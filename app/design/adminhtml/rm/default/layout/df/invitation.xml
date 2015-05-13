@@ -1,0 +1,26 @@
+<layout version='0.1.0'>
+    <adminhtml_invitation_index>
+        <reference name='content'>
+            <block name='invitation_grid_container' type='df_invitation/adminhtml_invitation' />
+        </reference>
+    </adminhtml_invitation_index>
+    <adminhtml_invitation_view>
+        <reference name='content'>
+            <block name='invitation_view_page' type='df_invitation/adminhtml_invitation_view' template='df/invitation/view.phtml'>
+                
+            </block>
+        </reference>
+        <reference name='left'>
+            <block name='invitation_view_tabs' as='tabs' type='df_invitation/adminhtml_invitation_view_tabs'>
+                <action method='addTab'><tab>general</tab><content>df_invitation/adminhtml_invitation_view_tab_general</content></action>
+                <action method='addTab'><tab>history</tab><content>df_invitation/adminhtml_invitation_view_tab_history</content></action>
+                <action method='setDestElementId'><id>invitation_elements</id></action>
+            </block>
+        </reference>
+    </adminhtml_invitation_view>
+    <adminhtml_invitation_new>
+        <reference name='content'>
+            <block name='invitation_add_page' type='df_invitation/adminhtml_invitation_add' />
+        </reference>
+    </adminhtml_invitation_new>
+</layout>

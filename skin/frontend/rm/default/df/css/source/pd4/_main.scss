@@ -1,0 +1,464 @@
+$formHeight: 608px;
+$firstDuplicateHeight: 281px;
+$secondDuplicateHeight: $formHeight - $firstDuplicateHeight - 2;
+
+$formWidth: 780px;
+$leftColumnWidth: 218px;
+$rightColumnWidth: $formWidth - $leftColumnWidth - 2;
+
+$standardLineHeight: 18px;
+
+
+
+
+@mixin input-10pt {
+	font-size: 10pt;
+	margin: 2px 0 0 0;
+}
+
+@mixin underline {
+	border-bottom: 1px solid black;
+}
+
+
+
+
+body.df {
+	color: black;
+    text-align: left;
+    font-family: Times New Roman;
+    font-size: 14px;
+    line-height: $standardLineHeight;
+
+    background: none;
+
+	div.df-pd4 {
+
+	 	.df-form-container {
+
+	 		width: $formWidth;
+			margin: 40px auto 0 auto;
+
+
+			.df-form {
+
+				width: 100%;
+
+				height: $formHeight;
+
+				border: 2px solid black;
+
+
+				.df-duplicate {
+					width: 100%;
+					overflow: hidden;
+
+					.df-column {
+						height: 100%;
+					}
+
+					.df-column-left {
+						float: left;
+						width: $leftColumnWidth;
+						border-right: 2px solid black;
+
+						p {
+							font-size: 8pt;
+							font-weight: bold;
+							text-align: center;
+						}
+
+						p.df-text-notification {
+							font-family: Arial;
+							margin: 40px 0 200px 0;
+						}
+
+						p.df-text-receipt {
+							font-family: Arial;
+							margin: 250px 0 18px 0;
+						}
+
+
+					}
+
+					.df-column-right {
+						float: left;
+						width: $rightColumnWidth;
+
+						.df-form-name {
+							font-size: 8pt;
+							font-weight: bold;
+							font-style:italic;
+							text-align: right;
+							margin-right: 20px;
+						}
+
+
+						.df-row {
+							padding: 2px 0 0 0;
+						}
+
+
+						.df-label-with-line {
+							border-top: 1px solid black;
+							font-size: 7pt;
+						}
+
+
+						.df-recipient-name {
+
+							margin: -6px 0 0 0;
+
+							text-align: center;
+
+							.df-label-with-line {
+								text-align: center;
+							}
+						}
+
+
+
+						.df-row-2 {
+							width: 100%;
+							overflow: hidden;
+							text-align: center;
+
+							.df-recipient-tax-number {
+								float: left;
+								width: 208px;
+							}
+
+							.df-recipient-bank-account-number {
+								float: right;
+								width: 314px;
+							}
+
+						}
+
+
+
+						.df-row-3 {
+							width: 100%;
+							overflow: hidden;
+							text-align: center;
+
+							.df-recipient-bank-name {
+								float: left;
+								width: 316px;
+								@include input-10pt;
+							}
+
+							.df-recipient-bank-id {
+								float: right;
+								width: 210px;
+								overflow: hidden;
+
+
+								.df-input {
+									width: 172px;
+									float: right;
+									@include underline;
+								}
+
+								.df-label {
+									float: left;
+									font-size: 8pt;
+									line-height: $standardLineHeight;
+								}
+
+
+							}
+
+						}
+
+
+
+						.df-recipient-bank-loro {
+
+							width: 100%;
+							overflow: hidden;
+
+							.df-input {
+								width: 308px;
+								float: right;
+								@include underline;
+								text-align: center;
+							}
+
+							.df-label {
+								float: left;
+								font-size: 8pt;
+								line-height: $standardLineHeight;
+								margin: 0 0 0 1em;
+							}
+						}
+
+
+
+
+						.df-row-5 {
+							width: 100%;
+							overflow: hidden;
+							text-align: center;
+
+							.df-payment-purpose {
+								float: left;
+								width: 318px;
+								@include input-10pt;
+							}
+
+							.df-payer-bank-account-number {
+								float: right;
+								width: 209px;
+								line-height: $standardLineHeight;
+								@include input-10pt;
+							}
+
+						}
+
+
+
+
+
+						.df-payer-name {
+
+							width: 100%;
+							overflow: hidden;
+
+							.df-input {
+								width: 408px;
+								float: right;
+								@include underline;
+								text-align: center;
+							}
+
+							.df-label {
+								float: left;
+								font-size: 8pt;
+								line-height: $standardLineHeight;
+								margin: 0 0 0 1em;
+							}
+						}
+
+
+						.df-payer-address {
+
+							width: 100%;
+							overflow: hidden;
+
+							.df-input {
+								width: 408px;
+								float: right;
+								@include underline;
+								text-align: center;
+								font-size: 9pt;
+							}
+
+							.df-label {
+								float: left;
+								font-size: 8pt;
+								line-height: $standardLineHeight;
+								margin: 0 0 0 1em;
+							}
+						}
+
+
+
+
+						.df-money {
+							display: block;
+							float: left;
+							width: 49%;
+							overflow: hidden;
+
+							.df-main-label {
+								float: left;
+								font-size: 9pt;
+								line-height: $standardLineHeight;
+								margin: 0 0 0 1em;
+							}
+
+
+							.df-numeric-container {
+								float: left;
+								overflow: hidden;
+
+								.df-input {
+									float: left;
+									text-align: center;
+									@include underline;
+									margin: 0 3px;
+								}
+
+								.df-label {
+									float: left;
+									font-size: 9pt;
+									line-height: $standardLineHeight;
+								}
+							}
+
+
+							.df-fractional-part {
+								.df-input {
+									width: 1.5em;
+								}
+							}
+
+						}
+
+
+
+
+
+						.df-row-8 {
+							width: 100%;
+							overflow: hidden;
+
+
+							.df-payment-net-amount {
+								.df-integer-part {
+									.df-input {
+										width: 6em;
+									}
+								}
+							}
+
+
+							.df-payment-fee {
+								.df-integer-part {
+									.df-input {
+										width: 3em;
+									}
+								}
+							}
+						}
+
+
+
+						.df-row-9 {
+							width: 100%;
+							overflow: hidden;
+
+
+							.df-payment-total-amount {
+								.df-integer-part {
+									.df-input {
+										width: 6em;
+									}
+								}
+							}
+
+
+							.df-date {
+
+								width: 49%;
+								overflow: hidden;
+
+								text-align: center;
+
+
+								.df-day-container {
+									float: left;
+									width: 2.7em;
+									overflow: hidden;
+
+									.df-quote {
+										float: left;
+									}
+
+									.df-day {
+										float: left;
+										width: 1.8em;
+										@include underline;
+									}
+								}
+
+
+								.df-month {
+									float: left;
+									width: 8em;
+									@include underline;
+									margin: 0 4px 0 0;
+								}
+
+
+								.df-year-container {
+									float: left;
+									width: 4em;
+									overflow: hidden;
+
+									.df-year {
+										float: left;
+										@include underline;
+									}
+
+									.df-label {
+										float: left;
+									}
+								}
+							}
+						}
+
+
+						.df-row-10 {
+
+							.df-main-text {
+								font-size: 8pt;
+								margin: 0 0 0 12px;
+							}
+
+							.df-signature-label {
+								float: right;
+								margin: -14px 40% 0 0;
+								font-weight: bold;
+								font-size: 8pt;
+							}
+
+						}
+
+
+
+
+					}
+
+				}
+
+
+				.df-duplicate-top {
+					height: $firstDuplicateHeight;
+					border-bottom: 2px solid black;
+				}
+
+				.df-duplicate-bottom {
+					height: $secondDuplicateHeight;
+
+
+
+
+					.df-rows {
+
+						margin: $standardLineHeight 0 0 0;
+
+						.df-row {
+							padding: 3px 0;
+						}
+
+					}
+				}
+
+
+			}
+
+
+			.df-cutting-line {
+				font-size: 12pt;
+
+               	padding: 0 0 0 20px;
+				background: url('../../images/pd4/scissors.png') left center no-repeat;
+			}
+
+	 	}
+
+	}
+
+}

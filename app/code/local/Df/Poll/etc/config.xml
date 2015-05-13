@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Poll>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Poll>
+	</modules>
+	<global>
+		<blocks>
+			<df_poll><class>Df_Poll_Block</class></df_poll>
+			<poll>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<activePoll>Df_Poll_Block_ActivePoll</activePoll>
+				</rewrite>
+			</poll>
+		</blocks>
+		<helpers>
+			<df_poll><class>Df_Poll_Helper</class></df_poll>
+		</helpers>
+		<models>
+			<df_poll>
+				<class>Df_Poll_Model</class>
+				<resourceModel>df_poll_resource</resourceModel>
+			</df_poll>
+			<df_poll_resource>
+				<class>Df_Poll_Model_Resource</class>
+			</df_poll_resource>
+		</models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Poll>
+					<files>
+						<default>Mage_Poll.csv</default>
+					</files>
+				</Df_Poll>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Poll>
+					<files>
+						<default>Mage_Poll.csv</default>
+					</files>
+				</Df_Poll>
+			</modules>
+		</translate>
+	</frontend>
+</config>

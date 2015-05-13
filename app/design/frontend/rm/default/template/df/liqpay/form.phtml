@@ -1,0 +1,50 @@
+<?php /** @var Df_LiqPay_Block_Form $this */ ?>
+<?php
+	/**
+	 * Нижеследующая стандартная для Magento разметка HTML
+ 	 * вместо простого echo $this->getDescription();
+ 	 * позволяет скрывать описание способа оплаты,
+ 	 * когда способ оплаты не является текущим.
+	 */
+?>
+<fieldset class='df-payment-method'>
+    <?php
+		$code = $this->getMethodCode();
+	?>
+    <ul id="payment_form_<?php echo $code; ?>" style="display:none">
+		<li>Варианты оплаты через платёжный сервис LiqPay:</li>
+        <li class='df-submethod'>
+			<input
+				type='radio'
+				id='df_liqpay__card'
+				name='payment[<?php echo Df_Payment_Model_Method_Base::INFO_KEY__SUBMETHOD; ?>]'
+				title='банковская карта'
+				class='radio'
+				value='card'
+			/>
+			<label for='df_liqpay__card'>банковская карта</label>
+        </li>
+		<li class='df-submethod'>
+			<input
+				type='radio'
+				id='df_liqpay__delayed'
+				name='payment[<?php echo Df_Payment_Model_Method_Base::INFO_KEY__SUBMETHOD; ?>]'
+				title='наличными через платёжный терминал ПриватБанка'
+				class='radio'
+				value='delayed'
+			/>
+			<label for='df_liqpay__delayed'>платёжный терминал ПриватБанка</label>
+		</li>
+		<li class='df-submethod'>
+			<input
+				type='radio'
+				id='df_liqpay__liqpay'
+				name='payment[<?php echo Df_Payment_Model_Method_Base::INFO_KEY__SUBMETHOD; ?>]'
+				title='личный счёт в системе LiqPay'
+				class='radio'
+				value='liqpay'
+			/>
+			<label for='df_liqpay__liqpay'>личный счёт в системе LiqPay</label>
+		</li>
+    </ul>
+</fieldset>

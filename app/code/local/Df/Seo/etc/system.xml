@@ -1,0 +1,180 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_seo translate='label' module='df_seo'>
+			<label>Поисковая оптимизация</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>15000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<common translate='label'>
+					<label>Общие настройки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enhanced_russian_transliteration translate='label'>
+							<label>Улучшенная транслитерация русских букв</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</enhanced_russian_transliteration>
+					</fields>
+				</common>
+				<catalog_category>
+					<label>Товарные разделы</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<hide_description_from_non_first_pages translate='label'>
+							<label>Скрывать описание товарного раздела со всех страниц товарного раздела, кроме первой?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</hide_description_from_non_first_pages>
+					</fields>
+				</catalog_category>
+				<html translate='label'>
+					<label>Разметка HTML</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<product_title_tag_default_pattern translate='label'>
+							<label>Шаблон по умолчанию для тега TITLE товарных страниц</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</product_title_tag_default_pattern>
+						<append_category_name_to_product_title_tag translate='label'>
+							<label>Добавлять к тегу TITLE товарной страницы называние товарного раздела</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</append_category_name_to_product_title_tag>
+					</fields>
+				</html>
+				<urls translate='label'>
+					<label>Адреса страниц</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>4000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<preserve_cyrillic translate='label'>
+							<label>Русские буквы в адресах страниц товаров и разделов</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</preserve_cyrillic>
+						<fix_add_category_to_product_url translate='label'>
+							<comment><![CDATA[
+Если Вы хотите, чтобы веб-адрес товарной страницы содержал название товара,
+то включите сначала стандартную функцию «Use Categories Path for Product URLs»
+(«Catalog» ⇾ «Search Engine Optimizations» ⇾ «Use Categories Path for Product URLs»),
+а потом эту заплатку.
+<br/>Если Вы включаете товар сразу в несколько разделов, то система перенаправит посетителя
+в один из них на свой выбор.]]>
+							</comment>
+							<label>Применить заплатку для правильного добавления названия товарного раздела в URL товара</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</fix_add_category_to_product_url>
+						<redirect_to_canonical_product_url translate='label'>
+							<comment>
+								<![CDATA[
+									В целом, рекомендуется включать эту опцию.<br/>
+									Однако, если после включения этой опции Вы смените значение опции «Use Categories Path for Product URLs»,то вам нужно будет очистить справочник перенаправлений следующей командой SQL
+									(её можно выполнить через phpMyAdmin):
+									«TRUNCATE `core_url_rewrite`;»
+								]]>
+							</comment>
+							<label>Перенаправлять посетителей с кодом 301 на канонический адрес товара</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</redirect_to_canonical_product_url>
+					</fields>
+				</urls>
+				<images translate='label'>
+					<label>Картинки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<use_descriptive_file_names translate='label'>
+							<label>Давать файлам картинок понятные описательные имена (транслитом)</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</use_descriptive_file_names>
+						<add_exif_to_jpegs translate='label'>
+							<label>Добавлять описания EXIF к картинкам в формате JPEG</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-seo</df_feature>
+						</add_exif_to_jpegs>
+					</fields>
+				</images>
+			</groups>
+		</df_seo>
+	</sections>
+</config>

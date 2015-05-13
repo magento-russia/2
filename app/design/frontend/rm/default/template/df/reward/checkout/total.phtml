@@ -1,0 +1,28 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ($this->getTotal()->getValue()): ?>
+    <tr class='df-reward-total'>
+        <th colspan="<?php echo $this->getColspan(); ?>" style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+            <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+                <?php $_title = $this->__('Remove'); ?>
+				<div class='df-discount'>
+					<a
+						href="<?php echo $this->getRemoveRewardTotalUrl(); ?>"
+						title="<?php echo df_h()->reward()->__('Remove'); ?>"
+						class="btn-remove"
+					><img
+						src="<?php echo $this->getSkinUrl('images/btn_remove.gif') ?>"
+						alt="<?php echo df_h()->reward()->__('Remove'); ?>"
+					/></a>
+					<div class='df-discount-value'>
+						<?php echo $this->getTotal()->getTitle(); ?>
+					</div>
+				</div>
+            <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+        </th>
+        <td style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+            <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+                <?php echo Mage::helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
+            <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+        </td>
+    </tr>
+<?php endif; ?>

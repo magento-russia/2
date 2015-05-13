@@ -1,0 +1,63 @@
+<?php /** @var $this Df_Banner_Block_Banner */ ?>
+<?php
+	if ($this->isItFirstRunForTemplate()) {
+		?>
+			<script
+				src='<?php echo $this->getSkinUrl('df/legacy/banner/js/legacy/jquery.cycle.js')?>'
+				type='text/javascript'
+			></script>
+		<?php
+	}
+	/** @var Df_Banner_Model_Banner $banner  */
+	$banner = $this->getBanner();
+	if ($banner->needShowTitle()) {
+		?><h3><?php echo df_escape($banner->getTitle()); ?></h3><?php
+	}
+	/** @var string $domId  */
+	$domId =
+		implode(
+			'-'
+			,
+			array(
+				'df', 'cycleslider', $banner->getId()
+			)
+		)
+	;
+	df_assert_string($domId);
+?>
+<div
+	id='<?php echo $domId; ?>'
+	style='width: <?php echo $banner->getSizeWidth().'px'; ?>;
+	height: <?php echo $banner->getSizeHeight().'px'; ?>;
+	display:none;'
+>
+	<?php
+		foreach($this->getBannerItems() as $bannerItem) {
+			/** @var Df_Banner_Model_Banneritem $bannerItem */
+			df_assert($bannerItem instanceof Df_Banner_Model_Banneritem);
+			?>
+				<a
+					href='<?php echo $bannerItem->getUrl(); ?>'
+				>
+					<img
+						src='<?php echo $this->getBannerItemImageUrl($bannerItem); ?>'
+						width='<?php echo $banner->getSizeWidth().'px'?> '
+						height=' <?php echo $banner->getSizeHeight().'px'?>'
+						alt=''
+					/>
+				</a>
+			<?php
+		}
+	?>
+</div>
+<script type='text/javascript'>
+	(function($) {
+		$(function() {
+			$('#<?php echo $domId; ?>').cycle({
+				fx: 'fade',
+				timeout: <?php echo $banner->getDelay(); ?>
+			});
+			$('#<?php echo $domId; ?>').fadeIn(1500);
+		});
+	})(jQuery);
+</script>

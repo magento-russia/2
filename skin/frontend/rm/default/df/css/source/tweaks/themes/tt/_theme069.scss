@@ -1,0 +1,21 @@
+body.df-theme-tt-theme069 {
+	button.button, a.button {
+		padding: {
+			left: 8px;
+			right: 8px;
+		}
+		text-transform: lowercase;
+	}
+	.add-to-box {
+		.add-to-cart {
+			width: 250px;
+		}
+	}
+	.form-list {
+		li.wide {
+			.field {
+				width: 80%;
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php
+	$_processes = $this->getProcessesForReindex();
+	foreach ($_processes as &$process) {
+		$process =
+			sprintf (
+				'«%s»'
+				,
+				mb_strtolower($process)
+			)
+		;
+	}
+?>
+<?php if ($_processes):?>
+	<div class="notification-global">
+		<strong>
+			<a
+				href='<?php echo $this->getManageUrl(); ?>'
+			><?php echo df_h()->index()->__('One or more of the Indexes are not up to date') ?></a>
+		</strong>: <?php echo implode(', ', $_processes)?>.
+	</div>
+<?php endif;?>

@@ -1,0 +1,82 @@
+<?php
+class Df_1C_Model_Cml2_File_CatalogComposite extends Df_1C_Model_Cml2_File {
+	/**
+	 * @override
+	 * @return string
+	 */
+	public function getNameBase() {return df_should_not_be_here(__METHOD__);}
+
+	/**
+	 * @override
+	 * @return string
+	 */
+	public function getPathFull() {return df_should_not_be_here(__METHOD__);}
+
+	/**
+	 * @override
+	 * @return string
+	 */
+	public function getPathRelative() {return df_should_not_be_here(__METHOD__);}
+
+	/**
+	 * @override
+	 * @return Df_Varien_Simplexml_Element
+	 */
+	public function getXml() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = rm_xml($this->getFileStructure()->getXml()->asXML());
+			$this->{__METHOD__}->extend($source = $this->getFileProducts()->getXml());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @override
+	 * @return Df_1C_Model_Cml2_Import_Data_Document_Catalog
+	 */
+	private function getXmlDocument() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				Df_1C_Model_Cml2_Import_Data_Document::create($this->getXml(), 'no path')
+			;
+			df_assert($this->{__METHOD__} instanceof Df_1C_Model_Cml2_Import_Data_Document_Catalog);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return Df_1C_Model_Cml2_File */
+	private function getFileProducts() {return $this->cfg(self::$P__FILE_PRODUCTS);}
+
+	/** @return Df_1C_Model_Cml2_File */
+	private function getFileStructure() {return $this->cfg(self::$P__FILE_STRUCTURE);}
+
+	/**
+	 * @override
+	 * @return void
+	 */
+	protected function _construct() {
+		parent::_construct();
+		$this
+			->_prop(self::$P__FILE_PRODUCTS, Df_1C_Model_Cml2_File::_CLASS)
+			->_prop(self::$P__FILE_STRUCTURE, Df_1C_Model_Cml2_File::_CLASS)
+		;
+	}
+	/** @var string */
+	private static $P__FILE_PRODUCTS = 'file_products';
+	/** @var string */
+	private static $P__FILE_STRUCTURE = 'file_structure';
+	/**
+	 * @param Df_1C_Model_Cml2_File $fileStructure
+	 * @param Df_1C_Model_Cml2_File $fileProducts
+	 * @return Df_1C_Model_Cml2_File_CatalogComposite
+	 */
+	public static function i2(
+		Df_1C_Model_Cml2_File $fileStructure, Df_1C_Model_Cml2_File $fileProducts
+	) {
+		df_assert($fileStructure->getXmlDocumentAsCatalog()->hasStructure());
+		df_assert($fileProducts->getXmlDocumentAsCatalog()->hasProducts());
+		return new self(array(
+			self::$P__FILE_PRODUCTS => $fileProducts, self::$P__FILE_STRUCTURE => $fileStructure
+		));
+	}
+}

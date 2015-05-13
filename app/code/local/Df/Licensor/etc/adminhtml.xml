@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<df_licensor>
+										<title>Российская сборка → Управление лицензиями</title>
+									</df_licensor>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

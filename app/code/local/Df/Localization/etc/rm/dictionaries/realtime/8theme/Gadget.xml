@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Mage_Newsletter'>
+		<block
+			class='Mage_Newsletter_Block_Subscribe'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Go</en_US>
+				<ru_RU>ОК</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

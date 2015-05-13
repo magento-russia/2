@@ -1,0 +1,39 @@
+<?php echo df_output()->getXmlHeader(); ?>
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<request>
+	<hash><?php echo $this->getHash(); ?></hash>
+	<Opcode><?php echo $this->getOperationCode(); ?></Opcode>
+	<Product><?php echo $this->getProductId(); ?></Product>
+	<Money>
+		<amount><?php echo $this->getPrice(); ?></amount>
+	</Money>
+	<Customer>
+		<firstName><?php echo $this->getBuyer()->getFirstName(); ?></firstName>
+		<lastName><?php echo $this->getBuyer()->getLastName(); ?></lastName>
+		<address><?php echo $this->getBuyer()->getStreetAddress(); ?></address>
+		<city><?php echo $this->getBuyer()->getCity(); ?></city>
+		<country><?php echo $this->getBuyer()->getCountryCode(); ?></country>
+		<state><?php echo $this->getBuyer()->getRegionCode; ?></state>
+		<zip><?php echo $this->getBuyer()->getPostCode(); ?></zip>
+		<phone><?php echo $this->getBuyer()->getPhone(); ?></phone>
+		<email><?php echo $this->getBuyer()->getEmail(); ?></email>
+		<cardNumber><?php echo $this->getCard()->getNumber();?></cardNumber>
+		<expirationDate><?php echo $this->getCard()->getExpirationDate() ;?></expirationDate>
+		<cvv><?php echo $this->getCard()->getCvv();?></cvv>
+		<bankName><?php echo $this->getCard()->getBankName();?></bankName>
+		<customerServiceNumber><?php echo $this->getCard()->getBankPhone();?></customerServiceNumber>
+		<ip><?php echo $this->getBuyer()->getIpAddress(); ?></ip>
+		<javascriptTimedate><?php echo $this->getBuyer()->getLocalTime();?></javascriptTimedate>
+		<screenResolution><?php echo $this->getBuyer()->getScreenResolution();?></screenResolution>
+		<userAgent><?php echo $this->getBuyer()->getUserAgent();?></userAgent>
+	</Customer>
+	<?php if ($this->getOptions()) { ?>
+		<Service>
+			<?php
+				foreach($this->getOptions() as $option) {
+					echo sprintf('<%s/>', $option);
+				}
+			?>
+		</Service>
+	<?php } ?>
+</request>

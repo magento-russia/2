@@ -1,0 +1,370 @@
+<?xml version='1.0'?>
+<dictionary>
+	<filesystem>
+		<operation>
+ 			<source>http://magento-forum.ru/res/themes/template-monster/43373/logo.gif</source>
+			<destination>skin/frontend/default/theme454/images/logo.gif</destination>
+		</operation>
+		<operation>
+ 			<source>http://magento-forum.ru/res/themes/template-monster/43373/slide1.jpg</source>
+			<destination>skin/frontend/default/theme454/images/media/slide1.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>http://magento-forum.ru/res/themes/template-monster/43373/slide2.jpg</source>
+			<destination>skin/frontend/default/theme454/images/media/slide2.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>http://magento-forum.ru/res/themes/template-monster/43373/slide3.jpg</source>
+			<destination>skin/frontend/default/theme454/images/media/slide3.jpg</destination>
+		</operation>
+	</filesystem>
+	<config>
+		<!-- Модуль TemplateMonster Easy Tabs -->
+		<entry>
+			<path>easy_tabs/customcms/tabnamecms</path>
+			<original_value>Custom tab</original_value>
+			<value>Дополнительная вкладка №1</value>
+		</entry>
+		<entry>
+			<path>easy_tabs/customcms/tabidcms1</path>
+			<original_value>Custom tab</original_value>
+			<value>custom_tab_2</value>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>poll</type>
+			<poll>
+				<title>What is the main reason for you to purchase products online?</title>
+			</poll>
+		</conditions>
+		<actions>
+			<new_title>Как Вы узнали о нашем магазине?</new_title>
+			<term>
+				<from>More convenient shipping and delivery</from>
+				<to>из Яндекс.Маркета</to>
+			</term>
+			<term>
+				<from>Lower price</from>
+				<to>через интернет-поиск</to>
+			</term>
+			<term>
+				<from>Bigger choice</from>
+				<to>видел рекламу в интернете</to>
+			</term>
+			<term>
+				<from>30-day Money Back Guarantee</from>
+				<to>слышал рекламу на радио</to>
+			</term>
+			<term>
+				<from>Centralized product search procedure (without having to leave your home)</from>
+				<to>читал/слышал отзывы</to>
+			</term>
+			<term>
+				<from>Payments security</from>
+				<to>через социальные сети</to>
+			</term>
+			<term>
+				<from>Other.</from>
+				<to>другое</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Black</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Чёрный</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Flavoured</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Ароматизированный</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Green</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Зелёный</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Oolong</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Улун</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Organic</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Эко</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Herbal</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Травяной</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Organic Flavoured</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Ароматизированный</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Pu-ehr</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Пу-эр</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>White</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Белый</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>footer_links</id></block>
+		</conditions>
+		<actions>
+			<!-- Footer Links («Information») -->
+			<new_title>Подвал. Левая колонка</new_title>
+			<term>
+				<from><![CDATA[>Information<]]></from>
+				<to><![CDATA[>Информация<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>footer_list_1</id></block>
+		</conditions>
+		<actions>
+			<!-- Footer list 1 («Why buy from us») -->
+			<new_title>Подвал. Центральная колонка</new_title>
+			<term>
+				<from><![CDATA[>Why buy from us<]]></from>
+				<to><![CDATA[>Интернет-магазин<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shipping & Returns<]]></from>
+				<to><![CDATA[>Как купить<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<li><a href="#">Secure Shopping</a></li>]]></from>
+				<to><![CDATA[<li><a href="{{store url=""}}contacts">Самовывоз</a></li>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>International Shipping<]]></from>
+				<to><![CDATA[>Услуги сервис-центра<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Affiliates<]]></from>
+				<to><![CDATA[>Обратный звонок<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Group Sales<]]></from>
+				<to><![CDATA[>Условия продажи<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>footer_list_2</id></block>
+		</conditions>
+		<actions>
+			<!-- Footer list 2 («My account») -->
+			<new_title>Подвал. Правая колонка</new_title>
+			<term>
+				<from><![CDATA[>My account<]]></from>
+				<to><![CDATA[>Уголок покупателя<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sign In<]]></from>
+				<to><![CDATA[>Вход<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>View Cart<]]></from>
+				<to><![CDATA[>Корзина<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>My Wishlist<]]></from>
+				<to><![CDATA[>План покупок<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Track My Order<]]></from>
+				<to><![CDATA[>Состояние заказа<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Help<]]></from>
+				<to><![CDATA[>Справка<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>custom_tab</id></block>
+		</conditions>
+		<actions>
+			<!-- Custom tab -->
+			<new_title>Пример вкладки</new_title>
+			<term>
+				<from><![CDATA[>Static CMS block displayed as additional tab.<]]></from>
+				<to><![CDATA[>Самодельный блок «Пример вкладки» (custom_tab)<]]></to>
+			</term>
+			<term>
+				<from>You can insert any content here (text or HTML), e.g. info about returns and refunds.</from>
+				<to>Он редактируется в административном разделе «Система» → «Самодельные блоки».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>contact_block</id></block>
+		</conditions>
+		<actions>
+			<!-- Contact block («Address») -->
+			<new_title>Адрес магазина</new_title>
+			<term>
+				<from><![CDATA[>Address<]]></from>
+				<to><![CDATA[>Контакты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Address 1:<]]></from>
+				<to><![CDATA[>Наш адрес<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Telephone:<]]></from>
+				<to><![CDATA[>Телефон<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Address 2:<]]></from>
+				<to><![CDATA[>Пункт самовывоза<]]></to>
+			</term>
+			<term>
+				<from>The Company Name Inc. 9870 St Vincent Place,Glasgow, DC 45</from>
+				<to>г. Москва Ленинградский пр. д.80 к.17</to>
+			</term>
+			<term>
+				<from>+1 (234) 567-8901</from>
+				<to>+ 7 (495) 225-95-22</to>
+			</term>
+			<term>
+				<from>+1 (234) 567-8902</from>
+				<to>ежедневно 09:00-22:00</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>map_content</id></block>
+		</conditions>
+		<actions>
+			<!-- Map Content -->
+			<new_title>Карта Google с адресом магазина</new_title>
+			<term>
+				<from><![CDATA[<iframe  src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Brooklyn,+New+York,+NY,+United+States&amp;aq=0&amp;sll=37.0625,-95.677068&amp;sspn=61.282355,146.513672&amp;ie=UTF8&amp;hq=&amp;hnear=Brooklyn,+Kings,+New+York&amp;ll=40.649974,-73.950005&amp;spn=0.01628,0.025663&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>]]></from>
+				<to><![CDATA[<iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.1435627631354!2d37.510818000000015!3d55.80810799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b548350c4e30e1%3A0x3e2e1001e54b547d!2z0JvQtdC90LjQvdCz0YDQsNC00YHQutC40Lkg0L_RgC4sIDgw0LoxNywg0JzQvtGB0LrQstCwLCAxMjUzMTU!5e0!3m2!1sru!2sru!4v1418124237630"></iframe>]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>social_icons</id></block>
+		</conditions>
+		<actions>
+			<!-- Social Icons -->
+			<new_title>Мы в социальных сетях</new_title>
+			<term>
+				<from><![CDATA[>Follow Us<]]></from>
+				<to><![CDATA[>Мы в социальных сетях<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>pay</id></block>
+		</conditions>
+		<actions>
+			<!-- Pay -->
+			<new_title>Способы оплаты</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>slider_1</id></block>
+		</conditions>
+		<actions>
+			<!-- Pay -->
+			<new_title>Слайдшоу</new_title>
+			<term>
+				<from>url='oolong.html'</from>
+				<to>url='test.html'</to>
+			</term>
+			<term>
+				<from>url='white.html'</from>
+				<to>url='oolong.html'</to>
+			</term>
+			<term>
+				<from>url='test.html'</from>
+				<to>url='white.html'</to>
+			</term>
+		</actions>
+	</rule>
+</dictionary>

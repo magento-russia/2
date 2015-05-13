@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_InTime>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_InTime>
+	</modules>
+	<global>
+		<blocks><df_in_time><class>Df_InTime_Block</class></df_in_time></blocks>
+		<helpers><df_in_time><class>Df_InTime_Helper</class></df_in_time></helpers>
+		<models><df_in_time><class>Df_InTime_Model</class></df_in_time></models>
+	</global>
+	<default>
+		<carriers>
+			<df-in-time>
+				<active>0</active>
+				<model>df_in_time/carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>Ін-Тайм (Ин-Тайм)</title>
+			</df-in-time>
+		</carriers>
+		<df_shipping>
+			<in-time>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__declared_value_percent>0</admin__declared_value_percent>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>1</frontend__sallowspecific>
+				<frontend__specificcountry>UA</frontend__specificcountry>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</in-time>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-in-time>
+				<module>df_in_time</module>
+				<title>Ін-Тайм (Ин-Тайм)</title>
+				<url>http://magento-forum.ru/forum/259/</url>
+			</df-in-time>
+		</features>
+		<shipping>
+			<in-time>
+				<allowed-methods>
+					<!--
+						Идентификаторам способов доставки достаточно быть уникальными
+						лишь в пределах модуля доставки,потому что система формирует уникальный идентификатор способа доставки
+						объединением идентификатором модуля доставки и способа доставки.
+					-->
+					<courier-to-home>
+						<title>До дома</title>
+						<class>df_in_time/method_toHome</class>
+					</courier-to-home>
+					<courier-to-point-of-issue>
+						<title>До пункта выдачи</title>
+						<class>df_in_time/method_toPointOfIssue</class>
+					</courier-to-point-of-issue>
+				</allowed-methods>
+			</in-time>
+		</shipping>
+	</df>
+</config>

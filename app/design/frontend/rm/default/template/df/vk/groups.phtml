@@ -1,0 +1,20 @@
+<?php /** @var Df_Vk_Block_Frontend_Widget_Groups $this */ ?>
+<?php
+    /** @var Df_Vk_Model_Settings_Widget_Groups_Page $settings  */
+	$settings = $this->getSettingsForTheCurrentPage();
+?>
+<script type='text/javascript'>
+	/** @type {String} */
+	var scopeName = '<?php echo $this->getJavaScriptNameSpace(); ?>';
+	rm.namespace(['rm','vk', scopeName].join('.'));
+	jQuery.extend(
+		rm.vk[scopeName]
+		,{
+			enabled: true
+			,applicationId: <?php echo $this->getApplicationId(); ?>
+			,position: '<?php echo $settings->getColumn(); ?>'
+			,verticalOrdering: <?php echo $settings->getPosition(); ?>
+			,settings: <?php echo $this->getSettingsAsJson(); ?>
+		}
+	);
+</script>

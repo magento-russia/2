@@ -1,0 +1,250 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_localization translate='label' module='df_admin'>
+			<label>Русификация</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<frontend translate='label'>
+					<label>Витрина</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<rm_translation__enabled translate='label'>
+							<label>Включить русский перевод витрины?</label>
+							<comment>
+								<![CDATA[
+									Включает русский перевод, идущий в комплекте с Российской сборкой, для витрины.
+									<br/>
+									После включения или отключения не забудьте обновить кэш.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-localization</df_feature>
+						</rm_translation__enabled>
+						<rm_translation__set_as_primary translate='label'>
+							<label>Назначить перевод витрины Российской сборкой основным?</label>
+							<comment>
+								<![CDATA[
+									Данная опция имеет значение, когда у Вас уже присутствует
+									русский перевод, альтернативный переводу Российской сборки.
+									<br/>
+									Если Вы укажете значение «да», то основным будет перевод Российской сборки.
+									<br/>
+									Если Вы укажете значение «нет», то основным будет Ваш альтернативный перевод.
+									<br/>
+									Система будет отдавать предпочтение основному переводу и использовать второстепенный
+									только при отсутствии основного перевода конкретной строки.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<rm_translation__enabled>1</rm_translation__enabled>
+							</depends>
+						</rm_translation__set_as_primary>
+						<allow_interference translate='label'>
+							<label><![CDATA[Разрешить модулям<br/>переводить друг друга?]]></label>
+							<comment>
+								<![CDATA[
+<a href='http://magento-forum.ru/topic/4681/' target='_blank'
+>как правильно настроить значение этой опции</a>
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_yesNoDev</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_enable_in_developer_mode>0</df_enable_in_developer_mode>
+						</allow_interference>
+						<hide_decimals translate='label'>
+							<label>Скрывать копейки?</label>
+							<comment><![CDATA[
+При значении «да» денежные величины будут отображаться на витрине без дробной части,
+например: «<b>107 руб.</b>» вместо «<b>107.25 руб.</b>».
+							]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_decimals>
+					</fields>
+				</frontend>
+				<admin translate='label'>
+					<label>Административная часть</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<rm_translation__enabled translate='label'>
+							<label>Включить русский перевод административной части?</label>
+							<comment>
+								<![CDATA[
+									Включает русский перевод, идущий в комплекте с Российской сборкой, для административной части.
+									<br/>
+									После включения или отключения не забудьте обновить кэш.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-localization</df_feature>
+						</rm_translation__enabled>
+						<rm_translation__set_as_primary translate='label'>
+							<label>Назначить перевод административной части Российской сборкой основным?</label>
+							<comment>
+								<![CDATA[
+									Данная опция имеет значение, когда у Вас уже присутствует
+									русский перевод, альтернативный переводу Российской сборки.
+									<br/>
+									Если Вы укажете значение «да», то основным будет перевод Российской сборки.
+									<br/>
+									Если Вы укажете значение «нет», то основным будет Ваш альтернативный перевод.
+									<br/>
+									Система будет отдавать предпочтение основному переводу и использовать второстепенный
+									только при отсутствии основного перевода конкретной строки.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<rm_translation__enabled>1</rm_translation__enabled>
+							</depends>
+						</rm_translation__set_as_primary>
+						<allow_interference translate='label'>
+							<label><![CDATA[Разрешить модулям<br/>переводить друг друга?]]></label>
+							<comment>
+								<![CDATA[
+<a href='http://magento-forum.ru/topic/4681/' target='_blank'
+>как правильно настроить значение этой опции</a>
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_yesNoDev</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_enable_in_developer_mode>0</df_enable_in_developer_mode>
+						</allow_interference>
+						<hide_decimals translate='label'>
+							<label>Скрывать копейки?</label>
+							<comment><![CDATA[
+При значении «да» денежные величины будут отображаться в административном интерфейсе без дробной части,
+<br/>например: «<b>107 руб.</b>» вместо «<b>107.25 руб.</b>».
+							]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_decimals>
+					</fields>
+				</admin>
+				<email translate='label'>
+					<label>Почтовые уведомления</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<rm_translation__enabled translate='label'>
+							<label>Включить русский перевод почтовых уведомлений?</label>
+							<comment>
+								<![CDATA[
+									Включает русский перевод, идущий в комплекте с Российской сборкой, для почтовых уведомлений.
+									<br/>
+									После включения или отключения не забудьте обновить кэш.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-localization</df_feature>
+						</rm_translation__enabled>
+						<hide_decimals translate='label'>
+							<label>Скрывать копейки?</label>
+							<comment>
+<![CDATA[
+При значении «да» денежные величины будут отображаться в письмах-уведомлениях без дробной части,
+например: «<b>107 руб.</b>» вместо «<b>107.25 руб.</b>».
+]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-localization</df_feature>
+						</hide_decimals>
+					</fields>
+				</email>
+			</groups>
+		</df_localization>
+		<ultraslideshow>
+			<!--
+				Обязательно нужно указать значение параметра sort_order,
+				иначе Magento CE 1.4 назначит sort_order = 0
+				и сделает данную секцию секцией по умолчанию,
+				что в свою очередь при отсутствии настраиваемого модуля
+				приведёт к сбою "Access denied" из-за отсутствия настроек ACL.
+			-->
+			<sort_order>90</sort_order>
+			<groups>
+				<general>
+					<comment><![CDATA[
+<h2 style="color:red;">Новинка:</h2>
+<strong>Отныне можно размещать слайд-шоу на любой странице и в любом самодельном блоке.</strong>
+<br/>Для такого размещения используйте специальный тег,
+описанный в главе 11 <strong>Руководства пользователя</strong> .
+<br/>Magento при формировании витринной страницы
+автоматически заменит содержимое данного тега на слайд-шоу.
+<br/><br/>
+<h2>Главная страница витрины:</h2>
+Вы можете быстро настроить отображение слайд-шоу на главной странице
+посредством размещённых ниже опций.<br/><br/><br/><br/>]]></comment>
+				</general>
+			</groups>
+		</ultraslideshow>
+	</sections>
+</config>

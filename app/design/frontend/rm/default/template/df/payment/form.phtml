@@ -1,0 +1,15 @@
+<?php /** @var Df_Payment_Block_Form $this */ ?>
+<?php
+	/**
+	 * Нижеследующая стандартная для Magento разметка HTML
+ 	 * вместо простого echo $this->getDescription();
+ 	 * позволяет скрывать описание способа оплаты,
+ 	 * когда способ оплаты не является текущим.
+	 */
+?>
+<fieldset class='form-list'>
+    <?php $code = $this->getMethodCode(); ?>
+    <ul id='payment_form_<?php echo $code; ?>' style='display:none'>
+        <li><?php echo $this->getDescription(); ?></li>
+    </ul>
+</fieldset>

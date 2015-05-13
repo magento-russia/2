@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Weee>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Weee>
+	</modules>
+	<global>
+		<blocks><df_weee><class>Df_Weee_Block</class></df_weee></blocks>
+		<helpers><df_weee><class>Df_Weee_Helper</class></df_weee></helpers>
+		<models><df_weee><class>Df_Weee_Model</class></df_weee></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Mage_Weee><files><default>Mage_Weee.csv</default></files></Mage_Weee>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Mage_Weee><files><default>Mage_Weee.csv</default></files></Mage_Weee>
+			</modules>
+		</translate>
+	</frontend>
+</config>

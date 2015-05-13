@@ -1,0 +1,144 @@
+body.df-theme-gala-titanshop {
+	/**
+	 	В русском языке написание каждого слова фразы с большой буквы
+	 	не принято и выглядит некрасиво,
+	 	поэтому отключаем везде правило capitalize.
+	 */
+	.em_nav .menu-item-depth-0 > a
+	, .product-view .product-tags li a
+	, .page-popup .link-print
+	, #em_quickshop_handler
+	, .cart-table a
+	, .opc .form-list li.control label
+	, .box-tags .tags a
+	, .customer-account-edit .fieldset li.control label
+	, .block-cart-top .block-content .product-name a
+	, .newsletter-title
+	, .category-title.page-title h1
+	, .em_post-action .tags li a
+	{
+		text-transform: none;
+	}
+	.df-checkout-ergonomic-page {
+		#opc-shipping_method {
+			.sp-methods {
+				dt {
+					float: none;
+					margin-bottom: 3px;
+				}
+				dd {
+					margin-bottom: 10px;
+					ul {
+						li {
+							margin:{
+								top: 0;
+								bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.fix_menu {
+		width: 100%;
+		overflow: hidden;
+		.header-bottom-right {
+			width: 914px;
+			.menu-item-depth-0 > a > span,
+			.menu-item-depth-0 > .em-catalog-navigation > li.level0 > a > span {
+				padding:{
+					left: 19px;
+					right: 19px;
+				}
+			}
+		}
+	}
+	.form-list {
+		li.control {
+			label {
+				text-transform: lowercase;
+			}
+		}
+	}
+	/** отключаем правило lowercase */
+	h1 {
+		text-transform: none;
+	}
+	.header-top {
+		span.number {
+			/* отступ номера телефона от подписи к нему слева */
+			padding-left: 4px;
+			padding-top: 2px;
+		}
+	}
+	.sale_off {
+		span:last-child {
+			margin-left: -10px;
+		}
+		span.rm-sale-off-minus {
+			display: block;
+			float: left;
+			font-size: 30px;
+			line-height: 4px;
+			margin-top: 5px !important;
+			margin-left: 11px;
+			text-align: right;
+		}
+	}
+}
+
+body.df-theme-gala-titanshop.checkout-cart-index {
+	#shopping-cart-totals-table {
+		tbody {
+			td.a-right {
+				font-size: 16px;
+			}
+		}
+		tfoot {
+			td.a-right {
+				strong {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+}
+
+body.df-theme-gala-titanshop.customer-account-create {
+	.page-title {
+		h2.legend {
+			display: none;
+		}
+	}
+}
+
+body.df-theme-gala-titanshop.customer-account-index {
+	.page-title {
+		display: none;
+	}
+	.dashboard {
+		.box-recent {
+			margin-top: 0;
+		}
+	}
+}
+
+body.df-theme-gala-titanshop.customer-account-login {
+	.account-login {
+
+	}
+}
+
+body.df-theme-gala-titanshop.wishlist-index-share {
+	.my-account {
+		.form-list {
+			label {
+				/** Нам нужно, чтобы «Вы» было написано с большой буквы */
+				small {
+					text-transform: none;
+				}
+			}
+		}
+	}
+}

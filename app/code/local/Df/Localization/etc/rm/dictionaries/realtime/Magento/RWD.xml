@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Df_Checkout'>
+		<block template='checkout/cart/minicart/items.phtml'>
+			<!-- Выпадающий блок мини-корзины -->
+			<term>
+				<en_US>View Shopping Cart</en_US>
+				<ru_RU>корзина полностью</ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Mage_Checkout'>
+		<block template='checkout/cart/minicart/default.phtml'>
+			<!-- Выпадающий блок мини-корзины -->
+			<term>
+				<en_US>Edit item</en_US>
+				<ru_RU>изменить</ru_RU>
+			</term>
+			<term>
+				<en_US>Remove Item</en_US>
+				<ru_RU>удалить</ru_RU>
+			</term>
+			<term>
+				<en_US>Details</en_US>
+				<ru_RU>опции</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

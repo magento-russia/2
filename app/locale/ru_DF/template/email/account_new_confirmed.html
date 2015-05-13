@@ -1,0 +1,55 @@
+<!--@subject Добро пожаловать, {{var customer.getFirstname()}}! @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$customer.name":"Имя и фамилия клиента",
+"htmlescape var=$customer.getFirstname()":"Имя клиента",
+"store url=\"customer/account/\"":"Customer Account Url"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <!-- [ header starts here] -->
+                <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                    <!-- [ middle starts here] -->
+                    <tr>
+                        <td valign="top">
+                            <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;"">Здравствуйте, {{htmlescape var=$customer.name}},</h1>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">
+								Добро пожаловать на сайт {{var store.getFrontendName()}}.
+								<br/>
+								<a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">Войти</a>.
+							</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 8px 0;">Когда Вы войдёте в свою учётную запись, вам будут доступны следующие функции:</p>
+                            <ul style="font-size:12px; line-height:16px; margin:0 0 16px 0; padding:0;">
+                                <li style="list-style:none inside; padding:0 0 0 10px;">&ndash; Оформлять заказы быстрее, используя данные, введенные во время предыдущих посещений сайта</li>
+                                <li style="list-style:none inside; padding:0 0 0 10px;">&ndash; Отслеживать состояние Ваших заказов</li>
+                                <li style="list-style:none inside; padding:0 0 0 10px;">&ndash; Просматривать историю заказов</li>
+                                <li style="list-style:none inside; padding:0 0 0 10px;">&ndash; Изменять информацию об учётной записи</li>
+                                <li style="list-style:none inside; padding:0 0 0 10px;">&ndash; Менять пароль</li>
+                                <li style="list-style:none inside; padding:0 0 0 10px;">&ndash; Сохранять дополнительные адреса (для доставки товаров нескольким родственникам или друзьям!)</li>
+                            </ul>
+                            <p style="font-size:12px; line-height:16px; margin:0;">Если у Вас возникли вопросы по поводу Вашей учётной записи или любой другой вопрос, пожалуйста, свяжитесь с нами по адресу <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> или по телефону {{config path='general/store_information/phone'}}.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;"><center><p style="font-size:12px; margin:0;">Спасибо, <strong>{{var store.getFrontendName()}}</strong></p></center></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Df_Checkout'>
+		<block
+			class='Df_Checkout_Block_Cart_Sidebar'
+			name='*'
+			template='top_sidebar.phtml$'
+		>
+			<term>
+				<en_US>items</en_US>
+				<ru_RU>товаров</ru_RU>
+			</term>
+			<term>
+				<en_US>item</en_US>
+				<ru_RU>товаров</ru_RU>
+			</term>
+		</block>
+		<controller name='EM_Ajaxproducts_IndexController'>
+			<term>
+				<en_US>items</en_US>
+				<ru_RU>товаров</ru_RU>
+			</term>
+			<term>
+				<en_US>item</en_US>
+				<ru_RU>товаров</ru_RU>
+			</term>
+		</controller>
+	</module>
+</dictionary>

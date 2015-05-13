@@ -1,0 +1,210 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_shipping>
+			<groups>
+				<autolux translate='label'>
+					<label>Украина. Автолюкс</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>52000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+						<![CDATA[
+							Для правильной работы модуля требуется указать единицу веса товаров в графе
+							<br/>«Система» → «Настройки» → «Российская сборка» → «Доставка»
+							 → «Параметры товаров» → «Единица веса товаров».
+						]]>
+					</comment>
+					<fields>
+						<active translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<!--
+								Надо удостовериться, что склад магазина расположен в Украине.
+								Возможность контролировать допустимость расположения склада магазина
+								при сохранении настроек модулей доставки
+								появилась в Российской сборке Magento
+								с 23 декабря 2012 года (версия 2.14.0).
+							-->
+							<backend_model>df_admin/config_backend_validator</backend_model>
+							<df_backend_validator_strategy>df_shipping/config_backend_validator_strategy_origin</df_backend_validator_strategy>
+							<df_origin_validator>df_shipping/config_backend_validator_strategy_origin_specificCountry</df_origin_validator>
+							<df_origin_country>UA</df_origin_country>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-autolux</df_feature>
+							<config_path>carriers/df-autolux/active</config_path>
+						</active>
+						<title translate='label'>
+							<label>Название для этого способа оплаты</label>
+							<comment>
+								<![CDATA[
+									Покупатель видит этот заголовок на этапе оформления заказа,а также в Личном кабинете.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<config_path>carriers/df-autolux/title</config_path>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</title>
+						<admin__fee_percent translate='label'>
+							<label>Относительная наценка</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>
+								<![CDATA[
+									в процентах
+								]]>
+							</comment>
+							<validate>
+								validate-digits
+								validate-zero-or-greater
+								validate-percents
+							</validate>
+							<depends><active>1</active></depends>
+						</admin__fee_percent>
+						<admin__fee_fixed translate='label'>
+							<label>Абсолютная наценка</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>
+								<![CDATA[
+									в учётной валюте магазина
+								]]>
+							</comment>
+							<validate>
+								validate-digits
+								validate-zero-or-greater
+							</validate>
+							<depends><active>1</active></depends>
+						</admin__fee_fixed>
+						<admin__declared_value_percent translate='label'>
+							<label>Объявленная стоимость груза</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>
+								<![CDATA[
+									В процентах относительно стоимости заказа.
+								]]>
+							</comment>
+							<validate>
+								validate-digits
+								validate-zero-or-greater
+							</validate>
+							<depends><active>1</active></depends>
+						</admin__declared_value_percent>
+						<service__need_get_cargo_from_the_shop_store translate='label'>
+							<label>Должна ли служба доставки приезжать за грузом на склад магазина?</label>
+							<comment>
+								<![CDATA[
+									Укажите значение «<b>да</b>», если служба доставки должна приезжать за грузом на склад магазина (доставка обойдётся дороже).
+									<br/>
+									Укажите значение «<b>нет</b>», если магазин сам будет привозить товар в службу доставки (доставка обойдётся дешевле).
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</service__need_get_cargo_from_the_shop_store>
+						<frontend__disable_for_shop_city translate='label'>
+							<label>Скрыть этот способ доставки для покупателей из города магазина?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>21000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__disable_for_shop_city>
+						<frontend__sort_order translate='label'>
+							<label>Вес для упорядочивания</label>
+							<comment>
+								<![CDATA[
+									Когда системе требуется перечислить способы доставки на экране,она упорядочивает их в соответствии с их весами.
+									<br/>Способы с меньшим весом отображаются выше способов с большим весом.
+									<br/>Веса задаются натуральными числами.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>22000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__sort_order>
+						<frontend__display_diagnostic_messages translate='label'>
+							<label>Показывать ли способ доставки на витрине в том случае,когда он по каким-либо причинам неприменим к текущему заказу?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да», то покупатель будет знать причину,по которой данный способ доставки неприменим к его заказу.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>23000</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__display_diagnostic_messages>
+						<frontend__sallowspecific translate='label'>
+							<label>Ограничить область доставки конкретными странами?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да», то система запросит у Вас перечень стран,куда разрешена доставка данным способом.
+									<br/>Во все неперечисленные Вами страны
+									доставка данным способом осуществляться не будет.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>24000</sort_order>
+							<frontend_class>shipping-applicable-country</frontend_class>
+							<source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__sallowspecific>
+						<frontend__specificcountry translate='label'>
+							<label>Перечень стран, куда разрешена доставка данным способом</label>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>25000</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<can_be_empty>1</can_be_empty>
+							<depends>
+								<active>1</active>
+								<frontend__sallowspecific>1</frontend__sallowspecific>
+							</depends>
+						</frontend__specificcountry>
+					</fields>
+				</autolux>
+			</groups>
+		</df_shipping>
+	</sections>
+</config>

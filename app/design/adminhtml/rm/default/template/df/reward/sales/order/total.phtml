@@ -1,0 +1,10 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php $this->setPriceDataObject($this->getSource()) ?>
+<?php if ((float) $this->getSource()->getRewardCurrencyAmount()): ?>
+    <tr>
+        <td class="label"><?php echo df_h()->reward()->formatReward($this->getSource()->getRewardPointsBalance()) ?></td>
+        <td>
+            <?php echo $this->displayPrices(-$this->getSource()->getBaseRewardCurrencyAmount(), -$this->getSource()->getRewardCurrencyAmount()); ?>
+        </td>
+    </tr>
+<?php endif; ?>

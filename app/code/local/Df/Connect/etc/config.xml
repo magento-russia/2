@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Connect>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Connect>
+	</modules>
+	<global>
+		<blocks><df_connect><class>Df_Connect_Block</class></df_connect></blocks>
+		<helpers><df_connect><class>Df_Connect_Helper</class></df_connect></helpers>
+		<models><df_connect><class>Df_Connect_Model</class></df_connect></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Mage_Connect><files><default>Mage_Connect.csv</default></files></Mage_Connect>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

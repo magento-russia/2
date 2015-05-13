@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Kazpost>
+			<version>2.26.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Kazpost>
+	</modules>
+	<global>
+		<blocks><df_kazpost><class>Df_Kazpost_Block</class></df_kazpost></blocks>
+		<helpers><df_kazpost><class>Df_Kazpost_Helper</class></df_kazpost></helpers>
+		<models><df_kazpost><class>Df_Kazpost_Model</class></df_kazpost></models>
+	</global>
+	<default>
+		<carriers>
+			<df-kazpost>
+				<active>0</active>
+				<model>df_kazpost/carrier</model>
+				<title>Казпочта</title>
+			</df-kazpost>
+		</carriers>
+		<df_shipping>
+			<kazpost>
+				<admin__declared_value_percent>100</admin__declared_value_percent>
+				<admin__processing_before_shipping__consider_days_off>0</admin__processing_before_shipping__consider_days_off>
+				<admin__processing_before_shipping__consider_today_untill>12</admin__processing_before_shipping__consider_today_untill>
+				<admin__processing_before_shipping__days>0</admin__processing_before_shipping__days>
+			</kazpost>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-kazpost>
+				<module>df_kazpost</module>
+				<title>Казпочта</title>
+				<url>http://magento-forum.ru/forum/326/</url>
+			</df-kazpost>
+		</features>
+	</df>
+</config>

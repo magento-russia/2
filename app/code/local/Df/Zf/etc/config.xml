@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Zf>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Zf>
+	</modules>
+	<global>
+		<models><df_zf><class>Df_Zf_Model</class></df_zf></models>
+		<helpers><df_zf><class>Df_Zf_Helper</class></df_zf></helpers>
+		<log><core><writer_model>Df_Zf_Log_Writer_Stream_Simple</writer_model></core>
+		</log>
+		<events>
+			<controller_front_init_before>
+				<observers>
+					<df_zf_controller_front_init_before>
+						<class>Df_Zf_Bootstrap</class>
+						<method>init</method>
+					</df_zf_controller_front_init_before>
+				</observers>
+			</controller_front_init_before>
+			<default>
+				<observers>
+					<df_zf_default>
+						<class>Df_Zf_Bootstrap</class>
+						<method>init</method>
+					</df_zf_default>
+				</observers>
+			</default>
+			<resource_get_tablename>
+				<observers>
+					<df_zf_resource_get_tablename>
+						<class>Df_Zf_Bootstrap</class>
+						<method>resource_get_tablename</method>
+					</df_zf_resource_get_tablename>
+				</observers>
+			</resource_get_tablename>
+		</events>
+	</global>
+</config>

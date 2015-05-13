@@ -1,0 +1,1493 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_tweaks translate='label' module='df_admin'>
+			<label>Витрина</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>4000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<labels translate='label'>
+					<label>Надписи</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>50</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<button__font__letter_case translate='label'>
+							<label>В каком регистре отображать надписи на кнопках?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</button__font__letter_case>
+						<side_block__font__letter_case translate='label'>
+							<label>В каком регистре отображать заголовки боковых информационных блоков?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</side_block__font__letter_case>
+					</fields>
+				</labels>
+				<header translate='label'>
+					<label>Шапка</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<font__letter_case translate='label'>
+							<label>В каком регистре отображать надписи?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</font__letter_case>
+						<remove_welcome_for_logged_in translate='label'>
+							<label>Скрыть приветствие&lt;br/&gt;«Welcome, Иван Петров!» («Добро пожаловать, Иван Петров!») от авторизованных?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_welcome_for_logged_in>
+						<show_only_first_name translate='label'>
+							<label>Называть клиента по имени, без фамилии?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_welcome_for_logged_in>0</remove_welcome_for_logged_in>
+							</depends>
+						</show_only_first_name>
+						<hide_account_link_from_anonymous_shopper translate='label'>
+							<label>Скрыть ссылку «Личный кабинет» («My Account») от анонимных посетителей?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>250</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_account_link_from_anonymous_shopper>
+						<replace_account_link_title_with_customer_name translate='label'>
+							<label>Заменить «Личный кабинет» («My Account») на имя авторизованного клиента?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</replace_account_link_title_with_customer_name>
+						<remove_wishlist_link translate='label'>
+							<label>Скрыть ссылку «план покупок» («My Wishlist») из верхнего меню?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_hideFromAnonymous</source_model>
+							<sort_order>400</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_wishlist_link>
+						<remove_cart_link translate='label'>
+							<label>Скрыть ссылку «My Cart»&lt;br/&gt;(«корзина») верхнего меню?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_cart_link>
+						<remove_checkout_link translate='label'>
+							<label>Скрыть ссылку «Checkout» («оформить заказ») верхнего меню?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_checkout_link>
+					</fields>
+				</header>
+				<footer translate='label'>
+					<label>Подвал</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>200</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_advanced_search_link translate='label'>
+							<label>Удалить ссылку&lt;br/&gt;«Advanced Search»&lt;br/&gt;(«Расширенный поиск»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_advanced_search_link>
+						<remove_search_terms_link translate='label'>
+							<label>Удалить ссылку&lt;br/&gt;«Search Terms»&lt;br/&gt;(«Поисковые запросы»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_search_terms_link>
+						<remove_help_us translate='label'>
+							<label>Убрать надпись «Help Us to Keep Magento Healthy» и номер версии Magento?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_help_us>
+						<update_year_in_copyright translate='label'>
+							<label>Автоматически обновлять текущий год в сообщении об авторском праве?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>
+								Замените в поле
+								&lt;br/&gt;«General» ⇾ «Design» ⇾ «Footer» ⇾ «Copyright»
+								&lt;br/&gt;(«Общие» ⇾ «Оформление» ⇾ «Подвал витринной страницы» ⇾ «Авторские права»)
+								&lt;br/&gt;числовое значение года (например, «&lt;i&gt;2008&lt;/i&gt;») шаблоном «&lt;i&gt;{currentYear}&lt;/i&gt;».
+								&lt;br/&gt;Например: «&lt;i&gt;© 2000-{currentYear} Иван Петров&lt;/i&gt;»
+							</comment>
+						</update_year_in_copyright>
+					</fields>
+				</footer>
+				<catalog_product_list translate='label'>
+					<label>Список товаров</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>210</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<hide_add_to_wishlist translate='label'>
+							<label>Скрыть ссылку «запомнить»&lt;br/&gt;(«Add to Wishlist»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</hide_add_to_wishlist>
+						<hide_add_to_compare translate='label'>
+							<label>Скрыть ссылку «сравнить»&lt;br/&gt;(«Add to Compare»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_add_to_compare>
+						<hide_add_to_cart translate='label'>
+							<label>Скрыть кнопку «в корзину»&lt;br/&gt;(«Add to Cart»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>225</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_add_to_cart>
+						<remove_empty_space translate='label'>
+							<label>Удалить пустоту, образовавшуюся после включения опций выше?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>250</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>
+								Если Вы скрыли одну из перечисленных выше ссылок/кнопок,то при показе товаров сеткой на карточках товара вместо скрытых ссылок остаётся пустое место.
+								После включения данной опции модуль попробует удалить эту пустоту.
+							</comment>
+						</remove_empty_space>
+						<replace_add_to_cart_with_more translate='label'>
+							<label>
+								Заменить кнопку «Добавить в корзину» кнопкой «Подробнее...»?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<hide_add_to_cart>0</hide_add_to_cart>
+							</depends>
+						</replace_add_to_cart_with_more>
+						<hide_price translate='label'>
+							<label>Скрыть цену?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>350</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_price>
+						<hide_rating translate='label'>
+							<label>Скрыть рейтинг?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_rating>
+						<hide_reviews translate='label'>
+							<label>Скрыть ссылку «Reviews»&lt;br/&gt;(«Отзывы»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_reviews>
+					</fields>
+				</catalog_product_list>
+				<catalog_product_view translate='label'>
+					<label>Страница товара</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>220</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<hide_empty_attributes translate='label'>
+							<label>Скрыть незаполненные свойства товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</hide_empty_attributes>
+						<hide_add_to_wishlist translate='label'>
+							<label>Скрыть ссылку «запомнить»&lt;br/&gt;(«Add to Wishlist»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_add_to_wishlist>
+						<hide_add_to_compare translate='label'>
+							<label>Скрыть ссылку «сравнить»&lt;br/&gt;(«Add to Compare»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_add_to_compare>
+						<hide_price translate='label'>
+							<label>Скрыть цену?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_price>
+						<hide_add_to_cart translate='label'>
+							<label>Скрыть кнопку «в корзину»&lt;br/&gt;(«Add to Cart»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>400</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</hide_add_to_cart>
+						<hide_rating translate='label'>
+							<label>Скрыть рейтинг?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_rating>
+						<hide_reviews_link translate='label'>
+							<label>Скрыть ссылку «отзывы» («Reviews»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_reviews_link>
+						<hide_add_review_link translate='label'>
+							<label>Скрыть ссылку «написать отзыв» («Add Your Review»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>650</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_add_review_link>
+						<hide_short_description translate='label'>
+							<label>Скрыть краткое описание?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>700</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_short_description>
+						<hide_tags translate='label'>
+							<label>Скрыть метки (теги)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>800</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_tags>
+						<hide_availability translate='label'>
+							<label>Скрыть информацию о наличии?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>900</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_availability>
+						<hide_email_to_friend translate='label'>
+							<label>Скрыть «рассказать другу» («Email to a Friend»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_email_to_friend>
+						<hide_product_name_from_breadcrumbs translate='label'>
+							<label>Скрыть название товара из навигационного меню?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</hide_product_name_from_breadcrumbs>
+					</fields>
+				</catalog_product_view>
+				<catalog_product_view_sku>
+					<label>Страница товара. Артикул</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>260</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Добавить артикул на страницу товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</enabled>
+						<sku__font__setup translate='label'>
+							<label>Настроить отображение артикула детально?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да», то система предложит Вам настроить
+									набор дополнительных опций отображения артикула.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>2000</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</sku__font__setup>
+						<sku__font__letter_case translate='label'>
+							<label>В каком регистре отображать буквы артикула?</label>
+							<comment>
+								<![CDATA[
+									Варианты:
+									<br/>
+									«не менять»: используется написание из административной части
+									<br/>
+									«с заглавной буквы»: «Rk-2680»
+									<br/>
+									«заглавными буквами»: «RK-2680»
+									<br/>
+									«строчными буквами»: «rk-2680»
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>3000</sort_order>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<sku__font__setup>1</sku__font__setup>
+							</depends>
+						</sku__font__letter_case>
+						<sku__font__emphase__bold translate='label'>
+							<label>Выделить артикул жирным шрифтом?</label>
+							<comment>
+								<![CDATA[
+									Например: <b>RK-2680</b>.
+									<br/>
+									Для выделения используется тег &lt;strong&gt;.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<sku__font__setup>1</sku__font__setup>
+							</depends>
+						</sku__font__emphase__bold>
+						<sku__font__emphase__italic translate='label'>
+							<label>Выделить артикул курсивом?</label>
+							<comment>
+								<![CDATA[
+									Например: <i>RK-2680</i>.
+									<br/>
+									Для выделения используется тег &lt;em&gt.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<sku__font__setup>1</sku__font__setup>
+							</depends>
+						</sku__font__emphase__italic>
+						<sku__font__emphase__underline translate='label'>
+							<label>Подчеркнуть артикул?</label>
+							<comment>
+								<![CDATA[
+									Например: <u>RK-2680</u>.
+									<br/>
+									Для выделения используется правило CSS «text-decoration: underline».
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<sku__font__setup>1</sku__font__setup>
+							</depends>
+						</sku__font__emphase__underline>
+						<show_label translate='label'>
+							<label>Отображать ли подпись к артикулу?</label>
+							<comment>
+								<![CDATA[
+									В качестве подписи к значению система использует
+									написание перевода термина «Sku» из языкового файла Mage_Catalog.csv.
+									<br/>
+									Варианты:
+									<br/>
+									«да»: «Артикул: RK-2680»
+									<br/>
+									«нет»: «RK-2680»
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</show_label>
+						<label__font__setup translate='label'>
+							<label>Настроить отображение подписи к артикулу детально?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да», то система предложит Вам настроить
+									набор дополнительных опций отображения артикула.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>7500</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_label>1</show_label>
+							</depends>
+						</label__font__setup>
+						<label__font__letter_case translate='label'>
+							<label>В каком регистре отображать подпись к значению?</label>
+							<comment>
+								<![CDATA[
+									Варианты:
+									<br/>
+									«не менять»: используется вариант написания из языкового файла
+									(обычно — «Артикул»)
+									<br/>
+									«с заглавной буквы»: «Артикул»
+									<br/>
+									«заглавными буквами»: «АРТИКУЛ»
+									<br/>
+									«строчными буквами»: «артикул»
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>8000</sort_order>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_label>1</show_label>
+								<label__font__setup>1</label__font__setup>
+							</depends>
+						</label__font__letter_case>
+						<label__font__emphase__bold translate='label'>
+							<label>Выделить ли подпись к артикулу жирным шрифтом?</label>
+							<comment>
+								<![CDATA[
+									Например: <b>Артикул</b>.
+									<br/>
+									Для выделения используется тег &lt;strong&gt;.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_label>1</show_label>
+								<label__font__setup>1</label__font__setup>
+							</depends>
+						</label__font__emphase__bold>
+						<label__font__emphase__italic translate='label'>
+							<label>Выделить подпись к артикулу курсивом?</label>
+							<comment>
+								<![CDATA[
+									Например: <i>Артикул</i>.
+									<br/>
+									Для выделения используется тег &lt;em&gt.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_label>1</show_label>
+								<label__font__setup>1</label__font__setup>
+							</depends>
+						</label__font__emphase__italic>
+						<label__font__emphase__underline translate='label'>
+							<label>Подчеркнуть подпись к артикулу?</label>
+							<comment>
+								<![CDATA[
+									Например: <u>Артикул</u>.
+									<br/>
+									Для выделения используется правило CSS «text-decoration: underline».
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_label>1</show_label>
+								<label__font__setup>1</label__font__setup>
+							</depends>
+						</label__font__emphase__underline>
+					</fields>
+				</catalog_product_view_sku>
+				<account translate='label'>
+					<label>Личный кабинет покупателя</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>300</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_section_billing_agreements translate='label'>
+							<label>Удалить раздел «Профили PayPal»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_section_billing_agreements>
+						<remove_section_recurring_profiles translate='label'>
+							<label>Удалить раздел  «Подписки PayPal»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_recurring_profiles>
+						<remove_section_product_reviews translate='label'>
+							<label>Удалить раздел  «Отзывы»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_product_reviews>
+						<remove_section_tags translate='label'>
+							<label>Удалить раздел  «Метки»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>400</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_tags>
+						<remove_section_wishlist translate='label'>
+							<label>Удалить раздел «План покупок»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_wishlist>
+						<remove_section_downloadable_products translate='label'>
+							<label>Удалить раздел «Файлы»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_downloadable_products>
+						<remove_section_applications translate='label'>
+							<label>Удалить раздел «Приложения»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_applications>
+						<remove_section_newsletter_subscriptions translate='label'>
+							<label>Удалить раздел «Уведомления»?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>700</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_section_newsletter_subscriptions>
+					</fields>
+				</account>
+				<recently_compared_products translate='label'>
+					<label>Блок «Сравнение товаров»</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>500</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+						<remove_from_account translate='label'>
+							<label>Удалить из кабинета покупателя?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_account>
+						<remove_from_catalog_search_result translate='label'>
+							<label>Удалить со страницы результатов полнотекстового поиска?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_search_result>
+					</fields>
+				</recently_compared_products>
+				<recently_viewed_products translate='label'>
+					<label>Блок «Недавно смотрели» («Recently Viewed Products»)</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>600</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+					</fields>
+				</recently_viewed_products>
+				<wishlist translate='label'>
+					<label>Блок «My Wishlist» («план покупок»)</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>700</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+					</fields>
+				</wishlist>
+				<banners_left translate='label'>
+					<label>Рекламные блоки слева (собака с лозунгом «Did you know?»)</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>800</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+						<remove_from_account translate='label'>
+							<label>Удалить из кабинета покупателя?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_account>
+					</fields>
+				</banners_left>
+				<banners_right translate='label'>
+					<label>Рекламные блоки справа («Back to School»)</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>900</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+					</fields>
+				</banners_right>
+				<paypal_logo translate='label'>
+					<label>Баннер «Now accepting PayPal»</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_from_catalog_product_view>
+					</fields>
+				</paypal_logo>
+				<poll translate='label'>
+					<label>Блок опросов</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+					</fields>
+				</poll>
+				<newsletter_subscription translate='label'>
+					<label>Блок «Newsletter» («Рассылка»)</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1200</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+						<remove_from_account translate='label'>
+							<label>Удалить из кабинета покупателя?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_account>
+					</fields>
+				</newsletter_subscription>
+				<tags_popular translate='label'>
+					<label>Блок «Популярные метки»</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1300</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+					</fields>
+				</tags_popular>
+				<cart translate='label'>
+					<label>Блок «Корзина»</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1350</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_from_all translate='label'>
+							<label>Удалить со всех страниц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_from_all>
+						<remove_from_frontpage translate='label'>
+							<label>Удалить с главной страницы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_frontpage>
+						<remove_from_catalog_product_list translate='label'>
+							<label>Удалить со страницы списка товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_list>
+						<remove_from_catalog_product_view translate='label'>
+							<label>Удалить со страницы товара?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_product_view>
+						<remove_from_account translate='label'>
+							<label>Удалить из кабинета покупателя?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_account>
+						<remove_from_catalog_search_result translate='label'>
+							<label>Удалить со страницы результатов полнотекстового поиска?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_removeIfEmpty</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<remove_from_all>0</remove_from_all>
+							</depends>
+						</remove_from_catalog_search_result>
+					</fields>
+				</cart>
+				<checkout_cart translate='label'>
+					<label>Страница корзины</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1400</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_shipping_and_tax_estimation translate='label'>
+							<label>Удалить блок «Estimate Shipping and Tax» («Рассчитать стоимость доставки и величину налога»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_shipping_and_tax_estimation>
+						<remove_discount_codes_block translate='label'>
+							<label>Удалить блок «Discount Codes» («Коды скидок»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_discount_codes_block>
+						<remove_crosssell_block translate='label'>
+							<label>Удалить блок сопутствующих товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</remove_crosssell_block>
+					</fields>
+				</checkout_cart>
+				<theme_modern translate='label'>
+					<label>Тема «Modern»</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1500</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remove_bottom_banner translate='label'>
+							<label>Удалить нижний баннер&lt;br/&gt;(«We're available 24/7»)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks</df_feature>
+						</remove_bottom_banner>
+					</fields>
+				</theme_modern>
+				<other translate='label'>
+					<label>Другое</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1600</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<jquery_load_mode>
+							<label>Вариант загрузки библиотеки jQuery</label>
+							<comment>
+								<![CDATA[
+									<br/>
+									«<b>загружать с сервера магазина</b>»
+									<br/>Этот вариант рекомендуется для разработки и отладки магазина.
+									<br/>Библиотека загружается в подробном виде, что замедляет загрузку,но упрощает отладку.
+									<br/><br/>
+									«<b>загружать с серверов Google</b>»
+									<br/>Этот вариант рекомендуется для промышленной эксплуатации магазина.
+									<br/>Библиотека загружается в сжатом виде, что ускоряет загрузку,но усложняет отладку.
+									<br/><br/>
+									«<b>не загружать</b>»
+									<br/>Этот вариант можно выбрать
+									при наличии на странице другой библиотеки jQuery.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_jqueryLoadMode</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</jquery_load_mode>
+						<jquery_remove_extraneous>
+							<label>Удалять с витринных страниц сторонние копии библиотеку jQuery
+								при наличии на этих страницах библиотеки jQuery Российской сборкой Magento?</label>
+							<comment>
+								<![CDATA[
+									Рекомендуемое значение данной опции — «<b>да</b>»,оно позволяет избежать конфликтов
+									наличия на одной странице сразу двух библиотек jQuery.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</jquery_remove_extraneous>
+					</fields>
+				</other>
+			</groups>
+		</df_tweaks>
+	</sections>
+</config>

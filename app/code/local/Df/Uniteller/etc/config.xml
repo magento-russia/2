@@ -1,0 +1,234 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Uniteller>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Uniteller>
+	</modules>
+	<global>
+		<blocks><df_uniteller><class>Df_Uniteller_Block</class></df_uniteller></blocks>
+		<helpers><df_uniteller><class>Df_Uniteller_Helper</class></df_uniteller></helpers>
+		<models><df_uniteller><class>Df_Uniteller_Model</class></df_uniteller></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<uniteller>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<frontend__title>Платёжный сервис Uniteller</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</uniteller>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-uniteller>
+				<model>df_uniteller/payment</model>
+			</df-uniteller>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_uniteller>/df-uniteller/</df_uniteller>
+		</secure_url>
+		-->
+		<routers>
+			<df-uniteller>
+				<use>standard</use>
+				<args>
+					<module>Df_Uniteller</module>
+					<frontName>df-uniteller</frontName>
+				</args>
+			</df-uniteller>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-uniteller>
+				<module>df_uniteller</module>
+				<title>Uniteller</title>
+				<url>http://magento-forum.ru/forum/166/</url>
+			</df-uniteller>
+		</features>
+		<payment>
+			<uniteller>
+				<currencies>
+					<allowed>
+						RUB,USD,EUR,UAH,KZT
+					</allowed>
+				</currencies>
+				<production>
+					<url>
+						<payment_page>https://wpay.uniteller.ru/pay/</payment_page>
+					</url>
+				</production>
+				<test>
+					<url>
+						<payment_page>https://test.wpay.uniteller.ru/pay/</payment_page>
+					</url>
+				</test>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>Order_ID</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_Uniteller: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_Uniteller: не используется.
+								Имя держателя карты.
+								Передаётся только в случае оплаты картой.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+								Df_Uniteller: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+								Df_Uniteller: не используется.
+							-->
+							<amount></amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_Uniteller: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<customer>
+								<!--
+									Кошелек покупателя.
+									Df_Payment: не используется.
+									Df_Uniteller: не используется.
+								-->
+								<account-id></account-id>
+								<!--
+									WMId покупателя.
+									Df_Payment: не используется.
+									Df_Uniteller: не используется.
+								-->
+								<id></id>
+							</customer>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_Uniteller: не используется.
+								-->
+								<date></date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Uniteller: не используется.
+								-->
+								<id></id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Uniteller: обязательный параметр.
+								-->
+								<state>Status</state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_Uniteller: не используется.
+								-->
+								<id></id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>Signature</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<Comment>
+								<max_length>1024</max_length>
+							</Comment>
+							<FirstName>
+								<max_length>64</max_length>
+							</FirstName>
+							<LastName>
+								<max_length>64</max_length>
+							</LastName>
+							<MiddleName>
+								<max_length>64</max_length>
+							</MiddleName>
+							<Email>
+								<max_length>64</max_length>
+							</Email>
+							<Phone>
+								<max_length>64</max_length>
+							</Phone>
+							<Address>
+								<max_length>64</max_length>
+							</Address>
+							<Country>
+								<max_length>64</max_length>
+							</Country>
+							<State>
+								<max_length>64</max_length>
+							</State>
+							<City>
+								<max_length>64</max_length>
+							</City>
+							<Zip>
+								<max_length>64</max_length>
+							</Zip>
+						</params>
+					</payment_page>
+				</request>
+			</uniteller>
+		</payment>
+	</df>
+</config>

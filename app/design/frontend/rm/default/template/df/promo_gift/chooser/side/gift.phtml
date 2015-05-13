@@ -1,0 +1,16 @@
+<?php /** @var Df_PromoGift_Block_Chooser_Gift $this */ ?>
+<?php
+	/**
+	 * Отображает товар-подарок
+	 *
+	 */
+	$gift = $this->getGift();
+	/** @var Df_PromoGift_Model_Gift $gift */
+	echo
+		$this
+			->renderProduct(
+				$gift->getProduct()
+				,
+				'df/promo_gift/chooser/side/product.phtml'
+			)
+	;

@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Spl>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Spl>
+	</modules>
+	<global>
+		<blocks><df_spl><class>Df_Spl_Helper</class></df_spl></blocks>
+		<helpers><df_spl><class>Df_Spl_Helper</class></df_spl></helpers>
+		<models><df_spl><class>Df_Spl_Model</class></df_spl></models>
+	</global>
+</config>

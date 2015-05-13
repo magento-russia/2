@@ -1,0 +1,93 @@
+<?php /** @var Df_Admin_Block_System_Config_Form_Field $this */ ?>
+<?php
+	/** @var Df_Admin_Model_Form_Element $element */
+	$element = $this->getElement();
+?>
+<tr id='row_<?php echo $element->getId(); ?>'>
+	<td class='label'>
+		<label for='<?php echo $element->getId(); ?>'>
+			<?php echo $element->getLabel(); ?>
+		</label>
+	</td>
+	<td class='value'>
+		<?php echo $element->getHtml(); ?>
+		<?php
+			if ($element->getComment()) {
+				?>
+					<p class='note'>
+						<span>
+							<?php echo $element->getComment(); ?>
+						</span>
+					</p>
+				<?php
+			}
+		?>
+	</td>
+	<?php if ($element->needToAddInheritBox()) { ?>
+		<td class='use-default'>
+			<input
+				id='<?php echo $element->getId(); ?>_inherit'
+				name='<?php echo $element->getNamePrefix(); ?>[inherit]'
+				type='checkbox'
+				value='1'
+				class='checkbox config-inherit'
+				<?php if ($element->getInherit()) { ?>
+					checked='checked'
+				<?php } ?>
+				onclick='toggleValueElements(this, Element.previous(this.parentNode))'
+			/>
+			<label
+				for='<?php echo $element->getId(); ?>_inherit'
+				class='inherit'
+				title='<?php echo $this->escapeHtml($element->getDefaultText()); ?>'
+			><?php echo $element->getCheckboxLabel(); ?></label>
+		</td>
+	<?php } ?>
+	<td class='scope-label'>
+		<?php echo $element->getScopeLabel(); ?>
+	</td>
+	<td class=''>
+		<?php if ($element->getHint()) { ?>
+			<div class='hint'>
+				<div style='display: none;'>
+					<?php echo $element->getHint(); ?>
+				</div>
+			</div>
+		<?php } ?>
+	</td>
+	<!--
+		Обратите внимание, что даже получение заголовка функциональной возможности(getFeatureTitle)
+		требует наличия модуля Df_Licensor
+	-->
+	<?php if (df_module_enabled(Df_Core_Module::LICENSOR) && $this->isFeatureSpecified()) { ?>
+		<td class='df'>
+			<div class='df-config'>
+				<div class='df-form'>
+					<div class='df-field'>
+						<div class='df-service'>
+							<div class='df-param df-title'>
+								<?php echo $this->getFeatureTitle(); ?>
+							</div>
+							<div class='df-param df-state'>
+								<?php
+									if ($this->isFeatureDisabledForAllStoresInCurrentScope()) {
+										?>
+											<div class='df-disabled'>отключен</div>
+										<?php
+									}
+									else {
+										?>
+											<div class='df-enabled'>
+												<?php echo $this->getFeatureStateText(); ?>
+											</div>
+										<?php
+									}
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</td>
+	<?php } ?>
+</tr>

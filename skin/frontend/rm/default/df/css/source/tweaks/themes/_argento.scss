@@ -1,0 +1,30 @@
+body.df-theme-argento {
+	.quick-links {
+		ul.links {
+			text-transform: lowercase;
+		}
+	}
+	.header-container {
+		.mini-search {
+			a.chzn-default {
+				font:{
+					size: 12px;
+					family: Arial,Helvetica,sans-serif;
+				}
+				padding-left: 10px;
+			}
+		}
+	}
+	.header-cart {
+		.summary {
+			width: 40px;
+		}
+	}
+	.fancybox-inner {
+		.account-login {
+			label {
+				font-size: 12px;
+			}
+		}
+	}
+}

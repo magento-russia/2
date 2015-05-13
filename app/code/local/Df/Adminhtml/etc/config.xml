@@ -1,0 +1,258 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Adminhtml>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Adminhtml>
+	</modules>
+	<global>
+		<blocks>
+			<df_adminhtml><class>Df_Adminhtml_Block</class></df_adminhtml>
+			<adminhtml>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						недопустить привязку товара к тем товарным разделам,
+						доступ к которым текущему администратору ограничем модулем Df_AccessControl.
+					-->
+					<catalog_product_edit_tab_categories>Df_Adminhtml_Block_Catalog_Product_Edit_Tab_Categories</catalog_product_edit_tab_categories>
+					<!--
+						Цель перекрытия —
+						позволить администратору менять привязку пользователя к сайту.
+					-->
+					<customer_edit_tab_account>Df_Adminhtml_Block_Customer_Edit_Tab_Account</customer_edit_tab_account>
+					<!--
+						Цель перекрытия —
+						объявление полей класса $_min и $_max,
+						которые родительский класс использует без объявления.
+						@see Mage_Adminhtml_Block_Dashboard_Graph::getChartUrl()
+						@link http://magento-forum.ru/topic/4291/
+					-->
+					<dashboard_tab_amounts>Df_Adminhtml_Block_Dashboard_Tab_Amounts</dashboard_tab_amounts>
+					<!--
+						Цель перекрытия —
+						объявление полей класса $_min и $_max,
+						которые родительский класс использует без объявления.
+						@see Mage_Adminhtml_Block_Dashboard_Graph::getChartUrl()
+						@link http://magento-forum.ru/topic/4291/
+					-->
+					<dashboard_tab_orders>Df_Adminhtml_Block_Dashboard_Tab_Orders</dashboard_tab_orders>
+					<!--
+						Цель перекрытия —
+						преопределение метода
+						@see Mage_Adminhtml_Block_Notification_Window::_isAllowed()
+						чтобы избежать сбоя:
+						«Notice: Undefined property: Mage_Adminhtml_Block_Notification_Window::$_aclResourcePath».
+
+						Причиной этого сбоя является дефект родительского метода:
+						там код пытается использовать несуществующую переменную $this->_aclResourcePath
+						Я внимательно проверил: этот код никак не связан с остальной частью системы,
+						переменная и ее данные нигде не используются.
+						Видимо, код остался от устаревших версий Magento.
+
+						Ранее сбой не возникал, потому что в классе Varien_Object
+						присутствовал магический метод __get.
+						Я этот магический метод удалил,
+						он мешает новой архитектуре Российской сборки Magento.
+					-->
+					<notification_window>Df_Adminhtml_Block_Notification_Window</notification_window>
+					<!--
+						Цель перекрытия —
+						расширение функциональности добавления на страницу скриптов и стилей.
+					-->
+					<page_head>Df_Adminhtml_Block_Page_Head</page_head>
+					<!--
+						Цель перекрытия —
+						сигнализации о событиях
+						@see Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection
+						@see Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter
+						Эти события используются
+						для добавления в коллекцию колонки с перечислением заказанных товаров.
+					-->
+					<sales_order_grid>Df_Adminhtml_Block_Sales_Order_Grid</sales_order_grid>
+					<!--
+						Цель перекрытия —
+						позволить скрывать копейки при отображении цен в таблице заказов.
+					-->
+					<sales_order_view_items_renderer_default>Df_Adminhtml_Block_Sales_Order_View_Items_Renderer_Default</sales_order_view_items_renderer_default>
+					<!--
+						Цель перекрытия —
+						позволить сохранять некоторые теги HTML (т.е. форматирование)
+						в комментариях к заказу.
+					-->
+					<sales_order_view_history>Df_Adminhtml_Block_Sales_Order_View_History</sales_order_view_history>
+					<!--
+						Цель перекрытия —
+						заплатка к методу @see Mage_Adminhtml_Block_System_Config_Form_Field::render(),
+						который в некоторых ситуациях может приводить к сбою.
+						Смотрите подробный комментарий внутри метода
+						@see Df_Adminhtml_Block_System_Config_Form_Field::render()
+					-->
+					<system_config_form_field>Df_Adminhtml_Block_System_Config_Form_Field</system_config_form_field>
+					<!--
+						Цель перекрытия —
+						Исправить работу Field Mapping в интерфейсе Dataflow
+						(«Система» → «Импорт/Экспорт» → «Стандартные программы»).
+						В Magento CE элемент управления Field Mapping работает не всегда корректно.
+					-->
+					<system_convert_gui_edit_tab_wizard>Df_Adminhtml_Block_System_Convert_Gui_Edit_Tab_Wizard</system_convert_gui_edit_tab_wizard>
+					<!--
+						Цель перекрытия —
+						перевести надписи на кнопках экспорта и импорта налоговых ставок
+						на экране «Продажи» → «Налоги и наценки» → «Импорт и экспорт ставок».
+					-->
+					<tax_rate_importExport>Df_Adminhtml_Block_Tax_Rate_ImportExport</tax_rate_importExport>
+					<!--
+						Цель перекрытия —
+						добавить комментарий к полю «Налоговая ставка» на экране
+						«Продажи» → «Налоги и наценки» → «Налоговые правила»  → <Налоговое правило>.
+					-->
+					<tax_rule_edit_form>Df_Adminhtml_Block_Tax_Rule_Edit_Form</tax_rule_edit_form>
+					<!--
+						Цель перекрытия —
+						позволить скрывать копейки при отображении цен
+						в различных административных таблицах.
+					-->
+					<widget_grid_column_renderer_currency>Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency</widget_grid_column_renderer_currency>
+					<!--
+						Цель перекрытия —
+						позволить скрывать копейки при отображении цен
+						в различных административных таблицах.
+					-->
+					<widget_grid_column_renderer_price>Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Price</widget_grid_column_renderer_price>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+		<helpers>
+			<df_adminhtml><class>Df_Adminhtml_Helper</class></df_adminhtml>
+		</helpers>
+		<models>
+			<adminhtml>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						возможность указания модуля для перевода надписей в разделе настроек
+						в том случае, когда сторонний модуль
+						не указал модуль для перевода в файле system.xml.
+						Magento CE в таком случае
+						использует для перевода модуль Mage_Adminhtml,
+						однако мы не хотим засорять словарь модуля Mage_Adminhtml
+						строками для перевода сторонних модулей
+						(при таком засорении будут конфликты при переводе строк,
+						идентичных на английском языке,
+						но переводящихся по-разному на русский в разном контексте).
+					-->
+					<config>Df_Adminhtml_Model_Config</config>
+					<!--
+						Цель перекрытия —
+						поддержка в Magento 1.4.0.1 ключа config_path,
+						который появился только в Magento 1.4.1.0
+					-->
+					<config_data>Df_Adminhtml_Model_Config_Data</config_data>
+					<!--
+						Цель перекрытия —
+						поддержка упорядочивания источников данных курсов валют
+						в соответствии с их весами, заданными в настроечных файлах модуля (config.xml).
+						Это позволяет нам, например, предложить администратору первым в списке
+						источников данных не Webservicex, а Банк России.
+					-->
+					<system_config_source_currency_service>Df_Adminhtml_Model_System_Config_Source_Currency_Service</system_config_source_currency_service>
+					<!--
+						Цель перекрытия —
+						замена в выпадающем списке значения опций
+						«Включить» / «Отключить» на «Да» / «Нет».
+						В Российской сборке Magento названия опций формулируются конкретно,
+						в вопросительной форме, и значения «Да» / «Нет» становятся намного осмысленнее,
+						чем «Включить» / «Отключить».
+					-->
+					<system_config_source_enabledisable>Df_Adminhtml_Model_System_Config_Source_Enabledisable</system_config_source_enabledisable>
+				</rewrite>
+			</adminhtml>
+			<df_adminhtml><class>Df_Adminhtml_Model</class></df_adminhtml>
+		</models>
+	</global>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<Df_Adminhtml before='Mage_Adminhtml'>Df_Adminhtml</Df_Adminhtml>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	<adminhtml>
+		<events>
+			<adminhtml_block_html_before>
+				<observers>
+					<df_adminhtml__adminhtml_block_html_before>
+						<class>df_adminhtml/dispatcher</class>
+						<method>adminhtml_block_html_before</method>
+					</df_adminhtml__adminhtml_block_html_before>
+				</observers>
+			</adminhtml_block_html_before>
+			<adminhtml_sales_order_create_process_data_before>
+				<observers>
+					<df_adminhtml__adminhtml_sales_order_create_process_data_before>
+						<class>df_adminhtml/dispatcher</class>
+						<method>adminhtml_sales_order_create_process_data_before</method>
+					</df_adminhtml__adminhtml_sales_order_create_process_data_before>
+				</observers>
+			</adminhtml_sales_order_create_process_data_before>
+			<adminhtml_widget_container_html_before>
+				<observers>
+					<df_adminhtml__adminhtml_widget_container_html_before>
+						<class>df_adminhtml/dispatcher</class>
+						<method>adminhtml_widget_container_html_before</method>
+					</df_adminhtml__adminhtml_widget_container_html_before>
+				</observers>
+			</adminhtml_widget_container_html_before>
+			<controller_action_predispatch>
+				<observers>
+					<df_adminhtml__controller_action_predispatch>
+						<class>df_adminhtml/dispatcher</class>
+						<method>controller_action_predispatch</method>
+					</df_adminhtml__controller_action_predispatch>
+				</observers>
+			</controller_action_predispatch>
+			<core_block_abstract_to_html_before>
+				<observers>
+					<df_adminhtml__core_block_abstract_to_html_before>
+						<class>df_adminhtml/dispatcher</class>
+						<method>core_block_abstract_to_html_before</method>
+					</df_adminhtml__core_block_abstract_to_html_before>
+				</observers>
+			</core_block_abstract_to_html_before>
+		</events>
+		<layout>
+			<updates>
+				<df_adminhtml module='Df_Adminhtml'><file>df/adminhtml.xml</file></df_adminhtml>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Df_Adminhtml>
+					<files>
+<!--
+	Модуль Df_Page используется
+	только для переопределения функциональности модуля Mage_Adminhtml,
+	поэтому мы заимствуем перевод из модуля Mage_Adminhtml.
+	Раньше мы заимствовали перевод другим, более сложным способом:
+	добавляя в каждый переопределяемый блок метод следующего содержания:
+	/**
+	 * @override
+	 * @return string
+	 */
+	public function __() {$a = func_get_args(); return rm_translate($a, 'Mage_Adminhtml');}
+
+	Очевидно, новый способ гораздо проще.
+ -->
+						<default>Mage_Adminhtml.csv</default>
+					</files>
+				</Df_Adminhtml>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

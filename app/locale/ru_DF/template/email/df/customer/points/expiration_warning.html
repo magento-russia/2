@@ -1,0 +1,37 @@
+<!--@subject Не забудьте потратить Ваши баллы в магазине {{var store.getFrontendName()|escape}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"config path='trans_email/ident_sales/email'":"Sales Contact Email",
+"config path='general/store_information/phone'":"Sales Contact Phone",
+"var unsubscription_url":"Unsubscription URL",
+"var customer_name|escape":"Сustomer Name",
+"var remaining_days":"Points exiration remaining days",
+"var points_expiring":"Points that will be expired",
+"var points_balance":"Current Points Amount"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>Здравствуйте, {{var customer_name|escape}}!</p>
+
+                            <p>Через {{var remaining_days}} дней Ваши {{var points_expiring}} баллов в магазине <a href="{{store url=""}}">{{var store.getFrontendName()|escape}}</a> могут сгореть.</p>
+                            <p>Не забудьте их потратить!</p>
+							<p>Всего у Вас на счету накопительной программы {{var points_balance}} баллов.</p>
+
+							<p><a href="{{var unsubscription_url}}">Отписаться от уведомлений накопительной программы</a>.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+

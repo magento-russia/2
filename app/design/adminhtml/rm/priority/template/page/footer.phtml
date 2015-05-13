@@ -1,0 +1,18 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<p class="bug-report">
+    <?php echo $this->__('Interface Locale: %s', $this->getLanguageSelect()) ?>
+</p>
+<p class="legality">
+    <a href="http://magento-forum.ru/" id="footer_connect"><?php echo $this->__('Connect with the Magento Community') ?></a><br/>
+</p>
+<?php echo $this->__('Magento ver. %s', rm_version_full ()) ?>
+<script type="text/javascript">
+    $('footer_connect').target = 'Varien_External';
+    function setInterfaceLanguage(evt){
+        var elem = Event.element(evt);
+        if (elem){
+            setLocation('<?php echo $this->getChangeLocaleUrl() ?>locale/'+elem.value+'/<?php echo $this->getRefererParamName() ?>/<?php echo $this->getUrlForReferer() ?>');
+        }
+    }
+    Event.observe('interface_locale', 'change', setInterfaceLanguage)
+</script>

@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<review_product_list>
+		<reference name='content'>
+			<block
+				type='df_review/frontend_js'
+				name='df_review_frontend_js'
+				template='df/review/js.phtml'
+			></block>
+		</reference>
+	</review_product_list>
+</layout>

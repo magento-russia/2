@@ -1,0 +1,99 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<customer>
+						<children>
+							 <df_invitation translate='title' module='df_invitation'>
+								<title>Invitations</title>
+								<sort_order>30</sort_order>
+							</df_invitation>
+						</children>
+					</customer>
+					<report>
+						<children>
+							<df_invitation translate='title' module='df_invitation'>
+								<title>Invitations</title>
+								<sort_order>40</sort_order>
+								<children>
+									<general translate='title' module='df_invitation'>
+										<title>General</title>
+										<sort_order>10</sort_order>
+									</general>
+									<customer translate='title' module='df_invitation'>
+										<title>Customers</title>
+										<sort_order>20</sort_order>
+									</customer>
+									<order translate='title' module='df_invitation'>
+										<title>Order Conversion Rate</title>
+										<sort_order>30</sort_order>
+									</order>
+								</children>
+							</df_invitation>
+						</children>
+					</report>
+					<system>
+						<children>
+							<config>
+								<children>
+									   <df_invitation translate='title' module='df_invitation'>
+										   <title>Invitation Section</title>
+									   </df_invitation>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<customer>
+			<children>
+				<df_invitation translate='title' module='df_invitation'>
+					   <title>Invitations</title>
+					   <action>adminhtml/invitation</action>
+					   <sort_order>30</sort_order>
+					   <depends>
+						   <module>Df_Invitation</module>
+						   <config>df_invitation/general/enabled</config>
+					   </depends>
+				</df_invitation>
+			</children>
+		</customer>
+		<report>
+			<children>
+				<df_invitation translate='title' module='df_invitation'>
+					   <title>Invitations</title>
+					   <sort_order>30</sort_order>
+					   <depends>
+						   <module>Df_Invitation</module>
+						   <config>df_invitation/general/enabled</config>
+					   </depends>
+					   <children>
+						   <general translate='title' module='df_invitation'>
+							   <title>General</title>
+							   <action>adminhtml/report_invitation</action>
+							   <resource>report/df_invitation</resource>
+							   <sort_order>10</sort_order>
+						   </general>
+						   <customer translate='title' module='df_invitation'>
+							   <title>Customers</title>
+							   <action>adminhtml/report_invitation/customer</action>
+							   <resource>report/df_invitation</resource>
+							   <sort_order>20</sort_order>
+						   </customer>
+						   <order translate='title' module='df_invitation'>
+							   <title>Order Conversion Rate</title>
+							   <action>adminhtml/report_invitation/order</action>
+							   <resource>report/df_invitation</resource>
+							   <sort_order>30</sort_order>
+						   </order>
+					   </children>
+				</df_invitation>
+			</children>
+		</report>
+	</menu>
+</config>

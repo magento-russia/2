@@ -1,0 +1,340 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Assist>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Assist>
+	</modules>
+	<global>
+		<blocks><df_assist><class>Df_Assist_Block</class></df_assist></blocks>
+		<helpers><df_assist><class>Df_Assist_Helper</class></df_assist></helpers>
+		<models><df_assist><class>Df_Assist_Model</class></df_assist></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<assist>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__card_payment_action>authorize</payment_service__card_payment_action>
+				<frontend__title>Процессинговый центр ASSIST</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<payment_service___production_domain>payments115.assist.ru</payment_service___production_domain>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+			</assist>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-assist>
+				<model>df_assist/payment</model>
+			</df-assist>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_assist>/df-assist/payment</df_assist>
+		</secure_url>
+		-->
+		<routers>
+			<df_assist>
+				<use>standard</use>
+				<args>
+					<module>Df_Assist</module>
+					<frontName>df-assist</frontName>
+				</args>
+			</df_assist>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-assist>
+				<module>df_assist</module>
+				<title>ASSIST</title>
+				<url>http://magento-forum.ru/forum/154/</url>
+			</df-assist>
+		</features>
+		<payment>
+			<assist>
+				<production>
+				</production>
+				<test>
+					<domain>test.paysecure.ru</domain>
+				</test>
+				<currencies>
+					<allowed>
+						RUB,USD,EUR,BYR,AUD,AZN,BGN,BRL,CAD,CHF,CNY,CZK,DKK,EEK,GBP,HUF,INR,JPY,KGS,KRW,KZT,LTL,LVL,MDL,NOK,PLN,RON,SEK,SGD,TJS,TMT,TRY,UAH,UZS,ZAR
+					</allowed>
+					<code-translation>
+						<RUB>RUR</RUB>
+					</code-translation>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>RU</ru_RU>
+						<en_US>EN</en_US>
+					</code-translation>
+				</locales>
+				<url>
+					<payment_page>pay/order.cfm</payment_page>
+					<confirm_charge>charge/charge.cfm</confirm_charge>
+					<refund>cancel/cancel.cfm</refund>
+					<recurrent_payment>recurrent/rp.cfm</recurrent_payment>
+					<order_state>orderstate/orderstate.cfm</order_state>
+					<payment_history>orderresult/orderresult.cfm</payment_history>
+					<payments_history>resultbydate/resultbydate.cfm</payments_history>
+				</url>
+				<payment-methods>
+					<CardPayment>
+						<title>Банковские карты</title>
+					</CardPayment>
+					<YMPayment>
+						<title>Яндекс.Деньги</title>
+					</YMPayment>
+					<QIWIPayment>
+						<title>QIWI</title>
+					</QIWIPayment>
+					<WMPayment>
+						<title>WebMoney</title>
+					</WMPayment>
+					<QIWIBeelinePayment>
+						<title>Мобильный платёж Билайн</title>
+					</QIWIBeelinePayment>
+					<QIWIMegafonPayment>
+						<title>Мобильный платёж МегаФон</title>
+					</QIWIMegafonPayment>
+					<QIWIMtsPayment>
+						<title>Мобильный платёж МТС</title>
+					</QIWIMtsPayment>
+					<AssistIDPayment>
+						<title>AssistID</title>
+					</AssistIDPayment>
+				</payment-methods>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>ordernumber</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_Assist: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_Assist: не используется.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+								Df_Assist: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>orderamount</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_Assist: обязательный параметр.
+								-->
+								<date>packetdate</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Assist: обязательный параметр.
+								-->
+								<id>billnumber</id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Assist: обязательный параметр.
+								-->
+								<state>orderstate</state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_Assist: обязательный параметр.
+								-->
+								<id>merchant_id</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>checkvalue</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/xml</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<Address>
+								<max_length>128</max_length>
+							</Address>
+							<AssistIDPayment>
+								<max_length></max_length>
+							</AssistIDPayment>
+							<CardPayment>
+								<max_length></max_length>
+							</CardPayment>
+							<City>
+								<max_length>70</max_length>
+							</City>
+							<Country>
+								<max_length>3</max_length>
+							</Country>
+							<Delay>
+								<max_length></max_length>
+							</Delay>
+							<Email>
+								<max_length>64</max_length>
+							</Email>
+							<Fax>
+								<max_length>20</max_length>
+							</Fax>
+							<Firstname>
+								<max_length>70</max_length>
+							</Firstname>
+							<HomePhone>
+								<max_length>64</max_length>
+							</HomePhone>
+							<Language>
+								<max_length></max_length>
+							</Language>
+							<Lastname>
+								<max_length>70</max_length>
+							</Lastname>
+							<Merchant_ID>
+								<max_length>128</max_length>
+							</Merchant_ID>
+							<Middlename>
+								<max_length>70</max_length>
+							</Middlename>
+							<MobilePhone>
+								<max_length>20</max_length>
+							</MobilePhone>
+							<OrderAmount>
+								<max_length>15</max_length>
+							</OrderAmount>
+							<OrderComment>
+								<max_length>256</max_length>
+							</OrderComment>
+							<OrderCurrency>
+								<max_length>3</max_length>
+							</OrderCurrency>
+							<OrderNumber>
+								<max_length>128</max_length>
+							</OrderNumber>
+							<QIWIBeelinePayment>
+								<max_length></max_length>
+							</QIWIBeelinePayment>
+							<QIWIMegafonPayment>
+								<max_length></max_length>
+							</QIWIMegafonPayment>
+							<QIWIMtsPayment>
+								<max_length></max_length>
+							</QIWIMtsPayment>
+							<QIWIPayment>
+								<max_length></max_length>
+							</QIWIPayment>
+							<RecurringIndicator>
+								<max_length></max_length>
+							</RecurringIndicator>
+							<RecurringMaxAmount>
+								<max_length>15</max_length>
+							</RecurringMaxAmount>
+							<RecurringMaxDate>
+								<max_length></max_length>
+							</RecurringMaxDate>
+							<RecurringMinAmount>
+								<max_length>15</max_length>
+							</RecurringMinAmount>
+							<RecurringPeriod>
+								<max_length>10</max_length>
+							</RecurringPeriod>
+							<Signature>
+								<max_length></max_length>
+							</Signature>
+							<State>
+								<max_length>3</max_length>
+							</State>
+							<TestMode>
+								<max_length></max_length>
+							</TestMode>
+							<URL_RETURN>
+								<max_length>128</max_length>
+							</URL_RETURN>
+							<URL_RETURN_NO>
+								<max_length>128</max_length>
+							</URL_RETURN_NO>
+							<URL_RETURN_OK>
+								<max_length>128</max_length>
+							</URL_RETURN_OK>
+							<WMPayment>
+								<max_length></max_length>
+							</WMPayment>
+							<WorkPhone>
+								<max_length>20</max_length>
+							</WorkPhone>
+							<YMPayment>
+								<max_length></max_length>
+							</YMPayment>
+							<Zip>
+								<max_length>25</max_length>
+							</Zip>
+						</params>
+					</payment_page>
+				</request>
+			</assist>
+		</payment>
+	</df>
+</config>

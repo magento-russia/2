@@ -1,0 +1,32 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ($this->canShow() && $this->getEvents() && count($this->getEvents())): ?>
+   <!--
+    <h2 class="table-caption"><?php echo Df_CustomerBalance_Helper_Data::s()->__('Balance History'); ?></h2>
+   -->
+	<br/>
+    <table id="customerbalance-history" class="data-table">
+        <col />
+        <col width="100" />
+        <col width="100" />
+        <col width="150" />
+        <thead>
+            <tr>
+                <th><?php echo Df_CustomerBalance_Helper_Data::s()->__('Action'); ?></th>
+                <th><?php echo Df_CustomerBalance_Helper_Data::s()->__('Balance Change'); ?></th>
+                <th><?php echo Df_CustomerBalance_Helper_Data::s()->__('Balance'); ?></th>
+                <th><?php echo Df_CustomerBalance_Helper_Data::s()->__('Date'); ?></th>
+            </tr>
+        </thead>
+        <?php foreach($this->getEvents() as $event): ?>
+        <tbody>
+            <tr>
+                <td><?php echo $this->getActionLabel($event->getAction()); ?></td>
+                <td><?php echo Mage::helper('core')->currency($event->getBalanceDelta()); ?></td>
+                <td><?php echo Mage::helper('core')->currency($event->getBalanceAmount()); ?></td>
+                <td><?php echo Mage::helper('core')->formatDate($event->getUpdatedAt(), 'short', true); ?></td>
+            </tr>
+        </tbody>
+        <?php endforeach; ?>
+    </table>
+    <script type="text/javascript">decorateTable('customerbalance-history')</script>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+body.df-theme-8theme-mercado {
+	.header {
+		.header-center {
+			margin:{
+				left: 12px;
+			}
+			width: 268px;
+			background: center;
+		}
+		.block-cart-header {
+			.button {
+				padding:{
+					right: 0;
+					left: 0;
+				}
+			}
+			.btn-view{
+				width: 129px;
+			}
+			.btn-checkout {
+				width: 164px;
+			}
+		}
+	}
+}

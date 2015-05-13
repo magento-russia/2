@@ -1,0 +1,195 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Interkassa>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Interkassa>
+	</modules>
+	<global>
+		<blocks><df_interkassa><class>Df_Interkassa_Block</class></df_interkassa></blocks>
+		<helpers><df_interkassa><class>Df_Interkassa_Helper</class></df_interkassa></helpers>
+		<models><df_interkassa><class>Df_Interkassa_Model</class></df_interkassa></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<interkassa>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<frontend__title>Платёжный сервис INTERKASSA</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>USD</payment_service__currency>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</interkassa>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-interkassa>
+				<model>df_interkassa/payment</model>
+			</df-interkassa>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_interkassa>/df-interkassa/</df_interkassa>
+		</secure_url>
+		-->
+		<routers>
+			<df-interkassa>
+				<use>standard</use>
+				<args>
+					<module>Df_Interkassa</module>
+					<frontName>df-interkassa</frontName>
+				</args>
+			</df-interkassa>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-interkassa>
+				<module>df_interkassa</module>
+				<title>INTERKASSA</title>
+				<url>http://magento-forum.ru/forum/173/</url>
+			</df-interkassa>
+		</features>
+		<payment>
+			<interkassa>
+				<currencies>
+					<allowed>
+						USD,RUB,EUR,UAH,KZT,BYR,AZM,LVL,LTL,MDL
+					</allowed>
+				</currencies>
+				<url>
+					<payment_page>http://www.interkassa.com/lib/payment.php</payment_page>
+				</url>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>ik_payment_id</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_Interkassa: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_Interkassa: не используется.
+								Имя держателя карты.
+								Передаётся только в случае оплаты картой.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+								Df_Interkassa: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>ik_payment_amount</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_Interkassa: не используется.
+							-->
+							<currency-code></currency-code>
+							<!--
+								Описание платежа.
+								Df_Payment: не используется.
+								Df_Interkassa: обязательный параметр.
+							-->
+							<description>ik_payment_desc</description>
+						</payment>
+						<payment_service>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_Interkassa: обязательный параметр.
+								-->
+								<date>ik_payment_timestamp</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Interkassa: не используется.
+								-->
+								<id>ik_trans_id</id>
+								<!--
+									Способ оплаты
+									из числа предоставляемых платёжной системой способов.
+									Df_Payment: не используется.
+									Df_Interkassa: обязательный параметр.
+								-->
+								<method>ik_paysystem_alias</method>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Interkassa: обязательный параметр.
+								-->
+								<state>ik_payment_state</state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_Interkassa: обязательный параметр.
+								-->
+								<id>ik_shop_id</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>ik_sign_hash</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<ik_payment_desc>
+								<max_length>255</max_length>
+							</ik_payment_desc>
+						</params>
+					</payment_page>
+				</request>
+			</interkassa>
+		</payment>
+	</df>
+</config>

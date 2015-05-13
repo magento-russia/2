@@ -1,0 +1,49 @@
+<?php /** @var Df_PromoGift_Block_Chooser $this */ ?>
+<div class="df">
+	<div class="df-frontend">
+		<div class="df-promo-gift">
+			<div class="df-gift-chooser">
+				<!--
+					Блок выбора подарка.
+					Обратите внимание, что текущему состоянию заказа
+					могут удовлетворять сразу несколько подарочных акций.
+				-->
+				<div class="df-center">
+					<!--
+						Вывод в центральной области.
+						Другой шаблон(c классом df-side вместо df-center)
+						способен отображать те же данные в боковой колонке.
+					-->
+					<h2>Выберите подарок</h2>
+					<ul class="df-promo-actions">
+						<?php foreach($this->getApplicablePromoActions() as $promoAction) {
+							/** @var Df_PromoGift_Model_PromoAction $promoAction */ ?>
+								<li class="df-promo-action">
+									<?php
+										/**
+										 * Отображаем подарки текущей промо-акции.
+										 *
+										 */
+										echo
+											$this
+												->renderPromoAction(
+												    /**
+													 * Отображаемая промо-акция
+													 */
+													$promoAction
+													,
+													/**
+													 * Шаблон для отображения
+													 */
+													'df/promo_gift/chooser/center/promo-action.phtml'
+												)
+										;
+									?>
+								</li>
+						<?php }	?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

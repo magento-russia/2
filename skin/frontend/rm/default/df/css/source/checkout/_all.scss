@@ -1,0 +1,99 @@
+.form-list {
+	ul {
+		li {
+			.df-phone-container {
+				width: 100%;
+				overflow: hidden;
+				.df-prefix {
+					float: left;
+					margin-top: 1.35em;
+					width: 1.5em;
+				}
+				label {
+					display: block;
+					width: 100%;
+
+					/** В системном файле Magento присутствует правило
+                        .form-list label {float: left;}
+					 */
+					float: none;
+				}
+				input {
+					letter-spacing: 0.03em;
+				}
+				.df-network-code-container {
+					float: left;
+					label {
+						width: 2.5em;
+						margin: 0 0 0 0.5em;
+					}
+					.df-network-code-input-frame {
+						width: 5em;
+						overflow: hidden;
+						.df-bracket {
+							float: left;
+						}
+						input.df-phone-network-code {
+						    float: left;
+							width: 2.5em;
+							margin: 0 0.25em;
+							text-align: center;
+						}
+					}
+				}
+				.df-suffix-container {
+					width: 8em;
+					float: left;
+					label {
+						width: 50%;
+					}
+					input.df-phone-suffix {
+						width: 7em;
+					}
+				}
+			}
+			.df-field-comment {
+				margin: 0.2em 0 0 0;
+				font-size: 82.5%;
+				line-height: 112.5%;
+			}
+		}
+	}
+}
+@import 'ergonomic/_main';
+#checkout-shipping-method-load
+,#checkout-payment-method-load
+{
+	span.p {
+		display: block;
+		margin: 0.5em 0;
+	}
+}
+
+#checkout-review-table {
+	th {
+		text: {
+			transform: lowercase;
+		}
+	}
+}
+#checkout-step-login {
+	.col-2 {
+		h3 {
+			display: none;
+		}
+
+		#login-form {
+			p {
+				display: none;
+			}
+		}
+	}
+}
+#df-login {
+	#login-form {
+		.content {
+			min-height: 0;
+		}
+	}
+}

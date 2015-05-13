@@ -1,0 +1,369 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Checkout>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Checkout>
+	</modules>
+	<global>
+		<blocks>
+			<df_checkout><class>Df_Checkout_Block</class></df_checkout>
+			<checkout>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						всегда показывать поле для указания города в витринном блоке
+						для расчёта пользователем стоимости доставки
+						до перехода на страницу оформления заказа (на странице корзины).
+					-->
+					<cart_shipping>Df_Checkout_Block_Cart_Shipping</cart_shipping>
+					<!--
+						Цель перекрытия —
+						кэширование блока мини-корзины в боковой колонке.
+					-->
+					<cart_sidebar>Df_Checkout_Block_Cart_Sidebar</cart_sidebar>
+					<!--
+						Цель перекрытия —
+						реализация модуля «Удобное оформление заказа».
+					-->
+					<onepage_billing>Df_Checkout_Block_Frontend_Ergonomic_Address_Type_Billing</onepage_billing>
+					<!--
+						Цель перекрытия —
+						реализация модуля «Удобное оформление заказа».
+					-->
+					<onepage_shipping>Df_Checkout_Block_Frontend_Ergonomic_Address_Type_Shipping</onepage_shipping>
+					<!--
+						2015-03-03
+						Цель перекрытия —
+						ускорение реакции системы на экране оформления заказа.
+						Стандартный блок ошибочно дважды персчитывает одни и те же тарифы доставки,
+						что замедляет реакцию системы.
+					-->
+					<onepage_shipping_method_available>Df_Checkout_Block_Onepage_Shipping_Method_Available</onepage_shipping_method_available>
+					<!--
+						Цель перекрытия —
+						предоставление платёжным модулям возможности подмены
+						стандартного шаблона сообщения об успешном оформлении заказа на свой.
+					-->
+					<onepage_success>Df_Checkout_Block_Onepage_Success</onepage_success>
+				</rewrite>
+			</checkout>
+		</blocks>
+		<helpers><df_checkout><class>Df_Checkout_Helper</class></df_checkout></helpers>
+		<models>
+			<df_checkout><class>Df_Checkout_Model</class></df_checkout>
+			<!-- Для Magento версии не меньше 1.6 -->
+			<checkout_resource>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						устранение сбоя, который, видимо, иногда происходил в методе
+						@see Mage_Checkout_Model_Mysql4_Cart::addExcludeProductFilter()
+					-->
+					<cart>Df_Checkout_Model_Resource_Cart</cart>
+				</rewrite>
+			</checkout_resource>
+		</models>
+		<template>
+			<email>
+				<!--
+					Обратите внимание, что дескриптор df_checkout_email_generated_password,
+					как и другие подобные дескрипторы шаблонов писем,
+					выбирается не произвольным образом,
+					а соответствует настроечному ключу (df_checkout/email/generated_password)
+				-->
+				<df_checkout_email_generated_password translate='label' module='df_checkout'>
+					<label>Автоматически созданный пароль к личному кабинету покупателя</label>
+					<file>df/checkout/generated_password.html</file>
+					<type>html</type>
+				</df_checkout_email_generated_password>
+			</email>
+		</template>
+		<rewrite>
+			<!--
+				Перекрываем контроллер только для ограниченного круга операций
+				(а для остальных операций оставляем стандартный)
+			-->
+			<df_checkout_save_billing>
+				<from><![CDATA[#^/checkout/onepage/saveBilling/#]]></from>
+				<to>/df_checkout/onepage/saveBilling/</to>
+			</df_checkout_save_billing>
+			<df_checkout_save_shipping_method>
+				<from><![CDATA[#^/checkout/onepage/saveShippingMethod/#]]></from>
+				<to>/df_checkout/onepage/saveShippingMethod/</to>
+			</df_checkout_save_shipping_method>
+		</rewrite>
+	</global>
+	<frontend>
+		<events>
+			<checkout_type_multishipping_create_orders_single>
+				<observers>
+					<df_checkout__checkout_type_multishipping_create_orders_single>
+						<class>df_checkout/dispatcher</class>
+						<method>checkout_type_multishipping_create_orders_single</method>
+					</df_checkout__checkout_type_multishipping_create_orders_single>
+				</observers>
+			</checkout_type_multishipping_create_orders_single>
+			<checkout_type_onepage_save_order>
+				<observers>
+					<df_checkout__checkout_type_onepage_save_order>
+						<class>df_checkout/dispatcher</class>
+						<method>checkout_type_onepage_save_order</method>
+					</df_checkout__checkout_type_onepage_save_order>
+				</observers>
+			</checkout_type_onepage_save_order>
+			<checkout_type_onepage_save_order_after>
+				<observers>
+					<df_checkout__checkout_type_onepage_save_order_after>
+						<class>df_checkout/dispatcher</class>
+						<method>checkout_type_onepage_save_order_after</method>
+					</df_checkout__checkout_type_onepage_save_order_after>
+				</observers>
+			</checkout_type_onepage_save_order_after>
+			<controller_action_predispatch_checkout>
+				<observers>
+					<df_checkout__controller_action_predispatch_checkout>
+						<class>df_checkout/dispatcher</class>
+						<method>controller_action_predispatch_checkout</method>
+					</df_checkout__controller_action_predispatch_checkout>
+				</observers>
+			</controller_action_predispatch_checkout>
+		</events>
+		<layout>
+			<updates>
+				<df_checkout><file>df/checkout.xml</file></df_checkout>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Df_Checkout>
+					<files>
+						<default>Df_Checkout.csv</default>
+						<parent>Mage_Checkout.csv</parent>
+					</files>
+				</Df_Checkout>
+			</modules>
+		</translate>
+		<routers>
+			<df_checkout>
+				<use>standard</use>
+				<args>
+					<module>Df_Checkout</module>
+					<frontName>df_checkout</frontName>
+				</args>
+			</df_checkout>
+		</routers>
+	</frontend>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Checkout>
+					<files>
+						<default>Df_Checkout.csv</default>
+						<parent>Mage_Checkout.csv</parent>
+					</files>
+				</Df_Checkout>
+			</modules>
+		</translate>
+	</adminhtml>
+	<df>
+		<features>
+			<df-checkout>
+				<module>df_checkout</module>
+				<title>Оформление заказа</title>
+				<url>http://magento-forum.ru/forum/175/</url>
+			</df-checkout>
+		</features>
+		<checkout>
+			<address>
+				<billing>
+					<fields>
+						<customer_password>
+							<label>Password</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<template>df/checkout/ergonomic/address/field/password.phtml</template>
+							<css-classes>validate-password</css-classes>
+							<authenticated>no</authenticated>
+						</customer_password>
+						<confirm_password>
+							<label>Confirm Password</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<template>df/checkout/ergonomic/address/field/password.phtml</template>
+							<css-classes>validate-cpassword</css-classes>
+							<authenticated>no</authenticated>
+						</confirm_password>
+					</fields>
+				</billing>
+				<shipping>
+					<fields>
+						<country>
+							<html-attributes>
+								<onchange>shipping.setSameAsBilling(false);</onchange>
+							</html-attributes>
+						</country>
+					</fields>
+				</shipping>
+				<default>
+					<fields>
+						<company>
+							<label>Company</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+						</company>
+						<lastname>
+							<label>Last Name</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<css-classes>rm.validate.lastName</css-classes>
+						</lastname>
+						<firstname>
+							<label>First Name</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<css-classes>rm.validate.firstName</css-classes>
+						</firstname>
+						<middlename>
+							<label>Patronymic</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<css-classes>rm.validate.patronymic</css-classes>
+						</middlename>
+						<telephone>
+							<label>Telephone</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+						</telephone>
+						<country>
+							<label>Country</label>
+							<block>df_checkout/frontend_ergonomic_address_field_country</block>
+							<template>df/checkout/ergonomic/address/field/country.phtml</template>
+							<css-classes>validate-select</css-classes>
+						</country>
+						<region>
+							<label>State/Province</label>
+							<block>df_checkout/frontend_ergonomic_address_field_region</block>
+							<template>df/checkout/ergonomic/address/field/region.phtml</template>
+						</region>
+						<city>
+							<label>City</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<css-classes>rm.validate.city</css-classes>
+						</city>
+						<postcode>
+							<label>Zip/Postal Code</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<css-classes>validate-zip-international</css-classes>
+						</postcode>
+						<street>
+							<label>Street Address</label>
+							<block>df_checkout/frontend_ergonomic_address_field_street</block>
+							<template>df/checkout/ergonomic/address/field/street.phtml</template>
+							<css-classes>input-text</css-classes>
+						</street>
+						<email>
+							<label>Email Address</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<css-classes>validate-email</css-classes>
+						</email>
+						<fax>
+							<label>Fax</label>
+							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+						</fax>
+					</fields>
+				</default>
+			</address>
+		</checkout>
+	</df>
+	<default>
+		<df_checkout>
+			<billing_field_applicability>
+				<enabled>1</enabled>
+				<company>optional</company>
+				<lastname>required</lastname>
+				<firstname>required</firstname>
+				<middlename>optional</middlename>
+				<telephone>required</telephone>
+				<country>required</country>
+				<region>required</region>
+				<city>required</city>
+				<postcode>required</postcode>
+				<street>required</street>
+				<email>required</email>
+				<customer_password>required</customer_password>
+				<confirm_password>required</confirm_password>
+				<fax>no</fax>
+			</billing_field_applicability>
+			<billing_field_ordering>
+				<enabled>1</enabled>
+				<company>1</company>
+				<lastname>2</lastname>
+				<firstname>3</firstname>
+				<middlename>3</middlename>
+				<telephone>5</telephone>
+				<country>6</country>
+				<region>6</region>
+				<city>7</city>
+				<postcode>7</postcode>
+				<street>8</street>
+				<email>9</email>
+				<customer_password>10</customer_password>
+				<confirm_password>10</confirm_password>
+				<fax>11</fax>
+			</billing_field_ordering>
+			<email>
+				<generated_password>df_checkout_email_generated_password</generated_password>
+			</email>
+			<interface>
+				<show_all_steps_at_once>1</show_all_steps_at_once>
+			</interface>
+			<order_comments>
+				<enabled>1</enabled>
+				<position_relative_to_terms>below</position_relative_to_terms>
+				<show_in_customer_account>1</show_in_customer_account>
+				<show_in_order_email>1</show_in_order_email>
+				<specify_textaarea_width>0</specify_textaarea_width>
+				<textarea_width>300</textarea_width>
+				<specify_textarea_position>0</specify_textarea_position>
+				<textarea_float>none</textarea_float>
+				<specify_textarea_horizontal_shift>0</specify_textarea_horizontal_shift>
+				<textarea_horizontal_shift_direction>left</textarea_horizontal_shift_direction>
+				<textarea_horizontal_shift_length>0</textarea_horizontal_shift_length>
+				<textarea_rows>5</textarea_rows>
+			</order_comments>
+			<other>
+				<alphabet>ru</alphabet>
+				<can_get_address_from_yandex_market>1</can_get_address_from_yandex_market>
+				<color__failure>#404040</color__failure>
+			</other>
+			<patches>
+				<fix_sales_convert_order_to_quote>1</fix_sales_convert_order_to_quote>
+			</patches>
+			<shipping_field_applicability>
+				<enabled>1</enabled>
+				<company>optional</company>
+				<lastname>required</lastname>
+				<firstname>required</firstname>
+				<middlename>optional</middlename>
+				<telephone>required</telephone>
+				<country>required</country>
+				<region>required</region>
+				<city>required</city>
+				<postcode>required</postcode>
+				<street>required</street>
+				<email>optional</email>
+				<fax>no</fax>
+			</shipping_field_applicability>
+			<shipping_field_ordering>
+				<enabled>1</enabled>
+				<company>1</company>
+				<lastname>2</lastname>
+				<firstname>3</firstname>
+				<middlename>3</middlename>
+				<telephone>5</telephone>
+				<country>6</country>
+				<region>6</region>
+				<city>7</city>
+				<postcode>7</postcode>
+				<street>8</street>
+				<email>9</email>
+				<fax>10</fax>
+			</shipping_field_ordering>
+		</df_checkout>
+	</default>
+</config>

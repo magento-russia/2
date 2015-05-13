@@ -1,0 +1,41 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<div class="page-title">
+    <h1><?php echo df_h()->invitation()->__('Invite your friends') ?></h1>
+</div>
+<div id="messages"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<?php echo $this->getChildHtml('form_before')?>
+<?php if ($maxPerSend =(int)df_h()->invitation()->getMaxInvitationsPerSend()): ?>
+<form id="invitationForm" action="" method="post">
+    <div class="fieldset">
+    <h2 class="legend"><?php echo df_h()->invitation()->__('Invite your friends by entering their email addresses below'); ?></h2>
+        <ul class="form-list">
+            <?php $_perRow = ceil($maxPerSend/3); for($_index = 1; $_index <= $maxPerSend; $_index ++): ?>
+            <li>
+                <label for="email_<?php echo $_index ?>"<?php if ($_index == 1) echo ' class="required"' ?>><?php if ($_index == 1) echo '<em>*</em>' ?><?php echo $_index; ?>:</label>
+                <div class="input-box">
+                    <input tabindex="<?php echo $_index ?>" name="email[]" id="email_<?php echo $_index ?>" title="<?php echo df_h()->invitation()->__('Email') ?>" value="" class="<?php if ($_index == 1): ?>required-entry <?php endif;?>input-text validate-email" type="text" />
+                </div>
+            </li>
+            <?php endfor; ?>
+        <?php if (df_h()->invitation()->isInvitationMessageAllowed()): ?>
+            <li>
+                <label for="message"><?php echo df_h()->invitation()->__('Message');?>: </label>
+                <div class="input-box">
+                    <textarea tabindex="<?php echo $_index+1 ?>" name="message" id="message" title="<?php echo df_h()->invitation()->__('Message') ?>"  class="input-text" rows="5" cols="5"></textarea>
+                </div>
+            </li>
+        </ul>
+        <?php endif;?>
+    </div>
+   <p class="required"><?php echo df_h()->invitation()->__('* Required Fields') ?></p>
+    <div class="buttons-set form-buttons">
+        <p class="back-link"><a href="<?php echo df_h()->invitation()->getCustomerInvitationUrl() ?>" class="back-link"><small>&laquo; </small><?php  echo df_h()->invitation()->__('Back to Invitations') ?></a></p>
+        <button class="button" type="submit"><span><span><?php echo df_h()->invitation()->__('Send Invitations') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    var contactForm = new VarienForm('invitationForm', true);
+</script>
+<?php else:?>
+<p><?php echo df_h()->invitation()->__('You cannot send more invitations'); ?></p>
+<?php endif; ?>

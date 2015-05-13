@@ -1,0 +1,324 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_WalletOne>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_WalletOne>
+	</modules>
+	<global>
+		<blocks><df_wallet_one><class>Df_WalletOne_Block</class></df_wallet_one></blocks>
+		<helpers><df_wallet_one><class>Df_WalletOne_Helper</class></df_wallet_one></helpers>
+		<models><df_wallet_one><class>Df_WalletOne_Model</class></df_wallet_one></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<wallet-one>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<frontend__title>Платёжный сервис «Единая касса»</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</wallet-one>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-wallet-one>
+				<model>df_wallet_one/payment</model>
+			</df-wallet-one>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_wallet_one>/df-wallet-one/</df_wallet_one>
+		</secure_url>
+		-->
+		<routers>
+			<df-wallet-one>
+				<use>standard</use>
+				<args>
+					<module>Df_WalletOne</module>
+					<frontName>df-wallet-one</frontName>
+				</args>
+			</df-wallet-one>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-wallet-one>
+				<module>df_wallet_one</module>
+				<title>Единая касса</title>
+				<url>http://magento-forum.ru/forum/165/</url>
+			</df-wallet-one>
+		</features>
+		<payment>
+			<wallet-one>
+				<currencies>
+					<allowed>
+						RUB,USD,UAH,KZT,ZAR
+					</allowed>
+					<!--
+						Для Коды валют соответствуют стандарту ISO 4217
+					-->
+					<code-translation>
+						<RUB>643</RUB>
+						<USD>840</USD>
+						<UAH>980</UAH>
+						<KZT>398</KZT>
+						<ZAR>710</ZAR>
+					</code-translation>
+				</currencies>
+				<url>
+					<payment_page>https://merchant.w1.ru/checkout/default.aspx</payment_page>
+				</url>
+				<payment-methods>
+					<LiqPayRUB>
+						<title>Банковские карты (рубли)</title>
+					</LiqPayRUB>
+					<LiqPayUSD>
+						<title>Банковские карты (доллары США)</title>
+					</LiqPayUSD>
+					<LiqPayEUR>
+						<title>Банковские карты (евро)</title>
+					</LiqPayEUR>
+					<LiqPayUAH>
+						<title>Банковские карты (украинские гривны)</title>
+					</LiqPayUAH>
+					<NsmepUAH>
+						<title>Банковские карты НСМЭП Украины</title>
+					</NsmepUAH>
+					<YandexMoneyRUB>
+						<title>Яндекс.Деньги</title>
+					</YandexMoneyRUB>
+					<QiwiWalletRUB>
+						<title>QIWI Кошёлек</title>
+					</QiwiWalletRUB>
+					<RbkMoneyRUB>
+						<title>RBK Money</title>
+					</RbkMoneyRUB>
+					<BeelineRUB>
+						<title>Мобильный платеж «Билайн» (Россия)</title>
+					</BeelineRUB>
+					<MtsRUB>
+						<title>Мобильный платеж «МТС» (Россия)</title>
+					</MtsRUB>
+					<MegafonRUB>
+						<title>Мобильный платеж «Мегафон» (Россия)</title>
+					</MegafonRUB>
+					<CashTerminalRUB>
+						<title>Платёжные терминалы России</title>
+					</CashTerminalRUB>
+					<CashTerminalUAH>
+						<title>Платёжные терминалы Украины</title>
+					</CashTerminalUAH>
+					<MobileRetailsRUB>
+						<title>Салоны сотовой связи: Евросеть, Связной и другие</title>
+					</MobileRetailsRUB>
+					<SberbankRUB>
+						<title>Отделения Сбербанка России</title>
+					</SberbankRUB>
+					<PrivatbankUAH>
+						<title>Банки Украины: Приватбанк, Правэкс-Банк, УкрСиббанк</title>
+					</PrivatbankUAH>
+					<RussianPostRUB>
+						<title>Отделения Почты России</title>
+					</RussianPostRUB>
+					<AlfaclickRUB>
+						<title>Интернет-банк «Альфа-Клик» («Альфа-Банк»)</title>
+					</AlfaclickRUB>
+					<Privat24UAH>
+						<title>Интернет-банк «Приват24»</title>
+					</Privat24UAH>
+					<PsbRetailRUB>
+						<title>Интернет-банк «PSB-Retail» («Промсвязьбанк»)</title>
+					</PsbRetailRUB>
+					<SvyaznoyBankRUB>
+						<title>Интернет-банк «Связной Банк»</title>
+					</SvyaznoyBankRUB>
+					<BankTransferRUB>
+						<title>Банковский перевод в рублях</title>
+					</BankTransferRUB>
+					<BankTransferUAH>
+						<title>Банковский перевод в гривнах</title>
+					</BankTransferUAH>
+					<BankTransferUSD>
+						<title>Банковский перевод в долларах</title>
+					</BankTransferUSD>
+					<UnistreamRUB>
+						<title>Денежные переводы «Юнистрим»</title>
+					</UnistreamRUB>
+					<ContactRUB>
+						<title>Денежные переводы «CONTACT»</title>
+					</ContactRUB>
+					<AnelikRUB>
+						<title>Денежные переводы «Anelik»</title>
+					</AnelikRUB>
+					<LiderRUB>
+						<title>Денежные переводы «ЛИДЕР»</title>
+					</LiderRUB>
+					<WalletOneRUB>
+						<title>Единый кошелёк (рубли)</title>
+					</WalletOneRUB>
+					<WalletOneUSD>
+						<title>Единый кошелёк (доллары США)</title>
+					</WalletOneUSD>
+					<WalletOneUAH>
+						<title>Единый кошелёк (украинские гривны)</title>
+					</WalletOneUAH>
+					<WalletOneZAR>
+						<title>Единый кошелёк (южноафриканские рэнды)</title>
+					</WalletOneZAR>
+					<UkashEUR>
+						<title>Ukash</title>
+					</UkashEUR>
+					<EasyPayBYR>
+						<title>EasyPay</title>
+					</EasyPayBYR>
+					<MoneyMailRUB>
+						<title>MoneyMail</title>
+					</MoneyMailRUB>
+					<ZPaymentRUB>
+						<title>Z-Payment</title>
+					</ZPaymentRUB>
+					<WebCredsRUB>
+						<title>WebCreds</title>
+					</WebCredsRUB>
+				</payment-methods>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>WMI_PAYMENT_NO</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_WalletOne: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_WalletOne: не используется.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+								Df_WalletOne: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>WMI_PAYMENT_AMOUNT</amount>
+							<!--
+								Описание платежа.
+								Df_Payment: не используется.
+								Df_WalletOne: обязательный параметр.
+							-->
+							<description>WMI_DESCRIPTION</description>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_WalletOne: обязательный параметр.
+							-->
+							<currency-code>WMI_CURRENCY_ID</currency-code>
+						</payment>
+						<payment_service>
+							<customer>
+								<!--
+									Кошелек покупателя.
+									Df_Payment: не используется.
+									Df_WalletOne: обязательный параметр
+								-->
+								<account-id>WMI_TO_USER_ID</account-id>
+								<!--
+									WMId покупателя.
+									Df_Payment: не используется.
+									Df_WalletOne: не используется
+								-->
+								<id></id>
+							</customer>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_WalletOne: обязательный параметр.
+								-->
+								<date>WMI_UPDATE_DATE</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_WalletOne: обязательный параметр.
+								-->
+								<id>WMI_ORDER_ID</id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_WalletOne: не используется.
+								-->
+								<state>WMI_ORDER_STATE</state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_WalletOne: обязательный параметр.
+								-->
+								<id>WMI_MERCHANT_ID</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>WMI_SIGNATURE</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<OrderDescription>
+								<max_length>255</max_length>
+							</OrderDescription>
+						</params>
+					</payment_page>
+				</request>
+			</wallet-one>
+		</payment>
+	</df>
+</config>

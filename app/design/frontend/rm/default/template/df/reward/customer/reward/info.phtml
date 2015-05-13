@@ -1,0 +1,43 @@
+<?php /** @var Df_Reward_Block_Customer_Reward_Info $this */ ?>
+<?php
+$helper = df_h()->reward();
+$maxBalance = $this->getMaxBalance();
+$minBalance = $this->getMinBalance();
+$expireIn = $this->getExpireIn();
+?>
+<div class='df-reward'>
+	<div class='df-customer-account'>
+		<div class='df-program-information'>
+			<div class="box info-box">
+				<h2 class="box-title"><?php echo $this->__('Reward points balance Information'); ?> <span class="separator">|</span> <a href="<?php echo $helper->getLandingPageUrl()?>"><?php echo $this->__('Learn more...')?></a></h2>
+				<dl class="box-content">
+					<dt><?php echo $this->__('Your current balance is %s.', $helper->formatReward($this->getPointsBalance(), $this->getCurrencyBalance()))?></dt>
+					<dt><?php echo $this->__('Current exchange rates:')?></dt>
+						<dd><?php echo $this->__('Each %s can be redeemed for %s.', $helper->formatReward($this->getPtsToAmountRatePts(), null, null, '<strong>%s</strong>'), '<strong>' . $helper->formatAmount($this->getPtsToAmountRateAmount()) . '</strong>')?></dd>
+						<dd><?php echo $this->__('Each %s spent will earn %s.', '<strong>' . $helper->formatAmount($this->getAmountToPtsRateAmount()) . '</strong>', $helper->formatReward($this->getAmountToPtsRatePts(), null, null, '<strong>%s</strong>'))?></dd>
+			<?php if ($maxBalance || $minBalance):?>
+					<dt class='df-subheader'><?php echo $this->__('Balance limitations:')?></dt>
+				<?php if ($maxBalance):?>
+						<dd><?php echo $this->__('Balance is capped at %s.', $helper->formatReward($maxBalance))?></dd>
+					<?php if ($this->getIsMaxBalanceReached()):?>
+						<dd class="warning"><?php echo $this->__('Maximum balance is reached.')?></dd>
+					<?php endif;?>
+				<?php endif;?>
+				<?php if ($minBalance):?>
+						<dd><?php echo $this->__('Minimum Balance in order to redeem: %s.', $helper->formatReward($minBalance))?></dd>
+					<?php if (!$this->getIsMinBalanceReached()):?>
+						<dd class="warning"><?php echo $this->__('Minimum balance for redeeming points is not reached.')?></dd>
+					<?php endif;?>
+				<?php endif;?>
+			<?php endif;?>
+			<?php if ($expireIn):?>
+				<dt><?php echo $this->__('Each earned reward points record expires in %s days.', '<span>' . $expireIn . '</span>')?></dt>
+				<?php if ($this->getIsHistoryPublished()):?>
+						<dd><?php echo $this->__('Refer to reward points history to see if a specific record expires and when.')?></dd>
+				<?php endif;?>
+			<?php endif;?>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>

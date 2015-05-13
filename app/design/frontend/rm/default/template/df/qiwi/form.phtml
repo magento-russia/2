@@ -1,0 +1,68 @@
+<?php /** @var Df_Qiwi_Block_Form $this */ ?>
+<?php
+	/**
+	 * Нижеследующая стандартная для Magento разметка HTML
+ 	 * вместо простого echo $this->getDescription();
+ 	 * позволяет скрывать описание способа оплаты,
+ 	 * когда способ оплаты не является текущим.
+	 */
+?>
+<fieldset class='form-list'>
+    <?php
+		$code = $this->getMethodCode();
+	?>
+    <ul id='payment_form_<?php echo $code; ?>' style='display:none'>
+		<li>
+			<div class='input-box df-phone-container'>
+				<!--
+					Пока поддерживаем только российские номера,
+					потому что QIWI пока не предоставляет информации
+					о проводе оплаты для номеров других стран
+				-->
+				<div class='df-prefix'>+7</div>
+				<div class='df-network-code-container'>
+					<label
+						for='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE; ?>'
+						class='required'
+					><em>*</em><?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE); ?></label>
+					<div class='df-network-code-input-frame'>
+						<div class='df-bracket df-bracket-open'>(</div>
+						<input
+							type='text'
+							id='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE; ?>'
+							name='payment[<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE; ?>]'
+							title='<?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE); ?>'
+							class='<?php echo $this->getQiwiCustomerPhoneNetworkCodeCssClassesAsString(); ?>'
+							value='<?php echo $this->getQiwiCustomerPhoneNetworkCode(); ?>'
+							maxlength='3'
+						/>
+						<div class='df-bracket df-bracket-close'>)</div>
+					</div>
+				</div>
+				<div class='df-suffix-container'>
+					<label
+						for='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX; ?>'
+						class='required'
+					><em>*</em><?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX); ?></label>
+					<input
+						type='text'
+						id='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX; ?>'
+						name='payment[<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX; ?>]'
+						title='<?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX); ?>'
+						class='<?php echo $this->getQiwiCustomerPhoneSuffixCssClassesAsString(); ?>'
+						value='<?php echo $this->getQiwiCustomerPhoneSuffix(); ?>'
+						maxlength='7'
+					/>
+				</div>
+			</div>
+			<div class='df-field-comment'>
+				Введите номер мобильного телефона России или Казахстана для входа в QIWI Кошелёк.
+			</div>
+        </li>
+        <li>
+            <?php
+				echo $this->getDescription();
+			?>
+        </li>
+    </ul>
+</fieldset>

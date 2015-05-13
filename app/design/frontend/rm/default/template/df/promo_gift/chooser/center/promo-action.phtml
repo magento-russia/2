@@ -1,0 +1,31 @@
+<?php /** @var Df_PromoGift_Block_Chooser_PromoAction $this */ ?>
+<?php if ($this->getDescription()) { ?>
+	<div class="df-description">
+		<?php echo $this->__($this->getDescription()); ?>
+	</div>
+<?php } ?>
+<ul class="df-product-list">
+	<?php
+		foreach($this->getGifts() as $gift) {
+			/** @var Df_PromoGift_Model_Gift $gift */
+			?>
+				<li class="df-product">
+					<?php
+						/**
+						 * Отображает подарок.
+						 *
+						 */
+						echo
+							$this
+								->renderGift(
+									$gift
+									,
+									'df/promo_gift/chooser/center/gift.phtml'
+								)
+						;
+					?>
+				</li>
+			<?php
+		}
+	?>
+</ul>

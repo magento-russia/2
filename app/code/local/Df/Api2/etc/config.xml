@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Api2>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Api2>
+	</modules>
+	<global>
+		<blocks><df_api2><class>Df_Api2_Block</class></df_api2></blocks>
+		<helpers><df_api2><class>Df_Api2_Helper</class></df_api2></helpers>
+		<models><df_api2><class>Df_Api2_Model</class></df_api2></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Mage_Api2><files><default>Mage_Api2.csv</default></files></Mage_Api2>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

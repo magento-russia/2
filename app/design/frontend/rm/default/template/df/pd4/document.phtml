@@ -1,0 +1,31 @@
+<?php /** @var Df_Pd4_Block_Document $this */ ?>
+<div class='df-pd4'>
+	<div class='df-form-container'>
+		<div class='df-form'>
+			<ul class='df-duplicates'>
+				<li class='df-duplicate df-duplicate-top'>
+					<div class='df-column df-column-left'>
+						<p class='df-text-notification'>Извещение</p>
+						<p class='df-text-cashier'>Кассир</p>
+					</div>
+					<div class='df-column df-column-right'>
+						<div class='df-form-name'>Форма № ПД-4</div>
+						<?php echo $this->getRowsHtml(); ?>
+					</div>
+				</li>
+				<li class='df-duplicate df-duplicate-bottom'>
+					<div class='df-column df-column-left'>
+						<p class='df-text-receipt'>Квитанция</p>
+						<p class='df-text-cashier'>Кассир</p>
+					</div>
+					<div class='df-column df-column-right'>
+						<?php echo $this->getRowsHtml(); ?>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class='df-cutting-line'>
+			- линия отреза
+		</div>
+	</div>
+</div>

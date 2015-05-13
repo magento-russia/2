@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<adminhtml_system_config_edit>
+        <reference name='head'>
+			<action
+				method='addItem'
+				ifconfig='df_tweaks_admin/system_config/remind_fieldset_toggle_state'
+			>
+				<type>skin_js</type>
+				<name>df/js/legacy/tools.js</name>
+			</action>
+		</reference>
+	</adminhtml_system_config_edit>
+</layout>

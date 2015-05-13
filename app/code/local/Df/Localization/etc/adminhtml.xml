@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<df_localization>
+										<title>Российская сборка → Русификация</title>
+									</df_localization>
+								</children>
+							</config>
+							<df_localization>
+								<title>Локализация</title>
+								<sort_order>-2</sort_order>
+								<children>
+									<theme>
+										<title>Оформительские темы</title>
+										<sort_order>1000</sort_order>
+									</theme>
+									<verification translate='title'>
+										<title>Проверка полноты перевода</title>
+										<sort_order>2000</sort_order>
+									</verification>
+								</children>
+							</df_localization>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<system>
+			<children>
+				<df_localization translate='title' module='df_localization'>
+					<title>Локализация</title>
+					<sort_order>-2</sort_order>
+					<children>
+						<theme>
+							<title>Оформительские темы</title>
+							<sort_order>1000</sort_order>
+							<action>df_localization/theme/index</action>
+						</theme>
+						<verification>
+							<title>Проверка полноты перевода</title>
+							<sort_order>2000</sort_order>
+							<action>df_localization/verification/index</action>
+						</verification>
+					</children>
+				</df_localization>
+			</children>
+		</system>
+	</menu>
+</config>

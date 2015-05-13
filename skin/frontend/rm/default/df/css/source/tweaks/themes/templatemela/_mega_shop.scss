@@ -1,0 +1,77 @@
+body.df-theme-templatemela-mega-shop {
+	.block .block-title
+	, div.menu a
+	, div.megnor-advanced-menu-popup a
+	, #advancedmenu .megnor-advanced-menu-popup .itemMenu  a
+	, div.menu .home_link a
+	, .custom_link li a
+	, .custom_menu a
+	, .customblock_inner h2
+	, .page-title h1,
+	, .page-title h2
+	, .block-layered-nav dt
+	, .product-block-inner .new-label
+	, .product-block-inner .sale-label
+	, .products-list li .list-left .sale-label
+	, .products-list li .list-left .new-label
+	, #opc-login h3
+	, .account-login .content h2
+	, .fieldset .legend
+	, .box-account .box-head h2
+	, .addresses-list h2
+	, .multiple-checkout h2
+	, .checkout-onepage-success h2
+	, .order-info-box h2
+	, .sales-order-print .col2-set h2
+	, .dashboard .box-info h4
+	, #footer .block-subscribe .block-title strong
+	{
+		/* Оформительская тема устанавливает text-transform: capitalize; */
+	    text-transform: none;
+	}
+	.custom_menu {
+		a {
+			/* Почему-то оформительская тема этого не делает */
+			cursor: pointer;
+		}
+	}
+	.df {
+		.df-checkout-ergonomic {
+			.tm-hide {
+				/**
+					Оформительская тема устанавливает opacity: 0
+					и использует это для скрытия стандартных радиокнопок
+					и заметы их на картинки.
+					Однако это замена не проходит удачно, и радиокнопки пропадают вовсе.
+				*/
+				opacity: initial;
+			}
+		}
+	}
+	#footer {
+		.block-subscribe {
+			.block-title {
+				strong {
+					/* Оформительская тема устанавливает text-transform: capitalize; */
+					text-transform: lowercase;
+				}
+			}
+			input.input-text{
+				/*
+					Оформительская тема устанавливает width: 274px;
+					и тогда не помещается в том же ряду кнопка «подписаться».
+				*/
+				width: 254px;
+			}
+		}
+	}
+	.fancybox-inner {
+		#df-login.account-login {
+			/**
+				Почему то стандартное width:auto работает неправильно.
+				Лень разбираться сейчас.
+			*/
+			width: 266px;
+		}
+	}
+}

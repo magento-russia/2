@@ -1,0 +1,14 @@
+<?php /** @var Df_Vk_Block_Frontend_Widget $this */ ?>
+<script type='text/javascript'>
+	/** @type {String} */
+	var scopeName = '<?php echo $this->getJavaScriptNameSpace(); ?>';
+	rm.namespace(['rm','vk', scopeName].join('.'));
+	jQuery.extend(
+		rm.vk[scopeName]
+		,{
+			enabled: true
+			, applicationId: <?php echo $this->getApplicationId(); ?>
+			, settings: <?php echo $this->getSettingsAsJson(); ?>
+		}
+	);
+</script>

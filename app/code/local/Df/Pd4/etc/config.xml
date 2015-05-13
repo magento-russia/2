@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Pd4>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Pd4>
+	</modules>
+	<df>
+		<features>
+			<df-pd4>
+				<module>df_pd4</module>
+				<title>Квитанция Сбербанка</title>
+				<url>http://magento-forum.ru/forum/152/</url>
+			</df-pd4>
+		</features>
+		<page>
+			<skip_standard_css>
+				<df_pd4_index_index>1</df_pd4_index_index>
+			</skip_standard_css>
+		</page>
+	</df>
+	<global>
+		<blocks><df_pd4><class>Df_Pd4_Block</class></df_pd4></blocks>
+		<helpers><df_pd4><class>Df_Pd4_Helper</class></df_pd4></helpers>
+		<models><df_pd4><class>Df_Pd4_Model</class></df_pd4></models>
+	</global>
+	<frontend>
+		<routers>
+			<df_pd4>
+				<use>standard</use>
+				<args>
+					<module>Df_Pd4</module>
+					<frontName>df-pd4</frontName>
+				</args>
+			</df_pd4>
+		</routers>
+		<layout>
+			<updates>
+				<df_pd4 module='Df_Pd4'><file>df/pd4.xml</file></df_pd4>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Df_Pd4><files><default>Df_Pd4.csv</default></files></Df_Pd4>
+			</modules>
+		</translate>
+	</frontend>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<pd4>
+				<active>1</active>
+				<frontend__title>В банковской кассе</frontend__title>
+				<frontend__description><![CDATA[После оформления заказа Вы сможете распечатать уже заполненную квитанцию (форма ПД-4) и оплатить заказ в банковской кассе.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__order_status>1</admin__order_status>
+				<frontend__allowspecific>1</frontend__allowspecific>
+				<frontend__specificcountry>RU</frontend__specificcountry>
+				<admin__recipient_name><![CDATA[ООО «Рога и Копыта»]]></admin__recipient_name>
+				<admin__recipient_tax_number>7714617793</admin__recipient_tax_number>
+				<admin__recipient_bank_account_number>40702810738040022765</admin__recipient_bank_account_number>
+				<admin__recipient_bank_name><![CDATA[КБ 'ХОЛДИНГ-КРЕДИТ' ООО]]></admin__recipient_bank_name>
+				<admin__recipient_bank_id>044525225</admin__recipient_bank_id>
+				<admin__recipient_bank_loro>30101810400000000225</admin__recipient_bank_loro>
+				<admin__payment_purpose_template>Оплата заказа №{order.id} от {order.date}</admin__payment_purpose_template>
+				<payment_service__currency>RUB</payment_service__currency>
+			</pd4>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-pd4>
+				<model>df_pd4/payment</model>
+			</df-pd4>
+		</payment>
+	</default>
+</config>

@@ -1,0 +1,285 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Moneta>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Moneta>
+	</modules>
+	<global>
+		<blocks><df_moneta><class>Df_Moneta_Block</class></df_moneta></blocks>
+		<helpers><df_moneta><class>Df_Moneta_Helper</class></df_moneta></helpers>
+		<models><df_moneta><class>Df_Moneta_Model</class></df_moneta></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<moneta>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<frontend__title>Платёжный сервис PayAnyWay («Монета.Ру»)</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_method>no</payment_service__payment_method>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</moneta>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-moneta>
+				<model>df_moneta/payment</model>
+			</df-moneta>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_moneta>/df-moneta/</df_moneta>
+		</secure_url>
+		-->
+		<routers>
+			<df-moneta>
+				<use>standard</use>
+				<args>
+					<module>Df_Moneta</module>
+					<frontName>df-moneta</frontName>
+				</args>
+			</df-moneta>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-moneta>
+				<module>df_moneta</module>
+				<title>PayAnyWay («Монета.Ру»)</title>
+				<url>http://magento-forum.ru/forum/174/</url>
+			</df-moneta>
+		</features>
+		<payment>
+			<moneta>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>ru</ru_RU>
+						<en_US>en</en_US>
+					</code-translation>
+				</locales>
+				<currencies>
+					<allowed>
+						RUB,USD,EUR,GBP
+					</allowed>
+				</currencies>
+				<url>
+					<payment_page>https://www.moneta.ru/assistant.htm</payment_page>
+				</url>
+				<payment-methods>
+					<card>
+						<!--<code>382203</code>-->
+						<code>499669</code>
+						<title>Банковская карта</title>
+					</card>
+					<euroset>
+						<code>248362</code>
+						<title>Салоны связи «Евросеть»</title>
+					</euroset>
+					<mcb>
+						<code>295339</code>
+						<title>Банкоматы Московского Кредитного Банка</title>
+					</mcb>
+					<yandex-money>
+						<code>1020</code>
+						<title>Яндекс.Деньги</title>
+					</yandex-money>
+					<webmoney>
+						<code>1017</code>
+						<title>WebMoney</title>
+					</webmoney>
+					<pd-4>
+						<!--<code>1030</code>-->
+						<code>705000</code>
+						<title>Банковский перевод по форме ПД-4</title>
+					</pd-4>
+					<contact>
+						<code>1028</code>
+						<title>Система переводов CONTACT</title>
+					</contact>
+					<alexnet>
+						<code>232821</code>
+						<title>Платёжные терминалы Элекснет</title>
+					</alexnet>
+					<novoplat>
+						<code>281129</code>
+						<title>Платёжные терминалы НовоПлат</title>
+					</novoplat>
+					<russian-post>
+						<code>1029</code>
+						<title>Почта России</title>
+					</russian-post>
+					<gorod>
+						<code>426904</code>
+						<title>Федеральная система «Город»</title>
+					</gorod>
+					<forward-mobile>
+						<code>83046</code>
+						<title>Форвард Мобайл</title>
+					</forward-mobile>
+					<platika>
+						<code>226272</code>
+						<title>PLATiKA</title>
+					</platika>
+					<w1>
+						<code>310212</code>
+						<title>Единый кошелёк</title>
+					</w1>
+					<moneta>
+						<code>1015</code>
+						<title>Монета.Ру</title>
+					</moneta>
+					<money-mail>
+						<code>1038</code>
+						<title>MoneyMail</title>
+					</money-mail>
+				</payment-methods>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>MNT_TRANSACTION_ID</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_Moneta: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_Moneta: не используется.
+								Имя держателя карты.
+								Передаётся только в случае оплаты картой.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+								Df_Moneta: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+								Df_Moneta: не используется.
+							-->
+							<amount>MNT_AMOUNT</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_Moneta: не используется.
+							-->
+							<currency-code>MNT_CURRENCY_CODE</currency-code>
+							<!--
+								Указывает, выполнялся ли платёж в тестовом режиме
+								Df_Payment: не используется.
+								Df_Moneta: обязательный параметр.
+							-->
+							<test>MNT_TEST_MODE</test>
+						</payment>
+						<payment_service>
+							<customer>
+								<!--
+									Кошелек покупателя.
+									Df_Payment: не используется.
+									Df_Moneta: обязательный параметр.
+								-->
+								<account-id>MNT_CORRACCOUNT</account-id>
+								<!--
+									Номер счета пользователя,если оплата производилась с пользовательского счета в системе «MONETA.RU»..
+									Df_Payment: не используется.
+									Df_Moneta: иногда используется.
+								-->
+								<id>MNT_USER</id>
+							</customer>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_Moneta: не используется.
+								-->
+								<date></date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Moneta: не используется.
+								-->
+								<id>MNT_OPERATION_ID</id>
+								<!--
+									Способ оплаты
+									из числа предоставляемых платёжной системой способов.
+									Df_Payment: не используется.
+									Df_Interkassa: обязательный параметр.
+								-->
+								<method>paymentSystem.unitId</method>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Moneta: не используется.
+								-->
+								<state></state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_Moneta: не используется.
+								-->
+								<id>MNT_ID</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>MNT_SIGNATURE</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+						</params>
+					</payment_page>
+				</request>
+			</moneta>
+		</payment>
+	</df>
+</config>

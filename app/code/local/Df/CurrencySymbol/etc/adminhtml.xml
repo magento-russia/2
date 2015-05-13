@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<currency>
+								<children>
+									<rates>
+										<title>Currency Rates</title>
+										<depends>
+											<module>Mage_CurrencySymbol</module>
+										</depends>
+									</rates>
+								</children>
+							</currency>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<system>
+			<children>
+				<currency>
+					<children>
+						<rates translate='title' module='currencysymbol'>
+							<title>Currency Rates</title>
+							<depends>
+								<module>Mage_CurrencySymbol</module>
+							</depends>
+						</rates>
+					</children>
+				</currency>
+			</children>
+		</system>
+	</menu>
+</config>

@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+    <adminhtml_permissions_role_editrole>
+        <reference name='adminhtml.permissions.editroles'>
+            <action method='addTab'>
+				<name>df_access_control</name>
+				<block>df_access_control/admin_tab</block>
+			</action>
+        </reference>
+    </adminhtml_permissions_role_editrole>
+</layout>

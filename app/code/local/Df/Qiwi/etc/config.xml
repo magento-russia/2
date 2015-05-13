@@ -1,0 +1,190 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Qiwi>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Qiwi>
+	</modules>
+	<global>
+		<blocks><df_qiwi><class>Df_Qiwi_Block</class></df_qiwi></blocks>
+		<helpers><df_qiwi><class>Df_Qiwi_Helper</class></df_qiwi></helpers>
+		<models><df_qiwi><class>Df_Qiwi_Model</class></df_qiwi></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<qiwi>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<frontend__title>QIWI Кошелёк</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>1</frontend__allowspecific>
+				<frontend__specificcountry>RU,KZ</frontend__specificcountry>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</qiwi>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-qiwi>
+				<model>df_qiwi/payment</model>
+			</df-qiwi>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_qiwi>/df-qiwi/payment</df_qiwi>
+		</secure_url>
+		-->
+		<routers>
+			<df_qiwi>
+				<use>standard</use>
+				<args>
+					<module>Df_Qiwi</module>
+					<frontName>df-qiwi</frontName>
+				</args>
+			</df_qiwi>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-qiwi>
+				<module>df_qiwi</module>
+				<title>QIWI Кошелёк</title>
+				<url>http://magento-forum.ru/forum/161/</url>
+			</df-qiwi>
+		</features>
+		<payment>
+			<qiwi>
+				<production>
+				</production>
+				<test>
+					<domain></domain>
+				</test>
+				<currencies>
+					<allowed>
+						RUB
+					</allowed>
+					<code-translation>
+						<RUB>643</RUB>
+					</code-translation>
+				</currencies>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>order_increment_id</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_Qiwi: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_Qiwi: не используется.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+								Df_Qiwi: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+								Df_Qiwi: не используется.
+							-->
+							<amount></amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_Qiwi: не используется.
+								-->
+								<date></date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Qiwi: не используется.
+								-->
+								<id></id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Qiwi: обязательный параметр.
+								-->
+								<state>payment_state</state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_Qiwi: передаётся платёжной системой, но не используется модулем.
+								-->
+								<id>shop_id</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>signature</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+								Для Soap 1.1: text/xml.
+								Для Soap 1.2: application/soap+xml.
+							-->
+							<content-type>application/soap+xml</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<to>
+								<length>10</length>
+							</to>
+						</params>
+					</payment_page>
+				</request>
+				<url>
+					<payment_page>http://w.qiwi.ru/setInetBill_utf.do</payment_page>
+				</url>
+			</qiwi>
+		</payment>
+	</df>
+</config>

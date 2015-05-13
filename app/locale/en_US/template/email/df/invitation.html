@@ -1,0 +1,45 @@
+<!--@subject {{if inviter_name}}{{var inviter_name}} invites you{{else}}Invite{{/if}} to join Private Sales Site @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"var store.getFrontendName()|escape":"Store Name",
+"var message|escape|nl2br":"Invitation Message",
+"var url|escape":"Invitation Url"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+            <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p><a href="{{store url=""}}" style="color:#1E7EC8;"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()|escape}}" border="0"/></a></p></td>
+                    </tr>
+                </table>
+
+            <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>Please accept this invitation to join {{var store.getFrontendName()|escape}}</p>
+                            <p>{{var store.getFrontendName()|escape}} offers limited time sales of products only to members.</p>
+
+                            <div>
+                            Please use the following link to create an account and view the deals {{if allow_message}} {{var message|escape|nl2br}} {{/if}}
+                            <a href="{{var url|escape}}">{{var url|escape}}</a>
+                            </div>
+
+                            <p>Thank you,</p>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_MoySklad>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_MoySklad>
+	</modules>
+	<global>
+		<blocks><df_moy_sklad><class>Df_MoySklad_Block</class></df_moy_sklad></blocks>
+		<helpers><df_moy_sklad><class>Df_MoySklad_Helper</class></df_moy_sklad></helpers>
+		<models><df_moy_sklad><class>Df_MoySklad_Model</class></df_moy_sklad></models>
+		<ignoredModules><entities><df-moy-sklad/></entities></ignoredModules>
+	</global>
+	<df>
+		<features>
+			<df-moy-sklad>
+				<module>df_moy_sklad</module>
+				<title>МойСклад</title>
+				<url>http://magento-forum.ru/forum/294/</url>
+			</df-moy-sklad>
+		</features>
+	</df>
+</config>

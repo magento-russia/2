@@ -1,0 +1,48 @@
+.df {
+	.df-sales-admin-widget-grid-column-renderer-products {
+
+	 	.df-products {
+
+			.df-product {
+
+				padding: 0 0 0.5em 0;
+
+     			.df-fields {
+
+     				width: 100%;
+     				overflow: hidden;
+
+     				.df-field {
+     					float: left;
+     				}
+
+
+     				.df-field-name {
+     					width: 70%;
+     				}
+
+     				.df-field-sku {
+						width: 25%;
+     				}
+
+     				.df-field-qty {
+						width: 5%;
+						text-align: center;
+     				}
+     			}
+
+			}
+
+
+			.df-product-odd {
+				/*background: yellow;*/
+			}
+
+			.df-product-even {
+				/*background: pink;*/
+			}
+
+	 	}
+
+	}
+}

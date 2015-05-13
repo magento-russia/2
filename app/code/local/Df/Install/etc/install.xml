@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config>
+	<wizard>
+		<steps>
+			<begin>
+				<remove>true</remove>
+			</begin>
+			<locale translate='code'>
+				<code>региональные настройки</code>
+			</locale>
+			<config translate='code'>
+				<code>другие настройки</code>
+			</config>
+			<administrator translate='code'>
+				<code>анкета администратора</code>
+			</administrator>
+			<end translate='code'>
+				<code>установка завершена</code>
+			</end>
+		</steps>
+	</wizard>
+</config>

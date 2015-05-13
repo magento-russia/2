@@ -1,0 +1,223 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_WebPay>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_WebPay>
+	</modules>
+	<global>
+		<blocks><df_webpay><class>Df_WebPay_Block</class></df_webpay></blocks>
+		<helpers><df_webpay><class>Df_WebPay_Helper</class></df_webpay></helpers>
+		<models><df_webpay><class>Df_WebPay_Model</class></df_webpay></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<webpay>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<payment_service__test_on_production>0</payment_service__test_on_production>
+				<payment_service__version>2</payment_service__version>
+				<frontend__title>Платёжный сервис WEBPAY</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>BYR</payment_service__currency>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__transaction_description><![CDATA[{shop.name} ({shop.domain}).]]></payment_service__transaction_description>
+			</webpay>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-webpay>
+				<model>df_webpay/payment</model>
+			</df-webpay>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_webpay>/df-webpay/</df_webpay>
+		</secure_url>
+		-->
+		<routers>
+			<df-webpay>
+				<use>standard</use>
+				<args>
+					<module>Df_WebPay</module>
+					<frontName>df-webpay</frontName>
+				</args>
+			</df-webpay>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-webpay>
+				<module>df_webpay</module>
+				<title>WEBPAY</title>
+				<url>http://magento-forum.ru/forum/191/</url>
+			</df-webpay>
+		</features>
+		<payment>
+			<webpay>
+				<currencies>
+					<allowed>
+						BYR
+					</allowed>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>russian</ru_RU>
+						<en_US>english</en_US>
+					</code-translation>
+				</locales>
+				<production>
+					<url>
+						<payment_page>https://secure.webpay.by/</payment_page>
+					</url>
+				</production>
+				<test>
+					<url>
+						<payment_page>https://secure.sandbox.webpay.by:8843/</payment_page>
+					</url>
+				</test>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>site_order_id</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_WebPay: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя держателя карты.
+								Df_Payment: не используется.
+								Df_WebPay: не используется.
+							-->
+							<name></name>
+							<!--
+								Номер телефона покупателя.
+								Df_Payment: не используется.
+								Df_WebPay: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>amount</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_WebPay: обязательный параметр.
+							-->
+							<currency-code>currency_id</currency-code>
+						</payment>
+						<payment_service>
+							<!--
+								Номер транзакции в системе Visa/MasterCard
+								Df_Payment: не используется.
+								Df_WebPay: обязательный параметр.
+							-->
+							<card_transaction_id>rrn</card_transaction_id>
+							<customer>
+							</customer>
+							<order>
+								<!--
+									Номер заказа в системе webpay.by.
+									Df_Payment: не используется.
+									Df_WebPay: обязательный параметр.
+								-->
+								<id>order_id</id>
+							</order>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_WebPay: обязательный параметр.
+								-->
+								<date>batch_timestamp</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_WebPay: обязательный параметр.
+								-->
+								<id>transaction_id</id>
+								<!--
+									Способ оплаты.
+									Df_Payment: не используется.
+									Df_WebPay: обязательный параметр.
+									(возможные значения:
+										cc - банковская карта
+										test - совершена без реального процессинга карты
+									)
+								-->
+								<method>payment_method</method>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_WebPay: обязательный параметр.
+								-->
+								<state>payment_type</state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_WebPay: обязательный параметр.
+								-->
+								<id>site_order_id</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>wsb_signature</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<wsb_store>
+								<max_length>64</max_length>
+							</wsb_store>
+						</params>
+					</payment_page>
+				</request>
+			</webpay>
+		</payment>
+	</df>
+</config>

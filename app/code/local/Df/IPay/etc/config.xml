@@ -1,0 +1,224 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_IPay>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_IPay>
+	</modules>
+	<global>
+		<blocks><df_ipay><class>Df_IPay_Block</class></df_ipay></blocks>
+		<helpers><df_ipay><class>Df_IPay_Helper</class></df_ipay></helpers>
+		<models><df_ipay><class>Df_IPay_Model</class></df_ipay></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<ipay>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<frontend__title>Платёжный сервис iPay</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>BYR</payment_service__currency>
+				<payment_service__transaction_description><![CDATA[Оплата заказа номер {order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</ipay>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-ipay>
+				<model>df_ipay/payment</model>
+			</df-ipay>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_ipay>/df-ipay/</df_ipay>
+		</secure_url>
+		-->
+		<routers>
+			<df-ipay>
+				<use>standard</use>
+				<args>
+					<module>Df_IPay</module>
+					<frontName>df-ipay</frontName>
+				</args>
+			</df-ipay>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-ipay>
+				<module>df_ipay</module>
+				<title>iPay</title>
+				<url>http://magento-forum.ru/forum/192/</url>
+			</df-ipay>
+		</features>
+		<payment>
+			<ipay>
+				<currencies>
+					<allowed>
+						BYR
+					</allowed>
+				</currencies>
+				<payment-methods>
+					<mts>
+						<title>Оплата со счёта МТС</title>
+						<payment-page>https://oper.ipay.by:4443/pls/iPay/!iSOU.Login</payment-page>
+					</mts>
+					<life>
+						<title>Оплата со счёта life:)</title>
+						<payment-page>https://gate.besmart.by/ipaylife/!iSOU.Login</payment-page>
+					</life>
+				</payment-methods>
+				<test>
+					<url>
+						<payment_page>https://besmart.serveftp.net:4443/pls/ipay/!iSOU.Login</payment_page>
+					</url>
+				</test>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>order_mer_code</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_IPay: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя держателя карты.
+								Df_Payment: не используется.
+								Df_IPay: не используется.
+							-->
+							<name></name>
+							<!--
+								Номер телефона покупателя.
+								Df_Payment: не используется.
+								Df_IPay: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>sum</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_IPay: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<!--
+								Номер транзакции в системе Visa/MasterCard
+								Df_Payment: не используется.
+								Df_IPay: не используется.
+							-->
+							<card_transaction_id></card_transaction_id>
+							<customer>
+								<!--
+									Кошелек покупателя.
+									Df_Payment: не используется.
+									Df_IPay: обязательный параметр.
+								-->
+								<account-id>card</account-id>
+							</customer>
+							<order>
+								<!--
+									Номер заказа в платёжной системе.
+									Df_Payment: не используется.
+									Df_IPay: не используется.
+								-->
+								<id></id>
+							</order>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_IPay: обязательный параметр.
+								-->
+								<date>purch_date</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_IPay: не используется.
+								-->
+								<id></id>
+								<!--
+									Способ оплаты.
+									Df_Payment: не используется.
+									Df_IPay: не используется.
+								-->
+								<method></method>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_IPay: не используется.
+								-->
+								<state></state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_IPay: обязательный параметр.
+								-->
+								<id>mer_no</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>notify_signature</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<method>get</method>
+					<payment_page>
+						<params>
+							<EP_Comment>
+								<max_length>50</max_length>
+							</EP_Comment>
+							<EP_OrderInfo>
+								<max_length>2000</max_length>
+							</EP_OrderInfo>
+						</params>
+					</payment_page>
+				</request>
+			</ipay>
+		</payment>
+	</df>
+</config>

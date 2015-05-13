@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Install>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Install>
+	</modules>
+	<global>
+		<blocks><df_install><class>Df_Install_Block</class></df_install></blocks>
+		<helpers><df_install><class>Df_Install_Helper</class></df_install></helpers>
+		<models>
+			<df_install><class>Df_Install_Model</class></df_install>
+			<install>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						предоставление программной возможности удаления шагов установки Magento.
+						Эта возможность используется для удаления шага принятия лицензионного соглашения.
+					-->
+					<config>Df_Install_Model_Config</config>
+				</rewrite>
+			</install>
+		</models>
+	</global>
+	<frontend>
+		<routers>
+			<install>
+				<args>
+					<modules>
+						<Df_Install before='Mage_Install'>Df_Install</Df_Install>
+					</modules>
+				</args>
+			</install>
+		</routers>
+	</frontend>
+</config>

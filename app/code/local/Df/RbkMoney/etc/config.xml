@@ -1,0 +1,261 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_RbkMoney>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_RbkMoney>
+	</modules>
+	<global>
+		<blocks><df_rbk_money><class>Df_RbkMoney_Block</class></df_rbk_money></blocks>
+		<helpers><df_rbk_money><class>Df_RbkMoney_Helper</class></df_rbk_money></helpers>
+		<models><df_rbk_money><class>Df_RbkMoney_Model</class></df_rbk_money></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<rbk-money>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_method>no</payment_service__payment_method>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<frontend__title>RBK Money</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+			</rbk-money>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-rbk-money>
+				<model>df_rbk_money/payment</model>
+			</df-rbk-money>
+		</payment>
+	</default>
+	<frontend>
+		<secure_url>
+			<df_rbk_money>/df-rbk-money/</df_rbk_money>
+		</secure_url>
+		<routers>
+			<df-rbk-money>
+				<use>standard</use>
+				<args>
+					<module>Df_RbkMoney</module>
+					<frontName>df-rbk-money</frontName>
+				</args>
+			</df-rbk-money>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-rbk-money>
+				<module>df_rbk_money</module>
+				<title>RBK Money</title>
+				<url>http://magento-forum.ru/forum/159/</url>
+			</df-rbk-money>
+		</features>
+		<payment>
+			<rbk-money>
+				<currencies>
+					<allowed>
+						RUB,USD,EUR,UAH
+					</allowed>
+					<code-translation>
+						<RUB>RUR</RUB>
+					</code-translation>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>ru</ru_RU>
+						<en_US>en</en_US>
+					</code-translation>
+				</locales>
+				<url>
+					<payment_page>https://rbkmoney.ru/acceptpurchase.aspx</payment_page>
+				</url>
+				<payment-methods>
+					<no>
+						<title>нет</title>
+					</no>
+					<bankcard>
+						<title>Банковская карта Visa/MasterCard</title>
+					</bankcard>
+					<exchangers>
+						<title>Электронные платёжные системы</title>
+					</exchangers>
+					<terminals>
+						<title>Платёжные терминалы</title>
+					</terminals>
+					<postrus>
+						<title>Почтовый перевод («КиберДеньги»)</title>
+					</postrus>
+					<mobilestores>
+						<title>Салоны связи (Евросеть, Связной, МТС, МобилЭлемент, Альт Телеком)</title>
+					</mobilestores>
+					<transfers>
+						<title>Системы денежных переводов (CONTACT, Золотая Корона, Лидер, Почта России)</title>
+					</transfers>
+					<ibank>
+						<title>Интернет-банк (Райффайзенбанк, УРАЛСИБ, Промсвязьбанк, HandyBank, Faktura.ru)</title>
+					</ibank>
+					<sberbank>
+						<title>Банковский платёж и банкоматы</title>
+					</sberbank>
+					<svyaznoy>
+						<title>Связной</title>
+					</svyaznoy>
+					<euroset>
+						<title>Евросеть</title>
+					</euroset>
+					<contact>
+						<title>CONTACT</title>
+					</contact>
+					<mts>
+						<title>МТС</title>
+					</mts>
+					<uralsib>
+						<title>Кассы банка УРАЛСИБ</title>
+					</uralsib>
+					<handybank>
+						<title>HandyBank</title>
+					</handybank>
+					<ocean>
+						<title>Океан Банк</title>
+					</ocean>
+					<ibankuralsib>
+						<title>Интернет-банк УРАЛСИБ</title>
+					</ibankuralsib>
+					<rbkmoney>
+						<title>Оплата с кошелька RBK Money</title>
+					</rbkmoney>
+					<prepaidcard>
+						<title>Предоплаченная карта RBK Money</title>
+					</prepaidcard>
+				</payment-methods>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>orderId</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+								Df_RbkMoney: обязательный параметр.
+							-->
+							<email>userEmail</email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_RbkMoney: обязательный параметр.
+							-->
+							<name>userName</name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>recipientAmount</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_RbkMoney: обязательный параметр.
+							-->
+							<currency-code>recipientCurrency</currency-code>
+							<!--
+								В этом поле передается назначение платежа
+								в соответствии с системой учета продавца,полученного системой с веб-сайта продавца.
+								Df_Payment: не используется.
+								Df_RbkMoney: обязательный параметр.
+							-->
+							<description>serviceName</description>
+						</payment>
+						<payment_service>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_RbkMoney: обязательный параметр.
+								-->
+								<date>paymentData</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_RbkMoney: передаётся платёжной системой, но не используется модулем.
+								-->
+								<id>paymentId</id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_RbkMoney: обязательный параметр.
+								-->
+								<state>paymentStatus</state>
+							</payment>
+							<shop>
+								<!--
+									Номер кошелька магазина в системе RBK Money.
+									Является уникальным в системе RBK Money.
+									Df_Payment: не используется.
+									Df_RbkMoney: обязательный параметр.
+								-->
+								<account-id>eshopAccount</account-id>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_RbkMoney: обязательный параметр.
+								-->
+								<id>eshopId</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>hash</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<serviceName>
+								<max_length>255</max_length>
+							</serviceName>
+						</params>
+					</payment_page>
+				</request>
+			</rbk-money>
+		</payment>
+	</df>
+</config>

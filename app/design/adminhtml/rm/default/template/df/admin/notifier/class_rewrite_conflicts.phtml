@@ -1,0 +1,43 @@
+<?php /** @var Df_Admin_Block_Notifier_ClassRewriteConflicts $this */ ?>
+<div class='rm'>
+	<div class='rm-notifier'>
+		<ul class='rm-class-rewrite-conflicts'>
+			<?php
+				foreach ($this->getConflicts() as $conflict) {
+					/** @var Df_Admin_Model_ClassRewrite $conflict */
+					/** @var string $originMf */
+					$originMf = $conflict->getOrigin()->getNameMf();
+					/** @var string $type */
+					$type = $conflict->getOrigin()->getType();
+					?>
+						<li class='rm-class-rewrite-conflict'>
+							<h3>Системный класс «<b><?php echo $originMf; ?></b>» типа «<b><?php echo $type; ?></b>»
+								перекрывают конфликтующие между собой классы:</h3>
+							<ul class='rm-class-rewrite-destinations'>
+								<?php
+									// Обращаем список классов, чтобы активный класс стал первым в списке
+									// (иначе он всегда последний списке:
+									// как раз за счёт этого  свего положения он и перекрывает все остальные классы)
+									$conflict->getDestinations()->reverse();
+									foreach ($conflict->getDestinations() as $destination) {
+										/** @var Df_Admin_Model_ClassInfo $destination */
+										?>
+											<li class='rm-class-rewrite-destination'>
+												<?php
+													echo $destination->getName();
+													if ($conflict->isDestinationActive($destination)) {
+														echo ' <b>[используется]</b>';
+													}
+												?>
+											</li>
+										<?php
+									}
+								?>
+							</ul>
+						</li>
+					<?php
+				}
+			?>
+		</ul>
+	</div>
+</div>

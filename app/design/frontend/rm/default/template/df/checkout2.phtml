@@ -1,0 +1,23 @@
+<?php /** @var Df_Checkout2_Block_Frontend $this */ ?>
+<div id='rm-checkout-frontend' class='rm-bootstrap'></div>
+<script>
+	window.ENV = window.ENV || {};
+	window.ENV["EXPERIMENTAL_CONTROL_HELPER"] = true;
+</script>
+<script
+	data-main='<?php echo $this->getJsUrl('df/modern/app/checkout/frontend/app.js'); ?>'
+	src='<?php echo $this->getJsUrl('df/modern/lib/require.js'); ?>'
+></script>
+<!--[if lt IE 9]>
+<script
+	src="<?php echo $this->getJsUrl('df/modern/lib/html5shiv.js'); ?>"
+	type="text/javascript"
+></script>
+<script
+	src="<?php echo $this->getJsUrl('df/modern/lib/respond.js'); ?>"
+	type="text/javascript"
+></script>
+<![endif]-->
+<script
+	src='<?php echo $this->getJsUrl('df/modern/lib/bootstrap.js'); ?>'
+></script>

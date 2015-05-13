@@ -1,0 +1,165 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_invitation translate='label' module='df_invitation'>
+			<label>Invitations</label>
+			<class>separator-top</class>
+			<tab>df</tab>
+			<sort_order>13000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general translate='label' module='df_invitation'>
+					<label>General</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+						<![CDATA[
+							<a
+								target='_blank'
+								href='http://magento-forum.ru/forum/189/'
+								title='описание настроек'
+							>описание настроек</a>
+						]]>
+					</comment>
+					<fields>
+						<enabled translate='label'>
+							<label>Enable Invitations Functionality</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>df_invitation/adminhtml_system_config_backend_cache</backend_model>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-invitation</df_feature>
+							<comment>
+								<![CDATA[
+									Включает и отключает модуль.
+								]]>
+							</comment>
+						</enabled>
+						<enabled_on_front translate='label'>
+							<label>Enable Invitations on Frontend</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>df_invitation/adminhtml_system_config_backend_cache</backend_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+								<![CDATA[
+									Когда эта опция отключена,только администратор будет вправе пользоваться модулем.
+								]]>
+							</comment>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</enabled_on_front>
+						<registration_use_inviter_group translate='label'>
+							<label>Referred Customer Group</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_invitation/adminhtml_system_config_source_boolean_group</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+							<comment>
+								<![CDATA[
+									Основная категория покупателей задаётся администратором в разделе
+									«Система» → «Настройки» → «Покупатели» → «Параметры учёта»
+									→ «Регистрация» → «К какой категории причислять зарегистрировавшихся покупателей?»
+								]]>
+							</comment>
+						</registration_use_inviter_group>
+						<registration_required_invitation translate='label'>
+							<label>Запретить регистрироваться без приглашения?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+							<comment>
+								<![CDATA[
+									После включения этой опции покупатели смогут зарегистрироваться в Вашем магазине
+									только по приглашению администратора или других покупателей.
+								]]>
+							</comment>
+						</registration_required_invitation>
+						<allow_customer_message translate='label'>
+							<label>Allow Customers to Add Custom Message to Invitation Email</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</allow_customer_message>
+						<max_invitation_amount_per_send translate='label'>
+							<label>Max Invitations Allowed to be Sent at One Time</label>
+							<frontend_type>text</frontend_type>
+							<backend_model>df_invitation/adminhtml_system_config_backend_limited</backend_model>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+							<comment>
+								<![CDATA[
+									Эта настройка оказывает влияние только на интерфейс формы приглашения:
+									форма будет содержать заданное количество граф для адресатов.
+								]]>
+							</comment>
+						</max_invitation_amount_per_send>
+					</fields>
+				</general>
+				<email translate='label' module='df_invitation'>
+					<label>Email Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<identity translate='label'>
+							<label>Customer Invitation Email Sender</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_identity</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</identity>
+						<template translate='label'>
+							<label>Customer Invitation Email Template</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</template>
+					</fields>
+				</email>
+			</groups>
+		</df_invitation>
+	</sections>
+</config>

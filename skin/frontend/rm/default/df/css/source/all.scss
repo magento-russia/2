@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/**
+	Обратите внимание, что правило @charset надо записывать именно с двойными кавычками
+	и именно в самом начале файла, без любых символов и пробелов впереди.
+*/
+@import 'account/_all';
+@import 'catalog/category/_navigation';
+@import 'checkout/_all';
+//@import 'checkout2/_all';
+@import 'cms/_main';
+@import 'common/_all';
+@import 'customer-credit/_main';
+/** @buyer {buyer} */
+//@import 'forum/_all';
+@import 'invitation/_main';
+@import 'payment/_main';
+@import 'pd4/_main';
+@import 'promo-gift/_main';
+@import 'reward/_main';
+@import 'tweaks/_all';
+@import 'vk/_all';

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Tag>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Tag>
+	</modules>
+	<global>
+		<blocks>
+			<df_tag><class>Df_Tag_Block</class></df_tag>
+			<tag>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<popular>Df_Tag_Block_Popular</popular>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<product_list>Df_Tag_Block_Product_List</product_list>
+				</rewrite>
+			</tag>
+		</blocks>
+		<helpers><df_tag><class>Df_Tag_Helper</class></df_tag></helpers>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Tag>
+					<files>
+						<default>Mage_Tag.csv</default>
+					</files>
+				</Df_Tag>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Tag>
+					<files>
+						<default>Mage_Tag.csv</default>
+					</files>
+				</Df_Tag>
+			</modules>
+		</translate>
+	</frontend>
+</config>

@@ -1,0 +1,218 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_WebMoney>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_WebMoney>
+	</modules>
+	<global>
+		<blocks><df_webmoney><class>Df_WebMoney_Block</class></df_webmoney></blocks>
+		<helpers><df_webmoney><class>Df_WebMoney_Helper</class></df_webmoney></helpers>
+		<models><df_webmoney><class>Df_WebMoney_Model</class></df_webmoney></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<webmoney>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<frontend__title>WebMoney</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+			</webmoney>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-webmoney>
+				<model>df_webmoney/payment</model>
+			</df-webmoney>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_webmoney>/df-webmoney/</df_webmoney>
+		</secure_url>
+		-->
+		<routers>
+			<df-webmoney>
+				<use>standard</use>
+				<args>
+					<module>Df_WebMoney</module>
+					<frontName>df-webmoney</frontName>
+				</args>
+			</df-webmoney>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-webmoney>
+				<module>df_webmoney</module>
+				<title>WebMoney</title>
+				<url>http://magento-forum.ru/forum/162/</url>
+			</df-webmoney>
+		</features>
+		<payment>
+			<webmoney>
+				<currencies>
+					<allowed>
+						RUB,USD,EUR,UAH,BYR
+					</allowed>
+					<code-translation-reversed>
+						<R>RUB</R>
+						<Z>USD</Z>
+						<E>EUR</E>
+						<U>UAH</U>
+						<B>BYR</B>
+						<!--
+							Кошельки типа D предназначены для учета выданных кредитов.
+							http://wiki.webmoney.ru/wiki/show/WMD
+						-->
+						<D>USD</D>
+					</code-translation-reversed>
+				</currencies>
+				<url>
+					<payment_page>https://merchant.webmoney.ru/lmi/payment.asp</payment_page>
+				</url>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>LMI_PAYMENT_NO</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Присутствует только если покупатель производит оплату
+								чеком Paymer.com или ВМ-картой.
+								Df_Payment: не используется.
+								Df_WebMoney: иногда используется.
+							-->
+							<email>LMI_PAYMER_EMAIL</email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_WebMoney: не используется.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Присутствует только если покупатель производит оплату
+								с телефона WM Keeper Mobile.
+								Df_Payment: не используется.
+								Df_WebMoney: иногда используется.
+							-->
+							<phone>LMI_TELEPAT_PHONENUMBER</phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>LMI_PAYMENT_AMOUNT</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_WebMoney: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<customer>
+								<!--
+									Кошелек покупателя.
+									Df_Payment: не используется.
+									Df_WebMoney: обязательный параметр.
+								-->
+								<account-id>LMI_PAYER_PURSE</account-id>
+								<!--
+									WMId покупателя.
+									Df_Payment: не используется.
+									Df_WebMoney: обязательный параметр.
+								-->
+								<id>LMI_PAYER_WM</id>
+							</customer>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_WebMoney: обязательный параметр.
+								-->
+								<date>LMI_SYS_TRANS_DATE</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_WebMoney: обязательный параметр.
+								-->
+								<id>LMI_SYS_TRANS_NO</id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+								-->
+								<state></state>
+								<!--
+									Указывает, в каком режиме выполнялась обработка запроса на платеж.
+									Может принимать два значения:
+										0:	Платеж выполнялся в реальном режиме,средства переведены с кошелька покупателя
+											на кошелек продавца;
+										1:	Платеж выполнялся в тестовом режиме,средства реально не переводились.
+									Df_Payment: не используется.
+									Df_WebMoney: обязательный параметр.
+								-->
+								<test>LMI_MODE</test>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_WebMoney: обязательный параметр.
+								-->
+								<id>LMI_PAYEE_PURSE</id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>LMI_HASH</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<LMI_PAYMENT_DESC>
+								<max_length>255</max_length>
+							</LMI_PAYMENT_DESC>
+						</params>
+					</payment_page>
+				</request>
+			</webmoney>
+		</payment>
+	</df>
+</config>

@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Paypal>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Paypal>
+	</modules>
+	<global>
+		<blocks><df_paypal><class>Df_Paypal_Block</class></df_paypal></blocks>
+		<helpers><df_paypal><class>Df_Paypal_Helper</class></df_paypal></helpers>
+		<models>
+			<df_paypal><class>Df_Paypal_Model</class></df_paypal>
+			<paypal>
+				<rewrite>
+					<!--
+						Цель перекрытия:
+
+						Помимо стандартных скидок Magento Community Edition
+						мы должны учесть скидки накопительной программы и личного счёта.
+
+						Модули "Накопительная программа" и "Личный счёт"
+						не добавляют свои скидки к общей скидке.
+
+						Поэтому нам надо учесть их скидки вручную
+					-->
+					<api_standard>Df_Paypal_Model_Api_Standard</api_standard>
+				</rewrite>
+			</paypal>
+		</models>
+	</global>
+</config>

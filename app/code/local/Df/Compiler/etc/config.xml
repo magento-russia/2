@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Compiler>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Compiler>
+	</modules>
+	<global>
+		<helpers><df_compiler><class>Df_Compiler_Helper</class></df_compiler></helpers>
+		<models>
+			<df_compiler><class>Df_Compiler_Model</class></df_compiler>
+			<compiler>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						качественное улучшение процесса компиляции:
+						предотвращение различных сбоев при компиляции,
+						улучшенная диагностика сбоев компиляции.
+					-->
+					<process>Df_Compiler_Model_Process</process>
+				</rewrite>
+			</compiler>
+		</models>
+	</global>
+</config>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_CatalogInventory>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_CatalogInventory>
+	</modules>
+	<global>
+		<blocks><df_catalog_inventory><class>Df_CatalogInventory_Block</class></df_catalog_inventory></blocks>
+		<helpers><df_catalog_inventory><class>Df_CatalogInventory_Helper</class></df_catalog_inventory></helpers>
+		<models>
+			<df_catalog_inventory><class>Df_CatalogInventory_Model</class></df_catalog_inventory>
+			<cataloginventory>
+				<rewrite>
+					<!--
+						Magento содержит дефект, который приводит к двойному расчёту
+						одних и тех же складских запасов при каждой записи товара в базу данных.
+						Данная заплатка ускоряет запись товара в базу данных путём исправления данного дефекта
+						(после включения заплатки складские запасы расчитываются единожды).
+					-->
+					<stock_item>Df_CatalogInventory_Model_Stock_Item</stock_item>
+				</rewrite>
+			</cataloginventory>
+		</models>
+	</global>
+	<default>
+		<cataloginventory>
+			<options>
+				<!-- Выставлять ли на витрину отсутствующие в наличии товары? -->
+				<show_out_of_stock>1</show_out_of_stock>
+			</options>
+		</cataloginventory>
+		<df_tweaks_admin>
+			<optimization>
+				<!--
+					Российская сборка придерживается политики, что новые функции Российской сборки
+					должны быть по умолчанию отключены
+					(если только нет критически-важной необходимости их включения).
+				-->
+				<fix_double_stock_reindexing_on_product_save>0</fix_double_stock_reindexing_on_product_save>
+			</optimization>
+		</df_tweaks_admin>
+	</default>
+</config>

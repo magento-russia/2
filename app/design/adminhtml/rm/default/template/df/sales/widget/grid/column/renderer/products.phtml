@@ -1,0 +1,65 @@
+<?php /** @var Df_Sales_Block_Admin_Widget_Grid_Column_RendererDf_Products $this */ ?>
+<?php
+	/** @var string $parentSelector */
+	$parentSelector =
+		'.df .df-sales-admin-widget-grid-column-renderer-products'
+		. ' .df-products .df-product .df-fields'
+	;
+?>
+<style type='text/css'>
+	<?php echo $parentSelector; ?> .df-field-name {
+		width: <?php echo $this->getFieldNameWidthAsString(); ?>%;
+	}
+	<?php echo $parentSelector; ?> .df-field-sku {
+		width: <?php echo $this->getFieldSkuWidthAsString(); ?>%;
+	}
+	<?php echo $parentSelector; ?> .df-field-qty {
+		width: <?php echo $this->getFieldQtyWidthAsString(); ?>%;
+	}
+</style>
+<div class='df'>
+	<div class='df-sales-admin-widget-grid-column-renderer-products'>
+		<ol class='df-products'>
+			<?php
+				/** @var int $ordering  */
+				$ordering = 0;
+				/** @var int $maxProductsToShow  */
+				$maxProductsToShow =
+					df_cfg()->sales()->orderGrid()->productColumn()->getMaxProductsToShow()
+				;
+				/** @var bool $showAllProducts  */
+				$showAllProducts =
+					df_cfg()->sales()->orderGrid()->productColumn()->showAllProducts()
+				;
+				/** @var bool $needChopCollection  */
+				$needChopCollection =
+						!$showAllProducts
+					&&
+						($maxProductsToShow < count($this->getProducts()))
+				;
+				foreach($this->getProducts() as $productBlock) {
+					if (!$showAllProducts) {
+						$ordering++;
+						if ($ordering > $maxProductsToShow) {
+							break;
+						}
+					}
+					/** @var Df_Sales_Block_Admin_Widget_Grid_Column_RendererDf_Products_Product $productBlock */
+					df_assert(
+							$productBlock
+						instanceof
+							Df_Sales_Block_Admin_Widget_Grid_Column_RendererDf_Products_Product
+					);
+					echo $productBlock->toHtml();
+				}
+				if ($needChopCollection) {
+					?>
+						<li class='df-product'>
+							<?php echo $this->escapeHtml('<...>'); ?>
+						</li>
+					<?php
+				}
+			?>
+		</ol>
+	</div>
+</div>

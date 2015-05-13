@@ -1,0 +1,64 @@
+<?php /** @var Df_Localization_Block_Admin_Verification $this */ ?>
+<div class='df'>
+	<div class='df-localization'>
+		<div class='df-verification'>
+			<h1>Проверка полноты перевода</h1>
+			<?php if (0 < count($this->getFiles())) { ?>
+				<div class='df-files'>
+					<div class='df-files-header'>
+						<ol class='df-file-properties df-header'>
+							<li class='df-file-property df-name'>
+								файл
+							</li>
+							<li class='df-file-property df-total'>
+								всего
+							</li>
+							<li class='df-file-property df-untranslated'>
+								без перевода
+							</li>
+							<li class='df-file-property df-absent'>
+								отсутствуют
+							</li>
+						</ol>
+					</div>
+					<ol class='df-files-body'>
+						<?php
+							foreach($this->getFiles() as $file) {
+								/** @var Df_Localization_Model_Translation_File $file  */
+								df_assert($file instanceof Df_Localization_Model_Translation_File);
+								echo $this->renderFile($file);
+							}
+						?>
+					</ol>
+				</div>
+				<div class='df-fileDetails df-hidden'>
+					<h2>Mage_Adminhtml.csv</h2>
+					<div class='df-untranslated'>
+						<h3>Без перевода</h3>
+						<ol class='df-untranslatedItems'>
+							<li class='df-untranslatedItem'>
+								Make sure that data encoding in the file is consistent
+								and saved in one of supported encodings(UTF-8 or ANSI).
+							</li>
+						</ol>
+					</div>
+					<div class='df-absent'>
+						<h3>Отсутствуют</h3>
+						<ol class='df-absentItems'>
+							<li class='df-untranslatedItem'>
+								Make sure that data encoding in the file is consistent
+								and saved in one of supported encodings(UTF-8 or ANSI).
+							</li>
+						</ol>
+					</div>
+				</div>
+			<?php } ?>
+			<script type='text/javascript'>
+				rm.namespace('rm.localization.verification');
+				rm.localization.verification.details =
+					<?php echo $this->getDetailsAsJson(); ?>
+				;
+			</script>
+		</div>
+	</div>
+</div>

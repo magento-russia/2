@@ -1,0 +1,482 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Catalog>
+			<version>2.23.5</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Catalog>
+	</modules>
+	<df>
+		<admin>
+			<notifiers>
+				<flat_category>Df_Catalog_Model_Admin_Notifier_Flat_Category</flat_category>
+				<flat_product>Df_Catalog_Model_Admin_Notifier_Flat_Product</flat_product>
+			</notifiers>
+		</admin>
+	</df>
+	<global>
+		<blocks>
+			<df_catalog><class>Df_Catalog_Block</class></df_catalog>
+			<catalog>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						кэширование блока пошаговой фильтрации.
+					-->
+					<layer_view>Df_Catalog_Block_Layer_View</layer_view>
+					<!--
+						Цель перекрытия —
+						предоставление возможности сторонним модулям
+						добавлять свои пункты в товарное меню
+						посредством подписки на создаваемое методом
+						@see Df_Catalog_Block_Navigation::getStoreCategories()
+						оповещение «rm_menu_top_add_submenu».
+					-->
+					<navigation>Df_Catalog_Block_Navigation</navigation>
+					<!--
+						Цель перекрытия —
+						кэширование бокового блока
+						с отложенными посетителем магазина для сравнения товарами.
+					-->
+					<product_compare_sidebar>Df_Catalog_Block_Product_Compare_Sidebar</product_compare_sidebar>
+					<!--
+						Цель перекрытия —
+						кэширование списка товаров,
+						а также предоставление администратору возможности
+						скрытия кнопки «в корзину» и замены её кнопкой «подробнее...».
+					-->
+					<product_list>Df_Catalog_Block_Product_List</product_list>
+					<!--
+						Цель перекрытия —
+						кэширование блока «Related Products».
+					-->
+					<product_list_related>Df_Catalog_Block_Product_List_Related</product_list_related>
+					<!--
+						Цель перекрытия —
+						кэширование панели инструментов (над списком товаров и под списком товаров)
+						на витринной странице товарного раздела.
+					-->
+					<product_list_toolbar>Df_Catalog_Block_Product_List_Toolbar</product_list_toolbar>
+					<!--
+						Цель перекрытия —
+						кэширование блока «Upsell Products».
+					-->
+					<product_list_upsell>Df_Catalog_Block_Product_List_Upsell</product_list_upsell>
+					<!--
+						Цель перекрытия —
+						предоставить администратору возможность скрывать с витрины ценники,
+						а также кэширование на витрине ценников.
+					-->
+					<product_price>Df_Catalog_Block_Product_Price</product_price>
+					<!--
+						Цель перекрытия —
+						предоставить администратору возможность
+						скрывать витринной товарной карточки
+						ссылку «рассказать другу», краткое описание товара,
+						а также кэширование витринной товарной карточки.
+					-->
+					<product_view>Df_Catalog_Block_Product_View</product_view>
+					<!--
+						Цели перекрытия:
+						1) предоставить администратору возможность скрывать с витринной товарной карточки
+						   свойства с незаполненными (пустыми) значениями.
+						2) кэширование блока свойств товара на витринной товарной карточке.
+					-->
+					<product_view_attributes>Df_Catalog_Block_Product_View_Attributes</product_view_attributes>
+					<!--
+						Цель перекрытия —
+						кэширование блока дополнительных изображений товара
+						на витринной товарной карточке.
+					-->
+					<product_view_media>Df_Catalog_Block_Product_View_Media</product_view_media>
+					<!--
+						Цель перекрытия —
+						устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
+						in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
+						@link http://magento-forum.ru/topic/4298/
+					-->
+					<seo_sitemap_category>Df_Catalog_Block_Seo_Sitemap_Category</seo_sitemap_category>
+					<!--
+						Цель перекрытия —
+						устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
+						in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
+						@link http://magento-forum.ru/topic/4298/
+					-->
+					<seo_sitemap_product>Df_Catalog_Block_Seo_Sitemap_Product</seo_sitemap_product>
+					<!--
+						Цель перекрытия —
+						устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
+						in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
+						@link http://magento-forum.ru/topic/4298/
+					-->
+					<seo_sitemap_tree_category>Df_Catalog_Block_Seo_Sitemap_Tree_Category</seo_sitemap_tree_category>
+				</rewrite>
+			</catalog>
+		</blocks>
+		<catalog>
+			<product>
+				<url_rewrite>
+					<helper>df_catalog/product_url_rewrite</helper>
+				</url_rewrite>
+			</product>
+		</catalog>
+		<helpers>
+			<df_catalog><class>Df_Catalog_Helper</class></df_catalog>
+			<catalog>
+				<rewrite>
+					<!--
+						Цели перекрытия:
+						1)	Запись в системный журнал сообщения об исключительной ситуации
+							в методе @see Mage_Catalog_Helper_Image::__toString (если она произойдёт).
+						2)	Устранение сбоя
+							«Warning: imagecopymerge() expects parameter 9 to be long, string given
+							in lib/Varien/Image/Adapter/Gd2.php on line 472».
+							@link http://magento-forum.ru/topic/4581/
+						3)	Запоминание товара для картинки,
+							чтобы в дальнейшем, при сохранении картинки,
+							добавить к ней при необходимости информацию EXIF
+							на основе информации товара.
+					-->
+					<image>Df_Catalog_Helper_Image</image>
+					<!--
+						Цель перекрытия —
+						предоставить администратору возможность скрывать ссылку «сравнить»
+						(с витринной товарной карточки
+						и с мини-карточкек товаров на страницах товарных разделов).
+					-->
+					<product_compare>Df_Catalog_Helper_Product_Compare</product_compare>
+					<!--
+						Цель перекрытия —
+						улучшить транслитерацию букв русского алфавита по сравнению с Magento CE.
+					-->
+					<product_url>Df_Catalog_Helper_Product_Url</product_url>
+				</rewrite>
+			</catalog>
+		</helpers>
+		<models>
+			<catalog>
+				<rewrite>
+					<!--
+						Цель перекрытия:
+						их много, потому что это один из ключевых классов Magento
+						(моделирует сущность «товарный раздел»).
+					-->
+					<category>Df_Catalog_Model_Category</category>
+					<!--
+						Цель перекрытия —
+						устранение сбоя «$_FILES array is empty»
+						при программном сохранении товарного раздела в устаревших версиях Magento CE
+						(заметил в Magento CE 1.6.1.0).
+					-->
+					<category_attribute_backend_image>Df_Catalog_Model_Category_Attribute_Backend_Image</category_attribute_backend_image>
+					<!--
+						Цель перекрытия —
+						предоставление возможности при импорте через Dataflow
+						импортировать вместе с товаром
+						товарные разделы, картинки, настраиваемые покупателем опции.
+					-->
+					<convert_adapter_product>Df_Catalog_Model_Convert_Adapter_Product</convert_adapter_product>
+					<!--
+						Цель перекрытия —
+						предоставление возможности при экспорте через Dataflow
+						экспортировать вместе с товаром
+						товарные разделы, картинки, настраиваемые покупателем опции.
+					-->
+					<convert_parser_product>Df_Catalog_Model_Convert_Parser_Product</convert_parser_product>
+					<!--
+						Цель перекрытия —
+						избежание преждевременной перестройки расчётных таблиц
+						в процессе массовой замены адресных ключей товарных разделов.
+					-->
+					<indexer_url>Df_Catalog_Model_Indexer_Url</indexer_url>
+					<!--
+						Цель перекрытия —
+						ускорение работы перекрываемого метода ядра
+						@see Mage_Catalog_Model_Observer::addCatalogToTopmenuItems()
+					-->
+					<observer>Df_Catalog_Model_Observer</observer>
+					<!--
+						Цель перекрытия:
+						их много, потому что это один из ключевых классов Magento
+						(моделирует сущность «товар»).
+					-->
+					<product>Df_Catalog_Model_Product</product>
+					<!--
+						Цели перекрытия:
+						1) Дача файлам картинок понятных описательных имён (транслитом).
+						2) Устранение утраты информация о главной картинке
+						   у товара-дублёра при дублировании товара.
+						3) Устранение сбоя
+						   «Warning: Illegal string offset 'new_file'
+						   in app/code/core/Mage/Catalog/Model/Product/Attribute/Backend/Media.php».
+					-->
+					<product_attribute_backend_media>Df_Catalog_Model_Product_Attribute_Backend_Media</product_attribute_backend_media>
+					<!--
+						Цель перекрытия —
+						добавление к товарному изображению информации EXIF.
+					-->
+					<product_image>Df_Catalog_Model_Product_Image</product_image>
+					<!--
+						Цель перекрытия —
+						добавление метода @see Df_Catalog_Model_Product_Option::deleteWithDependencies().
+						Этот метод позволяет не оставлять мусор при удалении опции.
+					-->
+					<product_option>Df_Catalog_Model_Product_Option</product_option>
+					<!--
+						Цель перекрытия —
+						объявление поля класса $_formattedOptionValue,
+						которое родительский класс использует без объявления.
+						@see Mage_Catalog_Model_Product_Option_Type_Date::getFormattedOptionValue()
+					-->
+					<product_option_type_date>Df_Catalog_Model_Product_Option_Type_Date</product_option_type_date>
+					<!--
+						Цель перекрытия —
+						объявление поля класса $_formattedOptionValue,
+						которое родительский класс использует без объявления.
+						@see Mage_Catalog_Model_Product_Option_Type_File::getFormattedOptionValue()
+					-->
+					<product_option_type_file>Df_Catalog_Model_Product_Option_Type_File</product_option_type_file>
+					<!--
+						Цель перекрытия —
+						объявление поля класса $_formattedOptionValue,
+						которое родительский класс использует без объявления.
+						@see Mage_Catalog_Model_Product_Option_Type_Select::getFormattedOptionValue()
+					-->
+					<product_option_type_select>Df_Catalog_Model_Product_Option_Type_Select</product_option_type_select>
+					<!--
+						Цель перекрытия —
+						улучшение транслитерации русских букв в адресах товаров.
+					-->
+					<product_url>Df_Catalog_Model_Product_Url</product_url>
+					<!--
+						Цели перекрытия:
+						1) поддержка русских букв в адресах страниц
+						2) перенаправление посетителя на канонический адрес страницы товара
+					-->
+					<url>Df_Catalog_Model_Url</url>
+				</rewrite>
+			</catalog>
+			<!-- Для Magento версии не меньше 1.6 -->
+			<catalog_resource>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						устрание сбоя
+						«Undefined offset (index) in Mage/Catalog/Model/Resource/Category/Flat.php».
+					-->
+					<category_flat>Df_Catalog_Model_Resource_Category_Flat</category_flat>
+					<!--
+						Цель перекрытия —
+						устранение следующего дефекта Magento CE/EE:
+						при программном сохранении товара, имеющего особые цены (tier prices),
+						система ошибочно принимает уже имеющиеся особые цены за новые,
+						и по этой причине ошибочно использует оператор SQL INSERT вместо UPDATE,
+						что приводит к сбою:
+						«Integrity constraint violation: 1062 Duplicate entry».
+						@link http://stackoverflow.com/a/10178922/254475
+					-->
+					<product_attribute_backend_tierprice>Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice</product_attribute_backend_tierprice>
+					<!--
+						Цель перекрытия —
+						перевод экранного названия «Special Price» товарного свойства «special_price»,
+						а также экранных названий некоторых других товарных свойств.
+						@link https://github.com/dfediuk/rm/commit/7ef0885000282541764964a45f27691e0f2639e3
+					-->
+					<product_attribute_collection>Df_Catalog_Model_Resource_Product_Attribute_Collection</product_attribute_collection>
+					<!--
+						Цели перекрытия:
+						их много, потому что данный класс — один из ключевых классов системы
+						(коллекция товаров).
+					-->
+					<product_collection>Df_Catalog_Model_Resource_Product_Collection</product_collection>
+					<!--
+						Цель перекрытия —
+						кэширование товарных свойств при включенном режиме денормализации.
+					-->
+					<product_flat_indexer>Df_Catalog_Model_Resource_Product_Flat_Indexer</product_flat_indexer>
+					<!--
+						Цель перекрытия —
+						отключение режима денормализации для данного типа коллекций,
+						потому что этот режим для данного типа коллекций иногда приводил к сбою
+						(возможно, что в настоящее время проблема уже устранена другим способом,
+						и данное перекрытие уже не нужно).
+					-->
+					<product_link_product_collection>Df_Catalog_Model_Resource_Product_Link_Product_Collection</product_link_product_collection>
+					<!--
+						Цель перекрытия —
+						перевод экранных названий настраиваемых покупателем опций товара.
+					-->
+					<product_option_collection>Df_Catalog_Model_Resource_Product_Option_Collection</product_option_collection>
+					<!--
+						Цель перекрытия —
+						перевод экранных названий опций
+						(которые являются товарными свойствами) настраиваемых товаров.
+						@link https://github.com/dfediuk/rm/commit/e4aecb5ebda695c40e1d004b569e2872e149a44c
+					-->
+					<product_type_configurable_attribute_collection>Df_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection</product_type_configurable_attribute_collection>
+					<!--
+						Цели перекрытия:
+						их много, потому что данный класс — один из ключевых классов системы
+						(работа с адресами страниц товаров и разделов).
+					-->
+					<url>Df_Catalog_Model_Resource_Url</url>
+				</rewrite>
+			</catalog_resource>
+			<!-- Для Magento версии меньше 1.6 -->
+			<catalog_resource_eav_mysql4>
+				<rewrite>
+					<category_flat>Df_Catalog_Model_Resource_Category_Flat</category_flat>
+					<product_attribute_backend_tierprice>Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice</product_attribute_backend_tierprice>
+					<product_attribute_collection>Df_Catalog_Model_Resource_Product_Attribute_Collection</product_attribute_collection>
+					<product_collection>Df_Catalog_Model_Resource_Product_Collection</product_collection>
+					<product_flat_indexer>Df_Catalog_Model_Resource_Product_Flat_Indexer</product_flat_indexer>
+					<product_link_product_collection>Df_Catalog_Model_Resource_Product_Link_Product_Collection</product_link_product_collection>
+					<product_option_collection>Df_Catalog_Model_Resource_Product_Option_Collection</product_option_collection>
+					<product_type_configurable_attribute_collection>Df_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection</product_type_configurable_attribute_collection>
+					<url>Df_Catalog_Model_Resource_Url</url>
+				</rewrite>
+			</catalog_resource_eav_mysql4>
+			<df_catalog>
+				<class>Df_Catalog_Model</class>
+				<resourceModel>df_catalog_resource</resourceModel>
+			</df_catalog>
+			<df_catalog_resource>
+				<class>Df_Catalog_Model_Resource</class>
+			</df_catalog_resource>
+		</models>
+		<resources>
+			<df_catalog_setup>
+				<setup>
+					<module>Df_Catalog</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_catalog_setup>
+		</resources>
+		<index>
+			<indexer>
+				<catalog_product_flat>
+					<model>df_catalog/product_indexer_flat</model>
+				</catalog_product_flat>
+			</indexer>
+		</index>
+		<cache>
+			<types>
+				<rm_catalog translate='label,description' module='df_catalog'>
+					<label>Улучшенное кэширование каталога</label>
+					<description>Хранит различные выборки товаров и разделов.</description>
+					<tags>rm_catalog</tags>
+				</rm_catalog>
+			</types>
+		</cache>
+	</global>
+	<admin>
+		<fieldsets>
+			<catalog_product_dataflow>
+				<df_additional_images><external>1</external></df_additional_images>
+			</catalog_product_dataflow>
+		</fieldsets>
+	</admin>
+	<frontend>
+		<events>
+			<core_block_abstract_to_html_after>
+				<observers>
+					<df_catalog_core_block_abstract_to_html_after>
+						<!--
+							При необходимости добавляет в макет блок
+							«Иллюстрированное меню товарных разделов»
+						-->
+						<class>df_catalog/category_navigation_observer</class>
+						<method>core_block_abstract_to_html_after</method>
+					</df_catalog_core_block_abstract_to_html_after>
+				</observers>
+			</core_block_abstract_to_html_after>
+		</events>
+		<translate>
+			<modules>
+				<Df_Catalog>
+					<files>
+						<default>Mage_Catalog.csv</default>
+					</files>
+				</Df_Catalog>
+			</modules>
+		</translate>
+	</frontend>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Catalog>
+					<files>
+						<default>Mage_Catalog.csv</default>
+					</files>
+				</Df_Catalog>
+				<Mage_Catalog>
+					<files>
+						<rm_additional>admin/Mage_Catalog.csv</rm_additional>
+					</files>
+				</Mage_Catalog>
+			</modules>
+		</translate>
+		<events>
+			<rm__config_after_save__catalog__frontend__flat_catalog_category>
+				<observers>
+					<df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_category>
+						<class>df_catalog/dispatcher</class>
+						<method>rm__config_after_save__catalog__frontend__flat_catalog_category</method>
+					</df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_category>
+				</observers>
+			</rm__config_after_save__catalog__frontend__flat_catalog_category>
+			<rm__config_after_save__catalog__frontend__flat_catalog_product>
+				<observers>
+					<df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_product>
+						<class>df_catalog/dispatcher</class>
+						<method>rm__config_after_save__catalog__frontend__flat_catalog_product</method>
+					</df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_product>
+				</observers>
+			</rm__config_after_save__catalog__frontend__flat_catalog_product>
+			<rm__magento_ce_has_just_been_installed>
+				<observers>
+					<df_catalog__rm__magento_ce_has_just_been_installed>
+						<class>df_catalog/dispatcher</class>
+						<method>rm__magento_ce_has_just_been_installed</method>
+					</df_catalog__rm__magento_ce_has_just_been_installed>
+				</observers>
+			</rm__magento_ce_has_just_been_installed>
+		</events>
+	</adminhtml>
+	<default>
+		<catalog>
+			<custom_options>
+				<date_fields_order>d,m,y</date_fields_order>
+				<time_format>24h</time_format>
+				<use_calendar>1</use_calendar>
+			</custom_options>
+			<downloadable>
+				<samples_title>Демо-образцы</samples_title>
+				<links_title>Файлы для скачивания</links_title>
+			</downloadable>
+			<frontend>
+				<!--
+					К сожалению, нельзя здесь включать опции денормализации,потому что при этом первоначальная одновременная установка
+					Magento community Edition и Российской сборки Magento
+					приводит к сбою:
+					Table 'catalog_category_flat_store_1' doesn't exist
+					<flat_catalog_category>1</flat_catalog_category>
+					<flat_catalog_product>1</flat_catalog_product>
+				-->
+				<!-- Разрешить «все» в качестве значения параметра «товаров на странице»? -->
+				<list_allow_all>1</list_allow_all>
+			</frontend>
+		</catalog>
+		<design>
+			<watermark>
+				<!-- Magento CE / EE не задают значение по умолчанию -->
+				<imageOpacity>30</imageOpacity>
+			</watermark>
+		</design>
+		<df_tweaks_admin>
+			<optimization>
+				<fix_double_stock_reindexing_on_product_save>1</fix_double_stock_reindexing_on_product_save>
+			</optimization>
+		</df_tweaks_admin>
+	</default>
+</config>

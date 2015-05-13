@@ -1,0 +1,13 @@
+<?php /** @var Df_PromoGift_Block_Cart_Gift_Highlighter $this */ ?>
+<?php
+    if ($this->getGiftingQuoteItemIds()) {
+		$quoteItemIds = implode(", ", $this->getGiftingQuoteItemIds());
+		?>
+			<script type='text/javascript'>
+				window.df = {} || window.df;
+				window.rm.promo_gift = {} || window.rm.promo_gift;
+				window.rm.promo_gift.giftingQuoteItems = [<?php echo $quoteItemIds; ?>];
+				window.rm.promo_gift.giftingQuoteItemTitle = '<?php echo $this->__("Ваш подарок!"); ?>';
+			</script>
+		<?php
+	}

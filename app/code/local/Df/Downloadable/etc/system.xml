@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<catalog>
+			<groups>
+				<downloadable>
+					<fields>
+						<content_disposition>
+							<comment>The «inline» value hints browser to view the file. The «attachment» value hints browser to save the file to customer's local PC.</comment>
+						</content_disposition>
+						<downloads_number>
+							<comment>Set «0» to remove download count restrictions</comment>
+						</downloads_number>
+						<shareable>
+							<comment>This is a default value, it can be overwritten on product level</comment>
+						</shareable>
+					</fields>
+				</downloadable>
+			</groups>
+		</catalog>
+	</sections>
+</config>

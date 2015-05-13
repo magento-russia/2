@@ -1,0 +1,20 @@
+@import "../../_common";
+
+
+
+/**
+ * Строки заказа с подарочными товарами
+ */
+#shopping-cart-table {
+	tr.df-free-quote-item {
+		background: $giftBackgroundColor;
+
+		.price {
+			text-decoration:line-through;
+		}
+
+		.df-gift-label {
+			@include orangeFont;
+		}
+	}
+}

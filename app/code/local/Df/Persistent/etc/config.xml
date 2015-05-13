@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Persistent>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Persistent>
+	</modules>
+	<global>
+		<blocks><df_persistent><class>Df_Persistent_Block</class></df_persistent></blocks>
+		<helpers><df_persistent><class>Df_Persistent_Helper</class></df_persistent></helpers>
+		<models><df_persistent><class>Df_Persistent_Model</class></df_persistent></models>
+	</global>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Persistent>
+					<files>
+						<default>Mage_Persistent.csv</default>
+						<checkout>Mage_Checkout.csv</checkout>
+					</files>
+				</Df_Persistent>
+				<Mage_Persistent>
+					<files>
+						<default>Mage_Persistent.csv</default>
+						<checkout>Mage_Checkout.csv</checkout>
+					</files>
+				</Mage_Persistent>
+			</modules>
+		</translate>
+	</frontend>
+</config>

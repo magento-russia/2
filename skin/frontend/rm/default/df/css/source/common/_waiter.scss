@@ -1,0 +1,35 @@
+#df-loading-mask {
+    background: url(../../images/blank.gif) repeat;
+    position:absolute;
+    color:#d85909;
+    font-size:1.1em;
+    font-weight:bold;
+    text-align:center;
+    opacity:0.80;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE8 */
+    z-index:500;
+
+	.loader {
+		position:fixed;
+		top:45%;
+		left:50%;
+		width:170px;
+		margin-left:-115px;
+		padding:15px 30px 8px 30px;
+		background:#fff4e9;
+		border:2px solid #f1af73;
+		color:#d85909;
+		font-weight:bold;
+		text-align:center;
+		z-index:1000;
+
+		img {
+			display: block;
+			width: 31px;
+			height: 31px;
+			margin: 0 auto 0.25em auto;
+		}
+		.df-text {
+		}
+    }
+}

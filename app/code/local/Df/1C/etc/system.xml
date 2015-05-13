@@ -1,0 +1,393 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_1c translate='label' module='df_1c'>
+			<label>1С:Управление торговлей</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>2000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general translate='label'>
+					<label>Общие настройки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+						<![CDATA[]]>
+					</comment>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-1c</df_feature>
+						</enabled>
+						<url>
+							<label>Адрес узла обмена</label>
+							<comment>
+								<![CDATA[Укажите этот адрес
+								в настройках узла обмена 1С:Управление торговлей.
+								<br/>Обратите внимание, что при промышленной эксплуатации
+								рекомендуется настроить в 1С: Управление торговлей
+								<br/><b>2 разных узла для одного и того же интернет-магазина</b>:
+								<br/>*) отдельный узел для <b>синхронизации заказов</b>;
+								обмен данными по этому узлу рекомендуется производить часто: например, раз в 15 минут
+								<br/>*) отдельный узел для <b>синхронизации товаров</b> (остатки, цены, новая номенклатура);
+								обмен данными по этому узлу можно производить реже: например, раз в сутки.
+								<br/>Если Вы решите использовать больше одного узла обмена данными
+								для одного и того же интернет-магазина,
+								то рекомендуется добавить к указанному выше адресу узла окончание
+								«node/<системное имя узла обмена данными>/»,
+								<br/>например: «http://example.ru/df-1c/cml2/index/node/prices/»
+								<br/>или «http://example.ru/df-1c/cml2/index/store-view/defaut/node/orders/»,
+								<br/>при этом <системное имя узла обмена данными> Вы можете выбрать произовльно.]]>
+							</comment>
+							<frontend_model>df_admin/system_config_form_field_info_urls</frontend_model>
+							<rm_url_path_base>df-1c/cml2/index</rm_url_path_base>
+							<backend_model>core/config_data</backend_model>
+							<sort_order>1500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</url>
+						<enable_logging translate='label'>
+							<label>Вести ли диагностический журнал?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</enable_logging>
+						<log_file_name_template translate='label'>
+							<label>Шаблон имени диагностического журнала</label>
+							<comment>
+								<![CDATA[
+									Путь к файлу диагностического журнала относительно папки var/log.
+									<br/>Файл диагностического журнала и все родительские папки будут созданы автоматически.
+									<br/>В шаблоне Вы можете применять следующие параметры:
+									<br/><b>{date}</b>: текущая дата в формате yyyy-mm-dd (например: «2014-05-25»)
+									<br/><b>{time}</b>: текущее время в формате hh-mm (например: «18-58»)
+									<br/><b>{store-view}</b>: системное имя интернет-магазина,
+									с которым производится обмен (например: «default»)
+									<br/><b>{node}</b>: системное имя узла обмена данными
+									в «1С: Управление торговли».
+									<br/>Eсли Вы хотите использовать параметр {node},
+									то Вы должны добавить системное имя узла обмена данными
+									к концу адреса узла обмена данными
+									в формате «node/<системное имя узла обмена данными>/», например:
+									«http://example.ru/df-1c/cml2/index/node/orders/».
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<enable_logging>1</enable_logging>
+							</depends>
+						</log_file_name_template>
+						<non_standard_currency_codes>
+							<label>Нестандартные символьные коды валют</label>
+							<comment>
+								<![CDATA[
+									Символьные коды валют в устаревших конфигурациях «1С:Управление торговлей»
+									(например, в российских конфигурацях редакции ниже 11,а также в устаревших конфигурациях для Украины, Белоруссии, Казахстана)
+									не соответствуют общепринятому международному стандарту
+									<a href='http://en.wikipedia.org/wiki/ISO_4217'>ISO 4217</a>.
+									<br/>
+									В частности, российский рубль обозначается как «руб.» или «руб»
+									вместо официального кода «RUB»,украинская гривна обозначается как «грн» вместо «UAH» и т.п.
+									<br/>
+									Более того, «1С:Управление торговлей» позволяет пользователям
+									самостоятельно произвольно устанавливать символьные коды валют.
+									<br/>
+									Откройте в «1С:Управление торговлей» справочник «Валюты».
+									Если Вы видите там нестандартные символьные коды — то укажите их
+									и соответствующие им валюты здесь,в настройках модуля (кнопка «<b>добавить...</b>»).
+								]]>
+							</comment>
+							<frontend_model>df_1c/system_config_form_field_nonStandardCurrencyCodes</frontend_model>
+							<backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</non_standard_currency_codes>
+					</fields>
+				</general>
+				<product__prices translate='label'>
+					<label>Цены</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<main translate='label'>
+							<label>Название основной цены или типового соглашения</label>
+							<comment>
+								<![CDATA[
+									Для обмена данными с «1С:Управление торговлей» <b>редакции 10</b>
+									в данной графе надо указать название того типа цен,который станет основным при импорте цен
+									из 1С:Управление торговлей в Magento.
+									<br/>
+									Для обмена данными с «1С:Управление торговлей» <b>редакции 11</b>
+									в данной графе надо указать название
+									<a href='http://magento-forum.ru/topic/3100/'>типового соглашения</a>
+									для покупателей из интернет-магазина.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+						</main>
+						<map>
+							<label>Соответствие категорий покупателей интернет-магазина
+								видам цен «1С:Управление торговлей»</label>
+							<comment>
+								<![CDATA[
+									Для основной категории покупателей интернет-магазина
+									соответствие уже задано выше и повторно указывать не нужно.
+								]]>
+							</comment>
+							<frontend_model>df_1c/system_config_form_field_mapFromCustomerGroupToPriceType</frontend_model>
+							<backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</map>
+					</fields>
+				</product__prices>
+				<product__name translate='label'>
+					<label>Название товара</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<source>
+							<label>Каким полем из 1С:Управление торговлей
+								обновлять название товара в интернет-магазине?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_1c/config_source_productNameSource</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</source>
+					</fields>
+				</product__name>
+				<product__description translate='label'>
+					<label>Описание товара</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>4000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<which_field_to_update>
+							<label>Какое поле в интернет-магазине
+								обновлять содержимым товарного поля «Текстовое описание»
+								из 1С:Управление торговлей?</label>
+							<comment>
+								<![CDATA[
+									Обратите внимание, что в 1С:Управление торговлей редакции 11
+									на товарной карточке присутствует поле «<b>Файл описания для сайта</b>».
+									<br/>Если данное поле заполнено, то его содержимое будет использоваться
+									для поля «Описание» (но не «Краткое описание») интернет-магазина.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_1c/config_source_whichDescriptionFieldToUpdate</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</which_field_to_update>
+						<default>
+							<label>Какой текст добавлять к товару в интернет-магазине
+								при невозможности или запрете брать описание товара
+								из 1С:Управление торговлей?</label>
+							<comment>
+								<![CDATA[
+									<p>Этот текст будет подставляться
+									в поля «<b>описание</b>» и «<b>краткое описание</b>» товара в интернет-магазине,
+									если администратор указал значение «никакое»
+									для опции «Какое поле в интернет-магазине
+									обновлять текстовым описанием товара из 1С:Управление торговлей?»,
+									либо если текстовое описание товара отсутствует в «1С:Управление торговлей».
+									</p>
+									<p>Этот текст будет подставляться
+									в поле «<b>описание</b>» товара в интернет-магазине,
+									если администратор указал значение «краткое описание»
+									или значение «никакое» для опции «Какое поле в интернет-магазине
+									обновлять текстовым описанием товара из 1С:Управление торговлей?»,
+									либо если текстовое описание товара отсутствует в «1С:Управление торговлей».
+									</p>
+									<p>Этот текст будет подставляться
+									в поле «<b>краткое описание</b>» товара в интернет-магазине,
+									если администратор указал значение «описание» или значение «никакое»
+									для опции «Какое поле в интернет-магазине
+									обновлять текстовым описанием товара из 1С:Управление торговлей?»,
+									либо если текстовое описание товара отсутствует в «1С:Управление торговлей».
+									</p>
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</default>
+						<preserve_if_unique translate='label'>
+							<label>Запретить ли автоматическое обновление
+								полей «описание» и «краткое описание» товара в интернет-магазине
+								данными из «1С:Управление торговлей»,
+								если содержимое этих полей непусто
+								и не соответствует значению опции
+								«Какой текст добавлять к товару в интернет-магазине
+								при невозможности или запрете брать описание товара
+								из 1С:Управление торговлей?»
+							</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</preserve_if_unique>
+					</fields>
+				</product__description>
+				<product__other translate='label'>
+					<label>Другие параметры товара</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<attributes__show_on_product_page translate='label'>
+							<label>Отображать ли импортированные свойства на товарной карточке?</label>
+							<comment>
+								<![CDATA[
+									После импорта Вы можете вручную изменить параметры конкретного свойства
+									в разделе «Каталог» → «Типы и свойства» → «Свойства товаров».
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</attributes__show_on_product_page>
+					</fields>
+				</product__other>
+				<reference_lists translate='label'>
+					<label>Справочники</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>6000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<update_mode>
+							<label>Сохранять ли прежние справочные значения,
+								если они отсутствуют в новом сеансе обмена?</label>
+							<comment>
+								<![CDATA[
+									Рекомендуется выбирать значение «сохранять все» в том случае,
+									если Ваш магазин использует несколько разных планов обмена данными.
+									Если план обмена данными только один,
+									то рекомендуется выбрать одно из значений
+									«сохранять только добавленные вручную администратором» или «не сохранять»
+									в зависимости от необходимости ручного редактирования справочников
+									через административную часть интернет-магазина.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_1c/config_source_referenceListUpdateMode</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</update_mode>
+					</fields>
+				</reference_lists>
+				<orders translate='label'>
+					<label>Заказы</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>7000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+					</fields>
+				</orders>
+				<catalog_export>
+					<label>Экспорт товаров в 1С</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>8000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<product_conditions>
+							<label>Условия</label>
+							<comment>
+								<![CDATA[
+									Если условия не будут указаны Вами,
+									<br/>то модуль передаст в 1С все товары Вашего магазина.
+								]]>
+							</comment>
+							<frontend_model>df_catalog/admin_conditions</frontend_model>
+							<backend_model>df_catalog/system_config_backend_conditions</backend_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_conditions>
+					</fields>
+				</catalog_export>
+			</groups>
+		</df_1c>
+	</sections>
+</config>

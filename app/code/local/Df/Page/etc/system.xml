@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<config>
+   <sections>
+		<design>
+			<groups>
+				<header>
+					<fields>
+						<logo_alt>
+							<comment><![CDATA[
+значение атрибута «<b>alt</b>» тега «img»
+							]]></comment>
+						</logo_alt>
+						<logo_src>
+							<comment><![CDATA[
+путь к файлу логотипа относительно папки браузерных файлов (skin/frontend/<пакет>/<тема>)
+							]]></comment>
+						</logo_src>
+						<logo_src_small>
+							<comment><![CDATA[
+путь к файлу логотипа относительно папки браузерных файлов (skin/frontend/<пакет>/<тема>)
+							]]></comment>
+						</logo_src_small>
+						<welcome>
+							<comment><![CDATA[
+стандартная оформительская тема показывает его в правой части шапки
+							]]></comment>
+						</welcome>
+					</fields>
+				</header>
+			</groups>
+		</design>
+	</sections>
+</config>

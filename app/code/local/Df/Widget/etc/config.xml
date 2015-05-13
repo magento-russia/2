@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Widget>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Widget>
+	</modules>
+	<global>
+		<blocks><df_widget><class>Df_Widget_Block</class></df_widget></blocks>
+		<helpers><df_widget><class>Df_Widget_Helper</class></df_widget></helpers>
+		<models>
+			<df_widget>
+				<class>Df_Widget_Model</class>
+				<resourceModel>df_widget_resource</resourceModel>
+			</df_widget>
+			<df_widget_resource>
+				<class>Df_Widget_Model_Resource</class>
+			</df_widget_resource>
+			<widget>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						устранение дефекта показа картинок в редакторе.
+						@link http://magento-forum.ru/topic/2320/
+					-->
+					<template_filter>Df_Widget_Model_Template_Filter</template_filter>
+				</rewrite>
+			</widget>
+		</models>
+	</global>
+</config>

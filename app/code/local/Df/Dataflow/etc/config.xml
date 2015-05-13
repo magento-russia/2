@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Dataflow>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Dataflow>
+	</modules>
+	<global>
+		<helpers><df_dataflow><class>Df_Dataflow_Helper</class></df_dataflow></helpers>
+		<models>
+			<dataflow>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						поддержка тегов HTML при экспорте и импорте файлов Excel.
+					-->
+					<convert_parser_xml_excel>Df_Dataflow_Model_Convert_Parser_Xml_Excel</convert_parser_xml_excel>
+				</rewrite>
+			</dataflow>
+			<df_dataflow>
+				<class>Df_Dataflow_Model</class>
+			</df_dataflow>
+		</models>
+	</global>
+	<adminhtml>
+		<layout>
+			<updates>
+				<df_dataflow><file>df/dataflow.xml</file></df_dataflow>
+			</updates>
+		</layout>
+	</adminhtml>
+	<default>
+		<df_dataflow>
+			<common>
+				<show_interactive_messages>1</show_interactive_messages>
+				<support_html_tags_in_excel>1</support_html_tags_in_excel>
+			</common>
+			<patches>
+				<fix_field_mapping_gui>1</fix_field_mapping_gui>
+			</patches>
+			<products>
+				<custom_options_support>1</custom_options_support>
+				<enhanced_category_support>1</enhanced_category_support>
+				<gallery_support>1</gallery_support>
+			</products>
+		</df_dataflow>
+	</default>
+</config>

@@ -1,0 +1,88 @@
+@import 'waiter';
+#checkout-progress-state {
+	text-transform: lowercase;
+}
+.cms-home {
+	.std {
+		.category-products {
+			ul {
+				padding: {
+					left: 0;
+				}
+				li {
+					list-style: {
+						type: none;
+					}
+				}
+			}
+			.products-grid {
+				margin: {
+					left: 0;
+				}
+			}
+		}
+	}
+}
+.customer-account-index {
+	.welcome-msg {
+		display: none;
+	}
+}
+/**
+	На экране восстановления пароля слишком много надписей.
+	Удаляем лишнее.
+*/
+.customer-account-forgotpassword {
+	#form-validate {
+		h2.legend {
+			display: none;
+		}
+		label {
+			display: none;
+		}
+		p {
+			line-height: 100%;
+		}
+		.form-list {
+			margin-top: 0.8em;
+		}
+	}
+}
+.data-table {
+	th {
+		text-transform: lowercase;
+
+	}
+}
+.df-red-star {
+	&::after {
+
+	}
+}
+.form-list {
+	label {
+		text-transform: lowercase;
+	}
+}
+.header-container {
+	.quick-access {
+		.links {
+			/**
+				Обратите внимание, что здеь не нужно правило
+					a {text-transform: lowercase;}
+				потому что применимость данного правила задаётся предпочтениями администратора.
+				@see Df_Tweaks_Block_Frontend_Style::getStyle()
+			*/
+			a.rm-preserve-case {
+				text-transform: none;
+			}
+		}
+	}
+}
+.newsletter-manage-index {
+	.my-account {
+		h2.legend {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,9 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ($_info = $this->getInfo()): ?>
+<?php echo $this->getMethod()->getTitle() ?><br />
+<?php echo $this->__('Name on the Card: %s', df_text()->escapeHtml($this->getInfo()->getCcOwner())) ?><br />
+<?php echo $this->__('Credit Card Type: %s', df_text()->escapeHtml($this->getCcTypeName())) ?><br />
+<?php echo $this->__('Credit Card Number: xxxx-%s', df_text()->escapeHtml($this->getInfo()->getCcLast4())) ?><br />
+<?php echo $this->__('Expiration Date: %s/%s', df_text()->escapeHtml($this->getCcExpMonth()), df_text()->escapeHtml($this->getInfo()->getCcExpYear())) ?>
+<?php else: ?>
+<?php endif; ?>

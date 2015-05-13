@@ -1,0 +1,177 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Robokassa>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Robokassa>
+	</modules>
+	<global>
+		<blocks><df_robokassa><class>Df_Robokassa_Block</class></df_robokassa></blocks>
+		<helpers><df_robokassa><class>Df_Robokassa_Helper</class></df_robokassa></helpers>
+		<models><df_robokassa><class>Df_Robokassa_Model</class></df_robokassa></models>
+	</global>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_robokassa>/df-robokassa</df_robokassa>
+		</secure_url>
+		-->
+		<routers>
+			<df_robokassa>
+				<use>standard</use>
+				<args>
+					<module>Df_Robokassa</module>
+					<frontName>df-robokassa</frontName>
+				</args>
+			</df_robokassa>
+		</routers>
+	</frontend>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<robokassa>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<frontend__title>Платёжный сервис ROBOKASSA</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__order_status>1</admin__order_status>
+				<admin__payment_action>Authorization</admin__payment_action>
+			</robokassa>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-robokassa>
+				<model>df_robokassa/payment</model>
+			</df-robokassa>
+		</payment>
+	</default>
+	<df>
+		<features>
+			<df-robokassa>
+				<title>ROBOKASSA</title>
+				<url>http://magento-forum.ru/forum/151/</url>
+			</df-robokassa>
+		</features>
+		<payment>
+			<robokassa>
+				<currencies>
+					<allowed>RUB,USD</allowed>
+					<code-translation>
+						<RUB>MerchantR</RUB>
+						<USD>MerchantU</USD>
+					</code-translation>
+				</currencies>
+				<production>
+					<url>
+						<payment_page>https://merchant.roboxchange.com/Index.aspx</payment_page>
+					</url>
+				</production>
+				<test>
+					<url>
+						<payment_page>http://test.robokassa.ru/Index.aspx</payment_page>
+					</url>
+				</test>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>InvId</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>OutSum</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_Robokassa: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_Robokassa: не используется.
+								-->
+								<date></date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Robokassa: не используется.
+								-->
+								<id></id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_Robokassa: не используется.
+								-->
+								<state></state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_Robokassa: не используется.
+								-->
+								<id></id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>SignatureValue</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+				</request>
+			</robokassa>
+		</payment>
+	</df>
+</config>

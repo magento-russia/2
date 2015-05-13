@@ -1,0 +1,47 @@
+<?php /** @var Df_IPay_Block_Form $this */ ?>
+<?php
+	/**
+	 * Нижеследующая стандартная для Magento разметка HTML
+ 	 * вместо простого echo $this->getDescription();
+ 	 * позволяет скрывать описание способа оплаты,
+ 	 * когда способ оплаты не является текущим.
+	 */
+?>
+<fieldset class='form-list'>
+    <?php
+		$code = $this->getMethodCode();
+	?>
+    <ul id='payment_form_<?php echo $code; ?>' style='display:none'>
+		<?php if (!$this->isTestMode()) { ?>
+			<li class='df-payment-options-container'>
+				<h4>Укажите оператора Вашего мобильного телефона:</h4>
+				<ul class='df-payment-options'>
+					<?php
+						foreach($this->getPaymentOptions() as $optionCode => $optionParams) {
+							/** @var string $optionCode */
+							/** @var array $optionParams */
+							$optionName = df_escape(df_a($optionParams, 'title'));
+							?>
+								<li class='df-payment-option'>
+									<label>
+										<input
+											type='radio'
+											name='payment[<?php echo Df_IPay_Model_Payment::INFO_KEY__MOBILE_NETWORK_OPERATOR; ?>]'
+											value='<?php echo $optionCode; ?>'
+										/>
+										<span><?php echo $optionName; ?></span>
+									</label>
+								</li>
+							<?php
+						}
+					?>
+				</ul>
+			</li>
+		<?php } ?>
+		<li>
+            <?php
+				echo $this->getDescription();
+			?>
+        </li>
+    </ul>
+</fieldset>

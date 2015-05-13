@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<payment>
+			<groups>
+				<checkmo>
+					<comment>
+						<![CDATA[
+							Money order — это одна из принятых на Западе форм денежного перевода.
+							<br/>
+							По сути money order — это же чек, только его выписывает не покупатель,а организация с хорошей финансовой репутацией
+							(например, магазин или служба Western Union)
+							и поэтому магазин уверен, что получит по этому чеку деньги.
+							<br/>
+							Купить money order можно много где.
+							<br/>
+							Например, во многих магазинах '7 Eleven' или в большом супермаркете.
+							<br/>
+							Просто поспрашивайте у людей (соседей?)
+							'Do you by any chance know where I can buy a money order'
+							— Вам обязательно скажут.
+							<br/>
+							Обойдется money order покупателю от 0 центов до пары долларов.
+							В среднем - один доллар.
+							<br/>
+							Т.е. покупатель отдаст 66 долларов наличными
+							и взамен получит money order на 65 долларов,который отправит Вашему магазину по указанному в настройках ниже адресу.
+							<br/>
+							Перед отправкой покупатель пишет на чеке имя получателя платежа
+							и оторывает для себя корешок-квитанцию
+							(на случай, если его письмо потеряется).
+						]]>
+					</comment>
+				</checkmo>
+				<free>
+					<comment>
+						<![CDATA[
+							Этот способ оплаты доступен покупателю только при заказе нулевой стоимости
+							(доставка тоже должна быть бесплатной).
+						]]>
+					</comment>
+				</free>
+			</groups>
+		</payment>
+		<df_payment translate='label' module='df_payment'>
+			<label>Оплата</label>
+			<tab>df</tab>
+			<!--
+				Обратите внимание на эту строку!
+			-->
+			<frontend_model>df_adminhtml/system_config_form</frontend_model>
+			<frontend_type>text</frontend_type>
+			<sort_order>8500</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+		</df_payment>
+	</sections>
+</config>

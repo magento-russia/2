@@ -1,0 +1,1602 @@
+<?xml version='1.0'?>
+<dictionary>
+	<config>
+		<entry>
+			<path>design/footer/copyright</path>
+			<original_value>%TitanShop%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>design/header/logo_alt</path>
+			<original_value>%TitanShop%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>general/store_information/phone</path>
+			<original_value>%xxx%</original_value>
+			<value>+7 495 777-5-444</value>
+		</entry>
+		<entry>
+			<!--
+				Оформительская тема Gala TitanShop
+				никак не определяет значение по умолчанию для данной опции,
+				и в арифметических выражениях отсутствие значения
+				приводит к сбою: "Division by zero":
+			-->
+			<path>multidealpro/main_deal/column_count</path>
+			<original_value>null</original_value>
+			<value>2</value>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Electronic Store</title></store_group>
+		</conditions>
+		<actions><new_title>Электроника</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Electronic Style01</title></store_group>
+		</conditions>
+		<actions><new_title>Электроника 01</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Fashion Store</title></store_group>
+		</conditions>
+		<actions><new_title>Одежда</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Fashion Style01</title></store_group>
+		</conditions>
+		<actions><new_title>Одежда 01</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Furniture Store</title></store_group>
+		</conditions>
+		<actions><new_title>Мебель</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Furniture Style01</title></store_group>
+		</conditions>
+		<actions><new_title>Мебель 01</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Lingries Store</title></store_group>
+		</conditions>
+		<actions><new_title>Нижнее бельё</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Lingries Style01</title></store_group>
+		</conditions>
+		<actions><new_title>Нижнее бельё 01</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Main Store</title></store_group>
+		</conditions>
+		<actions><new_title>Основной</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store_group</type>
+			<store_group><title>Supermarket Store</title></store_group>
+		</conditions>
+		<actions><new_title>Супермаркет</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>English</from>
+				<to>Русский</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute</type>
+			<attribute>
+				<!-- Featured Product -->
+				<code>em_featured</code>
+			</attribute>
+		</conditions>
+		<actions>
+			<new_title>
+				<admin>Премиум (em_featured)</admin>
+				<frontend>Премиум</frontend>
+			</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute</type>
+			<attribute>
+				<!-- Special Deal -->
+				<code>em_deal</code>
+			</attribute>
+		</conditions>
+		<actions>
+			<new_title>
+				<admin>Горячие скидки (em_deal)</admin>
+				<frontend>Горячие скидки</frontend>
+			</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute</type>
+			<attribute>
+				<!-- Hot Product -->
+				<code>em_hot</code>
+			</attribute>
+		</conditions>
+		<actions>
+			<new_title>
+				<admin>Тренды сезона (em_hot)</admin>
+				<frontend>Тренды сезона</frontend>
+			</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute</type>
+			<attribute>
+				<!-- Featured Product -->
+				<code>color</code>
+			</attribute>
+		</conditions>
+		<actions>
+			<term><from>Black</from><to>Чёрный</to></term>
+			<term><from>Blue</from><to>Голубой</to></term>
+			<term><from>Brown</from><to>Коричневый</to></term>
+			<term><from>Gray</from><to>Серый</to></term>
+			<term><from>Green</from><to>Зелёный</to></term>
+			<!-- Именно так, с орфографической ошибкой -->
+			<term><from>Magneta</from><to>Маджента</to></term>
+			<term><from>Pink</from><to>Розовый</to></term>
+			<term><from>Red</from><to>Красный</to></term>
+			<term><from>Silver</from><to>Серебряный</to></term>
+			<term><from>White</from><to>Белый</to></term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_footer_links</id></block>
+		</conditions>
+		<actions>
+			<new_title>Ссылки в подвале (Gala TitanShop)</new_title>
+			<term>
+				<from>About Us</from>
+				<to>О нас</to>
+			</term>
+			<term>
+				<from>Customer Service</from>
+				<to>Вопросы и ответы</to>
+			</term>
+			<term>
+				<from>Privacy Policy</from>
+				<to>Правила покупки</to>
+			</term>
+			<term>
+				<from>Contact Us</from>
+				<to>Контакты</to>
+			</term>
+			<term>
+				<from>Site Map</from>
+				<to>Карта сайта</to>
+			</term>
+			<term>
+				<from>Search Terms</from>
+				<to>Что у нас ищут</to>
+			</term>
+			<term>
+				<from>Advanced Search</from>
+				<to>Расширенный поиск</to>
+			</term>
+			<term>
+				<from>Orders and Returns</from>
+				<to>Заказы и возвраты</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area10_banner</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №10: Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area10_banner</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №3: Реклама</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_footer_payment</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Подвал. Способы оплаты</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area4_footer_brands</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №4: Подвал. Бренды</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area5_footer_link</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №5: Подвал. Ссылки</new_title>
+			<term>
+				<from><![CDATA[>Responsive layout<]]></from>
+				<to><![CDATA[>Адаптивный макет страницы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>View Cart<]]></from>
+				<to><![CDATA[>Корзина<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>My Account<]]></from>
+				<to><![CDATA[>Личный кабинет<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Order Status<]]></from>
+				<to><![CDATA[>Состояние заказа<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shop By Brand<]]></from>
+				<to><![CDATA[>Бренды<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Trade-in<]]></from>
+				<to><![CDATA[>Обмен старого на новый<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Testimonial<]]></from>
+				<to><![CDATA[>Отзывы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ispum dolor<]]></from>
+				<to><![CDATA[>Пример пункта меню<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customer Service<]]></from>
+				<to><![CDATA[>Вопросы и ответы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Rebate Center<]]></from>
+				<to><![CDATA[>Откаты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Unlimited colors<]]></from>
+				<to><![CDATA[>Множество цветовых вариантов<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Multipurpose<]]></from>
+				<to><![CDATA[>Универсальный<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>newsletter<]]></from>
+				<to><![CDATA[>новостная рассылка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>our blog<]]></from>
+				<to><![CDATA[>наш блог<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Retina ready<]]></from>
+				<to><![CDATA[>Поддержка дисплеев Retina<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_sidebar_banner</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Боковой баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_left_account_protected</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Левый блок: «Ваши персональные данные защищены»</new_title>
+			<term>
+				<from><![CDATA[>Account Protection<]]></from>
+				<to><![CDATA[>Защита персональных данных<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Your account is being Protected<]]></from>
+				<to><![CDATA[>Ваши персональные данные защищены<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_product_collateral_sample</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Товарная карточка. Пример дополнительной вкладки</new_title>
+			<term>
+				<from>A sample of additional collateral tabs that you can insert as a widget in static the backend.</from>
+				<to>Вы можете добавлять свои вкладки на товарную карточку.
+					Содержимое такой вкладки — это самодельный блок.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area07_sample_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №7</new_title>
+			<term>
+				<from>This is a sample content in position EM Area 07. You can add your own content by insert widget into position EM Area 07</from>
+				<to>Самодельный блок «Gala TitanShop. Место №7».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area06_sample_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №6</new_title>
+			<term>
+				<from>This is a sample content in position EM Area 06. You can add your own content by insert widget into position EM Area 06</from>
+				<to>Самодельный блок «Gala TitanShop. Место №6».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_sample_block_alert_us</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Блок «Сообщите нам»</new_title>
+			<term>
+				<from>This is a sample content in position Alert Url. You can add your own content by insert widget into position Alert Url</from>
+				<to>Самодельный блок «Сообщите нам».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_sample_block_extra_hint</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Блок «Уведомление посетителям»</new_title>
+			<term>
+				<from>This is a sample content in position Extra Hint. You can add your own content by insert widget into position Extra Hint</from>
+				<to>Самодельный блок «Уведомление посетителям».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_header_top_ads</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Информация в шапке</new_title>
+			<term>
+				<from>support online:</from>
+				<to><![CDATA[круглосуточный заказ]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_main_left_menu</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Товарное меню слева</new_title>
+			<term>
+				<from>Categories</from>
+				<to>Каталог товаров</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_header_search</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Форма поиска в шапке</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_sidebar_bestseller</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Боковая колонка. Популярные товары</new_title>
+			<term>
+				<from>Best Seller</from>
+				<to>Популярные товары</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area08_sample_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №8</new_title>
+			<term>
+				<from>This is a sample content in position EM Area 08. You can add your own content by insert widget into position EM Area 08</from>
+				<to>Самодельный блок «Gala TitanShop. Место №8».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area09_sample_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №9</new_title>
+			<term>
+				<from>This is a sample content in position EM Area 09. You can add your own content by insert widget into position EM Area 09</from>
+				<to>Самодельный блок «Gala TitanShop. Место №9».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area11_sample_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №11</new_title>
+			<term>
+				<from>This is a sample content in position EM Area 11. You can add your own content by insert widget into position EM Area 11</from>
+				<to>Самодельный блок «Gala TitanShop. Место №11».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area12_sample_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Место №12</new_title>
+			<term>
+				<from>This is a sample content in position EM Area 12. You can add your own content by insert widget into position EM Area 12</from>
+				<to>Самодельный блок «Gala TitanShop. Место №12».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_areamain_banner_electronic_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Электроника 01. Центральная область. Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area13_ourservice_electronic_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Электроника 01. Место №13: «Наши услуги»</new_title>
+			<term>
+				<from>Our Services</from>
+				<to>Наши услуги</to>
+			</term>
+			<term>
+				<from>Water Rain</from>
+				<to>Иван Петров</to>
+			</term>
+			<term>
+				<from>Project Manager</from>
+				<to>Менеджер проектов</to>
+			</term>
+			<term>
+				<from>Aliquam quis risus viverra, ornare ipsum vitae, congue tellus. Vestibulum nunc lorem, scelerisque a tristique non, accumsan ornare eros. Nullam sapien metus, volutpat dictum. Praesent tellus felis, aliquet id augue at, tincidunt vestibulum leo. Aliquam a porttitor nibh, et feugiat enim. Proin consequat ut lectus ac adipiscingMorbi ut neque eu lorem tincidunt varius mollis ut neque. Cras condimentum in lectus</from>
+				<to>В ресторане стоимость обслуживания (15%) включена в счет;
+в баре и кафе - 10-15% счета только за услуги официанта; в такси - чаевые включены в стоимость проезда,
+тем не менее комбинированный тур отражает пейзажный парк.
+Двухпалатный парламент неумеренно поднимает распространенный ледостав.
+Месторождение каменного угля, несмотря на то, что в воскресенье некоторые станции метро закрыты,
+выбирает небольшой Суэцкий перешеек, причем мужская фигурка устанавливается справа от женской.
+Португальская колонизация оформляет культурный провоз кошек и собак.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area14_info_electronic_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Электроника 01. Место №14: информация в 3 колонки
+под блоком «Наши услуги»</new_title>
+			<term>
+				<from>Sweet Menu</from>
+				<to>Русификация</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce Pharetra libero nec mauris molestie sed dictum tortor blandit. Per inceptos himenaeos.</from>
+				<to>Винный фестиваль проходит в приусадебном музее Георгикон, там же бессточное солоноватое озеро надкусывает склон Гиндукуша.
+Портер однородно притягивает комбинированный тур. Температура превышает полярный круг.</to>
+			</term>
+			<term>
+				<from><![CDATA[Fantastic caf&eacute;]]></from>
+				<to>1С:Управление торговлей</to>
+			</term>
+			<term>
+				<from>Daily Specials</from>
+				<to>Яндекс.Маркет</to>
+			</term>
+			<term>
+				<from><![CDATA[View more >]]></from>
+				<to><![CDATA[узнать больше >]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_areamain_banner_fashion_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Одежда 01. Центральная область. Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area15_banner_fashion_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Одежда 01. Место №15: Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_right_home_category_block</id></block>
+		</conditions>
+		<actions>
+			<!--
+				Обратите внимание, что товарное меню располагается именно слева,
+				а в англоязычном названии блока, тем не менее, написано right.
+			 -->
+			<new_title>Gala TitanShop. Боковая колонка. Товарное меню</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_right_home_compare_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Боковая колонка. Блок сравнения товаров</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_right_home_banner_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Боковая колонка. Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_right_home_tag_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Боковая колонка. Популярные метки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_main_banner_lingries_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Нижнее бельё 01. Центральная область. Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area13_banner_lingries_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Нижнее бельё 01. Место №13. Баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>galatitanshop_area_main_two_banner_lingries_style01</id></block>
+		</conditions>
+		<actions>
+			<new_title>Gala TitanShop. Нижнее бельё 01. Центральная область. Двойной баннер</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA[>Sample Block Here ...<]]></from>
+				<to><![CDATA[>Пример блока...<]]></to>
+			</term>
+			<term>
+				<from>alt="sample-banner"</from>
+				<to>alt="пример баннера"</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>widget</type>
+			<widget>
+				<theme>galatitanshop</theme>
+			</widget>
+		</conditions>
+		<actions>
+			<term>
+				<from>#Area\s*(\d+)#u</from>
+				<to>Место №$1</to>
+			</term>
+			<term>
+				<from>Area Main</from>
+				<to>Центральная область</to>
+			</term>
+			<term>
+				<from>Sample Block</from>
+				<to>Пример блока</to>
+			</term>
+			<term>
+				<from>Two Banner</from>
+				<to>Двойной баннер</to>
+			</term>
+			<term>
+				<from>Banner Block</from>
+				<to>Баннер</to>
+			</term>
+			<term>
+				<from>Banner</from>
+				<to>Баннер</to>
+			</term>
+			<term>
+				<from>Best Seller Products</from>
+				<to>Популярные товары</to>
+			</term>
+			<term>
+				<from>Lingries Store</from>
+				<to>Нижнее бельё</to>
+			</term>
+			<term>
+				<from>Lingries Style01</from>
+				<to>Нижнее бельё 01</to>
+			</term>
+			<term>
+				<from>Electronic Store</from>
+				<to>Электроника</to>
+			</term>
+			<term>
+				<from>Electronic Style01</from>
+				<to>Электроника 01</to>
+			</term>
+			<term>
+				<from>Fashion Store</from>
+				<to>Одежда</to>
+			</term>
+			<term>
+				<from>Fashion Style01</from>
+				<to>Одежда 01</to>
+			</term>
+			<term>
+				<from>Supermarket Store</from>
+				<to>Супермаркет</to>
+			</term>
+			<term>
+				<from>Supermarke Style01</from>
+				<to>Супермаркет 01</to>
+			</term>
+			<term>
+				<from>Furniture Store</from>
+				<to>Мебель</to>
+			</term>
+			<term>
+				<from>Furniture Style01</from>
+				<to>Мебель 01</to>
+			</term>
+			<term>
+				<from> Info  </from>
+				<to> Информация </to>
+			</term>
+			<term>
+				<from>Bestseller Tab</from>
+				<to>Вкладка с популярными товарами</to>
+			</term>
+			<term>
+				<from> Bestseller  </from>
+				<to> Популярные товары </to>
+			</term>
+			<term>
+				<from>Hot Products Slider</from>
+				<to>Карусель трендов сезона</to>
+			</term>
+			<term>
+				<from>Hot Products</from>
+				<to>Тренды сезона</to>
+			</term>
+			<term>
+				<from>Special Products Slider</from>
+				<to>Карусель скидочных товаров</to>
+			</term>
+			<term>
+				<from>Special Products</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>Featured Product Slider</from>
+				<to>Карусель премиум-товаров</to>
+			</term>
+			<term>
+				<from>Featured Products</from>
+				<to>Премиум-товары</to>
+			</term>
+			<term>
+				<from>Main Slideshow</from>
+				<to>Главное слайд-шоу</to>
+			</term>
+			<term>
+				<from>Main Slideshow 02</from>
+				<to>Главное слайд-шоу (вариант №2)</to>
+			</term>
+			<term>
+				<from>Main Slideshow 03</from>
+				<to>Главное слайд-шоу (вариант №3)</to>
+			</term>
+			<term>
+				<from>Slideshow</from>
+				<to>Слайд-шоу</to>
+			</term>
+			<term>
+				<from>Top Ads</from>
+				<to>Реклама вверху</to>
+			</term>
+			<term>
+				<from>Ads</from>
+				<to>Реклама</to>
+			</term>
+			<term>
+				<from>Footer</from>
+				<to>Подвал</to>
+			</term>
+			<term>
+				<from>Brands Slider</from>
+				<to>Карусель брендов</to>
+			</term>
+			<term>
+				<from>Brands</from>
+				<to>Бренды</to>
+			</term>
+			<term>
+				<from>Link</from>
+				<to>Ссылки</to>
+			</term>
+			<term>
+				<from>Area Header</from>
+				<to>Шапка</to>
+			</term>
+			<term>
+				<from>Header</from>
+				<to>Шапка</to>
+			</term>
+			<term>
+				<from>Search</from>
+				<to>Форма поиска</to>
+			</term>
+			<term>
+				<from>Ajax Products</from>
+				<to>Товары с асинхронной загрузкой</to>
+			</term>
+			<term>
+				<from>Latest Deal Tab</from>
+				<to>Вкладка с товарами текущей акции</to>
+			</term>
+			<term>
+				<from>Latest Products Slider</from>
+				<to>Карусель новинок (latest)</to>
+			</term>
+			<term>
+				<from>Latest Products</from>
+				<to>Новинки (latest)</to>
+			</term>
+			<term>
+				<from>New Arrivals Tab</from>
+				<to>Вкладка с новыми поступлениями</to>
+			</term>
+			<term>
+				<from>New Products Slider</from>
+				<to>Карусель новинок (new)</to>
+			</term>
+			<term>
+				<from>New Products</from>
+				<to>Новинки (new)</to>
+			</term>
+			<term>
+				<from>Sale Products Slider</from>
+				<to>Карусель товаров со скидками</to>
+			</term>
+			<term>
+				<from>Sale Products</from>
+				<to>Товары со скидками</to>
+			</term>
+			<term>
+				<from>Special Big Image Slider</from>
+				<to>Карусель горячих скидок (большие картинки)</to>
+			</term>
+			<term>
+				<from>Special Big Image</from>
+				<to>Горячие скидки (большие картинки)</to>
+			</term>
+			<term>
+				<from>Tabs Products</from>
+				<to>Содержимое вкладок</to>
+			</term>
+			<term>
+				<from>Tabs</from>
+				<to>Вкладки</to>
+			</term>
+			<term>
+				<from>Area Navigation</from>
+				<to>Область навигации</to>
+			</term>
+			<term>
+				<from>Horizontal Menu</from>
+				<to>Горизонтальное меню</to>
+			</term>
+			<term>
+				<from>Home</from>
+				<to>Главная страница</to>
+			</term>
+			<term>
+				<from>Category Block</from>
+				<to>Товарные разделы</to>
+			</term>
+			<term>
+				<from>Compare Block</from>
+				<to>Товары для сравнения</to>
+			</term>
+			<term>
+				<from>Tag Block</from>
+				<to>Метки</to>
+			</term>
+			<term>
+				<from>Main Left Menu</from>
+				<to>Главное меню слева</to>
+			</term>
+			<term>
+				<from>Latest Deals</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>Our Service</from>
+				<to>Наши услуги</to>
+			</term>
+			<term>
+				<from>Payment</from>
+				<to>Способы оплаты</to>
+			</term>
+			<term>
+				<from>Big Image Style01</from>
+				<to>Большая картинка 01</to>
+			</term>
+			<term>
+				<from>Big Image</from>
+				<to>Большая картинка</to>
+			</term>
+			<term>
+				<from>Area Right</from>
+				<to>Область справа</to>
+			</term>
+			<term>
+				<from>- Left -</from>
+				<to>- Левая колонка -</to>
+			</term>
+			<term>
+				<from>- Info -</from>
+				<to>- Информация -</to>
+			</term>
+			<term>
+				<from>Acount Protected</from>
+				<to>Персональные данные защищены</to>
+			</term>
+			<term>
+				<from>Product Collateral</from>
+				<to>Сопутствующие товары</to>
+			</term>
+			<term>
+				<from>Sample 1</from>
+				<to>Пример №1</to>
+			</term>
+			<term>
+				<from>Sample 2</from>
+				<to>Пример №2</to>
+			</term>
+			<term>
+				<from>Alert Url</from>
+				<to>Сообщите нам</to>
+			</term>
+			<term>
+				<from>Best sellers</from>
+				<to>Популярные товары</to>
+			</term>
+			<term>
+				<from>Best Sellers</from>
+				<to>Популярные товары</to>
+			</term>
+			<term>
+				<from>Extra Hint</from>
+				<to>Уведомление посетителям</to>
+			</term>
+			<term>
+				<from>Latest deals</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>Best seller</from>
+				<to>Популярные</to>
+			</term>
+			<term>
+				<from>New Arrivals</from>
+				<to>Новинки</to>
+			</term>
+			<term>
+				<from>Special</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>Featured</from>
+				<to>Премиум</to>
+			</term>
+			<term>
+				<from>Sale</from>
+				<to>Скидки</to>
+			</term>
+			<term>
+				<from>Latest</from>
+				<to>Новинки</to>
+			</term>
+			<term>
+				<from> - </from>
+				<to>. </to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>galatianshop_home_style01</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<!-- Gala TitanShop Magento Theme - Homepage 1 Column -->
+			<new_title>Gala TitanShop. Главная страница с единственной колонкой</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>galatitanshop_home</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<!-- Gala TitanShop Magento Theme - Homepage -->
+			<new_title>Gala TitanShop. Главная страница с двумя колонками</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>galatitanshop_home_3columns</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<!-- Gala TitanShop Magento Theme - Homepage Three Columns -->
+			<new_title>Gala TitanShop. Главная страница с тремя колонками</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>galatitanshop_typography</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<!-- Gala TitanShop Typography -->
+			<new_title>Gala TitanShop. Примеры шрифтов и стилей текста</new_title>
+			<term>
+				<from>General Elements</from>
+				<to>Основные элементы HTML</to>
+			</term>
+			<term>
+				<from>#Heading (\d)#u</from>
+				<to>Заголовок $1</to>
+			</term>
+			<term>
+				<from>Bullet List</from>
+				<to>Пункт маркированного списка</to>
+			</term>
+			<term>
+				<from>Number List</from>
+				<to>Пункт нумерованного списка</to>
+			</term>
+			<term>
+				<from>Definition title dt</from>
+				<to><![CDATA[Содержимое тега dt]]></to>
+			</term>
+			<term>
+				<from>Defination description dd</from>
+				<to><![CDATA[Содержимое тега dd]]></to>
+			</term>
+			<term>
+				<from>Code tag:</from>
+				<to><![CDATA[Содержимое тега code:]]></to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</from>
+				<to>На улицах и пустырях мальчики запускают воздушных змеев, а девочки играют деревянными ракетками с многоцветными рисунками в ханэ, при этом деформация прочно совершает парк Варошлигет. Официальный язык недоступно надкусывает теплый широколиственный лес. Подземный сток оформляет распространенный кристаллический фундамент. На коротко подстриженной траве можно сидеть и лежать, но население дегустирует храмовый комплекс, посвященный дилмунскому богу Енки.</to>
+			</term>
+			<term>
+				<from>block quote</from>
+				<to><![CDATA[Содержимое тега blockquote:]]></to>
+			</term>
+			<term>
+				<from>element with class</from>
+				<to>элемент класса</to>
+			</term>
+			<term>
+				<from>Tables</from>
+				<to>Таблицы</to>
+			</term>
+			<term>
+				<from>Table with class</from>
+				<to>Таблица класса</to>
+			</term>
+			<term>
+				<from>THEAD TH</from>
+				<to><![CDATA[Заголовок таблицы (th)]]></to>
+			</term>
+			<term>
+				<from>TBODY TD</from>
+				<to><![CDATA[Ячейка таблицы (td)]]></to>
+			</term>
+			<term>
+				<from>Custom CSS Classes</from>
+				<to>Дополнительные классы CSS</to>
+			</term>
+			<term>
+				<from><![CDATA[<p class="small">tag <strong>small</strong> and class <strong>.small</strong></p>]]></from>
+				<to><![CDATA[<p class="small">тег <strong>small</strong> и класс <strong>.small</strong></p>]]></to>
+			</term>
+			<term>
+				<from>paragraph with class</from>
+				<to>параграф класса</to>
+			</term>
+			<term>
+				<from>always has margin-bottom = 0</from>
+				<to>всегда имеет margin-bottom = 0</to>
+			</term>
+			<term>
+				<from>Add class</from>
+				<to>Класс</to>
+			</term>
+			<term>
+				<from>to hide element when screen's width less than</from>
+				<to>скрывает элемент при ширине экрана меньше</to>
+			</term>
+			<term>
+				<from>px.</from>
+				<to> пикселей</to>
+			</term>
+			<term>
+				<from>This block will disappear when resize window less than</from>
+				<to>Этот блок исчезнет при ширине экрана меньше</to>
+			</term>
+			<term>
+				<from>Icons</from>
+				<to>Иконки</to>
+			</term>
+			<term>
+				<from>Logo</from>
+				<to>Логотипы способов оплаты</to>
+			</term>
+			<term>
+				<from>Label</from>
+				<to>Ярлыки</to>
+			</term>
+			<term>
+				<from>image with class</from>
+				<to>картинка класса</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>galatitanshop_widgets</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<!-- Gala TitanShop Widgets -->
+			<new_title>Gala TitanShop. Примеры виджетов</new_title>
+			<term>
+				<from>Demo EM Slideshow Widget</from>
+				<to>Виджет «Слайд-шоу» (EM Slideshow)</to>
+			</term>
+			<term>
+				<from>Demo EM Featured Products Widget</from>
+				<to>Виджет «Премиум-товары» (EM Featured Products)</to>
+			</term>
+			<term>
+				<from>Grid View with column count = 2</from>
+				<to>Товары плиткой в 2 колонки</to>
+			</term>
+			<term>
+				<from>Grid View</from>
+				<to>Товары плиткой</to>
+			</term>
+			<term>
+				<from>List View with column count = 2</from>
+				<to>Товары списком в 2 колонки</to>
+			</term>
+			<term>
+				<from>List View</from>
+				<to>Товары списком</to>
+			</term>
+			<term>
+				<from>Demo EM Bestseller Products Widget</from>
+				<to>Виджет «Популярные товары» (EM Bestseller Product)</to>
+			</term>
+			<term>
+				<from>"Bestseller Products"</from>
+				<to>"Популярные товары"</to>
+			</term>
+			<term>
+				<from>"New Products"</from>
+				<to>"Новинки"</to>
+			</term>
+			<term>
+				<from>Demo EM Sale Products Widget</from>
+				<to>Виджет «Распродажа» (EM Sale Products)</to>
+			</term>
+			<term>
+				<from>Demo EM Slider Widget</from>
+				<to>Виджет «Карусель» (EM Slider)</to>
+			</term>
+			<term>
+				<from>Vertical Sliding</from>
+				<to>Вертикальная карусель</to>
+			</term>
+			<term>
+				<from>Horizontal Sliding</from>
+				<to>Горизонтальная карусель</to>
+			</term>
+			<term>
+				<from>Demo EM Tabs Widget</from>
+				<to>Виджет «Вкладки» (EM Tabs)</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA[<!--Empty-->]]></from>
+				<from><![CDATA[<!-- пусто -->]]></from>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>em.megamenupro</type>
+			<em.megamenupro>
+				<title>Sample Horizontal Menu</title>
+			</em.megamenupro>
+		</conditions>
+		<actions>
+			<new_title>Пример горизонтального меню</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>em.megamenupro</type>
+			<em.megamenupro>
+				<title>Sample Vertical Menu Left</title>
+			</em.megamenupro>
+		</conditions>
+		<actions>
+			<new_title>Пример вертикального меню в левой колонке</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>em.megamenupro</type>
+			<em.megamenupro>
+				<title>Sample Vertical Menu Right</title>
+			</em.megamenupro>
+		</conditions>
+		<actions>
+			<new_title>Пример вертикального меню в правой колонке</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>em.megamenupro</type>
+			<em.megamenupro>
+				<title>Gala TitanShop Horizontal Menu</title>
+			</em.megamenupro>
+		</conditions>
+		<actions>
+			<new_title>Главное меню в шапке (горизонтальное)</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>em.megamenupro</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>First Link Item</from>
+				<to>Первый пункт</to>
+			</term>
+			<term>
+				<from>1 Column</from>
+				<to>Одна колонка</to>
+			</term>
+			<term>
+				<from>#Link ([\d\.]+)#u</from>
+				<to>Пункт №$1</to>
+			</term>
+			<term>
+				<from>2 Columns</from>
+				<to>Две колонки</to>
+			</term>
+			<term>
+				<from>3 Columns</from>
+				<to>Три колонки</to>
+			</term>
+			<term>
+				<from><![CDATA[This is sample content of "Text" menu item. You can enter your own text here. It supports <strong>WYSIWYG Editor</strong> as well as <em>magento directive</em> (block, widget...)]]></from>
+				<to><![CDATA[Пример пункта меню с длинным текстом.
+Вы можете использовать здесь <strong>теги HTML</strong>,
+а также вставлять виджеты и самодельные блоки.]]></to>
+			</term>
+			<term>
+				<from>First Column contains only item "Text"</from>
+				<to>Первая колонка содержит только текст</to>
+			</term>
+			<term>
+				<from>Second Column</from>
+				<to>Вторая колонка</to>
+			</term>
+			<term>
+				<from>3rd Column</from>
+				<to>Третья колонка</to>
+			</term>
+			<term>
+				<from><![CDATA[Below is <code>]]></from>
+				<to><![CDATA[Содержимое ниже получено кодом: <code>]]></to>
+			</term>
+			<term>
+				<from>Below is static links</from>
+				<to>Ниже расположены ссылки</to>
+			</term>
+			<term>
+				<from>Mixed Columns</from>
+				<to>Различные колонки</to>
+			</term>
+			<term>
+				<from>Column width</from>
+				<to>Ширина колонки</to>
+			</term>
+			<term>
+				<from><![CDATA[Below is 2 <strong>Link</strong> items:]]></from>
+				<to><![CDATA[Ниже расположены две <strong>ссылки</strong>:]]></to>
+			</term>
+			<term>
+				<from>Categories</from>
+				<to>Товарные разделы</to>
+			</term>
+			<term>
+				<from><![CDATA[Use <strong>Rows Layout</strong> as parent <strongText</strong> for purpose of setting <em>spacing=10</em>]]></from>
+				<to><![CDATA[<strong>горизонтальный макет</strong>]]></to>
+			</term>
+			<term>
+				<from>Clothes</from>
+				<to>Одежда</to>
+			</term>
+			<term>
+				<from>Shoes</from>
+				<to>Обувь</to>
+			</term>
+			<term>
+				<from>Accessories</from>
+				<to>Аксессуары</to>
+			</term>
+			<term>
+				<from>Watch</from>
+				<to>Часы</to>
+			</term>
+			<term>
+				<from>Laptop / computer</from>
+				<to>Компьютеры</to>
+			</term>
+			<term>
+				<from><![CDATA[Toys, Kids & Baby]]></from>
+				<to>Детские товары</to>
+			</term>
+			<term>
+				<from><![CDATA[Home garden & Tools]]></from>
+				<to>Для дачи</to>
+			</term>
+			<term>
+				<from>Jewelry</from>
+				<to>Украшения</to>
+			</term>
+			<term>
+				<from>Musical instrument</from>
+				<to>Музыкальные инструменты</to>
+			</term>
+			<term>
+				<from>Sport</from>
+				<to>Спорт</to>
+			</term>
+			<term>
+				<from>Home</from>
+				<to>Главная</to>
+			</term>
+			<term>
+				<from>QUICK SHOP</from>
+				<to>Популярные разделы</to>
+			</term>
+			<term>
+				<from>Active Deals</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>watch</from>
+				<to>Часы</to>
+			</term>
+			<term>
+				<from>shoes</from>
+				<to>Обувь</to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. Proin ac orci ipsum. Sed quis vehicula est. Nunc congue nisi vitae mi placerat pharetra. massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi.</p>
+<p>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. </p>
+<p>Proin ac orci ipsum. Sed quis vehicula est. Nunc congue nisi vitae mi placerat pharetra. massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi.</p>]]></from>
+				<to><![CDATA[Закрытый аквапарк, при том, что королевские полномочия находятся в руках исполнительной власти - кабинета министров, притягивает официальный язык, хорошо, что в российском посольстве есть медпункт. Круговорот машин вокруг статуи Эроса, при том, что королевские полномочия находятся в руках исполнительной власти - кабинета министров, существенно оформляет рельеф, несмотря на это, обратный обмен болгарской валюты при выезде ограничен. Когда из храма с шумом выбегают мужчины в костюмах демонов и смешиваются с толпой, пустыня применяет небольшой знаменитый Фогель-маркет на Оудевард-плаатс. Месторождение ураново-радиевых руд традиционно совершает вулканизм. Кукуруза вероятна.
+Черный эль, как бы это ни казалось парадоксальным, выбирает кустарничек.]]></to>
+			</term>
+			<term>
+				<from>>BACKGROUND PATERNS</from>
+				<to>Пример заголовка</to>
+			</term>
+			<term>
+				<from>PRODUCT LABELS</from>
+				<to>Ещё заголовок</to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Nunc pharetra lorem eget sapien ornare id placerat massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi. Morbi ullamcorper nulla id lorem rhoncus blandit. Nunc molestie pretium pharetra. Suspendisse in elit dui, ac vehicula erat. Vivamus consequat risus ut dui feugiat eleifend.<br/>massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi.  </p>]]></from>
+				<to><![CDATA[<p>Здесь работали Карл Маркс и Владимир Ленин, но официальный язык перевозит кит. Круговорот машин вокруг статуи Эроса однородно вызывает ураган, также не надо забывать об островах Итуруп, Кунашир, Шикотан и грядах Хабомаи. Административно-территориальное деление, на первый взгляд, недоступно оформляет архипелаг. Мясо-молочное животноводство многопланово входит особый вид куниц, там же можно увидеть танец пастухов с палками, танец девушек с кувшином вина на голове и т.д.. </p>]]></to>
+			</term>
+			<term>
+				<from>digital</from>
+				<to>Гаджеты</to>
+			</term>
+			<term>
+				<from>RETINA READY</from>
+				<to>Полностраничное кэширование</to>
+			</term>
+			<term>
+				<from>FULLY RESPONSIVE</from>
+				<to>1С: Управление торговлей</to>
+			</term>
+			<term>
+				<from>UNLIMITED COLORS</from>
+				<to>Яндекс.Маркет</to>
+			</term>
+			<term>
+				<from>CUSTOM WIDGETS</from>
+				<to>Открытый исходный код</to>
+			</term>
+			<term>
+				<from>CUSTOM COLORS</from>
+				<to>Все функции Magento CE</to>
+			</term>
+			<term>
+				<from>GOOGLE FONTS</from>
+				<to>МойСклад</to>
+			</term>
+			<term>
+				<from>Here is some content with side images</from>
+				<to>Пример текста с боковыми картинками</to>
+			</term>
+			<term>
+				<from>Duis porttito</from>
+				<to>Российская сборка Magento</to>
+			</term>
+			<term>
+				<from>Fusce ligulani</from>
+				<to>Российская сборка Magento</to>
+			</term>
+			<term>
+				<from>Duis comm</from>
+				<to>Пример заголовка</to>
+			</term>
+			<term>
+				<from>You can use hightlight some content</from>
+				<to>На этот текст должны обратить внимание</to>
+			</term>
+			<term>
+				<from>Mauris tincidunts malesuada pellentesque fermentum mi felis nunc justo lacus feugiat non vehicula sit amet.</from>
+				<to>Тюлень отталкивает туристический памятник Средневековья, кроме этого, здесь есть ценнейшие коллекции мексиканских масок, бронзовые и каменные статуи из Индии и Цейлона, бронзовые барельефы и изваяния, созданные мастерами Экваториальной Африки пять-шесть веков назад. </to>
+			</term>
+			<term>
+				<from>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. Proin ac orci ipsum. Sed quis vehicula est. Nunc congue nisi vitae mi placerat pharetra.<br/>nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis
+				nibh iaculis odio, ac eleifend odio mi id nisl.</from>
+				<to>Основная магистраль проходит с севера на юг от Шкодера через Дуррес до Влёры, после поворота дождливая погода отражает культурный небольшой парк с дикими животными к юго-западу от Манамы, хотя, например, шариковая ручка, продающаяся в Тауэре с изображением стражников Тауэра и памятной надписью, стоит 36 $ США. Кандым, как бы это ни казалось парадоксальным, неумеренно связывает шведский кит, в начале века джентльмены могли ехать в них, не снимая цилиндра.</to>
+			</term>
+			<term>
+				<from>cellphone</from>
+				<to>Телефоны</to>
+			</term>
+			<term>
+				<from>Blog</from>
+				<to>Блог</to>
+			</term>
+			<term>
+				<from>AJAXCART</from>
+				<to>Российская сборка Magento</to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Text</strong> item contains the block <em>megamenupro/catalognavigation</em> already has margin so we place it outside the <strong>Rows Layout</strong>]]></from>
+				<to><![CDATA[<strong>Элемент меню</strong>, содержащий блок <em>megamenupro/catalognavigation</em>, уже имеет отступы, размещаем его за пределами <strong>основного макета</strong>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. Proin ac orci ipsum. Sed quis vehicula est. Nunc congue nisi vitae mi placerat pharetra. massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi.</p>]]></from>
+				<to><![CDATA[<p>Бессточное солоноватое озеро, по определению, отражает расовый состав, хотя, например, шариковая ручка, продающаяся в Тауэре с изображением стражников Тауэра и памятной надписью, стоит 36 $ США. Рекомендуется совершить прогулку на лодке по каналам города и Озеру Любви, однако не надо забывать, что поваренная соль превышает широкий парк Варошлигет. Пустыня прекрасно иллюстрирует урбанистический беспошлинный ввоз вещей и предметов в пределах личной потребности.</p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. </p>]]></from>
+				<to><![CDATA[<p>Мясо-молочное животноводство, несмотря на внешние воздействия, однократно. Денежная единица, в первом приближении, перевозит термальный источник. Месторождение каменного угля отталкивает символический центр современного Лондона, при этом к шесту прикрепляют ярко раскрашенных бумажных или матерчатых карпов, по одному на каждого мальчика в семье. </p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Proin ac orci ipsum. Sed quis vehicula est. Nunc congue nisi vitae mi placerat pharetra. massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi.</p>]]></from>
+				<to><![CDATA[<p>Крокодиловая ферма Самут Пракан - самая большая в мире, однако Бахрейн связывает различный Бенгальский залив. Солнечная радиация прочно надкусывает эфемероид, и не надо забывать, что время здесь отстает от московского на 2 часа.</p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. Proin ac orci ipsum. Sed quis vehicula est. Nunc congue nisi vitae mi placerat pharetra.<br/>nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis
+nibh iaculis odio, ac eleifend odio mi id nisl. </p>]]></from>
+				<to><![CDATA[<p>Снежный покров точно вызывает эфемероид. Замкнутая нация многопланово начинает холодный вечнозеленый кустарник, при этом разрешен провоз 3 бутылок крепких спиртных напитков, 2 бутылок вина; 1 л духов в откупоренных флаконах, 2 л одеколона в откупоренных флаконах. Геологическое строение, несмотря на внешние воздействия, постоянно.</p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Pellentesque fermentum mi nunc justo feugiat non vehicula sit amet, dapibus sit amet ipsum. </p>]]></from>
+				<to><![CDATA[<p>Архипелаг поднимает городской широколиственный лес, потому что именно здесь можно попасть из франкоязычной, валлонской части города во фламандскую.</p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Nunc pharetra lorem eget sapien ornare id placerat massa lacinia. Nulla facilisi. Praesent nisi odio, posuere ac varius eu, pellentesque sit amet nisi. Morbi ullamcorper nulla id lorem rhoncus blandit. Nunc molestie pretium pharetra. Suspendisse in elit dui, ac vehicula erat. Vivamus consequat risus ut dui feugiat eleifend.<br/>nibh iaculis odio, ac eleifend odio mi id nisl.<br/>massa lacinia ulla facilisi praesent nisi odio. </p>]]></from>
+				<to><![CDATA[<p>Восточно-Африканское плоскогорье изящно надкусывает небольшой альбатрос. Рыболовство декларирует бахрейнский динар. Для гостей открываются погреба Прибалатонских винодельческих хозяйств, известных отличными сортами вин "Олазрислинг" и "Сюркебарат", в этом же году нижнее течение текстологически дегустирует цикл.</p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Donec sollicitudin, lectus vel sodales consectetur, libero nibh iaculis odio, ac eleifend odio mi id nisl. Etiam felis leo, vulputate in vestibulum varius, accumsan tempor ligula. Suspendisse mauris nibh, mollis ac tempus sit amet, facilisis in nunc. Proin ac orci ipsum.</p>]]></from>
+				<to><![CDATA[<p>Бахрейн, несмотря на то, что в воскресенье некоторые станции метро закрыты, перевозит холодный закрытый аквапарк. Типичная европейская буржуазность и добропорядочность связывает живописный двухпалатный парламент, а чтобы сторож не спал и был добрым, ему приносят еду и питье, цветы и ароматные палочки.</p>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum cursus ultricies. Quisque semper, arcu et, non semper sapien lacus ut nulla. Integer tristique vestibulum magna, sit amet vestibulum purus vestibulum id. Cras cursus blandit tincidunt. Class aptent taciti sociosqu ad litora torquent, per inceptos himenaeos. Aenean nunc mauris, mattis faucibus porta ornare, mattis ut nisl.<br/>tristique vestibulum magna, sit amet vestibulum purus vestibulum id. Cras cursus tincidunt. Class aptent taciti sociosqu ad litora torquent nostra, per inceptos himenaeos. Aenean nunc mauris, mattis faucibus, sit amet vestibulum purus. </p>]]></from>
+				<to><![CDATA[<p>Фудзияма вызывает глубокий эфемероид, а чтобы сторож не спал и был добрым, ему приносят еду и питье, цветы и ароматные палочки. Из первых блюд распространены супы-пюре и бульоны, но подают их редко, тем не менее древняя платформа с сильно разрушенными складчатыми образованиями надкусывает ураган, в прошлом здесь был монетный двор, тюрьма, зверинец, хранились ценности королевского двора.</p>]]></to>
+			</term>
+			<term>
+				<from>Best sellers</from>
+				<to>Популярные товары</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>layout_update</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Latest deals</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>Latest Deals</from>
+				<to>Горячие скидки</to>
+			</term>
+			<term>
+				<from>Best seller</from>
+				<to>Популярное</to>
+			</term>
+			<term>
+				<from>Best Sellers</from>
+				<to>Популярное</to>
+			</term>
+			<term>
+				<from>New Arrivals</from>
+				<to>Новинки</to>
+			</term>
+			<term>
+				<from><![CDATA[>Categories<]]></from>
+				<to><![CDATA[>Разделы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured,]]></from>
+				<to><![CDATA[>Премиум,]]></to>
+			</term>
+		</actions>
+	</rule>
+</dictionary>

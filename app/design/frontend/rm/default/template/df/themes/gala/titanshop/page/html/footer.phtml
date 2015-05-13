@@ -1,0 +1,18 @@
+<?php
+/**
+ * Gala Titanshop
+ * @link http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636
+ * @link http://magento-forum.ru/forum/352/
+ * убираем из подвала ссылку на сайт производителя
+ */
+?>
+<div class="footer-container">
+    <div class="footer row">
+       	<div class="footer-address col-sm-12">
+            <address><?php echo $this->getCopyright() ?></address>
+		</div>
+		<div class="col-sm-12">
+		<?php echo $this->getChildHtml() ?>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<config>
+	<menu>
+		<system>
+			<children>
+				<api>
+					<children>
+						<users translate='title' module='df_api'>
+							<title>Web Service Users</title>
+						</users>
+						<roles translate='title' module='df_api'>
+							<title>Web Service Roles</title>
+						</roles>
+					</children>
+				</api>
+			</children>
+		</system>
+	</menu>
+</config>

@@ -1,0 +1,38 @@
+.customer-account-edit {
+	/** Скрываем избыточный заголовок «Edit Account Information» */
+	h2.legend {
+		display: none;
+	}
+}
+
+.wishlist-index-index {
+	#wishlist-table {
+		/** Заголовок «товары и Ваши комментарии к ним» */
+		th:nth-child(2) {
+			text-transform: none;
+		}
+	}
+}
+
+.wishlist-index-share {
+	.my-account {
+		/** Скрываем избыточный заголовок «Информация для публикации» */
+		h2.legend {
+			display: none;
+		}
+	}
+}
+
+.wishlist-shared-index {
+	.page-title {
+		/**
+			Некоторые оформительские темы (в частности, так делает Gala Titanshop)
+			могут отображать данный заголовок в нижнем регистре.
+			Однако этот заголовок содержит имя покупателя,
+			и отображать его в нижнем регистре поэтому нельзя.
+		*/
+		h1 {
+			text-transform: none;
+		}
+	}
+}

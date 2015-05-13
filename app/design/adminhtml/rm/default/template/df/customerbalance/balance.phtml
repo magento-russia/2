@@ -1,0 +1,10 @@
+<?php /** @var Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balance $this */ ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-account"><?php echo $this->helper('df_customerbalance')->__('Store Credit Balance')?></h4>
+    </div>
+    <div class="fieldset">
+        <?php echo $this->getChildHtml('grid')?>
+        <?php echo $this->getDeleteOrphanBalancesButton() ?>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<!--@subject Новый отзыв на товар в магазине {{var store.getFrontendName()}} @-->
+<!--@vars
+{"htmlescape var=$product.getName()":"Название товара",
+"htmlescape var=$product.getProductUrl()":"Адрес товара на витрине",
+"htmlescape var=$product.getSku()":"Артикул товара",
+"htmlescape var=$review.getNickname()":"Имя автора отзыва",
+"htmlescape var=$review.getTitle()":"Отзыв кратко",
+"var review.getDetailAsHtml()":"Отзыв подробно",
+"var store.getFrontendName()":"Название магазина",
+"store url=\"adminhtml/catalog_product_review/edit/\" id=$review.getId() ret=pending":"Адрес экрана модерации отзыва"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<p>Поступил новый отзыв на товар в магазине «{{var store.getFrontendName()}}».</p>
+<p>Для модерации перейдите по ссылке:
+<a
+	href='{{store url="adminhtml/catalog_product_review/edit/" id=$review.getId() ret=pending}}'
+	style="color:#1E7EC8;"
+>{{store url="adminhtml/catalog_product_review/edit/" id=$review.getId() ret=pending}}</a>
+</p>
+<table cellpadding='4'>
+	<tr>
+		<td width='150' valign='top'>Товар:</td>
+		<td>
+			<a href='{{htmlescape var=$product.getProductUrl()}}' style="color:#1E7EC8;"
+			>{{htmlescape var=$product.getName()}}</a> ({{htmlescape var=$product.getSku()}})
+		</td>
+	</tr>
+	<tr>
+		<td width='150' valign='top'>Автор отзыва:</td>
+		<td>{{htmlescape var=$review.getNickname()}}</td>
+	</tr>
+	<tr>
+		<td width='150' valign='top'>Отзыв кратко:</td>
+		<td>{{htmlescape var=$review.getTitle()}}</td>
+	</tr>
+	<tr>
+		<td width='150' valign='top'>Отзыв подробно:</td>
+		<td>{{var review.getDetailAsHtml()}}</td>
+	</tr>
+ </table>

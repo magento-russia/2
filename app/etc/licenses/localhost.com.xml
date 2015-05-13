@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<df>
+		<license>
+			<features>all</features>
+			<domains>localhost.com</domains>
+			<expired></expired>
+			<created>2012-04-13T10:20:50+04:00</created>
+			<signature><![CDATA[6c70075228b4b6c8541836447ad28fc9]]></signature>
+		</license>
+	</df>
+</xml>

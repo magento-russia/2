@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<layout>
+    <adminhtml_logging_index>
+        <reference name='content'>
+            <block type='df_logging/adminhtml_container' name='rm.logging.log' template='widget/grid/container.phtml'>
+                <block type='df_logging/adminhtml_index_grid' name='rm.logging.log.grid'/>
+                <action method='setHeaderText' translate='text'>
+                    <text>Admin Actions Log</text>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_logging_index>
+    <adminhtml_logging_grid>
+        <block type='df_logging/adminhtml_index_grid' name='root'/>
+    </adminhtml_logging_grid>
+    <adminhtml_logging_details>
+        <reference name='content'>
+            <block type='df_logging/adminhtml_details' name='rm.logging.details' template='df/logging/details.phtml'>
+                <block type='df_logging/adminhtml_details_grid' name='rm.logging.details.grid' as='details_grid'/>
+            </block>
+        </reference>
+    </adminhtml_logging_details>
+    <adminhtml_logging_archive>
+        <reference name='content'>
+            <block type='df_logging/adminhtml_container' name='rm.logging.archive' template='widget/grid/container.phtml'>
+                <block type='df_logging/adminhtml_archive_grid' name='rm.logging.archive.grid'/>
+                <action method='setHeaderText' translate='text'>
+                    <text>Admin Actions Log Archive</text>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_logging_archive>
+    <adminhtml_logging_archivegrid>
+        <block type='df_logging/adminhtml_archive_grid' name='root'/>
+    </adminhtml_logging_archivegrid>
+</layout>

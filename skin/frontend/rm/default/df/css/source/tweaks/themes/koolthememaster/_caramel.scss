@@ -1,0 +1,83 @@
+body.df-theme-koolthememaster-caramel {
+	#nav {
+		.brands {
+			a {
+				background:{
+					position: -335px -74px;
+				}
+			}
+		}
+	}
+	#minicart {
+		.empty {
+			display: none;
+		}
+	}
+	.quickllook {
+		text-transform: lowercase;
+	}
+	.add-to-box {
+		padding:{
+			left: 0;
+		}
+	}
+	.quick_cart {
+		.add {
+			left: 4em;
+		}
+		.dec {
+			left: 0;
+		}
+	}
+	.product-view {
+		.add {
+			left: 56px;
+		}
+		.dec {
+			left: 0;
+		}
+		a.prod-prev
+		,a.prod-next {
+			font-size: 13px;
+			padding:{
+				bottom: 9px;
+				top: 3px;
+			}
+		}
+	}
+	.add-to-cart {
+		.qty {
+			margin:{
+				left: 9px;
+			}
+		}
+		#reset_btn {
+			display: none;
+		}
+	}
+	.price {
+		text-transform: lowercase;
+	}
+	.actions {
+		.cat_loader {
+			.cart_msg {
+				width: 275px;
+				padding:{
+					top:15px;
+				}
+				height: 27px;
+				img {
+					margin:{
+						top: 0;
+					}
+				}
+			}
+		}
+	}
+	.pro-right {
+		width: 170px;
+		.addthis {
+			width: 155px;
+		}
+	}
+}

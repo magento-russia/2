@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_DeliveryUa>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_DeliveryUa>
+	</modules>
+	<global>
+		<blocks><df_delivery_ua><class>Df_DeliveryUa_Block</class></df_delivery_ua></blocks>
+		<helpers><df_delivery_ua><class>Df_DeliveryUa_Helper</class></df_delivery_ua></helpers>
+		<models><df_delivery_ua><class>Df_DeliveryUa_Model</class></df_delivery_ua></models>
+	</global>
+	<default>
+		<carriers>
+			<df-delivery-ua>
+				<active>0</active>
+				<model>df_delivery_ua/carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>Деливери</title>
+			</df-delivery-ua>
+		</carriers>
+		<df_shipping>
+			<delivery-ua>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__declared_value_percent>0</admin__declared_value_percent>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>1</frontend__sallowspecific>
+				<frontend__specificcountry>UA</frontend__specificcountry>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</delivery-ua>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-delivery-ua>
+				<module>df_delivery_ua</module>
+				<title>Деливери</title>
+				<url>http://magento-forum.ru/forum/264/</url>
+			</df-delivery-ua>
+		</features>
+		<shipping>
+			<delivery-ua>
+				<allowed-methods>
+					<!--
+						Идентификаторам способов доставки достаточно быть уникальными
+						лишь в пределах модуля доставки,потому что система формирует уникальный идентификатор способа доставки
+						объединением идентификатором модуля доставки и способа доставки.
+					-->
+					<courier-to-home>
+						<title>До дома</title>
+						<class>df_delivery_ua/method_toHome</class>
+					</courier-to-home>
+					<courier-to-point-of-issue>
+						<title>До пункта выдачи</title>
+						<class>df_delivery_ua/method_toPointOfIssue</class>
+					</courier-to-point-of-issue>
+				</allowed-methods>
+			</delivery-ua>
+		</shipping>
+	</df>
+</config>

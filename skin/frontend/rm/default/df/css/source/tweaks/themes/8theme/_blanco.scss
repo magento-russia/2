@@ -1,0 +1,34 @@
+body.df-theme-8theme-blanco {
+	.df-checkout-ergonomic-page {
+		.col-right {
+			width: 0;
+		}
+		.col-main {
+			width: 940px;
+		}
+	}
+	.footer {
+		.f-left {
+			width: 650px;
+		}
+	}
+	.header {
+		.header-left {
+			width: 260px;
+		}
+		.header-right {
+			width: 415px;
+			.links {
+			}
+		}
+	}
+	.block {
+		.actions {
+			a {
+				float: left;
+				width: 50%;
+				text-align: left;
+			}
+		}
+	}
+}

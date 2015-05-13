@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_SalesRule>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_SalesRule>
+	</modules>
+	<global>
+		<blocks><df_sales_rule><class>Df_SalesRule_Block</class></df_sales_rule></blocks>
+		<helpers><df_sales_rule><class>Df_SalesRule_Helper</class></df_sales_rule></helpers>
+		<models>
+			<df_sales_rule><class>Df_SalesRule_Model</class></df_sales_rule>
+			<salesrule>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						заплатка для опции «Группа товаров с определёнными условиями».
+					-->
+					<rule_condition_product_subselect>Df_SalesRule_Model_Rule_Condition_Product_Subselect</rule_condition_product_subselect>
+				</rewrite>
+			</salesrule>
+		</models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_SalesRule><files><default>Df_SalesRule.csv</default></files></Df_SalesRule>
+			</modules>
+		</translate>
+	</adminhtml>
+	<default>
+		<df_tweaks_admin>
+			<promotions>
+				<!--
+					Российская сборка придерживается политики, что новые функции Российской сборки
+					должны быть по умолчанию отключены
+					(если только нет критически-важной необходимости их включения)
+				-->
+				<fix_products_subselection>0</fix_products_subselection>
+			</promotions>
+		</df_tweaks_admin>
+	</default>
+</config>

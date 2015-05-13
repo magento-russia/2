@@ -1,0 +1,241 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Sales>
+			<version>2.23.5</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Sales>
+	</modules>
+	<df>
+		<features>
+			<df-sales>
+				<module>df_sales</module>
+				<title>Продажи</title>
+				<url>http://magento-forum.ru/forum/149/</url>
+			</df-sales>
+		</features>
+	</df>
+	<global>
+		<blocks>
+			<df_sales><class>Df_Sales_Block</class></df_sales>
+			<sales>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						предоставление администратору возможности сохранения переносов строк
+						при отображении комментария к заказу в личном кабинете покупателя.
+					-->
+					<order_view>Df_Sales_Block_Order_View</order_view>
+				</rewrite>
+			</sales>
+		</blocks>
+		<helpers>
+			<df_sales><class>Df_Sales_Helper</class></df_sales>
+			<sales>
+				<rewrite>
+					<!--
+						Цели перекрытия:
+						1) устранение сбоя
+						«Fatal error: Call to a member function addCrumb() on a non-object»
+						2) использование для перевода начальной хлебной крошки словаря модуля Mage_Cms
+						вместо словаря модуля Mage_Sales
+					-->
+					<guest>Df_Sales_Helper_Guest</guest>
+				</rewrite>
+			</sales>
+		</helpers>
+		<models>
+			<df_sales>
+				<class>Df_Sales_Model</class>
+				<resourceModel>df_sales_resource</resourceModel>
+			</df_sales>
+			<df_sales_resource>
+				<class>Df_Sales_Model_Resource</class>
+			</df_sales_resource>
+			<sales>
+				<rewrite>
+					<!--
+						Цели перекрытия:
+						их много, потому что перекрываемый класс — один из ключевых классов системы
+						(моделирует сущность «заказ»).
+					-->
+					<order>Df_Sales_Model_Order</order>
+					<!--
+						Цель перекрытия —
+						учёт настроек видимости и обязательности для заполнения полей оформления заказа
+						модуля «Удобная настройка витрины».
+					-->
+					<order_address>Df_Sales_Model_Order_Address</order_address>
+					<!--
+						Цели перекрытия:
+						1) перевод названий типов транзакций
+						2) удаление типа транзакции
+						@see Mage_Sales_Model_Order_Payment_Transaction::TYPE_ORDER
+						(потому что этот тип встречается только в PayPal Express Checkout)
+					-->
+					<order_payment_transaction>Df_Sales_Model_Order_Payment_Transaction</order_payment_transaction>
+					<!--
+						Цели перекрытия:
+						1) учёт настроек видимости и обязательности для заполнения полей оформления заказа
+						модуля «Удобная настройка витрины».
+						2) при отсутствии информации о стране считать страной Россию вместо null.
+					-->
+					<quote_address>Df_Sales_Model_Quote_Address</quote_address>
+					<!--
+						Цель перекрытия —
+						устранение сбоя
+						«Notice: Undefined property: Mage_Sales_Model_Quote_Address_Item::$_optionsByCode
+						in app/code/core/Mage/Sales/Model/Quote/Item/Abstract.php on line 90»
+					-->
+					<quote_address_item>Df_Sales_Model_Quote_Address_Item</quote_address_item>
+				</rewrite>
+			</sales>
+		</models>
+		<events>
+			<core_copy_fieldset_customer_address_to_quote_address>
+				<observers>
+					<df_sales__core_copy_fieldset_customer_address_to_quote_address>
+						<class>df_sales/dispatcher</class>
+						<method>core_copy_fieldset_customer_address_to_quote_address</method>
+					</df_sales__core_copy_fieldset_customer_address_to_quote_address>
+				</observers>
+			</core_copy_fieldset_customer_address_to_quote_address>
+			<sales_convert_order_to_quote>
+				<observers>
+					<df_sales__sales_convert_order_to_quote>
+						<class>df_sales/dispatcher</class>
+						<method>sales_convert_order_to_quote</method>
+					</df_sales__sales_convert_order_to_quote>
+				</observers>
+			</sales_convert_order_to_quote>
+			<sales_order_status_history_save_before>
+				<observers>
+					<df_sales__sales_order_status_history_save_before>
+						<class>df_sales/dispatcher</class>
+						<method>sales_order_status_history_save_before</method>
+					</df_sales__sales_order_status_history_save_before>
+				</observers>
+			</sales_order_status_history_save_before>
+			<sales_quote_address_save_before>
+				<observers>
+					<df_sales__quote_address_save_before>
+						<class>df_sales/dispatcher</class>
+						<method>sales_quote_address_save_before</method>
+					</df_sales__quote_address_save_before>
+				</observers>
+			</sales_quote_address_save_before>
+		</events>
+		<resources>
+			<df_sales_setup>
+				<setup>
+					<module>Df_Sales</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_sales_setup>
+		</resources>
+	</global>
+	<adminhtml>
+		<events>
+			<!--
+				Мы не используем событие _load_before,
+				потому что не все коллекции заказов используются для таблицы заказов,
+				а в Magento 1.4 по коллекции невозможно понять,
+				используется ли она для таблицы заказов или нет
+				(в более поздних версиях Magento понять можно, потому что
+				коллекция, используемая для таблицы заказов, принадлежит особому классу)
+			-->
+			<rm_adminhtml_block_sales_order_grid__prepare_collection>
+				<observers>
+					<df_sales__rm_adminhtml_block_sales_order_grid__prepare_collection>
+						<class>df_sales/dispatcher</class>
+						<method>rm_adminhtml_block_sales_order_grid__prepare_collection</method>
+					</df_sales__rm_adminhtml_block_sales_order_grid__prepare_collection>
+				</observers>
+			</rm_adminhtml_block_sales_order_grid__prepare_collection>
+			<!--
+				Это событие вызывается методом
+				@see Df_Adminhtml_Block_Sales_Order_Grid::_prepareColumns()
+			-->
+			<rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+				<observers>
+					<df_sales__rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+						<class>df_sales/dispatcher</class>
+						<method>rm_adminhtml_block_sales_order_grid__prepare_columns_after</method>
+					</df_sales__rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+				</observers>
+			</rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+		</events>
+		<translate>
+			<modules>
+				<Df_Sales>
+					<files>
+						<default>Mage_Sales.csv</default>
+					</files>
+				</Df_Sales>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Sales>
+					<files>
+						<default>Mage_Sales.csv</default>
+					</files>
+				</Df_Sales>
+			</modules>
+		</translate>
+	</frontend>
+	<default>
+		<sales>
+			<msrp>
+				<explanation_message><![CDATA[Цена нашего магазина на этот товар ниже цены,
+по которой мы, по договору с нашим поставщиком,
+имеем право публично выставлять на витрине данный товар.
+<br/>Чтобы увидеть реальную цену на товар — положите его корзину.]]></explanation_message>
+				<explanation_message_whats_this><![CDATA[Цена нашего магазина на этот товар ниже цены,
+по которой мы, по договору с нашим поставщиком,
+имеем право публично выставлять на витрине данный товар.
+<br/>Чтобы увидеть реальную цену на товар — положите его корзину.]]></explanation_message_whats_this>
+			</msrp>
+		</sales>
+		<sales_email>
+			<order>
+				<!--
+					«Продажи» → «Письма» → «Заказ» → «Получатели копии»
+					Значение надо устанавливать именно здесь,
+					потому что в демо-данных этот ключ отсутствует.
+				-->
+				<copy_to>admin@magento-forum.ru</copy_to>
+			</order>
+		</sales_email>
+		<df_sales>
+			<order_comments>
+				<admin_order_create__comment_is_visible_on_front>1</admin_order_create__comment_is_visible_on_front>
+				<preserve_line_breaks_in_admin_order_view>1</preserve_line_breaks_in_admin_order_view>
+				<preserve_line_breaks_in_customer_account>1</preserve_line_breaks_in_customer_account>
+				<preserve_line_breaks_in_order_email>1</preserve_line_breaks_in_order_email>
+				<preserve_some_tags_in_admin_order_view>1</preserve_some_tags_in_admin_order_view>
+				<preserve_some_tags_in_order_comments_in_admin_order_view>1</preserve_some_tags_in_order_comments_in_admin_order_view>
+				<tags_to_preserve_in_admin_order_view>br,h3,div,ul,li</tags_to_preserve_in_admin_order_view>
+				<wrap_in_standard_frame_in_order_email>1</wrap_in_standard_frame_in_order_email>
+			</order_comments>
+			<order_grid__product_column>
+				<chop_name>0</chop_name>
+				<enabled>0</enabled>
+				<max_products_to_show>3</max_products_to_show>
+				<name_width>70</name_width>
+				<order_by>name</order_by>
+				<order_direction>ASC</order_direction>
+				<ordering>3</ordering>
+				<product_name_max_length>50</product_name_max_length>
+				<qty_width>5</qty_width>
+				<show_all_products>1</show_all_products>
+				<show_name>1</show_name>
+				<show_qty>0</show_qty>
+				<show_sku>0</show_sku>
+				<sku_width>25</sku_width>
+			</order_grid__product_column>
+		</df_sales>
+	</default>
+</config>

@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Promotion>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Promotion>
+	</modules>
+	<global>
+		<blocks><df_promotion><class>Df_Promotion_Block</class></df_promotion></blocks>
+		<helpers><df_promotion><class>Df_Promotion_Helper</class></df_promotion></helpers>
+		<models><df_promotion><class>Df_Promotion_Model</class></df_promotion></models>
+	</global>
+</config>

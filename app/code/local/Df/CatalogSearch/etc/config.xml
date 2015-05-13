@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_CatalogSearch>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_CatalogSearch>
+	</modules>
+	<global>
+		<blocks><df_catalog_search><class>Df_CatalogSearch_Block</class></df_catalog_search></blocks>
+		<helpers><df_catalog_search><class>Df_CatalogSearch_Helper</class></df_catalog_search></helpers>
+		<models>
+			<catalogsearch_mysql4>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						устранение сбоя
+						«Call to undefined method Mage_Catalog_Model_Resource_Product_Flat::getEntityTablePrefix()
+						File: app/code/core/Mage/Eav/Model/Entity/Attribute/Abstract.php
+						Line: 511»
+					-->
+					<search_collection>Df_CatalogSearch_Model_Resource_Search_Collection</search_collection>
+				</rewrite>
+			</catalogsearch_mysql4>
+			<catalogsearch_resource>
+				<rewrite>
+					<search_collection>Df_CatalogSearch_Model_Resource_Search_Collection</search_collection>
+				</rewrite>
+			</catalogsearch_resource>
+			<df_catalog_search><class>Df_CatalogSearch_Model</class></df_catalog_search>
+		</models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_CatalogSearch><files><default>Df_CatalogSearch.csv</default></files></Df_CatalogSearch>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

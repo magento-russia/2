@@ -1,0 +1,96 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<script type="text/javascript">
+//<![CDATA[
+
+var catalogWysiwygEditor = {
+    overlayShowEffectOptions : null,
+    overlayHideEffectOptions : null,
+    open : function(editorUrl, elementId) {
+        if (editorUrl && elementId) {
+            new Ajax.Request(editorUrl, {
+                parameters: {
+                    element_id: elementId+'_editor',
+                    store_id: '<?php echo $this->getStoreId() ?>'
+                },
+                onSuccess: function(transport) {
+                    try {
+                        this.openDialogWindow(transport.responseText, elementId);
+                    } catch(e) {
+                        alert(e.message);
+                    }
+                }.bind(this)
+            });
+        }
+    },
+    openDialogWindow : function(content, elementId) {
+        this.overlayShowEffectOptions = Windows.overlayShowEffectOptions;
+        this.overlayHideEffectOptions = Windows.overlayHideEffectOptions;
+        Windows.overlayShowEffectOptions = {duration:0};
+        Windows.overlayHideEffectOptions = {duration:0};
+
+        Dialog.confirm(content, {
+            draggable:true,
+            resizable:true,
+            closable:true,
+            className:"magento",
+            windowClassName:"popup-window",
+            title:'Визуальный редактор',
+            width:950,
+            height:555,
+            zIndex:1000,
+            recenterAuto:false,
+            hideEffect:Element.hide,
+            showEffect:Element.show,
+            id:"catalog-wysiwyg-editor",
+            buttonClass:"form-button",
+            okLabel:"OK"
+			,cancelLabel: 'Отмена'
+            ,ok: this.okDialogWindow.bind(this),
+            cancel: this.closeDialogWindow.bind(this),
+            onClose: this.closeDialogWindow.bind(this),
+            firedElementId: elementId
+        });
+
+        content.evalScripts.bind(content).defer();
+
+        $(elementId+'_editor').value = $(elementId).value;
+    },
+    okDialogWindow : function(dialogWindow) {
+        if (dialogWindow.options.firedElementId) {
+            wysiwygObj = eval('wysiwyg'+dialogWindow.options.firedElementId+'_editor');
+			if ('function' === typeof wysiwygObj.turnOff) {
+				wysiwygObj.turnOff();
+			}
+            if (tinyMCE.get(wysiwygObj.id)) {
+                $(dialogWindow.options.firedElementId).value = tinyMCE.get(wysiwygObj.id).getContent();
+            } else {
+                if ($(dialogWindow.options.firedElementId+'_editor')) {
+                    $(dialogWindow.options.firedElementId).value = $(dialogWindow.options.firedElementId+'_editor').value;
+                }
+            }
+        }
+        this.closeDialogWindow(dialogWindow);
+    },
+    closeDialogWindow : function(dialogWindow) {
+        // remove form validation event after closing editor to prevent errors during save main form
+        if (typeof varienGlobalEvents != undefined && editorFormValidationHandler) {
+            varienGlobalEvents.removeEventHandler('formSubmit', editorFormValidationHandler);
+        }
+
+        //IE fix - blocked form fields after closing
+        $(dialogWindow.options.firedElementId).focus();
+
+        //destroy the instance of editor
+        wysiwygObj = eval('wysiwyg'+dialogWindow.options.firedElementId+'_editor');
+        if (tinyMCE.get(wysiwygObj.id)) {
+           tinyMCE.execCommand('mceRemoveControl', true, wysiwygObj.id);
+        }
+
+        dialogWindow.close();
+        Windows.overlayShowEffectOptions = this.overlayShowEffectOptions;
+        Windows.overlayHideEffectOptions = this.overlayHideEffectOptions;
+    }
+};
+
+//]]>
+</script>

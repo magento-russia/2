@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<rm>
+						<title>Российская сборка</title>
+					</rm>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

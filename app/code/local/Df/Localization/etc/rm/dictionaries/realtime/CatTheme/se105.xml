@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Bestmagento_BmProducts'>
+		<block
+			class='Bestmagento_BmProducts_Block_Product_Latest'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US><![CDATA[Latest Products]]></en_US>
+				<ru_RU><![CDATA[Новые товары]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[see more]]></en_US>
+				<ru_RU><![CDATA[ещё]]></ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Idev_OneStepCheckout'>
+		<block
+			class='*'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US><![CDATA[Cart <span>0</span> item]]></en_US>
+				<ru_RU><![CDATA[корзина пуста]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<a href="%s">Cart <span>1</span> item checkout</a> ]]></en_US>
+				<ru_RU><![CDATA[<a href="%s">товаров в корзине: <span>1</span></a> ]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<a href="%s">Cart <span>%s</span> items checkout</a>]]></en_US>
+				<ru_RU><![CDATA[<a href="%s">товаров в корзине: <span>%s</span></a>]]></ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Mage_Core'>
+		<block
+			class='*'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>search site...</en_US>
+				<ru_RU>что будем искать?</ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Mage_Customer'>
+		<block
+			class='Mage_Customer_Block_Form_Login'
+			name='*'
+			template='customer/form/mini.login.phtml'
+		>
+			<term>
+				<en_US>Login</en_US>
+				<ru_RU>Войти</ru_RU>
+			</term>
+			<term>
+				<en_US>Register</en_US>
+				<ru_RU>Зарегистрироваться</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

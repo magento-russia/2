@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/**
+	Обратите внимание, что правило @charset надо записывать именно с двойными кавычками
+	и именно в самом начале файла, без любых символов и пробелов впереди.
+*/
+/** Правила из themes.css будут обрабатываться браузером до других файлов CSS */
+body.df-theme-gala-titanshop .hnav .menu-item-depth-0.label-hot:before {
+  /*background: url("http://static.magento-pro.ru/themes/gala/titanshop/images/label-hot.png") 0 0 no-repeat !important;*/
+  background: url("../../images/themes/gala/titanshop/label-hot.png") 0 0 no-repeat !important; }

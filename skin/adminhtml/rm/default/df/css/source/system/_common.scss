@@ -1,0 +1,139 @@
+.go-try {
+	display: none;
+}
+
+
+#page-help-link {
+	display: none;
+}
+
+
+.grid-severity-critical
+,
+.grid-severity-critical span
+,
+.grid-severity-major
+, .grid-severity-major span
+, .grid-severity-minor
+, .grid-severity-minor span
+, .grid-severity-notice
+, .grid-severity-notice span {
+
+   text-transform: lowercase;
+
+}
+
+
+
+.grid-severity-critical span
+,
+, .grid-severity-major span
+, .grid-severity-minor span
+, .grid-severity-notice span {
+	line-height: 16px;
+
+}
+
+
+
+
+
+#config_edit_form {
+
+	$configValueColumnWidth: 380px;
+
+
+	.columns .form-list td.value {
+		width: $configValueColumnWidth;
+	}
+
+
+	.form-list {
+
+		td.value {
+			input.input-text
+			,
+			textarea {
+				width: $configValueColumnWidth - 6px;
+			}
+
+			textarea  {
+				height: 5em;
+			}
+
+			select {
+				width: $configValueColumnWidth;
+			}
+
+			.grid {
+				select {
+					width: 190px;
+				}
+			}
+
+			p.note {
+				width: $configValueColumnWidth;
+			}
+		}
+
+	}
+
+
+	.form-list td.label {
+		width: 250px;
+	}
+
+	.form-list td.label label {
+		width: 235px;
+	}
+
+}
+
+
+
+
+.columns {
+	#df_tweaks_admin_logging__actions {
+		.form-list {
+			td.value {
+				width: 700px;
+			}
+		}
+	}
+}
+
+
+
+#product_edit_form #sku_type,
+#product_edit_form #weight_type,
+#product_options_container .headings .type-type {
+	width: 150px;
+}
+
+
+.adminhtml-system-currencysymbol-index {
+	.content-header {
+		width: 533px;
+	}
+	#currency_symbols_form {
+		.fieldset {
+			width: 500px;
+			.hor-scroll {
+				table {
+					tbody {
+						td {
+							width: 50%;
+							.input-text {
+								width: 100px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+

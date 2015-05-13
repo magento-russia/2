@@ -1,0 +1,76 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Ems>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Ems>
+	</modules>
+	<global>
+		<blocks><df_ems><class>Df_Ems_Block</class></df_ems></blocks>
+		<helpers><df_ems><class>Df_Ems_Helper</class></df_ems></helpers>
+		<models><df_ems><class>Df_Ems_Model</class></df_ems></models>
+	</global>
+	<default>
+		<carriers>
+			<df-ems>
+				<active>0</active>
+				<model>df_ems/carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>EMS Почта России</title>
+			</df-ems>
+		</carriers>
+		<df_shipping>
+			<ems>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>0</frontend__sallowspecific>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</ems>
+		</df_shipping>
+	</default>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Ems><files><default>Df_Ems.csv</default></files></Df_Ems>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Ems><files><default>Df_Ems.csv</default></files></Df_Ems>
+			</modules>
+		</translate>
+	</frontend>
+	<df>
+		<features>
+			<df-ems>
+				<module>df_ems</module>
+				<title>EMS Почта России</title>
+				<url>http://magento-forum.ru/forum/197/</url>
+			</df-ems>
+		</features>
+		<shipping>
+			<ems>
+				<allowed-methods>
+					<!--
+						Идентификаторам способов доставки достаточно быть уникальными
+						лишь в пределах модуля доставки,потому что система формирует уникальный идентификатор способа доставки
+						объединением идентификатором модуля доставки и способа доставки.
+					-->
+					<standard>
+						<title>EMS</title>
+						<class>df_ems/method</class>
+					</standard>
+				</allowed-methods>
+			</ems>
+		</shipping>
+	</df>
+</config>

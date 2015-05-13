@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_ImportExport>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_ImportExport>
+	</modules>
+	<global>
+		<blocks><df_import_export><class>Df_ImportExport_Block</class></df_import_export></blocks>
+		<helpers><df_import_export><class>Df_ImportExport_Helper</class></df_import_export></helpers>
+		<models>
+			<df_import_export><class>Df_ImportExport_Model</class></df_import_export>
+			<importexport>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						устранение сбоя «No valid data sent» при экспорте товаров
+						«Undefined offset in app/code/core/Mage/ImportExport/Model/Export/Entity/Product.php on line 873»
+						@link http://magento-forum.ru/topic/3835/
+						@link http://www.magentocommerce.com/bug-tracking/issue?issue=15022
+					-->
+					<export_entity_product>Df_ImportExport_Model_Export_Entity_Product</export_entity_product>
+				</rewrite>
+			</importexport>
+		</models>
+	</global>
+</config>

@@ -1,0 +1,238 @@
+<?xml version='1.0'?>
+<config>
+   <sections>
+		<df_payment>
+			<groups>
+				<robokassa translate='label' module='df_robokassa'>
+					<label>ROBOKASSA</label>
+					<comment>
+					   <![CDATA[
+							<a
+								target='_blank'
+								href='http://robokassa.ru/ru/'
+								title='порядок регистрации магазина'
+							>как подключить магазин к ROBOKASSA?</a>
+					   ]]>
+				   </comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>17000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-robokassa</df_feature>
+						</active>
+						<payment_service__shop_id translate='label'>
+							<label>Логин магазина</label>
+							<comment>
+							   <![CDATA[
+									<a
+										target='_blank'
+										href='http://magento-forum.ru/topic/1641/'
+										title='инструкция с картинками'
+									>где его взять?</a>
+							   ]]>
+						   </comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__shop_id>
+						<payment_service__test translate='label'>
+							<label>Тестовый режим?</label>
+							<comment>
+							   <![CDATA[
+									В тестовом режиме денежные средства с покупателя не списываются.
+							   ]]>
+						   </comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__test>
+						<frontend__title translate='label'>
+							<label>Название для этого способа оплаты</label>
+							<comment>
+								<![CDATA[
+									Покупатель видит этот заголовок на этапе оформления заказа,а также в Личном кабинете.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</frontend__title>
+						<frontend__description translate='label'>
+							<label>Примечание к способу оплаты на экране оформления заказа</label>
+							<comment>
+								<![CDATA[
+									Это примечание отображается под названием способа оплаты
+									на экране оформления заказа.
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</frontend__description>
+						<frontend__sort_order translate='label'>
+							<label>Вес для упорядочивания</label>
+							<comment>
+								<![CDATA[
+									Когда системе требуется перечислить платёжные способы на экране,она упорядочивает их в соответствии с их весами.
+									<br/>Способы с меньшим весом отображаются выше способов с большим весом.
+									<br/>Веса задаются натуральными числами.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								validate-digits
+							</validate>
+						</frontend__sort_order>
+						<payment_service__request_password translate='label'>
+							<label>
+								Криптографический ключ
+								для шифрования обращений магазина к платёжной системе
+							</label>
+							<comment>
+							   <![CDATA[
+									Укажите здесь криптографический ключ,который Вы указывали в графе «<i>Пароль #1</i>»
+									в Личном кабинете Робокассы.
+									<br />
+									Магазин будет использовать этот криптографический ключ
+									для шифрования своих обращений к платёжной системе.
+							   ]]>
+						   </comment>
+							<frontend_type>obscure</frontend_type>
+							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__request_password>
+						<payment_service__response_password translate='label'>
+							<label>
+								Криптографический ключ
+								для шифрования обращений платёжной системы к магазину
+							</label>
+							<comment>
+							   <![CDATA[
+									Укажите здесь криптографический ключ,который Вы указывали в графе «<i>Пароль #2</i>»
+									в Личном кабинете Робокассы.
+									<br />
+									Платёжная система будет использовать этот криптографический ключ
+									для шифрования своих обращений к магазину.
+							   ]]>
+						   </comment>
+							<frontend_type>obscure</frontend_type>
+							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__response_password>
+						<payment_service__currency translate='label'>
+							<label>Валюта баланса</label>
+							<comment>
+							   <![CDATA[
+									Укажите здесь валюту, который Вы указывали в графе <b>Валюта, в которой будет расчитываться текущий баланс Продавца</b> в Личном кабинете Робокассы.
+									<br />
+									Обратите внимание:
+									<br />данная валюта должна быть в списке доступных валют магазина
+									<br />для данной валюты в магазине должен быть установлен обменный курс
+									(System -> Manage Currency Rates)
+							   ]]>
+						   </comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_payment/config_source_currency</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__currency>
+						<frontend__allowspecific translate='label'>
+							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да»,то система позволит Вам перечислить страны, которым
+									должен принадлежать адрес покупателя, чтобы покупатель мог
+									воспользоваться данным способом оплаты.
+								]]>
+							</comment>
+							<frontend_type>allowspecific</frontend_type>
+							<sort_order>10000</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</frontend__allowspecific>
+						<frontend__specificcountry translate='label'>
+							<label>Допустимые страны покупателей</label>
+							<comment>
+								<![CDATA[
+									Система покажет этот способ оплаты
+									только покупателям из указанных Вами стран.<br/>
+									Чтобы разрешить использование данного способа оплаты покупателям любой страны,укажите значение «нет» для опции
+									«Ограничить доступность способа оплаты покупателями из конкретных стран?».
+								]]>
+							</comment>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>11000</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<active>1</active>
+								<frontend__allowspecific>1</frontend__allowspecific>
+							</depends>
+						</frontend__specificcountry>
+					</fields>
+				</robokassa>
+			</groups>
+		</df_payment>
+	</sections>
+</config>

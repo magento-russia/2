@@ -1,0 +1,32 @@
+.rm {
+	.rm-notifier {
+		.rm-class-rewrite-conflicts {
+			font-weight: normal;
+			.rm-class-rewrite-conflict {
+				h3 {
+					font-weight: normal;
+					font-size: 11px;
+					margin: 0 0 0.15em 0;
+				}
+				margin:{
+					bottom: 0.75em;
+				}
+				.rm-class-rewrite-destinations {
+					list-style: disc;
+					.rm-class-rewrite-destination {
+						margin: {
+							left: 2em;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.notification-global {
+	span.rm-url-settings {
+		a {
+			font-weight: normal;
+		}
+	}
+}

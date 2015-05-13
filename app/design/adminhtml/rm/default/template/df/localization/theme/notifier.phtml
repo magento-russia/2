@@ -1,0 +1,13 @@
+<?php /** @var Df_Localization_Block_Admin_Theme_Notifier $this */ ?>
+<?php
+	foreach ($this->getProcessors() as $processor) {
+		/** @var Df_Localization_Model_Onetime_Processor $processor */
+		/** @var string $title */
+		$title = df_escape($processor->getTitle());
+		/** @var string $link */
+		$link = $processor->getLink();
+		?>
+			Русифицировать оформительскую тему «<b><?php echo $title; ?></b>»?
+			<a href='<?php echo $link; ?>'>русифицировать</a><br/>
+		<?php
+	}

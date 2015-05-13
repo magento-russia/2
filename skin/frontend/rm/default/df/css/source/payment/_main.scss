@@ -1,0 +1,30 @@
+@mixin df-payment-options-container {
+	h4 {
+		line-height: 1.2;
+		color: rgb(47, 47, 47);
+		margin: 0.5em 0;
+	}
+}
+
+.df {
+	.df-checkout-ergonomic {
+		.df-payment-options-container {
+			@include df-payment-options-container;
+		}
+	}
+
+	.df-payment-method {
+		.df-submethod {
+			margin: {
+				left: 1em;
+			}
+		}
+	}
+}
+
+
+.df-payment-options-container {
+	h4 {
+		@include df-payment-options-container;
+	}
+}

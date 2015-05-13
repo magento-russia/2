@@ -1,0 +1,83 @@
+<?xml version='1.0'?>
+<logging>
+	<df_cms_hierarchy translate='label'>
+		<label>CMS Hierarchy</label>
+		<expected_models>
+			<df_cms__hierarchy_node/>
+		</expected_models>
+		<actions>
+			<adminhtml_cms_hierarchy_index>
+				<action>view</action>
+				<expected_models />
+				<post_dispatch>Df_Cms_Model_Observer::postDispatchCmsHierachyView</post_dispatch>
+			</adminhtml_cms_hierarchy_index>
+			<adminhtml_cms_hierarchy_save>
+				<action>save</action>
+			</adminhtml_cms_hierarchy_save>
+		</actions>
+	</df_cms_hierarchy>
+	<df_cms_page_versioning translate='label'>
+		<label>CMS Versioning</label>
+		<actions>
+<!--
+	Versions
+-->
+			<adminhtml_cms_page_massDeleteVersions>
+				<action>massDelete</action>
+				<expected_models>
+					<df_cms__page_version/>
+				</expected_models>
+			</adminhtml_cms_page_massDeleteVersions>
+			<adminhtml_cms_page_version_edit>
+				<action>view</action>
+				<expected_models>
+					<df_cms__page_version/>
+				</expected_models>
+			</adminhtml_cms_page_version_edit>
+			<adminhtml_cms_page_version_save>
+				<action>save</action>
+				<expected_models>
+					<df_cms__page_version/>
+				</expected_models>
+			</adminhtml_cms_page_version_save>
+			<adminhtml_cms_page_version_delete>
+				<action>delete</action>
+				<expected_models>
+					<df_cms__page_version/>
+				</expected_models>
+			</adminhtml_cms_page_version_delete>
+<!--
+	Revisions
+-->
+			<adminhtml_cms_page_version_massDeleteRevisions>
+				<action>massDelete</action>
+				<expected_models>
+					<df_cms__page_revision/>
+				</expected_models>
+			</adminhtml_cms_page_version_massDeleteRevisions>
+			<adminhtml_cms_page_revision_edit>
+				<action>view</action>
+				<expected_models>
+					<df_cms__page_revision/>
+				</expected_models>
+			</adminhtml_cms_page_revision_edit>
+			<adminhtml_cms_page_revision_preview>
+				<action>preview</action>
+				<expected_models />
+				<post_dispatch>Df_Cms_Model_Observer::postDispatchCmsRevisionPreview</post_dispatch>
+			</adminhtml_cms_page_revision_preview>
+			<adminhtml_cms_page_revision_save>
+				<action>save</action>
+				<expected_models>
+					<df_cms__page_revision/>
+				</expected_models>
+			</adminhtml_cms_page_revision_save>
+			<adminhtml_cms_page_revision_delete>
+				<action>delete</action>
+				<expected_models>
+					<df_cms__page_revision/>
+				</expected_models>
+			</adminhtml_cms_page_revision_delete>
+		</actions>
+	</df_cms_page_versioning>
+</logging>

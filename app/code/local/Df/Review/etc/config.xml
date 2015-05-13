@@ -1,0 +1,106 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Review>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Review>
+	</modules>
+	<global>
+		<blocks>
+			<df_review>
+				<class>Df_Review_Block</class>
+			</df_review>
+			<review>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						исправление опечатки родительского метода
+						@see Mage_Review_Block_Form::___construct():
+						там происходит вызов $this->getAllowWriteReviewFlag
+						вместо $this->getAllowWriteReviewFlag().
+					-->
+					<form>Df_Review_Block_Form</form>
+				</rewrite>
+			</review>
+		</blocks>
+		<helpers>
+			<df_review>
+				<class>Df_Review_Helper</class>
+			</df_review>
+		</helpers>
+		<models>
+			<df_review>
+				<class>Df_Review_Model</class>
+				<resourceModel>df_review_resource</resourceModel>
+			</df_review>
+			<df_review_resource>
+				<class>Df_Review_Model_Resource</class>
+			</df_review_resource>
+		</models>
+		<template>
+			<email>
+				<!--
+					Обратите внимание, что дескриптор df_tweaks_admin_other_review_notification_template,
+					как и другие подобные дескрипторы шаблонов писем,
+					выбирается не произвольным образом,
+					а соответствует настроечному ключу (df_tweaks_admin/reviews/notification_template)
+				-->
+				<df_tweaks_admin_reviews_notification_template translate='label' module='df_review'>
+					<label>Оповещение администратора о новом отзыве на товар</label>
+					<file>df/review/admin_notification.html</file>
+					<type>html</type>
+				</df_tweaks_admin_reviews_notification_template>
+			</email>
+		</template>
+	</global>
+	<frontend>
+		<events>
+			<!--
+				Обрабатываем данное событие
+				для оповещения администратора о новых отзывах в магазине
+				Обратите внимание, что это событие появилось только в Magento CE 1.4.2.0.
+				Учитывая, что данная функциональность добавляется 2014-09-25
+				и не является критически важной,
+				мы сознательно игнорируем поддержку версий
+				Magento CE 1.4 ниже версии 1.4.2.0,
+				в то время как подавлябщее большинство
+				остальных функций Российской сборки Magento
+				совместимо с версиями Magento CE 1.4 ниже версии 1.4.2.0
+			-->
+			<core_session_abstract_add_message>
+				<observers>
+					<df_review__core_session_abstract_add_message>
+						<class>df_review/dispatcher</class>
+						<method>core_session_abstract_add_message</method>
+					</df_review__core_session_abstract_add_message>
+				</observers>
+			</core_session_abstract_add_message>
+		</events>
+		<layout>
+			<updates>
+				<df_review module='Df_Review'><file>df/review.xml</file></df_review>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Df_Review>
+					<files>
+						<default>Mage_Review.csv</default>
+					</files>
+				</Df_Review>
+			</modules>
+		</translate>
+	</frontend>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Review>
+					<files>
+						<default>Mage_Review.csv</default>
+					</files>
+				</Df_Review>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

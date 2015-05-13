@@ -1,0 +1,308 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_speed translate='label' module='df_speed'>
+			<label>Ускорение</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>19000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<block_caching>
+					<label>Блочное кэширование</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<catalog_product_list translate='label'>
+							<label>Кэшировать список товаров?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</catalog_product_list>
+						<page_html_topmenu translate='label'>
+							<label>Кэшировать товарное меню?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</page_html_topmenu>
+						<checkout_cart_sidebar translate='label'>
+							<label>Кэшировать боковой блок корзины?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</checkout_cart_sidebar>
+						<catalog_product_compare_sidebar translate='label'>
+							<label>Кэшировать боковой блок сравнения товаров?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</catalog_product_compare_sidebar>
+						<wishlist_customer_sidebar translate='label'>
+							<label>Кэшировать боковой блок планируемых покупок?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</wishlist_customer_sidebar>
+						<cms_page translate='label'>
+							<label>Кэшировать самодельные страницы?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</cms_page>
+						<page_html_breadcrumbs translate='label'>
+							<label>Кэшировать хлебные крошки?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</page_html_breadcrumbs>
+						<page_switch translate='label'>
+							<label>Кэшировать переключатели витрин и языков?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</page_switch>
+						<page_template_links translate='label'>
+							<label>Кэшировать ссылки в шапке и подвале?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</page_template_links>
+						<google_analytics translate='label'>
+							<label>Кэшировать код GoogleAnalytics?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</google_analytics>
+					</fields>
+				</block_caching>
+				<general>
+					<label>Дополнительно</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<!--
+						<disable_visitor_logging translate='label'>
+							<label>Отключить учёт посетителей витрины?</label>
+							<comment>
+								<![CDATA[
+									При своём стандартном поведении Magento ведёт учёт посетителей витрины
+									и при каждой загрузке страницы витрины сохраняет информацию о посетителе
+									в своей базе данных.
+									<br/>
+									Отключение этой функции позволяет ускорить загрузку страниц витрины.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</disable_visitor_logging>
+						-->
+						<disable_logging_last_visit_time translate='label'>
+							<label>Отключить учёт времени последнего посещения магазина каждым посетителем?</label>
+							<comment>
+								<![CDATA[
+									При своём стандартном поведении Magento ведёт учёт посетителей витрины
+									и при каждой загрузке страницы витрины сохраняет в своей базе данных
+									информацию о последнем времени посещения магазина текущим посетителем.
+									<br/>Отключение этой функции позволяет ускорить загрузку страниц витрины.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</disable_logging_last_visit_time>
+						<enable_assertions translate='label'>
+							<label>Выполнять самопроверку при вычислениях?</label>
+							<comment>
+								<![CDATA[
+									Отключение самопроверки ускоряет работу системы,однако при этом усложняет диагностику дефектов.
+									<br/>
+									Рекомендуется включать самопроверку перед обновлением Российской сборки
+									на период тестирования новых версий Российской сборки.
+									<br/>
+									Рекомендууется отключать самопроверку после того, как Вы убедитесь в стабильности
+									новой версии Российской сборки Magento.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</enable_assertions>
+						<enable_zend_date_caching translate='label'>
+							<label>Включить кэширование результатов календарных вычислений?</label>
+							<comment>
+								<![CDATA[
+									Кэширование результатов календарных вычислений —<br/>
+									<a
+										target='_blank'
+										href='http://framework.zend.com/manual/en/zend.date.overview.html#zend.date.options.cache'
+										title='Кэширование результатов календарных вычислений'
+									>возможность Zend Framework</a>,рекомендуемая к использованию разработчиками Zend Framework
+									для ускорения календарных вычислений.
+									<br/>
+									При своём стандартном поведении
+									Magento никогда не использует эту возможность.
+									<br/>
+									Обратите внимание, что включение данной опции ускорит Magento только в том случае,если Вы задействуете для Magento быструю систему кэширования
+									вместо используемого по умолчанию кэширования в виде файлов в папке var/cache.
+									<br/>
+									<br/>
+									Для промышленного веб-сервера
+									я рекомендую использовать систему кэширования APC в связке с PHP-FPM.
+									Для её включения напишите в app/etc/local.xml внутри ветки config/global:<br/>
+									&lt;cache&gt;<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&lt;backend&gt;apc&lt;/backend&gt;<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&lt;prefix&gt;YOUR_SHOP_NAME_&lt;/prefix&gt;<br/>
+									&lt;/cache&gt;
+									<br/>
+									<br/>
+									Для локальной разработке с использованием веб-сервера Zend Server CE
+									включите систему кэширования Zend_Cache_Backend_ZendServer_ShMem.
+									Для её включения напишите в app/etc/local.xml внутри ветки config/global:<br/>
+									&lt;cache&gt;<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&lt;backend&gt;Zend_Cache_Backend_ZendServer_ShMem&lt;/backend&gt;<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&lt;prefix&gt;YOUR_SHOP_NAME_&lt;/prefix&gt;<br/>
+									&lt;/cache&gt;
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_zend_date_caching>
+						<enable_php_scripts_load_checking translate='label'>
+							<label>Включить диагностику загрузки скриптов PHP?</label>
+							<comment>
+								<![CDATA[
+									Отключение такой диагностики ускоряет систему.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-speed</df_feature>
+						</enable_php_scripts_load_checking>
+					</fields>
+				</general>
+			</groups>
+		</df_speed>
+	</sections>
+</config>

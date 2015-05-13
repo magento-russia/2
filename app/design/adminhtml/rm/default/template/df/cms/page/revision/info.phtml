@@ -1,0 +1,27 @@
+<?php /** @var Df_Cms_Block_Adminhtml_Cms_Page_Revision_Edit_Info $this */ ?>
+<div class="cms-revision-info">
+    <table cellspacing="0">
+        <col width="1" />
+        <col />
+        <tr>
+            <?php if ($this->getRevisionNumber()): ?>
+                <th><span class="nobr"><?php echo $this->__('Revision #') ?></span></th>
+                <td><?php echo $this->getRevisionNumber() ?></td>
+            <?php else: ?>
+                <th colspan="2"><span class="nobr"><?php echo $this->__('New Revision') ?></span></th>
+            <?php endif; ?>
+        </tr>
+        <tr>
+            <th><span class="nobr"><?php echo $this->__('Author:') ?></span></th>
+            <td><?php echo $this->getAuthor() ?></td>
+        </tr>
+        <tr>
+            <th><span class="nobr"><?php echo $this->__('Created:') ?></span></th>
+            <td><?php echo $this->getCreatedAt() ?></td>
+        </tr>
+        <tr>
+            <th><span class="nobr"><?php echo $this->__('Version:') ?></span></th>
+            <td><?php echo $this->getVersionLabel() ?></td>
+        </tr>
+    </table>
+</div>

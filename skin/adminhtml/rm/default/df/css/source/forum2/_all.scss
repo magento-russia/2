@@ -1,0 +1,28 @@
+@import 'discourse/_all';
+@import '_navigation';
+@import '_tree';
+
+.rm-bootstrap {
+	h1 {
+		font: {
+			size: 24px;
+		}
+		margin: {
+			top: 0;
+		}
+	}
+}
+
+body.df-forum2-admin-index-index {
+	#anchor-content {
+		background: #EEEEEE;
+	}
+}
+
+#rm-forum-admin {
+	.container {
+		padding: 0;
+	}
+}
+
+

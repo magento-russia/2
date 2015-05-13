@@ -1,0 +1,46 @@
+<?php /** @var Df_Reward_Block_Customer_Reward_History $this */ ?>
+<div class="box">
+    <h2 class="sub-title"><?php echo $this->__('Balance History'); ?></h2>
+    <?php if ($history = $this->getHistory()):?>
+    <?php echo $this->getChildHtml('pager') ?>
+    <table id="reward-history" class="data-table">
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col />
+        <col width="1" />
+        <thead>
+            <tr>
+                <th><?php echo $this->__('Balance'); ?></th>
+                <th><?php echo $this->__('Amount'); ?></th>
+                <th><?php echo $this->__('Points Change'); ?></th>
+                <th><?php echo $this->__('Reason'); ?></th>
+                <th><?php echo $this->__('Date'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($history as $item): ?>
+            <tr>
+                <td class="a-right"><?php echo $this->getPointsBalance($item)?></td>
+                <td class="a-right"><?php echo $this->getCurrencyBalance($item)?></td>
+                <td class="a-right"><?php echo $this->getPointsDelta($item)?></td>
+                <td>
+                    <?php echo $this->escapeHtml($this->getMessage($item))?>
+                    <?php if ($explanation = $this->getExplanation($item)):?><br /><small><?php echo $this->escapeHtml($explanation);?></small><?php endif;?>
+                </td>
+                <td>
+                    <span class="nobr"><?php echo $this->getDate($item)?></span>
+                    <?php if ($expirationDate = $this->getExpirationDate($item)):?>
+                    <small class="nobr"><?php echo $this->__('Expires on %s', $expirationDate);?></small>
+                    <?php endif;?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('reward-history')</script>
+    <?php echo $this->getChildHtml('pager') ?>
+    <?php else:?>
+    <p><?php echo $this->__('There is no balance history yet.')?></p>
+    <?php endif;?>
+</div>

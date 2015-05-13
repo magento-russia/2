@@ -1,0 +1,63 @@
+body.df-theme-magento-enterprise {
+	.fancybox-inner {
+		.account-login {
+			min-height: 0;
+			margin: {
+				bottom: 0;
+			}
+			.registered-users {
+				padding: {
+					top: 10px;
+					bottom: 0;
+					right: 0;
+				}
+				h2 {
+					margin-bottom: 6px;
+					text-transform: uppercase;
+				}
+				width: auto;
+				.input-box {
+					/** для индикатора успешности ввода */
+					padding-right: 20px;
+				}
+			}
+		}
+	}
+	.df-checkout-ergonomic-page {
+		.form-list {
+			li.fields {
+				.field {
+					clear: none;
+				}
+			}
+		}
+		.df {
+			/**
+			 * Вероятно, что правила ниже нужны для всех оформительских тем
+			 * (при некоторых дополнительных, неизвестных пока условиях),
+			 * потому что встречаюсь с их необходимостью уже второй раз подряд.
+			 * (первый — в стандартной оформительской теме для Magento Enterprise,
+			 * второй — в оформительской теме TemplateMela Minimal Multi Purpose (MAG090180)).
+			 */
+			.df-checkout-ergonomic {
+				.df-body {
+					.df-block {
+						li.fields {
+							div.field {
+								.input-box {
+									input.input-text, select {
+										width: (290 / 2) - 10px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		#checkout-agreements {
+			display: block;
+			margin-top: 10px;
+		}
+	}
+}

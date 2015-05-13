@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<logging>
+	<df_invitation translate='label'>
+		<label>Customer Invitations</label>
+		<expected_models>
+			<df_invitation__invitation/>
+		</expected_models>
+		<actions>
+			<adminhtml_invitation_view>
+				<action>view</action>
+			</adminhtml_invitation_view>
+			<adminhtml_invitation_save>
+				<action>save</action>
+			</adminhtml_invitation_save>
+			<adminhtml_invitation_saveInvitation>
+				<action>save</action>
+			</adminhtml_invitation_saveInvitation>
+			<adminhtml_invitation_massCancel>
+				<action>massUpdate</action>
+			</adminhtml_invitation_massCancel>
+			<adminhtml_invitation_massResend>
+				<action>massUpdate</action>
+			</adminhtml_invitation_massResend>
+		</actions>
+	</df_invitation>
+</logging>

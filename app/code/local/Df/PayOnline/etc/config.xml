@@ -1,0 +1,227 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_PayOnline>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_PayOnline>
+	</modules>
+	<global>
+		<blocks><df_payonline><class>Df_PayOnline_Block</class></df_payonline></blocks>
+		<helpers><df_payonline><class>Df_PayOnline_Helper</class></df_payonline></helpers>
+		<models><df_payonline><class>Df_PayOnline_Model</class></df_payonline></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<payonline>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<frontend__title>Процессинговый центр PayOnline</frontend__title>
+				<frontend__description><![CDATA[Прежде чем проводить оплату, свяжитесь с менеджером по телефону, уточните наличие товара и поставьте его в резерв.]]></frontend__description>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__specificcountry></frontend__specificcountry>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_method>selected-by-customer</payment_service__payment_method>
+				<payment_service__transaction_description><![CDATA[Оплата заказа {order.id}]]></payment_service__transaction_description>
+			</payonline>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-payonline>
+				<model>df_payonline/payment</model>
+			</df-payonline>
+		</payment>
+	</default>
+	<frontend>
+		<!--
+		<secure_url>
+			<df_payonline>/df-payonline/</df_payonline>
+		</secure_url>
+		-->
+		<routers>
+			<df-payonline>
+				<use>standard</use>
+				<args>
+					<module>Df_PayOnline</module>
+					<frontName>df-payonline</frontName>
+				</args>
+			</df-payonline>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-payonline>
+				<module>df_payonline</module>
+				<title>PayOnline</title>
+				<url>http://magento-forum.ru/forum/163/</url>
+			</df-payonline>
+		</features>
+		<payment>
+			<payonline>
+				<currencies>
+					<allowed>
+						RUB,USD,EUR
+					</allowed>
+				</currencies>
+				<url>
+					<payment_page>https://merchant.payonline.ru/lmi/payment.asp</payment_page>
+				</url>
+				<payment-methods>
+					<selected-by-customer>
+						<title>На усмотрение покупателя</title>
+						<url>https://secure.payonlinesystem.com/ru/payment/select/</url>
+					</selected-by-customer>
+					<card-ru>
+						<title>Банковская карта (русскоязычный интерфейс)</title>
+						<url>https://secure.payonlinesystem.com/ru/payment/</url>
+					</card-ru>
+					<card-en>
+						<title>Банковская карта (англоязычный интерфейс)</title>
+						<url>https://secure.payonlinesystem.com/en/payment/</url>
+					</card-en>
+					<qiwi>
+						<title>QIWI</title>
+						<url>https://secure.payonlinesystem.com/ru/payment/select/qiwi/</url>
+					</qiwi>
+					<webmoney>
+						<title>WebMoney</title>
+						<url>https://secure.payonlinesystem.com/ru/payment/select/webmoney/</url>
+					</webmoney>
+				</payment-methods>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id>OrderId</increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Присутствует только если покупатель производит оплату
+								чеком Paymer.com или ВМ-картой.
+								Df_Payment: не используется.
+								Df_PayOnline: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+								Df_PayOnline:
+								Имя держателя карты.
+								Передаётся только в случае оплаты картой.
+							-->
+							<name>CardHolder</name>
+							<!--
+								Телефон покупателя.
+								Присутствует только если покупатель производит оплату
+								с телефона WM Keeper Mobile.
+								Df_Payment: не используется.
+								Df_PayOnline: иногда используется.
+								Номер телефона.
+								Передаётся только в случае оплаты посредством QIWI.
+							-->
+							<phone>Phone</phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount>Amount</amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+								Df_PayOnline: обязательный параметр.
+							-->
+							<currency-code>Currency</currency-code>
+						</payment>
+						<payment_service>
+							<customer>
+								<!--
+									Кошелек покупателя.
+									Df_Payment: не используется.
+									Df_PayOnline:
+									Передаётся только в случае оплаты посредством WebMoney.
+								-->
+								<account-id>WmPurse</account-id>
+								<!--
+									WMId покупателя.
+									Df_Payment: не используется.
+									Df_PayOnline:
+									Передаётся только в случае оплаты посредством WebMoney.
+								-->
+								<id>WmId</id>
+							</customer>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+									Df_PayOnline: обязательный параметр.
+								-->
+								<date>DateTime</date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_PayOnline: обязательный параметр.
+								-->
+								<id>TransactionID</id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+									Df_PayOnline: не используется.
+								-->
+								<state></state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+									Df_PayOnline: не используется.
+								-->
+								<id></id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>SecurityKey</signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+					<payment_page>
+						<params>
+							<OrderDescription>
+								<max_length>100</max_length>
+							</OrderDescription>
+						</params>
+					</payment_page>
+				</request>
+			</payonline>
+		</payment>
+	</df>
+</config>

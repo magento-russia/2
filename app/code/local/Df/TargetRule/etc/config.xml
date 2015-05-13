@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_TargetRule>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_TargetRule>
+	</modules>
+	<global>
+		<blocks>
+			<df_target_rule><class>Df_TargetRule_Block</class></df_target_rule>
+			<enterprise_targetrule>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						объявление поля $_index,
+						оторое родительский класс использует без предварителнього объявления.
+					-->
+					<checkout_cart_crosssell>Df_TargetRule_Block_Checkout_Cart_Crosssell</checkout_cart_crosssell>
+				</rewrite>
+			</enterprise_targetrule>
+		</blocks>
+		<helpers><df_target_rule><class>Df_TargetRule_Helper</class></df_target_rule></helpers>
+		<models><df_target_rule><class>Df_TargetRule_Model</class></df_target_rule></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_TargetRule>
+					<files>
+						<default>Enterprise_TargetRule.csv</default>
+					</files>
+				</Df_TargetRule>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_TargetRule>
+					<files>
+						<default>Enterprise_TargetRule.csv</default>
+					</files>
+				</Df_TargetRule>
+			</modules>
+		</translate>
+	</frontend>
+</config>

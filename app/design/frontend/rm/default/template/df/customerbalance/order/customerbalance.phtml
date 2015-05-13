@@ -1,0 +1,13 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php
+    $_order  = $this->getOrder();
+    $_source = $this->getSource();
+?>
+<?php if ($_source->getCustomerBalanceAmount()): ?>
+<tr>
+    <td <?php echo $this->getLabelProperties()?>>
+        <?php echo df_h()->customer()->balance()->__('Store Credit'); ?>
+    </td>
+    <td <?php echo $this->getValueProperties()?>>-<?php echo $_order->formatPrice($_source->getCustomerBalanceAmount()) ?></td>
+</tr>
+<?php endif; ?>

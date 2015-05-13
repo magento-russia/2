@@ -1,0 +1,94 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Eav>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Eav>
+	</modules>
+	<global>
+		<eav_frontendclasses>
+			<catalog_product>
+				<rm-natural-number>
+					<label>натуральное число</label>
+					<value>validate-number validate-greater-than-zero</value>
+				</rm-natural-number>
+			</catalog_product>
+		</eav_frontendclasses>
+		<helpers><df_eav><class>Df_Eav_Helper</class></df_eav></helpers>
+		<models>
+			<df_eav>
+				<class>Df_Eav_Model</class>
+				<resourceModel>df_eav_resource</resourceModel>
+			</df_eav>
+			<df_eav_resource>
+				<class>Df_Eav_Model_Resource</class>
+			</df_eav_resource>
+			<eav>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						кэширование свойств EAV.
+					-->
+					<config>Df_Eav_Model_Config</config>
+				</rewrite>
+			</eav>
+			<eav_mysql4>
+				<!-- Для Magento версии меньше 1.6 -->	
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						перевод значений товарных свойств типа «выпадающий список».
+					-->
+					<entity_attribute_option_collection>Df_Eav_Model_Resource_Entity_Attribute_Option_Collection</entity_attribute_option_collection>
+				</rewrite>
+			</eav_mysql4>
+			<eav_resource>
+				<!-- Для Magento версии 1.6 и выше -->
+				<rewrite>
+					<entity_attribute_option_collection>Df_Eav_Model_Resource_Entity_Attribute_Option_Collection</entity_attribute_option_collection>
+				</rewrite>
+			</eav_resource>
+		</models>
+	</global>
+	<adminhtml>
+		<events>
+			<eav_entity_attribute_load_after>
+				<observers>
+					<df_eav__eav_entity_attribute_load_after>
+						<class>df_eav/dispatcher</class>
+						<method>eav_entity_attribute_load_after</method>
+					</df_eav__eav_entity_attribute_load_after>
+				</observers>
+			</eav_entity_attribute_load_after>
+			<catalog_entity_attribute_load_after>
+				<observers>
+					<df_eav__eav_entity_attribute_load_after>
+						<class>df_eav/dispatcher</class>
+						<method>eav_entity_attribute_load_after</method>
+					</df_eav__eav_entity_attribute_load_after>
+				</observers>
+			</catalog_entity_attribute_load_after>
+			<core_collection_abstract_load_after>
+				<observers>
+					<df_eav__core_collection_abstract_load_after>
+						<class>df_eav/dispatcher</class>
+						<method>core_collection_abstract_load_after</method>
+					</df_eav__core_collection_abstract_load_after>
+				</observers>
+			</core_collection_abstract_load_after>
+		</events>
+		<translate>
+			<modules>
+				<Df_Eav><files><default>Df_Eav.csv</default></files></Df_Eav>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Eav><files><default>Df_Eav.csv</default></files></Df_Eav>
+			</modules>
+		</translate>
+	</frontend>
+</config>

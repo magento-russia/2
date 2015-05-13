@@ -1,0 +1,679 @@
+<?xml version='1.0'?>
+<dictionary>
+	<filesystem>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/slideshow/slide-1.jpg</source>
+			<destination>media/wysiwyg/slide-1.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/slideshow/slide-2.jpg</source>
+			<destination>media/wysiwyg/slide-2.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/slideshow/slide-3.jpg</source>
+			<destination>media/wysiwyg/slide-3.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/homepage-three-column-promo/homepage-three-column-promo-01.png</source>
+			<destination>media/wysiwyg/homepage-three-column-promo-01.png</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/homepage-three-column-promo/homepage-three-column-promo-01B.png</source>
+			<destination>media/wysiwyg/homepage-three-column-promo-01B.png</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/homepage-three-column-promo/homepage-three-column-promo-02.png</source>
+			<destination>media/wysiwyg/homepage-three-column-promo-02.png</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/homepage-three-column-promo/homepage-three-column-promo-03.png</source>
+			<destination>media/wysiwyg/homepage-three-column-promo-03.png</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/Cataccessoriesmainimg.jpg</source>
+			<destination>media/wysiwyg/Cataccessoriesmainimg.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/catmen-newimg.jpg</source>
+			<destination>media/wysiwyg/catmen-newimg.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/catwomen-newimg.jpg</source>
+			<destination>media/wysiwyg/catwomen-newimg.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/mainimg-home_decorcategory.jpg</source>
+			<destination>media/wysiwyg/mainimg-home_decorcategory.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/private-sales-banner.png</source>
+			<destination>media/wysiwyg/private-sales-banner.png</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/promo_banners_VIP.jpg</source>
+			<destination>media/wysiwyg/promo_banners_VIP.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/vip-correctsize1.gif</source>
+			<destination>media/wysiwyg/vip-correctsize1.gif</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/category-banners/vip-banner.jpg</source>
+			<destination>media/catalog/category/vip-banner.jpg</destination>
+		</operation>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/themes/magento/rwd/logo.png</source>
+			<destination>skin/frontend/rwd/default/images/media/logo.png</destination>
+		</operation>
+	</filesystem>
+	<config>
+		<entry>
+			<path>design/footer/copyright</path>
+			<original_value>%Madison%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>design/header/logo_alt</path>
+			<original_value>%Madison%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>trans_email/ident_general/name</path>
+			<original_value>Madison Island</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>trans_email/ident_sales/name</path>
+			<original_value>Madison Island</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shirts</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Рубашки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>promotional-banner</id></block>
+		</conditions>
+		<actions>
+			<!-- Promotional Banner -->
+			<new_title>Промо-баннер</new_title>
+			<term>
+				<from>New Reductions on select merchandise</from>
+				<to>Новые скидки</to>
+			</term>
+			<term>
+				<from>SHOP NOW</from>
+				<to>открыть</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>footer_links_sm</id></block>
+		</conditions>
+		<actions>
+			<new_title>Ссылки в подвале</new_title>
+			<term>
+				<from>Connect With Us</from>
+				<to>Мы в соцсетях</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>homepage-image-carousel</id></block>
+		</conditions>
+		<actions>
+			<!-- Homepage Image Carousel -->
+			<new_title>Карусель на главной странице</new_title>
+			<term>
+				<from>SLIDE #01</from>
+				<to>Слайд №1</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>home-decor</id></block>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA[Home & Decor]]></from>
+				<to>Интерьер и дизайн</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>dresses-skirts</id></block>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA[Dresses & Skirts]]></from>
+				<to>Платья и юбки</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>travel-gear-for-every-occasion</id></block>
+		</conditions>
+		<actions>
+			<!-- Travel Gear For Every Occasion -->
+			<new_title>Для путешествий</new_title>
+			<term>
+				<from><![CDATA[<strong style="display: block;    font-size: 24px;font-weight: 500; letter-spacing: 9px;">Travel gear</strong>For every occasion]]></from>
+				<to><![CDATA[<strong style="display: block;    font-size: 24px;font-weight: 500; letter-spacing: 9px;">Для путешествий</strong>]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landing-bottom-promo-block</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Bottom Promo Block -->
+			<new_title>Целевая страница товарного раздела. Промо-блок в нижней части</new_title>
+			<term>
+				<from>50% OFF ALL SHOES!</from>
+				<to>Скидка 50% на всю обувь!</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-accessories-linksblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landingpage Accessories Links Block -->
+			<new_title>Целевая страница аксессуаров. Блок с ссылками</new_title>
+			<term>
+				<from>Eyewear</from>
+				<to>Очки</to>
+			</term>
+			<term>
+				<from>Jewelry</from>
+				<to>Украшения</to>
+			</term>
+			<term>
+				<from>Shoes</from>
+				<to>Обувь</to>
+			</term>
+			<term>
+				<from>"Bags"</from>
+				<to>"Сумки"</to>
+			</term>
+			<term>
+				<from><![CDATA[Bags & Luggage]]></from>
+				<to>Сумки и чемоданы</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-accessories-mainblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Accessories - Main Block -->
+			<new_title>Целевая страница аксессуаров. Главный блок</new_title>
+			<term>
+				<from>"Hold It - Jet setting just got easier with our innovative travel gear and accessories</from>
+				<to>Собираетесь куда-то лететь? Обратите внимание на наши товарны для путешествий.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-accessories</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Accessories -->
+			<new_title>Целевая страница аксессуаров</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>main-image-404-page</id></block>
+		</conditions>
+		<actions>
+			<!-- Main image 404 Page -->
+			<new_title>Пиктограмма при отсутствии страницы</new_title>
+			<term>
+				<from>"image404"</from>
+				<to>"Пиктограмма при отсутствии страницы"</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>plp-header</id></block>
+		</conditions>
+		<actions>
+			<!-- PLP Header -->
+			<new_title>Сообщение про новую коллекцию в шапке</new_title>
+			<term>
+				<from><![CDATA[OUR NEW COLLECTION <br/>IS HERE]]></from>
+				<to><![CDATA[Новая коллекция]]></to>
+			</term>
+			<term>
+				<from>SHOP NEW ARRIVALS</from>
+				<to>открыть</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>couponing</id></block>
+		</conditions>
+		<actions>
+			<!-- Couponing -->
+			<new_title>«Есть вопросы?» (отключен)</new_title>
+			<term>
+				<from>Have Questions?</from>
+				<to>Есть вопросы?</to>
+			</term>
+			<term>
+				<from>We'd Love to help.</from>
+				<to>С радостью поможем</to>
+			</term>
+			<term>
+				<from>EMAIL CUSTOMER SUPPORT</from>
+				<to>Служба поддержки</to>
+			</term>
+			<term>
+				<from><![CDATA[VIEW OUR RETURN &amp; EXCHANGE POLICY]]></from>
+				<to>Правила обмена и возврата</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-home</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Home -->
+			<new_title>Целевая страница. Товары для дома</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-home</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Home -->
+			<new_title>Целевая страница. Товары для дома и интерьера</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-home-mainblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Home - Main Block -->
+			<new_title>Целевая страница. Товары для дома и интерьера. Основной блок</new_title>
+			<term>
+				<from>Home Chic Home - luxury isn't only for hotel living</from>
+				<to>Роскошь как в отеле!</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-home-linksblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landingpage Home Links Block -->
+			<new_title>Целевая страница. Товары для дома и интерьера. Блок с ссылками</new_title>
+			<term>
+				<from><![CDATA[Books &amp; Music]]></from>
+				<to>Книги и музыка</to>
+			</term>
+			<term>
+				<from><![CDATA[Bed &amp; Bath]]></from>
+				<to>Для сна и ванны</to>
+			</term>
+			<term>
+				<from><![CDATA[Electronics]]></from>
+				<to>Гаджеты</to>
+			</term>
+			<term>
+				<from><![CDATA[Decorative Accents]]></from>
+				<to>Предметы интерьера</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-men</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Men -->
+			<new_title>Целевая страница. Мужская одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-men-mainblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Men - Main Block -->
+			<new_title>Целевая страница. Мужская одежда. Основной блок</new_title>
+			<term>
+				<from>Bold New Blues - superior fabrics and tailored fits in subtle and standout hues</from>
+				<to>Новая коллекция деловой одежды</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-men-linksblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landingpage Men Links Block -->
+			<new_title>Целевая страница. Мужская одежда. Блок с ссылками</new_title>
+			<term>
+				<from>New Arrivals</from>
+				<to>Новая коллекция</to>
+			</term>
+			<term>
+				<from>Shirts</from>
+				<to>Рубашки</to>
+			</term>
+			<term>
+				<from>Tees, Knits and Polos</from>
+				<to>Майки, футболки и поло</to>
+			</term>
+			<term>
+				<from><![CDATA[Pants &amp; Denim]]></from>
+				<to>Брюки и джинсы</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-women</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Women -->
+			<new_title>Целевая страница. Женская одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-women-mainblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Women - Main Block -->
+			<new_title>Целевая страница. Женская одежда. Основной блок</new_title>
+			<term>
+				<from>Bon Voyage - sleek and stylish selections for on-the-go</from>
+				<to>Стильная одежда для путешествий!</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-women-linksblock</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landingpage Women Links Block -->
+			<new_title>Целевая страница. Женская одежда. Блок с ссылками</new_title>
+			<term>
+				<from>New Arrivals</from>
+				<to>Новая коллекция</to>
+			</term>
+			<term>
+				<from><![CDATA[Tops &amp; Blouses]]></from>
+				<to>Топы и блузки</to>
+			</term>
+			<term>
+				<from><![CDATA[Pants &amp; Denim]]></from>
+				<to>Брюки и джинсы</to>
+			</term>
+			<term>
+				<from><![CDATA[Dresses &amp; Skirts]]></from>
+				<to>Платья и юбки</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>footer_links_company</id></block>
+		</conditions>
+		<actions>
+			<!-- Footer Links Company -->
+			<new_title>Подвал страницы. Колонка с ссылками о магазине/компании</new_title>
+			<term>
+				<from>Company</from>
+				<to>Компания</to>
+			</term>
+			<term>
+				<from>About Us</from>
+				<to>О нас</to>
+			</term>
+			<term>
+				<from>Contact Us</from>
+				<to>Контакты</to>
+			</term>
+			<term>
+				<from>Customer Service</from>
+				<to>Вопросы и ответы</to>
+			</term>
+			<term>
+				<from>Privacy Policy</from>
+				<to>Правила покупки</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>category-landingpage-vip</id></block>
+		</conditions>
+		<actions>
+			<!-- Category Landing Page Vip -->
+			<new_title>Целевая страница. Премиум</new_title>
+			<term>
+				<from>Sky Loung - exclusive prices visible to members only - become a member now</from>
+				<to>Закрытая распродажа для членов клуба</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>cms_menu</id></block>
+		</conditions>
+		<actions>
+			<!-- CMS Menu -->
+			<new_title>Меню. Раздел с ссылками о магазине/компании</new_title>
+			<term>
+				<from>Company</from>
+				<to>Компания</to>
+			</term>
+			<term>
+				<from>About Us</from>
+				<to>О нас</to>
+			</term>
+			<term>
+				<from>Contact us</from>
+				<to>Контакты</to>
+			</term>
+			<term>
+				<from>Customer Service</from>
+				<to>Вопросы и ответы</to>
+			</term>
+			<term>
+				<from>Privacy Policy</from>
+				<to>Правила покупки</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>about-magento-demo-store</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<term>
+				<!-- Заголовок -->
+				<from>About Us</from>
+				<to>О компании</to>
+			</term>
+			<term>
+				<from>OUR STORY</from>
+				<to>РОССИЙСКАЯ СБОРКА MAGENTO</to>
+			</term>
+			<term>
+				<from><![CDATA[>Madison Island is...<]]></from>
+				<to><![CDATA[>Российская сборка Magento — это...<]]></to>
+			</term>
+			<term>
+				<from>a breath of fresh air</from>
+				<to>полностью открытый исходный код</to>
+			</term>
+			<term>
+				<from>a mecca for style savvy travellers</from>
+				<to>полная русификация</to>
+			</term>
+			<term>
+				<from>a curator of gorgeous sartorial design</from>
+				<to>интеграция с 1С:Управление торговлей</to>
+			</term>
+			<term>
+				<from>a world class concept store</from>
+				<to>интеграция с российскими платёжнными системами</to>
+			</term>
+			<term>
+				<from>Madison Island Boutique in NYC</from>
+				<to>Наш магазин в Москве</to>
+			</term>
+			<term>
+				<from><![CDATA[Uniquely designed with cosmopolitan appeal, Madison Island gives couture-conscious frequent flyers exactly what they want&mdash;unprecedented access to the latest looks of the season, style solutions for easy international jet setting, and convenient worldwide delivery.]]></from>
+				<to><![CDATA[Лена, несмотря на внешние воздействия, возможна. Древняя платформа с сильно разрушенными складчатыми образованиями, как бы это ни казалось парадоксальным, начинает очаг многовекового орошаемого земледелия. Денежная единица притягивает двухпалатный парламент.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[With its website relaunch in 2013, Madison Island has solidified its standing as the new essential luxury. Its pages are filled with exquisite finds for fashion and home.]]></from>
+				<to><![CDATA[В турецких банях не принято купаться раздетыми, поэтому из полотенца сооружают юбочку, а утконос просветляет шведский эфемероид, несмотря на то, что все здесь выстроено в оригинальном славянско-турецком стиле.]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>customer-service</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<term>
+				<!-- Заголовок -->
+				<from>Customer Service</from>
+				<to>Вопросы и ответы</to>
+			</term>
+			<term>
+				<from><![CDATA[>SHIPPING &amp; DELIVERY<]]></from>
+				<to><![CDATA[>Способы доставки по России<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<term>
+				<!-- Заголовок страницы -->
+				<from>Madison Island</from>
+				<to>Главная</to>
+			</term>
+			<term>
+				<from>An eye for detail - Click to Shop Eye Wear</from>
+				<to>Очки</to>
+			</term>
+			<term>
+				<from>Style solutions - covet-worthy styles in travel-friendly fabrics - Click to Shop Woman</from>
+				<to>Для женщин</to>
+			</term>
+			<term>
+				<from>Wing man - hit the runway in stylish separates and casuals - Click to Shop Man</from>
+				<to>Для мужчин</to>
+			</term>
+			<term>
+				<from><![CDATA[Physical &amp; Virtual Gift Cards]]></from>
+				<to>Подарочные карты</to>
+			</term>
+			<term>
+				<from>Shop Private Sales - Members Only</from>
+				<to>Клубная распродажа</to>
+			</term>
+			<term>
+				<from>Travel Gear for Every Occasion</from>
+				<to>Сумки и чемоданы</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>no-route</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<term>
+				<from>%OOPS!%</from>
+				<to><![CDATA[
+<p><img src="{{media url="wysiwyg/404-banner-3.jpg"}}" alt="404bannerimage" /></p>
+<h1 style="text-align:center;margin-top: 20px;">Страница не найдена</h1>
+<p style="text-align:center;">
+	<a href="{{config path="web/unsecure/base_url"}}">Перейти на главную страницеу магазина.</a>
+</p>
+				]]></to>
+			</term>
+			<term>
+				<!-- Заголовок -->
+				<from>404 Not Found</from>
+				<to>Страница не найдена</to>
+			</term>
+		</actions>
+	</rule>
+</dictionary>

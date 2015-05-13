@@ -1,0 +1,59 @@
+<?php /** @var Df_Checkout_Block_Frontend_Review_OrderComments $this */ ?>
+<div
+	id='df_checkout_review_orderComments'
+	class='buttons-set df-hidden'
+>
+	<ul class='form-list df-order-comments-topmost'>
+		<li>
+			<fieldset>
+				<ul>
+					<li>
+						<label for='df_order_comment'>
+							<?php echo df_mage()->salesHelper()->__('Order Comment'); ?>:
+						</label>
+						<div class='input-box df-order-comment-container'>
+							<textarea
+								id='df_order_comment'
+								class='input-text'
+								name='df_order_comment'
+								title='<?php echo df_mage()->salesHelper()->__('Order Comment'); ?>'
+								rows='<?php echo $this->getTextareaVisibleRows(); ?>'
+								cols='40'
+							></textarea>
+						</div>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+	</ul>
+</div>
+<style type='text/css'>
+	#df_order_comment {
+		height: <?php echo $this->getTextareaVisibleRows(); ?>em;
+		<?php if (df_cfg()->checkout()->orderComments()->specifyTextareaWidth()) { ?>
+			width: <?php echo $this->getTextareaWidth(); ?>px;
+		<?php } ?>
+		<?php
+			if (df_cfg()->checkout()->orderComments()->specifyTextareaPosition()) {
+				echo $this->getFloatRule();
+				echo $this->getMarginRule();
+			}
+		?>
+	}
+</style>
+<?php
+    /** @var Df_Checkout_Helper_Settings_OrderComments $settings  */
+	$settings = df_cfg()->checkout()->orderComments();
+?>
+<script type='text/javascript'>
+	rm.namespace('rm.checkout.orderComments');
+	jQuery
+		.extend(
+			rm.checkout.orderComments
+			,
+			{
+				position: '<?php echo $settings->getPositionRelativeToTheTerms(); ?>'
+			}
+		)
+	;
+</script>

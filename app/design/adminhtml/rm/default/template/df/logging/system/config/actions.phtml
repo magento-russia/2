@@ -1,0 +1,38 @@
+<?php /** @var Df_Logging_Block_Adminhtml_System_Config_Actions $this */ ?>
+<input
+	type="hidden" 
+	name="<?php echo $this->getNamePrefix() ?>[__empty]" 
+	value="1" 
+	id="<?php echo $this->getHtmlId() ?>" 
+/>
+<ul class="checkboxes">
+	<?php foreach($this->getLabels() as $name => $label): ?>
+		<li>
+			<input 
+				type="checkbox" 
+				value="1" 
+				name="<?php echo $this->getNamePrefix() ?>[<?php echo $name ?>]" 
+				id="<?php echo $this->getHtmlId() . '_' . $name ?>"<?php echo ($this->getIsChecked($name) ? ' checked="checked"' : '') ?>
+			/><label 
+				for="<?php echo $this->getHtmlId() . '_' . $name ?>"
+			><?php echo $label ?></label>
+		</li>
+	<?php endforeach;?>
+</ul>
+<script type="text/javascript">
+//<![CDATA[
+    var dfLoggingActionsLabel = $('<?php echo $this->getHtmlId() ?>').up('table').select('td.label label');
+    if (dfLoggingActionsLabel) {
+        var dfLoggingActions = $('<?php echo $this->getHtmlId() ?>').parentNode.select('ul.checkboxes input');
+        if (dfLoggingActions) {
+            var dfLoggingShouldBeChecked = true;
+            Event.observe(dfLoggingActionsLabel[0], 'click', function() {
+                for(var i = 0; i < dfLoggingActions.length; i++) {
+                    dfLoggingActions[i].checked = dfLoggingShouldBeChecked;
+                }
+                dfLoggingShouldBeChecked = !dfLoggingShouldBeChecked;
+            });
+        }
+    }
+//]]>
+</script>

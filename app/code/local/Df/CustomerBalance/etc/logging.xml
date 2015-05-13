@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<logging>
+	<df_customerbalance translate='label'>
+		<label>Store Credit</label>
+		<actions>
+			<adminhtml_customerbalance_form>
+				<action>view</action>
+				<expected_models>
+					<df_customerbalance__balance/>
+				</expected_models>
+			</adminhtml_customerbalance_form>
+		</actions>
+	</df_customerbalance>
+	<customer>
+		<actions>
+			<adminhtml_customer_save>
+				<expected_models extends='merge'>
+					<df_customerbalance__balance/>
+				</expected_models>
+				<skip_on_back>
+					<adminhtml_customerbalance_form/>
+					<adminhtml_customer_edit/>
+				</skip_on_back>
+			</adminhtml_customer_save>
+		</actions>
+	</customer>
+</logging>

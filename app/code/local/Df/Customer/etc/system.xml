@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<customer>
+			<groups>
+				<create_account>
+					<fields>
+						<email_domain>
+							<comment>This field is primarily used during admin Order creation. In this process, the email field is optional. If it is left blank, Magento will automatically generate an email address to associate to the Order. The format will be [Customer ID]@[Default Email Domain]. During this process there is a checkbox allowing you send an Email Order Confirmation.</comment>
+						</email_domain>
+						<generate_human_friendly_id>
+							<comment>Magento Community Edition не использует эту возможность, поэтому, если у Вас нет модулей, которые требуют включать данную опцию, то эту опцию можно не трогать и оставить выключеной.</comment>
+						</generate_human_friendly_id>
+					</fields>
+				</create_account>
+			</groups>
+		</customer>
+	</sections>
+</config>

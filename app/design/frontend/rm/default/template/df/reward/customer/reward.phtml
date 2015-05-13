@@ -1,0 +1,11 @@
+<?php /** @var Df_Reward_Block_Customer_Reward $this */ ?>
+<div class="page-title">
+    <h1><?php echo $this->__('Reward Points') ?></h1>
+</div>
+<div class="my-rewards">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('', true, true); ?>
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>"><small>&laquo; </small><?php echo Mage::helper('customer')->__('Back') ?></a></p>
+    </div>
+</div>

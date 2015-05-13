@@ -1,0 +1,4778 @@
+<?xml version='1.0'?>
+<dictionary>
+	<filesystem>
+		<operation>
+ 			<source>skin/frontend/rm/default/df/images/country-flags/ru.png</source>
+			<destination>skin/frontend/ultimo/default/images/flags/default.png</destination>
+		</operation>
+	</filesystem>
+	<config>
+		<entry>
+			<path>design/footer/copyright</path>
+			<original_value>%Infortis%</original_value>
+			<value><![CDATA[Российская сборка Magento]]></value>
+		</entry>
+		<entry>
+			<path>design/head/default_description</path>
+			<original_value>%Ultimo%</original_value>
+			<value>Российская сборка Magento — это редакция Magento для интернет-магазинов России и СНГ.</value>
+		</entry>
+		<entry>
+			<path>design/head/default_title</path>
+			<original_value>%Ultimo%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>design/header/logo_alt</path>
+			<original_value>Responsive Magento Theme</original_value>
+			<value>Оформительская тема Ultimo</value>
+		</entry>
+		<entry>
+			<path>general/locale/code</path>
+			<original_value>de_DE</original_value>
+			<value>ru_RU</value>
+		</entry>
+		<entry>
+			<path>general/store_information/name</path>
+			<original_value>%Infortis%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<!--
+				Ultimo по умолчанию переносит строку после пункта "Корзина".
+				Однако на демо-сайте Ultimo такого переноса нет:
+			    http://ultimo.infortis-themes.com/demo/
+			    И у нас его убираем по умолчанию.
+			-->
+			<path>ultimo/header/toplinks_break_position</path>
+			<original_value>30</original_value>
+			<!--
+				Значение 30 означает перенос после пункта меню "Корзина".
+				Пустая строка означает отсутствие переносов.
+			-->
+			<value/>
+			<!--
+				Обязательно нужно,
+				потому что значение по умолчанию Ultimo на нас не устраивает
+				и оно не перекрывается через config.xml
+			-->
+			<set_as_default/>
+		</entry>
+		<entry>
+			<!--
+				Добавляем к загружаемым с Google шрифтам русский алфавит.
+			-->
+			<path>ultimo_design/font/primary_char_subset</path>
+			<original_value>latin</original_value>
+			<value>cyrillic,latin</value>
+		</entry>
+		<entry>
+			<path>ultramegamenu/category_labels/label1</path>
+			<!-- New -->
+			<value>новинка</value>
+		</entry>
+		<entry>
+			<path>ultramegamenu/category_labels/label2</path>
+			<!-- Sale -->
+			<value>скидки</value>
+		</entry>
+		<entry>
+			<path>ultramegamenu/sidemenu/block_name</path>
+			<original_value>Categories: [current_category]</original_value>
+			<value>[current_category]</value>
+		</entry>
+		<entry>
+			<path>ultramegamenu/sidemenu/block_name_fallback</path>
+			<original_value>Main Categories</original_value>
+			<value>Разделы магазина</value>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>rating</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Overall</from>
+				<to>Общий</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>German</from>
+				<to>немецкий</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Second</from>
+				<to>витрина №2</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Third</from>
+				<to>витрина №3</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Fourth</from>
+				<to>витрина №4</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Fifth</from>
+				<to>витрина №5</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>store</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Sixth</from>
+				<to>витрина №6</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Women</name>
+				<url_key>women</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Женщинам</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Sunglasses</name>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Солнцезащитные очки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Shirts & Tops]]></name>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Топы и рубашки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Size - Small</name>
+				<parent_url_key>shirts</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Размер S</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Size - Medium</name>
+				<parent_url_key>shirts</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Размер M</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Size - Large</name>
+				<parent_url_key>shirts</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Размер L</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Designer Tops</name>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Нарядные топы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Blouses</name>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Блузки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Socks & Tights]]></name>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Чулки и колготки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Going Out</name>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Вечерняя одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Phones & Tablets]]></name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Телефоны и планшеты</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Design Theory</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Теория дизайна</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Magento Themes</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Оформительские темы Magento</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Magento Extensions</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Модули Magento</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Typography</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Типографика</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Casual Dresses</name>
+				<url_key>casual-dresses</url_key>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Повседневная одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Casual Dresses</name>
+				<url_key>casual-dresses</url_key>
+				<parent_url_key>dresses</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Повседневние платья</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Fashion</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Мода</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Evening</name>
+				<url_key>evening</url_key>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Вечерняя одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Evening</name>
+				<url_key>evening</url_key>
+				<parent_url_key>dresses</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Вечерние платья</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Designer</name>
+				<url_key>designer</url_key>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Дизайнерская одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Designer</name>
+				<url_key>designer</url_key>
+				<parent_url_key>dresses</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Дизайнерские</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Party</name>
+				<url_key>party</url_key>
+				<parent_url_key>women</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Для клуба</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Party</name>
+				<url_key>party</url_key>
+				<parent_url_key>dresses</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Клубные</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Party</name>
+				<url_key>party</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Для клуба</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Tops</name>
+				<url_key>tops</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Топы и майки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Evening Tops</name>
+				<url_key>evening-tops</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Вечерние топы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Modest</name>
+				<url_key>modest</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Сдержанные</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Distinguished</name>
+				<url_key>distinguished</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Яркие</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Shirts & Blouses]]></name>
+				<url_key>shirts-blouses</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Рубашки и блузки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Tunics</name>
+				<url_key>tunics</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Туники</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Vests</name>
+				<url_key>vests</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Жилеты</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Evening Tops</name>
+				<url_key>evening-tops</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Вечерние топы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Evening Tops</name>
+				<url_key>evening-tops</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Вечерние топы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Dresses</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Платья</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shoes</name>
+				<url_key>shoes</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Обувь</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Jewerly</name>
+				<url_key>jewerly</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Украшения</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Lingerie</name>
+				<url_key>lingerie</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Нижнее бельё</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Jackets</name>
+				<url_key>coats-jackets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Верхняя одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Coats</name>
+				<url_key>coats</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Пальто</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Jackets</name>
+				<url_key>jackets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Куртки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Leather Jackets</name>
+				<url_key>leather-jackets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Кожаные куртки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Blazers</name>
+				<url_key>blazers</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Блейзеры</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Long</name>
+				<url_key>long</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Длинные</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Short</name>
+				<url_key>short</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Короткие</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Flat Shoes</name>
+				<url_key>flat-shoes</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Туфли на плоской подошве</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Flat Sandals</name>
+				<url_key>flat-sandals</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Сандали на плоской подошве</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Boots</name>
+				<url_key>boots</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Ботинки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Heels</name>
+				<url_key>heels</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Туфли на каблуке</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Heels</name>
+				<url_key>heels</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Туфли на каблуке</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Jewelry</name>
+				<url_key>jewelry</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Украшения</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bracelets</name>
+				<url_key>bracelets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Браслеты</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Necklaces & Pendants]]></name>
+				<url_key>necklaces-pendants</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Ожерелья и подвески</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Pins & Brooches]]></name>
+				<url_key>pins-brooches</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Заколки и броши</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bras</name>
+				<url_key>bras</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Лифчики</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bodies</name>
+				<url_key>bodies</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Боди</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Lingerie Sets</name>
+				<url_key>lingerie-sets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Комплекты нижнего белья</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shapewear</name>
+				<url_key>shapewear</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Корректирующее бельё</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shapewear</name>
+				<url_key>shapewear</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Корректирующее бельё</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Bags & Purses]]></name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Сумки и кошельки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bags</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Сумки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Designer Bags</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Нарядные сумки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Handbags</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Мини-сумочки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Designer Handbags</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Нарядные сумочки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Purses</name>
+				<url_key>purses</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Кошельки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shoulder Bags</name>
+				<url_key>shoulder-bags</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Сумки на ремне</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Swimwear</name>
+				<url_key>swimwear</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Купальники</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Swimsuits</name>
+				<url_key>swimsuits</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Купальники</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Beach Clothing</name>
+				<url_key>beach-clothing</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Пляжная одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bikinis</name>
+				<url_key>bikinis</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Бикини</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Electronics</name>
+				<url_key>electronics</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<!--
+				Использую «Техника» вместо «Электроника»,
+				чтобы после русификации всё меню уместилось в одной строке,
+				как и до русификации.
+			 -->
+			<new_title>Техника</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Smartphones</name>
+				<url_key>smartphones</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Смартфоны</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Sample</name>
+				<url_key>sample</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Пример</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Accessories</name>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Аксессуары</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Headsets</name>
+				<url_key>headsets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Наушники</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Batteries</name>
+				<url_key>batteries</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Аккумуляторы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Screen Protectors</name>
+				<url_key>screen-protectors</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Защитные экраны</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Memory Cards</name>
+				<url_key>memory-cards</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Карты памяти</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Cables & Adapters]]></name>
+				<url_key>cables-adapters</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Кабели и адаптеры</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Chargers</name>
+				<url_key>chargers</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Зарядные устройства</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Cases</name>
+				<url_key>cases</url_key>
+				<parent_url_key>phone-accessories</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Чехлы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Cameras</name>
+			</category>
+		</conditions>
+		<actions>
+			<!--
+				В Ultimo, в отличие от стандартных демо-данных,
+				раздел «Cameras» включает не только фото, но и видео.
+			-->
+			<new_title>Фото и видео</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Digital Cameras</name>
+				<url_key>digital-cameras</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Фотокамеры</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Camcorders</name>
+				<url_key>camcorders</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Видеокамеры</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Lenses</name>
+				<url_key>lenses</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Объективы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Filters</name>
+				<url_key>filters</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Светофильтры</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Tripods</name>
+				<url_key>tripods</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Штативы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Cases</name>
+				<url_key>cases</url_key>
+				<parent_url_key>cameras</parent_url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Сумки</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Tablets</name>
+				<url_key>tablets</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Планшеты</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Digital</name>
+			</category>
+		</conditions>
+		<actions>
+			<!--
+				Использую «Цифровые» вместо «Цифровые товары»,
+				чтобы после русификации всё меню уместилось в одной строке,
+				как и до русификации.
+			 -->
+			<new_title>Цифровые</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>eBooks</name>
+				<url_key>ebooks</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Электронные книги</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Magento Tutorials</name>
+				<url_key>magento-tutorials</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Учебники по Magento</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Web Design</name>
+				<url_key>web-design</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Веб-дизайн</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Themes</name>
+				<url_key>themes</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Оформительские темы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Music</name>
+				<url_key>music</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Музыка</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Software</name>
+				<url_key>software</url_key>
+			</category>
+		</conditions>
+		<actions>
+			<new_title>Программное обеспечение</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Sample category</from>
+				<to>Пример товарного раздела</to>
+			</term>
+			<term>
+				<from>Create direct links to featured categories</from>
+				<to>Делайте заметными ссылки на разделы с премиум-товарами</to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured Category<]]></from>
+				<to><![CDATA[>Премиум<]]></to>
+			</term>
+			<term>
+				<from>This is a custom block ready to display any content. You can add blocks to any category in the catalog...</from>
+				<to>Содержимое этого блока задаётся в административном интерфейса данного товарного раздела.</to>
+			</term>
+			<term>
+				<from>View Category</from>
+				<to>перейти в этот раздел</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute_set</type>
+			<attribute_set>
+				<name>Bag</name>
+			</attribute_set>
+		</conditions>
+		<actions>
+			<new_title>Сумка</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute_set</type>
+			<attribute_set>
+				<name>Clothes</name>
+			</attribute_set>
+		</conditions>
+		<actions>
+			<new_title>Одежда</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute_set</type>
+			<attribute_set>
+				<name>Digital</name>
+			</attribute_set>
+		</conditions>
+		<actions>
+			<new_title>Гаджет</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute_set</type>
+			<attribute_set>
+				<name>Electro Accessories</name>
+			</attribute_set>
+		</conditions>
+		<actions>
+			<new_title>Аксессуар к гаджету</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute_set</type>
+			<attribute_set>
+				<name>Phone</name>
+			</attribute_set>
+		</conditions>
+		<actions>
+			<new_title>Телефон</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>attribute_set</type>
+			<attribute_set>
+				<name>Shoe</name>
+			</attribute_set>
+		</conditions>
+		<actions>
+			<new_title>Обувь</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_cart_below_table</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок под корзиной</new_title>
+			<term>
+				<from>Static CMS block displayed below the cart. Put your own content here.</from>
+				<to>Этот самодельный блок отображается под корзиной.</to>
+			</term>
+			<term>
+				<from><![CDATA[Use discount code/coupon]]></from>
+				<to><![CDATA[Имеется промокод?]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_cart_below_totals</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок под итоговой суммой заказа</new_title>
+			<term>
+				<from>SSL Image Example</from>
+				<to>Пример логотипа SSL</to>
+			</term>
+			<term>
+				<from><![CDATA[>Sample info about SSL Certificate<]]></from>
+				<to><![CDATA[>Пояснения о сертификате SSL<]]></to>
+			</term>
+			<term>
+				<from>Sample info about SSL Certificate. Put your own content here.</from>
+				<to>Пояснения о сертификате SSL.</to>
+			</term>
+			<term>
+				<from>Static CMS block displayed below totals. Put your own content here.</from>
+				<to>Самодельный блок «block_cart_below_totals».
+					Отображается на странице корзины под суммой заказа.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_category_above_collection</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок над списком товаров</new_title>
+			<term>
+				<from>Static CMS block displayed above list/grid of products. Put your own content here.</from>
+				<to>Этот самодельный блок отображается над списком товаров.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_category_above_empty_collection</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок над пустым списком товаров</new_title>
+			<term>
+				<from>There are no products matching the selection</from>
+				<to>Товары отсутствуют</to>
+			</term>
+			<term>
+				<from>There are no products matching the selection</from>
+				<to>Товары отсутствуют</to>
+			</term>
+			<term>
+				<from>This is a custom CMS block displayed if category is empty.</from>
+				<to>Этот самодельный блок отображается при отсутствии товаров.</to>
+			</term>
+			<term>
+				<from>You can replace it with any custom content.</from>
+				<to>Вы можете написать здесь подходящий Вашему магазину текст.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_category_below_collection</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок под списком товаров</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_cms_page_top</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок над основным текстом самодельной страницы</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_column1</id></block>
+		</conditions>
+		<actions>
+			<new_title>1-я колонка подвала</new_title>
+			<term>
+				<from>"About Ultimo"</from>
+				<to>"Об Ultimo"</to>
+			</term>
+			<term>
+				<from>"About Ultimo Magento Theme"</from>
+				<to>"Об Ultimo"</to>
+			</term>
+			<term>
+				<from><![CDATA[>About Ultimo<]]></from>
+				<to><![CDATA[>Об Ultimo<]]></to>
+			</term>
+			<term>
+				<from>Suitable for every type of store. Great starting point for your custom projects.</from>
+				<to>Парк Варошлигет изменяем. Гвианский щит точно просветляет вечнозеленый кустарник.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_column2</id></block>
+		</conditions>
+		<actions>
+			<new_title>2-я колонка подвала</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_column3</id></block>
+		</conditions>
+		<actions>
+			<new_title>3-я колонка подвала</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_column4</id></block>
+		</conditions>
+		<actions>
+			<new_title>4-я колонка подвала</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_column5</id></block>
+		</conditions>
+		<actions>
+			<term>
+				<from>Footer column 5 (demo 3)</from>
+				<to>5-я колонка подвала (демо-магазин №3)</to>
+			</term>
+			<term>
+				<from>Footer column 5 (demo 4)</from>
+				<to>5-я колонка подвала (демо-магазин №4)</to>
+			</term>
+			<term>
+				<from>Footer column 5 (demo 5)</from>
+				<to>5-я колонка подвала (демо-магазин №5)</to>
+			</term>
+			<term>
+				<from>#^Footer column 5$#</from>
+				<to>5-я колонка подвала</to>
+			</term>
+			<term>
+				<from>#^Footer column 5 \(SECOND\)$#</from>
+				<to>5-я колонка подвала (вариант №2)</to>
+			</term>
+			<term>
+				<from>Manufacturers</from>
+				<to>Производители</to>
+			</term>
+			<term>
+				<from>Example</from>
+				<to>Пример</to>
+			</term>
+			<term>
+				<from>Delivery</from>
+				<to>Доставка</to>
+			</term>
+			<term>
+				<from>Refunds</from>
+				<to>Правила возврата</to>
+			</term>
+			<term>
+				<from>Gift cards</from>
+				<to>Подарочные сертификаты</to>
+			</term>
+			<term>
+				<from>Track order</from>
+				<to>Отслеживание заказа</to>
+			</term>
+			<term>
+				<from><![CDATA[>Blog<]]></from>
+				<to><![CDATA[>Наш блог<]]></to>
+			</term>
+			<term>
+				<from>Company Information</from>
+				<to>О магазине</to>
+			</term>
+			<term>
+				<from><![CDATA[Company Inc., 90 Bedford Street<br />New York, NY 041, USA]]></from>
+				<to>ООО «Рога и Копыта», 127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1</to>
+			</term>
+			<term>
+				<from><![CDATA[Call us now toll free: +001 555 801<br /> +001 555 801, +77 123 1234]]></from>
+				<to>Круглосуточно Вы можете оформить заказ по телефону
+				или получить ответы на любые интересующие Вас вопросы: +7 495 777-5-444</to>
+			</term>
+			<term>
+				<from>Customer support: support@example.com</from>
+				<to>Прием заказов и служба поддержки клиентов: admin@magento-forum.ru</to>
+			</term>
+			<term>
+				<from>Press: pressroom@example.com</from>
+				<to>Пресс-служба: admin@magento-forum.ru</to>
+			</term>
+			<term>
+				<from>Skype: dummy-login</from>
+				<to>Skype: magento-forum.ru</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_column6</id></block>
+		</conditions>
+		<actions>
+			<new_title>6-я колонка подвала</new_title>
+			<term>
+				<from>Magento Extensions</from>
+				<to>Модули для Magento</to>
+			</term>
+			<term>
+				<from>Store Overview</from>
+				<to>О нашем магазине</to>
+			</term>
+			<term>
+				<from>Buy This</from>
+				<to>Купить</to>
+			</term>
+			<term>
+				<from>Some Other Link</from>
+				<to>Другой пример ссылки</to>
+			</term>
+			<term>
+				<from>Link Example</from>
+				<to>Третий пример ссылки</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_links</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример ссылок в подвале. Вариант №1</new_title>
+			<term>
+				<from>Custom Link</from>
+				<to>Пример ссылки</to>
+			</term>
+			<term>
+				<from>The Site Map</from>
+				<to>Карта сайта</to>
+			</term>
+			<term>
+				<from>Site Map</from>
+				<to>Карта сайта</to>
+			</term>
+			<term>
+				<from>Search Terms</from>
+				<to>Что у нас ищут</to>
+			</term>
+			<term>
+				<from>Advanced Search</from>
+				<to>Расширенный поиск</to>
+			</term>
+			<term>
+				<from>Orders and Returns</from>
+				<to>Заказы и возвраты</to>
+			</term>
+			<term>
+				<from>Contact Us</from>
+				<to>Контакты</to>
+			</term>
+			<term>
+				<from>This block can replace Magento's default footer links.</from>
+				<to>Этот блок (block_footer_links) замещает стандартный для Magento блок подвальных ссылок.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_links2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример ссылок в подвале. Вариант №2</new_title>
+			<term>
+				<from>You can add more custom links here</from>
+				<to>добавляйте новые ссылки сюда</to>
+			</term>
+			<term>
+				<from>Customer Service</from>
+				<to>Вопросы и ответы</to>
+			</term>
+			<term>
+				<from>You can even replace these links with any other content</from>
+				<to>Вы можете заменить этот текст на свой</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_payment</id></block>
+		</conditions>
+		<actions>
+			<new_title>Логотипы платёжных систем в подвале страницы</new_title>
+			<term>
+				<from>Payment methods</from>
+				<to>Способы оплаты</to>
+			</term>
+			<term>
+				<from>Sample image with payment methods in your store</from>
+				<to>Пример логотипов платёжных систем</to>
+			</term>
+			<term>
+				<from>"Sample image with payment methods"</from>
+				<to>"Пример логотипов платёжных систем"</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_primary_bottom_left</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок с логотипами социальных сетей в левой части подвала</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_primary_bottom_right</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок с формой подписки на рассылку в правой части подвала</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_row2_column1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. 2-й ряд, 1-я колонка</new_title>
+			<term>
+				<from>First Heading</from>
+				<to>Первый заголовок</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_row2_column2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. 2-й ряд, 2-я колонка</new_title>
+			<term>
+				<from>Second Heading</from>
+				<to>Второй заголовок</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_row2_column3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. 2-й ряд, 3-я колонка</new_title>
+			<term>
+				<from>Third Heading</from>
+				<to>Третий заголовок</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_row2_column4</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. 2-й ряд, 4-я колонка</new_title>
+			<term>
+				<from>Fourth Heading</from>
+				<to>Четвёртый заголовок</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_row2_column5</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. 2-й ряд, 5-я колонка</new_title>
+			<term>
+				<from><![CDATA[>Follow us on our<br /><a href="http://twitter.com/infortis">Twitter</a> account<]]></from>
+				<to><![CDATA[>Наш <a href="http://twitter.com/dfediuk">Твиттер</a><]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_row2_column6</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. 2-й ряд, 6-я колонка</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_top2_left</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Верхний ряд. Левый блок: логотипы социальных сетей</new_title>
+			<term>
+				<from>Follow us on Twitter</from>
+				<to>Наш блог в Twitter</to>
+			</term>
+			<term>
+				<from>Join us on Facebook</from>
+				<to>Наша страница в Facebook</to>
+			</term>
+			<term>
+				<from>Join us on Google Plus</from>
+				<to>Наша страница в Google+</to>
+			</term>
+			<term>
+				<from>"Youtube"</from>
+				<to>"Наш канал на Youtube"</to>
+			</term>
+			<term>
+				<from>"Vimeo"</from>
+				<to>"Наш канал на Vimeo"</to>
+			</term>
+			<term>
+				<from>"Wordpress"</from>
+				<to>"Наш блог в Wordpress"</to>
+			</term>
+			<term>
+				<from>"Pinterest</from>
+				<to>"Наша страница в Pinterest"</to>
+			</term>
+			<term>
+				<from>Linked in</from>
+				<to>Наша страница в LinkedIn</to>
+			</term>
+			<term>
+				<from>Ultimo Responsive Magneto Theme</from>
+				<to>Оформительская тема Ultimo</to>
+			</term>
+			<term>
+				<from>Pinterest</from>
+				<to>Наша страница в Pinterest</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_footer_top2_right</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Верхний ряд. Правый блок: подписка на рассылку</new_title>
+			<term>
+				<from>Follow us on Twitter</from>
+				<to>Наш блог в Twitter</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_nav_dropdown</id></block>
+		</conditions>
+		<actions>
+			<!--
+				Использую «Меню» вместо «Выпадающий блок»,
+				чтобы после русификации всё меню уместилось в одной строке,
+				как и до русификации.
+			-->
+			<new_title>Меню</new_title>
+			<term>
+				<from>Ultimo is a premium Magento theme with advanced admin module. It's fully responsive and extremely customizable.</from>
+				<to>Оформительская тема Ultimo обладает обширными административными настройками. Эта тема адаптирована для мобильных устройств. Она очень гибкая в настройке.</to>
+			</term>
+			<term>
+				<from>Buy this Magento theme</from>
+				<to>Купить эту оформительскую тему</to>
+			</term>
+			<term>
+				<from>Magento CMS blocks</from>
+				<to>Самодельные блоки</to>
+			</term>
+			<term>
+				<from>You can use CMS blocks as content placeholders
+to display custom content in almost every part of the store.
+Import sample CMS blocks from the demo.</from>
+				<to>Вы можете использовать эти самодельные блоки
+для показа требуемой информации в любой области страницы.</to>
+			</term>
+			<term>
+				<from>"Magento theme documentation"</from>
+				<to>"Документация к оформительской теме"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Magento theme documentation<]]></from>
+				<to><![CDATA[>Документация к оформительской теме<]]></to>
+			</term>
+			<term>
+				<from>190-pages documentation</from>
+				<to>190 страниц документации</to>
+			</term>
+			<term>
+				<from>The best Magento theme documentation on ThemeForest.
+It also describes selected Magento features
+which you need to know when starting to work with Magento.</from>
+				<to>Лучшая документация среди оформительских тем на ThemeForest.
+Документация описывает всё то, что Вам потребуется для начала работы с Magento.</to>
+			</term>
+			<term>
+				<from>Create Magento sub-themes</from>
+				<to>Создавайте свои вариации этой оформительской темы</to>
+			</term>
+			<term>
+				<from>Easy to customize</from>
+				<to>Лёгкость настройки</to>
+			</term>
+			<term>
+				<from>Use Ultimo as a starting point for your custom projects.
+Unlike many other themes, Ultimo lets you create multiple custom sub-themes (theme variants)
+for your clients.</from>
+				<to>Используйте Ultimo в качестве основы для своих проектов.
+В отличие от большинства других оформительских тем, Ultimo предоставляет возможность
+создавать свои вариации оформительской темы.
+				</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_top_left</id></block>
+		</conditions>
+		<actions>
+			<new_title>Левый верхний блок №1 в шапке страницы</new_title>
+			<term>
+				<from>You can put here a phone number or some additional help info</from>
+				<to>Вы можете разместить здесь номер телефона магазина
+или ещё какую-нибудь полезную посетителям информацию</to>
+			</term>
+			<term>
+				<from>Call +001 555 801</from>
+				<to>+7 495 777-5-444</to>
+			</term>
+			<term>
+				<from><![CDATA[Save 20%. Use discount code <strong>#save20%</strong>]]></from>
+				<to><![CDATA[Скидка 3% по промокоду <strong>#save3%</strong>]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_top_left2</id></block>
+		</conditions>
+		<actions>
+			<term>
+				<from>#^Header top left 2$#</from>
+				<to>Левый верхний блок №2 в шапке страницы</to>
+			</term>
+			<term>
+				<from>#^Header top left 2 \(version 2\)$#</from>
+				<to>Левый верхний блок №2 в шапке страницы. Вариант №2</to>
+			</term>
+			<term>
+				<from>#^Header top left 2 \(version 3\)$#</from>
+				<to>Левый верхний блок №2 в шапке страницы. Вариант №3</to>
+			</term>
+			<term>
+				<from>See more demos</from>
+				<to>Все примеры</to>
+			</term>
+			<term>
+				<from>All demos</from>
+				<to>Демо-сайты Ultimo</to>
+			</term>
+			<term>
+				<from>Features</from>
+				<to>Возможности Ultimo</to>
+			</term>
+			<term>
+				<from>Buy me!</from>
+				<to>Купить Ultimo</to>
+			</term>
+			<term>
+				<from>Our Twitter</from>
+				<to>Наш блог в Twitter</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_top_links</id></block>
+		</conditions>
+		<actions>
+			<new_title>Ссылки в шапке страницы</new_title>
+			<term>
+				<from>My Title</from>
+				<to>Мой заголовок</to>
+			</term>
+			<term>
+				<from>My description</from>
+				<to>Моё описание</to>
+			</term>
+			<term>
+				<from>My Link</from>
+				<to>Моя ссылка</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_top_links2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Ссылки в шапке страницы. Блок №2</new_title>
+			<term>
+				<from>My Title</from>
+				<to>Мой заголовок</to>
+			</term>
+			<term>
+				<from>My description</from>
+				<to>Моё описание</to>
+			</term>
+			<term>
+				<from>My Link</from>
+				<to>Моя ссылка</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_top_right</id></block>
+		</conditions>
+		<actions>
+			<new_title>Правый верхний блок №1 в шапке страницы</new_title>
+			<term>
+				<from>Sample header content</from>
+				<to>Пример текста в шапке</to>
+			</term>
+			<term>
+				<from>Sample content of the top right static block</from>
+				<to>Здесь отображается самодельный блок «block_header_top_right».</to>
+			</term>
+			<term>
+				<from>Replace it with custom content</from>
+				<to>Разместите здесь свою информацию</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_header_top_right2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Правый верхний блок №2 в шапке страницы</new_title>
+			<term>
+				<from>Multiple languages are supported. This is only a demo switcher so it doesn't switch languages.</from>
+				<to>Пример переключателя языка интерфейса</to>
+			</term>
+			<term>
+				<from>Sample</from>
+				<to>Пример</to>
+			</term>
+			<term>
+				<from>Replace it with custom content</from>
+				<to>Разместите здесь свою информацию</to>
+			</term>
+			<term>
+				<from><![CDATA[>English<]]></from>
+				<to><![CDATA[>Русский<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>German<]]></from>
+				<to><![CDATA[>Немецкий<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Italian<]]></from>
+				<to><![CDATA[>Итальянский<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>French<]]></from>
+				<to><![CDATA[>Французский<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_left1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Левый блок №1</new_title>
+			<term>
+				<from>Home Custom Block</from>
+				<to>Пример блока на главной странице</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the left sidebar on the home page.
+Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в левой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the left sidebar on the home page. Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в левой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+			<term>
+				<from>There are many similar content placeholders across the store.
+All editable from admin panel.</from>
+				<to>Эта оформительская тема содержит массу подобных блоков.
+Все они редактируемы в административном разделе самодельных блоков.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_left2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Левый блок №2</new_title>
+			<term>
+				<from>Another Custom Block</from>
+				<to>Блок «block_home_left2»</to>
+			</term>
+			<term>
+				<from>Another Home Block</from>
+				<to>Блок «block_home_left2»</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the left sidebar on the home page.
+Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в левой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the left sidebar on the home page. Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в левой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_left3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Левый блок №3</new_title>
+			<term>
+				<from>Next Custom Block</from>
+				<to>Ещё один блок</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the left sidebar on the home page.
+Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в левой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_postscript</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок с дополнительной информацией на главной странице (Демо-магазин №3)</new_title>
+			<term>
+				<from>Recommended Shoes</from>
+				<to>Премиум-обувь</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_preface</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок-предисловие на главной странице</new_title>
+			<term>
+				<from>Home page - preface. Placeholder for custom content.</from>
+				<to>Блок-предисловие на главной странице</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_right1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Правая колонка. Блок №1</new_title>
+			<term>
+				<from>Brands</from>
+				<to>Бренды</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_right2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Правая колонка. Блок №1</new_title>
+			<term>
+				<from>Home Custom Block</from>
+				<to>Пример блока на главной странице</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_home_right3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Правая колонка. Блок №3</new_title>
+			<term>
+				<from>Home Custom Block</from>
+				<to>Пример блока на главной странице</to>
+			</term>
+			<term>
+				<from>Another Custom Block</from>
+				<to>Блок «block_home_right3»</to>
+			</term>
+			<term>
+				<from>Another Home Block</from>
+				<to>Блок «block_home_right3»</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_landing_page1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Целевая страница №1</new_title>
+			<term>
+				<from>See Also: Recommended New Products</from>
+				<to>смотрите также наши новые поступления</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_landing_page2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Целевая страница №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_landing_page3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Целевая страница №3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_left_bottom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Левая колонка. Нижний блок</new_title>
+			<term>
+				<from>Custom Block - Bottom</from>
+				<to>Блок «block_left_bottom»</to>
+			</term>
+			<term>
+				<from>Custom Block (bottom)</from>
+				<to>Блок «block_home_left2»</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed in the sidebar below the other blocks. Put your own content here.</from>
+				<to>Этот блок отображается в левой колонке ниже всех остальных блоков.</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed in the left sidebar below the other blocks. Put your own content here.</from>
+				<to>Этот блок отображается в левой колонке ниже всех остальных блоков.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_left_top</id></block>
+		</conditions>
+		<actions>
+			<new_title>Левая колонка. Верхний блок</new_title>
+			<term>
+				<from>Custom content placeholder</from>
+				<to>Разместите здесь свою информацию</to>
+			</term>
+			<term>
+				<from>Custom Block (top)</from>
+				<to>Блок «block_left_top»</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the top of the left sidebar. Put your own content here.</from>
+				<to>Этот блок отображаеся в верхней части левой колонки.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_img_bottom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок под картинкой товара</new_title>
+			<term>
+				<from>Sample content of the static block - image column bottom.</from>
+				<to>Блок «block_product_img_bottom».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_mini_cart_above_products</id></block>
+		</conditions>
+		<actions>
+			<new_title>Мини-корзина над товарами</new_title>
+			<term>
+				<from>Customizable CMS block for promo info</from>
+				<to>Разместите здесь информацию о спецпредложениях</to>
+			</term>
+			<term>
+				<from>Check our latest super promotions!</from>
+				<to>Обратите внимание на наши спецпредложения!</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_nav_links</id></block>
+		</conditions>
+		<actions>
+			<new_title>Дополнительные пункты главного меню</new_title>
+			<term>
+				<from>Sample custom link, add more links via CMS admin</from>
+				<to>Пример дополнительного пункта меню.
+Такие пункты можно добавить из администратвиной части.</to>
+			</term>
+			<term>
+				<!--
+					Скрываю этот пункт меню,
+					чтобы после русификации всё меню уместилось в одной строке,
+					как и до русификации.
+				 -->
+				<from>Buy</from>
+				<to></to>
+			</term>
+			<term>
+				<from>Features</from>
+				<to>Возможности</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_opc_below_progress</id></block>
+		</conditions>
+		<actions>
+			<new_title>Оформление заказа. Блок под индикатором стадии оформления заказа</new_title>
+			<term>
+				<from>Custom CMS block displayed below the one page checkout progress block. Put your own content here</from>
+				<to>Этот блок отображается на странице оформления заказа под индикатором стадии оформления заказа</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_primary_bottom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Блок внизу центральной области</new_title>
+			<term>
+				<from>CMS block - put your own content here. Product page, primary column bottom.</from>
+				<to>Этот блок отображается на странице товара внизу центральной области</to>
+			</term>
+			<term>
+				<from>Sample content of the static block - primary column bottom.</from>
+				<to>Блок «block_product_primary_bottom».</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_replace_related</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Блок вместо стандартного блока похожих товаров</new_title>
+			<term>
+				<from>Replace related</from>
+				<to>Вместо стандартного блока похожих товаров</to>
+			</term>
+			<term>
+				<from>Custom CMS block replacing related products. Put your own content here: text, HTML, images - whatever you want.</from>
+				<to>Этот блок отображается вместо стандартного блока похожих товаров.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_replace_upsell</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Блок вместо стандартного блока апсейла</new_title>
+			<term>
+				<from>Custom CMS block displayed when you want to replace up-sell products with custom content. You can put here simple text, images, HTML or whatever you like.</from>
+				<to>Этот блок отображается вместо стандартного блока апсейла.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed when you want to replace up-sell products with custom content. You can display here some text, images or any other content.</from>
+				<to>Этот блок отображается вместо стандартного блока апсейла.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_secondary_bottom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Блок внизу боковой колонки</new_title>
+			<term>
+				<from>We'll send product in 2 days.</from>
+				<to>Доставка любого заказа занимает не более 48 часов</to>
+			</term>
+			<term>
+				<from>Read more...</from>
+				<to>подробности</to>
+			</term>
+			<term>
+				<from>Call us now for more info about our products.</from>
+				<to>Круглосуточно Вы можете оформить заказ по телефону
+или получить ответы на любые интересующие Вас вопросы.</to>
+			</term>
+			<term>
+				<from>Return purchased items, get your money back.</from>
+				<to>Возврат заказанных товаров</to>
+			</term>
+			<term>
+				<from>Buy this product and earn 10 loyalty points!</from>
+				<to>Купите этот товар и получите 10 бонусных баллов!</to>
+			</term>
+			<term>
+				<from>Build your own social bookmarks, for more details refer to: http://www.addthis.com/get/sharing</from>
+				<to>Добавьте требуемые социальные закладки на http://www.addthis.com/get/sharing</to>
+			</term>
+			<term>
+				<from>Remove HTML comment around the icons in order to display the icons on product page</from>
+				<to>Удалите операторы комментариев рядом с требуемой Вам иконкой для показа её на странице товара</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_tab1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Вкладка №1</new_title>
+			<term>
+				<from><![CDATA[Custom CMS block displayed as a tab. You can use it to display info about returns and refunds, latest promotions etc. You can put your own content here: text, HTML, images - whatever you like. There are <strong>many similar blocks</strong> accross the store. All CMS blocks are editable from the admin panel.]]></from>
+				<to>Содержимое этой вкладки определяется самодельным блоком «block_product_tab1»</to>
+			</term>
+			<term>
+				<from><![CDATA[Magento Community Edition is the most powerful</strong> open source e-commerce software and can be downloaded 100% for free. Developers can modify the core code, add custom features and functionality by installing extensions from Magento Connect marketplace.]]></from>
+				<to>Российская сборка Magento — это версия Magento, адаптированная для интернет-магазинов России и СНГ.</to>
+			</term>
+			<term>
+				<from><![CDATA[Manage the fully dynamic catalog</strong> with the intutive admistrative interface. The flexible catalog system includes various options for the display of items. Magento is also integrated with a variety of major payment gateways out of the box.]]></from>
+				<to>Российская сборка Magento 100% совместима со всеми свежими версиями Magento Community Edition, начиная с версии 1.4.</to>
+			</term>
+			<term>
+				<from><![CDATA[Magento is a fully global platform</strong>, allowing for the expansion of business or simply offering multiple versions of your site to meet the needs of your customers.
+Translated into over 60 languages, supporting multiple currencies, payment methods and taxes, Magento allows for internationalization of your online stores.]]></from>
+				<to>Российская сборка Magento всем клиентам и партнёрам поставляется с полностью открытым исходным кодом.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_product_tab2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Вкладка №2</new_title>
+			<term>
+				<from><![CDATA[Another custom CMS block displayed as a tab. You can use it to display info about returns and refunds, latest promotions etc. You can put your own content here: text, HTML, images - whatever you like. There are <strong>many similar blocks</strong> accross the store. All CMS blocks are editable from the admin panel.]]></from>
+				<to>Содержимое этой вкладки определяется самодельным блоком «block_product_tab2»</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_right_bottom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок внизу правой узкой колонки</new_title>
+			<term>
+				<from>Right Bottom Block</from>
+				<to>Блок внизу правой узкой колонки</to>
+			</term>
+			<term>
+				<from>Custom Block (bottom)</from>
+				<to>Блок «block_right_bottom»</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the bottom of the right sidebar.  There are many similar content placeholders across the store.</from>
+				<to>Этот самодельный блок отображается в нижней части правой узкой колонки.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_right_top</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок вверху правой узкой колонки</new_title>
+			<term>
+				<from>CMS TEST menu</from>
+				<to>Пример меню</to>
+			</term>
+			<term>
+				<from>Custom Block (top)</from>
+				<to>Блок «block_right_top»</to>
+			</term>
+			<term>
+				<from>Right Top Block</from>
+				<to>Блок вверху правой узкой колонки</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the top of the right sidebar. Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Этот самодельный блок отображается в верхней части правой узкой колонки.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slide1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slide2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slide3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд №3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slideshow_banners</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд-шоу из баннеров</new_title>
+			<term>
+				<from>Add custom text</from>
+				<to>Разместите здесь свой текст</to>
+			</term>
+			<term>
+				<from>Simple example</from>
+				<to>Простой пример</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slide_wide1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд широкоформатный №1</new_title>
+			<term>
+				<from>Sample slide caption</from>
+				<to>Пример заголовка слайда</to>
+			</term>
+			<term>
+				<from>Sample text inside the slideshow, replace with custom content.</from>
+				<to>Пример описания слайда</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slide_wide2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд широкоформатный №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>block_slide_wide2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Слайд широкоформатный №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>cookie_restriction_notice_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Предупреждение о необходимости включить cookie</new_title>
+			<term>
+				<from><![CDATA[This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy page</a>. To accept cookies from this site, please click the Allow button below.]]></from>
+				<to><![CDATA[Для правильной работы интернет-магазина необходимо включить cookie нажатием кнопки ниже.]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_landing_page1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример целевой страницы №1. Цифровые товары</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_landing_page2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример целевой страницы №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_landing_page3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример целевой страницы №3. Для конкретного товарного раздела</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_landing_page4</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример целевой страницы №4. Для конкретного товарного раздела</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_landing_page5</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример целевой страницы №5. Для конкретного товарного раздела</new_title>
+			<term>
+				<from>Der Category Banner</from>
+				<to>Баннер товарного раздела</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet. </from>
+				<to></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slideshow_banners_s1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример слайд-шоу из баннеров №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slideshow_banners_s1-wide</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример слайд-шоу из широкоформатных баннеров</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s2_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №2. Слайд №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slideshow_banners_s3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пример слайд-шоу из баннеров №3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_all_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №1 для всех магазинов</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_all_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №2 для всех магазинов</new_title>
+			<term>
+				<from>Configure Product Grid</from>
+				<to>Настройте отображение списка товаров</to>
+			</term>
+			<term>
+				<from>Customize the display of category grid, show/hide elements</from>
+				<to>Настройте отображение списка товаров</to>
+			</term>
+			<term>
+				<from>Show products in columns: from 2 to 7</from>
+				<to>Оформительская тема способна отображать от 2 до 7 колонок в списке товаров</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s1-wide_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №2 для всех магазинов</new_title>
+			<term>
+				<from>Configure Product Grid</from>
+				<to>Настройте отображение списка товаров</to>
+			</term>
+			<term>
+				<from>Customize the display of category grid, show/hide elements</from>
+				<to>Настройте отображение списка товаров</to>
+			</term>
+			<term>
+				<from>Show products in columns: from 2 to 7</from>
+				<to>Оформительская тема способна отображать от 2 до 7 колонок в списке товаров</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s1_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №1. Слайд №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s1_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №1. Слайд №2</new_title>
+			<term>
+				<from>Click to see theme features list</from>
+				<to>Нажмите для просмотра всей возможностей жтой оформительской темы</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s2_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №2. Слайд №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s2_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №2. Слайд №2</new_title>
+			<term>
+				<from>Change colors of almost every element</from>
+				<to>Эта оформительская тема предоставляет возможность указания цвета
+практически любого элемента страницы</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s3_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №3. Слайд №1</new_title>
+			<term>
+				<from>You have never seen so many options</from>
+				<to>Вряд ли Вы когда-либо видели столько настроек у другой оформительской темы</to>
+			</term>
+			<term>
+				<from>You can change color of almost every element</from>
+				<to>Посредством административного интерфейса
+Вы можете задать цвет практически любого элемента страницы</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s4_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №4. Слайд №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s4_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №4. Слайд №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s5_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №5. Слайд №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>demo_slide_s5_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №5. Слайд №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Landing page 1 -->
+			<block><id>landing_page1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Целевая страница №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Landing page 2 -->
+			<block><id>landing_page2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Целевая страница №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Landing page 3 -->
+			<block><id>landing_page3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Целевая страница №3</new_title>
+			<term>
+				<from><![CDATA[>This is a custom landing page: a CMS block which can replace category products. You can put your own content here: text, HTML, images - whatever you want. You can create landing page for every category.<]]></from>
+				<to><![CDATA[>Пример целевой страницы. Здесь отображается самодельный блок «Целевая страница №3».<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Category slide 1 -->
+			<block><id>block_category_slide1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу товарных разделов. Слайд №1</new_title>
+			<term>
+				<from>Category Slideshow</from>
+				<to>Слайд-шоу товарных разделов</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Category slide 2 -->
+			<block><id>block_category_slide2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу товарных разделов. Слайд №2</new_title>
+			<term>
+				<from>Sample Category Slideshow</from>
+				<to>Слайд-шоу товарных разделов</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s1 - 3 -->
+			<block><id>demo_slide_s1_3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №1.3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s1 - 3 -->
+			<block><id>demo_slide_s1_4</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №1.4</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s1 wide - 2 -->
+			<block><id>demo_slide_s1-wide_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №1.2 (широкий)</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s3 - 2 -->
+			<block><id>demo_slide_s3_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №3.2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s4 - 3 -->
+			<block><id>demo_slide_s4_3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №4.3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s5 - 3 -->
+			<block><id>demo_slide_s5_3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №5.3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s6 - 1 -->
+			<block><id>demo_slide_s6_1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №6.1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Demo slide - s6 - 2 -->
+			<block><id>demo_slide_s6_2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №6.2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA[>Fully Responsive Magento Theme<]]></from>
+				<to><![CDATA[>Адаптивная оформительская тема<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Super Promo<]]></from>
+				<to><![CDATA[>Промо-блок<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sample Column<]]></from>
+				<to><![CDATA[>Пример колонки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Content placeholders<]]></from>
+				<to><![CDATA[>Предустановленные самодельные блоки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>50+ CMS blocks<]]></from>
+				<to><![CDATA[>92 предустановленных самодельных блока<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>You can change color of almost every element of the design<]]></from>
+				<to><![CDATA[>Посредством административного интерфейса
+Вы можете задать цвет практически любого элемента страницы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Change color of almost every element of the design<]]></from>
+				<to><![CDATA[>Посредством административного интерфейса
+Вы можете задать цвет практически любого элемента страницы<]]></to>
+			</term>
+			<term>
+				<from>You can use content placeholders to display custom content in almost every part of the store. Import sample CMS blocks from the demo...</from>
+				<to>Оформительская тема Ultimo содержит предустановленные самодельные блоки. Используйте их для размещения своего содежимого.</to>
+			</term>
+			<term>
+				<from><![CDATA[Friends Inc., 90 Bedford St<br />New York, NY 041, USA]]></from>
+				<to><![CDATA[127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1]]></to>
+			</term>
+			<term>
+				<from>"See all available live demo stores"</from>
+				<to>"Все демо-сайты"</to>
+			</term>
+			<term>
+				<from>"Sell downloads in your store (software, e-books, music, any digital products)"</from>
+				<to>"Продавайте цифровые товары"</to>
+			</term>
+			<term>
+				<from>"Theme For Wide Screens"</from>
+				<to>"Для широких экранов"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Theme For Wide Screens<]]></from>
+				<to><![CDATA[>Для широких экранов<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>It also supports wide screens<]]></from>
+				<to><![CDATA[>Она также хорошо смотрится на широком экране<]]></to>
+			</term>
+			<term>
+				<from>"Magento Theme"</from>
+				<to>"Оформительская тема для Российской сборки Magento"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Magento Theme<]]></from>
+				<to><![CDATA[>Оформительская тема для Российской сборки Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customizable Magento Theme<]]></from>
+				<to><![CDATA[>Оформительская тема для Российской сборки Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Ultimo Theme fully supports wide screens<]]></from>
+				<to><![CDATA[>Ultimo хорошо смотрится на широких экранах<]]></to>
+			</term>
+			<term>
+				<from>This is a custom landing page with sidebar: a CMS block which can replace category products. You can put your own content here: text, HTML, images - whatever you want. You can create landing page for every category.</from>
+				<to>Пример целевой страницы с боковой колонкой</to>
+			</term>
+			<term>
+				<from>There are many similar blocks accross the store. All editable from admin panel.</from>
+				<to>Все подобные блоки редактируются в административном разделе «Витрина» → «Самодельные блоки»</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the right sidebar on the home page.
+Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в правой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+			<term>
+				<from>Custom CMS block displayed at the right sidebar on the home page. Put your own content here: text, HTML, images - whatever you like.</from>
+				<to>Пример самодельного блока в правой колонке главной страницы.
+Размещайте здесь всё, что душе угодно: тест, HTML, картинки...</to>
+			</term>
+			<term>
+				<from>Sample content of block_</from>
+				<to>Самодельный блок block_</to>
+			</term>
+			<term>
+				<from>Container for custom content: block_</from>
+				<to>Самодельный блок block_</to>
+			</term>
+			<term>
+				<from>"My Category Block"</from>
+				<to>"Товарные разделы"</to>
+			</term>
+			<term>
+				<from>"Main Categories"</from>
+				<to>"Товарные разделы"</to>
+			</term>
+			<term>
+				<from>"Main Categories"</from>
+				<to>"Товарные разделы"</to>
+			</term>
+			<term>
+				<from>"All Categories"</from>
+				<to>"Товарные разделы"</to>
+			</term>
+			<term>
+				<from>Create landing pages for categories</from>
+				<to>Сделайте целевые страницы для каждого товарного раздела</to>
+			</term>
+			<term>
+				<from><![CDATA[>e-Books<]]></from>
+				<to><![CDATA[>Электронные книги<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sell e-Books with Magento<]]></from>
+				<to><![CDATA[>Magento подходит для продажи электронных книг<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Music<]]></from>
+				<to><![CDATA[>Музыка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sell music with Magento<]]></from>
+				<to><![CDATA[>Magento подходит для продажи музыки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Software<]]></from>
+				<to><![CDATA[>Программное обеспечение<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sell digital products<]]></from>
+				<to><![CDATA[>Magento подходит для продажи программного обеспечения и других скачиваемых товаров<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor <]]></from>
+				<to><![CDATA[>Пример текста <]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-home-page</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Вариант №1</new_title>
+			<term>
+				<from>Модульная сетка с 12 колонками. Оформительская тема Ultimo хорошо смотрится на любом экране.
+Ultimo использует гибкий макет на основе сетки и автоматически адаптируется к изменениям размера экрана.</from>
+				<to>Множество цветовых вариантов</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-home-page2</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Вариант №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-home-page3</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Вариант №3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-home-page4</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Вариант №4</new_title>
+			<term>
+				<from>Product Grid</from>
+				<to>Список товаров</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-home-page5</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Вариант №5</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-home-page6</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Вариант №6</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>ultimo-responsive-magento-theme</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo — оформительская тема для Российской сборки Magento</new_title>
+			<term>
+				<from>Ultimo - Responsive Magento Theme</from>
+				<to>Ultimo — оформительская тема для Российской сборки Magento</to>
+			</term>
+			<term>
+				<from>Ultimo - Fully Responsive Magento Theme</from>
+				<to>Ultimo — тема для Российской сборки Magento</to>
+			</term>
+			<term>
+				<from>Ultimo is a premium Magento theme with advanced admin module. It’s extremely customizable, easy to use and fully responsive. Suitable for every type of store. Great as a starting point for your custom projects.</from>
+				<to><![CDATA[
+<strong>Ultimo</strong> — самая популярная оформительская тема для Magento
+(<strong><a
+	href="http://themeforest.net/search?utf8=%E2%9C%93&term=&sort=sales&view=list&category=ecommerce%2Fmagento&ref=dfediuk"
+>1-е место по продажам</a></strong> на ThemeForest,
+<strong>9867</strong> продаж на <strong>$976.833</strong> на сентябрь 2014 года).
+<br/>
+<a href="http://magento-forum.ru/">Российская сборка Magento</a>,
+начиная с <strong><a href="http://magento-forum.ru/topic/1464/">версии 2.41.0</a></strong>,
+содержит <strong><a href="http://magento-forum.ru/forum/320/">русификатор</a></strong> для Ultimo.
+<br/>
+<a href="http://magento-forum.ru/topic/756/">Клиентам Российской сборки Magento</a>
+по теме Ultimo оказывается <strong><a href="http://magento-forum.ru/forum/320/">техническая поддержка на русском языке</a>
+</strong>.
+				]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<h4><a class="go" href="http://ultimo.infortis-themes.com/demo/select-demo/" title="See more demos">See all available demos</a></h4>]]></from>
+				<to><![CDATA[<h4><a class="go" href="http://ultimo.infortis-themes.com/demo/select-demo/" title="демо-сайты">демо-сайты</a></h4>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<p><strong>Compatible with Magento:</strong><br/>1.5.0.1, 1.5.1.0, 1.6.0.0, 1.6.1.0, 1.6.2.0, 1.7.0.0, 1.7.0.1, 1.7.0.2, 1.8.0.0, 1.8.1.0</p>]]></from>
+				<to></to>
+			</term>
+			<term>
+				<from><![CDATA[<h4><a style="color:red;" class="go" href="http://themeforest.net/item/ultimo-flexible-magento-theme/1744309?ref=infortis">Buy this theme</a></h4>]]></from>
+				<to><![CDATA[
+<h4>
+	<a
+		style="color:red;"
+		class="go"
+		href="http://themeforest.net/item/ultimo-flexible-magento-theme/1744309?ref=dfediuk"
+	>купить эту тему</a>
+</h4>
+				]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<br/>
+<br/>
+
+
+
+<div style="background-color: #f5f5f5; border-radius: 5px; text-align:center;">
+<br/>
+<br/>
+
+<img src="{{media url='wysiwyg/demo/infortis/ultimo/custom/features1.png'}}" alt="Ultimo Theme Features" />
+
+<br/>
+<br/>
+</div>]]></from>
+				<to></to>
+			</term>
+			<term>
+				<from>List of key features</from>
+				<to>Возможности Ultimo</to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Customizable design</strong> - change the visual appearance of almost every element]]></from>
+				<to><![CDATA[Большое количестве <b>настроечных опций</b> отличает Ultimo от обычных оформительских тем.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Unlimited colors</strong> - change colors of dozens of elements, apply textures, upload custom background images]]></from>
+				<to><![CDATA[Вы можете указать свой <b>цвет и фоновое изображение</b> для многих элементов интерфейса.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Google Fonts</strong> - integration with Google Fonts]]></from>
+				<to><![CDATA[Ultimo задействует шрифты из <b>Google Fonts</b>:
+обширного каталога шрифтов для веба.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Custom font stack</strong> - ability to select standard web-safe fonts (e.g. Arial, Verdana) or define custom font stack (e.g.: <em>Arial, "Helvetica Neue", Helvetica, sans-serif</em>)]]></from>
+				<to><![CDATA[Вы можете назначать экранному элементу не только некий конкретный шрифт,
+но и <b><a href="http://webdesign.about.com/od/fonts/g/font-stack.htm">набор шрифтов</a></b>:
+тот или иной шрифт набора будет применяться браузером посетителя
+в зависимости от возможностей компьютера или мобильного устройства посетителя.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Responsive [on/off]</strong> - responsive layout can be disabled if you prefer non-responsive websites]]></from>
+				<to><![CDATA[Вы можете включать и отключать
+<b><a href="https://ru.wikipedia.org/wiki/Адаптивный_веб-дизайн">адаптивность</a></b> Вашего интернет-магазина
+к различным устройствам.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Customizable responsive layout</strong> - select maximum width of the page (from 1024 to 1680 pixels) or specify your custom width]]></from>
+				<to><![CDATA[Вы можете настраивать <b>максимальную ширину страницы</b>: от 1024 до 1680 пикселей.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Fluid page width</strong> - if fluid width is enabled, theme will always use entire available space of the screen to display content. It can adapt to any screen resolution. If disabled, page width will only be changed on predefined breakpoints (from 240 to 1680 pixels).]]></from>
+				<to><![CDATA[Вы можете выбирать между широкоформатным либо фиксированным режимом отображения темы.
+<br/>В <b>широкоформатном</b> режиме тема будет занимать по ширине всю доступную область окна браузера.
+<br/>В <b>фиксированном</b> режиме тема также адаптируется к ширен окна бразуера,
+но при этом меняет свою ширину будет менять свою ширину не непрерывно, а фиксированными интервалами:
+от 240 до 1680 пикселей.]]></to>
+			</term>
+			<term>
+				<from>MEGA MENU</from>
+				<to>Главное меню</to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>2 menu styles - </strong>wide mega menu [<a href="http://ultimo.infortis-themes.com/demo/">demo</a>] or classic drop-down menu [<a href="http://ultimo.infortis-themes.com/demo/third/">demo</a>]]]></from>
+				<to><![CDATA[Меню поддерживает <b>обычный</b> и <b>широкоформатный</b> режимы.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Custom content blocks</strong> - add any content (images, text, HTML) inside drop-down menus for every 1st-level and 2nd-level category]]></from>
+				<to><![CDATA[В широкоформатном режиме пункты меню могут содержать дополнительный контент: <b>картинки, текст, HTML</b>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Customizable size</strong> - adjust number of columns inside drop-down menus]]></from>
+				<to><![CDATA[Для широкоформатного режима Вы можете задать <b>количество колонок</b>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Accordion (mobile menu)</strong> - on mobile devices the menu turns into a collapsible accordion. Set the value of the web browser wievport width below which the menu turns into accordion]]></from>
+				<to><![CDATA[При просмотре сайта с мобильного устройства
+(или когда ширина окна браузера становиться меньше заданной администратором)
+меню переходит в специальный режим «<b>аккордеон</b>» для маленьких экранов.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Category labels</strong> - eye-catching labels for categories (customizable colors ant text)]]></from>
+				<to><![CDATA[Вы можете повесить на разделы меню бросающиеся в глаза <b>ярлыки</b>: например, «новая коллекция».]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Custom links</strong> - display custom links in the main menu bar and use it as a menu for CMS pages (categories can be completely removed from the menu, if needed)]]></from>
+				<to><![CDATA[Пункты меню могут вести на <b>произвольные страницы</b> магазина. Из меню можно убрать те или иные товарные разделы.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Fully customizable colors</strong>]]></from>
+				<to><![CDATA[Пункты меню можно окрасить произвольным <b>цветом</b>.]]></to>
+			</term>
+			<term>
+				<from>SIDEBAR MENU</from>
+				<to>Боковое меню</to>
+			</term>
+			<term>
+				<from><![CDATA[<li><strong>Sidebar menu</strong> - display sidebar menu (collapsible accordion) on selected pages. Enable it individually for: category pages, home page, CMS pages, product pages. Choose between left or right sidebar. Sidebar menu can also be displayed via shortcode in any CMS block and on any page.</li>]]></from>
+				<to><![CDATA[<li>Боковое меню отображается в <b>боковой колонке</b> выбранных Вами типов страниц магазина
+(товарные, списка товаров, самодельные, главная).</li>
+<li>Боковое меню работает в режиме «<b>аккордеона</b>».</li>
+<li>Помимо боковой колонки боковое меню можно вставить <b>внутрь любого блока</b>
+посредством специального тега.</li>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Depth of the sidebar menu</strong> - control how many levels in the hierarchy of categories are to be included in the menu]]></from>
+				<to><![CDATA[Вы можете задать предельную <b>глубину вложенности</b> элементов бокового меню (товарных разделов).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Starting category</strong> - sidebar menu will only contain children (subcategories) of the selected parent category]]></from>
+				<to><![CDATA[Вы можете ограничить боковое меню <b>одним товарным разделом</b>
+(со всеми его подразделами).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Hide on mobile devices</strong> - sidebar menu can be hidden on mobile devices (if browser viewport is narrower than 768 pixels)]]></from>
+				<to><![CDATA[Вы можете скрыть боковое меню
+для посетителей с <b>мобильных устройств</b> (когда ширина экрана браузера меньше 768 пикселей).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[CATEGORY VIEW]]></from>
+				<to><![CDATA[Страница товарного раздела]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Fluid product grid</strong> - select the number of products displayed in a single row on category pages. Display from 2 to 8 products per row. On wide screens the number of columns will be automatically increased to show more products in a row]]></from>
+				<to><![CDATA[В режиме плитки отображается <b>от 2 до 8 товаров в ряду</b>,
+в зависимости от размеров экрана.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Product grid on mobile devices</strong> - additionally control the number of products displayed if browser viewport width is below: 640 px, 768 px and 480 px.]]></from>
+				<to><![CDATA[Для <b>мобильных экранов</b> с заданным диапазоном разрешения
+(до 480, 640 и 768 пикселей) можно явно задать количество товаров в одном ряду плитки.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Customizable product grid</strong> - configure the display of the following elements of the grid: product name, price, "Add to cart" button, ratings (stars), "Add to wishlist" and "Add to compare" links.<br/>Elements can be: <strong>1) always visible, 2) visible only on mouse hover, 3) or completely removed</strong>]]></from>
+				<to><![CDATA[Вы можете <b>настроить отображение элементов</b> товарной плитки:
+названия товара, цены, кнопки добавления в корзину, индикатора рейтинга,
+ссылкок «отложить» и «сравнить». Эти элементы могут быть:
+видимы всегда, видимы при наведении мыши, полностью невидимы.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Centered or left-aligned</strong> - align grid elements to the center or to the left]]></from>
+				<to><![CDATA[Элементы товарной плитки (название товара, цена, кнопка «в корзину» и т.п.)
+могут быть <b>выровнены</b> либо по <b>центру</b>, либо по <b>левому краю</b> плитки.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Size of elements</strong> - control the size of the elements: product name, button, product labels]]></from>
+				<to><![CDATA[Вы можете задать <b>размеры</b> элементов товарной плитки: названия товара, кнопки «в корзину», ярлыков.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Alternative images</strong> - show alternative product images on mouse hover (in category view and in product sliders)]]></from>
+				<to><![CDATA[Вы можете задать <b>картинку</b>, которая будет отображаться при наведении мыши на товарную плитку.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Equal height</strong> - items in the product grid can be aligned vertically to improve the layout]]></from>
+				<to><![CDATA[Можно сделать все товарные плитки ряда <b>едиными по высоте</b>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Image aspect ratio</strong> - keep the aspect ratio of product images (upload images of any dimensions, not necessarily square)]]></from>
+				<to><![CDATA[Вы можете задать <b>пропорции товарных изображений</b> на плитке.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Sidebar category menu</strong> - configure additional menu (see section above)]]></from>
+				<to><![CDATA[Сбоку от плитки можно разместить меню товарных разделов (смотрите описание выше в разделе «<b>Боковое меню</b>»).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[PRODUCT PAGE]]></from>
+				<to><![CDATA[Страница товара]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Brand logo</strong> on product page. Logo can be a link to any page (to category with products from that brand, to search results or to any custom CMS page). Alternatively brand names can be displayed instead of logo images]]></from>
+				<to><![CDATA[На товарной карточке можно показать <b>торговую марку (бренд)</b>
+логотипом или текстом со ссылкой на произвольную страницу магазина
+(например, на страницу товарного раздела, результатов поиска или некую самодельную).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Customizable image size</strong> on product page. Specify any size you like, images don’t have to be square - you can keep the aspect ratio]]></from>
+				<to><![CDATA[Вы можете задать <b>размеры изображений</b> на товарной карточке,
+том числе и с автоматическим сохранением исходных пропорций.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Cloud Zoom + Lightbox</strong> - product image zoom. Use one of those methods or both at a time. Cloud Zoom can be displayed inside or outside the main image.]]></from>
+				<to><![CDATA[Для детализации товарных изображений Вы можете использовать
+<b>лупу</b> (<b>зум</b>) и/или всплывающее окно (<b>лайтбокс</b>).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Product image gallery</strong> - enable/disable gallery mode in the Lightbox (previous/next buttons)]]></from>
+				<to><![CDATA[Для лайтбокса можно включить <b>режим галереи</b>,
+	чтобы листать изображения, не покидая лайтбокс.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Image thumbnail slider</strong> - enable automatic scrolling, control speed]]></from>
+				<to><![CDATA[Для товарных изображений доступен <b>режим карусели</b>,
+в том числе и с автоматической прокруткой с заданной Вами скоростью]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Tabs/accordion</strong> - tabs smoothly turns into accordion on narrow screens]]></from>
+				<to><![CDATA[Для мобильных устройств информационные вкладки превращаются в «<b>аккордеон</b>».]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>"Additional Information" tab for individual product attributes</strong>- create and display custom product attributes]]></from>
+				<to><![CDATA[Для товарных свойств имеется вкладка «<b>Характеристики</b>».]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>2 tabs for custom content</strong> - ready to display any static content: info about shipping, returns, sales, promotions or any other general information]]></from>
+				<to><![CDATA[Имеются <b>2 дополнительных вкладки</b> для произвольного содержимого
+(например, условий доставки или описания промо-акций).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Tabbed reviews</strong> - show product reviews on product page to improve SEO]]></from>
+				<to><![CDATA[<b>Отзывы</b> для удобства посетителей и поисковой оптимизации
+отображаются прямо под товарной карточкой на отдельной вкладке
+(а не отдельной странице, как обычно в Magento).]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Replace Related Products and Up-sell Products</strong> blocks with custom content. Replace completely or replace only if the product does not have any related/up-sell products. Or disable those blocks completely with just one click]]></from>
+				<to><![CDATA[На месте стандартных блоков <b>апсейла</b> и <b>похожих товаров</b>
+Вы можете разместить свой контент.
+Замена возможна как на постоянной основе, так и только при отсутствии для товара апсейла и похожих.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Automatic scrolling of product sliders</strong> - enable automatic scrolling for Up-sell Products and Related Products]]></from>
+				<to><![CDATA[Можно включить автоматическкю <b>карусельную прокрутку</b> апсейла и плохожих товаров.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Lazy loading</strong> - if enabled for product sliders, images outside of viewport will not be loaded (to improve performance) before user scrolls to them]]></from>
+				<to><![CDATA[Можно <b>отложить загрузку</b> каруселей до попадания их в зону видимости посетителя.
+Это ускорит первичную загрузку страницы.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[HOME PAGE]]></from>
+				<to><![CDATA[Главная страница]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<li><strong>Home page slideshow</strong> - image slideshow can be displayed on any CMS page and in any static block with simple shortcode. Show any content in your slides (clickable or non-clickable images, complex HTML, anything), add captions above images.</li>]]></from>
+				<to><![CDATA[<li><b>Слайд-шоу</b> на главную страницу (и любую другую самодельную страницу)
+добавляется одним тегом.</li><li><b>Слайды</b> отображают любой контент: картинки (с ссылками и без),
+HTML и т.п.</li><li>Поверх слайдов можно разместить поясняющие их <b>надписи</b>.</li>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Slideshow + banners</strong> - additional small banners can be disabled at the right or left side of the slideshow]]></from>
+				<to><![CDATA[Сбоку от слайдов Вы можете показывать дополнительные небольшие <b>баннеры</b>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Full width slideshow</strong> - home page slideshow can be configured to span the full width of the page]]></from>
+				<to><![CDATA[Слайд-шоу имеет <b>широкоформатный режим</b>,
+тогда слайды занимают по ширине всё доступное место страницы.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Hide slideshow on mobile devices</strong> - ability to hide slideshow or slideshow banners on mobile devices</li>]]></from>
+				<to><![CDATA[Слайд-шоу и боковые баннеры можно <b>отключить для мобильных устройств</b>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<li><strong>1, 2, 3 columns layout</strong> - you can choose the layout of the home page: 1, 2 or 3 columns. Display custom content in multiple sidebar blocks. Enable/disable Magento’s default sidebar blocks on home page.</li>]]></from>
+				<to><![CDATA[<li>Главная страница может содержать <b>1, 2 или 3 колонки</b>.</li>
+<li>Для боковых колонок имеется множество <b>предустановленных блоков</b>,
+которые можно включать/отключать.</li>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>List of categories on home page</strong> - display category menu (see section: Sidebar Menu)]]></from>
+				<to><![CDATA[В боковой колонке главной страницы можно отобразить меню товарных разделов
+(смотрите раздел «<b>Боковое меню</b>» выше.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Brand slider</strong> - show all product brands on the home page (or on any other CMS page)]]></from>
+				<to><![CDATA[<b>Карусель с логотипами брендов</b> можно показать как на главной,
+так и на любой другой самодельной странице.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Responsive custom columns</strong> - compose page content with ease using built-in grid system]]></from>
+				<to><![CDATA[Для сохранения <b>адаптивности</b> сайта к мобильным устройствам
+используйте для своего контента встроенную модульную сетку.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[PRODUCT SLIDERS]]></from>
+				<to><![CDATA[Товарные карусели]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<li><strong>Customizable product sliders on any page</strong> - display fully customized product sliders <strong>on any CMS page</strong> and inside any CMS block. Configure the number of products, size of product images, scrolling speed, automatic or manual scrolling, display pagination, hide "Add to cart" buttons</li>]]></from>
+				<to><![CDATA[<li>Товарные карусели можно размещать на любой самодельной <b>странице</b>
+и в любом самодельном <b>блоке</b>.</li>
+<li>Для карусели <b>настраивается</b> количество видимых товаров,
+размеры слайдов (товарных изображений), режим прокрутки: ручной или автоматический,
+скорость автоматический прокрутки, блок постраничной разбивки данных,
+показ кнопки «добавить в корзину».</li>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Two types of sliders</strong> - "Featured Products" and "New Products"]]></from>
+				<to><![CDATA[Карусели показывают товары-<b>новинки</b> и для <b>премиум</b>-товары
+(Вы можете назначить таким произвольные товары, а также дать каруселям произвольные названия)]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Responsive sliders</strong> - full control over the number of products in a row visible with a particular browser viewport width]]></from>
+				<to><![CDATA[Карусели <b>адаптивны</b> к размерам экранов посетителей:
+можно задать для разных размеров экрана посетителей разное количество видимых в карусели товаров.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Multiple sliders</strong> - show multiple product sliders on a single page]]></from>
+				<to><![CDATA[На одной странице можно разместить сразу <b>несколько</b> каруселей.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Random products</strong> - display random products in the "Featured Products" slider]]></from>
+				<to><![CDATA[Карусели могут прокручивать товары в <b>случайном</b> порядке.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Lazy loading</strong> - if enabled, images outside of viewport will not be loaded (to improve performance) before user scrolls to them]]></from>
+				<to><![CDATA[Можно <b>отложить загрузку</b> каруселей до попадания их в зону видимости посетителя.
+Это ускорит первичную загрузку страницы.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<h4>CMS</h4>]]></from>
+				<to><![CDATA[<h4>Самодельные страницы</h4>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>One-click import</strong> - import CMS blocks and pages with sample content from the demo]]></from>
+				<to><![CDATA[<b>Импорт</b> стандартных для темы страниц и блоков одной кнопкой.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>50+ CMS blocks</strong> - content placeholders (in Magento called <em>static blocks</em>) ready to display custom content in almost every part of the store. Using these placeholders you are able to insert your content into product page, shopping cart, checkout, header, footer, CMS pages etc. Everything edited from the admin panel]]></from>
+				<to><![CDATA[<b>92 предустановленных самодельных блока блоков</b>
+позволят Вам разместить свою информацию в любом уголке Вашего интернет-магазина.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Multi-level footer</strong> - compose your page footer using predefined CMS blocks (placeholders) or with built-in grid system. Put there your links, latest news, company info or any other custom content]]></from>
+				<to><![CDATA[<b>Подвал</b> страниц Ultimo является многоуровневым:
+на каждом уровне расположены стандартные блоки, где Вы можете показывать произвольную информацию.
+Для размещения неукладывающегося в стандартные блоки содержимого
+Вы можете использовать встроенную модульную сетку.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Social services bookmarks</strong> - social widgets can be easily added to any section (product page, footer, header etc.) using any of the CMS blocks]]></from>
+				<to><![CDATA[Вы можете добавить в любое место страницы <b>социальные закладки</b>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[OTHER]]></from>
+				<to><![CDATA[Остальное]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>"New" and "Sale" labels</strong> - mark your products with eye-catching labels. Text on the labels can be easily translated to other languages]]></from>
+				<to><![CDATA[На товары можно вешать <b>ярлыки</b> «<b>Новинка</b>» и «<b>Скидка</b>».]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Override default Magento header and footer links</strong> - those links are hard-coded in Magento but with this theme you can easily replace them with your custom links]]></from>
+				<to><![CDATA[В <b>шапке</b> и <b>подвале</b> можно поместить свои <b>ссылки</b>
+вместо стандартных ссылок Magento.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[General Info]]></from>
+				<to><![CDATA[Общая информация]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>190-pages user guide PDF</strong> - the best Magento theme documentation<br />
+on ThemeForest]]></from>
+				<to><![CDATA[Ultimo обладает лучшей документацией среди тем Magento:
+				<strong>207 страниц в формате PDF</strong>.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Multi-language ready</strong> - this theme can work with any language installed in your Magento]]></from>
+				<to><![CDATA[Ultimo способна работать в <b>многоязычном</b> режиме
+и включает переключатель языка витрины.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>Multi-store ready</strong> - applicable for multi-store Magento installations]]></from>
+				<to><![CDATA[Ultimo способна работать в <b>многосайтовой</b> системе.]]></to>
+			</term>
+			<term>
+				<from><![CDATA[Optimized, well-structured and commented CSS]]></from>
+				<to><![CDATA[Правила <b>CSS</b> структурированы, содержат комментарии
+	и оптимизированы для быстрой загрузки браузером]]></to>
+			</term>
+			<term>
+				<from><![CDATA[PSD files included (with basic layout structure + all interface icons for easy customization)]]></from>
+				<to><![CDATA[Дистрибутив Ultimo содержит графические <b>макеты в формате Photoshop (PSD)</b>.
+Это позволит Вам вносить изменения в графические элементы.]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+				<title>Ultimo - Fully Responsive Magento Theme</title>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Демо-сайт №1</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+				<title>Ultimo - Fully Responsive Magento Theme | Demo 2</title>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Демо-сайт №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+				<title>Ultimo - Fully Responsive Magento Theme | Demo 3</title>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Демо-сайт №3</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+				<title>Ultimo - Fully Responsive Magento Theme | Demo 4</title>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Демо-сайт №4</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+				<title>Ultimo - Fully Responsive Magento Theme | Demo 5</title>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Ultimo. Главная страница. Демо-сайт №5</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>home</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA["Show Selected Products" ]]></from>
+				<to><![CDATA["Премиум"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Multiple Sliders"]]></from>
+				<to><![CDATA["Новинки"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Best Store and Best Brands"]]></from>
+				<to><![CDATA["Бренды"]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<!-- Magento Discount Code/Coupons -->
+				<url_key>magento-discount-code-coupons</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Специальные предложения</new_title>
+			<term>
+				<from>Magento Discount Code/Coupons</from>
+				<to>Специальные предложения</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>typography</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Обзор шрифтов и стилей текста</new_title>
+			<term>
+				<from>Sample of basic typography</from>
+				<to>Обзор шрифтов и стилей текста</to>
+			</term>
+			<term>
+				<from>H1 Heading</from>
+				<to>Заголовок H1</to>
+			</term>
+			<term>
+				<from>H2 Heading</from>
+				<to>Заголовок H2</to>
+			</term>
+			<term>
+				<from>H3 Heading</from>
+				<to>Заголовок H3</to>
+			</term>
+			<term>
+				<from>H4 Heading</from>
+				<to>Заголовок H4</to>
+			</term>
+			<term>
+				<from>H5 Heading</from>
+				<to>Заголовок H5</to>
+			</term>
+			<term>
+				<from>H6 Heading</from>
+				<to>Заголовок H6</to>
+			</term>
+			<term>
+				<from>Lid est laborum et dolorum fuga. Et harum quidem rerum facilis est et expeditasi distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihilse impedit quo minus id quod amets untra dolor amet sad. Sed ut perspser iciatis unde omnis iste natus error sit voluptatem accusantium doloremque laste. Dolores sadips ipsums sits.</from>
+				<to>Адажио образует канал, однако сами песни забываются очень быстро. Показательный пример – интервально-прогрессийная континуальная форма фактурна. Хамбакер, по определению, имитирует мелодический рефрен. Очевидно, что адажио имитирует модальный звукосниматель. Гармоническое микророндо имитирует глубокий микрохроматический интервал. Громкостнoй прогрессийный период имитирует лирический рефрен, но если бы песен было раз в пять меньше, было бы лучше для всех. </to>
+			</term>
+			<term>
+				<from>Paragraphs with icons</from>
+				<to>Параграфы с иконками</to>
+			</term>
+			<term>
+				<from>The Secondary Heading</from>
+				<to>Подзаголовок</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit sed scelerisque solare de equis. Nullam ornare enim nec justo biben lobortis. In eget metus. Lorem ipsum dolor sit consectetur...</from>
+				<to>При наступлении согласия всех сторон гарант лицензирует юридический штраф. Рефинансирование, несмотря на внешние воздействия, гарантирует вексель, делая этот вопрос чрезвычайно актуальным. Предпринимательский риск, в согласии с традиционными представлениями, гарантирует имущественный бытовой подряд.</to>
+			</term>
+			<term>
+				<from>Feature Title</from>
+				<to>Заголовок описания некой функциональной возможности</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit sed scelerisque quis. Nullam ornare enim nec justo bibendum lobortis. In eget metus. Lorem ipsum dolor sit consectetur, adipiscing elit</from>
+				<to>Согласно предыдущему, пустое подмножество традиционно стабилизирует ротор векторного поля. Интеграл по бесконечной области, не вдаваясь в подробности, специфицирует многомерный полином. Бином Ньютона, следовательно, упорядочивает функциональный анализ, что неудивительно. Умножение двух векторов (скалярное) изящно проецирует интеграл по бесконечной области.</to>
+			</term>
+			<term>
+				<from>Ordered  and unordered lists</from>
+				<to>Нумерованные и маркированные списки</to>
+			</term>
+			<term>
+				<from>Lectus vitae ligula tempus</from>
+				<to>Векторное поле искажает интеграл по бесконечной области</to>
+			</term>
+			<term>
+				<from>Vitae lorem ipsum dolor sit amet</from>
+				<to>Определитель системы линейных уравнений</to>
+			</term>
+			<term>
+				<from>Sample lectus vitae ligula tempus</from>
+				<to> Арифметическая прогрессия реально оправдывает аксиоматичный интеграл</to>
+			</term>
+			<term>
+				<from>Unlimited colors, dozens of customizable elements</from>
+				<to>Множество цветовых вариантов и настраиваемых элементов</to>
+			</term>
+			<term>
+				<from>System messages</from>
+				<to>Системные сообщения</to>
+			</term>
+			<term>
+				<from>These are sample system messages displayed by Magento.</from>
+				<to>Пример системного сообщения Magento</to>
+			</term>
+			<term>
+				<from>The maximum quantity allowed for purchase is 10.</from>
+				<to>Для заказа доступно 10 единиц данного товара</to>
+			</term>
+			<term>
+				<from>Please specify the product's option(s).</from>
+				<to>Выберите опции товара</to>
+			</term>
+			<term>
+				<from>Sample Custom Banners</from>
+				<to>Примеры рекламных баннеров</to>
+			</term>
+			<term>
+				<from>Here you can see some examples of banners.</from>
+				<to>Здесь Вы видите несколькоп римеров рекламных баннеров</to>
+			</term>
+			<term>
+				<from>Banners can be placed on any CMS page, and in any CMS block. Each banner is a simple image inside a link.</from>
+				<to>Вы можете размешать баннеры на любую самодельную страницу, а также в любом самодельном блоке. Каждый баннер — это просто картинка с гиперссылкой.</to>
+			</term>
+		</actions>
+	</rule>
+	<!--
+		Универсальное правило для всех блоков и страниц.
+		Намеренно стоит после правил для конкретных блоков и страниц,
+		чтобы сначала применялись правила для конкретных блоков и страниц.
+	-->
+	<rule>
+		<conditions>
+			<type>block page</type>
+		</conditions>
+		<actions>
+			<term>
+				<term>
+					<from>12-column grid</from>
+					<to>Модульная сетка с 12 колонками</to>
+				</term>
+				<from><![CDATA[>You can change colors of almost every element<]]></from>
+				<to><![CDATA[>Эта оформительская тема предоставляет возможность указания цвета
+практически любого элемента страницы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>You have never seen so many options<]]></from>
+				<to><![CDATA[>Вряд ли Вы когда-либо видели столько настроек у другой оформительской темы<]]></to>
+			</term>
+			<term>
+				<from>We will send this product in 2 days.</from>
+				<to>Доставим Ваш заказ в течение 48 часов.</to>
+			</term>
+			<term>
+				<from>Return purchased items and get all your money back.</from>
+				<to>Вы можете вернуть непонравившийся Вам товар в течение 10 дней.</to>
+			</term>
+			<term>
+				<from>Buy this product and earn 10 special loyalty points!</from>
+				<to>За покупку этого товара Вы получите 10 бонусных баллов.</to>
+			</term>
+			<term>
+				<from>Social bookmarks from http://www.addthis.com/get/sharing</from>
+				<to>Блок социальных закладок http://www.addthis.com/get/sharing</to>
+			</term>
+			<term>
+				<from>AddThis Button BEGIN</from>
+				<to>НАЧАЛО кода блока социальных закладок</to>
+			</term>
+			<term>
+				<from>AddThis Button END</from>
+				<to>КОНЕЦ кода блока социальных закладок</to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit sed scelerisque quis. Nullam ornare enim nec justo bibendum lobortis. In eget metus.<]]></from>
+				<to><![CDATA[>Рельеф последовательно оформляет живописный органический мир, это и есть всемирно известный центр огранки алмазов и торговли бриллиантами. Несмотря на внешние воздействия, он вызывает экскурсионный бамбуковый медведь панда.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Link example<]]></from>
+				<to><![CDATA[>Пример ссылки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Last Sample Link<]]></from>
+				<to><![CDATA[>Последний пример ссылки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Questions?<]]></from>
+				<to><![CDATA[>Вопросы?<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Terms<]]></from>
+				<to><![CDATA[>Правила<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Conditions<]]></from>
+				<to><![CDATA[>Режим работы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Example<]]></from>
+				<to><![CDATA[>Пример<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sample<]]></from>
+				<to><![CDATA[>Пример<]]></to>
+			</term>
+			<term>
+				<from>"Sample"</from>
+				<to>"Пример"</to>
+			</term>
+			<term>
+				<from>"Custom link"</from>
+				<to>"Ещё пример"</to>
+			</term>
+			<term>
+				<from>"Link Hidden on Mobile"</from>
+				<to>"Эта ссылка не отображается мобильными устройствами"</to>
+			</term>
+			<term>
+				<from>"Custom"</from>
+				<to>"Ещё пример"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Custom<]]></from>
+				<to><![CDATA[>Ещё пример<]]></to>
+			</term>
+			<term>
+				<from>"Links"</from>
+				<to>"Другой пример"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Links<]]></from>
+				<to><![CDATA[>Другой пример<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shipping<]]></from>
+				<to><![CDATA[>Доставка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Returns<]]></from>
+				<to><![CDATA[>Правила возврата<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>E-commerce<]]></from>
+				<to><![CDATA[>Электронная торговля<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>News<]]></from>
+				<to><![CDATA[>Новости<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Additional Info<]]></from>
+				<to><![CDATA[>Дополнительная информация<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>http://twitter.com/infortis<]]></from>
+				<to><![CDATA[>http://twitter.com/dfediuk<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>About Ultimo<]]></from>
+				<to><![CDATA[>Об Ultimo<]]></to>
+			</term>
+			<term>
+				<from>"Example Image"</from>
+				<to>"Пример картинки"</to>
+			</term>
+			<term>
+				<from>"Ultimo Theme"</from>
+				<to>"Оформительская тема Ultimo"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Ultimo is a premium Magento theme with advanced admin module. It’s extremely customizable, easy to use and fully responsive.<]]></from>
+				<to><![CDATA[>Оформительская тема Ultimo обладает широкими возможностями настройки.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Ultimo is a premium Magento theme with advanced admin module. It's extremely customizable and fully responsive. Can be used for every type of store.<]]></from>
+				<to><![CDATA[>Оформительская тема Ultimo обладает широкими возможностями настройки. Она универсальна: подходит для интернет-магазинов разных типов.<]]></to>
+			</term>
+			<term>
+				<from>Follow Infortis on Twitter</from>
+				<to>Наш Твиттер</to>
+			</term>
+			<term>
+				<from>"Join us on Facebook"</from>
+				<to>"Наша страница в Facebook"</to>
+			</term>
+			<term>
+				<from>"Join us on Google Plus"</from>
+				<to>"Наша страница в Google+"</to>
+			</term>
+			<term>
+				<from>"Youtube"</from>
+				<to>"Наш канал на Youtube"</to>
+			</term>
+			<term>
+				<from>"Vimeo"</from>
+				<to>"Наш канал на Vimeo"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Theme Features<]]></from>
+				<to><![CDATA[>Основные возможности<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Typography<]]></from>
+				<to><![CDATA[>Обзор шрифтов и стилей текста<]]></to>
+			</term>
+			<term>
+				<from>Meat Our Best Partners</from>
+				<to>Наши партнёры</to>
+			</term>
+			<term>
+				<from>Latest Work Samples</from>
+				<to>Последние наши работы</to>
+			</term>
+			<term>
+				<from>Our Other Projects</from>
+				<to>Другие наши проекты</to>
+			</term>
+			<term>
+				<from>One Click To Join Us</from>
+				<to>Связаться с нами в один клик</to>
+			</term>
+			<term>
+				<from>Follow Us On Twitter</from>
+				<to>Наш Твиттер</to>
+			</term>
+			<term>
+				<from>Magento Themes</from>
+				<to>Оформительские темы для Российской сборки Magento</to>
+			</term>
+			<term>
+				<from><![CDATA[>Ecommerce<]]></from>
+				<to><![CDATA[>Электронная торговля<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Footer Block<]]></from>
+				<to><![CDATA[>Подвальный блок<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Track your order<]]></from>
+				<to><![CDATA[>Отслеживание заказа<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Buy gift cards<]]></from>
+				<to><![CDATA[>Подарочные сертификаты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Key Features<]]></from>
+				<to><![CDATA[>Основные возможности<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Unlimited colors, hundreds of customizable elements<]]></from>
+				<to><![CDATA[>Множество настраиваемых экранных элементов<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customizable responsive layout based on fluid grid<]]></from>
+				<to><![CDATA[>Адаптивный макет с гибкой модульной сеткой<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>50+ placeholders to display custom content<]]></from>
+				<to><![CDATA[>92 предустановленных самодельных блока<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Create your custom sub-themes (variants)<]]></from>
+				<to><![CDATA[>Создавайте свои вариации оформительской темы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Company Info<]]></from>
+				<to><![CDATA[>Контакты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Company Info<]]></from>
+				<to><![CDATA[>Контакты<]]></to>
+			</term>
+			<term>
+				<from>Call Us +</from>
+				<to>Телефон: +</to>
+			</term>
+			<term>
+				<from>Fax +</from>
+				<to>Вотсап: +</to>
+			</term>
+			<term>
+				<from>"Sample Slide"</from>
+				<to>"пример слайда"</to>
+			</term>
+			<term>
+				<from>"Click to see the product"</from>
+				<to>"открыть товар"</to>
+			</term>
+			<term>
+				<from>"Responsive Theme"</from>
+				<to>"адаптирующаяся к мобильным устройствам тема"</to>
+			</term>
+			<term>
+				<from>"Buy Ultimo"</from>
+				<to>"купить Ultimo"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Configure Product Grid<]]></from>
+				<to><![CDATA[>Настройте список товаров<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customize the display of category grid<]]></from>
+				<to><![CDATA[>Вы можете настроить отображения списка товаров: скрывать и показывать элементы карточки товара<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customize the display of category grid, show/hide elements<]]></from>
+				<to><![CDATA[>Вы можете настроить отображения списка товаров: скрывать и показывать элементы карточки товара<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Show products in columns: from 2 to 8<]]></from>
+				<to><![CDATA[>Вы можете выбрать количество отображаемых в ряду товаров: от 2 до 8<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Show products in columns: from 2 to 7<]]></from>
+				<to><![CDATA[>Вы можете выбрать количество отображаемых в ряду товаров: от 2 до 7<]]></to>
+			</term>
+			<term>
+				<from>"Sample image"</from>
+				<to>"Пример картинки"</to>
+			</term>
+			<term>
+				<from>Sample banner</from>
+				<to>Пример рекламного баннера</to>
+			</term>
+			<term>
+				<from>Sample Banner</from>
+				<to>Пример рекламного баннера</to>
+			</term>
+			<term>
+				<from>Replace this image with your own content</from>
+				<to>Замените эту картинку на подходящую Вам</to>
+			</term>
+			<term>
+				<from>Replace this image with your own</from>
+				<to>Замените эту картинку на подходящую Вам</to>
+			</term>
+			<term>
+				<from>About Us</from>
+				<to>О магазине</to>
+			</term>
+			<!-- НАЧАЛО: ссылки в подвале -->
+			<term>
+				<from>Responsive Design</from>
+				<to>Адаптивность</to>
+			</term>
+			<term>
+				<from>"Responsive"</from>
+				<to>"Адаптивный к мобильным устройствам"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Responsive<]]></from>
+				<to><![CDATA[>Адаптивный к мобильным устройствам<]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Go to Magento cart page"]]></from>
+				<to><![CDATA["открыть страницу корзины"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Click to go to cart page"]]></from>
+				<to><![CDATA["открыть страницу корзины"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Add product to cart"]]></from>
+				<to><![CDATA["добавить товар в корзину"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Click to add sample product to your cart"]]></from>
+				<to><![CDATA["добавить товар в корзину"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Magento discount code"]]></from>
+				<to><![CDATA["промокод"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["Use discount code/coupon on cart page"]]></from>
+				<to><![CDATA["промокод"]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured Products<]]></from>
+				<to><![CDATA[>Премиум<]]></to>
+			</term>
+			<term>
+				<from><![CDATA["New in Store"]]></from>
+				<to><![CDATA["Новинки"]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit rory solare de equis.<]]></from>
+				<to><![CDATA[>Комбинированный тур, как бы это ни казалось парадоксальным, вызывает гидроузел. <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Secondary Heading<]]></from>
+				<to><![CDATA[>Подзаголовок<]]></to>
+			</term>
+			<term>
+				<from>Magento themes</from>
+				<to>Оформительские темы для Magento</to>
+			</term>
+			<term>
+				<from>Latest news</from>
+				<to>Новости магазина</to>
+			</term>
+			<term>
+				<from>About us</from>
+				<to>О магазине</to>
+			</term>
+			<term>
+				<from>Webdesign</from>
+				<to>Веб-дизайн</to>
+			</term>
+			<term>
+				<from>New brands</from>
+				<to>Новые бренды</to>
+			</term>
+			<term>
+				<from><![CDATA[>The blog<]]></from>
+				<to><![CDATA[>Наш блог<]]></to>
+			</term>
+			<term>
+				<from>This is just a sample link</from>
+				<to>Пример ссылки</to>
+			</term>
+			<term>
+				<from>And this is some other link</from>
+				<to>Другой пример ссылки</to>
+			</term>
+			<term>
+				<from>Another dummy text</from>
+				<to>Ещё один пример ссылки</to>
+			</term>
+			<term>
+				<from>Placeholder for custom content</from>
+				<to>Место для информации</to>
+			</term>
+			<term>
+				<from>This block can replace default newsletter form.</from>
+				<to>Этот блок отображается вместо стандартного блока подписки на расылку</to>
+			</term>
+			<!-- КОНЕЦ: ссылки в подвале -->
+			<term>
+				<from>There are many similar content placeholders across the store. All editable from admin panel.</from>
+				<to>Эта оформительская тема содержит массу подобных блоков.
+Все они редактируемы в административном разделе самодельных блоков.</to>
+			</term>
+			<term>
+				<from>See the list of all features</from>
+				<to>Описание возможностей</to>
+			</term>
+			<term>
+				<from>Click to buy this theme</from>
+				<to>Купить эту оформительскую тему</to>
+			</term>
+			<term>
+				<from>Sample slide</from>
+				<to>Пример слайда</to>
+			</term>
+			<term>
+				<from>Sample Caption</from>
+				<to>Пример заголовка</to>
+			</term>
+			<term>
+				<from><![CDATA[>Sample caption<]]></from>
+				<to><![CDATA[>Пример заголовка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Caption sample<]]></from>
+				<to><![CDATA[>Пример заголовка<]]></to>
+			</term>
+			<term>
+				<from>Sample Image</from>
+				<to>Пример картинки</to>
+			</term>
+			<term>
+				<from>You can edit this block or replace it with custom content</from>
+				<to>Разместите здесь свою информацию</to>
+			</term>
+			<term>
+				<from>Upload image and description for every category in the store</from>
+				<to>Добавьте свою картинку и описание для каждого товарного раздела Вашего магазина</to>
+			</term>
+			<term>
+				<from>Category Banner</from>
+				<to>Баннер товарного раздела</to>
+			</term>
+			<term>
+				<from>Create custom category blocks</from>
+				<to>Создайте индивидуальные самодельные блоки для товарных разделов</to>
+			</term>
+			<term>
+				<from>Go to ThemeForest marketplace to buy this theme</from>
+				<to>Купите эту оформительскую тему на ThemeForest</to>
+			</term>
+			<term>
+				<from>Buy This Theme</from>
+				<to>Купить эту тему</to>
+			</term>
+			<term>
+				<from>Buy this theme</from>
+				<to>Купить эту тему</to>
+			</term>
+			<term>
+				<from>See All Demos</from>
+				<to>Все примеры</to>
+			</term>
+			<term>
+				<from>Sell downloads in your Magento store (software, e-books, music, any digital products)</from>
+				<to>Magento подходит для продажи цифровых товаров: программного обеспечения, электронных книг, музыки и т.п.</to>
+			</term>
+			<term>
+				<from>Sell Downloads</from>
+				<to>Продавайте цифровые товары</to>
+			</term>
+			<term>
+				<from>List of all demos</from>
+				<to>Все примеры</to>
+			</term>
+			<term>
+				<from>Click to see a list of all demos of this  Magento theme</from>
+				<to>Все демо-магазины с данной оформительской темой</to>
+			</term>
+			<term>
+				<from>"Responsive Magento Theme"</from>
+				<to>"Адаптивная оформительская тема"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Responsive Magento Theme<]]></from>
+				<to><![CDATA[>Адаптивная оформительская тема<]]></to>
+			</term>
+			<term>
+				<from>"Fully Responsive"</from>
+				<to>"Полностью адаптивная"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Fully Responsive<]]></from>
+				<to><![CDATA[>Полностью адаптивная<]]></to>
+			</term>
+			<term>
+				<from>This theme can adapt to any mobile screen resolution</from>
+				<to>Эта оформительская тема умеет адаптироваться к мобильным устройствам любых размеров</to>
+			</term>
+			<term>
+				<from>Customizable Magento Theme</from>
+				<to>Оформительская тема с широкими настройками</to>
+			</term>
+			<term>
+				<from>Customizable Theme</from>
+				<to>Оформительская тема с широкими настройками</to>
+			</term>
+			<term>
+				<from>Click to see all features</from>
+				<to>Нажмите, чтобы увидеть все возможности</to>
+			</term>
+			<term>
+				<from>Unlimited Color Options</from>
+				<to>Много цветовых настроек</to>
+			</term>
+			<term>
+				<from>Dozens of color and design options</from>
+				<to>Эта оформительская тема поддеживает множество цветовых настроек и других настроек оформления</to>
+			</term>
+			<term>
+				<from>You can change color of almost every element of the theme</from>
+				<to>Посредством административного интерфейса
+Вы можете задать цвет практически любого элемента страницы</to>
+			</term>
+			<term>
+				<from>Click to see theme features list</from>
+				<to>Нажмите для просмотра всей возможностей жтой оформительской темы</to>
+			</term>
+			<term>
+				<from>Ultimo is based on fluid grid, it's optimized for all screen resolutions</from>
+				<to>Ultimo использует гибкий макет на основе сетки, и эта оформительская тема подходит ко всем размерам экрана</to>
+			</term>
+			<term>
+				<from>It can be displayed on any screen - desktop or mobile</from>
+				<to>Ultimo хорошо смотрится как на настольком компьютере, так и на мобильных устройствах</to>
+			</term>
+			<term>
+				<from>Read more</from>
+				<to>подробности</to>
+			</term>
+			<term>
+				<from>Recommended Products</from>
+				<to>Тренды сезона</to>
+			</term>
+			<term>
+				<from>New Products in Stock</from>
+				<to>Новинки продаж</to>
+			</term>
+			<term>
+				<from>Sample Custom Banners</from>
+				<to>Примеры баннеров</to>
+			</term>
+			<term>
+				<from>Sample Custom Banner</from>
+				<to>Пример баннера</to>
+			</term>
+			<term>
+				<from>Our Brands</from>
+				<to>Бренды</to>
+			</term>
+			<term>
+				<from>Product Brands</from>
+				<to>Бренды</to>
+			</term>
+			<term>
+				<from>Customizable design</from>
+				<to>Множество вариантов настройки</to>
+			</term>
+			<term>
+				<from>Fully customizable design. You have never seen so many options! Change colors of dozens of elements, apply textures, upload background images...</from>
+				<to>Оформительская тема Ultimo позволяет посредством административного интерфейса
+устанавливать цвет практически любого экранного элемента, а также применять текстуры и фоновые изображения.</to>
+			</term>
+			<term>
+				<from>You have never seen so many options! Change colors of dozens of elements, apply textures, upload background images...</from>
+				<to>Оформительская тема Ultimo позволяет посредством административного интерфейса
+устанавливать цвет практически любого экранного элемента, а также применять текстуры и фоновые изображения.</to>
+			</term>
+			<term>
+				<from>See all features</from>
+				<to>Все возможности</to>
+			</term>
+			<term>
+				<from>Responsive Layout</from>
+				<to>Адаптивный макет страницы</to>
+			</term>
+			<term>
+				<from>Mega Menu</from>
+				<to>Модуль меню с расширенными возможностями</to>
+			</term>
+			<term>
+				<from>Two styles: wide mega menu or classic drop-down menu. You can add any custom content (images, text, HTML) to any category in the catalog...</from>
+				<to>Модуль меню поддерживает 2 стиля отображения: обычный и широкоформатный.
+В широкоформатном режиме Вы можете добавлять к элементам меню дополнительный контент: картинки, текст, HTML.</to>
+			</term>
+			<term>
+				<from>Our Featured Products</from>
+				<to>Премиум</to>
+			</term>
+			<term>
+				<from>12-column grid system. Ultimo can be displayed on any screen. It is based on fluid grid system. If screen is resized, layout will be automatically adjusted...</from>
+				<to>Модульная сетка с 12 колонками. Ultimo хорошо смотрится на любом экране. Ultimo использует гибкую модульную сетку. При изменении размеров экрана Ultimo автоматически подсстраивается под новые размеры.</to>
+			</term>
+			<term>
+				<from>Sample Heading</from>
+				<to>Пример заголовка</to>
+			</term>
+			<term>
+				<from>Click to see more exemples of banners</from>
+				<to>Нажмите здесь, чтобы увидеть другие варианты баннеров</to>
+			</term>
+			<term>
+				<from>Ultimo can be displayed on any screen. It is based on fluid grid system. If screen is resized, layout will be automatically adjusted...</from>
+				<to>Ultimo хорошо смотрится на любом экране. Ultimo использует гибкую модульную сетку. При изменении размеров экрана Ultimo автоматически подсстраивается под новые размеры.</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit rory solare de equis et betam eltiam bedit sit tempora.</from>
+				<to>Стоит отметить, что спонсорство нейтрализует повседневный медиамикс,
+полагаясь на инсайдерскую информацию. Создание приверженного покупателя без оглядки на авторитеты
+восстанавливает креатив.</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit sed scelerisque quis et betam eltiam bedit.</from>
+				<to>Исправлению подверглись лишь явные орфографические и пунктуационные погрешности, например, транстекстуальность интегрирует урбанистический диалогический контекст. Правило альтернанса непосредственно аннигилирует сюжетный палимпсест.</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit, consectetur adipiscing elit. Etiam neque velit, blandit sed scelerisque quis betam eltiame nolam.</from>
+				<to>Восприятие сотворчества многопланово имеет предмет искусства. Переживание и его претворение заканчивает художественный идеал.</to>
+			</term>
+			<term>
+				<from><![CDATA[>Some Sample Link<]]></from>
+				<to><![CDATA[>Пример ссылки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sample Link<]]></from>
+				<to><![CDATA[>Пример ссылки<]]></to>
+			</term>
+			<term>
+				<from>Unlimited Colors</from>
+				<to>Множество цветовых вариантов</to>
+			</term>
+			<term>
+				<from>You can use CMS blocks as content placeholders to display custom content in almost every part of the store. Import sample CMS blocks from the demo.</from>
+				<to>Вы можете использовать стандартные для темы самодельные блоки для отображения требуемой информации практически в любом месте магазина.</to>
+			</term>
+			<term>
+				<from>Use Ultimo as a starting point for your custom projects. Unlike many other themes, Ultimo lets you create multiple custom sub-themes (theme variants) for your clients.</from>
+				<to>Используйте оформительскую тему Ultimo как основую для Ваших новых проктов на Российской сборке Magento. В отличие от большинства других тем, с Ultimo Вы можете создавать множество вариаций темы для своих клиентов.</to>
+			</term>
+			<term>
+				<from>Our sites</from>
+				<to>Наши сайты</to>
+			</term>
+			<term>
+				<from>Magento template</from>
+				<to>Оформительские темы для Российской сборки Magento</to>
+			</term>
+			<term>
+				<from>Our best design</from>
+				<to>Наше портфолио</to>
+			</term>
+			<term>
+				<from>What's new</from>
+				<to>Новости магазина</to>
+			</term>
+			<term>
+				<from>The company</from>
+				<to>О компании</to>
+			</term>
+			<term>
+				<from>"Products"</from>
+				<to>"Товары"</to>
+			</term>
+			<term>
+				<from><![CDATA[>Products<]]></from>
+				<to><![CDATA[>Товары<]]></to>
+			</term>
+			<term>
+				<from>Magento is a fully global platform, allowing for the expansion of business or simply offering multiple versions of your site to meet the needs of your customers. Translated into over 60 languages, supporting multiple currencies, payment methods and taxes, Magento allows for internationalization of your online stores.</from>
+				<to>Российская сборка Magento интегрирована со всеми популярными платёжными системами и службами доставки России, Украины, Казахстана, Белоруссии</to>
+			</term>
+			<term>
+				<from>This is a custom block ready to display any content. You can add blocks to any category in the catalog...</from>
+				<to>Это — самодельный блок, где Вы можете разместить любую информацию. Вы можете сделать такие блоки для каждого товарного раздела.</to>
+			</term>
+			<term>
+				<from>Featured Category</from>
+				<to>Премиум</to>
+			</term>
+			<term>
+				<from>View Category</from>
+				<to>товары раздела</to>
+			</term>
+			<term>
+				<from>The best Magento theme documentation on ThemeForest. It also describes selected Magento features which you need to know when starting to work with Magento.</from>
+				<to>Ultimo обладает лучшей документацией среди всех оформительских тем на ThemeForest.
+Помимо непосредственно самой оформительской темы
+документация также описывает базовые возможности Magento,
+которые Вам потребуются для начала работы с этой системой.</to>
+			</term>
+			<term>
+				<from>DESIGN</from>
+				<to>Оформление</to>
+			</term>
+			<term>
+				<from>LAYOUT</from>
+				<to>Макет</to>
+			</term>
+			<term>
+				<from><![CDATA[<strong>12-column fluid grid system</strong> - easy to use grid system will help you build content of your custom pages]]></from>
+				<to><![CDATA[Вы можете использовать при разработке своих страниц
+встроенную в Ultimo <b><a href="https://ru.wikipedia.org/wiki/Модульная_система_вёрстки">модульную сетку</a></b>
+с 12 колонками.]]></to>
+			</term>
+			<term>
+				<from>?ref=infortis</from>
+				<to>?ref=dfediuk</to>
+			</term>
+			<term>
+				<from>Customizable drop-down menu</from>
+				<to>Выпадающее меню с множеством настроек</to>
+			</term>			
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Page keywords</from>
+				<to>Ключевые слова для страницы</to>
+			</term>
+			<term>
+				<from>Page description</from>
+				<to>Описание для страницы</to>
+			</term>
+			<term>
+				<from>Recommended Bags</from>
+				<to>Лучшие сумочки</to>
+			</term>
+			<term>
+				<from>Recommended Shoes</from>
+				<to>Лучшая обувь</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>product.option</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>Additional Options</from>
+				<to>Опции</to>
+			</term>
+			<term>
+				<from>Dress Size</from>
+				<to>Размер платья</to>
+			</term>
+			<term>
+				<from>Dress Color</from>
+				<to>Цвет платья</to>
+			</term>
+			<term>
+				<from>Additional Accessories</from>
+				<to>Аксессуары</to>
+			</term>
+			<term>
+				<from>Memory</from>
+				<to>Память</to>
+			</term>
+			<term>
+				<from>Select Size</from>
+				<to>Размер</to>
+			</term>
+			<term>
+				<from>Select Color</from>
+				<to>Цвет</to>
+			</term>
+			<term>
+				<from>Select Delivery Date</from>
+				<to>Дата доставки</to>
+			</term>
+			<term>
+				<from>Additional Comment</from>
+				<to>Комментарий</to>
+			</term>
+			<term>
+				<from>Additional Option</from>
+				<to>Опции</to>
+			</term>
+		</actions>
+	</rule>
+</dictionary>

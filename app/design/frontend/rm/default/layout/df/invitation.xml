@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+    <customer_logged_in>
+        <block type='df_invitation/link' name='invitation_link_top'>
+            <action method='addAccountLink' translate='label title' module='df_invitation'><block>account.links</block><label>Send Invitations</label><url helper='df_invitation/data/getCustomerInvitationFormUrl' /><title>Send Invitations</title><prepare /><urlParams /><position>1</position><li>id='invitation-send-link'</li></action>
+        </block>
+    </customer_logged_in>
+    <df_invitation_index_send translate='label'>
+        <label>Customer My Account Invitations Form</label>
+        <update handle='customer_account'/>
+        <reference name='customer_account_navigation'>
+            <action method='setActive'><path>df_invitation/index/index</path></action>
+        </reference>
+        <reference name='content'>
+            <block type='core/template' name='invitationForm' template='df/invitation/form.phtml'>
+                <block type='page/html_wrapper' name='invitations.form.form.before' as='form_before'>
+                    <!--action method='setMayBeInvisible'><value>1</value></action-->
+                    <action method='setElementClass'><value>rewards</value></action>
+                </block>
+            </block>
+        </reference>
+    </df_invitation_index_send>
+    <df_invitation_index_index translate='label'>
+        <label>Customer My Account Invitations List</label>
+        <update handle='customer_account'/>
+        <reference name='content'>
+            <block type='df_invitation/customer_list' name='invitations_list' template='df/invitation/list.phtml'>
+                <block type='page/html_wrapper' name='invitations.list.list.before' as='list_before'>
+                    <!--action method='setMayBeInvisible'><value>1</value></action-->
+                    <action method='setElementClass'><value>rewards</value></action>
+                </block>
+            </block>
+        </reference>
+    </df_invitation_index_index>
+    <customer_account>
+        <block type='df_invitation/link' name='invitation_link_dashboard'>
+            <action method='addDashboardLink' translate='label' module='df_invitation'><block>customer_account_navigation</block><name>invitations</name><path>df_invitation/</path><label>My Invitations</label></action>
+        </block>
+    </customer_account>
+    <df_invitation_customer_account_create translate='label'>
+        <label>Customer Account Registration by Invitation Form</label>
+        <update handle='customer_account_create' />
+        <reference name='content'>
+            <remove name='customer_form_register' />
+            <block type='df_invitation/customer_form_register' name='customer_form_register_invitation' template='customer/form/register.phtml'>
+                <block type='page/html_wrapper' name='customer.form.register.invitation.fields.before' as='form_fields_before'>
+                    <!--action method='setMayBeInvisible'><value>1</value></action-->
+                    <action method='setElementClass'><value>rewards</value></action>
+                </block>
+            </block>
+        </reference>
+    </df_invitation_customer_account_create>
+</layout>

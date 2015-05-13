@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Pel>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Pel>
+	</modules>
+	<global>
+		<helpers><df_pel><class>Df_Pel_Helper</class></df_pel></helpers>
+		<models><df_pel><class>Df_Pel_Model</class></df_pel></models>
+		<events>
+			<controller_front_init_before>
+				<observers>
+					<df_pel_controller_front_init_before>
+						<class>df_pel/observer</class>
+						<method>controller_front_init_before</method>
+					</df_pel_controller_front_init_before>
+				</observers>
+			</controller_front_init_before>
+			<default>
+				<observers>
+					<df_pel_default>
+						<class>df_pel/observer</class>
+						<method>controller_front_init_before</method>
+					</df_pel_default>
+				</observers>
+			</default>
+		</events>
+	</global>
+</config>

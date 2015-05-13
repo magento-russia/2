@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Df_Catalog'>
+		<block
+			class='Df_Catalog_Block_Product_Compare_Sidebar'
+			template='catalog/product/compare/mini.phtml'
+			name='*'
+		>
+			<term>
+				<en_US>Compare</en_US>
+				<ru_RU>Сравнение</ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Df_Page'>
+		<block
+			template='page/html/header.phtml'
+			name='*'
+		>
+			<term>
+				<en_US>Compare</en_US>
+				<ru_RU>Сравнение</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

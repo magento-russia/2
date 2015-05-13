@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Rating>
+			<version>2.23.5</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Rating>
+	</modules>
+	<global>
+		<blocks><df_rating><class>Df_Rating_Block</class></df_rating></blocks>
+		<helpers><df_rating><class>Df_Rating_Helper</class></df_rating></helpers>
+		<models>
+			<df_rating>
+				<class>Df_Rating_Model</class>
+				<resourceModel>df_rating_resource</resourceModel>
+			</df_rating>
+			<df_rating_resource>
+				<class>Df_Rating_Model_Resource</class>
+			</df_rating_resource>
+		</models>
+		<resources>
+			<df_rating_setup>
+				<setup>
+					<module>Df_Rating</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_rating_setup>
+		</resources>
+	</global>
+</config>

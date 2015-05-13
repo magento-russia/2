@@ -1,0 +1,25 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="width:50%;"><h3 class="icon-head head-compilation">Translation Exporter</h3></td>
+            <td class="form-buttons">
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+	<p>Translations will be exported to:</p>
+	<p><tt>var/translations/(locale)/*.csv</tt></p>
+	<form
+		name="export_form"
+		id="export_form"
+		method="post"
+		action="<?php echo rm_url_admin('*/*/*'); ?>"
+	>
+		<?php echo $this->getBlockHtml('formkey')?>
+		<div class="form-buttons">
+		<button class="scalable" type="submit"><span>Export Now</span></button>
+		</div>
+	</form>
+</div>

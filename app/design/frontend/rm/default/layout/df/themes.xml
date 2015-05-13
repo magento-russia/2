@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<!--
+		Gala TitanShop
+		http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636
+		http://magento-forum.ru/forum/352/
+	-->
+    <THEME_frontend_default_galatitanshop>
+		<!-- убираем из подвала ссылку на сайт производителя -->
+		<reference name='footer'>
+			<action method='setTemplate'>
+				<template>df/themes/gala/titanshop/page/html/footer.phtml</template>
+			</action>
+		</reference>
+    </THEME_frontend_default_galatitanshop>
+</layout>

@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<config>
+	<api>
+		<acl>
+			<resources>
+				<rm translate='title' module='df_core'>
+					<title>Российская сборка</title>
+				</rm>
+			</resources>
+		</acl>
+	</api>
+</config>

@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<logging translate='title' module='df_logging'>
+										<title>Logging</title>
+									</logging>
+								</children>
+							</config>
+							<df_logging translate='title' module='df_logging'>
+								<title>Admin Logging</title>
+								<children>
+									<events translate='title'>
+										<title>Report</title>
+									</events>
+									<backups translate='title'>
+										<title>Archive</title>
+									</backups>
+								</children>
+							</df_logging>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<system>
+			<children>
+				<df_logging translate='title' module='df_logging'>
+					<title>Admin Actions Log</title>
+					<sort_order>71</sort_order>
+					<depends>
+						<config>df_tweaks_admin/logging__archiving/enabled</config>
+					</depends>
+					<children>
+						<events translate='title'>
+							<title>Last Entries</title>
+							<sort_order>1</sort_order>
+							<action>adminhtml/logging</action>
+						</events>
+						<backups translate='title'>
+							<title>Archive</title>
+							<sort_order>2</sort_order>
+							<action>adminhtml/logging/archive</action>
+						</backups>
+					</children>
+				</df_logging>
+			</children>
+		</system>
+	</menu>
+</config>

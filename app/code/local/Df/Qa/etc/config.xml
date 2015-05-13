@@ -1,0 +1,17 @@
+<config>
+	<modules>
+		<Df_Qa>
+			<!--
+				Модуль «Контроль качества» проводит контроль качества Российской сборки
+				прямо в процессе её работы.
+			-->
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Qa>
+	</modules>
+	<global>
+		<blocks><df_qa><class>Df_Qa_Block</class></df_qa></blocks>
+		<helpers><df_qa><class>Df_Qa_Helper</class></df_qa></helpers>
+		<models><df_qa><class>Df_Qa_Model</class></df_qa></models>
+	</global>
+</config>

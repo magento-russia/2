@@ -1,0 +1,292 @@
+<?xml version='1.0'?>
+<config>
+   <sections>
+		<df_payment>
+			<groups>
+				<moneta translate='label' module='df_moneta'>
+					<label>PayAnyWay («Монета.Ру»)</label>
+					<comment>
+					   <![CDATA[
+							<a
+								target='_blank'
+								href='http://payanyway.ru/info/p/how-to-start.htm'
+								title='порядок регистрации магазина'
+							>как подключить магазин к PayAnyWay («Монета.Ру»)?</a>
+					   ]]>
+				   </comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>13000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-moneta</df_feature>
+						</active>
+						<payment_service__shop_id translate='label'>
+							<label><![CDATA[Идентификатор магазина в системе Монета.Ру]]></label>
+							<comment>
+							   <![CDATA[
+									<a
+										target='_blank'
+										href='http://magento-forum.ru/topic/1807/'
+										title='инструкция с картинками'
+									>как узнать номер моего магазина?</a>
+							   ]]>
+						   </comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__shop_id>
+						<payment_service__test translate='label'>
+							<label>Тестовый режим?</label>
+							<comment>
+							   <![CDATA[
+									В тестовом режиме денежные средства с покупателя не списываются.
+							   ]]>
+						   </comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__test>
+						<frontend__title translate='label'>
+							<label>Название для этого способа оплаты</label>
+							<comment>
+								<![CDATA[
+									Покупатель видит этот заголовок на этапе оформления заказа,а также в Личном кабинете.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</frontend__title>
+						<frontend__description translate='label'>
+							<label>Примечание к способу оплаты на экране оформления заказа</label>
+							<comment>
+								<![CDATA[
+									Это примечание отображается под названием способа оплаты
+									на экране оформления заказа.
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</frontend__description>
+						<payment_service__transaction_description translate='label'>
+							<label>Примечание к счёту в платёжной системе</label>
+							<comment>
+								<![CDATA[
+									Это примечание к счёту передаётся в платёжную систему.
+									<br/>
+									Его видит как покупатель при оплате, так и администратор при просмотре счетов
+									в Личном кабинете платёжной системы.
+									<br/>В шаблоне примечания можно использовать следующие переменные:
+									<br/><b>{order.id}</b>: номер заказа
+									<br/><b>{shop.domain}</b>: домен магазина
+									<br/><b>{shop.name}</b>: название витрины
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</payment_service__transaction_description>
+						<frontend__sort_order translate='label'>
+							<label>Вес для упорядочивания</label>
+							<comment>
+								<![CDATA[
+									Когда системе требуется перечислить платёжные способы на экране,она упорядочивает их в соответствии с их весами.
+									<br/>Способы с меньшим весом отображаются выше способов с большим весом.
+									<br/>Веса задаются натуральными числами.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								validate-digits
+							</validate>
+						</frontend__sort_order>
+						<payment_service__response_password translate='label'>
+							<label>
+								Криптографический ключ магазина
+							</label>
+							<comment>
+							   <![CDATA[
+									Укажите здесь криптографический ключ,который Вы указывали в графе
+									«<i>Код проверки целостности данных</i>»
+									в Личном кабинете системы «Монета.Ру».
+									<br />
+									Платёжная система и модуль используют этот криптографический ключ
+									для шифрования информационного обмена между собой.
+									<br />
+									<a
+										target='_blank'
+										href='http://magento-forum.ru/topic/1808/'
+										title='инструкция с картинками'
+									>Как узнать криптографический ключ моего магазина?</a>
+							   ]]>
+						   </comment>
+							<frontend_type>obscure</frontend_type>
+							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__response_password>
+						<payment_service__currency translate='label'>
+							<label>Валюта заказов</label>
+							<comment>
+							   <![CDATA[
+									Модуль будет выражать размер платежа в этой валюте
+									при взаимодействии с «Монета.Ру».
+									<br/>
+									Обратите внимание:
+									<br />* Вы должны указать в данном поле не произвольную валюту,а валюту из Вашего договора с «Монета.Ру»
+									(эта валюта обозначена в Личном кабинете «Монета.Ру»).
+									<br />* данная валюта должна быть в списке доступных валют магазина
+									<br />* для данной валюты в магазине должен быть установлен обменный курс
+									(System -> Manage Currency Rates)
+							   ]]>
+						   </comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_payment/config_source_currency</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__currency>
+						<payment_service__payment_page_locale translate='label'>
+							<label>Язык платёжной формы на сайте «Монета.Ру»</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_payment/config_source_paymentPage_locale</source_model>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__payment_page_locale>
+						<payment_service__payment_methods translate='label'>
+							<label>Доступные покупателю способы оплаты</label>
+							<comment>
+							   <![CDATA[
+									Система «Монета.Ру» ограничит выбор плательщика
+									указанными Вами способами оплаты.
+							   ]]>
+						   </comment>
+							<frontend_type>df-multiselect</frontend_type>
+							<source_model>df_payment/config_source_paymentMethod</source_model>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__payment_methods>
+						<payment_service__payment_method translate='label'>
+							<label>Рекомендуемый покупателю способ оплаты</label>
+							<comment>
+							   <![CDATA[
+									Система «Монета.Ру» выделит этот способ оплаты из числа других,однако оставит окончательный выбор способа оплаты плательщику
+							   ]]>
+						   </comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_payment/config_source_paymentMethod</source_model>
+							<sort_order>12000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__payment_method>
+						<frontend__allowspecific translate='label'>
+							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да»,то система позволит Вам перечислить страны, которым
+									должен принадлежать адрес покупателя, чтобы покупатель мог
+									воспользоваться данным способом оплаты.
+								]]>
+							</comment>
+							<frontend_type>allowspecific</frontend_type>
+							<sort_order>13000</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</frontend__allowspecific>
+						<frontend__specificcountry translate='label'>
+							<label>Допустимые страны покупателей</label>
+							<comment>
+								<![CDATA[
+									Система покажет этот способ оплаты
+									только покупателям из указанных Вами стран.<br/>
+									Чтобы разрешить использование данного способа оплаты покупателям любой страны,укажите значение «нет» для опции
+									«Ограничить доступность способа оплаты покупателями из конкретных стран?».
+								]]>
+							</comment>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>14000</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<active>1</active>
+								<frontend__allowspecific>1</frontend__allowspecific>
+							</depends>
+						</frontend__specificcountry>
+					</fields>
+				</moneta>
+			</groups>
+		</df_payment>
+	</sections>
+</config>

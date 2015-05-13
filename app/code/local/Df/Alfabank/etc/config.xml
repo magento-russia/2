@@ -1,0 +1,119 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Alfabank>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Alfabank>
+	</modules>
+	<global>
+		<blocks><df_alfabank><class>Df_Alfabank_Block</class></df_alfabank></blocks>
+		<helpers><df_alfabank><class>Df_Alfabank_Helper</class></df_alfabank></helpers>
+		<models><df_alfabank><class>Df_Alfabank_Model</class></df_alfabank></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<alfabank>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__card_payment_action>authorize</payment_service__card_payment_action>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__description><![CDATA[После нажатия кнопки «Подтвердить заказ»
+Вы будете перенаправлены на платёжную страницу Альфа-Банка,
+где сможете оплатить Ваш заказ банковской картой.]]></frontend__description>
+				<frontend__message_failure><![CDATA[К сожалению, оплата заказа не удалась.
+<br/>Сообщение платёжного шлюза
+{название платёжного шлюза в родительном падеже}: «{сообщение от платёжного шлюза}».
+<br/>Возможно, Вы ввели на платёжной странице
+{название платёжного шлюза в родительном падеже} неточные данные?
+<br/>Попробуйте оформить Ваш заказ повторно.
+<br/>Если оплатить заказ через {название платёжного шлюза в именительном падеже}
+не получается — попробуйте другой способ оплаты
+или оформите Ваш заказ по телефону {телефон магазина}.]]></frontend__message_failure>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__specificcountry></frontend__specificcountry>
+				<frontend__title>Банковская карта</frontend__title>
+			</alfabank>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-alfabank>
+				<model>df_alfabank/payment</model>
+			</df-alfabank>
+		</payment>
+	</default>
+	<frontend>
+		<routers>
+			<df_alfabank>
+				<use>standard</use>
+				<args>
+					<module>Df_Alfabank</module>
+					<frontName>df-alfabank</frontName>
+				</args>
+			</df_alfabank>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-alfabank>
+				<module>df_alfabank</module>
+				<title>Альфа-Банк</title>
+				<url>http://magento-forum.ru/forum/313/</url>
+			</df-alfabank>
+		</features>
+		<payment>
+			<alfabank>
+				<currencies>
+					<allowed>
+						RUB
+					</allowed>
+					<code-translation>
+						<RUB>810</RUB>
+					</code-translation>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>ru</ru_RU>
+						<en_US>en</en_US>
+					</code-translation>
+				</locales>
+				<!-- Название платёжного шлюза для диагностических сообщений -->
+				<names>
+					<!-- именительный падеж -->
+					<nominative>Альфа-Банк</nominative>
+					<!-- родительный падеж -->
+					<genitive>Альфа-Банка</genitive>
+					<!-- дательный падеж -->
+					<dative>Альфа-Банку</dative>
+					<!-- творительный падеж -->
+					<instrumental>Альфа-Банком</instrumental>
+				</names>
+				<request>
+					<confirmation>
+						<payment>
+							<!-- размер платежа -->
+							<amount>Amount</amount>
+							<!-- код валюты платежа -->
+							<currency-code>currency</currency-code>
+							<!-- состояние платежа -->
+							<state>OrderStatus</state>
+						</payment>
+					</confirmation>
+				</request>
+			</alfabank>
+		</payment>
+	</df>
+</config>

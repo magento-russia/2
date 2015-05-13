@@ -1,0 +1,22 @@
+<?php /** @var Df_Chronopay_Block_Gate_Response $this */ ?>
+<?php echo $this->__("Sorry, we can not accept your credit card just now."); ?>
+<?php echo $this->__("The payment gateway says:"); ?>
+«<?php echo $this->__
+	(
+		implode(
+			' '
+			,
+			df_clean(
+				array(
+					$this->getResponse()->getMessage()
+				    ,
+				   $this->getResponse()->getExtendedMessage()
+				)
+			)
+		)
+	)
+;
+?>».
+<?php echo $this->__("Could you return to the credit card form and recheck data you have entered?"); ?>
+<?php echo $this->__("If you will see this message again, it could happen because of a bug in our information system."); ?>
+<?php echo $this->__("In this case we recommend you to choose another payment method or contact us."); ?>

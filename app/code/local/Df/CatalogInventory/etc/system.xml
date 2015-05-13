@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<cataloginventory>
+			<groups>
+				<item_options>
+					<fields>
+						<min_qty>
+							<label>Qty for Item Status to Become Out of Stock</label>
+						</min_qty>
+						<notify_stock_qty>
+							<comment>When a stock of any product goes below this level, Magento will automatically notify you via RSS Feed. This ability works in conjunction with the Decrease Stock When Order is Placed drop-down above, because Magento cannot notify you of a low stock unless you also enable it to keep track of stock reduction. In this field, enter the quantity level at which Magento will send a notification. Note that the default of 0 disables out-of-stock RSS notifications. In order to subscribe to the RSS feed, navigate to Catalog > Manage Products, and click the Notify Low Stock RSS link at the top of the page. You will be prompted to enter your User Name and Password. These are the same that you use to access the Magento admin panel. You will be redirected to the RSS page, where you can select which reader you would like to use for receiving this feed.</comment>
+						</notify_stock_qty>
+						<qty_increments>
+							<comment>The ordered amount of particular product must be a multiple of the value specified.</comment>
+						</qty_increments>
+					</fields>
+				</item_options>
+			</groups>
+		</cataloginventory>
+	</sections>
+</config>

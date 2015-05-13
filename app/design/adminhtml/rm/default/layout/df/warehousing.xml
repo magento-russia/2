@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<df_warehousing_admin_warehouse_index>
+		<reference name='content'>
+			<block type='df_warehousing/admin_warehouse_index'/>
+		</reference>
+	</df_warehousing_admin_warehouse_index>
+	<df_warehousing_admin_warehouse_edit>
+		<reference name='content'>
+			<block
+				type='df_warehousing/admin_warehouse_edit'
+				name='df_warehousing_admin_warehouse_edit'
+			/>
+		</reference>
+	</df_warehousing_admin_warehouse_edit>
+</layout>

@@ -1,0 +1,44 @@
+#rm-checkout-frontend {
+	/* Branch */
+	.tree-branch {
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.tree-node .tree-branch {
+		padding-left: 10px; /* Nested tree branches should be indented */
+	}
+
+	/* Node */
+	.tree-node {
+		list-style: none;
+		line-height: 20px;
+	}
+
+	/* Arrow */
+	.tree-node .toggle-icon {
+		cursor: pointer;
+		display: inline-block;
+		width: 10px;
+		margin-right: 0px;
+		font-size: 10px;
+	}
+
+	.tree-node .toggle-icon:hover {
+		opacity: 0.8;
+	}
+
+	.tree-node .toggle-icon.leaf {
+		visibility: hidden;
+	}
+
+	/* Node text */
+	.tree-node .text {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+
+	.tree-node .text:hover {
+		text-decoration: none;
+	}
+}

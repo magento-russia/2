@@ -1,0 +1,78 @@
+.df {
+	div.df-config {
+	    .df-form {
+			.df-field {
+				color: rgb(111, 137, 146);
+				font-size: 0.9em;
+				margin: 0 0 0 2em;
+				.df-service {
+					width: 100%;
+					display: block;
+					overflow: hidden;
+                    .df-param {
+                        display: block;
+                        float: left;
+                        margin: 0.63em 0 0 1em;
+                        .df-disabled {
+                        	color: red;
+                        }
+                        .df-enabled {
+                        	color: green;
+                        }
+                    }
+                    .df-title {
+                        display: block;
+                        float: left;
+                        margin-left: 0;
+                    }
+				}
+			}
+	    }
+	}
+}
+/*
+	Информационная поле, где система сообщает администратору,
+	какие веб-адреса надо использовать для настройки модуля.
+	Используется модулями «1С:Управление торговлей» и «Яндекс.Маркет».
+*/
+.entry-edit {
+	fieldset {
+		.df-config-info-urls {
+			display: block;
+			background: white;
+			padding: 2px 0 2px 0.75em;
+			width: 300px;
+			.df-url {
+				display: block;
+				width: 35em;
+				background: white;
+				cursor: pointer;
+			}
+			.df-url.hover {
+				background: #FFF9E9;
+			}
+			li {
+				display: block;
+				background: white;
+				margin: 0;
+				padding: 0;
+				.df-name {
+					float: left;
+					width: 7em;
+					padding: 4px 0;
+				}
+				.df-url {
+					padding: 4px 0.75em;
+					margin-left: 8em;
+				}
+			}
+		}
+	}
+}
+.form-list {
+	td.value {
+		p.note {
+			width: auto;
+		}
+	}
+}

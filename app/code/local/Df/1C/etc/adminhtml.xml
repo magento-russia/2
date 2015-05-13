@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<rm>
+						<children>
+							<_1c translate='title' module='df_1c'>
+								<title>Обмен данными с 1С:Предприятие</title>
+							</_1c>
+						</children>
+					</rm>
+					<system>
+						<children>
+							<config>
+								<children>
+									<df_1c>
+										<title>Российская сборка → 1С:Управление торговлей</title>
+									</df_1c>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

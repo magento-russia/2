@@ -1,0 +1,141 @@
+.df {
+	.df-localization {
+		.df-verification {
+
+	  		width: 100%;
+	 		overflow: hidden;
+
+
+			h1 {
+				text-transform: uppercase;
+				font-size: 200%;
+				font-weight: bold;
+				margin: 0 0 1em 0;
+			}
+
+
+			h2 {
+				font-size: 150%;
+				font-weight: bold;
+				margin: 0 0 0.75em 0;
+			}
+
+
+			h3 {
+				font-size: 125%;
+				font-weight: bold;
+				margin: 0 0 0.5em 0;
+				text-transform: lowercase;
+			}
+
+
+
+
+			.df-files {
+
+				width: 500px;
+				float: left;
+
+
+				.df-file-properties {
+					width: 100%;
+					overflow: hidden;
+
+					.df-file-property {
+						float: left;
+					}
+
+					.df-name {
+						width: 46%;
+					}
+
+					.df-total {
+						width: 18%;
+					}
+
+					.df-untranslated {
+						width: 18%;
+					}
+
+					.df-absent {
+						width: 18%;
+					}
+				}
+
+
+				.df-files-header {
+
+					.df-file-properties {
+
+		 				width: 480px;
+
+						.df-file-property {
+							font-weight: bold;
+							margin: 0 0 0.5em 0;
+						}
+					}
+
+				}
+
+
+				.df-files-body {
+
+					overflow-y: scroll;
+
+					.df-file {
+
+						padding: 0.5em 0;
+						cursor: pointer;
+					}
+
+
+					.df-file-fully-translated {
+						.df-name {
+							color: green;
+						}
+					}
+
+
+					.df-file-odd {
+						background: #F6F6F6;
+					}
+
+
+					.df-file-hovered {
+						background: #FCF5DD;
+					}
+
+
+
+					.df-file-selected {
+						background: #FCF593;
+					}
+
+				}
+
+			}
+
+
+
+
+			.df-fileDetails {
+
+				margin-left: 540px;
+
+
+				ol {
+					margin: 0 0 2em 0;
+
+					li {
+						margin: 0.4em 0;
+					}
+				}
+
+			}
+
+
+
+
+		}
+	}
+}

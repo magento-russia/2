@@ -1,0 +1,12 @@
+<?php /** @var Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text $this */ ?>
+<?php echo $this->getLabelHtml(); ?>
+<div class='input-box'>
+	<input 
+		type='text' 
+		id='<?php echo $this->getDomId(); ?>'
+		name='<?php echo $this->getDomName(); ?>'
+		value='<?php echo df_text()->escapeHtml($this->getValue()); ?>'
+		title='<?php echo $this->getLabel(); ?>'
+		class='<?php echo $this->getCssClassesAsText(); ?>'
+	/>
+</div>

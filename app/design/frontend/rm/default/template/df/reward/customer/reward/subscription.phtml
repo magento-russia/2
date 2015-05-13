@@ -1,0 +1,47 @@
+<?php /** @var Df_Reward_Block_Customer_Reward_Subscription $this */ ?>
+<form action='<?php echo $this->getUrl('reward/customer/saveSettings') ?>' method='post' id='form-validate'>
+	<?php echo $this->getBlockHtml('formkey')?>
+	<br/>
+	<ul class='form-list'>
+		<li class='control'>
+			<span class='input-box'>
+				<input
+					type='checkbox'
+					name='subscribe_updates'
+					id='subscribe_updates'
+					value='1'
+					title='<?php echo $this->__('Receive balance notifications?') ?>'
+					<?php if ($this->isSubscribedForUpdates()): ?>
+						checked='checked'
+					<?php endif; ?>
+					class='checkbox'
+				/>
+			</span>
+			<label
+				for='subscribe_updates'
+			><?php echo $this->__('Receive balance notifications?') ?></label>
+		</li>
+		<?php if (false):  ?>
+			<li class='control'>
+				<span class='input-box'>
+					<input type='checkbox'
+						   name='subscribe_warnings'
+						   id='subscribe_warnings'
+						   value='1'<?php if ($this->isSubscribedForWarnings()): ?>
+						   checked='checked'<?php endif; ?>
+						   class='checkbox'
+					/>
+				</span>
+				<label for='subscribe_warnings'>
+					<?php echo $this->__('Subscribe for points expiration notifications') ?>
+				</label>
+			</li>
+		<?php endif;?>
+	</ul>
+	<button
+		type='submit'
+		class='button'
+		title='<?php echo $this->__('Save Subscription Settings') ?>'>
+		<span><span><?php echo $this->__('Save Subscription Settings') ?></span></span>
+	</button>
+</form>

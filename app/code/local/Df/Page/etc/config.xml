@@ -1,0 +1,131 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Page>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Page>
+	</modules>
+	<df>
+		<admin>
+			<notifiers>
+				<merge_css>Df_Page_Model_Admin_Notifier_Merge_Css</merge_css>
+				<merge_js>Df_Page_Model_Admin_Notifier_Merge_Js</merge_js>
+			</notifiers>
+		</admin>
+	</df>
+	<global>
+		<blocks>
+			<df_page><class>Df_Page_Block</class></df_page>
+			<page>
+				<rewrite>
+					<!--
+						Цели перекрытия:
+						1) кэширование блока
+						2) предоставление администратору возможности
+						скрывать названия товара из навигационного меню витринной товарной карточки:
+						@link http://magento-forum.ru/topic/4509/
+					-->
+					<html_breadcrumbs>Df_Page_Block_Html_Breadcrumbs</html_breadcrumbs>
+					<!--
+						Цель перекрытия —
+						предоставление возможности удобного добавления клиентских ресурсов
+						(скриптов и стилей) на страницу.
+					-->
+					<html_head>Df_Page_Block_Html_Head</html_head>
+					<!--
+						Цель перекрытия —
+						предоставление администратору возможности скрывать сообщение «Добро пожаловать»
+						либо показывать там только имя посетителя без фамилии.
+					-->
+					<html_header>Df_Page_Block_Html_Header</html_header>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<html_notices>Df_Page_Block_Html_Notices</html_notices>
+					<!--
+						Цель перекрытия —
+						кэширование меню.
+					-->
+					<html_topmenu>Df_Page_Block_Html_Topmenu</html_topmenu>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<js_cookie>Df_Page_Block_Js_Cookie</js_cookie>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<switch>Df_Page_Block_Switch</switch>
+					<!--
+						Цели перекрытия —
+						1) кэширование блока
+						2) предоставление возможности удаления пункта меню
+						по типу блока, соответствующего пункту меню.
+					-->
+					<template_links>Df_Page_Block_Template_Links</template_links>
+				</rewrite>
+			</page>
+		</blocks>
+		<helpers><df_page><class>Df_Page_Helper</class></df_page></helpers>
+		<models><df_page><class>Df_Page_Model</class></df_page></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Page>
+					<files>
+						<default>Mage_Page.csv</default>
+					</files>
+				</Df_Page>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<events>
+			<page_block_html_topmenu_gethtml_before>
+				<observers>
+					<df_page__page_block_html_topmenu_gethtml_before>
+						<class>df_page/dispatcher</class>
+						<method>page_block_html_topmenu_gethtml_before</method>
+					</df_page__page_block_html_topmenu_gethtml_before>
+				</observers>
+			</page_block_html_topmenu_gethtml_before>
+			<rm_menu_top_add_submenu>
+				<observers>
+					<df_page__rm_menu_top_add_submenu>
+						<class>df_page/dispatcher</class>
+						<method>rm_menu_top_add_submenu</method>
+					</df_page__rm_menu_top_add_submenu>
+				</observers>
+			</rm_menu_top_add_submenu>
+		</events>
+		<translate>
+			<modules>
+				<Df_Page>
+					<files>
+						<default>Mage_Page.csv</default>
+					</files>
+				</Df_Page>
+			</modules>
+		</translate>
+	</frontend>
+	<default>
+		<design>
+			<head translate='default_description' module='page'>
+				<default_title>Российская сборка Magento</default_title>
+				<default_description></default_description>
+				<default_keywords></default_keywords>
+			</head>
+			<header translate='welcome' module='page'>
+				<logo_alt>Российская сборка Magento</logo_alt>
+				<welcome>Добро пожаловать!</welcome>
+			</header>
+			<footer translate='copyright' module='page'>
+				<copyright>Российская сборка Magento</copyright>
+			</footer>
+		</design>
+	</default>
+</config>

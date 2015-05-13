@@ -1,0 +1,146 @@
+<?xml version='1.0'?>
+<layout>
+    <adminhtml_cms_page_index>
+        <reference name='cms_page'>
+			<!--
+				данный блок используется лишь для модификации другого блока
+			-->
+            <block type='df_cms/adminhtml_cms_page' name='cms_page_extender' />
+        </reference>
+    </adminhtml_cms_page_index>
+    <adminhtml_cms_page_edit>
+        <reference name='cms_page_edit_tabs'>
+            <block
+				type='df_cms/adminhtml_cms_page_edit'
+				name='cms_page_edit_extender'
+			/>
+            <block
+				type='df_cms/adminhtml_cms_page_edit_tab_hierarchy'
+				name='cms_page_edit_tab_hierarchy'
+				template='df/cms/page/tab/hierarchy.phtml'
+			></block>
+            <action method='addTab'>
+				<name>hierarchy</name>
+				<block>cms_page_edit_tab_hierarchy</block>
+			</action>
+        </reference>
+    </adminhtml_cms_page_edit>
+<!--
+    Custom layout changes to native adminhtml_cms_page_edit handle
+-->
+    <adminhtml_cms_page_edit_changes>
+        <reference name='cms_page_edit_tabs'>
+			<action
+				method='removeTab'
+				ifconfig='df_cms/versioning/enabled'
+			>
+				<name>content_section</name>
+			</action>
+            <action
+				method='removeTab'
+				ifconfig='df_cms/versioning/enabled'
+			>
+				<name>design_section</name>
+			</action>
+            <action
+				method='removeTab'
+				ifconfig='df_cms/versioning/enabled'
+			>
+				<name>meta_section</name>
+			</action>
+			<block type='df_cms/adminhtml_cms_page_edit_tab_versions' name='cms_page_edit_tab_versions' />
+			<action
+				method='addTab'
+				ifconfig='df_cms/versioning/enabled'
+			>
+				<name>versions</name>
+				<block>cms_page_edit_tab_versions</block>
+			</action>
+        </reference>
+    </adminhtml_cms_page_edit_changes>
+<!--
+    Grid with versions on tab versions
+-->
+    <adminhtml_cms_page_versions>
+        <remove name='root' />
+        <block type='df_cms/adminhtml_cms_page_edit_tab_versions'  output='toHtml' name='cms_page_edit_versions' />
+    </adminhtml_cms_page_versions>
+<!--
+    Revision edit interface
+-->
+    <adminhtml_cms_page_revision_edit>
+        <update handle='editor'/>
+        <reference name='content'>
+            <block type='df_cms/adminhtml_cms_page_revision_edit' name='cms_page_revision_edit'>
+                <block type='df_cms/adminhtml_cms_page_revision_edit_info' name='revision_info' template='df/cms/page/revision/info.phtml' />
+            </block>
+        </reference>
+        <reference name='left'>
+            <block type='df_cms/adminhtml_cms_page_revision_edit_tabs' name='cms_page_revision_edit_tabs'>
+                <action method='addTab'><name>content_section</name><block>df_cms/adminhtml_cms_page_revision_edit_tab_content</block></action>
+                <action method='addTab'><name>design_section</name><block>df_cms/adminhtml_cms_page_revision_edit_tab_design</block></action>
+                <action method='addTab'><name>meta_section</name><block>df_cms/adminhtml_cms_page_revision_edit_tab_meta</block></action>
+            </block>
+        </reference>
+    </adminhtml_cms_page_revision_edit>
+<!--
+    Revision preview page
+-->
+    <adminhtml_cms_page_revision_preview>
+        <reference name='root'>
+            <action method='setTemplate'><template>df/cms/page/preview.phtml</template></action>
+            <block type='df_cms/adminhtml_cms_page_preview_form' name='preview_form' />
+            <block type='core/text_list' name='tools' as='tools'>
+                <block type='df_cms/adminhtml_cms_page_preview_store' name='store_switcher' template='df/cms/page/preview/store.phtml' />
+                <block type='df_cms/adminhtml_cms_page_preview_revision' name='revision_switcher' template='df/cms/page/preview/revision.phtml' />
+                <block type='df_cms/adminhtml_cms_page_preview_buttons' name='preview_control_buttons' />
+            </block>
+        </reference>
+    </adminhtml_cms_page_revision_preview>
+<!--
+    Version edit interface
+-->
+    <adminhtml_cms_page_version_edit>
+        <reference name='content'>
+            <block type='df_cms/adminhtml_cms_page_version_edit' name='cms_page_version_edit'>
+                <block type='df_cms/adminhtml_cms_page_version_edit_revisions' name='cms_page_version_edit_revisions_grid' />
+            </block>
+        </reference>
+    </adminhtml_cms_page_version_edit>
+<!--
+    Grid with revisions on version edit page
+-->
+    <adminhtml_cms_page_version_revisions>
+        <remove name='root' />
+        <block type='df_cms/adminhtml_cms_page_version_edit_revisions'  output='toHtml' name='cms_page_edit_version_edit_revisions' />
+    </adminhtml_cms_page_version_revisions>
+<!--
+    Main Page of Hierarchy Editor
+-->
+    <adminhtml_cms_hierarchy_index>
+        <reference name='head'>
+            <action method='setCanLoadExtJs'><flag>1</flag></action>
+        </reference>
+        <reference name='content'>
+            <block type='df_cms/adminhtml_cms_hierarchy_edit' name='df_cms_hierarchy_edit_tree'>
+                <block type='df_cms/adminhtml_cms_hierarchy_edit_form_grid' name='cms_page_grid' />
+            </block>
+        </reference>
+        <block type='adminhtml/store_switcher' name='store_switcher' />
+    </adminhtml_cms_hierarchy_index>
+<!--
+    Adding ExtJs scripts on cms page edit page for tree functionality
+-->
+    <adminhtml_cms_page_edit>
+        <reference name='head'>
+            <action method='setCanLoadExtJs'><flag>1</flag></action>
+        </reference>
+    </adminhtml_cms_page_edit>
+<!--
+    Layout handle for grid ajax loading
+-->
+    <adminhtml_cms_hierarchy_pagegrid>
+        <remove name='root' />
+        <block type='df_cms/adminhtml_cms_hierarchy_edit_form_grid' name='cms_page_grid' output='toHtml' />
+    </adminhtml_cms_hierarchy_pagegrid>
+</layout>

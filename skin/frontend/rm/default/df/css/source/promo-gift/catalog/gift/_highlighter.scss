@@ -1,0 +1,20 @@
+@import "../../_common";
+
+
+.df-gift-product {
+
+	.product-essential {
+
+		background: $giftBackgroundColor;
+
+		.price {
+			text-decoration: line-through;
+		}
+
+		.df-gift-label {
+			@include orangeFont;
+		}
+
+	}
+}
+

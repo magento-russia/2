@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<jstranslator>
+	<!--
+		В файле jstranslator.xml системного модуля Mage_Checkout
+		ошибочно используется одинаковый тег validate-shipping-methods-required
+		для двух фраз «Please specify shipping method.»  и «Please specify payment method.»
+	-->
+	<validate-shipping-methods-required translate='message' module='checkout'>
+		<message>Please specify shipping method.</message>
+	</validate-shipping-methods-required>
+	<validate-payment-methods-required translate='message' module='checkout'>
+		<message>Please specify payment method.</message>
+	</validate-payment-methods-required>
+</jstranslator>

@@ -1,0 +1,15 @@
+<?php /** @var Df_PromoGift_Block_Catalog_Gift_Highlighter $this */ ?>
+<?php
+    if ($this->getEligibleProductIds()) {
+		$eligibleProductIds = implode(", ", $this->getEligibleProductIds());
+		?>
+			<script type='text/javascript'>
+				window.df = {} || window.df;
+				window.rm.promo_gift = {} || window.rm.promo_gift;
+				window.rm.promo_gift.eligibleProductIds = [<?php echo $eligibleProductIds; ?>];
+				window.rm.promo_gift.eligibleProductLabel =
+					'<?php echo $this->__("Вы можете забрать этот товар бесплатно!"); ?>'
+				;
+			</script>
+		<?php
+	}

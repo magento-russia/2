@@ -1,0 +1,286 @@
+<?xml version='1.0'?>
+<config>
+   <sections>
+		<df_payment>
+			<groups>
+				<kkb translate='label' module='df_kkb'>
+					<label>Казкоммерцбанк</label>
+					<comment>
+					   <![CDATA[
+							<a
+								target='_blank'
+								href='http://ru.kkb.kz/cards/page/InternetEcqu'
+								title='порядок регистрации магазина'
+							>как подключить магазин к интернет-эквайрингу Казкоммерцбанка?</a>
+					   ]]>
+				   </comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>3800</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<!--
+								Надо удостовериться, что в системе доступна валюта KZT
+								и присутствует курс обмена учётной валюты магазина на KZT.
+							-->
+							<backend_model>df_payment/config_backend_active_currency</backend_model>
+							<rm_currency>KZT</rm_currency>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-kkb</df_feature>
+						</active>
+						<payment_service__test translate='label'>
+							<label>Тестовый режим?</label>
+							<comment>
+								<![CDATA[]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</payment_service__test>
+						<payment_service__shop_id translate='label'>
+							<label>Идентификатор магазина</label>
+							<comment>
+								<![CDATA[
+									значение поля <b>MERCHANT_ID</b>
+									в файле
+									<a
+										href='http://magento-forum.ru/topic/4216/'
+										title='где находится файл config.txt и как брать из него параметры?'
+									>config.txt</a>
+								]]>
+						   </comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>0</payment_service__test>
+							</depends>
+							<validate>required-entry</validate>
+						</payment_service__shop_id>
+						<payment_service__certificate_id translate='label'>
+							<label>Идентификатор сертификата</label>
+							<comment>
+								<![CDATA[
+									значение поля <b>MERCHANT_CERTIFICATE_ID</b>
+									в файле
+									<a
+										href='http://magento-forum.ru/topic/4216/'
+										title='где находится файл config.txt и как брать из него параметры?'
+									>config.txt</a>
+								]]>
+						   </comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>0</payment_service__test>
+							</depends>
+							<validate>required-entry</validate>
+						</payment_service__certificate_id>
+						<payment_service__shop_name translate='label'>
+							<label>Системное название магазина</label>
+							<comment>
+								<![CDATA[
+									значение поля <b>MERCHANT_NAME</b>
+									в файле
+									<a
+										href='http://magento-forum.ru/topic/4216/'
+										title='где находится файл config.txt и как брать из него параметры?'
+									>config.txt</a>
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>0</payment_service__test>
+							</depends>
+							<validate>required-entry</validate>
+						</payment_service__shop_name>
+						<payment_service__key_private translate='label'>
+							<label>Зашифрованный закрытый ключ</label>
+							<comment>
+								<![CDATA[
+									сюда надо вставить содержимое файла,
+									<br/>имя которого указано в поле <b>PRIVATE_KEY_FN</b>
+									в файле
+									<a
+										href='http://magento-forum.ru/topic/4216/'
+										title='где находится файл config.txt и как брать из него параметры?'
+									>config.txt</a>
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>0</payment_service__test>
+							</depends>
+						</payment_service__key_private>
+						<payment_service__key_private_password translate='label'>
+							<label>Пароль к закрытому ключу</label>
+							<comment>
+								<![CDATA[
+									значение поля <b>PRIVATE_KEY_PASS</b>
+									в файле
+									<a
+										href='http://magento-forum.ru/topic/4216/'
+										title='где находится файл config.txt и как брать из него параметры?'
+									>config.txt</a>
+								]]>
+							</comment>
+							<frontend_type>obscure</frontend_type>
+							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>0</payment_service__test>
+							</depends>
+							<validate>required-entry</validate>
+						</payment_service__key_private_password>
+						<frontend__title translate='label'>
+							<label>Название для этого способа оплаты</label>
+							<comment>
+								<![CDATA[
+									Покупатель видит этот заголовок на этапе оформления заказа,
+									а также в Личном кабинете.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</frontend__title>
+						<frontend__description translate='label'>
+							<label>Примечание к способу оплаты на экране оформления заказа</label>
+							<comment>
+								<![CDATA[
+									Это примечание отображается под названием способа оплаты
+									на экране оформления заказа.
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__description>
+						<frontend__message_failure translate='label'>
+							<label>Шаблон сообщения покупателю при отказе платёжного шлюза провести оплату</label>
+							<comment>
+								<![CDATA[
+									В случае отказа платёжного шлюза провести оплату
+									(например, если покупатель неправильно ввёл данные банковской карты
+									или на банковской карте нет достаточных для оплаты средств)
+									система возвратит покупателя на страницу оформления заказа и покажет ему сообщение
+									в соответствии с заданным шаблоном.
+									<br/>В шаблоне можно использовать следующие <b>параметры</b>:
+									<br/><b>{сообщение от платёжного шлюза}</b>
+									<br/><b>{телефон магазина}</b>
+									<br/><b>{название платёжного шлюза в именительном падеже}</b>
+									<br/><b>{название платёжного шлюза в родительном падеже}</b>
+									<br/><b>{название платёжного шлюза в дательном падеже}</b>
+									<br/><b>{название платёжного шлюза в творительном падеже}</b>
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__message_failure>
+						<frontend__sort_order translate='label'>
+							<label>Вес для упорядочивания</label>
+							<comment>
+								<![CDATA[
+									Когда системе требуется перечислить платёжные способы на экране,она упорядочивает их в соответствии с их весами.
+									<br/>Способы с меньшим весом отображаются выше способов с большим весом.
+									<br/>Веса задаются натуральными числами.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+							<validate>validate-digits</validate>
+						</frontend__sort_order>
+						<frontend__allowspecific translate='label'>
+							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да»,то система позволит Вам перечислить страны, которым
+									должен принадлежать адрес покупателя, чтобы покупатель мог
+									воспользоваться данным способом оплаты.
+								]]>
+							</comment>
+							<frontend_type>allowspecific</frontend_type>
+							<sort_order>12000</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><active>1</active></depends>
+						</frontend__allowspecific>
+						<frontend__specificcountry translate='label'>
+							<label>Допустимые страны покупателей</label>
+							<comment>
+								<![CDATA[
+									Система покажет этот способ оплаты
+									только покупателям из указанных Вами стран.<br/>
+									Чтобы разрешить использование данного способа оплаты покупателям любой страны,укажите значение «нет» для опции
+									«Ограничить доступность способа оплаты покупателями из конкретных стран?».
+								]]>
+							</comment>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>13000</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<frontend__allowspecific>1</frontend__allowspecific>
+							</depends>
+						</frontend__specificcountry>
+					</fields>
+				</kkb>
+			</groups>
+		</df_payment>
+	</sections>
+</config>

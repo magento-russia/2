@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project basedir=".">
+
+	<target name="concatenate">
+		<concat destfile="compiled/all.js" encoding="UTF-8">
+			<fileset dir="source" includes="**/*.js" />
+		</concat>
+	</target>
+
+	<target name="compress" depends="concatenate">
+		<apply executable="java" parallel="false">
+			<filelist dir="." files="compiled/all.js" />
+			<arg line="-jar" />
+			<arg path="C:/work/tools/yuicompressor-2.4.6/build/yuicompressor.jar" />
+			<srcfile />
+			<arg line="--charset UTF-8" />
+			<arg line="-o" />
+			<mapper type="glob" from="*.js" to="*-min.js" />
+			<targetfile />
+		</apply>
+	</target>
+</project>

@@ -1,0 +1,16 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ($this->getBalance()): ?>
+    <input id="p_method_use_customerbalance" value="1" name="payment[use_customer_balance]" type="checkbox" title="<?php echo $this->__('Store Credit') ?>" onclick="" <?php if ($this->getUseCustomerBalance()): ?>checked<?php endif; ?> />
+    <label for="p_method_use_customerbalance"><?php echo $this->__('Use Store Credit(%s available)', $this->formatPrice($this->getBalance())) ?></label>
+    <script type="text/javascript">
+        function toggleUseCustomerBalance()
+        {
+            value =($('p_method_use_customerbalance').checked ? 1 : 0);
+            var data = {};
+            data['payment[use_customer_balance]'] = value;
+            order.loadArea(['totals', 'billing_method'], true, data);
+        }
+        Event.observe($('p_method_use_customerbalance'), 'click', toggleUseCustomerBalance);
+        Event.observe(document, 'dom:loaded', toggleUseCustomerBalance);
+    </script>
+<?php endif; ?>

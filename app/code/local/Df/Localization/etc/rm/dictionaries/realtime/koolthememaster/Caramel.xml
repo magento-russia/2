@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Magicart_Ajax'>
+		<block
+			class='Magicart_Ajax_Block_Cart_Sidebar'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US><![CDATA[Shopping Cart]]></en_US>
+				<ru_RU><![CDATA[товаров в корзине]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>0 item</a>]]></en_US>
+				<ru_RU><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>нет</a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>1 item</a>]]></en_US>
+				<ru_RU><![CDATA[<span class='cart_icon'>%s:</span><a href='%s'>1</a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>%s items</a>]]></en_US>
+				<ru_RU><![CDATA[<span class='cart_icon'>%s:</span><a href='%s'>%s</a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[Checkout]]></en_US>
+				<ru_RU><![CDATA[Оформить заказ]]></ru_RU>
+			</term>
+		</block>
+		<controller
+			name='Magicart_Ajax_IndexController'
+			action='ajax_index_add'
+		>
+			<term>
+				<en_US><![CDATA[Shopping Cart]]></en_US>
+				<ru_RU><![CDATA[товаров в корзине]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>0 item</a>]]></en_US>
+				<ru_RU><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>нет</a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>1 item</a>]]></en_US>
+				<ru_RU><![CDATA[<span class='cart_icon'>%s:</span><a href='%s'>1</a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[<span class='cart_icon'>%s</span><a href='%s'>%s items</a>]]></en_US>
+				<ru_RU><![CDATA[<span class='cart_icon'>%s:</span><a href='%s'>%s</a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[Checkout]]></en_US>
+				<ru_RU><![CDATA[Оформить заказ]]></ru_RU>
+			</term>
+		</controller>
+	</module>
+	<module name='Mage_Catalog'>
+		<block
+			class='Df_Catalog_Block_Product_List'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US><![CDATA[Your item successfully added in your shopping cart]]></en_US>
+				<ru_RU><![CDATA[Товар успешно добавлен в Вашу корзину]]></ru_RU>
+			</term>
+		</block>
+		<block
+			class='Df_Catalog_Block_Product_View'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US><![CDATA[Qty:]]></en_US>
+				<ru_RU><![CDATA[]]></ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Wishlist>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Wishlist>
+	</modules>
+	<global>
+		<blocks>
+			<df_wishlist><class>Df_Wishlist_Block</class></df_wishlist>
+			<wishlist>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						кэширование блока.
+					-->
+					<customer_sidebar>Df_Wishlist_Block_Customer_Sidebar</customer_sidebar>
+				</rewrite>
+			</wishlist>
+		</blocks>
+		<helpers>
+			<df_wishlist><class>Df_Wishlist_Helper</class></df_wishlist>
+			<wishlist>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						предоставление администратору возможности
+						скрывать ссылку для добавления товара в план покупок
+						со страницы товара и с мини-карточек товаров со страницы товарного раздела.
+					-->
+					<data>Df_Wishlist_Helper_Data</data>
+				</rewrite>
+			</wishlist>
+		</helpers>
+		<models><df_wishlist><class>Df_Wishlist_Model</class></df_wishlist></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Wishlist>
+					<files>
+						<default>Mage_Wishlist.csv</default>
+					</files>
+				</Df_Wishlist>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Wishlist>
+					<files>
+						<default>Mage_Wishlist.csv</default>
+					</files>
+				</Df_Wishlist>
+			</modules>
+		</translate>
+	</frontend>
+</config>

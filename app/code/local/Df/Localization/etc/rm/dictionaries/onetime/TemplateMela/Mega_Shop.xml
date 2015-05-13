@@ -1,0 +1,384 @@
+<?xml version='1.0'?>
+<dictionary>
+	<config>
+		<entry>
+			<path>advanced_menu/customblock/customblock_identifier</path>
+			<value>tm_custom_link</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>advanced_menu/customblock/displaymenucustomblock</path>
+			<value>1</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>advanced_menu/customblock/menucustomblock_name</path>
+			<value>Дополнительное меню</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>design/header/logo_src</path>
+			<original_value>images/logo.gif</original_value>
+			<value>images/logo.jpg</value>
+		</entry>
+		<entry>
+			<path>df_tweaks/tags_popular/remove_from_all</path>
+			<value>1</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>featuredproducts/cmspage/heading_block</path>
+			<original_value>Featured Products</original_value>
+			<value>Премиум</value>
+		</entry>
+		<entry>
+			<path>featuredproducts/standalone/heading</path>
+			<original_value>Featured Products</original_value>
+			<value>Премиум</value>
+		</entry>
+		<entry>
+			<path>featuredproducts/standalone/meta_title</path>
+			<original_value>Featured Products</original_value>
+			<value>Премиум</value>
+		</entry>
+		<entry>
+			<path>featuredproducts/standalone/meta_description</path>
+			<original_value>Check out our great collection of Featured products</original_value>
+			<value>Премиум-коллекции, узнаваемый люкс</value>
+		</entry>
+		<entry>
+			<path>featuredproducts/standalone/meta_keywords</path>
+			<original_value>featured, products</original_value>
+			<value>Премиум</value>
+		</entry>
+		<entry>
+			<path>manufacturer/sidebar/blocktitle</path>
+			<value>Бренды</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>manufacturer/cmspage/heading</path>
+			<value>Бренды</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>manufacturer/sidebar/blocktitle</path>
+			<value>Бренды</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>manufacturer/standalone/heading</path>
+			<value>Все товары бренда</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>manufacturer/sidebar/meta_title</path>
+			<value>Бренды</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>manufacturer/standalone/meta_description</path>
+			<value>Все товары бренда</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>manufacturer/standalone/meta_keywords</path>
+			<value>Все товары бренда</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>newproducts/sidebar/heading</path>
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>newproducts/listing_home/heading</path>
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>newproducts/standalone/heading</path>
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>newproducts/standalone/meta_title</path>
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>newproducts/standalone/meta_description</path>
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>newproducts/standalone/meta_keywords</path>
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_header_static_block</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок в шапке справа от логотипа</new_title>
+			<term>
+				<from><![CDATA[>Free Shipping On All Products<]]></from>
+				<to><![CDATA[>доставка<br/>по Москве<br/>за 24 часа<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Money Back Guarantee<]]></from>
+				<to><![CDATA[>возврат<br/>в течение<br/>14 дней<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Special weekly Offer<]]></from>
+				<to><![CDATA[>подарки постоянным покупателям<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>000 000 000<]]></from>
+				<to><![CDATA[>+7 (495) 745-51-61<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_footer_contactus</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Контактная информация (справа)</new_title>
+			<term>
+				<from><![CDATA[>Contact Us<]]></from>
+				<to><![CDATA[>Контакты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Megnor Computer Pvt. Ltd.<]]></from>
+				<to><![CDATA[>Российская сборка Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>507-Union Trade Centre, Beside Apple Hospital,,Udhana Darwaja, Ring Road,Surat, India,<]]></from>
+				<to><![CDATA[>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Phone No:- 8866888222<]]></from>
+				<to><![CDATA[>+7 (495) 745-51-61<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>support@templatemela.com<]]></from>
+				<to><![CDATA[>admin@magento-forum.ru<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_footer_socialicon</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Ссылки на социальные сети</new_title>
+			<term>
+				<from><![CDATA[>Follow Me<]]></from>
+				<to><![CDATA[><]]></to>
+			</term>
+			<term>
+				<from><![CDATA["http://www.facebook.com"]]></from>
+				<to><![CDATA["https://www.facebook.com/magento.russia"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["http://www.twiiter.com"]]></from>
+				<to><![CDATA["https://twitter.com/dfediuk"]]></to>
+			</term>
+			<term>
+				<from><![CDATA["http://www.rss.com"]]></from>
+				<to><![CDATA["http://vk.com/magento_commerce"]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_footer_staticlink</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Меню в 3 колонки</new_title>
+			<term>
+				<from><![CDATA[>CMS Block<]]></from>
+				<to><![CDATA[>Покупателям<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Find a store near you<]]></from>
+				<to><![CDATA[>Доставка и оплата<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Pushchair Guarantee<]]></from>
+				<to><![CDATA[>Вопросы и ответы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Delivery Information<]]></from>
+				<to><![CDATA[>Новости<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shipping Information<]]></from>
+				<to><![CDATA[>Контакты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>View Order<]]></from>
+				<to><![CDATA[>Работа в компании<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_custom_link</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главное меню. Выпадающий блок дополнительного подменю</new_title>
+			<term>
+				<from><![CDATA[>HTML5 + CSS3<]]></from>
+				<to><![CDATA[>Интеграция с 1С<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Our designed to deliver almost everything you want to do online without requiring additional plugins.CSS3 has been split into "modules".<]]></from>
+				<to><![CDATA[>Российская сборка Magento поддерживает двунаправленный обмен данными с 1С:Управление торговлей по промышленному стандарту CommerceML 2.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Google Rich Snippet<]]></from>
+				<to><![CDATA[>Яндекс.Маркет<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>The rich snippets testing tool lets you check your markup and make sure that Google can extract the structured data from your page.<]]></from>
+				<to><![CDATA[>Российская сборка Magento позволяет публиковать товары интернет-магазина на Яндекс.Маркете с учётом множества параметров и настроек.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Responsive Design<]]></from>
+				<to><![CDATA[>Банковский эквайринг<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Responsive design is a Web design to provide an optimal navigation with a minimum of resizing, and scrolling&mdash;across a wide range of devices.<]]></from>
+				<to><![CDATA[>Российская сборка Magento способна принимать оплату банковскими картами напрямую, без посредников, прямо на счёт в ведущих банках: Альфа-Банк, Промсвязьбанк, Банк Авангард, Казкоммерцбанк.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Smart Product Grid<]]></from>
+				<to><![CDATA[>Платёжные инструменты<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Smart Product Grid is uses maximum available width of the screen to display content. It can be displayed on any screen or any devices.<]]></from>
+				<to><![CDATA[>Вы также можете принимать оплаты посредством терминалов QIWI,
+				Яндекс.Денег, WebMoney и платёжных агрегаторов:
+				ASSIST, РОБОКАССА, ChronoPay, INTERKASSA, EasyPay, iPay, LiqPay, Uniteller, PayOnline
+				PayAnyWay, WEBPAY, Oppay.ru и других.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SEO Optimazation<]]></from>
+				<to><![CDATA[>Службы доставки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SEO is a technique which helps search engines find and rank your site higher than the millions of other sites in response to a search query/<]]></from>
+				<to><![CDATA[>Российская сборка Magento интегрирована со множеством служб доставки:
+				10 для России, 9 для Украины, 3 для Казатстана.<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_advancedmenu_staticlink</id></block>
+		</conditions>
+		<actions>
+			<new_title>Пункты верхнего меню</new_title>
+			<term>
+				<from>href="about-magento-demo-store "</from>
+				<to>href="{{store url='about-magento-demo-store'}}"</to>
+			</term>
+			<term>
+				<from>href="privacy-policy-cookie-restriction-mode "</from>
+				<to>href="{{store url='privacy-policy-cookie-restriction-mode'}}"</to>
+			</term>
+			<term>
+				<from>href="customer-service"</from>
+				<to>href="{{store url='customer-service'}}"</to>
+			</term>
+			<term>
+				<from><![CDATA[>About Us<]]></from>
+				<to><![CDATA[>О магазине<]]></to>
+			</term>
+			<term>
+				<!-- Тег в конце намеренно не ставим, потому что в оригинале там пробел -->
+				<from><![CDATA[>Privacy Policy]]></from>
+				<to><![CDATA[>Доставка и оплата]]></to>
+			</term>
+			<term>
+				<!-- Тег в конце намеренно не ставим, потому что в оригинале там пробел -->
+				<from><![CDATA[>Customer Service]]></from>
+				<to><![CDATA[>Вопросы и ответы]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>tm_cms_tab</id></block>
+		</conditions>
+		<actions>
+			<new_title>Товарная карточка. Содержимое дополнительной вкладки</new_title>
+			<term>
+				<from>%Custom Variants and Options%</from>
+				<to><![CDATA[<p>Содержимое этой вкладки берётся из самодельного блока
+<br/>«<b>Товарная карточка. Содержимое дополнительной вкладки</b>» (<b>tm_cms_tab</b>).
+<br/>Самодельные блоки редактируются в административном разделе
+«<b>Витрина</b>» → «<b>Самодельные блоки</b>».
+<br/>Заголовок дополнительной вкладке редактируется в макетном файле
+<br/><b>app/design/frontend/default/MAG090172/layout/tempmela.xml</b>.
+<br/>Найдите там (примерно в строке <b>155</b>) правило
+<br/>&lt;action method=&quot;addTab&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;alias&gt;cms&lt;/alias&gt;&lt;title&gt;<b>CMS tab</b>&lt;/title&gt;&lt;block&gt;core/template&lt;/block&gt;&lt;template&gt;framework/tabs/cms.phtml&lt;/template&gt;&lt;/action&gt;
+<br/>и замените текст «<b>CMS tab</b>» на требуемое название вкладки.
+				</p>]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>TEST</id></block>
+		</conditions>
+		<actions>
+			<!-- TEST -->
+			<new_title>ТЕСТ</new_title>
+			<term>
+				<from><![CDATA[>TEST<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>TEST</id></block>
+		</conditions>
+		<actions>
+			<!-- TEST -->
+			<new_title>ТЕСТ</new_title>
+			<term>
+				<from><![CDATA[>TEST<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>TEST</id></block>
+		</conditions>
+		<actions>
+			<!-- TEST -->
+			<new_title>ТЕСТ</new_title>
+			<term>
+				<from><![CDATA[>TEST<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+		</actions>
+	</rule>
+</dictionary>

@@ -1,0 +1,130 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Chronopay>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Chronopay>
+	</modules>
+	<df>
+		<features>
+			<df-chronopay>
+				<title>ChronoPay</title>
+				<url>http://magento-forum.ru/forum/153/</url>
+			</df-chronopay>
+		</features>
+	</df>
+	<global>
+		<blocks><df_chronopay><class>Df_Chronopay_Block</class></df_chronopay></blocks>
+		<helpers><df_chronopay><class>Df_Chronopay_Helper</class></df_chronopay></helpers>
+		<models><df_chronopay><class>Df_Chronopay_Model</class></df_chronopay></models>
+		<events>
+			<sales_convert_quote_payment_to_order_payment>
+				<observers>
+					<chronopay_sales_convert_quote_payment_to_order_payment>
+						<class>df_chronopay/gate</class>
+						<method>sales_convert_quote_payment_to_order_payment</method>
+					</chronopay_sales_convert_quote_payment_to_order_payment>
+				</observers>
+			</sales_convert_quote_payment_to_order_payment>
+		</events>
+		<payment>
+			<cc>
+				<types>
+					<DI>
+						<code>DI</code>
+						<name>Discover</name>
+						<order>60</order>
+					</DI>
+					<JCB>
+						<code>JCB</code>
+						<name>JCB</name>
+						<order>61</order>
+					</JCB>
+					<DICL>
+						<code>DICL</code>
+						<name>Diners Club</name>
+						<order>62</order>
+					</DICL>
+					<ENR>
+						<code>ENR</code>
+						<name>enRoute</name>
+						<order>63</order>
+					</ENR>
+					<SS>
+						<code>SS</code>
+						<name>Switch/Solo</name>
+						<order>64</order>
+					</SS>
+				</types>
+			</cc>
+		</payment>
+	</global>
+	<frontend>
+		<secure_url>
+			<chronopay_standard>/df_chronopay/standard</chronopay_standard>
+		</secure_url>
+		<routers>
+			<chronopay>
+				<use>standard</use>
+				<args>
+					<module>Df_Chronopay</module>
+					<frontName>df_chronopay</frontName>
+				</args>
+			</chronopay>
+		</routers>
+		<translate>
+			<modules>
+				<Df_Chronopay><files><default>Df_Chronopay.csv</default></files></Df_Chronopay>
+			</modules>
+		</translate>
+	</frontend>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Chronopay><files><default>Df_Chronopay.csv</default></files></Df_Chronopay>
+			</modules>
+		</translate>
+		<layout>
+			<updates>
+				<df_chronopay module='Df_Chronopay'><file>df/chronopay.xml</file></df_chronopay>
+			</updates>
+		</layout>
+	</adminhtml>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<chronopay_standard>
+				  <model>df_chronopay/standard</model>
+				  <title>Банковская карта</title>
+				  <allowspecific>0</allowspecific>
+				  <transaction_type>O</transaction_type>
+			</chronopay_standard>
+			<chronopay_gate>
+				  <model>df_chronopay/gate</model>
+				  <title>ChronoPay Gateway</title>
+				  <allowspecific>0</allowspecific>
+				  <transaction_type>O</transaction_type>
+				  <cctypes>AE,VI,MC,DI</cctypes>
+				  <payment_action>authorize_capture</payment_action>
+			</chronopay_gate>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<chronopay_standard>
+				<model>df_chronopay/standard</model>
+			</chronopay_standard>
+			<chronopay_gate>
+				<model>df_chronopay/gate</model>
+			</chronopay_gate>
+		</payment>
+	</default>
+</config>

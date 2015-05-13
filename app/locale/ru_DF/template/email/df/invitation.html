@@ -1,0 +1,40 @@
+<!--@subject {{if inviter_name}}{{var inviter_name}} приглашает Вас{{else}}Приглашение{{/if}} в магазин {{var store.getFrontendName()|escape}}@-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"var store.getFrontendName()|escape":"Store Name",
+"var message|escape|nl2br":"Invitation Message",
+"var url|escape":"Invitation Url"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+            <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>Приглашаю Вас в магазин «{{var store.getFrontendName()|escape}}»!</p>
+                            <p>«{{var store.getFrontendName()|escape}}» с 7 по 14 февраля
+								предлагает ограниченную коллекцию рогов и копыт.</p>
+
+							{{if allow_message}} {{var message|escape|nl2br}} {{/if}}
+							<br/>
+
+							<div>
+								Для регистрации и просмотра коллекции пройдите по ссылке:
+								<a href="{{var url|escape}}">{{var url|escape}}</a>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

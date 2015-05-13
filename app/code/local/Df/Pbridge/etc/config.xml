@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Pbridge>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Pbridge>
+	</modules>
+	<global>
+		<blocks>
+			<df_pbridge><class>Df_Pbridge_Block</class></df_pbridge>
+			<enterprise_pbridge>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						адаптация модуля «Удобное оформление заказа» к Magento Enterprise Edition.
+					-->
+					<checkout_payment_review_container>Df_Pbridge_Block_Checkout_Payment_Review_Container</checkout_payment_review_container>
+				</rewrite>
+			</enterprise_pbridge>
+		</blocks>
+		<helpers>
+			<df_pbridge><class>Df_Pbridge_Helper</class></df_pbridge>
+			<enterprise_pbridge>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						адаптация модуля «Удобное оформление заказа» к Magento Enterprise Edition.
+					-->
+					<data>Df_Pbridge_Helper_Data</data>
+				</rewrite>
+			</enterprise_pbridge>
+		</helpers>
+		<models><df_pbridge><class>Df_Pbridge_Model</class></df_pbridge></models>
+	</global>
+</config>

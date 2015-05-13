@@ -1,0 +1,72 @@
+<?php /** @var Df_Catalog_Block_Category_Navigation $this */ ?>
+<div class='df'>
+	<div class='df-frontend'>
+		<div class='df-catalog'>
+			<div class='df-category'>
+				<div class='df-navigation'>
+					<!--
+						«Иллюстрированное меню товарных разделов»
+					-->
+					<?php $numColumns = df_cfg()->catalog()->navigation()->getNumberOfColumns(); ?>
+					<style type='text/css'>
+						.df div.df-frontend .df-catalog .df-category .df-navigation
+							ul.df-categories li.df-category {
+							width: <?php echo 98 / $numColumns; ?>%;
+						}
+					</style>
+					<ul class='df-categories'>
+						<?php
+						$index = 0;
+						foreach($this->getItems() as $item) {
+							/** @var Mage_Catalog_Model_Category $item */
+							$itemClasses = array('df-category');
+							if (!($index % $numColumns)) {
+								$itemClasses []= 'df-break';
+							}
+							$itemClasses = implode(' ', $itemClasses);
+							$index++;
+							$thumbnail = $item ['thumbnail'];
+							if (!$thumbnail) {
+								$thumbnail = $item ['df_thumbnail'];
+							}
+							$thumbnailUrl =
+									!$thumbnail
+								?
+									'/skin/frontend/base/default/df/images/catalog/category/navigation/absent/small.gif'
+								:
+									sprintf(
+										'%scatalog/category/%s'
+										,
+										Mage::getBaseUrl('media')
+										,
+										$thumbnail
+									)
+							;
+						?>
+							<li class='<?php echo $itemClasses; ?>'>
+								<a
+									href='<?php echo $item->getUrl(); ?>'
+									title='<?php echo $this->escapeHtml($item->getName()); ?>'
+									class='df-image-link'
+								>
+									<img
+										src='<?php echo $thumbnailUrl; ?>'
+										alt='<?php echo $this->escapeHtml($item->getName()); ?>'
+									/>
+								</a>
+								<a
+									href='<?php echo $item->getUrl(); ?>'
+									class='df-text-link'
+								>
+									<h2 class='df-caption'>
+										<?php echo $this->escapeHtml($item->getName()); ?>
+									</h2>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

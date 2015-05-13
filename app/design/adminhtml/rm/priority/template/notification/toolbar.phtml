@@ -1,0 +1,72 @@
+<?php /** @var Mage_Adminhtml_Block_Notification_Toolbar $this */ ?>
+<?php if ($this->isShow()): ?>
+<div class="notification-global">
+    <?php
+        $sParts = array();
+
+        if ($this->getCriticalCount()):
+            $sParts[] = '<span class="critical">' . $this->__('critical') . ' — <strong>'.$this->getCriticalCount().'</strong></span>';
+        endif;
+
+        if ($this->getMajorCount()):
+            $sParts[] = $this->__('major') . ' — <strong>'.$this->getMajorCount().'</strong> ';
+        endif;
+
+        if ($this->getMinorCount()):
+            $sParts[] = $this->__('minor') . ' — <strong>'.$this->getMinorCount().'</strong> ';
+        endif;
+
+        if ($this->getNoticeCount()):
+            $sParts[] = $this->__('notice') . ' — <strong>'.$this->getNoticeCount().'</strong> ';
+        endif;
+
+        $msgStats = '';
+        $c = count($sParts);
+        for ($i = 0; $i < $c; $i++) {
+            $msgStats .= $sParts[$i] . ($i == $c-1 ? '' : ($i == $c-2 ? $this->__(' and ') : ', '));
+        }
+
+        $latestNoticeUrl = $this->getLatestNoticeUrl();
+    ?>
+    <?php /*
+    <span class="f-right"><?php echo $this->__('You have %s unread message(s). <a href="%s">Go to messages inbox</a>.',
+        $msgStats,
+        $this->getNoticesInboxUrl()
+    );?></span>
+    */?>
+
+    <span class="f-right">
+        <?php $goToBoxMessage = (!empty($latestNoticeUrl)) ? $this->__('Go to messages inbox') : $this->__('Go to notifications') ?>
+        <a
+			href="<?php echo $this->getNoticesInboxUrl() ?>"
+		><?php echo $this->__('You have unread message(s)'); ?></a>: <?php echo $msgStats; ?>
+
+    </span>
+<?php /* ********** temporary commented
+    <span class="f-right"><?php echo $this->__('You have %s, %s and %s unread messages. <a href="%s">Go to messages inbox</a>.',
+        '<span class="critical"><strong>'.$this->getCriticalCount().'</strong> '.$this->__('critical').'</span>',
+        '<strong>'.$this->getMajorCount().'</strong> '.$this->__('major'),
+        '<strong>'.$this->getMinorCount().'</strong> '.$this->__('minor'),
+       $this->getNoticesInboxUrl()
+    );?></span>
+******** */?>
+
+	<strong
+		<?php if ($this->isMessageWindowAvailable()): ?>
+			class="label clickable" onclick="openMessagePopup()"
+		<?php else: ?>
+			class="label"
+		<?php endif; ?>
+	>
+		<?php if (!empty($latestNoticeUrl)): ?>
+			<a
+				href="<?php echo $latestNoticeUrl ?>"
+				onclick="this.target='_blank';"
+			>
+		<?php endif; ?>
+ 			<?php echo $this->__('Latest Message'); ?><?php if (!empty($latestNoticeUrl)): ?></a><?php endif; ?></strong>:
+	<?php echo $this->getLatestNotice() ?>
+
+
+</div>
+<?php endif; ?>

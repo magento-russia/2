@@ -1,0 +1,28 @@
+#config_edit_form {
+	fieldset#df_1c_general {
+		.form-list {
+			tr#row_df_1c_general_non_standard_currency_codes {
+				td.value {
+					.grid {
+						select.standard_code {
+							width: 15em;
+						}
+					}
+				}
+			}
+		}
+	}
+	fieldset#df_1c_product__prices {
+		.form-list {
+			tr#row_df_1c_product__prices_map {
+				td.value {
+					.grid {
+						select.customer_group {
+							width: 10em;
+						}
+					}
+				}
+			}
+		}
+	}
+}

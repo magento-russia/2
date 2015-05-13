@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_KazpostEms>
+			<version>2.27.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_KazpostEms>
+	</modules>
+	<global>
+		<blocks><df_kazpost_ems><class>Df_KazpostEms_Block</class></df_kazpost_ems></blocks>
+		<helpers><df_kazpost_ems><class>Df_KazpostEms_Helper</class></df_kazpost_ems></helpers>
+		<models><df_kazpost_ems><class>Df_KazpostEms_Model</class></df_kazpost_ems></models>
+	</global>
+	<default>
+		<carriers>
+			<df-kazpost-ems>
+				<active>0</active>
+				<model>df_kazpost_ems/carrier</model>
+				<title>Казпочта EMS</title>
+			</df-kazpost-ems>
+		</carriers>
+		<df_shipping>
+			<kazpost-ems>
+				<admin__declared_value_percent>100</admin__declared_value_percent>
+				<admin__processing_before_shipping__consider_days_off>0</admin__processing_before_shipping__consider_days_off>
+				<admin__processing_before_shipping__consider_today_untill>12</admin__processing_before_shipping__consider_today_untill>
+				<admin__processing_before_shipping__days>0</admin__processing_before_shipping__days>
+			</kazpost-ems>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-kazpost-ems>
+				<module>df_kazpost_ems</module>
+				<title>Казпочта EMS</title>
+				<url>http://magento-forum.ru/forum/327/</url>
+			</df-kazpost-ems>
+		</features>
+	</df>
+</config>

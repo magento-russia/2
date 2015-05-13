@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='TM_CustomMenu'>
+		<block
+			class='TM_CustomMenu_Block_Navigation'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Categories</en_US>
+				<ru_RU>Товарные разделы</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

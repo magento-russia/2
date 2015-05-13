@@ -1,0 +1,18 @@
+<?php /** @var Df_Reward_Block_Adminhtml_Sales_Order_Create_Payment $this */ ?>
+<?php if ($this->canUseRewardPoints()): ?>
+    <div>
+        <input id="p_method_use_reward_points" value="1" name="payment[use_reward_points]" type="checkbox" <?php if ($this->useRewardPoints()): ?>checked="checked"<?php endif; ?> />
+        <label for="p_method_use_reward_points"><?php echo $this->getUseLabel() ?></label>
+        <script type="text/javascript">
+            function toggleUseRewardPoints()
+            {
+                value =($('p_method_use_reward_points').checked ? 1 : 0);
+                var data = {};
+                data['payment[use_reward_points]'] = value;
+                order.loadArea(['totals', 'billing_method'], true, data);
+            }
+            Event.observe($('p_method_use_reward_points'), 'change', toggleUseRewardPoints);
+            Event.observe(document, 'dom:loaded', toggleUseRewardPoints);
+        </script>
+    </div>
+<?php endif; ?>

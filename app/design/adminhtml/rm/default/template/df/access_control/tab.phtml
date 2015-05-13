@@ -1,0 +1,47 @@
+<?php /** @var Df_AccessControl_Block_Admin_Tab $this */ ?>
+<div class='entry-edit'>
+    <div class='entry-edit-head'>
+        <h4 class='icon-head head-edit-form fieldset-legend'>
+			<?php echo $this->__('Доступ к товарным разделам') ?>
+		</h4>
+    </div>
+    <fieldset id='role_resources'>
+		<div class="field-row">
+			<label for="rm.accessControl.enable">Настроить?</label>
+			<select
+				id="rm.accessControl.enable"
+				name="rm.accessControl.enable"
+				class="select"
+			>
+				<option
+					value="0" <?php echo ($this->isModuleEnabled() ? '' : 'selected'); ?>
+				>нет</option>
+				<option
+					value="1" <?php echo ($this->isModuleEnabled() ? 'selected' : ''); ?>
+				>да</option>
+			</select>
+		</div>
+		<div id='rm.accessControl.settings'>
+			<div class='field-row'>
+				<?php
+					echo $this->renderCategoryTree();
+				?>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var accessControlModuleEnabled =
+				<?php echo ($this->isModuleEnabled() ? 'true' : 'false'); ?>
+			;
+			document.observe("dom:loaded", function() {
+				/** @type {HTMLDivElement} */
+				var dfAccessControlSettings = $('rm.accessControl.settings');
+				if (!accessControlModuleEnabled) {
+					dfAccessControlSettings.hide();
+				}
+				Event.observe('rm.accessControl.enable', 'change', function(event) {
+					dfAccessControlSettings.toggle();
+				});
+			});
+		</script>
+    </fieldset>
+</div>

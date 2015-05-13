@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<df_banner_adminhtml_banner_index>
+		<reference name='content'>
+			<block type='df_banner/adminhtml_banner' name='df_banner'/>
+		</reference>
+	</df_banner_adminhtml_banner_index>
+	<df_banner_adminhtml_banneritem_index>
+		<reference name='content'>
+			<block type='df_banner/adminhtml_banneritem' name='df_banner_item'/>
+		</reference>
+	</df_banner_adminhtml_banneritem_index>
+</layout>

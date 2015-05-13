@@ -1,0 +1,136 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Shipping>
+			<version>2.30.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Shipping>
+	</modules>
+	<df>
+		<attribute_set_processors>
+			<shipping>Df_Shipping_Model_Processor_AddDimensionsToProductAttributeSet</shipping>
+		</attribute_set_processors>
+	</df>
+	<global>
+		<blocks><df_shipping><class>Df_Shipping_Block</class></df_shipping></blocks>
+		<helpers><df_shipping><class>Df_Shipping_Helper</class></df_shipping></helpers>
+		<models>
+			<df_shipping>
+				<class>Df_Shipping_Model</class>
+				<resourceModel>df_shipping_resource</resourceModel>
+			</df_shipping>
+			<df_shipping_resource>
+				<class>Df_Shipping_Model_Resource</class>
+			</df_shipping_resource>
+			<shipping>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						улучшение диагностики в тех ситуациях,
+						когда требуемый класс некоего модуля доставки отсутствует.
+					-->
+					<config>Df_Shipping_Model_Config</config>
+				</rewrite>
+			</shipping>
+		</models>
+		<resources>
+			<df_shipping_setup>
+				<setup>
+					<module>Df_Shipping</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_shipping_setup>
+		</resources>
+		<sales>
+			<quote>
+				<item>
+					<product_attributes>
+						<width/>
+						<height/>
+						<length/>
+					</product_attributes>
+				</item>
+			</quote>
+		</sales>
+		<cache>
+			<types>
+				<rm_shipping translate='label,description' module='df_shipping'>
+					<label>Службы доставки</label>
+					<description>Хранит тарифы, условия и пункты доставки.</description>
+					<tags>rm_shipping</tags>
+				</rm_shipping>
+			</types>
+		</cache>
+	</global>
+	<frontend>
+		<product>
+			<collection>
+				<attributes>
+					<width/>
+					<height/>
+					<length/>
+				</attributes>
+			</collection>
+		</product>
+	</frontend>
+	<default>
+		<carriers>
+			<dhlint>
+				<!-- Заплатка для Magento CE 1.7.0.0 -->
+				<content_type>D</content_type>
+				<!--
+					Заплатка для Magento CE версий <= 1.6.0.0
+				-->
+				<model>usa/shipping_carrier_dhl_international</model>
+			</dhlint>
+			<flatrate>
+				<active>0</active>
+				<name></name>
+				<title>Единый тариф</title>
+				<price>300</price>
+			</flatrate>
+		</carriers>
+		<df_shipping>
+			<product>
+				<attribute__show_on_product_page>0</attribute__show_on_product_page>
+				<default__weight>1</default__weight>
+				<default__length>40</default__length>
+				<default__width>30</default__width>
+				<default__height>20</default__height>
+				<units__weight>kilogram</units__weight>
+				<units__length>centimetre</units__length>
+			</product>
+			<message>
+				<failure__general>
+<![CDATA[<p>В настоящий момент у нас не получается рассчитать
+стоимость доставки Вашего заказа
+{название службы и способа доставки в творительном падеже}.</p>
+<p>Если Вы хотите получить Ваш заказ именно этим способом —
+пожалуйста, позвоните нам по телефону <b>{телефон магазина}</b>.</p>
+<p>Вы можете также выбрать другой способ доставки Вашего заказа
+из перечисленных на этом экране.</p>]]>
+				</failure__general>
+				<failure__same_location>
+<![CDATA[<p>Мы тоже находимся <b>{в месте доставки}</b>, поэтому доставка
+{название службы и способа доставки в творительном падеже} невозможна.
+Пожалуйста, выберите другой способ доставки.</p>
+<p>В случае затруднений оформите Ваш заказ по телефону <b>{телефон магазина}</b>.</p>]]>
+				</failure__same_location>
+			</message>
+		</df_shipping>
+		<shipping>
+			<!--
+				При использовании демо-данных значения по умолчанию не учитываются,
+				поэтому дополнительно указываем эти же значения в русификаторе
+				app/code/local/Df/Localization/etc/rm/dictionaries/onetime/common.xml
+			-->
+			<origin>
+				<country_id>RU</country_id>
+				<postcode>127238</postcode>
+				<city>Москва</city>
+				<region_id>Москва</region_id>
+				<street_line1>Красная Площадь, дом 1</street_line1>
+			</origin>
+		</shipping>
+	</default>
+</config>

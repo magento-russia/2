@@ -1,0 +1,27 @@
+div.df-admin-account-generator {
+	/*background: #FFFBDD;*/
+
+	h1 {
+		font-size: 175%;
+	}
+
+	form {
+		textarea, label, input {
+			display: block;
+		}
+
+		ul.df-inputs {
+			li {
+				margin: 0 0 1em 0;
+
+				input#df-admin-account-generator-form-url {
+					width: 22em;
+				}
+			}
+		}
+
+		.df-submit {
+			margin: 1em 0 0 0;
+		}
+	}
+}

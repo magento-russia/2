@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+    <cms_page translate='label'>
+        <reference name='content'>
+            <block
+				type='df_cms/hierarchy_pagination'
+				name='hierarchy_pagination'
+				template='df/cms/hierarchy/pagination.phtml'
+			/>
+        </reference>
+    </cms_page>
+</layout>

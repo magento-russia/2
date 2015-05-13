@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Tax>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Tax>
+	</modules>
+	<global>
+		<blocks><df_tax><class>Df_Tax_Block</class></df_tax></blocks>
+		<helpers><df_tax><class>Df_Tax_Helper</class></df_tax></helpers>
+		<models><df_tax><class>Df_Tax_Model</class></df_tax></models>
+	</global>
+</config>

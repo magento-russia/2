@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_promotion translate='label' module='df_promotion'>
+			<groups>
+				<banners translate='label'>
+					<label>Реклама</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<!--
+								Модуль «Реклама» имеет право оказывать на систему какое-либо влияние,только если данная опция установлена в «true»
+							-->
+							<label>Activate?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-banner</df_feature>
+						</enabled>
+					</fields>
+				</banners>
+			</groups>
+		</df_promotion>
+	</sections>
+</config>

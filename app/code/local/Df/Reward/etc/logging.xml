@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<logging>
+	<df_reward_rate translate='label'>
+		<label>Reward Points Rates</label>
+		<expected_models>
+			<df_reward__reward_rate/>
+		</expected_models>
+		<actions>
+			<adminhtml_reward_rate_edit>
+				<action>edit</action>
+			</adminhtml_reward_rate_edit>
+			<adminhtml_reward_rate_save>
+				<action>save</action>
+			</adminhtml_reward_rate_save>
+			<adminhtml_reward_rate_delete>
+				<action>delete</action>
+			</adminhtml_reward_rate_delete>
+		</actions>
+	</df_reward_rate>
+	<customer>
+		<actions>
+			<adminhtml_customer_save>
+				<expected_models extends='merge'>
+					<df_reward__reward_history>
+						<skip_data>
+							<history_id/>
+							<action/>
+							<additional_data/>
+							<notification_sent/>
+							<created_at/>
+							<expired_at/>
+						</skip_data>
+					</df_reward__reward_history>
+				</expected_models>
+			</adminhtml_customer_save>
+		</actions>
+	</customer>
+	<!--df_reward translate='label'>
+		<label>Reward Points balance</label>
+		<expected_models>
+			<df_reward__reward_history>
+				<skip_data>
+					<new_password/>
+					<password/>
+					<password_hash/>
+				</skip_data>
+			</df_reward__reward_history>
+		</expected_models>
+		<actions>
+			<adminhtml_customer_save>
+				<expected_models extends='merge'>
+					<df_reward__reward_history/>
+				</expected_models>
+			</adminhtml_customer_save>
+		</actions>
+	</df_reward-->
+</logging>

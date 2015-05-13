@@ -1,0 +1,68 @@
+.df-theme-magento-rwd {
+	.product-view {
+		.product-shop {
+			.price-info {
+				max-width: 70%;
+			}
+		}
+	}
+	/*.skip-account {
+		right: 150px;
+		top: 1px;
+	} */
+	.shipping {
+		.form-list {
+			.shipping-postcode {
+				width: 35%;
+				review-product-list
+				div.input-box {
+					width: 6em;
+				}
+			}
+		}
+	}
+}
+.df-theme-magento-rwd.customer-account-login {
+	.scaffold-form {
+		label:first-child {
+			/* RWD зачем-то устанавливает width: 115px; */
+			width: auto;
+		}
+	}
+}
+.df-theme-magento-rwd.checkout-onepage-index {
+	.df-checkout-ergonomic-page {
+		.col-main {
+			float: none;
+			width: auto;
+			max-width: 1200px;
+		}
+		.df {
+			button.btn-checkout {
+				margin-top: 1em;
+			}
+		}
+	}
+}
+
+.df-theme-magento-rwd.review-product-list {
+	/* Скрываем кучу словесного мусора */
+	p.no-rating {
+		display: none;
+	}
+	#review-form {
+		h3 {
+			display: none;
+		}
+		> div {
+			padding-top: 0;
+		}
+		.form-list {
+			li:nth-child(3) {
+				label {
+					text-transform: none;
+				}
+			}
+		}
+	}
+}

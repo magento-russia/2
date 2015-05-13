@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Mage_Checkout'>
+		<block
+			class='Mage_Checkout_Block_Cart_Header'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>item</en_US>
+				<ru_RU>шт.</ru_RU>
+			</term>
+			<term>
+				<en_US>items</en_US>
+				<ru_RU>шт.</ru_RU>
+			</term>
+			<term>
+				<en_US>Total:</en_US>
+				<ru_RU>Итого:</ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Mage_Newsletter'>
+		<block
+			class='Mage_Newsletter_Block_Subscribe'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Submit</en_US>
+				<ru_RU>ОК</ru_RU>
+			</term>
+			<term>
+				<en_US>Sign up for our newsletter</en_US>
+				<ru_RU>подпишитесь на новости</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

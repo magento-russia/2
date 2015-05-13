@@ -1,0 +1,417 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Core>
+			<version>2.23.6</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Core>
+	</modules>
+	<df>
+		<version>2.43.15</version>
+		<jquery>
+			<core>
+				<cdn>http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js</cdn>
+				<local>df/js/system/jquery.js</local>
+			</core>
+			<migrate>
+				<cdn>http://code.jquery.com/jquery-migrate-1.2.1.js</cdn>
+				<local>df/js/system/jquery-migrate-1.2.1.js</local>
+			</migrate>
+		</jquery>
+		<units>
+			<length>
+				<millimetre>
+					<label>миллиметр</label>
+					<ratio>1</ratio>
+				</millimetre>
+				<centimetre>
+					<label>сантиметр</label>
+					<ratio>10</ratio>
+				</centimetre>
+				<metre>
+					<label>метр</label>
+					<ratio>1000</ratio>
+				</metre>
+			</length>
+			<weight>
+				<gram>
+					<label>грамм</label>
+					<ratio>1</ratio>
+				</gram>
+				<kilogram>
+					<label>килограмм</label>
+					<ratio>1000</ratio>
+				</kilogram>
+			</weight>
+		</units>
+	</df>
+	<global>
+		<blocks>
+			<core>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						предотвращение сбоя
+						«Invalid block» / «Недействительный тип блока» / «Система не нашла блок»
+						в том случае, когда блок был удалён модулем «Удобная настройка витрины»
+						или же какими-то другими программными способами.
+					-->
+					<text_list>Df_Core_Block_Text_List</text_list>
+				</rewrite>
+			</core>
+			<df_core><class>Df_Core_Block</class></df_core>
+		</blocks>
+		<helpers>
+			<core>
+				<rewrite>
+					<!--
+						Цели перекрытия:
+						их много, потому что перекрывается один из ключевых классов системы,
+						главный класс-помощник (helper) ядра системы.
+					-->
+					<data>Df_Core_Helper_DataM</data>
+					<!--
+						Цель перекрытия —
+						кэширование скриптов на странице.
+					-->
+					<js>Df_Core_Helper_Js</js>
+					<!--
+						Цель перекрытия —
+						крайне существенное (поров в 21000 раз)
+						ускорение работы строковых функций, используемых ядром Magento.
+					-->
+					<string>Df_Core_Helper_String</string>
+				</rewrite>
+			</core>
+			<df_core><class>Df_Core_Helper</class></df_core>
+		</helpers>
+		<models>
+			<core>
+				<rewrite>
+					<!--
+						К сожалению, мы не может настроить полностраничное кэширование автоматически
+						перекрытием класса @see Mage_Core_Model_Cache,
+						потому что этот класс инициализируется ДО Российской сборки Magento
+						и перекрыть его в Российской сборке Magento нельзя.
+					-->
+					<!--
+						Цели перекрытия:
+						их много, потому что перекрываемый класс — один из ключевых классов системы:
+						он содержит важную часть функциональности
+						сборки системой страницы на основе данных офомительской темы.
+					-->
+					<design_package>Df_Core_Model_Design_PackageM</design_package>
+					<!--
+						Цель перекрытия —
+						устранение дефекта показа картинок в редакторе.
+						@link http://magento-forum.ru/topic/2320/
+					-->
+					<email_template_filter>Df_Widget_Model_Template_Filter</email_template_filter>
+					<!--
+						Цель перекрытия —
+						оповещение разработчика о сбоях при создании блоков.
+					-->
+					<layout>Df_Core_Model_Layout</layout>
+					<!--
+						Цель перекрытия —
+						оповещение разработчика о сбоях
+						при синтаксическом разборе макетных файлов (layout/*.xml) оформитетельской темы.
+					-->
+					<layout_update>Df_Core_Model_Layout_Update</layout_update>
+					<!--
+						Цели перекрытия:
+						их много, потому что перекрываемый класс — один из ключевых классов системы:
+						он содержит функциональность локализации.
+					-->
+					<locale>Df_Core_Model_Locale</locale>
+					<!--
+						Цель перекрытия —
+						дополнительное кэширование:
+						ядро Magento кэширует между сеансами лишь некоторые настройки,
+						игнорируя кэширование остальных.
+						@see Mage_Core_Model_Store::initConfigCache()
+						@see Mage_Core_Model_Store::_configCacheBaseNodes
+						@see Mage_Core_Model_Store::_construct()
+					-->
+					<store>Df_Core_Model_StoreM</store>
+					<!--
+						Цели перекрытия:
+						их много, потому что перекрываемый класс — один из ключевых классов системы:
+						он содержит функциональность перевода интерфейса
+						с английского языка на требуемый (русский).
+					-->
+					<translate>Df_Core_Model_Translate</translate>
+					<!--
+						Цель перекрытия —
+						кэширование адресов страниц для ускорения их формирования.
+					-->
+					<url>Df_Core_Model_Url</url>
+					<!--
+						Цель перекрытия —
+						поддержка русских букв в адресах страниц.
+					-->
+					<url_rewrite>Df_Core_Model_Url_Rewrite</url_rewrite>
+				</rewrite>
+			</core>
+			<core_mysql4>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						улучшение функциональности загрузки настроечных опций.
+						Подробный комментарий находится внутри метода
+						@see Df_Core_Model_Resource_ConfigM::loadToXml()
+					-->
+					<config>Df_Core_Model_Resource_ConfigM</config>
+					<!--
+						Цель перекрытия —
+						улучшение функциональности загрузки настроечных опций.
+						Подробный комментарий находится внутри метода
+						@see Df_Core_Model_Resource_Config_Data::_prepareDataForSave()
+
+						Обратите внимание, что неправильным будет вместо перекрытия данного класса
+						перекрывать класс Mage_Core_Model_Config_Data
+						классом Df_Core_Model_Config_Data и надеяться,
+						что Df_Core_Model_Config_Data сам установит
+						требуемую ресурсную модель Df_Core_Model_Resource_Config_Data,
+						потому что класс Mage_Core_Model_Config_Data много кто перекрывает в ядре
+						(для реализации своих backend_model),
+						и тогда наш класс-перекрытие Df_Core_Model_Config_Data
+						просто не будет задействован.
+					-->
+					<config_data>Df_Core_Model_Resource_Config_Data</config_data>
+					<!--
+						2014-11-21
+						Цель перекрытия —
+						устранение сбоя «Магазин с таким кодом уже существует»
+						при сохранении административного магазина
+						в устаревших версиях Magento CE (например, 1.6.1.0).
+					-->
+					<store>Df_Core_Model_Resource_Store</store>
+				</rewrite>
+			</core_mysql4>
+			<core_resource>
+				<rewrite>
+					<config>Df_Core_Model_Resource_ConfigM</config>
+					<config_data>Df_Core_Model_Resource_Config_Data</config_data>
+					<store>Df_Core_Model_Resource_Store</store>
+				</rewrite>
+			</core_resource>
+			<df_core>
+				<class>Df_Core_Model</class>
+				<resourceModel>df_core_resource</resourceModel>
+			</df_core>
+			<df_core_resource>
+				<class>Df_Core_Model_Resource</class>
+				<entities>
+					<location><table>df_core_location</table></location>
+				</entities>
+			</df_core_resource>
+		</models>
+		<events>
+			<controller_action_layout_generate_blocks_after>
+				<observers>
+					<df_core__controller_action_layout_generate_blocks_after>
+						<class>df_core/dispatcher</class>
+						<method>controller_action_layout_generate_blocks_after</method>
+					</df_core__controller_action_layout_generate_blocks_after>
+				</observers>
+			</controller_action_layout_generate_blocks_after>
+			<controller_action_layout_generate_blocks_before>
+				<observers>
+					<df_core__controller_action_layout_generate_blocks_before>
+						<class>df_core/dispatcher</class>
+						<method>controller_action_layout_generate_blocks_before</method>
+					</df_core__controller_action_layout_generate_blocks_before>
+				</observers>
+			</controller_action_layout_generate_blocks_before>
+			<controller_action_layout_render_before>
+				<observers>
+					<df_core__controller_action_layout_render_before>
+						<class>df_core/dispatcher</class>
+						<method>controller_action_layout_render_before</method>
+					</df_core__controller_action_layout_render_before>
+				</observers>
+			</controller_action_layout_render_before>
+			<controller_action_predispatch>
+				<observers>
+					<df_core__controller_action_predispatch>
+						<class>df_core/dispatcher</class>
+						<method>controller_action_predispatch</method>
+					</df_core__controller_action_predispatch>
+				</observers>
+			</controller_action_predispatch>
+			<controller_action_postdispatch>
+				<observers>
+					<df_core__controller_action_predispatch>
+						<class>df_core/dispatcher</class>
+						<method>controller_action_postdispatch</method>
+					</df_core__controller_action_predispatch>
+				</observers>
+			</controller_action_postdispatch>
+			<controller_front_init_before>
+				<observers>
+					<df_core__controller_front_init_before>
+						<class>df_core/dispatcher</class>
+						<method>controller_front_init_before</method>
+					</df_core__controller_front_init_before>
+				</observers>
+			</controller_front_init_before>
+			<controller_front_send_response_after>
+				<observers>
+					<df_core__controller_front_send_response_after>
+						<class>df_core/dispatcher</class>
+						<method>controller_front_send_response_after</method>
+					</df_core__controller_front_send_response_after>
+				</observers>
+			</controller_front_send_response_after>
+			<default>
+				<observers>
+					<df_core__default>
+						<class>Df_Core_Bootstrap</class>
+						<method>init</method>
+					</df_core__default>
+				</observers>
+			</default>
+			<resource_get_tablename>
+				<observers>
+					<df_core__resource_get_tablename>
+						<class>Df_Core_Bootstrap</class>
+						<method>resource_get_tablename</method>
+					</df_core__resource_get_tablename>
+				</observers>
+			</resource_get_tablename>
+		</events>
+		<resources>
+			<df_core_setup>
+				<setup>
+					<module>Df_Core</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_core_setup>
+		</resources>
+		<cache>
+			<types>
+				<rm_url translate='label,description' module='df_core'>
+					<label>Веб-адреса</label>
+					<description>Веб-адреса страниц магазина</description>
+					<tags>rm_url</tags>
+				</rm_url>
+			</types>
+		</cache>
+	</global>
+	<adminhtml>
+		<layout>
+			<updates>
+				<df_core module='df_core'><file>df/core.xml</file></df_core>
+			</updates>
+		</layout>
+		<events>
+			<admin_session_user_login_success>
+				<observers>
+					<df_core__admin_session_user_login_success>
+						<class>df_core/dispatcher</class>
+						<method>admin_session_user_login_success</method>
+					</df_core__admin_session_user_login_success>
+				</observers>
+			</admin_session_user_login_success>
+		</events>
+	</adminhtml>
+	<frontend>
+		<layout>
+			<updates>
+				<df_core module='df_core'><file>df/core.xml</file></df_core>
+			</updates>
+		</layout>
+		<events>
+			<core_block_abstract_to_html_after>
+				<observers>
+					<df_core__core_block_abstract_to_html_after>
+						<class>df_core/dispatcher</class>
+						<method>core_block_abstract_to_html_after</method>
+					</df_core__core_block_abstract_to_html_after>
+				</observers>
+			</core_block_abstract_to_html_after>
+			<core_block_abstract_to_html_before>
+				<observers>
+					<df_core__core_block_abstract_to_html_before>
+						<class>df_core/dispatcher</class>
+						<method>core_block_abstract_to_html_before</method>
+					</df_core__core_block_abstract_to_html_before>
+				</observers>
+			</core_block_abstract_to_html_before>
+		</events>
+	</frontend>
+	<install>
+		<events>
+			<controller_action_postdispatch_install_wizard_end>
+				<observers>
+					<df_core__controller_action_postdispatch_install_wizard_end>
+						<class>df_core/dispatcher</class>
+						<method>controller_action_postdispatch_install_wizard_end</method>
+					</df_core__controller_action_postdispatch_install_wizard_end>
+				</observers>
+			</controller_action_postdispatch_install_wizard_end>
+		</events>
+	</install>
+	<stores>
+		<default>
+			<web>
+				<routers>
+					<standard>
+						<area>frontend</area>
+						<class>Df_Core_Controller_Varien_Router_Standard</class>
+					</standard>
+				</routers>
+			</web>
+		</default>
+	</stores>
+	<default>
+		<admin>
+			<security>
+				<use_form_key>0</use_form_key>
+				<session_cookie_lifetime>999999</session_cookie_lifetime>
+			</security>
+		</admin>
+		<dev>
+			<log>
+				<active>1</active>
+			</log>
+		</dev>
+		<general>
+			<country>
+				<default>RU</default>
+			</country>
+			<locale>
+				<code>ru_RU</code>
+				<currency>RUB</currency>
+				<firstday>1</firstday>
+				<timezone>Europe/Moscow</timezone>
+			</locale>
+			<store_information>
+				<merchant_country>RU</merchant_country>
+			</store_information>
+		</general>
+		<trans_email>
+			<ident_custom1>
+				<email>admin@magento-forum.ru</email>
+				<name>Дополнительный адрес</name>
+			</ident_custom1>
+			<ident_custom2>
+				<email>admin@magento-forum.ru</email>
+				<name>Дополнительный адрес</name>
+			</ident_custom2>
+			<ident_general>
+				<email>admin@magento-forum.ru</email>
+				<name>Администрация магазина</name>
+			</ident_general>
+			<ident_sales>
+				<email>admin@magento-forum.ru</email>
+				<name>Отдел продаж</name>
+			</ident_sales>
+			<ident_support>
+				<email>admin@magento-forum.ru</email>
+				<name>Служба поддержки</name>
+			</ident_support>
+		</trans_email>
+	</default>
+</config>

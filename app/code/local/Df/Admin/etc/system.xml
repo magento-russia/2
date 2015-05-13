@@ -1,0 +1,386 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_tweaks_admin translate='label' module='df_admin'>
+			<label>Административная часть</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>3000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<interface translate='label'>
+					<label>Интерфейс</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<form_label__font__letter_case translate='label'>
+							<label>В каком регистре отображать подписи к полям формы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</form_label__font__letter_case>
+						<grid_label__font__letter_case translate='label'>
+							<label>В каком регистре отображать подписи к столбцам таблиц?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</grid_label__font__letter_case>
+						<button_label__font__letter_case translate='label'>
+							<label>В каком регистре отображать надписи на кнопках?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</button_label__font__letter_case>
+					</fields>
+				</interface>
+				<system_tools_compilation translate='label'>
+					<label>Компиляция</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<fix translate='label'>
+							<label>Применить заплатку для избежания ошибок после компиляции?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix>
+					</fields>
+				</system_tools_compilation>
+				<system_config translate='label'>
+					<label>Настройки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<remind_fieldset_toggle_state translate='label'>
+							<label>Запоминать состояние схлопнутости / раскрытости групп настроек при их сохранении?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</remind_fieldset_toggle_state>
+					</fields>
+				</system_config>
+				<reviews translate='label'>
+					<label>Отзывы</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5250</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<notification_template>
+							<label>Шаблон оповещения администратора об отзыве посетителя на товар</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</notification_template>
+					</fields>
+				</reviews>
+				<sales_customers translate='label'>
+					<label>Покупатели</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5500</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable_website_changing translate='label'>
+							<label>Разрешить менять привязку покупателя к сайту</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_feature>df-tweaks-admin</df_feature>
+						</enable_website_changing>
+					</fields>
+				</sales_customers>
+				<system_indices translate='label'>
+					<label>Расчётные таблицы</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>6000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<varchar_length translate='label'>
+							<label>Максимальное количество символов для хранения значения свойства товара</label>
+							<comment>
+								<![CDATA[
+									<p>Magento по умолчанию отводит на хранение значения одного свойства товара
+									в своей базе данных 255 символов,для хранения которых MySQL выделяет 255 * 3 + 2 = 767 байтов.</p>
+									<p>Magento объединяет все свойства товаров в единой расчётной таблице,колонками которой служат свойства, а строками — товары.</p>
+									<p>Если свойств товаров слишком много, то Magento превышает
+									<a href='http://dev.mysql.com/doc/refman/5.0/en/column-count-limit.html'
+									>системное ограничение MySQL на одну строку таблицы</a>: 65535 байтов,что приводит к сбою построения расчётной таблицы товаров.</p>
+									<p>Для избежания данного сбоя Российская сборка Magento
+									позволяет уменьшить отводимое на одно свойство количество символов с 255
+									до какого-либо меньшего натурального значения.</p>
+									<p>При значении «0» в данном поле
+									система не будет уменьшать количество символов на свойство.</p>
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+							<validate>
+								validate-number
+								validate-number-range
+								number-range-0-255
+							</validate>
+						</varchar_length>
+					</fields>
+				</system_indices>
+				<editor translate='label'>
+					<label>Редактор</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>8000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<use_rm translate='label'>
+							<label>Включить редактор Российской сборки?</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_feature>df-admin-editor</df_feature>
+						</use_rm>
+						<fix_images translate='label'>
+							<label>Устранить дефект показа картинок в редакторе?</label>
+							<comment>
+								<![CDATA[
+									<a href='http://magento-forum.ru/topic/2320/'>описание дефекта</a>
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix_images>
+						<fix_headers_already_sent translate='label'>
+							<label>Устранить дефект «HEADERS ALREADY SENT»?</label>
+							<comment>
+								<![CDATA[
+									<a href='http://magento-forum.ru/topic/2321/'>описание дефекта</a>
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix_headers_already_sent>
+					</fields>
+				</editor>
+				<promotions translate='label'>
+					<label>Скидки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>9000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<fix_products_subselection translate='label'>
+							<label>Применить заплатку для опции&lt;br/&gt;«Группа товаров с определёнными условиями»?</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix_products_subselection>
+					</fields>
+				</promotions>
+				<catalog_product translate='label'>
+					<label>Товары</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<fix_bundle_js translate='label'>
+							<label>Устранить ошибку JavaScript при редактировании Bundle Products?</label>
+							<frontend_type>select</frontend_type>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix_bundle_js>
+					</fields>
+				</catalog_product>
+				<system_notifications translate='label'>
+					<label>Уведомления</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>11000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<fix_reminder translate='label'>
+							<label>Скрывать «Reminder: Change Magento`s default phone numbers» после пометки прочитанным</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix_reminder>
+					</fields>
+				</system_notifications>
+				<optimization translate='label'>
+					<label>Ускорение административных задач</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>12000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<fix_double_stock_reindexing_on_product_save translate='label'>
+							<label>Ускорить запись товаров в базу данных?</label>
+							<comment>
+								<![CDATA[
+								<p>Magento содержит дефект, который приводит к двойному расчёту
+								одних и тех же складских запасов при каждой записи товара в базу данных.
+								</p>
+								<p>
+								Данная заплатка ускоряет запись товара в базу данных путём исправления данного дефекта
+								(после включения заплатки складские запасы расчитываются единожды).
+								</p>
+							]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-tweaks-admin</df_feature>
+						</fix_double_stock_reindexing_on_product_save>
+					</fields>
+				</optimization>
+				<other translate='label'>
+					<label>Другое</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>13000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<jquery_load_mode>
+							<label>Вариант загрузки библиотеки jQuery</label>
+							<comment>
+								<![CDATA[
+									<br/>
+									«<b>загружать с сервера магазина</b>»
+									<br/>Этот вариант рекомендуется для разработки и отладки магазина.
+									<br/>Библиотека загружается в подробном виде, что замедляет загрузку,но упрощает отладку.
+									<br/><br/>
+									«<b>загружать с серверов Google</b>»
+									<br/>Этот вариант рекомендуется для промышленной эксплуатации магазина.
+									<br/>Библиотека загружается в сжатом виде, что ускоряет загрузку,но усложняет отладку.
+									<br/><br/>
+									«<b>не загружать</b>»
+									<br/>Этот вариант можно выбрать
+									при наличии на странице другой библиотеки jQuery.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_jqueryLoadMode</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</jquery_load_mode>
+						<jquery_remove_extraneous>
+							<label>Удалять с административных страниц сторонние копии библиотеку jQuery
+								при наличии на этих страницах библиотеки jQuery Российской сборкой Magento?</label>
+							<comment>
+								<![CDATA[
+									Рекомендуемое значение данной опции — «<b>да</b>»,оно позволяет избежать конфликтов
+									наличия на одной странице сразу двух библиотек jQuery.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</jquery_remove_extraneous>
+					</fields>
+				</other>
+			</groups>
+		</df_tweaks_admin>
+	</sections>
+</config>

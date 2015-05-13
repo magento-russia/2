@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<cms>
+						<children>
+							<page>
+								<children>
+									<save_revision translate='title' module='df_cms'>
+										<title>Save Revision and Version</title>
+										<sort_order>17</sort_order>
+									</save_revision>
+									<delete_revision translate='title' module='df_cms'>
+										<title>Delete Revision and Version</title>
+										<sort_order>25</sort_order>
+									</delete_revision>
+									<publish_revision translate='title' module='df_cms'>
+										<title>Publish Revision</title>
+										<sort_order>30</sort_order>
+									</publish_revision>
+								</children>
+							</page>
+							<hierarchy translate='title' module='df_cms'>
+								<title>Pages Hierarchy</title>
+								<sort_order>5</sort_order>
+							</hierarchy>
+						</children>
+					</cms>
+					<system>
+						<children>
+							<config>
+								<children>
+									<df_cms>
+										<title>Российская сборка → Статьи</title>
+									</df_cms>
+								</children>
+							</config>
+						</children>
+				   </system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<cms>
+			<children>
+				<page>
+					<children>
+						<page translate='title' module='df_cms'>
+							<title>Manage Content</title>
+							<action>adminhtml/cms_page</action>
+							<depends>
+								<config>df_cms/hierarchy/enabled</config>
+							</depends>
+							<sort_order>0</sort_order>
+							<resource>cms/page</resource>
+						</page>
+						<hierarchy translate='title' module='df_cms'>
+							<title>Manage Hierarchy</title>
+							<sort_order>5</sort_order>
+							<action>adminhtml/cms_hierarchy</action>
+							<depends>
+								<config>df_cms/hierarchy/enabled</config>
+							</depends>
+							<sort_order>10</sort_order>
+							<resource>cms/hierarchy</resource>
+					   </hierarchy>
+					</children>
+				</page>
+			</children>
+		</cms>
+	</menu>
+</config>

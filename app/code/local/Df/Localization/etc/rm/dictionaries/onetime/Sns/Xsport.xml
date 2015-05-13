@@ -1,0 +1,1396 @@
+<?xml version='1.0'?>
+<dictionary>
+	<config>
+		<entry>
+			<path>xsport_cfg/testimonial/title</path>
+			<original_value>Testimonial</original_value>
+			<value>Отзывы</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/testimonial/items</path>
+			<original_value>%Lorem%</original_value>
+			<value>a:6:{s:18:"_1401871001321_321";a:3:{s:11:"description";s:327:"Болгары очень дружелюбны, приветливы, гостеприимны, кроме того система рифтов существенно применяет гидроузел. Цикл вызывает кедровый стланик. Гидроузел декларирует альбатрос. ";s:4:"name";s:27:"Василий Чапаев";s:8:"position";s:38:"Менеджер по продажам";}s:18:"_1401871270722_722";a:3:{s:11:"description";s:355:"Кукуруза, по определению, перевозит холодный Бенгальский залив. Динарское нагорье, несмотря на то, что в воскресенье некоторые станции метро закрыты, существенно просветляет закрытый аквапарк.";s:4:"name";s:20:"Васисуалий";s:8:"position";s:16:"Директор";}s:18:"_1401871419788_788";a:3:{s:11:"description";s:327:"Болгары очень дружелюбны, приветливы, гостеприимны, кроме того система рифтов существенно применяет гидроузел. Цикл вызывает кедровый стланик. Гидроузел декларирует альбатрос. ";s:4:"name";s:23:"Марк Антоний";s:8:"position";s:38:"Менеджер по продажам";}s:18:"_1401871435159_159";a:3:{s:11:"description";s:355:"Кукуруза, по определению, перевозит холодный Бенгальский залив. Динарское нагорье, несмотря на то, что в воскресенье некоторые станции метро закрыты, существенно просветляет закрытый аквапарк.";s:4:"name";s:20:"Васисуалий";s:8:"position";s:16:"Дизайнер";}s:18:"_1401871444375_375";a:3:{s:11:"description";s:327:"Болгары очень дружелюбны, приветливы, гостеприимны, кроме того система рифтов существенно применяет гидроузел. Цикл вызывает кедровый стланик. Гидроузел декларирует альбатрос. ";s:4:"name";s:27:"Василий Чапаев";s:8:"position";s:38:"Менеджер по продажам";}s:18:"_1401871456788_788";a:3:{s:11:"description";s:355:"Кукуруза, по определению, перевозит холодный Бенгальский залив. Динарское нагорье, несмотря на то, что в воскресенье некоторые станции метро закрыты, существенно просветляет закрытый аквапарк.";s:4:"name";s:23:"Марк Антоний";s:8:"position";s:16:"Дизайнер";}}</value>
+		</entry>
+		<entry>
+			<path>design/header/logo_alt</path>
+			<original_value>%SNS%</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>tabs_cfg/general/title</path>
+			<original_value>SNS Tabs</original_value>
+			<value>Вкладки</value>
+		</entry>
+		<entry>
+			<path>blog/blog/title</path>
+			<original_value>Blog</original_value>
+			<value>Блог</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/menu/customItems</path>
+			<original_value>%Home%</original_value>
+			<value><![CDATA[a:3:{s:18:"_1402848764295_295";a:6:{s:5:"title";s:14:"Главная";s:4:"link";s:16:"{{store url=""}}";s:6:"target";s:5:"_self";s:8:"position";s:5:"first";s:8:"block_id";s:1:"0";s:6:"status";s:1:"0";}s:17:"_1402848869081_81";a:6:{s:5:"title";s:19:"О компании";s:4:"link";s:40:"{{store url="about-magento-demo-store"}}";s:6:"target";s:5:"_self";s:8:"position";s:4:"last";s:8:"block_id";s:1:"0";s:6:"status";s:1:"0";}s:18:"_1402848884264_264";a:6:{s:5:"title";s:16:"Контакты";s:4:"link";s:24:"{{store url="contacts"}}";s:6:"target";s:5:"_self";s:8:"position";s:4:"last";s:8:"block_id";s:1:"0";s:6:"status";s:1:"0";}}]]></value>
+			<low_level/>
+		</entry>
+		<entry>
+			<path>xsport_cfg/ourpartners/partners</path>
+			<original_value>%SNS%</original_value>
+			<value><![CDATA[a:8:{s:18:"_1401855295279_279";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:18:"_1401855478160_160";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:18:"_1401855478901_901";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:18:"_1401855479467_467";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:17:"_1401855480058_58";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:18:"_1401855480608_608";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:18:"_1401855481156_156";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}s:18:"_1401855482434_434";a:4:{s:5:"title";s:41:"Российская сборка Magento";s:4:"link";s:1:"#";s:6:"target";s:6:"_blank";s:5:"image";s:16:"wysiwyg/brd1.png";}}]]></value>
+			<low_level/>
+		</entry>
+		<entry>
+			<path>xsport_cfg/ourpartners/title</path>
+			<original_value>Our Banrd</original_value>
+			<value>Наши партнёры</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/storelocation/store_name</path>
+			<original_value>Xsport</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/storelocation/store_info</path>
+			<original_value>Responsive Magento Theme</original_value>
+			<value>редакция Magento для интернет-магазинов России и СНГ</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/storelocation/store_address</path>
+			<original_value>%Washington%</original_value>
+			<value>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/storelocation/store_phone</path>
+			<original_value>00-123-456-789</original_value>
+			<value>+7 495 777-5-444</value>
+		</entry>
+		<entry>
+			<path>xsport_cfg/storelocation/store_email</path>
+			<original_value>%xsport%</original_value>
+			<value>admin@magento-forum.ru</value>
+		</entry>
+		<entry>
+			<path>productlist_cfg/general/title</path>
+			<!-- Best Seller -->
+			<value>Популярные товары</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>producttabs_cfg/general/title</path>
+			<!-- New Products -->
+			<value>Новинки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>revolutionslider_cfg/general/title</path>
+			<!-- Revolution Slider -->
+			<value>Карусель</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>slider_cfg/advanced/pretext</path>
+			<value>Большое Медвежье озеро представляет собой кандым. Бассейн нижнего Инда, при том, что королевские полномочия находятся в руках исполнительной власти - кабинета министров, берёт уличный британский протекторат.</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>slider_cfg/general/title</path>
+			<!-- SNS Slider -->
+			<value>SNS Слайдер</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>slider_cfg/module_setting/slider_title_text</path>
+			<!-- Title Slider -->
+			<value>Слайдер названий</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>twitter_cfg/general/title</path>
+			<!-- Twitter -->
+			<value>Твиттер</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>ajaxfilter_cfg/price_slider/goBtnText</path>
+			<!-- Go -->
+			<value>применить</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>ajaxfilter_cfg/ajax_conf/loading_text</path>
+			<value>подождите...</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>ultramegamenu/sidemenu/block_name</path>
+			<original_value>Categories: [current_category]</original_value>
+			<value>Разделы: [current_category]</value>
+		</entry>
+		<entry>
+			<path>ultramegamenu/sidemenu/block_name_fallback</path>
+			<original_value>Main Categories</original_value>
+			<value>Каталог</value>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category><name>Root Catalog</name></category>
+		</conditions>
+		<actions>
+			<new_title>Корневой раздел</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category><name>New</name></category>
+		</conditions>
+		<actions>
+			<new_title>Велоспорт</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category><name>Bicycle</name></category>
+		</conditions>
+		<actions>
+			<new_title>Велосипеды</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Clothing</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Горные</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Small leathers</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Городские</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Hats and Gloves</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Шоссейные</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Nightwear</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Круизеры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Outerwear Jackets</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Подростковые</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Hair accessories</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Детские</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Gloves</name>
+			</category>
+		</conditions>
+		<actions><new_title>Защита</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Men's Clothing</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Велоперчатки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Blog</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Шлемы</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Scarves</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Наколенники</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bags</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Налокотники</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Lifestyle</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Браслеты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bras</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Защита брюк</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Footwear man</name>
+				<parent>Gloves</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Для детей</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Helmet</name>
+			</category>
+		</conditions>
+		<actions><new_title>Аксессуары</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Cosmetics</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Крылья</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Faux Leather Jackets</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Насосы</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Camis</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Звонки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Dresses</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Замки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Briefs</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Сумки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Accessories women</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Рюкзаки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Lingerie</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Детские сидения</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Product types</name>
+				<parent>Helmet</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Велокомпьютеры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shoes</name>
+				<parent>Bicycle</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Запчасти</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Rings</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Ручки на руль</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Shapewear</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Тормозные колодки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Sundresses</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Камеры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Cocktail</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Тормозные тросики</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Bands</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Заглушки руля</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Accessories man</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Педали</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Footwear women</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Сёдла</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Novelty Outerwear</name>
+				<parent>Shoes</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Покрышки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Sale</name>
+			</category>
+		</conditions>
+		<actions><new_title>Другое</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Jumpsuits</name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Роликовые коньки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Shorts & Skirts]]></name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Скейтборды</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Laptop Bags</name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Лонгборды</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Sleepwear</name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Стрит-сёрфинг</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name><![CDATA[Shirts & Tops]]></name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Самокаты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Duffle Bags</name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Санки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<name>Dresses</name>
+				<parent>Sale</parent>
+			</category>
+		</conditions>
+		<actions><new_title>Снегокаты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type>
+			<category>
+				<!-- именно с пробелом впереди -->
+				<name> Promotion</name>
+			</category>
+		</conditions>
+		<actions><new_title>Скидки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+			<page>
+				<url_key>xsport_home_page</url_key>
+			</page>
+		</conditions>
+		<actions>
+			<new_title>Xsport. Главная страница</new_title>
+			<term>
+				<from>"Popular Products"</from>
+				<to>"Популярные товары"</to>
+			</term>
+			<term>
+				<from>"Recommended Products"</from>
+				<to>"Рекомендуем"</to>
+			</term>
+			<term>
+				<from>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</from>
+				<to>Для пользования телефоном-автоматом необходимы разменные монеты, однако Великобритания традиционно отталкивает различный попугай. Королевство неумеренно выбирает распространенный эфемероид, что в переводе означает "город ангелов".</to>
+			</term>
+			<term>
+				<from>Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to.</from>
+				<to>В турецких банях не принято купаться раздетыми, поэтому из полотенца сооружают юбочку, а ветеринарное свидетельство прочно дегустирует пингвин. Портер вызывает культурный пейзажный парк, а в вечернее время в кабаре Алказар или кабаре Тифани можно увидеть красочное представление.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>banner-menu</id></block>
+		</conditions>
+		<actions>
+			<new_title>Баннер</new_title>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate cursus adipiscing</from>
+				<to>Восточно-Африканское плоскогорье просветляет уличный расовый состав. Здесь работали Карл Маркс и Владимир Ленин, но эфемероид сложен. Комбинированный тур применяет различный бальнеоклиматический курорт. Наводнение совершает кустарничек.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Connect Us -->
+			<block><id>connect-us</id></block>
+		</conditions>
+		<actions>
+			<new_title>Мы в соцсетях</new_title>
+			<term>
+				<from>https://twitter.com/snstheme</from>
+				<to>https://twitter.com/dfediuk</to>
+			</term>
+			<term>
+				<from>http://www.facebook.com/snstheme</from>
+				<to>https://www.facebook.com/magento.russia</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Contact Info -->
+			<block><id>contact-info</id></block>
+		</conditions>
+		<actions>
+			<new_title>Контактная информация</new_title>
+			<term>
+				<from>Phone</from>
+				<to>Телефон</to>
+			</term>
+			<term>
+				<from>0123456789</from>
+				<to>+7 495 777-5-444</to>
+			</term>
+			<term>
+				<from>contact@nova.com</from>
+				<to>admin@magento-forum.ru</to>
+			</term>
+			<term>
+				<from>123 Suspendis mattis, Sollicitudin District, Accums Fringilla</from>
+				<to>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Contact map -->
+			<block><id>contact-map</id></block>
+		</conditions>
+		<actions>
+			<new_title>Карта проезда</new_title>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum justo ante, bibendum at bibendum iaculis, sodales id mauris. Nullam scelerisque ante eu tortor eleifend vel fringilla dui ullamcorper. Aenean diam diam, volutpat id commodo vitae, consequat in nisi. In elementum fringilla libero.</from>
+				<to>Праздник франко-говорящего культурного сообщества просветляет урбанистический тюлень. Гидроузел, как бы это ни казалось парадоксальным, превышает действующий вулкан Катмаи, при этом имейте в виду, что чаевые следует оговаривать заранее, так как в разных заведениях они могут сильно различаться.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Easy to customize -->
+			<block><id>easy-to-customize</id></block>
+		</conditions>
+		<actions>
+			<new_title>Гибкость в настройке</new_title>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate cursus adipiscing</from>
+				<to>Британский протекторат неравномерен. Бальнеоклиматический курорт однородно выбирает различный двухпалатный парламент. На завтрак англичане предпочитают овсяную кашу и кукурузные хлопья, тем не менее оазисное земледелие жизненно дегустирует живописный бамбуковый медведь панда.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Left Custom -->
+			<block><id>left-custom</id></block>
+		</conditions>
+		<actions><new_title>Блок в левой колонке</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Main Banner / Main Promotion -->
+			<block><id>main-banner</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главный баннер</new_title>
+			<term>
+				<from>What should i wear</from>
+				<to>Что мне надеть?</to>
+			</term>
+			<term>
+				<from>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</from>
+				<to>Рекомендуется совершить прогулку на лодке по каналам города и Озеру Любви.</to>
+			</term>
+			<term>
+				<from>Mens Red Leather Blazer Jacket</from>
+				<to>Кедровый стланик интуитивно понятен.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Shop Policy -->
+			<block><id>position-0</id></block>
+		</conditions>
+		<actions>
+			<new_title>Условия доставки</new_title>
+			<term>
+				<from>Free Shipping Item</from>
+				<to>Принимаем заказы 24/7</to>
+			</term>
+			<term>
+				<from>30 day return policy</from>
+				<to>Принимаем заказы 24/7</to>
+			</term>
+			<term>
+				<from>Accepting orders 24/7</from>
+				<to>Принимаем заказы 24/7</to>
+			</term>
+			<term>
+				<from>Secured Payment</from>
+				<to>Принимаем заказы 24/7</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipis icing elit, sed do eiusmod tempor</from>
+				<to>Визовая наклейка, в первом приближении, дегустирует городской попугай.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Shop Categories -->
+			<block><id>position-10</id></block>
+		</conditions>
+		<actions>
+			<new_title>Каталог товаров</new_title>
+			<term>
+				<from>Jean</from>
+				<to>Велоспорт</to>
+			</term>
+			<term>
+				<from>Tees</from>
+				<to>Ролики</to>
+			</term>
+			<term>
+				<from>Shirts</from>
+				<to>Плавание</to>
+			</term>
+			<term>
+				<from>Looks</from>
+				<to>Настольный теннис</to>
+			</term>
+			<term>
+				<from>Natural high</from>
+				<to>Большой теннис</to>
+			</term>
+			<term>
+				<from>Spring st</from>
+				<to>Футбол</to>
+			</term>
+			<term>
+				<from>Vantage point</from>
+				<to>Единоборства</to>
+			</term>
+			<term>
+				<from>Industrious</from>
+				<to>Бег</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Footer Logo -->
+			<block><id>position-11</id></block>
+		</conditions>
+		<actions>
+			<new_title>Девиз в подвале</new_title>
+			<term>
+				<from>YOUR SLOGAN Lorem Ipsum is simply dummy text"</from>
+				<to>Российская сборка Magento — это версия Magento для интернет-магазинов России и СНГ.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Promotions 2 -->
+			<block><id>position-2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Баннер №2</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- What client say -->
+			<block><id>position-3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Отзывы клиентов</new_title>
+			<term>
+				<from>Stephen Ngo</from>
+				<to>Иван Петров</to>
+			</term>
+			<term>
+				<from>Jen Nguyen</from>
+				<to>Леонид Голубков</to>
+			</term>
+			<term>
+				<from>David Stone</from>
+				<to>Васисуалий Лоханкин</to>
+			</term>
+			<term>
+				<from>Nulla mauris odio, vehicula in, condimentum sit amet, tempus id, metus. Donec at nisi sit amet felis blandit posuere. Aliquam erat volutpat. Cras lobortis orci in quam porttitor cursus mattis dolor sit amet vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero</from>
+				<to>Альбатрос просветляет широкий пейзажный парк, но особой популярностью пользуются заведения подобного рода, сосредоточенные в районе Центральной площади и железнодорожного вокзала. Производство зерна и зернобобовых вразнобой входит распространенный эфемероид.</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero.</from>
+				<to>Венгры страстно любят танцевать, особенно ценятся национальные танцы, при этом храмовый комплекс, посвященный дилмунскому богу Енки, неравномерен. Парк Варошлигет представляет собой материк. Наводнение постоянно. Великобритания вызывает кит. Вечнозеленый кустарник неравномерен.</to>
+			</term>
+			<term>
+				<from>Fusce auctor, metus eu ultricies vulputate, sapien nibh faucibus ligula, eget sollicitudin augue risus et dolor. Aenean pellentesque, tortor in cursus mattis, ante diam malesuada ligula quam vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero</from>
+				<to>Месторождение ураново-радиевых руд, несмотря на внешние воздействия, выбирает урбанистический эфемероид. Месторождение ураново-радиевых руд представляет собой холодный цикл. Основная магистраль проходит с севера на юг от Шкодера через Дуррес до Влёры, после поворота месторождение каменного угля однородно применяет тюлень.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Our Brands -->
+			<block><id>position-5</id></block>
+		</conditions>
+		<actions>
+			<new_title>Наши бренды</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Contact Info - Newsletters -->
+			<block><id>position-6</id></block>
+		</conditions>
+		<actions>
+			<new_title>Контактная информация + Подписка на рассылку</new_title>
+			<term>
+				<from>Phone</from>
+				<to>Телефон</to>
+			</term>
+			<term>
+				<from>Fax</from>
+				<to>Skype</to>
+			</term>
+			<term>
+				<from>(012) 123 456 789</from>
+				<to>+7 495 777-5-444</to>
+			</term>
+			<term>
+				<from>(012) 123 456 777</from>
+				<to>magento-forum.ru</to>
+			</term>
+			<term>
+				<from>support@sns-dmmk.com</from>
+				<to>admin@magento-forum.ru</to>
+			</term>
+			<term>
+				<from>Newsletters</from>
+				<to>Новостная рассылка</to>
+			</term>
+			<term>
+				<from>Subscribe to the Dmmk mailing list to receive updates on new arrivals</from>
+				<to>Подпишитесь на нашу рассылку, чтобы быть в курсе распродаж</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Power Admin -->
+			<block><id>power-admin</id></block>
+		</conditions>
+		<actions>
+			<new_title>Абстрактный блок</new_title>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate cursus adipiscing</from>
+				<to>Гвианский щит неоднороден по составу. Коневодство однократно. Официальный язык, на первый взгляд, теоретически возможен. Винный фестиваль проходит в приусадебном музее Георгикон, там же белый саксаул берёт урбанистический бальнеоклиматический курорт.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Privacy Policy -->
+			<block><id>privacy-policy</id></block>
+		</conditions>
+		<actions>
+			<new_title>Покупателям</new_title>
+			<term>
+				<from>Privacy Policy</from>
+				<to>Покупателям</to>
+			</term>
+			<term>
+				<from>We will send this product in 2 days.</from>
+				<to>Венгры страстно любят танцевать</to>
+			</term>
+			<term>
+				<from>Return purchased items and get all your money back.</from>
+				<to>Суша морей изящно отражает ксерофитный кустарник</to>
+			</term>
+			<term>
+				<from>Accepting orders 24/7</from>
+				<to>Большое Медвежье озеро пространственно дегустирует парк </to>
+			</term>
+			<term>
+				<from>Order overs 999usd this product and earn 100 special loyalty points!</from>
+				<to>Растительный покров, в первом приближении, непосредственно отражает шведский портер</to>
+			</term>
+			<term>
+				<from>Bonus Gift on order overs 999usd</from>
+				<to>Очаг многовекового орошаемого земледелия</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Promotion News -->
+			<block><id>promotion-news</id></block>
+		</conditions>
+		<actions>
+			<new_title>Объявление</new_title>
+			<term>
+				<from>Custom Block</from>
+				<to>Объявление</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</from>
+				<to>Большая часть территории, несмотря на то, что есть много бунгало для проживания, применяет глубокий пейзажный парк. Материк, по определению, начинает крестьянский органический мир. Пустыня, по определению, последовательно берёт музей под открытым небом.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Responsive Design -->
+			<block><id>responsive-dessign</id></block>
+		</conditions>
+		<actions>
+			<new_title>Абстрактный блок №2</new_title>
+			<term>
+				<from>Responsive Design</from>
+				<to>Абстрактный блок №2</to>
+			</term>
+			<term>
+				<from>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate cursus adipiscing</from>
+				<to>Бахрейнский динар выбирает языковой кристаллический фундамент. Лена, куда входят Пик-Дистрикт, Сноудония и другие многочисленные национальные резерваты природы и парки, откровенна. Нижнее течение недоступно перевозит эфемероид.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- slide_html4 -->
+			<block><id>slide_html4</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №4</new_title>
+			<term>
+				<from>Mens Red Leather</from>
+				<to>Рюкзаки и сумки</to>
+			</term>
+			<term>
+				<from><![CDATA[On the other hand, we denounce with righteous indignation and<br />dislike men who are so beguiled and demoralized by the charms of<br />pleasure of the moment, so blinded by desire]]></from>
+				<to><![CDATA[Поваренная соль последовательно превышает городской британский протекторат.<br/>Геологическое строение отражает небольшой санитарный и ветеринарный контроль.<br/>Русло временного водотока превышает живописный музей под открытым небом.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- slide_html5 -->
+			<block><id>slide_html5</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №5</new_title>
+			<term>
+				<from>Race Leather</from>
+				<to>Стрит-сёрфинг</to>
+			</term>
+			<term>
+				<from><![CDATA[On the other hand, we denounce with righteous indignation and<br />dislike men who are so beguiled and demoralized by the charms of<br />pleasure of the moment, so blinded by desire]]></from>
+				<to><![CDATA[Поваренная соль последовательно превышает городской британский протекторат.<br/>Геологическое строение отражает небольшой санитарный и ветеринарный контроль.<br/>Русло временного водотока превышает живописный музей под открытым небом.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- slide_html6 -->
+			<block><id>slide_html6</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №6</new_title>
+			<term>
+				<from>Leather fashion</from>
+				<to>Скейтборды</to>
+			</term>
+			<term>
+				<from><![CDATA[On the other hand, we denounce with righteous indignation and<br />dislike men who are so beguiled and demoralized by the charms of<br />pleasure of the moment, so blinded by desire]]></from>
+				<to><![CDATA[Поваренная соль последовательно превышает городской британский протекторат.<br/>Геологическое строение отражает небольшой санитарный и ветеринарный контроль.<br/>Русло временного водотока превышает живописный музей под открытым небом.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- slide_html7 -->
+			<block><id>slide_html7</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №7</new_title>
+			<term>
+				<from>High Jewelry</from>
+				<to>Плавательные шорты</to>
+			</term>
+			<term>
+				<from><![CDATA[On the other hand, we denounce with righteous indignation and<br />dislike men who are so beguiled and demoralized by the charms of<br />pleasure of the moment, so blinded by desire]]></from>
+				<to><![CDATA[Поваренная соль последовательно превышает городской британский протекторат.<br/>Геологическое строение отражает небольшой санитарный и ветеринарный контроль.<br/>Русло временного водотока превышает живописный музей под открытым небом.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- slide_html8 -->
+			<block><id>slide_html8</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №8</new_title>
+			<term>
+				<from>Unique Engagement</from>
+				<to>Шапочки для плавания</to>
+			</term>
+			<term>
+				<from><![CDATA[On the other hand, we denounce with righteous indignation and<br />dislike men who are so beguiled and demoralized by the charms of<br />pleasure of the moment, so blinded by desire]]></from>
+				<to><![CDATA[Поваренная соль последовательно превышает городской британский протекторат.<br/>Геологическое строение отражает небольшой санитарный и ветеринарный контроль.<br/>Русло временного водотока превышает живописный музей под открытым небом.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- slide_html9 -->
+			<block><id>slide_html9</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд №9</new_title>
+			<term>
+				<from>High Jewelry</from>
+				<to>Гидрокостюмы</to>
+			</term>
+			<term>
+				<from><![CDATA[On the other hand, we denounce with righteous indignation and<br />dislike men who are so beguiled and demoralized by the charms of<br />pleasure of the moment, so blinded by desire]]></from>
+				<to><![CDATA[Поваренная соль последовательно превышает городской британский протекторат.<br/>Геологическое строение отражает небольшой санитарный и ветеринарный контроль.<br/>Русло временного водотока превышает живописный музей под открытым небом.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Statick block html -->
+			<block><id>static-block-html</id></block>
+		</conditions>
+		<actions>
+			<new_title>Абстрактный блок №3</new_title>
+			<term>
+				<from>Nullam porta urna quis mauris. Aliquam erat volutpat. Donec scelerisque quam vitae est. Aenean vitae diam at erat pellentesque condimentum. Duis pulvinar nisl sed orci. Vivamus turpis nisi, volutpat in, placerat et, pharetra nec, eros.</from>
+				<to>Русло временного водотока, несмотря на внешние воздействия, изящно совершает глубокий бамбуковый медведь панда, для этого необходим заграничный паспорт, действительный в течение трех месяцев с момента завершения поездки со свободной страницей для визы.</to>
+			</term>
+			<term>
+				<from>Suspendisse tellus metus, sodales non, venenatis a, ultrices auctor, erat. In ut leo nec elit mattis pellentesque. Sed eros elit, cursus accumsan, sollicitudin a, iaculis quis, diam. Pellentesque fermentum, pede a nonummy varius, ligula velit laoreet erat, et lacinia nibh nulla sit amet nunc.</from>
+				<to>Герцинская складчатость вызывает бесплатный праздник франко-говорящего культурного сообщества. Восточно-Африканское плоскогорье, несмотря на то, что есть много бунгало для проживания, дешево. Верховье традиционно оформляет культурный культурный ландшафт. Оазисное земледелие дегустирует различный кандым.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Banner 1 -->
+			<block><id>xsport_banner1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Баннер 270x420</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Banner in detail page -->
+			<block><id>xsport_detail_banner</id></block>
+		</conditions>
+		<actions>
+			<new_title>Баннер 269х79 на странице товара</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Shipping -->
+			<block><id>xsport_footer_top1</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Доставка</new_title>
+			<term>
+				<from>Shipping</from>
+				<to>Доставка</to>
+			</term>
+			<term>
+				<from>Delivery</from>
+				<to>Личный кабинет</to>
+			</term>
+			<term>
+				<from>Track your order</from>
+				<to>Сервисные услуги</to>
+			</term>
+			<term>
+				<from>Buy gift cards</from>
+				<to>Гарантийное обслуживание</to>
+			</term>
+			<term>
+				<from>Returns</from>
+				<to>Библиотека знаний</to>
+			</term>
+			<term>
+				<from>Services</from>
+				<to>Книга отзывов и предложений</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Questions? -->
+			<block><id>xsport_footer_top2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Информация</new_title>
+			<term>
+				<from>Questions?</from>
+				<to>О Компании</to>
+			</term>
+			<term>
+				<from>Terms</from>
+				<to>Наши магазины</to>
+			</term>
+			<term>
+				<from>Conditions</from>
+				<to>Социальные проекты</to>
+			</term>
+			<term>
+				<from>About us</from>
+				<to>Вакансии</to>
+			</term>
+			<term>
+				<from>Services</from>
+				<to>Арендодателям</to>
+			</term>
+			<term>
+				<from>Example</from>
+				<to>Контакты</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Follow us -->
+			<block><id>xsport_footer_top3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Мы в соцсетях</new_title>
+			<term>
+				<from>Follow us</from>
+				<to>Мы в соцсетях</to>
+			</term>
+			<term>
+				<from>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</from>
+				<to>Для пользования телефоном-автоматом необходимы разменные монеты.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- About us -->
+			<block><id>xsport_footer_top4</id></block>
+		</conditions>
+		<actions>
+			<new_title>Подвал. Контакты</new_title>
+			<term>
+				<from>About us</from>
+				<to>Контакты</to>
+			</term>
+			<term>
+				<from>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</from>
+				<to>Суша морей, по определению, прекрасно перевозит символический центр современного Лондона.</to>
+			</term>
+			<term>
+				<from>64 Newman Street, London<br />United Kingdom</from>
+				<to>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1</to>
+			</term>
+			<term>
+				<from>support@snstheme.com</from>
+				<to>admin@magento-forum.ru</to>
+			</term>
+			<term>
+				<from>00-123 767 878</from>
+				<to>+7 495 777-5-444</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Header banner -->
+			<block><id>xsport_header_banner</id></block>
+		</conditions>
+		<actions>
+			<new_title>Шапка. Телефон</new_title>
+			<term>
+				<from>0123 356 998</from>
+				<to>+7 495 777-5-444</to>
+			</term>
+			<term>
+				<from>Support</from>
+				<to>Звоните</to>
+			</term>
+			<term>
+				<from>Online</from>
+				<to>нам</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Payment methods -->
+			<block><id>xsport_payment</id></block>
+		</conditions>
+		<actions>
+			<new_title>Логотипы платёжных систем</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Custom block right -->
+			<block><id>xsport_right_custom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Блок справа</new_title>
+			<term>
+				<from>CUstom block</from>
+				<to>Блок справа</to>
+			</term>
+			<term>
+				<from>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</from>
+				<to>Из первых блюд распространены супы-пюре и бульоны, но подают их редко.</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- Right inner custom -->
+			<block><id>xsport_right_inner_custom</id></block>
+		</conditions>
+		<actions>
+			<new_title>Страница товара. Правая колонка. Баннер 270x400</new_title>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- xsport_slide_html -->
+			<block><id>xsport_slide_html</id></block>
+		</conditions>
+		<actions>
+			<new_title>Главная страница. Большое слайд-шоу 597x428</new_title>
+			<term>
+				<from>exceptional quality</from>
+				<to>Манишки</to>
+			</term>
+			<term>
+				<from>Cycling shoes</from>
+				<to>Гетры</to>
+			</term>
+			<term>
+				<from>Cycling Helmet Disposable</from>
+				<to>Мячи</to>
+			</term>
+			<term>
+				<from>Cycling gloves</from>
+				<to>Щитки</to>
+			</term>
+			<term>
+				<from>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</from>
+				<to>Многолетняя мерзлота дегустирует альбатрос, но, конечно, путешествие по реке приятно и увлекательно. </to>
+			</term>
+			<term>
+				<from>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</from>
+				<to>Из первых блюд распространены супы-пюре и бульоны, но подают их редко, тем не менее верховье недоступно</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- xsport_slide_html2 -->
+			<block><id>xsport_slide_html2</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №2</new_title>
+			<term>
+				<from>Lorem Ipsum is simply</from>
+				<to>Груши и мешки</to>
+			</term>
+			<term>
+				<from><![CDATA[Lorem Ipsum is simply dummy text of the printing and typesetting<br /> industry. Lorem Ipsum has been the industry's standard dummy text<br />ever since the 1500s, when an unknown printer took a galley of type<br /> and scrambled it to make a type specimen book.]]></from>
+				<to><![CDATA[На завтрак англичане предпочитают овсяную кашу и кукурузные хлопья. <br/>Тем не менее Бенгальский залив существенно вызывает глубокий подземный сток.<br/>Знаменитый Фогель-маркет на Оудевард-плаатс жизненно начинает склон Гиндукуша.<br/>Шенгенская виза просветляет ледостав.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<!-- xsport_slide_html3 -->
+			<block><id>xsport_slide_html3</id></block>
+		</conditions>
+		<actions>
+			<new_title>Слайд-шоу №3</new_title>
+			<term>
+				<from>Ut enim ad minim</from>
+				<to>Бутсы</to>
+			</term>
+			<term>
+				<from><![CDATA[Lorem Ipsum is simply dummy text of the printing and typesetting<br /> industry. Lorem Ipsum has been the industry's standard dummy text<br />ever since the 1500s, when an unknown printer took a galley of type<br /> and scrambled it to make a type specimen book.]]></from>
+				<to><![CDATA[На завтрак англичане предпочитают овсяную кашу и кукурузные хлопья. <br/>Тем не менее Бенгальский залив существенно вызывает глубокий подземный сток.<br/>Знаменитый Фогель-маркет на Оудевард-плаатс жизненно начинает склон Гиндукуша.<br/>Шенгенская виза просветляет ледостав.]]></to>
+			</term>
+			<term>
+				<from>Shop collection</from>
+				<to>весь ассортимент</to>
+			</term>
+		</actions>
+	</rule>
+</dictionary>

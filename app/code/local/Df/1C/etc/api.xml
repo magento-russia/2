@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config>
+	<api>
+		<acl>
+			<resources>
+				<rm>
+					<_1c translate='title' module='df_1c'>
+						<title>1С: Управление торговлей</title>
+					</_1c>
+				</rm>
+			</resources>
+		</acl>
+	</api>
+</config>

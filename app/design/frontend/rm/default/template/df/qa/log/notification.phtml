@@ -1,0 +1,37 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php
+	/** @var Df_Qa_Model_Message_Notification $model */
+	$model = $this->getData(Df_Qa_Model_Message_Notification::BLOCK_PARAM__MODEL);
+	df_assert($model instanceof Df_Qa_Model_Message_Notification);
+	/** @var string $currentUrl */
+    $currentUrl = df_current_url();
+	/** @var string $magentoVersion */
+	$magentoVersion = rm_version_full();
+	/** @var string $phpVersion */
+	$phpVersion = phpversion();
+	/** @var string $notificationMessage */
+	$notificationMessage = $model->getNotification();
+	/** @var string $rmTime */
+	$rmTime = df()->date()->nowInMoscowAsText();
+	/** @var string $additionalContext */
+	$additionalContext = Df_Qa_Model_Context::s()->render();
+	/** @var bool $isFrontend */
+	$isFrontend = !df_is_admin();
+	if ($isFrontend) {
+		/** @var string $rmDesignPackage */
+		$rmDesignPackage = rm_state()->getCurrentDesignPackage();
+		/** @var string $rmDesignTheme */
+		$rmDesignTheme = rm_state()->getCurrentDesignTheme();
+	}
+echo <<<TEXT
+URL:                 {$currentUrl}
+Версия Magento:      {$magentoVersion}
+Версия PHP:          {$phpVersion}
+Время:               {$rmTime}{$additionalContext}
+TEXT;
+if ($isFrontend) {
+	echo "\nОформительская тема: {$rmDesignPackage} / {$rmDesignTheme}";
+}
+echo "\n***********************************";
+echo "\n" . $notificationMessage;
+echo "\n***********************************";

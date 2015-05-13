@@ -1,0 +1,48 @@
+<?php /** @var Df_Invitation_Block_Customer_List $this */ ?>
+<div class="page-title">
+    <h1><?php echo df_h()->invitation()->__('My Invitations'); ?></h1>
+</div>
+<div id="messages"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<?php echo $this->getChildHtml('list_before')?>
+<?php if (count($this->getInvitationCollection())): ?>
+<table class="data-table" id="invitations-list-table" cellpadding="0">
+    <col />
+    <col width="100" />
+    <thead>
+        <tr>
+            <th>
+                <?php echo df_h()->invitation()->__('Addressee'); ?>
+            </th>
+            <th>
+                <?php echo df_h()->invitation()->__('Status'); ?>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($this->getInvitationCollection() as $invitation): ?>
+        <tr>
+            <td>
+                <?php echo df_text()->escapeHtml($invitation->getEmail()); ?>
+            </td>
+            <td>
+                <?php echo df_h()->invitation()->getInvitationStatusText($invitation);?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('invitations-list-table')</script>
+<?php else: ?>
+<div id="cookie-notice">
+    <ul class="messages"><li class="notice-msg">
+        <ul><li><?php echo df_h()->invitation()->__('There are no sent invitations yet'); ?></li></ul>
+    </li></ul>
+</div>
+<?php endif; ?>
+<div class="buttons-set">
+    <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+	<button
+		onclick="setLocation('<?php echo df_h()->invitation()->getCustomerInvitationFormUrl(); ?>')"
+		class="button"
+	><span><span><?php echo $this->__('Invite your friends now') ?></span></span></button>
+</div>

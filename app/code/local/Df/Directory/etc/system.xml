@@ -1,0 +1,276 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_directory translate='label' module='df_directory'>
+			<label>Справочники</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>17000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<regions_ru translate='label'>
+					<label>Субъекты РФ</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-directory</df_feature>
+						</enabled>
+						<position_1 translate='label'>
+							<label>Место №1:</label>
+							<comment>
+								<![CDATA[
+									Вы можете указать 5 субъектов РФ, которые будут отображаться в списке
+									выше остальных. Остальные будут отображаться по алфавиту.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_1>
+						<position_2 translate='label'>
+							<label>Место №2:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_2>
+						<position_3 translate='label'>
+							<label>Место №3:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_3>
+						<position_4 translate='label'>
+							<label>Место №4:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_4>
+						<position_5 translate='label'>
+							<label>Место №5:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_5>
+					</fields>
+				</regions_ru>
+				<regions_ua translate='label'>
+					<label>Административно-территориальное устройство Украины</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-directory</df_feature>
+						</enabled>
+						<position_1 translate='label'>
+							<label>Место №1:</label>
+							<comment>
+								<![CDATA[
+									Вы можете указать 5 административно-территориальных единиц Украины,которые будут отображаться в списке
+									выше остальных. Остальные будут отображаться по алфавиту.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_1>
+						<position_2 translate='label'>
+							<label>Место №2:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_2>
+						<position_3 translate='label'>
+							<label>Место №3:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_3>
+						<position_4 translate='label'>
+							<label>Место №4:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_4>
+						<position_5 translate='label'>
+							<label>Место №5:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_5>
+					</fields>
+				</regions_ua>
+				<regions_kz translate='label'>
+					<label>Административно-территориальное устройство Казахстана</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-directory</df_feature>
+						</enabled>
+						<position_1 translate='label'>
+							<label>Место №1:</label>
+							<comment>
+								<![CDATA[
+									Вы можете указать 5 административно-территориальных единиц Казахстана,которые будут отображаться в списке
+									выше остальных. Остальные будут отображаться по алфавиту.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_1>
+						<position_2 translate='label'>
+							<label>Место №2:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_2>
+						<position_3 translate='label'>
+							<label>Место №3:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_3>
+						<position_4 translate='label'>
+							<label>Место №4:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_4>
+						<position_5 translate='label'>
+							<label>Место №5:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</position_5>
+					</fields>
+				</regions_kz>
+			</groups>
+		</df_directory>
+		<currency>
+			<groups>
+				<import>
+					<fields>
+						<time>
+							<comment>час, минута, секунда</comment>
+						</time>
+						<error_email>
+							<comment>укажите адрес электронной почты</comment>
+						</error_email>
+					</fields>
+				</import>
+			</groups>
+		</currency>
+	</sections>
+</config>

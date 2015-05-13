@@ -1,0 +1,23 @@
+<?php /** @var $this Df_Banner_Block_Banner */ ?>
+<?php
+	/** @var Df_Banner_Model_Banner $banner  */
+	$banner = $this->getBanner();
+	if ($banner->needShowTitle()) {
+		?><h3><?php echo df_escape($banner->getTitle()); ?></h3><?php
+	}
+	foreach($this->getBannerItems() as $bannerItem) {
+		/** @var Df_Banner_Model_Banneritem $bannerItem */
+		df_assert($bannerItem instanceof Df_Banner_Model_Banneritem);
+		?>
+			<a
+				href='<?php echo $bannerItem->getUrl(); ?>'
+			>
+				<img
+					src='<?php echo $this->getBannerItemImageUrl($bannerItem); ?>'
+					width='<?php echo $banner->getSizeWidth().'px'?> '
+					height=' <?php echo $banner->getSizeHeight().'px'?>'
+					alt=''
+				/>
+			</a>
+		<?php
+	}

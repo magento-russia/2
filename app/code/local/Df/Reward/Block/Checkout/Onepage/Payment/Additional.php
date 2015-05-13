@@ -1,0 +1,2 @@
+<?php
+class Df_Reward_Block_Checkout_Onepage_Payment_Additional extends Df_Core_Block_Template_NoCache {}

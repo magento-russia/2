@@ -1,0 +1,155 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_promotion translate='label' module='df_promotion'>
+			<groups>
+				<gifts translate='label'>
+					<label>Подарки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<!--
+								Модуль «Промо-подарки» имеет право оказывать на систему какое-либо влияние,только если данная опция установлена в «true»
+							-->
+							<label>Activate?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-promo-gift</df_feature>
+						</enabled>
+						<enable_add_to_cart_button translate='label'>
+							<label>
+								Заменять ли в блоке выбора подарков кнопку «Подробнее...» на кнопку «Добавить к корзину»?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</enable_add_to_cart_button>
+						<chooser__show_on_product_list translate='label'>
+							<label>
+								Показывать ли блок выбора подарков на страницах списка товаров?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</chooser__show_on_product_list>
+						<chooser__show_on_product_view translate='label'>
+							<label>
+								Показывать ли блок выбора подарков на страницах товаров?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_layout_column</source_model>
+							<df_option_no>1</df_option_no>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</chooser__show_on_product_view>
+						<chooser__show_on_cart_page translate='label'>
+							<label>
+								Показывать ли блок выбора подарков на странице содержимого корзины?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</chooser__show_on_cart_page>
+						<chooser__show_on_front_page translate='label'>
+							<label>
+								Показывать ли блок выбора подарков
+								на главной странице?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</chooser__show_on_front_page>
+						<chooser__show_on_cms_pages translate='label'>
+							<label>
+								Показывать ли блок выбора подарков
+								на индивидуально настраиваемых посредством стандартного редактора CMS страницах?
+							</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</chooser__show_on_cms_pages>
+						<!--
+						<auto_add_to_cart translate='label'>
+							<label>Класть подарок в корзину покупателю автоматически?</label>
+							<comment>
+								<![CDATA[
+									Система способна автоматически положить подарок в корзину покупателю
+									при выполнении всех нижеперечисленных условий:
+									<ul>
+										<li>
+											В данной конкретной ситуации применим только 1 подарок
+											(у покупателя нет выбора между несколькими подарками)
+										</li>
+										<li>
+											Товар не требует от покупателя выбора параметров
+											(не содержит Custom Options, не является настраиваемым (configurable))
+										</li>
+									</ul>
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+						</auto_add_to_cart>
+						-->
+					</fields>
+				</gifts>
+			</groups>
+		</df_promotion>
+	</sections>
+</config>

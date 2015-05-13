@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Seo>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Seo>
+	</modules>
+	<df>
+		<seo>
+			<template>
+				<objects>
+					<product>
+						<name>product</name>
+						<adapter>df_seo/template_adapter_product</adapter>
+						<properties>
+							<category>df_seo/template_property_product_category</category>
+							<default>df_seo/template_property_product_default</default>
+							<price>df_seo/template_property_product_price</price>
+						</properties>
+					</product>
+				</objects>
+			</template>
+		</seo>
+	</df>
+	<global>
+		<helpers><df_seo><class>Df_Seo_Helper</class></df_seo></helpers>
+		<models><df_seo><class>Df_Seo_Model</class></df_seo></models>
+		<events>
+			<clean_catalog_images_cache_after>
+				<observers>
+					<df_seo_controller_front_init_before>
+						<class>df_seo/observer</class>
+						<method>clean_catalog_images_cache_after</method>
+					</df_seo_controller_front_init_before>
+				</observers>
+			</clean_catalog_images_cache_after>
+		</events>
+	</global>
+	<default>
+		<df_seo>
+			<catalog_category>
+				<hide_description_from_non_first_pages>1</hide_description_from_non_first_pages>
+			</catalog_category>
+			<common>
+				<enhanced_russian_transliteration>1</enhanced_russian_transliteration>
+			</common>
+			<html>
+				<append_category_name_to_product_title_tag>0</append_category_name_to_product_title_tag>
+				<!--
+					Обратите внимание, что удалять пустые строки нельзя,
+				 	иначе метод
+				-->
+				<product_title_tag_default_pattern></product_title_tag_default_pattern>
+			</html>
+			<images>
+				<add_exif_to_jpegs>0</add_exif_to_jpegs>
+				<use_descriptive_file_names>1</use_descriptive_file_names>
+			</images>
+			<urls>
+				<preserve_cyrillic>0</preserve_cyrillic>
+				<fix_add_category_to_product_url>1</fix_add_category_to_product_url>
+				<redirect_to_canonical_product_url>1</redirect_to_canonical_product_url>
+			</urls>
+		</df_seo>
+	</default>
+</config>

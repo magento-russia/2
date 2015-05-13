@@ -1,0 +1,89 @@
+body.df-localization-theme-index .rm-container {
+	h1 {
+		color: rgb(235, 94, 0);
+		font-size: 1.25em;
+		line-height: 1.2em;
+		margin-top: 0.3em;
+		margin-bottom: 0;
+	}
+	h2 {
+		font-size: 1.25em;
+	}
+	ul.rm-processors {
+		max-width: 44em;
+		> li {
+			display: block;
+			width: 100%;
+			overflow: hidden;
+			padding: 0.3em 0;
+			/** заголовки */
+			&:nth-child(1) {
+				display: none;
+				font-weight: bold;
+				background:{
+					image: url("/skin/adminhtml/default/default/images/sort_row_bg.gif");
+					repeat: repeat;
+				}
+			}
+			/** тело таблицы */
+			&:nth-child(n+2) {
+				&.rm-applicable {
+					/** название оформительской темы */
+					> :nth-child(1) {
+						color: green;
+						font-weight: bold
+					}
+				}
+				&.rm-processed {
+					/** перезапуск */
+					a {color: grey;}
+				}
+				&:nth-child(even) {
+					background-color: rgb(246, 246, 246);
+				}
+			}
+			> * {
+				display: block;
+				float: left;
+				padding: 0 0.4em;
+				/** название оформительской темы */
+				&:nth-child(1) {
+					width: 22em;
+				}
+				/** ссылка «запустить» / «перезапустить»
+					или фраза «тема отсутствует»
+				*/
+				&:nth-child(2) {
+					width: 8em;
+				}
+				/** ссылка «демо» */
+				&:nth-child(3) {
+					width: 2.5em;
+					.rm-dropdown {
+						text-decoration: none;
+						&:after {
+							/*font-family: Consolas, Courier New, Arial, sans-serif; */
+							/*
+								Символ «↓».
+								Символы в SASS приходится записывать именно цифровыми кодами,
+							 	иначе после компиляции они превращаются в кракозябры.
+							 */
+							content: '\2193';
+							font-weight: bold;
+							font-size: 120%;
+							/*color: #08C; */
+						}
+					}
+				}
+				/** ссылка «форум» */
+				&:nth-child(4) {
+					width: 3em;
+				}
+				/** ссылка «купить» */
+				&:nth-child(5) {
+					width: 3em;
+				}
+			}
+		}
+	}
+}

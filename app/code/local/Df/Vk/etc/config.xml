@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Vk>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Vk>
+	</modules>
+	<df>
+		<features>
+			<df-vk>
+				<module>df_vk</module>
+				<title>ВКонтакте</title>
+				<url>http://magento-forum.ru/forum/136/</url>
+			</df-vk>
+		</features>
+	</df>
+	<global>
+		<blocks><df_vk><class>Df_Vk_Block</class></df_vk></blocks>
+		<helpers><df_vk><class>Df_Vk_Helper</class></df_vk></helpers>
+		<models><df_vk><class>Df_Vk_Model</class></df_vk></models>
+	</global>
+	<frontend>
+		<layout>
+			<updates>
+				<df_vk><file>df/vk.xml</file></df_vk>
+			</updates>
+		</layout>
+	</frontend>
+</config>

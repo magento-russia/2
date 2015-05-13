@@ -1,0 +1,122 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Avangard>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Avangard>
+	</modules>
+	<global>
+		<blocks><df_avangard><class>Df_Avangard_Block</class></df_avangard></blocks>
+		<helpers><df_avangard><class>Df_Avangard_Helper</class></df_avangard></helpers>
+		<models><df_avangard><class>Df_Avangard_Model</class></df_avangard></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<avangard>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__transaction_description><![CDATA[Оплата заказа №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__description><![CDATA[После нажатия кнопки «Подтвердить заказ»
+Вы будете перенаправлены на платёжную страницу Банка Авангард,
+где сможете оплатить Ваш заказ банковской картой.]]></frontend__description>
+				<frontend__message_failure><![CDATA[К сожалению, оплата заказа не удалась.
+<br/>Сообщение платёжного шлюза
+{название платёжного шлюза в родительном падеже}: «{сообщение от платёжного шлюза}».
+<br/>Возможно, Вы ввели на платёжной странице
+{название платёжного шлюза в родительном падеже} неточные данные?
+<br/>Попробуйте оформить Ваш заказ повторно.
+<br/>Если оплатить заказ через {название платёжного шлюза в именительном падеже}
+не получается — попробуйте другой способ оплаты
+или оформите Ваш заказ по телефону {телефон магазина}.]]></frontend__message_failure>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__specificcountry></frontend__specificcountry>
+				<frontend__title>Банковская карта</frontend__title>
+			</avangard>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-avangard>
+				<model>df_avangard/payment</model>
+			</df-avangard>
+		</payment>
+	</default>
+	<frontend>
+		<routers>
+			<df_avangard>
+				<use>standard</use>
+				<args>
+					<module>Df_Avangard</module>
+					<frontName>df-avangard</frontName>
+				</args>
+			</df_avangard>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-avangard>
+				<module>df_avangard</module>
+				<title>Банк Авангард</title>
+				<url>http://magento-forum.ru/forum/315/</url>
+			</df-avangard>
+		</features>
+		<payment>
+			<avangard>
+				<currencies>
+					<allowed>
+						RUB
+					</allowed>
+					<code-translation>
+						<RUB>810</RUB>
+					</code-translation>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>ru</ru_RU>
+						<en_US>en</en_US>
+					</code-translation>
+				</locales>
+				<!-- Название платёжного шлюза для диагностических сообщений -->
+				<names>
+					<!-- именительный падеж -->
+					<nominative>Банк Авангард</nominative>
+					<!-- родительный падеж -->
+					<genitive>Банка Авангард</genitive>
+					<!-- дательный падеж -->
+					<dative>Банку Авангард</dative>
+					<!-- творительный падеж -->
+					<instrumental>Банком Авангард</instrumental>
+				</names>
+				<request>
+					<confirmation>
+						<payment>
+							<!-- размер платежа -->
+							<amount>Amount</amount>
+							<!-- код валюты платежа -->
+							<currency-code>currency</currency-code>
+							<!-- состояние платежа -->
+							<state>OrderStatus</state>
+						</payment>
+					</confirmation>
+				</request>
+				<url>
+					<payment_page>https://www.avangard.ru/iacq/pay</payment_page>
+				</url>
+			</avangard>
+		</payment>
+	</df>
+</config>

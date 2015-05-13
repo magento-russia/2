@@ -1,0 +1,158 @@
+<?php /** @var Df_Pd4_Block_Document_Rows $this */ ?>
+<ul class='df-rows'>
+	<li class='df-row df-row-1'>
+		<div class='df-recipient-name'>
+			<div class='df-input'>
+				<?php echo $this->getRecipientName(); ?>
+			</div>
+			<div class='df-label-with-line'>
+				(наименование получателя платежа)
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-2'>
+		<div class='df-recipient-tax-number'>
+			<div class='df-input'>
+				<?php echo $this->getRecipientTaxNumber(); ?>
+			</div>
+			<div class='df-label-with-line'>
+				(ИНН получателя платежа)
+			</div>
+		</div>
+		<div class='df-recipient-bank-account-number'>
+			<div class='df-input'>
+				 <?php echo $this->getRecipientBankAccountNumber(); ?>
+			</div>
+			<div class='df-label-with-line'>
+				(номер счёта получателя платежа)
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-3'>
+		<div class='df-recipient-bank-name'>
+			<div class='df-input'>
+				<?php echo $this->getRecipientBankName(); ?>
+			</div>
+			<div class='df-label-with-line'>
+				(наименование банка получателя платежа)
+			</div>
+		</div>
+		<div class='df-recipient-bank-id'>
+			<div class='df-label'>БИК</div>
+			<div class='df-input'>
+				<?php echo $this->getRecipientBankId(); ?>
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-4'>
+		<div class='df-recipient-bank-loro'>
+			<div class='df-label'>
+				Номер кор./сч. банка получателя платежа
+			</div>
+			<div class='df-input'>
+				<?php echo $this->getRecipientBankLoro(); ?>
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-5'>
+		<div class='df-payment-purpose'>
+			<div class='df-input'>
+				<?php echo $this->getPaymentPurpose(); ?>
+			</div>
+			<div class='df-label-with-line'>
+				(наименование платежа)
+			</div>
+		</div>
+		<div class='df-payer-bank-account-number'>
+			<div class='df-input'>
+				&nbsp;&nbsp;
+			</div>
+			<div class='df-label-with-line'>
+				(номер лицевого счета(код) плательщика)
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-6'>
+		<div class='df-payer-name'>
+			<div class='df-label'>
+				Ф.И.О. плательщика:
+			</div>
+			<div class='df-input'>
+				<?php echo $this->getCustomerName(); ?>
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-7'>
+		<div class='df-payer-address'>
+			<div class='df-label'>
+				Адрес плательщика:
+			</div>
+			<div class='df-input'>
+				<?php echo $this->getCustomerAddressAsCompositeString(); ?>
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-8'>
+		<div class='df-money df-payment-net-amount'>
+			<div class='df-main-label'>Сумма платежа:</div>
+			<div class='df-numeric-container df-integer-part'>
+				<div class='df-input'>
+					<?php echo $this->getOrderAmountIntegerPartAsString(); ?>
+				</div>
+				<div class='df-label'>руб.</div>
+			</div>
+			<div class='df-numeric-container df-fractional-part'>
+				<div class='df-input'>
+					<?php echo $this->getOrderAmountFractionalPartAsString(); ?>
+				</div>
+				<div class='df-label'>коп.</div>
+			</div>
+		</div>
+		<div class='df-money df-payment-fee'>
+			<div class='df-main-label'>Сумма платы за услуги:</div>
+			<div class='df-numeric-container df-integer-part'>
+				<div class='df-input'>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				<div class='df-label'>руб.</div>
+			</div>
+			<div class='df-numeric-container df-fractional-part'>
+				<div class='df-input'>&nbsp;&nbsp;</div>
+				<div class='df-label'>коп.</div>
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-9'>
+		<div class='df-money df-payment-total-amount'>
+			<div class='df-main-label'>Итого:</div>
+			<div class='df-numeric-container df-integer-part'>
+				<div class='df-input'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				<div class='df-label'>руб.</div>
+			</div>
+			<div class='df-numeric-container df-fractional-part'>
+				<div class='df-input'>&nbsp;&nbsp;</div>
+				<div class='df-label'>коп.</div>
+			</div>
+		</div>
+		<div class='df-date'>
+			<div class='df-day-container'>
+				<div class='df-quote'>"</div>
+				<div class='df-day'>&nbsp;&nbsp;</div>
+				<div class='df-quote'>"</div>
+			</div>
+			<div class='df-month'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div class='df-year-container'>
+				<div class='df-year'><?php echo $this->getOrderYear(); ?></div>
+				<div class='df-label'>г.</div>
+			</div>
+		</div>
+	</li>
+	<li class='df-row df-row-10'>
+		<div class='df-main-text'>
+			С условиями приема указанной в платёжном документе суммы,
+			в т.ч. с суммой взимаемой платы за услуги банка
+			ознакомлен и согласен.
+		</div>
+		<div class='df-signature-label'>
+			Подпись плательщика
+		</div>
+	</li>
+</ul>

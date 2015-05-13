@@ -1,0 +1,147 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_tweaks_admin>
+			<groups>
+				<logging__archiving translate='label'>
+					<label>Контроль работников магазина. Параметры архивации контрольного журнала</label>
+					<comment>
+						<![CDATA[
+							<a
+								target='_blank'
+								href='http://magento-forum.ru/forum/182/'
+								title='инструкция по настройке'
+							>инструкция по настройке</a>
+							<br/><br/>
+							Очевидно, что количество записей в контрольном журнале будет постепенно расти
+							(конкретная скорость роста зависит от интенсивности работы администраторов
+							магазина).
+							<br/>
+							Чтобы рост количества записей в контрольном журнале
+							не тормозил работу административной части сайта,система время от времени (с указанным Вами интервалом)
+							будет перемещать устаревшие записи контрольного журнала
+							из базы данных магазина в папку var/log/df/admin/actions.
+							<br/>
+							В этой папке устаревшие записи будут храниться в виде текстовых файлов в формате CSV.
+						]]>
+					</comment>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<sort_order>3000</sort_order>
+					<fields>
+ 						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-logging</df_feature>
+						</enabled>
+						<frequency translate='label'>
+							<label>Частота архивации</label>
+							<comment>
+								<![CDATA[
+									Допустимые значения:<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;ежедневно<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;еженедельно<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;ежемесячно
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_cron_frequency</source_model>
+							<backend_model>df_logging/config_backend_cron</backend_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</frequency>
+						<time translate='label'>
+							<label>Время начала архивации</label>
+							<comment>
+								<![CDATA[
+									Час, минута и секунда.
+									<br/>
+									В назначенное время будет начинаться архивация контрольного журнала.
+								]]>
+							</comment>
+							<frontend_type>time</frontend_type>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</time>
+					<!--
+						<frequency translate='label'>
+							<label>Частота архивации</label>
+							<comment>
+								<![CDATA[
+									В днях.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_logging/source_frequency</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-logging</df_feature>
+						</frequency>
+					-->
+						<lifetime translate='label'>
+							<label>Через сколько дней запись подлежит архивации?</label>
+							<comment>
+								<![CDATA[
+									В днях.
+									<br/>
+									Одна запись архивируется ровно один раз за всё время жизни сайта.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</lifetime>
+					</fields>
+				</logging__archiving>
+				<logging__actions>
+					<label>Контроль работников магазина. Контролируемые операции</label>
+					<comment>
+						<![CDATA[
+							Эти настройки учитываются только когда модуль включён
+							(модуль включается и выключается в расположенном выше блоке).
+						]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>4000</sort_order>
+					<show_in_default>1</show_in_default>
+					<sort_fields>
+						<by>label</by>
+					</sort_fields>
+					<fields>
+						<actions translate='label'>
+							<label>Контролируемые операции</label>
+							<frontend_model>df_logging/adminhtml_system_config_actions</frontend_model>
+							<backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+							<show_in_default>1</show_in_default>
+						</actions>
+					</fields>
+				</logging__actions>
+			</groups>
+		</df_tweaks_admin>
+	</sections>
+</config>

@@ -1,0 +1,30 @@
+<?php /** @var Mage_Adminhtml_Block_Widget_Form_Renderer_Fieldset $this */ ?>
+<?php
+	/** @var Varien_Data_Form_Element_Fieldset $fieldset */
+	$fieldset = $this->getElement();
+	/** @var string|null $comment */
+	$comment = $fieldset->getData('comment');
+	/** @var string $newChildUrl */
+	$newChildUrl = $fieldset->getData('new_child_url');
+	/** @var string $htmlId */
+	$htmlId = $fieldset->getHtmlId();
+?>
+<div class='rule-tree'>
+    <fieldset
+		id='<?php echo $htmlId; ?>'
+		<?php echo $fieldset->serialize(array('class')); ?>
+	>
+		<?php if ($comment) { ?>
+			<p class='comment'><?php echo $this->escapeHtml($comment); ?></p>
+		<?php } ?>
+		<?php echo $fieldset->getChildrenHtml(); ?>
+    </fieldset>
+</div>
+<script type='text/javascript'>
+	var <?php echo $htmlId; ?> = new VarienRulesForm(
+		'<?php echo $htmlId; ?>', '<?php echo $newChildUrl; ?>'
+	);
+	<?php if ($fieldset->getReadonly()) { ?>
+		<?php echo $htmlId; ?>.setReadonly(true);
+	<?php } ?>
+</script>

@@ -1,0 +1,6 @@
+<?php /** @var Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks $this */ ?>
+Обнаружены самодельные блоки, не привязанные ни к одной витрине:
+<br/><?php echo $this->enumerateBlocks(); ?>
+<br/>Возможно, витрины, к которым эти блоки были привязаны, были удалены.
+<br/>Удалить эти блоки? <a href='<?php echo $this->getLink(); ?>'>удалить.</a>
+

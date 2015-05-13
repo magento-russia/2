@@ -1,0 +1,1281 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<checkout translate='label' module='checkout'>
+			<label>Оформление заказа</label>
+		</checkout>
+		<df_checkout translate='label' module='df_checkout'>
+			<label>Оформление заказа</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<frontend_model>df_adminhtml/system_config_form</frontend_model>
+			<sort_order>10000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<interface>
+					<label>Внешний вид</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<show_all_steps_at_once translate='label'>
+							<label>Показать сразу все шаги оформления заказа?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</show_all_steps_at_once>
+					</fields>
+				</interface>
+				<billing_field_applicability translate='label'>
+					<label>Реквизиты плательщика. Наличие и обязательность заполнения</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+					<![CDATA[
+						Вы можете указать, какими реквизитами характеризуется плательщик,и какие из них обязательны к заполнению.
+						<br/><br/>
+						Настройки этого раздела вступят в силу, только если Вы указали «<b>да</b>»
+						в качестве значения опции
+						<br/>«Российская сборка» → «Оформление заказа» → «Внешний вид» →
+						«<b>Показать сразу все шаги оформления заказа?</b>»
+						<br/><br/>
+					]]>
+					</comment>
+					<fields>
+						<enabled translate='label'>
+							<label>Настроить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</enabled>
+						<company translate='label'>
+							<label>Организация</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</company>
+						<lastname translate='label'>
+							<label>Фамилия</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</lastname>
+						<firstname translate='label'>
+							<label>Имя</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>3300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</firstname>
+						<middlename translate='label'>
+							<label>Отчество</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>3600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</middlename>
+						<telephone translate='label'>
+							<label>Телефон</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</telephone>
+						<country translate='label'>
+							<label>Страна</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</country>
+						<region translate='label'>
+							<label>Область</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</region>
+						<city translate='label'>
+							<label>Город</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</city>
+						<postcode translate='label'>
+							<label>Почтовый индекс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</postcode>
+						<street translate='label'>
+							<label>Улица, дом, квартира / офис</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</street>
+						<email translate='label'>
+							<label>Адрес электронной почты</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</email>
+						<customer_password translate='label'>
+							<label>Пароль</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</customer_password>
+						<confirm_password translate='label'>
+							<label>Пароль повторно</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>12000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</confirm_password>
+						<fax translate='label'>
+							<label>Факс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>13000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</fax>
+					</fields>
+				</billing_field_applicability>
+				<billing_field_ordering translate='label'>
+					<label>Реквизиты плательщика. Порядок при заполнении</label>
+					<comment>
+					<![CDATA[
+						Вы можете для каждого реквизита указать порядковый номер строки размещения.
+						<br/>
+						Вы можете указать одну и ту же строку размещения для двух реквизитов:
+						в этом случае они оба будут размещены в одной строке.
+						<br/><br/>
+						Настройки этого раздела вступят в силу, только если Вы указали «<b>да</b>»
+						в качестве значения опции
+						<br/>«Российская сборка» → «Оформление заказа» → «Внешний вид» →
+						«<b>Показать сразу все шаги оформления заказа?</b>»
+						<br/><br/>
+					]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Настроить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</enabled>
+						<company translate='label'>
+							<label>Организация</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</company>
+						<lastname translate='label'>
+							<label>Фамилия</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</lastname>
+						<firstname translate='label'>
+							<label>Имя</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>3300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</firstname>
+						<middlename translate='label'>
+							<label>Отчество</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>3600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</middlename>
+						<telephone translate='label'>
+							<label>Телефон</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</telephone>
+						<country translate='label'>
+							<label>Страна</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</country>
+						<region translate='label'>
+							<label>Область</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</region>
+						<city translate='label'>
+							<label>Город</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</city>
+						<postcode translate='label'>
+							<label>Почтовый индекс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</postcode>
+						<street translate='label'>
+							<label>Улица, дом, квартира / офис</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</street>
+						<email translate='label'>
+							<label>Адрес электронной почты</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</email>
+						<customer_password translate='label'>
+							<label>Пароль</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</customer_password>
+						<confirm_password translate='label'>
+							<label>Пароль повторно</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>12000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</confirm_password>
+						<fax translate='label'>
+							<label>Факс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>13000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</fax>
+					</fields>
+				</billing_field_ordering>
+				<shipping_field_applicability translate='label'>
+					<label>Реквизиты доставки. Наличие и обязательность заполнения</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>4000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+					<![CDATA[
+						Вы можете указать, какими реквизитами характеризуется адрес доставки,и какие из них обязательны к заполнению.
+						<br/><br/>
+						Настройки этого раздела вступят в силу, только если Вы указали «<b>да</b>»
+						в качестве значения опции
+						<br/>«Российская сборка» → «Оформление заказа» → «Внешний вид» →
+						«<b>Показать сразу все шаги оформления заказа?</b>»
+						<br/><br/>
+					]]>
+					</comment>
+					<fields>
+						<enabled translate='label'>
+							<label>Настроить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</enabled>
+						<company translate='label'>
+							<label>Организация</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</company>
+						<lastname translate='label'>
+							<label>Фамилия</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</lastname>
+						<firstname translate='label'>
+							<label>Имя</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>3300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</firstname>
+						<middlename translate='label'>
+							<label>Отчество</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>3600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</middlename>
+						<telephone translate='label'>
+							<label>Телефон</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</telephone>
+						<country translate='label'>
+							<label>Страна</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</country>
+						<region translate='label'>
+							<label>Область</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</region>
+						<city translate='label'>
+							<label>Город</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</city>
+						<postcode translate='label'>
+							<label>Почтовый индекс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</postcode>
+						<street translate='label'>
+							<label>Улица, дом, квартира / офис</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</street>
+						<email translate='label'>
+							<label>Адрес электронной почты</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</email>
+						<fax translate='label'>
+							<label>Факс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_field_applicability</source_model>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</fax>
+					</fields>
+				</shipping_field_applicability>
+				<shipping_field_ordering translate='label'>
+					<label>Реквизиты доставки. Порядок при заполнении</label>
+					<comment>
+					<![CDATA[
+						Вы можете для каждого реквизита указать порядковый номер строки размещения.
+						<br/>
+						Вы можете указать одну и ту же строку размещения для двух реквизитов:
+						в этом случае они оба будут размещены в одной строке.
+						<br/><br/>
+						Настройки этого раздела вступят в силу, только если Вы указали «<b>да</b>»
+						в качестве значения опции
+						<br/>«Российская сборка» → «Оформление заказа» → «Внешний вид» →
+						«<b>Показать сразу все шаги оформления заказа?</b>»
+						<br/><br/>
+					]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>5000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Настроить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</enabled>
+						<company translate='label'>
+							<label>Организация</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</company>
+						<lastname translate='label'>
+							<label>Фамилия</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</lastname>
+						<firstname translate='label'>
+							<label>Имя</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>3300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</firstname>
+						<middlename translate='label'>
+							<label>Отчество</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>3600</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</middlename>
+						<telephone translate='label'>
+							<label>Телефон</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</telephone>
+						<country translate='label'>
+							<label>Страна</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</country>
+						<region translate='label'>
+							<label>Область</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</region>
+						<city translate='label'>
+							<label>Город</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</city>
+						<postcode translate='label'>
+							<label>Почтовый индекс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</postcode>
+						<street translate='label'>
+							<label>Улица, дом, квартира / офис</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</street>
+						<email translate='label'>
+							<label>Адрес электронной почты</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</email>
+						<fax translate='label'>
+							<label>Факс</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<df_min>1</df_min>
+							<df_max>15</df_max>
+							<df_step>1</df_step>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</fax>
+					</fields>
+				</shipping_field_ordering>
+				<email>
+					<label>Почтовые уведомления</label>
+					<comment>
+					<![CDATA[
+						Настройки этого раздела вступят в силу, только если Вы указали «<b>да</b>»
+						в качестве значения опции
+						<br/>«Российская сборка» → «Оформление заказа» → «Внешний вид» →
+						«<b>Показать сразу все шаги оформления заказа?</b>»
+					]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>6000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<generated_password translate='label'>
+							<label>Автоматически созданный пароль</label>
+							<comment>
+								<![CDATA[
+									Система использует этот шаблон для отсылки покупателю
+									автоматически созданного для него пароля к личному кабинету в том случае,если покупатель не указал пароль при оформлении заказа
+									(такое возможно,если администратор отключил обязательность указания пароля покупателем).
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</generated_password>
+					</fields>
+				</email>
+				<order_comments translate='label'>
+					<label>Покупательские примечания к заказу</label>
+					<comment>
+					<![CDATA[
+						Форматирование примечаний к заказу
+						(как покупательских, так и администраторских)
+						<br/>настраивается в разделе
+						«Российская сборка» → «Продажи» → «Примечания к заказу».
+					]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>6000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</enabled>
+						<position_relative_to_terms translate='label'>
+							<label>Расположение поля для примечания относительно условий продажи</label>
+							<comment>
+							<![CDATA[
+							Этот параметр применяется только при необходимости
+							добиться согласия покупателя с условиями продажи
+							]]>
+							</comment>
+							<df_label_suffix>Terms and Conditions</df_label_suffix>
+							<frontend_type>select</frontend_type>
+							<sort_order>1500</sort_order>
+							<source_model>df_admin/config_source_layout_position_aboveOrBelow</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+					  </position_relative_to_terms>
+						<show_in_customer_account translate='label'>
+							<label>Отображать ли в Личном кабинете покупателя?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</show_in_customer_account>
+						<show_in_order_email translate='label'>
+							<label>Отображать ли в письме-оповещении о заказе?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</show_in_order_email>
+						<specify_textarea_width translate='label'>
+							<label>Задать конкретную ширину поля для ввода примечания?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</specify_textarea_width>
+						<textarea_width translate='label'>
+							<label>Ширина в пикселях поля для примечания</label>
+							<comment>
+								<![CDATA[
+									Укажите одно натуральное число без дополнительных пометок.
+									<br/>Например: «300».
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+								<specify_textarea_width>1</specify_textarea_width>
+							</depends>
+							<validate>
+								validate-digits
+								validate-greater-than-zero
+							</validate>
+						</textarea_width>
+						<specify_textarea_position translate='label'>
+							<label>Попробовать выровнять по горизонтали поле для ввода примечания?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «<i>нет</i>», то поле для ввода примечания
+									будет выравниваться в соответствии с общими правилами темы.
+									<br/>
+									Только в том случае,если Вас такое выравнивание не устраивает — укажите значение «<i>да</i>».
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</specify_textarea_position>
+						<textarea_float translate='label'>
+							<label>
+								Попробовать прислонить поле для ввода примечания
+								к левой или правой стороне родительского блока?
+							</label>
+							<comment>
+								<![CDATA[
+									Данный параметр предоставляет быструю и удобную попытку
+									выровнять поле для ввода примечания
+									по левой или правой границе родительского блока.
+									<br/>
+									Технически, на основании данного параметра система устанавливает
+									полю для ввода примечания свойство CSS float.
+									<br/>
+									Обратите внимание, что это всего лишь попытка,и для некоторых тем может не работать,поэтому всегда проверяйте правильность результата
+									во всех популярных браузерах.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_layout_float</source_model>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+								<specify_textarea_position>1</specify_textarea_position>
+							</depends>
+						</textarea_float>
+						<specify_textarea_horizontal_shift translate='label'>
+							<label>Сместить поле для примечания по горизонтали?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+								<specify_textarea_position>1</specify_textarea_position>
+							</depends>
+						</specify_textarea_horizontal_shift>
+						<textarea_horizontal_shift_direction translate='label'>
+							<label>Направление горизонтального смещения поля для ввода примечания</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_layout_shift_direction_horizontal</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+								<specify_textarea_position>1</specify_textarea_position>
+								<specify_textarea_horizontal_shift>1</specify_textarea_horizontal_shift>
+							</depends>
+						</textarea_horizontal_shift_direction>
+						<textarea_horizontal_shift_length translate='label'>
+							<label>Горизонтальное смещение в пикселях поле для примечания</label>
+							<comment>
+								<![CDATA[
+									Укажите целое неотрицательное число.
+									<br/>Направление смещение задаётся выше в графе
+									«<i>Направление горизонтального смещения поля для ввода примечания</i>».
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+								<specify_textarea_position>1</specify_textarea_position>
+								<specify_textarea_horizontal_shift>1</specify_textarea_horizontal_shift>
+							</depends>
+							<validate>
+							validate-digits
+							validate-greater-than-zero
+							</validate>
+						</textarea_horizontal_shift_length>
+						<textarea_rows translate='label'>
+							<label>Количество видимых строк в поле для примечания</label>
+							<comment>
+								<![CDATA[
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>11000</sort_order>
+							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+							<validate>
+								validate-digits
+								validate-greater-than-zero
+							</validate>
+						</textarea_rows>
+					</fields>
+				</order_comments>
+				<patches translate='label'>
+					<label>Заплатки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<fix_sales_convert_order_to_quote translate='label'>
+							<label>
+								Устранить дефект утраты ФИО незарегистрированного покупателя
+								при редактировании его заказа из административной части?
+							</label>
+							<comment>
+								<![CDATA[
+									<a href='http://magento-forum.ru/topic/2184/'>описание дефекта</a>
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</fix_sales_convert_order_to_quote>
+					</fields>
+				</patches>
+				<other>
+					<label>Другое</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>11000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<can_get_address_from_yandex_market>
+							<label>Включить «Быстрый заказ» Яндекс.Маркета?</label>
+							<comment>
+								<![CDATA[
+									«<a href='http://help.yandex.ru/partnermarket/?id=1121719'
+									>Быстрый заказ</a>» Яндекс.Маркета
+									позволяет покупателю при оформлении заказа
+									указать в качестве платёжного адреса или адреса доставки
+									ранее заполненный им на Яндекс.Маркете адрес.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-checkout</df_feature>
+						</can_get_address_from_yandex_market>
+						<alphabet translate='label'>
+							<label>Какой алфавит использовать для валидации имён и географических названий?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_checkout/config_source_alphabet</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+						</alphabet>
+						<color__failure>
+							<label>Цвет диагностических сообщений</label>
+							<comment>
+								<![CDATA[]]>
+							</comment>
+							<frontend_type>df-color</frontend_type>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</color__failure>
+					</fields>
+				</other>
+			</groups>
+		</df_checkout>
+	</sections>
+</config>

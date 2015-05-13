@@ -1,0 +1,145 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Customer>
+			<version>2.23.7</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Customer>
+	</modules>
+	<global>
+		<blocks>
+			<customer>
+				<rewrite>
+					<!--
+						Цели перекрытия:
+						1) предоставить администратору возможность удалять вкладку
+						«Уведомления» (подписка на рассылку) из личного кабиета покупателей.
+						2) Описать поле $_subscription, которое родительский класс использует
+						без предварительного описания.
+					-->
+					<account_dashboard_info>Df_Customer_Block_Account_Dashboard_Info</account_dashboard_info>
+					<!--
+						Цель перекрытия —
+						добавление нового метода
+						@see Df_Customer_Block_Account_Navigation::removeLinkByPath(),
+						который предназначен для удаления пунктов меню
+						из личного кабинета покупателя.
+					-->
+					<account_navigation>Df_Customer_Block_Account_Navigation</account_navigation>
+				</rewrite>
+			</customer>
+			<df_customer><class>Df_Customer_Block</class></df_customer>
+		</blocks>
+		<helpers><df_customer><class>Df_Customer_Helper</class></df_customer></helpers>
+		<models>
+			<customer>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						учёт настроек видимости и обязательности для заполнения полей оформления заказа
+						модуля «Удобная настройка витрины».
+					-->
+					<address>Df_Customer_Model_Address</address>
+					<!--
+						Цель перекрытия —
+						добавление возмжности русификации свойств покупателя.
+					-->
+					<attribute>Df_Customer_Model_Attribute</attribute>
+					<!--
+						Цели перекрытия:
+						их много, потому что перекрываемый класс — один из ключевых классов системы
+						(сущность «покупатель»).
+					-->
+					<customer>Df_Customer_Model_Customer</customer>
+					<!--
+						Цель перекрытия —
+						учёт настроек видимости и обязательности для заполнения полей оформления заказа
+						модуля «Удобная настройка витрины».
+					-->
+					<form>Df_Customer_Model_Form</form>
+				</rewrite>
+			</customer>
+			<customer_entity>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						нам нужно, чтобы коллекция категорий покупателей использовала наши классы:
+						@see Df_Customer_Model_Group
+						@see Df_Customer_Model_Resource_Group
+					-->
+					<group_collection>Df_Customer_Model_Resource_Group_Collection</group_collection>
+				</rewrite>
+			</customer_entity>
+			<df_customer>
+				<class>Df_Customer_Model</class>
+				<resourceModel>df_customer_resource</resourceModel>
+			</df_customer>
+			<df_customer_resource>
+				<class>Df_Customer_Model_Resource</class>
+			</df_customer_resource>
+		</models>
+		<resources>
+			<df_customer_setup>
+				<setup>
+					<module>Df_Customer</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_customer_setup>
+		</resources>
+		<events>
+			<core_collection_abstract_load_after>
+				<observers>
+					<df_customer__form_attribute_collection__load_after>
+						<class>df_customer/dispatcher</class>
+						<method>form_attribute_collection__load_after</method>
+					</df_customer__form_attribute_collection__load_after>
+				</observers>
+			</core_collection_abstract_load_after>
+		</events>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Customer>
+					<files>
+						<default>Mage_Customer.csv</default>
+					</files>
+				</Df_Customer>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<events>
+			<controller_action_predispatch_customer_account_loginPost>
+				<observers>
+					<df_customer__controller_action_predispatch_customer_account_loginPost>
+						<class>df_customer/dispatcher</class>
+						<method>controller_action_predispatch_customer_account_loginPost</method>
+					</df_customer__controller_action_predispatch_customer_account_loginPost>
+				</observers>
+			</controller_action_predispatch_customer_account_loginPost>
+		</events>
+		<translate>
+			<modules>
+				<Df_Customer>
+					<files>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>Mage_Customer.csv</default>
+					</files>
+				</Df_Customer>
+				<Mage_Customer>
+					<files>
+						<!--
+							Для правильной русификации экранов модуля Mage_Persistent.
+							Обратите внимание, что порядок указания словарей имеет значение:
+							записи более позднего словаря
+							перекрывают одноимённые записи более раннего.
+						-->
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>Mage_Customer.csv</default>
+					</files>
+				</Mage_Customer>
+			</modules>
+		</translate>
+	</frontend>
+</config>

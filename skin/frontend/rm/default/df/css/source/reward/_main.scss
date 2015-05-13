@@ -1,0 +1,104 @@
+.df-reward-total {
+	.df-discount {
+		width: 100%;
+        overflow: hidden;
+
+        .btn-remove {
+			float: left;
+        }
+
+		.df-discount-value {
+			float: right;
+		}
+	}
+}
+.rewards {
+    margin:-10px 0 20px;
+}
+.reward-message
+,.df .reward-message {
+    display:block;
+    margin: 5px -15px 5px -15px;
+    background:#d55721 url("../../images/reward/background/0.gif") 5px 3px no-repeat;
+    padding:3px 5px 3px 32px;
+    font:normal 12px/20px Arial, Helvetica, sans-serif; color:#fff;
+    p {
+		margin:0 !important;
+	}
+	.limit {
+		display:block; font-size:11px; line-height:1.15;
+	}
+	a {
+		color:#ffe6dc;
+		text-decoration:underline;
+	}
+	a:hover {
+		color:#ffe6dc;
+		text-decoration:none;
+	}
+	.price {
+		font-size:1em;
+		font-weight:normal;
+	}
+}
+
+
+.reward-review,
+.reward-tag,
+.reward-checkout {
+    margin:0;
+}
+.my-rewards {
+	.box { margin:0 0 30px; }
+  	.info-box {
+		.box-title {
+		    margin:10px 10px;
+		}
+
+		.box-content {
+		    padding:0 10px 10px;
+	    }
+  	}
+	p.error {
+	    display:inline;
+	    color:#d91a00;
+    }
+	dl {
+	    font-size:12px;
+	 	dt {
+	 	    font-weight:bold;
+	 	    font-size:13px;
+	 	    margin-top:10px;
+	 		span {
+	 		    color:#d12c01;
+	 	    }
+	 	}
+	 	dd.last {
+	 	    margin:7px 0 0;
+	 	}
+	}
+	.form-list {
+		label {
+	    	width:auto;
+		}
+		.control {
+			.input-box {
+			    position:static;
+			    margin:0 5px 0 0;
+			}
+		}
+	}
+	.data-table {
+		small {
+		    display:block;
+		    font-size:1em;
+		    color:#808080;
+	    }
+	}
+}
+
+#reward_placer {
+	margin:{
+		bottom: 10px;
+	}
+}

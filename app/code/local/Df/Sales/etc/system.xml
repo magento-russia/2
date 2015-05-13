@@ -1,0 +1,412 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_sales translate='label' module='df_sales'>
+			<label>Продажи</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>14000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<order_comments translate='label'>
+					<label>Примечания к заказу</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<admin_order_create__comment_is_visible_on_front>
+							<label>
+								Показывать ли покупателю в Личном кабинете
+								написанное администратором при создании заказа примечание?
+							</label>
+							<comment>
+								<![CDATA[
+									Magento в стандартной комплектации не показывает покупателю
+									написанное администратором при создании заказа примечание.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-sales</df_feature>
+						</admin_order_create__comment_is_visible_on_front>
+						<preserve_line_breaks_in_customer_account translate='label'>
+							<label>Сохранять ли переносы строк
+								при отображении комментария к заказу в Личном кабинете покупателя?
+							</label>
+							<comment>
+								<![CDATA[
+									Конечно, желательно включить эту функцию.
+									<br/>
+									По умолчанию она отключена лишь потому, что не является стандартной
+									(Magento в стандартной комплектации не сохраняет переносы строк
+									при отображении комментария в Личном кабинете покупателя).
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</preserve_line_breaks_in_customer_account>
+						<preserve_line_breaks_in_order_email translate='label'>
+							<label>
+								Разбивать ли текст примечания к заказу на строки в том виде,как их разбивал комментатор при создании примечения,при отображении примечания в письме-оповещении о заказе?
+							</label>
+							<comment>
+								<![CDATA[
+									Конечно, желательно включить эту функцию.
+									<br/>
+									По умолчанию она отключена лишь потому, что не является стандартной
+									(Magento в стандартной комплектации не сохраняет переносы строк
+									при отображении комментария в письме-оповещении о заказе).
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</preserve_line_breaks_in_order_email>
+						<wrap_in_standard_frame_in_order_email translate='label'>
+							<label>
+								Нарисовать ли вокруг примечания к заказу в письме-оповещении о заказе
+								точно такую же рамку, как и для других блоков письма?
+							</label>
+							<comment>
+								<![CDATA[
+									Желательно включить эту функцию.
+									<br/>
+									По умолчанию система отображает примечание к заказу без рамки,вплотную прилепленным к нижней границе расположенного вышего блока.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</wrap_in_standard_frame_in_order_email>
+						<preserve_line_breaks_in_admin_order_view translate='label'>
+							<label>
+								Разбивать ли текст примечания к заказу на строки в том виде,как их разбивал комментатор при создании примечения,при отображении примечания на административном экране заказа?
+							</label>
+							<comment>
+								<![CDATA[
+									Конечно, желательно включить эту функцию.
+									<br/>
+									По умолчанию она отключена лишь потому, что не является стандартной
+									(Magento в стандартной комплектации не сохраняет переносы строк
+									при отображении комментария на административном экране заказа).
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</preserve_line_breaks_in_admin_order_view>
+						<preserve_some_tags_in_admin_order_view translate='label'>
+							<label>
+								Сохранить ли безопасные теги
+								при отображении примечания к заказу
+								на административном экране заказа?
+							</label>
+							<comment>
+								<![CDATA[
+									Безопасные теги в примечаниях к заказу
+									в настоящее время использует только платёжный модуль ChronoPay
+									(для удобного форматирования ответа от платёжного шлюза).
+									<br/>
+									В будущем эту возможность могут использовать и другие модули
+									Российской сборки Magento.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</preserve_some_tags_in_admin_order_view>
+						<tags_to_preserve_in_admin_order_view translate='label'>
+							<label>
+								Теги, которые система должна считать безопасными
+								при отображении примечания к заказу
+								на административном экране заказа
+							</label>
+							<comment>
+								<![CDATA[
+									Укажите теги HTML через запятую, без обрамляющих теги угловых скобок.
+									<br/>
+									Пример: «br,h3,div,ul,li».
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<preserve_some_tags_in_admin_order_view>1</preserve_some_tags_in_admin_order_view>
+							</depends>
+						</tags_to_preserve_in_admin_order_view>
+					</fields>
+				</order_comments>
+				<order_grid__product_column translate='label'>
+					<label>Таблица заказов. Колонка с перечислением заказанных товаров</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Добавить колонку с перечислением заказанных товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-sales</df_feature>
+						</enabled>
+						<ordering translate='label'>
+							<label>Порядковый номер для колонки</label>
+							<comment>
+								<![CDATA[
+									Отсчитывается слева.<br/>
+									Самая левая колонка с флажками в счёте не участвует (считайте её нулевой).
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+							<validate>
+								validate-digits
+								validate-greater-than-zero
+							</validate>
+						</ordering>
+						<show_all_products translate='label'>
+							<label>Перечислять все товары без исключения?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><enabled>1</enabled></depends>
+						</show_all_products>
+						<max_products_to_show translate='label'>
+							<label>Перечислить не более указанного количества товаров:</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_all_products>0</show_all_products>
+							</depends>
+							<validate>
+								validate-digits
+								validate-greater-than-zero
+							</validate>
+						</max_products_to_show>
+						<show_name translate='label'>
+							<label>Показывать названия товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</show_name>
+						<chop_name translate='label'>
+							<label>Обрезать названия товаров (для краткости)?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_name>1</show_name>
+							</depends>
+						</chop_name>
+						<product_name_max_length translate='label'>
+							<label>Максимально допустимое количество символов в названии товара</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_name>1</show_name>
+								<chop_name>1</chop_name>
+							</depends>
+							<validate>
+								validate-digits
+								validate-greater-than-zero
+							</validate>
+						</product_name_max_length>
+						<name_width translate='label'>
+							<label>Ширина поля для названия товара</label>
+							<comment>
+								<![CDATA[
+									В процентах от ширины ячейки с информацией о товарах.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_name>1</show_name>
+							</depends>
+							<validate>
+								validate-digits
+								validate-zero-or-greater
+								validate-percents
+							</validate>
+						</name_width>
+						<show_qty translate='label'>
+							<label>Показывать заказанные количества товаров?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><enabled>1</enabled></depends>
+						</show_qty>
+						<qty_width translate='label'>
+							<label>Ширина поля для заказанного количества товара</label>
+							<comment>
+								<![CDATA[
+									В процентах от ширины ячейки с информацией о товарах.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_qty>1</show_qty>
+							</depends>
+							<validate>
+								validate-digits
+								validate-zero-or-greater
+								validate-percents
+							</validate>
+						</qty_width>
+						<show_sku translate='label'>
+							<label>Показывать артикулы?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>11000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</show_sku>
+						<sku_width translate='label'>
+							<label>Ширина поля для артикула товара</label>
+							<comment>
+								<![CDATA[
+									В процентах от ширины ячейки с информацией о товарах.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>12000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+								<show_sku>1</show_sku>
+							</depends>
+							<validate>
+								validate-digits
+								validate-zero-or-greater
+								validate-percents
+							</validate>
+						</sku_width>
+						<order_by translate='label'>
+							<label>Упорядочить товары по:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_sales/system_config_source_orderGridColumnProductNames_orderBy</source_model>
+							<sort_order>13000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</order_by>
+						<order_direction translate='label'>
+							<label>Направление упорядочивания</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_orderingDirection</source_model>
+							<sort_order>14000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</order_direction>
+					</fields>
+				</order_grid__product_column>
+			</groups>
+		</df_sales>
+		<sales>
+			<groups>
+				<reorder>
+					<label>Reorder Settings</label>
+				</reorder>
+				<minimum_order>
+					<fields>
+						<error_message>
+							<comment>
+								<![CDATA[
+									если покупатель всё-таки попробует оформить заказ
+									на сумму, меньше минимально допустимой,то система вернёт покупателя на страницу корзины
+									и покажет покупателю это предупреждение
+								]]>
+							</comment>
+						</error_message>
+					</fields>
+				</minimum_order>
+			</groups>
+		</sales>
+	</sections>
+</config>

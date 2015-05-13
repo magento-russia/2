@@ -1,0 +1,36 @@
+<!--@subject Reward Points Balance Updated at {{var store.getFrontendName()|escape}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"config path='trans_email/ident_sales/email'":"Sales Contact Email",
+"config path='general/store_information/phone'":"Sales Contact Phone",
+"var unsubscription_url":"Unsubscription URL",
+"var points_balance":"Current Points Amount",
+"var customer.getName()|escape":"Customer Name"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>Hello, {{var customer.getName()|escape}}.</p>
+
+                            <p>You have {{var points_balance}} pts that can be used in our store <a href="{{store url=""}}">{{var store.getFrontendName()|escape}}</a>.</p>
+
+                            <p>If you have any questions about your account or any other matter, please feel free to contact us
+                            at <a href="mailto:{{config path='trans_email/ident_sales/email'}}">{{config path='trans_email/ident_sales/email'}}</a>
+                            or by phone at {{config path='general/store_information/phone'}}.</p>
+
+                            <p>You can <a href="{{var unsubscription_url}}">unsubscribe</a> from such notifications.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,96 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Bundle>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Bundle>
+	</modules>
+	<global>
+		<blocks>
+			<df_bundle><class>Df_Bundle_Block</class></df_bundle>
+			<bundle>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						устранить ошибку JavaScript при редактировании Bundle Products.
+					-->
+					<adminhtml_catalog_product_edit_tab_attributes>Df_Bundle_Block_Adminhtml_Catalog_Product_Edit_Tab_Attributes</adminhtml_catalog_product_edit_tab_attributes>
+					<!--
+						Цель перекрытия —
+						перевести надпись на кнопке «Delete Option»
+						на административном экране товарного комплекта.
+					-->
+					<adminhtml_catalog_product_edit_tab_bundle_option>Df_Bundle_Block_Adminhtml_Catalog_Product_Edit_Tab_Bundle_Option</adminhtml_catalog_product_edit_tab_bundle_option>
+					<!--
+						Цель перекрытия —
+						отсылка оповещения JavaScript bundle.product.edit.bundle.option.selection
+						для перевода посредством JavaScript некоторых надписей
+						на административном экране товарного комплекта.
+					-->
+					<adminhtml_catalog_product_edit_tab_bundle_option_selection>Df_Bundle_Block_Adminhtml_Catalog_Product_Edit_Tab_Bundle_Option_Selection</adminhtml_catalog_product_edit_tab_bundle_option_selection>
+				</rewrite>
+			</bundle>
+		</blocks>
+		<helpers><df_bundle><class>Df_Bundle_Helper</class></df_bundle></helpers>
+		<models>
+			<bundle>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						перевод названий типов элементов управления,
+						которые будут доступны на витринном экране товарного комплекта:
+						«Drop-down», «Radio Buttons», «Checkbox», «Multiple Select».
+						Эти элементы управления описаны в настроечной ветке
+						global/catalog/product/options/bundle/types
+						в файле config.xml модуля Mage_Bundle.
+					-->
+					<source_option_type>Df_Bundle_Model_Source_Option_Type</source_option_type>
+				</rewrite>
+			</bundle>
+			<df_bundle>
+				<class>Df_Bundle_Model</class>
+				<resourceModel>df_bundle_resource</resourceModel>
+			</df_bundle>
+			<df_bundle_resource>
+				<class>Df_Bundle_Model_Resource</class>
+				<entities>
+					<option><table>catalog_product_bundle_option</table></option>
+					<option_value><table>catalog_product_bundle_option_value</table></option_value>
+					<selection><table>catalog_product_bundle_selection</table></selection>
+					<selection_price><table>catalog_product_bundle_selection_price</table></selection_price>
+					<price_index><table>catalog_product_bundle_price_index</table></price_index>
+					<stock_index><table>catalog_product_bundle_stock_index</table></stock_index>
+					<price_indexer_idx><table>catalog_product_index_price_bundle_idx</table></price_indexer_idx>
+					<price_indexer_tmp><table>catalog_product_index_price_bundle_tmp</table></price_indexer_tmp>
+					<selection_indexer_idx><table>catalog_product_index_price_bundle_sel_idx</table></selection_indexer_idx>
+					<selection_indexer_tmp><table>catalog_product_index_price_bundle_sel_tmp</table></selection_indexer_tmp>
+					<option_indexer_idx><table>catalog_product_index_price_bundle_opt_idx</table></option_indexer_idx>
+					<option_indexer_tmp><table>catalog_product_index_price_bundle_opt_tmp</table></option_indexer_tmp>
+				</entities>
+			</df_bundle_resource>
+		</models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Bundle>
+					<files>
+						<default>Mage_Bundle.csv</default>
+					</files>
+				</Df_Bundle>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Bundle>
+					<files>
+						<default>Mage_Bundle.csv</default>
+					</files>
+				</Df_Bundle>
+			</modules>
+		</translate>
+	</frontend>
+</config>

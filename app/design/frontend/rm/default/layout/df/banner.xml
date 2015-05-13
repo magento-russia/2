@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<default>
+		<reference name='head'>
+			<action
+				method='addCss'
+				ifconfig='df_promotion/banners/enabled'
+			>
+				<stylesheet>df/legacy/banner/css/main.css</stylesheet>
+			</action>
+			<action
+				method='addItem'
+				ifconfig='df_promotion/banners/enabled'
+			>
+				<type>skin_js</type>
+				<name>df/legacy/banner/js/legacy/jquery.lightbox-0.5.js</name>
+			</action>
+			<action
+				method='addItem'
+				ifconfig='df_promotion/banners/enabled'
+			>
+				<type>skin_js</type>
+				<name>df/legacy/banner/js/legacy/plugins.init.js</name>
+			</action>
+		</reference>
+	</default>
+<!--
+	<catalog_category_view>
+        <reference name='content'>
+			<block type='df_banner/banner' name='banner' template='df/banner/simpleslider.phtml'>
+				 <action method='setBannerId'><banner_id>WSJwine</banner_id></action>
+			</block>
+        </reference>
+	</catalog_category_view>
+	<catalog_product_view>
+		<reference name='right'>
+			<block type='df_banner/banner' before='-' name='banner-1' template='df/banner/cycleslider.phtml'>
+				 <action method='setBannerId'><banner_id>Майские праздники</banner_id></action>
+			</block>
+		</reference>
+	</catalog_product_view>
+-->
+</layout>

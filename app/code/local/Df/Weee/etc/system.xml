@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<tax>
+			<groups>
+				<weee>
+					<comment>
+						<![CDATA[
+							Чтобы назначать товарам индивидульную абсолютную наценку,Вам надо создать новое товарное свойство,назначить ему административный элемент управления
+							«Индивидуальная абсолютная товарная наценка» и добавить
+							это свойство к требуемому прикладному товарному типу.
+						]]>
+					</comment>
+					<fields>
+						<include_in_subtotal>
+							<source_model>df_admin/config_source_noYes</source_model>
+						</include_in_subtotal>
+					</fields>
+				</weee>
+			</groups>
+		</tax>
+	</sections>
+</config>

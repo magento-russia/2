@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<df_promo_gift_chooser>
+	    <reference name='content'>
+			<block
+				type='df_promo_gift/chooser'
+				template='df/promo_gift/chooser/center/main.phtml'
+				name='df_promo_gift.chooser'
+				before='-'
+			/>
+		</reference>
+	</df_promo_gift_chooser>
+	<catalog_category_view>
+		<update handle='df_promo_gift_chooser' />
+	</catalog_category_view>
+	<catalog_product_view>
+		<!-- Безымянный блок может не сработать! -->
+	    <reference name='right'>
+			<block
+				type='df_promo_gift/chooser'
+				template='df/promo_gift/chooser/side/main.phtml'
+				name='df_promo_gift.chooser.right'
+				before='-'
+			/>
+		</reference>
+		<!-- Для тем с левой колонкой -->
+	    <reference name='left'>
+			<block
+				type='df_promo_gift/chooser'
+				template='df/promo_gift/chooser/side/main.phtml'
+				name='df_promo_gift.chooser.left'
+				before='-'
+			/>
+		</reference>
+	    <reference name='content'>
+			<!--
+				Если покупатель уже выполнил условия акции
+				и теперь вправе получить текущий товар в подарок —
+				надо отразить сей факт внешне на карточке товара
+			-->
+			<block
+				type='df_promo_gift/catalog_gift_highlighter'
+				template='df/promo_gift/catalog/gift/highlighter.phtml'
+				name='df_promo_gift.catalog.gift.highlighter'
+				before='-'
+			/>
+		</reference>
+	</catalog_product_view>
+	<checkout_cart_index>
+		<update handle='df_promo_gift_chooser' />
+	    <reference name='content'>
+			<!-- Внешне выделяет подарочные строки заказа -->
+			<block
+				type='df_promo_gift/cart_gift_highlighter'
+				template='df/promo_gift/cart/gift/highlighter.phtml'
+				after='df_promo_gift.chooser'
+				name='df_promo_gift.cart.gift.highlighter'
+			/>
+		</reference>
+	</checkout_cart_index>
+	<cms_page>
+		<update handle='df_promo_gift_chooser' />
+	</cms_page>
+</layout>

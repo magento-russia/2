@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<default>
+		<reference name='head'>
+			<action method='addItem'><type>js_css</type><name>df/css/compiled/all.css</name></action>
+			<action	method='addCss'><stylesheet>df/css/compiled/all.css</stylesheet></action>
+			<action method='addItem'><type>js</type><name>df/js/compiled/all.js</name></action>
+			<action method='addItem'><type>skin_js</type><name>df/js/compiled/all.js</name></action>
+		</reference>
+		<reference name='notifications'>
+			<block
+				type='df_core/admin_notifications'
+				name='df_core/admin_notifications'
+				template='df/core/notifications.phtml'
+			></block>
+		</reference>
+	</default>
+</layout>

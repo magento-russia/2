@@ -1,0 +1,163 @@
+<?php /** @var Mage_Checkout_Block_Onepage $this */ ?>
+<script type='text/javascript' src='<?php echo $this->getJsUrl('varien/accordion.js') ?>'></script>
+<script type='text/javascript' src='<?php echo $this->getSkinUrl('js/opcheckout.js') ?>'></script>
+<script type='text/javascript'>
+	countryRegions = <?php echo df_mage()->directoryHelper()->getRegionJson(); ?>
+</script>
+<script type='text/javascript'>
+	rm.namespace('rm.checkout');
+	rm.checkout.alphabet = '<?php echo df_cfg()->checkout()->other()->getAlphabet();?>';
+</script>
+<style type='text/css'>
+	.df .df-checkout-ergonomic .df-body .df-block .error-msg
+	,.df .df-checkout-ergonomic .df-body .df-block .error-msg * {
+		color: <?php echo df_cfg()->checkout()->other()->getColorFailure();?>;
+	}
+</style>
+<?php
+	/** @var Mage_Checkout_Block_Onepage_Login|bool $blockLogin */
+	$blockLogin = $this->getChild('login');
+	rm_session_checkout()->getQuote()->getShippingAddress()
+		->setCollectShippingRates(true)
+	;
+	/**
+	 * Пусть система заодно зарегистрирует покупателя.
+	 * Только вот что если он потом авторизуется?
+	 */
+	df_mage()->checkout()->onePageSingleton()
+		->saveCheckoutMethod(Mage_Checkout_Model_Type_Onepage::METHOD_REGISTER)
+	;
+	rm_session_checkout()->getQuote()->getShippingAddress()
+		->setSameAsBilling(true)
+	;
+	//rm_session_checkout()->setStepData('review', 'allow', true);
+?>
+<div class='df'>
+	<div class='df-checkout-ergonomic'>
+		<h1>Оформление заказа</h1>
+		<div class='df-legend'>поля с <span class='df-red-star'>красной звездой</span> обязательны для заполнения</div>
+		<?php if (!df_mage()->customer()->isLoggedIn()) { ?>
+			<a class='df-login' href='#df-login'>ранее покупали у нас что-то?</a>
+			<?php
+				if ($blockLogin instanceof Mage_Checkout_Block_Onepage_Login) {
+					echo $blockLogin->getChildHtml('login_before');
+				}
+			?>
+		<?php } ?>
+		<div style='display:none;'>
+			<?php
+				echo df_block_render('customer/form_login', null, 'df/checkout/ergonomic/login.phtml');
+				rm_session_customer()->setBeforeAuthUrl(
+					Mage::getUrl(
+						'checkout/onepage'
+						// Иначе возникают проблемы при включенном кэшировании
+						, array('_nosid' => true)
+					)
+				);
+			?>
+		</div>
+		<div class='df-body'>
+			<!--
+				Обратите внимание, что первой описываем не левую колонку, а правую.
+				Так нужно в соответствии с техникой вёрстки двухколоночного макета,
+				когда левая колонка должна быть фиксированной ширины, а правая — резиновой.
+				@link http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
+			-->
+			<div class='df-body-right'>
+				<div class='df-body-right-inner'>
+					<div class='df-body-right-top'>
+						<div class='df-column-2'>
+							<h2>Способ доставки</h2>
+							<div id='opc-shipping_method' class='df-block df-block-method-shipping'>
+								<?php echo $this->getChildHtml('shipping_method'); ?>
+							</div>
+						</div>
+						<div class='df-column-3'>
+							<h2>Способ оплаты</h2>
+							<div id='opc-payment' class='df-block df-block-method-payment'>
+								<?php echo $this->getChildHtml('payment'); ?>
+							</div>
+						</div>
+					</div>
+					<div id='opc-review' class='df-block df-block-method-review'>
+						<h2>Ваш заказ</h2>
+						<div class="order-review" id="checkout-review-load">
+							<?php echo $this->getBlockHtml('rm.checkout.onepage.review.info'); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='df-body-left'>
+				<div class='df-body-left-inner'>
+					<h2>Контактные данные</h2>
+					<?php
+						if (
+								false
+							&&
+								$blockLogin instanceof Mage_Checkout_Block_Onepage_Login
+							&&
+								$blockLogin->isShow()
+							&&
+								rm_session_checkout()->getStepData('login', 'allow')
+						) {
+							?>
+								<div class='df-block df-block-login'>
+									<?php echo $this->getChildHtml('login'); ?>
+								</div>
+							<?php
+						}
+					?>
+					<div id='opc-billing' class='df-block df-block-address-billing'>
+						<h3 class='df-h3'>Платёжные реквизиты</h3>
+						<?php echo df_block_render(Df_YandexMarket_Block_GetAddress::_CLASS); ?>
+						<?php echo $this->getChildHtml('billing'); ?>
+					</div>
+					<div id='opc-shipping' class='df-block df-block-address-shipping'>
+						<h3 class='df-h3'>Адрес доставки</h3>
+						<?php echo $this->getChildHtml('shipping'); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id='df-loading-mask' style='display:none'>
+    <div
+		class='loader'
+		id='loading_mask_loader'
+	><img
+		src='<?php echo $this->getSkinUrl('df/images/ajax-loader-tr.gif') ?>'
+		alt='Подождите...'
+	/><div class='df-text'>Подождите...</div></div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var checkout =
+		new Checkout(
+			{
+				openSection: function(section) {}
+				,
+				openPrevSection: function(boolean) {}
+				/**
+				 * Для Magento CE 1.7.
+				 * Там в конструкторе Checkout есть вызов:
+				 *
+					this.accordion.sections.each(function(section) {
+            			Event.observe($(section).down('.step-title'), 'click', this._onSectionClick.bindAsEventListener(this));
+        			}.bind(this));
+				 */
+				,
+				sections: {
+					each: function(callback) {}
+				}
+			}
+			,
+			{
+			progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+			review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+			saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+			failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+		)
+	;
+//]]>
+</script>

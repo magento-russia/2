@@ -1,0 +1,62 @@
+body.df-theme-templatemonster-43442 {
+	.account-login {
+		.registered-users {
+			width: 260px;
+			min-height: 0;
+			background-position: -200px bottom;
+			.form-list {
+				input.input-text {
+					width: 250px;
+				}
+			}
+		}
+	}
+	.col1-layout {
+		.col-main {
+			padding: {
+				right: 20px;
+				left: 20px;
+			}
+			.products-grid {
+				border: none;
+			}
+			.page-title {
+				margin: {
+					top: 0;
+					bottom: 35px;
+				}
+			}
+		}
+	}
+	.df-checkout-ergonomic {
+		#opc-review {
+			button {
+				span {
+					span {
+						margin-top: 5px;
+					}
+				}
+			}
+		}
+	}
+	.products-grid {
+		.grid-inner {
+			.fancybox {
+				text-transform: lowercase;
+			}
+		}
+	}
+	.products-list {
+		.list-inner {
+			.fancybox {
+				text-transform: lowercase;
+			}
+		}
+	}
+	.sort-by {
+		.jqTransformSelectWrapper {
+			width: 150px !important;
+			text-transform: lowercase;
+		}
+	}
+}

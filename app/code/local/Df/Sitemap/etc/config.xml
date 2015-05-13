@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Sitemap>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Sitemap>
+	</modules>
+	<global>
+		<blocks><df_sitemap><class>Df_Sitemap_Block</class></df_sitemap></blocks>
+		<helpers><df_sitemap><class>Df_Sitemap_Helper</class></df_sitemap></helpers>
+		<models>
+			<df_sitemap><class>Df_Sitemap_Model</class></df_sitemap>
+			<!-- Для Magento версии меньше 1.6 -->
+			<sitemap_mysql4>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						заплатка для перенаправления посетителей на «правильный», канонический адрес товара.
+						Эта заплатка работает только для Magento CE версий ниже 1.8.
+						Для Magento CE 1.8.0.0 и более свежих версий
+						обработка вынесена в класс
+						@see Df_Catalog_Helper_Product_Url_Rewrite
+					-->
+					<catalog_product>Df_Sitemap_Model_Resource_Catalog_Product</catalog_product>
+				</rewrite>
+			</sitemap_mysql4>
+			<!-- Для Magento версии 1.6 и выше -->
+			<sitemap_resource>
+				<rewrite>
+					<catalog_product>Df_Sitemap_Model_Resource_Catalog_Product</catalog_product>
+				</rewrite>
+			</sitemap_resource>
+		</models>
+	</global>
+</config>

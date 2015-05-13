@@ -1,0 +1,11 @@
+<?php /** @var Df_Core_Block_FormattedText $this */ ?>
+<?php echo $this->getPreprocessedText(); ?>
+<?php if ($this->getCssRulesAsText() && !$this->useInlineCssRules()) { ?>
+	<style type='text/css'>
+		#<?php echo $this->getDomElementId(); ?> {
+			<?php
+				echo $this->getCssRulesAsText();
+			?>
+		}
+	</style>
+<?php } ?>

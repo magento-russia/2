@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Mage_Catalog'>
+		<block
+			class='Df_Catalog_Block_Product_List'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Quick View</en_US>
+				<ru_RU>открыть</ru_RU>
+			</term>
+		</block>
+	</module>
+	<!--
+		Указываем в качестве модуля Df_Checkout, а не Excellence_Ajax,
+		потому что класс Excellence_Ajax_Block_Cart_Sidebar
+		в процессе адаптации оформительcкой темы
+		был унаследован от класса Df_Checkout_Block_Cart_Sidebar
+	-->
+	<module name='Df_Checkout'>
+		<block
+			class='Excellence_Ajax_Block_Cart_Sidebar'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Item</en_US>
+				<ru_RU>товар</ru_RU>
+			</term>
+			<term>
+				<en_US>Items</en_US>
+				<ru_RU>товар(ов)</ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[There is <a href="%s">1 item</a> in your cart.]]></en_US>
+				<ru_RU><![CDATA[<a href='%s'>товаров в корзине: <span>1</span></a>]]></ru_RU>
+			</term>
+			<term>
+				<en_US><![CDATA[There are <a href="%s">%s items</a> in your cart.]]></en_US>
+				<ru_RU><![CDATA[<a href='%s'>товаров в корзине: <span>%s</span></a>]]></ru_RU>
+			</term>
+		</block>
+		<controller
+			name='Excellence_Ajax_IndexController'
+			action='*'
+		>
+			<term>
+				<en_US>Items</en_US>
+				<ru_RU>товар(ов)</ru_RU>
+			</term>
+		</controller>
+	</module>
+	<module name='Excellence_AjaxWishlist'>
+		<controller
+			name='Excellence_AjaxWishlist_IndexController'
+			action='*'
+		>
+			<term>
+				<en_US><![CDATA[%1$s has been added to your wishlist.]]></en_US>
+				<ru_RU><![CDATA[«%1$s» добавлен в Ваш план покупок.]]></ru_RU>
+			</term>
+		</controller>
+	</module>
+	<module name='Thirty4_CatalogSale'>
+		<block
+			class='Thirty4_CatalogSale_Block_Widget_Carousel'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Details</en_US>
+				<ru_RU>подробности</ru_RU>
+			</term>
+		</block>
+	</module>
+</dictionary>

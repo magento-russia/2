@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Log>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Log>
+	</modules>
+	<global>
+		<helpers>
+			<df_log><class>Df_Log_Helper</class></df_log>
+		</helpers>
+		<models>
+			<df_log><class>Df_Log_Model</class></df_log>
+			<log>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						предоставление администратору возможности ускорить работу системы
+						посредством отключения учёта
+						времени последнего посещения магазина каждым посетителем
+					-->
+					<visitor>Df_Log_Model_Visitor</visitor>
+				</rewrite>
+			</log>
+		</models>
+	</global>
+</config>

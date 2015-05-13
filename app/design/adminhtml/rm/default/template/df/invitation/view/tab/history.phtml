@@ -1,0 +1,18 @@
+<?php /** @var Df_Invitation_Block_Adminhtml_Invitation_View_Tab_History $this */ ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+            <h4 class="icon-head head-invitation"><?php echo df_h()->invitation()->__('Status History') ?></h4>
+    </div>
+    <div class="fieldset">
+        <ul class="note-list">
+        <?php foreach($this->getHistoryCollection() as $_history): ?>
+            <li>
+                <strong><?php echo $this->formatDate($_history->getDate(), 'medium') ?></strong>
+                <?php echo $this->formatTime($_history->getDate(), 'medium') ?><span class="separator">|</span>
+                <strong><?php echo $_history->getStatusText()?></strong>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>

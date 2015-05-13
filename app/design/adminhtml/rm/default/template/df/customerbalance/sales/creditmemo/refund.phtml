@@ -1,0 +1,22 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ($this->canRefundToCustomerBalance()): ?>
+    <p>
+        <label for="creditmemo_customerbalance_return_enable"><?php echo Df_CustomerBalance_Helper_Data::s()->__('Refund to Store Credit') ?></label>
+        <input type="hidden" name="creditmemo[refund_customerbalance_return_enable]" value="0">
+        <input type="checkbox" name="creditmemo[refund_customerbalance_return_enable]" value="1" id="creditmemo_customerbalance_return_enable">
+        <input type="text" name="creditmemo[refund_customerbalance_return]" value="<?php echo $this->getReturnValue(); ?>" id="creditmemo_customerbalance_return" class="input-text not-negative-amount" style="width: 60px; text-align: right;">
+        <script type="text/javascript">
+        //<![CDATA[
+            function toggleCustomerBalanceRefundAmount() {
+                if ($('creditmemo_customerbalance_return_enable').checked) {
+                    $('creditmemo_customerbalance_return').disabled = false;
+                } else {
+                    $('creditmemo_customerbalance_return').disabled = true;
+                }
+            }
+            Event.observe($('creditmemo_customerbalance_return_enable'), 'change', toggleCustomerBalanceRefundAmount);
+            toggleCustomerBalanceRefundAmount();
+        //]]>
+        </script>
+    </p>
+<?php endif; ?>

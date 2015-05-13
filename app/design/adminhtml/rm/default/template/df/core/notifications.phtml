@@ -1,0 +1,11 @@
+<?php /** @var Df_Core_Block_Admin_Notifications $this */ ?>
+<?php foreach($this->getNotifiers() as $notifier) { ?>
+	<?php /** @var Df_Admin_Model_Notifier $notifier */ ?>
+	<div class='notification-global'>
+		<strong><?php echo $notifier->getMessage(); ?></strong>
+		<span class='f-right'>
+			<a href='<?php echo $notifier->getUrlSkip(); ?>'>скрыть это сообщение</a>
+		</span>
+	</div>
+<?php
+}

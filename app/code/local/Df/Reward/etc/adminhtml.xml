@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<df_reward translate='title' module='df_reward'>
+						<title>Российская сборка → Накопительная программа</title>
+						<sort_order>100</sort_order>
+						<children>
+							<balance translate='title'>
+								<title>Изменение баланса</title>
+								<sort_order>10</sort_order>
+							</balance>
+							<rates translate='title'>
+								<title>Изменение обменного курса</title>
+								<sort_order>20</sort_order>
+							</rates>
+							<affect translate='title'>
+								<title>Применение баллов при административном оформлении заказа</title>
+								<sort_order>30</sort_order>
+							</affect>
+						</children>
+					</df_reward>
+					<system>
+						<children>
+							<config>
+								<children>
+									<df_reward translate='title' module='df_reward'>
+										<title>Reward Points</title>
+										<sort_order>10</sort_order>
+									</df_reward>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<customer>
+			<children>
+				<reward translate='title' module='df_reward'>
+					<title>Reward Exchange Rates</title>
+					<action>adminhtml/reward_rate</action>
+					<sort_order>100</sort_order>
+					<depends>
+						<config>df_reward/general/enabled</config>
+					</depends>
+					<resource>df_reward/rates</resource>
+				</reward>
+			</children>
+		</customer>
+	</menu>
+</config>

@@ -1,0 +1,176 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Kkb>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Kkb>
+	</modules>
+	<global>
+		<blocks><df_kkb><class>Df_Kkb_Block</class></df_kkb></blocks>
+		<helpers><df_kkb><class>Df_Kkb_Helper</class></df_kkb></helpers>
+		<models><df_kkb><class>Df_Kkb_Model</class></df_kkb></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<kkb>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<!--
+					руководствуясь значением этого параметра
+					система будет автоматически переводить суммы в тенге
+					перед передачей их платёжному шлюзу
+				-->
+				<payment_service__currency>KZT</payment_service__currency>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__card_payment_action>authorize</payment_service__card_payment_action>
+				<payment_service__key_public><![CDATA[-----BEGIN CERTIFICATE-----
+MIIDijCCAnKgAwIBAgIFAMGDJ+gwDQYJKoZIhvcNAQEEBQAwUzELMAkGA1UEBhMC
+S1oxDDAKBgNVBAoTA0tLQjELMAkGA1UECxMCQ0ExDzANBgNVBAMTBktLQiBDQTEY
+MBYGCSqGSIb3DQEJARYJY2FAa2tiLmt6MB4XDTA0MTAxODEwMzYwNloXDTA5MTAx
+NzEwMzYwNlowgYMxCzAJBgNVBAYTAktaMQ8wDQYDVQQHEwZBbG1hdHkxHDAaBgNV
+BAoTE0pTQyBLYXprb21tZXJ0c2JhbmsxEzARBgNVBAsTCkhlYWRPZmZpY2UxFDAS
+BgNVBAMTC0VQQVkgU1lTVEVNMRowGAYJKoZIhvcNAQkBFgtlcGF5QGtrYi5rejCB
+nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwNtnbUr82ALmO1E0tQ8Ejp1D+9GH
+EKPeqVTokLb95VhvXX3GoYCKPseFvXMD8x+P0I9x03nJnSRyP6hJ85W/jsElkuYj
+LzYWFfYhCeCQgit2lbSx9FbGVJ1B7M4ZMYuub4DlgtjQ8ebbqRACZ3Yw7LhciUcS
+235c4K+zmL7p5i0CAwEAAaOBtzCBtDAdBgNVHQ4EFgQU+7GVWbXvHRDbdxFSXqc6
+vd6VPQcwHwYDVR0jBBgwFoAU712nYyivxvN+d0LbneCElQZ9clMwDAYDVR0TBAUw
+AwEBADAOBgNVHQ8BAf8EBAMCBPAwNQYDVR0fBC4wLDAqoCigJoYkaHR0cDovL3d3
+dy5ra2Iua3ovY2VydHJvb3Qva2tiY2EuY3JsMB0GA1UdJQQWMBQGCCsGAQUFBwMC
+BggrBgEFBQcDBDANBgkqhkiG9w0BAQQFAAOCAQEAB0jZpXUO9O0uWJZAJP28ATnC
+PCMYa9jheM8MwKhSqe0m1IQ8mkPBzFnKqgmBdyPSp94Fy6xY2ciEnJ5oCEJGM9Nm
+L1kUeg4/HqiTcEUaZWtec4SvwEhKjfoXVwx/teV9KNQoQ8YNyQflEm6DMjiZ6GDM
+qLNV2ZLD5RytWKJYzqg/WScKpuGHYBlUmAi75Ew4nNx1PXi0ATZ9wc0aiXYlwAaP
+pDhNvvLcVLiBjjs/o/QhBgtKewAbltVnU97gf/+yQErbfrL2z+Hg4hF0R63vkjj5
+HsxOZ+pVNi0p+TzKyI1QcS4f53rxo0pMYxHn0LJQquCzbyDKcipkg9qrAFkxoA==
+-----END CERTIFICATE-----]]></payment_service__key_public>
+				<payment_service__shop_id__test>92061101</payment_service__shop_id__test>
+				<payment_service__certificate_id__test>00C182B189</payment_service__certificate_id__test>
+				<payment_service__shop_name__test>Test shop</payment_service__shop_name__test>
+				<payment_service__key_private__test><![CDATA[-----BEGIN RSA PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: DES-EDE3-CBC,25E4520A4E5EE17A
+
+r1Uz/b1FZpMJg0kh2efZoaXpLnEg9xR8rkU8nH5y5LTP7q15zldAWm0BqGax6ZHm
+5xe/zTjFcZKYjh7NeINlTKrAnbNNYZnYxqqj9GGUa1gEpvHn8TukXB83cEbvsDeS
+jrbvbj5itRqqa9fNNs4rzizVdaGFpQKVhCqx4u7lE8oWdR1WCUHOywpFpkpHznDr
+od/B2JSzG6OekuwCB4tnyZmJ1RYncbsM7NysOGcUZcT9ZmfzteYkVjPxZKcHzjTr
+pLzhlYeAr0by9jNhtodGaYoRHEs2cqK8zEPBRMmgDydVA9Fg2NIIDaBB7ugdjaUw
+XuWUo1y5JrU0hRnB7FdAEizO1g5CNG5aZ5UDcg9jbNeKEqrZy2VcBKARYxVDUIlm
+INB98tXargbAgbCRwKvn76m8R0ClBMlIHiMzP3LCTfQaJnCIIDirfA==
+-----END RSA PRIVATE KEY-----]]></payment_service__key_private__test>
+				<payment_service__key_private_password__test>nissan</payment_service__key_private_password__test>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__description><![CDATA[После нажатия кнопки «Подтвердить заказ»
+Вы будете перенаправлены на платёжную страницу Казкоммерцбанка,
+где сможете оплатить Ваш заказ банковской картой.]]></frontend__description>
+				<frontend__message_failure><![CDATA[К сожалению, оплата заказа не удалась.
+<br/>Сообщение платёжного шлюза
+{название платёжного шлюза в родительном падеже}: «{сообщение от платёжного шлюза}».
+<br/>Возможно, Вы ввели на платёжной странице
+{название платёжного шлюза в родительном падеже} неточные данные?
+<br/>Попробуйте оформить Ваш заказ повторно.
+<br/>Если оплатить заказ через {название платёжного шлюза в именительном падеже}
+не получается — попробуйте другой способ оплаты
+или оформите Ваш заказ по телефону {телефон магазина}.]]></frontend__message_failure>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__specificcountry></frontend__specificcountry>
+				<frontend__title>Банковская карта</frontend__title>
+			</kkb>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-kkb>
+				<model>df_kkb/payment</model>
+			</df-kkb>
+		</payment>
+	</default>
+	<frontend>
+		<routers>
+			<df_kkb>
+				<use>standard</use>
+				<args>
+					<module>Df_Kkb</module>
+					<frontName>df-kkb</frontName>
+				</args>
+			</df_kkb>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-kkb>
+				<module>df_kkb</module>
+				<title>Казкоммерцбанк</title>
+				<url>http://magento-forum.ru/forum/324/</url>
+			</df-kkb>
+		</features>
+		<payment>
+			<kkb>
+				<currencies>
+					<allowed>KZT,USD</allowed>
+					<code-translation>
+						<KZT>398</KZT>
+						<USD>840</USD>
+					</code-translation>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>rus</ru_RU>
+						<en_US>eng</en_US>
+					</code-translation>
+				</locales>
+				<!-- Название платёжного шлюза для диагностических сообщений -->
+				<names>
+					<!-- именительный падеж -->
+					<nominative>Казкоммерцбанк</nominative>
+					<!-- родительный падеж -->
+					<genitive>Казкоммерцбанка</genitive>
+					<!-- дательный падеж -->
+					<dative>Казкоммерцбанку</dative>
+					<!-- творительный падеж -->
+					<instrumental>Казкоммерцбанком</instrumental>
+				</names>
+				<request>
+					<confirmation>
+						<payment>
+							<!-- размер платежа -->
+							<amount>AMOUNT</amount>
+						</payment>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>SIGN_CALLBACK</signature>
+						</request>
+						<response>
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+				</request>
+				<production>
+					<url>
+						<payment_page>https://epay.kkb.kz/jsp/process/logon.jsp</payment_page>
+					</url>
+				</production>
+				<test>
+					<url>
+						<payment_page>https://3dsecure.kkb.kz/jsp/process/logon.jsp</payment_page>
+					</url>
+				</test>
+			</kkb>
+		</payment>
+	</df>
+</config>

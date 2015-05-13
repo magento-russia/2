@@ -1,0 +1,303 @@
+<?php /** @var Df_AccessControl_Block_Admin_Tab_Tree $this */ ?>
+<?php if ($this->isTreeEmpty()) { ?>
+	<div>У данного магазина отсутствуют товарные разделы.</div>
+<?php } else { ?>
+	<input
+		type="hidden"
+		name="rm.accessControl.selectedCategories"
+		id="rm.accessControl.selectedCategories"
+		value="<?php echo $this->getSelectedCategoriesAsString(); ?>"
+	/>
+	<div id="rm.accessControl.categoryTree" class="tree"></div>
+	<script type="text/javascript">
+		/** @type {Object} */
+		var dfWidgetParams = {
+			/** @type {String} */
+			treeElementId: 'rm.accessControl.categoryTree'
+			,
+			/** @type {String} */
+			selectedCategoriesContainerElementId: 'rm.accessControl.selectedCategories'
+			,
+			/** @type {String} */
+			rootNodeId: '<?php echo $this->getRoot()->getId(); ?>'
+			,
+			/** @type {Boolean} */
+			autoSelectAncestors: <?php echo df_cfg()->admin()->access_control()->getAutoSelectAncestors() ? 'true' : 'false'; ?>
+			,
+			/** @type {Boolean} */
+			autoSelectDescendants: <?php echo df_cfg()->admin()->access_control()->getAutoSelectDescendants() ? 'true' : 'false'; ?>
+			,
+			/** @type {Boolean} */
+			autoExpandAll: <?php echo df_cfg()->admin()->access_control()->getAutoExpandAll() ? 'true' : 'false'; ?>
+		};
+		/** @type {HTMLInputElement} */
+		var selectedCategoriesContainer = $(dfWidgetParams.selectedCategoriesContainerElementId);
+		Ext.EventManager
+			.onDocumentReady(
+				/**
+				 * @function
+				 */
+				function() {
+					/** @type {Ext.tree.TreeLoader} */
+					var categoryLoader =
+						new Ext.tree.TreeLoader(
+							{
+							   dataUrl: '<?php echo $this->getLoadTreeUrl();?>'
+							}
+						)
+					;
+					/**
+					 * @function
+					 * @param {Object} config
+					 * @returns {Ext.tree.TreeNode|Ext.tree.AsyncTreeNode}
+					 */
+					categoryLoader.createNode =
+						function(config) {
+							config.uiProvider = Ext.tree.CheckboxNodeUI;
+							/** @type {Ext.tree.TreeNode|Ext.tree.AsyncTreeNode} */
+							var result = null;
+							if (config.children && !config.children.length) {
+								delete(config.children);
+								result = new Ext.tree.AsyncTreeNode(config);
+							}
+							else {
+								result = new Ext.tree.TreeNode(config);
+							}
+							return result;
+						}
+					;
+					categoryLoader
+						.on(
+							"beforeload"
+							,
+							/**
+							 * @function
+							 * @param {Object} treeLoader
+							 * @param {Object} node
+							 */
+							function(treeLoader, node) {
+								treeLoader.baseParams.category = node.attributes.id;
+							}
+						)
+					;
+					categoryLoader
+						.on(
+							"load"
+							,
+							/**
+							 * @function
+							 * @param {Object} treeLoader
+							 * @param {Object} node
+							 * @param {Object} config
+							 */
+							function(treeLoader, node, config) {
+								varienWindowOnload();
+							}
+						)
+					;
+					/** @type {Ext.tree.TreePanel} */
+					var tree =
+						new Ext.tree.TreePanel(
+							dfWidgetParams.treeElementId
+							,
+							{
+								/** @type {Boolean} */
+								animate: true
+								,
+								/** @type {Ext.tree.TreeLoader} */
+								loader: categoryLoader
+								,
+								/** @type {Boolean} */
+								enableDD: false
+								,
+								/** @type {Boolean} */
+								containerScroll: true
+								,
+								/** @type {Ext.tree.CheckboxNodeUI} */
+								rootUIProvider: Ext.tree.CheckboxNodeUI
+								,
+								/** @type {Ext.tree.CheckNodeMultiSelectionModel} */
+								selModel: new Ext.tree.CheckNodeMultiSelectionModel()
+								,
+								/** @type {String} */
+								rootVisible: '<?php echo $this->isRootVisible(); ?>'
+							}
+						)
+					;
+					/**
+					 * @function
+					 * @param {Ext.data.Node} node
+					 */
+					var checkHandler = function(node) {
+						if (dfWidgetParams.autoSelectAncestors) {
+							/**
+							 * Выделяем предков
+							 */
+							if (
+									node.parentNode
+								&&
+									node.attributes.checked
+							) {
+								/** @type {Ext.data.Node} */
+								var parentNode = node.parentNode;
+								this.removeListener('check', checkHandler);
+								while (
+										parentNode
+									&&
+										(dfWidgetParams.rootNodeId != parentNode.attributes.id)
+								) {
+									parentNode.ui.check(true);
+									parentNode = parentNode.parentNode;
+								}
+								this.on('check', checkHandler);
+							}
+						}
+						if (dfWidgetParams.autoSelectDescendants) {
+							/**
+							 * Выделяем потомков
+							 */
+							if (
+									!node.isLeaf()
+								&&
+									node.hasChildNodes()
+							) {
+								this.removeListener('check', checkHandler);
+								processChildren(node, node.attributes.checked);
+								this.on('check', checkHandler);
+							}
+						}
+						selectedCategoriesContainer.value = this.getChecked().join(',');
+					};
+					/**
+					 * @function
+					 * @param {Ext.data.Node} node
+					 * @param {Boolean} node
+					 */
+					var processChildren = function(node, state) {
+						if (node.hasChildNodes()) {
+							for(var i = 0; i < node.childNodes.length; i++ ) {
+								/**
+								 * @name i
+								 * @type {Number}
+								 */
+								node.childNodes[i].ui.check(state);
+								if (node.childNodes[i].hasChildNodes()) {
+									processChildren(node.childNodes[i], state);
+								}
+							}
+						}
+					};
+					tree
+						.on(
+							'check'
+							,
+							checkHandler
+							,
+							tree
+						)
+					;
+					/** @type {Ext.tree.TreeNode} root */
+					var root =
+						new Ext.tree.TreeNode(
+							{
+								/** @type {String} */
+								text: '<?php echo $this->jsQuoteEscape($this->getRoot()->getName()); ?>'
+								,
+								/** @type {Boolean} */
+								draggable: false
+								,
+								/** @type {String} */
+								checked: '<?php echo $this->getRoot()->getChecked(); ?>'
+								,
+								/** @type {String} */
+								id: '<?php echo $this->getRoot()->getId(); ?>'
+								,
+								/** @type {Boolean} */
+								disabled: <?php echo ($this->getRoot()->getDisabled() ? 'true' : 'false'); ?>
+								,
+								/** @type {Ext.tree.CheckboxNodeUI} */
+								uiProvider: Ext.tree.CheckboxNodeUI
+							}
+						)
+					;
+					tree.setRootNode(root);
+					buildCategoryTree(root, <?php echo $this->getTreeJson(); ?>);
+					tree.addListener('click', categoryClick.createDelegate(this));
+					// render the tree
+					tree.render();
+					root.expand();
+					if (dfWidgetParams.autoExpandAll) {
+						tree.expandAll();
+					}
+				}
+			)
+		;
+		/**
+		 * @function
+		 * @param {Object} parent
+		 * @param {Object} config
+		 */
+		var buildCategoryTree = function(parent, config) {
+			if (config) {
+				if (parent && config && config.length) {
+					for(var i = 0; i < config.length; i++) {
+						/**
+						 * @name i
+						 * @type {Number}
+						 */
+						config[i].uiProvider = Ext.tree.CheckboxNodeUI;
+						/** @type {Object} nodeData */
+						var nodeData = Object.clone(config[i]);
+						/** @type {Ext.tree.TreeNode|Ext.tree.AsyncTreeNode} newNode */
+						var newNode = null;
+						if (nodeData.children && !nodeData.children.length) {
+							delete(nodeData.children);
+							newNode = new Ext.tree.AsyncTreeNode(nodeData);
+						} else {
+							newNode = new Ext.tree.TreeNode(config[i]);
+						}
+						parent.appendChild(newNode);
+						newNode.loader = newNode.getOwnerTree().loader;
+						if (config[i].children){
+							buildCategoryTree(newNode, config[i].children);
+						}
+					}
+				}
+			}
+		};
+		/**
+		 * @function
+		 * @param {Ext.tree.TreeNode|Ext.tree.AsyncTreeNode} node
+		 * @param {Object} element
+		 */
+		var categoryClick = function(node, element) {
+			if (!node.disabled) {
+				node.getUI().check(!node.getUI().checked());
+				varienElementMethods.setHasChanges(Event.element(element), element);
+			}
+		};
+		/**
+		 * @function
+		 * @param {Number} id
+		 */
+		var categoryAdd = function(id) {
+			/** @type {Array} */
+			var ids = selectedCategoriesContainer.value.split(',');
+			ids.push(id);
+			selectedCategoriesContainer.value = ids.join(',');
+		};
+		/**
+		 * @function
+		 * @param {Number} id
+		 */
+		var categoryRemove = function(id) {
+			/** @type {Array} */
+			var ids = selectedCategoriesContainer.value.split(',');
+			// bug #7654 fixed
+			while (-1 != ids.indexOf(id)) {
+				ids.splice(ids.indexOf(id), 1);
+			}
+			selectedCategoriesContainer.value = ids.join(',');
+		};
+	</script>
+<?php } ?>

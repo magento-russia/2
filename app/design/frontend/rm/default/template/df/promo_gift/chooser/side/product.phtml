@@ -1,0 +1,23 @@
+<?php /** @var Df_PromoGift_Block_Chooser_Product $this */ ?>
+<?php
+	/**
+	 * 	Размер миниатюрной картинки в пикселях по любой из сторон(длине, ширине)
+	 */
+	$thumbnailSize = 50;
+?>
+<a
+	class="product-image"
+	href="<?php echo $this->getDetailsUrl(); ?>"
+	title="<?php echo $this->getName(); ?>"><img
+	src="<?php echo $this->getThumbnailUrl($thumbnailSize); ?>"
+	alt="<?php echo $this->getName(); ?>"
+	width="<?php echo $thumbnailSize; ?>"
+	height="<?php echo $thumbnailSize; ?>"
+></a>
+<div class="df-details">
+	<h3 class="df-name">
+		<a
+			href="<?php echo $this->getDetailsUrl(); ?>"
+		><?php echo $this->getName(); ?></a>
+	</h3>
+</div>

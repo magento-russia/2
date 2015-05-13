@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Downloadable>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Downloadable>
+	</modules>
+	<global>
+		<blocks>
+			<df_downloadable><class>Df_Downloadable_Block</class></df_downloadable>
+			<downloadable>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						объявление поля $_config, которое родительский класс использует
+						без предварительного объявления
+					-->
+					<adminhtml_catalog_product_edit_tab_downloadable_links>Df_Downloadable_Block_Adminhtml_Catalog_Product_Edit_Tab_Downloadable_Links</adminhtml_catalog_product_edit_tab_downloadable_links>
+					<!--
+						Цель перекрытия —
+						объявление поля $_config, которое родительский класс использует
+						без предварительного объявления
+					-->
+					<adminhtml_catalog_product_edit_tab_downloadable_samples>Df_Downloadable_Block_Adminhtml_Catalog_Product_Edit_Tab_Downloadable_Samples</adminhtml_catalog_product_edit_tab_downloadable_samples>
+				</rewrite>
+			</downloadable>
+		</blocks>
+		<helpers><df_downloadable><class>Df_Downloadable_Helper</class></df_downloadable></helpers>
+		<models><df_downloadable><class>Df_Downloadable_Model</class></df_downloadable></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Downloadable><files><default>Df_Downloadable.csv</default></files></Df_Downloadable>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

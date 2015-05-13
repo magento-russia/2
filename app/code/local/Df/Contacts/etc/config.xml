@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Contacts>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Contacts>
+	</modules>
+	<global>
+		<blocks><df_contacts><class>Df_Contacts_Block</class></df_contacts></blocks>
+		<helpers><df_contacts><class>Df_Contacts_Helper</class></df_contacts></helpers>
+		<models><df_contacts><class>Df_Contacts_Model</class></df_contacts></models>
+	</global>
+	<default>
+		<contacts>
+			<email>
+				<recipient_email>admin@magento-forum.ru</recipient_email>
+			</email>
+		</contacts>
+	</default>
+</config>

@@ -1,0 +1,143 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_cms>
+			<label>Статьи</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>18000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<hierarchy translate='label'>
+					<label>CMS Page Hierarchy</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Enable Hierarchy Functionality</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-cms-2</df_feature>
+						</enabled>
+						<add_to_catalog_menu translate='label'>
+							<label>Добавить оглавление в товарное меню?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</add_to_catalog_menu>
+						<!--
+						<menu_layout translate='label'>
+							<label>Default Layout for Hierarchy Menu</label>
+							<comment>
+								<![CDATA[
+									Модуль может, помимо или вместо добавления оглавления в стандартное товарное меню,показать это же оглавление в специализированном меню: там будет только оглавление,и не будет товарных разделов.
+									<br/>
+									Данная настройка не показывает вспомогательное меню:
+									она лишь задаёт его стандартное расположение.
+									<br/>
+									Вспомогательное меню будет показано только тогда, когда оно будет включено
+									в настройках корневых рубрик
+									(«Витрина» → «Самодельные страницы» → «Оглавление»).
+									<br/>
+									Там же, в настройках корневых рубрик, Вы можете указать
+									индивидуальное расположение вспомогательного меню
+									для конкретных корневых рубрик.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>df_cms/source_hierarchy_menu_layout</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</menu_layout>
+						-->
+						<lock_timeout translate='label'>
+							<label>Hierarchy Page Lock Timeout (seconds)</label>
+							<comment>Empty Value disables Page Locking. Non-Empty Values less than 120 are ignored.</comment>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</lock_timeout>
+					</fields>
+				</hierarchy>
+				<versioning translate='label'>
+					<label>CMS Versioning</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить функциональность учёта вариантов и редакций страниц?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «нет» — то система будет вести себя по-прежнему.
+									<br/>
+									Если Вы укажете значение «да» — то в административом интерфейсе
+									появятся новые элементы управления для учёта вариантов и редакций страниц.
+									Однако даже в этом случае учёт вариантов и редакций будет вестись
+									только для явно указанных администратором страниц.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-cms-2</df_feature>
+						</enabled>
+						<default translate='label'>
+							<label>Автоматически включать учёт вариантов и редакций для новых страниц?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «нет» — то для новых страниц учёт вариантов и редакций
+									будет по умолчанию выключен (однако Вы можете включить его).
+									<br/>
+									Если Вы укажете значение «да» — то для новых страниц учёт вариантов и редакций
+									будет по умолчанию включен (однако Вы можете выключить его).
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>
+						</default>
+					</fields>
+				</versioning>
+			</groups>
+		</df_cms>
+	</sections>
+</config>

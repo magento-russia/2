@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_CatalogIndex>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_CatalogIndex>
+	</modules>
+	<global>
+		<blocks><df_catalog_index><class>Df_CatalogIndex_Block</class></df_catalog_index></blocks>
+		<helpers><df_catalog_index><class>Df_CatalogIndex_Helper</class></df_catalog_index></helpers>
+		<models>
+			<catalogindex></catalogindex>
+			<df_catalog_index><class>Df_CatalogIndex_Model</class></df_catalog_index>
+		</models>
+	</global>
+</config>

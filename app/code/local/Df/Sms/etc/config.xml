@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Sms>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Sms>
+	</modules>
+	<df>
+		<features>
+			<df-sms>
+				<module>df_sms</module>
+				<title>SMS</title>
+				<url>http://magento-forum.ru/forum/112/</url>
+			</df-sms>
+		</features>
+	</df>
+	<global>
+		<blocks><df_sms><class>Df_Sms_Block</class></df_sms></blocks>
+		<helpers><df_sms><class>Df_Sms_Helper</class></df_sms></helpers>
+		<models><df_sms><class>Df_Sms_Model</class></df_sms></models>
+		<ignoredModules><entities><df-sms/></entities></ignoredModules>
+	</global>
+	<frontend>
+		<routers>
+			<df-sms>
+				<use>standard</use>
+				<args>
+					<module>Df_Sms</module>
+					<frontName>df-sms</frontName>
+				</args>
+			</df-sms>
+		</routers>
+	</frontend>
+	<default>
+		<df_sms>
+			<general>
+				<enabled>0</enabled>
+				<gate></gate>
+				<administrator_phone></administrator_phone>
+				<sender>inetsms</sender>
+			</general>
+		</df_sms>
+	</default>
+</config>

@@ -1,0 +1,129 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Psbank>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Psbank>
+	</modules>
+	<global>
+		<blocks><df_psbank><class>Df_Psbank_Block</class></df_psbank></blocks>
+		<helpers><df_psbank><class>Df_Psbank_Helper</class></df_psbank></helpers>
+		<models><df_psbank><class>Df_Psbank_Model</class></df_psbank></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<psbank>
+				<active>0</active>
+				<payment_service__test>1</payment_service__test>
+				<!--
+					руководствуясь значением этого параметра
+					система будет автоматически переводить суммы в рубли
+					перед передачей их платёжному шлюзу
+				-->
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__card_payment_action>authorize</payment_service__card_payment_action>
+				<payment_service__shop_id__test>790367686219999</payment_service__shop_id__test>
+				<payment_service__request_password__test>C50E41160302E0F5D6D59F1AA3925C45</payment_service__request_password__test>
+				<payment_service__transaction_description><![CDATA[Заказ №{order.id} в магазине {shop.domain}.]]></payment_service__transaction_description>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__description><![CDATA[После нажатия кнопки «Подтвердить заказ»
+Вы будете перенаправлены на платёжную страницу Промсвязьбанка,
+где сможете оплатить Ваш заказ банковской картой.]]></frontend__description>
+				<frontend__message_failure><![CDATA[К сожалению, оплата заказа не удалась.
+<br/>Сообщение платёжного шлюза
+{название платёжного шлюза в родительном падеже}: «{сообщение от платёжного шлюза}».
+<br/>Возможно, Вы ввели на платёжной странице
+{название платёжного шлюза в родительном падеже} неточные данные?
+<br/>Попробуйте оформить Ваш заказ повторно.
+<br/>Если оплатить заказ через {название платёжного шлюза в именительном падеже}
+не получается — попробуйте другой способ оплаты
+или оформите Ваш заказ по телефону {телефон магазина}.]]></frontend__message_failure>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__specificcountry></frontend__specificcountry>
+				<frontend__title>Банковская карта</frontend__title>
+			</psbank>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-psbank>
+				<model>df_psbank/payment</model>
+			</df-psbank>
+		</payment>
+	</default>
+	<frontend>
+		<routers>
+			<df_psbank>
+				<use>standard</use>
+				<args>
+					<module>Df_Psbank</module>
+					<frontName>df-psbank</frontName>
+				</args>
+			</df_psbank>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-psbank>
+				<module>df_psbank</module>
+				<title>Промсвязьбанк</title>
+				<url>http://magento-forum.ru/forum/330/</url>
+			</df-psbank>
+		</features>
+		<payment>
+			<psbank>
+				<currencies>
+					<allowed>RUB</allowed>
+				</currencies>
+				<!-- Название платёжного шлюза для диагностических сообщений -->
+				<names>
+					<!-- именительный падеж -->
+					<nominative>Промсвязьбанк</nominative>
+					<!-- родительный падеж -->
+					<genitive>Промсвязьбанка</genitive>
+					<!-- дательный падеж -->
+					<dative>Промсвязьбанку</dative>
+					<!-- творительный падеж -->
+					<instrumental>Промсвязьбанком</instrumental>
+				</names>
+				<request>
+					<confirmation>
+						<payment>
+							<!-- размер платежа -->
+							<amount>AMOUNT</amount>
+						</payment>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>P_SIGN</signature>
+						</request>
+						<response>
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+				</request>
+				<production>
+					<url>
+						<payment_page>https://3ds.payment.ru/cgi-bin/cgi_link</payment_page>
+					</url>
+				</production>
+				<test>
+					<url>
+						<payment_page>http://193.200.10.117:8080/cgi-bin/cgi_link</payment_page>
+					</url>
+				</test>
+			</psbank>
+		</payment>
+	</df>
+</config>

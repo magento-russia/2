@@ -1,0 +1,83 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<tax>
+			<groups>
+				<calculation>
+					<fields>
+						<algorithm>
+							<comment>
+								<![CDATA[
+									От выбора алгоритма зависит лишь способ вычисления налога,но результат применения алгоритмов отличается лишь погрешностями округления.
+									<br/>
+									Для российского магазина выбирайте любое значение
+									(разница между ними для России несущественна).
+								]]>
+							</comment>
+						</algorithm>
+						<based_on>
+							<source_model>df_tax/config_source_addressType</source_model>
+						</based_on>
+						<discount_tax>
+							<source_model>df_tax/config_source_applyDiscountOnPrices</source_model>
+						</discount_tax>
+					</fields>
+				</calculation>
+				<defaults>
+					<comment>
+						<![CDATA[
+Значения этого блока использутся в том случае, когда налоги должены рассчитываться на основании
+адреса доставки или адреса плательщика
+(Вы указываете тип адреса для расчёта налогов опцией «Продажи» → «Налоги» →
+«Параметры начисления налогов» → «Какой адрес использовать в налоговых правилах?»),
+но при этом адрес указанного типа ещё неизвестен системе
+(такое возможно, если расчёт производится до указания адреса покупателем, например, в корзине).
+						]]>
+					</comment>
+				</defaults>
+				<display>
+					<fields>
+						<type>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</type>
+						<shipping>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</shipping>
+					</fields>
+				</display>
+				<cart_display>
+					<fields>
+						<price>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</price>
+						<subtotal>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</subtotal>
+						<shipping>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</shipping>
+						<grandtotal>
+							<source_model>df_tax/config_source_displayTypeYesNo</source_model>
+						</grandtotal>
+					</fields>
+				</cart_display>
+				<sales_display>
+					<fields>
+						<price>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</price>
+						<subtotal>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</subtotal>
+						<shipping>
+							<source_model>df_tax/config_source_displayType</source_model>
+						</shipping>
+						<grandtotal>
+							<source_model>df_tax/config_source_displayTypeYesNo</source_model>
+						</grandtotal>
+					</fields>
+				</sales_display>
+			</groups>
+		</tax>
+	</sections>
+</config>

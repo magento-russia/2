@@ -1,0 +1,35 @@
+<?php /** @var Df_Chronopay_Block_Gate_Response $this */ ?>
+<?php if ($this->getResponse()) { ?>
+	<div class="df">
+		<div class="df-chronopay-order-status">
+			<?php
+				if (0 == $this->getResponse()->getCode()) {
+					?><h3>ChronoPay has accepted the payment</h3><?php
+				}
+				else {
+					?>
+						<h3>Error in capturing the payment via ChronoPay</h3>
+						<ul class="df-chronopay-order-status">
+							<?php
+								$odd = true;
+								foreach($this->getItems() as $key => $value) {
+									?>
+										<li class="<?php echo $odd ? "df-odd" : "df-even"; ?>">
+											<div class="df-cell df-key">
+												<?php echo df_text()->escapeHtml($key); ?>
+											</div>
+											<div class="df-cell df-value">
+												<?php echo df_text()->escapeHtml($value); ?>
+											</div>
+										</li>
+									<?php
+									$odd = !$odd;
+								}
+							?>
+						</ul>
+					<?php
+				}
+			?>
+		</div>
+	</div>
+<?php }

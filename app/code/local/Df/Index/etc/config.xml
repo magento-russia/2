@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Index>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Index>
+	</modules>
+	<global>
+		<blocks><df_index><class>Df_Index_Block</class></df_index></blocks>
+		<helpers><df_index><class>Df_Index_Helper</class></df_index></helpers>
+		<models><df_index><class>Df_Index_Model</class></df_index></models>
+		<events>
+			<catalog_product_flat_prepare_columns>
+				<observers>
+					<df_index__catalog_product_flat_prepare_columns>
+						<class>df_index/dispatcher</class>
+						<method>catalog_product_flat_prepare_columns</method>
+					</df_index__catalog_product_flat_prepare_columns>
+				</observers>
+			</catalog_product_flat_prepare_columns>
+		</events>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<!-- Magento 1.4.0.1 не включает данное определение (видимо, дефект) -->
+				<Df_Index><files><default>Mage_Index.csv</default></files></Df_Index>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

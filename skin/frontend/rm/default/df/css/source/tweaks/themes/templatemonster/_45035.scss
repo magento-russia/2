@@ -1,0 +1,53 @@
+body.df-theme-templatemonster-45035 {
+	.block-cart-header {
+		h3 {
+			margin:{
+				top: 1px;
+			}
+		}
+		.cart-content {
+			min-width: 290px;
+			.actions {
+				padding:{
+					left: 10px;
+					right: 10px;
+				}
+				> button.button {
+					margin: {
+						right: 20px;
+					}
+				}
+				button.button + button.button {
+					margin: {
+						right: 0px;
+					}
+				}
+			}
+		}
+	}
+	.df {
+		.df-checkout-ergonomic {
+			width: 1000px;
+			margin: 0 auto;
+			button.button {
+				> span {
+					display: block;
+					padding: {
+						top: 10px;
+						bottom: 10px;
+					}
+					line-height: auto;
+					height: auto;
+				}
+			}
+			.sp-methods {
+				dd {
+					margin: {
+						bottom: 10px;
+						top: 4px;
+					}
+				}
+			}
+		}
+	}
+}

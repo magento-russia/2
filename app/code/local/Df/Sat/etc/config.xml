@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Sat>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Sat>
+	</modules>
+	<global>
+		<blocks><df_sat><class>Df_Sat_Block</class></df_sat></blocks>
+		<helpers><df_sat><class>Df_Sat_Helper</class></df_sat></helpers>
+		<models><df_sat><class>Df_Sat_Model</class></df_sat></models>
+	</global>
+	<default>
+		<carriers>
+			<df-sat>
+				<active>0</active>
+				<model>df_sat/carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>САТ</title>
+			</df-sat>
+		</carriers>
+		<df_shipping>
+			<sat>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__declared_value_percent>0</admin__declared_value_percent>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>1</frontend__sallowspecific>
+				<frontend__specificcountry>UA</frontend__specificcountry>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</sat>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-sat>
+				<module>df_sat</module>
+				<title>САТ</title>
+				<url>http://magento-forum.ru/forum/263/</url>
+			</df-sat>
+		</features>
+		<shipping>
+			<sat>
+				<allowed-methods>
+					<!--
+						Идентификаторам способов доставки достаточно быть уникальными
+						лишь в пределах модуля доставки,потому что система формирует уникальный идентификатор способа доставки
+						объединением идентификатором модуля доставки и способа доставки.
+					-->
+					<to-home>
+						<title>До дома</title>
+						<class>df_sat/method_toHome</class>
+					</to-home>
+					<to-point-of-issue>
+						<title>До пункта выдачи</title>
+						<class>df_sat/method_toPointOfIssue</class>
+					</to-point-of-issue>
+				</allowed-methods>
+			</sat>
+		</shipping>
+	</df>
+</config>

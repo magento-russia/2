@@ -1,0 +1,670 @@
+.df {
+	.df-checkout-ergonomic {
+		/**
+			Тема RWD и некоторые другие устанавливают увелченную высоту полей ввода.
+			Нам это не нужно.
+		 */
+		input[type=email],
+		input[type=search],
+		input[type=number],
+		input[type=password],
+		input[type=tel],
+		input[type=text] {
+			height: auto;
+			/** Тема RWD зачем-то устанавливает 100%. */
+			max-width: none;
+		}
+		.form-list .control label,
+		.sp-methods dt label,
+		#checkout-shipping-method-load .sp-methods dd label,
+		#co-shipping-method-form .sp-methods dd label,
+		.product-options ul.options-list label {
+			/** Тема RWD устанавливает серенький фон. Нам это не нужно. */
+			background-color: inherit;
+			/** Тема RWD отображает надпись бледно. */
+			font-weight: bold;
+		}
+		strong {
+			font-weight: bold;
+			* {
+				font-weight: bold;
+			}
+		}
+		/*
+		 * Не помещаем внутрь .field,
+		 * потому что переключатель "доставить по этому адресу" и подпись "примечание к заказу"
+		 * почему-то не находятся внутри .field
+		 */
+		label {
+			/*
+				Тема RWD и некоторые другие отображают заголовки бледно.
+				Нам это не нужно.
+			 */
+			font-weight: bold;
+			color: rgb(102, 102, 102);
+			/*
+			 * Оформительская тема TemplateMonster #49198 («Men's Underwear»)
+			 * использует правило .form-list .label {float: left;},
+			 * что ломает внешний вид нашего экрана оформления заказа.
+			 * Надо явно указать, что мы хотим float: none.
+			 */
+			float: none;
+			/* Всё равно подписи большего размера не влезут в форму */
+			font-size: 12px;
+			/**
+				Тема Gala TitanShop (и некоторые другие)
+				пытается изуродовать padding.
+			 */
+			padding: 0;
+			/**
+				Тема Gala TitanShop (и некоторые другие)
+				пытается изуродовать line-height.
+			 */
+			line-height: normal;
+		}
+		/** Взял из темы RWD */
+		label.required:after,
+		span.required:after {
+			content: ' *';
+			color: red;
+			font-weight: normal;
+			font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+			font-size: 12px;
+		}
+		label.required em,
+		span.required em {
+			display: none;
+		}
+		/* Стили стандартной темы Magento */
+		h3,h4,h5,h6 {
+		    line-height:1.35;
+		}
+        input, select, textarea, button {
+			font-size: 12px;
+			line-height: 15px;
+        }
+		input.input-text, select {
+			/**
+				Тема Gala TitanShop (и некоторые другие)
+				пытается изуродовать line-height директивой !important,
+				поэтому и мы вынуждены добавить !important.
+			 */
+			line-height: 15px !important;
+		}
+		input.input-text, textarea {
+			/**
+				Тема Gala TitanShop (и некоторые другие)
+				пытается изуродовать padding директивой !important,
+				поэтому и мы вынуждены добавить !important.
+			 */
+			padding: 2px !important;
+        }
+		.input-text {
+			/** Тема RWD устанавливает радиус 2px */
+			-webkit-border-radius: 0;
+			-moz-border-radius: 0;
+			-ms-border-radius: 0;
+			-o-border-radius: 0;
+			border-radius: 0;
+		}
+		select {
+			/**
+				Так в теме Default, и это хорошо.
+				Добавляем здесь сразу для всех тем (например, в теме RWD такого нет).
+				Тема Gala TitanShop (и некоторые другие)
+				пытается изуродовать padding директивой !important,
+				поэтому и мы вынуждены добавить !important.
+			*/
+			padding: 1px !important;
+			/**
+				Тема Gala TitanShop (и некоторые другие)
+				пытается изуродовать height своим значением.
+			 */
+			height: auto;
+		}
+		h1 {
+			font-size: 20px;
+			line-height: 40px;
+		}
+		a.df-login {
+			display: block;
+			cursor: pointer;
+			font-weight: bold;
+			margin: 6px 0 0 0;
+		}
+		.df-body {
+  			margin: 1em 0 0 0;
+  			padding: 1em 0 0 0;
+			/*
+				радиокнопки:
+				«доставить по этому адресу» / «доставить по другому адресу»
+				способы доставки
+				способы оплаты
+			*/
+			@mixin input-radio {
+				input {
+					margin: 0 6px 0 0;
+					padding: 0;
+					/*
+						Тема RWD и некоторые другие (например, SNS Xsport)
+						устанавливают display: block и float: left.
+						Нам это не нужно.
+					*/
+					float: none;
+					display: inline;
+					/** Тема RWD пытается устанавливать top: -1px */
+					top: auto;
+					bottom: auto;
+					/** Тема RWD пытается устанавливать vertical-align: baseline */
+					vertical-align: middle;
+				}
+				label {
+					margin: 0;
+					/** Тема RWD пытается устанавливать padding */
+					padding: 0;
+					/** Тема RWD пытается устанавливать display: inline-block */
+					display: inline;
+					/** Тема RWD пытается устанавливать box-sizing: border-box */
+					box-sizing: content-box;
+					/** Тема RWD пытается менять это значение */
+					height: auto;
+					/** Тема RWD пытается устанавливать значение 14 */
+					line-height: 15px;
+					min-width: 0;
+					/** Тема RWD пытается устанавливать position: static */
+					position: relative;
+					width: auto;
+					/** Тема RWD пытается устанавливать vertical-align: top */
+					vertical-align: baseline;
+				}
+			}
+			.form-list {
+				/* радиокнопки «доставить по этому адресу» / «доставить по другому адресу» */
+				.control {
+					margin: 0;
+					height: auto;
+					font-size: 12px;
+					text-align: left;
+					@include input-radio;
+				}
+				li {
+					/* Тема RWD устанавливает margin-bottom 10. Нам это не нужно */
+					margin: 0 0 8px 0;
+					padding: 0;
+					.field {
+						/* Тема RWD устанавливает margin-bottom 10. Нам это не нужно */
+						margin: 0;
+						padding: 0;
+					}
+				}
+			}
+			/**
+				Селектор #co-shipping-method-form не является избыточным относительно .sp-methods:
+				в теме RWD он способствует приоритету наших правил перед стандартными.
+			 */
+			#co-shipping-method-form {
+				.gift-messages {
+					/*
+						Чтобы вопрос «Покупаете в подарок?»
+						не сливался с перечнем способов доставки
+					*/
+					margin-top: 16px;
+				}
+				.gift-messages-form {
+					li.fields {
+						div.field {
+							/*
+								Форма подарочного сообщения содержит поля
+                                для имён дарителя и получателя подарка.
+                                Не стоит располагать эти поля в одном ряду,
+                                потому что форма подарочного сообщения
+                                отображается в узкой колонке способов оплаты,
+                                и там может быть (так, например, в теме Default)
+                                просто недостаточно места для размещения
+                                обеих полей ввода в одном и том же ряду.
+							*/
+							float: none;
+						}
+					}
+					li.wide {
+						textarea {
+							width: 100%;
+						}
+					}
+				}
+				.sp-methods {
+					margin: 0 0 8px;
+					.error-msg {
+						padding:{
+							left: 8px !important;
+						}
+					}
+					dt {
+						margin:13px 0 5px;
+						font-weight: bold;
+					}
+					dd {
+						li {
+							margin: 0;
+							@include input-radio;
+							input {
+								margin-right: 3px;
+							}
+						}
+					}
+					label {
+						font-weight:bold;
+						color:#666;
+					}
+					.price {
+						font-weight:bold;
+					}
+					.form-list {
+						padding-left:20px;
+						li {
+							margin:0 0 8px;
+						}
+					}
+				}
+			}
+			$addressColumnWidth: 320px;
+			$addressColumnPaddingRight: 12px;
+			$addressColumnUsefulWidth: $addressColumnWidth - $addressColumnPaddingRight;
+  			.df-body-left {
+				/*
+					Используем технику вёрстки двухколоночного макета,
+					когда левая колонка должна быть фиксированной ширины, а правая — резиновой.
+					@link http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
+				*/
+				float: left;
+				width: $addressColumnWidth;
+				margin-left: -100%;
+				.df-body-left-inner {
+					padding: 0 $addressColumnPaddingRight 0 0;
+					h2 {
+						background: {
+							image: url('../../images/checkout/ergonomic/step/number/1.png');
+							repeat: no-repeat;
+						}
+					}
+					#opc-shipping {
+						margin-top: 16px;
+					}
+				}
+				label {
+					text-transform: lowercase;
+				}
+  			}
+  			.df-body-right {
+				/*
+					Используем технику вёрстки двухколоночного макета,
+					когда левая колонка должна быть фиксированной ширины, а правая — резиновой.
+					@link http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
+				*/
+				width: 100%;
+				float: left;
+				.df-body-right-inner {
+					margin-left: $addressColumnWidth + 12px;
+					.df-body-right-top {
+						width: 100%;
+						overflow: hidden;
+					}
+				}
+  			}
+			h2 {
+				font-size: 15px;
+				text-transform: uppercase;
+				font-weight: bold;
+				color: rgb(64, 64, 64);
+				background: {
+					position: top left;
+					repeat: no-repeat;
+				}
+				padding: 0 0 0 41px;
+				height: 41px;
+				line-height: 30px;
+			}
+			.df-h3 {
+				font-size: 12px;
+				text-transform: uppercase;
+				font-weight: bold;
+				color: rgb(64, 64, 64);
+				line-height: 25px;
+			}
+			.df-block {
+				.form-list {
+					input.input-text, select {
+						/**
+							box-sizing — очень полезное правило, появившееся в CSS3.
+							Мы говорим системе, что $width — - окончательная ширина поля ввода,
+							вне зависимости от border и padding.
+							Раньше между темами Default и RWD
+							был разнобой в использовании этого свойства,
+							(да и у других тем тоже, наверное),
+							поэтому сразу устанавливаем общие правила для всех тем.
+						*/
+						-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+						-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+						box-sizing: border-box;         /* Opera/IE 8+ */
+					}
+					li.fields {
+						width: 100%;
+						overflow: hidden;
+						$addressColumnHalfPart: $addressColumnUsefulWidth / 2 - 4px;
+						@mixin mixin-field($width) {
+							width: $width;
+							float: left;
+							.input-box {
+								width: $width;
+								clear: none;
+								input.input-text, select {
+									width: $width;
+								}
+							}
+						}
+						div.field {
+							@include mixin-field($addressColumnHalfPart);
+							&.df-field-country_id {
+								@include mixin-field($addressColumnHalfPart - 60px);
+							}
+							&.df-field-region {
+								@include mixin-field($addressColumnHalfPart + 60px);
+							}
+							&:last-child {
+								float: right;
+							}
+						}
+					}
+					li.wide {
+						width: 100%;
+						.field {
+							width: 100%;
+						}
+						/**
+							Не помещаем правило .input-box внутрь правила .field,
+							потому что для авторизованного покупателя
+							выпадающий список выбора адреса доставки
+							не расположен внутри .field.
+						*/
+						.input-box  {
+							width: 100%;
+							input.input-text, select {
+								width: 100%;
+							}
+						}
+					}
+					.df-field-street {
+						.df-street-line-1 {
+							margin: 0 0 8px 0;
+						}
+					}
+				}
+				#billing-buttons-container
+				,#shipping-buttons-container
+				,#payment-buttons-container
+				,#shipping-method-buttons-container {
+					display: none;
+					clear: none;
+				}
+				.messages {
+					p {
+						margin: 0.25em 0;
+						line-height: 1;
+					}
+					b,strong {
+						font-weight: bold;
+					}
+				}
+			}
+			.df-block-login {
+				.col2-set {
+					.col-1
+					,.col-2 {
+						float: none;
+						width: auto;
+					}
+					.col-1 {
+						h3, p, h4, ul.ul {
+							display: none;
+						}
+					}
+					.col-2 {
+						h4, p {
+							display: none;
+						}
+					}
+				}
+			}
+			#co-shipping-form {
+				/*
+					Оформительская тема TemplateMonster #43373
+					портит нам значения border, padding и background.
+					Делаю общее правило сразу для всех тем, потому что и ккия-нибудь другая тема
+					также может портить.
+				*/
+				border: 0;
+				padding: 0;
+				background: none;
+				.control {
+					display: none;
+				}
+			}
+			.df-column-2
+			,.df-column-3 {
+				width: 49%;
+				float: left;
+				.buttons-set {
+					display: none;
+				}
+			}
+			.df-column-2 {
+				h2 {
+					background: {
+						image: url('../../images/checkout/ergonomic/step/number/2.png');
+						repeat: no-repeat;
+					}
+				}
+			}
+			.df-column-3 {
+				margin-left: 2%;
+				h2 {
+					background: {
+						image: url('../../images/checkout/ergonomic/step/number/3.png');
+						repeat: no-repeat;
+					}
+				}
+			}
+			.df-block-method-review {
+                margin: 1em 0 0 0;
+				h2 {
+					background: {
+						image: url('../../images/checkout/ergonomic/step/number/4.png');
+						repeat: no-repeat;
+					}
+				}
+				/* Стили стандартной темы Magento */
+				/* Data Table */
+				.data-table { width:100%; border:1px solid #bebcb7; }
+				.data-table .odd  { background:#f8f7f5 }
+				.data-table .even { background:#eeeded; }
+				/*.data-table tr.odd:hover,
+				.data-table tr.even:hover { background:#ebf1f6; }*/
+				.data-table td.last,
+				.data-table th.last { border-right:0; }
+				.data-table tr.last th,
+				.data-table tr.last td { border-bottom:0 !important; }
+				.data-table th { padding:3px 8px; font-weight:bold; }
+				.data-table td { padding:3px 8px; line-height: 1.7; }
+
+				.data-table thead th { font-weight:bold; border-right:1px solid #c2d3e0; padding:2px 8px; color:#0a263c; white-space:nowrap; vertical-align:middle; }
+				.data-table thead th.wrap { white-space:normal; }
+				.data-table thead th a,
+				.data-table thead th a:hover { color:#fff; }
+				.data-table thead th { background:url(../../../../../default/default/images/bkg_th.gif) repeat-x 0 100% #d9e5ee; }
+				.data-table thead th .tax-flag { font-size:11px; white-space:nowrap; }
+
+				.data-table tfoot { border-bottom:1px solid #d9dde3; }
+				.data-table tfoot tr.first td { background:url(../../../../../default/default/images/bkg_tfoot.gif) 0 0 repeat-x; }
+				.data-table tfoot tr { background-color:#dee5e8 !important; }
+				.data-table tfoot td { padding-top:1px; padding-bottom:1px; border-bottom:0; border-right:1px solid #d9dde3; }
+				.data-table tfoot strong { font-size:16px; }
+
+				.data-table tbody th,
+				.data-table tbody td { border-bottom:1px solid #d9dde3; border-right:1px solid #d9dde3; }
+				/* Bundle products tables */
+				.data-table tbody.odd tr { background:#f8f7f5 !important; }
+				.data-table tbody.even tr { background:#f6f6f6 !important; }
+				.data-table tbody.odd tr td,
+				.data-table tbody.even tr td { border-bottom:0; }
+				.data-table tbody.odd tr.border td,
+				.data-table tbody.even tr.border td { border-bottom:1px solid #d9dde3; }
+				.data-table tbody td .option-label { font-weight:bold; font-style:italic; }
+				.data-table tbody td .option-value { padding-left:10px; }
+
+				#checkout-review-submit {
+					margin-top: 20px;
+					.buttons-set {
+						clear: none;
+						/** Тема Default добавляет рамку. Нам это не надо */
+						border: 0;
+					}
+					#review-buttons-container {
+						width: 100%;
+						overflow: hidden;
+						padding-left: 0;
+						padding-right: 0;
+						.f-left {
+							float: left;
+						}
+						.btn-checkout {
+							margin: 0;
+						}
+					}
+					#checkout-agreements {
+						display: block;
+						.buttons-set {
+							margin: 0;
+							padding: 0;
+						}
+						.checkout-agreements {
+							.agreement-content {
+								/** RWD устанавливает 670 */
+								max-width: none;
+							}
+							li {
+								margin-bottom: 0;
+								margin-top: 20px;
+								&:nth-child(1) {
+									margin-top: 0;
+									border: 1px solid red;
+								}
+							}
+							p.agree {
+								label {
+									/** RWD отображает бледно */
+									font-weight: bold;
+								}
+							}
+							.buttons-set {
+								clear: none;
+								margin: 0;
+								border: 0;
+								padding: 0;
+							}
+						}
+						.df-order-comments-topmost {
+							label {
+								/* display: inline ломает отображение */
+								display: block;
+								/** Magento Enteprise ставит .form-list .label {width: 225px;} */
+								width: auto;
+								/** Magento Enteprise ставит .form-list .label {text-align: right;} */
+								text-align: left;
+								/** RWD отображает бледно */
+								font-weight: bold;
+							}
+							.df-order-comment-container {
+				 				width: 75%;
+								textarea {
+									display: block;
+									width: 100%;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		#checkout-payment-method-load {
+			dt {
+				margin: 2px 0 0 0;
+				label {
+					font-weight:bold;
+					color:#666;
+				}
+			}
+		}
+		#co-billing-form {
+			> fieldset {
+				/*
+					Оформительская тема TemplateMonster #43373 портит нам эти значения.
+					Делаю общее правило сразу для всех тем, потому что и ккия-нибудь другая тема
+					также может портить.
+				*/
+				border: 0;
+				background: none;
+				padding: 0;
+			}
+		}
+	}
+}
+/* Раньше эти правила применялись лишь для отдельных оформительских тем,
+   но, похоже, разумно применить их сразу для всех тем.
+*/
+#df-login {
+	#login-form {
+		.form-list {
+			div.input-box {
+				input.input-text {
+					width: 250px;
+				}
+			}
+		}
+	}
+}
+.fancybox-inner {
+	#df-login.account-login {
+		width: auto;
+		.registered-users {
+			float: none;
+			width: auto;
+			/*
+				Оформительская тема TemplateMonster #43373
+				норовит установить здесь 280px.
+			*/
+			min-height: auto;
+			/*
+				Почему-то в оформительских темах Infortis Ultimo и Infortis Fortis
+				(а, может, и других), у надписей над полями ввода адреса почты и пароля
+				выравнивание сбивается на центральное.
+				Нам всегда нужно для этих надписей выравнивание по левому краю,
+				поэтому делаем данное правило общим.
+			*/
+			.input-box {
+				text-align: left;
+			}
+			.buttons-set {
+				/*
+					Оформительская тема TemplateMonster #43373
+					норовит установить здесь clear: both.
+				*/
+				clear: none;
+				/*
+					Оформительская тема TemplateMonster #43373
+					норовит установить здесь margin-top: -19px.
+				*/
+				margin-top: 0;
+			}
+		}
+	}
+}

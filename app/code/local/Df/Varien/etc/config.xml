@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Varien>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Varien>
+	</modules>
+	<global>
+		<blocks><df_varien><class>Df_Varien_Block</class></df_varien></blocks>
+		<helpers><df_varien><class>Df_Varien_Helper</class></df_varien></helpers>
+	</global>
+</config>

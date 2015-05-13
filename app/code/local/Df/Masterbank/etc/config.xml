@@ -1,0 +1,128 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Masterbank>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Masterbank>
+	</modules>
+	<global>
+		<blocks><df_masterbank><class>Df_Masterbank_Block</class></df_masterbank></blocks>
+		<helpers><df_masterbank><class>Df_Masterbank_Helper</class></df_masterbank></helpers>
+		<models><df_masterbank><class>Df_Masterbank_Model</class></df_masterbank></models>
+	</global>
+	<default>
+		<!--
+			Применение для настроек нестандартного ключа df_payment вместо payment
+			позволяет нам расположить настройки наших платёжных модулей
+			не в группе стандартных платёжных модулей,а в группе Российской сборки
+		-->
+		<df_payment>
+			<masterbank>
+				<active>0</active>
+				<payment_service__test>0</payment_service__test>
+				<payment_service__currency>RUB</payment_service__currency>
+				<payment_service__payment_methods>df-all</payment_service__payment_methods>
+				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
+				<payment_service__card_payment_action>authorize</payment_service__card_payment_action>
+				<frontend__allowspecific>0</frontend__allowspecific>
+				<frontend__description><![CDATA[После нажатия кнопки «Подтвердить заказ»
+Вы будете перенаправлены на платёжную страницу Мастер-Банка,
+где сможете оплатить Ваш заказ банковской картой.]]></frontend__description>
+				<frontend__message_failure><![CDATA[К сожалению, оплата заказа не удалась.
+<br/>Сообщение платёжного шлюза
+{название платёжного шлюза в родительном падеже}: «{сообщение от платёжного шлюза}».
+<br/>Возможно, Вы ввели на платёжной странице
+{название платёжного шлюза в родительном падеже} неточные данные?
+<br/>Попробуйте оформить Ваш заказ повторно.
+<br/>Если оплатить заказ через {название платёжного шлюза в именительном падеже}
+не получается — попробуйте другой способ оплаты
+или оформите Ваш заказ по телефону {телефон магазина}.]]></frontend__message_failure>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__specificcountry></frontend__specificcountry>
+				<frontend__title>Банковская карта</frontend__title>
+			</masterbank>
+		</df_payment>
+		<!--
+			Система использует ключ «payment»
+			для сопоставления кода (идентификатора) способа оплаты
+			и программного класса (в терминах PHP) этого способа
+		-->
+		<payment>
+			<df-masterbank>
+				<model>df_masterbank/payment</model>
+			</df-masterbank>
+		</payment>
+	</default>
+	<frontend>
+		<routers>
+			<df_masterbank>
+				<use>standard</use>
+				<args>
+					<module>Df_Masterbank</module>
+					<frontName>df-masterbank</frontName>
+				</args>
+			</df_masterbank>
+		</routers>
+	</frontend>
+	<df>
+		<features>
+			<df-masterbank>
+				<module>df_masterbank</module>
+				<title>Мастер-Банк</title>
+				<url>http://magento-forum.ru/forum/319/</url>
+			</df-masterbank>
+		</features>
+		<payment>
+			<masterbank>
+				<currencies>
+					<allowed>
+						RUB
+					</allowed>
+					<code-translation>
+						<RUB>810</RUB>
+					</code-translation>
+				</currencies>
+				<locales>
+					<allowed>ru_RU,en_US</allowed>
+					<code-translation>
+						<ru_RU>rus</ru_RU>
+						<en_US>eng</en_US>
+					</code-translation>
+				</locales>
+				<!-- Название платёжного шлюза для диагностических сообщений -->
+				<names>
+					<!-- именительный падеж -->
+					<nominative>Мастер-Банк</nominative>
+					<!-- родительный падеж -->
+					<genitive>Мастер-Банка</genitive>
+					<!-- дательный падеж -->
+					<dative>Мастер-Банку</dative>
+					<!-- творительный падеж -->
+					<instrumental>Мастер-Банком</instrumental>
+				</names>
+				<request>
+					<confirmation>
+						<payment>
+							<!-- размер платежа -->
+							<amount>AMOUNT</amount>
+						</payment>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature>SIGN_CALLBACK</signature>
+						</request>
+						<response>
+							<content-type>text/plain</content-type>
+						</response>
+					</confirmation>
+				</request>
+				<url>
+					<payment_page>https://pay.masterbank.ru/acquiring</payment_page>
+				</url>
+			</masterbank>
+		</payment>
+	</df>
+</config>

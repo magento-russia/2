@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#simpleupload_dlg.title}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/dialog.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/dialog.css" />
+
+</head>
+<body>
+
+<form id="simpleupload_form" onsubmit="return AIM.submit(this, {'onStart' : SimpleuploadDialog.startCallback, 'onComplete' : SimpleuploadDialog.completeCallback})" action="#" method="post" enctype="multipart/form-data">
+	<p>
+	<div class="simpleupload_errors" id="simpleupload_errors"></div>
+		<table width="100%">
+			<tr>
+				<td>
+					{#simpleupload_dlg.select_image}(.jpg .png .gif): <br>
+					<input id="simpleupload_file" name="simpleupload_file" type="file" class="simleupload_file" />
+				</td>
+				<td>
+					<img src="img/loading.gif" id="simpleupload_loading" style="display:none;" width="32" height="32"/>
+				</td>
+			</tr>
+		</table>
+	</p>
+
+	<div class="mceActionPanel">
+		<input type="submit" id="insert" name="insert" value="{#insert}" />
+		<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+	</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<?xml version='1.0'?>
+<config>
+	<df>
+		<yandex-market>
+			<countries>
+				<country>
+					<code>VG</code>
+					<yandex-market>Британские Виргинские острова</yandex-market>
+					<magento>Британские Виргинские Острова</magento>
+				</country>
+				<country>
+					<code>BN</code>
+					<yandex-market>Бруней</yandex-market>
+					<magento>Бруней Даруссалам</magento>
+				</country>
+				<country>
+					<code>BF</code>
+					<yandex-market>Буркина-Фасо</yandex-market>
+					<magento>Буркина Фасо</magento>
+				</country>
+				<country>
+					<code>GW</code>
+					<yandex-market>Гвинея-Бисау</yandex-market>
+					<magento>Гвинея-Биссау</magento>
+				</country>
+				<country>
+					<code>HK</code>
+					<yandex-market>Китай</yandex-market>
+					<magento>Гонконг</magento>
+				</country>
+				<country>
+					<code>CV</code>
+					<yandex-market>Кабо-Верде</yandex-market>
+					<magento>Острова Зеленого Мыса</magento>
+				</country>
+				<country>
+					<code>CG</code>
+					<yandex-market>Республика Конго</yandex-market>
+					<magento>Конго</magento>
+				</country>
+				<country>
+					<code>KP</code>
+					<yandex-market>Северная Корея</yandex-market>
+					<magento>Корейская Народно-Демократическая Республика</magento>
+				</country>
+				<country>
+					<code>CI</code>
+					<yandex-market>Кот-д'Ивуар</yandex-market>
+					<magento>Кот д’Ивуар</magento>
+				</country>
+				<country>
+					<code>KG</code>
+					<yandex-market>Киргизия</yandex-market>
+					<magento>Кыргызстан</magento>
+				</country>
+				<country>
+					<code>MO</code>
+					<yandex-market>Китай</yandex-market>
+					<magento>Макао (особый административный район КНР)</magento>
+				</country>
+				<country>
+					<code>MH</code>
+					<yandex-market>Маршалловы острова</yandex-market>
+					<magento>Маршалловы Острова</magento>
+				</country>
+				<country>
+					<code>PG</code>
+					<yandex-market>Папуа - Новая Гвинея</yandex-market>
+					<magento>Папуа-Новая Гвинея</magento>
+				</country>
+				<country>
+					<code>PR</code>
+					<yandex-market></yandex-market>
+					<magento>Пуэрто-Рико</magento>
+				</country>
+				<country>
+					<code>KR</code>
+					<yandex-market>Южная Корея</yandex-market>
+					<magento>Республика Корея</magento>
+				</country>
+				<country>
+					<code>SG</code>
+					<yandex-market>Сингапур (страна)</yandex-market>
+					<magento>Сингапур</magento>
+				</country>
+				<country>
+					<code>KN</code>
+					<yandex-market>Сент-Китс и Невис</yandex-market>
+					<magento>Сент-Киттс и Невис</magento>
+				</country>
+				<country>
+					<code>SY</code>
+					<yandex-market>Сирия</yandex-market>
+					<magento>Сирийская Арабская Республика</magento>
+				</country>
+				<country>
+					<code>TW</code>
+					<yandex-market>Китай</yandex-market>
+					<magento>Тайвань</magento>
+				</country>
+				<country>
+					<code>TC</code>
+					<yandex-market>Тёркс и Кайкос</yandex-market>
+					<magento>Острова Тёркс и Кайкос</magento>
+				</country>
+				<country>
+					<code>TM</code>
+					<yandex-market>Туркмения</yandex-market>
+					<magento>Туркменистан</magento>
+				</country>
+				<country>
+					<code>CZ</code>
+					<yandex-market>Чехия</yandex-market>
+					<magento>Чешская республика</magento>
+				</country>
+				<country>
+					<code>ZA</code>
+					<yandex-market>ЮАР</yandex-market>
+					<magento>Южная Африка</magento>
+				</country>
+				<country>
+					<code>AX</code>
+					<yandex-market></yandex-market>
+					<magento>Аландские острова</magento>
+				</country>
+				<country>
+					<code>AS</code>
+					<yandex-market></yandex-market>
+					<magento>Американское Самоа</magento>
+				</country>
+				<country>
+					<code>AI</code>
+					<yandex-market></yandex-market>
+					<magento>Ангуилла</magento>
+				</country>
+				<country>
+					<code>AQ</code>
+					<yandex-market></yandex-market>
+					<magento>Антарктика</magento>
+				</country>
+				<country>
+					<code>IO</code>
+					<yandex-market></yandex-market>
+					<magento>Британская территория в Индийском океане</magento>
+				</country>
+				<country>
+					<code>UM</code>
+					<yandex-market></yandex-market>
+					<magento>Внешние малые острова (США)</magento>
+				</country>
+				<country>
+					<code>GG</code>
+					<yandex-market></yandex-market>
+					<magento>Гернси</magento>
+				</country>
+				<country>
+					<code>GU</code>
+					<yandex-market></yandex-market>
+					<magento>Гуам</magento>
+				</country>
+				<country>
+					<code>JE</code>
+					<yandex-market></yandex-market>
+					<magento>Джерси</magento>
+				</country>
+				<country>
+					<code>CC</code>
+					<yandex-market></yandex-market>
+					<magento>Кокосовые острова</magento>
+				</country>
+				<country>
+					<code>MQ</code>
+					<yandex-market></yandex-market>
+					<magento>Мартиник</magento>
+				</country>
+				<country>
+					<code>MS</code>
+					<yandex-market></yandex-market>
+					<magento>Монсеррат</magento>
+				</country>
+				<country>
+					<code>NU</code>
+					<yandex-market></yandex-market>
+					<magento>Ниуе</magento>
+				</country>
+				<country>
+					<code>BV</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Буве</magento>
+				</country>
+				<country>
+					<code>DM</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Доминика</magento>
+				</country>
+				<country>
+					<code>IM</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Мэн</magento>
+				</country>
+				<country>
+					<code>NF</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Норфолк</magento>
+				</country>
+				<country>
+					<code>CX</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Рождества</magento>
+				</country>
+				<country>
+					<code>BL</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Святого Бартоломея</magento>
+				</country>
+				<country>
+					<code>MF</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Святого Мартина</magento>
+				</country>
+				<country>
+					<code>SH</code>
+					<yandex-market></yandex-market>
+					<magento>Остров Святой Елены</magento>
+				</country>
+				<country>
+					<code>HM</code>
+					<yandex-market></yandex-market>
+					<magento>Острова Херд и Макдональд</magento>
+				</country>
+				<country>
+					<code>PS</code>
+					<yandex-market></yandex-market>
+					<magento>Палестинская автономия</magento>
+				</country>
+				<country>
+					<code>PN</code>
+					<yandex-market></yandex-market>
+					<magento>Питкерн</magento>
+				</country>
+				<country>
+					<code>SV</code>
+					<yandex-market></yandex-market>
+					<magento>Сальвадор</magento>
+				</country>
+				<country>
+					<code>SJ</code>
+					<yandex-market></yandex-market>
+					<magento>Свальбард и Ян-Майен</magento>
+				</country>
+				<country>
+					<code>MP</code>
+					<yandex-market></yandex-market>
+					<magento>Северные Марианские Острова</magento>
+				</country>
+				<country>
+					<code>PM</code>
+					<yandex-market></yandex-market>
+					<magento>Сен-Пьер и Микелон</magento>
+				</country>
+				<country>
+					<code>SB</code>
+					<yandex-market></yandex-market>
+					<magento>Соломоновы Острова</magento>
+				</country>
+				<country>
+					<code>TK</code>
+					<yandex-market></yandex-market>
+					<magento>Токелау</magento>
+				</country>
+				<country>
+					<code>WF</code>
+					<yandex-market></yandex-market>
+					<magento>Уоллис и Футуна</magento>
+				</country>
+				<country>
+					<code>FO</code>
+					<yandex-market></yandex-market>
+					<magento>Фарерские острова</magento>
+				</country>
+				<country>
+					<code>FK</code>
+					<yandex-market></yandex-market>
+					<magento>Фолклендские острова</magento>
+				</country>
+				<country>
+					<code>TF</code>
+					<yandex-market></yandex-market>
+					<magento>Французские Южные Территории</magento>
+				</country>
+				<country>
+					<code>GS</code>
+					<yandex-market></yandex-market>
+					<magento>Южная Джорджия и Южные Сандвичевы Острова</magento>
+				</country>
+			</countries>
+		</yandex-market>
+	</df>
+</config>

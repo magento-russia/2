@@ -1,0 +1,1496 @@
+{
+	"AD": {
+		"nominative": "Андорра",
+		"genitive": "Андорры",
+		"dative": "Андорре",
+		"accusative": "Андорру"
+	},
+	"AE": {
+		"nominative": "ОАЭ",
+		"genitive": "ОАЭ",
+		"dative": "ОАЭ",
+		"accusative": "ОАЭ"
+	},
+	"AF": {
+		"nominative": "Афганистан",
+		"genitive": "Афганистана",
+		"dative": "Афганистану",
+		"accusative": "Афганистан"
+	},
+	"AG": {
+		"nominative": "Антигуа и Барбуда",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"AI": {
+		"nominative": "Ангилья",
+		"genitive": "Ангильи",
+		"dative": "Ангилье",
+		"accusative": "Ангилью"
+	},
+	"AL": {
+		"nominative": "Албания",
+		"genitive": "Албании",
+		"dative": "Албании",
+		"accusative": "Албанию"
+	},
+	"AM": {
+		"nominative": "Армения",
+		"genitive": "Армении",
+		"dative": "Армении",
+		"accusative": "Армению"
+	},
+	"AO": {
+		"nominative": "Ангола",
+		"genitive": "Анголы",
+		"dative": "Анголе",
+		"accusative": "Анголу"
+	},
+	"AQ": {
+		"nominative": "Антарктида",
+		"genitive": "Антарктиды",
+		"dative": "Антарктиде",
+		"accusative": "Антарктиду"
+	},
+	"AR": {
+		"nominative": "Аргентина",
+		"genitive": "Аргентины",
+		"dative": "Аргентине",
+		"accusative": "Аргентину"
+	},
+	"AS": {
+		"nominative": "Американское Самоа",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"AT": {
+		"nominative": "Австрия",
+		"genitive": "Австрии",
+		"dative": "Австрии",
+		"accusative": "Австрию"
+	},
+	"AU": {
+		"nominative": "Австралия",
+		"genitive": "Австралии",
+		"dative": "Австралии",
+		"accusative": "Австралию"
+	},
+	"AW": {
+		"nominative": "Аруба",
+		"genitive": "Арубы",
+		"dative": "Арубе",
+		"accusative": "Арубу"
+	},
+	"AX": {
+		"nominative": "Аландские острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"AZ": {
+		"nominative": "Азербайджан",
+		"genitive": "Азербайджана",
+		"dative": "Азербайджану",
+		"accusative": "Азербайджан"
+	},
+	"BA": {
+		"nominative": "Босния и Герцеговина",
+		"genitive": "Боснии и Герцеговины",
+		"dative": "Боснии и Герцеговине",
+		"accusative": "Боснию и Герцеговину"
+	},
+	"BB": {
+		"nominative": "Барбадос",
+		"genitive": "Барбадоса",
+		"dative": "Барбадосу",
+		"accusative": "Барбадос"
+	},
+	"BD": {
+		"nominative": "Бангладеш",
+		"genitive": "Бангладеша",
+		"dative": "Бангладешу",
+		"accusative": "Бангладеш"
+	},
+	"BE": {
+		"nominative": "Бельгия",
+		"genitive": "Бельгии",
+		"dative": "Бельгии",
+		"accusative": "Бельгию"
+	},
+	"BF": {
+		"nominative": "Буркина-Фасо",
+		"genitive": "Буркина-Фасо",
+		"dative": "Буркина-Фасо",
+		"accusative": "Буркина-Фасо"
+	},
+	"BG": {
+		"nominative": "Болгария",
+		"genitive": "Болгарии",
+		"dative": "Болгарии",
+		"accusative": "Болгарию"
+	},
+	"BH": {
+		"nominative": "Бахрейн",
+		"genitive": "Бахрейна",
+		"dative": "Бахрейну",
+		"accusative": "Бахрейн"
+	},
+	"BI": {
+		"nominative": "Бурунди",
+		"genitive": "Бурунди",
+		"dative": "Бурунди",
+		"accusative": "Бурунди"
+	},
+	"BJ": {
+		"nominative": "Бенин",
+		"genitive": "Бенина",
+		"dative": "Бенину",
+		"accusative": "Бенин"
+	},
+	"BL": {
+		"nominative": "Сен-Бартелеми",
+		"genitive": "Сен-Бартелеми",
+		"dative": "Сен-Бартелеми",
+		"accusative": "Сен-Бартелеми"
+	},
+	"BM": {
+		"nominative": "Бермуды",
+		"genitive": "Бермудов",
+		"dative": "Бермудам",
+		"accusative": "Бермуды"
+	},
+	"BN": {
+		"nominative": "Бруней",
+		"genitive": "Брунея",
+		"dative": "Брунею",
+		"accusative": "Бруней"
+	},
+	"BO": {
+		"nominative": "Боливия",
+		"genitive": "Боливии",
+		"dative": "Боливии",
+		"accusative": "Боливию"
+	},
+	"BQ": {
+		"nominative": "Бонэйр, Синт-Эстатиус и Саба",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"BR": {
+		"nominative": "Бразилия",
+		"genitive": "Бразилии",
+		"dative": "Бразилии",
+		"accusative": "Бразилию"
+	},
+	"BS": {
+		"nominative": "Багамы",
+		"genitive": "Багамов",
+		"dative": "Багамам",
+		"accusative": "Багамы"
+	},
+	"BT": {
+		"nominative": "Бутан",
+		"genitive": "Бутана",
+		"dative": "Бутану",
+		"accusative": "Бутан"
+	},
+	"BV": {
+		"nominative": "Остров Буве",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"BW": {
+		"nominative": "Ботсвана",
+		"genitive": "Ботсваны",
+		"dative": "Ботсване",
+		"accusative": "Ботсвану"
+	},
+	"BY": {
+		"nominative": "Белоруссия",
+		"genitive": "Белоруссии",
+		"dative": "Белоруссии",
+		"accusative": "Белоруссию"
+	},
+	"BZ": {
+		"nominative": "Белиз",
+		"genitive": "Белиза",
+		"dative": "Белизу",
+		"accusative": "Белиз"
+	},
+	"CA": {
+		"nominative": "Канада",
+		"genitive": "Канады",
+		"dative": "Канаде",
+		"accusative": "Канаду"
+	},
+	"CC": {
+		"nominative": "Кокосовые острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CD": {
+		"nominative": "ДР Конго",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CF": {
+		"nominative": "ЦАР",
+		"genitive": "ЦАР",
+		"dative": "ЦАР",
+		"accusative": "ЦАР"
+	},
+	"CG": {
+		"nominative": "Республика Конго",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CH": {
+		"nominative": "Швейцария",
+		"genitive": "Швейцарии",
+		"dative": "Швейцарии",
+		"accusative": "Швейцарию"
+	},
+	"CI": {
+		"nominative": "Кот-д’Ивуар",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CK": {
+		"nominative": "Острова Кука",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CL": {
+		"nominative": "Чили",
+		"genitive": "Чили",
+		"dative": "Чили",
+		"accusative": "Чили"
+	},
+	"CM": {
+		"nominative": "Камерун",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CN": {
+		"nominative": "Китай",
+		"genitive": "Китая",
+		"dative": "Китаю",
+		"accusative": "Китай"
+	},
+	"CO": {
+		"nominative": "Колумбия",
+		"genitive": "Колумбии",
+		"dative": "Колумбии",
+		"accusative": "Колумбию"
+	},
+	"CR": {
+		"nominative": "Коста-Рика",
+		"genitive": "Коста-Рики",
+		"dative": "Коста-Рике",
+		"accusative": "Коста-Рику"
+	},
+	"CU": {
+		"nominative": "Куба",
+		"genitive": "Кубы",
+		"dative": "Кубе",
+		"accusative": "Кубу"
+	},
+	"CV": {
+		"nominative": "Кабо-Верде",
+		"genitive": "Кабо-Верде",
+		"dative": "Кабо-Верде",
+		"accusative": "Кабо-Верде"
+	},
+	"CW": {
+		"nominative": "Кюрасао",
+		"genitive": "Кюрасао",
+		"dative": "Кюрасао",
+		"accusative": "Кюрасао"
+	},
+	"CX": {
+		"nominative": "Остров Рождества",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"CY": {
+		"nominative": "Кипр",
+		"genitive": "Кипра",
+		"dative": "Кипру",
+		"accusative": "Кипр"
+	},
+	"CZ": {
+		"nominative": "Чехия",
+		"genitive": "Чехии",
+		"dative": "Чехии",
+		"accusative": "Чехию"
+	},
+	"DE": {
+		"nominative": "Германия",
+		"genitive": "Германии",
+		"dative": "Германии",
+		"accusative": "Германию"
+	},
+	"DJ": {
+		"nominative": "Джибути",
+		"genitive": "Джибути",
+		"dative": "Джибути",
+		"accusative": "Джибути"
+	},
+	"DK": {
+		"nominative": "Дания",
+		"genitive": "Дании",
+		"dative": "Дании",
+		"accusative": "Данию"
+	},
+	"DM": {
+		"nominative": "Доминика",
+		"genitive": "Доминики",
+		"dative": "Доминике",
+		"accusative": "Доминику"
+	},
+	"DO": {
+		"nominative": "Доминиканская Республика",
+		"genitive": "Доминиканской Республики",
+		"dative": "Доминиканской Республике",
+		"accusative": "Доминиканскую Республику"
+	},
+	"DZ": {
+		"nominative": "Алжир",
+		"genitive": "Алжира",
+		"dative": "Алжиру",
+		"accusative": "Алжир"
+	},
+	"EC": {
+		"nominative": "Эквадор",
+		"genitive": "Эквадора",
+		"dative": "Эквадору",
+		"accusative": "Эквадор"
+	},
+	"EE": {
+		"nominative": "Эстония",
+		"genitive": "Эстонии",
+		"dative": "Эстонии",
+		"accusative": "Эстонию"
+	},
+	"EG": {
+		"nominative": "Египет",
+		"genitive": "Египта",
+		"dative": "Египту",
+		"accusative": "Египет"
+	},
+	"EH": {
+		"nominative": "Западная Сахара",
+		"genitive": "Западной Сахары",
+		"dative": "Западной Сахаре",
+		"accusative": "Западную Сахару"
+	},
+	"ER": {
+		"nominative": "Эритрея",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"ES": {
+		"nominative": "Испания",
+		"genitive": "Испании",
+		"dative": "Испании",
+		"accusative": "Испанию"
+	},
+	"ET": {
+		"nominative": "Эфиопия",
+		"genitive": "Эфиопии",
+		"dative": "Эфиопии",
+		"accusative": "Эфиопию"
+	},
+	"FI": {
+		"nominative": "Финляндия",
+		"genitive": "Финляндии",
+		"dative": "Финляндии",
+		"accusative": "Финляндию"
+	},
+	"FJ": {
+		"nominative": "Фиджи",
+		"genitive": "Фиджи",
+		"dative": "Фиджи",
+		"accusative": "Фиджи"
+	},
+	"FK": {
+		"nominative": "Фолклендские острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"FM": {
+		"nominative": "Микронезия",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"FO": {
+		"nominative": "Фарерские острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"FR": {
+		"nominative": "Франция",
+		"genitive": "Франции",
+		"dative": "Франции",
+		"accusative": "Францию"
+	},
+	"GA": {
+		"nominative": "Габон",
+		"genitive": "Габона",
+		"dative": "Габону",
+		"accusative": "Габон"
+	},
+	"GB": {
+		"nominative": "Великобритания",
+		"genitive": "Великобритании",
+		"dative": "Великобритании",
+		"accusative": "Великобританию"
+	},
+	"GD": {
+		"nominative": "Гренада",
+		"genitive": "Гренады",
+		"dative": "Гренаде",
+		"accusative": "Гренаду"
+	},
+	"GE": {
+		"nominative": "Грузия",
+		"genitive": "Грузии",
+		"dative": "Грузии",
+		"accusative": "Грузию"
+	},
+	"GF": {
+		"nominative": "Гвиана",
+		"genitive": "Гвианы",
+		"dative": "Гвиане",
+		"accusative": "Гвиану"
+	},
+	"GG": {
+		"nominative": "Гернси",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GH": {
+		"nominative": "Гана",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GI": {
+		"nominative": "Гибралтар",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GL": {
+		"nominative": "Гренландия",
+		"genitive": "Гренландии",
+		"dative": "Гренландии",
+		"accusative": "Гренландию"
+	},
+	"GM": {
+		"nominative": "Гамбия",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GN": {
+		"nominative": "Гвинея",
+		"genitive": "Гвинеи",
+		"dative": "Гвинеи",
+		"accusative": "Гвинею"
+	},
+	"GP": {
+		"nominative": "Гваделупа",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GQ": {
+		"nominative": "Экваториальная Гвинея",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GR": {
+		"nominative": "Греция",
+		"genitive": "Греции",
+		"dative": "Греции",
+		"accusative": "Грецию"
+	},
+	"GS": {
+		"nominative": "Южная Георгия и Южные Сандвичевы острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GT": {
+		"nominative": "Гватемала",
+		"genitive": "Гватемалы",
+		"dative": "Гватемале",
+		"accusative": "Гватемалу"
+	},
+	"GU": {
+		"nominative": "Гуам",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GW": {
+		"nominative": "Гвинея-Бисау",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"GY": {
+		"nominative": "Гайана",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"HK": {
+		"nominative": "Гонконг",
+		"genitive": "Гонконга",
+		"dative": "Гонконгу",
+		"accusative": "Гонконг"
+	},
+	"HM": {
+		"nominative": "Херд и Макдональд",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"HN": {
+		"nominative": "Гондурас",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"HR": {
+		"nominative": "Хорватия",
+		"genitive": "Хорватии",
+		"dative": "Хорватии",
+		"accusative": "Хорватию"
+	},
+	"HT": {
+		"nominative": "Гаити",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"HU": {
+		"nominative": "Венгрия",
+		"genitive": "Венгрии",
+		"dative": "Венгрии",
+		"accusative": "Венгрию"
+	},
+	"ID": {
+		"nominative": "Индонезия",
+		"genitive": "Индонезии",
+		"dative": "Индонезии",
+		"accusative": "Индонезию"
+	},
+	"IE": {
+		"nominative": "Ирландия",
+		"genitive": "Ирландии",
+		"dative": "Ирландии",
+		"accusative": "Ирландию"
+	},
+	"IL": {
+		"nominative": "Израиль",
+		"genitive": "Израиля",
+		"dative": "Израилю",
+		"accusative": "Израиль"
+	},
+	"IM": {
+		"nominative": "Остров Мэн",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"IN": {
+		"nominative": "Индия",
+		"genitive": "Индии",
+		"dative": "Индии",
+		"accusative": "Индию"
+	},
+	"IO": {
+		"nominative": "Британская территория в Индийском океане",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"IQ": {
+		"nominative": "Ирак",
+		"genitive": "Ирака",
+		"dative": "Ираку",
+		"accusative": "Ирак"
+	},
+	"IR": {
+		"nominative": "Иран",
+		"genitive": "Ирана",
+		"dative": "Ирану",
+		"accusative": "Иран"
+	},
+	"IS": {
+		"nominative": "Исландия",
+		"genitive": "Исландии",
+		"dative": "Исландии",
+		"accusative": "Исландию"
+	},
+	"IT": {
+		"nominative": "Италия",
+		"genitive": "Италии",
+		"dative": "Италии",
+		"accusative": "Италию"
+	},
+	"JE": {
+		"nominative": "Джерси (остров)",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"JM": {
+		"nominative": "Ямайка",
+		"genitive": "Ямайки",
+		"dative": "Ямайке",
+		"accusative": "Ямайку"
+	},
+	"JO": {
+		"nominative": "Иордания",
+		"genitive": "Иордании",
+		"dative": "Иордании",
+		"accusative": "Иорданию"
+	},
+	"JP": {
+		"nominative": "Япония",
+		"genitive": "Японии",
+		"dative": "Японии",
+		"accusative": "Японию"
+	},
+	"KE": {
+		"nominative": "Кения",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"KG": {
+		"nominative": "Киргизия",
+		"genitive": "Киргизии",
+		"dative": "Киргизии",
+		"accusative": "Киргизию"
+	},
+	"KH": {
+		"nominative": "Камбоджа",
+		"genitive": "Камбоджи",
+		"dative": "Камбодже",
+		"accusative": "Камбоджу"
+	},
+	"KI": {
+		"nominative": "Кирибати",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"KM": {
+		"nominative": "Коморы",
+		"genitive": "Коморов",
+		"dative": "Коморам",
+		"accusative": "Коморы"
+	},
+	"KN": {
+		"nominative": "Сент-Китс и Невис",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"KP": {
+		"nominative": "КНДР",
+		"genitive": "КНДР",
+		"dative": "КНДР",
+		"accusative": "КНДР"
+	},
+	"KR": {
+		"nominative": "Республика Корея",
+		"genitive": "Республики Корея",
+		"dative": "Республике Корея",
+		"accusative": "Республику Корея"
+	},
+	"KW": {
+		"nominative": "Кувейт",
+		"genitive": "Кувейта",
+		"dative": "Кувейту",
+		"accusative": "Кувейт"
+	},
+	"KY": {
+		"nominative": "Каймановы острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"KZ": {
+		"nominative": "Казахстан",
+		"genitive": "Казахстана",
+		"dative": "Казахстану",
+		"accusative": "Казахстан"
+	},
+	"LA": {
+		"nominative": "Лаос",
+		"genitive": "Лаоса",
+		"dative": "Лаосу",
+		"accusative": "Лаос"
+	},
+	"LB": {
+		"nominative": "Ливан",
+		"genitive": "Ливана",
+		"dative": "Ливану",
+		"accusative": "Ливан"
+	},
+	"LC": {
+		"nominative": "Сент-Люсия",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"LI": {
+		"nominative": "Лихтенштейн",
+		"genitive": "Лихтенштейна",
+		"dative": "Лихтенштейну",
+		"accusative": "Лихтенштейн"
+	},
+	"LK": {
+		"nominative": "Шри-Ланка",
+		"genitive": "Шри-Ланки",
+		"dative": "Шри-Ланке",
+		"accusative": "Шри-Ланку"
+	},
+	"LR": {
+		"nominative": "Либерия",
+		"genitive": "Либерии",
+		"dative": "Либерии",
+		"accusative": "Либерию"
+	},
+	"LS": {
+		"nominative": "Лесото",
+		"genitive": "Лесото",
+		"dative": "Лесото",
+		"accusative": "Лесото"
+	},
+	"LT": {
+		"nominative": "Литва",
+		"genitive": "Литвы",
+		"dative": "Литве",
+		"accusative": "Литву"
+	},
+	"LU": {
+		"nominative": "Люксембург",
+		"genitive": "Люксембурга",
+		"dative": "Люксембургу",
+		"accusative": "Люксембург"
+	},
+	"LV": {
+		"nominative": "Латвия",
+		"genitive": "Латвии",
+		"dative": "Латвии",
+		"accusative": "Латвию"
+	},
+	"LY": {
+		"nominative": "Ливия",
+		"genitive": "Ливии",
+		"dative": "Ливии",
+		"accusative": "Ливию"
+	},
+	"MA": {
+		"nominative": "Марокко",
+		"genitive": "Марокко",
+		"dative": "Марокко",
+		"accusative": "Марокко"
+	},
+	"MC": {
+		"nominative": "Монако",
+		"genitive": "Монако",
+		"dative": "Монако",
+		"accusative": "Монако"
+	},
+	"MD": {
+		"nominative": "Молдавия",
+		"genitive": "Молдавии",
+		"dative": "Молдавии",
+		"accusative": "Молдавию"
+	},
+	"ME": {
+		"nominative": "Черногория",
+		"genitive": "Черногории",
+		"dative": "Черногории",
+		"accusative": "Черногорию"
+	},
+	"MF": {
+		"nominative": "Сен-Мартен",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"MG": {
+		"nominative": "Мадагаскар",
+		"genitive": "Мадагаскара",
+		"dative": "Мадагаскару",
+		"accusative": "Мадагаскар"
+	},
+	"MH": {
+		"nominative": "Маршалловы Острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"MK": {
+		"nominative": "Македония",
+		"genitive": "Македонии",
+		"dative": "Македонии",
+		"accusative": "Македонию"
+	},
+	"ML": {
+		"nominative": "Мали",
+		"genitive": "Мали",
+		"dative": "Мали",
+		"accusative": "Мали"
+	},
+	"MM": {
+		"nominative": "Мьянма",
+		"genitive": "Мьянмы",
+		"dative": "Мьянме",
+		"accusative": "Мьянму"
+	},
+	"MN": {
+		"nominative": "Монголия",
+		"genitive": "Монголии",
+		"dative": "Монголии",
+		"accusative": "Монголию"
+	},
+	"MO": {
+		"nominative": "Макао",
+		"genitive": "Макао",
+		"dative": "",
+		"accusative": "Макао"
+	},
+	"MP": {
+		"nominative": "Северные Марианские острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"MQ": {
+		"nominative": "Мартиника",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"MR": {
+		"nominative": "Мавритания",
+		"genitive": "Мавритании",
+		"dative": "Мавритании",
+		"accusative": "Мавританию"
+	},
+	"MS": {
+		"nominative": "Монтсеррат",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"MT": {
+		"nominative": "Мальта",
+		"genitive": "Мальты",
+		"dative": "Мальте",
+		"accusative": "Мальту"
+	},
+	"MU": {
+		"nominative": "Маврикий",
+		"genitive": "Маврикия",
+		"dative": "Маврикию",
+		"accusative": "Маврикий"
+	},
+	"MV": {
+		"nominative": "Мальдивы",
+		"genitive": "Мальдивов",
+		"dative": "Мальдивам",
+		"accusative": "Мальдивы"
+	},
+	"MW": {
+		"nominative": "Малави",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"MX": {
+		"nominative": "Мексика",
+		"genitive": "Мексики",
+		"dative": "Мексике",
+		"accusative": "Мексику"
+	},
+	"MY": {
+		"nominative": "Малайзия",
+		"genitive": "Малайзии",
+		"dative": "Малайзии",
+		"accusative": "Малайзию"
+	},
+	"MZ": {
+		"nominative": "Мозамбик",
+		"genitive": "Мозамбика",
+		"dative": "Мозамбику",
+		"accusative": "Мозамбик"
+	},
+	"NA": {
+		"nominative": "Намибия",
+		"genitive": "Намибии",
+		"dative": "Намибии",
+		"accusative": "Намибию"
+	},
+	"NC": {
+		"nominative": "Новая Каледония",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"NE": {
+		"nominative": "Нигер",
+		"genitive": "Нигера",
+		"dative": "Нигеру",
+		"accusative": "Нигер"
+	},
+	"NF": {
+		"nominative": "Остров Норфолк",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"NG": {
+		"nominative": "Нигерия",
+		"genitive": "Нигерии",
+		"dative": "Нигерии",
+		"accusative": "Нигерию"
+	},
+	"NI": {
+		"nominative": "Никарагуа",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"NL": {
+		"nominative": "Нидерланды",
+		"genitive": "Нидерландов",
+		"dative": "Нидерландам",
+		"accusative": "Нидерланды"
+	},
+	"NO": {
+		"nominative": "Норвегия",
+		"genitive": "Норвегии",
+		"dative": "Норвегии",
+		"accusative": "Норвегию"
+	},
+	"NP": {
+		"nominative": "Непал",
+		"genitive": "Непала",
+		"dative": "Непалу",
+		"accusative": "Непал"
+	},
+	"NR": {
+		"nominative": "Науру",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"NU": {
+		"nominative": "Ниуэ",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"NZ": {
+		"nominative": "Новая Зеландия",
+		"genitive": "Новой Зеландии",
+		"dative": "Новой Зеландии",
+		"accusative": "Новую Зеландию"
+	},
+	"OM": {
+		"nominative": "Оман",
+		"genitive": "Омана",
+		"dative": "Оману",
+		"accusative": "Оман"
+	},
+	"PA": {
+		"nominative": "Панама",
+		"genitive": "Панамы",
+		"dative": "Панаме",
+		"accusative": "Панаму"
+	},
+	"PE": {
+		"nominative": "Перу",
+		"genitive": "Перу",
+		"dative": "Перу",
+		"accusative": "Перу"
+	},
+	"PF": {
+		"nominative": "Французская Полинезия",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"PG": {
+		"nominative": "Папуа — Новая Гвинея",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"PH": {
+		"nominative": "Филиппины",
+		"genitive": "Филиппин",
+		"dative": "Филиппинам",
+		"accusative": "Филиппины"
+	},
+	"PK": {
+		"nominative": "Пакистан",
+		"genitive": "Пакистана",
+		"dative": "Пакистану",
+		"accusative": "Пакистан"
+	},
+	"PL": {
+		"nominative": "Польша",
+		"genitive": "Польши",
+		"dative": "Польше",
+		"accusative": "Польшу"
+	},
+	"PM": {
+		"nominative": "Сен-Пьер и Микелон",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"PN": {
+		"nominative": "Острова Питкэрн",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"PR": {
+		"nominative": "Пуэрто-Рико",
+		"genitive": "Пуэрто-Рико",
+		"dative": "Пуэрто-Рико",
+		"accusative": "Пуэрто-Рико"
+	},
+	"PS": {
+		"nominative": "Палестина",
+		"genitive": "Палестины",
+		"dative": "Палестину",
+		"accusative": "Палестину"
+	},
+	"PT": {
+		"nominative": "Португалия",
+		"genitive": "Португалии",
+		"dative": "Португалии",
+		"accusative": "Португалию"
+	},
+	"PW": {
+		"nominative": "Палау",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"PY": {
+		"nominative": "Парагвай",
+		"genitive": "Парагвая",
+		"dative": "Парагваю",
+		"accusative": "Парагвай"
+	},
+	"QA": {
+		"nominative": "Катар",
+		"genitive": "Катара",
+		"dative": "Катару",
+		"accusative": "Катар"
+	},
+	"RE": {
+		"nominative": "Реюньон",
+		"genitive": "Реюньона",
+		"dative": "Реюньону",
+		"accusative": "Реюньон"
+	},
+	"RO": {
+		"nominative": "Румыния",
+		"genitive": "Румынии",
+		"dative": "Румынии",
+		"accusative": "Румынию"
+	},
+	"RS": {
+		"nominative": "Сербия",
+		"genitive": "Сербии",
+		"dative": "Сербии",
+		"accusative": "Сербию"
+	},
+	"RU": {
+		"nominative": "Россия",
+		"genitive": "России",
+		"dative": "России",
+		"accusative": "Россию"
+	},
+	"RW": {
+		"nominative": "Руанда",
+		"genitive": "Руанды",
+		"dative": "Руанде",
+		"accusative": "Руанду"
+	},
+	"SA": {
+		"nominative": "Саудовская Аравия",
+		"genitive": "Саудовской Аравии",
+		"dative": "Саудовской Аравии",
+		"accusative": "Саудовскую Аравию"
+	},
+	"SB": {
+		"nominative": "Соломоновы Острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"SC": {
+		"nominative": "Сейшельские Острова",
+		"genitive": "Сейшельских Островов",
+		"dative": "Сейшельские Острова",
+		"accusative": "Сейшельские Острова"
+	},
+	"SD": {
+		"nominative": "Судан",
+		"genitive": "Судана",
+		"dative": "Судану",
+		"accusative": "Судан"
+	},
+	"SE": {
+		"nominative": "Швеция",
+		"genitive": "Швеции",
+		"dative": "",
+		"accusative": "Швецию"
+	},
+	"SG": {
+		"nominative": "Сингапур",
+		"genitive": "Сингапура",
+		"dative": "Сингапуру",
+		"accusative": "Сингапур"
+	},
+	"SH": {
+		"nominative": "Острова Святой Елены, Вознесения и Тристан-да-Кунья",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"SI": {
+		"nominative": "Словения",
+		"genitive": "Словении",
+		"dative": "Словении",
+		"accusative": "Словению"
+	},
+	"SJ": {
+		"nominative": "Шпицберген и Ян-Майен",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"SK": {
+		"nominative": "Словакия",
+		"genitive": "Словакии",
+		"dative": "Словакии",
+		"accusative": "Словакию"
+	},
+	"SL": {
+		"nominative": "Сьерра-Леоне",
+		"genitive": "Сьерра-Леоне",
+		"dative": "Сьерра-Леоне",
+		"accusative": "Сьерра-Леоне"
+	},
+	"SM": {
+		"nominative": "Сан-Марино",
+		"genitive": "Сан-Марино",
+		"dative": "Сан-Марино",
+		"accusative": "Сан-Марино"
+	},
+	"SN": {
+		"nominative": "Сенегал",
+		"genitive": "Сенегала",
+		"dative": "Сенегалу",
+		"accusative": "Сенегал"
+	},
+	"SO": {
+		"nominative": "Сомали",
+		"genitive": "Сомали",
+		"dative": "Сомали",
+		"accusative": "Сомали"
+	},
+	"SR": {
+		"nominative": "Суринам",
+		"genitive": "Суринама",
+		"dative": "Суринаму",
+		"accusative": "Суринам"
+	},
+	"SS": {
+		"nominative": "Южный Судан",
+		"genitive": "Южного Судана",
+		"dative": "Южному Судану",
+		"accusative": "Южный Судан"
+	},
+	"ST": {
+		"nominative": "Сан-Томе и Принсипи",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"SV": {
+		"nominative": "Сальвадор",
+		"genitive": "Сальвадора",
+		"dative": "Сальвадору",
+		"accusative": "Сальвадор"
+	},
+	"SX": {
+		"nominative": "Синт-Мартен",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"SY": {
+		"nominative": "Сирия",
+		"genitive": "Сирии",
+		"dative": "Сирии",
+		"accusative": "Сирию"
+	},
+	"SZ": {
+		"nominative": "Свазиленд",
+		"genitive": "Свазиленда",
+		"dative": "Свазиленду",
+		"accusative": "Свазиленд"
+	},
+	"TC": {
+		"nominative": "Тёркс и Кайкос",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TD": {
+		"nominative": "Чад",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TF": {
+		"nominative": "Французские Южные и Антарктические Территории",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TG": {
+		"nominative": "Того",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TH": {
+		"nominative": "Таиланд",
+		"genitive": "Таиланда",
+		"dative": "Таиланду",
+		"accusative": "Таиланд"
+	},
+	"TJ": {
+		"nominative": "Таджикистан",
+		"genitive": "Таджикистана",
+		"dative": "Таджикистану",
+		"accusative": "Таджикистан"
+	},
+	"TK": {
+		"nominative": "Токелау",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TL": {
+		"nominative": "Восточный Тимор",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TM": {
+		"nominative": "Туркмения",
+		"genitive": "Туркмении",
+		"dative": "Туркмении",
+		"accusative": "Туркмению"
+	},
+	"TN": {
+		"nominative": "Тунис",
+		"genitive": "Туниса",
+		"dative": "Тунису",
+		"accusative": "Тунис"
+	},
+	"TO": {
+		"nominative": "Тонга",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TR": {
+		"nominative": "Турция",
+		"genitive": "Турции",
+		"dative": "Турции",
+		"accusative": "Турцию"
+	},
+	"TT": {
+		"nominative": "Тринидад и Тобаго",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"TV": {
+		"nominative": "Тувалу",
+		"genitive": "Тувалу",
+		"dative": "Тувалу",
+		"accusative": "Тувалу"
+	},
+	"TW": {
+		"nominative": "Тайвань",
+		"genitive": "Тайваня",
+		"dative": "Тайваню",
+		"accusative": "Тайвань"
+	},
+	"TZ": {
+		"nominative": "Танзания",
+		"genitive": "Танзании",
+		"dative": "Танзании",
+		"accusative": "Танзанию"
+	},
+	"UA": {
+		"nominative": "Украина",
+		"genitive": "Украины",
+		"dative": "Украине",
+		"accusative": "Украину"
+	},
+	"UG": {
+		"nominative": "Уганда",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"UM": {
+		"nominative": "Внешние малые острова (США)",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"US": {
+		"nominative": "США",
+		"genitive": "США",
+		"dative": "США",
+		"accusative": "США"
+	},
+	"UY": {
+		"nominative": "Уругвай",
+		"genitive": "Уругвая",
+		"dative": "Уругваю",
+		"accusative": "Уругвай"
+	},
+	"UZ": {
+		"nominative": "Узбекистан",
+		"genitive": "Узбекистана",
+		"dative": "Узбекистану",
+		"accusative": "Узбекистан"
+	},
+	"VA": {
+		"nominative": "Ватикан",
+		"genitive": "Ватикана",
+		"dative": "Ватикану",
+		"accusative": "Ватикан"
+	},
+	"VC": {
+		"nominative": "Сент-Винсент и Гренадины",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"VE": {
+		"nominative": "Венесуэла",
+		"genitive": "Венесуэлы",
+		"dative": "Венесуэле",
+		"accusative": "Венесуэлу"
+	},
+	"VG": {
+		"nominative": "Британские Виргинские острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"VI": {
+		"nominative": "Американские Виргинские острова",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"VN": {
+		"nominative": "Вьетнам",
+		"genitive": "Вьетнама",
+		"dative": "Вьетнаму",
+		"accusative": "Вьетнам"
+	},
+	"VU": {
+		"nominative": "Вануату",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"WF": {
+		"nominative": "Уоллис и Футуна",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"WS": {
+		"nominative": "Самоа",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"YE": {
+		"nominative": "Йемен",
+		"genitive": "Йемена",
+		"dative": "Йемену",
+		"accusative": "Йемен"
+	},
+	"YT": {
+		"nominative": "Майотта",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	},
+	"ZA": {
+		"nominative": "ЮАР",
+		"genitive": "ЮАР",
+		"dative": "ЮАР",
+		"accusative": "ЮАР"
+	},
+	"ZM": {
+		"nominative": "Замбия",
+		"genitive": "Замбии",
+		"dative": "Замбии",
+		"accusative": "Замбию"
+	},
+	"ZW": {
+		"nominative": "Зимбабве",
+		"genitive": "",
+		"dative": "",
+		"accusative": ""
+	}
+}

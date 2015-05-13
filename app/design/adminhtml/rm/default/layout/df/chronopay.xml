@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<!-- Magento 1.0.19870.1 (24hdiet.com) BEGIN -->
+	<admin_sales_order_view>
+		<reference name='head'>
+			<action
+				method='addCss'
+				ifconfig='df_payment/chronopay_gate/active'
+			>
+				<stylesheet>df/chronopay/order-status.css</stylesheet>
+			</action>
+		</reference>
+	</admin_sales_order_view>
+	<!-- Magento 1.0.19870.1 (24hdiet.com) END -->
+	<!-- Magento 1.3.1 (thermapower.net) BEGIN -->
+	<adminhtml_sales_order_view>
+		<reference name='head'>
+			<action
+				method='addCss'
+				ifconfig='df_payment/chronopay_gate/active'
+			>
+				<stylesheet>df/chronopay/order-status.css</stylesheet>
+			</action>
+		</reference>
+	</adminhtml_sales_order_view>
+	<!-- Magento 1.3.1 (thermapower.net) END -->
+</layout>

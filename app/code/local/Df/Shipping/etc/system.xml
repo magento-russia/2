@@ -1,0 +1,156 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_shipping translate='label' module='df_shipping'>
+			<label>Доставка</label>
+			<tab>df</tab>
+			<!--
+				Обратите внимание на эту строку!
+			-->
+			<frontend_model>df_adminhtml/system_config_form</frontend_model>
+			<frontend_type>text</frontend_type>
+			<sort_order>6000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<product translate='label'>
+					<label>Параметры товаров</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<units__weight translate='label'>
+							<label>Единица веса товаров</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_units_weight</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</units__weight>
+						<units__length translate='label'>
+							<label>Единица длины товаров</label>
+							<frontend_type>select</frontend_type>
+							<source_model>df_admin/config_source_units_length</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</units__length>
+						<default__weight translate='label'>
+							<label>Стандартный вес товара</label>
+							<comment>
+								<![CDATA[
+									Используется для товаров неизвестного веса.
+								]]>
+							</comment>
+							<validate>
+								validate-number
+								validate-greater-than-zero
+							</validate>
+							<frontend_type>text</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</default__weight>
+						<default__length translate='label'>
+							<label>Стандартная длина товара</label>
+							<comment>
+								<![CDATA[
+									Используется для товаров неизвестной длины.
+								]]>
+							</comment>
+							<validate>
+								validate-number
+								validate-greater-than-zero
+							</validate>
+							<frontend_type>text</frontend_type>
+							<sort_order>7000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</default__length>
+						<default__width translate='label'>
+							<label>Стандартная ширина товара</label>
+							<comment>
+								<![CDATA[
+									Используется для товаров неизвестной ширины.
+								]]>
+							</comment>
+							<validate>
+								validate-number
+								validate-greater-than-zero
+							</validate>
+							<frontend_type>text</frontend_type>
+							<sort_order>8000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</default__width>
+						<default__height translate='label'>
+							<label>Стандартная высота товара</label>
+							<comment>
+								<![CDATA[
+									Используется для товаров неизвестной высоты.
+								]]>
+							</comment>
+							<validate>
+								validate-number
+								validate-greater-than-zero
+							</validate>
+							<frontend_type>text</frontend_type>
+							<sort_order>9000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</default__height>
+					</fields>
+				</product>
+				<message translate='label'>
+					<label>Тексты</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+						<![CDATA[
+						]]>
+					</comment>
+					<fields>
+						<failure__general translate='label'>
+							<label>
+								Какое сообщение показывать покупателю
+								в случае невозможности расчёта стоимости доставки его заказа
+								в автоматическом режиме?
+							</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+						</failure__general>
+						<failure__same_location translate='label'>
+							<label>
+								Какое сообщение показывать покупателю
+								в случае невозможности расчёта стоимости доставки его заказа
+								по причине совпадения пункта доставки с местонахождением Вашего магазина?
+							</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+						</failure__same_location>
+					</fields>
+				</message>
+			</groups>
+		</df_shipping>
+	</sections>
+</config>

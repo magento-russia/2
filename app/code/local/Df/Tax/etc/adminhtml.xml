@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<config>
+	<menu>
+		<sales>
+			<children>
+				<tax>
+					<title><![CDATA[Tax & Markup]]></title>
+					<children>
+						<import_export>
+							<title><![CDATA[Import / Export Rates]]></title>
+						</import_export>
+						<classes_customer>
+							<title><![CDATA[Customer Classes]]></title>
+						</classes_customer>
+						<classes_product>
+							<title><![CDATA[Product Classes]]></title>
+						</classes_product>
+					</children>
+				</tax>
+			</children>
+		</sales>
+	</menu>
+</config>

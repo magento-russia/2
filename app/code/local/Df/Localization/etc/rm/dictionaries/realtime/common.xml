@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<dictionary>
+	<layout>
+		<term>
+			<en_US>Log In</en_US>
+			<ru_RU>Личный кабинет</ru_RU>
+		</term>
+	</layout>
+	<module name='Df_Page'>
+		<block class='Df_Page_Block_Html_Breadcrumbs'>
+			<term>
+				<en_US>Login</en_US>
+				<ru_RU>Авторизация</ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Mage_Catalog'>
+		<block
+			class='Df_Catalog_Block_Product_Price'
+			name='*'
+			template='tierprices.phtml$'
+		>
+			<term>
+				<en_US>and</en_US>
+				<ru_RU><![CDATA[ — ]]></ru_RU>
+			</term>
+		</block>
+	</module>
+	<module name='Mage_Checkout'>
+		<block
+			class='Mage_Checkout_Block_Onepage'
+			name='*'
+			template='*'
+		>
+			<term>
+				<en_US>Checkout</en_US>
+				<ru_RU>Оформление заказа</ru_RU>
+			</term>
+		</block>
+		<block
+			class='Mage_Checkout_Block_Multishipping_Addresses'
+			name='*'
+			template='checkout/multishipping/addresses.phtml$'
+		>
+			<term>
+				<en_US>Ship to Multiple Addresses</en_US>
+				<ru_RU>Доставка на несколько адресов</ru_RU>
+			</term>
+		</block>
+		<controller
+			name='Df_Checkout_OnepageController'
+			action='checkout_onepage_index'
+		>
+			<term>
+				<en_US>Checkout</en_US>
+				<ru_RU>Оформление заказа</ru_RU>
+			</term>
+		</controller>
+	</module>
+	<module name='Mage_Page'>
+		<controller
+			name='Mage_Sales_OrderController'
+		>
+			<term>
+				<en_US>Show</en_US>
+				<ru_RU>по</ru_RU>
+			</term>
+		</controller>
+	</module>
+</dictionary>

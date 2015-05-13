@@ -1,0 +1,78 @@
+@import "../_common";
+
+
+.df {
+    div.df-frontend {
+		.df-promo-gift {
+			.df-gift-chooser {
+				.df-side {
+
+					background: $giftBackgroundColor;
+					border: 1px solid rgb(206, 195, 182);
+					padding: 10px 0;
+					margin: 0 0 14px 0;
+
+					h2 {
+						@include orangeFont;
+						margin: 0 10px 5px 10px;
+					}
+
+					ul.df-promo-actions {
+						li.df-promo-action {
+
+		  					.df-description {
+		 						margin: 0 10px;
+		  					}
+
+							ul.df-product-list {
+								display: block;
+								margin: 0.5em 0;
+
+								li.df-product {
+									display: block;
+									width: 100%;
+									overflow: hidden;;
+									padding: 12px 0;
+
+									.product-image {
+										display: block;
+										float: left;
+										border: 1px solid rgb(208, 203, 193);
+										margin: 0 0 0 10px
+									}
+
+									.df-details {
+										display: block;
+										margin: 0 10px 0 60px;
+										padding: 0 0 0 12px;
+
+										.df-name {
+											margin: 0.25em 0 0.5em 0;
+										}
+									}
+								}
+
+								li.df-odd {
+									background: #FAFAFA;
+								}
+
+								li.df-last {
+									padding-bottom: 0;
+								}
+
+							}
+						}
+					}
+				}
+			}
+		}
+    }
+}
+
+
+
+
+
+
+
+

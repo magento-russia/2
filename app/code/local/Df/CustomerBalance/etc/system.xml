@@ -1,0 +1,99 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_customer>
+			<label>Покупатели</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>12000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<balance translate='label' module='df_customerbalance'>
+					<label>Личный счёт</label>
+					<comment>
+						<![CDATA[
+							<a
+								target='_blank'
+								href='http://magento-forum.ru/forum/184/'
+								title='инструкция по настройке'
+							>инструкция по настройке</a>
+						]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>adminhtml/system_config_backend_cache</backend_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-customer-balance</df_feature>
+						</enabled>
+						<show_history translate='label'>
+							<label>Показывать ли покупателю движения по счёту?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>							
+						</show_history>
+						<email_identity translate='label'>
+							<label>Отправитель писем-оповещений покупателям об изменении личного баланса счёта</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_identity</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>							
+						</email_identity>
+						<email_template translate='label'>
+							<label>Шаблон письма-оповещения покупателям об изменении баланса личного счёта</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<enabled>1</enabled>
+							</depends>							
+						</email_template>
+					</fields>
+				</balance>
+			</groups>
+		</df_customer>
+		<sales>
+			<groups>
+				<totals_sort>
+					<fields>
+						<customerbalance module='df_customerbalance' translate='label'>
+							<label>Баланс личного счёта</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</customerbalance>
+					</fields>
+				</totals_sort>
+			</groups>
+		</sales>
+	</sections>
+</config>

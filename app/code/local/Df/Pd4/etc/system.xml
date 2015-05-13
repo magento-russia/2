@@ -1,0 +1,266 @@
+<?xml version='1.0'?>
+<config>
+   <sections>
+		<df_payment>
+			<groups>
+				<pd4 translate='label' module='df_pd4'>
+					<label>Квитанция Сбербанка</label>
+					<comment>
+						<![CDATA[
+							Оплата наличными в кассе Сбербанка и других банков России
+						]]>
+					</comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>22000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-pd4</df_feature>
+						</active>
+						<frontend__title translate='label'>
+							<label>Название для этого способа оплаты</label>
+							<comment>
+								<![CDATA[
+									Покупатель видит этот заголовок на этапе оформления заказа,а также в Личном кабинете.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</frontend__title>
+						<frontend__description translate='label'>
+							<label>Примечание к способу оплаты на экране оформления заказа</label>
+							<comment>
+								<![CDATA[
+									Это примечание отображается под названием способа оплаты
+									на экране оформления заказа.
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>10000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</frontend__description>
+						<frontend__sort_order translate='label'>
+							<label>Вес для упорядочивания</label>
+							<comment>
+								<![CDATA[
+									Когда системе требуется перечислить платёжные способы на экране,она упорядочивает их в соответствии с их весами.
+									<br/>Способы с меньшим весом отображаются выше способов с большим весом.
+									<br/>Веса задаются натуральными числами.
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>15000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								validate-digits
+							</validate>
+						</frontend__sort_order>
+						<admin__order_status translate='label'>
+							<label>Состояние свежеразмещённых заказов</label>
+							<comment>
+								<![CDATA[
+									Система сразу после успешного оформления переведёт свежеразмещённый заказ
+									в указанное вами состояние.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_order_status</source_model>
+							<sort_order>20000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</admin__order_status>
+						<frontend__allowspecific translate='label'>
+							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
+							<comment>
+								<![CDATA[
+									Если Вы укажете значение «да»,то система позволит Вам перечислить страны, которым
+									должен принадлежать адрес покупателя, чтобы покупатель мог
+									воспользоваться данным способом оплаты.
+								]]>
+							</comment>
+							<frontend_type>allowspecific</frontend_type>
+							<sort_order>25000</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+						</frontend__allowspecific>
+						<frontend__specificcountry translate='label'>
+							<label>Допустимые страны покупателей</label>
+							<comment>
+								<![CDATA[
+									Система покажет этот способ оплаты
+									только покупателям из указанных Вами стран.<br/>
+									Чтобы разрешить использование данного способа оплаты покупателям любой страны,укажите значение «нет» для опции
+									«Ограничить доступность способа оплаты покупателями из конкретных стран?».
+								]]>
+							</comment>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>30000</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends>
+								<active>1</active>
+								<frontend__allowspecific>1</frontend__allowspecific>
+							</depends>
+						</frontend__specificcountry>
+						<admin__recipient_name translate='label'>
+							<label>Наименование получателя платежа</label>
+							<comment>
+								<![CDATA[
+									Например: ООО «Рога и Копыта»
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>35000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</admin__recipient_name>
+						<admin__recipient_tax_number translate='label'>
+							<label>ИНН получателя платежа</label>
+							<comment>
+								<![CDATA[
+									10 или 12 цифр
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								required-entry
+								validate-digits
+								validate-length	minimum-length-10 maximum-length-12
+							</validate>
+						</admin__recipient_tax_number>
+						<admin__recipient_bank_account_number translate='label'>
+							<label>Номер счета получателя платежа</label>
+							<comment>
+								<![CDATA[
+									20 цифр, если необходимо
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>45000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								validate-digits
+								validate-length	minimum-length-20 maximum-length-20
+							</validate>
+						</admin__recipient_bank_account_number>
+						<admin__recipient_bank_name translate='label'>
+							<label>Наименование банка получателя платежа</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>50000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</admin__recipient_bank_name>
+						<admin__recipient_bank_id translate='label'>
+							<label>БИК</label>
+							<comment>
+								<![CDATA[
+									8 или 9 цифр
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>55000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								required-entry
+								validate-digits
+								validate-length	minimum-length-8 maximum-length-9
+							</validate>
+						</admin__recipient_bank_id>
+						<admin__recipient_bank_loro translate='label'>
+							<label>Номер кор./сч. банка получателя платежа</label>
+							<comment>
+								<![CDATA[
+									20 цифр
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>60000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>
+								required-entry
+								validate-digits
+								validate-length	minimum-length-20 maximum-length-20
+							</validate>
+						</admin__recipient_bank_loro>
+						<admin__payment_purpose_template translate='label'>
+							<label>Назначение/наименование платежа (шаблон)</label>
+							<comment>
+								<![CDATA[
+									Оплата заказа №{order.id} от {order.date}
+								]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>65000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><active>1</active></depends>
+							<validate>required-entry</validate>
+						</admin__payment_purpose_template>
+					</fields>
+				</pd4>
+			</groups>
+		</df_payment>
+	</sections>
+</config>

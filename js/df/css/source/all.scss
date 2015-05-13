@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/**
+	Обратите внимание, что правило @charset надо записывать именно с двойными кавычками
+	и именно в самом начале файла, без любых символов и пробелов впереди.
+*/
+@import '_reset';
+@import '../../js/source/plugins/fancybox/_core/_core';
+/*.rm-bootstrap {
+	@import '../lib/bootstrap/css/_bootstrap';
+	@import '../lib/bootstrap/css/_bootstrap-theme';
+} */
+.df-hidden {display: none;}
+/*
+	При вынужденном совместном использовании Prototype и jQuery
+	почему-то иногда не удатся скрывать и показывать блоки стандартными средствами jQuery:
+	методами .hide() / .show() и даже методом .css({display: 'block'}).
+
+	Такой дефект встречается, например,
+	при использовании плагина dropdown:
+	skin/adminhtml/rm/default/df/js/source/_external/dropdown.js
+
+	При наличии такого дефекта используем .addClass('rm-display-block') / .removeClass('rm-display-block')
+	и, при неоходимости, то же самое с классом .rm-display-none.
+*/
+.rm-display-block {display: block !important;}
+.rm-display-none {display: none !important;}

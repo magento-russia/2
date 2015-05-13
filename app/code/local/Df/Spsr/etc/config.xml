@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Spsr>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Spsr>
+	</modules>
+	<global>
+		<blocks><df_spsr><class>Df_Spsr_Block</class></df_spsr></blocks>
+		<helpers><df_spsr><class>Df_Spsr_Helper</class></df_spsr></helpers>
+		<models><df_spsr><class>Df_Spsr_Model</class></df_spsr></models>
+	</global>
+	<default>
+		<carriers>
+			<df-spsr>
+				<active>0</active>
+				<model>df_spsr/carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>СПСР-Экспресс</title>
+			</df-spsr>
+		</carriers>
+		<df_shipping>
+			<spsr>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<service__insurer>carrier</service__insurer>
+				<service__enable_sms_notification>0</service__enable_sms_notification>
+				<service__endorse_delivery_time>1</service__endorse_delivery_time>
+				<admin__declared_value_percent>100</admin__declared_value_percent>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>0</frontend__sallowspecific>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</spsr>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-spsr>
+				<module>df_spsr</module>
+				<title>СПСР-Экспресс</title>
+				<url>http://magento-forum.ru/forum/198/</url>
+			</df-spsr>
+		</features>
+	</df>
+</config>

@@ -1,0 +1,12 @@
+<?php /** @var Mage_Adminhtml_Block_Cms_Page_Edit_Form $this */ ?>
+<div class="entry-edit">
+    <?php echo $this->getFormHtml() ?>
+</div>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo df_h()->cms()->__('Version Revisions') ?></h4>
+    </div>
+    <div id="version_fieldset" class="fieldset fieldset-wide">
+        <?php echo $this->getParentBlock()->getChildHtml('cms_page_version_edit_revisions_grid') ?>
+    </div>
+</div>

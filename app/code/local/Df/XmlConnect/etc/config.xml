@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_XmlConnect>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_XmlConnect>
+	</modules>
+	<global>
+		<blocks>
+			<df_xml_connect><class>Df_XmlConnect_Block</class></df_xml_connect>
+			<xmlconnect>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						объявление поля $_config, которое родительский класс использует
+						без предварительного объявления
+					-->
+					<adminhtml_mobile_edit_tab_design_images>Df_XmlConnect_Block_Adminhtml_Mobile_Edit_Tab_Design_Images</adminhtml_mobile_edit_tab_design_images>
+				</rewrite>
+			</xmlconnect>
+		</blocks>
+		<helpers><df_xml_connect><class>Df_XmlConnect_Helper</class></df_xml_connect></helpers>
+		<models><df_xml_connect><class>Df_XmlConnect_Model</class></df_xml_connect></models>
+	</global>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_XmlConnect>
+					<files>
+						<default>Mage_XmlConnect.csv</default>
+					</files>
+				</Df_XmlConnect>
+			</modules>
+		</translate>
+	</adminhtml>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_XmlConnect>
+					<files>
+						<default>Mage_XmlConnect.csv</default>
+					</files>
+				</Df_XmlConnect>
+			</modules>
+		</translate>
+	</frontend>
+</config>

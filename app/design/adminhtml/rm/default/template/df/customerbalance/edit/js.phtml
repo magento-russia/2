@@ -1,0 +1,36 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<script type="text/javascript">
+//<![CDATA[
+function updateEmailWebsites()
+{
+    emailWebsites = $('<?php echo $this->getPrefix() ?>store_id');
+    balanceWebsites = $('<?php echo $this->getPrefix() ?>website_id');
+    selectedWebsite = $('<?php echo $this->getPrefix() ?>website_id') ? $('<?php echo $this->getPrefix() ?>website_id').value : '<?php echo $this->getCustomerWebsite() ?>';
+    allowedWebsites = eval(<?php echo $this->getWebsitesJson()?>);
+    emailWebsites.innerHTML = '';
+    for(websiteKey in allowedWebsites) {
+        website = allowedWebsites[websiteKey];
+        if ( website.website_id && website.website_id == selectedWebsite ) {
+            groups = website["groups"];
+            for(groupKey in groups) {
+                group = groups[groupKey];
+                optionGroup = document.createElement("OPTGROUP");
+                optionGroup.label = group["name"];
+                emailWebsites.appendChild(optionGroup);
+                stores = group["stores"];
+                for(i=0; i < stores.length; i++) {
+                    var option = document.createElement("option");
+                    option.appendChild(document.createTextNode(stores[i]["name"]));
+                    option.setAttribute("value", stores[i]["store_id"]);
+                    optionGroup.appendChild(option);
+                }
+            }
+        }
+    }
+    container = $$('#note_amount_delta small');
+    if (container[0]) {
+        container[0].innerHTML = '<strong>[' + allowedWebsites[selectedWebsite].currency_code + ']</strong>';
+    }
+}
+//]]>
+</script>

@@ -1,0 +1,26 @@
+body.df-theme-templatemonster-41220 {
+	.footer {
+		.block-subscribe {
+			#newsletter {
+				text-transform: none;
+			}
+		}
+	}
+	.df {
+		.df-checkout-ergonomic {
+			button {
+				line-height: auto;
+				font-size: auto;
+			}
+		}
+	}
+	button.btn-checkout {
+		span {
+			span {
+				padding:{
+					top: 5px;
+				}
+			}
+		}
+	}
+}

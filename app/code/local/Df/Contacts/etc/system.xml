@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<contacts>
+			<groups>
+				<email>
+					<fields>
+						<sender_email_identity>
+							<label>Contact Form Email Sender</label>
+						</sender_email_identity>
+					</fields>
+				</email>
+			</groups>
+		</contacts>
+	</sections>
+</config>

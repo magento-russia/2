@@ -1,0 +1,7 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ((float) $this->getSource()->getRewardPointsBalanceToRefund()): ?>
+    <tr>
+        <td class="label"><strong><?php echo df_h()->reward()->__('Reward Points refunded to customer') ?></strong></td>
+        <td><strong><?php echo $this->getSource()->getRewardPointsBalanceToRefund(); ?></strong></td>
+    </tr>
+<?php endif; ?>

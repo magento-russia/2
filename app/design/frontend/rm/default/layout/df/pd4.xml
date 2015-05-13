@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<df_pd4_index_index>
+		<reference name='root'>
+			<action method='setTemplate'>
+				<template>df/pd4/page.phtml</template>
+			</action>
+			<block
+				type='df_pd4/document'
+				name='rm.pd4.document'
+				template='df/pd4/document.phtml'
+			/>
+		</reference>
+	</df_pd4_index_index>
+	<df_pd4_checkout_success>
+        <reference name='checkout.success'>
+            <block
+				type='df_pd4/LinkToDocument_ForLastOrder'
+				name='rm.pd4.document.link'
+				template='df/pd4/link_to_document/for_last_order.phtml'
+			/>
+        </reference>
+	</df_pd4_checkout_success>
+    <checkout_onepage_success translate='label'>
+        <update handle='df_pd4_checkout_success'/>
+    </checkout_onepage_success>
+    <checkout_multishipping_success translate='label'>
+        <update handle='df_pd4_checkout_success'/>
+    </checkout_multishipping_success>
+</layout>

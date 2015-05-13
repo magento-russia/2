@@ -1,0 +1,21 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<?php if ($this->canRefundRewardPoints()): ?>
+    <p>
+        <label for="creditmemo_refund_reward_points_enable"><?php echo df_h()->reward()->__('Refund Reward Points') ?></label>
+        <input type="checkbox" name="creditmemo[refund_reward_points_enable]" value="1" id="creditmemo_refund_reward_points_enable">
+        <input type="text" name="creditmemo[refund_reward_points]" value="<?php echo $this->getRefundRewardPointsBalance() ?>" id="creditmemo_refund_reward_points" class="input-text not-negative-amount" style="width: 60px; text-align: right;">
+        <script type="text/javascript">
+        //<![CDATA[
+            function toggleRewardPointsRefundAmount() {
+                if ($('creditmemo_refund_reward_points_enable').checked) {
+                    $('creditmemo_refund_reward_points').disabled = false;
+                } else {
+                    $('creditmemo_refund_reward_points').disabled = true;
+                }
+            }
+            Event.observe($('creditmemo_refund_reward_points_enable'), 'change', toggleRewardPointsRefundAmount);
+            toggleRewardPointsRefundAmount();
+        //]]>
+        </script>
+    </p>
+<?php endif; ?>

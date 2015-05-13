@@ -1,0 +1,115 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_AccessControl>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_AccessControl>
+	</modules>
+	<df>
+		<features>
+			<df-access-control>
+				<module>df_access_control</module>
+				<title>Административный доступ</title>
+				<url>http://magento-forum.ru/topic/1203/</url>
+			</df-access-control>
+		</features>
+	</df>
+	<global>
+		<blocks><df_access_control><class>Df_AccessControl_Block</class></df_access_control></blocks>
+		<helpers><df_access_control><class>Df_AccessControl_Helper</class></df_access_control></helpers>
+		<models>
+			<df_access_control>
+				<class>Df_AccessControl_Model</class>
+				<resourceModel>df_access_control_resource</resourceModel>
+			</df_access_control>
+			<df_access_control_resource>
+				<class>Df_AccessControl_Model_Resource</class>
+				<entities>
+					<role><table>df_access_control_role</table></role>
+				</entities>
+			</df_access_control_resource>
+		</models>
+		<resources>
+			<df_access_control_setup>
+				<!-- Создаём таблицу «df_access_control_role» -->
+				<setup>
+					<module>Df_AccessControl</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_access_control_setup>
+		</resources>
+	</global>
+	<admin>
+		<routers>
+			<!--
+				Для асинхронной загрузки ветвей дерева товарных разделов
+				на экран распределения доступов к товарным разделам.
+			-->
+			<df_access_control>
+				<use>admin</use>
+				<args>
+					<module>Df_AccessControl</module>
+					<frontName>df_access_control</frontName>
+				</args>
+			</df_access_control>
+		</routers>
+	</admin>
+	<adminhtml>
+		<events>
+			<admin_roles_save_after>
+				<observers>
+					<df_access_control__admin_roles_save_after>
+						<class>df_access_control/dispatcher</class>
+						<method>admin_roles_save_after</method>
+					</df_access_control__admin_roles_save_after>
+				</observers>
+			</admin_roles_save_after>
+			<!--
+				Обратите внимание, что хотя в целом Magento Community Edition версий ниже 1.4.2.0
+				не поддерживает специализированные события «_load_before»
+				на уровне базового класса для ресурсных коллекций,однако события «catalog_product_collection_load_before»
+				и «catalog_category_collection_load_before» там имеются
+				(реализованы отдельно на уровне классов-потомков).
+			-->
+			<catalog_product_collection_load_before>
+				<observers>
+					<df_access_control__catalog_product_collection_load_before>
+						<class>df_access_control/dispatcher</class>
+						<method>catalog_product_collection_load_before</method>
+					</df_access_control__catalog_product_collection_load_before>
+				</observers>
+			</catalog_product_collection_load_before>
+			<catalog_category_collection_load_before>
+				<observers>
+					<df_access_control__catalog_category_collection_load_before>
+						<class>df_access_control/dispatcher</class>
+						<method>catalog_category_collection_load_before</method>
+					</df_access_control__catalog_category_collection_load_before>
+				</observers>
+			</catalog_category_collection_load_before>
+			<controller_action_postdispatch_adminhtml_permissions_role_saverole>
+				<observers>
+					<df_access_control__controller_action_postdispatch_adminhtml_permissions_role_saverole>
+						<class>df_access_control/dispatcher</class>
+						<method>controller_action_postdispatch_adminhtml_permissions_role_saverole</method>
+					</df_access_control__controller_action_postdispatch_adminhtml_permissions_role_saverole>
+				</observers>
+			</controller_action_postdispatch_adminhtml_permissions_role_saverole>
+		</events>
+		<layout>
+			<updates>
+				<df_access_control><file>df/access_control.xml</file></df_access_control>
+			</updates>
+		</layout>
+	</adminhtml>
+	<default>
+		<df_tweaks_admin>
+			<access_control>
+				<auto_expand_all>0</auto_expand_all>
+				<auto_select_ancestors>0</auto_select_ancestors>
+				<auto_select_descendants>0</auto_select_descendants>
+			</access_control>
+		</df_tweaks_admin>
+	</default>
+</config>

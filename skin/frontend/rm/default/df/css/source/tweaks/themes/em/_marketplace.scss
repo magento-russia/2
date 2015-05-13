@@ -1,0 +1,36 @@
+body.df-theme-em-marketplace {
+	.category-products {
+		.toolbar {
+			.toolbar-dropdown {
+				width: 120px;
+				ul {
+					width: 118px;
+				}
+			}
+			.sort-by {
+				.toolbar-dropdown {
+					width: 145px;
+					text-transform: lowercase;
+					* {
+						text-transform: lowercase;
+					}
+					ul {
+						width: 143px;
+					}
+				}
+			}
+		}
+	}
+	.sidebar {
+		.block-title {
+			text-transform: none;
+		}
+	}
+	#opc-shipping_method {
+		.sp-methods {
+			dt {
+				float:none;
+			}
+		}
+	}
+}

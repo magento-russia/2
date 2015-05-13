@@ -1,0 +1,18 @@
+body.df-theme-templatemonster-49198 {
+	.df-checkout-ergonomic-page {
+		.df {
+			button.btn-checkout {
+				> span {
+					/**
+					 * Оформительская тема TemplateMonster #49198 («Men's Underwear»)
+					 * использует правило .button.button > span {height: 49px; line-height: 49px},
+					 * что ломает внешний вид нашего экрана оформления заказа.
+					 */
+					height: auto;
+					line-height: auto;
+					padding: 1em 0;
+				}
+			}
+		}
+	}
+}

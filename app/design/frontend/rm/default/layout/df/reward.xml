@@ -1,0 +1,232 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+    <customer_account>
+        <block type='df_reward/customer_account' name='rm.reward.customer.account' />
+    </customer_account>
+    <df_reward_customer_info>
+        <update handle='customer_account'/>
+        <reference name='content'>
+            <block type='df_reward/customer_reward' name='customer.reward' template='df/reward/customer/reward.phtml'>
+                <block type='df_reward/customer_reward_info' name='customer.reward.info' template='df/reward/customer/reward/info.phtml'/>
+                <block type='df_reward/customer_reward_history' name='customer.reward.history' template='df/reward/customer/reward/history.phtml'/>
+                <block type='df_reward/customer_reward_subscription' name='customer.reward.subscription' template='df/reward/customer/reward/subscription.phtml'/>
+            </block>
+        </reference>
+    </df_reward_customer_info>
+	<!--
+    <checkout_onepage_index>
+        <reference name='checkout.onepage.payment.methods_additional'>
+            <block
+				type='df_reward/checkout_payment_additional'
+				template='df/reward/checkout/onepage/payment/additional.phtml'
+				name='reward.points'
+				before='-'
+			/>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_paymentmethod>
+        <reference name='checkout.onepage.payment.methods.scripts'>
+            <block
+				type='df_reward/checkout_payment_additional'
+				template='df/reward/checkout/onepage/payment/scripts.phtml'
+				name='reward.scripts'
+				after='-'
+			/>
+        </reference>
+    </checkout_onepage_paymentmethod>
+    -->
+    
+    <checkout_multishipping_billing>
+        <reference name='payment_methods_before'>
+            <block
+				type='df_reward/checkout_payment_additional'
+				template='df/reward/checkout/multishipping/payment/additional.phtml'
+				name='reward_points'
+				before='-'
+			/>
+        </reference>
+    </checkout_multishipping_billing>
+    <catalog_product_view>
+        <reference name='product.tag.list.list.before'>
+            <block type='df_reward/tooltip' name='reward.tooltip.tag' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_tag</type></action>
+                <action method='setWrapperClass'><class>reward-tag</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Submit a new tag now and earn %s once the tag is approved.</message></action>
+                <action method='setRewardQtyLimitationMessage' translate='message' module='df_reward'><message>Up to %s new tag(s) can be rewarded.</message></action>
+                <action method='setIsGuestNote'><value>1</value></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+    <review_product_list>
+        <reference name='product.review.form.fields.before'>
+            <block type='df_reward/tooltip' name='reward.hint.review' template='df/reward/tooltip.phtml' after='product.info'>
+                <action method='initRewardType'><type>df_reward/action_review</type></action>
+                <action method='setWrapperClass'><class>reward-review</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Submit a review now and earn %s once the review is approved.</message></action>
+                <action method='setRewardQtyLimitationMessage' translate='message' module='df_reward'><message>Up to %s new review(s) can be rewarded.</message></action>
+                <action method='setIsGuestNote'><value>1</value></action>
+            </block>
+        </reference>
+    </review_product_list>
+    <customer_account_create>
+        <reference name='customer.form.register.fields.before'>
+            <block type='df_reward/tooltip' name='reward.tooltip.register' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_register</type></action>
+                <action method='setWrapperClass'><class>reward-register</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'>
+					<message>Register on our site now and earn %s.</message>
+				</action>
+                <action method='setHideLink'>
+					<value>1</value>
+                </action>
+            </block>
+            <block type='df_reward/tooltip' name='reward.tooltip.newsletter' template='df/reward/tooltip.phtml' after='reward.tooltip.register'>
+                <action method='initRewardType'><type>df_reward/action_newsletter</type></action>
+                <action method='setWrapperClass'><class>reward-newsletter</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Subscribe to our newsletter now and earn %s.</message></action>
+            </block>
+        </reference>
+    </customer_account_create>
+    <newsletter_manage_index>
+        <reference name='customer.newsletter.form.before'>
+            <block type='df_reward/tooltip' name='reward.tooltip.newsletter' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_newsletter</type></action>
+                <action method='setWrapperClass'><class>reward-newsletter</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Subscribe to our newsletter now and earn %s.</message></action>
+            </block>
+        </reference>
+    </newsletter_manage_index>
+    <checkout_cart_index>
+        <reference name='checkout.cart.form.before'>
+            <block type='df_reward/tooltip_checkout' name='reward.tooltip.checkout' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_orderExtra</type></action>
+                <action method='setWrapperClass'><class>reward-checkout</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'>
+					<message>Checkout now and earn %s for this order.</message>
+				</action>
+                <action method='setIsGuestNote'><value>1</value></action>
+            </block>
+        </reference>
+    </checkout_cart_index>
+    <checkout_onepage_index>
+        <reference name='checkout.onepage.login.before'>
+            <block type='df_reward/tooltip_checkout' name='reward.tooltip.checkout' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_orderExtra</type></action>
+                <action method='setWrapperClass'><class>reward-checkout</class></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'>
+					<message>Log in now and earn %s for this order.</message>
+				</action>
+                <action method='setIsGuestNote'><value>1</value></action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+    <df_invitation_index_index>
+        <reference name='invitations.list.list.before'>
+            <block type='df_reward/tooltip' name='reward.tooltip.invitation' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_invitationCustomer</type></action>
+                <action method='setWrapperClass'><class>reward-invitation</class></action>
+                <action method='setHideBalance'><value>1</value></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Send invitation now and earn %s when your invitee registers on our site.</message></action>
+                <action method='setRewardQtyLimitationMessage' translate='message' module='df_reward'><message>Up to %s invitee registration(s) can be rewarded.</message></action>
+            </block>
+            <block type='df_reward/tooltip' name='reward.tooltip.invitation.order' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_invitationOrder</type></action>
+                <action method='setWrapperClass'><class>reward-invitation</class></action>
+                <action method='setHideLink'><value>1</value></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Earn %s for purchases by your invitees.</message></action>
+                <action method='setRewardQtyLimitationMessage' translate='message' module='df_reward'><message>Up to %s invitee purchase(s) can be rewarded.</message></action>
+            </block>
+        </reference>
+    </df_invitation_index_index>
+    <df_invitation_index_send>
+        <reference name='invitations.form.form.before'>
+            <block type='df_reward/tooltip' name='reward.tooltip.invitation' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_invitationCustomer</type></action>
+                <action method='setWrapperClass'><class>reward-invitation</class></action>
+                <action method='setHideBalance'><value>1</value></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Send invitation now and earn %s when your invitee registers on our site.</message></action>
+                <action method='setRewardQtyLimitationMessage' translate='message' module='df_reward'><message>Up to %s invitee registration(s) can be rewarded.</message></action>
+            </block>
+            <block type='df_reward/tooltip' name='reward.tooltip.invitation.order' template='df/reward/tooltip.phtml'>
+                <action method='initRewardType'><type>df_reward/action_invitationOrder</type></action>
+                <action method='setWrapperClass'><class>reward-invitation</class></action>
+                <action method='setHideLink'><value>1</value></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'><message>Earn %s for purchases by your invitees.</message></action>
+                <action method='setRewardQtyLimitationMessage' translate='message' module='df_reward'><message>Up to %s invitee purchase(s) can be rewarded.</message></action>
+            </block>
+        </reference>
+    </df_invitation_index_send>
+    <df_invitation_customer_account_create>
+        <reference name='customer.form.register.invitation.fields.before'>
+            <block
+				type='df_reward/tooltip'
+				name='reward.tooltip.register'
+				template='df/reward/tooltip.phtml'
+			>
+                <action method='initRewardType'><type>df_reward/action_register</type></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'>
+					<message>Register on our site now and earn %s.</message>
+				</action>
+                <action method='setHideLink'>
+					<value>1</value>
+                </action>
+            </block>
+            <block
+				type='df_reward/tooltip'
+				name='reward.tooltip.newsletter'
+				template='df/reward/tooltip.phtml'
+				after='reward.tooltip.register'
+			>
+                <action method='initRewardType'><type>df_reward/action_newsletter</type></action>
+                <action method='setRewardMessage' translate='message' module='df_reward'>
+					<message>Subscribe to our newsletter now and earn %s.</message>
+				</action>
+            </block>
+        </reference>
+    </df_invitation_customer_account_create>
+    <sales_order_view>
+        <reference name='order_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name='order_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name='order_totals'>
+           <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_email_order_items>
+    <sales_order_invoice>
+        <reference name='invoice_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_order_invoice>
+    <sales_order_printinvoice>
+        <reference name='invoice_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_order_printinvoice>
+    <sales_email_order_invoice_items>
+        <reference name='invoice_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_email_order_invoice_items>
+    <sales_order_creditmemo>
+        <reference name='creditmemo_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_order_creditmemo>
+    <sales_order_printcreditmemo>
+        <reference name='creditmemo_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_order_printcreditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name='creditmemo_totals'>
+            <block type='df_reward/sales_order_total' name='reward.sales.order.total' />
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

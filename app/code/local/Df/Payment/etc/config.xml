@@ -1,0 +1,219 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Payment>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Payment>
+	</modules>
+	<global>
+		<blocks><df_payment><class>Df_Payment_Block</class></df_payment></blocks>
+		<helpers>
+			<df_payment><class>Df_Payment_Helper</class></df_payment>
+			<payment>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						перекрытие метода @see Mage_Payment_Helper_Data::_sortMethods().
+						Новый метод работает точь-в-точь как родительский
+						и перекрыт лишь для замены конструкций вида
+						$a->sort_order на $a->getData('sort_order').
+					-->
+					<data>Df_Payment_Helper_DataM</data>
+				</rewrite>
+			</payment>
+		</helpers>
+		<models><df_payment><class>Df_Payment_Model</class></df_payment></models>
+	</global>
+	<frontend>
+		<layout>
+			<updates>
+				<df_payment><file>df/payment.xml</file></df_payment>
+			</updates>
+		</layout>
+		<routers>
+			<df_payment>
+				<use>standard</use>
+				<args>
+					<module>Df_Payment</module>
+					<frontName>df-payment</frontName>
+				</args>
+			</df_payment>
+		</routers>
+		<secure_url>
+			<df_payment>/df-payment/</df_payment>
+		</secure_url>
+		<translate>
+			<modules>
+				<Df_Payment>
+					<files>
+						<default>Mage_Payment.csv</default>
+					</files>
+				</Df_Payment>
+			</modules>
+		</translate>
+	</frontend>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Payment>
+					<files>
+						<default>Mage_Payment.csv</default>
+					</files>
+				</Df_Payment>
+			</modules>
+		</translate>
+	</adminhtml>
+	<df>
+		<payment>
+			<default>
+				<frontend>
+					<message_failure><![CDATA[К сожалению, оплата заказа не удалась.
+<br/>Сообщение платёжного шлюза
+{название платёжного шлюза в родительном падеже}: «{сообщение от платёжного шлюза}».
+<br/>Возможно, Вы ввели на платёжной странице
+{название платёжного шлюза в родительном падеже} неточные данные?
+<br/>Попробуйте оформить Ваш заказ повторно.
+<br/>Если оплатить заказ через {название платёжного шлюза в именительном падеже}
+не получается — попробуйте другой способ оплаты
+или оформите Ваш заказ по телефону {телефон магазина}.]]></message_failure>
+				</frontend>
+				<request>
+					<confirmation>
+						<admin>
+							<order>
+								<!--
+									Пользовательский номер заказа в Magento.
+									Обязательный параметр.
+								-->
+								<increment-id></increment-id>
+							</order>
+						</admin>
+						<customer>
+							<!--
+								Адрес электронной почты покупателя.
+								Df_Payment: не используется.
+							-->
+							<email></email>
+							<!--
+								Имя покупателя.
+								Df_Payment: не используется.
+							-->
+							<name></name>
+							<!--
+								Телефон покупателя.
+								Df_Payment: не используется.
+							-->
+							<phone></phone>
+						</customer>
+						<payment>
+							<!--
+								Размер платежа.
+								Обязательный параметр.
+							-->
+							<amount></amount>
+							<!--
+								Код валюты платежа.
+								Df_Payment: не используется.
+							-->
+							<currency-code></currency-code>
+						</payment>
+						<payment_service>
+							<payment>
+								<!--
+									Дата и время проведения
+									или изменения состояния платежа платёжной системой.
+									Df_Payment: не используется.
+								-->
+								<date></date>
+								<!--
+									Идентификатор платежа в платёжной системе.
+									Df_Payment: не используется.
+								-->
+								<id></id>
+								<!--
+									Состояние обработки платежа в платёжной системе.
+									Df_Payment: не используется.
+								-->
+								<state></state>
+							</payment>
+							<shop>
+								<!--
+									Идентификатор магазина в платёжной системе.
+									Df_Payment: не используется.
+								-->
+								<id></id>
+							</shop>
+						</payment_service>
+						<request>
+							<!--
+								Подпись подтверждения платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<signature></signature>
+						</request>
+						<response>
+							<!--
+								Тип содержимого ответа магазина платёжной системе
+								в ответ на подтверждение платёжной системой магазину оплаты заказа.
+								Обязательный параметр.
+							-->
+							<content-type>text/plain</content-type>
+						</response>
+						<message>
+							<invalid>
+								<order>
+									<![CDATA[
+Ошибка: Платёжная система оповестила магазин об оплате не подлежащего оплате заказа №%d.
+									]]>
+								</order>
+								<payment-amount>
+									<![CDATA[
+Платёжная система подтвердила оплату,
+но величина оплаты почему-то не соответствует величине выставленного магазином счёта.
+<br/>Магазин выставил счёт на сумму: %s %s.
+<br/>Платёжная система подтвердила оплату на сумму: %s %s.
+									]]>
+								</payment-amount>
+								<signature>
+									<![CDATA[
+Некто от имени платёжной системы прислал подтверждение оплаты, однако подпись подтверждения неверна.
+<br/>Либо неверен криптографический ключ для шифрования обращений платёжной системы к магазину,
+указанный в административной части платёжного модуля Magento,
+либо платёжная система поменяла протокол обмена данными.
+<br/>Полученная подпись: {полученная подпись}.
+<br/>Ожидаемая подпись:  {ожидаемая подпись}.
+									]]>
+								</signature>
+							</invalid>
+							<success>
+									<![CDATA[
+Платёжная система подтвердила оплату заказа покупателем.
+<br/>Оплаченный счёт: %d.
+									]]>
+							</success>
+						</message>
+					</confirmation>
+				</request>
+			</default>
+		</payment>
+	</df>
+	<default>
+		<payment>
+			<ccsave>
+				<title>Банковская карта</title>
+				<active>0</active>
+			</ccsave>
+			<checkmo>
+				<title>Чек или денежный перевод типа Money Order</title>
+				<active>0</active>
+			</checkmo>
+			<free>
+				<title>Бесплатно</title>
+			</free>
+			<purchaseorder>
+				<title>Заявка на приобретение (Purchase Order)</title>
+			</purchaseorder>
+		</payment>
+	</default>
+</config>

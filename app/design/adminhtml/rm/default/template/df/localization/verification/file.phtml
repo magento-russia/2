@@ -1,0 +1,49 @@
+<?php /** @var Df_Localization_Block_Admin_Verification_File $this */ ?>
+<?php
+	/** @var array $fileClasses  */
+	$fileClasses = array('df-file');
+	if ($this->isFullyTranslated()) {
+		$fileClasses []= 'df-file-fully-translated';
+	}
+	/** @var string $fileClassesAsString  */
+	$fileClassesAsString = df_output()->getCssClassesAsString($fileClasses);
+	df_assert_string($fileClassesAsString);
+?>
+<li
+	class='<?php echo $fileClassesAsString; ?>'
+>
+	<ol class='df-file-properties'>
+		<li class='df-file-property df-name'>
+			<?php
+				if ($this->isFullyTranslated()) {
+					echo $this->getName();
+				}
+				else {
+					?>
+						<a
+							href='javascript:void(0);'
+							title='Подробная информация о недостатках перевода'
+						><?php echo $this->getName(); ?></a>
+					<?php
+				}
+			?>
+		</li>
+		<li class='df-file-property df-total'>
+			<?php echo $this->getNumEntries(); ?>
+		</li>
+		<li class='df-file-property df-untranslated'>
+			<?php
+				if (0 !== $this->getNumUntranslatedEntries()) {
+					echo $this->getNumUntranslatedEntries();
+				}
+			?>
+		</li>
+		<li class='df-file-property df-absent'>
+			<?php
+				if (0 !== $this->getNumAbsentEntries()) {
+					echo $this->getNumAbsentEntries();
+				}
+			?>
+		</li>
+	</ol>
+</li>

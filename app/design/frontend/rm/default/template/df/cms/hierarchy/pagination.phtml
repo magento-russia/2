@@ -1,0 +1,37 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<div class="pager pager-only">
+    <div class="pages">
+        <strong><?php echo $this->__('Page:') ?></strong>
+        <ol>
+        <?php if ($this->canShowSequence()):?>
+            <?php if ($this->canShowPrevious()):?>
+            <li><a class="previous" href="<?php echo $this->getPreviousNode()->getUrl()?>"><img src="<?php echo $this->getSkinUrl('images/pager_arrow_left.gif') ?>" alt="<?php echo $this->__('Previous') ?>" class="v-middle" /></a></li>
+            <?php endif;?>
+        <?php endif;?>
+        <?php if ($this->canShowOuter() && $this->canShowFirst()):?>
+            <li><a class="first" title="<?php echo df_text()->escapeHtml($this->getFirstNode()->getLabel())?>" href="<?php echo $this->getFirstNode()->getUrl()?>"><?php echo $this->getNodeLabel($this->getFirstNode())?></a></li>
+        <?php endif;?>
+        <?php if ($this->canShowPreviousJump()):?>
+            <li><a class="previous_jump" title="<?php echo df_text()->escapeHtml($this->getPreviousJumpNode()->getLabel())?>" href="<?php echo $this->getPreviousJumpNode()->getUrl()?>">...</a></li>
+        <?php endif;?>
+        <?php foreach($this->getNodesInRange() as $node):?>
+            <?php if ($node->getIsCurrent()):?>
+                <li class="current"><?php echo $this->getNodeLabel($node)?></li>
+            <?php else: ?>
+                <li><a title="<?php echo df_text()->escapeHtml($node->getLabel())?>" href="<?php echo $node->getUrl()?>"><?php echo $this->getNodeLabel($node)?></a></li>
+            <?php endif; ?>
+        <?php endforeach;?>
+        <?php if ($this->canShowNextJump()):?>
+            <li><a class="next_jump" title="<?php echo df_text()->escapeHtml($this->getNextJumpNode()->getLabel())?>" href="<?php echo $this->getNextJumpNode()->getUrl()?>">...</a></li>
+        <?php endif;?>
+        <?php if ($this->canShowOuter() && $this->canShowLast()):?>
+          <li><a class="last" title="<?php echo df_text()->escapeHtml($this->getLastNode()->getLabel())?>" href="<?php echo $this->getLastNode()->getUrl()?>"><?php echo $this->getNodeLabel($this->getLastNode())?></a><li>
+        <?php endif;?>
+        <?php if ($this->canShowSequence()):?>
+            <?php if ($this->canShowNext()):?>
+            <li><a class="next" href="<?php echo $this->getNextNode()->getUrl()?>"><img src="<?php echo $this->getSkinUrl('images/pager_arrow_right.gif') ?>" alt="<?php echo $this->__('Next') ?>" class="v-middle" /></a></li>
+            <?php endif;?>
+        <?php endif;?>
+        </ol>
+    </div>
+</div>

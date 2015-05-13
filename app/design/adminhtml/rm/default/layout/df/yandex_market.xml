@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+    <adminhtml_system_config_edit>
+		<reference name='head'>
+			<action method='setCanLoadExtJs'>
+				<flag>1</flag>
+			</action>
+			<action method='setCanLoadRulesJs'>
+				<flag>1</flag>
+			</action>
+		</reference>
+    </adminhtml_system_config_edit>
+</layout>

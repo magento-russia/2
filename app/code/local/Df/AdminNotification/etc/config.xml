@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_AdminNotification>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_AdminNotification>
+	</modules>
+	<global>
+		<helpers><df_admin_notification><class>Df_AdminNotification_Helper</class></df_admin_notification></helpers>
+		<models>
+			<df_admin_notification><class>Df_AdminNotification_Model</class></df_admin_notification>
+			<!-- Для Magento версии не меньше 1.6 -->
+			<adminnotification_resource>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						скрывать «Reminder: Change Magento`s default phone numbers»
+						после пометки прочитанным.
+					-->
+					<inbox>Df_AdminNotification_Model_Resource_Inbox</inbox>
+				</rewrite>
+			</adminnotification_resource>
+			<!-- Для Magento версии меньше 1.6 -->
+			<adminnotification_mysql4>
+				<rewrite>
+					<inbox>Df_AdminNotification_Model_Resource_Inbox</inbox>
+				</rewrite>
+			</adminnotification_mysql4>
+		</models>
+	</global>
+</config>

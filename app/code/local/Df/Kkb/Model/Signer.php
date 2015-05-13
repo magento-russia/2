@@ -1,0 +1,69 @@
+<?php
+class Df_Kkb_Model_Signer extends Df_Core_Model_Abstract {
+	/** @return string */
+	public function getSignature() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $result */
+			$result = null;
+			$r =
+				openssl_sign(
+					$this->getDocument(), $result
+					, openssl_get_privatekey(
+						$this->getServiceConfig()->getKeyPrivate()
+						,$this->getServiceConfig()->getKeyPrivatePassword()
+					)
+				)
+			;
+			df_assert($r);
+			$result = base64_encode(strrev($result));
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return string */
+	private function getDocument() {return $this->cfg(self::P__DOCUMENT);}
+
+	/** @return Df_Kkb_Model_Config_Area_Service */
+	private function getServiceConfig() {return $this->cfg(self::P__SERVICE_CONFIG);}
+	
+	/**
+	 * @override
+	 * @return void
+	 */
+	protected function _construct() {
+		/** @var bool $openSslIsInstalled */
+		static $openSslIsInstalled;
+		if (!isset($openSslIsInstalled)) {
+			/** @link http://searchcode.com/codesearch/view/15451657 */
+			$openSslIsInstalled = extension_loaded('openssl') && function_exists('openssl_sign');
+			if (!$openSslIsInstalled) {
+				df_error(
+					'Для работы модуля «Казкоммерцбанк» Вам нужно добавить к интерпретатору PHP'
+					. ' криптографическое расширение OpenSSL (http://php.net/openssl).'
+					. "\r\nИспользование OpenSSL является требованием Казкоммерцбанка,"
+					. ' без этого работа модуля невозможна.'
+				);
+			}
+		}
+		parent::_construct();
+		$this
+		    ->_prop(self::P__DOCUMENT, self::V_STRING_NE)
+			->_prop(self::P__SERVICE_CONFIG, Df_Kkb_Model_Config_Area_Service::_CLASS)
+		;
+	}
+	const _CLASS = __CLASS__;
+	const P__DOCUMENT = 'document';
+	const P__SERVICE_CONFIG = 'service_config';
+	/**
+	 * @static
+	 * @param string $document
+	 * @param Df_Kkb_Model_Config_Area_Service $serviceConfig
+	 * @return Df_Kkb_Model_Signer
+	 */
+	public static function i($document, Df_Kkb_Model_Config_Area_Service $serviceConfig) {
+		return new self(array(
+			self::P__DOCUMENT => $document, self::P__SERVICE_CONFIG => $serviceConfig
+		));
+	}
+}

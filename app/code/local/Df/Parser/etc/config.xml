@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Parser>
+			<version>2.40.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_Parser>
+	</modules>
+	<global>
+		<blocks><df_parser><class>Df_Parser_Block</class></df_parser></blocks>
+		<helpers><df_parser><class>Df_Parser_Helper</class></df_parser></helpers>
+		<models>
+			<df_parser>
+				<class>Df_Parser_Model</class>
+				<resourceModel>df_parser_resource</resourceModel>
+			</df_parser>
+			<df_parser_resource>
+				<class>Df_Parser_Model_Resource</class>
+			</df_parser_resource>
+		</models>
+		<resources>
+			<df_parser_setup>
+				<setup>
+					<module>Df_Parser</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_parser_setup>
+		</resources>
+	</global>
+</config>

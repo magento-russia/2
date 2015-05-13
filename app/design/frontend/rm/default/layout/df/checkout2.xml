@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<df_checkout2_frontend_index_index>
+		<reference name='root'>
+			<action method='setTemplate'>
+				<template>page/1column.phtml</template>
+			</action>
+		</reference>
+		<reference name='content'>
+			<block
+				type='df_checkout2/frontend'
+				template='df/checkout2.phtml'
+			/>
+		</reference>
+	</df_checkout2_frontend_index_index>
+</layout>

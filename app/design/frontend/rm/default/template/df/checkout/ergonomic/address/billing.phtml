@@ -1,0 +1,111 @@
+<?php /** @var Df_Checkout_Block_Frontend_Ergonomic_Address_Type_Billing $this */ ?>
+<form id="co-billing-form" action="">
+<fieldset>
+    <ul class="form-list">
+    <?php if ($this->customerHasAddresses()): ?>
+        <li class="wide">
+            <label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
+            <div class="input-box billing-address-select-container">
+                <?php echo $this->getAddressesHtmlSelect('billing') ?>
+            </div>
+        </li>
+    <?php endif; ?>
+    <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+        <fieldset>
+            <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
+            <ul>
+				<?php echo Df_Checkout_Block_Frontend_Ergonomic_Address::billing()->toHtml(); ?>
+				<li class="no-display">
+					<input type="hidden" name="billing[save_in_address_book]" value="1" />
+				</li>
+            </ul>
+        </fieldset>
+     </li>
+    <?php if ($this->canShip()): ?>
+        <li class="control">
+            <input
+				type="radio"
+				name="billing[use_for_shipping]"
+				id="billing:use_for_shipping_yes"
+				value="1"
+				<?php if ($this->isUseBillingAddressForShipping()) {?>
+					checked="checked"
+				<?php }?>
+				title="<?php echo $this->__('Ship to this address') ?>"
+				onclick="$('shipping:same_as_billing').checked = true;"
+				class="radio"
+			/><label for="billing:use_for_shipping_yes"><?php echo $this->__('Ship to this address') ?></label></li>
+        <li class="control">
+            <input
+				type="radio"
+				name="billing[use_for_shipping]"
+				id="billing:use_for_shipping_no"
+				value="0"
+				<?php if (!$this->isUseBillingAddressForShipping()) {?>
+					checked="checked"
+				<?php }?>
+				title="<?php echo $this->__('Ship to different address') ?>"
+				onclick="$('shipping:same_as_billing').checked = false;"
+				class="radio"
+			/><label for="billing:use_for_shipping_no"><?php echo $this->__('Ship to different address') ?></label>
+        </li>
+    <?php endif; ?>
+    </ul>
+    <?php if (!$this->canShip()): ?>
+        <input type="hidden" name="billing[use_for_shipping]" value="1" />
+    <?php endif; ?>
+    <div class="buttons-set" id="billing-buttons-container">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="billing.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+        <span class="please-wait" id="billing-please-wait" style="display:none;">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
+        </span>
+    </div>
+</fieldset>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var billing = new Billing('co-billing-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveBilling') ?>');
+    var billingForm = new VarienForm('co-billing-form');
+    //billingForm.setElementsRelation('billing:country_id', 'billing:region', '<?php echo $this->getUrl('directory/json/childRegion') ?>', '<?php echo $this->__('Select State/Province...') ?>');
+    $('billing-address-select') && billing.newAddress(!$('billing-address-select').value);
+//]]>
+</script>
+<?php
+	/**
+	 * Создаём RegionUpdater только при наличии поля region,
+	 * иначе будет сбой JavaScript.
+	 *
+	 * Обратите внимание, что если поле region отсутствует,
+ 	 * то, в отличие от shippingRegionUpdater,
+ 	 * нам не надо создавать для billingRegionUpdater объект-зашлушку,
+ 	 * т.к. стандартный код вызывает billingRegionUpdater аккуратно,
+ 	 * проверяя его существование перед вызовом.
+	 */
+	if (
+			Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__NO
+		!==
+			df_cfg()->checkout()->applicabilityBilling()->region()
+	) {
+?>
+	<script type="text/javascript">
+		if (
+				document.getElementById('billing:country_id')
+			&&
+				document.getElementById('billing:region')
+			&&
+				document.getElementById('billing:region_id')
+		) {
+			var billingRegionUpdater =
+				new RegionUpdater(
+					'billing:country_id'
+					,'billing:region'
+					,'billing:region_id'
+					,countryRegions
+					,undefined
+					,'billing:postcode'
+				)
+			;
+		}
+	</script>
+<?php } ?>

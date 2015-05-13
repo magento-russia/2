@@ -1,0 +1,23 @@
+body.df-theme-magento-modern {
+	.df-checkout-ergonomic {
+		.df-block-method-payment {
+			.sp-methods {
+				dt {
+					margin:{
+						top: 5px;
+						bottom: 5px;
+					}
+				}
+			}
+		}
+		#opc-review {
+			#checkout-agreements {
+				.buttons-set {
+					padding:{
+						bottom: 0;
+					}
+				}
+			}
+		}
+	}
+}

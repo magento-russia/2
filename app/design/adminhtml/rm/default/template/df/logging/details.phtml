@@ -1,0 +1,79 @@
+<?php /** @var Mage_Core_Block_Template $this */ ?>
+<div class='content-header'>
+    <table cellspacing='0'>
+        <tr>
+            <td style='<?php echo $this->getHeaderWidth() ?>'><?php echo $this->getHeaderHtml() ?></td>
+            <td class='form-buttons'><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<?php
+$event = $this->getCurrentEvent();
+?>
+<div class='entry-edit'>
+    <div class='entry-edit'>
+        <div class='entry-edit-head'>
+            <h4 class='icon-head head-edit-form fieldset-legend'><?php echo $this->__('Admin User Data'); ?></h4>
+        </div>
+        <div id='log_details_fieldset' class='log-details'>
+            <table cellspacing='0' class='log-info table'>
+                <col width='25%' />
+                <col />
+                <tbody>
+                    <tr>
+                        <th><?php echo $this->__('Aggregated Information'); ?></th>
+                        <td><?php echo $event->getInfo(); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo $this->__('Admin User ID'); ?></th>
+                        <td>
+                        <?php if ($this->getEventUser()){ ?>
+                        #<?php echo $event->getUserId(); ?>
+                        <?php } else { ?>
+                        N/A
+                        <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php echo $this->__('Admin User Name'); ?></th>
+                        <td>
+                        <?php if ($this->getEventUser()){ ?>
+                        <a href='<?php echo $this->getUrl('adminhtml/permissions_user/edit', array('user_id' => $event->getUserId())); ?>'><?php echo $event->getUser(); ?></a>
+                        <?php } else { ?>
+                        <?php echo $event->getUser(); ?>
+                        <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php echo $this->__('IP-Address'); ?></th>
+                        <td><?php echo $this->getEventIp(); ?></td>
+                    </tr>
+                    <?php if ($this->getEventXForwardedIp()) { ?>
+                    <tr>
+                        <th><?php echo $this->__('X-Forwarded For'); ?></th>
+                        <td><?php echo $this->getEventXForwardedIp(); ?></td>
+                    </tr>
+                    <?php } ?>
+                    <?php if ($this->getEventError()) { ?>
+                    <tr>
+                        <th><?php echo $this->__('Error Message'); ?></th>
+                        <td><?php echo $this->getEventError(); ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?php if ($event->hasChanges()){ ?>
+<div class='entry-edit'>
+    <div class='entry-edit'>
+        <div class='entry-edit-head'>
+            <h4 class='icon-head head-edit-form fieldset-legend'><?php echo $this->__('Related Changes'); ?></h4>
+        </div>
+        <div class='log-details-grid'>
+            <?php echo $this->getChildHtml('details_grid') ?>
+        </div>
+    </div>
+</div>
+<?php } ?>

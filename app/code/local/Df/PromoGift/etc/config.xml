@@ -1,0 +1,177 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_PromoGift>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_PromoGift>
+	</modules>
+<!--
+	Модуль «Товары в подарок» позволяет магазину подарить покупателю
+	некоторые указанные администратором магазина товары
+	при соответствии заказа покупетеля некоторым указанным администратором магазина правилам.
+	Например, администратор магазина может указать в административной части правило:
+	«если покупатель закажет кровать с артикулом X — покупатель получает в подарок любые туфли
+	из товарного раздела Y».
+	Модуль позволяет вести учёт сразу нескольких таких акций одновременно.
+	Для каждой акции модуль учитывает сроки её проведения.
+	Как только содержимое корзины покупателя отвечает условиям хотя бы одной из акций,магазин отображает на витрине специальный блок «Выберите товар в подарок».
+	Блок «Выберите товар в подарок» явно показывает покупателю, что все товары внутри блока — бесплатны
+	для покупателя (подарки).
+	На отдельной странице бесплатного товара магазин тоже явно показывает покупателю, что товар
+	для этого покупателя — бесплатен.
+	Покупатель может выбрать параметры (опции) бесплатного товара. Например, цвет и размер.
+	И после выбора опций покупатель может положить бесплатный товар в корзину.
+	И на странице корзины магазин явно показывает покупателю, что товар для этого покупателя — бесплатен.
+	Модуль не предоставляет отдельный административный интерфейс
+	для редактирования акций вида «товары в подарок»,а вместо него использует немного доработанный интерфейс редактирования ценовых правил?
+-->
+	<df>
+		<features>
+			<df-promo-gift>
+				<module>df_promo_gift</module>
+				<title>Promo Gifts</title>
+				<url>http://magento-forum.ru/topic/914/</url>
+			</df-promo-gift>
+		</features>
+	</df>
+	<global>
+		<blocks><df_promo_gift><class>Df_PromoGift_Block</class></df_promo_gift></blocks>
+		<helpers><df_promo_gift><class>Df_PromoGift_Helper</class></df_promo_gift></helpers>
+		<models>
+			<df_promo_gift>
+				<class>Df_PromoGift_Model</class>
+				<resourceModel>df_promo_gift_resource</resourceModel>
+			</df_promo_gift>
+			<df_promo_gift_resource>
+				<class>Df_PromoGift_Model_Resource</class>
+				<entities>
+					<!--
+						Модуль вычисляет подарки заранее, на этапе индексации
+						(в том числе и автоматической, незаметно от администратора).
+						Данная таблица содержит результаты таких вычислений
+					-->
+					<gift><table>df_promo_gift</table></gift>
+				</entities>
+			</df_promo_gift_resource>
+		</models>
+		<!--
+			Обратите внимание, что модуль не перекрывает ни единого системного класса Magento.
+			Единственной точкой входа модуля в систему является обработка системных событий.
+		-->
+		<events>
+			<!--
+				Система присылает сообщение «sales_quote_collect_totals_before»
+				перед расчётом ценовых правил.
+			-->
+			<sales_quote_collect_totals_before>
+				<observers>
+					<df_promo_gift__sales_quote_collect_totals_before>
+						<!--
+							Модуль при получении сообщения «sales_quote_collect_totals_before»
+							обнуляет свои счётчики находящихся в корзине покупателя товаров-подарков
+						-->
+						<class>df_promo_gift/dispatcher</class>
+						<method>sales_quote_collect_totals_before</method>
+					</df_promo_gift__sales_quote_collect_totals_before>
+				</observers>
+			</sales_quote_collect_totals_before>
+			<salesrule_validator_process>
+				<observers>
+					<df_promo_gift__validator_process>
+						<!--
+							Отображаем и выдаём промо-подарки покупателю
+						-->
+						<class>df_promo_gift/dispatcher</class>
+						<method>salesrule_validator_process</method>
+					</df_promo_gift__validator_process>
+				</observers>
+			</salesrule_validator_process>
+			<!--
+				Обратите внимание, что при изменении ценовых правил для корзины
+				модуль автоматически обновляет таблицу промо-подарков,обрабатывая событие «salesrule_rule_save_after» (см. ниже).
+				Событие удаления ценовых правил для корзины нам обрабатывать не нужно,потому что соответствующие удалённым правилам товары-подарки автоматически
+				удаляются из базы данных благодаря ограничению ON DELETE CASCADE.
+			-->
+			<salesrule_rule_save_after>
+				<observers>
+					<df_promo_gift__salesrule_rule_save_after>
+						<class>df_promo_gift/dispatcher</class>
+						<method>salesrule_rule_save_after</method>
+					</df_promo_gift__salesrule_rule_save_after>
+				</observers>
+			</salesrule_rule_save_after>
+		</events>
+		<index>
+			<indexer>
+				<df_promo_gift>
+					<model>df_promo_gift/indexer</model>
+				</df_promo_gift>
+			</indexer>
+		</index>
+		<resources>
+			<df_promo_gift_setup>
+				<!--
+					[*]	Добавляем в таблицу «salesrule» поле для хранения промо-подарков.
+					[*]	Создаём таблицу «df_promo_gift».
+				-->
+				<setup>
+					<module>Df_PromoGift</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_promo_gift_setup>
+		</resources>
+	</global>
+	<frontend>
+		<layout>
+			<updates>
+				<df_promo_gift module='Df_PromoGift'><file>df/promo_gift.xml</file></df_promo_gift>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Df_PromoGift><files><default>Df_PromoGift.csv</default></files></Df_PromoGift>
+			</modules>
+		</translate>
+	</frontend>
+	<adminhtml>
+		<events>
+			<adminhtml_block_salesrule_actions_prepareform>
+				<observers>
+					<df_promo_gift__actions_prepareform>
+						<!--
+							Настраиваем административную форму
+							«Promotions» ⇾ «Shopping Cart Price Rules» ⇾ «Actions»
+							для учёта промо-подарков для ценового правила
+						-->
+						<class>df_promo_gift/dispatcher</class>
+						<method>adminhtml_block_salesrule_actions_prepareform</method>
+					</df_promo_gift__actions_prepareform>
+				</observers>
+			</adminhtml_block_salesrule_actions_prepareform>
+		</events>
+		<translate>
+			<modules>
+				<Df_PromoGift><files><default>Df_PromoGift.csv</default></files></Df_PromoGift>
+			</modules>
+		</translate>
+	</adminhtml>
+	<default>
+		<df_promotion>
+			<gifts>
+				<!--
+					Российская сборка придерживается политики, что новые функции Российской сборки
+					должны быть по умолчанию отключены
+					(если только нет критически-важной необходимости их включения)
+				-->
+				<enabled>0</enabled>
+				<enable_add_to_cart_button>0</enable_add_to_cart_button>
+				<chooser__show_on_product_list>1</chooser__show_on_product_list>
+				<chooser__show_on_product_view>right</chooser__show_on_product_view>
+				<chooser__show_on_cart_page>1</chooser__show_on_cart_page>
+				<chooser__show_on_front_page>1</chooser__show_on_front_page>
+				<chooser__show_on_cms_pages>1</chooser__show_on_cms_pages>
+			</gifts>
+		</df_promotion>
+	</default>
+</config>
