@@ -77,7 +77,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_Add_Form extends Mage_Adminhtml_B
 		$groups
 			->addFieldToFilter('customer_group_id', array('gt'=> 0))
 			->load()
-			->toOptionHash();
+		;
 		$fieldset
 			->addField(
 				'group_id'
@@ -86,7 +86,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_Add_Form extends Mage_Adminhtml_B
 					'label' => df_h()->invitation()->__('Invitee Group')
 					,'required' => true
 					,'name' => 'group_id'
-					,'values' => $groups
+					,'values' => $groups->toOptionHash()
 				)
 			)
 		;
