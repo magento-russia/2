@@ -65,7 +65,8 @@ class Df_Cms_Block_Frontend_Menu_Contents extends Mage_Core_Block_Abstract {
 							,df_clean(array(
 								'class' => count($node->getChildren()) ? 'parent' : null
 							))
-						)					;
+						)
+					;
 				}
 			}
 			if (count($renderedNodes)) {
@@ -134,7 +135,7 @@ class Df_Cms_Block_Frontend_Menu_Contents extends Mage_Core_Block_Abstract {
 					df_h()->cms()->getCurrentNode()
 				&&
 					($cmsNode->getId() === df_h()->cms()->getCurrentNode()->getId())
-			? rm_tag('span', rm_tag('strong', array(), $cmsNode->getLabel()))
+			? rm_tag('span', array(), rm_tag('strong', array(), $cmsNode->getLabel()))
 			: rm_tag('a', array('href' => $cmsNode->getUrl()), $cmsNode->getLabel())
 		;
 	}
