@@ -1,0 +1,14 @@
+*
+!*/
+!.gitignore
+!app/code/local/Df
+!app/design/adminhtml/rm
+!app/design/frontend/rm
+!app/etc/licenses/localhost.com.xml
+!app/etc/modules/Df_*
+!app/etc/modules/Find_Feed.xml
+!app/locale/en_US/templates/email/df
+!app/locale/ru_DF
+!js/df
+!skin/adminhtml/rm
+!skin/frontend/rm
