@@ -1,3 +1,5 @@
+# http://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
+# http://stackoverflow.com/questions/9162919/whitelisting-and-subdirectories-in-git
 *
 !*/
 !.gitignore
