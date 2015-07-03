@@ -40,22 +40,32 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 */
 	private function isItJQuery($scriptName) {
 		/**
-		 * Как ядро библиотеки jQuery должны определяться скрипты с именами следующего вида:
-		 * path/jquery.js
-		 * path/jquery-1.8.3.js
-		 * path/jquery-1.8.3.min.js
-		 *
-		 * Обратите внимание, что скрипты с именами вроде path/history.adapter.jquery.js
-		 * не должны определяться, как ядро библиотеки jQuery.
-		 * @link http://magento-forum.ru/topic/3979/
+		 * 2015-07-04
+		 * Модуль Cmsmart_Ajaxsearch использует какую-то свою переделанную версию библиотеки jQuery
+		 * и размещает её в файлах со стандартными для jQuery именами.
 		 */
-		/** @var string $fileName */
-		$fileName = rm_last(explode('/', $scriptName));
-		/** @var string $pattern */
-		$pattern = '#^jquery(\-\d+\.\d+\.\d+)?(\.min)?\.js$#ui';
-		/** @var string[] $matches */
-		$matches = array();
-		$result = (1 === preg_match($pattern, $fileName, $matches));
+		if (rm_contains($scriptName, '/cmsmart/')) {
+			$result = false;
+		}
+		else {
+			/**
+			 * Как ядро библиотеки jQuery должны определяться скрипты с именами следующего вида:
+			 * path/jquery.js
+			 * path/jquery-1.8.3.js
+			 * path/jquery-1.8.3.min.js
+			 *
+			 * Обратите внимание, что скрипты с именами вроде path/history.adapter.jquery.js
+			 * не должны определяться, как ядро библиотеки jQuery.
+			 * @link http://magento-forum.ru/topic/3979/
+			 */
+			/** @var string $fileName */
+			$fileName = rm_last(explode('/', $scriptName));
+			/** @var string $pattern */
+			$pattern = '#^jquery(\-\d+\.\d+\.\d+)?(\.min)?\.js$#ui';
+			/** @var string[] $matches */
+			$matches = array();
+			$result = (1 === preg_match($pattern, $fileName, $matches));
+		}
 		return $result;
 	}
 
