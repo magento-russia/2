@@ -44,7 +44,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		 * Модуль Cmsmart_Ajaxsearch использует какую-то свою переделанную версию библиотеки jQuery
 		 * и размещает её в файлах со стандартными для jQuery именами.
 		 */
-		if (rm_contains($scriptName, '/cmsmart/')) {
+		if (rm_starts_with($scriptName, 'cmsmart/ajaxsearch')) {
 			$result = false;
 		}
 		else {
