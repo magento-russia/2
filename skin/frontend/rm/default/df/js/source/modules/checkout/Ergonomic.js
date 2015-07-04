@@ -30,8 +30,9 @@ rm.checkout.Ergonomic = {
 						 * которые тоже используют библиотеку Fancybox,
 						 * добавляем свой уникальный класс CSS для корневого контейнера.
 						 * Просто удивительно, что я не сделал этого раньше.
+						 * @link http://stackoverflow.com/a/9526314/254475
 						 */
-						, wrapCss: 'df-fancybox'
+						, wrapCSS: 'df-fancybox'
 					});
 					/** @type {rm.checkout.ergonomic.address.Billing} */
 					rm.checkout.ergonomic.billingAddressSingleton =

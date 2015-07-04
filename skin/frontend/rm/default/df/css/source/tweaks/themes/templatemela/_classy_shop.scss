@@ -20,9 +20,11 @@ body.df-theme-templatemela-classy-shop {
 	.category-title h2 , .category-title h2 a,  .crosssell h2{
 		text-transform: none;
 	}
-	.fancybox-inner {
-		.account-login {
-			min-width: 270px;
+	.fancybox-wrap.df-fancybox {
+		.fancybox-inner {
+			.account-login {
+				min-width: 270px;
+			}
 		}
 	}
 	.df-checkout-ergonomic-page {

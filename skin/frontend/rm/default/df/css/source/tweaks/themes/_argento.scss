@@ -20,10 +20,12 @@ body.df-theme-argento {
 			width: 40px;
 		}
 	}
-	.fancybox-inner {
-		.account-login {
-			label {
-				font-size: 12px;
+	.fancybox-wrap.df-fancybox {
+		.fancybox-inner {
+			.account-login {
+				label {
+					font-size: 12px;
+				}
 			}
 		}
 	}

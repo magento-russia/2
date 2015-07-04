@@ -1,24 +1,26 @@
 body.df-theme-magento-enterprise {
-	.fancybox-inner {
-		.account-login {
-			min-height: 0;
-			margin: {
-				bottom: 0;
-			}
-			.registered-users {
-				padding: {
-					top: 10px;
+	.fancybox-wrap.df-fancybox {
+		.fancybox-inner {
+			.account-login {
+				min-height: 0;
+				margin: {
 					bottom: 0;
-					right: 0;
 				}
-				h2 {
-					margin-bottom: 6px;
-					text-transform: uppercase;
-				}
-				width: auto;
-				.input-box {
-					/** для индикатора успешности ввода */
-					padding-right: 20px;
+				.registered-users {
+					padding: {
+						top: 10px;
+						bottom: 0;
+						right: 0;
+					}
+					h2 {
+						margin-bottom: 6px;
+						text-transform: uppercase;
+					}
+					width: auto;
+					.input-box {
+						/** для индикатора успешности ввода */
+						padding-right: 20px;
+					}
 				}
 			}
 		}

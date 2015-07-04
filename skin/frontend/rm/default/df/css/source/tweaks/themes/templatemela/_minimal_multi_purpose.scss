@@ -27,9 +27,11 @@ body.df-theme-templatemela-minimal-multi-purpose {
 	.product-block-inner .sale-label,.products-list li .list-left .sale-label{
 	    text-transform: lowercase;
 	}
-	.fancybox-inner {
-		.account-login {
-			min-width: 270px;
+	.fancybox-wrap.df-fancybox {
+		.fancybox-inner {
+			.account-login {
+				min-width: 270px;
+			}
 		}
 	}
 	.df-checkout-ergonomic-page {

@@ -4263,6 +4263,7 @@ jQuery.extend({
 	if (rm.defined(window.Validation)) {
 		Object.extend(Validation, {
 			/**
+			 * @used-by Validation.prototype.dfValidateFilledFieldsOnly()
 			 * @param {Element} elm
 			 * @return {Boolean}
 			 */
@@ -4272,7 +4273,8 @@ jQuery.extend({
 						Validation.rm.parent.isVisible(elm)
 					&&
 						/**
-						 * Временно считаем пустые поля "невидимыми", * чтобы стандарный класс не считал их неправильно заполненными
+						 * Временно считаем пустые поля "невидимыми",
+						 * чтобы стандарный класс не считал их неправильно заполненными
 						 */
 						('' !== $F(elm))
 				;
@@ -4281,11 +4283,8 @@ jQuery.extend({
 
 			,/**
 			 * Данный метод проверяет корректность заполнения формы
-			 * так же, как и стандартный метод test(), * но не выводит диагностических сообщений.
-			 *
+			 * так же, как и стандартный метод test(),
 			 * Это используется при Быстром оформлении заказа
-			 *
-			 * @function
 			 * @param {String} name
 			 * @param {Element} elm
 			 * @param {Boolean} useTitle
@@ -4308,13 +4307,10 @@ jQuery.extend({
 				}
 				return result;
 			}
-
 		});
 		Object.extend(Validation.prototype, {
 			/**
 			 * Это используется при Быстром оформлении заказа
-			 *
-			 * @function
 			 * @return {Boolean}
 			 */
 			dfValidateFilledFieldsOnly: function() {
@@ -4337,9 +4333,7 @@ jQuery.extend({
 			 * Данный метод проверяет корректность заполнения формы
 			 * так же, как и стандартный метод validate(),
 			 * но не выводит диагностических сообщений.
-			 *
 			 * Это используется при Быстром оформлении заказа
-			 *
 			 * @function
 			 * @return {Boolean}
 			 */
@@ -4355,10 +4349,8 @@ jQuery.extend({
 				finally {
 					Validation.test = standardMethod;
 				}
-
 				return result;
 			}
-
 		});
 	}
 })();(function($) {$(function() {

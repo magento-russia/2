@@ -651,9 +651,9 @@
 #df-login #login-form .form-list div.input-box input.input-text {
   width: 250px; }
 
-.fancybox-inner #df-login.account-login {
+.fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login {
   width: auto; }
-  .fancybox-inner #df-login.account-login .registered-users {
+  .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users {
     float: none;
     width: auto;
     /*
@@ -668,9 +668,9 @@
     	╨Э╨░╨╝ ╨▓╤Б╨╡╨│╨┤╨░ ╨╜╤Г╨╢╨╜╨╛ ╨┤╨╗╤П ╤Н╤В╨╕╤Е ╨╜╨░╨┤╨┐╨╕╤Б╨╡╨╣ ╨▓╤Л╤А╨░╨▓╨╜╨╕╨▓╨░╨╜╨╕╨╡ ╨┐╨╛ ╨╗╨╡╨▓╨╛╨╝╤Г ╨║╤А╨░╤О,
     	╨┐╨╛╤Н╤В╨╛╨╝╤Г ╨┤╨╡╨╗╨░╨╡╨╝ ╨┤╨░╨╜╨╜╨╛╨╡ ╨┐╤А╨░╨▓╨╕╨╗╨╛ ╨╛╨▒╤Й╨╕╨╝.
     */ }
-    .fancybox-inner #df-login.account-login .registered-users .input-box {
+    .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users .input-box {
       text-align: left; }
-    .fancybox-inner #df-login.account-login .registered-users .buttons-set {
+    .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users .buttons-set {
       /*
       	╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ TemplateMonster #43373
       	╨╜╨╛╤А╨╛╨▓╨╕╤В ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М ╨╖╨┤╨╡╤Б╤М clear: both.
@@ -704,7 +704,7 @@ span.p, #checkout-payment-method-load span.p {
     margin: 0 0 14px 0;
     padding: 15px;
     border: 1px solid #d1d1d1;
-    background: white url(../../images/cms/bkg_cms-menu.gif) 0 0 repeat-x;
+    background: #fff url(../../images/cms/bkg_cms-menu.gif) 0 0 repeat-x;
     font-size: 12px;
     list-style-position: inside; }
   .df-cms-menu-wrapper .cms-menu li {
@@ -1259,7 +1259,7 @@ body.df-theme-argento .header-container .mini-search a.chzn-default {
   padding-left: 10px; }
 body.df-theme-argento .header-cart .summary {
   width: 40px; }
-body.df-theme-argento .fancybox-inner .account-login label {
+body.df-theme-argento .fancybox-wrap.df-fancybox .fancybox-inner .account-login label {
   font-size: 12px; }
 
 body.df-theme-8theme-blanco .df-checkout-ergonomic-page .col-right {
@@ -1501,18 +1501,18 @@ body.df-theme-magento-default .cms-hp-touchsmart-iq506-has-arrived .main {
 body.df-theme-magento-default .cms-hp-touchsmart-iq506-has-arrived .breadcrumbs {
   display: none; }
 
-body.df-theme-magento-enterprise .fancybox-inner .account-login {
+body.df-theme-magento-enterprise .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
   min-height: 0;
   margin-bottom: 0; }
-  body.df-theme-magento-enterprise .fancybox-inner .account-login .registered-users {
+  body.df-theme-magento-enterprise .fancybox-wrap.df-fancybox .fancybox-inner .account-login .registered-users {
     padding-top: 10px;
     padding-bottom: 0;
     padding-right: 0;
     width: auto; }
-    body.df-theme-magento-enterprise .fancybox-inner .account-login .registered-users h2 {
+    body.df-theme-magento-enterprise .fancybox-wrap.df-fancybox .fancybox-inner .account-login .registered-users h2 {
       margin-bottom: 6px;
       text-transform: uppercase; }
-    body.df-theme-magento-enterprise .fancybox-inner .account-login .registered-users .input-box {
+    body.df-theme-magento-enterprise .fancybox-wrap.df-fancybox .fancybox-inner .account-login .registered-users .input-box {
       /** ╨┤╨╗╤П ╨╕╨╜╨┤╨╕╨║╨░╤В╨╛╤А╨░ ╤Г╤Б╨┐╨╡╤И╨╜╨╛╤Б╤В╨╕ ╨▓╨▓╨╛╨┤╨░ */
       padding-right: 20px; }
 body.df-theme-magento-enterprise .df-checkout-ergonomic-page .form-list li.fields .field {
@@ -1595,7 +1595,7 @@ body.df-theme-templatemela-classy-shop {
     text-transform: lowercase; }
   body.df-theme-templatemela-classy-shop .category-title h2, body.df-theme-templatemela-classy-shop .category-title h2 a, body.df-theme-templatemela-classy-shop .crosssell h2 {
     text-transform: none; }
-  body.df-theme-templatemela-classy-shop .fancybox-inner .account-login {
+  body.df-theme-templatemela-classy-shop .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
     min-width: 270px; }
   body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df {
     /**
@@ -1659,7 +1659,7 @@ body.df-theme-templatemela-mega-shop #footer .block-subscribe input.input-text {
   	╨╕ ╤В╨╛╨│╨┤╨░ ╨╜╨╡ ╨┐╨╛╨╝╨╡╤Й╨░╨╡╤В╤Б╤П ╨▓ ╤В╨╛╨╝ ╨╢╨╡ ╤А╤П╨┤╤Г ╨║╨╜╨╛╨┐╨║╨░ ┬л╨┐╨╛╨┤╨┐╨╕╤Б╨░╤В╤М╤Б╤П┬╗.
   */
   width: 254px; }
-body.df-theme-templatemela-mega-shop .fancybox-inner #df-login.account-login {
+body.df-theme-templatemela-mega-shop .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login {
   /**
   	╨Я╨╛╤З╨╡╨╝╤Г ╤В╨╛ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╡ width:auto ╤А╨░╨▒╨╛╤В╨░╨╡╤В ╨╜╨╡╨┐╤А╨░╨▓╨╕╨╗╤М╨╜╨╛.
   	╨Ы╨╡╨╜╤М ╤А╨░╨╖╨▒╨╕╤А╨░╤В╤М╤Б╤П ╤Б╨╡╨╣╤З╨░╤Б.
@@ -1692,7 +1692,7 @@ body.df-theme-templatemela-minimal-multi-purpose {
     text-transform: none; }
   body.df-theme-templatemela-minimal-multi-purpose .product-block-inner .sale-label, body.df-theme-templatemela-minimal-multi-purpose .products-list li .list-left .sale-label {
     text-transform: lowercase; }
-  body.df-theme-templatemela-minimal-multi-purpose .fancybox-inner .account-login {
+  body.df-theme-templatemela-minimal-multi-purpose .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
     min-width: 270px; }
   body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df {
     /**
@@ -1755,13 +1755,13 @@ body.df-theme-templatemonster-43373 .pager .limiter {
   */
   min-width: auto; }
 
-.fancybox-inner #df-login.account-login .registered-users {
+.fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users {
   /*
   	╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ TemplateMonster #43373
   	╨╜╨╛╤А╨╛╨▓╨╕╤В ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М ╨╖╨┤╨╡╤Б╤М 20px, ╤З╤В╨╛ ╨┤╨╗╤П ╨▓╤Б╨┐╨╗╤Л╨▓╨░╤О╤Й╨╡╨│╨╛ ╨╛╨║╨╜╨░ ╤Б╨╗╨╕╤И╨║╨╛╨╝ ╨╝╨╜╨╛╨│╨╛.
   */
   padding-bottom: 8px; }
-  .fancybox-inner #df-login.account-login .registered-users p.required {
+  .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users p.required {
     /*
     	╨Ф╤Г╨╝╨░╤О, ╨┤╨╗╤П ╤Д╨╛╤А╨╝╤Л ╨░╨▓╤В╨╛╤А╨╕╨╖╨░╤Ж╨╕╨╕ ╨╕╨╖ ╨┤╨▓╤Г╤Е ╨┐╨╛╨╗╨╡╨╣ ╨╜╨╡ ╤В╨░╨║ ╤Г╨╢ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨┐╨╛╤П╤Б╨╜╨╡╨╜╨╕╨╡,
     	╤З╤В╨╛ ╨╖╨▓╤С╨╖╨┤╨╛╤З╨║╨╛╨╣ ╨╛╨▒╨╛╨╖╨╜╨░╤З╨╡╨╜╤Л ╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨┤╨╗╤П ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤П ╨┐╨╛╨╗╤П.
@@ -1846,3 +1846,5 @@ body.df-theme-tt-theme069 .form-list li.wide .field {
 
 #vk_comments {
   margin-top: 1em; }
+
+/*# sourceMappingURL=all.css.map */

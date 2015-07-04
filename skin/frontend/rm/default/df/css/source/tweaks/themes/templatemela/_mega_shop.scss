@@ -65,13 +65,15 @@ body.df-theme-templatemela-mega-shop {
 			}
 		}
 	}
-	.fancybox-inner {
-		#df-login.account-login {
-			/**
-				Почему то стандартное width:auto работает неправильно.
-				Лень разбираться сейчас.
-			*/
-			width: 266px;
+	.fancybox-wrap.df-fancybox {
+		.fancybox-inner {
+			#df-login.account-login {
+				/**
+					Почему то стандартное width:auto работает неправильно.
+					Лень разбираться сейчас.
+				*/
+				width: 266px;
+			}
 		}
 	}
 }
