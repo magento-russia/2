@@ -4,6 +4,8 @@
 !*/
 !.gitignore
 !app/code/local/Df
+!app/code/local/Varien
+!app/code/local/Zend
 !app/design/adminhtml/rm
 !app/design/frontend/rm
 !app/etc/licenses/localhost.com.xml
