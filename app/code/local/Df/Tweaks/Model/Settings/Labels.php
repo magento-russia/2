@@ -11,6 +11,16 @@ class Df_Tweaks_Model_Settings_Labels extends Df_Core_Model_Settings {
 	}
 
 	/** @return Df_Admin_Model_Config_Extractor_Font */
+	public function getFontForFormInputs() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Df_Admin_Model_Config_Extractor_Font::i(
+				self::CONFIG_GROUP_PATH, 'form_inputs'
+			);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return Df_Admin_Model_Config_Extractor_Font */
 	public function getFontForSideBlockLabel() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Admin_Model_Config_Extractor_Font::i(

@@ -89,8 +89,9 @@
 				<number_of_columns>3</number_of_columns>
 			</illustrated_catalog_navigation>
 			<labels>
-				<button__font__letter_case>default</button__font__letter_case>
-				<side_block__font__letter_case>default</side_block__font__letter_case>
+				<buttons__font__letter_case>default</buttons__font__letter_case>
+				<form_inputs__font__letter_case>lowercase</form_inputs__font__letter_case>
+				<side_block_titles__font__letter_case>default</side_block_titles__font__letter_case>
 			</labels>
 			<other>
 				<jquery_load_mode>load-from-local</jquery_load_mode>

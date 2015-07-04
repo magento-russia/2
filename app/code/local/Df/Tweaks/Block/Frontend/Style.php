@@ -145,6 +145,22 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 				->adjustLetterCase(
 					df_cfg()->tweaks()->labels()->getFontForButton(), '.button *, .buttons-set'
 				)
+				/**
+				 * 2015-02-01
+				 * Раньше существовало глобальное правило CSS,
+				 * которое насильно делало все подписи к полям ввода строчными буквами:
+					.form-list {
+						label {
+							text-transform: lowercase;
+						}
+					}
+				 * Конечно, это неправильно.
+				 * Теперь у администратора есть выбор регистра отображения подписей полей ввода.
+				 * @link http://magento-forum.ru/topic/4982/
+				 */
+				->adjustLetterCase(
+					df_cfg()->tweaks()->labels()->getFontForFormInputs(), '.form-list label'
+				)
 				->adjustLetterCase(
 					df_cfg()->tweaks()->labels()->getFontForSideBlockLabel(), '.sidebar .block-title'
 				)
