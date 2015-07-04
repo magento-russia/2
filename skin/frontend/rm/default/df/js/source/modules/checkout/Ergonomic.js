@@ -20,9 +20,18 @@ rm.checkout.Ergonomic = {
 					checkout.reloadProgressBlock = function() {};
 					_this.loadWaiting_adjust();
 					$('a.df-login', _this.getElement()).fancybox({
-						'titlePosition' : 'inside'
-						,'transitionIn' : 'none'
-						,'transitionOut' : 'none'
+						titlePosition : 'inside'
+						,transitionIn : 'none'
+						,transitionOut : 'none'
+						/**
+						 * 2015-07-04
+						 * Чтобы стили наших всплывающих окон
+						 * не ломали внешний вид всплывающих окон других модулей и оформительских тем,
+						 * которые тоже используют библиотеку Fancybox,
+						 * добавляем свой уникальный класс CSS для корневого контейнера.
+						 * Просто удивительно, что я не сделал этого раньше.
+						 */
+						, wrapCss: 'df-fancybox'
 					});
 					/** @type {rm.checkout.ergonomic.address.Billing} */
 					rm.checkout.ergonomic.billingAddressSingleton =
