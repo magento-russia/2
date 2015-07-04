@@ -218,7 +218,9 @@
 	<frontend>
 		<translate>
 			<modules>
-				<Df_CustomerBalance><files><default>Df_CustomerBalance.csv</default></files></Df_CustomerBalance>
+				<Df_CustomerBalance>
+					<files><default>Df_CustomerBalance.csv</default></files>
+				</Df_CustomerBalance>
 			</modules>
 		</translate>
 		<layout>
@@ -282,7 +284,9 @@
 		</events>
 		<translate>
 			<modules>
-				<Df_CustomerBalance><files><default>Df_CustomerBalance.csv</default></files></Df_CustomerBalance>
+				<Df_CustomerBalance>
+					<files><default>Df_CustomerBalance.csv</default></files>
+				</Df_CustomerBalance>
 			</modules>
 		</translate>
 	</adminhtml>

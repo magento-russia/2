@@ -33,7 +33,9 @@
 	<adminhtml>
 		<translate>
 			<modules>
-				<Df_CatalogSearch><files><default>Df_CatalogSearch.csv</default></files></Df_CatalogSearch>
+				<Df_CatalogSearch>
+					<files><default>Df_CatalogSearch.csv</default></files>
+				</Df_CatalogSearch>
 			</modules>
 		</translate>
 	</adminhtml>

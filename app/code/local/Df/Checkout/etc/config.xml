@@ -140,7 +140,6 @@
 				<Df_Checkout>
 					<files>
 						<default>Df_Checkout.csv</default>
-						<parent>Mage_Checkout.csv</parent>
 					</files>
 				</Df_Checkout>
 			</modules>
@@ -161,7 +160,6 @@
 				<Df_Checkout>
 					<files>
 						<default>Df_Checkout.csv</default>
-						<parent>Mage_Checkout.csv</parent>
 					</files>
 				</Df_Checkout>
 			</modules>

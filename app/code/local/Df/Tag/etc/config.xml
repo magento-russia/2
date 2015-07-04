@@ -26,26 +26,4 @@
 		</blocks>
 		<helpers><df_tag><class>Df_Tag_Helper</class></df_tag></helpers>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Tag>
-					<files>
-						<default>Mage_Tag.csv</default>
-					</files>
-				</Df_Tag>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_Tag>
-					<files>
-						<default>Mage_Tag.csv</default>
-					</files>
-				</Df_Tag>
-			</modules>
-		</translate>
-	</frontend>
 </config>

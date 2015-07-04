@@ -23,26 +23,4 @@
 		<helpers><df_xml_connect><class>Df_XmlConnect_Helper</class></df_xml_connect></helpers>
 		<models><df_xml_connect><class>Df_XmlConnect_Model</class></df_xml_connect></models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_XmlConnect>
-					<files>
-						<default>Mage_XmlConnect.csv</default>
-					</files>
-				</Df_XmlConnect>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_XmlConnect>
-					<files>
-						<default>Mage_XmlConnect.csv</default>
-					</files>
-				</Df_XmlConnect>
-			</modules>
-		</translate>
-	</frontend>
 </config>

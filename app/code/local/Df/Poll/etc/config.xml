@@ -32,26 +32,4 @@
 			</df_poll_resource>
 		</models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Poll>
-					<files>
-						<default>Mage_Poll.csv</default>
-					</files>
-				</Df_Poll>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_Poll>
-					<files>
-						<default>Mage_Poll.csv</default>
-					</files>
-				</Df_Poll>
-			</modules>
-		</translate>
-	</frontend>
 </config>

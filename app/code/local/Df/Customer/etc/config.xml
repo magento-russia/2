@@ -97,17 +97,6 @@
 			</core_collection_abstract_load_after>
 		</events>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Customer>
-					<files>
-						<default>Mage_Customer.csv</default>
-					</files>
-				</Df_Customer>
-			</modules>
-		</translate>
-	</adminhtml>
 	<frontend>
 		<events>
 			<controller_action_predispatch_customer_account_loginPost>
@@ -124,7 +113,6 @@
 				<Df_Customer>
 					<files>
 						<checkout>Mage_Checkout.csv</checkout>
-						<default>Mage_Customer.csv</default>
 					</files>
 				</Df_Customer>
 				<Mage_Customer>

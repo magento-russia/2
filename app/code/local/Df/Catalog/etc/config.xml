@@ -391,24 +391,10 @@
 				</observers>
 			</core_block_abstract_to_html_after>
 		</events>
-		<translate>
-			<modules>
-				<Df_Catalog>
-					<files>
-						<default>Mage_Catalog.csv</default>
-					</files>
-				</Df_Catalog>
-			</modules>
-		</translate>
 	</frontend>
 	<adminhtml>
 		<translate>
 			<modules>
-				<Df_Catalog>
-					<files>
-						<default>Mage_Catalog.csv</default>
-					</files>
-				</Df_Catalog>
 				<Mage_Catalog>
 					<files>
 						<rm_additional>admin/Mage_Catalog.csv</rm_additional>

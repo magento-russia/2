@@ -22,26 +22,4 @@
 		<helpers><df_google_analytics><class>Df_GoogleAnalytics_Helper</class></df_google_analytics></helpers>
 		<models><df_google_analytics><class>Df_GoogleAnalytics_Model</class></df_google_analytics></models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_GoogleAnalytics>
-					<files>
-						<default>Mage_GoogleAnalytics.csv</default>
-					</files>
-				</Df_GoogleAnalytics>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_GoogleAnalytics>
-					<files>
-						<default>Mage_GoogleAnalytics.csv</default>
-					</files>
-				</Df_GoogleAnalytics>
-			</modules>
-		</translate>
-	</frontend>
 </config>

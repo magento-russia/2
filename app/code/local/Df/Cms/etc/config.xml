@@ -151,7 +151,6 @@
 				<Df_Cms>
 					<files>
 						<default>Df_Cms.csv</default>
-						<parent>Mage_Cms.csv</parent>
 					</files>
 				</Df_Cms>
 			</modules>
@@ -218,7 +217,6 @@
 				<Df_Cms>
 					<files>
 						<default>Df_Cms.csv</default>
-						<parent>Mage_Cms.csv</parent>
 					</files>
 				</Df_Cms>
 			</modules>

@@ -231,28 +231,5 @@
 				<df_adminhtml module='Df_Adminhtml'><file>df/adminhtml.xml</file></df_adminhtml>
 			</updates>
 		</layout>
-		<translate>
-			<modules>
-				<Df_Adminhtml>
-					<files>
-<!--
-	Модуль Df_Page используется
-	только для переопределения функциональности модуля Mage_Adminhtml,
-	поэтому мы заимствуем перевод из модуля Mage_Adminhtml.
-	Раньше мы заимствовали перевод другим, более сложным способом:
-	добавляя в каждый переопределяемый блок метод следующего содержания:
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function __() {$a = func_get_args(); return rm_translate($a, 'Mage_Adminhtml');}
-
-	Очевидно, новый способ гораздо проще.
- -->
-						<default>Mage_Adminhtml.csv</default>
-					</files>
-				</Df_Adminhtml>
-			</modules>
-		</translate>
 	</adminhtml>
 </config>

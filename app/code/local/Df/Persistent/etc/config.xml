@@ -16,7 +16,6 @@
 			<modules>
 				<Df_Persistent>
 					<files>
-						<default>Mage_Persistent.csv</default>
 						<checkout>Mage_Checkout.csv</checkout>
 					</files>
 				</Df_Persistent>

@@ -11,11 +11,4 @@
 		<helpers><df_connect><class>Df_Connect_Helper</class></df_connect></helpers>
 		<models><df_connect><class>Df_Connect_Model</class></df_connect></models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Mage_Connect><files><default>Mage_Connect.csv</default></files></Mage_Connect>
-			</modules>
-		</translate>
-	</adminhtml>
 </config>

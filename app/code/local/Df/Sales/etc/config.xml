@@ -165,27 +165,7 @@
 				</observers>
 			</rm_adminhtml_block_sales_order_grid__prepare_columns_after>
 		</events>
-		<translate>
-			<modules>
-				<Df_Sales>
-					<files>
-						<default>Mage_Sales.csv</default>
-					</files>
-				</Df_Sales>
-			</modules>
-		</translate>
 	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_Sales>
-					<files>
-						<default>Mage_Sales.csv</default>
-					</files>
-				</Df_Sales>
-			</modules>
-		</translate>
-	</frontend>
 	<default>
 		<sales>
 			<msrp>

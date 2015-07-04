@@ -251,6 +251,64 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	protected function _getTranslatedString($text, $code) {
 		/** @var string $result */
 		$result = null;
+		/**
+		 * 2015-07-04
+		 * Замечение №1
+		 * Заметил интересную ситуацию в магазине chepe.ru:
+		 * в период эксплуатации магазина до установки Российской сборки Magento
+		 * около сотни интерфейсных строк были переведены интерактивно:
+		 * это когда администратор переводит строки приямо на витрине, перевод сохраняется в БД.
+		 * Так вот, в шаблоне app/design/frontend/studiyaak/default/template/page/html/topmenu.phtml
+		 * там нестандартная строка $this->__( 'Production' ),
+		 * которая после интерактивного перевода сохранились в БД как
+		 * Mage_Page::Production => Продукция.
+		 * После установки Российской сборки Magento соответствующий класс блок был перекрыт,
+		 * и система стала искать не Mage_Page::Production, а Df_Page::Production,
+		 * не находя, разумеется, перевод из БД.
+		 *
+		 * Написал заплатку для подобной ситуации.
+		 * Думаю, эта заплатка будет полезной всем магазинам,
+		 * которые использовали интерактивный перевод до установки Российской сборки Magento.
+		 *
+		 * Замечение №2
+		 * Заметил ещё одну проблему вы описанной выше ситуации:
+		 * получается, что перевод Российской сборки
+		 * перекрывает инлайновый перевод, сделанный до установки РСМ,
+		 * потому что код перевода РСМ начинается с Df_,
+		 * а код инлайнового перевода до установки РСМ начинается с Mage_.
+		 * Пример — перевод фразы «Sort By».
+		 * В БД хранится инлайновый перевод с кодом Mage_Catalog::Sort By.
+		 * РСМ же делала так:
+			<translate>
+				<modules>
+					<Df_Catalog>
+						<files>
+							<default>Mage_Catalog.csv</default>
+						</files>
+					</Df_Catalog>
+				</modules>
+			</translate>
+		 * То есть РСМ повторно загружала строки файла Mage_Catalog.csv,
+		 * только со своим префиксом Df_Catalog.
+		 * Далее, РСМ искала ключ с префиксом Df_Catalog и находила его,
+		 * игнорируя инлайновый перевод до установки РСМ.
+		 *
+		 * Мало того, что этот подход дефектен, так он ещё и ведёт
+		 * к удвоению расхода оперативной памяти и процессорного времени
+		 * на хранение и обработку словарей, ведь словари ядра грузятся дальше.
+		 * Куда только я раньше смотрел???
+		 *
+		 * Переделал по-правильному.
+		 */
+		/** @var bool $isItRmCode */
+		$isItRmCode = ('Df_' === substr($code, 0, 3));
+		/**
+		 * Обратите внимание, что в ядре PHP нет функции @see mb_str_replace
+		 * Используем уж @see str_replace,
+		 * тем более, что мы здесь замещаем только латинские символы.
+		 */
+		/** @var string $originalCode */
+		$originalCode = !$isItRmCode ? null : str_replace('Df_', 'Mage_', $code);
 		/** @var bool $needUseRmTranslator */
 		static $needUseRmTranslator;
 		if (!isset($needUseRmTranslator)) {
@@ -287,6 +345,9 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				$rmTranslator = Df_Localization_Model_Realtime_Translator::s();
 			}
 			$result = $rmTranslator->translate($text, $code);
+			if ((is_null($result) || $text === $result) && $originalCode) {
+				$result = $rmTranslator->translate($text, $originalCode);
+			}
 		}
 		if (is_null($result) || ($text === $result)) {
 			/**
@@ -304,36 +365,11 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			else if (isset($this->_data[$code])) {
 				$result = $this->_data[$code];
 			}
+			else if ($originalCode && isset($this->_data[$originalCode])) {
+				$result = $this->_data[$originalCode];
+			}
 			else if (isset($this->_data[$text])) {
 				$result = $this->_data[$text];
-			}
-			/**
-			 * 2015-07-04
-			 * Заметил интересную ситуацию в магазине chepe.ru:
-			 * в период эксплуатации магазина до установки Российской сборки Magento
-			 * около сотни интерфейсных строк были переведены интерактивно:
-			 * это когда администратор переводит строки приямо на витрине, перевод сохраняется в БД.
-			 * Так вот, в шаблоне app/design/frontend/studiyaak/default/template/page/html/topmenu.phtml
-			 * там нестандартная строка $this->__( 'Production' ),
-			 * которая после интерактивного перевода сохранились в БД как
-			 * Mage_Page::Production => Продукция.
-			 * После установки Российской сборки Magento соответствующий класс блок был перекрыт,
-			 * и система стала искать не Mage_Page::Production, а Df_Page::Production,
-			 * не находя, разумеется, перевод из БД.
-			 *
-			 * Написал заплатку для подобной ситуации.
-			 * Думаю, эта заплатка будет полезной всем магазинам,
-			 * которые использовали интерактивный перевод до установки Российской сборки Magento.
-			 */
-			else if (rm_starts_with($code, 'Df_')) {
-				/**
-				 * Обратите внимание, что в ядре PHP нет функции @see mb_str_replace
-				 * Используем уж @see str_replace,
-				 * тем более, что мы здесь замещаем только латинские символы.
-				 */
-				/** @var string $originalCode */
-				$originalCode = str_replace('Df_', 'Mage_', $code);
-				$result = $this->_getTranslatedString($text, $originalCode);
 			}
 			else {
 				$result = $text;

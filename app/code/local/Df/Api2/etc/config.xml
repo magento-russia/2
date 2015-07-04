@@ -11,11 +11,4 @@
 		<helpers><df_api2><class>Df_Api2_Helper</class></df_api2></helpers>
 		<models><df_api2><class>Df_Api2_Model</class></df_api2></models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Mage_Api2><files><default>Mage_Api2.csv</default></files></Mage_Api2>
-			</modules>
-		</translate>
-	</adminhtml>
 </config>

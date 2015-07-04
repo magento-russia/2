@@ -35,26 +35,4 @@
 		</helpers>
 		<models><df_wishlist><class>Df_Wishlist_Model</class></df_wishlist></models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Wishlist>
-					<files>
-						<default>Mage_Wishlist.csv</default>
-					</files>
-				</Df_Wishlist>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_Wishlist>
-					<files>
-						<default>Mage_Wishlist.csv</default>
-					</files>
-				</Df_Wishlist>
-			</modules>
-		</translate>
-	</frontend>
 </config>

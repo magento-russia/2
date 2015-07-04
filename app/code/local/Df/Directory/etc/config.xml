@@ -131,27 +131,7 @@
 				</args>
 			</df-directory>
 		</routers>
-		<translate>
-			<modules>
-				<Df_Directory>
-					<files>
-						<default>Mage_Directory.csv</default>
-					</files>
-				</Df_Directory>
-			</modules>
-		</translate>
 	</frontend>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Directory>
-					<files>
-						<default>Mage_Directory.csv</default>
-					</files>
-				</Df_Directory>
-			</modules>
-		</translate>
-	</adminhtml>
 	<df>
 		<features>
 			<df-directory>

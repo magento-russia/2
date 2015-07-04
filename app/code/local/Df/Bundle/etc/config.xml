@@ -71,26 +71,4 @@
 			</df_bundle_resource>
 		</models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Bundle>
-					<files>
-						<default>Mage_Bundle.csv</default>
-					</files>
-				</Df_Bundle>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_Bundle>
-					<files>
-						<default>Mage_Bundle.csv</default>
-					</files>
-				</Df_Bundle>
-			</modules>
-		</translate>
-	</frontend>
 </config>

@@ -72,17 +72,6 @@
 		<helpers><df_page><class>Df_Page_Helper</class></df_page></helpers>
 		<models><df_page><class>Df_Page_Model</class></df_page></models>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Page>
-					<files>
-						<default>Mage_Page.csv</default>
-					</files>
-				</Df_Page>
-			</modules>
-		</translate>
-	</adminhtml>
 	<frontend>
 		<events>
 			<page_block_html_topmenu_gethtml_before>
@@ -102,15 +91,6 @@
 				</observers>
 			</rm_menu_top_add_submenu>
 		</events>
-		<translate>
-			<modules>
-				<Df_Page>
-					<files>
-						<default>Mage_Page.csv</default>
-					</files>
-				</Df_Page>
-			</modules>
-		</translate>
 	</frontend>
 	<default>
 		<design>

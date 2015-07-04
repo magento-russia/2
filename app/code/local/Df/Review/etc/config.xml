@@ -82,15 +82,6 @@
 				<df_review module='Df_Review'><file>df/review.xml</file></df_review>
 			</updates>
 		</layout>
-		<translate>
-			<modules>
-				<Df_Review>
-					<files>
-						<default>Mage_Review.csv</default>
-					</files>
-				</Df_Review>
-			</modules>
-		</translate>
 	</frontend>
 	<adminhtml>
 		<translate>
