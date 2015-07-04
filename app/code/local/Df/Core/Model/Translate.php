@@ -307,6 +307,34 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			else if (isset($this->_data[$text])) {
 				$result = $this->_data[$text];
 			}
+			/**
+			 * 2015-07-04
+			 * Заметил интересную ситуацию в магазине chepe.ru:
+			 * в период эксплуатации магазина до установки Российской сборки Magento
+			 * около сотни интерфейсных строк были переведены интерактивно:
+			 * это когда администратор переводит строки приямо на витрине, перевод сохраняется в БД.
+			 * Так вот, в шаблоне app/design/frontend/studiyaak/default/template/page/html/topmenu.phtml
+			 * там нестандартная строка $this->__( 'Production' ),
+			 * которая после интерактивного перевода сохранились в БД как
+			 * Mage_Page::Production => Продукция.
+			 * После установки Российской сборки Magento соответствующий класс блок был перекрыт,
+			 * и система стала искать не Mage_Page::Production, а Df_Page::Production,
+			 * не находя, разумеется, перевод из БД.
+			 *
+			 * Написал заплатку для подобной ситуации.
+			 * Думаю, эта заплатка будет полезной всем магазинам,
+			 * которые использовали интерактивный перевод до установки Российской сборки Magento.
+			 */
+			else if (rm_starts_with($code, 'Df_')) {
+				/**
+				 * Обратите внимание, что в ядре PHP нет функции @see mb_str_replace
+				 * Используем уж @see str_replace,
+				 * тем более, что мы здесь замещаем только латинские символы.
+				 */
+				/** @var string $originalCode */
+				$originalCode = str_replace('Df_', 'Mage_', $code);
+				$result = $this->_getTranslatedString($text, $originalCode);
+			}
 			else {
 				$result = $text;
 			}
