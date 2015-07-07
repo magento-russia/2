@@ -80,19 +80,27 @@ function df_array_clean($elements) {
 }
 
 /**
- * array_combine требует, чтобы оба массива содержали не менее 1 элемента,
- * поэтому надо выделять случай с пустыми массивами в отдельную ветку алгоритма
+ * @uses array_combine() при использовании интерпретатора PHP версии ниже 5.4 требует,
+ * чтобы оба массива содержали не менее 1 элемента:
+ * @link http://php.net/manual/function.array-combine.php
+ * «5.4.0	Previous versions issued E_WARNING and returned FALSE for empty arrays»
+ * Поэтому при прямом применении @uses array_combine()
+ * требуется выделять случай с пустыми массивами в отдельную ветку алгоритма,
+ * что усложняет код.
+ * Функция @see df_array_combine() делает то же, что и @uses array_combine(),
+ * но также способна работать с пустыми массивами.
  *
- * @param array $array1
- * @param array $array2
- * @return array
+ * 2015-02-08
+ * Если требуется заполнить все ключи одним и тем же значнием,
+ * то используйте стандартную функцию @see array_fill_keys()
+ * @link http://php.net/manual/function.array-fill-keys.php
+ *
+ * @param string[]|int[] $keys
+ * @param mixed[] $values
+ * @return array(string|int => mixed)
  */
-function df_array_combine(array $array1, array $array2) {
-	return
-		(0 === count($array1))
-		? array()
-		: array_combine($array1, $array2)
-	;
+function df_array_combine(array $keys, array $values) {
+	return !$keys ? array() : array_combine($keys, $values);
 }
 
 /**

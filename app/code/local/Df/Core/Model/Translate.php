@@ -230,16 +230,15 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * «array_combine: Both parameters should have at least 1 element
 		 * in Df/Core/Model/Translate.php on line 226»
 		 * @link http://magento-forum.ru/topic/4815/
+		 *
+		 * 2015-07-07
+		 * Обратите внимание, что спецсимволы {\n}, {\r}, {\t} надо замещать только в значении
+		 * и не надо заменять в ключе, потому что они не должны встречаться в ключе.
+		 * Из ключа мы переносы строк и символы табуляции удаляем в методе @see _getTranslatedString()
 		 */
-		return
-			! $dictionary
-			? $dictionary
-			: array_combine(
-				array_map(array($this, 'processSpecialCharacters'), array_keys($dictionary))
-				, array_map(array($this, 'processSpecialCharacters'), array_values($dictionary))
-				//, array_values($dictionary)
-			)
-		;
+		return df_array_combine(
+			array_keys($dictionary), $this->processSpecialCharacters(array_values($dictionary))
+		);
 	}
 
 	/**
@@ -249,6 +248,45 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	 * @return string
 	 */
 	protected function _getTranslatedString($text, $code) {
+		/**
+		 * 2015-07-07
+		 * Позволяет нам переводить стандартным способом (посредством файлов CSV) строки,
+		 * содержащие переносы строк и символы табуляции.
+		 * Например, оформительская тема Infortis Ultimo содержит надпись:
+			<comment><![CDATA[<strong>IMPORTANT:</strong><br/>Width of the header columns is specified in <strong style="color:red;">grid units</strong>.<br/>If you want to display three columns (<strong>Left Column</strong>, <strong>Central Column</strong>, <strong>Right Column</strong>) in a single row,<br/>sum of these columns has to be <strong>equal 12 grid units</strong>, for example:<br/>4 + 4 + 4, or 4 + 0 + 8, or 3 + 0 + 9, or 0 + 12 + 0.
+			<br/><br/>]]></comment>
+		 * Обратите внимание на окончиние этой надписи: перед заверщающими символами <br/><br/>
+		 * расположен перенос строки и несколько символов табуляции.
+		 * Стандартным для Magento CE способом подобную строку перевести нельзя (ну, или я не понял, как).
+		 * Моя заплатка позволяет переводить подобные строки.
+		 *
+		 * Обратите внимание, что нельзя вместо str_replace() использовать @see strtr c 3-мя параметрами:
+		 * strtr($text, "\r\n\t", '')
+		 * Такой вызов действительно обрабатывает строку побайтово,
+		 * заменяя каждый из символов \r, \n, \t по-отдельности,
+		 * однако он разумно работает только если длина последнего аргумента равна количеству замещаемых символов:
+		 * «If given three arguments,
+		 * this function returns a copy of str where all occurrences of each (single-byte) character in from
+		 * have been translated to the corresponding character in to,
+		 * i.e., every occurrence of $from[$n] has been replaced with $to[$n],
+		 * where $n is a valid offset in both arguments.
+		 * If from and to have different lengths,
+		 * the extra characters in the longer of the two are ignored.
+		 * The length of str will be the same as the return value's.»
+		 * @link http://php.net/strtr
+		 *
+		 * То есть, если бы мы заменяли не на пустой символ, а, например, на пробел,
+		 * то можно было бы короче написать с @see strtr():
+		 * strtr($text, "\r\n\t", '   ')
+		 * При замене на пустой символ непонятно, как сделать последний аргумент равным по длине второму.
+		 *
+		 * Новый алгоритм взял отсюда:
+		 * @link http://stackoverflow.com/a/20717751/254475
+		 */
+		/** @var string[] $symbolsToRemove */
+		static $symbolsToRemove = array("\r", "\n", "\t");
+		$text = str_replace($symbolsToRemove, '', $text);
+		$code = str_replace($symbolsToRemove, '', $code);
 		/** @var string $result */
 		$result = null;
 		/**
@@ -562,12 +600,16 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	}
 
 	/**
-	 * @see Df_Core_Model_Translate::_getFileData()
-	 * @param string $text
-	 * @return string
+	 * @used-by Df_Core_Model_Translate::_getFileData()
+	 * @param string|string[] $text
+	 * @return string|string[]
 	 */
 	private function processSpecialCharacters($text) {
-		return strtr($text, array('{\n}' => "\n", '{\r}' => "\r", '{\t}' => "\t"));
+		return
+			is_array($text)
+			? array_map(array($this, __FUNCTION__), $text)
+			: strtr($text, array('{\n}' => "\n", '{\r}' => "\r", '{\t}' => "\t"))
+		;
 	}
 
 	const _CLASS = __CLASS__;
