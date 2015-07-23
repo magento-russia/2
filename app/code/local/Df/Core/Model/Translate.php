@@ -349,7 +349,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		$originalCode = !$isItRmCode ? null : str_replace('Df_', 'Mage_', $code);
 		/** @var bool $needUseRmTranslator */
 		static $needUseRmTranslator;
-		if (!isset($needUseRmTranslator)) {
+		if (is_null($needUseRmTranslator)) {
 			$needUseRmTranslator =
 				/**
 				 * Не используем Df_Localization_Model_Realtime_Translator
@@ -379,7 +379,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		if ($needUseRmTranslator) {
 			/** @var Df_Localization_Model_Realtime_Translator */
 			static $rmTranslator;
-			if (!isset($rmTranslator)) {
+			if (!$rmTranslator) {
 				$rmTranslator = Df_Localization_Model_Realtime_Translator::s();
 			}
 			$result = $rmTranslator->translate($text, $code);
