@@ -61,14 +61,27 @@ class Df_Core_Helper_Debug extends Mage_Core_Helper_Abstract {
 		$compactBT = array();
 		/** @var int $traceLength */
 		$traceLength = count($bt);
+		/**
+		 * 2015-07-23
+		 * 1) Удаляем часть файлового пути до корневой папки Magento.
+		 * 2) Заменяем разделитель папок на унифицированный.
+		 */
+		/** @var string $bp */
+		$bp = BP . DIRECTORY_SEPARATOR;
+		/** @var bool $nonStandardDS */
+		$nonStandardDS = DIRECTORY_SEPARATOR !== '/';
 		for ($traceIndex = 0; $traceIndex < $traceLength; $traceIndex++) {
 			/** @var array $currentState */
 			$currentState = df_a($bt, $traceIndex);
 			/** @var array(string => string) $nextState */
 			$nextState = df_a($bt, 1 + $traceIndex, array());
-			$compactBT[]=
-				array(
-					'Файл' => df_a($currentState, 'file')
+			/** @var string $file */
+			$file = str_replace($bp, '', df_a($currentState, 'file'));
+			if ($nonStandardDS) {
+				$file = str_replace(DIRECTORY_SEPARATOR, '/', $file);
+			}
+			$compactBT[]= array(
+				'Файл' => $file
 					,'Строка' => df_a($currentState, 'line')
 					,'Субъект' =>
 						!$nextState
