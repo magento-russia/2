@@ -9,13 +9,13 @@
 				<code>региональные настройки</code>
 			</locale>
 			<config translate='code'>
-				<code>другие настройки</code>
+				<code>Другие настройки</code>
 			</config>
 			<administrator translate='code'>
-				<code>анкета администратора</code>
+				<code>Анкета администратора</code>
 			</administrator>
 			<end translate='code'>
-				<code>установка завершена</code>
+				<code>ФИНИШ!</code>
 			</end>
 		</steps>
 	</wizard>
