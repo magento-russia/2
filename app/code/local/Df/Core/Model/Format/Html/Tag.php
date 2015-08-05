@@ -3,19 +3,17 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model_Abstract {
 	/** @return string */
 	public function getOutput() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				strtr(
-					!$this->getContent() && $this->isShortTagAllowed()
-					? '<{tag-and-attributes}/>'
-					: '<{tag-and-attributes}{after-attributes}>{content}</{tag}>'
-					,array(
-						'{tag}' => $this->getTag()
-						,'{tag-and-attributes}' => $this->getOpenTagWithAttributesAsText()
-						,'{after-attributes}' => $this->shouldAttributesBeMultiline() ? "\r\n" : ''
-						,'{content}' => $this->getContent()
-					)
+			$this->{__METHOD__} = strtr(
+				!$this->getContent() && $this->isShortTagAllowed()
+				? '<{tag-and-attributes}/>'
+				: '<{tag-and-attributes}{after-attributes}>{content}</{tag}>'
+				,array(
+					'{tag}' => $this->getTag()
+					,'{tag-and-attributes}' => $this->getOpenTagWithAttributesAsText()
+					,'{after-attributes}' => $this->shouldAttributesBeMultiline() ? "\n" : ''
+					,'{content}' => $this->getContent()
 				)
-			;
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -27,48 +25,40 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model_Abstract {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by getAttributesAsText()
+	 * @used-by array_map()
+	 * @link http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
 	 * @link http://3v4l.org/OipEQ
-	 *
 	 * @param string $name
-	 * @param string $value
+	 * @param string|string[]|int|null $value
 	 * @return string
 	 */
 	private function getAttributeAsText($name, $value) {
-		df_param_string($name, 0);
-		df_param_string($value, 1);
-		return
-			implode(
-				'='
-				,array(
-					$name
-					,rm_sprintf(
-						'\'%s\''
-						,str_replace(
-							'\''
-							,'\\\''
-							,$value
-						)
-					)
-				)
-			)
-		;
+		df_param_string_not_empty($name, 0);
+		/**
+		 * 2015-04-16
+		 * Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
+		 */
+		if (is_array($value)) {
+			$value = implode(' ', array_filter($value));
+		}
+		$value = rm_e($value);
+		return '' === $value ? '' : "{$name}='{$value}'";
 	}
 
 	/** @return string */
 	private function getAttributesAsText() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				implode(
-					$this->shouldAttributesBeMultiline() ? "\n" :  ' '
-					,array_map(
-						array($this, 'getAttributeAsText')
-						,array_keys($this->getAttributes())
-						,array_values($this->getAttributes())
-					)
-				)
-			;
+			$this->{__METHOD__} = implode(
+				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
+				, df_clean(array_map(
+					/** @uses getAttributeAsText() */
+					array($this, 'getAttributeAsText')
+					,array_keys($this->getAttributes())
+					,array_values($this->getAttributes())
+				))
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -81,12 +71,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model_Abstract {
 		/** @var bool $isMultiline */
 		$isMultiline = rm_contains($result, "\n");
 		if ($isMultiline) {
-			$result =
-				rm_sprintf(
-					"\n%s\n"
-					,df_tab_multiline($result)
-				)
-			;
+			$result = "\n" . df_tab_multiline($result) . "\n";
 		}
 		df_result_string($result);
 		return $result;

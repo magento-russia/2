@@ -389,6 +389,30 @@ function rm_contains($haystack, $needle) {return false !== strpos($haystack, $ne
 
 /**
  * 2015-02-17
+ * Не используем методы ядра
+ * @see Mage_Core_Helper_Abstract::escapeHtml()
+ * @see Mage_Core_Helper_Abstract::htmlEscape()
+ * потому что они используют @uses htmlspecialchars() со вторым параметром @see ENT_COMPAT,
+ * в результате чего одиночные кавычки не экранируются.
+ * Ядро Magento не использует одиночные кавычки при формировании HTML
+ * (в частности, в шаблонах *.phtml), поэтому, видимо, их устраивает режим ENT_COMPAT.
+ * Российская сборка Magento использует при формировании HTML одиночные кавычки,
+ * поэтому нам нужен режим ENT_QUOTES.
+ * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
+ * @see rm_ejs()
+ * @param string|string[]|int|null $text
+ * @return string|string[]
+ */
+function rm_e($text) {
+	return
+		is_array($text)
+		? array_map(__FUNCTION__, $text)
+		: htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false)
+	;
+}
+
+/**
+ * 2015-02-17
  * Экранирует строку для вставки её в код на JavaScript.
  * @uses json_encode() рекомендуют
  * как самый правильный способ вставки строки из PHP в JavaScript:
