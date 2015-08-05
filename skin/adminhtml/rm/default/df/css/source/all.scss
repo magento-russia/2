@@ -3,13 +3,12 @@
 	Обратите внимание, что правило @charset надо записывать именно с двойными кавычками
 	и именно в самом начале файла, без любых символов и пробелов впереди.
 */
-@import '_1c';
 @import '_catalog';
 @import '_chronopay';
 @import '_cms';
 @import 'external/_dropdown';
 @import 'external/_spectrum';
-//@import 'forum2/_all';
+@import '_forms';
 @import 'localization/_theme';
 @import 'localization/_verification';
 @import '_notifier';

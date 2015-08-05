@@ -98,36 +98,19 @@ class Df_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
 				$renderer->setDataUsingMethod('input_name', $inputName);
 				$renderer->setDataUsingMethod('column_name', $columnName);
 				$renderer->setColumn($column);
-				$result =
-					strtr(
-							strtr(
-								$renderer->render(new Varien_Object())
-								,array(
-									'\'' => '\\\''
-									,'"' => '\\"'
-								)
-							)
-						.
-							strtr(
-								'<script type="text/javascript">
-									jQuery(function() {
-										var jRow = jQuery (document.getElementById ("#{_id}"));
-										var jSelect = jQuery(".%columnName%", jRow);
-										jSelect.val(\\\'#{%columnName%}\\\');
-									});
-								</script>
-								'
-								,array(
-									'%columnName%' => $columnName
-								)
-							)
-						,array(
-							"\r" => ''
-							,"\n" => ''
-							,'/' => '\/'
-						)
+				$result = df_text()->removeLineBreaks(rm_ejs(
+					$renderer->render(new Varien_Object())
+					. strtr(
+						'<script type=\'text/javascript\'>
+							jQuery(function() {
+								var jRow = jQuery(document.getElementById(\'#{_id}\'));
+								var jSelect = jQuery(\'.%columnName%\', jRow);
+								jSelect.val(\'#{%columnName%}\');
+							});
+						</script>'
+						,array('%columnName%' => $columnName)
 					)
-				;
+				));
 			}
 		}
 		return $result;

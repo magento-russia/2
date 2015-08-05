@@ -3,11 +3,6 @@
 	Обратите внимание, что правило @charset надо записывать именно с двойными кавычками
 	и именно в самом начале файла, без любых символов и пробелов впереди.
 */
-#config_edit_form fieldset#df_1c_general .form-list tr#row_df_1c_general_non_standard_currency_codes td.value .grid select.standard_code {
-  width: 15em; }
-#config_edit_form fieldset#df_1c_product__prices .form-list tr#row_df_1c_product__prices_map td.value .grid select.customer_group {
-  width: 10em; }
-
 #product_attribute_tabs_main_content select {
   text-transform: lowercase; }
 #product_attribute_tabs_main_content .form-list td label {
@@ -419,31 +414,31 @@ License: MIT
 
 /* Gradients for hue, saturation and value instead of images.  Not pretty... but it works */
 .sp-sat {
-  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(rgba(204, 154, 129, 0)));
-  background-image: -webkit-linear-gradient(left, white, rgba(204, 154, 129, 0));
-  background-image: -moz-linear-gradient(left, white, rgba(204, 154, 129, 0));
-  background-image: -o-linear-gradient(left, white, rgba(204, 154, 129, 0));
-  background-image: -ms-linear-gradient(left, white, rgba(204, 154, 129, 0));
-  background-image: linear-gradient(to right, white, rgba(204, 154, 129, 0));
+  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#FFF), to(rgba(204, 154, 129, 0)));
+  background-image: -webkit-linear-gradient(left, #FFF, rgba(204, 154, 129, 0));
+  background-image: -moz-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
+  background-image: -o-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
+  background-image: -ms-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
+  background-image: linear-gradient(to right, #fff, rgba(204, 154, 129, 0));
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr=#FFFFFFFF, endColorstr=#00CC9A81)";
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr='#FFFFFFFF', endColorstr='#00CC9A81'); }
 
 .sp-val {
-  background-image: -webkit-gradient(linear, 0 100%, 0 0, from(black), to(rgba(204, 154, 129, 0)));
-  background-image: -webkit-linear-gradient(bottom, black, rgba(204, 154, 129, 0));
-  background-image: -moz-linear-gradient(bottom, black, rgba(204, 154, 129, 0));
-  background-image: -o-linear-gradient(bottom, black, rgba(204, 154, 129, 0));
-  background-image: -ms-linear-gradient(bottom, black, rgba(204, 154, 129, 0));
-  background-image: linear-gradient(to top, black, rgba(204, 154, 129, 0));
+  background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#000000), to(rgba(204, 154, 129, 0)));
+  background-image: -webkit-linear-gradient(bottom, #000000, rgba(204, 154, 129, 0));
+  background-image: -moz-linear-gradient(bottom, #000, rgba(204, 154, 129, 0));
+  background-image: -o-linear-gradient(bottom, #000, rgba(204, 154, 129, 0));
+  background-image: -ms-linear-gradient(bottom, #000, rgba(204, 154, 129, 0));
+  background-image: linear-gradient(to top, #000, rgba(204, 154, 129, 0));
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00CC9A81, endColorstr=#FF000000)";
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00CC9A81', endColorstr='#FF000000'); }
 
 .sp-hue {
-  background: -moz-linear-gradient(top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
-  background: -ms-linear-gradient(top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
-  background: -o-linear-gradient(top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
-  background: -webkit-gradient(linear, left top, left bottom, from(red), color-stop(0.17, yellow), color-stop(0.33, lime), color-stop(0.5, cyan), color-stop(0.67, blue), color-stop(0.83, magenta), to(red));
-  background: -webkit-linear-gradient(top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%); }
+  background: -moz-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
+  background: -ms-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
+  background: -o-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), color-stop(0.17, #ffff00), color-stop(0.33, #00ff00), color-stop(0.5, #00ffff), color-stop(0.67, #0000ff), color-stop(0.83, #ff00ff), to(#ff0000));
+  background: -webkit-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%); }
 
 /* IE filters do not support multiple color stops.
    Generate 6 divs, line them up, and do two color gradients for each.
@@ -745,6 +740,118 @@ License: MIT
 .sp-palette .sp-thumb-dark.sp-thumb-active .sp-thumb-inner {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAMdJREFUOE+tkgsNwzAMRMugEAahEAahEAZhEAqlEAZhEAohEAYh81X2dIm8fKpEspLGvudPOsUYpxE2BIJCroJmEW9qJ+MKaBFhEMNabSy9oIcIPwrB+afvAUFoK4H0tMaQ3XtlrggDhOVVMuT4E5MMG0FBbCEYzjYT7OxLEvIHQLY2zWwQ3D+9luyOQTfKDiFD3iUIfPk8VqrKjgAiSfGFPecrg6HN6m/iBcwiDAo7WiBeawa+Kwh7tZoSCGLMqwlSAzVDhoK+6vH4G0P5wdkAAAAASUVORK5CYII=); }
 
+.entry-edit div.comment {
+  width: auto;
+  margin: 0;
+  padding: 0 0 0 13px;
+  background: url(../../../../../default/default/images/note_bg.gif) 1px 6px no-repeat;
+  font-size: 11px;
+  line-height: 16px;
+  max-width: 1000px;
+  font-size: 12px; }
+  .entry-edit div.comment .rm-recommendation {
+    color: green;
+    font-weight: bold; }
+  .entry-edit div.comment ul, .entry-edit div.comment ol {
+    margin-left: 2em;
+    list-style-position: outside; }
+  .entry-edit div.comment ul {
+    list-style-type: disc; }
+  .entry-edit div.comment ol {
+    list-style-type: decimal; }
+  .entry-edit div.comment li {
+    margin: 0.2em 0; }
+  .entry-edit div.comment table.rm-definition {
+    margin-left: 1.5em;
+    border-collapse: collapse; }
+    .entry-edit div.comment table.rm-definition tr td:first-child {
+      font-weight: bold; }
+    .entry-edit div.comment table.rm-definition tr td {
+      padding: 0.25em 0.5em; }
+    .entry-edit div.comment table.rm-definition tr:nth-child(even) {
+      background-color: white; }
+.entry-edit .form-list td.value p.note, .entry-edit .form-list td.value div.note {
+  width: auto;
+  max-width: 800px; }
+.entry-edit .form-list td.value div.note {
+  width: auto;
+  margin: 0;
+  padding: 0 0 0 13px;
+  background: url(../../../../../default/default/images/note_bg.gif) 1px 6px no-repeat;
+  font-size: 11px;
+  line-height: 16px;
+  max-width: 800px; }
+  .entry-edit .form-list td.value div.note .rm-recommendation {
+    color: green;
+    font-weight: bold; }
+  .entry-edit .form-list td.value div.note ul, .entry-edit .form-list td.value div.note ol {
+    margin-left: 2em;
+    list-style-position: outside; }
+  .entry-edit .form-list td.value div.note ul {
+    list-style-type: disc; }
+  .entry-edit .form-list td.value div.note ol {
+    list-style-type: decimal; }
+  .entry-edit .form-list td.value div.note li {
+    margin: 0.2em 0; }
+  .entry-edit .form-list td.value div.note table.rm-definition {
+    margin-left: 1.5em;
+    border-collapse: collapse; }
+    .entry-edit .form-list td.value div.note table.rm-definition tr td:first-child {
+      font-weight: bold; }
+    .entry-edit .form-list td.value div.note table.rm-definition tr td {
+      padding: 0.25em 0.5em; }
+    .entry-edit .form-list td.value div.note table.rm-definition tr:nth-child(even) {
+      background-color: white; }
+.entry-edit .form-list td.value p#note_tax_rate {
+  font-size: inherit; }
+.entry-edit .form-list td.value .df-config-info-urls {
+  display: block;
+  background: white;
+  padding: 2px 0 2px 0.75em;
+  width: 300px; }
+  .entry-edit .form-list td.value .df-config-info-urls .df-url {
+    display: block;
+    width: 35em;
+    background: white;
+    cursor: pointer; }
+  .entry-edit .form-list td.value .df-config-info-urls .df-url.hover {
+    background: #FFF9E9; }
+  .entry-edit .form-list td.value .df-config-info-urls li {
+    display: block;
+    background: white;
+    margin: 0;
+    padding: 0; }
+    .entry-edit .form-list td.value .df-config-info-urls li .df-name {
+      float: left;
+      width: 7em;
+      padding: 4px 0; }
+    .entry-edit .form-list td.value .df-config-info-urls li .df-url {
+      padding: 4px 0.75em;
+      margin-left: 8em; }
+.entry-edit .form-list td.value .grid table tr td:last-child, .entry-edit .form-list td.value .grid table tr th:last-child {
+  width: 100px;
+  text-transform: lowercase; }
+.entry-edit .form-list td.value .grid table tr td .select2-container .select2-choice {
+  /*box-sizing: border-box; */ }
+.entry-edit .form-list td.value .Df_Directory_Block_Field_CountriesOrdered {
+  width: 300px; }
+.entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType {
+  max-width: 470px; }
+  .entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType select.customer_group {
+    width: 10em; }
+.entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes {
+  width: 380px; }
+  .entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes select.standard_code {
+    width: 15em; }
+.entry-edit .form-list td.value #df_directory_countries_popular__order .grid {
+  width: 300px; }
+
+#config_edit_form .entry-edit .form-list td.value {
+  width: auto; }
+  #config_edit_form .entry-edit .form-list td.value p.note, #config_edit_form .entry-edit .form-list td.value div.note {
+    width: auto;
+    max-width: 800px; }
+
 body.df-localization-theme-index .rm-container h1 {
   color: #eb5e00;
   font-size: 1.25em;
@@ -919,47 +1026,23 @@ div.df-admin-account-generator {
   div.df-admin-account-generator form .df-submit {
     margin: 1em 0 0 0; }
 
-div.df-licensor-generator {
-  /*background: #FFFBDD;*/ }
-  div.df-licensor-generator h1 {
-    font-size: 175%; }
-  div.df-licensor-generator form textarea, div.df-licensor-generator form label, div.df-licensor-generator form input {
-    display: block; }
-  div.df-licensor-generator form ul.df-inputs li {
-    margin: 0 0 1em 0; }
-  div.df-licensor-generator form .df-submit {
-    margin: 1em 0 0 0; }
 
-.go-try {
-  display: none; }
 
-#page-help-link {
-  display: none; }
+.adminhtml-system-currencysymbol-index .content-header {
+  width: 533px; }
+.adminhtml-system-currencysymbol-index #currency_symbols_form .fieldset {
+  width: 500px; }
+  .adminhtml-system-currencysymbol-index #currency_symbols_form .fieldset .hor-scroll table tbody td {
+    width: 50%; }
+    .adminhtml-system-currencysymbol-index #currency_symbols_form .fieldset .hor-scroll table tbody td .input-text {
+      width: 100px; }
 
-.grid-severity-critical
-,
-.grid-severity-critical span
-,
-.grid-severity-major
-, .grid-severity-major span
-, .grid-severity-minor
-, .grid-severity-minor span
-, .grid-severity-notice
-, .grid-severity-notice span {
-  text-transform: lowercase; }
-
-.grid-severity-critical span
-,
-.grid-severity-major span
-, .grid-severity-minor span
-, .grid-severity-notice span {
-  line-height: 16px; }
+.columns #df_tweaks_admin_logging__actions .form-list td.value {
+  width: 700px; }
 
 #config_edit_form .columns .form-list td.value {
   width: 380px; }
-#config_edit_form .form-list td.value input.input-text
-,
-#config_edit_form .form-list td.value textarea {
+#config_edit_form .form-list td.value input.input-text, #config_edit_form .form-list td.value textarea {
   width: 374px; }
 #config_edit_form .form-list td.value textarea {
   height: 5em; }
@@ -971,25 +1054,57 @@ div.df-licensor-generator {
   width: 380px; }
 #config_edit_form .form-list td.label {
   width: 250px; }
-#config_edit_form .form-list td.label label {
-  width: 235px; }
+  #config_edit_form .form-list td.label label {
+    width: 235px; }
 
-.columns #df_tweaks_admin_logging__actions .form-list td.value {
-  width: 700px; }
+.go-try {
+  display: none; }
+
+.grid-severity-critical
+, .grid-severity-critical span
+, .grid-severity-major
+, .grid-severity-major span
+, .grid-severity-minor
+, .grid-severity-minor span
+, .grid-severity-notice
+, .grid-severity-notice span {
+  text-transform: lowercase; }
+
+.grid-severity-critical span
+, .grid-severity-major span
+, .grid-severity-minor span
+, .grid-severity-notice span {
+  line-height: 16px; }
+
+div#messages {
+  line-height: normal; }
+  div#messages ul.messages li {
+    font-size: 100% !important;
+    line-height: normal;
+    min-height: auto !important;
+    /**
+    	╨Ф╨╗╤П ╨▓╤Л╨▓╨╛╨┤╨░ ╨▒╨╗╨╛╨║╨╛╨▓ XML.
+    	@see rm_xml_output_html()
+     */ }
+    div#messages ul.messages li .rm-xml {
+      margin: 0.75em 0;
+      color: #2f2f2f;
+      font-family: monospace; }
+    div#messages ul.messages li.error-msg ul.rm-batch li {
+      color: #2f2f2f;
+      font-weight: normal !important;
+      /*line-height: normal;*/
+      margin: 8px 0 !important;
+      font-size: 0.95em !important;
+      /*min-height: auto !important;*/ }
+
+#page-help-link {
+  display: none; }
 
 #product_edit_form #sku_type,
 #product_edit_form #weight_type,
 #product_options_container .headings .type-type {
   width: 150px; }
-
-.adminhtml-system-currencysymbol-index .content-header {
-  width: 533px; }
-.adminhtml-system-currencysymbol-index #currency_symbols_form .fieldset {
-  width: 500px; }
-  .adminhtml-system-currencysymbol-index #currency_symbols_form .fieldset .hor-scroll table tbody td {
-    width: 50%; }
-    .adminhtml-system-currencysymbol-index #currency_symbols_form .fieldset .hor-scroll table tbody td .input-text {
-      width: 100px; }
 
 .df div.df-config .df-form .df-field {
   color: #6f8992;
@@ -1012,39 +1127,6 @@ div.df-licensor-generator {
       float: left;
       margin-left: 0; }
 
-/*
-	╨Ш╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╨╛╨╜╨╜╨░╤П ╨┐╨╛╨╗╨╡, ╨│╨┤╨╡ ╤Б╨╕╤Б╤В╨╡╨╝╨░ ╤Б╨╛╨╛╨▒╤Й╨░╨╡╤В ╨░╨┤╨╝╨╕╨╜╨╕╤Б╤В╤А╨░╤В╨╛╤А╤Г,
-	╨║╨░╨║╨╕╨╡ ╨▓╨╡╨▒-╨░╨┤╤А╨╡╤Б╨░ ╨╜╨░╨┤╨╛ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╤М ╨┤╨╗╤П ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨╝╨╛╨┤╤Г╨╗╤П.
-	╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П ╨╝╨╛╨┤╤Г╨╗╤П╨╝╨╕ ┬л1╨б:╨г╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╤В╨╛╤А╨│╨╛╨▓╨╗╨╡╨╣┬╗ ╨╕ ┬л╨п╨╜╨┤╨╡╨║╤Б.╨Ь╨░╤А╨║╨╡╤В┬╗.
-*/
-.entry-edit fieldset .df-config-info-urls {
-  display: block;
-  background: white;
-  padding: 2px 0 2px 0.75em;
-  width: 300px; }
-  .entry-edit fieldset .df-config-info-urls .df-url {
-    display: block;
-    width: 35em;
-    background: white;
-    cursor: pointer; }
-  .entry-edit fieldset .df-config-info-urls .df-url.hover {
-    background: #FFF9E9; }
-  .entry-edit fieldset .df-config-info-urls li {
-    display: block;
-    background: white;
-    margin: 0;
-    padding: 0; }
-    .entry-edit fieldset .df-config-info-urls li .df-name {
-      float: left;
-      width: 7em;
-      padding: 4px 0; }
-    .entry-edit fieldset .df-config-info-urls li .df-url {
-      padding: 4px 0.75em;
-      margin-left: 8em; }
-
-.form-list td.value p.note {
-  width: auto; }
-
 .autocomplete-suggestions {
   border: 1px solid #999;
   background: #FFF;
@@ -1059,3 +1141,5 @@ div.df-licensor-generator {
       color: black; }
   .autocomplete-suggestions .autocomplete-selected {
     background: #F0F0F0; }
+
+/*# sourceMappingURL=all.css.map */

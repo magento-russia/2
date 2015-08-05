@@ -1,37 +1,19 @@
 #product_attribute_tabs_main_content {
-	select {
-		text-transform: lowercase;
-	}
-
+	select {text-transform: lowercase;}
 	.form-list {
 		td {
-			label {
-				width: 266px;
-			}
+			label {width: 266px;}
 		}
 	}
 }
-
-
 #product_attribute_tabs_labels_content {
-
 	.dynamic-grid {
-
-		th {
-			width: 180px;
-		}
-
+		th {width: 180px;}
 		td {
-			input {
-				width: 174px;
-			}
+			input {width: 174px;}
 		}
 	}
 }
-
-
 #catalog-wysiwyg-editor_content {
-	label {
-		display: none;
-	}
+	label {display: none;}
 }

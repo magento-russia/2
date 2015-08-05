@@ -481,10 +481,38 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
+	 * 2015-03-03
+	 * Алгоритм аналогичен @see singleLine()
+	 *
+	 * 2015-07-07
+	 * Раньше алгоритм был таким:
+	 	return strtr($text, "\r\n", '  ');
+	 * Однако он не совсем правилен,
+	 * потому что если перенос строки записан в формате Windows
+	 * (то есть, в качестве переноса строки используется последовательность \r\n),
+	 * то прошлый алгоритм заменит эту последовательность на 2 пробела, а надо — на один.
+	 *
+	 * «If given three arguments,
+	 * this function returns a copy of str where all occurrences of each (single-byte) character in from
+	 * have been translated to the corresponding character in to,
+	 * i.e., every occurrence of $from[$n] has been replaced with $to[$n],
+	 * where $n is a valid offset in both arguments.
+	 * If from and to have different lengths,
+	 * the extra characters in the longer of the two are ignored.
+	 * The length of str will be the same as the return value's.»
+	 * @link http://php.net/strtr
+	 *
+	 * Новый алгоритм взял отсюда:
+	 * @link http://stackoverflow.com/a/20717751/254475
+	 *
 	 * @param string $text
 	 * @return string
 	 */
-	public function removeLineBreaks($text) {return rm_string_clean($text, "\r\n");}
+	public function removeLineBreaks($text) {
+		/** @var string[] $symbolsToRemove */
+		static $symbolsToRemove = array("\r\n", "\r", "\n");
+		return str_replace($symbolsToRemove, ' ', $text);
+	}
 
 	/**
 	 * @link http://www.php.net/str_ireplace

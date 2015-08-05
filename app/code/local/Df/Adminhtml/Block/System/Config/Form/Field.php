@@ -1,17 +1,32 @@
 <?php
 /**
+ * @singleton
  * КЭШИРОВАНИЕ НАДО РЕАЛИЗОВЫВАТЬ КРАЙНЕ ОСТОРОЖНО!!!
- * Система использует данный класс и его потмков как одиночек:
- * $renderer = Mage::getBlockSingleton('adminhtml/system_config_form_field');
+ * Обратите внимание, что Magento не создаёт отдельные экземпляры данного класса
+ * для вывода каждого поля!
+ * Magento использует ЕДИНСТВЕННЫЙ экземпляр данного класса для вывода всех полей!
+ * Поэтому в объектах данного класса нельзя кешировать информацию,
+ * которая индивидуальна для поля конкретного поля!
  *
- * @see Mage_Adminhtml_Block_System_Config_Form::initFields():
+ * Все классы, которые мы указываем в качестве «frontend_model» для интерфейсного поля,
+ * в том числе и данный класс, используются как объекты-одиночки.
+ * Конструируются «frontend_model» в методе
+ * @used-by Mage_Adminhtml_Block_System_Config_Form::initFields():
 	if ($element->frontend_model) {
 		$fieldRenderer = Mage::getBlockSingleton((string)$element->frontend_model);
 	} else {
 		$fieldRenderer = $this->_defaultFieldRenderer;
 	}
+ * Обратите внимание, что для конструирования используется метод @uses Mage::getBlockSingleton()
+ * Он-то как раз и обеспечивает одиночество объектов.
  *
- * Этот класс перекрывает системный класс @see Mage_Adminhtml_Block_System_Config_Form_Field
+ * Рисование полей происходит в методе
+ * @see Mage_Adminhtml_Block_System_Config_Form_Field::render()
+ * @see Df_Adminhtml_Block_System_Config_Form_Field::render()
+		$html .= '<td class="value">';
+		$html .= $this->_getElementHtml($element);
+ *
+ * Наш класс перекрывает системный класс @see Mage_Adminhtml_Block_System_Config_Form_Field
  * ради устранения сбоя
  * «Warning: Illegal string offset 'value'
  * in app/code/core/Mage/Adminhtml/Block/System/Config/Form/Field.php»,
@@ -28,10 +43,16 @@
  */
 class Df_Adminhtml_Block_System_Config_Form_Field extends Mage_Adminhtml_Block_System_Config_Form_Field {
 	/**
-	 * Цель перекрытия —
-	 * заплатка к методу @see Mage_Adminhtml_Block_System_Config_Form_Field::render(),
-	 * который в некоторых ситуациях может приводить к сбою.
+	 * Цели перекрытия:
+	 * 1) Заплатка к методу @see Mage_Adminhtml_Block_System_Config_Form_Field::render(),
+	 * 	который в некоторых ситуациях может приводить к сбою.
 	 * Смотрите подробный комментарий внутри метода
+	 * @see Df_Adminhtml_Block_System_Config_Form_Field::render()
+	 * 2) Замена тегов p.note > span, обрамляющих примечание, на блочный тег div,
+	 * что позволяет использовать теги, которые не позволено использовать внутри тегов p и span
+	 * (в частности ul и p) в комментариях к полям ввода
+	 * (браузеры не допускают использование тегов ul и p внутри тегов p и span
+	 * и при наличии недопустимых тегов размещают их не внутри родительского тега, а после него).
 	 * @see Df_Adminhtml_Block_System_Config_Form_Field::render().
 	 * @override
 	 * @param Varien_Data_Form_Element_Abstract $element
@@ -78,7 +99,7 @@ class Df_Adminhtml_Block_System_Config_Form_Field extends Mage_Adminhtml_Block_S
 			$html .= $this->_getElementHtml($element);
 		};
 		if ($element->getComment()) {
-			$html.= '<p class="note"><span>'.$element->getComment().'</span></p>';
+			$html.= "<div class='note'>{$element->getComment()}</div>";
 		}
 		$html.= '</td>';
 
