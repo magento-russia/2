@@ -4,9 +4,24 @@
  * передаваемому 1С в интернет-магазин.
  */
 abstract class Df_1C_Model_Cml2_Import_Data_Document extends Df_Core_Model_SimpleXml_Parser_Entity {
-	/** @return string */
+	/**
+	 * 2015-08-04
+	 * @return string
+	 * @see Df_1C_Model_Cml2_Import_Data_Document_Catalog::getExternalId_CatalogAttributes()
+	 * @see Df_1C_Model_Cml2_Import_Data_Document_Offers::getExternalId_CatalogAttributes()
+	 */
+	abstract public function getExternalId_CatalogAttributes();
+	/**
+	 * @return string
+	 * @see Df_1C_Model_Cml2_Import_Data_Document_Catalog::getExternalId_CatalogProducts()
+	 * @see Df_1C_Model_Cml2_Import_Data_Document_Offers::getExternalId_CatalogProducts()
+	 */
 	abstract public function getExternalId_CatalogProducts();
-	/** @return string */
+	/**
+	 * @return string
+	 * @see Df_1C_Model_Cml2_Import_Data_Document_Catalog::getExternalId_CatalogStructure()
+	 * @see Df_1C_Model_Cml2_Import_Data_Document_Offers::getExternalId_CatalogStructure()
+	 */
 	abstract public function getExternalId_CatalogStructure();
 	/** @return void */
 	abstract public function storeInSession();

@@ -24,7 +24,8 @@ class Df_1C_Model_Cml2_File_CatalogComposite extends Df_1C_Model_Cml2_File {
 	 */
 	public function getXml() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_xml($this->getFileStructure()->getXml()->asXML());
+			$this->{__METHOD__} = clone $this->getFileStructure()->getXml();
+			$this->{__METHOD__}->extend($source = $this->getFileAttributes()->getXml());
 			$this->{__METHOD__}->extend($source = $this->getFileProducts()->getXml());
 		}
 		return $this->{__METHOD__};
@@ -45,6 +46,9 @@ class Df_1C_Model_Cml2_File_CatalogComposite extends Df_1C_Model_Cml2_File {
 	}
 
 	/** @return Df_1C_Model_Cml2_File */
+	private function getFileAttributes() {return $this->cfg(self::$P__FILE_ATTRIBUTES);}
+
+	/** @return Df_1C_Model_Cml2_File */
 	private function getFileProducts() {return $this->cfg(self::$P__FILE_PRODUCTS);}
 
 	/** @return Df_1C_Model_Cml2_File */
@@ -57,10 +61,13 @@ class Df_1C_Model_Cml2_File_CatalogComposite extends Df_1C_Model_Cml2_File {
 	protected function _construct() {
 		parent::_construct();
 		$this
+			->_prop(self::$P__FILE_ATTRIBUTES, Df_1C_Model_Cml2_File::_CLASS)
 			->_prop(self::$P__FILE_PRODUCTS, Df_1C_Model_Cml2_File::_CLASS)
 			->_prop(self::$P__FILE_STRUCTURE, Df_1C_Model_Cml2_File::_CLASS)
 		;
 	}
+	/** @var string */
+	private static $P__FILE_ATTRIBUTES = 'file_attributes';
 	/** @var string */
 	private static $P__FILE_PRODUCTS = 'file_products';
 	/** @var string */
@@ -68,15 +75,21 @@ class Df_1C_Model_Cml2_File_CatalogComposite extends Df_1C_Model_Cml2_File {
 	/**
 	 * @param Df_1C_Model_Cml2_File $fileStructure
 	 * @param Df_1C_Model_Cml2_File $fileProducts
+	 * @param Df_1C_Model_Cml2_File $fileAttributes
 	 * @return Df_1C_Model_Cml2_File_CatalogComposite
 	 */
 	public static function i2(
-		Df_1C_Model_Cml2_File $fileStructure, Df_1C_Model_Cml2_File $fileProducts
+		Df_1C_Model_Cml2_File $fileStructure
+		, Df_1C_Model_Cml2_File $fileProducts
+		, Df_1C_Model_Cml2_File $fileAttributes
 	) {
-		df_assert($fileStructure->getXmlDocumentAsCatalog()->hasStructure());
+		df_assert($fileAttributes->getXmlDocumentAsCatalog()->hasAttributes());
 		df_assert($fileProducts->getXmlDocumentAsCatalog()->hasProducts());
+		df_assert($fileStructure->getXmlDocumentAsCatalog()->hasStructure());
 		return new self(array(
-			self::$P__FILE_PRODUCTS => $fileProducts, self::$P__FILE_STRUCTURE => $fileStructure
+			self::$P__FILE_ATTRIBUTES => $fileAttributes
+			, self::$P__FILE_PRODUCTS => $fileProducts
+			, self::$P__FILE_STRUCTURE => $fileStructure
 		));
 	}
 }

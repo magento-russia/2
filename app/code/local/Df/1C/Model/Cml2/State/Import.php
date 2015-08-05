@@ -11,21 +11,65 @@ class Df_1C_Model_Cml2_State_Import extends Df_Core_Model_Abstract {
 		return $this->getFileCurrent()->getXmlDocumentAsOffers();
 	}
 
+	/**
+	 * 2015-08-04
+	 * Раньше (модуль 1С-Битрикс 4 / CommerceML 2.08)
+	 * 1С передавала товарные свойства вместе со структурой каталога.
+	 * Однако сегодня, тестируя версию 5.0.6 модуля 1С-Битрикс (CommerceML версии 2.09)
+	 * заметил, что первый файл import__*.xml, который 1С передаёт интернет-магазину,
+	 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
+	 * однако не содержит подветку Свойства.
+	 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
+	 * @used-by getFileCatalogComposite()
+	 * @used-by Df_1C_Model_Cml2_State_Import_Collections::getAttributes()
+	 * @param bool $preprareSession [optional]
+	 * @return Df_1C_Model_Cml2_File
+	 */
+	public function getFileCatalogAttributes($preprareSession = true) {
+		if (!isset($this->{__METHOD__})) {
+			if (
+					$this->getDocumentCurrent()->isCatalog()
+				&&
+					$this->getDocumentCurrentAsCatalog()->hasAttributes()
+			) {
+				$this->{__METHOD__} = $this->getFileCurrent();
+			}
+			else {
+				if ($preprareSession) {
+					Df_1C_Model_Cml2_Session_ByIp::s()->begin();
+				}
+				$this->{__METHOD__} =
+					Df_1C_Model_Cml2_File::i(
+						Df_1C_Model_Cml2_Session_ByIp::s()->getFilePathById(
+							Df_1C_Model_Cml2_Import_Data_Document_Catalog::TYPE__ATTRIBUTES
+							, $this->getDocumentCurrent()->getExternalId_CatalogAttributes()
+						)
+					)
+				;
+				if ($preprareSession) {
+					Df_1C_Model_Cml2_Session_ByIp::s()->end();
+				}
+			}
+		}
+		return $this->{__METHOD__};
+	}
+
 	/** @return Df_1C_Model_Cml2_File */
 	public function getFileCatalogComposite() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_1C_Model_Cml2_File $result */
 			if (
-					$this->getDocumentCurrent()->isCatalog()
-				&&
-					$this->getDocumentCurrentAsCatalog()->hasProducts()
-				&&
-					$this->getDocumentCurrentAsCatalog()->hasStructure()
+				$this->getDocumentCurrent()->isCatalog()
+				&& $this->getDocumentCurrentAsCatalog()->hasAttributes()
+				&& $this->getDocumentCurrentAsCatalog()->hasProducts()
+				&& $this->getDocumentCurrentAsCatalog()->hasStructure()
 			) {
 				$result = $this->getFileCurrent();
 			}
 			else {
 				Df_1C_Model_Cml2_Session_ByIp::s()->begin();
+				/** @var Df_1C_Model_Cml2_File $fileAttributes */
+				$fileAttributes = $this->getFileCatalogAttributes($preprareSession = false);
 				/** @var Df_1C_Model_Cml2_File $fileProducts */
 				$fileProducts = $this->getFileCatalogProducts($preprareSession = false);
 				/** @var Df_1C_Model_Cml2_File $fileStructure */
@@ -33,8 +77,11 @@ class Df_1C_Model_Cml2_State_Import extends Df_Core_Model_Abstract {
 				Df_1C_Model_Cml2_Session_ByIp::s()->end();
 				$result =
 					$fileProducts->getPathRelative() === $fileStructure->getPathRelative()
+					&& $fileProducts->getPathRelative() === $fileAttributes->getPathRelative()
 					? $fileProducts
-					: Df_1C_Model_Cml2_File_CatalogComposite::i2($fileStructure, $fileProducts)
+					: Df_1C_Model_Cml2_File_CatalogComposite::i2(
+						$fileStructure, $fileProducts, $fileAttributes
+					)
 				;
 			}
 			$this->{__METHOD__} = $result;

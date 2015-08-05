@@ -33,6 +33,18 @@ class Df_1C_Model_Cml2_Action_Catalog_Import extends Df_1C_Model_Cml2_Action_Cat
 		if ($this->getDocumentCurrent()->isCatalog()) {
 			if ($this->getDocumentCurrentAsCatalog()->hasStructure()) {
 				$this->importCategories();
+			}
+			/**
+			 * 2015-08-04
+			 * Раньше товарные свойства импортировались при возвращении true методом
+			 * @see Df_1C_Cml2_Import_Data_Document_Catalog::hasStructure()
+			 * Однако сегодня, тестируя версию 5.0.6 модуля 1С-Битрикс (CommerceML версии 2.09)
+			 * заметил, что первый файл import__*.xml, который 1С передаёт интернет-магазину,
+			 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
+			 * однако не содержит подветку Свойства.
+			 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
+			 */
+			if ($this->getDocumentCurrentAsCatalog()->hasAttributes()) {
 				$this->importReferenceLists();
 			}
 		}
@@ -112,11 +124,11 @@ class Df_1C_Model_Cml2_Action_Catalog_Import extends Df_1C_Model_Cml2_Action_Cat
 			else {
 				if (df_is_it_my_local_pc()) {
 					Mage::log(
-						'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!.'
+						'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!'
 					);
 				}
 				rm_1c_log(
-					'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!.'
+					'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!'
 				);
 			}
 		}

@@ -10,6 +10,20 @@ class Df_1C_Model_Cml2_Import_Data_Document_Offers extends Df_1C_Model_Cml2_Impo
 	}
 
 	/**
+	 * 2015-08-04
+	 * @override
+	 * @see Df_1C_Model_Cml2_Import_Data_Document::getExternalId_CatalogAttributes()
+	 * @return string
+	 */
+	public function getExternalId_CatalogAttributes() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->descendS('ПакетПредложений/ИдКлассификатора');
+			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * @override
 	 * @return string
 	 */

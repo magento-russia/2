@@ -1,7 +1,22 @@
 <?php
 class Df_1C_Model_Cml2_Import_Data_Document_Catalog extends Df_1C_Model_Cml2_Import_Data_Document {
 	/**
+	 * 2015-08-04
 	 * @override
+	 * @see Df_1C_Cml2_Import_Data_Document::getExternalId_CatalogAttributes()
+	 * @return string
+	 */
+	public function getExternalId_CatalogAttributes() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->descendS('Каталог/ИдКлассификатора');
+			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @override
+	 * @see Df_1C_Cml2_Import_Data_Document::getExternalId_CatalogProducts()
 	 * @return string
 	 */
 	public function getExternalId_CatalogProducts() {
@@ -15,6 +30,7 @@ class Df_1C_Model_Cml2_Import_Data_Document_Catalog extends Df_1C_Model_Cml2_Imp
 
 	/**
 	 * @override
+	 * @see Df_1C_Cml2_Import_Data_Document::getExternalId_CatalogStructure()
 	 * @return string
 	 */
 	public function getExternalId_CatalogStructure() {
@@ -22,6 +38,24 @@ class Df_1C_Model_Cml2_Import_Data_Document_Catalog extends Df_1C_Model_Cml2_Imp
 			df_assert($this->isOffers());
 			$this->{__METHOD__} = $this->descendS('Каталог/ИдКлассификатора');
 			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-04
+	 * Раньше товарные свойства импортировались при возвращении true методом @see hasStructure()
+	 * Однако сегодня, тестируя версию 5.0.6 модуля 1С-Битрикс (CommerceML версии 2.09)
+	 * заметил, что первый файл import__*.xml, который 1С передаёт интернет-магазину,
+	 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
+	 * однако не содержит подветку Свойства.
+	 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
+	 * @used-by Df_1C_Cml2_Action_Catalog_Import::_process()
+	 * @return bool
+	 */
+	public function hasAttributes() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->e()->descend('Классификатор/Свойства');
 		}
 		return $this->{__METHOD__};
 	}
@@ -94,7 +128,30 @@ class Df_1C_Model_Cml2_Import_Data_Document_Catalog extends Df_1C_Model_Cml2_Imp
 				self::TYPE__PRODUCTS, $this->getIdProducts(), $this->getPath()
 			);
 		}
+		/**
+		 * 2015-08-04
+		 * Раньше (модуль 1С-Битрикс 4 / CommerceML 2.08)
+		 * 1С передавала товарные свойства вместе со структурой каталога.
+		 * Однако сегодня, тестируя версию 5.0.6 модуля 1С-Битрикс (CommerceML версии 2.09)
+		 * заметил, что первый файл import__*.xml, который 1С передаёт интернет-магазину,
+		 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
+		 * однако не содержит подветку Свойства.
+		 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
+		 */
+		if ($this->hasAttributes()) {
+			$this->session()->setFilePathById(
+				self::TYPE__ATTRIBUTES, $this->getIdAttributes(), $this->getPath()
+			);
+		}
 		$this->session()->end();
+	}
+
+	/** @return string|null */
+	private function getIdAttributes() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = rm_n_set($this->descendS('Классификатор/Ид'));
+		}
+		return rm_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */
@@ -114,6 +171,19 @@ class Df_1C_Model_Cml2_Import_Data_Document_Catalog extends Df_1C_Model_Cml2_Imp
 	}
 
 	const _CLASS = __CLASS__;
+	/**
+	 * 2015-08-04
+	 * Раньше (модуль 1С-Битрикс 4 / CommerceML 2.08)
+	 * 1С передавала товарные свойства вместе со структурой каталога.
+	 * Однако сегодня, тестируя версию 5.0.6 модуля 1С-Битрикс (CommerceML версии 2.09)
+	 * заметил, что первый файл import__*.xml, который 1С передаёт интернет-магазину,
+	 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
+	 * однако не содержит подветку Свойства.
+	 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
+	 * @used-by storeInSession()
+	 * @used-by Df_1C_Model_Cml2_State_Import::getFileCatalogAttributes()
+	 */
+	const TYPE__ATTRIBUTES = 'catalog_attributes';
 	const TYPE__PRODUCTS = 'catalog_products';
 	const TYPE__STRUCTURE = 'catalog_structure';
 }

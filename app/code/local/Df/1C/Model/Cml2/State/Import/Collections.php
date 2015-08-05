@@ -1,26 +1,24 @@
 <?php
 class Df_1C_Model_Cml2_State_Import_Collections extends Df_Core_Model_Abstract {
-	/** @return Df_1C_Model_Cml2_Import_Data_Collection_Attributes */
+	/**
+	 * Если каталог разбит на несколько файлов,
+	 * то товарные свойства содержатся именно в файле со структурой:
+		  Процедура ВыгрузитьИнформациюОТоварах:
+	 			(...)
+				Если Пакет = 0 тогда
+					СписокСкладов 	= РазбитаяСтруктураДанных.Склады;
+					СписокСоглашений= РазбитаяСтруктураДанных.Соглашения;
+					СписокСвойств 	= РазбитаяСтруктураДанных.Свойства;
+					СписокЕдиниц 	= РазбитаяСтруктураДанных.Единицы;
+				КонецЕсли;
+				(...)
+	 * @return Df_1C_Model_Cml2_Import_Data_Collection_Attributes
+	 */
 	public function getAttributes() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_1C_Model_Cml2_Import_Data_Collection_Attributes::i(
-					/**
-					 * Если каталог разюит на несколько файлов,
-					 * то товарные свойства содержатся именно в файле со структурой:
-						  Процедура ВыгрузитьИнформациюОТоварах:
-					 			(...)
-								Если Пакет = 0 тогда
-									СписокСкладов 	= РазбитаяСтруктураДанных.Склады;
-									СписокСоглашений= РазбитаяСтруктураДанных.Соглашения;
-									СписокСвойств 	= РазбитаяСтруктураДанных.Свойства;
-									СписокЕдиниц 	= РазбитаяСтруктураДанных.Единицы;
-								КонецЕсли;
-								(...)
-					 */
-					Df_1C_Model_Cml2_State_Import::s()->getFileCatalogStructure()->getXml()
-				)
-			;
+			$this->{__METHOD__} = Df_1C_Model_Cml2_Import_Data_Collection_Attributes::i(
+				Df_1C_Model_Cml2_State_Import::s()->getFileCatalogAttributes()->getXml()
+			);
 		}
 		return $this->{__METHOD__};
 	}
