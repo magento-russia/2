@@ -6,7 +6,7 @@
  * Эмуляцию для PHP версий ниже 5.5 взял отсюда:
  * @link https://github.com/ramsey/array_column
  * Как сказано: «It is written by PHP 5.5 array_column creator itself»
- * @link http://stackoverflow.com/a/20746278/254475
+ * @link http://stackoverflow.com/a/20746278
  */
 if (!function_exists('array_column')) {
 	/**

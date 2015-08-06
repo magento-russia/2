@@ -42,7 +42,7 @@ class Df_Core_Helper_Url extends Mage_Core_Helper_Abstract {
 	 */
 	public function is($string) {
 		/**
-		 * @link http://stackoverflow.com/a/15011528/254475
+		 * @link http://stackoverflow.com/a/15011528
 		 * @link http://www.php.net/manual/en/function.filter-var.php
 		 * Обратите внимание, что
 		 * filter_var('/C/A/CA559AWLE574_1.jpg', FILTER_VALIDATE_URL) вернёт false

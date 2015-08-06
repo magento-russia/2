@@ -14,7 +14,7 @@ class Df_Core_Model_SimpleXml_Generator_Document extends Df_Core_Model_SimpleXml
 			/**
 			 * символ 0xB (вертикальная табуляция) допустим в UTF-8,
 			 * но недопустим в XML
-			 * @link http://stackoverflow.com/a/10095901/254475
+			 * @link http://stackoverflow.com/a/10095901
 			 */
 			$result = str_replace("\x0B", "&#x0B;", $result);
 			if ($this->hasEncodingWindows1251()) {

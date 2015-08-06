@@ -346,8 +346,8 @@ abstract class Df_Core_Model_Abstract
 	 * потому что вместо функций @see serialize() / @see unserialize()
 	 * будут применены более быстрые функции @see json_encode() / @see json_decode().
 	 * вместо @see saveDataComplex() / @see loadDataComplex().
-	 * @link http://stackoverflow.com/a/7723730/254475
-	 * @link http://stackoverflow.com/a/804053/254475
+	 * @link http://stackoverflow.com/a/7723730
+	 * @link http://stackoverflow.com/a/804053
 	 * @return string[]
 	 */
 	protected function getPropertiesToCacheSimple() {return array();}

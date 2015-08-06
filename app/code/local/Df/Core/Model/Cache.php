@@ -34,8 +34,8 @@ class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
 	 * поэтому для простых массивов (массивов, не содержащих объекты),
 	 * используйте методы @see saveDataArray() / @see loadDataArray()
 	 * вместо @see saveDataComplex() / @see loadDataComplex().
-	 * @link http://stackoverflow.com/a/7723730/254475
-	 * @link http://stackoverflow.com/a/804053/254475
+	 * @link http://stackoverflow.com/a/7723730
+	 * @link http://stackoverflow.com/a/804053
 	 * @param string $key
 	 * @return mixed[]|bool
 	 */
@@ -171,8 +171,8 @@ class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
 	 * поэтому для простых массивов (массивов, не содержащих объекты),
 	 * используйте методы @see saveDataArray() / @see loadDataArray()
 	 * вместо @see saveDataComplex() / @see loadDataComplex().
-	 * @link http://stackoverflow.com/a/7723730/254475
-	 * @link http://stackoverflow.com/a/804053/254475
+	 * @link http://stackoverflow.com/a/7723730
+	 * @link http://stackoverflow.com/a/804053
 	 * @param string $key
 	 * @param mixed[] $value
 	 * @return void

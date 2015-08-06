@@ -6,7 +6,7 @@ class Df_CatalogRule_Model_Rule_Condition_Product extends Mage_CatalogRule_Model
 	 * ценовые правила для каталога с условиями, основанными на товарных свойствах
 	 * с глобальной областью доступности, работают неправильно.
 	 * @link https://www.google.com/search?q=Magento+1.8+rule+not+working
-	 * @link http://stackoverflow.com/a/19976036/254475
+	 * @link http://stackoverflow.com/a/19976036
 	 * @link https://bitbucket.org/gferon/magento-1.8-catalogrule-fix/
 	 * @link http://www.magentocommerce.com/bug-tracking/issue?issue=15936
 	 * @link http://www.magentocommerce.com/bug-tracking/issue?issue=15896

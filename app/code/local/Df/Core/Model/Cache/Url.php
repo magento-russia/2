@@ -81,8 +81,8 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 		if (!is_null($routeParams)) {
 			/**
 			 * @see json_encode() работает быстрее, чем @see serialize()
-			 * @link http://stackoverflow.com/a/7723730/254475
-			 * @link http://stackoverflow.com/a/804053/254475
+			 * @link http://stackoverflow.com/a/7723730
+			 * @link http://stackoverflow.com/a/804053
 			 *
 			 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
 			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.

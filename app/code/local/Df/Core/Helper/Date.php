@@ -229,7 +229,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		/** @var Zend_Date $dateMax */
 		$dateMax = $this->max($date1, $date2);
 		/**
-		 * @link http://stackoverflow.com/a/3118478/254475
+		 * @link http://stackoverflow.com/a/3118478
 		 */
 		/** @var Zend_Date $dateMinA */
 		$dateMinA = new Zend_Date($dateMin);

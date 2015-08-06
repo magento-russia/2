@@ -9,7 +9,7 @@ class Df_Core_Model_RemoteControl_Coder extends Df_Core_Model_Abstract {
 		$dataAsJson =
 			/**
 			 * Здесь надо использовать именно @see trim (а не @see df_trim или нечто другое).
-			 * @link http://stackoverflow.com/a/3814674/254475
+			 * @link http://stackoverflow.com/a/3814674
 			 * @link http://php.pe-tr.com/ru/php-mb_trim-unicode/
 			 * trim нужен для отсекания «мусора» (символов NUL),
 			 * который почему-то образуется на конце строки
@@ -69,7 +69,7 @@ class Df_Core_Model_RemoteControl_Coder extends Df_Core_Model_Abstract {
 			 * Обратите внимание, что mcrypt возвращает в результате кодирования бинарные данные,
 			 * которые не являются текстом
 			 * @link https://bugs.php.net/bug.php?id=42295
-			 * @link http://stackoverflow.com/a/2174721/254475
+			 * @link http://stackoverflow.com/a/2174721
 			 *
 			 * Мы передаём по протоколу HTTP именно бинарные данные,
 			 * пометив их заголовком application/octet-stream.

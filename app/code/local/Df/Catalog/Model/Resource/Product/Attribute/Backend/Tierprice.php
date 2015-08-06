@@ -9,7 +9,7 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 	 * и по этой причине ошибочно использует оператор SQL INSERT вместо UPDATE,
 	 * что приводит к сбою:
 	 * «Integrity constraint violation: 1062 Duplicate entry».
-	 * @link http://stackoverflow.com/a/10178922/254475
+	 * @link http://stackoverflow.com/a/10178922
 	 *
 	 * @override
 	 * @param Varien_Object $priceObject

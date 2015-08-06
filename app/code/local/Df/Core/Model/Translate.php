@@ -281,7 +281,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * При замене на пустой символ непонятно, как сделать последний аргумент равным по длине второму.
 		 *
 		 * Новый алгоритм взял отсюда:
-		 * @link http://stackoverflow.com/a/20717751/254475
+		 * @link http://stackoverflow.com/a/20717751
 		 */
 		/** @var string[] $symbolsToRemove */
 		static $symbolsToRemove = array("\r", "\n", "\t");
@@ -395,7 +395,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			 * @see Mage_Core_Model_Translate::_getTranslatedString()
 			 * реализуем его алгоритм несколько другим, более быстрым способом:
 			 * заменив @see array_key_exists на @see isset
-			 * @link http://stackoverflow.com/a/700257/254475
+			 * @link http://stackoverflow.com/a/700257
 			 */
 			if (!$this->_data) {
 				$result = $text;

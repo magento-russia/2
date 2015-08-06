@@ -75,7 +75,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * В БД колонка «request_path» таблицы «core_url_rewrite» имеет тип varchar(255).
 	 * Начиная с версии 4.1 в MySQL varchar(255) означает именно 255 символов
 	 * (в том числе и UTF-8), а не 255 байтов:
-	 * @link http://stackoverflow.com/a/3739871/254475
+	 * @link http://stackoverflow.com/a/3739871
 	 * @link http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
 	 *
 	 * «MySQL interprets length specifications in character column definitions in character units.
@@ -138,7 +138,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		 * В БД колонка «request_path» таблицы «core_url_rewrite» имеет тип varchar(255).
 		 * Начиная с версии 4.1 в MySQL varchar(255) означает именно 255 символов
 		 * (в том числе и UTF-8), а не 255 байтов:
-		 * @link http://stackoverflow.com/a/3739871/254475
+		 * @link http://stackoverflow.com/a/3739871
 		 * @link http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
 		 *
 		 * «MySQL interprets length specifications in character column definitions in character units.
@@ -244,7 +244,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		 * В БД колонка «request_path» таблицы «core_url_rewrite» имеет тип varchar(255).
 		 * Начиная с версии 4.1 в MySQL varchar(255) означает именно 255 символов
 		 * (в том числе и UTF-8), а не 255 байтов:
-		 * @link http://stackoverflow.com/a/3739871/254475
+		 * @link http://stackoverflow.com/a/3739871
 		 * @link http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
 		 *
 		 * «MySQL interprets length specifications in character column definitions in character units.

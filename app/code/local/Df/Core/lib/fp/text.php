@@ -435,8 +435,8 @@ function rm_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @param string $haystack
  * @param string $needle
  * @return bool
- * @link http://stackoverflow.com/a/10473026/254475
- * @link http://stackoverflow.com/a/834355/254475
+ * @link http://stackoverflow.com/a/10473026
+ * @link http://stackoverflow.com/a/834355
  * @see rm_starts_with()
  */
 function rm_ends_with($haystack, $needle) {
@@ -591,15 +591,15 @@ function rm_sprintf_strict($pattern) {
  * @param string $haystack
  * @param string $needle
  * @return bool
- * @link http://stackoverflow.com/a/10473026/254475
- * @link http://stackoverflow.com/a/834355/254475
+ * @link http://stackoverflow.com/a/10473026
+ * @link http://stackoverflow.com/a/834355
  * @see rm_ends_with()
  */
 function rm_starts_with($haystack, $needle) {
 	/**
 	 * Утверждают, что код ниже работает быстрее, чем
 	 * return 0 === mb_strpos($haystack, $needle);
-	 * @link http://stackoverflow.com/a/10473026/254475
+	 * @link http://stackoverflow.com/a/10473026
 	 */
 	/** @var int $length */
 	$length = mb_strlen($needle);

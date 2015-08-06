@@ -114,7 +114,7 @@ class Df_Core_Model_SimpleXml_Parser_Entity extends Df_Core_Model_Abstract {
 				 * но при этом @see count() для этого объекта работает как для массива (!),
 				 * то есть реально возвращает количество детей типа rule.
 				 * Далее, оператор [] также работает, как для массива (!)
-				 * @link http://stackoverflow.com/a/16100099/254475
+				 * @link http://stackoverflow.com/a/16100099
 				 * Класс SimplexmlElement — вообще один из самых необычных классов PHP.
 				 */
 				df_assert_eq(1, count($childNodes));

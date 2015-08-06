@@ -549,7 +549,7 @@ class Df_Shipping_Model_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 *
 	 * Аналогично — для сгруппированных товаров.
 	 *
-	 * @link http://stackoverflow.com/a/8301170/254475
+	 * @link http://stackoverflow.com/a/8301170
 	 *
 	 * Поэтому мы при комплектации груза учитываем только простые товары.
 	 *

@@ -246,7 +246,7 @@ class Df_Varien_Simplexml_Element extends Varien_Simplexml_Element {
 	}
 
 	/**
-	 * @link http://stackoverflow.com/a/3153704/254475
+	 * @link http://stackoverflow.com/a/3153704
 	 * @param mixed $value
 	 * @return Df_Varien_Simplexml_Element
 	 */
@@ -408,7 +408,7 @@ class Df_Varien_Simplexml_Element extends Varien_Simplexml_Element {
 	}
 
 	/**
-	 * @link http://stackoverflow.com/a/6260295/254475
+	 * @link http://stackoverflow.com/a/6260295
 	 * @param string $text
 	 * @return Df_Varien_Simplexml_Element
 	 */

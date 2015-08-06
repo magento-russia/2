@@ -288,7 +288,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 */
 	public function isTranslated($text) {
 		if (!isset($this->{__METHOD__}[$text])) {
-			/** @link http://stackoverflow.com/a/16130169/254475 */
+			/** @link http://stackoverflow.com/a/16130169 */
 			$this->{__METHOD__}[$text] = !is_null(rm_preg_match('#[\p{Cyrillic}]#mu', $text, false));
 		}
 		return $this->{__METHOD__}[$text];
@@ -347,7 +347,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * Аналог @see str_pad() для Unicode.
-	 * @link http://stackoverflow.com/a/14773638/254475
+	 * @link http://stackoverflow.com/a/14773638
 	 * @param string $input
 	 * @param int $pad_length
 	 * @param string $pad_string
@@ -503,7 +503,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 * @link http://php.net/strtr
 	 *
 	 * Новый алгоритм взял отсюда:
-	 * @link http://stackoverflow.com/a/20717751/254475
+	 * @link http://stackoverflow.com/a/20717751
 	 *
 	 * @param string $text
 	 * @return string
@@ -638,7 +638,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * Источник алгоритма:
-	 * @link http://stackoverflow.com/a/14338869/254475
+	 * @link http://stackoverflow.com/a/14338869
 	 * @param string $string1
 	 * @param string $string2
 	 * @return string

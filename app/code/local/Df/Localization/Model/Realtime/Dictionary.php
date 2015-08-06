@@ -284,7 +284,7 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 		/**
 		 * Метод реализован именно таким способом ради ускорения.
 		 * Данная реализация работает быстрее, нежели использование @see in_array()
-		 * @link http://stackoverflow.com/a/5036972/254475
+		 * @link http://stackoverflow.com/a/5036972
 		 */
 		if (!isset($this->_entries)) {
 			/** @var bool $canUseCache */
@@ -329,8 +329,8 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 						/**
 						 * @see json_encode() / @see json_decode работает быстрее,
 						 * чем @see serialize() / @see unserialize()
-						 * @link http://stackoverflow.com/a/7723730/254475
-						 * @link http://stackoverflow.com/a/804053/254475
+						 * @link http://stackoverflow.com/a/7723730
+						 * @link http://stackoverflow.com/a/804053
 						 *
 						 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
 						 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.

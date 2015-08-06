@@ -24,7 +24,7 @@
 			 */
 			,empty: function(value) {
 				/**
-				 * @link http://stackoverflow.com/a/154068/254475
+				 * @link http://stackoverflow.com/a/154068
 				 */
 				return !value;
 			}

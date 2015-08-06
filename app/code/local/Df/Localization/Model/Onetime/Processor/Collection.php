@@ -31,11 +31,11 @@ class Df_Localization_Model_Onetime_Processor_Collection extends Df_Varien_Data_
 	private function sort() {
 		/**
 		 * @link http://php.net/manual/en/function.uasort.php#100485
-		 * @link http://stackoverflow.com/a/6054036/254475
+		 * @link http://stackoverflow.com/a/6054036
 		 */
 		/**
 		 * Подавляем предупреждение «Array was modified by the user comparison function»
-		 * @link http://stackoverflow.com/a/10985500/254475
+		 * @link http://stackoverflow.com/a/10985500
 		 */
 		@uasort($this->_items, array('self', 'compare'));
 	}
