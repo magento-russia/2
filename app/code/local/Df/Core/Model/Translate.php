@@ -295,7 +295,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * Magento CE пытается перевести этот комментарий:
 		 * @used-by Mage_Adminhtml_Block_System_Config_Form::_prepareFieldComment():
 		 * $comment = Mage::helper($helper)->__($commentInfo);
-		 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
+		 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9.2.1/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
 		 * Т.к. комментарий — на русском языке, то перевода для него не находится,
 		 * и в итоге наш метод должен вернуть комментарий в неизменном виде,
 		 * с сохранением всех переносов строк, чтобы администратору было удобно его читать.
@@ -441,7 +441,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				 * Magento CE пытается перевести этот комментарий:
 				 * @used-by Mage_Adminhtml_Block_System_Config_Form::_prepareFieldComment():
 				 * $comment = Mage::helper($helper)->__($commentInfo);
-				 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
+				 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9.2.1/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
 				 * Т.к. комментарий — на русском языке, то перевода для него не находится,
 				 * и в итоге наш метод должен вернуть комментарий в неизменном виде,
 				 * с сохранением всех переносов строк, чтобы администратору было удобно его читать.
