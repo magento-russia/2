@@ -285,6 +285,23 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 */
 		/** @var string[] $symbolsToRemove */
 		static $symbolsToRemove = array("\r", "\n", "\t");
+		/**
+		 * 2015-08-08
+		 * Сохраняет оригинальное значение со всеми спецсимволами,
+		 * чтобы вернуть его в том случае, когда перевод не найден или не нужен.
+		 * Конкретная ситуация: я в файле system.xml своего модуля
+		 * пишу видимый администратору комментарий к настроечной опции на русском языке,
+		 * используя в том числе переносы строк.
+		 * Magento CE пытается перевести этот комментарий:
+		 * @used-by Mage_Adminhtml_Block_System_Config_Form::_prepareFieldComment():
+		 * $comment = Mage::helper($helper)->__($commentInfo);
+		 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
+		 * Т.к. комментарий — на русском языке, то перевода для него не находится,
+		 * и в итоге наш метод должен вернуть комментарий в неизменном виде,
+		 * с сохранением всех переносов строк, чтобы администратору было удобно его читать.
+		 * @var string $textOriginal
+		 */
+		$textOriginal = $text;
 		$text = str_replace($symbolsToRemove, '', $text);
 		$code = str_replace($symbolsToRemove, '', $code);
 		/** @var string $result */
@@ -356,9 +373,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				 * в процессе установки Magento Community Edition,
 				 * потому что в это время Российская сборка ещё не установлена и не инициализирована,
 				 * и использование Df_Localization_Model_Realtime_Translator::s() приводит к сбою
-				 * Call to undefined function df_model()
-				 * (и, видимо, к дальшейшим сбоям, даже если мы будем использовать df_model
-				 * вместо df_model)
+				 * Call to undefined function df_model().
 				 */
 				Mage::isInstalled()
 			&&
@@ -373,6 +388,12 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				 */
 				function_exists('df_model')
 			&&
+				/**
+				 * 2015-08-08
+				 * Обратите внимание, что @see Df_Localization_Model_Realtime_Translator
+				 * не используетс также для административной части:
+				 * @uses Df_Localization_Model_Realtime_Translator::isEnabled()
+				 */
 				Df_Localization_Model_Realtime_Translator::s()->isEnabled()
 			;
 		}
@@ -410,7 +431,22 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				$result = $this->_data[$text];
 			}
 			else {
-				$result = $text;
+				/**
+				 * 2015-08-08
+				 * Перевод не найден или не нужен.
+				 * Возвращаем оригинальное значение со всеми спецсимволами.
+				 * Конкретная ситуация: я в файле system.xml своего модуля
+				 * пишу видимый администратору комментарий к настроечной опции на русском языке,
+				 * используя в том числе переносы строк.
+				 * Magento CE пытается перевести этот комментарий:
+				 * @used-by Mage_Adminhtml_Block_System_Config_Form::_prepareFieldComment():
+				 * $comment = Mage::helper($helper)->__($commentInfo);
+				 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
+				 * Т.к. комментарий — на русском языке, то перевода для него не находится,
+				 * и в итоге наш метод должен вернуть комментарий в неизменном виде,
+				 * с сохранением всех переносов строк, чтобы администратору было удобно его читать.
+				 */
+				$result = $textOriginal;
 			}
 		}
 		if (

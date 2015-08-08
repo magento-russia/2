@@ -98,8 +98,10 @@ class Df_Adminhtml_Block_System_Config_Form_Field extends Mage_Adminhtml_Block_S
 			$html .= '<td class="value">';
 			$html .= $this->_getElementHtml($element);
 		};
-		if ($element->getComment()) {
-			$html.= "<div class='note'>{$element->getComment()}</div>";
+		/** @var string|null $comment */
+		$comment = $element->getDataUsingMethod('comment');
+		if ($comment) {
+			$html.= "<div class='note'>{$comment}</div>";
 		}
 		$html.= '</td>';
 
