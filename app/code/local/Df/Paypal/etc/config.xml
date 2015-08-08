@@ -25,6 +25,13 @@
 						Поэтому нам надо учесть их скидки вручную
 					-->
 					<api_standard>Df_Paypal_Model_Api_Standard</api_standard>
+					<!--
+						2015-08-08
+						Цели перекрытия:
+						1) Поддержка России в качестве страны продавца.
+						2) Поддержка российского рубля в качестве валюты платежа.
+					-->
+					<config>Df_Paypal_Model_Config</config>
 				</rewrite>
 			</paypal>
 		</models>
