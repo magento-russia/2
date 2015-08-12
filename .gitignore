@@ -1,9 +1,9 @@
 # http://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
 # http://stackoverflow.com/questions/9162919/whitelisting-and-subdirectories-in-git
+# http://stackoverflow.com/questions/8024924#comment15884195_8025106
 *
 !*/
 !.gitignore
-# http://stackoverflow.com/questions/8024924#comment15884195_8025106
 !app/code/local/Df/**/*
 !app/code/local/Varien/**/*
 !app/code/local/Zend/**/*
@@ -12,7 +12,7 @@
 !app/etc/licenses/localhost.com.xml
 !app/etc/modules/Df_*
 !app/etc/modules/Find_Feed.xml
-!app/locale/en_US/templates/email/df
+!app/locale/en_US/templates/email/df/**/*
 !app/locale/ru_DF
 !js/df/**/*
 !skin/adminhtml/rm/**/*
