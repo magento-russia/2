@@ -3,17 +3,19 @@
 *
 !*/
 !.gitignore
-!app/code/local/Df
-!app/code/local/Varien
-!app/code/local/Zend
-!app/design/adminhtml/rm
-!app/design/frontend/rm
+# http://stackoverflow.com/questions/8024924#comment15884195_8025106
+!app/code/local/Df/**/*
+!app/code/local/Varien/**/*
+!app/code/local/Zend/**/*
+!app/design/adminhtml/rm/**/*
+!app/design/frontend/rm/**/*
 !app/etc/licenses/localhost.com.xml
 !app/etc/modules/Df_*
 !app/etc/modules/Find_Feed.xml
 !app/locale/en_US/templates/email/df
 !app/locale/ru_DF
-!js/df
-!skin/adminhtml/rm
-!skin/frontend/rm
+!js/df/**/*
+!skin/adminhtml/rm/**/*
+!skin/frontend/rm/**/*
 dev/
+*.css.map

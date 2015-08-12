@@ -1,0 +1,41 @@
+<?php
+/**
+ * 2015-04-16
+ * Заменил p.note > span на div.note аналогично
+ * @see Df_Adminhtml_Block_Config_Form_Field::render()
+ * и app/design/adminhtml/rm/priority/template/catalog/form/renderer/fieldset/element.phtml
+ * @var Mage_Adminhtml_Block_Widget_Form_Renderer_Fieldset_Element $this
+ * @var Varien_Data_Form_Element_Abstract|Df_Varien_Data_Form_Element_Abstract $element
+ */
+$element = $this->getElement();
+if (!$element->getNoDisplay()) {
+	/** @var string $html */
+	$html = trim($element->getElementHtml());
+	/** @var string $result */
+	if ('hidden' === $element->getType())  {
+		$result = rm_tag('td', array('colspan' => 2, 'class' => 'hidden'), $html);
+	}
+	else {
+		/** @var array(string -> string|string[]) $css */
+		$css = array('label', 'note', 'value');
+		/** @noinspection PhpParamsInspection */
+		$css = array_combine($css, $css);
+		if ($element->getValueClass()) {
+			$css['value'] = $element->getValueClass();
+		}
+		if ($element->getFieldsetHtmlClass()) {
+			foreach ($css as &$entry) {
+				$entry = array($entry, "{$element->getFieldsetHtmlClass()}-{$entry}");
+			}
+		}
+		$result = rm_tag('td', array('class' => $css['label']), trim($element->getLabelHtml()));
+		if ($element->getNote()) {
+			$html .= rm_tag('div', array(
+				'class' => $css['note']
+				, 'id' => "note_{$element->getId()}"
+			), $element->getNote());
+		}
+		$result .= rm_tag('td', array('class' => $css['value']), $html);
+	} 	
+	echo rm_tag('tr', array('id' => $element['html_container_id']), $result);
+}

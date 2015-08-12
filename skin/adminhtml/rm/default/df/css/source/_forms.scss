@@ -1,0 +1,100 @@
+.entry-edit {
+	@mixin rm-note {
+		width: auto;
+		// 2015-04-15
+		// Дублируем здесь правила, которые Magento CE применяет к блоку p.note
+		// Мы поменяли тег p на div, чтобы допустить блочные элементы в комментарии:
+		// @see Df_Adminhtml_Block_Config_Form_Field::render()
+		margin: 0;
+		padding: 0 0 0 13px;
+		background: url(../../../../../default/default/images/note_bg.gif) 1px 6px no-repeat;
+		font-size: 11px;
+		// 2015-04-20
+		// Уменьшаем межстрочные интервалы
+		// (по умолчанию они 18 пикселей, что при размере шрифта в 11 пикселей многовато).
+		line-height: 16px;
+		// 2015-04-20
+		// Этим стилем в длинном тексте примечания к настроечной опции или блоку
+		// выделяется самая главная мысль рекомендации.
+		.rm-recommendation {
+			color: green;
+			font-weight: bold;
+		}
+		// Наши дополнительные правила для внутренних элементов.
+		// Magento CE использует по умолчанию «list-style: none»
+		// @see skin/adminhtml/default/default/reset.css
+		ul, ol {
+			margin-left: 2em;
+			list-style-position: outside;
+		}
+		ul {list-style-type: disc;}
+		ol {list-style-type: decimal;}
+		li {margin: 0.2em 0;}
+		// Используется для таблиц с определениями.
+		// Пример использования: комментарий к полю «Шаблон имени диагностического журнала»
+		// настроек модуля «1С: Управление торговлей»:
+		// @see Df/1C/etc/system.xml
+		table.rm-definition {
+			margin-left: 1.5em;
+			border-collapse: collapse;
+			tr {
+				td:first-child {font-weight: bold;}
+				td {padding: 0.25em 0.5em;}
+			}
+			tr:nth-child(even) {background-color: white;}
+		}
+	}
+	// 2015-04-20
+	//Примечание к блоку настроек
+	div.comment {
+		@include rm-note;
+		// чтобы строки с текстом не становились слишком длинными:
+		// из их тогда неудобно читать
+		max-width: 1000px;
+		// 2015-04-20
+		// Увеличиваем размер шрифта (по умолчанию он 11 пикселей).
+		// Обратите внимание, что мы увеличиваем только размер шрифта комментариев к блокам настроек,
+		// но оставляем размер шрифта прежним для комментариев к конкретным настроечным опциям.
+		font-size: 12px;
+	}
+	// Задаёт правила для отображения полей ввода.
+	.form-list td.value {
+		p.note, div.note {
+			width: auto;
+			// чтобы строки с текстом не становились слишком длинными:
+			// из их тогда неудобно читать
+			max-width: 800px;
+		}
+		div.note {
+			@include rm-note;
+			// чтобы строки с текстом не становились слишком длинными:
+			// из их тогда неудобно читать
+			max-width: 800px;
+		}
+		// Примечание для поля «Ставка» на экране
+		// «Продажи» → «НДС» → «Правила» → <экран налогового правила>.
+		// Оно длинное и важное, поэтому негоже отображать его мелким шрифтом.
+		p#note_tax_rate {font-size: inherit;}
+		@import 'forms/_config-info-urls';
+		@import 'forms/_grid';
+		#df_directory_countries_popular__order .grid {width: 300px;}
+	}
+}
+// 2015-04-15
+// Вынуждены продублировать «width: auto» в таком виде,
+// потому что Magento CE своё правило начинает с селектора #config_edit_form,
+// и без нашего дублирования правило Magento CE оказывается для браузера приоритетнее.
+// С другой стороны, мы не можем оставить лишь это сильное правило
+// и отказаться от «width: auto» выше,
+// потому что «width: auto» нужно не только в разделе «Система» → «Настройки»,
+// но и в других административных разделах.
+#config_edit_form .entry-edit .form-list td.value {
+	width: auto;
+	p.note, div.note {
+		width: auto;
+		// чтобы строки с текстом не становились слишком длинными:
+		// из их тогда неудобно читать
+		max-width: 800px;
+	}
+}
+

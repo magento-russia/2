@@ -1,0 +1,31 @@
+// Элемент управления в виде таблицы с динамическим добевлением строк.
+// @see Df_Admin_Block_Field_DynamicTable
+.grid {
+	table tr {
+		td:last-child, th:last-child {
+			// Ширина самой правой колонки: с кнопками «добавить» и «удалить».
+			width: 100px;
+			text-transform: lowercase;
+		}
+		td {
+			// Чтобы высота простого поля ввода была равна высоте выпадающего списка,
+			// создаваемого плагином jQuery Select2.
+			// Обратите внимание, что значение «border-box»
+			// используется на витринном экране оформления заказа для всех полей ввода.
+			.select2-container {
+				.select2-choice {
+					/*box-sizing: border-box; */
+				}
+			}
+		}
+	}
+}
+.Df_Directory_Block_Field_CountriesOrdered {width: 300px;}
+.Df_1C_Config_Block_MapFromCustomerGroupToPriceType {
+	max-width: 470px;
+	select.customer_group {width: 10em;}
+}
+.Df_1C_Config_Block_NonStandardCurrencyCodes {
+	width: 380px;
+	select.standard_code {width: 15em;}
+}

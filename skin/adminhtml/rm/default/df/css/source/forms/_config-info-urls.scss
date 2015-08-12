@@ -1,0 +1,33 @@
+// Информационная поле, где система сообщает администратору,
+// какие веб-адреса надо использовать для настройки модуля.
+// Используется модулями «1С:Управление торговлей» и «Яндекс.Маркет».
+.df-config-info-urls {
+	display: block;
+	background: white;
+	padding: 2px 0 2px 0.75em;
+	width: 300px;
+	.df-url {
+		display: block;
+		width: 35em;
+		background: white;
+		cursor: pointer;
+	}
+	.df-url.hover {
+		background: #FFF9E9;
+	}
+	li {
+		display: block;
+		background: white;
+		margin: 0;
+		padding: 0;
+		.df-name {
+			float: left;
+			width: 7em;
+			padding: 4px 0;
+		}
+		.df-url {
+			padding: 4px 0.75em;
+			margin-left: 8em;
+		}
+	}
+}
