@@ -72,7 +72,16 @@ class Df_Core_Model_SimpleXml_Parser_Entity extends Df_Core_Model_Abstract {
 		if (!isset($this->{__METHOD__}[$childName])) {
 			/** @var Df_Varien_Simplexml_Element|null $child */
 			$child = $this->getChildSingleton($childName, $isRequired = false);
-			$this->{__METHOD__}[$childName] = $child && count($child->children());
+			/**
+			 * 2015-08-15
+			 * Нельзя здесь использовать count($child->children()),
+			 * потому что класс @see SimpleXmlElement не реализует интерфейс @see Iterator,
+			 * а реализует только интерфейс @see Traversable.
+			 * http://php.net/manual/class.iterator.php
+			 * http://php.net/manual/class.traversable.php
+			 * http://php.net/manual/en/simplexmlelement.count.php
+			 */
+			$this->{__METHOD__}[$childName] = $child && $child->children()->count();
 		}
 		return $this->{__METHOD__}[$childName];
 	}
