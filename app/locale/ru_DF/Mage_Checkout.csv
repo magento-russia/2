@@ -196,7 +196,7 @@
 Пожалуйста, исправьте его.
 Если данное сообщение после исправления адреса будет повторяться — свяжитесь с администратором магазина по телефону, он поможет Вам оформить заказ."
 "Please log in below:","Вход:"
-"Please select region, state or province","Выберите область (край, республику)"
+"Please select region, state or province","-- область --"
 "Please select shipping address for applicable items","Вы можете указать свой адрес доставки для каждой позиции заказа"
 "Please select shipping methods for all addresses","Укажите способ доставки для каждого адреса доставки"
 "Please specify shipping method.","Укажите способ доставки."
@@ -261,7 +261,7 @@
 "Some of the requested products are unavailable.","Некоторые запрошенные товары недоступны."
 "Some products quantities were recalculated because of quantity increment mismatch","Для некоторых товаров были изменены количества, так как количества не соответствовали указанному шагу"
 "Sorry, no quotes are available for this order at this time.","<span class='p'>Чтобы узнать доступные для Вашего заказа варианты доставки — укажите подробный адрес доставки.</span><span class='p'>Если Вы уже указали адрес доставки, но варианты доставки так и не появились — пожалуйста, позвоните нам по телефону, и мы подберём индивидуальный вариант доставки Вашего заказа.</span>"
-"State/Province","Область, край, республика"
+"State/Province","Область"
 "Status","Состояние"
 "Store View","Витрина"
 "Street Address","Улица, дом, квартира / офис"
