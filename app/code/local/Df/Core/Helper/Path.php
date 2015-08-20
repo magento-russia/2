@@ -25,7 +25,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 			)
 		;
 		foreach ($iterator as $item) {
-		    chmod($item, $mode);
+			df()->file()->chmod($item, $mode);
 		}
 	}
 
@@ -81,7 +81,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 				mkdir($path, $mode, $recursive = true);
 			}
 			else {
-				chmod($path, $mode);
+				df()->file()->chmod($path, $mode);
 			}
 			$this->{__METHOD__}[$path] = true;
 		}

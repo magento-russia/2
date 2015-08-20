@@ -56,7 +56,7 @@ class Df_Core_Model_Logger extends Df_Core_Model_Abstract {
 			$result = df_concat_path($this->getFileDir(), $this->getFileName());
 			if (!file_exists($result)) {
 				file_put_contents($result, '');
-				chmod($result, 0777);
+				df()->file()->chmod($result, 0777);
 			}
 			$this->{__METHOD__} = $result;
 		}

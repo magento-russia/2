@@ -1,6 +1,27 @@
 <?php
 class Df_Core_Helper_File extends Mage_Core_Helper_Abstract {
 	/**
+	 * 2015-08-20
+	 * @used-by Df_Core_Helper_Path::getFilePath()
+	 * @used-by Df_Core_Helper_Path::chmodRecursive()
+	 * @used-by Df_Core_Model_Logger::getFilePath()
+	 * @param string $resource
+	 * @param int $mode [optional]
+	 * @return void
+	 * http://magento-forum.ru/topic/5197/
+	 */
+	public function chmod($resource, $mode = 0777) {
+		/** @var bool $r */
+		try {$r = chmod($resource, $mode);}
+		catch (Exception $e) {$r = false;}
+		if (!$r) {
+			// Видимо, надо кого-то оповестить?
+			// Но сам я пока не хочу такие оповещения получать: завалят ими.
+			rm_log('Не могу установить права %o для %s.', $mode, $resource);
+		}
+	}
+
+	/**
 	 * @param string $file
 	 * @return string
 	 */
