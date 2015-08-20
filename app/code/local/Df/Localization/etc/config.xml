@@ -250,6 +250,7 @@
 				<dictionary>Ves/Super_Store.xml</dictionary>
 				<url>
 					<demo>http://demoleotheme.com/superstore/</demo>
+					<demo_images_base>http://demoleotheme.com/superstore/</demo_images_base>
 					<forum>http://magento-forum.ru/forum/370/</forum>
 					<official_site>http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk</official_site>
 				</url>
