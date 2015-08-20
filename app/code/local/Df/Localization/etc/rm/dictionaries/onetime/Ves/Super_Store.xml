@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<dictionary>
+	<filesystem>
+		<operation>
+ 			<source>http://demoleotheme.com/superstore/media/ves_megamenu/i/c/ico-home_1.png</source>
+			<destination>media/ves_megamenu/i/c/ico-home_1.png</destination>
+		</operation>
+	</filesystem>
+</dictionary>

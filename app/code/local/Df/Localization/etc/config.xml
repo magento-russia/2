@@ -243,6 +243,17 @@
 					<official_site>http://store.templatemonster.com/ru/magento-themes-type/43373.html?aff=Dmitry_Fedyuk</official_site>
 				</url>
 			</templatemonster-43373>
+			<ves-super-store>
+				<title>Ves Super Store</title>
+				<package>default</package>
+				<theme>ves_superstore</theme>
+				<dictionary>Ves/Super_Store.xml</dictionary>
+				<url>
+					<demo>http://demoleotheme.com/superstore/</demo>
+					<forum>http://magento-forum.ru/forum/370/</forum>
+					<official_site>http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk</official_site>
+				</url>
+			</ves-super-store>
 		</design-theme-processors>
 	</rm>
 </config>
