@@ -297,6 +297,65 @@
 				<TM_AjaxSearch>
 					<files><default>TM_AjaxSearch.csv</default></files>
 				</TM_AjaxSearch>
+				<!--
+					2015-08-21
+					Элементы с приставкой Ves_* содержат перевод
+					для модулей оформительской темы Ves Super Store (ThemeForest 8002349)
+					http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
+					http://demoleotheme.com/superstore/
+					http://magento-forum.ru/forum/370/
+
+					Обратите внимание, что языковые файлы уже объявлены
+					в аналогичных секциях «translate» этих модулей,
+					однако языковые файлы отсутствуют в дистрибутиве оформительской темы
+					(и уж тем более не стоит когда-либо ожидать от разработчиков
+					перевода на русский язык).
+					Мы объвляем языковые файлы заново, чтобы сгруппировать их в подпапке Ves,
+					вместо пихания в корневую папку языковых файлов
+					вперемешку с языковыми файлами ядра.
+				-->
+				<Ves_Autosearch>
+					<files><default>Ves/Autosearch.csv</default></files>
+				</Ves_Autosearch>
+				<Ves_BlockBuilder>
+					<files><default>Ves/BlockBuilder.csv</default></files>
+				</Ves_BlockBuilder>
+				<Ves_Blog>
+					<files><default>Ves/Blog.csv</default></files>
+				</Ves_Blog>
+				<Ves_Brand>
+					<files><default>Ves/Brand.csv</default></files>
+				</Ves_Brand>
+				<Ves_Deals>
+					<files><default>Ves/Deals.csv</default></files>
+				</Ves_Deals>
+				<Ves_Layerslider>
+					<files><default>Ves/Layerslider.csv</default></files>
+				</Ves_Layerslider>
+				<Ves_Megamenu>
+					<files><default>Ves/Megamenu.csv</default></files>
+				</Ves_Megamenu>
+				<Ves_Parallax>
+					<files><default>Ves/Parallax.csv</default></files>
+				</Ves_Parallax>
+				<Ves_ProductCarousel>
+					<files><default>Ves/ProductCarousel.csv</default></files>
+				</Ves_ProductCarousel>
+				<Ves_ProductCarousel2>
+					<files><default>Ves/ProductCarousel2.csv</default></files>
+				</Ves_ProductCarousel2>
+				<Ves_Socialsidebar>
+					<files><default>Ves/Socialsidebar.csv</default></files>
+				</Ves_Socialsidebar>
+				<Ves_TabsHome>
+					<files><default>Ves/TabsHome.csv</default></files>
+				</Ves_TabsHome>
+				<Ves_Tempcp>
+					<files><default>Ves/Tempcp.csv</default></files>
+				</Ves_Tempcp>
+				<Ves_Verticalmenu>
+					<files><default>Ves/Verticalmenu.csv</default></files>
+				</Ves_Verticalmenu>
 			</modules>
 			<sections>
 				<!-- Infortis_Brands -->
@@ -582,6 +641,65 @@
 						<catalog>Mage_Catalog.csv</catalog>
 					</files>
 				</Vinagento_Vpager>
+				<!--
+					2015-08-21
+					Элементы с приставкой Ves_* содержат перевод
+					для модулей оформительской темы Ves Super Store (ThemeForest 8002349)
+					http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
+					http://demoleotheme.com/superstore/
+					http://magento-forum.ru/forum/370/
+
+					Обратите внимание, что языковые файлы уже объявлены
+					в аналогичных секциях «translate» этих модулей,
+					однако языковые файлы отсутствуют в дистрибутиве оформительской темы
+					(и уж тем более не стоит когда-либо ожидать от разработчиков
+					перевода на русский язык).
+					Мы объвляем языковые файлы заново, чтобы сгруппировать их в подпапке Ves,
+					вместо пихания в корневую папку языковых файлов
+					вперемешку с языковыми файлами ядра.
+				-->
+				<Ves_Autosearch>
+					<files><default>Ves/Autosearch.csv</default></files>
+				</Ves_Autosearch>
+				<Ves_BlockBuilder>
+					<files><default>Ves/BlockBuilder.csv</default></files>
+				</Ves_BlockBuilder>
+				<Ves_Blog>
+					<files><default>Ves/Blog.csv</default></files>
+				</Ves_Blog>
+				<Ves_Brand>
+					<files><default>Ves/Brand.csv</default></files>
+				</Ves_Brand>
+				<Ves_Deals>
+					<files><default>Ves/Deals.csv</default></files>
+				</Ves_Deals>
+				<Ves_Layerslider>
+					<files><default>Ves/Layerslider.csv</default></files>
+				</Ves_Layerslider>
+				<Ves_Megamenu>
+					<files><default>Ves/Megamenu.csv</default></files>
+				</Ves_Megamenu>
+				<Ves_Parallax>
+					<files><default>Ves/Parallax.csv</default></files>
+				</Ves_Parallax>
+				<Ves_ProductCarousel>
+					<files><default>Ves/ProductCarousel.csv</default></files>
+				</Ves_ProductCarousel>
+				<Ves_ProductCarousel2>
+					<files><default>Ves/ProductCarousel2.csv</default></files>
+				</Ves_ProductCarousel2>
+				<Ves_Socialsidebar>
+					<files><default>Ves/Socialsidebar.csv</default></files>
+				</Ves_Socialsidebar>
+				<Ves_TabsHome>
+					<files><default>Ves/TabsHome.csv</default></files>
+				</Ves_TabsHome>
+				<Ves_Tempcp>
+					<files><default>Ves/Tempcp.csv</default></files>
+				</Ves_Tempcp>
+				<Ves_Verticalmenu>
+					<files><default>Ves/Verticalmenu.csv</default></files>
+				</Ves_Verticalmenu>
 			</modules>
 		</translate>
 	</frontend>

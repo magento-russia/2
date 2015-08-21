@@ -13,7 +13,7 @@
 !app/etc/modules/Df_*
 !app/etc/modules/Find_Feed.xml
 !app/locale/en_US/templates/email/df/**/*
-!app/locale/ru_DF
+!app/locale/ru_DF/**/*
 !js/df/**/*
 !skin/adminhtml/rm/**/*
 !skin/frontend/rm/**/*

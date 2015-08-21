@@ -1,5 +1,12 @@
 <?xml version='1.0'?>
 <dictionary>
+	<config>
+		<entry>
+			<path>ves_verticalmenu/ves_verticalmenu/title</path>
+			<original_value>Categories</original_value>
+			<value>Разделы</value>
+		</entry>
+	</config>
 	<filesystem>
 		<operation>
  			<source>http://demoleotheme.com/superstore/media/ves_megamenu/i/c/ico-home_1.png</source>
