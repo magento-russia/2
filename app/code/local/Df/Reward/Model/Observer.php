@@ -85,7 +85,7 @@ class Df_Reward_Model_Observer
 				/**
 				 * К сожалению, при событии customer_save_after от isObjectNew() толку мало,
 				 * потому что метод Mage_Eav_Model_Entity_Abstract::_processSaveData()
-				 * почему-то очищает флаг isObjectNew() до наступления события customer_save_after
+				 * почему-то удаляет флаг isObjectNew() до наступления события customer_save_after
 				 */
 				$customer->setData('rm_object_new', true);
 			}

@@ -5,7 +5,7 @@
 class Df_Core_Model_Config_Data extends Mage_Core_Model_Config_Data {
 	/**
 	 * При наличии у объекта значения поля _cacheTag
-	 * система будет автоматически очищать кэш после сохранения объекта.
+	 * система будет автоматически удалять кэш после сохранения объекта.
 	 * Странно, что родительский класс не указывает _cacheTag.
 	 * @see Mage_Core_Model_Abstract::cleanModelCache()
 	 * @var string
