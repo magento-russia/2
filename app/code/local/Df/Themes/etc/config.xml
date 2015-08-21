@@ -50,6 +50,20 @@
 					<adminhtml_button_import_cms>Df_Themes_Block_Infortis_Ultimo_Adminhtml_Button_Import_Cms</adminhtml_button_import_cms>
 				</rewrite>
 			</ultimo>
+			<!--
+					2015-08-22
+					Цель перекрытия —
+					показ вместо мусора действительно полезной русскоязычным клиентам информации.
+					Оформительская тема Ves Super Store (ThemeForest 8002349)
+					http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
+					http://demoleotheme.com/superstore/
+					http://magento-forum.ru/forum/370/
+			-->
+			<ves_verticalmenu>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_verticalmenu>
 		</blocks>
 		<helpers>
 			<df_themes><class>Df_Themes_Helper</class></df_themes>
@@ -310,51 +324,58 @@
 					однако языковые файлы отсутствуют в дистрибутиве оформительской темы
 					(и уж тем более не стоит когда-либо ожидать от разработчиков
 					перевода на русский язык).
-					Мы объвляем языковые файлы заново, чтобы сгруппировать их в подпапке Ves,
+
+					Мы объявляем языковые файлы заново, чтобы сгруппировать их в подпапке Ves,
 					вместо пихания в корневую папку языковых файлов
 					вперемешку с языковыми файлами ядра.
+
+					Обратите внимание, что мы используем ключ «rm», а не «default»,
+					потому что настроечные файлы модулей Ves_*
+					имеют приоритет перед нашим настроечным файлом при объединении их системой
+					(вообще, это странно, ибо модули Ves_* расположены в области comminity,
+					а наш — в области local, хоть и под другим именем).
 				-->
 				<Ves_Autosearch>
-					<files><default>Ves/Autosearch.csv</default></files>
+					<files><rm>Ves/Autosearch.csv</rm></files>
 				</Ves_Autosearch>
 				<Ves_BlockBuilder>
-					<files><default>Ves/BlockBuilder.csv</default></files>
+					<files><rm>Ves/BlockBuilder.csv</rm></files>
 				</Ves_BlockBuilder>
 				<Ves_Blog>
-					<files><default>Ves/Blog.csv</default></files>
+					<files><rm>Ves/Blog.csv</rm></files>
 				</Ves_Blog>
 				<Ves_Brand>
-					<files><default>Ves/Brand.csv</default></files>
+					<files><rm>Ves/Brand.csv</rm></files>
 				</Ves_Brand>
 				<Ves_Deals>
-					<files><default>Ves/Deals.csv</default></files>
+					<files><rm>Ves/Deals.csv</rm></files>
 				</Ves_Deals>
 				<Ves_Layerslider>
-					<files><default>Ves/Layerslider.csv</default></files>
+					<files><rm>Ves/Layerslider.csv</rm></files>
 				</Ves_Layerslider>
 				<Ves_Megamenu>
-					<files><default>Ves/Megamenu.csv</default></files>
+					<files><rm>Ves/Megamenu.csv</rm></files>
 				</Ves_Megamenu>
 				<Ves_Parallax>
-					<files><default>Ves/Parallax.csv</default></files>
+					<files><rm>Ves/Parallax.csv</rm></files>
 				</Ves_Parallax>
 				<Ves_ProductCarousel>
-					<files><default>Ves/ProductCarousel.csv</default></files>
+					<files><rm>Ves/ProductCarousel.csv</rm></files>
 				</Ves_ProductCarousel>
 				<Ves_ProductCarousel2>
-					<files><default>Ves/ProductCarousel2.csv</default></files>
+					<files><rm>Ves/ProductCarousel2.csv</rm></files>
 				</Ves_ProductCarousel2>
 				<Ves_Socialsidebar>
-					<files><default>Ves/Socialsidebar.csv</default></files>
+					<files><rm>Ves/Socialsidebar.csv</rm></files>
 				</Ves_Socialsidebar>
 				<Ves_TabsHome>
-					<files><default>Ves/TabsHome.csv</default></files>
+					<files><rm>Ves/TabsHome.csv</rm></files>
 				</Ves_TabsHome>
 				<Ves_Tempcp>
-					<files><default>Ves/Tempcp.csv</default></files>
+					<files><rm>Ves/Tempcp.csv</rm></files>
 				</Ves_Tempcp>
 				<Ves_Verticalmenu>
-					<files><default>Ves/Verticalmenu.csv</default></files>
+					<files><rm>Ves/Verticalmenu.csv</rm></files>
 				</Ves_Verticalmenu>
 			</modules>
 			<sections>
@@ -657,48 +678,54 @@
 					Мы объвляем языковые файлы заново, чтобы сгруппировать их в подпапке Ves,
 					вместо пихания в корневую папку языковых файлов
 					вперемешку с языковыми файлами ядра.
+
+					Обратите внимание, что мы используем ключ «rm», а не «default»,
+					потому что настроечные файлы модулей Ves_*
+					имеют приоритет перед нашим настроечным файлом при объединении их системой
+					(вообще, это странно, ибо модули Ves_* расположены в области comminity,
+					а наш — в области local, хоть и под другим именем).
 				-->
 				<Ves_Autosearch>
-					<files><default>Ves/Autosearch.csv</default></files>
+					<files><rm>Ves/Autosearch.csv</rm></files>
 				</Ves_Autosearch>
 				<Ves_BlockBuilder>
-					<files><default>Ves/BlockBuilder.csv</default></files>
+					<files><rm>Ves/BlockBuilder.csv</rm></files>
 				</Ves_BlockBuilder>
 				<Ves_Blog>
-					<files><default>Ves/Blog.csv</default></files>
+					<files><rm>Ves/Blog.csv</rm></files>
 				</Ves_Blog>
 				<Ves_Brand>
-					<files><default>Ves/Brand.csv</default></files>
+					<files><rm>Ves/Brand.csv</rm></files>
 				</Ves_Brand>
 				<Ves_Deals>
-					<files><default>Ves/Deals.csv</default></files>
+					<files><rm>Ves/Deals.csv</rm></files>
 				</Ves_Deals>
 				<Ves_Layerslider>
-					<files><default>Ves/Layerslider.csv</default></files>
+					<files><rm>Ves/Layerslider.csv</rm></files>
 				</Ves_Layerslider>
 				<Ves_Megamenu>
-					<files><default>Ves/Megamenu.csv</default></files>
+					<files><rm>Ves/Megamenu.csv</rm></files>
 				</Ves_Megamenu>
 				<Ves_Parallax>
-					<files><default>Ves/Parallax.csv</default></files>
+					<files><rm>Ves/Parallax.csv</rm></files>
 				</Ves_Parallax>
 				<Ves_ProductCarousel>
-					<files><default>Ves/ProductCarousel.csv</default></files>
+					<files><rm>Ves/ProductCarousel.csv</rm></files>
 				</Ves_ProductCarousel>
 				<Ves_ProductCarousel2>
-					<files><default>Ves/ProductCarousel2.csv</default></files>
+					<files><rm>Ves/ProductCarousel2.csv</rm></files>
 				</Ves_ProductCarousel2>
 				<Ves_Socialsidebar>
-					<files><default>Ves/Socialsidebar.csv</default></files>
+					<files><rm>Ves/Socialsidebar.csv</rm></files>
 				</Ves_Socialsidebar>
 				<Ves_TabsHome>
-					<files><default>Ves/TabsHome.csv</default></files>
+					<files><rm>Ves/TabsHome.csv</rm></files>
 				</Ves_TabsHome>
 				<Ves_Tempcp>
-					<files><default>Ves/Tempcp.csv</default></files>
+					<files><rm>Ves/Tempcp.csv</rm></files>
 				</Ves_Tempcp>
 				<Ves_Verticalmenu>
-					<files><default>Ves/Verticalmenu.csv</default></files>
+					<files><rm>Ves/Verticalmenu.csv</rm></files>
 				</Ves_Verticalmenu>
 			</modules>
 		</translate>
