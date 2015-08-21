@@ -59,6 +59,66 @@
 					http://demoleotheme.com/superstore/
 					http://magento-forum.ru/forum/370/
 			-->
+			<ves_autosearch>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_autosearch>
+			<ves_blog>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_blog>
+			<ves_brand>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_brand>
+			<ves_deals>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_deals>
+			<ves_layerslider>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_layerslider>
+			<ves_megamenu>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_megamenu>
+			<ves_parallax>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_parallax>
+			<ves_productcarousel>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_productcarousel>
+			<ves_productcarousel2>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_productcarousel2>
+			<ves_socialsidebar>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_socialsidebar>
+			<ves_tabshome>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_tabshome>
+			<ves_tempcp>
+				<rewrite>
+					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
+				</rewrite>
+			</ves_tempcp>
 			<ves_verticalmenu>
 				<rewrite>
 					<system_config_form_field_information>Df_Themes_Block_Ves_SupportInformation</system_config_form_field_information>
