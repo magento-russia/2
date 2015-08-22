@@ -398,6 +398,9 @@
 				<Ves_Autosearch>
 					<files><rm>Ves/Autosearch.csv</rm></files>
 				</Ves_Autosearch>
+				<Ves_Base>
+					<files><rm>Ves/Base.csv</rm></files>
+				</Ves_Base>
 				<Ves_BlockBuilder>
 					<files><rm>Ves/BlockBuilder.csv</rm></files>
 				</Ves_BlockBuilder>
@@ -751,6 +754,9 @@
 				<Ves_Autosearch>
 					<files><rm>Ves/Autosearch.csv</rm></files>
 				</Ves_Autosearch>
+				<Ves_Base>
+					<files><rm>Ves/Base.csv</rm></files>
+				</Ves_Base>
 				<Ves_BlockBuilder>
 					<files><rm>Ves/BlockBuilder.csv</rm></files>
 				</Ves_BlockBuilder>
