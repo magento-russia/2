@@ -67,7 +67,7 @@ class Df_Adminhtml_Model_Config extends Mage_Adminhtml_Model_Config {
 					 * название секции совпадает с названием модуля в формате Magento.
 					 * Чтобы нам не приходилось писать однотипный код типа:
 					 * <ves_verticalmenu>ves_verticalmenu</ves_verticalmenu>
-					 * пробуем для начала использовать название секции в качестве названия модуля.
+					 * пробуем использовать название секции в качестве названия модуля.
 					 */
 					else if (self::isItValidModuleNameMf($sectionName)){
 						$result = $sectionName;
@@ -79,6 +79,7 @@ class Df_Adminhtml_Model_Config extends Mage_Adminhtml_Model_Config {
 	}
 
 	/**
+	 * 2015-08-22
 	 * @param string $name
 	 * @return bool
 	 */
@@ -87,8 +88,44 @@ class Df_Adminhtml_Model_Config extends Mage_Adminhtml_Model_Config {
 		static $cache;
 		if (!isset($cache[$name])) {
 			try {
-				Mage::helper($name);
-				$cache[$name] = true;
+				/**
+				 * 2015-01-19
+				 * Раньше тут стоял код: Mage::helper($moduleNameMf);
+				 * Он работал успешно.
+				 * Однако затем я обновил IntelliJ IDEA с ветки 13 на ветку 14,
+				 * и на ветке 14, при запуске PHPUnit из IntelliJ IDEA
+				 * стал происходить сбой интерпретатора PHP
+				 * о том, что интерпретатор не может загрузить класс
+				 * PHPUnit/Extensions/Story/TestCase.php.
+				 * Я устранил этот сбой по рекомендации из статьи:
+				 * http://www.webguys.de/magento/tuerchen-11-the-magento-autoloader-and-external-libraries/
+				 * заменив у себя на локальном компьютере
+				 * в методе @see Varien_Autoload::autoload()
+				 * код
+				 * return include $classFile;
+				 * на код
+					 if (stream_resolve_include_path($classFile)) {
+						return include $classFile;
+					 } else {
+						return false;
+					 }
+				 * Однако после этого стал происходить сбой
+				 * Class 'Mage_Ultraslideshow_Helper_Data' not found Mage.php on line 547
+				 *
+				 * Поэтому используем модифицированный код метода @see Mage::helper():
+				 */
+				/** @var string $registryKey */
+				$registryKey = '_helper/' . $name;
+				/** @var Mage_Core_Helper_Abstract|null $helper */
+				$helper = Mage::registry($registryKey);
+				if (!$helper) {
+					$helperClass = Mage::getConfig()->getHelperClassName($name);
+					if (@class_exists($helperClass)) {
+						$helper = new $helperClass;
+						Mage::register($registryKey, $helper);
+					}
+				}
+				$cache[$name] = !!$helper;
 			}
 			catch (Exception $e) {
 				$cache[$name] = false;
