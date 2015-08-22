@@ -2,6 +2,121 @@
 <dictionary>
 	<config>
 		<entry>
+			<path>currency/options/allow</path>
+			<original_value>USD</original_value>
+			<value>RUB</value>
+		</entry>
+		<entry>
+			<path>currency/options/base</path>
+			<original_value>USD</original_value>
+			<value>RUB</value>
+		</entry>
+		<entry>
+			<path>currency/options/default</path>
+			<original_value>USD</original_value>
+			<value>RUB</value>
+		</entry>
+		<entry>
+			<path>general/country/default</path>
+			<original_value>US</original_value>
+			<value>RU</value>
+		</entry>
+		<entry>
+			<path>general/locale/code</path>
+			<original_value>en_US</original_value>
+			<value>ru_RU</value>
+		</entry>
+		<entry>
+			<path>general/locale/firstday</path>
+			<original_value>0</original_value>
+			<value>1</value>
+		</entry>
+		<entry>
+			<path>general/locale/timezone</path>
+			<original_value>America/Los_Angeles</original_value>
+			<value>Europe/Moscow</value>
+		</entry>
+		<entry>
+			<path>general/store_information/merchant_country</path>
+			<original_value>null</original_value>
+			<value>RU</value>
+		</entry>
+		<entry>
+			<path>general/store_information/name</path>
+			<original_value>Ves Superstore</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>general/store_information/phone</path>
+			<original_value>+8498980073</original_value>
+			<value>+7 495 777-5-444</value>
+		</entry>
+		<entry>
+			<path>general/store_information/merchant_vat_number</path>
+			<original_value>null</original_value>
+			<value>253608037991</value>
+		</entry>
+		<entry>
+			<path>ves_blog/general_setting/title</path>
+			<original_value>Blog</original_value>
+			<value>Новости</value>
+		</entry>
+		<entry>
+			<path>ves_blog/module_setting/cmenu_title</path>
+			<original_value>Blog Categories</original_value>
+			<value>Рубрики</value>
+		</entry>
+		<entry>
+			<path>ves_blog/module_setting/latestmod_title</path>
+			<original_value>Latest news</original_value>
+			<value>Новости</value>
+		</entry>
+		<entry>
+			<path>ves_deals/ves_deals/title</path>
+			<original_value>Latest Deals</original_value>
+			<value>Распродажа</value>
+		</entry>
+		<entry>
+			<path>ves_productcarousel2/ves_productcarousel2/title</path>
+			<original_value>Featured Products</original_value>
+			<value>Обратите внимание</value>
+		</entry>
+		<entry>
+			<path>ves_socialsidebar/follow/titleFollow</path>
+			<original_value>Follow</original_value>
+			<value>Следите за нашими новостями в соцсетях</value>
+		</entry>
+		<entry>
+			<path>ves_socialsidebar/share_setting/share_mgs</path>
+			<original_value>Follow us</original_value>
+			<value>Следите за нашими новостями в соцсетях</value>
+		</entry>
+		<entry>
+			<path>ves_socialsidebar/share_setting/share_title</path>
+			<original_value>Thanks for sharing!</original_value>
+			<value>Большое спасибо!!!</value>
+		</entry>
+		<entry>
+			<path>ves_socialsidebar/follow/Facebook</path>
+			<original_value>VenusTheme</original_value>
+			<value>magento.russia</value>
+		</entry>
+		<entry>
+			<path>ves_socialsidebar/follow/Twitter</path>
+			<original_value>VenusTheme</original_value>
+			<value>dfediuk</value>
+		</entry>
+		<entry>
+			<path>ves_socialsidebar/follow/thankTitle_follow</path>
+			<original_value>Thanks for following!</original_value>
+			<value>Большое спасибо!!!</value>
+		</entry>
+		<entry>
+			<path>ves_treemenu/ves_treemenu/title</path>
+			<original_value>Categories</original_value>
+			<value>Разделы</value>
+		</entry>
+		<entry>
 			<path>ves_verticalmenu/ves_verticalmenu/title</path>
 			<original_value>Categories</original_value>
 			<value>Разделы</value>
