@@ -1,12 +1,10 @@
 <?php
 class Df_Adminhtml_Model_Translator_Config extends Df_Core_Model_Abstract {
 	/**
-	 * @param Mage_Core_Model_Config_Element $section
-	 * @return string
+	 * @param string $sectionName
+	 * @return string|null
 	 */
-	public function getHelperModuleMf(Mage_Core_Model_Config_Element $section) {
-		return df_a($this->getMap(), $section->getName(), 'adminhtml');
-	}
+	public function getHelperModuleMf($sectionName) {return df_a($this->getMap(), $sectionName);}
 
 	/** @return array(string => string) */
 	private function getMap() {

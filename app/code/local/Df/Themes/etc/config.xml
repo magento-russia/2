@@ -445,25 +445,8 @@
 				когда разработчик модуля по неряшливости этого не сделал.
 			-->
 			<sections>
-				<!-- Infortis_Brands -->
-				<brands>brands</brands>
 				<!-- Infortis_CloudZoom -->
 				<cloudzoom>infortis_cloudzoom</cloudzoom>
-				<!-- Infortis_Infortis -->
-				<infortis>infortis</infortis>
-				<!-- Infortis_UltraMegamenu -->
-				<ultramegamenu>ultramegamenu</ultramegamenu>
-				<!-- Infortis_UltraSlideshow -->
-				<ultraslideshow>ultraslideshow</ultraslideshow>
-				<!--
-				 	2015-08-22
-					Оформительская тема Ves Super Store (ThemeForest 8002349)
-					http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
-					http://demoleotheme.com/superstore/
-					http://magento-forum.ru/forum/370/
-				-->
-				<ves_productcarousel>ves_productcarousel</ves_productcarousel>
-				<ves_productcarousel2>ves_productcarousel2</ves_productcarousel2>
 			</sections>
 		</translate>
 	</adminhtml>

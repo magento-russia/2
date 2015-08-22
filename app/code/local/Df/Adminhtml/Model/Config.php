@@ -43,23 +43,57 @@ class Df_Adminhtml_Model_Config extends Mage_Adminhtml_Model_Config {
 				$sectionNode = rm_first($sectionNode);
 			}
 			if ($sectionNode) {
-				/** @var string $moduleNameMf */
-				$moduleNameMf = Df_Adminhtml_Model_Translator_Config::s()->getHelperModuleMf($sectionNode);
-				/**
-				 * Обратите внимание, что модуль может отсутствовать в системе.
-				 * Игнорирование этого может привести к сбою типа
-				 * «Warning: include(Mage/Ultraslideshow/Helper/Data.php): failed to open stream»
-				 * в методе @see Mage_Adminhtml_Block_System_Config_Tabs::initTabs():
-				 	$helperName = $configFields->getAttributeModule($section);
-					$label = Mage::helper($helperName)->__((string)$section->label);
-				 */
-				try {
-					Mage::helper($moduleNameMf);
-					$result = $moduleNameMf;
+				/** @var string $sectionName */
+				$sectionName = $sectionNode->getName();
+				if ($sectionName) {
+					/** @var string|null $valueFromMap */
+					$valueFromMap =
+						Df_Adminhtml_Model_Translator_Config::s()->getHelperModuleMf($sectionName)
+					;
+					/**
+					 * Обратите внимание, что модуль может отсутствовать в системе.
+					 * Игнорирование этого может привести к сбою типа
+					 * «Warning: include(Mage/Ultraslideshow/Helper/Data.php): failed to open stream»
+					 * в методе @see Mage_Adminhtml_Block_System_Config_Tabs::initTabs():
+					 	$helperName = $configFields->getAttributeModule($section);
+						$label = Mage::helper($helperName)->__((string)$section->label);
+					 */
+					if ($valueFromMap && self::isItValidModuleNameMf($valueFromMap)) {
+						$result = $valueFromMap;
+					}
+					/**
+					 * 2015-08-22
+					 * Заметил, что в большинстве (95%) случаев
+					 * название секции совпадает с названием модуля в формате Magento.
+					 * Чтобы нам не приходилось писать однотипный код типа:
+					 * <ves_verticalmenu>ves_verticalmenu</ves_verticalmenu>
+					 * пробуем для начала использовать название секции в качестве названия модуля.
+					 */
+					else if (self::isItValidModuleNameMf($sectionName)){
+						$result = $sectionName;
+					}
 				}
-				catch (Exception $e) {}
 			}
 		}
 		return $result;
+	}
+
+	/**
+	 * @param string $name
+	 * @return bool
+	 */
+	private static function isItValidModuleNameMf($name) {
+		/** @var array(string => bool) */
+		static $cache;
+		if (!isset($cache[$name])) {
+			try {
+				Mage::helper($name);
+				$cache[$name] = true;
+			}
+			catch (Exception $e) {
+				$cache[$name] = false;
+			}
+		}
+		return $cache[$name];
 	}
 }
