@@ -10,6 +10,16 @@ class Df_Localization_Model_Onetime_Dictionary extends Df_Localization_Model_Dic
 		return $this->{__METHOD__};
 	}
 
+	/** @return Df_Localization_Model_Onetime_Dictionary_Db_Tables */
+	public function getDbTables() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				Df_Localization_Model_Onetime_Dictionary_Db_Tables::i($this->e())
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
 	/** @return Df_Localization_Model_Onetime_Dictionary_Filesystem_Operations */
 	public function getFilesystemOperations() {
 		if (!isset($this->{__METHOD__})) {

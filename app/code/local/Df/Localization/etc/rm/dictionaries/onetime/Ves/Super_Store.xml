@@ -132,4 +132,18 @@
 			<destination>media/ves_megamenu/i/c/ico-home_1.png</destination>
 		</operation>
 	</filesystem>
+	<db>
+		<table name='ves_megamenu/megamenu'>
+			<column name='title'>
+				<term>
+					<from>Home</from>
+					<to>Главная</to>
+				</term>
+				<term>
+					<from>Root Catalog</from>
+					<to>Каталог</to>
+				</term>
+			</column>
+		</table>
+	</db>
 </dictionary>

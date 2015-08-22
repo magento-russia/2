@@ -148,6 +148,34 @@ class Df_Localization_Model_Onetime_Processor extends Df_Core_Model_Abstract {
 			/** @var Df_Localization_Model_Onetime_Dictionary_Config_Entry $configEntry */
 			Df_Localization_Model_Onetime_Processor_Config::i($configEntry)->process();
 		}
+		/**
+		 * 2015-08-23
+		 * Прямой перевод значений в базе данных
+		 * Пример:
+			 <dictionary>
+				<db>
+					<table name='ves_megamenu/megamenu'>
+						<column name='title'>
+							<term>
+								<from>Home</from>
+								<to>Главная</to>
+							</term>
+							<term>
+								<from>Root Catalog</from>
+								<to>Каталог</to>
+							</term>
+						</column>
+					</table>
+				</db>
+			</dictionary>
+		 */
+		foreach ($dictionary->getDbTables() as $dbTable) {
+			/** @var Df_Localization_Model_Onetime_Dictionary_Db_Table $dbTable */
+			foreach ($dbTable->getColumns() as $column) {
+				/** @var Df_Localization_Model_Onetime_Dictionary_Db_Column $column */
+				Df_Localization_Model_Onetime_Processor_Db_Column::i($column)->process();
+			}
+		}
 		foreach ($dictionary->getFilesystemOperations() as $filesystemOperation) {
 			/** @var Df_Localization_Model_Onetime_Dictionary_Filesystem_Operation $filesystemOperation */
 			Df_Localization_Model_Onetime_Processor_Filesystem::i($filesystemOperation)->process();
