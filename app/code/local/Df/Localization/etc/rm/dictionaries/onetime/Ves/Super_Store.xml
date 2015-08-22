@@ -135,14 +135,22 @@
 	<db>
 		<table name='ves_megamenu/megamenu'>
 			<column name='title'>
-				<term>
-					<from>Home</from>
-					<to>Главная</to>
-				</term>
-				<term>
-					<from>Root Catalog</from>
-					<to>Каталог</to>
-				</term>
+				<term><from>Home</from><to>Главная</to></term>
+				<term><from>Root Catalog</from><to>Каталог</to></term>
+				<term><from>Featured</from><to>Премиум</to></term>
+				<term><from>Televisions</from><to>Телевизоры</to></term>
+				<term><from>Computer Parts</from><to>Комплектующие</to></term>
+				<term><from>Desktops</from><to>Компьютеры</to></term>
+				<term><from>Electronics</from><to>Электроника</to></term>
+				<term><from>Camera</from><to>Видеокамеры</to></term>
+				<term><from>Mouse</from><to>Мыши</to></term>
+				<term><from>Monitors</from><to>Мониторы</to></term>
+				<term><from>Hard Drives</from><to>Носители данных</to></term>
+				<term><from>Laptops</from><to>Нотубуки</to></term>
+				<term><from>Cameras</from><to>Фото/видео</to></term>
+				<term><from>Cell Phones</from><to>Телефоны</to></term>
+				<term><from>Digital Cameras</from><to>Фотоаппараты</to></term>
+				<term><from>Deals</from><to>Распродажа</to></term>
 			</column>
 		</table>
 	</db>
