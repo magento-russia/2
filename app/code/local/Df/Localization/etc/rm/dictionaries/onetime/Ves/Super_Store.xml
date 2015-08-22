@@ -6,6 +6,10 @@
 			<original_value>Categories</original_value>
 			<value>Разделы</value>
 		</entry>
+		<entry>
+			<path>web/seo/use_rewrites</path>
+			<value>1</value>
+		</entry>
 	</config>
 	<filesystem>
 		<operation>
