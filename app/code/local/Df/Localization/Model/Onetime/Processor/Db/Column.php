@@ -11,7 +11,9 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 			rm_conn()->update(
 				$table
 				, array($column => $term->getTo())
-				, array("? = {$column}" => $term->getFrom())
+				, $term->isItLike()
+					? array("{$column} LIKE ?" => $term->getFrom())
+					: array("? = {$column}" => $term->getFrom())
 			);
 		}
 	}

@@ -91,7 +91,7 @@ abstract class Df_Localization_Model_Onetime_Processor_Entity extends Df_Core_Mo
 		}
 		else if ($textOriginal && is_string($textOriginal)) {
 			/** @var string $textProcessed */
-			if ($term->isItLike() && rm_contains($textOriginal, $term->getFromForLike())) {
+			if ($term->isItLike2() && rm_contains($textOriginal, $term->getFromForLike())) {
 				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 				$result = $term->getTo();
 			}

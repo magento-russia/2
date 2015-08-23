@@ -29,12 +29,32 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	public function getTo() {return $this->getEntityParam('to');}
 
 	/**
-	 * Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
+	 * 2015-08-23
+	 * Здесь допустим как двухсторонний, так и односторонний лайк (только справа или только слева).
+	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::isItLike()
 	 * @return bool
 	 */
 	public function isItLike() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_text()->isLike($this->getFrom());
+			$this->{__METHOD__} =
+				rm_starts_with($this->getFrom(), '%') || rm_ends_with($this->getFrom(), '%')
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
+	 * Тогда замену проще запрограммировать,
+	 * и для большинства практических ситуаций этого достаточно).
+	 * @used-by Df_Localization_Model_Onetime_Processor_Entity::translate()
+	 * @return bool
+	 */
+	public function isItLike2() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				rm_starts_with($this->getFrom(), '%') && rm_ends_with($this->getFrom(), '%')
+			;
 		}
 		return $this->{__METHOD__};
 	}

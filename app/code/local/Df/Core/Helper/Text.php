@@ -254,20 +254,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string $text
-	 * @return string
-	 */
-	public function isLike($text) {
-		/**
-		 * Обратите внимание, что намеренно используем &&, а не ||.
-		 * Символ процента у нас должен стоять с обоих сторон
-		 * (тогда замену проще запрограммировать,
-		 * и для большинства практичесских ситуаций этого достаточно).
-		 */
-		return rm_starts_with($text, '%') && rm_ends_with($text, '%');
-	}
-
-	/**
-	 * @param string $text
 	 * @return bool
 	 */
 	public function isMultiline($text) {
