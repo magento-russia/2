@@ -500,6 +500,20 @@ function rm_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
 }
 
 /**
+ * 2015-08-24
+ * @used-by Df_Localization_Model_Onetime_Dictionary_Term::translate()
+ * @param string $pattern
+ * @param string $replacement
+ * @param string $subject
+ * @return string
+ */
+function rm_preg_replace($pattern, $replacement, $subject) {
+	return Df_Core_Model_Text_Regex::i($pattern, $subject, $throwOnError = true)
+		->replace($replacement)
+	;
+}
+
+/**
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnError [optional]

@@ -336,5 +336,44 @@
 				</path>
 			</column>
 		</table>
+		<table name='ves_tempcp/theme'>
+			<column name='params' filters='serialize,base64'>
+				<path value='copyright'>
+					<term>
+						<from>%%</from>
+						<to><![CDATA[<a href="http://magento-forum.ru" title="Magento">Российская сборка Magento</a>]]></to>
+					</term>
+				</path>
+				<path value='widget_aboutus_data'>
+					<term><from>#FREE SHIPPING#</from><to>Российская сборка Magento</to></term>
+					<term><from>#SPECIAL GIFT CARDS#</from><to>Российская сборка Magento</to></term>
+					<term><from>#DAILY PROMOTION#</from><to>Российская сборка Magento</to></term>
+					<term><from>#24/7 CUSTOMER#</from><to>Российская сборка Magento</to></term>
+				</path>
+				<path value='widget_custom-footer-links_data'>
+					<term><from>#Proin gravida nibh#</from><to>Миксолидийский аккорд</to></term>
+					<term><from>#Duis cursus#</from><to>Миксолидийский аккорд</to></term>
+					<term><from>#Morbi accumsan ipsum#</from><to>Миксолидийский аккорд</to></term>
+					<term><from>#Nam cidunt auctor#</from><to>Миксолидийский аккорд</to></term>
+					<term><from>#Sed mauris consequat#</from><to>Миксолидийский аккорд</to></term>
+					<term><from>#Mauris erat#</from><to>Миксолидийский аккорд</to></term>
+					<term><from>#About Us#</from><to>Форшлаг</to></term>
+					<term><from>#Jobs#</from><to>Форшлаг</to></term>
+					<term><from>#Affiliates#</from><to>Форшлаг</to></term>
+					<term><from>#Contact#</from><to>Форшлаг</to></term>
+					<term><from>#Newsletter#</from><to>Форшлаг</to></term>
+					<term><from>#Blog#</from><to>Форшлаг</to></term>
+					<term><from>#Contact Us#</from><to>Полимодальная</to></term>
+					<term>
+						<from><![CDATA[#Terms &amp; Conditions#]]></from>
+						<to>Полимодальная</to>
+					</term>
+					<term><from>#Privacy Policy#</from><to>Полимодальная</to></term>
+					<term><from>#Orders and Returns#</from><to>Полимодальная</to></term>
+					<term><from>#Site Map#</from><to>Полимодальная</to></term>
+					<term><from>#info@venustheme.com#</from><to>admin@magento-forum.ru</to></term>
+				</path>
+			</column>
+		</table>
 	</db>
 </dictionary>

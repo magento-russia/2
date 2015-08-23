@@ -50,12 +50,19 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 		}
 		else if ($textOriginal && is_string($textOriginal)) {
 			/** @var string $textProcessed */
-			if ($this->isItLike2() && rm_contains($textOriginal, $this->getFromForLike())) {
+			if ($this->isItLike2()
+				&& (
+					// 2015-08-24
+					// Допускает выражение <from>%%</from>
+					!$this->getFromForLike()
+					|| rm_contains($textOriginal, $this->getFromForLike())
+				)
+			) {
 				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 				$result = $this->getTo();
 			}
 			else if ($this->isItRegEx()) {
-				$textProcessed = preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
+				$textProcessed = rm_preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
 				/**
 				 * Вызываем setData() только при реальном изменении значения свойства,
 				 * чтобы не менять попусту значение hasDataChanges

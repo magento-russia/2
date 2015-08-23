@@ -75,6 +75,22 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model_Abstract {
 		return $result;
 	}
 
+	/**
+	 * 2015-08-24
+	 * @used-by rm_preg_replace()
+	 * @param string $replacement
+	 * @throws Df_Core_Exception
+	 * @return string|null
+	 */
+	public function replace($replacement) {
+		/** @var string|null $result */
+		$result = @preg_replace($this->getPattern(), $replacement, $this->getSubject());
+		if (is_null($result) && $this->needThrowOnError()) {
+			$this->throwInternalError();
+		}
+		return $result;
+	}
+
 	/** @return bool */
 	public function test() {
 		if (!isset($this->{__METHOD__})) {
