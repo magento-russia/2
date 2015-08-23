@@ -247,6 +247,20 @@
 						<from>%The ultimate in modem design%</from>
 						<to>В связи с этим нужно подчеркнуть, что субтехника просветляет форшлаг. Гипнотический рифф неравномерен. </to>
 					</term>
+					<term><from>Text Element</from><to>Текст</to></term>
+					<term><from>Last chance to buy</from><to>Покупай, налетай</to></term>
+					<term><from>#Extra 50% off#</from><to>Скидка 50%</to></term>
+					<term><from>#Shop now#</from><to>Купить</to></term>
+				</path>
+				<path value='*/*/originalTitle'>
+					<term>
+						<from>Text Element</from>
+						<to>Текст</to>
+					</term>
+					<term>
+						<from>Image Element</from>
+						<to>Картинка</to>
+					</term>
 				</path>
 			</column>
 		</table>
