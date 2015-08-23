@@ -65,6 +65,12 @@ function df_concat_xpath($arguments) {
 function df_escape($text) {return df_text()->htmlspecialchars($text);}
 
 /**
+ * @param string $xpath
+ * @return string[]
+ */
+function df_explode_xpath($xpath) {return explode('/', $xpath);}
+
+/**
  * @param mixed|false $value
  * @return mixed|null
  */

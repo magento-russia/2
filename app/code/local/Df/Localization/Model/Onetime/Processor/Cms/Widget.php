@@ -27,7 +27,7 @@ class Df_Localization_Model_Onetime_Processor_Cms_Widget
 			$textOriginal = df_a($widgetParams, $paramName);
 			if ($textOriginal && is_string($textOriginal)) {
 				/** @var string|null $textProcessed */
-				$textProcessed = $this->translate($textOriginal, $term);
+				$textProcessed = $term->translate($textOriginal);
 				if (!is_null($textProcessed)) {
 					$widgetParams[$paramName] = $textProcessed;
 					$translated = true;
@@ -48,7 +48,7 @@ class Df_Localization_Model_Onetime_Processor_Cms_Widget
 			$textOriginal = df_a($titleValue, 0);
 			if ($textOriginal && is_string($textOriginal)) {
 				/** @var string|null $textProcessed */
-				$textProcessed = $this->translate($textOriginal, $term);
+				$textProcessed = $term->translate($textOriginal);
 				if (!is_null($textProcessed)) {
 					$titleValue[0] = $textProcessed;
 					$widgetParams[$titleKey] = $titleValue;

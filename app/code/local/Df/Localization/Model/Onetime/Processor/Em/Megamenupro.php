@@ -35,7 +35,7 @@ class Df_Localization_Model_Onetime_Processor_Em_Megamenupro
 					$textOriginal = df_a($item, $propertyName);
 					if ($textOriginal) {
 						/** @var string|null $textProcessed */
-						$textProcessed = $this->translate($textOriginal, $term);
+						$textProcessed = $term->translate($textOriginal);
 						if (!is_null($textProcessed)) {
 							$item[$propertyName] = $textProcessed;
 							$translated = true;

@@ -27,7 +27,7 @@ class Df_Localization_Model_Onetime_Processor_Attribute
 				/** @var string|null $valueDefault */
 				$valueDefault = $option->getData('default_value');
 				if ((0 === intval($store->getId())) || ($value !== $valueDefault)) {
-					$textProcessed = $this->translate($option->getData('value'), $term);
+					$textProcessed = $term->translate($option->getData('value'));
 					if (!is_null($textProcessed)) {
 						$this->updateOption($option, $store, $textProcessed);
 					}

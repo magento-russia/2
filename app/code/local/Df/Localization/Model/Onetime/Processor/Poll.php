@@ -19,7 +19,7 @@ class Df_Localization_Model_Onetime_Processor_Poll
 		foreach ($this->getEntity()->getAnswers() as $answer) {
 			/** @var Df_Poll_Model_Poll_Answer $answer */
 			/** @var string|null $textProcessed */
-			$textProcessed = $this->translate($answer->getAnswerTitle(), $term);
+			$textProcessed = $term->translate($answer->getAnswerTitle());
 			if (!is_null($textProcessed)) {
 				$answer->setAnswerTitle($textProcessed);
 			}

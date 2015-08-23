@@ -415,6 +415,21 @@ function df_notify_me($message, $doLog = true) {
 }
 
 /**
+ * @param mixed|null $value
+ * @param bool $skipEmptyCheck [optional]
+ * @return mixed[]
+ */
+function df_nta($value, $skipEmptyCheck = false) {
+	if (!is_array($value)) {
+		if (!$skipEmptyCheck) {
+			df_assert(empty($value));
+		}
+		$value = array();
+	}
+	return $value;
+}
+
+/**
  * @param object|Varien_Object $entity
  * @param string $key
  * @param mixed $default

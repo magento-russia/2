@@ -21,6 +21,27 @@ function rm_quote_into($text, $value, $type = null, $count = null) {
 }
 
 /**
+ * 2015-08-23
+ * Обратите внимание, что метод
+ * @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName()
+ * возвращает не название колонки, а слово «PRIMARY»,
+ * поэтому он нам не подходит.
+ * @used-by Df_Localization_Model_Onetime_Dictionary_Db_Table::primaryKey()
+ * @param string $table
+ * @return string|null
+ */
+function rm_primary_key($table) {
+	/** @var array(string => string|null) */
+	static $cache;
+	if (!isset($cache[$table])) {
+		$cache[$table] = rm_n_set(rm_first(df_nta(df_a_deep(
+			rm_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
+		))));
+	}
+	return rm_n_get($cache[$table]);
+}
+
+/**
  * @see Mage_Core_Model_Resource::getTableName() не кэширует результаты своей работы,
  * и, глядя на реализацию Mage_Core_Model_Resource_Setup::getTable(),
  * которая выполняет кэширование для @see Mage_Core_Model_Resource::getTableName(),

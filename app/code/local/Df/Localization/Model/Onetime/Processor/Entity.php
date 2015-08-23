@@ -78,53 +78,6 @@ abstract class Df_Localization_Model_Onetime_Processor_Entity extends Df_Core_Mo
 		$this->getEntity()->setData($this->getTitlePropertyName(), $newTitle);
 	}
 
-	/**
-	 * @param string|null|mixed $textOriginal
-	 * @param Df_Localization_Model_Onetime_Dictionary_Term $term
-	 * @return string|null
-	 */
-	protected function translate($textOriginal, Df_Localization_Model_Onetime_Dictionary_Term $term) {
-		/** @var string|null $result */
-		$result = null;
-		if ($term->needFromBeEmpty() && !$textOriginal) {
-			$result = $term->getTo();
-		}
-		else if ($textOriginal && is_string($textOriginal)) {
-			/** @var string $textProcessed */
-			if ($term->isItLike2() && rm_contains($textOriginal, $term->getFromForLike())) {
-				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
-				$result = $term->getTo();
-			}
-			else if ($term->isItRegEx()) {
-				$textProcessed = preg_replace($term->getFrom(), $term->getTo(), $textOriginal);
-				/**
-				 * Вызываем setData() только при реальном изменении значения свойства,
-				 * чтобы не менять попусту значение hasDataChanges
-				 * (что потом приведёт к ненужным сохранениям объектов).
-				 */
-				if ($textProcessed !== $textOriginal) {
-					$result = $textProcessed;
-				}
-			}
-			else {
-				/** @var string $textOriginalNormalized */
-				$textOriginalNormalized = rm_normalize($textOriginal);
-				$textProcessed =
-					str_replace($term->getFromNormalized(), $term->getTo(), $textOriginalNormalized)
-				;
-				/**
-				 * Вызываем setData() только при реальном изменении значения свойства,
-				 * чтобы не менять попусту значение hasDataChanges
-				 * (что потом приведёт к ненужным сохранениям объектов).
-				 */
-				if ($textProcessed !== $textOriginalNormalized) {
-					$result = $textProcessed;
-				}
-			}
-		}
-		return $result;
-	}
-
 	/** @return void */
 	protected function updateProperties() {
 		$this->updatePropertiesCustom();
@@ -160,11 +113,10 @@ abstract class Df_Localization_Model_Onetime_Processor_Entity extends Df_Core_Mo
 	 * @param $propertyName
 	 */
 	private function applyTermToProperty(
-		Df_Localization_Model_Onetime_Dictionary_Term $term
-		,$propertyName
+		Df_Localization_Model_Onetime_Dictionary_Term $term, $propertyName
 	) {
 		/** @var string|null $textProcessed */
-		$textProcessed = $this->translate($this->getEntity()->getData($propertyName), $term);
+		$textProcessed = $term->translate($this->getEntity()->getData($propertyName));
 		if (!is_null($textProcessed)) {
 			$this->getEntity()->setData($propertyName, $textProcessed);
 		}

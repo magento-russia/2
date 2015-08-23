@@ -6,26 +6,16 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	 */
 	public function getId() {return $this->getFrom();}
 
-	/** @return string|null */
+	/**
+	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processSimple()
+	 * @return string|null
+	 */
 	public function getFrom() {return $this->getEntityParam('from');}
 
-	/** @return string */
-	public function getFromForLike() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trim($this->getFrom(), '%');
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	public function getFromNormalized() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_normalize($this->getFrom());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string|null */
+	/**
+	 * Df_Localization_Model_Onetime_Processor_Db_Column::processSimple()
+	 * @return string|null
+	 */
 	public function getTo() {return $this->getEntityParam('to');}
 
 	/**
@@ -44,13 +34,80 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	}
 
 	/**
+	 * @used-by Df_Localization_Model_Onetime_Processor_Attribute::processTerm()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Entity::applyTermToProperty()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Poll::processTerm()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Cms_Widget::processTerm()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Em_Megamenupro::processTerm()
+	 * @param string|null|mixed $textOriginal
+	 * @return string|null
+	 */
+	public function translate($textOriginal) {
+		/** @var string|null $result */
+		$result = null;
+		if ($this->needFromBeEmpty() && !$textOriginal) {
+			$result = $this->getTo();
+		}
+		else if ($textOriginal && is_string($textOriginal)) {
+			/** @var string $textProcessed */
+			if ($this->isItLike2() && rm_contains($textOriginal, $this->getFromForLike())) {
+				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
+				$result = $this->getTo();
+			}
+			else if ($this->isItRegEx()) {
+				$textProcessed = preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
+				/**
+				 * Вызываем setData() только при реальном изменении значения свойства,
+				 * чтобы не менять попусту значение hasDataChanges
+				 * (что потом приведёт к ненужным сохранениям объектов).
+				 */
+				if ($textProcessed !== $textOriginal) {
+					$result = $textProcessed;
+				}
+			}
+			else {
+				/** @var string $textOriginalNormalized */
+				$textOriginalNormalized = rm_normalize($textOriginal);
+				$textProcessed =
+					str_replace($this->getFromNormalized(), $this->getTo(), $textOriginalNormalized)
+				;
+				/**
+				 * Вызываем setData() только при реальном изменении значения свойства,
+				 * чтобы не менять попусту значение hasDataChanges
+				 * (что потом приведёт к ненужным сохранениям объектов).
+				 */
+				if ($textProcessed !== $textOriginalNormalized) {
+					$result = $textProcessed;
+				}
+			}
+		}
+		return $result;
+	}
+
+	/** @return string */
+	private function getFromForLike() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trim($this->getFrom(), '%');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return string */
+	private function getFromNormalized() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = rm_normalize($this->getFrom());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 	 * Тогда замену проще запрограммировать,
 	 * и для большинства практических ситуаций этого достаточно).
 	 * @used-by Df_Localization_Model_Onetime_Processor_Entity::translate()
 	 * @return bool
 	 */
-	public function isItLike2() {
+	private function isItLike2() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				rm_starts_with($this->getFrom(), '%') && rm_ends_with($this->getFrom(), '%')
@@ -60,7 +117,7 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	}
 
 	/** @return bool */
-	public function isItRegEx() {
+	private function isItRegEx() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_text()->isRegex($this->getFrom());
 		}
@@ -68,7 +125,7 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	}
 
 	/** @return bool */
-	public function needFromBeEmpty() {return '{empty}' === $this->getFrom();}
+	private function needFromBeEmpty() {return '{empty}' === $this->getFrom();}
 
 	/** Используется из @see Df_Localization_Model_Onetime_Dictionary_Terms::getItemClass() */
 	const _CLASS = __CLASS__;

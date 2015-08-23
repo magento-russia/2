@@ -40,6 +40,101 @@ function df_a(array $entity, $key, $default = null) {
 }
 
 /**
+ * @used-by Df_Core_Model_Geo_Locator_Real::loadFromCache()
+ * @used-by Df_Core_Model_Geo_Locator_Real::queryArray()
+ * @used-by Df_IPay_Model_Action_Abstract::getRequestParam()
+ * @used-by Df_IPay_Model_Action_Abstract::getRequestParamR()
+ * @used-by Df_Shipping_Model_Response::json()
+ * Этот метод предназначен для извлечения некоторого значения
+ * из многомерного массива посредством нотации ключ1/ключ2/ключ3
+ * Например: df_a_deep(array('test' => array('eee' => 3)), 'test/eee') вернёт «3».
+ * Обратите внимание, что ядро Magento реализует аналогичный алгоритм
+ * в методе @see Varien_Object::getData()
+ * Наша функция работает не только с объектами @see Varien_Object, но и с любыми массивами.
+ * @param array(string => mixed) $array
+ * @param string $path
+ * @param mixed $defaultValue [optional]
+ * @return mixed|null
+ */
+function df_a_deep(array $array, $path, $defaultValue = null) {
+	df_param_string_not_empty($path, 1);
+	/** @var mixed|null $result */
+	$result = null;
+	/**
+	 * 2015-02-06
+	 * Обратите внимание, что если разделитель отсутствует в строке,
+	 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+	 * Это вполне укладывается в наш универсальный алгоритм.
+	 */
+	/** @var string[] $pathParts */
+	$pathParts = df_explode_xpath($path);
+	while ($pathParts) {
+		$result = df_a($array, array_shift($pathParts));
+		if (is_array($result)) {
+			$array = $result;
+		}
+		else {
+			if ($pathParts) {
+				// Ещё не прошли весь путь, а уже наткнулись на не-массив.
+				$result = null;
+			}
+			break;
+		}
+	}
+	if (is_null($result)) {
+		$result = $defaultValue;
+	}
+	return $result;
+}
+
+/**
+ * 2015-08-23
+ * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processWithFilters()
+ * @param mixed $node
+ * @param string|string[] $path
+ * @param callable $callback
+ * @param mixed $params [optional]
+ * @return void
+ */
+function df_a_deep_walk(&$node, $path, $callback, $params = null) {
+	if (!is_array($node)) {
+		if (!$path) {
+			$node = call_user_func($callback, $node, $params);
+		}
+	}
+	else {
+		/**
+		 * 2015-02-06
+		 * Обратите внимание, что если разделитель отсутствует в строке,
+		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+		 * Это вполне укладывается в наш универсальный алгоритм.
+		 */
+		if (!is_array($path)) {
+			$path = df_explode_xpath($path);
+		}
+		while ($path) {
+			/** @var string $step */
+			$step = array_shift($path);
+			if ('*' !== $step) {
+				if (isset($node[$step])) {
+					// Первый аргумент передаётся по ссылке
+					// Проверял — работает даже для индексов массива:
+					// https://3v4l.org/9f3pk
+					df_a_deep_walk($node[$step], $path, $callback, $params);
+				}
+			}
+			else if ($path) {
+				// Здесь ссылки тоже работают: https://3v4l.org/damQl
+				foreach ($node as &$child) {
+					/** @var mixed $child */
+					df_a_deep_walk($child, $path, $callback, $params);
+				}
+			}
+		}
+	}
+}
+
+/**
  * 2015-02-07
  * Аналог @see array_change_key_case() с поддержкой UTF-8.
  * Реализацию взял отсюда: @link http://php.net/manual/function.array-change-key-case.php#107715
