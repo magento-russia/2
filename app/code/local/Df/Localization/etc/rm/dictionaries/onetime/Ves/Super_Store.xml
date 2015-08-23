@@ -264,5 +264,77 @@
 				</path>
 			</column>
 		</table>
+		<table name='ves_megamenu/megamenu_widget'>
+			<column name='name'>
+				<term><from>Demo HTML</from><to>Пример HTML</to></term>
+				<term><from>Demo Images</from><to>Пример картинок</to></term>
+				<term><from>Custom List</from><to>Пример списка</to></term>
+				<term><from>Best seller</from><to>Самые продаваемые товары</to></term>
+				<term><from>Information</from><to>Пример информационного блока</to></term>
+				<term><from>Video Widget</from><to>Пример видео</to></term>
+				<term><from>Categories</from><to>Разделы</to></term>
+				<term><from>Lingerie</from><to>Одежда</to></term>
+				<term><from>Account</from><to>Личный кабинет</to></term>
+				<term><from>Demo Images Top</from><to>Пример картинок 2</to></term>
+				<term><from>Last Tweets</from><to>Новости</to></term>
+				<term><from>Bestseller</from><to>Самые продаваемые товары</to></term>
+			</column>
+			<column name='params' filters='serialize'>
+				<!--
+					Значения одной и той же колонки могут быть закодированы в 2 разных форматах:
+					1) просто serialize
+					2) serialize + base64
+					Мы здесь переводим только первый формат (второй переводим ниже).
+				-->
+				<where><![CDATA[params LIKE '%show_name%']]></where>
+				<path value='html'>
+					<term>
+						<from>%Lorem Ipsum%</from>
+						<to><![CDATA[Действительно, примочка диссонирует алеаторически выстроенный бесконечный канон с полизеркальной векторно-голосовой структурой. Флажолет регрессийно представляет собой пласт, таким образом объектом имитации является число длительностей в каждой из относительно автономных ритмогрупп ведущего голоса. Развивая эту тему, аллюзийно-полистилистическая композиция просветляет определенный полиряд, на этих моментах останавливаются Л.А.Мазель и В.А.Цуккерман в своем "Анализе музыкальных произведений".]]></to>
+					</term>
+					<term><from>#Dresses#</from><to>Платья</to></term>
+					<term><from>#New#</from><to>Новинки</to></term>
+					<term><from>#Accessories#</from><to>Аксессуары</to></term>
+					<term><from>#Tops#</from><to>Блузки</to></term>
+					<term><from>#Bottoms#</from><to>Юбки</to></term>
+					<term><from>#About Us#</from><to>О магазине</to></term>
+					<term><from>#Delivery Information#</from><to>Доставка</to></term>
+					<term><from>#Privacy Policy#</from><to>Контакты</to></term>
+					<term><from><![CDATA[#Terms & Conditions#]]></from><to>Поддержка</to></term>
+				</path>
+			</column>
+			<column name='params' filters='serialize,base64'>
+				<!-- YTozOntzOjk6InNob3dfb... -->
+				<where><![CDATA[params LIKE 'YTo%']]></where>
+				<path value='html'>
+					<term><from>#Presets#</from><to>Соноропериод</to></term>
+					<term><from>#Typography#</from><to>Регрессийно</to></term>
+					<term><from>#Fully Loaded#</from><to>Крещендирующее</to></term>
+					<term><from>#Module Position#</from><to>Флажолет</to></term>
+					<term><from>#Module Variations#</from><to>Полиряд</to></term>
+					<term><from>#Duis vulputate#</from><to>Хроматический</to></term>
+					<term><from>#Morbi accumsan#</from><to>Ритмоединица</to></term>
+					<term><from>#Nam tellus odio#</from><to>Доминантсептаккорд</to></term>
+					<term><from>#Gravida#</from><to>Соноропериод</to></term>
+					<term><from>#Sollicitudin#</from><to>Соноропериод</to></term>
+					<term><from>#Bibendum#</from><to>Соноропериод</to></term>
+					<term><from>#Consequat ipsum#</from><to>Соноропериод</to></term>
+					<term><from>#Duis vulputate#</from><to>Соноропериод</to></term>
+					<term><from>#Morbi accumsan#</from><to>Соноропериод</to></term>
+					<term><from>#Shrot Sleeved#</from><to>Соноропериод</to></term>
+					<term><from>#Nam tellus odio#</from><to>Соноропериод</to></term>
+					<term><from>#Login#</from><to>Соноропериод</to></term>
+					<term><from>#Create account#</from><to>Соноропериод</to></term>
+					<term><from>#Wish List#</from><to>Соноропериод</to></term>
+					<term><from>#My Account#</from><to>Соноропериод</to></term>
+					<term><from>#Shopping Cart#</from><to>Соноропериод</to></term>
+					<term><from>#Consequat ipsum#</from><to>Соноропериод</to></term>
+					<term><from>#Duis vulputate#</from><to>Соноропериод</to></term>
+					<term><from>#MAKES UP PHOTOSHOP#</from><to>Соноропериод</to></term>
+					<term><from>#Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet laboriosam provident at option#</from><to>Очевидно, что флажолет сложен. Дисторшн, на первый взгляд, представляет собой гипнотический рифф.</to></term>
+					<term><from>#Voluptates, consectetur soluta laborum maiores alias autem velit deserunt quas quis repellendus#</from><to>Дисторшн, и это особенно заметно у Чарли Паркера или Джона Колтрейна, иллюстрирует дисторшн.</to></term>
+				</path>
+			</column>
+		</table>
 	</db>
 </dictionary>

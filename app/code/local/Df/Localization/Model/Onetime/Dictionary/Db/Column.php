@@ -56,6 +56,21 @@ class Df_Localization_Model_Onetime_Dictionary_Db_Column
 	}
 
 	/**
+		<table name='ves_megamenu/megamenu_widget'>
+			<column name='params' filters='serialize'>
+				<where><![CDATA[params LIKE '%show_name%']]></where>
+			</column>
+		</table>
+	 * @return string
+	 */
+	public function where() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = (string)$this->e()->descend('where');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * @param string $filter
 	 * @param string $direction
 	 * @param string $value

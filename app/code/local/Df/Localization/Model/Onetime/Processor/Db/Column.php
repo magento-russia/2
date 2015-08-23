@@ -13,14 +13,18 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 	private function processSimple() {
 		/** @var string $column */
 		$column = $this->column()->getName();
+		/** @var array(int|string => string) $whereCommon */
+		$whereCommon = df_clean(array($this->column()->where()));
 		foreach ($this->column()->terms() as $term) {
 			/** @var Df_Localization_Model_Onetime_Dictionary_Term $term */
 			rm_conn()->update(
 				$this->tableName()
 				, array($column => $term->getTo())
-				, $term->isItLike()
-					? array("{$column} LIKE ?" => $term->getFrom())
-					: array("? = {$column}" => $term->getFrom())
+				, $whereCommon + (
+					$term->isItLike()
+						? array("{$column} LIKE ?" => $term->getFrom())
+						: array("? = {$column}" => $term->getFrom())
+				)
 			);
 		}
 	}
@@ -41,6 +45,9 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 		/** @var Varien_Db_Select $select */
 		$select = rm_conn()->select();
 		$select->from($this->tableName(), array($primaryKey, $column));
+		if ($this->column()->where()) {
+			$select->where($this->column()->where());
+		}
 		/** @var array(array(string => string)) $rows */
 		$rows = rm_conn()->fetchAssoc($select);
 		foreach ($rows as $row) {
