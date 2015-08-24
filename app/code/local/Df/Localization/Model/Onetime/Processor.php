@@ -188,9 +188,7 @@ class Df_Localization_Model_Onetime_Processor extends Df_Core_Model_Abstract {
 			</attributes>
 		 */
 		/** @var string[] $attributes */
-		$attributes = df_parse_csv((string)$dictionary->e()->descend(
-			'attributes/used_in_product_listing'
-		));
+		$attributes = df_parse_csv((string)$dictionary->descendS('attributes/used_in_product_listing'));
 		if ($attributes) {
 			/** @var int[] $atttibuteIds */
 			$atttibuteIds = rm_fetch_col_int_unique(
