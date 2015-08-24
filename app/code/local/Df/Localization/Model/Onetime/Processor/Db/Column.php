@@ -2,42 +2,6 @@
 class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Abstract {
 	/** @return void */
 	public function process() {
-		$this->column()->hasFilters() ? $this->processWithFilters() : $this->processSimple();
-	}
-
-	/** @return Df_Localization_Model_Onetime_Dictionary_Db_Column */
-	private function column() {return $this->cfg(self::$P__COLUMN);}
-
-
-	/** @return void */
-	private function processSimple() {
-		/** @var string $column */
-		$column = $this->column()->getName();
-		/** @var array(int|string => string) $whereCommon */
-		$whereCommon = df_clean(array($this->column()->where()));
-		foreach ($this->column()->terms() as $term) {
-			/** @var Df_Localization_Model_Onetime_Dictionary_Term $term */
-			rm_conn()->update(
-				$this->tableName()
-				, array($column => $term->getTo())
-				, $whereCommon + (
-					$term->isItLike()
-						? array("{$column} LIKE ?" => $term->getFrom())
-						: array("? = {$column}" => $term->getFrom())
-				)
-			);
-		}
-	}
-
-	/**
-	 * 2015-08-23
-	 * Поддержка синтаксиса:
-	 * <column name='params' filters='serialize,base64'>
-	 * Атрибут filters позволяет нам переводить значения,
-	 * которые хранятся в базе данных в закодированном виде.
-	 * @return void
-	 */
-	private function processWithFilters() {
 		/** @var string $primaryKey */
 		$primaryKey = $this->column()->table()->primaryKey();
 		/** @var string $column */
@@ -54,6 +18,10 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 			self::$changed = false;
 			/** @var array(string => string) $row */
 			/** @var string $valueBefore */
+			// 2015-08-23
+			// Поддержка синтаксиса: <column name='params' filters='serialize,base64'>
+			// Атрибут filters позволяет нам переводить значения,
+			// которые хранятся в базе данных в закодированном виде
 			$valueBefore = $this->column()->decode($row[$column]);
 			/** @var string $valueAfter */
 			if (!$this->column()->isComplex()) {
@@ -101,6 +69,9 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 		}
 	}
 
+	/** @return Df_Localization_Model_Onetime_Dictionary_Db_Column */
+	private function column() {return $this->cfg(self::$P__COLUMN);}
+
 	/** @return string */
 	private function tableName() {
 		if (!isset($this->{__METHOD__})) {
@@ -130,7 +101,7 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 
 	/**
 	 * @used-by df_a_deep_walk()
-	 * @used-by processWithFilters()
+	 * @used-by process()
 	 * @param mixed $valueBefore
 	 * @param Df_Localization_Model_Onetime_Dictionary_Terms $terms
 	 * @return mixed
@@ -165,7 +136,7 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 	}
 
 	/**
-	 * @used-by processWithFilters()
+	 * @used-by process()
 	 * @used-by translate()
 	 * @var bool
 	 */

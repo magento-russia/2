@@ -249,8 +249,8 @@
 					</term>
 					<term><from>Text Element</from><to>Текст</to></term>
 					<term><from>Last chance to buy</from><to>Покупай, налетай</to></term>
-					<term><from>@Extra 50% off@</from><to>Скидка 50%</to></term>
-					<term><from>@Shop now@</from><to>Купить</to></term>
+					<term><from>Extra 50% off</from><to>Скидка 50%</to></term>
+					<term><from>Shop now</from><to>Купить</to></term>
 				</path>
 				<path value='*/*/originalTitle'>
 					<term>
@@ -292,47 +292,47 @@
 						<from>%Lorem Ipsum%</from>
 						<to><![CDATA[Действительно, примочка диссонирует алеаторически выстроенный бесконечный канон с полизеркальной векторно-голосовой структурой. Флажолет регрессийно представляет собой пласт, таким образом объектом имитации является число длительностей в каждой из относительно автономных ритмогрупп ведущего голоса. Развивая эту тему, аллюзийно-полистилистическая композиция просветляет определенный полиряд, на этих моментах останавливаются Л.А.Мазель и В.А.Цуккерман в своем "Анализе музыкальных произведений".]]></to>
 					</term>
-					<term><from>@Dresses@</from><to>Платья</to></term>
-					<term><from>@New@</from><to>Новинки</to></term>
-					<term><from>@Accessories@</from><to>Аксессуары</to></term>
-					<term><from>@Tops@</from><to>Блузки</to></term>
-					<term><from>@Bottoms@</from><to>Юбки</to></term>
-					<term><from>@About Us@</from><to>О магазине</to></term>
-					<term><from>@Delivery Information@</from><to>Доставка</to></term>
-					<term><from>@Privacy Policy@</from><to>Контакты</to></term>
-					<term><from><![CDATA[@Terms & Conditions@]]></from><to>Поддержка</to></term>
+					<term><from>Dresses</from><to>Платья</to></term>
+					<term><from>New</from><to>Новинки</to></term>
+					<term><from>Accessories</from><to>Аксессуары</to></term>
+					<term><from>Tops</from><to>Блузки</to></term>
+					<term><from>Bottoms</from><to>Юбки</to></term>
+					<term><from>About Us</from><to>О магазине</to></term>
+					<term><from>Delivery Information</from><to>Доставка</to></term>
+					<term><from>Privacy Policy</from><to>Контакты</to></term>
+					<term><from><![CDATA[Terms & Conditions]]></from><to>Поддержка</to></term>
 				</path>
 			</column>
 			<column name='params' filters='serialize,base64'>
 				<!-- YTozOntzOjk6InNob3dfb... -->
 				<where><![CDATA[params LIKE 'YTo%']]></where>
 				<path value='html'>
-					<term><from>@Presets@</from><to>Соноропериод</to></term>
-					<term><from>@Typography@</from><to>Регрессийно</to></term>
-					<term><from>@Fully Loaded@</from><to>Крещендирующее</to></term>
-					<term><from>@Module Position@</from><to>Флажолет</to></term>
-					<term><from>@Module Variations@</from><to>Полиряд</to></term>
-					<term><from>@Duis vulputate@</from><to>Хроматический</to></term>
-					<term><from>@Morbi accumsan@</from><to>Ритмоединица</to></term>
-					<term><from>@Nam tellus odio@</from><to>Доминантсептаккорд</to></term>
-					<term><from>@Gravida@</from><to>Соноропериод</to></term>
-					<term><from>@Sollicitudin@</from><to>Соноропериод</to></term>
-					<term><from>@Bibendum@</from><to>Соноропериод</to></term>
-					<term><from>@Consequat ipsum@</from><to>Соноропериод</to></term>
-					<term><from>@Duis vulputate@</from><to>Соноропериод</to></term>
-					<term><from>@Morbi accumsan@</from><to>Соноропериод</to></term>
-					<term><from>@Shrot Sleeved@</from><to>Соноропериод</to></term>
-					<term><from>@Nam tellus odio@</from><to>Соноропериод</to></term>
-					<term><from>@Login@</from><to>Соноропериод</to></term>
-					<term><from>@Create account@</from><to>Соноропериод</to></term>
-					<term><from>@Wish List@</from><to>Соноропериод</to></term>
-					<term><from>@My Account@</from><to>Соноропериод</to></term>
-					<term><from>@Shopping Cart@</from><to>Соноропериод</to></term>
-					<term><from>@Consequat ipsum@</from><to>Соноропериод</to></term>
-					<term><from>@Duis vulputate@</from><to>Соноропериод</to></term>
-					<term><from>@MAKES UP PHOTOSHOP@</from><to>Соноропериод</to></term>
-					<term><from>@Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet laboriosam provident at option@</from><to>Очевидно, что флажолет сложен. Дисторшн, на первый взгляд, представляет собой гипнотический рифф.</to></term>
-					<term><from>@Voluptates, consectetur soluta laborum maiores alias autem velit deserunt quas quis repellendus@</from><to>Дисторшн, и это особенно заметно у Чарли Паркера или Джона Колтрейна, иллюстрирует дисторшн.</to></term>
+					<term><from>Presets</from><to>Соноропериод</to></term>
+					<term><from>Typography</from><to>Регрессийно</to></term>
+					<term><from>Fully Loaded</from><to>Крещендирующее</to></term>
+					<term><from>Module Position</from><to>Флажолет</to></term>
+					<term><from>Module Variations</from><to>Полиряд</to></term>
+					<term><from>Duis vulputate</from><to>Хроматический</to></term>
+					<term><from>Morbi accumsan</from><to>Ритмоединица</to></term>
+					<term><from>Nam tellus odio</from><to>Доминантсептаккорд</to></term>
+					<term><from>Gravida</from><to>Соноропериод</to></term>
+					<term><from>Sollicitudin</from><to>Соноропериод</to></term>
+					<term><from>Bibendum</from><to>Соноропериод</to></term>
+					<term><from>Consequat ipsum</from><to>Соноропериод</to></term>
+					<term><from>Duis vulputate</from><to>Соноропериод</to></term>
+					<term><from>Morbi accumsan</from><to>Соноропериод</to></term>
+					<term><from>Shrot Sleeved</from><to>Соноропериод</to></term>
+					<term><from>Nam tellus odio</from><to>Соноропериод</to></term>
+					<term><from>Login</from><to>Соноропериод</to></term>
+					<term><from>Create account</from><to>Соноропериод</to></term>
+					<term><from>Wish List</from><to>Соноропериод</to></term>
+					<term><from>My Account</from><to>Соноропериод</to></term>
+					<term><from>Shopping Cart</from><to>Соноропериод</to></term>
+					<term><from>Consequat ipsum</from><to>Соноропериод</to></term>
+					<term><from>Duis vulputate</from><to>Соноропериод</to></term>
+					<term><from>MAKES UP PHOTOSHOP</from><to>Соноропериод</to></term>
+					<term><from>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet laboriosam provident at option</from><to>Очевидно, что флажолет сложен. Дисторшн, на первый взгляд, представляет собой гипнотический рифф.</to></term>
+					<term><from>Voluptates, consectetur soluta laborum maiores alias autem velit deserunt quas quis repellendus</from><to>Дисторшн, и это особенно заметно у Чарли Паркера или Джона Колтрейна, иллюстрирует дисторшн.</to></term>
 				</path>
 			</column>
 		</table>
@@ -351,44 +351,44 @@
 					</term>
 				</path>
 				<path value='widget_aboutus_data'>
-					<term><from>@FREE SHIPPING@</from><to>Российская сборка Magento</to></term>
-					<term><from>@SPECIAL GIFT CARDS@</from><to>Российская сборка Magento</to></term>
-					<term><from>@DAILY PROMOTION@</from><to>Российская сборка Magento</to></term>
-					<term><from>@24/7 CUSTOMER@</from><to>Российская сборка Magento</to></term>
+					<term><from>FREE SHIPPING</from><to>Российская сборка Magento</to></term>
+					<term><from>SPECIAL GIFT CARDS</from><to>Российская сборка Magento</to></term>
+					<term><from>DAILY PROMOTION</from><to>Российская сборка Magento</to></term>
+					<term><from>24/7 CUSTOMER</from><to>Российская сборка Magento</to></term>
 				</path>
 				<path value='widget_custom-footer-links_data'>
-					<term><from>@Proin gravida nibh@</from><to>Миксолидийский аккорд</to></term>
-					<term><from>@Duis cursus@</from><to>Миксолидийский аккорд</to></term>
-					<term><from>@Morbi accumsan ipsum@</from><to>Миксолидийский аккорд</to></term>
-					<term><from>@Nam cidunt auctor@</from><to>Миксолидийский аккорд</to></term>
-					<term><from>@Sed mauris consequat@</from><to>Миксолидийский аккорд</to></term>
-					<term><from>@Mauris erat@</from><to>Миксолидийский аккорд</to></term>
-					<term><from>@About Us@</from><to>Форшлаг</to></term>
-					<term><from>@Jobs@</from><to>Форшлаг</to></term>
-					<term><from>@Affiliates@</from><to>Форшлаг</to></term>
-					<term><from>@Contact@</from><to>Форшлаг</to></term>
-					<term><from>@Newsletter@</from><to>Форшлаг</to></term>
-					<term><from>@Blog@</from><to>Форшлаг</to></term>
-					<term><from>@Contact Us@</from><to>Полимодальная</to></term>
+					<term><from>Proin gravida nibh</from><to>Миксолидийский аккорд</to></term>
+					<term><from>Duis cursus</from><to>Миксолидийский аккорд</to></term>
+					<term><from>Morbi accumsan ipsum</from><to>Миксолидийский аккорд</to></term>
+					<term><from>Nam cidunt auctor</from><to>Миксолидийский аккорд</to></term>
+					<term><from>Sed mauris consequat</from><to>Миксолидийский аккорд</to></term>
+					<term><from>Mauris erat</from><to>Миксолидийский аккорд</to></term>
+					<term><from>About Us</from><to>Форшлаг</to></term>
+					<term><from>Jobs</from><to>Форшлаг</to></term>
+					<term><from>Affiliates</from><to>Форшлаг</to></term>
+					<term><from>Contact</from><to>Форшлаг</to></term>
+					<term><from>Newsletter</from><to>Форшлаг</to></term>
+					<term><from>Blog</from><to>Форшлаг</to></term>
+					<term><from>Contact Us</from><to>Полимодальная</to></term>
 					<term>
-						<from><![CDATA[@Terms &amp; Conditions@]]></from>
+						<from><![CDATA[Terms &amp; Conditions]]></from>
 						<to>Полимодальная</to>
 					</term>
-					<term><from>@Privacy Policy@</from><to>Полимодальная</to></term>
-					<term><from>@Orders and Returns@</from><to>Полимодальная</to></term>
-					<term><from>@Site Map@</from><to>Полимодальная</to></term>
-					<term><from>@info@venustheme.com@</from><to>admin@magento-forum.ru</to></term>
-					<term><from>@latest from blog@</from><to>Наши новости</to></term>
+					<term><from>Privacy Policy</from><to>Полимодальная</to></term>
+					<term><from>Orders and Returns</from><to>Полимодальная</to></term>
+					<term><from>Site Map</from><to>Полимодальная</to></term>
+					<term><from>info@venustheme.com</from><to>admin@magento-forum.ru</to></term>
+					<term><from>latest from blog</from><to>Наши новости</to></term>
 					<term>
-						<from><![CDATA[@<h3>informations</h3>@]]></from>
+						<from><![CDATA[<h3>informations</h3>]]></from>
 						<to><![CDATA[<h3>Арпеджио</h3>]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@<h3>service &amp; support</h3>@]]></from>
+						<from><![CDATA[<h3>service &amp; support</h3>]]></from>
 						<to><![CDATA[Оплата и доставка]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@<h3>about store</h3>@]]></from>
+						<from><![CDATA[<h3>about store</h3>]]></from>
 						<to><![CDATA[<h3>О магазине</h3>]]></to>
 					</term>
 					<term>
@@ -396,7 +396,7 @@
 						<to><![CDATA[<p>Алеаторически выстроенный бесконечный канон с полизеркальной векторно-голосовой структурой полифигурно имеет open-air. Развивая эту тему, драм-машина иллюстрирует тетрахорд.</p>]]></to>
 					</term>
 					<term>
-						<from>@Phone: +01 888 (000) 1234@</from>
+						<from>Phone: +01 888 (000) 1234</from>
 						<to>+7 (495) 745-51-65</to>
 					</term>
 				</path>
@@ -437,55 +437,81 @@
 				<where><![CDATA['html' = type]]></where>
 				<path value='html'>
 					<term>
-						<from><![CDATA[@>Crossed Shirt - Beluga<@]]></from>
+						<from><![CDATA[>Crossed Shirt - Beluga<]]></from>
 						<to><![CDATA[>Соноропериод<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Crossed Shirt - Belugas<@]]></from>
+						<from><![CDATA[>Crossed Shirt - Belugas<]]></from>
 						<to><![CDATA[>Глубокий форшлаг<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Double layer super soft<@]]></from>
+						<from><![CDATA[>Double layer super soft<]]></from>
 						<to><![CDATA[>Контрапункт контрастных фактур<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Farlap Shirt - Ruby Wine<@]]></from>
+						<from><![CDATA[>Farlap Shirt - Ruby Wine<]]></from>
 						<to><![CDATA[>Изоритмический лайн-ап<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Framed-Sleeve Bot<@]]></from>
+						<from><![CDATA[>Framed-Sleeve Bot<]]></from>
 						<to><![CDATA[>Мнимотакт<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Apple Cinema 30"<@]]></from>
+						<from><![CDATA[>Apple Cinema 30"<]]></from>
 						<to><![CDATA[>Глиссандо волнообразно<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Canon EOS 40D<@]]></from>
+						<from><![CDATA[>Canon EOS 40D<]]></from>
 						<to><![CDATA[>Мнимотакт<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Double layer super<@]]></from>
+						<from><![CDATA[>Double layer super<]]></from>
 						<to><![CDATA[>Флажолет<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Framed-Sleeve<@]]></from>
+						<from><![CDATA[>Framed-Sleeve<]]></from>
 						<to><![CDATA[>Флажолет<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>MAKES UP PHOTOSHOP<@]]></from>
+						<from><![CDATA[>MAKES UP PHOTOSHOP<]]></from>
 						<to><![CDATA[>Доминантсептаккорд<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet laboriosam provident at optio<@]]></from>
+						<from><![CDATA[>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet laboriosam provident at optio<]]></from>
 						<to><![CDATA[>Попса образует глубокий соноропериод.<]]></to>
 					</term>
 					<term>
-						<from><![CDATA[@>Voluptates, consectetur soluta laborum maiores alias autem velit deserunt quas quis repellendus<@]]></from>
+						<from><![CDATA[>Voluptates, consectetur soluta laborum maiores alias autem velit deserunt quas quis repellendus<]]></from>
 						<to><![CDATA[>Попса образует глубокий соноропериод.<]]></to>
 					</term>
 				</path>
 			</column>
 		</table>
 	</db>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>social-link</id></block>
+		</conditions>
+		<actions>
+			<new_title>Мы в соцсетях</new_title>
+			<term>
+				<from><![CDATA[>Follow us on<]]></from>
+				<to><![CDATA[>Мы в соцсетях<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>contact-info</id></block>
+		</conditions>
+		<actions>
+			<new_title>Мы в соцсетях</new_title>
+			<term>
+				<from><![CDATA[>Follow us on<]]></from>
+				<to><![CDATA[>Мы в соцсетях<]]></to>
+			</term>
+		</actions>
+	</rule>
 </dictionary>

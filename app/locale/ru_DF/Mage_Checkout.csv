@@ -1,6 +1,7 @@
 "(0 item) - ",""
 "(1 item) - ","(1 товар) - "
 "(%s items) - ","(товаров: %s) - "
+"%s item(s) - %s","товаров: %s - %s"
 "%s was added to your shopping cart.","товар <strong>«%s»</strong> добавлен в корзину"
 "%s was updated in your shopping cart.","товар <strong>%s</strong> обновлён в корзине"
 "* Required Fields","* обязательные поля"

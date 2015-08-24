@@ -2,24 +2,18 @@
 class Df_Localization_Model_Onetime_Dictionary_Db_Column
 	extends Df_Core_Model_SimpleXml_Parser_Entity {
 	/**
-	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processWithFilters()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::process()
 	 * @param string $value
 	 * @return string
 	 */
 	public function decode($value) {return $this->applyFilters($value, __FUNCTION__);}
 
 	/**
-	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processWithFilters()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::process()
 	 * @param string $value
 	 * @return string
 	 */
 	public function encode($value) {return $this->applyFilters($value, __FUNCTION__);}
-
-	/**
-	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::process()
-	 * @return bool
-	 */
-	public function hasFilters() {return !!$this->filters();}
 
 	/** @return bool */
 	public function isComplex() {

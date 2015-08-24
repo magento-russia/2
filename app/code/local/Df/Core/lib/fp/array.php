@@ -89,7 +89,7 @@ function df_a_deep(array $array, $path, $defaultValue = null) {
 
 /**
  * 2015-08-23
- * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processWithFilters()
+ * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::process()
  * @param mixed $node
  * @param string|string[] $path
  * @param callable $callback

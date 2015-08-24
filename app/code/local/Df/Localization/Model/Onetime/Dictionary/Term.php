@@ -7,18 +7,6 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	public function getId() {return $this->getFrom();}
 
 	/**
-	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processSimple()
-	 * @return string|null
-	 */
-	public function getFrom() {return $this->getEntityParam('from');}
-
-	/**
-	 * Df_Localization_Model_Onetime_Processor_Db_Column::processSimple()
-	 * @return string|null
-	 */
-	public function getTo() {return $this->getEntityParam('to');}
-
-	/**
 	 * 2015-08-23
 	 * Здесь допустим как двухсторонний, так и односторонний лайк (только справа или только слева).
 	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::isItLike()
@@ -61,29 +49,6 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 				$result = $this->getTo();
 			}
-			/**
-			 * 2015-08-24
-			 * Поддержка синтаксиса:
-				<term>
-					<from>@Phone: +01 888 (000) 1234@</from>
-					<to>+7 (495) 745-51-65</to>
-				</term>
-			 * Такой синтаксис позволяет заменить одну подстроку на другую,
-			 * не прибегая к регулярному выражению (при котором пришлось бы следить за спецсимволами).
-			 */
-			else if ($this->isItNeedle()) {
-				$textProcessed = str_replace(
-					$this->getFromForNeedle(), $this->getTo(), $textOriginal
-				);
-				/**
-				 * Вызываем setData() только при реальном изменении значения свойства,
-				 * чтобы не менять попусту значение hasDataChanges
-				 * (что потом приведёт к ненужным сохранениям объектов).
-				 */
-				if ($textProcessed !== $textOriginal) {
-					$result = $textProcessed;
-				}
-			}
 			else if ($this->isItRegEx()) {
 				$textProcessed = rm_preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
 				/**
@@ -114,29 +79,13 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 		return $result;
 	}
 
+	/** @return string|null */
+	private function getFrom() {return $this->getEntityParam('from');}
+
 	/** @return string */
 	private function getFromForLike() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_trim($this->getFrom(), '%');
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2015-08-24
-	 * Поддержка синтаксиса:
-		<term>
-			<from>@Phone: +01 888 (000) 1234@</from>
-			<to>+7 (495) 745-51-65</to>
-		</term>
-	 * Такой синтаксис позволяет заменить одну подстроку на другую,
-	 * не прибегая к регулярному выражению (при котором пришлось бы следить за спецсимволами).
-	 * @used-by translate()
-	 * @return string
-	 */
-	private function getFromForNeedle() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trim($this->getFrom(), '@');
 		}
 		return $this->{__METHOD__};
 	}
@@ -149,6 +98,9 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 		return $this->{__METHOD__};
 	}
 
+	/** @return string|null */
+	private function getTo() {return $this->getEntityParam('to');}
+
 	/**
 	 * Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 	 * Тогда замену проще запрограммировать,
@@ -160,27 +112,6 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				rm_starts_with($this->getFrom(), '%') && rm_ends_with($this->getFrom(), '%')
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2015-08-24
-	 * Поддержка синтаксиса:
-		<term>
-			<from>@Phone: +01 888 (000) 1234@</from>
-			<to>+7 (495) 745-51-65</to>
-		</term>
-	 * Такой синтаксис позволяет заменить одну подстроку на другую,
-	 * не прибегая к регулярному выражению (при котором пришлось бы следить за спецсимволами).
-	 * @used-by translate()
-	 * @return bool
-	 */
-	private function isItNeedle() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				rm_starts_with($this->getFrom(), '@') && rm_ends_with($this->getFrom(), '@')
 			;
 		}
 		return $this->{__METHOD__};

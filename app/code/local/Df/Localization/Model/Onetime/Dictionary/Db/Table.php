@@ -27,7 +27,7 @@ class Df_Localization_Model_Onetime_Dictionary_Db_Table
 	 * 2015-08-23
 	 * Первичный ключ должен обязательно существовать,
 	 * без этого алгоритм обновления работать не будет.
-	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::processWithFilters()
+	 * @used-by Df_Localization_Model_Onetime_Processor_Db_Column::process()
 	 * @return string
 	 */
 	public function primaryKey() {
