@@ -421,5 +421,71 @@
 				<term><from>Office</from><to>Дисторшн</to></term>
 			</column>
 		</table>
+		<table name='ves_verticalmenu/verticalmenu_widget'>
+			<column name='name'>
+				<term><from>Custom Product 1</from><to>Товар №1</to></term>
+				<term><from>Custom Product 2</from><to>Товар №2</to></term>
+				<term><from>Custom Product 3</from><to>Товар №3</to></term>
+				<term><from>Custom Product 4</from><to>Товар №4</to></term>
+				<term><from>Category</from><to>Каталог</to></term>
+				<term><from><![CDATA[Camera & Videos]]></from><to>Фототехника</to></term>
+				<term><from>Video Widget</from><to>Пример видео</to></term>
+				<term><from>Last Tweets</from><to>Наши новости</to></term>
+				<term><from>Demo Images</from><to>Пример картинки</to></term>
+			</column>
+			<column name='params' filters='serialize,base64'>
+				<where><![CDATA['html' = type]]></where>
+				<path value='html'>
+					<term>
+						<from><![CDATA[@>Crossed Shirt - Beluga<@]]></from>
+						<to><![CDATA[>Соноропериод<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Crossed Shirt - Belugas<@]]></from>
+						<to><![CDATA[>Глубокий форшлаг<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Double layer super soft<@]]></from>
+						<to><![CDATA[>Контрапункт контрастных фактур<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Farlap Shirt - Ruby Wine<@]]></from>
+						<to><![CDATA[>Изоритмический лайн-ап<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Framed-Sleeve Bot<@]]></from>
+						<to><![CDATA[>Мнимотакт<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Apple Cinema 30"<@]]></from>
+						<to><![CDATA[>Глиссандо волнообразно<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Canon EOS 40D<@]]></from>
+						<to><![CDATA[>Мнимотакт<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Double layer super<@]]></from>
+						<to><![CDATA[>Флажолет<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Framed-Sleeve<@]]></from>
+						<to><![CDATA[>Флажолет<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>MAKES UP PHOTOSHOP<@]]></from>
+						<to><![CDATA[>Доминантсептаккорд<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet laboriosam provident at optio<@]]></from>
+						<to><![CDATA[>Попса образует глубокий соноропериод.<]]></to>
+					</term>
+					<term>
+						<from><![CDATA[@>Voluptates, consectetur soluta laborum maiores alias autem velit deserunt quas quis repellendus<@]]></from>
+						<to><![CDATA[>Попса образует глубокий соноропериод.<]]></to>
+					</term>
+				</path>
+			</column>
+		</table>
 	</db>
 </dictionary>
