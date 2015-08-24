@@ -1,5 +1,9 @@
 <?xml version='1.0'?>
 <dictionary>
+	<!-- http://magento-forum.ru/topic/5161/ -->
+	<attributes>
+		<used_in_product_listing>image,em_deal,em_hot,em_featured</used_in_product_listing>
+	</attributes>
 	<config>
 		<entry>
 			<path>design/footer/copyright</path>
