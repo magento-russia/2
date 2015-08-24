@@ -402,5 +402,24 @@
 				</path>
 			</column>
 		</table>
+		<table name='ves_verticalmenu/verticalmenu'>
+			<column name='title'>
+				<term><from>ROOT</from><to>Корень</to></term>
+				<term><from>Root Catalog</from><to>Каталог</to></term>
+				<term><from><![CDATA[Cameras & Camcorders]]></from><to>Фототехника</to></term>
+				<term><from>Home Entertainment</from><to>Домашние кинотеатры</to></term>
+				<term><from><![CDATA[Computers & Laptops]]></from><to>Компьютеры</to></term>
+				<term><from><![CDATA[Gaming & Consoles]]></from><to>Игровые приставки</to></term>
+				<term><from><![CDATA[Smartphones & Tablets]]></from><to>Планшеты</to></term>
+				<term><from>Televisions</from><to>Телевизоры</to></term>
+				<term><from><![CDATA[Game & Toys]]></from><to>Настольные игры</to></term>
+				<term><from>Leather</from><to>Дисторшн</to></term>
+				<term><from>Tempor</from><to>Дисторшн</to></term>
+				<term><from>Vulputate</from><to>Дисторшн</to></term>
+				<term><from>Hendrerit</from><to>Дисторшн</to></term>
+				<term><from>Litterarum</from><to>Дисторшн</to></term>
+				<term><from>Office</from><to>Дисторшн</to></term>
+			</column>
+		</table>
 	</db>
 </dictionary>
