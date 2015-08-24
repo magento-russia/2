@@ -29,4 +29,30 @@ class Df_Themes_Model_Dispatcher {
 			df_handle_entry_point_exception($e);
 		}
 	}
+
+	/**
+	 * 2015-08-24
+	 * Ves Super Store (ThemeForest 8002349)
+	 * http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
+	 * http://demoleotheme.com/superstore/
+	 * http://magento-forum.ru/forum/370/
+	 * @param Varien_Event_Observer $observer
+	 * @return void
+	 */
+	public function controller_action_postdispatch_vesautosearch_index_ajaxgetproduct(Varien_Event_Observer $observer) {
+		try {
+			if (df_enabled(Df_Core_Feature::LOCALIZATION) && @class_exists('Ves_Autosearch_Helper_Data')) {
+				/** @var string $phrase */
+				$phrase = 'No products exists';
+				/** @var Mage_Core_Controller_Response_Http $response */
+				$response = rm_state()->getController()->getResponse();
+				$response->setBody(str_replace(
+					$phrase, Mage::helper('ves_autosearch')->__($phrase), $response->getBody()
+				));
+			}
+		}
+		catch(Exception $e) {
+			df_handle_entry_point_exception($e);
+		}
+	}
 }

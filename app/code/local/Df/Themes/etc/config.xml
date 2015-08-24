@@ -479,6 +479,21 @@
 					</df_themes__controller_action_postdispatch_ajax_index_options>
 				</observers>
 			</controller_action_postdispatch_ajax_index_options>
+			<!--
+				2015-08-24
+				Ves Super Store (ThemeForest 8002349)
+				http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
+				http://demoleotheme.com/superstore/
+				http://magento-forum.ru/forum/370/
+			-->
+			<controller_action_postdispatch_vesautosearch_index_ajaxgetproduct>
+				<observers>
+					<df_themes__controller_action_postdispatch_ajax_index_options>
+						<class>df_themes/dispatcher</class>
+						<method>controller_action_postdispatch_vesautosearch_index_ajaxgetproduct</method>
+					</df_themes__controller_action_postdispatch_ajax_index_options>
+				</observers>
+			</controller_action_postdispatch_vesautosearch_index_ajaxgetproduct>
 		</events>
 		<layout>
 			<updates>
