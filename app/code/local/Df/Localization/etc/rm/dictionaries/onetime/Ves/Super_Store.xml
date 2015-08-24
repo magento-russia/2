@@ -507,10 +507,18 @@
 			<block><id>contact-info</id></block>
 		</conditions>
 		<actions>
-			<new_title>Мы в соцсетях</new_title>
+			<new_title>Контакты</new_title>
 			<term>
-				<from><![CDATA[>Follow us on<]]></from>
-				<to><![CDATA[>Мы в соцсетях<]]></to>
+				<from>No 1123, Sky Tower, New York, USA</from>
+				<to>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1</to>
+			</term>
+			<term>
+				<from><![CDATA[+084 &nbsp;0123 456 789]]></from>
+				<to>+7 (495) 745-51-65</to>
+			</term>
+			<term>
+				<from>info@company.com</from>
+				<to>admin@magento-forum.ru</to>
 			</term>
 		</actions>
 	</rule>

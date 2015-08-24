@@ -9,10 +9,9 @@ abstract class Df_Localization_Model_Dictionary extends Df_Core_Model_SimpleXml_
 	 */
 	public function getSimpleXmlElement() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Varien_Simplexml_Element $document */
-			$document = @simplexml_load_file($this->getPathFull(), Df_Varien_Simplexml_Element::_CLASS);
-			df_assert($document);
-			$this->{__METHOD__} = rm_first($document->xpath('/dictionary'));
+			$this->{__METHOD__} = rm_first(
+				rm_xml_load_file($this->getPathFull())->xpath('/dictionary')
+			);
 			df_assert($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

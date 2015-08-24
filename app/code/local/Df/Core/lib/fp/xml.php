@@ -65,6 +65,42 @@ function rm_xml_child_simple(SimpleXMLElement $e, $paramName) {
 }
 
 /**
+ * 2015-08-24
+ * @used-by Df_Localization_Model_Dictionary::getSimpleXmlElement()
+ * @param string $filename
+ * @return Df_Varien_Simplexml_Element
+ */
+function rm_xml_load_file($filename) {
+	/** @var Df_Varien_Simplexml_Element $result */
+	libxml_use_internal_errors(true);
+	$result = @simplexml_load_file($filename, Df_Varien_Simplexml_Element::_CLASS);
+	if (!$result) {
+		rm_xml_throw_last(
+			"При разборе файла XML произошёл сбой.\r\nФайл: " . rm_fs_format($filename)
+		);
+	}
+	return $result;
+}
+
+/**
+ * 2015-08-24
+ * @used-by rm_xml_load_file()
+ * @param string $message
+ * @throws Df_Core_Exception_Client
+ */
+function rm_xml_throw_last($message) {
+	/** @var LibXMLError[] LibXMLError */
+	$errors = libxml_get_errors();
+	/** @var string[] $messages */
+	$messages = array($message);
+	foreach ($errors as $error) {
+		/** @var LibXMLError $error */
+		$messages[]= sprintf("(%d, %d) %s", $error->line, $error->column, $error->message);
+	}
+	df_error($messages);
+}
+
+/**
  * @param string $text
  * @return string
  */
