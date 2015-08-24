@@ -77,9 +77,19 @@
 			<set_as_default/>
 		</entry>
 		<entry>
+			<path>ves_deals/deals_setting/page_title</path>
+			<value>Распродажа</value>
+			<set_as_default/>
+		</entry>
+		<entry>
 			<path>ves_deals/ves_deals/title</path>
 			<original_value>Latest Deals</original_value>
 			<value>Распродажа</value>
+		</entry>
+		<entry>
+			<path>ves_productcarousel/ves_productcarousel/title</path>
+			<original_value>specials</original_value>
+			<value>Обратите внимание</value>
 		</entry>
 		<entry>
 			<path>ves_productcarousel2/ves_productcarousel2/title</path>
@@ -148,7 +158,7 @@
 				<term><from>Computer Parts</from><to>Комплектующие</to></term>
 				<term><from>Desktops</from><to>Компьютеры</to></term>
 				<term><from>Electronics</from><to>Электроника</to></term>
-				<term><from>Camera</from><to>Видеокамеры</to></term>
+				<term><from>Camera</from><to>Фототехника</to></term>
 				<term><from>Mouse</from><to>Мыши</to></term>
 				<term><from>Monitors</from><to>Мониторы</to></term>
 				<term><from>Hard Drives</from><to>Носители данных</to></term>
@@ -529,5 +539,29 @@
 				<to>admin@magento-forum.ru</to>
 			</term>
 		</actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Root Catalog</name></category></conditions>
+		<actions><new_title>Корневой раздел</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Camera</name></category></conditions>
+		<actions><new_title>Фототехника</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Computer Parts</name></category></conditions>
+		<actions><new_title>Комплектующие</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Desktops</name></category></conditions>
+		<actions><new_title>Компьютеры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Televisions</name></category></conditions>
+		<actions><new_title>Телевизоры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Featured</name></category></conditions>
+		<actions><new_title>Премиум</new_title></actions>
 	</rule>
 </dictionary>
