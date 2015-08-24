@@ -450,10 +450,12 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			}
 		}
 		if (
-				Df_Localization_Model_Realtime_Translator::$watched
-			&&
-				//rm_starts_with($text, Df_Localization_Model_Realtime_Translator::$watched)
-			 	($text === Df_Localization_Model_Realtime_Translator::$watched)
+			Df_Localization_Model_Realtime_Translator::$watched
+			&& (
+				Df_Localization_Model_Realtime_Translator::$needle
+				&& rm_contains($text, Df_Localization_Model_Realtime_Translator::$watched)
+				|| $text === Df_Localization_Model_Realtime_Translator::$watched
+			)
 		) {
 			Mage::log('text: ' . $text);
 			Mage::log('code: ' . $code);
