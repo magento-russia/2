@@ -250,7 +250,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Mage_Core_Model_Mysql4_Abstrac
 
 	/** @return Df_PromoGift_Model_Resource_Indexer */
 	private function deleteAllGifts() {
-		df()->db()->truncate($this->_getWriteAdapter(), $this->getMainTable());
+		rm_table_truncate($this->getMainTable(), $this->_getWriteAdapter());
 		return $this;
 	}
 
