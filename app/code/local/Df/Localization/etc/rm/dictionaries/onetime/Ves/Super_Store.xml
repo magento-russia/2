@@ -344,6 +344,12 @@
 						<to><![CDATA[<a href="http://magento-forum.ru" title="Magento">Российская сборка Magento</a>]]></to>
 					</term>
 				</path>
+				<path value='location_address'>
+					<term>
+						<from>%%</from>
+						<to>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1</to>
+					</term>
+				</path>
 				<path value='widget_aboutus_data'>
 					<term><from>#FREE SHIPPING#</from><to>Российская сборка Magento</to></term>
 					<term><from>#SPECIAL GIFT CARDS#</from><to>Российская сборка Magento</to></term>
@@ -372,6 +378,27 @@
 					<term><from>#Orders and Returns#</from><to>Полимодальная</to></term>
 					<term><from>#Site Map#</from><to>Полимодальная</to></term>
 					<term><from>#info@venustheme.com#</from><to>admin@magento-forum.ru</to></term>
+					<term><from>#latest from blog#</from><to>Наши новости</to></term>
+					<term>
+						<from><![CDATA[#<h3>informations</h3>#]]></from>
+						<to><![CDATA[<h3>Арпеджио</h3>]]></to>
+					</term>
+					<term>
+						<from><![CDATA[#<h3>service &amp; support</h3>#]]></from>
+						<to><![CDATA[Оплата и доставка]]></to>
+					</term>
+					<term>
+						<from><![CDATA[#<h3>about store</h3>#]]></from>
+						<to><![CDATA[<h3>О магазине</h3>]]></to>
+					</term>
+					<term>
+						<from><![CDATA[#<p>Duis at nisl quis quam condimentum pulvar.<br />Quisque euismod convallis eros, quis lacinia<br />enim rhoncus sed.</p>#]]></from>
+						<to><![CDATA[<p>Алеаторически выстроенный бесконечный канон с полизеркальной векторно-голосовой структурой полифигурно имеет open-air. Развивая эту тему, драм-машина иллюстрирует тетрахорд.</p>]]></to>
+					</term>
+					<term>
+						<from>@Phone: +01 888 (000) 1234@</from>
+						<to>+7 (495) 745-51-65</to>
+					</term>
 				</path>
 			</column>
 		</table>

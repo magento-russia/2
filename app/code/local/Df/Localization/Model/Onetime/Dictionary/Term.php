@@ -61,6 +61,29 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 				$result = $this->getTo();
 			}
+			/**
+			 * 2015-08-24
+			 * Поддержка синтаксиса:
+				<term>
+					<from>@Phone: +01 888 (000) 1234@</from>
+					<to>+7 (495) 745-51-65</to>
+				</term>
+			 * Такой синтаксис позволяет заменить одну подстроку на другую,
+			 * не прибегая к регулярному выражению (при котором пришлось бы следить за спецсимволами).
+			 */
+			else if ($this->isItNeedle()) {
+				$textProcessed = str_replace(
+					$this->getFromForNeedle(), $this->getTo(), $textOriginal
+				);
+				/**
+				 * Вызываем setData() только при реальном изменении значения свойства,
+				 * чтобы не менять попусту значение hasDataChanges
+				 * (что потом приведёт к ненужным сохранениям объектов).
+				 */
+				if ($textProcessed !== $textOriginal) {
+					$result = $textProcessed;
+				}
+			}
 			else if ($this->isItRegEx()) {
 				$textProcessed = rm_preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
 				/**
@@ -99,6 +122,25 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 		return $this->{__METHOD__};
 	}
 
+	/**
+	 * 2015-08-24
+	 * Поддержка синтаксиса:
+		<term>
+			<from>@Phone: +01 888 (000) 1234@</from>
+			<to>+7 (495) 745-51-65</to>
+		</term>
+	 * Такой синтаксис позволяет заменить одну подстроку на другую,
+	 * не прибегая к регулярному выражению (при котором пришлось бы следить за спецсимволами).
+	 * @used-by translate()
+	 * @return string
+	 */
+	private function getFromForNeedle() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trim($this->getFrom(), '@');
+		}
+		return $this->{__METHOD__};
+	}
+
 	/** @return string */
 	private function getFromNormalized() {
 		if (!isset($this->{__METHOD__})) {
@@ -111,13 +153,34 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	 * Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 	 * Тогда замену проще запрограммировать,
 	 * и для большинства практических ситуаций этого достаточно).
-	 * @used-by Df_Localization_Model_Onetime_Processor_Entity::translate()
+	 * @used-by translate()
 	 * @return bool
 	 */
 	private function isItLike2() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				rm_starts_with($this->getFrom(), '%') && rm_ends_with($this->getFrom(), '%')
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-24
+	 * Поддержка синтаксиса:
+		<term>
+			<from>@Phone: +01 888 (000) 1234@</from>
+			<to>+7 (495) 745-51-65</to>
+		</term>
+	 * Такой синтаксис позволяет заменить одну подстроку на другую,
+	 * не прибегая к регулярному выражению (при котором пришлось бы следить за спецсимволами).
+	 * @used-by translate()
+	 * @return bool
+	 */
+	private function isItNeedle() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				rm_starts_with($this->getFrom(), '@') && rm_ends_with($this->getFrom(), '@')
 			;
 		}
 		return $this->{__METHOD__};
