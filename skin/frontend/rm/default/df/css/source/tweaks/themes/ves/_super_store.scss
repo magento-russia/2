@@ -1,0 +1,5 @@
+body.df-theme-ves-super-store {
+	// В оригинале 65px.
+	// Делаем поменьше, чтобы все 3 кнопки вмещались в общей строке на странице товара.
+	input.qty, input[title="Qty"] {width: 45px;}
+}

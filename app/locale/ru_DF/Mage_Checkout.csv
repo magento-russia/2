@@ -139,6 +139,8 @@
 "Invalid method: %s","Неизвестный системе способ оформления заказа: «%s»"
 "Invalid shipping method.","Пожалуйста, выберите способ доставки."
 "Item not found or already ordered","Товар не найден или уже заказан"
+"item(s)","товар(ов)"
+"View cart","Корзина"
 "Items","Товары"
 "item in cart.",""
 "items in cart.",""

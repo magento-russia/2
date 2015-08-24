@@ -394,6 +394,16 @@ function rm_config_key($keyParts) {
 function rm_contains($haystack, $needle) {return false !== strpos($haystack, $needle);}
 
 /**
+ * 2015-08-24
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
+ */
+function rm_contains_ci($haystack, $needle) {
+	return rm_contains(mb_strtoupper($haystack), mb_strtoupper($needle));
+}
+
+/**
  * 2015-02-17
  * Не используем методы ядра
  * @see Mage_Core_Helper_Abstract::escapeHtml()

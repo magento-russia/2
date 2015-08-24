@@ -25,7 +25,7 @@
 		/**
 		 *  Используем jQuery.inArray вместо Array.indexOf,
 		 *  потому что Array.indexOf отсутствует в IE 8
-		 *  @link http://www.w3schools.com/jsref/jsref_indexof_array.asp
+		 *  http://www.w3schools.com/jsref/jsref_indexof_array.asp
 		 */
 		if (-1 === $.inArray($accountLink.text().toLowerCase(), standardAccountTitles)) {
 			$accountLink.addClass('rm-preserve-case');

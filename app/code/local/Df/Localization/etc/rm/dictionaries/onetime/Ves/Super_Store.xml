@@ -72,6 +72,11 @@
 			<value>Новости</value>
 		</entry>
 		<entry>
+			<path>ves_brand/general_setting/title</path>
+			<value>Производители</value>
+			<set_as_default/>
+		</entry>
+		<entry>
 			<path>ves_deals/ves_deals/title</path>
 			<original_value>Latest Deals</original_value>
 			<value>Распродажа</value>

@@ -453,7 +453,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			Df_Localization_Model_Realtime_Translator::$watched
 			&& (
 				Df_Localization_Model_Realtime_Translator::$needle
-				&& rm_contains($text, Df_Localization_Model_Realtime_Translator::$watched)
+				&& rm_contains_ci($text, Df_Localization_Model_Realtime_Translator::$watched)
 				|| $text === Df_Localization_Model_Realtime_Translator::$watched
 			)
 		) {

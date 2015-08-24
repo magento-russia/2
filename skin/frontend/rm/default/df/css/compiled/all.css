@@ -351,7 +351,7 @@
       /*
       	╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╨╝ ╤В╨╡╤Е╨╜╨╕╨║╤Г ╨▓╤С╤А╤Б╤В╨║╨╕ ╨┤╨▓╤Г╤Е╨║╨╛╨╗╨╛╨╜╨╛╤З╨╜╨╛╨│╨╛ ╨╝╨░╨║╨╡╤В╨░,
       	╨║╨╛╨│╨┤╨░ ╨╗╨╡╨▓╨░╤П ╨║╨╛╨╗╨╛╨╜╨║╨░ ╨┤╨╛╨╗╨╢╨╜╨░ ╨▒╤Л╤В╤М ╤Д╨╕╨║╤Б╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨╣ ╤И╨╕╤А╨╕╨╜╤Л, ╨░ ╨┐╤А╨░╨▓╨░╤П тАФ ╤А╨╡╨╖╨╕╨╜╨╛╨▓╨╛╨╣.
-      	@link http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
+      	http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
       */
       float: left;
       width: 320px;
@@ -369,7 +369,7 @@
       /*
       	╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╨╝ ╤В╨╡╤Е╨╜╨╕╨║╤Г ╨▓╤С╤А╤Б╤В╨║╨╕ ╨┤╨▓╤Г╤Е╨║╨╛╨╗╨╛╨╜╨╛╤З╨╜╨╛╨│╨╛ ╨╝╨░╨║╨╡╤В╨░,
       	╨║╨╛╨│╨┤╨░ ╨╗╨╡╨▓╨░╤П ╨║╨╛╨╗╨╛╨╜╨║╨░ ╨┤╨╛╨╗╨╢╨╜╨░ ╨▒╤Л╤В╤М ╤Д╨╕╨║╤Б╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨╣ ╤И╨╕╤А╨╕╨╜╤Л, ╨░ ╨┐╤А╨░╨▓╨░╤П тАФ ╤А╨╡╨╖╨╕╨╜╨╛╨▓╨╛╨╣.
-      	@link http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
+      	http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
       */
       width: 100%;
       float: left; }
@@ -1837,6 +1837,9 @@ body.df-theme-tt-theme069 .add-to-box .add-to-cart {
   width: 250px; }
 body.df-theme-tt-theme069 .form-list li.wide .field {
   width: 80%; }
+
+body.df-theme-ves-super-store input.qty, body.df-theme-ves-super-store input[title="Qty"] {
+  width: 45px; }
 
 #vk_like {
   margin-top: 1em; }
