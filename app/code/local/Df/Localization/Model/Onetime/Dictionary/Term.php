@@ -33,16 +33,22 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 	public function translate($textOriginal) {
 		/** @var string|null $result */
 		$result = null;
-		if ($this->needFromBeEmpty() && !$textOriginal) {
+		if ($this->needFromBeEmpty() && df_empty_string($textOriginal)) {
 			$result = $this->getTo();
 		}
-		else if ($textOriginal && is_string($textOriginal)) {
+		// 2015-08-24
+		// Раньше тут стояло $textOriginal && is_string($textOriginal)
+		// 1) Первая часть прежнего условия $textOriginal, очевидно, неверна,
+		// потому что она не позволяет переводить строку '0'
+		// (а это реально нужно, например, когда term используется для перевода значений в БД).
+		// 2) Вторая часть прежнего условия избыточна при новом условии.
+		else if (!df_empty_string($textOriginal)) {
 			/** @var string $textProcessed */
 			if ($this->isItLike2()
 				&& (
 					// 2015-08-24
 					// Допускает выражение <from>%%</from>
-					!$this->getFromForLike()
+					df_empty_string($this->getFromForLike())
 					|| rm_contains($textOriginal, $this->getFromForLike())
 				)
 			) {
@@ -63,9 +69,9 @@ class Df_Localization_Model_Onetime_Dictionary_Term extends Df_Core_Model_Simple
 			else {
 				/** @var string $textOriginalNormalized */
 				$textOriginalNormalized = rm_normalize($textOriginal);
-				$textProcessed =
-					str_replace($this->getFromNormalized(), $this->getTo(), $textOriginalNormalized)
-				;
+				$textProcessed = str_replace(
+					$this->getFromNormalized(), $this->getTo(), $textOriginalNormalized
+				);
 				/**
 				 * Вызываем setData() только при реальном изменении значения свойства,
 				 * чтобы не менять попусту значение hasDataChanges
