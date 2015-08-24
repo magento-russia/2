@@ -1099,6 +1099,21 @@ function rm_int($value, $allowNull = true) {
 }
 
 /**
+ * 2015-04-13
+ * В отличие от @see rm_int() функция rm_int_simple():
+ * 1) намеренно не проводит валидацию данных ради ускорения
+ * 2) работает только с массивами
+ * Ключи массива сохраняются: http://3v4l.org/NHgdK
+ * @used-by rm_fetch_col_int()
+ * @used-by rm_products_update()
+ * @used-by Df_Catalog_Model_Product_Exporter::applyRule()
+ * @used-by Df_Shipping_Rate_Request::getQty()
+ * @param mixed[] $values
+ * @return int[]
+ */
+function rm_int_simple(array $values) {return array_map('intval', $values);}
+
+/**
  * @param mixed $value
  * @param bool $allow0 [optional]
  * @return int

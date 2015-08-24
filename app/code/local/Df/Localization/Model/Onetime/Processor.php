@@ -180,6 +180,30 @@ class Df_Localization_Model_Onetime_Processor extends Df_Core_Model_Abstract {
 			/** @var Df_Localization_Model_Onetime_Dictionary_Filesystem_Operation $filesystemOperation */
 			Df_Localization_Model_Onetime_Processor_Filesystem::i($filesystemOperation)->process();
 		}
+		/**
+		 * 2015-08-24
+		 * Поддержка синтаксиса
+			<attributes>
+				<used_in_product_listing>featured</used_in_product_listing>
+			</attributes>
+		 */
+		/** @var string[] $attributes */
+		$attributes = df_parse_csv((string)$dictionary->e()->descend(
+			'attributes/used_in_product_listing'
+		));
+		if ($attributes) {
+			/** @var int[] $atttibuteIds */
+			$atttibuteIds = rm_fetch_col_int_unique(
+				'eav/attribute', 'attribute_id', 'attribute_code', $attributes
+			);
+			if ($atttibuteIds) {
+				rm_conn()->update(
+					rm_table('catalog/eav_attribute')
+					, array('used_in_product_listing' => 1)
+					, array('attribute_id IN (?)' => $atttibuteIds)
+				);
+			}
+		}
 	}
 
 	/** @return string */

@@ -492,19 +492,10 @@
 				</path>
 			</column>
 		</table>
-		<table name='catalog/eav_attribute'>
-			<column name='used_in_product_listing'>
-				<where><![CDATA[
-					attribute_id IN
-						(SELECT attribute_id
-							FROM eav_attribute
-							WHERE attribute_code = 'featured'
-						)
-				]]></where>
-				<term><from>0</from><to>1</to></term>
-			</column>
-		</table>
 	</db>
+	<attributes>
+		<used_in_product_listing>featured</used_in_product_listing>
+	</attributes>
 	<rule>
 		<conditions>
 			<type>block</type>
