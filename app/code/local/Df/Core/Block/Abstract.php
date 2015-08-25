@@ -54,7 +54,20 @@ abstract class Df_Core_Block_Abstract extends Mage_Core_Block_Abstract {
 			/** @var string[] $result */
 			$result = array(get_class($this), Mage::app()->getStore()->getCode());
 			if ($this->needCachingPerRequestAction())	{
-				$result[]= rm_state()->getController()->getFullActionName();
+				/**
+				 * 2015-08-25
+				 * Раньше тут стояло:
+				 * $result[]= rm_state()->getController()->getFullActionName();
+				 * Крайне неряшливый модуль Ves_Blog
+				 * оформительской темы Ves Super Store (ThemeForest 8002349)
+				 * ломает инициализацию системы, и в данной точке программы
+				 * контроллер может быть ещё не инициализирован.
+				 */
+				$result[]=
+					rm_state()->getController()
+					? rm_state()->getController()->getFullActionName()
+					: Mage::app()->getRequest()->getRequestUri()
+				;
 			}
 			if ($this->getCacheKeySuffix()) {
 				$result[]= $this->getCacheKeySuffix();

@@ -73,8 +73,21 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			if ($this->getTemplate()) {
 				$result[]= $this->getTemplate();
 			}
-			if ($this->needCachingPerRequestAction())	{
-				$result[]= rm_state()->getController()->getFullActionName();
+			if ($this->needCachingPerRequestAction()) {
+				/**
+				 * 2015-08-25
+				 * Раньше тут стояло:
+				 * $result[]= rm_state()->getController()->getFullActionName();
+				 * Крайне неряшливый модуль Ves_Blog
+				 * оформительской темы Ves Super Store (ThemeForest 8002349)
+				 * ломает инициализацию системы, и в данной точке программы
+				 * контроллер может быть ещё не инициализирован.
+				 */
+				$result[]=
+					rm_state()->getController()
+					? rm_state()->getController()->getFullActionName()
+					: Mage::app()->getRequest()->getRequestUri()
+				;
 			}
 			if ($this->getCacheKeySuffix()) {
 				$result[]= $this->getCacheKeySuffix();

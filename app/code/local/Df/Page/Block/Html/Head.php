@@ -43,17 +43,32 @@ class Df_Page_Block_Html_Head extends Mage_Page_Block_Html_Head {
 
 	/**
 	 * @override
+	 * @see Mage_Page_Block_Html_Head::getCssJsHtml()
 	 * @return string
 	 */
 	public function getCssJsHtml() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
+			/**
+			 * 2015-08-25
+			 * Раньше ключ кэширования создавался так:
+				$cacheKey =
+					$this->getCache()->makeKey(
+						__METHOD__, rm_state()->getController()->getFullActionName()
+					)
+				;
+			 * Крайне неряшливый модуль Ves_Blog
+			 * оформительской темы Ves Super Store (ThemeForest 8002349)
+			 * ломает инициализацию системы, и в данной точке программы
+			 * контроллер может быть ещё не инициализирован.
+			 * Смотрите также @see Df_Page_Helper_Head::needSkipAsStandardCss()
+			 */
 			/** @var string $cacheKey */
-			$cacheKey =
-				$this->getCache()->makeKey(
-					__METHOD__, rm_state()->getController()->getFullActionName()
-				)
-			;
+			$cacheKey = $this->getCache()->makeKey(__METHOD__,
+				rm_state()->getController()
+				? rm_state()->getController()->getFullActionName()
+				: Mage::app()->getRequest()->getRequestUri()
+			);
 			$result = $this->getCache()->loadData($cacheKey);
 			if (!$result) {
 				$result = parent::getCssJsHtml();

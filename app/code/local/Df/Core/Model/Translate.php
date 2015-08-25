@@ -249,6 +249,16 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	 */
 	protected function _getTranslatedString($text, $code) {
 		/**
+		 * 2015-08-25
+		 * Крайне неряшливый модуль Ves_Blog
+		 * оформительской темы Ves Super Store (ThemeForest 8002349)
+		 * ломает инициализацию системы, и в данной точке программы
+		 * словарь может быть ещё не инициализирован.
+		 */
+		if (!$this->_data) {
+			$this->init('frontend');
+		}
+		/**
 		 * 2015-07-07
 		 * Позволяет нам переводить стандартным способом (посредством файлов CSV) строки,
 		 * содержащие переносы строк и символы табуляции.

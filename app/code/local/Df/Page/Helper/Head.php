@@ -142,25 +142,34 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	private function needSkipAsStandardCss($type, $name) {
-		/** @var bool $needSkipStandardCss */
-		static $needSkipStandardCss;
-		if (!isset($needSkipStanradsCss)) {
-			$needSkipStandardCss =
-				rm_bool(
-					(string)Mage::getConfig()->getNode(
-						'df/page/skip_standard_css/' . rm_state()->getController()->getFullActionName()
+		/**
+		 * 2015-08-25
+		 * Крайне неряшливый модуль Ves_Blog
+		 * оформительской темы Ves Super Store (ThemeForest 8002349)
+		 * ломает инициализацию системы, и в данной точке программы
+		 * контроллер может быть ещё не инициализирован.
+		 * http://magento-forum.ru/topic/5206/
+		 */
+		/** @var bool $result */
+		$result = !!rm_state()->getController();
+		if ($result) {
+			/** @var bool $needSkipStandardCss */
+			static $needSkipStandardCss;
+			if (!isset($needSkipStanradsCss)) {
+				$needSkipStandardCss =
+					rm_bool(
+						(string)Mage::getConfig()->getNode(
+							'df/page/skip_standard_css/' . rm_state()->getController()->getFullActionName()
+						)
 					)
-				)
+				;
+			}
+			$result =
+				$needSkipStandardCss
+				&& in_array($type, array('skin_css', 'js_css'))
+				&& !rm_contains($name, 'df/')
 			;
 		}
-		/** @var bool $result */
-		$result =
-				$needSkipStandardCss
-			&&
-				(in_array($type, array('skin_css', 'js_css')))
-			&&
-				!rm_contains($name, 'df/')
-		;
 		return $result;
 	}
 
