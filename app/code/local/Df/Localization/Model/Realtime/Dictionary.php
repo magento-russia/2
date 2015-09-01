@@ -153,9 +153,7 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 				$this->getModuleNameFromCode($code)
 			;
 			if (!$currentModuleName) {
-				$currentModuleName =
-					df()->reflection()->getModuleNameByControllerClassName($currentControllerClass)
-				;
+				$currentModuleName = df()->reflection()->getModuleName($currentControllerClass);
 			}
 			df_assert_string_not_empty($currentModuleName);
 			/** @var Df_Localization_Model_Realtime_Dictionary_Module|null $currentModule */

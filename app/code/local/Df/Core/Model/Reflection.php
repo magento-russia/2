@@ -102,51 +102,6 @@ class Df_Core_Model_Reflection extends Df_Core_Model_DestructableSingleton {
 	}
 
 	/**
-	 * @param $controllerClassName string
-	 * @return string
-	 */
-	public function getModuleNameByControllerClassName($controllerClassName) {
-		/**
-		 * $controllerClassName — это, например:
-		 * «Df_Checkout_OnepageController»
-		 * «Mage_Adminhtml_Customer_Wishlist_Product_Composite_WishlistController»
-		 */
-
-		/**
-		 * Например:
-		 * [«Df», «Checkout», «OnepageController»]
-		 * [«Mage», «Adminhtml», «Customer», «Wishlist», «Product», «Composite», «WishlistController»]
-		 * @var string[] $classNameParts
-		 */
-		$classNameParts =
-			explode(
-				self::PARTS_SEPARATOR
-				,$controllerClassName
-			)
-		;
-		/**
-		 * Например:
-		 * [«Df», «Checkout»]
-		 * [«Mage», «Adminhtml»]
-		 * @var string[] $moduleNameParts
-		 */
-		$moduleNameParts =
-			array_slice(
-				$classNameParts
-				,0
-				,self::MODULE_NAME_PARTS_COUNT
-			)
-		;
-		/**
-		 * Например:
-		 * «Df_Checkout»
-		 * «Mage_Adminhtml»
-		 */
-		$result = implode(self::PARTS_SEPARATOR, $moduleNameParts);
-		return $result;
-	}
-
-	/**
 	 * @param string $className		Например:	«Df_SalesRule_Model_Resource_Order_Collection»
 	 * @return string
 	 */
