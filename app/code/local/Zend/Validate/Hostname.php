@@ -140,6 +140,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
 		,'berlin'
 		,'bike'
 		,'builders'
+        // добававил boutique 2015-09-03
+        ,'boutique'
 		,'buzz'
 		,'cab'
 		,'camera'
