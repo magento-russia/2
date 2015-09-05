@@ -114,6 +114,14 @@
 				-->
 				<se105>CatTheme/se105.xml</se105>
 			</default>
+			<!--
+			 	8theme Mercado
+				http://8theme.com/magento-template/mercado-magento-theme2.html
+				http://magento-forum.ru/forum/288/
+			-->
+			<mercado>
+				<default>8theme/Mercado.xml</default>
+			</mercado>
 			<rwd>
 				<default>Magento/RWD.xml</default>
 			</rwd>
@@ -126,14 +134,6 @@
 			<ultimo>
 				<default>Infortis/Ultimo.xml</default>
 			</ultimo>
-			<!--
-			 	8theme Mercado
-				http://8theme.com/magento-template/mercado-magento-theme2.html
-				http://magento-forum.ru/forum/288/
-			-->
-			<mercado>
-				<default>8theme/Mercado.xml</default>
-			</mercado>
 		</translation>
 		<design-theme-processors>
 			<gala-titanshop>
@@ -208,6 +208,40 @@
 					<forum>http://magento-forum.ru/forum/338/</forum>
 				</url>
 			</magento-rwd>
+			<!--
+			 	SmartWave Porto (ThemeForest 9725864)
+				http://magento-forum.ru/forum/371/
+				http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+			-->
+			<smartwave-porto>
+				<title>Porto (ThemeForest 9725864)</title>
+				<package>smartwave</package>
+				<theme>porto</theme>
+				<dictionary>SmartWave/Porto.xml</dictionary>
+				<url>
+					<demo>
+						http://newsmartwave.net/magento/porto/index.php/demo1_en
+						http://newsmartwave.net/magento/porto/index.php/demo2_en
+						http://newsmartwave.net/magento/porto/index.php/demo3_en
+						http://newsmartwave.net/magento/porto/index.php/demo4_en
+						http://newsmartwave.net/magento/porto/index.php/demo5_en
+						http://newsmartwave.net/magento/porto/index.php/demo6_en
+						http://newsmartwave.net/magento/porto/index.php/demo7_en
+						http://newsmartwave.net/magento/porto/index.php/demo8_en
+						http://newsmartwave.net/magento/porto/index.php/demo9_en
+						http://newsmartwave.net/magento/porto/index.php/demo10_en
+						http://newsmartwave.net/magento/porto/index.php/demo11_en
+						http://newsmartwave.net/magento/porto/index.php/demo12_en
+						http://newsmartwave.net/magento/porto/index.php/demo13_en
+						http://newsmartwave.net/magento/porto/index.php/demo14_en
+						http://newsmartwave.net/magento/porto/index.php/demo15_en
+						http://newsmartwave.net/magento/porto/index.php/demo16_en
+						http://newsmartwave.net/magento/porto/index.php/demo17_en
+					</demo>
+					<forum>http://magento-forum.ru/forum/371/</forum>
+					<official_site>http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864?ref=dfeduik</official_site>
+				</url>
+			</smartwave-porto>
 			<sns-xsport>
 				<title>SNS Xsport</title>
 				<package>default</package>
@@ -249,7 +283,10 @@
 				<theme>ves_superstore</theme>
 				<dictionary>Ves/Super_Store.xml</dictionary>
 				<url>
-					<demo>http://demoleotheme.com/superstore/</demo>
+					<demo>
+						http://demoleotheme.com/superstore/index.php/?___store=default
+						http://demoleotheme.com/superstore/index.php/?___store=english2
+					</demo>
 					<demo_images_base>http://demoleotheme.com/superstore/</demo_images_base>
 					<forum>http://magento-forum.ru/forum/370/</forum>
 					<official_site>http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk</official_site>
