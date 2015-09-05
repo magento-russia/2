@@ -1,3 +1,129 @@
 <?xml version='1.0'?>
 <dictionary>
+	<config>
+		<entry>
+			<path>porto_settings/footer/footer_ribbon_text</path>
+			<original_value>Ribbon Text</original_value>
+			<value>Текст на ленте</value>
+		</entry>
+		<entry>
+			<path>porto_settings/footer/footer_newsletter</path>
+			<original_value>%Get all the latest%</original_value>
+			<value><![CDATA[Полиряд изящно диссонирует лирический голос.<br/>Эти слова совершенно справедливы, однако звукосниматель продолжает зеркальный сет.]]></value>
+		</entry>
+		<entry>
+			<path>porto_settings/footer/footer_newsletter_title</path>
+			<original_value>Be the First to Know</original_value>
+			<value>Midi-контроллер сложен</value>
+		</entry>
+		<entry>
+			<path>porto_settings/footer/copyrights</path>
+			<original_value><![CDATA[&copy;Copyright 2015 by SW-THEMES. All Rights Reserved.]]></original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>porto_settings/newsletter_popup/newsletter_content</path>
+			<original_value><![CDATA[<h2>BE THE FIRST TO KNOW</h2><p>Subscribe to the Porto eCommerce newsletter to receive timely updates from your favorite products.</p>]]></original_value>
+			<value><![CDATA[<h2>Показательный пример</h2><p>Песня "All The Things She Said" (в русском варианте - "Я сошла с ума") имеет хамбакер, как и реверансы в сторону ранних "роллингов".</p>]]></value>
+		</entry>
+		<entry>
+			<path>porto_settings/contacts/address</path>
+			<original_value>Porto Store</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+		<entry>
+			<path>porto_settings/contacts/infoblock</path>
+			<original_value>%porto@gmail.com%</original_value>
+			<value><![CDATA[                <div class="row"><div class="col-sm-12">
+			                <i class="icon-phone"></i>
+			                <p>+7 495 777-5-444</p>
+			                <p>+7 495 777-5-444</p>
+			            </div></div>
+			                <div class="row"><div class="col-sm-12">
+			                    <i class="icon-mobile"></i>
+			                    <p>+7 495 777-5-444</p>
+			                    <p>+7 495 777-5-444</p>
+			                </div></div>
+			                <div class="row"><div class="col-sm-12">
+			                    <i class="icon-mail-alt"></i>
+			                    <p>admin@magento-forum.ru</p>
+			                    <p>admin@magento-forum.ru</p>
+			                </div></div>
+			                <div class="row"><div class="col-sm-12">
+			                    <i class="icon-skype"></i>
+			                    <p>magento-forum.ru</p>
+			                    <p>magento-forum.ru</p>
+			                </div></div>]]></value>
+		</entry>
+		<entry>
+			<path>porto_settings/product_label/new_label_text</path>
+			<original_value>New</original_value>
+			<value>Новинка</value>
+		</entry>
+		<entry>
+			<path>porto_settings/product_label/sale_label_text</path>
+			<original_value>Sale</original_value>
+			<value>Скидка</value>
+		</entry>
+	</config>
+	<db>
+		<table name='blog/blog'>
+			<column name='title'>
+				<term><from>Hello world!</from><to>Превед, медвед!</to></term>
+				<term><from>Post Format – Single Image</from><to>Статья с картинкой</to></term>
+				<term><from>Post Format – Image Gallery</from><to>Статья с галереей</to></term>
+				<term><from>Post Format – Video</from><to>Статья с видеороликом</to></term>
+			</column>
+			<column name='post_content'>
+				<term><from>%Welcome to Porto%</from><to><![CDATA[Эти слова совершенно справедливы, однако дифференциация имитирует хроматический сет. Поп-индустрия, в том числе, полифигурно начинает лирический лайн-ап. Развивая эту тему, форма заканчивает флажолет, не говоря уже о том, что рок-н-ролл мертв. Винил просветляет тон-полутоновый флажолет. Внутридискретное арпеджио продолжает open-air.
+
+				Модальное письмо может быть реализовано на основе принципов центропостоянности и центропеременности, таким образом хорус имеет звукорядный рок-н-ролл 50-х, не случайно эта композиция вошла в диск В.Кикабидзе "Ларису Ивановну хочу". Нонаккорд многопланово представляет собой автономный громкостнoй прогрессийный период. Нота использует фьюжн, а после исполнения Утесовым роли Потехина в "Веселых ребятах" слава артиста стала всенародной.
+
+				Голос синхронно дает самодостаточный тетрахорд, благодаря употреблению микромотивов (нередко из одного звука, а также двух-трех с паузами). Арпеджированная фактура монотонно имеет структурный октавер. Крещендирующее хождение имеет винил. Плотностная компонентная форма использует глубокий сет.]]></to></term>
+				<term><from>%Lorem ipsum%</from><to>Поп-индустрия использует резкий хамбакер. Ретро, следовательно, продолжает конструктивный голос. Рок-н-ролл 50-х, и это особенно заметно у Чарли Паркера или Джона Колтрейна, традиционен.
+
+				Фьюжн монотонно варьирует флюгель-горн. Кластерное вибрато относительно. Внутридискретное арпеджио, согласно традиционным представлениям, заканчивает флэнжер, благодаря употреблению микромотивов (нередко из одного звука, а также двух-трех с паузами). Лайн-ап, следовательно, регрессийно начинает тон-полутоновый доминантсептаккорд. Рондо начинает микрохроматический интервал, и если в одних голосах или пластах музыкальной ткани сочинения еще продолжаются конструктивно-композиционные процессы предыдущей части, то в других - происходит становление новых. Аллегро, на первый взгляд, параллельно.</to></term>
+				<term><from>%Euismod atras%</from><to>Очевидно, что шоу-бизнес неравномерен. Фишка диссонирует тетрахорд. Мономерная остинатная педаль дает доминантсептаккорд. Как было показано выше, легато диссонирует позиционный нонаккорд, в таких условиях можно спокойно выпускать пластинки раз в три года.
+
+				Очевидно, что аккорд вызывает позиционный сет. Крещендирующее хождение многопланово выстраивает хроматический сет. Ощущение мономерности ритмического движения возникает, как правило, в условиях темповой стабильности, тем не менее форма использует мелодический громкостнoй прогрессийный период.</to></term>
+			</column>
+			<column name='user'>
+				<term><from>Dmitry</from><to>Иван Иванов</to></term>
+				<term><from>Martin</from><to>Пётр Петров</to></term>
+				<term><from>Admin</from><to>Сидор Сидоров</to></term>
+				<term><from>Roberto</from><to>Васисуалий Лоханкин</to></term>
+			</column>
+			<column name='update_user'>
+				<term><from>Super Admin</from><to>Администратор</to></term>
+			</column>
+			<column name='tags'>
+				<term><from>Clothing,Blog,Photography,Women</from><to>Звукосниматель,Флажолет</to></term>
+				<term><from>Fashion,Bags</from><to>Звукосниматель,Октавер</to></term>
+				<term><from>Fashion,Shoes</from><to>Звукосниматель,Соноропериод</to></term>
+				<term><from>Fashio,Dresses</from><to>Звукосниматель,Флажолет,Октавер</to></term>
+			</column>
+			<column name='short_content'>
+				<term><from>%Welcome to Porto%</from><to><![CDATA[Эти слова совершенно справедливы, однако дифференциация имитирует хроматический сет. Поп-индустрия, в том числе, полифигурно начинает лирический лайн-ап. Развивая эту тему, форма заканчивает флажолет, не говоря уже о том, что рок-н-ролл мертв. Винил просветляет тон-полутоновый флажолет. Внутридискретное арпеджио продолжает open-air.]]></to></term>
+				<term><from>%Lorem ipsum%</from><to>Поп-индустрия использует резкий хамбакер. Ретро, следовательно, продолжает конструктивный голос. Рок-н-ролл 50-х, и это особенно заметно у Чарли Паркера или Джона Колтрейна, традиционен.</to></term>
+				<term><from>%Euismod atras%</from><to>Очевидно, что шоу-бизнес неравномерен. Фишка диссонирует тетрахорд. Мономерная остинатная педаль дает доминантсептаккорд. Как было показано выше, легато диссонирует позиционный нонаккорд, в таких условиях можно спокойно выпускать пластинки раз в три года.</to></term>
+			</column>
+		</table>
+		<table name='smartwave_blog_cat'>
+			<column name='title'>
+				<term><from>All about clothing</from><to>Превед, медвед!</to></term>
+				<term><from><![CDATA[Make-up & beauty]]></from><to>Композиционный сет</to></term>
+				<term><from>Accessories</from><to>Хроматический канал</to></term>
+				<term><from>Fashion trends</from><to>Гипнотический рифф</to></term>
+				<term><from><![CDATA[Haircuts & hairstyles]]></from><to>Гармонический интервал</to></term>
+			</column>
+		</table>
+		<table name='blog/blog_comment'>
+		</table>
+		<table name='blog/blog_post_cat'>
+		</table>
+		<table name='blog/blog_store'>
+		</table>
+		<table name='blog/blog_tags'>
+		</table>
+	</db>
 </dictionary>
