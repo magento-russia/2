@@ -191,6 +191,21 @@
 	<adminhtml>
 		<translate>
 			<modules>
+				<!--
+					2015-09-05
+					Оформительская тема Porto (ThemeForest 9725864)
+					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+					http://magento-forum.ru/forum/371/
+				-->
+				<AddThis_PluginsGeneral>
+					<files><rm>AddThis/PluginsGeneral.csv</rm></files>
+				</AddThis_PluginsGeneral>
+				<AddThis_SharingTool>
+					<files><rm>AddThis/SharingTool.csv</rm></files>
+				</AddThis_SharingTool>
+				<AddThis_SmartLayers>
+					<files><rm>AddThis/SmartLayers.csv</rm></files>
+				</AddThis_SmartLayers>
 				<EM_LayeredNavigation>
 					<files><default>EM/LayeredNavigation.csv</default></files>
 				</EM_LayeredNavigation>
@@ -246,6 +261,18 @@
 					</files>
 				</Infortis_UltraSlideshow>
 				<!--
+					2015-09-05
+					Оформительская тема Porto (ThemeForest 9725864)
+					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+					http://magento-forum.ru/forum/371/
+				-->
+				<Magegiant_Dailydeal>
+					<files><rm>Magegiant/Dailydeal.csv</rm></files>
+				</Magegiant_Dailydeal>
+				<Magegiant_Magegiantcore>
+					<files><rm>Magegiant/Core.csv</rm></files>
+				</Magegiant_Magegiantcore>
+				<!--
 				 	К сожалению, вынуждены указать в качестве модуля Mage_Adminhtml
 				 	вместо модулей Infortis,
 				 	потому что файл system.xml модулей Infortis
@@ -268,6 +295,51 @@
 				<Megnor_Specialproducts>
 					<files><default>Megnor_Specialproducts.csv</default></files>
 				</Megnor_Specialproducts>
+				<!--
+					2015-09-05
+					Оформительская тема Porto (ThemeForest 9725864)
+					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+					http://magento-forum.ru/forum/371/
+				-->
+				<Smartwave_Ajaxcart>
+					<files><rm>Smartwave/Ajaxcart.csv</rm></files>
+				</Smartwave_Ajaxcart>
+				<Smartwave_Ajaxcatalog>
+					<files><rm>Smartwave/Ajaxcatalog.csv</rm></files>
+				</Smartwave_Ajaxcatalog>
+				<Smartwave_All>
+					<files><rm>Smartwave/All.csv</rm></files>
+				</Smartwave_All>
+				<Smartwave_Blog>
+					<files><rm>Smartwave/Blog.csv</rm></files>
+				</Smartwave_Blog>
+				<Smartwave_CatalogCategorySearch>
+					<files><rm>Smartwave/CatalogCategorySearch.csv</rm></files>
+				</Smartwave_CatalogCategorySearch>
+				<Smartwave_Filterproducts>
+					<files><rm>Smartwave/Filterproducts.csv</rm></files>
+				</Smartwave_Filterproducts>
+				<Smartwave_Fullajax>
+					<files><rm>Smartwave/Fullajax.csv</rm></files>
+				</Smartwave_Fullajax>
+				<Smartwave_Homeslider>
+					<files><rm>Smartwave/Homeslider.csv</rm></files>
+				</Smartwave_Homeslider>
+				<Smartwave_Megamenu>
+					<files><rm>Smartwave/Megamenu.csv</rm></files>
+				</Smartwave_Megamenu>
+				<Smartwave_Porto>
+					<files><rm>Smartwave/Porto.csv</rm></files>
+				</Smartwave_Porto>
+				<Smartwave_QuickView>
+					<files><rm>Smartwave/QuickView.csv</rm></files>
+				</Smartwave_QuickView>
+				<Smartwave_Socialfeeds>
+					<files><rm>Smartwave/Socialfeeds.csv</rm></files>
+				</Smartwave_Socialfeeds>
+				<Smartwave_Socialicons>
+					<files><rm>Smartwave/Socialicons.csv</rm></files>
+				</Smartwave_Socialicons>
 				<!--
 				 	SNS Xsport
 				 	http://themeforest.net/item/sns-xsport-premium-responsive-magento-theme/8205296
@@ -504,6 +576,21 @@
 		</layout>
 		<translate>
 			<modules>
+				<!--
+					2015-09-05
+					Оформительская тема Porto (ThemeForest 9725864)
+					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+					http://magento-forum.ru/forum/371/
+				-->
+				<AddThis_PluginsGeneral>
+					<files><rm>AddThis/PluginsGeneral.csv</rm></files>
+				</AddThis_PluginsGeneral>
+				<AddThis_SharingTool>
+					<files><rm>AddThis/SharingTool.csv</rm></files>
+				</AddThis_SharingTool>
+				<AddThis_SmartLayers>
+					<files><rm>AddThis/SmartLayers.csv</rm></files>
+				</AddThis_SmartLayers>
 				<EM_Ajaxcart>
 					<files>
 						<catalog>Mage_Catalog.csv</catalog>
@@ -612,6 +699,18 @@
 					так и для других языковых пакетов
 				-->
 				<Mage_Captcha><files><default>Mage_Captcha.csv</default></files></Mage_Captcha>
+				<!--
+					2015-09-05
+					Оформительская тема Porto (ThemeForest 9725864)
+					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+					http://magento-forum.ru/forum/371/
+				-->
+				<Magegiant_Dailydeal>
+					<files><rm>Magegiant/Dailydeal.csv</rm></files>
+				</Magegiant_Dailydeal>
+				<Magegiant_Magegiantcore>
+					<files><rm>Magegiant/Core.csv</rm></files>
+				</Magegiant_Magegiantcore>
 				<Megnor_AdvancedMenu>
 					<files><default>Megnor_AdvancedMenu.csv</default></files>
 				</Megnor_AdvancedMenu>
@@ -627,6 +726,51 @@
 				<Megnor_Specialproducts>
 					<files><default>Megnor_Specialproducts.csv</default></files>
 				</Megnor_Specialproducts>
+				<!--
+					2015-09-05
+					Оформительская тема Porto (ThemeForest 9725864)
+					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
+					http://magento-forum.ru/forum/371/
+				-->
+				<Smartwave_Ajaxcart>
+					<files><rm>Smartwave/Ajaxcart.csv</rm></files>
+				</Smartwave_Ajaxcart>
+				<Smartwave_Ajaxcatalog>
+					<files><rm>Smartwave/Ajaxcatalog.csv</rm></files>
+				</Smartwave_Ajaxcatalog>
+				<Smartwave_All>
+					<files><rm>Smartwave/All.csv</rm></files>
+				</Smartwave_All>
+				<Smartwave_Blog>
+					<files><rm>Smartwave/Blog.csv</rm></files>
+				</Smartwave_Blog>
+				<Smartwave_CatalogCategorySearch>
+					<files><rm>Smartwave/CatalogCategorySearch.csv</rm></files>
+				</Smartwave_CatalogCategorySearch>
+				<Smartwave_Filterproducts>
+					<files><rm>Smartwave/Filterproducts.csv</rm></files>
+				</Smartwave_Filterproducts>
+				<Smartwave_Fullajax>
+					<files><rm>Smartwave/Fullajax.csv</rm></files>
+				</Smartwave_Fullajax>
+				<Smartwave_Homeslider>
+					<files><rm>Smartwave/Homeslider.csv</rm></files>
+				</Smartwave_Homeslider>
+				<Smartwave_Megamenu>
+					<files><rm>Smartwave/Megamenu.csv</rm></files>
+				</Smartwave_Megamenu>
+				<Smartwave_Porto>
+					<files><rm>Smartwave/Porto.csv</rm></files>
+				</Smartwave_Porto>
+				<Smartwave_QuickView>
+					<files><rm>Smartwave/QuickView.csv</rm></files>
+				</Smartwave_QuickView>
+				<Smartwave_Socialfeeds>
+					<files><rm>Smartwave/Socialfeeds.csv</rm></files>
+				</Smartwave_Socialfeeds>
+				<Smartwave_Socialicons>
+					<files><rm>Smartwave/Socialicons.csv</rm></files>
+				</Smartwave_Socialicons>
 				<!--
 				 	SNS Xsport
 				 	http://themeforest.net/item/sns-xsport-premium-responsive-magento-theme/8205296
