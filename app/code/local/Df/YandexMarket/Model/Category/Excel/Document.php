@@ -38,13 +38,17 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model_Abstra
 		$contents = @file_get_contents($fileUrl);
 		if (false === $contents) {
 			/** @var string $fileUrl */
-			$fileUrl = 'http://help.yandex.ru/help.yandex.ru/partnermarket/docs/market_categories.xls';
+			$fileUrl = 'http://download.cdn.yandex.net/support/ru/partnermarket/files/market_categories.xls';
 			$contents = @file_get_contents($fileUrl);
 			if (false === $contents) {
 				/**
 				 * Вероятно, Яндекс.Маркет поменял адрес документа.
 				 * Такое уже было:
 				 * @link http://magento-forum.ru/topic/4121/
+				 *
+				 * 2015-09-15
+				 * Обновил адрес на новый:
+				 * http://download.cdn.yandex.net/support/ru/partnermarket/files/market_categories.xls
 				 */
 				df_error(
 					strtr(
