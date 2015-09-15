@@ -67,7 +67,7 @@
 		</entry>
 	</config>
 	<db>
-		<table name='blog/blog'>
+		<table name='smartwave_blog'>
 			<column name='title'>
 				<term><from>Hello world!</from><to>Превед, медвед!</to></term>
 				<term><from>Post Format – Single Image</from><to>Статья с картинкой</to></term>
@@ -117,13 +117,33 @@
 				<term><from><![CDATA[Haircuts & hairstyles]]></from><to>Гармонический интервал</to></term>
 			</column>
 		</table>
-		<table name='blog/blog_comment'>
+		<table name='smartwave_blog_comment'>
+			<column name='comment'>
+				<term><from>%Cgestas metus%</from><to><![CDATA[Говорят также о фактуре, типичной для тех или иных жанров ("фактура походного марша", "фактура вальса" и пр.), и здесь мы видим, что фаза иллюстрирует звукорядный форшлаг, что отчасти объясняет такое количество кавер-версий. Эти слова совершенно справедливы, однако синкопа фактурна. В заключении добавлю, микрохроматический интервал иллюстрирует длительностный эффект "вау-вау". Ощущение мономерности ритмического движения возникает, как правило, в условиях темповой стабильности, тем не менее панладовая система свободна.]]></to></term>
+				<term><from>%Aliquam eu%</from><to><![CDATA[Динамический эллипсис, в том числе, образует гармонический интервал, и если в одних голосах или пластах музыкальной ткани сочинения еще продолжаются конструктивно-композиционные процессы предыдущей части, то в других - происходит становление новых. Рефрен дает гипнотический рифф. Гармоническое микророндо вызывает неизменный флюгель-горн.]]></to></term>
+				<term><from>test</from><to><![CDATA[Нота возможна. Нота представляет собой целотоновый кризис жанра. Пласт регрессийно трансформирует голос, благодаря употреблению микромотивов (нередко из одного звука, а также двух-трех с паузами). Звукоряд, и это особенно заметно у Чарли Паркера или Джона Колтрейна, диссонирует дорийский септаккорд, это и есть одномоментная вертикаль в сверхмногоголосной полифонической ткани.]]></to></term>
+			</column>
+			<column name='user'>
+				<term><from>Elen Aliquam</from><to>Иван Иванов</to></term>
+				<term><from>Martin Doe</from><to>Пётр Петров</to></term>
+				<term><from>Test</from><to>Сидор Сидоров</to></term>
+				<term><from>Martin</from><to>Васисуалий Лоханкин</to></term>
+			</column>
 		</table>
-		<table name='blog/blog_post_cat'>
-		</table>
-		<table name='blog/blog_store'>
-		</table>
-		<table name='blog/blog_tags'>
+		<table name='smartwave_blog_tags'>
+			<column name='tag'>
+				<term><from>Accessories</from><to>Звукосниматель</to></term>
+				<term><from>Bags</from><to>Соноропериод</to></term>
+				<term><from>Blog</from><to>Флажолет</to></term>
+				<term><from>Clother</from><to>Октавер</to></term>
+				<term><from>Clothing</from><to>Арпеджио</to></term>
+				<term><from>Dresses</from><to>Техно</to></term>
+				<term><from>Fashio</from><to>Рондо</to></term>
+				<term><from>Fashion</from><to>Ротация</to></term>
+				<term><from>Photography</from><to>Лайн-ап</to></term>
+				<term><from>Shoes</from><to>Аккорд</to></term>
+				<term><from>Women</from><to>Рифф</to></term>
+			</column>
 		</table>
 	</db>
 </dictionary>
