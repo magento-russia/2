@@ -366,4 +366,987 @@
 		<conditions><type>category</type><category><name>Other Vehicle Parts</name></category></conditions>
 		<actions><new_title>Хлебобулочные изделия</new_title></actions>
 	</rule>
+	<rule>
+		<conditions>
+			<type>block</type>
+		</conditions>
+		<actions>
+			<term>
+				<from>#^Porto \- Homepage Slider (\d+)$#</from>
+				<to>Porto. Главная страница. Слайдер №$1</to>
+			</term>
+			<term>
+				<from>#^Porto \- Homepage Slider (\d+) New$#</from>
+				<to>Porto. Главная страница. Слайдер №$1 новый</to>
+			</term>
+			<term>
+				<from><![CDATA[>Premium Responsive Magento Theme<]]></from>
+				<to><![CDATA[>Российская сборка Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>GET STARTED NOW<]]></from>
+				<to><![CDATA[>КУПИТЬ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Now starting at<]]></from>
+				<to><![CDATA[>Все модули за<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>$99<]]></from>
+				<to><![CDATA[>3000 рублей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>OFF<]]></from>
+				<to><![CDATA[>СКИДКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>HUGE <]]></from>
+				<to><![CDATA[>БОЛЬШАЯ <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SALE<]]></from>
+				<to><![CDATA[>РАСПРОДАЖА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Hurry up!<]]></from>
+				<to><![CDATA[>Поспешите!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> Sale ends 19th Nov.<]]></from>
+				<to><![CDATA[>Распродажа завершается 19 ноября.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>BACKGROUNDS<]]></from>
+				<to><![CDATA[>ЗАСТАВКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>VIDEO <]]></from>
+				<to><![CDATA[>ВИДЕО <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>It's very simple to use!<]]></from>
+				<to><![CDATA[>Просты в настройке<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SHOP NOW<]]></from>
+				<to><![CDATA[>КУПИТЬ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>DO YOU NEED A NEW<]]></from>
+				<to><![CDATA[>НУЖЕН НОВЫЙ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>eCOMMERCE?<]]></from>
+				<to><![CDATA[>ИНТЕРНЕТ_МАГАЗИН?<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Check our options and features.<]]></from>
+				<to><![CDATA[>Российская сборка Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> off!<]]></from>
+				<to><![CDATA[> скидка!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Fashion<]]></from>
+				<to><![CDATA[>Крупы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Electronics<]]></from>
+				<to><![CDATA[>Макаронные изделия<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Gifts<]]></from>
+				<to><![CDATA[>Масла растительные<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Music<]]></from>
+				<to><![CDATA[>Сахар, соль<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sports<]]></from>
+				<to><![CDATA[>Орехи<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>It’s time to feel<]]></from>
+				<to><![CDATA[>Самое время<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>POWER<]]></from>
+				<to><![CDATA[>ПОПРОБОВАТЬ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Up to <]]></from>
+				<to><![CDATA[>скидка <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>70% OFF<]]></from>
+				<to><![CDATA[>до 70%<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> in the new collection.<]]></from>
+				<to><![CDATA[> на гречку :-)<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>EXCLUSIVE<]]></from>
+				<to><![CDATA[>Эксклюзивная<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sunglasses<]]></from>
+				<to><![CDATA[>крупа<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Incredible prices<]]></from>
+				<to><![CDATA[>Невероятные цены<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SUNGLASSES<]]></from>
+				<to><![CDATA[>КРУПА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>WOMAN DRESSES<]]></from>
+				<to><![CDATA[>ЧИПСЫ И СУХАРИКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>WOMAN BAGS<]]></from>
+				<to><![CDATA[>МАЙОНЕЗ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>WEEKLY FEATURED PRODUCTS<]]></from>
+				<to><![CDATA[>ТОВАРЫ НЕДЕЛИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SPECIAL <]]></from>
+				<to><![CDATA[>НОВАЯ <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>PROMO<]]></from>
+				<to><![CDATA[>ПРОМО-АКЦИЯ!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Purchase now &gt;<]]></from>
+				<to><![CDATA[>Купить &gt;<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>LUXURY<]]></from>
+				<to><![CDATA[>ПРЕМИУМ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> man clock<]]></from>
+				<to><![CDATA[> консервы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>get early deals now...<]]></from>
+				<to><![CDATA[>поторопись...<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FASHION<]]></from>
+				<to><![CDATA[>РЫБА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> deals<]]></from>
+				<to><![CDATA[> мороженая<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>UP TO<]]></from>
+				<to><![CDATA[>ДО<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SHOP NOW <]]></from>
+				<to><![CDATA[>КУПИТЬ <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Free Shipping & Return<]]></from>
+				<to><![CDATA[>Бесплатная доставка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>при заказе от 3000 рублей<]]></from>
+				<to><![CDATA[>100% FREE IN ALL ORDERS<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed vulputate massa. Fusce ante magna, iaculis ut purus ut, facilisis ultrices nibh.<]]></from>
+				<to><![CDATA[>Строфоид текстологически вызывает стих. Познание текста нивелирует брахикаталектический брих.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed vulputate massa. Fusce ante magna, iaculis ut purus ut, facili.<]]></from>
+				<to><![CDATA[>Строфоид существенно приводит холодный цинизм. Дискурс иллюстрирует былинный реципиент.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed vulputate massa. Fusce ante magna, iaculis ut purus ut, facilisis ultrices.<]]></from>
+				<to><![CDATA[>Строфоид аллитерирует генезис свободного стиха. Поток сознания, чтобы уловить хореический ритм или аллитерацию на "л", нивелирует верлибр.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>THIS IS A GREAT OFFER<]]></from>
+				<to><![CDATA[>МЯСНЫЕ КОНСЕРВЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured<]]></from>
+				<to><![CDATA[>ПРЕМИУМ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SIGN UP BELOW FOR <]]></from>
+				<to><![CDATA[>ПОДПИШИСЬ <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>EARLY UPDATES<]]></from>
+				<to><![CDATA[>НА НОВОСТИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Please sign up to the mailing list to receive updates on new arrivals, special offers and other discount information.<]]></from>
+				<to><![CDATA[>Узнай первым о понижении цен на гречку.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Porto Presents...<]]></from>
+				<to><![CDATA[>Российская сборка Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>The Bride's Dream<]]></from>
+				<to><![CDATA[>Мечта продавца<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shop now <]]></from>
+				<to><![CDATA[>Купить <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> TOP CATEGORIES<]]></from>
+				<to><![CDATA[> ПОПУЛЯРНОЕ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Home & Garden<]]></from>
+				<to><![CDATA[>Торты, пирожные, выпечка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> TRENDING<]]></from>
+				<to><![CDATA[> ГОРЯЧИЕ СКИДКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Huge Sale - 70% Off<]]></from>
+				<to><![CDATA[>Скидка 70% на лимоны<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>New Arrivals<]]></from>
+				<to><![CDATA[>Свежие :-)<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FREE SHIPPING & RETURN<]]></from>
+				<to><![CDATA[>Бесплатная доставка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Free shipping on all orders over $99.<]]></from>
+				<to><![CDATA[>При заказе от 3000 рублей.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>MONEY BACK GUARANTEE<]]></from>
+				<to><![CDATA[>НЕ ПРОПУСТИ ГРЕЧКУ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>100% money back guarantee.<]]></from>
+				<to><![CDATA[>Пока она дешёвая.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>ONLINE SUPPORT 24/7<]]></from>
+				<to><![CDATA[>Круглосуточная доставка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet.<]]></from>
+				<to><![CDATA[>Стиль интуитивно понятен.<]]></to>
+			</term>
+			<term>
+				<from>Blank!!!</from>
+				<to>Здесь пока пусто...</to>
+			</term>
+			<term>
+				<from><![CDATA[>Now starting at <]]></from>
+				<to><![CDATA[>От <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shop now &gt;<]]></from>
+				<to><![CDATA[>Купить &gt;<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>amazing<]]></from>
+				<to><![CDATA[>потрясающие<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>COLLECTION<]]></from>
+				<to><![CDATA[>КОНСЕРВЫ]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>MOBILE<]]></from>
+				<to><![CDATA[>МЯСНЫЕ СУБПРОДУКТЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>MEGA SALE<]]></from>
+				<to><![CDATA[>СВИНЫЕ УШКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Deals<]]></from>
+				<to><![CDATA[>Овёс<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>PROMOS<]]></from>
+				<to><![CDATA[>ГОРОХ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Limited sales in<]]></from>
+				<to><![CDATA[>Мясо, птица, рыба<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>our categories.<]]></from>
+				<to><![CDATA[>МОРЕПРОДУКТЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FEEL<]]></from>
+				<to><![CDATA[>ПОЧУВСТВУЙ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>The<]]></from>
+				<to><![CDATA[>вкус<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Power!<]]></from>
+				<to><![CDATA[>гречки!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[EXPLORE <b style="font-weight:800;">PORTO</b>]]></from>
+				<to><![CDATA[Российская сборка <b style="font-weight:800;">Magento</b>]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>With <b>PORTO</b> you can customize the<br/>banners and styles whithin minutes.<]]></from>
+				<to><![CDATA[>Настройте обмен данными с 1С: Управление торговлей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>fashion<]]></from>
+				<to><![CDATA[>модная<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>TRENDS<]]></from>
+				<to><![CDATA[>ГРЕЧКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> + PROMOS<]]></from>
+				<to><![CDATA[>и ГОРОХ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Furniture & Garden<]]></from>
+				<to><![CDATA[>Рыба охлажденная и замороженная<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>HUGE<]]></from>
+				<to><![CDATA[>БОЛЬШАЯ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>up to<]]></from>
+				<to><![CDATA[>до<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FREE SHIPPING & FREE RETURNS<]]></from>
+				<to><![CDATA[>БЕСПЛАТНАЯ ДОСТАВКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Amazing New<]]></from>
+				<to><![CDATA[>Потрясающая свежая<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Collection<]]></from>
+				<to><![CDATA[>капуста<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Yes, this is our new collection, check it<br/>out our new arrivals.<]]></from>
+				<to><![CDATA[>О да, нам завезли свежую капусту.<br/>Налетай!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Check our options and features.<]]></from>
+				<to><![CDATA[>Оплати лицензию и попробуй.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Fashion Sunglasses<]]></from>
+				<to><![CDATA[>Полуфабрикаты замороженные<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FEATURED PRODUCTS<]]></from>
+				<to><![CDATA[>ПРЕМИУМ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>LET THE MUSIC PLAY<]]></from>
+				<to><![CDATA[>СЭНДВИЧИ, БУТЕРБРОДЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Connect with the best tech!<]]></from>
+				<to><![CDATA[>Купи себе сосиску в тесте!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Up to 70% OFF in the new collection.<]]></from>
+				<to><![CDATA[>из мяса Шарика<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>NEW ARRIVALS<]]></from>
+				<to><![CDATA[>МЯСО ШАРИКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>NEW COLLECTION<]]></from>
+				<to><![CDATA[>ШАУРМА ОТБОРНАЯ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Women Dresses<]]></from>
+				<to><![CDATA[>Только сегодня отобрали<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>COSMETICS<]]></from>
+				<to><![CDATA[>ПИЦЦА, ЛАЗАНЬЯ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>CHECK OUT THE NEW<]]></from>
+				<to><![CDATA[>Попробуй со вкусом<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>GLOSS FOR LIPS<]]></from>
+				<to><![CDATA[>ШАРИКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Starting at $9.99<]]></from>
+				<to><![CDATA[>от 499 рублей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shipping Returns<]]></from>
+				<to><![CDATA[>Пельмени, хинкали<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Holiday Extension *<]]></from>
+				<to><![CDATA[>с мясом Шарика *<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>100+ BRANDS<]]></from>
+				<to><![CDATA[>БЛИНЧИКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>10,000+ Products<]]></from>
+				<to><![CDATA[>с капустой и творогом<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>(+404) 158 14 25 78<]]></from>
+				<to><![CDATA[>+7 495 777-5-444<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>CONTACT US<]]></from>
+				<to><![CDATA[>ЗВОНИТЕ, НЕ КУСАЕМСЯ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FASHION PROMO<]]></from>
+				<to><![CDATA[>БИФШТЕКСЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>WOMAN SHOES<]]></from>
+				<to><![CDATA[>КОТЛЕТЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>50% OFF FASHION<]]></from>
+				<to><![CDATA[>ШНИЦЕЛИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>&copy;Copyright 2015 by SW-THEMES.<]]></from>
+				<to><![CDATA[>Российская сборка Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Features<span class="cat-label cat-label-label2">Hot!</span><]]></from>
+				<to><![CDATA[>Обзор возможностей<]]></to>
+			</term>
+			<term>
+				<from>#Header Type (\d+)#</from>
+				<to>Пример шапки №$1</to>
+			</term>
+			<term>
+				<from><![CDATA[>Headers<]]></from>
+				<to><![CDATA[>Примеры шапок<]]></to>
+			</term>
+			<term>
+				<from>#Homepage Variations (\d+)#</from>
+				<to>Примеры главной страницы. Часть $1</to>
+			</term>
+			<term>
+				<from>#Home Layout (\d+)#</from>
+				<to>Пример главной страницы №$1</to>
+			</term>
+			<term>
+				<from><![CDATA[>Home RTL Layout<]]></from>
+				<to><![CDATA[>Пример с текстом справа-налево<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Home Full Ajax Layout<]]></from>
+				<to><![CDATA[>Пример с асинхронной загрузкой<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Fullwidth Banner<]]></from>
+				<to><![CDATA[>Широкоформатный баннер<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Boxed Slider Banner<]]></from>
+				<to><![CDATA[>Слайдер фиксированного размера<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Boxed Image Banner<]]></from>
+				<to><![CDATA[>Баннер фиксированного размера<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Left Sidebar<]]></from>
+				<to><![CDATA[>Боковая колонка слева<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Right Sidebar<]]></from>
+				<to><![CDATA[>Боковая колонка справа]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Ajax Infinite Scroll<]]></from>
+				<to><![CDATA[>Асинхронная подгрузка страницы при прокрутке вниз<]]></to>
+			</term>
+			<term>
+				<from>#(\d+) Columns Products#</from>
+				<to>Количество товарных колонок: $1</to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Sidebar<]]></from>
+				<to><![CDATA[>Товарная страница с боковой колонкой<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page without Sidebar<]]></from>
+				<to><![CDATA[>Товарная страница без боковой колонки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Outer Zoom<]]></from>
+				<to><![CDATA[>Товарная страница с зумом<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Vertical Gallery<]]></from>
+				<to><![CDATA[>Товарная страница с вертикальной галереей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Addtocart Sticky<]]></from>
+				<to><![CDATA[>Товарная страница с постоянно видимой кнопкой добавления товара в корзину<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Vertical Tabs<]]></from>
+				<to><![CDATA[>Товарная страница с вертикальным рядом вкладок<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Accordion<]]></from>
+				<to><![CDATA[>Товарная страница с акордеоном<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Product Page with Moved Tabs<]]></from>
+				<to><![CDATA[>Товарная страница с подвижными вкладками<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Configurable Sample Product<]]></from>
+				<to><![CDATA[>Пример настраиваемого товара<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Bundle Sample Product<]]></from>
+				<to><![CDATA[>Пример товарного комплекта<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Grouped Sample Product<]]></from>
+				<to><![CDATA[>Пример сгруппированного товара<]]></to>
+			</term>
+			<term>
+				<from>?ref=SW-THEMES</from>
+				<to>?ref=dfediuk</to>
+			</term>
+			<term>
+				<from><![CDATA[>Buy Porto!<]]></from>
+				<to><![CDATA[>Купить Porto<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>STUB<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+		</actions>
+	</rule>
 </dictionary>
