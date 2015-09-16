@@ -146,4 +146,224 @@
 			</column>
 		</table>
 	</db>
+	<rule>
+		<conditions><type>category</type><category><name>Root Catalog</name></category></conditions>
+		<actions><new_title>Корневой раздел</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Fashion</name></category></conditions>
+		<actions><new_title>Молочные продукты, мороженое</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Motors</name></category></conditions>
+		<actions><new_title>Детское питание</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Jewellery</name></category></conditions>
+		<actions><new_title>Диетические продукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Kids Fashion</name></category></conditions>
+		<actions><new_title>Овощи, фрукты, зелень, грибы</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Shoes & Boots]]></name></category>
+		</conditions>
+		<actions><new_title>Бакалея</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Watch Fashion</name></category></conditions>
+		<actions><new_title>Заправки, соусы, приправы</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Tees, Knits & Polos]]></name></category>
+		</conditions>
+		<actions><new_title>Консервированные продукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Sweaters</name></category></conditions>
+		<actions><new_title>Кондитерские изделия</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Jeans & Shorts]]></name></category>
+		</conditions>
+		<actions><new_title>Чай, кофе, какао</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Parts & Accessories]]></name></category>
+		</conditions>
+		<actions><new_title>Мини-овощи</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Auto Tools & Supplies]]></name></category>
+		</conditions>
+		<actions><new_title>Фрукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Spring & Autumn]]></name></category>
+		</conditions>
+		<actions><new_title>Мясная гастрономия</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Computers & Tablets]]></name></category>
+		</conditions>
+		<actions><new_title>Рыбная гастрономия</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Car Audio, Video & GPS]]></name></category>
+		</conditions>
+		<actions><new_title>Мясо, птица, рыба и морепродукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Radios & Clock Radios]]></name></category>
+		</conditions>
+		<actions><new_title>Готовые блюда и кулинария</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Cell Phones & Accessories]]></name></category>
+		</conditions>
+		<actions><new_title>Яйцо</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Cameras & Photo]]></name></category>
+		</conditions>
+		<actions><new_title>Хлебобулочные изделия и выпечка</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[iPad & Android Tablets]]></name></category>
+		</conditions>
+		<actions><new_title>Напитки, соки, воды</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Video Games & Consolers]]></name></category>
+		</conditions>
+		<actions><new_title>Молоко, сливки, молочные коктейли</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Printers & Scanners]]></name></category>
+		</conditions>
+		<actions><new_title>Соевые продукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Game Machine & Devices]]></name></category>
+		</conditions>
+		<actions><new_title>Кисломолочные продукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>category</type><category>
+			<name><![CDATA[Motorcycles & Powersports]]></name></category>
+		</conditions>
+		<actions><new_title>Йогурты, десерты, творожки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Casual Shoes</name></category></conditions>
+		<actions><new_title>Творожные изделия</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Winter Sneakers</name></category></conditions>
+		<actions><new_title>Сливочные масла, маргарины, спреды</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Smart TVs</name></category></conditions>
+		<actions><new_title>Сыры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Games</name></category></conditions>
+		<actions><new_title>Мороженое</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>TV, Audio</name></category></conditions>
+		<actions><new_title>Закваски для домашнего приготовления</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Home Office Equipments</name></category></conditions>
+		<actions><new_title>Для беременных и кормящих мам</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>GPS Navigation</name></category></conditions>
+		<actions><new_title>Заменители материнского молока и сухие смеси</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Photo Accessories</name></category></conditions>
+		<actions><new_title>Пюре</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>IP Phones</name></category></conditions>
+		<actions><new_title>Каши</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Samsung Galaxy Phones</name></category></conditions>
+		<actions><new_title>Вода, соки и напитки</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>e-Book Readers</name></category></conditions>
+		<actions><new_title>Детская бакалея, печенье</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Digital Picture Frames</name></category></conditions>
+		<actions><new_title>Десерты и пудинги</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>3D Fashion Games</name></category></conditions>
+		<actions><new_title>Безглютеновые продукты</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Cars and Trucks</name></category></conditions>
+		<actions><new_title>Готовые блюда</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Boats</name></category></conditions>
+		<actions><new_title>Здоровая диета</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Motorcycle Parts</name></category></conditions>
+		<actions><new_title>Кондитерские изделия без сахара</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>ATV Parts</name></category></conditions>
+		<actions><new_title>Масла и эликсиры</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Snowmobile Parts</name></category></conditions>
+		<actions><new_title>Плодово-ягодные консервы без сахара</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Personal Watercraft Parts</name></category></conditions>
+		<actions><new_title>Сахарозаменители</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>category</type><category><name>Other Vehicle Parts</name></category></conditions>
+		<actions><new_title>Хлебобулочные изделия</new_title></actions>
+	</rule>
 </dictionary>
