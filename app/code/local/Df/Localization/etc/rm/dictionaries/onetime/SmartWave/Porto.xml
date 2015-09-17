@@ -368,7 +368,7 @@
 	</rule>
 	<rule>
 		<conditions>
-			<type>block</type>
+			<type>block page</type>
 		</conditions>
 		<actions>
 			<term>
@@ -1166,6 +1166,345 @@
 			<term>
 				<from><![CDATA[><b>SALE:</b> use coupon code <b>PORTO</b> to save 30%<]]></from>
 				<to><![CDATA[><b>РАСПРОДАЖА:</b> используйте код <b>PORTO</b> для получения скидки 30%<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured Products<]]></from>
+				<to><![CDATA[>Премиум<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>New Products<]]></from>
+				<to><![CDATA[>Новинки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customer Support<]]></from>
+				<to><![CDATA[>Техническая поддержка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>YOU WON'T BE ALONE<]]></from>
+				<to><![CDATA[>ОТВЕТИМ НА ВСЕ ВАШИ ВОПРОСЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>We really care about you and your website as much as you do. Purchasing Porto or any other theme from us you get 100% free support.<]]></from>
+				<to><![CDATA[>Заимствование вызывает строфоид, также необходимо сказать о сочетании метода апроприации художественных стилей прошлого с авангардистскими стратегиями.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Fully Customizable<]]></from>
+				<to><![CDATA[>Парономазия уязвима<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>TONS OF OPTIONS<]]></from>
+				<to><![CDATA[>ПАРОНОМАЗИЯ ОТРАЖАЕТ АНАПЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>With Porto you can customize the layout, colors and styles within only a few minutes. Start creating an amazing website right now!<]]></from>
+				<to><![CDATA[>Слово, не учитывая количества слогов, стоящих между ударениями, неумеренно осознаёт контрапункт, первым образцом которого принято считать книгу А.Бертрана "Гаспар из тьмы".<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Powerful Admin<]]></from>
+				<to><![CDATA[>Аллюзия приводит подтекст<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>MADE TO HELP YOU<]]></from>
+				<to><![CDATA[>ОРНАМЕНТАЛЬНЫЙ СКАЗ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Porto has very powerful admin features to help customer to build their own shop in minutes without any special skills in web development.<]]></from>
+				<to><![CDATA[>Быличка, как бы это ни казалось парадоксальным, непосредственно просветляет генезис свободного стиха.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Premium theme, unlimited possibilities...<]]></from>
+				<to><![CDATA[>Обсценная идиома неумеренно выбирает конкретный палимпсест...<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> music<]]></from>
+				<to><![CDATA[> свиные ушки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FEATURED<]]></from>
+				<to><![CDATA[>ПРЕМИУМ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>LATEST PRODUCTS<]]></from>
+				<to><![CDATA[>НОВИНКИ<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<rule>
+		<conditions>
+			<type>page</type>
+		</conditions>
+		<actions>
+			<term>
+				<from><![CDATA[>Home Page<]]></from>
+				<to><![CDATA[>Главная страница<]]></to>
+			</term>
+			<term>
+				<from>#^Porto - Homepage (\d+)$#</from>
+				<to>Porto. Главная страница №$1</to>
+			</term>
+			<term>
+				<from>#^Porto - Homepage (\d+) New$#</from>
+				<to>Porto. Главная страница №$1 новая</to>
+			</term>
+			<term>
+				<from>Porto - Homepage RTL</from>
+				<to>Porto. Главная страница справа-налево</to>
+			</term>
+			<term>
+				<from>404 Not Found 2</from>
+				<to>Страница не найдена 2</to>
+			</term>
+			<term>
+				<from>Porto - About Us</from>
+				<to>Porto. О компании</to>
+			</term>
+			<term>
+				<from><![CDATA[>FEATURED<]]></from>
+				<to><![CDATA[>ПРЕМИУМ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>NEW PRODUCTS<]]></from>
+				<to><![CDATA[>НОВИНКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>MOBILE<]]></from>
+				<to><![CDATA[>ГРЕЧКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>MEGA SALE<]]></from>
+				<to><![CDATA[>РАСПРОДАЖА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[><span>$</span>450.<span>00</span><]]></from>
+				<to><![CDATA[>59<span>рублей</span><]]></to>
+			</term>
+			<term>
+				<from><![CDATA[><span>$</span>350.<span>00</span><]]></from>
+				<to><![CDATA[>49<span>рублей</span><]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Our Brands<]]></from>
+				<to><![CDATA[>Производители<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>BEST SELLERS<]]></from>
+				<to><![CDATA[>ПОПУЛЯРНОЕ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>From the Blog<]]></from>
+				<to><![CDATA[>Новости<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FROM THE BLOG<]]></from>
+				<to><![CDATA[>НОВОСТИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>BestSellers<]]></from>
+				<to><![CDATA[>Популярное<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>New<]]></from>
+				<to><![CDATA[>Новинки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>The Wedding Day<]]></from>
+				<to><![CDATA[>Мясные консервы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a arcu lacinia, ornare lorem maximus, consequat mauris. Nam vitae risus at leo convallis sagittis.<]]></from>
+				<to><![CDATA[>Ложная цитата вероятна. Поток сознания, несмотря на внешние воздействия, традиционен. Палимпсест, по определению редуцирует эпитет. Гиперцитата аллитерирует резкий цикл.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Valentine’s Day<]]></from>
+				<to><![CDATA[>Овощные консервы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Galaxy phones Just Arrived<]]></from>
+				<to><![CDATA[>Новое поступление тушёнки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured Brands<]]></from>
+				<to><![CDATA[>Премиум<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>CATEGORIES<]]></from>
+				<to><![CDATA[>РАЗДЕЛЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SPECIAL<]]></from>
+				<to><![CDATA[>ПРОМО-АКЦИЯ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>OFFER<]]></from>
+				<to><![CDATA[>ВНИМАНИЕ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Buy new digital cameras & <br/>get lenses or accessories<]]></from>
+				<to><![CDATA[>Купи килограмм гречки<br/>и получи полкило овса<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shop now!<]]></from>
+				<to><![CDATA[>Купить!<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Keep up on our always evolving product features and technology.<br/>Enter your e-mail and subscribe to our newsletter.<]]></from>
+				<to><![CDATA[>Узнай первым о снижении цены на гречку.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>John Smith<]]></from>
+				<to><![CDATA[>Иван Петров<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>CEO &amp; Founder - Okler<]]></from>
+				<to><![CDATA[>Директор совхоза<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est.<]]></from>
+				<to><![CDATA[>Акцент текстологически нивелирует конструктивный хорей. Ложная цитата пространственно представляет собой сюжетный генезис свободного стиха.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Featured Fashion Dress<]]></from>
+				<to><![CDATA[>Грибные консервы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Hot<]]></from>
+				<to><![CDATA[>Рис<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sale<]]></from>
+				<to><![CDATA[>Пшено<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>WHY SHOP WITH US?<]]></from>
+				<to><![CDATA[>ЗАКУСКИ ИЗ МОРЕПРОДУКТОВ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>ИКРА МИНТАЯ<]]></from>
+				<to><![CDATA[>ТЕСТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Consult our specialists for help with an order, customization, or design advice.<]]></from>
+				<to><![CDATA[>Ритмический рисунок текстологически диссонирует стиль.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Get in Touch &gt;<]]></from>
+				<to><![CDATA[>Узнать больше &gt;<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>FREE RETURNS<]]></from>
+				<to><![CDATA[>МАНТЫ, ВАРЕНИКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>We stand behind our goods and services and want you to be satisfied with them.<]]></from>
+				<to><![CDATA[>Расположение эпизодов притягивает культурный эпитет, что нельзя сказать о нередко манерных эпитетах.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Returns Policy &gt;<]]></from>
+				<to><![CDATA[>Хлеб, тосты, лаваш &gt;<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>INTERNATIONAL SHIPPING<]]></from>
+				<to><![CDATA[>БАРАНКИ, БУБЛИКИ, СУШКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Currently over 50 countries qualify for express international shipping.<]]></from>
+				<to><![CDATA[>Гиперцитата, не учитывая количества слогов, стоящих между ударениями, отражает экзистенциальный коммунальный модернизм.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Learn More &gt;<]]></from>
+				<to><![CDATA[>Узнать больше &gt;<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>DEDICATED SERVICE<]]></from>
+				<to><![CDATA[>ТАРТАЛЕТКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Browse Our Categories<]]></from>
+				<to><![CDATA[>РАЗДЕЛЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>HOME & GARDEN<]]></from>
+				<to><![CDATA[>ТОРТЫ, ПИРОЖНЫЕ, ВЫПЕЧКА<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SPORTS<]]></from>
+				<to><![CDATA[>МУЧНЫЕ КОНДИТЕРСКИЕ ИЗДЕЛИЯ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>ELECTRONICS<]]></from>
+				<to><![CDATA[>ВОСТОЧНЫЕ СЛАДОСТИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Just Arrived<]]></from>
+				<to><![CDATA[>МАРМЕЛАД, ЗЕФИР<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Latest Blog Posts<]]></from>
+				<to><![CDATA[>НОВОСТИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>What Client's Say<]]></from>
+				<to><![CDATA[>Отзывы покупателей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Hello, I want to thank you for creating a great template and for the excellent and quick support and help that you have been providing to me as I begin to work with it.<]]></from>
+				<to><![CDATA[>Графомания, не учитывая количества слогов, стоящих между ударениями, приводит голос персонажа. В данной работе мы не будем анализировать все эти аспекты, однако хорей существенно интегрирует ритм.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Hello, I want to thank you for creating a great template and for the excellent and quick support and help that you have been providing to me as I begin to work with it.<]]></from>
+				<to><![CDATA[>Действительно, коммунальный модернизм дает литературный дольник, таким образом, очевидно, что в нашем языке царит дух карнавала, пародийного отстранения.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>LATEST PRODUCTS<]]></from>
+				<to><![CDATA[>НОВИНКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SALES<]]></from>
+				<to><![CDATA[>УКСУС, МАРИНАДЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SHOP LIVING ROOM<]]></from>
+				<to><![CDATA[>ГАЗИРОВАННЫЕ НАПИТКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>LIVING ROOM STARTING AT $999<]]></from>
+				<to><![CDATA[>Лимонад Буратино от 29 рублей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SHOP DINING ROOM<]]></from>
+				<to><![CDATA[>МОРСЫ, КИСЕЛИ, КОМПОТЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>DINING ROOM STARTING AT $999<]]></from>
+				<to><![CDATA[>Компот из груши от 39 рублей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>SHOP BEDROOM<]]></from>
+				<to><![CDATA[>ЭНЕРГЕТИЧЕСКИЕ НАПИТКИ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>BEDROOM STARTING AT $999<]]></from>
+				<to><![CDATA[>Яга от 59 рублей<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Top Selling Items<]]></from>
+				<to><![CDATA[>Самое популярное<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Fashion Selection<]]></from>
+				<to><![CDATA[>Холодный чай<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> SHOP CATEGORIES<]]></from>
+				<to><![CDATA[> РАЗДЕЛЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> DEDICATED SERVICE<]]></from>
+				<to><![CDATA[> РЫБНЫЕ КОНСЕРВЫ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[> FREE RETURNS<]]></from>
+				<to><![CDATA[> МОЛОЧНЫЕ КОНСЕРВЫ<]]></to>
 			</term>
 		</actions>
 	</rule>
