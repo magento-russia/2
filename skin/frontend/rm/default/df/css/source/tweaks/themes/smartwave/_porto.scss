@@ -1,2 +1,20 @@
 body.df-theme-smartwave-porto {
+	.df-checkout-ergonomic-page {
+		// 2015-09-18
+		// Оформительская тема Porto умудряется отображать боковую колонку
+		// даже на нашем экране оформления заказа.
+		.sidebar {display: none;}
+		.col-main {width: 100%;}
+		.form-list {
+			// Оформительская тема устанавливает 10px
+			label {margin-bottom: 0;}
+			.input-box {margin-bottom: 0;}
+		}
+	}
+}
+// Скрываем кнопку только со страницы оформления заказа
+body.df-theme-smartwave-porto.checkout-onepage-index {
+	// Кнопка полностью не отображается, да она и не нужна:
+	// это модальное окно закрывается просто по клику за его приеделами.
+	.fancybox-close {display: none;}
 }

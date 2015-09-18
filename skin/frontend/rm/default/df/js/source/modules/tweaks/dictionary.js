@@ -28,7 +28,7 @@
 	,'df-theme-magento-enterprise': {'package': 'enterprise'}
 	,'df-theme-magento-modern': {'package': 'default', 'theme': 'modern'}
 	,'df-theme-magento-rwd': {'package': 'rwd'}
-	,'df-theme-smartwave-porto': {'package': 'smartwave', 'theme': 'porto'}
+	,'df-theme-smartwave-porto': {'package': 'smartwave', 'theme': 'porto', skin: 'porto'}
 	,'df-theme-sns-xsport': {'package': 'default', 'theme': 'sns_xsport'}
 	,'df-theme-templatemela-beauty': {'package': 'default', 'skin': 'MAG080119'}
 	/**

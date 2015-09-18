@@ -959,6 +959,16 @@
 		</translate>
 	</frontend>
 	<default>
+		<!--
+			2015-09-18
+			Оформительская тема Porto.
+			Модуль Smartwave_Ajaxcatalog
+		-->
+		<ajax_catalog>
+			<price_slider_conf>
+				<goBtnText>применить</goBtnText>
+			</price_slider_conf>
+		</ajax_catalog>
 		<ajaxfilter_cfg>
 			<price_slider>
 				<goBtnText>применить</goBtnText>

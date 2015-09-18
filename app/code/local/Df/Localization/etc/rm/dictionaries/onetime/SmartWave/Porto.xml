@@ -2,6 +2,22 @@
 <dictionary>
 	<config>
 		<entry>
+			<path>ajax_catalog/price_slider_conf/goBtnText</path>
+			<value>OK</value>
+			<set_as_default/>
+		</entry>
+		<!-- похоже, они эти настройки (и сам модуль) стибрили у Infortis -->
+		<entry>
+			<path>megamenu/category_labels/label1</path>
+			<value>новинка</value>
+			<set_as_default/>
+		</entry>
+		<entry>
+			<path>megamenu/category_labels/label2</path>
+			<value>скидки</value>
+			<set_as_default/>
+		</entry>
+		<entry>
 			<path>porto_settings/footer/footer_ribbon_text</path>
 			<original_value>Ribbon Text</original_value>
 			<value>Текст на ленте</value>
@@ -67,6 +83,19 @@
 		</entry>
 	</config>
 	<db>
+		<table name='catalog_category_entity_text'>
+			<column name='value'>
+				<term><from><![CDATA[>SHOP NOW <]]></from><to><![CDATA[>КУПИТЬ <]]></to></term>
+				<term><from><![CDATA[>TV's<]]></from><to><![CDATA[>ТЕЛЕВИЗОРЫ<]]></to></term>
+				<term><from><![CDATA[>VIEW NOW <]]></from><to><![CDATA[>ПОКАЗАТЬ <]]></to></term>
+				<term><from><![CDATA[>This is a custom block. You can add any images or links here.<]]></from><to><![CDATA[><br/><br/>Пример самодельного блока.<br/>Его содержимое настраивается на административном экране товарного раздела.<]]></to></term>
+				<term><from><![CDATA[>SUGGESTIONS:<]]></from><to><![CDATA[>РЕКОМЕНДАЦИИ:<]]></to></term>
+				<term><from><![CDATA[>MOBILE<]]></from><to><![CDATA[>ГРЕЧКА<]]></to></term>
+				<term><from><![CDATA[>CAMERAS<]]></from><to><![CDATA[>ПШЕНО<]]></to></term>
+				<term><from><![CDATA[>HEADSETS<]]></from><to><![CDATA[>РИС<]]></to></term>
+				<term><from><![CDATA[>STUB<]]></from><to><![CDATA[>ТЕСТ<]]></to></term>
+			</column>
+		</table>
 		<table name='smartwave_blog'>
 			<column name='title'>
 				<term><from>Hello world!</from><to>Превед, медвед!</to></term>
@@ -152,7 +181,7 @@
 	</rule>
 	<rule>
 		<conditions><type>category</type><category><name>Fashion</name></category></conditions>
-		<actions><new_title>Молочные продукты, мороженое</new_title></actions>
+		<actions><new_title>Молочные продукты</new_title></actions>
 	</rule>
 	<rule>
 		<conditions><type>category</type><category><name>Motors</name></category></conditions>
@@ -371,6 +400,10 @@
 			<type>block page</type>
 		</conditions>
 		<actions>
+			<term>
+				<from>Custom Tab</from>
+				<to>Пример товарной вкладки</to>
+			</term>
 			<term>
 				<from>#^Porto \- Homepage Slider (\d+)$#</from>
 				<to>Porto. Главная страница. Слайдер №$1</to>

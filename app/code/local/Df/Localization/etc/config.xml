@@ -238,6 +238,7 @@
 						http://newsmartwave.net/magento/porto/index.php/demo16_en
 						http://newsmartwave.net/magento/porto/index.php/demo17_en
 					</demo>
+					<demo_images_base>http://newsmartwave.net/magento/porto/index.php/demo6_en/</demo_images_base>
 					<forum>http://magento-forum.ru/forum/371/</forum>
 					<official_site>http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864?ref=dfeduik</official_site>
 				</url>

@@ -97,7 +97,7 @@
 
 .df .df-checkout-ergonomic {
   /**
-  	╨в╨╡╨╝╨░ RWD ╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╨╡ ╨┤╤А╤Г╨│╨╕╨╡ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╤О╤В ╤Г╨▓╨╡╨╗╤З╨╡╨╜╨╜╤Г╤О ╨▓╤Л╤Б╨╛╤В╤Г ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░.
+  	╨в╨╡╨╝╨░ RWD ╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╨╡ ╨┤╤А╤Г╨│╨╕╨╡ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╤О╤В ╤Г╨▓╨╡╨╗╨╕╤З╨╡╨╜╨╜╤Г╤О ╨▓╤Л╤Б╨╛╤В╤Г ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░.
   	╨Э╨░╨╝ ╤Н╤В╨╛ ╨╜╨╡ ╨╜╤Г╨╢╨╜╨╛.
    */
   /*
@@ -1568,6 +1568,18 @@ body.df-theme-magento-modern .df-checkout-ergonomic #opc-review #checkout-agreem
     padding-top: 0; }
   .df-theme-magento-rwd.review-product-list #review-form .form-list li:nth-child(3) label {
     text-transform: none; }
+
+body.df-theme-smartwave-porto .df-checkout-ergonomic-page .sidebar {
+  display: none; }
+body.df-theme-smartwave-porto .df-checkout-ergonomic-page .col-main {
+  width: 100%; }
+body.df-theme-smartwave-porto .df-checkout-ergonomic-page .form-list label {
+  margin-bottom: 0; }
+body.df-theme-smartwave-porto .df-checkout-ergonomic-page .form-list .input-box {
+  margin-bottom: 0; }
+
+body.df-theme-smartwave-porto.checkout-onepage-index .fancybox-close {
+  display: none; }
 
 body.df-theme-sns-xsport {
   /** ╨Ю╨▒╤А╨░╤В╨╕╤В╨╡ ╨▓╨╜╨╕╨╝╨░╨╜╨╕╨╡, ╤З╤В╨╛ ╨║╨╗╨░╤Б╤Б CSS .df-checkout-ergonomic-page ╨▓ ╨┤╨░╨╜╨╜╨╛╨╣ ╤В╨╡╨╝╨╡ ╨╜╨╡╨┤╨╛╤Б╤В╤Г╨┐╨╡ */ }
