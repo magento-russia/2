@@ -15,7 +15,7 @@
 				<ru_RU>товаров</ru_RU>
 			</term>
 		</block>
-		<controller name='EM_Ajaxproducts_IndexController'>
+		<controller class='EM_Ajaxproducts_IndexController'>
 			<term>
 				<en_US>items</en_US>
 				<ru_RU>товаров</ru_RU>

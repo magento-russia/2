@@ -48,7 +48,7 @@
 			</term>
 		</block>
 		<controller
-			name='Df_Checkout_OnepageController'
+			class='Df_Checkout_OnepageController'
 			action='checkout_onepage_index'
 		>
 			<term>
@@ -58,9 +58,7 @@
 		</controller>
 	</module>
 	<module name='Mage_Page'>
-		<controller
-			name='Mage_Sales_OrderController'
-		>
+		<controller class='Mage_Sales_OrderController'>
 			<term>
 				<en_US>Show</en_US>
 				<ru_RU>по</ru_RU>

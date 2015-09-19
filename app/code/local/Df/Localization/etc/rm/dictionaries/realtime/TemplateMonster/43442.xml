@@ -42,7 +42,7 @@
 			</term>
 		</block>
 		<controller
-			name='Excellence_Ajax_IndexController'
+			class='Excellence_Ajax_IndexController'
 			action='*'
 		>
 			<term>
@@ -53,7 +53,7 @@
 	</module>
 	<module name='Excellence_AjaxWishlist'>
 		<controller
-			name='Excellence_AjaxWishlist_IndexController'
+			class='Excellence_AjaxWishlist_IndexController'
 			action='*'
 		>
 			<term>

@@ -28,7 +28,7 @@
 			</term>
 		</block>
 		<controller
-			name='Magicart_Ajax_IndexController'
+			class='Magicart_Ajax_IndexController'
 			action='ajax_index_add'
 		>
 			<term>
