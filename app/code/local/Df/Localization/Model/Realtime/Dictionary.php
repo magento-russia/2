@@ -90,6 +90,17 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 	 */
 	private function _continue($a, $b) {return $a && !in_array($a, array('*', $b));}
 
+	/**
+	 * 2015-09-19
+	 * @used-by handleTranslateForController()
+	 * @param string $expectedClass
+	 * @param object $object
+	 * @return bool
+	 */
+	private function _continueC($expectedClass, $object) {
+		return $expectedClass && '*' !== $expectedClass && !($object instanceof $expectedClass);
+	}
+
 	/** @return Df_Localization_Model_Realtime_Dictionary_Layout|null */
 	public function getLayout() {
 		if (!isset($this->{__METHOD__})) {
@@ -174,7 +185,7 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 					if (
 							$this->_continue($controller->getAction(), $currentControllerAction)
 						||
-							$this->_continue($controller->getControllerClass(), $currentControllerClass)
+							$this->_continueC($controller->getControllerClass(), $currentController)
 					) {
 						continue;
 					}
