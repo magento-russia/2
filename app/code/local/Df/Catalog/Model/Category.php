@@ -79,6 +79,34 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	/** @return string|int|null */
 	public function getPath() {return $this->_getData(self::P__PATH);}
 
+	/**
+	 * 2015-02-09
+	 * Родительский метод: @see Mage_Catalog_Model_Category::getResourceCollection()
+	 * @override
+	 * @return Df_Catalog_Model_Resource_Category_Collection|Df_Catalog_Model_Resource_Category_Flat_Collection
+	 */
+	public function getResourceCollection() {
+		/** @var Df_Catalog_Model_Resource_Category_Collection|Df_Catalog_Model_Resource_Category_Flat_Collection $result */
+		$result =
+			$this->_useFlatResource
+			? new Df_Catalog_Model_Resource_Category_Flat_Collection
+			: new Df_Catalog_Model_Resource_Category_Collection
+		;
+		/** по аналогии с @see Mage_Catalog_Model_Category::getResourceCollection() */
+		$result->setStoreId($this->getStoreId());
+		return $result;
+	}
+
+	/** @return string */
+	public function getTitle() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = strtr('«{name}» [{id}]', array(
+				'{name}' => $this->getName(), '{id}' => $this->getId()
+			));
+		}
+		return $this->{__METHOD__};
+	}
+
 	/** @return string|null */
 	public function getUrlKey() {return $this->_getData(self::P__URL_KEY);}
 
@@ -127,22 +155,58 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	 * (`catalog_category_flat_store_1`,
 	 * CONSTRAINT `FK_CAT_CTGR_FLAT_STORE_1_ENTT_ID_CAT_CTGR_ENTT_ENTT_ID`
 	 * FOREIGN KEY (`entity_id`) REFERENCES `catalog_category_entity` (`en)
-	 * @param int|null $storeId [optional]
+	 *
+	 * 2015-01-20
+	 * Обратите внимание, что параметр $store — обязательный:
+	 * неуказание магазина в многомагазинной системе
+	 * при включенном режиме денормализации приводит в Magento CE 1.9.1.0 к сбою:
+	 * «SQLSTATE[42S02]: Base table or view not found:
+	 * Table 'catalog_category_flat' doesn't exist,
+	 * query was: DESCRIBE `catalog_category_flat`».
+	 * И действительно, таблица «catalog_category_flat» в БД отсутствует,
+	 * вместо неё присутствуют таблицы:
+	 * «catalog_category_flat_store_1»
+	 * «catalog_category_flat_store_2»
+	 * «catalog_category_flat_store_3»
+	 * «catalog_category_flat_store_4»
+	 *
+	 * @param Df_Core_Model_StoreM|string|int|bool $store
 	 * @return Df_Catalog_Model_Category
 	 */
-	public function saveRm($storeId = null) {
-		rm_admin_call($this, 'saveRmInternal', array($storeId));
+	public function saveRm($store) {
+		/** поле @see _useFlatResource присутствует в том числе и в Magento CE 1.4.0.1 */
+		if ($this->_useFlatResource) {
+			df_error(
+				'Программист пытается сохранять товарный раздел {category},'
+				. ' загруженный из базы данных при включенном режиме денормализации.'
+				. "\nMagento корректно сохраняет только те товарные разделы,"
+				. " которые были загружены из базы данных при выключенном режиме денормализации."
+				,array('{category}' => $this->getTitle())
+			);
+		}
+		rm_admin_call($this, 'saveRmInternal', array($store));
 		return $this;
 	}
 
 	/**
-	 * @param int|null $storeId [optional]
+	 * 2015-01-20
+	 * Обратите внимание, что параметр $store — обязательный:
+	 * неуказание магазина в многомагазинной системе
+	 * при включенном режиме денормализации приводит в Magento CE 1.9.1.0 к сбою:
+	 * «SQLSTATE[42S02]: Base table or view not found:
+	 * Table 'catalog_category_flat' doesn't exist,
+	 * query was: DESCRIBE `catalog_category_flat`».
+	 * И действительно, таблица «catalog_category_flat» в БД отсутствует,
+	 * вместо неё присутствуют таблицы:
+	 * «catalog_category_flat_store_1»
+	 * «catalog_category_flat_store_2»
+	 * «catalog_category_flat_store_3»
+	 * «catalog_category_flat_store_4»
+	 * @param Df_Core_Model_StoreM|string|int|bool $store
 	 * @return void
 	 */
-	public function saveRmInternal($storeId = null) {
-		if (!is_null($storeId)) {
-			$this->setStoreId($storeId);
-		}
+	public function saveRmInternal($store) {
+		$this->setStoreId(rm_store_id($store));
 		$this->save();
 	}
 
@@ -262,6 +326,20 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	}
 
 	/**
+	 * 2015-02-09
+	 * Родительский метод: @see Mage_Catalog_Model_Category::_getResource()
+	 * @override
+	 * @return Df_Catalog_Model_Resource_Category|Df_Catalog_Model_Resource_Category_Flat
+	 */
+	protected function _getResource() {
+		return
+			$this->_useFlatResource
+			? Df_Catalog_Model_Resource_Category_Flat::s()
+			: Df_Catalog_Model_Resource_Category::s()
+		;
+	}
+
+	/**
 	 * @override
 	 * @return void
 	 */
@@ -276,32 +354,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		if (!Mage::isInstalled()) {
 			Df_Core_Bootstrap::s()->init();
 		}
-		/** @var Mage_Catalog_Helper_Category_Flat $flatHelper */
-		static $flatHelper;
-		if (!isset($flatHelper)) {
-			$flatHelper = Mage::helper('catalog/category_flat');
-		}
-		/** @var bool $needEnableFlatHelper */
-		static $needEnableFlatHelper;
-		if (!isset($needEnableFlatHelper)) {
-			$needEnableFlatHelper =
-				df_magento_version('1.8.0.0', '<')
-				? $flatHelper->isEnabled()
-				: (
-						$flatHelper->isAvailable()
-					&&
-						!Mage::app()->getStore()->isAdmin()
-					&&
-						$flatHelper->isBuilt(true)
-				)
-			;
-		}
-		if ($needEnableFlatHelper && !$this->_getData('disable_flat')) {
-			$this->_init(Df_Catalog_Model_Resource_Category_Flat::mf());
-			$this->_useFlatResource = true;
-		} else {
-			$this->_init(Df_Catalog_Model_Resource_Category::mf());
-		}
+		$this->_useFlatResource = self::useFlatResource() && !$this->_getData('disable_flat');
 	}
 	const _CLASS = __CLASS__;
 	const P__DISPLAY_MODE = 'display_mode';
@@ -314,8 +367,22 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	const P__THUMBNAIL = 'thumbnail';
 	const P__URL_KEY = 'url_key';
 
-	/** @return Df_Catalog_Model_Resource_Category_Collection */
-	public static function c() {return self::s()->getCollection();}
+	/**
+	 * 2015-02-09
+	 * По умолчанию денормализация здесь не используется
+	 * ради совместимости с уже имеющимся программным кодом.
+	 * Если кому-то нужно — пусть включит для своей коллекции вручную.
+	 * @param bool $allowFlat [optional]
+	 * @return Df_Catalog_Model_Resource_Category_Collection|Df_Catalog_Model_Resource_Category_Flat_Collection
+	 */
+	public static function c($allowFlat = false) {
+		return
+			$allowFlat && self::useFlatResource()
+			? new Df_Catalog_Model_Resource_Category_Flat_Collection
+			: new Df_Catalog_Model_Resource_Category_Collection
+		;
+	}
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $data
@@ -402,4 +469,30 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	}
 	/** @return Df_Catalog_Model_Category */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
+
+	/**
+	 * Нельзя кэшировать результат этого метода,
+	 * потому что результат метода может меняться в зависимости от контекста:
+	 * самый яркий пример — зависимость от вызова @see rm_admin_begin()
+	 * (в административном режиме денормализация никогда не используется,
+	 * а после выхода из административного режима денормализация может использоваться снова).
+	 * @return bool
+	 */
+	private static function useFlatResource() {
+		/** @var Mage_Catalog_Helper_Category_Flat $flatHelper */
+		static $flatHelper;
+		if (!$flatHelper) {
+			$flatHelper = Mage::helper('catalog/category_flat');
+		}
+		/** @var bool $needUseOldHelperInterface */
+		static $needUseOldHelperInterface;
+		if (is_null($needUseOldHelperInterface)) {
+			$needUseOldHelperInterface = df_magento_version('1.8.0.0', '<');
+		}
+		return !df_is_admin() && (
+			$needUseOldHelperInterface
+			? $flatHelper->isEnabled()
+			: $flatHelper->isAvailable() && $flatHelper->isBuilt(true)
+		);
+	}
 }

@@ -85,12 +85,21 @@ class Df_Core_Model_State extends Df_Core_Model_Abstract {
 		return Df_Core_Controller_Varien_Action::s()->getRefererUrl();
 	}
 
-	/** @return Mage_Core_Model_Store */
-	public function getStoreProcessed() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Store $result */
+	/**
+	 * @param bool $needThrow [optional]
+	 * @return Df_Core_Model_StoreM|null
+	 * @throws Df_Core_Exception|Exception
+	 */
+	public function getStoreProcessed($needThrow = true) {
+		if (!isset($this->_storeProcessed)) {
+			/** @var Df_Core_Model_StoreM|null $result */
 			$result = null;
 			if (Mage::app()->isSingleStoreMode()) {
+				/**
+				 * 2015-08-10
+				 * Нельзя использовать здесь @see rm_store(),
+				 * потому что @see rm_store() сам использует @see getStoreProcessed(), и получится зависание.
+				 */
 				$result = Mage::app()->getStore(true);
 			}
 			else {
@@ -105,41 +114,54 @@ class Df_Core_Model_State extends Df_Core_Model_Abstract {
 				/** @var string $storeCode */
 				$storeCode = df_request('store-view');
 				if (is_null($storeCode)) {
-					$storeCode =
-						rm_preg_match(
-							'#\/store\-view\/([^\/]+)\/#u'
-							, Mage::app()->getRequest()->getRequestUri()
-							,$needThrow = false
-						)
-					;
-				}
-				df_assert(
-					$storeCode
-					, 'Ваша система содержит несколько витрин,'
-						. ' поэтому Вы должны указать системное имя обрабатываемой витрины'
-						. ' в веб-адресе, добавив к веб-адресу окончание'
-						. ' «/store-view/<системное имя витрины>/».'
-				);
-				df_assert_string_not_empty($storeCode);
-				try {
-					$result = Mage::app()->getStore($storeCode);
-				}
-				catch(Mage_Core_Model_Store_Exception $e) {
-					df_error(
-						'Витрина с системным именем «%s» отсутствует в Вашей системе.'
-						,$storeCode
+					$storeCode = rm_preg_match(
+						'#\/store\-view\/([^\/]+)\/#u', rm_ruri(), $needThrow = false
 					);
 				}
+				if (!$storeCode) {
+					if ($needThrow) {
+						df_error(
+							'Ваша система содержит несколько витрин,'
+							. ' поэтому Вы должны указать системное имя обрабатываемой витрины'
+							. ' в веб-адресе, добавив к веб-адресу окончание'
+							. ' «/store-view/<системное имя витрины>/».'
+						);
+					}
+				}
+				else {
+					df_assert_string_not_empty($storeCode);
+					try {
+						/**
+						 * 2015-08-10
+						 * Нельзя использовать здесь @see rm_store(),
+						 * потому что @see rm_store() сам использует @see getStoreProcessed(), и получится зависание.
+						 */
+						$result = Mage::app()->getStore($storeCode);
+					}
+					catch (Mage_Core_Model_Store_Exception $e) {
+						if ($needThrow) {
+							df_error(
+								'Витрина с системным именем «%s» отсутствует в Вашей системе.'
+								, $storeCode
+							);
+						}
+					}
+				}
 			}
-			df_assert($result instanceof Mage_Core_Model_Store);
-			if (!$result->getWebsiteId()) {
-				// Так бывает...
-				$result = df_model('core/store')->load($result->getId());
-				df_assert($result->getWebsiteId());
+			if (!$result) {
+				df_assert(!$needThrow);
 			}
-			$this->{__METHOD__} = $result;
+			else {
+				df_assert($result instanceof Df_Core_Model_StoreM);
+				if (!$result->getWebsiteId()) {
+					// Так бывает...
+					$result = df_model('core/store')->load($result->getId());
+					df_assert($result->getWebsiteId());
+				}
+			}
+			$this->_storeProcessed = rm_n_set($result);
 		}
-		return $this->{__METHOD__};
+		return rm_n_get($this->_storeProcessed);
 	}
 
 	/** @return bool */
