@@ -12,7 +12,7 @@ function rm_store($store = null) {
 	$result = $store;
 	if (is_null($result)) {
 		/** @var Df_Core_Model_StoreM $coreCurrentStore */
-		$coreCurrentStore = Mage::app()->getStore(null);
+		$coreCurrentStore = Mage::app()->getStore();
 		/**
 		 * 2015-08-10
 		 * Доработал алгоритм.
@@ -78,7 +78,7 @@ function rm_store($store = null) {
 		 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.1/app/code/core/Mage/Core/Model/App.php#L842
 		 * @see Mage_Core_Model_App::_currentStore
 		 */
-		$result = Mage::app()->throwStoreException();
+		Mage::app()->throwStoreException();
 	}
 	return $result;
 }
