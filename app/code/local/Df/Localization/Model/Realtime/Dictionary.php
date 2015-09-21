@@ -61,8 +61,10 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 					else {
 						// Вызов из шаблона.
 						$this->log('рисование шаблона');
-						$result = $this->handleTranslateForTemplate($text, $code);
-						if (!$result) {
+						if (rm_state()->getCurrentBlock()) {
+							$result = $this->handleTranslateForTemplate($text, $code);
+						}
+						if (is_null($result)) {
 							$result = $this->handleTranslateForController($text, $code);
 						}
 					}
@@ -93,12 +95,18 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 	/**
 	 * 2015-09-19
 	 * @used-by handleTranslateForController()
+	 * @used-by handleTranslateForTemplate()
 	 * @param string $expectedClass
 	 * @param object $object
 	 * @return bool
 	 */
 	private function _continueC($expectedClass, $object) {
-		return $expectedClass && '*' !== $expectedClass && !($object instanceof $expectedClass);
+		return
+			$expectedClass
+			&& '*' !== $expectedClass
+			&& @class_exists($expectedClass)
+			&& !($object instanceof $expectedClass)
+		;
 	}
 
 	/** @return Df_Localization_Model_Realtime_Dictionary_Layout|null */
@@ -241,7 +249,7 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 			 */
 			$this->getModuleNameFromCode($code)
 		;
-		if (!$currentModuleName && !is_null($currentBlock)) {
+		if (!$currentModuleName) {
 			$currentModuleName = $currentBlock->getModuleName();
 		}
 		if ($currentModuleName) {
@@ -250,7 +258,7 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 			if (!is_null($currentModule)) {
 				/** @var string $currentTemplate */
 				$currentTemplate = null;
-				if ($currentBlock && ($currentBlock instanceof Mage_Core_Block_Template)) {
+				if ($currentBlock instanceof Mage_Core_Block_Template) {
 					/** @var Mage_Core_Block_Template $currentBlockTemplated */
 					$currentBlockTemplated = $currentBlock;
 					$currentTemplate = $currentBlockTemplated->getTemplate();
@@ -258,13 +266,9 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 				foreach ($currentModule->getBlocks() as $block) {
 					/** @var Df_Localization_Model_Realtime_Dictionary_ModulePart_Block $block */
 					if (
-							!$block->matchTemplate($currentTemplate)
-						||
-							!$block->matchClass($currentBlock ? get_class($currentBlock) : '')
-						||
-							$this->_continue(
-								$block->getName(), $currentBlock ? $currentBlock->getNameInLayout() : ''
-							)
+						!$block->matchTemplate($currentTemplate)
+						|| $this->_continueC($block->getBlockClass(), $currentBlock)
+						|| $this->_continue($block->getName(), $currentBlock->getNameInLayout())
 					) {
 						continue;
 					}

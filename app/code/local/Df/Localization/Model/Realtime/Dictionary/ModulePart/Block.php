@@ -33,37 +33,6 @@ class Df_Localization_Model_Realtime_Dictionary_ModulePart_Block
 	}
 
 	/**
-	 * @param string $currentBlockClass
-	 * @return bool
-	 */
-	public function matchClass($currentBlockClass) {
-		/** @var string|null $expectedClass */
-		$expectedClass = $this->getBlockClass();
-		return
-				!$currentBlockClass
-			||
-				!$expectedClass
-			||
-				('*' === $expectedClass)
-			||
-				($expectedClass === $currentBlockClass)
-			||
-				(
-						@class_exists($expectedClass)
-					&&
-						@class_exists($currentBlockClass)
-					&&
-						/**
-						 * Обратите внимание, что @see is_subclass_of()
-						 * вернёт false, когда классы $expectedClass и $currentBlockClass совпадают,
-						 * однако для этого обработки случая у нас есть отдельное условие выше.
-						 */
-						is_subclass_of($currentBlockClass, $expectedClass)
-				)
-		;
-	}
-
-	/**
 	 * @param string $template
 	 * @return bool
 	 */
