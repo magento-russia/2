@@ -86,11 +86,31 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 	protected function getType() {return 'realtime';}
 
 	/**
-	 * @param string $a
-	 * @param string $b
+	 * 2015-09-21
+	 * Добавил поддержку выражений типа <controller action='sales_transactions_*'>
+	 * @param string $pattern
+	 * @param string $value
 	 * @return bool
 	 */
-	private function _continue($a, $b) {return $a && !in_array($a, array('*', $b));}
+	private function _continue($pattern, $value) {
+		/** @var bool $result */
+		$result = false;
+		$pattern = (string)$pattern;
+		if (!in_array($pattern, array('', '*', $value), $strict = true)) {
+			/** @var string $trimmed */
+			$trimmed = df_trim_right($pattern, '*');
+			/**
+			 * 2015-09-21
+			 * Добавил поддержку выражений типа <controller action='sales_transactions_*'>
+			 * 1) $trimmed === $pattern означает, что $pattern не заканчивается на *.
+			 * А учитывая, что $pattern !== $value, то _continue должна вернуть true.
+			 * 2) !rm_starts_with($value, $trimmed) означает, что $pattern заканчивается на *,
+			 * однако текст до * не совпадает с началом $value.
+			 */
+			$result = $trimmed === $pattern || !rm_starts_with($value, $trimmed);
+		}
+		return $result;
+	}
 
 	/**
 	 * 2015-09-19
