@@ -12,6 +12,8 @@ class Df_Core_LibLoader extends Df_Core_LibLoader_Abstract {
 			, $base . 'array'
 			, $base . 'reflection'
 			, $base . 'validation'
+			, $base . 'state'
+			, $base . 'store'
 			, $base . 'text'
 			, $base . 'xml'
 			, $base . 'serialize'
