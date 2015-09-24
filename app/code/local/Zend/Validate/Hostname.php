@@ -149,6 +149,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
 		,'careers'
 		,'center'
 		,'clothing'
+        // добававил club 2015-09-24
+        ,'club'
 		,'coffee'
 		,'company'
 		,'computer'
