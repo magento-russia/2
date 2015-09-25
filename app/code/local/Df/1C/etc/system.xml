@@ -50,7 +50,7 @@
 								«node/<системное имя узла обмена данными>/»,
 								<br/>например: «http://example.ru/df-1c/cml2/index/node/prices/»
 								<br/>или «http://example.ru/df-1c/cml2/index/store-view/defaut/node/orders/»,
-								<br/>при этом <системное имя узла обмена данными> Вы можете выбрать произовльно.]]>
+								<br/>при этом <системное имя узла обмена данными> Вы можете выбрать произвольно.]]>
 							</comment>
 							<frontend_model>df_admin/system_config_form_field_info_urls</frontend_model>
 							<rm_url_path_base>df-1c/cml2/index</rm_url_path_base>
