@@ -724,7 +724,7 @@
 "This product has not been configured.","Этот товар не настроен."
 "This profile state cannot be changed to ""%s"".","Состояние профиля не может быть изменено на «%s»."
 "This will create an offline refund. To create an online refund, open an invoice and create credit memo for it. Do you wish to proceed?","This will create an offline refund. To create an online refund, open an invoice and create credit memo for it. Do you wish to proceed?"
-"Tier Pricing","Дифференцированное ценнообразование"
+"Tier Pricing","Оптовые цены"
 "Title","Заголовок"
 "To","На"
 "To Name","На имя"
