@@ -23,7 +23,7 @@
 "Google Sitemap Section","Раздел Google Sitemap"
 "Handling Fee","Наценка"
 "Import","Импорт"
-"Include Virtual Products in Price Calculation","Учитывать стоимость заказанных услуг (не товаров) в расчёте стоимости доставки"
+"Include Virtual Products in Price Calculation","Учитывать ли стоимость заказанных нематериальных товаров и услуг в расчёте стоимости доставки?"
 "Info:","Информация:"
 "Invalid Table Rate code for type %s: %s","Неверный код тарифа для типа %s: %s"
 "Invalid Table Rate code type: %s","Неверный код тарифа: %s"
