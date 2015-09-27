@@ -1,7 +1,7 @@
 "-- Please select --","-- выберите значение --"
 "Allowed Currencies","Разрешённые к использованию валюты"
 "Base Currency","Учётная валюта"
-"Base currency is used for all online payment transactions. Scope is defined by the catalog price scope (""Catalog"" > ""Price"" > ""Catalog Price Scope"").","В этой валюте система ведёт учёт цен на товары.<br/>Вы можете ограничить область действия этого параметра конкретным магазином или витриной посредством параметра<br/>«<b>Каталог</b>» → «<b>Цена</b>» → «<b>Область действия цен</b>»."
+"Base currency is used for all online payment transactions. Scope is defined by the catalog price scope (""Catalog"" > ""Price"" > ""Catalog Price Scope"").","В этой валюте система ведёт учёт цен на товары.<br/>Вы можете ограничить область действия этого параметра конкретным магазином или витриной, переключившись на общую область действия настроек и затем установив требуемое значение параметра «<b>Каталог</b>» → «<b>Цена</b>» → «<b>Область действия цен</b>»."
 "Cannot retrieve rate from %s.","Не удается получить курс от %s."
 "Connection Timeout in Seconds","Сколько секунд ждать ответа от сервера?"
 "Continue &raquo;","Продолжить &raquo;"
