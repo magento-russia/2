@@ -32,7 +32,7 @@ class Df_Directory_Model_Setup_Processor_Region extends Df_Core_Model_Abstract {
 		df_param_string($localeCode, 1);
 		/** @var Zend_Db_Select $select */
 		$select =
-			rm_conn()->select()
+			rm_select()
 				->from(array('maintable' => $this->getTableCountryRegionName()))
 				->where('? = maintable.locale', $localeCode)
 				->where('? = maintable.region_id', $region->getId())

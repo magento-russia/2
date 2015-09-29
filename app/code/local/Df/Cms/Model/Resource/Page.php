@@ -7,7 +7,7 @@ class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Mysql4_Page {
 	 */
 	public function findOrphanIds() {
 		return rm_conn()->fetchCol(
-			rm_conn()->select()
+			rm_select()
 				->from(array('p' => rm_table('cms_page')), 'page_id')
 				->joinLeft(
 					array('ps' => rm_table('cms_page_store'))

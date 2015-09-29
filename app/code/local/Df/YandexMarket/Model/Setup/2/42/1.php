@@ -41,7 +41,7 @@ class Df_YandexMarket_Model_Setup_2_42_1 extends Df_Core_Model_Setup {
 				false
 			===
 				rm_conn()->fetchOne(
-					rm_conn()->select()
+					rm_select()
 						->from(array('ea' => rm_table('eav/attribute')), 'ea.attribute_id')
 						->joinInner(
 							array('cea' => rm_table('catalog/eav_attribute'))

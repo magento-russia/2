@@ -7,8 +7,7 @@ class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Ab
 		/** @var string $column */
 		$column = $this->column()->getName();
 		/** @var Varien_Db_Select $select */
-		$select = rm_conn()->select();
-		$select->from($this->tableName(), array($primaryKey, $column));
+		$select = rm_select()->from($this->tableName(), array($primaryKey, $column));
 		if ($this->column()->where()) {
 			$select->where($this->column()->where());
 		}

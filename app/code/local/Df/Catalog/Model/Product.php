@@ -389,7 +389,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			 */
 			/** @var Zend_Db_Select $select */
 			$select =
-				rm_conn()->select()
+				rm_select()
 					->from(array('maintable' => rm_table('catalog/product_index_price')))
 					->where('(? = maintable.entity_id)', $this->getId())
 					->where('(? = maintable.website_id)', $this->getStore()->getWebsiteId())

@@ -13,8 +13,7 @@ function rm_conn() {
  */
 function rm_fetch_all($table, $cCompare = null, $values = null) {
 	/** @var Varien_Db_Select $select */
-	$select = rm_conn()->select();
-	$select->from(rm_table($table));
+	$select = rm_select()->from(rm_table($table));
 	if (!is_null($values)) {
 		$select->where($cCompare . ' ' . rm_sql_predicate_simple($values), $values);
 	}
@@ -34,8 +33,7 @@ function rm_fetch_all($table, $cCompare = null, $values = null) {
  */
 function rm_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
 	/** @var Varien_Db_Select $select */
-	$select = rm_conn()->select();
-	$select->from(rm_table($table), $cSelect);
+	$select = rm_select()->from(rm_table($table), $cSelect);
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
@@ -80,18 +78,6 @@ function rm_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
 }
 
 /**
- * 2015-04-13
- * @used-by rm_fetch_col()
- * @used-by rm_table_delete()
- * @param int|string|int[]|string[] $values
- * @param bool $not [optional]
- * @return string
- */
-function rm_sql_predicate_simple($values, $not = false) {
-	return is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?');
-}
-
-/**
  * 2015-08-23
  * Обратите внимание, что метод
  * @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName()
@@ -121,6 +107,24 @@ function rm_primary_key($table) {
  */
 function rm_quote_into($text, $value, $type = null, $count = null) {
 	return rm_conn()->quoteInto($text, $value, $type, $count);
+}
+
+/**
+ * 2015-09-29
+ * @return Varien_Db_Select
+ */
+function rm_select() {return rm_conn()->select();}
+
+/**
+ * 2015-04-13
+ * @used-by rm_fetch_col()
+ * @used-by rm_table_delete()
+ * @param int|string|int[]|string[] $values
+ * @param bool $not [optional]
+ * @return string
+ */
+function rm_sql_predicate_simple($values, $not = false) {
+	return is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?');
 }
 
 /**

@@ -27,8 +27,7 @@ class Df_Localization_Model_Onetime_DemoImagesImporter_Image_Collection
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				rm_conn()->fetchCol(
-					rm_conn()->select()
-						->from(rm_table('catalog/product_attribute_media_gallery'), 'value')
+					rm_select()->from(rm_table('catalog/product_attribute_media_gallery'), 'value')
 				)
 			;
 		}

@@ -52,11 +52,7 @@ class Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData {
 		 * то то же происходило и с товарными свойствами сторонней оформительской темы.
 		 */
 		/** @var int[] $attributeIds */
-		$attributeIds =
-			rm_conn()->fetchCol(
-				rm_conn()->select()->from(rm_table('eav/attribute'), 'attribute_id')
-			)
-		;
+		$attributeIds = rm_conn()->fetchCol(rm_select()->from(rm_table('eav/attribute'), 'attribute_id'));
 		foreach ($this->getTablesToProcess() as $table) {
 			/** @var string $table */
 			$this->processTable($table, $attributeIds);

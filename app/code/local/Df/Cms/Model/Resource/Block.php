@@ -14,7 +14,7 @@ class Df_Cms_Model_Resource_Block extends Mage_Cms_Model_Mysql4_Block {
 	 */
 	public function findOrphanIds() {
 		return rm_conn()->fetchCol(
-			rm_conn()->select()
+			rm_select()
 				->from(array('b' => rm_table('cms_block')), 'block_id')
 				->joinLeft(
 					array('bs' => rm_table('cms_block_store'))
