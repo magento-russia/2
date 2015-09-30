@@ -135,7 +135,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         'ug', 'uk', 'um', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'ws',
         'ye', 'yt', 'yu', 'za', 'zm', 'zw'
 		// Российская сборка Magento
-		,'рф','онлайн','сайт','укр'
+		,'рф','онлайн','сайт','укр', 'бел'
 		,'academy'
 		,'berlin'
 		,'bike'
