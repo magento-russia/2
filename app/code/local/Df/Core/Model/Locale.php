@@ -117,7 +117,6 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 		return array(
 			array('value' => 'ru_RU', 'label' => 'Русский')
 			, array('value' => 'en_US', 'label' => 'English')
-			, array('value' => 'uk_UA', 'label' => 'Українська')
 		);
 	}
 
