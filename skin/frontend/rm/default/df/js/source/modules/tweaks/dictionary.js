@@ -76,6 +76,12 @@
 	 * http://magento-forum.ru/forum/340/
 	 */
 	,'df-theme-templatemonster-49198': {'package': 'default', 'skin': 'theme611'}
+	/**
+	 * TemplateMonster #53174 («Kids Fashion»)
+	 * http://www.templatemonster.com/magento-themes/53174.html
+	 * http://magento-forum.ru/forum/372/
+	 */
+	,'df-theme-templatemonster-53174': {'package': 'default', 'skin': 'theme690'}
 	,'df-theme-tt-theme069': {'package': 'tt', 'skin': 'theme069'}
 	/**
 	 * Ves Super Store (ThemeForest 8002349)

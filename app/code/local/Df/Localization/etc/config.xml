@@ -278,6 +278,17 @@
 					<official_site>http://store.templatemonster.com/ru/magento-themes-type/43373.html?aff=Dmitry_Fedyuk</official_site>
 				</url>
 			</templatemonster-43373>
+			<templatemonster-53174>
+				<title>TemplateMonster #53174 (Kids Fashion)</title>
+				<package>default</package>
+				<theme>theme690</theme>
+				<dictionary>TemplateMonster/53174.xml</dictionary>
+				<url>
+					<demo>http://templatemonster-53174.magento-demo.ru/</demo>
+					<forum>http://magento-forum.ru/forum/372/</forum>
+					<official_site>http://store.templatemonster.com/ru/magento-themes-type/53174.html?aff=Dmitry_Fedyuk</official_site>
+				</url>
+			</templatemonster-53174>
 			<ves-super-store>
 				<title>Ves Super Store (ThemeForest 8002349)</title>
 				<package>default</package>
