@@ -97,18 +97,33 @@ class Df_PageCache_Model_Container_Catalognavigation extends Df_PageCache_Model_
 	protected function _renderBlock()
 	{
 		$layout = $this->_getLayout('default');
+		/** @var Mage_Core_Block_Abstract|Mage_Core_Block_Template|null $block */
 		$block = $layout->getBlock('catalog.topnav');
-		$block->setSkipRenderTag(true);
-
-		$categoryId = $this->_getCategoryId();
-		if (!Mage::registry('current_category') && $categoryId) {
-			$category = Mage::getModel('catalog/category')->load($categoryId);
-			Mage::register('current_category', $category);
-			Mage::register('current_entity_key', $category->getPath());
+		/**
+		 * 2015-10-15
+		 * Странно, что ранее мы никак не проверяли наличие блока перед его использованием.
+		 * Этот блок хоть и стандартен, но может быть удалён сторонней оформительской темой:
+		 * http://magento-forum.ru/topic/5252/
+		 * Вообще, этот код у нас свеж: он из новой версии модуля PageCache.
+		 */
+		/** @var string $result */
+		if (!$block || !($block instanceof Mage_Core_Block_Template) || !$block->getTemplate()) {
+			$result = '';
 		}
+		else {
+			$block->setSkipRenderTag(true);
 
-		Mage::dispatchEvent('render_block', array('block' => $block, 'placeholder' => $this->_placeholder));
+			$categoryId = $this->_getCategoryId();
+			if (!Mage::registry('current_category') && $categoryId) {
+				$category = Mage::getModel('catalog/category')->load($categoryId);
+				Mage::register('current_category', $category);
+				Mage::register('current_entity_key', $category->getPath());
+			}
 
-		return $block->toHtml();
+			Mage::dispatchEvent('render_block', array('block' => $block, 'placeholder' => $this->_placeholder));
+
+			$result = $block->toHtml();
+		}
+		return $result;
 	}
 }

@@ -1,3 +1,363 @@
 <?xml version='1.0'?>
 <dictionary>
+	<config>
+		<entry>
+			<path>design/header/logo_alt</path>
+			<original_value>Infant clothing store</original_value>
+			<value>Российская сборка Magento</value>
+		</entry>
+	</config>
+	<rule>
+		<conditions>
+			<type>block page</type>
+		</conditions>
+		<actions>
+			<title>
+				<from>Template settings</from>
+				<to>Настройки оформительской темы</to>
+			</title>
+			<term>
+				<from><![CDATA[>Custom tab<]]></from>
+				<to><![CDATA[>Пример товарной вкладки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Static CMS block displayed as additional tab.<]]></from>
+				<to><![CDATA[>Здесь показан самодельный блок с идентификатором «custom_tab».<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>You can insert any content here (text or HTML), e.g. info about returns and refunds.<]]></from>
+				<to><![CDATA[>Найти его можно в административном разделе «Витрина» → «Самодельные блоки»<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Address<]]></from>
+				<to><![CDATA[>Наш адрес<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Address 1:<]]></from>
+				<to><![CDATA[>Москва<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>The Company Name Inc. 9870 St Vincent Place,Glasgow, DC 45 <]]></from>
+				<to><![CDATA[>127299, г. Москва, ул. Клары Цеткин, д.2/3, стр.1<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Telephone:<]]></from>
+				<to><![CDATA[>Телефон:<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>+1 (234) 567-8901<]]></from>
+				<to><![CDATA[>+7 (495) 745-51-68<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Address 2:<]]></from>
+				<to><![CDATA[>Санкт-Петербург<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>The Company Name Inc. 9870 St Vincent Place,Glasgow, DC 45 <]]></from>
+				<to><![CDATA[>ул. Выборгское шоссе, д.5, корп. 1<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Make your kid one of a kind<]]></from>
+				<to><![CDATA[>Российская сборка Magento<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Donec sit amet eros дorem ipsum dolor sit amet, consectetuer adipiscing elit auris fermentum<]]></from>
+				<to><![CDATA[>Гелиоцентрическое расстояние выслеживает Каллисто.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Spring <]]></from>
+				<to><![CDATA[>Весна <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sales<]]></from>
+				<to><![CDATA[>Продажи<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet conse ctetur adipisi.<]]></from>
+				<to><![CDATA[>Движение существенно дает нулевой меридиан.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shop now!<]]></from>
+				<to><![CDATA[>Купить<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Call Us: <]]></from>
+				<to><![CDATA[>Звоните:<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet conse ctetur adipisi.<]]></from>
+				<to><![CDATA[>Кульминация оценивает вращательный Тукан.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Call Us Now!<]]></from>
+				<to><![CDATA[>Звоните<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Free <]]></from>
+				<to><![CDATA[>Бесплатно <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Shipping<]]></from>
+				<to><![CDATA[>Доставка<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet conse ctetur adipisi.<]]></from>
+				<to><![CDATA[>Огpомная пылевая кома параллельна.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>BABY 0-1 YEAR<]]></from>
+				<to><![CDATA[>ДЕТИ 0-1 ЛЕТ<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.<]]></from>
+				<to><![CDATA[>Популяционный индекс ищет вращательный натуральный логарифм. <]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sint occaecat cupidatat non proident, sunt in culpa qui.<]]></from>
+				<to><![CDATA[> Большой круг небесной сферы выбирает экваториальный реликтовый ледник.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>baby neutral<]]></from>
+				<to><![CDATA[>нулевой меридиан<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sint occaecat cupidatat non proident.<]]></from>
+				<to><![CDATA[>В отличие от давно известных астрономам планет земной группы, приливное трение иллюстрирует эллиптический секстант.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>BABY pajamas<]]></from>
+				<to><![CDATA[>Угловая скорость вращения<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.<]]></from>
+				<to><![CDATA[>Когда речь идет о галактиках, кульминация выслеживает вращательный Юпитер.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Excepteur sint occaecat<]]></from>
+				<to><![CDATA[>Отвесная линия гасит центральный экватор<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.<]]></from>
+				<to><![CDATA[>Очевидно, что движение жизненно оценивает годовой параллакс, а время ожидания ответа составило бы 80 миллиардов лет.<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Lorem ipsum dolor<]]></from>
+				<to><![CDATA[>Млечный Путь<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sit amet conse ctetur<]]></from>
+				<to><![CDATA[>Треть ковша Большой Медведицы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Adipisicing elitb<]]></from>
+				<to><![CDATA[>Вращательный Млечный Путь<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Sed do eiusmod tempor<]]></from>
+				<to><![CDATA[>Радиант выбирает непреложный узел<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Incididunt ut la<]]></from>
+				<to><![CDATA[>Полнолуние прекрасно вызывает случайный афелий<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>1. Home pages configurationn<]]></from>
+				<to><![CDATA[>1. Главная страница<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Page Name<]]></from>
+				<to><![CDATA[>Название<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Page HTML (Content tab)<]]></from>
+				<to><![CDATA[>Содержимое (HTML)<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Page XML (Design tab)<]]></from>
+				<to><![CDATA[>Макетные правила (XML)<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Layout<]]></from>
+				<to><![CDATA[>Кол-во колонок в макете<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>1 columns<]]></from>
+				<to><![CDATA[>1<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Home Page<]]></from>
+				<to><![CDATA[>Главная страница<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>About  Us<]]></from>
+				<to><![CDATA[>О компании<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>NA<]]></from>
+				<to><![CDATA[>---<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Customer Service<]]></from>
+				<to><![CDATA[>Вопросы и ответы<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Privacy Policy<]]></from>
+				<to><![CDATA[>Правила покупки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>2. Static blocks configuration<]]></from>
+				<to><![CDATA[>2. Самодельные блоки<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Block Name<]]></from>
+				<to><![CDATA[>Название<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Block Title<]]></from>
+				<to><![CDATA[>Заголовок на витрине<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Identifier<]]></from>
+				<to><![CDATA[>Идентификатор<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Content<]]></from>
+				<to><![CDATA[>Содержимое<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Footer List<]]></from>
+				<to><![CDATA[>Ссылки в подвале<]]></to>
+			</term>
+			<term>
+				<from><![CDATA[>Template Settings<]]></from>
+				<to><![CDATA[>Настройки оформительской темы<]]></to>
+			</term>
+		</actions>
+	</rule>
+	<db>
+		<table name='aw_blog'>
+			<column name='title'>
+				<term><from>Hello World</from><to>Превед, медвед!</to></term>
+				<term><from>Praesent vestibulum molestie</from><to>Орбита как терминатор</to></term>
+				<term><from>Consectetuer adipiscing elit</from><to>Эксцентриситет неустойчив</to></term>
+				<term><from>Lorem ipsum dolor sit amet</from><to>Приливное трение</to></term>
+			</column>
+			<column name='post_content'>
+				<term>
+					<from>%Welcome to Magento Blog%</from>
+					<to>Земная группа формировалась ближе к Солнцу, однако pадиотелескоп Максвелла дает нулевой меридиан. Конечно, нельзя не принять во внимание тот факт, что экскадрилья вероятна.</to>
+				</term>
+				<term>
+					<from>%Aenean nonummy hendrerit mauris%</from>
+					<to><![CDATA[<img src="{{media url="wysiwyg/blog_img/blog-img-1.jpg"}}" alt="" />
+					<p>Нулевой меридиан выбирает экватор. Надир отражает случайный азимут, однако большинство спутников движутся вокруг своих планет в ту же сторону, в какую вращаются планеты. В отличие от давно известных астрономам планет земной группы, зенитное часовое число вызывает натуральный логарифм. Юпитер слабопроницаем. Полнолуние вызывает космический натуральный логарифм, хотя галактику в созвездии Дракона можно назвать карликовой. Возмущающий фактор представляет собой непреложный перигей.</p>
+
+					<p>Даже если учесть разреженный газ, заполняющий пространство между звездами, то все равно приливное трение многопланово выбирает Юпитер, при этом плотность Вселенной в 3 * 10 в 18-й степени раз меньше, с учетом некоторой неизвестной добавки скрытой массы. Пpотопланетное облако точно ищет вращательный реликтовый ледник, тем не менее, уже 4,5 млрд лет расстояние нашей планеты от Солнца практически не меняется. Нулевой меридиан жизненно выслеживает экваториальный узел. Скоpость кометы в пеpигелии притягивает лимб. Магнитное поле перечеркивает далекий афелий . Астероид выбирает случайный годовой параллакс.</p>
+
+					<p>Расстояния планет от Солнца возрастают приблизительно в геометрической прогрессии (правило Тициуса — Боде): г = 0,4 + 0,3 · 2n (а.е.), где параллакс разрушаем. Соединение дает космический лимб. Атомное время мгновенно.</p>]]></to>
+				</term>
+				<term>
+					<from>%Lorem ipsum dolor sit amet, consectetuer adipiscing elit%</from>
+					<to><![CDATA[<img src="{{media url="wysiwyg/blog_img/blog-img-2.jpg"}}" alt="" />
+					<p>Исполинская звездная спираль с поперечником в 50 кпк, и это следует подчеркнуть, недоступно притягивает экваториальный дип-скай объект, и в этом вопросе достигнута такая точность расчетов, что, начиная с того дня, как мы видим, указанного Эннием и записанного в "Больших анналах", было вычислено время предшествовавших затмений солнца, начиная с того, которое в квинктильские ноны произошло в царствование Ромула. Зенитное часовое число, в первом приближении, оценивает непреложный экватор. Исполинская звездная спираль с поперечником в 50 кпк, а там действительно могли быть видны звезды, о чем свидетельствует Фукидид жизненно выбирает терминатор.</p>
+
+					<p>Расстояния планет от Солнца возрастают приблизительно в геометрической прогрессии (правило Тициуса — Боде): г = 0,4 + 0,3 · 2n (а.е.), где полнолуние традиционно отражает астероидный тропический год. Газопылевое облако на следующий год, когда было лунное затмение и сгорел древний храм Афины в Афинах (при эфоре Питии и афинском архонте Каллии), ничтожно вращает эллиптический нулевой меридиан. Лисичка прекрасно вращает эллиптический перигей. Весеннее равноденствие, в первом приближении, иллюстрирует экваториальный Каллисто.</p>
+
+					<p>Даже если учесть разреженный газ, заполняющий пространство между звездами, то все равно скоpость кометы в пеpигелии гасит керн. Зенитное часовое число, это удалось установить по характеру спектра, гасит Юпитер. Эклиптика, в первом приближении, недоступно выслеживает часовой угол (датировка приведена по Петавиусу, Цеху, Хайсу). Движение прекрасно гасит апогей. Южный Треугольник традиционно гасит близкий экватор.</p>]]></to>
+				</term>
+				<term>
+					<from>%Lorem ipsum dolor sit amet conse ctetur adipisicing elit%</from>
+					<to><![CDATA[<img src="{{media url="wysiwyg/blog_img/blog-img-3.jpg"}}" alt="" />
+					<p>Газопылевое облако ненаблюдаемо. Приливное трение, оценивая блеск освещенного металического шарика, перечеркивает космический терминатор. Южный Треугольник ничтожно ищет нулевой меридиан, таким образом, часовой пробег каждой точки поверхности на экваторе равен 1666км. Гелиоцентрическое расстояние, следуя пионерской работе Эдвина Хаббла, притягивает межпланетный метеорный дождь – у таких объектов рукава столь фрагментарны и обрывочны, что их уже нельзя назвать спиральными. Когда речь идет о галактиках, лимб меняет близкий параметр, Плутон не входит в эту классификацию.</p>
+
+					<p>Азимут представляет собой первоначальный тропический год. Бесспорно, эфемерида однородно решает астероидный натуральный логарифм. Популяционный индекс разрушаем. Полнолуние на следующий год, когда было лунное затмение и сгорел древний храм Афины в Афинах (при эфоре Питии и афинском архонте Каллии), перечеркивает эллиптический параллакс. Хотя хpонологи не увеpены, им кажется, что перигелий представляет собой натуральный логарифм.</p>
+
+					<p>По космогонической гипотезе Джеймса Джинса, параметр слабопроницаем. Перигелий пространственно вызывает pадиотелескоп Максвелла. Млечный Путь, сублимиpуя с повеpхности ядpа кометы, дает центральный зенит. Восход , по определению, гасит вращательный аргумент перигелия, хотя для имеющих глаза-телескопы туманность Андромеды показалась бы на небе величиной с треть ковша Большой Медведицы. Декретное время многопланово выбирает первоначальный керн.</p>]]></to>
+				</term>
+			</column>
+			<column name='user'>
+				<term><from>Joe Blogs</from><to>Иван Петров</to></term>
+				<term><from>Fred Morgan</from><to>Пётр Иванов</to></term>
+				<term><from>Admin</from><to>Пётр Петров</to></term>
+			</column>
+			<column name='update_user'>
+				<term><from>Joe Blogs</from><to>Иван Петров</to></term>
+				<term><from>Fred Morgan</from><to>Пётр Иванов</to></term>
+			</column>
+			<column name='short_content'>
+				<term>
+					<from>%Aenean nonummy hendrerit mauris.%</from>
+					<to><![CDATA[<img src="{{media url="wysiwyg/blog_img/blog-img-1.jpg"}}" alt="" />
+					Нулевой меридиан выбирает экватор. Надир отражает случайный азимут, однако большинство спутников движутся вокруг своих планет в ту же сторону, в какую вращаются планеты. В отличие от давно известных астрономам планет земной группы, зенитное часовое число вызывает натуральный логарифм. Юпитер слабопроницаем. Полнолуние вызывает космический натуральный логарифм, хотя галактику в созвездии Дракона можно назвать карликовой. Возмущающий фактор представляет собой непреложный перигей.]]></to>
+				</term>
+				<term>
+					<from>%Lorem ipsum dolor sit amet, consectetuer adipiscing elit%</from>
+					<to><![CDATA[<img src="{{media url="wysiwyg/blog_img/blog-img-2.jpg"}}" alt="" />
+										Исполинская звездная спираль с поперечником в 50 кпк, и это следует подчеркнуть, недоступно притягивает экваториальный дип-скай объект, и в этом вопросе достигнута такая точность расчетов, что, начиная с того дня, как мы видим, указанного Эннием и записанного в "Больших анналах", было вычислено время предшествовавших затмений солнца, начиная с того, которое в квинктильские ноны произошло в царствование Ромула. Зенитное часовое число, в первом приближении, оценивает непреложный экватор. Исполинская звездная спираль с поперечником в 50 кпк, а там действительно могли быть видны звезды, о чем свидетельствует Фукидид жизненно выбирает терминатор.]]></to>
+				</term>
+				<term>
+					<from>%Lorem ipsum dolor sit amet conse ctetur adipisicing elit%</from>
+					<to><![CDATA[<img src="{{media url="wysiwyg/blog_img/blog-img-3.jpg"}}" alt="" />
+										Газопылевое облако ненаблюдаемо. Приливное трение, оценивая блеск освещенного металического шарика, перечеркивает космический терминатор. Южный Треугольник ничтожно ищет нулевой меридиан, таким образом, часовой пробег каждой точки поверхности на экваторе равен 1666км. Гелиоцентрическое расстояние, следуя пионерской работе Эдвина Хаббла, притягивает межпланетный метеорный дождь – у таких объектов рукава столь фрагментарны и обрывочны, что их уже нельзя назвать спиральными. Когда речь идет о галактиках, лимб меняет близкий параметр, Плутон не входит в эту классификацию.]]></to>
+				</term>
+			</column>
+			<column name='meta_keywords'>
+				<term><from>Keywords</from><to>Ключевые слова</to></term>
+			</column>
+			<column name='meta_description'>
+				<term><from>Description</from><to>Описание</to></term>
+			</column>
+		</table>
+		<table name='aw_blog_cat'>
+			<column name='title'>
+				<term><from>News</from><to>Новости</to></term>
+			</column>
+		</table>
+	</db>
+	<rule>
+		<conditions><type>category</type></conditions>
+		<actions>
+			<term><from>Root Catalog</from><to>Корневой раздел</to></term>
+			<term><from>Toddler Boy</from><to>Верхняя одежда</to></term>
+			<term><from>Cum sociis natoque pe</from><to>Жилеты</to></term>
+			<term><from>Natoque penatibus</from><to>Комбинезоны зима</to></term>
+			<term><from>Vestibulum molestie</from><to>Комбинезоны осень</to></term>
+			<term><from>Aenean nonummy hendr</from><to>Костюмы осень</to></term>
+			<term><from>Lorem ipsum dolor </from><to>Куртки-ветровки</to></term>
+			<term><from>Tops</from><to>Вязаный трикотаж</to></term>
+			<term><from>Cipit varius mium sociis</from><to>Жилеты, жакеты</to></term>
+			<term><from>Nascetur ridiculus</from><to>Костюмы, комплекты</to></term>
+			<term><from>Dis parturient</from><to>Кофты, свитера</to></term>
+			<term><from>Fusce suscipit varius mi</from><to>Боди, песочники</to></term>
+			<term><from>Adipiscing elit pPraesent</from><to>Песочники</to></term>
+			<term><from>Infant Boy</from><to>Боди тонкий трикотаж</to></term>
+			<term><from>Montes nascetur ridiculus</from><to>Боди-распашонка</to></term>
+			<term><from>Sit amet consectetuer</from><to>Боди тёплый трикотаж</to></term>
+			<term><from>Default Category</from><to>Боди-платья</to></term>
+			<term><from>Baby Girl</from><to>Боди короткий рукав</to></term>
+			<term><from>Et magnis dis parturient</from><to>Боди длинный рукав</to></term>
+			<term><from>Phasellus porta fusce</from><to>Брюки, штанишки, шорты</to></term>
+			<term><from>Vauris phasellus porta</from><to>Джинсы, брюки</to></term>
+			<term><from>T-Shirts - Long Sleeve</from><to>Брючки тонкий трикотаж</to></term>
+			<term><from>Nonummy hendrerit</from><to>Брючки трикотажные</to></term>
+			<term><from>Toddler Girl</from><to>Брючки тёплый трикотаж</to></term>
+			<term><from>Cool Baby</from><to>Брючки велюровые</to></term>
+			<term><from>Fusce feugiat malesua</from><to>Брючки махровые</to></term>
+			<term><from>Aenean nonummy</from><to>Шорты, бриджи</to></term>
+			<term><from>Hendrerit mauris</from><to>Комбинезоны</to></term>
+			<term><from>Trousers</from><to>Комбинезоны велюровые</to></term>
+			<term><from>Donec sit amet eros</from><to>Комбинезоны махровые флисовые</to></term>
+			<term><from>Et magnis dis parturient</from><to>Комбинезоны тёплые на подкладе</to></term>
+			<term><from>Aliquam erat volutpat</from><to>Комбинезоны тонкий трикотаж</to></term>
+			<term><from>Magna donec accum</from><to>Комбинезоны трикотажные</to></term>
+			<term><from>Toddler Boy</from><to>Комбинезоны утеплёный трикотаж</to></term>
+			<term><from>Aenean auctor wisi et urna</from><to>Комплекты</to></term>
+			<term><from>Baby Boy</from><to>Костюмы</to></term>
+			<term><from>Fusce feugiat malesua</from><to>Для девочек</to></term>
+			<term><from>Tops</from><to>Для мальчиков</to></term>
+			<term><from>Baby Girl</from><to>Водолазки</to></term>
+			<term><from>Aenean nonummy hendr</from><to>Кофточки, футболки</to></term>
+			<term><from>Sed laoreet aliquam leo</from><to>Крестильные наборы</to></term>
+		</actions>
+	</rule>
 </dictionary>
