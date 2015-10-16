@@ -313,6 +313,15 @@
 				<term><from>News</from><to>Новости</to></term>
 			</column>
 		</table>
+		<table name='admin_menutop'>
+			<column name='label'>
+				<term><from>New!</from><to>Новинка!</to></term>
+				<term><from>Sale!</from><to>Распродажа!</to></term>
+				<!-- Иначе эти метки не помещаются в той же строке, что и текст пункта меню -->
+				<term><from>Hot!</from><to>-10%</to></term>
+				<term><from>Sale</from><to>-5%</to></term>
+			</column>
+		</table>
 	</db>
 	<rule>
 		<conditions><type>category</type></conditions>
@@ -333,7 +342,7 @@
 			<term><from>Infant Boy</from><to>Боди тонкий трикотаж</to></term>
 			<term><from>Montes nascetur ridiculus</from><to>Боди-распашонка</to></term>
 			<term><from>Sit amet consectetuer</from><to>Боди тёплый трикотаж</to></term>
-			<term><from>Default Category</from><to>Боди-платья</to></term>
+			<term><from>Default Category</from><to>Корневой раздел</to></term>
 			<term><from>Baby Girl</from><to>Боди короткий рукав</to></term>
 			<term><from>Et magnis dis parturient</from><to>Боди длинный рукав</to></term>
 			<term><from>Phasellus porta fusce</from><to>Брюки, штанишки, шорты</to></term>
@@ -358,6 +367,7 @@
 			<term><from>Baby Girl</from><to>Водолазки</to></term>
 			<term><from>Aenean nonummy hendr</from><to>Кофточки, футболки</to></term>
 			<term><from>Sed laoreet aliquam leo</from><to>Крестильные наборы</to></term>
+			<term><from>Online Only</from><to>Нарядная одежда</to></term>
 		</actions>
 	</rule>
 </dictionary>
