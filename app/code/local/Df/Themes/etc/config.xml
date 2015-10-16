@@ -206,6 +206,16 @@
 				<AddThis_SmartLayers>
 					<files><rm>AddThis/SmartLayers.csv</rm></files>
 				</AddThis_SmartLayers>
+				<!--
+				 	2015-10-16
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Cmsmart_AjaxCart>
+					<files><rm>Cmsmart/AjaxCart.csv</rm></files>
+				</Cmsmart_AjaxCart>
 				<EM_LayeredNavigation>
 					<files><default>EM/LayeredNavigation.csv</default></files>
 				</EM_LayeredNavigation>
@@ -591,6 +601,16 @@
 				<AddThis_SmartLayers>
 					<files><rm>AddThis/SmartLayers.csv</rm></files>
 				</AddThis_SmartLayers>
+				<!--
+				 	2015-10-16
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Cmsmart_AjaxCart>
+					<files><rm>Cmsmart/AjaxCart.csv</rm></files>
+				</Cmsmart_AjaxCart>
 				<EM_Ajaxcart>
 					<files>
 						<catalog>Mage_Catalog.csv</catalog>

@@ -49,6 +49,11 @@ class Df_Localization_Model_Realtime_Dictionary_ModulePart_Block
 						 // template='#tierprices\.phtml$#'
 						$this->isTemplateEnd() && rm_ends_with($template, $this->getTemplateEnd())
 					||
+						// 2015-10-16
+						// Поддержка синтаксиса template='*ajaxcart*'
+						$this->isTemplateWildcard()
+						&& rm_contains($template, $this->getTemplateWildcardBody())
+					||
 						$this->isTemplateRegex() && rm_preg_test($this->getTemplate(), $template)
 					||
 						($this->getTemplate() === $template)
@@ -70,6 +75,18 @@ class Df_Localization_Model_Realtime_Dictionary_ModulePart_Block
 	private function getTemplateEnd() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_trim_right($this->getTemplate(), '$');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-10-16
+	 * Поддержка синтаксиса template='*ajaxcart*'
+	 * @return string
+	 */
+	private function getTemplateWildcardBody() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trim($this->getTemplate(), '*');
 		}
 		return $this->{__METHOD__};
 	}
@@ -101,6 +118,21 @@ class Df_Localization_Model_Realtime_Dictionary_ModulePart_Block
 	private function isTemplateRegex() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_text()->isRegex($this->getTemplate());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-10-16
+	 * Поддержка синтаксиса template='*ajaxcart*'
+	 * @return bool
+	 */
+	private function isTemplateWildcard() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				rm_starts_with($this->getTemplate(), '*')
+				&& rm_ends_with($this->getTemplate(), '*')
+			;
 		}
 		return $this->{__METHOD__};
 	}

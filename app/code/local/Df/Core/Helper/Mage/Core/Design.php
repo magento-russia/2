@@ -22,10 +22,24 @@ class Df_Core_Helper_Mage_Core_Design extends Mage_Core_Helper_Abstract {
 		 * $theme = rm_design_package()->getTheme('default');
 		 * Передавая в метод getTheme() параметр «default», мы извлекаем значение опции
 		 * «Нестандартная папка темы».
+		 *
+		 * 2015-10-16
+		 * Всё-таки, и предыдущий алгоритм не совсем верен.
+		 * Заметил для темы TemplateMonster Kids Fashion (53174),
+		 * что rm_design_package()->getTheme('default') возвращает null,
+		 * rm_design_package()->getTheme('frontend') возвращает «default»,
+		 * в то время как rm_design_package()->getTheme('template')
+		 * возвращает правильное значение «theme690».
 		 */
 		/** @var string $result */
 		$result = rm_design_package()->getTheme('default');
-		return $result ? $result : rm_design_package()->getTheme('frontend');
+		if (!$result) {
+			$result = rm_design_package()->getTheme('frontend');
+		}
+		if ('default' === $result) {
+			$result = rm_design_package()->getTheme('template');
+		}
+		return $result;
 	}
 
 	/** @return Df_Core_Helper_Mage_Core_Design */

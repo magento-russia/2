@@ -108,6 +108,14 @@
 				-->
 				<theme464>TemplateMonster/43442.xml</theme464>
 				<!--
+					2015-10-16
+				 	TemplateMonster #53174
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+				 	http://magento-forum.ru/forum/372/
+				-->
+				<theme690>TemplateMonster/53174.xml</theme690>
+				<!--
 				 	CatTheme se105
 				 	http://demo.cattheme.com/se105/
 					http://magento-forum.ru/forum/292/

@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<dictionary>
+	<module name='Mage_Checkout'>
+		<block class='Mage_Checkout_Block_Cart_Item_Renderer' template='*ajaxcart*'>
+			<term><en_US>Update</en_US><ru_RU>Изменить</ru_RU></term>
+		</block>
+		<controller class='Cmsmart_AjaxCart_IndexController' action='*'>
+			<term><en_US>Update</en_US><ru_RU>Изменить</ru_RU></term>
+		</controller>
+	</module>
+</dictionary>
