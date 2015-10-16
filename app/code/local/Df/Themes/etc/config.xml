@@ -454,6 +454,16 @@
 					<files><default>TM_AjaxSearch.csv</default></files>
 				</TM_AjaxSearch>
 				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Youama_Ajaxlogin>
+					<files><rm>Youama_Ajaxlogin.csv</rm></files>
+				</Youama_Ajaxlogin>
+				<!--
 					2015-08-21
 					Элементы с приставкой Ves_* содержат перевод
 					для модулей оформительской темы Ves Super Store (ThemeForest 8002349)
@@ -901,6 +911,16 @@
 				<TM_AjaxSearch>
 					<files><default>TM_AjaxSearch.csv</default></files>
 				</TM_AjaxSearch>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Youama_Ajaxlogin>
+					<files><rm>Youama_Ajaxlogin.csv</rm></files>
+				</Youama_Ajaxlogin>
 				<Vinagento_Vpager>
 					<!-- Этот модуль содержится в оформительской теме TemplateMonster #43373 -->
 					<files>

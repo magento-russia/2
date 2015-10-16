@@ -7,6 +7,9 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 	 * @throws Exception
 	 */
 	public function translate($text, $code) {
+		if ('Qty' === $text) {
+			//xdebug_break();
+		}
 		/** @var bool $isProcessing */
 		/**
 		 * Не допускаем рекурсивность данного метода,

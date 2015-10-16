@@ -2,9 +2,21 @@
 <dictionary>
 	<module name='Mage_Checkout'>
 		<block class='Mage_Checkout_Block_Cart_Item_Renderer' template='*ajaxcart*'>
+			<!--
+			 	2015-10-16
+				Иначе кнопка «Изменить» не поместится в одном ряду с полем ввода.
+			-->
+			<term><en_US>Qty</en_US><ru_RU>кол-во</ru_RU></term>
+			<!--
+			 	2015-10-16
+			 	По умолчанию перевод — «Применить».
+			 	«Изменить» мне здесь сейчас больше нравится.
+			 	Может, и в других местах он будет получше.
+			-->
 			<term><en_US>Update</en_US><ru_RU>Изменить</ru_RU></term>
 		</block>
 		<controller class='Cmsmart_AjaxCart_IndexController' action='*'>
+			<term><en_US>Qty</en_US><ru_RU>кол-во</ru_RU></term>
 			<term><en_US>Update</en_US><ru_RU>Изменить</ru_RU></term>
 		</controller>
 	</module>
