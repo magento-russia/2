@@ -10,6 +10,25 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 	}
 
 	/**
+	 * 2015-10-16
+	 * Перевод заголовков опций простых (не настраиваемых) товаров.
+	 * @override
+	 * @return string
+	 */
+	public function getTitle() {
+		/** @var string|null $original */
+		$original = $this['title'];
+		/** @var bool $endsWithSemicolon */
+		$endsWithSemicolon = rm_ends_with($original, ':');
+		if ($endsWithSemicolon) {
+			$original = mb_substr($original, 0, -1);
+		}
+		/** @var string $result */
+		$result = rm_translate($original, array('Df_Eav', 'Mage_Catalog'));
+		return !$endsWithSemicolon ? $result : $result . ':';
+	}
+
+	/**
 	 * @override
 	 * @return void
 	 */

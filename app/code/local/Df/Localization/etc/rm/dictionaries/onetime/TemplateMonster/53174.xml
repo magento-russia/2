@@ -2,6 +2,11 @@
 <dictionary>
 	<config>
 		<entry>
+			<path>blog/blog/title</path>
+			<original_value>Blog</original_value>
+			<value>Новости</value>
+		</entry>
+		<entry>
 			<path>design/header/logo_alt</path>
 			<original_value>Infant clothing store</original_value>
 			<value>Российская сборка Magento</value>

@@ -3,4 +3,7 @@ body.df-theme-templatemonster-53174 {
 	// Иначе после русификации последняя, пятая колонка выпадающего меню
 	// почему-то не помещается в том же ряду, что и остальные четыре.
 	.grid-full .catagory_children .level1 {margin-right: 0;}
+	// 2015-10-16
+	// В оригинале: capitalize;
+	.block-blog .block-subtitle, .menu-tags h5 {text-transform: none;}
 }

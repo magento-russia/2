@@ -82,11 +82,15 @@ function rm_state() {
 
 /**
  * @param mixed[]|string $text
- * @param string $moduleName
- * @return Df_Localization_Helper_Translation
+ * @param string|string[] $module
+ * @return string
  */
-function rm_translate($text, $moduleName) {
-	return Df_Localization_Helper_Translation::s()->translateByModule($text, $moduleName);
+function rm_translate($text, $module) {
+	return
+		!is_array($module)
+		? Df_Localization_Helper_Translation::s()->translateByModule($text, $module)
+		: Df_Localization_Helper_Translation::s()->translateByModules(rm_array($text), $module)
+	;
 }
 
 /* @return Df_Localization_Helper_Translation */

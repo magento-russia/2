@@ -1843,6 +1843,8 @@ body.df-theme-templatemonster-49198 .df-checkout-ergonomic-page .df button.btn-c
 
 body.df-theme-templatemonster-53174 .grid-full .catagory_children .level1 {
   margin-right: 0; }
+body.df-theme-templatemonster-53174 .block-blog .block-subtitle, body.df-theme-templatemonster-53174 .menu-tags h5 {
+  text-transform: none; }
 
 body.df-theme-tt-theme069 button.button, body.df-theme-tt-theme069 a.button {
   padding-left: 8px;

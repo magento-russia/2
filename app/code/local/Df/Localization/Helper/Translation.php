@@ -24,7 +24,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string|string[] $text
-	 * @param string $module
+	 * @param string|string[] $module
 	 * @return string
 	 */
 	public function translateByModule($text, $module) {
@@ -55,7 +55,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 		$prevModule = null;
 		reset($args);
 		/** @var string $originalText */
-		$originalText = current ($args);
+		$originalText = current($args);
 		/** @var string $result */
 		$result = $originalText;
 		if (is_null($result)) {
