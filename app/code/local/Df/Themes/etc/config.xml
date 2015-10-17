@@ -216,6 +216,26 @@
 				<Cmsmart_AjaxCart>
 					<files><rm>Cmsmart/AjaxCart.csv</rm></files>
 				</Cmsmart_AjaxCart>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Cmsmart_Ajaxsearch>
+					<files><rm>Cmsmart/Ajaxsearch.csv</rm></files>
+				</Cmsmart_Ajaxsearch>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Cmsmart_Megamenu>
+					<files><rm>Cmsmart/Megamenu.csv</rm></files>
+				</Cmsmart_Megamenu>
 				<EM_LayeredNavigation>
 					<files><default>EM/LayeredNavigation.csv</default></files>
 				</EM_LayeredNavigation>
@@ -271,6 +291,16 @@
 					</files>
 				</Infortis_UltraSlideshow>
 				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<LitExtension_SocialLogin>
+					<files><rm>LitExtension_SocialLogin.csv</rm></files>
+				</LitExtension_SocialLogin>
+				<!--
 					2015-09-05
 					Оформительская тема Porto (ThemeForest 9725864)
 					http://themeforest.net/item/porto-ultimate-responsive-magento-theme/9725864
@@ -305,6 +335,16 @@
 				<Megnor_Specialproducts>
 					<files><default>Megnor_Specialproducts.csv</default></files>
 				</Megnor_Specialproducts>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Olark_Chatbox>
+					<files><rm>Olark_Chatbox.csv</rm></files>
+				</Olark_Chatbox>
 				<!--
 					2015-09-05
 					Оформительская тема Porto (ThemeForest 9725864)
@@ -450,9 +490,84 @@
 				<Thirty4_CatalogSale>
 					<files><default>Thirty4_CatalogSale.csv</default></files>
 				</Thirty4_CatalogSale>
+				<!--
+					2015-10-17
+					Приставку «TM_» имеют модули TemplateMonster.
+					Какой именно оформительской теме принадлежат перечисленные ниже модули,
+					для которых оформительская тема я вно не указана — я не помню.
+				-->
 				<TM_AjaxSearch>
-					<files><default>TM_AjaxSearch.csv</default></files>
+					<files><rm>TM/AjaxSearch.csv</rm></files>
 				</TM_AjaxSearch>
+				<TM_AskIt>
+					<files><rm>TM/AskIt.csv</rm></files>
+				</TM_AskIt>
+				<TM_CustomMenu>
+					<files><rm>TM/CustomMenu.csv</rm></files>
+				</TM_CustomMenu>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_Facebook>
+					<files><rm>TM/Facebook.csv</rm></files>
+				</TM_Facebook>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_GoogleMap>
+					<files><rm>TM/GoogleMap.csv</rm></files>
+				</TM_GoogleMap>
+				<TM_Highlight>
+					<files><rm>TM/Highlight.csv</rm></files>
+				</TM_Highlight>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_Instagram>
+					<files><rm>TM/Instagram.csv</rm></files>
+				</TM_Instagram>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_NewsletterPopup>
+					<files><rm>TM/NewsletterPopupTUB.csv</rm></files>
+				</TM_NewsletterPopup>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_SpecialPriceCountdown>
+					<files><rm>TM/SpecialPriceCountdown.csv</rm></files>
+				</TM_SpecialPriceCountdown>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_Twitter>
+					<files><rm>TM/Twitter.csv</rm></files>
+				</TM_Twitter>
 				<!--
 				 	2015-10-17
 				 	Оформительская тема TemplateMonster Kids Fashion (53174)
@@ -621,6 +736,26 @@
 				<Cmsmart_AjaxCart>
 					<files><rm>Cmsmart/AjaxCart.csv</rm></files>
 				</Cmsmart_AjaxCart>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Cmsmart_Ajaxsearch>
+					<files><rm>Cmsmart/Ajaxsearch.csv</rm></files>
+				</Cmsmart_Ajaxsearch>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Cmsmart_Megamenu>
+					<files><rm>Cmsmart/Megamenu.csv</rm></files>
+				</Cmsmart_Megamenu>
 				<EM_Ajaxcart>
 					<files>
 						<catalog>Mage_Catalog.csv</catalog>
@@ -724,6 +859,16 @@
 					</files>
 				</Infortis_UltraSlideshow>
 				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<LitExtension_SocialLogin>
+					<files><rm>LitExtension_SocialLogin.csv</rm></files>
+				</LitExtension_SocialLogin>
+				<!--
 					Magento CE по недосмотру не определяет файл перевода для модуля Mage_Captcha,
 					хотя сам файл Mage_Captcha.csv присутствует как в английском пакете,
 					так и для других языковых пакетов
@@ -756,6 +901,16 @@
 				<Megnor_Specialproducts>
 					<files><default>Megnor_Specialproducts.csv</default></files>
 				</Megnor_Specialproducts>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<Olark_Chatbox>
+					<files><rm>Olark_Chatbox.csv</rm></files>
+				</Olark_Chatbox>
 				<!--
 					2015-09-05
 					Оформительская тема Porto (ThemeForest 9725864)
@@ -908,9 +1063,84 @@
 				<Thirty4_CatalogSale>
 					<files><default>Thirty4_CatalogSale.csv</default></files>
 				</Thirty4_CatalogSale>
+				<!--
+					2015-10-17
+					Приставку «TM_» имеют модули TemplateMonster.
+					Какой именно оформительской теме принадлежат перечисленные ниже модули,
+					для которых оформительская тема я вно не указана — я не помню.
+				-->
 				<TM_AjaxSearch>
-					<files><default>TM_AjaxSearch.csv</default></files>
+					<files><rm>TM/AjaxSearch.csv</rm></files>
 				</TM_AjaxSearch>
+				<TM_AskIt>
+					<files><rm>TM/AskIt.csv</rm></files>
+				</TM_AskIt>
+				<TM_CustomMenu>
+					<files><rm>TM/CustomMenu.csv</rm></files>
+				</TM_CustomMenu>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_Facebook>
+					<files><rm>TM/Facebook.csv</rm></files>
+				</TM_Facebook>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_GoogleMap>
+					<files><rm>TM/GoogleMap.csv</rm></files>
+				</TM_GoogleMap>
+				<TM_Highlight>
+					<files><rm>TM/Highlight.csv</rm></files>
+				</TM_Highlight>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_Instagram>
+					<files><rm>TM/Instagram.csv</rm></files>
+				</TM_Instagram>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_NewsletterPopup>
+					<files><rm>TM/NewsletterPopupTUB.csv</rm></files>
+				</TM_NewsletterPopup>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_SpecialPriceCountdown>
+					<files><rm>TM/SpecialPriceCountdown.csv</rm></files>
+				</TM_SpecialPriceCountdown>
+				<!--
+				 	2015-10-17
+				 	Оформительская тема TemplateMonster Kids Fashion (53174)
+					http://www.templatemonster.com/demo/53174.html
+					http://www.templatemonster.com/magento-themes/53174.html
+					http://magento-forum.ru/forum/372/
+				-->
+				<TM_Twitter>
+					<files><rm>TM/Twitter.csv</rm></files>
+				</TM_Twitter>
 				<!--
 				 	2015-10-17
 				 	Оформительская тема TemplateMonster Kids Fashion (53174)
