@@ -546,7 +546,7 @@
 					http://magento-forum.ru/forum/372/
 				-->
 				<TM_NewsletterPopup>
-					<files><rm>TM/NewsletterPopupTUB.csv</rm></files>
+					<files><rm>TM/NewsletterPopup.csv</rm></files>
 				</TM_NewsletterPopup>
 				<!--
 				 	2015-10-17
@@ -1119,7 +1119,7 @@
 					http://magento-forum.ru/forum/372/
 				-->
 				<TM_NewsletterPopup>
-					<files><rm>TM/NewsletterPopupTUB.csv</rm></files>
+					<files><rm>TM/NewsletterPopup.csv</rm></files>
 				</TM_NewsletterPopup>
 				<!--
 				 	2015-10-17
