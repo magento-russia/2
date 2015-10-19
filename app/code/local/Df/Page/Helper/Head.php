@@ -79,7 +79,12 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	private function isItJQueryNoConflict($scriptName) {
-		return rm_contains(mb_strtolower($scriptName), mb_strtolower('noconflict.js'));
+		return
+			rm_contains(mb_strtolower($scriptName), 'noconflict.js')
+			// 2015-10-19
+			// Модуль Qaz_Qzoom, магазин chepe.ru
+			|| rm_contains($scriptName, 'jqueryNoconfig.js')
+		;
 	}
 
 	/**
