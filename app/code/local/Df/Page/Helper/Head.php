@@ -75,6 +75,14 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
+	 * 2015-10-19
+	 * Удаление избыточных копий библиотеки jQuery Migrate.
+	 * @param string $scriptName
+	 * @return bool
+	 */
+	private function isItJQueryMigrate($scriptName) {return rm_contains($scriptName, 'jquery-migrate');}
+
+	/**
 	 * @param string $scriptName
 	 * @return bool
 	 */
@@ -134,9 +142,11 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 				 * библиотеку jQuery не посредством addItem, а более низкоуровневыми методами
 				 */
 				(
-						$this->isItJQuery($name)
-					||
-						$this->isItJQueryNoConflict($name)
+					$this->isItJQuery($name)
+					|| $this->isItJQueryNoConflict($name)
+					// 2015-10-19
+					// Удаление избыточных копий библиотеки jQuery Migrate.
+					|| $this->isItJQueryMigrate($name)
 				)
 		;
 		return $result;
