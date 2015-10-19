@@ -57,11 +57,16 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 			 * Обратите внимание, что скрипты с именами вроде path/history.adapter.jquery.js
 			 * не должны определяться, как ядро библиотеки jQuery.
 			 * @link http://magento-forum.ru/topic/3979/
+			 *
+			 * 2015-10-19
+			 * Заметил, что один из сторонних модулей подключает jQuery файлом с именем jquery-1.6.js,
+			 * т.е. в номере версии 2 сегмента между точками, а не 3.
+			 * Обновил регулярное выражение.
 			 */
 			/** @var string $fileName */
 			$fileName = rm_last(explode('/', $scriptName));
 			/** @var string $pattern */
-			$pattern = '#^jquery(\-\d+\.\d+\.\d+)?(\.min)?\.js$#ui';
+			$pattern = '#^jquery(\-\d+\.\d+(\.\d+)?)?(\.min)?\.js$#ui';
 			/** @var string[] $matches */
 			$matches = array();
 			$result = (1 === preg_match($pattern, $fileName, $matches));
