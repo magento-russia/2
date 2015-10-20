@@ -4,7 +4,7 @@
  * что способна принимать переменное количество аргументов, например:
  * df_concat('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).
  * То есть, эта функция даёт только сокращение синтаксиса.
- * @param string[]|mixed[] $arguments
+ * @param string|string[]|mixed[]  $arguments
  * @return string
  */
 function df_concat($arguments) {

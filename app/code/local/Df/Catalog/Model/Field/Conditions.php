@@ -48,12 +48,6 @@ class Df_Catalog_Model_Field_Conditions extends Df_Core_Model_Abstract {
 		/** @var Mage_Adminhtml_Block_Widget_Form_Renderer_Fieldset $result */
 		$result = Mage::getBlockSingleton('adminhtml/widget_form_renderer_fieldset');
 		$result->setTemplate('df/catalog/conditions.phtml');
-		$result->setData(
-			'new_child_url'
-			,$this->getBlock()->getUrl(
-				'*/promo_catalog/newConditionHtml/form/rule_conditions_fieldset'
-			)
-		);
 		return $result;
 	}
 

@@ -4,8 +4,27 @@
 	$fieldset = $this->getElement();
 	/** @var string|null $comment */
 	$comment = $fieldset->getData('comment');
+	/**
+	 * 2015-10-20
+	 * В предыдущей версии кода использовалось ошибочное выражение
+	 * $newChildUrl = $fieldset->getData('new_child_url');
+	 * При этом значение свойства «new_child_url» устанавливалось методом
+	 * @see Df_Catalog_Model_Field_Conditions::createRendererFieldset()*
+	 */
+	// 	$result->setData(
+	//     'new_child_url'
+	//     ,$this->getBlock()->getUrl(
+	//         '*/promo_catalog/newConditionHtml/form/rule_conditions_fieldset'
+	//     )
+	// );
+	/**
+	 * Ошибочно оно потому, что свойство надо было извлекать не из объекта $fieldset,
+	 * а из объекта $this.
+	 * http://magento-forum.ru/topic/5269/
+	 * Теперь же я не только устранил этот дефект, но и упростил код.
+	 */
 	/** @var string $newChildUrl */
-	$newChildUrl = $fieldset->getData('new_child_url');
+	$newChildUrl = $this->getUrl('*/promo_catalog/newConditionHtml/form/rule_conditions_fieldset');
 	/** @var string $htmlId */
 	$htmlId = $fieldset->getHtmlId();
 ?>
