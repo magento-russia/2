@@ -1244,6 +1244,16 @@
 				<goBtnText>применить</goBtnText>
 			</price_slider>
 		</ajaxfilter_cfg>
+		<!--
+			2015-10-20
+			Оформительская тема TemplateMonster Kids Fashion (53174).
+			Модуль Cmsmart_Ajaxsearch
+		-->
+		<ajaxsearch>
+			<settings>
+				<noti_no_result>Ничего не найдено.</noti_no_result>
+			</settings>
+		</ajaxsearch>
 		<!-- Оформительские темы TemplateMela:
 			Classy Shop (MAG090171)
 			Minimal Multi Purpose (MAG090180)
