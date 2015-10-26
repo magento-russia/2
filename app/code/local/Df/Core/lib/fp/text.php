@@ -672,7 +672,7 @@ function rm_string_split($string) {return preg_split("//u", $string, -1, PREG_SP
  * @return string
  */
 function rm_tag($tag, array $attributes = array(), $content = null) {
-	return Df_Core_Model_Format_Html_Tag::output($tag, $attributes, $content);
+	return Df_Core_Model_Format_Html_Tag::render($tag, $attributes, $content);
 }
 
 /**
