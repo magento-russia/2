@@ -58,7 +58,13 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Core_Model_Abstract {
 				,$this->getProduct()->getName()
 			);
 		}
-		else if (0 === $this->getPrice()) {
+		/**
+		 * 2015-10-28
+		 * Ошибочно сравнение (0 === $this->getPrice()),
+		 * потому что $this->getPrice() всегда возвращает вещественное число.
+		 * С другой стороны, проще и надёжнее написать !, чем (0.0 === $this->getPrice()).
+		 */
+		else if (!$this->getPrice()) {
 			df_h()->yandexMarket()->log(
 				'Товару «%s» отказано в публикации, потому что для него отсутствует цена.'
 				,$this->getProduct()->getName()
@@ -293,13 +299,28 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Core_Model_Abstract {
 
 	/**
 	 * @param Df_Catalog_Model_Product $product
+	 * @param bool $forceShort [optional]
 	 * @return string
 	 */
-	private function getUrlForProduct(Df_Catalog_Model_Product $product) {
+	private function getUrlForProduct(Df_Catalog_Model_Product $product, $forceShort = false) {
 		/** @var string $result */
 		$product->setData(Df_Catalog_Model_Product::P__RM_CATEGORY_ID, $this->getCategoryId());
+		/**
+		 * 2015-10-28
+		 * Короткий адрес формируем по аналогии с
+		 * @see Mage_Catalog_Model_Product_Url::_getProductUrl()
+		 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.2/app/code/core/Mage/Catalog/Model/Product/Url.php#L278
+		 * К сожалению, мы никак не может использовать этот метод,
+		 * потому что он непубличен.
+		 */
 		/** @var string $urlRaw */
-		$urlRaw = $product->getProductUrl($useSid = false);
+		$urlRaw =
+			!$forceShort
+			? $product->getProductUrl($useSid = false)
+			: $product->getUrlModel()->getUrlInstance()->getUrl('catalog/product/view', array(
+				'id' => $product->getId()
+			));
+		;
 		/**
 		 * Заметил, что в магазине sekretsna.com
 		 * $product->getProductUrl($useSid = false)
@@ -314,9 +335,20 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Core_Model_Abstract {
 				,'{url}' => $urlRaw
 			)));
 		}
-		$result = df_h()->yandexMarket()->preprocessUrl($product->getProductUrl($useSid = false));
+		$result = df_h()->yandexMarket()->preprocessUrl($urlRaw);
 		df_result_string_not_empty($result);
 		$product->unsetData(Df_Catalog_Model_Product::P__RM_CATEGORY_ID);
+		/**
+		 * 2015-10-28
+		 * Опытным путём установил, что Яндекс.Маркет допускает длину адресов до 510 символов,
+		 * а при превышении выдаёт сообщение «URL предложения не соответствует стандарту RFC-1738»:
+		 * http://magento-forum.ru/topic/5282/
+		 * При превышении нам надо отдавать Яндекс.Маркету адрес вида
+		 * http://site.ru/catalog/product/view/id/1785
+		 */
+		if (!$forceShort && 510 < strlen(urlencode($urlRaw))) {
+			$result = $this->getUrlForProduct($product, $forceShort = true);
+		}
 		return $result;
 	}
 

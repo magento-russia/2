@@ -254,8 +254,13 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					;
 					break;
 			}
-			df_result_float($result);
-			$this->{__METHOD__} = $result;
+			/**
+			 * 2015-10-28
+			 * Методы ядра могут мутить разное,
+			 * но нам обязательно нужно вещественное (не целое) число.
+			 * @used-by Df_YandexMarket_Model_Yml_Processor_Offer::isEnabled()
+			 */
+			$this->{__METHOD__} = floatval($result);
 		}
 		return $this->{__METHOD__};
 	}

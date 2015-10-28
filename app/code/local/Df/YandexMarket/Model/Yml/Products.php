@@ -77,6 +77,36 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 			 * [/code]
 			 */
 			/**
+			 * 2015-10-28
+			 * Метод @see Mage_Catalog_Model_Resource_Product_Collection::addUrlRewrite()
+			 * устроен таким образом, что если вызвать его без параметров,
+			 * то адреса товаров не будут содержать товарный раздел:
+			 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.2/app/code/core/Mage/Catalog/Model/Resource/Product/Collection.php#L1143-L1147
+			 * Если же этот метод не вызывать и ничего дальше дополнительно не предпринимать,
+			 * то наоборот адреса страниц ВСЕГДА будут содержать товарный раздел:
+			 *
+				if (Mage::getStoreConfig(
+					Mage_Catalog_Helper_Product::XML_PATH_PRODUCT_URL_USE_CATEGORY
+			 		, $this->getStoreId()
+			 	)) {
+					$this->_urlRewriteCategory = $categoryId;
+				} else {
+					$this->_urlRewriteCategory = 0;
+				}
+			 *
+			 * Метод так реализован, видимо, потому что, на витрине его принято вызывать с параметром
+			 * в виде текущего товарного раздела (того раздела, где находится посетитель).
+			 * В нашем же случае текущего раздела нет, и вызов этого метода без параметров
+			 * работает не так, как нам нужно.
+			 * Поэтому вызываем его только если нам не нужно добавлять разделы в адрес товара.
+			 */
+			if (!Mage::getStoreConfig(
+				Mage_Catalog_Helper_Product::XML_PATH_PRODUCT_URL_USE_CATEGORY
+				, rm_state()->getStoreProcessed()
+			)) {
+				$result->addUrlRewrite();
+			}
+			/**
 			 * Старый комментарий:
 			 * Cистема оставляла в коллекции только те товары,
 			 * для которых администратор указал,
