@@ -86,6 +86,21 @@ class Df_Core_Model_State extends Df_Core_Model_Abstract {
 	}
 
 	/**
+	 * 2015-11-04
+	 * При нахождении в административном интерфейсе
+	 * и при отсутствии в веб-адресе идентификатора магазина
+	 * этот метод вернёт витрину по по-умолчанию,
+	 * а не витрину «admin», как делает стандартный метод
+	 * @see Mage_Core_Model_App::getStore() при вызове без параметров,
+	 * Не знаю, правильно ли это, но раз уж так работает — решил пока не трогать.
+	 *
+	 * В Magento 2 же стандартный метод \Magento\Store\Model\StoreManager::getStore()
+	 * при вызове без параметров возвращает именно витрину по умолчанию, а не витрину «admin»:
+	 * https://github.com/magento/magento2/issues/2254
+	 * «The call for \Magento\Store\Model\StoreManager::getStore() without parameters
+	 * inside the backend returns the default frontend store, not the «admin» store,
+	 * which is inconsistent with Magento 1.x behaviour and I think it will lead to developer mistakes.»
+	 *
 	 * @param bool $needThrow [optional]
 	 * @return Df_Core_Model_StoreM|null
 	 * @throws Df_Core_Exception|Exception

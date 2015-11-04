@@ -34,6 +34,13 @@ function rm_store($store = null) {
 			 * нам нужно вернуть витрину admin.
 			 * Например, это нужно, чтобы правильно работала функция @used-by df_is_admin()
 			 * Переменная $coreCurrentStore в данной точке содержит витрину admin.
+			 *
+			 * 2015-11-04
+			 * Вообще, напрашивается вопрос: правильно ли,
+			 * что при единственном магазине метод @uses Df_Core_State::getStoreProcessed()
+			 * возвращает витрину default, а не admin?
+			 * Кажется, что неправильно. Возможно, надо поменять.
+			 * Но решил это пока не трогать, чтобы не поломать текущее поведение модулей.
 			 */
 			if (is_null($result) && Mage::app()->isSingleStoreMode()) {
 				$result = $coreCurrentStore;
