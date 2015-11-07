@@ -157,25 +157,11 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 				,'categories' => array('category' => $this->getDocumentData_Categories())
 			)
 		;
-		/**
-		 * @link http://magento-forum.ru/topic/4201/
-		 */
+		/** @link http://magento-forum.ru/topic/4201/ */
 		if (0 === count($this->getDocumentData_Offers())) {
-			/** @var string $message */
-			$message =
-				'Интернет-магазин находится в таком состоянии,'
-				.' что ни один из его товаров не попадёт на Яндекс.Маркет.'
-				."\nПричиной могут быть как настройки модуля «Яндекс.Маркет»,"
-				. ' так и настройки товаров интернет-магазина.'
-			;
-			df_h()->yandexMarket()->notify($message);
-			// Всё равно файл YML будет невалидным,
-			// поэтому сразу сбойно завершаем формирование этого файла.
-			df_error($message);
+			df_h()->yandexMarket()->error_noOffers();
 		}
-		/**
-		 * @link http://magento-forum.ru/topic/4201/
-		 */
+		/** @link http://magento-forum.ru/topic/4201/ */
 		if (0 === count($this->getDocumentData_Categories())) {
 			/** @var string $message */
 			$message =

@@ -318,8 +318,24 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 					}
 					else {
 						$matchingProductIds = array();
-						/** @var int $storeId */
-						$storeId = rm_nat0(rm_state()->getStoreProcessed()->getId());
+						/**
+						 * 2015-11-07
+						 * Тут раньше стояло
+						 * $storeId = rm_nat0(rm_state()->getStoreProcessed()->getId());
+						 * и дальше шла выборка идентификатору магазина.
+						 * Это ошибочно и очевидно являлось недозарумением,
+						 * потому что даже в Magento CE 1.8.0.0
+						 * ключами элементов массива $matchingProductIdsRaw являются идентификаторы сайтов,
+						 * а не магазинов:
+						 * https://github.com/OpenMage/magento-mirror/blob/94e611e127d5c14008990b256ed06ded622dcee9/app/code/core/Mage/CatalogRule/Model/Rule.php#L268
+						 * @see Mage_CatalogRule_Model_Rule::callbackValidateProduct()
+							foreach ($this->_getWebsitesMap() as $websiteId => $defaultStoreId) {
+								$product->setStoreId($defaultStoreId);
+							$results[$websiteId] = (int)$this->getConditions()->validate($product);
+							}
+						 */
+						/** @var int $websiteId */
+						$websiteId = rm_nat0(rm_state()->getStoreProcessed()->getWebsiteId());
 						/**
 							[10704] => Array
 								(
@@ -330,15 +346,30 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 						foreach ($matchingProductIdsRaw as $matchingProductId => $matchingProductIdRaw) {
 							/** @var int $matchingProductId */
 							/** @var array(int => int) $matchingProductIdRaw */
-							if ($matchingProductIdRaw && df_a($matchingProductIdRaw, $storeId)) {
+							if ($matchingProductIdRaw && df_a($matchingProductIdRaw, $websiteId)) {
 								$matchingProductIds[]= rm_nat($matchingProductId);
 							}
 						}
 					}
 					/**
-					 * Вместо addIdFilter можно ещё использовать метод addIdFilterClientSide —
-					 * он позволяет уменьшить текст запроса SQL
+					 * 2015-11-07
+					 * Если массив $matchingProductIds пуст, то метод
+					 * @uses Mage_Catalog_Model_Resource_Product_Collection::addIdFilter()
+					 * сразу помечает коллекцию как загруженную:
+					 * https://github.com/OpenMage/magento-mirror/blob/053e0b286cbd6d52ac69ca9fd53a3b72c78aca1d/app/code/core/Mage/Catalog/Model/Resource/Product/Collection.php#L599-L602
+					 * Такое состояние явно свидетельствует об ошибке администратора,
+					 * поэтому лучше сразу сообщить ему об этом конкретно, а не обобщённо.
 					 */
+					if (!$matchingProductIds) {
+						df_h()->yandexMarket()->error_noOffers(
+							'Заданным администратором в графе'
+							.' «Система» → «Настройки» → «Российская сборка» → «Яндекс.Маркет»'
+							. ' → «Товары» → «Условия» условиям публикации товаров'
+							. ' не соответствует ни один из товаров интернет-магазина.'
+						);
+					}
+					// Вместо addIdFilter можно ещё использовать метод addIdFilterClientSide —
+					// он позволяет уменьшить текст запроса SQL.
 					$this->getProducts()->addIdFilter($matchingProductIds);
 				}
 			}

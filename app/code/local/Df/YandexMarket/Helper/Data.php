@@ -1,6 +1,33 @@
 <?php
 class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	/**
+	 * 2015-11-07
+	 * @used-by Df_YandexMarket_Model_Yml_Document::getDocumentData_Shop()
+	 * @used-by Df_YandexMarket_Model_Yml_Products::applyRule()
+	 * @param string|null $message
+	 * @return void
+	 * @throws Df_Core_Exception_Client
+	 */
+	public function error_noOffers($message = null) {
+		if (!$message) {
+			$message =
+				'Причиной могут быть как настройки модуля «Яндекс.Маркет»,'
+				. ' так и настройки товаров интернет-магазина.'
+			;
+		}
+		/** @var string $messageFull */
+		$messageFull =
+			'Интернет-магазин находится в таком состоянии,'
+			.' что ни один из его товаров не попадёт на Яндекс.Маркет.'
+			."\n" . $message
+		;
+		$this->notify($messageFull);
+		// Всё равно файл YML будет невалидным,
+		// поэтому сразу сбойно завершаем формирование этого файла.
+		df_error($messageFull);
+	}
+
+	/**
 	 * @param string|float $money
 	 * @return string
 	 */
