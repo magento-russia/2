@@ -43,12 +43,23 @@ class Df_1C_Model_Cml2_Action_Orders_Export extends Df_1C_Model_Cml2_Action_Gene
 			/** @var Zend_Db_Adapter_Abstract $adapter */
 			$adapter = $result->getSelect()->getAdapter();
 			// Отбраковываем из коллекции заказы других магазинов
-			$result
-				->addFieldToFilter(
-					$adapter->quoteIdentifier(Df_Sales_Model_Order::P__STORE_ID)
-					,rm_state()->getStoreProcessed()->getId()
-				)
-			;
+			/**
+			 * 2015-11-09
+			 * Убрал вызов @see Zend_Db_Adapter_Abstract::quoteIdentifier()
+			 * для совместимости с Magento CE 1.9.2.2,
+			 * потому что эта версия по соображениям безопасности магазина
+			 * после установки неряшливо написанных сторонних модулей
+			 * сама добавляет кавычки ко всем полям, указанным в методе
+			 * @uses Varien_Data_Collection_Db::addFieldToFilter(),
+			 * и когда качественно написанный модуль добавляет свои кавычки,
+			 * то получается, что ядро, в угоду неряшливо написанным модулям
+			 * бездумно добавляет дополнительные кавычки,
+			 * и в командах SQL имена полей получаются некорректными, например: AND (```is_active``` = 1)
+			 * @see Varien_Data_Collection_Db::_translateCondition():
+					$quotedField = $this->getConnection()->quoteIdentifier($field);
+			 * https://github.com/OpenMage/magento-mirror/blob/92a1142a37a1f8f639db95353199368f5784725d/lib/Varien/Data/Collection/Db.php#L417
+			 */
+			$result->addFieldToFilter(Df_Sales_Model_Order::P__STORE_ID, rm_state()->getStoreProcessed()->getId());
 			/**
 			 * Магазин должен передавать в 1С: Управление торговлей 2 вида заказов:
 			 * 1) Заказы, которые были созданы в магазине ПОСЛЕ последнего сеанса передачи данных
@@ -56,9 +67,25 @@ class Df_1C_Model_Cml2_Action_Orders_Export extends Df_1C_Model_Cml2_Action_Gene
 			 * Как я понимаю, оба ограничения можно наложить единым фильтром:
 			 * по времени изменения заказа.
 			 */
+			/**
+			 * 2015-11-09
+			 * Убрал вызов @see Zend_Db_Adapter_Abstract::quoteIdentifier()
+			 * для совместимости с Magento CE 1.9.2.2,
+			 * потому что эта версия по соображениям безопасности магазина
+			 * после установки неряшливо написанных сторонних модулей
+			 * сама добавляет кавычки ко всем полям, указанным в методе
+			 * @uses Varien_Data_Collection_Db::addFieldToFilter(),
+			 * и когда качественно написанный модуль добавляет свои кавычки,
+			 * то получается, что ядро, в угоду неряшливо написанным модулям
+			 * бездумно добавляет дополнительные кавычки,
+			 * и в командах SQL имена полей получаются некорректными, например: AND (```is_active``` = 1)
+			 * @see Varien_Data_Collection_Db::_translateCondition():
+					$quotedField = $this->getConnection()->quoteIdentifier($field);
+			 * https://github.com/OpenMage/magento-mirror/blob/92a1142a37a1f8f639db95353199368f5784725d/lib/Varien/Data/Collection/Db.php#L417
+			 */
 			$result
 				->addFieldToFilter(
-					$adapter->quoteIdentifier(Df_Sales_Model_Order::P__UPDATED_AT)
+					Df_Sales_Model_Order::P__UPDATED_AT
 					,array(
 						Df_Varien_Const::FROM => $this->getLastProcessedTime()
 						,Df_Varien_Const::DATETIME => true
