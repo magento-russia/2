@@ -46,32 +46,24 @@
 <script type="text/javascript">
 //<![CDATA[
 	var shippingRegionEnabled =
-		<?php
-			echo
-				intval(
-					(
-							Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__NO
-						!==
-							df_cfg()->checkout()->applicabilityShipping()->region()
-					)
-				)
-			;
-		?>
+		<?php echo intval(
+			Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__NO
+			!== df_cfg()->checkout()->applicabilityShipping()->region()
+		); ?>
 	;
 	var shippingRegionUpdater =
 		/**
 		 * Создаём RegionUpdater только при наличии поля region,
 		 * иначе будет сбой JavaScript.
 		 */
-			(
-					shippingRegionEnabled
-				&&
-					document.getElementById('shipping:country_id')
-				&&
-					document.getElementById('shipping:region')
-				&&
-					document.getElementById('shipping:region_id')
-			)
+			shippingRegionEnabled
+			// 2015-11-16
+			// Сегодня заметил, что в оформительской теме Gala SoftwareMarket
+			// переменная countryRegions не инициализирована.
+			&& window.countryRegions
+			&& document.getElementById('shipping:country_id')
+			&& document.getElementById('shipping:region')
+			&& document.getElementById('shipping:region_id')
 		?
 			/**
 			 * Однако заглушка нам всё равно нужна, ибо shippingRegionUpdater
@@ -85,10 +77,7 @@
 				,undefined
 				,'shipping:postcode'
 			)
-		:
-			{
-				update: function() {}
-			}
+		: {update: function() {}}
 	;
 //]]>
 </script>

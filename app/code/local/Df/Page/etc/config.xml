@@ -37,6 +37,13 @@
 						Цель перекрытия —
 						предоставление администратору возможности скрывать сообщение «Добро пожаловать»
 						либо показывать там только имя посетителя без фамилии.
+						2015-11-16
+						Начиная с Magento CE 1.7.0.2
+						метод @see Mage_Page_Block_Html_Header::getWelcome() стал устаревшим:
+						https://github.com/OpenMage/magento-mirror/blob/1.9.2.2/app/code/core/Mage/Page/Block/Html/Header.php#L85
+						и уже редко используется современными оформительскими темами.
+						Для современных версий Magento CE
+						аналогичное перекрытие делает мой класс	Df_Page_Block_Html_Welcome (см. ниже).
 					-->
 					<html_header>Df_Page_Block_Html_Header</html_header>
 					<!--
@@ -49,6 +56,19 @@
 						кэширование меню.
 					-->
 					<html_topmenu>Df_Page_Block_Html_Topmenu</html_topmenu>
+					<!--
+						2015-11-16
+						Цель перекрытия —
+						предоставление администратору возможности скрывать сообщение «Добро пожаловать»
+						либо показывать там только имя посетителя без фамилии.
+						Для Magento CE версий ранее 1.7.0.2 для этой же цели используется
+						класс Df_Page_Block_Html_Head,
+						однако перекрываемый им метод @see Mage_Page_Block_Html_Header::getWelcome()
+						с Magento CE версии 1.7.0.2 стал устаревшим:
+						https://github.com/OpenMage/magento-mirror/blob/1.9.2.2/app/code/core/Mage/Page/Block/Html/Header.php#L85
+						и уже редко используется современными оформительскими темами.
+					-->
+					<html_welcome>Df_Page_Block_Html_Welcome</html_welcome>
 					<!--
 						Цель перекрытия —
 						кэширование блока.
@@ -101,7 +121,16 @@
 			</head>
 			<header translate='welcome' module='page'>
 				<logo_alt>Российская сборка Magento</logo_alt>
-				<welcome>Добро пожаловать!</welcome>
+				<!--
+					2015-11-16
+					Неправильно таким образом переводить интерфейсные строки,
+					потому что магазин может иметь несколько витрин с разными языками.
+					<welcome>Добро пожаловать!</welcome>
+
+					С другой стороны, показывать приветствие по умолчанию
+					мне вообще не нравится, поэтому установил тут пустую строку.
+				-->
+				<welcome></welcome>
 			</header>
 			<footer translate='copyright' module='page'>
 				<copyright>Российская сборка Magento</copyright>
