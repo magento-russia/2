@@ -83,6 +83,13 @@
 				-->
 				<gadget>8theme/Gadget.xml</gadget>
 				<!--
+					2015-12-01
+				 	Gala SoftwareMarket
+					http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061
+					http://magento-forum.ru/forum/373/
+				-->
+				<softwaremarket>Gala/SoftwareMarket.xml</softwaremarket>
+				<!--
 				 	Gala TitanShop
 					http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636
 					http://magento-forum.ru/forum/352/
@@ -144,6 +151,16 @@
 			</ultimo>
 		</translation>
 		<design-theme-processors>
+			<gala-softwaremarket>
+				<title>ThemeForest Gala SoftwareMarket</title>
+				<package>default</package>
+				<theme>galasoftwaremarket</theme>
+				<dictionary>Gala/SoftwareMarket.xml</dictionary>
+				<url>
+					<forum>http://magento-forum.ru/forum/373/</forum>
+					<official_site>http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061?ref=dfediuk</official_site>
+				</url>
+			</gala-softwaremarket>
 			<gala-titanshop>
 				<title>ThemeForest Gala TitanShop</title>
 				<package>default</package>
