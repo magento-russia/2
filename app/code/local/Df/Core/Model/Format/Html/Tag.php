@@ -122,17 +122,6 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model_Abstract {
 	private static $P__TAG = 'tag';
 
 	/**
-	 * @param string $href
-	 * @return string
-	 */
-	public static function cssExternal($href) {
-		df_param_string_not_empty($href, 0);
-		return self::render(
-			'link', array('rel' => 'stylesheet', 'type' => 'text/javascript', 'href' => $href)
-		);
-	}
-
-	/**
 	 * @param string $tag
 	 * @param array(string => string) $attributes [optional]
 	 * @param string $content [optional]
