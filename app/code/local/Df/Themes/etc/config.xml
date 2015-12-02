@@ -236,9 +236,30 @@
 				<Cmsmart_Megamenu>
 					<files><rm>Cmsmart/Megamenu.csv</rm></files>
 				</Cmsmart_Megamenu>
+				<Gala_Galatitanshopsettings>
+					<!-- Оформительская тема Gala TitanShop -->
+					<files>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>Gala/TitanShop.csv</default>
+						<tag>Mage_Tag.csv</tag>
+					</files>
+				</Gala_Galatitanshopsettings>
+				<Gala_Softwaremarketsettings>
+					<!-- Оформительская тема Gala SoftwareMarket -->
+					<files>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>Gala/SoftwareMarket.csv</default>
+						<tag>Mage_Tag.csv</tag>
+					</files>
+				</Gala_Softwaremarketsettings>
 				<EM_LayeredNavigation>
 					<files><default>EM/LayeredNavigation.csv</default></files>
 				</EM_LayeredNavigation>
+				<EM_Themeframework>
+					<files>
+						<default>EM/Themeframework.csv</default>
+					</files>
+				</EM_Themeframework>
 				<Infortis_Brands>
 					<files>
 						<infortis>Infortis.csv</infortis>
@@ -767,11 +788,21 @@
 						<default>EM/Ajaxproducts.csv</default>
 					</files>
 				</EM_Ajaxproducts>
+				<EM_Bestsellerproducts>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+					</files>
+				</EM_Bestsellerproducts>
 				<EM_Blog>
 					<files>
 						<default>EM/Blog.csv</default>
 					</files>
 				</EM_Blog>
+				<EM_Cmswidget>
+					<files>
+						<catalog>EM/Cmswidget.csv</catalog>
+					</files>
+				</EM_Cmswidget>
 				<EM_Dynamicproducts>
 					<files>
 						<catalog>Mage_Catalog.csv</catalog>
@@ -792,6 +823,69 @@
 						<default>EM/Multidealpro.csv</default>
 					</files>
 				</EM_Multidealpro>
+				<EM_Newproducts>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+					</files>
+				</EM_Newproducts>
+				<EM_Onestepcheckout>
+					<files>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>EM/Onestepcheckout.csv</default>
+					</files>
+				</EM_Onestepcheckout>
+				<EM_Quickshop>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<checkout>Mage_Checkout.csv</checkout>
+					</files>
+				</EM_Quickshop>
+				<EM_Productlabels>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<catalog>EM/Productlabels.csv</catalog>
+					</files>
+				</EM_Productlabels>
+				<EM_Recentreviewproducts>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>EM/Recentreviewproducts.csv</default>
+					</files>
+				</EM_Recentreviewproducts>
+				<EM_Saleproducts>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>EM/Saleproducts.csv</default>
+					</files>
+				</EM_Saleproducts>
+				<EM_Sliderwidget>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>EM/Sliderwidget.csv</default>
+					</files>
+				</EM_Sliderwidget>
+				<EM_Slideshow2>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>EM/Slideshow2.csv</default>
+					</files>
+				</EM_Slideshow2>
+				<EM_Tabs>
+					<files>
+						<catalog>Mage_Catalog.csv</catalog>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>EM/Tabs.csv</default>
+					</files>
+				</EM_Tabs>
+				<EM_Themeframework>
+					<files>
+						<default>EM/Themeframework.csv</default>
+					</files>
+				</EM_Themeframework>
 				<Excellence_Ajax>
 					<!--
 						Модуль Excellence Ajax используется оформительскими темами TemplateMonster.
@@ -807,10 +901,18 @@
 					<!-- Оформительская тема Gala TitanShop -->
 					<files>
 						<checkout>Mage_Checkout.csv</checkout>
-						<default>Gala_TitanShop.csv</default>
+						<default>Gala/TitanShop.csv</default>
 						<tag>Mage_Tag.csv</tag>
 					</files>
 				</Gala_Galatitanshopsettings>
+				<Gala_Softwaremarketsettings>
+					<!-- Оформительская тема Gala SoftwareMarket -->
+					<files>
+						<checkout>Mage_Checkout.csv</checkout>
+						<default>Gala/SoftwareMarket.csv</default>
+						<tag>Mage_Tag.csv</tag>
+					</files>
+				</Gala_Softwaremarketsettings>
 				<Infortis_Brands>
 					<files>
 						<infortis>Infortis.csv</infortis>
