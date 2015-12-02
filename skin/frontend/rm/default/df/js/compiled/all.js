@@ -2175,6 +2175,13 @@ rm.namespace('rm.checkout');
 	 */
 	,'df-theme-em-marketplace': {'package': 'default', 'skin': 'em0067'}
 	/**
+	 * 2015-12-02
+	 * ThemeForest Gala SoftwareMarket
+	 * http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061
+	 * http://magento-forum.ru/forum/373/
+	 */
+	,'df-theme-gala-softwaremarket': {'package': 'default', 'theme': 'softwaremarket'}
+	/**
 	 * ThemeForest Gala TitanShop
 	 * http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636
 	 * http://magento-forum.ru/forum/352/
