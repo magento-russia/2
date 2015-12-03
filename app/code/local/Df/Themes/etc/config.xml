@@ -795,7 +795,12 @@
 				</EM_Bestsellerproducts>
 				<EM_Blog>
 					<files>
-						<default>EM/Blog.csv</default>
+						<!--
+							2015-12-03
+							Нельзя использовать здесь ключ «default»,
+							потому что этот ключ перетирается модулем.
+						-->
+						<df>EM/Blog.csv</df>
 					</files>
 				</EM_Blog>
 				<EM_Cmswidget>
