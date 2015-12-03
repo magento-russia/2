@@ -22,7 +22,7 @@ class Df_Localization_Model_Realtime_Translator extends Df_Core_Model_Abstract {
 	/** @var bool $needLog */
 	public static $needLog = false;
 	/** @var string */
-	public static $watched = 'EM Blog';
+	public static $watched = '';
 	/** @var bool */
 	public static $needle = false;
 
