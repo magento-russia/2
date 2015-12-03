@@ -800,12 +800,14 @@
 				</EM_Blog>
 				<EM_Cmswidget>
 					<files>
-						<catalog>EM/Cmswidget.csv</catalog>
+						<catalog>Mage_Catalog.csv</catalog>
+						<default>EM/Cmswidget.csv</default>
 					</files>
 				</EM_Cmswidget>
 				<EM_Dynamicproducts>
 					<files>
 						<catalog>Mage_Catalog.csv</catalog>
+						<default>EM/Dynamicproducts.csv</default>
 					</files>
 				</EM_Dynamicproducts>
 				<EM_LayeredNavigation>
@@ -826,6 +828,7 @@
 				<EM_Newproducts>
 					<files>
 						<catalog>Mage_Catalog.csv</catalog>
+						<default>EM/Newproducts.csv</default>
 					</files>
 				</EM_Newproducts>
 				<EM_Onestepcheckout>
