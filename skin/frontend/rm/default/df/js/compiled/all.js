@@ -1629,6 +1629,7 @@ rm.namespace('rm.checkout');
 	}
 	/** @type {jQuery} HTMLFormElement */
 	var $loginForm = $('#login-form');
+	debugger;
 	if (0 < $loginForm.length) {
 		/** @type {jQuery} HTMLInputElement */
 		var $formKeyField = $('input[name="form_key"]', $loginForm);
