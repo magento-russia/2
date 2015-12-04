@@ -35,9 +35,28 @@
 							 * {'package':'default', 'theme':'default', 'skin':'theme454'}
 							 */
 							applicable =
-									!rm.defined(rm.tweaks.options.skin)
-								||
-									('default' === rm.tweaks.options.skin)
+								!rm.defined(rm.tweaks.options.skin)
+								|| ('default' === rm.tweaks.options.skin)
+								/**
+								 * 2015-12-04
+								 * Добавил это условие для ситуации:
+								 * rm.tweaks.options:
+										{
+											"package":"default"
+											,"theme":"galasoftwaremarket"
+											,"skin":"galasoftwaremarket"
+										}
+								 * themeConditions.theme:
+										{
+											'package': 'default'
+											, 'theme': 'galasoftwaremarket'
+										}
+								 */
+								|| (
+									('default' !== rm.tweaks.options.theme)
+									&& rm.defined(themeConditions.theme)
+									&& themeConditions.theme === rm.tweaks.options.theme
+								)
 							;
 						}
 						else {

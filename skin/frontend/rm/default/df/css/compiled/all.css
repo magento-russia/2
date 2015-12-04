@@ -1250,6 +1250,8 @@ body.df {
 
 :lang(ru) .em_block-tag-cloud .block-content .actions a, :lang(ru) span.post-by span {
   text-transform: none !important; }
+:lang(ru) .blog.toolbar-bottom .sort-by select {
+  text-transform: lowercase; }
 
 body.df-theme-argento .quick-links ul.links {
   text-transform: lowercase; }
@@ -1330,6 +1332,9 @@ body.df-theme-em-marketplace .sidebar .block-title {
   text-transform: none; }
 body.df-theme-em-marketplace #opc-shipping_method .sp-methods dt {
   float: none; }
+
+body.df-theme-gala-softwaremarket .go-cart {
+  text-transform: lowercase; }
 
 body.df-theme-gala-titanshop {
   /**

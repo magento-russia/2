@@ -2082,9 +2082,28 @@ rm.namespace('rm.checkout');
 							 * {'package':'default', 'theme':'default', 'skin':'theme454'}
 							 */
 							applicable =
-									!rm.defined(rm.tweaks.options.skin)
-								||
-									('default' === rm.tweaks.options.skin)
+								!rm.defined(rm.tweaks.options.skin)
+								|| ('default' === rm.tweaks.options.skin)
+								/**
+								 * 2015-12-04
+								 * Добавил это условие для ситуации:
+								 * rm.tweaks.options:
+										{
+											"package":"default"
+											,"theme":"galasoftwaremarket"
+											,"skin":"galasoftwaremarket"
+										}
+								 * themeConditions.theme:
+										{
+											'package': 'default'
+											, 'theme': 'galasoftwaremarket'
+										}
+								 */
+								|| (
+									('default' !== rm.tweaks.options.theme)
+									&& rm.defined(themeConditions.theme)
+									&& themeConditions.theme === rm.tweaks.options.theme
+								)
 							;
 						}
 						else {
@@ -2180,7 +2199,7 @@ rm.namespace('rm.checkout');
 	 * http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061
 	 * http://magento-forum.ru/forum/373/
 	 */
-	,'df-theme-gala-softwaremarket': {'package': 'default', 'theme': 'softwaremarket'}
+	,'df-theme-gala-softwaremarket': {'package': 'default', 'theme': 'galasoftwaremarket'}
 	/**
 	 * ThemeForest Gala TitanShop
 	 * http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636

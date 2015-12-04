@@ -2,4 +2,8 @@
 // Gala SoftwareMarket
 // http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061
 // http://magento-forum.ru/forum/373/
-body.df-theme-gala-softwaremarket {}
+body.df-theme-gala-softwaremarket {
+	// 2015-12-04
+	// Ссылка «Открыть корзину»
+	.go-cart {text-transform: lowercase;}
+}

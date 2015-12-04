@@ -16,7 +16,7 @@
 	 * http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061
 	 * http://magento-forum.ru/forum/373/
 	 */
-	,'df-theme-gala-softwaremarket': {'package': 'default', 'theme': 'softwaremarket'}
+	,'df-theme-gala-softwaremarket': {'package': 'default', 'theme': 'galasoftwaremarket'}
 	/**
 	 * ThemeForest Gala TitanShop
 	 * http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636
