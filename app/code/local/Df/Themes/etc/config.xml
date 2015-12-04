@@ -779,6 +779,7 @@
 				</Cmsmart_Megamenu>
 				<EM_Ajaxcart>
 					<files>
+						<df>EM/Ajaxcart.csv</df>
 						<catalog>Mage_Catalog.csv</catalog>
 						<checkout>Mage_Checkout.csv</checkout>
 					</files>

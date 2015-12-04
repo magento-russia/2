@@ -386,7 +386,7 @@
 "Validation has failed.","Проверка не пройдена."
 "Values less than 60 are ignored. Note that changes will apply after logout.","Значения меньше 60-ти будут проигнорированы. Изменения будут применены только после выхода (logout)."
 "Variable Code must be unique.","Код переменной должен быть уникальным."
-"View cart & checkout","Оформить заказ"
+"View cart & checkout","Корзина"
 "Web","Интернет"
 "Web Services Configuration","Параметры прикладного программного интерфейса Magento для внешних систем"
 "Web Services definition files (api.xml).","Кэширует файлы api.xml"
