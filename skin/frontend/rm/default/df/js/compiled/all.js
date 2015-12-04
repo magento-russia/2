@@ -1616,18 +1616,13 @@ rm.namespace('rm.checkout');
 		}
 	}; _this.init(); return _this; } };
 
-})(jQuery);/**
- * Программный код,
- * который надо выполнить сразу после загрузки страницы
- */
-rm.namespace('rm.checkout');
+})(jQuery);rm.namespace('rm.checkout');
 (function($) { $(function() {
 	rm.namespace('rm.tweaks');
 	// rm.tweaks.options отсутствует на страницах формы ПД-4
 	if (!rm.tweaks.options) {
 		rm.tweaks.options = {};
 	}
-
 	/**
 	 * 2015-12-05
 	 * Удивительно, как я не додумался до такого решения раньше, ведь оно совсем простое.
@@ -1636,7 +1631,6 @@ rm.namespace('rm.checkout');
 	 */
 	/** @type {jQuery} HTMLFormElement[] */
 	var $loginForms = $("form[action*='customer/account/loginPost']");
-	debugger;
 	$loginForms.each(function() {
 		/** @type {jQuery} HTMLFormElement */
 		var $form = $(this);

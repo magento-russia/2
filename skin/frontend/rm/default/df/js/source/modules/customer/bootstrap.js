@@ -1,7 +1,3 @@
-/**
- * Программный код,
- * который надо выполнить сразу после загрузки страницы
- */
 rm.namespace('rm.checkout');
 (function($) { $(function() {
 	rm.namespace('rm.tweaks');
@@ -9,7 +5,6 @@ rm.namespace('rm.checkout');
 	if (!rm.tweaks.options) {
 		rm.tweaks.options = {};
 	}
-
 	/**
 	 * 2015-12-05
 	 * Удивительно, как я не додумался до такого решения раньше, ведь оно совсем простое.
