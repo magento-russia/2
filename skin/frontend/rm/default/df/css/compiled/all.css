@@ -1248,6 +1248,9 @@ body.df {
 #reward_placer {
   margin-bottom: 10px; }
 
+:lang(ru) .em_block-tag-cloud .block-content .actions a, :lang(ru) span.post-by span {
+  text-transform: none !important; }
+
 body.df-theme-argento .quick-links ul.links {
   text-transform: lowercase; }
 body.df-theme-argento .header-container .mini-search a.chzn-default {

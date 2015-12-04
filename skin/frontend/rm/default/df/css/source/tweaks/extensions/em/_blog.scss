@@ -1,0 +1,7 @@
+:lang(ru) {
+	// 2015-12-04
+	// В оригинале: capitalize, и ссылка на метки выглядит как «Все Метки», что некрасиво.
+	.em_block-tag-cloud .block-content .actions a, span.post-by span {
+		text-transform: none !important;
+	}
+}
