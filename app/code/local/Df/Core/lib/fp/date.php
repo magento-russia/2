@@ -3,13 +3,10 @@
  * 2015-12-04
  * @param Zend_Date $date [optional]
  * @param string $format [optional]
- * @param bool $showTime [optional]
  * @return string
  */
-function df_date_format(
-	$date = null, $format = Mage_Core_Model_Locale::FORMAT_TYPE_SHORT, $showTime = false
-) {
-	return df_mage()->coreHelper()->formatDate($date, $format, $showTime);
+function df_date_format($date = null, $format = Mage_Core_Model_Locale::FORMAT_TYPE_LONG) {
+	return df_mage()->coreHelper()->formatDate($date, $format);
 }
 
 /**
