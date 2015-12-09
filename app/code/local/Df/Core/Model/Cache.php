@@ -217,19 +217,18 @@ class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
 		return $this->{__METHOD__};
 	}
 
-	/** @return int|bool|null */
+	/**
+	 * 2015-12-09
+	 * Обратите внимание,
+	 * что мы намерернно используем @uses array_key_exists() вместо
+	 * потому чтов нашем случае null является полноценным значением и означает «кэшировать вечно»,
+	 * в то время как значение по умолчанию — «кэшировать на время, заданное в настройках ядра».
+	 * @return int|bool|null
+	 */
 	protected function getLifetime() {
-		return
-			$this->isInfinite()
-			? self::LIFETIME_INFINITE
-			/**
-			 * Обратите внимание,
-			 * что мы намерернно используем @see df_a() вместо @see Df_Core_Model_Abstract::cfg(),
-			 * потому что cfg() при обработке значения null предпочтёт ему значение по умолчанию,
-			 * а в нашем случае null является полноценным значением и означает «кэшировать вечно»,
-			 * в то время как значение по умолчанию — «кэшировать на время, заданное в настройках ядра».
-			 */
-			: df_a($this->_data, self::P__LIFETIME, self::LIFETIME_STANDARD)
+		return array_key_exists(self::P__LIFETIME, $this->_data)
+			? $this->_data[self::P__LIFETIME]
+			: self::LIFETIME_STANDARD
 		;
 	}
 
@@ -241,9 +240,6 @@ class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
 	/** @return string */
 	protected function getType() {return $this->cfg(self::P__TYPE);}
 
-	/** @return bool */
-	protected function isInfinite() {return $this->cfg(self::P__INFINITE, false);}
-
 	/**
 	 * @override
 	 * @return void
@@ -251,7 +247,6 @@ class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__INFINITE, self::V_BOOL)
 			->_prop(self::P__TAGS, self::V_ARRAY)
 			->_prop(self::P__TYPE, self::V_STRING)
 		;
@@ -287,7 +282,6 @@ class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
 	 * через 2 часа.
 	 */
 	const LIFETIME_STANDARD = false;
-	const P__INFINITE = 'infinite';
 	const P__LIFETIME = 'lifetime';
 	const P__TAGS = 'tags';
 	const P__TYPE = 'type';
