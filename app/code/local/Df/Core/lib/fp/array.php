@@ -589,7 +589,7 @@ function df_map(
 ) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
-	if (!$paramsToAppend && !$paramsToPrepend) {
+	if (!$paramsToAppend && !$paramsToPrepend && 0 === $keyPosition) {
 		$result = array_map($callback, $array);
 	}
 	else {
