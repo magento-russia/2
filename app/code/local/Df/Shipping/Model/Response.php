@@ -13,7 +13,7 @@ class Df_Shipping_Model_Response extends Df_Core_Model_Abstract {
 	 */
 	public function json($path = null, $defaultValue = null) {
 		if (!isset($this->_jsonDecoded)) {
-			$this->_jsonDecoded = Zend_Json::decode($this->getRequest()->preprocessJson($this->text()));
+			$this->_jsonDecoded = df_json_decode($this->getRequest()->preprocessJson($this->text()));
 			df_result_array($this->_jsonDecoded);
 		}
 		/** @var mixed[]|mixed $result */

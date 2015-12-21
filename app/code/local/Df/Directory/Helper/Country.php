@@ -57,7 +57,7 @@ class Df_Directory_Helper_Country extends Mage_Core_Helper_Abstract {
 	public function getMapFromIso2CodeToNameCases() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Zend_Json::decode(
+				df_json_decode(
 					file_get_contents(
 						df_concat_path(
 							Mage::getModuleDir(

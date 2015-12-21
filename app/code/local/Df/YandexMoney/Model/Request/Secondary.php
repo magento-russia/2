@@ -42,7 +42,7 @@ abstract class Df_YandexMoney_Model_Request_Secondary extends Df_Payment_Model_R
 	 */
 	protected function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Json::decode($this->getHttpClient()->request()->getBody());
+			$this->{__METHOD__} = df_json_decode($this->getHttpClient()->request()->getBody());
 		}
 		return $this->{__METHOD__};
 	}

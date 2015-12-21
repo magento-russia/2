@@ -941,7 +941,7 @@ abstract class phpQuery {
 	 */
 	public static function parseJSON($json) {
 		if (function_exists('json_decode')) {
-			$return = json_decode(trim($json), true);
+			$return = df_json_decode(trim($json));
 			// json_decode and UTF8 issues
 			if (isset($return))
 				return $return;

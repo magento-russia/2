@@ -47,7 +47,7 @@ class Df_Cdek_Model_Map extends Df_Core_Model_DestructableSingleton {
 			df_assert_string_not_empty($responseAsJson);
 			$responseAsJson = df_trim($responseAsJson, '()');
 			/** @var string[] $responseAsArray */
-			$responseAsArray = Zend_Json::decode($responseAsJson);
+			$responseAsArray = df_json_decode($responseAsJson);
 			df_assert_array($responseAsArray);
 			$responseAsArray = df_a($responseAsArray, 'geonames');
 			df_assert_array($responseAsArray);

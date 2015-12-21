@@ -166,22 +166,7 @@ class Df_Logging_Model_Handler_Controllers
 	 * @return Df_Logging_Model_Event|bool
 	 */
 	public function postDispatchPollValidation($config, $eventModel) {
-		$out =
-			/**
-			 * Zend_Json::decode использует json_decode при наличии расширения PHP JSON
-			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * @see Zend_Json::decode
-			 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-			 * Обратите внимание,
-			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * @link http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование Zend_Json::decode выглядит более правильным, чем json_decode.
-			 */
-			Zend_Json::decode(
-				Mage::app()->getResponse()->getBody()
-				,$objectDecodeType = Zend_Json::TYPE_OBJECT
-			)
-		;
+		$out = df_json_decode(Mage::app()->getResponse()->getBody(), false);
 		if (!empty($out->error)) {
 			$id = Mage::app()->getRequest()->getParam('id');
 			return $eventModel->setIsSuccess(false)->setInfo($id == 0 ? '' : $id);
@@ -202,21 +187,7 @@ class Df_Logging_Model_Handler_Controllers
 	 * @return Df_Logging_Model_Event|bool
 	 */
 	public function postDispatchCustomerValidate($config, $eventModel) {
-		$out =
-			/**
-			 * Zend_Json::decode использует json_decode при наличии расширения PHP JSON
-			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * @see Zend_Json::decode
-			 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-			 * Обратите внимание,
-			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * @link http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование Zend_Json::decode выглядит более правильным, чем json_decode.
-			 */
-			Zend_Json::decode(
-				Mage::app()->getResponse()->getBody()
-				,$objectDecodeType = Zend_Json::TYPE_OBJECT
-			);
+		$out = df_json_decode(Mage::app()->getResponse()->getBody(), false);
 		if (!empty($out->error)) {
 			$id = Mage::app()->getRequest()->getParam('id');
 			return $eventModel->setIsSuccess(false)->setInfo($id == 0 ? '' : $id);

@@ -53,7 +53,7 @@ class Df_Megapolis_Model_Map extends Df_Core_Model_DestructableSingleton {
 					)
 				;
 				/** @var string[] $responseAsArray */
-				$responseAsArray = Zend_Json::decode($responseAsJson);
+				$responseAsArray = df_json_decode($responseAsJson);
 				df_assert_array($responseAsArray);
 				foreach ($responseAsArray as $locationAsArray) {
 					/** @var array(string => string|int|null) $locationAsArray */

@@ -56,7 +56,7 @@ class Df_PageCache_Model_Processor_Category extends Df_PageCache_Model_Processor
 
 		$sessionParams = Df_PageCache_Model_Cookie::getCategoryCookieValue();
 		if ($sessionParams) {
-			$sessionParams = (array)json_decode($sessionParams);
+			$sessionParams = (array)df_json_decode($sessionParams);
 			foreach ($sessionParams as $key => $value) {
 				if (in_array($key, $this->_paramsMap) && !isset($queryParams[$key])) {
 					$queryParams[$key] = $value;
@@ -114,10 +114,10 @@ class Df_PageCache_Model_Processor_Category extends Df_PageCache_Model_Processor
 	 */
 	protected function _prepareCatalogSession()
 	{
-		$queryParams = json_decode($this->_getQueryParams(), true);
+		$queryParams = df_json_decode($this->_getQueryParams());
 		if (empty($queryParams)) {
 			$queryParams = Df_PageCache_Model_Cookie::getCategoryCookieValue();
-			$queryParams = json_decode($queryParams, true);
+			$queryParams = df_json_decode($queryParams);
 		}
 
 		if (is_array($queryParams) && !empty($queryParams)) {

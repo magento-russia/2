@@ -431,19 +431,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 		;
 		if (!is_null($additionalSettingsEncoded)) {
 			/** @var array|bool $additionalSettings */
-			$additionalSettings =
-				/**
-				 * Zend_Json::decode использует json_decode при наличии расширения PHP JSON
-				 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-				 * @see Zend_Json::decode
-				 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-				 * Обратите внимание,
-				 * что расширение PHP JSON не входит в системные требования Magento.
-				 * @link http://www.magentocommerce.com/system-requirements
-				 * Поэтому использование Zend_Json::decode выглядит более правильным, чем json_decode.
-				 */
-				Zend_Json::decode($additionalSettingsEncoded)
-			;
+			$additionalSettings = df_json_decode($additionalSettingsEncoded);
 			df_assert_array($additionalSettings);
 			$object
 				->addData(

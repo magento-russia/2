@@ -39,7 +39,7 @@ class Df_Alfabank_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 			/** @var array(string => string) $result */
 			$result = null;
 			try {
-				$result = Zend_Json::decode($this->getResponseAsJson());
+				$result = df_json_decode($this->getResponseAsJson());
 			}
 			catch (Zend_Json_Exception $e) {
 				$this->getPaymentMethod()

@@ -49,7 +49,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 			/** @var string|array(string => mixed) $images */
 			$images = $value['images'];
 			if ($images && is_string($images)) {
-				$images = Zend_Json::decode($images);
+				$images = df_json_decode($images);
 			}
 			if (!is_array($images)) {
 				$images = array();
@@ -70,7 +70,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 			/** @var bool $valuesWasEncoded */
 			$valuesWasEncoded = false;
 			if ($values && is_string($values)) {
-				$values = Zend_Json::decode($values);
+				$values = df_json_decode($values);
 				$valuesWasEncoded = true;
 			}
 			if (!is_array($values)) {

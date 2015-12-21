@@ -64,7 +64,7 @@ abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Requ
 	protected function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			try {
-				$this->{__METHOD__} = Zend_Json::decode($this->getResponseAsJson());
+				$this->{__METHOD__} = df_json_decode($this->getResponseAsJson());
 			}
 			catch (Zend_Json_Exception $e) {
 				df_notify_exception($e);

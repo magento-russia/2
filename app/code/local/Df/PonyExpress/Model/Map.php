@@ -56,7 +56,7 @@ class Df_PonyExpress_Model_Map extends Df_Core_Model_DestructableSingleton {
 			df_assert_string_not_empty($responseAsJson);
 			$responseAsJson = str_replace('﻿', '' , $responseAsJson);
 			/** @var string[] $responseAsArray */
-			$responseAsArray = Zend_Json::decode($responseAsJson);
+			$responseAsArray = df_json_decode($responseAsJson);
 			df_assert_array($responseAsArray);
 			/**
 			 * Для города Birmingham сервер возвращает странный массив

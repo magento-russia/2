@@ -181,7 +181,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 	/** @return array */
 	private function getInnerProducts() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Json::decode(
+			$this->{__METHOD__} = df_json_decode(
 				df_a($this->getImportedRow(), Df_Dataflow_Model_Import_Product_Row::FIELD__BUNDLE)
 			);
 			df_result_array($this->{__METHOD__});

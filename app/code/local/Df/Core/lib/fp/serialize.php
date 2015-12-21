@@ -13,6 +13,18 @@ if (false) {
 	function igbinary_unserialize($data) {df_should_not_be_here(__FUNCTION__);}
 }
 
+/**
+ * 2015-12-19
+ * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
+ * «Decoding failed: Syntax error»
+ * @param string $string
+ * @param bool $returnArray [optional]
+ * @return mixed|bool
+ */
+function df_json_decode($string, $returnArray = true) {
+	return '' === $string ? $string : json_decode($string, $returnArray);
+}
+
 /** @return bool */
 function rm_igbinary_available() {
 	/** bool $result */
@@ -90,32 +102,7 @@ function rm_unserialize_simple($data) {
 	return
 		false && rm_igbinary_available()
 		? @igbinary_unserialize($data)
-		/**
-		 * @see Zend_Json::decode() использует json_decode при наличии расширения PHP JSON
-		 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-		 * @see Zend_Json::decode
-		 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-		 * Обратите внимание,
-		 * что расширение PHP JSON не входит в системные требования Magento.
-		 * @link http://www.magentocommerce.com/system-requirements
-		 * Поэтому использование @see Zend_Json::decode выглядит более правильным,
-		 * чем @see json_decode().
-		 *
-		 * Обратите внимание, что при использовании @see json_decode() напрямую
-		 * параметр $assoc = true надо указывать обязательно,
-		 * иначе @see json_decode() может вернуть объект даже в том случае,
-		 * когда посредством @see json_encode() был кодирован массив.
-		 *
-		 * При использовании @see Zend_Json::decode()
-		 * второй параметр $objectDecodeType имеет значение Zend_Json::TYPE_ARRAY по умолчанию,
-		 * поэтому его можно не указывать.
-		 *
-		 * $result = Zend_Json::decode($serialized);
-		 *
-		 * P.S. Оно, конечно, правильнее, но @see json_decode() работает заметно быстрее,
-		 * чем обёртка @see Zend_Json::decode()
-		 */
-		: json_decode($data, $assoc = true)
+		: df_json_decode($data)
 	;
 }
 

@@ -4,7 +4,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model_Abstract {
 	private function _render() {
 		return strtr(
 			!$this->content() && $this->isShortTagAllowed()
-			? '<{tag-and-attributes}/>'
+			? '<{tag-and-attributes}{after-attributes}/>'
 			: '<{tag-and-attributes}{after-attributes}>{content}</{tag}>'
 			,array(
 				'{tag}' => $this->tag()

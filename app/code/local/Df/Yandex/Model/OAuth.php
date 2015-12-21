@@ -58,7 +58,7 @@ abstract class Df_Yandex_Model_OAuth extends Df_Core_Model_Abstract {
 	/** @return array(string => string) */
 	private function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Json::decode($this->getHttpClient()->request()->getBody());
+			$this->{__METHOD__} = df_json_decode($this->getHttpClient()->request()->getBody());
 			df_result_array($this->{__METHOD__});
 			$this->checkResponse($this->{__METHOD__});
 		}

@@ -18,19 +18,7 @@ class Df_Core_Model_RemoteControl_Coder extends Df_Core_Model_Abstract {
 		;
 		df_assert_string($dataAsJson);
 		/** @var array $result */
-		$result =
-			/**
-			 * Zend_Json::decode использует json_decode при наличии расширения PHP JSON
-			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * @see Zend_Json::decode
-			 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-			 * Обратите внимание,
-			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * @link http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование Zend_Json::decode выглядит более правильным, чем json_decode.
-			 */
-			Zend_Json::decode($dataAsJson)
-		;
+		$result = df_json_decode($dataAsJson);
 		df_result_array($result);
 		return $result;
 	}

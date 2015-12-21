@@ -333,27 +333,7 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 			 */
 			$cacheId = __METHOD__ . '::' . md5($this->getPathFull());
 			if ($canUseCache) {
-				/**
-				 * @see Zend_Json::decode() использует json_decode при наличии расширения PHP JSON
-				 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-				 * @see Zend_Json::decode
-				 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-				 * Обратите внимание,
-				 * что расширение PHP JSON не входит в системные требования Magento.
-				 * @link http://www.magentocommerce.com/system-requirements
-				 * Поэтому использование @see Zend_Json::decode выглядит более правильным,
-				 * чем @see json_decode().
-				 *
-				 * Обратите внимание, что при использовании @see json_decode() напрямую
-				 * параметр $assoc = true надо указывать обязательно,
-				 * иначе @see json_decode() может вернуть объект даже в том случае,
-				 * когда посредством @see json_encode() был кодирован массив.
-				 *
-				 * При использовании @see Zend_Json::decode()
-				 * второй параметр $objectDecodeType имеет значение Zend_Json::TYPE_ARRAY по умолчанию,
-				 * поэтому его можно не указывать.
-				 */
-				$this->_entries = Zend_Json::decode(Mage::app()->loadCache($cacheId));
+				$this->_entries = df_json_decode(Mage::app()->loadCache($cacheId));
 			}
 			if (!isset($this->_entries) || !is_array($this->_entries)) {
 				foreach ($this->e()->xpath('//en_US') as $entry) {
