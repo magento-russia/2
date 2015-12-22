@@ -606,8 +606,7 @@
             margin-bottom: 0;
             margin-top: 20px; }
             .df .df-checkout-ergonomic .df-body .df-block-method-review #checkout-review-submit #checkout-agreements .checkout-agreements li:nth-child(1) {
-              margin-top: 0;
-              border: 1px solid red; }
+              margin-top: 0; }
           .df .df-checkout-ergonomic .df-body .df-block-method-review #checkout-review-submit #checkout-agreements .checkout-agreements p.agree label {
             /** RWD ╨╛╤В╨╛╨▒╤А╨░╨╢╨░╨╡╤В ╨▒╨╗╨╡╨┤╨╜╨╛ */
             font-weight: bold; }

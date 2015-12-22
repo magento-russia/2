@@ -828,8 +828,12 @@ class Df_PageCache_Model_Observer {
 			return $this;
 		}
 		$sslOffloaderHeader = trim((string) Mage::getConfig()->getNode(
-			Mage_Core_Model_Store::XML_PATH_OFFLOADER_HEADER,
-			'default'
+			/**
+			 * 2015-12-22
+			 * В Magento CE 1.6.0.0
+			 * константа @see Mage_Core_Model_Store::XML_PATH_OFFLOADER_HEADER отсутствует.
+			 */
+			'web/secure/offloader_header', 'default'
 		));
 
 		$cachedSslOffloaderHeader = $this->_cacheInstance
