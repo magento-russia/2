@@ -19,4 +19,9 @@
 !skin/frontend/rm/**/*
 dev/
 mail/
-*.css.map
+# 2015-12-22
+# Раньше я исключал ещё файлы *.css.map,
+# однако эти файлы предназначены для сопоставления *.css и *.scss,
+# и Google Chrome Developer Tools использует их,
+# чтобы показать файл *.scss вместо скомпилированного *.css:
+# http://thesassway.com/intermediate/using-source-maps-with-sass
