@@ -18,4 +18,5 @@
 !skin/adminhtml/rm/**/*
 !skin/frontend/rm/**/*
 dev/
+mail/
 *.css.map
