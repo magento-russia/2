@@ -1589,7 +1589,8 @@ body.df-theme-smartwave-porto .df-checkout-ergonomic-page .form-list label {
   margin-bottom: 0; }
 body.df-theme-smartwave-porto .df-checkout-ergonomic-page .form-list .input-box {
   margin-bottom: 0; }
-
+body.df-theme-smartwave-porto .footer .footer-bottom .custom-block:first-child {
+  margin-left: 0; }
 body.df-theme-smartwave-porto.checkout-onepage-index .fancybox-close {
   display: none; }
 
