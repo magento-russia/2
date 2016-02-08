@@ -1,5 +1,5 @@
 <?php
-class Df_Page_Block_Html_Welcome extends Mage_Page_Block_Html_Welcome {
+class Df_Page_Block_Html_Welcome extends Df_Page_Block_Html_WelcomeM {
 	/**
 	 * 2015-11-16
 	 * Цель перекрытия —
