@@ -103,14 +103,14 @@
 				if (0 === $('dt', $methodsContainer).length) {
 					var $parent = $methodsContainer.parent();
 					/**
-					 * Отсутствуют способы оплаты
+					 * Отсутствуют способы доставки
 					 */
 					$methodsContainer
 						.replaceWith(
 							$('<div id="checkout-shipping-method-load" />')
 								.html(
-"<p><span class='p'>Чтобы узнать доступные для Вашего заказа варианты доставки — укажите подробный адрес доставки.</span>"
-+ "<span class='p'>Если Вы уже указали адрес доставки, но варианты доставки так и не появились — пожалуйста, позвоните нам по телефону, и мы подберём индивидуальный вариант доставки Вашего заказа.</span></p>"
+								'<p>' + Translator.translate('Sorry, no quotes are available for Shipping Methods at this time.') + '</p>' + '<br>' +
+'<p>' + Translator.translate('If you have already completed the detailed profiles of the previous block, but shipping methods did not appear - please send us email and we will select an individual option to ship your order.') + '</p>'
 								)
 						)
 					;

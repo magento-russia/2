@@ -91,9 +91,8 @@
 						.replaceWith(
 							$('<div id="checkout-payment-method-load" />')
 								.html(
-"<p><span class='p'>Чтобы узнать доступные для Вашего заказа варианты оплаты — подробно заполните предыдущие блоки анкеты(платёжные реквизиты, адрес доставки, способ доставки).</span>"
-+
-"<span class='p'>Если Вы уже заполнили подробно предыдущие блоки анкеты, но варианты доставки так и не появились — пожалуйста, позвоните нам по телефону, и мы подберём индивидуальный вариант оплаты Вашего заказа.</span></p>"
+								'<p>' + Translator.translate('Sorry, no quotes are available for Payment Methods at this time.') + '</p>' + '<br>' +
+								'<p>' + Translator.translate('If you have already completed the detailed profiles of the previous block, but payment methods did not appear - please send us email and we will select an individual option to confirm payment for your order.') + '</p>'
 								)
 						)
 					;

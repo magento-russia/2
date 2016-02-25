@@ -34,10 +34,9 @@
 ?>
 <div class='df'>
 	<div class='df-checkout-ergonomic'>
-		<h1>Оформление заказа</h1>
-		<div class='df-legend'>поля с <span class='df-red-star'>красной звездой</span> обязательны для заполнения</div>
+		<h1><?php echo $this->__('Checkout Page') ?></h1>
 		<?php if (!df_mage()->customer()->isLoggedIn()) { ?>
-			<a class='df-login' href='#df-login'>ранее покупали у нас что-то?</a>
+			<a class='df-login' href='#df-login'><?php echo $this->__('Log In') ?></a> <?php echo $this->__('If you have purchased something before') ?>
 			<?php
 				if ($blockLogin instanceof Mage_Checkout_Block_Onepage_Login) {
 					echo $blockLogin->getChildHtml('login_before');
@@ -67,20 +66,20 @@
 				<div class='df-body-right-inner'>
 					<div class='df-body-right-top'>
 						<div class='df-column-2'>
-							<h2>Способ доставки</h2>
+							<h2><?php echo $this->__('Shipping Method') ?></h2>
 							<div id='opc-shipping_method' class='df-block df-block-method-shipping'>
 								<?php echo $this->getChildHtml('shipping_method'); ?>
 							</div>
 						</div>
 						<div class='df-column-3'>
-							<h2>Способ оплаты</h2>
+							<h2><?php echo $this->__('Payment Method') ?></h2>
 							<div id='opc-payment' class='df-block df-block-method-payment'>
 								<?php echo $this->getChildHtml('payment'); ?>
 							</div>
 						</div>
 					</div>
 					<div id='opc-review' class='df-block df-block-method-review'>
-						<h2>Ваш заказ</h2>
+						<h2><?php echo $this->__('Order Details') ?></h2>
 						<div class="order-review" id="checkout-review-load">
 							<?php echo $this->getBlockHtml('rm.checkout.onepage.review.info'); ?>
 						</div>
@@ -89,7 +88,8 @@
 			</div>
 			<div class='df-body-left'>
 				<div class='df-body-left-inner'>
-					<h2>Контактные данные</h2>
+					<h2><?php echo $this->__('Customer Information') ?></h2>
+					<div class='df-legend' style="text-align:right"><span style='color:#ff0000'>*</span> - <?php echo $this->__('Required fields') ?></div>
 					<?php
 						if (
 								false
@@ -108,12 +108,12 @@
 						}
 					?>
 					<div id='opc-billing' class='df-block df-block-address-billing'>
-						<h3 class='df-h3'>Платёжные реквизиты</h3>
+						<h3 class='df-h3'><?php echo $this->__('Payment Details') ?></h3>
 						<?php echo df_block_render(Df_YandexMarket_Block_GetAddress::_CLASS); ?>
 						<?php echo $this->getChildHtml('billing'); ?>
 					</div>
 					<div id='opc-shipping' class='df-block df-block-address-shipping'>
-						<h3 class='df-h3'>Адрес доставки</h3>
+						<h3 class='df-h3'><?php echo $this->__('Shipping Address') ?></h3>
 						<?php echo $this->getChildHtml('shipping'); ?>
 					</div>
 				</div>
@@ -127,8 +127,8 @@
 		id='loading_mask_loader'
 	><img
 		src='<?php echo $this->getSkinUrl('df/images/ajax-loader-tr.gif') ?>'
-		alt='Подождите...'
-	/><div class='df-text'>Подождите...</div></div>
+		alt='<?php echo $this->__('Please Wait') ?>...'
+	/><div class='df-text'><?php echo $this->__('Please Wait') ?>...</div></div>
 </div>
 <script type="text/javascript">
 //<![CDATA[

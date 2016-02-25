@@ -11,4 +11,20 @@
 	<validate-payment-methods-required translate='message' module='checkout'>
 		<message>Please specify payment method.</message>
 	</validate-payment-methods-required>
+	<validate-shipping-methods-required-3 translate="message" module="checkout">
+		<message>Sorry, no quotes are available for Shipping Methods at this time.</message>
+	</validate-shipping-methods-required-3>
+	<validate-shipping-methods-required-2 translate="message" module="checkout">
+		<message>If you have already completed the detailed profiles of the previous block,
+but shipping methods did not appear - please send us email and we will select an individual option
+to ship your order.</message>
+	</validate-shipping-methods-required-2>
+	<validate-payment-methods-required-3 translate="message" module="checkout">
+		<message>Sorry, no quotes are available for Payment Methods at this time.</message>
+	</validate-payment-methods-required-3>
+	<validate-payment-methods-required-2 translate="message" module="checkout">
+		<message>If you have already completed the detailed profiles of the previous block,
+but payment methods did not appear - please send us email and we will select an individual option
+to confirm payment for your order.</message>
+	</validate-payment-methods-required-2>
 </jstranslator>
