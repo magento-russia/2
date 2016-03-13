@@ -1,4 +1,11 @@
 @import 'waiter';
+:lang(ru) {
+	// 2016-03-13
+	// В магазине hoobhookahs.com владелец сдуру включил правило
+	// .button *, .buttons-set {text-transform: capitalize;}
+	// что для русского текста выглядит некрасиво: «* Обязательные Поля».
+	p.required {text-transform: lowercase;}
+}
 #checkout-progress-state {
 	text-transform: lowercase;
 }

@@ -793,6 +793,9 @@ span.p, #checkout-payment-method-load span.p {
       height: 31px;
       margin: 0 auto 0.25em auto; }
 
+:lang(ru) p.required {
+  text-transform: lowercase; }
+
 #checkout-progress-state {
   text-transform: lowercase; }
 
@@ -1421,6 +1424,20 @@ body.df-theme-infortis-ultimo {
   	╨╗╨╛╨│╨╛╤В╨╕╨┐╤Г (╤Б╨╗╨╡╨▓╨░) ╤Г╨┤╨╡╨╗╤П╨╡╨╝ 3 ╨║╨╛╨╗╨╛╨╜╨║╨╕ ╨▓╨╝╨╡╤Б╤В╨╛ 4,
   	╨░ ╨╝╨╡╨╜╤О ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П (╤Б╨┐╤А╨░╨▓╨░) ╤Г╨┤╨╡╨╗╤П╨╡╨╝ 5 ╨║╨╛╨╗╨╛╨╜╨╛╨║ ╨▓╨╝╨╡╤Б╤В╨╛ 4.
   */ }
+  body.df-theme-infortis-ultimo.checkout-onepage-index #df-login.account-login .buttons-set button[type=submit] {
+    min-width: 100px; }
+  body.df-theme-infortis-ultimo.checkout-onepage-index #df-login.account-login .buttons-set > a {
+    line-height: 45px; }
+  body.df-theme-infortis-ultimo.contacts-index-index .buttons-set {
+    width: 100%;
+    max-width: 535px;
+    border: 0;
+    margin-top: 0.5em; }
+    body.df-theme-infortis-ultimo.contacts-index-index .buttons-set p.required {
+      line-height: inherit;
+      float: none;
+      margin-top: 0;
+      margin-bottom: 0.25em; }
   body.df-theme-infortis-ultimo .df .df-checkout-ergonomic {
     /*
     	╨Я╨╛╨┤╨╛╨▒╨╜╨╛╨╡ ╨┐╤А╨░╨▓╨╕╨╗╨╛ ╨┐╤А╨╕╤Б╤Г╤В╤Б╤В╨▓╤Г╨╡╤В ╨▓ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡,
@@ -1435,6 +1452,15 @@ body.df-theme-infortis-ultimo {
   body.df-theme-infortis-ultimo .dropdown-toggle .hide-below-1280
   , body.df-theme-infortis-ultimo .dropdown-toggle .hide-below-960 {
     text-transform: lowercase; }
+  body.df-theme-infortis-ultimo .icon.i-telephone {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    vertical-align: middle;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 3px; }
   body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block {
     width: 23%; }
     body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block#header-search {

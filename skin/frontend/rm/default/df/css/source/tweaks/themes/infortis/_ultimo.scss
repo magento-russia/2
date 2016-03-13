@@ -1,4 +1,37 @@
 body.df-theme-infortis-ultimo {
+	&.checkout-onepage-index #df-login.account-login .buttons-set {
+		// 2016-03-13
+		// В оригинале: 140px, и кнопка «Войти» становится слишком широкой.
+		button[type=submit] {min-width: 100px;}
+		// 2016-03-13
+		// Надпись «Забыли пароль?».
+		// В оригинале (смотрел в магазине hoobhookahs.com) она почему-то уползает вверх
+		// относительно расположенной слева кнопки «Войти».
+		// Поэтому назначаем ей тот же line-height, что и у кнопки «Войти»:
+		// таким образом, надпись «Забыли пароль?» будет выровнена вертикально по центру
+		// относительно кнопки «Войти».
+		> a {line-height: 45px;}
+	}
+	// 2016-03-13
+	// Почему после обновления Ultimo уползает вбок кнопка «Отправить» формы обратной связи?
+	// http://magento-forum.ru/topic/5375/
+	&.contacts-index-index .buttons-set {
+		width: 100%;
+		max-width: 535px;
+		border: 0;
+		// в оригинале: 30px
+		margin-top: 0.5em;
+		p.required {
+			// в оригинале зачем-то стоит 1em.
+			line-height: inherit;
+			// в оригинале: извращение с right.
+			float: none;
+			// в оригинале: -33px
+			margin-top: 0;
+			// в оригинале: 0
+			margin-bottom: 0.25em;
+		}
+	}
 	.df {
 		.df-checkout-ergonomic {
 			/*
@@ -20,6 +53,24 @@ body.df-theme-infortis-ultimo {
 		,.hide-below-960{
 			text-transform: lowercase;
 		}
+	}
+	// 2016-03-13
+	// После обновления Ultimo с версии 1.9.3 до версии 1.15.4 заметил,
+	// что иконка телефона в левом верхнем углу экрана перестала отображаться.
+	// Думаю, это не умышленное скрытие, а дефект, потому что новые стили
+	// всё также устанавливают для иконки картинку, однако стили для .icon пропали,
+	// а без них блок становиться inline, а не inline-block, и без размеров.
+	// Поэтому добавил заплатку.
+	// http://magento-forum.ru/topic/5374/
+	.icon.i-telephone {
+		background-color: transparent;
+		background-repeat: no-repeat;
+		border-radius: 50%;
+		vertical-align: middle;
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		padding: 3px;
 	}
 	/*
 		После русификации ссылки меню пользователя не помещаются в одном ряду в шапке.
