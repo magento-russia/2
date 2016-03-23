@@ -177,5 +177,28 @@
 				</country>
 			</groups>
 		</general>
+		<web>
+			<groups>
+				<secure>
+					<fields>
+						<!-- 2016-03-23 -->
+						<use_in_adminhtml>
+							<comment>
+								<![CDATA[
+Предварительно Вы должны установить и правильно настроить сертификат SSL, <b>иначе Ваш магазин перестанет работать правильно</b>.<br/>Вы можете заказать стандартную услугу «<a href="http://magento-forum.ru/topic/5145/">Настройка HTTPS (установка сертификата SSL)</a>».
+								]]>
+							</comment>
+						</use_in_adminhtml>
+						<use_in_frontend>
+							<comment>
+								<![CDATA[
+Предварительно Вы должны установить и правильно настроить сертификат SSL, <b>иначе Ваш магазин перестанет работать правильно</b>.<br/>Вы можете заказать стандартную услугу «<a href="http://magento-forum.ru/topic/5145/">Настройка HTTPS (установка сертификата SSL)</a>».
+								]]>
+							</comment>
+						</use_in_frontend>
+					</fields>
+				</secure>
+			</groups>
+		</web>
 	</sections>
 </config>

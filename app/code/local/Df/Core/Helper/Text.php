@@ -196,7 +196,16 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 				$result = mb_strtoupper($result);
 				break;
 			case Df_Admin_Model_Config_Source_Format_Text_LetterCase::UCFIRST:
-				$result = df_text()->ucfirst(mb_strtolower(df_trim($result)));
+				/**
+				 * 2016-03-23
+				 * Раньше алгоритм был таким:
+				 * $result = df_text()->ucfirst(mb_strtolower(df_trim($result)));
+				 * Это приводило к тому, что настроечная опция
+				 * «Использовать ли HTTPS для административной части?»
+				 * отображались как «Использовать ли https для административной части?».
+				 * Уже не помню, зачем я ранее здесь использовал @see mb_strtolower
+				 */
+				$result = df_text()->ucfirst(df_trim($result));
 				break;
 		}
 		/**
