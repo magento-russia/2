@@ -6,4 +6,11 @@ body.df-theme-gala-softwaremarket {
 	// 2015-12-04
 	// Ссылка «Открыть корзину»
 	.go-cart {text-transform: lowercase;}
+	// 2016-03-23
+	.global-site-notice.demo-notice {
+		line-height: initial;
+		padding: 20px 0;
+		p {margin: 0;}
+		font-size: 200%;
+	}
 }

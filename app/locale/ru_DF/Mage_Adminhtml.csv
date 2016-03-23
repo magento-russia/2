@@ -1205,7 +1205,7 @@
 "This account is inactive.","Вы отстранены от работы."
 "This attribute set does not have attributes which we can use for configurable product","У этого прикладного типа товаров отсутствуют свойства, которые можно использовать для настраиваемых товаров"
 "This attribute shares the same value in all the stores","У этого свойства одинаковые значения во всех магазинах"
-"This is a demo store. Any orders placed through this store will not be honored or fulfilled.","Это демонстрационный магазин. Любые заказы, оформленные на этом сайте, не будут обработаны или выполнены."
+"This is a demo store. Any orders placed through this store will not be honored or fulfilled.","Магазин ещё находится в разработке, заказы пока не принимаются."
 "This is a required field.","Это обязательное поле."
 "This product is currently disabled.","В данный момент этот товар отключен."
 "This report depends on timezone configuration. Once timezone is changed, the lifetime statistics need to be refreshed.","Если Вы решите сменить часовой пояс сервера, то вам потребуется пересчитать все статистические данные."

@@ -1342,6 +1342,12 @@ body.df-theme-em-marketplace #opc-shipping_method .sp-methods dt {
 
 body.df-theme-gala-softwaremarket .go-cart {
   text-transform: lowercase; }
+body.df-theme-gala-softwaremarket .global-site-notice.demo-notice {
+  line-height: initial;
+  padding: 20px 0;
+  font-size: 200%; }
+  body.df-theme-gala-softwaremarket .global-site-notice.demo-notice p {
+    margin: 0; }
 
 body.df-theme-gala-titanshop {
   /**
