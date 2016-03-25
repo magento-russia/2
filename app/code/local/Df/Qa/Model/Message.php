@@ -17,7 +17,13 @@ abstract class Df_Qa_Model_Message extends Df_Core_Model_Abstract {
 				))
 			;
 			$block->setTemplate($this->getTemplate());
-			$this->{__METHOD__} = $block->toHtml();
+			/**
+			 * 2016-03-25
+			 * Раньше тут стоял вызов @see Mage_Core_Block_Template::toHtml(),
+			 * но @uses Mage_Core_Block_Template::renderView() использовать правильнее,
+			 * потому что нам не нужно кэширование и события.
+			 */
+			$this->{__METHOD__} = $block->renderView();
 		}
 		return $this->{__METHOD__};
 	}
