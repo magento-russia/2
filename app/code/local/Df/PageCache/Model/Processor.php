@@ -315,6 +315,7 @@ class Df_PageCache_Model_Processor
 	 */
 	public function extractContent($content)
 	{
+		/** @var string|bool $result */
 		$cacheInstance = Df_PageCache_Model_Cache::getCacheInstance();
 		/*
 		 * Apply design change
@@ -323,58 +324,91 @@ class Df_PageCache_Model_Processor
 		if ($designChange) {
 			$designChange = unserialize($designChange);
 			if (is_array($designChange) && isset($designChange['package']) && isset($designChange['theme'])) {
-				$designPackage = Mage::getSingleton('core/design_package');
+				//Mage::getSingleton('core/design_package');
+				/**
+				 * 2016-03-25
+				 * В эту точку программы мы попадаем до инициализации модулей:
+				 * @see Mage_Core_Model_App::run()
+					if ($this->_cache->processRequest()) {
+						$this->getResponse()->sendResponse();
+					}
+				 	else {
+						$this->_initModules();
+				 	}
+				 * Получается, что программа сначала вычисляет условие в if,
+				 * попадает сюда, здесь мы устанавливаем синглтоном
+				 * неверный экземпляр «core/design_package»:
+				 * экземпляр ядра, а не наш класс @see Df_Core_Model_Design_PackageM
+				 * Далее наш метод возвращает false, программа попадает в ветку else,
+				 * и далее, если вдруг возникает потребность
+				 * записать диагностический отчёт в системный журнал,
+				 * то система не в состоянии это сделать, потому что не может найти файл
+				 * df/qa/log/notification.phtml, ибо он находится внутри папки rm,
+				 * и это приводит е ещё одному новому сбою о том,
+				 * что диангностическое сообщение пусто:
+				 * http://magento-forum.ru/topic/5383/
+				 *
+				 * Первоначально хотел обойтись Mage::unregister('_singleton/core/design_package');
+				 * однако Magento кэширует не только синглтоны, но и соответствие между
+				 * внутренним именем модели и классом:
+				 * «core/design_package» => Mage_Core_Model_Design_Package
+				 * Нашёл только вот приведённое ниже неуклюжее решение.
+				 */
+				$designPackage = new Df_Core_Model_Design_PackageM;
+				Mage::register('_singleton/core/design_package', $designPackage);
 				$designPackage->setPackageName($designChange['package'])
 					->setTheme($designChange['theme']);
 			}
 		}
-
 		if (!$this->_designExceptionExistsInCache) {
 			//no design exception value - error
 			//must be at least empty value
-			return false;
+			$result = false;
 		}
-		if (!$content && $this->isAllowed()) {
+		else if ($content || !$this->isAllowed()) {
+			$result = $content;
+		}
+		else {
 			$subprocessorClass = $this->getMetadata('cache_subprocessor');
 			if (!$subprocessorClass) {
-				return $content;
+				$result = false;
 			}
+			else {
+				/*
+				 * @var Df_PageCache_Model_Processor_Default
+				 */
+				$subprocessor = new $subprocessorClass;
+				$this->setSubprocessor($subprocessor);
+				$cacheId = $this->prepareCacheId($subprocessor->getPageIdWithoutApp($this));
 
-			/*
-			 * @var Df_PageCache_Model_Processor_Default
-			 */
-			$subprocessor = new $subprocessorClass;
-			$this->setSubprocessor($subprocessor);
-			$cacheId = $this->prepareCacheId($subprocessor->getPageIdWithoutApp($this));
+				$result = $cacheInstance->load($cacheId);
 
-			$content = $cacheInstance->load($cacheId);
+				if ($result) {
+					if (function_exists('gzuncompress')) {
+						$result = gzuncompress($result);
+					}
+					$result = $this->_processContent($result);
 
-			if ($content) {
-				if (function_exists('gzuncompress')) {
-					$content = gzuncompress($content);
-				}
-				$content = $this->_processContent($content);
+					// restore response headers
+					$responseHeaders = $this->getMetadata('response_headers');
+					$response = Mage::app()->getResponse();
+					if (is_array($responseHeaders)) {
+						$response->clearHeaders();
+						foreach ($responseHeaders as $header) {
+							$response->setHeader($header['name'], $header['value'], $header['replace']);
+						}
+					}
 
-				// restore response headers
-				$responseHeaders = $this->getMetadata('response_headers');
-				$response = Mage::app()->getResponse();
-				if (is_array($responseHeaders)) {
-					$response->clearHeaders();
-					foreach ($responseHeaders as $header) {
-						$response->setHeader($header['name'], $header['value'], $header['replace']);
+					// renew recently viewed products
+					$productId = $cacheInstance->load($this->getRequestCacheId() . '_current_product_id');
+					$countLimit = $cacheInstance->load($this->getRecentlyViewedCountCacheId());
+					if ($productId && $countLimit) {
+						Df_PageCache_Model_Cookie::registerViewedProducts($productId, $countLimit);
 					}
 				}
-
-				// renew recently viewed products
-				$productId = $cacheInstance->load($this->getRequestCacheId() . '_current_product_id');
-				$countLimit = $cacheInstance->load($this->getRecentlyViewedCountCacheId());
-				if ($productId && $countLimit) {
-					Df_PageCache_Model_Cookie::registerViewedProducts($productId, $countLimit);
-				}
 			}
-
 		}
-		return $content;
+		return $result;
 	}
 
 	/**
