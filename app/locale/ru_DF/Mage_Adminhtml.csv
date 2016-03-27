@@ -551,7 +551,7 @@
 "Invalid input data for %s => %s rate","Неверные данные для курса %s => %s"
 "Invalid parent block for this block","Неверный родительский блок для этого блока"
 "Invalid parent block for this block.","Неверный родительский блок для этого блока."
-"Invalid sender name ""%s"". Please use only visible characters and spaces.","Уберите нестандартные символы из имени отправителя."
+"Invalid sender name ""%s"". Please use only visible characters and spaces.","Уберите нестандартные символы из имени отправителя «%s»."
 "Invalidated","Отменено"
 "Inventory","Учёт наличия"
 "Inventory Stock Status","Количество товара на складе"
