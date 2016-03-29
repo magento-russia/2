@@ -11,6 +11,7 @@
 			<df_adminhtml><class>Df_Adminhtml_Block</class></df_adminhtml>
 			<adminhtml>
 				<rewrite>
+					<catalog_product_attribute_edit_tab_options>Df_Adminhtml_Block_Catalog_Product_Attribute_Edit_Tab_Options</catalog_product_attribute_edit_tab_options>
 					<!--
 						Цель перекрытия —
 						недопустить привязку товара к тем товарным разделам,

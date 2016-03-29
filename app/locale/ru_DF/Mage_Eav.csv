@@ -66,7 +66,6 @@
 "System","Система"
 "Text Area","Многострочное текстовое поле"
 "Text Field","Текстовое поле"
-"The attribute code \'%s\' is reserved by system. Please try another attribute code.","Код свойства \'%s\' зарезервирован в системе. Пожалуйста, введите другой код для свойства."
 "The value of attribute ""%s"" must be unique.","Значение свойства «%s» должно быть уникальным."
 "This attribute is used in configurable products.","Это свойство используется в настраиваемых товарах."
 "URL","URL"
