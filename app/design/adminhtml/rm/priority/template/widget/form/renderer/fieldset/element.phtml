@@ -36,6 +36,26 @@ if (!$element->getNoDisplay()) {
 			), $element->getNote());
 		}
 		$result .= rm_tag('td', array('class' => $css['value']), $html);
-	} 	
-	echo rm_tag('tr', array('id' => $element['html_container_id']), $result);
+	}
+	/**
+	 * 2016-05-04
+	 * Раньше здесь стояло $element['html_container_id'])
+	 * Это явно неправильно, потому что метод
+	 * @see Varien_Data_Form_Element_Abstract::getHtmlContainerId()
+	 * не является неявным, он действительно присутствует в системе,
+	 * причём даже в старых версиях Magento CE:
+	 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/lib/Varien/Data/Form/Element/Abstract.php#L262-L270
+	 * https://github.com/OpenMage/magento-mirror/blob/1.4.0.1/lib/Varien/Data/Form/Element/Abstract.php#L250-L258
+	 * Он работает так:
+		if ($this->hasData('container_id')) {
+			return $this->getData('container_id');
+		} elseif ($idPrefix = $this->getForm()->getFieldContainerIdPrefix()) {
+			return $idPrefix . $this->getId();
+		}
+		return '';
+	 * Поэтому $element['html_container_id']) — это явный дефект.
+	 * Удивительно, что его год (2015-04-16 - 2016-05-03) никто не замечал,
+	 * и только сейчас заметили: http://magento-forum.ru/topic/5422/
+	 */
+	echo rm_tag('tr', array('id' => $element->getHtmlContainerId()), $result);
 }
