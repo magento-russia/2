@@ -55,7 +55,26 @@ class Df_Kkb_Model_RequestDocument_OrderItems extends Df_Core_Model_SimpleXml_Ge
 					$this->getItemElementData(
 						++$itemOrdering
 						, $item->getName()
-						, rm_nat0($item->getQtyOrdered())
+						/**
+						 * 2016-05-04
+						 * Раньше тут использовалось @see rm_nat0(),
+						 * однако количество заказанного товара
+						 * почему-то хранится в системе как вещественное число,
+						 * что приводит к сбою
+						 * «Система не смогла распознать значение «1.0000» типа «string»
+						 * как целое число»
+						 * http://magento-forum.ru/topic/5424/
+						 *
+						 * Кстати, PHPDoc тоже говорит, что метод
+						 * @uses Mage_Sales_Model_Order_Item::getQtyOrdered()
+						 * возвращает именно вещественное число:
+						 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/app/code/core/Mage/Sales/Model/Order/Item.php#L74-L74
+						 *
+						 * Т.к. платёжный шлюз Казкоммерцбанка, видимо, удвивится вещественному числу,
+						 * да на практике там всегда целое число (типа того же «1.0000»),
+						 * то счёл лучшим использовать @uses round()
+						 */
+						, round($item->getQtyOrdered())
 						, $this->getAmount($item)
 					)
 				;
