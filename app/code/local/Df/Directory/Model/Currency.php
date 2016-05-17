@@ -16,7 +16,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * @return float|null
 	 * @throws Exception
 	 */
-	public function convert($price, $toCurrency=null) {
+	public function convert($price, $toCurrency = null) {
 		if (!is_string($toCurrency)) {
 			df_assert($toCurrency instanceof Df_Directory_Model_Currency);
 		}
