@@ -30,43 +30,6 @@
 				<payment_service__payment_methods>df-all</payment_service__payment_methods>
 				<payment_service__payment_page_locale>ru_RU</payment_service__payment_page_locale>
 				<payment_service__card_payment_action>authorize</payment_service__card_payment_action>
-				<payment_service__key_public><![CDATA[-----BEGIN CERTIFICATE-----
-MIIDijCCAnKgAwIBAgIFAMGDJ+gwDQYJKoZIhvcNAQEEBQAwUzELMAkGA1UEBhMC
-S1oxDDAKBgNVBAoTA0tLQjELMAkGA1UECxMCQ0ExDzANBgNVBAMTBktLQiBDQTEY
-MBYGCSqGSIb3DQEJARYJY2FAa2tiLmt6MB4XDTA0MTAxODEwMzYwNloXDTA5MTAx
-NzEwMzYwNlowgYMxCzAJBgNVBAYTAktaMQ8wDQYDVQQHEwZBbG1hdHkxHDAaBgNV
-BAoTE0pTQyBLYXprb21tZXJ0c2JhbmsxEzARBgNVBAsTCkhlYWRPZmZpY2UxFDAS
-BgNVBAMTC0VQQVkgU1lTVEVNMRowGAYJKoZIhvcNAQkBFgtlcGF5QGtrYi5rejCB
-nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwNtnbUr82ALmO1E0tQ8Ejp1D+9GH
-EKPeqVTokLb95VhvXX3GoYCKPseFvXMD8x+P0I9x03nJnSRyP6hJ85W/jsElkuYj
-LzYWFfYhCeCQgit2lbSx9FbGVJ1B7M4ZMYuub4DlgtjQ8ebbqRACZ3Yw7LhciUcS
-235c4K+zmL7p5i0CAwEAAaOBtzCBtDAdBgNVHQ4EFgQU+7GVWbXvHRDbdxFSXqc6
-vd6VPQcwHwYDVR0jBBgwFoAU712nYyivxvN+d0LbneCElQZ9clMwDAYDVR0TBAUw
-AwEBADAOBgNVHQ8BAf8EBAMCBPAwNQYDVR0fBC4wLDAqoCigJoYkaHR0cDovL3d3
-dy5ra2Iua3ovY2VydHJvb3Qva2tiY2EuY3JsMB0GA1UdJQQWMBQGCCsGAQUFBwMC
-BggrBgEFBQcDBDANBgkqhkiG9w0BAQQFAAOCAQEAB0jZpXUO9O0uWJZAJP28ATnC
-PCMYa9jheM8MwKhSqe0m1IQ8mkPBzFnKqgmBdyPSp94Fy6xY2ciEnJ5oCEJGM9Nm
-L1kUeg4/HqiTcEUaZWtec4SvwEhKjfoXVwx/teV9KNQoQ8YNyQflEm6DMjiZ6GDM
-qLNV2ZLD5RytWKJYzqg/WScKpuGHYBlUmAi75Ew4nNx1PXi0ATZ9wc0aiXYlwAaP
-pDhNvvLcVLiBjjs/o/QhBgtKewAbltVnU97gf/+yQErbfrL2z+Hg4hF0R63vkjj5
-HsxOZ+pVNi0p+TzKyI1QcS4f53rxo0pMYxHn0LJQquCzbyDKcipkg9qrAFkxoA==
------END CERTIFICATE-----]]></payment_service__key_public>
-				<payment_service__shop_id__test>92061101</payment_service__shop_id__test>
-				<payment_service__certificate_id__test>00C182B189</payment_service__certificate_id__test>
-				<payment_service__shop_name__test>Test shop</payment_service__shop_name__test>
-				<payment_service__key_private__test><![CDATA[-----BEGIN RSA PRIVATE KEY-----
-Proc-Type: 4,ENCRYPTED
-DEK-Info: DES-EDE3-CBC,25E4520A4E5EE17A
-
-r1Uz/b1FZpMJg0kh2efZoaXpLnEg9xR8rkU8nH5y5LTP7q15zldAWm0BqGax6ZHm
-5xe/zTjFcZKYjh7NeINlTKrAnbNNYZnYxqqj9GGUa1gEpvHn8TukXB83cEbvsDeS
-jrbvbj5itRqqa9fNNs4rzizVdaGFpQKVhCqx4u7lE8oWdR1WCUHOywpFpkpHznDr
-od/B2JSzG6OekuwCB4tnyZmJ1RYncbsM7NysOGcUZcT9ZmfzteYkVjPxZKcHzjTr
-pLzhlYeAr0by9jNhtodGaYoRHEs2cqK8zEPBRMmgDydVA9Fg2NIIDaBB7ugdjaUw
-XuWUo1y5JrU0hRnB7FdAEizO1g5CNG5aZ5UDcg9jbNeKEqrZy2VcBKARYxVDUIlm
-INB98tXargbAgbCRwKvn76m8R0ClBMlIHiMzP3LCTfQaJnCIIDirfA==
------END RSA PRIVATE KEY-----]]></payment_service__key_private__test>
-				<payment_service__key_private_password__test>nissan</payment_service__key_private_password__test>
 				<frontend__allowspecific>0</frontend__allowspecific>
 				<frontend__description><![CDATA[После нажатия кнопки «Подтвердить заказ»
 Вы будете перенаправлены на платёжную страницу Казкоммерцбанка,
@@ -83,6 +46,7 @@ INB98tXargbAgbCRwKvn76m8R0ClBMlIHiMzP3LCTfQaJnCIIDirfA==
 				<frontend__sort_order>0</frontend__sort_order>
 				<frontend__specificcountry></frontend__specificcountry>
 				<frontend__title>Банковская карта</frontend__title>
+				<payment_service__key_private_password__test>nissan</payment_service__key_private_password__test>
 			</kkb>
 		</df_payment>
 		<!--
@@ -167,7 +131,7 @@ INB98tXargbAgbCRwKvn76m8R0ClBMlIHiMzP3LCTfQaJnCIIDirfA==
 				</production>
 				<test>
 					<url>
-						<payment_page>https://3dsecure.kkb.kz/jsp/process/logon.jsp</payment_page>
+						<payment_page>https://testpay.kkb.kz/jsp/process/logon.jsp</payment_page>
 					</url>
 				</test>
 			</kkb>

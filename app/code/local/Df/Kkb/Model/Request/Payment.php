@@ -26,10 +26,17 @@ class Df_Kkb_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				 * Из документации:
 				 * «В данном поле передается XML документ закодированный в Base64
 				 * (генерится автоматически, предоставляемой компонентой)»
+				 *
+				 * 2016-05-26
+				 * https://testpay.kkb.kz/doc/htm/fields_description.html
 				 */
 				'Signed_Order_B64' => base64_encode($this->getDocumentRegistration()->getXml())
 				/**
 				 * Из документации: «e-mail покупателя»
+				 *
+				 * 2016-05-26
+				 * «e-mail покупателя. Адрес должен быть реальным, иначе платеж может быть оклонен!»
+				 * https://testpay.kkb.kz/doc/htm/fields_description.html
 				 */
 				,'email' =>  $this->getCustomerEmail()
 				/**

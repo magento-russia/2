@@ -70,7 +70,6 @@
 							<show_in_store>1</show_in_store>
 							<depends>
 								<active>1</active>
-								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__shop_id>
@@ -93,7 +92,6 @@
 							<show_in_store>1</show_in_store>
 							<depends>
 								<active>1</active>
-								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__certificate_id>
@@ -116,10 +114,45 @@
 							<show_in_store>1</show_in_store>
 							<depends>
 								<active>1</active>
-								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__shop_name>
+						<payment_service__key_public translate='label'>
+							<label>Открытый ключ</label>
+							<comment>
+								<![CDATA[
+									сюда надо вставить содержимое файла,
+									<br/>имя которого указано в поле <b>PUBLIC_KEY_FN</b>
+									в файле
+									<a
+										href='http://magento-forum.ru/topic/4216/'
+										title='где находится файл config.txt и как брать из него параметры?'
+									>config.txt</a>
+								]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>0</payment_service__test>
+							</depends>
+						</payment_service__key_public>
+						<payment_service__key_public__test translate='label'>
+							<label>Открытый ключ (тестовый режим)</label>
+							<comment><![CDATA[сюда надо вставить содержимое файла <b>test_pub.pem</b>]]></comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>1</payment_service__test>
+							</depends>
+						</payment_service__key_public__test>
 						<payment_service__key_private translate='label'>
 							<label>Зашифрованный закрытый ключ</label>
 							<comment>
@@ -143,6 +176,21 @@
 								<payment_service__test>0</payment_service__test>
 							</depends>
 						</payment_service__key_private>
+						<payment_service__key_private__test translate='label'>
+							<label>Зашифрованный закрытый ключ (тестовый режим)</label>
+							<comment>
+								<![CDATA[сюда надо вставить содержимое файла <b>test_prv.pem</b>]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>6500</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+								<payment_service__test>1</payment_service__test>
+							</depends>
+						</payment_service__key_private__test>
 						<payment_service__key_private_password translate='label'>
 							<label>Пароль к закрытому ключу</label>
 							<comment>
@@ -163,7 +211,6 @@
 							<show_in_store>1</show_in_store>
 							<depends>
 								<active>1</active>
-								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__key_private_password>

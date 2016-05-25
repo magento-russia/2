@@ -3,7 +3,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	/** @return string */
 	public function getCertificateId() {
 		/** @var string $result */
-		$result = $this->getVar($this->preprocessVar('certificate_id'));
+		$result = $this->getVar('certificate_id');
 		df_result_string_not_empty($result);
 		return $result;
 	}
@@ -51,7 +51,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	/** @return string */
 	public function getKeyPrivate() {
 		/** @var string $result */
-		$result = $this->getVar($this->preprocessVar('key_private'));
+		$result = $this->getVar($this->testable('key_private'));
 		df_result_string_not_empty($result);
 		return $result;
 	}
@@ -59,7 +59,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	/** @return string */
 	public function getKeyPrivatePassword() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getVar($this->preprocessVar('key_private_password'));
+			$this->{__METHOD__} = $this->getVar($this->testable('key_private_password'));
 			/**
 			 * Тестовое значение хранится в config.xml в открытом виде,
 			 * поэтому для него дешифрация не нужна и приведёт к повреждению данных.
@@ -85,7 +85,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	 */
 	public function getShopId() {
 		/** @var string $result */
-		$result = $this->getVar($this->preprocessVar(self::KEY__VAR__SHOP_ID));
+		$result = $this->getVar(self::KEY__VAR__SHOP_ID);
 		df_result_string_not_empty($result);
 		return $result;
 	}
@@ -93,7 +93,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	/** @return string */
 	public function getShopName() {
 		/** @var string $result */
-		$result = $this->getVar($this->preprocessVar('shop_name'));
+		$result = $this->getVar('shop_name');
 		df_result_string_not_empty($result);
 		return $result;
 	}
@@ -102,7 +102,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	 * @param string $variableName
 	 * @return string
 	 */
-	private function preprocessVar($variableName) {
+	private function testable($variableName) {
 		return $this->isTestMode() ? df_concat($variableName, '__test') : $variableName;
 	}
 

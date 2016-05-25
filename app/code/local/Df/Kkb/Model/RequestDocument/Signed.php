@@ -106,16 +106,21 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model_Abstrac
 	}
 
 	/**
+	 * Из документации:
+	 * «Используя XML документы из документации,
+	 * не забывайте удалять коментарии и знаки переносов,
+	 * которые установленны для наглядности картинки!»
+	 *
+	 * 2016-05-26
+	 * Добавил @uses df_trim(), потому что с 2015-07-07
+	 * алгоритм @uses Df_Core_Helper_Text::removeLineBreaks() изменился,
+	 * и на концах документа стали образовываться пробелы.
+	 * http://magento-forum.ru/topic/5430/
+	 *
 	 * @param string $xml
 	 * @return string
 	 */
-	private function postProcessXml($xml) {
-		// Из документации:
-		// «Используя XML документы из документации,
-		// не забывайте удалять коментарии и знаки переносов,
-		// которые установленны для наглядности картинки!»
-		return df_text()->removeLineBreaks($xml);
-	}
+	private function postProcessXml($xml) {return df_trim(df_text()->removeLineBreaks($xml));}
 
 	/**
 	 * @override

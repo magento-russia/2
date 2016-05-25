@@ -5,15 +5,21 @@ class Df_Kkb_Model_Signer extends Df_Core_Model_Abstract {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			$result = null;
-			$r =
-				openssl_sign(
-					$this->getDocument(), $result
-					, openssl_get_privatekey(
-						$this->getServiceConfig()->getKeyPrivate()
-						,$this->getServiceConfig()->getKeyPrivatePassword()
-					)
-				)
-			;
+			/** @var resource |false $pKey */
+			$pKey = openssl_pkey_get_private(
+				$this->getServiceConfig()->getKeyPrivate()
+				,$this->getServiceConfig()->getKeyPrivatePassword()
+			);
+			if (!$pKey) {
+				df_error(
+					'Пароль не подходит к зашифрованному закрытому ключу.'
+					.'<br/>Может быть, Вы неправильно указали их в административной части?'
+					.'<br/>Если решить проблему не получается — сообщите об этом'
+					. ' в <a href="http://magento-forum.ru/forum/324/">разделе модуля Казкоммерцбанка</a>'
+					. ' форума Российской сборки Magento.'
+				);
+			}
+			$r = openssl_sign($this->getDocument(), $result, $pKey);
 			df_assert($r);
 			$result = base64_encode(strrev($result));
 			$this->{__METHOD__} = $result;
