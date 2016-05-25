@@ -211,6 +211,7 @@
 							<show_in_store>1</show_in_store>
 							<depends>
 								<active>1</active>
+								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__key_private_password>
