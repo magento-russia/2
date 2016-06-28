@@ -30,27 +30,55 @@
 								Однако это условие никогда не будет выполняться,
 								потому что $this->getAgreements() — коллекция, а не массив.
 								Поэтому при отсутствии условий продажи
-								шаблон всё равно добавить на страницу мусорную разметку
+								шаблон всё равно добавляет на страницу мусорную разметку
 								<form action="" id="checkout-agreements" onsubmit="return false;">
 								<ol class="checkout-agreements">
 								</ol>
 								</form>
 								Вот её надо удалить.
+
+								2016-06-28
+								Предыдущий комментарий не совсем верен.
+								Смотрите реализацию метода Mage_Checkout_Block_Agreements::getAgreements()
+								Она идентична в самой свежей версии 1.9.2.4 и в старой версии 1.6.0.0.
+								Так вот, этот метод вчсё-таки возвращает массив: в том случае,
+								когда «Правила покупки» отклчены администратором магазина:
+									if (!Mage::getStoreConfigFlag('checkout/options/enable_agreements')) {
+										$agreements = array();
+									}
+								https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/app/code/core/Mage/Checkout/Block/Agreements.php#L31-L33
 							 */
 							$('#checkout-agreements').remove();
-							$('#checkout-review-submit')
-								.prepend(
-									$('<form/>')
-										.attr({
-											id: 'checkout-agreements'
-											,action: ''
-											,onsubmit: 'return false;'
-										})
-										.append(
-											this.getElement()
-										)
-								)
+							/** @type jQuery {HTMLFormElement} */
+							var $agreementsForm =
+								$('<form/>')
+									.attr({
+										id: 'checkout-agreements'
+										,action: ''
+										,onsubmit: 'return false;'
+									})
+									.append(this.getElement())
 							;
+							debugger;
+							$('#checkout-review-submit').prepend($agreementsForm);
+							/**
+							 * 2016-06-30
+							 * Очень важно!
+							 * Странно, как раньше без этого работала
+							 * функциональность коментария при размещении заказа.
+							 * Когда покупатель нажимает кнопку «Подтвердить заказ»,
+							 * то метод JavaScript Review.save() проверяет наличие формы
+							 * с идентификатором «checkout-agreements», и если эта форма присутствует на странице,
+							 * то отправляет её поля на сервер наравне с полями платёжной формы:
+								 var params = Form.serialize(payment.form);
+								 if (this.agreementsForm) {
+									params += '&'+Form.serialize(this.agreementsForm);
+								 }
+							 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/skin/frontend/base/default/js/opcheckout.js#L922-L924
+							 * Если же форма «checkout-agreements» отсутствует на странице,
+							 * то у нас пропадает возможность отправки на сервер комментария к заказу.
+							 */
+							review.agreementsForm = $agreementsForm.get(0);
 						}
 						else {
 							this.getElement().removeClass('buttons-set');

@@ -67,13 +67,26 @@
 	?>
     <script type="text/javascript">
     //<![CDATA[
-        review =
-			new Review(
-				'<?php echo $reviewUrl; ?>'
-				,'<?php echo $this->getUrl('checkout/onepage/success') ?>'
-				,$('checkout-agreements')
-			)
-		;
+        review = new Review(
+            '<?php echo $reviewUrl; ?>'
+            ,'<?php echo $this->getUrl('checkout/onepage/success') ?>'
+            /**
+             * 2016-06-28
+             * Этот параметр является для нас очень важным.
+			 * Когда покупатель нажимает кнопку «Подтвердить заказ»,
+			 * то метод JavaScript Review.save() проверяет наличие формы
+			 * с идентификатором «checkout-agreements», и если эта форма присутствует на странице,
+			 * то отправляет её поля на сервер наравне с полями платёжной формы:
+				 var params = Form.serialize(payment.form);
+				 if (this.agreementsForm) {
+					params += '&'+Form.serialize(this.agreementsForm);
+				 }
+			 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/skin/frontend/base/default/js/opcheckout.js#L922-L924
+			 * Если же форма «checkout-agreements» отсутствует на странице,
+			 * то у нас пропадает возможность отправки на сервер комментария к заказу.
+             */
+            ,$('checkout-agreements')
+        );
     //]]>
     </script>
 </div>

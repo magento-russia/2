@@ -4,6 +4,38 @@
 	rm.checkout.ergonomic.Review = {
 		construct: function(_config) { var _this = {
 			init: function() {
+				this.subscribeToOrderPlacement();
+				$(window)
+					.bind(
+						rm.checkout.Ergonomic.sectionUpdated
+						,/**
+						 * @param {jQuery.Event} event
+						 */
+						function(event) {
+							if ('review' === event.section) {
+								_this.subscribeToOrderPlacement();
+							}
+						}
+					)
+				;
+				$(window)
+					.bind(
+						rm.checkout.Ergonomic.interfaceUpdated
+						,/**
+						 * @param {jQuery.Event} event
+						 */
+						function(event) {
+							if (_this.needSave()) {
+								_this.save();
+							}
+						}
+					)
+				;
+			}
+			,/**
+			 * 2016-06-28
+			 */
+			subscribeToOrderPlacement: function() {
 				/**
 				 * При нажатии кнопки "Оформить заказ"
 				 * система должна провести валидацию всех форм.
@@ -52,19 +84,6 @@
 						}
 					)
 				;
-				$(window)
-					.bind(
-						rm.checkout.Ergonomic.interfaceUpdated
-						,/**
-						 * @param {jQuery.Event} event
-						 */
-						function(event) {
-							if (_this.needSave()) {
-								_this.save();
-							}
-						}
-					)
-				;
 			}
 			,/**
 			 * @public
@@ -91,7 +110,7 @@
 			}
 			,/**
 			 * @public
-			 * @param {Boolean}
+			 * @param {Boolean} value
 			 * @returns {rm.checkout.ergonomic.method.Shipping}
 			 */
 			needSave: function(value) {
