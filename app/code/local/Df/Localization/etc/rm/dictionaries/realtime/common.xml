@@ -4,6 +4,8 @@
 		<term>
 			<en_US>Log In</en_US>
 			<ru_RU>Личный кабинет</ru_RU>
+			<!-- 2016-07-03 -->
+			<pl_PL>Moje konto</pl_PL>
 		</term>
 	</layout>
 	<module name='Df_Page'>
@@ -35,6 +37,8 @@
 			<term>
 				<en_US>Checkout</en_US>
 				<ru_RU>Оформление заказа</ru_RU>
+				<!-- 2016-07-03 -->
+				<pl_PL>Realizuj zamówienie</pl_PL>
 			</term>
 		</block>
 		<block
@@ -54,6 +58,8 @@
 			<term>
 				<en_US>Checkout</en_US>
 				<ru_RU>Оформление заказа</ru_RU>
+				<!-- 2016-07-03 -->
+				<pl_PL>Realizuj zamówienie</pl_PL>
 			</term>
 		</controller>
 	</module>
