@@ -25,3 +25,9 @@ mail/
 # и Google Chrome Developer Tools использует их,
 # чтобы показать файл *.scss вместо скомпилированного *.css:
 # http://thesassway.com/intermediate/using-source-maps-with-sass
+
+# 2016-07-08
+app/design/frontend/rm/default/layout/alvosoft/
+app/design/frontend/rm/default/template/alvosoft/
+skin/frontend/rm/default/alvosoft/
+app/locale/ru_DF/Alvosoft/

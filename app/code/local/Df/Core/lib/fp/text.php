@@ -29,7 +29,7 @@ function df_concat_enum($arguments) {
 }
 
 /**
- * @param string[]|mixed[] $arguments
+ * @param ... $arguments
  * @return string
  */
 function df_concat_path($arguments) {
@@ -39,7 +39,7 @@ function df_concat_path($arguments) {
 }
 
 /**
- * @param string[] $arguments
+ * @param ... $arguments
  * @return string
  */
 function df_concat_url($arguments) {
@@ -49,7 +49,7 @@ function df_concat_url($arguments) {
 }
 
 /**
- * @param string[] $arguments
+ * @param ... $arguments
  * @return string
  */
 function df_concat_xpath($arguments) {

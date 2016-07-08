@@ -16,6 +16,15 @@
 function df_is_admin() {return 'admin' === Mage::app()->getStore()->getCode();}
 
 /**
+ * 2016-07-08
+ * Возвращает двухбуквенный код языка в нижнем регистре, например: «ru», «en», «pl».
+ * @return string
+ */
+function df_lang() {
+	static $r; return $r ? $r : $r = rm_first(explode('_', Mage::app()->getLocale()->getLocaleCode()));
+}
+
+/**
  * 2015-08-14
  * @return string
  */
