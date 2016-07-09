@@ -100,8 +100,8 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model_Abstract {
 	private $_request;
 
 	/**
-	 * @return Df_Payment_Model_Response
-	 * @throws void
+	 * @return void
+	 * @throws Df_Payment_Exception_Response
 	 */
 	public function throwOnFailure() {
 		if (!$this->isSuccessful()) {
