@@ -176,7 +176,9 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	 * @return int[]
 	 */
 	public function getDaysOff($store = null) {
-		return rm_int(df_parse_csv(df_nts(Mage::getStoreConfig('general/locale/weekend', $store))));
+		return rm_int(df_parse_csv(
+			str_replace('0', '7', df_nts(Mage::getStoreConfig('general/locale/weekend', $store)))
+		));
 	}
 
 	/** @return string */
