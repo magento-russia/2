@@ -151,11 +151,13 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		/** @var int $currentDayOfWeek */
 		$currentDayOfWeek = $this->getDayOfWeekAsDigit($startDate);
 		while (0 < $numWorkingDays) {
-			while (in_array($currentDayOfWeek, $daysOff)) {
+			if (in_array($currentDayOfWeek, $daysOff)) {
 				$result++;
-				$currentDayOfWeek = (++$currentDayOfWeek) % 7;
 			}
-			$numWorkingDays--;
+			else {
+				$numWorkingDays--;
+			}
+			$currentDayOfWeek = 1 + ($currentDayOfWeek % 7);
 		}
 		return $result;
 	}
