@@ -38,6 +38,13 @@
 								!rm.defined(rm.tweaks.options.skin)
 								|| ('default' === rm.tweaks.options.skin)
 								/**
+								 * 2016-09-30
+								 * Добавил звёздочку, чтобы условие
+								 * {package: 'ultimo', theme: '*'} пропускало модификации тем,
+								 * которые Infortis рекомендует называть «child».
+								 */
+								|| ('*' === themeConditions.theme)
+								/**
 								 * 2015-12-04
 								 * Добавил это условие для ситуации:
 								 * rm.tweaks.options:
@@ -79,6 +86,15 @@
 					if (applicable) {
 						if (rm.defined(themeConditions.theme)) {
 							applicable =
+									/**
+									 * 2016-09-30
+									 * Добавил звёздочку, чтобы условие
+									 * {package: 'ultimo', theme: '*'}
+									 * пропускало модификации тем,
+									 * которые Infortis рекомендует называть «child».
+									 */
+									('*' === themeConditions.theme)
+								||
 									(themeConditions.theme === rm.tweaks.options.theme)
 								||
 									(

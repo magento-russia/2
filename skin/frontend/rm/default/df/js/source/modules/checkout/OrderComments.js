@@ -59,7 +59,6 @@
 									})
 									.append(this.getElement())
 							;
-							debugger;
 							$('#checkout-review-submit').prepend($agreementsForm);
 							/**
 							 * 2016-06-30
