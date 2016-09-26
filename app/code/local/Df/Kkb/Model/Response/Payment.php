@@ -119,9 +119,9 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 	 * @return Df_Kkb_Model_Response_Payment
 	 */
 	private function checkPaymentCodeResponse() {
-		if ('00' === $this->getPaymentCodeResponse()) {
+		if ('00' !== $this->getPaymentCodeResponse()) {
 			$this->throwException(
-				'Код результата авторизации должен быть «00», однако получено значение «s».'
+				'Код результата авторизации должен быть «00», однако получено значение «%s».'
 				,$this->getPaymentCodeResponse()
 			);
 		}
