@@ -877,8 +877,15 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	const P__WEIGHT = 'weight';
 	const P__WIDTH = 'width';
 
-	/** @return Df_Catalog_Model_Resource_Product_Collection */
-	public static function c() {return self::s()->getCollection();}
+	/**
+	 * @param bool $disableFlat [optional]
+	 * @return Df_Catalog_Model_Resource_Product_Collection
+	 */
+	public static function c($disableFlat = false) {
+		return new Df_Catalog_Model_Resource_Product_Collection(array(
+			Df_Catalog_Model_Resource_Product_Collection::P__DISABLE_FLAT => $disableFlat
+		));
+	}
 
 	/**
 	 * @param int|Mage_Core_Model_Store|string|null $storeId [optional]

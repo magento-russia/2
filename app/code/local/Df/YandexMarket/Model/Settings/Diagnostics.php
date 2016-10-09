@@ -3,7 +3,9 @@ class Df_YandexMarket_Model_Settings_Diagnostics extends Df_YandexMarket_Model_S
 	/** @return boolean */
 	public function isEnabled() {return $this->getYesNo('enabled');}
 	/** @return int */
-	public function getLimit() {return $this->getNatural('limit');}
+	public function limit() {return
+		$this->isEnabled() && $this->needLimit() ? $this->getNatural('limit') : 0
+	;}
 	/** @return boolean */
 	public function needExplainRejection() {return $this->getYesNo('need_explain_rejection');}
 	/** @return boolean */

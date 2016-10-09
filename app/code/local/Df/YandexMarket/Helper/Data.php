@@ -3,7 +3,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	/**
 	 * 2015-11-07
 	 * @used-by Df_YandexMarket_Model_Yml_Document::getDocumentData_Shop()
-	 * @used-by Df_YandexMarket_Model_Yml_Products::applyRule()
+	 * @used-by Df_YandexMarket_Product_Exporter::noMatchingProductIds()
 	 * @param string|null $message
 	 * @return void
 	 * @throws Df_Core_Exception_Client

@@ -57,7 +57,7 @@ class Df_YandexMarket_Model_Action_Front extends Df_Core_Model_Controller_Action
 	private function getDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_YandexMarket_Model_Yml_Document::i(
-				Df_YandexMarket_Model_Yml_Products::s()->getProducts()
+				Df_YandexMarket_Product_Exporter::i()->getResult()
 			);
 		}
 		return $this->{__METHOD__};

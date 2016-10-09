@@ -1,55 +1,54 @@
 <?php
-class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
+class Df_Catalog_Product_Exporter extends Df_Core_Model_Abstract {
 	/** @return Df_Catalog_Model_Resource_Product_Collection */
-	public function getProducts() {
+	public function getResult() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var  Df_Catalog_Model_Resource_Product_Collection $result */
-			$result =
-				/**
-				 * Отключение денормализации позволяет иметь в коллекции товаров все необходимые нам свойства.
-				 * Вместо отключения денормализации есть и другой способ иметь все необходиые свойства:
-				 * указать в установочном скрипте,
-				 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
-				 * @see Df_Shipping_Model_Setup_2_16_2::process()
-				 * Однако значения поля «описание» могут быть очень длинными,
-				 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,
-				 * то тогда мы можем превысить устанавливаемый MySQL предел для одной строки таблицы
-				 *
-				 * «Magento по умолчанию отводит на хранение значения одного свойства товара
-				 * в своей базе данных 255 символов, для хранения которых MySQL выделяет 255 * 3 + 2 = 767 байтов.
-				 * Magento объединяет все свойства товаров в единой расчётной таблице,
-				 * колонками которой служат свойства, а строками — товары.
-				 * Если свойств товаров слишком много,
-				 * то Magento превышает системное ограничение MySQL на одну строку таблицы:
-				 * 65535 байтов,что приводит к сбою построения расчётной таблицы товаров»
-				 *
-				 * Либо же значение поля описание будет обрезаться в соответствии с установленным администратором
-				 * значением опции «Российская сборка» → «Административная часть» → «Расчётные таблицы» →
-				 * «Максимальное количество символов для хранения значения свойства товара».
-				 */
-				Df_Catalog_Model_Resource_Product_Collection::i(
-					array(
-						Df_Catalog_Model_Resource_Product_Collection::P__DISABLE_FLAT => true
-					)
-				)
-			;
-			$this->{__METHOD__} = $result;
-			$this->addAttributes();
+			/**
+			 * Отключение денормализации позволяет иметь в коллекции товаров все необходимые нам свойства.
+			 * Вместо отключения денормализации есть и другой способ иметь все необходиые свойства:
+			 * указать в установочном скрипте,
+			 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
+			 * @see Df_Shipping_Setup_2_16_2::process()
+			 * Однако значения поля «описание» могут быть очень длинными,
+			 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,
+			 * то тогда мы можем превысить устанавливаемый MySQL предел для одной строки таблицы
+			 *
+			 * «Magento по умолчанию отводит на хранение значения одного свойства товара
+			 * в своей базе данных 255 символов, для хранения которых MySQL выделяет 255 * 3 + 2 = 767 байтов.
+			 * Magento объединяет все свойства товаров в единой расчётной таблице,
+			 * колонками которой служат свойства, а строками — товары.
+			 * Если свойств товаров слишком много,
+			 * то Magento превышает системное ограничение MySQL на одну строку таблицы:
+			 * 65535 байтов,что приводит к сбою построения расчётной таблицы товаров»
+			 *
+			 * Либо же значение поля описание будет обрезаться в соответствии с установленным администратором
+			 * значением опции «Российская сборка» → «Административная часть» → «Расчётные таблицы» →
+			 * «Максимальное количество символов для хранения значения свойства товара».
+			 */
+			/** @var Df_Catalog_Model_Resource_Product_Collection $result */
+			$result = Df_Catalog_Model_Product::c($disableFlat = true);
+			/**
+			 * Обратите внимание, что при включенном режиме денормализации таблицы товаров
+			 * addAttributeToSelect('*') заружает не все свойства,
+			 * а только те, которые подлежат загрузке на странице товарного раздела.
+			 * Например, при включенном режиме денормализации таблицы товаров
+			 * в коллекцию не загружаются свойства image и description.
+			 */
+			/**
+			 * Раньше тут стояло $result->addAttributeToSelect('*');
+			 * Конкретное перечисление загружаемых товарных свойств
+			 * позволяет ускорить работу модуля и снизить требования к ресурсам PHP и MySQL
+			 */
+			$result->addAttributeToSelect($this->getAttributesToSelect());
 			/**
 			 * Раньше тут стоял код отбраковки товаров с нулевой (неуказанной) ценой:
-				$result
-					->addFieldToFilter(
-						array(
-							array(
-								'attribute' =>Df_Catalog_Model_Product::P__PRICE
-								,'gt' => 0
-							)
-						)
-					)
-				;
+				$result->addFieldToFilter(array(array(
+					'attribute' =>Df_Catalog_Model_Product::P__PRICE
+					,'gt' => 0
+				)));
 			 * Однако отбраковка товаров с нулевой ценой, помимо всего прочего,
 			 * отсеивает товарные комплекты, что неверно:
-			 * @link http://magento-forum.ru/topic/3780/
+			 * http://magento-forum.ru/topic/3780/
 			 *
 			 * Вместо этого система теперь отфильтровывает простые товары с нулевой ценой
 			 * в методе @see Df_YandexMarket_Model_Yml_Processor_Offer::isEnabled
@@ -63,9 +62,10 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 			 * Для товаров типа BUNDLE в качестве цены берётся
 			 * наименьшая возможная цена приобретения комплекта.
 			 * @see Df_YandexMarket_Model_Yml_Processor_Offer::getPrice()
-			 * @link http://magento-forum.ru/topic/3800/
+			 * http://magento-forum.ru/topic/3800/
 			 */
 			$result->addStoreFilter(rm_state()->getStoreProcessed());
+			$this->{__METHOD__} = $result;
 			$this->applyRule();
 			/**
 			 * Не надо добавлять $result->addUrlRewrite(),
@@ -152,17 +152,16 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 			 * чтобы использовать его в методе @see Df_YandexMarket_Model_Yml_Processor_Offer::isEnabled()
 			 */
 			$result->addAttributeToSelect('visibility');
-			/**
-			 * Удаляем из коллекции те товары,
-			 * которые администратор пометил как неподлежащие продаже
-			 */
-			$result->addAttributeToFilter('status', array(
-				'in' => df_mage()->catalog()->product()->statusSingleton()->getSaleableStatusIds()
-			));
-			/**
-			 * Удаляем из коллекции отсутствующие на складе товары
-			 */
-			if (!df_cfg()->yandexMarket()->products()->needPublishOutOfStock()) {
+			if ($this->needRemoveNotSalable()) {
+				/**
+				 * Удаляем из коллекции те товары,
+				 * которые администратор пометил как неподлежащие продаже
+				 */
+				$result->addAttributeToFilter('status', array(
+					'in' => df_mage()->catalog()->product()->statusSingleton()->getSaleableStatusIds()
+				));
+			}
+			if ($this->needRemoveOutOfStock()) {
 				/**
 				 * Удаляем из коллекции отсутствующие на складе товары.
 				 * Обратите внимание, что такая проверка не учитывает положительность складского остатка,
@@ -170,9 +169,7 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 				 * Однако значением опции «В наличии ли данный товар?» может быть «в наличии»
 				 * даже при нулевом складском остатке!
 				 */
-				df_mage()->catalogInventory()->stockSingleton()
-					->addInStockFilterToCollection($result)
-				;
+				df_mage()->catalogInventory()->stockSingleton()->addInStockFilterToCollection($result);
 			}
 			/**
 			 * Раньше тут был код:
@@ -193,14 +190,8 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 					;
 				}
 			 */
-			if (
-					df_cfg()->yandexMarket()->diagnostics()->isEnabled()
-				&&
-					df_cfg()->yandexMarket()->diagnostics()->needLimit()
-			) {
-				$result->getSelect()->limit(
-					df_cfg()->yandexMarket()->diagnostics()->getLimit()
-				);
+			if ($this->limit()) {
+				$result->getSelect()->limit($this->limit());
 			}
 			/**
 			 * Обратите внимание, что метод addCategoryIds
@@ -223,41 +214,71 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 		return $this->{__METHOD__};
 	}
 
-	/** @return void */
-	private function addAttributes() {
-		/**
-		 * Обратите внимание, что при включенном режиме денормализации таблицы товаров
-		 * addAttributeToSelect ('*') заружает не все свойства,
-		 * а только те, которые подлежат загрузке на странице товарного раздела.
-		 * Например, при включенном режиме денормализации таблицы товаров
-		 * в коллекцию не загружаются свойства image и description.
-		 */
-		/**
-		 * Раньше тут стояло $result->addAttributeToSelect('*');
-		 * Конкретное перечисление загружаемых товарных свойств
-		 * позволяет ускорить работу модуля и снизить требования к ресурсам PHP и MySQL
-		 */
-		$this->getProducts()->addAttributeToSelect(array(
-			Df_Catalog_Model_Product::P__COUNTRY_OF_MANUFACTURE
-			,Df_Catalog_Model_Product::P__DESCRIPTION
-			,Df_Catalog_Model_Product::P__IMAGE
-			,Df_Catalog_Model_Product::P__IS_SALABLE
-			,Df_Catalog_Model_Product::P__MANUFACTURER
-			,Df_Catalog_Model_Product::P__NAME
-			,Df_Catalog_Model_Product::P__PRICE
-			,Df_Catalog_Model_Product::P__SKU
-			,Df_Catalog_Model_Product::P__SMALL_IMAGE
-			,Df_Catalog_Model_Product::P__STORE_ID
-			,Df_Catalog_Model_Product::P__URL_KEY
-			,Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
-			,Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
-		));
+	/**
+	 * @used-by Df_Catalog_Product_Exporter::getAttributesToSelect()
+	 * @return string|string[]
+	 */
+	protected function additionalAttributes() {
+		return $this->cfg(self::P__ADDITIONAL_ATTRIBUTES, array());
 	}
+
+	/** @return string|string[] */
+	protected function getAttributesToSelect() {
+		return
+			$this->needLoadAllAttributes()
+			? '*'
+			: array_merge($this->additionalAttributes(), array(
+				Df_Catalog_Model_Product::P__COUNTRY_OF_MANUFACTURE
+				,Df_Catalog_Model_Product::P__DESCRIPTION
+				,Df_Catalog_Model_Product::P__IMAGE
+				,Df_Catalog_Model_Product::P__IS_SALABLE
+				,Df_Catalog_Model_Product::P__MANUFACTURER
+				,Df_Catalog_Model_Product::P__NAME
+				,Df_Catalog_Model_Product::P__PRICE
+				,Df_Catalog_Model_Product::P__SKU
+				,Df_Catalog_Model_Product::P__SMALL_IMAGE
+				,Df_Catalog_Model_Product::P__STORE_ID
+				,Df_Catalog_Model_Product::P__URL_KEY
+				,Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
+				,Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
+			));
+	}
+
+	/**
+	 * @used-by Df_Catalog_Product_Exporter::getResult()
+	 * @return int
+	 */
+	protected function limit() {return $this->cfg(self::P__LIMIT, 0);}
+
+	/**
+	 * @used-by Df_Catalog_Product_Exporter::getResult()
+	 * @return bool
+	 */
+	protected function needRemoveNotSalable() {return $this->cfg(self::P__NEED_REMOVE_NOT_SALABLE, false);}
+
+	/**
+	 * @used-by Df_Catalog_Product_Exporter::getResult()
+	 * @return bool
+	 */
+	protected function needRemoveOutOfStock() {return $this->cfg(self::P__NEED_REMOVE_OUT_OF_STOCK, false);}
+
+	/**
+	 * 2016-10-09
+	 * @used-by Df_Catalog_Product_Exporter::applyRule()
+	 * @return void
+	 */
+	protected function noMatchingProductIds() {}
+
+	/**
+	 * @used-by Df_Catalog_Product_Exporter::applyRule()
+	 * @return Mage_CatalogRule_Model_Rule|null
+	 */
+	protected function rule() {return $this->cfg(self::P__RULE);}
 
 	/** @return void */
 	private function applyRule() {
 		/** @var Mage_CatalogRule_Model_Rule|null $rule */
-		$rule = df_cfg()->yandexMarket()->products()->getRule();
+		$rule = $this->rule();
 		if ($rule) {
 			/**
 			 * Фильтрация на основе правил — очень ресурсоёмкая операция.
@@ -269,16 +290,13 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 				/** @var Mage_Rule_Model_Condition_Combine $combinedConditions */
 				$combinedConditions = $rule->getConditions();
 				$needApplyRule =
-						is_array($combinedConditions->getConditions())
-					&&
-						(0 < count($combinedConditions->getConditions()))
+					is_array($combinedConditions->getConditions())
+					&& $combinedConditions->getConditions()
 				;
 			}
 			if ($needApplyRule) {
 				/** @var int[]|array(int => array(int => int)) $matchingProductIdsRaw */
-				$matchingProductIdsRaw =
-					df_cfg()->yandexMarket()->products()->getRule()->getMatchingProductIds()
-				;
+				$matchingProductIdsRaw = $rule->getMatchingProductIds();
 				/**
 				 * В Magento CE, начиная с версии 1.8.0.0,
 				 * метод @see Mage_CatalogRule_Model_Rule::getMatchingProductIds()
@@ -306,15 +324,15 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 				 * метод @see Mage_CatalogRule_Model_Rule::getMatchingProductIds()
 				 * возвращает просто массив идентификаторов
 				 * принадлежащих заданному привилом множеству товаров.
-				 * @link http://magento-forum.ru/topic/4239/
-				 * @link http://magento-forum.ru/topic/4340/
+				 * http://magento-forum.ru/topic/4239/
+				 * http://magento-forum.ru/topic/4340/
 				 */
 				if ($matchingProductIdsRaw) {
 					/** @var int[] $matchingProductIds */
 					/** @var int|array(int => int) $matchingProductIdRawTest */
 					$matchingProductIdRawTest = rm_first($matchingProductIdsRaw);
 					if (!is_array($matchingProductIdRawTest)) {
-						$matchingProductIds = rm_int(array_values($matchingProductIdsRaw));
+						$matchingProductIds = rm_int_simple(array_values($matchingProductIdsRaw));
 					}
 					else {
 						$matchingProductIds = array();
@@ -323,7 +341,7 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 						 * Тут раньше стояло
 						 * $storeId = rm_nat0(rm_state()->getStoreProcessed()->getId());
 						 * и дальше шла выборка идентификатору магазина.
-						 * Это ошибочно и очевидно являлось недозарумением,
+						 * Это ошибочно и очевидно являлось недоразумением,
 						 * потому что даже в Magento CE 1.8.0.0
 						 * ключами элементов массива $matchingProductIdsRaw являются идентификаторы сайтов,
 						 * а не магазинов:
@@ -347,7 +365,7 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 							/** @var int $matchingProductId */
 							/** @var array(int => int) $matchingProductIdRaw */
 							if ($matchingProductIdRaw && df_a($matchingProductIdRaw, $websiteId)) {
-								$matchingProductIds[]= rm_nat($matchingProductId);
+								$matchingProductIds[]= (int)$matchingProductId;
 							}
 						}
 					}
@@ -360,23 +378,43 @@ class Df_YandexMarket_Model_Yml_Products extends Df_Core_Model_Abstract {
 					 * Такое состояние явно свидетельствует об ошибке администратора,
 					 * поэтому лучше сразу сообщить ему об этом конкретно, а не обобщённо.
 					 */
-					if (!$matchingProductIds) {
-						df_h()->yandexMarket()->error_noOffers(
-							'Заданным администратором в графе'
-							.' «Система» → «Настройки» → «Российская сборка» → «Яндекс.Маркет»'
-							. ' → «Товары» → «Условия» условиям публикации товаров'
-							. ' не соответствует ни один из товаров интернет-магазина.'
-						);
-					}
+					$this->noMatchingProductIds();
 					// Вместо addIdFilter можно ещё использовать метод addIdFilterClientSide —
 					// он позволяет уменьшить текст запроса SQL.
-					$this->getProducts()->addIdFilter($matchingProductIds);
+					$this->getResult()->addIdFilter($matchingProductIds);
 				}
 			}
 		}
 	}
 
-	const _CLASS = __CLASS__;
-	/** @return Df_YandexMarket_Model_Yml_Products */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	/** @return bool */
+	private function needLoadAllAttributes() {return $this->cfg(self::P__NEED_LOAD_ALL_ATTRIBUTES, false);}
+
+	/**
+	 * @override
+	 * @return void
+	 */
+	protected function _construct() {
+		parent::_construct();
+		$this
+			->_prop(self::P__ADDITIONAL_ATTRIBUTES, self::V_ARRAY, false)
+			->_prop(self::P__LIMIT, self::V_NAT0, false)
+			->_prop(self::P__NEED_LOAD_ALL_ATTRIBUTES, self::V_BOOL, false)
+			->_prop(self::P__NEED_REMOVE_NOT_SALABLE, self::V_BOOL, false)
+			->_prop(self::P__NEED_REMOVE_OUT_OF_STOCK, self::V_BOOL, false)
+			->_prop(self::P__RULE, 'Mage_CatalogRule_Model_Rule', false)
+		;
+	}
+
+	const P__ADDITIONAL_ATTRIBUTES = 'additional_attributes';
+	const P__LIMIT = 'limit';
+	const P__NEED_LOAD_ALL_ATTRIBUTES = 'need_load_all_attributes';
+	const P__NEED_REMOVE_NOT_SALABLE = 'need_remove_not_salable';
+	const P__NEED_REMOVE_OUT_OF_STOCK = 'need_remove_out_of_stock';
+	const P__RULE = 'rule';
+	/**
+	 * @param array(string => mixed) $parameters [optional]
+	 * @return Df_Catalog_Product_Exporter
+	 */
+	public static function i(array $parameters = array()) {return new self($parameters);}
 }
