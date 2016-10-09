@@ -33,7 +33,7 @@
 					<children>
 						<moysklad translate='title' module='df_moysklad'>
 							<title>Экспорт товаров из интернет-магазина в МойСклад</title>
-							<action>df_moysklad/index/index</action>
+							<action>df_moysklad/export/index</action>
 						</moysklad>
 					</children>
 				</convert>

@@ -61,15 +61,16 @@
 						</password>
 					</fields>
 				</general>
-				<export>
-					<label>Экспорт товаров из интернет-магазина в МойСклад</label>
+				<export_products>
+					<label>Экспорт товаров</label>
+					<comment><![CDATA[Экспорт товаров из интернет-магазина в МойСклад]]></comment>
 					<frontend_type>text</frontend_type>
 					<sort_order>2</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<product_conditions>
+						<conditions>
 							<label>Условия</label>
 							<comment><![CDATA[
 Если условия не будут указаны Вами,
@@ -81,9 +82,9 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</product_conditions>
+						</conditions>
 					</fields>
-				</export>
+				</export_products>
 			</groups>
 		</df_moysklad>
 	</sections>
