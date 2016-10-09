@@ -1,0 +1,8 @@
+<?xml version='1.0'?>
+<layout version='0.1.0'>
+	<df_moysklad_index_index>
+        <reference name='content'>
+            <block type='df_core/admin' template='df/moysklad/index.phtml'/>
+        </reference>
+	</df_moysklad_index_index>
+</layout>

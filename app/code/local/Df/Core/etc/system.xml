@@ -211,6 +211,16 @@
 						</schedule_lifetime>
 					</fields>
 				</cron>
+				<smtp>
+					<fields>
+						<disable>
+							<comment><![CDATA[
+Отключать почту имеет смысл в некоторых сценариях отладки системы.<br/>
+При промышленной эксплуатации магазина почта должна быть включена.
+]]></comment>
+						</disable>
+					</fields>
+				</smtp>
 			</groups>
 		</system>
 		<web>

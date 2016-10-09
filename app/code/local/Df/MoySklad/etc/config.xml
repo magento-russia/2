@@ -6,19 +6,37 @@
 			<author>Дмитрий Федюк</author>
 		</Df_MoySklad>
 	</modules>
-	<global>
-		<blocks><df_moy_sklad><class>Df_MoySklad_Block</class></df_moy_sklad></blocks>
-		<helpers><df_moy_sklad><class>Df_MoySklad_Helper</class></df_moy_sklad></helpers>
-		<models><df_moy_sklad><class>Df_MoySklad_Model</class></df_moy_sklad></models>
-		<ignoredModules><entities><df-moy-sklad/></entities></ignoredModules>
-	</global>
+	<admin>
+		<routers>
+			<df_moysklad>
+				<use>admin</use>
+				<args>
+					<module>Df_MoySklad</module>
+					<frontName>df_moysklad</frontName>
+				</args>
+			</df_moysklad>
+		</routers>
+	</admin>
+	<adminhtml>
+		<layout>
+			<updates>
+				<df_moysklad><file>df/moysklad.xml</file></df_moysklad>
+			</updates>
+		</layout>
+	</adminhtml>
 	<df>
 		<features>
-			<df-moy-sklad>
-				<module>df_moy_sklad</module>
+			<df-moysklad>
+				<module>df_moysklad</module>
 				<title>МойСклад</title>
 				<url>http://magento-forum.ru/forum/294/</url>
-			</df-moy-sklad>
+			</df-moysklad>
 		</features>
 	</df>
+	<global>
+		<blocks><df_moysklad><class>Df_MoySklad_Block</class></df_moysklad></blocks>
+		<helpers><df_moysklad><class>Df_MoySklad_Helper</class></df_moysklad></helpers>
+		<models><df_moysklad><class>Df_MoySklad_Model</class></df_moysklad></models>
+		<ignoredModules><entities><df-moysklad/></entities></ignoredModules>
+	</global>
 </config>
