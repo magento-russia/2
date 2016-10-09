@@ -14,13 +14,16 @@ if (false) {
 	print_r(df_json_decode($response->getBody()));
 }
 ?>
-TEST
-<script>
-	debugger;
+<div class='df-moysklad-export'/>
+<script>(function($) {$(function() {
 	jQuery.ajax({
-	    dataType: 'json',
-	    url: '/admin/df_moysklad/export/products/'
-	}).done(function(response){
-	    console.log(response); // will return the json as an object
+		dataType: 'json',
+		url: '<?php echo rm_ejs(rm_url_admin('df_moysklad/export/products')); ?>'
+	}).done(function(products) {
+		/** @type {jQuery} HTMLDivElement */
+		var $container = $('.df-moysklad-export');
+		$.each(products, function(index, name) {
+			$container.append($('<div/>').text(name))
+		});
 	});
-</script>
+});})(jQuery);</script>
