@@ -22,8 +22,16 @@ if (false) {
 	}).done(function(products) {
 		/** @type {jQuery} HTMLDivElement */
 		var $container = $('.df-moysklad-export');
+		/**
+		 * @param {String} text
+		 * @param {Object|String|Array=} params [optional]
+		 */
+		var log = function(text, params) {
+			$container.append($('<div/>').html(rm.string.t(text, params)));
+		};
+		log('<h3>Товаров для экспорта: <b>%s</b></h3>', products.length);
 		$.each(products, function(index, name) {
-			$container.append($('<div/>').text(name))
+			log(name);
 		});
 	});
 });})(jQuery);</script>

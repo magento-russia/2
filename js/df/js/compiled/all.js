@@ -3799,86 +3799,84 @@ jQuery.extend({
  * что имя файла намеренно начинается с символа подчёркивания.
  * Благодаря этому, сборщик (компилятор) помещает функции этого файла до других
  * (он размещает их в алфавитном порядке).
- */
-/**
+ *
  * Обратите внимание, что без начального «;»
  * стандартное слияние файлов JavaScript в Magento создаёт сбойный файл
  */
-;(function($) {
-	$.extend(true, window,{
-		rm: {
-			/**
-			 * @param value
-			 * @returns {Boolean}
-			 */
-			defined: function(value) {
-				return ('undefined' !== typeof value);
-			}
-			/**
-			 * @param {*} value
-			 * @returns {Boolean}
-			 */
-			,empty: function(value) {
-				/**
-				 * @link http://stackoverflow.com/a/154068
-				 */
-				return !value;
-			}
-			/**
-			 * @function
-			 * @throws {Error}
-			 */
-			,error: function() {
-				/** @type {String} */
-				var message = '';
-				if (0 < arguments.length) {
-					message =
-						(1 === arguments.length)
-						? arguments[0]
-						: sprintf.apply(arguments)
-					;
-				}
-				console.trace();
-				throw new Error(message);
-			}
-			,namespace:
-				/**
-				 * Создаёт иерархическое объектное пространство имён.
-				 * Пример применения:
-				 * rm.namespace('rm.catalog.showcase');
-				 * rm.catalog.showcase.product = {
-				 * 		<...>
-				 * };
-				 *
-				 */
-				function() {
-					var a=arguments, o=null, i, j, d;
-					for(i=0; i<a.length; i+=1) {
-						d=a[i].split(".");
-						o=window;
-						for(j=0; j<d.length; j+=1) {
-							o[d[j]]=o[d[j]] || {};
-							o=o[d[j]];
-						}
-					}
-					return o;
-				}
-			,reduce: function(array, fnReduce, valueInitial) {
-				$.each(array, function(index, value) {
-					valueInitial = fnReduce.call(value, valueInitial, value, index, array);
-				});
-				return valueInitial;
-			}
-			/**
-			 * @param value
-			 * @returns {Boolean}
-			 */
-			,undefined: function(value) {
-				return !rm.defined(value);
+;(function($) {$.extend(true, window,{rm: {
+	/**
+	 * 2016-08-05
+	 * http://stackoverflow.com/a/894877
+	 * @param {*} value
+	 * @param {*} _default
+	 * @returns {*}
+	 */
+	arg: function(value, _default) {return rm.defined(value) ? value : _default;}
+	/**
+	 * @param value
+	 * @returns {Boolean}
+	 */
+	,defined: function(value) {return ('undefined' !== typeof value);}
+	/**
+	 * @param {*} value
+	 * @returns {Boolean}
+	 * @link http://stackoverflow.com/a/154068
+	 */
+	,empty: function(value) {return !value;}
+	/**
+	 * @function
+	 * @throws {Error}
+	 */
+	,error: function() {
+		/** @type {String} */
+		var message = '';
+		if (0 < arguments.length) {
+			message =
+				(1 === arguments.length)
+				? arguments[0]
+				: sprintf.apply(arguments)
+			;
+		}
+		console.trace();
+		throw new Error(message);
+	}
+	/**
+	 * @param value
+	 * @returns {Boolean}
+	 */
+	,isObject: function(value) {return 'object' === typeof value && null !== value;}
+	/**
+	 * Создаёт иерархическое объектное пространство имён.
+	 * Пример применения:
+	 * rm.namespace('rm.catalog.showcase');
+	 * rm.catalog.showcase.product = {
+	 * 		<...>
+	 * };
+	 */
+	,namespace: function() {
+		var a=arguments, o=null, i, j, d;
+		for(i=0; i<a.length; i+=1) {
+			d=a[i].split(".");
+			o=window;
+			for(j=0; j<d.length; j+=1) {
+				o[d[j]]=o[d[j]] || {};
+				o=o[d[j]];
 			}
 		}
-	});
-})(jQuery);
+		return o;
+	}
+	,reduce: function(array, fnReduce, valueInitial) {
+		$.each(array, function(index, value) {
+			valueInitial = fnReduce.call(value, valueInitial, value, index, array);
+		});
+		return valueInitial;
+	}
+	/**
+	 * @param value
+	 * @returns {Boolean}
+	 */
+	,undefined: function(value) {return !rm.defined(value);}
+}});})(jQuery);
 ;(function($) {
 	rm.assert = {
 		/**
@@ -4250,7 +4248,57 @@ jQuery.extend({
 			return result;
 		}
 	};
-})(jQuery);(function() {
+})(jQuery);;(function($) {rm.string = {
+	/**
+	 * 2016-08-07
+	 * Замещает параметры аналогично моей функции PHP df_var()
+	 * https://github.com/mage2pro/core/blob/1.5.23/Core/lib/text.php?ts=4#L913-L929
+	 *
+	 * 2016-08-08
+	 * Lodash содержит функцию template: https://lodash.com/docs#template
+	 * Я не использую её, потому что она слишком навороченная для моего случая.
+	 *
+	 * JSFiddle: https://jsfiddle.net/dfediuk/uxusbhes/1/
+	 *
+	 * @param {String} result
+	 * @param {Object|String|Array=} params [optional]
+	 * @returns {String}
+	 */
+	t: function(result, params) {
+		params = rm.arg(params, {});
+		/**
+		 * 2016-08-08
+		 * Simple — не массив и не объект.
+		 * @type {Boolean}
+		 */
+		var paramsIsSimple = !rm.isObject(params);
+		// 2016-08-07
+		// Поддерживаем сценарий df.t('One-off Payment: %s.');
+		if (paramsIsSimple && 2 === arguments.length) {
+			result = result.replace('%s', params).replace('{0}', params);
+		}
+		else {
+			if (paramsIsSimple) {
+				/**
+				 * 2016-08-08
+				 * Почему-то прямой вызов arguments.slice(1) приводит к сбою:
+				 * «arguments.slice is not a function».
+				 * Решение взял отсюда: http://stackoverflow.com/a/960870
+				 */
+				params = Array.prototype.slice.call(arguments, 1);
+			}
+			/**
+			 * 2016-08-08
+			 * params теперь может быть как объектом, так и строкой: алгоритм един.
+			 * http://api.jquery.com/jquery.each/
+			 */
+			$.each(params, function(name, value) {
+				result = result.replace('{' + name + '}', value);
+			});
+		}
+		return result;
+	}
+};})(jQuery);(function() {
 	/**
 	 * Мы начали разрабатывать прикладные решения,
 	 * которые не включают библиотеку Prototype и стандартные скрипты Magento.

@@ -978,6 +978,9 @@ body.df-localization-theme-index .rm-container ul.rm-processors {
       .df .df-localization .df-verification .df-fileDetails ol li {
         margin: 0.4em 0; }
 
+.df-moysklad-export h3 {
+  font-weight: normal; }
+
 .rm .rm-notifier .rm-class-rewrite-conflicts {
   font-weight: normal; }
   .rm .rm-notifier .rm-class-rewrite-conflicts .rm-class-rewrite-conflict {
@@ -1026,7 +1029,16 @@ div.df-admin-account-generator {
   div.df-admin-account-generator form .df-submit {
     margin: 1em 0 0 0; }
 
-
+div.df-licensor-generator {
+  /*background: #FFFBDD;*/ }
+  div.df-licensor-generator h1 {
+    font-size: 175%; }
+  div.df-licensor-generator form textarea, div.df-licensor-generator form label, div.df-licensor-generator form input {
+    display: block; }
+  div.df-licensor-generator form ul.df-inputs li {
+    margin: 0 0 1em 0; }
+  div.df-licensor-generator form .df-submit {
+    margin: 1em 0 0 0; }
 
 .adminhtml-system-currencysymbol-index .content-header {
   width: 533px; }
