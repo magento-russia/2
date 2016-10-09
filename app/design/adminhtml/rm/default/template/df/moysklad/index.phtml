@@ -1,1 +1,13 @@
-ПРЕВЕД, МЕДВЕД!
+<?php
+/** @var Df_MoySklad_Settings_General $s */
+$s = Df_MoySklad_Settings_General::s();
+/** @var Zend_Http_Client $c */
+$c = new Zend_Http_Client;
+$c->setUri('https://online.moysklad.ru/api/remap/1.1/entity/product');
+$c->setAuth($s->login(), $s->password());
+$c->setHeaders('content-type', 'application/json');
+$c->setRawData(json_encode(array('name' => 'Мандарины')));
+//$client->set
+/** @var Zend_Http_Response $response */
+$response = $c->request(Zend_Http_Client::POST);
+print_r(df_json_decode($response->getBody()));

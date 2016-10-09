@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<config>
+	<sections>
+		<df_moysklad translate='label' module='df_moysklad'>
+			<label>МойСклад</label>
+			<tab>df</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>6500</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general translate='label'>
+					<label>Общие настройки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+						<![CDATA[]]>
+					</comment>
+					<fields>
+						<enabled translate='label'>
+							<label>Включить?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<df_feature>df-moysklad</df_feature>
+						</enabled>
+						<login translate='label'>
+							<label><![CDATA[Логин]]></label>
+							<comment><![CDATA[
+Логин Вашей учётной записи в МойСклад в формате имя@компания.
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+							<validate>required-entry</validate>
+						</login>
+						<password translate='label'>
+							<label>Пароль</label>
+							<comment><![CDATA[Пароль Вашей учётной записи в МойСклад.]]></comment>
+							<frontend_type>obscure</frontend_type>
+							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<depends><enabled>1</enabled></depends>
+							<validate>required-entry</validate>
+						</password>
+					</fields>
+				</general>
+			</groups>
+		</df_moysklad>
+	</sections>
+</config>

@@ -6,6 +6,13 @@
 				<children>
 					<system>
 						<children>
+							<config>
+								<children>
+									<df_moysklad>
+										<title>Российская сборка → МойСклад</title>
+									</df_moysklad>
+								</children>
+							</config>
 							<convert>
 								<children>
 									<moysklad translate="title">
