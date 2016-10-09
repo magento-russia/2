@@ -10,10 +10,10 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<general translate='label'>
+				<general>
 					<label>Общие настройки</label>
 					<frontend_type>text</frontend_type>
-					<sort_order>1000</sort_order>
+					<sort_order>1</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
@@ -61,6 +61,29 @@
 						</password>
 					</fields>
 				</general>
+				<export>
+					<label>Экспорт товаров из интернет-магазина в МойСклад</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<product_conditions>
+							<label>Условия</label>
+							<comment><![CDATA[
+Если условия не будут указаны Вами,
+<br/>то в МойСклад будут переданы все товары Вашего интернет-магазина.
+							]]></comment>
+							<frontend_model>Df_Catalog_Block_Admin_Conditions</frontend_model>
+							<backend_model>Df_Catalog_Model_System_Config_Backend_Conditions</backend_model>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_conditions>
+					</fields>
+				</export>
 			</groups>
 		</df_moysklad>
 	</sections>

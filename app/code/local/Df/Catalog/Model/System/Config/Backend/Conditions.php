@@ -75,6 +75,4 @@ class Df_Catalog_Model_System_Config_Backend_Conditions extends Df_Admin_Model_C
 		}
 		return (true === $validateResult);
 	}
-
-	const _CLASS = __CLASS__;
 }

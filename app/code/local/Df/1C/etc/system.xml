@@ -382,8 +382,8 @@
 									<br/>то модуль передаст в 1С все товары Вашего магазина.
 								]]>
 							</comment>
-							<frontend_model>df_catalog/admin_conditions</frontend_model>
-							<backend_model>df_catalog/system_config_backend_conditions</backend_model>
+							<frontend_model>Df_Catalog_Block_Admin_Conditions</frontend_model>
+							<backend_model>Df_Catalog_Model_System_Config_Backend_Conditions</backend_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>

@@ -16,7 +16,7 @@
 							<convert>
 								<children>
 									<moysklad translate="title">
-										<title>Первичный экспорт данных в МойСклад</title>
+										<title>Экспорт товаров из интернет-магазина в МойСклад</title>
 									</moysklad>
 								</children>
 							</convert>
@@ -32,7 +32,7 @@
 				<convert>
 					<children>
 						<moysklad translate='title' module='df_moysklad'>
-							<title>Первичный экспорт данных в МойСклад</title>
+							<title>Экспорт товаров из интернет-магазина в МойСклад</title>
 							<action>df_moysklad/index/index</action>
 						</moysklad>
 					</children>
