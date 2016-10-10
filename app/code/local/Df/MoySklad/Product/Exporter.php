@@ -17,7 +17,7 @@ class Df_MoySklad_Product_Exporter extends Df_Catalog_Product_Exporter {
 	 * @used-by Df_Catalog_Product_Exporter::getResult()
 	 * @return int
 	 */
-	protected function limit() {return 0;}
+	protected function limit() {return 10;}
 
 	/**
 	 * 2016-10-09

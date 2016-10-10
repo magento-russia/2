@@ -10,8 +10,6 @@ class Df_Core_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function date() {return Df_Core_Helper_Date::s();}
 	/** @return Df_Core_Helper_Db */
 	public function db() {return Df_Core_Helper_Db::s();}
-	/** @return Df_Core_Helper_Debug */
-	public function debug() {return Df_Core_Helper_Debug::s();}
 	/** @return Df_Core_Helper_File */
 	public function file() {return Df_Core_Helper_File::s();}
 

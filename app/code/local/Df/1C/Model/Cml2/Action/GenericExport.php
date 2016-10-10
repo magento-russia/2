@@ -49,7 +49,7 @@ abstract class Df_1C_Model_Cml2_Action_GenericExport extends Df_1C_Model_Cml2_Ac
 	private function getSavedCopyFileName() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Core_Model_Fs_GetNotUsedFileName::i(
+				Df_Core_Model_Fs_GetNotUsedFileName::r(
 					Df_1C_Model_Cml2_FileSystem::s()->getBaseDir()
 					,
 					// Df_1C_Model_Cml2_Action_Catalog_Export => 'export.catalog'
@@ -61,9 +61,8 @@ abstract class Df_1C_Model_Cml2_Action_GenericExport extends Df_1C_Model_Cml2_Ac
 							array_slice(explode('_', get_class($this)), -2)
 						)
 					)) . '-{date}-{time}.xml'
-					,array()
-					,array(Df_Core_Model_Fs_GetNotUsedFileName::P__DATE_PARTS_SEPARATOR => '.')
-				)->getResult()
+					,'.'
+				)
 			;
 		}
 		return $this->{__METHOD__};

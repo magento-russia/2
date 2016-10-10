@@ -25,6 +25,7 @@ class Df_Core_LibLoader extends Df_Core_LibLoader_Abstract {
 			, $base . 'db'
 			, $base . 'catalog'
 			, $base . '1c'
+			, $base . 'qa'
 		);
 	}
 

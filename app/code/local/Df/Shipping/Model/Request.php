@@ -151,7 +151,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model_Abstract {
 
 	/** @return Df_Shipping_Model_Request */
 	protected function logRequestParameters() {
-		df()->debug()->report(
+		rm_report(
 			rm_sprintf('%s-{ordering}.log', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
 			,rm_print_params($this->getQueryParams())
 		);
@@ -160,7 +160,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model_Abstract {
 
 	/** @return Df_Shipping_Model_Request */
 	protected function logResponseAsHtml() {
-		df()->debug()->report(
+		rm_report(
 			rm_sprintf('%s-{ordering}.html', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
 			, $this->getResponseAsText()
 		);
@@ -175,7 +175,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model_Abstract {
 			$responseAsArray = $this->response()->json();
 		}
 		catch (Exception $e) {}
-		df()->debug()->report(
+		rm_report(
 			rm_sprintf('%s-{ordering}.json', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
 			, is_null($responseAsArray)
 			? $this->getResponseAsText()
@@ -201,7 +201,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model_Abstract {
 
 	/** @return Df_Shipping_Model_Request */
 	protected function logResponseAsXml() {
-		df()->debug()->report(
+		rm_report(
 			rm_sprintf('%s-{ordering}.xml', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
 			,$this->getResponseAsText()
 		);

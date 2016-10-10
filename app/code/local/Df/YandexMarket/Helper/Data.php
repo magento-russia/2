@@ -174,12 +174,10 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 			$this->{__METHOD__} =
 				Df_Core_Model_Logger::s(array(
 					Df_Core_Model_Logger::P__FILE_NAME =>
-						basename(
-							Df_Core_Model_Fs_GetNotUsedFileName::i(
-								Mage::getBaseDir('var') . DS . 'log'
-								, 'rm.yandex.market-{date}-{time}.log'
-							)->getResult()
-						)
+						basename(Df_Core_Model_Fs_GetNotUsedFileName::r(
+							Mage::getBaseDir('var') . DS . 'log'
+							, 'rm.yandex.market-{date}-{time}.log'
+						))
 					, Df_Core_Model_Logger::P__FORMATTER => new Df_Zf_Log_Formatter_Benchmark()
 				))
 			;

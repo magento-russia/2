@@ -80,7 +80,7 @@ class Df_Core_Model_RemoteControl_MessageSerializer_Http extends Df_Core_Model_A
 			;
 			if ('text/html' === $contentType) {
 				if (df_is_it_my_local_pc()) {
-					df()->debug()->report('rm.response.{date}--{time}.html', $httpResponse->getBody());
+					rm_report('rm.response.{date}--{time}.html', $httpResponse->getBody());
 				}
 				$diagnosticMessage .= "\r\n\r\n" . htmlspecialchars($httpResponse->getBody());
 			}

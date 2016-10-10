@@ -76,10 +76,10 @@ class Df_Kkb_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				,'appendix' => base64_encode($this->getDocumentOrderItems()->getXml())
 			)
 		;
-//		df()->debug()->report(
+//		rm_report(
 //			'registration-{date}-{time}.xml', $this->getDocumentRegistration()->getXml()
 //		);
-//		df()->debug()->report(
+//		rm_report(
 //			'items-{date}-{time}.xml', $this->getDocumentOrderItems()->getXml()
 //		);
 		return $result;

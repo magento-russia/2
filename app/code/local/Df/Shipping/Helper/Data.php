@@ -58,7 +58,7 @@ class Df_Shipping_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function log($message, $caller = null) {
 		/** @var string $moduleName */
 		$moduleName = !$caller ? 'shipping' : Df_Core_Model_ClassManager::s()->getFeatureCode($caller);
-		df()->debug()->report(rm_sprintf('rm.%s-{date}-{time}.log', $moduleName), $message);
+		rm_report(rm_sprintf('rm.%s-{date}-{time}.log', $moduleName), $message);
 		return $this;
 	}
 

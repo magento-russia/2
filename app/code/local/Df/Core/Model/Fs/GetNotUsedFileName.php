@@ -1,18 +1,22 @@
 <?php
-class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract {
-	/** @return string */
-	public function getResult() {
+class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract  {
+	/**
+	 * Результатом всегда является непустая строка.
+	 * @used-by r()
+	 * @return string
+	 * @throws Exception
+	 */
+	private function _result() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
-			$result = '';
 			/** @var int $counter */
 			$counter = 1;
 			/** @var bool $hasOrderingPosition */
-			$hasOrderingPosition = rm_contains($this->getNameTemplate(), '{ordering}');
+			$hasOrderingPosition = rm_contains($this->getTemplate(), '{ordering}');
 			while (true) {
 				/** @var string $fileName */
-				$fileName = strtr($this->getNameTemplate(), array_merge(
-					array('{ordering}' => rm_sprintf('%03d', $counter))
+				$fileName = strtr($this->getTemplate(), array_merge(
+					array('{ordering}' => sprintf('%03d', $counter))
 					, $this->getVariables()
 				));
 				/** @var string $fileFullPath */
@@ -20,7 +24,7 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract {
 				if (!file_exists($fileFullPath)) {
 					/**
 					 * Раньше здесь стояло file_put_contents,
-					 * и иногла почему-то возникал сбой:
+					 * и иногда почему-то возникал сбой:
 					 * failed to open stream: No such file or directory.
 					 * Может быть, такой сбой возникает, если папка не существует?
 					 */
@@ -28,16 +32,8 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract {
 					break;
 				}
 				else {
-					if ($counter > $this->getCounterLimit()) {
-						/** @var string $diagnosticMessage */
-						$diagnosticMessage = rm_sprintf('Счётчик достиг предела (%d).', $counter);
-						if ($this->needThrowOnReachCounterLimit()) {
-							df_error($diagnosticMessage);
-						}
-						else {
-							Mage::log($diagnosticMessage);
-							break;
-						}
+					if ($counter > 100) {
+						df_error('Счётчик достиг предела (%d).', $counter);
 					}
 					else {
 						$counter++;
@@ -50,7 +46,7 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract {
 						 */
 						if (!$hasOrderingPosition && (2 === $counter)) {
 							/** @var string[] $fileNameTemplateExploded */
-							$fileNameTemplateExploded = explode('.', $this->getNameTemplate());
+							$fileNameTemplateExploded = explode('.', $this->getTemplate());
 							/** @var int $secondFromLastPartIndex*/
 							$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
 							/** @var string $secondFromLastPart */
@@ -61,78 +57,61 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract {
 							;
 							/** @var string $newFileNameTemplate */
 							$newFileNameTemplate = implode('.', $fileNameTemplateExploded);
-							df_assert_ne($this->getNameTemplate(), $newFileNameTemplate);
-							$this->setNameTemplate($newFileNameTemplate);
+							df_assert_ne($this->getTemplate(), $newFileNameTemplate);
+							$this[self::$P__TEMPLATE] = $newFileNameTemplate;
 						}
 					}
 				}
 			}
-			if ($this->needThrowOnReachCounterLimit()) {
-				df_result_string_not_empty($result);
-			}
-			else {
-				df_result_string($result);
-			}
+			df_result_string_not_empty($result);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * @param Zend_Date $time
-	 * @param string[] $formatParts
-	 * @return string
-	 */
-	private function formatTime(Zend_Date $time, array $formatParts) {
-		return df_dts($time, implode($this->getDatePartsSeparator(), $formatParts));
-	}
-
-	/** @return int */
-	private function getCounterLimit() {return $this->cfg(self::P__COUNTER_LIMIT, 100);}
-
-	/** @return bool */
-	private function getDatePartsSeparator() {return $this->cfg(self::P__DATE_PARTS_SEPARATOR, '-');}
+	/** @return string */
+	private function getDatePartsSeparator() {return $this->cfg(self::$P__DATE_PARTS_SEPARATOR, '-');}
 
 	/** @return string */
-	private function getDirectory() {return $this->cfg(self::P__DIRECTORY);}
+	private function getDirectory() {return $this[self::$P__DIRECTORY];}
+
 	/** @return string */
-	private function getNameTemplate() {return $this->cfg(self::P__NAME_TEMPLATE);}
+	private function getTemplate() {return $this[self::$P__TEMPLATE];}
 
 	/** @return array(string => string) */
 	private function getVariables() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Date $time */
-			$time = Zend_Date::now();
-			$time->setTimezone('Europe/Moscow');
-			/** @var array(string => string) $result */
-			$result =
-				array_merge(
-					array(
-						'{date}' => $this->formatTime($time, array('y', 'MM', 'dd'))
-						,'{time}' => $this->formatTime($time, array('HH', 'mm'))
-						,'{time-full}' => $this->formatTime($time, array('HH', 'mm', 'ss'))
-					)
-					,$this->cfg(self::P__VARIABLES, array())
-				)
-			;
+			$this->{__METHOD__} = array(
+				'{date}' => $this->nowS('y', 'MM', 'dd')
+				,'{time}' => $this->nowS('HH', 'mm')
+				,'{time-full}' => $this->nowS('HH', 'mm', 'ss')
+			);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by nowS()
+	 * @return Zend_Date
+	 */
+	private function now() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var Zend_Date $result */
+			$result = Zend_Date::now();
+			$result->setTimezone('Europe/Moscow');
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return bool */
-	private function needThrowOnReachCounterLimit() {
-		return $this->cfg(self::P__THROW_ON_REACH_COUNTER_LIMIT, true);
-	}
-
 	/**
-	 * @param string $nameTemplate
-	 * @return Df_Core_Model_Fs_GetNotUsedFileName
+	 * @used-by getVariables()
+	 * @return string
 	 */
-	private function setNameTemplate($nameTemplate) {
-		df_param_string_not_empty($nameTemplate, 0);
-		$this->setData(self::P__NAME_TEMPLATE, $nameTemplate);
-		return $this;
+	private function nowS() {
+		/** @var string[] $parts */
+		$parts = func_get_args();
+		return df_dts($this->now(), implode($this->getDatePartsSeparator(), $parts));
 	}
 
 	/**
@@ -142,35 +121,33 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__COUNTER_LIMIT, self::V_INT, false)
-			->_prop(self::P__DATE_PARTS_SEPARATOR, self::V_STRING)
-			->_prop(self::P__DIRECTORY, self::V_STRING_NE)
-			->_prop(self::P__NAME_TEMPLATE, self::V_STRING_NE)
-			->_prop(self::P__VARIABLES, self::V_ARRAY, false)
-			->_prop(self::P__THROW_ON_REACH_COUNTER_LIMIT, self::V_BOOL, false)
+			->_prop(self::$P__DATE_PARTS_SEPARATOR, self::V_STRING)
+			->_prop(self::$P__DIRECTORY, self::V_STRING_NE)
+			->_prop(self::$P__TEMPLATE, self::V_STRING_NE)
 		;
 	}
-	const _CLASS = __CLASS__;
-	const P__COUNTER_LIMIT = 'counter_limit';
-	const P__DATE_PARTS_SEPARATOR = 'date_parts_separator';
-	const P__DIRECTORY = 'directory';
-	const P__NAME_TEMPLATE = 'name_template';
-	const P__VARIABLES = 'variables';
-	const P__THROW_ON_REACH_COUNTER_LIMIT = 'throw_on_reach_counter_limit';
+	/** @var string */
+	private static $P__DATE_PARTS_SEPARATOR = 'date_parts_separator';
+	/** @var string */
+	private static $P__DIRECTORY = 'directory';
+	/** @var string */
+	private static $P__TEMPLATE = 'name_template';
+
 	/**
+	 * Результатом всегда является непустая строка.
+	 * @used-by rm_file_name()
 	 * @param string $directory
-	 * @param string $nameTemplate
-	 * @param array(string => string) $variables [optional]
-	 * @param array(string => string) $additionalParams [optional]
-	 * @return Df_Core_Model_Fs_GetNotUsedFileName
+	 * @param string $template
+	 * @param string $datePartsSeparator [optional]
+	 * @return string
 	 */
-	public static function i(
-		$directory, $nameTemplate, array $variables = array(), array $additionalParams = array()
-	) {
-		return new self(array_merge(array(
-			self::P__DIRECTORY => $directory
-			, self::P__NAME_TEMPLATE => $nameTemplate
-			, self::P__VARIABLES => $variables
-		), $additionalParams));
+	public static function r($directory, $template, $datePartsSeparator = '-') {
+		/** @var Df_Core_Model_Fs_GetNotUsedFileName $i */
+		$i = new self(array(
+			self::$P__DIRECTORY => $directory
+			, self::$P__TEMPLATE => $template
+			, self::$P__DATE_PARTS_SEPARATOR => $datePartsSeparator
+		));
+		return $i->_result();
 	}
 }

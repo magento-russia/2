@@ -121,7 +121,7 @@ abstract class Df_Qa_Model_Message extends Df_Core_Model_Abstract {
 
 	/** @return Df_Qa_Model_Message */
 	private function writeToFile() {
-		df()->debug()->report($this->getFileName(), $this->getMessage());
+		rm_report($this->getFileName(), $this->getMessage());
 		return $this;
 	}
 

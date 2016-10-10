@@ -89,7 +89,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 	private function getRequestDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Avangard_Model_RequestDocument::registration($this->getParams());
-			df()->debug()->report('registration-request-{date}-{time}.xml', $this->{__METHOD__}->getXml());
+			rm_report('registration-request-{date}-{time}.xml', $this->{__METHOD__}->getXml());
 		}
 		return $this->{__METHOD__};
 	}
@@ -110,9 +110,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 	private function getResponseAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_xml($this->getHttpResponse()->getBody());
-			df()->debug()->report(
-				'registration-{date}-{time}.xml', $this->getHttpResponse()->getBody()
-			);
+			rm_report('registration-{date}-{time}.xml', $this->getHttpResponse()->getBody());
 		}
 		return $this->{__METHOD__};
 	}

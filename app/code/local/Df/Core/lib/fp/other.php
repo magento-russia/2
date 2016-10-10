@@ -56,15 +56,6 @@ function df_block_render_simple($attributes) {
 	return df_block_render('core/template', '', $attributes);
 }
 
-/**
- * @param int $levelsToSkip
- * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
- * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
- *
- * @return void
- */
-function df_bt($levelsToSkip = 0) {df()->debug()->logCompactBacktrace($levelsToSkip + 1);}
-
 /** @return Df_Admin_Model_Settings */
 function df_cfg() {return Df_Admin_Model_Settings::s();}
 
