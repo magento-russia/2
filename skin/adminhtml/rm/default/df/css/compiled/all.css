@@ -979,19 +979,29 @@ body.df-localization-theme-index .rm-container ul.rm-processors {
         margin: 0.4em 0; }
 
 .df-moysklad-export {
-  width: 30em;
+  width: 42em;
   max-height: 50em;
   overflow-y: scroll; }
+  .df-moysklad-export h1 {
+    text-transform: uppercase;
+    font-size: 200%;
+    font-weight: bold;
+    margin: 0 0 1em 0; }
   .df-moysklad-export h3 {
     font-weight: normal; }
   .df-moysklad-export table {
     border-spacing: 0; }
-    .df-moysklad-export table tr:nth-child(even) {
-      background: #F6F6F6; }
-    .df-moysklad-export table tr td {
-      padding: 0.25em 0.5em; }
-      .df-moysklad-export table tr td:nth-child(1) {
-        width: 15em; }
+    .df-moysklad-export table tr {
+      cursor: pointer; }
+      .df-moysklad-export table tr:nth-child(even) {
+        background: #f6f6f6; }
+      .df-moysklad-export table tr:hover {
+        background: #fcf5dd; }
+      .df-moysklad-export table tr td {
+        padding: 0.5em 0.5em; }
+        .df-moysklad-export table tr td:nth-child(1) {
+          width: 20em;
+          padding-right: 1em; }
 
 .rm .rm-notifier .rm-class-rewrite-conflicts {
   font-weight: normal; }
