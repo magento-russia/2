@@ -14,24 +14,45 @@ if (false) {
 	print_r(df_json_decode($response->getBody()));
 }
 ?>
-<div class='df-moysklad-export'/>
+<div class='df-moysklad-export'>
+	<h3 class='progress'></h3>
+	<table>
+		<tbody/>
+	</table>
+</div>
 <script>(function($) {$(function() {
-	jQuery.ajax({
-		dataType: 'json',
-		url: '<?php echo rm_ejs(rm_url_admin('df_moysklad/export/products')); ?>'
-	}).done(function(products) {
+	/** @type {String} */
+	var urlBase = '<?php echo rm_ejs(rm_url_admin('df_moysklad/export/')); ?>';
+	$.getJSON(urlBase + 'products', function(products) {
 		/** @type {jQuery} HTMLDivElement */
-		var $container = $('.df-moysklad-export');
+		var $c = $('.df-moysklad-export');
 		/**
 		 * @param {String} text
 		 * @param {Object|String|Array=} params [optional]
 		 */
 		var log = function(text, params) {
-			$container.append($('<div/>').html(rm.string.t(text, params)));
+			$c.append($('<div/>').html(rm.string.t(text, params)));
 		};
-		log('<h3>Товаров для экспорта: <b>%s</b></h3>', products.length);
-		$.each(products, function(index, name) {
-			log(name);
+		/** @type {jQuery} HTMLHeadingElement */
+		var $progress = $('.progress', $c);
+		/** @type {String} */
+		var progressText = rm.string.t('Экспорт товара: <b>%s</b> из <b>{total}</b>', {
+			total: products.length
 		});
-	});
+		/** @type {jQuery} HTMLTableSectionElement */
+		var $tbody = $('tbody', $c);
+		var process = function(i) {
+			if (i < products.length) {
+				var product = products[i];
+				$progress.html(rm.string.t(progressText, 1 + i));
+				$.getJSON(urlBase + 'product', {id: product.id}, function(status) {
+					$tbody.append($(rm.string.t('<tr><td>{name}</td><td>{status}</td></tr>', {
+						name: product.name, status: status
+					})));
+					process(++i);
+				});
+			}
+		};
+		process(0);
+	})
 });})(jQuery);</script>

@@ -61,5 +61,11 @@ class Df_MoySklad_Product_Exporter extends Df_Catalog_Product_Exporter {
 			. ' не соответствует ни один из товаров интернет-магазина.'
 		);
 	}
+
+	/**
+	 * @param array(string => mixed) $parameters [optional]
+	 * @return Df_MoySklad_Product_Exporter
+	 */
+	public static function i(array $parameters = array()) {return new self($parameters);}
 }
 

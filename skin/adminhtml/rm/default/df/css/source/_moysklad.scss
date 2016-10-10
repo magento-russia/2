@@ -1,4 +1,17 @@
 // 2016-10-10
 .df-moysklad-export {
+	width: 30em;
+	max-height: 50em;
+	overflow-y: scroll;
 	h3 {font-weight: normal;}
+	table {
+		border-spacing: 0;
+		tr {
+			&:nth-child(even) {background: #F6F6F6;}
+			td {
+				padding: 0.25em 0.5em;
+				&:nth-child(1) {width: 15em;}
+			}
+		}
+	}
 }
