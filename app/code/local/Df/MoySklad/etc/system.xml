@@ -70,6 +70,24 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
+						<codePrefix>
+							<label>Приставка для кодов товаров в МойСклад</label>
+							<comment><![CDATA[
+При создании товара в МойСклад модуль назначает ему в качестве кода идентификатор этого товара в Magento.
+<br/>В большинстве случаев Вас должно устраивать данное поведение, и тогда эту опцию можно оставить пустой.
+<br/>Однако в некоторых (редких) ситуациях Вам нужно использовать приставку:
+<ol><li>Если МойСклад уже <b>содержит какие-то товары до импорта</b> товаров из интернет-магазина, и коды этих товаров пересекаются с идентификаторами товаров в интернет-магазине.</li>
+<li>Если Вы хотите синхронизировать МойСклад сразу с <b>несколькими внешними системами</b> (например, с несколькими интернет-магазинами).
+<br/>Обратите внимание, что если эти несколько магазинов располагаются внутри единой установки Magento, то приставка Вам не нужна, потому что Magento использует сквозную нумерацию всех товаров всех магазинов внутри себя.</li></ol>
+]]>
+						   </comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>df_admin/system_config_form_field</frontend_model>>
+						</codePrefix>
 						<conditions>
 							<label>Условия</label>
 							<comment><![CDATA[
@@ -78,7 +96,7 @@
 							]]></comment>
 							<frontend_model>Df_Catalog_Block_Admin_Conditions</frontend_model>
 							<backend_model>Df_Catalog_Model_System_Config_Backend_Conditions</backend_model>
-							<sort_order>1000</sort_order>
+							<sort_order>2</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>

@@ -1,5 +1,28 @@
 <?php
 /**
+ * @see df_cc()
+ * @return string
+ */
+function df_ccc() {
+	/** @var mixed[] $a */
+	$a = func_get_args();
+	/** @var string $glue */
+	$glue = array_shift($a);
+	return implode($glue, df_clean(dfa_flatten($a)));
+}
+
+/**
+ * 2015-12-01
+ * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * @return string
+ */
+function df_cc_path() {
+	/** @var mixed[] $a */
+	$a = func_get_args();
+	return df_ccc('/', dfa_flatten($a));
+}
+
+/**
  * Эта функция отличается от @see implode() тем,
  * что способна принимать переменное количество аргументов, например:
  * df_concat('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).

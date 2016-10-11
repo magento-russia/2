@@ -747,6 +747,7 @@ License: MIT
   background: url(../../../../../default/default/images/note_bg.gif) 1px 6px no-repeat;
   font-size: 11px;
   line-height: 16px;
+  font-size: 11px;
   max-width: 1000px;
   font-size: 12px; }
   .entry-edit div.comment .rm-recommendation {
@@ -770,81 +771,95 @@ License: MIT
       padding: 0.25em 0.5em; }
     .entry-edit div.comment table.rm-definition tr:nth-child(even) {
       background-color: white; }
-.entry-edit .form-list td.value p.note, .entry-edit .form-list td.value div.note {
-  width: auto;
-  max-width: 800px; }
-.entry-edit .form-list td.value div.note {
-  width: auto;
-  margin: 0;
-  padding: 0 0 0 13px;
-  background: url(../../../../../default/default/images/note_bg.gif) 1px 6px no-repeat;
-  font-size: 11px;
-  line-height: 16px;
-  max-width: 800px; }
-  .entry-edit .form-list td.value div.note .rm-recommendation {
-    color: green;
-    font-weight: bold; }
-  .entry-edit .form-list td.value div.note ul, .entry-edit .form-list td.value div.note ol {
+.entry-edit .form-list td.value {
+  font-size: 11px; }
+  .entry-edit .form-list td.value ul, .entry-edit .form-list td.value ol {
     margin-left: 2em;
     list-style-position: outside; }
-  .entry-edit .form-list td.value div.note ul {
+  .entry-edit .form-list td.value ul {
     list-style-type: disc; }
-  .entry-edit .form-list td.value div.note ol {
+  .entry-edit .form-list td.value ol {
     list-style-type: decimal; }
-  .entry-edit .form-list td.value div.note li {
+  .entry-edit .form-list td.value li {
     margin: 0.2em 0; }
-  .entry-edit .form-list td.value div.note table.rm-definition {
-    margin-left: 1.5em;
-    border-collapse: collapse; }
-    .entry-edit .form-list td.value div.note table.rm-definition tr td:first-child {
-      font-weight: bold; }
-    .entry-edit .form-list td.value div.note table.rm-definition tr td {
-      padding: 0.25em 0.5em; }
-    .entry-edit .form-list td.value div.note table.rm-definition tr:nth-child(even) {
-      background-color: white; }
-.entry-edit .form-list td.value p#note_tax_rate {
-  font-size: inherit; }
-.entry-edit .form-list td.value .df-config-info-urls {
-  display: block;
-  background: white;
-  padding: 2px 0 2px 0.75em;
-  width: 300px; }
-  .entry-edit .form-list td.value .df-config-info-urls .df-url {
-    display: block;
-    width: 35em;
-    background: white;
-    cursor: pointer; }
-  .entry-edit .form-list td.value .df-config-info-urls .df-url.hover {
-    background: #FFF9E9; }
-  .entry-edit .form-list td.value .df-config-info-urls li {
-    display: block;
-    background: white;
+  .entry-edit .form-list td.value ol, .entry-edit .form-list td.value ul {
+    padding-left: 13px; }
+  .entry-edit .form-list td.value p.note, .entry-edit .form-list td.value div.note {
+    width: auto;
+    max-width: 800px; }
+  .entry-edit .form-list td.value div.note {
+    width: auto;
     margin: 0;
-    padding: 0; }
-    .entry-edit .form-list td.value .df-config-info-urls li .df-name {
-      float: left;
-      width: 7em;
-      padding: 4px 0; }
-    .entry-edit .form-list td.value .df-config-info-urls li .df-url {
-      padding: 4px 0.75em;
-      margin-left: 8em; }
-.entry-edit .form-list td.value .grid table tr td:last-child, .entry-edit .form-list td.value .grid table tr th:last-child {
-  width: 100px;
-  text-transform: lowercase; }
-.entry-edit .form-list td.value .grid table tr td .select2-container .select2-choice {
-  /*box-sizing: border-box; */ }
-.entry-edit .form-list td.value .Df_Directory_Block_Field_CountriesOrdered {
-  width: 300px; }
-.entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType {
-  max-width: 470px; }
-  .entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType select.customer_group {
-    width: 10em; }
-.entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes {
-  width: 380px; }
-  .entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes select.standard_code {
-    width: 15em; }
-.entry-edit .form-list td.value #df_directory_countries_popular__order .grid {
-  width: 300px; }
+    padding: 0 0 0 13px;
+    background: url(../../../../../default/default/images/note_bg.gif) 1px 6px no-repeat;
+    font-size: 11px;
+    line-height: 16px;
+    font-size: 11px;
+    max-width: 800px; }
+    .entry-edit .form-list td.value div.note .rm-recommendation {
+      color: green;
+      font-weight: bold; }
+    .entry-edit .form-list td.value div.note ul, .entry-edit .form-list td.value div.note ol {
+      margin-left: 2em;
+      list-style-position: outside; }
+    .entry-edit .form-list td.value div.note ul {
+      list-style-type: disc; }
+    .entry-edit .form-list td.value div.note ol {
+      list-style-type: decimal; }
+    .entry-edit .form-list td.value div.note li {
+      margin: 0.2em 0; }
+    .entry-edit .form-list td.value div.note table.rm-definition {
+      margin-left: 1.5em;
+      border-collapse: collapse; }
+      .entry-edit .form-list td.value div.note table.rm-definition tr td:first-child {
+        font-weight: bold; }
+      .entry-edit .form-list td.value div.note table.rm-definition tr td {
+        padding: 0.25em 0.5em; }
+      .entry-edit .form-list td.value div.note table.rm-definition tr:nth-child(even) {
+        background-color: white; }
+  .entry-edit .form-list td.value p#note_tax_rate {
+    font-size: inherit; }
+  .entry-edit .form-list td.value .df-config-info-urls {
+    display: block;
+    background: white;
+    padding: 2px 0 2px 0.75em;
+    width: 300px; }
+    .entry-edit .form-list td.value .df-config-info-urls .df-url {
+      display: block;
+      width: 35em;
+      background: white;
+      cursor: pointer; }
+    .entry-edit .form-list td.value .df-config-info-urls .df-url.hover {
+      background: #FFF9E9; }
+    .entry-edit .form-list td.value .df-config-info-urls li {
+      display: block;
+      background: white;
+      margin: 0;
+      padding: 0; }
+      .entry-edit .form-list td.value .df-config-info-urls li .df-name {
+        float: left;
+        width: 7em;
+        padding: 4px 0; }
+      .entry-edit .form-list td.value .df-config-info-urls li .df-url {
+        padding: 4px 0.75em;
+        margin-left: 8em; }
+  .entry-edit .form-list td.value .grid table tr td:last-child, .entry-edit .form-list td.value .grid table tr th:last-child {
+    width: 100px;
+    text-transform: lowercase; }
+  .entry-edit .form-list td.value .grid table tr td .select2-container .select2-choice {
+    /*box-sizing: border-box; */ }
+  .entry-edit .form-list td.value .Df_Directory_Block_Field_CountriesOrdered {
+    width: 300px; }
+  .entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType {
+    max-width: 470px; }
+    .entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType select.customer_group {
+      width: 10em; }
+  .entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes {
+    width: 380px; }
+    .entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes select.standard_code {
+      width: 15em; }
+  .entry-edit .form-list td.value #df_directory_countries_popular__order .grid {
+    width: 300px; }
 
 #config_edit_form .entry-edit .form-list td.value {
   width: auto; }

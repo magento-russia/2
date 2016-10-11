@@ -2,6 +2,12 @@
 // 2016-10-09
 // Экспорт товаров из интернет-магазина в МойСклад.
 class Df_MoySklad_Settings_Export_Products extends Df_Core_Model_Settings {
+	/**
+	 * 2016-10-11
+	 * «Приставка для кодов товаров в МойСклад»
+	 * @return string
+	 */
+	public function codePrefix() {return $this->getString(__FUNCTION__);}
 	/**  
 	 * 2016-10-09
 	 * @return Mage_CatalogRule_Model_Rule|null 

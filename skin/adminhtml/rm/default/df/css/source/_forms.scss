@@ -1,4 +1,18 @@
 .entry-edit {
+	// 2016-10-11
+	@mixin rm-lists {
+		font-size: 11px;
+		// Наши дополнительные правила для внутренних элементов.
+		// Magento CE использует по умолчанию «list-style: none»
+		// @see skin/adminhtml/default/default/reset.css
+		ul, ol {
+			margin-left: 2em;
+			list-style-position: outside;
+		}
+		ul {list-style-type: disc;}
+		ol {list-style-type: decimal;}
+		li {margin: 0.2em 0;}
+	}
 	@mixin rm-note {
 		width: auto;
 		// 2015-04-15
@@ -20,16 +34,8 @@
 			color: green;
 			font-weight: bold;
 		}
-		// Наши дополнительные правила для внутренних элементов.
-		// Magento CE использует по умолчанию «list-style: none»
-		// @see skin/adminhtml/default/default/reset.css
-		ul, ol {
-			margin-left: 2em;
-			list-style-position: outside;
-		}
-		ul {list-style-type: disc;}
-		ol {list-style-type: decimal;}
-		li {margin: 0.2em 0;}
+		// 2016-10-11
+		@include rm-lists;
 		// Используется для таблиц с определениями.
 		// Пример использования: комментарий к полю «Шаблон имени диагностического журнала»
 		// настроек модуля «1С: Управление торговлей»:
@@ -59,6 +65,9 @@
 	}
 	// Задаёт правила для отображения полей ввода.
 	.form-list td.value {
+		// 2016-10-11
+		@include rm-lists;
+		ol, ul {padding-left: 13px;}
 		p.note, div.note {
 			width: auto;
 			// чтобы строки с текстом не становились слишком длинными:

@@ -8,74 +8,79 @@
 <script>(function($) {$(function() {
 	/** @type {String} */
 	var urlBase = '<?php echo rm_ejs(rm_url_admin('df_moysklad/export/')); ?>';
-	$.getJSON(urlBase + 'products', function(products) {
-		/** @type {jQuery} HTMLDivElement */
-		var $c = $('.df-moysklad-export');
-		/**
-		 * @param {String} text
-		 * @param {Object|String|Array=} params [optional]
-		 */
-		var log = function(text, params) {
-			$c.append($('<div/>').html(rm.string.t(text, params)));
-		};
-		/** @type {jQuery} HTMLHeadingElement */
-		var $progress = $('.progress', $c);
-		/** @type {String} */
-		var progressText = rm.string.t('Экспорт товара: <b>%s</b> из <b>{total}</b>', {
-			total: products.length
-		});
-		/** @type {jQuery} HTMLTableSectionElement */
-		var $tbody = $('tbody', $c);
-		var process = function(i) {
-			if (i < products.length) {
-				var product = products[i];
-				$progress.html(rm.string.t(progressText, 1 + i));
-				$.getJSON(urlBase + 'product', {id: product.id}, function(data) {
-					var $tr = $('<tr/>');
-					var $name = $('<td/>');
-					$tr.append($name);
-					var $status = $('<td/>');
-					$tr.append($status);
-					$status.html(data.success ? 'OK' : 'Сбой');
-					if (!data.success) {
-						$name.html(product.name);
-					}
-					else {
-						/**
-						 * 2016-10-10
-						 * Идентификатор в URL товара смещён на число 2 (в 16-ричной системе счисления)
-						 * по сравнению с идентификатором, возвразаемым JSON API:
-						 * https://support.moysklad.ru/hc/ru/requests/82430
-						 *
-						 * Оказалось, что и первый участок тоже смещён,
-						 * причём смещение для каждого товара разное.
-						 * Поэтому пока не знаю, как получить адрес товара в МойСклад.
-						 */
-						if (true) {
+	$.getJSON(urlBase + 'deleteAll', function() {
+		$.getJSON(urlBase + 'products', function(products) {
+			/** @type {jQuery} HTMLDivElement */
+			var $c = $('.df-moysklad-export');
+			/**
+			 * @param {String} text
+			 * @param {Object|String|Array=} params [optional]
+			 */
+			var log = function(text, params) {
+				$c.append($('<div/>').html(rm.string.t(text, params)));
+			};
+			/** @type {jQuery} HTMLHeadingElement */
+			var $progress = $('.progress', $c);
+			/** @type {String} */
+			var progressText = rm.string.t('Экспорт товара: <b>%s</b> из <b>{total}</b>', {
+				total: products.length
+			});
+			/** @type {jQuery} HTMLTableSectionElement */
+			var $tbody = $('tbody', $c);
+			var process = function(i) {
+				if (i < products.length) {
+					var product = products[i];
+					$progress.html(rm.string.t(progressText, 1 + i));
+					$.getJSON(urlBase + 'product', {id: product.id}, function(data) {
+						var $tr = $('<tr/>');
+						var $name = $('<td/>');
+						$tr.append($name);
+						var $status = $('<td/>');
+						$tr.append($status);
+						$status.html(data.success ? 'OK' : 'Сбой');
+						if (!data.success) {
 							$name.html(product.name);
+							$tr.click(function() {
+								alert(data.errors.join('\n'));
+							});
 						}
 						else {
-							/** @type {String[]} */
-							var idA = data.id.split('-');
-							/** @type {String} */
-							var lastS = idA[idA.length - 1];
-							/** @type {Number} */
-							var lastI = parseInt(lastS, 16);
-							idA[idA.length - 1] = (lastI - 2).toString(16);
-							/** @type {String} */
-							var id = idA.join('-');
-							$name.append($('<a/>').attr({
-								href: 'https://online.moysklad.ru/app/#good/edit?id=' + id
-								,target: '_blank'
-								,title: 'Открыть товар в МойСклад'
-							}).html(product.name));
+							/**
+							 * 2016-10-10
+							 * Идентификатор в URL товара смещён на число 2 (в 16-ричной системе счисления)
+							 * по сравнению с идентификатором, возвразаемым JSON API:
+							 * https://support.moysklad.ru/hc/ru/requests/82430
+							 *
+							 * Оказалось, что и первый участок тоже смещён,
+							 * причём смещение для каждого товара разное.
+							 * Поэтому пока не знаю, как получить адрес товара в МойСклад.
+							 */
+							if (true) {
+								$name.html(product.name);
+							}
+							else {
+								/** @type {String[]} */
+								var idA = data.id.split('-');
+								/** @type {String} */
+								var lastS = idA[idA.length - 1];
+								/** @type {Number} */
+								var lastI = parseInt(lastS, 16);
+								idA[idA.length - 1] = (lastI - 2).toString(16);
+								/** @type {String} */
+								var id = idA.join('-');
+								$name.append($('<a/>').attr({
+									href: 'https://online.moysklad.ru/app/#good/edit?id=' + id
+									,target: '_blank'
+									,title: 'Открыть товар в МойСклад'
+								}).html(product.name));
+							}
 						}
-					}
-					$tbody.append($tr);
-					process(++i);
-				});
-			}
-		};
-		process(0);
-	})
+						$tbody.append($tr);
+						process(++i);
+					});
+				}
+			};
+			process(0);
+		});
+	});
 });})(jQuery);</script>

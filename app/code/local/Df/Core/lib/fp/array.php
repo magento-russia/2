@@ -343,35 +343,45 @@ function df_array_unshift_assoc(&$arr, $key, $val)  {
 }
 
 /**
- * @param array $array
- * @param array $additionalValuesToClean
- * @param null|array $keysToClean
- * @return array
+ * 2015-02-07
+ * Обратите внимание,
+ * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
+ * http://php.net/manual/function.array-filter.php
+ * @see array_filter() с единственным параметром удалит из массива все элементы,
+ * чьи значения приводятся к логическому «false».
+ * Т.е., помимо наших array('', null, array()),
+ * @see array_filter() будет удалять из массива также элементы со значениями «false» и «0».
+ * Если это соответствует требуемому поведению в конретной точке программного кода,
+ * то используйте именно @see array_filter(),
+ * потому что встроенная функция @see array_filter() в силу реализации на языке С
+ * будет работать на порядки быстрее, нежели @see df_clean().
+ *
+ * 2015-01-22
+ * Теперь из исходного массива будут удаляться элементы,
+ * чьим значением является пустой массив.
+ * @param mixed[] $array
+ * @param mixed[] $additionalValuesToClean [optional]
+ * @return mixed[]
  */
-function df_clean(array $array, array $additionalValuesToClean = array(), $keysToClean = null) {
-	if ($keysToClean) {
-		$result =
-			array_merge(
-				array_diff_key($array, array_flip($keysToClean))
-				,df_clean(
-					array_intersect_key($array, array_flip($keysToClean))
-					,$additionalValuesToClean
-				)
-			)
-		;
-	}
-	else {
-		$result = array();
-		$valuesToClean = array_merge(array('', null), $additionalValuesToClean);
-		$isAssoc = df_is_assoc($array);
-		foreach ($array as $key => $value) {
-			if (!in_array($value, $valuesToClean, true)) {
-				if ($isAssoc) {
-					$result[$key]= $value;
-				}
-				else {
-					$result[]= $value;
-				}
+function df_clean(array $array, array $additionalValuesToClean = []) {
+	/** @var mixed[] $result */
+	$result = [];
+	// 2015-01-22
+	// Теперь из исходного массива будут удаляться элементы,
+	// чьим значением является пустой массив.
+	/** @var mixed[] $valuesToClean */
+	$valuesToClean = array_merge(array('', null, array()), $additionalValuesToClean);
+	/** @var bool $isAssoc */
+	$isAssoc = df_is_assoc($array);
+	foreach ($array as $key => $value) {
+		/** @var int|string $key */
+		/** @var mixed $value */
+		if (!in_array($value, $valuesToClean, true)) {
+			if ($isAssoc) {
+				$result[$key]= $value;
+			}
+			else {
+				$result[]= $value;
 			}
 		}
 	}
@@ -663,6 +673,35 @@ function df_tuple(array $arrays) {
  * @return array
  */
 function df_wrap_in_array($value) {return is_array($value) ? $value : array($value);}
+
+/**
+ * 2016-10-11
+ * Мои модули для Magento 2 используют такой алгоритм: http://stackoverflow.com/a/1320156
+ * Однако Российская сборка Magento должна поддерживать PHP 5.2,
+ * поэтому испольузем другой алгоритм, который я составил на основе этого:
+ * http://stackoverflow.com/a/1320112
+ * @used-by df_cc_class()
+ * @used-by df_cc_class_uc()
+ * @param array $a
+ * @return mixed[]
+ */
+function dfa_flatten(array $a) {
+	if (!is_array($a)) {
+		// nothing to do if it's not an array
+		return array($a);
+	}
+	/** @var mixed[] $result */
+	$result = array();
+	foreach ($a as $v) {
+		if (!is_array($v)) {
+			$result[]= $v;
+		}
+		else {
+			$result = array_merge($result, dfa_flatten($v));
+		}
+	}
+	return $result;
+}
 
 /**
  * @param mixed|mixed[] $value
