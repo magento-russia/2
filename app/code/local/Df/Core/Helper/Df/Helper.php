@@ -72,8 +72,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function payOnline() {return Df_PayOnline_Helper_Data::s();}
 	/** @return Df_Pd4_Helper_Data */
 	public function pd4() {return Df_Pd4_Helper_Data::s();}
-	/** @return Df_Pel_Helper_Data */
-	public function pel() {return Df_Pel_Helper_Data::s();}
 	/** @return Df_Phpquery_Helper_Data */
 	public function phpquery() {return Df_Phpquery_Helper_Data::s();}
 	/** @return Df_PromoGift_Helper_Data */

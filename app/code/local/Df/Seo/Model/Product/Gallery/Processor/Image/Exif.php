@@ -8,7 +8,11 @@ class Df_Seo_Model_Product_Gallery_Processor_Image_Exif extends Df_Core_Model_Ab
 				&&
 					$this->getProduct()
 			) {
-				df_h()->pel()->lib()->setCompatibleErrorReporting();
+				/**
+				 * Этот вызов неявно (автоматически) инициализирует библиотеку Pel.
+				 * @uses Df_Pel_Lib::s()
+				 */
+				Df_Pel_Lib::s()->setCompatibleErrorReporting();
 				try {
 					$data =
 						new PelDataWindow (
@@ -144,9 +148,10 @@ class Df_Seo_Model_Product_Gallery_Processor_Image_Exif extends Df_Core_Model_Ab
 							rm_file_put_contents($this->getImagePath(), $jpeg->getBytes());
 						}
 					}
-					df_h()->pel()->lib()->restoreErrorReporting();
+					Df_Pel_Lib::s()->restoreErrorReporting();
 				}
 				catch(Exception $e) {
+					Df_Pel_Lib::s()->restoreErrorReporting();
 					df_handle_entry_point_exception($e, false);
 				}
 			}

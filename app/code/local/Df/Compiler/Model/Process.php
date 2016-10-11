@@ -5,8 +5,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 	 * @return array
 	 */
 	public function getCompileClassList() {
-		Df_Core_Bootstrap::s()->init();
-		Df_Zf_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		$arrFiles = array();
 		foreach ($this->getScopes() as $code) {
 			/** @var array|null $classes */

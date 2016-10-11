@@ -65,7 +65,7 @@ class Df_Eav_Model_Config extends Mage_Eav_Model_Config {
 		 * Magento CE и Российской сборки Magento,
 		 * поэтому надо инициализировать Российскую сборку Magento.
 		 */
-		Df_Core_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		if (!$result && $this->needCacheRm($id)) {
 			$result = df_ftn(Df_Eav_Model_Cache::s()->loadDataComplex($this->getAttributeCacheKey($id)));
 			if ($result) {
@@ -97,7 +97,7 @@ class Df_Eav_Model_Config extends Mage_Eav_Model_Config {
 		 * Magento CE и Российской сборки Magento,
 		 * поэтому надо инициализировать Российскую сборку Magento.
 		 */
-		Df_Core_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		if ($this->needCacheRm($id)) {
 			if ($obj instanceof Mage_Catalog_Model_Resource_Eav_Attribute) {
 				/** @var Mage_Catalog_Model_Resource_Eav_Attribute $obj */

@@ -37,11 +37,11 @@ class Df_Core_Exception extends Mage_Core_Exception {
 	 */
 	public function getTraceAsText() {
 		return
-			Df_Qa_Model_Message_Failure_Exception::i(array(
-				Df_Qa_Model_Message_Failure_Exception::P__EXCEPTION => $this
-				,Df_Qa_Model_Message_Failure_Exception::P__NEED_LOG_TO_FILE => false
-				,Df_Qa_Model_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => false
-			))->getTraceAsText()
+			Df_Qa_Message_Failure_Exception::i(array(
+				Df_Qa_Message_Failure_Exception::P__EXCEPTION => $this
+				,Df_Qa_Message_Failure_Exception::P__NEED_LOG_TO_FILE => false
+				,Df_Qa_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => false
+			))->traceS()
 		;
 	}
 

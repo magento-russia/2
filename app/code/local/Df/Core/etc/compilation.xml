@@ -21,8 +21,6 @@
 			<Df_Core_Model_Design_PackageM/>
 			<Df_Core_Model_Dispatcher/>
 			<Df_Core_Model_Layout_Update/>
-			<Df_Core_Bootstrap/>
-			<Df_Core_Bootstrap_Abstract/>
 			<Df_Core_Model_Locale/>
 			<Df_Core_Model_Reflection/>
 			<Df_Core_Model_Settings_Group/>
@@ -55,15 +53,12 @@
 			<Df_Phpquery_LibLoader/>
 			<Df_Qa_Helper_Data/>
 			<Df_Qa_Helper_Method/>
-			<Df_Qa_Model_Shutdown/>
 			<Df_Seo_Model_Settings/>
 			<Df_Seo_Model_Settings_Urls/>
 			<Df_Speed_Model_Settings/>
 			<Df_Speed_Model_Settings_General/>
 			<Df_Speed_Model_Dispatcher/>
 			<Df_Varien_Simplexml_Element/>
-			<Df_Zf_LibLoader/>
-			<Df_Zf_Bootstrap/>
 			<Df_Zf_Validate/>
 			<Df_Zf_Validate_Array/>
 			<Df_Zf_Validate_Between/>
@@ -410,9 +405,9 @@
 			<Df_PromoGift_Block_Chooser/>
 			<Df_PromoGift_Model_Settings/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
 			<Df_Reward_Helper_Data/>
 			<Df_Reward_Model_Dispatcher/>
 			<Df_Reward_Model_Observer/>
@@ -720,9 +715,9 @@
 			<Df_PromoGift_Model_PromoAction_Collection/>
 			<Df_PromoGift_Model_Validate_Rule_ApplicableToCurrentQuote/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
 			<Df_Reward_Block_Tooltip/>
 			<Df_Reward_Helper_Data/>
 			<Df_Reward_Model_Dispatcher/>
@@ -1196,9 +1191,9 @@
 			<Df_PromoGift_Model_Customer_Rule_Counter/>
 			<Df_PromoGift_Model_Dispatcher/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
 			<Df_Qiwi_Model_Payment/>
 			<Df_RbkMoney_Model_Payment/>
 			<Df_Reward_Block_Checkout_Payment_Additional/>
@@ -1962,7 +1957,6 @@
 			<Df_Core_Helper_Fp/>
 			<Df_Core_Helper_Layout/>
 			<Df_Core_Helper_Mage/>
-			<Df_Core_Helper_Mage_Admin/>
 			<Df_Core_Helper_Mage_Adminhtml/>
 			<Df_Core_Helper_Mage_Adminhtml_Html/>
 			<Df_Core_Helper_Mage_Adminhtml_System/>
@@ -2142,12 +2136,12 @@
 			<Df_PromoGift_Model_Validate_Rule_ApplicableToCurrentQuote/>
 			<Df_Promotion_Helper_Data/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_Model_Debug_Execution_State/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
-			<Df_Qa_Model_Message_Failure_Exception/>
-			<Df_Qa_Model_Message_Notification/>
+			<Df_Qa_Debug_Execution_State/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
+			<Df_Qa_Message_Failure_Exception/>
+			<Df_Qa_Message_Notification/>
 			<Df_Qiwi_Model_Payment/>
 			<Df_RbkMoney_Model_Payment/>
 			<Df_Reports_Helper_Data/>
@@ -3437,9 +3431,9 @@
 			<Df_PromoGift_Model_Settings/>
 			<Df_PromoGift_Model_Dispatcher/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
 			<Df_Reward_Block_Customer_Account/>
 			<Df_Reward_Helper_Data/>
 			<Df_Reward_Model_Dispatcher/>
@@ -3823,9 +3817,9 @@
 			<Df_PromoGift_Model_Settings/>
 			<Df_PromoGift_Model_Dispatcher/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
 			<Df_Qiwi_Model_Payment/>
 			<Df_RbkMoney_Model_Payment/>
 			<Df_Reward_Helper_Data/>
@@ -4241,9 +4235,9 @@
 			<Df_Page_Block_Html_Header/>
 			<Df_Page_Block_Template_Links/>
 			<Df_Page_Model_Html_Head/>
-			<Df_Qa_Model_Message/>
-			<Df_Qa_Model_Message_Failure/>
-			<Df_Qa_Model_Message_Failure_Error/>
+			<Df_Qa_Message/>
+			<Df_Qa_Message_Failure/>
+			<Df_Qa_Message_Failure_Error/>
 			<Df_Reward_Block_Customer_Account/>
 			<Df_Reward_Block_Sales_Order_Total/>
 			<Df_Reward_Helper_Data/>

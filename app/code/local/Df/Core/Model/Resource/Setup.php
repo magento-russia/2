@@ -12,8 +12,7 @@ class Df_Core_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup {
 	 */
 	public function startSetup() {
 		parent::startSetup();
-		Df_Core_Bootstrap::s()->init();
-		Df_Zf_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		return $this;
 	}
 

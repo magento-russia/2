@@ -11,13 +11,18 @@ class Df_Directory_Model_Dispatcher {
 		 * потому что они не вызывают Mage::dispatchEvent('default');
 		 * @link http://magento-forum.ru/topic/3929/
 		 */
-		Df_Core_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		/**
 		 * Для ускорения работы системы проверяем класс коллекции прямо здесь,
 		 * а не в обработчике события.
 		 * Это позволяет нам не создавать обработчики событий для каждой коллекции.
 		 */
 		$collection = $observer->getData('collection');
+		/**
+		 * Для ускорения работы системы проверяем класс коллекции прямо здесь,
+		 * а не в обработчике события.
+		 * Это позволяет нам не создавать обработчики событий для каждой коллекции.
+		 */		
 		if (df_h()->directory()->check()->regionCollection($collection)) {
 			if (df_enabled(Df_Core_Feature::DIRECTORY)) {
 				try {

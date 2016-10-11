@@ -75,10 +75,10 @@ class Df_Client_Model_Request extends Df_Core_Model_RemoteControl_Request {
 		 * При этом задать для нашего индивидуального кэша неограниченный срок хранения.
 		 * Но ведь кэш может быть уничтожен? Не подходит. Лучше БД.
 		 */
-		Df_Qa_Model_Message_Failure_Exception::i(array(
-			Df_Qa_Model_Message_Failure_Exception::P__EXCEPTION => $exception
-			,Df_Qa_Model_Message_Failure_Exception::P__NEED_LOG_TO_FILE => df_is_it_my_local_pc()
-			,Df_Qa_Model_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => true
+		Df_Qa_Message_Failure_Exception::i(array(
+			Df_Qa_Message_Failure_Exception::P__EXCEPTION => $exception
+			,Df_Qa_Message_Failure_Exception::P__NEED_LOG_TO_FILE => df_is_it_my_local_pc()
+			,Df_Qa_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => true
 		))->log();
 		$this->getMessageRequest()->saveDelayedMessage();
 		return $result;

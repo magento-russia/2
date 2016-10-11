@@ -4,7 +4,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	 * @override
 	 * @param string $file
 	 * @param string $type
-	 * @param string|null $localeCode[optional]
+	 * @param string|null $localeCode [optional]
 	 * @return string|bool
 	 */
 	public function getTemplateFile($file, $type, $localeCode = null) {
@@ -17,7 +17,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			$localeCode = $this->getLocale();
 			/**
 			 * Почему-то в магазине mirigrushek.kz
-			 * метод @see getLocale() возвращает не строку, а объект @see Zend_Locale
+			 * метод @uses getLocale() возвращает не строку, а объект @see Zend_Locale
 			 */
 			if (!is_string($localeCode)) {
 				if ($localeCode instanceof Zend_Locale) {
@@ -31,7 +31,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		}
 		// НАЧАЛО ЗАПЛАТКИ
 		if (
-				(Df_Core_Const::LOCALE__RUSSIAN === $localeCode)
+				('ru_RU' === $localeCode)
 			&&
 				(
 						Df_Localization_Model_Settings::s()->email()->isEnabled()
@@ -43,7 +43,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		}
 		// КОНЕЦ ЗАПЛАТКИ
 		/** @var string $filePath */
-		$filePath = 
+		$filePath =
 			$this->getTemplateFilePathForLocale(
 				$localeCode
 				,$fileType = $type
@@ -57,7 +57,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 					$localeCode = Mage::app()->getLocale()->getDefaultLocale()
 					,$fileType = $type
 					,$fileName = $file
-				)				
+				)
 			;
 		}
 		if (!file_exists($filePath)) {
@@ -67,7 +67,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 					$localeCode = Mage_Core_Model_Locale::DEFAULT_LOCALE
 					,$fileType = $type
 					,$fileName = $file
-				)					
+				)
 			;
 		}
 		/** @var Varien_Io_File $ioAdapter */
@@ -96,69 +96,86 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	}
 
 	/**
+	 * 2015-03-10
+	 * Работает быстрее, чем @see Mage_Core_Model_Transtale::translate()
+	 * Не поддерживает дополнительные параметры переводимой строки,
+	 * а также @see Df_Localization_Realtime_Translator.
+	 *
+	 * @see Df_Localization_Realtime_Translator мы не применяем из-за кэширования:
+	 * его результат зависит от контекста (в частности, текущего блока),
+	 * и мы бы не смогли здесь кэшировать результат.
+	 *
+	 * Если нужна поддержка @see Df_Localization_Realtime_Translator
+	 * и параметров переводимой строки , то используйте @see translateFast()
+	 * @used-by rm_translate_simple()
 	 * @param string $text
 	 * @param string $moduleName
 	 * @return string
 	 */
-	public function translateFast($text, $moduleName) {
-		if (!isset($this->{__METHOD__}[$moduleName][$text])) {
-			/** @var string $code */
-			$code = $moduleName . self::SCOPE_SEPARATOR . $text;
-			/** @var string $result */
-			$result = $this->_getTranslatedString($text, $code);
-			$this->{__METHOD__}[$moduleName][$text] = $result;
+	public function translateSimple($text, $moduleName) {
+		/** @var string $code */
+		$code = $moduleName . self::SCOPE_SEPARATOR . $text;
+		if (!isset($this->{__METHOD__}[$code])) {
+			$this->{__METHOD__}[$code] = $this->_getTranslatedStringLowLevel($text, $code);
 		}
-		return $this->{__METHOD__}[$moduleName][$text];
+		return $this->{__METHOD__}[$code];
 	}
 
 	/**
+	 * 2015-03-15
+	 * Работает быстрее, чем @see Mage_Core_Model_Transtale::translate()
+	 * Отличается от @see translateSimple() поддержкой параметров переводимой строки
+	 * и @see
+	 * @used-by rm_translate()
+	 * @param string $text
+	 * @param string $moduleName
+	 * @param mixed[] $variables [optional]
+	 * @return string
+	 */
+	public function translateFast($text, $moduleName, array $variables = array()) {
+		/** @var string $code */
+		$code = $moduleName . self::SCOPE_SEPARATOR . $text;
+		/** @var string $result */
+		$result = $this->_getTranslatedString($text, $code);
+		return !$variables ? $result : vsprintf($result, $variables);
+	}
+
+	/**
+	 * В качестве $scope метод может получать:
+	 * 1) имя модуля (для перевода модулей)
+	 * 2) значение false (для перевода оформительских тем):
+	 * @used-by Mage_Core_Model_Translate::_loadThemeTranslation()
+	 * 3) целочисленный идентификатор магазина (для перевода из БД):
+	 * @used-by Mage_Core_Model_Translate::_loadDbTranslation()
 	 * @override
 	 * @param array(string => string) $data
 	 * @param string|bool|int $scope
-	 * @param bool $forceReload[optional]
+	 * @param bool $forceReload [optional]
 	 * @return Mage_Core_Model_Translate
-	 *
-	 * В качестве $scope метод может получать:
-	 * 1) имя модуля (для перевода модулей)
-	 * 2) значение false (для перевода офоррмительских тем),
-	 * @see Mage_Core_Model_Translate::_loadThemeTranslation()
-	 * 3) целочисленный идентификатор магазина (для перевода из БД),
-	 * @see Mage_Core_Model_Translate::_loadDbTranslation()
 	 */
 	protected function _addData($data, $scope, $forceReload = false) {
 		/** @var bool $allowInterference */
 		static $allowInterference;
-		if (!isset($allowInterference)) {
+		if (is_null($allowInterference)) {
 			/** @var string $allowInterferenceAsString */
 			$allowInterferenceAsString = rm_loc()->allowInterference();
 			if (is_null($allowInterferenceAsString)) {
 				/**
 				 * Как ни странно, в магазине shop.d-m-t.ru
-				 * метод allowInterference возвращает NULL.
-				 * @link http://magento-forum.ru/topic/3703/
+				 * метод @uses Df_Localization_Settings_Area::allowInterference() возвращает NULL.
+				 * http://magento-forum.ru/topic/3703/
 				 */
-				$allowInterferenceAsString =
-					Df_Admin_Model_Config_Source_YesNoDev::VALUE__DEVELOPER_MODE
-				;
+				$allowInterferenceAsString = Df_Admin_Model_Config_Source_YesNoDev::VALUE__DEVELOPER_MODE;
 			}
-			df_assert_string($allowInterferenceAsString);
 			$allowInterference =
-					!Mage::getIsDeveloperMode()
-				?
-					(
-							Df_Admin_Model_Config_Source_YesNoDev::VALUE__NO
-						!==
-							$allowInterferenceAsString
-					)
-				:
-					(
-							Df_Admin_Model_Config_Source_YesNoDev::VALUE__YES
-						===
-							$allowInterferenceAsString
-					)
+				!Mage::getIsDeveloperMode()
+				? (Df_Admin_Model_Config_Source_YesNoDev::VALUE__NO !== $allowInterferenceAsString)
+				: (Df_Admin_Model_Config_Source_YesNoDev::VALUE__YES === $allowInterferenceAsString)
 			;
 		}
 		foreach ($data as $key => $value) {
+			/** @var string $key */
+			/** @var string $value */
 			if ($key === $value) {
 				continue;
 			}
@@ -226,10 +243,10 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		$dictionary = parent::_getFileData($file);
 		/**
 		 * Массив $dictionary может оказаться пустым,
-		 * и тогда @see array_combine приведёт к сбою:
-		 * «array_combine: Both parameters should have at least 1 element
+		 * и тогда прямое применение @see array_combine() вместо @uses df_array_combine()
+		 * приведёт к сбою: «array_combine: Both parameters should have at least 1 element
 		 * in Df/Core/Model/Translate.php on line 226»
-		 * @link http://magento-forum.ru/topic/4815/
+		 * http://magento-forum.ru/topic/4815/
 		 *
 		 * 2015-07-07
 		 * Обратите внимание, что спецсимволы {\n}, {\r}, {\t} надо замещать только в значении
@@ -243,6 +260,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Translate::_getTranslatedString()
 	 * @param string $text
 	 * @param string $code
 	 * @return string
@@ -283,7 +301,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * If from and to have different lengths,
 		 * the extra characters in the longer of the two are ignored.
 		 * The length of str will be the same as the return value's.»
-		 * @link http://php.net/strtr
+		 * http://php.net/strtr
 		 *
 		 * То есть, если бы мы заменяли не на пустой символ, а, например, на пробел,
 		 * то можно было бы короче написать с @see strtr():
@@ -291,7 +309,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * При замене на пустой символ непонятно, как сделать последний аргумент равным по длине второму.
 		 *
 		 * Новый алгоритм взял отсюда:
-		 * @link http://stackoverflow.com/a/20717751
+		 * http://stackoverflow.com/a/20717751
 		 */
 		/** @var string[] $symbolsToRemove */
 		static $symbolsToRemove = array("\r", "\n", "\t");
@@ -305,7 +323,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * Magento CE пытается перевести этот комментарий:
 		 * @used-by Mage_Adminhtml_Block_System_Config_Form::_prepareFieldComment():
 		 * $comment = Mage::helper($helper)->__($commentInfo);
-		 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9.2.1/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
+		 * https://github.com/OpenMage/magento-mirror/blob/magento-1.9.2.1/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
 		 * Т.к. комментарий — на русском языке, то перевода для него не находится,
 		 * и в итоге наш метод должен вернуть комментарий в неизменном виде,
 		 * с сохранением всех переносов строк, чтобы администратору было удобно его читать.
@@ -377,34 +395,52 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		/** @var bool $needUseRmTranslator */
 		static $needUseRmTranslator;
 		if (is_null($needUseRmTranslator)) {
+			/**
+			 * 2015-03-10
+			 * Раньше переменная $needUseRmTranslator инициализировалась значением false,
+			 * если function_exists('df_model') возвращало false.
+			 *
+			 * Обратите внимание, что переменная $needUseRmTranslator — статическая,
+			 * и, значит, она инициализируется навечно.
+			 * Как ни странно, это ранее почему-то не приводило к проблемам.
+			 * Видимо, потому что объект-одиночка нашего класса @see Df_Core_Model_Translate
+			 * создавался не вполне корректно:
+			 * public static function s() {static $r; return $r ? $r : $r = new self;}
+			 *
+			 * Правильно, конечно, создавать наш объект-одиночку так:
+			 * public static function s() {return Mage::getSingleton('core/translate');}
+			 * Этот код возвращает объект, который уже был инициализирован ядром Magento ранее,
+			 * ведь наш класс перекрывает системный класс @see Mage_Core_Model_Translate
+			 * А ошибочный код выше создавал новый объект=одиночку,
+			 * игнорируя уже созданный ядром Magento объект, и в системе существовало
+			 * сразу два объекта-одиночки одного класса,
+			 * что приводило, в частности, к дублированию кэша.
+			 *
+			 * Теперь же я это исправил, и здесь, видимо, тоже надо исправить:
+			 * вместо проверки function_exists('df_model')
+			 * сразу инициализировать Российскую сборку Magento.
+			 *
+			 * Ещё одной нормальной альтернативой является применение метода
+			 * @see Df_Core_Boot::done(), чтобы использовать
+			 * @uses Df_Localization_Realtime_Translator
+			 * уже после инициализации Российской сборки Magento,
+			 * которая случиться где-нибудь в другом месте позже.
+			 */
+			Df_Core_Boot::run();
+			/**
+			 * Не используем Df_Localization_Realtime_Translator
+			 * в процессе установки Magento Community Edition,
+			 * потому что в это время Российская сборка ещё не установлена и не инициализирована,
+			 * и использование Df_Localization_Realtime_Translator::s() приводит к сбою
+			 * Call to undefined function df_model().
+			 *
+			 * 2015-08-08
+			 * Обратите внимание, что @see Df_Localization_Realtime_Translator
+			 * не используетс также для административной части:
+			 * @uses Df_Localization_Realtime_Translator::isEnabled()
+			 */
 			$needUseRmTranslator =
-				/**
-				 * Не используем Df_Localization_Model_Realtime_Translator
-				 * в процессе установки Magento Community Edition,
-				 * потому что в это время Российская сборка ещё не установлена и не инициализирована,
-				 * и использование Df_Localization_Model_Realtime_Translator::s() приводит к сбою
-				 * Call to undefined function df_model().
-				 */
-				Mage::isInstalled()
-			&&
-				/**
-				 * Не используем Df_Localization_Model_Realtime_Translator
-				 * в процессе обновления сторонних модулей,
-				 * потому что в это время Российская сборка ещё не установлена и не инициализирована,
-				 * и использование Df_Localization_Model_Realtime_Translator::s() приводит к сбою
-				 * Call to undefined function df_model()
-				 * (и, видимо, к дальшейшим сбоям, даже если мы будем использовать df_model
-				 * вместо df_model)
-				 */
-				function_exists('df_model')
-			&&
-				/**
-				 * 2015-08-08
-				 * Обратите внимание, что @see Df_Localization_Model_Realtime_Translator
-				 * не используетс также для административной части:
-				 * @uses Df_Localization_Model_Realtime_Translator::isEnabled()
-				 */
-				Df_Localization_Model_Realtime_Translator::s()->isEnabled()
+				Mage::isInstalled() && Df_Localization_Model_Realtime_Translator::s()->isEnabled()
 			;
 		}
 		if ($needUseRmTranslator) {
@@ -426,7 +462,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			 * @see Mage_Core_Model_Translate::_getTranslatedString()
 			 * реализуем его алгоритм несколько другим, более быстрым способом:
 			 * заменив @see array_key_exists на @see isset
-			 * @link http://stackoverflow.com/a/700257
+			 * http://stackoverflow.com/a/700257
 			 */
 			if (!$this->_data) {
 				$result = $text;
@@ -451,7 +487,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				 * Magento CE пытается перевести этот комментарий:
 				 * @used-by Mage_Adminhtml_Block_System_Config_Form::_prepareFieldComment():
 				 * $comment = Mage::helper($helper)->__($commentInfo);
-				 * @link https://github.com/OpenMage/magento-mirror/blob/magento-1.9.2.1/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
+				 * https://github.com/OpenMage/magento-mirror/blob/magento-1.9.2.1/app/code/core/Mage/Adminhtml/Block/System/Config/Form.php#L522
 				 * Т.к. комментарий — на русском языке, то перевода для него не находится,
 				 * и в итоге наш метод должен вернуть комментарий в неизменном виде,
 				 * с сохранением всех переносов строк, чтобы администратору было удобно его читать.
@@ -496,7 +532,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	protected function _loadModuleTranslation($moduleName, $files, $forceReload=false) {
 		/** @var bool $localeIsRussian */
 		static $localeIsRussian;
-		if (!isset($localeIsRussian)) {
+		if (is_null($localeIsRussian)) {
 			$localeIsRussian = df_h()->localization()->locale()->isRussian();
 		}
 		/** @var bool $needEnableRmTranslation */
@@ -505,14 +541,8 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		$needSetRmTranslationAsPrimary = $this->needSetRmTranslationAsPrimary();
 		/** @var string $ruDfBasePath */
 		static $ruDfBasePath;
-		if (!isset($ruDfBasePath)) {
-			$ruDfBasePath =
-				df_concat_path(
-					$this->getBaseDirLocale()
-					,self::LOCALE__RU_DF
-					,''
-				)
-			;
+		if (!$ruDfBasePath) {
+			$ruDfBasePath = $this->getBaseDirLocale() . DS . self::LOCALE__RU_DF . DS;
 		}
 		foreach ($files as $file) {
 			/** @var string $file */
@@ -529,7 +559,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				$paths[]=
 					/**
 					 * Работает в 2 раза быстрее, чем implode
-					 * @link http://stackoverflow.com/questions/4502654/php-many-concats-or-one-implode
+					 * http://stackoverflow.com/questions/4502654/php-many-concats-or-one-implode
 					 */
 					$ruDfBasePath . $file
 				;
@@ -545,6 +575,31 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			}
 		}
 		return $this;
+	}
+
+	/**
+	 * 2015-03-10
+	 * Более быстрая альтернатива @see Mage_Core_Model_Translate::_getTranslatedString()^
+	 * вместо @see array_key_exists использует @uses isset()
+	 * http://stackoverflow.com/a/700257
+	 * @param string $text
+	 * @param string $code
+	 * @return string
+	 */
+	private function _getTranslatedStringLowLevel($text, $code) {
+		return
+			!$this->_data
+			? $text
+			: (
+				isset($this->_data[$code])
+				? $this->_data[$code]
+				: (
+					isset($this->_data[$text])
+					? $this->_data[$text]
+					: $text
+				)
+			)
+		;
 	}
 
 	/** @return string */
@@ -583,17 +638,11 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		if (!isset($this->{__METHOD__})) {
 			/** @var bool $result */
 			$result = false;
-			/** @var array(string => string)|string $suffixesRaw */
-			$suffixes = Mage::getConfig()->getNode('df/disable-translation')->asArray();
-			if (is_array($suffixes)) {
-				/** @var string $uri */
-				$uri = Mage::app()->getRequest()->getRequestUri();
-				foreach ($suffixes as $suffix) {
-					/** @var string $suffix */
-					if (rm_contains($uri, $suffix)) {
-						$result = true;
-						break;
-					}
+			foreach (rm_config_a('df/disable-translation') as $suffix) {
+				/** @var string $suffix */
+				if (rm_ruri_contains($suffix)) {
+					$result = true;
+					break;
 				}
 			}
 			$this->{__METHOD__} = $result;
@@ -605,7 +654,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	private function needEnableRmTranslation() {
 		/** @var bool $result */
 		static $result;
-		if (!isset($result)) {
+		if (is_null($result)) {
 			/** @var bool $result */
 			$result =
 					df_h()->localization()->locale()->isRussian()
@@ -630,7 +679,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	private function needSetRmTranslationAsPrimary() {
 		/** @var bool $result */
 		static $result;
-		if (!isset($result)) {
+		if (is_null($result)) {
 			/** @var bool $result */
 			$result =
 					// Используем для экранов установки перевод Российской сборки Magento
@@ -660,8 +709,8 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const LOCALE__RU_DF = 'ru_DF';
 	/** @return Df_Core_Model_Translate */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	public static function s() {return Mage::getSingleton('core/translate');}
 }

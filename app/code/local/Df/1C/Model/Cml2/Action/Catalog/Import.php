@@ -11,9 +11,7 @@ class Df_1C_Model_Cml2_Action_Catalog_Import extends Df_1C_Model_Cml2_Action_Cat
 		 * Данный код добавляет версию схемы CommerceML
 		 * к диагностическим отчётам в случае сбоя обмены данными.
 		 */
-		Df_Qa_Model_Context::s()->addItem(
-			'Cхема CommerceML', $this->getDocumentCurrent()->getSchemeVersion()
-		);
+		rm_context('Cхема CommerceML', $this->getDocumentCurrent()->getSchemeVersion());
 		$this->getDocumentCurrent()->storeInSession();
 		/**
 		 * В самом простом случае имена файлов будут «import.xml» и «offers.xml».

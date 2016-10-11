@@ -7,9 +7,19 @@
 </div>
 <script>(function($) {$(function() {
 	/** @type {String} */
-	var urlBase = '<?php echo rm_ejs(rm_url_admin('df_moysklad/export/')); ?>';
-	$.getJSON(urlBase + 'deleteAll', function() {
-		$.getJSON(urlBase + 'products', function(products) {
+	var sessionKey = '123';
+	var request = function(suffix, data, callback) {
+		if ($.isFunction(data)) {
+			callback = data;
+			data = {};
+		}
+		/** @type {String} */
+		var urlBase = '<?php echo rm_ejs(rm_url_admin('df_moysklad/export/')); ?>';
+		data['df-session'] = sessionKey;
+		$.getJSON(urlBase + suffix, data, callback);
+	};
+	request('deleteAll', function() {
+		request('products', function(products) {
 			/** @type {jQuery} HTMLDivElement */
 			var $c = $('.df-moysklad-export');
 			/**
@@ -31,7 +41,7 @@
 				if (i < products.length) {
 					var product = products[i];
 					$progress.html(rm.string.t(progressText, 1 + i));
-					$.getJSON(urlBase + 'product', {id: product.id}, function(data) {
+					request('product', {id: product.id}, function(data) {
 						var $tr = $('<tr/>');
 						var $name = $('<td/>');
 						$tr.append($name);

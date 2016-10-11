@@ -134,26 +134,6 @@ class Df_Core_Model_Dispatcher {
 	 * @param Varien_Event_Observer $observer
 	 * @return void
 	 */
-	public function controller_front_init_before(Varien_Event_Observer $observer) {
-		try {
-			Df_Core_Bootstrap::s()->init();
-			if (
-					df_module_enabled(Df_Core_Module::SPEED)
-				&&
-					df_cfg()->speed()->general()->enablePhpScriptsLoadChecking()
-			) {
-				Df_Core_Autoload::register();
-			}
-		}
-		catch(Exception $e) {
-			df_handle_entry_point_exception($e);
-		}
-	}
-
-	/**
-	 * @param Varien_Event_Observer $observer
-	 * @return void
-	 */
 	public function controller_front_send_response_after(Varien_Event_Observer $observer) {
 		try {
 			/**

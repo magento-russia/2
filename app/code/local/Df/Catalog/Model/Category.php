@@ -352,7 +352,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		 * @link http://magento-forum.ru/topic/3732/
 		 */
 		if (!Mage::isInstalled()) {
-			Df_Core_Bootstrap::s()->init();
+			Df_Core_Boot::run();
 		}
 		$this->_useFlatResource = self::useFlatResource() && !$this->_getData('disable_flat');
 	}

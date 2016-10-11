@@ -660,19 +660,19 @@ abstract class Df_Payment_Model_Method_Base
 	 */
 	private function log($message, $filename) {
 		if ($message instanceof Exception) {
-			Df_Qa_Model_Message_Failure_Exception::i(array(
-				Df_Qa_Model_Message_Failure_Exception::P__EXCEPTION => $message
-				,Df_Qa_Model_Message_Failure_Exception::P__FILE_NAME => $filename
-				,Df_Qa_Model_Message_Failure_Exception::P__NEED_LOG_TO_FILE => true
-				,Df_Qa_Model_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => true
+			Df_Qa_Message_Failure_Exception::i(array(
+				Df_Qa_Message_Failure_Exception::P__EXCEPTION => $message
+				,Df_Qa_Message_Failure_Exception::P__FILE_NAME => $filename
+				,Df_Qa_Message_Failure_Exception::P__NEED_LOG_TO_FILE => true
+				,Df_Qa_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => true
 			))->log();
 		}
 		else if (is_string($message)) {
-			Df_Qa_Model_Message_Notification::i(array(
-					Df_Qa_Model_Message_Notification::P__NOTIFICATION => $message
-					,Df_Qa_Model_Message_Notification::P__NEED_LOG_TO_FILE => true
-					,Df_Qa_Model_Message_Notification::P__FILE_NAME => $filename
-					,Df_Qa_Model_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
+			Df_Qa_Message_Notification::i(array(
+				Df_Qa_Message_Notification::P__NOTIFICATION => $message
+				,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => true
+				,Df_Qa_Message_Notification::P__FILE_NAME => $filename
+				,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
 			))->log();
 		}
 		else {

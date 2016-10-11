@@ -838,7 +838,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		 * а системный класс используется при установке ядра,
 		 * в то время, когда Российская сборка ещё не инициализирована.
 		 */
-		Df_Core_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		$this->_init(Df_Catalog_Model_Resource_Product::mf());
 	}
 	const _CLASS = __CLASS__;

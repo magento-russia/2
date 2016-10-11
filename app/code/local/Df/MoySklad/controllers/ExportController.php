@@ -42,6 +42,8 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 		$id = df_request('id');
 		/** @var Df_Catalog_Model_Product $p */
 		$p = df_product($id);
+		rm_log($this->sessionGet('prev'));
+		$this->sessionSet('prev', $p->getName());
 		/** @var Zend_Http_Response $response */
 		$response = $this->request(Zend_Http_Client::POST, '', array(
 			'article' => $p->getSku()
@@ -55,6 +57,19 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 			 */
 			,'code' => Df_MoySklad_Settings_Export_Products::s()->codePrefix() . strval($p->getId())
 			,'name' => $p->getName()
+			,'salePrices' => array(
+				'currency' => array(
+					'meta' => array(
+						'href'=> 'https://online.moysklad.ru/api/remap/1.1/entity/currency/2b50da23-296b-11e6-8a84-bae500000055'
+						,'mediaType' => 'application/json'
+						,'metadataHref' => 'https://online.moysklad.ru/api/remap/1.1/entity/currency/metadata'
+						,'type' => 'currency'
+
+					)
+				)
+				,'priceType' => 'Цена продажи'
+				,'value' => 100
+			)
 		));
 		rm_report(df_fs_name($p->getName()) . '.json', df_json_pretty_print($response->getBody()));
 		$responseA = df_json_decode($response->getBody());
@@ -126,4 +141,19 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 		}
 		return $c->request($method);
 	}
+
+	/**
+	 * 2016-10-11
+	 * @param string $key
+	 * @return mixed
+	 */
+	private function sessionGet($key) {return rm_session()->getData($key);}
+
+	/**
+	 * 2016-10-11
+	 * @param string $key
+	 * @param mixed $value
+	 * @return void
+	 */
+	private function sessionSet($key, $value) {rm_session()->setData($key, $value);}
 }

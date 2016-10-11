@@ -248,12 +248,21 @@
 					</df_core__controller_action_predispatch>
 				</observers>
 			</controller_action_postdispatch>
+			<!--
+				2015-08-03
+				При установке РСМ одновременно с CE
+				controller_front_init_before — это первое событие,
+				которое становится доступно подписчикам,
+				а метод @see Df_Speed_Observer::controller_front_init_before()
+			 	уже использует @uses df_cfg(),
+			 	поэтому нам надо инициализирвать РСМ.
+			-->
 			<controller_front_init_before>
 				<observers>
-					<df_core__controller_front_init_before>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Boot</class>
 						<method>controller_front_init_before</method>
-					</df_core__controller_front_init_before>
+					</Df_Core>
 				</observers>
 			</controller_front_init_before>
 			<controller_front_send_response_after>
@@ -266,18 +275,18 @@
 			</controller_front_send_response_after>
 			<default>
 				<observers>
-					<df_core__default>
-						<class>Df_Core_Bootstrap</class>
-						<method>init</method>
-					</df_core__default>
+					<Df_Core>
+						<class>Df_Core_Boot</class>
+						<method>_default</method>
+					</Df_Core>
 				</observers>
 			</default>
 			<resource_get_tablename>
 				<observers>
-					<df_core__resource_get_tablename>
-						<class>Df_Core_Bootstrap</class>
+					<Df_Core>
+						<class>Df_Core_Boot</class>
 						<method>resource_get_tablename</method>
-					</df_core__resource_get_tablename>
+					</Df_Core>
 				</observers>
 			</resource_get_tablename>
 		</events>

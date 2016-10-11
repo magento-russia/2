@@ -1,7 +1,5 @@
 <?php
 class Df_Core_Helper_Mage extends Mage_Core_Helper_Abstract {
-	/** @return Df_Core_Helper_Mage_Admin */
-	public function admin() {return Df_Core_Helper_Mage_Admin::s();}
 	/** @return Mage_Admin_Helper_Data */
 	public function adminHelper() {return Mage::helper('admin');}
 	/** @return Df_Core_Helper_Mage_Adminhtml */

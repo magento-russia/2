@@ -322,7 +322,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model_Abstract {
 		 * происходит при выполнении стороннего скрипта,
 		 * который написан некачественно и не вызывает системные события.
 		 */
-		Df_Core_Bootstrap::s()->init();
+		Df_Core_Boot::run();
 		$this->_modelsHandler = df_model('df_logging/handler_models');
 		$this->_controllerActionsHandler = df_model('df_logging/handler_controllers');
 	}

@@ -90,11 +90,11 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 		$message = rm_sprintf($arguments);
 		Mage::log($message, $level = null, $file = 'rm.yandex.market.log', $forceLog = true);
 		if (!df_is_it_my_local_pc() && $this->settings()->general()->getNotificationEmail()) {
-			Df_Qa_Model_Message_Notification::i(array(
-				Df_Qa_Model_Message_Notification::P__NOTIFICATION => $message
-				,Df_Qa_Model_Message_Notification::P__NEED_LOG_TO_FILE => false
-				,Df_Qa_Model_Message_Notification::P__NEED_NOTIFY_DEVELOPER => false
-				,Df_Qa_Model_Message_Notification::P__RECIPIENTS =>
+			Df_Qa_Message_Notification::i(array(
+				Df_Qa_Message_Notification::P__NOTIFICATION => $message
+				,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => false
+				,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => false
+				,Df_Qa_Message_Notification::P__RECIPIENTS =>
 					array($this->settings()->general()->getNotificationEmail())
 			))->log();
 		}
