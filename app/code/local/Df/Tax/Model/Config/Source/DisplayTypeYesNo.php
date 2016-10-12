@@ -1,5 +1,5 @@
 <?php
-class Df_Tax_Model_Config_Source_DisplayTypeYesNo extends Df_Core_Model_Abstract {
+class Df_Tax_Model_Config_Source_DisplayTypeYesNo extends Df_Core_Model {
 	/** @return array(array(string => string)) */
 	public function toOptionArray() {
 		if (!isset($this->{__METHOD__})) {

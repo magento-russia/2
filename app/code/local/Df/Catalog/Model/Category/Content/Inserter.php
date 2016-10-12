@@ -3,7 +3,7 @@
  * Объект данного класса способен добавлять новые блоки на страницу товарного раздела
  * без каких-либо правок, перекрытий и наследований системных файлов
  */
-class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model {
 	/** @return bool */
 	public function insert() {
 		/** @var bool $result */

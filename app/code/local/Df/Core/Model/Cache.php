@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Cache extends Df_Core_Model_Abstract {
+class Df_Core_Model_Cache extends Df_Core_Model {
 	/** @return Df_Core_Model_Cache */
 	public function clean() {
 		$this->getCache()->clean($this->getTags());

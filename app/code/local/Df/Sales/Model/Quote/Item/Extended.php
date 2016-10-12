@@ -1,5 +1,5 @@
 <?php
-class Df_Sales_Model_Quote_Item_Extended extends Df_Core_Model_Abstract {
+class Df_Sales_Model_Quote_Item_Extended extends Df_Core_Model {
 	/** @return float */
 	public function getBaseCost() {return $this->_getF('base_cost');}
 	/** @return float */

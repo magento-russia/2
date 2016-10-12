@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_Model_Category_Adviser_Case extends Df_Core_Model_Abstract {
+class Df_YandexMarket_Model_Category_Adviser_Case extends Df_Core_Model {
 	/** @return string[] */
 	public function getSuggestions() {
 		if (!isset($this->{__METHOD__})) {

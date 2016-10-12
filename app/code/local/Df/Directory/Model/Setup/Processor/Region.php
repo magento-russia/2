@@ -1,5 +1,5 @@
 <?php
-class Df_Directory_Model_Setup_Processor_Region extends Df_Core_Model_Abstract {
+class Df_Directory_Model_Setup_Processor_Region extends Df_Core_Model {
 	/** @return Df_Directory_Model_Setup_Processor_Region */
 	public function process() {
 		/** @var Mage_Directory_Model_Region $region */

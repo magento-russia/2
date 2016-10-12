@@ -1,5 +1,5 @@
 <?php
-class Df_Licensor_Model_License extends Df_Core_Model_Abstract {
+class Df_Licensor_Model_License extends Df_Core_Model {
 	/** @return bool */
 	public function checkSignature() {return $this->getSignature() == $this->generateSignature();}
 

@@ -1,5 +1,5 @@
 <?php
-class Df_Logging_Model_Config extends Df_Core_Model_Abstract {
+class Df_Logging_Model_Config extends Df_Core_Model {
 	/**
 	 * Get all labels translated and sorted ASC
 	 * @return array(string => string)

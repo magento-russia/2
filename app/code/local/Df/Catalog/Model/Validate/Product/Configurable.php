@@ -3,7 +3,7 @@
  * Допускает товар системного типа Configurable
  */
 class Df_Catalog_Model_Validate_Product_Configurable
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Validate_Interface {
 	/**
 	 * @override

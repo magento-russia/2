@@ -1,5 +1,5 @@
 <?php
-class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model_Abstract {
+class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model {
 	/**
 	 * @param string $active
 	 * @param string $inactive

@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_NounForAmounts extends Df_Core_Model_Abstract {
+class Df_Core_Model_Format_NounForAmounts extends Df_Core_Model {
 	/**
 	 * @param int $amount
 	 * @param array $forms

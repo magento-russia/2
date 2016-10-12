@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Config extends Df_Core_Model_Abstract {
+class Df_Core_Model_Config extends Df_Core_Model {
 	/**
 	 * Извлекает простые строковые значения настроек по заданному пути.
 	 * Например, пусть есть настроечная ветка:

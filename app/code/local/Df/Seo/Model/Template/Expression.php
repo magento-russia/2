@@ -1,5 +1,5 @@
 <?php
-class Df_Seo_Model_Template_Expression extends Df_Core_Model_Abstract {
+class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 	/**
 	 * Например, «product.manufacturer»
 	 * @return string

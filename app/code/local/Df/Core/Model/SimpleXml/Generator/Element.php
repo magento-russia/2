@@ -6,7 +6,7 @@
  * и единственное применение этого класса на данный момент —
  * служить родителем классу @see Df_Core_Model_SimpleXml_Generator_Document.
  */
-abstract class Df_Core_Model_SimpleXml_Generator_Element extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_SimpleXml_Generator_Element extends Df_Core_Model {
 	/** @return Df_Varien_Simplexml_Element */
 	public function getElement() {
 		if (!isset($this->{__METHOD__})) {

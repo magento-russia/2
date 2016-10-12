@@ -1,5 +1,5 @@
 <?php
-class Df_Dataflow_Model_Import_Config extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Import_Config extends Df_Core_Model {
 	/** @return string */
 	public function getDecimalSeparator() {
 		/** @var string $result */

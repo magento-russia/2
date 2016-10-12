@@ -1,5 +1,5 @@
 <?php
-class Df_Page_Model_Html_Head extends Df_Core_Model_Abstract {
+class Df_Page_Model_Html_Head extends Df_Core_Model {
 	/**
 	 * @param array $staticItems
 	 * @return array

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Yandex_Model_OAuth extends Df_Core_Model_Abstract {
+abstract class Df_Yandex_Model_OAuth extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @param array(string => string) $response

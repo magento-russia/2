@@ -1,5 +1,5 @@
 <?php
-class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	/** @return Df_Dataflow_Model_Importer_Product_Gallery */
 	public function addAdditionalImagesToProduct() {
 		$additionalImages =

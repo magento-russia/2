@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Morpher extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Morpher extends Df_Core_Model {
 	/**
 	 * @param string $word
 	 * @return Df_Localization_Model_Morpher_Response

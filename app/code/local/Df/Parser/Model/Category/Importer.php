@@ -1,5 +1,5 @@
 <?php
-class Df_Parser_Model_Category_Importer extends Df_Core_Model_Abstract {
+class Df_Parser_Model_Category_Importer extends Df_Core_Model {
 	/** @return Df_Parser_Model_Category_Importer */
 	public function import() {
 		foreach ($this->getTree()->getNodes() as $category) {

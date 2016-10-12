@@ -1,5 +1,5 @@
 <?php
-class Df_Licensor_Model_Context extends Df_Core_Model_Abstract {
+class Df_Licensor_Model_Context extends Df_Core_Model {
 	/** @return string */
 	public function getScope() {
 		if (!isset($this->_scope)) {

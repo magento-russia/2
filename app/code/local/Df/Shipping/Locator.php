@@ -9,10 +9,10 @@ abstract class Df_Shipping_Locator extends Df_Core_Model_DestructableSingleton {
 
 	/**
 	 * @override
-	 * @used-by Df_Core_Model_Abstract::cacheLoad()
-	 * @used-by Df_Core_Model_Abstract::cacheSave()
-	 * @used-by Df_Core_Model_Abstract::isCacheEnabled()
-	 * Родительский метод: @see Df_Core_Model_Abstract::getPropertiesToCache()
+	 * @used-by Df_Core_Model::cacheLoad()
+	 * @used-by Df_Core_Model::cacheSave()
+	 * @used-by Df_Core_Model::isCacheEnabled()
+	 * Родительский метод: @see Df_Core_Model::getPropertiesToCache()
 	 * @return string[]
 	 */
 	protected function getPropertiesToCache() {return self::m(__CLASS__, 'map');}
@@ -24,16 +24,16 @@ abstract class Df_Shipping_Locator extends Df_Core_Model_DestructableSingleton {
 	 * потому что вместо функций @see serialize() / @see unserialize()
 	 * будут применены более быстрые функции @uses json_encode() / @uses json_decode().
 	 * @override
-	 * @used-by Df_Core_Model_Abstract::_construct()
-	 * Родительский метод: @see Df_Core_Model_Abstract::getPropertiesToCacheSimple()
+	 * @used-by Df_Core_Model::_construct()
+	 * Родительский метод: @see Df_Core_Model::getPropertiesToCacheSimple()
 	 * @return string[]
 	 */
 	protected function getPropertiesToCacheSimple() {return $this->getPropertiesToCache();}
 
 	/**
 	 * @used-by _find()
-	 * @used-by Df_Core_Model_Abstract::cacheLoadProperty()
-	 * @used-by Df_Core_Model_Abstract::cacheSaveProperty()
+	 * @used-by Df_Core_Model::cacheLoadProperty()
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @param string $type
 	 * @return array(string => string|int|array(string|int))
 	 */

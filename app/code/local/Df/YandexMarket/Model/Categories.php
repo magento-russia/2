@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_Model_Categories extends Df_Core_Model_Abstract {
+class Df_YandexMarket_Model_Categories extends Df_Core_Model {
 	/** @return string */
 	public function getNodesAsText() {
 		return implode("\r\n", $this->getNodesAsTextArray());

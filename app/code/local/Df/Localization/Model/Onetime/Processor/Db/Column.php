@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Onetime_Processor_Db_Column extends Df_Core_Model {
 	/** @return void */
 	public function process() {
 		/** @var string $primaryKey */

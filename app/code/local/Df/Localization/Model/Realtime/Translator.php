@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Realtime_Translator extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Realtime_Translator extends Df_Core_Model {
 	/** @return bool */
 	public function isEnabled() {
 		if (!isset($this->{__METHOD__})) {

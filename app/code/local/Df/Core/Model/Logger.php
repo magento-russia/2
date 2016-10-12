@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Logger extends Df_Core_Model_Abstract {
+class Df_Core_Model_Logger extends Df_Core_Model {
 	/**
 	 * @param string $message
 	 * @return Df_Core_Model_Logger

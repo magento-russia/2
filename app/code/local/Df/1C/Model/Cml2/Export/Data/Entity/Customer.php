@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Model_Cml2_Export_Data_Entity_Customer extends Df_Core_Model_Abstract {
+class Df_1C_Model_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 	/** @return string */
 	public function getDateOfBirthAsString() {
 		return

@@ -2,7 +2,7 @@
 /**
  * @method Df_Cms_Model_Resource_Increment getResource()
  */
-class Df_Cms_Model_Increment extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Increment extends Df_Core_Model {
 	/**
 	 * Generate new increment id for passed type, node and level.
 	 * @param int $type

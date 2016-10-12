@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Onetime_TypeManager extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Onetime_TypeManager extends Df_Core_Model {
 	/**
 	 * @param string $type
 	 * @return string

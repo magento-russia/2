@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_State extends Df_Core_Model_Abstract {
+class Df_Core_Model_State extends Df_Core_Model {
 	/** @return void */
 	public function blocksGenerationStarted() {$this->_blocksGenerationStarted = true;}
 	/** @return void */

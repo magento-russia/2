@@ -4,7 +4,7 @@
  * Система создаёт объект-одиночку для потомков этого класса.
  * Не забывайте об этом при реализации кеширования результатов вычислений внутри этого класса!
  */
-abstract class Df_Admin_Model_Config_Source extends Df_Core_Model_Abstract {
+abstract class Df_Admin_Model_Config_Source extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @param bool $isMultiSelect[optional]

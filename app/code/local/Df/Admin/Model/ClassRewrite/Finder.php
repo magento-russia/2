@@ -1,5 +1,5 @@
 <?php
-class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model_Abstract {
+class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	/** @return Df_Admin_Model_ClassRewrite_Collection */
 	public function getRewrites() {
 		if (!isset($this->{__METHOD__})) {

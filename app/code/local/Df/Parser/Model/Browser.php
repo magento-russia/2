@@ -1,5 +1,5 @@
 <?php
-class Df_Parser_Model_Browser extends Df_Core_Model_Abstract {
+class Df_Parser_Model_Browser extends Df_Core_Model {
 	/**
 	 * @param Zend_Uri|string $uri
 	 * @param bool $throwOnError [optional]

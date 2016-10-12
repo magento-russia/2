@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model_Abstract {
+class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 	/** @return string */
 	public function getOnlyDigits() {
 		if (!isset($this->{__METHOD__})) {

@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Config extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Config extends Df_Core_Model {
 	/** @return bool */
 	public function canCurrentUserDeletePage() {
 		return $this->_isAllowedAction('delete');

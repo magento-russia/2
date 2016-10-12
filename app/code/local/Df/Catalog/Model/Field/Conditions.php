@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Field_Conditions extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Field_Conditions extends Df_Core_Model {
 	/** @return string */
 	public function getHtml() {return $this->createForm()->toHtml();}
 

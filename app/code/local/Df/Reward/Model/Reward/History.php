@@ -2,7 +2,7 @@
 /**
  * @method Df_Reward_Model_Resource_Reward_History getResource()
  */
-class Df_Reward_Model_Reward_History extends Df_Core_Model_Abstract {
+class Df_Reward_Model_Reward_History extends Df_Core_Model {
 	/**
 	 * Processing object before save data.
 	 * Prepare history data

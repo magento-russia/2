@@ -3,7 +3,7 @@
  * Для данного множества подарков возвращает соответствующее ему множество товаров
  */
 class Df_PromoGift_Model_Filter_Gift_Collection_MapToProducts
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Filter_Interface {
 	/**
 	 *

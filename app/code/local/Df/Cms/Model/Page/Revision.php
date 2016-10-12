@@ -2,7 +2,7 @@
 /**
  * @method Df_Cms_Model_Resource_Page_Revision getResource()
  */
-class Df_Cms_Model_Page_Revision extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 	/** @return string[] */
 	public function getCacheIdTags() {
 		$tags = parent::getCacheIdTags();

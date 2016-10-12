@@ -6,7 +6,7 @@
  * реализовывать кэширование данных для объектов этого класса.
  * Данный класс нацелен решить эту проблему.
  */
-class Df_Admin_Model_Config_Form_FieldInstance extends Df_Core_Model_Abstract {
+class Df_Admin_Model_Config_Form_FieldInstance extends Df_Core_Model {
 	/**
 	 * @param string $name
 	 * @param bool $required [optional]

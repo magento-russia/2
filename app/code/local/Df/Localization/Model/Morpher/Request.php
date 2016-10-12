@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Morpher_Request extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Morpher_Request extends Df_Core_Model {
 	/** @return string */
 	public function getResponse() {
 		if (!isset($this->{__METHOD__})) {

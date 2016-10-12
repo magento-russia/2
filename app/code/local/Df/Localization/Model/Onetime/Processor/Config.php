@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Onetime_Processor_Config extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Onetime_Processor_Config extends Df_Core_Model {
 	/** @return void */
 	public function process() {
 		if ($this->getEntry()->getStoreId()) {

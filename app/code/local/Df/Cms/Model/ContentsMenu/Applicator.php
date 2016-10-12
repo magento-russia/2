@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model_Abstract {
+class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 	/** @return Df_Cms_Model_Hierarchy_Node */
 	public function getNode() {return $this->cfg(self::P__NODE);}
 

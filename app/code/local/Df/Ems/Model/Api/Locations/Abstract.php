@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Ems_Model_Api_Locations_Abstract extends Df_Core_Model_Abstract {
+abstract class Df_Ems_Model_Api_Locations_Abstract extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return string

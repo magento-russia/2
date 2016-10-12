@@ -1,5 +1,5 @@
 <?php
-class Df_RussianPost_Model_RussianPostCalc_Api extends Df_Core_Model_Abstract {
+class Df_RussianPost_Model_RussianPostCalc_Api extends Df_Core_Model {
 	/** @return string[] */
 	public function getRatesAsText() {
 		return $this->getRequest()->getRatesAsText();

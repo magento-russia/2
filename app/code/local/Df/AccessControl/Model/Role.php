@@ -2,7 +2,7 @@
 /**
  * @method Df_AccessControl_Model_Resource_Role getResource()
  */
-class Df_AccessControl_Model_Role extends Df_Core_Model_Abstract {
+class Df_AccessControl_Model_Role extends Df_Core_Model {
 	/** @return int[] */
 	public function getCategoryIds() {
 		df_assert($this->isModuleEnabled());
@@ -63,7 +63,7 @@ class Df_AccessControl_Model_Role extends Df_Core_Model_Abstract {
 
 	/**
 	 * @override
-	 * @return Df_Core_Model_Abstract
+	 * @return Df_Core_Model
 	 */
 	protected function _beforeSave() {
 		$this->setData(self::P__CATEGORIES, implode(',', $this->getCategoryIds()));

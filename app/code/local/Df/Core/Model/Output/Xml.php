@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Output_Xml extends Df_Core_Model_Abstract {
+class Df_Core_Model_Output_Xml extends Df_Core_Model {
 	/**
 	 * @param string $text
 	 * @return string

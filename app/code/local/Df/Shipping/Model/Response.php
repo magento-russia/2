@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_Response extends Df_Core_Model_Abstract {
+class Df_Shipping_Model_Response extends Df_Core_Model {
 	/**
 	 * @param string $needle
 	 * @return bool

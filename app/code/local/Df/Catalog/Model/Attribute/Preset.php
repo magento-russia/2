@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Attribute_Preset extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Attribute_Preset extends Df_Core_Model {
 	/**
 	 * @param array(string => string|int|bool) $params [optional]
 	 * @return array(string => string|int|bool)

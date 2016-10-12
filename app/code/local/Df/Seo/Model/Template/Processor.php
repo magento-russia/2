@@ -1,5 +1,5 @@
 <?php
-class Df_Seo_Model_Template_Processor extends Df_Core_Model_Abstract {
+class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	/**
 	 * Возвращает доступный в выражениях объект по имени.
 	 * Выражении «product.manufacturer» имя объекта — «product», 

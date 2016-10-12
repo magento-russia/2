@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Debug_Dumper extends Df_Core_Model_Abstract {
+class Df_Core_Model_Debug_Dumper extends Df_Core_Model {
 	/**
 	 * @param mixed $value
 	 * @return string

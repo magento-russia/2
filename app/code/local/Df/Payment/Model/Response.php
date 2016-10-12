@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Payment_Model_Response extends Df_Core_Model_Abstract {
+abstract class Df_Payment_Model_Response extends Df_Core_Model {
 	/** @return array(string => string) */
 	abstract public function getReportAsArray();
 	/** @return string */

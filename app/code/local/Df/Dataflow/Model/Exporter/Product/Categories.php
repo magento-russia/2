@@ -1,5 +1,5 @@
 <?php
-class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	/** @return string */
 	public function process() {
 		/** @var string $result */

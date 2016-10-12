@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_Date extends Df_Core_Model_Abstract {
+class Df_Core_Model_Format_Date extends Df_Core_Model {
 	/** @return Zend_Date */
 	public function getDate() {
 		return $this->cfg(self::P__DATE);

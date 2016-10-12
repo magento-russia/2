@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Core_Model_Controller_Action extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Controller_Action extends Df_Core_Model {
 	/**
 	 * @override
 	 * @return Df_Core_Model_Controller_Action

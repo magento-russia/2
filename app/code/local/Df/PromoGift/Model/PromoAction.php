@@ -1,5 +1,5 @@
 <?php
-class Df_PromoGift_Model_PromoAction extends Df_Core_Model_Abstract {
+class Df_PromoGift_Model_PromoAction extends Df_Core_Model {
 	/** @return int */
 	public function getId() {
 		$result = (int)$this->getRule()->getId();

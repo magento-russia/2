@@ -63,6 +63,7 @@ class Df_Core_Boot {
 		if (!self::$_done1) {
 			self::init1();
 			Df_Core_Lib::load('1C');
+			Df_Core_Lib::load('Zf');
 			//Df_Core_Lib::load('Directory');
 			//Df_Core_Lib::load('Tax');
 			self::$_done1 = true;

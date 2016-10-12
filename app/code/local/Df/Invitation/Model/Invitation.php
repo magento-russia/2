@@ -1,5 +1,5 @@
 <?php
-class Df_Invitation_Model_Invitation extends Df_Core_Model_Abstract {
+class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	/**
 	 * @param int|string $websiteId
 	 * @param int $referralId

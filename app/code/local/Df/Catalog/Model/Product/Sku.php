@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Product_Sku extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Product_Sku extends Df_Core_Model {
 	/**
 	 * @param string $sku
 	 * @return string

@@ -1,5 +1,5 @@
 <?php
-class Df_Logging_Model_Archive extends Df_Core_Model_Abstract {
+class Df_Logging_Model_Archive extends Df_Core_Model {
 	/**
 	 * Attempt to create a new file using specified base name
 	 * Or generate a base name from current date/time

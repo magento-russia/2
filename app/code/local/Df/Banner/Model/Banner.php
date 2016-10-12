@@ -2,7 +2,7 @@
 /**
  * @method Df_Banner_Model_Resource_Banner getResource()
  */
-class Df_Banner_Model_Banner extends Df_Core_Model_Abstract {
+class Df_Banner_Model_Banner extends Df_Core_Model {
 	/** @return int */
 	public function getDelay() {return $this->cfg(self::P__DELAY);}
 	/** @return int */

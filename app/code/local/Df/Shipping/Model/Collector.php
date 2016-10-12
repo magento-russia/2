@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
+class Df_Shipping_Model_Collector extends Df_Core_Model {
 	/** @return Mage_Shipping_Model_Rate_Result */
 	public function getRateResult() {
 		if (!isset($this->{__METHOD__})) {

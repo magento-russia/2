@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Localization_Model_Onetime_Processor_Entity extends Df_Core_Model_Abstract {
+abstract class Df_Localization_Model_Onetime_Processor_Entity extends Df_Core_Model {
 	/** @return string[] */
 	abstract protected function getTitlePropertyName();
 

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Varien_Data_Form_Processor extends Df_Core_Model_Abstract {
+abstract class Df_Varien_Data_Form_Processor extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return Df_Varien_Data_Form_Processor

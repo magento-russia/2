@@ -1,5 +1,5 @@
 <?php
-class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 	/** @return Df_Dataflow_Model_Importer_Product_Images */
 	public function process() {
 		/** @var bool $needSave */

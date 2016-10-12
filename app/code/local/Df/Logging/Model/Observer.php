@@ -3,7 +3,7 @@
  * Log admin actions and performed changes.
  * It doesn't log all admin actions, only listed in logging.xml config files.
  */
-class Df_Logging_Model_Observer extends Df_Core_Model_Abstract {
+class Df_Logging_Model_Observer extends Df_Core_Model {
 	/**
 	 * @param Varien_Event_Observer $observer
 	 * @return void

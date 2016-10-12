@@ -1,5 +1,5 @@
 <?php
-class Df_Directory_Model_System_Config_Source_Region_Russia extends Df_Core_Model_Abstract {
+class Df_Directory_Model_System_Config_Source_Region_Russia extends Df_Core_Model {
 	/** @return string[][] */
 	public function toOptionArray() {
 		return $this->getAsOptionArray();

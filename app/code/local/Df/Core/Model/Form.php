@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Core_Model_Form extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Form extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return string

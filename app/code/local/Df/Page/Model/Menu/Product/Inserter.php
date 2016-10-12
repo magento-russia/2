@@ -1,5 +1,5 @@
 <?php
-class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model_Abstract {
+class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 	/** @return Df_Page_Model_Menu_Product_Inserter */
 	public function process() {
 		foreach ($this->getMenuSources() as $menuSource) {

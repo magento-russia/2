@@ -1,5 +1,5 @@
 <?php
-class Df_Adminhtml_Model_Translator_Controller extends Df_Core_Model_Abstract {
+class Df_Adminhtml_Model_Translator_Controller extends Df_Core_Model {
 	/**
 	 * @param Mage_Adminhtml_Controller_Action $controller
 	 * @return string

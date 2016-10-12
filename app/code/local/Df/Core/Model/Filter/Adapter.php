@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Filter_Adapter extends Df_Core_Model_Abstract implements Zend_Filter_Interface {
+class Df_Core_Model_Filter_Adapter extends Df_Core_Model implements Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $value

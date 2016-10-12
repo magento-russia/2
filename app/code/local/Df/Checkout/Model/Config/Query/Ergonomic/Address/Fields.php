@@ -1,5 +1,5 @@
 <?php
-class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Model_Abstract {
+class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Model {
 	/** @return Mage_Core_Model_Config_Element */
 	public function getNode() {
 		if (!isset($this->{__METHOD__})) {

@@ -6,7 +6,7 @@
  * Это даёт возможность инкапсулировать программный код класса «событие»
  * и повторго использовать этот программный код для разных обработчиков событий
  */
-abstract class Df_Core_Model_Handler extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Handler extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param string $class

@@ -2,7 +2,7 @@
 /**
  * @method Df_CustomerBalance_Model_Resource_Balance_History getResource()
  */
-class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model_Abstract {
+class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 	/** @return string[] */
 	public function getActionNamesArray() {
 		return

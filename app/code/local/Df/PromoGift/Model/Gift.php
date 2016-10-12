@@ -2,7 +2,7 @@
 /**
  * @method Df_PromoGift_Model_Resource_Gift getResource()
  */
-class Df_PromoGift_Model_Gift extends Df_Core_Model_Abstract {
+class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	/** @return Df_Catalog_Model_Product */
 	public function getProduct() {
 		return
@@ -77,7 +77,7 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model_Abstract {
 
 	/**
 	 * @override
-	 * @return Df_Core_Model_Abstract
+	 * @return Df_Core_Model
 	 */
 	protected function _beforeSave() {
 		foreach ($this->getParamsForSave() as $paramName) {

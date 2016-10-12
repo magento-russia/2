@@ -1,5 +1,5 @@
 <?php
-class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model_Abstract {
+class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 	/** @return array */
 	public function calculate() {
 		/** @var Mage_Eav_Model_Entity_Attribute_Source_Table $source */

@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Model_Cml2_File extends Df_Core_Model_Abstract {
+class Df_1C_Model_Cml2_File extends Df_Core_Model {
 	/** @return string */
 	public function getNameBase() {
 		if (!isset($this->{__METHOD__})) {

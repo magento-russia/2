@@ -2,7 +2,7 @@
 /**
  * @method Df_Reward_Model_Resource_Reward_Rate getResource()
  */
-class Df_Reward_Model_Reward_Rate extends Df_Core_Model_Abstract {
+class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 	const RATE_EXCHANGE_DIRECTION_TO_CURRENCY = 1;
 	const RATE_EXCHANGE_DIRECTION_TO_POINTS   = 2;
 

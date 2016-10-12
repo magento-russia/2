@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_InputRequest extends Df_Core_Model_Abstract {
+class Df_Core_Model_InputRequest extends Df_Core_Model {
 	/**
 	 * @param string $paramName
 	 * @param string $defaultValue[optional]

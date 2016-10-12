@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Licensor_Model_Server_Time extends Df_Core_Model_Abstract {
+abstract class Df_Licensor_Model_Server_Time extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return string

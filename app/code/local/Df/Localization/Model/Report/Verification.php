@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Report_Verification extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Report_Verification extends Df_Core_Model {
 	/** @return Df_Localization_Model_Translation_File_Collection */
 	public function getFiles() {
 		return rm_translator()->getDefaultFileStorage()->getFiles();

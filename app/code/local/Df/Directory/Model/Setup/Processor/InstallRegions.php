@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Directory_Model_Setup_Processor_InstallRegions extends Df_Core_Model_Abstract {
+abstract class Df_Directory_Model_Setup_Processor_InstallRegions extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return string

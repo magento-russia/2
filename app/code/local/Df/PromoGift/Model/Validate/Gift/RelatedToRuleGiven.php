@@ -3,7 +3,7 @@
  * Допускает только относящиеся к данному правилу подарки
  */
 class Df_PromoGift_Model_Validate_Gift_RelatedToRuleGiven
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Validate_Interface {
 	/**
 	 * Returns an array of message codes that explain why a previous isValid() call

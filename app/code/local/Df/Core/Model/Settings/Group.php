@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Settings_Group extends Df_Core_Model_Abstract {
+class Df_Core_Model_Settings_Group extends Df_Core_Model {
 	/**
 	 * @param string $configKeySuffix
 	 * @param array|string $prefixes[optional]

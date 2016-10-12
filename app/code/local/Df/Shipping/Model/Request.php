@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_Request extends Df_Core_Model_Abstract {
+class Df_Shipping_Model_Request extends Df_Core_Model {
 	/**
 	 * Веб-сервисы служб доставки часто возвращают данные в формате,
 	 * очень похожем на JSON, но требующем некоторых корректировок

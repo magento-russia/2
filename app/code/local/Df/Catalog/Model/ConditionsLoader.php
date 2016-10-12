@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_ConditionsLoader extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_ConditionsLoader extends Df_Core_Model {
 	/** @return Mage_CatalogRule_Model_Rule|null */
 	public function getRule() {
 		if (!isset($this->{__METHOD__})) {

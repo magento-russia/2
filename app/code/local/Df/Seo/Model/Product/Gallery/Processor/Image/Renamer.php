@@ -1,5 +1,5 @@
 <?php
-class Df_Seo_Model_Product_Gallery_Processor_Image_Renamer extends Df_Core_Model_Abstract {
+class Df_Seo_Model_Product_Gallery_Processor_Image_Renamer extends Df_Core_Model {
 	/** @return string */
 	public function process() {
 		$result = $this->getImage()->getPath();

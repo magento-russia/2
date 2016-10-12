@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Dataflow_Model_Importer_Product_Specialized extends Df_Core_Model_Abstract {
+abstract class Df_Dataflow_Model_Importer_Product_Specialized extends Df_Core_Model {
 	/** @return Df_Dataflow_Model_Importer_Product_Specialized */
 	abstract public function process();
 

@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_SimpleXml_Parser_Entity extends Df_Core_Model_Abstract {
+class Df_Core_Model_SimpleXml_Parser_Entity extends Df_Core_Model {
 	/**
 	 * Я так понимаю, этот метод нужен для 1С:Управление торговлей?
 	 * В то же время, есть ситуации, когда данный класс вовсе не является абстрактным

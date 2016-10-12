@@ -1,5 +1,5 @@
 <?php
-class Df_Sms_Model_Message extends Df_Core_Model_Abstract {
+class Df_Sms_Model_Message extends Df_Core_Model {
 	/** @return string */
 	public function getBody() {
 		return $this->cfg(self::P__BODY);

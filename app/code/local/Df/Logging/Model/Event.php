@@ -2,7 +2,7 @@
 /**
  * @method Df_Logging_Model_Resource_Event getResource()
  */
-class Df_Logging_Model_Event extends Df_Core_Model_Abstract {
+class Df_Logging_Model_Event extends Df_Core_Model {
 	/** @return bool */
 	public function hasChanges() {
 		return $this->getId() && !!$this->getResource()->getEventChangeIds($this->getId());

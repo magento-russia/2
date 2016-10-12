@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Parser_Model_Pq extends Df_Core_Model_Abstract {
+abstract class Df_Parser_Model_Pq extends Df_Core_Model {
 	/** @return phpQueryObject */
 	protected function getPq() {
 		return $this->cfg(self::P__PQ);

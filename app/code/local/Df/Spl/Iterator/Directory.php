@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Spl_Iterator_Directory extends Df_Core_Model_Abstract implements Iterator {
+abstract class Df_Spl_Iterator_Directory extends Df_Core_Model implements Iterator {
 	/**
 	 * @param SplFileInfo $fileInfo
 	 * @return bool

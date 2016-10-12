@@ -1,5 +1,5 @@
 <?php
-class Df_Kkb_Model_Signer extends Df_Core_Model_Abstract {
+class Df_Kkb_Model_Signer extends Df_Core_Model {
 	/** @return string */
 	public function getSignature() {
 		if (!isset($this->{__METHOD__})) {

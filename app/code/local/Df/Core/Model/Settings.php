@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Core_Model_Settings extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	/**
 	 * @param string $key
 	 * @param Mage_Core_Model_Store|int|string|null $store [optional]

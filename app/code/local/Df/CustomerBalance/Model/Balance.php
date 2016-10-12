@@ -2,7 +2,7 @@
 /**
  * @method Df_CustomerBalance_Model_Resource_Balance getResource()
  */
-class Df_CustomerBalance_Model_Balance extends Df_Core_Model_Abstract {
+class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	/**
 	 * Public version of afterLoad
 	 * @return Df_CustomerBalance_Model_Balance

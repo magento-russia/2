@@ -3,7 +3,7 @@
  * Реестры нам нужны для ускорения доступа к одним и тем же объектам и коллекциям объектов.
  * Эти реестры должны использоваться всеми модулями Российской сборки Magento.
  */
-class Df_Dataflow_Model_Registry extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Registry extends Df_Core_Model {
 	/** @return Df_Dataflow_Model_Registry_Collection_Attributes */
 	public function attributes() {return Df_Dataflow_Model_Registry_Collection_Attributes::s();}
 

@@ -2,7 +2,7 @@
 /**
  * @method Df_Reward_Model_Resource_Reward getResource()
  */
-class Df_Reward_Model_Reward extends Df_Core_Model_Abstract {
+class Df_Reward_Model_Reward extends Df_Core_Model {
 	/** @return boolean */
 	public function canUpdateRewardPoints() {
 		/** @var Df_Reward_Model_Action_Abstract $action */

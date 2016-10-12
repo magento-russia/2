@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Dataflow_Model_Registry_Collection
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements IteratorAggregate, Countable {
 	/** @return Varien_Data_Collection */
 	abstract protected function createCollection();

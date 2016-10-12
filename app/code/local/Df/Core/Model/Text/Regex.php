@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Text_Regex extends Df_Core_Model_Abstract {
+class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	/**
 	 * @used-by rm_preg_match()
 	 * @used-by rm_preg_match_int()

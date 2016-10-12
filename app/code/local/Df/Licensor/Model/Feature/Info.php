@@ -1,5 +1,5 @@
 <?php
-class Df_Licensor_Model_Feature_Info extends Df_Core_Model_Abstract {
+class Df_Licensor_Model_Feature_Info extends Df_Core_Model {
 	/**
 	 * @override
 	 * @return Df_Licensor_Model_Feature

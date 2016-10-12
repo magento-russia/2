@@ -1,5 +1,5 @@
 <?php
-class Df_Licensor_Model_Validator_ServerTime extends Df_Core_Model_Abstract {
+class Df_Licensor_Model_Validator_ServerTime extends Df_Core_Model {
 	/** @return bool */
 	public function isValid() {
 		if (!isset($this->{__METHOD__})) {

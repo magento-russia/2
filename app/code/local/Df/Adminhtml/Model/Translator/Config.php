@@ -1,5 +1,5 @@
 <?php
-class Df_Adminhtml_Model_Translator_Config extends Df_Core_Model_Abstract {
+class Df_Adminhtml_Model_Translator_Config extends Df_Core_Model {
 	/**
 	 * @param string $sectionName
 	 * @return string|null

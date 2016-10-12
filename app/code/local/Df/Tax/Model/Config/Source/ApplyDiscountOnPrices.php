@@ -1,5 +1,5 @@
 <?php
-class Df_Tax_Model_Config_Source_ApplyDiscountOnPrices extends Df_Core_Model_Abstract {
+class Df_Tax_Model_Config_Source_ApplyDiscountOnPrices extends Df_Core_Model {
 	/** @return array */
 	public function toOptionArray() {
 		return

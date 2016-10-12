@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Translation_Db_Source_Key extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Translation_Db_Source_Key extends Df_Core_Model {
 	/** @return string */
 	public function getModule() {
 		return df_a($this->getSplittedKey(), 0);

@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Model_Cml2 extends Df_Core_Model_Abstract {
+class Df_1C_Model_Cml2 extends Df_Core_Model {
 	/** @return Df_1C_Model_Cml2_Import_Data_Document */
 	protected function getDocumentCurrent() {return $this->getFileCurrent()->getXmlDocument();}
 

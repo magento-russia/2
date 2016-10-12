@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_RemoteControl_MessageSerializer_Http extends Df_Core_Model_Abstract {
+class Df_Core_Model_RemoteControl_MessageSerializer_Http extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param Mage_Core_Controller_Request_Http $httpRequest

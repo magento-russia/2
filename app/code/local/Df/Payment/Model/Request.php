@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Payment_Model_Request extends Df_Core_Model_Abstract {
+abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	/** @return Df_Sales_Model_Order */
 	abstract public function getOrder();
 

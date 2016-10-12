@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Tree extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Tree extends Df_Core_Model {
 	/** @return Varien_Data_Tree */
 	public function getTree() {
 		if (!$this->_tree) {

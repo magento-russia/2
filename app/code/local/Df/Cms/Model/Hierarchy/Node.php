@@ -2,7 +2,7 @@
 /**
  * @method Df_Cms_Model_Resource_Hierarchy_Node getResource()
  */
-class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	/**
 	 * Appending passed page as child node for specified nodes and set it specified sort order.
 	 * Parent nodes specified as array(parentNodeId => sortOrder)
@@ -505,8 +505,8 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model_Abstract {
 			->_prop(self::P__PAGE_IDENTIFIER, self::V_STRING)
 			/**
 			 * Оказывается, при загрузке статей из БД P__PAGE_TITLE может быть равно NULL:
-				 #1 Df_Core_Model_Abstract->_validate('page_title', NULL)
-				 #2 Df_Core_Model_Abstract->setData('page_title', NULL)
+				 #1 Df_Core_Model->_validate('page_title', NULL)
+				 #2 Df_Core_Model->setData('page_title', NULL)
 				 #3 Varien_Object->addData(Array)
 				 #4 Varien_Data_Collection_Db->load()
 			 * @link http://magento-forum.ru/topic/4626/

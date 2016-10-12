@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Sms_Model_Gate extends Df_Core_Model_Abstract {
+abstract class Df_Sms_Model_Gate extends Df_Core_Model {
 	/** @return Df_Sms_Model_Gate */
 	abstract public function send();
 

@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model_Abstract {
+class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model {
 	/** @return array(string => string) */
 	public function getMapFromIso2CodeToCountryNameInYandexMarketFormat() {
 		if (!isset($this->{__METHOD__})) {

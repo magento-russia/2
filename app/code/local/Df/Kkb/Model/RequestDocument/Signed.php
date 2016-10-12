@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model_Abstract {
+abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 	/**                               
 	 * @abstract
 	 * @return array(string => string)

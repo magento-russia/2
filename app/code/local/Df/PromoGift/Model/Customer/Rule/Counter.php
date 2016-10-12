@@ -1,5 +1,5 @@
 <?php
-class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model_Abstract {
+class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 	/** @return array */
 	public function getGiftingQuoteItemIds() {
 		/** @var array $result */

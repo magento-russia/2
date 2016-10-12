@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Core_Model_Abstract {
+class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Core_Model {
 	/** @return array */
 	public function getDocumentData() {
 		/** @var array(string => mixed) $attributes */

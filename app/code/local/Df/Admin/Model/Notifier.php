@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Admin_Model_Notifier extends Df_Core_Model_Abstract {
+abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	/** @return string */
 	abstract protected function getMessageTemplate();
 

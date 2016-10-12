@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Translation_File extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Translation_File extends Df_Core_Model {
 	/** @return string[] */
 	public function getAbsentEntries() {
 		if (!isset($this->{__METHOD__})) {

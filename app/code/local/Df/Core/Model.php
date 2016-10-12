@@ -1,7 +1,5 @@
 <?php
-abstract class Df_Core_Model_Abstract
-	extends Mage_Core_Model_Abstract
-	implements Df_Core_Destructable {
+abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core_Destructable {
 	/**
 	 * Обратите внимание,
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
@@ -12,8 +10,8 @@ abstract class Df_Core_Model_Abstract
 	public function __destruct() {
 		/**
 		 * Для глобальных объекто-одиночек,
-		 * чей метод @see Df_Core_Model_Abstract::isDestructableSingleton() возвращает true,
-		 * метод @see Df_Core_Model_Abstract::_destruct()
+		 * чей метод @see Df_Core_Model::isDestructableSingleton() возвращает true,
+		 * метод @see Df_Core_Model::_destruct()
 		 * будет вызван на событие «controller_front_send_response_after»:
 		 * @see Df_Core_Model_Dispatcher::controller_front_send_response_after().
 		 */
@@ -26,7 +24,7 @@ abstract class Df_Core_Model_Abstract
 	 * Размещайте программный код деинициализации объекта именно в этом методе,
 	 * а не в стандартном деструкторе __destruct().
 	 *
-	 * Не все потомки класса @see Df_Core_Model_Abstract
+	 * Не все потомки класса @see Df_Core_Model
 	 * деинициализируется посредством стандартного деструктора.
 	 *
 	 * В частности, глобальные объекты-одиночки
@@ -35,11 +33,11 @@ abstract class Df_Core_Model_Abstract
 	 * сборщик мусора Zend Engine мог уже уничтожить другие объекты,
 	 * которые требуются для деинициализации.
 	 *
-	 * Метод @see Df_Core_Model_Abstract::_destruct() гарантированно
+	 * Метод @see Df_Core_Model::_destruct() гарантированно
 	 *
 	 * Для глобальных объекто-одиночек,
-	 * чей метод @see Df_Core_Model_Abstract::isDestructableSingleton() возвращает true,
-	 * метод @see Df_Core_Model_Abstract::_destruct()
+	 * чей метод @see Df_Core_Model::isDestructableSingleton() возвращает true,
+	 * метод @see Df_Core_Model::_destruct()
 	 * будет вызван на событие «controller_front_send_response_after»:
 	 * @see Df_Core_Model_Dispatcher::controller_front_send_response_after().
 	 *
@@ -65,7 +63,7 @@ abstract class Df_Core_Model_Abstract
 		/** @var mixed $result */
 		/**
 		 * Обратите внимание,
-		 * что здесь нужно вызывать именно @see Df_Core_Model_Abstract::getData(),
+		 * что здесь нужно вызывать именно @see Df_Core_Model::getData(),
 		 * а не @see Varien_Object::_getData()
 		 * чтобы работали валидаторы.
 		 */
@@ -149,17 +147,17 @@ abstract class Df_Core_Model_Abstract
 	 * @override
 	 * @param string|array(string => mixed) $key
 	 * @param mixed $value
-	 * @return Df_Core_Model_Abstract
+	 * @return Df_Core_Model
 	 */
 	public function setData($key, $value = null) {
 		/**
 		 * Раньше мы проводили валидацию лишь при извлечении значения свойства,
-		 * в методе @see Df_Core_Model_Abstract::getData().
+		 * в методе @see Df_Core_Model::getData().
 		 * Однако затем мы сделали улучшение:
 		 * перенести валидацию на более раннюю стадию — инициализацию свойства
-		 * @see Df_Core_Model_Abstract::setData(),
+		 * @see Df_Core_Model::setData(),
 		 * и инициализацию валидатора/фильтра
-		 * @see Df_Core_Model_Abstract::_prop().
+		 * @see Df_Core_Model::_prop().
 		 * Это улучшило диагностику случаев установки объекту некорректных значений свойств,
 		 * потому что теперь мы возбуждаем исключительную ситуацию
 		 * сразу при попытке установки некорректного значения.
@@ -184,7 +182,7 @@ abstract class Df_Core_Model_Abstract
 	/**
 	 * @override
 	 * @param mixed $value
-	 * @return Df_Core_Model_Abstract
+	 * @return Df_Core_Model
 	 */
 	public function setId($value) {
 		parent::setId($value ? $value : null);
@@ -196,7 +194,7 @@ abstract class Df_Core_Model_Abstract
 	 * @param Zend_Validate_Interface|Df_Zf_Validate_Type|string|mixed[] $validator
 	 * @param bool|null $isRequired [optional]
 	 * @throws Df_Core_Exception_Internal
-	 * @return Df_Core_Model_Abstract
+	 * @return Df_Core_Model
 	 */
 	protected function _prop($key, $validator, $isRequired = null) {
 		/** @var mixed[] $arguments */
@@ -283,12 +281,12 @@ abstract class Df_Core_Model_Abstract
 		}
 		/**
 		 * Раньше мы проводили валидацию лишь при извлечении значения свойства,
-		 * в методе @see Df_Core_Model_Abstract::getData().
+		 * в методе @see Df_Core_Model::getData().
 		 * Однако затем мы сделали улучшение:
 		 * перенести валидацию на более раннюю стадию — инициализацию свойства
-		 * @see Df_Core_Model_Abstract::setData(),
+		 * @see Df_Core_Model::setData(),
 		 * и инициализацию валидатора/фильтра
-		 * @see Df_Core_Model_Abstract::_prop().
+		 * @see Df_Core_Model::_prop().
 		 * Это улучшило диагностику случаев установки объекту некорректных значений свойств,
 		 * потому что теперь мы возбуждаем исключительную ситуацию
 		 * сразу при попытке установки некорректного значения.
@@ -354,7 +352,7 @@ abstract class Df_Core_Model_Abstract
 
 	/**
 	 * Если этот метод вернёт true,
-	 * то система вызовет метод @see Df_Core_Model_Abstract::_destruct()
+	 * то система вызовет метод @see Df_Core_Model::_destruct()
 	 * не в стандартном деструкторе __destruct(),
 	 * а на событие «controller_front_send_response_after»:
 	 * @see Df_Core_Model_Dispatchercontroller_front_send_response_after().
@@ -620,16 +618,16 @@ abstract class Df_Core_Model_Abstract
 		}
 	}
 
-	/** @return Df_Core_Model_Abstract */
+	/** @return Df_Core_Model */
 	private function cacheLoad() {
 		if ($this->isCacheEnabled()) {
 			$this->cacheLoadArea($this->getPropertiesToCache(), $this->getCacheKey());
 			/**
-			 * При вызове метода @see Df_Core_Model_Abstract::getCacheKeyPerStore()
+			 * При вызове метода @see Df_Core_Model::getCacheKeyPerStore()
 			 * может произойти исключительная ситуация в том случае,
 			 * когда текущий магазин системы ещё не инициализирован
 			 * (вызов Mage::app()->getStore() приводит к исключительной ситуации),
-			 * поэтому вызываем @see Df_Core_Model_Abstract::getCacheKeyPerStore()
+			 * поэтому вызываем @see Df_Core_Model::getCacheKeyPerStore()
 			 * только если в этом методе есть реальная потребность,
 			 * т.е. если класс действительно имеет свойства, подлежащие кэшированию в разрезе магазина,
 			 * и текущий магазин уже инициализирован.
@@ -684,17 +682,17 @@ abstract class Df_Core_Model_Abstract
 		}
 	}
 
-	/** @return Df_Core_Model_Abstract */
+	/** @return Df_Core_Model */
 	private function cacheSave() {
 		if ($this->isCacheEnabled()) {
 			$this->cacheSaveBefore();
 			$this->cacheSaveArea($this->getPropertiesToCache(), $this->getCacheKey());
 			/**
-			 * При вызове метода @see Df_Core_Model_Abstract::getCacheKeyPerStore()
+			 * При вызове метода @see Df_Core_Model::getCacheKeyPerStore()
 			 * может произойти исключительная ситуация в том случае,
 			 * когда текущий магазин системы ещё не инициализирован
 			 * (вызов Mage::app()->getStore() приводит к исключительной ситуации),
-			 * поэтому вызываем @see Df_Core_Model_Abstract::getCacheKeyPerStore()
+			 * поэтому вызываем @see Df_Core_Model::getCacheKeyPerStore()
 			 * только если в этом методе есть реальная потребность,
 			 * т.е. если класс действительно имеет свойства, подлежащие кэшированию в разрезе магазина,
 			 * и если текущий магазин уже инициализирован.
@@ -725,7 +723,7 @@ abstract class Df_Core_Model_Abstract
 								 * Сохраняем в кэше только те свойства,
 								 * которые либо еще не сохранены там,
 								 * либо чьё значение изменилось после загрузки из кэша:
-								 * @see Df_Core_Model_Abstract::markCachedPropertyAsModified()
+								 * @see Df_Core_Model::markCachedPropertyAsModified()
 								 */
 								!isset($this->_cachedPropertiesLoaded[$propertyName])
 							||
@@ -813,10 +811,10 @@ abstract class Df_Core_Model_Abstract
 			 * Фильтры мы здесь пока применять не можем,
 			 * потому что они ещё не инициализированны
 			 * (фильтры будут инициализированы потомками
-			 * уже после вызова @see Df_Core_Model_Abstract::_construct()).
+			 * уже после вызова @see Df_Core_Model::_construct()).
 			 * Вместо этого применяем фильтры для начальных данных
-			 * в методе @see Df_Core_Model_Abstract::_prop(),
-			 * а для дополнительных данных — в методе @see Df_Core_Model_Abstract::setData().
+			 * в методе @see Df_Core_Model::_prop(),
+			 * а для дополнительных данных — в методе @see Df_Core_Model::setData().
 			 */
 		}
 		parent::_construct();

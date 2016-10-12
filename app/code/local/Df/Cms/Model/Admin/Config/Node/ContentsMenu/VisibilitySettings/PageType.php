@@ -1,6 +1,6 @@
 <?php
 class Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType
-	extends Df_Core_Model_Abstract {
+	extends Df_Core_Model {
 	/** @return Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType */
 	public function addFields() {
 		/**

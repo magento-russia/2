@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Onetime_DemoImagesImporter extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Onetime_DemoImagesImporter extends Df_Core_Model {
 	/** @return void */
 	public function process() {
 		foreach (Df_Localization_Model_Onetime_DemoImagesImporter_Image_Collection::s() as $image) {

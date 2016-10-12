@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Onetime_DemoImagesImporter_Image extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Onetime_DemoImagesImporter_Image extends Df_Core_Model {
 	/** @return bool */
 	public function isExist() {return is_file($this->getPathFull());}
 

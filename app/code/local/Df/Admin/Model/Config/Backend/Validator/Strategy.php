@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Admin_Model_Config_Backend_Validator_Strategy extends Df_Core_Model_Abstract {
+abstract class Df_Admin_Model_Config_Backend_Validator_Strategy extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return bool

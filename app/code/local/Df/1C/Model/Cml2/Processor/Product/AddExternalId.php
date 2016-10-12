@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Model_Cml2_Processor_Product_AddExternalId extends Df_Core_Model_Abstract {
+class Df_1C_Model_Cml2_Processor_Product_AddExternalId extends Df_Core_Model {
 	/** @return Df_1C_Model_Cml2_Processor_Product_AddExternalId */
 	public function process() {
 		/**

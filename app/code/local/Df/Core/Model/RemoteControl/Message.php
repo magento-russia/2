@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_RemoteControl_Message extends Df_Core_Model_Abstract {
+class Df_Core_Model_RemoteControl_Message extends Df_Core_Model {
 	/** @return array */
 	public function getPersistentData() {
 		return $this->getData();

@@ -31,7 +31,7 @@ class Df_Zf_Validate_Float extends Df_Zf_Validate_Type implements Zend_Filter_In
 		 * чтобы пользователь данного класса, имеющий строку (число в виде строки),
 		 * мог предварительно сконвертировать её вещественное число
 		 * посредством вызова метода @see Df_Zf_Validate_Float::filter().
-		 * Так поступает, например, класс @see Df_Core_Model_Abstract:
+		 * Так поступает, например, класс @see Df_Core_Model:
 		 * при инициализации конкретного свойства данного класса
 		 * при наличии фильтра для данного свойства вызывается метод
 		 * @see Zend_Filter_Interface::filter().

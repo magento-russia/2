@@ -1,5 +1,5 @@
 <?php
-class Df_Invitation_Model_Observer extends Df_Core_Model_Abstract {
+class Df_Invitation_Model_Observer extends Df_Core_Model {
 	/**
 	 * @param Varien_Event_Observer $observer
 	 * @return void

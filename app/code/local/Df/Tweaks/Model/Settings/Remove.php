@@ -1,5 +1,5 @@
 <?php
-class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model_Abstract {
+class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	/**
 	 * Метод возвращает значение типа string, а не boolean,
 	 * потому что допустимых значений три:

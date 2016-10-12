@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_ContentsMenu extends Df_Core_Model_Abstract {
+class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	/** @return Df_Cms_Model_ContentsMenu_Applicator_Collection */
 	public function getApplicators() {
 		if (!isset($this->{__METHOD__})) {

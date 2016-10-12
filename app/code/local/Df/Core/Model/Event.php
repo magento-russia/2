@@ -17,7 +17,7 @@
  * и повторго использовать этот программный код для разных обработчиков событий
  *
  */
-abstract class Df_Core_Model_Event extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Event extends Df_Core_Model {
 	/**
 	 * Создаёт обертку нужного класса $class для системного события $observer.
 	 * Вы также можете передать в конструктор обёртки дополнительные параметры $additionalParams

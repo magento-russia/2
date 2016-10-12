@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Output_Html_A extends Df_Core_Model_Abstract {
+class Df_Core_Model_Output_Html_A extends Df_Core_Model {
 	/**
 	 * @override
 	 * @return string

@@ -1,5 +1,5 @@
 <?php
-class Df_Parser_Model_Category extends Df_Core_Model_Abstract {
+class Df_Parser_Model_Category extends Df_Core_Model {
 	/** @return string */
 	public function getName() {
 		return $this->cfg(self::P__NAME);

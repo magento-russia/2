@@ -1,5 +1,5 @@
 <?php
-class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 	/** @return array */
 	public function getAsArray() {return $this->cfg(self::P__ROW_AS_ARRAY);}
 

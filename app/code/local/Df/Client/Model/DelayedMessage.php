@@ -2,7 +2,7 @@
 /**
  * @method Df_Client_Model_Resource_DelayedMessage getResource()
  */
-class Df_Client_Model_DelayedMessage extends Df_Core_Model_Abstract {
+class Df_Client_Model_DelayedMessage extends Df_Core_Model {
 	/** @return string */
 	public function getBody() {
 		return $this->cfg(self::P__BODY);

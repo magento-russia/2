@@ -1,5 +1,5 @@
 <?php
-class Df_Admin_Model_Form_Element extends Df_Core_Model_Abstract {
+class Df_Admin_Model_Form_Element extends Df_Core_Model {
 	/** @return string */
 	public function getCheckboxLabel() {
 		return

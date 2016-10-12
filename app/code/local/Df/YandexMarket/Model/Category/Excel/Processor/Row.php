@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_Model_Category_Excel_Processor_Row extends Df_Core_Model_Abstract {
+class Df_YandexMarket_Model_Category_Excel_Processor_Row extends Df_Core_Model {
 	/** @return Df_YandexMarket_Model_Category_Excel_Processor_Row */
 	public function process() {
 		/** @var Df_YandexMarket_Model_Category_Node|null $parent */

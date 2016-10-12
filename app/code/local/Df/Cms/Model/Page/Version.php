@@ -2,7 +2,7 @@
 /**
  * @method Df_Cms_Model_Resource_Page_Version getResource()
  */
-class Df_Cms_Model_Page_Version extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Page_Version extends Df_Core_Model {
 	/** @return bool */
 	public function isPublic() {
 		return Df_Cms_Model_Page_Version::ACCESS_LEVEL_PUBLIC === $this->getAccessLevel();

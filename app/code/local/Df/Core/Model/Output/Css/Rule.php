@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Output_Css_Rule extends Df_Core_Model_Abstract {
+class Df_Core_Model_Output_Css_Rule extends Df_Core_Model {
 	/** @return string */
 	public function __toString() {return $this->getText(true);}
 

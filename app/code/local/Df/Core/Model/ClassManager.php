@@ -2,7 +2,7 @@
 /**
  * Инструмент парадигмы «convention over configuration»
  */
-class Df_Core_Model_ClassManager extends Df_Core_Model_Abstract {
+class Df_Core_Model_ClassManager extends Df_Core_Model {
 	/**
 	 * @param Varien_Object $caller
 	 * @return string

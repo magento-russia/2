@@ -1,5 +1,5 @@
 <?php
-class Df_IPay_Model_TransactionState extends Df_Core_Model_Abstract {
+class Df_IPay_Model_TransactionState extends Df_Core_Model {
 	/** @return Df_IPay_Model_TransactionState */
 	public function clear() {
 		$this->getPayment()

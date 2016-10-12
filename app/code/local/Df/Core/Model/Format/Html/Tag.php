@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_Html_Tag extends Df_Core_Model_Abstract {
+class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 	/** @return string */
 	private function _render() {
 		return strtr(

@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Exporter extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Exporter extends Df_Core_Model {
 	/** @return Df_Localization_Model_Exporter */
 	public function process() {
 		$this->writeTranslationToFiles($this->getTranslationByModules());

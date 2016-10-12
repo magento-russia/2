@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Onetime_Processor extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Onetime_Processor extends Df_Core_Model {
 	/**
 	 * @override
 	 * @return string

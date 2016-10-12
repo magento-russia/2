@@ -1,5 +1,5 @@
 <?php
-class Df_Reward_Model_Source_Website extends Df_Core_Model_Abstract {
+class Df_Reward_Model_Source_Website extends Df_Core_Model {
 	/**
 	 * @param bool $withAll Whether to prepend "All websites" option on not
 	 * @return string[]

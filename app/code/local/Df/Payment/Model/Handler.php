@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Payment_Model_Handler extends Df_Core_Model_Abstract {
+abstract class Df_Payment_Model_Handler extends Df_Core_Model {
 	/**
 	 * @return void
 	 * @throws Exception

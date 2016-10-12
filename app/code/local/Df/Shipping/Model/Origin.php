@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_Origin extends Df_Core_Model_Abstract {
+class Df_Shipping_Model_Origin extends Df_Core_Model {
 	/** @return string */
 	public function getCity() {return $this->cfg(self::P__CITY);}
 

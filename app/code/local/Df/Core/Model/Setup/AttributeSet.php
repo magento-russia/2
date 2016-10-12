@@ -27,7 +27,7 @@
  * добавляет к прикладному типу товара свойство «Примечание к товару (sales_notes)»
  * (свойство «Категория Яндекс.Маркета» пока добавляется по старой технологии).
  */
-abstract class Df_Core_Model_Setup_AttributeSet extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Setup_AttributeSet extends Df_Core_Model {
 	/** @return void */
 	abstract protected function processInternal();
 

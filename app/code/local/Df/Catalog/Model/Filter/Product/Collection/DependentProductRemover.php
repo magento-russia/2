@@ -3,7 +3,7 @@
  * Удаляет из коллекции товары, которые являются составными элементами настраиваемого товара
  */
 class Df_Catalog_Model_Filter_Product_Collection_DependentProductRemover
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Filter_Interface {
 	/** @return Zend_Filter_Interface */
 	public function getRejectingFilter() {

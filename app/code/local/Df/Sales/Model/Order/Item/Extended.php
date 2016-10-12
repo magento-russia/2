@@ -1,5 +1,5 @@
 <?php
-class Df_Sales_Model_Order_Item_Extended extends Df_Core_Model_Abstract {
+class Df_Sales_Model_Order_Item_Extended extends Df_Core_Model {
 	/** @return float */
 	public function getAmountRefunded() {return $this->_getF('amount_refunded');}
 	/** @return float */

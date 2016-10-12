@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Dataflow_Model_Importer_Row extends Df_Core_Model_Abstract {
+abstract class Df_Dataflow_Model_Importer_Row extends Df_Core_Model {
 	/**
 	 * @abctract
 	 * @return Df_Dataflow_Model_Importer_Row

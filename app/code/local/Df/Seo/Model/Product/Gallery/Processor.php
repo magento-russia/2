@@ -1,5 +1,5 @@
 <?php
-class Df_Seo_Model_Product_Gallery_Processor extends Df_Core_Model_Abstract {
+class Df_Seo_Model_Product_Gallery_Processor extends Df_Core_Model {
 	/** @return Df_Seo_Model_Product_Gallery_Processor */
 	public function process() {
 		$this->getProduct()->load('media_gallery');

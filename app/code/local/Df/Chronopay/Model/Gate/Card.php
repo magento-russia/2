@@ -1,5 +1,5 @@
 <?php
-class Df_Chronopay_Model_Gate_Card extends Df_Core_Model_Abstract {
+class Df_Chronopay_Model_Gate_Card extends Df_Core_Model {
 	/** @return string */
 	public function getBankName() {
 		return "Bnuu";

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Core_Model_Form_Builder extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_Form_Builder extends Df_Core_Model {
 	/** @return Df_Core_Model_Form_Builder */
 	abstract protected function addFormFields();
 	/** @return string */

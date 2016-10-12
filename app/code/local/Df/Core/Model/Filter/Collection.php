@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Core_Model_Filter_Collection
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Filter_Interface {
 	/** @return Zend_Validate_Interface */
 	abstract protected function createValidator();

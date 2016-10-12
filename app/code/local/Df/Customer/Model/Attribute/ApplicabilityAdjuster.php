@@ -1,5 +1,5 @@
 <?php
-class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model_Abstract {
+class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 	/** @return Df_Customer_Model_Attribute_ApplicabilityAdjuster */
 	public function adjust() {
 		if (!is_null($this->getApplicability())) {

@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model_Abstract  {
+class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model  {
 	/**
 	 * Результатом всегда является непустая строка.
 	 * @used-by r()

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Shipping_Model_Locator extends Df_Core_Model_Abstract {
+abstract class Df_Shipping_Model_Locator extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return string

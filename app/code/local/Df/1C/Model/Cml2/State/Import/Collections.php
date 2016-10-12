@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Model_Cml2_State_Import_Collections extends Df_Core_Model_Abstract {
+class Df_1C_Model_Cml2_State_Import_Collections extends Df_Core_Model {
 	/**
 	 * Если каталог разбит на несколько файлов,
 	 * то товарные свойства содержатся именно в файле со структурой:

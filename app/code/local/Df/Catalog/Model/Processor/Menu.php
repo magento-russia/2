@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Processor_Menu extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Processor_Menu extends Df_Core_Model {
 	/** @return void */
 	public function process() {
 		$this->initActiveStatus($this->getRoot());

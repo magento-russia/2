@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Entity_Dependency extends Df_Core_Model_Abstract {
+class Df_Core_Model_Entity_Dependency extends Df_Core_Model {
 	/** @return string */
 	public function getActionSaveClassName() {
 		return $this->cfg(self::P__ACTION_SAVE__CLASS_NAME);

@@ -1,5 +1,5 @@
 <?php
-class Df_Autotrading_Model_Api_Calculator extends Df_Core_Model_Abstract {
+class Df_Autotrading_Model_Api_Calculator extends Df_Core_Model {
 	/**
 	 * @param string $paramName
 	 * @param int $productIndex

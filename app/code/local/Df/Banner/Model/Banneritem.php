@@ -2,7 +2,7 @@
 /**
  * @method Df_Banner_Model_Resource_Banneritem getResource()
  */
-class Df_Banner_Model_Banneritem extends Df_Core_Model_Abstract {
+class Df_Banner_Model_Banneritem extends Df_Core_Model {
 	/** @return string */
 	public function getContent() {
 		return $this->cfg(self::P__CONTENT, '');

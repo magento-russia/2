@@ -1,5 +1,5 @@
 <?php
-class Df_Admin_Model_Mode extends Df_Core_Model_Abstract {
+class Df_Admin_Model_Mode extends Df_Core_Model {
 	/** @return void */
 	public function begin() {
 		$this->_counter++;

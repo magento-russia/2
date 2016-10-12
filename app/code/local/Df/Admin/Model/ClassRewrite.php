@@ -1,5 +1,5 @@
 <?php
-class Df_Admin_Model_ClassRewrite extends Df_Core_Model_Abstract {
+class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 	/** @return Df_Admin_Model_ClassInfo_Collection */
 	public function getDestinations() {
 		if (!isset($this->{__METHOD__})) {

@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Units_Length extends Df_Core_Model_Abstract {
+class Df_Core_Model_Units_Length extends Df_Core_Model {
 	/**
 	 * @param float $productLengthInDefaultUnits
 	 * @return float

@@ -1,5 +1,5 @@
 <?php
-class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model_Abstract {
+class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model {
 	/** @return string[] */
 	public function getOptions() {
 		return

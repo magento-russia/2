@@ -1,5 +1,5 @@
 <?php
-class Df_Logging_Model_Processor extends Df_Core_Model_Abstract {
+class Df_Logging_Model_Processor extends Df_Core_Model {
 	/**
 	 * Add new event changes
 	 * @param Df_Logging_Model_Event_Changes $eventChange

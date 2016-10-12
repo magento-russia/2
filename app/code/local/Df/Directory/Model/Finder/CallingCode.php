@@ -1,5 +1,5 @@
 <?php
-class Df_Directory_Model_Finder_CallingCode extends Df_Core_Model_Abstract {
+class Df_Directory_Model_Finder_CallingCode extends Df_Core_Model {
 	/**
 	 * @param Mage_Directory_Model_Country $country
 	 * @return string

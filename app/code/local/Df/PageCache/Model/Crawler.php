@@ -2,7 +2,7 @@
 /**
  * @method Df_PageCache_Model_Resource_Crawler getResource()
  */
-class Df_PageCache_Model_Crawler extends Df_Core_Model_Abstract {
+class Df_PageCache_Model_Crawler extends Df_Core_Model {
 	/**
 	 * Crawl all system urls
 	 * @return Df_PageCache_Model_Crawler

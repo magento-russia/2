@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Core_Model_RemoteControl_Request extends Df_Core_Model_Abstract {
+abstract class Df_Core_Model_RemoteControl_Request extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return Zend_Uri_Http

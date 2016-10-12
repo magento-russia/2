@@ -1,6 +1,6 @@
 <?php
 class Df_Checkout_Model_Validator_Ergonomic_Address_Field_Visible
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Validate_Interface {
 	/**
 	 * @override

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Page_Model_MenuSource extends Df_Core_Model_Abstract {
+abstract class Df_Page_Model_MenuSource extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return Varien_Data_Tree

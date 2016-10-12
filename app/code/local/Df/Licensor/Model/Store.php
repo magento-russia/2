@@ -1,5 +1,5 @@
 <?php
-class Df_Licensor_Model_Store extends Df_Core_Model_Abstract {
+class Df_Licensor_Model_Store extends Df_Core_Model {
 	/**
 	 * @param Df_Licensor_Model_Feature $feature
 	 * @return Zend_Date

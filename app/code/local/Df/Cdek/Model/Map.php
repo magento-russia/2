@@ -15,10 +15,10 @@ class Df_Cdek_Model_Map extends Df_Core_Model_DestructableSingleton {
 
 	/**             
 	 * @override
-	 * @used-by Df_Core_Model_Abstract::cacheLoad()
-	 * @used-by Df_Core_Model_Abstract::cacheSave()
-	 * @used-by Df_Core_Model_Abstract::isCacheEnabled()
-	 * Родительский метод: @see Df_Core_Model_Abstract::getPropertiesToCache()
+	 * @used-by Df_Core_Model::cacheLoad()
+	 * @used-by Df_Core_Model::cacheSave()
+	 * @used-by Df_Core_Model::isCacheEnabled()
+	 * Родительский метод: @see Df_Core_Model::getPropertiesToCache()
 	 * @return string[]
 	 */
 	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getByCity');}

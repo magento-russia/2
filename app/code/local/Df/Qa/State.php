@@ -1,5 +1,5 @@
 <?php
-class Df_Qa_State extends Df_Core_Model_Abstract {
+class Df_Qa_State extends Df_Core_Model {
 	/**
 	 * @used-by Df_Qa_Message_Failure::traceS()
 	 * @override

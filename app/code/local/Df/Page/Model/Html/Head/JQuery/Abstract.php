@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Page_Model_Html_Head_JQuery_Abstract extends Df_Core_Model_Abstract {
+abstract class Df_Page_Model_Html_Head_JQuery_Abstract extends Df_Core_Model {
 	/** @return string */
 	abstract protected function getConfigSuffix();
 

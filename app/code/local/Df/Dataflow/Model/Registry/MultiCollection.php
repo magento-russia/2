@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Dataflow_Model_Registry_MultiCollection
-	extends Df_Core_Model_Abstract implements IteratorAggregate {
+	extends Df_Core_Model implements IteratorAggregate {
 	/**
 	 * @param Mage_Core_Model_Store $store
 	 * @return Df_Dataflow_Model_Registry_Collection

@@ -1,5 +1,5 @@
 <?php
-class Df_Admin_Model_ClassInfo extends Df_Core_Model_Abstract {
+class Df_Admin_Model_ClassInfo extends Df_Core_Model {
 	/** @return string */
 	public function getConfigFilePath() {return $this->cfg(self::P__CONFIG_FILE_PATH);}
 	/**

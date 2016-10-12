@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Observer extends Df_Core_Model_Abstract {
+class Df_Cms_Model_Observer extends Df_Core_Model {
 	/**
 	 * Clean up private versions after user deleted.
 	 * @param Varien_Event_Observer $observer

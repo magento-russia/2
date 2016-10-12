@@ -50,8 +50,8 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 	protected function getPropertiesToCacheSimple() {return array('_urlCache');}
 
 	/**
-	 * Обратите внимание, что метод @see Df_Core_Model_Abstract::getCacheKeyParams()
-	 * присутствует в классе-предке @see Df_Core_Model_Abstract,
+	 * Обратите внимание, что метод @see Df_Core_Model::getCacheKeyParams()
+	 * присутствует в классе-предке @see Df_Core_Model,
 	 * поэтому называем метод getCacheKeyParams2().
 	 *
 	 * Обратите также внимание, что если всё-таки назвать данный метод getCacheKeyParams(),
@@ -59,7 +59,7 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 	 * (может, потому что области видимости разные, и современные версии PHP это учитывают?),
 	 * а вот PHP 5.3.19-1~dotdeb.0 вполне ожидаемо выдаёт предупреждение:
 	 * «Strict Notice: Declaration of Df_Core_Model_Cache_Url::getCacheKeyParams()
-	 * should be compatible with that of Df_Core_Model_Abstract::getCacheKeyParams()»
+	 * should be compatible with that of Df_Core_Model::getCacheKeyParams()»
 	 *
 	 * @param Df_Core_Model_Url $url
 	 * @param string|null $routePath

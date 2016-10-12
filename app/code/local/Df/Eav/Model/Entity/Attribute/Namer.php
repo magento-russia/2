@@ -1,5 +1,5 @@
 <?php
-class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model_Abstract {
+class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 	/** @return string */
 	public function getResult() {
 		if (!isset($this->{__METHOD__})) {

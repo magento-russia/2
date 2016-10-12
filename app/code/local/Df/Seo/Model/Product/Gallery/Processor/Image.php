@@ -1,5 +1,5 @@
 <?php
-class Df_Seo_Model_Product_Gallery_Processor_Image extends Df_Core_Model_Abstract {
+class Df_Seo_Model_Product_Gallery_Processor_Image extends Df_Core_Model {
 	/** @return Df_Seo_Model_Product_Gallery_Processor_Image */
 	public function process() {
 		// Path may be changed due to renaming

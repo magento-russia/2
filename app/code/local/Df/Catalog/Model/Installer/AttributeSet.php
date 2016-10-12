@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 	/** @return Df_Eav_Model_Entity_Attribute_Set */
 	public function getResult() {
 		if (!isset($this->{__METHOD__})) {

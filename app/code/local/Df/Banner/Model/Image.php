@@ -1,5 +1,5 @@
 <?php
-class Df_Banner_Model_Image extends Df_Core_Model_Abstract {
+class Df_Banner_Model_Image extends Df_Core_Model {
 	protected $_width;
 	protected $_height;
 	protected $_keepAspectRatio  = true;

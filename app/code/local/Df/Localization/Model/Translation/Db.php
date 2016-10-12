@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Translation_Db extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Translation_Db extends Df_Core_Model {
 	/** @return string[] */
 	public function getItems() {
 		if (!isset($this->{__METHOD__})) {

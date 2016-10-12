@@ -1,5 +1,5 @@
 <?php
-class Df_Spsr_Model_Api_Calculator extends Df_Core_Model_Abstract {
+class Df_Spsr_Model_Api_Calculator extends Df_Core_Model {
 	/** @return string */
 	public function getErrorMessage() {
 		/** @var string $result */

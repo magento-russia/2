@@ -17,7 +17,7 @@
 			<Df_Core_LibLoader_Abstract/>
 			<Df_Core_Helper_Path/>
 			<Df_Core_Model_Settings/>
-			<Df_Core_Model_Abstract/>
+			<Df_Core_Model/>
 			<Df_Core_Model_Design_PackageM/>
 			<Df_Core_Model_Dispatcher/>
 			<Df_Core_Model_Layout_Update/>

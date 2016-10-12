@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Product_Exporter extends Df_Core_Model_Abstract {
+class Df_Catalog_Product_Exporter extends Df_Core_Model {
 	/** @return Df_Catalog_Model_Resource_Product_Collection */
 	public function getResult() {
 		if (!isset($this->{__METHOD__})) {

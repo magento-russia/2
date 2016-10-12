@@ -1,5 +1,5 @@
 <?php
-class Df_Customer_Model_Address_Validator extends Df_Core_Model_Abstract {
+class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 	/** @return bool|array */
 	public function validate() {
 		df_assert(!is_null($this->getApplicabilityManager()));

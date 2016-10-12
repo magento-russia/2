@@ -6,7 +6,7 @@
  * сборщик Zend Engine мог уже уничтожить другие глобальные объекты,
  * требуемые для сохранения кэша.
  */
-class Df_Core_Model_GlobalSingletonDestructor extends Df_Core_Model_Abstract {
+class Df_Core_Model_GlobalSingletonDestructor extends Df_Core_Model {
 	/** @return void */
 	public function process() {
 		foreach ($this->_objects as $object) {

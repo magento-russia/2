@@ -49,7 +49,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model_DestructableSingleton {
 	protected function getCacheKeyParamsAdditional() {
 		/**
 		 * Здесь мы ещё не можем использовать @see Df_Core_Model_Cache_Store::getStore(),
-		 * потому что @see Df_Core_Model_Abstract::cacheLoad() вызывается перед
+		 * потому что @see Df_Core_Model::cacheLoad() вызывается перед
 		 * $this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_CLASS);
 		 */
 		/** @var Df_Core_Model_StoreM $store */

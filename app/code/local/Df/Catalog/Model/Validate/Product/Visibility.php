@@ -3,7 +3,7 @@
  * Допускает товар с заданной степенью видимости
  */
 class Df_Catalog_Model_Validate_Product_Visibility
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Validate_Interface {
 	/**
 	 * @override

@@ -1,5 +1,5 @@
 <?php
-class Df_Review_Model_Notifier extends Df_Core_Model_Abstract {
+class Df_Review_Model_Notifier extends Df_Core_Model {
 	/** @return void */
 	public function process() {$this->getMailer()->send();}
 

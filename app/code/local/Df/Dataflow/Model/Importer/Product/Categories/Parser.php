@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Dataflow_Model_Importer_Product_Categories_Parser
-	extends Df_Core_Model_Abstract {
+	extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return array

@@ -1,6 +1,6 @@
 <?php
 class Df_Checkout_Model_Filter_Ergonomic_Address
-	extends Df_Core_Model_Abstract
+	extends Df_Core_Model
 	implements Zend_Filter_Interface {
 	/**
 	 * @override

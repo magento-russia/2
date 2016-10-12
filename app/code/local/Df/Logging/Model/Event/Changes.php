@@ -2,7 +2,7 @@
 /**
  * @method Df_Logging_Model_Resource_Event_Changes getResource()
  */
-class Df_Logging_Model_Event_Changes extends Df_Core_Model_Abstract {
+class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	/**
 	 * Set skip fields and clear model data
 	 * @param mixed[] $skipFields

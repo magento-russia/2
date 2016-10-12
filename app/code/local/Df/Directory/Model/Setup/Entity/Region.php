@@ -1,5 +1,5 @@
 <?php
-class Df_Directory_Model_Setup_Entity_Region extends Df_Core_Model_Abstract {
+class Df_Directory_Model_Setup_Entity_Region extends Df_Core_Model {
 	/** @return string */
 	public function getCapital() {return $this->cfg(self::$P__CAPITAL);}
 	/** @return string */

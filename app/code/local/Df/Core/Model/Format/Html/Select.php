@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_Html_Select extends Df_Core_Model_Abstract {
+class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 	/** @return string */
 	public function render() {
 		return rm_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());

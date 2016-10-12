@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Qa_Message extends Df_Core_Model_Abstract {
+abstract class Df_Qa_Message extends Df_Core_Model {
 	/**
 	 * @used-by report()
 	 * @return string

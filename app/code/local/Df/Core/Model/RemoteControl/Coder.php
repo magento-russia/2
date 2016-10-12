@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_RemoteControl_Coder extends Df_Core_Model_Abstract {
+class Df_Core_Model_RemoteControl_Coder extends Df_Core_Model {
 	/**
 	 * @param string $encodedData
 	 * @return array

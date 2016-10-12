@@ -1,5 +1,5 @@
 <?php
-class Df_Dataflow_Model_Category_Path extends Df_Core_Model_Abstract {
+class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/**
 	 * The path can be mirrored to several categories
 	 * (e.g., with same names but in different tree branches)

@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Dataflow_Model_Importer_Product_Options_Format_Abstract
-	extends Df_Core_Model_Abstract {
+	extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @return Df_Dataflow_Model_Importer_Product_Options_Format_Abstract

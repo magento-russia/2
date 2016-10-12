@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Units_Weight extends Df_Core_Model_Abstract {
+class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	/**
 	 * @param float $productWeightInDefaultUnits
 	 * @return int

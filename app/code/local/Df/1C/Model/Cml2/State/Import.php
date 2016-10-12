@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Model_Cml2_State_Import extends Df_Core_Model_Abstract {
+class Df_1C_Model_Cml2_State_Import extends Df_Core_Model {
 	/** @return Df_1C_Model_Cml2_State_Import_Collections */
 	public function collections() {return Df_1C_Model_Cml2_State_Import_Collections::s();}
 

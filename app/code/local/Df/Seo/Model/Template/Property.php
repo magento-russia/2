@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Seo_Model_Template_Property extends Df_Core_Model_Abstract {
+abstract class Df_Seo_Model_Template_Property extends Df_Core_Model {
 	/** @return string */
 	abstract public function getValue();
 

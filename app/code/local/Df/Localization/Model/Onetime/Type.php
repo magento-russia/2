@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Localization_Model_Onetime_Type extends Df_Core_Model_Abstract {
+abstract class Df_Localization_Model_Onetime_Type extends Df_Core_Model {
 	/** @return Df_Dataflow_Model_Registry_Collection|Df_Dataflow_Model_Registry_MultiCollection|Mage_Core_Model_Abstract[] */
 	abstract public function getAllEntities();
 

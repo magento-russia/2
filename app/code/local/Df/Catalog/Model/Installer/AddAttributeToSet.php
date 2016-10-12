@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Installer_AddAttributeToSet extends Df_Core_Model_Abstract {
+class Df_Catalog_Model_Installer_AddAttributeToSet extends Df_Core_Model {
 	/**
 	 * Метод возвращает статус операции.
 	 * @see Df_Catalog_Model_Resource_Installer_Attribute::addAttributeToSetRm

@@ -1,5 +1,5 @@
 <?php
-class Df_Pd4_Model_Request_Document_View extends Df_Core_Model_Abstract {
+class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 	/** @return Df_Sales_Model_Order */
 	public function getOrder() {
 		if (!isset($this->{__METHOD__})) {

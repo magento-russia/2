@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Payment_Model_Config_Abstract extends Df_Core_Model_Abstract {
+abstract class Df_Payment_Model_Config_Abstract extends Df_Core_Model {
 	/**
 	 * @param string $key
 	 * @return bool

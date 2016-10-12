@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Model_Translation_FileStorage extends Df_Core_Model_Abstract {
+class Df_Localization_Model_Translation_FileStorage extends Df_Core_Model {
 	/** @return string */
 	public function getCode() {
 		return $this->cfg(self::P__CODE);

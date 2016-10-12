@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Design_Package extends Df_Core_Model_Abstract {
+class Df_Core_Model_Design_Package extends Df_Core_Model {
 	/** @return string|null */
 	public function getDefaultRoute() {
 		return $this->getPackageConfigParam(self::PACKAGE_PARAM__DEFAULT_ROUTE);

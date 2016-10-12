@@ -1,5 +1,5 @@
 <?php
-class Df_Payment_Model_Redirector extends Df_Core_Model_Abstract {
+class Df_Payment_Model_Redirector extends Df_Core_Model {
 	/** @return Df_Payment_Model_Redirector */
 	public function restoreQuote() {
 		if ($this->isOrderExists()) {

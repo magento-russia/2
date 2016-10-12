@@ -1,5 +1,5 @@
 <?php
-class Df_Pec_Model_Api_Calculator extends Df_Core_Model_Abstract {
+class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 	/**
 	 * @return array(string => array(string => int|float))
 	 * @throws Exception

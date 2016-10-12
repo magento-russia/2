@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Setup_FirstRun extends Df_Core_Model_Abstract {
+class Df_Core_Model_Setup_FirstRun extends Df_Core_Model {
 	/** @return Df_Core_Model_Setup_FirstRun */
 	public function process() {
 		$this->disableAndCleanCache();

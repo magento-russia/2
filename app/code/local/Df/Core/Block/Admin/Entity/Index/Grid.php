@@ -22,7 +22,7 @@ abstract class Df_Core_Block_Admin_Entity_Index_Grid extends Mage_Adminhtml_Bloc
 
 	/**
 	 * @override
-	 * @param Df_Core_Model_Abstract $row
+	 * @param Df_Core_Model $row
 	 * @return string
 	 */
 	public function getRowUrl($row) {
