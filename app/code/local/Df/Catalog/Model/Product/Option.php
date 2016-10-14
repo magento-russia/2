@@ -37,7 +37,11 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 	/**
 	 * @override
 	 * @return Df_Catalog_Model_Resource_Product_Option
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Catalog_Model_Resource_Product_Option::s();}
 
 	/** @used-by Df_Catalog_Model_Resource_Product_Option_Collection::_construct() */

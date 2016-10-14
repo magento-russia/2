@@ -9,7 +9,11 @@ class Df_Core_Model_Website extends Mage_Core_Model_Website {
 	/**
 	 * @override
 	 * @return Df_Core_Model_Resource_Website
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Core_Model_Resource_Website::s();}
 
 	/**

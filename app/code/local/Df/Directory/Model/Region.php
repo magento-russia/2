@@ -23,7 +23,11 @@ class Df_Directory_Model_Region extends Mage_Directory_Model_Region {
 	/**
 	 * @override
 	 * @return Df_Directory_Model_Resource_Region
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Directory_Model_Resource_Region::s();}
 
 	/** @used-by Df_Directory_Model_Resource_Region_Collection::_construct() */

@@ -27,7 +27,11 @@ class Df_Cms_Model_Block extends Mage_Cms_Model_Block {
 	/**
 	 * @override
 	 * @return Df_Cms_Model_Resource_Block
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Cms_Model_Resource_Block::s();}
 
 	/**
