@@ -61,7 +61,7 @@ class Df_1C_Cml2_File extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PATH_RELATIVE, RM_V_STRING_NE);
+		$this->_prop(self::$P__PATH_RELATIVE, DF_V_STRING_NE);
 	}
 
 	/** @used-by Df_1C_Cml2_File_CatalogComposite::_construct() */

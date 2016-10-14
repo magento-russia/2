@@ -34,7 +34,7 @@ class Df_Catalog_Helper_Product_Compare extends Mage_Catalog_Helper_Product_Comp
 				&&
 					(
 							(
-									rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+									df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 								&&
 									$settings->view()->needHideAddToCompare()
 							)

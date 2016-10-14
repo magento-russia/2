@@ -5,6 +5,9 @@
 !*/
 !.gitignore
 !app/code/local/Df/**/*
+!app/code/local/Mage/1930/**/*
+!app/code/local/Mage/Core/Block/Abstract.php
+!app/code/local/Mage/Core/Helper/Abstract.php
 !app/code/local/Varien/**/*
 !app/code/local/Zend/**/*
 !app/design/adminhtml/rm/**/*

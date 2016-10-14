@@ -19,7 +19,7 @@ class Df_Catalog_Observer {
 				$needProcess =
 					df_cfg()->catalog()->navigation()->getEnabled()
 					&& !df_is_admin()
-					&& rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+					&& df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 				;
 			}
 			/**

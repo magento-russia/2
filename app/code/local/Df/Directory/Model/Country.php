@@ -126,7 +126,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	private function countryHelper() {return df_h()->directory()->country();}
 
 	/**
-	 * @used-by Df_Core_Model_Format_MobilePhoneNumber::_construct()
+	 * @used-by Df_Core_Format_MobilePhoneNumber::_construct()
 	 * @used-by Df_Directory_Model_Resource_Country_Collection::_construct()
 	 * @used-by Df_RussianPost_Model_Official_Request_International::_construct()
 	 */

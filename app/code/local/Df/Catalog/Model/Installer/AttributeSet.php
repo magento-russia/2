@@ -91,8 +91,8 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__NAME, RM_V_STRING_NE)
-			->_prop(self::$P__SKIP_REINDEXING, RM_V_BOOL)
+			->_prop(self::$P__NAME, DF_V_STRING_NE)
+			->_prop(self::$P__SKIP_REINDEXING, DF_V_BOOL)
 		;
 	}
 	const _C = __CLASS__;

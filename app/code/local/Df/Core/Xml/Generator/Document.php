@@ -342,13 +342,13 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CONTENTS_AS_ARRAY, RM_V_ARRAY, false)
-			->_prop(self::P__DOC_TYPE, RM_V_STRING, false)
+			->_prop(self::P__CONTENTS_AS_ARRAY, DF_V_ARRAY, false)
+			->_prop(self::P__DOC_TYPE, DF_V_STRING, false)
 			->_prop(self::P__LOGGER, 'Df_Core_Model_Logger', false)
-			->_prop(self::P__NEED_DECODE_ENTITIES, RM_V_BOOL, false)
-			->_prop(self::P__NEED_REMOVE_LINE_BREAKS, RM_V_BOOL, false)
-			->_prop(self::P__NEED_SKIP_XML_HEADER, RM_V_BOOL, false)
-			->_prop(self::P__NEED_WRAP_IN_CDATA_ALL, RM_V_BOOL, false)
+			->_prop(self::P__NEED_DECODE_ENTITIES, DF_V_BOOL, false)
+			->_prop(self::P__NEED_REMOVE_LINE_BREAKS, DF_V_BOOL, false)
+			->_prop(self::P__NEED_SKIP_XML_HEADER, DF_V_BOOL, false)
+			->_prop(self::P__NEED_WRAP_IN_CDATA_ALL, DF_V_BOOL, false)
 		;
 	}
 	/** @used-by Df_Core_Xml_Generator_Part::_construct() */

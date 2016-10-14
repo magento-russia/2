@@ -23,7 +23,7 @@
 	<div id='<?php echo $element->getHtmlId(); ?>' class='df-config-info-urls'>
 		<?php
 			if (2 > count($this->getUrls())) {
-				echo rm_tag('div'
+				echo df_tag('div'
 					, array('class' => 'df-url', 'title' => 'скопируйте в буфер обмена')
 					, df_first($this->getUrls())
 				);

@@ -159,7 +159,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PATH, RM_V_STRING_NE, false);
+		$this->_prop(self::$P__PATH, DF_V_STRING_NE, false);
 	}
 	/** @var string */
 	private static $P__PATH = 'path';

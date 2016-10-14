@@ -4,7 +4,7 @@ class Df_Zf_Validate_String_Iso2 extends Df_Zf_Validate_Type implements Zend_Fil
 	 * 2015-02-13
 	 * Преобразовываем пустую строку в null,
 	 * чтобы при наличии свойства типа
-	 * $this->_prop(self::P__ISO2, RM_V_ISO2, false)
+	 * $this->_prop(self::P__ISO2, DF_V_ISO2, false)
 	 * валидатор не возбуждал исключительную ситуацию:
 	 * «значение «» недопустимо для свойства «iso2»».
 	 * Дело в том, что 3-й параметр ($isRequired) метода @see Df_Core_Model::_prop()

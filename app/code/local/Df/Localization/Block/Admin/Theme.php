@@ -5,7 +5,7 @@ class Df_Localization_Block_Admin_Theme extends Df_Core_Block_Admin {
 	 * @return string
 	 */
 	public function renderProcessor(Df_Localization_Onetime_Processor $processor) {
-		return rm_render(
+		return df_render(
 			Df_Localization_Block_Admin_Theme_Processor::getBlockClass($processor)
 			, array(Df_Localization_Block_Admin_Theme_Processor::P__PROCESSOR => $processor)
 		);

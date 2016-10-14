@@ -331,7 +331,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		 * Полезная проверка!
 		 * Как-то раз ошибочно описал поле без значения:
 			private static $P__TYPE;
-		 * И при вызове $this->_prop(self::$P__TYPE, RM_V_STRING_NE)
+		 * И при вызове $this->_prop(self::$P__TYPE, DF_V_STRING_NE)
 		 * получил диагностическое сообщение: «значение «» недопустимо для свойства «».»
 		 */
 		df_param_string_not_empty($key, 0);

@@ -54,7 +54,7 @@ class Df_Kkb_Model_Signer extends Df_Core_Model {
 		}
 		parent::_construct();
 		$this
-		    ->_prop(self::P__DOCUMENT, RM_V_STRING_NE)
+		    ->_prop(self::P__DOCUMENT, DF_V_STRING_NE)
 			->_prop(self::P__SERVICE_CONFIG, Df_Kkb_Model_Config_Area_Service::_C)
 		;
 	}

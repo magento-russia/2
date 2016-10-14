@@ -112,11 +112,11 @@ class Df_Cms_Block_Admin_Hierarchy_Widget_Chooser extends Df_Core_Block_Admin {
 		}
 		/**
 		 * 2015-04-01
-		 * Надо использовать именно @uses rm_render_l(),
+		 * Надо использовать именно @uses df_render_l(),
 		 * потому что блок @uses Mage_Widget_Block_Adminhtml_Widget_Chooser
 		 * использует метод @see Mage_Widget_Block_Adminhtml_Widget_Chooser::getLayout()
 		 */
-		$element['after_element_html'] = rm_render_l(
+		$element['after_element_html'] = df_render_l(
 			'Mage_Widget_Block_Adminhtml_Widget_Chooser', $params->getData()
 		);
 		return $element;

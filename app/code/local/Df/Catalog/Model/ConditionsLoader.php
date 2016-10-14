@@ -44,9 +44,9 @@ class Df_Catalog_Model_ConditionsLoader extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__MODULE_NAME, RM_V_STRING)
-			->_prop(self::$P__RULE_ID, RM_V_NAT0)
-			->_prop(self::$P__SETTINGS_PATH, RM_V_STRING)
+			->_prop(self::$P__MODULE_NAME, DF_V_STRING)
+			->_prop(self::$P__RULE_ID, DF_V_NAT0)
+			->_prop(self::$P__SETTINGS_PATH, DF_V_STRING)
 		;
 	}
 

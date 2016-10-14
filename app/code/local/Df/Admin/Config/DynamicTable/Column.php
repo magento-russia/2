@@ -65,10 +65,10 @@ abstract class Df_Admin_Config_DynamicTable_Column extends Df_Core_Model {
 		 * @see Df_Admin_Block_Field_DynamicTable::addColumnRm()
 		 */
 		$this
-			->_prop(self::$P__HTML_ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::$P__LABEL, RM_V_STRING_NE)
-			->_prop(self::$P__NAME, RM_V_STRING_NE)
-			->_prop(self::$P__RENDER_OPTIONS, RM_V_ARRAY, false)
+			->_prop(self::$P__HTML_ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::$P__LABEL, DF_V_STRING_NE)
+			->_prop(self::$P__NAME, DF_V_STRING_NE)
+			->_prop(self::$P__RENDER_OPTIONS, DF_V_ARRAY, false)
 		;
 	}
 	/** @used-by Df_Admin_Block_Column::_construct() */

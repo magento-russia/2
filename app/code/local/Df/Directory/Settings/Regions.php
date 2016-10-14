@@ -42,7 +42,7 @@ class Df_Directory_Settings_Regions extends Df_Core_Model_Settings {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CONFIG_KEY_COUNTRY_PART, RM_V_STRING_NE);
+		$this->_prop(self::P__CONFIG_KEY_COUNTRY_PART, DF_V_STRING_NE);
 	}
 	const NUM_PRIORITY_REGIONS = 5;
 	const P__CONFIG_KEY_COUNTRY_PART = 'config_key_country_part';

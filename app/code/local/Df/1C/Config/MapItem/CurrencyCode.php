@@ -36,8 +36,8 @@ class Df_1C_Config_MapItem_CurrencyCode extends Df_Admin_Config_MapItem {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__NON_STANDARD, RM_V_STRING, false)
-			->_prop(self::P__STANDARD, RM_V_STRING, false)
+			->_prop(self::P__NON_STANDARD, DF_V_STRING, false)
+			->_prop(self::P__STANDARD, DF_V_STRING, false)
 		;
 	}
 	/** @used-by Df_1C_Config_Block_NonStandardCurrencyCodes::_construct() */

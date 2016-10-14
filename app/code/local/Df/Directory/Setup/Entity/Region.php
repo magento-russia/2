@@ -16,15 +16,15 @@ class Df_Directory_Setup_Entity_Region extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__NAME, RM_V_STRING_NE)
-			->_prop(self::$P__CODE, RM_V_STRING_NE)
-			->_prop(self::$P__TYPE, RM_V_INT)
+			->_prop(self::$P__NAME, DF_V_STRING_NE)
+			->_prop(self::$P__CODE, DF_V_STRING_NE)
+			->_prop(self::$P__TYPE, DF_V_INT)
 			/**
 			 * У Московской и Ленинградской областей как бы нет столицы.
 			 * @see Df_Directory_Setup_2_0_0::getRussianRegions()
 			 * http://magento-forum.ru/topic/4376/
 			 */
-			->_prop(self::$P__CAPITAL, RM_V_STRING)
+			->_prop(self::$P__CAPITAL, DF_V_STRING)
 		;
 	}	
 

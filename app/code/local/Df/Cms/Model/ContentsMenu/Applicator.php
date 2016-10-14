@@ -57,14 +57,14 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 				/** @var string $handle */
 				df_assert_string($type);
 				df_assert_string($handle);
-				if (rm_handle_presents($handle)) {
+				if (df_handle($handle)) {
 					$result = $type;
 					break;
 				}
 			}
 			if (Df_Cms_Model_ContentsMenu_PageType::OTHER === $result) {
 				if (
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_PAGE)
+						df_handle(Df_Core_Model_Layout_Handle::CMS_PAGE)
 					&&
 						!is_null(df_h()->cms()->getCurrentNode())
 				) {

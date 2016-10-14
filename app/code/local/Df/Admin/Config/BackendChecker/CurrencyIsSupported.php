@@ -150,7 +150,7 @@ class Df_Admin_Config_BackendChecker_CurrencyIsSupported
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__CURRENCY_CODE, RM_V_STRING_NE);
+		$this->_prop(self::$P__CURRENCY_CODE, DF_V_STRING_NE);
 	}
 	/** @var string */
 	private static $P__CURRENCY_CODE = 'currencyCode';

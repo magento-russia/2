@@ -105,7 +105,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 					/**
 					 * 2015-02-13
 					 * Убираем пустые поля, чтобы при наличии свойства типа
-					 * $this->_prop(self::P__ISO2, RM_V_ISO2, false)
+					 * $this->_prop(self::P__ISO2, DF_V_ISO2, false)
 					 * валидатор не возбуждал исключительную ситуацию:
 					 * «значение «» недопустимо для свойства «iso2»».
 					 * Дело в том, что 3-й параметр ($isRequired) метода
@@ -236,7 +236,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__STORE, Df_Core_Model_StoreM::_C, false)
-			->_prop(self::$P__PREFIX, RM_V_STRING, false)
+			->_prop(self::$P__PREFIX, DF_V_STRING, false)
 		;
 		$this->_storeIdDefaultCacheSuffix = '$' . $this->store()->getId();
 	}

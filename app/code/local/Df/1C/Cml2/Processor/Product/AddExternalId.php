@@ -45,7 +45,7 @@ class Df_1C_Cml2_Processor_Product_AddExternalId extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__EXTERNAL_ID, RM_V_STRING_NE)
+			->_prop(self::$P__EXTERNAL_ID, DF_V_STRING_NE)
 			->_prop(self::$P__PRODUCT, Df_Catalog_Model_Product::_C)
 		;
 	}

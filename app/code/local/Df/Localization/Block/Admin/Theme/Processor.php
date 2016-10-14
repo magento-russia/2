@@ -20,7 +20,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	/** @return string */
 	protected function getLinksHtml() {
 		return implode(df_map(
-			'rm_tag'
+			'df_tag'
 			/** @uses getLinkHtml() */
 			,array_map(
 				array(__CLASS__, 'getLinkHtml')
@@ -125,25 +125,25 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 		/** разметка для плагина Dropdown: http://labs.abeautifulsite.net/jquery-dropdown/ */
 		return
 			!is_array($href)
-			? rm_tag('a', $attributes, $content)
+			? df_tag('a', $attributes, $content)
 			:
-				rm_tag('a', df_clean(array(
+				df_tag('a', df_clean(array(
 					'href' => '#'
 					, 'data-dropdown' => '#' . $elementId
 					, 'target' => null
 					, 'class' => 'rm-dropdown'
 				) + $attributes), $content)
 			.
-				rm_tag(
+				df_tag(
 					'div'
 					, array('class' => 'dropdown dropdown-tip', 'id' => $elementId)
-					, rm_tag(
+					, df_tag(
 						'ul'
 						, array('class' => 'dropdown-menu')
 						, implode(df_map(
-							'rm_tag'
+							'df_tag'
 							, df_map(
-								'rm_tag'
+								'df_tag'
 								, self::getDemoLinksParameters($href)
 								, $paramsToAppend = array()
 								, $paramsToPrepend = array('a')

@@ -52,11 +52,11 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @return string
 	 */
 	private function cell($value, $useColspan = false) {
-		return rm_tag('td', array(
+		return df_tag('td', array(
 			'class' => 'a-right'
 			,'colspan' => $useColspan ? $this->getColspan() : null
 			, 'style' => $this->getStyle()
-		), rm_tag('strong', array(), $value));
+		), df_tag('strong', array(), $value));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @return string
 	 */
 	private function row($name, $value, $class = null) {
-		return rm_tag(
+		return df_tag(
 			'tr', array('class' => $class)
 			, df_cc_n($this->cell_name($name)
 			, $this->cell_value($value))

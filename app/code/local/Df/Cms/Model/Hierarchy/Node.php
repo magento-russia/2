@@ -507,10 +507,10 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__LEVEL, RM_V_INT)
-			->_prop(self::P__MENU_EXCLUDED, RM_V_BOOL)
-			->_prop(self::P__MENU_LEVELS_DOWN, RM_V_INT)
-			->_prop(self::P__PAGE_IDENTIFIER, RM_V_STRING)
+			->_prop(self::P__LEVEL, DF_V_INT)
+			->_prop(self::P__MENU_EXCLUDED, DF_V_BOOL)
+			->_prop(self::P__MENU_LEVELS_DOWN, DF_V_INT)
+			->_prop(self::P__PAGE_IDENTIFIER, DF_V_STRING)
 			/**
 			 * Оказывается, при загрузке статей из БД P__PAGE_TITLE может быть равно NULL:
 				 #1 Df_Core_Model->_validate('page_title', NULL)
@@ -519,11 +519,11 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 				 #4 Varien_Data_Collection_Db->load()
 			 * http://magento-forum.ru/topic/4626/
 			 */
-			->_prop(self::P__PAGE_TITLE, RM_V_STRING)
-			->_prop(self::P__PARENT_NODE_ID, RM_V_NAT0)
-			->_prop(self::P__REQUEST_URL, RM_V_STRING)
-		    ->_prop(self::P__SORT_ORDER, RM_V_INT)
-			->_prop(self::P__XPATH, RM_V_STRING)
+			->_prop(self::P__PAGE_TITLE, DF_V_STRING)
+			->_prop(self::P__PARENT_NODE_ID, DF_V_NAT0)
+			->_prop(self::P__REQUEST_URL, DF_V_STRING)
+		    ->_prop(self::P__SORT_ORDER, DF_V_INT)
+			->_prop(self::P__XPATH, DF_V_STRING)
 		;
 	}
 	/** @var array */

@@ -12,7 +12,7 @@ class Df_Catalog_Block_Product_View extends Mage_Catalog_Block_Product_View {
 		if (
 				df_module_enabled(Df_Core_Module::TWEAKS)
 			&&
-				rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+				df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 			&&
 				df_cfg()->tweaks()->catalog()->product()->view()->needHideEmailToFriend()
 		) {
@@ -50,7 +50,7 @@ class Df_Catalog_Block_Product_View extends Mage_Catalog_Block_Product_View {
 			if (
 					df_module_enabled(Df_Core_Module::TWEAKS)
 				&&
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
 					df_cfg()->tweaks()->catalog()->product()->view()->needHideShortDescription()
 			) {

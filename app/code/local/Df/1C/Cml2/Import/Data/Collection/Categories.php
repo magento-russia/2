@@ -21,7 +21,7 @@ class Df_1C_Cml2_Import_Data_Collection_Categories extends Df_1C_Cml2_Import_Dat
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__XML_PATH_AS_ARRAY, RM_V_ARRAY, false);
+		$this->_prop(self::$P__XML_PATH_AS_ARRAY, DF_V_ARRAY, false);
 	}
 	/** @var string */
 	private static $P__XML_PATH_AS_ARRAY = 'xml_path_as_array';

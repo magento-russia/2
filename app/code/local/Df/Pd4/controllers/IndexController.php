@@ -4,7 +4,7 @@ class Df_Pd4_IndexController extends Mage_Core_Controller_Front_Action {
 	public function indexAction() {
 		try {
 			$this->loadLayout();
-			rm_block_head()->setTitle(
+			df_block_head()->setTitle(
 				'Форма ПД-4 для заказа №'
 				. df_h()->pd4()->getDocumentViewAction()->order()->getIncrementId()
 			);

@@ -48,7 +48,7 @@ class Df_Core_Model_Css_Selector extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::$P__RULE_SET, Df_Core_Model_Css_Rule_Set::_C, false)
-			->_prop(self::$P__SELECTOR, RM_V_STRING)
+			->_prop(self::$P__SELECTOR, DF_V_STRING)
 		;
 	}
 	/** @used-by Df_Core_Model_Css::itemClass() */

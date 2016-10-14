@@ -154,5 +154,5 @@ class Df_Banner_Block_Adminhtml_Banner_Grid extends Mage_Adminhtml_Block_Widget_
 	 * @used-by xml()
 	 * @return Df_Banner_Block_Adminhtml_Banner_Grid
 	 */
-	private static function i() {return rm_block_l(__CLASS__);}
+	private static function i() {return df_block_l(__CLASS__);}
 }

@@ -25,32 +25,32 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 			/** @var bool $result */
 			$result =
 					(
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+							df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 						&&
 							df_cfg()->promotion()->gifts()->needShowChooserOnProductListPage()
 					)
 				||
 					(
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CHECKOUT_CART_INDEX)
+							df_handle(Df_Core_Model_Layout_Handle::CHECKOUT_CART_INDEX)
 						&&
 							df_cfg()->promotion()->gifts()->needShowChooserOnCartPage()
 					)
 				||
 					(
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_PAGE)
+							df_handle(Df_Core_Model_Layout_Handle::CMS_PAGE)
 						&&
-							!rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
+							!df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 						&&
 							df_cfg()->promotion()->gifts()->needShowChooserOnCmsPage()
 					)
 				||
 					(
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
+							df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 						&&
 							df_cfg()->promotion()->gifts()->needShowChooserOnFrontPage()
 					)
 			;
-			if (rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
+			if (df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
 				/** @var string $position */
 				$position = df_cfg()->promotion()->gifts()->getChooserPositionOnProductViewPage();
 				$result =

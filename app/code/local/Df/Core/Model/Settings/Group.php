@@ -112,9 +112,9 @@ class Df_Core_Model_Settings_Group extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__GROUP, RM_V_STRING_NE)
-			->_prop(self::P__SECTION, RM_V_STRING_NE)
-			->_prop(self::P__PREFIXES, RM_V_ARRAY, false)
+			->_prop(self::P__GROUP, DF_V_STRING_NE)
+			->_prop(self::P__SECTION, DF_V_STRING_NE)
+			->_prop(self::P__PREFIXES, DF_V_ARRAY, false)
 		;
 	}
 	const _C = __CLASS__;

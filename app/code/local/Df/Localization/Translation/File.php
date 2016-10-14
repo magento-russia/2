@@ -135,7 +135,7 @@ class Df_Localization_Translation_File extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__PATH, RM_V_STRING_NE);
+		$this->_prop(self::P__PATH, DF_V_STRING_NE);
 	}
 	/** @used-by Df_Localization_Translation_File_Collection::itemClass() */
 	const _C = __CLASS__;

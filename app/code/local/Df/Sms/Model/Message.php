@@ -17,8 +17,8 @@ class Df_Sms_Model_Message extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__BODY, RM_V_STRING_NE)
-			->_prop(self::P__RECEIVER, RM_V_STRING_NE)
+			->_prop(self::P__BODY, DF_V_STRING_NE)
+			->_prop(self::P__RECEIVER, DF_V_STRING_NE)
 		;
 	}
 	/** @used-by Df_Sms_Model_Gate::_construct() */

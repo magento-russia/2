@@ -15,10 +15,10 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management extends Df_C
 	 */
 	protected function _prepareLayout(){
 		$this->setChild('balance',
-			rm_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance)
+			df_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance)
 		);
 		$this->setChild('update',
-			rm_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update)
+			df_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update)
 		);
 		return parent::_prepareLayout();
 	}

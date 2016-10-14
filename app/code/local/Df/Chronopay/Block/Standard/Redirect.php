@@ -41,6 +41,6 @@ class Df_Chronopay_Block_Standard_Redirect extends Df_Core_Block_Abstract_NoCach
 	 * @return string
 	 */
 	public static function r(Df_Sales_Model_Order $order) {
-		return rm_render(__CLASS__, array('order' => $order));
+		return df_render(__CLASS__, array('order' => $order));
 	}
 }

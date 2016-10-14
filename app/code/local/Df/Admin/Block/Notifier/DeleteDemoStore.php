@@ -39,6 +39,6 @@ class Df_Admin_Block_Notifier_DeleteDemoStore extends Df_Core_Block_Admin {
 	 * @return string
 	 */
 	private static function render(Df_Core_Model_StoreM $store) {
-		return rm_render(__CLASS__, array(self::$P__STORE => $store));
+		return df_render(__CLASS__, array(self::$P__STORE => $store));
 	}
 }

@@ -71,7 +71,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 		return
 			!df_contains($text, '[[')
 			? $text
-			: preg_replace("#\[\[([^\]]+)\]\]#u", rm_tag('a', array('href' => $url), '$1'), $text)
+			: preg_replace("#\[\[([^\]]+)\]\]#u", df_tag('a', array('href' => $url), '$1'), $text)
 		;
 	}
 

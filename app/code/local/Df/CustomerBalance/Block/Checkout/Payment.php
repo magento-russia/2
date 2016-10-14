@@ -112,7 +112,7 @@ class Df_CustomerBalance_Block_Checkout_Payment extends Df_Core_Block_Template_N
 		/** @var array(string => string) $cache */
 		static $cache;
 		if (!isset($cache[$file])) {
-			$cache[$file] = rm_render(__CLASS__, "df/customerbalance/checkout/payment/{$file}.phtml");
+			$cache[$file] = df_render(__CLASS__, "df/customerbalance/checkout/payment/{$file}.phtml");
 		}
 		return $cache[$file];
 	}

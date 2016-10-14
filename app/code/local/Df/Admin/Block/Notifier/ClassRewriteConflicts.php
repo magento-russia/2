@@ -26,6 +26,6 @@ class Df_Admin_Block_Notifier_ClassRewriteConflicts extends Df_Core_Block_Admin 
 	 * @return string
 	 */
 	public static function render(Df_Admin_Model_ClassRewrite_Collection $conflicts) {
-		return rm_render(__CLASS__, array(self::$P__CONFLICTS => $conflicts));
+		return df_render(__CLASS__, array(self::$P__CONFLICTS => $conflicts));
 	}
 }

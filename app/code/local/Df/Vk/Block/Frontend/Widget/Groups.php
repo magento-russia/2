@@ -72,7 +72,7 @@ class Df_Vk_Block_Frontend_Widget_Groups extends Df_Vk_Block_Frontend_Widget {
 				/** @var string $handle */
 				df_assert_string($type);
 				df_assert_string($handle);
-				if (rm_handle_presents($handle)) {
+				if (df_handle($handle)) {
 					$result = $type;
 					break;
 				}

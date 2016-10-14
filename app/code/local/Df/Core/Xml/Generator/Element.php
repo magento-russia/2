@@ -31,8 +31,8 @@ abstract class Df_Core_Xml_Generator_Element extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::P__TAG_NAME, RM_V_STRING_NE)
+			->_prop(self::P__ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::P__TAG_NAME, DF_V_STRING_NE)
 		;
 	}
 	const _C = __CLASS__;

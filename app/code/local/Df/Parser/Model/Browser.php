@@ -91,8 +91,8 @@ class Df_Parser_Model_Browser extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__AREA, RM_V_STRING)
-			->_prop(self::P__MAX_ATTEMPT_COUNT, RM_V_INT, false)
+			->_prop(self::P__AREA, DF_V_STRING)
+			->_prop(self::P__MAX_ATTEMPT_COUNT, DF_V_INT, false)
 			->_prop(self::P__VALIDATOR, 'Zend_Validate_Interface', false)
 		;
 	}

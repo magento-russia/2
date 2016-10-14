@@ -171,11 +171,11 @@ abstract class Df_Qa_Message extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__FILE_NAME, RM_V_STRING, false)
-			->_prop(self::P__NEED_LOG_TO_FILE, RM_V_BOOL)
-			->_prop(self::P__NEED_NOTIFY_ADMIN, RM_V_BOOL)
-			->_prop(self::P__NEED_NOTIFY_DEVELOPER, RM_V_BOOL)
-			->_prop(self::P__RECIPIENTS, RM_V_ARRAY, false)
+			->_prop(self::P__FILE_NAME, DF_V_STRING, false)
+			->_prop(self::P__NEED_LOG_TO_FILE, DF_V_BOOL)
+			->_prop(self::P__NEED_NOTIFY_ADMIN, DF_V_BOOL)
+			->_prop(self::P__NEED_NOTIFY_DEVELOPER, DF_V_BOOL)
+			->_prop(self::P__RECIPIENTS, DF_V_ARRAY, false)
 		;
 	}
 	const P__FILE_NAME = 'file_name';

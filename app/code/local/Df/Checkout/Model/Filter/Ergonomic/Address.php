@@ -30,7 +30,7 @@ class Df_Checkout_Model_Filter_Ergonomic_Address
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ADDRESS_TYPE, RM_V_STRING_NE);
+		$this->_prop(self::$P__ADDRESS_TYPE, DF_V_STRING_NE);
 	}
 	const _C = __CLASS__;
 	/** @var string */

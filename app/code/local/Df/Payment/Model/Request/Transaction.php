@@ -60,7 +60,7 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 		 * @see Df_Payment_Model_Method::refund()
 		 * но отсутствует для операции @see Df_Payment_Model_Method::void()
 		 */
-		$this->_prop(self::$P__AMOUNT, RM_V_FLOAT, false);
+		$this->_prop(self::$P__AMOUNT, DF_V_FLOAT, false);
 	}
 
 	/**

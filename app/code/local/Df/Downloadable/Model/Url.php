@@ -46,10 +46,10 @@ class Df_Downloadable_Model_Url extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__IS_SAMPLE, RM_V_BOOL)
-			->_prop(self::$P__PATH, RM_V_STRING, false)
-			->_prop(self::$P__TYPE, RM_V_STRING_NE)
-			->_prop(self::$P__URL, RM_V_STRING, false)
+			->_prop(self::$P__IS_SAMPLE, DF_V_BOOL)
+			->_prop(self::$P__PATH, DF_V_STRING, false)
+			->_prop(self::$P__TYPE, DF_V_STRING_NE)
+			->_prop(self::$P__URL, DF_V_STRING, false)
 		;
 	}
 	/** @var string */

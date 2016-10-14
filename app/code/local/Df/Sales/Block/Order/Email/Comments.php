@@ -29,7 +29,7 @@ class Df_Sales_Block_Order_Email_Comments extends Df_Core_Block_Template_NoCache
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__COMMENTS, RM_V_STRING_NE, false);
+		$this->_prop(self::$P__COMMENTS, DF_V_STRING_NE, false);
 	}
 	/** @var string */
 	private static $P__COMMENTS = 'comments';
@@ -40,6 +40,6 @@ class Df_Sales_Block_Order_Email_Comments extends Df_Core_Block_Template_NoCache
 	 * @return string
 	 */
 	public static function r($comments) {
-		return rm_render(new self(array(self::$P__COMMENTS => $comments)));
+		return df_render(new self(array(self::$P__COMMENTS => $comments)));
 	}
 }

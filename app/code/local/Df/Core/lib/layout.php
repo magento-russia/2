@@ -5,14 +5,14 @@
  * 2) класс блока в стандартном формате
  * 3) класс блока в формате Magento
  * 4) пустое значение: в таком случае будет создан блок типа @see Mage_Core_Block_Template
- * @used-by rm_block_l()
- * @used-by rm_render()
+ * @used-by df_block_l()
+ * @used-by df_render()
  * @param string|Mage_Core_Block_Abstract|null $block [optional]
  * @param string|array(string => mixed) $params [optional]
  * @return Mage_Core_Block_Abstract
  * @throws Exception
  */
-function rm_block($block = null, $params = array()) {
+function df_block($block = null, $params = array()) {
 	/** @var Mage_Core_Block_Abstract $result */
 	if (is_string($params)) {
 		$params = array('template' => $params);
@@ -23,7 +23,7 @@ function rm_block($block = null, $params = array()) {
 	}
 	if (!is_object($block)) {
 		df_param_string_not_empty($block, 0);
-		$result = rm_layout()->getBlockInstance($block, $params);
+		$result = df_layout()->getBlockInstance($block, $params);
 	}
 	else {
 		/**
@@ -44,15 +44,15 @@ function rm_block($block = null, $params = array()) {
  * В данном случае этот приём очень удобен, посколько позволяет избежать
  * бесчисленных проверок на существование объекта «head» перед обращением к нему.
  * @used-by Df_Pd4_IndexController::indexAction()
- * @used-by rm_page_global_css()
- * @used-by rm_page_global_js()
- * @used-by rm_page_skin_css()
- * @used-by rm_page_skin_js()
+ * @used-by df_page_global_css()
+ * @used-by df_page_global_js()
+ * @used-by df_page_skin_css()
+ * @used-by df_page_skin_js()
  * @return Mage_Page_Block_Html_Head
  */
-function rm_block_head() {
+function df_block_head() {
 	/** @var Mage_Page_Block_Html_Head $result */
-	$result = rm_layout()->getBlock('head');
+	$result = df_layout()->getBlock('head');
 	if (!$result) {
 		/** @var Mage_Page_Block_Html_Head $nullObject */
 		static $nullObject; if (!$nullObject) {$nullObject = new Mage_Page_Block_Html_Head;}
@@ -69,12 +69,12 @@ function rm_block_head() {
  * а при отображении макета.
  *
  * Если блок нуждается в методе @see Mage_Core_Block_Abstract::getLayout(),
- * но блок нужно нарисовать сразу, но используйте функцию @see rm_render_l():
+ * но блок нужно нарисовать сразу, но используйте функцию @see df_render_l():
  * она позволяет блоку использовать макет, но не добавляет блок в макет,
  * а рисует блок сразу.
  *
  * Если блок не нуждается в макете, то используйте функции
- * @see rm_block(), @see rm_render(), @see rm_render_simple()
+ * @see df_block(), @see df_render(), @see df_render_simple()
  *
  * В качестве параметра $block можно передавать:
  * 1) объект-блок
@@ -96,13 +96,12 @@ function rm_block_head() {
  *
  * @param string|Mage_Core_Block_Abstract|null $block [optional]
  * @param string|array(string => mixed) $params [optional]
- * @param bool $addToLayout [optional]
  * @return Mage_Core_Block_Abstract
  * @throws Exception
  */
-function rm_block_l($block, $params = array()) {
+function df_block_l($block, $params = array()) {
 	/** @var Mage_Core_Block_Abstract $result */
-	$result = rm_layout()->createBlock(rm_block($block, $params));
+	$result = df_layout()->createBlock(df_block($block, $params));
 	if (!$result) {
 		df_error("Не могу создать блок класса «{$block}».\nСмотрите отчёт в папке var/log.");
 	}
@@ -122,7 +121,7 @@ function rm_block_l($block, $params = array()) {
  * @param Mage_Core_Block_Abstract|string|string[] $block
  * @return void
  */
-function rm_block_remove($block) {
+function df_block_remove($block) {
 	if (func_num_args() > 1) {
 		$block = func_get_args();
 	}
@@ -141,10 +140,10 @@ function rm_block_remove($block) {
 		 * и затем быстро находить блоки по их типу.
 		 */
 		if (is_string($block)) {
-			$block = rm_layout()->getBlock($block);
+			$block = df_layout()->getBlock($block);
 		}
 		if ($block instanceof Mage_Core_Block_Abstract) {
-			rm_layout()->unsetBlock($block->getNameInLayout());
+			df_layout()->unsetBlock($block->getNameInLayout());
 			/** @var Mage_Core_Block_Abstract|null $parent */
 			$parent = $block->getParentBlock();
 			/**
@@ -235,21 +234,21 @@ function rm_block_remove($block) {
  * @param string $handle
  * @return bool
  */
-function rm_handle_presents($handle) {
+function df_handle($handle) {
 	/** @uses array_flip() / @uses isset() работает быстрее, чем @see in_array() */
 	/** @var bool[] $cache */
 	static $handles;
 	if (is_null($handles)) {
-		$handles = array_flip(rm_handles());
+		$handles = array_flip(df_handles());
 	}
 	return isset($handles[$handle]);
 }
 
 /** @return string[] */
-function rm_handles() {return rm_layout()->getUpdate()->getHandles();}
+function df_handles() {return df_layout()->getUpdate()->getHandles();}
 
 /** @return Df_Core_Model_Layout */
-function rm_layout() {return Mage::getSingleton('core/layout');}
+function df_layout() {return Mage::getSingleton('core/layout');}
 
 /**
  * 2015-03-30
@@ -257,11 +256,11 @@ function rm_layout() {return Mage::getSingleton('core/layout');}
  * @param string|string[] $file
  * @return void
  */
-function rm_page_global_css($file) {
+function df_page_global_css($file) {
 	if (func_num_args() > 1) {
 		$file = func_get_args();
 	}
-	is_array($file) ? array_map(__FUNCTION__, $file) : rm_block_head()->addItem('js_css', $file);
+	is_array($file) ? array_map(__FUNCTION__, $file) : df_block_head()->addItem('js_css', $file);
 }
 
 /**
@@ -270,11 +269,11 @@ function rm_page_global_css($file) {
  * @param string|string[] $file
  * @return void
  */
-function rm_page_global_js($file) {
+function df_page_global_js($file) {
 	if (func_num_args() > 1) {
 		$file = func_get_args();
 	}
-	is_array($file) ? array_map(__FUNCTION__, $file) : rm_block_head()->addItem('js', $file);
+	is_array($file) ? array_map(__FUNCTION__, $file) : df_block_head()->addItem('js', $file);
 }
 
 /**
@@ -283,11 +282,11 @@ function rm_page_global_js($file) {
  * @param string|string[] $file
  * @return void
  */
-function rm_page_skin_css($file) {
+function df_page_skin_css($file) {
 	if (func_num_args() > 1) {
 		$file = func_get_args();
 	}
-	is_array($file) ? array_map(__FUNCTION__, $file) : rm_block_head()->addItem('skin_css', $file);
+	is_array($file) ? array_map(__FUNCTION__, $file) : df_block_head()->addItem('skin_css', $file);
 }
 
 /**
@@ -296,17 +295,17 @@ function rm_page_skin_css($file) {
  * @param string|string[] $file
  * @return void
  */
-function rm_page_skin_js($file) {
+function df_page_skin_js($file) {
 	if (func_num_args() > 1) {
 		$file = func_get_args();
 	}
-	is_array($file) ? array_map(__FUNCTION__, $file) : rm_block_head()->addItem('skin_js', $file);
+	is_array($file) ? array_map(__FUNCTION__, $file) : df_block_head()->addItem('skin_js', $file);
 }
 
 /**
  * 2015-03-30
  * Обратите внимание, что эта функция:
- * 1) не добавляет блок в макет, в отличие от @see rm_block_l()
+ * 1) не добавляет блок в макет, в отличие от @see df_block_l()
  * 2) отображает блок упрощённым методом @uses Mage_Core_Block_Abstract::toHtmlFast()
  * вместо @see Mage_Core_Block_Abstract::toHtml()
  *
@@ -316,8 +315,8 @@ function rm_page_skin_js($file) {
  * 3) класс блока в формате Magento
  * 4) пустое значение: в таком случае будет создан блок типа @see Mage_Core_Block_Template
  * @used-by rm_admin_button()
- * @used-by rm_render_l()
- * @used-by rm_render_simple()
+ * @used-by df_render_l()
+ * @used-by df_render_simple()
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address::r()
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect::_toHtml()
  * @used-by Df_Chronopay_Block_Gate_Request::r()
@@ -333,7 +332,7 @@ function rm_page_skin_js($file) {
  * @return string
  * @throws Exception
  */
-function rm_render($block, $params = array()) {return rm_block($block, $params)->toHtmlFast();}
+function df_render($block, $params = array()) {return df_block($block, $params)->toHtmlFast();}
 
 /**
  * 2015-04-01
@@ -343,8 +342,8 @@ function rm_render($block, $params = array()) {return rm_block($block, $params)-
  * @return string
  * @throws Exception
  */
-function rm_render_child(Mage_Core_Block_Abstract $parent, $block, $params = array()) {
-	return rm_block($block, $params)->setParentBlock($parent)->toHtmlFast();
+function df_render_child(Mage_Core_Block_Abstract $parent, $block, $params = array()) {
+	return df_block($block, $params)->setParentBlock($parent)->toHtmlFast();
 }
 
 /**
@@ -352,7 +351,7 @@ function rm_render_child(Mage_Core_Block_Abstract $parent, $block, $params = arr
  * Используйте эту функцию для отображения блоков, которые используют метод
  * @see Mage_Core_Block_Abstract::getLayout()
  * Если блок не нужно рисовать сразу, а нужно непременно добавить в макет,
- * то используйте функцию @see rm_block_l()
+ * то используйте функцию @see df_block_l()
  *
  * @used-by Df_Cms_Block_Admin_Hierarchy_Widget_Chooser::prepareElementHtml()
  * @param string|Mage_Core_Block_Abstract|null $block [optional]
@@ -360,25 +359,25 @@ function rm_render_child(Mage_Core_Block_Abstract $parent, $block, $params = arr
  * @return string
  * @throws Exception
  */
-function rm_render_l($block, $params = array()) {
-	return rm_render(rm_block($block, $params)->setLayout(rm_layout()));
+function df_render_l($block, $params = array()) {
+	return df_render(df_block($block, $params)->setLayout(df_layout()));
 }
 
 /**
  * 2015-03-30
  * Обратите внимание, что эта функция:
- * 1) не добавляет блок в макет, в отличие от @see rm_block_l()
+ * 1) не добавляет блок в макет, в отличие от @see df_block_l()
  * 2) отображает блок упрощённым методом @uses Mage_Core_Block_Abstract::toHtmlFast()
  * вместо @see Mage_Core_Block_Abstract::toHtml()
  *
- * @used-by rm_render_simple_child()
+ * @used-by df_render_simple_child()
  * @used-by Df_Qa_Message::message()
  * @param string $template
  * @param string|array(string => mixed) $params [optional]
  * @return string
  */
-function rm_render_simple($template, array $params = array()) {
-	return rm_render(null, array('template' => $template) + $params);
+function df_render_simple($template, array $params = array()) {
+	return df_render(null, array('template' => $template) + $params);
 }
 
 /**
@@ -388,8 +387,8 @@ function rm_render_simple($template, array $params = array()) {
  * @param string|array(string => mixed) $params [optional]
  * @return string
  */
-function rm_render_simple_child(Mage_Core_Block_Template $parent, $templateShort, array $params = array()) {
-	return rm_render_simple(Mage::getDesign()->getTemplateFilename(
+function df_render_simple_child(Mage_Core_Block_Template $parent, $templateShort, array $params = array()) {
+	return df_render_simple(Mage::getDesign()->getTemplateFilename(
 		/**
 		 * Обратите внимание, что мы намеренно используем @uses Mage_Core_Block_Template::getTemplate()
 		 * вместо @see Mage_Core_Block_Template::getTemplateFile(),

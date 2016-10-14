@@ -20,7 +20,7 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History extends Df_Core
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__CUSTOMER_ID, RM_V_NAT0);
+		$this->_prop(self::$P__CUSTOMER_ID, DF_V_NAT0);
 		$this->setTemplate('df/reward/customer/edit/history.phtml');
 	}
 	/** @var string */
@@ -32,6 +32,6 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History extends Df_Core
 	 * @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History
 	 */
 	public static function i($customerId) {
-		return rm_block_l(new self(array(self::$P__CUSTOMER_ID => $customerId)));
+		return df_block_l(new self(array(self::$P__CUSTOMER_ID => $customerId)));
 	}
 }

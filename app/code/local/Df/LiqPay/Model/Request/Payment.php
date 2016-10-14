@@ -20,7 +20,7 @@ class Df_LiqPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		$result = array(
 			'version' => '1.2'
 			,'default_phone' =>
-				'+' . Df_Core_Model_Format_MobilePhoneNumber::i($this->phone())->getOnlyDigits()
+				'+' . Df_Core_Format_MobilePhoneNumber::i($this->phone())->getOnlyDigits()
 			,'amount' => $this->amountS()
 			// Раньше LiqPay запрещал кириллицу в описании платежа,
 			// но теперь, вроде, разрешает.

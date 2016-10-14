@@ -17,7 +17,7 @@ class Df_Localization_Block_Admin_Theme_Notifier extends Df_Core_Block_Admin {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PROCESSORS, RM_V_ARRAY);
+		$this->_prop(self::$P__PROCESSORS, DF_V_ARRAY);
 	}
 	/** @var string */
 	private static $P__PROCESSORS = 'processors';
@@ -26,7 +26,7 @@ class Df_Localization_Block_Admin_Theme_Notifier extends Df_Core_Block_Admin {
 	 * @return string
 	 */
 	public static function render(array $processors) {
-		return rm_render(__CLASS__, array(self::$P__PROCESSORS => $processors));
+		return df_render(__CLASS__, array(self::$P__PROCESSORS => $processors));
 	}
 }
 

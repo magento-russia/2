@@ -37,7 +37,7 @@ class Df_Admin_Block_Column_Select extends Df_Admin_Block_Column {
 
 	/** @return string */
 	private function renderHtml() {
-		return rm_html_select($this->getColumn()->getOptions(), null, $this->getHtmlAttributes());
+		return df_html_select($this->getColumn()->getOptions(), null, $this->getHtmlAttributes());
 	}
 
 	/**

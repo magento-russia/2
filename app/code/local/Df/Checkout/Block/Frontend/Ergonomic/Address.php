@@ -185,5 +185,5 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	 * @param string $type
 	 * @return string
 	 */
-	private static function r($type) {return rm_render(new self(array(self::$P__TYPE => $type)));}
+	private static function r($type) {return df_render(new self(array(self::$P__TYPE => $type)));}
 }

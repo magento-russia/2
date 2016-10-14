@@ -283,7 +283,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__IMAGES, RM_V_ARRAY)
+			->_prop(self::P__IMAGES, DF_V_ARRAY)
 			// Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::_C,
 			// однако это привело к сбою:
 			// «Fatal error: Cannot inherit previously-inherited or override constant _CLASS

@@ -35,6 +35,6 @@ class Df_Localization_Block_Admin_Verification_File extends Df_Core_Block_Admin 
 	 * @return Df_Localization_Block_Admin_Verification_File
 	 */
 	public static function r(Df_Localization_Translation_File $file) {
-		return rm_render(new self(array(self::$P__FILE => $file)));
+		return df_render(new self(array(self::$P__FILE => $file)));
 	}
 }

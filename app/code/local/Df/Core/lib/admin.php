@@ -15,7 +15,7 @@ function rm_admin_allowed($resourceId) {return rm_admin_session()->isAllowed($re
  * @return string
  */
 function rm_admin_button(array $params) {
-	return rm_render('Mage_Adminhtml_Block_Widget_Button', $params);
+	return df_render('Mage_Adminhtml_Block_Widget_Button', $params);
 }
 
 /**

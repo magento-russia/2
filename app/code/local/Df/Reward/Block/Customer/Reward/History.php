@@ -109,7 +109,7 @@ class Df_Reward_Block_Customer_Reward_History extends Df_Core_Block_Template_NoC
 	protected function _prepareLayout() {
 		if ($this->_isEnabled()) {
 			/** @var Mage_Page_Block_Html_Pager $pager */
-			$pager = rm_layout()->addBlock('page/html_pager', 'reward.history.pager');
+			$pager = df_layout()->addBlock('page/html_pager', 'reward.history.pager');
 			$pager->setCollection($this->_getCollection())->setIsOutputRequired(false);
 			$this->setChild('pager', $pager);
 		}

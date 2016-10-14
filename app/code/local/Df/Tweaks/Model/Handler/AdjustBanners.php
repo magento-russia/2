@@ -10,12 +10,12 @@ class Df_Tweaks_Model_Handler_AdjustBanners extends Df_Core_Model_Handler {
 		/** @var Df_Tweaks_Model_Settings_Banners_Left $s */
 		$s = Df_Tweaks_Model_Settings_Banners_Left::s();
 		if ($this->needRemove($s)
-			|| $s->removeFromAccount() && rm_handle_presents(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
+			|| $s->removeFromAccount() && df_handle(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
 		) {
-			rm_block_remove('left.permanent.callout');
+			df_block_remove('left.permanent.callout');
 		}
 		if ($this->needRemove(Df_Tweaks_Model_Settings_Banners_Right::s())) {
-			rm_block_remove('right.permanent.callout');
+			df_block_remove('right.permanent.callout');
 		}
 	}
 
@@ -39,19 +39,19 @@ class Df_Tweaks_Model_Handler_AdjustBanners extends Df_Core_Model_Handler {
 				(
 						$s->removeFromFrontpage()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
+						df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 				)
 			||
 				(
 						$s->removeFromCatalogProductList()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+						df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 				)
 			||
 				(
 						$s->removeFromCatalogProductView()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+						df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				)
 		;
 	}

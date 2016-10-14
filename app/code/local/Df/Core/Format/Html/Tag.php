@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
+class Df_Core_Format_Html_Tag extends Df_Core_Model {
 	/** @return string */
 	private function _render() {
 		return strtr(
@@ -109,9 +109,9 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__TAG, RM_V_STRING_NE)
-			->_prop(self::$P__CONTENT, RM_V_STRING, false)
-			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
+			->_prop(self::$P__TAG, DF_V_STRING_NE)
+			->_prop(self::$P__CONTENT, DF_V_STRING, false)
+			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
 		;
 	}
 	/** @var string */
@@ -128,7 +128,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 	 * @return string
 	 */
 	public static function render($tag, array $attributes = array(), $content = null) {
-		/** @var Df_Core_Model_Format_Html_Tag $i */
+		/** @var Df_Core_Format_Html_Tag $i */
 		$i = new self(array(
 			self::$P__ATTRIBUTES => $attributes
 			,self::$P__CONTENT => $content

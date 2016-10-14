@@ -15,7 +15,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 		if (df_module_enabled(Df_Core_Module::TWEAKS)) {
 			if (
 					(
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+							df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 						&&
 							df_cfg()->tweaks()->catalog()->product()->view()->needHideAddToCart()
 					)
@@ -68,9 +68,9 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 					df_module_enabled(Df_Core_Module::TWEAKS)
 				&&
 					(
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+							df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 						||
-							rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_PAGE)
+							df_handle(Df_Core_Model_Layout_Handle::CMS_PAGE)
 					)
 				&&
 					df_cfg()->tweaks()->catalog()->product()->_list()->needReplaceAddToCartWithMore()

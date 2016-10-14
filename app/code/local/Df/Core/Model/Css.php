@@ -42,7 +42,7 @@ class Df_Core_Model_Css extends Df_Varien_Data_Collection {
 		return
 			!$this->hasItems()
 			? '' :
-			rm_tag('style', array('type' => 'text/css'), df_tab_multiline(
+			df_tag('style', array('type' => 'text/css'), df_tab_multiline(
 				implode("\n\n", df_trim($this->walk('render')))
 			))
 		;

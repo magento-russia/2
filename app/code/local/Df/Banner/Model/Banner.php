@@ -43,8 +43,8 @@ class Df_Banner_Model_Banner extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DELAY, RM_V_NAT0)
-			->_prop(self::$P__IS_ENABLED, RM_V_BOOL)
+			->_prop(self::$P__DELAY, DF_V_NAT0)
+			->_prop(self::$P__IS_ENABLED, DF_V_BOOL)
 			/**
 			 * Для свойства show_title
 			 * приходится использовать валидатор/фильтр V_INT, а не V_BOOL,
@@ -55,9 +55,9 @@ class Df_Banner_Model_Banner extends Df_Core_Model {
 			 * @see Df_Banner_Block_Adminhtml_Banner_Edit_Tab_Form::_prepareForm()
 			 * @see Df_Banner_Model_Status::yesNo()
 			 */
-			->_prop(self::$P__NEED_SHOW_TITLE, RM_V_INT)
-			->_prop(self::$P__SIZE__HEIGHT, RM_V_NAT)
-			->_prop(self::$P__SIZE__WIDTH, RM_V_NAT)
+			->_prop(self::$P__NEED_SHOW_TITLE, DF_V_INT)
+			->_prop(self::$P__SIZE__HEIGHT, DF_V_NAT)
+			->_prop(self::$P__SIZE__WIDTH, DF_V_NAT)
 		;
 	}
 	/** @used-by Df_Banner_Model_Resource_Banner_Collection::_construct() */

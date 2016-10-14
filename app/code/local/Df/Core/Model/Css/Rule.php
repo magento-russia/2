@@ -44,9 +44,9 @@ class Df_Core_Model_Css_Rule extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__NAME, RM_V_STRING_NE)
-			->_prop(self::$P__UNITS, RM_V_STRING)
-			->_prop(self::$P__VALUE, RM_V_STRING_NE)
+			->_prop(self::$P__NAME, DF_V_STRING_NE)
+			->_prop(self::$P__UNITS, DF_V_STRING)
+			->_prop(self::$P__VALUE, DF_V_STRING_NE)
 		;
 	}
 	/** @used-by Df_Core_Model_Css_Rule_Set::itemClass() */

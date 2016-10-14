@@ -140,12 +140,12 @@ class Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ENABLED__LABEL, RM_V_STRING_NE)
+			->_prop(self::P__ENABLED__LABEL, DF_V_STRING_NE)
 			->_prop(self::P__FIELDSET, 'Varien_Data_Form_Element_Fieldset')
-			->_prop(self::P__PAGE_TYPE_ID, RM_V_STRING_NE)
-			->_prop(self::P__POSITION__LABEL, RM_V_STRING_NE)
-			->_prop(self::P__TAB_INDEX, RM_V_INT)
-			->_prop(self::P__VERTICAL_ORDERING__LABEL, RM_V_STRING_NE)
+			->_prop(self::P__PAGE_TYPE_ID, DF_V_STRING_NE)
+			->_prop(self::P__POSITION__LABEL, DF_V_STRING_NE)
+			->_prop(self::P__TAB_INDEX, DF_V_INT)
+			->_prop(self::P__VERTICAL_ORDERING__LABEL, DF_V_STRING_NE)
 		;
 	}
 	const _C = __CLASS__;

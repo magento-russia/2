@@ -4,19 +4,19 @@ if (!defined ('PHP_INT_MIN')) {
 }
 
 define('RM_F_TRIM', 'filter-trim');
-define('RM_V_ARRAY', 'array');
-define('RM_V_BOOL', 'boolean');
-define('RM_V_FLOAT', 'float');
-define('RM_V_INT', 'int');
+define('DF_V_ARRAY', 'array');
+define('DF_V_BOOL', 'boolean');
+define('DF_V_FLOAT', 'float');
+define('DF_V_INT', 'int');
 /**
  * 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
  * https://ru.wikipedia.org/wiki/ISO_3166-1
  */
-define('RM_V_ISO2', 'iso2');
-define('RM_V_NAT', 'nat');
-define('RM_V_NAT0', 'nat0');
-define('RM_V_STRING_NE', 'string_ne');
-define('RM_V_STRING', 'string');
+define('DF_V_ISO2', 'iso2');
+define('DF_V_NAT', 'nat');
+define('DF_V_NAT0', 'nat0');
+define('DF_V_STRING_NE', 'string_ne');
+define('DF_V_STRING', 'string');
 
 /**
  * @param string $method

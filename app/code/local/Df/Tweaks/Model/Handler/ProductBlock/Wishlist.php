@@ -14,17 +14,17 @@ class Df_Tweaks_Model_Handler_ProductBlock_Wishlist extends Df_Core_Model_Handle
 			||
 					$s->removeFromFrontpage()
 				&&
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
+					df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 			||
 					$s->removeFromCatalogProductList()
 				&&
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 			||
 					$s->removeFromCatalogProductView()
 				&&
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 		) {
-			rm_block_remove('wishlist_sidebar');
+			df_block_remove('wishlist_sidebar');
 		}
 	}
 

@@ -7,7 +7,7 @@ class Df_Tweaks_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function isItCatalogProductList() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 				||
 					/**
 					 * На случай вывода списка товаров через синтаксис {{}}:
@@ -18,9 +18,9 @@ class Df_Tweaks_Helper_Data extends Mage_Core_Helper_Abstract {
 					 * 		template="catalog/product/list.phtml"
 					 * }}
 					 */
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_PAGE)
+					df_handle(Df_Core_Model_Layout_Handle::CMS_PAGE)
 				||
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOGSEARCH_RESULT_INDEX)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOGSEARCH_RESULT_INDEX)
 			;
 		}
 		return $this->{__METHOD__};

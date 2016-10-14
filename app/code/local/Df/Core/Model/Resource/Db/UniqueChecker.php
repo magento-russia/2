@@ -128,7 +128,7 @@ class Df_Core_Model_Resource_Db_UniqueChecker extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DATA_TO_SAVE, RM_V_ARRAY)
+			->_prop(self::$P__DATA_TO_SAVE, DF_V_ARRAY)
 			->_prop(self::$P__MODEL, 'Mage_Core_Model_Abstract')
 			->_prop(self::$P__WRITE_APADTER, 'Varien_Db_Adapter_Interface')
 		;

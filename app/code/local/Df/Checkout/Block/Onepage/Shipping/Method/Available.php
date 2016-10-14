@@ -35,7 +35,7 @@ class Df_Checkout_Block_Onepage_Shipping_Method_Available
 		return
 			!$this->getShippingRates()
 			? "<p>{$this->__('Sorry, no quotes are available for this order at this time.')}</p>"
-			: rm_tag('dl', array('class' => 'sp-methods'), $this->renderCarriers())
+			: df_tag('dl', array('class' => 'sp-methods'), $this->renderCarriers())
 		;
 	}
 

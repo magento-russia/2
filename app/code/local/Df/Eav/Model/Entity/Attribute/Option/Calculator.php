@@ -224,9 +224,9 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__ATTRIBUTE, 'Mage_Eav_Model_Entity_Attribute')
-			->_prop(self::P__MODE__CASE_INSENSITIVE, RM_V_BOOL, false)
-			->_prop(self::P__MODE__INSERT, RM_V_BOOL, false)
-			->_prop(self::P__OPTIONS_VALUES_NEW, RM_V_ARRAY)
+			->_prop(self::P__MODE__CASE_INSENSITIVE, DF_V_BOOL, false)
+			->_prop(self::P__MODE__INSERT, DF_V_BOOL, false)
+			->_prop(self::P__OPTIONS_VALUES_NEW, DF_V_ARRAY)
 		;
 	}
 	const _C = __CLASS__;

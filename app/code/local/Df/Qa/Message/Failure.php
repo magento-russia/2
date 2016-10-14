@@ -64,8 +64,8 @@ abstract class Df_Qa_Message_Failure extends Df_Qa_Message {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ADDITIONAL_MESSAGE, RM_V_STRING, false)
-			->_prop(self::P__SHOW_CODE_CONTEXT, RM_V_BOOL, false)
+			->_prop(self::P__ADDITIONAL_MESSAGE, DF_V_STRING, false)
+			->_prop(self::P__SHOW_CODE_CONTEXT, DF_V_BOOL, false)
 		;
 	}
 	const P__ADDITIONAL_MESSAGE = 'additional_message';

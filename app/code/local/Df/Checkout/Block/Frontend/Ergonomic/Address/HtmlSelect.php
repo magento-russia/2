@@ -23,7 +23,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
-	protected function _toHtml() {return rm_render($this->getSelect());}
+	protected function _toHtml() {return df_render($this->getSelect());}
 
 	/**
 	 * @override
@@ -173,7 +173,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ADDRESS_TYPE, RM_V_STRING_NE)
+			->_prop(self::$P__ADDRESS_TYPE, DF_V_STRING_NE)
 			->_prop(self::$P__OWNER, 'Mage_Checkout_Block_Onepage_Abstract')
 		;
 	}

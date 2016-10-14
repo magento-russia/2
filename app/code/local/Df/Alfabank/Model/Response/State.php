@@ -138,15 +138,15 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__AMOUNT, RM_V_NAT0)
-			->_prop(self::$P__AUTHCODE, RM_V_INT)
-			->_prop(self::$P__CARDHOLDER_NAME, RM_V_STRING)
-			->_prop(self::$P__CURRENCY_CODE, RM_V_NAT)
-			->_prop(self::$P__DEPOSIT_AMOUNT, RM_V_NAT0)
-			->_prop(self::$P__IP_ADDRESS, RM_V_STRING)
-			->_prop(self::$P__ORDER_INCREMENT_ID, RM_V_STRING_NE)
-			->_prop(self::$P__PAN, RM_V_STRING)
-			->_prop(self::$P__PAYMENT_STATUS, RM_V_NAT0)
+			->_prop(self::$P__AMOUNT, DF_V_NAT0)
+			->_prop(self::$P__AUTHCODE, DF_V_INT)
+			->_prop(self::$P__CARDHOLDER_NAME, DF_V_STRING)
+			->_prop(self::$P__CURRENCY_CODE, DF_V_NAT)
+			->_prop(self::$P__DEPOSIT_AMOUNT, DF_V_NAT0)
+			->_prop(self::$P__IP_ADDRESS, DF_V_STRING)
+			->_prop(self::$P__ORDER_INCREMENT_ID, DF_V_STRING_NE)
+			->_prop(self::$P__PAN, DF_V_STRING)
+			->_prop(self::$P__PAYMENT_STATUS, DF_V_NAT0)
 		;
 	}
 	/** @var int */

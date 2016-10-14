@@ -37,7 +37,7 @@ class Df_Pbridge_Helper_Data extends Enterprise_Pbridge_Helper_Data {
 		}
 		else {
 			/** @var Mage_Core_Block_Template $blockObject */
-			$blockObject = rm_layout()->getBlock($block);
+			$blockObject = df_layout()->getBlock($block);
 			$result = !$blockObject ? '' : $blockObject->getTemplate();
 		}
 		return $result;

@@ -71,7 +71,7 @@ class Df_Core_Model_Money extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__AMOUNT, RM_V_FLOAT);
+		$this->_prop(self::$P__AMOUNT, DF_V_FLOAT);
 	}
 	/** @var string */
 	private static $P__AMOUNT = 'amount';

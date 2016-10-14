@@ -35,7 +35,7 @@ class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminh
 	{
 		$this->_initCustomer();
 		$this->loadLayout();
-		$this->getResponse()->setBody(rm_render(
+		$this->getResponse()->setBody(df_render(
 			new Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balance_History_Grid
 		));
 	}

@@ -45,7 +45,7 @@ abstract class Df_Core_Model_Form extends Df_Core_Model {
 	}
 
 	/** @return array */
-	private function getZendFormValues() {return $this->cfg(self::P__ZEND_FORM_VALUES);}
+	private function getZendFormValues() {return $this->cfg(self::P__ZEND_FODF_VALUES);}
 
 	/**
 	 * @override
@@ -53,7 +53,7 @@ abstract class Df_Core_Model_Form extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ZEND_FORM_VALUES, RM_V_ARRAY);
+		$this->_prop(self::P__ZEND_FODF_VALUES, DF_V_ARRAY);
 	}
-	const P__ZEND_FORM_VALUES = 'zend_form_values';
+	const P__ZEND_FODF_VALUES = 'zend_form_values';
 }

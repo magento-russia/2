@@ -198,7 +198,7 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__IMAGE_PATH, RM_V_STRING_NE)
+			->_prop(self::$P__IMAGE_PATH, DF_V_STRING_NE)
 			->_prop(self::$P__PRODUCT, Df_Catalog_Model_Product::_C)
 		;
 	}

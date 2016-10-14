@@ -1,14 +1,13 @@
 <?php
 /**
- * @used-by Df_Catalog_Block_Category_Navigation::_toHtml()
  * @param string $class
  * @param string|null $content
  * @return string
  */
-function rm_div($class, $content = null) {return rm_tag('div', array('class' => $class), $content);}
+function df_div($class, $content = null) {return df_tag('div', ['class' => $class], $content);}
 
 /**
- * @used-by rm_html_select_yesno()
+ * @used-by df_html_select_yesno()
  * @used-by Df_Admin_Block_Column_Select::renderHtml()
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Country::getDropdownAsHtml()
  * @param array(int|string => string)|array(array(string => int|string|mixed[])) $options
@@ -16,8 +15,8 @@ function rm_div($class, $content = null) {return rm_tag('div', array('class' => 
  * @param array(string => string) $attributes [optional]
  * @return string
  */
-function rm_html_select(array $options, $selected = null, array $attributes = array()) {
-	return Df_Core_Model_Format_Html_Select::render($options, $selected, $attributes);
+function df_html_select(array $options, $selected = null, array $attributes = []) {
+	return Df_Core_Format_Html_Select::render($options, $selected, $attributes);
 }
 
 /**
@@ -26,23 +25,40 @@ function rm_html_select(array $options, $selected = null, array $attributes = ar
  * @param array(string => string) $attributes [optional]
  * @return string
  */
-function rm_html_select_yesno($selected = null, array $attributes = array()) {
-	return rm_html_select(array('нет', 'да'), is_null($selected) ? null : (int)$selected, $attributes);
+function df_html_select_yesno($selected = null, array $attributes = []) {
+	return df_html_select(['нет', 'да'], is_null($selected) ? null : (int)$selected, $attributes);
 }
+
+/**
+ * 2015-12-21
+ * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
+ * @param string $css
+ * @return string
+ */
+function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
  * 2015-04-16
  * Отныне значением атрибута может быть массив:
- * @see Df_Core_Model_Format_Html_Tag::getAttributeAsText()
+ * @see Df_Core_Format_Html_Tag::getAttributeAsText()
  * Передавать в качестве значения массив имеет смысл, например, для атрибута «class».
- * @used-by rm_div()
+ *
+ * 2016-05-30
+ * Отныне в качестве параметра $attributes можно передавать строку вместо массива.
+ * В этом случае значение $attributes считается классом CSS формируемого элемента.
+ *
+ * @used-by df_div()
  * @param string $tag
- * @param array(string => string|string[]|int|null) $attributes [optional]
+ * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param string $content [optional]
+ * @param bool $multiline [optional]
  * @return string
  */
-function rm_tag($tag, array $attributes = array(), $content = null) {
-	return Df_Core_Model_Format_Html_Tag::render($tag, $attributes, $content);
+function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
+	if (!is_array($attributes)) {
+		$attributes = ['class' => $attributes];
+	};
+	return Df_Core_Format_Html_Tag::render($tag, $attributes, $content, $multiline);
 }
 
 /**
@@ -53,12 +69,10 @@ function rm_tag($tag, array $attributes = array(), $content = null) {
  * @param string|null $cssClassForItem [optional]
  * @return string
  */
-function rm_tag_list(
+function df_tag_list(
 	array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
 ) {
-	return Df_Core_Model_Format_Html_List::render(
+	return Df_Core_Format_Html_List::render(
 		$items, $isOrdered, $cssClassForList, $cssClassForItem
 	);
 }
-
-

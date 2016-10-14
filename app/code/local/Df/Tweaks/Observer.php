@@ -29,11 +29,11 @@ class Df_Tweaks_Observer {
 				,$observer
 			);
 			if (
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
 					df_cfg()->tweaks()->catalog()->product()->view()->needHideTags()
 			) {
-				rm_block_remove('product_tag_list');
+				df_block_remove('product_tag_list');
 			}
 		}
 		catch (Exception $e) {
@@ -49,7 +49,7 @@ class Df_Tweaks_Observer {
 	public function catalog_product_is_salable_after(Varien_Event_Observer $observer) {
 		if (df_installed()) {
 			if (
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+						df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 					&&
 						df_cfg()->tweaks()->catalog()->product()->view()->needHideAddToCart()
 				||

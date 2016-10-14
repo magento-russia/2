@@ -18,7 +18,7 @@ class Df_Uniteller_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 			,self::REQUEST_VAR__CUSTOMER__NAME_LAST => $this->nameLast()
 			,self::REQUEST_VAR__CUSTOMER__NAME_MIDDLE => $this->nameMiddle()
 			,self::REQUEST_VAR__CUSTOMER__PHONE =>
-				'+' . Df_Core_Model_Format_MobilePhoneNumber::i($this->phone())->getOnlyDigits()
+				'+' . Df_Core_Format_MobilePhoneNumber::i($this->phone())->getOnlyDigits()
 			,self::REQUEST_VAR__CUSTOMER__STATE => $this->regionCode()
 			,self::REQUEST_VAR__CUSTOMER__ZIP => $this->postCode()
 			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()

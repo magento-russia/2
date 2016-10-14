@@ -57,7 +57,7 @@ abstract class Df_1C_Cml2_Import_Data_Document extends Df_Core_Xml_Parser_Entity
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PATH, RM_V_STRING_NE);
+		$this->_prop(self::$P__PATH, DF_V_STRING_NE);
 	}
 	/** @var string */
 	protected static $P__PATH = 'path';

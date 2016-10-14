@@ -38,7 +38,7 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward
 	 * @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward
 	 */
 	protected function _prepareLayout() {
-		$accordion = rm_block_l('adminhtml/widget_accordion');
+		$accordion = df_block_l('adminhtml/widget_accordion');
 		$accordion->addItem('reward_points_history', array(
 			'title'	=> df_h()->reward()->__('Reward Points History')
 			,'open' => false

@@ -33,7 +33,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	public function getLabelHtml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_tag(
+				df_tag(
 					'label'
 					,array_filter(array(
 						'for' => $this->getDomId()
@@ -218,9 +218,9 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__CSS_CLASSES, RM_V_STRING)
-			->_prop(self::$P__ORDERING, RM_V_NAT0)
-			->_prop(self::$P__TYPE, RM_V_STRING_NE)
+			->_prop(self::$P__CSS_CLASSES, DF_V_STRING)
+			->_prop(self::$P__ORDERING, DF_V_NAT0)
+			->_prop(self::$P__TYPE, DF_V_STRING_NE)
 		;
 	}
 	/** @var string */

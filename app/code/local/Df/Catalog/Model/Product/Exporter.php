@@ -397,11 +397,11 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ADDITIONAL_ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::P__LIMIT, RM_V_INT, false)
-			->_prop(self::P__NEED_LOAD_ALL_ATTRIBUTES, RM_V_BOOL, false)
-			->_prop(self::P__NEED_REMOVE_NOT_SALABLE, RM_V_BOOL, false)
-			->_prop(self::P__NEED_REMOVE_OUT_OF_STOCK, RM_V_BOOL, false)
+			->_prop(self::P__ADDITIONAL_ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::P__LIMIT, DF_V_INT, false)
+			->_prop(self::P__NEED_LOAD_ALL_ATTRIBUTES, DF_V_BOOL, false)
+			->_prop(self::P__NEED_REMOVE_NOT_SALABLE, DF_V_BOOL, false)
+			->_prop(self::P__NEED_REMOVE_OUT_OF_STOCK, DF_V_BOOL, false)
 			->_prop(self::P__RULE, 'Mage_CatalogRule_Model_Rule', false)
 		;
 	}

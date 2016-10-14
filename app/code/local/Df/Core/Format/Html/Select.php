@@ -1,15 +1,15 @@
 <?php
-final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
+final class Df_Core_Format_Html_Select extends Df_Core_Model {
 	/**
 	 * @used-by render()
 	 * @return string
 	 */
 	private function _render() {
-		return rm_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());
+		return df_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());
 	}
 
 	/** @return array(string => string) */
-	private function getAttributes() {return $this->cfg(self::$P__ATTRIBUTES, array());}
+	private function getAttributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
 
 	/** @return array(int|string => string)|array(array(string => int|string|mixed[])) */
 	private function getOptions() {return $this->cfg(self::$P__OPTIONS);}
@@ -50,7 +50,7 @@ final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 			}
 			else {
 				// опция имеет формат array('label' => 'группа опций', 'value' => array(...))
-				$result = rm_tag('optgroup', array('label' => $label), $this->implodeTags(
+				$result = df_tag('optgroup', ['label' => $label], $this->implodeTags(
 					$this->renderOptions($value)
 				));
 			}
@@ -64,7 +64,7 @@ final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 	 */
 	private function renderOptions(array $options) {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		foreach ($options as $key => $option) {
 			/** @var int|string $key */
 			/** @var string|array(array(string => int|string|mixed[])) $option */
@@ -80,11 +80,11 @@ final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 	 */
 	private function renderOptionTag($value, $label) {
 		/** @var array(string => string) $attributes */
-		$attributes = array('value' => $value, 'label' => $label);
+		$attributes = ['value' => $value, 'label' => $label];
 		if ($value === $this->getSelected()) {
 			$attributes['selected'] = 'selected';
 		}
-		return rm_tag('option', $attributes, $label);
+		return df_tag('option', $attributes, $label);
 	}
 
 	/**
@@ -94,9 +94,9 @@ final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::$P__OPTIONS, RM_V_ARRAY)
-			->_prop(self::$P__SELECTED, RM_V_STRING, false)
+			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::$P__OPTIONS, DF_V_ARRAY)
+			->_prop(self::$P__SELECTED, DF_V_STRING, false)
 		;
 	}
 	/** @var string */
@@ -107,19 +107,17 @@ final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 	private static $P__SELECTED = 'selected';
 
 	/**
-	 * @used-by rm_html_select()
+	 * @used-by df_html_select()
 	 * @param array(int|string => string)|array(array(string => int|string|mixed[])) $options
 	 * @param string|null $selected [optional]
 	 * @param array(string => string) $attributes [optional]
 	 * @return string
 	 */
-	public static function render(array $options, $selected = null, array $attributes = array()) {
-		/** @var Df_Core_Model_Format_Html_Select $i */
-		$i = new self(array(
+	public static function render(array $options, $selected = null, array $attributes = []) {
+		return (new self([
 			self::$P__OPTIONS => $options
 			, self::$P__SELECTED => $selected
 			, self::$P__ATTRIBUTES => $attributes
-		));
-		return $i->_render();
+		]))->_render();
 	}
 }

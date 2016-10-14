@@ -74,7 +74,7 @@ abstract class Df_YandexMoney_Model_Request_Secondary extends Df_Payment_Model_R
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__TOKEN, RM_V_STRING_NE);
+		$this->_prop(self::P__TOKEN, DF_V_STRING_NE);
 	}
 	const P__TOKEN = 'token';
 }

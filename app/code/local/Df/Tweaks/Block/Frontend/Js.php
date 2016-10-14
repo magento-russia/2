@@ -6,7 +6,7 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 	 * @used-by Df_Core_Block_Abstract::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	public function cacheKeySuffix() {return rm_handles();}
+	public function cacheKeySuffix() {return df_handles();}
 	
 	/** @return string */
 	public function getOptionsAsJson() {

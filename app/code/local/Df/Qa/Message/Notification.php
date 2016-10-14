@@ -14,7 +14,7 @@ class Df_Qa_Message_Notification extends Df_Qa_Message {
 	 */
 	protected final function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__NOTIFICATION, RM_V_STRING_NE);
+		$this->_prop(self::P__NOTIFICATION, DF_V_STRING_NE);
 	}
 	const P__NOTIFICATION = 'notification';
 	/**

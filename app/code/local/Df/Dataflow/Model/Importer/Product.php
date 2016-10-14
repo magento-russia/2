@@ -624,7 +624,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__SKIP_CUSTOM_OPTIONS, RM_V_BOOL);
+		$this->_prop(self::P__SKIP_CUSTOM_OPTIONS, DF_V_BOOL);
 	}
 	const _C = __CLASS__;
 	const P__SKIP_CUSTOM_OPTIONS = 'skip_custom_options';

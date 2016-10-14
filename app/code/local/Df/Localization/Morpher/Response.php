@@ -81,7 +81,7 @@ class Df_Localization_Morpher_Response extends Df_Core_Xml_Parser_Entity {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CASE_NOMINATIVE, RM_V_STRING_NE);
+		$this->_prop(self::P__CASE_NOMINATIVE, DF_V_STRING_NE);
 	}
 	const _C = __CLASS__;
 	const P__CASE_NOMINATIVE = 'case_nominative';

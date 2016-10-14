@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_NumberInWords extends Df_Core_Model {
+class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	/** @return string */
 	public function getFractionalValueInWords() {
 		if (!isset($this->{__METHOD__})) {
@@ -92,14 +92,14 @@ class Df_Core_Model_Format_NumberInWords extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__FRACTIONAL_PART_GENDER, RM_V_STRING_NE)
-			->_prop(self::P__FRACTIONAL_PART_PRECISION, RM_V_NAT0)
-			->_prop(self::P__FRACTIONAL_PART_UNITS, RM_V_ARRAY)
-			->_prop(self::P__INTEGER_PART_GENDER, RM_V_STRING_NE)
-			->_prop(self::P__INTEGER_PART_UNITS, RM_V_ARRAY)
+			->_prop(self::P__FRACTIONAL_PART_GENDER, DF_V_STRING_NE)
+			->_prop(self::P__FRACTIONAL_PART_PRECISION, DF_V_NAT0)
+			->_prop(self::P__FRACTIONAL_PART_UNITS, DF_V_ARRAY)
+			->_prop(self::P__INTEGER_PART_GENDER, DF_V_STRING_NE)
+			->_prop(self::P__INTEGER_PART_UNITS, DF_V_ARRAY)
 			// Обратите внимание, что целые числа не проходят валидацию is_float,
 			// но проходят валидацию Zend_Validate_Float
-			->_prop(self::P__NUMBER, RM_V_FLOAT)
+			->_prop(self::P__NUMBER, DF_V_FLOAT)
 		;
 	}
 
@@ -140,8 +140,8 @@ class Df_Core_Model_Format_NumberInWords extends Df_Core_Model {
 		df_assert_in(
 			$gender
 			,array(
-				Df_Core_Model_Format_NumberInWords::GENDER__MALE
-				,Df_Core_Model_Format_NumberInWords::GENDER__FEMALE
+				Df_Core_Format_NumberInWords::GENDER__MALE
+				,Df_Core_Format_NumberInWords::GENDER__FEMALE
 			)
 		)
 		;
@@ -203,7 +203,7 @@ class Df_Core_Model_Format_NumberInWords extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Core_Model_Format_NumberInWords
+	 * @return Df_Core_Format_NumberInWords
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 

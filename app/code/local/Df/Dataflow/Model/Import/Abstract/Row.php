@@ -127,8 +127,8 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ORDERING, RM_V_INT)
-			->_prop(self::P__ROW_AS_ARRAY, RM_V_ARRAY)
+			->_prop(self::P__ORDERING, DF_V_INT)
+			->_prop(self::P__ROW_AS_ARRAY, DF_V_ARRAY)
 		;
 	}
 	/** @used-by Df_Dataflow_Model_Importer_Row::_construct() */

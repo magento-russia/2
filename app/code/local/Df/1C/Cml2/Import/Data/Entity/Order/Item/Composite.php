@@ -45,7 +45,7 @@ class Df_1C_Cml2_Import_Data_Entity_Order_Item_Composite
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__SIMPLE_ITEMS, RM_V_ARRAY);
+		$this->_prop(self::$P__SIMPLE_ITEMS, DF_V_ARRAY);
 	}
 	/** @var string */
 	private static $P__SIMPLE_ITEMS = 'simple_items';

@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
+class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
 	/** @return string */
 	public function getOnlyDigits() {
 		if (!isset($this->{__METHOD__})) {
@@ -85,7 +85,7 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__VALUE,	RM_V_STRING, false)
+			->_prop(self::P__VALUE,	DF_V_STRING, false)
 			->_prop(self::P__COUNTRY, Df_Directory_Model_Country::_C, false)
 		;
 	}
@@ -96,7 +96,7 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 	const P__VALUE = 'value';
 	/**
 	 * @param Df_Sales_Model_Quote_Address|Mage_Sales_Model_Quote_Address $address
-	 * @return Df_Core_Model_Format_MobilePhoneNumber
+	 * @return Df_Core_Format_MobilePhoneNumber
 	 */
 	public static function fromQuoteAddress(Df_Sales_Model_Quote_Address $address) {
 		return self::i($address->getTelephone());
@@ -119,7 +119,7 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 	 * @static
 	 * @param string|null $value
 	 * @param Df_Directory_Model_Country|null $country [optional]
-	 * @return Df_Core_Model_Format_MobilePhoneNumber
+	 * @return Df_Core_Format_MobilePhoneNumber
 	 */
 	public static function i($value = '', $country = null) {
 		return new self(array(self::P__VALUE => $value, self::P__COUNTRY => $country));

@@ -66,11 +66,11 @@ class Df_Admin_Model_ClassInfo extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__CONFIG_FILE_PATH, RM_V_STRING)
-			->_prop(self::$P__MODULE_NAME, RM_V_STRING)
-			->_prop(self::$P__NAME, RM_V_STRING)
-			->_prop(self::$P__NAME_MF, RM_V_STRING)
-			->_prop(self::$P__TYPE, RM_V_STRING)
+			->_prop(self::$P__CONFIG_FILE_PATH, DF_V_STRING)
+			->_prop(self::$P__MODULE_NAME, DF_V_STRING)
+			->_prop(self::$P__NAME, DF_V_STRING)
+			->_prop(self::$P__NAME_MF, DF_V_STRING)
+			->_prop(self::$P__TYPE, DF_V_STRING)
 		;
 	}
 	/**

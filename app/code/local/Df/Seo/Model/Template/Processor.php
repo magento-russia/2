@@ -74,8 +74,8 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__TEXT, RM_V_STRING)
-			->_prop(self::P__OBJECTS, RM_V_ARRAY)
+			->_prop(self::P__TEXT, DF_V_STRING)
+			->_prop(self::P__OBJECTS, DF_V_ARRAY)
 		;
 	}
 	/** @used-by Df_Seo_Model_Template_Expression::_construct() */

@@ -34,8 +34,8 @@ class Df_1C_Config_MapItem_PriceType extends Df_Admin_Config_MapItem {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CUSTOMER_GROUP, RM_V_INT, false)
-			->_prop(self::P__PRICE_TYPE, RM_V_STRING, false)
+			->_prop(self::P__CUSTOMER_GROUP, DF_V_INT, false)
+			->_prop(self::P__PRICE_TYPE, DF_V_STRING, false)
 		;
 	}
 	/** @used-by Df_1C_Config_Api_Product_Prices::_getMap() */

@@ -194,8 +194,8 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__CREDIT_AMOUNT, RM_V_FLOAT)
-			->_prop(self::$P__NEXT_RETRY, RM_V_NAT0)
+			->_prop(self::$P__CREDIT_AMOUNT, DF_V_FLOAT)
+			->_prop(self::$P__NEXT_RETRY, DF_V_NAT0)
 		;
 	}
 	/** @var string */

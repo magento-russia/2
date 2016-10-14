@@ -68,7 +68,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @param mixed $default [optional]
 	 * @return bool
 	 */
-	public function getVarFlag($key, $default = false) {return $this->getVar($key, $default, RM_V_BOOL);}
+	public function getVarFlag($key, $default = false) {return $this->getVar($key, $default, DF_V_BOOL);}
 
 	/**
 	 * @used-by getVar()
@@ -106,7 +106,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @param int $default [optional]
 	 * @return int
 	 */
-	protected function int($key, $default = 0) {return $this->getVar($key, $default, RM_V_INT);}
+	protected function int($key, $default = 0) {return $this->getVar($key, $default, DF_V_INT);}
 
 	/** @return Df_Checkout_Module_Config_Manager */
 	protected function manager() {return Df_Checkout_Module_Config_Manager::s($this->main());}
@@ -117,7 +117,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @param string $key
 	 * @return int
 	 */
-	protected function nat($key) {return $this->getVar($key, null, RM_V_NAT);}
+	protected function nat($key) {return $this->getVar($key, null, DF_V_NAT);}
 
 	/**
 	 * 2015-04-05
@@ -126,7 +126,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @param int $default [optional]
 	 * @return int
 	 */
-	protected function nat0($key, $default = 0) {return $this->getVar($key, $default, RM_V_NAT0);}
+	protected function nat0($key, $default = 0) {return $this->getVar($key, $default, DF_V_NAT0);}
 
 	/**
 	 * @override

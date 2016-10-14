@@ -9,7 +9,7 @@ abstract class Df_Core_Model_Geo_Locator extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__IP_ADDRESS, RM_V_STRING_NE);
+		$this->_prop(self::$P__IP_ADDRESS, DF_V_STRING_NE);
 	}
 	/** @var string */
 	private static $P__IP_ADDRESS = 'is_address';

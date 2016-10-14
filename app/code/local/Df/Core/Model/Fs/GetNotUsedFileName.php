@@ -121,9 +121,9 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DATE_PARTS_SEPARATOR, RM_V_STRING)
-			->_prop(self::$P__DIRECTORY, RM_V_STRING_NE)
-			->_prop(self::$P__TEMPLATE, RM_V_STRING_NE)
+			->_prop(self::$P__DATE_PARTS_SEPARATOR, DF_V_STRING)
+			->_prop(self::$P__DIRECTORY, DF_V_STRING_NE)
+			->_prop(self::$P__TEMPLATE, DF_V_STRING_NE)
 		;
 	}
 	/** @var string */

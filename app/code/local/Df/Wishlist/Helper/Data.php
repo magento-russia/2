@@ -13,7 +13,7 @@ class Df_Wishlist_Helper_Data extends Mage_Wishlist_Helper_Data {
 			if (df_module_enabled(Df_Core_Module::TWEAKS)) {
 				if (
 						(
-								rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+								df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 							&&
 								df_cfg()->tweaks()->catalog()->product()->view()->needHideAddToWishlist()
 						)

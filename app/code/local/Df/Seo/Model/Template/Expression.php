@@ -69,8 +69,8 @@ class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__PROCESSOR, Df_Seo_Model_Template_Processor::_C)
-			->_prop(self::P__RAW, RM_V_STRING)
-			->_prop(self::P__CLEAN, RM_V_STRING)
+			->_prop(self::P__RAW, DF_V_STRING)
+			->_prop(self::P__CLEAN, DF_V_STRING)
 		;
 	}
 	/** @used-by Df_Seo_Model_Template_Adapter::_construct() */

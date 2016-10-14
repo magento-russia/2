@@ -22,7 +22,7 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance exte
 		}
 		else {
 			$this->setChild('grid',
-				rm_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid)
+				df_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid)
 			);
 		}
 		return parent::_prepareLayout();

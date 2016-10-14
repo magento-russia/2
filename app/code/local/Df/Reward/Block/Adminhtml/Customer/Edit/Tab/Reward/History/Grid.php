@@ -163,6 +163,6 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History_Grid
 	 * @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History_Grid
 	 */
 	public static function i($customerId) {
-		return rm_block_l(new self(array(self::$P__CUSTOMER_ID => $customerId)));
+		return df_block_l(new self(array(self::$P__CUSTOMER_ID => $customerId)));
 	}
 }

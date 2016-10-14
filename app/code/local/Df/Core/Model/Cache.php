@@ -349,8 +349,8 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__TAGS, RM_V_ARRAY)
-			->_prop(self::$P__TYPE, RM_V_STRING)
+			->_prop(self::P__TAGS, DF_V_ARRAY)
+			->_prop(self::$P__TYPE, DF_V_STRING)
 		;
 	}
 	/**

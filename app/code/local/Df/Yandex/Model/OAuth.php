@@ -83,9 +83,9 @@ abstract class Df_Yandex_Model_OAuth extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__APP_ID, RM_V_STRING_NE)
-			->_prop(self::P__APP_PASSWORD, RM_V_STRING_NE)
-			->_prop(self::P__TOKEN_TEMPOPARY, RM_V_STRING_NE)
+			->_prop(self::P__APP_ID, DF_V_STRING_NE)
+			->_prop(self::P__APP_PASSWORD, DF_V_STRING_NE)
+			->_prop(self::P__TOKEN_TEMPOPARY, DF_V_STRING_NE)
 		;
 	}
 	const P__APP_ID = 'app_id';

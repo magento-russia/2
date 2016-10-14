@@ -50,18 +50,18 @@ class Df_Sales_Block_Admin_Grid_OrderItem extends Df_Core_Block_Admin {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__PRODUCT_NAME, RM_V_STRING_NE)
-			->_prop(self::P__PRODUCT_SKU, RM_V_STRING_NE)
+			->_prop(self::P__PRODUCT_NAME, DF_V_STRING_NE)
+			->_prop(self::P__PRODUCT_SKU, DF_V_STRING_NE)
 			/**
 			 * Как ни странно, система может передать вес в виде строки вида «1.0000».
 			 * http://magento-forum.ru/topic/4532/
 			 * По этой причине для свойства self::P__PRODUCT_QTY
-			 * нельзя использовать валидатор RM_V_NAT0.
+			 * нельзя использовать валидатор DF_V_NAT0.
 			 */
-			->_prop(self::P__PRODUCT_QTY, RM_V_STRING_NE)
-			->_prop(self::P__ORDER_ITEM_ID, RM_V_NAT)
-			->_prop(self::P__PRODUCT_ID, RM_V_NAT)
-			->_prop(self::P__ROW_TOTAL, RM_V_FLOAT)
+			->_prop(self::P__PRODUCT_QTY, DF_V_STRING_NE)
+			->_prop(self::P__ORDER_ITEM_ID, DF_V_NAT)
+			->_prop(self::P__PRODUCT_ID, DF_V_NAT)
+			->_prop(self::P__ROW_TOTAL, DF_V_FLOAT)
 		;
 	}
 

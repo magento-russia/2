@@ -15,7 +15,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Row extends Df_Core_Block_Abs
 	 * @return string
 	 */
 	protected function _toHtml() {
-		return rm_tag('li', array('class' => $this->getCssClassesAsText()), df_cc_n(array_map(
+		return df_tag('li', array('class' => $this->getCssClassesAsText()), df_cc_n(array_map(
 			/** @uses wrapField() */
 			array($this, 'wrapField')
 			/** @uses Df_Checkout_Block_Frontend_Ergonomic_Address_Field::toHtml() */
@@ -65,7 +65,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Row extends Df_Core_Block_Abs
 	 * @return string
 	 */
 	private function wrapField($fieldAsHtml, $fieldType) {
-		return rm_tag('div', array('class' => df_output()->getCssClassesAsString(array(
+		return df_tag('div', array('class' => df_output()->getCssClassesAsString(array(
 			'field', 'df-field-' . $fieldType
 		))), $fieldAsHtml);
 	}

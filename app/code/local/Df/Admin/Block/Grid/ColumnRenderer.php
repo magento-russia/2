@@ -53,7 +53,7 @@ class Df_Admin_Block_Grid_ColumnRender extends Df_Core_Block_Admin {
 	protected static function rc(
 		$class, Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract $renderer, Varien_Object $row
 	) {
-		return rm_render(rm_ic($class, __CLASS__, array(
+		return df_render(rm_ic($class, __CLASS__, array(
 			self::$P__RENDERER => $renderer, self::$P__ROW => $row
 		)));
 	}

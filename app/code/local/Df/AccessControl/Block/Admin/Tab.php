@@ -33,11 +33,11 @@ class Df_AccessControl_Block_Admin_Tab
 	public function isModuleEnabled() {return $this->getRole()->isModuleEnabled();}
 
 	/** @return string */
-	public function renderCategoryTree() {return rm_render('Df_AccessControl_Block_Admin_Tab_Tree');}
+	public function renderCategoryTree() {return df_render('Df_AccessControl_Block_Admin_Tab_Tree');}
 
 	/** @return string */
 	public function renderStoreSwitcher() {
-		return rm_render('adminhtml/store_switcher', 'store/switcher/enhanced.phtml');
+		return df_render('adminhtml/store_switcher', 'store/switcher/enhanced.phtml');
 	}
 
 	/** @return Df_AccessControl_Model_Role */

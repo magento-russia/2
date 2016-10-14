@@ -88,7 +88,7 @@ abstract class Df_Admin_Block_Field_DynamicTable
 	 * @return string
 	 */
 	protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element) {
-		return rm_tag('div'
+		return df_tag('div'
 			/**
 			 * 2015-04-18
 			 * Класс CSS используется для задания ширины таблицы и колонок:

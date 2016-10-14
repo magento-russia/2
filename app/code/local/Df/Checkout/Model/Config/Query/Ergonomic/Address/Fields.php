@@ -39,7 +39,7 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ADDRESS_TYPE, RM_V_STRING_NE);
+		$this->_prop(self::P__ADDRESS_TYPE, DF_V_STRING_NE);
 	}
 	const _C = __CLASS__;
 	const P__ADDRESS_TYPE = 'address_type';

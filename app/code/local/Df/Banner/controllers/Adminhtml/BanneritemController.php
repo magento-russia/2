@@ -35,8 +35,8 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 			$this->_addBreadcrumb(df_mage()->adminhtml()->__('Banner Item News'), df_mage()->adminhtml()->__('Banner Item News'));
 			$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 			$this
-				->_addContent(rm_block_l(new Df_Banner_Block_Adminhtml_Banneritem_Edit))
-				->_addLeft(rm_block_l(new Df_Banner_Block_Adminhtml_Banneritem_Edit_Tabs))
+				->_addContent(df_block_l(new Df_Banner_Block_Adminhtml_Banneritem_Edit))
+				->_addLeft(df_block_l(new Df_Banner_Block_Adminhtml_Banneritem_Edit_Tabs))
 			;
 			$this->renderLayout();
 		} else {

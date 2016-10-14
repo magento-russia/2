@@ -28,7 +28,7 @@ class Df_Spl_Iterator_FilesByExtension extends Df_Spl_Iterator_Directory {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__EXTENSION, RM_V_STRING_NE);
+		$this->_prop(self::P__EXTENSION, DF_V_STRING_NE);
 	}
 	const P__EXTENSION = 'extension';
 	/**

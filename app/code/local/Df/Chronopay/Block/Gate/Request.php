@@ -108,6 +108,6 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	 * @return string
 	 */
 	public static function r(Df_Chronopay_Model_Gate $method, Mage_Payment_Model_Info $info) {
-		return rm_render(__CLASS__, array(self::$P__METHOD => $method, self::$P__INFO => $info));
+		return df_render(__CLASS__, array(self::$P__METHOD => $method, self::$P__INFO => $info));
 	}
 }

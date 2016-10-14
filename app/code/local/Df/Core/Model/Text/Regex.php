@@ -293,10 +293,10 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__PATTERN, RM_V_STRING_NE)
-			->_prop(self::$P__SUBJECT, RM_V_STRING)
-			->_prop(self::$P__THROW_ON_ERROR, RM_V_BOOL, false)
-			->_prop(self::$P__THROW_ON_NOT_MATCH, RM_V_BOOL, false)
+			->_prop(self::$P__PATTERN, DF_V_STRING_NE)
+			->_prop(self::$P__SUBJECT, DF_V_STRING)
+			->_prop(self::$P__THROW_ON_ERROR, DF_V_BOOL, false)
+			->_prop(self::$P__THROW_ON_NOT_MATCH, DF_V_BOOL, false)
 		;
 	}
 	/** @var string */

@@ -27,7 +27,7 @@ if ('hidden' === $element->getType()) { ?>
             <?php
                 echo $html;
                 if ($element->getNote()) {
-                    echo rm_tag('div', array('class' => 'note'), $t->__($element->getNote()));
+                    echo df_tag('div', array('class' => 'note'), $t->__($element->getNote()));
                 }
             ?>
         </td>
@@ -52,7 +52,7 @@ if ('hidden' === $element->getType()) { ?>
                         $toggleCode = 'toggleValueElements(this, this.parentNode.parentNode);';
                     }
                     /** @var array(string => string) $useDefault */
-                    echo rm_tag('input', array(
+                    echo df_tag('input', array(
                         'type' => 'checkbox'
                         ,'name' => 'use_default[]'
                         ,'id' => "{$element->getHtmlId()}_default"

@@ -1044,8 +1044,8 @@
 			<Df_Core_Model_Event_Controller_Action_Postdispatch/>
 			<Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter/>
 			<Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore/>
-			<Df_Core_Model_Format_Html_Tag/>
-			<Df_Core_Model_Format_NounForAmounts/>
+			<Df_Core_Format_Html_Tag/>
+			<Df_Core_Format_NounForAmounts/>
 			<Df_Core_Model_Handler/>
 			<Df_Core_Model_Units_Weight/>
 			<Df_Core_Module/>
@@ -1850,12 +1850,12 @@
 			<Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter/>
 			<Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore/>
 			<Df_Core_Model_Form/>
-			<Df_Core_Model_Format_Date/>
-			<Df_Core_Model_Format_Html_Select/>
-			<Df_Core_Model_Format_Html_Tag/>
-			<Df_Core_Model_Format_MobilePhoneNumber/>
-			<Df_Core_Model_Format_NounForAmounts/>
-			<Df_Core_Model_Format_NumberInWords/>
+			<Df_Core_Format_Date/>
+			<Df_Core_Format_Html_Select/>
+			<Df_Core_Format_Html_Tag/>
+			<Df_Core_Format_MobilePhoneNumber/>
+			<Df_Core_Format_NounForAmounts/>
+			<Df_Core_Format_NumberInWords/>
 			<Df_Core_Model_Handler/>
 			<Df_Core_Model_InputRequest/>
 			<Df_Core_Model_Message_Collection/>
@@ -3533,7 +3533,7 @@
 			<Df_Core_Model_Event_Controller_Action_Postdispatch/>
 			<Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter/>
 			<Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore/>
-			<Df_Core_Model_Format_NounForAmounts/>
+			<Df_Core_Format_NounForAmounts/>
 			<Df_Core_Model_Handler/>
 			<Df_Core_Model_Units_Weight/>
 			<Df_CustomerBalance_Helper_Data/>

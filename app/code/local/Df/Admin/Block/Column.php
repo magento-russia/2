@@ -104,6 +104,6 @@ abstract class Df_Admin_Block_Column extends Df_Core_Block_Admin {
 		/** @var Df_Admin_Block_Column $block */
 		$block = new $class(array(self::$P__COLUMN => $column, self::$P__FIELD => $field));
 		df_assert($block instanceof Df_Admin_Block_Column);
-		return rm_render($block);
+		return df_render($block);
 	}
 }

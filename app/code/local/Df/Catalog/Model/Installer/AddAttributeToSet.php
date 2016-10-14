@@ -39,10 +39,10 @@ class Df_Catalog_Model_Installer_AddAttributeToSet extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__GROUP_NAME, RM_V_STRING_NE, false)
-			->_prop(self::$P__ATTRIBUTE_CODE, RM_V_STRING_NE)
-			->_prop(self::$P__SET_ID, RM_V_INT)
-			->_prop(self::$P__ORDERING, RM_V_INT, false)
+			->_prop(self::$P__GROUP_NAME, DF_V_STRING_NE, false)
+			->_prop(self::$P__ATTRIBUTE_CODE, DF_V_STRING_NE)
+			->_prop(self::$P__SET_ID, DF_V_INT)
+			->_prop(self::$P__ORDERING, DF_V_INT, false)
 		;
 	}
 	/** @var string */

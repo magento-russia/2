@@ -131,15 +131,15 @@ class Df_Core_Validator {
 			/** @var array(string => string) $map */
 			static $map; if (!$map) {$map = array(
 				RM_F_TRIM => 'Df_Zf_Filter_String_Trim'
-				,RM_V_ARRAY => 'Df_Zf_Validate_Array'
-				,RM_V_BOOL => 'Df_Zf_Validate_Boolean'
-				,RM_V_FLOAT => 'Df_Zf_Validate_Float'
-				,RM_V_INT => 'Df_Zf_Validate_Int'
-				,RM_V_ISO2 => 'Df_Zf_Validate_String_Iso2'
-				,RM_V_NAT => 'Df_Zf_Validate_Nat'
-				,RM_V_NAT0 => 'Df_Zf_Validate_Nat0'
-				,RM_V_STRING => 'Df_Zf_Validate_String'
-				,RM_V_STRING_NE => 'Df_Zf_Validate_String_NotEmpty'
+				,DF_V_ARRAY => 'Df_Zf_Validate_Array'
+				,DF_V_BOOL => 'Df_Zf_Validate_Boolean'
+				,DF_V_FLOAT => 'Df_Zf_Validate_Float'
+				,DF_V_INT => 'Df_Zf_Validate_Int'
+				,DF_V_ISO2 => 'Df_Zf_Validate_String_Iso2'
+				,DF_V_NAT => 'Df_Zf_Validate_Nat'
+				,DF_V_NAT0 => 'Df_Zf_Validate_Nat0'
+				,DF_V_STRING => 'Df_Zf_Validate_String'
+				,DF_V_STRING_NE => 'Df_Zf_Validate_String_NotEmpty'
 			);}
 			/** @var Zend_Validate_Interface|Zend_Filter_Interface $result */
 			if (isset($map[$name])) {

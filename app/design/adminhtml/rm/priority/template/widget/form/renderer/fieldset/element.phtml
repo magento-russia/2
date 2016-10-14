@@ -13,7 +13,7 @@ if (!$element->getNoDisplay()) {
 	$html = trim($element->getElementHtml());
 	/** @var string $result */
 	if ('hidden' === $element->getType())  {
-		$result = rm_tag('td', array('colspan' => 2, 'class' => 'hidden'), $html);
+		$result = df_tag('td', array('colspan' => 2, 'class' => 'hidden'), $html);
 	}
 	else {
 		/** @var array(string -> string|string[]) $css */
@@ -28,14 +28,14 @@ if (!$element->getNoDisplay()) {
 				$entry = array($entry, "{$element->getFieldsetHtmlClass()}-{$entry}");
 			}
 		}
-		$result = rm_tag('td', array('class' => $css['label']), trim($element->getLabelHtml()));
+		$result = df_tag('td', array('class' => $css['label']), trim($element->getLabelHtml()));
 		if ($element->getNote()) {
-			$html .= rm_tag('div', array(
+			$html .= df_tag('div', array(
 				'class' => $css['note']
 				, 'id' => "note_{$element->getId()}"
 			), $element->getNote());
 		}
-		$result .= rm_tag('td', array('class' => $css['value']), $html);
+		$result .= df_tag('td', array('class' => $css['value']), $html);
 	}
 	/**
 	 * 2016-05-04
@@ -57,5 +57,5 @@ if (!$element->getNoDisplay()) {
 	 * Удивительно, что его год (2015-04-16 - 2016-05-03) никто не замечал,
 	 * и только сейчас заметили: http://magento-forum.ru/topic/5422/
 	 */
-	echo rm_tag('tr', array('id' => $element->getHtmlContainerId()), $result);
+	echo df_tag('tr', array('id' => $element->getHtmlContainerId()), $result);
 }

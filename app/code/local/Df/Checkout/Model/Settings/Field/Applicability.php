@@ -39,7 +39,7 @@ class Df_Checkout_Model_Settings_Field_Applicability extends Df_Core_Model_Setti
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ADDRESS_TYPE, RM_V_STRING_NE)
+			->_prop(self::P__ADDRESS_TYPE, DF_V_STRING_NE)
 			->addData(array(self::P__SECTION => 'df_checkout'))
 		;
 	}

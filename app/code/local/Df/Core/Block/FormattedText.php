@@ -42,12 +42,12 @@ class Df_Core_Block_FormattedText extends Df_Core_Block_Template_NoCache {
 			$result = $this->font()->applyLetterCase($this->getRawText());
 			if ($this->font()->needSetup()) {
 				if ($this->font()->useBold()) {
-					$result = rm_tag('strong', array(), $result);
+					$result = df_tag('strong', array(), $result);
 				}
 				if ($this->font()->useItalic()) {
-					$result = rm_tag('em', array(), $result);
+					$result = df_tag('em', array(), $result);
 				}
-				$result = rm_tag('span', $this->getSpanAttributes(), $result);
+				$result = df_tag('span', $this->getSpanAttributes(), $result);
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -128,7 +128,7 @@ class Df_Core_Block_FormattedText extends Df_Core_Block_Template_NoCache {
 	public static function render(
 		Df_Admin_Config_Font $font, $rawText, $inline, $domElementId = null
 	) {
-		return df_trim(rm_render(new self(array(
+		return df_trim(df_render(new self(array(
 			Df_Core_Block_FormattedText::$P__FONT => $font
 			,Df_Core_Block_FormattedText::$P__RAW_TEXT => $rawText
 			,Df_Core_Block_FormattedText::$P__DOM_ELEMENT_ID => $domElementId

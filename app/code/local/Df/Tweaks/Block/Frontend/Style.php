@@ -6,7 +6,7 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 	 * @used-by Df_Core_Block_Abstract::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	public function cacheKeySuffix() {return rm_handles();}
+	public function cacheKeySuffix() {return df_handles();}
 
 	/**
 	 * @override
@@ -82,7 +82,7 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 				$this->hide('.category-products .ratings .amount');
 			}
 		}
-		else if (rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
+		else if (df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
 			if (
 				$s->view()->needHideRating()
 				&& $s->view()->needHideReviewsLink()
@@ -152,7 +152,7 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 				$this->hide('p.bugs');
 			}
 			if (
-					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
 					df_cfg()->tweaks()->catalog()->product()->view()->needHideAvailability()
 			) {

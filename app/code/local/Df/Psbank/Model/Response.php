@@ -418,11 +418,11 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DESC, RM_V_STRING)
-			->_prop(self::$P__EMAIL, RM_V_STRING)
-			->_prop(self::$P__MERCH_NAME, RM_V_STRING)
-			->_prop(self::$P__RC, RM_V_STRING)
-			->_prop(self::P__RM_TRANSACTION_TYPE, RM_V_STRING, false)
+			->_prop(self::$P__DESC, DF_V_STRING)
+			->_prop(self::$P__EMAIL, DF_V_STRING)
+			->_prop(self::$P__MERCH_NAME, DF_V_STRING)
+			->_prop(self::$P__RC, DF_V_STRING)
+			->_prop(self::P__RM_TRANSACTION_TYPE, DF_V_STRING, false)
 		;
 	}
 	const _C = __CLASS__;

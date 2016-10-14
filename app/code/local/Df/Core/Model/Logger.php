@@ -50,7 +50,7 @@ final class Df_Core_Model_Logger extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__FILE_PATH, RM_V_STRING_NE);
+		$this->_prop(self::$P__FILE_PATH, DF_V_STRING_NE);
 	}
 	/** @var string */
 	private static $P__FILE_PATH = 'file_path';

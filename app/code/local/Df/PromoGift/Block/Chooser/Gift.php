@@ -14,7 +14,7 @@ class Df_PromoGift_Block_Chooser_Gift extends Df_Core_Block_Template_NoCache {
 	 * @return string
 	 */
 	public static function r(Df_PromoGift_Model_Gift $gift, $template) {
-		return rm_render(new self(array(
+		return df_render(new self(array(
 			self::$P__GIFT => $gift, 'template' => "df/promo_gift/chooser/{$template}/gift.phtml"
 		)));
 	}

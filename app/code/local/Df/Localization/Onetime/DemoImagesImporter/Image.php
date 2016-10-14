@@ -42,7 +42,7 @@ class Df_Localization_Onetime_DemoImagesImporter_Image extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__LOCAL_PATH, RM_V_STRING_NE);
+		$this->_prop(self::$P__LOCAL_PATH, DF_V_STRING_NE);
 	}
 
 	/** @var string */

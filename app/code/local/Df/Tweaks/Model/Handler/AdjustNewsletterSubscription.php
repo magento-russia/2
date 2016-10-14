@@ -15,28 +15,28 @@ class Df_Tweaks_Model_Handler_AdjustNewsletterSubscription extends Df_Core_Model
 				(
 						$s->removeFromFrontpage()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
+						df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 				)
 			||
 				(
 						$s->removeFromCatalogProductList()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+						df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 				)
 			||
 				(
 						$s->removeFromCatalogProductView()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+						df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				)
 			||
 				(
 						$s->removeFromAccount()
 					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
+						df_handle(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
 				)
 		) {
-			rm_block_remove('left.newsletter', 'newsletter');
+			df_block_remove('left.newsletter', 'newsletter');
 		}
 	}
 

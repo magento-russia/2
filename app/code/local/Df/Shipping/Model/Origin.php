@@ -49,11 +49,11 @@ class Df_Shipping_Model_Origin extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CITY, RM_V_STRING, RM_F_TRIM)
-			->_prop(self::P__COUNTRY_ID, RM_V_STRING, false)
-			->_prop(self::P__POSTAL_CODE, RM_V_STRING, RM_F_TRIM)
-			->_prop(self::P__REGION_NAME, RM_V_STRING, RM_F_TRIM)
-			->_prop(self::P__REGION_ID, RM_V_NAT0)
+			->_prop(self::P__CITY, DF_V_STRING, RM_F_TRIM)
+			->_prop(self::P__COUNTRY_ID, DF_V_STRING, false)
+			->_prop(self::P__POSTAL_CODE, DF_V_STRING, RM_F_TRIM)
+			->_prop(self::P__REGION_NAME, DF_V_STRING, RM_F_TRIM)
+			->_prop(self::P__REGION_ID, DF_V_NAT0)
 		;
 	}
 	const _C = __CLASS__;

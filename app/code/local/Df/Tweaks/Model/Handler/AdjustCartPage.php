@@ -10,13 +10,13 @@ class Df_Tweaks_Model_Handler_AdjustCartPage extends Df_Core_Model_Handler {
 		/** @var Df_Tweaks_Model_Settings_Cart $s */
 		$s = Df_Tweaks_Model_Settings_Cart::s();
 		if ($s->removeShippingAndTaxEstimation()) {
-			rm_block_remove('checkout.cart.shipping');
+			df_block_remove('checkout.cart.shipping');
 		}
 		if ($s->removeDiscountCodesBlock()) {
-			rm_block_remove('checkout.cart.coupon');
+			df_block_remove('checkout.cart.coupon');
 		}
 		if ($s->removeCrosssellBlock()) {
-			rm_block_remove('checkout.cart.crosssell');
+			df_block_remove('checkout.cart.crosssell');
 		}
 	}
 

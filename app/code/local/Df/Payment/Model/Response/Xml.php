@@ -49,7 +49,7 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__XML, RM_V_STRING_NE);
+		$this->_prop(self::P__XML, DF_V_STRING_NE);
 	}
 	const _C = __CLASS__;
 	const P__XML = 'xml';

@@ -99,9 +99,9 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ENTITY_TYPE_ID, RM_V_INT, false)
-			->_prop(self::P__NAME_DESIRED, RM_V_STRING_NE)
-			->_prop(self::P__PREFIXES, RM_V_ARRAY, false)
+			->_prop(self::P__ENTITY_TYPE_ID, DF_V_INT, false)
+			->_prop(self::P__NAME_DESIRED, DF_V_STRING_NE)
+			->_prop(self::P__PREFIXES, DF_V_ARRAY, false)
 		;
 	}
 	const P__ENTITY_TYPE_ID = 'entity_type_id';

@@ -27,7 +27,7 @@ class Df_Directory_Config_MapItem_Country extends Df_Admin_Config_MapItem {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ISO2, RM_V_ISO2, false);
+		$this->_prop(self::P__ISO2, DF_V_ISO2, false);
 	}
 	/** @used-by Df_Directory_Block_Field_CountriesOrdered::_construct() */
 	const P__ISO2 = 'iso2';

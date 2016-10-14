@@ -39,7 +39,7 @@ abstract class Df_Localization_Dictionary extends Df_Core_Xml_Parser_Entity {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PATH_LOCAL, RM_V_STRING_NE);
+		$this->_prop(self::$P__PATH_LOCAL, DF_V_STRING_NE);
 	}
 	/** @var string */
 	protected static $P__PATH_LOCAL = 'path_local';

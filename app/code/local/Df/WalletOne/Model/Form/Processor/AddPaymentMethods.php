@@ -27,8 +27,8 @@ class Df_WalletOne_Model_Form_Processor_AddPaymentMethods extends Df_Varien_Data
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__FIELD_NAME, RM_V_STRING_NE)
-			->_prop(self::P__FIELD_VALUES, RM_V_ARRAY)
+			->_prop(self::P__FIELD_NAME, DF_V_STRING_NE)
+			->_prop(self::P__FIELD_VALUES, DF_V_ARRAY)
 		;
 	}
 	const _C = __CLASS__;

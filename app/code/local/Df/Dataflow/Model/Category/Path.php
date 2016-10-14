@@ -353,7 +353,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__STORE, Df_Core_Model_StoreM::_C)
-			->_prop(self::P__PATH_AS_NAMES_ARRAY, RM_V_ARRAY)
+			->_prop(self::P__PATH_AS_NAMES_ARRAY, DF_V_ARRAY)
 		;
 	}
 	const _C = __CLASS__;

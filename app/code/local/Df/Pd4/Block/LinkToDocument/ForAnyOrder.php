@@ -26,6 +26,6 @@ class Df_Pd4_Block_LinkToDocument_ForAnyOrder extends Df_Pd4_Block_LinkToDocumen
 	 * @return string
 	 */
 	public static function r(Df_Sales_Model_Order $order) {
-		return rm_render(new self(array(self::$P__ORDER => $order)));
+		return df_render(new self(array(self::$P__ORDER => $order)));
 	}
 }

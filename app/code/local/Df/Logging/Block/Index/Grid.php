@@ -183,5 +183,5 @@ class Df_Logging_Block_Index_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 	 * @used-by xml()
 	 * @return Df_Logging_Block_Index_Grid
 	 */
-	private static function i() {return rm_block_l(__CLASS__);}
+	private static function i() {return df_block_l(__CLASS__);}
 }

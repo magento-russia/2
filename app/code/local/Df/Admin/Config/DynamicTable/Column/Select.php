@@ -19,7 +19,7 @@ class Df_Admin_Config_DynamicTable_Column_Select
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OPTIONS, RM_V_ARRAY);
+		$this->_prop(self::$P__OPTIONS, DF_V_ARRAY);
 	}
 	/** @var string */
 	private static $P__OPTIONS = 'options';

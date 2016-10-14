@@ -26,7 +26,7 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 	 */
 	public function handle() {
 		if ($this->needToRemove()) {
-			rm_block_remove($this->getBlockNames());
+			df_block_remove($this->getBlockNames());
 		}
 	}
 
@@ -49,19 +49,19 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			$result = $this->getSettings()->removeFromAll();
-			if (rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)) {
+			if (df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)) {
 				$result = $this->getSettings()->removeFromFrontpage();
 			}
-			else if (rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)) {
+			else if (df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)) {
 				$result = $this->getSettings()->removeFromCatalogProductList();
 			}
-			else if (rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
+			else if (df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
 				$result = $this->getSettings()->removeFromCatalogProductView();
 			}
-			else if (rm_handle_presents(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)) {
+			else if (df_handle(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)) {
 				$result = $this->getSettings()->removeFromAccount();
 			}
-			else if (rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOGSEARCH_RESULT_INDEX)) {
+			else if (df_handle(Df_Core_Model_Layout_Handle::CATALOGSEARCH_RESULT_INDEX)) {
 				$result = $this->getSettings()->removeFromCatalogSearchResult();
 			}
 			df_result_string($result);

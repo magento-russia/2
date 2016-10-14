@@ -50,7 +50,7 @@ class Df_YandexMoney_Model_OAuth extends Df_Yandex_Model_OAuth {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CUSTOMER_RETURN_URL, RM_V_STRING_NE);
+		$this->_prop(self::P__CUSTOMER_RETURN_URL, DF_V_STRING_NE);
 	}
 	const P__CUSTOMER_RETURN_URL = 'param__customer_return_url';
 	/**

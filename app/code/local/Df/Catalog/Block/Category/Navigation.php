@@ -9,7 +9,7 @@ class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 		/** @var string $result */
 		$result = parent::_toHtml();
 		if ($result) {
-			$result = rm_div('df', rm_div('df-category-navigation', $result));
+			$result = df_div('df', df_div('df-category-navigation', $result));
 		}
 		return $result;
 	}
@@ -134,5 +134,5 @@ class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 	 * @used-by Df_Catalog_Model_Category_Content_Inserter::contentNew()
 	 * @return string
 	 */
-	public static function r() {static $r; return !is_null($r) ? $r : $r = rm_render(__CLASS__);}
+	public static function r() {static $r; return !is_null($r) ? $r : $r = df_render(__CLASS__);}
 }

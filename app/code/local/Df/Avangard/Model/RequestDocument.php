@@ -28,8 +28,8 @@ class Df_Avangard_Model_RequestDocument extends Df_Core_Xml_Generator_Document {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__REQUEST_PARAMS, RM_V_ARRAY)
-			->_prop(self::$P__TAG_NAME, RM_V_STRING_NE)
+			->_prop(self::$P__REQUEST_PARAMS, DF_V_ARRAY)
+			->_prop(self::$P__TAG_NAME, DF_V_STRING_NE)
 		;
 	}
 	/** @var string */

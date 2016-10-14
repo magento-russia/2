@@ -75,7 +75,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__SECTION, RM_V_STRING_NE);
+		$this->_prop(self::P__SECTION, DF_V_STRING_NE);
 	}
 	const _C = __CLASS__;
 	const P__SECTION = 'section';

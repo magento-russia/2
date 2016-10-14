@@ -36,8 +36,8 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 			$this->_addBreadcrumb(df_mage()->adminhtml()->__('Banner News'), df_mage()->adminhtml()->__('Banner News'));
 			$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 			$this
-				->_addContent(rm_block_l(new Df_Banner_Block_Adminhtml_Banner_Edit))
-				->_addLeft(rm_block_l(new Df_Banner_Block_Adminhtml_Banner_Edit_Tabs))
+				->_addContent(df_block_l(new Df_Banner_Block_Adminhtml_Banner_Edit))
+				->_addLeft(df_block_l(new Df_Banner_Block_Adminhtml_Banner_Edit_Tabs))
 			;
 			$this->renderLayout();
 		} else {

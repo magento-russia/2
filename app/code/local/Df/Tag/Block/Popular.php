@@ -24,19 +24,19 @@ class Df_Tag_Block_Popular extends Mage_Tag_Block_Popular {
 						(
 								$settings->removeFromFrontpage()
 							&&
-								rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
+								df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 						)
 					||
 						(
 								$settings->removeFromCatalogProductList()
 							&&
-								rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
+								df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 						)
 					||
 						(
 								$settings->removeFromCatalogProductView()
 							&&
-								rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
+								df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 						)
 				)
 		) {

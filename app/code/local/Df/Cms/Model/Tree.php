@@ -243,7 +243,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 			);
 			$result = false;
 			/** @var Mage_Core_Block_Abstract $navigationBlock */
-			$navigationBlock = rm_layout()->getBlockSingleton('catalog/navigation');
+			$navigationBlock = df_layout()->getBlockSingleton('catalog/navigation');
 			foreach ($templateMelaMenuClasses as $templateMelaMenuClass) {
 				/** @var string $templateMelaMenuClass */
 				/**

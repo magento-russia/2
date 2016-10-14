@@ -115,7 +115,7 @@ class Df_Avangard_Model_Response_State extends Df_Avangard_Model_Response {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P_STATUS_CODE, RM_V_NAT0);
+		$this->_prop(self::$P_STATUS_CODE, DF_V_NAT0);
 	}
 	/** @var string */
 	private static $P_STATUS_CODE = 'status_code';

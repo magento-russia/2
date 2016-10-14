@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Format_Date extends Df_Core_Model {
+class Df_Core_Format_Date extends Df_Core_Model {
 	/** @return Zend_Date */
 	public function getDate() {
 		return $this->cfg(self::P__DATE);
@@ -51,7 +51,7 @@ class Df_Core_Model_Format_Date extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Core_Model_Format_Date
+	 * @return Df_Core_Format_Date
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 }

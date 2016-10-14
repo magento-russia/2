@@ -283,7 +283,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 				. '<br/>После устранения сбоев — перезапустите русификацию оформительской темы повторно.'
 				. '{messages}'
 				, array(
-					'{messages}' => rm_tag_list(df_t()->nl2br($e->messages()), false, 'rm-batch')
+					'{messages}' => df_tag_list(df_t()->nl2br($e->messages()), false, 'rm-batch')
 					,'{theme}' => $this->getTitle()
 				)
 			));
@@ -302,12 +302,12 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DICTIONARY, RM_V_STRING_NE)
-			->_prop(self::P__ID, RM_V_STRING_NE)
-			->_prop(self::$P__PACKAGE, RM_V_STRING_NE)
-			->_prop(self::$P__THEME, RM_V_STRING)
-			->_prop(self::$P__TITLE, RM_V_STRING_NE)
-			->_prop(self::$P__URL, RM_V_ARRAY, false)
+			->_prop(self::$P__DICTIONARY, DF_V_STRING_NE)
+			->_prop(self::P__ID, DF_V_STRING_NE)
+			->_prop(self::$P__PACKAGE, DF_V_STRING_NE)
+			->_prop(self::$P__THEME, DF_V_STRING)
+			->_prop(self::$P__TITLE, DF_V_STRING_NE)
+			->_prop(self::$P__URL, DF_V_ARRAY, false)
 		;
 	}
 	/**

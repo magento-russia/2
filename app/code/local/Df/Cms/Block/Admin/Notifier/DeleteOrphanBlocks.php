@@ -46,6 +46,6 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 	 * @return string
 	 */
 	public static function render(Df_Cms_Model_Resource_Block_Collection $blocks) {
-		return rm_render(__CLASS__, array(self::$P__BLOCKS => $blocks));
+		return df_render(__CLASS__, array(self::$P__BLOCKS => $blocks));
 	}
 }

@@ -76,7 +76,7 @@ class Df_Reward_Block_Checkout_Payment extends Df_Core_Block_Template_NoCache {
 		/** @var array(string => string) $cache */
 		static $cache;
 		if (!isset($cache[$suffix])) {
-			$cache[$suffix] = rm_render(__CLASS__, "df/reward/checkout/payment/{$suffix}.phtml");
+			$cache[$suffix] = df_render(__CLASS__, "df/reward/checkout/payment/{$suffix}.phtml");
 		}
 		return $cache[$suffix];
 	}
