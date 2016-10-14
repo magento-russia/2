@@ -1,5 +1,5 @@
 <?php
-class Df_Spsr_Model_Config_Area_Service extends Df_Shipping_Model_Config_Area_Service {
+class Df_Spsr_Model_Config_Area_Service extends Df_Shipping_Config_Area_Service {
 	/** @return string */
 	public function getInsurer() {
 		/** @var string $result */
@@ -18,7 +18,7 @@ class Df_Spsr_Model_Config_Area_Service extends Df_Shipping_Model_Config_Area_Se
 		return $this->getVarFlag(self::KEY__VAR__PERSONAL_HANDING);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const KEY__VAR__ENDORSE_DELIVERY_TIME = 'endorse_delivery_time';
 	const KEY__VAR__INSURER = 'insurer';
 	const KEY__VAR__PERSONAL_HANDING = 'personal_handing';

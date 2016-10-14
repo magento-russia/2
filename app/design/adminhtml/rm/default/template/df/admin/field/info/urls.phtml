@@ -1,0 +1,69 @@
+<?php
+	/** @var Df_Admin_Block_Field_Info_Urls $this */
+	/** @var Varien_Data_Form_Element_Abstract $element */
+	$element = $this->getElement();
+	/** @var string $tableId */
+	$tableId = $element->getHtmlId() . '_table';
+?>
+<td class='label'>
+	<label for='<?php echo $element->getHtmlId(); ?>'>
+		<?php echo $element['label']; ?>
+	</label>
+</td>
+<td class='value'>
+	<!--
+		Назначение конкретно этому элементу конкретно этого идентификатора
+		необходимо для корректного скрытия/показа элемента
+		при зависимости его от значений других элементов
+		@see FormElementDependenceController::trackChange():
+			if (!$(idTo)) {
+				return;
+			}
+	-->
+	<div id='<?php echo $element->getHtmlId(); ?>' class='df-config-info-urls'>
+		<?php
+			if (2 > count($this->getUrls())) {
+				echo rm_tag('div'
+					, array('class' => 'df-url', 'title' => 'скопируйте в буфер обмена')
+					, rm_first($this->getUrls())
+				);
+			}
+			else {
+				?>
+					<ul id='<?php echo $tableId; ?>'>
+						<?php
+							foreach ($this->getUrls() as $storeName => $url) {
+								/** @var string $storeName */
+								/** @var string $url */
+								?>
+									<li>
+										<div class='df-name'><?php echo $storeName; ?></div>
+										<div
+											class='df-url'
+											title='скопируйте в буфер обмена'
+											href='javascript:void(0);'
+										><?php echo $url; ?></div>
+									</li>
+								<?php
+							}
+						?>
+					</ul>
+					<script type='text/javascript'>decorateList('<?php echo $tableId; ?>');</script>
+				<?php
+			}
+		?>
+		<script type='text/javascript'>
+			jQuery(function() {
+				jQuery('.df-config-info-urls .df-url').hover(
+					function() {jQuery(this).toggleClass('hover');}
+				);
+			});
+		</script>
+	</div>
+	<!--
+	 	2015-04-15
+	 	Заменили теги p.note > span на div аналогично
+	 	@see Df_Adminhtml_Block_Config_Form_Field::render()
+	-->
+	<div class='note'><?php echo $element['comment']; ?></div>
+</td>

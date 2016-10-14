@@ -1,94 +1,84 @@
 <?php
 class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstract_NoCache {
 	/**
-	 * Этот метод используется только полями
-	 * (объектами класса Df_Checkout_Block_Frontend_Ergonomic_Address_Field),
-	 * которые создаёт данный класс
-	 * @return Mage_Sales_Model_Quote_Address
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field::getValue()
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Country::getValue()
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Street::getValueForStreetLine()
+	 * @return Df_Sales_Model_Quote_Address
 	 */
 	public function getAddress() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Sales_Model_Quote_Address $result */
+			/** @var Df_Sales_Model_Quote_Address $result */
 			$result = null;
-			if (
-					!df_mage()->customer()->isLoggedIn()
-				&&
-					df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
+			if (!rm_customer_logged_in()
+				&& df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
 			) {
-				$result = $this->getAddressFromYandexMarket();
+				$result = $this->addressFromYandexMarket();
 			}
-			if (is_null($result)) {
+			if (!$result) {
 				$result =
-					df_mage()->customer()->isLoggedIn()
-					? (
-						(self::TYPE__BILLING === $this->getType())
-						? $this->getSession()->getQuote()->getBillingAddress()
-						: $this->getSession()->getQuote()->getShippingAddress()
-					)
+					rm_customer_logged_in()
+					? ($this->isBilling() ? rm_quote_address_billing() : rm_quote_address_shipping())
 					: Df_Sales_Model_Quote_Address::i()
 				;
 			}
-			df_assert($result instanceof Mage_Sales_Model_Quote_Address);
+			df_assert($result instanceof Df_Sales_Model_Quote_Address);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * Этот метод публичен, потому что его использует
-	 * класс Df_Checkout_Block_Frontend_Ergonomic_Address_Field
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field::getDomId()
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field::getDomName()
 	 * @return string
 	 */
-	public function getType() {return $this->cfg(self::P__TYPE);}
+	public function getType() {return $this[self::$P__TYPE];}
+
+	/** @return bool */
+	public function isBilling() {return self::TYPE__BILLING === $this->getType();}
+
+	/** @return bool */
+	public function isShipping() {return self::TYPE__SHIPPING === $this->getType();}
 
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Abstract::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
 	protected function _toHtml() {
 		/** @var string $result */
-		$result = '';
 		try {
-			$result = implode("\n", $this->getRows()->walk('toHtml'));
+			$result = df_concat_n($this->rows()->walk('toHtml'));
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $result;
 	}
 
 	/** @return Df_Sales_Model_Quote_Address|null */
-	private function getAddressFromYandexMarket() {
+	private function addressFromYandexMarket() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => array(string => string))|null $addressesDataFromYandexMarket */
-			$addressesDataFromYandexMarket =
-				$this->getSession()->getData(
-					Df_YandexMarket_Model_Action_ImportAddress::SESSION__ADDRESSES_FROM_YANDEX_MARKET
-				)
-			;
-			if (!is_array($addressesDataFromYandexMarket)) {
-				$addressesDataFromYandexMarket = array();
-			}
 			/** @var array(string => string))|null $address */
-			$address = df_a($addressesDataFromYandexMarket, $this->getType());
-			$this->{__METHOD__} = rm_n_set(
-				!$address ? null : Df_Sales_Model_Quote_Address::i($address)
-			);
+			$address = Df_YandexMarket_AddressSession::get($this->getType());
+			$this->{__METHOD__} = rm_n_set(!$address ? null : Df_Sales_Model_Quote_Address::i($address));
 		}
 		return rm_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_Checkout_Model_Collection_Ergonomic_Address_Field */
-	private function getFields() {
+	private function fields() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Checkout_Model_Collection_Ergonomic_Address_Field $result */
 			$result = Df_Checkout_Model_Collection_Ergonomic_Address_Field::i();
 			/** @var int $orderingInConfig */
 			$orderingInConfig = 1;
 			/** @var mixed[] $nodeAsArray */
-			$nodeAsArray = $this->getFieldsConfig()->getNode()->asCanonicalArray();
+			$nodeAsArray = $this->fieldsConfig()->getNode()->asCanonicalArray();
 			/**
-			 * Varien_Simplexml_Element::asCanonicalArray может возвращать строку в случае,
+			 * @uses Varien_Simplexml_Element::asCanonicalArray() может возвращать строку в случае,
 			 * когда структура исходных данных не соответствует массиву.
 			 */
 			df_assert_array($nodeAsArray);
@@ -97,40 +87,19 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 				df_assert_string($fieldType);
 				/** @var array $fieldConfig */
 				df_assert_array($fieldConfig);
-				/** @var Df_Checkout_Block_Frontend_Ergonomic_Address_Field $block */
-				$block = null;
-				try {
-					$block =
-						df_block(
-							df_a($fieldConfig, 'block')
-							,null
-							,array_merge(
-								$fieldConfig
-								,array(
-									Df_Checkout_Block_Frontend_Ergonomic_Address_Field
-										::P__TYPE => $fieldType
-									,Df_Checkout_Block_Frontend_Ergonomic_Address_Field
-										::P__ADDRESS => $this
-									,Df_Checkout_Block_Frontend_Ergonomic_Address_Field
-										::P__ORDERING_IN_CONFIG => $orderingInConfig++
-								)
-							)
-
-						)
-					;
-				}
-				catch(Exception $e) {
-					df_error('Не найден класс блока: %s' ,df_a($fieldConfig, 'block'));
-				}
-				$result->addItem($block);
+				$result->addItem(Df_Checkout_Block_Frontend_Ergonomic_Address_Field::ic(
+					df_a($fieldConfig, 'block'), $this, $fieldType, $orderingInConfig++, $fieldConfig
+				));
 			}
-			$this->{__METHOD__} = $this->getFilter()->filter($result);
+			$result->removeHidden();
+			$result->orderByWeight();
+			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields */
-	private function getFieldsConfig() {
+	private function fieldsConfig() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields::i($this->getType())
@@ -139,20 +108,8 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 		return $this->{__METHOD__};
 	}
 
-	/** @return Zend_Filter */
-	private function getFilter() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = new Zend_Filter();
-			$this->{__METHOD__}
-				->addFilter(Df_Checkout_Model_Filter_Ergonomic_Address_Field_Collection_ByVisibility::i())
-				->addFilter(Df_Checkout_Model_Filter_Ergonomic_Address_Field_Collection_Order_ByWeight::i())
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
 	/** @return Df_Checkout_Model_Collection_Ergonomic_Address_Row */
-	private function getRows() {
+	private function rows() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Checkout_Model_Collection_Ergonomic_Address_Row $result */
 			$result = Df_Checkout_Model_Collection_Ergonomic_Address_Row::i();
@@ -160,7 +117,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 			$previousWeight = null;
 			/** @var Df_Checkout_Block_Frontend_Ergonomic_Address_Row $currentRow */
 			$currentRow = null;
-			foreach ($this->getFields() as $field) {
+			foreach ($this->fields() as $field) {
 				/** @var Df_Checkout_Block_Frontend_Ergonomic_Address_Field $field */
 				if (
 						is_null($previousWeight)
@@ -173,7 +130,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 						($previousWeight != $field->getOrderingWeight())
 				) {
 					/** @var Df_Checkout_Block_Frontend_Ergonomic_Address_Row $row */
-					$row = Df_Checkout_Block_Frontend_Ergonomic_Address_Row::i();
+					$row = new Df_Checkout_Block_Frontend_Ergonomic_Address_Row;
 					$row->getFields()->addItem($field);
 					$result->addItem($row);
 					$currentRow = $row;
@@ -189,40 +146,44 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Checkout_Model_Session */
-	private function getSession() {return rm_session_checkout();}
-
 	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__TYPE, Df_Zf_Validate_String_NotEmpty::s());
+		$this->_prop(self::$P__TYPE, Df_Zf_Validate_String_NotEmpty::s());
 	}
-	const _CLASS = __CLASS__;
 	/**
 	 * Ядро Magento использует поле «type» блоков для своих внутренних целей.
 	 * @see Mage_Core_Model_Layout::createBlock():
 	 * $block->setType($type);
+	 * Поэтому называем наше поле «rm__type».
+	 * @var string
 	 */
-	const P__TYPE = 'rm__type';
+	private static $P__TYPE = 'rm__type';
+	/** @used-by Df_YandexMarket_Model_Action_ImportAddress::getAddressType() */
 	const TYPE__BILLING = 'billing';
+	/** @used-by Df_YandexMarket_Model_Action_ImportAddress::getAddressType() */
 	const TYPE__SHIPPING = 'shipping';
-	/** @return Df_Checkout_Block_Frontend_Ergonomic_Address */
-	public static function billing() {
-		return self::i(self::TYPE__BILLING);
-	}
+
 	/**
-	 * @param string $type
-	 * @return Df_Checkout_Block_Frontend_Ergonomic_Address
+	 * @used-by df/checkout/ergonomic/address/billing.phtml
+	 * @return string
 	 */
-	public static function i($type) {
-		df_param_string_not_empty($type, 0);
-		return df_block(new self(array(self::P__TYPE => $type)));
-	}
-	/** @return Df_Checkout_Block_Frontend_Ergonomic_Address */
-	public static function shipping() {
-		return self::i(self::TYPE__SHIPPING);
-	}
+	public static function renderBilling() {return self::r(self::TYPE__BILLING);}
+
+	/**
+	 * @used-by df/checkout/ergonomic/address/shipping.phtml
+	 * @return string
+	 */
+	public static function renderShipping() {return self::r(self::TYPE__SHIPPING);}
+
+	/**
+	 * @used-by renderBilling()
+	 * @used-by renderShipping()
+	 * @param string $type
+	 * @return string
+	 */
+	private static function r($type) {return rm_render(new self(array(self::$P__TYPE => $type)));}
 }

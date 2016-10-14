@@ -5,29 +5,22 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 	 * @return string
 	 */
 	protected function getRequestAsXml_Test() {
-		/** @var string $result */
-		$result =
+		return
 			true//0 === rand (0, 1)
 			? $this->getRequestAsXml_Test_Error()
 			: $this->getRequestAsXml_Test_Success()
 		;
-		df_result_string($result);
-		return $result;
 	}
 
 	/**
 	 * @override
-	 * @return Df_IPay_Model_Action_Confirm
+	 * @see Df_Core_Model_Action::_process()
+	 * @used-by Df_Core_Model_Action::process()
+	 * @return void
 	 */
-	protected function processInternal() {
+	protected function _process() {
 		if (!is_null($this->getRequestParam_ErrorText())) {
-			$this->getOrder()
-				->addStatusHistoryComment(
-					$this->getRequestParam_ErrorText()
-				)
-			;
-			$this->getOrder()->setData(Df_Sales_Const::ORDER_PARAM__IS_CUSTOMER_NOTIFIED, false);
-			$this->getOrder()->save();
+			$this->comment($this->getRequestParam_ErrorText());
 			/**
 			 * После получения от iPay ОТРИЦАТЕЛЬНОГО TransactionResult
 			 * (т.е. отмены операции)
@@ -37,70 +30,46 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 			$this->getTransactionState()->clear();
 		}
 		else {
-			if (!$this->getOrder()->canInvoice()) {
-				df_error(
-					'Заказ номер %d уже оплачен'
-					,$this->getOrder()->getId()
-				);
+			if (!$this->order()->canInvoice()) {
+				df_error('Заказ номер %d уже оплачен', $this->order()->getId());
 			}
 			/** @var Mage_Sales_Model_Order_Invoice $invoice */
-			$invoice = $this->getOrder()->prepareInvoice();
+			$invoice = $this->order()->prepareInvoice();
 			$invoice->register();
 			$invoice->capture();
-			/** @var Mage_Core_Model_Resource_Transaction $transaction */
-			$transaction = df_model(Df_Core_Const::CORE_RESOURCE_TRANSACTION_CLASS_MF);
-			$transaction
-				->addObject($invoice)
-				->addObject($invoice->getOrder())
-				->save()
-			;
-			$this->getOrder()
-				->setState(
-					Mage_Sales_Model_Order::STATE_PROCESSING
-					,Mage_Sales_Model_Order::STATE_PROCESSING
-					,rm_sprintf(
-						$this->getMessage(Df_Payment_Model_Action_Confirm::CONFIG_KEY__MESSAGE__SUCCESS)
-						,$invoice->getIncrementId()
-					)
-					,true
+			$this->saveInvoice($invoice);
+			$this->order()->setState(
+				Mage_Sales_Model_Order::STATE_PROCESSING
+				,Mage_Sales_Model_Order::STATE_PROCESSING
+				,rm_sprintf(
+					$this->getMessage(Df_Payment_Model_Action_Confirm::CONFIG_KEY__MESSAGE__SUCCESS)
+					,$invoice->getIncrementId()
 				)
-			;
-			$this->getOrder()->save();
-			$this->getOrder()->sendNewOrderEmail();
+				,true
+			);
+			$this->order()->save();
+			$this->order()->sendNewOrderEmail();
 		}
-		$this->getResponseAsSimpleXmlElement()
-			->appendChild(
-				Df_Varien_Simplexml_Element::createNode('TransactionResult')
-					->importArray(
-						array(
-							'ServiceProvider_TrxId' => $this->getOrder()->getIncrementId()
-							,'Info' =>
-								array(
-									'InfoLine' =>
-										is_null($this->getRequestParam_ErrorText())
-										? $this->getRequestPayment()->getTransactionDescription()
-										: 'Операция отменена'
-								)
-						)
-					)
+		$this->e()->appendChild(rm_xml_node('TransactionResult')->importArray(array(
+			'ServiceProvider_TrxId' => $this->order()->getIncrementId()
+			,'Info' => array(
+				'InfoLine' =>
+					is_null($this->getRequestParam_ErrorText())
+					? $this->getRequestPayment()->getTransactionDescription()
+					: 'Операция отменена'
 			)
-		;
-		return $this;
+		)));
 	}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedRequestType() {
-		return self::TRANSACTION_STATE__RESULT;
-	}
+	protected function getExpectedRequestType() {return 'TransactionResult';}
 
 	/** @return string */
 	private function getRequestAsXml_Test_Error() {
-		/** @var string $result */
-		$result =
-			df_text()->convertUtf8ToWindows1251("<?xml version='1.0' encoding='windows-1251' ?>
+		return rm_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>TransactionResult</RequestType>
@@ -114,17 +83,12 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 		<ErrorText>Операция отменена</ErrorText>
 	</TransactionResult>
 </ServiceProvider_Request>
-			")
-		;
-		df_result_string($result);
-		return $result;
+		");
 	}
 
 	/** @return string */
 	private function getRequestAsXml_Test_Success() {
-		/** @var string $result */
-		$result =
-			df_text()->convertUtf8ToWindows1251("<?xml version='1.0' encoding='windows-1251' ?>
+		return rm_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>TransactionResult</RequestType>
@@ -137,30 +101,11 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 		<ServiceProvider_TrxId>8571502</ServiceProvider_TrxId>
 	</TransactionResult>
 </ServiceProvider_Request>
-			")
-		;
-		df_result_string($result);
-		return $result;
+		");
 	}
 
 	/** @return string|null */
 	private function getRequestParam_ErrorText() {
-		/** @var string|null $result */
-		$result = $this->getRequestParam(self::REQUEST_PARAM__TRANSACTION_RESULT__ERROR_TEXT);
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
-
-	const _CLASS = __CLASS__;
-	const REQUEST_PARAM__TRANSACTION_RESULT__ERROR_TEXT = 'TransactionResult/ErrorText';
-	/**
-	 * @static
-	 * @param Df_IPay_ConfirmController $controller
-	 * @return Df_IPay_Model_Action_Confirm
-	 */
-	public static function i(Df_IPay_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
+		return $this->getRequestParam('TransactionResult/ErrorText');
 	}
 }

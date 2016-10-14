@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 class Df_Tweaks_Model_Handler_Account_AdjustLinks extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -81,7 +79,7 @@ class Df_Tweaks_Model_Handler_Account_AdjustLinks extends Df_Core_Model_Handler 
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
 	/** @return Df_Customer_Block_Account_Navigation|null */
@@ -107,5 +105,6 @@ class Df_Tweaks_Model_Handler_Account_AdjustLinks extends Df_Core_Model_Handler 
 		return rm_n_get($this->{__METHOD__});
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

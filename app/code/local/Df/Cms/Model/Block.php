@@ -3,6 +3,12 @@
  * @method Df_Cms_Model_Resource_Block getResource()
  */
 class Df_Cms_Model_Block extends Mage_Cms_Model_Block {
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Block_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
 	/** @return void */
 	public function loadStoresInfo() {
 		if ($this->getId() && !$this->getData(self::P__STORES)) {
@@ -20,13 +26,16 @@ class Df_Cms_Model_Block extends Mage_Cms_Model_Block {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Cms_Model_Resource_Block
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Block::mf());
-	}
-	const _CLASS = __CLASS__;
+	protected function _getResource() {return Df_Cms_Model_Resource_Block::s();}
+
+	/**
+	 * @used-by Df_Cms_Model_Resource_Block_Collection::_construct()
+	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Block::getEntityClass()
+	 * @used-by Df_Localization_Onetime_Processor_Cms_Block::_construct()
+	 */
+	const _C = __CLASS__;
 	const P__IDENTIFIER = 'identifier';
 	const P__STORE_ID = 'store_id';
 	const P__STORES = 'stores';
@@ -59,11 +68,6 @@ class Df_Cms_Model_Block extends Mage_Cms_Model_Block {
 		df_param_string_not_empty($identifier, 0);
 		return df_load(__CLASS__, $identifier, self::P__IDENTIFIER, $throwOnError = false);
 	}
-	/**
-	 * @see Df_Cms_Model_Resource_Block_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Cms_Model_Block */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

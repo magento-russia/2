@@ -22,12 +22,11 @@ class Df_Themes_Helper_Sns_Xsport_Data extends Sns_Xsport_Helper_Data {
 				,'useTagNew'
 				,'useTagSale'
 			);
-			$this->defaults =
-				array_merge(
-					array_combine($keys, array_fill(0, count($keys), null))
-					, $this->defaults
-				)
-			;
+			/**
+			 * 2015-02-08
+			 * Для ассоциативных массивов $b + $a по сути эквивалентно array_merge($a, $b)
+			 */
+			$this->defaults += array_fill_keys($keys, null);
 		}
 	}
 }

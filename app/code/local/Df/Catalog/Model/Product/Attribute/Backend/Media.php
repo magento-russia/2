@@ -51,9 +51,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 			if ($images && is_string($images)) {
 				$images = df_json_decode($images);
 			}
-			if (!is_array($images)) {
-				$images = array();
-			}
+			$images = df_nta($images);
 			/**
 			 * Ключ «values» содержит информацию о главной картинке товара.
 			 * Значением ключа является ассоциативный массив вида:
@@ -73,9 +71,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 				$values = df_json_decode($values);
 				$valuesWasEncoded = true;
 			}
-			if (!is_array($values)) {
-				$values = array();
-			}
+			$values = df_nta($values);
 			/** @var string[] $clearImages */
 			$clearImages = array();
 			/** @var string[] $newImages */
@@ -89,7 +85,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 					/** @var string $file */
 					$file = $image['file'];
 					/** @var array(string => string|int) $image */
-					if(!empty($image['removed'])) {
+					if (!empty($image['removed'])) {
 						$clearImages[] = $file;
 					}
 					else if (!isset($image['value_id'])) {
@@ -125,7 +121,9 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 						 * «Warning: Illegal string offset 'new_file'
 						 * in app/code/core/Mage/Catalog/Model/Product/Attribute/Backend/Media.php».
 						 */
-						$newImages[$file] = array('new_file' => $copy, 'label' => df_a($image, 'label'));
+						$newImages[$file] = array(
+							'new_file' => $copy, 'label' => df_a($image, 'label')
+						);
 					}
 				}
 				$value['duplicate'] = $duplicate;
@@ -188,11 +186,11 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 				!$valuesWasEncoded
 				? $values
 				/**
-				 * @see Zend_Json::encode портит нам файловые пути.
+				 * @uses Zend_Json::encode() портит нам файловые пути.
 				 * Было до применения пары decode/encode:
 				 * {"image":"/t/s/tsb95041.jpg.tmp","small_image":"/t/s/tsb95041.jpg.tmp","thumbnail":"/t/s/tsb95041.jpg.tmp"}
 				 * Стало: {"image":"\/t\/s\/tsb95041.jpg.tmp","small_image":"\/t\/s\/tsb95041.jpg.tmp","thumbnail":"\/t\/s\/tsb95041.jpg.tmp"}
-				 * @link http://stackoverflow.com/questions/6700719/
+				 * http://stackoverflow.com/questions/6700719/
 				 */
 				: str_replace('\/', '/', Zend_Json::encode($values))
 			;
@@ -215,18 +213,10 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 	protected function _moveImageFromTmp($file) {
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
-		if (!isset($patchNeeded)) {
-			$patchNeeded =
-					df_enabled(Df_Core_Feature::SEO)
-				&&
-					df_cfg()->seo()->images()->getUseDescriptiveFileNames()
-			;
+		if (is_null($patchNeeded)) {
+			$patchNeeded =  df_cfg()->seo()->images()->getUseDescriptiveFileNames();
 		}
-		return
-			$patchNeeded
-			? $this->moveImageFromTmpDf($file)
-			: parent::_moveImageFromTmp($file)
-		;
+		return $patchNeeded ? $this->moveImageFromTmpDf($file) : parent::_moveImageFromTmp($file);
 	}
 
 	/** @return Df_Catalog_Model_Product */
@@ -246,13 +236,13 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 		try {
 			$ioObject->open(array('path'=>$destDirectory));
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			try {
 				$ioObject->mkdir($destDirectory, 0777, true);
 				$ioObject->open(array('path'=>$destDirectory));
 			}
-			catch(Exception $e) {
-				df_error(strtr(
+			catch (Exception $e) {
+				df_error(
 					"[%method%]:\nСогласно текущему алгоритму,"
 					."\nсистема должна переместить загруженную картинку в папку"
 					."\n«%destionationDirectory%»"
@@ -263,7 +253,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 						,'%destionationDirectory%' => $destDirectory
 						,'%exceptionMessage%»' => rm_ets($e)
 					)
-				));
+				);
 			}
 		}
 		if (mb_strrpos($file, '.tmp') === mb_strlen($file)-4) {
@@ -276,26 +266,34 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 		$product = $this->getProduct();
 		df_assert($product instanceof Df_Catalog_Model_Product);
 		/** @var string $destionationFilePathOptimizedForSeo */
+		/**
+		 * Аналогичный алгоритм:
+		 * @see Df_Adminhtml_Catalog_Product_GalleryController::uploadActionDf()
+		 */
 		$destionationFilePathOptimizedForSeo =
-			df_h()->seo()->getProductImageRenamer()->getSeoFileName($destionationFilePath, $product)
+			df_concat_path(
+				dirname($destionationFilePath)
+				,rm_concat_clean('.'
+					,df_output()->transliterate($product->getName())
+					, df()->file()->getExt($destionationFilePath)
+				)
+			)
 		;
 		/** @var string $destionationFilePathOptimizedForSeoAndUnique */
 		$destionationFilePathOptimizedForSeoAndUnique =
-			df_h()->core()->file()->getUniqueFileName($destionationFilePathOptimizedForSeo)
+			df()->file()->getUniqueFileName($destionationFilePathOptimizedForSeo)
 		;
 		/** @var string $sourceFilePath */
 		$sourceFilePath = $this->_getConfig()->getTmpMediaPath($file);
 		if (!is_file($sourceFilePath)) {
 			df_error(
-				strtr(
-					"[%method%]:\nСогласно текущему алгоритму,"
-					."\nсистема должна была временно сохранить загруженную картинку по пути"
-					."\n«%sourceFilePath%»"
-					."\nОднако, файл «%sourceFilePath%» отсутствует на сервере."
-					,array(
-						'%method%' => __METHOD__
-						,'%sourceFilePath%' => $sourceFilePath
-					)
+				"[%method%]:\nСогласно текущему алгоритму,"
+				."\nсистема должна была временно сохранить загруженную картинку по пути"
+				."\n«%sourceFilePath%»"
+				."\nОднако, файл «%sourceFilePath%» отсутствует на сервере."
+				,array(
+					'%method%' => __METHOD__
+					,'%sourceFilePath%' => $sourceFilePath
 				)
 			);
 		}
@@ -309,16 +307,14 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 		df_assert_boolean($r);
 		if (!$r || !is_file($destionationFilePathOptimizedForSeoAndUnique)) {
 			df_error(
-				strtr(
-					"[%method%]:\nСистеме не удалось переместить файл"
-					. "\nс пути «%sourceFilePath%»"
-					. "\nна путь «%destionationFilePathOptimizedForSeoAndUnique%»."
-					,array(
-						'%method%' => __METHOD__
-						,'%sourceFilePath%' => $sourceFilePath
-						,'%destionationFilePathOptimizedForSeoAndUnique%' =>
-							$destionationFilePathOptimizedForSeoAndUnique
-					)
+				"[%method%]:\nСистеме не удалось переместить файл"
+				. "\nс пути «%sourceFilePath%»"
+				. "\nна путь «%destionationFilePathOptimizedForSeoAndUnique%»."
+				,array(
+					'%method%' => __METHOD__
+					,'%sourceFilePath%' => $sourceFilePath
+					,'%destionationFilePathOptimizedForSeoAndUnique%' =>
+						$destionationFilePathOptimizedForSeoAndUnique
 				)
 			);
 		}

@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_LiqPay>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>LiqPay</title>
+			<version>1.0.0</version>
 		</Df_LiqPay>
 	</modules>
 	<global>
@@ -38,7 +39,7 @@
 		-->
 		<payment>
 			<df-liqpay>
-				<model>df_liqpay/payment</model>
+				<model>Df_LiqPay_Model_Payment</model>
 			</df-liqpay>
 		</payment>
 	</default>

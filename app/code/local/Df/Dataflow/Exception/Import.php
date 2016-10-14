@@ -7,7 +7,7 @@ class Df_Dataflow_Exception_Import extends Df_Dataflow_Exception {
 	public function getMessageRm() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = sprintf(
-				"%s\r\nИмпортируемые данные:\r\n%s"
+				"%s\nИмпортируемые данные:\n%s"
 				, parent::getMessageRm()
 				, df_tab_multiline(rm_print_params($this->getRow()->getAsArray()))
 			);
@@ -16,16 +16,17 @@ class Df_Dataflow_Exception_Import extends Df_Dataflow_Exception {
 	}
 
 	/** @return Df_Dataflow_Model_Import_Abstract_Row */
-	public function getRow() {return $this->cfg(self::$P__ROW);}
+	public function getRow() {return $this->_row;}
 
 	/**
+	 * Обратите внимание, что данный метод нам действительно нужен,
+	 * и мы не можем инициализировать $row в конструкторе:
+	 * @used-by Df_Dataflow_Model_Import_Abstract_Row::error()
 	 * @param Df_Dataflow_Model_Import_Abstract_Row $row
 	 * @return void
 	 */
-	public function setRow(Df_Dataflow_Model_Import_Abstract_Row $row) {
-		$this->setData(self::$P__ROW, $row);
-	}
+	public function setRow(Df_Dataflow_Model_Import_Abstract_Row $row) {$this->_row = $row;}
 
-	/** @var string */
-	private static $P__ROW = 'row';
+	/** @var Df_Dataflow_Model_Import_Abstract_Row */
+	private $_row;
 }

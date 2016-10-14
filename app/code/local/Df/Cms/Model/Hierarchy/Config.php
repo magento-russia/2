@@ -27,13 +27,11 @@ class Df_Cms_Model_Hierarchy_Config {
 
 	/** @return Df_Cms_Model_Hierarchy_Config */
 	protected function _initContextMenuLayouts() {
-		$config = Mage::getConfig()->getNode(self::XML_PATH_CONTEXT_MENU_LAYOUTS);
+		$config = rm_config_node(self::XML_PATH_CONTEXT_MENU_LAYOUTS);
 		if ($this->_contextMenuLayouts !== null || !$config) {
 			return $this;
 		}
-		if (!is_array($this->_contextMenuLayouts)) {
-			$this->_contextMenuLayouts = array();
-		}
+		$this->_contextMenuLayouts = df_nta($this->_contextMenuLayouts);
 		foreach ($config->children() as $layoutCode => $layoutConfig) {
 			$this->_contextMenuLayouts[$layoutCode] =
 				new Varien_Object(array(

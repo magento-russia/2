@@ -1,5 +1,5 @@
 <?php
-class Df_Logging_Model_Config_Backend_Cron extends Df_Admin_Model_Config_Backend_Cron {
+class Df_Logging_Model_Config_Backend_Cron extends Df_Admin_Config_Backend_Cron {
 	/**
 	 * @override
 	 * @return string

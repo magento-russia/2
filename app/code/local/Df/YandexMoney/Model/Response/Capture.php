@@ -47,7 +47,7 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 	 */
 	public function getPaymentAmount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Money::i($this->cfg(self::$P__CREDIT_AMOUNT));
+			$this->{__METHOD__} = rm_money($this->cfg(self::$P__CREDIT_AMOUNT));
 		}
 		return $this->{__METHOD__};
 	}
@@ -85,9 +85,7 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 				if ($this->need3DSecure()) {
 					$result['Требуется 3D-Secure'] = rm_bts_r(true);
 					$result['Адрес 3D-Secure'] = $this->get3DSecureUri();
-					$result['Параметры 3D-Secure'] =
-						"\r\n" . rm_print_params($this->get3DSecureParams())
-					;
+					$result['Параметры 3D-Secure'] = "\n" . rm_print_params($this->get3DSecureParams());
 				}
 				$result = array_merge($result, array(
 					'Идентификатор платежа в Яндекс.Деньгах' => $this->getPaymentExternalId()
@@ -196,11 +194,10 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__CREDIT_AMOUNT, self::V_FLOAT)
-			->_prop(self::$P__NEXT_RETRY, self::V_NAT0)
+			->_prop(self::$P__CREDIT_AMOUNT, RM_V_FLOAT)
+			->_prop(self::$P__NEXT_RETRY, RM_V_NAT0)
 		;
 	}
-	const _CLASS = __CLASS__;
 	/** @var string */
 	private static $P__CREDIT_AMOUNT = 'credit_amount';
 	/** @var string */

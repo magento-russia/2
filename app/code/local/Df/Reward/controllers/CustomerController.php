@@ -38,7 +38,7 @@ class Df_Reward_CustomerController extends Mage_Core_Controller_Front_Action {
 	public function saveSettingsAction()
 	{
 		if (!$this->_validateFormKey()) {
-			return $this->_redirect('*/*/info');
+			$this->_redirect('*/*/info');
 		}
 
 		$customer = $this->_getCustomer();
@@ -65,7 +65,7 @@ class Df_Reward_CustomerController extends Mage_Core_Controller_Front_Action {
 		}
 
 		try {
-			/* @var $customer Mage_Customer_Model_Session */
+			/* @var Df_Customer_Model_Customer $customer */
 			$customer = $this->_getCustomer();
 			if ($customer->getId()) {
 				if ($notification == 'update') {
@@ -85,34 +85,18 @@ class Df_Reward_CustomerController extends Mage_Core_Controller_Front_Action {
 		$this->_redirect('*/*/info');
 	}
 
-	/**
-	 * Retrieve customer session model object
-	 * @return Mage_Customer_Model_Session
-	 */
-	protected function _getSession()
-	{
-		return rm_session_customer();
-	}
+	/** @return Mage_Customer_Model_Session */
+	protected function _getSession() {return rm_session_customer();}
 
-	/**
-	 * Retrieve customer session model object
-	 * @return Mage_Customer_Model_Session
-	 */
-	protected function _getCustomer()
-	{
-		return $this->_getSession()->getCustomer();
-	}
+	/** @return Df_Customer_Model_Customer */
+	protected function _getCustomer() {return $this->_getSession()->getCustomer();}
 
-	/**
-	 * Load reward by customer
-	 * @return Df_Reward_Model_Reward
-	 */
-	protected function _getReward()
-	{
-		$reward = Df_Reward_Model_Reward::i()
+	/** @return Df_Reward_Model_Reward */
+	protected function _getReward() {
+		return Df_Reward_Model_Reward::i()
 			->setCustomer($this->_getCustomer())
-			->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-			->loadByCustomer();
-		return $reward;
+			->setWebsiteId(rm_website_id())
+			->loadByCustomer()
+		;
 	}
 }

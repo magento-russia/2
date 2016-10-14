@@ -34,7 +34,7 @@
 		<?php echo $fieldset->serialize(array('class')); ?>
 	>
 		<?php if ($comment) { ?>
-			<p class='comment'><?php echo $this->escapeHtml($comment); ?></p>
+			<p class='comment'><?php echo rm_e($comment); ?></p>
 		<?php } ?>
 		<?php echo $fieldset->getChildrenHtml(); ?>
     </fieldset>

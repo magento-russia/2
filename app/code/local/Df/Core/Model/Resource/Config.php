@@ -10,7 +10,7 @@ class Df_Core_Model_Resource_Config extends Df_Core_Model_Resource_ConfigM {
 	/**
 	 * @param string $path
 	 * @param string $value
-	 * @param string $valueOriginal [optional]
+	 * @param string|null $valueOriginal [optional]
 	 * @param bool $useLikeOperator [optional]
 	 */
 	public function updateByPath($path, $value, $valueOriginal = null, $useLikeOperator = false) {
@@ -38,36 +38,32 @@ class Df_Core_Model_Resource_Config extends Df_Core_Model_Resource_ConfigM {
 	/**
 	 * @param string $path
 	 * @param string $value
-	 * @param string $valueOriginal [optional]
+	 * @param string|null $valueOriginal [optional]
 	 * @param bool $useLikeOperator [optional]
 	 */
 	public function updateByPathLowLevel(
 		$path, $value, $valueOriginal = null, $useLikeOperator = false
 	) {
 		/** @var string $where */
-		$where =
-			strtr(
-				$useLikeOperator
-				? "value like '{old value}'"
-				: "value = '{old value}'"
-				, array('{old value}' => $valueOriginal)
-			)
-		;
+		$where = strtr(
+			$useLikeOperator
+			? "value like '{old value}'"
+			: "value = '{old value}'"
+			, array('{old value}' => $valueOriginal)
+		);
 		/** @var string $query */
-		$query =
-			strtr(
-				"UPDATE {table} SET value = {new_value} WHERE ({where}) and path = '{path}';"
-				,array(
-					'{table}' => rm_table('core/config_data')
-					,'{path}' => $path
-					,'{new_value}' =>
-						df_strings_are_equal_ci($value, 'null')
-						? 'null'
-						: df_quote_single($value)
-					,'{where}' => $where
-				)
+		$query = strtr(
+			"UPDATE {table} SET value = {new_value} WHERE ({where}) and path = '{path}';"
+			, array(
+				'{table}' => rm_table('core/config_data')
+				,'{path}' => $path
+				,'{new_value}' =>
+					df_strings_are_equal_ci($value, 'null')
+					? 'null'
+					: df_quote_single($value)
+				,'{where}' => $where
 			)
-		;
+		);
 		try {
 			rm_conn()->query($query);
 		}

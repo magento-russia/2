@@ -34,7 +34,4 @@ class Df_Invitation_Block_Adminhtml_Report_Invitation_Order_Grid
 		$this->addExportType('*/*/exportOrderExcel', df_h()->invitation()->__('Excel'));
 		return parent::_prepareColumns();
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Report_Invitation_Order_Grid */
-	public static function i() {return df_block(__CLASS__);}
 }

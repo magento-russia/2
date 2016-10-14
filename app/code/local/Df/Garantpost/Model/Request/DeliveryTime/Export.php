@@ -23,7 +23,7 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 		catch (Exception $e) {
 			df_notify_exception($e);
 			if (df_is_it_my_local_pc()) {
-				throw $e;
+				df_error($e);
 			}
 			$result = 0;
 		}
@@ -51,11 +51,11 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 			df_result_integer($result);
 		}
 		catch (Exception $e) {
-			$this->logRequest($e);
+			//$this->logRequest($e);
 			$this->logResponseAsHtml();
 			df_notify_exception($e);
 			if (df_is_it_my_local_pc()) {
-				throw $e;
+				df_error($e);
 			}
 			$result = 0;
 		}
@@ -112,20 +112,10 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 			;
 			df_assert_string($deliveryTimeToOtherLocationsAsText);
 			/** @var $deliveryTimeToCapitalAsArray */
-			$deliveryTimeToCapitalAsArray =
-				explode(
-					'-'
-					,$deliveryTimeToCapitalAsText
-				)
-			;
+			$deliveryTimeToCapitalAsArray = explode('-', $deliveryTimeToCapitalAsText);
 			df_assert_array($deliveryTimeToCapitalAsArray);
 			/** @var $deliveryTimeToOtherLocationsAsArray */
-			$deliveryTimeToOtherLocationsAsArray =
-				explode(
-					'-'
-					,$deliveryTimeToOtherLocationsAsText
-				)
-			;
+			$deliveryTimeToOtherLocationsAsArray = explode('-', $deliveryTimeToOtherLocationsAsText);
 			df_assert_array($deliveryTimeToOtherLocationsAsArray);
 			$this->{__METHOD__} =
 				array(
@@ -154,9 +144,7 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders()
-			,array('Referer' => 'http://www.garantpost.ru/tools/transint')
-		);
+		return array('Referer' => 'http://www.garantpost.ru/tools/transint') + parent::getHeaders();
 	}
 
 	/** @return array(string => int) */
@@ -181,23 +169,19 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 
 	/** @return int */
 	private function getDestinationCountryId() {
-		/** @var int $result */
-		$result =
-			df_a(
-				Df_Garantpost_Model_Request_Countries_ForDeliveryTime::s()
-					->getResponseAsArray()
-				,$this->getDestinationCountryIso2()
-				,0
-			)
-		;
-		df_result_integer($result);
-		return $result;
+		return df_a(
+			Df_Garantpost_Model_Request_Countries_ForDeliveryTime::s()->getResponseAsArray()
+			, $this->getDestinationCountryIso2()
+			, 0
+		);
 	}
 
-	/** @return string */
-	private function getDestinationCountryIso2() {
-		return $this->cfg(self::P__DESTINATION_COUNTRY_ISO2);
-	}
+	/**
+	 * Возвращает 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
+	 * https://ru.wikipedia.org/wiki/ISO_3166-1
+	 * @return string
+	 */
+	private function getDestinationCountryIso2() {return $this->cfg(self::P__DESTINATION_COUNTRY_ISO2);}
 
 	/**
 	 * @override
@@ -205,9 +189,13 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__DESTINATION_COUNTRY_ISO2, self::V_STRING_NE);
+		$this->_prop(self::P__DESTINATION_COUNTRY_ISO2, RM_V_ISO2);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
+	/**
+	 * 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
+	 * https://ru.wikipedia.org/wiki/ISO_3166-1
+	 */
 	const P__DESTINATION_COUNTRY_ISO2  = 'destination_country_iso2';
 	const POST_PARAM__DESTINATION_COUNTRY_ID = 'cid';
 	const RESULT__CAPITAL = 'capital';
@@ -219,7 +207,10 @@ class Df_Garantpost_Model_Request_DeliveryTime_Export extends Df_Garantpost_Mode
 	 * @param string $destinationCountryIso2Code
 	 * @return Df_Garantpost_Model_Request_DeliveryTime_Export
 	 */
-	public static function i($destinationCountryIso2Code) {return new self(array(
-		self::P__DESTINATION_COUNTRY_ISO2 => $destinationCountryIso2Code
-	));}
+	public static function i($destinationCountryIso2Code) {
+		df_param_iso2($destinationCountryIso2Code, 0);
+		return new self(array(
+			self::P__DESTINATION_COUNTRY_ISO2 => $destinationCountryIso2Code
+		));
+	}
 }

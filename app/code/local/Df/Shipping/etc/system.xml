@@ -1,20 +1,18 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_shipping translate='label' module='df_shipping'>
+		<df_shipping>
 			<label>Доставка</label>
 			<tab>df</tab>
-			<!--
-				Обратите внимание на эту строку!
-			-->
-			<frontend_model>df_adminhtml/system_config_form</frontend_model>
+			<!-- Обратите внимание на эту строку! -->
+			<frontend_model>Df_Adminhtml_Block_Config_Form</frontend_model>
 			<frontend_type>text</frontend_type>
 			<sort_order>6000</sort_order>
 			<show_in_default>1</show_in_default>
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<product translate='label'>
+				<product>
 					<label>Параметры товаров</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -22,31 +20,27 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<units__weight translate='label'>
+						<units__weight>
 							<label>Единица веса товаров</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_units_weight</source_model>
+							<source_model>Df_Admin_Config_Source_Units_Weight</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</units__weight>
-						<units__length translate='label'>
+						<units__length>
 							<label>Единица длины товаров</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_units_length</source_model>
+							<source_model>Df_Admin_Config_Source_Units_Length</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</units__length>
-						<default__weight translate='label'>
+						<default__weight>
 							<label>Стандартный вес товара</label>
-							<comment>
-								<![CDATA[
-									Используется для товаров неизвестного веса.
-								]]>
-							</comment>
+							<comment>используется для товаров неизвестного веса</comment>
 							<validate>
 								validate-number
 								validate-greater-than-zero
@@ -57,13 +51,9 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</default__weight>
-						<default__length translate='label'>
+						<default__length>
 							<label>Стандартная длина товара</label>
-							<comment>
-								<![CDATA[
-									Используется для товаров неизвестной длины.
-								]]>
-							</comment>
+							<comment>используется для товаров неизвестной длины</comment>
 							<validate>
 								validate-number
 								validate-greater-than-zero
@@ -74,13 +64,9 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</default__length>
-						<default__width translate='label'>
+						<default__width>
 							<label>Стандартная ширина товара</label>
-							<comment>
-								<![CDATA[
-									Используется для товаров неизвестной ширины.
-								]]>
-							</comment>
+							<comment>используется для товаров неизвестной ширины</comment>
 							<validate>
 								validate-number
 								validate-greater-than-zero
@@ -91,13 +77,9 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</default__width>
-						<default__height translate='label'>
+						<default__height>
 							<label>Стандартная высота товара</label>
-							<comment>
-								<![CDATA[
-									Используется для товаров неизвестной высоты.
-								]]>
-							</comment>
+							<comment>используется для товаров неизвестной высоты</comment>
 							<validate>
 								validate-number
 								validate-greater-than-zero
@@ -110,7 +92,7 @@
 						</default__height>
 					</fields>
 				</product>
-				<message translate='label'>
+				<message>
 					<label>Тексты</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>2000</sort_order>
@@ -122,7 +104,7 @@
 						]]>
 					</comment>
 					<fields>
-						<failure__general translate='label'>
+						<failure__general>
 							<label>
 								Какое сообщение показывать покупателю
 								в случае невозможности расчёта стоимости доставки его заказа
@@ -135,7 +117,7 @@
 							<show_in_store>1</show_in_store>
 							<validate>required-entry</validate>
 						</failure__general>
-						<failure__same_location translate='label'>
+						<failure__same_location>
 							<label>
 								Какое сообщение показывать покупателю
 								в случае невозможности расчёта стоимости доставки его заказа
@@ -150,6 +132,58 @@
 						</failure__same_location>
 					</fields>
 				</message>
+				<in_house_processing>
+					<label>Сроки</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<days>
+							<label><![CDATA[Сколько дней Вам требуется для передачи заказа покупателя в службу доставки?]]></label>
+							<comment><![CDATA[Указанное количество дней будет добавлено к срокам доставки
+								для показа совокупных сроков доставки покупателю]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
+							<df_min>0</df_min>
+							<df_max>5</df_max>
+							<df_step>1</df_step>
+							<sort_order>1000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
+						</days>
+						<can_ship_today_untill>
+							<label><![CDATA[До какого часа учитывать текущий день в сроках передачи заказа покупателя в службу доставки?]]></label>
+							<frontend_type>select</frontend_type>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
+							<df_min>8</df_min>
+							<df_max>18</df_max>
+							<df_step>1</df_step>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
+						</can_ship_today_untill>
+						<consider_days_off>
+							<label><![CDATA[Учитывать ли в сроках передачи заказа в службу доставки
+							выходные дни Вашего магазина?]]></label>
+							<comment><![CDATA[Выходные дни магазина задаются в административном разделе
+							 «Система» → «Настройки» → «Основное» →
+							 «Региональные настройки» → «Выходные дни»]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</consider_days_off>
+					</fields>
+				</in_house_processing>
 			</groups>
 		</df_shipping>
 	</sections>

@@ -160,16 +160,10 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 	 * @param array $rgbArray
 	 * @return string
 	 */
-	private function _rgbToString($rgbArray)
-	{
+	private function _rgbToString($rgbArray) {
 		$result = array();
 		foreach ($rgbArray as $value) {
-			if (null === $value) {
-				$result[]= 'null';
-			}
-			else {
-				$result[]= rm_sprintf('%02s', dechex($value));
-			}
+			$result[]= is_null($value) ? 'null' : sprintf('%02s', dechex($value));
 		}
 		return implode($result);
 	}
@@ -230,7 +224,7 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 
 		$baseFile = $baseDir . $file;
 		if ((!$file) || (!file_exists($baseFile))) {
-			throw new Exception(df_mage()->catalogHelper()->__('Image file not found'));
+			df_error(df_mage()->catalogHelper()->__('Image file not found'));
 		}
 		$this->_baseFile = $baseFile;
 		// build new filename (most important params)
@@ -333,10 +327,10 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 		}
 
 		$baseDir = df_mage()->catalog()->productMediaConfig()->getBaseMediaPath();
-		if (file_exists($baseDir . '/watermark/stores/' . Mage::app()->getStore()->getId() . $file)) {
-			$filename = $baseDir . '/watermark/stores/' . Mage::app()->getStore()->getId() . $file;
-		} else if (file_exists($baseDir . '/watermark/websites/' . Mage::app()->getWebsite()->getId() . $file)) {
-			$filename = $baseDir . '/watermark/websites/' . Mage::app()->getWebsite()->getId() . $file;
+		if (file_exists($baseDir . '/watermark/stores/' . rm_store_id() . $file)) {
+			$filename = $baseDir . '/watermark/stores/' . rm_store_id() . $file;
+		} else if (file_exists($baseDir . '/watermark/websites/' . rm_website_id() . $file)) {
+			$filename = $baseDir . '/watermark/websites/' . rm_website_id() . $file;
 		} else if (file_exists($baseDir . '/watermark/default/' . $file)) {
 			$filename = $baseDir . '/watermark/default/' . $file;
 		} else if (file_exists($baseDir . '/watermark/' . $file)) {
@@ -409,11 +403,10 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 	}
 
 	/** @return Df_Banner_Model_Image */
-	public function setWatermarkSize($size)
-	{
+	public function setWatermarkSize($size) {
 		if (is_array($size)) {
-			$this->setWatermarkWidth($size['width'])
-				->setWatermarkHeigth($size['heigth']);
+			$this->setWatermarkWidth($size['width']);
+			$this->setWatermarkHeigth($size['heigth']);
 		}
 		return $this;
 	}
@@ -448,12 +441,9 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 		$io = new Varien_Io_File();
 		$io->rmdir($directory, true);
 	}
-
-	const _CLASS = __CLASS__;
 	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @used-by Df_Banner_Helper_Image::init()
 	 * @return Df_Banner_Model_Image
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i() {return new self;}
 }

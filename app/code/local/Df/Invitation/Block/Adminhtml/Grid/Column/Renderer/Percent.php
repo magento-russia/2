@@ -17,7 +17,4 @@ class Df_Invitation_Block_Adminhtml_Grid_Column_Renderer_Percent
 		$value = round($value, 2);
 		return $value . ' %';
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Grid_Column_Renderer_Percent */
-	public static function i() {return df_block(__CLASS__);}
 }

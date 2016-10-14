@@ -6,32 +6,24 @@
 			<author>Дмитрий Федюк</author>
 		</Df_Exline>
 	</modules>
-	<global>
-		<blocks><df_exline><class>Df_Exline_Block</class></df_exline></blocks>
-		<helpers><df_exline><class>Df_Exline_Helper</class></df_exline></helpers>
-		<models><df_exline><class>Df_Exline_Model</class></df_exline></models>
-	</global>
 	<default>
 		<carriers>
 			<df-exline>
 				<active>0</active>
-				<model>df_exline/carrier</model>
+				<model>Df_Exline_Carrier</model>
 				<title>EXLINE</title>
 			</df-exline>
 		</carriers>
 		<df_shipping>
 			<exline>
 				<admin__declared_value_percent>100</admin__declared_value_percent>
-				<admin__processing_before_shipping__consider_days_off>0</admin__processing_before_shipping__consider_days_off>
-				<admin__processing_before_shipping__consider_today_untill>12</admin__processing_before_shipping__consider_today_untill>
-				<admin__processing_before_shipping__days>0</admin__processing_before_shipping__days>
 			</exline>
 		</df_shipping>
 	</default>
 	<df>
 		<features>
 			<df-exline>
-				<module>df_exline</module>
+				<module>Df_Exline</module>
 				<title>EXLINE</title>
 				<url>http://magento-forum.ru/forum/328/</url>
 			</df-exline>

@@ -1,29 +1,17 @@
 <?php
-class Df_Cdek_Model_Config_Area_Service extends Df_Shipping_Model_Config_Area_Service {
-	/** @return string */
-	public function getShopId() {
-		/** @var string $result */
-		$result =
-			$this->getVar(
-				self::KEY__VAR__SHOP_ID
-				,/**
-				 * Поле — необязательно для заполнения
-				 */
-				''
-			)
-		;
-		df_result_string($result);
-		return $result;
-	}
+class Df_Cdek_Model_Config_Area_Service extends Df_Shipping_Config_Area_Service {
+	/**
+	 * Поле необязательно для заполнения.
+	 * @return string
+	 */
+	public function getShopId() {return $this->getVar('shop_id', '');}
 
 	/** @return string */
 	public function getShopPassword() {
 		/** @var string|null $encryptedValue */
-		$encryptedValue = $this->getVar(self::KEY__VAR__SHOP_PASSWORD);
-		return !$encryptedValue ? '' : $this->decrypt($encryptedValue);
+		$encryptedValue = $this->getVar('shop_password');
+		return !$encryptedValue ? '' : rm_decrypt($encryptedValue);
 	}
 
-	const _CLASS = __CLASS__;
-	const KEY__VAR__SHOP_ID = 'shop_id';
-	const KEY__VAR__SHOP_PASSWORD = 'shop_password';
+	const _C = __CLASS__;
 }

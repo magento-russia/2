@@ -15,10 +15,23 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 	 * @return array(int => string)
 	 */
 	protected function getErrorCodeMap() {
-		return df_array_merge_assoc(
-			parent::getErrorCodeMap()
-			,array(2 => 'Заказ отклонен по причине ошибки в реквизитах платежа')
-		);
+		/**
+		 * 2015-02-08
+		 * Ошибочно вместо операции «+» использовать здесь @see array_merge(),
+		 * потому что @see array_merge() не сохраняет числовые ключи (перенумеровывает их).
+		 * Обратите внимание, что операция «+» игнорирует те элементы второго массива,
+		 * ключи которого присутствуют в первом массиве:
+		 * «The keys from the first array will be preserved.
+		 * If an array key exists in both arrays,
+		 * then the element from the first array will be used
+		 * and the matching key's element from the second array will be ignored.»
+		 * http://php.net/manual/function.array-merge.php
+		 */
+		return
+				array(2 => 'Заказ отклонен по причине ошибки в реквизитах платежа')
+			+
+				parent::getErrorCodeMap()
+		;
 	}
 	/** @return string */
 	public function getIpAddress() {return $this->cfg(self::$P__IP_ADDRESS);}
@@ -54,14 +67,14 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 	 */
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_clean(array(
+			$this->{__METHOD__} = array_filter(array(
 				'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
 				,'Состояние платежа' => $this->getPaymentStatusMeaning()
 				,'Детали сбоя' => $this->onFail($this->getErrorCodeMeaning())
 				,'Номер заказа' => $this->getOrderIncrementId()
 				,'Имя владельца карты' => $this->getCardholderName()
 				,'Номер карты' => $this->getCardNumberMasked()
-				,'Размер платежа' => rm_sprintf('%.2f', $this->getPaymentAmount() / 100)
+				,'Размер платежа' => rm_number_2f($this->getPaymentAmount() / 100)
 				,'Код валюты' => $this->getCurrencyCode()
 				,'Адрес IP плательщика' => $this->getIpAddress()
 			));
@@ -125,18 +138,17 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__AMOUNT, self::V_NAT0)
-			->_prop(self::$P__AUTHCODE, self::V_INT)
-			->_prop(self::$P__CARDHOLDER_NAME, self::V_STRING)
-			->_prop(self::$P__CURRENCY_CODE, self::V_NAT)
-			->_prop(self::$P__DEPOSIT_AMOUNT, self::V_NAT0)
-			->_prop(self::$P__IP_ADDRESS, self::V_STRING)
-			->_prop(self::$P__ORDER_INCREMENT_ID, self::V_STRING_NE)
-			->_prop(self::$P__PAN, self::V_STRING)
-			->_prop(self::$P__PAYMENT_STATUS, self::V_NAT0)
+			->_prop(self::$P__AMOUNT, RM_V_NAT0)
+			->_prop(self::$P__AUTHCODE, RM_V_INT)
+			->_prop(self::$P__CARDHOLDER_NAME, RM_V_STRING)
+			->_prop(self::$P__CURRENCY_CODE, RM_V_NAT)
+			->_prop(self::$P__DEPOSIT_AMOUNT, RM_V_NAT0)
+			->_prop(self::$P__IP_ADDRESS, RM_V_STRING)
+			->_prop(self::$P__ORDER_INCREMENT_ID, RM_V_STRING_NE)
+			->_prop(self::$P__PAN, RM_V_STRING)
+			->_prop(self::$P__PAYMENT_STATUS, RM_V_NAT0)
 		;
 	}
-	const _CLASS = __CLASS__;
 	/** @var int */
 	private static $P__AMOUNT = 'Amount';
 	/** @var string */
@@ -156,9 +168,8 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 	/** @var string */
 	private static $P__PAYMENT_STATUS = 'OrderStatus';
 	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @used-by Df_Alfabank_Block_Info::getState()
 	 * @return Df_Alfabank_Model_Response_State
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i() {return new self;}
 }

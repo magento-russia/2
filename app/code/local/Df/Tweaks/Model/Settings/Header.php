@@ -1,9 +1,9 @@
 <?php
 class Df_Tweaks_Model_Settings_Header extends Df_Core_Model_Settings {
-	/** @return Df_Admin_Model_Config_Extractor_Font */
+	/** @return Df_Admin_Config_Font */
 	public function getFont() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Admin_Model_Config_Extractor_Font::i('df_tweaks/header');
+			$this->{__METHOD__} = Df_Admin_Config_Font::i('df_tweaks/header');
 		}
 		return $this->{__METHOD__};
 	}

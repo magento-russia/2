@@ -55,29 +55,14 @@ class Df_Invitation_Model_Config {
 	 * Retrieve configuration for availability of invitations
 	 * on global level. Also will disallowe any functionality in admin.
 	 *
-	 * @param int $storeId[optional]
+	 * @param int $storeId [optional]
 	 * @return boolean
 	 */
 	public function isEnabled($storeId = null) {
-		if (!is_null($storeId)) {
-			$storeId = rm_nat0($storeId);
-		}
-		else {
-			/** @var int $defaultStoreId */
-			static $defaultStoreId;
-			if (!isset($defaultStoreId)) {
-				$defaultStoreId = rm_nat0(Mage::app()->getStore()->getId());
-			}
-			$storeId = $defaultStoreId;
-		}
+		$storeId = !is_null($storeId) ? $storeId : rm_store_id();
 		if (!isset($this->{__METHOD__}[$storeId])) {
-			/** @var bool $featureIsEnabled */
-			static $featureIsEnabled;
-			if (!isset($featureIsEnabled)) {
-				$featureIsEnabled = df_enabled(Df_Core_Feature::INVITATION);
-			}
 			$this->{__METHOD__}[$storeId] =
-				$featureIsEnabled && Mage::getStoreConfigFlag(self::XML_PATH_ENABLED, $storeId)
+				Mage::getStoreConfigFlag(self::XML_PATH_ENABLED, $storeId)
 			;
 		}
 		return $this->{__METHOD__}[$storeId];

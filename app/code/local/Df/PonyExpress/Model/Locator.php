@@ -51,7 +51,7 @@ class Df_PonyExpress_Model_Locator extends Df_Shipping_Model_Locator {
 		return strtr($locationName, array('ё' => 'е', 'Ё' => 'Е'));
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

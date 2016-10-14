@@ -520,4 +520,4 @@ class PelEntryCopyright extends PelEntryAscii {
 	  return $this->editor . $e;
 		return '';
   }
-}?>
+}

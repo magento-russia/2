@@ -3,13 +3,23 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 	/**
 	 * Этот метод сделан публичным и вынесен в базовый класс,
 	 * потому что этот метод используется для диагностики:
-	 * @see Df_Payment_Exception_Response::getMessageRm()
+	 * @used-by Df_Payment_Exception_Response::getMessageRm()
 	 * @return Zend_Uri_Http
 	 */
 	abstract public function getUri();
 
-	/** @return string */
+	/**
+	 * @used-by getGenericFailureMessage()
+	 * @return string
+	 */
 	abstract protected function getGenericFailureMessageUniquePart();
+
+	/**
+	 * @override
+	 * @used-by params()
+	 * @return array(string => string|int)
+	 */
+	abstract protected function _params();
 
 	/**
 	 * Этот метод никак не используется данным классом,
@@ -26,37 +36,55 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 	/** @return array(string => string) */
 	abstract protected function getResponseAsArray();
 
-	/** @return string */
-	abstract protected function getResponseClass();
-
 	/**
 	 * @override
+	 * @see Df_Payment_Model_Request::order()
+	 * @used-by Df_Payment_Model_Request::amount()
+	 * @used-by Df_Payment_Model_Request::method()
+	 * @used-by Df_Payment_Model_Request::payment()
 	 * @return Df_Sales_Model_Order
 	 */
-	public function getOrder() {return $this->getOrderPayment()->getOrder();}
+	protected function order() {return $this->payment()->getOrder();}
+
+	/**
+	 * 2015-03-15
+	 * Основное назначение данного метода — подготовка параметров для запроса.
+	 * Потомки его переопределяют через @see _params(), потомки же его и используют.
+	 * Ядро Российской сборки Magento использует данный метод только для диагностики;
+	 * наличие этого метода в базовом классе позволяет обобщить диагностику:
+	 * @used-by Df_Payment_Exception_Response::getMessageRm()
+	 * @return array(string => string|int)
+	 */
+	public function params() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->_params();
+		}
+		return $this->{__METHOD__};
+	}
 
 	/** @return Df_Payment_Model_Response */
 	public function getResponse() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_model($this->getResponseClass(), $this->getResponseAsArray());
-			df_assert($this->{__METHOD__} instanceof Df_Payment_Model_Response);
-			/** @var Df_Payment_Model_Response $response */
-			$response = $this->{__METHOD__};
-			// для диагностики
-			$response->setRequest($this);
-			$response->postProcess($this->getOrderPayment());
+			$this->{__METHOD__} = $response = Df_Payment_Model_Response::ic(
+				$this, $this->getResponseAsArray()
+			);
+			$response->postProcess($this->payment());
 		}
 		return $this->{__METHOD__};
 	}
+
 	/** @return string */
 	protected function getGenericFailureMessage() {
-		return rm_sprintf(
-			'При %s произошёл неизвестный сбой.', $this->getGenericFailureMessageUniquePart()
-		);
+		return sprintf('При %s произошёл неизвестный сбой.', $this->getGenericFailureMessageUniquePart());
 	}
 
-	/** @return Mage_Sales_Model_Order_Payment */
-	protected function getOrderPayment() {return $this->cfg(self::P__ORDER_PAYMENT);}
+	/**
+	 * @override
+	 * @see Df_Payment_Model_Request::payment()
+	 * @used-by Df_Payment_Model_Request::method()
+	 * @return Mage_Sales_Model_Order_Payment
+	 */
+	protected function payment() {return $this->cfg(self::$P__PAYMENT);}
 	
 	/**
 	 * @override
@@ -64,8 +92,29 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ORDER_PAYMENT, 'Mage_Sales_Model_Order_Payment');
+		$this->_prop(self::$P__PAYMENT, 'Mage_Sales_Model_Order_Payment');
 	}
-	const _CLASS = __CLASS__;
-	const P__ORDER_PAYMENT = 'order_payment';
+	/** @used-by Df_Kkb_Model_RequestDocument_Secondary::_construct() */
+	const _C = __CLASS__;
+	/**
+	 * @used-by _construct()
+	 * @used-by getPayment()
+	 * @used-by ic()
+	 * @used-by Df_Payment_Model_Request_Transaction::doTransaction()
+	 * @used-by Df_YandexMoney_Model_Request_Authorize::i()
+	 * @used-by Df_YandexMoney_Model_Request_Capture::i()
+	 * @var string
+	 */
+	protected static $P__PAYMENT = 'payment';
+
+	/**
+	 * @used-by Df_Alfabank_Model_Request_State::i()
+	 * @used-by Df_Avangard_Model_Request_State::i()
+	 * @param string $class
+	 * @param Mage_Sales_Model_Order_Payment $payment
+	 * @return Df_Payment_Model_Request_Secondary
+	 */
+	protected static function ic($class, Mage_Sales_Model_Order_Payment $payment) {
+		return rm_ic($class, __CLASS__, array(self::$P__PAYMENT => $payment));
+	}
 }

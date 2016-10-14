@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Spsr>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>СПСР-Экспресс</title>
+			<version>1.0.0</version>
 		</Df_Spsr>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-spsr>
 				<active>0</active>
-				<model>df_spsr/carrier</model>
+				<model>Df_Spsr_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

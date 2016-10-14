@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Pec>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>ПЭК</title>
+			<version>1.0.0</version>
 		</Df_Pec>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-pec>
 				<active>0</active>
-				<model>df_pec/carrier</model>
+				<model>Df_Pec_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

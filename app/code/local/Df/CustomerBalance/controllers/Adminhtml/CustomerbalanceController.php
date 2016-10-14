@@ -11,7 +11,7 @@ class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminh
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		if (!df_h()->customer()->balance()->isEnabled()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled()) {
 			if ($this->getRequest()->getActionName() != 'noroute') {
 				$this->_forward('noroute');
 			}
@@ -38,10 +38,9 @@ class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminh
 	{
 		$this->_initCustomer();
 		$this->loadLayout();
-		$this->getResponse()->setBody(
-			Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balance_History_Grid::i()
-				->toHtml()
-		);
+		$this->getResponse()->setBody(rm_render(
+			new Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balance_History_Grid
+		));
 	}
 
 	/**
@@ -65,7 +64,7 @@ class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminh
 		/** @var Df_Customer_Model_Customer $customer */
 		$customer = Df_Customer_Model_Customer::ld((int)$this->getRequest()->getParam($idFieldName));
 		if (!$customer->getId()) {
-			Mage::throwException(df_h()->customer()->balance()->__('Failed to initialize customer'));
+			Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Failed to initialize customer'));
 		}
 		Mage::register('current_customer', $customer);
 	}
@@ -74,8 +73,5 @@ class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminh
 	 * Check is allowed customer management
 	 * @return bool
 	 */
-	protected function _isAllowed()
-	{
-		return df_mage()->admin()->session()->isAllowed('customer/manage');
-	}
+	protected function _isAllowed() {return rm_admin_allowed('customer/manage');}
 }

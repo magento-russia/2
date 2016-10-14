@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Accounting>
+			<author>Дмитрий Федюк</author>
+			<title>Учёт</title>
+			<version>3.0.0</version>
+		</Df_Accounting>
+	</modules>
+</config>

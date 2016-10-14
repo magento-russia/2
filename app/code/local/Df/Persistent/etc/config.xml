@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Persistent>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Persistent>
 	</modules>
 	<global>

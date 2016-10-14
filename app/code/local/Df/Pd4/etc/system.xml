@@ -3,7 +3,7 @@
    <sections>
 		<df_payment>
 			<groups>
-				<pd4 translate='label' module='df_pd4'>
+				<pd4>
 					<label>Квитанция Сбербанка</label>
 					<comment>
 						<![CDATA[
@@ -16,7 +16,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -24,10 +24,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-pd4</df_feature>
 						</active>
-						<frontend__title translate='label'>
+						<frontend__title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -39,11 +39,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</frontend__title>
-						<frontend__description translate='label'>
+						<frontend__description>
 							<label>Примечание к способу оплаты на экране оформления заказа</label>
 							<comment>
 								<![CDATA[
@@ -56,10 +56,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</frontend__description>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -73,13 +73,13 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								validate-digits
 							</validate>
 						</frontend__sort_order>
-						<admin__order_status translate='label'>
+						<admin__order_status>
 							<label>Состояние свежеразмещённых заказов</label>
 							<comment>
 								<![CDATA[
@@ -93,10 +93,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</admin__order_status>
-						<frontend__allowspecific translate='label'>
+						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
 								<![CDATA[
@@ -111,10 +111,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</frontend__allowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Допустимые страны покупателей</label>
 							<comment>
 								<![CDATA[
@@ -130,13 +130,13 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<active>1</active>
 								<frontend__allowspecific>1</frontend__allowspecific>
 							</depends>
 						</frontend__specificcountry>
-						<admin__recipient_name translate='label'>
+						<admin__recipient_name>
 							<label>Наименование получателя платежа</label>
 							<comment>
 								<![CDATA[
@@ -148,11 +148,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</admin__recipient_name>
-						<admin__recipient_tax_number translate='label'>
+						<admin__recipient_tax_number>
 							<label>ИНН получателя платежа</label>
 							<comment>
 								<![CDATA[
@@ -164,7 +164,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								required-entry
@@ -172,7 +172,7 @@
 								validate-length	minimum-length-10 maximum-length-12
 							</validate>
 						</admin__recipient_tax_number>
-						<admin__recipient_bank_account_number translate='label'>
+						<admin__recipient_bank_account_number>
 							<label>Номер счета получателя платежа</label>
 							<comment>
 								<![CDATA[
@@ -184,25 +184,25 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								validate-digits
 								validate-length	minimum-length-20 maximum-length-20
 							</validate>
 						</admin__recipient_bank_account_number>
-						<admin__recipient_bank_name translate='label'>
+						<admin__recipient_bank_name>
 							<label>Наименование банка получателя платежа</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>50000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</admin__recipient_bank_name>
-						<admin__recipient_bank_id translate='label'>
+						<admin__recipient_bank_id>
 							<label>БИК</label>
 							<comment>
 								<![CDATA[
@@ -214,7 +214,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								required-entry
@@ -222,7 +222,7 @@
 								validate-length	minimum-length-8 maximum-length-9
 							</validate>
 						</admin__recipient_bank_id>
-						<admin__recipient_bank_loro translate='label'>
+						<admin__recipient_bank_loro>
 							<label>Номер кор./сч. банка получателя платежа</label>
 							<comment>
 								<![CDATA[
@@ -234,7 +234,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								required-entry
@@ -242,7 +242,7 @@
 								validate-length	minimum-length-20 maximum-length-20
 							</validate>
 						</admin__recipient_bank_loro>
-						<admin__payment_purpose_template translate='label'>
+						<admin__payment_purpose_template>
 							<label>Назначение/наименование платежа (шаблон)</label>
 							<comment>
 								<![CDATA[
@@ -254,7 +254,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</admin__payment_purpose_template>

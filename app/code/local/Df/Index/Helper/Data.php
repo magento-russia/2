@@ -9,25 +9,17 @@ class Df_Index_Helper_Data extends Mage_Core_Helper_Abstract {
 			$process = df_mage()->index()->indexer()->getProcessByCode($process);
 		}
 		df_assert($process instanceof Mage_Index_Model_Process);
-		/**
-		 * @see Mage_Index_Model_Process::reindexEverything()
-		 */
+		/** @see Mage_Index_Model_Process::reindexEverything() */
 		$process->unsetData('runed_reindexall');
-		/**
-		 * @todo Лучше перестраивать расчётные таблицы
-		 * только для обрабатываемого магазина.
-		 * Сейчас же мы перестраиваем расчётные таблицы для всех магазинов системы
-		 */
+		// @todo Лучше перестраивать расчётные таблицы только для обрабатываемого магазина.
+		// Сейчас же мы перестраиваем расчётные таблицы для всех магазинов системы.
 		$process->reindexEverything();
 	}
 
-	/** @return Df_Index_Helper_Data */
+	/** @return void */
 	public function reindexEverything() {
-		foreach (df_mage()->index()->indexer()->getProcessesCollection() as $process) {
-			/** @var Mage_Index_Model_Process $process */
-			$this->reindex($process);
-		}
-		return $this;
+		/** @uses reindex() */
+		df_mage()->index()->indexer()->getProcessesCollection()->walk(array($this, 'reindex'));
 	}
 
 	/** @return Df_Index_Helper_Data */

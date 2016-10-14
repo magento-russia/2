@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_AdminNotification>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_AdminNotification>
 	</modules>
 	<global>

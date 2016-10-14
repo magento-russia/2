@@ -1,7 +1,5 @@
 <?php
 class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
-	/** @return Df_1C_Helper_Data */
-	public function _1c() {return Df_1C_Helper_Data::s();}
 	/** @return Df_AccessControl_Helper_Data */
 	public function accessControl() {return Df_AccessControl_Helper_Data::s();}
 	/** @return Df_Admin_Helper_Data */
@@ -28,8 +26,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function compiler() {return Df_Compiler_Helper_Data::s();}
 	/** @return Df_Connect_Helper_Data */
 	public function connect() {return Df_Connect_Helper_Data::s();}
-	/** @return Df_Core_Helper_Data */
-	public function core() {return Df_Core_Helper_Data::s();}
 	/** @return Df_Customer_Helper_Data */
 	public function customer() {return Df_Customer_Helper_Data::s();}
 	/** @return Df_Dataflow_Helper_Data */
@@ -42,22 +38,14 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function eav() {return Df_Eav_Helper_Data::s();}
 	/** @return Df_Ems_Helper_Data */
 	public function ems() {return Df_Ems_Helper_Data::s();}
-	/** @return Df_Excel_Helper_Data */
-	public function excel() {return Df_Excel_Helper_Data::s();}
 	/** @return Df_Index_Helper_Data */
 	public function index() {return Df_Index_Helper_Data::s();}
 	/** @return Df_Invitation_Helper_Data */
 	public function invitation() {return Df_Invitation_Helper_Data::s();}
-	/** @return Df_Licensor_Helper_Data */
-	public function licensor() {return Df_Licensor_Helper_Data::s();}
-	/** @return Dfa_LicensorGenerator_Helper_Data */
-	public function licensorGenerator() {return Dfa_LicensorGenerator_Helper_Data::s();}
 	/** @return Df_Localization_Helper_Data */
 	public function localization() {return Df_Localization_Helper_Data::s();}
 	/** @return Df_Logging_Helper_Data */
 	public function logging() {return Df_Logging_Helper_Data::s();}
-	/** @return Df_Newsletter_Helper_Data */
-	public function newsletter() {return Df_Newsletter_Helper_Data::s();}
 	/** @return Df_OnPay_Helper_Data */
 	public function onPay() {return Df_OnPay_Helper_Data::s();}
 	/** @return Df_Page_Helper_Data */
@@ -72,14 +60,10 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function payOnline() {return Df_PayOnline_Helper_Data::s();}
 	/** @return Df_Pd4_Helper_Data */
 	public function pd4() {return Df_Pd4_Helper_Data::s();}
-	/** @return Df_Phpquery_Helper_Data */
-	public function phpquery() {return Df_Phpquery_Helper_Data::s();}
 	/** @return Df_PromoGift_Helper_Data */
 	public function promoGift() {return Df_PromoGift_Helper_Data::s();}
 	/** @return Df_Promotion_Helper_Data */
 	public function promotion() {return Df_Promotion_Helper_Data::s();}
-	/** @return Df_Qa_Helper_Data */
-	public function qa() {return Df_Qa_Helper_Data::s();}
 	/** @return Df_Qiwi_Helper_Data */
 	public function qiwi() {return Df_Qiwi_Helper_Data::s();}
 	/** @return Df_Rating_Helper_Data */
@@ -92,12 +76,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function sales() {return Df_Sales_Helper_Data::s();}
 	/** @return Df_SalesRule_Helper_Data */
 	public function salesRule() {return Df_SalesRule_Helper_Data::s();}
-	/** @return Df_Seo_Helper_Data */
-	public function seo() {return Df_Seo_Helper_Data::s();}
-	/** @return Dfa_Server_Helper_Data */
-	public function server() {return Dfa_Server_Helper_Data::s();}
-	/** @return Df_Shipping_Helper_Data */
-	public function shipping() {return Df_Shipping_Helper_Data::s();}
 	/** @return Df_Sitemap_Helper_Data */
 	public function sitemap() {return Df_Sitemap_Helper_Data::s();}
 	/** @return Df_Sms_Helper_Data */

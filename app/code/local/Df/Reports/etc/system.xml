@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_reports translate='label' module='df_reports'>
+		<df_reports>
 			<label>Отчёты</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<common translate='label'>
+				<common>
 					<label>Общее</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -18,7 +18,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -26,10 +26,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-reports</df_feature>
 						</enabled>
-						<remove_timozone_notice translate='label'>
+						<remove_timozone_notice>
 							<label>
 								<![CDATA[
 									Убрать сообщение<br/>«<b>This report depends on timezone configuration</b>»?
@@ -46,10 +46,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</remove_timozone_notice>
-						<set_end_date_to_the_yesterday translate='label'>
+						<set_end_date_to_the_yesterday>
 							<label><![CDATA[Использовать в качестве<br/><b>конца отчётного периода<br/>вчерашний день</b>,<br/>если администратор явно не указал другое значение?]]></label>
 							<comment>
 								<![CDATA[
@@ -67,21 +67,21 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</set_end_date_to_the_yesterday>
-						<period_duration translate='label'>
+						<period_duration>
 							<label>Продолжительность отчётного периода по умолчанию</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_reports/system_config_source_duration</source_model>
+							<source_model>Df_Reports_Model_Config_Source_Duration</source_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><set_end_date_to_the_yesterday>1</set_end_date_to_the_yesterday></depends>
 						</period_duration>
-						<enable_group_by_week translate='label'>
+						<enable_group_by_week>
 							<label>Сделать возможной группировку данных по неделям?</label>
 							<comment>
 								<![CDATA[
@@ -101,7 +101,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</enable_group_by_week>
 					</fields>

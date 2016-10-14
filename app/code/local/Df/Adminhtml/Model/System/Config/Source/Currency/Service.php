@@ -4,15 +4,13 @@
  * Система создаёт объект-одиночку для потомков этого класса.
  * Не забывайте об этом при реализации кеширования результатов вычислений внутри этого класса!
  */
-class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_Model_Config_Source {
+class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_Config_Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect
 	 * @return array(array(string => string))
 	 */
-	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return $this->getAsOptionArray();
-	}
+	protected function toOptionArrayInternal($isMultiSelect = false) {return $this->getAsOptionArray();}
 	
 	/** @return string[][] */
 	private function getAsOptionArray() {
@@ -21,10 +19,7 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[][] $result */
 			$result = array();
-			/** @var array $services */
-			$services = Mage::getConfig()->getNode('global/currency/import/services')->asArray();
-			df_assert_array($result);
-			foreach ($services as $code => $service) {
+			foreach (rm_config_a('global/currency/import/services') as $code => $service) {
 				/** @var array $service */
 				df_assert_array($service);
 				/** @var string $code */
@@ -37,9 +32,7 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 				 * @var int $ordering
 				 */
 				$ordering = rm_int(df_a($service, 'ordering', 0));
-				$result[$ordering]=
-					array(self::OPTION_KEY__LABEL => $name, self::OPTION_KEY__VALUE => $code)
-				;
+				$result[$ordering]= rm_option($code, $name);
 			}
 			// Вот ради этого мы перекрыли родительский класс
 			ksort($result);
@@ -47,5 +40,4 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 		}
 		return $this->{__METHOD__};
 	}
-	const _CLASS = __CLASS__;
 }

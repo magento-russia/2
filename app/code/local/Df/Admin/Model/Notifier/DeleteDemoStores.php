@@ -16,18 +16,16 @@ class Df_Admin_Model_Notifier_DeleteDemoStores extends Df_Admin_Model_Notifier {
 	 * @return string
 	 */
 	protected function getMessageTemplate() {
-		return implode('<br/>', array_map(
-			'Df_Admin_Block_Notifier_DeleteDemoStore::render', $this->getDemoStores()
-		));
+		return implode('<br/>', Df_Admin_Block_Notifier_DeleteDemoStore::renderA($this->getDemoStores()));
 	}
 
-	/** @return Mage_Core_Model_Store[] */
+	/** @return Df_Core_Model_StoreM[] */
 	private function getDemoStores() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				array_intersect_key(
+				df_select(
 					Mage::app()->getStores($withDefault = false, $codeKey = true)
-					,array_flip($this->getDemoStoreCodes())
+					, $this->getDemoStoreCodes()
 				)
 			;
 		}

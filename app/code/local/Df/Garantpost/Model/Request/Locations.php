@@ -35,7 +35,7 @@ abstract class Df_Garantpost_Model_Request_Locations extends Df_Garantpost_Model
 	 */
 	protected function postProcessLocations($locations) {
 		// У Чеченской республики отсутствует код
-		return df_clean($locations);
+		return array_filter($locations);
 	}
 
 	/** @return array(string => int) */
@@ -53,5 +53,5 @@ abstract class Df_Garantpost_Model_Request_Locations extends Df_Garantpost_Model
 		return $this->postProcessLocations($locations);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

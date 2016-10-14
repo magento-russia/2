@@ -9,7 +9,7 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	}
 
 	/** @return string */
-	public function getPosition() {return $this->cfg(self::P__POSITION);}
+	public function getPosition() {return $this->getApplicator()->getPosition();}
 
 	/** @return int[] */
 	public function getRootNodeIds() {
@@ -27,7 +27,7 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	}
 
 	/** @return int */
-	public function getVerticalOrdering() {return $this->cfg(self::P__VERTICAL_ORDERING);}
+	public function getVerticalOrdering() {return $this->getApplicator()->getVerticalOrdering();}
 
 	/** @return Df_Cms_Model_ContentsMenu */
 	public function insertIntoLayout() {
@@ -42,12 +42,12 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	 * @return Df_Cms_Model_ContentsMenu
 	 */
 	public function merge(Df_Cms_Model_ContentsMenu $menu) {
-		foreach ($menu->getApplicators() as $applicator) {
-			/** @var Df_Cms_Model_ContentsMenu_Applicator $applicator */
-			$this->getApplicators()->addItem($applicator);
-		}
+		$this->getApplicators()->add($menu->getApplicators());
 		return $this;
 	}
+
+	/** @return Df_Cms_Model_ContentsMenu_Applicator */
+	private function getApplicator() {return $this->cfg(self::$P__APPLICATOR);}
 
 	/** @return Df_Cms_Block_Frontend_Menu_Contents */
 	private function getBlockMenu() {
@@ -117,21 +117,22 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this
-			->_prop(self::P__POSITION, self::V_STRING_NE)
-			->_prop(self::P__VERTICAL_ORDERING, self::V_INT)
-		;
+		$this->_prop(self::$P__APPLICATOR, Df_Cms_Model_ContentsMenu_Applicator::_C);
 	}
-	const _CLASS = __CLASS__;
-	const P__POSITION = 'position';
-	const P__VERTICAL_ORDERING = 'vertical_ordering';
+	/** @used-by Df_Cms_Model_ContentsMenu_Collection::itemClass() */
+	const _C = __CLASS__;
 	const POSITION__CONTENT = 'content';
 	const POSITION__LEFT = 'left';
 	const POSITION__RIGHT = 'right';
+	/** @var string */
+	private static $P__APPLICATOR = 'applicator';
+
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param Df_Cms_Model_ContentsMenu_Applicator $applicator
 	 * @return Df_Cms_Model_ContentsMenu
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(Df_Cms_Model_ContentsMenu_Applicator $applicator) {return new self(array(
+		self::$P__APPLICATOR => $applicator
+	));}
 }

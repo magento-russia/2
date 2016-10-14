@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Gunsel>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Гюнсел</title>
+			<version>1.0.0</version>
 		</Df_Gunsel>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-gunsel>
 				<active>0</active>
-				<model>df_gunsel/carrier</model>
+				<model>Df_Gunsel_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_DeliveryUa>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Деливери</title>
+			<version>1.0.0</version>
 		</Df_DeliveryUa>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-delivery-ua>
 				<active>0</active>
-				<model>df_delivery_ua/carrier</model>
+				<model>Df_DeliveryUa_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

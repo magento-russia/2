@@ -16,11 +16,11 @@ abstract class Df_Dataflow_Model_Importer_Product_Specialized extends Df_Core_Mo
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__IMPORTED_ROW, self::V_ARRAY)
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_CLASS)
+			->_prop(self::P__IMPORTED_ROW, RM_V_ARRAY)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__IMPORTED_ROW = 'importedRow';
 	const P__PRODUCT = 'product';
 }

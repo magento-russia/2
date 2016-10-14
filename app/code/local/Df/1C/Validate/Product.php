@@ -7,7 +7,7 @@ class Df_1C_Validate_Product extends Df_Zf_Validate {
 	 */
 	public function isValid($value) {
 		df_assert($value instanceof Df_Catalog_Model_Product);
-		return !!$value->getData(Df_Eav_Const::ENTITY_EXTERNAL_ID);
+		return !!$value->get1CId();
 	}
 
 	/**

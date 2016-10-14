@@ -4,17 +4,17 @@
 		<resources>
 			<admin>
 				<children>
-					<df_banner module='df_banner'>
+					<df_banner>
 						<title>Реклама</title>
 						<sort_order>71</sort_order>
 						<children>
-							<banners module='df_banner'>
+							<banners>
 								<title>Рекламные щиты</title>
 								<sort_order>0</sort_order>
 							</banners>
 						</children>
 						<children>
-							<banneritems module='df_banner'>
+							<banneritems>
 								<title>Рекламные объявления</title>
 								<sort_order>10</sort_order>
 							</banneritems>
@@ -25,21 +25,21 @@
 		</resources>
 	</acl>
 	<menu>
-		<df_banner module='df_banner'>
+		<df_banner>
 			<title>Реклама</title>
 			<sort_order>71</sort_order>
 			<depends>
 				<config>df_promotion/banners/enabled</config>
 			</depends>
 			<children>
-				<banners module='df_banner'>
+				<banners>
 					<title>Рекламные щиты</title>
 					<sort_order>0</sort_order>
 					<action>df_banner/adminhtml_banner</action>
 				</banners>
 			</children>
 			<children>
-				<banneritems module='df_banner'>
+				<banneritems>
 					<title>Рекламные объявления</title>
 					<sort_order>10</sort_order>
 					<action>df_banner/adminhtml_banneritem</action>

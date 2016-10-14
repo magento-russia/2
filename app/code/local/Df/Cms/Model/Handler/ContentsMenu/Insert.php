@@ -1,25 +1,14 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 class Df_Cms_Model_Handler_ContentsMenu_Insert extends Df_Core_Model_Handler {
 	/**
+	 * @uses Df_Cms_Model_ContentsMenu_Collection::walk()
+	 * @uses Df_Cms_Model_ContentsMenu::insertIntoLayout()
 	 * @override
 	 * @return void
 	 */
 	public function handle() {
-		foreach ($this->getContentsMenus()->getPositions() as $position) {
-			/** @var Df_Cms_Model_ContentsMenu_Collection $position */
-			/**
-			 * Убрал df_assert ради ускорения
-			 * (метод Df_Cms_Model_Handler_ContentsMenu_Insert::handle
-			 * срабатывает при каждой загрузке страницы)
-			 */
-			foreach ($position as $contentsMenu) {
-				/** @var Df_Cms_Model_ContentsMenu $contentsMenu */
-				$contentsMenu->insertIntoLayout();
-			}
-		}
+		$this->getContentsMenus()->getPositions()->walk('walk', array('insertIntoLayout'));
 	}
 
 	/** @return Df_Cms_Model_ContentsMenu_Collection */
@@ -27,11 +16,7 @@ class Df_Cms_Model_Handler_ContentsMenu_Insert extends Df_Core_Model_Handler {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Cms_Model_ContentsMenu_Collection $result */
 			/** @var string $cacheKey */
-			$cacheKey =
-				Df_Cms_Model_Cache::s()->makeKey(
-					__METHOD__, rm_state()->getController()->getFullActionName()
-				)
-			;
+			$cacheKey = Df_Cms_Model_Cache::s()->makeKey(__METHOD__, rm_action_name());
 			$result = Df_Cms_Model_Cache::s()->loadDataComplex($cacheKey);
 			if (!$result) {
 				$result = Df_Cms_Model_ContentsMenu_Collection::i();
@@ -49,8 +34,9 @@ class Df_Cms_Model_Handler_ContentsMenu_Insert extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Cms_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

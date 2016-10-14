@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Assist>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>ASSIST</title>
+			<version>1.0.0</version>
 		</Df_Assist>
 	</modules>
 	<global>
@@ -40,7 +41,7 @@
 		-->
 		<payment>
 			<df-assist>
-				<model>df_assist/payment</model>
+				<model>Df_Assist_Model_Payment</model>
 			</df-assist>
 		</payment>
 	</default>

@@ -8,64 +8,30 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 
 	/**
 	 * @override
-	 * @return string
+	 * @return void
+	 * @throws Exception
 	 */
-	public function getMethodTitle() {
-		return
-			implode(
-				' '
-				,array(
-					rm_sprintf('%s:', parent::getMethodTitle())
-					,rm_sprintf(
-						'%s'
-						,$this->formatTimeOfDelivery(
-							$timeOfDeliveryMin = 1
-							,$timeOfDeliveryMax = 3
-						)
-					)
-				)
-			)
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsUkraine()
+			->checkCountryDestinationIsUkraine()
+			->checkCityOriginIsNotEmpty()
+			->checkCityDestinationIsNotEmpty()
+			->checkLocationIdOrigin()
+			->checkLocationIdDestination()
 		;
 	}
 
 	/**
 	 * @override
-	 * @return bool
-	 * @throws Exception
-	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsUkraine()
-					->checkCountryDestinationIsUkraine()
-					->checkCityOriginIsNotEmpty()
-					->checkCityDestinationIsNotEmpty()
-				;
-				if (!$this->getLocationIdOrigin()) {
-					$this->throwExceptionInvalidOrigin();
-				}
-				if (!$this->getLocationIdDestination()) {
-					$this->throwExceptionInvalidDestination();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
-		}
-		return $result;
-	}
-
-	/**
-	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
 	 * @return float
 	 */
-	protected function getCostInHryvnias() {
+	protected function getCost() {
 		/** @var float $result */
 		$result = $this->getRatePrimary();
-		if ($this->getRmConfig()->service()->needGetCargoFromTheShopStore()) {
+		if ($this->configS()->needGetCargoFromTheShopStore()) {
 			$result += $this->getRateDoor();
 		}
 		if ($this->needDeliverToHome()) {
@@ -78,11 +44,16 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 
 	/**
 	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
+	 */
+	protected function getDeliveryTime() {return array(1, 3);}
+
+	/**
+	 * @override
 	 * @return array
 	 */
-	protected function getLocations() {
-		return Df_DeliveryUa_Model_Request_Locations::s()->getLocations();
-	}
+	protected function getLocations() {return Df_DeliveryUa_Model_Request_Locations::s()->getLocations();}
 
 	/** @return Df_DeliveryUa_Model_Request_Rate */
 	private function getApi() {
@@ -98,9 +69,7 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 	private function getRateByVolume() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					$this->getApi()->getRateByVolume()
-				*
-					$this->getRequest()->getVolumeInCubicMetres()
+				$this->getApi()->getRateByVolume() * $this->rr()->getVolumeInCubicMetres()
 			;
 		}
 		return $this->{__METHOD__};
@@ -110,9 +79,7 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 	private function getRateByWeight() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					$this->getApi()->getRateByWeight()
-				*
-					$this->getRequest()->getWeightInKilogrammes()
+				$this->getApi()->getRateByWeight() * $this->rr()->getWeightInKilogrammes()
 			;
 		}
 		return $this->{__METHOD__};
@@ -122,7 +89,7 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 	private function getRateDoor() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_float(
-				df_a(df_a(self::$_rateDoorTable, $this->getRateDoorIndex()), self::RATE)
+				df_a(df_a($this->getRateDoorTable(), $this->getRateDoorIndex()), self::$RATE)
 			);
 		}
 		return $this->{__METHOD__};
@@ -132,22 +99,22 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 	private function getRateDoorIndex() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $result */
-			$result = count(self::$_rateDoorTable) - 1;
-			foreach (self::$_rateDoorTable as $index => $rateConditions) {
+			$result = count($this->getRateDoorTable()) - 1;
+			foreach ($this->getRateDoorTable() as $index => $rateConditions) {
 				/** @var int $index */
 				df_assert_integer($index);
 				/** @var array $rateConditions */
 				df_assert_array($rateConditions);
 				/** @var float $maxWeight */
-				$maxWeight = df_a($rateConditions, self::MAX_WEIGHT);
+				$maxWeight = df_a($rateConditions, self::$MAX_WEIGHT);
 				df_assert_float($maxWeight);
 				/** @var float $maxVolume */
-				$maxVolume = df_a($rateConditions, self::MAX_VOLUME);
+				$maxVolume = df_a($rateConditions, self::$MAX_VOLUME);
 				df_assert_float($maxVolume);
 				if (
-						($maxVolume >= $this->getRequest()->getVolumeInCubicMetres())
+						($maxVolume >= $this->rr()->getVolumeInCubicMetres())
 					&&
-						($maxWeight >= $this->getRequest()->getWeightInKilogrammes())
+						($maxWeight >= $this->rr()->getWeightInKilogrammes())
 				) {
 					$result = $index;
 					break;
@@ -159,85 +126,38 @@ abstract class Df_DeliveryUa_Model_Method extends Df_Shipping_Model_Method_Ukrai
 		return $this->{__METHOD__};
 	}
 
-	/** @var array */
-	private static $_rateDoorTable =
-		array(
-			array(
-				self::MAX_VOLUME => 0.3
-				,self::MAX_WEIGHT => 100
-				,self::RATE => 45
-			)
-			,array(
-				self::MAX_VOLUME => 1
-				,self::MAX_WEIGHT => 250
-				,self::RATE => 55
-			)
-			,array(
-				self::MAX_VOLUME => 2
-				,self::MAX_WEIGHT => 500
-				,self::RATE => 65
-			)
-			,array(
-				self::MAX_VOLUME => 3
-				,self::MAX_WEIGHT => 750
-				,self::RATE => 75
-			)
-			,array(
-				self::MAX_VOLUME => 4
-				,self::MAX_WEIGHT => 1000
-				,self::RATE => 85
-			)
-			,array(
-				self::MAX_VOLUME => 5
-				,self::MAX_WEIGHT => 1250
-				,self::RATE => 95
-			)
-			,array(
-				self::MAX_VOLUME => 6
-				,self::MAX_WEIGHT => 1500
-				,self::RATE => 105
-			)
-			,array(
-				self::MAX_VOLUME => 7
-				,self::MAX_WEIGHT => 2000
-				,self::RATE => 125
-			)
-			,array(
-				self::MAX_VOLUME => 10
-				,self::MAX_WEIGHT => 2500
-				,self::RATE => 150
-			)
-			,array(
-				self::MAX_VOLUME => 12
-				,self::MAX_WEIGHT => 3000
-				,self::RATE => 185
-			)
-			,array(
-				self::MAX_VOLUME => 14
-				,self::MAX_WEIGHT => 3500
-				,self::RATE => 220
-			)
-			,array(
-				self::MAX_VOLUME => 16
-				,self::MAX_WEIGHT => 4000
-				,self::RATE => 260
-			)
-			,array(
-				self::MAX_VOLUME => 20
-				,self::MAX_WEIGHT => 5000
-				,self::RATE => 300
-			)
-		)
-	;
-	const MAX_VOLUME = 'max_volume';
-	const MAX_WEIGHT = 'max_weight';
-	const RATE = 'rate';
+	/** @return array(array(string => float)) */
+	private function getRateDoorTable() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_map('array_combine', array(
+				array(0.3, 100, 45)
+				,array(1, 250, 55)
+				,array(2, 500, 65)
+				,array(3, 750, 75)
+				,array(4, 1000, 85)
+				,array(5, 1250, 95)
+				,array(6, 1500, 105)
+				,array(7, 2000, 125)
+				,array(10, 2500, 150)
+				,array(12, 3000, 185)
+				,array(14, 3500, 220)
+				,array(16, 4000, 260)
+				,array(20, 5000, 300)
+			), array(), array(array(self::$MAX_VOLUME, self::$MAX_WEIGHT, self::$RATE)));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @var string */
+	private static $MAX_VOLUME = 'max_volume';
+	/** @var string */
+	private static $MAX_WEIGHT = 'max_weight';
+	/** @var string */
+	private static $RATE = 'rate';
 
 	/** @return float */
 	private function getRatePrimary() {
 		// Будем считать, что у нас только 1 место (т.е. что все товары запакованы в один ящик)
 		return max(8, $this->getRateByVolume(), $this->getRateByWeight());
 	}
-
-	const _CLASS = __CLASS__;
 }

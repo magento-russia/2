@@ -51,7 +51,7 @@ class Df_Core_Model_Format_NounForAmounts extends Df_Core_Model {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const NOUN_FORM_1 = 0;
 	const NOUN_FORM_2 = 1;
 	const NOUN_FORM_5 = 2;

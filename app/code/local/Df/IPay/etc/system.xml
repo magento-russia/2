@@ -3,7 +3,7 @@
    <sections>
 		<df_payment>
 			<groups>
-				<ipay translate='label' module='df_ipay'>
+				<ipay>
 					<label>iPay</label>
 					<comment>
 					   <![CDATA[
@@ -20,24 +20,24 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<!--
 								Надо удостовериться, что в системе доступна валюта BYR
 								и присутствует курс обмена учётной валюты магазина на BYR.
 							-->
-							<backend_model>df_payment/config_backend_active_currency</backend_model>
+							<backend_model>Df_Admin_Config_Backend_Currency</backend_model>
 							<rm_currency>BYR</rm_currency>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-ipay</df_feature>
 						</active>
-						<payment_service__shop_id translate='label'>
+						<payment_service__shop_id>
 							<label><![CDATA[Номер магазина в iPay]]></label>
 							<comment>
 							   <![CDATA[]]>
@@ -47,14 +47,14 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								required-entry
 								validate-digits
 							</validate>
 						</payment_service__shop_id>
-						<payment_service__test translate='label'>
+						<payment_service__test>
 							<label>Тестовый режим?</label>
 							<comment>
 							   <![CDATA[
@@ -67,11 +67,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__test>
-						<frontend__title translate='label'>
+						<frontend__title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -83,11 +83,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</frontend__title>
-						<frontend__description translate='label'>
+						<frontend__description>
 							<label>Примечание к способу оплаты на экране оформления заказа</label>
 							<comment>
 								<![CDATA[
@@ -100,10 +100,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</frontend__description>
-						<payment_service__transaction_description translate='label'>
+						<payment_service__transaction_description>
 							<label>Название получателя платежа на экране оплаты</label>
 							<comment>
 								<![CDATA[
@@ -122,10 +122,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</payment_service__transaction_description>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -139,13 +139,13 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								validate-digits
 							</validate>
 						</frontend__sort_order>
-						<payment_service__response_password translate='label'>
+						<payment_service__response_password>
 							<label>
 								Криптографический ключ магазина
 							</label>
@@ -163,11 +163,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__response_password>
-						<frontend__allowspecific translate='label'>
+						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
 								<![CDATA[
@@ -182,10 +182,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</frontend__allowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Допустимые страны покупателей</label>
 							<comment>
 								<![CDATA[
@@ -201,7 +201,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<active>1</active>
 								<frontend__allowspecific>1</frontend__allowspecific>

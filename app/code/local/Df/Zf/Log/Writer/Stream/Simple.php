@@ -1,4 +1,15 @@
 <?php
+/**
+ * Этот класс перекрывает системный класс @see Zend_Log_Writer_Stream
+ * в файле Df/Zf/etc/config.xml следующим образом:
+	<global>
+		<log>
+			<core>
+				<writer_model>Df_Zf_Log_Writer_Stream_Simple</writer_model>
+			</core>
+		</log>
+	</global>
+ */
 class Df_Zf_Log_Writer_Stream_Simple extends Zend_Log_Writer_Stream {
 	/**
 	 * @override

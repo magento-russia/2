@@ -2,10 +2,15 @@
 class Df_Catalog_Model_Resource_Product_Attribute_Collection
 	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Attribute_Collection {
 	/**
+	 * @override
+	 * @return Df_Catalog_Model_Resource_Attribute
+	 */
+	public function getResource() {return Df_Catalog_Model_Resource_Attribute::s();}
+
+	/**
 	 * Цель перекрытия —
 	 * перевод экранного названия «Special Price» товарного свойства «special_price»,
 	 * а также экранных названий некоторых других товарных свойств.
-	 * @link https://github.com/dfediuk/rm/commit/7ef0885000282541764964a45f27691e0f2639e3
 	 * @override
 	 * @return Df_Catalog_Model_Resource_Product_Attribute_Collection
 	 */
@@ -19,7 +24,6 @@ class Df_Catalog_Model_Resource_Product_Attribute_Collection
 	 * Решает проблему перевода
 	 * экранного названия «Special Price» товарного свойства «special_price»,
 	 * а также экранных названий некоторых других товарных свойств.
-	 * @link https://github.com/dfediuk/rm/commit/7ef0885000282541764964a45f27691e0f2639e3
 	 *
 	 * Обратите внимание, что этот метод решает проблему не полностью а лишь часть её.
 	 * Другую часть решает метод Df_Eav_Model_Config::_save().
@@ -50,14 +54,6 @@ class Df_Catalog_Model_Resource_Product_Attribute_Collection
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {
-		parent::_construct();
-		$this->_init(
-			Df_Catalog_Model_Resource_Eav_Attribute::mf(), Df_Catalog_Model_Resource_Attribute::mf()
-		);
-	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Catalog_Model_Resource_Product_Attribute_Collection */
-	public static function i() {return new self;}
+	public function _construct() {$this->_itemObjectClass = Df_Catalog_Model_Resource_Eav_Attribute::_C;}
+	const _C = __CLASS__;
 }

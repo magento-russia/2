@@ -25,15 +25,6 @@ class Df_Core_Helper_Request extends Mage_Core_Helper_Abstract {
 		return $array;
 	}
 
-	/**
-	 * @param string $paramName
-	 * @param mixed $default[optional]
-	 * @return mixed
-	 */
-	public function getParam($paramName, $default = null) {
-		return Mage::app()->getRequest()->getParam($paramName, $default);
-	}
-
 	/** @return Df_Core_Helper_Request */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Cdek>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>СДЭК</title>
+			<version>1.0.0</version>
 		</Df_Cdek>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-cdek>
 				<active>0</active>
-				<model>df_cdek/carrier</model>
+				<model>Df_Cdek_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки
@@ -26,17 +27,15 @@
 		</carriers>
 		<df_shipping>
 			<cdek>
-				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
-				<frontend__sort_order>0</frontend__sort_order>
-				<admin__processing_before_shipping__consider_days_off>0</admin__processing_before_shipping__consider_days_off>
-				<admin__processing_before_shipping__consider_today_untill>12</admin__processing_before_shipping__consider_today_untill>
-				<admin__processing_before_shipping__days>0</admin__processing_before_shipping__days>
 				<admin__declared_value_percent>0</admin__declared_value_percent>
 				<admin__fee_percent>0</admin__fee_percent>
 				<admin__fee_fixed>0</admin__fee_fixed>
-				<frontend__sallowspecific>1</frontend__sallowspecific>
-				<frontend__specificcountry>RU</frontend__specificcountry>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
 				<frontend__display_diagnostic_messages>0</frontend__display_diagnostic_messages>
+				<frontend__sallowspecific>1</frontend__sallowspecific>
+				<frontend__show_method_name>0</frontend__show_method_name>
+				<frontend__sort_order>0</frontend__sort_order>
+				<frontend__specificcountry>RU</frontend__specificcountry>
 			</cdek>
 		</df_shipping>
 	</default>

@@ -6,10 +6,10 @@
 				<frontend>
 					<fields>
 						<flat_catalog_category>
-							<backend_model>df_catalog/system_config_backend_catalog_category_flat</backend_model>
+							<backend_model>Df_Catalog_Model_Config_Backend_Catalog_Category_Flat</backend_model>
 						</flat_catalog_category>
 						<flat_catalog_product>
-							<backend_model>df_catalog/system_config_backend_catalog_product_flat</backend_model>
+							<backend_model>Df_Catalog_Model_Config_Backend_Catalog_Product_Flat</backend_model>
 						</flat_catalog_product>
 					</fields>
 				</frontend>
@@ -36,7 +36,7 @@
 				</watermark>
 			</groups>
 		</design>
-		<df_tweaks translate='label' module='df_admin'>
+		<df_tweaks>
 			<groups>
 				<illustrated_catalog_navigation>
 					<label>Иллюстрированное меню товарных разделов</label>
@@ -46,7 +46,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Activate?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -54,10 +54,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks</df_feature>
 						</enabled>
-						<enabled_for_front_page translate='label'>
+						<enabled_for_front_page>
 							<label>Activate for Front Page?</label>
 							<comment>
 								<![CDATA[
@@ -76,10 +76,10 @@
 								<enabled>1</enabled>
 							</depends>
 						</enabled_for_front_page>
-						<position translate='label'>
+						<position>
 							<label>Position</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_catalog/system_config_source_category_content_position</source_model>
+							<source_model>Df_Catalog_Model_Config_Source_Category_Content_Position</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -88,7 +88,7 @@
 								<enabled>1</enabled>
 							</depends>
 						</position>
-						<number_of_columns translate='label'>
+						<number_of_columns>
 							<label>Number of Columns</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>3000</sort_order>

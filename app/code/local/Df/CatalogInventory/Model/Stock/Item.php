@@ -25,12 +25,9 @@ class Df_CatalogInventory_Model_Stock_Item extends Mage_CatalogInventory_Model_S
 		$result =  parent::getProduct();
 		/** @var bool $optimizationNeeded */
 		static $optimizationNeeded;
-		if (!isset($optimizationNeeded)) {
+		if (is_null($optimizationNeeded)) {
 			$optimizationNeeded =
-					df_enabled(Df_Core_Feature::TWEAKS_ADMIN)
-				&&
-					df_cfg()->admin()->optimization()
-						->getFixDoubleStockReindexingOnProductSave()
+				df_cfg()->admin()->optimization()->getFixDoubleStockReindexingOnProductSave()
 			;
 		}
 		if ($optimizationNeeded && !$result && isset($this->_productInstance)) {
@@ -38,4 +35,7 @@ class Df_CatalogInventory_Model_Stock_Item extends Mage_CatalogInventory_Model_S
 		}
 		return $result;
 	}
+
+	/** @return Df_CatalogInventory_Model_Stock_Item */
+	public static function i() {return new self;}
 }

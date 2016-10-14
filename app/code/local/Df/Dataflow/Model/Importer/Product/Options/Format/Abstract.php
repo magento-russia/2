@@ -37,12 +37,12 @@ abstract class Df_Dataflow_Model_Importer_Product_Options_Format_Abstract
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__IMPORTED_KEY, self::V_STRING_NE)
-			->_prop(self::P__IMPORTED_VALUE, self::V_STRING)
+			->_prop(self::P__IMPORTED_KEY, RM_V_STRING_NE)
+			->_prop(self::P__IMPORTED_VALUE, RM_V_STRING)
 			->_prop(self::P__PRODUCT, self::P__PRODUCT_TYPE)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__IMPORTED_KEY = 'importedKey';
 	const P__IMPORTED_VALUE = 'importedValue';
 	const P__PRODUCT = 'product';

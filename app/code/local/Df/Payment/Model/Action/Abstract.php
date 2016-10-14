@@ -1,76 +1,75 @@
 <?php
-abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Controller_Action {
+abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 	/**
 	 * @abstract
+	 * @used-by comment()
+	 * @used-by method()
+	 * @used-by payment()
 	 * @return Df_Sales_Model_Order
 	 */
-	abstract protected function getOrder();
+	abstract protected function order();
+
+	/**
+	 * @used-by Df_Interkassa_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_LiqPay_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_OnPay_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_Payment_Model_Action_Abstract::_process()
+	 * @used-by Df_Payment_Model_Action_Confirm::logExceptionToOrderHistory()
+	 * @used-by Df_Qiwi_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @param string $comment
+	 * @param bool $isCustomerNotified [optional]
+	 * @return void
+	 */
+	protected function comment($comment, $isCustomerNotified = false) {
+		$this->order()->comment($comment, $isCustomerNotified);
+	}
+
+	/** @return Df_Payment_Config_Area_Service */
+	protected function configS() {return $this->method()->configS();}
 
 	/**
 	 * @param string $configKey
-	 * @param bool $isRequired[optional]
-	 * @param string $defaultValue[optional]
+	 * @param bool $isRequired [optional]
+	 * @param string $default [optional]
 	 * @return string
 	 */
-	protected function getConst(
-		$configKey
-		,$isRequired = true
-		,$defaultValue = ''
-	) {
-		df_param_string($configKey, 0);
-		df_param_boolean($isRequired, 1);
-		df_param_string($defaultValue, 2);
+	protected function getConst($configKey, $isRequired = true, $default = '') {
 		/** @var string $key */
-		$key = rm_config_key(self::CONFIG_BASE, $configKey);
+		$key = 'request/confirmation/' . $configKey;
 		/** @var string $result */
-		$result = $this->getPaymentMethod()->getConst($key, $canBeTest = false);
+		$result = $this->method()->getConst($key, $canBeTest = false);
 		if ('' === $result) {
 			if ($isRequired) {
 				df_error(
-					self::T__REQUIRED_KEY_IS_ABSENT
-					,df()->reflection()->getModuleName(
-						get_class(
-							/**
-							 * Раньше тут стояло $this,
-							 * но $this->getPaymentMethod() вроде точнее
-							 */
-							$this->getPaymentMethod()
-						)
-					)
-					,$key
+					'В файле «config.xml» модуля «%s» отсутствует требуемый ключ «%s».'
+					, rm_module_name($this->method()), $key
 				);
 			}
-			$result = $defaultValue;
+			$result = $default;
 		}
-		df_result_string($result);
 		return $result;
 	}
 
-	/** @return Df_Payment_Model_Method_WithRedirect */
-	protected function getPaymentMethod() {
+	/**
+	 * @used-by Df_Psbank_Model_Action_CustomerReturn::getResponseByTransactionType()
+	 * @return Mage_Payment_Model_Info
+	 */
+	protected function info() {return $this->method()->getInfoInstance();}
+
+	/**
+	 * @used-by getConst()
+	 * @used-by info()
+	 * @return Df_Payment_Model_Method_WithRedirect
+	 */
+	protected function method() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Sales_Model_Order_Payment $payment */
-			$payment = $this->getOrder()->getPayment();
-			/**
-			 * Не используем тут df_assert, потому что эта функция может быть отключена,
-			 * а нам важно показать правильное диагностическое сообщение,
-			 * а не «Call to a member function getMethodInstance() on a non-object»
-			 */
-			if (!($payment instanceof Mage_Sales_Model_Order_Payment)) {
-				df_error(
-					'Платёжная система прислала сообщение
-					относительно заказа №«%s», который не предназначен для оплаты.'
-					,$this->getOrder()->getIncrementId()
-				);
-			}
 			/** @var Df_Payment_Model_Method_WithRedirect $result */
-			$result = $payment->getMethodInstance();
+			$result = $this->payment()->getMethodInstance();
 			if (!$result instanceof Df_Payment_Model_Method_WithRedirect) {
 				df_error(
-					'Платёжная система прислала сообщение'
-					.' относительно заказа №«%s»,'
-					. ' который не предназначен для оплаты порледством данной платёжной системы.'
-					,$this->getOrder()->getIncrementId()
+					'Платёжная система прислала сообщение относительно заказа №«%s»,'
+					. ' который не предназначен для оплаты последством данной платёжной системы.'
+					,$this->order()->getIncrementId()
 				);
 			}
 			$this->{__METHOD__} = $result;
@@ -78,7 +77,53 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Controller
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
-	const CONFIG_BASE = 'request/confirmation';
-	const T__REQUIRED_KEY_IS_ABSENT = 'В файле «config.xml» модуля «%s» отсутствует требуемый ключ «%s».';
+	/**
+	 * 2015-03-08
+	 * Обратите внимание, что:
+	 * 1) @uses Mage_Sales_Model_Order::getPayment() может иногда возвращать false
+	 * 2) Результат @uses Mage_Sales_Model_Order::getPayment() разумно кэшировать
+	 * в силу реализации этого метода (там используется foreach).
+	 * @used-by method()
+	 * @see Df_Payment_Model_Request::getPayment()
+	 * @return Mage_Sales_Model_Order_Payment
+	 */
+	protected function payment() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var Mage_Sales_Model_Order_Payment|bool $result */
+			$result = $this->order()->getPayment();
+			/**
+			 * Не используем тут @see df_assert(), потому что эта функция может быть отключена,
+			 * а нам важно показать правильное диагностическое сообщение,
+			 * а не «Call to a member function getMethodInstance() on a non-object»
+			 */
+			if (!$result instanceof Mage_Sales_Model_Order_Payment) {
+				df_error(
+					'Платёжная система прислала сообщение
+					относительно заказа №«%s», который не предназначен для оплаты.'
+					,$this->order()->getIncrementId()
+				);
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by Df_Alfabank_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_Avangard_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_IPay_Model_Action_Confirm::_process()
+	 * @used-by Df_Payment_Model_Action_Confirm::_process()
+	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::_process()
+	 * @param Mage_Sales_Model_Order_Invoice $invoice
+	 * @return void
+	 */
+	protected function saveInvoice(Mage_Sales_Model_Order_Invoice $invoice) {
+		/** @var Df_Core_Model_Resource_Transaction $transaction */
+		$transaction = Df_Core_Model_Resource_Transaction::i();
+		$transaction
+			->addObject($invoice)
+			->addObject($invoice->getOrder())
+			->save()
+		;
+	}
 }

@@ -2,6 +2,8 @@
 class Df_Catalog_Block_Product_List_Toolbar extends Mage_Catalog_Block_Product_List_Toolbar {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -16,11 +18,11 @@ class Df_Catalog_Block_Product_List_Toolbar extends Mage_Catalog_Block_Product_L
 				/**
 				 * К ключу кэширования надо также добавить
 				 * значение текущего ключа пошаговой фильтрации.
-				 * @link http://magento-forum.ru/topic/4472/
+				 * http://magento-forum.ru/topic/4472/
 				 * Обратите внимание, что мы не знаем название ключа пошаговой фильтрации,
 				 * потому что это название равно названию некоего товарного свойства,
 				 * по которому осуществляется пошаговая фильтрация.
-				 * @link http://localhost.com:719/bed1.html?p=2&vid_tovara=12
+				 * http://localhost.com:719/bed1.html?p=2&vid_tovara=12
 				 * Здесь название ключа: «vid_tovara».
 				 * Более того, таких ключей в веб-адресе может быть даже несколько.
 				 * Поэтому, я так понимаю, что лучшим решением будет
@@ -68,7 +70,7 @@ class Df_Catalog_Block_Product_List_Toolbar extends Mage_Catalog_Block_Product_L
 		 * (и в полную противоположность Zend Framework
 		 * и всем остальным частям Magento, где используется кэширование)
 		 * означает, что блок не удет кэшироваться вовсе!
-		 * @see Mage_Core_Block_Abstract::_loadCache()
+		 * @used-by Mage_Core_Block_Abstract::_loadCache()
 		 */
 		$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 		/** @var string[] $cachedFields */

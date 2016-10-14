@@ -1,6 +1,10 @@
 <?php
 /**
+ * @method bool|null getPageExists()
+ * @method int|null getPageId()
  * @method Df_Cms_Model_Resource_Hierarchy_Node getResource()
+ * @method Df_Cms_Model_Hierarchy_Node setIsCurrent(bool $value)
+ * @method Df_Cms_Model_Hierarchy_Node setPageNumber(int $value)
  */
 class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	/**
@@ -29,7 +33,8 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 				$sortOrder = $nodes[$node->getId()];
 				if ($node->getPageExists()) {
 					continue;
-				} else {
+				}
+				else {
 					$node->addData($pageData)
 						->setParentNodeId($node->getId())
 						->unsetData($this->getIdFieldName())
@@ -39,7 +44,8 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 						->setXpath($node->getXpath() . '/')
 						->save();
 				}
-			} else {
+			}
+			else {
 				$removeFromNodes[]= $node->getId();
 			}
 		}
@@ -59,28 +65,24 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	 * Return true if a page binded to a tree node
 	 *
 	 * @param string $identifier
-	 * @param int|Mage_Core_Model_Store $storeId
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $storeId [optional]
 	 * @return bool
 	 */
-	public function checkIdentifier($identifier, $storeId = null)
-	{
-		$storeId = Mage::app()->getStore($storeId)->getId();
-		return $this->getResource()->checkIdentifier($identifier, $storeId);
+	public function checkIdentifier($identifier, $storeId = null) {
+		return $this->getResource()->checkIdentifier($identifier, rm_store_id($storeId));
 	}
 
 	/**
 	 * Collect and save tree
 	 *
 	 * @param array $data	   modified nodes data array
-	 * @param array $remove	 the removed node ids
+	 * @param int[] $remove	 the removed node ids
 	 * @return Df_Cms_Model_Hierarchy_Node
 	 */
-	public function collectTree($data, $remove)
-	{
+	public function collectTree($data, $remove) {
 		if (!is_array($data)) {
 			return $this;
 		}
-
 		$nodes = array();
 		foreach ($data as $v) {
 			$required = array(
@@ -89,9 +91,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 			// validate required node data
 			foreach ($required as $field) {
 				if (!array_key_exists($field, $v)) {
-					Mage::throwException(
-						df_h()->cms()->__('Invalid node data')
-					);
+					Mage::throwException(df_h()->cms()->__('Invalid node data'));
 				}
 			}
 			// В данной точке программы $parentNodeId не должно принимать значение null,
@@ -122,7 +122,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 			$this->getResource()->commit();
 		} catch (Exception $e) {
 			$this->getResource()->rollBack();
-			throw $e;
+			df_error($e);
 		}
 		return $this;
 	}
@@ -202,6 +202,12 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	/** @return string|null */
 	public function getRequestUrl() {return $this->cfg(self::P__REQUEST_URL);}
 
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Hierarchy_Node_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
 	/** @return int */
 	public function getSortOrder() {return $this->cfg(self::P__SORT_ORDER);}
 
@@ -262,7 +268,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 			!$store
 			// для ускорения
 			? Mage::getUrl('', $urlParams)
-			: Mage::app()->getStore($store)->getUrl('', $urlParams);
+			: rm_store($store)->getUrl('', $urlParams);
 	}
 
 	/** @return bool */
@@ -275,7 +281,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	public function isBelongTo($nodeId) {
 		df_param_integer($nodeId, 0);
 		if (!isset($this->{__METHOD__}[$nodeId])) {
-			$this->{__METHOD__}[$nodeId] = in_array($nodeId, explode('/', $this->getXPath()));
+			$this->{__METHOD__}[$nodeId] = in_array($nodeId, df_explode_xpath($this->getXPath()));
 		}
 		return $this->{__METHOD__}[$nodeId];
 	}
@@ -389,8 +395,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	 * @param Mage_Cms_Model_Page $page
 	 * @return Df_Cms_Model_Hierarchy_Node
 	 */
-	public function updateRewriteUrls(Mage_Cms_Model_Page $page)
-	{
+	public function updateRewriteUrls(Mage_Cms_Model_Page $page) {
 		$xpaths = $this->getResource()->getTreeXpathsByPage($page->getId());
 		foreach ($xpaths as $xpath) {
 			$this->getResource()->updateRequestUrlsForTreeByXpath($xpath);
@@ -488,8 +493,12 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 		}
 		return $this;
 	}
-	/** @var array */
-	 protected $_metaNodes = array();
+
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Hierarchy_Node
+	 */
+	protected function _getResource() {return Df_Cms_Model_Resource_Hierarchy_Node::s();}
 
 	/**
 	 * @override
@@ -497,28 +506,34 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Hierarchy_Node::mf());
 		$this
-			->_prop(self::P__LEVEL, self::V_INT)
-			->_prop(self::P__MENU_EXCLUDED, self::V_BOOL)
-			->_prop(self::P__MENU_LEVELS_DOWN, self::V_INT)
-			->_prop(self::P__PAGE_IDENTIFIER, self::V_STRING)
+			->_prop(self::P__LEVEL, RM_V_INT)
+			->_prop(self::P__MENU_EXCLUDED, RM_V_BOOL)
+			->_prop(self::P__MENU_LEVELS_DOWN, RM_V_INT)
+			->_prop(self::P__PAGE_IDENTIFIER, RM_V_STRING)
 			/**
 			 * Оказывается, при загрузке статей из БД P__PAGE_TITLE может быть равно NULL:
 				 #1 Df_Core_Model->_validate('page_title', NULL)
 				 #2 Df_Core_Model->setData('page_title', NULL)
 				 #3 Varien_Object->addData(Array)
 				 #4 Varien_Data_Collection_Db->load()
-			 * @link http://magento-forum.ru/topic/4626/
+			 * http://magento-forum.ru/topic/4626/
 			 */
-			->_prop(self::P__PAGE_TITLE, self::V_STRING)
-			->_prop(self::P__PARENT_NODE_ID, self::V_NAT0)
-			->_prop(self::P__REQUEST_URL, self::V_STRING)
-		    ->_prop(self::P__SORT_ORDER, self::V_INT)
-			->_prop(self::P__XPATH, self::V_STRING)
+			->_prop(self::P__PAGE_TITLE, RM_V_STRING)
+			->_prop(self::P__PARENT_NODE_ID, RM_V_NAT0)
+			->_prop(self::P__REQUEST_URL, RM_V_STRING)
+		    ->_prop(self::P__SORT_ORDER, RM_V_INT)
+			->_prop(self::P__XPATH, RM_V_STRING)
 		;
 	}
-	const _CLASS = __CLASS__;
+	/** @var array */
+	 protected $_metaNodes = array();
+
+	/**
+	 * @used-by Df_Cms_Model_ContentsMenu_Applicator::_construct()
+	 * @used-by Df_Cms_Model_Resource_Hierarchy_Node_Collection::_construct()
+	 */
+	const _C = __CLASS__;
 	const META_NODE_TYPE_CHAPTER = 'chapter';
 	const META_NODE_TYPE_SECTION = 'section';
 	const META_NODE_TYPE_FIRST = 'start';
@@ -538,8 +553,8 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	const P__XPATH = 'xpath';
 
 	/** @return Df_Cms_Model_Resource_Hierarchy_Node_Collection */
-	public static function c() {return self::s()->getCollection();}
-	/** @return array */
+	public static function c() {return new Df_Cms_Model_Resource_Hierarchy_Node_Collection;}
+	/** @return string[] */
 	public static function getMetadataKeys() {
 		return array_merge(
 			array(
@@ -599,11 +614,6 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	 * @return Df_Cms_Model_Hierarchy_Node
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Cms_Model_Resource_Hierarchy_Node_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Cms_Model_Hierarchy_Node */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

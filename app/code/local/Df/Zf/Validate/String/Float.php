@@ -10,7 +10,7 @@ class Df_Zf_Validate_String_Float extends Df_Zf_Validate_String_Parser {
 		/**
 		 * Избавляет от сбоев типа
 		 * «Система не смогла распознать значение «368.» типа «string» как вещественное число.»
-		 * @link http://magento-forum.ru/topic/4648/
+		 * http://magento-forum.ru/topic/4648/
 		 * Другими словами, думаю, что будет правильным
 		 * конвертировать строки типа «368.» в вещественные числа без сбоев.
 		 *

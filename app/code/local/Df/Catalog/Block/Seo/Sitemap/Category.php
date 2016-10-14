@@ -10,7 +10,7 @@ class Df_Catalog_Block_Seo_Sitemap_Category extends Mage_Catalog_Block_Seo_Sitem
 	 * Цель перекрытия —
 	 * устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
 	 * in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
-	 * @link http://magento-forum.ru/topic/4298/
+	 * http://magento-forum.ru/topic/4298/
 	 * @override
 	 * @return Varien_Data_Collection
 	 */
@@ -24,13 +24,13 @@ class Df_Catalog_Block_Seo_Sitemap_Category extends Mage_Catalog_Block_Seo_Sitem
 
 	/**
 	 * Этот метод публичен, потому что используется не только этим классом, но и классами:
-	 * @see Df_Catalog_Block_Seo_Sitemap_Product
-	 * @see Df_Catalog_Block_Seo_Sitemap_Tree_Category
+	 * @used-by Df_Catalog_Block_Seo_Sitemap_Product
+	 * @used-by Df_Catalog_Block_Seo_Sitemap_Tree_Category
 	 *
 	 * Цель обработки коллекции — устранение сбоя
 	 * «Notice: Undefined property: Df_Catalog_Model_Category::$name
 	 * in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
-	 * @link http://magento-forum.ru/topic/4298/
+	 * http://magento-forum.ru/topic/4298/
 	 *
 	 * @override
 	 * @param Varien_Data_Collection $collection

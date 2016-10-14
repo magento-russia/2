@@ -1,4 +1,5 @@
 <?php
+/** @used-by Df_Zf_Log_Writer_Stream_Simple::setFormatter() */
 class Df_Zf_Log_Formatter_Simple extends Zend_Log_Formatter_Simple {
 	/**
 	 * @override

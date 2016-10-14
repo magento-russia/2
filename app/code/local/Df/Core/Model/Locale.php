@@ -11,7 +11,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 		try {
 			$result = parent::currency($currency);
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			$result = $this->currencyDf($currency);
 		}
 		return $result;
@@ -81,10 +81,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 		ksort($zones);
 		foreach ($zones as $code => $name) {
 			$name = trim($name);
-			$options[]= array(
-			   'label' => empty($name) ? $code : $name . ' (' . $code . ')'
-				, 'value' => $code
-			);
+			$options[]= rm_option($code, empty($name) ? $code : $name . ' (' . $code . ')');
 		}
 		return $this->_sortOptionArray($options);
 	}
@@ -114,10 +111,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 	 * @return array(array(string => string))
 	 */
 	public function getTranslatedOptionLocales() {
-		return array(
-			array('value' => 'ru_RU', 'label' => 'Русский')
-			, array('value' => 'en_US', 'label' => 'English')
-		);
+		return rm_map_to_options(array('ru_RU' => 'Русский', 'en_US' => 'English'));
 	}
 
 	/**

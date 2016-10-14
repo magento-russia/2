@@ -9,19 +9,12 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 	 * @return Df_Catalog_Model_Convert_Parser_Product
 	 */
 	public function unparse() {
-		// Используем наши улучшения экспорта только для товаров,
-		// которые экспорта из лицензированных магазинов
-		if (!df_enabled(Df_Core_Feature::DATAFLOW, $this->getStoreId())) {
-			parent::unparse();
+		try {
+			$this->unparseRm();
 		}
-		else {
-			try {
-				$this->unparseRm();
-			}
-			catch(Exception $e) {
-				$this->addException($e);
-				df_handle_entry_point_exception($e, false);
-			}
+		catch (Exception $e) {
+			$this->addException($e);
+			df_handle_entry_point_exception($e, false);
 		}
 		return $this;
 	}
@@ -89,9 +82,9 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 			}
 		}
 		/**
-		 * С @see rm_array_unique_fast() постоянно возникакает проблема
-		 * array_flip(): Can only flip STRING and INTEGER values
-		 * @link http://magento-forum.ru/topic/4695/
+		 * С @see rm_array_unique_fast() постоянно возникакает проблема:
+		 * «array_flip(): Can only flip STRING and INTEGER values»
+		 * http://magento-forum.ru/topic/4695/
 		 * Лучше верну-ка старую добрую функцию @see array_unique()
 		 */
 		$result = array_unique($result);
@@ -116,13 +109,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 	}
 
 	/**
-	 * Этот метод может быть приватным,
-	 * несмотря на использование его как callable,
-	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
-	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * Этот метод вызывает сам себя через @uses array_map()
 	 * @param mixed $value
 	 * @return mixed[]
 	 */
@@ -132,19 +119,25 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 			?
 				df_array_combine(
 					array_keys($value)
-					,array_map(array($this, 'prepareForSerialization'), $value)
+					/** @uses prepareForSerialization() */
+					,array_map(array($this, __FUNCTION__), $value)
 				)
 			:
 				(
-							is_object($value)
-						&&
-							/**
-							 * К сожалению, нельзя здесь для проверки публичности метода
-							 * использовать is_callable,
-							 * потому что наличие Varien_Object::__call
-							 * приводит к тому, что is_callable всегда возвращает true.
-							 */
-							method_exists($value, 'toArray')
+						is_object($value)
+					&&
+						/**
+						 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
+						 * потому что наличие @see Varien_Object::__call()
+						 * приводит к тому, что @see is_callable всегда возвращает true.
+						 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
+						 * не гарантирует публичную доступность метода:
+						 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
+						 * потому что он имеет доступность private или protected.
+						 * Пока эта проблема никак не решена.
+						 */
+						/** @uses Varien_Object::toArray() */
+						method_exists($value, 'toArray')
 					? call_user_func(array($value, 'toArray'))
 					: $value
 				)
@@ -171,34 +164,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 						->toArray()
 				;
 			}
-			$row['df_custom_options'] =
-				rm_sprintf(
-					//'<![CDATA[%s]]>'
-					'%s'
-					,/**
-					 * Метод Zend_Json::prettyPrint отсутствует в Magento 1.4.0.1
-					 * Однако, мы можем поддержать его в более поздних версиях
-					 * через свой нестандартный фильтр
-					 */
-					df_json_pretty_print(
-						df_text()->adjustCyrillicInJson(
-							/**
-							 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
-							 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-							 * @see Zend_Json::encode
-							 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-							 * Обратите внимание,
-							 * что расширение PHP JSON не входит в системные требования Magento.
-							 * @link http://www.magentocommerce.com/system-requirements
-							 * Поэтому использование Zend_Json::encode выглядит более правильным, чем json_encode.
-							 */
-							Zend_Json::encode(
-								$optionsForSerialization
-							)
-						)
-					)
-				)
-			;
+			$row['df_custom_options'] = rm_json_prettify(Zend_Json::encode($optionsForSerialization));
 		}
 		return $this;
 	}
@@ -212,42 +178,36 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				->load($entityId);
 			$this->setProductTypeInstance($product);
 			$this->_currentProduct = $product;
-			/* @var $product Mage_Catalog_Model_Product */
-
+			/* @var Df_Catalog_Model_Product $product */
 			$position = df_mage()->catalogHelper()->__('Line %d, SKU: %s', ($i+1), $product->getSku());
 			$this->setPosition($position);
-			$row =
-				array(
-					'store' => $this->getStore()->getCode()
-					,'websites' => ''
-					,'attribute_set' =>
-						$this->getAttributeSetName(
-							$product->getEntityTypeId()
-							,$product->getAttributeSetId()
-						)
-					,'type' => $product->getTypeId()
-					,'category_ids' => implode(',', $product->getCategoryIds())
+			$row = array(
+				'store' => $this->getStore()->getCode()
+				,'websites' => ''
+				,'attribute_set' => $this->getAttributeSetName(
+					$product->getEntityTypeId(), $product->getAttributeSetId()
+				)
+				,'type' => $product->getTypeId()
+				,'category_ids' => df_csv($product->getCategoryIds())
 			);
 			if (Mage_Core_Model_Store::ADMIN_CODE === $this->getStore()->getCode()) {
 				$websiteCodes = array();
 				foreach ($product->getWebsiteIds() as $websiteId) {
-					$websiteCode = Mage::app()->getWebsite($websiteId)->getCode();
+					$websiteCode = rm_website($websiteId)->getCode();
 					$websiteCodes[$websiteCode] = $websiteCode;
 				}
-				$row['websites'] = implode(',', $websiteCodes);
+				$row['websites'] = df_csv($websiteCodes);
 			}
 			else {
-				$row['websites'] = $this->getStore()->getWebsite()->getCode();
+				$row['websites'] = rm_website()->getCode();
 				if ($this->getVar('url_field')) {
 					$row['url'] = $product->getProductUrl(false);
 				}
 			}
-
 			foreach ($product->getData() as $field => $value) {
 				if (in_array($field, $this->_systemFields) || is_object($value)) {
 					continue;
 				}
-
 				$attribute = $this->getAttribute($field);
 				if (!$attribute) {
 					continue;
@@ -270,11 +230,10 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				else if (is_array($value)) {
 					continue;
 				}
-
 				$row[$field] = $value;
 			}
-
-			if ($stockItem = $product->getStockItem()) {
+			$stockItem = $product->getStockItem();
+			if ($stockItem) {
 				foreach ($stockItem->getData() as $field => $value) {
 					if (in_array($field, $this->_systemFields) || is_object($value)) {
 						continue;
@@ -294,34 +253,21 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				}
 			}
 			// BEGIN PATCH: Export of additional images
-			if (
-					df_enabled(Df_Core_Feature::DATAFLOW_IMAGES, $this->getStoreId())
-				&&
-					df_cfg()->dataflow()->products()->getGallerySupport()
-			) {
-				$row['df_additional_images'] =
-					$this->getAdditionalImagesAsString(
-						array(
-							'product' => $product
-							,'row' => $row
-						)
-					)
-				;
+			if (df_cfg()->dataflow()->products()->getGallerySupport()) {
+				$row['df_additional_images'] = $this->getAdditionalImagesAsString(array(
+					'product' => $product, 'row' => $row)
+				);
 			}
 			// END PATCH: Export of additional images
 
 			// BEGIN PATCH: Export of Custom Options
-			if (df_enabled(Df_Core_Feature::DATAFLOW_CO, $this->getStoreId()) && df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
+			if (df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
 				$this->unparseCustomOptions($product, $row);
 			}
 			// END PATCH: Export of Custom Options
 
 			// BEGIN PATCH: Export of product categories
-			if (
-					df_enabled(Df_Core_Feature::DATAFLOW_CATEGORIES, $this->getStoreId())
-				&&
-					df_cfg()->dataflow()->products()->getEnhancedCategorySupport()
-			) {
+			if (df_cfg()->dataflow()->products()->getEnhancedCategorySupport()) {
 				$row['df_categories'] =
 					Df_Dataflow_Model_Exporter_Product_Categories::i(
 						array(
@@ -336,7 +282,8 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				->setBatchId($this->getBatchModel()->getId())
 				->setBatchData($row)
 				->setStatus(1)
-				->save();
+				->save()
+			;
 			$product->reset();
 		}
 		return $this;

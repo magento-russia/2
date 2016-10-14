@@ -2,9 +2,7 @@
 class Df_Invitation_Helper_Data extends Mage_Core_Helper_Abstract {
 	protected $_isRegistrationAllowed = null;
 	/** @return Df_Invitation_Model_Config */
-	public function config() {
-		return Df_Invitation_Model_Config::s();
-	}
+	public function config() {return Df_Invitation_Model_Config::s();}
 
 	/**
 	 * Return max Invitation amount per send by config.

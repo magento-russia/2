@@ -1,11 +1,4 @@
-/*
- * jQuery dropdown: A simple dropdown plugin
- *
- * Copyright A Beautiful Site, LLC. (http://www.abeautifulsite.net/)
- *
- * Licensed under the MIT license: http://opensource.org/licenses/MIT
- *
-*/
+/** https://github.com/claviska/jquery-dropdown */
 if (jQuery) (function ($) {
 
     $.extend($.fn, {

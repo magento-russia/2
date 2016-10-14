@@ -23,7 +23,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'amount'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Balance')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Balance')
 					,'width' => 50
 					,'index' => 'amount'
 					,'sortable' => false
@@ -34,7 +34,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'website_id'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Website')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Website')
 					,'index' => 'website_id'
 					,'sortable' => false
 					,'type' => 'options'

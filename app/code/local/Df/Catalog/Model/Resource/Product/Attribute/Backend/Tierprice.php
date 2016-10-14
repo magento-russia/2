@@ -9,8 +9,7 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 	 * и по этой причине ошибочно использует оператор SQL INSERT вместо UPDATE,
 	 * что приводит к сбою:
 	 * «Integrity constraint violation: 1062 Duplicate entry».
-	 * @link http://stackoverflow.com/a/10178922
-	 *
+	 * http://stackoverflow.com/a/10178922
 	 * @override
 	 * @param Varien_Object $priceObject
 	 * @return Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
@@ -28,43 +27,47 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 				$adapter = $this->_getReadAdapter();
 				/** @var Varien_Db_Select $select */
 				$select = $adapter->select();
-				$select->from($this->getMainTable(), array($this->getIdFieldName()));
+				$select->from($this->getMainTable(), $this->getIdFieldName());
 				/** @var string $identificationFields */
-				$identificationFields =
-					array('entity_id', 'customer_group_id', 'website_id', 'all_groups', 'qty')
-				;
-				/** @var array(string => mixed) $identificationData */
-				$identificationData =
-					array_intersect_key(
-						$data, array_flip($identificationFields)
-					)
-				;
-				foreach ($identificationData as $key => $value) {
+				$identificationFields = array(
+					'entity_id', 'customer_group_id', 'website_id', 'all_groups', 'qty'
+				);
+				foreach (df_select($data, $identificationFields) as $key => $value) {
 					/** @var string $key */
 					/** @var mixed $value */
-					$select->where(rm_sprintf('%s = ?', $key), $value);
+					$select->where("{$value} = ?", $key);
 				}
 				/** @var array(array(string => mixed)) $rows */
 				$rows = $adapter->fetchAll($select);
-				if (0 === count($rows)) {
+				if (!$rows) {
 					$adapter->insert($this->getMainTable(), $data);
 				}
 				else {
-					$adapter->update(
-						$this->getMainTable()
-						,$data
-						,rm_quote_into(
-							rm_sprintf('%s = ?', $this->getIdFieldName())
-							,df_a(rm_first($rows), $this->getIdFieldName())
-						)
-					);
+					$adapter->update($this->getMainTable(), $data, rm_quote_into(
+						sprintf('%s = ?', $this->getIdFieldName())
+						,df_a(rm_first($rows), $this->getIdFieldName())
+					));
 				}
 			}
 		}
 		catch (Exception $e) {
 			Mage::logException($e);
-			throw $e;
+			df_error($e);
 		}
 		return $this;
+	}
+
+	/**
+	 * 2015-02-09
+	 * Возвращаем объект-одиночку именно таким способом,
+	 * потому что наш класс перекрывает посредством <rewrite> системный класс,
+	 * и мы хотим, чтобы вызов @see Mage::getResourceSingleton() ядром Magento
+	 * возвращал тот же объект, что и наш метод @see s(),
+	 * сохраняя тем самым объект одиночкой (это важно, например, для производительности:
+	 * сохраняя объект одиночкой — мы сохраняем его кэш между всеми пользователями объекта).
+	 * @return Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
+	 */
+	public static function s() {
+		return Mage::getResourceSingleton('catalog/product_attribute_backend_tierprice');
 	}
 }

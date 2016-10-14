@@ -13,21 +13,16 @@
  */
 class Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter extends Df_Core_Model_Event {
 	/** @return Mage_Core_Model_Resource_Db_Collection_Abstract|Mage_Core_Model_Mysql4_Collection_Abstract */
-	public function getCollection() {
-		/** @var Mage_Core_Model_Resource_Db_Collection_Abstract|Mage_Core_Model_Mysql4_Collection_Abstract $result */
-		$result =
-			$this->getEventParam(self::EVENT_PARAM__COLLECTION)
-		;
-		df()->assert()->resourceDbCollectionAbstract($result);
-		return $result;
-	}
+	public function getCollection() {return $this->getEventParam('collection');}
 
 	/** @return string */
-	protected function getExpectedEventSuffix() {
-		return self::EXPECTED_EVENT_SUFFIX;
-	}
+	protected function getExpectedEventSuffix() {return '_load_after';}
 
-	const _CLASS = __CLASS__;
-	const EVENT_PARAM__COLLECTION = 'collection';
-	const EXPECTED_EVENT_SUFFIX = '_load_after';
+	/**
+	 * @used-by Df_Customer_Observer::form_attribute_collection__load_after()
+	 * @used-by Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability::getEventClass()
+	 * @used-by Df_Directory_Observer::core_collection_abstract_load_after()
+	 * @used-by Df_Directory_Model_Handler_ProcessRegionsAfterLoading::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

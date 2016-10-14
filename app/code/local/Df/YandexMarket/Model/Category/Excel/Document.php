@@ -44,7 +44,7 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model {
 				/**
 				 * Вероятно, Яндекс.Маркет поменял адрес документа.
 				 * Такое уже было:
-				 * @link http://magento-forum.ru/topic/4121/
+				 * http://magento-forum.ru/topic/4121/
 				 *
 				 * 2015-09-15
 				 * Обновил адрес на новый:
@@ -80,7 +80,7 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model {
 	/** @return PHPExcel */
 	private function getPhpExcel() {
 		if (!isset($this->{__METHOD__})) {
-			df_h()->excel()->init();
+			Df_Core_Lib::load('Excel');
 			$this->downloadFile();
 			$this->{__METHOD__} = PHPExcel_IOFactory::load($this->getFilePath());
 		}
@@ -95,7 +95,7 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

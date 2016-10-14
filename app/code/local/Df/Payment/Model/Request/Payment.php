@@ -2,127 +2,79 @@
 abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request {
 	/**
 	 * @abstract
-	 * @return array(string => mixed)
+	 * @used-by params()
+	 * @return array(string => string|int)
 	 */
-	abstract protected function getParamsInternal();
+	abstract protected function _params();
 
 	/**
-	 * Метод публичен, потому что его использует класс Df_IPay_Model_Action_GetPaymentAmount
-	 * @return Mage_Sales_Model_Order_Address
-	 */
-	public function getBillingAddress() {return $this->getOrder()->getBillingAddress();}
-
-	/**
-	 * @override
-	 * @return Df_Sales_Model_Order
-	 */
-	public function getOrder() {return $this->cfg(self::P__ORDER);}
-
-	/**
-	 * Этот метод используется методом
-	 * @see Df_Payment_Model_Method_WithRedirect::getPaymentPageParams()
-	 * @override
-	 * @return array(string => mixed)
-	 */
-	public function getParams() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => mixed) $result */
-			$this->{__METHOD__} = $this->preprocessParams($this->getParamsInternal());
-			df_result_array($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * Метод публичен, потому что его иногда используют сторонние классы:
-	 * @see Df_IPay_Model_Action_Confirm::processInternal()
-	 * @see Df_IPay_Model_Action_ConfirmPaymentByShop::processInternal()
-	 * @see Df_IPay_Model_Action_GetPaymentAmount::processInternal()
-	 * @see Df_YandexMoney_Model_Request_Authorize::getRequestParams()
+	 * @used-by Df_IPay_Model_Action_GetPaymentAmount::_process()
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
 	 * @return string
 	 */
-	public function getTransactionDescription() {
+	public function city() {return $this->address()->getCity();}
+
+	/**
+	 * @used-by Df_Uniteller_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function countryName() {return $this->address()->getCountryModel()->getName();}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function currencyCode() {return $this->configS()->getCurrencyCodeInServiceFormat();}
+
+	/** @return string */
+	protected function getTransactionDescription() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				str_replace(
-					array_keys($this->getTransactionDescriptionParams())
-					,array_values($this->getTransactionDescriptionParams())
-					,$this->getServiceConfig()->getTransactionDescription()
-				)
-			;
+			$this->{__METHOD__} = str_replace(
+				array_keys($this->getTransactionDescriptionParams())
+				,array_values($this->getTransactionDescriptionParams())
+				,$this->configS()->getTransactionDescription()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	protected function getAddressStreet() {
-		return implode(' ', df_clean($this->getBillingAddress()->getStreet()));
-	}
-
-	/** @return string */
-	protected function getCustomerEmail() {return $this->getOrder()->getCustomerEmail();}
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function email() {return $this->order()->getCustomerEmail();}
 
 	/** @return string */
 	public function getCustomerIpAddress() {
-		return
-			!is_null(rm_state()->getController())
-			? rm_state()->getController()->getRequest()->getClientIp()
-			: ''
-		;
+		return !rm_controller() ? '' : rm_controller()->getRequest()->getClientIp();
 	}
 
 	/** @return string */
 	protected function getCustomerNameFull() {
 		return rm_concat_clean(' '
-			,$this->getOrder()->getCustomerLastname()
-			,$this->getOrder()->getCustomerFirstname()
-			,$this->getOrder()->getCustomerMiddlename()
+			,$this->order()->getCustomerLastname()
+			,$this->order()->getCustomerFirstname()
+			,$this->order()->getCustomerMiddlename()
 		);
 	}
 
 	/** @return string */
-	protected function getCustomerPhone() {return df_nts($this->getBillingAddress()->getTelephone());}
-
-	/** @return string */
-	protected function getCustomerReturnUrl() {
+	protected function urlCustomerReturn() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getPaymentMethod()->getCustomerReturnUrl($this->getOrder());
+			$this->{__METHOD__} = $this->method()->getCustomerReturnUrl($this->order());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @override
-	 * @return Df_Payment_Model_Method_WithRedirect
+	 * @used-by getTransactionDescription
+	 * @return Zend_Uri_Http
 	 */
-	protected function getPaymentMethod() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Payment_Model_Method_WithRedirect $result */
-			$result = parent::_getData(self::P__PAYMENT_METHOD);
-			if (is_null($result)) {
-				$result = $this->getOrder()->getPayment()->getMethodInstance();
-			}
-			if (!($result instanceof Df_Payment_Model_Method_WithRedirect)) {
-				df_error(
-					'Заказ №«%s» не предназначен для оплаты каким-либо из платёжных модулей
-					Российской сборки Magento.'
-					,$this->getOrder()->getIncrementId()
-				);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return Mage_Core_Model_Store */
-	protected function getStore() {return $this->getOrder()->getStore();}
-
-	/** @return Zend_Uri_Http */
 	protected function getStoreUri() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Zend_Uri_Http $result */
 			$this->{__METHOD__} = Zend_Uri_Http::fromString(
-				$this->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
+				$this->store()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
 			);
 		}
 		return $this->{__METHOD__};
@@ -132,37 +84,112 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	protected function getTransactionDescriptionParams() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
-				'{order.id}' => $this->getOrder()->getIncrementId()
+				'{order.id}' => $this->order()->getIncrementId()
 				,'{shop.domain}' => $this->getStoreUri()->getHost()
-				,'{shop.name}' => $this->getStore()->getName()
+				,'{shop.name}' => $this->store()->getName()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	protected function getUrlCheckoutFail() {return df_h()->payment()->url()->getCheckoutFail();}
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function iso3() {return $this->address()->getCountryModel()->getIso3Code();}
 
-	/** @return string */
-	protected function getUrlCheckoutSuccess() {
-		return df_h()->payment()->url()->getCheckoutSuccess();
-	}
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @used-by Df_OnPay_Model_Request_Payment::_params()
+	 * @used-by Df_RbkMoney_Model_Request_Payment::_params()
+	 * @used-by Df_WebPay_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function localeCode() {return $this->configS()->getLocaleCodeInServiceFormat();}
 
-	/** @return string */
-	protected function getUrlConfirm() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::getUrl(df_concat_url(
-				$this->getPaymentMethod()->getCode(), self::URL_PART__CONFIRM
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function nameFirst() {return $this->order()->getCustomerFirstname();}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function nameLast() {return $this->order()->getCustomerLastname();}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function nameMiddle() {return $this->order()->getCustomerMiddlename();}
+
+	/**
+	 * @override
+	 * @see Df_Payment_Model_Request::order()
+	 * @used-by Df_Payment_Model_Request::amount()
+	 * @used-by Df_Payment_Model_Request::method()
+	 * @used-by Df_Payment_Model_Request::payment()
+	 * @return Df_Sales_Model_Order
+	 */
+	protected function order() {return rm_last_order();}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function phone() {return df_nts($this->address()->getTelephone());}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function postCode() {return df_nts($this->address()->getPostcode());}
 
 	/**
 	 * @param array(string => mixed) $params
 	 * @return array(string => mixed)
 	 */
 	protected function preprocessParams(array $params) {return $this->chopParams($params);}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function regionCode() {return $this->region()->getCode();}
+
+	/**
+	 * @used-by Df_Assist_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function street() {return implode(' ', df_clean($this->address()->getStreet()));}
+
+	/**
+	 * Этот метод используют только потомки:
+	 * @used-by Df_Interkassa_Model_Request_Payment::_params()
+	 * @used-by Df_Kkb_Model_Request_Payment::_params()
+	 * @used-by Df_LiqPay_Model_Request_Payment::getParamsForXml()
+	 * @used-by Df_WebMoney_Model_Request_Payment::_params()
+	 * @used-by Df_WebPay_Model_Request_Payment::_params()
+	 * @return string
+	 */
+	protected function urlConfirm() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Mage::getUrl($this->method()->getCode() . '/confirm');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by city()
+	 * @used-by iso3()
+	 * @used-by phone()
+	 * @used-by region()
+	 * @used-by street()
+	 * @return Df_Sales_Model_Order_Address
+	 */
+	private function address() {return $this->order()->getBillingAddress();}
 
 	/**
 	 * @param string $text
@@ -173,16 +200,12 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 		df_param_string($text, 0);
 		df_param_string($requestVarName, 1);
 		/** @var int $maxLength */
-		$maxLength =
-			$this->getPaymentMethod()->getRmConfig()->getConstManager()
-				->getRequestVarMaxLength($requestVarName)
-		;
-		df_assert_integer($maxLength);
+		$maxLength = $this->method()->constManager()->getRequestVarMaxLength($requestVarName);
 		/** @var string $result */
 		$result =
 			(0 >= $maxLength)
 			? $text
-			: mb_substr($text, 0, $maxLength, Df_Core_Const::UTF_8)
+			: mb_substr($text, 0, $maxLength, 'UTF-8')
 		;
 		return $result;
 	}
@@ -213,14 +236,26 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	}
 
 	/**
-	 * @override
-	 * @return void
+	 * @used-by regionCode()
+	 * @return Mage_Directory_Model_Region
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::P__ORDER, Df_Sales_Model_Order::_CLASS);
+	private function region() {return $this->address()->getRegionModel();}
+
+	/**
+	 * @used-by Df_Payment_Model_Method_WithRedirect::getPaymentPageParams()
+	 * @param Df_Payment_Model_Method_WithRedirect $method
+	 * @return array(string => string|int)
+	 */
+	public static function params(Df_Payment_Model_Method_WithRedirect $method) {
+		/** @var array(string => array(string => string|int)) */
+		static $cache;
+		/** @var string $key */
+		$key = $method->getCode();
+		if (!isset($cache[$key])) {
+			/** @var Df_Payment_Model_Request_Payment $i */
+			$i = rm_ic(rm_convention($method, 'Model_Request_Payment'), __CLASS__);
+			$cache[$key] = $i->preprocessParams($i->_params());
+		}
+		return $cache[$key];
 	}
-	const _CLASS = __CLASS__;
-	const P__ORDER = 'order';
-	const URL_PART__CONFIRM = 'confirm';
 }

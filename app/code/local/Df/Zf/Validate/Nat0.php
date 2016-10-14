@@ -12,7 +12,7 @@ class Df_Zf_Validate_Nat0 extends Df_Zf_Validate_Int {
 			$result = rm_nat0($value);
 		}
 		catch (Exception $e) {
-			throw new Zend_Filter_Exception(rm_ets($e));
+			df_error(new Zend_Filter_Exception(rm_ets($e)));
 		}
 		return $result;
 	}

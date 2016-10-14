@@ -2,51 +2,23 @@
 class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @override
-	 * @return Df_WebMoney_Model_Action_Confirm
+	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		parent::alternativeProcessWithoutInvoicing();
-		$this->getOrder()
-			->addStatusHistoryComment(
-				'Предварительная проверка платёжной системой работоспособности магазина'
-			)
-		;
-		$this->getOrder()->setData(Df_Sales_Const::ORDER_PARAM__IS_CUSTOMER_NOTIFIED, false);
-		$this->getOrder()->save();
-		return $this;
+		$this->addAndSaveStatusHistoryComment(
+			'Предварительная проверка платёжной системой работоспособности магазина'
+		);
 	}
 
 	/**
 	 * @override
-	 * @return Df_WebMoney_Model_Action_Confirm
-	 */
-	public function process() {
-		try {
-			if (0 === count($this->getRequest()->getParams())) {
-				df_error(
-					"Платёжная система WebMoney прислала подтверждение оплаты безо всяких параметров.
-					\nВидимо, администратор магазина некачественно настроил Личный кабинет WebMoney:
-					забыл включить опцию «Передавать параметры в предварительном запросе»."
-				);
-			}
-			parent::process();
-		}
-		catch(Exception $e) {
-			$this->processException($e);
-		}
-		return $this;
-	}
-
-	/**
-	 * @override
-	 * @return Df_Payment_Model_Action_Confirm
+	 * @return void
 	 * @throws Mage_Core_Exception
 	 */
 	protected function checkSignature() {
 		if ($this->needInvoice()) {
 			parent::checkSignature();
 		}
-		return $this;
 	}
 
 	/**
@@ -54,9 +26,7 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {
-		return 'LMI_PAYMENT_NO';
-	}
+	protected function getRequestKeyOrderIncrementId() {return 'LMI_PAYMENT_NO';}
 
 	/**
 	 * @override
@@ -64,20 +34,18 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var array $signatureParams */
-		$signatureParams =
-			array(
-				$this->getRequestValueShopId()
-				,$this->getRequestValuePaymentAmountAsString()
-				,$this->getRequestValueOrderIncrementId()
-				,$this->getRequestValueServicePaymentTest()
-				,$this->getRequest()->getParam('LMI_SYS_INVS_NO')
-				,$this->getRequestValueServicePaymentId()
-				,$this->getRequestValueServicePaymentDate()
-				,$this->getResponsePassword()
-				,$this->getRequestValueServiceCustomerAccountId()
-				,$this->getRequestValueServiceCustomerId()
-			)
-		;
+		$signatureParams = array(
+			$this->getRequestValueShopId()
+			,$this->getRequestValuePaymentAmountAsString()
+			,$this->getRequestValueOrderIncrementId()
+			,$this->getRequestValueServicePaymentTest()
+			,$this->getRequest()->getParam('LMI_SYS_INVS_NO')
+			,$this->getRequestValueServicePaymentId()
+			,$this->getRequestValueServicePaymentDate()
+			,$this->getResponsePassword()
+			,$this->getRequestValueServiceCustomerAccountId()
+			,$this->getRequestValueServiceCustomerId()
+		);
 		return md5(implode($signatureParams));
 	}
 
@@ -86,6 +54,21 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {return !rm_bool($this->getRequest()->getParam('LMI_PREREQUEST'));}
+
+	/**
+	 * @override
+	 * @return void
+	 */
+	protected function processPrepare() {
+		parent::processPrepare();
+		if (!$this->getRequest()->getParams()) {
+			df_error(
+				"Платёжная система WebMoney прислала подтверждение оплаты безо всяких параметров.
+				\nВидимо, администратор магазина некачественно настроил Личный кабинет WebMoney:
+				забыл включить опцию «Передавать параметры в предварительном запросе»."
+			);
+		}
+	}
 
 	/**
 	 * Кошелек покупателя
@@ -156,7 +139,7 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * Кошелек покупателя
 	 */
@@ -176,12 +159,4 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * 		средства реально не переводились.
 	 */
 	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__TEST = 'payment_service/payment/test';
-	/**
-	 * @static
-	 * @param Df_WebMoney_ConfirmController $controller
-	 * @return Df_WebMoney_Model_Action_Confirm
-	 */
-	public static function i(Df_WebMoney_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
 }

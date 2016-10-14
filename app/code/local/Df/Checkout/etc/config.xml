@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Checkout>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Оформление заказа</title>
+			<version>1.0.0</version>
 		</Df_Checkout>
 	</modules>
 	<global>
@@ -52,7 +53,11 @@
 		</blocks>
 		<helpers><df_checkout><class>Df_Checkout_Helper</class></df_checkout></helpers>
 		<models>
-			<df_checkout><class>Df_Checkout_Model</class></df_checkout>
+			<checkout>
+				<rewrite>
+					<type_onepage>Df_Checkout_Model_Type_Onepage</type_onepage>
+				</rewrite>
+			</checkout>
 			<!-- Для Magento версии не меньше 1.6 -->
 			<checkout_resource>
 				<rewrite>
@@ -64,6 +69,9 @@
 					<cart>Df_Checkout_Model_Resource_Cart</cart>
 				</rewrite>
 			</checkout_resource>
+			<df_checkout>
+				<class>Df_Checkout_Model</class>
+			</df_checkout>
 		</models>
 		<template>
 			<email>
@@ -99,34 +107,34 @@
 		<events>
 			<checkout_type_multishipping_create_orders_single>
 				<observers>
-					<df_checkout__checkout_type_multishipping_create_orders_single>
-						<class>df_checkout/dispatcher</class>
+					<Df_Checkout>
+						<class>Df_Checkout_Observer</class>
 						<method>checkout_type_multishipping_create_orders_single</method>
-					</df_checkout__checkout_type_multishipping_create_orders_single>
+					</Df_Checkout>
 				</observers>
 			</checkout_type_multishipping_create_orders_single>
 			<checkout_type_onepage_save_order>
 				<observers>
-					<df_checkout__checkout_type_onepage_save_order>
-						<class>df_checkout/dispatcher</class>
+					<Df_Checkout>
+						<class>Df_Checkout_Observer</class>
 						<method>checkout_type_onepage_save_order</method>
-					</df_checkout__checkout_type_onepage_save_order>
+					</Df_Checkout>
 				</observers>
 			</checkout_type_onepage_save_order>
 			<checkout_type_onepage_save_order_after>
 				<observers>
-					<df_checkout__checkout_type_onepage_save_order_after>
-						<class>df_checkout/dispatcher</class>
+					<Df_Checkout>
+						<class>Df_Checkout_Observer</class>
 						<method>checkout_type_onepage_save_order_after</method>
-					</df_checkout__checkout_type_onepage_save_order_after>
+					</Df_Checkout>
 				</observers>
 			</checkout_type_onepage_save_order_after>
 			<controller_action_predispatch_checkout>
 				<observers>
-					<df_checkout__controller_action_predispatch_checkout>
-						<class>df_checkout/dispatcher</class>
+					<Df_Checkout>
+						<class>Df_Checkout_Observer</class>
 						<method>controller_action_predispatch_checkout</method>
-					</df_checkout__controller_action_predispatch_checkout>
+					</Df_Checkout>
 				</observers>
 			</controller_action_predispatch_checkout>
 		</events>
@@ -139,7 +147,7 @@
 			<modules>
 				<Df_Checkout>
 					<files>
-						<default>Df_Checkout.csv</default>
+						<default>Df/Checkout.csv</default>
 					</files>
 				</Df_Checkout>
 			</modules>
@@ -159,7 +167,7 @@
 			<modules>
 				<Df_Checkout>
 					<files>
-						<default>Df_Checkout.csv</default>
+						<default>Df/Checkout.csv</default>
 					</files>
 				</Df_Checkout>
 			</modules>
@@ -179,14 +187,14 @@
 					<fields>
 						<customer_password>
 							<label>Password</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<template>df/checkout/ergonomic/address/field/password.phtml</template>
 							<css-classes>validate-password</css-classes>
 							<authenticated>no</authenticated>
 						</customer_password>
 						<confirm_password>
 							<label>Confirm Password</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<template>df/checkout/ergonomic/address/field/password.phtml</template>
 							<css-classes>validate-cpassword</css-classes>
 							<authenticated>no</authenticated>
@@ -206,62 +214,62 @@
 					<fields>
 						<company>
 							<label>Company</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 						</company>
 						<lastname>
 							<label>Last Name</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<css-classes>rm.validate.lastName</css-classes>
 						</lastname>
 						<firstname>
 							<label>First Name</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<css-classes>rm.validate.firstName</css-classes>
 						</firstname>
 						<middlename>
 							<label>Patronymic</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<css-classes>rm.validate.patronymic</css-classes>
 						</middlename>
 						<telephone>
 							<label>Telephone</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 						</telephone>
 						<country>
 							<label>Country</label>
-							<block>df_checkout/frontend_ergonomic_address_field_country</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Country</block>
 							<template>df/checkout/ergonomic/address/field/country.phtml</template>
 							<css-classes>validate-select</css-classes>
 						</country>
 						<region>
 							<label>State/Province</label>
-							<block>df_checkout/frontend_ergonomic_address_field_region</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Region</block>
 							<template>df/checkout/ergonomic/address/field/region.phtml</template>
 						</region>
 						<city>
 							<label>City</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<css-classes>rm.validate.city</css-classes>
 						</city>
 						<postcode>
 							<label>Zip/Postal Code</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<css-classes>validate-zip-international</css-classes>
 						</postcode>
 						<street>
 							<label>Street Address</label>
-							<block>df_checkout/frontend_ergonomic_address_field_street</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Street</block>
 							<template>df/checkout/ergonomic/address/field/street.phtml</template>
 							<css-classes>input-text</css-classes>
 						</street>
 						<email>
 							<label>Email Address</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 							<css-classes>validate-email</css-classes>
 						</email>
 						<fax>
 							<label>Fax</label>
-							<block>df_checkout/frontend_ergonomic_address_field_text</block>
+							<block>Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text</block>
 						</fax>
 					</fields>
 				</default>
@@ -272,7 +280,7 @@
 		<df_checkout>
 			<billing_field_applicability>
 				<enabled>1</enabled>
-				<company>optional</company>
+				<company>no</company>
 				<lastname>required</lastname>
 				<firstname>required</firstname>
 				<middlename>optional</middlename>
@@ -334,7 +342,7 @@
 			</patches>
 			<shipping_field_applicability>
 				<enabled>1</enabled>
-				<company>optional</company>
+				<company>no</company>
 				<lastname>required</lastname>
 				<firstname>required</firstname>
 				<middlename>optional</middlename>

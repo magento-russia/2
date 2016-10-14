@@ -2,15 +2,16 @@
 <config>
 	<modules>
 		<Df_AccessControl>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Разграничение административого доступа</title>
+			<version>1.0.0</version>
 		</Df_AccessControl>
 	</modules>
 	<df>
 		<features>
 			<df-access-control>
 				<module>df_access_control</module>
-				<title>Административный доступ</title>
+				<title>Разграничение административого доступа</title>
 				<url>http://magento-forum.ru/topic/1203/</url>
 			</df-access-control>
 		</features>
@@ -59,10 +60,10 @@
 		<events>
 			<admin_roles_save_after>
 				<observers>
-					<df_access_control__admin_roles_save_after>
-						<class>df_access_control/dispatcher</class>
+					<Df_AccessControl>
+						<class>Df_AccessControl_Observer</class>
 						<method>admin_roles_save_after</method>
-					</df_access_control__admin_roles_save_after>
+					</Df_AccessControl>
 				</observers>
 			</admin_roles_save_after>
 			<!--
@@ -74,26 +75,26 @@
 			-->
 			<catalog_product_collection_load_before>
 				<observers>
-					<df_access_control__catalog_product_collection_load_before>
-						<class>df_access_control/dispatcher</class>
+					<Df_AccessControl>
+						<class>Df_AccessControl_Observer</class>
 						<method>catalog_product_collection_load_before</method>
-					</df_access_control__catalog_product_collection_load_before>
+					</Df_AccessControl>
 				</observers>
 			</catalog_product_collection_load_before>
 			<catalog_category_collection_load_before>
 				<observers>
-					<df_access_control__catalog_category_collection_load_before>
-						<class>df_access_control/dispatcher</class>
+					<Df_AccessControl>
+						<class>Df_AccessControl_Observer</class>
 						<method>catalog_category_collection_load_before</method>
-					</df_access_control__catalog_category_collection_load_before>
+					</Df_AccessControl>
 				</observers>
 			</catalog_category_collection_load_before>
 			<controller_action_postdispatch_adminhtml_permissions_role_saverole>
 				<observers>
-					<df_access_control__controller_action_postdispatch_adminhtml_permissions_role_saverole>
-						<class>df_access_control/dispatcher</class>
+					<Df_AccessControl>
+						<class>Df_AccessControl_Observer</class>
 						<method>controller_action_postdispatch_adminhtml_permissions_role_saverole</method>
-					</df_access_control__controller_action_postdispatch_adminhtml_permissions_role_saverole>
+					</Df_AccessControl>
 				</observers>
 			</controller_action_postdispatch_adminhtml_permissions_role_saverole>
 		</events>

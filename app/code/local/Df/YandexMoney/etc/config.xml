@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_YandexMoney>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Яндекс.Деньги</title>
+			<version>1.0.0</version>
 		</Df_YandexMoney>
 	</modules>
 	<global>
@@ -54,7 +55,7 @@
 		-->
 		<payment>
 			<df-yandex-money>
-				<model>df_yandex_money/payment</model>
+				<model>Df_YandexMoney_Model_Payment</model>
 			</df-yandex-money>
 		</payment>
 	</default>

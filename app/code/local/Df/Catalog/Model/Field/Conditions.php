@@ -85,7 +85,6 @@ class Df_Catalog_Model_Field_Conditions extends Df_Core_Model {
 			->_prop(self::$P__ELEMENT, 'Varien_Data_Form_Element_Abstract')
 		;
 	}
-	const _CLASS = __CLASS__;
 	/** @var string */
 	private static $P__BLOCK = 'block';
 	/** @var string */

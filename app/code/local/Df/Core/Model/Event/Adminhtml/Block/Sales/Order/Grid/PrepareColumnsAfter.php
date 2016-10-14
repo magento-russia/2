@@ -12,14 +12,18 @@
 class Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter
 	extends Df_Core_Model_Event {
 	/** @return Df_Adminhtml_Block_Sales_Order_Grid */
-	public function getGrid() {return $this->getEventParam(self::EVENT_PARAM__GRID);}
+	public function getGrid() {return $this->getEventParam('grid');}
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EVENT;}
+	protected function getExpectedEventPrefix() {
+		return 'rm_adminhtml_block_sales_order_grid__prepare_columns_after';
+	}
 
-	const _CLASS = __CLASS__;
-	const EVENT = 'rm_adminhtml_block_sales_order_grid__prepare_columns_after';
-	const EVENT_PARAM__GRID = 'grid';
+	/**
+	 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_columns_after()
+	 * @used-by Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn::getEventClass()_
+	 */
+	const _C = __CLASS__;
 }

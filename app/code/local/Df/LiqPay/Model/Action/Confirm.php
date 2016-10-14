@@ -2,20 +2,11 @@
 class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @override
-	 * @return Df_LiqPay_Model_Action_Confirm
+	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
 		parent::alternativeProcessWithoutInvoicing();
-		$this->getOrder()
-			->addStatusHistoryComment(
-				$this->getPaymentStateMessage(
-					$this->getRequestValueServicePaymentState()
-				)
-			)
-		;
-		$this->getOrder()->setData(Df_Sales_Const::ORDER_PARAM__IS_CUSTOMER_NOTIFIED, false);
-		$this->getOrder()->save();
-		return $this;
+		$this->comment($this->getPaymentStateMessage($this->getRequestValueServicePaymentState()));
 	}
 
 	/**
@@ -51,9 +42,9 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			base64_encode(
 				sha1(
 					df_concat(
-						$this->getServiceConfig()->getResponsePassword()
+						$this->configS()->getResponsePassword()
 						,$this->getResponseXml()
-						,$this->getServiceConfig()->getResponsePassword()
+						,$this->configS()->getResponsePassword()
 					)
 					,1
 				)
@@ -80,7 +71,7 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $this->getPaymentInfoAsVarienXml()->asCanonicalArray();
 	}
 
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getPaymentInfoAsVarienXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_xml($this->getResponseXml());
@@ -112,24 +103,15 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/** @return string */
 	private function getResponseXml() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = base64_decode(df_request('operation_xml'));
+			$this->{__METHOD__} = base64_decode(rm_request('operation_xml'));
 			// base64_decode возвращает false в случае сбоя
 			df_result_string($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
 	const PAYMENT_STATE__DELAYED = 'delayed';
 	const PAYMENT_STATE__FAILURE = 'failure';
 	const PAYMENT_STATE__SUCCESS = 'success';
 	const PAYMENT_STATE__WAIT_SECURE = 'wait_secure';
-	/**
-	 * @static
-	 * @param Df_LiqPay_ConfirmController $controller
-	 * @return Df_LiqPay_Model_Action_Confirm
-	 */
-	public static function i(Df_LiqPay_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
 }

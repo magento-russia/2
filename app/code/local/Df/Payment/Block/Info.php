@@ -1,8 +1,8 @@
 <?php
 /**
- * Обратите внимание, что класс Df_Payment_Block_Info не унаследован от Mage_Payment_Block_Info,
+ * Обратите внимание, что класс @see Df_Payment_Block_Info не унаследован от @see Mage_Payment_Block_Info
  * но реализует полностью его интерфейс.
- * Намеренно наследуемся от Df_Core_Block_Template,
+ * Намеренно наследуемся от @see Df_Core_Block_Template,
  * чтобы пользоваться всеми возможностями этого класса.
  */
 class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
@@ -13,14 +13,34 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	public function getArea() {return Df_Core_Const_Design_Area::FRONTEND;}
 
 	/**
-	 * заимствовано из Mage_Payment_Block_Info
-	 * @see Mage_Payment_Block_Info::getChildPdfAsArray
-	 * @return array
+	 * Заимствовано из @see Mage_Payment_Block_Info::getChildPdfAsArray()
+	 * @return string[]
 	 */
 	public function getChildPdfAsArray() {
+		/** @var string[] $result */
 		$result = array();
 		foreach ($this->getChild() as $child) {
-			if (is_callable(array($child, 'toPdf'))) {
+			/** @var Mage_Core_Block_Abstract $child */
+			/**
+			 * 2015-02-02
+			 * Метод ядра @see Mage_Payment_Block_Info::getChildPdfAsArray()
+			 * использует здесь код
+				is_callable(array($child, 'toPdf')
+			 * Я так понимаю, что использовать @see is_callable() в Magento не стоит,
+			 * потому что наличие @see Varien_Object::__call()
+			 * приводит к тому, что @see is_callable() всегда возвращает true.
+			 *
+			 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
+			 * не гарантирует публичную доступность метода:
+			 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
+			 * потому что он имеет доступность private или protected.
+			 * Пока эта проблема никак не решена.
+			 */
+			/**
+			 * @uses Mage_Payment_Block_Info::toPdf()
+			 * @uses Df_Payment_Block_Info::toPdf()
+			 */
+			if (method_exists($child, 'toPdf')) {
 				$result[] = call_user_func(array($child, 'toPdf'));
 			}
 		}
@@ -28,9 +48,9 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	}
 
 	/**
-	 * заимствовано из Mage_Payment_Block_Info
-	 * @see Mage_Payment_Block_Info::getInfo
-	 * @return Mage_Payment_Model_Info
+	 * Заимствовано из:
+	 * @see Mage_Payment_Block_Info::getInfo()
+	 * @return Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment
 	 */
 	public function getInfo() {
 		/** @var Mage_Payment_Model_Info $result */
@@ -42,8 +62,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	}
 
 	/**
-	 * заимствовано из Mage_Payment_Block_Info
-	 * @see Mage_Payment_Block_Info::getIsSecureMode
+	 * Заимствовано из @see Mage_Payment_Block_Info::getIsSecureMode
 	 * @return bool
 	 */
 	public function getIsSecureMode() {
@@ -57,14 +76,14 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 		if (!$method = $payment->getMethodInstance()) {
 			return true;
 		}
-		return !Mage::app()->getStore($method->getDataUsingMethod('store'))->isAdmin();
+		return df_is_admin($method->getDataUsingMethod('store'));
 	}
 
 	/**
 	 * заимствовано из Mage_Payment_Block_Info
 	 * @see Mage_Payment_Block_Info::getMethod
 	 * @override
-	 * @return Df_Payment_Model_Method_Base
+	 * @return Df_Payment_Model_Method
 	 */
 	public function getMethod() {return $this->getInfo()->getMethodInstance();}
 
@@ -76,30 +95,30 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	 * @see Mage_Payment_Block_Info::getSpecificInformation
 	 * @return array
 	 */
-	public function getSpecificInformation() {
-		return $this->_prepareSpecificInformation()->getData();
-	}
+	public function getSpecificInformation() {return $this->_prepareSpecificInformation()->getData();}
 
 	/**
-	 * заимствовано из Mage_Payment_Block_Info
-	 * @see Mage_Payment_Block_Info::getValueAsArray
-	 * @param mixed $value
+	 * Заимствовано из @see Mage_Payment_Block_Info::getValueAsArray()
+	 * @param string|mixed|string[]|mixed[] $value
 	 * @param bool $escapeHtml [optional]
-	 * @return mixed[]
+	 * @return string[]|mixed[]
 	 */
 	public function getValueAsArray($value, $escapeHtml = false) {
-		if (empty($value)) {
-			return array();
+		/** @var string[]|mixed[] $result */
+		if (!$value) {
+			$result = array();
 		}
-		if (!is_array($value)) {
-			$value = array($value);
-		}
-		if ($escapeHtml) {
-			foreach ($value as $_key => $_val) {
-				$value[$_key] = $this->escapeHtml($_val);
+		else {
+			$result = rm_array($value);
+			if ($escapeHtml) {
+				foreach ($result as $key => $item) {
+					/** @var string|int $key */
+					/** @var string|mixed $item */
+					$result[$key] = rm_e($item);
+				}
 			}
 		}
-		return $value;
+		return $result;
 	}
 
 	/**
@@ -116,14 +135,11 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 			elseif (is_array($transport)) {
 				$transport = new Varien_Object($transport);
 			}
-			Mage::dispatchEvent(
-				'payment_info_block_prepare_specific_information'
-				,array(
-					'transport' => $transport
-					,'payment'   => $this->getInfo()
-					,'block'     => $this
-				)
-			);
+			Mage::dispatchEvent('payment_info_block_prepare_specific_information', array(
+				'transport' => $transport
+				,'payment'   => $this->getInfo()
+				,'block'     => $this
+			));
 			$this->_paymentSpecificInformation = $transport;
 		}
 		return $this->_paymentSpecificInformation;
@@ -131,38 +147,32 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/payment/info.phtml';}
+	protected function defaultTemplate() {return 'df/payment/info.phtml';}
 
-	/** @return Mage_Sales_Model_Order|null */
-	protected function getOrder() {
+	/**
+	 * @used-by Df_Pd4_Block_Info::capableLinkToOrder()
+	 * @used-by Df_Pd4_Block_Info::getLinkBlock()
+	 * @return Df_Sales_Model_Order|null
+	 */
+	protected function order() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Payment_Model_Info $paymentInfo */
+			/** @var Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment $paymentInfo */
 			$paymentInfo = $this->getInfo();
-			/** @var Mage_Sales_Model_Order|null $result */
-			$result =
-				!($paymentInfo instanceof Mage_Sales_Model_Order_Payment)
+			$this->{__METHOD__} = rm_n_set(
+				!$paymentInfo instanceof Mage_Sales_Model_Order_Payment
 				? null
-				: $paymentInfo->getDataUsingMethod('order')
-			;
-			if (!is_null($result)) {
-				df_assert($result instanceof Mage_Sales_Model_Order);
-			}
-			$this->{__METHOD__} = $result;
+				: $paymentInfo->getOrder()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @override
-	 * @return bool
-	 */
-	protected function needCaching() {return false;}
-
-	/**
-	 * заимствовано из Mage_Payment_Block_Info
-	 * @see Mage_Payment_Block_Info::toPdf
+	 * @see Mage_Payment_Block_Info::toPdf()
 	 * @return string
 	 */
 	public function toPdf() {
@@ -173,5 +183,6 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	/** @var Varien_Object|null */
 	protected $_paymentSpecificInformation = null;
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Payment_Model_Method::getInfoBlockType() */
+	const _C = __CLASS__;
 }

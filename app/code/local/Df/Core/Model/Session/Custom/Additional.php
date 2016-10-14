@@ -38,7 +38,7 @@ abstract class Df_Core_Model_Session_Custom_Additional extends Df_Core_Model_Ses
 
 	/** @return bool */
 	private function isSessionStarted() {
-		/** @link http://php.net/manual/en/function.session-status.php#111945 */
+		/** http://php.net/manual/function.session-status.php#111945 */
 		return
 				('cli' !== php_sapi_name())
 			&&
@@ -48,7 +48,7 @@ abstract class Df_Core_Model_Session_Custom_Additional extends Df_Core_Model_Ses
 						/**
 						 * Функция @see session_status() и константа @see PHP_SESSION_ACTIVE
 						 * появились только в PHP 5.4
-						 * @link http://magento-forum.ru/topic/4627/
+						 * http://magento-forum.ru/topic/4627/
 						 */
 						(PHP_SESSION_ACTIVE === session_status())
 					:

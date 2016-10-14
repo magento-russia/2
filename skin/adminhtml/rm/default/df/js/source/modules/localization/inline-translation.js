@@ -9,7 +9,7 @@
 		 * Вызов $locale.val() приведёт к предупреждению в консоли Firefox:
 		 * «Use of attributes' specified attribute is deprecated. It always returns true.»
 		 * Видимо, это дефект jQuery
-		 * @link http://stackoverflow.com/questions/8389841/using-jquery-to-determine-selected-option-causes-specified-attribute-is-depreca
+		 * http://stackoverflow.com/questions/8389841/using-jquery-to-determine-selected-option-causes-specified-attribute-is-depreca
 		 */
 		if ('ru_RU' === $locale.attr('value')) {
 			$(window).bind('bundle.product.edit.bundle.option.selection', function() {

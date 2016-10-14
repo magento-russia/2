@@ -1,10 +1,5 @@
 <?php
-class Df_NightExpress_Model_Carrier extends Df_Shipping_Model_Carrier {
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getRmId() {return 'night-express';}
+class Df_NightExpress_Model_Carrier extends Df_Shipping_Carrier {
 	/**
 	 * @override
 	 * @return bool

@@ -10,7 +10,7 @@ class Df_Core_Helper_Assert extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @var int|string|null|Mage_Core_Model_Store $store
+	 * @var Df_Core_Model_StoreM|int|string|bool|null $store
 	 * @return Df_Core_Helper_Assert
 	 */
 	public function storeAsParameterForGettingConfigValue($store) {

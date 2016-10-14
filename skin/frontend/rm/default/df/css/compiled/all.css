@@ -1,8 +1,13 @@
 @charset "UTF-8";
-/**
-	Обратите внимание, что правило @charset надо записывать именно с двойными кавычками
-	и именно в самом начале файла, без любых символов и пробелов впереди.
-*/
+body.customer-account-create .account-create {
+  /**
+  	2015-02-01
+  	╨б╨║╤А╤Л╨▓╨░╨╡╨╝ ╨╕╨╖╨▒╤Л╤В╨╛╤З╨╜╤Л╨╣ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨╛╨║
+  	┬лPlease enter the following information to create your account.┬╗
+  */ }
+  body.customer-account-create .account-create p.form-instructions {
+    display: none; }
+
 .customer-account-edit {
   /** ╨б╨║╤А╤Л╨▓╨░╨╡╨╝ ╨╕╨╖╨▒╤Л╤В╨╛╤З╨╜╤Л╨╣ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨╛╨║ ┬лEdit Account Information┬╗ */ }
   .customer-account-edit h2.legend {
@@ -28,26 +33,26 @@
   .wishlist-shared-index .page-title h1 {
     text-transform: none; }
 
-.df div.df-frontend .df-catalog .df-category .df-navigation {
+.df .df-category-navigation {
   margin: 0 0 4em 0; }
-  .df div.df-frontend .df-catalog .df-category .df-navigation ul.df-categories {
+  .df .df-category-navigation ul.df-categories {
     display: block;
     width: 100%;
     overflow: hidden; }
-    .df div.df-frontend .df-catalog .df-category .df-navigation ul.df-categories li.df-break {
+    .df .df-category-navigation ul.df-categories li.df-break {
       clear: left; }
-    .df div.df-frontend .df-catalog .df-category .df-navigation ul.df-categories li.df-category {
+    .df .df-category-navigation ul.df-categories li.df-category {
       display: block;
       float: left;
       text-align: center;
       margin: 1em 0; }
-      .df div.df-frontend .df-catalog .df-category .df-navigation ul.df-categories li.df-category a.df-image-link {
+      .df .df-category-navigation ul.df-categories li.df-category a.df-image-link {
         display: inline;
         text-decoration: none;
         margin: 0 auto; }
-      .df div.df-frontend .df-catalog .df-category .df-navigation ul.df-categories li.df-category a.df-text-link {
+      .df .df-category-navigation ul.df-categories li.df-category a.df-text-link {
         display: block; }
-        .df div.df-frontend .df-catalog .df-category .df-navigation ul.df-categories li.df-category a.df-text-link h2.df-caption {
+        .df .df-category-navigation ul.df-categories li.df-category a.df-text-link h2.df-caption {
           display: block;
           text-align: center;
           text-decoration: underline; }
@@ -96,10 +101,7 @@
   line-height: 112.5%; }
 
 .df .df-checkout-ergonomic {
-  /**
-  	╨в╨╡╨╝╨░ RWD ╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╨╡ ╨┤╤А╤Г╨│╨╕╨╡ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╤О╤В ╤Г╨▓╨╡╨╗╨╕╤З╨╡╨╜╨╜╤Г╤О ╨▓╤Л╤Б╨╛╤В╤Г ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░.
-  	╨Э╨░╨╝ ╤Н╤В╨╛ ╨╜╨╡ ╨╜╤Г╨╢╨╜╨╛.
-   */
+  /* ╨а╨░╨╖╨╝╨╡╤А ╤И╤А╨╕╤Д╤В╨░ ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░ */
   /*
    * ╨Э╨╡ ╨┐╨╛╨╝╨╡╤Й╨░╨╡╨╝ ╨▓╨╜╤Г╤В╤А╤М .field,
    * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨┐╨╡╤А╨╡╨║╨╗╤О╤З╨░╤В╨╡╨╗╤М "╨┤╨╛╤Б╤В╨░╨▓╨╕╤В╤М ╨┐╨╛ ╤Н╤В╨╛╨╝╤Г ╨░╨┤╤А╨╡╤Б╤Г" ╨╕ ╨┐╨╛╨┤╨┐╨╕╤Б╤М "╨┐╤А╨╕╨╝╨╡╤З╨░╨╜╨╕╨╡ ╨║ ╨╖╨░╨║╨░╨╖╤Г"
@@ -107,12 +109,13 @@
    */
   /** ╨Т╨╖╤П╨╗ ╨╕╨╖ ╤В╨╡╨╝╤Л RWD */
   /* ╨б╤В╨╕╨╗╨╕ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╣ ╤В╨╡╨╝╤Л Magento */ }
-  .df .df-checkout-ergonomic input[type=email],
-  .df .df-checkout-ergonomic input[type=search],
-  .df .df-checkout-ergonomic input[type=number],
-  .df .df-checkout-ergonomic input[type=password],
-  .df .df-checkout-ergonomic input[type=tel],
-  .df .df-checkout-ergonomic input[type=text] {
+  .df .df-checkout-ergonomic input[type=email]
+  , .df .df-checkout-ergonomic input[type=search]
+  , .df .df-checkout-ergonomic input[type=number]
+  , .df .df-checkout-ergonomic input[type=password]
+  , .df .df-checkout-ergonomic input[type=tel]
+  , .df .df-checkout-ergonomic input[type=text] {
+    /** ╨в╨╡╨╝╨░ RWD ╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╨╡ ╨┤╤А╤Г╨│╨╕╨╡ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╤О╤В ╤Г╨▓╨╡╨╗╨╕╤З╨╡╨╜╨╜╤Г╤О ╨▓╤Л╤Б╨╛╤В╤Г ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░. */
     height: auto;
     /** ╨в╨╡╨╝╨░ RWD ╨╖╨░╤З╨╡╨╝-╤В╨╛ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В 100%. */
     max-width: none; }
@@ -281,16 +284,16 @@
       */
       margin-top: 16px; }
     .df .df-checkout-ergonomic .df-body #co-shipping-method-form .gift-messages-form li.fields div.field {
-      							/*
-      								╨д╨╛╤А╨╝╨░ ╨┐╨╛╨┤╨░╤А╨╛╤З╨╜╨╛╨│╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╤Б╨╛╨┤╨╡╤А╨╢╨╕╤В ╨┐╨╛╨╗╤П
-                                      ╨┤╨╗╤П ╨╕╨╝╤С╨╜ ╨┤╨░╤А╨╕╤В╨╡╨╗╤П ╨╕ ╨┐╨╛╨╗╤Г╤З╨░╤В╨╡╨╗╤П ╨┐╨╛╨┤╨░╤А╨║╨░.
-                                      ╨Э╨╡ ╤Б╤В╨╛╨╕╤В ╤А╨░╤Б╨┐╨╛╨╗╨░╨│╨░╤В╤М ╤Н╤В╨╕ ╨┐╨╛╨╗╤П ╨▓ ╨╛╨┤╨╜╨╛╨╝ ╤А╤П╨┤╤Г,
-                                      ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╤Д╨╛╤А╨╝╨░ ╨┐╨╛╨┤╨░╤А╨╛╤З╨╜╨╛╨│╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П
-                                      ╨╛╤В╨╛╨▒╤А╨░╨╢╨░╨╡╤В╤Б╤П ╨▓ ╤Г╨╖╨║╨╛╨╣ ╨║╨╛╨╗╨╛╨╜╨║╨╡ ╤Б╨┐╨╛╤Б╨╛╨▒╨╛╨▓ ╨╛╨┐╨╗╨░╤В╤Л,
-                                      ╨╕ ╤В╨░╨╝ ╨╝╨╛╨╢╨╡╤В ╨▒╤Л╤В╤М (╤В╨░╨║, ╨╜╨░╨┐╤А╨╕╨╝╨╡╤А, ╨▓ ╤В╨╡╨╝╨╡ Default)
-                                      ╨┐╤А╨╛╤Б╤В╨╛ ╨╜╨╡╨┤╨╛╤Б╤В╨░╤В╨╛╤З╨╜╨╛ ╨╝╨╡╤Б╤В╨░ ╨┤╨╗╤П ╤А╨░╨╖╨╝╨╡╤Й╨╡╨╜╨╕╤П
-                                      ╨╛╨▒╨╡╨╕╤Е ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░ ╨▓ ╨╛╨┤╨╜╨╛╨╝ ╨╕ ╤В╨╛╨╝ ╨╢╨╡ ╤А╤П╨┤╤Г.
-      							*/
+      /*
+      	╨д╨╛╤А╨╝╨░ ╨┐╨╛╨┤╨░╤А╨╛╤З╨╜╨╛╨│╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╤Б╨╛╨┤╨╡╤А╨╢╨╕╤В ╨┐╨╛╨╗╤П
+      	╨┤╨╗╤П ╨╕╨╝╤С╨╜ ╨┤╨░╤А╨╕╤В╨╡╨╗╤П ╨╕ ╨┐╨╛╨╗╤Г╤З╨░╤В╨╡╨╗╤П ╨┐╨╛╨┤╨░╤А╨║╨░.
+      	╨Э╨╡ ╤Б╤В╨╛╨╕╤В ╤А╨░╤Б╨┐╨╛╨╗╨░╨│╨░╤В╤М ╤Н╤В╨╕ ╨┐╨╛╨╗╤П ╨▓ ╨╛╨┤╨╜╨╛╨╝ ╤А╤П╨┤╤Г,
+      	╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╤Д╨╛╤А╨╝╨░ ╨┐╨╛╨┤╨░╤А╨╛╤З╨╜╨╛╨│╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П
+      	╨╛╤В╨╛╨▒╤А╨░╨╢╨░╨╡╤В╤Б╤П ╨▓ ╤Г╨╖╨║╨╛╨╣ ╨║╨╛╨╗╨╛╨╜╨║╨╡ ╤Б╨┐╨╛╤Б╨╛╨▒╨╛╨▓ ╨╛╨┐╨╗╨░╤В╤Л,
+      	╨╕ ╤В╨░╨╝ ╨╝╨╛╨╢╨╡╤В ╨▒╤Л╤В╤М (╤В╨░╨║, ╨╜╨░╨┐╤А╨╕╨╝╨╡╤А, ╨▓ ╤В╨╡╨╝╨╡ Default)
+      	╨┐╤А╨╛╤Б╤В╨╛ ╨╜╨╡╨┤╨╛╤Б╤В╨░╤В╨╛╤З╨╜╨╛ ╨╝╨╡╤Б╤В╨░ ╨┤╨╗╤П ╤А╨░╨╖╨╝╨╡╤Й╨╡╨╜╨╕╤П
+      	╨╛╨▒╨╡╨╕╤Е ╨┐╨╛╨╗╨╡╨╣ ╨▓╨▓╨╛╨┤╨░ ╨▓ ╨╛╨┤╨╜╨╛╨╝ ╨╕ ╤В╨╛╨╝ ╨╢╨╡ ╤А╤П╨┤╤Г.
+      */
       float: none; }
     .df .df-checkout-ergonomic .df-body #co-shipping-method-form .gift-messages-form li.wide textarea {
       width: 100%; }
@@ -415,28 +418,18 @@
       overflow: hidden; }
       .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field {
         width: 150px;
-        float: left; }
+        float: left;
+        /*&.df-field-country_id {
+        	@include mixin-field($addressColumnHalfPart - 60px);
+        }
+        &.df-field-region {
+        	@include mixin-field($addressColumnHalfPart + 60px);
+        } */ }
         .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field .input-box {
           width: 150px;
           clear: none; }
           .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field .input-box input.input-text, .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field .input-box select {
             width: 150px; }
-        .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-country_id {
-          width: 90px;
-          float: left; }
-          .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-country_id .input-box {
-            width: 90px;
-            clear: none; }
-            .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-country_id .input-box input.input-text, .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-country_id .input-box select {
-              width: 90px; }
-        .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-region {
-          width: 210px;
-          float: left; }
-          .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-region .input-box {
-            width: 210px;
-            clear: none; }
-            .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-region .input-box input.input-text, .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field.df-field-region .input-box select {
-              width: 210px; }
         .df .df-checkout-ergonomic .df-body .df-block .form-list li.fields div.field:last-child {
           float: right; }
     .df .df-checkout-ergonomic .df-body .df-block .form-list li.wide {
@@ -463,7 +456,7 @@
       clear: none; }
     .df .df-checkout-ergonomic .df-body .df-block .messages p {
       margin: 0.25em 0;
-      line-height: 1; }
+      line-height: 1.25; }
     .df .df-checkout-ergonomic .df-body .df-block .messages b, .df .df-checkout-ergonomic .df-body .df-block .messages strong {
       font-weight: bold; }
     .df .df-checkout-ergonomic .df-body .df-block-login .col2-set .col-1
@@ -643,6 +636,8 @@
     border: 0;
     background: none;
     padding: 0; }
+  .df .df-checkout-ergonomic .select2-container {
+    font-size: 12px; }
 
 .df-checkout-ergonomic-page .col-main {
   margin-left: 0;
@@ -686,8 +681,7 @@
       */
       margin-top: 0; }
 
-#checkout-shipping-method-load
-span.p, #checkout-payment-method-load span.p {
+#checkout-shipping-method-load span.p, #checkout-payment-method-load span.p {
   display: block;
   margin: 0.5em 0; }
 
@@ -701,6 +695,8 @@ span.p, #checkout-payment-method-load span.p {
 
 #df-login #login-form .content {
   min-height: 0; }
+#df-login #login-form .form-list div.input-box input.input-text {
+  width: 250px; }
 
 .df-cms-menu-wrapper {
   width: 100%; }
@@ -1086,24 +1082,24 @@ body.df {
       padding: 0 0 0 20px;
       background: url("../../images/pd4/scissors.png") left center no-repeat; }
 
-.df div.df-frontend .df-promo-gift .df-gift-chooser .df-center {
+.df .df-promo-gift .df-gift-chooser .df-center {
   font-family: Arial,Helvetica,sans-serif;
   border: 1px solid #cec3b6;
   background: #fafaec;
   padding: 12px 15px 0 15px;
   margin: 0 0 25px 0; }
-  .df div.df-frontend .df-promo-gift .df-gift-chooser .df-center h2 {
+  .df .df-promo-gift .df-gift-chooser .df-center h2 {
     color: #e26703;
     font-size: 13px;
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 5px 0; }
-  .df div.df-frontend .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list {
+  .df .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list {
     display: block;
     width: 100%;
     overflow: hidden;
     margin: 0.5em 0; }
-    .df div.df-frontend .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product {
+    .df .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product {
       display: block;
       float: left;
       text-align: center;
@@ -1111,48 +1107,48 @@ body.df {
       width: 150px;
       border: 1px solid #d0cbc1;
       padding: 1em; }
-      .df div.df-frontend .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details .df-name {
+      .df .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details .df-name {
         margin: 0.25em 0 0.5em 0;
         line-height: 17px;
         height: 51px; }
-        .df div.df-frontend .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details .df-name a {
+        .df .df-promo-gift .df-gift-chooser .df-center ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details .df-name a {
           font-weight: bold; }
 
-.df div.df-frontend .df-promo-gift .df-gift-chooser .df-side {
+.df .df-promo-gift .df-gift-chooser .df-side {
   background: #fafaec;
   border: 1px solid #cec3b6;
   padding: 10px 0;
   margin: 0 0 14px 0; }
-  .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side h2 {
+  .df .df-promo-gift .df-gift-chooser .df-side h2 {
     color: #e26703;
     font-size: 13px;
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 10px 5px 10px; }
-  .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action .df-description {
+  .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action .df-description {
     margin: 0 10px; }
-  .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list {
+  .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list {
     display: block;
     margin: 0.5em 0; }
-    .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product {
+    .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product {
       display: block;
       width: 100%;
       overflow: hidden;
       padding: 12px 0; }
-      .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .product-image {
+      .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .product-image {
         display: block;
         float: left;
         border: 1px solid #d0cbc1;
         margin: 0 0 0 10px; }
-      .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details {
+      .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details {
         display: block;
         margin: 0 10px 0 60px;
         padding: 0 0 0 12px; }
-        .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details .df-name {
+        .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-product .df-details .df-name {
           margin: 0.25em 0 0.5em 0; }
-    .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-odd {
+    .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-odd {
       background: #FAFAFA; }
-    .df div.df-frontend .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-last {
+    .df .df-promo-gift .df-gift-chooser .df-side ul.df-promo-actions li.df-promo-action ul.df-product-list li.df-last {
       padding-bottom: 0; }
 
 /**
@@ -1255,6 +1251,9 @@ body.df {
 #reward_placer {
   margin-bottom: 10px; }
 
+.cart .cart-totals table tfoot .df-vat td {
+  font-size: 12px; }
+
 :lang(ru) .em_block-tag-cloud .block-content .actions a, :lang(ru) span.post-by span {
   text-transform: none !important; }
 :lang(ru) .blog.toolbar-bottom .sort-by select {
@@ -1293,7 +1292,6 @@ body.df-theme-8theme-gadget .cart .totals tfoot td strong {
 body.df-theme-8theme-gadget h2.supertab {
   text-transform: lowercase; }
 body.df-theme-8theme-gadget .product-view .add-to-links {
-  backgrround: yellow;
   margin-right: 30px; }
 body.df-theme-8theme-gadget .product-view ul.product-tabs li a {
   text-transform: lowercase; }
@@ -1349,130 +1347,103 @@ body.df-theme-gala-softwaremarket .global-site-notice.demo-notice {
   body.df-theme-gala-softwaremarket .global-site-notice.demo-notice p {
     margin: 0; }
 
-body.df-theme-gala-titanshop {
-  /**
-   	╨Т ╤А╤Г╤Б╤Б╨║╨╛╨╝ ╤П╨╖╤Л╨║╨╡ ╨╜╨░╨┐╨╕╤Б╨░╨╜╨╕╨╡ ╨║╨░╨╢╨┤╨╛╨│╨╛ ╤Б╨╗╨╛╨▓╨░ ╤Д╤А╨░╨╖╤Л ╤Б ╨▒╨╛╨╗╤М╤И╨╛╨╣ ╨▒╤Г╨║╨▓╤Л
-   	╨╜╨╡ ╨┐╤А╨╕╨╜╤П╤В╨╛ ╨╕ ╨▓╤Л╨│╨╗╤П╨┤╨╕╤В ╨╜╨╡╨║╤А╨░╤Б╨╕╨▓╨╛,
-   	╨┐╨╛╤Н╤В╨╛╨╝╤Г ╨╛╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨▓╨╡╨╖╨┤╨╡ ╨┐╤А╨░╨▓╨╕╨╗╨╛ capitalize.
-   */
-  /** ╨╛╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨┐╤А╨░╨▓╨╕╨╗╨╛ lowercase */ }
-  body.df-theme-gala-titanshop .em_nav .menu-item-depth-0 > a
-  , body.df-theme-gala-titanshop .product-view .product-tags li a
-  , body.df-theme-gala-titanshop .page-popup .link-print
-  , body.df-theme-gala-titanshop #em_quickshop_handler
-  , body.df-theme-gala-titanshop .cart-table a
-  , body.df-theme-gala-titanshop .opc .form-list li.control label
-  , body.df-theme-gala-titanshop .box-tags .tags a
-  , body.df-theme-gala-titanshop .customer-account-edit .fieldset li.control label
-  , body.df-theme-gala-titanshop .block-cart-top .block-content .product-name a
-  , body.df-theme-gala-titanshop .newsletter-title
-  , body.df-theme-gala-titanshop .category-title.page-title h1
-  , body.df-theme-gala-titanshop .em_post-action .tags li a {
-    text-transform: none; }
-  body.df-theme-gala-titanshop .df-checkout-ergonomic-page #opc-shipping_method .sp-methods dt {
-    float: none;
-    margin-bottom: 3px; }
-  body.df-theme-gala-titanshop .df-checkout-ergonomic-page #opc-shipping_method .sp-methods dd {
-    margin-bottom: 10px; }
-    body.df-theme-gala-titanshop .df-checkout-ergonomic-page #opc-shipping_method .sp-methods dd ul li {
-      margin-top: 0;
-      margin-bottom: 0; }
-  body.df-theme-gala-titanshop .fix_menu {
-    width: 100%;
-    overflow: hidden; }
-    body.df-theme-gala-titanshop .fix_menu .header-bottom-right {
-      width: 914px; }
-      body.df-theme-gala-titanshop .fix_menu .header-bottom-right .menu-item-depth-0 > a > span,
-      body.df-theme-gala-titanshop .fix_menu .header-bottom-right .menu-item-depth-0 > .em-catalog-navigation > li.level0 > a > span {
-        padding-left: 19px;
-        padding-right: 19px; }
-  body.df-theme-gala-titanshop .form-list li.control label {
-    text-transform: lowercase; }
-  body.df-theme-gala-titanshop h1 {
-    text-transform: none; }
-  body.df-theme-gala-titanshop .header-top span.number {
-    /* ╨╛╤В╤Б╤В╤Г╨┐ ╨╜╨╛╨╝╨╡╤А╨░ ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░ ╨╛╤В ╨┐╨╛╨┤╨┐╨╕╤Б╨╕ ╨║ ╨╜╨╡╨╝╤Г ╤Б╨╗╨╡╨▓╨░ */
-    padding-left: 4px;
-    padding-top: 2px; }
-  body.df-theme-gala-titanshop .sale_off span:last-child {
-    margin-left: -10px; }
-  body.df-theme-gala-titanshop .sale_off span.rm-sale-off-minus {
-    display: block;
-    float: left;
-    font-size: 30px;
-    line-height: 4px;
-    margin-top: 5px !important;
-    margin-left: 11px;
-    text-align: right; }
-
+body.df-theme-gala-titanshop .em_nav .menu-item-depth-0 > a
+, body.df-theme-gala-titanshop .product-view .product-tags li a
+, body.df-theme-gala-titanshop .page-popup .link-print
+, body.df-theme-gala-titanshop #em_quickshop_handler
+, body.df-theme-gala-titanshop .cart-table a
+, body.df-theme-gala-titanshop .opc .form-list li.control label
+, body.df-theme-gala-titanshop .box-tags .tags a
+, body.df-theme-gala-titanshop .customer-account-edit .fieldset li.control label
+, body.df-theme-gala-titanshop .block-cart-top .block-content .product-name a
+, body.df-theme-gala-titanshop .newsletter-title
+, body.df-theme-gala-titanshop .category-title.page-title h1
+, body.df-theme-gala-titanshop .em_post-action .tags li a {
+  text-transform: none; }
+body.df-theme-gala-titanshop .df-checkout-ergonomic-page #opc-shipping_method .sp-methods dt {
+  float: none;
+  margin-bottom: 3px; }
+body.df-theme-gala-titanshop .df-checkout-ergonomic-page #opc-shipping_method .sp-methods dd {
+  margin-bottom: 10px; }
+  body.df-theme-gala-titanshop .df-checkout-ergonomic-page #opc-shipping_method .sp-methods dd ul li {
+    margin-top: 0;
+    margin-bottom: 0; }
+body.df-theme-gala-titanshop .fix_menu {
+  width: 100%;
+  overflow: hidden; }
+  body.df-theme-gala-titanshop .fix_menu .header-bottom-right {
+    width: 914px; }
+    body.df-theme-gala-titanshop .fix_menu .header-bottom-right .menu-item-depth-0 > a > span,
+    body.df-theme-gala-titanshop .fix_menu .header-bottom-right .menu-item-depth-0 > .em-catalog-navigation > li.level0 > a > span {
+      padding-left: 19px;
+      padding-right: 19px; }
+body.df-theme-gala-titanshop .form-list li.control label {
+  text-transform: lowercase; }
+body.df-theme-gala-titanshop h1 {
+  text-transform: none; }
+body.df-theme-gala-titanshop .header-top span.number {
+  padding-left: 4px;
+  padding-top: 2px; }
+body.df-theme-gala-titanshop .sale_off span:last-child {
+  margin-left: -10px; }
+body.df-theme-gala-titanshop .sale_off span.rm-sale-off-minus {
+  display: block;
+  float: left;
+  font-size: 30px;
+  line-height: 4px;
+  margin-top: 5px !important;
+  margin-left: 11px;
+  text-align: right; }
 body.df-theme-gala-titanshop.checkout-cart-index #shopping-cart-totals-table tbody td.a-right {
   font-size: 16px; }
 body.df-theme-gala-titanshop.checkout-cart-index #shopping-cart-totals-table tfoot td.a-right strong {
   font-size: 18px; }
-
 body.df-theme-gala-titanshop.customer-account-create .page-title h2.legend {
   display: none; }
-
 body.df-theme-gala-titanshop.customer-account-index .page-title {
   display: none; }
 body.df-theme-gala-titanshop.customer-account-index .dashboard .box-recent {
   margin-top: 0; }
+body.df-theme-gala-titanshop.wishlist-index-share .my-account .form-list label small {
+  text-transform: none; }
 
-body.df-theme-gala-titanshop.wishlist-index-share .my-account .form-list label {
-  /** ╨Э╨░╨╝ ╨╜╤Г╨╢╨╜╨╛, ╤З╤В╨╛╨▒╤Л ┬л╨Т╤Л┬╗ ╨▒╤Л╨╗╨╛ ╨╜╨░╨┐╨╕╤Б╨░╨╜╨╛ ╤Б ╨▒╨╛╨╗╤М╤И╨╛╨╣ ╨▒╤Г╨║╨▓╤Л */ }
-  body.df-theme-gala-titanshop.wishlist-index-share .my-account .form-list label small {
-    text-transform: none; }
-
-body.df-theme-infortis-ultimo {
-  /*
-  	╨Я╨╛╤Б╨╗╨╡ ╤А╤Г╤Б╨╕╤Д╨╕╨║╨░╤Ж╨╕╨╕ ╤Б╤Б╤Л╨╗╨║╨╕ ╨╝╨╡╨╜╤О ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П ╨╜╨╡ ╨┐╨╛╨╝╨╡╤Й╨░╤О╤В╤Б╤П ╨▓ ╨╛╨┤╨╜╨╛╨╝ ╤А╤П╨┤╤Г ╨▓ ╤И╨░╨┐╨║╨╡.
-  	╨Я╨╛ ╤Н╤В╨╛╨╣ ╨┐╤А╨╕╤З╨╕╨╜╨╡ ╨╜╨╡╨╝╨╜╨╛╨│╨╛ ╨║╨╛╤А╤А╨╡╨║╤В╨╕╤А╤Г╨╡╨╝ 12-╨║╨╛╨╗╨╛╨╜╨╛╤З╨╜╤Г╤О ╨╝╨╛╨┤╤Г╨╗╤М╨╜╤Г╤О ╤Б╨╡╤В╨║╤Г ╨┤╨╗╤П ╤И╨░╨┐╨║╨╕:
-  	╨╗╨╛╨│╨╛╤В╨╕╨┐╤Г (╤Б╨╗╨╡╨▓╨░) ╤Г╨┤╨╡╨╗╤П╨╡╨╝ 3 ╨║╨╛╨╗╨╛╨╜╨║╨╕ ╨▓╨╝╨╡╤Б╤В╨╛ 4,
-  	╨░ ╨╝╨╡╨╜╤О ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П (╤Б╨┐╤А╨░╨▓╨░) ╤Г╨┤╨╡╨╗╤П╨╡╨╝ 5 ╨║╨╛╨╗╨╛╨╜╨╛╨║ ╨▓╨╝╨╡╤Б╤В╨╛ 4.
-  */ }
-  body.df-theme-infortis-ultimo.checkout-onepage-index #df-login.account-login .buttons-set button[type=submit] {
-    min-width: 100px; }
-  body.df-theme-infortis-ultimo.checkout-onepage-index #df-login.account-login .buttons-set > a {
-    line-height: 45px; }
-  body.df-theme-infortis-ultimo.contacts-index-index .buttons-set {
-    width: 100%;
-    max-width: 535px;
-    border: 0;
-    margin-top: 0.5em; }
-    body.df-theme-infortis-ultimo.contacts-index-index .buttons-set p.required {
-      line-height: inherit;
-      float: none;
-      margin-top: 0;
-      margin-bottom: 0.25em; }
-  body.df-theme-infortis-ultimo .df .df-checkout-ergonomic {
-    /*
-    	╨Я╨╛╨┤╨╛╨▒╨╜╨╛╨╡ ╨┐╤А╨░╨▓╨╕╨╗╨╛ ╨┐╤А╨╕╤Б╤Г╤В╤Б╤В╨▓╤Г╨╡╤В ╨▓ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡,
-    	╨╛╨┤╨╜╨░╨║╨╛ ╨╛╨╜╨╛ ╨│╨╗╤Г╤И╨╕╤В╤Б╤П ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╤Л╨╝╨╕ ╨┐╤А╨░╨▓╨╕╨╗╨░╨╝╨╕ ╨╝╨╛╨┤╤Г╨╗╤П "╨г╨┤╨╛╨▒╨╜╨╛╨╡ ╨╛╤Д╨╛╤А╨╝╨╗╨╡╨╜╨╕╨╡ ╨╖╨░╨║╨░╨╖╨░".
-    	╨Т╨╛╤Б╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╨╡╨│╨╛.
-    */ }
-    body.df-theme-infortis-ultimo .df .df-checkout-ergonomic button.btn-checkout {
-      line-height: 55px;
-      font-size: 1.1666em; }
-    body.df-theme-infortis-ultimo .df .df-checkout-ergonomic .error-msg {
-      border: 1px solid #c02230; }
-  body.df-theme-infortis-ultimo .dropdown-toggle .hide-below-1280
-  , body.df-theme-infortis-ultimo .dropdown-toggle .hide-below-960 {
-    text-transform: lowercase; }
-  body.df-theme-infortis-ultimo .icon.i-telephone {
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    vertical-align: middle;
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    padding: 3px; }
-  body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block {
-    width: 23%; }
-    body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block#header-search {
-      width: 31.33%; }
-    body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block.user-menu {
-      width: 39.67%; }
+body.df-theme-infortis-ultimo.checkout-onepage-index #df-login.account-login .buttons-set button[type=submit] {
+  min-width: 100px; }
+body.df-theme-infortis-ultimo.checkout-onepage-index #df-login.account-login .buttons-set > a {
+  line-height: 45px; }
+body.df-theme-infortis-ultimo.contacts-index-index .buttons-set {
+  width: 100%;
+  max-width: 535px;
+  border: 0;
+  margin-top: 0.5em; }
+  body.df-theme-infortis-ultimo.contacts-index-index .buttons-set p.required {
+    line-height: inherit;
+    float: none;
+    margin-top: 0;
+    margin-bottom: 0.25em; }
+body.df-theme-infortis-ultimo .df .df-checkout-ergonomic button.btn-checkout {
+  line-height: 55px;
+  font-size: 1.1666em; }
+body.df-theme-infortis-ultimo .df .df-checkout-ergonomic .error-msg {
+  border: 1px solid #c02230; }
+body.df-theme-infortis-ultimo .dropdown-toggle .hide-below-1280
+, body.df-theme-infortis-ultimo .dropdown-toggle .hide-below-960 {
+  text-transform: lowercase; }
+body.df-theme-infortis-ultimo .icon.i-telephone {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 3px; }
+body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block {
+  width: 23%; }
+  body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block#header-search {
+    width: 31.33%; }
+  body.df-theme-infortis-ultimo .header-regular .hp-blocks-holder > .hp-block.user-menu {
+    width: 39.67%; }
 
 body.df-theme-koolthememaster-caramel #nav .brands a {
   background-position: -335px -74px; }
@@ -1554,7 +1525,6 @@ body.df-theme-magento-enterprise .fancybox-wrap.df-fancybox .fancybox-inner .acc
       margin-bottom: 6px;
       text-transform: uppercase; }
     body.df-theme-magento-enterprise .fancybox-wrap.df-fancybox .fancybox-inner .account-login .registered-users .input-box {
-      /** ╨┤╨╗╤П ╨╕╨╜╨┤╨╕╨║╨░╤В╨╛╤А╨░ ╤Г╤Б╨┐╨╡╤И╨╜╨╛╤Б╤В╨╕ ╨▓╨▓╨╛╨┤╨░ */
       padding-right: 20px; }
 body.df-theme-magento-enterprise .df-checkout-ergonomic-page .form-list li.fields .field {
   clear: none; }
@@ -1578,40 +1548,33 @@ body.df-theme-magento-modern .df-checkout-ergonomic .df-block-method-payment .sp
 body.df-theme-magento-modern .df-checkout-ergonomic #opc-review #checkout-agreements .buttons-set {
   padding-bottom: 0; }
 
-.df-theme-magento-rwd {
-  /*.skip-account {
-  	right: 150px;
-  	top: 1px;
-  } */ }
-  .df-theme-magento-rwd .product-view .product-shop .price-info {
-    max-width: 70%; }
-  .df-theme-magento-rwd .shipping .form-list .shipping-postcode {
-    width: 35%; }
-    .df-theme-magento-rwd .shipping .form-list .shipping-postcode review-product-list
-    div.input-box {
-      width: 6em; }
-
-.df-theme-magento-rwd.customer-account-login .scaffold-form label:first-child {
-  /* RWD ╨╖╨░╤З╨╡╨╝-╤В╨╛ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В width: 115px; */
-  width: auto; }
-
 .df-theme-magento-rwd.checkout-onepage-index .df-checkout-ergonomic-page .col-main {
   float: none;
   width: auto;
   max-width: 1200px; }
 .df-theme-magento-rwd.checkout-onepage-index .df-checkout-ergonomic-page .df button.btn-checkout {
   margin-top: 1em; }
-
-.df-theme-magento-rwd.review-product-list {
-  /* ╨б╨║╤А╤Л╨▓╨░╨╡╨╝ ╨║╤Г╤З╤Г ╤Б╨╗╨╛╨▓╨╡╤Б╨╜╨╛╨│╨╛ ╨╝╤Г╤Б╨╛╤А╨░ */ }
-  .df-theme-magento-rwd.review-product-list p.no-rating {
-    display: none; }
-  .df-theme-magento-rwd.review-product-list #review-form h3 {
-    display: none; }
-  .df-theme-magento-rwd.review-product-list #review-form > div {
-    padding-top: 0; }
-  .df-theme-magento-rwd.review-product-list #review-form .form-list li:nth-child(3) label {
-    text-transform: none; }
+.df-theme-magento-rwd.customer-account-create .scaffold-form label:first-child {
+  min-width: 140px;
+  width: auto; }
+.df-theme-magento-rwd.customer-account-login .scaffold-form label:first-child {
+  min-width: 115px;
+  width: auto; }
+.df-theme-magento-rwd.review-product-list p.no-rating {
+  display: none; }
+.df-theme-magento-rwd.review-product-list #review-form h3 {
+  display: none; }
+.df-theme-magento-rwd.review-product-list #review-form > div {
+  padding-top: 0; }
+.df-theme-magento-rwd.review-product-list #review-form .form-list li:nth-child(3) label {
+  text-transform: none; }
+.df-theme-magento-rwd .product-view .product-shop .price-info {
+  max-width: 70%; }
+.df-theme-magento-rwd .shipping .form-list .shipping-postcode {
+  width: 35%; }
+  .df-theme-magento-rwd .shipping .form-list .shipping-postcode review-product-list
+  div.input-box {
+    width: 6em; }
 
 body.df-theme-smartwave-porto .df-checkout-ergonomic-page .sidebar {
   display: none; }
@@ -1626,41 +1589,29 @@ body.df-theme-smartwave-porto .footer .footer-bottom .custom-block:first-child {
 body.df-theme-smartwave-porto.checkout-onepage-index .fancybox-close {
   display: none; }
 
-body.df-theme-sns-xsport {
-  /** ╨Ю╨▒╤А╨░╤В╨╕╤В╨╡ ╨▓╨╜╨╕╨╝╨░╨╜╨╕╨╡, ╤З╤В╨╛ ╨║╨╗╨░╤Б╤Б CSS .df-checkout-ergonomic-page ╨▓ ╨┤╨░╨╜╨╜╨╛╨╣ ╤В╨╡╨╝╨╡ ╨╜╨╡╨┤╨╛╤Б╤В╤Г╨┐╨╡ */ }
-
-body.df-theme-templatemela-classy-shop {
+body.df-theme-templatemela-classy-shop .account-login .content h2
+, body.df-theme-templatemela-classy-shop .fieldset .legend
+, body.df-theme-templatemela-classy-shop .box-account .box-head h2
+, body.df-theme-templatemela-classy-shop .addresses-list h2
+, body.df-theme-templatemela-classy-shop .multiple-checkout h2
+, body.df-theme-templatemela-classy-shop .checkout-onepage-success h2
+, body.df-theme-templatemela-classy-shop .order-info-box h2
+, body.df-theme-templatemela-classy-shop .sales-order-print .col2-set h2 {
+  text-transform: lowercase; }
+body.df-theme-templatemela-classy-shop .category-title h2, body.df-theme-templatemela-classy-shop .category-title h2 a, body.df-theme-templatemela-classy-shop .crosssell h2 {
+  text-transform: none; }
+body.df-theme-templatemela-classy-shop .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
+  min-width: 270px; }
+body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df {
   /**
-   * ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨┐╤А╨░╨▓╨╕╨╗╨╛ {text-transform: capitalize;},
-   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╕ ╤В╨╕╨┐╨░ ┬л╨Я╨╛╨║╤Г╨┐╨░╨╗╨╕ ╨а╨░╨╜╨╡╨╡?┬╗ ╤Б╨╝╨╛╤В╤А╤П╤В╤Б╤П ╨┐╨╗╨╛╤Е╨╛
-   */
-  /**
-   * ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨┐╤А╨░╨▓╨╕╨╗╨╛ {text-transform: capitalize;},
-   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╕ ╤В╨╕╨┐╨░ ┬л╨Ю╨▒╤А╨░╤В╨╕╤В╨╡ ╨Т╨╜╨╕╨╝╨░╨╜╨╕╨╡┬╗ ╤Б╨╝╨╛╤В╤А╤П╤В╤Б╤П ╨┐╨╗╨╛╤Е╨╛
+   * ╨Т╨╡╤А╨╛╤П╤В╨╜╨╛, ╤З╤В╨╛ ╨┐╤А╨░╨▓╨╕╨╗╨░ ╨╜╨╕╨╢╨╡ ╨╜╤Г╨╢╨╜╤Л ╨┤╨╗╤П ╨▓╤Б╨╡╤Е ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╕╤Е ╤В╨╡╨╝
+   * (╨┐╤А╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╤Е ╨┤╨╛╨┐╨╛╨╗╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е, ╨╜╨╡╨╕╨╖╨▓╨╡╤Б╤В╨╜╤Л╤Е ╨┐╨╛╨║╨░ ╤Г╤Б╨╗╨╛╨▓╨╕╤П╤Е),
+   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨▓╤Б╤В╤А╨╡╤З╨░╤О╤Б╤М ╤Б ╨╕╤Е ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╤М╤О ╤Г╨╢╨╡ ╨▓╤В╨╛╤А╨╛╨╣ ╤А╨░╨╖ ╨┐╨╛╨┤╤А╤П╨┤.
+   * (╨┐╨╡╤А╨▓╤Л╨╣ тАФ ╨▓ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╣ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ ╨┤╨╗╤П Magento Enterprise,
+   * ╨▓╤В╨╛╤А╨╛╨╣ тАФ ╨▓ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ TemplateMela Minimal Multi Purpose (MAG090180)).
    */ }
-  body.df-theme-templatemela-classy-shop .account-login .content h2
-  , body.df-theme-templatemela-classy-shop .fieldset .legend
-  , body.df-theme-templatemela-classy-shop .box-account .box-head h2
-  , body.df-theme-templatemela-classy-shop .addresses-list h2
-  , body.df-theme-templatemela-classy-shop .multiple-checkout h2
-  , body.df-theme-templatemela-classy-shop .checkout-onepage-success h2
-  , body.df-theme-templatemela-classy-shop .order-info-box h2
-  , body.df-theme-templatemela-classy-shop .sales-order-print .col2-set h2 {
-    text-transform: lowercase; }
-  body.df-theme-templatemela-classy-shop .category-title h2, body.df-theme-templatemela-classy-shop .category-title h2 a, body.df-theme-templatemela-classy-shop .crosssell h2 {
-    text-transform: none; }
-  body.df-theme-templatemela-classy-shop .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
-    min-width: 270px; }
-  body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df {
-    /**
-     * ╨Т╨╡╤А╨╛╤П╤В╨╜╨╛, ╤З╤В╨╛ ╨┐╤А╨░╨▓╨╕╨╗╨░ ╨╜╨╕╨╢╨╡ ╨╜╤Г╨╢╨╜╤Л ╨┤╨╗╤П ╨▓╤Б╨╡╤Е ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╕╤Е ╤В╨╡╨╝
-     * (╨┐╤А╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╤Е ╨┤╨╛╨┐╨╛╨╗╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е, ╨╜╨╡╨╕╨╖╨▓╨╡╤Б╤В╨╜╤Л╤Е ╨┐╨╛╨║╨░ ╤Г╤Б╨╗╨╛╨▓╨╕╤П╤Е),
-     * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨▓╤Б╤В╤А╨╡╤З╨░╤О╤Б╤М ╤Б ╨╕╤Е ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╤М╤О ╤Г╨╢╨╡ ╨▓╤В╨╛╤А╨╛╨╣ ╤А╨░╨╖ ╨┐╨╛╨┤╤А╤П╨┤.
-     * (╨┐╨╡╤А╨▓╤Л╨╣ тАФ ╨▓ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╣ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ ╨┤╨╗╤П Magento Enterprise,
-     * ╨▓╤В╨╛╤А╨╛╨╣ тАФ ╨▓ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ TemplateMela Minimal Multi Purpose (MAG090180)).
-     */ }
-    body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box input.input-text, body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box select {
-      width: 140px; }
+  body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box input.input-text, body.df-theme-templatemela-classy-shop .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box select {
+    width: 140px; }
 
 body.df-theme-templatemela-fancyshop button.button span {
   text-transform: lowercase; }
@@ -1691,73 +1642,43 @@ body.df-theme-templatemela-mega-shop .page-title h2
 , body.df-theme-templatemela-mega-shop .sales-order-print .col2-set h2
 , body.df-theme-templatemela-mega-shop .dashboard .box-info h4
 , body.df-theme-templatemela-mega-shop #footer .block-subscribe .block-title strong {
-  /* ╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В text-transform: capitalize; */
   text-transform: none; }
 body.df-theme-templatemela-mega-shop .custom_menu a {
-  /* ╨Я╨╛╤З╨╡╨╝╤Г-╤В╨╛ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ ╤Н╤В╨╛╨│╨╛ ╨╜╨╡ ╨┤╨╡╨╗╨░╨╡╤В */
   cursor: pointer; }
 body.df-theme-templatemela-mega-shop .df .df-checkout-ergonomic .tm-hide {
-  /**
-  	╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В opacity: 0
-  	╨╕ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В ╤Н╤В╨╛ ╨┤╨╗╤П ╤Б╨║╤А╤Л╤В╨╕╤П ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╤Л╤Е ╤А╨░╨┤╨╕╨╛╨║╨╜╨╛╨┐╨╛╨║
-  	╨╕ ╨╖╨░╨╝╨╡╤В╤Л ╨╕╤Е ╨╜╨░ ╨║╨░╤А╤В╨╕╨╜╨║╨╕.
-  	╨Ю╨┤╨╜╨░╨║╨╛ ╤Н╤В╨╛ ╨╖╨░╨╝╨╡╨╜╨░ ╨╜╨╡ ╨┐╤А╨╛╤Е╨╛╨┤╨╕╤В ╤Г╨┤╨░╤З╨╜╨╛, ╨╕ ╤А╨░╨┤╨╕╨╛╨║╨╜╨╛╨┐╨║╨╕ ╨┐╤А╨╛╨┐╨░╨┤╨░╤О╤В ╨▓╨╛╨▓╤Б╨╡.
-  */
   opacity: initial; }
 body.df-theme-templatemela-mega-shop #footer .block-subscribe .block-title strong {
-  /* ╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В text-transform: capitalize; */
   text-transform: lowercase; }
 body.df-theme-templatemela-mega-shop #footer .block-subscribe input.input-text {
-  /*
-  	╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В width: 274px;
-  	╨╕ ╤В╨╛╨│╨┤╨░ ╨╜╨╡ ╨┐╨╛╨╝╨╡╤Й╨░╨╡╤В╤Б╤П ╨▓ ╤В╨╛╨╝ ╨╢╨╡ ╤А╤П╨┤╤Г ╨║╨╜╨╛╨┐╨║╨░ ┬л╨┐╨╛╨┤╨┐╨╕╤Б╨░╤В╤М╤Б╤П┬╗.
-  */
   width: 254px; }
 body.df-theme-templatemela-mega-shop .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login {
-  /**
-  	╨Я╨╛╤З╨╡╨╝╤Г ╤В╨╛ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╡ width:auto ╤А╨░╨▒╨╛╤В╨░╨╡╤В ╨╜╨╡╨┐╤А╨░╨▓╨╕╨╗╤М╨╜╨╛.
-  	╨Ы╨╡╨╜╤М ╤А╨░╨╖╨▒╨╕╤А╨░╤В╤М╤Б╤П ╤Б╨╡╨╣╤З╨░╤Б.
-  */
   width: 266px; }
 
-body.df-theme-templatemela-minimal-multi-purpose {
+body.df-theme-templatemela-minimal-multi-purpose .account-login .content h2
+, body.df-theme-templatemela-minimal-multi-purpose .fieldset .legend
+, body.df-theme-templatemela-minimal-multi-purpose .box-account .box-head h2
+, body.df-theme-templatemela-minimal-multi-purpose .addresses-list h2
+, body.df-theme-templatemela-minimal-multi-purpose .multiple-checkout h2
+, body.df-theme-templatemela-minimal-multi-purpose .checkout-onepage-success h2
+, body.df-theme-templatemela-minimal-multi-purpose .order-info-box h2
+, body.df-theme-templatemela-minimal-multi-purpose .sales-order-print .col2-set h2 {
+  text-transform: lowercase; }
+body.df-theme-templatemela-minimal-multi-purpose .block-layered-nav dt {
+  text-transform: none; }
+body.df-theme-templatemela-minimal-multi-purpose .product-block-inner .sale-label, body.df-theme-templatemela-minimal-multi-purpose .products-list li .list-left .sale-label {
+  text-transform: lowercase; }
+body.df-theme-templatemela-minimal-multi-purpose .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
+  min-width: 270px; }
+body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df {
   /**
-   * ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨┐╤А╨░╨▓╨╕╨╗╨╛ {text-transform: capitalize;},
-   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╕ ╤В╨╕╨┐╨░ ┬л╨Я╨╛╨║╤Г╨┐╨░╨╗╨╕ ╨а╨░╨╜╨╡╨╡?┬╗ ╤Б╨╝╨╛╤В╤А╤П╤В╤Б╤П ╨┐╨╗╨╛╤Е╨╛
-   */
-  /**
-   * ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨┐╤А╨░╨▓╨╕╨╗╨╛ {text-transform: capitalize;},
-   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╕ ╤В╨╕╨┐╨░ ┬л╨Т╤Л╤Б╨╛╤В╨░ ╨Ъ╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░┬╗ ╤Б╨╝╨╛╤В╤А╤П╤В╤Б╤П ╨┐╨╗╨╛╤Е╨╛
-   */
-  /**
-   * ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨┐╤А╨░╨▓╨╕╨╗╨╛ {text-transform: capitalize;},
-   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╕ ╤В╨╕╨┐╨░ ┬л╨б╨║╨╕╨┤╨║╨░┬╗ ╨╖╨░╨╜╨╕╨╝╨░╤О╤В ╤Б╨╗╨╕╤И╨║╨╛╨╝ ╨╝╨╜╨╛╨│╨╛ ╨╝╨╡╤Б╤В╨░ ╨▓ ╨▓╤Л╤Б╨╛╤В╤Г
+   * ╨Т╨╡╤А╨╛╤П╤В╨╜╨╛, ╤З╤В╨╛ ╨┐╤А╨░╨▓╨╕╨╗╨░ ╨╜╨╕╨╢╨╡ ╨╜╤Г╨╢╨╜╤Л ╨┤╨╗╤П ╨▓╤Б╨╡╤Е ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╕╤Е ╤В╨╡╨╝
+   * (╨┐╤А╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╤Е ╨┤╨╛╨┐╨╛╨╗╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е, ╨╜╨╡╨╕╨╖╨▓╨╡╤Б╤В╨╜╤Л╤Е ╨┐╨╛╨║╨░ ╤Г╤Б╨╗╨╛╨▓╨╕╤П╤Е),
+   * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨▓╤Б╤В╤А╨╡╤З╨░╤О╤Б╤М ╤Б ╨╕╤Е ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╤М╤О ╤Г╨╢╨╡ ╨▓╤В╨╛╤А╨╛╨╣ ╤А╨░╨╖ ╨┐╨╛╨┤╤А╤П╨┤.
+   * (╨┐╨╡╤А╨▓╤Л╨╣ тАФ ╨▓ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╣ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ ╨┤╨╗╤П Magento Enterprise,
+   * ╨▓╤В╨╛╤А╨╛╨╣ тАФ ╨▓ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ TemplateMela Minimal Multi Purpose (MAG090180)).
    */ }
-  body.df-theme-templatemela-minimal-multi-purpose .account-login .content h2
-  , body.df-theme-templatemela-minimal-multi-purpose .fieldset .legend
-  , body.df-theme-templatemela-minimal-multi-purpose .box-account .box-head h2
-  , body.df-theme-templatemela-minimal-multi-purpose .addresses-list h2
-  , body.df-theme-templatemela-minimal-multi-purpose .multiple-checkout h2
-  , body.df-theme-templatemela-minimal-multi-purpose .checkout-onepage-success h2
-  , body.df-theme-templatemela-minimal-multi-purpose .order-info-box h2
-  , body.df-theme-templatemela-minimal-multi-purpose .sales-order-print .col2-set h2 {
-    text-transform: lowercase; }
-  body.df-theme-templatemela-minimal-multi-purpose .block-layered-nav dt {
-    text-transform: none; }
-  body.df-theme-templatemela-minimal-multi-purpose .product-block-inner .sale-label, body.df-theme-templatemela-minimal-multi-purpose .products-list li .list-left .sale-label {
-    text-transform: lowercase; }
-  body.df-theme-templatemela-minimal-multi-purpose .fancybox-wrap.df-fancybox .fancybox-inner .account-login {
-    min-width: 270px; }
-  body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df {
-    /**
-     * ╨Т╨╡╤А╨╛╤П╤В╨╜╨╛, ╤З╤В╨╛ ╨┐╤А╨░╨▓╨╕╨╗╨░ ╨╜╨╕╨╢╨╡ ╨╜╤Г╨╢╨╜╤Л ╨┤╨╗╤П ╨▓╤Б╨╡╤Е ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╕╤Е ╤В╨╡╨╝
-     * (╨┐╤А╨╕ ╨╜╨╡╨║╨╛╤В╨╛╤А╤Л╤Е ╨┤╨╛╨┐╨╛╨╗╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е, ╨╜╨╡╨╕╨╖╨▓╨╡╤Б╤В╨╜╤Л╤Е ╨┐╨╛╨║╨░ ╤Г╤Б╨╗╨╛╨▓╨╕╤П╤Е),
-     * ╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨▓╤Б╤В╤А╨╡╤З╨░╤О╤Б╤М ╤Б ╨╕╤Е ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╤М╤О ╤Г╨╢╨╡ ╨▓╤В╨╛╤А╨╛╨╣ ╤А╨░╨╖ ╨┐╨╛╨┤╤А╤П╨┤.
-     * (╨┐╨╡╤А╨▓╤Л╨╣ тАФ ╨▓ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╨╛╨╣ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ ╨┤╨╗╤П Magento Enterprise,
-     * ╨▓╤В╨╛╤А╨╛╨╣ тАФ ╨▓ ╨╛╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨╛╨╣ ╤В╨╡╨╝╨╡ TemplateMela Minimal Multi Purpose (MAG090180)).
-     */ }
-    body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box input.input-text, body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box select {
-      width: 160px; }
+  body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box input.input-text, body.df-theme-templatemela-minimal-multi-purpose .df-checkout-ergonomic-page .df .df-checkout-ergonomic .df-body .df-block li.fields div.field .input-box select {
+    width: 160px; }
 
 body.df-theme-templatemonster-34402 .df-checkout-ergonomic-page .col-main {
   float: none;
@@ -1784,18 +1705,8 @@ body.df-theme-templatemonster-43373 .block-layered-nav {
   padding-top: 10px;
   padding-bottom: 10px; }
   body.df-theme-templatemonster-43373 .block-layered-nav .block-subtitle {
-    /*
-    	╨б╨║╤А╤Л╨▓╨░╨╡╨╝ ╨╜╨░╨┤╨┐╨╕╤Б╤М ┬л╨Ъ╤А╨╕╤В╨╡╤А╨╕╨╕ ╤Д╨╕╨╗╤М╤В╤А╨░╤Ж╨╕╨╕┬╗ ╨▓ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╡ ╨▒╨╗╨╛╨║╨░ ╨┐╨╛╤И╨░╨│╨╛╨▓╨╛╨╣ ╤Д╨╕╨╗╤М╤В╤А╨░╤Ж╨╕╨╕
-    	╨▓ ╨▒╨╛╨║╨╛╨▓╨╛╨╣ ╨║╨╛╨╗╨╛╨╜╨║╨╡ ╨╜╨░ ╨▓╨╕╤В╤А╨╕╨╜╨╜╨╛╨╣ ╤Б╤В╤А╨░╨╜╨╕╤Ж╨╡ ╤Б╨┐╨╕╤Б╨║╨░ ╤В╨╛╨▓╨░╤А╨╛╨▓,
-    	╨┐╨╛╤В╨╛╨╝╤Г ╤В╨╛ ╨╜╨░╨┤ ╨╜╨╡╨╣ ╤Г╨╢╨╡ ╨╛╤В╨╛╨▒╤А╨░╨╢╨░╨╡╤В╤Б╤П ╨╜╨░╨┤╨┐╨╕╤Б╤М ┬л╨д╨╕╨╗╤М╤В╤А┬╗,
-    	╨╕ ╤Н╤В╨╕ ╨┤╨▓╨╡ ╨╜╨░╨┤╨┐╨╕╤Б╨╕, ╨┐╨╛ ╤Б╤Г╤В╨╕, ╨┤╤Г╨▒╨╗╨╕╤А╤Г╤О╤В ╨┤╤А╤Г╨│ ╨┤╤А╤Г╨│╨░.
-    */
     display: none; }
   body.df-theme-templatemonster-43373 .block-layered-nav .block-title {
-    /*
-    	... ╨░ ╨┐╨╛╤В╨╛╨╝ ╨┐╨╛╨┤╤Г╨╝╨░╨╗ ╨╕ ╤А╨╡╤И╨╕╨╗ ╤Б╨║╤А╤Л╤В╤М ╨╕ ╨╜╨░╨┤╨┐╨╕╤Б╤М ┬л╨д╨╕╨╗╤М╤В╤А┬╗.
-    	╨Я╨╛ ╨╕╨╜╤В╨╡╤А╤Д╨╡╨╣╤Б╤Г ╤Д╨╕╨╗╤М╤В╤А╨░ ╨╕ ╤В╨░╨║ ╨┐╨╛╨╜╤П╤В╨╜╨╛, ╤З╤В╨╛ ╤Н╤В╨╛ ╤Д╨╕╨╗╤М╤В╤А.
-    */
     display: none; }
   body.df-theme-templatemonster-43373 .block-layered-nav .block-content {
     padding-bottom: 0;
@@ -1803,29 +1714,21 @@ body.df-theme-templatemonster-43373 .block-layered-nav {
     body.df-theme-templatemonster-43373 .block-layered-nav .block-content dd.last ol {
       padding-bottom: 0; }
 body.df-theme-templatemonster-43373 .pager .limiter {
-  /*
-  	╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ TemplateMonster #43373
-  	╨╜╨╛╤А╨╛╨▓╨╕╤В ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М ╨╖╨┤╨╡╤Б╤М min-width: 110px;
-  */
   min-width: auto; }
 
 .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users {
+  padding-bottom: 8px;
   /*
-  	╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ TemplateMonster #43373
-  	╨╜╨╛╤А╨╛╨▓╨╕╤В ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М ╨╖╨┤╨╡╤Б╤М 20px, ╤З╤В╨╛ ╨┤╨╗╤П ╨▓╤Б╨┐╨╗╤Л╨▓╨░╤О╤Й╨╡╨│╨╛ ╨╛╨║╨╜╨░ ╤Б╨╗╨╕╤И╨║╨╛╨╝ ╨╝╨╜╨╛╨│╨╛.
-  */
-  padding-bottom: 8px; }
+  	╨Ф╤Г╨╝╨░╤О, ╨┤╨╗╤П ╤Д╨╛╤А╨╝╤Л ╨░╨▓╤В╨╛╤А╨╕╨╖╨░╤Ж╨╕╨╕ ╨╕╨╖ ╨┤╨▓╤Г╤Е ╨┐╨╛╨╗╨╡╨╣ ╨╜╨╡ ╤В╨░╨║ ╤Г╨╢ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨┐╨╛╤П╤Б╨╜╨╡╨╜╨╕╨╡,
+  	╤З╤В╨╛ ╨╖╨▓╤С╨╖╨┤╨╛╤З╨║╨╛╨╣ ╨╛╨▒╨╛╨╖╨╜╨░╤З╨╡╨╜╤Л ╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨┤╨╗╤П ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤П ╨┐╨╛╨╗╤П.
+  	╨Т ╤В╨╛ ╨╢╨╡ ╨▓╤А╨╡╨╝╤П, ╤Б╨║╤А╤Л╤В╨╕╨╡ ╤Н╤В╨╛╨│╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╨┐╨╛╨╖╨▓╨╛╨╗╨╕╤В
+  	╤Г╨╝╨╡╨╜╤М╤И╨╕╤В╤М ╨▓╤Л╤Б╨╛╤В╤Г ╨▓╤Б╨┐╨╗╤Л╨▓╨░╤О╤Й╨╡╨│╨╛ ╨╛╨║╨╜╨░ ╨░╨▓╤В╨╛╤А╨╕╨╖╨░╤Ж╨╕╨╕
+  	╨╕ ╤Г╨▒╤А╨░╤В╤М ╤Н╤Б╤В╨╡╤В╨╕╤З╨╡╤Б╨║╨╕ ╨╜╨╡╨║╤А╨░╤Б╨╕╨▓╨╛╨╡ ╨▓╨╖╨░╨╕╨╝╨╜╨╛╨╡ ╤А╨░╤Б╨┐╨╛╨╗╨╛╨╢╨╡╨╜╨╕╨╡ ╨╜╨░╨┤╨┐╨╕╤Б╨╡╨╣
+  	┬л╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨┐╨╛╨╗╤П┬╗ ╨╕ ┬л╨╖╨░╨▒╤Л╨╗╨╕ ╨┐╨░╤А╨╛╨╗╤М?┬╗
+  	(╨╛╨╜╨╕ ╨┐╨╛╨╗╤Г╤З╨░╤О╤В╤Б╤П ╤А╨░╤Б╨┐╨╛╨╗╨╛╨╢╨╡╨╜╤Л ╨╗╨╡╤Б╨╡╨╜╨║╨╛╨╣,
+  	╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╛╤В╨╜╨╛╤Б╤П╤В╤Б╤П ╨║ ╤А╨░╨╖╨╜╤Л╨╝ ╤А╨╛╨┤╨╕╤В╨╡╨╗╤М╤Б╨║╨╕╨╝ ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░╨╝).
+  */ }
   .fancybox-wrap.df-fancybox .fancybox-inner #df-login.account-login .registered-users p.required {
-    /*
-    	╨Ф╤Г╨╝╨░╤О, ╨┤╨╗╤П ╤Д╨╛╤А╨╝╤Л ╨░╨▓╤В╨╛╤А╨╕╨╖╨░╤Ж╨╕╨╕ ╨╕╨╖ ╨┤╨▓╤Г╤Е ╨┐╨╛╨╗╨╡╨╣ ╨╜╨╡ ╤В╨░╨║ ╤Г╨╢ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨┐╨╛╤П╤Б╨╜╨╡╨╜╨╕╨╡,
-    	╤З╤В╨╛ ╨╖╨▓╤С╨╖╨┤╨╛╤З╨║╨╛╨╣ ╨╛╨▒╨╛╨╖╨╜╨░╤З╨╡╨╜╤Л ╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨┤╨╗╤П ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤П ╨┐╨╛╨╗╤П.
-    	╨Т ╤В╨╛ ╨╢╨╡ ╨▓╤А╨╡╨╝╤П, ╤Б╨║╤А╤Л╤В╨╕╨╡ ╤Н╤В╨╛╨│╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╨┐╨╛╨╖╨▓╨╛╨╗╨╕╤В
-    	╤Г╨╝╨╡╨╜╤М╤И╨╕╤В╤М ╨▓╤Л╤Б╨╛╤В╤Г ╨▓╤Б╨┐╨╗╤Л╨▓╨░╤О╤Й╨╡╨│╨╛ ╨╛╨║╨╜╨░ ╨░╨▓╤В╨╛╤А╨╕╨╖╨░╤Ж╨╕╨╕
-    	╨╕ ╤Г╨▒╤А╨░╤В╤М ╤Н╤Б╤В╨╡╤В╨╕╤З╨╡╤Б╨║╨╕ ╨╜╨╡╨║╤А╨░╤Б╨╕╨▓╨╛╨╡ ╨▓╨╖╨░╨╕╨╝╨╜╨╛╨╡ ╤А╨░╤Б╨┐╨╛╨╗╨╛╨╢╨╡╨╜╨╕╨╡ ╨╜╨░╨┤╨┐╨╕╤Б╨╡╨╣
-    	┬л╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╤Л╨╡ ╨┐╨╛╨╗╤П┬╗ ╨╕ ┬л╨╖╨░╨▒╤Л╨╗╨╕ ╨┐╨░╤А╨╛╨╗╤М?┬╗
-    	(╨╛╨╜╨╕ ╨┐╨╛╨╗╤Г╤З╨░╤О╤В╤Б╤П ╤А╨░╤Б╨┐╨╛╨╗╨╛╨╢╨╡╨╜╤Л ╨╗╨╡╤Б╨╡╨╜╨║╨╛╨╣,
-    	╨┐╨╛╤В╨╛╨╝╤Г ╤З╤В╨╛ ╨╛╤В╨╜╨╛╤Б╤П╤В╤Б╤П ╨║ ╤А╨░╨╖╨╜╤Л╨╝ ╤А╨╛╨┤╨╕╤В╨╡╨╗╤М╤Б╨║╨╕╨╝ ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░╨╝).
-    */
     display: none; }
 
 body.df-theme-templatemonster-43442 .account-login .registered-users {
@@ -1877,11 +1780,6 @@ body.df-theme-templatemonster-45035 .df .df-checkout-ergonomic {
     margin-top: 4px; }
 
 body.df-theme-templatemonster-49198 .df-checkout-ergonomic-page .df button.btn-checkout > span {
-  /**
-   * ╨Ю╤Д╨╛╤А╨╝╨╕╤В╨╡╨╗╤М╤Б╨║╨░╤П ╤В╨╡╨╝╨░ TemplateMonster #49198 (┬лMen's Underwear┬╗)
-   * ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В ╨┐╤А╨░╨▓╨╕╨╗╨╛ .button.button > span {height: 49px; line-height: 49px},
-   * ╤З╤В╨╛ ╨╗╨╛╨╝╨░╨╡╤В ╨▓╨╜╨╡╤И╨╜╨╕╨╣ ╨▓╨╕╨┤ ╨╜╨░╤И╨╡╨│╨╛ ╤Н╨║╤А╨░╨╜╨░ ╨╛╤Д╨╛╤А╨╝╨╗╨╡╨╜╨╕╤П ╨╖╨░╨║╨░╨╖╨░.
-   */
   height: auto;
   line-height: auto;
   padding: 1em 0; }
@@ -1903,10 +1801,10 @@ body.df-theme-tt-theme069 .form-list li.wide .field {
 body.df-theme-ves-super-store input.qty, body.df-theme-ves-super-store input[title="Qty"] {
   width: 45px; }
 
-#vk_like {
+#vk_comments {
   margin-top: 1em; }
 
-#vk_comments {
+#vk_like {
   margin-top: 1em; }
 
 /*# sourceMappingURL=all.css.map */

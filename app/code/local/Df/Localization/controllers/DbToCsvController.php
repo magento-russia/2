@@ -14,10 +14,7 @@ class Df_Localization_DbToCsvController extends Df_Core_Controller_Admin {
 
 	/** @return void */
 	public function exportAction() {
-		Df_Localization_Model_Exporter::i()->process();
+		Df_Localization_Exporter::i()->process();
 		$this->_redirect('*/*/*');
 	}
-
-	/** @return bool */
-	protected function _isAllowed() {return df_enabled(Df_Core_Feature::LOCALIZATION);}
 }

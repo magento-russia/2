@@ -1,7 +1,4 @@
 <?php
-/**
- * @method Df_Cms_Model_Resource_Block getResource()
- */
 class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Mysql4_Block_Collection {
 	/**
 	 * @override
@@ -15,6 +12,12 @@ class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Mysql4_Block
 		}
 		parent::__construct($resource);
 	}
+
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Block
+	 */
+	public function getResource() {return Df_Cms_Model_Resource_Block::s();}
 
 	/**
 	 * @param string|null $paramName [optional]
@@ -45,15 +48,13 @@ class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Mysql4_Block
 	protected function _afterLoad() {
 		parent::_afterLoad();
 		/**
-		 * По аналогии с @see Df_Cms_Model_Resource_Page_Collection
+		 * По аналогии с @see Df_Cms_Model_Resource_Page_Collection::_afterLoad()
 		 * Правда, не проверял, имеется ли при сохранении самодельных блоков без информации о витринах
 		 * опасность такого же сбоя, как для самодельных страниц.
 		 */
 		if ($this->needLoadStoresInfo()) {
-			foreach ($this->_items as $block) {
-				/** @var Df_Cms_Model_Block $block */
-				$block->loadStoresInfo();
-			}
+			/** @uses Df_Cms_Model_Block::loadStoresInfo() */
+			$this->walk('loadStoresInfo');
 		}
 		return $this;
 	}
@@ -73,11 +74,14 @@ class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Mysql4_Block
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Cms_Model_Block::mf(), Df_Cms_Model_Resource_Block::mf());
+		$this->_itemObjectClass = Df_Cms_Model_Block::_C;
 	}
+
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _CLASS = __CLASS__;
+
+	/** @used-by Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks::_construct() */
+	const _C = __CLASS__;
 	/**
 	 * По аналогии с @see Df_Cms_Model_Resource_Page_Collection
 	 * Правда, не проверял, имеется ли при сохранении самодельных блоков без информации о витринах

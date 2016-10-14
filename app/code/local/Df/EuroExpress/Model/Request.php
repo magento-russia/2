@@ -5,7 +5,7 @@ abstract class Df_EuroExpress_Model_Request extends Df_Shipping_Model_Request {
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
+		return array(
 			'Accept' => '*/*'
 			,'Accept-Encoding' => 'gzip, deflate'
 			,'Accept-Language' => 'en-us,en;q=0.5'
@@ -15,8 +15,7 @@ abstract class Df_EuroExpress_Model_Request extends Df_Shipping_Model_Request {
 			,'Host' => $this->getQueryHost()
 			,'Pragma' => 'no-cache'
 			,'Referer' => 'http://www.euroexpress.net.ua/ru/services_calc'
-			,'User-Agent' => Df_Core_Const::FAKE_USER_AGENT
-		));
+		) + parent::getHeaders();
 	}
 	/**
 	 * @override
@@ -28,5 +27,4 @@ abstract class Df_EuroExpress_Model_Request extends Df_Shipping_Model_Request {
 	 * @return string
 	 */
 	protected function getQueryPath() {return '/ru/services_calc';}
-	const _CLASS = __CLASS__;
 }

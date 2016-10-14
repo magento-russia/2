@@ -2,6 +2,8 @@
 class Df_Catalog_Block_Product_Compare_Sidebar extends Mage_Catalog_Block_Product_Compare_Sidebar {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -36,7 +38,7 @@ class Df_Catalog_Block_Product_Compare_Sidebar extends Mage_Catalog_Block_Produc
 			 * (и в полную противоположность Zend Framework
 			 * и всем остальным частям Magento, где используется кэширование)
 			 * означает, что блок не удет кэшироваться вовсе!
-			 * @see Mage_Core_Block_Abstract::_loadCache()
+			 * @used-by Mage_Core_Block_Abstract::_loadCache()
 			 */
 			$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 		}

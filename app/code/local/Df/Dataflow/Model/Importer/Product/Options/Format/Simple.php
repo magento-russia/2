@@ -36,16 +36,10 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Simple
 	 */
 	protected function getPattern() {return "#^\s*df_custom_options\s*\[([^\]]+)\]\s*$#u";}
 
-	/** @return Df_Dataflow_Model_Importer_Product_Options_Format_Simple */
+	/** @return void */
 	private function deletePreviousOptionWithSameTitle() {
-		/** @var Df_Catalog_Model_Product_Option[] $options */
-		$options = $this->getProduct()->getOptionsByTitle($this->getImportedKey());
-		df_assert_array($options);
-		foreach ($options as $option) {
-			/** @var Df_Catalog_Model_Product_Option $option */
-			$option->deleteWithDependencies();
-		}
-		return $this;
+		/** @uses Df_Catalog_Model_Product_Option::deleteWithDependencies() */
+		df_each($this->getProduct()->getOptionsByTitle($this->getImportedKey()), 'deleteWithDependencies');
 	}
 
 	/** @return mixed[][] */
@@ -55,14 +49,12 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Simple
 			$ordering = 0;
 			foreach ($this->getValuesTitles() as $title) {
 				/** @var string $title */
-				$this->{__METHOD__}[]=
-					array(
-						'title' => $title
-						,'price' => 0
-						,'price_type' => 'fixed'
-						,'sort_order' => $ordering++
-					)
-				;
+				$this->{__METHOD__}[]= array(
+					'title' => $title
+					,'price' => 0
+					,'price_type' => 'fixed'
+					,'sort_order' => $ordering++
+				);
 			}
 		}
 		return $this->{__METHOD__};
@@ -71,7 +63,7 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Simple
 	/** @return string[] */
 	private function getValuesTitles() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_parse_csv($this->getImportedValue());
+			$this->{__METHOD__} = df_csv_parse($this->getImportedValue());
 		}
 		return $this->{__METHOD__};
 	}

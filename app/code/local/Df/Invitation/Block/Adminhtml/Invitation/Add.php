@@ -36,7 +36,4 @@ class Df_Invitation_Block_Adminhtml_Invitation_Add extends Mage_Adminhtml_Block_
 	{
 		return df_h()->invitation()->__('New Invitations');
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation_Add */
-	public static function i() {return df_block(__CLASS__);}
 }

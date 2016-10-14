@@ -2,18 +2,14 @@
 class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model {
 	/** @return string[] */
 	public function getOptions() {
-		return
-			array(
-				Df_Invitation_Model_Invitation::STATUS_NEW =>
-					df_h()->invitation()->__('Not Sent')
-				,Df_Invitation_Model_Invitation::STATUS_SENT =>
-					df_h()->invitation()->__('Sent')
-				,Df_Invitation_Model_Invitation::STATUS_ACCEPTED =>
-					df_h()->invitation()->__('Accepted')
-				,Df_Invitation_Model_Invitation::STATUS_CANCELED =>
-					df_h()->invitation()->__('Discarded')
-			)
-		;
+		/** @var Df_Invitation_Helper_Data $h */
+		$h = df_h()->invitation();
+		return array(
+			Df_Invitation_Model_Invitation::STATUS_NEW => $h->__('Not Sent')
+			,Df_Invitation_Model_Invitation::STATUS_SENT => $h->__('Sent')
+			,Df_Invitation_Model_Invitation::STATUS_ACCEPTED => $h->__('Accepted')
+			,Df_Invitation_Model_Invitation::STATUS_CANCELED => $h->__('Discarded')
+		);
 	}
 
 	/**
@@ -29,22 +25,14 @@ class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model {
 	}
 
 	/**
-	 * @param boolean $useEmpty
+	 * @param boolean $useEmpty [optional]
 	 * @return string[][]
 	 */
 	public function toOptionsArray($useEmpty = false) {
-		/** @var string[][] $result */
-		$result = array();
-		if ($useEmpty) {
-			$result[]= array('value' => '', 'label' => '');
-		}
-		foreach ($this->getOptions() as $value => $label) {
-			$result[]= array('value' => $value, 'label' => $label);
-		}
-		return $result;
+		return array_merge(array(rm_option('', '')), rm_map_to_options($this->getOptions()));
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Invitation_Model_Source_Invitation_Status */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

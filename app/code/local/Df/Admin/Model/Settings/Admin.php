@@ -12,8 +12,6 @@ class Df_Admin_Model_Settings_Admin extends Df_Core_Model_Settings {
 	public function logging() {return Df_Logging_Model_Settings::s();}
 	/** @return Df_Admin_Model_Settings_Admin_Optimization */
 	public function optimization() {return Df_Admin_Model_Settings_Admin_Optimization::s();}
-	/** @return Df_Admin_Model_Settings_Admin_Jquery */
-	public function jquery() {return Df_Admin_Model_Settings_Admin_Jquery::s();}
 	/** @return Df_Admin_Model_Settings_Admin_Promotions */
 	public function promotions() {return Df_Admin_Model_Settings_Admin_Promotions::s();}
 	/** @return Df_Admin_Model_Settings_Admin_Sales */

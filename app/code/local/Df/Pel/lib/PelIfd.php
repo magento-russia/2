@@ -533,7 +533,8 @@ class PelIfd implements IteratorAggregate, ArrayAccess {
    * @return array an array of {@link PelTag}s which are valid for
    * this IFD.
    */
-  function getValidTags() {
+	/** @noinspection PhpInconsistentReturnPointsInspection */
+	function getValidTags() {
 	switch($this->type) {
 	case PelIfd::IFD0:
 	case PelIfd::IFD1:
@@ -976,4 +977,4 @@ PelTag::CFA_REPEAT_PATTERN_DIM,
   }
 
 
-}?>
+}

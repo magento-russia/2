@@ -1,11 +1,13 @@
 <?php
 class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	/**
+	 * @used-by rm_json_prettify()
 	 * @param string $json
 	 * @return string
 	 */
 	public function adjustCyrillicInJson($json) {
-		$trans = array(
+		/** @var array(string => string) $trans */
+		static $trans = array(
 			'\u0430'=>'а', '\u0431'=>'б', '\u0432'=>'в', '\u0433'=>'г','\u0434'=>'д'
 			, '\u0435'=>'е', '\u0451'=>'ё', '\u0436'=>'ж','\u0437'=>'з', '\u0438'=>'и'
 			, '\u0439'=>'й', '\u043a'=>'к','\u043b'=>'л', '\u043c'=>'м'
@@ -60,7 +62,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 		if (false === $result) {
 			$result = '';
 		}
-		df_result_string($result);
 		return $result;
 	}
 
@@ -68,25 +69,12 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 * @param string $text
 	 * @return string
 	 */
-	public function camelize($text) {
-		df_param_string($text, 0);
-		return
-			implode(
-				array_map(
-					array($this, 'ucfirst')
-					,explode(
-						Df_Core_Const::T_CONFIG_WORD_SEPARATOR
-						,df_trim($text)
-					)
-				)
-			)
-		;
-	}
+	public function camelize($text) {return implode(rm_ucfirst(rm_explode_class(df_trim($text))));}
 
 	/**
 	 * @param string $text
 	 * @param int $requiredLength
-	 * @param bool $addDots[optional]
+	 * @param bool $addDots [optional]
 	 * @return string
 	 */
 	public function chop($text, $requiredLength, $addDots = true) {
@@ -105,116 +93,35 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @param string|array(int|string => string) $text
-	 * @return string|string[]
+	 * 'YandexMarket' => array('Yandex', 'Market')
+	 * 'NewNASAModule' => array('New', 'NASA', Module)
+	 * http://stackoverflow.com/a/17122207
+	 * @param string $text
+	 * @return string[]
 	 */
-	public function convertUtf8ToWindows1251($text) {
-		/** @var string|array(int|string => string) $result */
-		$result = null;
-		/** @var bool $firstParamIsArray */
-		$firstParamIsArray = is_array($text);
-		/** @var mixed[] $arguments */
-		$arguments = $firstParamIsArray ? $text : func_get_args();
-		if ((1 < count($arguments)) || $firstParamIsArray) {
-			/**
-			 * If the array argument contains string keys
-			 * then the returned array will contain string keys
-			 * if and only if exactly one array is passed.
-			 * @see array_map
-			 * @link http://php.net/manual/en/function.array-map.php
-			 */
-			$result = array_map(array($this, 'convertUtf8ToWindows1251'), $arguments);
-		}
-		else {
-			/**
-			 * Насколько я понимаю, данному вызову равноценно:
-			 * iconv('utf-8', 'windows-1251', $string)
-			 */
-			$result = mb_convert_encoding($text, 'Windows-1251', 'UTF-8');
-		}
-		return $result;
-	}
-
-	/**
-	 * @param string|array(int|string => string) $text
-	 * @return string|string[]
-	 */
-	public function convertWindows1251ToUtf8($text) {
-		/** @var string|array(int|string => string) $result */
-		$result = null;
-		/** @var bool $firstParamIsArray */
-		$firstParamIsArray = is_array($text);
-		/** @var mixed[] $arguments */
-		$arguments = $firstParamIsArray ? $text : func_get_args();
-		if ((1 < count($arguments)) || $firstParamIsArray) {
-			$result = array_map(array($this, 'convertWindows1251ToUtf8'), $arguments);
-		}
-		else {
-			/**
-			 * Насколько я понимаю, данному вызову равноценно:
-			 * iconv('utf-8', 'windows-1251', $string)
-			 */
-			$result = mb_convert_encoding($text, 'UTF-8', 'Windows-1251');
-		}
-		return $result;
-	}
-
-	/**
-	 * @param string|string[] $data
-	 * @param string[]|null $allowedTags [optional]
-	 * @return string|string[]
-	 */
-	public function escapeHtml($data, $allowedTags = null) {
-		/** @var string|string[] $result */
-		$result =
-			/**
-			 * К сожалению, нельзя здесь для проверки публичности метода
-			 * использовать @see is_callable,
-			 * потому что наличие @see Varien_Object::__call
-			 * приводит к тому, что is_callable всегда возвращает true.
-			 */
-			method_exists(df_mage()->coreHelper(), 'escapeHtml')
-			? call_user_func(array(df_mage()->coreHelper(), 'escapeHtml'), $data, $allowedTags)
-			: df_mage()->coreHelper()->htmlEscape($data, $allowedTags)
-		;
-		return $result;
-	}
+	public function explodeCamel($text) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $text);}
 
 	/**
 	 * @param string $text
-	 * @param string $format
-	 * @return string
+	 * @param bool $needThrow [optional]
+	 * @return int|null
 	 */
-	public function formatCase($text, $format) {
-		/** @var string $result */
-		$result = $text;
-		switch($format) {
-			case Df_Admin_Model_Config_Source_Format_Text_LetterCase::LOWERCASE:
-				$result = mb_strtolower($result);
-				break;
-			case Df_Admin_Model_Config_Source_Format_Text_LetterCase::UPPERCASE:
-				$result = mb_strtoupper($result);
-				break;
-			case Df_Admin_Model_Config_Source_Format_Text_LetterCase::UCFIRST:
-				/**
-				 * 2016-03-23
-				 * Раньше алгоритм был таким:
-				 * $result = df_text()->ucfirst(mb_strtolower(df_trim($result)));
-				 * Это приводило к тому, что настроечная опция
-				 * «Использовать ли HTTPS для административной части?»
-				 * отображались как «Использовать ли https для административной части?».
-				 * Уже не помню, зачем я ранее здесь использовал @see mb_strtolower
-				 */
-				$result = df_text()->ucfirst(df_trim($result));
-				break;
+	public function firstInteger($text, $needThrow = true) {
+		/** @var int|null $result */
+		if (!df_check_string_not_empty($text)) {
+			if ($needThrow) {
+				df_error('Не могу вычленить целое число из пустой строки.');
+			}
+			else {
+				$result = null;
+			}
 		}
-		/**
-		 * Убрал валидацию результата намеренно: сам метод безобиден,
-		 * и даже если он как-то неправильно будет работать — ничего страшного.
-		 * Пока метод дал сбой только один раз, в магазине laap.ru
-		 * при форматировании заголовков административной таблицы товаров
-		 * (видимо, сбой произошёл из-за влияния некоего стороннего модуля).
-		 */
+		else {
+			$result = rm_preg_match_int('#(\d+)#m', $text, false);
+			if (is_null($result) && $needThrow) {
+				df_error('Не могу вычленить целое число из строки «%s».', $text);
+			}
+		}
 		return $result;
 	}
 
@@ -226,18 +133,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	public function formatFloat($float, $decimals = 2) {
 		return number_format(rm_float($float), $decimals, '.', '');
 	}
-
-	/**
-	 * Этот метод не предназначен для интеграции со сторонними системами.
-	 * Для интеграции со сторонними системами следует создавать отдельный метод
-	 * в соответствующем сторонней системе модуле.
-	 * @see Df_1C_Helper_Data::formatMoney
-	 * @see Df_YandexMarket_Helper_Data::formatMoney
-	 *
-	 * @param string|float $money
-	 * @return string
-	 */
-	public function formatMoney($money) {return $this->formatMoney($money, 2);}
 
 	/**
 	 * @param int $amount
@@ -253,21 +148,33 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	private function getNounFormatter() {return Df_Core_Model_Format_NounForAmounts::s();}
 
 	/**
-	 * @param string $text
+	 * http://php.net/manual/function.com-create-guid.php#99425
+	 * http://stackoverflow.com/a/26163679
 	 * @return string
 	 */
-	public function htmlspecialchars($text) {
-		$filter = new Df_Zf_Filter_HtmlSpecialChars();
-		return $filter->filter($text);
+	public function guid() {
+		return strtolower(
+			function_exists('com_create_guid')
+			? trim(com_create_guid(), '{}')
+			: sprintf(
+				'%04X%04X-%04X-%04X-%04X-%04X%04X%04X'
+				, mt_rand(0, 65535)
+				, mt_rand(0, 65535)
+				, mt_rand(0, 65535)
+				, mt_rand(16384, 20479)
+				, mt_rand(32768, 49151)
+				, mt_rand(0, 65535)
+				, mt_rand(0, 65535)
+				, mt_rand(0, 65535)
+			)
+		);
 	}
 
 	/**
 	 * @param string $text
 	 * @return bool
 	 */
-	public function isMultiline($text) {
-		return rm_contains($text, "\n") || rm_contains($text, "\r");
-	}
+	public function isMultiline($text) {return rm_contains($text, "\n") || rm_contains($text, "\r");}
 
 	/**
 	 * Простой, неполный, но практически адекватный для моих ситуаций
@@ -283,41 +190,54 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 */
 	public function isTranslated($text) {
 		if (!isset($this->{__METHOD__}[$text])) {
-			/** @link http://stackoverflow.com/a/16130169 */
+			/** http://stackoverflow.com/a/16130169 */
 			$this->{__METHOD__}[$text] = !is_null(rm_preg_match('#[\p{Cyrillic}]#mu', $text, false));
 		}
 		return $this->{__METHOD__}[$text];
 	}
 
 	/**
-	 * @param string $string
-	 * @return string
+	 * @param string|string[]|array(string => string) $string
+	 * @return string|string[]|array(string => string)
 	 */
 	public function lcfirst($string) {
-		return mb_strtolower(mb_substr($string, 0, 1)) . mb_substr($string, 1);
+		return
+			is_array($string)
+			? array_map(array($this, __FUNCTION__), $string)
+			: mb_strtolower(mb_substr($string, 0, 1)) . mb_substr($string, 1)
+		;
 	}
 
 	/**
-	 * @param string $text
-	 * @return string
+	 * @param string|string[]|array(string => string) $text
+	 * @return string|string[]|array(string => string)
 	 */
 	public function nl2br($text){
-		/** @var string $result */
-		$result = $text;
-		if (rm_contains($text, '<pre>')) {
+		/** @var string|string[] $result */
+		if (is_array($text)) {
+			$result = array_map(array($this, __FUNCTION__), $text);
+		}
+		else {
+			/** @var string $result */
 			$text = rm_normalize($text);
-			$text = str_replace("\n", '{rm-newline}', $text);
-			$text =
-				preg_replace_callback(
-					'#\<pre\>([\s\S]*)\<\/pre\>#mui'
-					, array('self', 'nl2brCallback')
-					, $text
-				)
-			;
-			$result = strtr($text, array(
-				'{rm-newline}' => '<br/>'
-				,'{rm-newline-preserve}' => "\n"
-			));
+			/** обрабатываем тег <pre>, который добавляется функцией @see rm_xml_output_html() */
+			if (!rm_contains($text, '<pre class=') && !rm_contains($text, '<pre>')) {
+				$result  = nl2br($text);
+			}
+			else {
+				$text = str_replace("\n", '{rm-newline}', $text);
+				$text =
+					preg_replace_callback(
+						'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
+						, array(__CLASS__, 'nl2brCallback')
+						, $text
+					)
+				;
+				$result = strtr($text, array(
+					'{rm-newline}' => '<br/>'
+					,'{rm-newline-preserve}' => "\n"
+				));
+			}
 		}
 		return $result;
 	}
@@ -341,92 +261,13 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	public function normalizeName($name) {return mb_strtoupper(df_trim($name));}
 
 	/**
-	 * Аналог @see str_pad() для Unicode.
-	 * @link http://stackoverflow.com/a/14773638
-	 * @param string $input
-	 * @param int $pad_length
-	 * @param string $pad_string
-	 * @param int $pad_type
-	 * @param string $encoding
-	 * @return string
-	 */
-	public function pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_RIGHT, $encoding = 'UTF-8') {
-		/** @var string $result */
-		/** @var int $input_length */
-		$input_length = mb_strlen($input, $encoding);
-		/** @var int $pad_string_length */
-		$pad_string_length = mb_strlen($pad_string, $encoding);
-		if ($pad_length <= 0 || ($pad_length - $input_length) <= 0) {
-			$result = $input;
-		}
-		else {
-			/** @var int $num_pad_chars */
-			$num_pad_chars = $pad_length - $input_length;
-			/** @var int $left_pad */
-			/** @var int $right_pad */
-			switch ($pad_type) {
-				case STR_PAD_RIGHT:
-					$left_pad = 0;
-					$right_pad = $num_pad_chars;
-					break;
-				case STR_PAD_LEFT:
-					$left_pad = $num_pad_chars;
-					$right_pad = 0;
-					break;
-				case STR_PAD_BOTH:
-					$left_pad = floor($num_pad_chars / 2);
-					$right_pad = $num_pad_chars - $left_pad;
-					break;
-				default:
-					df_error_internal();
-					break;
-			}
-			$result = '';
-			for ($i = 0; $i < $left_pad; ++$i) {
-				$result .= mb_substr($pad_string, $i % $pad_string_length, 1, $encoding);
-			}
-			$result .= $input;
-			for ($i = 0; $i < $right_pad; ++$i) {
-				$result .= mb_substr($pad_string, $i % $pad_string_length, 1, $encoding);
-			}
-		}
-		return $result;
-	}
-
-	/**
-	 * @param string $text
-	 * @param bool $needThrow [optional]
-	 * @return int|null
-	 */
-	public function parseFirstInteger($text, $needThrow = true) {
-		/** @var int|null $result */
-		if (!df_check_string_not_empty($text)) {
-			if ($needThrow) {
-				df_error_internal('Не могу вычленить целое число из пустой строки.');
-			}
-			else {
-				$result = null;
-			}
-		}
-		else {
-			$result = rm_preg_match_int('#(\d+)#m', $text, false);
-			if (is_null($result) && $needThrow) {
-				df_error_internal('Не могу вычленить целое число из строки «%s».', $text);
-			}
-		}
-		return $result;
-	}
-
-	/**
 	 * @param string $text
 	 * @return string[]
 	 */
-	public function parseTextarea($text) {
-		return df_clean(array_map('df_trim', explode("\n", rm_normalize(df_trim($text)))));
-	}
+	public function parseTextarea($text) {return df_clean(df_trim(df_explode_n(df_trim($text))));}
 
 	/**
-	 * @param string|string[] $text
+	 * @param string|string[]|array(string => string) $text
 	 * @param string $type [optional]
 	 * @return string|string[]
 	 */
@@ -438,22 +279,20 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			$type = self::QUOTE__SINGLE;
 		}
 		/** @var array(string => string[]) $quotesMap */
-		static $quotesMap =
-			array(
-				self::QUOTE__DOUBLE => array('"', '"')
-				,self::QUOTE__RUSSIAN => array('«', '»')
-				,self::QUOTE__SINGLE => array('\'', '\'')
-			)
-		;
+		static $quotesMap = array(
+			self::QUOTE__DOUBLE => array('"', '"')
+			,self::QUOTE__RUSSIAN => array('«', '»')
+			,self::QUOTE__SINGLE => array('\'', '\'')
+		);
 		/** @var string[] $quotes */
 		$quotes = df_a($quotesMap, $type);
 		if (!is_array($quotes)) {
-			df_error_internal('Неизвестный тип кавычки «%s».', $type);
+			df_error('Неизвестный тип кавычки «%s».', $type);
 		}
 		df_assert_array($quotes);
 		$result =
 			is_array($text)
-			? df_map(array($this, 'quote'), $text, array($type))
+			? df_map(array($this, __FUNCTION__), $text, array($type))
 			:
 				/**
 				 * Обратите внимание на красоту решения:
@@ -495,10 +334,10 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 * If from and to have different lengths,
 	 * the extra characters in the longer of the two are ignored.
 	 * The length of str will be the same as the return value's.»
-	 * @link http://php.net/strtr
+	 * http://php.net/strtr
 	 *
 	 * Новый алгоритм взял отсюда:
-	 * @link http://stackoverflow.com/a/20717751
+	 * http://stackoverflow.com/a/20717751
 	 *
 	 * @param string $text
 	 * @return string
@@ -510,12 +349,11 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @link http://www.php.net/str_ireplace
-	 *
+	 * http://www.php.net/str_ireplace
 	 * @param string $search
 	 * @param string $replace
 	 * @param string $subject
-	 * @param int|null $count[optional]
+	 * @param int|null $count [optional]
 	 * @return string
 	 */
 	public function replaceCI($search, $replace, $subject, $count = null) {
@@ -524,7 +362,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			if (0 === $slen) {
 				return $subject;
 			}
-
 			$lendif = mb_strlen($replace) - mb_strlen($search);
 			$search = mb_strtolower($search);
 			$search = preg_quote($search);
@@ -553,12 +390,9 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			foreach (array_keys($search) as $k ) {
 				if (is_array($replace)) {
 					if (array_key_exists($k,$replace)) {
-						$subject =
-							$this->replaceCI(
-								$search[$k], $replace[$k], $subject, $count
-							)
-						;
-					} else {
+						$subject = $this->replaceCI($search[$k], $replace[$k], $subject, $count);
+					}
+					else {
 						$subject = $this->replaceCI($search[$k], '', $subject, $count);
 					}
 				} else {
@@ -570,70 +404,119 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
+	 * 2015-03-03
+	 * Алгоритм аналогичен @see removeLineBreaks()
+	 *
+	 * 2015-07-07
+	 * Раньше алгоритм был таким:
+	 	return strtr($text, "\r\n", '  ');
+	 * Однако он не совсем правилен,
+	 * потому что если перенос строки записан в формате Windows
+	 * (то есть, в качестве переноса строки используется последовательность \r\n),
+	 * то прошлый алгоритм заменит эту последовательность на 2 пробела, а надо — на один.
+	 *
+	 * «If given three arguments,
+	 * this function returns a copy of str where all occurrences of each (single-byte) character in from
+	 * have been translated to the corresponding character in to,
+	 * i.e., every occurrence of $from[$n] has been replaced with $to[$n],
+	 * where $n is a valid offset in both arguments.
+	 * If from and to have different lengths,
+	 * the extra characters in the longer of the two are ignored.
+	 * The length of str will be the same as the return value's.»
+	 * http://php.net/strtr
+	 *
+	 * Новый алгоритм взял отсюда:
+	 * http://stackoverflow.com/a/20717751
+	 *
 	 * @param string $text
-	 * @return string[]
+	 * @return string
 	 */
-	public function splitOnLines($text) {return explode("\n", rm_normalize($text));}
+	public function singleLine($text) {
+		/** @var string[] $symbolsToRemove */
+		static $symbolsToRemove = array("\r\n", "\r", "\n", "\t");
+		return str_replace($symbolsToRemove, ' ', $text);
+	}
+
+	/**
+	 * @param string|string[]|array(string => string) $string
+	 * @return string|string[]|array(string => string)
+	 */
+	public function strtolower($string) {
+		return
+			is_array($string)
+			? array_map(array($this, __FUNCTION__), $string)
+			: mb_strtolower($string)
+		;
+	}
+
+	/**
+	 * @param string|string[]|array(string => string) $string
+	 * @return string|string[]|array(string => string)
+	 */
+	public function strtoupper($string) {
+		return
+			is_array($string)
+			? array_map(array($this, __FUNCTION__), $string)
+			: mb_strtoupper($string)
+		;
+	}
 
 	/**
 	 *
-	 * @param string $text
-	 * @param string $charlist[optional]
-	 * @return string
+	 * @param string|string[] $text
+	 * @param string $charlist [optional]
+	 * @return string|string[]
 	 */
 	public function trim($text, $charlist = null) {
-		if (!is_null($charlist)) {
-			/** @var string[] $addionalSymbolsToTrim */
-			$addionalSymbolsToTrim = array("\n", "\r", ' ');
-			foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
-				/** @var string $addionalSymbolToTrim */
-				if (!rm_contains($charlist, $addionalSymbolToTrim)) {
-					$charlist = df_concat($charlist, $addionalSymbolToTrim);
+		/** @var string|string $result */
+		if (is_array($text)) {
+			$result = df_map(array($this, __FUNCTION__), $text, $charlist);
+		}
+		else {
+			if (!is_null($charlist)) {
+				/** @var string[] $addionalSymbolsToTrim */
+				$addionalSymbolsToTrim = array("\n", "\r", ' ');
+				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
+					/** @var string $addionalSymbolToTrim */
+					if (!rm_contains($charlist, $addionalSymbolToTrim)) {
+						$charlist = df_concat($charlist, $addionalSymbolToTrim);
+					}
 				}
 			}
-		}
-		/**
-		 * Обратите внимание, что класс Zend_Filter_StringTrim может работать некорректно
-		 * для строк, заканчивающихся заглавной кириллической буквой «Р».
-		 * @link http://framework.zend.com/issues/browse/ZF-11223
-		 * Однако решение, которое предложено по ссылке выше
-		 * (@link http://framework.zend.com/issues/browse/ZF-11223)
-		 * может приводить к падению интерпретатора PHP
-		 * для строк, начинающихся с заглавной кириллической буквы «Р».
-		 * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
-		 * Кто виноват: решение или исходный класс Zend_Filter_StringTrim — не знаю
-		 * (скорее, решение).
-		 * Поэтому мой класс Df_Zf_Filter_StringTrim дополняет решение по ссылке выше
-		 * программным кодом из Zend Framework 2.0.
-		 */
-		$filter = new Df_Zf_Filter_StringTrim($charlist);
-		/** @var Df_Zf_Filter_StringTrim $filter */
-		/** @var string $result */
-		$result = $filter->filter($text);
-		/**
-		 * Zend_Filter_StringTrim::filter теоретически может вернуть null,
-		 * потому что этот метод зачастую перепоручает вычисление результата функции preg_replace
-		 * @url http://php.net/manual/en/function.preg-replace.php
-		 */
-		$result = df_nts($result);
-		// Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».
-		if (' ' === $result) {
-			$result = '';
+			/**
+			 * Обратите внимание, что класс Zend_Filter_StringTrim может работать некорректно
+			 * для строк, заканчивающихся заглавной кириллической буквой «Р».
+			 * http://framework.zend.com/issues/browse/ZF-11223
+			 * Однако решение, которое предложено по ссылке выше
+			 * (http://framework.zend.com/issues/browse/ZF-11223)
+			 * может приводить к падению интерпретатора PHP
+			 * для строк, начинающихся с заглавной кириллической буквы «Р».
+			 * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
+			 * Кто виноват: решение или исходный класс @see Zend_Filter_StringTrim — не знаю
+			 * (скорее, решение).
+			 * Поэтому мой класс @see Df_Zf_Filter_StringTrim дополняет решение по ссылке выше
+			 * программным кодом из Zend Framework 2.0.
+			 */
+			/** @var Df_Zf_Filter_StringTrim $filter */
+			$filter = new Df_Zf_Filter_StringTrim($charlist);
+			$result = $filter->filter($text);
+			/**
+			 * @see Zend_Filter_StringTrim::filter() теоретически может вернуть null,
+			 * потому что этот метод зачастую перепоручает вычисление результата функции @uses preg_replace()
+			 * @url http://php.net/manual/function.preg-replace.php
+			 */
+			$result = df_nts($result);
+			// Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».
+			if (' ' === $result) {
+				$result = '';
+			}
 		}
 		return $result;
 	}
 
 	/**
-	 * @param string $string
-	 * @return string
-	 */
-	public function ucfirst($string) {
-		return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1);
-	}
-
-	/**
 	 * Источник алгоритма:
-	 * @link http://stackoverflow.com/a/14338869
+	 * http://stackoverflow.com/a/14338869
 	 * @param string $string1
 	 * @param string $string2
 	 * @return string
@@ -642,7 +525,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 		return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const QUOTE__DOUBLE = 'double';
 	const QUOTE__RUSSIAN = 'russian';
 	const QUOTE__SINGLE = 'single';

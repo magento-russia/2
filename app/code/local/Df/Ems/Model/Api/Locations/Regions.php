@@ -14,21 +14,10 @@ class Df_Ems_Model_Api_Locations_Regions extends Df_Ems_Model_Api_Locations_Abst
 			$cacheKey = $this->getCache()->makeKey(array($this, __FUNCTION__));
 			$result = $this->getCache()->loadDataArray($cacheKey);
 			if (!is_array($result)) {
-				$result =
-					df_array_combine(
-						array_map(
-							array($this, 'getRegionIdInMagentoByRegionNameInEmsFormat')
-							,df_column(
-								$this->getLocationsAsRawArray()
-								,'name'
-							)
-						)
-						,df_column(
-							$this->getLocationsAsRawArray()
-							,'value'
-						)
-					)
-				;
+				$result = array_flip(array_map(
+					array($this, 'getRegionIdInMagentoByRegionNameInEmsFormat')
+					, array_column($this->getLocationsAsRawArray(), 'name', 'value')
+				));
 				$this->getCache()->saveDataArray($cacheKey, $result);
 			}
 			$this->{__METHOD__} = $result;
@@ -49,13 +38,11 @@ class Df_Ems_Model_Api_Locations_Regions extends Df_Ems_Model_Api_Locations_Abst
 	/** @return array(string => int) */
 	private function getMapFromMagentoRegionNameToMagentoRegionId() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => int) $result */
-			$result = array();
-			foreach (df_h()->directory()->getRussianRegions() as $region) {
-				/** @var Df_Directory_Model_Region $region */
-				$result[mb_strtoupper($region->getName())] = $region->getId();
-			}
-			$this->{__METHOD__} = $result;
+			/** @var Df_Directory_Model_Resource_Region_Collection $regions */
+			$regions = df_h()->directory()->getRussianRegions();
+			$this->{__METHOD__} = array_combine(
+				df_t()->strtoupper($regions->walk('getName')), $regions->walk('getId')
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -64,32 +51,25 @@ class Df_Ems_Model_Api_Locations_Regions extends Df_Ems_Model_Api_Locations_Abst
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by getMapFromMagentoRegionIdToEmsRegionId()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param string $regionNameInEmsFormat
 	 * @return int
 	 */
 	private function getRegionIdInMagentoByRegionNameInEmsFormat($regionNameInEmsFormat) {
 		df_param_string($regionNameInEmsFormat, 0);
-		/** @var array $replacements */
-		$replacements =
-			array(
-				'СЕВЕРНАЯ ОСЕТИЯ-АЛАНИЯ РЕСПУБЛИКА' => 'СЕВЕРНАЯ ОСЕТИЯ — АЛАНИЯ РЕСПУБЛИКА'
-				,'ТЫВА РЕСПУБЛИКА' => 'ТЫВА (ТУВА) РЕСПУБЛИКА'
-				,'ХАНТЫ-МАНСИЙСКИЙ-ЮГРА АВТОНОМНЫЙ ОКРУГ' => 'ХАНТЫ-МАНСИЙСКИЙ АВТОНОМНЫЙ ОКРУГ'
-			)
-		;
+		/** @var array(string => string) $replacements */
+		$replacements = array(
+			'СЕВЕРНАЯ ОСЕТИЯ-АЛАНИЯ РЕСПУБЛИКА' => 'СЕВЕРНАЯ ОСЕТИЯ — АЛАНИЯ РЕСПУБЛИКА'
+			,'ТЫВА РЕСПУБЛИКА' => 'ТЫВА (ТУВА) РЕСПУБЛИКА'
+			,'ХАНТЫ-МАНСИЙСКИЙ-ЮГРА АВТОНОМНЫЙ ОКРУГ' => 'ХАНТЫ-МАНСИЙСКИЙ АВТОНОМНЫЙ ОКРУГ'
+		);
 		/** @var string $regionNameInMagentoFormat */
 		$regionNameInMagentoFormat =
-			df_a(
-				$replacements
-				,$regionNameInEmsFormat
-				,$regionNameInEmsFormat
-			)
+			df_a($replacements, $regionNameInEmsFormat, $regionNameInEmsFormat)
 		;
-		df_assert_string($regionNameInMagentoFormat);
 		/** @var string $result */
 		$result =
 			df_a(
@@ -99,13 +79,11 @@ class Df_Ems_Model_Api_Locations_Regions extends Df_Ems_Model_Api_Locations_Abst
 			)
 		;
 		/** @var array $expectedlyNotTranslated */
-		$expectedlyNotTranslated =
-			array(
-				'КАЗАХСТАН'
-				,'ТАЙМЫРСКИЙ АО'
-				,'ТАЙМЫРСКИЙ ДОЛГАНО-НЕНЕЦКИЙ РАЙОН'
-			)
-		;
+		$expectedlyNotTranslated = array(
+			'КАЗАХСТАН'
+			,'ТАЙМЫРСКИЙ АО'
+			,'ТАЙМЫРСКИЙ ДОЛГАНО-НЕНЕЦКИЙ РАЙОН'
+		);
 		if ((0 === $result) && !in_array($regionNameInMagentoFormat, $expectedlyNotTranslated)) {
 			//df_notify('Не могу перевести: ' . $regionNameInMagentoFormat);
 		}
@@ -113,7 +91,7 @@ class Df_Ems_Model_Api_Locations_Regions extends Df_Ems_Model_Api_Locations_Abst
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

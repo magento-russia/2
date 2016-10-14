@@ -12,7 +12,6 @@
 				label {
 					display: block;
 					width: 100%;
-
 					/** В системном файле Magento присутствует правило
                         .form-list label {float: left;}
 					 */
@@ -61,14 +60,13 @@
 	}
 }
 @import 'ergonomic/_main';
-#checkout-shipping-method-load
-,#checkout-payment-method-load{
+@import 'ergonomic/_fancybox';
+#checkout-shipping-method-load,#checkout-payment-method-load {
 	span.p {
 		display: block;
 		margin: 0.5em 0;
 	}
 }
-
 #checkout-review-table {
 	th {
 		text: {
@@ -91,8 +89,13 @@
 }
 #df-login {
 	#login-form {
-		.content {
-			min-height: 0;
+		.content {min-height: 0;}
+		// Раньше эти правила применялись лишь для отдельных оформительских тем,
+		// но, похоже, разумно применить их сразу для всех тем.
+		.form-list {
+			div.input-box {
+				input.input-text {width: 250px;}
+			}
 		}
 	}
 }

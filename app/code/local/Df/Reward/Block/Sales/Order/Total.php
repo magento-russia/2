@@ -4,37 +4,25 @@ class Df_Reward_Block_Sales_Order_Total extends Df_Core_Block_Template_NoCache {
 	 * Get label cell tag properties
 	 * @return string
 	 */
-	public function getLabelProperties()
-	{
-		return $this->getParentBlock()->getLabelProperties();
-	}
+	public function getLabelProperties() {return $this->getParentBlock()->getLabelProperties();}
 
 	/**
 	 * Get order store object
-	 * @return Mage_Sales_Model_Order
+	 * @return Df_Sales_Model_Order
 	 */
-	public function getOrder()
-	{
-		return $this->getParentBlock()->getOrder();
-	}
+	public function getOrder() {return $this->getParentBlock()->getOrder();}
 
 	/**
 	 * Get totals source object
-	 * @return Mage_Sales_Model_Order
+	 * @return Df_Sales_Model_Order
 	 */
-	public function getSource()
-	{
-		return $this->getParentBlock()->getSource();
-	}
+	public function getSource() {return $this->getParentBlock()->getSource();}
 
 	/**
 	 * Get value cell tag properties
 	 * @return string
 	 */
-	public function getValueProperties()
-	{
-		return $this->getParentBlock()->getValueProperties();
-	}
+	public function getValueProperties() {return $this->getParentBlock()->getValueProperties();}
 
 	/**
 	 * Initialize reward points totals

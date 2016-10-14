@@ -37,7 +37,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			$this->loadLayout()->_setActiveMenu('customer/invitation');
 			$this->renderLayout();
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			rm_exception_to_session($e);
 			$this->_redirect('*/*/');
 		}
@@ -78,7 +78,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				Mage::throwException(df_h()->invitation()->__('Specify at least one email.'));
 			}
 			if (Mage::app()->isSingleStoreMode()) {
-				$storeId = Mage::app()->getStore(true)->getId();
+				$storeId = rm_store(true)->getId();
 			}
 			else {
 				$storeId = $this->getRequest()->getParam('store_id');
@@ -109,7 +109,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 						$failedCount++;
 					}
 				}
-				catch(Mage_Core_Exception $e) {
+				catch (Mage_Core_Exception $e) {
 					if ($e->getCode()) {
 						$failedCount++;
 						if ($e->getCode() == Df_Invitation_Model_Invitation::ERROR_CUSTOMER_EXISTS) {
@@ -117,7 +117,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 						}
 					}
 					else {
-						throw $e;
+						df_error($e);
 					}
 				}
 			}
@@ -134,7 +134,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			$this->_redirect('*/*/');
 			return;
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			rm_exception_to_session($e);
 		}
 		$this->_redirect('*/*/new');
@@ -142,6 +142,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 
 	/**
 	 * Edit invitation's information
+	 * @return void
 	 */
 	public function saveInvitationAction()
 	{
@@ -158,7 +159,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 						rm_session()->addError($message);
 					}
 					$this->_redirect('*/*/view', array('_current' => true));
-					return $this;
+					return;
 				}
 
 				//If there was no validation errors trying to save
@@ -166,7 +167,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				rm_session()->addSuccess(df_h()->invitation()->__('Invitation was successfully saved.'));
 			}
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			rm_exception_to_session($e);
 		}
 		$this->_redirect('*/*/view', array('_current' => true));
@@ -197,10 +198,10 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 						$sent++;
 					}
 				}
-				catch(Mage_Core_Exception $e) {
+				catch (Mage_Core_Exception $e) {
 					// jam all exceptions with codes
 					if (!$e->getCode()) {
-						throw $e;
+						df_error($e);
 					}
 					// close irrelevant invitations
 					if ($e->getCode() === Df_Invitation_Model_Invitation::ERROR_CUSTOMER_EXISTS) {
@@ -215,7 +216,8 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			if ($sent) {
 				rm_session()->addSuccess(df_h()->invitation()->__('%1$d of %2$d invitations were sent.', $sent, $found));
 			}
-			if ($failed = ($found - $sent)) {
+			$failed = $found - $sent;
+			if ($failed) {
 				rm_session()->addError(df_h()->invitation()->__('Failed to send %d invitation(s).', $failed));
 			}
 			if ($customerExists) {
@@ -224,7 +226,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				);
 			}
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			rm_exception_to_session($e);
 		}
 		$this->_redirect('*/*/');
@@ -254,21 +256,22 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 						$cancelled++;
 					}
 				}
-				catch(Mage_Core_Exception $e) {
+				catch (Mage_Core_Exception $e) {
 					// jam all exceptions with codes
 					if (!$e->getCode()) {
-						throw $e;
+						df_error($e);
 					}
 				}
 			}
 			if ($cancelled) {
 				rm_session()->addSuccess(df_h()->invitation()->__('%1$d of %2$d invitations were discarded.', $cancelled, $found));
 			}
-			if ($failed = ($found - $cancelled)) {
+			$failed = $found - $cancelled;
+			if ($failed) {
 				rm_session()->addNotice(df_h()->invitation()->__('%d of selected invitation(s) were skipped.', $failed));
 			}
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			rm_exception_to_session($e);
 		}
 		$this->_redirect('*/*/');
@@ -278,9 +281,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 	 * Acl admin user check
 	 * @return boolean
 	 */
-	protected function _isAllowed()
-	{
-		return df_h()->invitation()->config()->isEnabled()
-			&& df_mage()->admin()->session()->isAllowed('customer/df_invitation');
+	protected function _isAllowed() {
+		return df_h()->invitation()->config()->isEnabled() && rm_admin_allowed('customer/df_invitation');
 	}
 }

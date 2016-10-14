@@ -1,5 +1,5 @@
 <?php
-class Df_Garantpost_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_Garantpost_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
 	 * @return Df_Garantpost_Model_Method[]
@@ -8,6 +8,8 @@ class Df_Garantpost_Model_Collector extends Df_Shipping_Model_Collector {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Garantpost_Model_Method[] $result */
 			$result = array();
+			/** @var Df_Garantpost_Model_Method[] $notApplicable */
+			$notApplicable = array();
 			foreach (parent::getMethods() as $method) {
 				/** @var bool $isApplicable */
 				$isApplicable = false;
@@ -17,7 +19,7 @@ class Df_Garantpost_Model_Collector extends Df_Shipping_Model_Collector {
 						try {
 							$method->getCost();
 						}
-						catch(Exception $e) {
+						catch (Exception $e) {
 							// Намеренно ничего не делаем.
 							// Раньше тут происходила запись исключительной ситуации в системный журнал.
 							// Но нам это не надо, потому что там исключительная ситуация всегда одна —
@@ -27,20 +29,26 @@ class Df_Garantpost_Model_Collector extends Df_Shipping_Model_Collector {
 						}
 					}
 				}
-				catch(Exception $e) {
+				catch (Exception $e) {
 					// Сюда мы попадаем, если способ неприменим.
 					// Надо бы, конечно, сообщить посетителю о неприменимости, в том случае,
 					// если соответствующую опцию включил администратор,
 					// но пока неясно, как это сделать, не нарушая цикла.
 				}
-				if ($isApplicable || $method->needDisplayDiagnosticMessages()) {
+				if ($isApplicable) {
 					$result[]= $method;
 				}
+				else {
+					$notApplicable[]= $method;
+				}
+			}
+			if (!$result && $this->configF()->needDisplayDiagnosticMessages()) {
+				// 2015-02-19
+				// Отображаем неприменимые варианты доставки только при отсутствии применимых.
+				$result = $notApplicable;
 			}
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

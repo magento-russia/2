@@ -12,9 +12,7 @@ class Df_Dellin_Model_Locator extends Df_Shipping_Model_Locator {
 			/** @var Df_Dellin_Model_Location[] $locationsWithSameName */
 			$locationsWithSameName = Df_Dellin_Model_Map::s()->getByCity($this->getCity());
 			/** @var string $regionNameNormalized */
-			$regionNameNormalized =
-				Df_Dellin_Model_Location::i()->normalizeName($this->getRegionName())
-			;
+			$regionNameNormalized = Df_Dellin_Model_Location::i()->normalizeName($this->getRegionName());
 			foreach ($locationsWithSameName as $location) {
 				if (
 						!$location->hasRegion()
@@ -40,20 +38,10 @@ class Df_Dellin_Model_Locator extends Df_Shipping_Model_Locator {
 	 * @return string
 	 */
 	private function normalizeLocationName($locationName) {
-		/** @var string $result */
-		$result =
-			strtr(
-				$locationName
-				,array(
-					'ё' => 'е'
-					,'Ё' => 'Е'
-				)
-			)
-		;
-		return $result;
+		return strtr($locationName, array('ё' => 'е', 'Ё' => 'Е'));
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

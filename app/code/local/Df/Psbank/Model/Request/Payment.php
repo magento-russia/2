@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Psbank_Model_Config_Area_Service getServiceConfig()
- */
+/** @method Df_Psbank_Model_Config_Area_Service configS() */
 class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override
@@ -17,43 +15,30 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 
 	/**
 	 * @override
-	 * @return array(string => string)
+	 * @see Df_Payment_Model_Request_Payment::_params()
+	 * @used-by Df_Payment_Model_Request_Payment::params()
+	 * @return array(string => string|int)
 	 */
-	protected function getParamsInternal() {
-		return array_merge(
-			$this->getParamsForSignature()
-			,array('P_SIGN' => $this->getSignature())
-		);
-	}
-
-	/** @return string */
-	private function getOrderId() {
-		/** @var string $result */
-		$result = $this->getOrder()->getIncrementId();
-		df_result_string_not_empty($result);
-		// Согласно документации, номер заказа должен содежать только цифры
-		// и состоять не менее чем из 6 символов
-		df_assert(ctype_digit($result));
-		df_assert_ge(6, strlen($result));
-		return $result;
+	protected function _params() {
+		return array('P_SIGN' => $this->getSignature()) + $this->getParamsForSignature();
 	}
 
 	/** @return array(string => string) */
 	private function getParamsForSignature() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
-				'AMOUNT' => $this->getAmount()->getAsString()
+				'AMOUNT' => $this->amountS()
 				, 'CURRENCY' => 'RUB'
-				, 'ORDER' => $this->getOrderId()
+				, 'ORDER' => $this->orderIId()
 				, 'DESC' => $this->getTransactionDescription()
-				, 'TERMINAL' => $this->getServiceConfig()->getTerminalId()
+				, 'TERMINAL' => $this->configS()->getTerminalId()
 				, 'TRTYPE' => $this->getTransactionType()
-				, 'MERCH_NAME' => $this->getServiceConfig()->getShopName()
-				, 'MERCHANT' => $this->getShopId()
+				, 'MERCH_NAME' => $this->configS()->getShopName()
+				, 'MERCHANT' => $this->shopId()
 				, 'EMAIL' => Df_Core_Helper_Mail::s()->getCurrentStoreMailAddress()
 				, 'TIMESTAMP' => Df_Psbank_Helper_Data::s()->getTimestamp()
 				, 'NONCE' => Df_Psbank_Helper_Data::s()->generateNonce()
-				, 'BACKREF' => $this->getCustomerReturnUrl()
+				, 'BACKREF' => $this->urlCustomerReturn()
 			);
 		}
 		return $this->{__METHOD__};
@@ -69,7 +54,7 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 						'AMOUNT', 'CURRENCY', 'ORDER', 'MERCH_NAME', 'MERCHANT', 'TERMINAL', 'EMAIL'
 						, 'TRTYPE', 'TIMESTAMP', 'NONCE', 'BACKREF'
 					)
-					,$this->getServiceConfig()->getRequestPassword()
+					,$this->password()
 				)
 			;
 		}
@@ -78,6 +63,6 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 
 	/** @return int */
 	private function getTransactionType() {
-		return rm_int($this->getServiceConfig()->isCardPaymentActionCapture());
+		return rm_int($this->configS()->isCardPaymentActionCapture());
 	}
 }

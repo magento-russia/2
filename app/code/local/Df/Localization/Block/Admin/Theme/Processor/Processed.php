@@ -12,11 +12,11 @@ class Df_Localization_Block_Admin_Theme_Processor_Processed
 	 * @return string
 	 */
 	public function getLinkTitle() {
-		return df_escape(
+		return rm_e(
 			'уже применялся '
 			. df_dts($this->getProcessor()->getTimeOfLastProcessing(), 'dd.MM.y HH:mm:ss')
 		);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

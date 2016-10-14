@@ -62,12 +62,14 @@ class Df_Logging_Model_Archive_Collection extends Varien_Data_Collection_Filesys
 	 */
 	protected function _generateRow($filename) {
 		$row = parent::_generateRow($filename);
-		$date = new Zend_Date(str_replace('.csv', '', $row['basename']), 'yyyyMMddHH', Mage::app()->getLocale()->getLocaleCode());
+		$date = new Zend_Date(str_replace('.csv', '', $row['basename']), 'yyyyMMddHH', rm_locale());
 		$row['time'] = $date;
 		/**
 		 * Used in date filter, becouse $date contains hours
 		 */
-		$dateWithoutHours = new Zend_Date(str_replace('.csv', '', $row['basename']), 'yyyyMMdd', Mage::app()->getLocale()->getLocaleCode());
+		$dateWithoutHours = new Zend_Date(
+			str_replace('.csv', '', $row['basename']), 'yyyyMMdd', rm_locale()
+		);
 		$row['timestamp'] = df_dts($dateWithoutHours, 'yyyy-MM-dd');
 		return $row;
 	}

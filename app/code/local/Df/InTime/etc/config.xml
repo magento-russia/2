@@ -6,22 +6,17 @@
 			<author>Дмитрий Федюк</author>
 		</Df_InTime>
 	</modules>
-	<global>
-		<blocks><df_in_time><class>Df_InTime_Block</class></df_in_time></blocks>
-		<helpers><df_in_time><class>Df_InTime_Helper</class></df_in_time></helpers>
-		<models><df_in_time><class>Df_InTime_Model</class></df_in_time></models>
-	</global>
 	<default>
 		<carriers>
 			<df-in-time>
 				<active>0</active>
-				<model>df_in_time/carrier</model>
+				<model>Df_InTime_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки
 					над перечнем тарифов данного способа доставки.
 				-->
-				<title>Ін-Тайм (Ин-Тайм)</title>
+				<title>Ин-Тайм</title>
 			</df-in-time>
 		</carriers>
 		<df_shipping>
@@ -40,29 +35,10 @@
 	<df>
 		<features>
 			<df-in-time>
-				<module>df_in_time</module>
-				<title>Ін-Тайм (Ин-Тайм)</title>
+				<module>Df_InTime</module>
+				<title>Ин-Тайм</title>
 				<url>http://magento-forum.ru/forum/259/</url>
 			</df-in-time>
 		</features>
-		<shipping>
-			<in-time>
-				<allowed-methods>
-					<!--
-						Идентификаторам способов доставки достаточно быть уникальными
-						лишь в пределах модуля доставки,потому что система формирует уникальный идентификатор способа доставки
-						объединением идентификатором модуля доставки и способа доставки.
-					-->
-					<courier-to-home>
-						<title>До дома</title>
-						<class>df_in_time/method_toHome</class>
-					</courier-to-home>
-					<courier-to-point-of-issue>
-						<title>До пункта выдачи</title>
-						<class>df_in_time/method_toPointOfIssue</class>
-					</courier-to-point-of-issue>
-				</allowed-methods>
-			</in-time>
-		</shipping>
 	</df>
 </config>

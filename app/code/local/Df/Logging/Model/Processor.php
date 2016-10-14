@@ -53,7 +53,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			 * потому что внутри себя использует функцию @see array_flip(),
 			 * которая не допускает null в значениях массива:
 			 * «Warning: array_flip(): Can only flip STRING and INTEGER values!».
-			 * @link http://magento-forum.ru/topic/4600/
+			 * http://magento-forum.ru/topic/4600/
 			 */
 			$uniqueIds = array_unique($classIds);
 			$ids = array_merge($ids, $uniqueIds);
@@ -88,13 +88,13 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		 * customer page.
 		 */
 		/** @var bool $doNotLog */
-		$doNotLog = df_mage()->admin()->session()->getSkipLoggingAction();
+		$doNotLog = rm_admin_session()->getSkipLoggingAction();
 		if ($doNotLog) {
 			if (is_array($doNotLog)) {
 				$key = array_search($fullActionName, $doNotLog);
 				if ($key !== false) {
 					unset($doNotLog[$key]);
-					df_mage()->admin()->session()->setSkipLoggingAction($doNotLog);
+					rm_admin_session()->setSkipLoggingAction($doNotLog);
 					$this->_skipNextAction = true;
 					return;
 				}
@@ -102,15 +102,15 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		}
 		if (isset($this->_eventConfig->skip_on_back)) {
 			$addValue = array_keys($this->_eventConfig->skip_on_back->asArray());
-			$sessionValue = df_mage()->admin()->session()->getSkipLoggingAction();
+			$sessionValue = rm_admin_session()->getSkipLoggingAction();
 			if (!is_array($sessionValue) && $sessionValue) {
-				$sessionValue = explode(',', $sessionValue);
+				$sessionValue = df_csv_parse($sessionValue);
 			}
 			else if (!$sessionValue) {
 				$sessionValue = array();
 			}
 			$merge = array_merge($addValue, $sessionValue);
-			df_mage()->admin()->session()->setSkipLoggingAction($merge);
+			rm_admin_session()->setSkipLoggingAction($merge);
 		}
 	}
 
@@ -122,35 +122,23 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		if (!$this->_initAction) {
 			return;
 		}
-		$username = null;
-		$userId   = null;
-		if (df_mage()->admin()->session()->isLoggedIn()) {
-			$userId = df_mage()->admin()->session()->getUser()->getId();
-			$username = df_mage()->admin()->session()->getUser()->getUsername();
-		}
+		/** @var string|null $username */
+		$username = rm_admin_name(false);
+		/** @var int|null $userId */
+		$userId = rm_admin_id(false);
 		$errors = df_model('adminhtml/session')->getMessages()->getErrors();
-		$loggingEvent =
-			df_model('df_logging/event')
-				->setData(
-					array(
-						'ip' => Mage::helper('core/http')->getRemoteAddr()
-						,'x_forwarded_ip' =>
-							Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_FOR')
-						,'user' => $username
-						,'user_id' => $userId
-						,'is_success' => empty($errors)
-						,'fullaction' => $this->_initAction
-						,'error_message' =>
-								implode(
-									"\n"
-									,array_map(
-										create_function('$a', 'return $a->toString();')
-										,$errors
-									)
-								)
-					)
-				)
-		;
+		$loggingEvent = df_model('df_logging/event')->setData(array(
+			'ip' => rm_visitor_ip()
+			,'x_forwarded_ip' => Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_FOR')
+			,'user' => $username
+			,'user_id' => $userId
+			,'is_success' => empty($errors)
+			,'fullaction' => $this->_initAction
+			,'error_message' => df_concat_n(array_map(
+				create_function('$a', 'return $a->toString();')
+				,$errors
+			))
+		));
 		if ($this->_actionName == 'denied') {
 			$_conf = Df_Logging_Model_Config::s()->getNode($this->_initAction);
 			if (!$_conf || !Df_Logging_Model_Config::s()->isActive($this->_initAction)) {
@@ -179,7 +167,8 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			}
 			if ($handler->$callback($this->_eventConfig, $loggingEvent, $this)) {
 				$loggingEvent->save();
-				if ($eventId = $loggingEvent->getId()) {
+				$eventId = $loggingEvent->getId();
+				if ($eventId) {
 					foreach ($this->_eventChanges as $changes){
 						if ($changes && ($changes->getOriginalData() || $changes->getResultData())) {
 							$changes->setEventId($eventId);
@@ -248,18 +237,19 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			}
 			$className = Mage::getConfig()->getModelClassName(str_replace('__', '/', $expect));
 			if ($model instanceof $className){
-				$classMap = $this->_getCallbackFunction(trim($callback), $this->_modelsHandler,rm_sprintf('model%sAfter', ucfirst($action)));
+				/**
+				 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+				 * потому что в данном случае нам не нужна поддержка UTF-8.
+				 */
+				$classMap = $this->_getCallbackFunction(
+					trim($callback), $this->_modelsHandler, 'model' . ucfirst($action) . 'After'
+				);
 				$handler  = $classMap['handler'];
 				$callback = $classMap['callback'];
 				if ($handler) {
 					if (
-							/**
-							 * Чтобы не попасть в рекурсию,
-							 * для Mage_Core_Model_Store мы не вызываем df_enabled
-							 */
-							($model instanceof Mage_Core_Model_Store)
-						||
-							(df_cfg()->logging()->isEnabled() && df_enabled(Df_Core_Feature::LOGGING))
+						$model instanceof Mage_Core_Model_Store
+						|| df_cfg()->logging()->isEnabled()
 					) {
 						$changes = $handler->$callback($model, $this);
 						//Because of logging view action, $changes must be checked if it is an object
@@ -294,7 +284,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		}
 		try {
 			$classPath = explode('::', $srtCallback);
-			if (count($classPath) == 2) {
+			if (2 === count($classPath)) {
 				$return['handler'] = Mage::getSingleton(str_replace('__', '/', $classPath[0]));
 				$return['callback'] = $classPath[1];
 			} else {
@@ -317,7 +307,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		/**
-		 * @link http://magento-forum.ru/topic/4485/
+		 * http://magento-forum.ru/topic/4485/
 		 * Видимо, сбой «Call to undefined function df_model»
 		 * происходит при выполнении стороннего скрипта,
 		 * который написан некачественно и не вызывает системные события.
@@ -351,7 +341,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 	 */
 	protected $_skipFieldsByModel = array();
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @deprecated after 1.6.0.0
 	 */

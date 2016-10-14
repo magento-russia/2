@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Api>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Api>
 	</modules>
 	<global>
@@ -14,7 +14,7 @@
 	<adminhtml>
 		<translate>
 			<modules>
-				<Df_Api><files><default>Df_Api.csv</default></files></Df_Api>
+				<Df_Api><files><default>Df/Api.csv</default></files></Df_Api>
 			</modules>
 		</translate>
 	</adminhtml>

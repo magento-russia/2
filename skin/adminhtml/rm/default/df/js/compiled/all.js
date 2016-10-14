@@ -636,14 +636,7 @@
         });
     };
 }));
-/*
- * jQuery dropdown: A simple dropdown plugin
- *
- * Copyright A Beautiful Site, LLC. (http://www.abeautifulsite.net/)
- *
- * Licensed under the MIT license: http://opensource.org/licenses/MIT
- *
-*/
+/** https://github.com/claviska/jquery-dropdown */
 if (jQuery) (function ($) {
 
     $.extend($.fn, {
@@ -3370,6 +3363,31 @@ varienGlobalEvents.attachEventHandler('tinymceChange', dataChanged);
 
 
 })(jQuery);;(function($) { $(function() {
+	/**
+	 * 2015-04-03
+	 * Сегодня заметил, что при изменении в настройках модулей доставки
+	 * значения опции «Ограничить область доставки конкретными странами?» с «нет» на «да»
+	 * сбрасывается значение поля «Перечень стран, куда разрешена доставка данным способом»,
+	 * причём Magento Community Edition делает это преднамеренно:
+	 * @see app/design/adminhtml/default/default/template/system/shipping/applicable_country.phtml
+	 * @see CountryModel.prototype.initSpecificCountry()
+	 * @see CountryModel.prototype.checkSpecificCountry()
+	 * Отключаем данное поведение.
+	 *
+	 * Обратите внимание, что тот же класс @see CountryModel
+	 * при смене значения той же опции «Ограничить область доставки конкретными странами?» с «да» на «нет»
+	 * зачем-то скрывает поле «Показывать ли способ доставки на витрине в том случае,
+	 * когда он по каким-либо причинам неприменим к текущему заказу?».
+	 * Этот эффект, в отличие от описанного выше, было замечен мной уже давно,
+	 * и поэтому устранён по-другому: @see Df_Shipping_Config_Area_Frontend::getStandardKeys()
+	 *
+	 * Обратите внимание, что заплатку надо применять именно после загрузки DOM,
+	 * потому что @see CountryModel инициализируется через шаблон:
+	 * @see app/design/adminhtml/default/default/template/system/shipping/applicable_country.phtml
+	 */
+	if (rm.defined(window.CountryModel)) {
+		CountryModel.prototype.unselectSpecificCountry = function(){};
+	}
 	(function(){
 		/**
 		 * Если у кнопки отсутствует метка (а она обычно кнопке не нужна),
@@ -3406,7 +3424,7 @@ varienGlobalEvents.attachEventHandler('tinymceChange', dataChanged);
 		 * Вызов $locale.val() приведёт к предупреждению в консоли Firefox:
 		 * «Use of attributes' specified attribute is deprecated. It always returns true.»
 		 * Видимо, это дефект jQuery
-		 * @link http://stackoverflow.com/questions/8389841/using-jquery-to-determine-selected-option-causes-specified-attribute-is-depreca
+		 * http://stackoverflow.com/questions/8389841/using-jquery-to-determine-selected-option-causes-specified-attribute-is-depreca
 		 */
 		if ('ru_RU' === $locale.attr('value')) {
 			$(window).bind('bundle.product.edit.bundle.option.selection', function() {

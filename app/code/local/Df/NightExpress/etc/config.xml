@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_NightExpress>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Ночной Экспресс</title>
+			<version>1.0.0</version>
 		</Df_NightExpress>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-night-express>
 				<active>0</active>
-				<model>df_night_express/carrier</model>
+				<model>Df_NightExpress_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

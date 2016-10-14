@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Logging>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Logging>
 	</modules>
 	<global>
@@ -35,60 +35,52 @@
 		<events>
 			<controller_action_predispatch>
 				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>controllerPredispatch</method>
-					</df_logging>
+					<Df_Logging>
+						<class>Df_Logging_Observer</class>
+						<method>controller_action_predispatch</method>
+					</Df_Logging>
 				</observers>
 			</controller_action_predispatch>
 			<controller_action_postdispatch_adminhtml>
 				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>controllerPostdispatch</method>
-					</df_logging>
+					<Df_Logging>
+						<class>Df_Logging_Observer</class>
+						<method>controller_action_postdispatch_adminhtml</method>
+					</Df_Logging>
 				</observers>
 			</controller_action_postdispatch_adminhtml>
 			<model_save_after>
 				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>modelSaveAfter</method>
-					</df_logging>
+					<Df_Logging>
+						<class>Df_Logging_Observer</class>
+						<method>model_save_after</method>
+					</Df_Logging>
 				</observers>
 			</model_save_after>
 			<model_delete_after>
 				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>modelDeleteAfter</method>
-					</df_logging>
+					<Df_Logging>
+						<class>Df_Logging_Observer</class>
+						<method>model_delete_after</method>
+					</Df_Logging>
 				</observers>
 			</model_delete_after>
 			<model_load_after>
 				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>modelLoadAfter</method>
-					</df_logging>
+					<Df_Logging>
+						<class>Df_Logging_Observer</class>
+						<method>model_load_after</method>
+					</Df_Logging>
 				</observers>
 			</model_load_after>
 			<admin_session_user_login_success>
 				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>adminSessionLoginSuccess</method>
-					</df_logging>
+					<Df_Logging>
+						<class>Df_Logging_Observer</class>
+						<method>admin_session_user_login_success</method>
+					</Df_Logging>
 				</observers>
 			</admin_session_user_login_success>
-			<admin_session_user_login_failed>
-				<observers>
-					<df_logging>
-						<class>df_logging/observer</class>
-						<method>adminSessionLoginFailed</method>
-					</df_logging>
-				</observers>
-			</admin_session_user_login_failed>
 		</events>
 		<layout>
 			<updates>
@@ -97,7 +89,7 @@
 		</layout>
 		<translate>
 			<modules>
-				<Df_Logging><files><default>Df_Logging.csv</default></files></Df_Logging>
+				<Df_Logging><files><default>Df/Logging.csv</default></files></Df_Logging>
 			</modules>
 		</translate>
 		<df>
@@ -131,7 +123,7 @@
 				</schedule>
 				-->
 				<run>
-					<model>df_logging/observer::rotateLogs</model>
+					<model>Df_Logging_Observer::rotateLogs</model>
 				</run>
 			</df_logging_rotate_logs>
 		</jobs>

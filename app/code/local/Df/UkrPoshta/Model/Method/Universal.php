@@ -58,7 +58,7 @@ abstract class Df_UkrPoshta_Model_Method_Universal extends Df_UkrPoshta_Model_Me
 			,'packing' => rm_bts($this->getRmConfig()->service()->needPacking())
 			,'postpay' =>
 				$this->getRmConfig()->service()->needAcceptCashOnDelivery()
-				? rm_currency()->convertFromBaseToHryvnias($this->getRequest()->getPackageValue())
+				? rm_currency_h()->convertFromBaseToHryvnias($this->getRequest()->getPackageValue())
 				: 0
 			,'region' =>
 				rm_bts(
@@ -66,7 +66,7 @@ abstract class Df_UkrPoshta_Model_Method_Universal extends Df_UkrPoshta_Model_Me
 					 * Обратите внимание,
 					 * что тарифы УкрПочты не зависят от городов отправления и назначения,
 					 * поэтому при расчёте информация о городах может отсутствовать.
-					 * @link http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
+					 * http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
 					 */
 					$this->getRequest()->isDestinationCityRegionalCenter()
 				)

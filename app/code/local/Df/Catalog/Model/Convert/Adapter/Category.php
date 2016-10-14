@@ -11,13 +11,11 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 	 * Category display modes
 	 * @var array
 	 */
-	protected $_displayModes =
-		array(
-			Mage_Catalog_Model_Category::DM_PRODUCT
-			,Mage_Catalog_Model_Category::DM_PAGE
-			,Mage_Catalog_Model_Category::DM_MIXED
-		)
-	;
+	protected $_displayModes = array(
+		Mage_Catalog_Model_Category::DM_PRODUCT
+		,Mage_Catalog_Model_Category::DM_PAGE
+		,Mage_Catalog_Model_Category::DM_MIXED
+	);
 
 	/** @return void */
 	public function parse()
@@ -45,7 +43,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 		$store = false;
 		if (empty($importData['store'])) {
 			if (!is_null($this->getBatchParams('store'))) {
-				$store = Mage::app()->getStore($this->getBatchParams('store'));
+				$store = rm_store($this->getBatchParams('store'));
 			} else {
 				$message = df_mage()->catalogHelper()->__('Skip import row, required field "%s" not defined', 'store');
 				Mage::throwException($message);
@@ -75,9 +73,9 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 			$collection->getSelect()->where("path like '".$rootPath."/%'");
 			foreach ($collection as $cat) {
 				/** @var Df_Catalog_Model_Category $cat */
-				$pathArr = explode('/', $cat->getPath());
+				$pathArr = df_explode_xpath($cat->getPath());
 				$namePath = '';
-				for($i=2, $l=sizeof($pathArr); $i<$l; $i++) {
+				for ($i=2, $l=sizeof($pathArr); $i<$l; $i++) {
 					$name = $collection->getItemById($pathArr[$i])->getName();
 					$namePath .= (empty($namePath) ? '' : '/').trim($name);
 				}
@@ -100,7 +98,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 		$path = $rootPath;
 		$namePath = '';
 		$i = 1;
-		$categories = explode('/', $importData['categories']);
+		$categories = df_explode_xpath($importData['categories']);
 		foreach ($categories as $catName) {
 			$namePath .= (empty($namePath) ? '' : '/').mb_strtolower($catName);
 			if (empty($cache[$namePath])) {
@@ -123,23 +121,14 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 				 * a foreign key constraint fails
 				 * (`catalog_category_flat_store_1`, * CONSTRAINT `FK_CAT_CTGR_FLAT_STORE_1_ENTT_ID_CAT_CTGR_ENTT_ENTT_ID`
 				 * FOREIGN KEY (`entity_id`) REFERENCES `catalog_category_entity` (`en)
-				 *
-				 * @var Mage_Catalog_Model_Category $cat
 				 */
-				$cat =
-					Df_Catalog_Model_Category::createAndSave(
-						array(
-							Df_Catalog_Model_Category::P__PATH => $path
-							,Df_Catalog_Model_Category::P__NAME => $catName
-							,Df_Catalog_Model_Category::P__IS_ACTIVE => true
-							,Df_Catalog_Model_Category::P__IS_ANCHOR => true
-							,Df_Catalog_Model_Category::P__DISPLAY_MODE => $dispMode
-						)
-						,$store->getId()
-					)
-				;
-				df_assert($cat instanceof Mage_Catalog_Model_Category);
-				$cache[$namePath] = $cat;
+				$cache[$namePath] = Df_Catalog_Model_Category::createAndSave(array(
+					Df_Catalog_Model_Category::P__PATH => $path
+					,Df_Catalog_Model_Category::P__NAME => $catName
+					,Df_Catalog_Model_Category::P__IS_ACTIVE => true
+					,Df_Catalog_Model_Category::P__IS_ANCHOR => true
+					,Df_Catalog_Model_Category::P__DISPLAY_MODE => $dispMode
+				), $store->getId());
 			}
 			$catId = $cache[$namePath]->getId();
 			$path .= '/'.$catId;
@@ -152,7 +141,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 	 * Retrieve store object by code
 	 *
 	 * @param string $store
-	 * @return Mage_Core_Model_Store
+	 * @return Df_Core_Model_StoreM
 	 */
 	public function getStoreByCode($store)
 	{
@@ -169,11 +158,11 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 	 *  @param   none
 	 *  @return	  void
 	 */
-	protected function _initStores()
-	{
+	protected function _initStores() {
 		if (is_null($this->_stores)) {
 			$this->_stores = Mage::app()->getStores(true, true);
 			foreach ($this->_stores as $code => $store) {
+				/** @var Df_Core_Model_StoreM $store */
 				$this->_storesIdCode[$store->getId()] = $code;
 			}
 		}
@@ -181,8 +170,8 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 	/**
 	 * Как ни странно, переменная _storesIdCode
 	 * используется в родительских методах без предварительного объявления:
-	 * @see Mage_Catalog_Model_Convert_Adapter_Product::_initStores()
-	 * @see Mage_Catalog_Model_Convert_Adapter_Product::getStoreById()
+	 * @used-by Mage_Catalog_Model_Convert_Adapter_Product::_initStores()
+	 * @used-by Mage_Catalog_Model_Convert_Adapter_Product::getStoreById()
 	 * @var array(int => string)
 	 */
 	protected $_storesIdCode = array();

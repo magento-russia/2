@@ -15,56 +15,40 @@ class Df_Catalog_Block_Frontend_Product_View_Sku extends Df_Core_Block_Template 
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Template::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	protected function getCacheKeyParamsAdditional() {return $this->getProduct()->getId();}
+	protected function cacheKeySuffix() {return $this->getProduct()->getId();}
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/catalog/product/view/sku.phtml';}
+	protected function defaultTemplate() {return 'df/catalog/product/view/sku.phtml';}
 
 	/**
 	 * @override
 	 * @return bool
 	 */
 	protected function needToShow() {
-		return
-				df_enabled(Df_Core_Feature::TWEAKS)
-			&&
-				df_module_enabled(Df_Core_Module::TWEAKS)
-			&&
-				$this->getSettings()->isEnabled()
-		;
+		return df_module_enabled(Df_Core_Module::TWEAKS) && $this->settings()->isEnabled();
 	}
 
 	/** @return string */
 	private function getFormattedLabel() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!$this->getSettings()->isLabelEnabled()
-				? ''
-				: $this->getSettings()->getLabelFont()->format(
-					df_mage()->catalogHelper()->__('Sku')
-					,'rm-product-' . $this->getProduct()->getId() . '-sku-label'
-				)
-			;
-		}
-		return $this->{__METHOD__};
+		return
+			!$this->settings()->isLabelEnabled()
+			? ''
+			: $this->settings()->getLabelFont()->applyTo(df_mage()->catalogHelper()->__('Sku'))
+		;
 	}
 
 	/** @return string */
 	private function getFormattedValue() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getSettings()->getSkuFont()->format(
-					$this->getSku()
-					, 'rm-product-' . $this->getProduct()->getId() . '-sku-value'
-				)
-			;
-		}
-		return $this->{__METHOD__};
+		return $this->settings()->getSkuFont()->applyTo($this->getSku());
 	}
 
 	/** @return Df_Catalog_Model_Product */
@@ -77,12 +61,10 @@ class Df_Catalog_Block_Frontend_Product_View_Sku extends Df_Core_Block_Template 
 	}
 
 	/** @return Df_Tweaks_Model_Settings_Catalog_Product_View_Sku */
-	private function getSettings() {
+	private function settings() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_cfg()->tweaks()->catalog()->product()->view()->sku();
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

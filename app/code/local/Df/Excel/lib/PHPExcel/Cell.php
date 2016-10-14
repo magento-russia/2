@@ -104,7 +104,7 @@ class PHPExcel_Cell
 	 **/
 	public function notifyCacheController() {
 		$this->_parent->updateCacheData($this);
-
+		/** @noinspection PhpInconsistentReturnPointsInspection */
 		return $this;
 	}
 

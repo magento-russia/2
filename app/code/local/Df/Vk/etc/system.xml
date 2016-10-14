@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_vk translate='label' module='df_vk'>
+		<df_vk>
 			<label>ВКонтакте</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<comments translate='label'>
+				<comments>
 					<label>Виджет для комментариев</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -18,7 +18,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -26,10 +26,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-vk</df_feature>
 						</enabled>
-						<code translate='label'>
+						<code>
 							<label>Код для вставки</label>
 							<comment>
 								<![CDATA[
@@ -42,12 +42,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</code>
 					</fields>
 				</comments>
-				<like translate='label'>
+				<like>
 					<label>Виджет «Мне нравится»</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>2000</sort_order>
@@ -55,7 +55,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -63,10 +63,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-vk</df_feature>
 						</enabled>
-						<code translate='label'>
+						<code>
 							<label>Код для вставки</label>
 							<comment>
 								<![CDATA[
@@ -79,12 +79,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</code>
 					</fields>
 				</like>
-				<groups translate='label'>
+				<groups>
 					<label>Виджет для сообществ</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>3000</sort_order>
@@ -92,7 +92,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -100,10 +100,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-vk</df_feature>
 						</enabled>
-						<code translate='label'>
+						<code>
 							<label>Код для вставки</label>
 							<comment>
 								<![CDATA[
@@ -116,10 +116,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</code>
-						<front_page_show translate='label'>
+						<front_page_show>
 							<label>Показывать на главной странице?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -127,24 +127,24 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</front_page_show>
-						<front_page_column translate='label'>
+						<front_page_column>
 							<label>В какой колонке показывать на главной странице?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_layout_column</source_model>
+							<source_model>Df_Admin_Config_Source_Layout_Column</source_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<front_page_show>1</front_page_show>
 							</depends>
 						</front_page_column>
-						<front_page_vertical_ordering translate='label'>
+						<front_page_vertical_ordering>
 							<label>Порядковый номер блока на главной странице</label>
 							<comment>
 								<![CDATA[
@@ -152,18 +152,18 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
 							<sort_order>5000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<front_page_show>1</front_page_show>
 							</depends>
 						</front_page_vertical_ordering>
-						<catalog_product_list_page_show translate='label'>
+						<catalog_product_list_page_show>
 							<label>Показывать на страницах списка товаров?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -171,24 +171,24 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</catalog_product_list_page_show>
-						<catalog_product_list_page_column translate='label'>
+						<catalog_product_list_page_column>
 							<label>В какой колонке показывать на страницах списка товаров?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_layout_column</source_model>
+							<source_model>Df_Admin_Config_Source_Layout_Column</source_model>
 							<sort_order>7000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<catalog_product_list_page_show>1</catalog_product_list_page_show>
 							</depends>
 						</catalog_product_list_page_column>
-						<catalog_product_list_page_vertical_ordering translate='label'>
+						<catalog_product_list_page_vertical_ordering>
 							<label>Порядковый номер блока на страницах списка товаров</label>
 							<comment>
 								<![CDATA[
@@ -196,18 +196,18 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
 							<sort_order>8000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<catalog_product_list_page_show>1</catalog_product_list_page_show>
 							</depends>
 						</catalog_product_list_page_vertical_ordering>
-						<catalog_product_view_page_show translate='label'>
+						<catalog_product_view_page_show>
 							<label>Показывать на страницах товаров?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -215,24 +215,24 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</catalog_product_view_page_show>
-						<catalog_product_view_page_column translate='label'>
+						<catalog_product_view_page_column>
 							<label>В какой колонке показывать на страницах товаров?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_layout_column</source_model>
+							<source_model>Df_Admin_Config_Source_Layout_Column</source_model>
 							<sort_order>10000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<catalog_product_view_page_show>1</catalog_product_view_page_show>
 							</depends>
 						</catalog_product_view_page_column>
-						<catalog_product_view_page_vertical_ordering translate='label'>
+						<catalog_product_view_page_vertical_ordering>
 							<label>Порядковый номер блока на страницах товаров</label>
 							<comment>
 								<![CDATA[
@@ -240,18 +240,18 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
 							<sort_order>11000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<catalog_product_view_page_show>1</catalog_product_view_page_show>
 							</depends>
 						</catalog_product_view_page_vertical_ordering>
-						<account_page_show translate='label'>
+						<account_page_show>
 							<label>Показывать на страницах личного кабинета?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -259,24 +259,24 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</account_page_show>
-						<account_page_column translate='label'>
+						<account_page_column>
 							<label>В какой колонке показывать на страницах личного кабинета?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_layout_column</source_model>
+							<source_model>Df_Admin_Config_Source_Layout_Column</source_model>
 							<sort_order>13000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<account_page_show>1</account_page_show>
 							</depends>
 						</account_page_column>
-						<account_page_vertical_ordering translate='label'>
+						<account_page_vertical_ordering>
 							<label>Порядковый номер блока на страницах личного кабинета</label>
 							<comment>
 								<![CDATA[
@@ -284,18 +284,18 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
 							<sort_order>14000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<account_page_show>1</account_page_show>
 							</depends>
 						</account_page_vertical_ordering>
-						<other_page_show translate='label'>
+						<other_page_show>
 							<label>Показывать на других страницах?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -303,24 +303,24 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</other_page_show>
-						<other_page_column translate='label'>
+						<other_page_column>
 							<label>В какой колонке показывать на других страницах?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_layout_column</source_model>
+							<source_model>Df_Admin_Config_Source_Layout_Column</source_model>
 							<sort_order>16000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<other_page_show>1</other_page_show>
 							</depends>
 						</other_page_column>
-						<other_page_vertical_ordering translate='label'>
+						<other_page_vertical_ordering>
 							<label>Порядковый номер блока на других страницах</label>
 							<comment>
 								<![CDATA[
@@ -328,12 +328,12 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
+							<source_model>Df_Admin_Config_Source_SelectNumberFromDropdown</source_model>
 							<sort_order>17000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<other_page_show>1</other_page_show>

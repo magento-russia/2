@@ -24,15 +24,15 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			catch (Exception $e) {
 				df_notify_exception($e);
 				$this->error(
-					'При импорте товарного изображения для товара «%s» произошёл сбой: «%s».'
-					,$product->getName()
+					'При импорте товарного изображения для товара %s произошёл сбой: «%s».'
+					,$product->getTitle()
 					,rm_ets($e)
 				);
 			}
 			$isPrimaryImage = false;
 			$this->log(
-				'К товару «%s» добавлена картинка «%s».'
-				,$product->getName()
+				'К товару %s добавлена картинка «%s».'
+				,$product->getTitle()
 				,df_path()->makeRelative($imagePath)
 			);
 			$needSave = true;
@@ -46,7 +46,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		}
 		if ($needSave) {
 			$product->saveRm($isMassUpdate = true);
-			$this->log('Обновлён товар «%s».', $product->getName());
+			$this->log('Обновлён товар %s.', $product->getTitle());
 		}
 		if ($needReload) {
 			$product->reload();
@@ -59,7 +59,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			 * только для текущего магазина.
 			 * Однако в этом случае товарное изображение будет отсутствовать
 			 * на витринной странице списка товаров:
-			 * @link http://magento-forum.ru/topic/3783/
+			 * http://magento-forum.ru/topic/3783/
 			 *
 			 * Причиной отсутствия картиник на странице товарного изображения
 			 * является недостаток (либо дефект, либо так было задумано с целью ускорения)
@@ -89,7 +89,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 
 	/**
 	 * @param Df_Catalog_Model_Product $product
-	 * @return Df_1C_Model_Cml2_Import_Processor_Product_Part_Images
+	 * @return Df_1C_Cml2_Import_Processor_Product_Part_Images
 	 */
 	private function addImagesToDefaultScopeIfNeeded(Df_Catalog_Model_Product $product) {
 		/** @var string[] $mediaAttributes */
@@ -97,7 +97,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			array(
 				'small_image'
 				/**
-				 * @link http://magento-forum.ru/topic/3941/
+				 * http://magento-forum.ru/topic/3941/
 				 */
 				,'thumbnail'
 			)
@@ -113,7 +113,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 				$attributesToUpdate[]= $mediaAttribute;
 			}
 		}
-		if (0 < count($attributesToUpdate)) {
+		if ($attributesToUpdate) {
 			foreach ($attributesToUpdate as $mediaAttribute) {
 				/** @var string $mediaAttribute */
 				$productWithDefaultValues->setData($mediaAttribute, $product->getData($mediaAttribute));
@@ -142,7 +142,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		$contentType = strtolower($response->getHeader('content-type'));
 		df_assert_string_not_empty($contentType);
 		/** @var string[] $contentTypeExploded */
-		$contentTypeExploded = explode('/', $contentType);
+		$contentTypeExploded = df_explode_xpath($contentType);
 		if ('image' === rm_first($contentTypeExploded)) {
 			/** @var string $imageType */
 			$imageType = rm_last($contentTypeExploded);
@@ -168,25 +168,20 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		/** @var array $arguments */
 		$arguments = func_get_args();
 		/** @var string $message */
-		$message = rm_sprintf($arguments);
+		$message = rm_format($arguments);
 		$this->log($message);
 		df_error($message);
 	}
 
 	/**
 	 * @param Df_Catalog_Model_Product $product
-	 * @return Df_1C_Model_Cml2_Import_Processor_Product_Part_Images
+	 * @return Df_1C_Cml2_Import_Processor_Product_Part_Images
 	 */
 	private function excludeImagesFromOtherStores(Df_Catalog_Model_Product $product) {
 		/** @var int[] $storesToExcludeFrom */
-		$storesToExcludeFrom =
-			array_diff(
-				$product->getStoreIds()
-				,array($product->getStoreId())
-			)
-		;
+		$storesToExcludeFrom = array_diff($product->getStoreIds(), array($product->getStoreId()));
 		$storesToExcludeFrom[]= Mage_Core_Model_App::ADMIN_STORE_ID;
-		if (0 < count($storesToExcludeFrom)) {
+		if ($storesToExcludeFrom) {
 			/** @var string[] $imageFileNames */
 			$imageFileNames = array();
 			/** @var Mage_Eav_Model_Entity_Attribute_Abstract[] $attributes */
@@ -213,19 +208,17 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 						}
 					}
 				}
-				if (0 < count($imageFileNames)) {
+				if ($imageFileNames) {
 					foreach ($storesToExcludeFrom as $storeToExcludeFrom) {
 						/** @var int $storeToExcludeFrom */
 						/** @var $productWithScopedValues $productWithDefaultValues */
 						$productWithScopedValues = $product->forStore($storeToExcludeFrom);
 						foreach ($imageFileNames as $imageFileName) {
-							$backend
-								->updateImage(
-									$productWithScopedValues
-									, $imageFileName
-									, array('exclude' => 1)
-								)
-							;
+							$backend->updateImage(
+								$productWithScopedValues
+								, $imageFileName
+								, array('exclude' => 1)
+							);
 						}
 						$productWithScopedValues->saveRm($isMassUpdate = true);
 					}
@@ -254,7 +247,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			$result = array();
 			foreach ($this->cfg(self::P__IMAGES) as $image) {
 				/** @var string $image */
-				if (df()->url()->is($image)) {
+				if (df_url()->is($image)) {
 					$image = $this->download($image);
 				}
 				$result[]= $image;
@@ -278,7 +271,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		if (is_object($this->getLogger())) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$this->getLogger()->log(rm_sprintf($arguments));
+			$this->getLogger()->log(rm_format($arguments));
 		}
 		return $this;
 	}
@@ -290,16 +283,16 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__IMAGES, self::V_ARRAY)
-			// Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::_CLASS,
+			->_prop(self::P__IMAGES, RM_V_ARRAY)
+			// Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::_C,
 			// однако это привело к сбою:
 			// «Fatal error: Cannot inherit previously-inherited or override constant _CLASS
 			// from interface Df_Dataflow_Logger in app/code/local/Df/1C/Helper/Data.php on line 2»
 			->_prop(self::P__LOGGER, 'Df_Dataflow_Logger', false)
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_CLASS)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__IMAGES = 'images';
 	const P__LOGGER = 'logger';
 	const P__PRODUCT = 'product';
@@ -310,7 +303,9 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 	 * @param Df_Dataflow_Logger|null $logger [optional]
 	 * @return Df_Dataflow_Model_Importer_Product_Images
 	 */
-	public static function i(Df_Catalog_Model_Product $product, array $images, $logger = null) {
+	public static function i(
+		Df_Catalog_Model_Product $product, array $images, Df_Dataflow_Logger $logger = null
+	) {
 		return new self(array(
 			self::P__PRODUCT => $product, self::P__IMAGES => $images, self::P__LOGGER => $logger
 		));

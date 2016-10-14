@@ -1,16 +1,15 @@
 <?php
 class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History extends Df_Core_Block_Admin {
 	/** @return int */
-	public function getCustomerId() {return $this->cfg(self::P__CUSTOMER_ID);}
+	public function getCustomerId() {return $this[self::$P__CUSTOMER_ID];}
 
 	/**
 	 * @override
 	 * @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History
 	 */
 	protected function _prepareLayout() {
-		$this->setChild(
-			'grid'
-			, Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History_Grid::i($this->getCustomerId())
+		$this->setChild('grid',
+			Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History_Grid::i($this->getCustomerId())
 		);
 		return parent::_prepareLayout();
 	}
@@ -21,15 +20,18 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History extends Df_Core
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CUSTOMER_ID, self::V_NAT0);
+		$this->_prop(self::$P__CUSTOMER_ID, RM_V_NAT0);
 		$this->setTemplate('df/reward/customer/edit/history.phtml');
 	}
-	const P__CUSTOMER_ID = 'customer_id';
+	/** @var string */
+	private static $P__CUSTOMER_ID = 'customer_id';
+
 	/**
+	 * @used-by Df_Reward_Adminhtml_Customer_RewardController::historyAction()
 	 * @param int $customerId
 	 * @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History
 	 */
 	public static function i($customerId) {
-		return df_block(new self(array(self::P__CUSTOMER_ID => $customerId)));
+		return rm_block_l(new self(array(self::$P__CUSTOMER_ID => $customerId)));
 	}
 }

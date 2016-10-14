@@ -1,55 +1,32 @@
 <?php
 class Df_RussianPost_Model_RussianPostCalc_Api extends Df_Core_Model {
 	/** @return string[] */
-	public function getRatesAsText() {
-		return $this->getRequest()->getRatesAsText();
-	}
+	public function getRatesAsText() {return $this->getRequest()->getRatesAsText();}
 
 	/** @return float */
-	private function getDeclaredValue() {
-		return $this->cfg(self::P__DECLARED_VALUE);
-	}
+	private function getDeclaredValue() {return $this->cfg(self::P__DECLARED_VALUE);}
 
 	/** @return string */
-	private function getDestinationPostalCode() {
-		/** @var string $result */
-		$result = $this->_getData(self::P__DESTINATION__POSTAL_CODE);
-		df_h()->shipping()->assertPostalCodeDestination($result);
-		return $result;
-	}
+	private function getDestinationPostalCode() {return $this->cfg(self::P__DESTINATION__POSTAL_CODE);}
 
 	/** @return Df_RussianPost_Model_RussianPostCalc_Request */
 	private function getRequest() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_RussianPost_Model_RussianPostCalc_Request::i(
-				df_text()->convertUtf8ToWindows1251(array(
-					Df_RussianPost_Model_RussianPostCalc_Request
-						::POST_PARAM__SOURCE__POSTAL_CODE => $this->getSourcePostalCode()
-					,Df_RussianPost_Model_RussianPostCalc_Request
-						::POST_PARAM__DECLARED_VALUE => $this->getDeclaredValue()
-					,'russianpostcalc' => 1
-					,Df_RussianPost_Model_RussianPostCalc_Request
-						::POST_PARAM__DESTINATION__POSTAL_CODE => $this->getDestinationPostalCode()
-					,Df_RussianPost_Model_RussianPostCalc_Request
-						::POST_PARAM__WEIGHT => $this->getWeight()
-				))
+				$this->getSourcePostalCode()
+				, $this->getDestinationPostalCode()
+				, $this->getWeight()
+				, $this->getDeclaredValue()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
-	private function getSourcePostalCode() {
-		/** @var string $result */
-		$result = $this->_getData(self::P__SOURCE__POSTAL_CODE);
-		df_h()->shipping()->assertPostalCodeSource($result);
-		return $result;
-	}
+	private function getSourcePostalCode() {return $this->cfg(self::P__SOURCE__POSTAL_CODE);}
 
 	/** @return float */
-	private function getWeight() {
-		return $this->cfg(self::P__WEIGHT);
-	}
+	private function getWeight() {return $this->cfg(self::P__WEIGHT);}
 
 	/**
 	 * @override
@@ -58,7 +35,7 @@ class Df_RussianPost_Model_RussianPostCalc_Api extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__DECLARED_VALUE, self::V_FLOAT)
+			->_prop(self::P__DECLARED_VALUE, RM_V_FLOAT)
 			/**
 			 * Не используем валидаторы для почтовых индексов,
 			 * потому что приход сюда почтового индекса в неверном формате
@@ -66,18 +43,28 @@ class Df_RussianPost_Model_RussianPostCalc_Api extends Df_Core_Model {
 			 * и покупателю нужно показать понятное ему сообщение
 			 * вместо сообщения валидатора.
 			 */
-			->_prop(self::P__WEIGHT, self::V_FLOAT)
+			->_prop(self::P__WEIGHT, RM_V_FLOAT)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__DECLARED_VALUE = 'declared_value';
 	const P__DESTINATION__POSTAL_CODE = 'destination__postal_code';
 	const P__SOURCE__POSTAL_CODE = 'source__postal_code';
 	const P__WEIGHT = 'weight';
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param string $sourcePostalCode
+	 * @param string $destinationPostalCode
+	 * @param float $weight
+	 * @param float $declaredValue
 	 * @return Df_RussianPost_Model_RussianPostCalc_Api
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i($sourcePostalCode, $destinationPostalCode, $weight, $declaredValue) {
+		return new self(array(
+			self::P__SOURCE__POSTAL_CODE => $sourcePostalCode
+			, self::P__DESTINATION__POSTAL_CODE => $destinationPostalCode
+			, self::P__WEIGHT => $weight
+			, self::P__DECLARED_VALUE => $declaredValue
+		));
+	}
 }

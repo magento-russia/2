@@ -1,23 +1,15 @@
 <?php
 class Df_Chronopay_Model_Gate_Config extends Varien_Object {
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/**
 	 * @param string $field
-	 * @param string|null $default[optional]
+	 * @param string|null $default [optional]
 	 * @return string|null
 	 */
 	public function getParam($field, $default = null) {
-		$result =
-			$this->getPaymentModel()->getConfigData($field, null)
-		;
-		return
-				(is_null($result))
-			?
-				$default
-			:
-				$result
-		;
+		$result = $this->getPaymentModel()->getConfigData($field);
+		return (is_null($result)) ? $default : $result;
 	}
 
 	/** @return Df_Chronopay_Model_Gate */

@@ -1,15 +1,6 @@
 <?php
+/** @method Df_Qiwi_Model_Payment getMethod() */
 class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
-	/**
-	 * Перекрываем метод лишь для того,
-	 * чтобы среда разработки знала класс способа оплаты
-	 * @override
-	 * @return Df_Qiwi_Model_Payment
-	 */
-	public function getMethod() {
-		return parent::getMethod();
-	}
-
 	/** @return string */
 	public function getQiwiCustomerPhoneNetworkCode() {
 		if (!isset($this->{__METHOD__})) {
@@ -74,20 +65,18 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {
-		return 'df/qiwi/form.phtml';
-	}
+	protected function defaultTemplate() {return 'df/qiwi/form.phtml';}
 
 	/** @return Df_Core_Model_Format_MobilePhoneNumber */
 	private function getBillingAddressPhone() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Core_Model_Format_MobilePhoneNumber::fromQuoteAddress(
-					$this->getQuote()->getBillingAddress()
-				)
-			;
+			$this->{__METHOD__} = Df_Core_Model_Format_MobilePhoneNumber::fromQuoteAddress(
+				rm_quote_address_billing()
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -114,16 +103,14 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	/** @return Df_Core_Model_Format_MobilePhoneNumber */
 	private function getShippingAddressPhone() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Core_Model_Format_MobilePhoneNumber::i(
-					$this->getQuote()->getShippingAddress()->getTelephone()
-				)
-			;
+			$this->{__METHOD__} = Df_Core_Model_Format_MobilePhoneNumber::i(
+				rm_quote_address_shipping()->getTelephone()
+			);
 		};
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const T_FIELD_LABEL__QIWI_CUSTOMER_ID = 'Номер телефона';
 	const T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE = 'Код:';
 	const T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX = 'Номер:';

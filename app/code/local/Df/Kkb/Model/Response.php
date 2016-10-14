@@ -1,7 +1,7 @@
 <?php
 abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 	/** @return Df_Kkb_Model_Config_Area_Service */
-	protected function getServiceConfig() {
+	protected function configS() {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * Обратите внимание, что таким туповатым способом
@@ -9,7 +9,7 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 			 * лишь потому, что от него мы получаем только те данные,
 			 * которые не зависят от области действия настроек.
 			 */
-			$this->{__METHOD__} = Df_Kkb_Model_Payment::i()->getRmConfig()->service();
+			$this->{__METHOD__} = Df_Kkb_Model_Payment::i()->configS();
 		}
 		return $this->{__METHOD__};
 	}
@@ -36,12 +36,12 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 
 	/**
 	 * @throws Exception
-	 * @return Df_Kkb_Model_Response
+	 * @return void
 	 */
 	private function checkSignatureCorrect() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var resource $publicKeyResource */
-			$publicKeyResource = openssl_get_publickey($this->getServiceConfig()->getKeyPublic());
+			$publicKeyResource = openssl_get_publickey($this->configS()->getKeyPublic());
 			df_assert(is_resource($publicKeyResource));
 			try {
 				/** @var int $verificationResult */
@@ -65,11 +65,10 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 			}
 			catch (Exception $e) {
 				openssl_free_key($publicKeyResource);
-				throw $e;
+				df_error($e);
 			}
 			openssl_free_key($publicKeyResource);
 		}
-		return $this->{__METHOD__};
 	}
 	
 	/** @return string */
@@ -80,9 +79,9 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 					/**
 					 * Функция @see mb_stristr() доступна, начиная с PHP 5.2
 					 * (при этом должно быть включено расширение mbstring интерпретатора PHP)ю
-					 * @link http://www.php.net/manual/en/function.mb-stristr.php
+					 * http://www.php.net/manual/en/function.mb-stristr.php
 					 * Magento Community Edition требует PHP версии не ниже 5.2.13
-					 * @link http://magento.com/resources/system-requirements
+					 * http://magento.com/resources/system-requirements
 					 */
 					mb_stristr($this->getXml(), '<bank')
 					, 0
@@ -93,5 +92,5 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

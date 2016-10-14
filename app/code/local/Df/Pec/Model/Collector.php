@@ -1,5 +1,5 @@
 <?php
-class Df_Pec_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_Pec_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
 	 * @return Df_Pec_Model_Method[]
@@ -10,8 +10,8 @@ class Df_Pec_Model_Collector extends Df_Shipping_Model_Collector {
 			$result = array();
 			/** @var array(string => array(string, string)) $methods */
 			$methods = array(
-				Df_Pec_Model_Method_Air::METHOD => array(Df_Pec_Model_Method_Air::_CLASS, 'Воздушный')
-				,Df_Pec_Model_Method_Ground::METHOD => array(Df_Pec_Model_Method_Ground::_CLASS, 'Наземный')
+				Df_Pec_Model_Method_Air::METHOD => array(Df_Pec_Model_Method_Air::_C, 'Воздушный')
+				,Df_Pec_Model_Method_Ground::METHOD => array(Df_Pec_Model_Method_Ground::_C, 'Наземный')
 			);
 			foreach ($methods as $methodId => $methodData) {
 				/** @var array(string, string) $methodData */
@@ -38,11 +38,9 @@ class Df_Pec_Model_Collector extends Df_Shipping_Model_Collector {
 						->setTimeOfDeliveryMin(
 							df_a($rate, Df_Pec_Model_Api_Calculator::RESULT__DELIVERY_TIME_MIN, 0)
 						)
-						->setCost(
-							$method->convertFromRoublesToBase(
-								df_a($rate, Df_Pec_Model_Api_Calculator::RESULT__RATE)
-							)
-						)
+						->setCost($this->convertFromRoublesToBase(
+							df_a($rate, Df_Pec_Model_Api_Calculator::RESULT__RATE)
+						))
 					;
 					$result[]= $method;
 				}
@@ -57,11 +55,9 @@ class Df_Pec_Model_Collector extends Df_Shipping_Model_Collector {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Pec_Model_Api_Calculator::i(array(
 				Df_Pec_Model_Api_Calculator::P__REQUEST => $this->getRateRequest()
-				,Df_Pec_Model_Api_Calculator::P__RM_CONFIG => $this->getRmConfig()
+				,Df_Pec_Model_Api_Calculator::P__RM_CONFIG => $this->config()
 			));
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

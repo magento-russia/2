@@ -11,7 +11,7 @@
 				<required>1</required>
 				<type>label</type>
 				<helper_block>
-					<type>df_cms/adminhtml_cms_hierarchy_widget_chooser</type>
+					<type>df_cms/admin_hierarchy_widget_chooser</type>
 					<data>
 						<button translate='open'>
 							<open>Select Page or Node...</open>

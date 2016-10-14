@@ -198,7 +198,10 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 						->setWatermarkSize($this->parseSize($this->getWatermarkSize()))
 						->setWatermark($this->getWatermark(), $this->getWatermarkPosition());
 				} else {
-					if ($watermark = Mage::getStoreConfig("design/watermark/{$this->_getModel()->getDestinationSubdir()}_image")) {
+					$watermark = Mage::getStoreConfig(
+						"design/watermark/{$this->_getModel()->getDestinationSubdir()}_image"
+					);
+					if ($watermark) {
 						$this->_getModel()
 							->setWatermarkPosition( $this->getWatermarkPosition())
 							->setWatermarkSize($this->parseSize($this->getWatermarkSize()))
@@ -208,7 +211,7 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 
 				$url = $this->_getModel()->saveFile()->getUrl();
 			}
-		} catch( Exception $e ) {
+		} catch ( Exception $e ) {
 			$url = Mage::getDesign()->getSkinUrl($this->getPlaceholder());
 		}
 		return $url;

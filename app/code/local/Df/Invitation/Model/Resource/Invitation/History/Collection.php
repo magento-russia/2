@@ -1,19 +1,18 @@
 <?php
 class Df_Invitation_Model_Resource_Invitation_History_Collection
-	extends Mage_Core_Model_Mysql4_Collection_Abstract {
+	extends Df_Core_Model_Resource_Collection {
+	/**
+	 * @override
+	 * @return Df_Invitation_Model_Resource_Invitation_History
+	 */
+	public function getResource() {return Df_Invitation_Model_Resource_Invitation_History::s();}
+
 	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
-		parent::_construct();
-		$this->_init(
-			Df_Invitation_Model_Invitation_History::mf()
-			,Df_Invitation_Model_Resource_Invitation_History::mf()
-		);
+		$this->_itemObjectClass = Df_Invitation_Model_Invitation_History::_C;
 	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Invitation_Model_Resource_Invitation_History_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

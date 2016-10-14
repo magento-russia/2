@@ -20,31 +20,11 @@
             </block>
         </reference>
     </df_customerbalance_info_index>
-	<!--
-    <checkout_onepage_index>
-        <reference name='checkout.onepage.payment.methods_additional'>
-            <block
-				type='df_customerbalance/checkout_onepage_payment_additional'
-				template='df/customerbalance/checkout/onepage/payment/additional.phtml'
-				name='customerbalance'
-			/>
-        </reference>
-    </checkout_onepage_index>
-    <checkout_onepage_paymentmethod>
-        <reference name='checkout.onepage.payment.methods.scripts'>
-            <block
-				type='df_customerbalance/checkout_onepage_payment_additional'
-				template='df/customerbalance/checkout/onepage/payment/scripts.phtml'
-				name='customerbalance_scripts'
-			/>
-        </reference>
-    </checkout_onepage_paymentmethod>
-	-->
     <checkout_multishipping_billing>
         <reference name='payment_methods_before'>
             <block 
-				type='df_customerbalance/checkout_onepage_payment_additional' 
-				template='df/customerbalance/checkout/multishipping/payment.phtml' 
+				type='Df_CustomerBalance_Block_Checkout_Payment'
+				template='df/customerbalance/checkout/payment/multishipping.phtml'
 				name='customerbalance'
 			/>
         </reference>

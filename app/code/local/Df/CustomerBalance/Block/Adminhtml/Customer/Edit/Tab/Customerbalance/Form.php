@@ -13,30 +13,23 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Form 
 			$form->addFieldset(
 				'storecreidt_fieldset'
 				,array(
-					'legend' => df_h()->customer()->balance()->__('Update Balance')
+					'legend' => Df_CustomerBalance_Helper_Data::s()->__('Update Balance')
 				)
 			)
 		;
-		if (!Df_CustomerBalance_Model_Balance::s()->shouldCustomerHaveOneBalance($customer)) {
-			$fieldset
-				->addField(
-					'website_id'
-					,'select'
-					,array(
-						'name' => 'website_id'
-						,'label' => df_h()->customer()->balance()->__('Website')
-						,'title' => df_h()->customer()->balance()->__('Website')
-						,'values' => df_mage()->adminhtml()->system()->storeSingleton()
-							->getWebsiteValuesForForm()
-						,'onchange' => 'updateEmailWebsites()'
-					)
-				)
-			;
-		}
+		$fieldset->addField('website_id', 'select', array(
+			'name' => 'website_id'
+			,'label' => Df_CustomerBalance_Helper_Data::s()->__('Website')
+			,'title' => Df_CustomerBalance_Helper_Data::s()->__('Website')
+			,'values' => df_mage()->adminhtml()->system()->storeSingleton()
+				->getWebsiteValuesForForm()
+			,'onchange' => 'updateEmailWebsites()'
+		));
 		/**
 		 * Обратите внимание,
 		 * что нельзя применять цепной вызов $fieldset->addField()->addField(),
-		 * потому что addField() возвращает не $fieldset, а созданное поле.
+		 * потому что @uses Varien_Data_Form_Element_Fieldset::addField()
+		 * возвращает не $fieldset, а созданное поле.
 		 */
 		$fieldset
 			->addField(
@@ -44,10 +37,10 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Form 
 				,'text'
 				,array(
 					'name' => 'amount_delta'
-					,'label' => df_h()->customer()->balance()->__('Balance Change')
-					,'title' => df_h()->customer()->balance()->__('Balance Change')
+					,'label' => Df_CustomerBalance_Helper_Data::s()->__('Balance Change')
+					,'title' => Df_CustomerBalance_Helper_Data::s()->__('Balance Change')
 					,'comment' =>
-						df_h()->customer()->balance()->__('An amount on which to change the balance')
+						Df_CustomerBalance_Helper_Data::s()->__('An amount on which to change the balance')
 				)
 			)
 		;
@@ -57,8 +50,8 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Form 
 				,'checkbox'
 				,array(
 					'name' => 'notify_by_email'
-					,'label' => df_h()->customer()->balance()->__('Notify customer by email')
-					,'title' => df_h()->customer()->balance()->__('Notify customer by email')
+					,'label' => Df_CustomerBalance_Helper_Data::s()->__('Notify customer by email')
+					,'title' => Df_CustomerBalance_Helper_Data::s()->__('Notify customer by email')
 					,'after_element_html' => '<script type="text/javascript">'
 						. "
 						updateEmailWebsites();
@@ -79,11 +72,11 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Form 
 				,array(
 					'name' => 'store_id'
 					,'label' =>
-						df_h()->customer()->balance()->__(
+						Df_CustomerBalance_Helper_Data::s()->__(
 							'Send email notification from the following Store View'
 						)
 					,'title' =>
-						df_h()->customer()->balance()->__(
+						Df_CustomerBalance_Helper_Data::s()->__(
 							'Send email notification from the following Store View'
 						)
 				)
@@ -95,9 +88,9 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Form 
 				,'text'
 				,array(
 					'name' => 'comment'
-					,'label' => df_h()->customer()->balance()->__('Comment')
-					,'title' => df_h()->customer()->balance()->__('Comment')
-					,'comment' => df_h()->customer()->balance()->__('Comment')
+					,'label' => Df_CustomerBalance_Helper_Data::s()->__('Comment')
+					,'title' => Df_CustomerBalance_Helper_Data::s()->__('Comment')
+					,'comment' => Df_CustomerBalance_Helper_Data::s()->__('Comment')
 				)
 			)
 		;

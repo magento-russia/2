@@ -25,5 +25,3 @@ class Df_Adminhtml_Block_Catalog_Product_Attribute_Edit_Tab_Options
 		return is_array($r0) ? $r0 : $result;
 	}
 }
-
-

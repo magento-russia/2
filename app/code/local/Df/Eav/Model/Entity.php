@@ -1,6 +1,6 @@
 <?php
 class Df_Eav_Model_Entity extends Mage_Eav_Model_Entity {
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -17,7 +17,7 @@ class Df_Eav_Model_Entity extends Mage_Eav_Model_Entity {
 	 */
 	private static function getSingletonByType($type) {
 		/** @var array(string => Df_Eav_Model_Entity) */
-		static $cache = array();
+		static $cache;
 		if (!isset($cache[$type])) {
 			$cache[$type] = self::i()->setType($type);
 		}

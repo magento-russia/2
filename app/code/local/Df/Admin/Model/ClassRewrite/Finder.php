@@ -5,20 +5,14 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Admin_Model_ClassRewrite_Collection $result */
 			$result = Df_Admin_Model_ClassRewrite_Collection::i();
-			/** @var array(string => string) $classTypeMap */
-			$classTypeMap = array(
-				'blocks' => Df_Admin_Model_ClassInfo::TYPE__BLOCK
-				,'helpers' => Df_Admin_Model_ClassInfo::TYPE__HELPER
-				,'models' => Df_Admin_Model_ClassInfo::TYPE__MODEL
-			);
 			foreach ($this->getModulesConfiguration() as $filePath => $moduleConfiguration) {
 				/** @var string $filePath */
 				/** @var Df_Varien_Simplexml_Config $moduleConfiguration */
-				/** @var Df_Varien_Simplexml_Element $xmlGlobal */
+				/** @var Df_Core_Sxe $xmlGlobal */
 				$xmlGlobal = $moduleConfiguration->getNode()->{'global'};
 				if ($xmlGlobal) {
-					foreach ($classTypeMap as $xmlKey => $classType) {
-						/** @var Df_Varien_Simplexml_Element $xmlBlocks */
+					foreach (Df_Admin_Model_ClassInfo::classTypeMap() as $xmlKey => $classType) {
+						/** @var Df_Core_Sxe $xmlBlocks */
 						$xml = $xmlGlobal->{$xmlKey};
 						if ($xml) {
 							$this->parseRewrites(
@@ -40,11 +34,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	/** @return bool */
 	private function areLocalModulesDisabled() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var string|bool $resultAsString */
-			$resultAsString = (string)Mage::app()->getConfig()->getNode('global/disable_local_modules');
-			$this->{__METHOD__} =
-				$resultAsString && in_array($resultAsString, array('1', 'true'), $strict = true)
-			;
+			$this->{__METHOD__} = rm_leaf_b(rm_config_node('global/disable_local_modules'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -55,19 +45,24 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 			/** @var array(string => Df_Varien_Simplexml_Config) $result */
 			$result = array();
 			/** @var array(string => Mage_Core_Model_Config_Element) $moduleDeclarations */
-			$moduleDeclarations = Mage::app()->getConfig()->getNode('modules')->children();
+			$moduleDeclarations = rm_config_node('modules')->children();
 			/** @var string[] $configFileBaseNames */
 			$configFileBaseNames = array('config.xml', $this->getResourceConfigFileName());
 			foreach ($moduleDeclarations as $moduleName => $moduleDeclaration) {
 				/** @var string $moduleName */
 				/** @var Mage_Core_Model_Config_Element $moduleDeclaration */
+				/**
+				 * 2015-02-06
+				 * Метод @uses Mage_Core_Model_Config_Element::is() возвращает true,
+				 * если данный узел XML $fieldConfig содержит дочерний узел с заданным именем.
+				 */
 				if (
 						$moduleDeclaration->is('active')
 					&&
 						(
 								!$this->areLocalModulesDisabled()
 							||
-								('local' !== (string)$moduleDeclaration->{'codePool'})
+								('local' !== rm_leaf_s($moduleDeclaration->{'codePool'}))
 						)
 				) {
 					foreach ($configFileBaseNames as $configFileBaseName) {
@@ -104,8 +99,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 			;
 			df_assert($resourceConnectionConfig instanceof Varien_Simplexml_Element);
 			/** @var string $resourceConfigNameSuffix */
-			$resourceConfigNameSuffix = (string)$resourceConnectionConfig->{'model'};
-			df_assert_string_not_empty($resourceConfigNameSuffix);
+			$resourceConfigNameSuffix = rm_leaf_sne($resourceConnectionConfig->{'model'});
 			$this->{__METHOD__} = sprintf('config.%s.xml', $resourceConfigNameSuffix);
 		}
 		return $this->{__METHOD__};
@@ -113,7 +107,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 
 	/**
 	 * @param Df_Admin_Model_ClassRewrite_Collection $rewrites
-	 * @param Df_Varien_Simplexml_Element $xml
+	 * @param Df_Core_Sxe $e
 	 * @param string $type
 	 * @param string $moduleName
 	 * @param string $filePath
@@ -121,46 +115,36 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	 */
 	private function parseRewrites(
 		Df_Admin_Model_ClassRewrite_Collection $rewrites
-		,Df_Varien_Simplexml_Element $xml
+		,Df_Core_Sxe $e
 		,$type
 		,$moduleName
 		,$filePath
 	) {
-		foreach ($xml->children() as $moduleNameMf => $child) {
+		foreach ($e->children() as $moduleNameMf => $child) {
 			/** @var string $moduleNameMf */
-			/** @var Df_Varien_Simplexml_Element $child */
-			/** @var Df_Varien_Simplexml_Element $xmlRewrite */
+			/** @var Df_Core_Sxe $child */
+			/** @var Df_Core_Sxe $xmlRewrite */
 			$xmlRewrite = $child->{'rewrite'};
 			if ($xmlRewrite) {
 				foreach ($xmlRewrite->children() as $originSuffixMf => $xmlDestinationClassName) {
 					/** @var string $originSuffixMf */
-					/** @var Df_Varien_Simplexml_Element $xmlDestinationClassName */
+					/** @var Df_Core_Sxe $xmlDestinationClassName */
 					/** @var string $destinationClassName */
-					$destinationClassName = (string)$xmlDestinationClassName;
+					$destinationClassName = rm_leaf_s($xmlDestinationClassName);
 					/** @var string $originClassNameMf */
 					$originClassNameMf = $moduleNameMf . '/' . $originSuffixMf;
 					/** @var Df_Admin_Model_ClassRewrite|null $rewrite */
 					$rewrite = $rewrites->getByOrigin($type, $originClassNameMf);
 					if (!$rewrite) {
-						$rewrite =
-							Df_Admin_Model_ClassRewrite::i(
-								Df_Admin_Model_ClassInfo::i(array(
-									Df_Admin_Model_ClassInfo::P__NAME_MF => $originClassNameMf
-									, Df_Admin_Model_ClassInfo::P__TYPE => $type
-								))
-							)
-						;
+						$rewrite = Df_Admin_Model_ClassRewrite::i(Df_Admin_Model_ClassInfo::i_mf(
+							$type, $originClassNameMf
+						));
 						$rewrites->addItem($rewrite);
 					}
 					if (!$rewrite->getDestinations()->getItemById($destinationClassName)) {
-						$rewrite->getDestinations()->addItem(
-							Df_Admin_Model_ClassInfo::i(array(
-								Df_Admin_Model_ClassInfo::P__CONFIG_FILE_PATH => $filePath
-								, Df_Admin_Model_ClassInfo::P__MODULE_NAME => $moduleName
-								, Df_Admin_Model_ClassInfo::P__NAME => $destinationClassName
-								, Df_Admin_Model_ClassInfo::P__TYPE => $type
-							))
-						);
+						$rewrite->getDestinations()->addItem(Df_Admin_Model_ClassInfo::i(
+							$type, $destinationClassName, $moduleName, $filePath
+						));
 					}
 				}
 			}

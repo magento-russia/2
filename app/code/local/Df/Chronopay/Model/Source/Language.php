@@ -1,10 +1,9 @@
 <?php
-class Df_Chronopay_Model_Source_Language
-{
-	/** @return array */
-	public function toOptionArray()
-	{
-		return array(
-			array('value' => 'EN', 'label' => df_h()->chronopay()->__('English')),array('value' => 'RU', 'label' => df_h()->chronopay()->__('Russian')),array('value' => 'NL', 'label' => df_h()->chronopay()->__('Dutch')),array('value' => 'DE', 'label' => df_h()->chronopay()->__('German')),);
+class Df_Chronopay_Model_Source_Language {
+	/** @return array(array(string => string|int)) */
+	public function toOptionArray() {
+		return rm_map_to_options(array(
+			'EN' => 'English', 'RU' => 'Russian', 'NL' => 'Dutch' ,'DE' => 'German'
+		), $this);
 	}
 }

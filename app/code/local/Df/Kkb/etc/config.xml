@@ -56,7 +56,7 @@
 		-->
 		<payment>
 			<df-kkb>
-				<model>df_kkb/payment</model>
+				<model>Df_Kkb_Model_Payment</model>
 			</df-kkb>
 		</payment>
 	</default>

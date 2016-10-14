@@ -8,7 +8,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 			/** @var string $result */
 			$result = $this->encodeAsSimple($this->getCategoriesInExportFormat());
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $result;
@@ -18,31 +18,15 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	 * @param mixed $data
 	 * @return  string
 	 */
-	private function encodeAsJson($data) {
-		return
-			df_text()->adjustCyrillicInJson(
-				/**
-				 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
-				 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-				 * @see Zend_Json::encode
-				 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-				 * Обратите внимание,
-				 * что расширение PHP JSON не входит в системные требования Magento.
-				 * @link http://www.magentocommerce.com/system-requirements
-				 * Поэтому использование Zend_Json::encode выглядит более правильным, чем json_encode.
-				 */
-				Zend_Json::encode($data)
-			)
-		;
-	}
+	private function encodeAsJson($data) {return rm_json_prettify(Zend_Json::encode($data));}
 
 	/**
 	 * @param array $data
 	 * @return string
 	 */
 	private function encodeAsSimple(array $data) {
-		df_param_array($data, 0);
-		return implode("\r\n,", array_map(array($this, 'encodePathAsSimple'), $data));
+		/** @uses encodePathAsSimple() */
+		return implode("\n,", array_map(array($this, 'encodePathAsSimple'), $data));
 	}
 
 	/** @return string[][] */
@@ -50,6 +34,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 		/** @var string[][] $result */
 		$result = array();
 		foreach ($this->getProduct()->getCategoryCollection() as $category) {
+			/** @var Df_Catalog_Model_Category $category */
 			$result[]= $this->getCategoryInExportFormat($category);
 		}
 		return $result;
@@ -83,15 +68,15 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	 * @return Df_Catalog_Model_Resource_Category_Collection
 	 */
 	private function getParentCategories(Df_Catalog_Model_Category $category) {
-		/** @var array $pathIds */
-		$pathIds = array_reverse(explode(',', $category->getPathInStore()));
+		/** @var int[] $pathIds */
+		$pathIds = array_reverse(df_csv_parse_int($category->getPathInStore()));
 		/** @var Df_Catalog_Model_Resource_Category_Collection $result */
-		$result = Df_Catalog_Model_Resource_Category_Collection::i();
+		$result = Df_Catalog_Model_Category::c();
 		$result
-			->setStore(Mage::app()->getStore())
+			->setStore(rm_store())
 			->addAttributeToSelect('name')
 			->addAttributeToSelect('url_key')
-			->addFieldToFilter('entity_id', array('in'=>$pathIds))
+			->addFieldToFilter('entity_id', array('in' => $pathIds))
 			->addFieldToFilter('is_active', 1)
 			->setOrder('level', 'asc')
 		;
@@ -102,14 +87,15 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by encodeAsSimple()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
+	 * http://3v4l.org/OipEQ
 	 * @param string[] $path
 	 * @return string
 	 */
 	private function encodePathAsSimple(array $path) {
-		df_param_array($path, 0);
+		/** @uses encodePathPartAsSimple() */
 		return implode('/', array_map(array($this, 'encodePathPartAsSimple'), $path));
 	}
 
@@ -117,21 +103,15 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by encodePathAsSimple()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param string $pathPart
 	 * @return string
 	 */
 	private function encodePathPartAsSimple($pathPart) {
-		df_param_string($pathPart, 0);
-		return
-			str_replace(
-				',' ,'\,'
-				,str_replace('/', '\/', $pathPart)
-			)
-		;
+		return strtr($pathPart, array('/' => '\/', ',' => '\,'));
 	}
 
 	/** @return Mage_Catalog_Model_Product */
@@ -145,7 +125,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__PRODUCT, self::P__PRODUCT_TYPE);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__PRODUCT = 'product';
 	const P__PRODUCT_TYPE = 'Mage_Catalog_Model_Product';
 	/**

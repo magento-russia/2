@@ -9,8 +9,8 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	 * @param string $file
 	 * @param string $contents
 	 * @return string
-	 * @link http://magento-forum.ru/topic/4502/
-	 * @link http://magento.stackexchange.com/questions/14973/problem-with-data-uris-and-css-file-merge
+	 * http://magento-forum.ru/topic/4502/
+	 * http://magento.stackexchange.com/questions/14973/problem-with-data-uris-and-css-file-merge
 	 */
 	public function beforeMergeCss($file, $contents) {
 		$this->_setCallbackFileDir($file);
@@ -28,6 +28,8 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	/**
 	 * Этот метод должен быть именно публичным,
 	 * потому что используется как callback сторонним классом.
+	 * @used-by getMergedJsUrl()
+	 * @used-by _mergeFiles()
 	 * @param string $file
 	 * @param string $contents
 	 * @return string
@@ -35,6 +37,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	public function beforeMergeJsRm($file, $contents) {return $contents . ';';}
 
 	/**
+	 * Перекрываем родительский метод @see Mage_Core_Model_Design_Package::getFilename() ради кэширования.
 	 * @override
 	 * @param string $file
 	 * @param array $params
@@ -56,13 +59,11 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 		$result = Df_Core_Model_Cache_Design_Package::s()->cacheGet($cacheKey);
 		if (!$result) {
 			//Mage::log('cache miss!');
-			$result =
-				$this->_fallback($file, $params, array(
-					array(),
-					array('_theme' => $this->getFallbackTheme()),
-					array('_theme' => self::DEFAULT_THEME),
-				));
-			;
+			$result = $this->_fallback($file, $params, array(
+				array(),
+				array('_theme' => $this->getFallbackTheme()),
+				array('_theme' => self::DEFAULT_THEME),
+			));
 			Df_Core_Model_Cache_Design_Package::s()->cacheSet($cacheKey, $result);
 		}
 		return $result;
@@ -75,7 +76,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	 */
 	public function getMergedJsUrl($files) {
 		/** @var string $targetFilename */
-		$targetFilename = md5(implode(',', $files)) . '.js';
+		$targetFilename = md5(df_csv($files)) . '.js';
 		/** @var string $targetDir */
 		$targetDir = $this->_initMergerDir('js');
 		/** @var string $result */
@@ -87,6 +88,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 					$files
 					, $targetDir . DS . $targetFilename
 					, false
+					/** @uses beforeMergeJsRm() */
 					, $beforeMergeCallback = array($this, 'beforeMergeJsRm')
 					, 'js'
 				)
@@ -98,8 +100,8 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 
 	/**
 	 * @override
-	 * @param string $file
-	 * @param array $params
+	 * @param string|null $file [optional]
+	 * @param array(string => mixed) $params [optional]
 	 * @return string
 	 */
 	public function getSkinUrl($file = null, array $params = array()) {
@@ -110,29 +112,27 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 			 * Обратите внимание, что для ресурсов из папки js мы добавляем параметр v по-другому:
 			 * в методе Df_Page_Block_Html_Head::_prepareStaticAndSkinElements
 			 */
-			$result = df()->url()->addVersionStamp($result);
+			$result = df_url()->addVersionStamp($result);
 		}
 		else {
 			/** @var bool */
 			static $isRunningCustomSolution;
-			if (!isset($isRunningCustomSolution)) {
+			if (is_null($isRunningCustomSolution)) {
 				$isRunningCustomSolution =
-						Df_Core_Model_Design_Package::s()->isCustom()
-					&&
-						Df_Core_Model_Design_Package::s()->hasConfiguration()
+					Df_Core_Model_Design_Package::s()->isCustom()
+					&& Df_Core_Model_Design_Package::s()->hasConfiguration()
 				;
 			}
 			if ($isRunningCustomSolution) {
 				/** @var string $packageUrlPart */
 				static $packageUrlPart;
 				if (!isset($packageUrlPart)) {
-					$packageUrlPart = rm_sprintf('/%s/', Df_Core_Model_Design_Package::s()->getName());
+					$packageUrlPart = sprintf('/%s/', Df_Core_Model_Design_Package::s()->getName());
 				}
 				if (rm_contains($result, $packageUrlPart)) {
-					$result =
-						df()->url()
-							->addVersionStamp($result, Df_Core_Model_Design_Package::s()->getVersion())
-					;
+					$result = df_url()->addVersionStamp(
+						$result, Df_Core_Model_Design_Package::s()->getVersion()
+					);
 				}
 			}
 		}
@@ -182,7 +182,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 				 * Российская сборка Magento во время работы установочного скрипта
 				 * еще не инициализирована, и работа установочного скрипта завершалась сбоем:
 				 * «Call to undefined function df_a()»
-				 * @link http://magento-forum.ru/topic/3779/
+				 * http://magento-forum.ru/topic/3779/
 				 */
 				'_package' => isset($params['_package']) ? $params['_package'] : null
 				,'_theme' => isset($params['_theme']) ? $params['_theme'] : null

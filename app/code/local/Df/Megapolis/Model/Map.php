@@ -1,5 +1,5 @@
 <?php
-class Df_Megapolis_Model_Map extends Df_Core_Model_DestructableSingleton {
+class Df_Megapolis_Model_Map extends Df_Core_Model {
 	/**
 	 * @param string $cityName
 	 * @return array(string => Df_Megapolis_Model_Location[])
@@ -13,11 +13,12 @@ class Df_Megapolis_Model_Map extends Df_Core_Model_DestructableSingleton {
 		return $this->{__METHOD__}[$cityName];
 	}
 
-	/**             
+	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobalObjects()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getByCity');}
+	protected function cachedGlobalObjects() {return self::m(__CLASS__, 'getByCity');}
 
 	/**
 	 * @param string $cityName
@@ -46,14 +47,11 @@ class Df_Megapolis_Model_Map extends Df_Core_Model_DestructableSingleton {
 			 */
 			if ($responseAsText) {
 				/** @var string $responseAsJson */
-				$responseAsJson =
-					rm_sprintf(
-						'[%s]'
-						,implode("\n,", explode("\n", strtr($responseAsText, array('=>' => ':'))))
-					)
-				;
+				$responseAsJson = rm_sprintf('[%s]', implode("\n" . ',',
+					df_explode_n(strtr($responseAsText, array('=>' => ':'))))
+				);
 				/** @var string[] $responseAsArray */
-				$responseAsArray = df_json_decode($responseAsJson);
+				$responseAsArray = Zend_Json::decode($responseAsJson);
 				df_assert_array($responseAsArray);
 				foreach ($responseAsArray as $locationAsArray) {
 					/** @var array(string => string|int|null) $locationAsArray */
@@ -62,14 +60,14 @@ class Df_Megapolis_Model_Map extends Df_Core_Model_DestructableSingleton {
 				}
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			Mage::logException($e);
 			throw $e;
 		}
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Megapolis_Model_Map */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

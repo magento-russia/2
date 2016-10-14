@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Robokassa>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>ROBOKASSA</title>
+			<version>1.0.0</version>
 		</Df_Robokassa>
 	</modules>
 	<global>
@@ -52,7 +53,7 @@
 		-->
 		<payment>
 			<df-robokassa>
-				<model>df_robokassa/payment</model>
+				<model>Df_Robokassa_Model_Payment</model>
 			</df-robokassa>
 		</payment>
 	</default>

@@ -1,6 +1,16 @@
 <?php
 /**
+ * @method int|null getCustomerId()
  * @method Df_CustomerBalance_Model_Resource_Balance getResource()
+ * @method int|null getWebsiteId()
+ * @method bool hasWebsiteId()
+ * @method Df_CustomerBalance_Model_Balance setAmountDelta(float $value)
+ * @method Df_CustomerBalance_Model_Balance setComment(string $value)
+ * @method Df_CustomerBalance_Model_Balance setCustomer(Mage_Customer_Model_Customer $value)
+ * @method Df_CustomerBalance_Model_Balance setCustomerId(int $value)
+ * @method Df_CustomerBalance_Model_Balance setHistoryAction(int $value)
+ * @method Df_CustomerBalance_Model_Balance setOrder(Df_Sales_Model_Order $value)
+ * @method Df_CustomerBalance_Model_Balance setWebsiteId(int $value)
  */
 class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	/**
@@ -32,22 +42,29 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	}
 
 	/**
+	 * @override
+	 * @return Df_CustomerBalance_Model_Resource_Balance_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
 	 * Check whether balance completely covers specified quote
-	 * @param Mage_Sales_Model_Quote $quote
+	 * @param Mage_Sales_Model_Quote|Df_Sales_Model_Quote $quote
 	 * @param bool $isEstimation [optional]
 	 * @return bool
 	 */
 	public function isFullAmountCovered(Mage_Sales_Model_Quote $quote, $isEstimation = false) {
-		if (!$isEstimation && !$quote->getUseCustomerBalance()) {
-			return false;
-		}
 		return
-				$this->getAmount()
-			>=
+				($isEstimation || $quote->getUseCustomerBalance())
+			&&
 				(
-						(float)$quote->getBaseGrandTotal()
-				 	+
-						(float)$quote->getBaseCustomerBalanceAmountUsed()
+						$this->getAmount()
+					>=
+						(
+								(float)$quote->getBaseGrandTotal()
+							+
+								(float)$quote->getBaseCustomerBalanceAmountUsed()
+						)
 				)
 		;
 	}
@@ -65,9 +82,9 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 		}
 		else {
 			if (df_is_admin()) {
-				Mage::throwException(df_h()->customer()->balance()->__('Website ID must be set.'));
+				Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Website ID must be set.'));
 			}
-			$websiteId = Mage::app()->getStore()->getWebsiteId();
+			$websiteId = rm_website_id();
 		}
 		$this->getResource()->loadByCustomerAndWebsiteIds($this, $this->getCustomerId(), $websiteId);
 		return $this;
@@ -95,20 +112,11 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 		$this->setData('notify_by_email', $shouldNotify);
 		if ($shouldNotify) {
 			if (null === $storeId) {
-				Mage::throwException(df_h()->customer()->balance()->__('Set Store ID as well.'));
+				Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Set Store ID as well.'));
 			}
 			$this->setStoreId($storeId);
 		}
 		return $this;
-	}
-
-	/**
-	 * @deprecated after 1.3.2.3
-	 * @param Mage_Customer_Model_Customer $customer
-	 * @return bool
-	 */
-	public function shouldCustomerHaveOneBalance($customer) {
-		return false;
 	}
 
 	/**
@@ -133,14 +141,9 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	 */
 	protected function _beforeSave() {
 		$this->_ensureCustomer();
-		// make sure appropriate website was set. Admin website is disallowed
-		if ((!$this->hasWebsiteId()) && $this->shouldCustomerHaveOneBalance($this->getCustomer())) {
-			$this->setWebsiteId($this->getCustomer()->getWebsiteId());
-		}
 		if (0 == $this->getWebsiteId()) {
-			Mage::throwException(df_h()->customer()->balance()->__('Website ID must be set.'));
+			Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Website ID must be set.'));
 		}
-
 		// check history action
 		if (!$this->getId()) {
 			$this->loadByCustomer();
@@ -158,7 +161,7 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 			$this->setNotifyByEmail(false);
 		}
 		if ($this->getNotifyByEmail() && !$this->hasStoreId()) {
-			Mage::throwException(df_h()->customer()->balance()->__('In order to send email notification, the Store ID must be set.'));
+			Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('In order to send email notification, the Store ID must be set.'));
 		}
 		return parent::_beforeSave();
 	}
@@ -172,15 +175,21 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 			$this->setCustomerId($this->getCustomer()->getId());
 		}
 		if (!$this->getCustomerId()) {
-			Mage::throwException(df_h()->customer()->balance()->__('Customer ID must be specified.'));
+			Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Customer ID must be specified.'));
 		}
 		if (!$this->getCustomer()) {
 			$this->setCustomer(Df_Customer_Model_Customer::ld($this->getCustomerId()));
 		}
 		if (!$this->getCustomer()->getId()) {
-			Mage::throwException(df_h()->customer()->balance()->__('Customer is not set or does not exist.'));
+			Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Customer is not set or does not exist.'));
 		}
 	}
+
+	/**
+	 * @override
+	 * @return Df_CustomerBalance_Model_Resource_Balance
+	 */
+	protected function _getResource() {return Df_CustomerBalance_Model_Resource_Balance::s();}
 
 	/**
 	 * Validate & adjust amount change
@@ -209,27 +218,19 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 		return $result;
 	}
 
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_CustomerBalance_Model_Resource_Balance::mf());
-	}
-
-	/** @var Mage_Customer_Model_Customer */
+	/** @var Df_Customer_Model_Customer */
 	protected $_customer;
 	/** @var string */
 	protected $_eventPrefix = 'customer_balance';
 	/** @var string */
 	protected $_eventObject = 'balance';
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_CustomerBalance_Model_Resource_Balance_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__ID = 'balance_id';
 
 	/** @return Df_CustomerBalance_Model_Resource_Balance_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_CustomerBalance_Model_Resource_Balance_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -243,11 +244,6 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	 * @return Df_CustomerBalance_Model_Balance
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_CustomerBalance_Model_Resource_Balance_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_CustomerBalance_Model_Balance */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -13,11 +13,8 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 	public function isApplicableToTheCurrentPage() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					df_enabled(Df_Core_Feature::CMS_2)
-				&&
-					df_cfg()->cms()->hierarchy()->isEnabled()
-				&&
-					rm_bool($this->getNodeMenuParam('enabled'))
+				df_cfg()->cms()->hierarchy()->isEnabled()
+				&& rm_bool($this->getNodeMenuParam('enabled'))
 			;
 		}
 		return $this->{__METHOD__};
@@ -109,9 +106,13 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__NODE, Df_Cms_Model_Hierarchy_Node::_CLASS);
+		$this->_prop(self::P__NODE, Df_Cms_Model_Hierarchy_Node::_C);
 	}
-	const _CLASS = __CLASS__;
+	/**
+	 * @used-by Df_Cms_Model_ContentsMenu::_construct()
+	 * @used-by Df_Cms_Model_ContentsMenu_Applicator_Collection::itemClass()
+	 */
+	const _C = __CLASS__;
 	const P__NODE = 'node';
 	/**
 	 * @static

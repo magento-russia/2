@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Mage_Core_Model_Mysql4_Collection_Abstract {
+abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Df_Core_Model_Resource_Collection {
 	/**
 	 * Array of admin users in loaded collection
 	 * @var array
@@ -23,16 +23,13 @@ abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Mage_Core_
 	 * @param mixed $page
 	 * @return Df_Cms_Model_Resource_Page_Collection_Abstract
 	 */
-	public function addPageFilter($page)
-	{
+	public function addPageFilter($page) {
 		if ($page instanceof Mage_Cms_Model_Page) {
 			$page = $page->getId();
 		}
-
 		if (is_array($page)) {
 			$page = array('in' => $page);
 		}
-
 		$this->addFieldToFilter('page_id', $page);
 		return $this;
 	}
@@ -49,20 +46,20 @@ abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Mage_Core_
 		$_condition = array();
 		if (is_array($userId)) {
 			$_condition[]= $this->_getConditionSql(
-				$this->_getMappedField('user_id'), array('in' => $userId));
-		} else if ($userId){
-			$_condition[]= $this->_getConditionSql(
-				$this->_getMappedField('user_id'), $userId);
+				$this->_getMappedField('user_id'), array('in' => $userId)
+			);
 		}
-
+		else if ($userId) {
+			$_condition[]= $this->_getConditionSql($this->_getMappedField('user_id'), $userId);
+		}
 		if (is_array($accessLevel)) {
 			$_condition[]= $this->_getConditionSql(
-				$this->_getMappedField('access_level'), array('in' => $accessLevel));
-		} else {
-			$_condition[]= $this->_getConditionSql(
-				$this->_getMappedField('access_level'), $accessLevel);
+				$this->_getMappedField('access_level'), array('in' => $accessLevel)
+			);
 		}
-
+		else {
+			$_condition[]= $this->_getConditionSql($this->_getMappedField('access_level'), $accessLevel);
+		}
 		$this->getSelect()->where(implode(' OR ', $_condition));
 		return $this;
 	}
@@ -114,7 +111,8 @@ abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Mage_Core_
 					} else {
 						$this->_usersHash[$username] = $username;
 					}
-				} else {
+				}
+				else {
 					$this->_usersHash['-1'] = df_h()->cms()->__('[No Owner]');
 				}
 			}

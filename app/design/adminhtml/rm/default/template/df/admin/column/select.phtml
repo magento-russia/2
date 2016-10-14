@@ -1,0 +1,14 @@
+<?php /** @var Df_Admin_Block_Column_Select $this */ ?>
+<?php
+	/** @var string $columnName */
+	$columnName = rm_ejs($this->getColumn()->getName());
+	/** синтаксис шаблонов Prototype: http://api.prototypejs.org/language/Template/ */
+?>
+<script type='text/javascript'>
+	(function($) {$(function() {
+		var $row = $(document.getElementById('#{_id}'));
+		var $select = $('.<?php echo $columnName; ?>', $row);
+		$select.val('#{<?php echo $columnName; ?>}');
+		$select.select2(<?php echo rm_ejs($this->getRenderOptions()); ?>);
+	});})(jQuery);
+</script>

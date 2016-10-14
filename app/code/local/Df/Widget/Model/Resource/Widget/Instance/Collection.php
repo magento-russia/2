@@ -15,6 +15,12 @@ class Df_Widget_Model_Resource_Widget_Instance_Collection
 	}
 
 	/**
+	 * @override
+	 * @return Df_Widget_Model_Resource_Widget_Instance
+	 */
+	public function getResource() {return Df_Widget_Model_Resource_Widget_Instance::s();}
+
+	/**
 	 * @param string|null $paramName [optional]
 	 * @return mixed
 	 */
@@ -49,13 +55,10 @@ class Df_Widget_Model_Resource_Widget_Instance_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Widget_Model_Widget_Instance::mf(), Df_Widget_Model_Resource_Widget_Instance::mf());
-	}
+	protected function _construct() {$this->_itemObjectClass = Df_Widget_Model_Widget_Instance::_C;}
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @var string */
 	private static $P__FOR_UPDATING = 'for_updating';
 

@@ -3,15 +3,11 @@ class Df_Sms_Helper_Data extends Mage_Core_Helper_Abstract {
 	/**
 	 * @param string $receiver
 	 * @param string $message
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_Sms_Helper_Data
 	 */
-	public function send($receiver, $message, Mage_Core_Model_Store $store) {
-		if (
-				df_cfg()->sms()->general()->isEnabled($store)
-			&&
-				df_enabled(Df_Core_Feature::SMS, $store)
-		) {
+	public function send($receiver, $message, Df_Core_Model_StoreM $store) {
+		if (df_cfg()->sms()->general()->isEnabled($store)) {
 			/** @var Df_Sms_Model_Gate $gate */
 			$gate =
 				df_model(
@@ -34,7 +30,7 @@ class Df_Sms_Helper_Data extends Mage_Core_Helper_Abstract {
 		return $this;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Sms_Helper_Data */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

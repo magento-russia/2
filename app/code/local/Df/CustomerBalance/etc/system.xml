@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<balance translate='label' module='df_customerbalance'>
+				<balance>
 					<label>Личный счёт</label>
 					<comment>
 						<![CDATA[
@@ -27,7 +27,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -36,10 +36,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>0</show_in_website>
 							<show_in_store>0</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-customer-balance</df_feature>
 						</enabled>
-						<show_history translate='label'>
+						<show_history>
 							<label>Показывать ли покупателю движения по счёту?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -51,7 +51,7 @@
 								<enabled>1</enabled>
 							</depends>							
 						</show_history>
-						<email_identity translate='label'>
+						<email_identity>
 							<label>Отправитель писем-оповещений покупателям об изменении личного баланса счёта</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_email_identity</source_model>
@@ -63,7 +63,7 @@
 								<enabled>1</enabled>
 							</depends>							
 						</email_identity>
-						<email_template translate='label'>
+						<email_template>
 							<label>Шаблон письма-оповещения покупателям об изменении баланса личного счёта</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_email_template</source_model>
@@ -83,7 +83,7 @@
 			<groups>
 				<totals_sort>
 					<fields>
-						<customerbalance module='df_customerbalance' translate='label'>
+						<customerbalance module='df_customerbalance'>
 							<label>Баланс личного счёта</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>6</sort_order>

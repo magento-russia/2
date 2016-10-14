@@ -1,14 +1,7 @@
 <?php
 class Df_Tweaks_Helper_Data extends Mage_Core_Helper_Abstract {
-	/** @return Df_Tweaks_Helper_Config */
-	public function config() {
-		return Df_Tweaks_Helper_Config::s();
-	}
-
 	/** @return Df_Tweaks_Helper_Customer */
-	public function customer() {
-		return Df_Tweaks_Helper_Customer::s();
-	}
+	public function customer() {return Df_Tweaks_Helper_Customer::s();}
 
 	/** @return bool */
 	public function isItCatalogProductList() {

@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_CatalogRule>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_CatalogRule>
 	</modules>
 	<global>
@@ -17,12 +17,12 @@
 						устранение дефекта Magento CE 1.8:
 						ценовые правила для каталога с условиями, основанными на товарных свойствах
 						с глобальной областью доступности, работают неправильно.
-						@link https://www.google.com/search?q=Magento+1.8+rule+not+working
-						@link http://stackoverflow.com/a/19976036
-						@link https://bitbucket.org/gferon/magento-1.8-catalogrule-fix/
-						@link http://www.magentocommerce.com/bug-tracking/issue?issue=15936
-						@link http://www.magentocommerce.com/bug-tracking/issue?issue=15896
-						@link http://www.magentocommerce.com/bug-tracking/issue?issue=15075
+						https://www.google.com/search?q=Magento+1.8+rule+not+working
+						http://stackoverflow.com/a/19976036
+						https://bitbucket.org/gferon/magento-1.8-catalogrule-fix/
+						http://www.magentocommerce.com/bug-tracking/issue?issue=15936
+						http://www.magentocommerce.com/bug-tracking/issue?issue=15896
+						http://www.magentocommerce.com/bug-tracking/issue?issue=15075
 					-->
 					<rule_condition_product>Df_CatalogRule_Model_Rule_Condition_Product</rule_condition_product>
 				</rewrite>

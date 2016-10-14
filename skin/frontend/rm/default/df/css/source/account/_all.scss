@@ -1,8 +1,17 @@
+body.customer-account-create {
+	.account-create{
+		/**
+			2015-02-01
+			Скрываем избыточный заголовок
+			«Please enter the following information to create your account.»
+		*/
+		p.form-instructions {display: none};
+	}
+}
+
 .customer-account-edit {
 	/** Скрываем избыточный заголовок «Edit Account Information» */
-	h2.legend {
-		display: none;
-	}
+	h2.legend {display: none;}
 }
 
 .wishlist-index-index {

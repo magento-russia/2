@@ -34,7 +34,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				('ru_RU' === $localeCode)
 			&&
 				(
-						Df_Localization_Model_Settings::s()->email()->isEnabled()
+						Df_Localization_Settings::s()->email()->isEnabled()
 					||
 						rm_contains($file, 'df' . DS)
 				)
@@ -43,7 +43,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		}
 		// КОНЕЦ ЗАПЛАТКИ
 		/** @var string $filePath */
-		$filePath =
+		$filePath = 
 			$this->getTemplateFilePathForLocale(
 				$localeCode
 				,$fileType = $type
@@ -57,7 +57,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 					$localeCode = Mage::app()->getLocale()->getDefaultLocale()
 					,$fileType = $type
 					,$fileName = $file
-				)
+				)				
 			;
 		}
 		if (!file_exists($filePath)) {
@@ -67,7 +67,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 					$localeCode = Mage_Core_Model_Locale::DEFAULT_LOCALE
 					,$fileType = $type
 					,$fileName = $file
-				)
+				)					
 			;
 		}
 		/** @var Varien_Io_File $ioAdapter */
@@ -96,15 +96,15 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	}
 
 	/**
-	 * 2015-03-10
+	 * 2015-03-10    
 	 * Работает быстрее, чем @see Mage_Core_Model_Transtale::translate()
-	 * Не поддерживает дополнительные параметры переводимой строки,
+	 * Не поддерживает дополнительные параметры переводимой строки, 
 	 * а также @see Df_Localization_Realtime_Translator.
-	 *
+	 *  
 	 * @see Df_Localization_Realtime_Translator мы не применяем из-за кэширования:
 	 * его результат зависит от контекста (в частности, текущего блока),
 	 * и мы бы не смогли здесь кэшировать результат.
-	 *
+	 *  
 	 * Если нужна поддержка @see Df_Localization_Realtime_Translator
 	 * и параметров переводимой строки , то используйте @see translateFast()
 	 * @used-by rm_translate_simple()
@@ -121,10 +121,10 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		return $this->{__METHOD__}[$code];
 	}
 
-	/**
-	 * 2015-03-15
-	 * Работает быстрее, чем @see Mage_Core_Model_Transtale::translate()
-	 * Отличается от @see translateSimple() поддержкой параметров переводимой строки
+	/**    
+	 * 2015-03-15              
+	 * Работает быстрее, чем @see Mage_Core_Model_Transtale::translate() 
+	 * Отличается от @see translateSimple() поддержкой параметров переводимой строки 
 	 * и @see
 	 * @used-by rm_translate()
 	 * @param string $text
@@ -165,12 +165,12 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				 * метод @uses Df_Localization_Settings_Area::allowInterference() возвращает NULL.
 				 * http://magento-forum.ru/topic/3703/
 				 */
-				$allowInterferenceAsString = Df_Admin_Model_Config_Source_YesNoDev::VALUE__DEVELOPER_MODE;
+				$allowInterferenceAsString = Df_Admin_Config_Source_YesNoDev::DEVELOPER_MODE;
 			}
 			$allowInterference =
 				!Mage::getIsDeveloperMode()
-				? (Df_Admin_Model_Config_Source_YesNoDev::VALUE__NO !== $allowInterferenceAsString)
-				: (Df_Admin_Model_Config_Source_YesNoDev::VALUE__YES === $allowInterferenceAsString)
+				? (Df_Admin_Config_Source_YesNoDev::NO !== $allowInterferenceAsString)
+				: (Df_Admin_Config_Source_YesNoDev::YES === $allowInterferenceAsString)
 			;
 		}
 		foreach ($data as $key => $value) {
@@ -354,7 +354,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * которые использовали интерактивный перевод до установки Российской сборки Magento.
 		 *
 		 * Замечение №2
-		 * Заметил ещё одну проблему вы описанной выше ситуации:
+		 * Заметил ещё одну проблему Вы описанной выше ситуации:
 		 * получается, что перевод Российской сборки
 		 * перекрывает инлайновый перевод, сделанный до установки РСМ,
 		 * потому что код перевода РСМ начинается с Df_,
@@ -440,14 +440,14 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			 * @uses Df_Localization_Realtime_Translator::isEnabled()
 			 */
 			$needUseRmTranslator =
-				Mage::isInstalled() && Df_Localization_Model_Realtime_Translator::s()->isEnabled()
+				Mage::isInstalled() && Df_Localization_Realtime_Translator::s()->isEnabled()
 			;
 		}
 		if ($needUseRmTranslator) {
-			/** @var Df_Localization_Model_Realtime_Translator */
+			/** @var Df_Localization_Realtime_Translator */
 			static $rmTranslator;
 			if (!$rmTranslator) {
-				$rmTranslator = Df_Localization_Model_Realtime_Translator::s();
+				$rmTranslator = Df_Localization_Realtime_Translator::s();
 			}
 			$result = $rmTranslator->translate($text, $code);
 			if ((is_null($result) || $text === $result) && $originalCode) {
@@ -496,11 +496,11 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			}
 		}
 		if (
-			Df_Localization_Model_Realtime_Translator::$watched
+			Df_Localization_Realtime_Translator::$watched
 			&& (
-				Df_Localization_Model_Realtime_Translator::$needle
-				&& rm_contains_ci($text, Df_Localization_Model_Realtime_Translator::$watched)
-				|| $text === Df_Localization_Model_Realtime_Translator::$watched
+				Df_Localization_Realtime_Translator::$needle
+				&& rm_contains_ci($text, Df_Localization_Realtime_Translator::$watched)
+				|| $text === Df_Localization_Realtime_Translator::$watched
 			)
 		) {
 			Mage::log('text: ' . $text);

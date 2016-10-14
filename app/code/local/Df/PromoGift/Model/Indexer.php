@@ -1,24 +1,18 @@
 <?php
-/**
- * @method Df_PromoGift_Model_Resource_Indexer getResource()
- */
+/** @method Df_PromoGift_Model_Resource_Indexer getResource() */
 class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 	/**
 	 * Карта событий, которые будет обрабатывать данный класс.
 	 * Данный свойство перекрывает одноимённый свойство родителя.
-	 * Родитель использует данный свойство в методе Mage_Index_Model_Indexer_Abstract::matchEvent()
-	 * @var array
+	 * Родитель использует данный свойство в методе @see Mage_Index_Model_Indexer_Abstract::matchEvent()
+	 * Пока мы скопировали данную карту из класса @see Mage_Catalog_Model_Product_Indexer_Flat
+	 * @var array(string => mixed)
 	 */
 	protected $_matchedEntities =
-		/**
-		 * Пока мы скопировали данную карту из класса Mage_Catalog_Model_Product_Indexer_Flat
-		 */
 		array(
-			Df_SalesRule_Const::RULE_ENTITY =>
+			Df_SalesRule_Model_Rule::ENTITY =>
 				array(
-					/**
-					 * Это сообщение приходит после сохранения ценового правила для корзины.
-					 */
+					// Это сообщение приходит после сохранения ценового правила для корзины.
 					Mage_Index_Model_Event::TYPE_SAVE
 				)
 			,Mage_Catalog_Model_Product::ENTITY =>
@@ -83,17 +77,19 @@ class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 	 * Get Indexer name
 	 * @return string
 	 */
-	public function getName() {
-		return df_h()->promoGift()->__(Df_PromoGift_Const::T_PROMO_GIFTS);
-	}
+	public function getName() {return 'Промо-подарки';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getDescription() {
-		return df_h()->promoGift()->__(Df_PromoGift_Const::T_INDEXER_DESCRIPTION);
-	}
+	public function getDescription() {return 'хранит товары-подарки для каждой промо-акции';}
+
+	/**
+	 * @override
+	 * @return Df_PromoGift_Model_Resource_Indexer
+	 */
+	protected function _getResource() {return Df_PromoGift_Model_Resource_Indexer::s();}
 
 	/**
 	 * Register indexer required data inside event object
@@ -157,16 +153,13 @@ class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 		 */
 		try {
 			if (
-					df_enabled(Df_Core_Feature::PROMO_GIFT)
-				&&
-					df_module_enabled(Df_Core_Module::PROMO_GIFT)
-				&&
-					df_cfg()->promotion()->gifts()->getEnabled()
+				df_module_enabled(Df_Core_Module::PROMO_GIFT)
+				&& df_cfg()->promotion()->gifts()->getEnabled()
 			) {
 				/** @var string $entityType */
 				$entityType = $event->getEntity();
 				/** @var mixed $entity */
-				$entity = $event[Df_Index_Const::EVENT_PARAM__DATA_OBJECT];
+				$entity = $event['data_object'];
 				/** @var string $eventType */
 				$eventType = $event->getType();
 				if (Mage_Core_Model_Website::ENTITY === $entityType) {
@@ -180,7 +173,7 @@ class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 						 $this->getResource()->reindexWebsite($entity);
 					}
 				}
-				else if (Df_SalesRule_Const::RULE_ENTITY === $entityType) {
+				else if (Df_SalesRule_Model_Rule::ENTITY === $entityType) {
 					if (Mage_Index_Model_Event::TYPE_SAVE === $eventType) {
 						/**
 						 * Было создано новое ценовое правило, или же изменились параметры созданного ранее.
@@ -214,19 +207,13 @@ class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 						if (!is_null($entity)) {
 							df_assert($entity instanceof Varien_Object);
 							/** @var Varien_Object $entity */
-							/**
-							 * $productIds — это идентификаторы обновлённых товаров.
-							 */
+							// $productIds — это идентификаторы обновлённых товаров
 							$productIds = $entity['product_ids'];
 							/** @var array $productIds */
 							df_assert(is_array($productIds));
-							$collection
-								->addAttributeToFilter(
-									'entity_id'
-									,array(
-										Df_Varien_Const::IN => $productIds
-									)
-							);
+							$collection->addAttributeToFilter('entity_id', array(
+								Df_Varien_Const::IN => $productIds
+							));
 						}
 						foreach ($collection as $product) {
 							/** @var Df_Catalog_Model_Product $product */
@@ -246,16 +233,8 @@ class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 				}
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
-	}
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_PromoGift_Model_Resource_Indexer::mf());
 	}
 }

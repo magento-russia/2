@@ -2,39 +2,11 @@
 <config>
 	<modules>
 		<Df_Speed>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Ускорение Magento</title>
+			<version>1.0.0</version>
 		</Df_Speed>
 	</modules>
-	<global>
-		<blocks><df_speed><class>Df_Speed_Block</class></df_speed></blocks>
-		<helpers><df_speed><class>Df_Speed_Helper</class></df_speed></helpers>
-		<models><df_speed><class>Df_Speed_Model</class></df_speed></models>
-		<events>
-			<controller_front_init_before>
-				<observers>
-					<df_speed__controller_front_init_before>
-						<class>df_speed/dispatcher</class>
-						<method>controller_front_init_before</method>
-					</df_speed__controller_front_init_before>
-				</observers>
-			</controller_front_init_before>
-		</events>
-	</global>
-	<frontend>
-		<translate>
-			<modules>
-				<Df_Speed><files><default>Df_Speed.csv</default></files></Df_Speed>
-			</modules>
-		</translate>
-	</frontend>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Speed><files><default>Df_Speed.csv</default></files></Df_Speed>
-			</modules>
-		</translate>
-	</adminhtml>
 	<df>
 		<features>
 			<df-speed>
@@ -44,6 +16,35 @@
 			</df-speed>
 		</features>
 	</df>
+	<global>
+		<blocks><df_speed><class>Df_Speed_Block</class></df_speed></blocks>
+		<helpers><df_speed><class>Df_Speed_Helper</class></df_speed></helpers>
+		<models><df_speed><class>Df_Speed_Model</class></df_speed></models>
+		<events>
+			<controller_front_init_before>
+				<observers>
+					<Df_Speed>
+						<class>Df_Speed_Observer</class>
+						<method>controller_front_init_before</method>
+					</Df_Speed>
+				</observers>
+			</controller_front_init_before>
+		</events>
+	</global>
+	<frontend>
+		<translate>
+			<modules>
+				<Df_Speed><files><default>Df/Speed.csv</default></files></Df_Speed>
+			</modules>
+		</translate>
+	</frontend>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Df_Speed><files><default>Df/Speed.csv</default></files></Df_Speed>
+			</modules>
+		</translate>
+	</adminhtml>
 	<default>
 		<df_speed>
 			<block_caching>
@@ -62,6 +63,7 @@
 				<disable_logging_last_visit_time>1</disable_logging_last_visit_time>
 				<disable_visitor_logging>0</disable_visitor_logging>
 				<enable_assertions>1</enable_assertions>
+				<enable_php_scripts_load_checking>0</enable_php_scripts_load_checking>
 				<enable_zend_date_caching>0</enable_zend_date_caching>
 			</general>
 		</df_speed>

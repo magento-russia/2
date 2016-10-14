@@ -24,56 +24,38 @@ body.df-theme-templatemela-mega-shop {
 	, .order-info-box h2
 	, .sales-order-print .col2-set h2
 	, .dashboard .box-info h4
-	, #footer .block-subscribe .block-title strong
-	{
-		/* Оформительская тема устанавливает text-transform: capitalize; */
+	, #footer .block-subscribe .block-title strong {
+		// оформительская тема устанавливает «text-transform: capitalize»
 	    text-transform: none;
 	}
 	.custom_menu {
-		a {
-			/* Почему-то оформительская тема этого не делает */
-			cursor: pointer;
-		}
+		// почему-то оформительская тема этого не делает
+		a {cursor: pointer;}
 	}
 	.df {
 		.df-checkout-ergonomic {
-			.tm-hide {
-				/**
-					Оформительская тема устанавливает opacity: 0
-					и использует это для скрытия стандартных радиокнопок
-					и заметы их на картинки.
-					Однако это замена не проходит удачно, и радиокнопки пропадают вовсе.
-				*/
-				opacity: initial;
-			}
+			// Оформительская тема устанавливает «opacity: 0»
+			// и использует это для скрытия стандартных радиокнопок и заметы их на картинки.
+			// Однако это замена не проходит удачно, и радиокнопки пропадают вовсе.
+			.tm-hide {opacity: initial;}
 		}
 	}
 	#footer {
 		.block-subscribe {
 			.block-title {
-				strong {
-					/* Оформительская тема устанавливает text-transform: capitalize; */
-					text-transform: lowercase;
-				}
+				// оформительская тема устанавливает «text-transform: capitalize»
+				strong {text-transform: lowercase;}
 			}
-			input.input-text{
-				/*
-					Оформительская тема устанавливает width: 274px;
-					и тогда не помещается в том же ряду кнопка «подписаться».
-				*/
-				width: 254px;
-			}
+			// Оформительская тема устанавливает «width: 274px»
+			// и тогда не помещается в том же ряду кнопка «подписаться».
+			input.input-text {width: 254px;}
 		}
 	}
 	.fancybox-wrap.df-fancybox {
 		.fancybox-inner {
-			#df-login.account-login {
-				/**
-					Почему то стандартное width:auto работает неправильно.
-					Лень разбираться сейчас.
-				*/
-				width: 266px;
-			}
+			// Почему то стандартное «width:auto» работает неправильно.
+			// Лень разбираться сейчас.
+			#df-login.account-login {width: 266px;}
 		}
 	}
 }

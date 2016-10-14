@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Megapolis>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>МЕГАПОЛИС</title>
+			<version>1.0.0</version>
 		</Df_Megapolis>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-megapolis>
 				<active>0</active>
-				<model>df_megapolis/carrier</model>
+				<model>Df_Megapolis_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

@@ -1,6 +1,12 @@
 <?php
 class Df_Invitation_Block_Customer_Form_Register extends Mage_Customer_Block_Form_Register {
 	/**
+	 * Retrieve customer invitation
+	 * @return Df_Invitation_Model_Invitation
+	 */
+	public function getCustomerInvitation() {return Mage::registry('current_invitation');}
+
+	/**
 	 * Retrieve form data
 	 * @return Varien_Object
 	 */
@@ -26,20 +32,5 @@ class Df_Invitation_Block_Customer_Form_Register extends Mage_Customer_Block_For
 	 * Retrieve form posting url
 	 * @return string
 	 */
-	public function getPostActionUrl()
-	{
-		return $this->getUrl('*/*/createpost', array('_current'=>true));
-	}
-
-	/**
-	 * Retrieve customer invitation
-	 * @return Df_Invitation_Model_Invitation
-	 */
-	public function getCustomerInvitation()
-	{
-		return Mage::registry('current_invitation');
-	}
-
-	/** @return Df_Invitation_Block_Customer_Form_Register */
-	public static function i() {return df_block(__CLASS__);}
+	public function getPostActionUrl() {return $this->getUrl('*/*/createpost', array('_current'=>true));}
 }

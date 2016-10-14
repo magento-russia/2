@@ -6,11 +6,11 @@ class Df_Seo_Model_Template_Property_Product_Price extends Df_Seo_Model_Template
 			/**
 			 * Раньше тут стояло strip_tags($this->getProduct()->getFormatedPrice()),
 			 * что работало неправильно при отличии учетной валюты от витринной:
-			 * @link http://magento-forum.ru/topic/3699/
+			 * http://magento-forum.ru/topic/3699/
 			 */
 			Mage_Core_Helper_Data::currency(
 				$value =
-					df_mage()->taxHelper()->getPrice(
+					rm_tax_h()->getPrice(
 						$product = $this->getProduct()
 						/**
 						 * Обратите внимание,
@@ -19,7 +19,7 @@ class Df_Seo_Model_Template_Property_Product_Price extends Df_Seo_Model_Template
 						 * или @see Mage_Catalog_Model_Product_Type_Price::getBasePrice()
 						 * вместо @see Mage_Catalog_Model_Product::getPrice(),
 						 * чтобы учитывать скидки, специальные цены и т.п.
-						 * @link http://magento-forum.ru/topic/3705/
+						 * http://magento-forum.ru/topic/3705/
 						 */
 						,$price = $this->getProduct()->getCompositeFinalPriceWithTax()
 					)
@@ -30,5 +30,5 @@ class Df_Seo_Model_Template_Property_Product_Price extends Df_Seo_Model_Template
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

@@ -1,8 +1,17 @@
 <?php
 class Df_Core_Model_Cache extends Df_Core_Model {
-	/** @return Df_Core_Model_Cache */
+	/**
+	 * @used-by rm_eav_reset()
+	 * @return Df_Core_Model_Cache
+	 */
 	public function clean() {
 		$this->getCache()->clean($this->getTags());
+		/**
+		 * 2015-08-10
+		 * Централизованный сброс кэша оперативной памяти.
+		 * Это особенно важно в сценарии @used-by rm_eav_reset()
+		 */
+		$this->ramReset();
 		return $this;
 	}
 
@@ -34,8 +43,8 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 * поэтому для простых массивов (массивов, не содержащих объекты),
 	 * используйте методы @see saveDataArray() / @see loadDataArray()
 	 * вместо @see saveDataComplex() / @see loadDataComplex().
-	 * @link http://stackoverflow.com/a/7723730
-	 * @link http://stackoverflow.com/a/804053
+	 * http://stackoverflow.com/a/7723730
+	 * http://stackoverflow.com/a/804053
 	 * @param string $key
 	 * @return mixed[]|bool
 	 */
@@ -47,14 +56,14 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 			$serialized = $this->loadData($key);
 			if (false !== $serialized) {
 				/**
-				 * @see Zend_Json::decode() использует json_decode при наличии расширения PHP JSON
+				 * @see df_json_decode() использует json_decode при наличии расширения PHP JSON
 				 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-				 * @see Zend_Json::decode
-				 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
+				 * @see df_json_decode
+				 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
 				 * Обратите внимание,
 				 * что расширение PHP JSON не входит в системные требования Magento.
-				 * @link http://www.magentocommerce.com/system-requirements
-				 * Поэтому использование @see Zend_Json::decode выглядит более правильным,
+				 * http://www.magentocommerce.com/system-requirements
+				 * Поэтому использование @see df_json_decode выглядит более правильным,
 				 * чем @see json_decode().
 				 *
 				 * Обратите внимание, что при использовании @see json_decode() напрямую
@@ -62,14 +71,14 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 				 * иначе @see json_decode() может вернуть объект даже в том случае,
 				 * когда посредством @see json_encode() был кодирован массив.
 				 *
-				 * При использовании @see Zend_Json::decode()
+				 * При использовании @see df_json_decode()
 				 * второй параметр $objectDecodeType имеет значение Zend_Json::TYPE_ARRAY по умолчанию,
 				 * поэтому его можно не указывать.
 				 *
-				 * $result = Zend_Json::decode($serialized);
+				 * $result = df_json_decode($serialized);
 				 *
-				 * P.S. Оно, конечно, правильнее, но @see json_decode() работает заметно быстрее,
-				 * чем обёртка @see Zend_Json::decode()
+				 * P.S. Оно, конечно, правильнее, но @uses json_decode() работает заметно быстрее,
+				 * чем обёртка @see df_json_decode()
 				 */
 				$result = rm_unserialize_simple($serialized);
 				if (!is_array($result)) {
@@ -98,6 +107,58 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	}
 
 	/**
+	 * 2015-08-11
+	 * @used-by p()
+	 * @param string $key
+	 * @param bool $complex [optional]
+	 * @return mixed|bool
+	 */
+	public function loadDataGeneric($key, $complex = false) {
+		return $complex ? $this->loadDataComplex($key) : $this->loadDataArray($key);
+	}
+
+	/**
+	 * 2015-08-10
+	 * Этот метод значительно упрощает двуступенчатое кэширование.
+	 * @used-by rm_eav_cache()
+	 * @param object|null $object
+	 * @param string $function
+	 * @param string|string[]|null|array(string => mixed) $params [optional]
+	 * @param bool $complex [optional]
+	 * @param bool $ramOnly [optional]
+	 * @return mixed|false
+	 */
+	public function p($object, $function, $params = null, $complex = false, $ramOnly = false) {
+		/** @var bool $paramsIsArray */
+		$paramsIsArray = is_array($params);
+		/** @var bool $paramsIsAssoc */
+		$paramsIsAssoc = $paramsIsArray && rm_is_assoc($params);
+		/** @var string|string[]|null $cacheKeyParams */
+		$cacheKeyParams = !$paramsIsAssoc ? $params : array_keys($params);
+		/** @var string $key */
+		$key = $this->makeKey($object ? array($object, $function) : $function, $cacheKeyParams);
+		/** @var mixed|false $result */
+		$result = $this->ramGet($key);
+		if (false === $result) {
+			if (!$ramOnly) {
+				$result = $this->loadDataGeneric($key, $complex);
+			}
+			if (false === $result) {
+				$params = is_null($params) ? array() : (!$paramsIsArray ? array($params) : $params);
+				$function .= '_';
+				/** @var callable $callback */
+				$callback = $object ? array($object, $function) : $function;
+				$result = call_user_func_array($callback, $params);
+				if (!$ramOnly) {
+					$this->saveDataGeneric($key, $result, $complex);
+				}
+			}
+			$this->ramSet($key, $result);
+		}
+		return $result;
+	}
+
+	/**
 	 * @param string|array(object, string) $method
 	 * @param string|string[]|null $params [optional]
 	 * @return string
@@ -120,17 +181,16 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 			$function = rm_last($method);
 			$method = implode('::', array(get_class($object), $function));
 		}
-		df_param_string_not_empty($method, 0);
 		/** @var string[] $keyParts */
 		$keyParts = array();
 		if ($this->getType()) {
 			$keyParts[]= $this->getType();
 		}
 		$keyParts[]= $method;
-		$keyParts[]= Mage::app()->getStore()->getCode();
+		$keyParts[]= rm_store()->getCode();
 		if ($params) {
 			if (!is_array($params)) {
-				$keyParts []= $params;
+				$keyParts[]= $params;
 			}
 			else {
 				$keyParts = array_merge($keyParts, $params);
@@ -143,10 +203,27 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		 * то русские буквы и недопустимые символы будут заменены на символ «_»,
 		 * и имя файла будет выглядеть как «mage---b26_DF_LOCALIZATION_MODEL_MORPHER________».
 		 * Чтобы избавиться от русских букв и других недопустимых символов
-		 * при сохранении уникальности ключа, испольузем функцию @see md5().
+		 * при сохранении уникальности ключа, используем функцию @гыуы md5().
 		 */
 		return md5(implode('::', $keyParts));
 	}
+
+	/**
+	 * 2015-08-10
+	 * В случае отсутствия значения в кэше возвращаем не null, а false
+	 * ради согласованности с долгосрочным кэшем.
+	 * @param string $key
+	 * @return mixed|bool
+	 */
+	public function ramGet($key) {return df_a($this->_ram, $key, false);}
+
+	/**
+	 * 2015-08-10
+	 * @param string $key
+	 * @param mixed $value
+	 * @return void
+	 */
+	public function ramSet($key, $value) {$this->_ram[$key] = $value;}
 
 	/**
 	 * @param string $key
@@ -171,8 +248,8 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 * поэтому для простых массивов (массивов, не содержащих объекты),
 	 * используйте методы @see saveDataArray() / @see loadDataArray()
 	 * вместо @see saveDataComplex() / @see loadDataComplex().
-	 * @link http://stackoverflow.com/a/7723730
-	 * @link http://stackoverflow.com/a/804053
+	 * http://stackoverflow.com/a/7723730
+	 * http://stackoverflow.com/a/804053
 	 * @param string $key
 	 * @param mixed[] $value
 	 * @return void
@@ -180,18 +257,19 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	public function saveDataArray($key, array $value) {
 		if ($this->isEnabled()) {
 			/**
-			 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
+			 * @see Zend_Json::encode() использует
+			 * @see json_encode() при наличии расширения PHP JSON
 			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * @see Zend_Json::encode
-			 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
+			 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
 			 * Обратите внимание,
 			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * @link http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование Zend_Json::encode выглядит более правильным, чем json_encode.
+			 * http://www.magentocommerce.com/system-requirements
+			 * Поэтому использование @see Zend_Json::encode()
+			 * выглядит более правильным, чем @see json_encode().
 			 *
 			 * $this->saveData($key, Zend_Json::encode($value));
 			 *
-			 * P.S. Оно, конечно, правильнее, но @see json_encode() работает заметно быстрее,
+			 * P.S. Оно, конечно, правильнее, но @uses json_encode() работает заметно быстрее,
 			 * чем обёртка @see Zend_Json::encode()
 			 */
 			$this->saveData($key, rm_serialize_simple($value));
@@ -209,19 +287,25 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		}
 	}
 
-	/** @return Mage_Core_Model_Cache */
-	protected function getCache() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::app()->getCacheInstance();
-		}
-		return $this->{__METHOD__};
+	/**
+	 * @used-by p()
+	 * @param string $key
+	 * @param mixed $value
+	 * @param bool $complex [optional]
+	 * @return void
+	 */
+	public function saveDataGeneric($key, $value, $complex = false) {
+		$complex ? $this->saveDataComplex($key, $value) : $this->saveDataArray($key, $value);
 	}
+
+	/** @return Mage_Core_Model_Cache */
+	protected function getCache() {return rm_cache();}
 
 	/**
 	 * 2015-12-09
 	 * Обратите внимание,
-	 * что мы намерернно используем @uses array_key_exists() вместо
-	 * потому чтов нашем случае null является полноценным значением и означает «кэшировать вечно»,
+	 * что мы намерернно используем @uses array_key_exists() вместо @see df_a()
+	 * потому что в нашем случае null является полноценным значением и означает «кэшировать вечно»,
 	 * в то время как значение по умолчанию — «кэшировать на время, заданное в настройках ядра».
 	 * @return int|bool|null
 	 */
@@ -238,7 +322,25 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	}
 
 	/** @return string */
-	protected function getType() {return $this->cfg(self::P__TYPE);}
+	protected function getType() {return $this[self::$P__TYPE];}
+
+	/**
+	 * 2015-08-10
+	 * @return void
+	 */
+	protected function ramReset() {$this->_ram = array();}
+
+	/**
+	 * 2015-08-10
+	 * Централизованный кэш в оперативной памяти.
+	 * Централизация кэша позволяет нам централизованно его сбрасывать:
+	 * в частности, в случае @see rm_eav_reset()
+	 * @used-by ramGet()
+	 * @used-by ramReset()
+	 * @used-by ramSet()
+	 * @var array(string => mixed)
+	 */
+	private $_ram = array();
 
 	/**
 	 * @override
@@ -247,18 +349,18 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__TAGS, self::V_ARRAY)
-			->_prop(self::P__TYPE, self::V_STRING)
+			->_prop(self::P__TAGS, RM_V_ARRAY)
+			->_prop(self::$P__TYPE, RM_V_STRING)
 		;
 	}
 	/**
-	 * Zend Framework для обозначения безличитного кэширования использует значение null:
+	 * Zend Framework для обозначения безлимитного кэширования использует значение null:
 	 * @see Zend_Cache_Backend_Interface::save()
 	 *
 	 * Обратите внимание (это лишь напоминание, к классу @see Df_Core_Model_Cache отношения не имеет),
 	 * что при кэшировании блоков посредством встроенного в @see Mage_Core_Block_Abstract алгоритма
 	 * значение null почему-то имеет прямо противоположное значение запрет на кэширование блока:
-	 * @see Mage_Core_Block_Abstract::_loadCache().
+	 * @used-by Mage_Core_Block_Abstract::_loadCache().
 	 */
 	const LIFETIME_INFINITE = null;
 	/**
@@ -284,7 +386,8 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	const LIFETIME_STANDARD = false;
 	const P__LIFETIME = 'lifetime';
 	const P__TAGS = 'tags';
-	const P__TYPE = 'type';
+	/** @var string */
+	private static $P__TYPE = 'type';
 
 	/**
 	 * @param string|null $type [optional]
@@ -330,14 +433,13 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		if ($infinite) {
 			$lifetime = self::LIFETIME_INFINITE;
 		}
-		if (!$tags) {
-			$tags = $type ? array($type) : array();
-		}
-		else if (!is_array($tags)) {
-			$tags = array($tags);
-		}
+		$tags =
+			$tags
+		 	? rm_array($tags)
+			: ($type ? array($type) : array())
+		;
 		return new self(array(
-			self::P__TYPE => $type, self::P__LIFETIME => $lifetime, self::P__TAGS => $tags
+			self::$P__TYPE => $type, self::P__LIFETIME => $lifetime, self::P__TAGS => $tags
 		));
 	}
 }

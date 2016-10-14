@@ -4,34 +4,23 @@ class Df_Garantpost_Model_Method_Heavy_Ground extends Df_Garantpost_Model_Method
 	 * @override
 	 * @return string
 	 */
-	public function getMethod() {
-		return self::METHOD;
-	}
+	public function getMethod() {return 'heavy-ground';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getMethodTitle() {
-		return 'наземная:';
-	}
+	public function getMethodTitle() {return 'наземная:';}
 
 	/**
 	 * @abstract
 	 * @return string
 	 */
-	protected function getLocationDestinationSuffix() {
-		return 'авто';
-	}
+	protected function getLocationDestinationSuffix() {return 'авто';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getTitleBase() {
-		return 'тяжёлый груз, наземным транспортом';
-	}
-
-	const _CLASS = __CLASS__;
-	const METHOD = 'heavy-ground';
+	protected function getTitleBase() {return 'тяжёлый груз, наземным транспортом';}
 }

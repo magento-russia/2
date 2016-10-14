@@ -1,17 +1,41 @@
 <?php
-/** Родительский класс — именно @see Mage_Catalog_Model_Resource_Eav_Attribute даже в Magento CE 1.4 */
+/**
+ * Родительский класс — именно @see Mage_Catalog_Model_Resource_Eav_Attribute даже в Magento CE 1.4
+ * @method string|null getFrontendInput()
+ * @method bool|null getIsRequired()
+ * @method string|null getNote()
+ * @method bool hasAttributeSetInfo()
+ */
 class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resource_Eav_Attribute {
+	/** @return string|null */
+	public function get1CId() {return $this->_getData(Df_1C_Const::ENTITY_EXTERNAL_ID);}
+
 	/**
-	 * @param Mage_Core_Model_Store|null $store
+	 * 2015-01-24
+	 * Обратите внимание, что этот метод возвращает опции
+	 * только для тех свойств, чьи опции перечислены на вкладке «Опции»
+	 * административного экрана свойства.
+	 * У таких свойств поле «source_model» «имеет значение eav/entity_attribute_source_table»
+	 * Его же возвращает и метод @see getSourceModel()
+	 *
+	 * Однако есть и другие свойства (например, «Страна производства» [country_of_manufacture]),
+	 * у которых вкладка «Опции» — пустая,
+	 * а перечень значений берётся каким-нибудь нестандартным способом,
+	 * запрограммированным классом указанным в поле «source_model».
+	 * В частности, у свойства «Страна производства» [country_of_manufacture]
+	 * поле «source_model» имеет значение «catalog/product_attribute_source_countryofmanufacture»,
+	 * и опции берутся из справочника стран.
+	 * Для таких опций наш метод @see getOptions() неприменим.
+	 *
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store  [optional]
 	 * @return Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 	 */
 	public function getOptions($store = null) {
-		if (!$store) {
-			$store = Mage::app()->getStore($this->getStoreId());
-		}
+		$store = rm_store(is_null($store) ? $this->getStoreId() : $store);
 		if (!isset($this->_options[$store->getId()])) {
 			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $result */
-			$result = Df_Eav_Model_Resource_Entity_Attribute_Option_Collection::i();
+			$result = Df_Eav_Model_Entity_Attribute_Option::c();
+			$result->setPositionOrder('asc');
 			$result->setAttributeFilter($this->getId());
 			$result->setStoreFilter($store->getId());
 			Df_Varien_Data_Collection::unsetDataChanges($result);
@@ -19,57 +43,83 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 		}
 		return $this->_options[$store->getId()];
 	}
-	/** @var array(int => Df_Eav_Model_Resource_Entity_Attribute_Option_Collection) */
-	private $_options = array();
+
+	/**
+	 * @override
+	 * @return Df_Catalog_Model_Resource_Product_Attribute_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * По аналогии с @see Df_Catalog_Model_Product::getTitle()
+	 * @return string
+	 */
+	public function getTitle() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = strtr('«{label}» [{code}]', array(
+				'{label}' => $this->getFrontendLabel(), '{code}' => $this->getName()
+			));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @param string|string[] $type
+	 * @return bool
+	 */
+	public function isApplicableToProductSystemType($type) {
+		/** @var bool $result */
+		/** @var string[] $applyTo */
+		$applyTo = $this->getApplyTo();
+		return !$applyTo || array_intersect($applyTo, rm_array($type));
+	}
 	
 	/**
 	 * @param string $attributeCode
 	 * @param string|string[] $options
-	 * @return Mage_Catalog_Model_Resource_Eav_Attribute
+	 * @return Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	public static function addOptions($attributeCode, $options) {
-		if (!is_array($options)) {
-			$options = array($options);
-		}
-		/** @var Mage_Catalog_Model_Resource_Eav_Attribute $result */
-		$result = df()->registry()->attributes()->findByCode($attributeCode);
-		/** @var array(string => mixed) $attributeData */
-		$attributeData =
-			array_merge(
-				$result->getData()
-				,array(
-					'option' =>
-						Df_Eav_Model_Entity_Attribute_Option_Calculator
-							::calculateStatic(
-								$result
-								,$options
-								,$isModeInsert = true
-								,$caseInsensitive = true
-							)
+		/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+		$attribute = rm_attributes()->findByCode($attributeCode);
+		return rm_attributes()->createOrUpdate(
+			array_merge($attribute->getData(), array('option' =>
+				Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
+					$attribute, rm_array($options), $isModeInsert = true, $caseInsensitive = true
 				)
-			)
-		;
-		$result = df()->registry()->attributes()->findByCodeOrCreate($attributeCode, $attributeData);
-		return $result;
+			))
+		);
 	}
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Catalog_Model_Resource_Attribute
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Catalog_Model_Resource_Attribute::mf());
-	}
+	/** @noinspection PhpHierarchyChecksInspection */
+	protected function _getResource() {return Df_Catalog_Model_Resource_Attribute::s();}
 
-	const _CLASS = __CLASS__;
+	/** @var array(int => Df_Eav_Model_Resource_Entity_Attribute_Option_Collection) */
+	private $_options = array();
+
+	/**
+	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real::_construct()
+	 * @used-by Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty::_construct()
+	 * @used-by Df_Catalog_Model_Resource_Product_Attribute_Collection::_construct()
+	 * @used-by Df_Dataflow_Model_Registry_Collection_Attributes::getEntityClass()
+	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Attribute::getEntityClass()
+	 */
+	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return string */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
+	/** @return Df_Catalog_Model_Resource_Product_Attribute_Collection */
+	public static function c() {return new Df_Catalog_Model_Resource_Product_Attribute_Collection;}
 }
 

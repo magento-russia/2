@@ -2,18 +2,19 @@
 class Df_YandexMarket_Block_GetAddress extends Df_Core_Block_Template {
 	/** @return string */
 	public function getRedirectUrl() {
-		return
-			rm_sprintf(
-				'http://market.yandex.ru/addresses.xml?callback=%s'
-				,rawurlencode(Mage::getUrl('df-yandex-market/address/'))
-			)
-		;
+		return df_concat(
+			'http://market.yandex.ru/addresses.xml?callback='
+			,rawurlencode(Mage::getUrl('df-yandex-market/address/'))
+		);
 	}
+
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/yandex_market/getAddress.phtml';}
+	protected function defaultTemplate() {return 'df/yandex_market/getAddress.phtml';}
 
 	/**
 	 * @override
@@ -21,12 +22,8 @@ class Df_YandexMarket_Block_GetAddress extends Df_Core_Block_Template {
 	 */
 	protected function needToShow() {
 		return
-				df_enabled(Df_Core_Feature::YANDEX_MARKET)
-			&&
-				df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
-			&&
-				!df_mage()->customer()->isLoggedIn()
+			df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
+			&& !rm_customer_logged_in()
 		;
 	}
-	const _CLASS = __CLASS__;
 }

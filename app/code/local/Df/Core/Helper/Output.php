@@ -4,22 +4,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	 * @param string $text
 	 * @return string
 	 */
-	public function _($text) {return df_escape($text);}
-
-	/**
-	 * @param bool $boolean
-	 * @return string
-	 */
-	public function convertBooleanToString($boolean) {return $boolean ? 'true' : 'false';}
-
-	/**
-	 * @param bool $boolean
-	 * @return string
-	 */
-	public function convertBooleanToStringRussian($boolean) {return $boolean ? 'да' : 'нет';}
-
-	/** @return Df_Core_Helper_Output_Element */
-	public function element() {return Df_Core_Helper_Output_Element::s();}
+	public function _($text) {return rm_e($text);}
 
 	/**
 	 * @param string $string
@@ -54,7 +39,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	public function getCssClassesAsString(array $cssClasses) {return implode(' ', $cssClasses);}
 
 	/** @return string */
-	public function getXmlHeader() {return '<'.'?xml version="1.0" encoding="UTF-8"?'.'>'."\r\n";}
+	public function getXmlHeader() {return '<'.'?xml version="1.0" encoding="UTF-8"?'.'>'."\n";}
 
 	/**
 	 * @param mixed[] $data
@@ -65,8 +50,8 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @param string $string
-	 * @param string $delimiter[optional]
+	 * @param string|null $string
+	 * @param string $delimiter [optional]
 	 * @return string[]
 	 */
 	public function parseCsv($string, $delimiter = ',') {
@@ -74,42 +59,9 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * Преобразует текст
-			Array
-			(
-				[pattern_id] => p2p
-				[to] => 41001260130727
-				[identifier_type] => account
-				[amount] => 0.01
-				[comment] => Оплата заказа №100000099 в магазине localhost.com.
-				[message] =>
-				[label] => localhost.com
-			)
-	 * в текст:
-		[pattern_id] => p2p
-		[to] => 41001260130727
-		[identifier_type] => account
-		[amount] => 0.01
-		[comment] => Оплата заказа №100000099 в магазине localhost.com.
-		[message] =>
-		[label] => localhost.com
-	 *
-	 * @param array(string => string) $params
-	 * @return mixed
-	 */
-	public function printParams(array $params) {
-		return df_text()->removeLeadingSpacesMultiline(
-			df_trim_text_right(
-				df_trim_text_left(print_r($params, $result = true), "Array\n(\n")
-				,")\n"
-			)
-			, 4
-		);
-	}
-
-	/**
-	 * Пребразует строку вида 'превед [[медвед]]'
-	 * в 'превед <a href="http://yandex.ru">медвед</a>'
+	 * Пребразует строку вида «превед [[медвед]]» в «превед <a href="http://yandex.ru">медвед</a>».
+	 * @used-by Df_Admin_Model_Notifier::getMessage()
+	 * @used-by Df_Admin_Model_Notifier_Settings::getMessage()
 	 * @param string $text
 	 * @param string $url
 	 * @param string $quote [optional]
@@ -119,15 +71,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 		return
 			!rm_contains($text, '[[')
 			? $text
-			: preg_replace(
-				"#\[\[([^\]]+)\]\]#u"
-				, rm_tag_a(array(
-					Df_Core_Model_Output_Html_A::P__HREF => $url
-					,Df_Core_Model_Output_Html_A::P__ANCHOR => '$1'
-					,Df_Core_Model_Output_Html_A::P__QUOTE => $quote
-				))
-				, $text
-			)
+			: preg_replace("#\[\[([^\]]+)\]\]#u", rm_tag('a', array('href' => $url), '$1'), $text)
 		;
 	}
 
@@ -157,8 +101,8 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 			$result = 0;
 			/**
 			 * Использование кавычек обязательно!
-			 * @link http://php.net/manual/en/function.defined.php (пример 1)
-			 * @link http://magento-forum.ru/topic/4190/
+			 * http://php.net/manual/function.defined.php (пример 1)
+			 * http://magento-forum.ru/topic/4190/
 			 */
 			if (defined('JSON_FORCE_OBJECT')) {
 				$result |= JSON_FORCE_OBJECT;

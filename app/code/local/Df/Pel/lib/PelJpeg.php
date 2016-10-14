@@ -567,4 +567,4 @@ class PelJpeg {
 		return $d->getByte($i) == PelJpegMarker::SOI;
   }
 
-}?>
+}

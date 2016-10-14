@@ -23,8 +23,9 @@ class Df_Reward_Block_Tooltip extends Df_Core_Block_Template_NoCache {
 			$customer = rm_session_customer()->getCustomer();
 			$this->_rewardInstance = Df_Reward_Model_Reward::s()
 				->setCustomer($customer)
-				->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-				->loadByCustomer();
+				->setWebsiteId(rm_website_id())
+				->loadByCustomer()
+			;
 			$this->_actionInstance = $this->_rewardInstance->getActionInstance($action, true);
 		}
 	}
@@ -33,12 +34,11 @@ class Df_Reward_Block_Tooltip extends Df_Core_Block_Template_NoCache {
 	 * Getter for amount customer may be rewarded for current action
 	 * Can format as currency
 	 *
-	 * @param float $amount
-	 * @param bool $asCurrency
+	 * @param float|null $amount [optional]
+	 * @param bool $asCurrency [optional]
 	 * @return string|null
 	 */
-	public function getRewardAmount($amount = null, $asCurrency = false)
-	{
+	public function getRewardAmount($amount = null, $asCurrency = false) {
 		$amount = null === $amount ? $this->_getData('reward_amount') : $amount;
 		return df_h()->reward()->formatAmount($amount, $asCurrency);
 	}
@@ -85,11 +85,12 @@ class Df_Reward_Block_Tooltip extends Df_Core_Block_Template_NoCache {
 	}
 
 	/**
-	 * Check whether everything is set for output
+	 * @override
+	 * @see Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
-	protected function _toHtml()
-	{
+	protected function _toHtml() {
 		$this->_prepareTemplateData();
 		if (!$this->_actionInstance || !$this->getRewardPoints() || $this->hasQtyLimit() && !$this->getQtyLimit()) {
 			return '';

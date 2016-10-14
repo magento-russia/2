@@ -9,7 +9,7 @@
 			<adminhtml_cms_hierarchy_index>
 				<action>view</action>
 				<expected_models />
-				<post_dispatch>Df_Cms_Model_Observer::postDispatchCmsHierachyView</post_dispatch>
+				<post_dispatch>Df_Cms_Observer::adminhtml_cms_hierarchy_index</post_dispatch>
 			</adminhtml_cms_hierarchy_index>
 			<adminhtml_cms_hierarchy_save>
 				<action>save</action>
@@ -64,7 +64,7 @@
 			<adminhtml_cms_page_revision_preview>
 				<action>preview</action>
 				<expected_models />
-				<post_dispatch>Df_Cms_Model_Observer::postDispatchCmsRevisionPreview</post_dispatch>
+				<post_dispatch>Df_Cms_Observer::adminhtml_cms_page_revision_preview</post_dispatch>
 			</adminhtml_cms_page_revision_preview>
 			<adminhtml_cms_page_revision_save>
 				<action>save</action>

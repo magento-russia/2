@@ -26,7 +26,7 @@
 		$html .= '<td class="value">';
 		$html .= $this->_getElementHtml($element);
  */
-class Df_Catalog_Block_Admin_Conditions extends Df_Adminhtml_Block_System_Config_Form_Field {
+class Df_Catalog_Block_Admin_Conditions extends Df_Adminhtml_Block_Config_Form_Field {
 	/**
 	 * @override
 	 * @param Varien_Data_Form_Element_Abstract $element
@@ -35,7 +35,7 @@ class Df_Catalog_Block_Admin_Conditions extends Df_Adminhtml_Block_System_Config
 	protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element) {
 		return df_concat(
 		   Df_Catalog_Model_Field_Conditions::i($element, $this)->getHtml()
-			, rm_sprintf('<input type="hidden" value="0" name="%s"/>', $element->getData('name'))
+			, sprintf('<input type="hidden" value="0" name="%s"/>', $element->getData('name'))
 		);
 	}
 }

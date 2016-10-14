@@ -49,50 +49,33 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	/** @return string */
 	private function getRequestBody() {
 		Mage::log($this->getRequestBodyAsSimpleXmlElement()->asXml());
-		return rm_string_clean($this->getRequestBodyAsSimpleXmlElement()->asXml(), "\r\n");
+		return df_t()->removeLineBreaks($this->getRequestBodyAsSimpleXmlElement()->asXml());
 	}
 
 	/** @return mixed[] */
 	private function getRequestBodyAsArray() {
 		/** @var mixed[] $result */
-		$result =
-			array(
-				'security' =>
-					array(
-						'token' =>
-							array(
-								Df_Varien_Simplexml_Element::KEY__ATTRIBUTES =>
-									array('value' => $this->getToken())
-							)
-					)
-				,'message' =>
-					array(
-						Df_Varien_Simplexml_Element::KEY__ATTRIBUTES => array('type' => 'sms')
-						,Df_Varien_Simplexml_Element::KEY__VALUE =>
-							array(
-								'sender' => $this->getSenderName()
-								,'abonent' =>
-									array(
-										Df_Varien_Simplexml_Element::KEY__ATTRIBUTES =>
-											array('phone' => $this->getMessage()->getReceiver())
-									)
-								,'text' =>
-									strtr(
-										$this->getMessage()->getBody()
-										,array(
-											"\r\n" => '/n'
-											,"\r" => '/n'
-											,"\n" => '/n'
-										)
-									)
-							)
-					)
+		$result = array(
+			'security' => array('token' => array(Df_Core_Sxe::ATTR => array('value' => $this->getToken())))
+			,'message' => array(
+				Df_Core_Sxe::ATTR => array('type' => 'sms')
+				,Df_Core_Sxe::CONTENT => array(
+					'sender' => $this->getSenderName()
+					,'abonent' => array(Df_Core_Sxe::ATTR => array(
+						'phone' => $this->getMessage()->getReceiver()
+					))
+					,'text' => strtr($this->getMessage()->getBody(), array(
+						"\r\n" => '/n'
+						,"\r" => '/n'
+						,"\n" => '/n'
+					))
+				)
 			)
-		;
+		);
 		return $result;
 	}
 	
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getRequestBodyAsSimpleXmlElement() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
@@ -107,9 +90,10 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	}
 
 	/** @return string */
-	private function getToken() {return df_cfg()->sms()->sms16ru()->getToken($this->getStore());}
+	private function getToken() {return df_cfg()->sms()->sms16ru()->getToken($this->store());}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Sms_Model_Settings_General::getGateClass() */
+	const _C = __CLASS__;
 	const RM__ID = 'sms16.ru';
 	/**
 	 * @static

@@ -1,9 +1,7 @@
 body.df-theme-templatemonster-41220 {
 	.footer {
 		.block-subscribe {
-			#newsletter {
-				text-transform: none;
-			}
+			#newsletter {text-transform: none;}
 		}
 	}
 	.df {
@@ -16,11 +14,7 @@ body.df-theme-templatemonster-41220 {
 	}
 	button.btn-checkout {
 		span {
-			span {
-				padding:{
-					top: 5px;
-				}
-			}
+			span {padding-top: 5px;}
 		}
 	}
 }

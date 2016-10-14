@@ -4,6 +4,12 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	public function getLabel() {return $this->_getData(self::P__LABEL);}
 
 	/**
+	 * @override
+	 * @return Df_Sales_Model_Resource_Order_Status_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
 	 * @param string $value
 	 * @return Df_Sales_Model_Order_Status
 	 */
@@ -15,15 +21,12 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Sales_Model_Resource_Order_Status
 	 */
-	protected function _construct() {
-		parent::_construct();
-		if (!self::isOldInterface()) {
-			$this->_init(Df_Sales_Model_Resource_Order_Status::mf());
-		}
-	}
-	const _CLASS = __CLASS__;
+	protected function _getResource() {return Df_Sales_Model_Resource_Order_Status::s();}
+
+	/** @used-by Df_Sales_Model_Resource_Order_Status_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__LABEL = 'label';
 
 	/** @return Df_Sales_Model_Resource_Order_Status_Collection */
@@ -35,7 +38,7 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 				." либо обратиться в службу поддежки Российской сборки Magento."
 			);
 		}
-		return self::s()->getCollection();
+		return new Df_Sales_Model_Resource_Order_Status_Collection;
 	}
 	/**
 	 * @static
@@ -43,11 +46,6 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	 * @return Df_Sales_Model_Order_Status
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/**
-	 * @see Df_Sales_Model_Resource_Order_Status_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Sales_Model_Order_Status */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
@@ -56,11 +54,8 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	 * @return bool
 	 */
 	private static function isOldInterface() {
-		/** @var bool $result */
-		static $result;
-		if (!isset($result)) {
-			$result = !@class_exists('Mage_Sales_Model_Mysql4_Order_Status');
-		}
-		return $result;
+		static $r; return !is_null($r) ? $r : $r =
+			!@class_exists('Mage_Sales_Model_Mysql4_Order_Status')
+		;
 	}
 }

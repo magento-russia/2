@@ -3,6 +3,12 @@
  * @method Df_Logging_Model_Resource_Event getResource()
  */
 class Df_Logging_Model_Event extends Df_Core_Model {
+	/**
+	 * @override
+	 * @return Df_Logging_Model_Resource_Event_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
 	/** @return bool */
 	public function hasChanges() {
 		return $this->getId() && !!$this->getResource()->getEventChangeIds($this->getId());
@@ -27,19 +33,18 @@ class Df_Logging_Model_Event extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Logging_Model_Resource_Event
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Logging_Model_Resource_Event::mf());
-	}
-	const _CLASS = __CLASS__;
+	protected function _getResource() {return Df_Logging_Model_Resource_Event::s();}
+
+	/** @used-by Df_Logging_Model_Resource_Event_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__ID = 'log_id';
 	const RESULT_SUCCESS = 'success';
 	const RESULT_FAILURE = 'failure';
 
 	/** @return Df_Logging_Model_Resource_Event_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Logging_Model_Resource_Event_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -53,11 +58,6 @@ class Df_Logging_Model_Event extends Df_Core_Model {
 	 * @return Df_Logging_Model_Event
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Logging_Model_Resource_Event_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Logging_Model_Event */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

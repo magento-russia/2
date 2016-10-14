@@ -6,8 +6,8 @@ class Df_Chronopay_Model_Settings_Gateway extends Df_Core_Model_Settings {
 	}
 	/**
 	 * @static
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_Chronopay_Model_Settings_Gateway
 	 */
-	public static function i(Mage_Core_Model_Store $store) {return new self(array(self::P__STORE => $store));}
+	public static function i(Df_Core_Model_StoreM $store) {return new self(array(self::P__STORE => $store));}
 }

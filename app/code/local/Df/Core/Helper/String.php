@@ -16,7 +16,8 @@
  * @see Mage_Catalog_Block_Product_View::_prepareLayout():
  * $headBlock->setDescription(Mage::helper('core/string')->substr($product->getDescription(), 0, 255));
  *
- * Оказалось, что вызов @see Mage_Core_Helper_String::substr() на сервере Debian в тысячи раз медленнее,
+ * Оказалось, что вызов @see Mage_Core_Helper_String::substr()
+ * на сервере Debian в тысячи раз медленнее,
  * чем тот же вызов на локальном веб-сервере с Windows.
  * Причина тормозов: на Unix-подобном сервере
  * функции PHP iconv_* по умолчанию реализованы через библиотеку glibc

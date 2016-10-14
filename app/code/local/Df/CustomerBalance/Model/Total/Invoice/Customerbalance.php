@@ -8,7 +8,7 @@ class Df_CustomerBalance_Model_Total_Invoice_Customerbalance extends Mage_Sales_
 	 */
 	public function collect(Mage_Sales_Model_Order_Invoice $invoice)
 	{
-		if (!df_h()->customer()->balance()->isEnabled()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled()) {
 			return $this;
 		}
 		$order = $invoice->getOrder();

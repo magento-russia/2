@@ -1,6 +1,6 @@
 <?php
 class Df_Chronopay_Model_Gate_Exception extends Mage_Core_Exception {
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @var array */
 	private $_params;
 

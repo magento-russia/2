@@ -1,6 +1,10 @@
 <?php
 class Df_Qiwi_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
-	/** @return string */
+	/**
+	 * @used-by Df_Qiwi_Block_Form::getQiwiCustomerPhone()
+	 * @used-by Df_Qiwi_Model_Request_Payment::::getQiwiCustomerPhone()
+	 * @return string
+	 */
 	public function getQiwiCustomerPhone() {
 		return rm_concat_clean(''
 			,$this->getInfoInstance()->getAdditionalInformation(

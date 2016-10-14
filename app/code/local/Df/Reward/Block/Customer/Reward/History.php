@@ -88,18 +88,15 @@ class Df_Reward_Block_Customer_Reward_History extends Df_Core_Block_Template_NoC
 	 * Return reword points update history collection by customer and website
 	 * @return Df_Reward_Model_Resource_Reward_History_Collection
 	 */
-	protected function _getCollection()
-	{
+	protected function _getCollection() {
 		if (!$this->_collection) {
-			$websiteId = Mage::app()->getWebsite()->getId();
-			$this->_collection =
-				Df_Reward_Model_Resource_Reward_History_Collection::i()
-					->addCustomerFilter(rm_session_customer()->getCustomerId())
-					->addWebsiteFilter($websiteId)
-					->setExpiryConfig(df_h()->reward()->getExpiryConfig())
-					->addExpirationDate($websiteId)
-					->skipExpiredDuplicates()
-					->setDefaultOrder()
+			$this->_collection = Df_Reward_Model_Reward_History::c()
+				->addCustomerFilter(rm_session_customer()->getCustomerId())
+				->addWebsiteFilter(rm_website_id())
+				->setExpiryConfig(df_h()->reward()->getExpiryConfig())
+				->addExpirationDate(rm_website_id())
+				->skipExpiredDuplicates()
+				->setDefaultOrder()
 			;
 		}
 		return $this->_collection;
@@ -109,36 +106,31 @@ class Df_Reward_Block_Customer_Reward_History extends Df_Core_Block_Template_NoC
 	 * Instantiate Pagination
 	 * @return Df_Reward_Block_Customer_Reward_History
 	 */
-	protected function _prepareLayout()
-	{
+	protected function _prepareLayout() {
 		if ($this->_isEnabled()) {
-			$pager = df_block('page/html_pager', 'reward.history.pager')
-				->setCollection($this->_getCollection())->setIsOutputRequired(false)
-			;
+			/** @var Mage_Page_Block_Html_Pager $pager */
+			$pager = rm_layout()->addBlock('page/html_pager', 'reward.history.pager');
+			$pager->setCollection($this->_getCollection())->setIsOutputRequired(false);
 			$this->setChild('pager', $pager);
 		}
 		return parent::_prepareLayout();
 	}
 
 	/**
-	 * Whether the history may show up
-	 * @return string
-	 */
-	protected function _toHtml()
-	{
-		if ($this->_isEnabled()) {
-			return parent::_toHtml();
-		}
-		return '';
-	}
-
-	/**
 	 * Whether the history is supposed to be rendered
 	 * @return bool
 	 */
-	protected function _isEnabled()
-	{
+	protected function _isEnabled() {
 		return df_h()->reward()->isEnabledOnFront()
-			&& df_h()->reward()->getGeneralConfig('publish_history');
+		   && df_h()->reward()->getGeneralConfig('publish_history');
 	}
+
+	/**
+	 * @override
+	 * @see Df_Core_Block_Abstract::needToShow()
+	 * @used-by Df_Core_Block_Abstract::_loadCache()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
+	 * @return bool
+	 */
+	protected function needToShow() {return $this->_isEnabled();}
 }

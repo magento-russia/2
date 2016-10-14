@@ -15,7 +15,7 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 				preg_replace(
 					rm_sprintf(
 						'#^(%s)#'
-						,rm_concat_clean(Df_Core_Const::T_REGEX_ALTERNATIVE_SEPARATOR
+						,rm_concat_clean('|'
 							,$this->getCallingCode()
 							,$this->getAlternativeCallingCode()
 						)
@@ -85,20 +85,20 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__VALUE,	self::V_STRING, false)
-			->_prop(self::P__COUNTRY, Df_Directory_Model_Country::_CLASS, false)
+			->_prop(self::P__VALUE,	RM_V_STRING, false)
+			->_prop(self::P__COUNTRY, Df_Directory_Model_Country::_C, false)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const MAX_LENGTH = 15;
 	const MIN_LENGTH = 11;
 	const P__COUNTRY = 'country';
 	const P__VALUE = 'value';
 	/**
-	 * @param Mage_Sales_Model_Quote_Address $address
+	 * @param Df_Sales_Model_Quote_Address|Mage_Sales_Model_Quote_Address $address
 	 * @return Df_Core_Model_Format_MobilePhoneNumber
 	 */
-	public static function fromQuoteAddress(Mage_Sales_Model_Quote_Address $address) {
+	public static function fromQuoteAddress(Df_Sales_Model_Quote_Address $address) {
 		return self::i($address->getTelephone());
 	}
 	/** @return string[] */
@@ -107,8 +107,8 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 			self::$_cssClasses = array(
 				'validate-digits'
 				,'validate-length'
-				,rm_sprintf('minimum-length-%d', self::MIN_LENGTH)
-				,rm_sprintf('maximum-length-%d', self::MAX_LENGTH)
+				,'minimum-length-' . self::MIN_LENGTH
+				,'maximum-length-' . self::MAX_LENGTH
 			);
 		}
 		return self::$_cssClasses;

@@ -3,7 +3,7 @@
    <sections>
 		<df_payment>
 			<groups>
-				<qiwi translate='label' module='df_qiwi'>
+				<qiwi>
 					<label>QIWI Кошелёк</label>
 					<comment>
 					   <![CDATA[
@@ -20,7 +20,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -28,10 +28,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-qiwi</df_feature>
 						</active>
-						<payment_service__shop_id translate='label'>
+						<payment_service__shop_id>
 							<label>Номер магазина в системе QIWI Кошелёк</label>
 							<comment>
 							   <![CDATA[
@@ -47,14 +47,14 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								required-entry
 								validate-digits
 							</validate>
 						</payment_service__shop_id>
-						<payment_service__response_password translate='label'>
+						<payment_service__response_password>
 							<label>
 								Пароль к Личному кабинету магазина в системе QIWI Кошелёк
 							</label>
@@ -69,11 +69,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__response_password>
-						<frontend__title translate='label'>
+						<frontend__title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -85,11 +85,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</frontend__title>
-						<frontend__description translate='label'>
+						<frontend__description>
 							<label>Примечание к способу оплаты на экране оформления заказа</label>
 							<comment>
 								<![CDATA[
@@ -102,10 +102,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</frontend__description>
-						<payment_service__transaction_description translate='label'>
+						<payment_service__transaction_description>
 							<label>Примечание к счёту в платёжной системе</label>
 							<comment>
 								<![CDATA[
@@ -124,10 +124,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</payment_service__transaction_description>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -141,13 +141,13 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								validate-digits
 							</validate>
 						</frontend__sort_order>
-						<frontend__allowspecific translate='label'>
+						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
 								<![CDATA[
@@ -162,10 +162,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</frontend__allowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Допустимые страны покупателей</label>
 							<comment>
 								<![CDATA[
@@ -181,7 +181,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<active>1</active>
 								<frontend__allowspecific>1</frontend__allowspecific>

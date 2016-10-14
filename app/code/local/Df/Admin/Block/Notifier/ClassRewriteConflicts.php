@@ -5,11 +5,11 @@ class Df_Admin_Block_Notifier_ClassRewriteConflicts extends Df_Core_Block_Admin 
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {
-		return 'df/admin/notifier/class_rewrite_conflicts.phtml';
-	}
+	protected function defaultTemplate() {return 'df/admin/notifier/class_rewrite_conflicts.phtml';}
 
 	/**
 	 * @override
@@ -17,7 +17,7 @@ class Df_Admin_Block_Notifier_ClassRewriteConflicts extends Df_Core_Block_Admin 
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__CONFLICTS, Df_Admin_Model_ClassRewrite_Collection::_CLASS);
+		$this->_prop(self::$P__CONFLICTS, Df_Admin_Model_ClassRewrite_Collection::_C);
 	}
 	/** @var string */
 	private static $P__CONFLICTS = 'conflicts';
@@ -26,6 +26,6 @@ class Df_Admin_Block_Notifier_ClassRewriteConflicts extends Df_Core_Block_Admin 
 	 * @return string
 	 */
 	public static function render(Df_Admin_Model_ClassRewrite_Collection $conflicts) {
-		return df_block_render(__CLASS__, '', array(self::$P__CONFLICTS => $conflicts));
+		return rm_render(__CLASS__, array(self::$P__CONFLICTS => $conflicts));
 	}
 }

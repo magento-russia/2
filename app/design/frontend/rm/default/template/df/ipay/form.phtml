@@ -8,10 +8,7 @@
 	 */
 ?>
 <fieldset class='form-list'>
-    <?php
-		$code = $this->getMethodCode();
-	?>
-    <ul id='payment_form_<?php echo $code; ?>' style='display:none'>
+    <ul id='payment_form_<?php echo $this->getMethodCode(); ?>' style='display:none'>
 		<?php if (!$this->isTestMode()) { ?>
 			<li class='df-payment-options-container'>
 				<h4>Укажите оператора Вашего мобильного телефона:</h4>
@@ -20,7 +17,7 @@
 						foreach($this->getPaymentOptions() as $optionCode => $optionParams) {
 							/** @var string $optionCode */
 							/** @var array $optionParams */
-							$optionName = df_escape(df_a($optionParams, 'title'));
+							$optionName = rm_e(df_a($optionParams, 'title'));
 							?>
 								<li class='df-payment-option'>
 									<label>
@@ -38,10 +35,6 @@
 				</ul>
 			</li>
 		<?php } ?>
-		<li>
-            <?php
-				echo $this->getDescription();
-			?>
-        </li>
+		<li><?php echo $this->getDescription(); ?></li>
     </ul>
 </fieldset>

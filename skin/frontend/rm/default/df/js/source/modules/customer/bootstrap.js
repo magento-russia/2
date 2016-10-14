@@ -1,3 +1,7 @@
+/**
+ * Программный код,
+ * который надо выполнить сразу после загрузки страницы
+ */
 rm.namespace('rm.checkout');
 (function($) { $(function() {
 	rm.namespace('rm.tweaks');

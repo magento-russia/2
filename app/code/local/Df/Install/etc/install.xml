@@ -5,16 +5,16 @@
 			<begin>
 				<remove>true</remove>
 			</begin>
-			<locale translate='code'>
-				<code>региональные настройки</code>
+			<locale>
+				<code>Региональные настройки</code>
 			</locale>
-			<config translate='code'>
+			<config>
 				<code>Другие настройки</code>
 			</config>
-			<administrator translate='code'>
+			<administrator>
 				<code>Анкета администратора</code>
 			</administrator>
-			<end translate='code'>
+			<end>
 				<code>ФИНИШ!</code>
 			</end>
 		</steps>

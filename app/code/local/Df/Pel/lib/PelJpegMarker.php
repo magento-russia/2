@@ -428,4 +428,4 @@ class PelJpegMarker {
 	  return Pel::fmt('Unknown marker: 0x%02X', $m);
 	}
   }
-}?>
+}

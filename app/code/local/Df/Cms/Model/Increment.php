@@ -52,13 +52,11 @@ class Df_Cms_Model_Increment extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Cms_Model_Resource_Increment
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Increment::mf());
-	}
-	const _CLASS = __CLASS__;
+	protected function _getResource() {return Df_Cms_Model_Resource_Increment::s();}
+
+	const _C = __CLASS__;
 	/*
 	 * Increment levels
 	 */

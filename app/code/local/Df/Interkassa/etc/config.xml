@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Interkassa>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>INTERKASSA</title>
+			<version>1.0.0</version>
 		</Df_Interkassa>
 	</modules>
 	<global>
@@ -37,7 +38,7 @@
 		-->
 		<payment>
 			<df-interkassa>
-				<model>df_interkassa/payment</model>
+				<model>Df_Interkassa_Model_Payment</model>
 			</df-interkassa>
 		</payment>
 	</default>

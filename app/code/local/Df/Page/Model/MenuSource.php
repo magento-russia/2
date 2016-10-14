@@ -20,9 +20,9 @@ abstract class Df_Page_Model_MenuSource extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__WEIGHT, self::V_INT);
+		$this->_prop(self::P__WEIGHT, RM_V_INT);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__WEIGHT = 'weight';
 	/**
 	 * @param Df_Page_Model_MenuSource $a
@@ -35,7 +35,7 @@ abstract class Df_Page_Model_MenuSource extends Df_Core_Model {
 		 * must return an integer less than, equal to, or greater than zero
 		 * if the first argument is considered to be respectively
 		 * less than, equal to, or greater than the second.
-		 * @link http://php.net/manual/en/function.usort.php
+		 * http://php.net/manual/function.usort.php
 		 * @see usort
 		 */
 		return $a->getWeight() - $b->getWeight();

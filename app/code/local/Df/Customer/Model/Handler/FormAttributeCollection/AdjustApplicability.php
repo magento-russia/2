@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter getEvent() */
 class Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -22,21 +20,17 @@ class Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability exte
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_CLASS;
-	}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_C;}
 
 	/**
 	 * @param Mage_Customer_Model_Attribute $attribute
 	 * @return Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability
 	 */
 	private function adjust(Mage_Customer_Model_Attribute $attribute) {
-		Df_Customer_Model_Attribute_ApplicabilityAdjuster::i(
-			array(
-				Df_Customer_Model_Attribute_ApplicabilityAdjuster::P__ATTRIBUTE => $attribute
-				,Df_Customer_Model_Attribute_ApplicabilityAdjuster::P__ADDRESS => $this->getAddress()
-			)
-		)->adjust();
+		Df_Customer_Model_Attribute_ApplicabilityAdjuster::i(array(
+			Df_Customer_Model_Attribute_ApplicabilityAdjuster::P__ATTRIBUTE => $attribute
+			,Df_Customer_Model_Attribute_ApplicabilityAdjuster::P__ADDRESS => $this->getAddress()
+		))->adjust();
 		return $this;
 	}
 
@@ -48,5 +42,6 @@ class Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability exte
 		return $this->getAttributes()->getFlag(Df_Customer_Const_Form_Attribute_Collection::P__ADDRESS);
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Customer_Observer::form_attribute_collection__load_after() */
+	const _C = __CLASS__;
 }

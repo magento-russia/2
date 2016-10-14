@@ -18,5 +18,5 @@ class Df_Vk_Block_Frontend_Widget_Comments extends Df_Vk_Block_Frontend_Widget {
 	 */
 	protected function getSettings() {return df_cfg()->vk()->comments();}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

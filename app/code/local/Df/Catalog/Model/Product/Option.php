@@ -10,6 +10,12 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 	}
 
 	/**
+	 * @override
+	 * @return Df_Catalog_Model_Resource_Product_Option_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
 	 * 2015-10-16
 	 * Перевод заголовков опций простых (не настраиваемых) товаров.
 	 * @override
@@ -30,18 +36,16 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Catalog_Model_Resource_Product_Option
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Catalog_Model_Resource_Product_Option::mf());
-	}
+	protected function _getResource() {return Df_Catalog_Model_Resource_Product_Option::s();}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Catalog_Model_Resource_Product_Option_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__TITLE = 'title';
 
 	/** @return Df_Catalog_Model_Resource_Product_Option_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Catalog_Model_Resource_Product_Option_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -55,11 +59,6 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 	 * @return Df_Catalog_Model_Product_Option
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Catalog_Model_Resource_Product_Option::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Catalog_Model_Product_Option */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

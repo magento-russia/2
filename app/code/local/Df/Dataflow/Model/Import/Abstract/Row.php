@@ -5,8 +5,8 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 
 	/**
 	 * @param string $fieldName
-	 * @param bool $isRequired[optional]
-	 * @param string|null $default[optional]
+	 * @param bool $isRequired [optional]
+	 * @param string|null $default [optional]
 	 * @return string|null
 	 */
 	public function getFieldValue($fieldName, $isRequired = false, $default = null) {
@@ -18,19 +18,15 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 		/** @var string|null $result */
 		$result = df_a($this->getAsArray(), $fieldName, $default);
 		if ($isRequired && is_null($result)) {
-			/** @var Df_Dataflow_Exception_Import_RequiredValueIsAbsent $exception */
-			$exception = new Df_Dataflow_Exception_Import_RequiredValueIsAbsent();
-			$exception
-				->setFieldName($fieldName)
-				->setRowOrdering($this->getOrdering())
-			;
-			$this->error($exception);
+			$this->error(new Df_Dataflow_Exception_Import_RequiredValueIsAbsent(
+				$fieldName, $this->getOrdering()
+			));
 		}
 		if (!is_null($result)) {
 			if (is_bool($result)) {
 				// true => '1'
 				// false => '0'
-				$result = strval(intval($result));
+				$result = strval((int)($result));
 			}
 			else if (is_int($result)) {
 				$result = strval($result);
@@ -82,16 +78,16 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 			df_assert_array($allowedSymbols);
 			/** @var string $resultAsString */
 			$resultAsString = '';
-			for($i = 0; $i < strlen($value); $i ++) {
+			for ($i = 0; $i < strlen($value); $i ++) {
 				if (in_array($value[$i], $allowedSymbols)) {
 					$resultAsString .= $value[$i];
 				}
 			}
-			if (Df_Core_Const::T_PERIOD !== $this->getConfig()->getDecimalSeparator()) {
+			if ('.' !== $this->getConfig()->getDecimalSeparator()) {
 				$resultAsString =
 					str_replace(
 						$this->getConfig()->getDecimalSeparator()
-						,Df_Core_Const::T_PERIOD
+						,'.'
 						,$resultAsString
 					)
 				;
@@ -106,9 +102,9 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 	protected function getConfig() {return df_h()->dataflow()->import()->getConfig();}
 
 	/**
-	 * @param string[]|mixed[]|Df_Dataflow_Exception_Import $arguments
+	 * @param string|string[]|mixed[]|Df_Dataflow_Exception_Import $arguments
 	 * @return void
-	 * @throws Df_Core_Exception_Client
+	 * @throws Df_Core_Exception
 	 */
 	protected function error($arguments) {
 		/** @var Df_Dataflow_Exception_Import $exception */
@@ -116,10 +112,9 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 			$exception = $arguments;
 		}
 		else {
-			// Обратите внимание, что функция func_get_args()
-			// не может быть параметром другой функции.
+			/** @uses func_get_args() не может быть параметром другой функции */
 			$arguments = is_array($arguments) ? $arguments : func_get_args();
-			$exception = new Df_Dataflow_Exception_Import(rm_sprintf($arguments));
+			$exception = new Df_Dataflow_Exception_Import(rm_format($arguments));
 		}
 		$exception->setRow($this);
 		df_error($exception);
@@ -132,11 +127,12 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ORDERING, self::V_INT)
-			->_prop(self::P__ROW_AS_ARRAY, self::V_ARRAY)
+			->_prop(self::P__ORDERING, RM_V_INT)
+			->_prop(self::P__ROW_AS_ARRAY, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Dataflow_Model_Importer_Row::_construct() */
+	const _C = __CLASS__;
 	const P__ORDERING = 'ordering';
 	const P__ROW_AS_ARRAY = 'rowAsArray';
 }

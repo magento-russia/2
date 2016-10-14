@@ -1,5 +1,5 @@
 <?php
-class Df_Reward_Model_Resource_Reward extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 	/**
 	 * Delete orphan (points of deleted website) points by given customer
 	 * @param integer $customerId
@@ -22,13 +22,13 @@ class Df_Reward_Model_Resource_Reward extends Mage_Core_Model_Mysql4_Abstract {
 	 */
 	public function getRewardSalesrule($rule) {
 		$data = array();
-		$select = $this->_getReadAdapter()->select()->from(rm_table('df_reward/reward_salesrule'), $cols = '*');
+		$select = rm_select()->from(rm_table('df_reward/reward_salesrule'));
 		if (is_array($rule)) {
 			$select->where('rule_id IN (?)', $rule);
-			$data = $this->_getReadAdapter()->fetchAll($select);
-		} else if (intval($rule)) {
-			$select->where('rule_id = ?', intval($rule));
-			$data = $this->_getReadAdapter()->fetchRow($select);
+			$data = rm_conn()->fetchAll($select);
+		} else if ($rule) {
+			$select->where('rule_id = ?', (int)$rule);
+			$data = rm_conn()->fetchRow($select);
 		}
 		return $data;
 	}
@@ -41,12 +41,12 @@ class Df_Reward_Model_Resource_Reward extends Mage_Core_Model_Mysql4_Abstract {
 	 * @return Df_Reward_Model_Resource_Reward
 	 */
 	public function loadByCustomerId(Df_Reward_Model_Reward $reward, $customerId, $websiteId) {
-		$select = $this->_getReadAdapter()->select()
-			->from($this->getMainTable(), $cols = '*')
+		$select = rm_select()
+			->from($this->getMainTable())
 			->where('customer_id = ?', $customerId)
 			->where('website_id = ?', $websiteId)
 		;
-		$data = $this->_getReadAdapter()->fetchRow($select);
+		$data = rm_conn()->fetchRow($select);
 		if ($data) {
 			$reward->addData($data);
 		}
@@ -79,17 +79,18 @@ class Df_Reward_Model_Resource_Reward extends Mage_Core_Model_Mysql4_Abstract {
 	 * @return Df_Reward_Model_Resource_Reward
 	 */
 	public function saveRewardSalesrule($ruleId, $pointsDelta) {
-		$select = $this->_getWriteAdapter()->select()
-			->from(rm_table('df_reward/reward_salesrule'), array('rule_id'))
+		$select = rm_select()
+			->from(rm_table('df_reward/reward_salesrule'), 'rule_id')
 			->where('rule_id = ?', $ruleId);
-		if ($this->_getWriteAdapter()->fetchOne($select)) {
-			$this->_getWriteAdapter()->update(
+		if (rm_conn()->fetchOne($select)) {
+			rm_conn()->update(
 				rm_table('df_reward/reward_salesrule')
 				, array('points_delta' => $pointsDelta)
 				, rm_quote_into('rule_id = ?', $ruleId)
 			);
-		} else {
-			$this->_getWriteAdapter()->insert(rm_table('df_reward/reward_salesrule'), array(
+		}
+		else {
+			rm_conn()->insert(rm_table('df_reward/reward_salesrule'), array(
 				'rule_id' => $ruleId,'points_delta' => $pointsDelta
 			));
 		}
@@ -113,25 +114,22 @@ class Df_Reward_Model_Resource_Reward extends Mage_Core_Model_Mysql4_Abstract {
 	}
 
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_Reward_Model_Reward::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_reward/reward';
+	protected function _construct() {$this->_init(self::TABLE, Df_Reward_Model_Reward::P__ID);}
 	/**
-	 * @see Df_Reward_Model_Reward::_construct()
-	 * @see Df_Reward_Model_Resource_Reward_Collection::_construct()
-	 * @return string
+	 * @used-by Df_Reward_Model_Resource_Reward_History::isExistHistoryUpdate()
+	 * @used-by Df_Reward_Model_Resource_Reward_History::getTotalQtyRewards()
+	 * @used-by Df_Reward_Model_Resource_Reward_History::expirePoints()
+	 * @used-by Df_Reward_Model_Resource_Reward_History_Collection::_joinReward()
+	 * @used-by Df_Reward_Setup_1_0_0::_process()
+	 * @used-by Df_Reward_Setup_1_0_1::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_reward/reward';
 	/** @return Df_Reward_Model_Resource_Reward */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

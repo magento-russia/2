@@ -19,23 +19,18 @@ class Df_Adminhtml_Block_Page_Head extends Mage_Adminhtml_Block_Page_Head {
 	 */
 	public function addItem($type, $name, $params = null, $if = null, $cond = null) {
 		if (!df_h()->page()->head()->needSkipItem($type, $name)) {
-			if (self::PREPEND !== $params) {
+			if ('prepend' !== $params) {
 				parent::addItem($type, $name, $params, $if, $cond);
 			}
 			else {
 				$params = null;
-				df_array_unshift_assoc(
-					$this->_data['items']
-					,$type.'/'.$name
-					,array(
-						'type' => $type
-						,'name' => $name
-						,'params' => $params
-						,'if' => $if
-						,'cond' => $cond
-					)
-				)
-				;
+				df_array_unshift_assoc($this->_data['items'], $type . '/' . $name, array(
+					'type' => $type
+					,'name' => $name
+					,'params' => $params
+					,'if' => $if
+					,'cond' => $cond
+				));
 			}
 		}
 		return $this;
@@ -62,14 +57,12 @@ class Df_Adminhtml_Block_Page_Head extends Mage_Adminhtml_Block_Page_Head {
 		,array $skinItems
 		,$mergeCallback = null
 	) {
-		/** @var Df_Page_Model_Html_Head $adjuster */
-		$adjuster = Df_Page_Model_Html_Head::s();
 		if (is_null($mergeCallback)) {
-			$staticItems = $adjuster->addVersionStamp($staticItems);
+			$staticItems = Df_Page_Head::addVersionStamp($staticItems);
 			/**
-			 * Обратите внимание, что для ресурсов темы мы добавляем параметр v по-другому:
+			 * Обратите внимание, что для ресурсов темы мы добавляем параметр «v» по-другому:
 			 * в методе @see Df_Core_Model_Design_PackageM::getSkinUrl()
-			 * Здесь нам добавлять v было нельзя: ведь getSkinUrl работает с именами файлов
+			 * Здесь нам добавлять «v» было нельзя: ведь @see getSkinUrl() работает с именами файлов
 			 * и просто не найдёт файл с именем file.css?v=1.33.3
 			 */
 		}
@@ -77,16 +70,10 @@ class Df_Adminhtml_Block_Page_Head extends Mage_Adminhtml_Block_Page_Head {
 		// потому что иначе система педупреждает:
 		// «Notice: Only variable references should be returned by reference»
 		/** @var string $result */
-		$result = rm_concat_clean("\r\n"
-			, $adjuster->prependAdditionalTags($format, $staticItems)
-			, parent::_prepareStaticAndSkinElements(
-				$format, $staticItems, $skinItems, $mergeCallback
-			)
+		$result = rm_concat_clean("\n"
+			,Df_Page_Head::prependTags($format, $staticItems)
+			,parent::_prepareStaticAndSkinElements($format, $staticItems, $skinItems, $mergeCallback)
 		);
 		return $result;
 	}
-
-	const _CLASS = __CLASS__;
-	const PREPEND = 'prepend';
-
 }

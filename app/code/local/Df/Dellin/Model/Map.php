@@ -1,5 +1,5 @@
 <?php
-class Df_Dellin_Model_Map extends Df_Core_Model_DestructableSingleton {
+class Df_Dellin_Model_Map extends Df_Core_Model {
 	/**
 	 * @param string $cityName
 	 * @return array(string => Df_Dellin_Model_Location[])
@@ -13,11 +13,12 @@ class Df_Dellin_Model_Map extends Df_Core_Model_DestructableSingleton {
 		return $this->{__METHOD__}[$cityName];
 	}
 
-	/**             
+	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobalObjects()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getByCity');}
+	protected function cachedGlobalObjects() {return self::m(__CLASS__, 'getByCity');}
 
 	/**
 	 * @param string $cityName
@@ -25,22 +26,17 @@ class Df_Dellin_Model_Map extends Df_Core_Model_DestructableSingleton {
 	 * @throws Exception
 	 */
 	private function requestLocationsFromServer($cityName) {
+		/** @var Df_Dellin_Model_Location[] $result */
 		try {
-			/** @var Df_Dellin_Model_Location[] $result */
-			$result = array();
 			/** @var Zend_Uri_Http $uri */
 			$uri = Zend_Uri::factory('http');
 			$uri->setHost('public.services.dellin.ru');
 			$uri->setPath('/calculatorTool2/js/index.html');
-			$uri
-				->setQuery(
-					array(
-						'answerType' => 'json'
-						,'mode' => 'getPlaces'
-						,'q' => $cityName
-					)
-				)
-			;
+			$uri->setQuery(array(
+				'answerType' => 'json'
+				,'mode' => 'getPlaces'
+				,'q' => $cityName
+			));
 			/** @var Zend_Http_Client $httpClient */
 			$httpClient = new Zend_Http_Client();
 			$httpClient->setUri($uri);
@@ -49,24 +45,21 @@ class Df_Dellin_Model_Map extends Df_Core_Model_DestructableSingleton {
 			/** @var string $responseAsJson */
 			$responseAsJson = $response->getBody();
 			df_assert_string_not_empty($responseAsJson);
-			$responseAsJson = df_text()->bomRemove($responseAsJson);
+			$responseAsJson = df_t()->bomRemove($responseAsJson);
 			/** @var string[] $responseAsArray */
-			$responseAsArray = df_json_decode($responseAsJson);
+			$responseAsArray = Zend_Json::decode($responseAsJson);
 			df_assert_array($responseAsArray);
-			foreach ($responseAsArray as $locationAsArray) {
-				/** @var array(string => string|int|null) $locationAsArray */
-				df_assert_array($locationAsArray);
-				$result[]= Df_Dellin_Model_Location::i($locationAsArray);
-			}
+			/** @uses Df_Dellin_Model_Location::i() */
+			$result = array_map('Df_Dellin_Model_Location::i', $responseAsArray);
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			Mage::logException($e);
-			throw $e;
+			df_error($e);
 		}
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Dellin_Model_Map */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

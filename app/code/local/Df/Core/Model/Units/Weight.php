@@ -1,52 +1,58 @@
 <?php
 class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	/**
-	 * @param float $productWeightInDefaultUnits
-	 * @return int
+	 * @param float $weightInDefaultUnits
+	 * @return float
 	 */
-	public function convertToGrammes($productWeightInDefaultUnits) {
-		return (int)$this->getProductWeightUnitsRatio() * $productWeightInDefaultUnits;
+	public function inGrammes($weightInDefaultUnits) {
+		/** @var float $weight*/
+		$weight = rm_float($weightInDefaultUnits);
+		return self::VALUE__GRAM === $this->getDefaultUnits() ? $weight : $this->getRatio() * $weight;
 	}
 
 	/**
-	 * @param float $productWeightInDefaultUnits
+	 * @param float $weightInDefaultUnits
 	 * @return float
 	 */
-	public function convertToKilogrammes($productWeightInDefaultUnits) {
-		return 0.001 * $this->convertToGrammes($productWeightInDefaultUnits);
+	public function inKilogrammes($weightInDefaultUnits) {
+		return
+			self::VALUE__KILOGRAM === $this->getDefaultUnits()
+			? rm_float($weightInDefaultUnits)
+			: 0.001 * $this->inGrammes($weightInDefaultUnits)
+		;
 	}
 
 	/** @return array(string => array(string => string|int)) */
-	public function getAll() {
+	public function getUnitsSettings() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::app()->getConfig()->getNode('df/units/weight')->asCanonicalArray();
-			/**
-			 * Varien_Simplexml_Element::asCanonicalArray может возвращать строку в случае,
-			 * когда структура исходных данных не соответствует массиву.
-			 */
-			df_result_array($this->{__METHOD__});
+			$this->{__METHOD__} = rm_config_a('df/units/weight');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return string */
+	private function getDefaultUnits() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_cfg()->shipping()->product()->getUnitsWeight();
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return float */
-	private function getProductWeightUnitsRatio() {
+	private function getRatio() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array $productDefaultUnits */
-			$productDefaultUnits =
-				df_a(
-					df()->units()->weight()->getAll()
-					,df_cfg()->shipping()->product()->getUnitsWeight()
-				)
-			;
-			$this->{__METHOD__} = rm_float(df_a($productDefaultUnits, self::UNIT__RATIO));
+			/** @var array(string => string|int) $unitSettings */
+			$unitSettings = df_a($this->getUnitsSettings(), $this->getDefaultUnits());
+			$this->{__METHOD__} = rm_float(df_a($unitSettings, self::UNIT__RATIO));
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const UNIT__LABEL = 'label';
 	const UNIT__RATIO = 'ratio';
+	const VALUE__GRAM = 'gram';
+	const VALUE__KILOGRAM = 'kilogram';
 
 	/** @return Df_Core_Model_Units_Weight */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

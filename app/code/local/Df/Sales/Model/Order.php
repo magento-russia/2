@@ -1,5 +1,31 @@
 <?php
+/**
+ * @method float|null getBaseCustomerBalanceAmount()
+ * @method float|null getBaseRewardCurrencyAmount()
+ * @method float|null getBaseRewardCurrencyAmountInvoiced()
+ * @method float|null getBaseRewardCurrencyAmountRefunded()
+ * @method float|null getCustomerBalanceInvoiced()
+ * @method float|null getCustomerBalanceRefunded()
+ * @method float|null getRewardPointsBalance()
+ * @method Df_Sales_Model_Order setForcedCanCreditmemo(bool $value)
+ */
 class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
+	/**
+	 * @used-by Df_LiqPay_CustomerReturnController::processDelayed()
+	 * @used-by Df_Payment_Model_Action_Abstract::commentOrder()
+	 * @used-by Df_Reward_Observer::applyRewardSalesrulePoints()
+	 * @used-by Df_Reward_Observer::orderCompleted()
+	 * @param string $comment
+	 * @param bool $isCustomerNotified [optional]
+	 * @return void
+	 */
+	public function comment($comment, $isCustomerNotified = false) {
+		/** @var Mage_Sales_Model_Order_Status_History $history */
+		$history = $this->addStatusHistoryComment($comment);
+		$history->setIsCustomerNotified($isCustomerNotified);
+		$history->save();
+	}
+
 	/**
 	 * @override
 	 * @param float $price
@@ -32,19 +58,17 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	public function getEmailCustomerNote() {
 		/** @var bool $preserveLineBreaks */
 		static $preserveLineBreaks;
-		if (!isset($preserveLineBreaks)) {
+		if (is_null($preserveLineBreaks)) {
 			$preserveLineBreaks =
-					df_enabled(Df_Core_Feature::SALES)
-				&&
-					df_cfg()->sales()->orderComments()->preserveLineBreaksInOrderEmail()
+				df_cfg()->sales()->orderComments()->preserveLineBreaksInOrderEmail()
 			;
 		}
 		/** @var string|null $result */
 		$result = parent::getEmailCustomerNote();
 		if ($result && $preserveLineBreaks) {
-			$result = nl2br($result);
+			$result = df_t()->nl2br($result);
 			if (df_cfg()->sales()->orderComments()->wrapInStandardFrameInOrderEmail()) {
-				$result = Df_Sales_Block_Order_Email_Comments::i($result)->toHtml();
+				$result = Df_Sales_Block_Order_Email_Comments::r($result);
 			}
 		}
 		if (!is_null($result)) {
@@ -55,20 +79,49 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 
 	/**
 	 * @override
-	 * @return Mage_Core_Model_Abstract
+	 * @return Df_Sales_Model_Resource_Order_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/** @return bool */
+	public function needCommentToBeVisibleOnFront() {return $this->_commentNeedToBeVisibleOnFront;}
+
+	/**
+	 * @param bool $value
+	 * @return void
+	 */
+	public function setCommentToBeVisibleOnFront($value) {$this->_commentNeedToBeVisibleOnFront = $value;}
+
+	/**
+	 * 2015-02-13
+	 * Этот метод у нас перекрыт с самых первых версий Российской сборки Magento.
+	 * При повторных сохранениях заказа прежнее значение protect_code
+	 * заменяется новым в родительском методе @see Mage_Sales_Model_Order::_beforeSave():
+	 * $this->setData('protect_code', substr(md5(uniqid(mt_rand(), true) . ':' . microtime(true)), 5, 6));
+	 * Нам же нужно сохранять прежнее значение protect_code,
+	 * потому что оно используется, например, в веб-адресе на квитанцию Сбербанка для конкретного заказа.
+	 * @override
+	 * @return Df_Sales_Model_Order
 	 */
 	protected function _beforeSave() {
 		/** @var string|null $protectCode */
-		$protectCode = $this->getData(Df_Sales_Const::ORDER_PARAM__PROTECT_CODE);
-		if (!is_null($protectCode)) {
-			df_assert_string($protectCode);
-		}
+		$protectCode = $this->getProtectCode();
 		parent::_beforeSave();
-		if (!is_null($protectCode)) {
-			$this->setData(Df_Sales_Const::ORDER_PARAM__PROTECT_CODE, $protectCode);
+		/**
+		 * Обратите внимание, что при первом сохранении заказа переменная $protectCode равна null
+		 * (ведь protect_code инициализируется как раз при вызове parent::_beforeSave()).
+		 */
+		if ($protectCode) {
+			$this->setProtectCode($protectCode);
 		}
 		return $this;
 	}
+
+	/**
+	 * @override
+	 * @return Df_Sales_Model_Resource_Order
+	 */
+	protected function _getResource() {return Df_Sales_Model_Resource_Order::s();}
 
 	/**
 	 * @param float $price
@@ -76,18 +129,18 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	 * @return string
 	 */
 	private function formatPriceDf($price, $addBrackets = false) {
-		return $this->formatPricePrecision($price, rm_currency()->getPrecision(), $addBrackets);
+		return $this->formatPricePrecision($price, rm_currency_precision(), $addBrackets);
 	}
 
+	/** @var bool */
+	private $_commentNeedToBeVisibleOnFront = false;
 	/**
-	 * @override
-	 * @return void
+	 * @used-by Df_1C_Cml2_Export_Data_Entity_Customer::_construct()
+	 * @used-by Df_1C_Cml2_Export_Processor_Sale_Order::_construct()
+	 * @used-by Df_Payment_Model_Request_Payment::_construct()
+	 * @used-by Df_Sales_Model_Resource_Order_Collection::_construct()
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Sales_Model_Resource_Order::mf());
-	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ADJUSTMENT_NEGATIVE = 'adjustment_negative';
 	const P__ADJUSTMENT_POSITIVE = 'adjustment_positive';
 	const P__APPLIED_RULE_IDS = 'applied_rule_ids';
@@ -243,10 +296,9 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	const P__UPDATED_AT = 'updated_at';
 	const P__WEIGHT = 'weight';
 	const P__X_FORWARDED_FOR ='x_forwarded_for';
-	const RM_PARAM__COMMENT_IS_VISIBLE_ON_FRONT = 'rm__comment_is_visible_on_front';
 
 	/** @return Df_Sales_Model_Resource_Order_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Sales_Model_Resource_Order_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -272,11 +324,6 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	public static function ldi($incrementId, $throwOnError = true) {
 		return self::ld($incrementId, self::P__INCREMENT_ID, $throwOnError);
 	}
-	/**
-	 * @see Df_Sales_Model_Resource_Order_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Sales_Model_Order */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

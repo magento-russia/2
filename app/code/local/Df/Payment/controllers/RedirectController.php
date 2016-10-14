@@ -34,22 +34,22 @@ class Df_Payment_RedirectController extends Mage_Core_Controller_Front_Action {
 			 *
 			 * Поэтому мы делаем обработку в двух точках:
 			 * @see Df_Payment_RedirectController::indexAction
-			 * @see Df_Checkout_Model_Dispatcher::controller_action_predispatch_checkout
+			 * @see Df_Checkout_Observer::controller_action_predispatch_checkout
 			 */
-			if (Df_Payment_Model_Redirector::s()->isRedirected()) {
-				Df_Payment_Model_Redirector::s()->restoreQuote();
-				$this->_redirect(Df_Checkout_Const::URL__CHECKOUT);
+			if (Df_Payment_Redirected::is()) {
+				Df_Payment_Redirected::restoreQuote();
+				$this->_redirect(RM_URL_CHECKOUT);
 			}
 			else {
-				Df_Payment_Model_Redirector::s()->setRedirected();
+				Df_Payment_Redirected::on();
 				$this->loadLayout();
 				$this->renderLayout();
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			/**
 			 * Обратите внимание,
-			 * что при возвращении на страницу Df_Checkout_Const::URL__CHECKOUT
+			 * что при возвращении на страницу RM_URL_CHECKOUT
 			 * диагностическое сообщение надо добавлять в rm_session_core(),
 			 * а не в rm_session_checkout(),
 			 * потому что сообщения сессии checkout
@@ -57,8 +57,8 @@ class Df_Payment_RedirectController extends Mage_Core_Controller_Front_Action {
 			 */
 			rm_exception_to_session($e);
 			df_notify_exception($e);
-			Df_Payment_Model_Redirector::s()->restoreQuote();
-			$this->_redirect(Df_Checkout_Const::URL__CHECKOUT);
+			Df_Payment_Redirected::restoreQuote();
+			$this->_redirect(RM_URL_CHECKOUT);
 		}
 	}
 }

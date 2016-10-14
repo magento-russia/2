@@ -113,4 +113,4 @@ class PelJpegComment extends PelJpegContent {
 	return $this->getValue();
   }
 
-}?>
+}

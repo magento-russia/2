@@ -3,28 +3,26 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	/** @return string */
 	abstract protected function getMessageTemplate();
 
-	/** @return string */
+	/**
+	 * @used-by app/design/adminhtml/rm/default/template/df/core/notifications.phtml
+	 * @return string
+	 */
 	public function getMessage() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_output()->processLink(
-					strtr($this->getMessageTemplate(), $this->getMessageVariables())
-					,$this->getUrlHelp()
-				)
-			;
+			$this->{__METHOD__} = df_output()->processLink(
+				strtr($this->getMessageTemplate(), $this->getMessageVariables()), $this->getUrlHelp()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
+	/**
+	 * @used-by app/design/adminhtml/rm/default/template/df/core/notifications.phtml
+	 * @return string
+	 */
 	public function getUrlSkip() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				rm_url_admin(
-					'df_admin/notification/skip'
-					, array(Df_Admin_Model_Action_Notification_Skip::RP__CLASS => get_class($this))
-				)
-			;
+			$this->{__METHOD__} = Df_Admin_Model_Action_SkipNotification::getLink(get_class($this));
 		}
 		return $this->{__METHOD__};
 	}
@@ -57,9 +55,7 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	/** @return array(string => string) */
 	protected function getMessageVariables() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				self::$MESSAGE_VAR__URL_HELP => $this->getUrlHelp()
-			);
+			$this->{__METHOD__} = array('{веб-адрес пояснений}' => $this->getUrlHelp());
 		}
 		return $this->{__METHOD__};
 	}
@@ -75,10 +71,11 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
-	/** @var string */
-	protected static $MESSAGE_VAR__URL_HELP = '{веб-адрес пояснений}';
+	/** @used-by Df_Admin_Model_Notifier_Collection::itemClass() */
+	const _C = __CLASS__;
 	/**
+	 * @used-by getConfigPathSkip()
+	 * @used-by Df_Admin_Model_Action_SkipNotification::getConfigPath()
 	 * @param string $class
 	 * @return string
 	 */

@@ -51,7 +51,7 @@ class Df_Dataflow_Model_Importer_Product_Options extends Df_Dataflow_Model_Impor
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param Df_Catalog_Model_Product $product

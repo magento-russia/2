@@ -1,26 +1,41 @@
 <?php
 /**
+ * @method int|null getConfigId()
  * @method Df_Core_Model_Resource_Config_Data getResource()
  */
 class Df_Core_Model_Config_Data extends Mage_Core_Model_Config_Data {
 	/**
-	 * При наличии у объекта значения поля _cacheTag
+	 * @override
+	 * @return Df_Core_Model_Resource_Config_Data_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * 2016-10-13
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
+	 * @override
+	 * @return Df_Core_Model_Resource_Config_Data
+	 */
+	/** @noinspection PhpHierarchyChecksInspection */
+	protected function _getResource() {return Df_Core_Model_Resource_Config_Data::s();}
+
+	/**
+	 * При наличии у объекта значения поля @see _cacheTag
 	 * система будет автоматически удалять кэш после сохранения объекта.
-	 * Странно, что родительский класс не указывает _cacheTag.
-	 * @see Mage_Core_Model_Abstract::cleanModelCache()
+	 * Странно, что родительский класс не указывает @see Mage_Core_Model_Config_Data::_cacheTag.
+	 * @used-by getCacheTags()
+	 * @used-by cleanModelCache()
 	 * @var string
 	 */
 	protected $_cacheTag = 'CONFIG';
 
 	/**
-	 * @override
-	 * @return void
+	 * @used-by Df_Adminhtml_Model_Config_Data::save_patchFor_1_4_0_1()
+	 * @used-by Df_Adminhtml_Model_Config_Data::save_patchFor_1_7_0_2()
+	 * @used-by Df_Core_Model_Resource_Config_Data_Collection::_construct()
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Core_Model_Resource_Config_Data::mf());
-	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @var string */
 	private static $P__PATH = 'path';
 	/** @var string */
@@ -31,7 +46,7 @@ class Df_Core_Model_Config_Data extends Mage_Core_Model_Config_Data {
 	private static $P__VALUE = 'value';
 
 	/** @return Mage_Core_Model_Resource_Config_Data_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Mage_Core_Model_Resource_Config_Data_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -45,11 +60,6 @@ class Df_Core_Model_Config_Data extends Mage_Core_Model_Config_Data {
 	 * @return Df_Core_Model_Config_Data
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Core_Model_Resource_Config_Data_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 
 	/**
 	 * @static

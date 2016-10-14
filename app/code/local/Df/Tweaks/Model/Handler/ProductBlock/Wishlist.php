@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 class Df_Tweaks_Model_Handler_ProductBlock_Wishlist extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,28 +7,24 @@ class Df_Tweaks_Model_Handler_ProductBlock_Wishlist extends Df_Core_Model_Handle
 	 * @return void
 	 */
 	public function handle() {
+		/** @var Df_Tweaks_Model_Settings_Wishlist $s */
+		$s = Df_Tweaks_Model_Settings_Wishlist::s();
 		if (
-				df_cfg()->tweaks()->wishlist()->removeFromAll()
+				$s->removeFromAll()
 			||
-				(
-						df_cfg()->tweaks()->wishlist()->removeFromFrontpage()
-					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
-				)
+					$s->removeFromFrontpage()
+				&&
+					rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 			||
-				(
-						df_cfg()->tweaks()->wishlist()->removeFromCatalogProductList()
-					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
-				)
+					$s->removeFromCatalogProductList()
+				&&
+					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 			||
-				(
-						df_cfg()->tweaks()->wishlist()->removeFromCatalogProductView()
-					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
-				)
+					$s->removeFromCatalogProductView()
+				&&
+					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 		) {
-			df()->layout()->removeBlock('wishlist_sidebar');
+			rm_block_remove('wishlist_sidebar');
 		}
 	}
 
@@ -40,8 +34,9 @@ class Df_Tweaks_Model_Handler_ProductBlock_Wishlist extends Df_Core_Model_Handle
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

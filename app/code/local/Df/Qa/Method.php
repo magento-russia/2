@@ -75,6 +75,17 @@ class Df_Qa_Method extends Mage_Core_Helper_Abstract {
 	 * @return void
 	 * @throws Exception
 	 */
+	public static function assertParamIsIso2($paramValue, $paramOrdering, $stackLevel = 0) {
+		self::validateParam(Df_Zf_Validate_String_Iso2::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+	}
+
+	/**
+	 * @param string $paramValue
+	 * @param int $paramOrdering
+	 * @param int $stackLevel [optional]
+	 * @return void
+	 * @throws Exception
+	 */
 	public static function assertParamIsString($paramValue, $paramOrdering, $stackLevel = 0) {
 		self::validateParam(Df_Zf_Validate_String::s(), $paramValue, $paramOrdering, $stackLevel + 1);
 	}
@@ -145,6 +156,16 @@ class Df_Qa_Method extends Mage_Core_Helper_Abstract {
 	 * @return void
 	 * @throws Exception
 	 */
+	public static function assertResultIsIso2($resultValue, $stackLevel = 0) {
+		self::validateResult(Df_Zf_Validate_String_Iso2::s(), $resultValue, $stackLevel + 1);
+	}
+
+	/**
+	 * @param string $resultValue
+	 * @param int $stackLevel [optional]
+	 * @return void
+	 * @throws Exception
+	 */
 	public static function assertResultIsString($resultValue, $stackLevel = 0) {
 		self::validateResult(Df_Zf_Validate_String::s(), $resultValue, $stackLevel + 1);
 	}
@@ -207,6 +228,16 @@ class Df_Qa_Method extends Mage_Core_Helper_Abstract {
 	 */
 	public static function assertValueIsInteger($value, $stackLevel = 0) {
 		self::validateValue(Df_Zf_Validate_Int::s(), $value, $stackLevel + 1);
+	}
+
+	/**
+	 * @param string $value
+	 * @param int $stackLevel [optional]
+	 * @return void
+	 * @throws Exception
+	 */
+	public static function assertValueIsIso2($value, $stackLevel = 0) {
+		self::validateValue(Df_Zf_Validate_String_Iso2::s(), $value, $stackLevel + 1);
 	}
 
 	/**

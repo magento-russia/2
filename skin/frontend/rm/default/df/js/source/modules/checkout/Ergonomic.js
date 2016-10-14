@@ -20,9 +20,9 @@ rm.checkout.Ergonomic = {
 					checkout.reloadProgressBlock = function() {};
 					_this.loadWaiting_adjust();
 					$('a.df-login', _this.getElement()).fancybox({
-						titlePosition : 'inside'
-						,transitionIn : 'none'
-						,transitionOut : 'none'
+						'titlePosition' : 'inside'
+						,'transitionIn' : 'none'
+						,'transitionOut' : 'none'
 						/**
 						 * 2015-07-04
 						 * Чтобы стили наших всплывающих окон

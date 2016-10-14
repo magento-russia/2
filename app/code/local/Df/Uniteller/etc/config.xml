@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Uniteller>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Uniteller</title>
+			<version>1.0.0</version>
 		</Df_Uniteller>
 	</modules>
 	<global>
@@ -37,7 +38,7 @@
 		-->
 		<payment>
 			<df-uniteller>
-				<model>df_uniteller/payment</model>
+				<model>Df_Uniteller_Model_Payment</model>
 			</df-uniteller>
 		</payment>
 	</default>

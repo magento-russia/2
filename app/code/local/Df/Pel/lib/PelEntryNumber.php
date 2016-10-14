@@ -287,4 +287,4 @@ abstract class PelEntryNumber extends PelEntry {
 		return $str;
   }
 
-}?>
+}

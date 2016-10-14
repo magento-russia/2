@@ -45,14 +45,14 @@ class Df_Exline_Locator extends Df_Shipping_Locator {
 	}
 
 	/**
-	 * @used-by Df_Exline_Model_Collector::locationDestId()
+	 * @used-by Df_Exline_Collector::locationDestId()
 	 * @param string $cityNameUc
 	 * @return int|null
 	 */
 	public static function findD($cityNameUc) {return self::_find(__CLASS__, 'destination', $cityNameUc);}
 
 	/**
-	 * @used-by Df_Exline_Model_Collector::locationOrigId()
+	 * @used-by Df_Exline_Collector::locationOrigId()
 	 * @param string $cityNameUc
 	 * @return int|null
 	 */

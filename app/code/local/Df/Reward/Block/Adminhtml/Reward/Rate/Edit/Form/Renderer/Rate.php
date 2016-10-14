@@ -61,7 +61,4 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Edit_Form_Renderer_Rate
 	{
 		return $this->getRate()->getData($this->getEqualValueIndex());
 	}
-
-	/** @return Df_Reward_Block_Adminhtml_Reward_Rate_Edit_Form_Renderer_Rate */
-	public static function i() {return df_block(__CLASS__);}
 }

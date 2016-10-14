@@ -15,9 +15,7 @@ class Df_Localization_Helper_Data extends Mage_Core_Helper_Abstract {
 	}
 
 	/** @return Df_Localization_Helper_Locale */
-	public function locale() {
-		return Df_Localization_Helper_Locale::s();
-	}
+	public function locale() {return Df_Localization_Helper_Locale::s();}
 
 	/** @return Df_Localization_Helper_Translation */
 	public function translation() {return Df_Localization_Helper_Translation::s();}

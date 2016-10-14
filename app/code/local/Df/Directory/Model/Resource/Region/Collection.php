@@ -1,21 +1,11 @@
 <?php
-class Df_Directory_Model_Resource_Region_Collection
-	extends Mage_Core_Model_Mysql4_Collection_Abstract {
+class Df_Directory_Model_Resource_Region_Collection extends Df_Core_Model_Resource_Collection {
 	/**
-	 * Filter by country code (ISO 3)
-	 * @param string $countryCode
-	 * @return Df_Directory_Model_Resource_Region_Collection
+	 * В оригинале имеется метод
+	 * @see Mage_Directory_Model_Mysql4_Region_Collection::addCountryCodeFilter(),
+	 * однако он нигде не используется ни в Magento CE 1.4.0.1, ни в Magento CE 1.9.1.0
+	 * (и, скорей всего, в промежуточных версиях тоже)
 	 */
-	public function addCountryCodeFilter($countryCode) {
-		$this->getSelect()
-			->joinLeft(
-				array('country' => $this->_countryTable)
-				,'main_table.country_id = country.country_id'
-			)
-			->where('country.iso3_code = ?', $countryCode);
-		return $this;
-	}
-
 	/**
 	 * Filter by country_id
 	 * @param string|array $countryId
@@ -45,6 +35,22 @@ class Df_Directory_Model_Resource_Region_Collection
 			} else {
 				$this->addFieldToFilter('main_table.code', $regionCode);
 			}
+		}
+		return $this;
+	}
+
+	/**
+	* Filter region by its code or name
+	*
+	* @param string|array $region
+	* @return Mage_Directory_Model_Resource_Region_Collection
+	*/
+	public function addRegionCodeOrNameFilter($region) {
+		if (!empty($region)) {
+			$condition = is_array($region) ? array('in' => $region) : $region;
+			$this->addFieldToFilter(
+				array('main_table.code', 'main_table.default_name'), array($condition, $condition)
+			);
 		}
 		return $this;
 	}
@@ -84,20 +90,23 @@ class Df_Directory_Model_Resource_Region_Collection
 	}
 
 	/**
+	 * @override
+	 * @return Df_Directory_Model_Resource_Region
+	 */
+	public function getResource() {return Df_Directory_Model_Resource_Region::s();}
+
+	/**
 	 * Convert collection items to select options array
 	 * @return array
 	 */
 	public function toOptionArray() {
 		$options = $this->_toOptionArray('region_id', 'default_name', array('title' => 'default_name'));
-		if (count($options) > 0) {
-			array_unshift(
-				$options
-				,array(
-					'title '=> null
-					,'value' => '0'
-					,'label' => Mage::helper('directory')->__('-- Please select --')
-				)
-			);
+		if ($options) {
+			array_unshift($options, array(
+				'title '=> null
+				,'value' => '0'
+				,'label' => Mage::helper('directory')->__('-- Please select --')
+			));
 		}
 		return $options;
 	}
@@ -108,27 +117,22 @@ class Df_Directory_Model_Resource_Region_Collection
 	 */
 	protected function _initSelect() {
 		parent::_initSelect();
-		$locale = Mage::app()->getLocale()->getLocaleCode();
-		$this->addBindParam(':region_locale', $locale);
+		$this->addBindParam(':region_locale', rm_locale());
 		$this->getSelect()->joinLeft(
-			array('rname' => $this->_regionNameTable),'main_table.region_id = rname.region_id AND rname.locale = :region_locale',array('name'));
+			array('rname' => $this->_regionNameTable)
+			,'main_table.region_id = rname.region_id AND rname.locale = :region_locale'
+			,array('name'))
+		;
 		return $this;
 	}
-	/** @var string */
-	protected $_countryTable;
-	/** @var string */
-	protected $_regionNameTable;
 
 	/** @return array(string => Df_Directory_Model_Region) */
 	private function getMapFromNameToItem() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => Df_Directory_Model_Region) $result  */
-			$result = array();
-			foreach ($this->getItems() as $region) {
-				/** @var Df_Directory_Model_Region $region */
-				$result[mb_strtoupper($region->getNameOriginal())] = $region;
-			}
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} =
+				/** @uses Df_Directory_Model_Region::getNameOriginal() */
+				array_combine(df_t()->strtoupper($this->walk('getNameOriginal')), $this->getItems())
+			;
 		}
 		return $this->{__METHOD__};
 	}
@@ -138,13 +142,16 @@ class Df_Directory_Model_Resource_Region_Collection
 	 * @return void
 	 */
 	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Directory_Model_Region::mf(), Df_Directory_Model_Resource_Region::mf());
-		$this->_countryTable = rm_table('directory/country');
-		$this->_regionNameTable = rm_table('directory/country_region_name');
+		$this->_itemObjectClass = Df_Directory_Model_Region::_C;
+		$this->_countryTable = rm_table(Df_Directory_Model_Resource_Country::TABLE);
+		$this->_regionNameTable = rm_table(Df_Directory_Model_Resource_Region::TABLE__NAME);
+		$this->addOrder('name', Varien_Data_Collection::SORT_ORDER_ASC);
+		$this->addOrder('default_name', Varien_Data_Collection::SORT_ORDER_ASC);
 	}
-	const _CLASS = __CLASS__;
+	/** @var string */
+	protected $_countryTable;
+	/** @var string */
+	protected $_regionNameTable;
 
-	/** @return Df_Directory_Model_Resource_Region_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

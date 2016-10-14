@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Downloadable>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Downloadable>
 	</modules>
 	<global>
@@ -26,13 +26,29 @@
 				</rewrite>
 			</downloadable>
 		</blocks>
-		<helpers><df_downloadable><class>Df_Downloadable_Helper</class></df_downloadable></helpers>
-		<models><df_downloadable><class>Df_Downloadable_Model</class></df_downloadable></models>
+		<helpers>
+			<df_downloadable>
+				<class>Df_Downloadable_Helper</class>
+			</df_downloadable>
+		</helpers>
+		<models>
+			<df_downloadable>
+				<class>Df_Downloadable_Model</class>
+				<resourceModel>df_downloadable_resource</resourceModel>
+			</df_downloadable>
+			<df_downloadable_resource>
+				<class>Df_Downloadable_Model_Resource</class>
+			</df_downloadable_resource>
+		</models>
 	</global>
 	<adminhtml>
 		<translate>
 			<modules>
-				<Df_Downloadable><files><default>Df_Downloadable.csv</default></files></Df_Downloadable>
+				<Df_Downloadable>
+					<files>
+						<default>Df/Downloadable.csv</default>
+					</files>
+				</Df_Downloadable>
 			</modules>
 		</translate>
 	</adminhtml>

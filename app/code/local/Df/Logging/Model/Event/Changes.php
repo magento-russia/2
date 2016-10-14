@@ -21,9 +21,7 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 * @deprecated after 1.6.0.0
 	 * @return string
 	 */
-	public function getModelId() {
-		return $this->getSourceId();
-	}
+	public function getModelId() {return $this->getSourceId();}
 
 	/**
 	 * Getter for source name of event changes
@@ -31,9 +29,13 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 * @deprecated after 1.6.0.0
 	 * @return string
 	 */
-	public function getModelName() {
-		return $this->getSourceName();
-	}
+	public function getModelName() {return $this->getSourceName();}
+
+	/**
+	 * @override
+	 * @return Df_Logging_Model_Resource_Event_Changes_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
 
 	/**
 	 * Define if current model has difference between original and result data
@@ -47,9 +49,7 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 * @deprecated after 1.6.0.0
 	 * @param string $modelId
 	 */
-	public function setModelId($modelId) {
-		$this->setSourceId($modelId);
-	}
+	public function setModelId($modelId) {$this->setSourceId($modelId);}
 
 	/**
 	 * Setter for source name of event changes
@@ -57,9 +57,7 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 * @deprecated after 1.6.0.0
 	 * @param string $modelName
 	 */
-	public function setModelName($modelName) {
-		$this->setSourceName($modelName);
-	}
+	public function setModelName($modelName) {$this->setSourceName($modelName);}
 
 	/**
 	 * @override
@@ -79,15 +77,10 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	protected function _calculateDifference() {
 		if (is_null($this->_difference)) {
 			$updatedParams = $newParams = $sameParams = $difference = array();
-			$newOriginalData = $origData = $this->getOriginalData();
-			$newResultData = $resultData = $this->getResultData();
-			if (!is_array($origData)) {
-				$origData = array();
-			}
-			if (!is_array($resultData)) {
-				$resultData = array();
-			}
-
+			$newOriginalData = $this->getOriginalData();
+			$origData = df_nta($newOriginalData);
+			$newResultData = $this->getResultData();
+			$resultData = df_nta($newResultData);
 			if (!$origData && $resultData) {
 				$newOriginalData = array('__was_created' => true);
 				$difference = $resultData;
@@ -142,18 +135,19 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 
 	/**
 	 * @override
+	 * @return Df_Logging_Model_Resource_Event_Changes
+	 */
+	protected function _getResource() {return Df_Logging_Model_Resource_Event_Changes::s();}
+
+	/**
+	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Logging_Model_Resource_Event_Changes::mf());
-		$this->_globalSkipFields =
-			df_clean(
-				df_parse_csv(
-					(string)Mage::getConfig()->getNode(self::XML_PATH_SKIP_GLOBAL_FIELDS)
-				)
-			)
-		;
+		$this->_globalSkipFields = df_clean(df_csv_parse(rm_leaf_s(rm_config_node(
+			self::XML_PATH_SKIP_GLOBAL_FIELDS
+		))));
 	}
 
 	/**
@@ -172,12 +166,13 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 */
 	protected $_difference = null;
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Logging_Model_Resource_Event_Changes_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__ID = 'id';
 	const XML_PATH_SKIP_GLOBAL_FIELDS = 'adminhtml/df/logging/skip_fields';
 
 	/** @return Df_Logging_Model_Resource_Event_Changes_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Logging_Model_Resource_Event_Changes_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -191,11 +186,6 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 * @return Df_Logging_Model_Event_Changes
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Logging_Model_Resource_Event_Changes_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Logging_Model_Event_Changes */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

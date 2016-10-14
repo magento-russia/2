@@ -22,7 +22,7 @@
     <?php foreach($this->getInvitationCollection() as $invitation): ?>
         <tr>
             <td>
-                <?php echo df_text()->escapeHtml($invitation->getEmail()); ?>
+                <?php echo rm_e($invitation->getEmail()); ?>
             </td>
             <td>
                 <?php echo df_h()->invitation()->getInvitationStatusText($invitation);?>

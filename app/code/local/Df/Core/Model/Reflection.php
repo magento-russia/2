@@ -1,76 +1,69 @@
 <?php
-class Df_Core_Model_Reflection extends Df_Core_Model_DestructableSingleton {
+class Df_Core_Model_Reflection extends Df_Core_Model {
 	/**
-	 * @param string $className		Например:	«Df_SalesRule_Model_Event_Validator_Process»
+	 * «Df_1C_Cml2_Action_Catalog_Export_Process» => «cml2.action.catalog.export.process»
+	 * «Df_1C_Cml2_Export_Document_Catalog» => «export.document.catalog»
+	 * @param Mage_Core_Model_Abstract $model
+	 * @param string $separator
+	 * @param int $offsetLeft [optional]
+	 * @return string
+	 */
+	public function getModelId(Mage_Core_Model_Abstract $model, $separator, $offsetLeft = 0) {
+		/** @var string $className */
+		$className = get_class($model);
+		if (!isset($this->{__METHOD__}[$className][$separator][$offsetLeft])) {
+			$this->{__METHOD__}[$className][$separator][$offsetLeft] =
+				implode('.', array_slice(df_t()->lcfirst(rm_explode_class($className)), 3 + $offsetLeft))
+			;
+		}
+		return $this->{__METHOD__}[$className][$separator][$offsetLeft];
+	}
+
+	/**
+	 * «Df_SalesRule_Model_Event_Validator_Process» => «df_sales_rule/event_validator_process»
+	 * @param string $className
 	 * @return string
 	 */
 	public function getModelNameInMagentoFormat($className) {
 		if (!isset($this->{__METHOD__}[$className])) {
-			$classNameParts = explode(self::PARTS_SEPARATOR, $className);
 			/**
 			 * @var array $classNameParts
-			 * Например:	[«Df», «SalesRule», «Model», «Event», «Validator», «Process»]
+			 * Например: [«Df», «SalesRule», «Model», «Event», «Validator», «Process»]
 			 */
+			$classNameParts = rm_explode_class($className);
 			/**
 			 * @var string $moduleName
-			 * Например:	«Df_SalesRule»
+			 * Например: «Df_SalesRule»
 			 */
-			$moduleName =
-				implode(
-					self::PARTS_SEPARATOR
-					,array_slice($classNameParts, 0, self::MODULE_NAME_PARTS_COUNT)
-				)
-			;
+			$moduleName = rm_concat_class(array_slice($classNameParts, 0, 2));
 			/** @var string $entityType */
 			$entityType = strtolower(df_a($classNameParts, 2));
 			/**
 			 * @var string $moduleNameInMagentoFormat
-			 * Например:	«df_sales_rule»
+			 * Например: «df_sales_rule»
 			 */
-			$moduleNameInMagentoFormat =
-				$this->getModuleNameInMagentoFormat(
-					$moduleName
-					,$entityType
-				)
-			;
+			$moduleNameInMagentoFormat = $this->getModuleNameInMagentoFormat($moduleName, $entityType);
 			/**
 			 * @var string|null $classNameWithoutModuleNameInMagentoFormat
 			 * Например:	«event_validator_process»
 			 */
-			$classNameWithoutModuleNameInMagentoFormat = null;
-			/**
-			 * Для главного хелпера data всегда используем краткую нотацию
-			 * (Df_Directory_Helper_Data => df_directory).
-			 *
-			 * Длинную нотацию (df_directory/data) Magento так же понимает,
-			 * однако её использование приведёт к дублированию объектов-одиночек в реестре
-			 * (они там идентифицируются по имени в формате Magento)
-			 */
-			if (
-					(self::ENTITY_TYPE__HELPER === $entityType)
-				&&
-					(4 === count($classNameParts))
-				&&
-					'data' === strtolower(df_a($classNameParts, 3))
-			) {
-				$classNameWithoutModuleNameInMagentoFormat = null;
-			}
-			else {
-				$classNameWithoutModuleNameInMagentoFormat =
-					implode(
-						self::PARTS_SEPARATOR
-						,array_map(
-							'df_lcfirst'
-							,array_slice(
-								$classNameParts
-								,// +1, чтобы пропустить слово «model» или «block»
-								self::MODULE_NAME_PARTS_COUNT + 1
-							)
-						)
-					)
-				;
-			}
-			$this->{__METHOD__}[$className] = rm_concat_clean(self::MODULE_NAME_SEPARATOR
+			$classNameWithoutModuleNameInMagentoFormat =
+				/**
+				 * Для главного хелпера data всегда используем краткую нотацию
+				 * (Df_Directory_Helper_Data => df_directory).
+				 *
+				 * Длинную нотацию (df_directory/data) Magento так же понимает,
+				 * однако её использование приведёт к дублированию объектов-одиночек в реестре
+				 * (они там идентифицируются по имени в формате Magento)
+				 */
+				'helper' === $entityType
+				&& 4 === count($classNameParts)
+				&& 'data' === strtolower(df_a($classNameParts, 3))
+				? null
+				// +1, чтобы пропустить слово «model» или «block»
+				: rm_concat_class(df_t()->lcfirst(array_slice($classNameParts, 2 + 1)))
+			;
+			$this->{__METHOD__}[$className] = rm_concat_clean(self::$MODULE_NAME_SEPARATOR
 				,$moduleNameInMagentoFormat
 				,$classNameWithoutModuleNameInMagentoFormat
 			);
@@ -80,95 +73,35 @@ class Df_Core_Model_Reflection extends Df_Core_Model_DestructableSingleton {
 	}
 
 	/**
+	 * @used-by rm_module_name()
+	 * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
 	 * @param string $className
 	 * @return string
 	 */
 	public function getModuleName($className) {
-		df_param_string($className, 0);
 		if (!isset($this->{__METHOD__}[$className])) {
-			$this->{__METHOD__}[$className] =
-				implode(
-					self::PARTS_SEPARATOR
-					,array_slice(
-						explode(self::PARTS_SEPARATOR, $className)
-						,0
-						,self::MODULE_NAME_PARTS_COUNT
-					)
-				)
-			;
+			$this->{__METHOD__}[$className] = rm_concat_class(
+				array_slice(rm_explode_class($className), 0, 2)
+			);
 			$this->markCachedPropertyAsModified(__METHOD__);
 		}
 		return $this->{__METHOD__}[$className];
 	}
 
 	/**
-	 * @param string $className		Например:	«Df_SalesRule_Model_Resource_Order_Collection»
+	 * Намеренно добавили к названию метода окончание «ByClass»,
+	 * чтобы название метода не конфликтовало с родительским методом
+	 * @see Df_Core_Model::moduleTitle()
+	 * «Df_1C_Cml2_Export_Document_Catalog» => «1C:Управление торговлей»
+	 * @param string $className
 	 * @return string
 	 */
-	public function getResourceNameInMagentoFormat($className) {
+	public function getModuleTitleByClass($className) {
 		if (!isset($this->{__METHOD__}[$className])) {
-			$classNameParts = explode(self::PARTS_SEPARATOR, $className);
-			/**
-			 * @var array $classNameParts
-			 * Например:	[«Df», «SalesRule», «Model», «Resource», «Order», «Collection»]
-			 * Например:	[«Df», «PromoGift», «Model», «Resource», «Indexer»]
-			 */
-			/**
-			 * @var string $moduleName
-			 * Например:	«Df_SalesRule»
-			 * Например:	«Df_PromoGift»
-			 */
-			$moduleName =
-				implode(
-					self::PARTS_SEPARATOR
-					,array_slice($classNameParts, 0, self::MODULE_NAME_PARTS_COUNT)
-				)
-			;
-			df_assert_eq(self::ENTITY_TYPE__MODEL, strtolower(df_a($classNameParts, 2)));
-			/**
-			 * @var string $moduleNameInMagentoFormat
-			 * Например:	«df_sales_rule»
-			 * Например:	«df_promo_gift»
-			 */
-			$moduleNameInMagentoFormat =
-				$this->getModuleNameInMagentoFormat(
-					$moduleName
-					,self::ENTITY_TYPE__MODEL
-				)
-			;
-			/** @var string $resourcePrefix */
-			$resourcePrefix =
-				(string)
-					Mage::getConfig()->getNode()->global->models->{strtolower($moduleNameInMagentoFormat)}
-						->resourceModel
-			;
-			if (!$resourcePrefix) {
-				df_error(
-					'Не могу найти ресурсную модель «global/models/%s/resourceModel»'
-					,strtolower($moduleNameInMagentoFormat)
-				);
-			}
-			df_assert_string_not_empty($resourcePrefix);
-			/**
-			 * @var string|null $classNameWithoutModuleNameInMagentoFormat
-			 * Например: «event_validator_process»
-			 */
-			$classNameWithoutModuleNameInMagentoFormat =
-				implode(
-					self::PARTS_SEPARATOR
-					,array_map(
-						'df_lcfirst'
-						,array_slice(
-							$classNameParts
-							,// +2, чтобы пропустить слова «model» и «resource»
-							self::MODULE_NAME_PARTS_COUNT + 2
-						)
-					)
-				)
-			;
-			$this->{__METHOD__}[$className] = rm_concat_clean(self::MODULE_NAME_SEPARATOR
-				, $moduleNameInMagentoFormat
-				, $classNameWithoutModuleNameInMagentoFormat
+			/** @var string $moduleName */
+			$moduleName = $this->getModuleName($className);
+			$this->{__METHOD__}[$className] = rm_leaf_s(
+				rm_config_node('modules', $moduleName,  'title'), $moduleName
 			);
 			$this->markCachedPropertyAsModified(__METHOD__);
 		}
@@ -177,74 +110,67 @@ class Df_Core_Model_Reflection extends Df_Core_Model_DestructableSingleton {
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobal()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {
+	protected function cachedGlobal() {
 		return self::m(__CLASS__,
 			'getModelNameInMagentoFormat'
 			,'getModuleName'
+			/**
+			 * Намеренно добавили к названию метода окончание «ByClass»,
+			 * чтобы название метода не конфликтовало с родительским методом
+			 * @see Df_Core_Model::moduleTitle()
+			 */
+			,'getModuleTitleByClass'
 			,'getModuleNameInMagentoFormat'
-			,'getResourceNameInMagentoFormat'
 		);
 	}
-
-	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getPropertiesToCacheSimple() {return $this->getPropertiesToCache();}
 
 	/**
 	 * Почему бы не сохранять в межстраничном кэше?
 	 * Например, для модуля «Df_PromoGift» метод вернёт: «df_promo_gift»
 	 * @param string $moduleName
-	 * @param string $entityType[optional]
+	 * @param string $entityType [optional]
 	 * @return string
 	 */
-	private function getModuleNameInMagentoFormat($moduleName, $entityType = self::ENTITY_TYPE__MODEL) {
+	private function getModuleNameInMagentoFormat($moduleName, $entityType = 'model') {
 		if (!isset($this->{__METHOD__}[$moduleName][$entityType])) {
 			/** @var string $result */
 			$result = null;
 			/** @var array $entityTypeUcFirst */
 			static $entityTypeUcFirst = array();
 			if (!isset($entityTypeUcFirst[$entityType])) {
+				/**
+				 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+				 * потому что в данном случае нам не нужна поддержка UTF-8.
+				 */
 				$entityTypeUcFirst[$entityType] = ucfirst($entityType);
 			}
 			/** @var array $entityTypePlural */
 			static $entityTypePlural = array();
 			if (!isset($entityTypePlural[$entityType])) {
-				$entityTypePlural[$entityType] =
-					rm_sprintf('%ss', $entityType)
-				;
+				$entityTypePlural[$entityType] = $entityType . 's';
 			}
 			/**
 			 * @var string $modelPrefix
-			 * Например:	«Df_PromoGift_Model»
+			 * Например: «Df_PromoGift_Model»
 			 */
-			$modelPrefix =
-				implode(
-					self::PARTS_SEPARATOR
-					,array($moduleName, $entityTypeUcFirst[$entityType])
-				)
-			;
+			$modelPrefix = rm_concat_class($moduleName, $entityTypeUcFirst[$entityType]);
 			/** @var Varien_Simplexml_Element $config */
 			$config = Mage::getConfig()->getNode();
-			$nodes =
-				$config->xpath(
-					'global/' . $entityTypePlural[$entityType] . '/*/class[. = "' . $modelPrefix . '"]'
-				)
-			;
+			$nodes = $config->xpath(
+				'global/' . $entityTypePlural[$entityType] . '/*/class[. = "' . $modelPrefix . '"]'
+			);
 			if (is_array($nodes)) {
 				foreach ($nodes as $node) {
 					/** @var Varien_Simplexml_Element $node */
-
 					if ((string)$node === $modelPrefix) {
 						/** @var Varien_Simplexml_Element $parent */
 						$parent = $node->getParent();
 						$result = $parent->getName();
 						break;
 					}
-
 				}
 			}
 			$this->{__METHOD__}[$moduleName][$entityType] = $result;
@@ -253,16 +179,8 @@ class Df_Core_Model_Reflection extends Df_Core_Model_DestructableSingleton {
 		return $this->{__METHOD__}[$moduleName][$entityType];
 	}
 
-	const ENTITY_TYPE__BLOCK = 'block';
-	const ENTITY_TYPE__HELPER = 'helper';
-	const ENTITY_TYPE__MODEL = 'model';
-	const MODEL_PREFIX_FIELD_NAME = 'class';
-	/** Количество частей в названии модуля */
-	const MODULE_NAME_PARTS_COUNT = 2;
-	/** Разделитель между частями в названии класса */
-	const PARTS_SEPARATOR = '_';
 	/** Разделитель между названием модуля и названием класса внутри модуля */
-	const MODULE_NAME_SEPARATOR = '/';
+	private static $MODULE_NAME_SEPARATOR = '/';
 
 	/** @return Df_Core_Model_Reflection */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

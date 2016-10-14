@@ -18,11 +18,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 
 	/** @return string */
 	public function getIpAddress() {
-		return
-			!is_null(rm_state()->getController())
-			? rm_state()->getController()->getRequest()->getClientIp()
-			: ''
-		;
+		return !rm_controller() ? '' : rm_controller()->getRequest()->getClientIp();
 	}
 
 	/** @return string */
@@ -66,9 +62,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 	}
 
 	/** @return string */
-	public function getStreetAddress() {
-		return $this->getStreetLine1() ? $this->getStreetLine1() : $this->getStreetLine2();
-	}
+	public function getStreetAddress() {return $this->getBillingAddress()->getStreetAsText();}
 
 	/** @return string */
 	public function getScreenResolution() {
@@ -83,17 +77,13 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 	}
 
 	/** @return string */
-	public function getUserAgent() {
-		return df_a($_SERVER, "HTTP_USER_AGENT");
-	}
+	public function getUserAgent() {return df_a($_SERVER, "HTTP_USER_AGENT");}
 
 	/**
 	 * @param string $text
 	 * @return string
 	 */
-	private function __($text) {
-		return df_h()->chronopay()-> __ ($text);
-	}
+	private function __($text) {return df_h()->chronopay()->__($text);}
 
 	/**
 	 * @param string $name
@@ -114,11 +104,10 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 		df_assert(false !== $matchingResult);
 		if (0 < $matchingResult) {
 			$invalidSymbols = df_a($matches, 0);
-			if (count($invalidSymbols)) {
+			if ($invalidSymbols) {
 				df_error(
-					implode(
-						"\r\n"
-						,array_map(
+					df_concat_n(
+						array_map(
 							array($this, "__")
 							,array(
 								"The cardholder name you entered (“%s”) contains invalid characters: %s."
@@ -128,25 +117,23 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 						)
 					)
 					,$name
-					,implode(", ", $invalidSymbols)
+					,df_csv_pretty($invalidSymbols)
 				);
 			}
 		}
 		return $this;
 	}
 
-	/** @return Mage_Sales_Model_Order_Address */
+	/** @return Df_Sales_Model_Order_Address */
 	private function getBillingAddress() {return $this->getOrder()->getBillingAddress();}
 
 	/** @return string */
 	private function getCompositeName() {
 		if (!isset($this->{__METHOD__})) {
-			$name =
-				strtr(
-					mb_strtoupper($this->getPayment()->getCcOwner())
-					,df_h()->chronopay()->cartholderNameConversionConfig()->getConversionTable()
-				)
-			;
+			$name = strtr(
+				mb_strtoupper($this->getPayment()->getCcOwner())
+				,df_h()->chronopay()->cartholderNameConversionConfig()->getConversionTable()
+			);
 			$this->checkNameValidness($name);
 			// We expect that all name parts besides the last are First Name,
 			// and the last part is Last Name
@@ -162,17 +149,11 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Sales_Model_Order */
+	/** @return Df_Sales_Model_Order */
 	private function getOrder() {return $this->getPayment()->getData('order');}
 
 	/** @return Mage_Payment_Model_Info */
 	private function getPayment() {return $this->_getData(self::P__PAYMENT);}
-
-	/** @return string */
-	private function getStreetLine1() {return df_a($this->getBillingAddress()->getStreet(), 0, '');}
-
-	/** @return string */
-	private function getStreetLine2() {return df_a($this->getBillingAddress()->getStreet(), 1, '');}
 
 	/**
 	 * @override
@@ -182,7 +163,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__PAYMENT, 'Mage_Payment_Model_Info');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__PAYMENT = 'payment';
 	/**
 	 * @static

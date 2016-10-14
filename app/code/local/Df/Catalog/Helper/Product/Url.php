@@ -12,17 +12,10 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	 * @return Df_Catalog_Helper_Product_Url
 	 */
 	public function __construct() {
-		if (
-				df_enabled(Df_Core_Feature::SEO)
-			&&
-				df_cfg()->seo()->common()->getEnhancedRussianTransliteration()
-		) {
+		if (df_cfg()->seo()->common()->getEnhancedRussianTransliteration()) {
 			$this->_convertTable =
-				array_merge(
-					$this->_convertTable
-					,$this->getRussianUpdatesLc()
-				)
-			;
+				array_merge($this->_convertTable, $this->getRussianUpdatesLc()
+			);
 		}
 		parent::__construct();
 	}
@@ -63,12 +56,10 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 			$values = array_values(self::$_russianUpdatesRaw);
 			/** @var string[] $keys */
 			$keys = array_keys(self::$_russianUpdatesRaw);
-			$this->{__METHOD__} =
-				array_merge(
-					df_array_combine($keys, $values)
-					,df_array_combine($this->lowercaseArray($keys), $this->lowercaseArray($values))
-				)
-			;
+			$this->{__METHOD__} = array_merge(
+				df_array_combine($keys, $values)
+				,df_array_combine(df_t()->strtolower($keys), df_t()->strtolower($values))
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -77,24 +68,16 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	private function getRussianUpdatesLc() {
  		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $values */
-			$values = $this->lowercaseArray(array_values(self::$_russianUpdatesRaw));
+			$values = df_t()->strtolower(array_values(self::$_russianUpdatesRaw));
 			/** @var string[] $keys */
 			$keys = array_keys(self::$_russianUpdatesRaw);
-			$this->{__METHOD__} =
-				array_merge(
-					df_array_combine($keys, $values)
-					,df_array_combine($this->lowercaseArray($keys), $values)
-				)
-			;
+			$this->{__METHOD__} = array_merge(
+				df_array_combine($keys, $values)
+				,df_array_combine(df_t()->strtolower($keys), $values)
+			);
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * @param string[] $items
-	 * @return string[]
-	 */
-	private function lowercaseArray(array $items) {return array_map('mb_strtolower', $items);}
 
 	/** @var string[] */
 	private static $_russianUpdatesRaw =

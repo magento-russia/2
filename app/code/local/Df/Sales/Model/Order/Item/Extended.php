@@ -132,7 +132,7 @@ class Df_Sales_Model_Order_Item_Extended extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__ORDER_ITEM, 'Mage_Sales_Model_Order_Item');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ORDER_ITEM = 'order_item';
 	/**
 	 * @static

@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Page_Version extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Cms_Model_Resource_Page_Version extends Df_Core_Model_Resource {
 	/**
 	 * Checking if version id not last public for its page
 	 *
@@ -25,9 +25,14 @@ class Df_Cms_Model_Resource_Page_Version extends Mage_Core_Model_Mysql4_Abstract
 	public function isVersionHasPublishedRevision(Mage_Core_Model_Abstract $object)
 	{
 		$select = $this->_getReadAdapter()->select();
-		$select->from(array('p' => rm_table('cms/page')), array())
+		$select->from(array('p' => rm_table('cms/page')), null)
 			->where('p.page_id = ?', $object->getPageId())
-			->join(array('r' => rm_table('df_cms/page_revision')),'r.revision_id = p.published_revision_id', array('r.version_id'));
+			->join(
+				array('r' => rm_table(Df_Cms_Model_Resource_Page_Revision::TABLE))
+				,'r.revision_id = p.published_revision_id'
+				, 'r.version_id'
+			)
+		;
 		$result = $this->_getReadAdapter()->fetchOne($select);
 		return $result === $object->getVersionId();
 	}
@@ -86,25 +91,20 @@ class Df_Cms_Model_Resource_Page_Version extends Mage_Core_Model_Mysql4_Abstract
 	}
 
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_Cms_Model_Page_Version::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_cms/page_version';
+	protected function _construct() {$this->_init(self::TABLE, Df_Cms_Model_Page_Version::P__ID);}
 	/**
-	 * @see Df_Cms_Model_Page_Version::_construct()
-	 * @see Df_Cms_Model_Resource_Page_Version_Collection::_construct()
-	 * @return string
+	 * @used-by Df_Cms_Model_Resource_Page_Revision::_construct()
+	 * @used-by Df_Cms_Model_Resource_Page_Revision::_aggregateVersionData()
+	 * @used-by Df_Cms_Model_Resource_Page_Revision_Collection::joinVersions()
+	 * @used-by Df_Cms_Setup_2_0_0::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_cms/page_version';
 	/** @return Df_Cms_Model_Resource_Page_Version */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

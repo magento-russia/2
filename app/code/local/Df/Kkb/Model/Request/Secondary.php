@@ -1,23 +1,28 @@
 <?php
-/**
- * @method Df_Kkb_Model_Payment getPaymentMethod()
- */
-abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_Secondary {
+/** @method Df_Kkb_Model_Payment getMethod() */
+abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_Transaction {
 	/** @return string */
 	abstract public function getTransactionType();
 
 	/**
-	 * Используется только для диагностики!
-	 * @see Df_Payment_Model_Request_Secondary::getParams()
+	 * 2015-03-09
+	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @return array(string => string)
+	 * @see Df_Payment_Model_Request_Transaction::amount()
+	 * @used-by Df_Kkb_Model_RequestDocument_Signed::amount()
+	 * @see Df_Kkb_Model_Request_Payment::amount()
+	 * @return Df_Core_Model_Money
 	 */
-	public function getParams() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array('document' => $this->getRequestDocument()->getXml());
-		}
-		return $this->{__METHOD__};
-	}
+	public function amount() {return parent::amount();}
+
+	/**
+	 * Используется только для диагностики!
+	 * @override
+	 * @see Df_Payment_Model_Request_Secondary::_params()
+	 * @used-by Df_Payment_Model_Request_Secondary::params()
+	 * @return array(string => string|int)
+	 */
+	protected function _params() {return array('document' => $this->getRequestDocument()->getXml());}
 
 	/**
 	 * @override
@@ -32,7 +37,7 @@ abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_S
 	public function getResponse() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Kkb_Model_Response_Secondary::i($this->getResponseAsXml());
-			$this->{__METHOD__}->postProcess($this->getOrderPayment());
+			$this->{__METHOD__}->postProcess($this->getPayment());
 		}
 		return $this->{__METHOD__};
 	}
@@ -41,7 +46,7 @@ abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_S
 	public function getResponsePayment() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Kkb_Model_Response_Payment::i()->loadFromPaymentInfo($this->getOrderPayment())
+				Df_Kkb_Model_Response_Payment::i()->loadFromPaymentInfo($this->getPayment())
 			;
 		}
 		return $this->{__METHOD__};
@@ -64,20 +69,21 @@ abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_S
 	}
 
 	/**
+	 * @used-by Df_Kkb_Model_RequestDocument_Signed::getOrderId()
+	 * @see Df_Kkb_Model_Request_Payment::orderId()
+	 * @return string
+	 */
+	public function orderId() {return $this->order()->getIncrementId();}
+
+	/**
 	 * @override
 	 * @return array(string => string)
 	 */
 	protected function getResponseAsArray() {df_abstract(__METHOD__);}
 
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getResponseClass() {df_abstract(__METHOD__);}
-
 	/** @return string */
 	private function getHost() {
-		return $this->getPaymentMethod()->isTestMode() ? '3dsecure.kkb.kz' : 'epay.kkb.kz';
+		return $this->getMethod()->isTestMode() ? '3dsecure.kkb.kz' : 'epay.kkb.kz';
 	}
 	
 	/** @return Df_Kkb_Model_RequestDocument_Secondary */

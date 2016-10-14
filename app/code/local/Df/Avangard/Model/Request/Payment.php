@@ -1,18 +1,5 @@
 <?php
 class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
-	/** @return Df_Avangard_Model_Response_Registration */
-	public function getResponse() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Avangard_Model_Response_Registration::i(
-					$this->getResponseAsSimpleXml()->asCanonicalArray()
-				)
-			;
-			$this->{__METHOD__}->postProcess($this->getOrder()->getPayment());
-		}
-		return $this->{__METHOD__};
-	}
-
 	/**
 	 * @override
 	 * @return string
@@ -23,23 +10,12 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 
 	/**
 	 * @override
-	 * @return array(string => string)
+	 * @see Df_Payment_Model_Request_Payment::_params()
+	 * @used-by Df_Payment_Model_Request_Payment::params()
+	 * @return array(string => string|int)
 	 */
-	protected function getParamsInternal() {
-		return array(
-			'shop_id' => $this->getServiceConfig()->getShopId()
-			,'shop_passwd' => $this->getServiceConfig()->getRequestPassword()
-			,'amount' => rm_round(100 * $this->getAmount()->getAsFixedFloat())
-			,'order_number' => $this->getOrder()->getIncrementId()
-			,'order_description' => $this->getTransactionDescription()
-			,'language' => 'RU'
-			,'back_url' => $this->getCustomerReturnUrl()
-			,'client_name' => $this->getCustomerNameFull()
-			,'client_address' => $this->getAddressStreet()
-			,'client_phone' => $this->getCustomerPhone()
-			,'client_email' => $this->getCustomerEmail()
-			,'client_ip' => $this->getCustomerIpAddress()
-		);
+	protected function _params() {
+		return array('ticket' => $this->getResponse()->getPaymentExternalId());
 	}
 	
 	/** @return Zend_Http_Client */
@@ -62,7 +38,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 				 * 'application/x-www-form-urlencoded; charset=utf-8' automatically.
 				 * Please use Zend_Http_Client::setRawData to send this kind of content.»
 				 * @see Zend_Http_Client::_prepareBody()
-				 * @link http://magento-forum.ru/topic/4100/
+				 * http://magento-forum.ru/topic/4100/
 				 */
 				->setRawData(
 					http_build_query(array('xml' => $this->getRequestDocument()->getXml()), '', '&')
@@ -88,7 +64,20 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 	/** @return Df_Avangard_Model_RequestDocument */
 	private function getRequestDocument() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Avangard_Model_RequestDocument::registration($this->getParams());
+			$this->{__METHOD__} = Df_Avangard_Model_RequestDocument::registration(array(
+				'shop_id' => $this->shopId()
+				,'shop_passwd' => $this->password()
+				,'amount' => rm_round(100 * $this->amount()->getAsFixedFloat())
+				,'order_number' => $this->orderIId()
+				,'order_description' => $this->getTransactionDescription()
+				,'language' => 'RU'
+				,'back_url' => $this->urlCustomerReturn()
+				,'client_name' => $this->getCustomerNameFull()
+				,'client_address' => $this->street()
+				,'client_phone' => $this->phone()
+				,'client_email' => $this->email()
+				,'client_ip' => $this->getCustomerIpAddress()
+			));
 			rm_report('registration-request-{date}-{time}.xml', $this->{__METHOD__}->getXml());
 		}
 		return $this->{__METHOD__};
@@ -106,7 +95,18 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Avangard_Model_Response_Registration */
+	private function getResponse() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Df_Avangard_Model_Response_Registration::i(
+				$this->getResponseAsSimpleXml()->asCanonicalArray()
+			);
+			$this->{__METHOD__}->postProcess($this->payment());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return Df_Core_Sxe */
 	private function getResponseAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_xml($this->getHttpResponse()->getBody());

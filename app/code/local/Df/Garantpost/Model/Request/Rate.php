@@ -5,9 +5,7 @@ class Df_Garantpost_Model_Request_Rate extends Df_Garantpost_Model_Request {
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
-			'Referer' => 'http://www.garantpost.ru/tools/calc'
-		));
+		return array('Referer' => 'http://www.garantpost.ru/tools/calc') + parent::getHeaders();
 	}
 	/**
 	 * @override
@@ -19,5 +17,5 @@ class Df_Garantpost_Model_Request_Rate extends Df_Garantpost_Model_Request {
 	 * @return string
 	 */
 	protected function getRequestMethod() {return Zend_Http_Client::POST;}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

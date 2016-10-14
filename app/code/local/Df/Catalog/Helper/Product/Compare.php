@@ -30,7 +30,7 @@ class Df_Catalog_Helper_Product_Compare extends Mage_Catalog_Helper_Product_Comp
 			/** @var Df_Tweaks_Model_Settings_Catalog_Product $settings */
 			$settings = df_cfg()->tweaks()->catalog()->product();
 			$this->{__METHOD__} =
-					(df_module_enabled(Df_Core_Module::TWEAKS) && df_enabled(Df_Core_Feature::TWEAKS))
+					df_module_enabled(Df_Core_Module::TWEAKS)
 				&&
 					(
 							(

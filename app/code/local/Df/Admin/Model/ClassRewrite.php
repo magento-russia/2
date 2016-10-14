@@ -21,7 +21,7 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 	}
 
 	/** @return Df_Admin_Model_ClassInfo */
-	public function getOrigin() {return $this->cfg(self::P__ORIGIN);}
+	public function getOrigin() {return $this->cfg(self::$P__ORIGIN);}
 
 	/** @return string */
 	public function getType() {return $this->getOrigin()->getType();}
@@ -34,28 +34,22 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var bool $result */
 			/** @var int $count */
-			$count = count($this->getDestinations());
+			$count = $this->getDestinations()->count();
 			if ($count < 2) {
-				/**
-				 * Данный системный класс перекрывается не более, чем одним классом.
-				 * Точно не конфликт.
-				 */
+				// Данный системный класс перекрывается не более, чем одним классом.
+				// Точно не конфликт.
 				$result = false;
 			}
 			else if ($count > 3) {
-				/**
-				 * Данный системный класс перекрывается более, чем тремя классами.
-				 * Точно конфликт.
-				 */
+				// Данный системный класс перекрывается более, чем тремя классами.
+				// Точно конфликт.
 				$result = true;
 			}
 			else if (3 === $count) {
-				/**
-				 * Данный системный класс перекрывается ровно тремя классами.
-				 * Смотрим родственные отношения этих классов.
-				 * Алторитм аналогичен алгоритму для 2-х классов,
-				 * смотрите комментарии ниже для случая 2-х классов.
-				 */
+				// Данный системный класс перекрывается ровно тремя классами.
+				// Смотрим родственные отношения этих классов.
+				// Алгоритм аналогичен алгоритму для 2-х классов,
+				// смотрите комментарии ниже для случая 2-х классов.
 				/** @var Df_Admin_Model_ClassInfo[] $items */
 				$items = $this->getDestinations()->getItems();
 				/** @var Df_Admin_Model_ClassInfo $classInfoActive */
@@ -92,7 +86,7 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 				 *
 				 * ПОЯСНЕНИЕ:
 				 * Администратор мог уже устранить проблему изменением иерархии наследования:
-				 * @link http://magento-forum.ru/topic/4244/
+				 * http://magento-forum.ru/topic/4244/
 				 * Однако при этом директивы rewrite остались прежними.
 				 * Вообще, не находится удобного способа
 				 * одновременно исправить и директивы rewrite, и изменить иерархию наследования.
@@ -124,7 +118,7 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 				$result =
 						/**
 						 * Некоторые конфликты сознательно разрешены:
-						 * @link http://magento-forum.ru/topic/4710/page__view__findpost__p__18177
+						 * http://magento-forum.ru/topic/4710/page__view__findpost__p__18177
 						 */
 						!Df_Admin_Model_ClassRewrite_AllowedConflicts::s()->isAllowed(
 							$classInfoActive->getName(), $classInfoInactive->getName()
@@ -157,7 +151,7 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 						 * нам нужно отслеживать для rewrite отношения дед-внук
 						 * и не считать такие отношения конфликтом.
 						 * Вот поэтому мы и используем теперь
-						 * @see is_subclass_of вместо @see get_parent_class()
+						 * @see is_subclass_of() вместо @see get_parent_class()
 						 */
 						!is_subclass_of($classInfoActive->getName(), $classInfoInactive->getName())
 				;
@@ -184,18 +178,25 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ORIGIN, Df_Admin_Model_ClassInfo::_CLASS);
+		$this->_prop(self::$P__ORIGIN, Df_Admin_Model_ClassInfo::_C);
 	}
-	const _CLASS = __CLASS__;
-	const P__ORIGIN = 'origin';
+	/** @used-by Df_Admin_Model_ClassRewrite_Collection::itemClass() */
+	const _C = __CLASS__;
+	/** @var string */
+	private static $P__ORIGIN = 'origin';
+
 	/**
+	 * @used-by Df_Admin_Model_ClassRewrite_Finder::parseRewrites()
 	 * @param Df_Admin_Model_ClassInfo $origin
 	 * @return Df_Admin_Model_ClassRewrite
 	 */
 	public static function i(Df_Admin_Model_ClassInfo $origin) {
-		return new self(array(self::P__ORIGIN => $origin));
+		return new self(array(self::$P__ORIGIN => $origin));
 	}
+
 	/**
+	 * @used-by getId()
+	 * @used-by Df_Admin_Model_ClassRewrite_Collection::getByOrigin()
 	 * @param string $type
 	 * @param string $classNameMf
 	 * @return string

@@ -38,31 +38,28 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string $path
-	 * @param int $mode [optional]
+	 * @param bool $isDir [optional]
 	 * @return void
 	 */
-	public function chmodRecursive($path, $mode = 0777) {
-		/** @var RecursiveIteratorIterator $iterator */
-		$iterator =
-			new RecursiveIteratorIterator(
-				new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::SELF_FIRST
-			)
-		;
-		foreach ($iterator as $item) {
-			df()->file()->chmod($item, $mode);
-		}
-	}
-
-	/**
-	 * @param string $path
-	 * @return void
-	 */
-	public function create($path) {
+	public function createAndMakeWritable($path, $isDir = false) {
 		df_param_string_not_empty($path, 0);
-		/** @var Varien_Io_File $file */
-		$file = new Varien_Io_File();
-		$file->setAllowCreateFolders(true);
-		$file->createDestinationDir($path);
+		if (!isset($this->{__METHOD__}[$path])) {
+			if (file_exists($path)) {
+				df_assert(is_dir($path) === $isDir);
+				$this->chmod($path);
+			}
+			else {
+				/** @var string $dir */
+				$dir = $isDir ? $path : dirname($path);
+				if (!file_exists($dir)) {
+					$this->mkdir($dir);
+				}
+				else {
+					$this->chmod($dir);
+				}
+			}
+			$this->{__METHOD__}[$path] = true;
+		}
 	}
 
 	/**
@@ -95,24 +92,6 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string $path
-	 * @param int $mode [optional]
-	 * @return void
-	 */
-	public function prepareForWriting($path, $mode = 0777) {
-		df_param_string_not_empty($path, 0);
-		if (!isset($this->{__METHOD__}[$path])) {
-			if (!is_dir($path)) {
-				mkdir($path, $mode, $recursive = true);
-			}
-			else {
-				df()->file()->chmod($path, $mode);
-			}
-			$this->{__METHOD__}[$path] = true;
-		}
-	}
-
-	/**
-	 * @param string $path
 	 * @return string
 	 */
 	public function removeTrailingSlash($path) {
@@ -138,14 +117,70 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 		// and convert all slashes and backslashes to DS
 		$result = !$result ? BP : $this->adjustSlashes(preg_replace('#[/\\\\]+#u', $ds, $result));
 		if (!df_check_string($result)) {
+			df_error("[{method}]:\tНе могу обработать путь «{path}».", array(
+				'{method}%' => __METHOD__, '{path}' => $path
+			));
+		}
+		return $result;
+	}
+
+	/**
+	 * 2015-08-20
+	 * http://magento-forum.ru/topic/5197/
+	 * Обратите внимание, что для РС 2.х я сделал реализацию попроще:
+	 * http://code.dmitry-fedyuk.com/rm/2/commit/7bf8cfc71d3369b7cb33dacab8cf201758a7d11e
+	 * А для РС 3.х я написал этот метод давно: ещё в начале 2015 года.
+	 *
+	 * @param string $path
+	 * @throws Df_Core_Exception
+	 */
+	private function chmod($path) {
+		try {
+			$r = chmod($path, 0777);
+			rm_throw_last_error($r);
+		}
+		catch (Exception $e) {
+			/** @var bool $isPermissionDenied */
+			$isPermissionDenied = rm_contains($e->getMessage(), 'Permission denied');
 			df_error(
-				strtr(
-					"[{method}]:\tНе могу обработать путь {path}"
-					,array('{method}%' => __METHOD__, '{path}' => $path)
+				$isPermissionDenied
+				? "Операционная система запретила интерпретатору PHP {operation} «{path}»."
+				:
+					"Не удалась {operation} «{path}»."
+					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
+				,array(
+					'{operation}' => is_dir($path) ? 'запись в папку' : 'запись файла'
+					,'{path}' => $path
+					,'{message}' => $e->getMessage()
 				)
 			);
 		}
-		return $result;
+	}
+
+	/**
+	 * @param string $dir
+	 * @throws Df_Core_Exception
+	 */
+	private function mkdir($dir) {
+		try {
+			$r = mkdir($dir, 0777, $recursive = true);
+			rm_throw_last_error($r);
+		}
+		catch (Exception $e) {
+			/** @var bool $isPermissionDenied */
+			$isPermissionDenied = rm_contains($e->getMessage(), 'Permission denied');
+			df_error(
+				$isPermissionDenied
+				? 'Операционная система запретила интерпретатору PHP создание папки «{dir}».'
+				:
+					"Не удалось создать папку «{dir}»."
+					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
+				,array(
+					'{dir}' => $dir
+					,'{message}' => $e->getMessage()
+				)
+			);
+		}
 	}
 
 	/** @return Df_Core_Helper_Path */

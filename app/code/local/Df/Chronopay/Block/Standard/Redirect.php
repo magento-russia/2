@@ -2,6 +2,8 @@
 class Df_Chronopay_Block_Standard_Redirect extends Df_Core_Block_Abstract_NoCache {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Abstract::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
 	protected function _toHtml() {
@@ -15,15 +17,15 @@ class Df_Chronopay_Block_Standard_Redirect extends Df_Core_Block_Abstract_NoCach
 			->setMethod(Zend_Http_Client::POST)
 			->setUseContainer(true)
 		;
-		$standard->setOrder($this->getOrder());
+		$standard->setOrder($this['order']);
 		foreach ($standard->getStandardCheckoutFormFields() as $field => $value) {
-			$form
-				->addField(
-					$field
-					,Df_Varien_Data_Form_Element_Abstract::TYPE__HIDDEN
-					,array('name' => $field, 'value' => $value)
-				)
-			;
+			/** @var string $name */
+			/** @var string $value */
+			$form->addField(
+				$field
+				, Df_Varien_Data_Form_Element_Abstract::TYPE__HIDDEN
+				, array('name' => $field, 'value' => $value)
+			);
 		}
 		$html = '<html><body>';
 		$html.= $this->__('You will be redirected to ChronoPay in a few seconds.');
@@ -33,6 +35,12 @@ class Df_Chronopay_Block_Standard_Redirect extends Df_Core_Block_Abstract_NoCach
 		return $html;
 	}
 
-	/** @return Df_Chronopay_Block_Standard_Redirect */
-	public static function i() {return df_block(__CLASS__);}
+	/**
+	 * @used-by Df_Chronopay_StandardController::redirectAction()
+	 * @param Df_Sales_Model_Order $order
+	 * @return string
+	 */
+	public static function r(Df_Sales_Model_Order $order) {
+		return rm_render(__CLASS__, array('order' => $order));
+	}
 }

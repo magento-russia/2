@@ -45,30 +45,12 @@ class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 	/** @return Df_Seo_Model_Template_Adapter */
 	private function getAdapter() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_model(
-					$this->getAdapterClass()
-					,array(Df_Seo_Model_Template_Adapter::P__EXPRESSION => $this)
-				)
-			;
+			$this->{__METHOD__} = df_model(
+				rm_leaf_sne(rm_config_node('df/seo/template/objects', $this->getObjectName(), 'adapter'))
+				,array(Df_Seo_Model_Template_Adapter::P__EXPRESSION => $this)
+			);
 		}
 		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	private function getAdapterClass() {
-		/** @var string $valueAsString */
-		$valueAsString = df()->config()->getNodeValueAsString($this->getConfigNode());
-		return $valueAsString ? $valueAsString : null;
-	}
-
-	/**
-	 * @return Mage_Core_Model_Config_Element|null
-	*/
-	private function getConfigNode() {
-		return df()->config()->getNodeByKey(
-			'df/seo/template/objects/' . $this->getObjectName() . '/adapter'
-		);
 	}
 
 	/** @return string[] */
@@ -86,12 +68,13 @@ class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__PROCESSOR, Df_Seo_Model_Template_Processor::_CLASS)
-			->_prop(self::P__RAW, self::V_STRING)
-			->_prop(self::P__CLEAN, self::V_STRING)
+			->_prop(self::P__PROCESSOR, Df_Seo_Model_Template_Processor::_C)
+			->_prop(self::P__RAW, RM_V_STRING)
+			->_prop(self::P__CLEAN, RM_V_STRING)
 		;
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Seo_Model_Template_Adapter::_construct() */
+	const _C = __CLASS__;
 	const P__CLEAN = 'clean';
 	const P__PROCESSOR = 'processor';
 	const P__RAW = 'raw';

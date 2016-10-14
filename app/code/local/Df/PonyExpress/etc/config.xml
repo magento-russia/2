@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_PonyExpress>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>PONY EXPRESS</title>
+			<version>1.0.0</version>
 		</Df_PonyExpress>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-pony-express>
 				<active>0</active>
-				<model>df_pony_express/carrier</model>
+				<model>Df_PonyExpress_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

@@ -116,7 +116,7 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 				return;
 			}
 		}
-		return $this->_redirect('*/*/');
+		$this->_redirect('*/*/');
 	}
 
 	/**
@@ -170,8 +170,5 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 	 * Acl check for admin
 	 * @return boolean
 	 */
-	protected function _isAllowed()
-	{
-		return df_mage()->admin()->session()->isAllowed('df_reward/rates');
-	}
+	protected function _isAllowed() {return rm_admin_allowed('df_reward/rates');}
 }

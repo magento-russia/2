@@ -83,7 +83,7 @@ function rm_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
  * @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName()
  * возвращает не название колонки, а слово «PRIMARY»,
  * поэтому он нам не подходит.
- * @used-by Df_Localization_Model_Onetime_Dictionary_Db_Table::primaryKey()
+ * @used-by Df_Localization_Onetime_Dictionary_Db_Table::primaryKey()
  * @param string $table
  * @return string|null
  */

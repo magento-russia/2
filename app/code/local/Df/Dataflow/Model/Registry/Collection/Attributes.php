@@ -1,55 +1,59 @@
 <?php
 /**
- * @method Mage_Catalog_Model_Resource_Eav_Attribute|null findByLabel(string $label)
+ * @method Df_Catalog_Model_Resource_Eav_Attribute|null findByLabel(string $label)
  */
 class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model_Registry_Collection {
 	/**
 	 * @override
-	 * @param Mage_Core_Model_Abstract $entity
+	 * @param Mage_Core_Model_Abstract|Df_Catalog_Model_Resource_Eav_Attribute $entity
 	 * @return void
 	 */
 	public function addEntity(Mage_Core_Model_Abstract $entity) {
 		parent::addEntity($entity);
-		/** @var Mage_Catalog_Model_Resource_Eav_Attribute $entity */
+		/** @var Df_Catalog_Model_Resource_Eav_Attribute $entity */
 		$this->addEntityToCodeMap($entity);
 	}
 
 	/**
+	 * Обратите внимание на универсальность этого метода:
+	 * он используется как для создания, так и для изменения свойств.
 	 * @override
-	 * @param string $code
-	 * @return Mage_Catalog_Model_Resource_Eav_Attribute|null
+	 * @param array(string => mixed) $attributeData
+	 * @param string|null $code [optional]
+	 * @return Df_Catalog_Model_Resource_Eav_Attribute
 	 */
-	public function findByCode($code) {return df_a($this->getMapFromCodeToEntity(), $code);}
-
-	/**
-	 * @override
-	 * @param string $code
-	 * @param array $attributeData
-	 * @return Mage_Catalog_Model_Resource_Eav_Attribute
-	 */
-	public function findByCodeOrCreate($code, array $attributeData) {
-		df_param_string($code, 0);
-		/** @var Mage_Catalog_Model_Resource_Eav_Attribute $result */
+	public function createOrUpdate(array $attributeData, $code = null) {
+		if ($code) {
+			$attributeData['attribute_code'] = $code;
+		}
+		$code = df_a($attributeData, 'attribute_code');
+		df_assert_string_not_empty($code);
+		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = $this->findByCode($code);
 		if (!is_null($result)) {
-			$attributeData = array_merge($result->getData(), $attributeData);
+			$attributeData = $attributeData + $result->getData();
 		}
-		$result =
-			Df_Catalog_Model_Resource_Installer_AddAttribute::s()
-				->addAttributeRm($code, $attributeData)
-		;
+		$result = Df_Catalog_Model_Resource_Installer_AddAttribute::s()->addAttributeRm(
+			$code, $attributeData
+		);
 		df_assert($result->getId());
 		$this->addEntity($result);
 		return $result;
 	}
 
 	/**
-	 * @param Mage_Core_Model_Abstract $entity
+	 * @override
+	 * @param string $code
+	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
+	 */
+	public function findByCode($code) {return df_a($this->getMapFromCodeToEntity(), $code);}
+
+	/**
+	 * @param Mage_Core_Model_Abstract|Df_Catalog_Model_Resource_Eav_Attribute $entity
 	 * @return void
 	 */
 	public function removeEntity(Mage_Core_Model_Abstract $entity) {
 		parent::removeEntity($entity);
-		/** @var Mage_Catalog_Model_Resource_Eav_Attribute $entity */
 		$this->removeEntityFromCodeMap($entity);
 	}
 
@@ -59,11 +63,20 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	 */
 	protected function createCollection() {
 		/** @var Df_Catalog_Model_Resource_Product_Attribute_Collection $result */
-		$result = Df_Catalog_Model_Resource_Product_Attribute_Collection::i();
+		$result = Df_Catalog_Model_Resource_Eav_Attribute::c();
+		$result->addSetInfo(true);
 		/**
-		 * addFieldToSelect (Df_Eav_Const::ENTITY_EXTERNAL_ID)
-		 * нам не нужно (ибо это поле — не из основной таблицы, а из дополнительной)
-		 * и даже приводит к сбою (по той же причине)
+		 * Вызывать
+		 * @see Df_Catalog_Model_Resource_Product_Attribute_Collection::addFieldToSelect(
+		  		Df_1C_Const::ENTITY_EXTERNAL_ID
+		  )
+		 * здесь ошибочно (ибо это поле — не из основной таблицы,
+		 * а из дополнительной таблицы «catalog/eav_attribute»,
+		 * @see Df_1C_Setup_1_0_2::process())
+		 * и даже приводит к сбою (по той же причине).
+		 * Данные из дополнительной таблицы «catalog/eav_attribute»
+		 * добавляются к коллекции автоматически:
+		 * @see Mage_Catalog_Model_Resource_Product_Attribute_Collection::_initSelect()
 		 */
 		/**
 		 * Пока используем это вместо $result->addHasOptionsFilter(),
@@ -77,11 +90,11 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return 'Mage_Catalog_Model_Resource_Eav_Attribute';}
+	protected function getEntityClass() {return Df_Catalog_Model_Resource_Eav_Attribute::_C;}
 
 	/**
 	 * @override
-	 * @param Mage_Core_Model_Abstract|Mage_Catalog_Model_Resource_Eav_Attribute $entity
+	 * @param Mage_Core_Model_Abstract|Df_Catalog_Model_Resource_Eav_Attribute $entity
 	 * @return string|null
 	 */
 	protected function getEntityLabel(Mage_Core_Model_Abstract $entity) {
@@ -89,10 +102,10 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	}
 
 	/**
-	 * @param Mage_Catalog_Model_Resource_Eav_Attribute $entity
+	 * @param Df_Catalog_Model_Resource_Eav_Attribute $entity
 	 * @return void
 	 */
-	private function addEntityToCodeMap(Mage_Catalog_Model_Resource_Eav_Attribute $entity) {
+	private function addEntityToCodeMap(Df_Catalog_Model_Resource_Eav_Attribute $entity) {
 		$this->getMapFromCodeToEntity();
 		/** @var string $code */
 		$code = $entity->getAttributeCode();
@@ -101,13 +114,13 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	}	
 
 
-	/** @return array(string => Mage_Catalog_Model_Resource_Eav_Attribute) */
+	/** @return array(string => Df_Catalog_Model_Resource_Eav_Attribute) */
 	private function getMapFromCodeToEntity() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => Mage_Catalog_Model_Resource_Eav_Attribute) $result */
+			/** @var array(string => Df_Catalog_Model_Resource_Eav_Attribute) $result */
 			$result = array();
 			foreach ($this->getCollectionRm() as $entity) {
-				/** @var Mage_Catalog_Model_Resource_Eav_Attribute $entity */
+				/** @var Df_Catalog_Model_Resource_Eav_Attribute $entity */
 				/** @var string|null $code */
 				$code = $entity->getAttributeCode();
 				if ($code) {
@@ -121,10 +134,10 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	}
 
 	/**
-	 * @param Mage_Catalog_Model_Resource_Eav_Attribute $entity
+	 * @param Df_Catalog_Model_Resource_Eav_Attribute $entity
 	 * @return void
 	 */
-	private function removeEntityFromCodeMap(Mage_Catalog_Model_Resource_Eav_Attribute $entity) {
+	private function removeEntityFromCodeMap(Df_Catalog_Model_Resource_Eav_Attribute $entity) {
 		$this->getMapFromCodeToEntity();
 		/** @var string $code */
 		$code = $entity->getAttributeCode();

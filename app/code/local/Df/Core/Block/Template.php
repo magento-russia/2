@@ -1,31 +1,48 @@
 <?php
-/**
- * Намеренно не делаем это класс абстрактным,
- * потому что его экземпляры имеют практический смысл
- */
+// Намеренно не делаем это класс абстрактным,
+// потому что его экземпляры имеют практический смысл
 class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	/**
+	 * Этот метод отличается от методов @see getData(), @see offsetGet(), @see _getData()
+	 * возможностью указать значение по умолчанию.
 	 * @param string $key
-	 * @param mixed $default[optional]
+	 * @param mixed $default [optional]
 	 * @return mixed
 	 */
 	public function cfg($key, $default = null) {
 		/** @var mixed $result */
 		/**
-		 * Обратите внимание,
-		 * что здесь нужно вызывать именно @see Df_Core_Block_Template::getData(),
-		 * а не @see Varien_Object::_getData()
-		 * чтобы работали валидаторы.
+		 * 2015-03-26
+		 * Раньше здесь стоял вызов @see getData()
+		 * Однако при новой реализации @see getData()
+		 * разумнее вызывать сразу @uses offsetGet():
+		 * нам тогда не приходится обрабатывать ситуацию с пустым ключом $key:
+		 * при вызове @see cfg() ключ не может быть пустым.
+		 *
+		 * Обратите внимание, что вызывать @see _getData() здесь ошибочно,
+		 * потому что тогда могут не сработать валидаторы и фильтры.
 		 */
-		$result = $this->getData($key);
+		$result = $this->offsetGet($key);
 		// Некоторые фильтры заменяют null на некоторое другое значение,
 		// поэтому обязательно учитываем равенство null
 		// значения свойства ДО применения фильтров.
-		/** @var bool $valueWasNullBeforeFilters */
-		$valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		//
 		// Раньше вместо !is_null($result) стояло !$result.
 		// !is_null выглядит логичней.
-		return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
+		//
+		// 2015-02-10
+		// Раньше код был таким:
+		// $valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		// return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
+		// Изменил его ради ускорения.
+		// Неожиданным результатом стала простота и понятность нового кода.
+		return
+			null === $result
+			|| !isset($this->_valueWasNullBeforeFilters[$key])
+			|| $this->_valueWasNullBeforeFilters[$key]
+			? $default
+			: $result
+		;
 	}
 
 	/**
@@ -35,18 +52,19 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	 * @return string
 	 */
 	public function fetchView($fileName) {
+		/** @var string $result */
 		try {
 			$result = parent::fetchView($fileName);
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			/**
 			 * «Failed to delete buffer zlib output compression»
-			 * @link http://www.mombu.com/php/php/t-output-buffering-and-zlib-compression-issue-3554315.html
+			 * http://www.mombu.com/php/php/t-output-buffering-and-zlib-compression-issue-3554315.html
 			 */
 			if (ob_get_level()) {
 				while (@ob_end_clean());
 			}
-			throw $e;
+			df_error($e);
 		}
 		if ($this->isItFirstRunForTemplate()) {
 			Mage::register($this->getTemplateExecutionKey(), true);
@@ -63,37 +81,42 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	}
 
 	/**
+	 * 2015-03-11
+	 * Обратите внимание, что в Magento CE 1.4.0.1
+	 * методы @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * и @see Mage_Core_Block_Abstract::getCacheKeyInfo() отсутствуют
+	 * (они появились в Magento CE 1.4.1.0).
+	 * Нас это не очень волнует, потому что родительский метод мы не вызываем.
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array(get_class($this), Mage::app()->getStore()->getCode());
-			if ($this->getTemplate()) {
-				$result[]= $this->getTemplate();
+			$result = array(get_class($this), rm_store()->getCode(), $this->getArea());
+			/** @var string|null $template */
+			$template = $this->getTemplate();
+			if ($template) {
+				$result[]= $template;
 			}
-			if ($this->needCachingPerRequestAction()) {
+			if ($this->shouldCachePerRequestAction()) {
 				/**
 				 * 2015-08-25
 				 * Раньше тут стояло:
-				 * $result[]= rm_state()->getController()->getFullActionName();
+				 * $result[]= rm_action_name();
 				 * Крайне неряшливый модуль Ves_Blog
 				 * оформительской темы Ves Super Store (ThemeForest 8002349)
 				 * ломает инициализацию системы, и в данной точке программы
 				 * контроллер может быть ещё не инициализирован.
 				 */
-				$result[]=
-					rm_state()->getController()
-					? rm_state()->getController()->getFullActionName()
-					: Mage::app()->getRequest()->getRequestUri()
-				;
+				/** @var string $a */
+				$a = rm_action_name();
+				$result[]= $a ? $a : df_current_url();
 			}
-			if ($this->getCacheKeySuffix()) {
-				$result[]= $this->getCacheKeySuffix();
-			}
-			$result = array_merge($result, rm_array($this->getCacheKeyParamsAdditional()));
-			$this->{__METHOD__} = $result;
+			/** @var string|string[] $suffix */
+			$suffix = $this->cacheKeySuffix();
+			$this->{__METHOD__} = !$suffix ? $result : array_merge($result, rm_array($suffix));
 		}
 		return $this->{__METHOD__};
 	}
@@ -103,29 +126,35 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	 * @return int|null|bool
 	 */
 	public function getCacheLifetime() {
-		return $this->needCaching() ? self::CACHE_LIFETIME_STANDARD : null;
-	}
-
-	/** @return string */
-	public function getCurrentClassNameInMagentoFormat() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_h()->core()->reflection()->getModelNameInMagentoFormat(get_class($this))
-			;
-		}
-		return $this->{__METHOD__};
+		return $this->canCache() ? self::CACHE_LIFETIME_STANDARD : null;
 	}
 
 	/**
-	 * @throws Mage_Core_Exception
+	 * @override
+	 * Обратите внимание, что мы сознательно никак не используем параметр $index
+	 * и не поддерживаем сложные ключи $key, как это делает родительский метод.
+	 * @see Varien_Object::getData()
 	 * @param string $key
 	 * @param null|string|int $index
 	 * @return mixed
 	 */
 	public function getData($key = '', $index = null) {
 		/** @var mixed $result */
-		if (('' === $key) || array_key_exists($key, $this->_data)) {
-			$result = parent::getData($key, $index);
+		if ('' === $key) {
+			/**
+			 * Фильтры и валидаторы для присутствующих в @see $_data ключей
+			 * уже были применены при вызове @see _prop(),
+			 * поэтому данные уже проверены и отфильтрованы.
+			 */
+			$result = $this->_data;
+		}
+		else if (array_key_exists($key, $this->_data)) {
+			/**
+			 * Фильтры и валидаторы для присутствующих в @see $_data ключей
+			 * уже были применены при вызове @see _prop(),
+			 * поэтому данные уже проверены и отфильтрованы.
+			 */
+			$result = $this->_data[$key];
 		}
 		else {
 			// Обрабатываем здесь только те случаи,
@@ -144,36 +173,31 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 
 	/**
 	 * @override
+	 * @see Varien_Object::getId()
+	 * @used-by Varien_Data_Collection::addItem()
 	 * @return string|int
 	 */
 	public function getId() {
 		return
 			empty($this->_idFieldName) && is_null($this->_getData('id'))
-			? // для использования блоков в коллекциях
-			  $this->getAutoGeneratedId()
+			? $this->getAutoGeneratedId()
 			: parent::getId()
 		;
 	}
 
 	/**
-	 * Этот метод используется, как правило,
-	 * в заимоствованных модулях при их рефакторинге.
-	 * @return Df_Core_Block_Template
-	 */
-	public function getRmParent() {return $this->getData(self::P__RM_PARENT);}
-
-	/**
-	 * Не кешируем результат метода, чтобы соблюсти спецификации родительского метода.
-	 * Например, при вызове сначала setTemplate (A)
-	 * последующий вызов getTemplate должен вернуть A.
 	 * @override
+	 * @see Mage_Core_Block_Template::getTemplate()
+	 * @used-by getCacheKeyInfo()
+	 * @used-by Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Template::getTemplateFile()
 	 * @return string|null
 	 */
 	public function getTemplate() {
 		return
-			!$this->needToShow()
-			? null
-			: (parent::getTemplate() ? parent::getTemplate() : $this->getDefaultTemplate())
+			isset($this->_template) && $this->_template
+			? $this->_template
+			: $this->defaultTemplate()
 		;
 	}
 
@@ -184,6 +208,41 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 
 	/**
 	 * @override
+	 * @used-by getData()
+	 * @see Varien_Object::offsetGet()
+	 * @see ArrayAccess::offsetGet()
+	 * @param string $offset
+	 * @return mixed
+	*/
+	public function offsetGet($offset) {
+		/** @var mixed $result */
+		if (array_key_exists($offset, $this->_data)) {
+			/**
+			 * Фильтры и валидаторы для присутствующих в @see $_data ключей
+			 * уже были применены при вызове @see _prop(),
+			 * поэтому данные уже проверены и отфильтрованы.
+			 */
+			$result = $this->_data[$offset];
+		}
+		else {
+			// Обратите внимание, что фильтры и валидаторы применяются только единократно,
+			// и повторно мы в эту ветку кода не попадём
+			// из-за срабатывания условия array_key_exists($key, $this->_data) выше
+			// (даже если фильтры для null вернут null, наличие ключа array('ключ' => null))
+			// достаточно, чтобы не попадать в данную точку программы повторно.
+			//
+			// Обрабатываем здесь только те случаи,
+			// когда запрашиваются значения неицициализированных свойств объекта
+			$result = $this->_applyFilters($offset, null);
+			$this->_validate($offset, $result);
+			$this->_data[$offset] = $result;
+		}
+		return $result;
+	}
+
+	/**
+	 * @override
+	 * @see Varien_Object::setData()
 	 * @param string|array(string => mixed) $key
 	 * @param mixed $value
 	 * @return Df_Core_Block_Template
@@ -219,87 +278,81 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	}
 
 	/**
-	 * @param string $name
-	 * @return Df_Core_Block_Template
+	 * 2015-03-12
+	 * Как ни странно, перекрытие именно метода @see Mage_Core_Block_Abstract::_loadCache()
+	 * является наиболее эффективным применением @uses needToShow()
+	 * Обратите внимание, что метод @used-by Mage_Core_Block_Abstract::toHtml()
+	 * перекрыть невозможно, потому что он объвлен как final.
+	 * @see Mage_Core_Block_Abstract::_loadCache() используется только из
+	 * @see Mage_Core_Block_Abstract::toHtml()
+	 * Ранее я перекрывал @see Mage_Core_Block_Template::getTemplate() следующим образом:
+			public function getTemplate() {
+				return
+					!$this->needToShow()
+					? null
+					: (
+						isset($this->_template) && $this->_template
+						? $this->_template
+						: $this->defaultTemplate()
+					)
+				;
+			}
+	 * Это был вполне рабочий вариант, но перекрывать @see Mage_Core_Block_Abstract::_loadCache()
+	 * эффективнее:
+	 * 1) _loadCache() вызывается раньше, чем getTemplate(),
+	 * и при отстутствии необходимости отображать блок система тратит меньше ресурсов
+	 * на исполнение ненужного кода.
+	 * 2)  _loadCache() вызывается только из единственной точки системы:
+	 * из @see Mage_Core_Block_Abstract::toHtml()
+	 * Это гарантирует нам, что система не будет тратить ресурсы
+	 * на повторные вызовы @see needToShow()
+	 * Обратите внимание, что перекрытие @see getTemplate() таким достоинством не обладает:
+	 * этот метод и вызывается много откуда,
+	 * и, более того, чтобы соблюсти спецификации родительского метода,
+	 * результат @see getTemplate() мы не можем кэшировать:
+	 * например, при вызове сначала setTemplate(A)
+	 * последующий вызов getTemplate() должен вернуть A.
+	 * @override
+	 * @see Mage_Core_Block_Abstract::_loadCache()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
+	 * @return string|bool
 	 */
-	protected function addGlobalCss($name) {
-		if (!is_null($this->getBlockHead())) {
-			$this->getBlockHead()
-				->addItem(
-					$type = 'js_css'
-					,$name
-				)
-			;
-		}
-		return $this;
-	}
-
-	/**
-	 * @param string $name
-	 * @return Df_Core_Block_Template
-	 */
-	protected function addGlobalJs($name) {
-		if (!is_null($this->getBlockHead())) {
-			$this->getBlockHead()
-				->addItem(
-					$type = 'js'
-					,$name
-				)
-			;
-		}
-		return $this;
-	}
-
-	/**
-	 * @param string $name
-	 * @return Df_Core_Block_Template
-	 */
-	protected function addSkinCss($name) {
-		if (!is_null($this->getBlockHead())) {
-			$this->getBlockHead()
-				->addItem(
-					$type = 'skin_css'
-					,$name
-				)
-			;
-		}
-		return $this;
-	}
-
-	/**
-	 * @param string $name
-	 * @return Df_Core_Block_Template
-	 */
-	protected function addSkinJs($name) {
-		if (!is_null($this->getBlockHead())) {
-			$this->getBlockHead()
-				->addItem(
-					$type = 'skin_js'
-					,$name
-				)
-			;
-		}
-		return $this;
-	}
+	protected function _loadCache()	{return !$this->needToShow() ? '' : parent::_loadCache();}
 
 	/**
 	 * @param string $key
 	 * @param Zend_Validate_Interface|Df_Zf_Validate_Type|string|mixed[] $validator
 	 * @param bool|null $isRequired [optional]
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return Df_Core_Block_Template
 	 */
 	protected function _prop($key, $validator, $isRequired = null) {
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
 		/**
-		 * Обратите внимание, что если метод _prop() был вызван с двумя параметрами,
+		 * Полезная проверка!
+		 * Как-то раз ошибочно описал поле без значения:
+			private static $P__TYPE;
+		 * И при вызове $this->_prop(self::$P__TYPE, RM_V_STRING_NE)
+		 * получил диагностическое сообщение: «значение «» недопустимо для свойства «».»
+		 */
+		df_param_string_not_empty($key, 0);
+		/**
+		 * Обратите внимание, что если метод @see _prop() был вызван с двумя параметрами,
 		 * то и count($arguments) вернёт 2,
-		 * хотя в методе _prop() всегда доступен и 3-х параметр: $isRequired.
+		 * хотя в методе @see _prop() всегда доступен и 3-х параметр: $isRequired.
 		 * Другими словами, @see func_get_args() не возвращает параметры по умолчанию,
 		 * если они не были реально указаны при вызове текущего метода.
 		 */
-		if (2 < count($arguments)) {
+		/**
+		 * Хотя документация к PHP говорит,
+		 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
+		 * однако на самом деле @uses func_num_args() быть параметром других функций
+		 * в любых версиях PHP 5 и даже PHP 4.
+		 * http://3v4l.org/HKFP7
+		 * http://php.net/manual/function.func-num-args.php
+		 */
+		if (2 < func_num_args()) {
+			/** @var mixed[] $arguments */
+			$arguments = func_get_args();
 			$isRequired = rm_last($arguments);
 			/** @var bool $hasRequiredFlag */
 			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired);
@@ -316,44 +369,24 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		/** @var Zend_Filter_Interface[] $additionalFilters */
 		$additionalFilters = array();
 		if (!is_array($validator)) {
-			$validator =
-				$this->_resolveValidatorOrFilter(
-					$validator
-					, $key
-					/**
-					 * Если значение флага $isRequired не указано,
-					 * то ради ускорения системы используем в качестве валидатора объект-одиночку.
-					 * Если же значение флага $isRequired указано,
-					 * то использовать объект-одиночку нельзя:
-					 * ведь для каждого такого валидатора значение флага может быть своим
-					 */
-					, $useSingleton = is_null($isRequired)
-				)
-			;
+			$validator = Df_Core_Validator::resolveForProperty(
+				$this, $validator, $key, $skipOnNull = false === $isRequired
+			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 		}
 		else {
 			/** @var array(Zend_Validate_Interface|Df_Zf_Validate_Type|string) $additionalValidatorsRaw */
 			$additionalValidatorsRaw = rm_tail($validator);
-			$validator =
-				$this->_resolveValidatorOrFilter(
-					rm_first($validator)
-					, $key
-					/**
-					 * Если значение флага $isRequired не указано,
-					 * то ради ускорения системы используем в качестве валидатора объект-одиночку.
-					 * Если же значение флага $isRequired указано,
-					 * то использовать объект-одиночку нельзя:
-					 * ведь для каждого такого валидатора значение флага может быть своим
-					 */
-					, $useSingleton = is_null($isRequired)
-				)
-			;
+			$validator = Df_Core_Validator::resolveForProperty(
+				$this, rm_first($validator), $key, $skipOnNull = false === $isRequired
+			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 			foreach ($additionalValidatorsRaw as $additionalValidatorRaw) {
 				/** @var Zend_Validate_Interface|Zend_Filter_Interface|string $additionalValidatorsRaw */
 				/** @var Zend_Validate_Interface|Zend_Filter_Interface $additionalValidator */
-				$additionalValidator = $this->_resolveValidatorOrFilter($additionalValidatorRaw, $key);
+				$additionalValidator = Df_Core_Validator::resolveForProperty(
+					$this, $additionalValidatorRaw, $key
+				);
 				if ($additionalValidator instanceof Zend_Validate_Interface) {
 					$additionalValidators[]= $additionalValidator;
 				}
@@ -362,7 +395,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 				}
 			}
 		}
-		$this->_addValidator($key, $validator, $isRequired);
+		$this->_validators[$key][] = $validator;
 		if ($validator instanceof Zend_Filter_Interface) {
 			/** @var Zend_Filter_Interface $filter */
 			$filter = $validator;
@@ -374,12 +407,10 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		}
 		/**
 		 * Раньше мы проводили валидацию лишь при извлечении значения свойства,
-		 * в методе @see Df_Core_Block_Template::getData().
+		 * в методе @see getData().
 		 * Однако затем мы сделали улучшение:
-		 * перенести валидацию на более раннюю стадию — инициализацию свойства
-		 * @see Df_Core_Block_Template::setData(),
-		 * и инициализацию валидатора/фильтра
-		 * @see Df_Core_Block_Template::_prop().
+		 * перенести валидацию на более раннюю стадию — инициализацию свойства @see setData(),
+		 * и инициализацию валидатора/фильтра @see _prop().
 		 * Это улучшило диагностику случаев установки объекту некорректных значений свойств,
 		 * потому что теперь мы возбуждаем исключительную ситуацию
 		 * сразу при попытке установки некорректного значения.
@@ -390,57 +421,76 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		/** @var bool $hasValueVorTheKey */
 		$hasValueVorTheKey = array_key_exists($key, $this->_data);
 		if ($hasValueVorTheKey) {
-			$this->_validateByConcreteValidator($key, $this->_data[$key], $validator);
+			Df_Core_Validator::checkProperty($this, $key, $this->_data[$key], $validator);
 		}
 		foreach ($additionalValidators as $additionalValidator) {
 			/** @var Zend_Validate_Interface $additionalValidator */
-			$this->_addValidator($key, $additionalValidator);
+			$this->_validators[$key][] = $additionalValidator;
 			if ($hasValueVorTheKey) {
-				$this->_validateByConcreteValidator($key, $this->_data[$key], $additionalValidator);
+				Df_Core_Validator::checkProperty($this, $key, $this->_data[$key], $additionalValidator);
 			}
 		}
 		return $this;
 	}
-	/** @var array(string => Zend_Filter_Interface[]) */
-	private $_filters = array();
-	/** @var array(string => Zend_Validate_Interface[]) */
-	private $_validators = array();
-
-	/** @return Mage_Page_Block_Html_Head|null */
-	protected function getBlockHead() {return df()->layout()->getBlockHead();}
-
-	/** @return string[] */
-	protected function getCacheKeyParamsAdditional() {return array();}
-
-	/** @return string */
-	protected function getCacheKeySuffix() {return $this->cfg(self::P__CACHE_KEY_SUFFIX);}
-
-	/** @return string|null */
-	protected function getDefaultTemplate() {return null;}
 
 	/** @return bool */
-	protected function needCaching() {return true;}
+	protected function canCache() {return true;}
 
-	/** @return bool */
-	protected function needCachingPerRequestAction() {return false;}
+	/**
+	 * @used-by getCacheKeyInfo()
+	 * @return string|string[]
+	 */
+	protected function cacheKeySuffix() {return array();}
 
-	/** @return bool */
+	/**
+	 * @used-by getTemplate()
+	 * @return string|null
+	 */
+	protected function defaultTemplate() {return null;}
+
+	/**
+	 * 2015-04-21
+	 * Для иерархической декомпозиции сложных блоков.
+	 * @see parent()
+	 * @return Mage_Core_Block_Abstract
+	 */
+	protected function grandGrandParent() {return $this->grandParent()->getParentBlock();}
+
+	/**
+	 * 2015-04-02
+	 * Для иерархической декомпозиции сложных блоков.
+	 * @see parent()
+	 * @return Mage_Core_Block_Abstract
+	 */
+	protected function grandParent() {return $this->parent()->getParentBlock();}
+
+	/**
+	 * @used-by _loadCache()
+	 * @used-by getCacheKey()
+	 * @return bool
+	 */
 	protected function needToShow() {return true;}
 
 	/**
+	 * 2015-04-01
+	 * Для иерархической декомпозиции сложных блоков.
+	 * @see grandParent()
+	 * @return Mage_Core_Block_Abstract
+	 */
+	protected function parent() {return $this->getParentBlock();}
+
+	/**
+	 * @used-by getCacheKeyInfo()
+	 * @return bool
+	 */
+	protected function shouldCachePerRequestAction() {return false;}
+
+	/**
 	 * @param string $key
-	 * @param Zend_Filter_Interface|string $filter
+	 * @param Zend_Filter_Interface $filter
 	 * @return void
 	 */
-	private function _addFilter($key, $filter) {
-		if (is_string($filter)) {
-			$filter = self::_getValidatorByName($filter);
-		}
-		df_assert(is_object($filter));
-		df_assert($filter instanceof Zend_Filter_Interface);
-		if (!isset($this->_filters[$key])) {
-			$this->_filters[$key] = array();
-		}
+	private function _addFilter($key, Zend_Filter_Interface $filter) {
 		$this->_filters[$key][] = $filter;
 		/**
 		 * Не используем @see isset(), потому что для массива
@@ -456,36 +506,12 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 
 	/**
 	 * @param string $key
-	 * @param Zend_Validate_Interface $validator
-	 * @param bool|null $isRequired [optional]
-	 * @return void
-	 */
-	private function _addValidator($key, Zend_Validate_Interface $validator, $isRequired = null) {
-		/**
-		 * Обратите внимание, что здесь ошибочно писать
-		 		$isRequired = rm_bool($isRequired);
-		 * потому что $isRequired может принимать не только значения true/false,
-		 * но и отличное от них по смыслу значение null.
-		 */
-		/**
-		 * Обратите внимание, что флаг $RM_VALIDATOR__REQUIRED надо устанавливать в любом случае,
-		 * потому что у нас подавляющее большинство валидаторов является объектами-одиночками,
-		 * и нам надо сбросить предыдущее значение $isRequired у этого объекта.
-		 */
-		$validator->{self::$RM_VALIDATOR__REQUIRED} = $isRequired;
-		if (!isset($this->_validators[$key])) {
-			$this->_validators[$key] = array();
-		}
-		$this->_validators[$key][] = $validator;
-	}
-
-	/**
-	 * @param string $key
 	 * @param mixed $value
 	 * @return mixed
 	 */
 	private function _applyFilters($key, $value) {
 		/** @var Zend_Filter_Interface[] $filters */
+		/** @noinspection PhpParamsInspection */
 		$filters = df_a($this->_filters, $key, array());
 		foreach ($filters as $filter) {
 			/** @var Zend_Filter_Interface $filter */
@@ -515,8 +541,6 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	private function _checkForNull($key, $value) {
 		$this->_valueWasNullBeforeFilters[$key] = is_null($value);
 	}
-	/** @var array(string => bool) */
-	private $_valueWasNullBeforeFilters = array();
 
 	/**
 	 * @param array(string => mixed) $params
@@ -531,58 +555,24 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	}
 
 	/**
-	 * @param Zend_Validate_Interface|Zend_Filter_Interface|string $validator
-	 * @param string $key
-	 * @param bool $useSingleton [optional]
-	 * @return Zend_Validate_Interface|Zend_Filter_Interface
-	 */
-	private function _resolveValidatorOrFilter($validator, $key, $useSingleton = true) {
-		/** @var Zend_Validate_Interface|Zend_Filter_Interface $result */
-		if (is_object($validator)) {
-			$result = $validator;
-		}
-		else if (is_string($validator)) {
-			$result = self::_getValidatorByName($validator, $useSingleton);
-		}
-		else {
-			df_error_internal(
-				'Валидатор/фильтр поля «%s» класса «%s» имеет недопустимый тип: «%s».'
-				,$key, get_class($this), gettype($validator)
-			);
-		}
-		if (
-				!($result instanceof Zend_Validate_Interface)
-			&&
-				!($result instanceof Zend_Filter_Interface)
-		) {
-			df_error_internal(
-				'Валидатор/фильтр поля «%s» класса «%s» имеет недопустимый класс «%s»,'
-				. ' у которого отсутствуют требуемые интерфейсы'
-				.' Zend_Validate_Interface и Zend_Filter_Interface.'
-				,$key, get_class($this), get_class($result)
-			);
-		}
-		return $result;
-	}
-
-	/**
 	 * @param string $key
 	 * @param mixed $value
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return void
 	 */
 	private function _validate($key, $value) {
 		/** @var @var array(Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
+		/** @noinspection PhpParamsInspection */
 		$validators = df_a($this->_validators, $key, array());
 		foreach ($validators as $validator) {
 			/** @var Zend_Validate_Interface|Df_Zf_Validate_Type $validator */
-			$this->_validateByConcreteValidator($key, $value, $validator);
+			Df_Core_Validator::checkProperty($this, $key, $value, $validator);
 		}
 	}
 
 	/**
 	 * @param array(string => mixed) $params
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return void
 	 */
 	private function _validateArray(array $params) {
@@ -590,55 +580,6 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			/** @var string $key */
 			/** @var mixed $value */
 			$params[$key] = $this->_validate($key, $value);
-		}
-	}
-
-	/**
-	 * @param string $key
-	 * @param mixed $value
-	 * @param Zend_Validate_Interface|Df_Zf_Validate_Type $validator
-	 * @throws Df_Core_Exception_Internal
-	 * @return void
-	 */
-	private function _validateByConcreteValidator($key, $value, Zend_Validate_Interface $validator) {
-		if (!(
-				is_null($value)
-			&&
-				/**
-				 * Обратите внимание, что если значение свойства равно NULL,
-				 * то isset($validator->{self::$RM_VALIDATOR__REQUIRED}) вернёт false,
-				 * в то время как @see property_exists() вернёт true.
-				 */
-				property_exists($validator, self::$RM_VALIDATOR__REQUIRED)
-			&&
-				/**
-				 * Здесь должна стоять проверка именно на false,
-				 * потому что помимо true/false
-				 * $validator->{self::$RM_VALIDATOR__REQUIRED})
-				 * может принимать значение null
-				 */
-				(false === $validator->{self::$RM_VALIDATOR__REQUIRED})
-		)) {
-			if (!$validator->isValid($value)) {
-				/** @var string $compositeMessage */
-				$compositeMessage =
-					rm_sprintf(
-						"«%s»: значение %s недопустимо для свойства «%s»."
-						. "\r\nСообщение проверяющего:\r\n%s"
-						,get_class($this)
-						,df_h()->qa()->convertValueToDebugString($value)
-						,$key
-						,implode(Df_Core_Const::T_NEW_LINE, $validator->getMessages())
-					)
-				;
-				$exception = new Df_Core_Exception_Internal($compositeMessage);
-				/** @var Mage_Core_Model_Message $coreMessage */
-				$coreMessage = df_model('core/message');
-				$exception->addMessage(
-					$coreMessage->error($compositeMessage, __CLASS__,  __METHOD__)
-				);
-				throw $exception;
-			}
 		}
 	}
 
@@ -653,9 +594,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	/** @return string */
 	private function getTemplateExecutionKey() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				implode('_', array(get_class($this), md5($this->getTemplate())))
-			;
+			$this->{__METHOD__} = implode('_', array(get_class($this), md5($this->getTemplate())));
 		}
 		return $this->{__METHOD__};
 	}
@@ -669,7 +608,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			$this->_checkForNullArray($this->_data);
 			/**
 			 * Фильтры мы здесь пока применять не можем,
-			 * потому что они ещё не инициализированны
+			 * потому что они ещё не инициализированы
 			 * (фильтры будут инициализированы потомками
 			 * уже после вызова @see Df_Core_Block_Template::_construct()).
 			 * Вместо этого применяем фильтры для начальных данных
@@ -678,12 +617,15 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			 */
 		}
 		parent::_construct();
-		$this->_prop(self::P__CACHE_KEY_SUFFIX, self::V_STRING);
 	}
 
-	/** @var string */
-	private static $RM_VALIDATOR__REQUIRED = 'rm__required';
-	const _CLASS = __CLASS__;
+	/** @var array(string => Zend_Filter_Interface[]) */
+	private $_filters = array();
+	/** @var array(string => Zend_Validate_Interface[]) */
+	private $_validators = array();
+	/** @var array(string => bool) */
+	private $_valueWasNullBeforeFilters = array();
+
 	const CACHE_KEY_EMPTY = 'empty'; // ключ для кэширования пустых блоков
 	const CACHE_LIFETIME_DISABLE = null;
 	/**
@@ -717,34 +659,6 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	 * через 2 часа.
 	 */
 	const CACHE_LIFETIME_STANDARD = false;
-	const F_TRIM = 'filter-trim';
-	const P__CACHE_KEY_SUFFIX = 'rm__cache_key_suffix';
-	const P__NAME = 'name';
-	const P__RM_PARENT = 'rm_parent';
-	const P__TEMPLATE = 'template';
-	const P__TYPE = 'type';
-	const V_ARRAY = 'array';
-	const V_BOOL = 'boolean';
-	const V_FLOAT = 'float';
-	const V_INT = 'int';
-	const V_NAT = 'nat';
-	const V_NAT0 = 'nat0';
-	const V_STRING_NE = 'string';
-	const V_STRING = 'string_empty';
-
-	/**
-	 * Не используем имя i(), потому что от данного класса много кто наследуется,
-	 * и у них будет своя спецификация метода i().
-	 * @param array(string => mixed) $parameters [optional]
-	 * @param string|null $template [optional]
-	 * @param string|null $name [optional]
-	 * @return Df_Core_Block_Template
-	 */
-	public static function create(array $parameters = array(), $template = null, $name = null) {
-		return df_block(__CLASS__, $name,
-			array_merge(array(self::P__TEMPLATE => $template), $parameters)
-		);
-	}
 
 	/**
 	 * @param string $class
@@ -763,52 +677,6 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		foreach ($functions as $function) {
 			/** @var string $function */
 			$result[]= $class . '::' . $function;
-		}
-		return $result;
-	}
-
-	/**
-	 * @static
-	 * @param string $validatorName
-	 * @param bool $useSingleton [optional]
-	 * @return Zend_Validate_Interface
-	 */
-	private static function _getValidatorByName($validatorName, $useSingleton = true) {
-		/** @var array(string => Zend_Validate_Interface) $map */
-		static $map;
-		if (!isset($map)) {
-			$map = array(
-				self::F_TRIM => Df_Zf_Filter_String_Trim::s()
-				,self::V_ARRAY => Df_Zf_Validate_Array::s()
-				,self::V_BOOL => Df_Zf_Validate_Boolean::s()
-				,self::V_FLOAT => Df_Zf_Validate_Float::s()
-				,self::V_INT => Df_Zf_Validate_Int::s()
-				,self::V_NAT => Df_Zf_Validate_Nat::s()
-				,self::V_NAT0 => Df_Zf_Validate_Nat0::s()
-				,self::V_STRING => Df_Zf_Validate_String::s()
-				,self::V_STRING_NE => Df_Zf_Validate_String_NotEmpty::s()
-			);
-		}
-		/** @var Zend_Validate_Interface $result */
-		$result = df_a($map, $validatorName);
-		if ($result) {
-			if (!$useSingleton) {
-				/** @var string $class */
-				$class = get_class($result);
-				$result = new $class;
-			}
-		}
-		else {
-			if (@class_exists($validatorName) || @interface_exists($validatorName)) {
-				$result =
-					$useSingleton
-					? Df_Zf_Validate_Class::s($validatorName)
-					: Df_Zf_Validate_Class::i($validatorName)
-				;
-			}
-			else {
-				df_error_internal('Система не смогла распознать валидатор «%s».', $validatorName);
-			}
 		}
 		return $result;
 	}

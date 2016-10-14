@@ -1,6 +1,6 @@
 <?php
 class Df_PromoGift_Block_Catalog_Gift_Highlighter extends Df_Core_Block_Template_NoCache {
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/** @return int[] */
 	public function getEligibleProductIds() {
@@ -13,7 +13,7 @@ class Df_PromoGift_Block_Catalog_Gift_Highlighter extends Df_Core_Block_Template
 					$result[]= $gift->getProductId();
 				}
 			}
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = array_unique($result);
 		}
 		return $this->{__METHOD__};
 	}

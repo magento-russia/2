@@ -14,6 +14,12 @@ class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Mysql4_Poll
 	}
 
 	/**
+	 * @override
+	 * @return Df_Poll_Model_Resource_Poll
+	 */
+	public function getResource() {return Df_Poll_Model_Resource_Poll::s();}
+
+	/**
 	 * @param string|null $paramName [optional]
 	 * @return mixed
 	 */
@@ -58,13 +64,10 @@ class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Mysql4_Poll
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {
-		parent::_construct();
-		$this->_init(Df_Poll_Model_Poll::mf(), Df_Poll_Model_Resource_Poll::mf());
-	}
+	public function _construct() {$this->_itemObjectClass = Df_Poll_Model_Poll::_C;}
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__STORE_IDS = 'store_ids';
 	const P__STORES = 'stores';
 	/**

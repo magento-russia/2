@@ -3,7 +3,7 @@
    <sections>
 		<df_payment>
 			<groups>
-				<psbank translate='label' module='df_psbank'>
+				<psbank>
 					<label>Промсвязьбанк</label>
 					<comment>
 					   <![CDATA[
@@ -20,24 +20,24 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<!--
 								Надо удостовериться, что в системе доступна валюта RUB
 								и присутствует курс обмена учётной валюты магазина на RUB.
 							-->
-							<backend_model>df_payment/config_backend_active_currency</backend_model>
+							<backend_model>Df_Admin_Config_Backend_Currency</backend_model>
 							<rm_currency>RUB</rm_currency>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-psbank</df_feature>
 						</active>
-						<payment_service__test translate='label'>
+						<payment_service__test>
 							<label>Тестовый режим?</label>
 							<comment>
 								<![CDATA[]]>
@@ -51,7 +51,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__test>
-						<payment_service__shop_id translate='label'>
+						<payment_service__shop_id>
 							<label>Идентификатор магазина</label>
 							<comment><![CDATA[Выдаётся банком]]></comment>
 							<frontend_type>text</frontend_type>
@@ -69,7 +69,7 @@
 								validate-length	minimum-length-12 maximum-length-15
 							</validate>
 						</payment_service__shop_id>
-						<payment_service__terminal translate='label'>
+						<payment_service__terminal>
 							<label>Идентификатор виртуального терминала</label>
 							<comment><![CDATA[Выдаётся банком]]></comment>
 							<frontend_type>text</frontend_type>
@@ -84,7 +84,7 @@
 								validate-length	minimum-length-8 maximum-length-8
 							</validate>
 						</payment_service__terminal>
-						<payment_service__request_password_part_1 translate='label'>
+						<payment_service__request_password_part_1>
 							<label>Закрытый ключ (часть 1)</label>
 							<comment><![CDATA[
 Первая часть закрытого ключа для подписи обращений магазина к платёжному шлюзу. Выдаётся банком.]]></comment>
@@ -94,14 +94,14 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<active>1</active>
 								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__request_password_part_1>
-						<payment_service__request_password_part_2 translate='label'>
+						<payment_service__request_password_part_2>
 							<label>Закрытый ключ (часть 2)</label>
 							<comment><![CDATA[
 Вторая часть закрытого ключа для подписи обращений магазина к платёжному шлюзу. Выдаётся банком.]]></comment>
@@ -111,14 +111,14 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<active>1</active>
 								<payment_service__test>0</payment_service__test>
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service__request_password_part_2>
-						<payment_service__shop_name translate='label'>
+						<payment_service__shop_name>
 							<label>Название магазина для покупателя на платёжной странице банка</label>
 							<comment><![CDATA[не более 30 символов]]></comment>
 							<frontend_type>text</frontend_type>
@@ -132,7 +132,7 @@
 								validate-length	maximum-length-30
 							</validate>
 						</payment_service__shop_name>
-						<frontend__title translate='label'>
+						<frontend__title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -148,7 +148,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</frontend__title>
-						<frontend__description translate='label'>
+						<frontend__description>
 							<label>Примечание к способу оплаты на экране оформления заказа</label>
 							<comment>
 								<![CDATA[
@@ -163,7 +163,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__description>
-						<payment_service__transaction_description translate='label'>
+						<payment_service__transaction_description>
 							<label>Примечание к счёту в платёжной системе</label>
 							<comment>
 								<![CDATA[
@@ -182,11 +182,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__transaction_description>
-						<payment_service__card_payment_action translate='label'>
+						<payment_service__card_payment_action>
 							<label>Режим оплаты банковской картой</label>
 							<comment>
 							   <![CDATA[
@@ -203,7 +203,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_payment/config_source_paymentCard_paymentAction</source_model>
+							<source_model>Df_Payment_Config_Source_PaymentCard_PaymentAction</source_model>
 							<sort_order>11000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -211,7 +211,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__card_payment_action>
-						<frontend__message_failure translate='label'>
+						<frontend__message_failure>
 							<label>Шаблон сообщения покупателю при отказе платёжного шлюза провести оплату</label>
 							<comment>
 								<![CDATA[
@@ -236,7 +236,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__message_failure>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -253,7 +253,7 @@
 							<depends><active>1</active></depends>
 							<validate>validate-digits</validate>
 						</frontend__sort_order>
-						<frontend__allowspecific translate='label'>
+						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
 								<![CDATA[
@@ -270,7 +270,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__allowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Допустимые страны покупателей</label>
 							<comment>
 								<![CDATA[

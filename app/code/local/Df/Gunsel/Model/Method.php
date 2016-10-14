@@ -2,67 +2,40 @@
 class Df_Gunsel_Model_Method extends Df_Shipping_Model_Method_Ukraine {
 	/**
 	 * @override
-	 * @return string
-	 */
-	public function getMethod() {
-		return 'standard';
-	}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getMethodTitle() {
-		return rm_sprintf('%s', $this->formatTimeOfDelivery($timeOfDeliveryMin = 1));
-	}
-
-	/**
-	 * @override
-	 * @return bool
+	 * @return void
 	 * @throws Exception
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsUkraine()
-					->checkCountryDestinationIsUkraine()
-					->checkCityOriginIsNotEmpty()
-					->checkCityDestinationIsNotEmpty()
-				;
-				if (!$this->getLocationIdOrigin()) {
-					$this->throwExceptionInvalidOrigin();
-				}
-				if (!$this->getLocationIdDestination()) {
-					$this->throwExceptionInvalidDestination();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
-		}
-		return $result;
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsUkraine()
+			->checkCountryDestinationIsUkraine()
+			->checkCityOriginIsNotEmpty()
+			->checkCityDestinationIsNotEmpty()
+			->checkLocationIdOrigin()
+			->checkLocationIdDestination()
+		;
 	}
 
 	/**
 	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
 	 * @return float
 	 */
-	protected function getCostInHryvnias() {
-		return $this->getApi()->getRate();
-	}
+	protected function getCost() {return $this->getApi()->getRate();}
+
+	/**
+	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
+	 */
+	protected function getDeliveryTime() {return 1;}
 
 	/**
 	 * @override
 	 * @return array
 	 */
-	protected function getLocations() {
-		return
-			Df_Gunsel_Model_Request_Locations::s()->getLocations()
-		;
-	}
+	protected function getLocations() {return Df_Gunsel_Model_Request_Locations::s()->getLocations();}
 
 	/** @return Df_Gunsel_Model_Request_Rate */
 	private function getApi() {
@@ -73,9 +46,7 @@ class Df_Gunsel_Model_Method extends Df_Shipping_Model_Method_Ukraine {
 	}
 
 	/** @return float */
-	private function getCostInsurance() {
-		return max(1, 0.01* $this->getRequest()->getDeclaredValueInHryvnias());
-	}
+	private function getCostInsurance() {return max(1, 0.01* $this->rr()->getDeclaredValueInHryvnias());}
 
 	/** @return array */
 	private function getPostParams() {
@@ -83,14 +54,12 @@ class Df_Gunsel_Model_Method extends Df_Shipping_Model_Method_Ukraine {
 			'height' => 50
 			,'length' => 50
 			,'width' => 50
-			,'price' => $this->getRequest()->getDeclaredValueInHryvnias()
-			,'weight' => $this->getRequest()->getWeightInKilogrammes()
-			,'start_city' => mb_strtoupper($this->getRequest()->getOriginCity())
-			,'stop_city' => mb_strtoupper($this->getRequest()->getDestinationCity())
+			,'price' => $this->rr()->getDeclaredValueInHryvnias()
+			,'weight' => $this->rr()->getWeightInKilogrammes()
+			,'start_city' => mb_strtoupper($this->rr()->getOriginCity())
+			,'stop_city' => mb_strtoupper($this->rr()->getDestinationCity())
 			,'s1' => 1
 			,'s2' => 2
 		);
 	}
-
-	const _CLASS = __CLASS__;
 }

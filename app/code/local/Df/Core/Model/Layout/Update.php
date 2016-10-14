@@ -14,8 +14,8 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 	public function getFileLayoutUpdatesXml($area, $package, $theme, $storeId = null) {
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
-		if (!isset($patchNeeded)) {
-			$patchNeeded = df_magento_version("1.4.2.0", '>=');
+		if (is_null($patchNeeded)) {
+			$patchNeeded = df_magento_version('1.4.2.0', '>=');
 		}
 		return
 			$patchNeeded
@@ -33,13 +33,11 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 	 * @return null|SimpleXMLElement
 	 */
 	public function getFileLayoutUpdatesXml_Df($area, $package, $theme, $storeId = null) {
-		if (null === $storeId) {
-			$storeId = Mage::app()->getStore()->getId();
-		}
+		$storeId = is_null($storeId) ? rm_store_id() : $storeId;
 		/* @var $design Mage_Core_Model_Design_Package */
 		$design = Mage::getSingleton('core/design_package');
 		$elementClass = $this->getElementClass();
-		$updatesRoot = Mage::app()->getConfig()->getNode($area.'/layout/updates');
+		$updatesRoot = rm_config_node($area, 'layout/updates');
 		Mage::dispatchEvent('core_layout_update_updates_get_after', array('updates' => $updatesRoot));
 		$updateFiles = array();
 		foreach ($updatesRoot->children() as $updateNode) {
@@ -70,19 +68,15 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 				foreach (libxml_get_errors() as $error) {
 					$errors[]= $error->message;
 				}
-				df_notify(
-					"Failed loading XML from %s.\n\n%s\n\n%s"
+				/** @var string $message */
+				$message = rm_sprintf(
+					"Файл XML «%s» содержит синтаксические ошибки:\n«%s»\n%s"
 					,$filename
 					,implode("\n\n", $errors)
 					,$fileStr
 				);
-				throw new Exception(
-					rm_sprintf(
-						"Invalid-formatted XML file: %s\n\nErrors:\n%s"
-						,$filename
-						,implode("\n\n", $errors)
-					)
-				);
+				df_notify($message);
+				df_error($message);
 			}
 			if (!$fileXml instanceof SimpleXMLElement) {
 				continue;

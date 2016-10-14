@@ -5,7 +5,7 @@ class Df_Adminhtml_Block_Tax_Rate_ImportExport extends Mage_Adminhtml_Block_Tax_
 	/**
 	 * Цель перекрытия —
 	 * перевести надписи на кнопках экспорта и импорта налоговых ставок
-	 * на экране «Продажи» → «Налоги и наценки» → «Импорт и экспорт ставок».
+	 * на экране «Продажи» → «НДС» → «Импорт и экспорт ставок».
 	 * @override
 	 * @param string $label
 	 * @param string $onclick

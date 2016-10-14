@@ -17,9 +17,4 @@ class Df_Chronopay_Block_Gate_Form extends Mage_Payment_Block_Form_Cc {
 	}
 
 	const TEMPLATE = 'df/chronopay/gate/form.phtml';
-	/**
-	 * @param string $name
-	 * @return Df_Chronopay_Block_Gate_Form
-	 */
-	public static function i($name) {return df_block(__CLASS__, $name);}
 }

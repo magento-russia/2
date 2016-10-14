@@ -2,11 +2,18 @@
 <config>
 	<modules>
 		<Df_Seo>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Поисковая оптимизация</title>
+			<version>1.0.0</version>
 		</Df_Seo>
 	</modules>
 	<df>
+		<features>
+			<df-seo>
+				<title>Поисковая оптимизация</title>
+				<url>http://magento-forum.ru/topic/594/</url>
+			</df-seo>
+		</features>
 		<seo>
 			<template>
 				<objects>
@@ -29,10 +36,10 @@
 		<events>
 			<clean_catalog_images_cache_after>
 				<observers>
-					<df_seo_controller_front_init_before>
-						<class>df_seo/observer</class>
+					<Df_Seo>
+						<class>Df_Seo_Observer</class>
 						<method>clean_catalog_images_cache_after</method>
-					</df_seo_controller_front_init_before>
+					</Df_Seo>
 				</observers>
 			</clean_catalog_images_cache_after>
 		</events>

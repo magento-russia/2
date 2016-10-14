@@ -1,5 +1,5 @@
 <?php
-class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract {
+class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_Resource_Collection {
 	/**
 	 * Join reward table and retrieve total balance total with customer_id
 	 * @return Df_Reward_Model_Resource_Reward_History_Collection
@@ -10,7 +10,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model
 			return $this;
 		}
 		$this->getSelect()->joinInner(
-			array('reward_table' => rm_table('df_reward/reward'))
+			array('reward_table' => rm_table(Df_Reward_Model_Resource_Reward::TABLE))
 			,'reward_table.reward_id = main_table.reward_id'
 			, array('customer_id', 'points_balance_total' => 'points_balance')
 		);
@@ -73,14 +73,11 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model
 	}
 
 	/**
-	 * Add filter by website id
-	 *
-	 * @param integer|array $websiteId
+	 * @param int|int[] $websiteId
 	 * @return Df_Reward_Model_Resource_Reward_History_Collection
 	 */
-	public function addWebsiteFilter($websiteId)
-	{
-		$this->getSelect()->where(is_array($websiteId) ? 'main_table.website_id IN (?)' : 'main_table.website_id = ?', $websiteId);
+	public function addWebsiteFilter($websiteId) {
+		$this->getSelect()->where('main_table.website_id IN (?)', rm_array($websiteId));
 		return $this;
 	}
 
@@ -157,13 +154,19 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model
 				;
 				$cases[]= " WHEN '{$wId}' THEN `{$field}` ";
 			}
-			if (count($cases) > 0) {
+			if ($cases) {
 				$sql .= implode(' ', $cases) . ' END ';
 				$this->getSelect()->columns( array('expiration_date' => new Zend_Db_Expr($sql)));
 			}
 		}
 		return $this;
 	}
+
+	/**
+	 * @override
+	 * @return Df_Reward_Model_Resource_Reward_History
+	 */
+	public function getResource() {return Df_Reward_Model_Resource_Reward_History::s();}
 
 	/**
 	 * Return total amounts of points that will be expired soon (pre-configured days value) for specified website
@@ -193,10 +196,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model
 			? 'expired_at_static'
 			: 'expired_at_dynamic'
 		;
-		$now = $this->getResource()->formatDate(time());
-		$expireAtLimit = new Zend_Date($now);
-		$expireAtLimit->addDay($inDays);
-		$expireAtLimit = $this->getResource()->formatDate($expireAtLimit);
+		$expireAtLimit = $this->getResource()->formatDate(rm_today_add($inDays));
 		$this->getSelect()
 			->columns(array('total_expired' => new Zend_Db_Expr('SUM(`points_delta`-`points_used`)')))
 			->where('`points_delta`-`points_used`>0')
@@ -215,8 +215,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model
 	 * Order by primary key desc
 	 * @return Df_Reward_Model_Resource_Reward_History_Collection
 	 */
-	public function setDefaultOrder()
-	{
+	public function setDefaultOrder() {
 		$this->getSelect()->reset(Zend_Db_Select::ORDER);
 		return $this->setOrder('history_id', 'DESC');
 	}
@@ -225,13 +224,8 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Mage_Core_Model
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Reward_Model_Reward_History::mf(), Df_Reward_Model_Resource_Reward_History::mf());
-	}
+	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward_History::_C;}
 	/** @var array */
 	protected $_expiryConfig = array();
-	const _CLASS = __CLASS__;
-	/** @return Df_Reward_Model_Resource_Reward_History_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

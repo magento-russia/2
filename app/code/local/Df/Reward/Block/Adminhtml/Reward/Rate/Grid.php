@@ -16,11 +16,8 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Grid extends Mage_Adminhtml_Block_Wi
 	 * Prepare grid collection object
 	 * @return Df_Reward_Block_Adminhtml_Reward_Rate_Grid
 	 */
-	protected function _prepareCollection()
-	{
-		/* @var $collection Df_Reward_Model_Resource_Reward_Rate_Collection */
-		$collection = Df_Reward_Model_Resource_Reward_Rate_Collection::i();
-		$this->setCollection($collection);
+	protected function _prepareCollection() {
+		$this->setCollection(Df_Reward_Model_Reward_Rate::c());
 		return parent::_prepareCollection();
 	}
 
@@ -69,19 +66,14 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Grid extends Mage_Adminhtml_Block_Wi
 	 * @param Varien_Object $row
 	 * @return string|null
 	 */
-	public function getRateText($row)
-	{
+	public function getRateText($row) {
 		$websiteId = $row->getWebsiteId();
-		$result =
-			Df_Reward_Model_Reward_Rate::getRateText(
-				$row->getDirection()
-				,$row->getPoints()
-				,$row->getCurrencyAmount()
-				,0 == $websiteId
-				?
-					null
-				:
-					Mage::app()->getWebsite($websiteId)->getBaseCurrencyCode()
+		$result = Df_Reward_Model_Reward_Rate::getRateText(
+			$row->getDirection()
+			,$row->getPoints()
+			,$row->getCurrencyAmount()
+			// в оригинале здесь именно ==, а не ===
+			,(0 == $websiteId) ? null : rm_website($websiteId)->getBaseCurrencyCode()
 		);
 		return $result;
 	}

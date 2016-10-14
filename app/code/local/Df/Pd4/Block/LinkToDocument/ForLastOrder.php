@@ -2,27 +2,17 @@
 class Df_Pd4_Block_LinkToDocument_ForLastOrder extends Df_Pd4_Block_LinkToDocument {
 	/**
 	 * @override
+	 * @used-by Df_Pd4_Block_LinkToDocument_ForLastOrder::getPaymentDocumentUrl()
+	 * @used-by Df_Pd4_Block_LinkToDocument_ForLastOrder::needToShow()
 	 * @return Df_Sales_Model_Order
 	 */
-	protected function getOrder() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Sales_Model_Order::ld($this->getLastOrderId());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function order() {return rm_last_order();}
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/pd4/link_to_document/for_last_order.phtml';}
-
-	/** @return int */
-	private function getLastOrderId() {
-		return rm_nat(rm_session_checkout()->getDataUsingMethod(
-			Df_Checkout_Const::SESSION_PARAM__LAST_ORDER_ID
-		));
-	}
-
-	const _CLASS = __CLASS__;
+	protected function defaultTemplate() {return 'df/pd4/link_to_document/for_last_order.phtml';}
 }

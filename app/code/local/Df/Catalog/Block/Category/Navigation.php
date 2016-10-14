@@ -1,39 +1,47 @@
 <?php
 class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 	/**
-	 * @return
-	 *			Mage_Catalog_Model_Resource_Category_Collection
-	 * 		|	Mage_Catalog_Model_Resource_Category_Flat_Collection
-	 *		|	Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection
-	 * 		|	Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Flat_Collection
-	 *		|	array
+	 * @override
+	 * @see Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 */
-	public function getItems() {
+	protected function _toHtml() {
+		/** @var string $result */
+		$result = parent::_toHtml();
+		if ($result) {
+			$result = rm_div('df', rm_div('df-category-navigation', $result));
+		}
+		return $result;
+	}
+
+	/**
+	 * @used-by df/catalog/category/navigation.phtml
+	 * @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Flat_Collection
+	 */
+	protected function categories() {
 		if (!isset($this->{__METHOD__})) {
+			/** @var Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Flat_Collection $result */
+			$result = $this->currentCategory()->getCollection();
+			$result->addAttributeToSelect('*');
+			$result->addAttributeToFilter('is_active', 1);
+			$result->addIdFilter($this->currentCategory()->getChildren());
+			$result->setOrder('position', 'ASC');
 			/**
-			 * @var
-			 *			Mage_Catalog_Model_Resource_Category_Collection
-			 * 		|	Mage_Catalog_Model_Resource_Category_Flat_Collection
-			 *		|	Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection
-			 * 		|	Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Flat_Collection
-			 *		|	array
+			 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
+			 * потому что наличие @see Varien_Object::__call()
+			 * приводит к тому, что @see is_callable всегда возвращает true.
+			 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
+			 * не гарантирует публичную доступность метода:
+			 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
+			 * потому что он имеет доступность private или protected.
+			 * Пока эта проблема никак не решена.
 			 */
-			$result = array();
-			if ($this->hasItems()) {
-				/** @var Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Flat_Collection $result */
-				$result = $this->getCurrentCategory()->getCollection();
-				$result->addAttributeToSelect('*');
-				$result->addAttributeToFilter('is_active', 1);
-				$result->addIdFilter($this->getCurrentCategory()->getChildren());
-				$result->setOrder('position', 'ASC');
-				/**
-				 * К сожалению, нельзя здесь для проверки публичности метода
-				 * использовать is_callable, * потому что наличие Varien_Object::__call
-				 * приводит к тому, что is_callable всегда возвращает true.
-				 */
-				if (method_exists($result, 'joinUrlRewrite')) {
-					call_user_func(array($result, 'joinUrlRewrite'));
-				}
+			/**
+			 * @uses Mage_Catalog_Model_Resource_Category_Collection::joinUrlRewrite()
+			 * @uses Mage_Catalog_Model_Resource_Category_Flat_Collection::joinUrlRewrite()
+			 */
+			if (method_exists($result, 'joinUrlRewrite')) {
+				call_user_func(array($result, 'joinUrlRewrite'));
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -42,53 +50,65 @@ class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 
 	/**
 	 * @override
-	 * @return Mage_Core_Block_Abstract
-	 */
-	protected function _prepareLayout() {
-		if (df_cfg()->catalog()->navigation()->getEnabled()) {
-			/**
-			 * Добавление *.css и *.js именно здесь, а не через файлы layout,
-			 * даёт нам большую гибкость: нам не нужно думать, какие handle обрабатывать
-			 */
-			$this->addClientResourcesToThePage();
-		}
-		parent::_prepareLayout();
-	}
-
-	/**
-	 * @override
+	 * @see Df_Core_Block_Template::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Template::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	protected function getCacheKeyParamsAdditional() {return $this->getCurrentCategory()->getId();}
+	protected function cacheKeySuffix() {return $this->currentCategory()->getId();}
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return self::DEFAULT_TEMPLATE;}
+	protected function defaultTemplate() {return 'df/catalog/category/navigation.phtml';}
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::needToShow()
+	 * @used-by Df_Core_Block_Template::_loadCache()
+	 * @used-by Df_Core_Block_Template::getCacheKey()
+	 * @used-by _construct()
 	 * @return bool
 	 */
 	protected function needToShow() {
-		/** @var bool $result */
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				df_cfg()->catalog()->navigation()->getEnabled() && $this->hasItems()
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by df/catalog/category/navigation.phtml
+	 * @param Df_Catalog_Model_Category $category
+	 * @return string
+	 */
+	protected function thumbUrl(Df_Catalog_Model_Category $category) {
+		/** @var string|null $thumb */
+		$thumb = $category['thumbnail'];
+		if (!$thumb) {
+			$thumb = $category['df_thumbnail'];
+		}
 		return
-				parent::needToShow()
-			&&
-				df_enabled(Df_Core_Feature::TWEAKS)
-			&&
-				df_cfg()->catalog()->navigation()->getEnabled()
-			&&
-				$this->hasItems()
+			!$thumb
+			? '/skin/frontend/base/default/df/images/catalog/category/navigation/absent/small.gif'
+			: Mage::getBaseUrl('media') . "catalog/category/{$thumb}"
 		;
 	}
 
-	/** @return Df_Catalog_Model_Category */
-	private function getCurrentCategory() {
+	/**
+	 * @used-by cacheKeySuffix()
+	 * @used-by getItems()
+	 * @used-by hasItems()
+	 * @return Df_Catalog_Model_Category
+	 */
+	private function currentCategory() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Catalog_Model_Category $result */
-			$result = $this->cfg(self::P__CATEGORY);
+			$result = $this['category'];
 			if (!$result) {
 				$result = rm_state()->getCurrentCategory();
 			}
@@ -98,29 +118,21 @@ class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Catalog_Block_Category_Navigation */
-	private function addClientResourcesToThePage() {
-		if (!is_null($this->getBlockHead())) {
-			/** Блок может отсутствовать на некоторых страницах. Например, при импорте товаров. */
-			$this
-				->getBlockHead()
-					->addCss('df/common/reset.css')
-					->addCss('df/catalog/category/navigation.css')
-			;
-		}
-		return $this;
-	}
-
-	/** @return bool */
+	/**
+	 * @used-by getItems()
+	 * @used-by needToShow()
+	 * @return bool
+	 */
 	private function hasItems() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getCurrentCategory() && $this->getCurrentCategory()->hasChildren()
-			;
+			$this->{__METHOD__} = $this->currentCategory()->hasChildren();
 		}
 		return $this->{__METHOD__};
 	}
 
-	const DEFAULT_TEMPLATE = 'df/catalog/category/navigation.phtml';
-	const P__CATEGORY = 'category';
+	/**
+	 * @used-by Df_Catalog_Model_Category_Content_Inserter::contentNew()
+	 * @return string
+	 */
+	public static function r() {static $r; return !is_null($r) ? $r : $r = rm_render(__CLASS__);}
 }

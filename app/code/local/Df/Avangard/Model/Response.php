@@ -22,12 +22,11 @@ abstract class Df_Avangard_Model_Response extends Df_Payment_Model_Response {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$_ID, self::V_NAT)
-			->_prop(self::$_RESPONSE_CODE, self::V_INT)
-			->_prop(self::$_RESPONSE_MESSAGE, self::V_STRING)
+			->_prop(self::$_ID, RM_V_NAT)
+			->_prop(self::$_RESPONSE_CODE, RM_V_INT)
+			->_prop(self::$_RESPONSE_MESSAGE, RM_V_STRING)
 		;
 	}
-	const _CLASS = __CLASS__;
 	/** @var string */
 	private static $_ID = 'id';
 	/** @var string */

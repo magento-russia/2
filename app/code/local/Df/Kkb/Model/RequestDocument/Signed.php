@@ -21,30 +21,41 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 		}
 		return $this->{__METHOD__};
 	}
-	/** @return string */
-	protected function getAmount() {
-		/**
-		 * В документации о формате суммы платежа ничего не сказано.
-		 *
-		 * В примере paysystem_PHP/paysys/kkb.utils.php
-		 * в комментации к функции @see process_request()
-		 * явно написано, что сумма платежа должна быть целым числом (а не дробным).
-		 *
-		 * Однако практика показала, что платёжный шлюз Казкоммерцбанка
-		 * полне допускает дробные размеры платежей.
-		 */
-		return $this->getRequest()->getAmount()->getAsString();
-	}
+
+	/**
+	 * В документации о формате суммы платежа ничего не сказано.
+	 *
+	 * В примере paysystem_PHP/paysys/kkb.utils.php
+	 * в комментации к функции @see process_request()
+	 * явно написано, что сумма платежа должна быть целым числом (а не дробным).
+	 *
+	 * Однако практика показала, что платёжный шлюз Казкоммерцбанка
+	 * полне допускает дробные размеры платежей.
+	 * @return string
+	 */
+	protected function amount() {return $this->getRequest()->amount()->getAsString();}
+
+	/** @return Df_Kkb_Model_Config_Area_Service */
+	protected function configS() {return $this->getRequest()->configS();}
 
 	/** @return string */
 	protected function getCurrencyCode() {
-		return $this->getServiceConfig()->getCurrencyCodeInServiceFormat();
+		return $this->configS()->getCurrencyCodeInServiceFormat();
 	}
 
-	/** @return string */
-	protected function getOrderId() {
+	/** @return Df_Kkb_Model_Request_Payment|Df_Kkb_Model_Request_Secondary */
+	protected function getRequest() {return $this->cfg(self::P__REQUEST);}
+
+	/**
+	 * @used-by Df_Kkb_Model_RequestDocument_Registration::getDocumentData_Order()
+	 * @used-by Df_Kkb_Model_RequestDocument_Secondary::getDocumentData_Payment()
+	 * @uses Df_Kkb_Model_Request_Payment::orderIId()
+	 * @uses Df_Kkb_Model_Request_Secondary::orderIId()
+	 * @return string
+	 */
+	protected function orderIId() {
 		/** @var string $result */
-		$result = $this->getRequest()->getOrder()->getIncrementId();
+		$result = $this->getRequest()->orderIId();
 		df_result_string_not_empty($result);
 		// из документации: «номер заказа должен состоять не менее чем из 6 ЧИСЛОВЫХ знаков»
 		df_assert(ctype_digit($result));
@@ -52,17 +63,11 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Df_Payment_Model_Request */
-	protected function getRequest() {return $this->cfg(self::P__REQUEST);}
-
-	/** @return Df_Kkb_Model_Config_Area_Service */
-	protected function getServiceConfig() {return $this->getRequest()->getServiceConfig();}
-
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getElementLetter() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Varien_Simplexml_Element::createNode('merchant', $this->getLetterAttributes())
+				rm_xml_node('merchant', $this->getLetterAttributes())
 					->importArray($this->getLetterBody())
 			;
 		}
@@ -85,12 +90,10 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getElementSignature() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Varien_Simplexml_Element::createNode('merchant_sign', array('type' => 'RSA'))
-			;
+			$this->{__METHOD__} = rm_xml_node('merchant_sign', array('type' => 'RSA'));
 			$this->{__METHOD__}->setValue($this->getSigner()->getSignature());
 		}
 		return $this->{__METHOD__};
@@ -100,7 +103,7 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 	private function getSigner() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Kkb_Model_Signer::i($this->getLetter(), $this->getServiceConfig());
+				Df_Kkb_Model_Signer::i($this->getLetter(), $this->configS());
 		}
 		return $this->{__METHOD__};
 	}
@@ -120,7 +123,7 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 	 * @param string $xml
 	 * @return string
 	 */
-	private function postProcessXml($xml) {return df_trim(df_text()->removeLineBreaks($xml));}
+	private function postProcessXml($xml) {return df_trim(df_t()->removeLineBreaks($xml));}
 
 	/**
 	 * @override
@@ -128,7 +131,7 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST, Df_Payment_Model_Request::_CLASS);
+		$this->_prop(self::P__REQUEST, 'Df_Payment_Model_Request');
 	}
 	const P__REQUEST = 'request';
 }

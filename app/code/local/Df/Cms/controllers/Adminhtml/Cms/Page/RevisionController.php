@@ -7,7 +7,8 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 	public function deleteAction()
 	{
 		// check if we know what should be deleted
-		if ($id = $this->getRequest()->getParam('revision_id')) {
+		$id = $this->getRequest()->getParam('revision_id');
+		if ($id) {
 			$error = false;
 			try {
 				// init model and delete
@@ -87,7 +88,6 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			if (is_array($selectedStoreId)) {
 				$selectedStoreId = array_shift($selectedStoreId);
 			}
-
 			if (isset($data['preview_selected_store']) && $data['preview_selected_store']) {
 				$selectedStoreId = $data['preview_selected_store'];
 			} else {
@@ -100,7 +100,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			 * Emulating front environment
 			 */
 			Mage::app()->getLocale()->emulate($selectedStoreId);
-			Mage::app()->setCurrentStore(Mage::app()->getStore($selectedStoreId));
+			Mage::app()->setCurrentStore(rm_store($selectedStoreId));
 			Mage::getDesign()->setArea('frontend')
 				->setStore($selectedStoreId);
 			$designChange = Mage::getSingleton('core/design')
@@ -133,8 +133,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			$this->_redirect('*/cms_page/edit',array('page_id' => $this->getRequest()->getParam('page_id')));
 			return;
 		}
-
-		$data = df_mage()->adminhtml()->session()->getFormData(true);
+		$data = rm_session()->getFormData(true);
 		if (!empty($data)) {
 			$_data = $revision->getData();
 			$_data = array_merge($_data, $data);
@@ -164,25 +163,19 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			$this->_currentArea = 'frontend';
 		}
 		parent::preDispatch();
-		if (!df_enabled(Df_Core_Feature::CMS_2)) {
-			if ($this->getRequest()->getActionName() != 'denied') {
-				$this->_forward('denied');
-				$this->setFlag('', self::FLAG_NO_DISPATCH, true);
-			}
-		}
 		return $this;
 	}
 
 	/**
 	 * Prepares page with iframe
-	 * @return Df_Cms_Adminhtml_Cms_Page_RevisionController
+	 * @return void
 	 */
 	public function previewAction() {
 		// check if data sent
 		$data = $this->getRequest()->getPost();
 		if (empty($data) || !isset($data['page_id'])) {
 			$this->_forward('noRoute');
-			return $this;
+			return;
 		}
 
 		$page = $this->_initPage();
@@ -196,7 +189,6 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 		if (isset($data['stores'])) {
 			$stores = $data['stores'];
 		}
-
 		/*
 		 * Checking if all stores passed then we should not assign array to block
 		 */
@@ -252,17 +244,17 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 
 	/**
 	 * Save action
-	 * @return Df_Cms_Adminhtml_Cms_Page_RevisionController
+	 * @return void
 	 */
 	public function saveAction()
 	{
 		// check if data sent
-		if ($data = $this->getRequest()->getPost()) {
+		$data = $this->getRequest()->getPost();
+		if ($data) {
 			$data = $this->_filterPostData($data);
 			// init model and set data
 			$revision = $this->_initRevision();
-			$revision->setData($data)
-				->setUserId(df_mage()->admin()->session()->getUser()->getId());
+			$revision->setData($data)->setUserId(rm_admin_id());
 			// try to save it
 			try {
 				// save the data
@@ -287,14 +279,14 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				// display error message
 				rm_exception_to_session($e);
 				// save data in session
-				df_mage()->adminhtml()->session()->setFormData($data);
+				rm_session()->setFormData($data);
 				// redirect to edit form
 				$this->_redirect('*/*/edit',array(
 						'page_id' => $this->getRequest()->getParam('page_id'),'revision_id' => $this->getRequest()->getParam('revision_id'),));
 				return;
 			}
 		}
-		return $this;
+		return;
 	}
 
 	/**
@@ -326,7 +318,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 		}
 		/** @var Df_Cms_Model_Page_Revision $revision */
 		$revision = Df_Cms_Model_Page_Revision::i();
-		$userId = df_mage()->admin()->session()->getUser()->getId();
+		$userId = rm_admin_id();
 		$accessLevel = Df_Cms_Model_Config::s()->getAllowedAccessLevel();
 		if ($revisionId) {
 			$revision->loadWithRestrictions($accessLevel, $userId, $revisionId);
@@ -351,23 +343,19 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 	protected function _isAllowed() {
 		/** @var bool $result */
 		$result = false;
-		if (
-			df_enabled(Df_Core_Feature::CMS_2)
-		) {
-			switch($this->getRequest()->getActionName()) {
-				case 'save':
-					$result = Df_Cms_Model_Config::s()->canCurrentUserSaveRevision();
-					break;
-				case 'publish':
-					$result = Df_Cms_Model_Config::s()->canCurrentUserPublishRevision();
-					break;
-				case 'delete':
-					$result = Df_Cms_Model_Config::s()->canCurrentUserDeleteRevision();
-					break;
-				default:
-					$result = df_mage()->admin()->session()->isAllowed('cms/page');
-					break;
-			}
+		switch($this->getRequest()->getActionName()) {
+			case 'save':
+				$result = Df_Cms_Model_Config::s()->canCurrentUserSaveRevision();
+				break;
+			case 'publish':
+				$result = Df_Cms_Model_Config::s()->canCurrentUserPublishRevision();
+				break;
+			case 'delete':
+				$result = Df_Cms_Model_Config::s()->canCurrentUserDeleteRevision();
+				break;
+			default:
+				$result = rm_admin_allowed('cms/page');
+				break;
 		}
 		return $result;
 	}

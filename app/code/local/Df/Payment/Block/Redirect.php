@@ -2,7 +2,7 @@
 class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	/**
 	 * @override
-	 * @return array
+	 * @return array(string => string|int)
 	 */
 	public function getFormFields() {return $this->getPaymentMethod()->getPaymentPageParams();}
 
@@ -20,15 +20,12 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	public function getHtmlFormRedirect() {
 		/** @var string $result */
 		try {
-			$result = strtr(
-				'{form}<script type="text/javascript">document.getElementById("{id}").submit();</script>'
-				,array(
-					'{form}' => $this->getForm()->toHtml()
-					,'{id}' => $this->getFormId()
-				)
+			$result = $this->getForm()->toHtml() . sprintf(
+				"<script type='text/javascript'>document.getElementById('%s').submit();</script>"
+				,$this->getFormId()
 			);
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $result;
@@ -44,6 +41,8 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 
 	/**
 	 * @override
+	 * @see Mage_Page_Block_Redirect::getTargetURL()
+	 * @used-by app/design/frontend/base/default/template/page/redirect.phtml
 	 * @return string
 	 */
 	public function getTargetURL() {return $this->getPaymentMethod()->getPaymentPageUrl();}
@@ -68,28 +67,16 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	}
 
 	/** @return Df_Sales_Model_Order */
-	private function getOrder() {
+	private function order() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var mixed $orderIncrementId */
-			$orderIncrementId =
-				rm_session_checkout()->getData(Df_Checkout_Const::SESSION_PARAM__LAST_REAL_ORDER_ID)
-			;
-			if (!$orderIncrementId) {
+			$this->{__METHOD__} = rm_last_order(false);
+			if (!$this->{__METHOD__}) {
 				df_error('Пожалуйста, попробуйте оформить Ваш заказ повторно или оформите заказ по телефону.');
 			}
-			/** @var Df_Sales_Model_Order $result */
-			$result = Df_Sales_Model_Order::i();
-			$result->loadByIncrementId($orderIncrementId);
-			if (!$result->getId()) {
-				df_error('Пожалуйста, попробуйте оформить Ваш заказ повторно или оформите заказ по телефону.');
-			}
-			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return Df_Payment_Model_Method_WithRedirect */
-	private function getPaymentMethod() {return $this->getOrder()->getPayment()->getMethodInstance();}
-
-	const _CLASS = __CLASS__;
+	private function getPaymentMethod() {return $this->order()->getPayment()->getMethodInstance();}
 }

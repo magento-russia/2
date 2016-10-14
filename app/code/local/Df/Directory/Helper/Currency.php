@@ -3,122 +3,91 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 	/**
 	 * @param float $amountInBaseCurrency
 	 * @param string|Mage_Directory_Model_Currency $customCurrency
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromBase($amountInBaseCurrency, $customCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		$store = Mage::app()->getStore($store);
 		if (!is_string($customCurrency)) {
 			df_assert($customCurrency instanceof Mage_Directory_Model_Currency);
-			/**
-			 * Метод ядра использует только код валюты
-			 */
+			// метод ядра использует только код валюты
 			$customCurrency = $customCurrency->getCode();
 		}
 		/**
 		 * Кэшировать курсы не надо,
-		 * потому что это делает системный метод Mage_Directory_Model_Currency::getRate
+		 * потому что это делает системный метод @see Mage_Directory_Model_Currency::getRate()
 		 */
-		/** @var float $result */
-		$result = $store->getBaseCurrency()->convert($amountInBaseCurrency, $customCurrency);
-		df_result_float($result);
-		return $result;
+		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $customCurrency);
 	}
 
 	/**
 	 * @param float $amountInBaseCurrency
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromBaseToHryvnias($amountInBaseCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		$store = Mage::app()->getStore($store);
-		/** @var float $result */
-		$result = $store->getBaseCurrency()->convert($amountInBaseCurrency, $this->getHryvnia());
-		df_result_float($result);
-		return $result;
+		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getHryvnia());
 	}
 
 	/**
 	 * @param float $amountInBaseCurrency
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromBaseToRoubles($amountInBaseCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		$store = Mage::app()->getStore($store);
-		/** @var float $result */
-		$result = $store->getBaseCurrency()->convert($amountInBaseCurrency, $this->getRouble());
-		df_result_float($result);
-		return $result;
+		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getRouble());
 	}
 
 	/**
 	 * @param float $amountInBaseCurrency
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromBaseToTenge($amountInBaseCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		$store = Mage::app()->getStore($store);
-		/** @var float $result */
-		$result = $store->getBaseCurrency()->convert($amountInBaseCurrency, $this->getTenge());
-		df_result_float($result);
-		return $result;
+		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getTenge());
 	}
 
 	/**
 	 * @param float $amountInHryvnias
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromHryvniasToBase($amountInHryvnias, $store = null) {
 		df_param_float($amountInHryvnias, 0);
-		$store = Mage::app()->getStore($store);
-		/** @var float $result */
-		$result = $this->convertToBase($amountInHryvnias, $this->getHryvnia(), $store);
-		df_result_float($result);
-		return $result;
+		return $this->convertToBase($amountInHryvnias, $this->getHryvnia(), $store);
 	}
 
 	/**
 	 * @param float $amountInRoubles
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromRoublesToBase($amountInRoubles, $store = null) {
 		df_param_float($amountInRoubles, 0);
-		$store = Mage::app()->getStore($store);
-		/** @var float $result */
-		$result = $this->convertToBase($amountInRoubles, $this->getRouble(), $store);
-		df_result_float($result);
-		return $result;
+		return $this->convertToBase($amountInRoubles, $this->getRouble(), $store);
 	}
 
 	/**
 	 * @param float $amountInTenge
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromTengeToBase($amountInTenge, $store = null) {
 		df_param_float($amountInTenge, 0);
-		$store = Mage::app()->getStore($store);
-		/** @var float $result */
-		$result = $this->convertToBase($amountInTenge, $this->getTenge(), $store);
-		df_result_float($result);
-		return $result;
+		return $this->convertToBase($amountInTenge, $this->getTenge(), $store);
 	}
 
 	/**
 	 * @param float $amountInCustomCurrency
 	 * @param string|Mage_Directory_Model_Currency $customCurrency
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertToBase($amountInCustomCurrency, $customCurrency, $store = null) {
 		df_param_float($amountInCustomCurrency, 0);
-		$store = Mage::app()->getStore($store);
 		if (is_string($customCurrency)) {
 			$customCurrency = Df_Directory_Model_Currency::ld($customCurrency);
 		}
@@ -135,16 +104,16 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 			 */
 				$amountInCustomCurrency
 			*
-				(1 / $store->getBaseCurrency()->convert(doubleval(1), $customCurrency))
+				(1 / rm_store($store)->getBaseCurrency()->convert(doubleval(1), $customCurrency))
 		;
 		return $result;
 	}
 
 	/** @return Df_Directory_Model_Currency */
 	public function getBase() {
-		return Df_Directory_Model_Currency::ld(
-			Mage::getStoreConfig(Mage_Directory_Model_Currency::XML_PATH_CURRENCY_BASE)
-		);
+		return Df_Directory_Model_Currency::ld(Mage::getStoreConfig(
+			Mage_Directory_Model_Currency::XML_PATH_CURRENCY_BASE
+		));
 	}
 
 	/** @return Df_Directory_Model_Currency */
@@ -155,20 +124,6 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 	/** @return Df_Directory_Model_Currency */
 	public function getHryvnia() {
 		return Df_Directory_Model_Currency::ld(Df_Directory_Model_Currency::UAH);
-	}
-
-	/** @return int */
-	public function getPrecision() {
-		// Странно, что результат этого метода раньше не кэшировался.
-		// Обязательно надо кэшировать!
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				rm_loc()->needHideDecimals()
-				? 0
-				: df_a(df_mage()->core()->localeSingleton()->getJsPriceFormat(), 'requiredPrecision', 2)
-			;
-		}
-		return $this->{__METHOD__};
 	}
 
 	/** @return Df_Directory_Model_Currency */

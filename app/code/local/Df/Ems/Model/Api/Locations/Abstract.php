@@ -47,6 +47,4 @@ abstract class Df_Ems_Model_Api_Locations_Abstract extends Df_Core_Model {
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

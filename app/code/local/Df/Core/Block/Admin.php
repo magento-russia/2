@@ -1,8 +1,8 @@
 <?php
 /**
- * Этот класс не является наследником класса Mage_Adminhtml_Block_Template,
+ * Этот класс не является наследником класса @see Mage_Adminhtml_Block_Template,
  * но реализует все его методы и, таким образом,
- * может использоваться в качестве заменителя класса Mage_Adminhtml_Block_Template
+ * может использоваться в качестве заменителя класса @see Mage_Adminhtml_Block_Template
  * для заимствованных модулей, в то же время добавляя к ним новую функциональность.
  */
 class Df_Core_Block_Admin extends Df_Core_Block_Template_NoCache {
@@ -28,12 +28,12 @@ class Df_Core_Block_Admin extends Df_Core_Block_Template_NoCache {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
 	protected function _toHtml(){
 		Mage::dispatchEvent('adminhtml_block_html_before', array('block' => $this));
 		return parent::_toHtml();
 	}
-
-	const _CLASS = __CLASS__;
 }

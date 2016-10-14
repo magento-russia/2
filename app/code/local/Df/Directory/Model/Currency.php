@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Mage_Directory_Model_Resource_Currency getResource()
- */
+/** @method Mage_Directory_Model_Resource_Currency getResource() */
 class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	/**
 	 * Родительский метод работает некорректно в нескольких случаях:
@@ -9,7 +7,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * 2) когда нет прямого курса конвертации, но есть обратный.
 	 * 3) когда обе валюты не являются базовой,
 	 * и по этой причине нет ни прямого курса конвертации, ни обратного,
-	 * но возможна конвартация через базовую (третью) валюту: @link http://magento-forum.ru/topic/4335/
+	 * но возможна конвартация через базовую (третью) валюту: http://magento-forum.ru/topic/4335/
 	 * @param float $price
 	 * @param string|Df_Directory_Model_Currency $toCurrency
 	 * @override
@@ -42,7 +40,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 				// но зато запросто можно выполнить конвертацию через промежуточное посредничество
 				// базовой (третьей) валюты.
 				/** @var Df_Directory_Model_Currency $baseCurrency */
-				$baseCurrency = Mage::app()->getStore()->getBaseCurrency();
+				$baseCurrency = rm_store()->getBaseCurrency();
 				if ($this->getCode() !== $baseCurrency->getCode()) {
 					$toCurrency = is_object($toCurrency) ? $toCurrency : self::ld($toCurrency);
 					if ($toCurrency->getCode() !== $baseCurrency->getCode()) {
@@ -98,7 +96,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 						. ' «Система» -> «Настройки» -> «Общие» -> «Валюты» ->'
 						. " «Разрешённые к использованию валюты»,\nа затем указать курс обмена %s на %s"
 						.' в административном разделе «Система» -> «Валюты» -> «Курсы».'
-						,implode(' и ', df_each('getNameInCaseAccusative', $notAvailableCurrencies))
+						,implode(' и ', df_each($notAvailableCurrencies, 'getNameInCaseAccusative'))
 						,$this->getNameInFormOrigin()
 						,$toCurrency->getNameInFormDestination()
 					);
@@ -146,11 +144,11 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 		;
 	}
 
-	/** @return Df_Localization_Model_Morpher_Response|null */
+	/** @return Df_Localization_Morpher_Response|null */
 	public function getMorpher() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_n_set(
-				Df_Localization_Model_Morpher::s()->getResponseSilent($this->getName())
+				Df_Localization_Morpher::s()->getResponseSilent($this->getName())
 			);
 		}
 		return rm_n_get($this->{__METHOD__});
@@ -174,12 +172,12 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * Например, для валюты «Доллар США» последним словом будет «США», и система выдаёт фразы типа:
 	 * «Укажите курс обмена сша на тенге»
 	 *
-	 * @return Df_Localization_Model_Morpher_Response|null
+	 * @return Df_Localization_Morpher_Response|null
 	 */
 	public function getMorpherShort() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_n_set(
-				Df_Localization_Model_Morpher::s()->getResponseSilent(
+				Df_Localization_Morpher::s()->getResponseSilent(
 					rm_last(explode(' ', $this->getName()))
 				)
 			);
@@ -190,9 +188,9 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	/** @return string */
 	public function getName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(df_text()->lcfirst($this->getCurrencyZend()->getName()));
+			$this->{__METHOD__} = df_t()->lcfirst(rm_currency_name($this->getCode()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return $this->{__METHOD__};
 	}
 
 	/**
@@ -204,11 +202,10 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 		if (!isset($this->{__METHOD__}[$case])) {
 			/** @var string $result */
 			$this->{__METHOD__}[$case] =
-				!is_null($this->getMorpher())
-				? call_user_func(array($this->getMorpher(), df_concat('getInCase', ucfirst($case))))
-				: rm_sprintf('%s «%s»', $defaultTemplate, $this->getName())
+				$this->getMorpher()
+				? $this->getMorpher()->getInCase($case)
+				: sprintf('%s «%s»', $defaultTemplate, $this->getName())
 			;
-			df_result_string($this->{__METHOD__}[$case]);
 		}
 		return $this->{__METHOD__}[$case];
 	}
@@ -252,11 +249,11 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	}
 
 	/**
-	 * @param Mage_Core_Model_Store|string|int|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return bool
 	 */
 	public function isAvailable($store = null) {
-		return in_array($this->getCode(), Mage::app()->getStore($store)->getAvailableCurrencyCodes());
+		return in_array($this->getCode(), rm_store($store)->getAvailableCurrencyCodes());
 	}
 
 	/**
@@ -266,13 +263,9 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * @param bool $addBrackets
 	 * @return string
 	 */
-	private function formatDf($price, $options=array(), $includeContainer = true, $addBrackets = false) {
+	private function formatDf($price, $options = array(), $includeContainer = true, $addBrackets = false) {
 		return $this->formatPrecision(
-			$price
-			, rm_currency()->getPrecision()
-			, $options
-			, $includeContainer
-			, $addBrackets
+			$price, rm_currency_precision(), $options, $includeContainer, $addBrackets
 		);
 	}
 
@@ -281,18 +274,11 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * @param array $options
 	 * @return string
 	 */
-	private function formatTxtDf($price, $options=array()) {
-		return
-			parent::formatTxt(
-				$price, array_merge($options, array('precision' => rm_currency()->getPrecision()))
-			)
-		;
+	private function formatTxtDf($price, $options = array()) {
+		return parent::formatTxt($price, array('precision' => rm_currency_precision()) + $options);
 	}
-	
-	/** @return Zend_Currency */
-	private function getCurrencyZend() {return df_zf_currency($this->getCode());}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const BYR = 'BYR';
 	const RUB = 'RUB';
 	const KZT = 'KZT';
@@ -311,7 +297,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 */
 	public static function ld($code) {
 		/** @var array(string => Df_Directory_Model_Currency) $cache */
-		static $cache = array();
+		static $cache;
 		if (!isset($cache[$code])) {
 			$cache[$code] = df_load(self::i(), $code);
 		}

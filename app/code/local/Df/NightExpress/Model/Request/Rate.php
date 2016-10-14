@@ -14,13 +14,13 @@ class Df_NightExpress_Model_Request_Rate extends Df_NightExpress_Model_Request {
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(),array(
+		return array(
 			'Accept' => '*/*'
 			,'Cache-Control' => 'no-cache'
 			,'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
 			,'Pragma' => 'no-cache'
 			,'X-Requested-With' => 'XMLHttpRequest'
-		));
+		) + parent::getHeaders();
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Df_NightExpress_Model_Request_Rate extends Df_NightExpress_Model_Request {
 	 */
 	protected function getRequestMethod() {return Zend_Http_Client::POST;}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

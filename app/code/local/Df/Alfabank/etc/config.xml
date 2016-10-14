@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Alfabank>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Альфа-Банк</title>
+			<version>1.0.0</version>
 		</Df_Alfabank>
 	</modules>
 	<global>
@@ -50,7 +51,7 @@
 		-->
 		<payment>
 			<df-alfabank>
-				<model>df_alfabank/payment</model>
+				<model>Df_Alfabank_Model_Payment</model>
 			</df-alfabank>
 		</payment>
 	</default>
@@ -76,9 +77,7 @@
 		<payment>
 			<alfabank>
 				<currencies>
-					<allowed>
-						RUB
-					</allowed>
+					<allowed>RUB</allowed>
 					<code-translation>
 						<RUB>810</RUB>
 					</code-translation>

@@ -23,10 +23,10 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 				$reportRows[]=
 					in_array($key, $this->getKeysToSuppress())
 					? $value
-					: rm_sprintf('%s: %s.', $key, df_trim($value, '.'))
+					: sprintf("{$key}: %s.", df_trim($value, '.'))
 				;
 			}
-			$this->{__METHOD__} = implode("\r\n", $reportRows);;
+			$this->{__METHOD__} = df_concat_n($reportRows);
 		}
 		return $this->{__METHOD__};
 	}
@@ -50,12 +50,6 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * Используется в платёжном шаблоне info.phtml
-	 * @return bool
-	 */
-	public function isEmpty() {return !$this->getData();}
 
 	/**
 	 * Используется методом @see Df_Payment_Model_Request_Secondary::logAsPaymentTransaction()
@@ -109,11 +103,11 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 		}
 	}
 
-	/** @return Df_Payment_Exception_Response */
-	protected function getExceptionInstance() {return new Df_Payment_Exception_Response();}
+	/** @return string */
+	protected function getExceptionClass() {return Df_Payment_Exception_Response::_C;}
 
 	/** @return string */
-	protected function getIdInPaymentInfo() {return $this->getCurrentClassNameInMagentoFormat();}
+	protected function getIdInPaymentInfo() {return rm_class_mf(get_class($this));}
 
 	/** @return string[] */
 	protected function getKeysToSuppress() {return array();}
@@ -144,32 +138,30 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			$exception = $message;
 		}
 		else {
-			df_param_string_not_empty($message, 0);
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
+			/** @var string $exceptionClass */
+			$exceptionClass = $this->getExceptionClass();
 			/** @var Df_Payment_Exception_Response $exception */
-			$exception = $this->getExceptionInstance();
+			$exception = new $exceptionClass(rm_format($arguments), $this);
 			df_assert($exception instanceof Df_Payment_Exception_Response);
-			$exception->setMessage(rm_sprintf($arguments));
-			$exception->setResponse($this);
 		}
 		df_error($exception);
 	}
 
 	/**
 	 * @param Mage_Sales_Model_Order_Payment $orderPayment
-	 * @return Df_Payment_Model_Response
+	 * @return void
 	 */
 	private function logAsPaymentTransaction(Mage_Sales_Model_Order_Payment $orderPayment) {
 		$orderPayment->addData(array(
 			// Обратите внимание, что при совпадении этих идентификаторов
 			// ранняя информация будет перезаписана новой
-			'transaction_id' =>
-				implode('-', array(
-					$orderPayment->getOrder()->getIncrementId()
-					,Df_Core_Model_ClassManager::s()->getFeatureSuffix($this)
-					,df_dts(Zend_Date::now(), 'HH:mm:ss')
-				))
+			'transaction_id' => implode('-', array(
+				$orderPayment->getOrder()->getIncrementId()
+				,mb_strtolower(rm_last(rm_explode_class($this)))
+				,df_dts(Zend_Date::now(), 'HH:mm:ss')
+			))
 			,'is_transaction_closed' => $this->isTransactionClosed()
 		));
 		$orderPayment->setTransactionAdditionalInfo(
@@ -177,13 +169,10 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			,$value = $this->getReportAsArray()
 		);
 		/** @var Mage_Sales_Model_Order_Payment_Transaction $paymentTransaction */
-		$paymentTransaction =
-			$orderPayment->addTransaction(
-				$type = $this->getTransactionType(), $salesDocument = $orderPayment->getOrder()
-			)
-		;
+		$paymentTransaction = $orderPayment->addTransaction(
+			$type = $this->getTransactionType(), $salesDocument = $orderPayment->getOrder()
+		);
 		$paymentTransaction->save();
-		return $this;
 	}
 
 	/**
@@ -198,5 +187,18 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 		return $this;
 	}
 
-	const _CLASS = __CLASS__;
+	/**
+	 * @used-by Df_Payment_Model_Request_Secondary::getResponse()
+	 * @param Df_Payment_Model_Request_Secondary $request
+	 * @param array(string => string) $params
+	 * @return Df_Payment_Model_Response
+	 */
+	public static function ic(Df_Payment_Model_Request_Secondary $request, array $params) {
+		/** @var string $class */
+		$class = str_replace('Request', 'Response', get_class($request));
+		/** @var Df_Payment_Model_Response $result */
+		$result = rm_ic($class, __CLASS__, $params);
+		$result->setRequest($request);
+		return $result;
+	}
 }

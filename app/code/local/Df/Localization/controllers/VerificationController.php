@@ -11,10 +11,4 @@ class Df_Localization_VerificationController extends Df_Core_Controller_Admin {
 			->renderLayout()
 		;
 	}
-
-	/**
-	 * @override
-	 * @return bool
-	 */
-	protected function _isAllowed() {return df_enabled(Df_Core_Feature::LOCALIZATION);}
 }

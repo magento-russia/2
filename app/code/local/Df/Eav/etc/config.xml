@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Eav>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Eav>
 	</modules>
 	<global>
@@ -55,39 +55,39 @@
 		<events>
 			<eav_entity_attribute_load_after>
 				<observers>
-					<df_eav__eav_entity_attribute_load_after>
-						<class>df_eav/dispatcher</class>
+					<Df_Eav>
+						<class>Df_Eav_Observer</class>
 						<method>eav_entity_attribute_load_after</method>
-					</df_eav__eav_entity_attribute_load_after>
+					</Df_Eav>
 				</observers>
 			</eav_entity_attribute_load_after>
 			<catalog_entity_attribute_load_after>
 				<observers>
-					<df_eav__eav_entity_attribute_load_after>
-						<class>df_eav/dispatcher</class>
+					<Df_Eav>
+						<class>Df_Eav_Observer</class>
 						<method>eav_entity_attribute_load_after</method>
-					</df_eav__eav_entity_attribute_load_after>
+					</Df_Eav>
 				</observers>
 			</catalog_entity_attribute_load_after>
 			<core_collection_abstract_load_after>
 				<observers>
-					<df_eav__core_collection_abstract_load_after>
-						<class>df_eav/dispatcher</class>
+					<Df_Eav>
+						<class>Df_Eav_Observer</class>
 						<method>core_collection_abstract_load_after</method>
-					</df_eav__core_collection_abstract_load_after>
+					</Df_Eav>
 				</observers>
 			</core_collection_abstract_load_after>
 		</events>
 		<translate>
 			<modules>
-				<Df_Eav><files><default>Df_Eav.csv</default></files></Df_Eav>
+				<Df_Eav><files><default>Df/Eav.csv</default></files></Df_Eav>
 			</modules>
 		</translate>
 	</adminhtml>
 	<frontend>
 		<translate>
 			<modules>
-				<Df_Eav><files><default>Df_Eav.csv</default></files></Df_Eav>
+				<Df_Eav><files><default>Df/Eav.csv</default></files></Df_Eav>
 			</modules>
 		</translate>
 	</frontend>

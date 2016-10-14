@@ -5,33 +5,15 @@ class Df_Localization_Helper_Locale extends Mage_Core_Helper_Abstract {
 	 * @return string
 	 */
 	public function getLanguageCodeByLocaleCode($localeCode) {
-		df_param_string($localeCode, 0);
+		df_param_string_not_empty($localeCode, 0);
 		/** @var string $result */
-		$result =
-			df_a(
-				explode(
-					self::SEPARATOR
-					,$localeCode
-				)
-				,0
-			)
-		;
-		df_result_string($result);
+		$result = df_a(explode(self::SEPARATOR, $localeCode), 0);
+		df_result_string_not_empty($result);
 		return $result;
 	}
 
 	/** @return bool */
-	public function isRussian() {
-		/** @var bool $result */
-		$result =
-			(
-					Df_Core_Const::LOCALE__RUSSIAN
-				===
-					Mage::app()->getLocale()->getLocaleCode()
-			)
-		;
-		return $result;
-	}
+	public function isRussian() {return 'ru_RU' === rm_locale();}
 
 	const SEPARATOR = '_';
 

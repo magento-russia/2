@@ -1,29 +1,23 @@
 <?php
 class Df_Eav_Helper_Data extends Mage_Core_Helper_Abstract {
-	/** @return Df_Eav_Helper_Assert */
-	public function assert() {return Df_Eav_Helper_Assert::s();}
-
-	/** @return Df_Eav_Helper_Check */
-	public function check() {return Df_Eav_Helper_Check::s();}
-
 	/** @return bool */
-	public function isPacketUpdate() {return $this->_isPacketUpdate;}
+	public function isPacketUpdate() {return 0 < $this->_packetUpdateRefCount;}
 
 	/** @return void */
-	public function packetUpdateBegin() {$this->_isPacketUpdate = true;}
+	public function packetUpdateBegin() {$this->_packetUpdateRefCount++;}
 
 	/** @return void */
-	public function packetUpdateEnd() {$this->_isPacketUpdate = false;}
+	public function packetUpdateEnd() {$this->_packetUpdateRefCount--;}
 
-	/** @var bool */
-	private $_isPacketUpdate = false;
+	/** @var int */
+	private $_packetUpdateRefCount = 0;
 
 	/**
 	 * @param Mage_Eav_Model_Entity_Attribute_Abstract $attribute
 	 * @return bool
 	 */
 	public function isAttributeBelongsToProduct(Mage_Eav_Model_Entity_Attribute_Abstract $attribute) {
-		return rm_eav_id_product() === intval($attribute->getEntityTypeId());
+		return rm_eav_id_product() === (int)$attribute->getEntityTypeId();
 	}
 
 	/** @return Df_Eav_Helper_Data */

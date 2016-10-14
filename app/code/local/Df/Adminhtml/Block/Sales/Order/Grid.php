@@ -2,7 +2,7 @@
 class Df_Adminhtml_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Sales_Order_Grid {
 	/**
 	 * Цель перекрытия —
-	 * сигнализации о событии @see Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection.
+	 * сигнализации о событии @uses Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection.
 	 * @override
 	 * @param Varien_Data_Collection $collection
 	 * @return void
@@ -17,7 +17,7 @@ class Df_Adminhtml_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Sales_Ord
 		 * коллекция, используемая для таблицы заказов, принадлежит особому классу).
 		 *
 		 * Это событие перехватывается методом
-		 * @see Df_Sales_Model_Dispatcher::rm_adminhtml_block_sales_order_grid__prepare_collection()
+		 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_collection()
 		 * для добавления в коллекцию колонки с перечислением заказанных товаров.
 		 */
 		Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection::dispatch($collection);
@@ -26,7 +26,8 @@ class Df_Adminhtml_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Sales_Ord
 
 	/**
 	 * Цель перекрытия —
-	 * сигнализации о событии @see Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter.
+	 * сигнализации о событии
+	 * @uses Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter
 	 * @override
 	 * @return Df_Adminhtml_Block_Sales_Order_Grid
 	 */
@@ -34,7 +35,7 @@ class Df_Adminhtml_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Sales_Ord
 		parent::_prepareColumns();
 		/**
 		 * Это событие перехватывается методом
-		 * @see Df_Sales_Model_Dispatcher::rm_adminhtml_block_sales_order_grid__prepare_columns_after()
+		 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_columns_after()
 		 * для добавления в коллекцию колонки с перечислением заказанных товаров.
 		 */
 		Mage::dispatchEvent(

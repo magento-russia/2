@@ -18,6 +18,6 @@ abstract class Df_Varien_Data_Form_Processor extends Df_Core_Model {
 	/** @return Df_Varien_Data_Form */
 	protected function getForm() {return $this->cfg(self::P__FORM);}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__FORM = 'form';
 }

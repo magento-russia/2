@@ -20,9 +20,9 @@ rm.checkout.Ergonomic = {
 					checkout.reloadProgressBlock = function() {};
 					_this.loadWaiting_adjust();
 					$('a.df-login', _this.getElement()).fancybox({
-						titlePosition : 'inside'
-						,transitionIn : 'none'
-						,transitionOut : 'none'
+						'titlePosition' : 'inside'
+						,'transitionIn' : 'none'
+						,'transitionOut' : 'none'
 						/**
 						 * 2015-07-04
 						 * Чтобы стили наших всплывающих окон
@@ -161,54 +161,27 @@ rm.checkout.Ergonomic = {
 								Однако это условие никогда не будет выполняться,
 								потому что $this->getAgreements() — коллекция, а не массив.
 								Поэтому при отсутствии условий продажи
-								шаблон всё равно добавляет на страницу мусорную разметку
+								шаблон всё равно добавить на страницу мусорную разметку
 								<form action="" id="checkout-agreements" onsubmit="return false;">
 								<ol class="checkout-agreements">
 								</ol>
 								</form>
 								Вот её надо удалить.
-
-								2016-06-28
-								Предыдущий комментарий не совсем верен.
-								Смотрите реализацию метода Mage_Checkout_Block_Agreements::getAgreements()
-								Она идентична в самой свежей версии 1.9.2.4 и в старой версии 1.6.0.0.
-								Так вот, этот метод вчсё-таки возвращает массив: в том случае,
-								когда «Правила покупки» отклчены администратором магазина:
-									if (!Mage::getStoreConfigFlag('checkout/options/enable_agreements')) {
-										$agreements = array();
-									}
-								https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/app/code/core/Mage/Checkout/Block/Agreements.php#L31-L33
 							 */
 							$('#checkout-agreements').remove();
-							/** @type jQuery {HTMLFormElement} */
-							var $agreementsForm =
-								$('<form/>')
-									.attr({
-										id: 'checkout-agreements'
-										,action: ''
-										,onsubmit: 'return false;'
-									})
-									.append(this.getElement())
+							$('#checkout-review-submit')
+								.prepend(
+									$('<form/>')
+										.attr({
+											id: 'checkout-agreements'
+											,action: ''
+											,onsubmit: 'return false;'
+										})
+										.append(
+											this.getElement()
+										)
+								)
 							;
-							$('#checkout-review-submit').prepend($agreementsForm);
-							/**
-							 * 2016-06-30
-							 * Очень важно!
-							 * Странно, как раньше без этого работала
-							 * функциональность коментария при размещении заказа.
-							 * Когда покупатель нажимает кнопку «Подтвердить заказ»,
-							 * то метод JavaScript Review.save() проверяет наличие формы
-							 * с идентификатором «checkout-agreements», и если эта форма присутствует на странице,
-							 * то отправляет её поля на сервер наравне с полями платёжной формы:
-								 var params = Form.serialize(payment.form);
-								 if (this.agreementsForm) {
-									params += '&'+Form.serialize(this.agreementsForm);
-								 }
-							 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.4/skin/frontend/base/default/js/opcheckout.js#L922-L924
-							 * Если же форма «checkout-agreements» отсутствует на странице,
-							 * то у нас пропадает возможность отправки на сервер комментария к заказу.
-							 */
-							review.agreementsForm = $agreementsForm.get(0);
 						}
 						else {
 							this.getElement().removeClass('buttons-set');
@@ -423,38 +396,6 @@ rm.namespace('rm.checkout');
 	rm.checkout.ergonomic.Review = {
 		construct: function(_config) { var _this = {
 			init: function() {
-				this.subscribeToOrderPlacement();
-				$(window)
-					.bind(
-						rm.checkout.Ergonomic.sectionUpdated
-						,/**
-						 * @param {jQuery.Event} event
-						 */
-						function(event) {
-							if ('review' === event.section) {
-								_this.subscribeToOrderPlacement();
-							}
-						}
-					)
-				;
-				$(window)
-					.bind(
-						rm.checkout.Ergonomic.interfaceUpdated
-						,/**
-						 * @param {jQuery.Event} event
-						 */
-						function(event) {
-							if (_this.needSave()) {
-								_this.save();
-							}
-						}
-					)
-				;
-			}
-			,/**
-			 * 2016-06-28
-			 */
-			subscribeToOrderPlacement: function() {
 				/**
 				 * При нажатии кнопки "Оформить заказ"
 				 * система должна провести валидацию всех форм.
@@ -503,6 +444,19 @@ rm.namespace('rm.checkout');
 						}
 					)
 				;
+				$(window)
+					.bind(
+						rm.checkout.Ergonomic.interfaceUpdated
+						,/**
+						 * @param {jQuery.Event} event
+						 */
+						function(event) {
+							if (_this.needSave()) {
+								_this.save();
+							}
+						}
+					)
+				;
 			}
 			,/**
 			 * @public
@@ -529,7 +483,7 @@ rm.namespace('rm.checkout');
 			}
 			,/**
 			 * @public
-			 * @param {Boolean} value
+			 * @param {Boolean}
 			 * @returns {rm.checkout.ergonomic.method.Shipping}
 			 */
 			needSave: function(value) {
@@ -570,6 +524,18 @@ rm.namespace('rm.checkout');
 				this.handleShippingAddressHasNoFields();
 				this.listenForSelection();
 				this.addFakeRegionFieldsIfNeeded();
+				$(document.getElementById('billing:country_id')).select2({
+					width: 150
+					, minimumResultsForSearch: 0
+					, containerCssClass: ''
+					,dropdownCss: {width: 200}
+				})
+					.on('change', function(e) {
+						if (window.billingRegionUpdater) {
+							window.billingRegionUpdater.update();
+          				}
+					})
+				;
 			}
 			,/** @returns {void} */
 			save: function() {
@@ -721,7 +687,11 @@ rm.namespace('rm.checkout');
 				this.disableShippingAddressTheSameSwitcherIfNeeded();
 				this.handleShippingAddressHasNoFields();
 				this.listenForSelection();
-				$(document.getElementById('shipping:country_id'))
+				$(document.getElementById('shipping:country_id')).select2({
+					width: 150
+					, minimumResultsForSearch: 0
+					,dropdownCss: {width: 200}
+				})
 					.on('change', function(e) {
 						if (window.shippingRegionUpdater) {
 							window.shippingRegionUpdater.update();
@@ -1106,24 +1076,30 @@ rm.namespace('rm.checkout');
 			}
 			,/**
 			 * @public
-			 * @returns {rm.checkout.ergonomic.method.Payment}
+			 * @returns {void}
 			 */
 			handleNoMethods: function() {
 				/** @type {jQuery} HTMLDListElement */
 				var $methodsContainer = $('#checkout-payment-method-load');
-				if (0 === $('dt', $methodsContainer).length) {
-					var $parent = $methodsContainer.parent();
-					/**
-					 * Отсутствуют способы оплаты
-					 */
-					$methodsContainer
-						.replaceWith(
-							$('<div id="checkout-payment-method-load" />')
-								.html(
-								'<p>' + Translator.translate('Sorry, no quotes are available for Payment Methods at this time.') + '</p>' + '<br>' +
-								'<p>' + Translator.translate('If you have already completed the detailed profiles of the previous block, but payment methods did not appear - please send us email and we will select an individual option to confirm payment for your order.') + '</p>'
-								)
-						)
+				if (!$('dt', $methodsContainer).length) {
+					var $message = $('<div id="checkout-payment-method-load" />').html(
+						"<p>"
+							+ "<span class='p'>"
+								+ "Чтобы узнать доступные для Вашего заказа варианты оплаты — "
+								+ "подробно заполните предыдущие блоки анкеты "
+								+ "(платёжные реквизиты, адрес доставки, способ доставки)."
+							+ "</span>"
+							+ "<span class='p'>"
+								+ "Если Вы уже заполнили подробно предыдущие блоки анкеты, "
+								+ "но варианты доставки так и не появились — пожалуйста, "
+								+ "позвоните нам по телефону, "
+								+ "и мы подберём индивидуальный вариант оплаты Вашего заказа."
+							+ "</span>"
+						+ "</p>"
+					);
+					$methodsContainer.length
+						? $methodsContainer.replaceWith($message)
+						: $('#co-payment-form').html($message)
 					;
 				}
 				return this;
@@ -1349,25 +1325,25 @@ rm.namespace('rm.checkout');
 			}
 			,/**
 			 * @public
-			 * @returns {rm.checkout.ergonomic.method.Shipping}
+			 * @returns {void}
 			 */
 			handleNoMethods: function() {
 				/** @type {jQuery} HTMLDListElement */
 				var $methodsContainer = $('#checkout-shipping-method-load');
-				if (0 === $('dt', $methodsContainer).length) {
-					var $parent = $methodsContainer.parent();
-					/**
-					 * Отсутствуют способы доставки
-					 */
-					$methodsContainer
-						.replaceWith(
-							$('<div id="checkout-shipping-method-load" />')
-								.html(
-								'<p>' + Translator.translate('Sorry, no quotes are available for Shipping Methods at this time.') + '</p>' + '<br>' +
-'<p>' + Translator.translate('If you have already completed the detailed profiles of the previous block, but shipping methods did not appear - please send us email and we will select an individual option to ship your order.') + '</p>'
-								)
-						)
-					;
+				if (!$('dt', $methodsContainer).length) {
+					$methodsContainer.replaceWith($('<div id="checkout-shipping-method-load" />').html(
+						"<p>"
+							+ "<span class='p'>"
+								+ "Чтобы узнать доступные для Вашего заказа варианты доставки — "
+								+ "укажите подробный адрес доставки."
+							+ "</span>"
+							+ "<span class='p'>Если Вы уже указали адрес доставки, "
+								+ "но варианты доставки так и не появились — "
+								+ "пожалуйста, позвоните нам по телефону, "
+								+ "и мы подберём индивидуальный вариант доставки Вашего заказа."
+							+ "</span>"
+						+ "</p>"
+					));
 				}
 				return this;
 			}
@@ -1661,36 +1637,32 @@ rm.namespace('rm.checkout');
 		}
 	}; _this.init(); return _this; } };
 
-})(jQuery);rm.namespace('rm.checkout');
+})(jQuery);/**
+ * Программный код,
+ * который надо выполнить сразу после загрузки страницы
+ */
+rm.namespace('rm.checkout');
 (function($) { $(function() {
 	rm.namespace('rm.tweaks');
 	// rm.tweaks.options отсутствует на страницах формы ПД-4
 	if (!rm.tweaks.options) {
 		rm.tweaks.options = {};
 	}
-	/**
-	 * 2015-12-05
-	 * Удивительно, как я не додумался до такого решения раньше, ведь оно совсем простое.
-	 * Раньше тут стоял код var $loginForms = $('#login-form');
-	 * Конечно, новый код намного универсальнее.
-	 */
-	/** @type {jQuery} HTMLFormElement[] */
-	var $loginForms = $("form[action*='customer/account/loginPost']");
-	$loginForms.each(function() {
-		/** @type {jQuery} HTMLFormElement */
-		var $form = $(this);
+	/** @type {jQuery} HTMLFormElement */
+	var $loginForm = $('#login-form');
+	if (0 < $loginForm.length) {
 		/** @type {jQuery} HTMLInputElement */
-		var $keyField = $('input[name="form_key"]', $form);
-		if (0 === $keyField.length) {
+		var $formKeyField = $('input[name="form_key"]', $loginForm);
+		if (0 === $formKeyField.length) {
 			/** @type string */
 			var formKey = rm.tweaks.options.formKey;
 			if (formKey) {
-				$form.append(
+				$loginForm.append(
 					$('<input/>').attr({type: 'hidden', name: 'form_key', 'value': formKey})
 				);
 			}
 		}
-	});
+	}
 }); })(jQuery);function show_hide_checkbox_fields(objName,condition)
 {
 	document.getElementById(objName).disabled = condition==1?"disabled":"";
@@ -2131,35 +2103,9 @@ rm.namespace('rm.checkout');
 							 * {'package':'default', 'theme':'default', 'skin':'theme454'}
 							 */
 							applicable =
-								!rm.defined(rm.tweaks.options.skin)
-								|| ('default' === rm.tweaks.options.skin)
-								/**
-								 * 2016-09-30
-								 * Добавил звёздочку, чтобы условие
-								 * {package: 'ultimo', theme: '*'} пропускало модификации тем,
-								 * которые Infortis рекомендует называть «child».
-								 */
-								|| ('*' === themeConditions.theme)
-								/**
-								 * 2015-12-04
-								 * Добавил это условие для ситуации:
-								 * rm.tweaks.options:
-										{
-											"package":"default"
-											,"theme":"galasoftwaremarket"
-											,"skin":"galasoftwaremarket"
-										}
-								 * themeConditions.theme:
-										{
-											'package': 'default'
-											, 'theme': 'galasoftwaremarket'
-										}
-								 */
-								|| (
-									('default' !== rm.tweaks.options.theme)
-									&& rm.defined(themeConditions.theme)
-									&& themeConditions.theme === rm.tweaks.options.theme
-								)
+									!rm.defined(rm.tweaks.options.skin)
+								||
+									('default' === rm.tweaks.options.skin)
 							;
 						}
 						else {
@@ -2182,15 +2128,6 @@ rm.namespace('rm.checkout');
 					if (applicable) {
 						if (rm.defined(themeConditions.theme)) {
 							applicable =
-									/**
-									 * 2016-09-30
-									 * Добавил звёздочку, чтобы условие
-									 * {package: 'ultimo', theme: '*'}
-									 * пропускало модификации тем,
-									 * которые Infortis рекомендует называть «child».
-									 */
-									('*' === themeConditions.theme)
-								||
 									(themeConditions.theme === rm.tweaks.options.theme)
 								||
 									(
@@ -2247,108 +2184,91 @@ rm.namespace('rm.checkout');
 		}
 	})();
 }); })(jQuery);;(function($) {rm.namespace('rm.tweaks'); rm.tweaks.dictionary = {
-	'df-theme-8theme-blanco': {package: 'default', skin: 'blanco'}
-	,'df-theme-8theme-gadget': {package: 'default', skin: 'gadget'}
-	,'df-theme-8theme-mercado': {package: 'mercado'}
-	,'df-theme-argento': {package: 'argento'}
-	,'df-theme-cattheme-se105': {package: 'default', skin: 'se105'}
+	'df-theme-8theme-blanco': {'package': 'default', 'skin': 'blanco'}
+	,'df-theme-8theme-gadget': {'package': 'default', 'skin': 'gadget'}
+	,'df-theme-8theme-mercado': {'package': 'mercado'}
+	,'df-theme-argento': {'package': 'argento'}
+	,'df-theme-cattheme-se105': {'package': 'default', 'skin': 'se105'}
 	/**
 	 * EM Marketplace
 	 * http://www.emthemes.com/premium-magento-themes/em-marketplace.html
 	 * http://magento-forum.ru/forum/312/
 	 */
-	,'df-theme-em-marketplace': {package: 'default', skin: 'em0067'}
-	/**
-	 * 2015-12-02
-	 * ThemeForest Gala SoftwareMarket
-	 * http://themeforest.net/item/responsive-magento-theme-gala-softwaremarket/6384061
-	 * http://magento-forum.ru/forum/373/
-	 */
-	,'df-theme-gala-softwaremarket': {package: 'default', theme: 'galasoftwaremarket'}
+	,'df-theme-em-marketplace': {'package': 'default', 'skin': 'em0067'}
 	/**
 	 * ThemeForest Gala TitanShop
 	 * http://themeforest.net/item/responsive-magento-theme-gala-titanshop/8202636
 	 * http://magento-forum.ru/forum/352/
 	 */
-	,'df-theme-gala-titanshop': {package: 'default', theme: 'galatitanshop'}
+	,'df-theme-gala-titanshop': {'package': 'default', 'theme': 'galatitanshop'}
 	/**
 	 * ThemeForest Infortis Fortis
 	 * http://themeforest.net/item/fortis-responsive-magento-theme/1744309
 	 * http://magento-forum.ru/forum/350/
-	 *
-	 * 2016-09-25
-	 * Добавил звёздочку, чтобы условие пропускало модификации тем,
-	 * которые Infortis рекомендует называть «child».
 	 */
-	,'df-theme-infortis-fortis': {package: 'fortis', theme: '*'}
-	,'df-theme-infortis-ultimo': {package: 'ultimo', theme: '*'}
-	,'df-theme-koolthememaster-caramel': {package: 'default', skin: 'caramel'}
-	,'df-theme-magento-default': {package: 'default', theme: 'default'}
-	,'df-theme-magento-enterprise': {package: 'enterprise'}
-	,'df-theme-magento-modern': {package: 'default', theme: 'modern'}
-	,'df-theme-magento-rwd': {package: 'rwd'}
-	,'df-theme-smartwave-porto': {package: 'smartwave', theme: 'porto', skin: 'porto'}
-	,'df-theme-sns-xsport': {package: 'default', theme: 'sns_xsport'}
-	,'df-theme-templatemela-beauty': {package: 'default', skin: 'MAG080119'}
+	,'df-theme-infortis-fortis': {'package': 'fortis'}
+	,'df-theme-infortis-ultimo': {'package': 'ultimo'}
+	,'df-theme-koolthememaster-caramel': {'package': 'default', 'skin': 'caramel'}
+	,'df-theme-magento-default': {'package': 'default', 'theme': 'default'}
+	,'df-theme-magento-enterprise': {'package': 'enterprise'}
+	,'df-theme-magento-modern': {'package': 'default', 'theme': 'modern'}
+	,'df-theme-magento-rwd': {'package': 'rwd'}
+	,'df-theme-smartwave-porto': {'package': 'smartwave', 'theme': 'porto', skin: 'porto'}
+	,'df-theme-sns-xsport': {'package': 'default', 'theme': 'sns_xsport'}
+	,'df-theme-templatemela-beauty': {'package': 'default', 'skin': 'MAG080119'}
 	/**
 	 * TemplateMela Classy Shop (MAG090171)
 	 * http://www.templatemela.com/classyshop-magento-theme.html
 	 * http://themeforest.net/item/classy-shop-magento-responsive-template/519426
 	 * http://magento-forum.ru/forum/342/
 	 */
-	,'df-theme-templatemela-classy-shop': {package: 'default', skin: 'MAG090171'}
+	,'df-theme-templatemela-classy-shop': {'package': 'default', 'skin': 'MAG090171'}
 	/**
 	 * TemplateMela (ThemeForest) Fancy Shop
 	 * http://themeforest.net/item/fancy-shop-magento-template/3087093
 	 * http://magento-forum.ru/forum/316/
 	 */
 	,'df-theme-templatemela-fancyshop':
-		{package: 'default', skin: ['fancyshop_brown', 'fancyshop_blue', 'forest_fancyshop']}
+		{'package': 'default', 'skin': ['fancyshop_brown', 'fancyshop_blue', 'forest_fancyshop']}
 	/**
 	 * TemplateMela Mega Shop (MAG090172)
 	 * http://www.templatemela.com/mega-shop-magento-template.html
 	 * http://themeforest.net/item/mega-shop-magento-responsive-template/6608610
 	 * http://magento-forum.ru/forum/363/
 	 */
-	,'df-theme-templatemela-mega-shop': {package: 'default', skin: 'MAG090172'}
+	,'df-theme-templatemela-mega-shop': {'package': 'default', 'skin': 'MAG090172'}
 	/**
 	 * TemplateMela Minimal Multi Purpose (MAG090180)
 	 * http://www.templatemela.com/minimal-multi-purpose-magento-theme.html
 	 * http://magento-forum.ru/forum/341/
 	 */
-	,'df-theme-templatemela-minimal-multi-purpose': {package: 'default', skin: 'MAG090180'}
-	,'df-theme-templatemonster-34402': {package: 'default', skin: 'theme043k'}
-	,'df-theme-templatemonster-37419': {package: 'default', skin: 'theme264'}
-	,'df-theme-templatemonster-41220': {package: 'default', skin: 'theme411'}
+	,'df-theme-templatemela-minimal-multi-purpose': {'package': 'default', 'skin': 'MAG090180'}
+	,'df-theme-templatemonster-34402': {'package': 'default', 'skin': 'theme043k'}
+	,'df-theme-templatemonster-37419': {'package': 'default', 'skin': 'theme264'}
+	,'df-theme-templatemonster-41220': {'package': 'default', 'skin': 'theme411'}
 	/**
 	 * TemplateMonster #43373
 	 * http://www.templatemela.com/minimal-multi-purpose-magento-theme.html
 	 * http://magento-forum.ru/forum/364/
 	 * http://www.templatemonster.com/ru/magento-themes-type/43373.html
 	 */
-	,'df-theme-templatemonster-43373': {package: 'default', skin: 'theme454'}
-	,'df-theme-templatemonster-43442': {package: 'default', skin: 'theme464'}
-	,'df-theme-templatemonster-45035': {package: 'default', skin: 'theme500'}
+	,'df-theme-templatemonster-43373': {'package': 'default', 'skin': 'theme454'}
+	,'df-theme-templatemonster-43442': {'package': 'default', 'skin': 'theme464'}
+	,'df-theme-templatemonster-45035': {'package': 'default', 'skin': 'theme500'}
 	/**
 	 * TemplateMonster #49198 («Men's Underwear»)
 	 * http://www.templatemonster.com/magento-themes/49198.html
 	 * http://magento-forum.ru/forum/340/
 	 */
-	,'df-theme-templatemonster-49198': {package: 'default', skin: 'theme611'}
-	/**
-	 * TemplateMonster #53174 («Kids Fashion»)
-	 * http://www.templatemonster.com/magento-themes/53174.html
-	 * http://magento-forum.ru/forum/372/
-	 */
-	,'df-theme-templatemonster-53174': {package: 'default', skin: 'theme690'}
-	,'df-theme-tt-theme069': {package: 'tt', skin: 'theme069'}
+	,'df-theme-templatemonster-49198': {'package': 'default', 'skin': 'theme611'}
+	,'df-theme-tt-theme069': {'package': 'tt', 'skin': 'theme069'}
 	/**
 	 * Ves Super Store (ThemeForest 8002349)
 	 * http://themeforest.net/item/ves-super-store-responsive-magento-theme-/8002349?ref=dfediuk
 	 * http://demoleotheme.com/superstore/
 	 * http://magento-forum.ru/forum/370/
 	 */
-	,'df-theme-ves-super-store': {package: 'default', skin: 'ves_superstore'}
+	,'df-theme-ves-super-store': {'package': 'default', 'skin': 'ves_superstore'}
 };})(jQuery);;(function($) {
 	rm.namespace('rm.vk');
 	//noinspection JSValidateTypes
@@ -2643,94 +2563,132 @@ rm.namespace('rm.checkout');
  * «ReferenceError: RegionUpdater is not defined».
  */
 if (rm.defined(window.RegionUpdater)) {
-	RegionUpdater.prototype.update =
-		function() {
-			if (this.regions[this.countryEl.value]) {
-				var i, option, region, def;
-				var defaultRegionId = this.regionSelectEl.getAttribute('defaultValue');
-				if (this.regionTextEl) {
-					def = this.regionTextEl.value.toLowerCase();
-					this.regionTextEl.value = '';
-				}
-				if (!def) {
-					def = defaultRegionId;
-				}
-				this.regionSelectEl.options.length = 1;
-				for (regionId in this.regions[this.countryEl.value]) {
-					region = this.regions[this.countryEl.value][regionId];
-					// НАЧАЛО ЗАПЛАТКИ
-					/**
-					 * 2014-10-23
-					 * Скрипт RegionUpdater.js был перекрыт 3 года назад, 2011-11-05,
-					 * причём к заплатке в системе контроля версий был дан такой комментарий:
-					 * «Исправление упорядочивания субъектов РФ для Webkit».
-					 *
-					 * Я уже сейчас не помню, в чём там проблема была с упорядочиванием регионов,
-					 * но заплатка оставалась все 3 года и останется сейчас.
-					 *
-					 * Обратите внимание, что идентификаторы добавлены в массив регионов
-					 * другой заплаткой, в методах
-					 * @see Df_Directory_Helper_Data::getRegionJson()
-					 * @see Df_Directory_Helper_Data::_getRegions()
-					 */
-					regionId = region.id;
-					if (rm.undefined(regionId)) {
-						continue;
-					}
-					// КОНЕЦ ЗАПЛАТКИ
-					option = document.createElement('OPTION');
-					option.value = regionId;
-					option.text = region.name;
-					if (this.regionSelectEl.options.add) {
-						this.regionSelectEl.options.add(option);
-					} else {
-						this.regionSelectEl.appendChild(option);
-					}
-					if (
-							(regionId == defaultRegionId)
-						||
-							(region.name.toLowerCase()==def)
-						||
-							(region.code.toLowerCase()==def)
-					) {
-						this.regionSelectEl.value = regionId;
-					}
-				}
-				if (this.disableAction=='hide') {
-					if (this.regionTextEl) {
-						this.regionTextEl.style.display = 'none';
-					}
-					this.regionSelectEl.style.display = '';
-				} else if (this.disableAction=='disable') {
-					if (this.regionTextEl) {
-						this.regionTextEl.disabled = true;
-					}
-					this.regionSelectEl.disabled = false;
-				}
-				this.setMarkDisplay(this.regionSelectEl, true);
-			} else {
-				if (this.disableAction=='hide') {
-					if (this.regionTextEl) {
-						this.regionTextEl.style.display = '';
-					}
-					this.regionSelectEl.style.display = 'none';
-					Validation.reset(this.regionSelectEl);
-				} else if (this.disableAction=='disable') {
-					if (this.regionTextEl) {
-						this.regionTextEl.disabled = false;
-					}
-					this.regionSelectEl.disabled = true;
-				} else if (this.disableAction=='nullify') {
-					this.regionSelectEl.options.length = 1;
-					this.regionSelectEl.value = '';
-					this.regionSelectEl.selectedIndex = 0;
-					this.lastCountryId = '';
-				}
-				this.setMarkDisplay(this.regionSelectEl, false);
-			}
-			// Make Zip and its label required/optional
-			var zipUpdater = new ZipUpdater(this.countryEl.value, this.zipEl);
-			zipUpdater.update();
+	RegionUpdater.prototype.update = function() {
+		/** @type {Boolean} */
+		var isErgonomicCheckout = !!jQuery('.df .df-checkout-ergonomic').length;
+		if (isErgonomicCheckout) {
+			/** @type {jQuery} HTMLSelectElement */
+			var $select = jQuery(this.regionSelectEl);
+			/** http://stackoverflow.com/a/19328273 */
+			$select.select2('destroy');
 		}
-	;
+		if (this.regions[this.countryEl.value]) {
+			var i, option, region, def;
+			var defaultRegionId = this.regionSelectEl.getAttribute('defaultValue');
+			if (this.regionTextEl) {
+				def = this.regionTextEl.value.toLowerCase();
+				this.regionTextEl.value = '';
+			}
+			if (!def) {
+				def = defaultRegionId;
+			}
+			this.regionSelectEl.options.length = 1;
+			for (regionId in this.regions[this.countryEl.value]) {
+				region = this.regions[this.countryEl.value][regionId];
+				// НАЧАЛО ЗАПЛАТКИ
+				/**
+				 * 2014-10-23
+				 * Скрипт RegionUpdater.js был перекрыт 3 года назад, 2011-11-05,
+				 * причём к заплатке в системе контроля версий был дан такой комментарий:
+				 * «Исправление упорядочивания субъектов РФ для Webkit».
+				 *
+				 * Я уже сейчас не помню, в чём там проблема была с упорядочиванием регионов,
+				 * но заплатка оставалась все 3 года и останется сейчас.
+				 *
+				 * Обратите внимание, что идентификаторы добавлены в массив регионов
+				 * другой заплаткой, в методах
+				 * @uses Df_Directory_Helper_Data::getRegionJson()
+				 * @uses Df_Directory_Helper_Data::_getRegions()
+				 */
+				regionId = region.id;
+				if (rm.undefined(regionId)) {
+					continue;
+				}
+				// КОНЕЦ ЗАПЛАТКИ
+				option = document.createElement('OPTION');
+				option.value = regionId;
+				option.text = region.name;
+				if (this.regionSelectEl.options.add) {
+					this.regionSelectEl.options.add(option);
+				}
+				else {
+					this.regionSelectEl.appendChild(option);
+				}
+				if (
+						(regionId == defaultRegionId)
+					||
+						(region.name.toLowerCase()==def)
+					||
+						(region.code.toLowerCase()==def)
+				) {
+					this.regionSelectEl.value = regionId;
+				}
+			}
+			if (this.disableAction=='hide') {
+				if (this.regionTextEl) {
+					this.regionTextEl.style.display = 'none';
+				}
+				this.regionSelectEl.style.display = '';
+			}
+			else if (this.disableAction=='disable') {
+				if (this.regionTextEl) {
+					this.regionTextEl.disabled = true;
+				}
+				this.regionSelectEl.disabled = false;
+			}
+			this.setMarkDisplay(this.regionSelectEl, true);
+			if (isErgonomicCheckout) {
+				/** http://stackoverflow.com/a/19328273 */
+				var clearValue = function(regionElement, fieldName) {
+					var input = document.getElementById(
+						regionElement.id.replace('region_id', fieldName)
+					);
+					if (input) {
+						input.value = '';
+					}
+				};
+				$select.select2({
+					width: 150
+					, minimumResultsForSearch: 0
+					,dropdownCss: {width: 300}
+					//,placeholder: '-- область --'
+				})
+					.on('change', function(e) {
+						/**
+						 * 2015-02-15
+						 * После смены области
+						 * надо удалить содержимое полей «Город» и «Почтовый индекс».
+						 */
+						clearValue(this, 'city');
+						clearValue(this, 'postcode');
+					})
+				;
+			}
+		}
+		else {
+			if ('hide' === this.disableAction) {
+				if (this.regionTextEl) {
+					this.regionTextEl.style.display = '';
+				}
+				this.regionSelectEl.style.display = 'none';
+				Validation.reset(this.regionSelectEl);
+			}
+			else if (this.disableAction=='disable') {
+				if (this.regionTextEl) {
+					this.regionTextEl.disabled = false;
+				}
+				this.regionSelectEl.disabled = true;
+			}
+			else if (this.disableAction=='nullify') {
+				this.regionSelectEl.options.length = 1;
+				this.regionSelectEl.value = '';
+				this.regionSelectEl.selectedIndex = 0;
+				this.lastCountryId = '';
+			}
+			this.setMarkDisplay(this.regionSelectEl, false);
+		}
+		// Make Zip and its label required/optional
+		var zipUpdater = new ZipUpdater(this.countryEl.value, this.zipEl);
+		zipUpdater.update();
+	};
 }

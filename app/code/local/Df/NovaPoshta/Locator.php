@@ -34,7 +34,7 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 			 * потому что иначе расчёт сроков доставки приводил к сбою,
 			 * когда в качестве параметра «recipientCity» было указано «Хмельник»
 			 * вместо «Хмельник (Винницкая обл.)».
-			 * @see Df_NovaPoshta_Model_Collector::date()
+			 * @see Df_NovaPoshta_Collector::date()
 			 */
 			$result[$nameNormalized] = array($value, $nameOriginal);
 		}
@@ -42,14 +42,14 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 	}
 
 	/**
-	 * @used-by Df_NovaPoshta_Model_Collector::locationDestId()
+	 * @used-by Df_NovaPoshta_Collector::locationDestId()
 	 * @param string $cityNameUc
 	 * @return string[]|null
 	 */
 	public static function findD($cityNameUc) {return self::_find(__CLASS__, self::$D, $cityNameUc);}
 
 	/**
-	 * @used-by Df_NovaPoshta_Model_Collector::locationOrigId()
+	 * @used-by Df_NovaPoshta_Collector::locationOrigId()
 	 * @param string $cityNameUc
 	 * @return string[]|null
 	 */
@@ -62,7 +62,7 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 	private static function getInputIdByType($type) {
 		/** @var string $result */
 		$result = df_a(array(
-			 self::$D => 'DeliveryForm_recipientCity'
+			self::$D => 'DeliveryForm_recipientCity'
 			,self::$O => 'DeliveryForm_senderCity_id'
 		), $type);
 		df_result_string_not_empty($result);
@@ -74,16 +74,16 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 	 * @return Df_Shipping_Model_Response
 	 */
 	private static function response() {
-		/** @var Df_Shipping_Model_Response $result */
-		static $result;
-		if (!isset($result)) {
+		/** @var Df_Shipping_Model_Response $r */
+		static $r;
+		if (!$r) {
 			/** @var Df_NovaPoshta_Request $request */
 			$request = new Df_NovaPoshta_Request(array(
 				Df_NovaPoshta_Request::P__QUERY_PATH => '/delivery'
 			));
-			$result = $request->response();
+			$r = $request->response();
 		}
-		return $result;
+		return $r;
 	}
 
 	/** @var string */

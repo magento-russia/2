@@ -12,10 +12,8 @@ class Df_Spsr_Model_Locator extends Df_Shipping_Model_Locator {
 			if (!$this->getCity()) {
 				$this->throwExceptionNoCityOrigin();
 			}
-			/**
-			 * Важное условие!
-			 * Запрограммированный ниже алгоритм обязательно требует знания области склада магазина.
-			 */
+			// Важное условие!
+			// Запрограммированный ниже алгоритм обязательно требует знания области склада магазина.
 			if (!$this->getRegionName()) {
 				$this->throwExceptionNoRegionOrigin();
 			}
@@ -24,7 +22,7 @@ class Df_Spsr_Model_Locator extends Df_Shipping_Model_Locator {
 			/** @var string $regionNameNormalized */
 			$regionNameNormalized = Df_Spsr_Model_Location::i()->normalizeName($this->getRegionName());
 			/** @var string $countryNameNormalized */
-			$countryNameNormalized = Df_Cdek_Model_Location::i()->normalizeName($this->getCountryName());
+			$countryNameNormalized = Df_Spsr_Model_Location::i()->normalizeName($this->getCountryName());
 			foreach ($locationsWithSameName as $location) {
 				if (
 						!$location->hasRegion()
@@ -58,7 +56,7 @@ class Df_Spsr_Model_Locator extends Df_Shipping_Model_Locator {
 				}
 			}
 			if (!$result) {
-				if (!is_null($this->getRequest())) {
+				if ($this->rr()) {
 					$this->throwExceptionInvalidLocation();
 				}
 				else {
@@ -76,7 +74,7 @@ class Df_Spsr_Model_Locator extends Df_Shipping_Model_Locator {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

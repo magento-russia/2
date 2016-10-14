@@ -1,5 +1,6 @@
 <?php
 /**
+ * @method Df_Eav_Model_Entity_Attribute_Set findById(int $id)
  * @method Df_Eav_Model_Entity_Attribute_Set|null findByLabel(string $label)
  */
 class Df_Dataflow_Model_Registry_Collection_AttributeSets extends Df_Dataflow_Model_Registry_Collection {
@@ -8,17 +9,14 @@ class Df_Dataflow_Model_Registry_Collection_AttributeSets extends Df_Dataflow_Mo
 	 * @return Df_Eav_Model_Resource_Entity_Attribute_Set_Collection
 	 */
 	protected function createCollection() {
-		/** @var Df_Eav_Model_Resource_Entity_Attribute_Set_Collection $result */
-		$result = Df_Eav_Model_Resource_Entity_Attribute_Set_Collection::i();
-		$result->setEntityTypeFilter(rm_eav_id_product());
-		return $result;
+		return Df_Eav_Model_Entity_Attribute_Set::c()->setEntityTypeFilter(rm_eav_id_product());
 	}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Eav_Model_Entity_Attribute_Set::_CLASS;}
+	protected function getEntityClass() {return Df_Eav_Model_Entity_Attribute_Set::_C;}
 
 	/**
 	 * @override

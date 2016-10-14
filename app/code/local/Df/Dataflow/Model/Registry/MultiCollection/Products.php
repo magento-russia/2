@@ -3,10 +3,10 @@ class Df_Dataflow_Model_Registry_MultiCollection_Products
 	extends Df_Dataflow_Model_Registry_MultiCollection {
 	/**
 	 * @override
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_Dataflow_Model_Registry_Collection_Products
 	 */
-	protected function getCollectionForStore(Mage_Core_Model_Store $store) {
+	protected function getCollectionForStore(Df_Core_Model_StoreM $store) {
 		return Df_Dataflow_Model_Registry_Collection_Products::s($store);
 	}
 

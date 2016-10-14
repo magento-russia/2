@@ -1,13 +1,6 @@
 <?php
-class Df_Dataflow_Model_Convert_Mapper_Defaults extends Df_Dataflow_Model_Convert_Mapper_Abstract {
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getFeatureCode() {
-		return Df_Core_Feature::DATAFLOW;
-	}
-
+class Df_Dataflow_Model_Convert_Mapper_Defaults
+	extends Df_Dataflow_Model_Convert_Mapper_Abstract {
 	/**
 	 * @param array $row
 	 * @return array

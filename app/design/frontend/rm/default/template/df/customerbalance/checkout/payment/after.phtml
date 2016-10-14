@@ -1,0 +1,23 @@
+<?php /** @var Df_CustomerBalance_Block_Checkout_Payment $this */ ?>
+<?php if ($this->isAllowed()): ?>
+<script type='text/javascript'>
+	isFullyPaidAfterCustomerBalanceApplication = <?php echo($this->isFullyPaidAfterApplication() ? 'true' : 'false'); ?>;
+	quoteBaseGrandTotal = <?php echo(float)rm_quote()->getBaseGrandTotal(); ?>;
+	function setCustomerBalanceAvailable(balance, formattedBalance) {
+		if ($('customerbalance_placer')) {
+			if (balance == 0) {
+				$('use_customer_balance').checked = false;
+				$('use_customer_balance').disabled = true;
+				$('customerbalance_placer').hide();
+			} else {
+				$('use_customer_balance').disabled = false;
+				$('customerbalance_placer').show();
+			}
+		}
+		if ($('customerbalance_available_amount')) {
+			$('customerbalance_available_amount').innerHTML = formattedBalance;
+		}
+	}
+	setCustomerBalanceAvailable('<?php echo $this->getBalance(); ?>', '<?php echo Mage::helper('core')->currency($this->getBalance()); ?>');
+</script>
+<?php endif;?>

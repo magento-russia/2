@@ -369,6 +369,7 @@ class DOMDocumentWrapper {
 			$markup, $matches, PREG_OFFSET_CAPTURE
 		);
 		if (! isset($matches[0]))
+			/** @noinspection PhpInconsistentReturnPointsInspection */
 			return;
 		$metaContentType = $matches[0][0];
 		$markup = substr($markup, 0, $matches[0][1])
@@ -657,7 +658,7 @@ class DOMDocumentWrapper {
 	 * @param $xml
 	 * @return unknown_type
 	 * @author mjaque at ilkebenson dot com
-	 * @link http://php.net/manual/en/domdocument.savehtml.php#81256
+	 * @link http://php.net/manual/domdocument.savehtml.php#81256
 	 */
 	public static function expandEmptyTag($tag, $xml){
 		$indice = 0;

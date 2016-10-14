@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter getEvent() */
 class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,11 +7,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 	 * @return void
 	 */
 	public function handle() {
-		if (
-				df_cfg()->sales()->orderGrid()->productColumn()->getEnabled()
-			&&
-				df_enabled(Df_Core_Feature::SALES)
-		) {
+		if (df_cfg()->sales()->orderGrid()->productColumn()->getEnabled()) {
 			$this
 				->registerProductColumnRenderer()
 				->addProductColumn()
@@ -29,33 +23,21 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 			$columnRenderers = array();
 		}
 		df_assert_array($columnRenderers);
-		$this->getEvent()->getGrid()
-			->setData(
-				'column_renderers'
-				,array_merge(
-					$columnRenderers
-					,array(
-						self::COLUMN_TYPE__DF_ORDER_GRID_PRODUCTS =>
-							Df_Sales_Block_Admin_Widget_Grid_Column_Renderer_Products::_CLASS
-					)
-				)
-			)
-		;
+		$this->getEvent()->getGrid()->setData('column_renderers',
+				array(self::$COLUMN_TYPE => Df_Sales_Block_Admin_Grid_OrderItemsWrapper::_C)
+			+
+				$columnRenderers
+		);
 		return $this;
 	}
 
 	/** @return Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn */
 	private function addProductColumn() {
-		$this->getEvent()->getGrid()
-			->addColumnAfter(
-				'df_products'
-				,array(
-					'header' => 'Товары'
-					,'type'  => self::COLUMN_TYPE__DF_ORDER_GRID_PRODUCTS
-				)
-				,$this->getPreviousColumnId()
-			)
-		;
+		$this->getEvent()->getGrid()->addColumnAfter(
+			'df_products'
+			,array('header' => 'Товары', 'type'  => self::$COLUMN_TYPE)
+			,$this->getPreviousColumnId()
+		);
 		return $this;
 	}
 	
@@ -81,9 +63,11 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter::_CLASS;
+		return Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter::_C;
 	}
 
-	const _CLASS = __CLASS__;
-	const COLUMN_TYPE__DF_ORDER_GRID_PRODUCTS = 'df_order_grid_products';
+	/** @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_columns_after() */
+	const _C = __CLASS__;
+	/** @var string */
+	private static $COLUMN_TYPE = 'df_order_grid_products';
 }

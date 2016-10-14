@@ -6,10 +6,10 @@ class Df_Payment_CancelController extends Mage_Core_Controller_Front_Action {
 	 * @return void
 	 */
 	public function indexAction() {
-		Df_Payment_Model_Redirector::s()->restoreQuote();
+		Df_Payment_Redirected::restoreQuote();
 		if (!rm_session_core()->getMessages()->getErrors()) {
 			rm_session_checkout()->addError('К сожалению, оплата заказа была прервана. Оформите Ваш заказ повторно.');
 		}
-		$this->_redirect(Df_Checkout_Const::URL__CART);
+		$this->_redirect('checkout/cart');
 	}
 }

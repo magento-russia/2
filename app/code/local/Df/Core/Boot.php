@@ -63,9 +63,8 @@ class Df_Core_Boot {
 		if (!self::$_done1) {
 			self::init1();
 			Df_Core_Lib::load('1C');
-			Df_Core_Lib::load('Zf');
-			//Df_Core_Lib::load('Directory');
-			//Df_Core_Lib::load('Tax');
+			Df_Core_Lib::load('Directory');
+			Df_Core_Lib::load('Tax');
 			self::$_done1 = true;
 		}
 		/**
@@ -123,26 +122,9 @@ class Df_Core_Boot {
 		Mage::setIsDeveloperMode(true);
 		/**
 		 * В PHP 5.6 этот вызов считается устаревшим:
-		 * «Use of mbstring.internal_encoding is deprecated»
-		 * @link http://php.net/manual/mbstring.configuration.php#ini.mbstring.internal-encoding
-		 *
-		 * Вместо «mbstring.internal_encoding» рекомендуется использовать «default_charset».
-		 * Впрочем, начиная с PHP 5.6 значение «default_charset»
-		 * по-умолчанию и так равно «UTF-8»:
-		 * @link http://php.net/manual/en/ini.core.php#ini.default-charset
+		 * «Use of mbstring.internal_encoding is deprecated».
 		 */
-		if (version_compare(phpversion(), '5.6', '>=')) {
-			ini_set('default_charset', 'UTF-8');
-			/**
-			 * Обратите внимание, что Zend Framework использует аналогичные устаревшие вызовы
-			 * @see iconv_set_encoding() с параметром «internal_encoding»:
-			 * @link http://magento.stackexchange.com/questions/34015/magento-1-9-php-5-6-use-of-iconv-internal-encoding-is-deprecated
-			 * Однако чуть ниже в коде мы отключаем предупреждения уровня E_DEPRECATED.
-			 */
-		}
-		else {
-			ini_set('mbstring.internal_encoding', 'UTF-8');
-		}
+		@ini_set('mbstring.internal_encoding', 'UTF-8');
 		/**
 		 * Magento CE, включая самую свежую на настоящее время версию 1.9.0.1,
 		 * официально не совместима с PHP 5.4 и 5.5.

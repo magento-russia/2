@@ -64,7 +64,7 @@ class Df_Avangard_Model_Response_State extends Df_Avangard_Model_Response {
 	 */
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_clean(array(
+			$this->{__METHOD__} = array_filter(array(
 				'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
 				,'Состояние платежа' => $this->onSucc($this->getPaymentStatusMeaning())
 				,'Описание состояния платежа' => $this->onFail($this->getPaymentStatusMessage())
@@ -115,15 +115,8 @@ class Df_Avangard_Model_Response_State extends Df_Avangard_Model_Response {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P_STATUS_CODE, self::V_NAT0);
+		$this->_prop(self::$P_STATUS_CODE, RM_V_NAT0);
 	}
-	const _CLASS = __CLASS__;
 	/** @var string */
 	private static $P_STATUS_CODE = 'status_code';
-	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Avangard_Model_Response_State
-	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
 }

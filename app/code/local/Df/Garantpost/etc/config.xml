@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Garantpost>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Гарантпост</title>
+			<version>1.0.0</version>
 		</Df_Garantpost>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-garantpost>
 				<active>0</active>
-				<model>df_garantpost/carrier</model>
+				<model>Df_Garantpost_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

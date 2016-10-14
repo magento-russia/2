@@ -58,7 +58,7 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Json
 				}
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $this;

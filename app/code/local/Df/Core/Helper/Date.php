@@ -11,10 +11,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	 * @return Zend_Date
 	 */
 	public function create($arguments) {
-		/**
-		 * Обратите внимание,
-		 * что функция func_get_args() не может быть параметром другой функции.
-		 */
+		/** @uses func_get_args() не может быть параметром другой функции */
 		$arguments = is_array($arguments) ? $arguments : func_get_args();
 		/** @var int $numberOfArguments */
 		$numberOfArguments = count($arguments);
@@ -24,16 +21,16 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		$countOfParamKeys = count($paramKeys);
 		df_assert_between($numberOfArguments, 1, $countOfParamKeys);
 		if ($countOfParamKeys > $numberOfArguments) {
-			$arguments =
-				array_merge($arguments, array_fill(0, $countOfParamKeys - $numberOfArguments, 0))
-			;
+			$arguments = array_merge(
+				$arguments, array_fill(0, $countOfParamKeys - $numberOfArguments, 0)
+			);
 		}
 		return new Zend_Date(array_combine($paramKeys, $arguments));
 	}
 
 	/**
 	 * @param string $dateAsString
-	 * @param string $format[optional]
+	 * @param string $format [optional]
 	 * @throws Exception
 	 * @return Zend_Date
 	 */
@@ -43,7 +40,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string $dateAsString
-	 * @param string $format[optional]
+	 * @param string $format [optional]
 	 * @throws Exception
 	 * @return Zend_Date
 	 */
@@ -85,9 +82,9 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 			try {
 				$result = new Zend_Date($datetime, Zend_Date::ISO_8601);
 			}
-			catch(Exception $e) {
+			catch (Exception $e) {
 				if ($throw) {
-					throw $e;
+					df_error($e);
 				}
 			}
 		}
@@ -135,7 +132,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	/**
 	 * @param Zend_Date $startDate
 	 * @param int $numWorkingDays
-	 * @param Mage_Core_Model_Store|string|int|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return int
 	 */
 	public function getNumCalendarDaysByNumWorkingDays(Zend_Date $startDate, $numWorkingDays, $store = null) {
@@ -174,28 +171,25 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @param Mage_Core_Model_Store|string|int|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return int[]
 	 */
 	public function getDaysOff($store = null) {
-		return rm_int(df_parse_csv(
+		return df_csv_parse_int(
 			str_replace('0', '7', df_nts(Mage::getStoreConfig('general/locale/weekend', $store)))
-		));
+		);
 	}
 
 	/** @return string */
 	public function getFormatShort() {
-		/** @var string $result */
-		static $result;
-		if (!isset($result)) {
-			/** @var string $result */
-			$result = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
-			/**
-			 * @see Mage_Core_Model_Locale::getDateFormat() может вернуть false
-			 */
-			df_result_string($result);
+		/** @var string $r */
+		static $r;
+		if (!$r) {
+			$r = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
+			/** @see Mage_Core_Model_Locale::getDateFormat() может вернуть false */
+			df_result_string_not_empty($r);
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
@@ -233,7 +227,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		/** @var Zend_Date $dateMax */
 		$dateMax = $this->max($date1, $date2);
 		/**
-		 * @link http://stackoverflow.com/a/3118478
+		 * http://stackoverflow.com/a/3118478
 		 */
 		/** @var Zend_Date $dateMinA */
 		$dateMinA = new Zend_Date($dateMin);
@@ -279,7 +273,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param Zend_Date $date
-	 * @param Mage_Core_Model_Store|string|int|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return bool
 	 */
 	public function isDayOff(Zend_Date $date, $store = null) {
@@ -303,12 +297,10 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	}	
 
 	/**
-	 * @param Mage_Core_Model_Store|string|int|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return bool
 	 */
-	public function isTodayOff($store = null) {
-		return $this->isDayOff(Zend_Date::now(), $store);
-	}
+	public function isTodayOff($store = null) {return $this->isDayOff(Zend_Date::now(), $store);}
 
 	/**
 	 * @param Zend_Date $date
@@ -355,7 +347,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param Zend_Date $date
-	 * @param bool $inCurrentTimeZone[optional]
+	 * @param bool $inCurrentTimeZone [optional]
 	 * @return string
 	 */
 	public function toDb(Zend_Date $date, $inCurrentTimeZone = true) {
@@ -387,7 +379,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	public function yesterday() {return Zend_Date::now()->subDay(1);}
 
 	/** @return Zend_Date */
-	private function createTomorrow() {return clone Zend_Date::now()->addDay(1);}
+	private function createTomorrow() {return rm_today_add(1);}
 
 	/** @return Df_Core_Helper_Date */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

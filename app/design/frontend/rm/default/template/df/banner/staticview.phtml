@@ -4,7 +4,7 @@
 		/** @var Df_Banner_Model_Banner $banner  */
 		$banner = $this->getBanner();
 		if ($banner->needShowTitle()) {
-			?><h3><?php echo df_escape($banner->getTitle()); ?></h3><?php
+			?><h3><?php echo rm_e($banner->getTitle()); ?></h3><?php
 		}
 		foreach($this->getBannerItems() as $bannerItem) {
 			/** @var Df_Banner_Model_Banneritem $bannerItem */

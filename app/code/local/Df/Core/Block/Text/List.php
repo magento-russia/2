@@ -2,11 +2,15 @@
 class Df_Core_Block_Text_List extends Mage_Core_Block_Text_List {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Text_List::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
 	protected function _toHtml() {
 		$this->setText('');
 		foreach ($this->getSortedChildren() as $name) {
+			/** @var string $name */
+			/** @var Mage_Core_Block_Abstract $block */
 			$block = $this->getLayout()->getBlock($name);
 			/**
 			 * 2013-12-11
@@ -20,10 +24,6 @@ class Df_Core_Block_Text_List extends Mage_Core_Block_Text_List {
 				$this->addText($block->toHtml());
 			}
 		}
-		return
-			!$this->_beforeToHtml()
-			? ''
-			: $this->getText()
-		;
+		return $this->getText();
 	}
 }

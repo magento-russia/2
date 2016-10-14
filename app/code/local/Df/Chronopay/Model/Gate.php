@@ -1,4 +1,5 @@
 <?php
+/** @method int getStore() */
 class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	protected $_code  = 'chronopay_gate';
 	protected $_formBlockType = 'df_chronopay/gate_form';
@@ -25,23 +26,22 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 		parent::capture($payment, $amount);
 		try {
 			if (0 != $this->getChronopayResponse()->getCode()) {
-				throw new
-					Df_Chronopay_Model_Gate_Exception(
-						array(
-							'messageForCustomer' => $this->getDiagnosticMessageForCustomer()
-							,'messageForStatus' => $this->getDiagnosticMessageForStatus()
-							,'messageForLog' => $this->getChronopayResponse()->getDiagnosticMessage()
-						)
+				df_error(new Df_Chronopay_Model_Gate_Exception(array(
+					'messageForCustomer' => Df_Chronopay_Block_Gate_Response::r(
+						$this->getChronopayResponse(), 'df/chronopay/gate/response/customer.phtml'
 					)
-				;
+					,'messageForStatus' => Df_Chronopay_Block_Gate_Response::r(
+						$this->getChronopayResponse(), 'df/chronopay/gate/response/admin/status.phtml'
+					)
+					,'messageForLog' => $this->getChronopayResponse()->getDiagnosticMessage()
+				)));
 			}
-
 			$payment->setStatus(self::STATUS_APPROVED);
 			$payment->setLastTransId($this->getChronopayResponse()->getTransactionId());
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			$futureException =
-				($e instanceof Df_Chronopay_Model_Gate_Exception)
+				$e instanceof Df_Chronopay_Model_Gate_Exception
 				? $e
 				: new Df_Chronopay_Model_Gate_Exception(array('message' => rm_ets($e)))
 			;
@@ -64,25 +64,9 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 			else {
 				// TODO: use some tools for logging invalid payment attempt
 			}
-			throw $futureException;
+			df_error($futureException);
 		}
 		return $this;
-	}
-
-	/**
-	 * @param string $name
-	 * @return Df_Chronopay_Block_Gate_Form
-	 */
-	public function createFormBlock($name) {
-		/** @var Df_Chronopay_Block_Gate_Form $result */
-		$result = Df_Chronopay_Block_Gate_Form::i($name);
-		$result->addData(
-			array(
-				'method' => $this->_code
-				,'payment' => $this->_getData('payment')
-			)
-		);
-		return $result;
 	}
 
 	/**
@@ -90,11 +74,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	 * @return bool
 	 */
 	public function isAvailable($quote = null) {
-		$result =
-				df_enabled(Df_Core_Feature::CHRONOPAY)
-			&&
-				parent::isAvailable()
-		;
+		$result = parent::isAvailable();
 		if (!$result) {
 			if ($this->getConfigData('active', ($quote ? $quote->getStoreId() : null))) {
 				df_assert(
@@ -118,51 +98,30 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	 */
 	public function getConfigData($field, $storeId = null) {
 		if (null === $storeId) {
-			$storeId = $this->getDataUsingMethod('store');
+			$storeId = $this->getStore();
 		}
 		/** @var string $path */
-		$path = rm_config_key('df_payment', $this->getCode(), $field);
+		$path = df_concat_xpath('df_payment', $this->getCode(), $field);
 		return Mage::getStoreConfig($path, $storeId);
-	}
-
-	/** @return array */
-	private function getAdditionalPaymentFields() {
-		return
-			array(
-				self::FIELD__CLIENT_LOCAL_TIME
-				,self::FIELD__CLIENT_SCREEN_RESOLUTION
-			)
-		;
 	}
 
 	/**
 	 * @param Varien_Object $from
 	 * @param Varien_Object $to
-	 * @return Df_Chronopay_Model_Gate
+	 * @return void
 	 */
 	private function assignAdditionalFields(Varien_Object $from, Varien_Object $to) {
-		foreach ($this->getAdditionalPaymentFields() as $field) {
-			$to->setData($field,$from->getData($field));
-		}
-		return $this;
+		$to->addData(df_select($from->getData(), array(
+			self::FIELD__CLIENT_LOCAL_TIME, self::FIELD__CLIENT_SCREEN_RESOLUTION
+		)));
 	}
 
 	/** @return Df_Chronopay_Model_Settings_Gateway */
 	private function cfg() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Chronopay_Model_Settings_Gateway::i(Mage::app()->getStore($this->getStore()))
-			;
+			$this->{__METHOD__} = Df_Chronopay_Model_Settings_Gateway::i(rm_store($this->getStore()));
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @param $event
-	 * @return void
-	 */
-	public function sales_convert_quote_payment_to_order_payment($event) {
-		$this->assignAdditionalFields($event->getData('quote_payment'), $event->getData('order_payment'));
 	}
 
 	/**
@@ -171,7 +130,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	 */
 	public function assignData($data) {
 		parent::assignData($data);
-		if (!($data instanceof Varien_Object)) {
+		if (!$data instanceof Varien_Object) {
 			$data = new Varien_Object($data);
 		}
 		$this->assignAdditionalFields($data, $this->getInfoInstance());
@@ -189,14 +148,16 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	/** @return string */
 	public function sendPurchaseRequest() {
 		$putData = tmpfile();
-		fwrite($putData, $this->getXml());
+		/** @var string $xml */
+		$xml = Df_Chronopay_Block_Gate_Request::r($this, $this->getInfoInstance());
+		fwrite($putData, $xml);
 		fseek($putData, 0);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, 'https://gate.chronopay.com/');
 		curl_setopt($ch, CURLOPT_PUT, true);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_INFILE, $putData);
-		curl_setopt($ch, CURLOPT_INFILESIZE, strlen($this->getXml()));
+		curl_setopt($ch, CURLOPT_INFILESIZE, strlen($xml));
 		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
 		$result = curl_exec($ch);
 		fclose($putData);
@@ -213,7 +174,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 		df_assert_in(
 			$this->getChronopayCurrency()->getCode()
 			,Df_Directory_Model_Currency::i()->getConfigAllowCurrencies()
-			,rm_sprintf(
+			,sprintf(
 				'ChronoPay currency %s must be set as allowed in Magento'
 				. '\nConfiguration → General → Currency Setup → Currency Options → Allowed currencies'
 				,$this->getChronopayCurrency()->getCode()
@@ -230,16 +191,6 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Chronopay_Block_Gate_Response */
-	private function createResponseBlock() {
-		return Df_Chronopay_Block_Gate_Response::i($this->getChronopayResponse());
-	}
-
-	/** @return Df_Chronopay_Block_Gate_Request */
-	private function createRequestBlock() {
-		return Df_Chronopay_Block_Gate_Request::i($this, $this->getInfoInstance());
-	}
-
 	/** @return string */
 	private function getChronopayCurrencyCode() {
 		if (!isset($this->{__METHOD__})) {
@@ -248,51 +199,6 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	private function getDiagnosticMessageForStatus() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this
-					->createResponseBlock()
-					->setTemplate(self::DF_TEMPLATE_RESPONSE_ADMIN_STATUS)
-					->renderView()
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	private function getDiagnosticMessageForCustomer() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this
-					->createResponseBlock()
-					->setTemplate(self::DF_TEMPLATE_RESPONSE_CUSTOMER)
-					->renderView()
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	private function getXml() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this
-					->createRequestBlock()
-					->setTemplate(self::DF_TEMPLATE_REQUEST)
-					->renderView()
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	// Шаблон запроса к платёжному шлюзу ChronoPay
-	const DF_TEMPLATE_REQUEST = 'df/chronopay/gate/request.xml';
-	// Шаблон ответа платёжного шлюза для администратора магазина
-	const DF_TEMPLATE_RESPONSE_ADMIN_STATUS = 'df/chronopay/gate/response/admin/status.phtml';
-	// Шаблон ответа платёжного шлюза для покупателя
-	const DF_TEMPLATE_RESPONSE_CUSTOMER = 'df/chronopay/gate/response/customer.phtml';
 	const FIELD__CLIENT_LOCAL_TIME = 'client_local_time';
 	const FIELD__CLIENT_SCREEN_RESOLUTION = 'client_screen_resolution';
 

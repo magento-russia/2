@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Index>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Index>
 	</modules>
 	<global>
@@ -13,20 +13,12 @@
 		<events>
 			<catalog_product_flat_prepare_columns>
 				<observers>
-					<df_index__catalog_product_flat_prepare_columns>
-						<class>df_index/dispatcher</class>
+					<Df_Index>
+						<class>Df_Index_Observer</class>
 						<method>catalog_product_flat_prepare_columns</method>
-					</df_index__catalog_product_flat_prepare_columns>
+					</Df_Index>
 				</observers>
 			</catalog_product_flat_prepare_columns>
 		</events>
 	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<!-- Magento 1.4.0.1 не включает данное определение (видимо, дефект) -->
-				<Df_Index><files><default>Mage_Index.csv</default></files></Df_Index>
-			</modules>
-		</translate>
-	</adminhtml>
 </config>

@@ -26,6 +26,6 @@ abstract class Df_Vk_Model_Settings_Widget extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	private function getConfigKey($configKeyShort) {
-		return rm_config_key('df_vk', $this->getWidgetType(), $configKeyShort);
+		return df_concat_xpath('df_vk', $this->getWidgetType(), $configKeyShort);
 	}
 }

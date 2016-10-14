@@ -2,13 +2,278 @@
 <config>
 	<modules>
 		<Df_Tax>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>3.0.0</version>
 		</Df_Tax>
 	</modules>
 	<global>
-		<blocks><df_tax><class>Df_Tax_Block</class></df_tax></blocks>
-		<helpers><df_tax><class>Df_Tax_Helper</class></df_tax></helpers>
-		<models><df_tax><class>Df_Tax_Model</class></df_tax></models>
+		<blocks>
+			<df_tax>
+				<class>Df_Tax_Block</class>
+			</df_tax>
+		</blocks>
+		<models>
+			<df_tax>
+				<class>Df_Tax_Model</class>
+				<resourceModel>df_tax_resource</resourceModel>
+			</df_tax>
+			<df_tax_resource>
+				<class>Df_Tax_Model_Resource</class>
+			</df_tax_resource>
+			<tax>
+				<rewrite>
+					<!--
+						2015-04-11
+						Цель перекрытия —
+						фильтрация налоговых ставок по стране текущей витрины,
+						чтобы при использовании налоговых ставок в выпадающих списках,
+						(например, при назначении налоговой ставки товару)
+						не показывать администраторам интернет-магазинам одной страны
+						налоговые ставки других стран).
+					-->
+					<class_source_product>Df_Tax_Model_Class_Source_Product</class_source_product>
+				</rewrite>
+			</tax>
+		</models>
+		<resources>
+			<df_tax_setup>
+				<setup>
+					<module>Df_Tax</module>
+					<class>Df_Core_Model_Resource_Setup</class>
+				</setup>
+			</df_tax_setup>
+		</resources>
+		<sales>
+			<quote>
+				<totals>
+					<grand_total>
+						<!--
+							2015-08-08
+							Перекрываем родительский класс
+							ради адаптированного для России отображения налогов покупателю.
+							@see Df_Tax_Block_Checkout_Grandtotal
+						-->
+						<renderer>df_tax/checkout_grandtotal</renderer>
+					</grand_total>
+				</totals>
+			</quote>
+		</sales>
 	</global>
+	<default>
+		<df_accounting>
+			<vat>
+				<enabled>0</enabled>
+				<eacu>AM,BY,RU,KG,KZ</eacu>
+			</vat>
+		</df_accounting>
+		<tax>
+			<!--
+			 	Раздел настроек	«Система» → «Настройки» → «Продажи» → «НДС» → «Параметры начисления».
+			 	Пояснения к каждой настройке, в том числе обоснование значения по умолчанию,
+			 	читайте в интерфейсных комментариях для администратора
+			 	к соответствующему настроечному полю в указанном разделе настроек.
+			-->
+			<calculation>
+				<!--
+					2015-04-19
+					«Налогооблагаемой базой является стоимость заказа
+					до вычета скидок или после вычета скидок?»
+					@see Mage_Tax_Model_System_Config_Source_Apply::__construct()
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<apply_after_discount>1</apply_after_discount>
+				<!--
+					2015-04-19
+					«Если администратор при редактировании заказа из административной части
+					установил покупателю нестандартные цены на позиции заказа,
+					то на основании каких цен расчитывать налогооблагаемую базу:
+					цен заказа или цен каталога?»
+					@see Mage_Adminhtml_Model_System_Config_Source_Tax_Apply_On::toOptionArray()
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					Значение «0» — «на основании цен заказа».
+				-->
+				<apply_tax_on>0</apply_tax_on>
+				<!--
+					 2015-04-19
+					 «По законодательству какой страны начислять НДС?»
+					 @see Df_Tax_Config_Source_AddressType::toOptionArray()
+					 @see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<based_on>origin</based_on>
+				<!--
+					 2015-04-19
+					 «Подгонять ли стоимость товара без НДС под ставку НДС страны покупателя
+					 таким образом, чтобы цена товара с НДС не зависела от страны покупателя?»
+					 @see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<cross_border_trade_enabled>0</cross_border_trade_enabled>
+				<!--
+					 2015-04-19
+					 «Для расчёта размера скидки использовать стоимость заказа без НДС или с НДС?»
+					 @see Df_Tax_Config_Source_ApplyDiscountOnPrices::toOptionArray()
+					 @see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<discount_tax>0</discount_tax>
+				<!--
+					2015-04-14
+					«Заложен ли НДС в учётные цены товаров?»
+					В Magento CE значением по умолчанию является «нет».
+					Для российских магазинов разумными значениями могут быть как «нет», так и «да».
+					Но всё-таки, в большинстве случаев администратору удобно видеть
+					в качестве учётной цены продажную цену
+					(особенно если основной учёт ведётся во внешней системе типа «1С:Управление торговлей»),
+					поэтому пусть значением по умолчанию будет «да».
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<price_includes_tax>1</price_includes_tax>
+				<!--
+					2015-04-14
+					«Заложен ли НДС в стоимость доставки?»
+					В Magento CE значением по умолчанию является «нет».
+					Насколько я понимаю, российские службы доставки
+					показывают стоимость доставки уже с включением НДС.
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<shipping_includes_tax>1</shipping_includes_tax>
+			</calculation>
+			<!--
+				2015-04-20
+				Значения блока «Предположительная налоговая принадлежность покупателя»
+				использутся только когда значением опции «Продажи» → «НДС» →
+				«Параметры начисления» → «По законодательству какой страны начислять НДС?»
+				является либо «страна доставки», либо «страна плательщика»,
+				и указанная страна ещё неизвестна системе
+				(посетитель интернет-магазина ещё не зарегистрировался либо не авторизовался).
+				Как уже было сказано в комментарии к этой опции,
+				для России и СНГ правильным её значением является «страна интернет-магазина»,
+				поэтому опции блока «Предположительная налоговая принадлежность покупателя»
+				для России и СНГ опции настраивать не нужно.
+				Однако на всякий случай настраиваем.
+				@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+			-->
+			<defaults>
+				<country>RU</country>
+				<region>0</region>
+				<postcode>*</postcode>
+			</defaults>
+			<display>
+				<!--
+					2015-04-20
+					«С НДС или без отображать цены на витрине?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<type>2</type>
+				<!--
+					2015-04-20
+					«С НДС или без отображать стоимость доставки?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<shipping>2</shipping>
+			</display>
+			<cart_display>
+				<!--
+					2015-04-20
+					«С НДС или без отображать стоимость отдельных позиций заказа?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<price>2</price>
+				<!--
+					2015-04-20
+					«С НДС или без отображать совокупную стоимость позиций заказа?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<subtotal>2</subtotal>
+				<!--
+					2015-04-20
+					«С НДС или без отображать стоимость доставки?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<shipping>2</shipping>
+				<!--
+					2015-04-20
+					«С НДС или без отображать итоговую стоимость заказа?»
+					«1» — «с НДС»
+					Обратите внимание, что в отличие от остальных опций,
+					значению «с НДС» соответствует код «1», а не «2».
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayTypeYesNo::toOptionArray()
+				-->
+				<grandtotal>2</grandtotal>
+				<!--
+					2015-04-20
+					«Показывать ли каждый налог отдельной строкой
+					(помимо показа совокупного размера всех налогов)?»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<full_summary>0</full_summary>
+				<!--
+					2015-04-20
+					«Выделять ли НДС при нулевой ставке
+					и показывать ли пометку «без налога (НДС)» при неприменимости НДС?»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<zero_tax>1</zero_tax>
+			</cart_display>
+			<sales_display>
+				<!--
+					2015-04-20
+					«С НДС или без отображать стоимость отдельных позиций заказа?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<price>2</price>
+				<!--
+					2015-04-20
+					«С НДС или без отображать совокупную стоимость позиций заказа?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<subtotal>2</subtotal>
+				<!--
+					2015-04-20
+					«С НДС или без отображать стоимость доставки?»
+					«2» — «с НДС»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayType::toOptionArray()
+				-->
+				<shipping>2</shipping>
+				<!--
+					2015-04-20
+					«С НДС или без отображать итоговую стоимость заказа?»
+					«1» — «с НДС»
+					Обратите внимание, что в отличие от остальных опций,
+					значению «с НДС» соответствует код «1», а не «2».
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+					@see Df_Tax_Config_Source_DisplayTypeYesNo::toOptionArray()
+				-->
+				<grandtotal>2</grandtotal>
+				<!--
+					2015-04-20
+					«Показывать ли каждый налог отдельной строкой
+					(помимо показа совокупного размера всех налогов)?»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<full_summary>0</full_summary>
+				<!--
+					2015-04-20
+					«Выделять ли НДС при нулевой ставке
+					и показывать ли пометку «без налога (НДС)» при неприменимости НДС?»
+					@see Df_Tax_Setup_3_0_0::настроитьДляСНГ()
+				-->
+				<zero_tax>1</zero_tax>
+			</sales_display>
+		</tax>
+	</default>
 </config>

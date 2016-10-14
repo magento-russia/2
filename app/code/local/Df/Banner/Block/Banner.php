@@ -11,7 +11,7 @@ class Df_Banner_Block_Banner extends Df_Core_Block_Template {
 	/** @return string */
 	public function getBannerId() {
 		/** @var string $result */
-		$result = $this->cfg(self::P__ID);
+		$result = $this->cfg('banner_id');
 		if (is_null($result)) {
 			df_error('Укажите идентификатор рекламного щита');
 		}
@@ -37,7 +37,7 @@ class Df_Banner_Block_Banner extends Df_Core_Block_Template {
 	public function getBannerItems() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Banner_Model_Resource_Banneritem_Collection $result */
-			$result = Df_Banner_Model_Resource_Banneritem_Collection::i();
+			$result = Df_Banner_Model_Banneritem::c();
 			$result->addFieldToFilter('status', true);
 			$result->addFieldToFilter('banner_id', $this->getBanner()->getId());
 			$result->setOrder('banner_order', 'ASC');
@@ -53,9 +53,11 @@ class Df_Banner_Block_Banner extends Df_Core_Block_Template {
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Template::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	protected function getCacheKeyParamsAdditional() {return $this->getBannerId();}
+	protected function cacheKeySuffix() {return $this->getBannerId();}
 
 	/**
 	 * @override
@@ -65,16 +67,11 @@ class Df_Banner_Block_Banner extends Df_Core_Block_Template {
 		return
 				parent::needToShow()
 			&&
-				df_enabled(Df_Core_Feature::BANNER)
-			&&
 				df_cfg()->promotion()->banners()->getEnabled()
 			&&
 				$this->getBanner()->isEnabled()
 			&&
-				count($this->getBannerItems())
+				$this->getBannerItems()->count()
 		;
 	}
-
-	const _CLASS = __CLASS__;
-	const P__ID = 'banner_id';
 }

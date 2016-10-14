@@ -1,47 +1,60 @@
 <?php
-class Df_PromoGift_Model_Resource_Gift_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract {
+class Df_PromoGift_Model_Resource_Gift_Collection extends Df_Core_Model_Resource_Collection {
+	/**
+	 * @param int $ruleId
+	 * @return Df_PromoGift_Model_Resource_Gift_Collection
+	 */
+	public function addRuleFilter($ruleId) {
+		$this->addFieldToFilter(Df_PromoGift_Model_Gift::P__RULE_ID, array('eq' => $ruleId));
+		return $this;
+	}
+
 	/**
 	 * Отбраковываем неотносящиеся к магазину правила
-	 *
 	 * @param int $websiteId
 	 * @return Df_PromoGift_Model_Resource_Gift_Collection
 	 */
 	public function addWebsiteFilter($websiteId) {
-		/**
-		 * 2015-11-09
-		 * Убрал вызов @see Zend_Db_Adapter_Abstract::quoteIdentifier()
-		 * для совместимости с Magento CE 1.9.2.2,
-		 * потому что эта версия по соображениям безопасности магазина
-		 * после установки неряшливо написанных сторонних модулей
-		 * сама добавляет кавычки ко всем полям, указанным в методе
-		 * @uses Varien_Data_Collection_Db::addFieldToFilter(),
-		 * и когда качественно написанный модуль добавляет свои кавычки,
-		 * то получается, что ядро, в угоду неряшливо написанным модулям
-		 * бездумно добавляет дополнительные кавычки,
-		 * и в командах SQL имена полей получаются некорректными, например: AND (```is_active``` = 1)
-		 * @see Varien_Data_Collection_Db::_translateCondition():
-				$quotedField = $this->getConnection()->quoteIdentifier($field);
-		 * https://github.com/OpenMage/magento-mirror/blob/92a1142a37a1f8f639db95353199368f5784725d/lib/Varien/Data/Collection/Db.php#L417
-		 */
-		$this->addFieldToFilter(
-			Df_PromoGift_Const::DB__PROMO_GIFT__WEBSITE_ID, array(Df_Varien_Const::EQ => $websiteId)
-		);
+		$this->addFieldToFilter(Df_PromoGift_Model_Gift::P__WEBSITE_ID, array('eq' => $websiteId));
 		return $this;
 	}
+
+	/**
+	 * Для данного множества подарков возвращает соответствующее ему множество товаров.
+	 * Конечно, объекты класса @see Df_PromoGift_Model_Gift умеют сами загужать
+	 * относящиеся к ним модели (правило, товар, сайт),
+	 * но если они будут делать это по-отдельности — они создадут много запросов к БД.
+	 * Эффективней явно дать им нужные модели.
+	 * @return Df_Catalog_Model_Resource_Product_Collection
+	 */
+	public function getProducts() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var Df_Catalog_Model_Resource_Product_Collection $result */
+			$result = Df_Catalog_Model_Product::c();
+			$result->addAttributeToSelect('*');
+			$result->addIdFilter(
+				array_values($this->getColumnValues(Df_PromoGift_Model_Gift::P__PRODUCT_ID))
+			);
+			/**
+			 * Иначе адреса будут вида
+			 * http://example.com/catalog/product/view/id/119/s/coalesce-shirt/category/34/
+			 */
+			$result->addUrlRewrite();
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @override
+	 * @return Df_PromoGift_Model_Resource_Gift
+	 */
+	public function getResource() {return Df_PromoGift_Model_Resource_Gift::s();}
 
 	/**
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_PromoGift_Model_Gift::mf(), Df_PromoGift_Model_Resource_Gift::mf());
-	}
-	/** @var string */
-	protected $_eventObject = 'gift_collection';
-	/** @var string */
-	protected $_eventPrefix = 'df_promo_gift_gift_collection';
-	const _CLASS = __CLASS__;
-	/** @return Df_PromoGift_Model_Resource_Gift_Collection */
-	public static function i() {return new self;}
+	protected function _construct() {$this->_itemObjectClass = Df_PromoGift_Model_Gift::_C;}
+	const _C = __CLASS__;
 }

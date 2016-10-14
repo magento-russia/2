@@ -1,11 +1,12 @@
 <?php
-class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Service {
+class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	/** @return string */
 	public function getCertificateId() {
-		/** @var string $result */
-		$result = $this->getVar('certificate_id');
-		df_result_string_not_empty($result);
-		return $result;
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->getVar('certificate_id');
+			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
 	}
 	
 	/**
@@ -25,16 +26,14 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	}
 
 	/**
+	 * Платёжный шлюз Казкоммерцбанка, согласно своей документации,
+	 * помимо казахского тенге позволяет выставлять счёт в долларах.
+	 * Однако, оплата счёта в долларах почему-то приводит к сбою
+	 * «Ошибка авторизации» с кодом «-19».
 	 * @override
 	 * @return string
 	 */
-	public function getCurrencyCode() {
-		// Платёжный шлюз Казкоммерцбанка, согласно своей документации,
-		// помимо казахского тенге позволяет выставлять счёт в долларах.
-		// Однако, оплата счёта в долларах почему-то приводит к сбою
-		// «Ошибка авторизации» с кодом «-19».
-		return 'KZT';
-	}
+	public function getCurrencyCode() {return 'KZT';}
 
 	/**
 	 * @override
@@ -59,43 +58,31 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 	/** @return string */
 	public function getKeyPrivatePassword() {
 		if (!isset($this->{__METHOD__})) {
+			/** @var string $result */
 			$this->{__METHOD__} = $this->getVar($this->testable('key_private_password'));
-			/**
-			 * Тестовое значение хранится в config.xml в открытом виде,
-			 * поэтому для него дешифрация не нужна и приведёт к повреждению данных.
-			 */
-			if (!$this->isTestMode()) {
-				$this->{__METHOD__} = $this->decrypt($this->{__METHOD__});
-			}
+			// Тестовое значение хранится в config.xml в открытом виде,
+			// поэтому для него дешифрация не нужна и приведёт к повреждению данных.
+			$this->{__METHOD__} = $this->isTestMode() ? $result : rm_decrypt($result);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
 	public function getKeyPublic() {
-		/** @var string $result */
-		$result = $this->getVar('key_public');
-		df_result_string_not_empty($result);
-		return $result;
-	}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getShopId() {
-		/** @var string $result */
-		$result = $this->getVar(self::KEY__VAR__SHOP_ID);
-		df_result_string_not_empty($result);
-		return $result;
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->getVar('key_public');
+			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
 	}
 
 	/** @return string */
 	public function getShopName() {
-		/** @var string $result */
-		$result = $this->getVar('shop_name');
-		df_result_string_not_empty($result);
-		return $result;
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->getVar('shop_name');
+			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**
@@ -106,5 +93,6 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Serv
 		return $this->isTestMode() ? df_concat($variableName, '__test') : $variableName;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Kkb_Model_Signer::_construct */
+	const _C = __CLASS__;
 }

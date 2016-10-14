@@ -57,12 +57,12 @@ class Df_Spsr_Model_Location extends Df_Shipping_Model_Location {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CITY_OWNER_ID, self::V_INT)
-			->_prop(self::P__COUNTRY, self::V_STRING)
-			->_prop(self::P__ID, self::V_INT)
+			->_prop(self::P__CITY_OWNER_ID, RM_V_INT)
+			->_prop(self::P__COUNTRY, RM_V_STRING)
+			->_prop(self::P__ID, RM_V_INT)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__CITY_OWNER_ID = 'city_owner_id';
 	const P__COUNTRY = 'country';
 	const P__ID = 'id';

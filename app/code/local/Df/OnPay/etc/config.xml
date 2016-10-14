@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_OnPay>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Onpay.ru</title>
+			<version>1.0.0</version>
 		</Df_OnPay>
 	</modules>
 	<global>
@@ -40,7 +41,7 @@
 		-->
 		<payment>
 			<df-onpay>
-				<model>df_onpay/payment</model>
+				<model>Df_OnPay_Model_Payment</model>
 			</df-onpay>
 		</payment>
 	</default>

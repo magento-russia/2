@@ -24,12 +24,7 @@ class Df_Cdek_Model_Locator extends Df_Shipping_Model_Locator {
 				}
 			}
 			if (!$result) {
-				if (!is_null($this->getRequest())) {
-					$this->throwExceptionInvalidLocation();
-				}
-				else {
-					df_error();
-				}
+				$this->rr() ? $this->throwExceptionInvalidLocation() : df_error();
 			}
 			df_result_integer($result);
 			$this->{__METHOD__} = $result;
@@ -37,7 +32,7 @@ class Df_Cdek_Model_Locator extends Df_Shipping_Model_Locator {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

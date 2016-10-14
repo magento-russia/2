@@ -1,8 +1,6 @@
 body.df-theme-argento {
 	.quick-links {
-		ul.links {
-			text-transform: lowercase;
-		}
+		ul.links {text-transform: lowercase;}
 	}
 	.header-container {
 		.mini-search {
@@ -16,16 +14,12 @@ body.df-theme-argento {
 		}
 	}
 	.header-cart {
-		.summary {
-			width: 40px;
-		}
+		.summary {width: 40px;}
 	}
 	.fancybox-wrap.df-fancybox {
 		.fancybox-inner {
 			.account-login {
-				label {
-					font-size: 12px;
-				}
+				label {font-size: 12px;}
 			}
 		}
 	}

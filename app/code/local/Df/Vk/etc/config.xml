@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Vk>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>ВКонтакте</title>
+			<version>1.0.0</version>
 		</Df_Vk>
 	</modules>
 	<df>

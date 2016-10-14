@@ -13,7 +13,7 @@ class Df_Avangard_Model_Response_Registration extends Df_Avangard_Model_Response
 	 */
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_clean(array(
+			$this->{__METHOD__} = array_filter(array(
 				'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
 				,'Номер запроса в банке' => $this->getRequestExternalId()
 				,'Идентификатор платежа в банке' => $this->getPaymentExternalId()
@@ -28,9 +28,10 @@ class Df_Avangard_Model_Response_Registration extends Df_Avangard_Model_Response
 	 */
 	public function getTransactionType() {return Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT;}
 
-	const _CLASS = __CLASS__;
 	/**
-	 * @static
+	 * @used-by Df_Avangard_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_Avangard_Model_Request_Payment::getResponse()
+	 * @used-by Df_Avangard_Model_Request_Secondary::getResponseRegistration()
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Avangard_Model_Response_Registration
 	 */

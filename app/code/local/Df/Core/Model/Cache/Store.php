@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Cache_Store extends Df_Core_Model_DestructableSingleton {
+class Df_Core_Model_Cache_Store extends Df_Core_Model {
 	/**
 	 * @param string $path
 	 * @return string|null
@@ -7,7 +7,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model_DestructableSingleton {
 	public function getConfig($path) {
 		if (!isset($this->_config[$path])) {
 			/** @var string|null $result */
-			$result = $this->getStore()->getConfigParent($path);
+			$result = $this->store()->getConfigParent($path);
 			$this->_config[$path] = rm_n_set($result);
 			$this->markCachedPropertyAsModified('_config');
 		}
@@ -44,64 +44,61 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model_DestructableSingleton {
 
 	/**
 	 * @override
-	 * @return string[]
+	 * @see Df_Core_Model::cacheKeySuffix()
+	 * @used-by Df_Core_Model::getCacheKey()
+	 * @return string
 	 */
-	protected function getCacheKeyParamsAdditional() {
+	protected function cacheKeySuffix() {
 		/**
-		 * Здесь мы ещё не можем использовать @see Df_Core_Model_Cache_Store::getStore(),
-		 * потому что @see Df_Core_Model::cacheLoad() вызывается перед
-		 * $this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_CLASS);
+		 * Здесь мы ещё не можем использовать @see store(),
+		 * потому что @used-by Df_Core_Model::cacheLoad() вызывается перед
+		 * $this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C);
 		 */
 		/** @var Df_Core_Model_StoreM $store */
 		$store = $this->_getData(self::$P__STORE);
-		return array($store->getCode());
+		return $store->getCode();
 	}
 
 	/**
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @override
 	 * @return string[]
 	 */
-	protected function getCacheTagsRm() {
+	protected function cacheTags() {
 		/** @see Mage_Core_Model_Store::initConfigCache() */
 		return array(Mage_Core_Model_Store::CACHE_TAG, Mage_Core_Model_Config::CACHE_TAG);
 	}
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Store::initConfigCache()
 	 * @return string
 	 */
-	protected function getCacheTypeRm() {
-		/** @see Mage_Core_Model_Store::initConfigCache() */
-		return 'config';
-	}
+	protected function cacheType() {return 'config';}
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobal()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return array('_config');}
+	protected function cachedGlobal() {return array('_config');}
 
-	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getPropertiesToCacheSimple() {return array('_config');}
 
 	/** @return Df_Core_Model_StoreM */
-	private function getStore() {return $this->cfg(self::$P__STORE);}
+	private function store() {return $this->cfg(self::$P__STORE);}
 	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_CLASS);
+		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C);
 		/**
 		 * Обратите внимание,
 		 * что $configCache может быть равно null, если кэш устарел.
 		 */
 		/** @var array(string => string)|null $configCache */
-		$configCache = $this->getStore()->getConfigCache();
+		$configCache = $this->store()->getConfigCache();
 		if (isset($this->_config) && $configCache) {
 			/**
 			 * Добавляем к нашему кэшу кэш ядра, инициализированный как в методе

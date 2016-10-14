@@ -30,7 +30,7 @@ class Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQu
 		 * @var int $maxUsagesPerQuote
 		 */
 		$maxUsagesPerQuote =
-			rm_nat0($this->getRule()->getData(Df_PromoGift_Const::DB__SALES_RULE__MAX_USAGES_PER_QUOTE))
+			rm_nat0($this->getRule()->getData(Df_PromoGift_Model_Rule::P__MAX_USAGES_PER_QUOTE))
 		;
 		/**
 		 * Дальше в коде мы можем «отнять» подарок.
@@ -42,20 +42,20 @@ class Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQu
 		if (0 < $maxUsagesPerQuote) {
 			// Сколько раз правило уже использовали для корзины
 			/** @var int $timesUsed */
-			$timesUsed = $this->getRule()->getData(self::TIMES_USED);
+			$timesUsed = $this->getRule()->getTimesUsed();
 			if (is_null($timesUsed)) {
 				$timesUsed = 0;
 			}
 			// Учитываем данное использование и обновляем счётчик
 			$timesUsed++;
-			$this->getRule()->setData(self::TIMES_USED, $timesUsed);
+			$this->getRule()->setTimesUsed($timesUsed);
 			if ($timesUsed > $maxUsagesPerQuote) {
 				// Превысили лимит использования, делаем скидку недействительной
 				$this->getResult()->addData(array(
-					self::DISCOUNT_AMOUNT => 0
-					,self::BASE_DISCOUNT_AMOUNT => 0
+					Df_SalesRule_Model_Rule::P__DISCOUNT_AMOUNT => 0
+					,Df_SalesRule_Model_Rule::P__BASE_DISCOUNT_AMOUNT => 0
 				));
-				$this->getCurrentQuoteItem()->unsetData(self::DISCOUNT_PERCENT);
+				$this->getCurrentQuoteItem()->unsetData('discount_percent');
 				$isGift = false;
 			}
 		}
@@ -100,26 +100,18 @@ class Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQu
 				 *
 				 *  Видимо, нельзя сохранять quote item при несохранённом quote.
 				 */
-
 				if (is_null($this->getQuote()->getId())) {
 					$this->getQuote()->save();
 				}
-
 				if (is_null($this->getCurrentQuoteItem()->getId())) {
 					$this->getCurrentQuoteItem()->save();
 				}
-
 			}
 			df_assert(!is_null($this->getCurrentQuoteItem()->getId()));
-			$counter
-				->count(
-					$this->getRule()->getId()
-					,$this->getCurrentQuoteItem()->getId()
-				)
-			;
+			$counter->count($this->getRule()->getId(), $this->getCurrentQuoteItem()->getId());
 		}
-
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_PromoGift_Observer::salesrule_validator_process() */
+	const _C = __CLASS__;
 }

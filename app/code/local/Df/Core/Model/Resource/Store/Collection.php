@@ -2,8 +2,14 @@
 class Df_Core_Model_Resource_Store_Collection extends Mage_Core_Model_Mysql4_Store_Collection {
 	/** @return string */
 	public function getNames() {
-		return df_quote_and_concat($this->getColumnValues(Df_Core_Model_Store::P__NAME));
+		return df_csv_pretty_quote($this->getColumnValues(Df_Core_Model_Store::P__NAME));
 	}
+
+	/**
+	 * @override
+	 * @return Df_Core_Model_Resource_Store
+	 */
+	public function getResource() {return Df_Core_Model_Resource_Store::s();}
 
 	/**
 	 * @override
@@ -11,24 +17,16 @@ class Df_Core_Model_Resource_Store_Collection extends Mage_Core_Model_Mysql4_Sto
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Core_Model_Store::mf(), Df_Core_Model_Resource_Store::mf());
+		$this->_itemObjectClass = Df_Core_Model_Store::_C;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/**
-	 * @param Mage_Core_Model_Store[] $stores
+	 * @param Df_Core_Model_StoreM[] $stores
 	 * @return string
 	 */
 	public static function getNamesStatic(array $stores) {
-		/** @var string[] $names */
-		$names = array();
-		foreach ($stores as $store) {
-			/** @var Mage_Core_Model_Store $store */
-			$names[]= $store->getName();
-		}
-		return df_quote_and_concat($names);
+		/** @uses Mage_Core_Model_Store::getName() */
+		return df_csv_pretty_quote(df_each($stores, 'getName'));
 	}
-
-	/** @return Df_Core_Model_Resource_Store_Collection */
-	public static function i() {return new self;}
 }

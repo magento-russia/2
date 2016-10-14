@@ -2,12 +2,10 @@
 class Df_YandexMarket_Model_Settings_Other extends Df_YandexMarket_Model_Settings_Yml {
 	/** @return string */
 	public function getCategoriesReferenceBookUrl() {
-		/**
-		 * Второй параметр тут важен,
-		 * потому что иначе мы на товарной карточке получим неявный сбой
-		 * про неуказанный текущий магазин.
-		 */
-		return $this->getString('categories_reference_book_url', Mage::app()->getStore());
+		// Второй параметр тут важен,
+		// потому что иначе мы на товарной карточке получим неявный сбой
+		// про неуказанный текущий магазин.
+		return $this->getString('categories_reference_book_url', rm_store());
 	}
 
 	/** @return string */
@@ -23,7 +21,7 @@ class Df_YandexMarket_Model_Settings_Other extends Df_YandexMarket_Model_Setting
 					. '<br/>либо отключить опцию'
 					. ' «<b>Использовать нестандартный домен для веб-адресов в файле YML?</b>»'
 					. ' для этого же магазина в этом же разделе.'
-					, $this->getStore()->getName()
+					, $this->store()->getName()
 				);
 			}
 			$this->{__METHOD__} = $result;

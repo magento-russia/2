@@ -1,84 +1,54 @@
 <?php
-class Df_Dellin_Model_Method extends Df_Shipping_Model_Method {
+class Df_Dellin_Model_Method extends Df_Shipping_Model_Method_Russia {
 	/**
 	 * @override
-	 * @return float
-	 */
-	public function getCost() {
-		if (!isset($this->{__METHOD__})) {
-			if (0 === $this->getCostInRoubles()) {
-				$this->throwExceptionCalculateFailure();
-			}
-			$this->{__METHOD__} = $this->convertFromRoublesToBase($this->getCostInRoubles());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getMethod() {return __CLASS__;}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getMethodTitle() {
-		/** @var string $result */
-		$result = '';
-		if (!is_null($this->getRequest()) && (0 !== $this->getTimeOfDelivery())) {
-			$result = rm_sprintf('%s', $this->formatTimeOfDelivery($this->getTimeOfDelivery()));
-		}
-		return $result;
-	}
-
-	/**
-	 * @override
-	 * @return bool
+	 * @return void
 	 * @throws Exception
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsRussia()
-					->checkCountryDestinationIsRussia()
-					->checkCityOriginIsNotEmpty()
-					->checkCityDestinationIsNotEmpty()
-					->checkOriginAndDestinationCitiesAreDifferent()
-				;
-				if (!$this->getLocationIdOrigin()) {
-					$this->throwExceptionInvalidOrigin();
-				}
-				if (!$this->getLocationIdDestination()) {
-					$this->throwExceptionInvalidDestination();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
-		}
-		return $result;
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsRussia()
+			->checkCountryDestinationIsRussia()
+			->checkCityOriginIsNotEmpty()
+			->checkCityDestinationIsNotEmpty()
+			->checkOriginAndDestinationCitiesAreDifferent()
+			->checkLocationIdOrigin()
+			->checkLocationIdDestination()
+		;
 	}
+
+	/**
+	 * Обратите внимание, что служба доставки «Деловые Линии»
+	 * на самом деле возвращает стоимость доставки в виде дробного числа, с копейками,
+	 * например: «737.5».
+	 * http://magento-forum.ru/topic/4476/
+	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
+	 * @return int
+	 */
+	protected function getCost() {return (int)$this->getApi()->getRate();}
+
+	/**
+	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
+	 */
+	protected function getDeliveryTime() {return $this->getApi()->getDeliveryTime();}
 
 	/**
 	 * @override
 	 * @return string
 	 */
 	protected function getLocationIdDestination() {
-		return $this->getRequest()->getLocatorDestination()->getResult();
+		return $this->rr()->getLocatorDestination()->getResult();
 	}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getLocationIdOrigin() {
-		return $this->getRequest()->getLocatorOrigin()->getResult();
-	}
+	protected function getLocationIdOrigin() {return $this->rr()->getLocatorOrigin()->getResult();}
 
 	/** @return Df_Dellin_Model_Request_Rate */
 	private function getApi() {
@@ -86,48 +56,15 @@ class Df_Dellin_Model_Method extends Df_Shipping_Model_Method {
 			$this->{__METHOD__} = Df_Dellin_Model_Request_Rate::i(array(
 				'derivalPoint' => $this->getLocationIdOrigin()
 				,'arrivalPoint' => $this->getLocationIdDestination()
-				,'sizedWeight' => $this->getRequest()->getWeightInKilogrammes()
-				,'sizedVolume' => $this->getRequest()->getVolumeInCubicMetres()
-				,'statedValue' => $this->getRequest()->getDeclaredValueInRoubles()
+				,'sizedWeight' => $this->rr()->getWeightInKilogrammes()
+				,'sizedVolume' => $this->rr()->getVolumeInCubicMetres()
+				,'statedValue' => $this->rr()->getDeclaredValueInRoubles()
 				,'packages' => '0x838FC70BAEB49B564426B45B1D216C15'
 			));
 		}
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * @override
-	 * @return int
-	 */
-	private function getCostInRoubles() {
-		/**
-		 * Обратите внимание, что служба доставки «Деловые Линии»
-		 * на самом деле возвращает стоимость доставки в виде дробного числа, с копейками,
-		 * например: «737.5».
-		 * @link http://magento-forum.ru/topic/4476/
-		 */
-		return intval($this->getApi()->getRate());
-	}
-
-	/** @return int */
-	private function getTimeOfDelivery() {
-		/** @var int $result */
-		$result = 0;
-		try {
-			$result = rm_nat($this->getApi()->getDeliveryTimeInDays());
-		}
-		catch(Exception $e) {
-			/**
-			 * Вот здесь вываливать исключительную ситуацию наружу нам не нужно,
-			 * потому что метод getTimeOfDelivery вызывается из метода getMethodTitle,
-			 * а тот, в свою очередь, из ядра Magento,
-			 * и там исключительную ситуаацию никто не обработает.
-			 */
-			Mage::logException($e);
-		}
-		df_result_integer($result);
-		return $result;
-	}
-
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Dellin_Model_Collector::getMethods() */
+	const _C = __CLASS__;
 }

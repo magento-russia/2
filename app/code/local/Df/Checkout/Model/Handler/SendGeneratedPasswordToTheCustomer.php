@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter getEvent()
- */
+/** @method Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter getEvent() */
 class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,11 +7,7 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 	 * @return void
 	 */
 	public function handle() {
-		if (
-				df_cfg()->checkout()->_interface()->needShowAllStepsAtOnce()
-			&&
-				$this->getGeneratedPassword()
-		) {
+		if (rm_checkout_ergonomic() && $this->getGeneratedPassword()) {
  			$this->getMailer()->send();
 			// Важно!
 			// Удаляем пароль из сессии после отсылки,
@@ -21,6 +15,14 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 			rm_session_customer()->unsetData(Df_Customer_Const_Session::GENERATED_PASSWORD);
 		}
 	}
+
+	/**
+	 * Класс события (для валидации события)
+	 * @override
+	 * @return string
+	 */
+	protected function getEventClass() {return Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter::_C;}
+
 
 	/** @return Df_Core_Model_Email_Template_Mailer */
 	private function getMailer() {
@@ -44,42 +46,32 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 	private function getMailInfo() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Core_Model_Email_Info::i();
-			$this->{__METHOD__}
-				->addTo(
-					$this->getEvent()->getOrder()->getCustomerEmail()
-					,$this->getEvent()->getOrder()->getCustomerName()
-				)
-			;
+			$this->{__METHOD__}->addTo(
+				$this->getEvent()->getOrder()->getCustomerEmail()
+				,$this->getEvent()->getOrder()->getCustomerName()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
 	private function getMailSender() {
-		return Mage::getStoreConfig(Mage_Sales_Model_Order::XML_PATH_EMAIL_IDENTITY, $this->getStore());
+		return $this->store()->getConfig(Mage_Sales_Model_Order::XML_PATH_EMAIL_IDENTITY);
 	}
 
 	/** @return string */
 	private function getMailTemplateId() {
-		return Mage::getStoreConfig('df_checkout/email/generated_password', $this->getStore());
+		return $this->store()->getConfig('df_checkout/email/generated_password');
 	}
-
-	/** @return Mage_Core_Model_Store */
-	private function getStore() {return $this->getEvent()->getOrder()->getStore();}
 
 	/** @return string */
 	private function getGeneratedPassword() {
 		return df_string(rm_session_customer()->getData(Df_Customer_Const_Session::GENERATED_PASSWORD));
 	}
 
-	/**
-	 * Класс события (для валидации события)
-	 * @override
-	 * @return string
-	 */
-	protected function getEventClass() {
-		return Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter::_CLASS;
-	}
+	/** @return Df_Core_Model_StoreM */
+	private function store() {return $this->getEvent()->getOrder()->getStore();}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Checkout_Observer::checkout_type_onepage_save_order_after() */
+	const _C = __CLASS__;
 }

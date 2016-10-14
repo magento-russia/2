@@ -26,14 +26,8 @@ class Df_Adminhtml_Block_Sales_Order_View_Items_Renderer_Default extends Mage_Ad
 	 * @return string
 	 */
 	private function displayPricesDf($basePrice, $price, $strong = false, $separator = '<br />') {
-		return
-			$this->displayRoundedPrices(
-				$basePrice
-				,$price
-				,rm_currency()->getPrecision()
-				,$strong
-				,$separator
-			)
-		;
+		return $this->displayRoundedPrices(
+			$basePrice, $price, rm_currency_precision(), $strong, $separator
+		);
 	}
 }

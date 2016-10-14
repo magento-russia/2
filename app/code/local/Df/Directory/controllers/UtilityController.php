@@ -8,13 +8,12 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 			/** @var string $fileContents */
 			$fileContents = file_get_contents(df_concat_path($filePath, 'countries.csv'));
 			/** @var string[] $fileContentsAsRows */
-			$fileContentsAsRows = explode("\r\n", $fileContents);
+			$fileContentsAsRows = df_explode_n($fileContents);
 			/** @var array(string => array(string => string)) $fileContentsAsAssocArray */
 			$fileContentsAsAssocArray = array();
 			foreach ($fileContentsAsRows as $fileContentsAsRow) {
 				/** @var string[] $fileContentsAsRow */
 				$rowAsColumns = explode(';', $fileContentsAsRow);
-				Mage::log($rowAsColumns);
 				/** @var string $countryCode */
 				$countryCode = df_a($rowAsColumns, 0);
 				df_assert_string_not_empty($countryCode, -1);
@@ -38,7 +37,7 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 			rm_file_put_contents(df_concat_path($filePath, 'countries.json'), $resultAsJson);
 			$this->getResponse()->setBody('OK');
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_notify_exception($e);
 			//df_handle_entry_point_exception($e, false);
 			echo rm_ets($e);

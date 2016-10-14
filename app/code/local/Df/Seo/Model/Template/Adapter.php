@@ -73,8 +73,9 @@ abstract class Df_Seo_Model_Template_Adapter extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__EXPRESSION, Df_Seo_Model_Template_Expression::_CLASS);
+		$this->_prop(self::P__EXPRESSION, Df_Seo_Model_Template_Expression::_C);
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Seo_Model_Template_Property::_construct() */
+	const _C = __CLASS__;
 	const P__EXPRESSION = 'expression';
 }

@@ -1,16 +1,47 @@
 <?php
+/**
+ * @method string getValue()
+ */
 class Df_Eav_Model_Entity_Attribute_Option extends Mage_Eav_Model_Entity_Attribute_Option {
+	/** @return string|null */
+	public function get1CId() {return $this->_getData(Df_1C_Const::ENTITY_EXTERNAL_ID);}
+
 	/**
-	 * Вынуждены сделать этот метод публичным, потому что публичен родительский.
-	 * @see Mage_Eav_Model_Entity_Attribute_Option::_construct()
+	 * 2015-02-06
+	 * По аналогии с @see Df_Catalog_Model_Product::getId()
+	 * Читайте подробный комментарий в заголовке этого метода.
 	 * @override
-	 * @return void
+	 * @return int|null
 	 */
-	public function _construct() {
-		parent::_construct();
-		$this->_init(Df_Eav_Model_Resource_Entity_Attribute_Option::mf());
+	public function getId() {
+		/** @var int|null $result */
+		$result = parent::getId();
+		return is_null($result) ? null : (int)$result;
 	}
-	const _CLASS = __CLASS__;
-	/** @return string */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
+
+	/**
+	 * @override
+	 * @return Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * @param string|null $value
+	 * @return Df_Eav_Model_Entity_Attribute_Option
+	 */
+	public function set1CId($value) {
+		$this->setData(Df_1C_Const::ENTITY_EXTERNAL_ID, $value);
+		return $this;
+	}
+
+	/**
+	 * @override
+	 * @return Df_Eav_Model_Resource_Entity_Attribute_Option
+	 */
+	protected function _getResource() {return Df_Eav_Model_Resource_Entity_Attribute_Option::s();}
+
+	/** @used-by Df_Eav_Model_Resource_Entity_Attribute_Option_Collection::_construct() */
+	const _C = __CLASS__;
+	/** @return Df_Eav_Model_Resource_Entity_Attribute_Option_Collection */
+	public static function c() {return new Df_Eav_Model_Resource_Entity_Attribute_Option_Collection;}
 }

@@ -1,8 +1,6 @@
 body.df-theme-templatemela-minimal-multi-purpose {
-	/**
-	 * Отключаем правило {text-transform: capitalize;},
-	 * потому что заголовки типа «Покупали Ранее?» смотрятся плохо
-	 */
+	// Отключаем правило {text-transform: capitalize;},
+	// потому что заголовки типа «Покупали Ранее?» смотрятся плохо.
 	.account-login .content h2
 	, .fieldset .legend
 	, .box-account .box-head h2
@@ -10,28 +8,18 @@ body.df-theme-templatemela-minimal-multi-purpose {
 	, .multiple-checkout h2
 	, .checkout-onepage-success h2
 	, .order-info-box h2
-	, .sales-order-print .col2-set h2 {
+	, .sales-order-print .col2-set h2 {text-transform: lowercase;}
+	// Отключаем правило {text-transform: capitalize;},
+	// потому что заголовки типа «Высота Контейнера» смотрятся плохо.
+	.block-layered-nav dt {text-transform: none;}
+	// Отключаем правило {text-transform: capitalize;},
+	// потому что заголовки типа «Скидка» занимают слишком много места в высоту
+	.product-block-inner .sale-label,.products-list li .list-left .sale-label {
 		text-transform: lowercase;
-	}
-	/**
-	 * Отключаем правило {text-transform: capitalize;},
-	 * потому что заголовки типа «Высота Контейнера» смотрятся плохо
-	 */
-	.block-layered-nav dt {
-		text-transform: none;
-	}
-	/**
-	 * Отключаем правило {text-transform: capitalize;},
-	 * потому что заголовки типа «Скидка» занимают слишком много места в высоту
-	 */
-	.product-block-inner .sale-label,.products-list li .list-left .sale-label{
-	    text-transform: lowercase;
 	}
 	.fancybox-wrap.df-fancybox {
 		.fancybox-inner {
-			.account-login {
-				min-width: 270px;
-			}
+			.account-login {min-width: 270px;}
 		}
 	}
 	.df-checkout-ergonomic-page {

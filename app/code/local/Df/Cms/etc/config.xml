@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Cms>
-			<version>2.0.2</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.0.2</version>
 		</Df_Cms>
 	</modules>
 	<df>
@@ -55,7 +55,7 @@
 					<!--
 						Цель перекрытия —
 						устранение дефекта показа картинок в редакторе.
-						@link http://magento-forum.ru/topic/2320/
+						http://magento-forum.ru/topic/2320/
 					-->
 					<template_filter>Df_Widget_Model_Template_Filter</template_filter>
 				</rewrite>
@@ -65,7 +65,7 @@
 					<!--
 						Цель перекрытия —
 						устранение дефекта показа картинок в редакторе.
-						@link http://magento-forum.ru/topic/2320/
+						http://magento-forum.ru/topic/2320/
 					-->
 					<page>Df_Cms_Model_Resource_Page</page>
 				</rewrite>
@@ -102,21 +102,19 @@
 		<events>
 			<cms_controller_router_match_before>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>cmsControllerRouterMatchBefore</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>cms_controller_router_match_before</method>
+					</Df_Cms>
 				</observers>
 			</cms_controller_router_match_before>
 			<controller_front_init_routers>
 				<observers>
-					<df_cms>
-						<!--
-							Для поддержки кириллицы в адресах текстовых страниц
-						-->
+					<Df_Cms>
+						<!-- Для поддержки кириллицы в адресах самодельных страниц -->
 						<class>Df_Cms_Controller_Router</class>
 						<method>initControllerRouters</method>
-					</df_cms>
+					</Df_Cms>
 				</observers>
 			</controller_front_init_routers>
 		</events>
@@ -134,10 +132,10 @@
 		<events>
 			<controller_action_layout_generate_blocks_after>
 				<observers>
-					<df_cms__controller_action_layout_generate_blocks_after>
-						<class>df_cms/dispatcher</class>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
 						<method>controller_action_layout_generate_blocks_after</method>
-					</df_cms__controller_action_layout_generate_blocks_after>
+					</Df_Cms>
 				</observers>
 			</controller_action_layout_generate_blocks_after>
 		</events>
@@ -150,7 +148,7 @@
 			<modules>
 				<Df_Cms>
 					<files>
-						<default>Df_Cms.csv</default>
+						<default>Df/Cms.csv</default>
 					</files>
 				</Df_Cms>
 			</modules>
@@ -160,50 +158,50 @@
 		<events>
 			<adminhtml_cms_page_edit_tab_main_prepare_form>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>onMainTabPrepareForm</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>adminhtml_cms_page_edit_tab_main_prepare_form</method>
+					</Df_Cms>
 				</observers>
 			</adminhtml_cms_page_edit_tab_main_prepare_form>
 			<cms_page_save_before>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>cmsPageSaveBefore</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>cms_page_save_before</method>
+					</Df_Cms>
 				</observers>
 			</cms_page_save_before>
 			<cms_page_save_after>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>cmsPageSaveAfter</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>cms_page_save_after</method>
+					</Df_Cms>
 				</observers>
 			</cms_page_save_after>
 			<admin_user_delete_after>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>adminUserDeleteAfter</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>admin_user_delete_after</method>
+					</Df_Cms>
 				</observers>
 			</admin_user_delete_after>
 			<cms_page_get_available_statuses>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>modifyPageStatuses</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>cms_page_get_available_statuses</method>
+					</Df_Cms>
 				</observers>
 			</cms_page_get_available_statuses>
 			<cms_page_delete_after>
 				<observers>
-					<df_cms>
-						<class>df_cms/observer</class>
-						<method>cmsPageDeleteAfter</method>
-					</df_cms>
+					<Df_Cms>
+						<class>Df_Cms_Observer</class>
+						<method>cms_page_delete_after</method>
+					</Df_Cms>
 				</observers>
 			</cms_page_delete_after>
 		</events>
@@ -216,7 +214,7 @@
 			<modules>
 				<Df_Cms>
 					<files>
-						<default>Df_Cms.csv</default>
+						<default>Df/Cms.csv</default>
 					</files>
 				</Df_Cms>
 			</modules>

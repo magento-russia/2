@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Cache_Design_Package extends Df_Core_Model_DestructableSingleton {
+class Df_Core_Model_Cache_Design_Package extends Df_Core_Model {
 	/**
 	 * @param string $key
 	 * @return string|null
@@ -18,15 +18,10 @@ class Df_Core_Model_Cache_Design_Package extends Df_Core_Model_DestructableSingl
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobal()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return array(self::$F__CACHE);}
-
-	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getPropertiesToCacheSimple() {return array(self::$F__CACHE);}
+	protected function cachedGlobal() {return array(self::$F__CACHE);}
 
 	/** @var array(string => string) */
 	protected $_cache = array();

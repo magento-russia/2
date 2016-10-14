@@ -31,7 +31,7 @@ class Df_CustomerBalance_Block_Adminhtml_Sales_Order_Create_Payment
 	 */
 	public function getBalance()
 	{
-		if (!df_h()->customer()->balance()->isEnabled() || !$this->_getBalanceInstance()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled() || !$this->_getBalanceInstance()) {
 			return 0.0;
 		}
 		return $this->_getBalanceInstance()->getAmount();
@@ -77,11 +77,10 @@ class Df_CustomerBalance_Block_Adminhtml_Sales_Order_Create_Payment
 			if (!$quote || !$quote->getCustomerId() || !$quote->getStoreId()) {
 				return false;
 			}
-			$store = Mage::app()->getStore($quote->getStoreId());
 			/** @var Df_CustomerBalance_Model_Balance $result */
 			$result = Df_CustomerBalance_Model_Balance::i();
 			$result->setCustomerId($quote->getCustomerId());
-			$result->setWebsiteId($store->getWebsiteId());
+			$result->setWebsiteId(rm_store($quote->getStoreId())->getWebsiteId());
 			$result->loadByCustomer();
 			$this->_balanceInstance = $result;
 		}

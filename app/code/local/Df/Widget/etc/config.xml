@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Widget>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Widget>
 	</modules>
 	<global>
@@ -22,7 +22,7 @@
 					<!--
 						Цель перекрытия —
 						устранение дефекта показа картинок в редакторе.
-						@link http://magento-forum.ru/topic/2320/
+						http://magento-forum.ru/topic/2320/
 					-->
 					<template_filter>Df_Widget_Model_Template_Filter</template_filter>
 				</rewrite>

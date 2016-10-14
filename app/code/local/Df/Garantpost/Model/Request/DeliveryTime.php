@@ -7,5 +7,5 @@ class Df_Garantpost_Model_Request_DeliveryTime extends Df_Garantpost_Model_Reque
 	protected function getRequestMethod() {
 		return Zend_Http_Client::POST;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

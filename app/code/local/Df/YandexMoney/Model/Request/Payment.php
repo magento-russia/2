@@ -1,20 +1,27 @@
 <?php
-/**
- * @method Df_YandexMoney_Model_Config_Area_Service getServiceConfig()
- */
+/** @method Df_YandexMoney_Model_Config_Area_Service configS() */
 class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
-	 * Метод публичен, потому что его иногда использует сторонний класс:
-	 * @see Df_YandexMoney_Model_Request_Authorize::getRequestParams()
+	 * 2015-03-09
+	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
+	 * @override
+	 * @used-by Df_YandexMoney_Model_Request_Authorize::getParamsUnique()
+	 * @see Df_Payment_Model_Request_Payment::getTransactionDescription()
+	 * @return string
+	 */
+	public function getTransactionDescription() {return parent::getTransactionDescription();}
+
+	/**
+	 * @used-by Df_YandexMoney_Model_Request_Authorize::getParamsUnique()
 	 * @return string
 	 */
 	public function getTransactionDescriptionForShop() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				!$this->getServiceConfig()->getTransactionDescriptionForShop()
+				!$this->configS()->getTransactionDescriptionForShop()
 				? $this->getTransactionDescription()
 				: strtr(
-					$this->getServiceConfig()->getTransactionDescriptionForShop()
+					$this->configS()->getTransactionDescriptionForShop()
 					,$this->getTransactionDescriptionParams()
 				)
 			;
@@ -33,7 +40,7 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 				str_replace(
 					array_keys($this->getTransactionDescriptionParams())
 					,array_values($this->getTransactionDescriptionParams())
-					,$this->getServiceConfig()->getTransactionTag()
+					,$this->configS()->getTransactionTag()
 				)
 			;
 		}
@@ -42,22 +49,18 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 
 	/**
 	 * @override
-	 * @return array(string => string)
+	 * @see Df_Payment_Model_Request_Payment::_params()
+	 * @used-by Df_Payment_Model_Request_Payment::params()
+	 * @return array(string => string|int)
 	 */
-	protected function getParamsInternal() {
-		if (
-				!$this->getServiceConfig()->isTestMode()
-			&&
-				(1 > $this->getAmount()->getAsFixedFloat())
-		) {
-			df_error(
-				'В промышленном режиме минимальный платёж посредством Яндекс.Денег — 1 рубль.'
-			);
+	protected function _params() {
+		if (!$this->configS()->isTestMode() && 1 > $this->amount()->getAsFixedFloat()) {
+			df_error('В промышленном режиме минимальный платёж посредством Яндекс.Денег — 1 рубль.');
 		}
 		return array(
-			'client_id' => $this->getServiceConfig()->getAppId()
+			'client_id' => $this->configS()->getAppId()
 			,'response_type' => 'code'
-			,'redirect_uri' => $this->getCustomerReturnUrl()
+			,'redirect_uri' => $this->urlCustomerReturn()
 			,'scope' => $this->getScope()
 		);
 	}
@@ -70,11 +73,11 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_merge(parent::getTransactionDescriptionParams(), array(
 				'{website.domain}' => $this->getStoreUri()->getHost()
-				,'{website.name}' => $this->getStore()->getWebsite()->getName()
-				,'{website.code}' => $this->getStore()->getWebsite()->getCode()
-				,'{store.name}' => $this->getStore()->getGroup()->getName()
-				,'{storeView.name}' => $this->getStore()->getName()
-				,'{storeView.code}' => $this->getStore()->getCode()
+				,'{website.name}' => $this->store()->getWebsite()->getName()
+				,'{website.code}' => $this->store()->getWebsite()->getCode()
+				,'{store.name}' => $this->store()->getGroup()->getName()
+				,'{storeView.name}' => $this->store()->getName()
+				,'{storeView.code}' => $this->store()->getCode()
 			));
 		}
 		return $this->{__METHOD__};
@@ -83,23 +86,12 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 	/** @return string */
 	private function getScope() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = implode(' ', array(
+			$this->{__METHOD__} =
 				'money-source("wallet")'
-				,strtr('payment.to-account("{номер счёта}").limit(,{сумма})', array(
-					'{номер счёта}' => $this->getShopId()
-					,'{сумма}' => $this->getAmount()->getAsString()
-				))
-			));
+				. " payment.to-account(\"{$this->shopId()}\").limit(,{$this->amountS()})"
+			;
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
 	}
 
 	/**

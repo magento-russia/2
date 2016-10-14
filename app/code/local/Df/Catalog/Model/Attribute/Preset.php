@@ -52,10 +52,10 @@ class Df_Catalog_Model_Attribute_Preset extends Df_Core_Model {
 			/**
 			 * Сможет ли администратор удалять данное свойство.
 			 * обратите внимание, что данный массив одновременно содержит ключи
-			 * user_defined и is_user_defined,
-			 * потому что ключ user_defined используется методом
+			 * «user_defined» и «is_user_defined»,
+			 * потому что ключ «user_defined» используется методом
 			 * @see Mage_Eav_Model_Entity_Setup::addAttribute(),
-			 * а ключ is_user_defined хоть и заполняется автоматически при вызове метода
+			 * а ключ «is_user_defined» хоть и заполняется автоматически при вызове метода
 			 * @see Mage_Eav_Model_Entity_Setup::_prepareValues(),
 			 * однако у класса @see Df_Catalog_Model_Resource_Installer_AddAttribute
 			 * (потомка Mage_Eav_Model_Entity_Setup)
@@ -73,15 +73,15 @@ class Df_Catalog_Model_Attribute_Preset extends Df_Core_Model {
 			,'is_wysiwyg_enabled' => 0
 			// В Magento CE 1.4 значением поля «note» не может быть null
 			,'note' => ''
-			// Порядковый номер свойства в блоке пошаговой фильтрации
+			// порядковый номер свойства в блоке пошаговой фильтрации
 			,'position' => 0
 			,'source_model' => ''
 			/**
 			 * @deprecated
 			 * Позволять ли администратору использовать данное свойство
 			 * в качестве условия ценовых правил?
-			 * (используется в Magento 1.4.0.1,
-			 * не используется в современных версиях Magento)
+			 * (используется в Magento CE 1.4.0.1,
+			 * но не используется в современных версиях Magento)
 			 */
 			,'is_used_for_price_rules' => 0
 			// Давать ли покупателю возможность упорядочивать товары

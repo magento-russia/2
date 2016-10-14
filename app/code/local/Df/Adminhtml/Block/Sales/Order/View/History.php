@@ -5,35 +5,33 @@ class Df_Adminhtml_Block_Sales_Order_View_History extends Mage_Adminhtml_Block_S
 	 * позволить сохранять некоторые теги HTML (т.е. форматирование)
 	 * в комментариях к заказу.
 	 * @override
-	 * @param mixed $data
-	 * @param string[] $allowedTags[optional]
+	 * @param string|string[] $data
+	 * @param string[]|null $allowedTags [optional]
 	 * @return string
 	 */
 	public function escapeHtml($data, $allowedTags = null) {
-		if (df_enabled(Df_Core_Feature::SALES)) {
-			if (is_null($allowedTags)) {
-				$allowedTags = array();
-			}
-			if (df_cfg()->sales()->orderComments()->preserveSomeTagsInAdminOrderView()) {
-				$allowedTags =
-					array_merge(
-						$allowedTags
-						,df_cfg()->sales()->orderComments()
-							->getTagsToPreserveInAdminOrderView()
-					)
-				;
-			}
-			if (df_cfg()->sales()->orderComments()->preserveLineBreaksInAdminOrderView()) {
-				$allowedTags[]= 'br';
-				$data = nl2br($data);
-			}
-			$allowedTags = rm_array_unique_fast($allowedTags);
+		$allowedTags = is_null($allowedTags) ? array() : $allowedTags;
+		/** @var Df_Sales_Model_Settings_OrderComments $settings */
+		$settings = df_cfg()->sales()->orderComments();
+		if ($settings->preserveSomeTagsInAdminOrderView()) {
+			$allowedTags = array_merge(
+				$allowedTags, $settings->getTagsToPreserveInAdminOrderView()
+			);
 		}
-		/** @var string $result */
-		$result =
-			df_text()->escapeHtml($data, $allowedTags)
-		;
-		df_result_string($result);
-		return $result;
+		if ($settings->preserveLineBreaksInAdminOrderView()) {
+			$allowedTags[]= 'br';
+			$data = df_t()->nl2br($data);
+		}
+		/**
+		 * 2015-02-06
+		 * Т.к. ключи массива — целочисленные, то результат применения @uses array_merge()
+		 * может содержать повторяющиеся элементы,
+		 * которые мы удаляем посредством @uses array_unique().
+		 * http://php.net/manual/function.array-merge.php
+		 * «If, however, the arrays contain numeric keys,
+		 * the later value will not overwrite the original value, but will be appended.»
+		 */
+		$allowedTags = rm_array_unique_fast($allowedTags);
+		return parent::escapeHtml($data, $allowedTags);
 	}
 }

@@ -1,51 +1,42 @@
 <?php
 /**
+ * @singleton
+ * КЭШИРОВАНИЕ НАДО РЕАЛИЗОВЫВАТЬ КРАЙНЕ ОСТОРОЖНО!!!
  * Обратите внимание, что Magento не создаёт отдельные экземпляры данного класса
  * для вывода каждого поля!
  * Magento использует ЕДИНСТВЕННЫЙ экземпляр данного класса для вывода всех полей!
  * Поэтому в объектах данного класса нельзя кешировать информацию,
  * которая индивидуальна для поля конкретного поля!
- */
-class Df_YandexMarket_Block_Api_GetConfirmationCode extends Df_Adminhtml_Block_System_Config_Form_Field {
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getTemplate() {return 'df/yandex_market/api/get_confirmation_code.phtml';}
-
-	/**
-	 * @override
-	 * @param Varien_Data_Form_Element_Abstract $element
-	 * @return string
-	 */
-	protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element) {
-		/**
-		 * Раньше тут стоял код:
-		 * $originalData = $element->getDataUsingMethod('original_data');
-		 * $caption = df_a($originalData, 'button_label');
-		 * Однако в Magento CE 1.4 поле «original_data» отсутствует.
-		 */
-		/** @var Mage_Core_Model_Config_Element $fieldConfig */
-		$fieldConfig = $element->getData('field_config');
-		/** @var string $caption */
-		$caption = (string)$fieldConfig->{'button_label'};
-		/** @var string $url */
-		$url =
-			rm_sprintf(
-				'https://oauth.yandex.ru/authorize?response_type=code&client_id=%s'
-				,df_cfg()->yandexMarket()->api()->getApplicationId()
-			)
-		;
-		$this->addData(array(
-			self::P__CAPTION => $caption
-			,self::P__HTML_ID => $element->getHtmlId()
-			,self::P__URL => $url
-		));
-		return $this->_toHtml();
+ *
+ * Все классы, которые мы указываем в качестве «frontend_model» для интерфейсного поля,
+ * в том числе и данный класс, используются как объекты-одиночки.
+ * Конструируются «frontend_model» в методе
+ * @used-by Mage_Adminhtml_Block_System_Config_Form::initFields():
+	if ($element->frontend_model) {
+		$fieldRenderer = Mage::getBlockSingleton((string)$element->frontend_model);
+	} else {
+		$fieldRenderer = $this->_defaultFieldRenderer;
 	}
-
-	const _CLASS = __CLASS__;
-	const P__CAPTION = 'caption';
-	const P__HTML_ID = 'html_id';
-	const P__URL = 'url';
+ * Обратите внимание, что для конструирования используется метод @uses Mage::getBlockSingleton()
+ * Он-то как раз и обеспечивает одиночество объектов.
+ *
+ * Рисование полей происходит в методе
+ * @see Mage_Adminhtml_Block_System_Config_Form_Field::render()
+ * @see Df_Adminhtml_Block_Config_Form_Field::render()
+		$html .= '<td class="value">';
+		$html .= $this->_getElementHtml($element);
+ */
+class Df_YandexMarket_Block_Api_GetConfirmationCode extends Df_Admin_Block_Field_Button {
+	/**
+	 * @override
+	 * @see Df_Admin_Block_Field_Button::url()
+	 * Кэшировать результат обычным образом нельзя!
+	 * @used-by df/admin/field/button/action.phtml
+	 * @return string
+	 */
+	protected function url() {
+		return 'https://oauth.yandex.ru/authorize?response_type=code&client_id='
+			. df_cfg()->yandexMarket()->api()->getApplicationId()
+		;
+	}
 }

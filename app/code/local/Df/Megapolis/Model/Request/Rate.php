@@ -1,14 +1,5 @@
 <?php
 class Df_Megapolis_Model_Request_Rate extends Df_Shipping_Model_Request {
-	/** @return float */
-	public function getResult() {
-		if (!isset($this->{__METHOD__})) {
-			$this->responseFailureDetect();
-			$this->{__METHOD__} = rm_float($this->response()->json('price'));
-		}
-		return $this->{__METHOD__};
-	}
-
 	/**
 	 * @override
 	 * @param string $responseAsText
@@ -18,34 +9,23 @@ class Df_Megapolis_Model_Request_Rate extends Df_Shipping_Model_Request {
 
 	/**
 	 * @override
-	 * @return Df_Shipping_Model_Request
+	 * @return string|float
 	 */
-	protected function responseFailureDetectInternal() {
-		if ($this->response()->contains('{ERR}')) {
-			/** @var string $errorMessage */
-			$errorMessage = $this->response()->match('#описание ошибки: ([^\n]+)\n#u', false);
-			if (is_null($errorMessage)) {
-				$errorMessage = self::T__ERROR_MESSAGE__DEFAULT;
-			}
-			$this->responseFailureHandle($errorMessage);
-		}
-		return $this;
-	}
+	protected function _getRate() {return $this->response()->json('price');}
 
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
+		return array(
 			'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 			,'Accept-Encoding' => 'gzip, deflate'
 			,'Accept-Language' => 'en-us,en;q=0.5'
 			,'Connection' => 'keep-alive'
 			,'Host' => 'www.megapolis-exp.ru'
 			,'Referer' => 'http://www.megapolis-exp.ru/'
-			,'User-Agent' => Df_Core_Const::FAKE_USER_AGENT
-		));
+		) + parent::getHeaders();
 	}
 
 	/**
@@ -74,11 +54,27 @@ class Df_Megapolis_Model_Request_Rate extends Df_Shipping_Model_Request {
 	 */
 	protected function getQueryPath() {return '/api/';}
 
-	/** @return float */
-	private function getCargoDeclaredValue() {return $this->cfg(self::P__CARGO__DECLARED_VALUE);}
+	/**
+	 * @override
+	 * @return void
+	 * @throws Exception
+	 */
+	protected function responseFailureDetect() {
+		if ($this->response()->contains('{ERR}')) {
+			/** @var string $errorMessage */
+			$errorMessage = $this->response()->match('#описание ошибки: ([^\n]+)\n#u', false);
+			if (is_null($errorMessage)) {
+				$errorMessage = self::T__ERROR_MESSAGE__DEFAULT;
+			}
+			df_error($errorMessage);
+		}
+	}
 
 	/** @return float */
-	private function getCargoWeight() {return $this->cfg(self::P__CARGO__WEIGHT);}
+	private function getCargoDeclaredValue() {return $this->cfg(self::$P__CARGO__DECLARED_VALUE);}
+
+	/** @return float */
+	private function getCargoWeight() {return $this->cfg(self::$P__CARGO__WEIGHT);}
 
 	/** @return string */
 	private function getCargoWeightCode() {
@@ -104,15 +100,7 @@ class Df_Megapolis_Model_Request_Rate extends Df_Shipping_Model_Request {
 				/** @var int $ceil */
 				$ceil = ceil ($this->getCargoWeight());
 				df_assert_integer($ceil);
-				$result =
-					implode(
-						'-'
-						,array(
-							rm_sprintf('%.1f', $ceil - 1)
-							,rm_sprintf('%.1f', $ceil)
-						)
-					)
-				;
+				$result = implode('-', array(rm_sprintf('%.1f', $ceil - 1), rm_sprintf('%.1f', $ceil)));
 			}
 			df_result_string($result);
 			$this->{__METHOD__} = $result;
@@ -121,7 +109,7 @@ class Df_Megapolis_Model_Request_Rate extends Df_Shipping_Model_Request {
 	}
 
 	/** @return string */
-	private function getLocationDestination() {return $this->cfg(self::P__LOCATION__DESTINATION);}
+	private function getLocationDestination() {return $this->cfg(self::$P__LOCATION__DESTINATION);}
 
 	/**
 	 * @override
@@ -130,19 +118,27 @@ class Df_Megapolis_Model_Request_Rate extends Df_Shipping_Model_Request {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CARGO__DECLARED_VALUE, self::V_FLOAT)
-			->_prop(self::P__CARGO__WEIGHT, self::V_FLOAT)
-			->_prop(self::P__LOCATION__DESTINATION, self::V_INT)
+			->_prop(self::$P__CARGO__DECLARED_VALUE, RM_V_FLOAT)
+			->_prop(self::$P__CARGO__WEIGHT, RM_V_FLOAT)
+			->_prop(self::$P__LOCATION__DESTINATION, RM_V_INT)
 		;
 	}
-	const _CLASS = __CLASS__;
-	const P__CARGO__DECLARED_VALUE = 'cargo__declared_value';
-	const P__CARGO__WEIGHT = 'cargo__weight';
-	const P__LOCATION__DESTINATION = 'location__destination';
+	/** @var string */
+	private static $P__CARGO__DECLARED_VALUE = 'cargo__declared_value';
+	/** @var string */
+	private static $P__CARGO__WEIGHT = 'cargo__weight';
+	/** @var string */
+	private static $P__LOCATION__DESTINATION = 'location__destination';
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param int $destinationId
+	 * @param float $weight
+	 * @param float $declaredValue
 	 * @return Df_Megapolis_Model_Request_Rate
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i($destinationId, $weight, $declaredValue) {return new self(array(
+		self::$P__LOCATION__DESTINATION => $destinationId
+		,self::$P__CARGO__WEIGHT => $weight
+		,self::$P__CARGO__DECLARED_VALUE => $declaredValue
+	));}
 }

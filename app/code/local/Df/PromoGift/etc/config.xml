@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_PromoGift>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Промо-подарки</title>
+			<version>1.0.0</version>
 		</Df_PromoGift>
 	</modules>
 <!--
@@ -30,7 +31,7 @@
 		<features>
 			<df-promo-gift>
 				<module>df_promo_gift</module>
-				<title>Promo Gifts</title>
+				<title>Промо-подарки</title>
 				<url>http://magento-forum.ru/topic/914/</url>
 			</df-promo-gift>
 		</features>
@@ -66,25 +67,25 @@
 			-->
 			<sales_quote_collect_totals_before>
 				<observers>
-					<df_promo_gift__sales_quote_collect_totals_before>
+					<Df_PromoGift>
 						<!--
 							Модуль при получении сообщения «sales_quote_collect_totals_before»
 							обнуляет свои счётчики находящихся в корзине покупателя товаров-подарков
 						-->
-						<class>df_promo_gift/dispatcher</class>
+						<class>Df_PromoGift_Observer</class>
 						<method>sales_quote_collect_totals_before</method>
-					</df_promo_gift__sales_quote_collect_totals_before>
+					</Df_PromoGift>
 				</observers>
 			</sales_quote_collect_totals_before>
 			<salesrule_validator_process>
 				<observers>
-					<df_promo_gift__validator_process>
+					<Df_PromoGift>
 						<!--
 							Отображаем и выдаём промо-подарки покупателю
 						-->
-						<class>df_promo_gift/dispatcher</class>
+						<class>Df_PromoGift_Observer</class>
 						<method>salesrule_validator_process</method>
-					</df_promo_gift__validator_process>
+					</Df_PromoGift>
 				</observers>
 			</salesrule_validator_process>
 			<!--
@@ -95,17 +96,17 @@
 			-->
 			<salesrule_rule_save_after>
 				<observers>
-					<df_promo_gift__salesrule_rule_save_after>
-						<class>df_promo_gift/dispatcher</class>
+					<Df_PromoGift>
+						<class>Df_PromoGift_Observer</class>
 						<method>salesrule_rule_save_after</method>
-					</df_promo_gift__salesrule_rule_save_after>
+					</Df_PromoGift>
 				</observers>
 			</salesrule_rule_save_after>
 		</events>
 		<index>
 			<indexer>
 				<df_promo_gift>
-					<model>df_promo_gift/indexer</model>
+					<model>Df_PromoGift_Model_Indexer</model>
 				</df_promo_gift>
 			</indexer>
 		</index>
@@ -130,7 +131,7 @@
 		</layout>
 		<translate>
 			<modules>
-				<Df_PromoGift><files><default>Df_PromoGift.csv</default></files></Df_PromoGift>
+				<Df_PromoGift><files><default>Df/PromoGift.csv</default></files></Df_PromoGift>
 			</modules>
 		</translate>
 	</frontend>
@@ -138,21 +139,21 @@
 		<events>
 			<adminhtml_block_salesrule_actions_prepareform>
 				<observers>
-					<df_promo_gift__actions_prepareform>
+					<Df_PromoGift>
 						<!--
 							Настраиваем административную форму
 							«Promotions» ⇾ «Shopping Cart Price Rules» ⇾ «Actions»
 							для учёта промо-подарков для ценового правила
 						-->
-						<class>df_promo_gift/dispatcher</class>
+						<class>Df_PromoGift_Observer</class>
 						<method>adminhtml_block_salesrule_actions_prepareform</method>
-					</df_promo_gift__actions_prepareform>
+					</Df_PromoGift>
 				</observers>
 			</adminhtml_block_salesrule_actions_prepareform>
 		</events>
 		<translate>
 			<modules>
-				<Df_PromoGift><files><default>Df_PromoGift.csv</default></files></Df_PromoGift>
+				<Df_PromoGift><files><default>Df/PromoGift.csv</default></files></Df_PromoGift>
 			</modules>
 		</translate>
 	</adminhtml>

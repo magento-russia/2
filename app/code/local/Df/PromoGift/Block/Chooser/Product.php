@@ -40,18 +40,7 @@ class Df_PromoGift_Block_Chooser_Product extends Df_Core_Block_Template_NoCache 
 	public function getDetailsUrl() {return $this->getProduct()->getProductUrl();}
 
 	/** @return Df_Catalog_Model_Product */
-	public function getProduct() {return $this->_product;}
-
-	/**
-	 * @param Df_Catalog_Model_Product $product
-	 * @return Df_PromoGift_Block_Chooser_Product
-	 */
-	public function setProduct(Df_Catalog_Model_Product $product) {
-		$this->_product = $product;
-		return $this;
-	}
-	/** @var Df_Catalog_Model_Product */
-	private $_product;
+	public function getProduct() {return $this[self::$P__PRODUCT ];}
 
 	/**
 	 * Возвращает адрес миниатюрной картинки товара
@@ -60,15 +49,26 @@ class Df_PromoGift_Block_Chooser_Product extends Df_Core_Block_Template_NoCache 
 	 */
 	public function getThumbnailUrl($size) {
 		df_param_integer($size, 0);
-		$this->getImageHelper()->init($this->getProduct(), self::SMALL_IMAGE);
+		$this->getImageHelper()->init($this->getProduct(), 'small_image');
 		return (string)$this->getImageHelper()->resize($size);
 	}
 
 	/** @return Mage_Catalog_Helper_Image */
 	private function getImageHelper() {return df_mage()->catalogImageHelper();}
 
-	const SMALL_IMAGE = 'small_image';
+	/** @var string */
+	private static $P__PRODUCT = 'product';
 
-	/** @return Df_PromoGift_Block_Chooser_Product */
-	public static function i() {return df_block(__CLASS__);}
+	/**
+	 * @used-by df/promo_gift/chooser/center/gift.phtml
+	 * @used-by df/promo_gift/chooser/side/gift.phtml
+	 * @param Df_Catalog_Model_Product $product
+	 * @param string $template
+	 * @return string
+	 */
+	public static function r(Df_Catalog_Model_Product $product, $template) {
+		return rm_render(new self(array(
+			self::$P__PRODUCT => $product, 'template' => "df/promo_gift/chooser/{$template}/product.phtml"
+		)));
+	}
 }

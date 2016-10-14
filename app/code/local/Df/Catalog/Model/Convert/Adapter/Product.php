@@ -10,13 +10,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 	 * @return bool
 	 */
 	public function saveRow(array $importData) {
-		return
-			// Используем наши улучшения импорта только для товаров,
-			// которые ипортируются в лицензированные магазины
- 			df_enabled(Df_Core_Feature::DATAFLOW, $this->getStoreId_Df($importData))
-			? $this->dfSaveRow($importData)
-			: parent::saveRow($importData)
-		;
+		return $this->dfSaveRow($importData);
 	}
 
 	/**
@@ -37,7 +31,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		$product = df_product();
 		/**
 		 * Важно! Иначе могут не импортироваться цена и вес товара:
-		 * @link http://magento-forum.ru/topic/3728/
+		 * http://magento-forum.ru/topic/3728/
 		 * Так происходит потому, что в методе
 		 * Mage_Catalog_Model_Convert_Adapter_Product::getAttribute
 		 * проверяется, применимо ли товарное свойство
@@ -114,11 +108,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		if (isset($importData['category_ids'])) {
 			$product->setCategoryIds($importData['category_ids']);
 		}
-		if (
-				df_enabled(Df_Core_Feature::DATAFLOW_CATEGORIES, $this->getStoreId_Df($importData))
-			&&
-				df_cfg()->dataflow()->products()->getEnhancedCategorySupport()
-		) {
+		if (df_cfg()->dataflow()->products()->getEnhancedCategorySupport()) {
 			// BEGIN PATCH: Import categories in various formats
 			Df_Dataflow_Model_Importer_Product_Categories::i($product, $importData, $store)->process();
 			// END PATCH: Import categories in various formats
@@ -128,11 +118,9 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 				unset($importData[$field]);
 			}
 		}
-		if ($store->getId() != 0) {
-			$websiteIds = $product->getWebsiteIds();
-			if (!is_array($websiteIds)) {
-				$websiteIds = array();
-			}
+		/** @var int[] $websiteIds */
+		if ($store->getId()) {
+			$websiteIds = df_nta($product->getWebsiteIds());
 			if (!in_array($store->getWebsiteId(), $websiteIds)) {
 				$websiteIds[]= $store->getWebsiteId();
 			}
@@ -143,15 +131,16 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 			if (!is_array($websiteIds) || !$store->getId()) {
 				$websiteIds = array();
 			}
-			$websiteCodes = explode(',', $importData['websites']);
+			$websiteCodes = df_csv_parse($importData['websites']);
 			foreach ($websiteCodes as $websiteCode) {
+				/** @var string $websiteCode */
 				try {
-					$website = Mage::app()->getWebsite(trim($websiteCode));
+					$website = rm_website(trim($websiteCode));
 					if (!in_array($website->getId(), $websiteIds)) {
 						$websiteIds[]= $website->getId();
 					}
 				}
-				catch(Exception $e) {}
+				catch (Exception $e) {}
 			}
 			$product->setWebsiteIds($websiteIds);
 			unset($websiteIds);
@@ -247,7 +236,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		/***************************
 		 * Заключительная часть заплатки для локали
 		 */
-		catch(Exception $e) {
+		catch (Exception $e) {
 			$exception = $e;
 		}
 		if ($originalLocaleCode != df_mage()->core()->translateSingleton()->getLocale()) {
@@ -257,7 +246,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 			;
 		}
 		if (!is_null($exception)) {
-			throw $exception;
+			df_error($exception);
 		}
 		/***************************
 		 * Конец заплатки для локали
@@ -289,34 +278,25 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		$galleryImporter = Df_Dataflow_Model_Importer_Product_Gallery::i($product, $importData);
 		/** @var array[] $imageData */
 		$imageData = $galleryImporter->getPrimaryImages();
-		Mage::log($imageData);
 		// Do something only if there are some new images!
 		if (!empty ($imageData)) {
-			if (df_enabled(Df_Core_Feature::DATAFLOW_IMAGES, $this->getStoreId_Df($importData)) && df_cfg()->dataflow()->products()->getDeletePreviousImages()) {
+			if (df_cfg()->dataflow()->products()->getDeletePreviousImages()) {
 				//remove previous images
 				$product->deleteImages();
 			}
 			foreach ($imageData as $file => $fields) {
-				$imagePath =
-					Mage::getBaseDir('media') . DS . 'import' . trim ($file)
-				;
+				$imagePath = Mage::getBaseDir('media') . DS . 'import' . trim ($file);
 				if (!is_file($imagePath)) {
-					throw new Exception(
-						rm_sprintf(
-							"Image file %s does not exist"
-							,$imagePath
-						)
-					)
-					;
+					df_error("Image file %s does not exist", $imagePath);
 				}
 				try {
 					$product->addImageToMediaGallery($imagePath, array('thumbnail','small_image','image'), false, false);
 				}
-				catch(Exception $e) {
+				catch (Exception $e) {
 					df_handle_entry_point_exception($e, false);
 				}
 			}
-			if (df_enabled(Df_Core_Feature::DATAFLOW_IMAGES, $this->getStoreId_Df($importData)) && df_cfg()->dataflow()->products()->getGallerySupport()) {
+			if (df_cfg()->dataflow()->products()->getGallerySupport()) {
 				// BEGIN PATCH 2: Import of additional images
 				$galleryImporter->addAdditionalImagesToProduct();
 				// END PATCH 2: Import of additional images
@@ -325,11 +305,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		}
 		// END PATCH: import images
 		// BEGIN PATCH: Import of custom options
-		if (
-				df_enabled(Df_Core_Feature::DATAFLOW_CO, $this->getStoreId_Df($importData))
-			&&
-				df_cfg()->dataflow()->products()->getCustomOptionsSupport()
-		) {
+		if (df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
 			$product->reload();
 			Df_Dataflow_Model_Importer_Product_Options::i($product, $importData)->process();
 			$product->save();

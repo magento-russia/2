@@ -10,7 +10,7 @@ class Df_Wishlist_Helper_Data extends Mage_Wishlist_Helper_Data {
 	public function isAllow() {
 		$result = parent::isAllow();
 		if ($result) {
-			if (df_module_enabled(Df_Core_Module::TWEAKS) && df_enabled(Df_Core_Feature::TWEAKS)) {
+			if (df_module_enabled(Df_Core_Module::TWEAKS)) {
 				if (
 						(
 								rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
@@ -31,7 +31,7 @@ class Df_Wishlist_Helper_Data extends Mage_Wishlist_Helper_Data {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/** @return Df_Wishlist_Helper_Data */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

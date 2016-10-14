@@ -45,13 +45,13 @@ class Df_Kkb_Model_Response_Secondary extends Df_Kkb_Model_Response {
 	/** @return string */
 	private function getCode() {return $this->getElementResponse()->getAttribute('code');}
 	
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getElementResponse() {return $this->getElement('bank/response');}
 
 	/** @return string */
 	private function getMessage() {return $this->getElementResponse()->getAttribute('message');}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param string $xml [optional]

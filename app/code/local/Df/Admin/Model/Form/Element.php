@@ -3,101 +3,48 @@ class Df_Admin_Model_Form_Element extends Df_Core_Model {
 	/** @return string */
 	public function getCheckboxLabel() {
 		return
-				$this->getWrappedElement()->getData(
-					self::FORM_ELEMENT__ATTRIBUTE_CAN_USE_WEBSITE_VALUE
-				)
-			?
-				df_mage()->adminhtml()->__(self::T_USE_WEBSITE)
-			:
-				(
-						$this->getWrappedElement()->getData(
-							self::FORM_ELEMENT__ATTRIBUTE_CAN_USE_DEFAULT_VALUE
-						)
-					?
-						df_mage()->adminhtml()->__(self::T_USE_DEFAULT)
-					:
-						''
-				)
+			$this->e()->getCanUseWebsiteValue()
+			? df_mage()->adminhtml()->__('Use Website')
+			: (
+				$this->e()->getCanUseDefaultValue()
+				? df_mage()->adminhtml()->__('Use Default')
+				: ''
+			)
 		;
 	}
 
 	/** @return string */
-	public function getComment() {return df_nts($this->getWrappedElement()->getData('comment'));}
+	public function getComment() {return df_nts($this->e()->getComment());}
 
 	/** @return string */
 	public function getDefaultText() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				$this->getOptions()
-				? $this->getDefaultValueFromOptions()
-				: $this->getWrappedElement()->getData(self::FORM_ELEMENT__ATTRIBUTE_DEFAULT_VALUE)
+				$this->getOptions() ? $this->getDefaultValueFromOptions() : $this->e()->getDefaultValue()
 			;
 		}
 		return $this->{__METHOD__};
 	}
-
-	/** @return Df_Licensor_Model_Feature */
-	public function getFeature() {return df_feature($this->getFeatureCode());}
-
-	/** @return string|null */
-	public function getFeatureCode() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
-				rm_empty_to_null(
-					df_trim(df_a($this->getFieldConfig()->asArray(), self::FIELD_ATTRIBUTE_FEATURE))
-				)
-			);
-		}
-		return rm_n_get($this->{__METHOD__});
-	}
-
-	/** @return Df_Licensor_Model_Feature_Info */
-	public function getFeatureInfo() {return df_h()->licensor()->getFeatureInfo($this->getFeature());}
 
 	/** @return string */
-	public function getHint() {
-		return $this->getWrappedElement()->getData(self::FORM_ELEMENT__ATTRIBUTE_HIHT);
-	}
+	public function getHint() {return $this->e()->getHint();}
 
 	/** @return bool */
-	public function getInherit() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				rm_bool($this->getWrappedElement()->getDataUsingMethod(
-					Df_Varien_Data_Form_Element_Abstract::P__INHERIT
-				))
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getInherit() {return !!$this->e()->getInherit();}
 
 	/** @return string */
 	public function getNamePrefix() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				preg_replace(
-					'#\[value\](\[\])?$#'
-					,''
-					,$this->getWrappedElement()->getName()
-				)
-			;
+			$this->{__METHOD__} = preg_replace('#\[value\](\[\])?$#', '', $this->e()->getName());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
-	public function getScopeLabel() {
-		return
-			$this->getWrappedElement()->getData(self::FORM_ELEMENT__ATTRIBUTE_SCOPE)
-			? $this->getWrappedElement()->getData(self::FORM_ELEMENT__ATTRIBUTE_SCOPE_LABEL)
-			: ''
-		;
-	}
+	public function getScopeLabel() {return $this->e()->getScope() ? $this->e()->getScopeLabel() : '';}
 
 	/** @return Mage_Core_Model_Config_Element */
-	protected function getFieldConfig() {
-		return $this->getWrappedElement()->getData(self::FIELD_CONFIG);
-	}
+	protected function getFieldConfig() {return $this->e()->getFieldConfig();}
 
 	/** @return string */
 	private function getDefaultValueFromOptions() {
@@ -105,115 +52,59 @@ class Df_Admin_Model_Form_Element extends Df_Core_Model {
 		foreach ($this->getOptions() as $k=>$v) {
 			/** @var string $k */
 			/** @var array $v */
-
 			if ($this->isMultiple()) {
 				if (is_array($v['value']) && in_array($k, $v['value'])) {
 					$defTextArr[]= $v['label'];
 				}
 			}
-			else if (
-					$v['value']
-				===
-					$this->getWrappedElement()
-						->getDataUsingMethod(
-							Df_Varien_Data_Form_Element_Abstract::P__DEFAULT_VALUE
-						)
-			) {
+			else if ($v['value'] === $this->e()->getDefaultValue()) {
 				$defTextArr[]= $v['label'];
 				break;
 			}
 		}
-		return df_concat_enum($defTextArr);
+		return df_csv_pretty($defTextArr);
 	}
 
 	/** @return array */
-	private function getOptions() {
-		/** @var array $result */
-		$result = $this->getWrappedElement()
-			->getDataUsingMethod(Df_Varien_Data_Form_Element_Abstract::P__VALUES)
-		;
-		/**
-		 * Varien_Data_Form_Element_Abstract::getValues() вполне может вернуть null
-		 */
-		if (is_null($result)) {
-			$result = array();
-		}
-		df_result_array($result);
-		return $result;
+	private function getOptions() {return df_nta($this->e()->getValues());}
+
+	/** @return string */
+	public function getHtml() {return $this->e()->getElementHtml();}
+
+	/** @return string */
+	public function getId() {return $this->e()->getHtmlId();}
+
+	/** @return string */
+	public function getLabel() {return df_nts($this->e()->getLabel());}
+
+	/** @return bool */
+	public function needToAddInheritBox() {
+		return $this->e()->getCanUseWebsiteValue() && $this->e()->getCanUseDefaultValue();
 	}
 
-	/** @return string */
-	public function getHtml() {
-		/** @var string $result */
-		$result = $this->getWrappedElement()->getElementHtml();
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string */
-	public function getId() {return $this->getWrappedElement()->getHtmlId();}
-
-	/** @return string */
-	public function getLabel() {return df_nts($this->getWrappedElement()->getData('label'));}
-
-	/** @return Varien_Data_Form_Element_Abstract */
-	public function getWrappedElement() {
+	/**
+	 * 2015-03-08
+	 * Обратите внимание на технику:
+	 * добавляем в описание типа «|Df_Varien_Data_Form_Element_Abstract»,
+	 * чтобы среда разработки знала о псевдометодах типа $this->e()->getCanUseWebsiteValue(),
+	 * которые не описаны в классе @see Varien_Data_Form_Element_Abstract (при этом доступны там),
+	 * но описаны специально для среды разработки в классе @see Df_Varien_Data_Form_Element_Abstract
+	 * @return Varien_Data_Form_Element_Abstract|Df_Varien_Data_Form_Element_Abstract
+	 */
+	private function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->cfg(self::P__WRAPPED_ELEMENT);
-			df_assert($this->{__METHOD__});
-			if (
-					$this->{__METHOD__}->getDataUsingMethod(
-						Df_Varien_Data_Form_Element_Abstract::P__CAN_USE_WEBSITE_VALUE
-					)
-				&&
-					$this->{__METHOD__}->getDataUsingMethod(
-						Df_Varien_Data_Form_Element_Abstract::P__CAN_USE_DEFAULT_VALUE
-					)
-				&&
-					$this->{__METHOD__}->getDataUsingMethod(
-						Df_Varien_Data_Form_Element_Abstract::P__INHERIT
-					)
-			) {
-				$this->{__METHOD__}
-					->setDataUsingMethod(
-						Df_Varien_Data_Form_Element_Abstract::P__DISABLED, true
-					)
-				;
+			/** @var Varien_Data_Form_Element_Abstract|Df_Varien_Data_Form_Element_Abstract $r */
+			$r = $this->cfg(self::$P__E);
+			if ($r->getCanUseWebsiteValue() && $r->getCanUseDefaultValue() && $r->getInherit()) {
+				$r->setDisabled(true);
 			}
+			$this->{__METHOD__} = $r;
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return bool */
-	public function needToAddInheritBox() {
-		$result =
-				$this->getWrappedElement()
-					->getDataUsingMethod(
-						Df_Varien_Data_Form_Element_Abstract::P__CAN_USE_WEBSITE_VALUE
-					)
-			&&
-				$this->getWrappedElement()
-					->getDataUsingMethod(
-						Df_Varien_Data_Form_Element_Abstract::P__CAN_USE_DEFAULT_VALUE
-					)
-		;
-		return $result;
-	}
-
-	/** @return bool */
-	private function isMultiple() {
-		$result =
-			(
-					self::MULTIPLE
-				===
-					$this->getWrappedElement()
-						->getDataUsingMethod(
-							Df_Varien_Data_Form_Element_Abstract::P__EXT_TYPE
-						)
-			)
-		;
-		return $result;
-	}
+	private function isMultiple() {return 'multiple' === $this->e()->getExtType();}
 
 	/**
 	 * @override
@@ -221,27 +112,17 @@ class Df_Admin_Model_Form_Element extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__WRAPPED_ELEMENT, self::P__WRAPPED_ELEMENT_TYPE);
+		$this->_prop(self::$P__E, 'Varien_Data_Form_Element_Abstract');
 	}
-	const _CLASS = __CLASS__;
-	const FIELD_ATTRIBUTE_FEATURE = 'df_feature';
-	const FIELD_CONFIG = 'field_config';
-	const FORM_ELEMENT__ATTRIBUTE_CAN_USE_DEFAULT_VALUE = 'сan_use_default_value';
-	const FORM_ELEMENT__ATTRIBUTE_CAN_USE_WEBSITE_VALUE = 'can_use_website_value';
-	const FORM_ELEMENT__ATTRIBUTE_DEFAULT_VALUE = 'default_value';
-	const FORM_ELEMENT__ATTRIBUTE_HIHT = 'hint';
-	const FORM_ELEMENT__ATTRIBUTE_SCOPE = 'scope';
-	const FORM_ELEMENT__ATTRIBUTE_SCOPE_LABEL = 'scope_label';
-	const MULTIPLE = 'multiple';
-	const P__WRAPPED_ELEMENT = 'wrappedElement';
-	const P__WRAPPED_ELEMENT_TYPE = 'Varien_Data_Form_Element_Abstract';
-	const T_USE_DEFAULT= 'Use Default';
-	const T_USE_WEBSITE = 'Use Website';
+	/** @var string */
+	private static $P__E = 'e';
 
 	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @used-by Df_Admin_Block_Field::render()
+	 * @param Varien_Data_Form_Element_Abstract $e
 	 * @return Df_Admin_Model_Form_Element
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(Varien_Data_Form_Element_Abstract $e) {
+		return new self(array(self::$P__E => $e));
+	}
 }

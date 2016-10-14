@@ -44,11 +44,8 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function isEnabled() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					Mage::isInstalled()
-				&&
-					df_enabled(Df_Core_Feature::REWARD)
-				&&
-					Mage::getStoreConfigFlag('df_reward/general/enabled')
+				Mage::isInstalled()
+				&& Mage::getStoreConfigFlag('df_reward/general/enabled')
 			;
 		}
 		return $this->{__METHOD__};
@@ -56,14 +53,17 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * Check whether reward module is enabled in system config on front per website
-	 * @param integer $websiteId
+	 * @param int $websiteId
 	 * @return boolean
 	 */
 	public function isEnabledOnFront($websiteId = null) {
-		if ($websiteId === null) {
-			$websiteId = Mage::app()->getStore()->getWebsiteId();
-		}
-		return($this->isEnabled() && $this->getGeneralConfig('enabled_on_front', (int)$websiteId));
+		return
+				$this->isEnabled()
+			&&
+				$this->getGeneralConfig(
+					'enabled_on_front', (int)(is_null($websiteId) ? rm_website_id() : $websiteId)
+				)
+		;
 	}
 
 	/**
@@ -74,12 +74,9 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @param integer $websiteId
 	 * @return mixed
 	 */
-	public function getConfigValue($section, $field, $websiteId = null)
-	{
-		if ($websiteId === null) {
-			$websiteId = Mage::app()->getWebsite()->getId();
-		}
-		return(string)Mage::app()->getConfig()->getNode($section . $field, 'website', (int)$websiteId);
+	public function getConfigValue($section, $field, $websiteId = null) {
+		$websiteId = is_null($websiteId) ? rm_website_id() : $websiteId;
+		return rm_leaf_s(Mage::app()->getConfig()->getNode($section . $field, 'website', (int)$websiteId));
 	}
 
 	/**
@@ -99,15 +96,15 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @return string
 	 */
 	public function getPointsAmountAsText($pointsAmount) {
-		// Когда изначально был чужим,
+		// Код изначально был чужим,
 		// поэтому на всякий случай приводим количество баллов к целому типу
-		$pointsAmount = intval($pointsAmount);
+		$pointsAmount = (int)$pointsAmount;
 		/** @var string $result */
 		$result =
 			rm_sprintf(
 				'%d %s'
 				,$pointsAmount
-				,df_text()->getNounForm($pointsAmount, array('балл', 'балла', 'баллов'))
+				,df_t()->getNounForm($pointsAmount, array('балл', 'балла', 'баллов'))
 			)
 		;
 		return $result;
@@ -187,24 +184,23 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * Render a reward message as X points Y money
 	 *
 	 * @param int $points
-	 * @param float|null $amount
-	 * @param int|null $storeId
-	 * @param string $pointsFormat
-	 * @param string $amountFormat
+	 * @param float|null $amount [optional]
+	 * @param int|null $storeId [optional]
+	 * @param string $pointsFormat [optional]
+	 * @param string $amountFormat [optional]
 	 * @return string
 	 */
-	public function formatReward($points, $amount = null, $storeId = null, $pointsFormat = '%s', $amountFormat = '%s')
-	{
+	public function formatReward(
+		$points, $amount = null, $storeId = null, $pointsFormat = '%s', $amountFormat = '%s'
+	) {
 		/** @var string $result */
 		$result = $this->getPointsAmountAsText($points);
 		if (!is_null($amount)) {
-			$result =
-				rm_sprintf(
-					'%s (%s)'
-					,$result
-					,rm_sprintf($amountFormat, $this->formatAmount($amount, true, $storeId))
-				)
-			;
+			$result = rm_sprintf(
+				'%s (%s)'
+				,$result
+				,rm_sprintf($amountFormat, $this->formatAmount($amount, true, $storeId))
+			);
 		}
 		return $result;
 	}
@@ -215,24 +211,17 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @param double|string|null $amount
 	 * @param bool $asCurrency
 	 * @param int|null $storeId
-	 * @return string|null
+	 * @return string|double|null
 	 */
-	public function formatAmount($amount, $asCurrency = true, $storeId = null)
-	{
-		if (null === $amount) {
-			return  null;
-		}
+	public function formatAmount($amount, $asCurrency = true, $storeId = null) {
 		return
+			is_null($amount)
+			? null
+			: (
 				$asCurrency
-			?
-				Mage::app()->getStore($storeId)
-					->convertPrice(
-						$amount
-						,true
-						,false
-					)
-			:
-				rm_sprintf('%.2F', $amount)
+				? rm_store($storeId)->convertPrice($amount, true, false)
+				: rm_number_2f($amount)
+			)
 		;
 	}
 
@@ -278,7 +267,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param float $currencyAmount
-	 * @param string|null $currencyCode[optional]
+	 * @param string|null $currencyCode [optional]
 	 * @return string
 	 */
 	private function getCurrencyAmountAsText($currencyAmount, $currencyCode = null) {
@@ -289,7 +278,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 				rm_sprintf(
 					'%.0F %s'
 					,$currencyAmount
-					,df_text()->getNounForm(rm_floor($currencyAmount), array(
+					,df_t()->getNounForm(rm_floor($currencyAmount), array(
 						'валютная единица'
 						,'валютных единицы'
 						,'валютных единиц'
@@ -306,7 +295,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Reward_Helper_Data */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

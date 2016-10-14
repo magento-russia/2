@@ -20,7 +20,11 @@
 				this.disableShippingAddressTheSameSwitcherIfNeeded();
 				this.handleShippingAddressHasNoFields();
 				this.listenForSelection();
-				$(document.getElementById('shipping:country_id'))
+				$(document.getElementById('shipping:country_id')).select2({
+					width: 150
+					, minimumResultsForSearch: 0
+					,dropdownCss: {width: 200}
+				})
 					.on('change', function(e) {
 						if (window.shippingRegionUpdater) {
 							window.shippingRegionUpdater.update();

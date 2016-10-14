@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Pd4>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Квитанция Сбербанка</title>
+			<version>1.0.0</version>
 		</Df_Pd4>
 	</modules>
 	<df>
@@ -42,7 +43,7 @@
 		</layout>
 		<translate>
 			<modules>
-				<Df_Pd4><files><default>Df_Pd4.csv</default></files></Df_Pd4>
+				<Df_Pd4><files><default>Df/Pd4.csv</default></files></Df_Pd4>
 			</modules>
 		</translate>
 	</frontend>
@@ -56,7 +57,7 @@
 			<pd4>
 				<active>1</active>
 				<frontend__title>В банковской кассе</frontend__title>
-				<frontend__description><![CDATA[После оформления заказа Вы сможете распечатать уже заполненную квитанцию (форма ПД-4) и оплатить заказ в банковской кассе.]]></frontend__description>
+				<frontend__description><![CDATA[После оформления заказа вы сможете распечатать уже заполненную квитанцию (форма ПД-4) и оплатить заказ в банковской кассе.]]></frontend__description>
 				<frontend__sort_order>0</frontend__sort_order>
 				<admin__order_status>1</admin__order_status>
 				<frontend__allowspecific>1</frontend__allowspecific>
@@ -78,7 +79,7 @@
 		-->
 		<payment>
 			<df-pd4>
-				<model>df_pd4/payment</model>
+				<model>Df_Pd4_Model_Payment</model>
 			</df-pd4>
 		</payment>
 	</default>

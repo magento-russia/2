@@ -33,23 +33,15 @@ class Df_Cdek_Model_Location extends Df_Shipping_Model_Location {
 	}
 
 	/**
+	 * СДЭК может вернуть название населенного пункта в формате
+	 * «Киев, Киевская обл., Украина»
+	 * http://api.edostavka.ru/city/getListByTerm/jsonp.php?q=Киев
 	 * @override
 	 * @param string $name
 	 * @return string
 	 */
-	public function normalizeNameSingle($name) {
-		return
-			parent::normalizeNameSingle(
-				df_trim(
-					/**
-					 * СДЭК может вернуть название населенного пункта в формате
-					 * «Киев, Киевская обл., Украина»
-					 * @link http://api.edostavka.ru/city/getListByTerm/jsonp.php?q=Киев
-					 */
-					rm_first(explode(',', $name))
-				)
-			)
-		;
+	protected function normalizeNameSingle($name) {
+		return parent::normalizeNameSingle(df_trim(rm_first(df_csv_parse($name))));
 	}
 
 	/**
@@ -59,11 +51,12 @@ class Df_Cdek_Model_Location extends Df_Shipping_Model_Location {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__COUNTRY, self::V_STRING)
-			->_prop(self::P__ID, self::V_NAT0)
+			->_prop(self::P__COUNTRY, RM_V_STRING)
+			->_prop(self::P__ID, RM_V_NAT0)
 		;
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Cdek_Model_Map::requestLocationsFromServer() */
+	const _C = __CLASS__;
 	const P__CITY = 'cityName';
 	const P__COUNTRY = 'countryName';
 	const P__ID = 'id';
@@ -71,8 +64,8 @@ class Df_Cdek_Model_Location extends Df_Shipping_Model_Location {
 	const P__REGION = 'regionName';
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param array(string => string|int|null) $locationAsArray
 	 * @return Df_Cdek_Model_Location
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(array $locationAsArray) {return new self($locationAsArray);}
 }

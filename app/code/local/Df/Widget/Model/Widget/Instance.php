@@ -3,6 +3,12 @@
  * @method string getInstanceType()
  */
 class Df_Widget_Model_Widget_Instance extends Mage_Widget_Model_Widget_Instance {
+	/**
+	 * @override
+	 * @return Df_Widget_Model_Resource_Widget_Instance_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
 	/** @return bool */
 	public function needSaveRelations() {
 		/** @var bool $result */
@@ -40,18 +46,26 @@ class Df_Widget_Model_Widget_Instance extends Mage_Widget_Model_Widget_Instance 
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Widget_Model_Resource_Widget_Instance
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Widget_Model_Resource_Widget_Instance::mf());
-	}
-	const _CLASS = __CLASS__;
+	protected function _getResource() {return Df_Widget_Model_Resource_Widget_Instance::s();}
+
+	/**
+	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Widget::getEntityClass()
+	 * @used-by Df_Localization_Onetime_Processor_Cms_Widget::_construct()
+	 * @used-by Df_Widget_Model_Resource_Widget_Instance_Collection::_construct()
+	 */
+	const _C = __CLASS__;
 	/** @var bool */
 	private static $P__NEED_SAVE_RELATIONS = 'need_save_relations';
-
-	/** @return string */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
+	/**
+	 * @static
+	 * @param bool $forUpdating [optional]
+	 * @return Df_Widget_Model_Resource_Widget_Instance_Collection
+	 */
+	public static function c($forUpdating = false) {
+		return Df_Widget_Model_Resource_Widget_Instance_Collection::i($forUpdating);
+	}
 	/** @return Df_Widget_Model_Widget_Instance */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

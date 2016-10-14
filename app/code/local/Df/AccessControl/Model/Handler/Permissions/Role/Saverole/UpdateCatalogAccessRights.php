@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_AccessControl_Model_Event_Permissions_Role_Saverole getEvent()
- */
+/** @method Df_AccessControl_Model_Event_Permissions_Role_Saverole getEvent() */
 class Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAccessRights
 	extends Df_Core_Model_Handler {
 	/**
@@ -10,27 +8,15 @@ class Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAcce
 	 * @return void
 	 */
 	public function handle() {
-		if (
-				df_enabled(Df_Core_Feature::ACCESS_CONTROL)
-			&&
-				df_cfg()->admin()->access_control()->getEnabled()
-		) {
-			if (
-				/**
-				 * true, если расширенное управление доступом
-				 * включено для данной конкретной должности
-				 */
-				$this->getEvent()->isModuleEnabledForRole()
-			) {
-				$this->getRole()
-					->setCategoryIds(
-						$this->getEvent()->getSelectedCategoryIds()
-					)
-				;
+		if (df_cfg()->admin()->access_control()->getEnabled()) {
+			/**
+			 * true, если расширенное управление доступом
+			 * включено для данной конкретной должности
+			 */
+			if ($this->getEvent()->isModuleEnabledForRole()) {
+				$this->getRole()->setCategoryIds($this->getEvent()->getSelectedCategoryIds());
 				if (is_null($this->getRole()->getId())) {
-					$this->getRole()
-						->prepareForInsert($this->getEvent()->getRoleId())
-					;
+					$this->getRole()->prepareForInsert($this->getEvent()->getRoleId());
 				}
 				$this->getRole()
 					->save()
@@ -70,9 +56,8 @@ class Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAcce
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_AccessControl_Model_Event_Permissions_Role_Saverole::_CLASS;
-	}
+	protected function getEventClass() {return Df_AccessControl_Model_Event_Permissions_Role_Saverole::_C;}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_AccessControl_Observer::controller_action_postdispatch_adminhtml_permissions_role_saverole() */
+	const _C = __CLASS__;
 }

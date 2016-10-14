@@ -1,49 +1,34 @@
 <?php
 class Df_PonyExpress_Model_Method extends Df_Shipping_Model_Method_CollectedManually {
-	/**          
+	/**
 	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
 	 * @return float
 	 */
-	public function getCost() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->convertFromRoublesToBase(rm_float(df_a($this->getVariant(), 'tariffvat')))
-			;
-		}
-		return $this->{__METHOD__};
-	}
-	
-	/** @return int */
-	protected function getTimeOfDeliveryMax() {return rm_last($this->getTimeOfDeliveryAsArray());}
+	protected function getCost() {return rm_float(df_a($this->getVariant(), 'tariffvat'));}
 
-	/** @return int */
-	protected function getTimeOfDeliveryMin() {
-		return rm_first($this->getTimeOfDeliveryAsArray());
-	}	
-	
+	/**
+	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
+	 */
+	protected function getDeliveryTime() {
+		/** @var string|int() $time */
+		$time = df_a($this->getVariant(), 'delivery');
+		return is_array($time) ? $time : explode(' - ', $time);
+	}
+
 	/**
 	 * @override
 	 * @return string
 	 */
 	protected function getTitleBase() {return df_a($this->getVariant(), 'servise');}
-	
-	/** @return int[] */
-	private function getTimeOfDeliveryAsArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string|array() $timeOfDelivery */
-			$timeOfDelivery = df_a($this->getVariant(), 'delivery');
-			$this->{__METHOD__} =
-				is_array($timeOfDelivery)
-				? $timeOfDelivery
-				: rm_int(explode(' - ', $timeOfDelivery))
-			;
-		}
-		return $this->{__METHOD__};
-	}
 
 	/** @return array(string => string) */
 	private function getVariant() {return $this->_getData(self::P__VARIANT);}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_PonyExpress_Model_Collector::createMethodFromVariant() */
+	const _C = __CLASS__;
+	/** @used-by Df_PonyExpress_Model_Collector::createMethodFromVariant() */
 	const P__VARIANT = 'variant';
 }

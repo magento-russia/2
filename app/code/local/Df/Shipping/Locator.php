@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Shipping_Locator extends Df_Core_Model_DestructableSingleton {
+abstract class Df_Shipping_Locator extends Df_Core_Model {
 	/**
 	 * @used-by map()
 	 * @param string $type
@@ -9,31 +9,15 @@ abstract class Df_Shipping_Locator extends Df_Core_Model_DestructableSingleton {
 
 	/**
 	 * @override
-	 * @used-by Df_Core_Model::cacheLoad()
-	 * @used-by Df_Core_Model::cacheSave()
-	 * @used-by Df_Core_Model::isCacheEnabled()
-	 * Родительский метод: @see Df_Core_Model::getPropertiesToCache()
+	 * @see Df_Core_Model_Abstract::cachedGlobal()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return self::m(__CLASS__, 'map');}
-
-	/**
-	 * Если требующее кэширование свойство не является объектом или массивом, содержащим объекты,
-	 * то перечислите это свойство в методе @see getPropertiesToCacheSimple(),
-	 * и тогда свойство будет кэшироваться быстрее,
-	 * потому что вместо функций @see serialize() / @see unserialize()
-	 * будут применены более быстрые функции @uses json_encode() / @uses json_decode().
-	 * @override
-	 * @used-by Df_Core_Model::_construct()
-	 * Родительский метод: @see Df_Core_Model::getPropertiesToCacheSimple()
-	 * @return string[]
-	 */
-	protected function getPropertiesToCacheSimple() {return $this->getPropertiesToCache();}
+	protected function cachedGlobal() {return self::m(__CLASS__, 'map');}
 
 	/**
 	 * @used-by _find()
-	 * @used-by Df_Core_Model::cacheLoadProperty()
-	 * @used-by Df_Core_Model::cacheSaveProperty()
+	 * @used-by Df_Core_Model_Abstract::cacheLoadProperty()
+	 * @used-by Df_Core_Model_Abstract::cacheSaveProperty()
 	 * @param string $type
 	 * @return array(string => string|int|array(string|int))
 	 */
@@ -58,7 +42,7 @@ abstract class Df_Shipping_Locator extends Df_Core_Model_DestructableSingleton {
 	 */
 	protected static function _find($class, $type, $cityNameUc, $starts = false) {
 		/** Df_Shipping_Locator $s */
-		static $s; $s = isset($s) ? $s : $s = rm_sc($class, __CLASS__);
+		static $s; if (!$s) {$s = rm_sc($class, __CLASS__);}
 		/** @var string|mixed $result */
 		if (!$starts) {
 			$result = df_a($s->map($type), $cityNameUc);

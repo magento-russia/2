@@ -8,7 +8,7 @@ class Df_Core_Helper_Mail extends Mage_Core_Helper_Abstract {
 			/** @var Zend_Validate_EmailAddress $mailValidator */
 			$mailValidator = new Zend_Validate_EmailAddress();
 			if (!$mailValidator->isValid($result)) {
-				$result = rm_sprintf('noname@%s', $this->getCurrentStoreDomain());
+				$result = 'noname@' . $this->getCurrentStoreDomain();
 			}
 			df_result_string($result);
 			df_assert($mailValidator->isValid($result));

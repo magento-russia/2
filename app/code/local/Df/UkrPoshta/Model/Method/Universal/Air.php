@@ -28,7 +28,7 @@ class Df_UkrPoshta_Model_Method_Universal_Air extends Df_UkrPoshta_Model_Method_
 			try {
 				/**
 				 * Авиадоставка доступна только для зарубежных отправлений
-				 * @link http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
+				 * http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
 				 */
 				$this
 					->checkCountryDestinationIsNot(Df_Directory_Helper_Country::ISO_2_CODE__UKRAINE)

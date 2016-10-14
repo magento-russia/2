@@ -27,7 +27,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			$this->norouteAction();
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
-		else if ($this->_getSession()->isLoggedIn()) {
+		else if (rm_customer_logged_in()) {
 			$this->_redirect('customer/account/');
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
@@ -72,7 +72,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			$this->renderLayout();
 			return;
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			rm_exception_to_session($e);
 		}
 		$this->_redirect('customer/account/login');
@@ -80,6 +80,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 
 	/**
 	 * Create customer account action
+	 * @return void
 	 */
 	public function createPostAction()
 	{
@@ -90,19 +91,21 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			$customer->setId(null);
 			$customer->setSkipConfirmationIfEmail($invitation->getEmail());
 			Mage::register('current_customer', $customer);
-			if ($groupId = $invitation->getGroupId()) {
+			$groupId = $invitation->getGroupId();
+			if ($groupId) {
 				$customer->setGroupId($groupId);
 			}
 			parent::createPostAction();
-			if ($customerId = $customer->getId()) {
-				$invitation->accept(Mage::app()->getWebsite()->getId(), $customerId);
+			$customerId = $customer->getId();
+			if ($customerId) {
+				$invitation->accept(rm_website_id(), $customerId);
 				Mage::dispatchEvent('df_invitation_customer_accepted', array(
 				   'customer' => $customer,   'invitation' => $invitation
 				));
 			}
 			return;
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			$_definedErrorCodes = array(
 				Df_Invitation_Model_Invitation::ERROR_CUSTOMER_EXISTS,Df_Invitation_Model_Invitation::ERROR_INVALID_DATA
 			);
@@ -125,12 +128,11 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 				}
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			$this->_getSession()->setCustomerFormData($this->getRequest()->getPost())
 				->addException($e, Mage::helper('customer')->__('Can\'t save customer'));
 		}
 		$this->_redirectError('');
-		return $this;
 	}
 
 	/**

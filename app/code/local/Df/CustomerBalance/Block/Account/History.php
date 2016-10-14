@@ -11,12 +11,11 @@ class Df_CustomerBalance_Block_Account_History extends Df_Core_Block_Template_No
 	 * Check if history can be shown to customer
 	 * @return bool
 	 */
-	public function canShow()
-	{
+	public function canShow() {
 		return
-				df_cfg()->customer()->balance()->isEnabled()
+				Df_CustomerBalance_Model_Settings::s()->isEnabled()
 			&&
-				df_cfg()->customer()->balance()->needShowHistory()
+				Df_CustomerBalance_Model_Settings::s()->needShowHistory()
 		;
 	}
 
@@ -32,7 +31,7 @@ class Df_CustomerBalance_Block_Account_History extends Df_Core_Block_Template_No
 		if ($customerId) {
 			$result = Df_CustomerBalance_Model_Balance_History::c();
 			$result->addFieldToFilter('customer_id', $customerId);
-			$result->addFieldToFilter('website_id', Mage::app()->getStore()->getWebsiteId());
+			$result->addFieldToFilter('website_id', rm_website_id());
 			$result->setOrder('updated_at');
 		}
 		return $result;

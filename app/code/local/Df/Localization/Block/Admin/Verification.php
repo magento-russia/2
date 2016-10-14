@@ -11,25 +11,27 @@ class Df_Localization_Block_Admin_Verification extends Df_Core_Block_Admin {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Localization_Model_Translation_File_Collection */
+	/** @return Df_Localization_Translation_File_Collection */
 	public function getFiles() {return $this->getReport()->getFiles();}
 
 	/** @return string */
 	public function getTitle() {return 'Проверка качества перевода';}
 
 	/**
-	 * @param Df_Localization_Model_Translation_File $file
+	 * @param Df_Localization_Translation_File $file
 	 * @return string
 	 */
-	public function renderFile(Df_Localization_Model_Translation_File $file) {
-		return Df_Localization_Block_Admin_Verification_File::i($file)->toHtml();
+	public function renderFile(Df_Localization_Translation_File $file) {
+		return Df_Localization_Block_Admin_Verification_File::r($file);
 	}
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/localization/verification.phtml';}
+	protected function defaultTemplate() {return 'df/localization/verification.phtml';}
 
 	/** @return array(string => array(string => string[])) */
 	private function getDetails() {
@@ -37,7 +39,7 @@ class Df_Localization_Block_Admin_Verification extends Df_Core_Block_Admin {
 			/** @var array $result */
 			$result = array();
 			foreach ($this->getFiles() as $file)  {
-				/** @var Df_Localization_Model_Translation_File $file */
+				/** @var Df_Localization_Translation_File $file */
 				$result[$file->getName()]=
 					array(
 						/**
@@ -54,13 +56,13 @@ class Df_Localization_Block_Admin_Verification extends Df_Core_Block_Admin {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Localization_Model_Report_Verification */
+	/** @return Df_Localization_Report_Verification */
 	private function getReport() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Localization_Model_Report_Verification::i();
+			$this->{__METHOD__} = Df_Localization_Report_Verification::i();
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

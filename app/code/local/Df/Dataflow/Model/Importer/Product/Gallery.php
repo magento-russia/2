@@ -22,8 +22,10 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				df_clean(array_map(
+					/** @uses removeNonExistent() */
 					array($this, 'removeNonExistent')
 					,array_map(
+						/** @uses processRawImage() */
 						array($this, 'processRawImage')
 						, $this->getAdditionalImagesAsRawArray()
 					)
@@ -57,7 +59,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 			/**
 			 * С @see rm_array_unique_fast() постоянно возникакает проблема
 			 * array_flip(): Can only flip STRING and INTEGER values
-			 * @link http://magento-forum.ru/topic/4695/
+			 * http://magento-forum.ru/topic/4695/
 			 * Лучше верну-ка старую добрую функцию @see array_unique()
 			 */
 			$usedPrimaryImageSizes = array_unique(array_values($this->{__METHOD__}));
@@ -122,14 +124,14 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 				;
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			/**
 			 * Несмотря на сказанное в документации по PHP, как показывает практика,
 			 * $rh в случае сбоя может быть равно не только false, но и null
 			 */
 			if ($rh) {fclose($rh);}
 			if ($wh) {fclose($wh);}
-			throw $e;
+			df_error($e);
 		}
 		return $this;
 	}
@@ -143,7 +145,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 		try {
 			$this->download($imagePath, $result);
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, false);
 			$result = null;
 		}
@@ -153,7 +155,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	/** @return array */
 	private function getAdditionalImagesAsRawArray() {
 		if (!isset($this->{__METHOD__})) {
- 			$this->{__METHOD__} = df_clean(df_trim(
+ 			$this->{__METHOD__} = array_filter(df_trim(
 				explode($this->getRawImagesDelimiter(), $this->getAdditionalImagesAsString())
 			));
 		}
@@ -193,7 +195,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 
 	/**
 	 * @param string $key
-	 * @param string|null $default[optional]
+	 * @param string|null $default [optional]
 	 * @return string
 	 */
 	private function getImportedValue($key, $default = null) {
@@ -244,10 +246,10 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by getAdditionalImages()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param string $imagePath
 	 * @return null|string
 	 */
@@ -263,10 +265,10 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by getAdditionalImages()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param string $imagePath
 	 * @return string|null
 	 */
@@ -294,11 +296,11 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__IMPORTED_ROW, self::V_ARRAY)
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_CLASS)
+			->_prop(self::P__IMPORTED_ROW, RM_V_ARRAY)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__IMPORTED_ROW = 'importedRow';
 	const P__PRODUCT = 'product';
 	/**

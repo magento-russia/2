@@ -135,7 +135,7 @@
 						устранение сбоя
 						«Undefined property: Df_Catalog_Model_Product::$special_price
 						in Megnor/Framework/Helper/Data.php on line 26»
-						@link http://magento-forum.ru/topic/4490/
+						http://magento-forum.ru/topic/4490/
 					-->
 					<data>Df_Themes_Helper_Megnor_Framework_Data</data>
 				</rewrite>
@@ -701,10 +701,10 @@
 				    «controller_action_postdispatch_ajax_index_options».
 				-->
 				<observers>
-					<df_themes__controller_action_postdispatch_ajax_index_options>
-						<class>df_themes/dispatcher</class>
+					<Df_Themes>
+						<class>Df_Themes_Observer</class>
 						<method>controller_action_postdispatch_ajax_index_options</method>
-					</df_themes__controller_action_postdispatch_ajax_index_options>
+					</Df_Themes>
 				</observers>
 			</controller_action_postdispatch_ajax_index_options>
 			<!--
@@ -716,10 +716,10 @@
 			-->
 			<controller_action_postdispatch_vesautosearch_index_ajaxgetproduct>
 				<observers>
-					<df_themes__controller_action_postdispatch_ajax_index_options>
-						<class>df_themes/dispatcher</class>
+					<Df_Themes>
+						<class>Df_Themes_Observer</class>
 						<method>controller_action_postdispatch_vesautosearch_index_ajaxgetproduct</method>
-					</df_themes__controller_action_postdispatch_ajax_index_options>
+					</Df_Themes>
 				</observers>
 			</controller_action_postdispatch_vesautosearch_index_ajaxgetproduct>
 		</events>
@@ -899,7 +899,7 @@
 					<!--
 						Модуль Excellence Ajax используется оформительскими темами TemplateMonster.
 						Например: TemplateMonster #43373.
-						@link http://magento-forum.ru/forum/364/
+						http://magento-forum.ru/forum/364/
 					-->
 					<files>
 						<checkout>Mage_Checkout.csv</checkout>
@@ -1414,7 +1414,7 @@
 		</producttabs_cfg>
 		<!--
 			Оформительская тема Argento
-			@link http://argentotheme.com/
+			http://argentotheme.com/
 		-->
 		<tm_ajaxsearch>
 			<general>
@@ -1425,7 +1425,7 @@
 		</tm_ajaxsearch>
 		<!--
 			Оформительские темы Infortis Ultimo и Infortis Fortis
-			@link http://themeforest.net/item/ultimo-fluid-responsive-magento-theme/3231798?WT.ac=category_item&WT.seg_1=category_item&WT.z_author=infortis
+			http://themeforest.net/item/ultimo-fluid-responsive-magento-theme/3231798?WT.ac=category_item&WT.seg_1=category_item&WT.z_author=infortis
 			Обратите внимание, что для перевода демо-данных
 			(когда англоязычные значения уже попали в БД и система не использует сначения по умолчанию ниже),
 			перевод осуществляется по словарю:

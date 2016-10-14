@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_yandex_market translate='label' module='df_yandex_market'>
+		<df_yandex_market>
 			<label>Яндекс.Маркет</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<general translate='label'>
+				<general>
 					<label>Общие настройки</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -22,7 +22,7 @@
 						]]>
 					</comment>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -30,7 +30,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-yandex-market</df_feature>
 						</enabled>
 						<url>
@@ -40,7 +40,7 @@
 								в <a href='http://magento-forum.ru/topic/3029/'>личном кабинете магазина</a>
 								на Яндекс.Маркете.]]>
 							</comment>
-							<frontend_model>df_admin/system_config_form_field_info_urls</frontend_model>
+							<frontend_model>Df_Admin_Block_Field_Info_Urls</frontend_model>
 							<rm_url_path_base>df-yandex-market/yml</rm_url_path_base>
 							<rm_url_pass_parameters_as_query/>
 							<backend_model>core/config_data</backend_model>
@@ -52,7 +52,7 @@
 								<enabled>1</enabled>
 							</depends>
 						</url>
-						<notification_email translate='label'>
+						<notification_email>
 							<label><![CDATA[Адрес для оповещения о сбоях]]></label>
 							<comment>
 								<![CDATA[Крайне желательно заполнить это поле.
@@ -66,7 +66,7 @@
 							<validate>validate-email</validate>
 							<depends><enabled>1</enabled></depends>
 						</notification_email>
-						<currency translate='label'>
+						<currency>
 							<label>В какой валюте передавать Яндекс.Маркету цены на товары?</label>
 							<comment>
 								<![CDATA[Выбранная Вами валюта должна быть разрешена к использованию
@@ -77,14 +77,14 @@
 «Система» → «Валюты» → «Курсы».]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_yandex_market/system_config_source_currency</source_model>
-							<backend_model>df_yandex_market/system_config_backend_currency</backend_model>
+							<source_model>Df_YandexMarket_Model_Config_Source_Currency</source_model>
+							<backend_model>Df_YandexMarket_Model_Config_Backend_Currency</backend_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</currency>
-						<local_delivery_cost translate='label'>
+						<local_delivery_cost>
 							<label>Стоимость доставки для покупателей из региона магазина</label>
 							<comment>
 								<![CDATA[
@@ -103,7 +103,7 @@
 							</validate>
 							<depends><enabled>1</enabled></depends>
 						</local_delivery_cost>
-						<has_points_of_sale translate='label'>
+						<has_points_of_sale>
 							<label>Имеются ли розничные точки продаж?</label>
 							<comment>
 								<![CDATA[Надо заполнять точно так же,
@@ -115,10 +115,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</has_points_of_sale>
-						<pickup translate='label'>
+						<pickup>
 							<label>Имеется ли возможность самовывоза?</label>
 							<comment>
 								<![CDATA[Надо заполнять точно так же,
@@ -130,7 +130,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 								<has_points_of_sale>1</has_points_of_sale>
@@ -164,7 +164,7 @@
 						</sales_notes>
 					</fields>
 				</general>
-				<diagnostics translate='label'>
+				<diagnostics>
 					<label>Отладка</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>2000</sort_order>
@@ -173,7 +173,7 @@
 					<show_in_store>1</show_in_store>
 					<comment><![CDATA[]]></comment>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Вести журнал?</label>
 							<comment>
 								<![CDATA[
@@ -189,7 +189,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</enabled>
-						<need_limit translate='label'>
+						<need_limit>
 							<label>Ограничить количество включаемых в документ YML товаров?</label>
 							<comment>
 								<![CDATA[
@@ -206,7 +206,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><enabled>1</enabled></depends>
 						</need_limit>
-						<limit translate='label'>
+						<limit>
 							<label>Максимальное количество включаемых в документ YML товаров</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>3000</sort_order>
@@ -222,7 +222,7 @@
 								validate-digits
 							</validate>
 						</limit>
-						<need_explain_rejection translate='label'>
+						<need_explain_rejection>
 							<label>Указывать причину отказа в публикации для каждого товара?</label>
 							<comment>
 								<![CDATA[
@@ -243,7 +243,7 @@
 						</need_explain_rejection>
 					</fields>
 				</diagnostics>
-				<shop translate='label'>
+				<shop>
 					<label>Описание магазина</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>3000</sort_order>
@@ -251,7 +251,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<name_for_clients translate='label'>
+						<name_for_clients>
 							<label>Название магазина для посетителей Яндекс.Маркета</label>
 							<comment>
 								<![CDATA[
@@ -274,7 +274,7 @@
 								validate-length	maximum-length-20
 							</validate>
 						</name_for_clients>
-						<name_for_administration translate='label'>
+						<name_for_administration>
 							<label>Официальное название компании для администрации Яндекс.Маркета</label>
 							<comment>
 								<![CDATA[
@@ -288,7 +288,7 @@
 							<show_in_store>1</show_in_store>
 							<validate>required-entry</validate>
 						</name_for_administration>
-						<agency translate='label'>
+						<agency>
 							<label>Название агентства, которое оказывает техническую поддержку магазину и отвечает за работоспособность сайта</label>
 							<comment>
 								<![CDATA[]]>
@@ -300,7 +300,7 @@
 							<show_in_store>1</show_in_store>
 							<validate></validate>
 						</agency>
-						<support_email translate='label'>
+						<support_email>
 							<label>Контактный адрес технической поддежки магазина</label>
 							<comment>
 								<![CDATA[]]>
@@ -314,7 +314,7 @@
 						</support_email>
 					</fields>
 				</shop>
-				<products translate='label'>
+				<products>
 					<label>Товары</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>4000</sort_order>
@@ -324,20 +324,15 @@
 					<fields>
 						<conditions>
 							<label>Условия</label>
-							<comment>
-								<![CDATA[
-									Если условия не будут указаны Вами, то модуль опубликует на Яндекс.Маркете
-									все товары Вашего магазина.
-								]]>
-							</comment>
+							<comment>при отсутствии условий будут опубликованы все товары</comment>
 							<frontend_model>Df_Catalog_Block_Admin_Conditions</frontend_model>
-							<backend_model>Df_Catalog_Model_System_Config_Backend_Conditions</backend_model>
+							<backend_model>Df_Catalog_Model_Config_Backend_Conditions</backend_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</conditions>
-						<publish_out_of_stock translate='label'>
+						<publish_out_of_stock>
 							<label>Публиковать ли товары, у которых в графе
 								«В наличии ли данный товар?» стоит «нет в наличии»?</label>
 							<comment>
@@ -353,7 +348,7 @@
 						</publish_out_of_stock>
 					</fields>
 				</products>
-				<api translate='label'>
+				<api>
 					<label>API</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>5000</sort_order>
@@ -361,7 +356,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<application_id translate='label'>
+						<application_id>
 							<label>Идентификатор приложения</label>
 							<comment><![CDATA[
 Его Вы получите при <a href='http://api.yandex.ru/oauth/doc/dg/tasks/register-client.xml'
@@ -378,7 +373,7 @@
 								minimum-length-32
 							</validate>
 						</application_id>
-						<application_password translate='label'>
+						<application_password>
 							<label>Пароль приложения</label>
 							<comment><![CDATA[
 Его Вы получите при <a href='http://api.yandex.ru/oauth/doc/dg/tasks/register-client.xml'
@@ -395,23 +390,23 @@
 								minimum-length-32
 							</validate>
 						</application_password>
-						<get_confirmation_code translate='label'>
+						<get_confirmation_code>
 							<label></label>
-							<button_label>получить код подтверждения...</button_label>
+							<rm_button_label>получить код подтверждения...</rm_button_label>
 							<comment>
 								<![CDATA[Перед получением кода подтверждения
 								заполните поля «Идентификатор приложения» и «Пароль приложения» и
 								сохраните настройки.
 								]]>
 							</comment>
-							<frontend_model>df_yandex_market/api_getConfirmationCode</frontend_model>
+							<frontend_model>Df_YandexMarket_Block_Api_GetConfirmationCode</frontend_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>0</show_in_website>
 							<show_in_store>0</show_in_store>
 							<validate></validate>
 						</get_confirmation_code>
-						<confirmation_code translate='label'>
+						<confirmation_code>
 							<label>Код подтверждения</label>
 							<comment>
 								<![CDATA[
@@ -419,7 +414,7 @@
 								]]>
 							</comment>
 							<frontend_type>text</frontend_type>
-							<backend_model>df_yandex_market/system_config_backend_api_confirmationCode</backend_model>
+							<backend_model>Df_YandexMarket_Model_Config_Backend_Api_ConfirmationCode</backend_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>0</show_in_website>
@@ -428,7 +423,7 @@
 						</confirmation_code>
 					</fields>
 				</api>
-				<other translate='label'>
+				<other>
 					<label>Другое</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>6000</sort_order>
@@ -436,13 +431,13 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<categories_reference_book_url translate='label'>
+						<categories_reference_book_url>
 							<label>Веб-адрес справочника категорий товарных предложений</label>
 							<comment>
 								<![CDATA[
 Как правило, здесь должен быть указан адрес
-<br/><a href='http://help.yandex.ru/partnermarket/docs/market_categories.xls'
->http://help.yandex.ru/partnermarket/docs/market_categories.xls</a>
+<br/><a href='http://download.cdn.yandex.net/support/ru/partnermarket/files/market_categories.xls'
+>http://download.cdn.yandex.net/support/ru/partnermarket/files/market_categories.xls</a>
 <br/>Указывайте другой адрес только в том случае,
 если Яндекс.Маркет изменит адрес справочника категорий товарных предложений.
 								]]>
@@ -453,7 +448,7 @@
 							<show_in_website>0</show_in_website>
 							<show_in_store>0</show_in_store>
 						</categories_reference_book_url>
-						<use_non_standard_domain translate='label'>
+						<use_non_standard_domain>
 							<label>Использовать нестандартный домен для веб-адресов в файле YML?</label>
 							<comment>
 								<![CDATA[Эту опцию имеет смысл включать
@@ -469,7 +464,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</use_non_standard_domain>
-						<domain translate='label'>
+						<domain>
 							<label>Домен веб-адресов в файле YML</label>
 							<comment><![CDATA[]]></comment>
 							<frontend_type>text</frontend_type>

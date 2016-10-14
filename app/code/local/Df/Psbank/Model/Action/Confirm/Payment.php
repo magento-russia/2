@@ -21,13 +21,6 @@ class Df_Psbank_Model_Action_Confirm_Payment extends Df_Psbank_Model_Action_Conf
 	 */
 	protected function needInvoice() {return true;}
 
-	const _CLASS = __CLASS__;
-	/**
-	 * @static
-	 * @param Df_Psbank_ConfirmController $controller
-	 * @return Df_Psbank_Model_Action_Confirm_Payment
-	 */
-	public static function i(Df_Psbank_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
+	/** @used-by Df_Psbank_ConfirmController::getActionMap() */
+	const _C = __CLASS__;
 }

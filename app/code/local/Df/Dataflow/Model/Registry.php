@@ -4,16 +4,13 @@
  * Эти реестры должны использоваться всеми модулями Российской сборки Magento.
  */
 class Df_Dataflow_Model_Registry extends Df_Core_Model {
-	/** @return Df_Dataflow_Model_Registry_Collection_Attributes */
-	public function attributes() {return Df_Dataflow_Model_Registry_Collection_Attributes::s();}
-
 	/** @return Df_Dataflow_Model_Registry_Collection_AttributeSets */
 	public function attributeSets() {return Df_Dataflow_Model_Registry_Collection_AttributeSets::s();}
 	
 	/** @return Df_Dataflow_Model_Registry_Collection_Categories */
 	public function categories() {return Df_Dataflow_Model_Registry_Collection_Categories::s();}
 
-	/** @return Mage_Core_Model_Store */
+	/** @return Df_Core_Model_StoreM */
 	public function getStoreProcessed() {
 		if (!isset($this->_storeProcessed)) {
 			/**
@@ -42,14 +39,14 @@ class Df_Dataflow_Model_Registry extends Df_Core_Model {
 	public function resetCategories() {Df_Dataflow_Model_Registry_Collection_Categories::reset();}
 
 	/**
-	 * @param Mage_Core_Model_Store $storeProcessed
+	 * @param Df_Core_Model_StoreM $storeProcessed
 	 * @return void
 	 */
-	public function setStoreProcessed(Mage_Core_Model_Store $storeProcessed) {
+	public function setStoreProcessed(Df_Core_Model_StoreM $storeProcessed) {
 		$this->_storeProcessed = $storeProcessed;
 	}
 
-	/** @var Mage_Core_Model_Store */
+	/** @var Df_Core_Model_StoreM */
 	private $_storeProcessed;
 
 	/** @return Df_Dataflow_Model_Registry */

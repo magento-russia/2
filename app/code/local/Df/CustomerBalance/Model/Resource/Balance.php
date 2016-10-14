@@ -1,5 +1,5 @@
 <?php
-class Df_CustomerBalance_Model_Resource_Balance extends Mage_Core_Model_Mysql4_Abstract {
+class Df_CustomerBalance_Model_Resource_Balance extends Df_Core_Model_Resource {
 	/**
 	 * Delete customer orphan balances
 	 * @param int $customerId
@@ -65,25 +65,18 @@ class Df_CustomerBalance_Model_Resource_Balance extends Mage_Core_Model_Mysql4_A
 	}
 
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_CustomerBalance_Model_Balance::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_customerbalance/balance';
+	protected function _construct() {$this->_init(self::TABLE, Df_CustomerBalance_Model_Balance::P__ID);}
 	/**
-	 * @see Df_CustomerBalance_Model_Balance::_construct()
-	 * @see Df_CustomerBalance_Model_Resource_Balance_Collection::_construct()
-	 * @return string
+	 * @used-by Df_CustomerBalance_Model_Resource_Balance_History_Collection::_initSelect()
+	 * @used-by Df_CustomerBalance_Setup_1_0_0::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_customerbalance/balance';
 	/** @return Df_CustomerBalance_Model_Resource_Balance */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

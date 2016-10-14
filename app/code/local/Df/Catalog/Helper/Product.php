@@ -3,7 +3,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 	/**
 	 * @param int $attributeSetId
 	 * @param string $groupName
-	 * @param int|null $sortOrder[optional]
+	 * @param int|null $sortOrder [optional]
 	 * @return Df_Catalog_Helper_Product
 	 */
 	public function addGroupToAttributeSetIfNeeded($attributeSetId, $groupName, $sortOrder = null) {
@@ -48,29 +48,16 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 		df_param_sku($sku, 0);
 		/** @var int|null $result */
 		$result = $this->getResource()->getIdBySku($sku);
-		return $result ? intval($result) : null;
+		return $result ? (int)$result : null;
 	}
 
 	/**
-	 * Работает быстрее, чем
-	 *
-		$product->getAttributeText(
-			Df_Catalog_Model_Product::P__MANUFACTURER
-		)
-	 *
+	 * Работает быстрее, чем $product->getAttributeText(Df_Catalog_Model_Product::P__MANUFACTURER)
 	 * @param string $manufacturerCode
 	 * @return string|null
 	 */
 	public function getManufacturerNameByCode($manufacturerCode) {
-		df_param_string($manufacturerCode, 0);
-		/** @var string|null $result */
-		$result =
-			df_a(
-				$this->getMapFromManufacturerCodeToName()
-				,$manufacturerCode
-			)
-		;
-		return $result;
+		return df_a($this->getMapFromManufacturerCodeToName(), $manufacturerCode);
 	}
 
 	/** @return Df_Catalog_Model_Resource_Product */
@@ -105,9 +92,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 				/** @var Mage_Eav_Model_Entity_Attribute_Source_Interface $source */
 				$source = $manufacturerAttribute->getSource();
 				df_assert($source instanceof Mage_Eav_Model_Entity_Attribute_Source_Interface);
-				/** @var array $options */
-				$options = $source->getAllOptions();
-				$result = array_combine(df_column($options, 'value'), df_column($options, 'label'));
+				$result = rm_options_to_map($source->getAllOptions());
 			}
 			$this->{__METHOD__} = $result;
 		}

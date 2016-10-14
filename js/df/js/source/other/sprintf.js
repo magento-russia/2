@@ -1,5 +1,5 @@
 /**
- * @link https://github.com/alexei/sprintf.js
+ * https://github.com/alexei/sprintf.js
  */
 (function(ctx) {
 	var sprintf = function() {

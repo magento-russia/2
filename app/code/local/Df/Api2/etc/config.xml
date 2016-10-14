@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Api2>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Api2>
 	</modules>
 	<global>

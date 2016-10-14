@@ -3,10 +3,9 @@ class Df_Checkout_Block_Frontend_Address_AccountNumber
 	extends Df_Checkout_Block_Frontend_Address_Element {
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return self::DEFAULT_TEMPLATE;}
-
-	const _CLASS = __CLASS__;
-	const DEFAULT_TEMPLATE = 'df/checkout/address/accountNumber.phtml';
+	protected function defaultTemplate() {return 'df/checkout/address/accountNumber.phtml';}
 }

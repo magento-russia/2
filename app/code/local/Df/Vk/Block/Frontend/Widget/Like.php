@@ -18,5 +18,5 @@ class Df_Vk_Block_Frontend_Widget_Like extends Df_Vk_Block_Frontend_Widget {
 	 */
 	protected function getSettings() {return df_cfg()->vk()->like();}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

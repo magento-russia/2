@@ -9,7 +9,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 			foreach ($this->getCmsNodes() as $cmsNode) {
 				/** @var Df_Cms_Model_Hierarchy_Node $cmsNode */
 				/** @var Df_Cms_Varien_Data_Tree_Node $varienNode */
-				$varienNode = $this->convertCmsNodeToVarienDataTreeNode($cmsNode, $result);
+				$varienNode = $this->cmsNodeToVarienNode($cmsNode, $result);
 				if (!$cmsNode->getParentNodeId()) {
 					/**
 					 * Корневой узел.
@@ -22,12 +22,12 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 					 *
 					 * Раньше, до учёта этого факта,
 					 * в системе происходил дефект пропадания меню статей из общего меню:
-					 * @link http://magento-forum.ru/topic/4518/
+					 * http://magento-forum.ru/topic/4518/
 					 *
 					 * Меню статей пропадало из общего меню по следующей причине.
 					 * После редактирования администратором товара
 					 * система автоматически удаляет полностраничный кэш.
-					 * В этом случае мы попадаем данный метод @see Df_Cms_Model_Tree::getTree().
+					 * В этом случае мы попадаем в данный метод @see Df_Cms_Model_Tree::getTree().
 					 * Но в данную точну программы мы уже не попадали,
 					 * потому что система загружает из кэша дерево дерево @see $_tree.
 					 *
@@ -42,7 +42,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 					 * и, таким образом, меню статей не добавлялось в товарное меню.
 					 *
 					 * Для устранения этого дефекта помечаем корневой узел меню статей
-					 * специальным флагом @see $RM__ROOT,
+					 * специальным флагом @uses $RM__ROOT,
 					 * а перед сохранением в кэше дерева @see $_tree
 					 * удаляем у корневого узла мню статей родителя
 					 * и возвращаем ему в качестве дерева наше дерево меню статей
@@ -84,11 +84,6 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 		}
 		return $this->_tree;
 	}
-	/** @var Df_Cms_Varien_Data_Tree_Node[]  */
-	protected $_nodesMap = array();
-
-	/** @var Varien_Data_Tree */
-	protected $_tree;
 
 	/**
 	 * @override
@@ -102,10 +97,9 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 			if (is_null($node->getParent())) {
 				$this->getMenu()->addNode($node);
 			}
-		 *
 		 * Раньше, до учёта этого факта,
 		 * в системе происходил дефект пропадания меню статей из общего меню:
-		 * @link http://magento-forum.ru/topic/4518/
+		 * http://magento-forum.ru/topic/4518/
 		 *
 		 * Меню статей пропадало из общего меню по следующей причине.
 		 * После редактирования администратором товара
@@ -142,98 +136,52 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 	}
 
 	/**
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @override
 	 * @return string[]
 	 */
-	protected function getCacheTagsRm() {return array(Df_Cms_Model_Cache::TAG);}
+	protected function cacheTags() {return array(Df_Cms_Model_Cache::TAG);}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getCacheTypeRm() {return Df_Cms_Model_Cache::TYPE;}
+	protected function cacheType() {return Df_Cms_Model_Cache::TYPE;}
 
 	/**
+	 * Значения этих свойств кэшируются для каждого магазина отдельно.
 	 * @override
+	 * @see Df_Core_Model::cachedObjects()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCachePerStore() {return array('_nodesMap', '_tree');}
+	protected function cachedObjects() {return array('_nodesMap', '_tree');}
 
 	/**
+	 * @used-by getTree()
 	 * @param Df_Cms_Model_Hierarchy_Node $cmsNode
 	 * @param Varien_Data_Tree $tree
 	 * @return Df_Cms_Varien_Data_Tree_Node
 	 */
-	private function convertCmsNodeToVarienDataTreeNode(
-		Df_Cms_Model_Hierarchy_Node $cmsNode, Varien_Data_Tree $tree
-	) {
-		/**
-		 * TemplateMela использует старую схему работы с меню
-		 * @link http://magento-forum.ru/forum/317/
-		 */
-		/** @var bool $isItTemplateMela */
-		static $isItTemplateMela;
-		if (!isset($isItTemplateMela)) {
-				/** @var string[] $templateMelaMenuClasses */
-				$templateMelaMenuClasses =
-					array(
-						'TM_CustomMenu_Block_Navigation'
-						, 'Megnor_AdvancedMenu_Block_Navigation'
-					)
-				;
-				$isItTemplateMela = false;
-				/** @var Mage_Core_Block_Abstract $navigationBlock */
-				$navigationBlock = rm_layout()->getBlockSingleton('catalog/navigation');
-			    foreach ($templateMelaMenuClasses as $templateMelaMenuClass) {
-					/** @var string $templateMelaMenuClass */
-					$isItTemplateMela =
-							@class_exists($templateMelaMenuClass)
-						&&
-							/**
-							 * Обратите внимание,
-							 * что блок может быть не только класса $templateMelaMenuClass,
-							 * но и класса одного из потомков класса $templateMelaMenuClass,
-							 * поэтому @see is_a() точнее, чем
-							  		$templateMelaMenuClass
-							  ===
-							  		Mage::getConfig()->getBlockClassName('catalog/navigation')
-							 */
-							is_a($navigationBlock, $templateMelaMenuClass)
-					;
-					if ($isItTemplateMela) {
-						break;
-					}
-				}
-			;
-		}
-		/** @var Df_Cms_Varien_Data_Tree_Node $result */
-		$result =
-			new Df_Cms_Varien_Data_Tree_Node(
-				$data = array(
-					'name' => $cmsNode->getLabel()
-					,/**
-					 * Обратите внимание, что Magento 1.7 RC1 трактует флаг is_active иначе,
-				 	 * чем предыдущие версии.
-					 * В предыдущих версиях is_active означает, что рубрика подлежит публикации.
-					 * В Magento 1.7 is_active означает, что рубрика является текущей
-					 */
-					'is_active' => df_magento_version('1.7', '<') || $isItTemplateMela
-					,'id' => 'df-cms-' . $cmsNode->getId()
-					,'url' =>
-						is_null($cmsNode->getPageIdentifier())
-						? 'javascript:void(0);'
-						: $cmsNode->getUrl()
-					,/**
-					 * привязываем узел CMS к созданному на его основе узлу Varien_Data_Tree_Node
-					 */
-					'cms_node' => $cmsNode
-				)
-				,$idField = 'id'
-				,$tree
-				,$parent = null
+	private function cmsNodeToVarienNode(Df_Cms_Model_Hierarchy_Node $cmsNode, Varien_Data_Tree $tree) {
+		return new Df_Cms_Varien_Data_Tree_Node(
+			$data = array(
+				'name' => $cmsNode->getLabel()
+				,/**
+				 * Обратите внимание, что Magento 1.7 RC1 трактует флаг is_active иначе,
+				 * чем предыдущие версии.
+				 * В предыдущих версиях is_active означает, что рубрика подлежит публикации.
+				 * В Magento 1.7 is_active означает, что рубрика является текущей
+				 */
+				'is_active' => df_magento_version('1.7', '<') || self::isItTemplateMela()
+				,'id' => 'df-cms-' . $cmsNode->getId()
+				,'url' => !$cmsNode->getPageIdentifier() ? 'javascript:void(0);' : $cmsNode->getUrl()
+				/** привязываем узел CMS к созданному на его основе узлу @see Varien_Data_Tree_Node */
+				, 'cms_node' => $cmsNode
 			)
-		;
-		return $result;
+			,$idField = 'id'
+			,$tree
+			,$parent = null
+		);
 	}
 
 	/** @return Df_Cms_Model_Resource_Hierarchy_Node_Collection */
@@ -242,7 +190,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 			/** @var Df_Cms_Model_Resource_Hierarchy_Node_Collection $result */
 			$result = Df_Cms_Model_Hierarchy_Node::c();
 			$result
-				->addStoreFilter(Mage::app()->getStore(), false)
+				->addStoreFilter(rm_store(), false)
 				->joinCmsPage()
 				->joinMetaData()
 				->filterExcludedPagesOut()
@@ -265,13 +213,54 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 		return df_a($this->_nodesMap, $cmsNode->getParentNodeId());
 	}
 
-	const _CLASS = __CLASS__;
+	/** @var Df_Cms_Varien_Data_Tree_Node[]  */
+	protected $_nodesMap = array();
+	/** @var Varien_Data_Tree */
+	protected $_tree;
+
 	/** @var string */
 	private static $RM__ROOT = 'rm_root';
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Cms_Model_Tree
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
+
+	/**
+	 * TemplateMela использует старую схему работы с меню: http://magento-forum.ru/forum/317/
+	 * @used-by cmsNodeToVarienNode()
+	 * @return bool
+	 */
+	private static function isItTemplateMela() {
+		/** @var bool $result */
+		static $result;
+		if (is_null($result)) {
+			/** @var string[] $templateMelaMenuClasses */
+			$templateMelaMenuClasses = array(
+				'TM_CustomMenu_Block_Navigation', 'Megnor_AdvancedMenu_Block_Navigation'
+			);
+			$result = false;
+			/** @var Mage_Core_Block_Abstract $navigationBlock */
+			$navigationBlock = rm_layout()->getBlockSingleton('catalog/navigation');
+			foreach ($templateMelaMenuClasses as $templateMelaMenuClass) {
+				/** @var string $templateMelaMenuClass */
+				/**
+				 * Обратите внимание,
+				 * что блок может быть не только класса $templateMelaMenuClass,
+				 * но и класса одного из потомков класса $templateMelaMenuClass,
+				 * поэтому @uses rm_is() точнее, чем
+						$templateMelaMenuClass
+				  ===
+						Mage::getConfig()->getBlockClassName('catalog/navigation')
+				 */
+				if (rm_is($navigationBlock, $templateMelaMenuClass)) {
+					$result = true;
+					break;
+				}
+			}
+		}
+		return $result;
+	}
 }

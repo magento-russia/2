@@ -7,7 +7,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * Российская сборка Magento обязана перекрыть этот метод
 	 * для правильной обработки кириллических URL.
 	 *
-	 * Перекрываемый родительский метод применяет функции @see strlen и @see substr(),
+	 * Перекрываемый родительский метод применяет функции @see strlen() и @see substr(),
 	 * что иногда, редко (для кириллических URL максимально допустимой длины)
 	 * приводит к падению интрпретатора PHP.
 	 *
@@ -75,15 +75,15 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * В БД колонка «request_path» таблицы «core_url_rewrite» имеет тип varchar(255).
 	 * Начиная с версии 4.1 в MySQL varchar(255) означает именно 255 символов
 	 * (в том числе и UTF-8), а не 255 байтов:
-	 * @link http://stackoverflow.com/a/3739871
-	 * @link http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
+	 * http://stackoverflow.com/a/3739871
+	 * http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
 	 *
 	 * «MySQL interprets length specifications in character column definitions in character units.
 	 * (Before MySQL 4.1, column lengths were interpreted in bytes.)
 	 * This applies to CHAR, VARCHAR, and the TEXT types.»
 	 *
 	 * Magento требует MySQL версии не ниже 4.1.20:
-	 * @link http://magento.com/resources/system-requirements
+	 * http://magento.com/resources/system-requirements
 	 *
 	 * Поэтому можно быть уверенным, что в колонку «request_path» таблицы «core_url_rewrite»
 	 * поместится 255 символов, даже если часть из этих символов будет кириллицей.
@@ -93,7 +93,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * Обратите внимание, что мы не можем решить данную проблему посредством mbstring.func_overload,
 	 * потому что значение mbstring.func_overload можно итзменить только через ini-файлы,
 	 * и нельзя изменить через @see ini_set():
-	 * @link http://stackoverflow.com/questions/8526147/utf-8-and-php-mbstring-func-overload-doesnt-work
+	 * http://stackoverflow.com/questions/8526147/utf-8-and-php-mbstring-func-overload-doesnt-work
 	 *
 	 * @override
 	 * @param Varien_Object $product
@@ -116,7 +116,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			// НАЧАЛО ЗАПЛАТКИ
 			/** @var bool $exists_addCategoryUrlPath */
 			static $exists_addCategoryUrlPath;
-			if (!isset($exists_addCategoryUrlPath)) {
+			if (is_null($exists_addCategoryUrlPath)) {
 				$exists_addCategoryUrlPath = method_exists($this, '_addCategoryUrlPath');
 			}
 			if ($exists_addCategoryUrlPath) {
@@ -138,15 +138,15 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		 * В БД колонка «request_path» таблицы «core_url_rewrite» имеет тип varchar(255).
 		 * Начиная с версии 4.1 в MySQL varchar(255) означает именно 255 символов
 		 * (в том числе и UTF-8), а не 255 байтов:
-		 * @link http://stackoverflow.com/a/3739871
-		 * @link http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
+		 * http://stackoverflow.com/a/3739871
+		 * http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
 		 *
 		 * «MySQL interprets length specifications in character column definitions in character units.
 		 * (Before MySQL 4.1, column lengths were interpreted in bytes.)
 		 * This applies to CHAR, VARCHAR, and the TEXT types.»
 		 *
 		 * Magento требует MySQL версии не ниже 4.1.20:
-		 * @link http://magento.com/resources/system-requirements
+		 * http://magento.com/resources/system-requirements
 		 *
 		 * Поэтому можно быть уверенным, что в колонку «request_path» таблицы «core_url_rewrite»
 		 * поместится 255 символов, даже если часть из этих символов будет кириллицей.
@@ -185,7 +185,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			// НАЧАЛО ЗАПЛАТКИ
 			/** @var bool $exists_deleteOldTargetPath */
 			static $exists_deleteOldTargetPath;
-			if (!isset($exists_deleteOldTargetPath)) {
+			if (is_null($exists_deleteOldTargetPath)) {
 				$exists_deleteOldTargetPath = method_exists($this, '_deleteOldTargetPath');
 			}
 			if ($exists_deleteOldTargetPath) {
@@ -196,12 +196,13 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			}
 			// КОНЕЦ ЗАПЛАТКИ
 		}
-		/**
-		* Check 2 variants: $requestPath and $requestPath . '-' . $productId
-		*/
+		// Check 2 variants: $requestPath and $requestPath . '-' . $productId
 		$validatedPath = $this->getResource()->checkRequestPaths(
-			array($requestPath.$suffix, $requestPath.'-'.$product->getId().$suffix),
-			$storeId
+			array(
+				$requestPath . $suffix
+				, $requestPath . '-' . $product->getId() . $suffix
+			)
+			,$storeId
 		);
 		if ($validatedPath) {
 			return $validatedPath;
@@ -244,15 +245,15 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		 * В БД колонка «request_path» таблицы «core_url_rewrite» имеет тип varchar(255).
 		 * Начиная с версии 4.1 в MySQL varchar(255) означает именно 255 символов
 		 * (в том числе и UTF-8), а не 255 байтов:
-		 * @link http://stackoverflow.com/a/3739871
-		 * @link http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
+		 * http://stackoverflow.com/a/3739871
+		 * http://dev.mysql.com/doc/refman/5.0/en/string-type-overview.html
 		 *
 		 * «MySQL interprets length specifications in character column definitions in character units.
 		 * (Before MySQL 4.1, column lengths were interpreted in bytes.)
 		 * This applies to CHAR, VARCHAR, and the TEXT types.»
 		 *
 		 * Magento требует MySQL версии не ниже 4.1.20:
-		 * @link http://magento.com/resources/system-requirements
+		 * http://magento.com/resources/system-requirements
 		 *
 		 * Поэтому можно быть уверенным, что в колонку «request_path» таблицы «core_url_rewrite»
 		 * поместится 255 символов, даже если часть из этих символов будет кириллицей.
@@ -271,10 +272,10 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		else {
 			$this->_rewrite = null;
 		}
-
+		/** @var Varien_Object $rewrite */
 		$rewrite = $this->getResource()->getRewriteByRequestPath($requestPath, $storeId);
 		if ($rewrite && $rewrite->getId()) {
-			if ($idPath === $rewrite->getDataUsingMethod('id_path')) {
+			if ($idPath === $rewrite->getData('id_path')) {
 				$this->_rewrite = $rewrite;
 				return $requestPath;
 			}
@@ -299,6 +300,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			) {
 				return $this->getUnusedPath($storeId, '-', $idPath);
 			}
+			/** @noinspection PhpWrongStringConcatenationInspection */
 			$requestPath = $match[1].(isset($match[3])?'-'.($match[3]+1):'-1').(isset($match[4])?$match[4]:'');
 			return $this->getUnusedPath($storeId, $requestPath, $idPath);
 		}
@@ -315,15 +317,13 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 */
 	public function refreshProductRewrites($storeId) {
 		parent::refreshProductRewrites($storeId);
-		if (df_enabled(Df_Core_Feature::SEO, $storeId)) {
-			/**
-			 * @todo Для подтоваров (вариантов для настраиваемых товаров)
-			 * мы можем сделать перенаправление на настраиваемый товар — это самое разумное
-			 */
-			$this->getResource()->clearRewritesForInvisibleProducts($storeId);
-			if (df_cfg()->seo()->urls()->needRedirectToCanonicalProductUrl()) {
-				$this->makeRedirectsToCanonicalProductUrl($storeId);
-			}
+		/**
+		 * @todo Для подтоваров (вариантов для настраиваемых товаров)
+		 * мы можем сделать перенаправление на настраиваемый товар — это самое разумное
+		 */
+		$this->getResource()->clearRewritesForInvisibleProducts($storeId);
+		if (df_cfg()->seo()->urls()->needRedirectToCanonicalProductUrl()) {
+			$this->makeRedirectsToCanonicalProductUrl($storeId);
 		}
 		return $this;
 	}
@@ -338,7 +338,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		// Делаем что-либо только при наличии параметра $storeId,
 		// потому что вызов refreshRewrites без этого параметра
 		// всё равно сводится к рекурсивному вызову с этим параметром
-		if (!is_null($storeId) && df_enabled(Df_Core_Feature::SEO, $storeId)) {
+		if (!is_null($storeId)) {
 			// Это позволяет нам избежать циклических перенаправлений
 			// в результате нескольких смен значений параметра
 			// «Use Categories Path for Product URLs»
@@ -347,13 +347,24 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			 * сделать перенаправление с прошлых URL.
 			 * Нужен другой алгоритм избежания циклических перенаправлений.
 			*/
-			//$this->getResource()->clearSystemRewrites($storeId);
 		}
 		return parent::refreshRewrites($storeId);
 	}
 
 	/**
-	 * Refresh product rewrite
+	 * @override
+	 * @return Df_Catalog_Model_Resource_Url
+	 */
+	protected function _getResource() {return Df_Catalog_Model_Resource_Url::s();}
+
+	/**
+	 * 2015-02-06
+	 * Обратите внимание на типы параметров!
+	 * Они именно такие.
+	 * Хотя параметры $product и $category содержат данные товара и товарного раздела,
+	 * они не имеют классы @see Df_Catalog_Model_Product и @see Df_Catalog_Model_Category.
+	 * Загрузку товаров из базы данных смотрите, например, в методе
+	 * @see Mage_Catalog_Model_Resource_Url::_getProducts()
 	 * @override
 	 * @param Varien_Object $product
 	 * @param Varien_Object $category
@@ -375,11 +386,13 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		 */
 		if (
 			!(
-					df_enabled(Df_Core_Feature::SEO, $product->getData('store_id'))
+					!$category->getData('url_path')
 				&&
-					!$category->getUrlPath()
-				&&
-					($category->getId() != $this->getStores($category->getStoreId())->getRootCategoryId())
+					(
+							$category->getId()
+						!=
+							$this->getStores($category->getData('store_id'))->getRootCategoryId()
+					)
 			)
 
 		) {
@@ -395,7 +408,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		$result = array();
 		foreach ($rewrites as $rewrite) {
 			/** @var Varien_Object $rewrite */
-			if (null !== $rewrite->getData("category_id")) {
+			if (null !== $rewrite->getData('category_id')) {
 				$result[]= $rewrite;
 			}
 		}
@@ -413,13 +426,10 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		$this->preloadCategoriesLevelInfo($rewrites);
 		$resultNestingLevel = -1;
 		/** @var integer $resultNestingLevel */
-
 		foreach ($rewrites as $rewrite) {
 			/** @var Varien_Object $rewrite */
-
 			$nestingLevel = $this->getCategoryNestingLevel($rewrite);
 			/** @var integer $nestingLevel */
-
 			if ($nestingLevel > $resultNestingLevel) {
 				$resultNestingLevel = $nestingLevel;
 				$result = $rewrite;
@@ -431,16 +441,12 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	private $_preloadedCategoriesLevelInfo = array();
 
 	/**
-	 * @param array $rewrites
-	 * @return array
+	 * @param Varien_Object[] $rewrites
+	 * @return int[]
 	 */
 	private function getCategoryIdsForRewrites(array $rewrites) {
-		$result = array();
-		foreach ($rewrites as $rewrite) {
-			/** @var Varien_Object $rewrite */
-			$result[]= $rewrite->getData("category_id");
-		}
-		return $result;
+		/** @uses Varien_Object::getData() */
+		return df_each($rewrites, 'getData', 'category_id');
 	}
 
 	/**
@@ -492,7 +498,6 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		if ($rewriteWithMaxCategoryNestingLevel) {
 			foreach ($rewrites as $index => $rewrite) {
 				/** @var Varien_Object $rewrite */
-
 				if (
 						$rewrite->getData("url_rewrite_id")
 					==
@@ -514,7 +519,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		$result = null;
 		foreach ($rewrites as $index => $rewrite) {
 			/** @var Varien_Object $rewrite */
-			if (is_null($rewrite->getData("category_id"))) {
+			if (is_null($rewrite->getData('category_id'))) {
 				$result = $index;
 				break;
 			}
@@ -542,12 +547,9 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			$rewrites = $this->getResource()->getRewritesForProducts($productIds, $storeId);
 			foreach ($productIds as $productId) {
 				/** @var int $productId */
-				$this
-					->makeRedirectsToCanonicalProductUrlForConcreteProduct(
-						df_a($rewrites, $productId, array())
-						,$storeId
-					)
-				;
+				$this->makeRedirectsToCanonicalProductUrlForConcreteProduct(
+					df_nta(df_a($rewrites, $productId)), $storeId
+				);
 			}
 
 			unset($products);
@@ -571,18 +573,11 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			if (!is_null($indexOfMainRewrite)) {
 				$mainRewrite = df_a($rewrites, $indexOfMainRewrite);
 				/** @var Varien_Object $mainRewrite */
-
 				foreach ($rewrites as $index => $rewrite) {
 					if ($index !== $indexOfMainRewrite) {
-						$this
-							->getResource()
-								->makeRedirect(
-									array(
-										"from" => $rewrite
-										,"to" => $mainRewrite
-									)
-								)
-						;
+						$this->getResource()->makeRedirect(array(
+							'from' => $rewrite, 'to' => $mainRewrite
+						));
 					}
 				}
 
@@ -592,33 +587,12 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	}
 
 	/**
-	 * @param array $rewrites
-	 * @return Df_Catalog_Model_Url
+	 * @param Varien_Object[] $rewrites
+	 * @return void
 	 */
 	private function preloadCategoriesLevelInfo(array $rewrites) {
-		$this->_preloadedCategoriesLevelInfo =
-			$this->getResource()->getCategoriesLevelInfo(
-				$this->getCategoryIdsForRewrites(
-					$rewrites
-				)
-			)
-		;
-		return $this;
+		$this->_preloadedCategoriesLevelInfo = $this->getResource()->getCategoriesLevelInfo(
+			$this->getCategoryIdsForRewrites($rewrites)
+		);
 	}
-
-	const _CLASS = __CLASS__;
-	const P__ID = 'url_rewrite_id';
-	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Catalog_Model_Url
-	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
-	/**
-	 * @static
-	 * @param int|string $id
-	 * @param string|null $field [optional]
-	 * @return Df_Catalog_Model_Url
-	 */
-	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
 }

@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_RussianPost>
-			 <version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Почта России</title>
+			<version>1.0.0</version>
 		</Df_RussianPost>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-russian-post>
 				<active>0</active>
-				<model>df_russian_post/carrier</model>
+				<model>Df_RussianPost_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

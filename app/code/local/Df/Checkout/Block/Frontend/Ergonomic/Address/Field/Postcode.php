@@ -1,0 +1,3 @@
+<?php
+class Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Postcode
+	extends Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text {}

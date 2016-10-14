@@ -2,6 +2,8 @@
 class Df_Cms_Block_Page extends Mage_Cms_Block_Page {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Abstract::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -16,9 +18,9 @@ class Df_Cms_Block_Page extends Mage_Cms_Block_Page {
 				get_class($this)
 				,$this->getPage()->getId()
 				/**
-				 * Здесь md5 не нужно,
-				 * потому что @see Mage_Core_Block_Abstract::getCacheKey()
-				 * использует аналогичную md5 функцию sha1
+				 * Здесь @see md5() не нужно,
+				 * потому что @used-by Mage_Core_Block_Abstract::getCacheKey()
+				 * использует аналогичную функцию @uses sha1()
 				 */
 				,$this->getMessagesBlock()->toHtml()
 			));
@@ -45,7 +47,7 @@ class Df_Cms_Block_Page extends Mage_Cms_Block_Page {
 			 * (и в полную противоположность Zend Framework
 			 * и всем остальным частям Magento, где используется кэширование)
 			 * означает, что блок не удет кэшироваться вовсе!
-			 * @see Mage_Core_Block_Abstract::_loadCache()
+			 * @used-by Mage_Core_Block_Abstract::_loadCache()
 			 */
 			$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 		}

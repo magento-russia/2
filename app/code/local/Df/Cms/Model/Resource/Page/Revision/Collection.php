@@ -22,7 +22,7 @@ class Df_Cms_Model_Resource_Page_Revision_Collection
 				$columns[]= $cols;
 			}
 			$this->getSelect()->joinInner(
-				array('ver_table' => rm_table('df_cms/page_version'))
+				array('ver_table' => rm_table(Df_Cms_Model_Resource_Page_Version::TABLE))
 				,'ver_table.version_id = main_table.version_id'
 				, $columns
 			);
@@ -38,16 +38,13 @@ class Df_Cms_Model_Resource_Page_Revision_Collection
 	 * @param int|Df_Cms_Model_Page_Version $version
 	 * @return Df_Cms_Model_Resource_Page_Revision_Collection
 	 */
-	public function addVersionFilter($version)
-	{
+	public function addVersionFilter($version) {
 		if ($version instanceof Df_Cms_Model_Page_Version) {
 			$version = $version->getId();
 		}
-
 		if (is_array($version)) {
 			$version = array('in' => $version);
 		}
-
 		$this->addFieldToFilter('version_id', $version);
 		return $this;
 	}
@@ -58,11 +55,16 @@ class Df_Cms_Model_Resource_Page_Revision_Collection
 	 * @param string $dir
 	 * @return Df_Cms_Model_Resource_Page_Revision_Collection
 	 */
-	public function addNumberSort($dir = 'desc')
-	{
+	public function addNumberSort($dir = 'desc') {
 		$this->setOrder('revision_number', $dir);
 		return $this;
 	}
+
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Page_Revision
+	 */
+	public function getResource() {return Df_Cms_Model_Resource_Page_Revision::s();}
 
 	/**
 	 * @override
@@ -70,10 +72,7 @@ class Df_Cms_Model_Resource_Page_Revision_Collection
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Cms_Model_Page_Revision::mf(), Df_Cms_Model_Resource_Page_Revision::mf());
+		$this->_itemObjectClass = Df_Cms_Model_Page_Revision::_C;
 	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Cms_Model_Resource_Page_Revision_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

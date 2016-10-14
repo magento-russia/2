@@ -60,7 +60,4 @@ class Df_Invitation_Block_Link extends Df_Core_Block_Template_NoCache {
 		}
 		return $this;
 	}
-
-	/** @return Df_Invitation_Block_Link */
-	public static function i() {return df_block(__CLASS__);}
 }

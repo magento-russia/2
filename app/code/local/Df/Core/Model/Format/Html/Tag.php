@@ -14,7 +14,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 			)
 		);
 	}
-	
+
 	/**
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
@@ -38,7 +38,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 		$value = rm_e($value);
 		return '' === $value ? '' : "{$name}='{$value}'";
 	}
-	
+
 	/** @return array(string => string) */
 	private function attributes() {return $this->cfg(self::$P__ATTRIBUTES, array());}
 
@@ -57,7 +57,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 		}
 		return $this->{__METHOD__};
 	}
-	
+
 	/** @return string */
 	private function content() {
 		if (!isset($this->{__METHOD__})) {
@@ -78,7 +78,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 	private function isShortTagAllowed() {
 		return !in_array(strtolower($this->tag()), array('div', 'script'));
 	}
-	
+
 	/** @return string */
 	private function openTagWithAttributesAsText() {
 		return rm_concat_clean(' '
@@ -109,9 +109,9 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__TAG, self::V_STRING_NE)
-			->_prop(self::$P__CONTENT, self::V_STRING, false)
-			->_prop(self::$P__ATTRIBUTES, self::V_ARRAY, false)
+			->_prop(self::$P__TAG, RM_V_STRING_NE)
+			->_prop(self::$P__CONTENT, RM_V_STRING, false)
+			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
 		;
 	}
 	/** @var string */

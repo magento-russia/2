@@ -1,12 +1,8 @@
 <?php
-class Df_Pec_Model_Carrier extends Df_Shipping_Model_Carrier {
+class Df_Pec_Model_Carrier extends Df_Shipping_Carrier {
 	/**
 	 * @override
 	 * @return bool
 	 */
-	public function isTrackingAvailable() {
-		return true;
-	}
-
-	const _CLASS = __CLASS__;
+	public function isTrackingAvailable() {return true;}
 }

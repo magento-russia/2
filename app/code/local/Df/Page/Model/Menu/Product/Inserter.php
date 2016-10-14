@@ -1,46 +1,28 @@
 <?php
+/**
+ * 2015-08-15
+ * Обратите внимание, что объект данного класса всегда является одиночкой,
+ * потому что создётся при обработке события, которое случается лишь единократно:
+ * @used-by Df_Page_Observer::page_block_html_topmenu_gethtml_before()
+ * @used-by Df_Page_Observer::rm_menu_top_add_submenu()
+ */
 class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
-	/** @return Df_Page_Model_Menu_Product_Inserter */
-	public function process() {
-		foreach ($this->getMenuSources() as $menuSource) {
-			/** @var Df_Page_Model_MenuSource $menuSource */
-			foreach ($menuSource->getTree()->getNodes() as $node) {
-				/** @var Df_Cms_Varien_Data_Tree_Node $node */
-				if (is_null($node->getParent())) {
-					$this->getMenu()->addNode($node);
-				}
-			}
-		}
-		return $this;
+	/**
+	 * @used-by Df_Core_Model::cacheSaveProperty()
+	 * @override
+	 * @return string[]
+	 */
+	protected function cacheTags() {
+		return array_merge(array(Mage_Core_Model_Config::CACHE_TAG), parent::cacheTags());
 	}
 
 	/**
 	 * @override
-	 * @return string[]
-	 */
-	protected function getCacheTagsRm() {
-		return array_merge(array(Mage_Core_Model_Config::CACHE_TAG), parent::getCacheTagsRm());
-	}
-
-	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getMenuSourcesAsArray');}
-
-	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getPropertiesToCacheSimple() {return $this->getPropertiesToCache();}
-
-	/**
-	 * @override
+	 * @see Df_Core_Model::cacheType()
+	 * @used-by Df_Core_Model::isCacheEnabled()
 	 * @return bool
 	 */
-	protected function isCacheEnabled() {
-		return parent::isCacheEnabled() && Mage::app()->useCache(Mage_Core_Model_Config::CACHE_TAG);
-	}
+	protected function cacheType() {return Mage_Core_Model_Config::CACHE_TAG;}
 
 	/**
 	 * @param array(string => string|int)
@@ -65,7 +47,7 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Page_Model_MenuSource[] $result  */
 			$result = array();
-			foreach ($this->getMenuSourcesAsArray() as $menuSourceAsArray) {
+			foreach (rm_config_a('df/menu/product') as $menuSourceAsArray) {
 				/** @var array(string => string|int) $menuSourceAsArray */
 				/** @var Df_Page_Model_MenuSource $menuSource */
 				$menuSource = $this->createMenuSource($menuSourceAsArray);
@@ -79,18 +61,24 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 	
-	/** @return array(string => array(string => string|int)) */
-	private function getMenuSourcesAsArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Config_Element|null $result */
-			$node = df()->config()->getNodeByKey('df/menu/product');
-			$this->{__METHOD__} = !$node ? array() : $node->asCanonicalArray();
-		}
-		return $this->{__METHOD__};
-	}
-	
 	/** @return Df_Page_Model_Menu_Product */
-	private function getMenu() {return $this->cfg(self::P__MENU);}
+	private function getMenu() {return $this->cfg(self::$P__MENU);}
+
+	/**
+	 * @used-by p()
+	 * @return void
+	 */
+	private function process() {
+		foreach ($this->getMenuSources() as $menuSource) {
+			/** @var Df_Page_Model_MenuSource $menuSource */
+			foreach ($menuSource->getTree()->getNodes() as $node) {
+				/** @var Df_Cms_Varien_Data_Tree_Node $node */
+				if (is_null($node->getParent())) {
+					$this->getMenu()->addNode($node);
+				}
+			}
+		}
+	}
 
 	/**
 	 * @override
@@ -98,16 +86,21 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__MENU, Df_Page_Model_Menu_Product::_CLASS);
+		$this->_prop(self::$P__MENU, Df_Page_Model_Menu_Product::_C);
 	}
-	const _CLASS = __CLASS__;
-	const P__MENU = 'menu';
+	/** @var string */
+	private static $P__MENU = 'menu';
 	/**
-	 * @static
+	 * 2015-08-15
+	 * Обратите внимание, что объект данного класса всегда является одиночкой:
+	 * @used-by Df_Page_Observer::page_block_html_topmenu_gethtml_before()
+	 * @used-by Df_Page_Observer::rm_menu_top_add_submenu()
 	 * @param Df_Page_Model_Menu_Product $menu
-	 * @return Df_Page_Model_Menu_Product_Inserter
+	 * @return void
 	 */
-	public static function i(Df_Page_Model_Menu_Product $menu) {return new self(array(
-		self::P__MENU => $menu
-	));}
+	public static function p(Df_Page_Model_Menu_Product $menu) {
+		/** @var Df_Page_Model_Menu_Product_Inserter $i */
+		$i = new self(array(self::$P__MENU => $menu));
+		$i->process();
+	}
 }

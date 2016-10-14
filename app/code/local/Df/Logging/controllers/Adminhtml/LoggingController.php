@@ -66,16 +66,12 @@ class Df_Logging_Adminhtml_LoggingController extends Mage_Adminhtml_Controller_A
 	 * @return void
 	 */
 	public function exportCsvAction() {
-		$this->_prepareDownloadResponse(
-			'log.csv', Df_Logging_Block_Adminhtml_Index_Grid::i()->getCsvFile()
-		);
+		$this->_prepareDownloadResponse('log.csv', Df_Logging_Block_Index_Grid::csv());
 	}
 
 	/** @return void */
 	public function exportXmlAction() {
-		$this->_prepareDownloadResponse(
-			'log.xml', Df_Logging_Block_Adminhtml_Index_Grid::i()->getExcelFile()
-		);
+		$this->_prepareDownloadResponse('log.xml', Df_Logging_Block_Index_Grid::excel());
 	}
 
 	/** @return void */
@@ -103,21 +99,19 @@ class Df_Logging_Adminhtml_LoggingController extends Mage_Adminhtml_Controller_A
 	protected function _isAllowed() {
 		/** @var bool $result */
 		$result = false;
-		if (df_enabled(Df_Core_Feature::LOGGING)) {
-			switch($this->getRequest()->getActionName()) {
-				case 'archive':
-				case 'download':
-				case 'archiveGrid':
-					$result = df_mage()->admin()->session()->isAllowed('admin/system/df_logging/backups');
-					break;
-				case 'grid':
-				case 'exportCsv':
-				case 'exportXml':
-				case 'details':
-				case 'index':
-					$result = df_mage()->admin()->session()->isAllowed('admin/system/df_logging/events');
-					break;
-			}
+		switch($this->getRequest()->getActionName()) {
+			case 'archive':
+			case 'download':
+			case 'archiveGrid':
+				$result = rm_admin_allowed('admin/system/df_logging/backups');
+				break;
+			case 'grid':
+			case 'exportCsv':
+			case 'exportXml':
+			case 'details':
+			case 'index':
+				$result = rm_admin_allowed('admin/system/df_logging/events');
+				break;
 		}
 		return $result;
 	}

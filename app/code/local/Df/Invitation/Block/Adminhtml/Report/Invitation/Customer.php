@@ -12,7 +12,4 @@ class Df_Invitation_Block_Adminhtml_Report_Invitation_Customer
 		$this->_headerText = df_h()->invitation()->__('Customers');
 		$this->_removeButton('add');
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Report_Invitation_Customer */
-	public static function i() {return df_block(__CLASS__);}
 }

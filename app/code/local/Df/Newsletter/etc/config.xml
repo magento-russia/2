@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Newsletter>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Новостная рассылка</title>
+			<version>1.0.0</version>
 		</Df_Newsletter>
 	</modules>
 	<global>
@@ -13,10 +14,10 @@
 		<events>
 			<newsletter_subscriber_save_before>
 				<observers>
-					<df_newsletter__newsletter_subscriber_save_before>
-						<class>df_newsletter/dispatcher</class>
+					<Df_Newsletter>
+						<class>Df_Newsletter_Observer</class>
 						<method>newsletter_subscriber_save_before</method>
-					</df_newsletter__newsletter_subscriber_save_before>
+					</Df_Newsletter>
 				</observers>
 			</newsletter_subscriber_save_before>
 		</events>

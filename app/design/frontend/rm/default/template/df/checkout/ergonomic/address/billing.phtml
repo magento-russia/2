@@ -2,19 +2,19 @@
 <form id="co-billing-form" action="">
 <fieldset>
     <ul class="form-list">
-    <?php if ($this->customerHasAddresses()): ?>
+    <?php if ($this->customerHasAddresses()) { ?>
         <li class="wide">
             <label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
             <div class="input-box billing-address-select-container">
                 <?php echo $this->getAddressesHtmlSelect('billing') ?>
             </div>
         </li>
-    <?php endif; ?>
+    <?php } ?>
     <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
         <fieldset>
             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
             <ul>
-				<?php echo Df_Checkout_Block_Frontend_Ergonomic_Address::billing()->toHtml(); ?>
+				<?php echo Df_Checkout_Block_Frontend_Ergonomic_Address::renderBilling(); ?>
 				<li class="no-display">
 					<input type="hidden" name="billing[save_in_address_book]" value="1" />
 				</li>
@@ -96,16 +96,14 @@
 			&&
 				document.getElementById('billing:region_id')
 		) {
-			var billingRegionUpdater =
-				new RegionUpdater(
-					'billing:country_id'
-					,'billing:region'
-					,'billing:region_id'
-					,countryRegions
-					,undefined
-					,'billing:postcode'
-				)
-			;
+			var billingRegionUpdater = new RegionUpdater(
+				'billing:country_id'
+				,'billing:region'
+				,'billing:region_id'
+				,countryRegions
+				,undefined
+				,'billing:postcode'
+			);
 		}
 	</script>
 <?php } ?>

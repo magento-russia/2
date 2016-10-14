@@ -1,39 +1,19 @@
 <?php
 class Df_Cms_Model_Config extends Df_Core_Model {
 	/** @return bool */
-	public function canCurrentUserDeletePage() {
-		return $this->_isAllowedAction('delete');
-	}
-
+	public function canCurrentUserDeletePage() {return $this->_isAllowedAction('delete');}
 	/** @return bool */
-	public function canCurrentUserDeleteRevision() {
-		return $this->_isAllowedAction('delete_revision');
-	}
-
+	public function canCurrentUserDeleteRevision() {return $this->_isAllowedAction('delete_revision');}
 	/** @return bool */
-	public function canCurrentUserPublishRevision() {
-		return $this->_isAllowedAction('publish_revision');
-	}
-
+	public function canCurrentUserPublishRevision() {return $this->_isAllowedAction('publish_revision');}
 	/** @return bool */
-	public function canCurrentUserDeleteVersion() {
-		return $this->canCurrentUserDeleteRevision();
-	}
-
+	public function canCurrentUserDeleteVersion() {return $this->canCurrentUserDeleteRevision();}
 	/** @return bool */
-	public function canCurrentUserSavePage() {
-		return $this->_isAllowedAction('save');
-	}
-
+	public function canCurrentUserSavePage() {return $this->_isAllowedAction('save');}
 	/** @return bool */
-	public function canCurrentUserSaveRevision() {
-		return $this->_isAllowedAction('save_revision');
-	}
-
+	public function canCurrentUserSaveRevision() {return $this->_isAllowedAction('save_revision');}
 	/** @return bool */
-	public function canCurrentUserSaveVersion() {
-		return $this->canCurrentUserSaveRevision();
-	}
+	public function canCurrentUserSaveVersion() {return $this->canCurrentUserSaveRevision();}
 
 	/**
 	 * Returns array of access levels which can be viewed by current user.
@@ -66,9 +46,7 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 	 * @param $userId
 	 * @return bool
 	 */
-	public function isCurrentUserOwner($userId) {
-		return rm_nat0($userId) === rm_nat0(df_mage()->admin()->session()->getUser()->getId());
-	}
+	public function isCurrentUserOwner($userId) {return rm_nat0($userId) === rm_admin_id();}
 
 	/**
 	 * @param string $type
@@ -85,31 +63,24 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 	 * @param string $action
 	 * @return bool
 	 */
-	private function _isAllowedAction($action) {
-		return df_mage()->admin()->session()->isAllowed('cms/page/' . $action);
-	}
+	private function _isAllowedAction($action) {return rm_admin_allowed('cms/page/' . $action);}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const XML_PATH_CONTENT_VERSIONING = 'df_cms/versioning/default';
 	/** @var string[][] */
-	protected $_revisionControlledAttributes =
-		array(
-			'page' =>
-				array(
-					'root_template'
-					,'meta_keywords'
-					,'meta_description'
-					,'content_heading'
-					,'content'
-					,'layout_update_xml'
-					,'custom_theme'
-					,'custom_root_template'
-					,'custom_layout_update_xml'
-					,'custom_theme_from'
-					,'custom_theme_to'
-				)
-		)
-	;
+	protected $_revisionControlledAttributes = array('page' => array(
+		'root_template'
+		,'meta_keywords'
+		,'meta_description'
+		,'content_heading'
+		,'content'
+		,'layout_update_xml'
+		,'custom_theme'
+		,'custom_root_template'
+		,'custom_layout_update_xml'
+		,'custom_theme_from'
+		,'custom_theme_to'
+	));
 	/** @return Df_Cms_Model_Config */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

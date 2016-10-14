@@ -1,5 +1,5 @@
 <?php
-class Df_PonyExpress_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_PonyExpress_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
 	 * @return Df_PonyExpress_Model_Method[]
@@ -23,7 +23,7 @@ class Df_PonyExpress_Model_Collector extends Df_Shipping_Model_Collector {
 	 */
 	private function createMethodFromVariant(array $variant) {
 		/** @var Df_PonyExpress_Model_Method $result */
-		$result = $this->createMethod(Df_PonyExpress_Model_Method::_CLASS, df_a($variant, 'servise'));
+		$result = $this->createMethod(Df_PonyExpress_Model_Method::_C, df_a($variant, 'servise'));
 		$result->setData(Df_PonyExpress_Model_Method::P__VARIANT, $variant);
 		return $result;
 	}
@@ -31,12 +31,10 @@ class Df_PonyExpress_Model_Collector extends Df_Shipping_Model_Collector {
 	/** @return Df_PonyExpress_Model_Request_Rate */
 	private function getApi() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_PonyExpress_Model_Request_Rate::i($this->getRateRequest(), $this->getCarrier())
-			;
+			$this->{__METHOD__} = Df_PonyExpress_Model_Request_Rate::i(
+				$this->getRateRequest(), $this->main()
+			);
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

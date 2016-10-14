@@ -9,7 +9,7 @@ class Df_Poll_Model_Poll extends Mage_Poll_Model_Poll {
 			/** @var Mage_Poll_Model_Poll_Answer[]|Df_Poll_Model_Resource_Poll_Answer_Collection $result */
 			$result = parent::getAnswers();
 			if (!$result && $this->getId()) {
-				$result = Df_Poll_Model_Resource_Poll_Answer_Collection::i();
+				$result = Df_Poll_Model_Poll_Answer::c();
 				$result->addPollFilter($this->getId());
 				Df_Varien_Data_Collection::unsetDataChanges($result);
 			}
@@ -20,15 +20,29 @@ class Df_Poll_Model_Poll extends Mage_Poll_Model_Poll {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Poll_Model_Resource_Poll_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Poll_Model_Resource_Poll::mf());
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * @override
+	 * @return Df_Poll_Model_Resource_Poll
+	 */
+	protected function _getResource() {return Df_Poll_Model_Resource_Poll::s();}
+
+	/**
+	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Poll::getEntityClass()
+	 * @used-by Df_Poll_Model_Resource_Poll_Collection::_construct()
+	 */
+	const _C = __CLASS__;
+	/**
+	 * @static
+	 * @param bool $loadStoresInfo [optional]
+	 * @return Df_Poll_Model_Resource_Poll_Collection
+	 */
+	public static function c($loadStoresInfo = false) {
+		return Df_Poll_Model_Resource_Poll_Collection::i($loadStoresInfo);
 	}
-	const _CLASS = __CLASS__;
-	/** @return string */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Poll_Model_Poll */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -14,8 +14,6 @@ class Df_Core_Module {
 	const GALLERY = 'Df_Gallery';
 	const INTERKASSA = 'Df_Interkassa';
 	const INVITATION = 'Df_Invitation';
-	const LICENSOR = 'Df_Licensor';
-	const LICENSOR_GENERATOR = 'Dfa_LicensorGenerator';
 	const LIQPAY = 'Df_LiqPay';
 	const LOCALIZATION = 'Df_Localization';
 	const MONETA = 'Df_Moneta';

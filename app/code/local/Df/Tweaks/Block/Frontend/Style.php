@@ -2,149 +2,132 @@
 class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 	/**
 	 * @override
-	 * @return string[]
+	 * @see Df_Core_Block_Abstract::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Abstract::getCacheKeyInfo()
+	 * @return string|string[]
 	 */
-	public function getCacheKeyInfo() {
-		return
-			array_merge(
-				parent::getCacheKeyInfo()
-				,array(get_class($this))
-				,rm_layout()->getUpdate()->getHandles()
-			)
-		;
-	}
+	public function cacheKeySuffix() {return rm_handles();}
 
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Abstract::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
-	protected function _toHtml() {
-		/** @var string $result */
-		$result =
-				!(
-						df_module_enabled(Df_Core_Module::TWEAKS)
-					&&
-						df_enabled(Df_Core_Feature::TWEAKS)
-				)
-			?
-				''
-			:
-				$this->getStyle()->toHtml()
-		;
-		return $result;
-	}
+	protected function _toHtml() {return $this->css()->render();}
 
 	/**
-	 * @param Df_Admin_Model_Config_Extractor_Font $font
+	 * @override
+	 * @see Df_Core_Block_Abstract::needToShow()
+	 * @used-by Df_Core_Block_Abstract::_loadCache()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
+	 * @return bool
+	 */
+	protected function needToShow() {return df_module_enabled(Df_Core_Module::TWEAKS);}
+
+	/**
+	 * @param Df_Admin_Config_Font $font
 	 * @param string|string[] $selector
 	 * @return Df_Tweaks_Block_Frontend_Style
 	 */
-	private function adjustLetterCase(Df_Admin_Model_Config_Extractor_Font $font, $selector) {
-		if (
-				Df_Admin_Model_Config_Source_Format_Text_LetterCase::_DEFAULT
-			!==
-				$font->getLetterCase()
-		) {
-			if (is_array($selector)) {
-				$selector = df_concat_enum($selector);
+	private function adjustLetterCase(Df_Admin_Config_Font $font, $selector) {
+		if (!$font->isDefault()) {
+			/**
+			 * 2015-02-01
+			 * Раньше опция @see Df_Admin_Config_Source_LetterCase::UCFIRST
+			 * простро транслировалась в правило «text-transform: capitalize»,
+			 * что приводило к результатам типа «Адрес Электронной Почты».
+			 * http://htmlbook.ru/css/text-transform
+			 * Однако в русском языке написание каждого слова с заглавной буквы не принято:
+			 * вместо этого гораздо разумнее при значении опции
+			 * @see Df_Admin_Config_Source_LetterCase::UCFIRST
+			 * делать заглавной только первую букву первого слова,
+			 * например: «Адрес электронной почты».
+			 * Это можно сделать посредством применения селектора «:first-letter», например:
+				.block:first-letter {text-transform: uppercase;}
+			 * http://stackoverflow.com/a/5577380
+			 * То есть нам надо к каждому $selector добавить дополнительный селектор «:first-letter».
+			 */
+			if ($font->isUcFirst()) {
+				// тут нам удобнее работать с массивом,
+				// чем отдельно разбирать случаи массива и строки
+				$selector = rm_array($selector);
+				foreach ($selector as &$item) {
+					/** @var string $item */
+					// Строка не должна состоять из нескольких селекторов.
+					// Если нужно применить одно правило сразу к нескольким селекторам,
+					// то передавайте селекторы в виде массива $selector
+					// (другими словами, передавайте в качестве $selector не строку, а массив)
+					df_assert(!rm_contains($item, ','));
+					$item = $item . ':first-letter';
+				}
 			}
-			$this->getStyle()->getSelectors()->addItem(
-				Df_Core_Block_Element_Style_Selector::i(
-					$selector
-					,Df_Core_Model_Output_Css_Rule_Set::i()->addItem($font->getLetterCaseAsCssRule())
-				)
-			);
+			$this->css()->addSelectorSimple($selector, 'text-transform', $font->getLetterCaseCss());
 		}
 		return $this;
 	}
 
 	/** @return Df_Tweaks_Block_Frontend_Style */
 	private function adjustReviewsAndRatings() {
+		/** @var Df_Tweaks_Model_Settings_Catalog_Product $s */
+		$s = df_cfg()->tweaks()->catalog()->product();
 		if (df_h()->tweaks()->isItCatalogProductList()) {
-			if (
-					df_cfg()->tweaks()->catalog()->product()->_list()->needHideRating()
-				&&
-					df_cfg()->tweaks()->catalog()->product()->_list()->needHideReviews()
-			) {
-				$this->getStyle()->getSelectors()
-					->addHider('.category-products .ratings')
-				;
+			if ($s->_list()->needHideRating() && $s->_list()->needHideReviews()) {
+				$this->hide('.category-products .ratings');
 			}
-			else if (df_cfg()->tweaks()->catalog()->product()->_list()->needHideRating()) {
-				$this->getStyle()->getSelectors()
-					->addHider('.category-products .ratings .rating-box')
-				;
+			else if ($s->_list()->needHideRating()) {
+				$this->hide('.category-products .ratings .rating-box');
 			}
-			else if (df_cfg()->tweaks()->catalog()->product()->_list()->needHideReviews()) {
-				$this->getStyle()->getSelectors()
-					->addHider('.category-products .ratings .amount')
-				;
+			else if ($s->_list()->needHideReviews()) {
+				$this->hide('.category-products .ratings .amount');
 			}
 		}
 		else if (rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
-			if 	(
-					df_cfg()->tweaks()->catalog()->product()->view()->needHideRating()
-				&&
-					df_cfg()->tweaks()->catalog()->product()->view()->needHideReviewsLink()
-				&&
-					df_cfg()->tweaks()->catalog()->product()->view()->needHideAddReviewLink()
+			if (
+				$s->view()->needHideRating()
+				&& $s->view()->needHideReviewsLink()
+				&& $s->view()->needHideAddReviewLink()
 			) {
-				$this->getStyle()->getSelectors()
-					->addHider('.product-view .ratings')
-				;
+				$this->hide('.product-view .ratings');
 			}
 			else {
-				if (df_cfg()->tweaks()->catalog()->product()->view()->needHideRating()) {
-					$this->getStyle()->getSelectors()
-						->addHider('.product-view .ratings .rating-box')
-					;
+				if ($s->view()->needHideRating()) {
+					$this->hide('.product-view .ratings .rating-box');
 				}
-				if (
-						df_cfg()->tweaks()->catalog()->product()->view()->needHideReviewsLink()
-					&&
-						df_cfg()->tweaks()->catalog()->product()->view()->needHideAddReviewLink()
-				) {
-					$this->getStyle()->getSelectors()
-						->addHider('.product-view .ratings .rating-links')
-					;
+				if ($s->view()->needHideReviewsLink() && $s->view()->needHideAddReviewLink()) {
+					$this->hide('.product-view .ratings .rating-links');
 				}
 				else {
-					if (
-							df_cfg()->tweaks()->catalog()->product()->view()->needHideReviewsLink()
-						||
-							df_cfg()->tweaks()->catalog()->product()->view()->needHideAddReviewLink()
-					) {
-						$this->getStyle()->getSelectors()
-							->addHider('.product-view .ratings .rating-links .separator')
-						;
+					if ($s->view()->needHideReviewsLink() || $s->view()->needHideAddReviewLink()) {
+						$this->hide('.product-view .ratings .rating-links .separator');
 					}
-					if (df_cfg()->tweaks()->catalog()->product()->view()->needHideReviewsLink()) {
-						$this->getStyle()->getSelectors()
-							->addHider('.product-view .ratings .rating-links a:first-child')
-							->addHider('.product-view .ratings .rating-links a.first-child')
-						;
+					if ($s->view()->needHideReviewsLink()) {
+						$this->hide(
+							'.product-view .ratings .rating-links a:first-child'
+							,'.product-view .ratings .rating-links a.first-child'
+						);
 					}
-					if (df_cfg()->tweaks()->catalog()->product()->view()->needHideAddReviewLink()) {
-						$this->getStyle()->getSelectors()
-							->addHider('.product-view .ratings .rating-links a:last-child')
-							->addHider('.product-view .ratings .rating-links a.last-child')
-							->addHider('.product-view p.no-rating')
-						;
+					if ($s->view()->needHideAddReviewLink()) {
+						$this->hide(
+							'.product-view .ratings .rating-links a:last-child'
+							,'.product-view .ratings .rating-links a.last-child'
+							,'.product-view p.no-rating'
+						);
 					}
 				}
 			}
 		}
 		return $this;
 	}
-
-	/** @return Df_Core_Block_Element_Style */
-	private function getStyle() {
+	
+	/** @return Df_Core_Model_Css */
+	private function css() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Block_Element_Style::i(__METHOD__);
+			$this->{__METHOD__} = Df_Core_Model_Css::i();
+			/** @var Df_Tweaks_Model_Settings_Labels $fonts */
+			$fonts = Df_Tweaks_Model_Settings_Labels::s();
 			$this
-				->adjustLetterCase(
-					df_cfg()->tweaks()->labels()->getFontForButton(), '.button *, .buttons-set'
-				)
+				->adjustLetterCase($fonts->forButtons(), array('.button *', '.buttons-set'))
 				/**
 				 * 2015-02-01
 				 * Раньше существовало глобальное правило CSS,
@@ -156,33 +139,34 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 					}
 				 * Конечно, это неправильно.
 				 * Теперь у администратора есть выбор регистра отображения подписей полей ввода.
-				 * @link http://magento-forum.ru/topic/4982/
+				 * http://magento-forum.ru/topic/4982/
 				 */
-				->adjustLetterCase(
-					df_cfg()->tweaks()->labels()->getFontForFormInputs(), '.form-list label'
-				)
-				->adjustLetterCase(
-					df_cfg()->tweaks()->labels()->getFontForSideBlockLabel(), '.sidebar .block-title'
-				)
-				->adjustLetterCase(
-					df_cfg()->tweaks()->header()->getFont()
-					, array('.header .links', '.header-container .quick-access .links a')
-				)
+				->adjustLetterCase($fonts->forFormInputs(), '.form-list label')
+				->adjustLetterCase($fonts->forSideBlockTitles(), '.sidebar .block-title')
+				->adjustLetterCase(df_cfg()->tweaks()->header()->getFont(), array(
+					'.header .links', '.header-container .quick-access .links a'
+				))
 			;
 			$this->adjustReviewsAndRatings();
 			if (df_cfg()->tweaks()->footer()->removeHelpUs()) {
-				$this->getStyle()->getSelectors()->addHider('p.bugs');
+				$this->hide('p.bugs');
 			}
 			if (
 					rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
 					df_cfg()->tweaks()->catalog()->product()->view()->needHideAvailability()
 			) {
-				$this->getStyle()->getSelectors()->addHider('.product-view p.availability');
+				$this->hide('.product-view p.availability');
 			}
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * @param string|string[] $selector
+	 * @return void
+	 */
+	private function hide($selector) {$this->css()->addHider($selector);}
 
 	/**
 	 * @override
@@ -198,9 +182,8 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 		 * (и в полную противоположность Zend Framework
 		 * и всем остальным частям Magento, где используется кэширование)
 		 * означает, что блок не удет кэшироваться вовсе!
-		 * @see Mage_Core_Block_Abstract::_loadCache()
+		 * @used-by Mage_Core_Block_Abstract::_loadCache()
 		 */
 		$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 	}
-	const _CLASS = __CLASS__;
 }

@@ -12,15 +12,15 @@ class Df_Catalog_Model_ConditionsLoader extends Df_Core_Model {
 				$result = df_model('catalogrule/rule');
 				$result->load($this->getRuleId());
 				if (!$result->getId()) {
-					df_error(strtr(
+					df_error(
 						'Кто-то удалил используемое модулем «{moduleName}» ценовое правило для каталога.'
 						."\nПеренастройте его заново в административном разделе"
 						."\n«Система» → «Настройки» → {settingsPath}."
 						,array(
 							'{moduleName}' => $this->getModuleName()
-							,'{settingsPath}' => $this->getSettingsPath()
+							, '{settingsPath}' => $this->getSettingsPath()
 						)
-					));
+					);
 				}
 			}
 			$this->{__METHOD__} = rm_n_set($result);
@@ -44,9 +44,9 @@ class Df_Catalog_Model_ConditionsLoader extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__MODULE_NAME, self::V_STRING)
-			->_prop(self::$P__RULE_ID, self::V_NAT0)
-			->_prop(self::$P__SETTINGS_PATH, self::V_STRING)
+			->_prop(self::$P__MODULE_NAME, RM_V_STRING)
+			->_prop(self::$P__RULE_ID, RM_V_NAT0)
+			->_prop(self::$P__SETTINGS_PATH, RM_V_STRING)
 		;
 	}
 

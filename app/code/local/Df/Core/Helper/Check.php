@@ -5,15 +5,14 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function resourceDbCollectionAbstract(Varien_Data_Collection_Db $collection) {
-		return
-			@class_exists('Mage_Core_Model_Resource_Db_Collection_Abstract')
-			? ($collection instanceof Mage_Core_Model_Resource_Db_Collection_Abstract)
-			: ($collection instanceof Mage_Core_Model_Mysql4_Collection_Abstract)
-		;
+		return rm_is($collection,
+			'Mage_Core_Model_Resource_Db_Collection_Abstract'
+			,'Mage_Core_Model_Mysql4_Collection_Abstract'
+		);
 	}
 
 	/**
-	 * @var int|string|null|Mage_Core_Model_Store $store
+	 * @var int|string|null|Df_Core_Model_StoreM $store
 	 * @return bool
 	 */
 	public function storeAsParameterForGettingConfigValue($store) {
@@ -24,7 +23,7 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 			||
 				is_null($store)
 			||
-				($store instanceof Mage_Core_Model_Store)
+				$store instanceof Df_Core_Model_StoreM
 		;
 	}
 
@@ -33,11 +32,10 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function storeCollection(Varien_Data_Collection_Db $collection) {
-		return
-			@class_exists('Mage_Core_Model_Resource_Store_Collection')
-			? ($collection instanceof Mage_Core_Model_Resource_Store_Collection)
-			: ($collection instanceof Mage_Core_Model_Mysql4_Store_Collection)
-		;
+		return rm_is($collection,
+			'Mage_Core_Model_Resource_Store_Collection'
+			,'Mage_Core_Model_Mysql4_Store_Collection'
+		);
 	}
 
 	/**
@@ -45,11 +43,10 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function websiteCollection(Varien_Data_Collection_Db $collection) {
-		return
-			@class_exists('Mage_Core_Model_Resource_Website_Collection')
-			? ($collection instanceof Mage_Core_Model_Resource_Website_Collection)
-			: ($collection instanceof Mage_Core_Model_Mysql4_Website_Collection)
-		;
+		return rm_is($collection,
+			'Mage_Core_Model_Resource_Website_Collection'
+			,'Mage_Core_Model_Mysql4_Website_Collection'
+		);
 	}
 
 	/** @return Df_Core_Helper_Check */

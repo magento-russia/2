@@ -12,13 +12,10 @@ class Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbidden
 	public function handle() {
 		/** @var bool $needHandle */
 		static $needHandle;
-		if (!isset($needHandle)) {
+		if (is_null($needHandle)) {
 			$needHandle =
-					df_enabled(Df_Core_Feature::ACCESS_CONTROL)
-				&&
-					df_cfg()->admin()->access_control()->getEnabled()
-				&&
-					df_h()->accessControl()->getCurrentRole()
+				df_cfg()->admin()->access_control()->getEnabled()
+				&& df_h()->accessControl()->getCurrentRole()
 			;
 		}
 		if ($needHandle && df_h()->accessControl()->getCurrentRole()->isModuleEnabled()) {
@@ -37,7 +34,8 @@ class Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbidden
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Catalog_Model_Event_Product_Collection_Load_Before::_CLASS;}
+	protected function getEventClass() {return Df_Catalog_Model_Event_Product_Collection_Load_Before::_C;}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_AccessControl_Observer::catalog_product_collection_load_before() */
+	const _C = __CLASS__;
 }

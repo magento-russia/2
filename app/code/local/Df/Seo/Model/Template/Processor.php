@@ -23,10 +23,10 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by getExpressions()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param array(string => mixed) $params
 	 * @return Df_Seo_Model_Template_Expression
 	 */
@@ -42,6 +42,7 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	private function getExpressions() {
 		$result =
 			array_map(
+				/** @uses createExpression() */
 				array($this, 'createExpression')
 				,preg_match_all(
 					$this->getPattern()
@@ -56,15 +57,12 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return array */
-	private function getMappings() {
-		$result = array();
-		foreach ($this->getExpressions() as $expression) {
-			/** @var Df_Seo_Model_Template_Expression $expression */
-			$result[$expression->getRaw()] = $expression->getResult();
-		}
-		return $result;
-	}
+	/**
+	 * @uses Df_Seo_Model_Template_Expression::getRaw()
+	 * @uses Df_Seo_Model_Template_Expression::getResult()
+	 * @return array(string => string)
+	 */
+	private function getMappings() {return df_column($this->getExpressions(), 'getResult', 'getRaw');}
 
 	/** @return string */
 	private function getPattern() {return '#{([^}]+)}#mui';}
@@ -76,11 +74,12 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__TEXT, self::V_STRING)
-			->_prop(self::P__OBJECTS, self::V_ARRAY)
+			->_prop(self::P__TEXT, RM_V_STRING)
+			->_prop(self::P__OBJECTS, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Seo_Model_Template_Expression::_construct() */
+	const _C = __CLASS__;
 	const P__OBJECTS = 'objects';
 	const P__TEXT = 'text';
 	/**

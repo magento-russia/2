@@ -1,8 +1,6 @@
 body.df-theme-templatemela-classy-shop {
-	/**
-	 * Отключаем правило {text-transform: capitalize;},
-	 * потому что заголовки типа «Покупали Ранее?» смотрятся плохо
-	 */
+	// Отключаем правило {text-transform: capitalize;},
+	// потому что заголовки типа «Покупали Ранее?» смотрятся плохо
 	.account-login .content h2
 	, .fieldset .legend
 	, .box-account .box-head h2
@@ -10,21 +8,13 @@ body.df-theme-templatemela-classy-shop {
 	, .multiple-checkout h2
 	, .checkout-onepage-success h2
 	, .order-info-box h2
-	, .sales-order-print .col2-set h2 {
-		text-transform: lowercase;
-	}
-	/**
-	 * Отключаем правило {text-transform: capitalize;},
-	 * потому что заголовки типа «Обратите Внимание» смотрятся плохо
-	 */
-	.category-title h2 , .category-title h2 a,  .crosssell h2{
-		text-transform: none;
-	}
+	, .sales-order-print .col2-set h2 {text-transform: lowercase;}
+	// Отключаем правило {text-transform: capitalize;},
+	// потому что заголовки типа «Обратите Внимание» смотрятся плохо
+	.category-title h2 , .category-title h2 a,  .crosssell h2 {text-transform: none;}
 	.fancybox-wrap.df-fancybox {
 		.fancybox-inner {
-			.account-login {
-				min-width: 270px;
-			}
+			.account-login {min-width: 270px;}
 		}
 	}
 	.df-checkout-ergonomic-page {
@@ -42,9 +32,7 @@ body.df-theme-templatemela-classy-shop {
 						li.fields {
 							div.field {
 								.input-box {
-									input.input-text, select {
-										width: (300 / 2) - 10px;
-									}
+									input.input-text, select {width: (300 / 2) - 10px;}
 								}
 							}
 						}

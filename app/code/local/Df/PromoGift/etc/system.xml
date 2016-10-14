@@ -1,9 +1,9 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_promotion translate='label' module='df_promotion'>
+		<df_promotion>
 			<groups>
-				<gifts translate='label'>
+				<gifts>
 					<label>Подарки</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>2000</sort_order>
@@ -11,21 +11,23 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<!--
-								Модуль «Промо-подарки» имеет право оказывать на систему какое-либо влияние,только если данная опция установлена в «true»
+								Модуль «Промо-подарки» имеет право
+								оказывать на систему какое-либо влияние,
+								только если данная опция установлена в «true»
 							-->
-							<label>Activate?</label>
+							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-promo-gift</df_feature>
 						</enabled>
-						<enable_add_to_cart_button translate='label'>
+						<enable_add_to_cart_button>
 							<label>
 								Заменять ли в блоке выбора подарков кнопку «Подробнее...» на кнопку «Добавить к корзину»?
 							</label>
@@ -35,12 +37,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 							</depends>
 						</enable_add_to_cart_button>
-						<chooser__show_on_product_list translate='label'>
+						<chooser__show_on_product_list>
 							<label>
 								Показывать ли блок выбора подарков на страницах списка товаров?
 							</label>
@@ -50,28 +52,26 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 							</depends>
 						</chooser__show_on_product_list>
-						<chooser__show_on_product_view translate='label'>
-							<label>
-								Показывать ли блок выбора подарков на страницах товаров?
-							</label>
+						<chooser__show_on_product_view>
+							<label>Показывать ли блок выбора подарков на страницах товаров?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_layout_column</source_model>
+							<source_model>Df_Admin_Config_Source_Layout_Column</source_model>
 							<df_option_no>1</df_option_no>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 							</depends>
 						</chooser__show_on_product_view>
-						<chooser__show_on_cart_page translate='label'>
+						<chooser__show_on_cart_page>
 							<label>
 								Показывать ли блок выбора подарков на странице содержимого корзины?
 							</label>
@@ -81,12 +81,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 							</depends>
 						</chooser__show_on_cart_page>
-						<chooser__show_on_front_page translate='label'>
+						<chooser__show_on_front_page>
 							<label>
 								Показывать ли блок выбора подарков
 								на главной странице?
@@ -97,12 +97,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 							</depends>
 						</chooser__show_on_front_page>
-						<chooser__show_on_cms_pages translate='label'>
+						<chooser__show_on_cms_pages>
 							<label>
 								Показывать ли блок выбора подарков
 								на индивидуально настраиваемых посредством стандартного редактора CMS страницах?
@@ -113,13 +113,13 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends>
 								<enabled>1</enabled>
 							</depends>
 						</chooser__show_on_cms_pages>
 						<!--
-						<auto_add_to_cart translate='label'>
+						<auto_add_to_cart>
 							<label>Класть подарок в корзину покупателю автоматически?</label>
 							<comment>
 								<![CDATA[
@@ -143,7 +143,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</auto_add_to_cart>
 						-->

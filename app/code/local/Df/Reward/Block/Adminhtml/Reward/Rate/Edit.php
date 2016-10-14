@@ -1,8 +1,9 @@
 <?php
 class Df_Reward_Block_Adminhtml_Reward_Rate_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 	/**
-	 * Перекрывать надо именно конструктор, а не метод _construct,
+	 * Перекрывать надо именно конструктор, а не метод @see _construct(),
 	 * потому что родительский класс пихает инициализацию именно в конструктор.
+	 * @see Mage_Adminhtml_Block_Widget_Form_Container::__construct()
 	 * @override
 	 * @return Df_Reward_Block_Adminhtml_Reward_Rate_Edit
 	 */

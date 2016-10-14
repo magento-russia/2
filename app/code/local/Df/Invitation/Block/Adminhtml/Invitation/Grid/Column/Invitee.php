@@ -1,6 +1,6 @@
 <?php
 class Df_Invitation_Block_Adminhtml_Invitation_Grid_Column_Invitee
-	extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract {
+	extends Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract {
 	/**
 	 * Render invitee email linked to its account edit page
 	 *
@@ -18,11 +18,8 @@ class Df_Invitation_Block_Adminhtml_Invitation_Grid_Column_Invitee
 			'<a href="'
 			. rm_url_admin('*/customer/edit', array('id' => $row->getReferralId()))
 			. '">'
-			. df_text()->escapeHtml($customer->getName())
+			. rm_e($customer->getName())
 			. '</a>'
 		;
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation_Grid_Column_Invitee */
-	public static function i() {return df_block(__CLASS__);}
 }

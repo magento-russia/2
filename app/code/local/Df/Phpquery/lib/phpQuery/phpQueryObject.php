@@ -570,6 +570,7 @@ class phpQueryObject
 	 * @return boolean
 	 * @access private
 	 */
+	/** @noinspection PhpInconsistentReturnPointsInspection */
 	protected function matchClasses($class, $node) {
 		// multi-class
 		if (mb_strpos($class, '.', 1)) {
@@ -860,9 +861,11 @@ class phpQueryObject
 					: array();
 				break;
 			case 'gt':
+				/** @noinspection PhpWrongStringConcatenationInspection */
 				$this->elements = array_slice($this->elements, $args+1);
 				break;
 			case 'lt':
+				/** @noinspection PhpWrongStringConcatenationInspection */
 				$this->elements = array_slice($this->elements, 0, $args+1);
 				break;
 			case 'first':

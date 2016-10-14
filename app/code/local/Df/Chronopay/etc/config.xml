@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Chronopay>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>ChronoPay</title>
+			<version>1.0.0</version>
 		</Df_Chronopay>
 	</modules>
 	<df>
@@ -18,16 +19,6 @@
 		<blocks><df_chronopay><class>Df_Chronopay_Block</class></df_chronopay></blocks>
 		<helpers><df_chronopay><class>Df_Chronopay_Helper</class></df_chronopay></helpers>
 		<models><df_chronopay><class>Df_Chronopay_Model</class></df_chronopay></models>
-		<events>
-			<sales_convert_quote_payment_to_order_payment>
-				<observers>
-					<chronopay_sales_convert_quote_payment_to_order_payment>
-						<class>df_chronopay/gate</class>
-						<method>sales_convert_quote_payment_to_order_payment</method>
-					</chronopay_sales_convert_quote_payment_to_order_payment>
-				</observers>
-			</sales_convert_quote_payment_to_order_payment>
-		</events>
 		<payment>
 			<cc>
 				<types>
@@ -99,13 +90,13 @@
 		-->
 		<df_payment>
 			<chronopay_standard>
-				  <model>df_chronopay/standard</model>
+				  <model>Df_Chronopay_Model_Standard</model>
 				  <title>Банковская карта</title>
 				  <allowspecific>0</allowspecific>
 				  <transaction_type>O</transaction_type>
 			</chronopay_standard>
 			<chronopay_gate>
-				  <model>df_chronopay/gate</model>
+				  <model>Df_Chronopay_Model_Gate</model>
 				  <title>ChronoPay Gateway</title>
 				  <allowspecific>0</allowspecific>
 				  <transaction_type>O</transaction_type>
@@ -120,10 +111,10 @@
 		-->
 		<payment>
 			<chronopay_standard>
-				<model>df_chronopay/standard</model>
+				<model>Df_Chronopay_Model_Standard</model>
 			</chronopay_standard>
 			<chronopay_gate>
-				<model>df_chronopay/gate</model>
+				<model>Df_Chronopay_Model_Gate</model>
 			</chronopay_gate>
 		</payment>
 	</default>

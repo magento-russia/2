@@ -51,6 +51,6 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance
 	protected function _construct() {
 		parent::_construct();
 		$this->setId('customerbalance');
-		$this->setTitle(df_h()->customer()->balance()->__('Store Credit'));
+		$this->setTitle(Df_CustomerBalance_Helper_Data::s()->__('Store Credit'));
 	}
 }

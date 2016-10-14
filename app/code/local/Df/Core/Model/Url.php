@@ -3,10 +3,9 @@ class Df_Core_Model_Url extends Mage_Core_Model_Url {
 	/**
 	 * Цель перекрытия —
 	 * кэширование адресов страниц для ускорения их формирования.
-	 *
 	 * @override
-	 * @param string|null $routePath
-	 * @param array|null $routeParams
+	 * @param string|null $routePath [optional]
+	 * @param array(string => mixed)|null $routeParams [optional]
 	 * @return string
 	 */
 	public function getUrl($routePath = null, $routeParams = null) {
@@ -21,15 +20,15 @@ class Df_Core_Model_Url extends Mage_Core_Model_Url {
 	}
 
 	/**
-	 * @param string|null $routePath
-	 * @param array|null $routeParams
+	 * @param string|null $routePath [optional]
+	 * @param array(string => mixed)|null $routeParams [optional]
 	 * @return string
 	 */
 	public function getUrlParent($routePath = null, $routeParams = null) {
 		return parent::getUrl($routePath, $routeParams);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

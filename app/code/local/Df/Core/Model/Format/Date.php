@@ -24,9 +24,7 @@ class Df_Core_Model_Format_Date extends Df_Core_Model {
 	/** @return string */
 	public function getMonthInGenetiveCase() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getDate()->toString(Zend_Date::MONTH_NAME, null, Df_Core_Const::LOCALE__RUSSIAN)
-			;
+			$this->{__METHOD__} = $this->getDate()->toString(Zend_Date::MONTH_NAME, null, 'ru_RU');
 		}
 		return $this->{__METHOD__};
 	}
@@ -47,7 +45,7 @@ class Df_Core_Model_Format_Date extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__DATE, 'Zend_Date');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const FORMAT__RUSSIAN = 'dd.MM.yyyy';
 	const P__DATE = 'date';
 	/**

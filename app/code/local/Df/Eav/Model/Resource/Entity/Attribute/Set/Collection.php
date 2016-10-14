@@ -2,6 +2,12 @@
 class Df_Eav_Model_Resource_Entity_Attribute_Set_Collection
 	extends Mage_Eav_Model_Mysql4_Entity_Attribute_Set_Collection {
 	/**
+	 * @override
+	 * @return Df_Eav_Model_Resource_Entity_Attribute_Set
+	 */
+	public function getResource() {return Df_Eav_Model_Resource_Entity_Attribute_Set::s();}
+
+	/**
 	 * Вынуждены делать данный метод публичным,
 	 * потому что родительский метод
 	 * @see Mage_Eav_Model_Mysql4_Entity_Attribute_Set_Collection::_construct()
@@ -9,14 +15,6 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set_Collection
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {
-		parent::_construct();
-		$this->_init(
-			Df_Eav_Model_Entity_Attribute_Set::mf(), Df_Eav_Model_Resource_Entity_Attribute_Set::mf()
-		);
-	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Eav_Model_Resource_Entity_Attribute_Set_Collection */
-	public static function i() {return new self;}
+	public function _construct() {$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Set::_C;}
+	const _C = __CLASS__;
 }

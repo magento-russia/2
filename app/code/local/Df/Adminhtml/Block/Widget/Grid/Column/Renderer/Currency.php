@@ -15,27 +15,30 @@ class Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency
 
 	/**
 	 * @param Varien_Object $row
-	 * @return string
+	 * @return string|null
 	 */
 	private function renderDf(Varien_Object $row) {
-		$data = $row->getData($this->getColumn()->getIndex());
-		if ($data) {
-			$currency_code = $this->_getCurrencyCode($row);
-			if (!$currency_code) {
-				return $data;
-			}
-			$data = rm_float($data) * $this->_getRate($row);
-			$sign = (!!$this->getColumn()->getShowNumberSign()) && (0 < $data) ? '+' : '';
-			$data = rm_sprintf('%f', $data);
-			$data =
-				df_zf_currency($currency_code)->toCurrency(
-					$data, array('precision' => rm_currency()->getPrecision())
-				)
-			;
-			return $sign . $data;
+		/** @var Varien_Object $column */
+		$column = $this->getColumn();
+		/** @var string|null $result */
+		/** @var float|null $value */
+		$value = $row->getData($column->getDataUsingMethod('index'));
+		if (!$value) {
+			$result = $column->getDataUsingMethod('default');
 		}
-		return $this->getColumn()->getDefault();
+		else {
+			/** @var string|null $currencyCode */
+			$currencyCode = $this->_getCurrencyCode($row);
+			if (!$currencyCode) {
+				$result = $value;
+			}
+			else {
+				$value = rm_float($value) * $this->_getRate($row);
+				/** @var string $sign */
+				$sign = $column->getDataUsingMethod('show_number_sign') && (0 < $value) ? '+' : '';
+				$result = $sign . rm_money_fl($value, $currencyCode);
+			}
+		}
+		return $result;
 	}
-
-	const _CLASS = __CLASS__;
 }

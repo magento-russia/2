@@ -1,66 +1,68 @@
 <?php
-class Df_Megapolis_Model_Method extends Df_Shipping_Model_Method {
+class Df_Megapolis_Model_Method extends Df_Shipping_Model_Method_Russia {
 	/**
 	 * @override
-	 * @return float
-	 */
-	public function getCost() {
-		if (!isset($this->{__METHOD__})) {
-			if (0 === $this->getCostInRoubles()) {
-				$this->throwExceptionCalculateFailure();
-			}
-			$this->{__METHOD__} = $this->convertFromRoublesToBase($this->getCostInRoubles());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getMethod() {return 'standard';}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	public function getMethodTitle() {
-		/** @var string $result */
-		$result = '';
-		if (!is_null($this->getRequest()) && (0 !== $this->getTimeOfDeliveryMin())) {
-			$result =
-				rm_sprintf(
-					'%s'
-					,$this->formatTimeOfDelivery(
-						$this->getTimeOfDeliveryMin()
-						,$this->getTimeOfDeliveryMax()
-					)
-				)
-			;
-		}
-		return $result;
-	}
-
-	/**
-	 * @override
-	 * @return bool
+	 * @return void
 	 * @throws Exception
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryDestinationIsRussia()
-					->checkCountryOriginIsRussia()
-					->checkWeightIsLE(31.5)
-					->checkOriginIsMoscow()
-					->checkCityDestinationIsNotEmpty()
-				;
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryDestinationIsRussia()
+			->checkCountryOriginIsRussia()
+			->checkWeightIsLE(31.5)
+			->checkOriginIsMoscow()
+			->checkCityDestinationIsNotEmpty()
+		;
+	}
+
+	/**
+	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
+	 * @return float
+	 */
+	protected function getCost() {return rm_nat0($this->getApiRate()->getRate());}
+
+	/**
+	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
+	 */
+	protected function getDeliveryTime() {
+		/** @var int|int[] $result */
+		$result = 0;
+		/** @var array(string => string|mixed[]) $regionData */
+		$regionData = df_a($this->_deliveryTimeMap, $this->rr()->getDestinationRegionName());
+		df_assert_array($regionData);
+		/** @var string $capital */
+		$capital = df_a($regionData, 'capital');
+		df_assert_string($capital);
+		/** @var array(string => int) $timeToCapital */
+		$timeToCapital = df_a($regionData, 'time_to_capital');
+		df_assert_array($timeToCapital);
+		/** @var string $destinationCityUppercased */
+		$destinationCityUppercased = mb_strtoupper($this->rr()->getDestinationCity());
+		df_assert_string($destinationCityUppercased);
+		if ($destinationCityUppercased === mb_strtoupper($capital)) {
+			$result = $timeToCapital;
+		}
+		else {
+			/** @var array(string => array(string => int))|null $specialConditions */
+			$specialConditions = df_a($regionData, 'special_conditions');
+			if (!is_null($specialConditions)) {
+				df_assert_array($specialConditions);
+				$result = df_a($specialConditions, $destinationCityUppercased);
 			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
+			if (!$result) {
+				/** @var array(string => int) $timeFromCapitalToAnotherLocation */
+				$timeFromCapitalToAnotherLocation =
+					df_a($regionData, 'time_from_capital_to_another_location')
+				;
+				df_assert_array($timeFromCapitalToAnotherLocation);
+				$result = array(
+					df_a($timeToCapital, 'min') +  df_a($timeFromCapitalToAnotherLocation, 'min')
+					,df_a($timeToCapital, 'max') + df_a($timeFromCapitalToAnotherLocation, 'max')
+				);
 			}
 		}
 		return $result;
@@ -69,85 +71,15 @@ class Df_Megapolis_Model_Method extends Df_Shipping_Model_Method {
 	/** @return Df_Megapolis_Model_Request_Rate */
 	private function getApiRate() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Megapolis_Model_Request_Rate::i(array(
-				Df_Megapolis_Model_Request_Rate::P__LOCATION__DESTINATION =>
-					$this->getRequest()->getLocatorDestination()->getResult()
-				,Df_Megapolis_Model_Request_Rate::P__CARGO__WEIGHT =>
-					$this->getRequest()->getWeightInKilogrammes()
+			$this->{__METHOD__} = Df_Megapolis_Model_Request_Rate::i(
+				$this->rr()->getLocatorDestination()->getResult()
+				,$this->rr()->getWeightInKilogrammes()
 				// Объявленная стоимость не может превышать 50000 рублей
-				,Df_Megapolis_Model_Request_Rate::P__CARGO__DECLARED_VALUE =>
-					min(50000, $this->getRequest()->getDeclaredValueInRoubles())
-			));
+				,min(50000, $this->rr()->getDeclaredValueInRoubles())
+			);
 		}
 		return $this->{__METHOD__};
 	}
-
-	/** @return int */
-	private function getCostInRoubles() {return rm_nat0($this->getApiRate()->getResult());}
-
-	/** @return array(string => int) */
-	private function getTimeOfDeliveryAsArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var array $result */
-			$result = null;
-			/** @var array(string => string|mixed[]) $regionData */
-			$regionData =
-				df_a(
-					$this->_deliveryTimeMap
-					,$this->getRequest()->getDestinationRegionName()
-				)
-			;
-			df_assert_array($regionData);
-			/** @var string $capital */
-			$capital = df_a($regionData, 'capital');
-			df_assert_string($capital);
-			/** @var array(string => int) $timeToCapital */
-			$timeToCapital = df_a($regionData, 'time_to_capital');
-			df_assert_array($timeToCapital);
-			/** @var string $destinationCityUppercased */
-			$destinationCityUppercased = mb_strtoupper($this->getRequest()->getDestinationCity());
-			df_assert_string($destinationCityUppercased);
-			if ($destinationCityUppercased === mb_strtoupper($capital)) {
-				$result = $timeToCapital;
-			}
-			else {
-				/** @var array(string => array(string => int))|null $specialConditions */
-				$specialConditions = df_a($regionData, 'special_conditions');
-				if (!is_null($specialConditions)) {
-					df_assert_array($specialConditions);
-					$result = df_a($specialConditions, $destinationCityUppercased);
-				}
-				if (is_null($result)) {
-					/** @var array(string => int) $timeFromCapitalToAnotherLocation */
-					$timeFromCapitalToAnotherLocation =
-						df_a($regionData, 'time_from_capital_to_another_location')
-					;
-					df_assert_array($timeFromCapitalToAnotherLocation);
-					$result =
-						array(
-							'min' =>
-									df_a($timeToCapital, 'min')
-								+
-									df_a($timeFromCapitalToAnotherLocation, 'min')
-							,'max' =>
-									df_a($timeToCapital, 'max')
-								+
-									df_a($timeFromCapitalToAnotherLocation, 'max')
-						)
-					;
-				}
-			}
-			df_result_array($result);
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return int */
-	private function getTimeOfDeliveryMax() {return rm_nat0(df_a($this->getTimeOfDeliveryAsArray(), 'max'));}
-
-	/** @return int */
-	private function getTimeOfDeliveryMin() {return rm_nat0(df_a($this->getTimeOfDeliveryAsArray(), 'min'));}
 
 	/** @var array(string => mixed[]) */
 	private $_deliveryTimeMap =
@@ -706,7 +638,8 @@ class Df_Megapolis_Model_Method extends Df_Shipping_Model_Method {
 					,'time_from_capital_to_another_location' => array('min' => 1, 'max' => 4)
 				)
 		)
-
 	;
-	const _CLASS = __CLASS__;
+
+	/** @used-by Df_Megapolis_Model_Collector::getMethods() */
+	const _C = __CLASS__;
 }

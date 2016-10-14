@@ -2,6 +2,8 @@
 class Df_Page_Block_Js_Cookie extends Mage_Page_Block_Js_Cookie {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -26,7 +28,7 @@ class Df_Page_Block_Js_Cookie extends Mage_Page_Block_Js_Cookie {
 		 * (и в полную противоположность Zend Framework
 		 * и всем остальным частям Magento, где используется кэширование)
 		 * означает, что блок не удет кэшироваться вовсе!
-		 * @see Mage_Core_Block_Abstract::_loadCache()
+		 * @used-by Mage_Core_Block_Abstract::_loadCache()
 		 */
 		$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 	}

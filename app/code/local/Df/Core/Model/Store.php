@@ -1,7 +1,7 @@
 <?php
 class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 	/**
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return string
 	 */
 	public function getDomain($store = null) {
@@ -10,7 +10,7 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 			df_assert($store->getId());
 		}
 		else {
-			$store = Mage::app()->getStore($store);
+			$store = rm_store($store);
 		}
 		if (!isset($this->{__METHOD__}[$store->getId()])) {
 			/** @var string $storeBaseUriAsText */
@@ -29,29 +29,36 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Core_Model_Resource_Store_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Core_Model_Resource_Store::mf());
-	}
+	public function getResourceCollection() {return self::c();}
 
-	const _CLASS = __CLASS__;
+	/**
+	 * @override
+	 * @return Df_Core_Model_Resource_Store
+	 */
+	protected function _getResource() {return Df_Core_Model_Resource_Store::s();}
+
+	/** @used-by Df_Core_Model_Resource_Store_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__NAME = 'name';
 	/**
 	 * @static
-	 * @param bool $loadDefault[optional]
+	 * @param bool $loadDefault [optional]
 	 * @return Df_Core_Model_Resource_Store_Collection
 	 */
 	public static function c($loadDefault = false) {
-		return self::s()->getCollection()->setLoadDefault($loadDefault);
+		/** @var Df_Core_Model_Resource_Store_Collection $result */
+		$result = new Df_Core_Model_Resource_Store_Collection;
+		$result->setLoadDefault($loadDefault);
+		return $result;
 	}
 
 	/**
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return void
 	 */
-	public static function deleteStatic(Mage_Core_Model_Store $store) {
+	public static function deleteStatic(Df_Core_Model_StoreM $store) {
 		df_assert($store->isCanDelete());
 		$store->delete();
 		Mage::dispatchEvent('store_delete', array('store' => $store));
@@ -64,11 +71,6 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 	 * @return Df_Core_Model_Store
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/**
-	 * @see Df_Core_Model_Resource_Store_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Core_Model_Store */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

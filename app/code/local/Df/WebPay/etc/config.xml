@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_WebPay>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>WEBPAY</title>
+			<version>1.0.0</version>
 		</Df_WebPay>
 	</modules>
 	<global>
@@ -40,7 +41,7 @@
 		-->
 		<payment>
 			<df-webpay>
-				<model>df_webpay/payment</model>
+				<model>Df_WebPay_Model_Payment</model>
 			</df-webpay>
 		</payment>
 	</default>

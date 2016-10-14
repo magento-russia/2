@@ -1,6 +1,6 @@
 <?php
 // 2016-10-09
-class Df_MoySklad_Product_Exporter extends Df_Catalog_Product_Exporter {
+class Df_MoySklad_Product_Exporter extends Df_Catalog_Model_Product_Exporter {
 	/**
 	 * 2016-10-09
 	 * @override

@@ -1,12 +1,10 @@
 <?php
-/**
- * @method Df_Core_Controller_Admin _title($text = null, $resetIfExists = true)
- */
+/** @method Df_Core_Controller_Admin _title($text = null, $resetIfExists = true) */
 abstract class Df_Core_Controller_Admin extends Mage_Adminhtml_Controller_Action {
 	/**
 	 * @param string $label
 	 * @param string $title
-	 * @param string|null $link[optional]
+	 * @param string|null $link [optional]
 	 * @return Df_Core_Controller_Admin
 	 */
 	public function addBreadcrumb($label, $title, $link = null) {
@@ -14,22 +12,12 @@ abstract class Df_Core_Controller_Admin extends Mage_Adminhtml_Controller_Action
 		return $this;
 	}
 
-	/** @return Df_Core_Controller_Admin */
 	/**
 	 * @param string $path
 	 * @param array $arguments
-	 * @return Df_Core_Controller_Admin
+	 * @return void
 	 */
-	public function redirect($path, $arguments = array()) {
-		$this->_redirect($path, $arguments);
-		return $this;
-	}
-
-	/** @return Df_Core_Controller_Admin */
-	public function redirectReferer() {
-		$this->_redirectReferer();
-		return $this;
-	}
+	public function redirect($path, $arguments = array()) {$this->_redirect($path, $arguments);}
 
 	/**
 	 * @param string $menuPath
@@ -58,5 +46,6 @@ abstract class Df_Core_Controller_Admin extends Mage_Adminhtml_Controller_Action
 		parent::_renderTitles();
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Core_Model_Action_Admin::_construct() */
+	const _C = __CLASS__;
 }

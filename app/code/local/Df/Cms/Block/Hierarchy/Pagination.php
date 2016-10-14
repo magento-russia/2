@@ -37,7 +37,7 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 		 * (и в полную противоположность Zend Framework
 		 * и всем остальным частям Magento, где используется кэширование)
 		 * означает, что блок не удет кэшироваться вовсе!
-		 * @see Mage_Core_Block_Abstract::_loadCache()
+		 * @used-by Mage_Core_Block_Abstract::_loadCache()
 		 */
 		$this->setData('cache_lifetime', self::CACHE_LIFETIME_STANDARD);
 	}
@@ -245,27 +245,25 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 
 	/**
 	 * Retrieve Nodes collection array
-	 * @return array
+	 * @return array(int => Df_Cms_Model_Hierarchy_Node)
 	 */
-	public function getNodes()
-	{
+	public function getNodes() {
 		if (!$this->hasData('_nodes')) {
-			// initialize nodes
-			$nodes	= $this->_node
-				->setCollectActivePagesOnly(true)
-				->getParentNodeChildren();
-			$flags	= array(
-				'previous' => false,'next'	 => false
-			);
-			$count	= count($nodes);
+			/** @var array(int => Df_Cms_Model_Hierarchy_Node) $nodes */
+			$nodes	=
+				$this->_node
+					->setCollectActivePagesOnly(true)
+					->getParentNodeChildren()
+			;
+			$flags = array('previous' => false, 'next' => false);
+			$count = count($nodes);
 			$previous = null;
-			$next	 = null;
-			$first	= null;
-			$last	 = null;
-			$current  = 0;
+			$next = null;
+			$first = null;
+			$last = null;
+			$current = 0;
 			foreach ($nodes as $k => $node) {
 				/** @var Df_Cms_Model_Hierarchy_Node $node */
-
 				$node->setPageNumber($k + 1);
 				$node->setIsCurrent(false);
 				if (is_null($first)) {
@@ -367,15 +365,15 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 	}
 
 	/**
-	 * Render block HTML
+	 * @override
+	 * @see Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
-	protected function _toHtml()
-	{
+	protected function _toHtml() {
 		if (!$this->_node || !$this->getPaginationEnabled()) {
 			return '';
 		}
-
 		// collect nodes to output pagination in template
 		$nodes = $this->getNodes();
 		// don't display pagination with one page
@@ -387,7 +385,9 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Template::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	protected function getCacheKeyParamsAdditional() {return $this->_getData('node_id');}
+	protected function cacheKeySuffix() {return $this->_getData('node_id');}
 }

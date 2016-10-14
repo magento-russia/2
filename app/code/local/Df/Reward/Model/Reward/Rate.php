@@ -23,6 +23,7 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 			case self::RATE_EXCHANGE_DIRECTION_TO_POINTS:
 				return df_h()->reward()->formatRateToPoints($points, $amount, $currencyCode);
 		}
+		return null;
 	}
 
 	/**
@@ -172,8 +173,8 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 			if ($websiteId === null) {
 				$websiteId = $this->getWebsiteId();
 			}
-			$currencyCode = Mage::app()->getWebsite($websiteId)->getBaseCurrencyCode();
-			return df_zf_currency ($currencyCode)->toCurrency($amount);
+			$currencyCode = rm_website($websiteId)->getBaseCurrencyCode();
+			return rm_currency ($currencyCode)->toCurrency($amount);
 		}
 		return $amount;
 	}
@@ -193,17 +194,22 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Reward_Model_Resource_Reward_Rate_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Reward_Model_Resource_Reward_Rate::mf());
-	}
-	const _CLASS = __CLASS__;
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * @override
+	 * @return Df_Reward_Model_Resource_Reward_Rate
+	 */
+	protected function _getResource() {return Df_Reward_Model_Resource_Reward_Rate::s();}
+
+	/** @used-by Df_Reward_Model_Resource_Reward_Rate_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__ID = 'rate_id';
 
 	/** @return Df_Reward_Model_Resource_Reward_Rate_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Reward_Model_Resource_Reward_Rate_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -217,11 +223,6 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 	 * @return Df_Reward_Model_Reward_Rate
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Reward_Model_Resource_Reward_Rate_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Reward_Model_Reward_Rate */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

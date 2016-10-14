@@ -394,4 +394,4 @@ class PelEntryVersion extends PelEntryUndefined {
 	  return Pel::fmt('Version %s', $v);
   }
 
-}?>
+}

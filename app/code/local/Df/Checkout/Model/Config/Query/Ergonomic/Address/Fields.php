@@ -5,17 +5,21 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 		if (!isset($this->{__METHOD__})) {
 			// Обязательно клонируем объект,
 			// потому что Magento кэширует настроечные узлы
-			$this->{__METHOD__} =
-				clone df()->config()->getNodeByKey($this->getPathByAddressType('default'))
-			;
-			$this->{__METHOD__}
-				->extend(
-					df()->config()->getNodeByKey($this->getPathByAddressType($this->getAddressType()))
-					,$overwrite = true
-				)
-			;
+			$this->{__METHOD__} = clone rm_config_node($this->getPathByAddressType('default'));
+			$this->{__METHOD__}->extend(
+				rm_config_node($this->getPathByAddressType($this->getAddressType()))
+				,$overwrite = true
+			);
 		}
 		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @param string $addressType
+	 * @return Mage_Core_Model_Config_Element
+	 */
+	private function getNodeByAddressType($addressType) {
+		return df_concat_xpath('df/checkout/address', $addressType, 'fields');
 	}
 
 	/**
@@ -23,7 +27,7 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 	 * @return string
 	 */
 	private function getPathByAddressType($addressType) {
-		return rm_config_key('df/checkout/address', $addressType, 'fields');
+		return df_concat_xpath('df/checkout/address', $addressType, 'fields');
 	}
 
 	/** @return string */
@@ -35,9 +39,9 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ADDRESS_TYPE, self::V_STRING_NE);
+		$this->_prop(self::P__ADDRESS_TYPE, RM_V_STRING_NE);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ADDRESS_TYPE = 'address_type';
 	/**
 	 * @static

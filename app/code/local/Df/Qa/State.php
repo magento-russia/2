@@ -157,7 +157,7 @@ class Df_Qa_State extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__SHOW_CONTEXT, self::V_BOOL);
+		$this->_prop(self::$P__SHOW_CONTEXT, RM_V_BOOL);
 	}
 
 	/**

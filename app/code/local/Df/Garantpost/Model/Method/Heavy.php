@@ -8,42 +8,33 @@ abstract class Df_Garantpost_Model_Method_Heavy extends Df_Garantpost_Model_Meth
 
 	/**
 	 * @override
-	 * @return bool
+	 * @return void
 	 * @throws Exception
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryDestinationIs(Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA)
-					->checkWeightIsGT(31.5)
-					->checkWeightIsLE(80)
-				;
-				if (0 >= $this->getCostInRoubles()) {
-					$this->throwExceptionNoRate();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryDestinationIs(Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA)
+			->checkWeightIsGT(31.5)
+			->checkWeightIsLE(80)
+		;
+		if (!$this->getCostInRoubles()) {
+			$this->throwExceptionNoRate();
 		}
-		return $result;
 	}
 
 	/**
 	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
 	 * @return int
 	 */
-	protected function getCostInRoubles() {return rm_nat($this->getApiRate()->getResult());}
+	protected function getCost() {return rm_nat($this->getApiRate()->getResult());}
 
 	/** @return Df_Garantpost_Model_Request_Rate_Heavy */
 	private function getApiRate() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Garantpost_Model_Request_Rate_Heavy::i(array(
-				Df_Garantpost_Model_Request_Rate_Heavy::P__WEIGHT =>
-					$this->getRequest()->getWeightInKilogrammes()
+				Df_Garantpost_Model_Request_Rate_Heavy::P__WEIGHT => $this->rr()->getWeightInKilogrammes()
 				,Df_Garantpost_Model_Request_Rate_Heavy::P__SERVICE => $this->getServiceCode()
 				,Df_Garantpost_Model_Request_Rate_Heavy::P__LOCATION_ORIGIN_ID =>
 					$this->getLocationOriginId()
@@ -57,67 +48,28 @@ abstract class Df_Garantpost_Model_Method_Heavy extends Df_Garantpost_Model_Meth
 	/** @return string */
 	private function getLocationDestinationName() {
 		$this->checkCityDestinationIsNotEmpty();
-		/** @var string $result */
-		$result =
-			implode(
-				' '
-				,array(
-					$this->getRequest()->getDestinationCity()
-					,$this->getLocationDestinationSuffix()
-				)
-			)
-		;
-		return $result;
+		return implode(' ', array($this->rr()->getDestinationCity(), $this->getLocationDestinationSuffix()));
 	}
 
 	/** @return string|null */
 	private function getLocationOriginId() {
-		/** @var string|null $result */
-		$result = null;
-		if ($this->isDeliveryFromMoscow()) {
-			$result = 'msk';
-		}
-		else {
-			if (
-				df_strings_are_equal_ci(
-					'Московская'
-					,$this->getRequest()->getOriginRegionName()
-				)
-			) {
-				$result = 'obl';
-			}
-		}
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
+		return
+			$this->isDeliveryFromMoscow()
+			? 'msk'
+			: (df_strings_are_equal_ci('Московская', $this->rr()->getOriginRegionName())
+				? 'obl'
+				: null
+			)
+		;
 	}
 
 	/** @return string */
 	private function getServiceCode() {
-		/** @var string[] $states */
-		$states =
-			array(
-				false => 'term'
-				,true => 'door'
-			)
-		;
-		return
-			implode(
-				'-'
-				,array(
-					df_a(
-						$states
-						,$this->getRmConfig()->service()->needDeliverCargoToTheBuyerHome()
-					)
-					,df_a(
-						$states
-						,$this->getRmConfig()->service()->needGetCargoFromTheShopStore()
-					)
-				)
-			)
-		;
+		/** @var array(bool => string) $states */
+		$states = array(false => 'term', true => 'door');
+		return implode('-', array(
+			df_a($states, $this->configS()->needDeliverCargoToTheBuyerHome())
+			,df_a($states, $this->configS()->needGetCargoFromTheShopStore())
+		));
 	}
-
-	const _CLASS = __CLASS__;
 }

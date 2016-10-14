@@ -1,9 +1,9 @@
 <?php
-class Df_UkrPoshta_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_UkrPoshta_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
-	 * @param Df_Shipping_Model_Method|Df_Shipping_Model_Rate_Result_Error[] $methods
-	 * @return Df_Shipping_Model_Method|Df_Shipping_Model_Rate_Result_Error[]
+	 * @param Df_Shipping_Model_Method|Df_Shipping_Rate_Result_Error[] $methods
+	 * @return Df_Shipping_Model_Method|Df_Shipping_Rate_Result_Error[]
 	 */
 	protected function postProcessMethods(array $methods) {
 		/**
@@ -20,7 +20,7 @@ class Df_UkrPoshta_Model_Collector extends Df_Shipping_Model_Collector {
 		/** @var Df_UkrPoshta_Model_Method|null $methodToPointOfIssue */
 		$methodToPointOfIssue = null;
 		foreach ($methods as $method) {
-			/** @var Df_UkrPoshta_Model_Method|Df_Shipping_Model_Rate_Result_Error $method */
+			/** @var Df_UkrPoshta_Model_Method|Df_Shipping_Rate_Result_Error $method */
 			if (
 					($method instanceof Df_UkrPoshta_Model_Method)
 				&&
@@ -49,10 +49,10 @@ class Df_UkrPoshta_Model_Collector extends Df_Shipping_Model_Collector {
 				}
 			}
 		}
-		/** @var Df_Shipping_Model_Method|Df_Shipping_Model_Rate_Result_Error[] $result */
+		/** @var Df_Shipping_Model_Method|Df_Shipping_Rate_Result_Error[] $result */
 		$result = array();
 		foreach ($methods as $method) {
-			/** @var Df_UkrPoshta_Model_Method|Df_Shipping_Model_Rate_Result_Error $method */
+			/** @var Df_UkrPoshta_Model_Method|Df_Shipping_Rate_Result_Error $method */
 			if (
 					!($method instanceof Df_UkrPoshta_Model_Method)
 				||

@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_PageCache_Model_Resource_Crawler getResource()
- */
+/** @method Df_PageCache_Model_Resource_Crawler getResource() */
 class Df_PageCache_Model_Crawler extends Df_Core_Model {
 	/**
 	 * Crawl all system urls
@@ -16,10 +14,10 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 			foreach ($storesInfo as $info) {
 				$options	= array(CURLOPT_USERAGENT => self::USER_AGENT);
 				$storeId	= $info['store_id'];
-				if (!Mage::app()->getStore($storeId)->getConfig(self::XML_PATH_CRAWLER_ENABLED)) {
+				if (!rm_store($storeId)->getConfig(self::XML_PATH_CRAWLER_ENABLED)) {
 					continue;
 				}
-				$threads = (int)Mage::app()->getStore($storeId)->getConfig(self::XML_PATH_CRAWLER_THREADS);
+				$threads = (int)rm_store($storeId)->getConfig(self::XML_PATH_CRAWLER_THREADS);
 				if (!$threads) {
 					$threads = 1;
 				}
@@ -61,11 +59,17 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 			}
 		}
 
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
 		}
 		return $this;
 	}
+
+	/**
+	 * @override
+	 * @return Df_PageCache_Model_Resource_Crawler
+	 */
+	protected function _getResource() {return Df_PageCache_Model_Resource_Crawler::s();}
 
 	/**
 	 * Если в адресе присутствуют символы кириллицы, то кодируем их.
@@ -78,7 +82,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 	 */
 	private function encodeUrlPath($path) {
 		df_param_string($path, 0);
-		return df_concat_url(array_map('rawurlencode', explode('/', $path)));
+		return df_concat_url(array_map('rawurlencode', df_explode_url($path)));
 	}
 
 	/** @return Varien_Http_Adapter_Curl */
@@ -103,17 +107,17 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 	private function getStoresInfo() {
 		$baseUrls = array();
 		foreach (Mage::app()->getStores() as $store) {
-			$website = Mage::app()->getWebsite($store->getWebsiteId());
+			/** @var Df_Core_Model_StoreM $store */
+			/** @var Mage_Core_Model_Website $website */
+			$website = rm_website($store->getWebsiteId());
 			$defaultWebsiteStore = $website->getDefaultStore();
-			$defaultWebsiteBaseUrl	  = $defaultWebsiteStore->getBaseUrl();
-			$defaultWebsiteBaseCurrency = $defaultWebsiteStore->getDefaultCurrencyCode();
-			$baseUrl			= Mage::app()->getStore($store)->getBaseUrl();
-			$defaultCurrency	= Mage::app()->getStore($store)->getDefaultCurrencyCode();
+			$defaultWebsiteBaseUrl = $defaultWebsiteStore->getBaseUrl();
+			$baseUrl = $store->getBaseUrl();
+			$defaultCurrency = $store->getDefaultCurrencyCode();
 			$cookie = '';
 			if (($baseUrl == $defaultWebsiteBaseUrl) && ($defaultWebsiteStore->getId() != $store->getId())) {
 				$cookie = 'store='.$store->getCode().';';
 			}
-
 			$baseUrls[]= array(
 				'store_id' => $store->getId(),'base_url' => $baseUrl,'cookie'   => $cookie,);
 			if ($store->getConfig(self::XML_PATH_CRAWL_MULTICURRENCY)
@@ -122,7 +126,9 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 				foreach ($currencies as $currencyCode) {
 					if ($currencyCode != $defaultCurrency) {
 						$baseUrls[]= array(
-							'store_id' => $store->getId(),'base_url' => $baseUrl,'cookie'   => $cookie.'currency='.$currencyCode.';'
+							'store_id' => $store->getId()
+							,'base_url' => $baseUrl
+							,'cookie' => $cookie.'currency='.$currencyCode.';'
 						);
 					}
 				}
@@ -141,15 +147,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 		return $this;
 	}
 
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_PageCache_Model_Resource_Crawler::mf());
-	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const XML_PATH_CRAWL_MULTICURRENCY = 'df_speed/page_cache/auto_crawling__multicurrency';
 	const XML_PATH_CRAWLER_ENABLED	 = 'df_speed/page_cache/auto_crawling__enabled';
 	const XML_PATH_CRAWLER_THREADS	 = 'df_speed/page_cache/auto_crawling__num_threads';

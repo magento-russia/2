@@ -20,11 +20,9 @@ class Df_Core_Model_Event_Controller_Action_Postdispatch extends Df_Core_Model_E
 	/** @return bool */
 	public function isClientExpectedHtml() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_strings_are_equal_ci(
-					Zend_Mime::TYPE_HTML, df_a($this->getContentTypesExpectedByClient(), 0)
-				)
-			;
+			$this->{__METHOD__} = df_strings_are_equal_ci(
+				Zend_Mime::TYPE_HTML, df_a($this->getContentTypesExpectedByClient(), 0)
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -33,12 +31,12 @@ class Df_Core_Model_Event_Controller_Action_Postdispatch extends Df_Core_Model_E
 	public function getRequest() {return $this->getController()->getRequest();}
 
 	/** @return Mage_Core_Controller_Varien_Action */
-	public function getController() {return $this->getEventParam(self::EVENT_PARAM__CONTROLLER_ACTION);}
+	public function getController() {return $this->getEventParam('controller_action');}
 
 	/** @return string[] */
 	private function getContentTypesExpectedByClient() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_parse_csv($this->getAcceptHeader());
+			$this->{__METHOD__} = df_csv_parse($this->getAcceptHeader());
 		}
 		return $this->{__METHOD__};
 	}
@@ -46,8 +44,15 @@ class Df_Core_Model_Event_Controller_Action_Postdispatch extends Df_Core_Model_E
 	/** @return string */
 	private function getAcceptHeader() {
 		if (!isset($this->{__METHOD__})) {
+			/**
+			 * Обратите внимание, что названия заголовков могут быть записаны в запросе
+			 * как прописными буквами, так и строчными,
+			 * однако @uses Zend_Controller_Request_Http::getHeader()
+			 * самостоятельно приводит их к нужному регистру
+			 * http://stackoverflow.com/questions/5258977/are-http-headers-case-sensitive
+			 */
 			/** @var string|bool $result */
-			$result = $this->getRequest()->getHeader(self::HEADER__ACCEPT);
+			$result = $this->getRequest()->getHeader('Accept');
 			$this->{__METHOD__} = $result ? $result : '';
 		}
 		return $this->{__METHOD__};
@@ -57,16 +62,5 @@ class Df_Core_Model_Event_Controller_Action_Postdispatch extends Df_Core_Model_E
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
-
-	const _CLASS = __CLASS__;
-	const EXPECTED_EVENT_PREFIX = 'controller_action_postdispatch';
-	const EVENT_PARAM__CONTROLLER_ACTION = 'controller_action';
-	/**
-	 * Обратите внимание, что названия заголовков могут быть записаны в запросе
-	 * как прописными буквами, так и строчными,
-	 * однако Zend_Controller_Request_Http::getHeader() самостоятельно приводит их к нужному регистру
-	 * @link http://stackoverflow.com/questions/5258977/are-http-headers-case-sensitive
-	 */
-	const HEADER__ACCEPT = 'Accept';
+	protected function getExpectedEventPrefix() {return 'controller_action_postdispatch';}
 }

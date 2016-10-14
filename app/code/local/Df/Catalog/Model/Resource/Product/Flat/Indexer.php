@@ -7,20 +7,25 @@ class Df_Catalog_Model_Resource_Product_Flat_Indexer
 	 * @override
 	 * @return string[]
 	 */
-	public function getAttributeCodes() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $cacheKey */
-			$cacheKey = Df_Eav_Model_Cache::s()->makeKey(__METHOD__);
-			/** @var string[]|bool $result */
-			$result = Df_Eav_Model_Cache::s()->loadDataArray($cacheKey);
-			if (false === $result) {
-				$result = parent::getAttributeCodes();
-				Df_Eav_Model_Cache::s()->saveDataArray($cacheKey, $result);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getAttributeCodes() {return rm_eav_cache($this, __FUNCTION__);}
+
+	/**
+	 * @see getAttributeCodes()
+	 * @return string[]
+	 */
+	public function getAttributeCodes_() {return parent::getAttributeCodes();}
+
+	/**
+	 * 2015-02-09
+	 * Возвращаем объект-одиночку именно таким способом,
+	 * потому что наш класс перекрывает посредством <rewrite> системный класс,
+	 * и мы хотим, чтобы вызов @see Mage::getResourceSingleton() ядром Magento
+	 * возвращал тот же объект, что и наш метод @see s(),
+	 * сохраняя тем самым объект одиночкой (это важно, например, для производительности:
+	 * сохраняя объект одиночкой — мы сохраняем его кэш между всеми пользователями объекта).
+	 * @return Df_Catalog_Model_Resource_Product_Flat_Indexer
+	 */
+	public static function s() {return Mage::getResourceSingleton('catalog/product_flat_indexer');}
 }
 
 

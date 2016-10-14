@@ -9,9 +9,7 @@ class Df_Adminhtml_Model_Translator_Config extends Df_Core_Model {
 	/** @return array(string => string) */
 	private function getMap() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Config_Element|bool $node */
-			$node = Mage::getConfig()->getNode('adminhtml/translate/sections');
-			$this->{__METHOD__} = !$node ? array() : $node->asCanonicalArray();
+			$this->{__METHOD__} = rm_config_a('adminhtml/translate/sections');
 		}
 		return $this->{__METHOD__};
 	}

@@ -1,7 +1,4 @@
 <?php
-/**
- * @method Df_Cms_Model_Resource_Page getResource()
- */
 class Df_Cms_Model_Resource_Page_Collection extends Mage_Cms_Model_Mysql4_Page_Collection {
 	/**
 	 * @override
@@ -15,6 +12,12 @@ class Df_Cms_Model_Resource_Page_Collection extends Mage_Cms_Model_Mysql4_Page_C
 		}
 		parent::__construct($resource);
 	}
+
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Page
+	 */
+	public function getResource() {return Df_Cms_Model_Resource_Page::s();}
 
 	/**
 	 * @param string|null $paramName [optional]
@@ -63,10 +66,8 @@ class Df_Cms_Model_Resource_Page_Collection extends Mage_Cms_Model_Mysql4_Page_C
 		 * @see Mage_Cms_Model_Resource_Page::getIsUniquePageToStores()
 		 */
 		if ($this->needLoadStoresInfo()) {
-			foreach ($this->_items as $page) {
-				/** @var Df_Cms_Model_Page $page */
-				$page->loadStoresInfo();
-			}
+			/** @uses Df_Cms_Model_Page::loadStoresInfo() */
+			$this->walk('loadStoresInfo');
 		}
 		return $this;
 	}
@@ -89,11 +90,11 @@ class Df_Cms_Model_Resource_Page_Collection extends Mage_Cms_Model_Mysql4_Page_C
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Cms_Model_Page::mf(), Df_Cms_Model_Resource_Page::mf());
+		$this->_itemObjectClass = Df_Cms_Model_Page::_C;
 	}
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * Если Вы намерены изменять (обновлять, сохранять) элементы коллекции,
 	 * то при создании коллекции укажите параметр load_stores_info = true,

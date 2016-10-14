@@ -5,9 +5,7 @@ class Df_Garantpost_Model_Request_Locations_Internal_ForRate extends Df_Garantpo
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
-			'Referer' => 'http://www.garantpost.ru/tools/transit/'
-		));
+		return array('Referer' => 'http://www.garantpost.ru/tools/transit/') + parent::getHeaders();
 	}
 
 	/**
@@ -30,18 +28,7 @@ class Df_Garantpost_Model_Request_Locations_Internal_ForRate extends Df_Garantpo
 	protected function normalizeLocationName($locationName) {
 		df_param_string($locationName, 0);
 		$locationName = mb_strtoupper($locationName);
-		$locationName =
-			strtr(
-				$locationName
-				,array(
-					' АО' => ''
-					,' Г.' => ''
-					,' КРАЙ' => ''
-					,' ОБЛ.' => ''
-					,' РЕСП.' => ''
-				)
-			)
-		;
+		$locationName = str_replace(array(' АО', ' Г.', ' КРАЙ', ' ОБЛ.', ' РЕСП.'), null, $locationName);
 		$locationName = df_trim($locationName, ', ');
 		/** @var string $result */
 		$result =
@@ -58,7 +45,7 @@ class Df_Garantpost_Model_Request_Locations_Internal_ForRate extends Df_Garantpo
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Garantpost_Model_Request_Locations_Internal_ForRate */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

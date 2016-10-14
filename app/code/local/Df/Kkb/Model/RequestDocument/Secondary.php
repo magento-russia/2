@@ -1,22 +1,18 @@
 <?php
-/**
- * @method Df_Kkb_Model_Request_Secondary getRequest()
- */
+/** @method Df_Kkb_Model_Request_Secondary getRequest() */
 class Df_Kkb_Model_RequestDocument_Secondary extends Df_Kkb_Model_RequestDocument_Signed {
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getLetterAttributes() {
-		return array('id' => $this->getServiceConfig()->getShopId());
-	}
+	protected function getLetterAttributes() {return array('id' => $this->configS()->getShopId());}
 
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
 	protected function getLetterBody() {
-		return df_clean(array(
+		return array_filter(array(
 			'command' => $this->getDocumentData_Command()
 			,'payment' => $this->getDocumentData_Payment()
 			,'reason' => $this->getDocumentData_Reason()
@@ -25,24 +21,18 @@ class Df_Kkb_Model_RequestDocument_Secondary extends Df_Kkb_Model_RequestDocumen
 
 	/** @return array(string => mixed) */
 	private function getDocumentData_Command() {
-		return array(
-			Df_Varien_Simplexml_Element::KEY__ATTRIBUTES =>
-				array('type' => $this->getTransactionType())
-		);
+		return array(Df_Core_Sxe::ATTR => array('type' => $this->getTransactionType()));
 	}
 
 	/** @return array(string => mixed) */
 	private function getDocumentData_Payment() {
-		return array(
-			Df_Varien_Simplexml_Element::KEY__ATTRIBUTES =>
-				array(
-					'reference' => $this->getRequest()->getPaymentExternalId()
-					,'approval_code' => $this->getResponsePayment()->getPaymentCodeApproval()
-					,'orderid' => $this->getOrderId()
-					,'amount' => $this->getAmount()
-					,'currency_code' => $this->getCurrencyCode()
-				)
-		);
+		return array(Df_Core_Sxe::ATTR => array(
+			'reference' => $this->getRequest()->getPaymentExternalId()
+			,'approval_code' => $this->getResponsePayment()->getPaymentCodeApproval()
+			,'orderid' => $this->orderIId()
+			,'amount' => $this->amount()
+			,'currency_code' => $this->getCurrencyCode()
+		));
 	}
 
 	/** @return string|null */
@@ -63,9 +53,9 @@ class Df_Kkb_Model_RequestDocument_Secondary extends Df_Kkb_Model_RequestDocumen
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST, Df_Kkb_Model_Request_Secondary::_CLASS);
+		$this->_prop(self::P__REQUEST, Df_Kkb_Model_Request_Secondary::_C);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const TRANSACTION__CAPTURE = 'complete';
 	const TRANSACTION__VOID = 'reverse';
 	/**

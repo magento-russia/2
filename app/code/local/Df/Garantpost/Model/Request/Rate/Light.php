@@ -41,13 +41,13 @@ class Df_Garantpost_Model_Request_Rate_Light extends Df_Garantpost_Model_Request
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__LOCATION_DESTINATION_ID, self::V_INT)
-			->_prop(self::P__LOCATION_ORIGIN_ID, self::V_INT)
-			->_prop(self::P__SERVICE, self::V_STRING_NE)
-			->_prop(self::P__WEIGHT, self::V_FLOAT)
+			->_prop(self::P__LOCATION_DESTINATION_ID, RM_V_INT)
+			->_prop(self::P__LOCATION_ORIGIN_ID, RM_V_INT)
+			->_prop(self::P__SERVICE, RM_V_STRING_NE)
+			->_prop(self::P__WEIGHT, RM_V_FLOAT)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__LOCATION_DESTINATION_ID = 'location_destination_id';
 	const P__LOCATION_ORIGIN_ID = 'location_origin_id';
 	const P__SERVICE = 'service';

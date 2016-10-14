@@ -59,42 +59,81 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 			'attribute_set_id' => $setId
 			, 'attribute_id' => $attributeId
 		);
-		$select =
-			$this->_conn->select()
-				->from($table)
-				->where('attribute_set_id = :attribute_set_id')
-				->where('attribute_id = :attribute_id')
+		$select = rm_select()
+			->from($table, array('attribute_group_id', 'entity_attribute_id'))
+			->where('attribute_set_id = :attribute_set_id')
+			->where('attribute_id = :attribute_id')
 		;
-		$row = $this->_conn->fetchRow($select, $bind);
+		$row = rm_conn()->fetchRow($select, $bind);
 		if ($row) {
 			if ($row['attribute_group_id'] != $groupId) {
-				$where = array('entity_attribute_id =?' => $row['entity_attribute_id']);
-				$data  = array('attribute_group_id' => $groupId);
-				$this->_conn->update($table, $data, $where);
+				rm_conn()->update(
+					$table
+					, array('attribute_group_id' => $groupId)
+					, array('? = entity_attribute_id ' => $row['entity_attribute_id'])
+				);
 				$result = self::ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP;
+				rm_eav_reset();
 			}
 		}
 		else {
-			$data =
-				array(
-					'entity_type_id' => $entityTypeId,'attribute_set_id' => $setId,'attribute_group_id' => $groupId,'attribute_id' => $attributeId,'sort_order' =>
-						$this->getAttributeSortOrder(
-							$entityTypeId
-							,$setId
-							,$groupId
-							,$sortOrder
-						)
+			rm_conn()->insert($table, array(
+				'entity_type_id' => $entityTypeId
+				,'attribute_set_id' => $setId
+				,'attribute_group_id' => $groupId
+				,'attribute_id' => $attributeId
+				,'sort_order' => $this->getAttributeSortOrder(
+					$entityTypeId, $setId, $groupId, $sortOrder
 				)
-			;
-			$this->_conn->insert($table, $data);
+			));
 			$result = self::ADD_ATTRIBUTE_TO_SET__ADDED;
+			rm_eav_reset();
 		}
-		/**
-		 * Вот в таких ситуациях, когда у нас меняется структура прикладного типа товаров,
-		 * нам нужно сбросить глобальный кэш EAV.
-		 */
-		rm_eav_reset();
 		return $result;
+	}
+
+	/**
+	 * 2015-08-09
+	 * @return array(string => array(string => string))
+	 */
+	public function defaultProductAttributes() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				df_a(df_a($this->getDefaultEntities(), 'catalog_product'), 'attributes')
+				/**
+				 * 2015-08-09
+				 * Родительский метод @uses Mage_Catalog_Model_Resource_Setup::getDefaultEntities()
+				 * не добавляет свойство для налоговогой группы товара.
+				 * Это свойство добавляет модуль Mage_Tax в своём установщике:
+				 * https://github.com/OpenMage/magento-mirror/blob/1.9.2.1/app/code/core/Mage/Tax/sql/tax_setup/install-1.6.0.0.php#L263-L285
+				 * Скопировал оттуда код для добавления.
+				 */
+				+ array('tax_class_id' => array(
+					'group' => 'Prices'
+					,'type' => 'int'
+					,'backend' => ''
+					,'frontend' => ''
+					,'label' => 'Tax Class'
+					,'input' => 'select'
+					,'class' => ''
+					,'source' => 'tax/class_source_product'
+					,'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_WEBSITE
+					,'visible' => true
+					,'required' => true
+					,'user_defined' => false
+					,'default' => ''
+					,'searchable' => true
+					,'filterable' => false
+					,'comparable' => false
+					,'visible_on_front' => false
+					,'visible_in_advanced_search' => true
+					,'used_in_product_listing' => true
+					,'unique' => false
+					,'apply_to' => 'simple,configurable,virtual,downloadable,bundle'
+				))
+			;
+		}
+		return $this->{__METHOD__};
 	}
 	
 	/** @return int */
@@ -151,18 +190,18 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 	 * (в том числе и добавленные нами свойства).
 	 *
 	 * Поэтому правильное решение для товаров
-	 * смотрите у наследников класса @see Df_Core_Model_Setup_AttributeSet:
+	 * смотрите у наследников класса @see Df_Core_Setup_AttributeSet:
 	 * @see Df_Shipping_Model_Processor_AddDimensionsToProductAttributeSet
-	 * @see Df_YandexMarket_Model_Setup_Processor_AttributeSet
+	 * @see Df_YandexMarket_Setup_AttributeSet
 	 * В целом, оно заключается в загрузке/создании/изменении свойства
-	 * вызовом @see Df_Dataflow_Model_Registry_Collection_Attributes::findByCodeOrCreate()
-	 * (df()->registry()->attributes()->findByCodeOrCreate())
+	 * вызовом @see Df_Dataflow_Model_Registry_Collection_Attributes::createOrUpdate()
+	 * (rm_attributes()->createOrUpdate())
 	 * и затем ручной привязкой свойства к конкретному прикладному типу товаров,
 	 * а когда надо привязать свойство сразу ко всем прикладным типам товаров,
 	 * то это делается в цикле с вызовом соответствующего настройщика прикладного типа товаров.
-	 * Смотрите, например, @see Df_YandexMarket_Model_Setup_2_38_2::process():
+	 * Смотрите, например, @see Df_YandexMarket_Setup_AttributeSet::p():
 		foreach (df()->registry()->attributeSets() as $attributeSet) {
-			Df_YandexMarket_Model_Setup_Processor_AttributeSet::process($attributeSet);
+			Df_YandexMarket_Setup_AttributeSet::process($attributeSet);
 		}
 	 *
 	 * @param string $entityType
@@ -188,9 +227,14 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 		df_param_string($groupName, 1);
 		df_param_integer($ordering, 2);
 		$this->cleanCache();
-		if ($this->getAttributeId($entityType, $attributeId)) {
-			$this->removeAttribute($entityType, $attributeId);
-		}
+		/**
+		 * 2015-03-13
+		 * Обратите внимание, что метод @uses Mage_Eav_Model_Entity_Setup::removeAttribute()
+		 * сам проверяет, присутствует ли свойство, и выполняет работу только при наличии свойства,
+		 * поэтому вручную проверять присутствие свойства не нужно.
+		 * @see rm_remove_attribute()
+		 */
+		$this->removeAttribute($entityType, $attributeId);
 		/** @var int $entityTypeId */
 		$entityTypeId = $this->getEntityTypeId($entityType);
 		/** @var int $attributeSetId */
@@ -220,7 +264,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 		);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const ADD_ATTRIBUTE_TO_SET__ADDED = 'added';
 	const ADD_ATTRIBUTE_TO_SET__NOT_CHANGED = 'not_changed';
 	const ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP = 'changed_group';

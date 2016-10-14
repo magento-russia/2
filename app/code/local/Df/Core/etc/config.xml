@@ -2,15 +2,15 @@
 <config>
 	<modules>
 		<Df_Core>
-			<version>2.23.6</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.23.6</version>
 		</Df_Core>
 	</modules>
 	<df>
-		<version>2.49.11</version>
+		<version>3.0.0</version>
 		<jquery>
 			<core>
-				<cdn>http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js</cdn>
+				<cdn>http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js</cdn>
 				<local>df/js/system/jquery.js</local>
 			</core>
 			<migrate>
@@ -104,7 +104,7 @@
 					<!--
 						Цель перекрытия —
 						устранение дефекта показа картинок в редакторе.
-						@link http://magento-forum.ru/topic/2320/
+						http://magento-forum.ru/topic/2320/
 					-->
 					<email_template_filter>Df_Widget_Model_Template_Filter</email_template_filter>
 					<!--
@@ -210,42 +210,42 @@
 		<events>
 			<controller_action_layout_generate_blocks_after>
 				<observers>
-					<df_core__controller_action_layout_generate_blocks_after>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_action_layout_generate_blocks_after</method>
-					</df_core__controller_action_layout_generate_blocks_after>
+					</Df_Core>
 				</observers>
 			</controller_action_layout_generate_blocks_after>
 			<controller_action_layout_generate_blocks_before>
 				<observers>
-					<df_core__controller_action_layout_generate_blocks_before>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_action_layout_generate_blocks_before</method>
-					</df_core__controller_action_layout_generate_blocks_before>
+					</Df_Core>
 				</observers>
 			</controller_action_layout_generate_blocks_before>
 			<controller_action_layout_render_before>
 				<observers>
-					<df_core__controller_action_layout_render_before>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_action_layout_render_before</method>
-					</df_core__controller_action_layout_render_before>
+					</Df_Core>
 				</observers>
 			</controller_action_layout_render_before>
 			<controller_action_predispatch>
 				<observers>
-					<df_core__controller_action_predispatch>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_action_predispatch</method>
-					</df_core__controller_action_predispatch>
+					</Df_Core>
 				</observers>
 			</controller_action_predispatch>
 			<controller_action_postdispatch>
 				<observers>
-					<df_core__controller_action_predispatch>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_action_postdispatch</method>
-					</df_core__controller_action_predispatch>
+					</Df_Core>
 				</observers>
 			</controller_action_postdispatch>
 			<!--
@@ -267,12 +267,20 @@
 			</controller_front_init_before>
 			<controller_front_send_response_after>
 				<observers>
-					<df_core__controller_front_send_response_after>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_front_send_response_after</method>
-					</df_core__controller_front_send_response_after>
+					</Df_Core>
 				</observers>
 			</controller_front_send_response_after>
+			<core_config_data_save_commit_after>
+				<observers>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
+						<method>core_config_data_save_commit_after</method>
+					</Df_Core>
+				</observers>
+			</core_config_data_save_commit_after>
 			<default>
 				<observers>
 					<Df_Core>
@@ -317,47 +325,47 @@
 		<events>
 			<admin_session_user_login_success>
 				<observers>
-					<df_core__admin_session_user_login_success>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>admin_session_user_login_success</method>
-					</df_core__admin_session_user_login_success>
+					</Df_Core>
 				</observers>
 			</admin_session_user_login_success>
 		</events>
 	</adminhtml>
 	<frontend>
+		<events>
+			<core_block_abstract_to_html_after>
+				<observers>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
+						<method>core_block_abstract_to_html_after</method>
+					</Df_Core>
+				</observers>
+			</core_block_abstract_to_html_after>
+			<core_block_abstract_to_html_before>
+				<observers>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
+						<method>core_block_abstract_to_html_before</method>
+					</Df_Core>
+				</observers>
+			</core_block_abstract_to_html_before>
+		</events>
 		<layout>
 			<updates>
 				<df_core module='df_core'><file>df/core.xml</file></df_core>
 			</updates>
 		</layout>
-		<events>
-			<core_block_abstract_to_html_after>
-				<observers>
-					<df_core__core_block_abstract_to_html_after>
-						<class>df_core/dispatcher</class>
-						<method>core_block_abstract_to_html_after</method>
-					</df_core__core_block_abstract_to_html_after>
-				</observers>
-			</core_block_abstract_to_html_after>
-			<core_block_abstract_to_html_before>
-				<observers>
-					<df_core__core_block_abstract_to_html_before>
-						<class>df_core/dispatcher</class>
-						<method>core_block_abstract_to_html_before</method>
-					</df_core__core_block_abstract_to_html_before>
-				</observers>
-			</core_block_abstract_to_html_before>
-		</events>
 	</frontend>
 	<install>
 		<events>
 			<controller_action_postdispatch_install_wizard_end>
 				<observers>
-					<df_core__controller_action_postdispatch_install_wizard_end>
-						<class>df_core/dispatcher</class>
+					<Df_Core>
+						<class>Df_Core_Observer</class>
 						<method>controller_action_postdispatch_install_wizard_end</method>
-					</df_core__controller_action_postdispatch_install_wizard_end>
+					</Df_Core>
 				</observers>
 			</controller_action_postdispatch_install_wizard_end>
 		</events>

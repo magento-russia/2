@@ -49,6 +49,7 @@ class Df_Pec_Model_Request_Locations extends Df_Shipping_Model_Request {
 		$locationNames = array_keys($locationsFlatten);
 		df_assert_array($locationNames);
 		/** @var string[] $locationNamesProcessed */
+		/** @uses processLocationName() */
 		$locationNamesProcessed = array_map(array($this, 'processLocationName'), $locationNames);
 		df_assert_array($locationNamesProcessed);
 		$result =
@@ -64,10 +65,10 @@ class Df_Pec_Model_Request_Locations extends Df_Shipping_Model_Request {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by parseLocations()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param string $locationName
 	 * @return string
 	 */
@@ -76,7 +77,6 @@ class Df_Pec_Model_Request_Locations extends Df_Shipping_Model_Request {
 		return mb_strtoupper(df_trim(rm_preg_match('#([^\(]+)#u', $locationName)));
 	}
 
-	const _CLASS = __CLASS__;
 	/** @return Df_Pec_Model_Request_Locations */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

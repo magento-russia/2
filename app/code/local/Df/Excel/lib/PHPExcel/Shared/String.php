@@ -514,7 +514,7 @@ class PHPExcel_Shared_String
 	 *
 	 * Can handle both BOM'ed data and un-BOM'ed data.
 	 * Assumes Big-Endian byte order if no BOM is available.
-	 * This function was taken from http://php.net/manual/en/function.utf8-decode.php
+	 * This function was taken from http://php.net/manual/function.utf8-decode.php
 	 * and $bom_be parameter added.
 	 *
 	 * @param   string  $str  UTF-16 encoded data to decode.

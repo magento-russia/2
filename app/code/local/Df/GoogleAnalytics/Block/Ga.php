@@ -2,6 +2,8 @@
 class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -12,22 +14,20 @@ class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 			&&
 				df_cfg()->speed()->blockCaching()->googleAnalytics()
 		) {
-			$result =
-				array_merge(
-					$result
-					,array(
-						get_class($this)
-						,Mage::app()->getStore()->getId()
-						/**
-						 * Здесь md5 не нужно,
-						 * потому что @see Mage_Core_Block_Abstract::getCacheKey()
-						 * использует аналогичную md5 функцию sha1
-						 */
-						,$this->getPageName()
-					)
-					,df_a($this->getData(), 'order_ids', array())
+			$result = array_merge(
+				$result
+				, array(
+					get_class($this)
+					,rm_store_id()
+					/**
+					 * Здесь @see md5() не нужно,
+					 * потому что @used-by Mage_Core_Block_Abstract::getCacheKey()
+					 * использует аналогичную функцию @uses sha1()
+					 */
+					,$this->getPageName()
 				)
-			;
+				,df_a($this->getData(), 'order_ids', array())
+			);
 		}
 		return $result;
 	}
@@ -51,7 +51,7 @@ class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 			 * (и в полную противоположность Zend Framework
 			 * и всем остальным частям Magento, где используется кэширование)
 			 * означает, что блок не удет кэшироваться вовсе!
-			 * @see Mage_Core_Block_Abstract::_loadCache()
+			 * @used-by Mage_Core_Block_Abstract::_loadCache()
 			 */
 			$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 		}

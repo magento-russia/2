@@ -96,7 +96,7 @@ class Df_Logging_Model_Archive extends Df_Core_Model {
 		return 1 === preg_match('/^[0-9]{10}\.csv$/', $baseName);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @var string */
 	protected $_file = '';
 	/**

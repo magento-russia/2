@@ -69,6 +69,9 @@ class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
 	private static $PARAM__CLASS = 'class';
 
 	/**
+	 * @used-by s()
+	 * @used-by Df_Dataflow_Model_Registry_Collection::getValidator()
+	 * @used-by Df_Core_Validator::byName()
 	 * @param string $className
 	 * @return Df_Zf_Validate_Class
 	 */
@@ -77,12 +80,15 @@ class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
 		return new self(array(self::$PARAM__CLASS => $className));
 	}
 	/**
+	 * @used-by Df_Qa_Method::validateParamClass()
+	 * @used-by Df_Qa_Method::validateResultClass()
+	 * @used-by Df_Qa_Method::validateValueClass()
 	 * @param string $className
 	 * @return Df_Zf_Validate_Class
 	 */
 	public static function s($className) {
 		/** @var array(string => Df_Zf_Validate_Class) */
-		static $result = array();
+		static $result;
 		if (!isset($result[$className])) {
 			$result[$className] = self::i($className);
 		}

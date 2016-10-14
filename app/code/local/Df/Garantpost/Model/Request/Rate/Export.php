@@ -36,19 +36,19 @@ class Df_Garantpost_Model_Request_Rate_Export extends Df_Garantpost_Model_Reques
 		if (0 === $result) {
 			df_error(
 				'Служба Гарантпост не доставляет грузы в %s'
-				,df_h()->directory()->country()->getByIso2Code(
-					$this->getDestinationCountryIso2()
-				)->getNameInCaseAccusative()
+				,rm_country($this->getDestinationCountryIso2())->getNameInCaseAccusative()
 			);
 		}
 		df_result_integer($result);
 		return $result;
 	}
 
-	/** @return string */
-	private function getDestinationCountryIso2() {
-		return $this->cfg(self::P__DESTINATION_COUNTRY_ISO2);
-	}
+	/**
+	 * Возвращает 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
+	 * https://ru.wikipedia.org/wiki/ISO_3166-1
+	 * @return string
+	 */
+	private function getDestinationCountryIso2() {return $this->cfg(self::P__DESTINATION_COUNTRY_ISO2);}
 
 	/** @return string */
 	private function getWeight() {return $this->cfg(self::P__WEIGHT);}
@@ -60,11 +60,11 @@ class Df_Garantpost_Model_Request_Rate_Export extends Df_Garantpost_Model_Reques
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__DESTINATION_COUNTRY_ISO2, self::V_STRING_NE)
-			->_prop(self::P__WEIGHT, self::V_FLOAT)
+			->_prop(self::P__DESTINATION_COUNTRY_ISO2, RM_V_ISO2)
+			->_prop(self::P__WEIGHT, RM_V_FLOAT)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__DESTINATION_COUNTRY_ISO2  = 'destination_country_iso2';
 	const P__WEIGHT = 'weight';
 	const POST_PARAM__DESTINATION_COUNTRY_ID = 'i_to_1';
@@ -76,8 +76,11 @@ class Df_Garantpost_Model_Request_Rate_Export extends Df_Garantpost_Model_Reques
 	 * @param float $weight
 	 * @return Df_Garantpost_Model_Request_Rate_Export
 	 */
-	public static function i($destinationCountryIso2Code, $weight) {return new self(array(
-		self::P__DESTINATION_COUNTRY_ISO2 => $destinationCountryIso2Code
-		, self::P__WEIGHT => $weight
-	));}
+	public static function i($destinationCountryIso2Code, $weight) {
+		df_param_iso2($destinationCountryIso2Code, 0);
+		return new self(array(
+			self::P__DESTINATION_COUNTRY_ISO2 => $destinationCountryIso2Code
+			, self::P__WEIGHT => $weight
+		));
+	}
 }

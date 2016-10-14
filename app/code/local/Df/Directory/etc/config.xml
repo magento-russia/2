@@ -2,32 +2,37 @@
 <config>
 	<modules>
 		<Df_Directory>
-			<version>2.25.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.25.0</version>
 		</Df_Directory>
 	</modules>
 	<global>
+		<blocks>
+			<df_directory>
+				<class>Df_Directory_Block</class>
+			</df_directory>
+		</blocks>
 		<currency>
 			<import>
 				<services>
 					<rm-russia>
 						<name>Банк России</name>
-						<model>df_directory/currency_import_russia</model>
+						<model>Df_Directory_Model_Currency_Import_Russia</model>
 						<ordering>-400</ordering>
 					</rm-russia>
 					<rm-ukraine>
 						<name>Национальный банк Украины</name>
-						<model>df_directory/currency_import_ukraine</model>
+						<model>Df_Directory_Model_Currency_Import_Ukraine</model>
 						<ordering>-300</ordering>
 					</rm-ukraine>
 					<rm-kazakhstan>
 						<name>Национальный банк Казахстана</name>
-						<model>df_directory/currency_import_kazakhstan</model>
+						<model>Df_Directory_Model_Currency_Import_Kazakhstan</model>
 						<ordering>-200</ordering>
 					</rm-kazakhstan>
 					<rm-belarus>
 						<name>Национальный банк Республики Беларусь</name>
-						<model>df_directory/currency_import_belarus</model>
+						<model>Df_Directory_Model_Currency_Import_Belarus</model>
 						<ordering>-100</ordering>
 					</rm-belarus>
 				</services>
@@ -65,7 +70,7 @@
 							в) когда обе валюты не являются базовой,
 							и по этой причине нет ни прямого курса конвертации, ни обратного,
 							но возможна конвартация через базовую (третью) валюту:
-							@link http://magento-forum.ru/topic/4335/
+							http://magento-forum.ru/topic/4335/
 					-->
 					<currency>Df_Directory_Model_Currency</currency>
 				</rewrite>
@@ -73,6 +78,12 @@
 			<!-- Для Magento версии меньше 1.6 -->
 			<directory_mysql4>
 				<rewrite>
+					<!--
+						Цель перекрытия —
+						добавление возможности ставить популярные страны выше остальных
+						в списке стран
+					-->
+					<country_collection>Df_Directory_Model_Resource_Country_Collection</country_collection>
 					<!--
 						В Magento CE < 1.6
 						класс Mage_Directory_Model_Mysql4_Region
@@ -93,6 +104,16 @@
 					<region_collection>Df_Directory_Model_Resource_Region_Collection</region_collection>
 				</rewrite>
 			</directory_mysql4>
+			<directory_resource>
+				<rewrite>
+					<!--
+						Цель перекрытия —
+						добавление возможности ставить популярные страны выше остальных
+						в списке стран.
+					-->
+					<country_collection>Df_Directory_Model_Resource_Country_Collection</country_collection>
+				</rewrite>
+			</directory_resource>
 		</models>
 		<resources>
 			<df_directory_setup>
@@ -105,18 +126,18 @@
 		<events>
 			<core_collection_abstract_load_before>
 				<observers>
-					<df_directory__core_collection_abstract_load_before>
-						<class>df_directory/dispatcher</class>
+					<Df_Directory>
+						<class>Df_Directory_Observer</class>
 						<method>core_collection_abstract_load_before</method>
-					</df_directory__core_collection_abstract_load_before>
+					</Df_Directory>
 				</observers>
 			</core_collection_abstract_load_before>
 			<core_collection_abstract_load_after>
 				<observers>
-					<df_directory__core_collection_abstract_load_after>
-						<class>df_directory/dispatcher</class>
+					<Df_Directory>
+						<class>Df_Directory_Observer</class>
 						<method>core_collection_abstract_load_after</method>
-					</df_directory__core_collection_abstract_load_after>
+					</Df_Directory>
 				</observers>
 			</core_collection_abstract_load_after>
 		</events>
@@ -889,6 +910,13 @@
 			</import>
 		</currency>
 		<df_directory>
+			<countries_popular>
+				<duplicate>0</duplicate>
+				<enable>1</enable>
+				<label_all>все</label_all>
+				<label_popular>СНГ</label_popular>
+				<order>RU,UA,BY,KZ,KG,AM</order>
+			</countries_popular>
 			<regions_ru>
 				<enabled>1</enabled>
 			</regions_ru>

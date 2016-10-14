@@ -7,7 +7,7 @@ class Df_Parser_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function log($message) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		Mage::log(rm_sprintf($arguments), null, 'df.parser.log', true);
+		Mage::log(rm_format($arguments), null, 'df.parser.log', true);
 		return $this;
 	}
 

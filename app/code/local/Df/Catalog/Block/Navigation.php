@@ -13,7 +13,7 @@ class Df_Catalog_Block_Navigation extends Mage_Catalog_Block_Navigation {
 		/** @var Varien_Data_Tree_Node_Collection|Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection|Varien_Data_Collection|array $result */
 		$result = parent::getStoreCategories();
 		/** @var bool $isNodeCollection */
-		$isNodeCollection = ($result instanceof Varien_Data_Tree_Node_Collection);
+		$isNodeCollection = $result instanceof Varien_Data_Tree_Node_Collection;
 		/** @var bool $isArray */
 		$isArray = is_array($result);
 		df_assert(
@@ -23,7 +23,7 @@ class Df_Catalog_Block_Navigation extends Mage_Catalog_Block_Navigation {
 			||
 				df_h()->catalog()->check()->categoryCollection($result)
 			||
-				($result instanceof Varien_Data_Collection)
+				$result instanceof Varien_Data_Collection
 		);
 		Mage::dispatchEvent('rm_menu_top_add_submenu', array('menu' => $this->getAdditionalRoot()));
 		if ($isArray || $isNodeCollection) {

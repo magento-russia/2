@@ -1,6 +1,7 @@
 <?php
 /**
  * @method Df_Dataflow_Model_Import_Product_Row getRow()
+ * @see Df_Dataflow_Model_Importer_Row::getRow()
  */
 class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row {
 	/** @return Df_Catalog_Model_Product */
@@ -8,9 +9,18 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Catalog_Model_Product $result */
 			$result = df_product();
-			rm_eav_reset($reindexFlat = false);
+			/**
+			 * 2015-08-11
+			 * Раньше здесь стояло:
+			 * rm_eav_reset($reindexFlatProducts = false);
+			 * Однако если предшествующий код работал с кэшем правильно,
+			 * то нам вовсе нет необходимости грохать здесь кэш полностью.
+			 * А если предшествующий код работал с кэшем неправильно,
+			 * то уж лучше устранить в нём дефекты, чем грохать кэш полностью
+			 * и тем самым снижать скорость импорта товаров.
+			 */
 			// Перед загрузкой товара из базы данных устанавливаем для него магазин.
-			$result->setStoreId($this->getRow()->getStore()->getId());
+			$result->setStoreId($this->storeId());
 			if (!$this->getRow()->isProductNew()) {
 				$result->load($this->getRow()->getId());
 				if (rm_nat0($result->getId()) !== rm_nat0($this->getRow()->getId())) {
@@ -65,32 +75,30 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		if ($this->getRow()->isProductNew()) {
 			// Убеждаемся в присутствии значений обязательных для нового товара полей
 			$this->assertRequiredAttributesExistence();
+			// 2015-08-10
+			// Проверяем, что все требуемые Magento свойства
+			// входят в тот прикладной тип товаров,
+			// которому принадлежит текущий создаваемый товар.
+			$this->getRow()->assertRequiredAttributesBelongToTheProductAttributeSet();
 		}
 		$this->importCategoriesUsingStandardTechnology();
 		$this->importCategoriesUsingAdvancedTechnology();
 		$this->initWebsiteAttributeForProduct();
 		$this->importAttributeValues();
-		if (!$this->getProduct()->getDataUsingMethod('visibility')) {
-			$this->getProduct()
-				->getDataUsingMethod(
-					Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE
-				)
-			;
-		}
 		$this->importInventoryData();
 		$this->importTierPrices();
 		$this->getProduct()->saveRm($isMassUpdate = true);
 		/**
-		 * Решение проблемы @link http://magento-forum.ru/topic/3963/
+		 * Решение проблемы http://magento-forum.ru/topic/3963/
 		 * Когда обмен выполняется с многовитринным магазином,
 		 * то в магазине atletica.baaton.com почему-то не устанавливатся
 		 * значения по-умолчанию (store = 0),
 		 * и по этой причине товары не показываются на витрине.
 		 * В чём дело-не понял, но оказывается значения можно устанавливать и вручную.
 		 */
-		if ($this->getRow()->getStore()->getId() !== Mage_Core_Model_App::ADMIN_STORE_ID) {
+		if ($this->storeId() !== Mage_Core_Model_App::ADMIN_STORE_ID) {
 			/** @var Df_Catalog_Model_Product $productInCurrentScope */
-			$productInCurrentScope = $this->getProduct()->forStore($this->getRow()->getStore()->getId());
+			$productInCurrentScope = $this->getProduct()->forStore($this->storeId());
 			/** @var Df_Catalog_Model_Product $productInAdminScope */
 			$productInAdminScope = $this->getProduct()->forStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 			/**
@@ -123,7 +131,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		}
 		$this->importImages();
 		/**
-		 * Модули «1С: Управление торговлей» и «МойСклад»
+		 * Модули «1С:Управление торговлей» и «МойСклад»
 		 * импортируют опции товара самостоятельно.
 		 * Избежание вызова @see Df_Dataflow_Model_Importer_Product::importCustomOptions()
 		 * ускоряет работу этих модулей.
@@ -164,11 +172,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 
 	/** @return Df_Dataflow_Model_Importer_Product */
 	private function importCustomOptions() {
-		if (
-				df_enabled(Df_Core_Feature::DATAFLOW_CO, $this->getRow()->getStore()->getId())
-			&& 
-				df_cfg()->dataflow()->products()->getCustomOptionsSupport()
-		) {
+		if (df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
 			$this->reloadProduct();
 			$this->getCustomOptionsImporter()->process();
 			$this->getProduct()->saveRm($isMassUpdate = true);
@@ -193,17 +197,9 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 	private function importImages() {
 		/** @var array $primaryImages */
 		$primaryImages = $this->getGalleryImporter()->getPrimaryImages();
-		if (0 < count($primaryImages)) {
+		if ($primaryImages) {
 			$this->reloadProduct();
-			/** @var bool $importAdditionalImagesIsAllowed */
-			$importAdditionalImagesIsAllowed =
-				df_enabled(Df_Core_Feature::DATAFLOW_IMAGES, $this->getRow()->getStore()->getId())
-			;
-			if (
-					$importAdditionalImagesIsAllowed
-				&&
-					df_cfg()->dataflow()->products()->getDeletePreviousImages()
-			) {
+			if (df_cfg()->dataflow()->products()->getDeletePreviousImages()) {
 				//remove previous images
 				$this->getProduct()->deleteImages();
 			}
@@ -214,7 +210,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 				df_assert_array($fields);
 				$imagePath = Mage::getBaseDir('media') . DS . 'import' . trim ($file);
 				if (!is_file($imagePath)) {
-					throw new Exception(rm_sprintf("Image file %s does not exist", $imagePath));
+					df_error("Image file %s does not exist", $imagePath);
 				}
 				try {
 					$this->getProduct()->addImageToMediaGallery(
@@ -224,15 +220,11 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 						,$exclude = false
 					);
 				}
-				catch(Exception $e) {
+				catch (Exception $e) {
 					df_handle_entry_point_exception($e, false);
 				}
 			}
-			if (
-					$importAdditionalImagesIsAllowed
-				&&
-					df_cfg()->dataflow()->products()->getGallerySupport()
-			) {
+			if (df_cfg()->dataflow()->products()->getGallerySupport()) {
 				$this->getGalleryImporter()->addAdditionalImagesToProduct();
 			}
 			$this->getProduct()->saveRm($isMassUpdate = true);
@@ -299,7 +291,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 			}
 		}
 		/** @var array(array(string => int))|null $existingTierPrices */
-		$existingTierPrices = $this->getProduct()->getDataUsingMethod('tier_price');
+		$existingTierPrices = $this->getProduct()->getTierPrice();
 		if ($existingTierPrices) {
 			foreach ($existingTierPrices as $existingTierPrice) {
 				/** @var array(string => int) $existingTierPrice */
@@ -330,7 +322,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		return $this;
 	}
 
-	/** @return array */
+	/** @return string[] */
 	private function getInventoryFields() {
 		return $this->helper()->getInventoryFieldsByProductType($this->getProduct()->getTypeId());
 	}
@@ -362,13 +354,9 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 
 	/** @return Df_Dataflow_Model_Importer_Product */
 	private function importCategoriesUsingAdvancedTechnology() {
-		if (
-				df_enabled(Df_Core_Feature::DATAFLOW_CATEGORIES, $this->getRow()->getStore()->getId())
-			&&
-				df_cfg()->dataflow()->products()->getEnhancedCategorySupport()
-		) {
+		if (df_cfg()->dataflow()->products()->getEnhancedCategorySupport()) {
 			Df_Dataflow_Model_Importer_Product_Categories::i(
-				$this->getProduct(), $this->getRow()->getAsArray(), $this->getRow()->getStore()
+				$this->getProduct(), $this->getRow()->getAsArray(), $this->store()
 			)->process();
 		}
 		return $this;
@@ -379,13 +367,13 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		/** @var array $websiteIds */
 		$websiteIds = $this->getProduct()->getWebsiteIds();
 		df_assert_array($websiteIds);
-		if (!in_array($this->getRow()->getStore()->getWebsiteId(), $websiteIds)) {
+		if (!in_array($this->store()->getWebsiteId(), $websiteIds)) {
 			/**
 			 * Это условие заимствовано из стандартного кода.
 			 * Ценность не вполне осознана мной.
 			 */
-			if (0 !== $this->getRow()->getStore()->getId()) {
-				$websiteIds[]= $this->getRow()->getStore()->getWebsiteId();
+			if (0 !== $this->storeId()) {
+				$websiteIds[]= $this->store()->getWebsiteId();
 				$this->getProduct()->setDataUsingMethod('website_ids', $websiteIds);
 			}
 		}
@@ -394,28 +382,21 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 
 	/** @return Df_Dataflow_Model_Importer_Product */
 	private function initWebsiteAttributeFromWebsiteIdsField() {
-		if (0 < count($this->getRow()->getWebsites())) {
+		if ($this->getRow()->getWebsites()) {
 			/** @var array $websiteIds */
 			$websiteIds = $this->getProduct()->getWebsiteIds();
 			if (
 					is_null($websiteIds)
 				||
-					/**
-					 * Странное условие.
-					 * Присутствует в оригинальном коде ядра.
-					 */
-					(0 === $this->getRow()->getStore()->getId())
+					// Странное условие. Присутствует в оригинальном коде ядра.
+					0 === $this->storeId()
 			) {
 				$websiteIds = array();
 			}
-			df_assert_array($websiteIds);
-			foreach ($this->getRow()->getWebsites() as $website) {
-				/** @var Mage_Core_Model_Website $website */
-				if (!in_array($website->getId(), $websiteIds)) {
-					$websiteIds[]= $website->getId();
-				}
-			}
-			$this->getProduct()->setDataUsingMethod('website_ids', $websiteIds);
+			/** @uses Mage_Core_Model_Website::getId() */
+			$this->getProduct()->setDataUsingMethod('website_ids', array_unique(array_merge($websiteIds,
+				df_each($this->getRow()->getWebsites(), 'getId')
+			)));
 		}
 		return $this;
 	}
@@ -471,15 +452,14 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 				if (is_null($fieldValue)) {
 					continue;
 				}
-				/** @var Mage_Eav_Model_Entity_Attribute|null $fieldAttribute */
+				/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $fieldAttribute */
 				$fieldAttribute = $this->getAttributeForField($fieldName);
-				if (is_null($fieldAttribute)) {
+				if (!$fieldAttribute) {
 					continue;
 				}
-				df_assert($fieldAttribute instanceof Mage_Eav_Model_Entity_Attribute);
 				/**
 				 * Позволяет менять артикул товара при импорте
-				 * @link http://magento-forum.ru/topic/3653/
+				 * http://magento-forum.ru/topic/3653/
 				 */
 				if (Df_Catalog_Model_Product::P__SKU === $fieldName) {
 					if ($this->getRow()->getSkuNew()) {
@@ -490,13 +470,11 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 				$isArray = false;
 				/** @var string|array $valueToSet */
 				$valueToSet = $fieldValue;
-				if ('multiselect' === $fieldAttribute->getDataUsingMethod('frontend_input')) {
-					$fieldValue =
-						explode(
-							Mage_Catalog_Model_Convert_Adapter_Product::MULTI_DELIMITER
-							,$fieldValue
-						)
-					;
+				if ('multiselect' === $fieldAttribute->getFrontendInput()) {
+					$fieldValue = explode(
+						Mage_Catalog_Model_Convert_Adapter_Product::MULTI_DELIMITER
+						, $fieldValue
+					);
 					$isArray = true;
 					$valueToSet = array();
 				}
@@ -504,43 +482,31 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 					$valueToSet = $this->getRow()->parseAsNumber($fieldValue);
 				}
 				if ($fieldAttribute->usesSource()) {
-					/**
-					 * Данный программный код приводит к проблеме:
-					 * если в импортируемом файле значения опции записаны в фомате одной локали,
-					 * а при импорте установлена другая локаль, то значения не будут распознаны.
-					 */
-					/** @var Mage_Eav_Model_Entity_Attribute_Source_Abstract $source */
-					$source = $fieldAttribute->getSource();
 					/** @var array $options */
-					$options =
-						/**
-						 * Как ни странно, хотя базовый интерфейс Mage_Eav_Model_Entity_Attribute_Source_Interface
-						 * определяет getAllOptions как метод без параметров,
-						 * класс Mage_Core_Model_Design_Source_Design переопределяет этот метод как метод с параметром,
-						 * причём значением по умолчанию является true.
-						 *
-						 * Не уверен, что вызов getAllOptions(false) — это лучшее решение, но так делает стандартный код.
-						 */
-						$source->getAllOptions(false)
-					;
+					$options = rm_attribute_options($fieldAttribute);
 					df_assert_array($options);
-					if ($isArray) {
+					if (!$isArray) {
+						/**
+						 * 2015-08-11
+						 * Дополнительное кэширование здесь не делаем:
+						 * вдруг набор опций изменится?
+						 * @var array(string => string|int) $map
+						 */
+						$map = rm_options_to_map_reverse($options);
+						/**
+						 * 2015-08-10
+						 * Сделал значенем по умолчанию само значение.
+						 * Это позволяет указывать в качестве значения не только строковое представление
+						 * (например: «Россия. НДС 10%»), но и уже готовый идентификатор.
+						 */
+						$valueToSet = df_a($map, $fieldValue, $fieldValue);
+					}
+					else {
 						foreach ($options as $option) {
 							/** @var array $option */
 							df_assert_array($option);
 							if (in_array(df_a($option, 'label'), $fieldValue)) {
 								$valueToSet[]= df_a($option, 'value');
-							}
-						}
-					}
-					else {
-						$valueToSet = false;
-						foreach ($options as $option) {
-							/** @var array $option */
-							df_assert_array($option);
-							if (df_a($option, 'label') === $fieldValue) {
-								$valueToSet = df_a($option, 'value');
-								break;
 							}
 						}
 					}
@@ -551,7 +517,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		/***************************
 		 * Заключительная часть заплатки для локали
 		 */
-		catch(Exception $e) {
+		catch (Exception $e) {
 			$exception = $e;
 		}
 		if ($originalLocaleCode != df_mage()->core()->translateSingleton()->getLocale()) {
@@ -561,7 +527,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 			;
 		}
 		if (!is_null($exception)) {
-			throw $exception;
+			df_error($exception);
 		}
 		/***************************
 		 * Конец заплатки для локали
@@ -569,61 +535,51 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		return $this;
 	}
 
-	/** @return Df_Dataflow_Model_Import_Product_Row */
+	/**
+	 * @used-by import()
+	 * @return void
+	 * @throws Df_Dataflow_Exception_Import_RequiredValueIsAbsent|Df_Dataflow_Exception_Import
+	 */
 	private function assertRequiredAttributesExistence() {
 		foreach ($this->helper()->getRequiredFields() as $requiredField) {
 			/** @var string $requiredField */
-			df_assert_string($requiredField);
-			/** @var Mage_Eav_Model_Entity_Attribute $attribute */
+			df_assert_string_not_empty($requiredField);
+			/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 			$attribute = $this->getAttributeForField($requiredField);
-			if (!is_null($attribute)) {
-				df_assert($attribute instanceof Mage_Eav_Model_Entity_Attribute);
-				if ($attribute->getDataUsingMethod('is_required')) {
-					// убеждаемся в присутствии значений
-					$this->getRow()->getFieldValue($requiredField, true);
-				}
+			if ($attribute && $attribute->getIsRequired()) {
+				// убеждаемся в присутствии значений
+				$this->getRow()->getFieldValue($requiredField, true);
 			}
 		}
-		return $this;
 	}
 
 	/**
-	 * @param string $fieldName
-	 * @return Mage_Eav_Model_Entity_Attribute|null
+	 * @param string $code
+	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
-	private function getAttributeForField($fieldName) {
-		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
-		$result = df_h()->dataflow()->registry()->attributes()->findByCode($fieldName);
-		if (!$result) {
-			$result = Df_Catalog_Model_Resource_Eav_Attribute::i();
-			$result->loadByCode(rm_eav_id_product(), $fieldName);
-			if (!$result->getId()) {
-				$result = null;
-			}
-			else {
-				df_h()->dataflow()->registry()->attributes()->addEntity($result);
-				df_assert($result instanceof Mage_Eav_Model_Entity_Attribute);
-				if ($result instanceof Mage_Catalog_Model_Resource_Eav_Attribute) {
-					/** @var Mage_Catalog_Model_Resource_Eav_Attribute $result */
-					/** @var array $applyTo */
-					$applyTo = $result->getApplyTo();
-					// apply_to позволяет ограничить область применения свойства
-					if (!is_null($applyTo)) {
-						df_assert_array($applyTo);
-						/**
-						 * Mage_Catalog_Model_Resource_Eav_Attribute::getApplyTo() возващает пустой массив,
-						 * если свойство применим ко всем типам товара.
-						 */
-						if (0 < count($applyTo)) {
-							if (!in_array($this->getProduct()->getTypeId(), $applyTo)) {
-								/**
-								 * Скопировал данную логику из метода
-								 * Mage_Catalog_Model_Convert_Adapter_Product::getAttribute()
-								 */
-								$result = null;
-							}
-						}
-					}
+	private function getAttributeForField($code) {
+		/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $result */
+		$result = rm_attributes()->findByCode($code);
+		// 2015-08-10
+		// Некоторые свойства являются виртуальными.
+		// Пример: «websites».
+		// Такие свойства отсутствуют в реестре, и $result будет равен null.
+		if ($result) {
+			/** @var string[] $applyTo */
+			$applyTo = $result->getApplyTo();
+			// apply_to позволяет ограничить область применения свойства
+			if (!is_null($applyTo)) {
+				df_assert_array($applyTo);
+				/**
+				 * @uses Mage_Catalog_Model_Resource_Eav_Attribute::getApplyTo() возващает пустой массив,
+				 * если свойство применим ко всем типам товара.
+				 */
+				if ($applyTo && !in_array($this->getProduct()->getTypeId(), $applyTo)) {
+					/**
+					 * Скопировал данную логику из метода
+					 * @see Mage_Catalog_Model_Convert_Adapter_Product::getAttribute()
+					 */
+					$result = null;
 				}
 			}
 		}
@@ -634,7 +590,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 	private function helper() {return Df_Catalog_Helper_Product_Dataflow::s();}
 
 	/**
-	 * Модули «1С: Управление торговлей» и «МойСклад»
+	 * Модули «1С:Управление торговлей» и «МойСклад»
 	 * импортируют опции товара самостоятельно.
 	 * Избежание вызова @see Df_Dataflow_Model_Importer_Product::importCustomOptions()
 	 * ускоряет работу этих модулей.
@@ -643,14 +599,34 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 	private function needSkipCustomOptions() {return $this->cfg(self::P__SKIP_CUSTOM_OPTIONS);}
 
 	/**
+	 * @used-by importCategoriesUsingAdvancedTechnology()
+	 * @used-by initWebsiteAttributeFromStore()
+	 * @used-by storeId()
+	 * @return Df_Core_Model_StoreM
+	 */
+	public function store() {return $this->getRow()->store();}
+
+	/**
+	 * @used-by import()
+	 * @used-by importCustomOptions()
+	 * @used-by importImages()
+	 * @used-by importCategoriesUsingAdvancedTechnology()
+	 * @used-by initWebsiteAttributeFromStore()
+	 * @used-by initWebsiteAttributeFromWebsiteIdsField()
+	 * @used-by getProduct()
+	 * @return int
+	 */
+	private function storeId() {return $this->store()->getId();}
+
+	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__SKIP_CUSTOM_OPTIONS, self::V_BOOL);
+		$this->_prop(self::P__SKIP_CUSTOM_OPTIONS, RM_V_BOOL);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__SKIP_CUSTOM_OPTIONS = 'skip_custom_options';
 	/**
 	 * @static

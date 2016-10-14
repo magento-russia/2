@@ -10,7 +10,7 @@ class Df_Review_Model_Notifier extends Df_Core_Model {
 			$result = df_model('core/email_template_mailer');
 			$result->addEmailInfo($this->getMailInfo());
 			$result->setSender(Mage::getStoreConfig('contacts/email/sender_email_identity'));
-			$result->setStoreId(Mage::app()->getStore()->getId());
+			$result->setStoreId(rm_store_id());
 			$result->setTemplateId(Mage::getStoreConfig('df_tweaks_admin/reviews/notification_template'));
 			$result->setTemplateParams(array(
 				'review' => $this->getReview()
@@ -43,9 +43,7 @@ class Df_Review_Model_Notifier extends Df_Core_Model {
 	/** @return Df_Review_Model_Review */
 	private function getReview() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Review_Model_Resource_Review_Collection::i()->limitLast()->getFirstItem()
-			;
+			$this->{__METHOD__} = Df_Review_Model_Review::c()->limitLast()->getFirstItem();
 			df_assert($this->{__METHOD__} instanceof Df_Review_Model_Review);
 		}
 		return $this->{__METHOD__};

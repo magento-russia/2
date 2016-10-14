@@ -14,24 +14,18 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 	 */
 	public function filter($value) {
 		df_param_array($value, 0);
+		/** @var Df_Checkout_Model_Settings_Field_Applicability $settings */
+		$settings = df_cfg()->checkout()->applicabilityBilling();
 		if (
-				df_cfg()->checkout()->_interface()->needShowAllStepsAtOnce()
+				rm_checkout_ergonomic()
 			&&
 				// Убеждаемся, что покупатель неавторизован
-				!df_mage()->customer()->isLoggedIn()
+				!rm_customer_logged_in()
 			&&
 				// Убеждаемся, что поля «Пароль» и «Пароль повторно» необязательны для заполнения
-				(
-						df_cfg()->checkout()->applicabilityBilling()->customer_password()
-					!==
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-				)
+				!$settings->isRequired(Df_Checkout_Const_Field::CUSTOMER_PASSWORD)
 			&&
-				(
-						df_cfg()->checkout()->applicabilityBilling()->confirm_password()
-					!==
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-				)
+				!$settings->isRequired(Df_Checkout_Const_Field::CONFIRM_PASSWORD)
 			&&
 				// Убеждаемся, что поля «Пароль» и «Пароль повторно» не заполнены
 				!df_a($value, Df_Checkout_Const_Field::CUSTOMER_PASSWORD)
@@ -55,7 +49,7 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

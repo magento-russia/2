@@ -3,7 +3,7 @@
 	<sections>
 		<df_shipping>
 			<groups>
-				<ukr-poshta translate='label'>
+				<ukr-poshta>
 					<label>Украина. Укрпошта (Укрпочта)</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>50000</sort_order>
@@ -18,7 +18,7 @@
 						]]>
 					</comment>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -29,19 +29,19 @@
 								появилась в Российской сборке Magento
 								с 23 декабря 2012 года (версия 2.14.0).
 							-->
-							<backend_model>df_admin/config_backend_validator</backend_model>
-							<df_backend_validator_strategy>df_shipping/config_backend_validator_strategy_origin</df_backend_validator_strategy>
-							<df_origin_validator>df_shipping/config_backend_validator_strategy_origin_specificCountry</df_origin_validator>
+							<backend_model>Df_Admin_Config_Backend_Validator</backend_model>
+							<df_backend_validator_strategy>Df_Shipping_Config_Backend_Validator_Strategy_Origin</df_backend_validator_strategy>
+							<df_origin_validator>Df_Shipping_Config_Backend_Validator_Strategy_Origin_SpecificCountry</df_origin_validator>
 							<df_origin_country>UA</df_origin_country>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-ukr-poshta</df_feature>
 							<config_path>carriers/df-ukr-poshta/active</config_path>
 						</active>
-						<title translate='label'>
+						<title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -57,7 +57,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</title>
-						<admin__fee_percent translate='label'>
+						<admin__fee_percent>
 							<label>Относительная наценка</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>3000</sort_order>
@@ -76,7 +76,7 @@
 							</validate>
 							<depends><active>1</active></depends>
 						</admin__fee_percent>
-						<admin__fee_fixed translate='label'>
+						<admin__fee_fixed>
 							<label>Абсолютная наценка</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>4000</sort_order>
@@ -94,7 +94,7 @@
 							</validate>
 							<depends><active>1</active></depends>
 						</admin__fee_fixed>
-						<service__need_accept_cash_on_delivery translate='label'>
+						<service__need_accept_cash_on_delivery>
 							<label>Должна ли служба доставки принимать от покупателя оплату заказа?</label>
 							<comment>
 								<![CDATA[
@@ -111,7 +111,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__need_accept_cash_on_delivery>
-						<admin__declared_value_percent translate='label'>
+						<admin__declared_value_percent>
 							<label>Объявленная стоимость груза</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>6000</sort_order>
@@ -129,7 +129,7 @@
 							</validate>
 							<depends><active>1</active></depends>
 						</admin__declared_value_percent>
-						<service__need_get_cargo_from_the_shop_store translate='label'>
+						<service__need_get_cargo_from_the_shop_store>
 							<label>Должна ли служба доставки приезжать за грузом на склад магазина?</label>
 							<comment>
 								<![CDATA[
@@ -146,7 +146,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__need_get_cargo_from_the_shop_store>
-						<service__enable_sms_notification translate='label'>
+						<service__enable_sms_notification>
 							<label>Оповещать по SMS о факте доставки груза получателю?</label>
 							<comment>
 								<![CDATA[
@@ -161,7 +161,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__enable_sms_notification>
-						<service__make_accompanying_forms translate='label'>
+						<service__make_accompanying_forms>
 							<label>
 								Должна ли служба доставки
 								составлять сопроводительную документацию на груз?
@@ -181,7 +181,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__make_accompanying_forms>
-						<service__need_packing translate='label'>
+						<service__need_packing>
 							<label>Нужна ли услуга упаковки груза?</label>
 							<comment>
 								<![CDATA[
@@ -195,7 +195,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__need_packing>
-						<frontend__disable_for_shop_city translate='label'>
+						<frontend__disable_for_shop_city>
 							<label>Скрыть этот способ доставки для покупателей из города магазина?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -205,7 +205,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__disable_for_shop_city>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -221,8 +221,8 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__sort_order>
-						<frontend__display_diagnostic_messages translate='label'>
-							<label>Показывать ли способ доставки на витрине в том случае,когда он по каким-либо причинам неприменим к текущему заказу?</label>
+						<frontend__display_diagnostic_messages>
+							<label>Показывать ли способ доставки на витрине в том случае, когда он по каким-либо причинам неприменим к текущему заказу?</label>
 							<comment>
 								<![CDATA[
 									Если Вы укажете значение «да», то покупатель будет знать причину,по которой данный способ доставки неприменим к его заказу.
@@ -236,7 +236,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__display_diagnostic_messages>
-						<frontend__sallowspecific translate='label'>
+						<frontend__sallowspecific>
 							<label>Ограничить область доставки конкретными странами?</label>
 							<comment>
 								<![CDATA[
@@ -254,7 +254,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__sallowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Перечень стран, куда разрешена доставка данным способом</label>
 							<frontend_type>multiselect</frontend_type>
 							<sort_order>25000</sort_order>

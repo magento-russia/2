@@ -1,7 +1,10 @@
 <?php
 class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
-	/** @return Df_Sales_Model_Order */
-	public function getOrder() {
+	/**
+	 * @used-by Df_Pd4_Block_Document_Rows::order()
+	 * @return Df_Sales_Model_Order
+	 */
+	public function order() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Sales_Model_Order $result */
 			$result = Df_Sales_Model_Order::i();
@@ -14,30 +17,34 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
-	public function getAmount() {
+	/**
+	 * @used-by Df_Pd4_Block_Document_Rows::getOrderAmountFractionalPartAsString()
+	 * @used-by Df_Pd4_Block_Document_Rows::getOrderAmountIntegerPartAsString()
+	 * @return Df_Core_Model_Money
+	 */
+	public function amount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getServiceConfig()->getOrderAmountInServiceCurrency($this->getOrder())
-			;
+			$this->{__METHOD__} = $this->configS()->getOrderAmountInServiceCurrency(
+				$this->order()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return Df_Pd4_Model_Payment */
-	public function getPaymentMethod() {
+	public function getMethod() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Pd4_Model_Payment $result */
 			$result = null;
 			/**
-			 * Раньше здесь стояло if(!is_null($this->getOrder()->getPayment()))
-			 * Как ни странно, иногда $this->getOrder()->getPayment() возвращает и не null,
+			 * Раньше здесь стояло if(!is_null($this->order()->getPayment()))
+			 * Как ни странно, иногда $this->order()->getPayment() возвращает и не null,
 			 * и не объект.
 			 */
-			if ($this->getOrder()->getPayment() instanceof Mage_Sales_Model_Order_Payment) {
-				$result = $this->getOrder()->getPayment()->getMethodInstance();
+			if ($this->order()->getPayment() instanceof Mage_Sales_Model_Order_Payment) {
+				$result = $this->order()->getPayment()->getMethodInstance();
 			}
-			if (!($result instanceof Df_Pd4_Model_Payment)) {
+			if (!$result instanceof Df_Pd4_Model_Payment) {
 				df_error(
 					"Заказ №{$this->getOrderId()} не предназначен для оплаты через банковскую кассу."
 				);
@@ -76,37 +83,25 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 	/** @return integer */
 	private function getOrderProtectCode() {
 		/** @var integer $result */
-		$result = df_request(Df_Pd4_Const::URL_PARAM__ORDER_PROTECT_CODE);
+		$result = rm_request(Df_Pd4_Block_LinkToDocument::URL_PARAM__ORDER_PROTECT_CODE);
 		df_assert(!is_null($result), $this->getInvalidUrlMessage());
 		return $result;
 	}
 
 	/** @return string */
 	private function getInvalidUrlMessage() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$result = 
-				nl2br(
-					df_h()->pd4()->__(
-						"Вероятно, Вы хотели распечатать квитанцию?"
-						."\nОднако ссылка на квитанцию не совсем верна."
-						."\nМожет быть, Вы не полностью скопировали ссылку в адресную строку браузера?"
-						."\nПопробуйте аккуратно ещё раз."
-						."\nЕсли Вы вновь увидите данное сообщение — обратитесь к администратору магазина,"
-						." приложив к вашему обращению ссылку на квитанцию."
-					)
-				)
-			;
-			df_result_string($result);
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
+		return df_t()->nl2br(
+			"Вероятно, Вы хотели распечатать квитанцию?"
+			."\nОднако ссылка на квитанцию не совсем верна."
+			."\nМожет быть, Вы не полностью скопировали ссылку в адресную строку браузера?"
+			."\nПопробуйте аккуратно ещё раз."
+			."\nЕсли Вы вновь увидите данное сообщение — обратитесь к администратору магазина,"
+			." приложив к вашему обращению ссылку на квитанцию."
+		);
 	}
 
-	/** @return Df_Payment_Model_Config_Area_Service */
-	private function getServiceConfig() {return $this->getPaymentMethod()->getRmConfig()->service();}
-
-	const _CLASS = __CLASS__;
+	/** @return Df_Payment_Config_Area_Service */
+	private function configS() {return $this->getMethod()->configS();}
 
 	/** @return Df_Pd4_Model_Request_Document_View */
 	public static function i() {return new self;}

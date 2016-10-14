@@ -2,36 +2,16 @@
 class Df_Dataflow_Model_Convert_Adapter_Dropdown
 	extends Mage_Dataflow_Model_Convert_Adapter_Abstract {
 	/**
-	 * Обратите внимание, что родительский класс Mage_Dataflow_Model_Convert_Adapter_Abstract
-	 * не является потомком класса Varien_Object,
-	 * поэтому у нашего класса нет метода _construct,
-	 * и мы перекрываем именно конструктор
 	 * @override
 	 * @return Df_Dataflow_Model_Convert_Adapter_Dropdown
 	 */
-	public function __construct() {
-		df_assert(
-			df_enabled(Df_Core_Feature::DATAFLOW_CO)
-			,'Import of custom options disallowed for you because of absense of license'
-		);
-		parent::__construct();
-	}
+	public function load() {return $this;}
 
 	/**
 	 * @override
 	 * @return Df_Dataflow_Model_Convert_Adapter_Dropdown
 	 */
-	public function load() {
-		return $this;
-	}
-
-	/**
-	 * @override
-	 * @return Df_Dataflow_Model_Convert_Adapter_Dropdown
-	 */
-	public function save() {
-		return $this;
-	}
+	public function save() {return $this;}
 
 	/**
 	 * @override
@@ -53,7 +33,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 								array(
 									'option_0' =>
 										array(
-											$this->getStore() => $this->getOption()
+											$this->storeId() => $this->getOption()
 										)
 								)
 							,'order' =>
@@ -72,24 +52,18 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 	/** @var int */
 	private $_rowIndex;
 
-	/** @return Df_Dataflow_Model_Convert_Adapter_Dropdown */
+	/** @return void */
 	private function deleteAllOptions() {
+		/** @var array(array(string => string|int)) $allOptions */
 		$allOptions = $this->getAttribute()->getSource()->getAllOptions(false);
-		$optionsToDelete = array();
-		foreach ($allOptions as $option) {
-			$optionsToDelete[$option['value']]	= 1;
-		}
-		$options2 = array();
-		foreach ($allOptions as $option) {
-			$options2[$option['value']]= array($option['label']);
-		}
-		$data = array('option' => array('value' => $options2, 'delete' => $optionsToDelete));
-		$this->getAttribute()->addData($data);
+		$this->getAttribute()->addData(array('option' => array(
+			'value' => array_column($allOptions, 'label', 'value')
+			, 'delete' => array_fill_keys(array_column($allOptions, 'value'), 1)
+		)));
 		$this->getAttribute()->save();
-		return $this;
 	}
 
-	/** @return Mage_Catalog_Model_Resource_Eav_Attribute */
+	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->getAttributeByCode($this->getAttributeCode());
@@ -120,9 +94,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 	}
 
 	/** @return string */
-	private function getOption() {
-		return $this->getRowData('option');
-	}
+	private function getOption() {return $this->getRowData('option');}
 
 	/**
 	 * @param string $key
@@ -158,21 +130,11 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 
 	/** @return mixed[] */
 	private function getSessionStorage() {
-		$result =
-			rm_session_core()
-				->getData(
-					$this->getSessionKey()
-				)
-		;
+		$result = rm_session_core()->getData($this->getSessionKey());
 		if (!$result) {
 			$result = array();
 		}
 		return $result;
-	}
-
-	/** @return string */
-	private function getStore() {
-		return $this->getRowData('store', $this->getBatchParams('store'));
 	}
 
 	/**
@@ -180,12 +142,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 	 * @return Df_Dataflow_Model_Convert_Adapter_Dropdown
 	 */
 	private function setSessionStorage(array $storage) {
-		rm_session_core()
-			->setData(
-				$this->getSessionKey()
-				,$storage
-			)
-		;
+		rm_session_core()->setData($this->getSessionKey(), $storage);
 		return $this;
 	}
 
@@ -200,4 +157,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 		$this->setSessionStorage($storage);
 		return $this;
 	}
+
+	/** @return string */
+	private function storeId() {return $this->getRowData('store', $this->getBatchParams('store'));}
 }

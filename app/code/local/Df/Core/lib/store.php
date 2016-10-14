@@ -22,7 +22,7 @@ function rm_store($store = null) {
 		 */
 		if ('admin' === $coreCurrentStore->getCode()) {
 			/** @var int|null $storeIdFromRequest */
-			$storeIdFromRequest = df_request('store');
+			$storeIdFromRequest = rm_request('store');
 			if ($storeIdFromRequest) {
 				$result = Mage::app()->getStore($result);
 			}
@@ -91,6 +91,14 @@ function rm_store($store = null) {
 }
 
 /**
+ * 2015-03-19
+ * @used-by Df_Payment_Config_Area_Service::getTransactionDescription()
+ * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
+ * @return string
+ */
+function rm_store_domain($store = null) {return rm_store_uri($store)->getHost();}
+
+/**
  * 2015-02-04
  * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $store = null,
  * ведь текущий магазин может меняться.
@@ -99,3 +107,43 @@ function rm_store($store = null) {
  * @throws Mage_Core_Model_Store_Exception
  */
 function rm_store_id($store = null) {return rm_store($store)->getId();}
+
+/**
+ * 2015-03-19
+ * @used-by rm_store_domain()
+ * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
+ * @return Zend_Uri_Http
+ */
+function rm_store_uri($store = null) {
+	$store = rm_store($store);
+	/** @var string $key */
+	$key = $store->getId();
+	/** @var array(int => Zend_Uri_Http) $cache */
+	static $cache;
+	if (!isset($cache[$key])) {
+		$cache[$key] = Zend_Uri_Http::fromString($store->getBaseUrl(
+			Mage_Core_Model_Store::URL_TYPE_WEB
+		));
+	}
+	return $cache[$key];
+}
+
+/**
+ * 2015-02-04
+ * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $website = null,
+ * ведь текущий сайт может меняться.
+ * @param Mage_Core_Model_Website|string|int|bool|null $website [optional]
+ * @return Mage_Core_Model_Website
+ * @throws Mage_Core_Exception
+ */
+function rm_website($website = null) {return Mage::app()->getWebsite($website);}
+
+/**
+ * 2015-02-04
+ * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $website = null,
+ * ведь текущий сайт может меняться.
+ * @param Mage_Core_Model_Website|string|int|bool|null $website [optional]
+ * @return int
+ * @throws Mage_Core_Exception
+ */
+function rm_website_id($website = null) {return rm_website($website)->getId();}

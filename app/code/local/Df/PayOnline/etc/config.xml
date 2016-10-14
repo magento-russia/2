@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_PayOnline>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>PayOnline</title>
+			<version>1.0.0</version>
 		</Df_PayOnline>
 	</modules>
 	<global>
@@ -38,7 +39,7 @@
 		-->
 		<payment>
 			<df-payonline>
-				<model>df_payonline/payment</model>
+				<model>Df_PayOnline_Model_Payment</model>
 			</df-payonline>
 		</payment>
 	</default>

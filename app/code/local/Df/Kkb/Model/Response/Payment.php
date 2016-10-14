@@ -22,7 +22,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 	public function getPaymentAmountInServiceCurrency() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				$this->getServiceConfig()->convertAmountToServiceCurrency(
+				$this->configS()->convertAmountToServiceCurrency(
 					$this->getOrderCurrency(), $this->getPaymentAmount()
 				)
 			;
@@ -56,7 +56,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				!$this->isSuccessful()
-				? df_clean(array(
+				? array_filter(array(
 					'Диагностическое сообщение' => $this->getErrorMessage()
 					,'Дата и время платежа' => df_dts($this->getTime(), 'dd.MM.y HH:mm:ss')
 				))
@@ -65,10 +65,9 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 					,'Владелец карты' => $this->getCustomerName()
 					,'E-mail покупателя' => $this->getCustomerEmail()
 					,'Телефон покупателя' => $this->getCustomerPhone()
-					,'Размер платежа' => rm_sprintf('%.2f', $this->getPaymentAmount())
+					,'Размер платежа' => rm_number_2f($this->getPaymentAmount())
 					,'Валюта платежа' => $this->getOrderCurrency()->getName()
-					,'Была ли проверка 3-D Secure / SecureCode' =>
-						rm_bts_r($this->isPaymentUsed3DSecure())
+					,'Была ли проверка 3-D Secure / SecureCode' => rm_bts_r($this->isPaymentUsed3DSecure())
 					,'Код авторизации' => $this->getPaymentCodeApproval()
 				))
 
@@ -156,13 +155,13 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getElementCustomer() {return $this->getElement('bank/customer');}
 
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getElementOrder() {return $this->getElement('bank/customer/merchant/order');}
 	
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getElementPayment() {return $this->getElement('bank/results/payment');}
 	
 	/** @return Df_Directory_Model_Currency */
@@ -172,7 +171,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 			$currencyCodeInPaymentSystemFormat = $this->getElementOrder()->getAttribute('currency');
 			df_assert_string_not_empty($currencyCodeInPaymentSystemFormat);
 			$this->{__METHOD__} =
-				$this->getServiceConfig()->getCurrencyByCodeInServiceFormat(
+				$this->configS()->getCurrencyByCodeInServiceFormat(
 					$currencyCodeInPaymentSystemFormat
 				)
 			;
@@ -187,7 +186,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 			$currencyCodeInPaymentSystemFormat = $this->getElementOrder()->getAttribute('currency');
 			df_assert_string_not_empty($currencyCodeInPaymentSystemFormat);
 			$this->{__METHOD__} =
-				$this->getServiceConfig()->translateCurrencyCodeReversed(
+				$this->configS()->translateCurrencyCodeReversed(
 					$currencyCodeInPaymentSystemFormat
 				)
 			;
@@ -236,7 +235,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param string $xml [optional]

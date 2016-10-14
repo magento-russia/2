@@ -29,31 +29,18 @@ class Df_Cms_Helper_Hierarchy extends Mage_Core_Helper_Abstract {
 					$source = array_merge($source, $default);
 				}
 			}
-
 			$target = $this->_forcedCopyMetaData($source, $target);
 		}
 		return $target;
 	}
 
 	/**
-	 * Copy metadata fields that don't depend on isMetadataEnabled
-	 *
-	 * @param array $source
-	 * @param array $target
-	 * @return array
+	 * @param array(string => mixed) $source
+	 * @param array(string => mixed) $target
+	 * @return array(string => mixed)
 	 */
-	protected function _forcedCopyMetaData($source, $target)
-	{
-		if (!is_array($source)) {
-			return $target;
-		}
-
-		foreach (Df_Cms_Model_Hierarchy_Node::getMetadataKeys() as $element) {
-			if (array_key_exists($element, $source)) {
-				$target[$element] = $source[$element];
-			}
-		}
-		return $target;
+	protected function _forcedCopyMetaData($source, $target) {
+		return df_select(df_nta($source, true), Df_Cms_Model_Hierarchy_Node::getMetadataKeys()) + $target;
 	}
 
 	/**

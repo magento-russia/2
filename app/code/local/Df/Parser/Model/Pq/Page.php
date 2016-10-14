@@ -61,6 +61,6 @@ abstract class Df_Parser_Model_Pq_Page extends Df_Parser_Model_Pq implements Zen
 		parent::_construct();
 		$this->_prop(self::P__URI, 'Zend_Uri_Http');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__URI = 'uri';
 }

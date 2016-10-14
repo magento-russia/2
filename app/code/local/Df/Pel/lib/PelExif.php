@@ -162,4 +162,4 @@ class PelExif extends PelJpegContent {
 	 $this->tiff->__toString();
   }
 
-}?>
+}

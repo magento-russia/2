@@ -2,6 +2,8 @@
 class Df_Page_Block_Switch extends Mage_Page_Block_Switch {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -51,7 +53,7 @@ class Df_Page_Block_Switch extends Mage_Page_Block_Switch {
 				 * (и в полную противоположность Zend Framework
 				 * и всем остальным частям Magento, где используется кэширование)
 				 * означает, что блок не удет кэшироваться вовсе!
-				 * @see Mage_Core_Block_Abstract::_loadCache()
+				 * @used-by Mage_Core_Block_Abstract::_loadCache()
 				 */
 				Df_Core_Block_Template::CACHE_LIFETIME_STANDARD
 			:
@@ -73,7 +75,7 @@ class Df_Page_Block_Switch extends Mage_Page_Block_Switch {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const TEMPLATE__FLAGS = 'page/switch/flags.phtml';
 	const TEMPLATE__LANGUAGES = 'page/switch/languages.phtml';
 	const TEMPLATE__STORES = 'page/switch/stores.phtml';

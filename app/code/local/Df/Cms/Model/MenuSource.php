@@ -12,13 +12,10 @@ class Df_Cms_Model_MenuSource extends Df_Page_Model_MenuSource {
 	 */
 	public function isEnabled() {
 		return
-				df_cfg()->cms()->hierarchy()->isEnabled()
-			&&
-				df_cfg()->cms()->hierarchy()->needAddToCatalogMenu()
-			&&
-				df_enabled(Df_Core_Feature::CMS_2)
+			df_cfg()->cms()->hierarchy()->isEnabled()
+			&& df_cfg()->cms()->hierarchy()->needAddToCatalogMenu()
 		;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

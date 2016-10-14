@@ -1,15 +1,14 @@
 <?php
-class Df_Banner_Model_Resource_Banneritem_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract {
+class Df_Banner_Model_Resource_Banneritem_Collection extends Df_Core_Model_Resource_Collection {
+	/**
+	 * @override
+	 * @return Df_Banner_Model_Resource_Banneritem
+	 */
+	public function getResource() {return Df_Banner_Model_Resource_Banneritem::s();}
+
 	/**
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Banner_Model_Banneritem::mf(), Df_Banner_Model_Resource_Banneritem::mf());
-	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Banner_Model_Resource_Banneritem_Collection */
-	public static function i() {return new self;}
+	protected function _construct() {$this->_itemObjectClass = Df_Banner_Model_Banneritem::_C;}
 }

@@ -7,7 +7,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	public function editAction()
 	{
 		$page = $this->_initPage();
-		$data = df_mage()->adminhtml()->session()->getFormData(true);
+		$data = rm_session()->getFormData(true);
 		if (! empty($data)) {
 			$page->setData($data);
 		}
@@ -33,13 +33,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	 */
 	public function massDeleteVersionsAction()
 	{
-		if (
-			! (
-					df_enabled(Df_Core_Feature::CMS_2)
-				&&
-					df_cfg()->cms()->versioning()->isEnabled()
-			)
-		) {
+		if (!df_cfg()->cms()->versioning()->isEnabled()) {
 			$this->_forward('denied');
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
@@ -50,26 +44,27 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 			}
 			else {
 				try {
-					$userId = df_mage()->admin()->session()->getUser()->getId();
 					$accessLevel = Df_Cms_Model_Config::s()->getAllowedAccessLevel();
 					foreach ($ids as $id) {
-						$version =
-							Df_Cms_Model_Page_Version::s()->loadWithRestrictions(
-								$accessLevel, $userId, $id
-							)
-						;
+						$version = Df_Cms_Model_Page_Version::s()->loadWithRestrictions(
+							$accessLevel, rm_admin_id(), $id
+						);
 						if ($version->getId()) {
 							$version->delete();
 						}
 					}
-					rm_session()->addSuccess(
-						$this->__('Total of %d record(s) were successfully deleted', count($ids))
-					);
-				} catch (Mage_Core_Exception $e) {
+					rm_session()->addSuccess($this->__(
+						'Total of %d record(s) were successfully deleted', count($ids)
+					));
+				}
+				catch (Mage_Core_Exception $e) {
 					rm_exception_to_session($e);
-				} catch (Exception $e) {
+				}
+				catch (Exception $e) {
 					Mage::logException($e);
-					rm_session()->addError(df_h()->cms()->__('Error while deleting versions. Please try again later.'));
+					rm_session()->addError(df_h()->cms()->__(
+						'Error while deleting versions. Please try again later.'
+					));
 				}
 			}
 			$this->_redirect('*/*/edit', array('_current' => true, 'tab' => 'versions'));
@@ -83,13 +78,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	 */
 	public function versionsAction()
 	{
-		if (
-			! (
-					df_enabled(Df_Core_Feature::CMS_2)
-				&&
-					df_cfg()->cms()->versioning()->isEnabled()
-			)
-		) {
+		if (!df_cfg()->cms()->versioning()->isEnabled()) {
 			$this->_forward('denied');
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
@@ -110,13 +99,9 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	{
 		if (
 			!(
-					df_enabled(Df_Core_Feature::CMS_2)
-				&&
-					(
-							df_cfg()->cms()->versioning()->isEnabled()
-						||
-							df_cfg()->cms()->hierarchy()->isEnabled()
-					)
+					df_cfg()->cms()->versioning()->isEnabled()
+				||
+					df_cfg()->cms()->hierarchy()->isEnabled()
 			)
 		) {
 			parent::_initAction();

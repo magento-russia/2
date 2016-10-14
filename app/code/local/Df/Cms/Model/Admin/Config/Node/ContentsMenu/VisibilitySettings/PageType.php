@@ -6,7 +6,8 @@ class Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType
 		/**
 		 * Обратите внимание,
 		 * что нельзя применять цепной вызов $fieldset->addField()->addField(),
-		 * потому что addField() возвращает не $fieldset, а созданное поле.
+		 * потому что @uses Varien_Data_Form_Element_Fieldset::addField()
+		 * возвращает не $fieldset, а созданное поле.
 		 */
 		$this->getFieldset()
 			->addField(
@@ -106,7 +107,7 @@ class Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType
 	private function getOptionsVerticalOrdering() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Admin_Model_Config_Source_SelectNumberFromDropdown::i(15)->toOptionArray()
+				Df_Admin_Config_Source_SelectNumberFromDropdown::i(15)->toOptionArray()
 			;
 		}
 		return $this->{__METHOD__};
@@ -139,15 +140,15 @@ class Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ENABLED__LABEL, self::V_STRING_NE)
+			->_prop(self::P__ENABLED__LABEL, RM_V_STRING_NE)
 			->_prop(self::P__FIELDSET, 'Varien_Data_Form_Element_Fieldset')
-			->_prop(self::P__PAGE_TYPE_ID, self::V_STRING_NE)
-			->_prop(self::P__POSITION__LABEL, self::V_STRING_NE)
-			->_prop(self::P__TAB_INDEX, self::V_INT)
-			->_prop(self::P__VERTICAL_ORDERING__LABEL, self::V_STRING_NE)
+			->_prop(self::P__PAGE_TYPE_ID, RM_V_STRING_NE)
+			->_prop(self::P__POSITION__LABEL, RM_V_STRING_NE)
+			->_prop(self::P__TAB_INDEX, RM_V_INT)
+			->_prop(self::P__VERTICAL_ORDERING__LABEL, RM_V_STRING_NE)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ENABLED__LABEL = 'enabled__label';
 	const P__FIELDSET = 'fieldset';
 	const P__PAGE_TYPE_ID = 'page_type_id';

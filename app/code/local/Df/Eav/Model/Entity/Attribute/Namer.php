@@ -57,14 +57,8 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 	/** @return string[] */
 	private function getPrefixesAdjusted() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(mixed => mixed) $result */
-			$result = array();
-			foreach ($this->getPrefixes() as $prefix) {
-				/** @var string $prefix */
-				$result[]= $this->adjust($prefix);
-			}
-			$result = df_clean($result);
-			$this->{__METHOD__} = $result;
+			/** @uses adjust() */
+			$this->{__METHOD__} = array_filter(array_map(array($this, 'adjust'), $this->getPrefixes()));
 		}
 		return $this->{__METHOD__};
 	}
@@ -78,14 +72,10 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 		/** @var string $result */
 		$result =
 			substr(
-				implode(
-					'__'
-					,
-					array_merge(
-						$this->getPrefixesAdjusted()
-						, array($this->getNameDesiredAdjusted())
-					)
-				)
+				implode('__', array_merge(
+					$this->getPrefixesAdjusted()
+					, array($this->getNameDesiredAdjusted())
+				))
 				,0
 				,(1 === $attempt)
 				?
@@ -109,9 +99,9 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ENTITY_TYPE_ID, self::V_INT, false)
-			->_prop(self::P__NAME_DESIRED, self::V_STRING_NE)
-			->_prop(self::P__PREFIXES, self::V_ARRAY, false)
+			->_prop(self::P__ENTITY_TYPE_ID, RM_V_INT, false)
+			->_prop(self::P__NAME_DESIRED, RM_V_STRING_NE)
+			->_prop(self::P__PREFIXES, RM_V_ARRAY, false)
 		;
 	}
 	const P__ENTITY_TYPE_ID = 'entity_type_id';

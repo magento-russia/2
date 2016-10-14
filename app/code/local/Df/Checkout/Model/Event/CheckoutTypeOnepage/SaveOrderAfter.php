@@ -12,22 +12,19 @@
 class Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter
 	extends Df_Checkout_Model_Event_SaveOrder_Abstract {
 	/** @return Mage_Sales_Model_Quote */
-	public function getQuote() {
-		/** @var Mage_Sales_Model_Quote $result */
-		$result = $this->getEventParam(self::EVENT_PARAM__QUOTE);
-		df_assert($result instanceof Mage_Sales_Model_Quote);
-		return $result;
-	}
+	public function getQuote() {return $this->getEventParam(self::EVENT_PARAM__QUOTE);}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {
-		return self::EXPECTED_EVENT_PREFIX;
-	}
+	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
 
-	const _CLASS = __CLASS__;
+	/**
+	 * @used-by Df_Checkout_Observer::checkout_type_onepage_save_order_after()
+	 * @used-by Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer::getEventClass()
+	 */
+	const _C = __CLASS__;
 	const EVENT_PARAM__QUOTE = 'quote';
 	const EXPECTED_EVENT_PREFIX = 'checkout_type_onepage_save_order_after';
 }

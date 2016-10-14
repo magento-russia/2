@@ -10,9 +10,6 @@ class Df_Widget_Model_Resource_Widget_Instance extends Mage_Widget_Model_Mysql4_
 		}
 	}
 
-	const _CLASS = __CLASS__;
-	/** @return string */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
 	/** @return Df_Widget_Model_Resource_Widget_Instance */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

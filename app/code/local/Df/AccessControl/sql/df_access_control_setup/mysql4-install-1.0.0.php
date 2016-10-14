@@ -1,5 +1,5 @@
 <?php
 /** @var Df_Core_Model_Resource_Setup $this */
 $this->startSetup();
-Df_AccessControl_Model_Setup_1_0_0::i($this)->process();
+Df_AccessControl_Model_Resource_Role::s()->tableCreate($this);
 $this->endSetup();

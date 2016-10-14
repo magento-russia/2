@@ -25,9 +25,9 @@ class Df_Payment_Helper_DataM extends Mage_Payment_Helper_Data {
 				is_object($b) && ($b instanceof Varien_Object)
 		) {
 			/** @var int $orderingA */
-			$orderingA = intval($a->getData('sort_order'));
+			$orderingA = (int)$a->getData('sort_order');
 			/** @var int $orderingB */
-			$orderingB = intval($b->getData('sort_order'));
+			$orderingB = (int)$b->getData('sort_order');
 			$result = $orderingA < $orderingB ? -1 : ($orderingA > $orderingB ? 1 : 0);
 		}
 		return $result;

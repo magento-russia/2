@@ -7,6 +7,10 @@
  * требуемые для сохранения кэша.
  */
 interface Df_Core_Destructable {
-	/** @return void */
+	/**
+	 * @used-by Df_Core_GlobalSingletonDestructor::process()
+	 * @see Df_Core_Model::_destruct()
+	 * @return void
+	 */
 	public function _destruct();
 }

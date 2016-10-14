@@ -82,7 +82,4 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_History
 		}
 		return parent::formatTime($date, $format, $showDate);
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation_View_Tab_History */
-	public static function i() {return df_block(__CLASS__);}
 }

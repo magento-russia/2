@@ -1,56 +1,39 @@
 <?php
-/**
- * @method Df_EasyPay_Model_Payment getPaymentMethod()
- */
+/** @method Df_EasyPay_Model_Payment getMethod() */
 class Df_EasyPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override
-	 * @return array(string => string)
+	 * @see Df_Payment_Model_Request_Payment::_params()
+	 * @used-by Df_Payment_Model_Request_Payment::params()
+	 * @return array(string => string|int)
 	 */
-	protected function getParamsInternal() {
-		/** @var array(string => string) $result */
-		$result =
-			array_merge(
-				array(
-					self::REQUEST_VAR__SHOP_ID => $this->getServiceConfig()->getShopId()
-					,self::REQUEST_VAR__ORDER_NUMBER => $this->getOrder()->getIncrementId()
-					,self::REQUEST_VAR__ORDER_AMOUNT =>
-						$this
-							->getAmount()
-							/**
-							 * EASYPAY требует, чтобы суммы были целыми числами
-							 */
-							->getAsInteger()
-					,'EP_Expires' => 3
-					,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
-					,'EP_OrderInfo' => $this->getTransactionDescription()
-					,self::REQUEST_VAR__SIGNATURE =>	$this->getSignature()
-					,self::REQUEST_VAR__URL_RETURN_OK =>	$this->getUrlCheckoutSuccess()
-					,self::REQUEST_VAR__URL_RETURN_NO =>	$this->getUrlCheckoutFail()
-					,'EP_URL_Type' => 'link'
-					,self::REQUEST_VAR__REQUEST__TEST_MODE => rm_01($this->getServiceConfig()->isTestMode())
-					,'EP_Encoding' => 'utf-8'
-				)
-			)
-		;
-		return $result;
+	protected function _params() {
+		return array(
+			self::REQUEST_VAR__SHOP_ID => $this->shopId()
+			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
+			// EASYPAY требует, чтобы суммы были целыми числами
+			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amount()->getAsInteger()
+			,'EP_Expires' => 3
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+			,'EP_OrderInfo' => $this->getTransactionDescription()
+			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
+			,self::REQUEST_VAR__URL_RETURN_OK => rm_url_checkout_success()
+			,self::REQUEST_VAR__URL_RETURN_NO => rm_url_checkout_fail()
+			,'EP_URL_Type' => 'link'
+			,self::REQUEST_VAR__REQUEST__TEST_MODE => rm_01($this->configS()->isTestMode())
+			,'EP_Encoding' => 'utf-8'
+		);
 	}
 
 	/** @return string */
 	private function getSignature() {
 		/** @var string $result */
-		$result =
-			md5(
-				implode(
-					$this->preprocessParams(array(
-						self::REQUEST_VAR__SHOP_ID => $this->getServiceConfig()->getShopId()
-						,'Encryption Key' => $this->getServiceConfig()->getResponsePassword()
-						,self::REQUEST_VAR__ORDER_NUMBER => $this->getOrder()->getIncrementId()
-						,self::REQUEST_VAR__ORDER_AMOUNT => $this->getAmount()->getAsInteger()
-					))
-				)
-			)
-		;
+		$result = md5(implode($this->preprocessParams(array(
+			self::REQUEST_VAR__SHOP_ID => $this->shopId()
+			,'Encryption Key' => $this->password()
+			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
+			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amount()->getAsInteger()
+		))));
 		return $result;
 	}
 

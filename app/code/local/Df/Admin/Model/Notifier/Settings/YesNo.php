@@ -5,10 +5,10 @@ abstract class Df_Admin_Model_Notifier_Settings_YesNo extends Df_Admin_Model_Not
 
 	/**
 	 * @override
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return bool
 	 */
-	protected function isStoreAffected(Mage_Core_Model_Store $store) {
+	protected function isStoreAffected(Df_Core_Model_StoreM $store) {
 		return !Mage::getStoreConfigFlag($this->getConfigPath(), $store);
 	}
 }

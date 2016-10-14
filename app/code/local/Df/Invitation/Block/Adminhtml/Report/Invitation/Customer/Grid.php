@@ -40,7 +40,4 @@ class Df_Invitation_Block_Adminhtml_Report_Invitation_Customer_Grid
 		$this->addExportType('*/*/exportCustomerExcel', df_h()->invitation()->__('Excel'));
 		return parent::_prepareColumns();
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Report_Invitation_Customer_Grid */
-	public static function i() {return df_block(__CLASS__);}
 }

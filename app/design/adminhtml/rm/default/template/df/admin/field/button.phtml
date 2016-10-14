@@ -1,0 +1,17 @@
+<?php /** @var Df_Admin_Block_Field_Button $this */ ?>
+<button
+	type='button'
+	class='rm-action'
+	id='<?php echo $this->getHtmlId(); ?>'><?php echo $this->getCaption(); ?>
+</button>
+<script type='text/javascript'>
+	(function($){$(function() {
+		/** @type string */
+		var elementId = '<?php echo $this->getHtmlId(); ?>';
+		/** @type string */
+		var url = '<?php echo rm_ejs($this->url()); ?>';
+		/** @type {jQuery} HTMLButtonElement */
+		var $element = $('#' +  elementId);
+		$element.click(function() {window.open(url, '_blank');});
+	});})(jQuery);
+</script>

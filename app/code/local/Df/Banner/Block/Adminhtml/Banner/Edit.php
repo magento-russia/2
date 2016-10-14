@@ -1,8 +1,9 @@
 <?php
 class Df_Banner_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 	/**
-	 * Перекрывать надо именно конструктор, а не метод _construct,
+	 * Перекрывать надо именно конструктор, а не метод @see _construct(),
 	 * потому что родительский класс пихает инициализацию именно в конструктор.
+	 * @see Mage_Adminhtml_Block_Widget_Form_Container::__construct()
 	 * @override
 	 * @return Df_Banner_Block_Adminhtml_Banner_Edit
 	 */
@@ -11,19 +12,13 @@ class Df_Banner_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Block_Widget_
 		$this->_objectId = 'id';
 		$this->_blockGroup = 'df_banner';
 		$this->_controller = 'adminhtml_banner';
-		$this->_updateButton('save', 'label', df_h()->banner()->__('Утвердить и вернуться'));
-		$this->_updateButton('delete', 'label', df_h()->banner()->__('Удалить'));
-		$this
-			->_addButton(
-				'saveandcontinue'
-				,array(
-					'label'	=> df_mage()->adminhtml()->__('Утвердить и остаться')
-					,'onclick' => 'saveAndContinueEdit()'
-					,'class' => 'save'
-				)
-				,-100
-			)
-		;
+		$this->_updateButton('save', 'label', 'Утвердить и вернуться');
+		$this->_updateButton('delete', 'label', 'Удалить');
+		$this->_addButton('saveandcontinue', array(
+			'label'	=> 'Утвердить и остаться'
+			,'onclick' => 'saveAndContinueEdit()'
+			,'class' => 'save'
+		), -100);
 		$this->_formScripts[]= "
 			function toggleEditor() {
 				if (null === tinyMCE.getInstanceById('df_banner_content')) {
@@ -32,7 +27,6 @@ class Df_Banner_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Block_Widget_
 					tinyMCE.execCommand('mceRemoveControl', false, 'df_banner_content');
 				}
 			}
-
 			function saveAndContinueEdit(){
 				editForm.submit($('edit_form').action+'back/edit/');
 			}
@@ -44,41 +38,10 @@ class Df_Banner_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Block_Widget_
 	 * @return string
 	 */
 	public function getHeaderText() {
-		/** @var string $result */
-		$result = '';
-		if (Mage::registry('df_banner_data') && Mage::registry('df_banner_data')->getId()) {
-			$result =
-				df_h()->banner()->__(
-					'Настройка щита «%s»'
-					,$this->escapeHtml(
-						Mage::registry('df_banner_data')->getTitle()
-					)
-				)
-			;
-		} else {
-			$result = df_h()->banner()->__('Повесить новый щит...');
-		}
-		return $result;
-	}
-
-	/**
-	 * @override
-	 * @return string|null
-	 */
-	public function getTemplate() {
-		/** @var string|null $result */
-		$result =
-			/**
-			 * В отличие от витрины, шаблоны административной части будут отображаться
-			 * даже если модуль отключен (но модуль должен быть лицензирован)
-			 */
-			!(df_enabled(Df_Core_Feature::BANNER))
-			? null
-			: parent::getTemplate()
+		return
+			Mage::registry('df_banner_data') && Mage::registry('df_banner_data')->getId()
+			? sprintf('Настройка щита «%s»', rm_e(Mage::registry('df_banner_data')->getTitle()))
+			: 'Повесить новый щит...'
 		;
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
 	}
 }

@@ -4,14 +4,8 @@
  */
 class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update
 	extends Mage_Adminhtml_Block_Widget_Form {
-	/**
-	 * Getter
-	 * @return Mage_Customer_Model_Customer
-	 */
-	public function getCustomer()
-	{
-		return Mage::registry('current_customer');
-	}
+	/** @return Df_Customer_Model_Customer */
+	public function getCustomer() {return Mage::registry('current_customer');}
 
 	/**
 	 * Prepare form before rendering HTML
@@ -48,7 +42,8 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update
 		/**
 		 * Обратите внимание,
 		 * что нельзя применять цепной вызов $fieldset->addField()->addField(),
-		 * потому что addField() возвращает не $fieldset, а созданное поле.
+		 * потому что @uses Varien_Data_Form_Element_Fieldset::addField()
+		 * возвращает не $fieldset, а созданное поле.
 		 */
 		$fieldset
 			->addField(
@@ -123,28 +118,21 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update
 		$values = array();
 		$nonEscapableNbspChar = html_entity_decode('&#160;', ENT_NOQUOTES, 'UTF-8');
 		foreach ($stores as $websiteId => $website) {
-			$values[]= array(
-				'label' => $website['label'],'value' => array()
-			);
+			$values[]= rm_option(array(), $website['label']);
 			if (isset($website['children']) && is_array($website['children'])) {
 				foreach ($website['children'] as $groupId => $group) {
 					if (isset($group['children']) && is_array($group['children'])) {
 						$options = array();
 						foreach ($group['children'] as $storeId => $store) {
-							$options[]= array(
-								'label' => str_repeat($nonEscapableNbspChar, 4) . $store['label'],'value' => $store['value']
+							$options[]= rm_option(
+								$store['value'], str_repeat($nonEscapableNbspChar, 4) . $store['label']
 							);
 						}
-						$values[]= array(
-							'label' => str_repeat($nonEscapableNbspChar, 4) . $group['label'],'value' => $options
-						);
+						$values[]= rm_option($options, str_repeat($nonEscapableNbspChar, 4) . $group['label']);
 					}
 				}
 			}
 		}
 		return $values;
 	}
-
-	/** @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update */
-	public static function i() {return df_block(__CLASS__);}
 }

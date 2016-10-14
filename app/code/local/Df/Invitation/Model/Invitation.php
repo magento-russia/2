@@ -1,4 +1,8 @@
 <?php
+/**
+ * @method int|null getCustomerId()
+ * @method int|null getReferralId()
+ */
 class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	/**
 	 * @param int|string $websiteId
@@ -29,7 +33,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 			$this->makeSureCanBeAccepted($websiteId);
 			return true;
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			// intentionally jammed
 		}
 		return false;
@@ -53,9 +57,9 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 			$this->makeSureCanBeSent();
 			return true;
 		}
-		catch(Mage_Core_Exception $e) {
+		catch (Mage_Core_Exception $e) {
 			if ($e->getCode() && $e->getCode() === self::ERROR_INVALID_DATA) {
-				throw $e;
+				df_error($e);
 			}
 		}
 		return false;
@@ -82,22 +86,22 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 		return $this->getId() . ':' . $this->getProtectionCode();
 	}
 
-	/** @return Mage_Customer_Model_Customer */
+	/** @return Df_Customer_Model_Customer|null */
 	public function getInviter() {
-		$inviter = $this->getCustomer();
-		if (!$inviter || !$inviter->getId()) {
-			$inviter = null;
-		}
-		return $inviter;
+		/** @var Df_Customer_Model_Customer|null $result */
+		$result = $this->getCustomer();
+		return $result && $result->getId() ? $result : null;
 	}
+
+	/**
+	 * @override
+	 * @return Df_Invitation_Model_Resource_Invitation_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
 
 	/** @return int */
 	public function getStoreId() {
-		return
-			$this->hasData('store_id')
-			? $this->_getData('store_id')
-			: Mage::app()->getStore()->getId()
-		;
+		return $this->hasData('store_id') ? $this->_getData('store_id') : rm_store_id();
 	}
 
 	/**
@@ -138,10 +142,8 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 		) {
 			throw new Mage_Core_Exception($messageInvalid, self::ERROR_STATUS);
 		}
-		if (null === $websiteId) {
-			$websiteId = Mage::app()->getWebsite()->getId();
-		}
-		if ($websiteId != Mage::app()->getStore($this->getStoreId())->getWebsiteId()) {
+		$websiteId = is_null($websiteId) ? rm_website_id() : $websiteId;
+		if ($websiteId != rm_store($this->getStoreId())->getWebsiteId()) {
 			throw new Mage_Core_Exception($messageInvalid, self::ERROR_STATUS);
 		}
 	}
@@ -185,15 +187,11 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	 * @return void
 	 */
 	public function makeSureCustomerNotExists($email = null, $websiteId = null) {
-		if (null === $websiteId) {
-			$websiteId = Mage::app()->getStore($this->getStoreId())->getWebsiteId();
-		}
+		$websiteId = !is_null($websiteId) ? $websiteId : rm_store($this->getStoreId())->getWebsiteId();
 		if (!$websiteId) {
 			throw new Mage_Core_Exception(
-				df_h()->invitation()->__(
-					'Unable to determine proper website.'
-				)
-				,self::ERROR_INVALID_DATA
+				df_h()->invitation()->__('Unable to determine proper website.')
+				, self::ERROR_INVALID_DATA
 			);
 		}
 		if (null === $email) {
@@ -238,17 +236,12 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 		/** @var bool $result */
 		$result = false;
 		$this->makeSureCanBeSent();
-		$store = Mage::app()->getStore($this->getStoreId());
+		$store = rm_store($this->getStoreId());
 		/** @var Df_Core_Model_Email_Template $mail */
 		$mail = Df_Core_Model_Email_Template::i();
-		$mail
-			->setDesignConfig(
-				array(
-					  'area'=>Df_Core_Const_Design_Area::FRONTEND
-					  , 'store' => $this->getStoreId()
-				)
-			)
-		;
+		$mail->setDesignConfig(array(
+			'area'=>Df_Core_Const_Design_Area::FRONTEND, 'store' => $this->getStoreId()
+		));
 		$mail
 			->sendTransactional(
 				$store->getConfig(self::XML_PATH_EMAIL_TEMPLATE)
@@ -353,12 +346,9 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 		}
 		else {
 			if ($this->dataHasChangedFor('message') && !$this->canMessageBeUpdated()) {
-				throw new Mage_Core_Exception(
-					df_h()->invitation()->__(
-						'Message cannot be updated.'
-						,self::ERROR_STATUS
-					)
-				);
+				throw new Mage_Core_Exception(df_h()->invitation()->__(
+					'Message cannot be updated.', self::ERROR_STATUS
+				));
 			}
 		}
 		parent::_beforeSave();
@@ -367,12 +357,9 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Invitation_Model_Resource_Invitation
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Invitation_Model_Resource_Invitation::mf());
-	}
+	protected function _getResource() {return Df_Invitation_Model_Resource_Invitation::s();}
 
 	/** @var array[] */
 	private static $_customerExistsLookup = array();
@@ -381,7 +368,8 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	/** @var string */
 	protected $_eventPrefix = 'df_invitation';
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Invitation_Model_Resource_Invitation_Collection::_construct() */
+	const _C = __CLASS__;
 	const ERROR_CUSTOMER_EXISTS = 3;
 	const ERROR_INVALID_DATA = 2;
 	const ERROR_STATUS = 1;
@@ -394,7 +382,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	const XML_PATH_EMAIL_TEMPLATE = 'df_invitation/email/template';
 
 	/** @return Df_Invitation_Model_Resource_Invitation_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Invitation_Model_Resource_Invitation_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -408,11 +396,6 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	 * @return Df_Invitation_Model_Invitation
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Invitation_Model_Resource_Invitation_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Invitation_Model_Invitation */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

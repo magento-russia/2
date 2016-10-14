@@ -54,9 +54,9 @@ class Df_PonyExpress_Model_Location extends Df_Shipping_Model_Location {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__AS_TEXT, self::V_STRING);
+		$this->_prop(self::P__AS_TEXT, RM_V_STRING);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__AS_TEXT = 'as_text';
 	/**
 	 * @static

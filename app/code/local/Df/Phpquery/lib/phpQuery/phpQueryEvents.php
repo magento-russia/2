@@ -138,6 +138,8 @@ abstract class phpQueryEvents {
 			}
 		}
 	}
+
+	/** @noinspection PhpInconsistentReturnPointsInspection */
 	protected static function getNode($documentID, $node) {
 		foreach (phpQuery::$documents[$documentID]->eventsNodes as $eventNode) {
 			if ($node->isSameNode($eventNode))

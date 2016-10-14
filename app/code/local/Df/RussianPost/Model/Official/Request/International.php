@@ -1,19 +1,30 @@
 <?php
 class Df_RussianPost_Model_Official_Request_International extends Df_Shipping_Model_Request {
-	/** @return float */
+	/**
+	 * @return float
+	 * @throws Exception
+	 */
 	public function getRate() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var phpQueryObject $pqRate */
 			$pqRate = $this->response()->pq('#TarifValue');
-			$this->{__METHOD__} = rm_float(df_trim($pqRate->text()));
+			try {
+				$this->{__METHOD__} = rm_float(df_trim($pqRate->text()));
+			}
+			catch (Exception $e) {
+				//$this->logRequestParameters();
+				$this->logResponseAsHtml();
+				throw $e;
+			}
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * @override
+	 * @used-by Df_Shipping_Model_Request::getHttpClient()
 	 * @param Zend_Http_Client $httpClient
-	 * @return Df_RussianPost_Model_Official_Request_International
+	 * @return void
 	 */
 	protected function adjustHttpClient(Zend_Http_Client $httpClient) {$httpClient->setCookieJar(true);}
 
@@ -82,11 +93,9 @@ class Df_RussianPost_Model_Official_Request_International extends Df_Shipping_Mo
 				/** @var string $result */
 				$result = $this->getHttpClient()->request()->getBody();
 			}
-			else if(rm_contains($result, 'window.location.replace(window.location.toString())')) {
+			else if (rm_contains($result, 'window.location.replace(window.location.toString())')) {
 				$this->getHttpClient()
-					->setHeaders(
-						array('Referer' => 'http://www.russianpost.ru/autotarif/Autotarif.aspx')
-					)
+					->setHeaders(array('Referer' => 'http://www.russianpost.ru/autotarif/Autotarif.aspx'))
 					->setUri($originalUri)
 					->setMethod(Zend_Http_Client::GET)
 				;
@@ -114,32 +123,25 @@ class Df_RussianPost_Model_Official_Request_International extends Df_Shipping_Mo
 			,'Host' => 'www.russianpost.ru'
 			,'Pragma' => 'no-cache'
 			,'Referer' => 'http://www.russianpost.ru/autotarif/Autotarif.aspx'
-			,'User-Agent' => Df_Core_Const::FAKE_USER_AGENT
-		);
+		) + parent::getHeaders();
 	}
 
 	/**
+	 * Не знаю, насколько это обязательно, но не повредит точно
+	 * http://framework.zend.com/manual/1.12/en/zend.http.client.advanced.html
 	 * @override
 	 * @return array
 	 */
-	protected function getRequestConfuguration() {
-		return array(
-			/**
-			 * Не знаю, насколько это обязательно, но не повредит точно
-			 * @link http://framework.zend.com/manual/1.12/en/zend.http.client.advanced.html
-			 */
-			'keepalive' => true
-		);
-	}
+	protected function getRequestConfuguration() {return array('keepalive' => true);}
 
 	/** @return int */
-	private function getDeclaredValue() {return $this->cfg(self::P__DECLARED_VALUE);}
+	private function getDeclaredValue() {return $this->cfg(self::$P__DECLARED_VALUE);}
 
 	/** @return Df_Directory_Model_Country */
-	private function getDestinationCountry() {return $this->cfg(self::P__DESTINATION_COUNTRY);}
+	private function getDestinationCountry() {return $this->cfg(self::$P__DESTINATION_COUNTRY);}
 
 	/** @return int */
-	private function getWeightInGrammes() {return $this->cfg(self::P__WEIGHT_IN_GRAMMES);}
+	private function getWeightInGrammes() {return $this->cfg(self::$P__WEIGHT_IN_GRAMMES);}
 
 	/**
 	 * @param string $responseAsText
@@ -156,21 +158,29 @@ class Df_RussianPost_Model_Official_Request_International extends Df_Shipping_Mo
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__WEIGHT_IN_GRAMMES, self::V_INT)
-			->_prop(self::P__DECLARED_VALUE, self::V_INT)
-			->_prop(self::P__DESTINATION_COUNTRY, Df_Directory_Model_Country::_CLASS)
+			->_prop(self::$P__WEIGHT_IN_GRAMMES, RM_V_INT)
+			->_prop(self::$P__DECLARED_VALUE, RM_V_INT)
+			->_prop(self::$P__DESTINATION_COUNTRY, Df_Directory_Model_Country::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
-	const P__DECLARED_VALUE = 'declared_value';
-	const P__DESTINATION_COUNTRY = 'destination_country';
-	const P__WEIGHT_IN_GRAMMES = 'weight_in_grammes';
+	/** @var string */
+	private static $P__DECLARED_VALUE = 'declared_value';
+	/** @var string */
+	private static $P__DESTINATION_COUNTRY = 'destination_country';
+	/** @var string */
+	private static $P__WEIGHT_IN_GRAMMES = 'weight_in_grammes';
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param Df_Directory_Model_Country $destinationCountry
 	 * @return Df_RussianPost_Model_Official_Request_International
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(
+		Df_Directory_Model_Country $destinationCountry, $weightInGrammes, $declaredValue
+	) {return new self(array(
+		self::$P__DESTINATION_COUNTRY => $destinationCountry
+		,self::$P__WEIGHT_IN_GRAMMES => $weightInGrammes
+		,self::$P__DECLARED_VALUE => $declaredValue
+	));}
 }
 
 

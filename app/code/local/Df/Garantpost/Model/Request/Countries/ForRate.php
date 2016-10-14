@@ -6,9 +6,7 @@ class Df_Garantpost_Model_Request_Countries_ForRate
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(),array(
-			'Referer' => 'http://www.garantpost.ru/tools/calc'
-		));
+		return array('Referer' => 'http://www.garantpost.ru/tools/calc') + parent::getHeaders();
 	}
 
 	/**
@@ -36,7 +34,7 @@ class Df_Garantpost_Model_Request_Countries_ForRate
 	 */
 	protected function getRequestMethod() {return Zend_Http_Client::POST;}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_Garantpost_Model_Request_Countries_ForRate */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -5,9 +5,7 @@
  */
 class Df_Catalog_Model_Event_AttributeSet_GroupAdded extends Df_Core_Model_Event {
 	/** @return int */
-	public function getAttributeSetId() {
-		return rm_nat($this->getEventParam(self::EVENT_PARAM__ATTRIBUTE_SET_ID));
-	}
+	public function getAttributeSetId() {return rm_nat($this->getEventParam(self::$E__ATTRIBUTE_SET_ID));}
 
 	/** @return Df_Eav_Model_Entity_Attribute_Set */
 	public function getAttributeSet() {
@@ -18,20 +16,23 @@ class Df_Catalog_Model_Event_AttributeSet_GroupAdded extends Df_Core_Model_Event
 	}
 
 	/** @return int */
-	public function getGroupName() {return $this->getEventParam(self::EVENT_PARAM__GROUP_NAME);}
+	public function getGroupName() {return $this->getEventParam(self::$E__GROUP_NAME);}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EVENT;}
+	protected function getExpectedEventPrefix() {return self::$EVENT;}
 
-	const _CLASS = __CLASS__;
-	const EVENT = 'df_catalog__attribute_set__group_added';
-	const EVENT_PARAM__ATTRIBUTE_SET_ID = 'attribute_set_id';
-	const EVENT_PARAM__GROUP_NAME = 'group_name';
+	/** @var string */
+	private static $E__ATTRIBUTE_SET_ID = 'attribute_set_id';
+	/** @var string */
+	private static $E__GROUP_NAME = 'group_name';
+	/** @var string */
+	private static $EVENT = 'df_catalog__attribute_set__group_added';
 
 	/**
+	 * @used-by Df_Catalog_Helper_Product::addGroupToAttributeSetIfNeeded()
 	 * @param int $attributeSetId
 	 * @param string $groupName
 	 * @return void
@@ -39,18 +40,15 @@ class Df_Catalog_Model_Event_AttributeSet_GroupAdded extends Df_Core_Model_Event
 	public static function dispatch($attributeSetId, $groupName) {
 		df_param_integer($attributeSetId, 0);
 		df_param_string_not_empty($groupName, 1);
-		Mage::dispatchEvent(self::EVENT, array(
-			self::EVENT_PARAM__ATTRIBUTE_SET_ID => $attributeSetId
-			, self::EVENT_PARAM__GROUP_NAME => $groupName
+		Mage::dispatchEvent(self::$EVENT, array(
+			self::$E__ATTRIBUTE_SET_ID => $attributeSetId, self::$E__GROUP_NAME => $groupName
 		));
 	}
 
 	/**
-	 * @static
+	 * @used-by Df_1C_Observer::df_catalog__attribute_set__group_added()
 	 * @param Varien_Event_Observer $observer
 	 * @return Df_Catalog_Model_Event_AttributeSet_GroupAdded
 	 */
-	public static function i(Varien_Event_Observer $observer) {
-		return new self(array(self::P__OBSERVER => $observer));
-	}
+	public static function i(Varien_Event_Observer $observer) {return self::ic(__CLASS__, $observer);}
 }

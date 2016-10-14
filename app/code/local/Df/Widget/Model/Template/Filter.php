@@ -10,7 +10,7 @@ class Df_Widget_Model_Template_Filter extends Mage_Widget_Model_Template_Filter 
 	/**
 	 * Цель перекрытия —
 	 * устранение дефекта показа картинок в редакторе.
-	 * @link http://magento-forum.ru/topic/2320/
+	 * http://magento-forum.ru/topic/2320/
 	 * @override
 	 * @param array $construction
 	 * @return string

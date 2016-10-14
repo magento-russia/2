@@ -11,15 +11,11 @@ abstract class Df_Core_Model_Handler extends Df_Core_Model {
 	 * @static
 	 * @param string $class
 	 * @param Df_Core_Model_Event $event
-	 * @param array $additionalParams[optional]
+	 * @param array $additionalParams [optional]
 	 * @return Df_Core_Model_Handler
 	 */
 	public static function create($class, Df_Core_Model_Event $event, $additionalParams = array()) {
-		df_param_string($class, 0);
-		df_param_array($additionalParams, 2);
-		$result = df_model($class, array_merge(array(self::P__EVENT => $event), $additionalParams));
-		df_assert($result instanceof Df_Core_Model_Handler);
-		return $result;
+		return rm_ic($class, __CLASS__, array(self::P__EVENT => $event) + $additionalParams);
 	}
 
 	/**
@@ -38,9 +34,7 @@ abstract class Df_Core_Model_Handler extends Df_Core_Model {
 	abstract protected function getEventClass();
 
 	/** @return Df_Core_Model_Event */
-	protected function getEvent() {
-		return $this->cfg(self::P__EVENT);
-	}
+	protected function getEvent() {return $this->cfg(self::P__EVENT);}
 
 	/**
 	 * @override
@@ -50,6 +44,6 @@ abstract class Df_Core_Model_Handler extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__EVENT, $this->getEventClass());
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__EVENT = 'event';
 }

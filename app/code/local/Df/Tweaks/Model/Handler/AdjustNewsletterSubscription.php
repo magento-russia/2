@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 class Df_Tweaks_Model_Handler_AdjustNewsletterSubscription extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,37 +7,36 @@ class Df_Tweaks_Model_Handler_AdjustNewsletterSubscription extends Df_Core_Model
 	 * @return void
 	 */
 	public function handle() {
+		/** @var Df_Tweaks_Model_Settings_NewsletterSubscription $s */
+		$s = Df_Tweaks_Model_Settings_NewsletterSubscription::s();
 		if (
-				df_cfg()->tweaks()->newsletter()->subscription()->removeFromAll()
+				$s->removeFromAll()
 			||
 				(
-						df_cfg()->tweaks()->newsletter()->subscription()->removeFromFrontpage()
+						$s->removeFromFrontpage()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 				)
 			||
 				(
-						df_cfg()->tweaks()->newsletter()->subscription()->removeFromCatalogProductList()
+						$s->removeFromCatalogProductList()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 				)
 			||
 				(
-						df_cfg()->tweaks()->newsletter()->subscription()->removeFromCatalogProductView()
+						$s->removeFromCatalogProductView()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				)
 			||
 				(
-						df_cfg()->tweaks()->newsletter()->subscription()->removeFromAccount()
+						$s->removeFromAccount()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
 				)
 		) {
-			df()->layout()
-				->removeBlock('left.newsletter')
-				->removeBlock('newsletter')
-			;
+			rm_block_remove('left.newsletter', 'newsletter');
 		}
 	}
 
@@ -49,8 +46,9 @@ class Df_Tweaks_Model_Handler_AdjustNewsletterSubscription extends Df_Core_Model
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

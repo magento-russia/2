@@ -2,11 +2,11 @@
 class Df_Core_Helper_ArrayColumn {
 	/**
 	 * 2015-02-07
-	 * @link http://php.net/manual/function.array-column.php
+	 * http://php.net/manual/function.array-column.php
 	 * Эмуляцию для PHP версий ниже 5.5 взял отсюда:
-	 * @link https://github.com/ramsey/array_column
+	 * https://github.com/ramsey/array_column
 	 * Как сказано: «It is written by PHP 5.5 array_column creator itself»
-	 * @link http://stackoverflow.com/a/20746278
+	 * http://stackoverflow.com/a/20746278
 	 * @param array $array
 	 * @param mixed $column_key
 	 * @param mixed $index_key [optional]

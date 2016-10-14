@@ -4,7 +4,7 @@ class Df_Page_Block_Template_Links extends Mage_Page_Block_Template_Links {
 	 * Цель перекрытия —
 	 * устранение сбоя «Serialization of 'Mage_Core_Model_Layout_Element' is not allowed»
 	 * оформительской темы ThemeForest Infortis Fortis:
-	 * @link http://magento-forum.ru/topic/4837/
+	 * http://magento-forum.ru/topic/4837/
 	 * @override
 	 * @param string $label
 	 * @param string $url
@@ -29,10 +29,10 @@ class Df_Page_Block_Template_Links extends Mage_Page_Block_Template_Links {
 		$label = $this->__($label);
 		$title = $this->__($title);
 		if ($beforeText instanceof SimpleXMLElement) {
-			$beforeText = (string)$beforeText;
+			$beforeText = rm_leaf_s($beforeText);
 		}
 		if ($afterText instanceof SimpleXMLElement) {
-			$afterText = (string)$afterText;
+			$afterText = rm_leaf_s($afterText);
 		}
 		parent::addLink(
 			$label, $url, $title, $prepare, $urlParams, $position

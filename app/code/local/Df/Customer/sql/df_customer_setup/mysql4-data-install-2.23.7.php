@@ -8,5 +8,5 @@
  */
 /** @var Df_Core_Model_Resource_Setup $this */
 $this->startSetup();
-Df_Customer_Model_Setup_2_23_7::s()->process();
+$this->p(__FILE__);
 $this->endSetup();

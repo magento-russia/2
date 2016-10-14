@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Adminhtml_Block_HtmlBefore getEvent()
- */
+/** @method Df_Core_Model_Event_Adminhtml_Block_HtmlBefore getEvent() */
 class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -20,14 +18,10 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_CLASS;
-	}
+	protected function getEventClass() {return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C;}
 
 	/** @return Mage_Adminhtml_Block_Report_Filter_Form */
-	private function getBlockAsReportFilterForm() {
-		return $this->getEvent()->getBlock();
-	}
+	private function getBlockAsReportFilterForm() {return $this->getEvent()->getBlock();}
 
 	/** @return array(string => int|string)|null */
 	private function getPeriodDuration() {
@@ -35,27 +29,22 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 			/** @var array|null $result */
 			$result = null;
 			if (
-					Df_Reports_Model_System_Config_Source_Duration::UNDEFINED
+					Df_Reports_Model_Config_Source_Duration::UNDEFINED
 				!==
 					df_cfg()->reports()->common()->getPeriodDuration()
 			) {
-				/** @var Df_Reports_Model_System_Config_Source_Duration $configDuration */
-				$configDuration = Df_Reports_Model_System_Config_Source_Duration::i();
+				/** @var Df_Reports_Model_Config_Source_Duration $configDuration */
+				$configDuration = Df_Reports_Model_Config_Source_Duration::i();
+				/** @var string $duration */
+				$duration = df_cfg()->reports()->common()->getPeriodDuration();
 				foreach ($configDuration->toOptionArray() as $option) {
-					/** @var array $option */
-					if (
-							df_cfg()->reports()->common()->getPeriodDuration()
-						===
-							df_a($option, Df_Admin_Model_Config_Source::OPTION_KEY__VALUE)
-					)  {
+					/** @var array(string => string) $option */
+					if ($duration === rm_option_v($option))  {
 						/** @var array(string => int|string) $duration */
-						$result =
-							df_a(
-								$option
-								,Df_Reports_Model_System_Config_Source_Duration
-									::OPTION_PARAM__DURATION
-							)
-						;
+						$result = df_a(
+							$option
+							,Df_Reports_Model_Config_Source_Duration::OPTION_PARAM__DURATION
+						);
 						df_assert_array($result);
 						break;
 					}
@@ -73,7 +62,7 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 	private function setEndDateToYesterday() {
 		/** @var Varien_Data_Form_Element_Date|null $elementEndDate */
 		$elementEndDate =
-			$this->getBlockAsReportFilterForm()->getForm()->getElement(self::FORM_ELEMENT__TO)
+			$this->getBlockAsReportFilterForm()->getForm()->getElement(self::$FORM_ELEMENT__TO)
 		;
 		if ($elementEndDate && !$elementEndDate->getValueInstance()) {
 			$elementEndDate->setValue(df()->date()->cleanTime(df()->date()->yesterday()));
@@ -84,13 +73,11 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 	/** @return Df_Reports_Model_Handler_SetDefaultFilterValues */
 	private function setStartDate() {
 		/** @var Varien_Data_Form_Element_Date|null $elementStartDate */
-		$elementStartDate =
-			$this->getBlockAsReportFilterForm()->getForm()->getElement(self::FORM_ELEMENT__FROM)
-		;
+		$elementStartDate = $this->getBlockAsReportFilterForm()->getForm()->getElement('from');
 		if ($elementStartDate && !$elementStartDate->getValueInstance()) {
 			/** @var Varien_Data_Form_Element_Date|null $elementEndDate */
 			$elementEndDate =
-				$this->getBlockAsReportFilterForm()->getForm()->getElement(self::FORM_ELEMENT__TO)
+				$this->getBlockAsReportFilterForm()->getForm()->getElement(self::$FORM_ELEMENT__TO)
 			;
 			if ($elementEndDate) {
 				/** @var Zend_Date|null $endDate */
@@ -105,12 +92,12 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 					$startDate->sub(
 						df_a(
 							$this->getPeriodDuration()
-							,Df_Reports_Model_System_Config_Source_Duration
+							,Df_Reports_Model_Config_Source_Duration
 								::OPTION_PARAM__DURATION__VALUE
 						)
 						,df_a(
 							$this->getPeriodDuration()
-							,Df_Reports_Model_System_Config_Source_Duration
+							,Df_Reports_Model_Config_Source_Duration
 								::OPTION_PARAM__DURATION__DATEPART
 						)
 					);
@@ -121,7 +108,8 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 		return $this;
 	}
 
-	const _CLASS = __CLASS__;
-	const FORM_ELEMENT__FROM = 'from';
-	const FORM_ELEMENT__TO = 'to';
+	/** @used-by Df_Reports_Observer::adminhtml_block_html_before() */
+	const _C = __CLASS__;
+	/** @var string */
+	private static $FORM_ELEMENT__TO = 'to';
 }

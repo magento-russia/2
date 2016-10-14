@@ -6,13 +6,9 @@ class Df_Spsr_Model_Request_Rate extends Df_Spsr_Model_Request {
 	 */
 	public function getErrorMessage() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Varien_Simplexml_Element|null $errorMessageAsSimpleXml */
-			$errorMessageAsSimpleXml = $this->response()->xml('/root/Error');
-			$this->{__METHOD__} =
-				is_null($errorMessageAsSimpleXml)
-				? ''
-				: (string)$errorMessageAsSimpleXml
-			;
+			/** @var Df_Core_Sxe|null $e */
+			$e = $this->response()->xml('/root/Error');
+			$this->{__METHOD__} = !$e ? '' : rm_leaf_s($e);
 		}
 		return $this->{__METHOD__};
 	}
@@ -22,11 +18,11 @@ class Df_Spsr_Model_Request_Rate extends Df_Spsr_Model_Request {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array[] $result */
 			$result = array();
-			/** @var Df_Varien_Simplexml_Element[] $tariffsAsSimpleXml */
+			/** @var Df_Core_Sxe[] $tariffsAsSimpleXml */
 			$tariffsAsSimpleXml = $this->response()->xml('/root/Tariff', $all = true);
 			try {
 				foreach ($tariffsAsSimpleXml as $tariffAsSimpleXml) {
-					/** @var Df_Varien_Simplexml_Element $tariffAsSimpleXml */
+					/** @var Df_Core_Sxe $tariffAsSimpleXml */
 					/** @var array(string => string) $tariffAsArray */
 					$tariffAsArray = $tariffAsSimpleXml->asArray();
 					/** @var int $cost */
@@ -34,22 +30,16 @@ class Df_Spsr_Model_Request_Rate extends Df_Spsr_Model_Request {
 					if (0 < $cost) {
 						/** @var int[] $deliveryTimeAsArray */
 						$deliveryTimeAsArray = rm_int(explode('-', df_a($tariffAsArray, 'DP')));
-						$result[]=
-							array(
-								self::RATE__TITLE =>
-									strtr(
-										df_a($tariffAsArray,'TariffType')
-										,array(
-											'Услуги по доставке ' => ''
-											,'Услуга по экспорту отправлений' => ''
-											,'"' => ''
-										)
-									)
-								,self::RATE__COST => $cost
-								,self::RATE__TIME_OF_DELIVERY__MIN => rm_first($deliveryTimeAsArray)
-								,self::RATE__TIME_OF_DELIVERY__MAX => rm_last($deliveryTimeAsArray)
+						$result[]= array(
+							self::RATE__TITLE => str_replace(
+								array('Услуги по доставке ', 'Услуга по экспорту отправлений','"')
+								,null
+								,df_a($tariffAsArray,'TariffType')
 							)
-						;
+							,self::RATE__COST => $cost
+							,self::RATE__TIME_OF_DELIVERY__MIN => rm_first($deliveryTimeAsArray)
+							,self::RATE__TIME_OF_DELIVERY__MAX => rm_last($deliveryTimeAsArray)
+						);
 					}
 				}
 			}
@@ -79,7 +69,7 @@ class Df_Spsr_Model_Request_Rate extends Df_Spsr_Model_Request {
 	 */
 	protected function getRequestMethod() {return Zend_Http_Client::GET;}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const POST__DECLARED_VALUE = 'Amount';
 	const POST__NOTIFY_RECIPIENT_BY_SMS = 'SMS_Recv';
 	const POST__NOTIFY_SENDER_BY_SMS = 'SMS';

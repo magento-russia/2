@@ -10,20 +10,7 @@
 			/** @var Df_PromoGift_Model_Gift $gift */
 			?>
 				<li class="df-product">
-					<?php
-						/**
-						 * Отображает подарок.
-						 *
-						 */
-						echo
-							$this
-								->renderGift(
-									$gift
-									,
-									'df/promo_gift/chooser/center/gift.phtml'
-								)
-						;
-					?>
+					<?php echo Df_PromoGift_Block_Chooser_Gift::r($gift, 'center'); ?>
 				</li>
 			<?php
 		}

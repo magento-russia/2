@@ -5,7 +5,7 @@
 		type='text'
 		id='<?php echo $this->getDomId(); ?>'
 		name='<?php echo $this->getDomName(); ?>'
-		value='<?php echo df_text()->escapeHtml($this->getValue()); ?>'
+		value='<?php echo rm_e($this->getValue()); ?>'
 		title='<?php echo $this->getLabel(); ?>'
 		class='<?php echo $this->getCssClassesAsText(); ?> df-street-line-1'
 	/>
@@ -18,7 +18,7 @@
 		type='text'
 		id='<?php echo $this->getDomIdForStreetLine($lineOrdering); ?>'
 		name='<?php echo $this->getDomName(); ?>'
-		value='<?php echo df_text()->escapeHtml($this->getValueForStreetLine($lineOrdering)); ?>'
+		value='<?php echo rm_e($this->getValueForStreetLine($lineOrdering)); ?>'
 		title='<?php echo $this->getLabel(); ?>'
 		class='input-text'
 	/>

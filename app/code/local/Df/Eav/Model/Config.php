@@ -11,7 +11,7 @@ class Df_Eav_Model_Config extends Mage_Eav_Model_Config {
 		/** @var int $attributeSetId */
 		$attributeSetId = 0;
 		if ($object instanceof Varien_Object) {
-			$attributeSetId = intval($object->getDataUsingMethod('attribute_set_id'));
+			$attributeSetId = (int)$object->getDataUsingMethod('attribute_set_id');
 		}
 		/** @var string $cacheKey */
 		$cacheKey = implode('-', array($entityType->getId(), $attributeSetId));

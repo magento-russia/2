@@ -8,13 +8,11 @@ class Df_Reward_Model_Total_Quote_Reward extends Mage_Sales_Model_Quote_Address_
 	 * @override
 	 * @return Df_Reward_Model_Total_Quote_Reward
 	 */
-	public function __construct() {
-		$this->setCode('reward');
-	}
+	public function __construct() {$this->setCode('reward');}
 
 	/**
 	 * @override
-	 * @param Mage_Sales_Model_Quote_Address $address
+	 * @param Mage_Sales_Model_Quote_Address|Df_Sales_Model_Quote_Address $address
 	 * @return Df_Reward_Model_Total_Quote_Reward
 	 */
 	public function collect(Mage_Sales_Model_Quote_Address $address) {
@@ -72,7 +70,7 @@ class Df_Reward_Model_Total_Quote_Reward extends Mage_Sales_Model_Quote_Address_
 
 	/**
 	 * @override
-	 * @param Mage_Sales_Model_Quote_Address $address
+	 * @param Mage_Sales_Model_Quote_Address|Df_Sales_Model_Quote_Address $address
 	 * @return Df_Reward_Model_Total_Quote_Reward
 	 */
 	public function fetch(Mage_Sales_Model_Quote_Address $address) {
@@ -82,7 +80,9 @@ class Df_Reward_Model_Total_Quote_Reward extends Mage_Sales_Model_Quote_Address_
 		}
 		if ($address->getRewardCurrencyAmount()) {
 			$address->addTotal(array(
-				'code'  => $this->getCode(),'title' => df_h()->reward()->formatReward($address->getRewardPointsBalance()),'value' => -$address->getRewardCurrencyAmount()
+				'code' => $this->getCode()
+				,'title' => df_h()->reward()->formatReward($address->getRewardPointsBalance())
+				,'value' => -$address->getRewardCurrencyAmount()
 			));
 		}
 		return $this;

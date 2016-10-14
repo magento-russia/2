@@ -11,30 +11,18 @@ class Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbidde
 	 */
 	public function handle() {
 		if (
-				df_enabled(Df_Core_Feature::ACCESS_CONTROL)
-			&&
 				df_cfg()->admin()->access_control()->getEnabled()
 			&&
 				!is_null(df_h()->accessControl()->getCurrentRole())
 		) {
 			if (df_h()->accessControl()->getCurrentRole()->isModuleEnabled()) {
-				/**
-				 * Добавляем фильтр по разрешённым товарным разделам.
-				 */
+				// добавляем фильтр по разрешённым товарным разделам
 				/** @var Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection $collection */
 				$collection = $this->getEvent()->getCollection();
-				if (
-					!$collection
-						->hasFlag(
-							Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbiddenCategories
-								::DISABLE_PROCESSING
-						)
-				) {
-					$collection
-						->addIdFilter(
+				if (!Df_AccessControl_Helper_Data::disable($collection)) {
+					$collection->addIdFilter(
 						df_h()->accessControl()->getCurrentRole()->getCategoryIdsWithAncestors()
-						)
-					;
+					);
 				}
 			}
 		}
@@ -45,10 +33,8 @@ class Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbidde
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Catalog_Model_Event_Category_Collection_Load_Before::_CLASS;
-	}
+	protected function getEventClass() {return Df_Catalog_Model_Event_Category_Collection_Load_Before::_C;}
 
-	const _CLASS = __CLASS__;
-	const DISABLE_PROCESSING = 'disable_processing';
+	/** @used-by Df_AccessControl_Observer::catalog_category_collection_load_before() */
+	const _C = __CLASS__;
 }

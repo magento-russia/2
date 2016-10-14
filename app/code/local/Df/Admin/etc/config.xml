@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Admin>
-			<version>2.23.7</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.23.7</version>
 		</Df_Admin>
 	</modules>
 	<df>
@@ -28,18 +28,6 @@
 				<title>Импорт и экспорт картинок</title>
 				<url>http://magento-forum.ru/topic/762/</url>
 			</df-dataflow-images>
-			<df-localization>
-				<title>Русификация</title>
-				<url>http://magento-forum.ru/topic/2031/</url>
-			</df-localization>
-			<df-seo>
-				<title>Поисковая оптимизация</title>
-				<url>http://magento-forum.ru/topic/594/</url>
-			</df-seo>
-			<df-tweaks>
-				<title>Витрина</title>
-				<url>http://magento-forum.ru/topic/796/</url>
-			</df-tweaks>
 			<df-tweaks-admin>
 				<title>Административная часть</title>
 				<url>http://magento-forum.ru/forum/135/</url>
@@ -50,8 +38,8 @@
 				<skip>
 					<conflict>
 						<!--
-							@link http://magento-forum.ru/topic/4710/page__view__findpost__p__18177
-							@link http://magento-forum.ru/topic/4918/
+							http://magento-forum.ru/topic/4710/page__view__findpost__p__18177
+							http://magento-forum.ru/topic/4918/
 						 -->
 						<active>Megnor_AdvancedMenu_Block_Topmenu</active>
 						<inactive>Df_Page_Block_Html_Topmenu</inactive>
@@ -60,9 +48,9 @@
 			</class_rewrite_conflicts>
 			<config-form>
 				<element-types>
-					<df-color>Df_Admin_Model_Config_Form_Element_Color</df-color>
-					<df-multiselect>Df_Admin_Model_Config_Form_Element_Multiselect</df-multiselect>
-					<df-text>Df_Admin_Model_Config_Form_Element_Text</df-text>
+					<df-color>Df_Admin_Config_Form_Element_Color</df-color>
+					<df-multiselect>Df_Admin_Config_Form_Element_Multiselect</df-multiselect>
+					<df-text>Df_Admin_Config_Form_Element_Text</df-text>
 				</element-types>
 			</config-form>
 			<notifiers>
@@ -116,7 +104,7 @@
 	<adminhtml>
 		<translate>
 			<modules>
-				<Df_Admin><files><default>Df_Admin.csv</default></files></Df_Admin>
+				<Df_Admin><files><default>Df/Admin.csv</default></files></Df_Admin>
 			</modules>
 		</translate>
 	</adminhtml>

@@ -29,7 +29,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 				 * к неправильному отображению формы авторизации покупателя,
 				 * открывающейся при нажатии на ссылку «ранее покупали у нас что-то?».
 				 */
-				$this->needSkipCustom($type, $name)
+				$this->needSkipCustom($name)
 		;
 		return $result;
 	}
@@ -56,7 +56,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 			 *
 			 * Обратите внимание, что скрипты с именами вроде path/history.adapter.jquery.js
 			 * не должны определяться, как ядро библиотеки jQuery.
-			 * @link http://magento-forum.ru/topic/3979/
+			 * http://magento-forum.ru/topic/3979/
 			 *
 			 * 2015-10-19
 			 * Заметил, что один из сторонних модулей подключает jQuery файлом с именем jquery-1.6.js,
@@ -101,55 +101,24 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	private function needSkipAsJQuery($type, $name) {
-		/** @var bool $jqueryRemoveExtraneous */
-		static $jqueryRemoveExtraneous;
-		if (!isset($jqueryRemoveExtraneous)) {
-			$jqueryRemoveExtraneous =
-					(
-							df_is_admin()
-						&&
-							df_cfg()->admin()->jquery()->needRemoveExtraneous()
-						&&
-							(
-									Df_Admin_Model_Config_Source_JqueryLoadMode::VALUE__NO_LOAD
-								!==
-									df_cfg()->admin()->jquery()->getLoadMode()
-							)
-					)
-				||
-					(
-							!df_is_admin()
-						&&
-							df_cfg()->tweaks()->jquery()->needRemoveExtraneous()
-						&&
-							(
-									Df_Admin_Model_Config_Source_JqueryLoadMode::VALUE__NO_LOAD
-								!==
-									df_cfg()->tweaks()->jquery()->getLoadMode()
-							)
-					)
-
-			;
+		/** @var bool $removeExtraneous */
+		static $removeExtraneous;
+		if (is_null($removeExtraneous)) {
+			$removeExtraneous = df_cfg()->jquery()->needRemoveExtraneous();
 		}
-		/** @var bool $result */
-		$result =
-				$jqueryRemoveExtraneous
-			&&
-				(in_array($type, array('js', 'skin_js')))
-			&&
-				/**
-				 * Обратите внимание, что Российская сборка Magento добавляет на страницу
-				 * библиотеку jQuery не посредством addItem, а более низкоуровневыми методами
-				 */
-				(
-					$this->isItJQuery($name)
-					|| $this->isItJQueryNoConflict($name)
-					// 2015-10-19
-					// Удаление избыточных копий библиотеки jQuery Migrate.
-					|| $this->isItJQueryMigrate($name)
-				)
+		return
+			$removeExtraneous
+			&& in_array($type, array('js', 'skin_js'))
+			/**
+			 * Обратите внимание, что Российская сборка Magento добавляет на страницу
+			 * библиотеку jQuery не посредством @see addItem(), а более низкоуровневыми методами.
+			 */
+			&& (
+				$this->isItJQuery($name)
+				|| $this->isItJQueryNoConflict($name)
+				|| $this->isItJQueryMigrate($name)
+			)
 		;
-		return $result;
 	}
 
 	/**
@@ -171,21 +140,15 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		 * http://magento-forum.ru/topic/5206/
 		 */
 		/** @var bool $result */
-		$result = !!rm_state()->getController();
+		$result = !!rm_action_name();
 		if ($result) {
-			/** @var bool $needSkipStandardCss */
-			static $needSkipStandardCss;
-			if (!isset($needSkipStanradsCss)) {
-				$needSkipStandardCss =
-					rm_bool(
-						(string)Mage::getConfig()->getNode(
-							'df/page/skip_standard_css/' . rm_state()->getController()->getFullActionName()
-						)
-					)
-				;
+			/** @var bool $skip */
+			static $skip;
+			if (is_null($skip)) {
+				$skip = rm_leaf_b(rm_config_node('df/page/skip_standard_css/', rm_action_name()));
 			}
 			$result =
-				$needSkipStandardCss
+				$skip
 				&& in_array($type, array('skin_css', 'js_css'))
 				&& !rm_contains($name, 'df/')
 			;
@@ -203,26 +166,22 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 * могут приводить (и приводят в случае темы TemplateMonster #43373)
 	 * к неправильному отображению формы авторизации покупателя,
 	 * открывающейся при нажатии на ссылку «ранее покупали у нас что-то?».
-	 * @param string $type
+	 *
+	 * Вообще говоря, по-правильному надо использовать здесь шаблон проектирования «наблюдатель»:
+	 * вызывать @see Mage::dispatchEvent(), однако я сознательно это пока не делаю
+	 * ради ускорения работы системы
+	 * (сделаю, когда подобная обработка потребуется не одному модулю, а нескольким).
+	 *
 	 * @param string $name
 	 * @return bool
 	 */
-	private function needSkipCustom($type, $name) {
-		/**
-		 * Вообще говоря, по-правильному надо использовать здесь шаблон проектирования «наблюдатель»:
-		 * вызывать @see Mage::dispatchEvent(), однако я сознательно это пока не делаю
-		 * ради ускорения работы системы
-		 * (сделаю, когда подобная обработка потребуется не одному модулю, а нескольким).
-		 */
-		/** @var bool $result */
-		$result =
-			 	!df_is_admin()
+	private function needSkipCustom($name) {
+		return
+				!df_is_admin()
 			&&
-				rm_state()->getController()
+				'checkout_onepage_index' === rm_action_name()
 			&&
-				('checkout_onepage_index' === rm_state()->getController()->getFullActionName())
-			&&
-				df_cfg()->checkout()->_interface()->needShowAllStepsAtOnce()
+				rm_checkout_ergonomic()
 			&&
 				(in_array($name, array(
 					'js/fancybox/jquery.fancybox-1.3.4.js'
@@ -231,7 +190,6 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 					,'js/fancybox/jquery.fancybox-1.3.4.css'
 				)))
 		;
-		return $result;
 	}
 
 	/** @return Df_Page_Helper_Head */

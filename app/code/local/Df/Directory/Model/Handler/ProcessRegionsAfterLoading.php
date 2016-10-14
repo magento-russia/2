@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter getEvent() */
 class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,8 +7,8 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 	 * @return void
 	 */
 	public function handle() {
-		self::addTypeToNameStatic($this->getEvent()->getCollection());
-		if (true !== ($this->getEvent()->getCollection()->getFlag(self::FLAG__PREVENT_REORDERING))) {
+		self::addTypeToNameStatic($this->getRegions());
+		if (true !== ($this->getRegions()->getFlag(self::FLAG__PREVENT_REORDERING))) {
 			$this->reorder();
 		}
 	}
@@ -20,21 +18,34 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_CLASS;
-	}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_C;}
 
-	/** @return Df_Directory_Model_Handler_ProcessRegionsAfterLoading */
+	/**
+	 * Очищаем коллекцию, но не используем для этого
+	 * @see Varien_Data_Collection::clear(),
+	 * потому что @see Varien_Data_Collection::clear()
+	 * переводит коллекцию в незагруженное состояние.
+	 * @uses Varien_Data_Collection::removeItemByKey()
+	 *
+	 * 2015-02-12
+	 * Намеренно не используем @see Mage_Core_Model_Resource_Db_Collection_Abstract::getAllIds()
+	 * потому что:
+	 * 1) этот метод делает новый запрос к БД
+	 * 2) этот метод дефектен:
+	 * он вызывает $this->getConnection()->fetchCol($idsSelect)
+	 * @uses Varien_Db_Adapter_Interface::fetchCol()
+	 * без второго параметра $bind, и это может приводить к сбою:
+	 * «Invalid parameter number: no parameters were bound, query was:
+	 * SELECT `main_table`.`region_id` FROM `directory_country_region` AS `main_table`
+	 * LEFT JOIN `directory_country_region_name` AS `rname`
+	 * ON main_table.region_id = rname.region_id AND rname.locale = :region_locale
+	 * WHERE (main_table.country_id = 'RU')».
+	 * Этот дефект был устранён в методе @see Df_Core_Model_Resource_Collection::getAllIds(),
+	 * однако делать лишний запрос к БД нам всё равно не нужно.
+	 * @return void
+	 */
 	private function clearCollection() {
-		/**
-		 * Очищаем коллекцию, но не используем для этого clear(),
-		 * потому что clear() переводит коллекцию в незагруженное состояние
-		 */
-		foreach ($this->getEvent()->getCollection() as $region) {
-			/** @var Mage_Directory_Model_Region $region */
-			$this->getEvent()->getCollection()->removeItemByKey($region->getId());
-		}
-		return $this;
+		array_map(array($this->getRegions(), 'removeItemByKey'), $this->getRegions()->walk('getId'));
 	}
 
 	/** @return array */
@@ -42,20 +53,15 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $ids */
 			$ids = array();
-			/** @var Df_Directory_Model_Settings_Regions $settings */
-			$settings = df_cfg()->directory()->regionsRu();
-			for($i=1; $i <= Df_Directory_Model_Settings_Regions::NUM_PRIORITY_REGIONS; $i++) {
-				$ids[]= $settings->getPriorityRegionIdAtPosition($i);
+			foreach (array('RU', 'KZ', 'UA') as $iso2) {
+				/** @var array $iso2 */
+				$ids = array_merge($ids,
+					df_cfg()->directory()->getRegions($iso2)->getPriorityRegionIds()
+				);
 			}
-			$ids = df_clean($ids, array(0));
-			/** @var array $result */
-			$result = array();
-			foreach ($ids as $id) {
-				/** @var int $id */
-				df_assert_integer($id);
-				$result[]= $this->getEvent()->getCollection()->getItemById($id);
-			}
-			$this->{__METHOD__} = df_clean($result);
+			$this->{__METHOD__} =
+				array_filter(df_select_ordered($this->getRegions()->getItems(), array_filter($ids)))
+			;
 		}
 		return $this->{__METHOD__};
 	}
@@ -70,7 +76,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 		$result = null;
 		$name = mb_strtoupper($name);
 		df_assert_string($name);
-		foreach ($this->getEvent()->getCollection() as $region) {
+		foreach ($this->getRegions() as $region) {
 			/** @var Mage_Directory_Model_Region $region */
 			$currentName = self::getRegionName($region);
 			df_assert_string($currentName);
@@ -84,11 +90,13 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 		return $result;
 	}
 
-	/** @return Df_Directory_Model_Handler_ProcessRegionsAfterLoading */
+	/** @return Mage_Directory_Model_Resource_Region_Collection|Df_Directory_Model_Resource_Region_Collection */
+	private function getRegions() {return $this->getEvent()->getCollection();}
+
+	/** @return void */
 	private function reorder() {
-		/** @var Mage_Directory_Model_Resource_Region_Collection|Mage_Directory_Model_Mysql4_Region_Collection $originalCollection */
-		$originalCollection = clone $this->getEvent()->getCollection();
-		df_h()->directory()->assert()->regionCollection($originalCollection);
+		/** @var Mage_Directory_Model_Resource_Region_Collection|Df_Directory_Model_Resource_Region_Collection $originalCollection */
+		$originalCollection = clone $this->getRegions();
 		/** @var array $priorityRegions */
 		$priorityRegions = $this->getPriorityRegions();
 		df_assert_array($priorityRegions);
@@ -96,21 +104,24 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 		foreach ($priorityRegions as $priorityRegion) {
 			/** @var Mage_Directory_Model_Region $priorityRegion */
 			$originalCollection->removeItemByKey($priorityRegion->getId());
-			$this->getEvent()->getCollection()->addItem($priorityRegion);
+			$this->getRegions()->addItem($priorityRegion);
 		}
-		foreach ($originalCollection as $region) {
-			/** @var Mage_Directory_Model_Region $region */
-			$this->getEvent()->getCollection()->addItem($region);
-		}
-		return $this;
+		/** @uses Mage_Directory_Model_Resource_Region_Collection::addItem() */
+		$originalCollection->walk(array($this->getRegions(), 'addItem'));
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Directory_Observer::core_collection_abstract_load_after() */
+	const _C = __CLASS__;
+	/**
+	 * @used-by handle()
+	 * @used-by Df_Directory_Config_Source_Region_Kazakhstan::getAsOptionArray()
+	 * @used-by Df_Directory_Config_Source_Region_Russia::getAsOptionArray()
+	 * @used-by Df_Directory_Config_Source_Region_Ukraine::getAsOptionArray()
+	 */
 	const FLAG__PREVENT_REORDERING = 'df_directory_handler_processRegionsAfterLoading.preventReordering';
 	/**
 	 * @param Varien_Data_Collection_Db $regions
 	 */
 	public static function addTypeToNameStatic(Varien_Data_Collection_Db $regions) {
-		df_h()->directory()->assert()->regionCollection($regions);
 		foreach ($regions as $region) {
 			/** @var Mage_Directory_Model_Region $region */
 			/** @var string $originalName */
@@ -119,15 +130,13 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 			/** @var int $typeAsInteger */
 			$typeAsInteger = rm_nat0($region->getData('df_type'));
 			/** @var array $typesMap */
-			$typesMap =
-				array(
-					1 => 'Республика'
-					,2 => 'край'
-					,3 => 'область'
-					,5 => 'автономная область'
-					,6 => 'автономный округ'
-				)
-			;
+			$typesMap = array(
+				1 => 'Республика'
+				,2 => 'край'
+				,3 => 'область'
+				,5 => 'автономная область'
+				,6 => 'автономный округ'
+			);
 			df_assert_array($typesMap);
 			/** @var $typeAsString $result */
 			$typeAsString = df_a($typesMap, $typeAsInteger, '');

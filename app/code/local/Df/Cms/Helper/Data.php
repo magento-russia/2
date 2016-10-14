@@ -25,29 +25,22 @@ class Df_Cms_Helper_Data extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * Retrieve array of admin users in system
+	 * @uses Df_Admin_Model_User::getId()
+	 * @uses Df_Admin_Model_User::getUsername()
 	 * @param bool $addEmptyUser [optional]
-	 * @return array
+	 * @return array(int|string => string)
 	 */
 	public function getUsersArray($addEmptyUser = false) {
-		if (!$this->_usersHash) {
-			$collection = Df_Admin_Model_User::c();
-			$this->_usersHash = array();
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(int => string) $result */
+			$result = df_column(Df_Admin_Model_User::c(), 'getUsername', 'getId');
 			if ($addEmptyUser) {
-				$this->_usersHash[''] = '';
+				$result = array('' => '') + $result;
 			}
-			foreach ($collection as $user) {
-				/** @var Df_Admin_Model_User $user */
-				$this->_usersHash[$user->getId()] = $user->getUsername();
-			}
+			$this->{__METHOD__} = $result;
 		}
-		return $this->_usersHash;
+		return $this->{__METHOD__};
 	}
-	/**
-	 * Array of admin users in system
-	 * @var array
-	 */
-	protected $_usersHash = null;
 
 	/** @return string[] */
 	public function getVersionAccessLevels() {
@@ -65,25 +58,24 @@ class Df_Cms_Helper_Data extends Mage_Core_Helper_Abstract {
 	 *
 	 * @param Varien_Data_Form_Abstract $container
 	 * @param string $onChange
-	 * @param string|array $excludeTypes
+	 * @param string|string[] $excludeTypes
 	 */
 	public function addOnChangeToFormElements(
 		$container
 		,$onChange
 		,$excludeTypes = array(Df_Varien_Data_Form_Element_Abstract::TYPE__HIDDEN))
 	{
-		if (!is_array($excludeTypes)) {
-			$excludeTypes = array($excludeTypes);
-		}
-
+		$excludeTypes = rm_array($excludeTypes);
 		foreach ($container->getElements()as $element) {
 			if ('fieldset' === $element->getType()) {
 				$this->addOnChangeToFormElements($element, $onChange, $excludeTypes);
-			} else {
+			}
+			else {
 				if (!in_array($element->getType(), $excludeTypes)) {
 					if ($element->hasOnchange()) {
 						$onChangeBefore = $element->getOnchange() . ';';
-					} else {
+					}
+					else {
 						$onChangeBefore = '';
 					}
 					$element->setOnchange($onChangeBefore . $onChange);

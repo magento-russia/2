@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Sales>
-			<version>2.23.5</version>
 			<author>Дмитрий Федюк</author>
+			<title>Продажи</title>
+			<version>2.23.5</version>
 		</Df_Sales>
 	</modules>
 	<df>
@@ -75,6 +76,28 @@
 					-->
 					<order_payment_transaction>Df_Sales_Model_Order_Payment_Transaction</order_payment_transaction>
 					<!--
+						2015-08-08
+						Цель перекрытия —
+						кэширование результата работы родительского метода
+						@see Mage_Sales_Model_Quote::getTotals()
+						Странно, что родительский метод не кэширует результат своей работы.
+						Например, на странице корзины (checkout/cart) в Magento CE 1.9.2.1
+						присутствует 6(!) разных блоков корзины:
+							Mage_Checkout_Block_Cart_Minicart
+							Mage_Checkout_Block_Cart_Sidebar + render
+							Mage_Checkout_Block_Cart
+							Mage_Checkout_Block_Cart_Coupon
+							Mage_Checkout_Block_Cart_Shipping
+							Mage_Checkout_Block_Cart_Totals
+						Большинство из них вызывает метод @see Mage_Sales_Model_Quote::getTotals(),
+						и т.к. результат этого метода по непонятным причинам не кэшируется,
+						получается, что система напрасно расходует ресурсы сервера.
+
+						Конечно, могут быть скрытые причины, почему такое кэширование не осуществляется.
+						Практика и время покажут.
+					-->
+					<quote>Df_Sales_Model_Quote</quote>
+					<!--
 						Цели перекрытия:
 						1) учёт настроек видимости и обязательности для заполнения полей оформления заказа
 						модуля «Удобная настройка витрины».
@@ -88,40 +111,49 @@
 						in app/code/core/Mage/Sales/Model/Quote/Item/Abstract.php on line 90»
 					-->
 					<quote_address_item>Df_Sales_Model_Quote_Address_Item</quote_address_item>
+					<!--
+						2015-04-06
+						Цель перекрытия —
+						отображение на экране оформления заказа
+						дополнительной полезной покупателю информации
+						о доступных покупателю способах доставки
+						(в частности, отображение планируемой даты доставки)
+					-->
+					<quote_address_rate>Df_Sales_Model_Quote_Address_Rate</quote_address_rate>
 				</rewrite>
 			</sales>
 		</models>
 		<events>
 			<core_copy_fieldset_customer_address_to_quote_address>
 				<observers>
-					<df_sales__core_copy_fieldset_customer_address_to_quote_address>
-						<class>df_sales/dispatcher</class>
+					<Df_Sales>
+						<class>Df_Sales_Observer</class>
 						<method>core_copy_fieldset_customer_address_to_quote_address</method>
-					</df_sales__core_copy_fieldset_customer_address_to_quote_address>
+					</Df_Sales>
 				</observers>
 			</core_copy_fieldset_customer_address_to_quote_address>
 			<sales_convert_order_to_quote>
 				<observers>
-					<df_sales__sales_convert_order_to_quote>
-						<class>df_sales/dispatcher</class>
+					<Df_Sales>
+						<class>Df_Sales_Observer</class>
 						<method>sales_convert_order_to_quote</method>
-					</df_sales__sales_convert_order_to_quote>
+					</Df_Sales>
 				</observers>
 			</sales_convert_order_to_quote>
 			<sales_order_status_history_save_before>
 				<observers>
-					<df_sales__sales_order_status_history_save_before>
-						<class>df_sales/dispatcher</class>
+					<Df_Sales>
+						<class>Df_Sales_Observer</class>
 						<method>sales_order_status_history_save_before</method>
-					</df_sales__sales_order_status_history_save_before>
+					</Df_Sales>
 				</observers>
 			</sales_order_status_history_save_before>
 			<sales_quote_address_save_before>
 				<observers>
-					<df_sales__quote_address_save_before>
-						<class>df_sales/dispatcher</class>
+					<Df_Sales>
+						<class>Df_Sales_Observer</class>
 						<method>sales_quote_address_save_before</method>
-					</df_sales__quote_address_save_before>
+					</Df_Sales>
 				</observers>
 			</sales_quote_address_save_before>
 		</events>
@@ -146,10 +178,10 @@
 			-->
 			<rm_adminhtml_block_sales_order_grid__prepare_collection>
 				<observers>
-					<df_sales__rm_adminhtml_block_sales_order_grid__prepare_collection>
-						<class>df_sales/dispatcher</class>
+					<Df_Sales>
+						<class>Df_Sales_Observer</class>
 						<method>rm_adminhtml_block_sales_order_grid__prepare_collection</method>
-					</df_sales__rm_adminhtml_block_sales_order_grid__prepare_collection>
+					</Df_Sales>
 				</observers>
 			</rm_adminhtml_block_sales_order_grid__prepare_collection>
 			<!--
@@ -158,10 +190,10 @@
 			-->
 			<rm_adminhtml_block_sales_order_grid__prepare_columns_after>
 				<observers>
-					<df_sales__rm_adminhtml_block_sales_order_grid__prepare_columns_after>
-						<class>df_sales/dispatcher</class>
+					<Df_Sales>
+						<class>Df_Sales_Observer</class>
 						<method>rm_adminhtml_block_sales_order_grid__prepare_columns_after</method>
-					</df_sales__rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+					</Df_Sales>
 				</observers>
 			</rm_adminhtml_block_sales_order_grid__prepare_columns_after>
 		</events>

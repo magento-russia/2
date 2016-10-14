@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_IPay>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>iPay</title>
+			<version>1.0.0</version>
 		</Df_IPay>
 	</modules>
 	<global>
@@ -37,7 +38,7 @@
 		-->
 		<payment>
 			<df-ipay>
-				<model>df_ipay/payment</model>
+				<model>Df_IPay_Model_Payment</model>
 			</df-ipay>
 		</payment>
 	</default>

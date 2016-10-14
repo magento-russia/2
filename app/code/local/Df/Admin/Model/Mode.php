@@ -4,7 +4,7 @@ class Df_Admin_Model_Mode extends Df_Core_Model {
 	public function begin() {
 		$this->_counter++;
 		if (1 === $this->_counter) {
-			$this->_currentStore = Mage::app()->getStore();
+			$this->_currentStore = rm_store();
 			$this->_updateMode = Mage::app()->getUpdateMode();
 			/**
 			 * Очень важный момент!
@@ -38,7 +38,7 @@ class Df_Admin_Model_Mode extends Df_Core_Model {
 		}
 		catch (Exception $e) {
 			$this->end();
-			throw $e;
+			df_error($e);
 		}
 		$this->end();
 		return $result;
@@ -56,7 +56,7 @@ class Df_Admin_Model_Mode extends Df_Core_Model {
 		}
 	}
 
-	/** @var Mage_Core_Model_Store */
+	/** @var Df_Core_Model_StoreM */
 	private $_currentStore;
 	/** @var int */
 	private $_counter = 0;

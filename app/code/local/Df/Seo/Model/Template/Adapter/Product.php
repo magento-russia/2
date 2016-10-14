@@ -9,9 +9,7 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 	 */
 	protected function getPropertyClass($propertyName) {
 		if (!isset($this->{__METHOD__}[$propertyName])) {
-			$this->{__METHOD__}[$propertyName] =
-				$this->evalPropertyClass($propertyName)
-			;
+			$this->{__METHOD__}[$propertyName] = $this->evalPropertyClass($propertyName);
 		}
 		return $this->{__METHOD__}[$propertyName];
 	}
@@ -25,9 +23,7 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 		if (!$node) {
 			$node = $this->getConfigNode('default');
 		}
-		/** @var string $result */
-		$result = df()->config()->getNodeValueAsString($node);
-		return $result;
+		return rm_leaf_sne($node);
 	}
 
 	/**
@@ -35,15 +31,10 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 	 * @return Mage_Core_Model_Config_Element
 	*/
 	private function getConfigNode($propertyType) {
-		return
-			df()->config()->getNodeByKey(
-				rm_sprintf(
-					'df/seo/template/objects/%s/properties/%s'
-					,$this->getName()
-					,$propertyType
-				)
-			)
-		;
+		return rm_leaf_child(
+			rm_config_node('df/seo/template/objects', $this->getName(), 'properties'), $propertyType
+		);
 	}
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Seo_Model_Template_Property_Product::_construct() */
+	const _C = __CLASS__;
 }

@@ -6,7 +6,7 @@ class Df_Alfabank_Model_Response_Void extends Df_Alfabank_Model_Response {
 	 */
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_clean(array(
+			$this->{__METHOD__} = array_filter(array(
 				'Успешность запроса' => $this->getErrorCodeMeaning()
 				,'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
 			));
@@ -31,12 +31,4 @@ class Df_Alfabank_Model_Response_Void extends Df_Alfabank_Model_Response {
 	 * @return string
 	 */
 	protected function getKey_ErrorMessage() {return 'errorMessage';}
-
-	const _CLASS = __CLASS__;
-	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Alfabank_Model_Response_Void
-	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
 }

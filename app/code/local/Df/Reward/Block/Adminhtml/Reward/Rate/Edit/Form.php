@@ -33,7 +33,8 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Edit_Form extends Mage_Adminhtml_Blo
 		/**
 		 * Обратите внимание,
 		 * что нельзя применять цепной вызов $fieldset->addField()->addField(),
-		 * потому что addField() возвращает не $fieldset, а созданное поле.
+		 * потому что @uses Varien_Data_Form_Element_Fieldset::addField()
+		 * возвращает не $fieldset, а созданное поле.
 		 */
 		$fieldset
 			->addField(
@@ -71,8 +72,8 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Edit_Form extends Mage_Adminhtml_Blo
 				)
 			)
 		;
-		$rateRenderer = Df_Reward_Block_Adminhtml_Reward_Rate_Edit_Form_Renderer_Rate::i()
-			->setRate($this->getRate());
+		$rateRenderer = new Df_Reward_Block_Adminhtml_Reward_Rate_Edit_Form_Renderer_Rate;
+		$rateRenderer->setRate($this->getRate());
 		$fromIndex = $this->getRate()->getDirection() == Df_Reward_Model_Reward_Rate::RATE_EXCHANGE_DIRECTION_TO_CURRENCY
 				   ? 'points' : 'currency_amount';
 		$toIndex = $this->getRate()->getDirection() == Df_Reward_Model_Reward_Rate::RATE_EXCHANGE_DIRECTION_TO_CURRENCY

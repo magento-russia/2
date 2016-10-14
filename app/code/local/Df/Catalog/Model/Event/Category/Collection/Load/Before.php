@@ -19,14 +19,16 @@
  */
 class Df_Catalog_Model_Event_Category_Collection_Load_Before extends Df_Core_Model_Event {
 	/** @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
-	public function getCollection() {return $this->getEventParam(self::EVENT_PARAM__COLLECTION);}
+	public function getCollection() {return $this->getEventParam('category_collection');}
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
+	protected function getExpectedEventPrefix() {return 'catalog_category_collection_load_before';}
 
-	const _CLASS = __CLASS__;
-	const EVENT_PARAM__COLLECTION = 'category_collection';
-	const EXPECTED_EVENT_PREFIX = 'catalog_category_collection_load_before';
+	/**
+	 * @used-by Df_AccessControl_Observer::catalog_category_collection_load_before()
+	 * @used-by Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbiddenCategories::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

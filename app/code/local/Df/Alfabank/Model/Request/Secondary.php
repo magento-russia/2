@@ -1,33 +1,15 @@
 <?php
 /**
- * @method Df_Alfabank_Model_Payment getPaymentMethod()
+ * @method Df_Alfabank_Model_Payment getMethod()
  * @method Df_Alfabank_Model_Response getResponse()
- * @method Df_Alfabank_Model_Config_Area_Service getServiceConfig()
+ * @method Df_Alfabank_Model_Config_Area_Service configS()
  */
-abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Request_Secondary {
-	/** @return string */
-	abstract protected function getServiceName();
-
-	/** @return array(string => string|int|float) */
-	protected function getAdditionalParams() {return array();}
-
+abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Request_Transaction {
 	/**
-	 * @override
-	 * @return array(string => string|int)
+	 * @used-by getUri()
+	 * @return string
 	 */
-	public function getParams() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_merge(
-				array(
-					'userName' => $this->getServiceConfig()->getShopId()
-					,'password' => $this->getServiceConfig()->getRequestPassword()
-					,'orderId' => $this->getPaymentExternalId()
-				)
-				,$this->getAdditionalParams()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	abstract protected function getServiceName();
 
 	/**
 	 * @override
@@ -35,10 +17,29 @@ abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Requ
 	 */
 	public function getUri() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getServiceConfig()->getUri($this->getServiceName());
-			$this->{__METHOD__}->setQuery($this->getParams());
+			$this->{__METHOD__} = $this->configS()->getUri($this->getServiceName());
+			$this->{__METHOD__}->setQuery($this->params());
 		}
 		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @override
+	 * @see Df_Payment_Model_Request_Secondary::_params()
+	 * @used-by Df_Payment_Model_Request_Secondary::params()
+	 * @return array(string => string|int)
+	 */
+	protected function _params() {
+		/** @var array(string => string|int) $result */
+		$result = array(
+			'userName' => $this->shopId()
+			,'password' => $this->password()
+			,'orderId' => $this->getPaymentExternalId()
+		);
+		if ($this->hasAmount()) {
+			$result['amount'] = rm_round(100 * $this->amount()->getAsFixedFloat());
+		}
+		return $result;
 	}
 
 	/**
@@ -47,11 +48,9 @@ abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Requ
 	 */
 	protected function getPaymentExternalId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getOrderPayment()->getAdditionalInformation(
-					Df_Alfabank_Model_Payment::INFO__PAYMENT_EXTERNAL_ID
-				)
-			;
+			$this->{__METHOD__} = $this->payment()->getAdditionalInformation(
+				Df_Alfabank_Model_Payment::INFO__PAYMENT_EXTERNAL_ID
+			);
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
@@ -64,7 +63,7 @@ abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Requ
 	protected function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			try {
-				$this->{__METHOD__} = df_json_decode($this->getResponseAsJson());
+				$this->{__METHOD__} = Zend_Json::decode($this->getResponseAsJson());
 			}
 			catch (Zend_Json_Exception $e) {
 				df_notify_exception($e);

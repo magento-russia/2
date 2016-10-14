@@ -14,28 +14,17 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Mysql
 	 */
 	public function getCollection($storeId) {
 		/** @var bool $patchNeeded */
-		static $patchNeeded;
-		if (!isset($patchNeeded)) {
-			$patchNeeded =
-					df_enabled(Df_Core_Feature::SEO, $storeId)
-				&&
-					df_cfg()->seo()->urls()->getFixAddCategoryToProductUrl()
-				&&
-					/**
-					 * Для Magento CE 1.8.0.0 и более свежих версий
-					 * обработка вынесена в класс
-					 * @see Df_Catalog_Helper_Product_Url_Rewrite
-					 * Код ниже для Magento CE 1.8.0.0 не подходит:
-					 * @link http://magento-forum.ru/topic/4038/
-					 */
-					df_magento_version('1.8.0.0', '<')
-			;
-		}
-		return
-			$patchNeeded
-			? $this->getCollectionDf($storeId)
-			: parent::getCollection($storeId)
-		;
+		static $patchNeeded; if (is_null($patchNeeded)) {$patchNeeded =
+			df_cfg()->seo()->urls()->getFixAddCategoryToProductUrl()
+			/**
+			 * Для Magento CE 1.8.0.0 и более свежих версий
+			 * обработка вынесена в класс @see Df_Catalog_Helper_Product_Url_Rewrite
+			 * Код ниже для Magento CE 1.8.0.0 не подходит:
+			 * http://magento-forum.ru/topic/4038/
+			 */
+			&& df_magento_version('1.8.0.0', '<')
+		;}
+		return $patchNeeded ? $this->getCollectionDf($storeId) : parent::getCollection($storeId);
 	}
 
 	/**
@@ -44,8 +33,8 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Mysql
 	 */
 	private function getCollectionDf($storeId) {
 		$products = array();
-		$store = Mage::app()->getStore($storeId);
-		/* @var $store Mage_Core_Model_Store */
+		/* @var Df_Core_Model_StoreM $store */
+		$store = rm_store($storeId);
 		if (!$store) {
 			return false;
 		}
@@ -62,15 +51,15 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Mysql
 			, rm_quote_into('ur.is_system=?', 1)
 		);
 		$this->_select = $this->_getWriteAdapter()->select()
-			->from(array('e' => $this->getMainTable()), array($this->getIdFieldName()))
+			->from(array('e' => $this->getMainTable()), $this->getIdFieldName())
 			->join(
 				array('w' => rm_table('catalog/product_website'))
 				,'e.entity_id=w.product_id'
-				,array()
+				,null
 			)
 			->where('w.website_id=?', $store->getWebsiteId())
 			->joinLeft(
-				array('ur' => rm_table('core/url_rewrite'))
+				array('ur' => rm_table(Df_Catalog_Model_Resource_Url::TABLE))
 				,implode(' AND ', $urCondions),array('url' => 'request_path')
 			)
 		;
@@ -87,10 +76,23 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Mysql
 			,'in'
 		);
 		$query = $this->_getWriteAdapter()->query($this->_select);
+		/** @noinspection PhpAssignmentInConditionInspection */
 		while ($row = $query->fetch()) {
 			$product = $this->_prepareProduct($row);
 			$products[$product->getId()] = $product;
 		}
 		return $products;
 	}
+
+	/**
+	 * 2015-02-09
+	 * Возвращаем объект-одиночку именно таким способом,
+	 * потому что наш класс перекрывает посредством <rewrite> системный класс,
+	 * и мы хотим, чтобы вызов @see Mage::getResourceSingleton() ядром Magento
+	 * возвращал тот же объект, что и наш метод @see s(),
+	 * сохраняя тем самым объект одиночкой (это важно, например, для производительности:
+	 * сохраняя объект одиночкой — мы сохраняем его кэш между всеми пользователями объекта).
+	 * @return Df_Sitemap_Model_Resource_Catalog_Product
+	 */
+	public static function s() {return Mage::getResourceSingleton('sitemap/catalog_product');}
 }

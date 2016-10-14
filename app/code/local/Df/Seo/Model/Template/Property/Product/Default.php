@@ -22,5 +22,5 @@ class Df_Seo_Model_Template_Property_Product_Default
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

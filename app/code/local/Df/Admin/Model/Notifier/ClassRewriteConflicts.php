@@ -10,12 +10,10 @@ class Df_Admin_Model_Notifier_ClassRewriteConflicts extends Df_Admin_Model_Notif
 			$result = false;
 			if ($this->hasModulesSetBeenChanged()) {
 				$result = $this->hasConflicts();
-				/**
-				 * Раз набор модулей в системе изменился,
-				 * то, возможно, появятся некоторые новые предупреждения,
-				 * о которых администратор ещё не знает,
-				 * поэтому аннулируем скрытие блока предупреждений.
-				 */
+				// Раз набор модулей в системе изменился,
+				// то, возможно, появятся некоторые новые предупреждения,
+				// о которых администратор ещё не знает,
+				// поэтому аннулируем скрытие блока предупреждений.
 				$this->resetSkipStatus();
 				$this->getCache()->saveData(
 					$this->getCacheKeyForModules(), $this->getModulesHashCurrent()
@@ -67,16 +65,32 @@ class Df_Admin_Model_Notifier_ClassRewriteConflicts extends Df_Admin_Model_Notif
 	}
 
 	/**
+	 * 2015-02-06
+	 * @used-by getModulesHashCurrent()
 	 * @param string $codePool
 	 * @return string[]
 	 */
 	private function getModulesFromCodePool($codePool) {
-		return
-			array_diff(
-				scandir(Mage::app()->getConfig()->getOptions()->getCodeDir().DS.$codePool)
-				, array('..', '.')
-			)
-		;
+		/** @var string $path */
+		$path = Mage::app()->getConfig()->getOptions()->getCodeDir() . DS . $codePool;
+		/**
+		 * Например, если в качестве $codePool передано значение «local»,
+		 * то $vendors будет содержать подпапки внутри папки «app/code/local»?
+		 * например: array('Df', 'Dfa', 'Dfm', 'Dft', 'Portal', 'Utkonos', 'Varien', 'Zend')
+		 * @var string[] $vendors
+		 */
+		$vendors = df_path()->children($path);
+		/** @var string[] $result */
+		$result = array();
+		foreach ($vendors as $vendor) {
+			/** @var string $vendor */
+			$modules = df_path()->children($path . DS . $vendor);
+			foreach ($modules as $module) {
+				/** @var string $module */
+				$result[]= $vendor . '_' . $module;
+			}
+		}
+		return $result;
 	}
 
 	/**
@@ -88,14 +102,27 @@ class Df_Admin_Model_Notifier_ClassRewriteConflicts extends Df_Admin_Model_Notif
 	/** @return string */
 	private function getModulesHashCurrent() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getModulesHash(
-					array_merge(
-						$this->getModulesFromCodePool('local')
-						, $this->getModulesFromCodePool('community')
-					)
-				)
-			;
+			/**
+			 * 2015-02-06
+			 * Обратите внимание, что @uses getModulesFromCodePool()
+			 * возвращает массив с целочисленными ключами,
+			 * и результат применения @uses array_merge() может содержать повторяющиеся элементы.
+			 * Однако в данной ситуации мы их намеренно не удаляем,
+			 * потому что повторяющиеся элементы
+			 * обозначают один и то же модуль в разных областях программного кода,
+			 * и наличие одного модуля сразу в двух областях программного кода
+			 * должно влиять на результат нашего метода.
+			 * На практике это возможно,
+			 * когда модули ядра из области программного кода «core» (папка «app/code/core»)
+			 * перекрыты одноимёнными модулями из области программного кода «local»
+			 * (папка «app/code/local»),
+			 * то есть, когда в папке «app/code/local» содержится подпапка «Mage»
+			 * с некоторыми классами, перекрывающими системные классы.
+			 */
+			$this->{__METHOD__} = $this->getModulesHash(array_merge(
+				$this->getModulesFromCodePool('local')
+				, $this->getModulesFromCodePool('community')
+			));
 		}
 		return $this->{__METHOD__};
 	}
@@ -109,12 +136,7 @@ class Df_Admin_Model_Notifier_ClassRewriteConflicts extends Df_Admin_Model_Notif
 	}
 
 	/** @return bool */
-	private function hasConflicts() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = (0 < count($this->getConflicts()));
-		}
-		return $this->{__METHOD__};
-	}
+	private function hasConflicts() {return $this->getConflicts()->hasItems();}
 
 	/** @return bool */
 	private function hasModulesSetBeenChanged() {

@@ -1,9 +1,7 @@
 body.df-theme-gala-titanshop {
-	/**
-	 	В русском языке написание каждого слова фразы с большой буквы
-	 	не принято и выглядит некрасиво,
-	 	поэтому отключаем везде правило capitalize.
-	 */
+	// В русском языке написание каждого слова фразы с большой буквы
+	// не принято и выглядит некрасиво,
+	// поэтому отключаем везде правило «capitalize».
 	.em_nav .menu-item-depth-0 > a
 	, .product-view .product-tags li a
 	, .page-popup .link-print
@@ -15,10 +13,7 @@ body.df-theme-gala-titanshop {
 	, .block-cart-top .block-content .product-name a
 	, .newsletter-title
 	, .category-title.page-title h1
-	, .em_post-action .tags li a
-	{
-		text-transform: none;
-	}
+	, .em_post-action .tags li a {text-transform: none;}
 	.df-checkout-ergonomic-page {
 		#opc-shipping_method {
 			.sp-methods {
@@ -56,26 +51,20 @@ body.df-theme-gala-titanshop {
 	}
 	.form-list {
 		li.control {
-			label {
-				text-transform: lowercase;
-			}
+			label {text-transform: lowercase;}
 		}
 	}
-	/** отключаем правило lowercase */
-	h1 {
-		text-transform: none;
-	}
+	// отключаем правило «lowercase»
+	h1 {text-transform: none;}
 	.header-top {
 		span.number {
-			/* отступ номера телефона от подписи к нему слева */
+			// отступ номера телефона от подписи к нему слева
 			padding-left: 4px;
 			padding-top: 2px;
 		}
 	}
 	.sale_off {
-		span:last-child {
-			margin-left: -10px;
-		}
+		span:last-child {margin-left: -10px;}
 		span.rm-sale-off-minus {
 			display: block;
 			float: left;
@@ -86,57 +75,35 @@ body.df-theme-gala-titanshop {
 			text-align: right;
 		}
 	}
-}
-
-body.df-theme-gala-titanshop.checkout-cart-index {
-	#shopping-cart-totals-table {
-		tbody {
-			td.a-right {
-				font-size: 16px;
+	&.checkout-cart-index {
+		#shopping-cart-totals-table {
+			tbody {
+				td.a-right {font-size: 16px;}
 			}
-		}
-		tfoot {
-			td.a-right {
-				strong {
-					font-size: 18px;
+			tfoot {
+				td.a-right {
+					strong {font-size: 18px;}
 				}
 			}
 		}
 	}
-}
-
-body.df-theme-gala-titanshop.customer-account-create {
-	.page-title {
-		h2.legend {
-			display: none;
+	&.customer-account-create {
+		.page-title {
+			h2.legend {display: none;}
 		}
 	}
-}
-
-body.df-theme-gala-titanshop.customer-account-index {
-	.page-title {
-		display: none;
-	}
-	.dashboard {
-		.box-recent {
-			margin-top: 0;
+	&.customer-account-index {
+		.page-title {display: none;}
+		.dashboard {
+			.box-recent {margin-top: 0;}
 		}
 	}
-}
-
-body.df-theme-gala-titanshop.customer-account-login {
-	.account-login {
-
-	}
-}
-
-body.df-theme-gala-titanshop.wishlist-index-share {
-	.my-account {
-		.form-list {
-			label {
-				/** Нам нужно, чтобы «Вы» было написано с большой буквы */
-				small {
-					text-transform: none;
+	&.wishlist-index-share {
+		.my-account {
+			.form-list {
+				label {
+					// нам нужно, чтобы «Вы» было написано с большой буквы
+					small {text-transform: none;}
 				}
 			}
 		}

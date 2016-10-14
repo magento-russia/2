@@ -1,34 +1,22 @@
 <?php
+/** @method Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm getEvent() */
 class Df_PromoGift_Model_Handler_Adminhtml_Block_Actions_PrepareForm_AddInputMaxUsagesPerQuote
 	extends Df_Core_Model_Handler {
 	/** @return void */
 	public function handle() {
-		/**
-		 * Добавляем поле
-		 */
-		$this->getEvent()->getActionsFieldset()
-			->addField(
-				Df_PromoGift_Const::DB__SALES_RULE__MAX_USAGES_PER_QUOTE
-				,'text'
-				,array(
-					'name' => Df_PromoGift_Const::DB__SALES_RULE__MAX_USAGES_PER_QUOTE
-					,'label' =>
-						'Сколько раз можно применять правило для одного и того же заказа (опция предназначена только для модуля «Промо-подарки»)'
-				)
-				,/**
-				 * Поле, после которого система разместит наше поле
-				 */
-				"discount_qty"
+		// добавляем поле
+		$this->getEvent()->getActionsFieldset()->addField(
+			Df_PromoGift_Model_Rule::P__MAX_USAGES_PER_QUOTE
+			,'text'
+			,array(
+				'name' => Df_PromoGift_Model_Rule::P__MAX_USAGES_PER_QUOTE
+				,'label' =>
+					'Сколько раз можно применять правило для одного и того же заказа'
+					. ' (опция предназначена только для модуля «Промо-подарки»)'
 			)
-		;
-	}
-
-	/**
-	 * Объявляем метод заново, чтобы IDE знала настоящий тип результата
-	 * @return Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm
-	 */
-	protected function getEvent() {
-		return parent::getEvent();
+			// поле, после которого система разместит наше поле
+			,'discount_qty'
+		);
 	}
 
 	/**
@@ -36,8 +24,9 @@ class Df_PromoGift_Model_Handler_Adminhtml_Block_Actions_PrepareForm_AddInputMax
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm::_CLASS;
+		return Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm::_C;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_PromoGift_Observer::adminhtml_block_salesrule_actions_prepareform() */
+	const _C = __CLASS__;
 }

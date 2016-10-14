@@ -5,6 +5,7 @@
 */
 @import '_reset';
 @import '../../js/source/plugins/fancybox/_core/_core';
+@import 'plugins/_select2';
 /*.rm-bootstrap {
 	@import '../lib/bootstrap/css/_bootstrap';
 	@import '../lib/bootstrap/css/_bootstrap-theme';
@@ -24,3 +25,18 @@
 */
 .rm-display-block {display: block !important;}
 .rm-display-none {display: none !important;}
+
+/*
+	2015-02-13
+	В Firefox опции внутри optgroup почему-то отображаются шрифтом MsShellDlg и без отступов слева.
+	https://github.com/twbs/bootstrap/issues/7611
+	Устанавливаем им шрифт остальных опций и отступы.
+	@used-by Df_Admin_Block_Column_Select::getAttributes()
+*/
+optgroup {
+	font-family: inherit;
+	font-size: inherit;
+	option {
+		margin-left: 2em;
+	}
+}

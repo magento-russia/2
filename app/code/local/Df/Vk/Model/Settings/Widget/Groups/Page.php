@@ -29,13 +29,7 @@ class Df_Vk_Model_Settings_Widget_Groups_Page extends Df_Core_Model_Settings {
 	 */
 	private function getConfigKey($uniquePart) {
 		df_param_string($uniquePart, 0);
-		return rm_config_key(
-			'df_vk', 'groups'
-			,implode(
-				Df_Core_Const::T_CONFIG_WORD_SEPARATOR
-				,array($this->getType(), 'page', $uniquePart)
-			)
-		);
+		return df_concat_xpath('df_vk', 'groups', implode('_', array($this->getType(), 'page', $uniquePart)));
 	}
 	/**
 	 * @static

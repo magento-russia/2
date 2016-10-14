@@ -1,0 +1,8 @@
+<?xml version='1.0'?>
+<layout>
+    <default>
+        <reference name='right.poll'>
+            <action method='setFrameTags'><start>!--[POLL--</start><end>!--POLL]--</end></action>
+        </reference>
+    </default>
+</layout>

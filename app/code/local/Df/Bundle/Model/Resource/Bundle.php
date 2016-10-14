@@ -2,19 +2,14 @@
 class Df_Bundle_Model_Resource_Bundle extends Mage_Bundle_Model_Mysql4_Bundle {
 	/**
 	 * @param int $productId
-	 * @return Df_Bundle_Model_Resource_Bundle
+	 * @return void
 	 */
 	public function deleteAllOptions($productId) {
 		df_param_integer($productId, 0);
 		//$this->dropAllUnneededSelections($productId, array());
-		/**
-		 * При удалении опции все данные опции из других таблиц удаляться автоматически
-		 * (ON DELETE CASCADE)
-		 */
-		$this->_getWriteAdapter()->delete(
-			rm_table('bundle/option'), array('? = parent_id' => $productId)
-		);
-		return $this;
+		// При удалении опции все данные опции из других таблиц удаляться автоматически
+		// (ON DELETE CASCADE)
+		rm_table_delete('bundle/option', 'parent_id', $productId);
 	}
 
 	/** @return Df_Bundle_Model_Resource_Bundle */

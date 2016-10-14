@@ -14,17 +14,52 @@ class Df_Catalog_Model_Resource_Product_Collection
 		parent::__construct($resource);
 	}
 
+	/** @return array(string => Df_Catalog_Model_Resource_Eav_Attribute) */
+	public function getAttributes() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(string => Df_Catalog_Model_Resource_Eav_Attribute) $result */
+			$result = array();
+			foreach ($this->getAttributeSets() as $attributeSet) {
+				/** @var Df_Eav_Model_Entity_Attribute_Set $attributeSet */
+				foreach ($attributeSet->getAttributes() as $attribute) {
+					/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+					if ($attribute->isApplicableToProductSystemType($this->getTypes())) {
+						$result[$attribute->getName()] = $attribute;
+					}
+				}
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return array(int => Df_Eav_Model_Entity_Attribute_Set) */
+	public function getAttributeSets() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(int => Df_Eav_Model_Entity_Attribute_Set) $result */
+			$result = array();
+			/** @var Df_Dataflow_Model_Registry_Collection_AttributeSets $registry */
+			$registry = Df_Dataflow_Model_Registry::s()->attributeSets();
+			foreach ($this as $product) {
+				/** @var Df_Catalog_Model_Product $product */
+				/** @var int $attributeSetId */
+				$attributeSetId = $product->getAttributeSetId();
+				$result[$attributeSetId] = $registry->findById($attributeSetId);
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
 	/**
 	 * @override
-	 * @param array|string|integer|Mage_Core_Model_Config_Element $attribute
+	 * @param string|string[]|integer|Mage_Core_Model_Config_Element $attribute
 	 * @param bool|string $joinType [optional]
 	 * @return Df_Catalog_Model_Resource_Product_Collection
 	 */
 	public function addAttributeToSelect($attribute, $joinType = false) {
 		if ($this->isEnabledFlat() && ('*' !== $attribute)) {
-			$this->checkAttributesAreAvailableInFlatMode(
-				is_array($attribute) ? $attribute : array($attribute)
-			);
+			$this->checkAttributesAreAvailableInFlatMode(rm_array($attribute));
 		}
 		parent::addAttributeToSelect($attribute, $joinType);
 		return $this;
@@ -118,6 +153,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 				foreach ($this->getItems() as $product) {
 					/** @var Df_Catalog_Model_Product $product */
 					/** @var bool $hasDataChanges */
+					// запоминаем состояние изменённости/нетронутости товара
 					$hasDataChanges = $product->hasDataChanges();
 					$product->setCategoryIds(df_a($categoryIds, $product->getId(), array()));
 					$product->setDataChanges($hasDataChanges);
@@ -161,46 +197,24 @@ class Df_Catalog_Model_Resource_Product_Collection
 		$this->_idFilterClientSide = $productIds;
 		return $this;
 	}
-	/** @var array */
+	/** @var int[] */
 	private $_idFilterClientSide = array();
 
 	/**
 	 * Возвращает идентификаторы всех товарных разделов коллекции.
-	 * Использует алгоритм Mage_Catalog_Model_Resource_Product_Collection::addCategoryIds
-	 * @see Mage_Catalog_Model_Resource_Product_Collection::addCategoryIds
+	 * Использует алгоритм @see Mage_Catalog_Model_Resource_Product_Collection::addCategoryIds()
+	 * Обратите внимание, что @see getItems() загружает коллекцию.
+	 * Предварительная загрузка коллекции — необходимое условие работоспособности
+	 * расположенного ниже алгоритма
 	 * @return int[]
 	 */
 	public function getCategoryIds() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var int[] $result */
-			$result = array();
 			/** @var int[] $productIds */
-			$productIds =
-				array_keys(
-					/**
-					 * Обратите внимание, что getItems() загружает коллекцию.
-					 * Предварительная загрузка коллекции — необходимое условие работоспособности
-					 * расположенного ниже алгоритма
-					 */
-					$this->getItems()
-				)
-			;
-			if ($productIds) {
-				/** @var Varien_Db_Select $select */
-				$select = $this->getConnection()->select();
-				$select
-					->distinct($flag = true)
-					->from(
-						$name = $this->_productCategoryTable
-						,$cols = array('category_id', 'product_id')
-					)
-					->where('product_id IN (?)', $productIds)
-				;
-				/** @var array $rows */
-				$result = $this->getConnection()->fetchCol($select);
-			}
-			df_result_array($result);
-			$this->{__METHOD__} = $result;
+			$productIds = array_keys($this->getItems());
+			$this->{__METHOD__} = !$productIds ? array() : rm_fetch_col_int_unique(
+				$this->_productCategoryTable, 'category_id', 'product_id', $productIds
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -215,11 +229,11 @@ class Df_Catalog_Model_Resource_Product_Collection
 
 	/**
 	 * Отключение денормализации позволяет иметь в коллекции товаров все необходимые нам свойства.
-	 * Вместо отключения денормализации есть и другой способ иметь все необходиые свойства:
+	 * Вместо отключения денормализации есть и другой способ иметь все необходимые свойства:
 	 * указать в установочном скрипте,
 	 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
-	 * @see Df_Shipping_Model_Setup_2_16_2::process()
-	 * Однако методу Df_1C_Model_Cml2_Import_Processor_Product_Type::getDescription()
+	 * @see Df_Shipping_Setup_2_16_2::process()
+	 * Однако методу Df_1C_Cml2_Import_Processor_Product_Type::getDescription()
 	 * требуется, чтобы в коллекции товаров присутствовало свойство «описание».
 	 * Однако значения поля «описание» могут быть очень длинными,
 	 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,
@@ -242,10 +256,17 @@ class Df_Catalog_Model_Resource_Product_Collection
 	public function isEnabledFlat() {
 		/** @var bool $isFlatDisabled */
 		$isFlatDisabled = (true === $this->getRmData(self::P__DISABLE_FLAT));
-		/** @var bool $result */
-		$result = !$isFlatDisabled && parent::isEnabledFlat();
-		return $result;
+		return !$isFlatDisabled && parent::isEnabledFlat();
 	}
+
+	/**
+	 * 2015-02-09
+	 * Родительский метод: @see Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::setEntity()
+	 * @override
+	 * @param Mage_Eav_Model_Entity_Abstract $entity
+	 * @return Df_Catalog_Model_Resource_Product_Collection
+	 */
+	public function setEntity($entity) {df_should_not_be_here(__METHOD__);}
 
 	/**
 	 * @override
@@ -253,16 +274,11 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 */
 	protected function _afterLoad() {
 		parent::_afterLoad();
-		if (0 < count($this->_idFilterClientSide)) {
-			$this->_items =
-				array_intersect_key(
-					$this->_items
-					,array_flip(
-						$this->_idFilterClientSide
-					)
-				)
-			;
+		if ($this->_idFilterClientSide) {
+			$this->_items = df_select($this->_items, $this->_idFilterClientSide);
 		}
+		/** @uses Df_Catalog_Model_Product::markAsLoadedInCollection() */
+		df_each($this, 'markAsLoadedInCollection');
 		return $this;
 	}
 
@@ -279,10 +295,10 @@ class Df_Catalog_Model_Resource_Product_Collection
 		/**
 		 * Обратите внимание,
 		 * что данный метод может быть вызван несколько раз для одной и той же коллекции.
-		 * Например, данный метод будет вызван при каждолм вызове следующих методов коллекции:
-		 * @see addMinimalPrice()
-		 * @see addFinalPrice()
-		 * @see addStoreFilter()
+		 * Например, данный метод будет вызван при каждом вызове следующих методов коллекции:
+		 * @used-by addMinimalPrice()
+		 * @used-by addFinalPrice()
+		 * @used-by addStoreFilter()
 		 */
 		// Добавил данный код 2014-10-07 из Magento CE 1.9.0.1
 		Mage::dispatchEvent('catalog_product_collection_apply_limitations_before', array(
@@ -306,7 +322,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 			$conditions = array('cat_index.product_id = e.entity_id');
 			/**
 			 * Ключ «store_id» может отсутствовать в массиве $filters.
-			 * @link http://magento-forum.ru/topic/3748/
+			 * http://magento-forum.ru/topic/3748/
 			 */
 			/** @var int|null $storeId */
 			$storeId = df_a($filters, 'store_id');
@@ -322,11 +338,9 @@ class Df_Catalog_Model_Resource_Product_Collection
 			}
 			if ($this->hasCategoriesFilter()) {
 				$conditions[]=
-					(1 > count($this->getCategoriesFilter()))
+					!$this->getCategoriesFilter()
 					? null
-					: rm_sprintf(
-						'cat_index.category_id IN (%s)', implode(',', $this->getCategoriesFilter())
-					)
+					: sprintf('cat_index.category_id IN (%s)', df_csv($this->getCategoriesFilter()))
 				;
 			}
 			else {
@@ -339,9 +353,8 @@ class Df_Catalog_Model_Resource_Product_Collection
 			if (isset($filters['category_is_anchor'])) {
 				$conditions[]= rm_quote_into('? = cat_index.is_parent', $filters['category_is_anchor']);
 			}
-			$conditions = df_clean($conditions);
 			/** @var string $joinCond */
-			$joinCond = implode(' AND ', $conditions);
+			$joinCond = implode(' AND ', array_filter($conditions));
 			/** @var array $fromPart */
 			$fromPart = $this->getSelect()->getPart(Zend_Db_Select::FROM);
 			/**
@@ -420,7 +433,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 			: (
 				!$this->getCategoriesFilter()
 				? null
-				: rm_sprintf('cat_pro.category_id IN (%s)', implode(',', $this->getCategoriesFilter()))
+				: sprintf('cat_pro.category_id IN (%s)', df_csv($this->getCategoriesFilter()))
 			)
 		);
 		/** @var array(string => mixed) $fromPart */
@@ -541,7 +554,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 				else {
 					df_warning(
 						"Некий модуль или оформительская тема"
-						." требует наличия товарных свойств «%s» в коллекции товаров,"
+						." требует наличия товарных свойств %s в коллекции товаров,"
 						." однако сейчас эти свойства настроены таким образом,"
 						." что они в коллекцию товаров не попадут."
 						."\nЧтобы эти товарные свойства попадали в коллекцию товаров, Вам надо сейчас открыть"
@@ -549,7 +562,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 						."\n(«Каталог» → «Типы и свойства» → «Свойства товаров»), указать «да»"
 						." в качестве значения опции «Загружать ли в товарные коллекции?»"
 						." и затем перестроить расчётные таблицы."
-						,implode(',', $failedAttributes)
+						,df_csv_pretty_quote($failedAttributes)
 					);
 				}
 			}
@@ -557,42 +570,62 @@ class Df_Catalog_Model_Resource_Product_Collection
 		return $this;
 	}
 
-	/** @return array|null */
+	/** @return int[]|null */
 	private function getCategoriesFilter() {
 		return df_a($this->_productLimitationFilters, self::$LIMITATION__CATEGORIES);
+	}
+
+	/**
+	 * Возвращает перечень системных типов товаров коллекции.
+	 * Например:  array('simple', 'grouped', 'configurable', 'giftcard')
+	 * @return string[]
+	 */
+	private function getTypes() {
+		if (!isset($this->{__METHOD__})) {
+			/** @uses Df_Catalog_Model_Product::getTypeId() */
+			$this->{__METHOD__} = array_unique(df_each($this, 'getTypeId'));
+		}
+		return $this->{__METHOD__};
 	}
 
 	/** @return bool */
 	private function hasCategoriesFilter() {return !is_null($this->getCategoriesFilter());}
 
 	/**
+	 * 2015-02-09
+	 * Родительский метод не вызываем намеренно.
+	 * Родительский метод: @see Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::_init()
 	 * @override
-	 * @return void
+	 * @param string $model
+	 * @param string|null $entityModel [optional]
+	 * @return Df_Catalog_Model_Resource_Category_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(
-			Df_Catalog_Model_Product::mf()
-			,$this->isEnabledFlat()
-			? Df_Catalog_Model_Resource_Product_Flat::mf()
-			: Df_Catalog_Model_Resource_Product::mf()
-		);
+	protected function _init($model, $entityModel = null) {
+		$this->_itemObjectClass = Df_Catalog_Model_Product::_C;
+		$this->_entity =
+			$this->isEnabledFlat()
+			? Df_Catalog_Model_Resource_Product_Flat::s()
+			: Df_Catalog_Model_Resource_Product::s()
+		;
+		return $this;
 	}
+
 	/** @var bool */
 	private $_catIndexPositionIsAvailable = false;
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Catalog_Model_XmlExport_Catalog::_construct() */
+	const _C = __CLASS__;
 	/** @var string */
 	private static $LIMITATION__CATEGORIES = 'df_categories';
 	/**
 	 * Этот параметр используется модулем 1С:Управление торговлей.
 	 * Отключение денормализации позволяет иметь в коллекции товаров все необходимые нам свойства.
-	 * Вместо отключения денормализации есть и другой способ иметь все необходиые свойства:
+	 * Вместо отключения денормализации есть и другой способ иметь все необходимые свойства:
 	 * указать в установочном скрипте,
 	 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
-	 * @see Df_Shipping_Model_Setup_2_16_2::process()
-	 * Однако методу Df_1C_Model_Cml2_Import_Processor_Product_Type::getDescription()
+	 * @see Df_Shipping_Setup_2_16_2::process()
+	 * Однако методу @see Df_1C_Cml2_Import_Processor_Product_Type::getDescription()
 	 * требуется, чтобы в коллекции товаров присутствовало свойство «описание».
 	 * Однако значения поля «описание» могут быть очень длинными,
 	 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,

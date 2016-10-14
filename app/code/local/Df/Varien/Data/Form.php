@@ -57,46 +57,30 @@ class Df_Varien_Data_Form extends Varien_Data_Form {
 		foreach ($fieldValue as $subFieldName => $subFieldValue) {
 			/** @var string|int $subFieldName */
 			/** @var mixed $subFieldValue */
-
 			if (!is_int($subFieldName)) {
 				df_assert_string($subFieldName);
 			}
+			$this->addHiddenField(
+				implode('_', array($fieldId, df_string($subFieldName)))
+				/**
+				 * http://php.net/manual/reserved.variables.post.php
+				 *
+					you may have multidimensional array in form inputs
 
-			$this
-				->addHiddenField(
-					implode(
-						'_'
-						,array(
-							$fieldId
-							,df_string($subFieldName)
-						)
-					)
+					HTML Example:
 
-					/**
-					 * @link http://php.net/manual/en/reserved.variables.post.php
-					 *
-						you may have multidimensional array in form inputs
+					<input name="data[User][firstname]" type="text" />
+					<input name="data[User][lastname]" type="text" />
+					...
 
-						HTML Example:
+					Inside php script
+					after submit you can access the individual element like so:
 
-						<input name="data[User][firstname]" type="text" />
-						<input name="data[User][lastname]" type="text" />
-						...
-
-						Inside php script
-						after submit you can access the individual element like so:
-
-						$firstname = $_POST['data']['User']['firstname'];
-					 */
-
-					,rm_sprintf(
-						'%s[%s]'
-						,$fieldName
-						,df_string($subFieldName)
-					)
-					,$subFieldValue
-				)
-			;
+					$firstname = $_POST['data']['User']['firstname'];
+				 */
+				,sprintf('%s[%s]', $fieldName, df_string($subFieldName))
+				,$subFieldValue
+			);
 		}
 		return $this;
 	}

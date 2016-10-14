@@ -14,7 +14,7 @@ abstract class Df_Psbank_Model_Action_Confirm extends Df_Payment_Model_Action_Co
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Psbank_Model_Response::i($this->getRequest()->getParams());
-			$this->{__METHOD__}->postProcess($this->getOrderPayment());
+			$this->{__METHOD__}->postProcess($this->getPayment());
 		}
 		return $this->{__METHOD__};
 	}
@@ -37,16 +37,14 @@ abstract class Df_Psbank_Model_Action_Confirm extends Df_Payment_Model_Action_Co
 			 * чем запихнуть в getSignatureFromOwnCalculations() — не придумал.
 			 */
 			$this->getResponseAsObject();
-			$this->{__METHOD__} =
-				Df_Psbank_Helper_Data::s()->generateSignature(
-					$this->getRequest()->getParams()
-					,$this->getParamsForSignature()
-					,$this->getServiceConfig()->getRequestPassword()
-				)
-			;
+			$this->{__METHOD__} = Df_Psbank_Helper_Data::s()->generateSignature(
+				$this->getRequest()->getParams()
+				,$this->getParamsForSignature()
+				,$this->configS()->getRequestPassword()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

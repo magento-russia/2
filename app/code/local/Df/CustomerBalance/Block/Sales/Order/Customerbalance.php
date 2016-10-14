@@ -2,16 +2,11 @@
 class Df_CustomerBalance_Block_Sales_Order_Customerbalance extends Df_Core_Block_Template_NoCache {
 	/**
 	 * Retrieve current order model instance
-	 * @return Mage_Sales_Model_Order
+	 * @return Df_Sales_Model_Order
 	 */
-	public function getOrder() {
-		return $this->getParentBlock()->getOrder();
-	}
+	public function getOrder() {return $this->getParentBlock()->getOrder();}
 
-	public function getSource()
-	{
-		return $this->getParentBlock()->getSource();
-	}
+	public function getSource() {return $this->getParentBlock()->getSource();}
 
 	/**
 	 * Initialize customer balance order total

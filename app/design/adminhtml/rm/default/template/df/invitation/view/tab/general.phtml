@@ -17,16 +17,16 @@
 			<td class='label' rowspan='5'><label><?php  echo df_h()->invitation()->__('Invitation Message'); ?></label></td>
 			<td class='value' rowspan='5'>
 				<?php if ($this->canEditMessage()): ?>
-				<textarea name='message' rows='5'><?php echo df_text()->escapeHtml($this->getInvitation()->getMessage());?></textarea>
+				<textarea name='message' rows='5'><?php echo rm_e($this->getInvitation()->getMessage());?></textarea>
 				<div class='clearer'></div>
 				<?php echo $this->getSaveMessageButtonHtml(); ?>
 				<?php else: ?>
 					<strong><?php if ($this->getInvitation()->getMessage()): ?>
-					<?php echo df_text()->escapeHtml($this->getInvitation()->getMessage());?>
+					<?php echo rm_e($this->getInvitation()->getMessage());?>
 					<?php else: ?>
 					<?php echo df_h()->invitation()->__('N/A'); ?>
 					<?php endif; ?></strong>
-					<textarea style='height:1px; visibility: hidden'><?php echo df_text()->escapeHtml($this->getInvitation()->getMessage());?></textarea>
+					<textarea style='height:1px; visibility: hidden'><?php echo rm_e($this->getInvitation()->getMessage());?></textarea>
 				<?php endif; ?>
 			</td>
 		</tr>
@@ -36,7 +36,7 @@
 			<?php if ($this->canEditMessage()): ?>
 				<input type='text' class='required-entry input-text validate-email' name='email' value='<?php echo $this->getInvitation()->getEmail() ?>' />
 			<?php else: ?>
-				<strong><?php echo df_text()->escapeHtml($this->getInvitation()->getEmail()) ?></strong>
+				<strong><?php echo rm_e($this->getInvitation()->getEmail()) ?></strong>
 			<?php endif; ?>
 			</td>
 		</tr>
@@ -113,7 +113,7 @@
                 <td class='label'><label><?php  echo df_h()->invitation()->__('First Name'); ?></label></td>
                 <td class='value'><strong>
                 <?php if ($this->getReferral()): ?>
-                    <?php echo df_text()->escapeHtml($this->getReferral()->getFirstname())?>
+                    <?php echo rm_e($this->getReferral()->getFirstname())?>
                 <?php else:  ?>
                     <?php echo df_h()->invitation()->__('N/A'); ?>
                 <?php endif; ?></strong></td>
@@ -122,7 +122,7 @@
             	<td class='label'><label><?php  echo df_h()->invitation()->__('Last Name'); ?></label></td>
                 <td class='value'><strong>
                 <?php if ($this->getReferral()): ?>
-                    <?php echo df_text()->escapeHtml($this->getReferral()->getLastname())?>
+                    <?php echo rm_e($this->getReferral()->getLastname())?>
                 <?php else:  ?>
                     <?php echo df_h()->invitation()->__('N/A'); ?>
                 <?php endif; ?></strong></td>
@@ -131,7 +131,7 @@
             	<td class='label'><label><?php  echo df_h()->invitation()->__('Email'); ?></label></td>
                 <td class='value'><strong>
                 <?php if ($this->getReferral()): ?>
-                    <?php echo df_text()->escapeHtml($this->getReferral()->getEmail())?>
+                    <?php echo rm_e($this->getReferral()->getEmail())?>
                 <?php else:  ?>
                     <?php echo df_h()->invitation()->__('N/A'); ?>
                 <?php endif; ?></strong></td>
@@ -183,7 +183,7 @@
                 <td class='label'><label><?php  echo df_h()->invitation()->__('First Name'); ?></label></td>
                 <td class='value'><strong>
                 <?php if ($this->getCustomer()): ?>
-                    <?php echo df_text()->escapeHtml($this->getCustomer()->getFirstname())?>
+                    <?php echo rm_e($this->getCustomer()->getFirstname())?>
                 <?php else:  ?>
                     <?php echo df_h()->invitation()->__('N/A'); ?>
                 <?php endif; ?></strong></td>
@@ -192,7 +192,7 @@
             	<td class='label'><label><?php  echo df_h()->invitation()->__('Last Name'); ?></label></td>
                 <td class='value'><strong>
                 <?php if ($this->getCustomer()): ?>
-                    <?php echo df_text()->escapeHtml($this->getCustomer()->getLastname())?>
+                    <?php echo rm_e($this->getCustomer()->getLastname())?>
                 <?php else:  ?>
                     <?php echo df_h()->invitation()->__('N/A'); ?>
                 <?php endif; ?></strong></td>
@@ -201,7 +201,7 @@
             	<td class='label'><label><?php  echo df_h()->invitation()->__('Email'); ?></label></td>
                 <td class='value'><strong>
                 <?php if ($this->getCustomer()): ?>
-                    <?php echo df_text()->escapeHtml($this->getCustomer()->getEmail())?>
+                    <?php echo rm_e($this->getCustomer()->getEmail())?>
                 <?php else:  ?>
                     <?php echo df_h()->invitation()->__('N/A'); ?>
                 <?php endif; ?></strong></td>

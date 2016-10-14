@@ -8,9 +8,9 @@
  * [/code]
  */
 class Df_Sales_Model_Event_OrderStatusHistory_SaveBefore extends Df_Core_Model_Event {
-	/** @return Mage_Sales_Model_Order|null */
+	/** @return Df_Sales_Model_Order|null */
 	public function getOrder() {
-		/** @var Mage_Sales_Model_Order|null $result */
+		/** @var Df_Sales_Model_Order|null $result */
 		$result = $this->getOrderStatusHistory()->getOrder();
 		/**
 		 * $this->getOrderStatusHistory()->getOrder() вернёт null
@@ -20,25 +20,20 @@ class Df_Sales_Model_Event_OrderStatusHistory_SaveBefore extends Df_Core_Model_E
 			$result = Mage::registry('current_order');
 		}
 		if (!is_null($result)) {
-			df_assert($result instanceof Mage_Sales_Model_Order);
+			df_assert($result instanceof Df_Sales_Model_Order);
 		}
 		return $result;
 	}
 
 	/** @return Mage_Sales_Model_Order_Status_History */
-	public function getOrderStatusHistory() {
-		/** @var Mage_Sales_Model_Order_Status_History $result */
-		$result = $this->getEventParam(self::EVENT_PARAM__DATA_OBJECT);
-		df_assert($result instanceof Mage_Sales_Model_Order_Status_History);
-		return $result;
-	}
+	public function getOrderStatusHistory() {return $this->getEventParam('data_object');}
 
 	/** @return string */
-	protected function getExpectedEventSuffix() {
-		return self::EXPECTED_EVENT_SUFFIX;
-	}
+	protected function getExpectedEventSuffix() {return '_save_before';}
 
-	const _CLASS = __CLASS__;
-	const EVENT_PARAM__DATA_OBJECT = 'data_object';
-	const EXPECTED_EVENT_SUFFIX = '_save_before';
+	/**
+	 * @used-by Df_Sales_Observer::sales_order_status_history_save_before()
+	 * @used-by Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

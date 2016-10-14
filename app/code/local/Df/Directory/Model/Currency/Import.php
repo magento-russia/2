@@ -19,9 +19,7 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 	 * @override
 	 * @return array
 	 */
-	public function getMessages() {
-		return $this->_messages;
-	}
+	public function getMessages() {return $this->_messages;}
 
 	/** @var string[] */
 	private $_messages = array();
@@ -39,8 +37,8 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 		try {
 			$result = round($this->convertInternal($currencyFrom, $currencyTo), 4);
 		}
-		catch(Exception $e) {
-			$this->_messages[]= rm_ets($e) ? rm_ets($e) : nl2br(df_exception_get_trace($e));
+		catch (Exception $e) {
+			$this->_messages[]= rm_ets($e) ? rm_ets($e) : df_t()->nl2br(df_exception_get_trace($e));
 			df_handle_entry_point_exception($e, $rethrow = false);
 		}
 		return $result;
@@ -55,8 +53,8 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 	protected function throwNoRate($currencyCodeFrom, $currencyCodeTo) {
 		df_error(
 			'Система не в состоянии узнать курс обмена валюты «%s» на валюту «%s» от сервиса «%s»'
-			,df_zf_currency($currencyCodeFrom)->getName()
-			,df_zf_currency($currencyCodeTo)->getName()
+			,rm_currency_name($currencyCodeFrom)
+			,rm_currency_name($currencyCodeTo)
 			,$this->getName()
 		);
 	}
@@ -68,7 +66,4 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 	protected function throwServiceFailure($url) {
 		df_error(Mage::helper('directory')->__('Cannot retrieve rate from %s.', $url));
 	}
-
-	const _CLASS = __CLASS__;
-
 }

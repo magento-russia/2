@@ -4,5 +4,5 @@ class Df_YandexMoney_CustomerReturnController extends Mage_Core_Controller_Front
 	 * Яндекс.Деньги передают сюда результат авторизации приложения
 	 * @return void
 	 */
-	public function indexAction() {Df_YandexMoney_Model_Action_CustomerReturn::i($this)->process();}
+	public function indexAction() {rm_action($this);}
 }

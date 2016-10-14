@@ -29,11 +29,9 @@ class Df_Cms_Model_ContentsMenu_Collection extends Df_Varien_Data_Collection {
 	 */
 	public function loadItemsForTheCurrentPage() {
 		if (!$this->isLoaded()) {
-			$this
-				->addItemsForTheCurrentPageApplicators()
-				->mergeItemsWithTheSamePosition()
-				->_setIsLoaded(true)
-			;
+			$this->addItemsForTheCurrentPageApplicators();
+			$this->mergeItemsWithTheSamePosition();
+			$this->_setIsLoaded(true);
 		}
 		return $this;
 	}
@@ -70,38 +68,29 @@ class Df_Cms_Model_ContentsMenu_Collection extends Df_Varien_Data_Collection {
 
 	/**
 	 * @override
+	 * @see Df_Varien_Data_Collection::itemClass()
+	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function getItemClass() {return Df_Cms_Model_ContentsMenu::_CLASS;}
+	protected function itemClass() {return Df_Cms_Model_ContentsMenu::_C;}
 
-	/** @return Df_Cms_Model_ContentsMenu_Collection */
+	/** @return void */
 	private function addItemsForTheCurrentPageApplicators() {
 		foreach (Df_Cms_Model_Registry::s()->getApplicators() as $applicator) {
 			/** @var Df_Cms_Model_ContentsMenu_Applicator $applicator */
 			// Должна ли данная рубрика отображаться в каком-либо меню на текущей странице?
 			if ($applicator->isApplicableToTheCurrentPage()) {
-				/**
-				 * Итак, рубрика должна отображаться в каком-то меню на текущей странице:
-				 * либо в одном из уже присутствующик в коллекции меню, либо в новом меню.
-				 * Нам проще для каждой рубрики добавлять новое меню,
-				 * и лишь потом объединить несколько меню в одно.
-				 */
+				// Итак, рубрика должна отображаться в каком-то меню на текущей странице:
+				// либо в одном из уже присутствующик в коллекции меню, либо в новом меню.
+				// Нам проще для каждой рубрики добавлять новое меню,
+				// и лишь потом объединить несколько меню в одно.
 				/** @var Df_Cms_Model_ContentsMenu $menu */
-				$menu =
-					Df_Cms_Model_ContentsMenu::i(
-						array(
-							Df_Cms_Model_ContentsMenu::P__POSITION => $applicator->getPosition()
-							,Df_Cms_Model_ContentsMenu
-								::P__VERTICAL_ORDERING => $applicator->getVerticalOrdering()
-						)
-					)
-				;
+				$menu = Df_Cms_Model_ContentsMenu::i($applicator);
 				$menu->getApplicators()->addItem($applicator);
 				$this->addItem($menu);
 				$this->getPosition($applicator->getPosition())->addItem($menu);
 			}
 		}
-		return $this;
 	}
 
 	/**
@@ -126,17 +115,12 @@ class Df_Cms_Model_ContentsMenu_Collection extends Df_Varien_Data_Collection {
 	 * которые должны отображаться в меню на текущей странице.
 	 * Теперь надо объединить те меню,
 	 * которые на экране будут расположены на одном и том же месте.
-	 * @return Df_Cms_Model_ContentsMenu_Collection
+	 * @uses Df_Cms_Model_ContentsMenu_Collection::mergeItems()
+	 * @return void
 	 */
-	private function mergeItemsWithTheSamePosition() {
-		foreach ($this->getPositions() as $position) {
-			/** @var Df_Cms_Model_ContentsMenu_Collection $position */
-			$position->mergeItems();
-		}
-		return $this;
-	}
+	private function mergeItemsWithTheSamePosition() {$this->getPositions()->walk('mergeItems');}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ID = 'id';
 	/** @return Df_Cms_Model_ContentsMenu_Collection */
 	public static function i() {return new self;}

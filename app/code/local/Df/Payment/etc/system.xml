@@ -48,7 +48,7 @@
 			<!--
 				Обратите внимание на эту строку!
 			-->
-			<frontend_model>df_adminhtml/system_config_form</frontend_model>
+			<frontend_model>Df_Adminhtml_Block_Config_Form</frontend_model>
 			<frontend_type>text</frontend_type>
 			<sort_order>8500</sort_order>
 			<show_in_default>1</show_in_default>

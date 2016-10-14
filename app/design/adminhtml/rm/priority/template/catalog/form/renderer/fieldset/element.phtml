@@ -1,26 +1,72 @@
-<?php /** @var Mage_Adminhtml_Block_Catalog_Form_Renderer_Fieldset_Element $this */ ?>
-<?php $_element = $this->getElement() ?>
-<?php $this->checkFieldDisable() ?>
-
-<?php if ($_element->getType()=='hidden'): ?>
-<tr>
-    <td class="hidden" colspan="100"><?php echo trim($_element->getElementHtml()) ?></td>
-</tr>
-<?php else: ?>
-<tr>
-    <td class="label"><?php echo trim($this->getElementLabelHtml()) ?></td>
-    <td class="value">
-        <?php echo trim($this->getElementHtml()) ?>
-        <?php if ($_element->getNote()) : ?>
-            <p class="note"><?php echo df_mage()->catalogHelper()->__ ($_element->getNote()); ?></p>
-        <?php endif; ?>
-    </td>
-    <td class="scope-label"><span class="nobr"><?php echo $this->getScopeLabel() ?></span></td>
-    <?php if ($this->canDisplayUseDefault()): ?>
-    <td class="value use-default">
-        <input <?php if ($_element->getReadonly()):?> disabled="disabled"<?php endif; ?> type="checkbox" name="use_default[]" id="<?php echo $_element->getHtmlId() ?>_default"<?php if ($this->usedDefault()): ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode.parentNode)" value="<?php echo $this->getAttributeCode() ?>"/>
-        <label for="<?php echo $_element->getHtmlId() ?>_default" class="normal"><?php echo $this->__('Use Default Value') ?></label>
-    </td>
-    <?php endif; ?>
-</tr>
-<?php endif; ?>
+<?php
+/**   
+ * @var Mage_Adminhtml_Block_Catalog_Form_Renderer_Fieldset_Element $this 
+ * 2015-04-16
+ * Заменил p.note на div.note аналогично @see Df_Adminhtml_Block_Config_Form_Field::render()
+ * и app/design/adminhtml/rm/priority/template/widget/form/renderer/fieldset/element.phtml
+ */
+/** @var Varien_Data_Form_Element_Abstract|Df_Varien_Data_Form_Element_Abstract $element */
+$element = $this->getElement();
+$this->checkFieldDisable();
+/**
+ * Используем перевод модуля Mage_Catalog, потому что работаем в контексте этого модуля:
+ * обратите внимание на класс блока.
+ * @var Mage_Catalog_Helper_Data $t
+ */
+$t = df_mage()->catalogHelper();
+/** @var string $html */
+$html = trim($element->getElementHtml());
+if ('hidden' === $element->getType()) { ?>
+    <tr>
+        <td class='hidden' colspan='100'><?php echo $html; ?></td>
+    </tr>
+<?php } else { ?>
+    <tr>
+        <td class='label'><?php echo trim($this->getElementLabelHtml()); ?></td>
+        <td class='value'>
+            <?php
+                echo $html;
+                if ($element->getNote()) {
+                    echo rm_tag('div', array('class' => 'note'), $t->__($element->getNote()));
+                }
+            ?>
+        </td>
+        <td class='scope-label'>
+            <span class='nobr'><?php echo $this->getScopeLabel(); ?></span>
+        </td>
+        <?php if ($this->canDisplayUseDefault()) { ?>
+            <td class='value use-default'>
+                <?php
+                    /**
+                     * 2015-04-15
+                     * Возможность задавать этот параметр
+                     * появилась в последних версиях Magento CE:
+                     * @see app/design/adminhtml/default/default/template/catalog/form/renderer/fieldset/element.phtml
+                     * @see Mage_Adminhtml_Block_Catalog_Category_Helper_Pricestep::getToggleCode()
+                     * @see Mage_Adminhtml_Block_Catalog_Category_Helper_Sortby_Available::getToggleCode()
+                     * @see Mage_Adminhtml_Block_Catalog_Category_Helper_Sortby_Default::getToggleCode()
+                     * @var string|null $toggleCode
+                     */
+                    $toggleCode = $element->getToggleCode();
+                    if ($toggleCode) {
+                        $toggleCode = 'toggleValueElements(this, this.parentNode.parentNode);';
+                    }
+                    /** @var array(string => string) $useDefault */
+                    echo rm_tag('input', array(
+                        'type' => 'checkbox'
+                        ,'name' => 'use_default[]'
+                        ,'id' => "{$element->getHtmlId()}_default"
+                        ,'onclick' => $toggleCode
+                        ,'value' => $this->getAttributeCode()
+                        ,'disabled' => $element->getReadonly() ? 'disabled' : null
+                        ,'checked' => $this->usedDefault() ? 'checked' : null
+                    ));
+                ?>
+                <label
+                    for='<?php echo $element->getHtmlId() ?>_default'
+                    class='normal'
+                ><?php echo $this->__('Use Default Value'); ?></label>
+            </td>
+        <?php } ?>
+    </tr>
+<?php }

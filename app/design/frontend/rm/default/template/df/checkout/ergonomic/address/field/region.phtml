@@ -11,16 +11,7 @@
 		id='<?php echo $asDropdown->getDomId(); ?>'
 		name='<?php echo $asDropdown->getDomName(); ?>'
 		title='<?php echo $asDropdown->getLabel(); ?>'
-		<?php
-			/**
-			 * Если регион необязателен для указания,
-			 * то добавление класса validate-select будет ошибкой,
-			 * потому что validate-select требует обязательной заполненности поля
-			 */
-			if ($asDropdown->isRequired()) {
-				?>class='validate-select'<?php
-			}
-		?>
+		class='<?php echo $asDropdown->getCssClassesAsText(); ?>'
 		style='display:none;'
 	>
 		<option
@@ -30,11 +21,7 @@
 	<script type='text/javascript'>
 	//<![CDATA[
 		$('<?php echo $asDropdown->getDomId(); ?>')
-			.setAttribute(
-				'defaultValue'
-				,
-				'<?php echo $asDropdown->getValue(); ?>'
-			)
+			.setAttribute('defaultValue', '<?php echo $asDropdown->getValue(); ?>')
 		;
 	//]]>
 	</script>
@@ -42,9 +29,9 @@
 		type='text'
 		id='<?php echo $asText->getDomId(); ?>'
 		name='<?php echo $asText->getDomName(); ?>'
-		value='<?php echo df_text()->escapeHtml($asText->getValue()); ?>'
+		value='<?php echo rm_e($asText->getValue()); ?>'
 		title='<?php echo $asText->getLabel(); ?>'
-		class='input-text rm.validate.region.text'
+		class='<?php echo $asDropdown->getCssClassesAsText(); ?>'
 		style='display:none;'
 	/>
 </div>

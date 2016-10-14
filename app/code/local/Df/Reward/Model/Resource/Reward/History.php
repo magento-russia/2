@@ -1,5 +1,5 @@
 <?php
-class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Abstract $object
@@ -39,9 +39,9 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 	 */
 	public function isExistHistoryUpdate($customerId, $action, $websiteId, $entity)
 	{
-		$select = $this->_getWriteAdapter()->select()
-			->from(array('reward_table' => rm_table('df_reward/reward')), array())
-			->joinInner(array('history_table' => $this->getMainTable()),'history_table.reward_id = reward_table.reward_id', array())
+		$select = rm_select()
+			->from(array('reward_table' => rm_table(Df_Reward_Model_Resource_Reward::TABLE)), null)
+			->joinInner(array('history_table' => $this->getMainTable()),'history_table.reward_id = reward_table.reward_id', null)
 			->where('history_table.action = ?', $action)
 			->where('history_table.website_id = ?', $websiteId)
 			->where('history_table.entity = ?', $entity)
@@ -64,14 +64,14 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 	{
 		$select = $this->_getReadAdapter()->select()->from(array('history_table' => $this->getMainTable()), array('COUNT(*)'))
 			->joinInner(
-				array('reward_table' => rm_table('df_reward/reward'))
+				array('reward_table' => rm_table(Df_Reward_Model_Resource_Reward::TABLE))
 				,'history_table.reward_id = reward_table.reward_id'
-				, array()
+				, null
 			)
 			->where("history_table.action=?", $action)
 			->where("reward_table.customer_id=?", $customerId)
 			->where("history_table.website_id=?", $websiteId);
-		return intval($this->_getReadAdapter()->fetchOne($select));
+		return (int)$this->_getReadAdapter()->fetchOne($select);
 	}
 
 	/**
@@ -102,6 +102,7 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 			$stmt = $this->_getReadAdapter()->query($select);
 			$updateSql = "INSERT INTO `{$this->getMainTable()}` (`history_id`, `points_used`) VALUES ";
 			$updateSqlValues = array();
+			/** @noinspection PhpAssignmentInConditionInspection */
 			while ($row = $stmt->fetch()) {
 				if ($required <= 0) {
 					break;
@@ -112,30 +113,28 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 				$newPointsUsed = $pointsUsed + $row['points_used'];
 				$updateSqlValues[]= " ('{$row['history_id']}', '{$newPointsUsed}') ";
 			}
-			if (count($updateSqlValues) > 0) {
-				$updateSql = $updateSql
-						   . implode(',', $updateSqlValues)
-						   . " ON DUPLICATE KEY UPDATE `points_used`=VALUES(`points_used`) ";
+			if ($updateSqlValues) {
+				$updateSql =
+					$updateSql
+				   . df_csv($updateSqlValues)
+				   . " ON DUPLICATE KEY UPDATE `points_used`=VALUES(`points_used`) "
+				;
 				$this->_getWriteAdapter()->query($updateSql);
 			}
 			$this->_getWriteAdapter()->commit();
 		} catch (Exception $e) {
 			$this->_getWriteAdapter()->rollback();
-			throw $e;
+			df_error($e);
 		}
 		return $this;
 	}
 
 	/**
-	 * Update history expired_at_dynamic field for specified websites when config changed
-	 *
-	 * @param int $days Reward Points Expire in (days)
-	 * @param array $websiteIds Array of website ids that must be updated
+	 * @param int $days
+	 * @param int|int[] $websiteIds
 	 * @return Df_Reward_Model_Resource_Reward_History
 	 */
-	public function updateExpirationDate($days, $websiteIds)
-	{
-		$websiteIds = is_array($websiteIds) ? $websiteIds : array($websiteIds);
+	public function updateExpirationDate($days, $websiteIds) {
 		$days = (int)abs($days);
 		if ($days) {
 			$newValue = "ADDDATE(`created_at`, INTERVAL {$days} DAY)";
@@ -143,7 +142,7 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 			$newValue = '0000-00-00 00:00:00';
 		}
 		$sql = "UPDATE `{$this->getMainTable()}` SET `expired_at_dynamic`={$newValue} WHERE ";
-		$sql.= rm_quote_into("`website_id` in (?)", $websiteIds);
+		$sql.= rm_quote_into("`website_id` in (?)", rm_array($websiteIds));
 		$this->_getWriteAdapter()->query($sql);
 	}
 
@@ -200,7 +199,7 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 			$duplicates[]= $row;
 		}
 
-		if (count($expiredHistoryIds) > 0) {
+		if ($expiredHistoryIds) {
 			// decrease points balance of rewards
 			foreach ($expiredAmounts as $rewardId => $expired) {
 				if ($expired == 0) {
@@ -215,7 +214,7 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 					)
 				;
 				$this->_getWriteAdapter()->update(
-					rm_table('df_reward/reward')
+					rm_table(Df_Reward_Model_Resource_Reward::TABLE)
 					, $bind
 					, array('? = reward_id' => $rewardId)
 				);
@@ -252,25 +251,19 @@ class Df_Reward_Model_Resource_Reward_History extends Mage_Core_Model_Mysql4_Abs
 	}
 
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_Reward_Model_Reward_History::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_reward/reward_history';
+	protected function _construct() {$this->_init(self::TABLE, Df_Reward_Model_Reward_History::P__ID);}
 	/**
-	 * @see Df_Reward_Model_Reward_History::_construct()
-	 * @see Df_Reward_Model_Resource_Reward_History_Collection::_construct()
-	 * @return string
+	 * @used-by Df_Reward_Setup_1_0_0::_process()
+	 * @used-by Df_Reward_Setup_1_0_1::_process()
+	 * @used-by Df_Reward_Setup_2_20_6::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_reward/reward_history';
 	/** @return Df_Reward_Model_Resource_Reward_History */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

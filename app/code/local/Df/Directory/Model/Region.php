@@ -1,12 +1,11 @@
 <?php
 /**
+ * @method int|null getRegionId()
  * @method Df_Directory_Model_Resource_Region getResource()
  */
 class Df_Directory_Model_Region extends Mage_Directory_Model_Region {
 	/** @return string|null */
-	public function getCapital() {
-		return $this->_getData(self::P__DF_CAPITAL);
-	}
+	public function getCapital() {return $this->_getData(self::P__DF_CAPITAL);}
 
 	/** @return string */
 	public function getNameOriginal() {
@@ -17,13 +16,18 @@ class Df_Directory_Model_Region extends Mage_Directory_Model_Region {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Directory_Model_Resource_Region_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Directory_Model_Resource_Region::mf());
-	}
-	const _CLASS = __CLASS__;
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * @override
+	 * @return Df_Directory_Model_Resource_Region
+	 */
+	protected function _getResource() {return Df_Directory_Model_Resource_Region::s();}
+
+	/** @used-by Df_Directory_Model_Resource_Region_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__COUNTRY_ID = 'country_id';
 	const P__CODE = 'code';
 	const P__DEFAULT_NAME = 'default_name';
@@ -35,7 +39,7 @@ class Df_Directory_Model_Region extends Mage_Directory_Model_Region {
 	const P__REGION_ID = 'region_id';
 
 	/** @return Df_Directory_Model_Resource_Region_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Directory_Model_Resource_Region_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -49,11 +53,6 @@ class Df_Directory_Model_Region extends Mage_Directory_Model_Region {
 	 * @return Df_Directory_Model_Region
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Directory_Model_Resource_Region_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Directory_Model_Region */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

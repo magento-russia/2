@@ -9,17 +9,15 @@ class Df_CustomerBalance_Model_Total_Quote_Customerbalance
 	 * @override
 	 * @return Df_CustomerBalance_Model_Total_Quote_Customerbalance
 	 */
-	public function __construct() {
-		$this->setCode('customerbalance');
-	}
+	public function __construct() {$this->setCode('customerbalance');}
 
 	/**
 	 * Collect customer balance totals for specified address
-	 * @param Mage_Sales_Model_Quote_Address $address
+	 * @param Mage_Sales_Model_Quote_Address|Df_Sales_Model_Quote_Address $address
 	 * @return Df_CustomerBalance_Model_Total_Quote_Customerbalance
 	 */
 	public function collect(Mage_Sales_Model_Quote_Address $address) {
-		if (!df_h()->customer()->balance()->isEnabled()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled()) {
 			return $this;
 		}
 		$quote = $address->getQuote();
@@ -32,7 +30,7 @@ class Df_CustomerBalance_Model_Total_Quote_Customerbalance
 		$baseBalance = $balance = 0;
 		if ($quote->getCustomer()->getId()) {
 			if ($quote->getUseCustomerBalance()) {
-				$store = Mage::app()->getStore($quote->getStoreId());
+				$store = rm_store($quote->getStoreId());
 				$baseBalance = Df_CustomerBalance_Model_Balance::i()
 					->setCustomer($quote->getCustomer())
 					->setWebsiteId($store->getWebsiteId())
@@ -67,16 +65,19 @@ class Df_CustomerBalance_Model_Total_Quote_Customerbalance
 
 	/**
 	 * Return shopping cart total row items
-	 * @param Mage_Sales_Model_Quote_Address $address
+	 * @param Mage_Sales_Model_Quote_Address|Df_Sales_Model_Quote_Address $address
 	 * @return Df_CustomerBalance_Model_Total_Quote_Customerbalance
 	 */
 	public function fetch(Mage_Sales_Model_Quote_Address $address) {
-		if (!df_h()->customer()->balance()->isEnabled()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled()) {
 			return $this;
 		}
 		if ($address->getCustomerBalanceAmount()) {
 			$address->addTotal(array(
-				'code'=>$this->getCode(),'title'=>df_h()->customer()->balance()->__('Store Credit'),'value'=>-$address->getCustomerBalanceAmount(),));
+				'code' => $this->getCode()
+				,'title' => Df_CustomerBalance_Helper_Data::s()->__('Store Credit')
+				,'value' => -$address->getCustomerBalanceAmount()
+			));
 		}
 		return $this;
 	}

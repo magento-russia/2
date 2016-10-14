@@ -2931,7 +2931,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 					$formula1 = $this->_parser->toReversePolish();
 					$sz1 = strlen($formula1);
 
-				} catch(PHPExcel_Exception $e) {
+				} catch (PHPExcel_Exception $e) {
 					$sz1 = 0;
 					$formula1 = '';
 				}
@@ -2948,7 +2948,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 					$formula2 = $this->_parser->toReversePolish();
 					$sz2 = strlen($formula2);
 
-				} catch(PHPExcel_Exception $e) {
+				} catch (PHPExcel_Exception $e) {
 					$sz2 = 0;
 					$formula2 = '';
 				}

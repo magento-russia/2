@@ -1,4 +1,5 @@
 <?php
+/** @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin */
 class Df_Shipping_Model_Origin extends Df_Core_Model {
 	/** @return string */
 	public function getCity() {return $this->cfg(self::P__CITY);}
@@ -6,11 +7,7 @@ class Df_Shipping_Model_Origin extends Df_Core_Model {
 	/** @return Df_Directory_Model_Country|null */
 	public function getCountry() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
-				!$this->getCountryId()
-				? null
-				: df_h()->directory()->country()->getByIso2Code($this->getCountryId())
-			);
+			$this->{__METHOD__} = rm_n_set(!$this->getCountryId() ? null : rm_country($this->getCountryId()));
 		}
 		return rm_n_get($this->{__METHOD__});
 	}
@@ -52,14 +49,14 @@ class Df_Shipping_Model_Origin extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CITY, self::V_STRING, self::F_TRIM)
-			->_prop(self::P__COUNTRY_ID, self::V_STRING, false)
-			->_prop(self::P__POSTAL_CODE, self::V_STRING, self::F_TRIM)
-			->_prop(self::P__REGION_NAME, self::V_STRING, self::F_TRIM)
-			->_prop(self::P__REGION_ID, self::V_NAT0)
+			->_prop(self::P__CITY, RM_V_STRING, RM_F_TRIM)
+			->_prop(self::P__COUNTRY_ID, RM_V_STRING, false)
+			->_prop(self::P__POSTAL_CODE, RM_V_STRING, RM_F_TRIM)
+			->_prop(self::P__REGION_NAME, RM_V_STRING, RM_F_TRIM)
+			->_prop(self::P__REGION_ID, RM_V_NAT0)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__CITY = 'city';
 	const P__COUNTRY_ID = 'country_id';
 	const P__POSTAL_CODE = 'postal_code';

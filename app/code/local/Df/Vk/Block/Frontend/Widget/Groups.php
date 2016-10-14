@@ -36,9 +36,11 @@ class Df_Vk_Block_Frontend_Widget_Groups extends Df_Vk_Block_Frontend_Widget {
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/vk/groups.phtml';}
+	protected function defaultTemplate() {return 'df/vk/groups.phtml';}
 
 	/**
 	 * @override
@@ -91,5 +93,5 @@ class Df_Vk_Block_Frontend_Widget_Groups extends Df_Vk_Block_Frontend_Widget {
 		);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

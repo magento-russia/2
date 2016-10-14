@@ -13,9 +13,15 @@ class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Mysql
 	public function __construct() {
 		parent::__construct();
 		if (self::isOldInterface()) {
-			$this->setItemObjectClass(Df_Review_Model_Review::_CLASS);
+			$this->setItemObjectClass(Df_Review_Model_Review::_C);
 		}
 	}
+
+	/**
+	 * @override
+	 * @return Df_Review_Model_Resource_Review
+	 */
+	public function getResource() {return Df_Review_Model_Resource_Review::s();}
 
 	/** @return Df_Review_Model_Resource_Review_Collection */
 	public function limitLast() {
@@ -31,13 +37,11 @@ class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Mysql
 	protected function _construct() {
 		if (!self::isOldInterface()) {
 			parent::_construct();
-			$this->_init(Df_Review_Model_Review::mf(), Df_Review_Model_Resource_Review::mf());
+			$this->_itemObjectClass = Df_Review_Model_Review::_C;
 		}
 	}
 
-	const _CLASS = __CLASS__;
-	/** @return Df_Review_Model_Resource_Review_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 
 	/**
 	 * В Magento CE 1.4 класс @see Mage_Review_Model_Mysql4_Review_Collection
@@ -46,24 +50,21 @@ class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Mysql
 	 * и @see Mage_Review_Model_Mysql4_Review_Collection::_init().
 	 * Поэтому реализуем логику отсутствующих методов своим способом.
 	 * своим способом.
+	 *
+	 * Раньше тут стояло:
+	 * $result = !method_exists('self', '_init') || !method_exists('self', '_construct');
+	 * В моей версии PHP 5.5.12 вызов @see method_exists с первым параметром 'self' работает:
+	 * method_exists('self', '_init').
+	 * Однако 2014-10-14 заметил, что у клиентов, использующих PHP 5.3 (5.3.3 и 5..3.23)
+	 * такой вызов не работает:
+	 * https://mail.google.com/mail/u/0/#search/Warning%3A+include(Self.php)
+	 * https://bugs.php.net/bug.php?id=50289
+	 *
 	 * @return bool
 	 */
 	private static function isOldInterface() {
-		/** @var bool $result */
-		static $result;
-		if (!isset($result)) {
-			/**
-			 * Раньше тут стояло:
-			 * $result = !method_exists('self', '_init') || !method_exists('self', '_construct');
-			 * В моей версии PHP 5.5.12 вызов @see method_exists с первым параметром 'self' работает:
-			 * method_exists('self', '_init').
-			 * Однако 2014-10-14 заметил, что у клиентов, использующих PHP 5.3 (5.3.3 и 5..3.23)
-			 * такой вызов не работает:
-			 * @link https://mail.google.com/mail/u/0/#search/Warning%3A+include(Self.php)
-			 * @link https://bugs.php.net/bug.php?id=50289
-			 */
-			$result = !method_exists(__CLASS__, '_init') || !method_exists(__CLASS__, '_construct');
-		}
-		return $result;
+		static $r; return !is_null($r) ? $r : $r =
+			!method_exists(__CLASS__, '_init') || !method_exists(__CLASS__, '_construct')
+		;
 	}
 }

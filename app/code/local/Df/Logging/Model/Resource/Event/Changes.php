@@ -1,25 +1,18 @@
 <?php
-class Df_Logging_Model_Resource_Event_Changes extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Logging_Model_Resource_Event_Changes extends Df_Core_Model_Resource {
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_Logging_Model_Event_Changes::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_logging/event_changes';
+	protected function _construct() {$this->_init(self::TABLE, Df_Logging_Model_Event_Changes::P__ID);}
 	/**
-	 * @see Df_Logging_Model_Event_Changes::_construct()
-	 * @see Df_Logging_Model_Resource_Event_Changes_Collection::_construct()
-	 * @return string
+	 * @used-by Df_Logging_Model_Resource_Event::getEventChangeIds()
+	 * @used-by Df_Logging_Setup_1_0_0::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_logging/event_changes';
 	/** @return Df_Logging_Model_Resource_Event_Changes */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

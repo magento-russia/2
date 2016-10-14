@@ -20,7 +20,7 @@ abstract class Df_Dataflow_Model_Importer_Row extends Df_Core_Model {
 	 * общего для всех строк импортируемых данных.
 	 * Как правило, общие параметры используются в качестве параметров по умолчанию.
 	 * @param string $paramName
-	 * @param string|null $defaultValue[optional]
+	 * @param string|null $defaultValue [optional]
 	 * @return string|null
 	 */
 	protected function getConfigParam($paramName, $defaultValue = null) {
@@ -45,8 +45,8 @@ abstract class Df_Dataflow_Model_Importer_Row extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ROW, Df_Dataflow_Model_Import_Abstract_Row::_CLASS);
+		$this->_prop(self::P__ROW, Df_Dataflow_Model_Import_Abstract_Row::_C);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ROW = 'row';
 }

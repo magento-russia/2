@@ -7,7 +7,15 @@ class Df_Zf_Validate_String_NotEmpty extends Df_Zf_Validate_Type {
 	 */
 	public function isValid($value) {
 		$this->prepareValidation($value);
-		return is_string($value) && ('' !== strval($value));
+		/**
+		 * 2015-02-16
+		 * Раньше здесь стояло is_string($value) && ('' !== strval($value))
+		 * Однако интерпретатор PHP способен неявно и вполне однозначно
+		 * (без двусмысленностей, как, скажем, с вещественными числами)
+		 * конвертировать целые числа в строки,
+		 * поэтому пусть целые числа всегда проходят валидацию как непустые строки.
+		 */
+		return is_int($value) || (is_string($value) && ('' !== strval($value)));
 	}
 
 	/**

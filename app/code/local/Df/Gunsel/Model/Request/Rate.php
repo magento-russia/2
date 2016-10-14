@@ -13,7 +13,7 @@ class Df_Gunsel_Model_Request_Rate extends Df_Gunsel_Model_Request {
 	/** @return string */
 	protected function getRequestMethod() {return Zend_Http_Client::POST;}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Customer>
-			<version>2.23.7</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.23.7</version>
 		</Df_Customer>
 	</modules>
 	<global>
@@ -89,10 +89,10 @@
 		<events>
 			<core_collection_abstract_load_after>
 				<observers>
-					<df_customer__form_attribute_collection__load_after>
-						<class>df_customer/dispatcher</class>
-						<method>form_attribute_collection__load_after</method>
-					</df_customer__form_attribute_collection__load_after>
+					<Df_Customer>
+						<class>Df_Customer_Observer</class>
+						<method>core_collection_abstract_load_after</method>
+					</Df_Customer>
 				</observers>
 			</core_collection_abstract_load_after>
 		</events>
@@ -101,10 +101,10 @@
 		<events>
 			<controller_action_predispatch_customer_account_loginPost>
 				<observers>
-					<df_customer__controller_action_predispatch_customer_account_loginPost>
-						<class>df_customer/dispatcher</class>
+					<Df_Customer>
+						<class>Df_Customer_Observer</class>
 						<method>controller_action_predispatch_customer_account_loginPost</method>
-					</df_customer__controller_action_predispatch_customer_account_loginPost>
+					</Df_Customer>
 				</observers>
 			</controller_action_predispatch_customer_account_loginPost>
 		</events>

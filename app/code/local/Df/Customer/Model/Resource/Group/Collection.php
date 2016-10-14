@@ -5,16 +5,22 @@ class Df_Customer_Model_Resource_Group_Collection extends Mage_Customer_Model_En
 	 * нам нужно, чтобы коллекция категорий покупателей использовала наши классы:
 	 * @see Df_Customer_Model_Group
 	 * @see Df_Customer_Model_Resource_Group
-	 *
+	 * @override
+	 * @return Df_Customer_Model_Resource_Group
+	 */
+	public function getResource() {return Df_Customer_Model_Resource_Group::s();}
+
+	/**
+	 * Цель перекрытия —
+	 * нам нужно, чтобы коллекция категорий покупателей использовала наши классы:
+	 * @see Df_Customer_Model_Group
+	 * @see Df_Customer_Model_Resource_Group
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Customer_Model_Group::mf(), Df_Customer_Model_Resource_Group::mf());
-	}
-	const _CLASS = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Group::_C;}
+	const _C = __CLASS__;
 
 	/** @return Df_Customer_Model_Resource_Group_Collection */
-	public static function i() {return new self;}
+	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

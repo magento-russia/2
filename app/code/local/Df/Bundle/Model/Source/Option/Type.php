@@ -15,11 +15,7 @@ class Df_Bundle_Model_Source_Option_Type extends Mage_Bundle_Model_Source_Option
 		$result = parent::toOptionArray();
 		foreach ($result as &$item) {
 			/** @var string[] $item */
-			df_assert_array($item);
-			/** @var string $label */
-			$label = df_a($item, 'label');
-			df_assert_string($label);
-			$item['label'] = df_mage()->bundleHelper()->__($label);
+			$item['label'] = df_mage()->bundleHelper()->__(df_a($item, 'label'));
 		}
 		return $result;
 	}

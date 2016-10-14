@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Ems>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>EMS Почта России</title>
+			<version>1.0.0</version>
 		</Df_Ems>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-ems>
 				<active>0</active>
-				<model>df_ems/carrier</model>
+				<model>Df_Ems_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки
@@ -38,14 +39,14 @@
 	<adminhtml>
 		<translate>
 			<modules>
-				<Df_Ems><files><default>Df_Ems.csv</default></files></Df_Ems>
+				<Df_Ems><files><default>Df/Ems.csv</default></files></Df_Ems>
 			</modules>
 		</translate>
 	</adminhtml>
 	<frontend>
 		<translate>
 			<modules>
-				<Df_Ems><files><default>Df_Ems.csv</default></files></Df_Ems>
+				<Df_Ems><files><default>Df/Ems.csv</default></files></Df_Ems>
 			</modules>
 		</translate>
 	</frontend>

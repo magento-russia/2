@@ -12,7 +12,7 @@ class Df_Zf_Validate_Boolean extends Df_Zf_Validate_Type implements Zend_Filter_
 			$result = rm_bool($value);
 		}
 		catch (Exception $e) {
-			throw new Zend_Filter_Exception(rm_ets($e));
+			df_error(new Zend_Filter_Exception(rm_ets($e)));
 		}
 		return $result;
 	}

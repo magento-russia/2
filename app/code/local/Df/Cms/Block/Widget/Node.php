@@ -43,7 +43,9 @@ class Df_Cms_Block_Widget_Node
 	}
 
 	/**
-	 * Render block HTML
+	 * @override
+	 * @see Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
 	protected function _toHtml()

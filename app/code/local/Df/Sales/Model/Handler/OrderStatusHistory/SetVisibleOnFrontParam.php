@@ -13,17 +13,12 @@ class Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam extends D
 			/**
 			 * Проверка обязательна,
 			 * иначе некорректно работает добавление комментариев администратором
-			 * @link http://magento-forum.ru/topic/2394/
+			 * http://magento-forum.ru/topic/2394/
 			 */
 			if (!df_is_admin()) {
-				$this->getEvent()->getOrderStatusHistory()
-					->setData(
-						Df_Sales_Const::ORDER_STATUS_HISTORY_PARAM__IS_VISIBLE_ON_FRONT
-						,$this->getEvent()->getOrder()->getData(
-							Df_Sales_Model_Order::RM_PARAM__COMMENT_IS_VISIBLE_ON_FRONT
-						)
-					)
-				;
+				$this->getEvent()->getOrderStatusHistory()->setIsVisibleOnFront(
+					$this->getEvent()->getOrder()->needCommentToBeVisibleOnFront()
+				);
 			}
 			else {
 				/**
@@ -35,21 +30,14 @@ class Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam extends D
 				 * Можно опционально его изменить...
 				 */
 				if (
-						df_cfg()->sales()->orderComments()->adminOrderCreate_commentIsVisibleOnFront()
-					&&
-						df_enabled(Df_Core_Feature::SALES)
+					df_cfg()->sales()->orderComments()
+						->adminOrderCreate_commentIsVisibleOnFront()
 				) {
 					if (
-							('new' === $this->getEvent()->getOrder()->getState())
-						&&
-							('pending' === $this->getEvent()->getOrder()->getStatus())
+						'new' === $this->getEvent()->getOrder()->getState()
+						&& 'pending' === $this->getEvent()->getOrder()->getStatus()
 					) {
-						$this->getEvent()->getOrderStatusHistory()
-							->setData(
-								Df_Sales_Const::ORDER_STATUS_HISTORY_PARAM__IS_VISIBLE_ON_FRONT
-								,true
-							)
-						;
+						$this->getEvent()->getOrderStatusHistory()->setIsVisibleOnFront(true);
 					}
 				}
 			}
@@ -61,9 +49,8 @@ class Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam extends D
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Sales_Model_Event_OrderStatusHistory_SaveBefore::_CLASS;
-	}
+	protected function getEventClass() {return Df_Sales_Model_Event_OrderStatusHistory_SaveBefore::_C;}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Sales_Observer::sales_order_status_history_save_before() */
+	const _C = __CLASS__;
 }

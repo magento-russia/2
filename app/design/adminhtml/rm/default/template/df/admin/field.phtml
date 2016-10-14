@@ -1,0 +1,58 @@
+<?php /** @var Df_Admin_Block_Field $this */ ?>
+<?php
+	/** @var Df_Admin_Model_Form_Element $element */
+	$element = $this->getElement();
+?>
+<tr id='row_<?php echo $element->getId(); ?>'>
+	<td class='label'>
+		<label for='<?php echo $element->getId(); ?>'>
+			<?php echo $element->getLabel(); ?>
+		</label>
+	</td>
+	<td class='value'>
+		<?php echo $element->getHtml(); ?>
+		<?php
+			if ($element->getComment()) {
+				?>
+					<p class='note'>
+						<span>
+							<?php echo $element->getComment(); ?>
+						</span>
+					</p>
+				<?php
+			}
+		?>
+	</td>
+	<?php if ($element->needToAddInheritBox()) { ?>
+		<td class='use-default'>
+			<input
+				id='<?php echo $element->getId(); ?>_inherit'
+				name='<?php echo $element->getNamePrefix(); ?>[inherit]'
+				type='checkbox'
+				value='1'
+				class='checkbox config-inherit'
+				<?php if ($element->getInherit()) { ?>
+					checked='checked'
+				<?php } ?>
+				onclick='toggleValueElements(this, Element.previous(this.parentNode))'
+			/>
+			<label
+				for='<?php echo $element->getId(); ?>_inherit'
+				class='inherit'
+				title='<?php echo rm_e($element->getDefaultText()); ?>'
+			><?php echo $element->getCheckboxLabel(); ?></label>
+		</td>
+	<?php } ?>
+	<td class='scope-label'>
+		<?php echo $element->getScopeLabel(); ?>
+	</td>
+	<td class=''>
+		<?php if ($element->getHint()) { ?>
+			<div class='hint'>
+				<div style='display: none;'>
+					<?php echo $element->getHint(); ?>
+				</div>
+			</div>
+		<?php } ?>
+	</td>
+</tr>

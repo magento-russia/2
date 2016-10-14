@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Reports>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Отчёты</title>
+			<version>1.0.0</version>
 		</Df_Reports>
 	</modules>
 	<df>
@@ -48,32 +49,32 @@
 		<events>
 			<adminhtml_block_html_before>
 				<observers>
-					<df_reports__adminhtml_block_html_before>
-						<class>df_reports/dispatcher</class>
+					<Df_Reports>
+						<class>Df_Reports_Observer</class>
 						<method>adminhtml_block_html_before</method>
-					</df_reports__adminhtml_block_html_before>
+					</Df_Reports>
 				</observers>
 			</adminhtml_block_html_before>
 			<controller_action_layout_generate_blocks_after>
 				<observers>
-					<df_reports__controller_action_layout_generate_blocks_after>
-						<class>df_reports/dispatcher</class>
+					<Df_Reports>
+						<class>Df_Reports_Observer</class>
 						<method>controller_action_layout_generate_blocks_after</method>
-					</df_reports__controller_action_layout_generate_blocks_after>
+					</Df_Reports>
 				</observers>
 			</controller_action_layout_generate_blocks_after>
 			<core_collection_abstract_load_before>
 				<observers>
-					<df_reports__core_collection_abstract_load_before>
-						<class>df_reports/dispatcher</class>
+					<Df_Reports>
+						<class>Df_Reports_Observer</class>
 						<method>core_collection_abstract_load_before</method>
-					</df_reports__core_collection_abstract_load_before>
+					</Df_Reports>
 				</observers>
 			</core_collection_abstract_load_before>
 		</events>
 		<translate>
 			<modules>
-				<Df_Reports><files><default>Df_Reports.csv</default></files></Df_Reports>
+				<Df_Reports><files><default>Df/Reports.csv</default></files></Df_Reports>
 			</modules>
 		</translate>
 	</adminhtml>

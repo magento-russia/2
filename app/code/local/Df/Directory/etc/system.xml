@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_directory translate='label' module='df_directory'>
+		<df_directory>
 			<label>Справочники</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,15 +10,87 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<regions_ru translate='label'>
-					<label>Субъекты РФ</label>
+				<countries_popular>
+					<label>Популярные страны</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enable>
+							<label>Разместить популярные страны выше других в списке стран?</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
+							<df_feature>df-directory</df_feature>
+						</enable>
+						<order>
+							<label>Популярные страны</label>
+							<comment>эти страны будут отображаться выше других в списке стран</comment>
+							<frontend_model>Df_Directory_Block_Field_CountriesOrdered</frontend_model>
+							<backend_model>Df_Admin_Config_Backend_Table</backend_model>
+							<rm_type>Df_Directory_Config_MapItem_Country</rm_type>
+							<sort_order>3000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><enable>1</enable></depends>
+						</order>
+						<duplicate>
+							<label>Продублировать популярные страны?</label>
+							<comment>
+								<![CDATA[
+При значении «<b>да</b>» популярные страны будут отображаться в списке стран дважды:
+выше других стран и на обычном месте в алфавитном порядке.
+<br/>Это значение рекомендуется при большом списке доступных стран
+<br/>При значении «<b>нет</b>» популярные страны будут отображаться только один раз: выше других стран.
+<br/>Они будут отсутствовать в их обычных местах в алфавитном порядке.
+								]]>
+							</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>4000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><enable>1</enable></depends>
+						</duplicate>
+						<label_popular>
+							<label>Название группы популярных стран в выпадающем списке стран</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>5000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+							<depends><enable>1</enable></depends>
+						</label_popular>
+						<label_all>
+							<label>Название группы остальных (или всех) стран в выпадающем списке стран</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>6000</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+							<depends><enable>1</enable></depends>
+						</label_all>
+					</fields>
+				</countries_popular>
+				<regions_ru>
+					<label>Субъекты РФ</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -26,10 +98,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-directory</df_feature>
 						</enabled>
-						<position_1 translate='label'>
+						<position_1>
 							<label>Место №1:</label>
 							<comment>
 								<![CDATA[
@@ -38,69 +110,69 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Russia</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_1>
-						<position_2 translate='label'>
+						<position_2>
 							<label>Место №2:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Russia</source_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_2>
-						<position_3 translate='label'>
+						<position_3>
 							<label>Место №3:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Russia</source_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_3>
-						<position_4 translate='label'>
+						<position_4>
 							<label>Место №4:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Russia</source_model>
 							<sort_order>5000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_4>
-						<position_5 translate='label'>
+						<position_5>
 							<label>Место №5:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_russia</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Russia</source_model>
 							<sort_order>6000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_5>
 					</fields>
 				</regions_ru>
-				<regions_ua translate='label'>
+				<regions_ua>
 					<label>Административно-территориальное устройство Украины</label>
 					<frontend_type>text</frontend_type>
-					<sort_order>2000</sort_order>
+					<sort_order>4000</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -108,10 +180,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-directory</df_feature>
 						</enabled>
-						<position_1 translate='label'>
+						<position_1>
 							<label>Место №1:</label>
 							<comment>
 								<![CDATA[
@@ -120,69 +192,69 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Ukraine</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_1>
-						<position_2 translate='label'>
+						<position_2>
 							<label>Место №2:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Ukraine</source_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_2>
-						<position_3 translate='label'>
+						<position_3>
 							<label>Место №3:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Ukraine</source_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_3>
-						<position_4 translate='label'>
+						<position_4>
 							<label>Место №4:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Ukraine</source_model>
 							<sort_order>5000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_4>
-						<position_5 translate='label'>
+						<position_5>
 							<label>Место №5:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_ukraine</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Ukraine</source_model>
 							<sort_order>6000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_5>
 					</fields>
 				</regions_ua>
-				<regions_kz translate='label'>
+				<regions_kz>
 					<label>Административно-территориальное устройство Казахстана</label>
 					<frontend_type>text</frontend_type>
-					<sort_order>3000</sort_order>
+					<sort_order>5000</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -190,10 +262,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-directory</df_feature>
 						</enabled>
-						<position_1 translate='label'>
+						<position_1>
 							<label>Место №1:</label>
 							<comment>
 								<![CDATA[
@@ -202,56 +274,56 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Kazakhstan</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_1>
-						<position_2 translate='label'>
+						<position_2>
 							<label>Место №2:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Kazakhstan</source_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_2>
-						<position_3 translate='label'>
+						<position_3>
 							<label>Место №3:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Kazakhstan</source_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_3>
-						<position_4 translate='label'>
+						<position_4>
 							<label>Место №4:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Kazakhstan</source_model>
 							<sort_order>5000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_4>
-						<position_5 translate='label'>
+						<position_5>
 							<label>Место №5:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_directory/system_config_source_region_kazakhstan</source_model>
+							<source_model>Df_Directory_Config_Source_Region_Kazakhstan</source_model>
 							<sort_order>6000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><enabled>1</enabled></depends>
 						</position_5>
 					</fields>

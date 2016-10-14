@@ -2,15 +2,9 @@ body.df-theme-magento-default {
 	.df-cms-home-base {
 		.col1-layout {
 			border:0;
-			.col-main {
-				padding:0;
-			}
-			.category-view {
-				margin:0 0 20px;
-			}
-			.page-title {
-				margin:3px 0 0;
-			}
+			.col-main {padding:0;}
+			.category-view {margin:0 0 20px;}
+			.page-title {margin:3px 0 0;}
 			.products-grid {
 				margin: 0;
 				border: 1px solid #cbc0b2;
@@ -26,14 +20,10 @@ body.df-theme-magento-default {
 		}
 		.main {
 			.std {
-				.messages {
-					margin-top:0;
-				}
+				.messages {margin-top:0;}
 			}
 		}
-		.top-callout {
-			margin-bottom:6px;
-		}
+		.top-callout {margin-bottom:6px;}
 	}
 	.cms-home {
 		@extend .df-cms-home-base;
@@ -42,14 +32,8 @@ body.df-theme-magento-default {
 		@extend .df-cms-home-base;
 	}
 	.cms-hp-touchsmart-iq506-has-arrived {
-		.col-main {
-			padding:0;
-		}
-		.main {
-			margin-top:0;
-		}
-		.breadcrumbs {
-			display:none;
-		}
+		.col-main {padding:0;}
+		.main {margin-top:0;}
+		.breadcrumbs {display:none;}
 	}
 }

@@ -89,7 +89,7 @@ abstract class Df_UkrPoshta_Model_Method_Lightweight extends Df_UkrPoshta_Model_
 			/**
 			 * Как ни странно, тарифы УкрПочты не зависят от городов отправления и назначения,
 			 * поэтому при расчёте информация о городах может отсутствовать.
-			 * @link http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
+			 * http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
 			 */
 				$this->getRequest()->getOriginCity()
 			&&
@@ -114,7 +114,7 @@ abstract class Df_UkrPoshta_Model_Method_Lightweight extends Df_UkrPoshta_Model_
 			'Mass' => rm_nat0($this->getRequest()->getWeightInGrammes())
 			,'declaredAfterPayment' =>
 				$this->getRmConfig()->service()->needAcceptCashOnDelivery()
-				? rm_currency()->convertFromBaseToHryvnias($this->getRequest()->getPackageValue())
+				? rm_currency_h()->convertFromBaseToHryvnias($this->getRequest()->getPackageValue())
 				: 0
 			,'mailCategoryList' =>
 				(0 < $this->getRmConfig()->admin()->getDeclaredValuePercent())

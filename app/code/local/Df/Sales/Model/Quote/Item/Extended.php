@@ -104,7 +104,7 @@ class Df_Sales_Model_Quote_Item_Extended extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__QUOTE_ITEM, 'Mage_Sales_Model_Quote_Item');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__QUOTE_ITEM = 'quote_item';
 	/**
 	 * @static

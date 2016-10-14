@@ -31,8 +31,8 @@ class Df_Adminhtml_Model_Config extends Mage_Adminhtml_Model_Config {
 			 * 2014-11-28
 			 * Заметил, что в Magento CE 1.9.1.0
 			 * сюда в качестве $sectionNode может попадать
-			 * не только объект класса Mage_Core_Model_Config_Element,
-			 * но и массив из одного элемента класса Mage_Core_Model_Config_Element.
+			 * не только объект класса @see Mage_Core_Model_Config_Element,
+			 * но и массив из одного элемента класса @see Mage_Core_Model_Config_Element.
 			 * Видимо, так происходит из-за вызова
 			 * $this->_sections->xpath($path);
 			 * в методе @see Mage_Adminhtml_Model_Config::getSystemConfigNodeLabel().

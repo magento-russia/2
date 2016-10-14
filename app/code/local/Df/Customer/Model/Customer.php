@@ -1,24 +1,27 @@
 <?php
 /**
- * @method string getEmail()
+ * @method array getCustomerBalanceData()
+ * @method string|null getEmail()
+ * @method string|null getFirstname()
+ * @method string|null getIncrementId()
+ * @method string|null getLastname()
+ * @method string|null getMiddlename()
  * @method Df_Customer_Model_Resource_Customer getResource()
- * @method Df_Customer_Model_Customer setEmail($value)
- * @method Df_Customer_Model_Customer setGroupId($value)
- * @method Df_Customer_Model_Customer setPassword($value)
- * @method Df_Customer_Model_Customer setWebsiteId($value)
+ * @method bool|null getRewardUpdateNotification()
+ * @method bool|null getRewardWarningNotification()
+ * @method int|null getWebsiteId()
+ * @method Df_Customer_Model_Customer setCustomerBalanceData(array $value)
+ * @method Df_Customer_Model_Customer setEmail(string $value)
+ * @method Df_Customer_Model_Customer setFirstname(string $value)
+ * @method Df_Customer_Model_Customer setGroupId(int $value)
+ * @method Df_Customer_Model_Customer setLastname(string $value)
+ * @method Df_Customer_Model_Customer setMiddlename(string $value)
+ * @method Df_Customer_Model_Customer setPassword(string $value)
+ * @method Df_Customer_Model_Customer setRewardUpdateNotification(bool $value)
+ * @method Df_Customer_Model_Customer setRewardWarningNotification(bool $value)
+ * @method Df_Customer_Model_Customer setWebsiteId(int $value)
  */
 class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
-	/**
-	 * Этот метод должен быть публичен,
-	 * потому что он почему-то публичен в родительском классе.
-	 * @override
-	 * @return void
-	 */
-	public function _construct() {
-		parent::_construct();
-		$this->_init(Df_Customer_Model_Resource_Customer::mf());
-	}
-
 	/** @return Zend_Date|null */
 	public function getDateOfBirth() {
 		/** @var string|null $dateAsString */
@@ -49,14 +52,11 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	/** @return string */
 	public function getInn() {return df_nts($this->_getData('taxvat'));}
 
-	/** @return string|null */
-	public function getNameFirst() {return $this->_getData(self::P__NAME_FIRST);}
-
-	/** @return string|null */
-	public function getNameLast() {return $this->_getData(self::P__NAME_LAST);}
-
-	/** @return string|null */
-	public function getNameMiddle() {return $this->_getData(self::P__NAME_MIDDLE);}
+	/**
+	 * @override
+	 * @return Df_Customer_Model_Resource_Customer_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
 
 	/**
 	 * @param string|Zend_Date|null $value
@@ -65,7 +65,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	public function setDob($value) {
 		/**
 		 * Обратите внимание, что $value может быть равно NULL.
-		 * @link http://magento-forum.ru/topic/4198/
+		 * http://magento-forum.ru/topic/4198/
 		 */
 		if ($value instanceof Zend_Date) {
 			$value = df_dts($value, 'y-MM-dd HH-mm-ss');
@@ -82,7 +82,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	public function setGender($value) {
 		/**
 		 * $value может быть равно null
-		 * @link http://magento-forum.ru/topic/4220/
+		 * http://magento-forum.ru/topic/4220/
 		 */
 		if (is_numeric($value) || is_null($value)) {
 			$value = rm_int($value);
@@ -94,7 +94,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 		}
 		/**
 		 * Оказывается, система может передавать в метод setGender значение '0'.
-		 * @link http://magento-forum.ru/topic/4243/
+		 * http://magento-forum.ru/topic/4243/
 		 */
 		if (0 == $value) {
 			$this->unsetData(self::P__GENDER);
@@ -106,42 +106,6 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	}
 
 	/**
-	 * @param string|null $value
-	 * @return Df_Customer_Model_Customer
-	 */
-	public function setNameFirst($value) {
-		if (!is_null($value)) {
-			df_param_string($value, 0);
-		}
-		$this->setData(self::P__NAME_FIRST, $value);
-		return $this;
-	}
-
-	/**
-	 * @param string|null $value
-	 * @return Df_Customer_Model_Customer
-	 */
-	public function setNameLast($value) {
-		if (!is_null($value)) {
-			df_param_string($value, 0);
-		}
-		$this->setData(self::P__NAME_LAST, $value);
-		return $this;
-	}
-
-	/**
-	 * @param string|null $value
-	 * @return Df_Customer_Model_Customer
-	 */
-	public function setNameMiddle($value) {
-		if (!is_null($value)) {
-			df_param_string($value, 0);
-		}
-		$this->setData(self::P__NAME_MIDDLE, $value);
-		return $this;
-	}
-
-	/**
 	 * @override
 	 * @return bool|array
 	 */
@@ -149,44 +113,53 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 		if (!Zend_Validate::is($this->getEmail(), 'EmailAddress')) {
 			$this->setEmail($this->getFakedEmail());
 		}
-		if (!Zend_Validate::is(trim($this->getNameFirst()) , 'NotEmpty')) {
-			$this->setNameFirst('Аноним');
+		if (!Zend_Validate::is(trim($this->getFirstname()) , 'NotEmpty')) {
+			$this->setFirstname('Аноним');
 		}
-		if (!Zend_Validate::is(trim($this->getNameLast()) , 'NotEmpty')) {
-			$this->setNameLast('Анонимов');
+		if (!Zend_Validate::is(trim($this->getLastname()) , 'NotEmpty')) {
+			$this->setLastname('Анонимов');
 		}
 		/** @var bool|array $result */
 		$result = parent::validate();
 		return $result;
 	}
 
+	/**
+	 * @override
+	 * @return Df_Customer_Model_Resource_Customer
+	 */
+	protected function _getResource() {return Df_Customer_Model_Resource_Customer::s();}
+
 	/** @return string */
 	private function getFakedEmail() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $incrementId */
-			$incrementId = $this->getDataUsingMethod('increment_id');
+			$incrementId = $this->getIncrementId();
 			$this->{__METHOD__} = implode('@', array(
 				$incrementId ? $incrementId : time()
-				,Mage::app()->getStore()->getConfig(self::XML_PATH_DEFAULT_EMAIL_DOMAIN)
+				,rm_store()->getConfig(self::XML_PATH_DEFAULT_EMAIL_DOMAIN)
 			));
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Customer_Model_Resource_Customer_Collection::_construct() */
+	const _C = __CLASS__;
 	const GENDER__FEMALE = 'Female';
 	const GENDER__MALE = 'Male';
 	const P__CREATED_IN = 'created_in';
 	const P__DOB = 'dob';
 	const P__EMAIL = 'email';
+	const P__FIRSTNAME = 'firstname';
 	const P__GENDER = 'gender';
 	const P__GROUP_ID = 'group_id';
-	const P__NAME_FIRST = 'firstname';
-	const P__NAME_LAST = 'lastname';
-	const P__NAME_MIDDLE = 'middlename';
+	const P__LASTNAME = 'lastname';
+	const P__MIDDLENAME = 'middlename';
 	const P__PASSWORD = 'password';
 	const P__WEBSITE_ID = 'website_id';
 
+	/** @return Df_Customer_Model_Resource_Customer_Collection */
+	public static function c() {return new Df_Customer_Model_Resource_Customer_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -200,9 +173,4 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	 * @return Df_Customer_Model_Customer
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Customer_Model_Resource_Customer_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 }

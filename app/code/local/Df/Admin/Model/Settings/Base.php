@@ -1,7 +1,7 @@
 <?php
 class Df_Admin_Model_Settings_Base extends Df_Core_Model_Settings {
 	/**
-	 * @param mixed $store[optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return string
 	 */
 	public function getStorePhone($store = null) {

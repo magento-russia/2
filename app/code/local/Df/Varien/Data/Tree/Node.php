@@ -5,7 +5,7 @@
 class Df_Varien_Data_Tree_Node extends Varien_Data_Tree_Node {
 	/**
 	 * @param string $key
-	 * @param mixed $default[optional]
+	 * @param mixed $default [optional]
 	 * @return mixed
 	 */
 	public function cfg($key, $default = null) {

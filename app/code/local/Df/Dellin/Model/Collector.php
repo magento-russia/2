@@ -1,5 +1,5 @@
 <?php
-class Df_Dellin_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_Dellin_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
 	 * @return Df_Dellin_Model_Method[]
@@ -10,12 +10,9 @@ class Df_Dellin_Model_Collector extends Df_Shipping_Model_Collector {
 			/** @var array $result */
 			$result = array();
 			/** @var Df_Dellin_Model_Method $methodByPublicApi */
-			$methodByPublicApi =
-				$this->createMethod(
-					Df_Dellin_Model_Method::_CLASS
-					,$title = 'Посредством публичного API'
-				)
-			;
+			$methodByPublicApi = $this->createMethod(
+				Df_Dellin_Model_Method::_C, $title = 'Посредством публичного API'
+			);
 			/** @var bool $isMethodByPublicApiApplicable */
 			$isMethodByPublicApiApplicable = false;
 			try {
@@ -25,12 +22,12 @@ class Df_Dellin_Model_Collector extends Df_Shipping_Model_Collector {
 						0 < $methodByPublicApi->getCost()
 				;
 			}
-			catch(Exception $e) {
-				if (!($e instanceof Df_Core_Exception_Client)) {
+			catch (Exception $e) {
+				if (!$e instanceof Df_Shipping_Exception_MethodNotApplicable) {
 					df_notify_exception($e);
 				}
-				if ($this->getRmConfig()->frontend()->needDisplayDiagnosticMessages()) {
-					throw $e;
+				if ($this->configF()->needDisplayDiagnosticMessages()) {
+					df_error($e);
 				}
 			}
 			if ($isMethodByPublicApiApplicable) {
@@ -40,6 +37,4 @@ class Df_Dellin_Model_Collector extends Df_Shipping_Model_Collector {
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

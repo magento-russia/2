@@ -2,12 +2,8 @@
 <config>
 	<modules>
 		<Df_Pel>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Pel>
 	</modules>
-	<global>
-		<helpers><df_pel><class>Df_Pel_Helper</class></df_pel></helpers>
-		<models><df_pel><class>Df_Pel_Model</class></df_pel></models>
-	</global>
 </config>

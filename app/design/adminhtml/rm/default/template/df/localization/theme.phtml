@@ -9,8 +9,8 @@
 			<div></div>
 		</li>
 		<?php
-			foreach (Df_Localization_Model_Onetime_Processor_Collection::s() as $processor) {
-				/** @var Df_Localization_Model_Onetime_Processor $processor */
+			foreach (Df_Localization_Onetime_Processor_Collection::s() as $processor) {
+				/** @var Df_Localization_Onetime_Processor $processor */
 				echo $this->renderProcessor($processor);
 			}
 		?>

@@ -1,20 +1,28 @@
 <?php
-class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Controller_Action {
+class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Action {
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function generateResponseBody() {
-		/** @var mixed[] $addresses */
-		$addresses = $this->getSession()->getData(self::SESSION__ADDRESSES_FROM_YANDEX_MARKET);
-		if (!is_array($addresses)) {
-			$addresses = array();
+	protected function getRedirectLocation() {return RM_URL_CHECKOUT;}
+
+	/**
+	 * @override
+	 * @see Df_Core_Model_Action::_process()
+	 * @used-by Df_Core_Model_Action::process()
+	 * @return void
+	 */
+	protected function _process() {
+		if ($this->getAddressType()) {
+			Df_YandexMarket_AddressSession::set($this->getAddressType(), $this->getAddressData());
 		}
-		$addresses[$this->getAddressType()]= $this->getAddressData();
-		$this->getSession()->setData(self::SESSION__ADDRESSES_FROM_YANDEX_MARKET, $addresses);
-		$this->redirect(Df_Checkout_Const::URL__CHECKOUT);
-		return '';
 	}
+
+	/**
+	 * @param string $key
+	 * @return string|null
+	 */
+	private function _post($key) {return $this->getRequest()->getPost($key);}
 
 	/**
 	 * @param string $paramName
@@ -45,24 +53,25 @@ class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Controlle
 			,'fax' => ''
 		));
 	}
-	
+
 	/** @return string */
 	private function getAddressType() {
-		/** @var string $result */
-		$result = '';
-		if (rm_bool($this->getRequest()->getCookie('rm_yandex_market_address_billing'))) {
-			$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__BILLING;
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $result */
+			$result = '';
+			if (rm_bool($this->getRequest()->getCookie('rm_yandex_market_address_billing'))) {
+				$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__BILLING;
+			}
+			else if (rm_bool($this->getRequest()->getCookie('rm_yandex_market_address_shipping'))) {
+				$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__SHIPPING;
+			}
+			$this->{__METHOD__} = $result;
 		}
-		else if (rm_bool($this->getRequest()->getCookie('rm_yandex_market_address_shipping'))) {
-			$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__SHIPPING;
-		}
-		return $result;
+		return $this->{__METHOD__};
 	}
 	
 	/** @return string|null */
-	private function getCountryId() {
-		return df_h()->directory()->country()->getIso2CodeByName($this->_post('country'));
-	}
+	private function getCountryId() {return rm_country_ntc_ru($this->_post('country'));}
 
 	/** @return Mage_Checkout_Model_Session */
 	private function getSession() {return rm_session_checkout();}
@@ -80,22 +89,5 @@ class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Controlle
 			,!$this->_post('cargolift') ? null	: 'есть грузовой лифт'
 			,$this->composeStreetPart('comment', '')
 		);
-	}
-
-	/**
-	 * @param string $key
-	 * @return string|null
-	 */
-	private function _post($key) {return $this->getRequest()->getPost($key);}
-
-	const _CLASS = __CLASS__;
-	const SESSION__ADDRESSES_FROM_YANDEX_MARKET = 'rm_addresses_from_yandex_market';
-	/**
-	 * @static
-	 * @param Df_YandexMarket_AddressController $controller
-	 * @return Df_YandexMarket_Model_Action_ImportAddress
-	 */
-	public static function i(Df_YandexMarket_AddressController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
 	}
 }

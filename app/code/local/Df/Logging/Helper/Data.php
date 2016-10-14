@@ -7,8 +7,7 @@ class Df_Logging_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @param string $glue Separator to join
 	 * @return string
 	 */
-	public function implodeValues($array, $glue = ', ')
-	{
+	public function implodeValues($array, $glue = ', ') {
 		if (!is_array($array)) {
 			return $array;
 		}

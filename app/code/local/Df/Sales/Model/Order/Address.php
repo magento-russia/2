@@ -1,5 +1,26 @@
 <?php
+/**
+ * @method Mage_Directory_Model_Region getRegionModel()
+ */
 class Df_Sales_Model_Order_Address extends Mage_Sales_Model_Order_Address {
+	/**
+	 * Намеренно не кэшируем результат:
+	 * на производительность системы в целом кэширование адреса никак не повлияет,
+	 * а вот вероятность ошибки при изменении адреса увеличивает.
+	 * @return string
+	 */
+	public function getStreetAsText() {
+		/**
+		 * Обратите внимание, что @uses getStreetFull()
+		 * может вернуть как строку, так и массив строк.
+		 */
+		return
+			!is_array($this->getStreetFull())
+			? $this->getStreetFull()
+			: df_concat_n(df_clean($this->getStreetFull()))
+		;
+	}
+
 	/**
 	 * Цель перекрытия —
 	 * учёт настроек видимости и обязательности для заполнения полей оформления заказа
@@ -31,17 +52,10 @@ class Df_Sales_Model_Order_Address extends Mage_Sales_Model_Order_Address {
 
 	/** @return bool */
 	private function isCustomValidationNeeded() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					df_cfg()->checkout()->_interface()->needShowAllStepsAtOnce()
-				&&
-					$this->getAddressType()
-			;
-		}
-		return $this->{__METHOD__};
+		return rm_checkout_ergonomic() && $this->getAddressType();
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

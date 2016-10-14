@@ -29,7 +29,7 @@ abstract class Df_Zf_Validate_String_Parser extends Df_Zf_Validate_Type {
 			/** @var Zend_Validate_Interface $result */
 			$result = new $class($locale);
 			df_assert($result instanceof Zend_Validate_Interface);
-			$this->{__METHOD__}[$locale] =$result;
+			$this->{__METHOD__}[$locale] = $result;
 		}
 		return $this->{__METHOD__}[$locale];
 	}

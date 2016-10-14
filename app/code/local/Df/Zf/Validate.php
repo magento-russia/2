@@ -26,7 +26,7 @@ abstract class Df_Zf_Validate implements Zend_Validate_Interface {
 		if (!isset($this->_message)) {
 			$this->_message = $this->getMessageInternal();
 			if ($this->getExplanation()) {
-				$this->_message .= ("\r\n" . $this->getExplanation());
+				$this->_message .= ("\n" . $this->getExplanation());
 			}
 		}
 		return $this->_message;
@@ -40,7 +40,7 @@ abstract class Df_Zf_Validate implements Zend_Validate_Interface {
 
 	/**
 	 * @param string $paramName
-	 * @param mixed $defaultValue[optional]
+	 * @param mixed $defaultValue [optional]
 	 * @return mixed
 	 */
 	protected function cfg($paramName, $defaultValue = null) {

@@ -4,17 +4,17 @@ class Df_Core_Helper_Db extends Mage_Core_Helper_Abstract {
 	 * Метод @see Varien_Db_Adapter_Pdo_Mysql::getCheckSql()
 	 * отсутствует в Magento CE 1.4, поэтому скопировал его сюда.
 	 * @param Zend_Db_Expr|Zend_Db_Select|string $expression
-	 * @param string $true  true value
-	 * @param string $false false value
+	 * @param string $true
+	 * @param string $false
 	 * @return Zend_Db_Expr
 	 */
 	public function getCheckSql($expression, $true, $false) {
+		/** @var string $expressionS */
+		$expressionS = (string)$expression;
 		if ($expression instanceof Zend_Db_Expr || $expression instanceof Zend_Db_Select) {
-			$expression = rm_sprintf("IF((%s), %s, %s)", $expression, $true, $false);
-		} else {
-			$expression = rm_sprintf("IF(%s, %s, %s)", $expression, $true, $false);
+			$expressionS = '(' . $expressionS . ')';
 		}
-		return new Zend_Db_Expr($expression);
+		return new Zend_Db_Expr(sprintf('IF(%s, %s, %s)', $expressionS, $true, $false));
 	}
 
 	/**

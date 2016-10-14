@@ -47,8 +47,8 @@ class Df_Cms_Model_Admin_Notifier_DeleteOrphanBlocks extends Df_Admin_Model_Noti
 				$result = !!$result;
 			}
 			else {
-				$result = (0 < $this->getOrphanBlocks()->count());
-				$this->getCache()->saveData(__METHOD__, intval($result));
+				$result = !!$this->getOrphanBlocks()->count();
+				$this->getCache()->saveData(__METHOD__, (int)$result);
 			}
 			$this->{__METHOD__} = $result;
 		}

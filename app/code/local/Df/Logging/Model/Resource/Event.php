@@ -1,5 +1,5 @@
 <?php
-class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 	/**
 	 * Select all values of specified field from main table
 	 * @param string $field
@@ -22,18 +22,7 @@ class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
 	 * @return int[]
 	 */
 	public function getEventChangeIds($eventId) {
-		$adapter = $this->_getReadAdapter();
-		$select =
-			$adapter->select()
-				->from(
-					rm_table(Df_Logging_Model_Resource_Event_Changes::TABLE_NAME)
-					,array('id')
-				)
-				->where('event_id = ?', $eventId)
-		;
-		/** @var int[] $result */
-		$result = $adapter->fetchCol($select);
-		return $result;
+		return rm_fetch_col_int(Df_Logging_Model_Resource_Event_Changes::TABLE, 'id', 'event_id', $eventId);
 	}
 
 	/**
@@ -42,22 +31,16 @@ class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
 	 * @return string[]
 	 */
 	public function getUserNames() {
-		$select =
+		return $this->_getReadAdapter()->fetchCol(
 			$this->_getReadAdapter()->select()
 				->distinct()
-				->from(
-					array('admins' => rm_table('admin/user'))
-					,'username'
-				)
+				->from(array('admins' => rm_table('admin/user')), 'username')
 				->joinInner(
-					array('events' => rm_table('df_logging/event'))
+					array('events' => rm_table(self::TABLE))
 					,'admins.username = events.user'
-					,array()
-				)
+					,null
+				))
 		;
-		/** @var string[] $result */
-		$result = $this->_getReadAdapter()->fetchCol($select);
-		return $result;
 	}
 
 	/**
@@ -72,7 +55,7 @@ class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
 			/** @var Df_Logging_Model_Archive $archive */
 			$archive = Df_Logging_Model_Archive::i();
 			$archive->createNew();
-			$table = rm_table('df_logging/event');
+			$table = rm_table(self::TABLE);
 			// get the latest log entry required to the moment
 			$clearBefore = $this->formatDate(time() - $lifetime);
 			$latestLogEntry = $this->_getWriteAdapter()->fetchOne("SELECT log_id FROM {$table}
@@ -80,7 +63,6 @@ class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
 			if (!$latestLogEntry) {
 				return;
 			}
-
 			// dump all records before this log entry into a CSV-file
 			$csv = fopen($archive->getFilename(), 'w');
 			foreach ($this->_getWriteAdapter()->fetchAll("SELECT *, INET_NTOA(ip)
@@ -97,7 +79,7 @@ class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
 
 	/**
 	 * @override
-	 * @param Df_Logging_Model_Resource_Event|Mage_Core_Model_Abstract $event
+	 * @param Df_Logging_Model_Event|Mage_Core_Model_Abstract $event
 	 * @return Df_Logging_Model_Resource_Event
 	 */
 	protected function _beforeSave(Mage_Core_Model_Abstract $event) {
@@ -108,25 +90,15 @@ class Df_Logging_Model_Resource_Event extends Mage_Core_Model_Mysql4_Abstract {
 	}
 
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_Logging_Model_Event::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_logging/event';
-	/**
-	 * @see Df_Logging_Model_Event::_construct()
-	 * @see Df_Logging_Model_Resource_Event_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	protected function _construct() {$this->_init(self::TABLE, Df_Logging_Model_Event::P__ID);}
+	/** @used-by Df_Logging_Setup_1_0_0::_process() */
+	const TABLE = 'df_logging/event';
 	/** @return Df_Logging_Model_Resource_Event */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

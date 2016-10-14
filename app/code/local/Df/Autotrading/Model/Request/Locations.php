@@ -1,29 +1,7 @@
 <?php
 class Df_Autotrading_Model_Request_Locations extends Df_Shipping_Model_Request {
 	/** @return string[][] */
-	public function getLocations() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[][] $result */
-			/** @var string $cacheKey */
-			$cacheKey = $this->getCache()->makeKey(array($this, __FUNCTION__));
-			$result = $this->getCache()->loadDataArray($cacheKey);
-			if (!is_array($result)) {
-				$result = $this->parseLocations();
-				$this->getCache()->saveDataArray($cacheKey, $result);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string[][] */
-	public function getLocationsAll() {return df_a($this->getLocations(), self::LOCATIONS__ALL);}
-
-	/** @return string[][] */
-	public function getLocationsAllMap() {return df_a($this->getLocations(), self::LOCATIONS__ALL_MAP);}
-
-	/** @return string[][] */
-	public function getLocationsGrouped() {return df_a($this->getLocations(), self::LOCATIONS__GROUPED);}
+	public function getLocationsGrouped() {return df_a($this->getLocations(), self::$LOCATIONS__GROUPED);}
 
 	/**
 	 * @param string $location
@@ -101,9 +79,124 @@ class Df_Autotrading_Model_Request_Locations extends Df_Shipping_Model_Request {
 		df_h()->directory()->normalizeLocationName($regionalCenter);
 		/** @var string[] $result */
 		$result = array(
-			self::KEY__LOCATION => df_h()->directory()->normalizeLocationName($place)
-			,self::KEY__REGIONAL_CENTER => df_h()->directory()->normalizeLocationName($regionalCenter)
-			,self::KEY__ORIGINAL_NAME => $originalName
+			self::$KEY__LOCATION => df_h()->directory()->normalizeLocationName($place)
+			,self::$KEY__REGIONAL_CENTER => df_h()->directory()->normalizeLocationName($regionalCenter)
+			,self::$KEY__ORIGINAL_NAME => $originalName
+		);
+		return $result;
+	}
+
+	/**
+	 * @override
+	 * @return array(string => string)
+	 */
+	protected function getHeaders() {
+		return array(
+			'Accept' => 'application/json, text/javascript, */*; q=0.01'
+			,'Accept-Encoding' => 'gzip, deflate'
+			,'Accept-Language' => 'en-us,en;q=0.5'
+			,'Connection' => 'keep-alive'
+			,'Host' => $this->getQueryHost()
+			,'Referer' => 'http://www.ae5000.ru/rates/calculate/'
+			,'X-Requested-With' => 'XMLHttpRequest'
+		) + parent::getHeaders();
+	}
+
+	/**
+	 * @override
+	 * @return string
+	 */
+	protected function getQueryHost() {return 'www.ae5000.ru';}
+
+	/**
+	 * @override
+	 * @return array
+	 */
+	protected function getQueryParams() {return array('term' => ' ');}
+
+	/**
+	 * @override
+	 * @return string
+	 */
+	protected function getQueryPath() {return '/site/autocomplete';}
+
+	/** @return string[][] */
+	private function getLocations() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string[][] $result */
+			/** @var string $cacheKey */
+			$cacheKey = $this->getCache()->makeKey(array($this, __FUNCTION__));
+			$result = $this->getCache()->loadDataArray($cacheKey);
+			if (!is_array($result)) {
+				$result = $this->parseLocations();
+				$this->getCache()->saveDataArray($cacheKey, $result);
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return string[][] */
+	private function getLocationsAll() {return df_a($this->getLocations(), self::$LOCATIONS__ALL);}
+
+	/** @return string[][] */
+	private function getPeripheralLocations() {
+		if (!isset($this->{__METHOD__})) {
+			/** @uses parseLocation() */
+			$this->{__METHOD__} = array_map(
+				array($this, 'parseLocation'), array_column($this->response()->json(), 'value')
+			);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return string[][] */
+	private function parseLocations() {
+		/** @var string[][] $result */
+		/** @var string[] $all */
+		$all = array();
+		/** @var mixed[][] $allMap */
+		$allMap = array();
+		foreach ($this->getPeripheralLocations() as $peripheralLocation) {
+			/** @var string $peripheralLocation */
+			$all[]= df_a($peripheralLocation, self::$KEY__LOCATION);
+			$allMap[df_a($peripheralLocation, self::$KEY__LOCATION)] =
+				df_a($peripheralLocation, self::$KEY__ORIGINAL_NAME)
+			;
+		}
+		/**
+		 * Раньше мы получали региональные центры отдельным запросом по адресу
+		 * http://www.ae5000.ru/api.php?metod=city&type=to,
+		 * однако этот адрес перестал работать.
+		 */
+		foreach ($this->getPeripheralLocations() as $peripheralLocation) {
+			/** @var string $peripheralLocation */
+			/** @var string $regionalCenter */
+			$regionalCenter = df_a($peripheralLocation, self::$KEY__REGIONAL_CENTER);
+			$all[]= $regionalCenter;
+			$allMap[$regionalCenter] = $regionalCenter;
+		}
+		$all = rm_array_unique_fast($all);
+		/** @var mixed[][] $grouped */
+		$grouped = array();
+		/**
+		 * Группируем и индексируем данные по региональным центрам
+		 */
+		foreach ($this->getPeripheralLocations() as $peripheralLocation) {
+			/** @var string[] $peripheralLocation */
+			/** @var string $regionalCenter */
+			$regionalCenter = df_a($peripheralLocation, self::$KEY__REGIONAL_CENTER);
+			/** @var string[] $locationsForRegionalCenter */
+			$locationsForRegionalCenter = df_a($grouped, $regionalCenter, array());
+			$locationsForRegionalCenter[df_a($peripheralLocation, self::$KEY__LOCATION)] =
+				df_a($peripheralLocation, self::$KEY__ORIGINAL_NAME)
+			;
+			$grouped[$regionalCenter] = $locationsForRegionalCenter;
+		}
+		$result = array(
+			self::$LOCATIONS__ALL => $all
+			,self::$LOCATIONS__ALL_MAP => $allMap
+			,self::$LOCATIONS__GROUPED => $grouped
 		);
 		return $result;
 	}
@@ -126,115 +219,18 @@ class Df_Autotrading_Model_Request_Locations extends Df_Shipping_Model_Request {
 		return $result;
 	}
 
-	/**
-	 * @override
-	 * @return array(string => string)
-	 */
-	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
-			'Accept' => 'application/json, text/javascript, */*; q=0.01'
-			,'Accept-Encoding' => 'gzip, deflate'
-			,'Accept-Language' => 'en-us,en;q=0.5'
-			,'Connection' => 'keep-alive'
-			,'Host' => $this->getQueryHost()
-			,'Referer' => 'http://www.ae5000.ru/rates/calculate/'
-			,'User-Agent' => Df_Core_Const::FAKE_USER_AGENT
-			,'X-Requested-With' => 'XMLHttpRequest'
-		));
-	}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getQueryHost() {return 'www.ae5000.ru';}
-
-	/**
-	 * @override
-	 * @return array
-	 */
-	protected function getQueryParams() {return array('term' => ' ');}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getQueryPath() {return '/site/autocomplete';}
-
-	/** @return string[][] */
-	private function getPeripheralLocations() {
-		if (!isset($this->{__METHOD__})) {
-			$this->response()->json();
-			/** @var string[][] $result */
-			$result = array();
-			$peripheralLocationsRaw = df_column($this->response()->json(), 'value');
-			foreach ($peripheralLocationsRaw as $peripheralLocationRaw) {
-				$result[]= $this->parseLocation($peripheralLocationRaw);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string[][] */
-	private function parseLocations() {
-		/** @var string[][] $result */
-		/** @var string[] $all */
-		$all = array();
-		/** @var mixed[][] $allMap */
-		$allMap = array();
-		foreach ($this->getPeripheralLocations() as $peripheralLocation) {
-			/** @var string $peripheralLocation */
-			$all[]= df_a($peripheralLocation, self::KEY__LOCATION);
-			$allMap[df_a($peripheralLocation, self::KEY__LOCATION)] =
-				df_a($peripheralLocation, self::KEY__ORIGINAL_NAME)
-			;
-		}
-		/**
-		 * Раньше мы получали региональные центры отдельным запросом по адресу
-		 * http://www.ae5000.ru/api.php?metod=city&type=to,
-		 * однако этот адрес перестал работать.
-		 */
-		foreach ($this->getPeripheralLocations() as $peripheralLocation) {
-			/** @var string $peripheralLocation */
-			/** @var string $regionalCenter */
-			$regionalCenter = df_a($peripheralLocation, self::KEY__REGIONAL_CENTER);
-			$all[]= $regionalCenter;
-			$allMap[$regionalCenter] = $regionalCenter;
-		}
-		$all = rm_array_unique_fast($all);
-		/** @var mixed[][] $grouped */
-		$grouped = array();
-		/**
-		 * Группируем и индексируем данные по региональным центрам
-		 */
-		foreach ($this->getPeripheralLocations() as $peripheralLocation) {
-			/** @var string[] $peripheralLocation */
-			/** @var string $regionalCenter */
-			$regionalCenter = df_a($peripheralLocation, self::KEY__REGIONAL_CENTER);
-			/** @var string[] $locationsForRegionalCenter */
-			$locationsForRegionalCenter = df_a($grouped, $regionalCenter, array());
-			$locationsForRegionalCenter[df_a($peripheralLocation, self::KEY__LOCATION)] =
-				df_a($peripheralLocation, self::KEY__ORIGINAL_NAME)
-			;
-			$grouped[$regionalCenter] = $locationsForRegionalCenter;
-		}
-		$result = array(
-			self::LOCATIONS__ALL => $all
-			,self::LOCATIONS__ALL_MAP => $allMap
-			,self::LOCATIONS__GROUPED => $grouped
-		);
-		return $result;
-	}
-
-	const _CLASS = __CLASS__;
-	const KEY__LOCATION = 'location';
-	const KEY__ORIGINAL_NAME = 'original_name';
-	const KEY__REGIONAL_CENTER = 'regional_center';
-	const LOCATIONS__ALL = 'all';
-	const LOCATIONS__ALL_MAP = 'all_map';
-	const LOCATIONS__GROUPED = 'grouped';
-	const P__REGIONAL_CENTER = 'regional_center';
+	/** @var string */
+	private static $KEY__LOCATION = 'location';
+	/** @var string */
+	private static $KEY__ORIGINAL_NAME = 'original_name';
+	/** @var string */
+	private static $KEY__REGIONAL_CENTER = 'regional_center';
+	/** @var string */
+	private static $LOCATIONS__ALL = 'all';
+	/** @var string */
+	private static $LOCATIONS__ALL_MAP = 'all_map';
+	/** @var string */
+	private static $LOCATIONS__GROUPED = 'grouped';
 
 	/** @return Df_Autotrading_Model_Request_Locations */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

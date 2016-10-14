@@ -1,12 +1,7 @@
 <?php
-/**
- * Source model for Acquiring frequency when Order processed after Invitation
- */
-class Df_Reward_Model_Source_Points_InvitationOrder
-{
-	public function toOptionArray()
-	{
-		return array(
-			array('value' => '*', 'label' => df_h()->reward()->__('Each')),array('value' => '1', 'label' => df_h()->reward()->__('First')),);
+class Df_Reward_Model_Source_Points_InvitationOrder {
+	/** @return array(array(string => string)) */
+	public function toOptionArray() {
+		return rm_map_to_options(array('*' => 'Each', '1' => 'First'), $this);
 	}
 }

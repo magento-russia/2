@@ -1,9 +1,0 @@
-<?php /** @var Df_Assist_Block_Api_PaymentConfirmation_Success $this */ ?>
-<?php echo df_output()->getXmlHeader(); ?>
-<pushpaymentresult firstcode='0' secondcode='0'>
-	<order>
-		<billnumber><?php echo $this->getBillNumber(); ?></billnumber>
-		<packetdate><?php echo $this->getPacketDate(); ?></packetdate>
-	</order>
-</pushpaymentresult>
-	

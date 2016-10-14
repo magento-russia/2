@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_Model_Category_Adviser extends Df_Core_Model_DestructableSingleton {
+class Df_YandexMarket_Model_Category_Adviser extends Df_Core_Model {
 	/**
 	 * @param string $piece
 	 * @return string[]
@@ -16,21 +16,18 @@ class Df_YandexMarket_Model_Category_Adviser extends Df_Core_Model_DestructableS
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::cacheLifetime()
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @return int|null
 	 */
-	protected function getCacheLifetime() {return 86400 * 7;}
+	protected function cacheLifetime() {return 86400 * 7;}
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobal()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getSuggestions');}
-
-	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getPropertiesToCacheSimple() {return $this->getPropertiesToCache();}
+	protected function cachedGlobal() {return self::m(__CLASS__, 'getSuggestions');}
 
 	/** @return Df_YandexMarket_Model_Category_Adviser */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

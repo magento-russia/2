@@ -113,7 +113,7 @@ class Df_Logging_Model_Config extends Df_Core_Model {
 	/** @var Varien_Simplexml_Config */
 	private $_xmlConfig;
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/** @return Df_Logging_Model_Config */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

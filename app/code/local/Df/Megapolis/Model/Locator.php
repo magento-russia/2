@@ -34,7 +34,7 @@ class Df_Megapolis_Model_Locator extends Df_Shipping_Model_Locator {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

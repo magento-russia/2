@@ -352,4 +352,4 @@ abstract class PelEntry {
 	$str .= Pel::fmt("	Text	  : %s\n", $this->getText());
 	return $str;
   }
-}?>
+}

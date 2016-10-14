@@ -4,45 +4,30 @@ class Df_NightExpress_Model_Method_ToPointOfIssue extends Df_NightExpress_Model_
 	 * @override
 	 * @return string
 	 */
-	public function getMethod() {
-		return 'to-point-of-issue';
-	}
+	public function getMethod() {return 'to-point-of-issue';}
 
 	/**
 	 * @override
-	 * @return bool
+	 * @return void
 	 * @throws Exception
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = true;
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsUkraine()
-					->checkCountryDestinationIsUkraine()
-				;
-				if ($this->getRmConfig()->service()->needGetCargoFromTheShopStore()) {
-					$this->checkWeightIsLE(30);
-				}
-				else {
-					$this->checkWeightIsGT(30);
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsUkraine()
+			->checkCountryDestinationIsUkraine()
+		;
+		if ($this->configS()->needGetCargoFromTheShopStore()) {
+			$this->checkWeightIsLE(30);
 		}
-		return $result;
+		else {
+			$this->checkWeightIsGT(30);
+		}
 	}
 
 	/**
 	 * @override
 	 * @return bool
 	 */
-	protected function needDeliverToHome() {
-		return false;
-	}
-
-	const _CLASS = __CLASS__;
+	protected function needDeliverToHome() {return false;}
 }

@@ -280,4 +280,4 @@ class PelEntryWindowsString extends PelEntry {
 	return $this->str;
   }
 
-}?>
+}

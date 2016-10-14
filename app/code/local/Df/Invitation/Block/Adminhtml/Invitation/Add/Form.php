@@ -33,7 +33,8 @@ class Df_Invitation_Block_Adminhtml_Invitation_Add_Form extends Mage_Adminhtml_B
 		/**
 		 * Обратите внимание,
 		 * что нельзя применять цепной вызов $fieldset->addField()->addField(),
-		 * потому что addField() возвращает не $fieldset, а созданное поле.
+		 * потому что @uses Varien_Data_Form_Element_Fieldset::addField()
+		 * возвращает не $fieldset, а созданное поле.
 		 */
 		$fieldset
 			->addField(
@@ -100,11 +101,5 @@ class Df_Invitation_Block_Adminhtml_Invitation_Add_Form extends Mage_Adminhtml_B
 	 * Return adminhtml session
 	 * @return Mage_Adminhtml_Model_Session
 	 */
-	protected function _getSession()
-	{
-		return df_mage()->adminhtml()->session();
-	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation_Add_Form */
-	public static function i() {return df_block(__CLASS__);}
+	protected function _getSession() {return rm_session();}
 }

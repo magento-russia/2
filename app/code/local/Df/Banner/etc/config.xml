@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Banner>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Реклама</title>
+			<version>1.0.0</version>
 		</Df_Banner>
 	</modules>
 	<df>
@@ -60,7 +61,7 @@
 		</routers>
 		<translate>
 			<modules>
-				<Df_Banner><files><default>Df_Banner.csv</default></files></Df_Banner>
+				<Df_Banner><files><default>Df/Banner.csv</default></files></Df_Banner>
 			</modules>
 		</translate>
 	</frontend>
@@ -83,7 +84,7 @@
 		</layout>
 		<translate>
 			<modules>
-				<Df_Banner><files><default>Df_Banner.csv</default></files></Df_Banner>
+				<Df_Banner><files><default>Df/Banner.csv</default></files></Df_Banner>
 			</modules>
 		</translate>
 	</adminhtml>

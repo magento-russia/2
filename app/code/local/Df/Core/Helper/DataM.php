@@ -2,6 +2,7 @@
 class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 	/**
 	 * @override
+	 * @see Mage_Core_Helper_Abstract::__()
 	 * @return string
 	 */
 	public function __() {$a = func_get_args(); return rm_translate($a, 'Mage_Core');}
@@ -66,7 +67,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 	public function escapeHtml($data, $allowedTags = null) {
 		/** @var int $tagLength */
 		static $tagLength;
-		if (!isset($tagLength)) {
+		if (!$tagLength) {
 			$tagLength = mb_strlen(self::TAG__NO_ESCAPE);
 		}
 		/** @var string|string[] $result */
@@ -83,12 +84,33 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 	}
 
 	/**
+	 * 2015-02-13
+	 * Цель перекрытия —
+	 * значением по умолчанию станет страна посетителя, определённая по его адресу IP.
+	 * Родительский метод: @see Mage_Core_Helper_Data::getDefaultCountry()
+	 * @override
+	 * @param Df_Core_Model_StoreM|string|int|bool|null $store [optional]
+	 * @return string
+	 */
+	public function getDefaultCountry($store = null)  {
+		/** @var string|null $result */
+		$result = df_is_admin() ? null : rm_visitor_location()->getCountryIso2();
+		/**
+		 * Не вызываем родительский метод @see Mage_Core_Helper_Data::getDefaultCountry(),
+		 * потому что он отсутствует в Magento 1.4.0.1.
+		 * Константа @see Mage_Core_Helper_Data::XML_PATH_DEFAULT_COUNTRY
+		 * также отсутствует в Magento 1.4.0.1.
+		 */
+		return $result ? $result : Mage::getStoreConfig('general/country/default', $store);
+	}
+
+	/**
 	 * @override
 	 * @return bool
 	 */
 	public function useDbCompatibleMode() {
 		/**
-		 * Как ни странно, именно способом мы можем инициализировать Российскую сборку Magento
+		 * Как ни странно, именно таким способом мы можем инициализировать Российскую сборку Magento
 		 * до вызова установочных скриптов сторонних модулей.
 		 * Это позволяет избежать сбоев в установочных скриптах сторонних модулей,
 		 * когда из этих скриптов поток управления
@@ -96,7 +118,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 		 * которая на момент запуска установочных скриптах сторонних модулей может не быть
 		 * (и почти наверняка не будет) инициализирована.
 		 * Пример сбоя:
-		 * @link http://magento-forum.ru/topic/4174/
+		 * http://magento-forum.ru/topic/4174/
 		 *
 		 * Других адекватных способов за часы анализа я не нашёл.
 		 * А этот способ, несмотря на его странность — работает.
@@ -138,7 +160,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 	 * В Magento CE такой синтаксис обратывается магическим методом
 	 * @see Varien_Object::__set(), однако в Российской сборке Magento этот метод отсутствует
 	 * ради поддержки $this->{__METHOD__}.
-	 * @link http://magento-forum.ru/topic/4293/
+	 * http://magento-forum.ru/topic/4293/
 	 * @param Varien_Object|object $element
 	 * @param string $key
 	 * @param mixed $value
@@ -159,11 +181,13 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 			}
 			// вот здесь единственное отличие от родительского метода
 			/** @var string $camelizedKey */
-			$camelizedKey = df_text()->lcfirst(df_text()->camelize($key));
+			$camelizedKey = df_t()->lcfirst(df_t()->camelize($key));
 			$element->$camelizedKey = $value;
 		}
 	}
 
-	const _CLASS = __CLASS__;
 	const TAG__NO_ESCAPE = '{#rm-no-escape#}';
+
+	/** @return Df_Core_Helper_DataM */
+	public static function s() {return Mage::helper('core');}
 }

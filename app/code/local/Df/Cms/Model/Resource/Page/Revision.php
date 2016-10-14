@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Page_Revision extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	/**
 	 * Name of page table from config
 	 * @var string
@@ -98,7 +98,7 @@ class Df_Cms_Model_Resource_Page_Revision extends Mage_Core_Model_Mysql4_Abstrac
 	 */
 	protected function _aggregateVersionData($versionId)
 	{
-		$versionTable = rm_table('df_cms/page_version');
+		$versionTable = rm_table(Df_Cms_Model_Resource_Page_Version::TABLE);
 		$select = 'UPDATE `' . $versionTable . '` SET `revisions_count` =
 			(SELECT count(*) from `' . $this->getMainTable() . '` where `version_id` = ' . (int)$versionId . ')
 			where `version_id` = ' . (int)$versionId;
@@ -280,21 +280,19 @@ class Df_Cms_Model_Resource_Page_Revision extends Mage_Core_Model_Mysql4_Abstrac
 	 * @return void
 	 */
 	protected function _construct() {
-		$this->_init(self::TABLE_NAME, Df_Cms_Model_Page_Revision::P__ID);
+		$this->_init(self::TABLE, Df_Cms_Model_Page_Revision::P__ID);
 		$this->_pageTable = rm_table('cms/page');
-		$this->_versionTable = rm_table(Df_Cms_Model_Resource_Page_Version::TABLE_NAME);
+		$this->_versionTable = rm_table(Df_Cms_Model_Resource_Page_Version::TABLE);
 		$this->_pageTableAlias = 'page_table';
 		$this->_versionTableAlias = 'version_table';
 	}
-
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_cms/page_revision';
 	/**
-	 * @see Df_Cms_Model_Page_Revision::_construct()
-	 * @see Df_Cms_Model_Resource_Page_Revision_Collection::_construct()
-	 * @return string
+	 * @used-by Df_Cms_Model_Resource_Page_Version::isVersionHasPublishedRevision()
+	 * @used-by Df_Cms_Model_Resource_Page_Version_Collection::joinRevisions()
+	 * @used-by Df_Cms_Setup_2_0_0::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_cms/page_revision';
+
 	/** @return Df_Cms_Model_Resource_Page_Revision */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

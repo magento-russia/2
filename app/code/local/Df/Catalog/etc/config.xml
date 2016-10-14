@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Catalog>
-			<version>2.23.5</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.23.5</version>
 		</Df_Catalog>
 	</modules>
 	<df>
@@ -93,21 +93,21 @@
 						Цель перекрытия —
 						устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
 						in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
-						@link http://magento-forum.ru/topic/4298/
+						http://magento-forum.ru/topic/4298/
 					-->
 					<seo_sitemap_category>Df_Catalog_Block_Seo_Sitemap_Category</seo_sitemap_category>
 					<!--
 						Цель перекрытия —
 						устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
 						in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
-						@link http://magento-forum.ru/topic/4298/
+						http://magento-forum.ru/topic/4298/
 					-->
 					<seo_sitemap_product>Df_Catalog_Block_Seo_Sitemap_Product</seo_sitemap_product>
 					<!--
 						Цель перекрытия —
 						устранение сбоя «Notice: Undefined property: Df_Catalog_Model_Category::$name
 						in app/design/frontend/base/default/template/catalog/seo/tree.phtml on line 36»
-						@link http://magento-forum.ru/topic/4298/
+						http://magento-forum.ru/topic/4298/
 					-->
 					<seo_sitemap_tree_category>Df_Catalog_Block_Seo_Sitemap_Tree_Category</seo_sitemap_tree_category>
 				</rewrite>
@@ -131,7 +131,7 @@
 						2)	Устранение сбоя
 							«Warning: imagecopymerge() expects parameter 9 to be long, string given
 							in lib/Varien/Image/Adapter/Gd2.php on line 472».
-							@link http://magento-forum.ru/topic/4581/
+							http://magento-forum.ru/topic/4581/
 						3)	Запоминание товара для картинки,
 							чтобы в дальнейшем, при сохранении картинки,
 							добавить к ней при необходимости информацию EXIF
@@ -273,14 +273,14 @@
 						и по этой причине ошибочно использует оператор SQL INSERT вместо UPDATE,
 						что приводит к сбою:
 						«Integrity constraint violation: 1062 Duplicate entry».
-						@link http://stackoverflow.com/a/10178922
+						http://stackoverflow.com/a/10178922
 					-->
 					<product_attribute_backend_tierprice>Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice</product_attribute_backend_tierprice>
 					<!--
 						Цель перекрытия —
 						перевод экранного названия «Special Price» товарного свойства «special_price»,
 						а также экранных названий некоторых других товарных свойств.
-						@link https://github.com/dfediuk/rm/commit/7ef0885000282541764964a45f27691e0f2639e3
+						https://github.com/dfediuk/rm/commit/7ef0885000282541764964a45f27691e0f2639e3
 					-->
 					<product_attribute_collection>Df_Catalog_Model_Resource_Product_Attribute_Collection</product_attribute_collection>
 					<!--
@@ -311,7 +311,7 @@
 						Цель перекрытия —
 						перевод экранных названий опций
 						(которые являются товарными свойствами) настраиваемых товаров.
-						@link https://github.com/dfediuk/rm/commit/e4aecb5ebda695c40e1d004b569e2872e149a44c
+						https://github.com/dfediuk/rm/commit/e4aecb5ebda695c40e1d004b569e2872e149a44c
 					-->
 					<product_type_configurable_attribute_collection>Df_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection</product_type_configurable_attribute_collection>
 					<!--
@@ -355,7 +355,7 @@
 		<index>
 			<indexer>
 				<catalog_product_flat>
-					<model>df_catalog/product_indexer_flat</model>
+					<model>Df_Catalog_Model_Product_Indexer_Flat</model>
 				</catalog_product_flat>
 			</indexer>
 		</index>
@@ -380,14 +380,14 @@
 		<events>
 			<core_block_abstract_to_html_after>
 				<observers>
-					<df_catalog_core_block_abstract_to_html_after>
+					<Df_Catalog>
 						<!--
 							При необходимости добавляет в макет блок
 							«Иллюстрированное меню товарных разделов»
 						-->
-						<class>df_catalog/category_navigation_observer</class>
+						<class>Df_Catalog_Observer</class>
 						<method>core_block_abstract_to_html_after</method>
-					</df_catalog_core_block_abstract_to_html_after>
+					</Df_Catalog>
 				</observers>
 			</core_block_abstract_to_html_after>
 		</events>
@@ -405,26 +405,26 @@
 		<events>
 			<rm__config_after_save__catalog__frontend__flat_catalog_category>
 				<observers>
-					<df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_category>
-						<class>df_catalog/dispatcher</class>
+					<Df_Catalog>
+						<class>Df_Catalog_Observer</class>
 						<method>rm__config_after_save__catalog__frontend__flat_catalog_category</method>
-					</df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_category>
+					</Df_Catalog>
 				</observers>
 			</rm__config_after_save__catalog__frontend__flat_catalog_category>
 			<rm__config_after_save__catalog__frontend__flat_catalog_product>
 				<observers>
-					<df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_product>
-						<class>df_catalog/dispatcher</class>
+					<Df_Catalog>
+						<class>Df_Catalog_Observer</class>
 						<method>rm__config_after_save__catalog__frontend__flat_catalog_product</method>
-					</df_catalog__rm__config_after_save__catalog__frontend__flat_catalog_product>
+					</Df_Catalog>
 				</observers>
 			</rm__config_after_save__catalog__frontend__flat_catalog_product>
 			<rm__magento_ce_has_just_been_installed>
 				<observers>
-					<df_catalog__rm__magento_ce_has_just_been_installed>
-						<class>df_catalog/dispatcher</class>
+					<Df_Catalog>
+						<class>Df_Catalog_Observer</class>
 						<method>rm__magento_ce_has_just_been_installed</method>
-					</df_catalog__rm__magento_ce_has_just_been_installed>
+					</Df_Catalog>
 				</observers>
 			</rm__magento_ce_has_just_been_installed>
 		</events>

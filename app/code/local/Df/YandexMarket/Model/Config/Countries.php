@@ -7,11 +7,11 @@ class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model {
 			$countriesConfigAsSimpleXml =
 				$this->getFileAsSimpleXml()->getNode('df/yandex-market/countries/country')
 			;
-			df_assert($countriesConfigAsSimpleXml instanceof Df_Varien_Simplexml_Element);
+			df_assert($countriesConfigAsSimpleXml instanceof Df_Core_Sxe);
 			/** @var array(string => string) $result */
 			$result = array();
 			foreach ($countriesConfigAsSimpleXml as $countryConfigAsSimpleXml) {
-				/** @var Df_Varien_Simplexml_Element $countryConfigAsSimpleXml */
+				/** @var Df_Core_Sxe $countryConfigAsSimpleXml */
 				/** @var array $countryConfig */
 				$countryConfig = $countryConfigAsSimpleXml->asCanonicalArray();
 				/** @var string $iso2Code */
@@ -63,11 +63,11 @@ class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model {
 	/** @return array(mixed => mixed) */
 	private function getValidNames() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = explode("\r\n", file_get_contents($this->getFilePath('countries.txt')));
+			$this->{__METHOD__} = df_explode_n(file_get_contents($this->getFilePath('countries.txt')));
 		}
 		return $this->{__METHOD__};
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const FILE_DIR = 'etc';
 	const MODULE_NAME = 'Df_YandexMarket';
 	const XML_TAG__CODE = 'code';

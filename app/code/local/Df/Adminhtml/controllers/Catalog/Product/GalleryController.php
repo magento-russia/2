@@ -9,24 +9,16 @@ require_once BP . '/app/code/core/Mage/Adminhtml/controllers/Catalog/Product/Gal
 class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Catalog_Product_GalleryController {
 	/**
 	 * @override
+	 * @see Mage_Adminhtml_Catalog_Product_GalleryController::uploadAction()
 	 * @return void
 	 */
 	public function uploadAction() {
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
-		if (!isset($patchNeeded)) {
-			$patchNeeded =
-					df_enabled(Df_Core_Feature::SEO)
-				&&
-					df_cfg()->seo()->images()->getUseDescriptiveFileNames()
-			;
+		if (is_null($patchNeeded)) {
+			$patchNeeded =  df_cfg()->seo()->images()->getUseDescriptiveFileNames();
 		}
-		if ($patchNeeded) {
-			$this->uploadActionDf();
-		}
-		else {
-			parent::uploadAction();
-		}
+		$patchNeeded ? $this->uploadActionDf() : parent::uploadAction();
 	}
 
 	/** @return void */
@@ -46,9 +38,13 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 			$imageName = df_a(df_a($_FILES, 'image', array()), 'name', '');
 			// Начало заплатки
 			/** @var string $imageName */
+			/**
+			 * Аналогичный алгоритм:
+			 * @see Df_Catalog_Model_Product_Attribute_Backend_Media::moveImageFromTmpDf()
+			 */
 			$imageName = rm_concat_clean('.'
-				,df_output()->transliterate(df_h()->core()->file()->stripExt($imageName))
-				,df_h()->core()->file()->getExt($imageName)
+				,df_output()->transliterate(rm_strip_ext($imageName))
+				,df()->file()->getExt($imageName)
 			);
 			// Конец заплатки
 			$result =

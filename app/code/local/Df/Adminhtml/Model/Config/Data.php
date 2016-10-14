@@ -1,6 +1,15 @@
 <?php
+/**
+ * @method string|null getScope()
+ * @method int|null getScopeId()
+ */
 class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
-	/** @return Df_Adminhtml_Model_Config_Data */
+	/**
+	 * @override
+	 * @see Mage_Adminhtml_Model_Config_Data::save()
+	 * @used-by Mage_Adminhtml_System_ConfigController::saveAction()
+	 * @return Df_Adminhtml_Model_Config_Data
+	 */
 	public function save() {
 		if (df_magento_version('1.4.1.0', '<')) {
 			$this->save_patchFor_1_4_0_1();
@@ -37,10 +46,8 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		if (empty($groups)) {
 			return $this;
 		}
-
 		/* @var $sections Mage_Core_Model_Config_Element */
-		$sections = df_mage()->adminhtml()->getConfig()->getSections();
-
+		$sections = rm_config_adminhtml()->getSections();
 		$oldConfig = $this->_getConfig(true);
 		$deleteTransaction = df_model('core/resource_transaction');
 		/* @var $deleteTransaction Mage_Core_Model_Resource_Transaction */
@@ -54,7 +61,8 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			* Map field names if they were cloned
 			*/
 			$groupConfig = $sections->descend($section.'/groups/'.$group);
-			if ($clonedFields = !empty($groupConfig->clone_fields)) {
+			$clonedFields = !empty($groupConfig->clone_fields);
+			if ($clonedFields) {
 				if ($groupConfig->clone_model) {
 					$cloneModel = df_model((string)$groupConfig->clone_model);
 				} else {
@@ -70,14 +78,16 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 					}
 				}
 			}
-		  // set value for group field entry by fieldname
-		  // use extra memory
-		  $fieldsetData = array();
-		  foreach ($groupData['fields'] as $field => $fieldData) {
-			  $fieldsetData[$field] = (is_array($fieldData) && isset($fieldData['value']))
-				  ? $fieldData['value'] : null;
-		  }
-
+			// set value for group field entry by fieldname
+			// use extra memory
+			$fieldsetData = array();
+			foreach ($groupData['fields'] as $field => $fieldData) {
+				$fieldsetData[$field] =
+					is_array($fieldData) && isset($fieldData['value'])
+					? $fieldData['value']
+					: null
+				;
+			}
 			foreach ($groupData['fields'] as $field => $fieldData) {
 				/**
 				* Get field backend model
@@ -87,7 +97,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 					$backendClass = $sections->descend($section.'/groups/'.$group.'/fields/'.$mappedFields[$field].'/backend_model');
 				}
 				if (!$backendClass) {
-					$backendClass = Df_Core_Model_Config_Data::_CLASS;
+					$backendClass = Df_Core_Model_Config_Data::_C;
 				}
 				$dataObject = df_model($backendClass);
 				if (!$dataObject instanceof Mage_Core_Model_Config_Data) {
@@ -193,10 +203,8 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		if (empty($groups)) {
 			return $this;
 		}
-
 		$sections = df_mage()->adminhtml()->getConfig()->getSections();
 		/* @var $sections Mage_Core_Model_Config_Element */
-
 		$oldConfig = $this->_getConfig(true);
 		$deleteTransaction = df_model('core/resource_transaction');
 		/* @var $deleteTransaction Mage_Core_Model_Resource_Transaction */
@@ -210,7 +218,8 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			* Map field names if they were cloned
 			*/
 			$groupConfig = $sections->descend($section.'/groups/'.$group);
-			if ($clonedFields = !empty($groupConfig->clone_fields)) {
+			$clonedFields = !empty($groupConfig->clone_fields);
+			if ($clonedFields) {
 				if ($groupConfig->clone_model) {
 					$cloneModel = df_model((string)$groupConfig->clone_model);
 				}
@@ -260,7 +269,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				$backendClass =
 					isset($fieldConfig->backend_model)
 					? $fieldConfig->backend_model
-					: Df_Core_Model_Config_Data::_CLASS
+					: Df_Core_Model_Config_Data::_C
 				;
 				/******************************
 				 * END PATCH
@@ -328,6 +337,4 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		$saveTransaction->save();
 		return $this;
 	}
-
-	const _CLASS = __CLASS__;
 }

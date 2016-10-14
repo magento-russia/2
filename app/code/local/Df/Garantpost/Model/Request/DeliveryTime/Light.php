@@ -34,9 +34,7 @@ class Df_Garantpost_Model_Request_DeliveryTime_Light extends Df_Garantpost_Model
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(),array(
-			'Referer' => 'http://www.garantpost.ru/tools/transit/')
-		);
+		return array('Referer' => 'http://www.garantpost.ru/tools/transit/') + parent::getHeaders();
 	}
 
 	/** @return array(string => string|int|float|bool) */
@@ -64,9 +62,9 @@ class Df_Garantpost_Model_Request_DeliveryTime_Light extends Df_Garantpost_Model
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__LOCATION_DESTINATION_ID, self::V_INT);
+		$this->_prop(self::P__LOCATION_DESTINATION_ID, RM_V_INT);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__LOCATION_DESTINATION_ID = 'location_destination_id';
 	const POST_PARAM__LOCATION_DESTINATION_ID = 'city';
 	/**

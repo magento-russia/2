@@ -1,5 +1,6 @@
 <?php
-class Df_IPay_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Service {
+/** @method Df_IPay_Model_Payment main() */
+class Df_IPay_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	/**
 	 * @override
 	 * @return string
@@ -18,7 +19,7 @@ class Df_IPay_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Ser
 	/** @return string|null */
 	private function getMobileNetworkOperator() {
 		/** @var string|null $result */
-		$result = $this->getPaymentMethod()->getMobileNetworkOperator();
+		$result = $this->main()->getMobileNetworkOperator();
 		if (!is_null($result)) {
 			df_result_string($result);
 		}
@@ -30,16 +31,11 @@ class Df_IPay_Model_Config_Area_Service extends Df_Payment_Model_Config_Area_Ser
 		/** @var array(string => string $result */
 		$result =
 			df_a(
-				$this->getConstManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
+				$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
 				,$this->getMobileNetworkOperator()
 			)
 		;
 		df_result_array($result);
 		return $result;
-	}
-
-	/** @return Df_IPay_Model_Payment */
-	private function getPaymentMethod() {
-		return $this->getVarManager()->getPaymentMethod();
 	}
 }

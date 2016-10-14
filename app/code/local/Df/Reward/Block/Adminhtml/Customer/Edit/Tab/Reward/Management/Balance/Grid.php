@@ -6,10 +6,8 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid
 		return $this->getUrl('*/customer_reward/deleteOrphanPoints', array('_current' => true));
 	}
 
-	/** @return Mage_Customer_Model_Customer */
-	public function getCustomer() {
-		return Mage::registry('current_customer');
-	}
+	/** @return Df_Customer_Model_Customer */
+	public function getCustomer() {return Mage::registry('current_customer');}
 
 	/**
 	 * @override
@@ -21,8 +19,8 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid
 		foreach ($this->getCollection() as $item) {
 			$website = $item->getData('website_id');
 			if ($website !== null) {
-				$minBalance = df_h()->reward()->getGeneralConfig('min_points_balance', intval($website));
-				$maxBalance = df_h()->reward()->getGeneralConfig('max_points_balance', intval($website));
+				$minBalance = df_h()->reward()->getGeneralConfig('min_points_balance', (int)$website);
+				$maxBalance = df_h()->reward()->getGeneralConfig('max_points_balance', (int)$website);
 				$item->addData(array(
 					'min_points_balance' => rm_nat0($minBalance)
 					,'max_points_balance' =>
@@ -52,23 +50,11 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid
 	protected function _afterToHtml($html) {
 		$html = parent::_afterToHtml($html);
 		if ($this->_customerHasOrphanPoints) {
-			$deleteOrhanPointsButton =
-				df_block('adminhtml/widget_button')
-					->setData(
-						array(
-							'label' => df_h()->reward()->__('Delete Orphan Points')
-							,'onclick' =>
-								rm_sprintf(
-									'setLocation(%s)'
-									,df_quote_single(
-										$this->getDeleteOrphanPointsUrl()
-									)
-								)
-							,'class' => 'scalable delete'
-						)
-					)
-			;
-			$html .= $deleteOrhanPointsButton->toHtml();
+			$html .= rm_admin_button(array(
+				'label' => df_h()->reward()->__('Delete Orphan Points')
+				,'onclick' => rm_admin_button_location($this->getDeleteOrphanPointsUrl())
+				,'class' => 'scalable delete'
+			));
 		}
 		return $html;
 	}
@@ -159,7 +145,4 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid
 	}
 	/** @var bool */
 	protected $_customerHasOrphanPoints = false;
-
-	/** @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid */
-	public static function i() {return df_block(__CLASS__);}
 }

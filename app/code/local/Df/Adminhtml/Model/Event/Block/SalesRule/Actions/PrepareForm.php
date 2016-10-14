@@ -16,9 +16,7 @@ class Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm extends Df_Co
 	 */
 	public function getActionElement() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getActionsFieldset()->getElements()->searchById(self::DF_ELEMENT_SIMPLE_ACTION)
-			;
+			$this->{__METHOD__} = $this->getActionsFieldset()->getElements()->searchById('simple_action');
 			df_assert($this->{__METHOD__} instanceof Varien_Data_Form_Element_Select);
 		}
 		return $this->{__METHOD__};
@@ -30,9 +28,7 @@ class Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm extends Df_Co
 	 */
 	public function getActionsFieldset() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getForm()->getElements()->searchById(self::DF_ELEMENT_FIELDSET_ACTIONS)
-			;
+			$this->{__METHOD__} = $this->getForm()->getElements()->searchById('action_fieldset');
 			df_assert($this->{__METHOD__} instanceof Varien_Data_Form_Element_Fieldset);
 		}
 		return $this->{__METHOD__};
@@ -44,7 +40,7 @@ class Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm extends Df_Co
 	 */
 	public function getForm() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getObserver()->getData(self::P__FORM);
+			$this->{__METHOD__} = $this->getObserver()->getData('form');
 			df_assert($this->{__METHOD__} instanceof Varien_Data_Form);
 		}
 		return $this->{__METHOD__};
@@ -53,11 +49,11 @@ class Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm extends Df_Co
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
+	protected function getExpectedEventPrefix() {return 'adminhtml_block_salesrule_actions_prepareform';}
 
-	const _CLASS = __CLASS__;
-	const DF_ELEMENT_FIELDSET_ACTIONS = 'action_fieldset';
-	const DF_ELEMENT_SIMPLE_ACTION = 'simple_action';
-	const EXPECTED_EVENT_PREFIX = 'adminhtml_block_salesrule_actions_prepareform';
-	const P__FORM = 'form';
+	/**
+	 * @used-by Df_PromoGift_Observer::adminhtml_block_salesrule_actions_prepareform()
+	 * @used-by Df_PromoGift_Model_Handler_Adminhtml_Block_Actions_PrepareForm_AddInputMaxUsagesPerQuote::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

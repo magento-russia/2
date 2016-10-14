@@ -1,52 +1,35 @@
 <?php
-/**
- * @method Df_PromoGift_Model_Resource_Gift getResource()
- */
+/** @method Df_PromoGift_Model_Resource_Gift getResource() */
 class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	/** @return Df_Catalog_Model_Product */
 	public function getProduct() {
-		return
-			$this->getParamAsModel(
-				self::P__PRODUCT
-				,Df_Catalog_Model_Product::_CLASS
-			)
-		;
+		return $this->getParamAsModel(self::P__PRODUCT, Df_Catalog_Model_Product::_C);
 	}
 
 	/** @return int */
-	public function getProductId() {
-		return $this->getModelId(self::P__PRODUCT);
-	}
+	public function getProductId() {return $this->getModelId(self::P__PRODUCT);}
 
-	/** @return Mage_SalesRule_Model_Rule */
+	/**
+	 * @override
+	 * @return Df_PromoGift_Model_Resource_Gift_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/** @return Mage_SalesRule_Model_Rule|Df_SalesRule_Model_Rule */
 	public function getRule() {
-		return
-			$this->getParamAsModel(
-				self::P__RULE
-				,Df_SalesRule_Const::RULE_CLASS
-			)
-		;
+		return $this->getParamAsModel(self::P__RULE, Df_SalesRule_Model_Rule::_C);
 	}
 
 	/** @return int */
-	public function getRuleId() {
-		return $this->getModelId(self::P__RULE);
-	}
+	public function getRuleId() {return $this->getModelId(self::P__RULE);}
 
 	/** @return Mage_Core_Model_Website */
 	public function getWebsite() {
-		return
-			$this->getParamAsModel(
-				self::P__WEBSITE
-				,Df_Core_Model_Website::_CLASS
-			)
-		;
+		return $this->getParamAsModel(self::P__WEBSITE, Df_Core_Model_Website::_C);
 	}
 
 	/** @return int */
-	public function getWebsiteId() {
-		return $this->getModelId(self::P__WEBSITE);
-	}
+	public function getWebsiteId() {return $this->getModelId(self::P__WEBSITE);}
 
 	/**
 	 * @param Df_Catalog_Model_Product $product
@@ -87,6 +70,12 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 		parent::_beforeSave();
 		return $this;
 	}
+
+	/**
+	 * @override
+	 * @return Df_PromoGift_Model_Resource_Gift
+	 */
+	protected function _getResource() {return Df_PromoGift_Model_Resource_Gift::s();}
 
 	/**
 	 * @param string $paramName
@@ -130,15 +119,7 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	}
 
 	/** @return string[] */
-	private function getParamsForSave() {
-		return
-			array(
-				self::P__PRODUCT
-				,self::P__RULE
-				,self::P__WEBSITE
-			)
-		;
-	}
+	private function getParamsForSave() {return array(self::P__PRODUCT, self::P__RULE, self::P__WEBSITE);}
 
 	/**
 	 * @param string $paramName
@@ -158,26 +139,26 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_PromoGift_Model_Resource_Gift::mf());
 		$this
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_CLASS, false)
-			->_prop(self::P__RULE, Df_SalesRule_Const::RULE_CLASS, false)
-			->_prop(self::P__WEBSITE, Df_Core_Const::WEBSITE_CLASS, false)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C, false)
+			->_prop(self::P__RULE, 'Mage_SalesRule_Model_Rule', false)
+			->_prop(self::P__WEBSITE, 'Mage_Core_Model_Website', false)
 		;
 	}
-	/** @var string */
-	protected $_eventObject = 'gift';
-	/** @var string */
-	protected $_eventPrefix = 'df_promo_gift';
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_PromoGift_Model_Resource_Gift_Collection::_construct() */
+	const _C = __CLASS__;
+	const ID_SUFFIX = '_id';
 	const P__ID = 'gift_id';
 	const P__PRODUCT = 'product';
+	const P__PRODUCT_ID = 'product_id';
 	const P__RULE = 'rule';
+	const P__RULE_ID = 'rule_id';
 	const P__WEBSITE = 'website';
+	const P__WEBSITE_ID = 'website_id';
 
 	/** @return Df_PromoGift_Model_Resource_Gift_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_PromoGift_Model_Resource_Gift_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -191,11 +172,6 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	 * @return Df_PromoGift_Model_Gift
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_PromoGift_Model_Resource_Gift_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_PromoGift_Model_Gift */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

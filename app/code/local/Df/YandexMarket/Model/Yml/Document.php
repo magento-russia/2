@@ -1,39 +1,64 @@
 <?php
-class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generator_Document {
+class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
 	/**
-	 * Метод публичен, потому что его использует класс @see Df_YandexMarket_Model_Yml_Processor_Offer
-	 * @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Collection
+	 * @override
+	 * @return string
 	 */
-	public function getCategories() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Catalog_Model_Resource_Category_Collection $result */
-			$result = Df_Catalog_Model_Resource_Category_Collection::i();
-			$result->addIdFilter($this->getProducts()->getCategoryIds());
-			/** @var string[] $attributes */
-			$attributes = array('name', Df_YandexMarket_Const::ATTRIBUTE__CATEGORY);
-			$result->addAttributeToSelect($attributes);
-			/**
-			 * Вызов выше метода
-			 * @see Mage_Catalog_Model_Resource_Category_Collection::addIdFilter()
-			 * может отсечь товарный раздел,
-			 * который хоть и не содержит товаров непосредственно,
-			 * но является родительским для товарного раздела, содержащего товары,
-			 * и тогда свойство parentId товарного раздела, содержащего товары,
-			 * будет ссылаться на отсутствующий в файле YML товарный раздел.
-			 * @link http://magento-forum.ru/topic/4572/
-			 * По этой причине нам надо добавить к коллекции разделы-предки.
-			 */
-			$result->addAncestors($attributes);
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getOperationNameInPrepositionalCase() {return 'формировании документа YML';}
 
 	/**
-	 * Метод публичен, потому что его использует класс @see Df_YandexMarket_Model_Yml_Processor_Offer
-	 * @return Df_Catalog_Model_Resource_Product_Collection
+	 * @override
+	 * @param string $url
+	 * @return string
 	 */
-	public function getProducts() {return $this->cfg(self::P__PRODUCTS);}
+	public function preprocessUrl($url) {
+		/** @var array $schemeAndOther */
+		$schemeAndOther = explode('//', $url);
+		/**
+		 * Раньше я считал, что count($schemeAndOther) должно быть всегда равно 2.
+		 * Однако потом заметил, что в магазине sekretsna.com
+		 * $product->getProductUrl($useSid = false)
+		 * возвращает значения вроде «http://sekretsna.com//la-scala-bpr-12-semejnoe-160x220x2.html»,
+		 * то есть, с лишним  символом «/» после имени домена.
+		 *
+		 * В магазине sekretsna.com подобные веб-адреса образовались
+		 * в результате ручных или программных правок справочника перенаправлений.
+		 * Причём подобные адреса — рабочие.
+		 * Более того, Magento почему-то даже открывает тот же самый товар при трёх символах «/» подряд:
+		 * «http://sekretsna.com///la-scala-bpr-12-semejnoe-160x220x2.html».
+		 *
+		 * Конечно, подобные адреса не вполне хороши
+		 * и могут приводить к дубликатам страниц для поисковых систем,
+		 * однако модуля Яндекс.Маркет это не касается и он падать из-за таких адресов не должен.
+		 */
+		if (2 > count($schemeAndOther)) {
+			df_error('Система не смогла распознать значение «%s» как веб-адрес.', $url);
+		}
+		/** @var string $scheme */
+		$scheme = rm_first($schemeAndOther);
+		/** @var string $schemeTail */
+		/**
+		 * Раньше тут стояло:
+		 * $schemeTail = rm_last($schemeAndOther).
+		 * Причина смены кода объяснена в предыдущем комментарии выше.
+		 */
+		$schemeTail = implode('//', rm_tail($schemeAndOther));
+		/** @var string[] $schemeTailExploded */
+		$schemeTailExploded = df_explode_url($schemeTail);
+		df_assert_ge(2, count($schemeTailExploded));
+		/** @var string $domainAndPort */
+		$domainAndPort = rm_first($schemeTailExploded);
+		if (df_cfg()->yandexMarket()->other()->useNonStandardDomain()) {
+			$domainAndPort = df_cfg()->yandexMarket()->other()->getDomain();
+		}
+		/** @var string[] $path */
+		$pathExploded = rm_tail($schemeTailExploded);
+		/** @var string $resultRaw */
+		$result =
+			$scheme . '//' . $domainAndPort . '/' . df_concat_url(array_map('urlencode', $pathExploded))
+		;
+		return $result;
+	}
 
 	/**
 	 * @override
@@ -47,7 +72,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 	 * @override
 	 * @return array(string => mixed)
 	 */
-	protected function getContentsAsArray() {return array('shop' => $this->getDocumentData_Shop());}
+	protected function getContentsAsArray() {return array('shop' => $this->getOutput_Shop());}
 
 	/**
 	 * @override
@@ -57,32 +82,62 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 
 	/**
 	 * @override
+	 * @return string[]
+	 */
+	protected function getEmailAddressesToNotify() {
+		return array(df_cfg()->yandexMarket()->general()->getNotificationEmail());
+	}
+
+	/**
+	 * @override
+	 * @return Df_Directory_Model_Currency
+	 */
+	protected function getExportCurrency() {return $this->getSettings()->general()->getCurrency();}
+
+	/**
+	 * Намеренно возвращаем пустое значение!
+	 * @override
+	 * @return string
+	 */
+	protected function getLogDocumentName() {return '';}
+
+	/**
+	 * @override
+	 * @return string
+	 */
+	protected function getProcessorClass_products() {return Df_YandexMarket_Model_Yml_Processor_Offer::_C;}
+
+	/**
+	 * @override
 	 * @return string
 	 */
 	protected function getTagName() {return 'yml_catalog';}
+
+	/**
+	 * @override
+	 * @return bool
+	 */
+	protected function needLog() {return df_cfg()->yandexMarket()->diagnostics()->isEnabled();}
 	
 	/** @return array(array(string => string|array(string => int))) */
-	private function getDocumentData_Categories() {
+	private function getOutput_Categories() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string|array(string => int))) $result  */
 			$result = array();
 			foreach ($this->getCategories() as $category) {
-				/** @var Mage_Catalog_Model_Category $category */
+				/** @var Df_Catalog_Model_Category $category */
 				if ($category->getId()) {
 					/** @var array(string => int) $attributes */
 					$attributes = array('id' => $category->getId());
 					if (0 < $category->getParentId()) {
 						$attributes['parentId'] = $category->getParentId();
 					}
-					$result[]=
-						array(
-							Df_Varien_Simplexml_Element::KEY__ATTRIBUTES => $attributes
-							,Df_Varien_Simplexml_Element::KEY__VALUE =>
-								rm_cdata(
-									$category->getName() ? $category->getName() : $category->getId()
-								)
+					$result[]= array(
+						Df_Core_Sxe::ATTR => $attributes
+						,Df_Core_Sxe::CONTENT => rm_cdata(
+							$category->getName() ? $category->getName() : $category->getId()
 						)
-					;
+					);
 				}
 			}
 			$this->{__METHOD__} = $result;
@@ -91,9 +146,9 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 	}
 
 	/** @return array */
-	private function getDocumentData_Currencies() {
+	private function getOutput_Currencies() {
 		/** @var array $result */
-		$result = array(array(Df_Varien_Simplexml_Element::KEY__ATTRIBUTES => array(
+		$result = array(array(Df_Core_Sxe::ATTR => array(
 			'id' => $this->getSettings()->general()->getCurrencyCode()
 			/**
 			 * Параметр rate указывает курс валюты к курсу основной валюты,
@@ -109,60 +164,29 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 		)));
 		return $result;
 	}
-	
-	/** @return Df_YandexMarket_Model_Yml_Processor_Offer[] */
-	private function getDocumentData_Offers() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_YandexMarket_Model_Yml_Processor_Offer[] $result  */
-			$result = array();
-			df_h()->yandexMarket()->log('Рассматривается товаров: %d.', count($this->getProducts()));
-			foreach ($this->getProducts() as $product) {
-				/** @var Df_Catalog_Model_Product $product */
-				/** @var Df_YandexMarket_Model_Yml_Processor_Offer $offer */
-				$offer =
-					Df_YandexMarket_Model_Yml_Processor_Offer::i(
-						array(
-							Df_YandexMarket_Model_Yml_Processor_Offer::P__DOCUMENT => $this
-							,Df_YandexMarket_Model_Yml_Processor_Offer::P__PRODUCT => $product
-						)
-					)
-				;
-				if ($offer->isEnabled()) {
-					$result[]= $offer->getDocumentData();
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
 
 	/** @return array */
-	private function getDocumentData_Shop() {
-		/** @var array $result */
-		$result =
-			array(
-				'name' => $this->getSettings()->shop()->getNameForClients()
-				,'company' => $this->getSettings()->shop()->getNameForAdministration()
-				,'url' =>
-					df_h()->yandexMarket()->preprocessUrl(
-						rm_state()->getStoreProcessed()->getBaseUrl(
-							Mage_Core_Model_Store::URL_TYPE_WEB
-						)
-					)
-				,'platform' => 'Российская сборка Magento'
-				,'version' => rm_version()
-				,'agency' => $this->getSettings()->shop()->getAgency()
-				,'email' => $this->getSettings()->shop()->getSupportEmail()
-				,'currencies' => array('currency' => $this->getDocumentData_Currencies())
-				,'categories' => array('category' => $this->getDocumentData_Categories())
+	private function getOutput_Shop() {
+		/** @var array(string => mixed) $result */
+		$result = array(
+			'name' => $this->getSettings()->shop()->getNameForClients()
+			,'company' => $this->getSettings()->shop()->getNameForAdministration()
+			,'url' => $this->preprocessUrl(
+				rm_state()->getStoreProcessed()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
 			)
-		;
-		/** @link http://magento-forum.ru/topic/4201/ */
-		if (0 === count($this->getDocumentData_Offers())) {
+			,'platform' => 'Российская сборка Magento'
+			,'version' => rm_version()
+			,'agency' => $this->getSettings()->shop()->getAgency()
+			,'email' => $this->getSettings()->shop()->getSupportEmail()
+			,'currencies' => array('currency' => $this->getOutput_Currencies())
+			,'categories' => array('category' => $this->getOutput_Categories())
+		);
+		/** http://magento-forum.ru/topic/4201/ */
+		if (!$this->getOutput_Products()) {
 			df_h()->yandexMarket()->error_noOffers();
 		}
-		/** @link http://magento-forum.ru/topic/4201/ */
-		if (0 === count($this->getDocumentData_Categories())) {
+		/** http://magento-forum.ru/topic/4201/ */
+		if (!$this->getOutput_Categories()) {
 			/** @var string $message */
 			$message =
 				'Ни один из передаваемых на Яндекс.Маркет товаров'
@@ -170,7 +194,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 				."\nКаждый передаваемый на Яндекс.Маркет товар"
 				.' должен быть привязан хотя бы к одному товарному разделу.'
 			;
-			df_h()->yandexMarket()->notify($message);
+			$this->notify($message);
 			// Всё равно файл YML будет невалидным,
 			// поэтому сразу сбойно завершаем формирование этого файла.
 			df_error($message);
@@ -178,7 +202,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 		if (0 !== $this->getSettings()->general()->getLocalDeliveryCost()) {
 			$result['local_delivery_cost'] = $this->getSettings()->general()->getLocalDeliveryCost();
 		}
-		$result['offers'] = array('offer' => $this->getDocumentData_Offers());
+		$result['offers'] = array('offer' => $this->getOutput_Products());
 		return $result;
 	}
 
@@ -186,21 +210,11 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Core_Model_SimpleXml_Generat
 	private function getSettings() {return Df_YandexMarket_Model_Settings::s();}
 
 	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::P__PRODUCTS, Df_Catalog_Model_Resource_Product_Collection::_CLASS);
-	}
-	const _CLASS = __CLASS__;
-	const P__PRODUCTS = 'products';
-	/**
-	 * @static
+	 * @used-by Df_YandexMarket_Model_Action_Front::getDocument()
 	 * @param Df_Catalog_Model_Resource_Product_Collection $products
 	 * @return Df_YandexMarket_Model_Yml_Document
 	 */
 	public static function i(Df_Catalog_Model_Resource_Product_Collection $products) {
-		return new self(array(self::P__PRODUCTS => $products));
+		return self::ic(__CLASS__, $products);
 	}
 }

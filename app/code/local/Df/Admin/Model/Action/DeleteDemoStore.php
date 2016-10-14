@@ -1,51 +1,27 @@
 <?php
-class Df_Admin_Model_Action_DeleteDemoStore extends Df_Core_Model_Controller_Action_Admin {
-	/**
-	 * @param Mage_Core_Model_Store $store
-	 * @return string
-	 */
-	public function getLink(Mage_Core_Model_Store $store) {
-		return rm_url_admin(
-			'df_admin/notification/deleteDemoStore', array(self::$RP__STORE => $store->getCode())
-		);
-	}
-
+class Df_Admin_Model_Action_DeleteDemoStore extends Df_Core_Model_Action_Admin {
 	/**
 	 * @override
-	 * @return string
+	 * @see Df_Core_Model_Action::_process()
+	 * @used-by Df_Core_Model_Action::process()
+	 * @return void
 	 */
-	protected function generateResponseBody() {
-		try {
-			Df_Core_Model_Store::deleteStatic($this->getStore());
-		}
-		catch (Exception $e) {
-			rm_exception_to_session($e);
-		}
-		$this->getController()->redirectReferer();
-		return '';
-	}
-
-	/** @return Mage_Core_Model_Store */
-	private function getStore() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::app()->getStore($this->getStoreCode());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function _process() {Df_Core_Model_Store::deleteStatic($this->store());}
 
 	/** @return string */
-	private function getStoreCode() {return df_request(self::$RP__STORE);}
+	private function getStoreCode() {return rm_request(self::$RP__STORE);}
+
+	/**
+	 * @used-by Df_Admin_Block_Notifier_DeleteDemoStore::getLink()
+	 * @param Df_Core_Model_StoreM $store
+	 * @return string
+	 */
+	public static function getLink(Df_Core_Model_StoreM $store) {
+		return rm_url_admin('df_admin/notification/deleteDemoStore', array(
+			self::$RP__STORE => $store->getCode()
+		));
+	}
 
 	/** @var string */
 	private static $RP__STORE = 'store';
-	/**
-	 * @static
-	 * @param Df_Admin_NotificationController $controller
-	 * @return Df_Admin_Model_Action_DeleteDemoStore
-	 */
-	public static function i(Df_Admin_NotificationController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
-	/** @return Df_Admin_Model_Action_DeleteDemoStore */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

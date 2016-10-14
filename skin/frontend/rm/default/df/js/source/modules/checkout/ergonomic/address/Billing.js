@@ -18,6 +18,18 @@
 				this.handleShippingAddressHasNoFields();
 				this.listenForSelection();
 				this.addFakeRegionFieldsIfNeeded();
+				$(document.getElementById('billing:country_id')).select2({
+					width: 150
+					, minimumResultsForSearch: 0
+					, containerCssClass: ''
+					,dropdownCss: {width: 200}
+				})
+					.on('change', function(e) {
+						if (window.billingRegionUpdater) {
+							window.billingRegionUpdater.update();
+          				}
+					})
+				;
 			}
 			,/** @returns {void} */
 			save: function() {

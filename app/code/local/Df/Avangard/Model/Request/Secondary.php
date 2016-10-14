@@ -1,28 +1,8 @@
 <?php
-/**
- * @method Df_Avangard_Model_Payment getPaymentMethod()
- */
-abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Request_Secondary {
+/** @method Df_Avangard_Model_Payment getMethod() */
+abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Request_Transaction {
 	/** @return string */
-	abstract protected function getRequestDocumentTag();
-
-	/** @return string */
-	abstract protected function getRequestUriSuffix();
-
-	/**
-	 * @override
-	 * @return array(string => string)
-	 */
-	public function getParams() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				'shop_id' => $this->getServiceConfig()->getShopId()
-				,'shop_passwd' => $this->getServiceConfig()->getRequestPassword()
-				,'ticket' => $this->getPaymentExternalId()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	abstract protected function getRequestId();
 
 	/**
 	 * @override
@@ -33,10 +13,24 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 			/** @var Zend_Uri_Http $result */
 			$result = Zend_Uri::factory('https');
 			$result->setHost('www.avangard.ru');
-			$result->setPath(rm_sprintf('/iacq/h2h/%s', $this->getRequestUriSuffix()));
+			$result->setPath('/iacq/h2h/' . $this->getRequestId());
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @override
+	 * @see Df_Payment_Model_Request_Secondary::_params()
+	 * @used-by Df_Payment_Model_Request_Secondary::params()
+	 * @return array(string => string|int)
+	 */
+	protected function _params() {
+		return array(
+			'shop_id' => $this->shopId()
+			,'shop_passwd' => $this->password()
+			,'ticket' => $this->getPaymentExternalId()
+		);
 	}
 
 	/**
@@ -78,7 +72,7 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 				 * 'application/x-www-form-urlencoded; charset=utf-8' automatically.
 				 * Please use Zend_Http_Client::setRawData to send this kind of content.»
 				 * @see Zend_Http_Client::_prepareBody()
-				 * @link http://magento-forum.ru/topic/4100/
+				 * http://magento-forum.ru/topic/4100/
 				 */
 				->setRawData(
 					http_build_query(array('xml' => $this->getRequestDocument()->getXml()), '', '&')
@@ -89,8 +83,8 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 				->setConfig(array('timeout' => 3))
 			;
 			rm_report(
-				rm_sprintf('%s-request-{date}-{time}.xml', $this->getRequestUriSuffix())
-				,$this->getRequestDocument()->getXml()
+				$this->getRequestId() . '-request-{date}-{time}.xml'
+				, $this->getRequestDocument()->getXml()
 			);
 			$this->{__METHOD__} = $result;
 		}
@@ -108,22 +102,19 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 	/** @return Df_Avangard_Model_RequestDocument */
 	private function getRequestDocument() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Avangard_Model_RequestDocument::i(
-					$requestParams = $this->getParams()
-					,$tagName = $this->getRequestDocumentTag()
-				)
-			;
+			$this->{__METHOD__} = Df_Avangard_Model_RequestDocument::i(
+				$this->getParams(), $this->getRequestId()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getResponseAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_xml($this->getHttpResponse()->getBody());
 			rm_report(
-				rm_sprintf('%s-response-{date}-{time}.xml', $this->getRequestUriSuffix())
+				$this->getRequestId() . '-response-{date}-{time}.xml'
 				,$this->getHttpResponse()->getBody()
 			);
 		}
@@ -134,10 +125,8 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 	private function getResponseRegistration() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Avangard_Model_Response_Registration::i();
-			$this->{__METHOD__}->loadFromPaymentInfo($this->getOrderPayment());
+			$this->{__METHOD__}->loadFromPaymentInfo($this->getPayment());
 		}
 		return $this->{__METHOD__};
 	}
-	
-	const _CLASS = __CLASS__;
 }

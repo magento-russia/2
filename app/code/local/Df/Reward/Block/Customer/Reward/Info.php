@@ -8,23 +8,22 @@ class Df_Reward_Block_Customer_Reward_Info extends Df_Core_Block_Template_NoCach
 	protected $_rewardInstance = null;
 
 	/**
-	 * Render if all there is a customer and a balance
+	 * @override
+	 * @see Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
-	protected function _toHtml()
-	{
+	protected function _toHtml() {
 		$customer = rm_session_customer()->getCustomer();
-		if ($customer && $customer->getId()) {
-			$this->_rewardInstance =
-				Df_Reward_Model_Reward::i()
-					->setCustomer($customer)
-					->setWebsiteId(Mage::app()->getWebsite()->getId())
-					->loadByCustomer()
-			;
-			if ($this->_rewardInstance->getId()) {
-				$this->_prepareTemplateData();
-				return parent::_toHtml();
-			}
+		$this->_rewardInstance =
+			Df_Reward_Model_Reward::i()
+				->setCustomer($customer)
+				->setWebsiteId(rm_website_id())
+				->loadByCustomer()
+		;
+		if ($this->_rewardInstance->getId()) {
+			$this->_prepareTemplateData();
+			return parent::_toHtml();
 		}
 		return '';
 	}
@@ -54,4 +53,13 @@ class Df_Reward_Block_Customer_Reward_Info extends Df_Core_Block_Template_NoCach
 			,'is_history_published' => (int)df_h()->reward()->getGeneralConfig('publish_history')
 		));
 	}
+
+	/**
+	 * @override
+	 * @see Df_Core_Block_Abstract::needToShow()
+	 * @used-by Df_Core_Block_Abstract::_loadCache()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
+	 * @return bool
+	 */
+	protected function needToShow() {return rm_customer_logged_in();}
 }

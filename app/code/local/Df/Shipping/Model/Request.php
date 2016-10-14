@@ -1,16 +1,89 @@
 <?php
 class Df_Shipping_Model_Request extends Df_Core_Model {
 	/**
+	 * Не все запросы к серверу предназначены для получения срока доставки,
+	 * однако иметь метод @see getDeliveryTime() в базовом классе выгодно:
+	 * смотрите комментарий к методу @see getRate()
+	 * @uses _filterDeliveryTime()
+	 * @uses _getDeliveryTime()
+	 * @return int
+	 */
+	public function getDeliveryTime() {return $this->call(__FUNCTION__);}
+
+	/**
+	 * Не все запросы к серверу предназначены для получения срока доставки,
+	 * однако иметь метод @see getDeliveryTimeMax() в базовом классе выгодно:
+	 * смотрите комментарий к методу @see getRate()
+	 * @uses _filterDeliveryTimeMax()
+	 * @uses _getDeliveryTimeMax()
+	 * @return int
+	 */
+	public function getDeliveryTimeMax() {return $this->call(__FUNCTION__);}
+
+	/**
+	 * Не все запросы к серверу предназначены для получения срока доставки,
+	 * однако иметь метод @see getDeliveryTimeMin() в базовом классе выгодно:
+	 * смотрите комментарий к методу @see getRate()
+	 * @uses _filterDeliveryTimeMin()
+	 * @uses _getDeliveryTimeMin()
+	 * @return int
+	 */
+	public function getDeliveryTimeMin() {return $this->call(__FUNCTION__);}
+
+	/**
+	 * 2015-02-20
+	 * Не все запросы к серверу предназначены для получения тарифа.
+	 * Например, некоторые запросы предназначекны для получения перечня пунктов доставки.
+	 * Однако, иметь метод @see getRate() в базовом классе нам очень удобно:
+	 * это позволяет не дублировать данную функциональность в тех классах-потомках, где она требуется.
+	 * Другими словами, у нас ситуация: метод @see getRate() нужен примерно половине классов-потомков,
+	 * однако мы не можем вынести метод @see getRate() в общий подкласс-родитель той половины
+	 * классов потомков класса @see Df_Shipping_Model_Request, которым требуется метод @see @see getRate(),
+	 * потому что у этих классов уже есть своя иерархия (иерархия по службе доставки: у API каждой службы
+	 * доставки ведь своя специфика и своя общая функциональность для всех потомков).
+	 * @uses _filterRate()
+	 * @uses _getRate()
+	 * @return float|int
+	 */
+	public function getRate() {return $this->call(__FUNCTION__);}
+
+	/**
 	 * Веб-сервисы служб доставки часто возвращают данные в формате,
 	 * очень похожем на JSON, но требующем некоторых корректировок
-	 * перед вызовом Zend_Json::decode.
-	 * Метод публичен, потому что его использует класс @see Df_Shipping_Model_Response
+	 * перед вызовом @see Zend_Json::decode()
+	 * @used-by Df_Shipping_Model_Response::json()
 	 * @param string $responseAsText
 	 * @return string
 	 */
 	public function preprocessJson($responseAsText) {return $responseAsText;}
 
-	/** @return Df_Shipping_Model_Response */
+	/**
+	 * @return string
+	 */
+	public function report() {
+		/** @var string[] $parts */
+		$parts = array(
+			'Модуль: ' . $this->getCarrier()->getTitle()
+			,'Адрес: ' . $this->getUri()->__toString()
+		);
+		/** @var array(string => string) $params */
+		$params = $this->getPostParameters() + $this->getQueryParams();
+		if ($params || $this->getPostRawData()) {
+			$parts[]= 'Параметры:';
+			if ($params) {
+				$parts[]= rm_print_params($params);
+			}
+			if ($this->getPostRawData()) {
+				$parts[]= $this->getPostRawData();
+			}
+		}
+		return(df_concat_n($parts));
+	}
+
+	/**
+	 * @used-by Df_Exline_Locator::_map()
+	 * @return Df_Shipping_Model_Response
+	 */
 	public function response() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Shipping_Model_Response::i($this, $this->getResponseAsText());
@@ -19,11 +92,102 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	}
 
 	/**
+	 * @used-by Df_Shipping_Model_Request::getDeliveryTime()
+	 * @param string|int $value
+	 * @return int
+	 */
+	protected function _filterDeliveryTime($value) {return rm_nat($value);}
+
+	/**
+	 * @used-by Df_Shipping_Model_Request::getDeliveryTimeMax()
+	 * @param string|int $value
+	 * @return int
+	 */
+	protected function _filterDeliveryTimeMax($value) {return $this->_filterDeliveryTime($value);}
+
+	/**
+	 * @used-by Df_Shipping_Model_Request::getDeliveryTimeMin()
+	 * @param string|int $value
+	 * @return int
+	 */
+	protected function _filterDeliveryTimeMin($value) {return $this->_filterDeliveryTime($value);}
+
+	/**
+	 * @used-by Df_Shipping_Model_Request::getRate()
+	 * @param float|int|string $value
+	 * @return float
+	 */
+	protected function _filterRate($value) {return rm_float_positive($value);}
+
+	/**
+	 * Этот метод предназначен для перекрытия потомками.
+	 * @used-by Df_Shipping_Model_Request::getDeliveryTime()
+	 * @return int|string
+	 */
+	protected function _getDeliveryTime() {df_abstract(__METHOD__);}
+
+	/**
+	 * Этот метод предназначен для перекрытия потомками.
+	 * @used-by Df_Shipping_Model_Request::getRate()
+	 * @return float|int|string
+	 */
+	protected function _getRate() {df_abstract(__METHOD__);}
+
+	/**
+	 * Этот метод предназначен для перекрытия потомкими.
+	 * @see Df_RussianPost_Model_Official_Request_International::adjustHttpClient()
 	 * @used-by getHttpClient()
 	 * @param Zend_Http_Client $httpClient
 	 * @return void
 	 */
 	protected function adjustHttpClient(Zend_Http_Client $httpClient) {}
+
+	/**
+	 * @used-by getDeliveryTime()
+	 * @used-by getDeliveryTimeMax()
+	 * @used-by getDeliveryTimeMin()
+	 * @used-by getRate()
+	 * @used-by Df_Cdek_Model_Request_Rate::getServiceId()
+	 * @param string $method
+	 * @return mixed
+	 * @throws Exception
+	 */
+	protected function call($method) {
+		if (!isset($this->{__METHOD__}[$method])) {
+			try {
+				if (false === $this->_responseFailureChecked) {
+					$this->responseFailureDetect();
+					$this->_responseFailureChecked = true;
+				}
+				/**
+				 * Вызываем внутренний метод для извлечения данных из ответа сервера.
+				 * Например, для метода @see getRate() будет вызван метод @see _getRate().
+				 */
+				/** @var mixed $result */
+				$result = call_user_func(array($this, '_' . $method));
+				/**
+				 * Выполняем фильтрацию и проверку результата.
+				 * Например, для метода @see getRate() будет вызван метод @see _filterRate().
+				 */
+				/** @var string $filter */
+				$filter = '_filter' . df_trim_text_left($method, 'get');
+				if (method_exists($this, $filter)) {
+					$result = call_user_func(array($this, $filter), $result);
+				}
+				$this->{__METHOD__}[$method] = $result;
+			}
+			catch (Exception $e) {
+				// В случае сбоя на стороне службы доставки расчёта тарифа
+				// (например, служба Деловые Линии может выдавать ответ:
+				// «Сервис временно недоступен. Попробуйте посчитать стоимость доставки чуть позже.»)
+				// надо удалить кэш,
+				// чтобы при следующем оформлении заказа модуль сделал запрос тарифа заново.
+				$this->removeCache();
+				throw $e;
+			}
+		}
+		return $this->{__METHOD__}[$method];
+	}
 
 	/** @return Df_Core_Model_Cache */
 	protected function getCache() {
@@ -54,25 +218,34 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Df_Shipping_Model_Carrier */
+	/** @return Df_Shipping_Carrier */
 	protected function getCarrier() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $className */
-			$className = Df_Core_Model_ClassManager::s()->getResourceClass($this, 'Model_Carrier');
-			df_assert_ne('Df_Shipping_Model_Carrier', $className);
+			$className = rm_convention($this, 'Model_Carrier');
 			$this->{__METHOD__} = new $className(array(
-				Df_Shipping_Model_Carrier::P__STORE => Mage::app()->getStore()
+				Df_Shipping_Carrier::P__STORE => rm_store()
 			));
-			df_assert($this->{__METHOD__} instanceof Df_Shipping_Model_Carrier);
+			df_assert($this->{__METHOD__} instanceof Df_Shipping_Carrier);
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2015-02-21
+	 * Этот метод предназначен для перекрытия потомками.
+	 * @used-by Df_Shipping_Model_Request::getDeliveryTime()
+	 * @return int
+	 */
+	protected function getDeliveryTimeInternal() {df_abstract(__METHOD__);}
 
 	/** @return string */
 	protected function getErrorMessage() {return '';}
 
 	/** @return array(string => string) */
-	protected function getHeaders() {return $this->cfg(self::P__HEADERS, array());}
+	protected function getHeaders() {return array(
+		'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0'
+	);}
 
 	/** @return Zend_Http_Client */
 	protected function getHttpClient() {
@@ -87,18 +260,8 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 			$this->{__METHOD__} = new Zend_Http_Client();
 			$this->{__METHOD__}
 				->setHeaders($this->getHeaders())
-				->setConfig(
-					array_merge(
-						array('timeout' => 10)
-						,$this->getRequestConfuguration()
-					)
-				)
+				->setConfig($this->getRequestConfuguration() + array('timeout' => 10))
 			;
-			/** @var Zend_Http_CookieJar|null $cookieJar */
-			$cookieJar = $this->cfg(self::P__COOKIE_JAR);
-			if ($cookieJar) {
-				$this->{__METHOD__}->setCookieJar($cookieJar);
-			}
 			$this->adjustHttpClient($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
@@ -133,6 +296,16 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 		return $this->cfg(self::P__REQUEST_METHOD, Zend_Http_Client::GET);
 	}
 
+	/** @return string */
+	protected function getResponseAsTextInternal() {
+		/** @var string $result */
+		$result = $this->getResponse()->getBody();
+		if ($this->needConvertResponseFrom1251ToUtf8()) {
+			$result = str_replace('charset=windows-1251', 'charset=utf-8', rm_1251_from($result));
+		}
+		return $result;
+	}
+
 	/** @return Zend_Uri_Http */
 	protected function getUri() {
 		if (!isset($this->{__METHOD__})) {
@@ -147,65 +320,6 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
-	}
-
-	/** @return Df_Shipping_Model_Request */
-	protected function logRequestParameters() {
-		rm_report(
-			rm_sprintf('%s-{ordering}.log', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
-			,rm_print_params($this->getQueryParams())
-		);
-		return $this;
-	}
-
-	/** @return Df_Shipping_Model_Request */
-	protected function logResponseAsHtml() {
-		rm_report(
-			rm_sprintf('%s-{ordering}.html', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
-			, $this->getResponseAsText()
-		);
-		return $this;
-	}
-
-	/** @return Df_Shipping_Model_Request */
-	protected function logResponseAsJson() {
-		/** @var mixed[] $responseAsArray */
-		$responseAsArray = null;
-		try {
-			$responseAsArray = $this->response()->json();
-		}
-		catch (Exception $e) {}
-		rm_report(
-			rm_sprintf('%s-{ordering}.json', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
-			, is_null($responseAsArray)
-			? $this->getResponseAsText()
-			: rm_print_params($responseAsArray)
-		);
-		return $this;
-	}
-
-	/** @return string */
-	protected function getResponseAsTextInternal() {
-		/** @var string $result */
-		$result = $this->getHttpResponse()->getBody();
-		if ($this->needConvertResponseFrom1251ToUtf8()) {
-			$result =
-				str_replace(
-					'charset=windows-1251', 'charset=utf-8'
-					, df_text()->convertWindows1251ToUtf8($result)
-				)
-			;
-		}
-		return $result;
-	}
-
-	/** @return Df_Shipping_Model_Request */
-	protected function logResponseAsXml() {
-		rm_report(
-			rm_sprintf('%s-{ordering}.xml', Df_Core_Model_ClassManager::s()->getFeatureCode($this))
-			,$this->getResponseAsText()
-		);
-		return $this;
 	}
 
 	/** @return bool */
@@ -225,95 +339,12 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	 * @return bool
 	 */
 	protected function needPostKeysWithSameName() {return false;}
-	
+
 	/**
-	 * @return Df_Shipping_Model_Request
+	 * @return void
 	 * @throws Exception
 	 */
-	protected function responseFailureDetect() {
-		if (false === $this->_responseFailureChecked) {
-			$this->responseFailureDetectInternal();
-			$this->_responseFailureChecked = true;
-		}
-		return $this;
-	}
-	/** @var bool */
-	private $_responseFailureChecked = false;
-
-	/**
-	 * @return Df_Shipping_Model_Request
-	 * @throws Exception
-	 */
-	protected function responseFailureDetectInternal() {return $this;}
-
-	/**
-	 * @param Exception|string $message
-	 * @return Df_Shipping_Model_Request
-	 */
-	protected function responseFailureHandle($message) {
-		// В случае сбоя на стороне службы доставки расчёта тарифа
-		// (например, служба Деловые Линии может выдавать ответ:
-		// «Сервис временно недоступен. Попробуйте посчитать стоимость доставки чуть позже.»)
-		// надо удалить кэш, чтобы при следующем оформлении заказа модуль сделал запрос тарифа заново.
-		if ($this->needCacheResponse()) {
-			$this->getCache()->removeData($this->getCacheKey_Shipping());
-		}
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
-		if (1 < count($arguments)) {
-			$message = rm_sprintf($arguments);
-		}
-		$this->logRequest($message);
-		if ($message instanceof Exception) {
-			/** @var Exception $e */
-			$e = $message;
-			$message = rm_ets($e);
-			if (!($e instanceof Df_Core_Exception_Client)) {
-				df_notify_exception($e);
-				$message = df_mage()->shippingHelper()->__(Df_Shipping_Model_Carrier::T_INTERNAL_ERROR);
-			}
-			/**
-			 * Вообще говоря, причиной сбоя self::MESSAGE__ERROR_PARSING_BODY
-			 * был некорректно работающий класс Varien_Http_Client.
-			 * После замены его на Varien_Http_Client побобный сбой вроде не возникает.
-			 */
-			if (self::MESSAGE__ERROR_PARSING_BODY === $message) {
-				$message = 'Служба доставки не смогла рассчитать тариф';
-			}
-		}
-		df_error($message ? $message : self::T__ERROR_MESSAGE__DEFAULT);
-		return $this;
-	}
-
-	/**
-	 * @param Exception|string |null$message [optional]
-	 * @return Df_Shipping_Model_Request
-	 */
-	protected function logRequest($message = null) {
-		/** @var bool $isException */
-		$isException = ($message instanceof Exception);
-		if ($isException) {
-			$message = rm_ets($message);
-		}
-		if ($isException || $this->needLogNonExceptionErrors()) {
-			/** @var array $logRecordParts */
-			$logRecordParts = array(self::T__ERROR_MESSAGE__DEFAULT);
-			$logRecordParts[]= rm_sprintf('Модуль: %s', $this->getCarrier()->getTitle());
-			if ($message) {
-				$logRecordParts[]= $message;
-			}
-			$logRecordParts[]= rm_sprintf('Адрес: %s', $this->getUri()->__toString());
-			$logRecordParts[]=
-				rm_print_params(
-					$this->isItPost()
-					? ($this->getPostRawData() ? $this->getPostRawData() : $this->getPostParameters())
-					: $this->getUri()->getQueryAsArray()
-				)
-			;
-			df_h()->shipping()->log(implode("\n", $logRecordParts), $сaller = $this);
-		}
-		return $this;
-	}
+	protected function responseFailureDetect() {}
 
 	/** @return string */
 	private function getCacheKey_Shipping() {
@@ -331,7 +362,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	}
 	
 	/** @return Zend_Http_Response */
-	private function getHttpResponse() {
+	private function getResponse() {
 		if (!isset($this->{__METHOD__})) {
 			$this->getHttpClient()->setUri($this->getUri());
 			if ($this->isItPost()) {
@@ -348,16 +379,12 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 							 * Некоторые калькуляторы допускают несколько одноимённых опций.
 							 * http_build_query кодирует их как a[0]=1&a[1]=2&a[2]=3
 							 * Чтобы убрать квадратные скобки, используем регулярное выражение
-							 * @link http://www.php.net/manual/en/function.http-build-query.php#78603
+							 * http://www.php.net/manual/en/function.http-build-query.php#78603
 							 */
 							preg_replace(
 								'#%5B(?:[0-9]|[1-9][0-9]+)%5D=#u'
 								,'='
-								,http_build_query(
-									$this->getPostParameters()
-									,''
-									,'&'
-								)
+								,http_build_query($this->getPostParameters(), '', '&')
 							)
 						);
 					}
@@ -393,7 +420,10 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
+	/**
+	 * @return string
+	 * @throws Df_Shipping_Exception_NoResponse
+	 */
 	private function getResponseAsText() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
@@ -405,8 +435,9 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 				try {
 					$result = $this->getResponseAsTextInternal();
 				}
-				catch(Exception $e) {
-					$this->responseFailureHandle($e);
+				catch (Exception $e) {
+					$this->removeCache();
+					throw new Df_Shipping_Exception_NoResponse($e, $this);
 				}
 				if ($this->needCacheResponse()) {
 					$this->getCache()->saveData($this->getCacheKey_Shipping(), $result);
@@ -420,6 +451,13 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	/** @return bool */
 	private function isItPost() {return Zend_Http_Client::POST === $this->getRequestMethod();}
 
+	/** @return void */
+	private function removeCache() {
+		if ($this->needCacheResponse()) {
+			$this->getCache()->removeData($this->getCacheKey_Shipping());
+		}
+	}
+
 	/**
 	 * @override
 	 * @return void
@@ -427,31 +465,26 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__COOKIE_JAR, 'Zend_Http_CookieJar', false)
-			->_prop(self::P__HEADERS, self::V_ARRAY, false)
-			->_prop(self::P__POST_PARAMS, self::V_ARRAY, false)
-			->_prop(self::P__QUERY_HOST, self::V_STRING, false)
-			->_prop(self::P__QUERY_PARAMS, self::V_ARRAY, false)
-			->_prop(self::P__QUERY_PATH, self::V_STRING, false)
-			->_prop(self::P__REQUEST_METHOD, self::V_STRING, false)
+			->_prop(self::P__POST_PARAMS, RM_V_ARRAY, false)
+			->_prop(self::P__QUERY_HOST, RM_V_STRING, false)
+			->_prop(self::P__QUERY_PARAMS, RM_V_ARRAY, false)
+			->_prop(self::P__QUERY_PATH, RM_V_STRING, false)
+			->_prop(self::P__REQUEST_METHOD, RM_V_STRING, false)
 		;
 	}
-	const _CLASS = __CLASS__;
+	/** @var bool */
+	private $_responseFailureChecked = false;
+
+	/** @used-by Df_Shipping_Model_Response::_construct() */
+	const _C = __CLASS__;
 	const CACHE_TYPE = 'rm_shipping';
-	const MESSAGE__ERROR_PARSING_BODY =
-		'Error parsing body - doesn\'t seem to be a chunked message'
-	;
-	const NO_INTERNET = false;
-	const P__COOKIE_JAR = 'cookie_jar';
-	const P__HEADERS = 'headers';
+	const MESSAGE__ERROR_PARSING_BODY = 'Error parsing body - doesn\'t seem to be a chunked message';
 	const P__POST_PARAMS = 'post_params';
 	const P__QUERY_HOST = 'query_host';
 	const P__QUERY_PARAMS = 'query_params';
 	const P__QUERY_PATH = 'query_path';
 	const P__REQUEST_METHOD = 'request_method';
-	const T__ERROR_MESSAGE__DEFAULT =
-		'Обращение к программному интерфейсу службы доставки привело к сбою.'
-	;
+	const T__ERROR_MESSAGE__DEFAULT = 'Обращение к программному интерфейсу службы доставки привело к сбою.';
 
 	/**
 	 * @used-by uriAreEqual()

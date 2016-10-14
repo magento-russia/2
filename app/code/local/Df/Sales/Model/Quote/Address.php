@@ -1,4 +1,7 @@
 <?php
+/**
+ * @method Df_Sales_Model_Quote_Address setStreet(string $value)
+ */
 class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 	/**
 	 * Цель перекрытия —
@@ -15,12 +18,37 @@ class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 			 * потому что метод Mage_Core_Helper_Data::getDefaultCountry
 			 * отсутствует в Magento 1.4.0.1
 			 */
-			$result = Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_COUNTRY);
+			$result = Df_Core_Helper_DataM::s()->getDefaultCountry();
 		}
 		if (!is_null($result)) {
 			df_result_string($result);
 		}
 		return $result;
+	}
+
+	/** @return void */
+	public function convertStreetToText() {
+		if (is_array($this->getStreet())) {
+			$this->setStreet($this->getStreetAsText());
+		}
+	}
+
+	/**
+	 * Намеренно не кэшируем результат:
+	 * на производительность системы в целом кэширование адреса никак не повлияет,
+	 * а вот вероятность ошибки при изменении адреса увеличивает.
+	 * @return string
+	 */
+	public function getStreetAsText() {
+		/**
+		 * Обратите внимание, что @uses getStreetFull()
+		 * может вернуть как строку, так и массив строк.
+		 */
+		return
+			!is_array($this->getStreetFull())
+			? $this->getStreetFull()
+			: df_concat_n(df_clean($this->getStreetFull()))
+		;
 	}
 
 	/**
@@ -46,14 +74,7 @@ class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 
 	/** @return bool */
 	private function isCustomValidationNeeded() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					df_cfg()->checkout()->_interface()->needShowAllStepsAtOnce()
-				&&
-					$this->getAddressType()
-			;
-		}
-		return $this->{__METHOD__};
+		return rm_checkout_ergonomic() && $this->getAddressType();
 	}
 
 	/** @return Df_Customer_Model_Address_Validator */
@@ -64,7 +85,8 @@ class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
+	const P__STREET = 'street';
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

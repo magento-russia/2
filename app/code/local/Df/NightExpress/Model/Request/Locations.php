@@ -41,7 +41,7 @@ class Df_NightExpress_Model_Request_Locations extends Df_NightExpress_Model_Requ
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @return Df_NightExpress_Model_Request_Locations */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

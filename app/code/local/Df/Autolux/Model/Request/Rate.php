@@ -21,9 +21,8 @@ class Df_Autolux_Model_Request_Rate extends Df_Autolux_Model_Request {
 	 */
 	protected function getQueryPath() {return '/Autolux/inc/Pages/PatternStd/img/rates.php';}
 
-	const _CLASS = __CLASS__;
 	/**
-	 * @static
+	 * @used-by Df_Autolux_Model_Method::getApi()
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Autolux_Model_Request_Rate
 	 */

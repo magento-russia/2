@@ -1,83 +1,61 @@
 <?php
 /**
- * @method Varien_Data_Tree_Node|null getRoot(Mage_Catalog_Model_Category $parentNodeCategory = null, int $recursionLevel = 3)
+ * @used-by Df_AccessControl_AdminController::categoriesAction()
+ * @used-by Df_AccessControl_Block_Admin_Tab::renderCategoryTree()
+ * @method Varien_Data_Tree_Node|null getRoot(Df_Catalog_Model_Category $parentNodeCategory = null, int $recursionLevel = 3)
  */
 class Df_AccessControl_Block_Admin_Tab_Tree	extends Mage_Adminhtml_Block_Catalog_Category_Tree {
 	/**
-	 * @param int $categoryId
-	 * @param int $roleId
-	 * @return mixed[][]
-	 */
-	public function getChildrenNodes($categoryId, $roleId) {
-		df_param_integer($categoryId, 0);
-		df_param_integer($roleId, 1);
-		/** @var mixed[][] $result */
-		$result = array();
-		/** @var Varien_Data_Tree $tree */
-		$tree = $this->getRoot(Df_Catalog_Model_Category::ld($categoryId), $storeId = 1)->getTree();
-		/** @var Varien_Data_Tree_Node|null $node */
-		$node = $tree->getNodeById($categoryId);
-		if ($node && $node->hasChildren()) {
-			foreach ($node->getChildren() as $child) {
-				/** Varien_Data_Tree_Node $node */
-				$result[]= $this->_getNodeJson($child);
-			}
-		}
-		return $result;
-	}
-
-	/**
 	 * @override
-	 * @param bool|null $expanded[optional]
+	 * @see Mage_Adminhtml_Block_Catalog_Category_Tree::getLoadTreeUrl()
+	 * @used-by app/design/adminhtml/rm/default/template/df/access_control/tab/tree.phtml
+	 * @param bool|null $expanded [optional]
 	 * @return string
 	 */
 	public function getLoadTreeUrl($expanded = null) {
-		return $this->getUrl('df_access_control/admin/categories', array('rid' => $this->getRoleId()));
-	}
-
-	/** @return string */
-	public function getSelectedCategoriesAsString() {
-		// Результат может быть пустой строкой!
-		return implode(',', $this->getSelectedCategories());
+		return $this->getUrl('df_access_control/admin/categories', array('rid' => $this->roleId()));
 	}
 
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getTemplate()
+	 * @used-by Mage_Core_Block_Template::_toHtml()
+	 * @used-by Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Mage_Core_Block_Template::getTemplateFile()
 	 * @return string|null
 	 */
 	public function getTemplate() {
 		return
-			!(df_enabled(Df_Core_Feature::ACCESS_CONTROL) && df_cfg()->admin()->access_control()->getEnabled())
+			!df_cfg()->admin()->access_control()->getEnabled()
 			? null
 			: 'df/access_control/tab/tree.phtml'
 		;
 	}
 
 	/** @return bool */
-	public function isRootVisible() {
-		return !is_null($this->getRoot()) && $this->getRoot()->getDataUsingMethod('is_visible');
-	}
-
-	/** @return bool */
 	public function isTreeEmpty() {return !$this->getRoot() || !$this->getRoot()->hasChildren();}
 
 	/**
-	 * Get JSON of a tree node or an associative array
 	 * @override
+	 * @see Mage_Adminhtml_Block_Catalog_Category_Tree::_getNodeJson()
+	 * @used-by getChildrenNodes()
+	 * @used-by Mage_Adminhtml_Block_Catalog_Category_Tree::getBreadcrumbsJavascript()
+	 * @used-by Mage_Adminhtml_Block_Catalog_Category_Tree::getTree()
+	 * @used-by Mage_Adminhtml_Block_Catalog_Category_Tree::getTreeJson()
 	 * @param Varien_Data_Tree_Node|array $node
-	 * @param int $level[optional]
-	 * @return mixed[]
+	 * @param int $level [optional]
+	 * @return array(string => mixed)
 	 */
 	protected function _getNodeJson($node, $level = 1) {
 		if (is_array($node)) {
-			$node = new Varien_Data_Tree_Node ($node, 'entity_id', new Varien_Data_Tree);
+			$node = new Varien_Data_Tree_Node($node, 'entity_id', new Varien_Data_Tree);
 		}
 		df_assert($node instanceof Varien_Data_Tree_Node);
 		df_param_integer($level, 1);
 		/** @var mixed[] $result */
 		$result = parent::_getNodeJson($node, $level);
 		/** @var bool $needBeChecked */
-		$needBeChecked = in_array($node->getId(), $this->getSelectedCategories());
+		$needBeChecked = in_array($node->getId(), $this->selectedCategories());
 		if ($needBeChecked) {
 			$result['checked'] = true;
 		}
@@ -87,33 +65,60 @@ class Df_AccessControl_Block_Admin_Tab_Tree	extends Mage_Adminhtml_Block_Catalog
 		return $result;
 	}
 
-	/** @return Df_AccessControl_Model_Role */
-	private function getRole() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_AccessControl_Model_Role::i();
-			// Обратите внимание,
-			// что объект Df_AccessControl_Model_Role может отсутствовать в БД.
-			// Видимо, это дефект моего программирования 2011 года.
-			$this->{__METHOD__}->load($this->getRoleId());
-		}
-		return $this->{__METHOD__};
+	/**
+	 * @used-by app/design/adminhtml/rm/default/template/df/access_control/tab/tree.phtml
+	 * @return bool
+	 */
+	protected function isRootVisible() {
+		return $this->getRoot() && $this->getRoot()->getData('is_visible');
 	}
 
-	/** @return int|null */
-	private function getRoleId() {return df_request('rid');}
-
-	/** @return int[] */
-	private function getSelectedCategories() {
+	/**
+	 * @used-by _getNodeJson()
+	 * @used-by selectedCategoriesS()
+	 * @used-by app/design/adminhtml/rm/default/template/df/access_control/tab/tree.phtml
+	 * @return int[]
+	 */
+	protected function selectedCategories() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				!$this->getRole()->isModuleEnabled()
+				!$this->roleId()
 				? array()
-				: $this->getRole()->getCategoryIds()
+				: Df_AccessControl_Model_Role::ld($this->roleId())->getCategoryIds()
 			;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_AccessControl_Block_Admin_Tab_Tree */
-	public static function i() {return df_block(__CLASS__);}
+	/**
+	 * Метод вернт null в сценарии создания роли (когда роль ещё не сохранена в БД).
+	 * @used-by selectedCategories()
+	 * @used-by getLoadTreeUrl()
+	 * @return int|null
+	 */
+	private function roleId() {return rm_request('rid');}
+
+	/**
+	 * @used-by Df_AccessControl_AdminController::getChildrenNodes()
+	 * @param int $categoryId
+	 * @return array(array(string => mixed))
+	 */
+	public static function getChildrenNodes($categoryId) {
+		/** @var array(array(string => mixed)) $result */
+		$result = array();
+		/** @var Df_AccessControl_Block_Admin_Tab_Tree $i */
+		$i = new self;
+		/** @var Varien_Data_Tree $tree */
+		$tree = $i->getRoot(Df_Catalog_Model_Category::ld($categoryId), $storeId = 1)->getTree();
+		/** @var Varien_Data_Tree_Node|null $node */
+		/** @noinspection PhpParamsInspection */
+		$node = $tree->getNodeById($categoryId);
+		if ($node) {
+			foreach ($node->getChildren() as $child) {
+				/** Varien_Data_Tree_Node $child */
+				$result[]= $i->_getNodeJson($child);
+			}
+		}
+		return $result;
+	}
 }

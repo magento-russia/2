@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_WebMoney>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>WebMoney</title>
+			<version>1.0.0</version>
 		</Df_WebMoney>
 	</modules>
 	<global>
@@ -36,7 +37,7 @@
 		-->
 		<payment>
 			<df-webmoney>
-				<model>df_webmoney/payment</model>
+				<model>Df_WebMoney_Model_Payment</model>
 			</df-webmoney>
 		</payment>
 	</default>

@@ -17,42 +17,26 @@ class Df_Core_Model_Design_Package extends Df_Core_Model {
 	/** @return string|null */
 	public function getVersion() {return $this->getPackageConfigParam(self::PACKAGE_PARAM__VERSION);}
 
-	/** @return mixed[] */
+	/** @return array(string => mixed) */
 	private function getPackageConfig() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var mixed[] $result  */
-			$result = array();
-			if ($this->isCustom()) {
-				/** @var Mage_Core_Model_Config_Element|bool $configNode */
-				$configNode =
-					Mage::getConfig()->getNode(
-						rm_config_key('rm/design/package', rm_design_package()->getPackageName())
-					)
-				;
-				if ($configNode) {
-					$result = $configNode->asCanonicalArray();
-				}
-			}
-			/**
-			 * Varien_Simplexml_Element::asCanonicalArray может возвращать строку в случае,
-			 * когда структура исходных данных не соответствует массиву.
-			 */
-			df_result_array($result);
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = !$this->isCustom() ? array() : rm_config_a(
+				'rm/design/package', rm_design_package()->getPackageName()
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * @param string $paramName
-	 * @param mixed $defaultValue[optional]
+	 * @param mixed $defaultValue [optional]
 	 * @return string
 	 */
 	private function getPackageConfigParam($paramName, $defaultValue = null) {
 		return df_a($this->getPackageConfig(), $paramName, $defaultValue);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const PACKAGE_PARAM__DEFAULT_ROUTE = 'default-route';
 	const PACKAGE_PARAM__VERSION = 'version';
 

@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_promotion translate='label' module='df_promotion'>
+		<df_promotion>
 			<label>Повышение продаж</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>

@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Psbank>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Промсвязьбанк</title>
+			<version>1.0.0</version>
 		</Df_Psbank>
 	</modules>
 	<global>
@@ -56,7 +57,7 @@
 		-->
 		<payment>
 			<df-psbank>
-				<model>df_psbank/payment</model>
+				<model>Df_Psbank_Model_Payment</model>
 			</df-psbank>
 		</payment>
 	</default>

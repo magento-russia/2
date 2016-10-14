@@ -2,7 +2,7 @@
 class Df_Core_Model_InputRequest extends Df_Core_Model {
 	/**
 	 * @param string $paramName
-	 * @param string $defaultValue[optional]
+	 * @param string $defaultValue [optional]
 	 * @return string|null
 	 */
 	public function getParam($paramName, $defaultValue = null) {
@@ -74,7 +74,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 			."\nЗапрос: «{url}»"
 			."\nДопустимые значения параметра «{paramName}»: {allowedValues}."
 			,array(
-				'{allowedValues}' => df_quote_and_concat($allowedValues)
+				'{allowedValues}' => df_csv_pretty_quote($allowedValues)
 				,'{paramName}' => $paramName
 				,'{paramValue}' => $paramValue
 				,'{prefix}' => $this->getErrorMessagePrefix()
@@ -87,7 +87,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 	protected function getErrorMessagePrefix() {return '';}
 
 	/** @return Mage_Core_Controller_Request_Http */
-	protected function getRequest() {return $this->cfg(self::P__REQUEST);}
+	protected function getRequest() {return $this->cfg(self::$P__REQUEST);}
 
 	/**
 	 * @override
@@ -95,9 +95,18 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST, 'Mage_Core_Controller_Request_Http');
+		$this->_prop(self::$P__REQUEST, 'Mage_Core_Controller_Request_Http');
 	}
-	/** Используется из @see Df_Core_Model_Controller_Action::getRmRequestClass() */
-	const _CLASS = __CLASS__;
-	const P__REQUEST = 'request';
+	/** @var string */
+	private static $P__REQUEST = 'request';
+
+	/**
+	 * @used-by Df_Core_Model_Action::getRmRequest()
+	 * @param string $class
+	 * @param Mage_Core_Controller_Request_Http $request
+	 * @return Df_Core_Model_InputRequest
+	 */
+	public static function ic($class, Mage_Core_Controller_Request_Http $request) {
+		return rm_ic($class, __CLASS__, array(self::$P__REQUEST => $request));
+	}
 }

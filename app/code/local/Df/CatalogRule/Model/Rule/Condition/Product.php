@@ -5,12 +5,12 @@ class Df_CatalogRule_Model_Rule_Condition_Product extends Mage_CatalogRule_Model
 	 * устранение дефекта Magento CE 1.8:
 	 * ценовые правила для каталога с условиями, основанными на товарных свойствах
 	 * с глобальной областью доступности, работают неправильно.
-	 * @link https://www.google.com/search?q=Magento+1.8+rule+not+working
-	 * @link http://stackoverflow.com/a/19976036
-	 * @link https://bitbucket.org/gferon/magento-1.8-catalogrule-fix/
-	 * @link http://www.magentocommerce.com/bug-tracking/issue?issue=15936
-	 * @link http://www.magentocommerce.com/bug-tracking/issue?issue=15896
-	 * @link http://www.magentocommerce.com/bug-tracking/issue?issue=15075
+	 * https://www.google.com/search?q=Magento+1.8+rule+not+working
+	 * http://stackoverflow.com/a/19976036
+	 * https://bitbucket.org/gferon/magento-1.8-catalogrule-fix/
+	 * http://www.magentocommerce.com/bug-tracking/issue?issue=15936
+	 * http://www.magentocommerce.com/bug-tracking/issue?issue=15896
+	 * http://www.magentocommerce.com/bug-tracking/issue?issue=15075
 	 *
 	 * @override
 	 * @param Varien_Object $object
@@ -19,7 +19,7 @@ class Df_CatalogRule_Model_Rule_Condition_Product extends Mage_CatalogRule_Model
 	protected function _getAttributeValue($object) {
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
-		if (!isset($patchNeeded)) {
+		if (is_null($patchNeeded)) {
 			$patchNeeded = df_magento_version('1.8.0.0', '1.8.1.0');
 		}
 		/** @var mixed $result */

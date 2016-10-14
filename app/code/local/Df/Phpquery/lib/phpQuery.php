@@ -575,7 +575,6 @@ abstract class phpQuery {
 					continue;
 				if (isset(self::$pluginsStaticMethods[$method])) {
 					throw new Exception("Duplicate method '{$method}' from plugin '{$c}' conflicts with same method from plugin '".self::$pluginsStaticMethods[$method]."'");
-					return;
 				}
 				self::$pluginsStaticMethods[$method] = $class;
 			}
@@ -609,7 +608,8 @@ abstract class phpQuery {
 	 */
 	public static function unloadDocuments($id = null) {
 		if (isset($id)) {
-			if ($id = self::getDocumentID($id))
+			$id = self::getDocumentID($id);
+			if ($id)
 				unset(phpQuery::$documents[$id]);
 		} else {
 			foreach (phpQuery::$documents as $k => $v) {
@@ -941,7 +941,7 @@ abstract class phpQuery {
 	 */
 	public static function parseJSON($json) {
 		if (function_exists('json_decode')) {
-			$return = df_json_decode(trim($json));
+			$return = json_decode(trim($json), true);
 			// json_decode and UTF8 issues
 			if (isset($return))
 				return $return;

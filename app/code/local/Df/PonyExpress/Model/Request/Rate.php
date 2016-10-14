@@ -16,13 +16,11 @@ class Df_PonyExpress_Model_Request_Rate extends Df_Shipping_Model_Request {
 			}
 			catch (Exception $e) {
 				$this->logResponseAsJson();
-				throw $e;
+				df_error($e);
 			}
 		}
 		return $this->{__METHOD__};
 	}
-	/** @var array(array(string => string))*/
-	private $_variants;
 
 	/**
 	 * @override
@@ -33,16 +31,16 @@ class Df_PonyExpress_Model_Request_Rate extends Df_Shipping_Model_Request {
 
 	/**
 	 * @override
-	 * @return Df_Shipping_Model_Carrier
+	 * @return Df_Shipping_Carrier
 	 */
-	protected function getCarrier() {return $this->cfg(self::P__CARRIER);}
+	protected function getCarrier() {return $this->cfg(self::$P__CARRIER);}
 
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
+		return array(
 			'Accept' => '	application/json, text/javascript, */*; q=0.01'
 			,'Accept-Encoding' => 'gzip, deflate'
 			,'Cache-Control'	=> 'no-cache'
@@ -50,27 +48,25 @@ class Df_PonyExpress_Model_Request_Rate extends Df_Shipping_Model_Request {
 			,'Host' => 'www.ponyexpress.ru'
 			,'Pragma' => 'no-cache'
 			,'Referer' => 'http://www.ponyexpress.ru/tariff.php'
-			,'User-Agent' => Df_Core_Const::FAKE_USER_AGENT
 			,'X-Requested-With'	=> 'XMLHttpRequest'
-		));
+		) + parent::getHeaders();
 	}
 
 	/** @return array(string => mixed) */
 	protected function getPostParameters() {
 		return array(
 			'excel' => 0
-			,'data' =>
+			,'data' => array(
 				array(
-					array(
-						'from' => $this->getRateRequest()->getLocatorOrigin()->getResult()
-						,'to' => $this->getRateRequest()->getLocatorDestination()->getResult()
-						,'weight' => $this->getRateRequest()->getWeightInKilogrammes()
-						,'go' => 0
-						,'og' => 0
-						,'service' => array(array(1,2,3,5,6,7))
-						,'service_count' => 6
-					)
+					'from' => $this->getRateRequest()->getLocatorOrigin()->getResult()
+					,'to' => $this->getRateRequest()->getLocatorDestination()->getResult()
+					,'weight' => $this->getRateRequest()->getWeightInKilogrammes()
+					,'go' => 0
+					,'og' => 0
+					,'service' => array(array(1,2,3,5,6,7))
+					,'service_count' => 6
 				)
+			)
 		);
 	}
 
@@ -109,8 +105,8 @@ class Df_PonyExpress_Model_Request_Rate extends Df_Shipping_Model_Request {
 	 */
 	protected function getRequestMethod() {return Zend_Http_Client::POST;}
 
-	/** @return Df_Shipping_Model_Rate_Request */
-	private function getRateRequest() {return $this->cfg(self::P__RATE_REQUEST);}
+	/** @return Df_Shipping_Rate_Request */
+	private function getRateRequest() {return $this->cfg(self::$P__RATE_REQUEST);}
 
 	/**
 	 * @override
@@ -119,20 +115,21 @@ class Df_PonyExpress_Model_Request_Rate extends Df_Shipping_Model_Request {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CARRIER, Df_Shipping_Model_Carrier::_CLASS)
-			->_prop(self::P__RATE_REQUEST, Df_Shipping_Model_Rate_Request::_CLASS)
+			->_prop(self::$P__CARRIER, Df_Shipping_Carrier::_C)
+			->_prop(self::$P__RATE_REQUEST, Df_Shipping_Rate_Request::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
-	const P__CARRIER = 'carrier';
-	const P__RATE_REQUEST = 'rate_request';
+	/** @var string */
+	private static $P__CARRIER = 'carrier';
+	/** @var string */
+	private static $P__RATE_REQUEST = 'rate_request';
 	/**
 	 * @static
-	 * @param Df_Shipping_Model_Rate_Request $rateRequest
-	 * @param Df_Shipping_Model_Carrier $carrier
+	 * @param Df_Shipping_Rate_Request $rateRequest
+	 * @param Df_Shipping_Carrier $carrier
 	 * @return Df_PonyExpress_Model_Request_Rate
 	 */
-	public static function i(Df_Shipping_Model_Rate_Request $rateRequest, Df_Shipping_Model_Carrier $carrier) {
-		return new self(array(self::P__CARRIER => $carrier, self::P__RATE_REQUEST => $rateRequest));
+	public static function i(Df_Shipping_Rate_Request $rateRequest, Df_Shipping_Carrier $carrier) {
+		return new self(array(self::$P__CARRIER => $carrier, self::$P__RATE_REQUEST => $rateRequest));
 	}
 }

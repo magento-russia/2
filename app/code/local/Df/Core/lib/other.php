@@ -1,60 +1,6 @@
 <?php
 /** @return Df_Core_Helper_Data */
-function df() {
-	// метод реализован именно таким способом ради ускорения
-	static $r; return $r ? $r : $r = Df_Core_Helper_Data::s();
-}
-
-/**
- * В качестве параметра $type можно передавать:
- * 1) объект-блок
- * 2) класс блока в стандартном формате
- * 3) класс блока в формате Magento
- * @param string|Mage_Core_Block_Abstract $type
- * @param string $name
- * @param mixed[]|string $attributes
- * @return Mage_Core_Block_Abstract|bool
- */
-function df_block($type, $name = '', $attributes = array()) {
-	if (is_string($attributes)) {
-		$attributes = array(Df_Core_Block_Template::P__TEMPLATE => $attributes);
-	}
-	df_param_array($attributes, 2);
-	if (is_object($type)) {
-		/**
-		 * @see Mage_Core_Model_Layout::createBlock() не добавит параметры к блоку,
-		 * если в этот метод передать не тип блока, а еще созданный объект-блок.
-		 */
-		df_assert($type instanceof Mage_Core_Block_Abstract);
-		$type->addData($attributes);
-	}
-	/** @var Mage_Core_Block_Abstract $result */
-	$result = rm_layout()->createBlock($type, $name, $attributes);
-	df_assert($result instanceof Mage_Core_Block_Abstract);
-	return $result;
-}
-
-/**
- * В качестве параметра $type можно передавать:
- * 1) объект-блок
- * 2) класс блока в стандартном формате
- * 3) класс блока в формате Magento
- * @param string|Mage_Core_Block_Abstract $type
- * @param string $name
- * @param mixed[]|string $attributes
- * @return string
- */
-function df_block_render($type, $name = '', $attributes = array()) {
-	return df_block($type, $name, $attributes)->toHtml();
-}
-
-/**
- * @param mixed[]|string $attributes
- * @return string
- */
-function df_block_render_simple($attributes) {
-	return df_block_render('core/template', '', $attributes);
-}
+function df() {static $r; return $r ? $r : $r = Df_Core_Helper_Data::s();}
 
 /** @return Df_Admin_Model_Settings */
 function df_cfg() {return Df_Admin_Model_Settings::s();}
@@ -73,7 +19,7 @@ function df_empty_string($value) {return '' === $value;}
  * потому что этот метод — финальный
  *
  * @param Exception $exception
- * @param bool $showCodeContext[optional]
+ * @param bool $showCodeContext [optional]
  * @return string
  */
 function df_exception_get_trace(Exception $exception, $showCodeContext = false) {
@@ -113,7 +59,7 @@ function df_handle_entry_point_exception(Exception $e, $rethrow = null, $sendCon
 	 * по умолчанию не выводим диагностическое сообщение на экран
 	 * (но это можно отключить посредством $rethrow = true).
 	 */
-	if ((Mage::getIsDeveloperMode() && (false !== $rethrow)) || (true === $rethrow)) {
+	if (Mage::getIsDeveloperMode() && false !== $rethrow || true === $rethrow) {
 		/**
 		 * Чтобы кириллица отображалась в верной кодировке —
 		 * пробуем отослать браузеру заголовок Content-Type.
@@ -122,7 +68,7 @@ function df_handle_entry_point_exception(Exception $e, $rethrow = null, $sendCon
 		 * ведь нашу исключительную ситуацию может поймать и обработать
 		 * ядро Magento или какой-нибудь сторонний модуль, и они затем могут
 		 * захотеть вернуть браузеру документ другого типа (не text/html).
-		 * Однако, по-правильному они должны при этом сами установить свой Content-type/
+		 * Однако, по-правильному они должны при этом сами установить свой Content-type.
 		 */
 		if (!headers_sent() && $sendContentTypeHeader) {
 			header('Content-Type: text/html; charset=UTF-8');
@@ -155,70 +101,12 @@ function df_handle_event($handlerClass, $eventClass, Varien_Event_Observer $obse
 /** @return Df_Core_Helper_Df_Helper */
 function df_h() {return Df_Core_Helper_Df_Helper::s();}
 
-/**
- * @param Mage_Core_Model_Abstract|string $model
- * @param int|string $id
- * @param string|null $field [optional]
- * @param bool $throwOnError [optional]
- * @return Mage_Core_Model_Abstract|null
- */
-function df_load($model, $id, $field = null, $throwOnError = true) {
-	/**
-	 * Обратите внимание, что идентификатор необязательно является целым числом,
-	 * потому что объект может загружаться по нестандартному ключу
-	 * (с указанием этого ключа параметром $field).
-	 * Так же, и первичный ключ может не быть чцелым числом (например, при загрузке валют).
-	 */
-	df_assert($id);
-	if (!is_null($field)) {
-		df_param_string($field, 2);
-	}
-	/** @var Mage_Core_Model_Abstract|null $result */
-	$result = is_string($model) ? df_model($model) : $model;
-	df_assert($result instanceof Mage_Core_Model_Abstract);
-	$result->load($id, $field);
-	if (!$result->getId()) {
-		if (!$throwOnError) {
-			$result = null;
-		}
-		else {
-			df_error(
-				'Система не нашла в базе данных объект класса «%s» с идентификатором «%d».'
-				,get_class($result)
-				,$id
-			);
-		}
-	}
-	if (!is_null($result)) {
-		/** @var mixed $modelId */
-		$modelId = is_null($field) ? $result->getId() : $result->getData($field);
-		/**
-		 * Обратите внимание, что мы намеренно используем !=, а не !==
-		 */
-		if ($id != $modelId) {
-			if (!$throwOnError) {
-				$result = null;
-			}
-			else {
-				df_error(
-					'При загрузке из базы данных объекта класса «%s» произошёл сбой: '
-					.' идентификатор объекта должен быть равен «%s», а вместо этого равен «%s».'
-					,get_class($result)
-					,$id
-					,$modelId
-				);
-			}
-		}
-	}
-	return $result;
-}
-
 /** @return Df_Core_Helper_Mage */
 function df_mage() {return Df_Core_Helper_Mage::s();}
 
 /**
- * @param string $param1[optional]
- * @param string $param2[optional]
+ * @param string $param1 [optional]
+ * @param string $param2 [optional]
  * @return string|boolean
  */
 function df_magento_version($param1 = null, $param2 = null) {
@@ -226,75 +114,13 @@ function df_magento_version($param1 = null, $param2 = null) {
 }
 
 /**
- * В качестве параметра $modelClass можно передавать:
- * 1) класс модели в стандартном формате
- * 2) класс модели в формате Magento
- * @param string $modelClass
- * @param array(string => mixed) $parameters [optional]
- * @return Mage_Core_Model_Abstract
- * @throws Exception
- */
-function df_model($modelClass = '', $parameters = array()) {
-	/**
-	 * Удаление df_param_string
-	 * ускорило загрузку главной страницы на эталонном тесте
-	 * с 1.501 сек. до 1.480 сек.
-	 */
-	/** @var Mage_Core_Model_Abstract $result */
-	$result = null;
-	try {
-		$result = Mage::getModel($modelClass, $parameters);
-		if (!is_object($result)) {
-			df_error('Не найден класс «%s»', $modelClass);
-		}
-		/**
-		 * Обратите внимание, что Mage::getModel
-		 * почему-то не устанавливает поле @see Varien_Object::_hasModelChanged в true.
-		 * Мы же ранее устанавливали этот флаг в данной функции df_model,
-		 * однако теперь это делаем более эффективным способом:
-		 * в @see Df_Core_Model::_construct().
-		 * Обратите внимание, что у нас после недавнего рефакторинга (январь 2014 года)
-		 * большинство моделей теперь содаётся через new, а не через df_model,
-		 * поэтому установка флага в df_model теперь не только неэффективна, но и некорректна.
-		 */
-	}
-	catch(Exception $e) {
-		Mage::logException($e);
-		/** @var array $bt */
-		$bt = debug_backtrace();
-		/** @var array $caller */
-		$caller = df_a($bt, 1);
-		/** @var string $className */
-		$className = df_a($caller, 'class');
-		/** @var string $methodName */
-		$methodName = df_a($caller, 'function');
-		/** @var string $methodNameWithClassName */
-		$methodNameWithClassName = implode('::', array($className, $methodName));
-		df_error(strtr(
-			"%method%[%line%]\nНе могу создать модель класса «%modelClass%»."
-			."\nСообщение системы: «%message%»"
-			,array(
-				'%method%' => $methodNameWithClassName
-				,'%line%' => df_a(df_a($bt, 0), "line")
-				,'%modelClass%' => $modelClass
-				,'%message%' => rm_ets($e)
-			)
-		));
-	}
-	return $result;
-}
-
-/**
  * @param string $moduleName
  * @return bool
  */
 function df_module_enabled($moduleName) {
-	/** @var Df_Core_Model_Cache_Module $cacher */
-	static $cacher;
-	if (!isset($cacher)) {
-		$cacher = Df_Core_Model_Cache_Module::s();
-	}
-	return $cacher->isEnabled($moduleName);
+	/** @var Df_Core_Model_Cache_Module $c */
+	static $c; if(!$c) {$c = Df_Core_Model_Cache_Module::s();}
+	return $c->isEnabled($moduleName);
 }
 
 /**
@@ -315,7 +141,7 @@ function df_notify($message) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
 		Df_Qa_Message_Notification::i(array(
-			Df_Qa_Message_Notification::P__NOTIFICATION => rm_sprintf($arguments)
+			Df_Qa_Message_Notification::P__NOTIFICATION => rm_format($arguments)
 			,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => true
 			,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
 		))->log();
@@ -332,7 +158,7 @@ function df_notify_admin($message, $doLog = true) {
 		$doLog = true;
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$message = rm_sprintf($arguments);
+		$message = rm_format($arguments);
 	}
 	Df_Qa_Message_Notification::i(array(
 		Df_Qa_Message_Notification::P__NOTIFICATION => $message
@@ -346,15 +172,13 @@ function df_notify_admin($message, $doLog = true) {
 /**
  * Задача данного метода — ясно и доступно объяснить разработчику причину исключительной ситуации
  * и состояние системы в момент возникновения исключительной ситуации.
- * Если у Вас нет объекта класса Exception, то используйте @see df_notify()
- *
  * @param Exception|string $exception
  * @param string|null $additionalMessage [optional]
  * @return void
  */
 function df_notify_exception($exception, $additionalMessage = null) {
 	if (is_string($exception)) {
-		$exception = new Df_Core_Exception_Client($exception);
+		$exception = new Exception($exception);
 	}
 	Df_Qa_Message_Failure_Exception::i(array(
 		Df_Qa_Message_Failure_Exception::P__EXCEPTION => $exception
@@ -374,7 +198,7 @@ function df_notify_me($message, $doLog = true) {
 		$doLog = true;
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$message = rm_sprintf($arguments);
+		$message = rm_format($arguments);
 	}
 	Df_Qa_Message_Notification::i(array(
 		Df_Qa_Message_Notification::P__NOTIFICATION => $message
@@ -400,18 +224,24 @@ function df_nta($value, $skipEmptyCheck = false) {
 }
 
 /**
+ * @param mixed|null $value
+ * @return mixed
+ */
+function df_nts($value) {return !is_null($value) ? $value : '';}
+
+/**
  * @param object|Varien_Object $entity
  * @param string $key
  * @param mixed $default
- * @return mixed
+ * @return mixed|null
  */
 function df_o($entity, $key, $default = null) {
 	/**
-	 * Раньше функция @see df_a была универсальной:
+	 * Раньше функция @see df_a() была универсальной:
 	 * она принимала в качестве аргумента $entity как массивы, так и объекты.
 	 * В 99.9% случаев в качестве параметра передавался массив.
 	 * Поэтому ради ускорения работы системы
-	 * вынес обработку объектов в отдельную функцию @see df_o
+	 * вынес обработку объектов в отдельную функцию @see df_o()
 	 */
 	/** @var mixed $result */
 	if (!is_object($entity)) {
@@ -425,9 +255,9 @@ function df_o($entity, $key, $default = null) {
 	}
 	else {
 		/**
-		 * Например, stdClass.
+		 * Например, @see stdClass.
 		 * Используется, например, методом
-		 * @see Df_Qiwi_Model_Action_Confirm::updateBill
+		 * @used-by Df_Qiwi_Model_Action_Confirm::updateBill()
 		 */
 		$result = isset($entity->{$key}) ? $entity->{$key} : $default;
 	}
@@ -437,66 +267,8 @@ function df_o($entity, $key, $default = null) {
 /** @return Df_Core_Helper_Output */
 function df_output() {return Df_Core_Helper_Output::s();}
 
-/**
- * Обратите внимание, что эта функция должна находиться именно в модуле Df_Core,
- * а не в модуле Df_Phpquery.
- * Перемещение этой функции в модуль Df_Phpquery
- * приведёт к сбою «Call to undefined function df_pq()»,
- * потому что перед использованием глобальных функций модуля Df_Phpquery
- * надо вызывать df_h()->phpquery()->lib(),
- * а метод df_h()->phpquery()->lib() вызывается именно внутри функции df_pq().
- * @param $arguments
- * @param $context[optional]
- * @return phpQueryObject
- */
-function df_pq($arguments, $context = null) {
-	/** @var bool $initialized */
-	static $initialized = false;
-	if (false === $initialized) {
-		df_h()->phpquery()->lib();
-		$initialized = true;
-	}
-	/** @var phpQueryObject|bool $result */
-	$result = null;
-	if (is_null($context) && is_string($arguments)) {
-		$result = phpQuery::newDocument($arguments);
-	}
-	else {
-		/** @var mixed[] $args */
-		$args = func_get_args();
-		$result = call_user_func_array(array('phpQuery', 'pq'), $args);
-	}
-	df_assert($result instanceof phpQueryObject);
-	return $result;
-}
-
-/**
- * @param string $key
- * @param string $default[optional]
- * @return string
- */
-function df_request($key, $default = null) {return df()->request()->getParam($key, $default);}
-
-/** @return string */
-function df_t() {
-	/**
-	 * Обратите внимание, что этот метод нельзя записать в одну строку,
-	 * потому что функция func_get_args() не может быть параметром другой функции.
-	 */
-	/** @var mixed[] $fa */
-	$fa = func_get_args();
-	return
-		Mage::app()->getTranslator()->translate(
-			array_merge(
-				array(new Mage_Core_Model_Translate_Expr(df_a($fa, 1), df_a($fa, 0)))
-				,array_slice($fa, 2)
-			)
-		)
-	;
-}
-
 /** @return Df_Core_Helper_Url */
-function df_url() {return df_h()->core()->url();}
+function df_url() {return Df_Core_Helper_Url::s();}
 
 /**
  * @param Varien_Object $object
@@ -512,7 +284,7 @@ function rm_adapt_legacy_object(Varien_Object $object, $absentProperties = array
 		}
 	}
 	/**
-	 * Позволяет инициализировать те поля, которые отсутствуют в @see Varien_Object::getData(),
+	 * Позволяет инициализировать те поля, которые отсутствуют в @uses Varien_Object::getData(),
 	 * но обращение к которым, тем не менее, происходит в дефектных оформительских темах.
 	 */
 	if ($absentProperties) {
@@ -547,28 +319,14 @@ function rm_admin_end() {Df_Admin_Model_Mode::s()->end();}
  * @param float|int $value
  * @return int
  */
-function rm_ceil($value) {return intval(ceil($value));}
+function rm_ceil($value) {return (int)ceil($value);}
 
 /**
- * @param string $className
+ * @see rm_encrypt()
+ * @param $value
  * @return string
  */
-function rm_class_mf($className) {
-	return Df_Core_Model_Reflection::s()->getModelNameInMagentoFormat($className);
-}
-
-/**
- * @param string $className
- * @return string
- */
-function rm_class_mf_r($className) {
-	/** @var Df_Core_Model_Reflection $reflection */
-	static $reflection;
-	if (!isset($reflection)) {
-		$reflection = df()->reflection();
-	}
-	return $reflection->getResourceNameInMagentoFormat($className);
-}
+function rm_decrypt($value) {return df_mage()->coreHelper()->decrypt($value);}
 
 /**
  * @param mixed $value
@@ -577,39 +335,17 @@ function rm_class_mf_r($className) {
 function rm_empty_to_null($value) {return $value ? $value : null;}
 
 /**
+ * @see rm_decrypt()
+ * @param $value
+ * @return string
+ */
+function rm_encrypt($value) {return df_mage()->coreHelper()->encrypt($value);}
+
+/**
  * @param float|int $value
  * @return int
  */
-function rm_floor($value) {return intval(floor($value));}
-
-/**
- * @param bool $condition
- * @param mixed $resultOnTrue
- * @param mixed $resultOnFalse [optional]
- * @return mixed
- */
-function rm_if($condition, $resultOnTrue, $resultOnFalse = null) {
-	return $condition ? $resultOnTrue : $resultOnFalse;
-}
-
-/**
- * @param string $handle
- * @return bool
- */
-function rm_handle_presents($handle) {
-	/** @var bool[] $cache */
-	static $handles;
-	if (!isset($handles)) {
-		$handles = array_flip(rm_handles());
-	}
-	/**
-	 * @see array_flip() / @see isset() работает быстрее, чем @see in_array()
-	 */
-	return isset($handles[$handle]);
-}
-
-/** @return string[] */
-function rm_handles() {return rm_layout()->getUpdate()->getHandles();}
+function rm_floor($value) {return (int)floor($value);}
 
 /**
  * @see rm_sc()
@@ -625,27 +361,32 @@ function rm_ic($resultClass, $expectedClass, array $params = array()) {
 	return $result;
 }
 
-/** @return Mage_Core_Model_Layout */
-function rm_layout() {return Mage::getSingleton('core/layout');}
+/**
+ * @param bool $condition
+ * @param mixed $resultOnTrue
+ * @param mixed|null $resultOnFalse [optional]
+ * @return mixed
+ */
+function rm_if($condition, $resultOnTrue, $resultOnFalse = null) {
+	return $condition ? $resultOnTrue : $resultOnFalse;
+}
 
 /**
  * @param Varien_Object|mixed[]|mixed $value
  * @return void
  */
-function rm_log($value) {Mage::log(Df_Core_Model_Debug_Dumper::s()->dump($value));}
+function rm_log($value) {Mage::log(rm_dump($value));}
 
 /**
+ * При установке заголовка HTTP «Content-Type»
+ * надёжнее всегда добавлять 3-й параметр: $replace = true,
+ * потому что заголовок «Content-Type» уже ранее был установлен методом
+ * @see Mage_Core_Model_App::getResponse()
  * @param Mage_Core_Controller_Response_Http $httpResponse
  * @param string $contentType
  * @return void
  */
 function rm_response_content_type(Mage_Core_Controller_Response_Http $httpResponse, $contentType) {
-	/**
-	 * При установке заголовка HTTP «Content-Type»
-	 * надёжнее всегда добавлять 3-й параметр: $replace = true,
-	 * потому что заголовок «Content-Type» уже ранее был установлен методом
-	 * @see Mage_Core_Model_App::getResponse()
-	 */
 	$httpResponse->setHeader('Content-Type', $contentType, $replace = true);
 }
 
@@ -655,15 +396,18 @@ function rm_response_content_type(Mage_Core_Controller_Response_Http $httpRespon
  * @param string $resultClass
  * @param string $expectedClass
  * @param array(string => mixed) $params [optional]
+ * @param string $cacheKeySuffix [optional]
  * @return Varien_Object|object
  */
-function rm_sc($resultClass, $expectedClass, array $params = array()) {
+function rm_sc($resultClass, $expectedClass, array $params = array(), $cacheKeySuffix = '') {
 	/** @var array(string => object) $cache */
 	static $cache;
-	if (!isset($cache[$resultClass])) {
-		$cache[$resultClass] = rm_ic($resultClass, $expectedClass, $params);
+	/** @var string $key */
+	$key = $resultClass . $cacheKeySuffix;
+	if (!isset($cache[$key])) {
+		$cache[$key] = rm_ic($resultClass, $expectedClass, $params);
 	}
-	return $cache[$resultClass];
+	return $cache[$key];
 }
 
 /**
@@ -722,6 +466,7 @@ function rm_url($routePath, array $routeParams = array()) {
  * Пример: @see Df_Payment_Model_Method_WithRedirect::getCustomerReturnUrl()
  *
  * В Magento в большинстве случаев оба варианта равноценны, но надо понимать разницу между ними!
+ * @used-by rm_admin_button_location()
  * @param string $routePath
  * @param array(string => mixed) $routeParams [optional]
  * @return string
@@ -754,26 +499,15 @@ function rm_n_set($value) {return is_null($value) ? RM_NULL : $value;}
  * @param float|int $value
  * @return int
  */
-function rm_round($value) {return intval(round($value));}
+function rm_round($value) {return (int)round($value);}
 
-/**
- * @param SimpleXMLElement $element
- * @param string $key
- * @param string|null $default [optional]
- * @return string
- */
-function rm_simple_xml_a(SimpleXMLElement $element, $key, $default = null) {
-	/** @var @mixed $result */
-	$result = null;
-	if (isset($element->$key)) {
-		/** @var string[] $resultAsArray */
-		$resultAsArray = $element->$key;
-		if (is_null($resultAsArray)) {
-			$result = $default;
-		}
-		else {
-			$result = (string)$resultAsArray;
-		}
+/** @return Mage_Core_Model_Session_Abstract */
+function rm_session() {
+	/** @var Mage_Core_Model_Session_Abstract $result */
+	static $result;
+	if (!$result) {
+		$result = df_is_admin() ? Mage::getSingleton('adminhtml/session') : rm_session_core();
+		df_assert($result instanceof Mage_Core_Model_Session_Abstract);
 	}
 	return $result;
 }
@@ -792,22 +526,12 @@ function rm_singleton($class) {
 function rm_version() {
 	/** @var string $result */
 	static $result;
-	if (!isset($result)) {
+	if (!$result) {
 		/** @var string $result */
-		$result = (string)(Mage::getConfig()->getNode('df/version'));
-		if (df()->version()->isItFree()) {
-			$result .= '-free';
-		}
-		else {
-			if (df()->version()->isItAdmin()) {
-				$result .= '-admin';
-			}
-		}
+		$result = rm_leaf_sne(rm_config_node('df/version'));
 	}
 	return $result;
 }
 
 /** @return string */
-function rm_version_full() {
-	return rm_sprintf('%s (%s)', rm_version(), Mage::getVersion());
-}
+function rm_version_full() {return sprintf('%s (%s)', rm_version(), Mage::getVersion());}

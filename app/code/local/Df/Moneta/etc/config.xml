@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Moneta>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>PayAnyWay</title>
+			<version>1.0.0</version>
 		</Df_Moneta>
 	</modules>
 	<global>
@@ -40,7 +41,7 @@
 		-->
 		<payment>
 			<df-moneta>
-				<model>df_moneta/payment</model>
+				<model>Df_Moneta_Model_Payment</model>
 			</df-moneta>
 		</payment>
 	</default>

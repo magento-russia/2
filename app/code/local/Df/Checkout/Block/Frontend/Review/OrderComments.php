@@ -3,28 +3,15 @@ class Df_Checkout_Block_Frontend_Review_OrderComments extends Df_Core_Block_Temp
 	/** @return string */
 	public function getFloatRule() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$result = '';
-			if (
-					df_cfg()->checkout()->orderComments()->specifyTextareaPosition()
+			/** @var string $float */
+			$float = $this->settings()->getTextareaFloat();
+			$this->{__METHOD__} =
+					$this->settings()->specifyTextareaPosition()
 				&&
-					(
-							Df_Admin_Model_Config_Source_Layout_Float::NONE
-						!==
-							df_cfg()->checkout()->orderComments()->getTextareaFloat()
-					)
-			) {
-				$result =
-					Df_Core_Model_Output_Css_Rule::compose(
-						'float'
-						,df_cfg()->checkout()->orderComments()->getTextareaFloat()
-						,null
-						,true
-					)
-				;
-			}
-			df_result_string($result);
-			$this->{__METHOD__} = $result;
+					!Df_Admin_Config_Source_Layout_Float::isNone($float)
+				? Df_Core_Model_Css_Rule::compose('float', $float, null, true)
+				: ''
+			;
 		}
 		return $this->{__METHOD__};
 	}
@@ -35,24 +22,18 @@ class Df_Checkout_Block_Frontend_Review_OrderComments extends Df_Core_Block_Temp
 			/** @var string $result */
 			$result = '';
 			if (
-					df_cfg()->checkout()->orderComments()->specifyTextareaPosition()
+					$this->settings()->specifyTextareaPosition()
 				&&
-					df_cfg()->checkout()->orderComments()->specifyTextareaHoriziontalShift()
+					$this->settings()->specifyTextareaHoriziontalShift()
 				&&
-					(0 < df_cfg()->checkout()->orderComments()->getTextareaHoriziontalShiftLength())
+					(0 < $this->settings()->getTextareaHoriziontalShiftLength())
 			) {
-				$result =
-					Df_Core_Model_Output_Css_Rule::compose(
-						array(
-							'margin'
-							,df_cfg()->checkout()->orderComments()
-								->getTextareaHoriziontalShiftDirection()							
-						)
-						,-1 * df_cfg()->checkout()->orderComments()->getTextareaHoriziontalShiftLength()
-						,'px'
-						,true
-					)
-				;
+				$result = Df_Core_Model_Css_Rule::compose(
+					array('margin', $this->settings()->getTextareaHoriziontalShiftDirection())
+					,-1 * $this->settings()->getTextareaHoriziontalShiftLength()
+					,'px'
+					,true
+				);
 			}
 			df_result_string($result);
 			$this->{__METHOD__} = $result;
@@ -64,12 +45,10 @@ class Df_Checkout_Block_Frontend_Review_OrderComments extends Df_Core_Block_Temp
 	public function getNeedInsertFormTag() {return $this->{__METHOD__};}
 
 	/** @return int */
-	public function getTextareaWidth() {return df_cfg()->checkout()->orderComments()->getTextareaWidth();}
+	public function getTextareaWidth() {return $this->settings()->getTextareaWidth();}
 
 	/** @return int */
-	public function getTextareaVisibleRows() {
-		return df_cfg()->checkout()->orderComments()->getTextareaVisibleRows();
-	}
+	public function getTextareaVisibleRows() {return $this->settings()->getTextareaVisibleRows();}
 
 	/**
 	 * @param bool $needInsertFormTag
@@ -83,15 +62,19 @@ class Df_Checkout_Block_Frontend_Review_OrderComments extends Df_Core_Block_Temp
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/checkout/review/orderComments.phtml';}
+	protected function defaultTemplate() {return 'df/checkout/review/orderComments.phtml';}
 
 	/**
 	 * @override
 	 * @return bool
 	 */
-	protected function needToShow() {return df_cfg()->checkout()->orderComments()->isEnabled();}
+	protected function needToShow() {return $this->settings()->isEnabled();}
 
-	const _CLASS = __CLASS__;
+
+	/** @return Df_Checkout_Model_Settings_OrderComments */
+	private function settings() {return Df_Checkout_Model_Settings_OrderComments::s();}
 }

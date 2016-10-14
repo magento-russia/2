@@ -1,18 +1,11 @@
 <?php
 class Df_Dataflow_Model_Import_Config extends Df_Core_Model {
 	/** @return string */
-	public function getDecimalSeparator() {
-		/** @var string $result */
-		$result =
-			$this->getParam('decimal_separator', Df_Core_Const::T_PERIOD)
-		;
-		df_result_string($result);
-		return $result;
-	}
+	public function getDecimalSeparator() {return $this->getParam('decimal_separator', '.');}
 
 	/**
 	 * @param string $paramName
-	 * @param string|null $defaultValue[optional]
+	 * @param string|null $defaultValue [optional]
 	 * @return string|null
 	 */
 	public function getParam($paramName, $defaultValue = null) {
@@ -46,7 +39,7 @@ class Df_Dataflow_Model_Import_Config extends Df_Core_Model {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

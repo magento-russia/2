@@ -2,10 +2,19 @@
 <config>
 	<modules>
 		<Df_Tweaks>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Удобная настройка витрины</title>
+			<version>1.0.0</version>
 		</Df_Tweaks>
 	</modules>
+	<df>
+		<features>
+			<df-tweaks>
+				<title>Удобная настройка витрины</title>
+				<url>http://magento-forum.ru/topic/796/</url>
+			</df-tweaks>
+		</features>
+	</df>
 	<global>
 		<blocks><df_tweaks><class>Df_Tweaks_Block</class></df_tweaks></blocks>
 		<helpers><df_tweaks><class>Df_Tweaks_Helper</class></df_tweaks></helpers>
@@ -22,18 +31,18 @@
 		<events>
 			<catalog_product_is_salable_after>
 				<observers>
-					<df_tweaks_controller_action_layout_generate_blocks_after>
-						<class>df_tweaks/dispatcher</class>
+					<Df_Tweaks>
+						<class>Df_Tweaks_Observer</class>
 						<method>catalog_product_is_salable_after</method>
-					</df_tweaks_controller_action_layout_generate_blocks_after>
+					</Df_Tweaks>
 				</observers>
 			</catalog_product_is_salable_after>
 			<controller_action_layout_generate_blocks_after>
 				<observers>
-					<df_tweaks_controller_action_layout_generate_blocks_after>
-						<class>df_tweaks/dispatcher</class>
+					<Df_Tweaks>
+						<class>Df_Tweaks_Observer</class>
 						<method>controller_action_layout_generate_blocks_after</method>
-					</df_tweaks_controller_action_layout_generate_blocks_after>
+					</Df_Tweaks>
 				</observers>
 			</controller_action_layout_generate_blocks_after>
 		</events>
@@ -54,6 +63,7 @@
 				<remove_from_frontpage>0</remove_from_frontpage>
 			</cart>
 			<catalog_product_view>
+				<hide_empty_attributes>1</hide_empty_attributes>
 				<hide_product_name_from_breadcrumbs>0</hide_product_name_from_breadcrumbs>
 			</catalog_product_view>
 			<catalog_product_view_sku>

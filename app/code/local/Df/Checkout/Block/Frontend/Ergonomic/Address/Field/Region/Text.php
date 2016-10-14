@@ -1,10 +1,23 @@
 <?php
 class Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Region_Text
-	extends Df_Checkout_Block_Frontend_Ergonomic_Address_Field {
-	const _CLASS = __CLASS__;
+	extends Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Text {
 	/**
-	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Region_Text
+	 * @override
+	 * @return string|null
 	 */
-	public static function i($parameters) {return df_block(__CLASS__, null, $parameters);}
+	public function getValue() {
+		/** @var string|null $result */
+		$result = parent::getValue();
+		return $result ? $result :rm_visitor_location()->getRegionName();
+	}
+
+	/**
+	 * @override
+	 * @see Df_Checkout_Block_Frontend_Ergonomic_Address_Field::getCssClasses()
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field::getCssClassesAsText()
+	 * @return string[]
+	 */
+	protected function getCssClasses() {
+		return array_merge(array('rm.validate.region.text'), parent::getCssClasses());
+	}
 }

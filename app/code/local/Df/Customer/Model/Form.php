@@ -25,19 +25,16 @@ class Df_Customer_Model_Form extends Mage_Customer_Model_Form {
 			if ($this->getEntity() instanceof Mage_Customer_Model_Address_Abstract) {
 				$result = $this->getEntity();
 			}
-			else if (rm_contains(Mage::app()->getRequest()->getRequestUri(), 'saveBilling')) {
-				$result = rm_session_checkout()->getQuote()->getBillingAddress();
+			else if (rm_ruri_contains('saveBilling')) {
+				$result = rm_quote_address_billing();
 			}
-			else if (rm_contains(Mage::app()->getRequest()->getRequestUri(), 'saveShipping')) {
-				$result = rm_session_checkout()->getQuote()->getShippingAddress();
-			}
-			if (!is_null($result)) {
-				df_assert($result instanceof Mage_Customer_Model_Address_Abstract);
+			else if (rm_ruri_contains('saveShipping')) {
+				$result = rm_quote_address_shipping();
 			}
 			$this->{__METHOD__} = rm_n_set($result);
 		}
 		return rm_n_get($this->{__METHOD__});
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

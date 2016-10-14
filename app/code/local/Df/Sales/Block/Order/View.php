@@ -6,21 +6,17 @@ class Df_Sales_Block_Order_View extends Mage_Sales_Block_Order_View {
 	 * при отображении комментария к заказу в личном кабинете покупателя.
 	 * @override
 	 * @param mixed $data
-	 * @param array $allowedTags[optional]
+	 * @param array $allowedTags [optional]
 	 * @return string
 	 */
 	public function escapeHtml($data, $allowedTags = null) {
-		if (
-				df_enabled(Df_Core_Feature::SALES)
-			&&
-				df_cfg()->sales()->orderComments()->preserveLineBreaksInCustomerAccount()
-		) {
+		if (df_cfg()->sales()->orderComments()->preserveLineBreaksInCustomerAccount()) {
 			if (is_null($allowedTags)) {
 				$allowedTags = array();
 			}
 			$allowedTags[]= 'br';
-			$data = nl2br($data);
+			$data = df_t()->nl2br($data);
 		}
-		return df_text()->escapeHtml($data, $allowedTags);
+		return parent::escapeHtml($data, $allowedTags);
 	}
 }

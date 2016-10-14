@@ -360,4 +360,4 @@ class Pel {
 	return rm_sprintf(dgettext('pel', $str), $args);
   }
 
-}?>
+}

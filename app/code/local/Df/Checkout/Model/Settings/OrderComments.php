@@ -1,6 +1,9 @@
 <?php
 class Df_Checkout_Model_Settings_OrderComments extends Df_Core_Model_Settings {
-	/** @return string */
+	/**
+	 * @used-by df/checkout/review/orderComments.phtml
+	 * @return string
+	 */
 	public function getPositionRelativeToTheTerms() {return $this->getString('position_relative_to_terms');}
 	/** @return string */
 	public function getTextareaFloat() {return $this->getString('textarea_float');}
@@ -10,7 +13,10 @@ class Df_Checkout_Model_Settings_OrderComments extends Df_Core_Model_Settings {
 	public function specifyTextareaHoriziontalShift() {
 		return $this->getYesNo('specify_textarea_horizontal_shift');
 	}
-	/** @return string */
+	/**
+	 * @used-by Df_Checkout_Block_Frontend_Review_OrderComments::getMarginRule()
+	 * @return string
+	 */
 	public function getTextareaHoriziontalShiftDirection() {
 		return $this->getString('textarea_horizontal_shift_direction');
 	}

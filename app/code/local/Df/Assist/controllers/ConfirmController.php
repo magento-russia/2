@@ -1,10 +1,8 @@
 <?php
 class Df_Assist_ConfirmController extends Mage_Core_Controller_Front_Action {
 	/**
-	 * Платёжная система присылает сюда подтверждение приёма оплаты от покупателя.
+	 * @uses Df_Assist_Model_Action_Confirm
 	 * @return void
 	 */
-	public function indexAction() {
-		Df_Assist_Model_Action_Confirm::i($this)->process();
-	}
+	public function indexAction() {rm_action($this);}
 }

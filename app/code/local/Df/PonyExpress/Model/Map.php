@@ -1,5 +1,5 @@
 <?php
-class Df_PonyExpress_Model_Map extends Df_Core_Model_DestructableSingleton {
+class Df_PonyExpress_Model_Map extends Df_Core_Model {
 	/**
 	 * @param string $cityName
 	 * @return array(string => Df_PonyExpress_Model_Location[])
@@ -13,11 +13,12 @@ class Df_PonyExpress_Model_Map extends Df_Core_Model_DestructableSingleton {
 		return $this->{__METHOD__}[$cityName];
 	}
 
-	/**             
+	/**
 	 * @override
+	 * @see Df_Core_Model::cachedGlobalObjects()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getByCity');}
+	protected function cachedGlobalObjects() {return self::m(__CLASS__, 'getByCity');}
 
 	/**
 	 * @param string $cityName
@@ -25,9 +26,9 @@ class Df_PonyExpress_Model_Map extends Df_Core_Model_DestructableSingleton {
 	 * @throws Exception
 	 */
 	private function requestLocationsFromServer($cityName) {
+		/** @var Df_PonyExpress_Model_Location[] $result */
+		$result = array();
 		try {
-			/** @var Df_PonyExpress_Model_Location[] $result */
-			$result = array();
 			/** @var Zend_Uri_Http $uri */
 			$uri = Zend_Uri::factory('http');
 			$uri->setHost('www.ponyexpress.ru');
@@ -56,7 +57,7 @@ class Df_PonyExpress_Model_Map extends Df_Core_Model_DestructableSingleton {
 			df_assert_string_not_empty($responseAsJson);
 			$responseAsJson = str_replace('﻿', '' , $responseAsJson);
 			/** @var string[] $responseAsArray */
-			$responseAsArray = df_json_decode($responseAsJson);
+			$responseAsArray = Zend_Json::decode($responseAsJson);
 			df_assert_array($responseAsArray);
 			/**
 			 * Для города Birmingham сервер возвращает странный массив
@@ -66,21 +67,21 @@ class Df_PonyExpress_Model_Map extends Df_Core_Model_DestructableSingleton {
 					[0] =>
 				)
 			 */
-			$responseAsArray = df_clean($responseAsArray);
+			$responseAsArray = array_filter($responseAsArray);
 			foreach ($responseAsArray as $locationAsText) {
 				/** @var string $locationAsText */
 				df_assert_string_not_empty($locationAsText);
 				$result[]= Df_PonyExpress_Model_Location::i($locationAsText);
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			Mage::logException($e);
-			throw $e;
+			df_error($e);
 		}
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/** @return Df_PonyExpress_Model_Map */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

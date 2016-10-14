@@ -10,7 +10,7 @@ class Df_Pd4_Helper_Data extends Mage_Core_Helper_Abstract {
 	/** @var Df_Pd4_Model_Request_Document_View */
 	private $_documentViewAction;	
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 	/** @return Df_Pd4_Helper_Data */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

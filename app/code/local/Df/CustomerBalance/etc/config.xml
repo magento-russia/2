@@ -2,10 +2,20 @@
 <config>
 	<modules>
 		<Df_CustomerBalance>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Личный счёт</title>
+			<version>1.0.0</version>
 		</Df_CustomerBalance>
 	</modules>
+	<df>
+		<features>
+			<df-customer-balance>
+				<module>df_customerbalance</module>
+				<title>Личный счёт</title>
+				<url>http://magento-forum.ru/forum/184/</url>
+			</df-customer-balance>
+		</features>
+	</df>
 	<global>
 		<blocks><df_customerbalance><class>Df_CustomerBalance_Block</class></df_customerbalance></blocks>
 		<helpers><df_customerbalance><class>Df_CustomerBalance_Helper</class></df_customerbalance></helpers>
@@ -74,126 +84,94 @@
 			</sales_convert_quote_address>
 		</fieldsets>
 		<events>
-			<adminhtml_customer_save_after>
-				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>customerSaveAfter</method>
-					</df_customerbalance>
-				</observers>
-			</adminhtml_customer_save_after>
-			<sales_quote_payment_import_data_before>
-				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>paymentDataImport</method>
-					</df_customerbalance>
-				</observers>
-			</sales_quote_payment_import_data_before>
-			<sales_order_place_after>
-				<observers>
-					<df_customerbalance_sales_order_place_after>
-						<class>df_customerbalance/observer</class>
-						<method>processOrderPlace</method>
-					</df_customerbalance_sales_order_place_after>
-				</observers>
-			</sales_order_place_after>
 			<core_layout_update_updates_get_after>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>disableLayout</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>core_layout_update_updates_get_after</method>
+					</Df_CustomerBalance>
 				</observers>
 			</core_layout_update_updates_get_after>
-			<adminhtml_sales_order_create_process_data>
-				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>processOrderCreationData</method>
-					</df_customerbalance>
-				</observers>
-			</adminhtml_sales_order_create_process_data>
 			<payment_method_is_active>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>togglePaymentMethods</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>payment_method_is_active</method>
+					</Df_CustomerBalance>
 				</observers>
 			</payment_method_is_active>
+			<sales_order_place_after>
+				<observers>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_order_place_after</method>
+					</Df_CustomerBalance>
+				</observers>
+			</sales_order_place_after>
+			<sales_quote_payment_import_data_before>
+				<observers>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_quote_payment_import_data_before</method>
+					</Df_CustomerBalance>
+				</observers>
+			</sales_quote_payment_import_data_before>
 			<sales_quote_collect_totals_before>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>quoteCollectTotalsBefore</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_quote_collect_totals_before</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_quote_collect_totals_before>
 			<sales_order_place_before>
 				<observers>
-					<df_customerbalance_sales_order_place_before>
-						<class>df_customerbalance/observer</class>
-						<method>processBeforeOrderPlace</method>
-					</df_customerbalance_sales_order_place_before>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_order_place_before</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_order_place_before>
 			<sales_quote_merge_after>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>quoteMergeAfter</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_quote_merge_after</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_quote_merge_after>
 			<sales_order_invoice_save_after>
 				<observers>
-					<df_customerbalance_sales_order_invoice_save_after>
-						<class>df_customerbalance/observer</class>
-						<method>increaseOrderInvoicedAmount</method>
-					</df_customerbalance_sales_order_invoice_save_after>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_order_invoice_save_after</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_order_invoice_save_after>
 			<sales_order_creditmemo_save_after>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>creditmemoSaveAfter</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_order_creditmemo_save_after</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_order_creditmemo_save_after>
-			<adminhtml_sales_order_creditmemo_register_before>
-				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>creditmemoDataImport</method>
-					</df_customerbalance>
-				</observers>
-			</adminhtml_sales_order_creditmemo_register_before>
 			<sales_order_load_after>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>salesOrderLoadAfter</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_order_load_after</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_order_load_after>
 			<sales_order_creditmemo_refund>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>refund</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>sales_order_creditmemo_refund</method>
+					</Df_CustomerBalance>
 				</observers>
 			</sales_order_creditmemo_refund>
-			<website_delete_before>
-				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>setCustomersBalanceCurrencyToWebsiteBaseCurrency</method>
-					</df_customerbalance>
-				</observers>
-			</website_delete_before>
 		</events>
 		<pdf>
 			<totals>
@@ -219,7 +197,7 @@
 		<translate>
 			<modules>
 				<Df_CustomerBalance>
-					<files><default>Df_CustomerBalance.csv</default></files>
+					<files><default>Df/CustomerBalance.csv</default></files>
 				</Df_CustomerBalance>
 			</modules>
 		</translate>
@@ -245,10 +223,10 @@
 		<events>
 			<core_block_abstract_to_html_after>
 				<observers>
-					<df_customerbalance__core_block_abstract_to_html_after>
-						<class>df_customerbalance/dispatcher</class>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
 						<method>core_block_abstract_to_html_after</method>
-					</df_customerbalance__core_block_abstract_to_html_after>
+					</Df_CustomerBalance>
 				</observers>
 			</core_block_abstract_to_html_after>
 		</events>
@@ -275,17 +253,49 @@
 		<events>
 			<adminhtml_customer_prepare_save>
 				<observers>
-					<df_customerbalance>
-						<class>df_customerbalance/observer</class>
-						<method>prepareCustomerBalanceSave</method>
-					</df_customerbalance>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>adminhtml_customer_prepare_save</method>
+					</Df_CustomerBalance>
 				</observers>
 			</adminhtml_customer_prepare_save>
+			<adminhtml_customer_save_after>
+				<observers>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>adminhtml_customer_save_after</method>
+					</Df_CustomerBalance>
+				</observers>
+			</adminhtml_customer_save_after>
+			<adminhtml_sales_order_create_process_data>
+				<observers>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>adminhtml_sales_order_create_process_data</method>
+					</Df_CustomerBalance>
+				</observers>
+			</adminhtml_sales_order_create_process_data>
+			<adminhtml_sales_order_creditmemo_register_before>
+				<observers>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>adminhtml_sales_order_creditmemo_register_before</method>
+					</Df_CustomerBalance>
+				</observers>
+			</adminhtml_sales_order_creditmemo_register_before>
+			<website_delete_before>
+				<observers>
+					<Df_CustomerBalance>
+						<class>Df_CustomerBalance_Observer</class>
+						<method>website_delete_before</method>
+					</Df_CustomerBalance>
+				</observers>
+			</website_delete_before>
 		</events>
 		<translate>
 			<modules>
 				<Df_CustomerBalance>
-					<files><default>Df_CustomerBalance.csv</default></files>
+					<files><default>Df/CustomerBalance.csv</default></files>
 				</Df_CustomerBalance>
 			</modules>
 		</translate>
@@ -305,13 +315,4 @@
 			</totals_sort>
 		</sales>
 	</default>
-	<df>
-		<features>
-			<df-customer-balance>
-				<module>df_customerbalance</module>
-				<title>Личный счёт</title>
-				<url>http://magento-forum.ru/forum/184/</url>
-			</df-customer-balance>
-		</features>
-	</df>
 </config>

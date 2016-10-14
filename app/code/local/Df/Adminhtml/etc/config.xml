@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Adminhtml>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Adminhtml>
 	</modules>
 	<global>
@@ -28,7 +28,7 @@
 						объявление полей класса $_min и $_max,
 						которые родительский класс использует без объявления.
 						@see Mage_Adminhtml_Block_Dashboard_Graph::getChartUrl()
-						@link http://magento-forum.ru/topic/4291/
+						http://magento-forum.ru/topic/4291/
 					-->
 					<dashboard_tab_amounts>Df_Adminhtml_Block_Dashboard_Tab_Amounts</dashboard_tab_amounts>
 					<!--
@@ -36,7 +36,7 @@
 						объявление полей класса $_min и $_max,
 						которые родительский класс использует без объявления.
 						@see Mage_Adminhtml_Block_Dashboard_Graph::getChartUrl()
-						@link http://magento-forum.ru/topic/4291/
+						http://magento-forum.ru/topic/4291/
 					-->
 					<dashboard_tab_orders>Df_Adminhtml_Block_Dashboard_Tab_Orders</dashboard_tab_orders>
 					<!--
@@ -84,30 +84,47 @@
 					-->
 					<sales_order_view_history>Df_Adminhtml_Block_Sales_Order_View_History</sales_order_view_history>
 					<!--
-						Цель перекрытия —
-						заплатка к методу @see Mage_Adminhtml_Block_System_Config_Form_Field::render(),
+						Цели перекрытия:
+						1) Заплатка к методу @see Mage_Adminhtml_Block_System_Config_Form_Field::render(),
 						который в некоторых ситуациях может приводить к сбою.
 						Смотрите подробный комментарий внутри метода
-						@see Df_Adminhtml_Block_System_Config_Form_Field::render()
+						@see Df_Adminhtml_Block_Config_Form_Field::render()
+						2) Замена тегов p.note > span, обрамляющих примечание, на блочный тег div,
+						что позволяет использовать теги,
+						которые не позволено использовать внутри тегов p и span
+						(в частности ul и p) в комментариях к полям ввода
+						(браузеры не допускают использование тегов ul и p внутри тегов p и span
+						и при наличии недопустимых тегов размещают их не внутри родительского тега,
+						а после него).
 					-->
-					<system_config_form_field>Df_Adminhtml_Block_System_Config_Form_Field</system_config_form_field>
+					<system_config_form_field>Df_Adminhtml_Block_Config_Form_Field</system_config_form_field>
 					<!--
 						Цель перекрытия —
 						Исправить работу Field Mapping в интерфейсе Dataflow
 						(«Система» → «Импорт/Экспорт» → «Стандартные программы»).
 						В Magento CE элемент управления Field Mapping работает не всегда корректно.
 					-->
-					<system_convert_gui_edit_tab_wizard>Df_Adminhtml_Block_System_Convert_Gui_Edit_Tab_Wizard</system_convert_gui_edit_tab_wizard>
+					<system_convert_gui_edit_tab_wizard>Df_Adminhtml_Block_Convert_Gui_Edit_Tab_Wizard</system_convert_gui_edit_tab_wizard>
+					<!--
+						2015-04-11
+						Цель перекрытия —
+						добавление возможности указывать для налоговой ставки страны,
+						чтобы в дальнейшем, при использовании налоговых ставок в выпадающих списках,
+						(например, при назначении налоговой ставки товару)
+						не показывать администраторам интернет-магазинам одной страны
+						налоговые ставки других стран).
+					-->
+					<tax_class_edit_form>Df_Adminhtml_Block_Tax_Class_Edit_Form</tax_class_edit_form>
 					<!--
 						Цель перекрытия —
 						перевести надписи на кнопках экспорта и импорта налоговых ставок
-						на экране «Продажи» → «Налоги и наценки» → «Импорт и экспорт ставок».
+						на экране «Продажи» → «НДС» → «Импорт и экспорт ставок».
 					-->
 					<tax_rate_importExport>Df_Adminhtml_Block_Tax_Rate_ImportExport</tax_rate_importExport>
 					<!--
 						Цель перекрытия —
-						добавить комментарий к полю «Налоговая ставка» на экране
-						«Продажи» → «Налоги и наценки» → «Налоговые правила»  → <Налоговое правило>.
+						добавление поясняющих комментариев к экрану налогового правила:
+						«Продажи» → «НДС» → «Правила»  → <Налоговое правило>.
 					-->
 					<tax_rule_edit_form>Df_Adminhtml_Block_Tax_Rule_Edit_Form</tax_rule_edit_form>
 					<!--
@@ -120,8 +137,25 @@
 						Цель перекрытия —
 						позволить скрывать копейки при отображении цен
 						в различных административных таблицах.
+						2015-03-06
+						Обратите внимание, что мы перекрываем класс
+						Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Price
+						классом Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency,
+						который не является его наследником,
+						однако за исключением явно изменяемого нами поведения
+						ведёт себя точно также, как и перекрытый класс.
+
+						Мы поступаем так потому, что в ядре Magento классы
+						Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Price
+						и Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency
+						хоть и не находятся в отношении родитель-сын, но почти идентичны
+						и отличаются лишь тем, что Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency
+						позволяет при форматировании денежных сумм добавлять перед суммой знак «+» или «-».
+
+						Видимо, программисты ядра Magento недосмотрели возможность
+						использовать один общий класс вместо этих двух.
 					-->
-					<widget_grid_column_renderer_price>Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Price</widget_grid_column_renderer_price>
+					<widget_grid_column_renderer_price>Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency</widget_grid_column_renderer_price>
 				</rewrite>
 			</adminhtml>
 		</blocks>
@@ -188,42 +222,42 @@
 		<events>
 			<adminhtml_block_html_before>
 				<observers>
-					<df_adminhtml__adminhtml_block_html_before>
-						<class>df_adminhtml/dispatcher</class>
+					<Df_Adminhtml>
+						<class>Df_Adminhtml_Observer</class>
 						<method>adminhtml_block_html_before</method>
-					</df_adminhtml__adminhtml_block_html_before>
+					</Df_Adminhtml>
 				</observers>
 			</adminhtml_block_html_before>
 			<adminhtml_sales_order_create_process_data_before>
 				<observers>
-					<df_adminhtml__adminhtml_sales_order_create_process_data_before>
-						<class>df_adminhtml/dispatcher</class>
+					<Df_Adminhtml>
+						<class>Df_Adminhtml_Observer</class>
 						<method>adminhtml_sales_order_create_process_data_before</method>
-					</df_adminhtml__adminhtml_sales_order_create_process_data_before>
+					</Df_Adminhtml>
 				</observers>
 			</adminhtml_sales_order_create_process_data_before>
 			<adminhtml_widget_container_html_before>
 				<observers>
-					<df_adminhtml__adminhtml_widget_container_html_before>
-						<class>df_adminhtml/dispatcher</class>
+					<Df_Adminhtml>
+						<class>Df_Adminhtml_Observer</class>
 						<method>adminhtml_widget_container_html_before</method>
-					</df_adminhtml__adminhtml_widget_container_html_before>
+					</Df_Adminhtml>
 				</observers>
 			</adminhtml_widget_container_html_before>
 			<controller_action_predispatch>
 				<observers>
-					<df_adminhtml__controller_action_predispatch>
-						<class>df_adminhtml/dispatcher</class>
+					<Df_Adminhtml>
+						<class>Df_Adminhtml_Observer</class>
 						<method>controller_action_predispatch</method>
-					</df_adminhtml__controller_action_predispatch>
+					</Df_Adminhtml>
 				</observers>
 			</controller_action_predispatch>
 			<core_block_abstract_to_html_before>
 				<observers>
-					<df_adminhtml__core_block_abstract_to_html_before>
-						<class>df_adminhtml/dispatcher</class>
+					<Df_Adminhtml>
+						<class>Df_Adminhtml_Observer</class>
 						<method>core_block_abstract_to_html_before</method>
-					</df_adminhtml__core_block_abstract_to_html_before>
+					</Df_Adminhtml>
 				</observers>
 			</core_block_abstract_to_html_before>
 		</events>

@@ -6,31 +6,23 @@
 			<author>Дмитрий Федюк</author>
 		</Df_NovaPoshta>
 	</modules>
-	<global>
-		<blocks><df_nova_poshta><class>Df_NovaPoshta_Block</class></df_nova_poshta></blocks>
-		<helpers><df_nova_poshta><class>Df_NovaPoshta_Helper</class></df_nova_poshta></helpers>
-		<models><df_nova_poshta><class>Df_NovaPoshta_Model</class></df_nova_poshta></models>
-	</global>
 	<default>
 		<carriers>
 			<df-nova-poshta>
 				<active>0</active>
-				<model>df_nova_poshta/carrier</model>
+				<model>Df_NovaPoshta_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки
 					над перечнем тарифов данного способа доставки.
 				-->
-				<title>Нова Пошта (Новая Почта)</title>
+				<title>Нова Пошта</title>
 			</df-nova-poshta>
 		</carriers>
 		<df_shipping>
 			<nova-poshta>
 				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
 				<frontend__sort_order>0</frontend__sort_order>
-				<admin__processing_before_shipping__consider_days_off>0</admin__processing_before_shipping__consider_days_off>
-				<admin__processing_before_shipping__consider_today_untill>12</admin__processing_before_shipping__consider_today_untill>
-				<admin__processing_before_shipping__days>0</admin__processing_before_shipping__days>
 				<admin__declared_value_percent>0</admin__declared_value_percent>
 				<admin__fee_percent>0</admin__fee_percent>
 				<admin__fee_fixed>0</admin__fee_fixed>
@@ -43,8 +35,8 @@
 	<df>
 		<features>
 			<df-nova-poshta>
-				<module>df_nova_poshta</module>
-				<title>Нова Пошта (Новая Почта)</title>
+				<module>Df_NovaPoshta</module>
+				<title>Нова Пошта</title>
 				<url>http://magento-forum.ru/forum/257/</url>
 			</df-nova-poshta>
 		</features>

@@ -170,25 +170,13 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General
 		}
 	}
 
-	/**
-	 * Invitation website name getter
-	 * @return string
-	 */
-	public function getWebsiteName()
-	{
-		return Mage::app()->getStore($this->getInvitation()->getStoreId())
-			->getWebsite()->getName();
+	/** @return string */
+	public function getWebsiteName() {
+		return rm_store($this->getInvitation()->getStoreId())->getWebsite()->getName();
 	}
 
-	/**
-	 * Invitation store name getter
-	 * @return string
-	 */
-	public function getStoreName()
-	{
-		return Mage::app()->getStore($this->getInvitation()->getStoreId())
-			->getName();
-	}
+	/** @return string */
+	public function getStoreName() {return rm_store($this->getInvitation()->getStoreId())->getName();}
 
 	/**
 	 * Get invitation URL in case if it can be accepted
@@ -197,7 +185,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General
 	public function getInvitationUrl()
 	{
 		if (!$this->getInvitation()->canBeAccepted(
-			Mage::app()->getStore($this->getInvitation()->getStoreId())->getWebsiteId())) {
+			rm_store($this->getInvitation()->getStoreId())->getWebsiteId())) {
 			return false;
 		}
 		return df_h()->invitation()->getInvitationUrl($this->getInvitation());
@@ -217,11 +205,5 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General
 	 * Check whether can show referral link
 	 * @return bool
 	 */
-	public function canShowReferralLink()
-	{
-		return df_mage()->admin()->session()->isAllowed('customer/manage');
-	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General */
-	public static function i() {return df_block(__CLASS__);}
+	public function canShowReferralLink() {return rm_admin_allowed('customer/manage');}
 }

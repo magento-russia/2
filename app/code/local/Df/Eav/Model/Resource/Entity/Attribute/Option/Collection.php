@@ -2,6 +2,12 @@
 class Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 	extends Mage_Eav_Model_Mysql4_Entity_Attribute_Option_Collection {
 	/**
+	 * @override
+	 * @return Df_Eav_Model_Resource_Entity_Attribute_Option
+	 */
+	public function getResource() {return Df_Eav_Model_Resource_Entity_Attribute_Option::s();}
+
+	/**
 	 * Цель перекрытия —
 	 * перевод значений товарных свойств типа «выпадающий список».
 	 * @override
@@ -43,13 +49,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 	 */
 	public function _construct() {
 		parent::_construct();
-		$this->_init(
-			Df_Eav_Model_Entity_Attribute_Option::mf()
-			, Df_Eav_Model_Resource_Entity_Attribute_Option::mf()
-		);
+		$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Option::_C;
 	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Eav_Model_Resource_Entity_Attribute_Option_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

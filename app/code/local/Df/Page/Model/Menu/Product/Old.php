@@ -21,7 +21,7 @@ class Df_Page_Model_Menu_Product_Old extends Df_Page_Model_Menu_Product {
 		parent::_construct();
 		$this->_prop(self::P__MENU, 'Varien_Data_Tree');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__MENU = 'menu';
 	/**
 	 * @static

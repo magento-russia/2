@@ -8,68 +8,38 @@ abstract class Df_Sat_Model_Method extends Df_Shipping_Model_Method_Ukraine {
 
 	/**
 	 * @override
-	 * @return string
+	 * @return void
+	 * @throws Exception
 	 */
-	public function getMethodTitle() {
-		return
-			implode(
-				' '
-				,array(
-					rm_sprintf('%s:', parent::getMethodTitle())
-					,rm_sprintf(
-						'%s'
-						,$this->formatTimeOfDelivery(
-							$timeOfDeliveryMin = 1
-							,$timeOfDeliveryMax = 2
-						)
-					)
-				)
-			)
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsUkraine()
+			->checkCountryDestinationIsUkraine()
+			->checkLocationIdOrigin()
+			->checkLocationIdDestination()
 		;
 	}
 
 	/**
 	 * @override
-	 * @return bool
-	 * @throws Exception
+	 * @used-by Df_Shipping_Model_Method::_getCost()
+	 * @return float
 	 */
-	public function isApplicable() {
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsUkraine()
-					->checkCountryDestinationIsUkraine()
-				;
-				if (!$this->getLocationIdOrigin()) {
-					$this->throwExceptionInvalidOrigin();
-				}
-				if (!$this->getLocationIdDestination()) {
-					$this->throwExceptionInvalidDestination();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
-		}
-		return $result;
-	}
+	protected function getCost() {return $this->getApi()->getRate();}
 
 	/**
 	 * @override
-	 * @return float
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
 	 */
-	protected function getCostInHryvnias() {
-		return $this->getApi()->getRate();
-	}
+	protected function getDeliveryTime() {return array(1, 2);}
 
 	/**
 	 * @override
 	 * @return array
 	 */
-	protected function getLocations() {
-		return Df_Sat_Model_Request_Locations::s()->getLocations();
-	}
+	protected function getLocations() {return Df_Sat_Model_Request_Locations::s()->getLocations();}
 
 	/** @return Df_Sat_Model_Request_Rate */
 	private function getApi() {
@@ -85,12 +55,12 @@ abstract class Df_Sat_Model_Method extends Df_Shipping_Model_Method_Ukraine {
 		return array(
 			'city_from' => $this->getLocationIdOrigin()
 			,'city_to' => $this->getLocationIdDestination()
-			,'cost' => $this->getRequest()->getDeclaredValueInHryvnias()
+			,'cost' => $this->rr()->getDeclaredValueInHryvnias()
 			,'description' => ''
 			,'doors' => rm_01($this->needDeliverToHome())
-			,'sklad' => rm_01($this->getRmConfig()->service()->needGetCargoFromTheShopStore())
-			,'shape' => $this->getRequest()->getVolumeInCubicMetres()
-			,'weight' => $this->getRequest()->getWeightInKilogrammes()
+			,'sklad' => rm_01($this->configS()->needGetCargoFromTheShopStore())
+			,'shape' => $this->rr()->getVolumeInCubicMetres()
+			,'weight' => $this->rr()->getWeightInKilogrammes()
 			,'from' => ''
 			,'numbers' => ''
 			,'paypack' => 0
@@ -104,6 +74,4 @@ abstract class Df_Sat_Model_Method extends Df_Shipping_Model_Method_Ukraine {
 			,'to' => ''
 		);
 	}
-
-	const _CLASS = __CLASS__;
 }

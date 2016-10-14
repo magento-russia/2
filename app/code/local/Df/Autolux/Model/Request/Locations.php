@@ -61,7 +61,7 @@ class Df_Autolux_Model_Request_Locations extends Df_Autolux_Model_Request {
 			$locationNameRaw = df_a($match, 2);
 			df_assert_string_not_empty($locationNameRaw);
 			/** @var string $locationName */
-			$locationName = rm_first(explode(',', $locationNameRaw));
+			$locationName = rm_first(df_csv_parse($locationNameRaw));
 			df_assert_string_not_empty($locationName);
 			$locationName = mb_strtoupper($locationName);
 			if (!isset($result[$locationName])) {
@@ -71,7 +71,9 @@ class Df_Autolux_Model_Request_Locations extends Df_Autolux_Model_Request {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
-	/** @return Df_Autolux_Model_Request_Locations */
+	/**
+	 * @used-by Df_Autolux_Model_Method::getLocations()
+	 * @return Df_Autolux_Model_Request_Locations
+	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

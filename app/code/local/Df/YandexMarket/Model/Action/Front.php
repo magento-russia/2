@@ -1,37 +1,25 @@
 <?php
-class Df_YandexMarket_Model_Action_Front extends Df_Core_Model_Controller_Action {
+class Df_YandexMarket_Model_Action_Front extends Df_YandexMarket_Model_Action {
 	/**
 	 * @override
-	 * @return Df_Core_Model_Controller_Action
-	 */
-	protected function checkAccessRights() {
-		if (!df_enabled(Df_Core_Feature::YANDEX_MARKET, rm_state()->getStoreProcessed())) {
-			df_error(
-				'У маг' . 'азина отсутс' . 'твует лицен' . 'зия на использ'
-				. 'ование мод' . 'уля «Янд' . 'екс.Мар' . 'кет»'
-			);
-		}
-		if (!df_cfg()->yandexMarket()->general()->isEnabled()) {
-			df_error('Модуль «Яндекс.Маркет отключен в административной части магазина');
-		}
-		return $this;
-	}
-
-	/**
-	 * @override
+	 * @see Df_Core_Model_Action::generateResponseBody()
+	 * @used-by Df_Core_Model_Action::getResponseBody()
 	 * @return string
 	 */
 	protected function generateResponseBody() {return $this->getDocument()->getXml();}
 
 	/**
 	 * @override
+	 * @see Df_Core_Model_Action::getContentType()
+	 * @used-by Df_Core_Model_Action::getResponseLogFileExtension()
+	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
 	protected function getContentType() {
 		return
 			$this->getDocument()->hasEncodingWindows1251()
-			? Df_Core_Const::CONTENT_TYPE__XML__WINDOWS_1251
-			: Df_Core_Const::CONTENT_TYPE__XML__UTF_8
+			? 'application/xml; charset=windows-1251'
+			: self::$CONTENT_TYPE__XML__UTF_8
 		;
 	}
 
@@ -49,27 +37,43 @@ class Df_YandexMarket_Model_Action_Front extends Df_Core_Model_Controller_Action
 
 	/**
 	 * @override
+	 * @see Df_Core_Model_Action::needLogResponse()
+	 * @used-by Df_Core_Model_Action::processFinish()
 	 * @return bool
 	 */
 	protected function needLogResponse() {return df_is_it_my_local_pc();}
+
+	/**
+	 * @override
+	 * @see Df_Core_Model_Action::store()
+	 * @used-by Df_Core_Model_Action::checkAccessRights()
+	 * @used-by Df_Core_Model_Action::getStoreConfig()
+	 * @return Df_Core_Model_StoreM
+	 */
+	protected function store() {return rm_state()->getStoreProcessed();}
 
 	/** @return Df_YandexMarket_Model_Yml_Document */
 	private function getDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_YandexMarket_Model_Yml_Document::i(
-				Df_YandexMarket_Product_Exporter::i()->getResult()
+				Df_Catalog_Model_Product_Exporter::i(array(
+					Df_Catalog_Model_Product_Exporter::P__RULE =>
+						df_cfg()->yandexMarket()->products()->getRule()
+					,Df_Catalog_Model_Product_Exporter::P__ADDITIONAL_ATTRIBUTES => array(
+						Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
+						,Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
+					)
+					,Df_Catalog_Model_Product_Exporter::P__LIMIT =>
+							df_cfg()->yandexMarket()->diagnostics()->isEnabled()
+						&&
+							df_cfg()->yandexMarket()->diagnostics()->needLimit()
+						? df_cfg()->yandexMarket()->diagnostics()->getLimit()
+						: 0
+					,Df_Catalog_Model_Product_Exporter::P__NEED_REMOVE_NOT_SALABLE => true
+					,Df_Catalog_Model_Product_Exporter::P__NEED_REMOVE_OUT_OF_STOCK => true
+				))->getResult()
 			);
 		}
 		return $this->{__METHOD__};
-	}
-
-	const _CLASS = __CLASS__;
-	/**
-	 * @static
-	 * @param Df_YandexMarket_YmlController $controller
-	 * @return Df_YandexMarket_Model_Action_Front
-	 */
-	public static function i(Df_YandexMarket_YmlController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
 	}
 }

@@ -2,23 +2,21 @@
 <config>
 	<modules>
 		<Df_1C>
-			<version>1.0.2</version>
 			<author>Дмитрий Федюк</author>
+			<title>1С:Управление торговлей</title>
+			<version>3.0.0</version>
 		</Df_1C>
 	</modules>
 	<df>
 		<features>
 			<df-1c>
 				<module>df_1c</module>
-				<title>1С: Управление торговлей</title>
+				<title>1С:Управление торговлей</title>
 				<url>http://magento-forum.ru/forum/217/</url>
 			</df-1c>
 		</features>
 	</df>
 	<global>
-		<blocks><df_1c><class>Df_1C_Block</class></df_1c></blocks>
-		<helpers><df_1c><class>Df_1C_Helper</class></df_1c></helpers>
-		<models><df_1c><class>Df_1C_Model</class></df_1c></models>
 		<resources>
 			<df_1c_setup>
 				<setup>
@@ -31,10 +29,10 @@
 		<events>
 			<df_catalog__attribute_set__group_added>
 				<observers>
-					<df_1c__attribute_set__group_added>
-						<class>df_1c/dispatcher</class>
+					<Df_1C>
+						<class>Df_1C_Observer</class>
 						<method>df_catalog__attribute_set__group_added</method>
-					</df_1c__attribute_set__group_added>
+					</Df_1C>
 				</observers>
 			</df_catalog__attribute_set__group_added>
 		</events>
@@ -56,6 +54,7 @@
 				<enabled>0</enabled>
 				<enable_logging>0</enable_logging>
 				<log_file_name_template>1c/{date}-{time}.log</log_file_name_template>
+				<non_standard_currency_codes>[["руб.", "RUB"],["грн", "UAH"]]</non_standard_currency_codes>
 			</general>
 			<orders>
 			</orders>

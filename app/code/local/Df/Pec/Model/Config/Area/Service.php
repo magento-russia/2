@@ -1,5 +1,5 @@
 <?php
-class Df_Pec_Model_Config_Area_Service extends Df_Shipping_Model_Config_Area_Service {
+class Df_Pec_Model_Config_Area_Service extends Df_Shipping_Config_Area_Service {
 	/** @return string */
 	public function getMoscowCargoReceptionPoint() {
 		/** @var string $result */
@@ -44,7 +44,7 @@ class Df_Pec_Model_Config_Area_Service extends Df_Shipping_Model_Config_Area_Ser
 	/** @return bool */
 	public function needRigidContainer() {return $this->getVarFlag(self::KEY__VAR__NEED_RIGID_CONTAINER);}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const KEY__VAR__MOSCOW_CARGO_RECEPTION_POINT = 'moscow_cargo_reception_point';
 	const KEY__VAR__NEED_CARGO_TAIL_LOADER_AT_DESTINATION = 'need_cargo_tail_loader_at_destination';
 	const KEY__VAR__NEED_CARGO_TAIL_LOADER_AT_ORIGIN = 'need_cargo_tail_loader_at_origin';

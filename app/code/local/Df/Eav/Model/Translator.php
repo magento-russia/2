@@ -2,23 +2,23 @@
 class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 	/**
 	 * @override
+	 * @see Df_Core_Model::_destruct()
 	 * @return void
 	 */
 	public function _destruct() {
 		if (
-				df_is_it_my_local_pc()
-			&&
-				!df_is_admin()
-			&&
-				Mage::isInstalled()
-			&&
-				$this->_untranslated
+			df_is_it_my_local_pc()
+			&& !df_is_admin()
+			&& Mage::isInstalled()
+			&& $this->_untranslated
 		) {
-			Mage::log(rm_sprintf(
-				'Добавьте в файл app/locale/ru_DF/Df_Eav.csv'
-				. " перевод следующих экранных названий свойств:\r\n%s"
-				, implode("\r\n", rm_array_unique_fast($this->_untranslated))
-			), null, 'rm.translation.log');
+			Mage::log(
+				'Добавьте в файл app/locale/ru_DF/Df/Eav.csv'
+				. " перевод следующих экранных названий свойств:\n"
+				. df_concat_n(rm_array_unique_fast($this->_untranslated))
+				, null
+				, 'rm.translation.log'
+			);
 		}
 		parent::_destruct();
 	}
@@ -51,16 +51,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 						)
 				)
 		) {
-			/** @var string[] $labels */
-			$labels = array();
-			foreach (self::$LABEL_NAMES as $labelName) {
-				$labels[$labelName] = $attribute->getData($labelName);
-			}
-			/** @var string[] $labelsTranslated */
-			$labelsTranslated = $this->translateLabels($labels);
-			foreach (self::$LABEL_NAMES as $labelName) {
-				$attribute->setData($labelName, $labelsTranslated[$labelName]);
-			}
+			$attribute->addData($this->translateLabels(df_select($attribute->getData(), self::$LABEL_NAMES)));
 			$attribute->{self::$RM_TRANSLATED} = true;
 		}
 		/**
@@ -110,16 +101,9 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 						!rm_bool(df_a($attributeData, 'is_user_defined'))
 				)
 		) {
-			/** @var string[] $labels */
-			$labels = array();
-			foreach (self::$LABEL_NAMES as $labelName) {
-				$labels[$labelName] = df_a($attributeData, $labelName);
-			}
-			/** @var string[] $labelsTranslated */
-			$labelsTranslated = $this->translateLabels($labels);
-			foreach (self::$LABEL_NAMES as $labelName) {
-				$attributeData[$labelName] = $labelsTranslated[$labelName];
-			}
+			$attributeData =
+				$this->translateLabels(df_select($attributeData, self::$LABEL_NAMES)) + $attributeData
+			;
 		}
 	}
 
@@ -130,11 +114,6 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 	 */
 	public function translateLabel($label, $logUntranslated = true) {
 		if (!isset($this->{__METHOD__}[$label])) {
-			/** @var Df_Core_Model_Translate $translator */
-			static $translator;
-			if (!isset($translator)) {
-				$translator = Mage::app()->getTranslator();
-			}
 			/**
 			 * Раньше тут стояло:
 				$result = df_mage()->catalogHelper()->__($label);
@@ -144,9 +123,9 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 			 * Изменил код ради ускорения.
 			 */
 			/** @var string $result */
-			$result = $translator->translateFast($label, 'Mage_Catalog');
+			$result = rm_translate_simple($label, 'Mage_Catalog');
 			if ($result === $label) {
-				$result = $translator->translateFast($label, 'Df_Eav');
+				$result = rm_translate_simple($label, 'Df_Eav');
 			}
 			if (
 					$logUntranslated
@@ -155,7 +134,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 				&&
 					($result === $label)
 				&&
-					!df_text()->isTranslated($label)
+					!df_t()->isTranslated($label)
 			) {
 				$this->_untranslated[]= $label;
 			}
@@ -195,7 +174,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 				$translatedValueCurrent =
 					$this->translateLabel($labelValue, $logUntranslated = !$translatedValue)
 				;
-				if (!df_text()->isTranslated($translatedValueCurrent)) {
+				if (!df_t()->isTranslated($translatedValueCurrent)) {
 					$result[$labelName] = $translatedValue ? $translatedValue : $labelValue;
 				}
 				else {

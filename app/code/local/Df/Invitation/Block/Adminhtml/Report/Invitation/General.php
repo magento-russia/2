@@ -12,7 +12,4 @@ class Df_Invitation_Block_Adminhtml_Report_Invitation_General
 		$this->_headerText = df_h()->invitation()->__('General');
 		$this->_removeButton('add');
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Report_Invitation_General */
-	public static function i() {return df_block(__CLASS__);}
 }

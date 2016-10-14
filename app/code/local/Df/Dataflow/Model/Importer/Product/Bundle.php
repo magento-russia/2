@@ -11,7 +11,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 			}
 			/**
 			 * Не знаю, зачем это, но так рекомендуют на Stack Overflow
-			 * @link http://stackoverflow.com/questions/3108775/programmatically-add-bundle-products-in-magento-using-the-sku-id-of-simple-ite
+			 * http://stackoverflow.com/questions/3108775/programmatically-add-bundle-products-in-magento-using-the-sku-id-of-simple-ite
 			 */
 			Mage::register('product', $this->getProduct());
 			Mage::register('current_product', $this->getProduct());
@@ -70,15 +70,9 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 			foreach ($this->getInnerProducts() as $innerProduct) {
 				/** @var array $innerProduct */
 				df_assert_array($innerProduct);
-				$result[]=
-					array(
-						/**
-						 * Всего один элемент в массиве,
-						 * потому что мы не даёт покупателю выбор составных частей сборного товара
-						 */
-						$this->createBundleSelection($innerProduct)
-					)
-				;
+				// Всего один элемент в массиве,
+				// потому что мы не даём покупателю выбор составных частей сборного товара
+				$result[]= array($this->createBundleSelection($innerProduct));
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -100,7 +94,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 			!is_null($innerProductId)
 			,rm_sprintf(
 				'Перед импортом сборного товара «%s» '
-				. 'в системе уже должна прустутствовать его составная часть: простой товар «%s».'
+				. 'в системе уже должна пристутствовать его составная часть: простой товар «%s».'
 				,$this->getBundleOriginalSku()
 				,$innerProductSku
 			)
@@ -143,7 +137,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 			!is_null($innerProductId)
 			,rm_sprintf(
 				'Перед импортом сборного товара «%s» '
-				. 'в системе уже должна прустутствовать его составная часть: простой товар «%s».'
+				. 'в системе уже должна пристутствовать его составная часть: простой товар «%s».'
 				,$this->getBundleOriginalSku()
 				,$innerProductSku
 			)
@@ -189,7 +183,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param Df_Catalog_Model_Product $product

@@ -1,19 +1,34 @@
 <?php
 class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
+	 * @used-by Zend_Soap_Server::handle()
+	 * @param stdClass $params
+	 * @return int
+	 */
+	public function updateBill($params) {
+		/**
+		 * Номер заказа надо указывать отдельным вызовом setParam,
+		 * потому что @see getRequestKeyShopId() уже будет использовать указанное значение
+		 */
+		$this->getRequest()->setParam($this->getRequestKeyOrderIncrementId(), df_o($params, 'txn'));
+		$this->getRequest()->setParams(array(
+			$this->getRequestKeyShopId() => df_o($params, 'login')
+			,$this->getRequestKeySignature() => df_o($params, 'password')
+			/**
+			 * Df_Payment_Model_Action_Confirm::getRequestValueServicePaymentState
+			 * должен вернуть строку
+			 */
+			,$this->getRequestKeyServicePaymentState() => strval(df_o($params, 'status'))
+		));
+		return 0;
+	}
+
+	/**
 	 * @override
-	 * @return Df_Qiwi_Model_Action_Confirm
+	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		parent::alternativeProcessWithoutInvoicing();
-		$this->getOrder()->addStatusHistoryComment(
-			$this->getPaymentStateMessage(
-				rm_nat($this->getRequestValueServicePaymentState())
-			)
-		);
-		$this->getOrder()->setData(Df_Sales_Const::ORDER_PARAM__IS_CUSTOMER_NOTIFIED, false);
-		$this->getOrder()->save();
-		return $this;
+		$this->comment($this->getPaymentStateMessage(rm_nat($this->getRequestValueServicePaymentState())));
 	}
 
 	/**
@@ -21,66 +36,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {
-		return 'order_increment_id';
-	}
-
-	/**
-	 * @override
-	 * @return Df_Qiwi_Model_Action_Confirm
-	 */
-	public function process() {
-		try {
-			$this->getSoapServer()->handle();
-		}
-		catch(Exception $e) {
-			/**
-			 * Обратите внимание, что в при большинстве сбоев мы не попадём сюда,
-			 * и вообще не попадём дальше handle(),
-			 * по причине особенности работы класса SoapServer:
-			 * @link https://bugs.php.net/bug.php?id=49513
-			 */
-			df_handle_entry_point_exception($e, false);
-		}
-
-		parent::process();
-		return $this;
-	}
-
-	/**
-	 * @param stdClass $params
-	 * @return int
-	 */
-	public function updateBill($params) {
-		/**
-		 * Номер заказа надо указывать отдельным вызовом setParam,
-		 * потому что getRequestKeyShopId() уже будет использовать указанное значение
-		 */
-		$this->getRequest()->setParam($this->getRequestKeyOrderIncrementId(), df_o($params, 'txn'));
-		$this->getRequest()
-			->setParams(
-				array(
-					$this->getRequestKeyShopId() => df_o($params, 'login')
-					,$this->getRequestKeySignature() => df_o($params, 'password')
-					/**
-					 * Df_Payment_Model_Action_Confirm::getRequestValueServicePaymentState
-					 * должен вернуть строку
-					 */
-					,$this->getRequestKeyServicePaymentState() => strval(df_o($params, 'status'))
-				)
-			)
-		;
-		return 0;
-	}
-
-	/**
-	 * @override
-	 * @return Df_Qiwi_Model_Action_Confirm
-	 * @throws Mage_Core_Exception
-	 */
-	protected function checkPaymentAmount() {
-		return $this;
-	}
+	protected function getRequestKeyOrderIncrementId() {return 'order_increment_id';}
 
 	/**
 	 * @override
@@ -95,9 +51,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {
-		return $this->getSoapServer()->getLastResponse();
-	}
+	protected function getResponseTextForSuccess() {return $this->getSoapServer()->getLastResponse();}
 
 	/**
 	 * @override
@@ -105,14 +59,10 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var string $result */
-		$result =
-			strtoupper(md5(
-				df_concat(
-					$this->adjustSignatureParamEncoding($this->getRequestValueOrderIncrementId())
-					,strtoupper(md5($this->adjustSignatureParamEncoding($this->getResponsePassword())))
-				)
-			))
-		;
+		$result = strtoupper(md5(df_concat(
+			$this->adjustSignatureParamEncoding($this->getRequestValueOrderIncrementId())
+			,strtoupper(md5($this->adjustSignatureParamEncoding($this->getResponsePassword())))
+		)));
 		return $result;
 	}
 
@@ -125,12 +75,24 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	}
 
 	/**
+	 * @override
+	 * @see Df_Payment_Model_Action_Confirm::_process()
+	 * @used-by Df_Core_Model_Action::process()
+	 * @return void
+	 */
+	protected function _process() {
+		/** @uses updateBill() */
+		$this->getSoapServer()->handle();
+		parent::_process();
+	}
+
+	/**
 	 * @param string $signatureParam
 	 * @return string
 	 */
 	private function adjustSignatureParamEncoding($signatureParam) {
 		df_param_string($signatureParam, 0);
-		return df_text()->convertUtf8ToWindows1251($signatureParam);
+		return rm_1251_to($signatureParam);
 	}
 
 	/**
@@ -162,22 +124,17 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				$result = self::T__PAYMENT_STATE__CANCELLED__TIMEOUT;
 			}
 		}
-		return rm_concat_clean(' '
-			,df_h()->qiwi()->__($result)
-			,rm_sprintf(df_h()->qiwi()->__('Код состояния платежа: «%d».'), $code)
-		);
+		return rm_concat_clean(' ', $result, "Код состояния платежа: «{$code}».");
 	}
 
 	/** @return Df_Zf_Soap_Server */
 	private function getSoapServer() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Zf_Soap_Server $result */
-			$result =
-				new Df_Zf_Soap_Server (
-					Mage::getConfig()->getModuleDir('etc', 'Df_Qiwi') . DS. 'IShopClientWS.wsdl'
-					,array('encoding' => 'UTF-8')
-				)
-			;
+			$result = new Df_Zf_Soap_Server(
+				Mage::getConfig()->getModuleDir('etc', 'Df_Qiwi') . DS. 'IShopClientWS.wsdl'
+				,array('encoding' => 'UTF-8')
+			);
 			// Soap 1.2 и так является значением по умолчанию,
 			// но данным выражением мы явно это подчёркиваем.
 			$result->setSoapVersion(SOAP_1_2);
@@ -188,7 +145,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const PAYMENT_STATE__BILL_CREATED = 50;
 	const PAYMENT_STATE__PROCESSING = 52;
 	const PAYMENT_STATE__PROCESSED = 60;
@@ -206,12 +163,4 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	;
 	const T__PAYMENT_STATE__CANCELLED__OTHER = 'Счёт отменён.';
 	const T__PAYMENT_STATE__CANCELLED__TIMEOUT = 'Счёт отменён, т.к. истекло время его оплаты.';
-	/**
-	 * @static
-	 * @param Df_Qiwi_ConfirmController $controller
-	 * @return Df_Qiwi_Model_Action_Confirm
-	 */
-	public static function i(Df_Qiwi_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
 }

@@ -22,8 +22,11 @@ class Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before extends Df
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
+	protected function getExpectedEventPrefix() {return 'adminhtml_sales_order_create_process_data_before';}
 
-	const _CLASS = __CLASS__;
-	const EXPECTED_EVENT_PREFIX = 'adminhtml_sales_order_create_process_data_before';
+	/**
+	 * @used-by Df_Adminhtml_Observer::adminhtml_sales_order_create_process_data_before()
+	 * @used-by Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

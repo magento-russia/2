@@ -2,14 +2,27 @@
 <config>
 	<modules>
 		<Df_Localization>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Русификация</title>
+			<version>1.0.0</version>
 		</Df_Localization>
 	</modules>
+	<df>
+		<admin>
+			<notifiers>
+				<localization__theme>Df_Localization_Notifier_Theme</localization__theme>
+			</notifiers>
+		</admin>
+		<features>
+			<df-localization>
+				<title>Русификация</title>
+				<url>http://magento-forum.ru/topic/2031/</url>
+			</df-localization>
+		</features>
+	</df>
 	<global>
 		<blocks><df_localization><class>Df_Localization_Block</class></df_localization></blocks>
 		<helpers><df_localization><class>Df_Localization_Helper</class></df_localization></helpers>
-		<models><df_localization><class>Df_Localization_Model</class></df_localization></models>
 	</global>
 	<admin>
 		<routers>
@@ -60,13 +73,6 @@
 			</email>
 		</df_localization>
 	</default>
-	<df>
-		<admin>
-			<notifiers>
-				<localization__theme>Df_Localization_Model_Notifier_Theme</localization__theme>
-			</notifiers>
-		</admin>
-	</df>
 	<rm>
 		<translation>
 			<default>

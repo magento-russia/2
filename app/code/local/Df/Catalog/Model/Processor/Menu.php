@@ -9,8 +9,12 @@ class Df_Catalog_Model_Processor_Menu extends Df_Core_Model {
 		}
 	}
 
-	/** @return string[] */
-	protected function getPropertiesToCachePerStore() {return array('_root');}
+	/**
+	 * @override
+	 * @see Df_Core_Model::cachedObjects()
+	 * @return string[]
+	 */
+	protected function cachedObjects() {return array('_root');}
 
 	/**
 	 * @param Varien_Data_Tree_Node $parent
@@ -33,19 +37,17 @@ class Df_Catalog_Model_Processor_Menu extends Df_Core_Model {
 	 */
 	private function addCategory(Varien_Data_Tree_Node $parent, Varien_Object $category) {
 		/** @var Varien_Data_Tree_Node $node */
-		$node =
-			new Varien_Data_Tree_Node(
-				$data = array(
-					'name' => $category->getName()
-					,'id' => 'category-node-' . $category->getId()
-					,'url' => df_mage()->catalog()->categoryHelper()->getCategoryUrl($category)
-					,self::$NODE__CATEGORY_ID => $category->getId()
-				)
-				,$idField = 'id'
-				,$parent->getTree()
-				,$parent
+		$node = new Varien_Data_Tree_Node(
+			$data = array(
+				'name' => $category->getName()
+				,'id' => 'category-node-' . $category->getId()
+				,'url' => df_mage()->catalog()->categoryHelper()->getCategoryUrl($category)
+				,self::$NODE__CATEGORY_ID => $category->getId()
 			)
-		;
+			,$idField = 'id'
+			,$parent->getTree()
+			,$parent
+		);
 		$parent->addChild($node);
 		$this->addCategories(
 			$node
@@ -103,19 +105,14 @@ class Df_Catalog_Model_Processor_Menu extends Df_Core_Model {
 	private function isActive(Varien_Data_Tree_Node $node) {
 		/** @var array(int => int) $map */
 		static $map;
-		if (!isset($map)) {
+		if (is_null($map)) {
 			$map =
 				!rm_state()->hasCategory()
 				? array()
-				: array_flip(
-					array_map(
-						'intval'
-						, explode(',', rm_state()->getCurrentCategory()->getPathInStore())
-					)
-				)
+				: array_flip(df_csv_parse_int(rm_state()->getCurrentCategory()->getPathInStore()))
 			;
 		}
-		$result = isset($map[intval($node->getData(self::$NODE__CATEGORY_ID))]);
+		$result = isset($map[(int)$node->getData(self::$NODE__CATEGORY_ID)]);
 		return $result;
 	}
 

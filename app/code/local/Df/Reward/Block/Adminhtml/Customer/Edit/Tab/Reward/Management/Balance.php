@@ -16,17 +16,15 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance exte
 	 */
 	protected function _prepareLayout()
 	{
-		if (!df_mage()->admin()->session()->isAllowed('df_reward/balance')) {
+		if (!rm_admin_allowed('df_reward/balance')) {
 			// unset template to get empty output
 			$this->setTemplate(null);
-		} else {
-			$this->setChild(
-				'grid', Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid::i()
+		}
+		else {
+			$this->setChild('grid',
+				rm_block_l(new Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid)
 			);
 		}
 		return parent::_prepareLayout();
 	}
-
-	/** @return Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance */
-	public static function i() {return df_block(__CLASS__);}
 }

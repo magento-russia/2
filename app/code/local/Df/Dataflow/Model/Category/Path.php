@@ -1,19 +1,14 @@
 <?php
 class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/**
-	 * The path can be mirrored to several categories
-	 * (e.g., with same names but in different tree branches)
+	 * Не кэшируем результат, потому что метод — одноразовый:
+	 * @used-by Df_Dataflow_Model_Importer_Product_Categories::getCategoriesByPath()
 	 * @return Df_Catalog_Model_Category[]
 	 */
 	public function getCategories() {
 		/** @var Df_Catalog_Model_Category[] $result */
-		$result = $this->findCategories();;
-		df_result_array($result);
-		if (0 === count($result)) {
-			$result = $this->createCategories();
-			df_result_array($result);
-		}
-		return $result;
+		$result = $this->findCategories();
+		return $result ? $result : $this->createCategories();
 	}
 
 	/** @return Df_Catalog_Model_Category[] */
@@ -21,11 +16,11 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		/** @var mixed[][] $relevancies */
 		$relevancies = $this->getTheMostRelevantExistedCategoriesToInsertToInsertNewPath();
 		df_assert_array($relevancies);
-		/** @var Df_Catalog_Model_Category[] $result */
-		$result = array();
-		if (0 === count($relevancies)){
+		if (!$relevancies){
 			$relevancies[]= array(self::INTERNAL_PARAM__IDENTICAL_PART_LENGTH => 0);
 		}
+		/** @var Df_Catalog_Model_Category[] $result */
+		$result = array();
 		foreach ($relevancies as $relevancy) {
 			/** @var mixed[] $relevancy */
 			df_assert_array($relevancy);
@@ -35,7 +30,6 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 			/** @var Df_Catalog_Model_Category|null $nodeToGrow */
 			$nodeToGrow = null;
 			/** @var array $pathToAdd */
-			$pathToAdd = array();
 			if (0 === $identicalPartLength) {
 				// Add category to the root
 				$pathToAdd = $this->getPathAsNamesArray();
@@ -81,44 +75,38 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 				 * CONSTRAINT `FK_CAT_CTGR_FLAT_STORE_1_ENTT_ID_CAT_CTGR_ENTT_ENTT_ID`
 				 * FOREIGN KEY (`entity_id`) REFERENCES `catalog_category_entity` (`en)
 				 */
-				$nodeToGrow =
-					Df_Catalog_Model_Category::createAndSave(
-						array(
-							Df_Catalog_Model_Category::P__PATH =>
-								!$nodeToGrow
-								? $this->getDefaultSystemPath()
-								: $nodeToGrow->getDataUsingMethod(
-									Df_Catalog_Model_Category::P__PATH
-								)
-							,Df_Catalog_Model_Category::P__NAME => $name
-							,Df_Catalog_Model_Category::P__IS_ACTIVE => true
-							,Df_Catalog_Model_Category::P__IS_ANCHOR => true
-							,Df_Catalog_Model_Category::P__DISPLAY_MODE =>
-								Df_Catalog_Model_Category::DM_MIXED
-						)
-						,$this->getStore()->getId()
-					)
-				;
+				$nodeToGrow = Df_Catalog_Model_Category::createAndSave(array(
+					Df_Catalog_Model_Category::P__PATH =>
+						!$nodeToGrow ? $this->getDefaultSystemPath() : $nodeToGrow->getPath()
+					,Df_Catalog_Model_Category::P__NAME => $name
+					,Df_Catalog_Model_Category::P__IS_ACTIVE => true
+					,Df_Catalog_Model_Category::P__IS_ANCHOR => true
+					,Df_Catalog_Model_Category::P__DISPLAY_MODE => Df_Catalog_Model_Category::DM_MIXED
+				),$this->store()->getId());
 			}
-			if (!is_null($result)) {
-				$result[]= $nodeToGrow;
-			}
+			$result[]= $nodeToGrow;
 		}
 		return $result;
 	}
 
 	/**
-	 * Этот метод может быть приватным,
-	 * несмотря на использование его как callable,
-	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * Этот метод вызывает сам себя через @uses array_map()
+	 * @used-by escapeSlash()
+	 * @used-by array_map()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
-	 * @param string $string
-	 * @return string
+	 * http://3v4l.org/OipEQ
+	 * @param string|string[] $string
+	 * @return string|string[]
 	 */
-	private function escapeSlash($string) {return str_replace(self::PARTS_SEPARATOR, '\/', $string);}
+	private function escapeSlash($string) {
+		return
+			is_array($string)
+			/** @uses escapeSlash() */
+			? array_map(array($this, __FUNCTION__), $string)
+			: str_replace(self::PARTS_SEPARATOR, '\/', $string)
+		;
+	}
 
 	/** @return Df_Catalog_Model_Category[] */
 	private function findCategories() {
@@ -148,7 +136,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		df_param_string($name, 0);
 		/** @var Df_Catalog_Model_Resource_Category_Collection $result */
 		$result = Df_Catalog_Model_Category::c();
-		$result->setStore($this->getStore());
+		$result->setStore($this->store());
 		$result->addAttributeToSelect('*');
 		$result->addFieldToFilter('name', $name);
 		return $result;
@@ -157,13 +145,10 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/** @return string */
 	private function getDefaultSystemPath() {
 		/** @var int $rootId */
-		$rootId = $this->getStore()->getRootCategoryId();
+		$rootId = $this->store()->getRootCategoryId();
 		df_assert_integer($rootId);
 		if (0 === $rootId) {
-			/** @var Mage_Core_Model_Store $store */
-			$store =  Mage::app()->getStore(Mage_Core_Model_App::DISTRO_STORE_ID);
-			df_assert($store instanceof Mage_Core_Model_Store);
-			$rootId = $store->getRootCategoryId();
+			$rootId = rm_store(Mage_Core_Model_App::DISTRO_STORE_ID)->getRootCategoryId();
 		}
 		return rm_concat_clean(self::PARTS_SEPARATOR, self::FIRST_PART_FOR_ROOT, $rootId);
 	}
@@ -273,9 +258,6 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Mage_Core_Model_Store */
-	private function getStore() {return $this->cfg(self::P__STORE);}
-
 	/** @return mixed[][] */
 	private function getTheMostRelevantExistedCategoriesToInsertToInsertNewPath() {
 		/** @var mixed[][] $result */
@@ -330,7 +312,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 				$result = false;
 			}
 			else {
-				for($offset = 1; $offset < $this->getNumParts(); $offset++) {
+				for ($offset = 1; $offset < $this->getNumParts(); $offset++) {
 					/** @var int $offset */
 					/** @var string|null $currentNeedleValue */
 					$currentNeedleValue = df_a($needle, $offset);
@@ -357,9 +339,11 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	 * @return string
 	 */
 	private function pathToString(array $path) {
-		df_param_array($path, 0);
-		return implode(self::PARTS_SEPARATOR, array_map(array($this, 'escapeSlash'), $path));
+		return implode(self::PARTS_SEPARATOR, $this->escapeSlash($path));
 	}
+
+	/** @return Df_Core_Model_StoreM */
+	private function store() {return $this->cfg(self::P__STORE);}
 
 	/**
 	 * @override
@@ -368,11 +352,11 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__STORE, 'Mage_Core_Model_Store')
-			->_prop(self::P__PATH_AS_NAMES_ARRAY, self::V_ARRAY)
+			->_prop(self::P__STORE, Df_Core_Model_StoreM::_C)
+			->_prop(self::P__PATH_AS_NAMES_ARRAY, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const FIRST_PART_FOR_ROOT = '1';
 	const INTERNAL_PARAM__IDENTICAL_PART_LENGTH = 'identicalPartLength';
 	const INTERNAL_PARAM__IDENTICAL_PART = 'identicalPart';
@@ -383,10 +367,10 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param string[] $path
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_Dataflow_Model_Category_Path
 	 */
-	public static function i(array $path, Mage_Core_Model_Store $store) {
+	public static function i(array $path, Df_Core_Model_StoreM $store) {
 		return new self(array(self::P__PATH_AS_NAMES_ARRAY => $path, self::P__STORE => $store));
 	}
 }

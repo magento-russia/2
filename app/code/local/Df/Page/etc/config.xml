@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Page>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Page>
 	</modules>
 	<df>
@@ -24,7 +24,7 @@
 						1) кэширование блока
 						2) предоставление администратору возможности
 						скрывать названия товара из навигационного меню витринной товарной карточки:
-						@link http://magento-forum.ru/topic/4509/
+						http://magento-forum.ru/topic/4509/
 					-->
 					<html_breadcrumbs>Df_Page_Block_Html_Breadcrumbs</html_breadcrumbs>
 					<!--
@@ -96,18 +96,18 @@
 		<events>
 			<page_block_html_topmenu_gethtml_before>
 				<observers>
-					<df_page__page_block_html_topmenu_gethtml_before>
-						<class>df_page/dispatcher</class>
+					<Df_Page>
+						<class>Df_Page_Observer</class>
 						<method>page_block_html_topmenu_gethtml_before</method>
-					</df_page__page_block_html_topmenu_gethtml_before>
+					</Df_Page>
 				</observers>
 			</page_block_html_topmenu_gethtml_before>
 			<rm_menu_top_add_submenu>
 				<observers>
-					<df_page__rm_menu_top_add_submenu>
-						<class>df_page/dispatcher</class>
+					<Df_Page>
+						<class>Df_Page_Observer</class>
 						<method>rm_menu_top_add_submenu</method>
-					</df_page__rm_menu_top_add_submenu>
+					</Df_Page>
 				</observers>
 			</rm_menu_top_add_submenu>
 		</events>

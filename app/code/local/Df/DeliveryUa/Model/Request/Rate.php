@@ -118,7 +118,6 @@ class Df_DeliveryUa_Model_Request_Rate extends Df_DeliveryUa_Model_Request {
 	private function parseRatesForOrigin() {
 		/** @var array(int => array(string => float)) $result */
 		$result = array();
-		df_h()->phpquery()->lib();
 		/** @var phpQueryObject $pqTitle */
 		$pqTitle = $this->response()->pq('h1.pagetitle');
 		/** @var phpQueryObject $pqTable */
@@ -153,11 +152,11 @@ class Df_DeliveryUa_Model_Request_Rate extends Df_DeliveryUa_Model_Request {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__LOCATION_DESTINATION_ID, self::V_INT)
-			->_prop(self::P__LOCATION_ORIGIN_ID, self::V_INT)
+			->_prop(self::P__LOCATION_DESTINATION_ID, RM_V_INT)
+			->_prop(self::P__LOCATION_ORIGIN_ID, RM_V_INT)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__LOCATION_DESTINATION_ID = 'location_destination_id';
 	const P__LOCATION_ORIGIN_ID = 'location_origin_id';
 	const RATE__BY_VOLUME = 'by_volume';

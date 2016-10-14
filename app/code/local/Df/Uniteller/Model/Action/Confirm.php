@@ -2,39 +2,20 @@
 class Df_Uniteller_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @override
-	 * @return Df_Uniteller_Model_Action_Confirm
+	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		parent::alternativeProcessWithoutInvoicing();
-		$this->getOrder()
-			->addStatusHistoryComment(
-				$this->getPaymentStateMessage(
-					$this->getRequestValueServicePaymentState()
-				)
-			)
-		;
-		$this->getOrder()->setData(Df_Sales_Const::ORDER_PARAM__IS_CUSTOMER_NOTIFIED, false);
-		$this->getOrder()->save();
-		return $this;
+		$this->addAndSaveStatusHistoryComment(
+			$this->getPaymentStateMessage($this->getRequestValueServicePaymentState())
+		);
 	}
 
 	/**
-	 * @override
-	 * @return Df_Uniteller_Model_Action_Confirm
-	 * @throws Mage_Core_Exception
-	 */
-	protected function checkPaymentAmount() {
-		return $this;
-	}
-
-	/**
-	 * Использовать getConst нельзя из-за рекурсии.
+	 * Использовать @see getConst нельзя из-за рекурсии.
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {
-		return 'Order_ID';
-	}
+	protected function getRequestKeyOrderIncrementId() {return 'Order_ID';}
 
 	/**
 	 * После успешной оплаты картой Покупателя
@@ -55,7 +36,7 @@ class Df_Uniteller_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * следует самостоятельно инициировать запрос,
 	 * как описано в п. 6.7.1 «Запрос результатов авторизации» на стр. 40.
 	 *
-	 * @link https://mail.google.com/mail/u/0/?ui=2&ik=a7a1e9bc54&view=att&th=1344267973cfe8ac&attid=0.1&disp=inline&safe=1&zw
+	 * https://mail.google.com/mail/u/0/?ui=2&ik=a7a1e9bc54&view=att&th=1344267973cfe8ac&attid=0.1&disp=inline&safe=1&zw
 	 */
 
 	/**
@@ -64,13 +45,11 @@ class Df_Uniteller_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var array $signatureParams */
-		$signatureParams =
-			array(
-				$this->getRequestValueOrderIncrementId()
-				,$this->getRequestValueServicePaymentState()
-				,$this->getResponsePassword()
-			)
-		;
+		$signatureParams = array(
+			$this->getRequestValueOrderIncrementId()
+			,$this->getRequestValueServicePaymentState()
+			,$this->getResponsePassword()
+		);
 		return strtoupper(md5(implode($signatureParams)));
 	}
 
@@ -87,7 +66,7 @@ class Df_Uniteller_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 		 * сначала «authorized», и лишь потом — «paid».
 		 */
 		return
-				$this->getOrder()->canInvoice()
+				$this->order()->canInvoice()
 			&&
 				in_array(
 					$this->getRequestValueServicePaymentState()
@@ -117,16 +96,7 @@ class Df_Uniteller_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
 	const PAYMENT_STATE__AUTHORIZED = 'authorized';
 	const PAYMENT_STATE__PAID = 'paid';
 	const PAYMENT_STATE__CANCELED = 'canceled';
-	/**
-	 * @static
-	 * @param Df_Uniteller_ConfirmController $controller
-	 * @return Df_Uniteller_Model_Action_Confirm
-	 */
-	public static function i(Df_Uniteller_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
 }

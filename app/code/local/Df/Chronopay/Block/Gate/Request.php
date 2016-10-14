@@ -2,20 +2,20 @@
 class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	/** @return double */
 	public function getBaseGrandTotal() {
-		return $this->getPaymentInfo()->getOrder()->getBaseGrandTotal();
+		return $this->info()->getOrder()->getBaseGrandTotal();
 	}
 
 	/** @return Df_Chronopay_Model_Gate_Buyer */
 	public function getBuyer() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Buyer::i($this->getPaymentInfo());
+			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Buyer::i($this->info());
 		}
 		return $this->{__METHOD__};
 	}
 	/** @return Df_Chronopay_Model_Gate_Card */
 	public function getCard() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Card::i($this->getPaymentInfo());
+			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Card::i($this->info());
 		}
 		return $this->{__METHOD__};
 	}
@@ -23,7 +23,7 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getHash() {
 		return md5(implode('-', array(
-			df_mage()->coreHelper()->decrypt($this->getConfigParam('shared_sec'))
+			rm_decrypt($this->getConfigParam('shared_sec'))
 			,$this->getOperationCode()
 			,$this->getProductId()
 		)));
@@ -35,19 +35,14 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	/** @return string[] */
 	public function getOptions() {
 		if (!isset($this->{__METHOD__})) {
-			$options =
-				array(
-					'skip_client_callback' => 'skipClientCallback'
-					,'skip_customer_email' => 'skipCustomerEmail'
-					,'skip_rebill' => 'skipRebill'
-				)
+			/** @uses getConfigParam() */
+			$this->{__METHOD__} =
+				array_keys(array_filter(array_map(array($this, 'getConfigParam'), array(
+					'skipClientCallback' => 'skip_client_callback'
+					,'skipCustomerEmail' => 'skip_customer_email'
+					,'skipRebill' => 'skip_rebill'
+				))))
 			;
-			$this->{__METHOD__} = array();
-			foreach ($options as $key => $tag) {
-				if ($this->getConfigParam($key)) {
-					$this->{__METHOD__}[]= $tag;
-				}
-			}
 		}
 		return $this->{__METHOD__};
 	}
@@ -61,15 +56,15 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 		$result = null;
 		try {
 			$convertedPrice =
-				rm_currency()->getBase()->convert(
+				rm_currency_h()->getBase()->convert(
 					$this->getBaseGrandTotal()
-					,$this->getPaymentController()->getChronopayCurrency()
+					,$this->method()->getChronopayCurrency()
 				)
 			;
 			/** @var string $result */
 			$result = number_format((float)$convertedPrice,2 ,'.', '');
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $result;
@@ -79,36 +74,40 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	public function getProductId() {return $this->getConfigParam('product_id');}
 
 	/**
+	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
+	 */
+	protected function defaultTemplate() {return 'df/chronopay/gate/request.xml';}
+
+	/**
 	 * @param string $key
-	 * @param string|null $default[optional]
+	 * @param string|null $default [optional]
 	 * @return string|null
 	 */
 	private function getConfigParam($key, $default = null) {
 		/** @var string|null $value */
-		$value = $this->getPaymentController()->getConfigData($key);
+		$value = $this->method()->getConfigData($key);
 		return $value ? $value : $default;
 	}
 
-	/** @return Df_Chronopay_Model_Gate */
-	private function getPaymentController() {return $this->_getData('paymentController');}
-
 	/** @return Mage_Payment_Model_Info */
-	private function getPaymentInfo() {return $this->_getData('paymentInfo');}
+	private function info() {return $this[self::$P__INFO];}
 
-	const _CLASS = __CLASS__;
-	const P__PAYMENT_CONTROLLER = 'paymentController';
-	const P__PAYMENT_INFO = 'paymentInfo';
+	/** @return Df_Chronopay_Model_Gate */
+	private function method() {return $this[self::$P__METHOD];}
+	/** @var string */
+	private static $P__INFO = 'info';
+	/** @var string */
+	private static $P__METHOD = 'method';
 	/**
-	 * @param Df_Chronopay_Model_Gate $paymentController
-	 * @param Mage_Payment_Model_Info $paymentInfo
-	 * @return Df_Chronopay_Block_Gate_Request
+	 * @used-by Df_Chronopay_Model_Gate::sendPurchaseRequest()
+	 * @param Df_Chronopay_Model_Gate $method
+	 * @param Mage_Payment_Model_Info $info
+	 * @return string
 	 */
-	public static function i(
-		Df_Chronopay_Model_Gate $paymentController, Mage_Payment_Model_Info $paymentInfo
-	) {
-		return df_block(new self(array(
-			self::P__PAYMENT_CONTROLLER => $paymentController
-			, self::P__PAYMENT_INFO => $paymentInfo
-		)));
+	public static function r(Df_Chronopay_Model_Gate $method, Mage_Payment_Model_Info $info) {
+		return rm_render(__CLASS__, array(self::$P__METHOD => $method, self::$P__INFO => $info));
 	}
 }

@@ -1,28 +1,28 @@
 <?php
-/**
- * @method Df_Moneta_Model_Payment getPaymentMethod()
- */
+/** @method Df_Moneta_Model_Payment getMethod() */
 class Df_Moneta_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override
-	 * @return array(string => string)
+	 * @see Df_Payment_Model_Request_Payment::_params()
+	 * @used-by Df_Payment_Model_Request_Payment::params()
+	 * @return array(string => string|int)
 	 */
-	protected function getParamsInternal() {
+	protected function _params() {
 		/** @var array(string => string) $result */
 		$result = array(
-			self::REQUEST_VAR__ORDER_AMOUNT => $this->getAmount()->getAsString()
+			self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
 			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
 			,self::REQUEST_VAR__ORDER_CURRENCY =>
-				$this->getServiceConfig()->getCurrencyCodeInServiceFormat()
-			,self::REQUEST_VAR__ORDER_NUMBER => $this->getOrder()->getIncrementId()
+				$this->configS()->getCurrencyCodeInServiceFormat()
+			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__PAYMENT_SERVICE__PAYMENT_METHOD =>
-				$this->getServiceConfig()->getSelectedPaymentMethodCode()
+				$this->configS()->getSelectedPaymentMethodCode()
 			,self::REQUEST_VAR__PAYMENT_SERVICE__PAYMENT_METHODS => $this->getPaymentMethodsAllowed()
-			,self::REQUEST_VAR__REQUEST__TEST_MODE => rm_01($this->getPaymentMethod()->isTestMode())
-			,self::REQUEST_VAR__SIGNATURE =>	$this->getSignature()
-			,self::REQUEST_VAR__SHOP_ID => $this->getServiceConfig()->getShopId()
-			,self::REQUEST_VAR__URL_RETURN_OK =>	$this->getUrlCheckoutSuccess()
-			,self::REQUEST_VAR__URL_RETURN_NO =>	$this->getUrlCheckoutFail()
+			,self::REQUEST_VAR__REQUEST__TEST_MODE => rm_01($this->getMethod()->isTestMode())
+			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
+			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
+			,self::REQUEST_VAR__URL_RETURN_OK => rm_url_checkout_success()
+			,self::REQUEST_VAR__URL_RETURN_NO => rm_url_checkout_fail()
 		);
 		return $result;
 	}
@@ -30,9 +30,7 @@ class Df_Moneta_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return string */
 	private function getPaymentMethodsAllowed() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				implode(',', $this->getServiceConfig()->getSelectedPaymentMethodCodes())
-			;
+			$this->{__METHOD__} = df_csv($this->configS()->getSelectedPaymentMethodCodes());
 		}
 		return $this->{__METHOD__};
 	}
@@ -40,13 +38,12 @@ class Df_Moneta_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return string */
 	private function getSignature() {
 		return md5(implode($this->preprocessParams(array(
-			self::REQUEST_VAR__SHOP_ID => $this->getServiceConfig()->getShopId()
-			,self::REQUEST_VAR__ORDER_NUMBER => $this->getOrder()->getIncrementId()
-			,self::REQUEST_VAR__ORDER_AMOUNT => $this->getAmount()->getAsString()
-			,self::REQUEST_VAR__ORDER_CURRENCY => $this->getServiceConfig()->getCurrencyCodeInServiceFormat()
-			,self::REQUEST_VAR__REQUEST__TEST_MODE => rm_01($this->getPaymentMethod()->isTestMode())
-			,self::SIGNATURE_PARAM__ENCRYPTION_KEY =>
-				$this->getServiceConfig()->getResponsePassword()
+			self::REQUEST_VAR__SHOP_ID => $this->shopId()
+			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
+			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
+			,self::REQUEST_VAR__ORDER_CURRENCY => $this->configS()->getCurrencyCodeInServiceFormat()
+			,self::REQUEST_VAR__REQUEST__TEST_MODE => rm_01($this->getMethod()->isTestMode())
+			,self::SIGNATURE_PARAM__ENCRYPTION_KEY => $this->password()
 		))));
 	}
 

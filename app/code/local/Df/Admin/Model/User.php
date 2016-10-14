@@ -1,45 +1,40 @@
 <?php
 /**
  * @method Df_Admin_Model_Resource_User getResource()
+ * @method Df_Admin_Model_User setNewPassword(string $value)
+ * @method Df_Admin_Model_User setPasswordConfirmation(string $value)
  */
 class Df_Admin_Model_User extends Mage_Admin_Model_User {
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Admin_Model_Resource_User_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Admin_Model_Resource_User::mf());
-	}
-	const _CLASS = __CLASS__;
-	const P__EMAIL = 'email';
-	const P__FIRSTNAME = 'firstname';
-	const P__IS_ACTIVE = 'is_active';
-	const P__LASTNAME = 'lastname';
-	const P__NEW_PASSWORD = 'new_password';
-	const P__PASSWORD_CONFIRMATION = 'password_confirmation';
-	const P__ROLE_ID = 'role_id';
-	const P__USERNAME = 'username';
-	/** @return Df_Admin_Model_Resource_User_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public function getResourceCollection() {return self::c();}
+
 	/**
-	 * @static
+	 * @override
+	 * @return Df_Admin_Model_Resource_User
+	 */
+	protected function _getResource() {return Df_Admin_Model_Resource_User::s();}
+
+	/** @used-by Df_Admin_Model_Resource_User_Collection::_construct() */
+	const _C = __CLASS__;
+
+	/**
+	 * @used-by Df_Cms_Helper_Data::getUsersArray()
+	 * @return Df_Admin_Model_Resource_User_Collection
+	 */
+	public static function c() {return new Df_Admin_Model_Resource_User_Collection;}
+	/**
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Admin_Model_User
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 	/**
-	 * @static
+	 * @used-by Df_Cms_Block_Admin_Page_Revision_Edit_Info::getAuthor()
 	 * @param int|string $id
 	 * @param string|null $field [optional]
 	 * @return Df_Admin_Model_User
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Admin_Model_Resource_User_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
-	/** @return Df_Admin_Model_User */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

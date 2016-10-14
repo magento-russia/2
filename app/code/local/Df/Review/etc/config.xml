@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Review>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Review>
 	</modules>
 	<global>
@@ -70,10 +70,10 @@
 			-->
 			<core_session_abstract_add_message>
 				<observers>
-					<df_review__core_session_abstract_add_message>
-						<class>df_review/dispatcher</class>
+					<Df_Review>
+						<class>Df_Review_Observer</class>
 						<method>core_session_abstract_add_message</method>
-					</df_review__core_session_abstract_add_message>
+					</Df_Review>
 				</observers>
 			</core_session_abstract_add_message>
 		</events>
@@ -83,15 +83,16 @@
 			</updates>
 		</layout>
 	</frontend>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Df_Review>
-					<files>
-						<default>Mage_Review.csv</default>
-					</files>
-				</Df_Review>
-			</modules>
-		</translate>
-	</adminhtml>
+	<default>
+		<catalog>
+			<review>
+				<!--
+					2015-03-02
+					По умолчанию запрещаем анонимам писать отзывы на товар,
+					потому что иначе валится много спама.
+				-->
+				<allow_guest>0</allow_guest>
+			</review>
+		</catalog>
+	</default>
 </config>

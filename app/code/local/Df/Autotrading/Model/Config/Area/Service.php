@@ -1,5 +1,5 @@
 <?php
-class Df_Autotrading_Model_Config_Area_Service extends Df_Shipping_Model_Config_Area_Service {
+class Df_Autotrading_Model_Config_Area_Service extends Df_Shipping_Config_Area_Service {
 	/** @return bool */
 	public function checkCargoOnReceipt() {return $this->getVarFlag('check_cargo_on_receipt');}
 	/** @return bool */
@@ -20,5 +20,4 @@ class Df_Autotrading_Model_Config_Area_Service extends Df_Shipping_Model_Config_
 	public function needPlywoodBox() {return $this->getVarFlag('need_plywood_box');}
 	/** @return bool */
 	public function notifySenderAboutDelivery() {return $this->getVarFlag('notify_sender_about_delivery');}
-	const _CLASS = __CLASS__;
 }

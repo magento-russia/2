@@ -23,7 +23,7 @@ class Df_Garantpost_Model_Request_Rate_Heavy extends Df_Garantpost_Model_Request
 			// door-door — от двери до двери
 			,self::POST_PARAM__SERVICE => $this->getService()
 			,self::POST_PARAM__LOCATION_DESTINATION_NAME =>
-				df_text()->convertUtf8ToWindows1251($this->getLocationDestinationName())
+				rm_1251_to($this->getLocationDestinationName())
 			,self::POST_PARAM__WEIGHT => $this->getWeight()
 		));
 	}
@@ -49,13 +49,13 @@ class Df_Garantpost_Model_Request_Rate_Heavy extends Df_Garantpost_Model_Request
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__LOCATION_DESTINATION_NAME, self::V_STRING_NE)
-			->_prop(self::P__LOCATION_ORIGIN_ID, self::V_STRING_NE)
-			->_prop(self::P__SERVICE, self::V_STRING_NE)
-			->_prop(self::P__WEIGHT, self::V_FLOAT)
+			->_prop(self::P__LOCATION_DESTINATION_NAME, RM_V_STRING_NE)
+			->_prop(self::P__LOCATION_ORIGIN_ID, RM_V_STRING_NE)
+			->_prop(self::P__SERVICE, RM_V_STRING_NE)
+			->_prop(self::P__WEIGHT, RM_V_FLOAT)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__LOCATION_DESTINATION_NAME = 'location_destination_name';
 	const P__LOCATION_ORIGIN_ID = 'location_origin_id';
 	const P__SERVICE = 'service';

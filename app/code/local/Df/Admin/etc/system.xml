@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_tweaks_admin translate='label' module='df_admin'>
+		<df_tweaks_admin>
 			<label>Административная часть</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<interface translate='label'>
+				<interface>
 					<label>Интерфейс</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -18,42 +18,42 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<form_label__font__letter_case translate='label'>
+						<form_label__font__letter_case>
 							<label>В каком регистре отображать подписи к полям формы?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<source_model>Df_Admin_Config_Source_LetterCase</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</form_label__font__letter_case>
-						<grid_label__font__letter_case translate='label'>
+						<grid_label__font__letter_case>
 							<label>В каком регистре отображать подписи к столбцам таблиц?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<source_model>Df_Admin_Config_Source_LetterCase</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</grid_label__font__letter_case>
-						<button_label__font__letter_case translate='label'>
+						<button_label__font__letter_case>
 							<label>В каком регистре отображать надписи на кнопках?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_format_text_letterCase</source_model>
+							<source_model>Df_Admin_Config_Source_LetterCase</source_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</button_label__font__letter_case>
 					</fields>
 				</interface>
-				<system_tools_compilation translate='label'>
+				<system_tools_compilation>
 					<label>Компиляция</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>2000</sort_order>
@@ -61,7 +61,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix translate='label'>
+						<fix>
 							<label>Применить заплатку для избежания ошибок после компиляции?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -69,12 +69,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</fix>
 					</fields>
 				</system_tools_compilation>
-				<system_config translate='label'>
+				<system_config>
 					<label>Настройки</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>5000</sort_order>
@@ -82,7 +82,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<remind_fieldset_toggle_state translate='label'>
+						<remind_fieldset_toggle_state>
 							<label>Запоминать состояние схлопнутости / раскрытости групп настроек при их сохранении?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -90,12 +90,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</remind_fieldset_toggle_state>
 					</fields>
 				</system_config>
-				<reviews translate='label'>
+				<reviews>
 					<label>Отзывы</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>5250</sort_order>
@@ -111,11 +111,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</notification_template>
 					</fields>
 				</reviews>
-				<sales_customers translate='label'>
+				<sales_customers>
 					<label>Покупатели</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>5500</sort_order>
@@ -123,10 +123,10 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enable_website_changing translate='label'>
+						<enable_website_changing>
 							<label>Разрешить менять привязку покупателя к сайту</label>
 							<frontend_type>select</frontend_type>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>100</sort_order>
 							<show_in_default>1</show_in_default>
@@ -136,7 +136,7 @@
 						</enable_website_changing>
 					</fields>
 				</sales_customers>
-				<system_indices translate='label'>
+				<system_indices>
 					<label>Расчётные таблицы</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>6000</sort_order>
@@ -144,7 +144,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<varchar_length translate='label'>
+						<varchar_length>
 							<label>Максимальное количество символов для хранения значения свойства товара</label>
 							<comment>
 								<![CDATA[
@@ -166,7 +166,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 							<validate>
 								validate-number
@@ -176,7 +176,7 @@
 						</varchar_length>
 					</fields>
 				</system_indices>
-				<editor translate='label'>
+				<editor>
 					<label>Редактор</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>8000</sort_order>
@@ -184,14 +184,10 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<use_rm translate='label'>
+						<use_rm>
 							<label>Включить редактор Российской сборки?</label>
-							<comment>
-								<![CDATA[
-								]]>
-							</comment>
 							<frontend_type>select</frontend_type>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
@@ -199,7 +195,7 @@
 							<show_in_store>1</show_in_store>
 							<df_feature>df-admin-editor</df_feature>
 						</use_rm>
-						<fix_images translate='label'>
+						<fix_images>
 							<label>Устранить дефект показа картинок в редакторе?</label>
 							<comment>
 								<![CDATA[
@@ -207,7 +203,7 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
@@ -215,7 +211,7 @@
 							<show_in_store>1</show_in_store>
 							<df_feature>df-tweaks-admin</df_feature>
 						</fix_images>
-						<fix_headers_already_sent translate='label'>
+						<fix_headers_already_sent>
 							<label>Устранить дефект «HEADERS ALREADY SENT»?</label>
 							<comment>
 								<![CDATA[
@@ -223,7 +219,7 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
@@ -233,7 +229,7 @@
 						</fix_headers_already_sent>
 					</fields>
 				</editor>
-				<promotions translate='label'>
+				<promotions>
 					<label>Скидки</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>9000</sort_order>
@@ -241,10 +237,10 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix_products_subselection translate='label'>
+						<fix_products_subselection>
 							<label>Применить заплатку для опции&lt;br/&gt;«Группа товаров с определёнными условиями»?</label>
 							<frontend_type>select</frontend_type>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>100</sort_order>
 							<show_in_default>1</show_in_default>
@@ -254,7 +250,7 @@
 						</fix_products_subselection>
 					</fields>
 				</promotions>
-				<catalog_product translate='label'>
+				<catalog_product>
 					<label>Товары</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>10000</sort_order>
@@ -262,10 +258,10 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix_bundle_js translate='label'>
+						<fix_bundle_js>
 							<label>Устранить ошибку JavaScript при редактировании Bundle Products?</label>
 							<frontend_type>select</frontend_type>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
 							<sort_order>100</sort_order>
 							<show_in_default>1</show_in_default>
@@ -275,7 +271,7 @@
 						</fix_bundle_js>
 					</fields>
 				</catalog_product>
-				<system_notifications translate='label'>
+				<system_notifications>
 					<label>Уведомления</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>11000</sort_order>
@@ -283,7 +279,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix_reminder translate='label'>
+						<fix_reminder>
 							<label>Скрывать «Reminder: Change Magento`s default phone numbers» после пометки прочитанным</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -291,12 +287,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</fix_reminder>
 					</fields>
 				</system_notifications>
-				<optimization translate='label'>
+				<optimization>
 					<label>Ускорение административных задач</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>12000</sort_order>
@@ -304,7 +300,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix_double_stock_reindexing_on_product_save translate='label'>
+						<fix_double_stock_reindexing_on_product_save>
 							<label>Ускорить запись товаров в базу данных?</label>
 							<comment>
 								<![CDATA[
@@ -323,12 +319,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-tweaks-admin</df_feature>
 						</fix_double_stock_reindexing_on_product_save>
 					</fields>
 				</optimization>
-				<other translate='label'>
+				<other>
 					<label>Другое</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>13000</sort_order>
@@ -355,7 +351,7 @@
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_jqueryLoadMode</source_model>
+							<source_model>Df_Admin_Config_Source_JqueryLoadMode</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -377,7 +373,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</jquery_remove_extraneous>
 					</fields>
 				</other>

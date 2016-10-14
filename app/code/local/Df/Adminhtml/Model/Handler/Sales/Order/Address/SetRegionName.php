@@ -1,7 +1,7 @@
 <?php
 /**
  * @method Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before getEvent()
- * @link http://magento-forum.ru/topic/2612/
+ * http://magento-forum.ru/topic/2612/
  */
 class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Core_Model_Handler {
 	/**
@@ -17,16 +17,8 @@ class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Co
 		 * иногда переменная $order в этом месте равна null
 		 */
 		if (!is_null($order)) {
-			$order[self::REQUEST_PARAM__BILLING_ADDRESS] =
-				$this->processAddress(
-					df_a($order, self::REQUEST_PARAM__BILLING_ADDRESS)
-				)
-			;
-			$order[self::REQUEST_PARAM__SHIPPING_ADDRESS] =
-				$this->processAddress(
-					df_a($order, self::REQUEST_PARAM__SHIPPING_ADDRESS)
-				)
-			;
+			$this->processAddress($order, 'billing_address');
+			$this->processAddress($order, 'shipping_address');
 			$this->getEvent()->getRequest()->setParam('order', $order);
 			/**
 			 * Приходится делать так,
@@ -44,39 +36,35 @@ class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Co
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before::_CLASS;
+		return Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before::_C;
 	}
 
 	/**
-	 * @param array|null $address
-	 * @return array|null
+	 * @param array(string => mixed) $order
+	 * @param string $addressName
+	 * @return void
 	 */
-	private function processAddress($address) {
-		/** @var array|null $result */
-		$result = $address;
+	private function processAddress(array &$order, $addressName) {
+		/** @var array(string => mixed)|null $result */
+		$address = df_a($order, $addressName);
 		/**
-		 * Как ни странно, судя по отчетам $address — не всегда массив
-		 * @link http://magento-forum.ru/topic/3283/
+		 * Как ни странно, судя по отчетам $address — не всегда массив (может быть null).
+		 * http://magento-forum.ru/topic/3283/
 		 */
 		if (is_array($address)) {
 			/** @var string|null $regionName */
-			$regionName = df_a($address, self::KEY__REGION_NAME);
+			$regionName = df_a($address, 'region');
 			if (!$regionName) {
 				/** @var int $regionId */
-				$regionId = rm_nat0(df_a($address, self::KEY__REGION_ID));
+				$regionId = rm_nat0(df_a($address, 'region_id'));
 				if (0 < $regionId) {
-					$result[self::KEY__REGION_NAME] =
-						Df_Directory_Model_Region::ld($regionId)->getName()
-					;
+					$address['region'] = Df_Directory_Model_Region::ld($regionId)->getName();
 				}
 			}
 		}
-		return $result;
+		$order[$addressName] = $address;
 	}
 
-	const _CLASS = __CLASS__;
-	const KEY__REGION_NAME = 'region';
-	const KEY__REGION_ID = 'region_id';
-	const REQUEST_PARAM__BILLING_ADDRESS = 'billing_address';
-	const REQUEST_PARAM__SHIPPING_ADDRESS = 'shipping_address';
+	/** @used-by Df_Adminhtml_Observer::adminhtml_sales_order_create_process_data_before() */
+	const _C = __CLASS__;
 }

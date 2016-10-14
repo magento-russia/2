@@ -45,11 +45,11 @@ class Df_Catalog_Helper_Image extends Mage_Catalog_Helper_Image {
 	 * устранение сбоя
 	 * «Warning: imagecopymerge() expects parameter 9 to be long, string given
 	 * in lib/Varien/Image/Adapter/Gd2.php on line 472».
-	 * @link http://magento-forum.ru/topic/4581/
+	 * http://magento-forum.ru/topic/4581/
 	 *
 	 * Если администратор не указал степень прозрачности водяного знака,
 	 * то в качестве $imageOpacity сюда из метода
-	 * @see Mage_Catalog_Helper_Image::init()
+	 * @used-by Mage_Catalog_Helper_Image::init()
 			$this->setWatermarkImageOpacity(
 				Mage::getStoreConfig(
 	  				"design/watermark/{$this->_getModel()->getDestinationSubdir()}_imageOpacity"
@@ -67,7 +67,7 @@ class Df_Catalog_Helper_Image extends Mage_Catalog_Helper_Image {
 			$imageOpacity =
 				('' == df_trim($imageOpacity))
 				? 30
-				: intval($imageOpacity)
+				: (int)($imageOpacity)
 			;
 		}
 		parent::setWatermarkImageOpacity($imageOpacity);
@@ -101,6 +101,4 @@ class Df_Catalog_Helper_Image extends Mage_Catalog_Helper_Image {
 		}
 		return $this;
 	}
-
-	const _CLASS = __CLASS__;
 }

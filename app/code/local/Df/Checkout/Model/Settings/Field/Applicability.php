@@ -1,33 +1,22 @@
 <?php
 class Df_Checkout_Model_Settings_Field_Applicability extends Df_Core_Model_Settings_Group {
-	/** @return string */
-	public function confirm_password() {
-		/** @var string $result */
-		$result = $this->getValue(Df_Checkout_Const_Field::CONFIRM_PASSWORD);
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string */
-	public function customer_password() {
-		/** @var string $result */
-		$result = $this->getValue(Df_Checkout_Const_Field::CUSTOMER_PASSWORD);
-		df_result_string($result);
-		return $result;
-	}
-
 	/** @return bool */
-	public function isEnabled() {
-		return $this->getYesNo('enabled');
+	public function isEnabled() {return $this->getYesNo('enabled');}
+
+	/**
+	 * @param string $field
+	 * @return bool
+	 */
+	public function isRequired($field) {
+		return
+				Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
+			===
+				$this->getValue($field)
+		;
 	}
 
 	/** @return string */
-	public function region() {
-		/** @var string $result */
-		$result = $this->getValue(Df_Checkout_Const_Field::REGION);
-		df_result_string($result);
-		return $result;
-	}
+	public function region() {return $this->getValue(Df_Checkout_Const_Field::REGION);}
 
 	/**
 	 * @override
@@ -41,12 +30,7 @@ class Df_Checkout_Model_Settings_Field_Applicability extends Df_Core_Model_Setti
 	}
 
 	/** @return string */
-	private function getAddressType() {
-		/** @var string $result */
-		$result = $this->cfg(self::P__ADDRESS_TYPE);
-		df_result_string($result);
-		return $result;
-	}
+	private function getAddressType() {return $this->cfg(self::P__ADDRESS_TYPE);}
 
 	/**
 	 * @override
@@ -55,11 +39,11 @@ class Df_Checkout_Model_Settings_Field_Applicability extends Df_Core_Model_Setti
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ADDRESS_TYPE, self::V_STRING_NE)
+			->_prop(self::P__ADDRESS_TYPE, RM_V_STRING_NE)
 			->addData(array(self::P__SECTION => 'df_checkout'))
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ADDRESS_TYPE = 'address_type';
 	/**
 	 * @static

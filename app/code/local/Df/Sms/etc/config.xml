@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Sms>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
+			<title>SMS</title>
 		</Df_Sms>
 	</modules>
 	<df>

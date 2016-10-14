@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -25,7 +23,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 			&&
 				$this->getBlock()
 			&&
-				!rm_session_customer()->isLoggedIn()
+				!rm_customer_logged_in()
 		) {
 			$this->getBlock()->removeLinkByUrl($this->getBlock()->getUrl('customer/account'));
 		}
@@ -40,38 +38,18 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 				 * @see Df_Tweaks_Model_Handler_Header_AdjustLinks::replaceAccountLinkTitleWithCustomerName()
 				 * для анонимных покупателей ускоряет для таких покупателей работу системы.
 				 */
-				rm_session_customer()->isLoggedIn()
+				rm_customer_logged_in()
 		) {
 			$this->replaceAccountLinkTitleWithCustomerName();
 		}
 		if (
-				(
-						(
-								Df_Admin_Model_Config_Source_HideFromAnonymous::VALUE__HIDE
-							===
-								$config->hideWishlistLink()
-						)
-					||
-						(
-								(
-										Df_Admin_Model_Config_Source_HideFromAnonymous::VALUE__HIDE_FROM_ANONYMOUS
-									===
-										$config->hideWishlistLink()
-								)
-							&&
-								!rm_session_customer()->isLoggedIn()
-						)
-				)
+				Df_Admin_Config_Source_HideFromAnonymous::needHide($config->hideWishlistLink())
 			&&
 				$this->getBlock()
 		) {
 			$this->getBlock()->removeLinkByBlockType('wishlist/links');
 		}
-		if (
-				$config->hideCartLink()
-			&&
-				$this->getBlock()
-		) {
+		if ($config->hideCartLink() && $this->getBlock()) {
 			$this->getBlock()->removeLinkByUrl($this->getBlock()->getUrl('checkout/cart'));
 		}
 		if (
@@ -108,7 +86,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
 	/** @return Df_Page_Block_Template_Links|null */
@@ -125,5 +103,6 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 		return rm_n_get($this->{__METHOD__});
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

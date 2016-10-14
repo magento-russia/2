@@ -92,54 +92,58 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 			catch (Exception $e) {
 				df_notify(
 					"Получили следующий неожиданный ответ от ПЭК:\n%s"
-					,rm_print_params($responseAsArray)
+					, rm_print_params($responseAsArray)
 				);
-				throw $e;
+				df_error($e);
 			}
 		}
 		return $this->{__METHOD__};
 	}
 
+	/** @return Df_Checkout_Module_Config_Facade */
+	private function config() {return $this->cfg(self::P__RM_CONFIG);}
+
+	/** @return Df_Pec_Model_Config_Area_Service */
+	private function configS() {return $this->config()->service();}
+
 	/** @return Df_Pec_Model_Request_Rate */
 	private function getApiRequest() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Pec_Model_Request_Rate::i(array(
-				'deliver' =>
-					array(
-						'gidro' => rm_01($this->getServiceConfig()->needCargoTailLoaderAtDestination())
-						,'moscow' => 0
-						,'speed' => 0
-						,'tent' => rm_01($this->getServiceConfig()->needRemoveAwningAtDestination())
-						,'town' => $this->getLocationDestinationId()
-					)
-				,'take' =>
-					array(
-						'gidro' => rm_01($this->getServiceConfig()->needCargoTailLoaderAtOrigin())
-						,'moscow' =>
-							df_a(
-								array(
-									Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
-										::OPTION_VALUE__OUTSIDE => 0
-									,Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
-										::OPTION_VALUE__INSIDE_LITTLE_RING_RAILWAY => 1
-									,Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
-										::OPTION_VALUE__INSIDE_THIRD_RING_ROAD => 2
-									,Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
-										::OPTION_VALUE__INSIDE_GARDEN_RING => 3
-								)
-								,$this->getServiceConfig()->getMoscowCargoReceptionPoint()
-								,0
+				'deliver' => array(
+					'gidro' => rm_01($this->configS()->needCargoTailLoaderAtDestination())
+					,'moscow' => 0
+					,'speed' => 0
+					,'tent' => rm_01($this->configS()->needRemoveAwningAtDestination())
+					,'town' => $this->getLocationDestinationId()
+				)
+				,'take' => array(
+					'gidro' => rm_01($this->configS()->needCargoTailLoaderAtOrigin())
+					,'moscow' =>
+						df_a(
+							array(
+								Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
+									::OPTION_VALUE__OUTSIDE => 0
+								,Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
+									::OPTION_VALUE__INSIDE_LITTLE_RING_RAILWAY => 1
+								,Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
+									::OPTION_VALUE__INSIDE_THIRD_RING_ROAD => 2
+								,Df_Pec_Model_Config_Source_MoscowCargoReceptionPoint
+									::OPTION_VALUE__INSIDE_GARDEN_RING => 3
 							)
-						,'speed' => 0
-						,'tent' => rm_01($this->getServiceConfig()->needRemoveAwningAtOrigin())
-						,'town' => $this->getLocationSourceId()
-					)
+							,$this->configS()->getMoscowCargoReceptionPoint()
+							,0
+						)
+					,'speed' => 0
+					,'tent' => rm_01($this->configS()->needRemoveAwningAtOrigin())
+					,'town' => $this->getLocationSourceId()
+				)
 				,'fast' => 0
-				,'fixedbox' => rm_01($this->getServiceConfig()->needRigidContainer())
-				,'night' => rm_01($this->getServiceConfig()->needOvernightDelivery())
+				,'fixedbox' => rm_01($this->configS()->needRigidContainer())
+				,'night' => rm_01($this->configS()->needOvernightDelivery())
 				,'places' => $this->getPlaces()
-				,'plombir' => $this->getServiceConfig()->getSealCount()
-				,'strah' => $this->getRequest()->getDeclaredValueInRoubles()
+				,'plombir' => $this->configS()->getSealCount()
+				,'strah' => $this->rr()->getDeclaredValueInRoubles()
 			));
 		}
 		return $this->{__METHOD__};
@@ -157,18 +161,14 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 	 * @return string
 	 */
 	private function getLocationDestinationId() {
-		df_assert($this->getRequest()->getDestinationCity(), 'Укажите город.');
+		df_assert($this->rr()->getDestinationCity(), 'Укажите город.');
 		/** @var string $result */
-		$result =
-			df_a(
-				Df_Pec_Model_Request_Locations::s()->getResponseAsArray()
-				,df_h()->directory()->normalizeLocationName(
-					$this->getRequest()->getDestinationCity()
-				)
-			)
-		;
+		$result = df_a(
+			Df_Pec_Model_Request_Locations::s()->getResponseAsArray()
+			,df_h()->directory()->normalizeLocationName($this->rr()->getDestinationCity())
+		);
 		if (is_null($result)) {
-			$this->getRequest()->throwExceptionInvalidDestination();
+			$this->rr()->throwExceptionInvalidDestination();
 		}
 		df_result_string($result);
 		return $result;
@@ -186,24 +186,14 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 	 * @return string
 	 */
 	private function getLocationSourceId() {
-		df_assert(
-			$this->getRequest()->getDestinationCity()
-			, 'Администратор должен указать город склада магазина'
-		);
+		df_assert($this->rr()->getDestinationCity(), 'Администратор должен указать город склада магазина');
 		/** @var string $result */
-		$result =
-			df_a(
-				Df_Pec_Model_Request_Locations::s()->getResponseAsArray()
-				,df_h()->directory()->normalizeLocationName(
-					$this->getRequest()->getOriginCity()
-				)
-			)
-		;
+		$result = df_a(
+			Df_Pec_Model_Request_Locations::s()->getResponseAsArray()
+			, df_h()->directory()->normalizeLocationName($this->rr()->getOriginCity())
+		);
 		if (is_null($result)) {
-			df_error(
-				'Доставка из населённого пункта %s невозможна'
-				,$this->getRequest()->getOriginCity()
-			);
+			df_error('Доставка из населённого пункта %s невозможна', $this->rr()->getOriginCity());
 		}
 		df_result_string($result);
 		return $result;
@@ -214,30 +204,35 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(float|int)) $result */
 			$result = array();
-			foreach ($this->getRequest()->getQuoteItemsSimple() as $quoteItem) {
+			foreach ($this->rr()->getQuoteItemsSimple() as $quoteItem) {
 				/** @var Mage_Sales_Model_Quote_Item $quoteItem */
 				/** @var Df_Catalog_Model_Product $product */
-				$product =
-					$this->getRequest()->getProductsWithDimensions()->getItemById(
-						$quoteItem->getProductId()
-					)
-				;
+				$product = $this->rr()->getProductsWithDimensions()->getItemById(
+					$quoteItem->getProductId()
+				);
 				df_assert($product);
-				/** @var array $productDimensionsInMeters */
-				$productDimensionsInMeters =
-					array_map(
-						array(df()->units()->length(), 'convertToMetres')
-						,array(
-							$product->getLength()
-							,$product->getWidth()
-							,$product->getHeight()
-						)
-					)
-				;
-				df_assert_array($productDimensionsInMeters);
-				/** @var array(float|int) $place */
-				$place =
-					array_merge(
+				/** @var float $weight */
+				$weight = $product->getWeightInKilogrammes();
+				/**
+				 * 2015-01-25
+				 * Обратите внимание,
+				 * что для некоторых типов (например, виртуальных и скачиваемых) нормально не иметь вес.
+				 * Передавать такие товары в службу доставку не нужно.
+				 * Обратите также внимание,
+				 * что если товар по своему типу (например, простой или настраиваемый) способен иметь вес,
+				 * но информация о весе данного в базе данных интернет-магазина остутствует,
+				 * то @see Df_Catalog_Model_Product::getWeight()
+				 * вернёт не нулевой вес, а то значение, которое администратор интернет-магазина
+				 * указал в качестве веса по умолчанию.
+				 */
+				if ($weight) {
+					/** @var float[] $productDimensionsInMeters */
+					$productDimensionsInMeters = rm_length()->inMetres(
+						$product->getLength(), $product->getWidth(), $product->getHeight()
+					);
+					df_assert_array($productDimensionsInMeters);
+					/** @var array(float|int) $place */
+					$place = array_merge(
 						$productDimensionsInMeters
 						,array(
 									df_a($productDimensionsInMeters, 0)
@@ -245,35 +240,26 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 									df_a($productDimensionsInMeters, 1)
 								*
 									df_a($productDimensionsInMeters, 2)
-							,df()->units()->weight()->convertToKilogrammes(
-								rm_float($product->getWeight())
-							)
-							// Груз габаритен?
+							,$weight
+							// габаритен ли груз?
 							,1
-							,rm_01($this->getServiceConfig()->needRigidContainer())
+							,rm_01($this->configS()->needRigidContainer())
 						)
-					)
-				;
-				/** @var int $qty */
-				$qty = Df_Sales_Model_Quote_Item_Extended::i($quoteItem)->getQty();
-				for($index = 0; $index < $qty; $index++) {
-					$result[]= $place;
+					);
+					/** @var int $qty */
+					$qty = Df_Sales_Model_Quote_Item_Extended::i($quoteItem)->getQty();
+					for ($index = 0; $index < $qty; $index++) {
+						$result[]= $place;
+					}
 				}
 			}
-			df_result_array($result);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Shipping_Model_Rate_Request */
-	private function getRequest() {return $this->cfg(self::P__REQUEST);}
-
-	/** @return Df_Shipping_Model_Config_Facade */
-	private function getRmConfig() {return $this->cfg(self::P__RM_CONFIG);}
-
-	/** @return Df_Pec_Model_Config_Area_Service */
-	private function getServiceConfig() {return $this->getRmConfig()->service();}
+	/** @return Df_Shipping_Rate_Request */
+	private function rr() {return $this->cfg(self::P__REQUEST);}
 
 	/**
 	 * @override
@@ -282,11 +268,11 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__REQUEST, Df_Shipping_Model_Rate_Request::_CLASS)
-			->_prop(self::P__RM_CONFIG, Df_Shipping_Model_Config_Facade::_CLASS)
+			->_prop(self::P__REQUEST, Df_Shipping_Rate_Request::_C)
+			->_prop(self::P__RM_CONFIG, Df_Checkout_Module_Config_Facade::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__REQUEST = 'request';
 	const P__RM_CONFIG = 'rm_config';
 	const RESULT__DELIVERY_TIME_MAX = 'delivery_time_max';

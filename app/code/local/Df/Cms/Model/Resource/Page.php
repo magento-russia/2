@@ -11,8 +11,8 @@ class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Mysql4_Page {
 				->from(array('p' => rm_table('cms_page')), 'page_id')
 				->joinLeft(
 					array('ps' => rm_table('cms_page_store'))
-					,'p.page_id = ps.page_id'
-					,array()
+					, 'p.page_id = ps.page_id'
+					, null
 				)
 				// Отфильтровываем страницы, которые привязаны к ранее удалённым витринам.
 				->where(rm_conn()->prepareSqlCondition('ps.store_id', array(
@@ -41,13 +41,17 @@ class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Mysql4_Page {
 		return 1 === preg_match($pattern, $object->getData('identifier'));
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
+
 	/**
-	 * @see Df_Cms_Model_Page::_construct()
-	 * @see Df_Cms_Model_Resource_Page_Collection::_construct()
-	 * @return string
+	 * 2015-02-09
+	 * Возвращаем объект-одиночку именно таким способом,
+	 * потому что наш класс перекрывает посредством <rewrite> системный класс,
+	 * и мы хотим, чтобы вызов @see Mage::getResourceSingleton() ядром Magento
+	 * возвращал тот же объект, что и наш метод @see s(),
+	 * сохраняя тем самым объект одиночкой (это важно, например, для производительности:
+	 * сохраняя объект одиночкой — мы сохраняем его кэш между всеми пользователями объекта).
+	 * @return Df_Cms_Model_Resource_Page
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
-	/** @return Df_Cms_Model_Resource_Page */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	public static function s() {return Mage::getResourceSingleton('cms/page');}
 }

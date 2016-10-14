@@ -3,12 +3,6 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 	extends Mage_Dataflow_Model_Convert_Mapper_Abstract {
 	/**
 	 * @abstract
-	 * @return string
-	 */
-	abstract protected function getFeatureCode();
-
-	/**
-	 * @abstract
 	 * @param array $row
 	 * @return void
 	 */
@@ -38,48 +32,34 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 
 	/** @return Df_Dataflow_Model_Convert_Mapper_Abstract */
 	public function map() {
-		if (
-				df_module_enabled(Df_Core_Module::LICENSOR)
-			&&
-				!$this->getFeature()->isEnabled()
-		) {
-			$this->addException(
-				rm_sprintf(
-					self::T_LICENSE_NEEDED, $this->getFeature()->getTitle())
-					,Mage_Dataflow_Model_Convert_Exception::ERROR
-				)
+		foreach ($this->getSourceRowIds() as $sourceRowId) {
+			/** @var int $sourceRowModel */
+			/** @var Mage_Dataflow_Model_Batch_Abstract $sourceRowModel */
+			$sourceRowModel = $this->createSourceRowModel()->load($sourceRowId);
+			df_assert($sourceRowModel instanceof Mage_Dataflow_Model_Batch_Abstract);
+			/** @var array $sourceRow */
+			$sourceRow = $sourceRowModel->getBatchData();
+			df_assert_array($sourceRow);
+			/** @var array $destinationRow */
+			$destinationRow = $this->processRow($sourceRow);
+			df_assert_array($destinationRow);
+			/** @var Mage_Dataflow_Model_Batch_Abstract $destinationRowModel */
+			$destinationRowModel =
+				$this->isSourceAndDestinationAreSame()
+				? $sourceRowModel
+				: $this->createDestinationRowModel()
 			;
-		}
-		else {
-			foreach ($this->getSourceRowIds() as $sourceRowId) {
-				/** @var int $sourceRowModel */
-				/** @var Mage_Dataflow_Model_Batch_Abstract $sourceRowModel */
-				$sourceRowModel = $this->createSourceRowModel()->load($sourceRowId);
-				df_assert($sourceRowModel instanceof Mage_Dataflow_Model_Batch_Abstract);
-				/** @var array $sourceRow */
-				$sourceRow = $sourceRowModel->getBatchData();
-				df_assert_array($sourceRow);
-				/** @var array $destinationRow */
-				$destinationRow = $this->processRow($sourceRow);
-				df_assert_array($destinationRow);
-				/** @var Mage_Dataflow_Model_Batch_Abstract $destinationRowModel */
-				$destinationRowModel =
-					$this->isSourceAndDestinationAreSame()
-					? $sourceRowModel
-					: $this->createDestinationRowModel()
-				;
-				df_assert($destinationRowModel instanceof Mage_Dataflow_Model_Batch_Abstract);
-				$destinationRowModel
-					->setBatchData($destinationRow)
-					->setData('status', 2)
-				;
-				$destinationRowModel->save();
-				// update column list (list of field names)
-				$this
-					->getBatchModel()
-					->parseFieldList($destinationRowModel->getBatchData())
-				;
-			}
+			df_assert($destinationRowModel instanceof Mage_Dataflow_Model_Batch_Abstract);
+			$destinationRowModel
+				->setBatchData($destinationRow)
+				->setData('status', 2)
+			;
+			$destinationRowModel->save();
+			// update column list (list of field names)
+			$this
+				->getBatchModel()
+				->parseFieldList($destinationRowModel->getBatchData())
+			;
 		}
 		return $this;
 	}
@@ -87,8 +67,8 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 	/**
 	 * @param array $row
 	 * @param string $fieldName
-	 * @param bool $isRequired[optional]
-	 * @param string|null $defaultValue[optional]
+	 * @param bool $isRequired [optional]
+	 * @param string|null $defaultValue [optional]
 
 	 * @return string
 	 */
@@ -175,12 +155,15 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 	 * @return Mage_Dataflow_Model_Batch_Abstract
 	 */
 	protected function createRowModel($importOrExport) {
-		df_param_string($importOrExport, 0);
-		/** @var Mage_Dataflow_Model_Batch_Abstract $result */
-		$result = df_model(rm_sprintf("dataflow/batch_%s", $importOrExport));
-		df_assert($result instanceof Mage_Dataflow_Model_Batch_Abstract);
-		$result->setData('batch_id', $this->getBatchModel()->getId());
-		return $result;
+		/**
+		 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+		 * потому что в данном случае нам не нужна поддержка UTF-8.
+		 */
+		return rm_ic(
+			'Mage_Dataflow_Model_Batch_' . ucfirst($importOrExport)
+			,'Mage_Dataflow_Model_Batch_Abstract'
+			,array('batch_id' => $this->getBatchModel()->getId())
+		);
 	}
 
 	/**
@@ -219,9 +202,6 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 	private function convertBatchTableTypeToParamName($souceOrDestination) {
 		return rm_sprintf(self::DF_TABLE_TYPE_TEMPLATE, $souceOrDestination);
 	}
-
-	/** @return Df_Licensor_Model_Feature */
-	private function getFeature() {return df_feature($this->getFeatureCode());}
 
 	const DF_TABLE_TYPE_TEMPLATE = 'df-table-%s';
 	const VAR_MAP = 'map';

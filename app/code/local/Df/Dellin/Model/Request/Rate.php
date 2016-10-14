@@ -1,48 +1,43 @@
 <?php
 class Df_Dellin_Model_Request_Rate extends Df_Shipping_Model_Request {
-	/** @return int|null */
-	public function getDeliveryTimeInDays() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
-				!$this->getDateDeparture() || !$this->getDateArrival()
-				? null
-				:
-						df()->date()->getNumberOfDaysBetweenTwoDates(
-							$this->getDateDeparture(), $this->getDateArrival()
-						)
-					+
-						// Добавляем по 2 дня на каждое дополнительное перемещение между пунктами.
-						// Узлы для дополнительных перемещений могут содержать текст типа:
-						// «Срок доставки груза из г. Новороссийск в г. Анапа(Красн.кр.) составит 1 день.
-						// Отправка из филиала осуществляется по вс,пн,вт,чт..»
-						2 * (count($this->getDateNodes()) - 2)
-			);
-		}
-		return rm_n_get($this->{__METHOD__});
+	/**
+	 * @override
+	 * @return int
+	 */
+	protected function _getDeliveryTime() {
+		return
+			!$this->getDateDeparture() || !$this->getDateArrival()
+			? 0
+			:
+					df()->date()->getNumberOfDaysBetweenTwoDates(
+						$this->getDateDeparture(), $this->getDateArrival()
+					)
+				+
+					// Добавляем по 2 дня на каждое дополнительное перемещение между пунктами.
+					// Узлы для дополнительных перемещений могут содержать текст типа:
+					// «Срок доставки груза из г. Новороссийск в г. Анапа(Красн.кр.) составит 1 день.
+					// Отправка из филиала осуществляется по вс,пн,вт,чт..»
+					2 * (count($this->getDateNodes()) - 2)
+		;
 	}
-	
-	/** @return float */
-	public function getRate() {
-		if (!isset($this->{__METHOD__})) {
-			$this->responseFailureDetect();
-			$this->{__METHOD__} = rm_float((string)$this->response()->xml('/data/price'));
-			df_assert_gt0($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+
+	/**
+	 * @override
+	 * @return string
+	 */
+	protected function _getRate() {return rm_leaf_f($this->response()->xml('/data/price'));}
 
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(), array(
+		return array(
 			'Accept-Encoding' => 'gzip, deflate'
 			,'Accept-Language' => 'en-us,en;q=0.5'
 			,'Connection' => 'keep-alive'
 			,'Host' => $this->getQueryHost()
-			,'User-Agent' => Df_Core_Const::FAKE_USER_AGENT
-		));
+		) + parent::getHeaders();
 	}
 	
 	/**
@@ -76,19 +71,18 @@ class Df_Dellin_Model_Request_Rate extends Df_Shipping_Model_Request {
 
 	/**
 	 * @override
-	 * @return Df_Dellin_Model_Request_Rate
+	 * @return void
 	 * @throws Exception
 	 */
-	protected function responseFailureDetectInternal() {
-		/** @var Df_Varien_Simplexml_Element|null $errorNode */
+	protected function responseFailureDetect() {
+		/** @var Df_Core_Sxe|null $errorNode */
 		$errorNode = $this->response()->xml('/data/error');
 		if (!is_null($errorNode)) {
 			// Раньше текст диагностического сообщения имел шаблон:
 			// При обращении к API службы «Деловые Линии» произошёл сбой: «%s».
 			// Однако, как я понимаю, покупателям не нужно знать ни о каких API.
-			$this->responseFailureHandle(df_quote_russian(df_trim((string)$errorNode)));
+			df_error(df_quote_russian(df_trim(rm_leaf_s($errorNode))));
 		}
-		return $this;
 	}
 	
 	/** @return Zend_Date|null */
@@ -113,19 +107,9 @@ class Df_Dellin_Model_Request_Rate extends Df_Shipping_Model_Request {
 	 */
 	private function getDates() {
 		if (!isset($this->{__METHOD__})) {
-			try {
-				$this->responseFailureDetect();
-				$result = array();
-				foreach ($this->getDateNodes() as $dateNode) {
-					/** @var SimpleXMLElement $dateNode */
-					$result = array_merge($result, $this->parseDates($dateNode));
-				}
-				$this->{__METHOD__} = $result;
-			}
-			catch (Exception $e) {
-				$this->logResponseAsXml();
-				throw $e;
-			}
+			$this->{__METHOD__} = df_merge_single(
+				array_map(array($this, 'parseDates'), $this->getDateNodes())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -141,14 +125,13 @@ class Df_Dellin_Model_Request_Rate extends Df_Shipping_Model_Request {
 		/** @var Zend_Date[] $result */
 		$result = array();
 		/** @var string $dateNodeAsText */
-		$dateNodeAsText = (string)$dateNode;
-		df_assert_string_not_empty($dateNodeAsText);
+		$dateNodeAsText = rm_leaf_sne($dateNode);
 		/** @var string[] $matches */
 		$matches = array();
 		/** @var int $r */
 		preg_match_all('#\d+\.\d+\.\d+#', $dateNodeAsText, $matches);
 		/** @var string $dateAsText */
-		if (0 < count($matches)) {
+		if ($matches) {
 			/** @var string[] $datesAsText */
 			$datesAsText = df_a($matches, 0);
 			foreach ($datesAsText as $dateAsText) {
@@ -160,7 +143,6 @@ class Df_Dellin_Model_Request_Rate extends Df_Shipping_Model_Request {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

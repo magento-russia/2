@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_dataflow translate='label' module='df_dataflow'>
+		<df_dataflow>
 			<label>Обмен данными</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<common translate='label'>
+				<common>
 					<label>Общее</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>10</sort_order>
@@ -18,7 +18,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<show_interactive_messages translate='label'>
+						<show_interactive_messages>
 							<label>Давать интерактивный отчёт о ходе обработки данных</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -26,10 +26,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow</df_feature>
 						</show_interactive_messages>
-						<support_html_tags_in_excel translate='label'>
+						<support_html_tags_in_excel>
 							<label>Поддержка тегов HTML при экспорте и импорте файлов Excel</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -37,12 +37,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow</df_feature>
 						</support_html_tags_in_excel>
 					</fields>
 				</common>
-				<products translate='label'>
+				<products>
 					<label>Товары</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>20</sort_order>
@@ -50,7 +50,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enhanced_category_support translate='label'>
+						<enhanced_category_support>
 							<label>Импорт и экспорт товарных разделов вместе с товарами</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -58,10 +58,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow-categories</df_feature>
 						</enhanced_category_support>
-						<gallery_support translate='label'>
+						<gallery_support>
 							<label>Импорт и экспорт всех картинок товара</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -69,10 +69,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow-images</df_feature>
 						</gallery_support>
-						<delete_previous_images translate='label'>
+						<delete_previous_images>
 							<label>Удалять имеющиеся картинки товара перед загрузкой новых</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -80,10 +80,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow-images</df_feature>
 						</delete_previous_images>
-						<custom_options_support translate='label'>
+						<custom_options_support>
 							<label>Импорт и экспорт Custom Options</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -91,12 +91,12 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow-co</df_feature>
 						</custom_options_support>
 					</fields>
 				</products>
-				<patches translate='label'>
+				<patches>
 					<label>Заплатки</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>30</sort_order>
@@ -104,7 +104,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix_field_mapping_gui translate='label'>
+						<fix_field_mapping_gui>
 							<label>Исправить работу Field Mapping</label>
 							<comment>
 								<![CDATA[
@@ -118,7 +118,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-dataflow</df_feature>
 						</fix_field_mapping_gui>
 					</fields>

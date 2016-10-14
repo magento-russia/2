@@ -56,7 +56,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_Grid extends Mage_Adminhtml_Block
 					,'index' => 'invitee_email'
 					,'type' => 'text'
 					,'renderer' =>
-						(df_mage()->admin()->session()->isAllowed('customer/manage'))
+						rm_admin_allowed('customer/manage')
 						? 'df_invitation/adminhtml_invitation_grid_column_invitee'
 						: false
 				)
@@ -169,7 +169,4 @@ class Df_Invitation_Block_Adminhtml_Invitation_Grid extends Mage_Adminhtml_Block
 		$this->setDefaultDir('DESC');
 		$this->setSaveParametersInSession(true);
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation_Grid */
-	public static function i() {return df_block(__CLASS__);}
 }

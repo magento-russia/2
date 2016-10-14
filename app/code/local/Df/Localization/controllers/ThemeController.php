@@ -12,14 +12,11 @@ class Df_Localization_ThemeController extends Df_Core_Controller_Admin {
 				->renderLayout()
 			;
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
 		}
 	}
 
 	/** @return void */
-	public function processAction() {Df_Localization_Model_Onetime_Action::i($this)->process();}
-
-	/** @return bool */
-	protected function _isAllowed() {return df_enabled(Df_Core_Feature::LOCALIZATION);}
+	public function processAction() {rm_action($this, 'Df_Localization_Onetime_Action');}
 }

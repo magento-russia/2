@@ -37,15 +37,16 @@ class Df_Core_Model_Entity_Dependency extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ACTION_SAVE__CLASS_NAME, self::V_STRING_NE)
-			->_prop(self::P__CLASS_NAME, self::V_STRING_NE)
-			->_prop(self::P__DELETE_CASCADE, self::V_BOOL, false)
-			->_prop(self::P__ID_FIELD_NAME, self::V_STRING_NE)
-			->_prop(self::P__NAME, self::V_STRING_NE)
+			->_prop(self::P__ACTION_SAVE__CLASS_NAME, RM_V_STRING_NE)
+			->_prop(self::P__CLASS_NAME, RM_V_STRING_NE)
+			->_prop(self::P__DELETE_CASCADE, RM_V_BOOL, false)
+			->_prop(self::P__ID_FIELD_NAME, RM_V_STRING_NE)
+			->_prop(self::P__NAME, RM_V_STRING_NE)
 		;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Core_Model_Entity_Dependency_Collection::itemClass() */
+	const _C = __CLASS__;
 	const P__ACTION_SAVE__CLASS_NAME = 'action_save__class_name';
 	const P__CLASS_NAME = 'class_name';
 	const P__DELETE_CASCADE = 'delete_cascade';

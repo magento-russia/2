@@ -7,11 +7,8 @@ class Df_CustomerBalance_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function isEnabled() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					Mage::isInstalled()
-				&&
-					df_enabled(Df_Core_Feature::CUSTOMER_BALANCE)
-				&&
-					df_cfg()->customer()->balance()->isEnabled()
+				Mage::isInstalled()
+				&& Df_CustomerBalance_Model_Settings::s()->isEnabled()
 			;
 		}
 		return $this->{__METHOD__};

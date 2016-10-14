@@ -1,16 +1,7 @@
 <?php
 class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
-	/** @return Df_Directory_Helper_Assert */
-	public function assert() {return Df_Directory_Helper_Assert::s();}
-
-	/** @return Df_Directory_Helper_Check */
-	public function check() {return Df_Directory_Helper_Check::s();}
-
 	/** @return Df_Directory_Helper_Country */
 	public function country() {return Df_Directory_Helper_Country::s();}
-
-	/** @return Df_Directory_Helper_Currency */
-	public function currency() {return Df_Directory_Helper_Currency::s();}
 
 	/** @return Df_Directory_Helper_Finder */
 	public function finder() {return Df_Directory_Helper_Finder::s();}
@@ -41,19 +32,16 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 	public function getRegionJson() {
 		Varien_Profiler::start('TEST: '.__METHOD__);
 		if (!$this->_regionJson) {
-			$cacheKey = 'DIRECTORY_REGIONS_JSON_STORE'.Mage::app()->getStore()->getId();
+			$cacheKey = 'DIRECTORY_REGIONS_JSON_STORE' . rm_store_id();
 			if (Mage::app()->useCache('config')) {
 				$json = Mage::app()->loadCache($cacheKey);
 			}
 			if (empty($json)) {
-				$countryIds = array();
-				foreach ($this->getCountryCollection() as $country) {
-					$countryIds[]= $country->getCountryId();
-				}
 				/** @var Df_Directory_Model_Resource_Region_Collection $collection */
 				$collection = Df_Directory_Model_Region::c();
 				$collection
-					->addCountryFilter($countryIds)
+					/** @uses Mage_Directory_Model_Country::getCountryId() */
+					->addCountryFilter($this->getCountryCollection()->walk('getCountryId'))
 					->load();
 				$regions = array();
 				foreach ($collection as $region) {
@@ -176,15 +164,10 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 	 * @return Mage_Directory_Model_Resource_Region_Collection|Mage_Directory_Model_Mysql4_Region_Collection
 	 */
 	public function normalizeRegions(Varien_Data_Collection_Db $regions) {
-		df_h()->directory()->assert()->regionCollection($regions);
 		/** @var bool $needNormalize */
 		static $needNormalize;
-		if (!isset($needNormalize)) {
-			$needNormalize =
-					!df_cfg()->directory()->regionsRu()->getEnabled()
-				||
-					!df_enabled(Df_Core_Feature::DIRECTORY)
-			;
+		if (is_null($needNormalize)) {
+			$needNormalize = !df_cfg()->directory()->regionsRu()->getEnabled();
 		}
 		if ($needNormalize) {
 			Df_Directory_Model_Handler_ProcessRegionsAfterLoading::addTypeToNameStatic($regions);
@@ -199,24 +182,21 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 	 * Обратите внимание, что данный метод отсутствует
 	 * и не должен вызываться в устаревших версиях Magento CE.
 	 * @override
-	 * @param string|int|null|Mage_Core_Model_Store $storeId
-	 * @return array|null
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $storeId
+	 * @return array(string => mixed)|null
 	 */
 	protected function _getRegions($storeId) {
 		/** @var int[] $countryIds */
 		$countryIds = array();
 		/** @var Mage_Directory_Model_Resource_Country_Collection $collection */
 		$countryCollection = $this->getCountryCollection()->loadByStore($storeId);
-		foreach ($countryCollection as $country) {
-			/** @var Mage_Directory_Model_Country */
-			$countryIds[] = $country->getCountryId();
-		}
 		/** @var Mage_Directory_Model_Region $regionModel */
 		$regionModel = $this->_factory->getModel('directory/region');
 		/** @var Mage_Directory_Model_Resource_Region_Collection $collection */
 		$collection =
 			$regionModel->getResourceCollection()
-				->addCountryFilter($countryIds)
+				/** @uses Mage_Directory_Model_Country::getCountryId() */
+				->addCountryFilter($countryCollection->walk('getCountryId'))
 				->load()
 		;
 		/** @var array(string => array(string => bool|string[])) $regions */

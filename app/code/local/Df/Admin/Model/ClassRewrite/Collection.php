@@ -27,11 +27,14 @@ class Df_Admin_Model_ClassRewrite_Collection extends Df_Varien_Data_Collection {
 
 	/**
 	 * @override
+	 * @see Df_Varien_Data_Collection::itemClass()
+	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function getItemClass() {return Df_Admin_Model_ClassRewrite::_CLASS;}
+	protected function itemClass() {return Df_Admin_Model_ClassRewrite::_C;}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Admin_Block_Notifier_ClassRewriteConflicts::_construct() */
+	const _C = __CLASS__;
 
 	/** @return Df_Admin_Model_ClassRewrite_Collection */
 	public static function i() {return new self;}

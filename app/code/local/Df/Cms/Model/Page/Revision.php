@@ -13,6 +13,12 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 	}
 
 	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Page_Revision_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
 	 * Loading revision with empty data which is under
 	 * control and with other data from version and page.
 	 * Also apply extra access level checking.
@@ -59,7 +65,7 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 			$this->getResource()->commit();
 		} catch (Exception $e){
 			$this->getResource()->rollBack();
-			throw $e;
+			df_error($e);
 		}
 		$this->cleanModelCache();
 		return $this;
@@ -104,6 +110,12 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 		return parent::_beforeSave();
 	}
 
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Page_Revision
+	 */
+	protected function _getResource() {return Df_Cms_Model_Resource_Page_Revision::s();}
+
 	/** @return mixed[] */
 	protected function _prepareDataForPublish() {
 		$data = array();
@@ -147,7 +159,6 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Page_Revision::mf());
 		$this->_config = Df_Cms_Model_Config::s();
 	}
 
@@ -160,11 +171,12 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 	/** @var string */
 	protected $_eventPrefix = 'df_cms_revision';
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Cms_Model_Resource_Page_Revision_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__ID = 'revision_id';
 
 	/** @return Df_Cms_Model_Resource_Page_Revision_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Cms_Model_Resource_Page_Revision_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -178,11 +190,6 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 	 * @return Df_Cms_Model_Page_Revision
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Cms_Model_Resource_Page_Revision_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Cms_Model_Page_Revision */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

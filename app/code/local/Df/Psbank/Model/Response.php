@@ -5,25 +5,13 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	 * Присутствует во всех ответах.
 	 * Формат данных: числовой с десятичной точкой.
 	 * Длина данных: 1-11.
+	 * @used-by getReportAsArray()
+	 * @used-by Df_Psbank_Model_Request_Secondary::getParamsForSignature()
 	 * @return Df_Core_Model_Money
 	 */
-	public function getAmount() {
+	public function amount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Money::i($this->cfg('AMOUNT'));
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * Назначение: сумма подтверждения или отмены предавторизации.
-	 * Присутствует только в ответах на запросы подтверждения и отмены предавторизации.
-	 * Формат данных: числовой с десятичной точкой.
-	 * Длина данных: 1-11.
-	 * @return Df_Core_Model_Money
-	 */
-	public function getAmountOriginal() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Money::i($this->cfg('ORG_AMOUNT'));
+			$this->{__METHOD__} = rm_money($this->cfg('AMOUNT'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -86,7 +74,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	 * Результат может быть отрицательным числом, например, «-17».
 	 * Может показаться, что код ответа всегда является целым числом,
 	 * однако на практике встречал код ответа «00».
-	 * @link http://magento-forum.ru/topic/4598/
+	 * http://magento-forum.ru/topic/4598/
 	 * @return string
 	 */
 	public function getCode() {return $this->cfg(self::$P__RC);}
@@ -163,6 +151,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	 * Присутствует во всех ответах.
 	 * Формат данных: символьный.
 	 * Длина данных: 1-32.
+	 * @used-by Df_Psbank_Model_Request_Secondary::getPaymentExternalId()
 	 * @return string
 	 */
 	public function getOperationExternalId() {
@@ -198,11 +187,10 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_clean(array(
 				'Тип транзакции' => $this->getTransactionName()
-				,'Состояние операции' =>
-					rm_sprintf('%s (%s)', $this->getStatusMeaning(), $this->getCodeMeaning())
+				,'Состояние операции' => sprintf('%s (%s)', $this->getStatusMeaning(), $this->getCodeMeaning())
 				,'Код состояния операции' => $this->getCode()
 				,'Дата и время операции' => df_dts($this->getTime(), 'dd.MM.y HH:mm:ss')
-				,'Сумма операции' => $this->getAmount()->getAsString()
+				,'Сумма операции' => $this->amount()->getAsString()
 				,'Валюта операции' => $this->getCurrency()->getName()
 				,'Номер заказа' => $this->getOrderIncrementId()
 				,'Номер терминала' => $this->getTerminalId()
@@ -239,23 +227,6 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 			df_result_string_not_empty($this->{__METHOD__});
 			df_assert(ctype_digit($this->{__METHOD__}));
 			df_assert_eq(12, strlen($this->{__METHOD__}));
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * Назначение: идентификатор операции на платёжном шлюзе.
-	 * Присутствует только в ответах на запросы оплаты и приедавторизации.
-	 * Формат данных: числовой.
-	 * Длина данных: 12-15.
-	 * @return string
-	 */
-	public function getShopId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->cfg('MERCHANT');
-			df_result_string_not_empty($this->{__METHOD__});
-			df_assert(ctype_digit($this->{__METHOD__}));
-			df_assert_between(strlen($this->{__METHOD__}), 12, 15);
 		}
 		return $this->{__METHOD__};
 	}
@@ -401,8 +372,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	}
 
 	/**
-	 * Метод публичен, потому что используется методом
-	 * @see Df_Psbank_Model_Action_CustomerReturn::getRedirect()
+	 * @used-by Df_Psbank_Model_Action_CustomerReturn::getRedirect()
 	 * @override
 	 * @return bool
 	 */
@@ -448,14 +418,14 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DESC, self::V_STRING)
-			->_prop(self::$P__EMAIL, self::V_STRING)
-			->_prop(self::$P__MERCH_NAME, self::V_STRING)
-			->_prop(self::$P__RC, self::V_STRING)
-			->_prop(self::P__RM_TRANSACTION_TYPE, self::V_STRING, false)
+			->_prop(self::$P__DESC, RM_V_STRING)
+			->_prop(self::$P__EMAIL, RM_V_STRING)
+			->_prop(self::$P__MERCH_NAME, RM_V_STRING)
+			->_prop(self::$P__RC, RM_V_STRING)
+			->_prop(self::P__RM_TRANSACTION_TYPE, RM_V_STRING, false)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__RM_TRANSACTION_TYPE = 'rm_transaction_type';
 	/** @var string */
 	private static $P__DESC = 'DESC';
@@ -472,9 +442,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	 */
 	public static function i($parameters = array()) {
 		return new self(
-			is_array($parameters)
-			? $parameters
-			: array(self::P__RM_TRANSACTION_TYPE => $parameters)
+			is_array($parameters) ? $parameters : array(self::P__RM_TRANSACTION_TYPE => $parameters)
 		);
 	}
 }

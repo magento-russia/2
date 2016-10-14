@@ -16,7 +16,4 @@ class Df_Invitation_Block_Adminhtml_Invitation extends Mage_Adminhtml_Block_Widg
 		$this->_headerText = df_h()->invitation()->__('Manage Invitations');
 		$this->_addButtonLabel = df_h()->invitation()->__('Add Invitations');
 	}
-
-	/** @return Df_Invitation_Block_Adminhtml_Invitation */
-	public static function i() {return df_block(__CLASS__);}
 }

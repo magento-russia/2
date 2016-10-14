@@ -1,0 +1,38 @@
+.fancybox-wrap.df-fancybox {
+	.fancybox-inner {
+		#df-login.account-login {
+			width: auto;
+			.registered-users {
+				float: none;
+				width: auto;
+				/*
+					Оформительская тема TemplateMonster #43373
+					норовит установить здесь 280px.
+				*/
+				min-height: auto;
+				/*
+					Почему-то в оформительских темах Infortis Ultimo и Infortis Fortis
+					(а, может, и других), у надписей над полями ввода адреса почты и пароля
+					выравнивание сбивается на центральное.
+					Нам всегда нужно для этих надписей выравнивание по левому краю,
+					поэтому делаем данное правило общим.
+				*/
+				.input-box {
+					text-align: left;
+				}
+				.buttons-set {
+					/*
+						Оформительская тема TemplateMonster #43373
+						норовит установить здесь clear: both.
+					*/
+					clear: none;
+					/*
+						Оформительская тема TemplateMonster #43373
+						норовит установить здесь margin-top: -19px.
+					*/
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}

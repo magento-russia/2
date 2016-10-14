@@ -4,7 +4,7 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 	 * Цель перекрытия —
 	 * предоставление администратору возможности
 	 * скрывать названия товара из навигационного меню витринной товарной карточки:
-	 * @link http://magento-forum.ru/topic/4509/
+	 * http://magento-forum.ru/topic/4509/
 	 *
 	 * @override
 	 * @param string $crumbName
@@ -13,14 +13,11 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 	 * @return Df_Page_Block_Html_Breadcrumbs
 	 */
 	public function addCrumb($crumbName, $crumbInfo, $after = false) {
-		/** @var bool $needHideProductNameFromBreadcrumbs */
-		static $needHideProductNameFromBreadcrumbs;
-		if (!isset($needHideProductNameFromBreadcrumbs)) {
-			$needHideProductNameFromBreadcrumbs =
-				Df_Tweaks_Model_Settings_Catalog_Product_View::s()->needHideProductNameFromBreadcrumbs()
-			;
-		}
-		if (!($needHideProductNameFromBreadcrumbs && ('product' === $crumbName))) {
+		/** @var bool $hide */
+		static $hide; if (is_null($hide)) {$hide =
+			Df_Tweaks_Model_Settings_Catalog_Product_View::s()->needHideProductNameFromBreadcrumbs()
+		;}
+		if (!$hide || 'product' !== $crumbName) {
 			$crumbInfo['label'] = $this->__(df_a($crumbInfo, 'label', ''));
 			$crumbInfo['title'] = $this->__(df_a($crumbInfo, 'title', ''));
 			parent::addCrumb($crumbName, $crumbInfo, $after);
@@ -29,31 +26,29 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 	}
 
 	/**
+	 * 2015-03-12
+	 * Обратите внимание, что родительский метод @see Mage_Page_Block_Html_Breadcrumbs::getCacheKeyInfo()
+	 * появился только в Magento CE 1.8.1.0.
+	 * Мы проверяем его существование условием isset($result['crumbs'])
+	 * Свои параметры ключа добавляем только при отсутствии родительской реализации.
 	 * @override
+	 * @see Mage_Page_Block_Html_Breadcrumbs::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
 		/** @var string[] $result */
 		$result = parent::getCacheKeyInfo();
 		if (
+				!isset($result['crumbs'])
+			&&
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
 				df_cfg()->speed()->blockCaching()->pageHtmlBreadcrumbs()
 		) {
-			$result =
-				array_merge(
-					$result
-					,array(get_class($this))
-					,$this->calculateCrumbCacheKeys()
-				)
-			;
+			$result = array_merge($result, array(get_class($this)), array_keys(df_nta($this->_crumbs)));
 		}
 		return $result;
-	}
-
-	/** @return string[] */
-	private function calculateCrumbCacheKeys() {
-		return is_array($this->_crumbs) ? array_keys($this->_crumbs) : array();
 	}
 
 	/**
@@ -75,7 +70,7 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 			 * (и в полную противоположность Zend Framework
 			 * и всем остальным частям Magento, где используется кэширование)
 			 * означает, что блок не удет кэшироваться вовсе!
-			 * @see Mage_Core_Block_Abstract::_loadCache()
+			 * @used-by Mage_Core_Block_Abstract::_loadCache()
 			 */
 			$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 		}

@@ -15,13 +15,8 @@
  */
 class Df_Checkout_Model_Event_CheckoutTypeMultishipping_CreateOrdersSingle
 	extends Df_Checkout_Model_Event_SaveOrder_Abstract {
-	/** @return Mage_Sales_Model_Quote_Address */
-	public function getAddress() {
-		/** @var Mage_Sales_Model_Quote_Address $result */
-		$result = $this->getEventParam(self::EVENT_PARAM__ADDRESS);
-		df_assert($result instanceof Mage_Sales_Model_Quote_Address);
-		return $result;
-	}
+	/** @return Df_Sales_Model_Quote_Address */
+	public function getAddress() {return $this->getEventParam(self::EVENT_PARAM__ADDRESS);}
 
 	/**
 	 * @override
@@ -29,7 +24,8 @@ class Df_Checkout_Model_Event_CheckoutTypeMultishipping_CreateOrdersSingle
 	 */
 	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Checkout_Observer::checkout_type_multishipping_create_orders_single() */
+	const _C = __CLASS__;
 	const EVENT_PARAM__ADDRESS = 'address';
 	const EXPECTED_EVENT_PREFIX = 'checkout_type_multishipping_create_orders_single';
 }

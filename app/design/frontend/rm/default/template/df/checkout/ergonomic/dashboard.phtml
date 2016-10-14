@@ -17,19 +17,21 @@
 <?php
 	/** @var Mage_Checkout_Block_Onepage_Login|bool $blockLogin */
 	$blockLogin = $this->getChild('login');
-	rm_session_checkout()->getQuote()->getShippingAddress()
-		->setCollectShippingRates(true)
-	;
 	/**
-	 * Пусть система заодно зарегистрирует покупателя.
-	 * Только вот что если он потом авторизуется?
+	 * 2015-03-31
+	 * Обратите внимание, что функция @uses rm_quote_address_shipping()
+	 * не кэширует свой результат и в то же время является ресурсоёмкой,
+	 * ибо @uses Mage_Sales_Model_Quote::_getAddressByType() использует foreach.
+	 * @var Df_Sales_Model_Quote_Address $shippingAddress
 	 */
-	df_mage()->checkout()->onePageSingleton()
-		->saveCheckoutMethod(Mage_Checkout_Model_Type_Onepage::METHOD_REGISTER)
-	;
-	rm_session_checkout()->getQuote()->getShippingAddress()
-		->setSameAsBilling(true)
-	;
+	$shippingAddress = rm_quote_address_shipping();
+	$shippingAddress->setCollectShippingRates(true);
+	// Пусть система заодно зарегистрирует покупателя.
+	// Только вот что если он потом авторизуется?
+	Df_Checkout_Model_Type_Onepage::s()->saveCheckoutMethod(
+		Mage_Checkout_Model_Type_Onepage::METHOD_REGISTER
+	);
+	$shippingAddress->setSameAsBilling(true);
 	//rm_session_checkout()->setStepData('review', 'allow', true);
 ?>
 <div class='df'>
@@ -45,7 +47,7 @@
 		<?php } ?>
 		<div style='display:none;'>
 			<?php
-				echo df_block_render('customer/form_login', null, 'df/checkout/ergonomic/login.phtml');
+				echo rm_render('customer/form_login', 'df/checkout/ergonomic/login.phtml');
 				rm_session_customer()->setBeforeAuthUrl(
 					Mage::getUrl(
 						'checkout/onepage'
@@ -60,7 +62,7 @@
 				Обратите внимание, что первой описываем не левую колонку, а правую.
 				Так нужно в соответствии с техникой вёрстки двухколоночного макета,
 				когда левая колонка должна быть фиксированной ширины, а правая — резиновой.
-				@link http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
+				http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/
 			-->
 			<div class='df-body-right'>
 				<div class='df-body-right-inner'>
@@ -90,26 +92,9 @@
 				<div class='df-body-left-inner'>
 					<h2><?php echo $this->__('Customer Information') ?></h2>
 					<div class='df-legend' style="text-align:right"><span style='color:#ff0000'>*</span> - <?php echo $this->__('Required fields') ?></div>
-					<?php
-						if (
-								false
-							&&
-								$blockLogin instanceof Mage_Checkout_Block_Onepage_Login
-							&&
-								$blockLogin->isShow()
-							&&
-								rm_session_checkout()->getStepData('login', 'allow')
-						) {
-							?>
-								<div class='df-block df-block-login'>
-									<?php echo $this->getChildHtml('login'); ?>
-								</div>
-							<?php
-						}
-					?>
 					<div id='opc-billing' class='df-block df-block-address-billing'>
 						<h3 class='df-h3'><?php echo $this->__('Payment Details') ?></h3>
-						<?php echo df_block_render(Df_YandexMarket_Block_GetAddress::_CLASS); ?>
+						<?php echo rm_render('Df_YandexMarket_Block_GetAddress'); ?>
 						<?php echo $this->getChildHtml('billing'); ?>
 					</div>
 					<div id='opc-shipping' class='df-block df-block-address-shipping'>

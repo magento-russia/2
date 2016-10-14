@@ -1,6 +1,8 @@
 <?php
-abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Method_Base {
+abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Method {
 	/**
+	 * @used-by Df_Payment_Model_Request_Payment::urlCustomerReturn()
+	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::getToken()
 	 * @param Df_Sales_Model_Order $order
 	 * @return string
 	 */
@@ -14,8 +16,8 @@ abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Met
 	}
 
 	/**
-	 * Вызывается из Mage_Checkout_Model_Type_Onepage::saveOrder()
-	 * [code]
+	 * @override
+	 * @used-by Mage_Checkout_Model_Type_Onepage::saveOrder():
 			$redirectUrl = $this->getQuote()->getPayment()->getOrderPlaceRedirectUrl();
 			if (!$redirectUrl && $order->getCanSendNewEmailFlag()) {
 				try {
@@ -28,39 +30,32 @@ abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Met
 			$this->_checkoutSession->setLastOrderId($order->getId())
 				->setRedirectUrl($redirectUrl)
 				->setLastRealOrderId($order->getIncrementId());
-	 * [/code]
-	 * @override
 	 * @return string
 	 */
 	public function getOrderPlaceRedirectUrl() {
-		return
-			Mage::getUrl(
-				df_concat_url(self::RM__ROUTER_NAME, self::RM__REDIRECT_CONTROLLER_SHORT_NAME)
-				,array('_secure' => true)
-			)
-		;
+		return Mage::getUrl('df-payment/redirect', array('_secure' => true));
 	}
 
 	/**
 	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Model_Payment)
 	 * не нуждается в получении параметров при перенаправлении на него покупателя.
-	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом,
-	 * и платёжный шлюз возвращает модулю уникальный веб-адрес,
+	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом
+	 * @see Df_Alfabank_Model_Payment::getRegistrationResponse()
+	 * и платёжный шлюз возвращает модулю уникальный веб-адрес
+	 * @see Df_Alfabank_Model_Payment::getPaymentPageUrl()
 	 * на который модуль перенаправляет покупателя без параметров.
-	 *
 	 * Если в других модулях потребуется такое же поведение (перенаправление без параметров),
-	 * то посмотрите, как устроен модуль Альфа-Банк:
-	 * он перекрывает метод @see Df_Payment_Model_Method_WithRedirect::getPaymentPageParams()
-	 * (@see Df_Alfabank_Model_Payment::getPaymentPageParams()),
-	 * а класс @see Df_Alfabank_Model_Request_Payment используется
-	 * не для получения параметров перенаправления покупателя на платёжный шлюз,
-	 * а для предварительной регистрации заказа в платёжном шлюзе.
-	 * @return array(string => mixed)
+	 * то посмотрите, как устроен модуль Альфа-Банк.
+	 * @used-by Df_Payment_Block_Redirect::getFormFields()
+	 * @return array(string => string|int)
 	 */
-	public function getPaymentPageParams() {return $this->getRequestPayment()->getParams();}
+	public function getPaymentPageParams() {return Df_Payment_Model_Request_Payment::params($this);}
 
-	/** @return string */
-	public function getPaymentPageUrl() {return $this->getRmConfig()->service()->getUrlPaymentPage();}
+	/**
+	 * @used-by Df_Payment_Block_Redirect::getTargetURL()
+	 * @return string
+	 */
+	public function getPaymentPageUrl() {return $this->configS()->getUrlPaymentPage();}
 
 	/**
 	 * Method that will be executed instead of authorize or capture
@@ -85,71 +80,8 @@ abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Met
 	 * @override
 	 * @return bool
 	 */
-	public function isInitializeNeeded() {
-		return true;
-	}
+	public function isInitializeNeeded() {return true;}
 
-	/**
-	 * Метод обозначен как protected (а не private),
-	 * потому что его использует класс-потомок:
-	 * @see Df_Alfabank_Model_Request_Payment::getPaymentPageUrl().
-	 * В таком использовании нет ничего плохого:
-	 * просто сам модуль Альфа-Банк обладает индивидуальностью:
-	 * платёжный шлюз Альфа-Банка не нуждается в получении параметров
-	 * при перенаправлении на него покупателя.
-	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом,
-	 * и платёжный шлюз возвращает модулю уникальный веб-адрес
-	 * (@see Df_Alfabank_Model_Request_Payment::getPaymentPageUrl()),
-	 * на который модуль перенаправляет покупателя без параметров.
-	 * @return Df_Payment_Model_Request_Payment
-	 */
-	protected function getRequestPayment() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Payment_Model_Request_Payment $result */
-			$this->{__METHOD__} =
-				df_model(
-					$this->getRequestPaymentClass()
-					,array(Df_Payment_Model_Request_Payment::P__ORDER => $this->loadOrder())
-				)
-			;
-			df_assert($this->{__METHOD__} instanceof Df_Payment_Model_Request_Payment);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @return string
-	 * @throws Df_Core_Exception_Client
-	 */
-	protected function getRequestPaymentClass() {
-		return
-			Df_Core_Model_ClassManager::s()->getResourceClass(
-				$caller = $this
-				,$resourceSuffix = 'Model_Request_Payment'
-				,$defaultResult = null
-			)
-		;
-	}
-
-	/** @return Df_Sales_Model_Order */
-	private function loadOrder() {
-		/** @var Df_Sales_Model_Order $result */
-		$result = Df_Sales_Model_Order::i();
-		/** @var string $orderIncrementId */
-		$orderIncrementId =
-			rm_session_checkout()->getDataUsingMethod(
-				Df_Checkout_Const::SESSION_PARAM__LAST_REAL_ORDER_ID
-			)
-		;
-		if ($orderIncrementId) {
-			$result->loadByIncrementId($orderIncrementId);
-		}
-		df_assert(!is_null($result->getId()));
-		return $result;
-	}
-
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const REQUEST_PARAM__ORDER_INCREMENT_ID = 'magentoOrderIncrementId';
-	const RM__REDIRECT_CONTROLLER_SHORT_NAME = 'redirect';
-	const RM__ROUTER_NAME = 'df-payment';
 }

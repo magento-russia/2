@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 	/**
 	 * @abstract
@@ -28,10 +26,7 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 	 */
 	public function handle() {
 		if ($this->needToRemove()) {
-			foreach ($this->getBlockNames() as $blockName) {
-				/** @var string $blockName */
-				df()->layout()->removeBlock($blockName);
-			}
+			rm_block_remove($this->getBlockNames());
 		}
 	}
 
@@ -41,17 +36,12 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
 	/** @return string[] */
 	private function getApplicableConfigValues() {
-		return
-			array(
-				$this->getSettings()->removeFromAll()
-				,$this->getConfigValueForCurrentPage()
-			)
-		;
+		return array($this->getSettings()->removeFromAll(), $this->getConfigValueForCurrentPage());
 	}
 
 	/** @return string */
@@ -83,9 +73,9 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 	/** @return string[] */
 	private function getInvisibleStates() {
 		/** @var string[] $result */
-		$result = array(Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__REMOVE);
+		$result = array(Df_Admin_Config_Source_RemoveIfEmpty::REMOVE);
 		if (!$this->hasDataToShow()) {
-			$result[]= Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__REMOVE_IF_EMPTY;
+			$result[]= Df_Admin_Config_Source_RemoveIfEmpty::REMOVE_IF_EMPTY;
 		}
 		return $result;
 	}
@@ -95,5 +85,5 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 		return !!array_intersect($this->getApplicableConfigValues(), $this->getInvisibleStates());
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

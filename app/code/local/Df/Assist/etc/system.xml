@@ -3,7 +3,7 @@
    <sections>
 		<df_payment>
 			<groups>
-				<assist translate='label' module='df_assist'>
+				<assist>
 					<label>ASSIST</label>
 					<comment>
 					   <![CDATA[
@@ -20,7 +20,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -28,10 +28,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-assist</df_feature>
 						</active>
-						<payment_service__shop_id translate='label'>
+						<payment_service__shop_id>
 							<label>Номер магазина в ASSIST</label>
 							<comment>
 							   <![CDATA[
@@ -53,7 +53,7 @@
 								validate-digits
 							</validate>
 						</payment_service__shop_id>
-						<payment_service__test translate='label'>
+						<payment_service__test>
 							<label>Тестовый режим?</label>
 							<comment>
 							   <![CDATA[
@@ -69,7 +69,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__test>
-						<frontend__title translate='label'>
+						<frontend__title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -84,7 +84,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</frontend__title>
-						<frontend__description translate='label'>
+						<frontend__description>
 							<label>Примечание к способу оплаты на экране оформления заказа</label>
 							<comment>
 								<![CDATA[
@@ -99,7 +99,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__description>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -118,7 +118,7 @@
 								validate-digits
 							</validate>
 						</frontend__sort_order>
-						<payment_service___production_domain translate='label'>
+						<payment_service___production_domain>
 							<label>
 							   <![CDATA[
 									Домен платёжного сервера ASSIST для рабочего режима.
@@ -141,7 +141,7 @@
 							</depends>
 							<validate>required-entry</validate>
 						</payment_service___production_domain>
-						<payment_service__response_password translate='label'>
+						<payment_service__response_password>
 							<label>
 								Криптографический ключ
 								для шифрования обращений платёжной системы к магазину
@@ -164,7 +164,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__response_password>
-						<payment_service__currency translate='label'>
+						<payment_service__currency>
 							<label>Основная валюта для заказов</label>
 							<comment>
 							   <![CDATA[
@@ -178,7 +178,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_payment/config_source_currency</source_model>
+							<source_model>Df_Payment_Config_Source_Currency</source_model>
 							<sort_order>8000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -186,10 +186,10 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__currency>
-						<payment_service__payment_page_locale translate='label'>
+						<payment_service__payment_page_locale>
 							<label>Язык платёжной формы на сайте ASSIST</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_payment/config_source_paymentPage_locale</source_model>
+							<source_model>Df_Payment_Config_Source_PaymentPage_Locale</source_model>
 							<sort_order>8250</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -197,7 +197,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__payment_page_locale>
-						<payment_service__card_payment_action translate='label'>
+						<payment_service__card_payment_action>
 							<label>Режим оплаты банковской картой</label>
 							<comment>
 								<![CDATA[
@@ -215,7 +215,7 @@
 								]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_payment/config_source_paymentCard_paymentAction</source_model>
+							<source_model>Df_Payment_Config_Source_PaymentCard_PaymentAction</source_model>
 							<sort_order>8500</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -223,7 +223,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__card_payment_action>
-						<payment_service__payment_methods translate='label'>
+						<payment_service__payment_methods>
 							<label>Способы оплаты</label>
 							<comment>
 							   <![CDATA[
@@ -234,7 +234,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>df-multiselect</frontend_type>
-							<source_model>df_payment/config_source_paymentMethod</source_model>
+							<source_model>Df_Payment_Config_Source_PaymentMethod</source_model>
 							<sort_order>9000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -242,7 +242,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__payment_methods>
-						<frontend__allowspecific translate='label'>
+						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
 								<![CDATA[
@@ -259,7 +259,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__allowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Допустимые страны покупателей</label>
 							<comment>
 								<![CDATA[

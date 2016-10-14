@@ -1,7 +1,7 @@
 <?php
 class Df_Seo_Model_Settings_Urls extends Df_Core_Model_Settings {
 	/**
-	 * @param Mage_Core_Model_Store|int|string|null $store [optional]
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return boolean
 	 */
 	public function getAddCategoryToProductUrl($store = null) {

@@ -2,10 +2,10 @@
 abstract class Df_Dataflow_Model_Registry_MultiCollection
 	extends Df_Core_Model implements IteratorAggregate {
 	/**
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_Dataflow_Model_Registry_Collection
 	 */
-	abstract protected function getCollectionForStore(Mage_Core_Model_Store $store);
+	abstract protected function getCollectionForStore(Df_Core_Model_StoreM $store);
 
 	/**
 	 * @override
@@ -18,12 +18,23 @@ abstract class Df_Dataflow_Model_Registry_MultiCollection
 		return $this->{__METHOD__};
 	}
 
-	/** @return void */
+	/**
+	 * @return void
+	 * @throws Df_Core_Exception_Batch|Exception
+	 */
 	public function save() {
+		/** @var Df_Core_Exception_Batch $batchException */
+		$batchException = new Df_Core_Exception_Batch();
 		foreach ($this->getCollections() as $collection) {
 			/** @var Df_Dataflow_Model_Registry_Collection $collection */
-			$collection->save();
+			try {
+				$collection->save();
+			}
+			catch (Df_Core_Exception_Batch $partialBatch) {
+				$batchException->addBatch($partialBatch);
+			}
 		}
+		$batchException->throwIfNeeed();
 	}
 
 	/** @return array(int => Df_Dataflow_Model_Registry_Collection) */
@@ -32,7 +43,7 @@ abstract class Df_Dataflow_Model_Registry_MultiCollection
 			/** @var array(int => Df_Dataflow_Model_Registry_Collection) $result */
 			$result = array();
 			foreach (Mage::app()->getStores($withDefault = true) as $store) {
-				/** @var Mage_Core_Model_Store $store */
+				/** @var Df_Core_Model_StoreM $store */
 				$result[$store->getId()] = $this->getCollectionForStore($store);
 			}
 			$this->{__METHOD__} = $result;
@@ -43,16 +54,8 @@ abstract class Df_Dataflow_Model_Registry_MultiCollection
 	/** @return Mage_Core_Model_Abstract[] */
 	private function getEntities() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Abstract[] $result */
-			$result = array();
-			foreach ($this->getCollections() as $collection) {
-				/** @var Df_Dataflow_Model_Registry_Collection $collection */
-				foreach ($collection as $entity) {
-					/** @var Mage_Core_Model_Abstract $entity */
-					$result[]= $entity;
-				}
-			}
-			$this->{__METHOD__} = $result;
+			/** @uses iterator_to_array() */
+			$this->{__METHOD__} = df_merge_single(array_map('iterator_to_array', $this->getCollections()));
 		}
 		return $this->{__METHOD__};
 	}

@@ -10,7 +10,10 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Js ex
 		$result = array();
 		foreach (Mage::app()->getWebsites() as $websiteId => $website) {
 			$result[$websiteId] = array(
-				'name'		  => $website->getName(),'website_id'	=> $websiteId,'currency_code' => $website->getBaseCurrencyCode(),'groups'		=> array()
+				'name' => $website->getName()
+				,'website_id' => $websiteId
+				,'currency_code' => $website->getBaseCurrencyCode()
+				,'groups' => array()
 			);
 			foreach ($website->getGroups() as $groupId => $group) {
 				$result[$websiteId]['groups'][$groupId] = array(

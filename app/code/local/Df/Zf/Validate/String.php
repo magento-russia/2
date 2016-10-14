@@ -17,7 +17,15 @@ class Df_Zf_Validate_String extends Df_Zf_Validate_Type implements Zend_Filter_I
 	 */
 	public function isValid($value) {
 		$this->prepareValidation($value);
-		return is_string($value);
+		/**
+		 * 2015-02-16
+		 * Раньше здесь стояло просто is_string($value)
+		 * Однако интерпретатор PHP способен неявно и вполне однозначно
+		 * (без двусмысленностей, как, скажем, с вещественными числами)
+		 * конвертировать целые числа и null в строки,
+		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
+		 */
+		return is_string($value) || is_int($value) || is_null($value);
 	}
 
 	/**

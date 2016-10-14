@@ -1,6 +1,6 @@
 <?php
 class Df_Spsr_Model_Validator_Origin
-	extends Df_Shipping_Model_Config_Backend_Validator_Strategy_Origin {
+	extends Df_Shipping_Config_Backend_Validator_Strategy_Origin {
 	/**
 	 * @override
 	 * @return bool
@@ -21,7 +21,7 @@ class Df_Spsr_Model_Validator_Origin
 			)->getResult();
 			$result = true;
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_notify_exception($e);
 			$this->getBackend()->getMessages()->addMessage(new Mage_Core_Model_Message_Error(
 				rm_ets($e)
@@ -47,5 +47,5 @@ class Df_Spsr_Model_Validator_Origin
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

@@ -40,14 +40,10 @@ class Df_YandexMarket_Model_Category_Excel_Processor_Row extends Df_Core_Model {
 	}
 
 	/** @return string[] */
-	private function getRow() {
-		return $this->cfg(self::P__ROW);
-	}
+	private function getRow() {return $this->cfg(self::$P__ROW);}
 
 	/** @return Df_YandexMarket_Model_Category_Tree */
-	private function getTree() {
-		return $this->cfg(self::P__TREE);
-	}
+	private function getTree() {return $this->cfg(self::$P__TREE);}
 
 	/**
 	 * @override
@@ -56,17 +52,22 @@ class Df_YandexMarket_Model_Category_Excel_Processor_Row extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__TREE, Df_YandexMarket_Model_Category_Tree::_CLASS)
-			->_prop(self::P__ROW, self::V_ARRAY)
+			->_prop(self::$P__TREE, Df_YandexMarket_Model_Category_Tree::_C)
+			->_prop(self::$P__ROW, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
-	const P__TREE = 'tree';
-	const P__ROW = 'row';
+	const _C = __CLASS__;
+	/** @var string */
+	private static $P__ROW = 'row';
+	/** @var string */
+	private static $P__TREE = 'tree';
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param Df_YandexMarket_Model_Category_Tree $tree
+	 * @param string[] $row
 	 * @return Df_YandexMarket_Model_Category_Excel_Processor_Row
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(Df_YandexMarket_Model_Category_Tree $tree, array $row) {
+		return new self(array(self::$P__TREE => $tree, self::$P__ROW => $row));
+	}
 }

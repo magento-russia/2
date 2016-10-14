@@ -18,15 +18,15 @@
 class Df_SalesRule_Model_Event_Validator_Process extends Df_Core_Model_Event {
 	/**
 	 * Адрес данного заказа
-	 * @return Mage_Sales_Model_Quote_Address
+	 * @return Df_Sales_Model_Quote_Address
 	 */
-	public function getAddress() {return $this->getEventParam(self::P__ADDRESS);}
+	public function getAddress() {return $this->getEventParam('address');}
 
 	/**
 	 * Текущая графа из заказа
 	 * @return Mage_Sales_Model_Quote_Item_Abstract
 	 */
-	public function getCurrentQuoteItem() {return $this->getEventParam(self::P__ITEM);}
+	public function getCurrentQuoteItem() {return $this->getEventParam('item');}
 
 	/**
 	 * Количество единиц товара, на которое распространяется скидка.
@@ -42,39 +42,36 @@ class Df_SalesRule_Model_Event_Validator_Process extends Df_Core_Model_Event {
 	 * [/code]
 	 * @return int
 	 */
-	public function getQty() {return rm_nat0($this->getEventParam(self::P__QTY));}
+	public function getQty() {return rm_nat0($this->getEventParam('qty'));}
 
 	/**
 	 * Содержимое заказа
 	 * @return Mage_Sales_Model_Quote
 	 */
-	public function getQuote() {return $this->getEventParam(self::P__QUOTE);}
+	public function getQuote() {return $this->getEventParam('quote');}
 
 	/**
 	 * Возвращает результат стандартной работы ценового правила.
 	 * Меняя характеристики данного объекта — мы меняем результат работы ценового правила.
 	 * @return Varien_Object
 	 */
-	public function getResult() {return $this->getObserver()->getData(self::P__RESULT);}
+	public function getResult() {return $this->getObserver()->getData('result');}
 
 	/**
 	 * Возвращает текущее ценовое правило
 	 * @return Mage_SalesRule_Model_Rule
 	 */
-	public function getRule() {return $this->getEventParam(self::P__RULE);}
+	public function getRule() {return $this->getEventParam('rule');}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
+	protected function getExpectedEventPrefix() {return 'salesrule_validator_process';}
 
-	const _CLASS = __CLASS__;
-	const EXPECTED_EVENT_PREFIX = 'salesrule_validator_process';
-	const P__ADDRESS = 'address';
-	const P__ITEM = 'item';
-	const P__QUOTE = 'quote';
-	const P__QTY = 'qty';
-	const P__RESULT = 'result';
-	const P__RULE = 'rule';
+	/**
+	 * @used-by Df_PromoGift_Observer::salesrule_validator_process()
+	 * @used-by Df_PromoGift_Model_Handler_SalesRule_Validator_Process_Abstract::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

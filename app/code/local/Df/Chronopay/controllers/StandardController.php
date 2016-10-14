@@ -11,9 +11,6 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 
 	/** @return void */
 	public function redirectAction() {
-		if (!df_enabled(Df_Core_Feature::CHRONOPAY)) {
-			df_error('Вам надо купить лицензию на Российскую сборку Magento');
-		}
 		rm_session_checkout()->setChronopayStandardQuoteId(rm_session_checkout()->getQuoteId());
 		$order = $this->getOrder();
 		if (!$order->getId()) {
@@ -27,10 +24,7 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 			)
 			->save()
 		;
-		/** @var Df_Chronopay_Block_Standard_Redirect $block */
-		$block = Df_Chronopay_Block_Standard_Redirect::i();
-		$block->setData('order', $order);
-		$this->getResponse()->setBody($block->toHtml());
+		$this->getResponse()->setBody(Df_Chronopay_Block_Standard_Redirect::r($order));
 		rm_session_checkout()->unsQuoteId();
 	}
 
@@ -60,13 +54,13 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 		ob_start();
 		try {
 			$postData = $this->getRequest()->getPost();
-			if (!count($postData)) {
+			if (!$postData) {
 				$this->norouteAction();
 			}
 			else {
 				/** @var Df_Sales_Model_Order $order */
 				$order = Df_Sales_Model_Order::i();
-				$order->loadByIncrementId(df_mage()->coreHelper()->decrypt($postData['cs1']));
+				$order->loadByIncrementId(rm_decrypt($postData['cs1']));
 				if (!$order->getId()) {
 					df_error("invalid order id");
 				}
@@ -75,11 +69,10 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 						$processingResult = true;
 					}
 					else {
-						$result =
-							$order->getPayment()->getMethodInstance()
-								->setOrder($order)
-								->validateResponse($postData)
-						;
+						/** @var Df_Chronopay_Model_Standard $paymentMethod */
+						$paymentMethod = $order->getPayment()->getMethodInstance();
+						$paymentMethod->setOrder($order);
+						$result = $paymentMethod->validateResponse($postData);
 						if ($result instanceof Exception) {
 							if ($order->getId()) {
 								$order->addStatusToHistory($order->getStatus(), $result->getMessage());
@@ -108,20 +101,17 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 				}
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, false);
 		}
 		/**
 		 * Используем @, чтобы избежать сбоя «Failed to delete buffer zlib output compression».
 		 * Такой сбой у меня возник на сервере moysklad.magento-demo.ru
-		 * в другой точке программы при аналогичном вызове @see ob_get_clean.
+		 * в другой точке программы при аналогичном вызове @uses ob_get_clean().
 		 */
 		$output = @ob_get_clean();
 		if (!empty($output)) {
-			df_error(
-				"invalid (but catched) output\n:%s"
-				,$output
-			);
+			df_error("invalid (but catched) output\n:%s", $output);
 		}
 		if (!$processingResult) {
 			df_error("invalid processing");
@@ -134,10 +124,10 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 	}
 
 	/**
-	 * @param Mage_Sales_Model_Order $order
+	 * @param Df_Sales_Model_Order $order
 	 * @return bool
 	 */
-	protected function isOrderAlreadyPayed(Mage_Sales_Model_Order $order) {
+	protected function isOrderAlreadyPayed(Df_Sales_Model_Order $order) {
 		$result = false;
 		foreach ($order->getStatusHistoryCollection() as $historyItem) {
 			/** @var Mage_Sales_Model_Order_Status_History $historyItem */
@@ -159,10 +149,10 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 	}
 
 	/**
-	 * @param Mage_Sales_Model_Order $order
+	 * @param Df_Sales_Model_Order $order
 	 * @return bool
 	 */
-	protected function saveInvoice(Mage_Sales_Model_Order $order)
+	protected function saveInvoice(Df_Sales_Model_Order $order)
 	{
 		//if ($order->canInvoice()) {
 			$invoice = $order->prepareInvoice();
@@ -185,17 +175,16 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 	{
 		$errorMsg = df_h()->chronopay()->__('There was an error occurred during paying process.');
 		$order = $this->getOrder();
-		if (!$order->getId()) {
+		if (!$order || !$order->getId()) {
 			$this->norouteAction();
-			return;
 		}
-		if ($order instanceof Mage_Sales_Model_Order && $order->getId()) {
+		else {
 			$order->addStatusToHistory($order->getStatus(), $errorMsg);
 			$order->cancel();
 			$order->save();
+			$this->loadLayout();
+			$this->renderLayout();
+			rm_session_checkout()->unsLastRealOrderId();
 		}
-		$this->loadLayout();
-		$this->renderLayout();
-		rm_session_checkout()->unsLastRealOrderId();
 	}
 }

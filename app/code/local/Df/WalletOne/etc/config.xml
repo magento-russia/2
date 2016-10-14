@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_WalletOne>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Единая касса</title>
+			<version>1.0.0</version>
 		</Df_WalletOne>
 	</modules>
 	<global>
@@ -38,7 +39,7 @@
 		-->
 		<payment>
 			<df-wallet-one>
-				<model>df_wallet_one/payment</model>
+				<model>Df_WalletOne_Model_Payment</model>
 			</df-wallet-one>
 		</payment>
 	</default>

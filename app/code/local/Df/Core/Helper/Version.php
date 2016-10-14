@@ -1,33 +1,6 @@
 <?php
 class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
 	/** @return bool */
-	public function isItAdmin() {return $this->isLicensorGeneratorExist();}
-
-	/** @return bool */
-	public function isItFree() {return !$this->isLicensorExist();}
-
-	/** @return bool */
-	public function isLicensorEncoded() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var bool $result */
-			$result = false;
-			if ($this->isLicensorExist()) {
-				/** @var string $pathToLicensorFile */
-				$pathToLicensorFile = BP . DS . 'app/code/local/Df/Licensor/Model/License.php';
-				df_assert(file_exists($pathToLicensorFile));
-				/** @var bool $result */
-				$result =
-						false
-					!==
-						strpos(file_get_contents($pathToLicensorFile), base64_decode('SFIrYw=='))
-				;
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return bool */
 	public function isCommunityEdition() {
 		return !$this->isEnterpriseEdition() && !$this->isProfessionalEdition();
 	}
@@ -65,8 +38,8 @@ class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @param string|null $param1[optional]
-	 * @param string|null $param2[optional]
+	 * @param string|null $param1 [optional]
+	 * @param string|null $param2 [optional]
 	 * @return string|boolean
 	 */
 	public function magentoVersion($param1 = null, $param2 = null) {
@@ -143,21 +116,6 @@ class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
 	 * @return int
 	 */
 	private function hasDigits($string) {return 1 === preg_match('#\d#', $string);}
-
-	/** @return bool */
-	private function isLicensorExist() {return df_module_enabled(Df_Core_Module::LICENSOR);}
-
-	/** @return bool */
-	private function isLicensorGeneratorExist() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					@class_exists('Dfa_LicensorGenerator_Model_License_Generator')
-				&&
-					df_module_enabled(Df_Core_Module::LICENSOR_GENERATOR)
-			;
-		}
-		return $this->{__METHOD__};
-	}
 
 	/**
 	 * @param string $originalVersion

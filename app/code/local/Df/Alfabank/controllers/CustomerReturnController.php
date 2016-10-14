@@ -1,8 +1,8 @@
 <?php
 class Df_Alfabank_CustomerReturnController extends Mage_Core_Controller_Front_Action {
 	/**
-	 * Платёжная система присылает сюда подтверждение приёма оплаты от покупателя.
+	 * @uses Df_Alfabank_Model_Action_CustomerReturn
 	 * @return void
 	 */
-	public function indexAction() {Df_Alfabank_Model_Action_CustomerReturn::i($this)->process();}
+	public function indexAction() {rm_action($this);}
 }

@@ -1,12 +1,22 @@
 <?php
 /**
+ * @method Df_Cms_Model_Page_Revision|null getLastRevision()
  * @method Df_Cms_Model_Resource_Page_Version getResource()
+ * @method Df_Cms_Model_Page_Version setAccessLevel(string $value)
+ * @method Df_Cms_Model_Page_Version setLabel(string $value)
+ * @method Df_Cms_Model_Page_Version setPageId(int $value)
+ * @method Df_Cms_Model_Page_Version setUserId(int $value)
+ * @method Df_Cms_Model_Page_Version setInitialRevisionData(array $value)
  */
 class Df_Cms_Model_Page_Version extends Df_Core_Model {
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Page_Version_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
 	/** @return bool */
-	public function isPublic() {
-		return Df_Cms_Model_Page_Version::ACCESS_LEVEL_PUBLIC === $this->getAccessLevel();
-	}
+	public function isPublic() {return self::ACCESS_LEVEL_PUBLIC === $this->getAccessLevel();}
 
 	/**
 	 * Loading version with extra access level checking.
@@ -17,11 +27,7 @@ class Df_Cms_Model_Page_Version extends Df_Core_Model {
 	 * @return Df_Cms_Model_Page_Version
 	 */
 	public function loadWithRestrictions($accessLevel, $userId, $value, $field = null) {
-		$this->getResource()
-			->loadWithRestrictions(
-				$this, $accessLevel, $userId, $value, $field = null
-			)
-		;
+		$this->getResource()->loadWithRestrictions($this, $accessLevel, $userId, $value, $field = null);
 		$this->_afterLoad();
 		$this->setOrigData();
 		return $this;
@@ -29,7 +35,7 @@ class Df_Cms_Model_Page_Version extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return Df_Cms_Model_Observer
+	 * @return Df_Cms_Model_Page_Version
 	 */
 	protected function _afterDelete() {
 		Df_Cms_Model_Resource_Increment::s()->cleanIncrementRecord(
@@ -133,18 +139,17 @@ class Df_Cms_Model_Page_Version extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Cms_Model_Resource_Page_Version
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Page_Version::mf());
-	}
+	protected function _getResource() {return Df_Cms_Model_Resource_Page_Version::s();}
+
 	/** @var string */
 	protected $_eventPrefix = 'df_cms_version';
 	/** @var string */
 	protected $_eventObject = 'version';
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Cms_Model_Resource_Page_Version_Collection::_construct() */
+	const _C = __CLASS__;
 	/**
 	 * Access level constants
 	 */
@@ -154,7 +159,7 @@ class Df_Cms_Model_Page_Version extends Df_Core_Model {
 	const P__ID = 'version_id';
 
 	/** @return Df_Cms_Model_Resource_Page_Version_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Cms_Model_Resource_Page_Version_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -168,11 +173,6 @@ class Df_Cms_Model_Page_Version extends Df_Core_Model {
 	 * @return Df_Cms_Model_Page_Version
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Cms_Model_Resource_Page_Version_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Cms_Model_Page_Version */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

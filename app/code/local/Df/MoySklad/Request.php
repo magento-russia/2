@@ -38,9 +38,9 @@ class Df_MoySklad_Request extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__METHOD, self::V_STRING_NE)
-			->_prop(self::$P__PARAMS, self::V_ARRAY)
-			->_prop(self::$P__PATH, self::V_STRING)
+			->_prop(self::$P__METHOD, RM_V_STRING_NE)
+			->_prop(self::$P__PARAMS, RM_V_ARRAY)
+			->_prop(self::$P__PATH, RM_V_STRING)
 		;
 	}
 	const _C = __CLASS__;

@@ -10,10 +10,8 @@ class Df_Core_Model_Url_Rewrite extends Mage_Core_Model_Url_Rewrite {
 	public function loadByRequestPath($path) {
 		/** @var bool */
  		static $patchEnabled;
-		if (!isset($patchEnabled)) {
-			$patchEnabled =
-				df_enabled(Df_Core_Feature::SEO) && df_cfg()->seo()->urls()->getPreserveCyrillic()
-			;
+		if (is_null($patchEnabled)) {
+			$patchEnabled = df_cfg()->seo()->urls()->getPreserveCyrillic();
 		}
 		return parent::loadByRequestPath(
 			!$patchEnabled
@@ -22,7 +20,7 @@ class Df_Core_Model_Url_Rewrite extends Mage_Core_Model_Url_Rewrite {
 		);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ID = 'url_rewrite_id';
 	const P__ID_PATH = 'id_path';
 	const P__IS_SYSTEM = 'is_system';

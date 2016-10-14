@@ -6,45 +6,35 @@ class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 		/** @var bool|array $result */
 		$result = true;
 		$this->getAddress()->implodeStreetAddress();
+		/** @var Df_Checkout_Model_Settings_Field_Applicability $settings */
+		$settings = $this->getApplicabilityManager();
 		foreach ($this->getValidationMap() as $field => $errorMessage) {
 			$this->validateNotEmpty($field, $errorMessage);
 		}
 		if (
-				(
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-					===
-						$this->getApplicabilityManager()->getValue(Df_Checkout_Const_Field::STREET)
-				)
+				$settings->isRequired(Df_Checkout_Const_Field::STREET)
 			&&
 				!$this->getAddress()->getStreet(1)
 		) {
-			$this->getException()->addMessage(
-				df_mage()->core()->messageSingleton()->error('Please enter the street.')
-			);
+			$this->getException()->addMessage(df_mage()->core()->messageSingleton()->error(
+				'Please enter the street.'
+			));
 		}
 		/** @var array $_havingOptionalZip */
 		$havingOptionalZip = df_mage()->directoryHelper()->getCountriesWithOptionalZip();
 		if (
-				(
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-					===
-						$this->getApplicabilityManager()->getValue(Df_Checkout_Const_Field::POSTCODE)
-				)
+				$settings->isRequired(Df_Checkout_Const_Field::POSTCODE)
 			&&
 				!in_array($this->getAddress()->getDataUsingMethod('country_id'), $havingOptionalZip)
 			&&
 				!$this->getAddress()->getDataUsingMethod(Df_Checkout_Const_Field::POSTCODE)
 		) {
-			$this->getException()->addMessage(
-				df_mage()->core()->messageSingleton()->error('Please enter the zip/postal code.')
-			);
+			$this->getException()->addMessage(df_mage()->core()->messageSingleton()->error(
+				'Please enter the zip/postal code.'
+			));
 		}
 		if (
-				(
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-					===
-						$this->getApplicabilityManager()->getValue(Df_Checkout_Const_Field::COUNTRY)
-				)
+				$settings->isRequired(Df_Checkout_Const_Field::COUNTRY)
 			&&
 				!$this->getAddress()->getDataUsingMethod('country_id')
 		) {
@@ -53,21 +43,17 @@ class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 			);
 		}
 		if (
-				(
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-					===
-						$this->getApplicabilityManager()->getValue(Df_Checkout_Const_Field::REGION)
-				)
+				$settings->isRequired(Df_Checkout_Const_Field::REGION)
 			&&
-				count($this->getAddress()->getCountryModel()->getRegionCollection())
+				$this->getAddress()->getCountryModel()->getRegionCollection()->count()
 			&&
 				!$this->getAddress()->getRegionId()
 		) {
-			$this->getException()->addMessage(
-				df_mage()->core()->messageSingleton()->error('Please enter the state/province.')
-			);
+			$this->getException()->addMessage(df_mage()->core()->messageSingleton()->error(
+				'Please enter the state/province.'
+			));
 		}
-		if (0 < count($this->getException()->getMessages())) {
+		if ($this->getException()->getMessages()) {
 			$result = array();
 			foreach ($this->getException()->getMessages() as $message) {
 				/** @var Mage_Core_Model_Message_Abstract $message */
@@ -133,11 +119,7 @@ class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 	 */
 	private function validateNotEmpty($fieldName, $errorMessage) {
 		if (
-				(
-						Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__REQUIRED
-					===
-						$this->getApplicabilityManager()->getValue($fieldName)
-				)
+				$this->getApplicabilityManager()->isRequired($fieldName)
 			&&
 				!Zend_Validate::is($this->getAddress()->getDataUsingMethod($fieldName), 'NotEmpty')
 		) {
@@ -154,9 +136,9 @@ class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ADDRESS, Df_Customer_Const::ADDRESS_ABSTRACT_CLASS);
+		$this->_prop(self::P__ADDRESS, 'Mage_Customer_Model_Address_Abstract');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ADDRESS = 'address';
 	/**
 	 * @static

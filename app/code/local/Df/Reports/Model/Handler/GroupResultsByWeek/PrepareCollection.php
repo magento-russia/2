@@ -10,13 +10,9 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	 */
 	public function handle() {
 		if (
-				$this->isItReportCollection()
-			&&
-				df_enabled(Df_Core_Feature::REPORTS)
-			&&
-				df_cfg()->reports()->common()->enableGroupByWeek()
-			&&
-				df_h()->reports()->groupResultsByWeek()->isSelectedInFilter()
+			$this->isItReportCollection()
+			&& df_cfg()->reports()->common()->enableGroupByWeek()
+			&& df_h()->reports()->groupResultsByWeek()->isSelectedInFilter()
 		) {
 			if (!$this->getReportCollection()->isTotals()) {
 				$this->adjustGroupPart();
@@ -30,9 +26,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_CLASS;
-	}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_C;}
 
 	/** @return Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection */
 	private function adjustColumns() {
@@ -94,16 +88,14 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	/** @return bool */
 	private function isItReportCollection() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Resource_Db_Collection_Abstract $collection */
-			$collection = $this->getEvent()->getCollection();
-			$this->{__METHOD__} =
-				@class_exists('Mage_Sales_Model_Resource_Report_Collection_Abstract')
-				? ($collection instanceof Mage_Sales_Model_Resource_Report_Collection_Abstract)
-				: ($collection instanceof Mage_Sales_Model_Mysql4_Report_Collection_Abstract)
-			;
+			$this->{__METHOD__} = rm_is($this->getEvent()->getCollection(),
+				'Mage_Sales_Model_Resource_Report_Collection_Abstract'
+				,'Mage_Sales_Model_Mysql4_Report_Collection_Abstract'
+			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Reports_Observer::core_collection_abstract_load_before() */
+	const _C = __CLASS__;
 }

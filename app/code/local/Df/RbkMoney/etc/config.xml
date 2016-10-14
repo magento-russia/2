@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_RbkMoney>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>RBK Money</title>
+			<version>1.0.0</version>
 		</Df_RbkMoney>
 	</modules>
 	<global>
@@ -38,7 +39,7 @@
 		-->
 		<payment>
 			<df-rbk-money>
-				<model>df_rbk_money/payment</model>
+				<model>Df_RbkMoney_Model_Payment</model>
 			</df-rbk-money>
 		</payment>
 	</default>

@@ -15,12 +15,12 @@ class Df_Zf_Form extends Zend_Form {
 	}
 
 	/**
-	 * @throws Df_Core_Exception_InvalidUserInput
+	 * @throws Mage_Core_Exception
 	 * @return void
 	 */
 	protected function throwValidationException() {
-		/** @var Df_Core_Exception_InvalidUserInput $result */
-		$exception = new Df_Core_Exception_InvalidUserInput();
+		/** @var Mage_Core_Exception $exception */
+		$exception = new Mage_Core_Exception();
 		foreach ($this->getMessages() as $elementName => $messages) {
 			/** @var string $elementName */
 			/** @var array $messages */
@@ -35,7 +35,7 @@ class Df_Zf_Form extends Zend_Form {
 					if (!df_check_string($label)) {
 						$label = $elementName;
 					}
-					$message = rm_sprintf('Вы указали недопустимое значение для поля «%s».', $label);
+					$message = sprintf('Вы указали недопустимое значение для поля «%s».', $label);
 					foreach ($messages as $concreteMessage) {
 						/** @var string $concreteMessage */
 						$message = implode('<br/>', array($message, $concreteMessage));
@@ -47,7 +47,7 @@ class Df_Zf_Form extends Zend_Form {
 				$exception->addMessage($invalidUserInputMessage);
 			}
 		}
-		throw $exception;
+		df_error($exception);
 	}
 
 	const FORM_ELEMENT_ATTRIB__MESSAGE_FOR_INVALID_VALUE_CASE = 'messageForInvalidValueCase';

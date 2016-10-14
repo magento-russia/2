@@ -6,7 +6,7 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	 * @return Df_Catalog_Model_Category[]
 	 */
 	public function getCategoriesByPath($path) {
-		return Df_Dataflow_Model_Category_Path::i($path, $this->getStore())->getCategories();
+		return Df_Dataflow_Model_Category_Path::i($path, $this->store())->getCategories();
 	}
 
 	/**
@@ -20,7 +20,7 @@ class Df_Dataflow_Model_Importer_Product_Categories
 				$this->getProduct()->setCategoryIds($this->getCategoryIds());
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
 		}
 		return $this;
@@ -33,7 +33,7 @@ class Df_Dataflow_Model_Importer_Product_Categories
 			$result = array();
 			foreach ($this->getPaths() as $path) {
 				/** @var string[] $path */
-				$result = array_merge($result, df_clean($this->getCategoriesByPath($path)));
+				$result = array_merge($result, $this->getCategoriesByPath($path));
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -43,19 +43,16 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	/** @return int[] */
 	private function getCategoryIds() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var int[] $result */
-			$result = array();
-			foreach ($this->getCategories() as $category) {
-				/** @var Df_Catalog_Model_Category $category */
-				$result[]= rm_nat($category->getId());
-			}
 			/**
 			 * С @see rm_array_unique_fast() постоянно возникакает проблема
 			 * array_flip(): Can only flip STRING and INTEGER values
-			 * @link http://magento-forum.ru/topic/4695/
+			 * http://magento-forum.ru/topic/4695/
 			 * Лучше верну-ка старую добрую функцию @see array_unique()
+			 *
+			 * 2015-02-11
+			 * Функцию @see rm_array_unique_fast() доработал и ввёл в действите снова.
 			 */
-			$this->{__METHOD__} = array_unique($result);
+			$this->{__METHOD__} = rm_array_unique_fast(df_each($this->getCategories(), 'getId'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -103,8 +100,8 @@ class Df_Dataflow_Model_Importer_Product_Categories
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Core_Model_Store */
-	private function getStore() {return $this->cfg(self::P__STORE);}
+	/** @return Df_Core_Model_StoreM */
+	private function store() {return $this->cfg(self::P__STORE);}
 
 	/**
 	 * @override
@@ -112,21 +109,19 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__STORE, Df_Core_Const::STORE_CLASS);
+		$this->_prop(self::P__STORE, Df_Core_Model_StoreM::_C);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const IMPORTED_KEY = 'df_categories';
 	const P__STORE = 'store';
 	/**
 	 * @static
 	 * @param Df_Catalog_Model_Product $product
 	 * @param array(string => mixed) $row
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_Dataflow_Model_Importer_Product_Categories
 	 */
-	public static function i(
-		Df_Catalog_Model_Product $product, array $row, Mage_Core_Model_Store $store
-	) {
+	public static function i(Df_Catalog_Model_Product $product, array $row, Df_Core_Model_StoreM $store) {
 		return new self(array(
 			self::P__PRODUCT => $product
 			, self::P__IMPORTED_ROW => $row

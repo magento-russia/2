@@ -60,13 +60,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		if (
-			!(
-					df_enabled(Df_Core_Feature::CMS_2)
-				&&
-					df_cfg()->cms()->hierarchy()->isEnabled()
-			)
-		) {
+		if (!df_cfg()->cms()->hierarchy()->isEnabled()) {
 			if ($this->getRequest()->getActionName() != 'denied') {
 				$this->_forward('denied');
 				$this->setFlag('', self::FLAG_NO_DISPATCH, true);
@@ -95,22 +89,20 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 					$nodesData = array();
 				}
 				if (!empty($data['removed_nodes'])) {
-					$removedNodes = explode(',', $data['removed_nodes']);
+					$removedNodes = df_csv_parse_int($data['removed_nodes']);
 				} else {
 					$removedNodes = array();
 				}
-
-
 				$node->collectTree($nodesData, $removedNodes);
 				$hasError = false;
 				rm_session()->addSuccess(
 					df_h()->cms()->__('Hierarchy has been successfully saved.')
 				);
 			}
-			catch(Mage_Core_Exception $e) {
+			catch (Mage_Core_Exception $e) {
 				rm_exception_to_session($e);
 			}
-			catch(Exception $e) {
+			catch (Exception $e) {
 				rm_session()->addException($e, df_h()->cms()->__('Error in saving hierarchy.'));
 				Mage::logException($e);
 			}
@@ -134,15 +126,8 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 	 * Check is allowed access to action
 	 * @return bool
 	 */
-	protected function _isAllowed()
-	{
-		return
-				df_mage()->admin()->session()->isAllowed('cms/hierarchy')
-			&&
-				df_enabled(Df_Core_Feature::CMS_2)
-			&&
-				df_cfg()->cms()->hierarchy()->isEnabled()
-		;
+	protected function _isAllowed() {
+		return rm_admin_allowed('cms/hierarchy') && df_cfg()->cms()->hierarchy()->isEnabled();
 	}
 
 	/**

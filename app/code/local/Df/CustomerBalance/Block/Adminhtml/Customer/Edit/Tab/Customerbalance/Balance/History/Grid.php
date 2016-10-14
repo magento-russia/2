@@ -31,7 +31,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'updated_at'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Date')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Date')
 					,'index' => 'updated_at'
 					,'type' => 'datetime'
 					,'filter' => false
@@ -41,7 +41,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'website_id'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Website')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Website')
 					,'index' => 'website_id'
 					,'type'	 => 'options'
 					,'options' =>
@@ -54,7 +54,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'balance_action'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Action')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Action')
 					,'width' => 70
 					,'index' => 'action'
 					,'sortable' => false
@@ -65,7 +65,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'balance_delta'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Balance Change')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Balance Change')
 					,'width' => 50
 					,'index' => 'balance_delta'
 					,'type' => 'price'
@@ -77,7 +77,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'balance_amount'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Balance')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Balance')
 					,'width' => 50
 					,'index' => 'balance_amount'
 					,'sortable' => false
@@ -88,13 +88,13 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'is_customer_notified'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Customer notified?')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Customer notified?')
 					,'index' => 'is_customer_notified'
 					,'type'	=> 'options'
 					,'options'=>
 						array(
-							'1' => df_h()->customer()->balance()->__('Notified')
-							,'0' => df_h()->customer()->balance()->__('No')
+							'1' => Df_CustomerBalance_Helper_Data::s()->__('Notified')
+							,'0' => Df_CustomerBalance_Helper_Data::s()->__('No')
 						)
 					,'sortable' => false
 					,'filter' => false
@@ -104,7 +104,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 			->addColumn(
 				'additional_info'
 				,array(
-					'header' => df_h()->customer()->balance()->__('Additional information')
+					'header' => Df_CustomerBalance_Helper_Data::s()->__('Additional information')
 					,'index' => 'additional_info'
 					,'sortable' => false
 				)
@@ -124,10 +124,4 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 		$this->setUseAjax(true);
 		$this->setDefaultSort('updated_at');
 	}
-
-	/**
-	 * @param string|null $name [optional]
-	 * @return Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balance_History_Grid
-	 */
-	public static function i($name = null) {return df_block(__CLASS__, $name);}
 }

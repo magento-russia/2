@@ -10,23 +10,16 @@ class Df_Alfabank_Model_Request_State extends Df_Alfabank_Model_Request_Secondar
 
 	/**
 	 * @override
-	 * @return string
-	 */
-	protected function getResponseClass() {return Df_Alfabank_Model_Response_State::_CLASS;}
-
-	/**
-	 * @override
+	 * @used-by Df_Alfabank_Model_Request_Secondary::getUri()
 	 * @return string
 	 */
 	protected function getServiceName() {return 'getOrderStatus';}
 
-	const _CLASS = __CLASS__;
 	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
+	 * @param Mage_Sales_Model_Order_Payment $payment
 	 * @return Df_Alfabank_Model_Request_State
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(Mage_Sales_Model_Order_Payment $payment) {return self::ic(__CLASS__, $payment);}
 }
 
 

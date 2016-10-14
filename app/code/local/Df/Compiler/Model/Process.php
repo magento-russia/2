@@ -9,18 +9,12 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 		$arrFiles = array();
 		foreach ($this->getScopes() as $code) {
 			/** @var array|null $classes */
-			$classes = df_a($this->getConfigMap(), $code);
-			if (is_array($classes)) {
-				$arrFiles[$code] = array_keys($classes);
-			}
-			else {
-				$arrFiles[$code] = array();
-			}
+			$arrFiles[$code] = array_keys(df_nta(df_a($this->getConfigMap(), $code), true));
 			$statClasses = array();
 			/** @var string|null $statFileForTheCurrentScope */
 			$statFileForTheCurrentScope = df_a($this->getStatFiles(), $code);
 			if (!is_null($statFileForTheCurrentScope)) {
-				$statClassesAll = explode("\n", file_get_contents($statFileForTheCurrentScope));
+				$statClassesAll = df_explode_n(file_get_contents($statFileForTheCurrentScope));
 				/** @var int $statClassesCount */
 				$statClassesCount = count($statClassesAll);
 				/** @var int $statClassesLimit */
@@ -64,9 +58,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 	 * @return string
 	 */
 	protected function _getClassesSourceCode($classes, $scope) {
-		if (@class_exists('Mage_Shell_Compiler', false)) {
-			Df_Core_LibLoader::s();
-		}
+		Df_Core_Boot::run();
 		return
 			// Видимо, улучшенную компиляцию нельзя отрубать даже по истечению лицензии,
 			// иначе при неправильной компиляции сайт может перестать работать
@@ -84,6 +76,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 	private function _getClassesSourceCodeDf($classes, $scope) {
 		$sortedClasses = array();
 		foreach ($classes as $className) {
+			/** @var string $className */
 			if (!@class_exists($className)) {
 				continue;
 			}
@@ -148,7 +141,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 			$contentBeforeRemovingBom = $content;
 			df_assert_string($contentBeforeRemovingBom);
 			/** @var string $content */
-			$content = df_text()->bomRemove($content);
+			$content = df_t()->bomRemove($content);
 			df_assert_string($content);
 			if ($content !== $contentBeforeRemovingBom) {
 				Mage::log(rm_sprintf(
@@ -161,7 +154,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 			$content = rtrim($content, "\n\r\t?>");
 			$classesSource.=
 				rm_sprintf(
-					"\n\nif (!class_exists('%s', false) && !(interface_exists ('%s', false))) {\n%s\n}"
+					"\n\nif (!class_exists('%s', false) && !(interface_exists('%s', false))) {\n%s\n}"
 					,$className
 					,$className
 					,$content

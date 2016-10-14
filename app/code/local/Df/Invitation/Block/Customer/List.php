@@ -31,7 +31,4 @@ class Df_Invitation_Block_Customer_List extends Mage_Customer_Block_Account_Dash
 		return Df_Invitation_Model_Source_Invitation_Status::s()
 			->getOptionText($invitation->getStatus());
 	}
-
-	/** @return Df_Invitation_Block_Customer_List */
-	public static function i() {return df_block(__CLASS__);}
 }

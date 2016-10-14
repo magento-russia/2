@@ -1,108 +1,55 @@
 <?php
 /**
+ * @method string|null getContent()
+ * @method string|null getImageFileName()
+ * @method string|null getImageUrl()
  * @method Df_Banner_Model_Resource_Banneritem getResource()
+ * @method string|null getThumbnailFileName()
+ * @method string|null getThumbnailUrl()
+ * @method string|null getTitle()
+ * @method string|null getUrl()
+ * @method Df_Banner_Model_Banneritem setIsMassupdate(bool $value)
+ * @method Df_Banner_Model_Banneritem setStatus(int $value)
  */
 class Df_Banner_Model_Banneritem extends Df_Core_Model {
-	/** @return string */
-	public function getContent() {
-		return $this->cfg(self::P__CONTENT, '');
-	}
-
-	/** @return string|null */
-	public function getImageFileName() {
-		/** @var string|null $result */
-		$result = $this->cfg(self::P__IMAGE__FILE_NAME);
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
-
-	/** @return string|null */
-	public function getImageUrl() {
-		/** @var string|null $result */
-		$result = $this->cfg(self::P__IMAGE__URL);
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
-
-	/** @return string */
-	public function getTitle() {
-		/** @var string $result */
-		$result = $this->cfg(self::P__TITLE);
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string|null */
-	public function getThumbnailFileName() {
-		/** @var string|null $result */
-		$result = $this->cfg(self::P__THUMBNAIL__FILE_NAME);
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
-
-	/** @return string|null */
-	public function getThumbnailUrl() {
-		/** @var string|null $result */
-		$result = $this->cfg(self::P__THUMBNAIL__URL);
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
-
-	/** @return string */
-	public function getUrl() {
-		/** @var string $result */
-		$result = $this->cfg(self::P__URL);
-		df_result_string($result);
-		return $result;
-	}
+	/**
+	 * @override
+	 * @return Df_Banner_Model_Resource_Banneritem_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Banner_Model_Resource_Banneritem
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Banner_Model_Resource_Banneritem::mf());
-	}
+	protected function _getResource() {return Df_Banner_Model_Resource_Banneritem::s();}
 
-	const _CLASS = __CLASS__;
-	const P__CONTENT = 'content';
+	/** @used-by Df_Banner_Model_Resource_Banneritem_Collection::_construct() */
+	const _C = __CLASS__;
+	/** @used-by Df_Banner_Model_Resource_Banneritem::_construct() */
 	const P__ID = 'banner_item_id';
-	const P__IMAGE__FILE_NAME = 'image';
-	const P__IMAGE__URL = 'image_url';
-	const P__TITLE = 'title';
-	const P__THUMBNAIL__FILE_NAME = 'thumb_image';
-	const P__THUMBNAIL__URL = 'thumb_image_url';
-	const P__URL = 'link_url';
 
-	/** @return Df_Banner_Model_Resource_Banneritem_Collection */
-	public static function c() {return self::s()->getCollection();}
 	/**
-	 * @static
+	 * @used-by getResourceCollection()
+	 * @used-by Df_Banner_Block_Banner::getBannerItems()
+	 * @used-by Df_Banner_Block_Adminhtml_Banneritem_Grid::_prepareCollection()
+	 * @return Df_Banner_Model_Resource_Banneritem_Collection
+	 */
+	public static function c() {return new Df_Banner_Model_Resource_Banneritem_Collection;}
+	/**
+	 * @used-by Df_Banner_Adminhtml_BanneritemController::deleteAction()
+	 * @used-by Df_Banner_Adminhtml_BanneritemController::editAction()
+	 * @used-by Df_Banner_Adminhtml_BanneritemController::saveAction()
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Banner_Model_Banneritem
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 	/**
-	 * @static
+	 * @used-by Df_Banner_Adminhtml_BanneritemController::massDeleteAction()
+	 * @used-by Df_Banner_Adminhtml_BanneritemController::massStatusAction()
 	 * @param int|string $id
 	 * @param string|null $field [optional]
 	 * @return Df_Banner_Model_Banneritem
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Banner_Model_Resource_Banneritem_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
-	/** @return Df_Banner_Model_Banneritem */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

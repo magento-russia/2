@@ -29,25 +29,28 @@ class Df_YandexMoney_Model_OAuth extends Df_Yandex_Model_OAuth {
 		}
 		return $this;
 	}
+
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getAdditionalParams() {return array('redirect_uri' => $this->getCustomerReturnUrl());}
+	protected function getAdditionalParams() {
+		return array('redirect_uri' => $this->cfg(self::P__CUSTOMER_RETURN_URL));
+	}
+
 	/**
 	 * @override
 	 * @return string
 	 */
 	protected function getUriAsString() {return 'https://sp-money.yandex.ru/oauth/token';}
-	/** @return string */
-	private function getCustomerReturnUrl() {return $this->cfg(self::P__CUSTOMER_RETURN_URL);}
+
 	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CUSTOMER_RETURN_URL, self::V_STRING_NE);
+		$this->_prop(self::P__CUSTOMER_RETURN_URL, RM_V_STRING_NE);
 	}
 	const P__CUSTOMER_RETURN_URL = 'param__customer_return_url';
 	/**

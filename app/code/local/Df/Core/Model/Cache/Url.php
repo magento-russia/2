@@ -1,9 +1,9 @@
 <?php
-class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
+class Df_Core_Model_Cache_Url extends Df_Core_Model {
 	/**
 	 * @param Df_Core_Model_Url $url
-	 * @param string|null $routePath
-	 * @param array|null $routeParams
+	 * @param string|null $routePath [optional]
+	 * @param array(string => mixed)|null $routeParams [optional]
 	 * @return string
 	 */
 	public function getUrl(Df_Core_Model_Url $url, $routePath = null, $routeParams = null) {
@@ -29,32 +29,31 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 	protected $_urlCache;
 
 	/**
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @override
 	 * @return string[]
 	 */
-	protected function getCacheTagsRm() {return array('rm_url');}
+	protected function cacheTags() {return array('rm_url');}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getCacheTypeRm() {return 'rm_url';}
-
-	/** @return string[] */
-	protected function getPropertiesToCachePerStore() {return array('_urlCache');}
+	protected function cacheType() {return 'rm_url';}
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::cached()
 	 * @return string[]
 	 */
-	protected function getPropertiesToCacheSimple() {return array('_urlCache');}
+	protected function cached() {return array('_urlCache');}
 
 	/**
 	 * Обратите внимание, что метод @see Df_Core_Model::getCacheKeyParams()
 	 * присутствует в классе-предке @see Df_Core_Model,
-	 * поэтому называем метод getCacheKeyParams2().
+	 * поэтому называем метод @see getCacheKeyParams2().
 	 *
-	 * Обратите также внимание, что если всё-таки назвать данный метод getCacheKeyParams(),
+	 * Обратите также внимание, что если всё-таки назвать данный метод @see getCacheKeyParams(),
 	 * то PHP 5.5 почему-то не выдаёт никаких предупреждений
 	 * (может, потому что области видимости разные, и современные версии PHP это учитывают?),
 	 * а вот PHP 5.3.19-1~dotdeb.0 вполне ожидаемо выдаёт предупреждение:
@@ -62,8 +61,8 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 	 * should be compatible with that of Df_Core_Model::getCacheKeyParams()»
 	 *
 	 * @param Df_Core_Model_Url $url
-	 * @param string|null $routePath
-	 * @param array|null $routeParams
+	 * @param string|null $routePath [optional]
+	 * @param array(string => mixed)|null $routeParams [optional]
 	 * @return string[]
 	 */
 	private function getCacheKeyParams2(Df_Core_Model_Url $url, $routePath = null, $routeParams = null) {
@@ -76,26 +75,27 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 		 * например, её веб-адрес.
 		 */
 		if (rm_contains($routePath, '*')) {
-			$result []= Mage::app()->getRequest()->getRequestUri();
+			$result[]= rm_ruri();
 		}
 		if (!is_null($routeParams)) {
 			/**
 			 * @see json_encode() работает быстрее, чем @see serialize()
-			 * @link http://stackoverflow.com/a/7723730
-			 * @link http://stackoverflow.com/a/804053
+			 * http://stackoverflow.com/a/7723730
+			 * http://stackoverflow.com/a/804053
 			 *
-			 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
+			 * @see Zend_Json::encode() использует
+			 * @see json_encode() при наличии расширения PHP JSON
 			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * @see Zend_Json::encode
-			 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
+			 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
 			 * Обратите внимание,
 			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * @link http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование Zend_Json::encode выглядит более правильным, чем json_encode.
+			 * http://www.magentocommerce.com/system-requirements
+			 * Поэтому использование @see Zend_Json::encode()
+			 * выглядит более правильным, чем @see json_encode().
 			 *
 			 * $cacheKey .= Zend_Json::encode($routeParams);
 			 *
-			 * P.S. Оно, конечно, правильнее, но @see json_encode() работает заметно быстрее,
+			 * P.S. Оно, конечно, правильнее, но @uses json_encode() работает заметно быстрее,
 			 * чем обёртка @see Zend_Json::encode()
 			 */
 			$result[]= json_encode($routeParams);
@@ -103,7 +103,7 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model_DestructableSingleton {
 		if ($url->getStore()) {
 			$result[]= $url->getStore()->getCode();
 		}
-		$result[]= intval($url->getUseSession());
+		$result[]= (int)$url->getUseSession();
 		if ($url->getQueryParams()) {
 			$result[]= json_encode($url->getQueryParams());
 		}

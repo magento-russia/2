@@ -2,113 +2,95 @@
 class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getCustomerAddressAsCompositeString() {
-		return $this->escapeHtml(rm_concat_clean(', '
-			,$this->getCustomerAddress()->getData(Df_Sales_Const::ORDER_ADDRESS__PARAM__POSTCODE)
-			,$this->getCustomerAddress()->getData(Df_Sales_Const::ORDER_ADDRESS__PARAM__CITY)
-			,$this->getCustomerAddress()->getData(Df_Sales_Const::ORDER_ADDRESS__PARAM__STREET)
+		return rm_e(rm_concat_clean(', '
+			,$this->getCustomerAddress()->getPostcode()
+			,$this->getCustomerAddress()->getCity()
+			,$this->getCustomerAddress()->getStreetAsText()
 		));
 	}
 
 	/** @return string */
 	public function getCustomerName() {
-		return $this->escapeHtml(rm_concat_clean(' '
-			,$this->getOrder()->getData(Df_Sales_Const::ORDER_PARAM__CUSTOMER_LASTNAME)
-			,$this->getOrder()->getData(Df_Sales_Const::ORDER_PARAM__CUSTOMER_FIRSTNAME)
-			,$this->getOrder()->getData(Df_Sales_Const::ORDER_PARAM__CUSTOMER_MIDDLENAME)
+		return rm_e(rm_concat_clean(' '
+			,$this->order()->getCustomerLastname()
+			,$this->order()->getCustomerFirstname()
+			,$this->order()->getCustomerMiddlename()
 		));
 	}
 
 	/** @return string */
 	public function getOrderAmountFractionalPartAsString() {
-		return df_string($this->getActionDf()->getAmount()->getFractionalPartAsString());
+		return df_string($this->getActionDf()->amount()->getFractionalPartAsString());
 	}
 
 	/** @return string */
 	public function getOrderAmountIntegerPartAsString() {
-		return df_string($this->getActionDf()->getAmount()->getIntegerPart());
+		return df_string($this->getActionDf()->amount()->getIntegerPart());
 	}
 
 	/** @return string */
 	public function getRecipientBankAccountNumber() {
-		return $this->escapeHtml($this->getConfigAdmin()->getRecipientBankAccountNumber());
+		return rm_e($this->configA()->getRecipientBankAccountNumber());
 	}
 
 	/** @return string */
-	public function getRecipientBankId() {
-		return $this->escapeHtml($this->getConfigAdmin()->getRecipientBankId());
-	}
+	public function getRecipientBankId() {return rm_e($this->configA()->getRecipientBankId());}
 
 	/** @return string */
-	public function getRecipientBankLoro() {
-		return $this->escapeHtml($this->getConfigAdmin()->getRecipientBankLoro());
-	}
+	public function getRecipientBankLoro() {return rm_e($this->configA()->getRecipientBankLoro());}
 
 	/** @return string */
 	public function getRecipientBankName() {
-		return $this->escapeHtml($this->getConfigAdmin()->getRecipientBankName());
+		return rm_e($this->configA()->getRecipientBankName());
 	}
 
 	/** @return string */
-	public function getRecipientName() {
-		return $this->escapeHtml($this->getConfigAdmin()->getRecipientName());
-	}
+	public function getRecipientName() {return rm_e($this->configA()->getRecipientName());}
 
 	/** @return string */
 	public function getRecipientTaxNumber() {
-		return $this->escapeHtml($this->getConfigAdmin()->getRecipientTaxNumber());
+		return rm_e($this->configA()->getRecipientTaxNumber());
 	}
 
 	/** @return string */
 	public function getPaymentPurpose() {
-		return
-			$this->escapeHtml(
-				strtr(
-					$this->getConfigAdmin()->getPaymentPurposeTemplate()
-					,array(
-						self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_ID =>
-							$this->getOrder()->getDataUsingMethod(
-								Df_Sales_Const::ORDER_PARAM__INCREMENT_ID
-							)
-						,self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_DATE =>
-							df_dts(
-								$this->getOrderDate()
-								, Df_Core_Model_Format_Date::FORMAT__RUSSIAN
-							)
-					)
-				)
-			)
-		;
+		return rm_e(strtr($this->configA()->getPaymentPurposeTemplate(), array(
+			self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_ID => $this->order()->getIncrementId()
+			,self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_DATE =>
+				df_dts($this->getOrderDate(), Df_Core_Model_Format_Date::FORMAT__RUSSIAN)
+		)));
 	}
 
 	/** @return int */
 	public function getOrderYear() {return rm_int(df_dts($this->getOrderDate(), Zend_Date::YEAR));}
 
 	/** @return Df_Pd4_Model_Config_Area_Admin */
-	protected function getConfigAdmin() {
+	protected function configA() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getActionDf()->getPaymentMethod()->getRmConfig()->admin();
+			$this->{__METHOD__} = $this->getActionDf()->getMethod()->configA();
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/pd4/document/rows.phtml';}
+	protected function defaultTemplate() {return 'df/pd4/document/rows.phtml';}
+
 	/** @return Df_Pd4_Model_Request_Document_View */
 	private function getActionDf() {return df_h()->pd4()->getDocumentViewAction();}
-	/** @return Df_Sales_Model_Order */
-	private function getOrder() {return $this->getActionDf()->getOrder();}
-	/** @return Mage_Sales_Model_Order_Address */
-	private function getCustomerAddress() {return $this->getOrder()->getBillingAddress();}
-	/** @return Zend_Date */
-	private function getOrderDate() {return $this->getOrder()->getDateCreated();}
 
-	const _CLASS = __CLASS__;
+	/** @return Df_Sales_Model_Order */
+	private function order() {return $this->getActionDf()->order();}
+	/** @return Df_Sales_Model_Order_Address */
+	private function getCustomerAddress() {return $this->order()->getBillingAddress();}
+
+	/** @return Zend_Date */
+	private function getOrderDate() {return $this->order()->getDateCreated();}
+
 	const PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_ID = '{order.id}';
 	const PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_DATE = '{order.date}';
-
-	/** @return Df_Pd4_Block_Document_Rows */
-	public static function i() {return df_block(__CLASS__);}
 }

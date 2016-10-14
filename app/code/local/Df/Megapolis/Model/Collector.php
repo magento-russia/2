@@ -1,5 +1,5 @@
 <?php
-class Df_Megapolis_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_Megapolis_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
 	 * @return Df_Megapolis_Model_Method[]
@@ -9,7 +9,7 @@ class Df_Megapolis_Model_Collector extends Df_Shipping_Model_Collector {
 			/** @var Df_Megapolis_Model_Method[] $result */
 			$result = array();
 			/** @var Df_Megapolis_Model_Method $method */
-			$method = $this->createMethod(Df_Megapolis_Model_Method::_CLASS, $title = 'Стандартный');
+			$method = $this->createMethod(Df_Megapolis_Model_Method::_C, $title = 'Стандартный');
 			if ($method->isApplicable()) {
 				$method->getCost();
 				$result[]= $method;
@@ -18,6 +18,4 @@ class Df_Megapolis_Model_Collector extends Df_Shipping_Model_Collector {
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

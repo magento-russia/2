@@ -24,7 +24,7 @@ abstract class Df_Dataflow_Model_Convert_Adapter_Abstract
 				df_assert_eq(
 					rm_nat0($importId)
 					, rm_nat0($this->getBatchImportModel()->getId())
-					, rm_sprintf('Отсутствует пакет данных №%d.', $importId)
+					, sprintf('Отсутствует пакет данных №%d.', $importId)
 				)
 				;
 				/** @var array $rowAsArray */
@@ -33,7 +33,7 @@ abstract class Df_Dataflow_Model_Convert_Adapter_Abstract
 				$this->saveRowInternal($rowAsArray, $rowOrdering);
 			}
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $this;
@@ -55,14 +55,9 @@ abstract class Df_Dataflow_Model_Convert_Adapter_Abstract
 	 */
 	public function saveRow(array $rowAsArray) {
 		try {
-			$this
-				->saveRowInternal(
-					$rowAsArray
-					,df_mage()->adminhtml()->session()->getData(Df_Dataflow_Const::P__COUNTER)
-				)
-			;
+			$this->saveRowInternal($rowAsArray, rm_session()->getData(Df_Dataflow_Const::P__COUNTER));
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $this;
@@ -85,7 +80,7 @@ abstract class Df_Dataflow_Model_Convert_Adapter_Abstract
 	 * общего для всех строк импортируемых данных.
 	 * Как правило, общие параметры используются в качестве параметров по умолчанию.
 	 * @param string $paramName
-	 * @param string|null $defaultValue[optional]
+	 * @param string|null $defaultValue [optional]
 	 * @return string|null
 	 */
 	protected function getConfigParam($paramName, $defaultValue = null) {

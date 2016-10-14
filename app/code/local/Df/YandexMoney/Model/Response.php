@@ -1,7 +1,7 @@
 <?php
 /**
- * @link http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
- * @link http://api.yandex.ru/money/doc/dg/reference/process-payment.xml
+ * http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
+ * http://api.yandex.ru/money/doc/dg/reference/process-payment.xml
  */
 abstract class Df_YandexMoney_Model_Response extends Df_Payment_Model_Response {
 	/** @return array(string => string) */
@@ -25,9 +25,7 @@ abstract class Df_YandexMoney_Model_Response extends Df_Payment_Model_Response {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $resultAsString */
 			$resultAsString = $this->cfg('balance');
-			$this->{__METHOD__} = rm_n_set(
-				!$resultAsString ? null : Df_Core_Model_Money::i(rm_float($resultAsString))
-			);
+			$this->{__METHOD__} = rm_n_set(!$resultAsString ? null : rm_money(rm_float($resultAsString)));
 		}
 		return rm_n_get($this->{__METHOD__});
 	}

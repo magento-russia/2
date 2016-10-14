@@ -14,7 +14,6 @@
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
-				<Df_Licensor/>
 				<Mage_Customer/>
 			</depends>
 		</Df_CustomerBalance>
@@ -23,7 +22,7 @@
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
-				<Df_Licensor/>
+
 				<Mage_Adminhtml/>
 				<Mage_Customer/>
 			</depends>
@@ -33,7 +32,7 @@
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
-				<Df_Licensor/>
+
 			</depends>
 		</Df_Logging>
 		<Df_PageCache>
@@ -41,7 +40,7 @@
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
-				<Df_Licensor/>
+
 			</depends>
 		</Df_PageCache>
 		<Df_Reward>
@@ -49,7 +48,7 @@
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
-				<Df_Licensor/>
+
                 <Mage_Customer/>
                 <Mage_Checkout/>
 			</depends>

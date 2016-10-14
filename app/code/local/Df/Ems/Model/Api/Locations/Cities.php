@@ -6,7 +6,7 @@ class Df_Ems_Model_Api_Locations_Cities extends Df_Ems_Model_Api_Locations_Abstr
 	 */
 	protected function getLocationType() {return 'cities';}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

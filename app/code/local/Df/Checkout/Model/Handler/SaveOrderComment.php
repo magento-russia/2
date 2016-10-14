@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Checkout_Model_Event_SaveOrder_Abstract getEvent()
- */
+/** @method Df_Checkout_Model_Event_SaveOrder_Abstract getEvent() */
 class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,25 +7,18 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	 * @return void
 	 */
 	public function handle() {
-		if (
-				$this->getOrderComment()
-			&&
-				df_cfg()->checkout()->orderComments()->isEnabled()
-			&&
-				df_enabled(Df_Core_Feature::CHECKOUT)
-		) {
-			$this->getEvent()->getOrder()->addData(
-				array(
-					/**
-					 * Устанавка customer note
-					 * приводит в числе прочего к вызову addStatusHistoryComment
-					 */
-					Df_Sales_Model_Order::P__CUSTOMER_NOTE => $this->getOrderComment()
-					,Df_Sales_Model_Order::P__CUSTOMER_NOTE_NOTIFY =>
-						df_cfg()->checkout()->orderComments()->needShowInOrderEmail()
-					,Df_Sales_Model_Order::RM_PARAM__COMMENT_IS_VISIBLE_ON_FRONT =>
-						df_cfg()->checkout()->orderComments()->needShowInCustomerAccount()
-				)
+		if ($this->getOrderComment() && df_cfg()->checkout()->orderComments()->isEnabled()) {
+			$this->getEvent()->getOrder()->addData(array(
+				/**
+				 * Устанавка «customer note»
+				 * приводит в числе прочего к вызову @see Mage_Sales_Model_Order::addStatusHistoryComment()
+				 */
+				Df_Sales_Model_Order::P__CUSTOMER_NOTE => $this->getOrderComment()
+				,Df_Sales_Model_Order::P__CUSTOMER_NOTE_NOTIFY =>
+					df_cfg()->checkout()->orderComments()->needShowInOrderEmail()
+			));
+			$this->getEvent()->getOrder()->setCommentToBeVisibleOnFront(
+				df_cfg()->checkout()->orderComments()->needShowInCustomerAccount()
 			);
 		}
 	}
@@ -37,15 +28,14 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Checkout_Model_Event_SaveOrder_Abstract::_CLASS;
-	}
+	protected function getEventClass() {return Df_Checkout_Model_Event_SaveOrder_Abstract::_C;}
 
 	/** @return string */
-	private function getOrderComment() {
-		return df_trim(df_request(self::REQUEST_PARAM__ORDER_COMMENT, ''));
-	}
+	private function getOrderComment() {return df_trim(rm_request('df_order_comment', ''));}
 
-	const _CLASS = __CLASS__;
-	const REQUEST_PARAM__ORDER_COMMENT = 'df_order_comment';
+	/**
+	 * @used-by Df_Checkout_Observer::checkout_type_multishipping_create_orders_single()
+	 * @used-by Df_Checkout_Observer::checkout_type_onepage_save_order()
+	 */
+	const _C = __CLASS__;
 }

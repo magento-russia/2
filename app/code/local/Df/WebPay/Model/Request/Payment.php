@@ -1,14 +1,16 @@
 <?php
 /**
- * @method Df_WebPay_Model_Config_Area_Service getServiceConfig()
- * @method Df_WebPay_Model_Payment getPaymentMethod()
+ * @method Df_WebPay_Model_Config_Area_Service configS()
+ * @method Df_WebPay_Model_Payment getMethod()
  */
 class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override
-	 * @return array
+	 * @see Df_Payment_Model_Request_Payment::_params()
+	 * @used-by Df_Payment_Model_Request_Payment::params()
+	 * @return array(string => string|int)
 	 */
-	protected function getParamsInternal() {
+	protected function _params() {
 		/**
 		 * Документация WEBPAY:
 		 *
@@ -19,49 +21,35 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		 * Выявляем эту проблему на максимально ранней стадии.
 		 */
 		$this->verifyAmount();
-		/** @var array $result */
-		$result =
-			array_merge(
-				array(
-					'*scart' => ''
-					,self::REQUEST_VAR__SHOP_ID => $this->getServiceConfig()->getShopId()
-					,self::REQUEST_VAR__SHOP_NAME => $this->getTransactionDescription()
-					,self::REQUEST_VAR__ORDER_NUMBER => $this->getOrder()->getIncrementId()
-					,self::REQUEST_VAR__ORDER_CURRENCY =>
-						$this->getServiceConfig()->getCurrencyCodeInServiceFormat()
-					,'wsb_version' => '2'
-					,self::REQUEST_VAR__PAYMENT_SERVICE__LANGUAGE =>
-						$this->getServiceConfig()->getLocaleCodeInServiceFormat()
-					,self::REQUEST_VAR__OPEN_KEY => $this->getOpenKey()
-					,self::REQUEST_VAR__SIGNATURE =>	$this->getSignature()
-					,self::REQUEST_VAR__URL_RETURN_OK =>	$this->getUrlCheckoutSuccess()
-					,self::REQUEST_VAR__URL_RETURN_NO =>	$this->getUrlCheckoutFail()
-					,self::REQUEST_VAR__URL_CONFIRM => $this->getUrlConfirm()
-					,self::REQUEST_VAR__REQUEST__TEST_MODE => $this->isTestMode()
-					,'wsb_invoice_item_name' => $this->getOrderItemNames()
-					,'wsb_invoice_item_quantity' => $this->getOrderItemQtys()
-					,'wsb_invoice_item_price' =>
-						df_each(
-							'getAsInteger'
-							,$this->getOrderItemPrices()
-						)
-					,'wsb_tax' => $this->getAmountTaxCorrected()->getAsInteger()
-					,'wsb_shipping_name' => $this->getOrder()->getShippingCarrier()->getConfigData('name')
-					,'wsb_shipping_price' => $this->getAmountShipping()->getAsInteger()
-					,'wsb_discount_name' => 'Скидка'
-					,'wsb_discount_price' =>	$this->getAmountDiscountCorrected()->getAsInteger()
-					,self::REQUEST_VAR__ORDER_AMOUNT =>
-						$this
-							->getAmount()
-							/**
-							 * WEBPAY требует, чтобы суммы были целыми числами
-							 */
-							->getAsInteger()
-					,self::REQUEST_VAR__CUSTOMER__EMAIL => $this->getCustomerEmail()
-					,self::REQUEST_VAR__CUSTOMER__PHONE => $this->getCustomerPhone()
-				)
-			)
-		;
+		/** @var array(string => string) $result */
+		$result = array(
+			'*scart' => ''
+			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
+			,self::REQUEST_VAR__SHOP_NAME => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
+			,self::REQUEST_VAR__ORDER_CURRENCY =>
+				$this->configS()->getCurrencyCodeInServiceFormat()
+			,'wsb_version' => '2'
+			,self::REQUEST_VAR__PAYMENT_SERVICE__LANGUAGE => $this->localeCode()
+			,self::REQUEST_VAR__OPEN_KEY => $this->getOpenKey()
+			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
+			,self::REQUEST_VAR__URL_RETURN_OK => rm_url_checkout_success()
+			,self::REQUEST_VAR__URL_RETURN_NO => rm_url_checkout_fail()
+			,self::REQUEST_VAR__URL_CONFIRM => $this->urlConfirm()
+			,self::REQUEST_VAR__REQUEST__TEST_MODE => $this->isTestMode()
+			,'wsb_invoice_item_name' => $this->getOrderItemNames()
+			,'wsb_invoice_item_quantity' => $this->getOrderItemQtys()
+			,'wsb_invoice_item_price' => df_each($this->getOrderItemPrices(), 'getAsInteger')
+			,'wsb_tax' => $this->getAmountTaxCorrected()->getAsInteger()
+			,'wsb_shipping_name' => $this->order()->getShippingCarrier()->getConfigData('name')
+			,'wsb_shipping_price' => $this->getAmountShipping()->getAsInteger()
+			,'wsb_discount_name' => 'Скидка'
+			,'wsb_discount_price' => $this->getAmountDiscountCorrected()->getAsInteger()
+			// WEBPAY требует, чтобы суммы были целыми числами
+			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amount()->getAsInteger()
+			,self::REQUEST_VAR__CUSTOMER__EMAIL => $this->email()
+			,self::REQUEST_VAR__CUSTOMER__PHONE => $this->phone()
+		);
 		return $result;
 	}
 
@@ -69,21 +57,17 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * @used-by getOrderItemPrices()
+	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
 	 * @param float|string $amountInOrderCurrency
 	 * @return Df_Core_Model_Money
 	 */
 	private function convertAmountFromOrderCurrencyToServiceCurrency($amountInOrderCurrency) {
-		return
-			$this->getServiceConfig()
-				->convertAmountFromOrderCurrencyToServiceCurrency(
-					$this->getOrder()
-					,$amountInOrderCurrency
-				)
-		;
+		return $this->configS()->convertAmountFromOrderCurrencyToServiceCurrency(
+			$this->order(), $amountInOrderCurrency
+		);
 	}
 
 	/** @return Df_Core_Model_Money */
@@ -91,7 +75,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				$this->convertAmountFromOrderCurrencyToServiceCurrency(
-						$this->getOrder()->getDiscountAmount()
+						$this->order()->getDiscountAmount()
 					/**
 					 * Обратите внимание, что помимо стандартных скидок Magento Community Edition
 					 * мы должны учесть скидки накопительной программы и личного счёта.
@@ -101,9 +85,9 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 					 * Поэтому нам надо учесть их скидки вручную
 					 */
 					+
-						$this->getOrder()->getData('reward_currency_amount')
+						$this->order()->getData('reward_currency_amount')
 					+
-						$this->getOrder()->getData('customer_balance_amount')
+						$this->order()->getData('customer_balance_amount')
 				)
 			;
 		}
@@ -113,21 +97,19 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getAmountDiscountCorrected() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Core_Model_Money::i(
-						$this->getAmountDiscount()->getAsInteger()
-					-
-						/**
-						 * delta < 0 означает, что рассчитанная Magento заказа
-						 * ниже, чем рассчитанная вручную.
-						 * Чтобы уравнять обе суммы,
-						 * увеличиваем скидку для суммы, рассчитанной вручную.
-						 * Мы применяем операцию вычитания, потому что
-						 * второй операнд гарантированно неположителен.
-						 */
-						min(0, $this->getAmountDelta()->getAsInteger())
-				)
-			;
+			$this->{__METHOD__} = rm_money(
+					$this->getAmountDiscount()->getAsInteger()
+				-
+					/**
+					 * delta < 0 означает, что рассчитанная Magento заказа
+					 * ниже, чем рассчитанная вручную.
+					 * Чтобы уравнять обе суммы,
+					 * увеличиваем скидку для суммы, рассчитанной вручную.
+					 * Мы применяем операцию вычитания, потому что
+					 * второй операнд гарантированно неположителен.
+					 */
+					min(0, $this->getAmountDelta()->getAsInteger())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -135,11 +117,9 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getAmountShipping() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->convertAmountFromOrderCurrencyToServiceCurrency(
-					$this->getOrder()->getShippingAmount()
-				)
-			;
+			$this->{__METHOD__} = $this->convertAmountFromOrderCurrencyToServiceCurrency(
+				$this->order()->getShippingAmount()
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -147,11 +127,9 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getAmountTax() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->convertAmountFromOrderCurrencyToServiceCurrency(
-					$this->getOrder()->getTaxAmount()
-				)
-			;
+			$this->{__METHOD__} = $this->convertAmountFromOrderCurrencyToServiceCurrency(
+				$this->order()->getTaxAmount()
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -159,19 +137,17 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getAmountTaxCorrected() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Core_Model_Money::i(
-						$this->getAmountTax()->getAsInteger()
-					+
-						/**
-						 * delta > 0 означает, что рассчитанная Magento заказа
-						 * выше, чем рассчитанная вручную.
-						 * Чтобы уравнять обе суммы,
-						 * увеличиваем налог для суммы, рассчитанной вручную.
-						 */
-						max(0, $this->getAmountDelta()->getAsInteger())
-				)
-			;
+			$this->{__METHOD__} = rm_money(
+					$this->getAmountTax()->getAsInteger()
+				+
+					/**
+					 * delta > 0 означает, что рассчитанная Magento заказа
+					 * выше, чем рассчитанная вручную.
+					 * Чтобы уравнять обе суммы,
+					 * увеличиваем налог для суммы, рассчитанной вручную.
+					 */
+					max(0, $this->getAmountDelta()->getAsInteger())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -182,14 +158,9 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			/** @var int $resultAsInteger */
 			$resultAsInteger = 0;
 			/** @var array $tuple */
-			$tuple =
-				df_tuple(
-					array(
-						'price' => $this->getOrderItemPrices()
-						,'qty' => $this->getOrderItemQtys()
-					)
-				)
-			;
+			$tuple = df_tuple(array(
+				'price' => $this->getOrderItemPrices(), 'qty' => $this->getOrderItemQtys()
+			));
 			foreach ($tuple as $item) {
 				/** @var array $item */
 				df_assert_array($item);
@@ -201,7 +172,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				df_assert_integer($qty);
 				$resultAsInteger += ($qty * $price->getAsInteger());
 			}
-			$this->{__METHOD__} = Df_Core_Model_Money::i($resultAsInteger);
+			$this->{__METHOD__} = rm_money($resultAsInteger);
 		}
 		return $this->{__METHOD__};
 	}
@@ -209,7 +180,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getCalculatedAmountTotal() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Money::i(
+			$this->{__METHOD__} = rm_money(
 					$this->getCalculatedAmountSubtotal()->getAsInteger()
 				+
 					$this->getAmountShipping()->getAsInteger()
@@ -225,7 +196,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getCalculatedAmountTotalCorrected() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Money::i(
+			$this->{__METHOD__} = rm_money(
 					$this->getCalculatedAmountSubtotal()->getAsInteger()
 				+
 					$this->getAmountShipping()->getAsInteger()
@@ -242,21 +213,17 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	private function getAmountDelta() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Core_Model_Money $result */
-			$result = 
-				Df_Core_Model_Money::i(
-						$this->getAmount()->getAsInteger()
-					-
-						$this->getCalculatedAmountTotal()->getAsInteger()
-				)
-			;
-			if ($result->getAsInteger() !== Df_Core_Model_Money::getZero()->getAsInteger()) {
+			$result = rm_money(
+				$this->amount()->getAsInteger() - $this->getCalculatedAmountTotal()->getAsInteger()
+			);
+			if (0 !== $result->getAsInteger()) {
 				df_notify(
 					"Рассчитанная вручную стоимость заказа не соответствует рассчитанной Magento."
 					."\nCтоимость, рассчитанная вручную: %s."
 					."\nCтоимость, рассчитанная Magento: %s."
 					."\nМодуль «WEBPAY» уравняет эти суммы посредством изменения налога или скидки."
 					,$this->getCalculatedAmountTotal()->getAsInteger()
-					,$this->getAmount()->getAsInteger()
+					,$this->amount()->getAsInteger()
 				);
 			}
 			$this->{__METHOD__} = $result;
@@ -273,7 +240,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	}
 
 	/** @return Mage_Sales_Model_Resource_Order_Item_Collection */
-	private function getOrderItems() {return $this->getOrder()->getItemsCollection();}
+	private function getOrderItems() {return $this->order()->getItemsCollection();}
 
 	/** @return string[] */
 	private function getOrderItemNames() {
@@ -288,6 +255,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				array_map(
+					/** @uses convertAmountFromOrderCurrencyToServiceCurrency() */
 					array($this, 'convertAmountFromOrderCurrencyToServiceCurrency')
 					,$this->getOrderItems()->getColumnValues('price')
 				)
@@ -308,13 +276,13 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	private function getSignature() {
 		return sha1(df_concat($this->preprocessParams(array(
 			self::REQUEST_VAR__OPEN_KEY => $this->getOpenKey()
-			,self::REQUEST_VAR__SHOP_ID => $this->getServiceConfig()->getShopId()
-			,self::REQUEST_VAR__ORDER_NUMBER => $this->getOrder()->getIncrementId()
+			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
+			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__REQUEST__TEST_MODE => $this->isTestMode()
 			,self::REQUEST_VAR__ORDER_CURRENCY =>
-				$this->getServiceConfig()->getCurrencyCodeInServiceFormat()
-			,self::REQUEST_VAR__ORDER_AMOUNT => $this->getAmount()->getAsInteger()
-			,self::SIGNATURE_PARAM__ENCRYPTION_KEY => $this->getServiceConfig()->getResponsePassword()
+				$this->configS()->getCurrencyCodeInServiceFormat()
+			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amount()->getAsInteger()
+			,self::SIGNATURE_PARAM__ENCRYPTION_KEY => $this->password()
 		))));
 	}
 
@@ -328,26 +296,20 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 */
 	private function verifyAmount() {
 		/** @var Df_Core_Model_Money $calculatedAmountTotalCorrected */
-		$calculatedAmountTotalCorrected =
-			Df_Core_Model_Money::i(
-					$this->getCalculatedAmountSubtotal()->getAsInteger()
-				+
-					$this->getAmountShipping()->getAsInteger()
-				+
-					$this->getAmountTaxCorrected()->getAsInteger()
-				-
-					$this->getAmountDiscountCorrected()->getAsInteger()
-			)
-		;
+		$calculatedAmountTotalCorrected = rm_money(
+				$this->getCalculatedAmountSubtotal()->getAsInteger()
+			+
+				$this->getAmountShipping()->getAsInteger()
+			+
+				$this->getAmountTaxCorrected()->getAsInteger()
+			-
+				$this->getAmountDiscountCorrected()->getAsInteger()
+		);
 		/** @var Df_Core_Model_Money $deltaCorrected */
-		$deltaCorrected =
-			Df_Core_Model_Money::i(
-					$this->getAmount()->getAsInteger()
-				-
-					$this->getCalculatedAmountTotalCorrected()->getAsInteger()
-			)
-		;
-		if ($deltaCorrected->getAsInteger() !== Df_Core_Model_Money::getZero()->getAsInteger()) {
+		$deltaCorrected = rm_money(
+			$this->amount()->getAsInteger() - $this->getCalculatedAmountTotalCorrected()->getAsInteger()
+		);
+		if (0 !== $deltaCorrected->getAsInteger()) {
 			df_notify(
 				"Рассчитанная вручную стоимость заказа"
 				. " даже после корректировки не соответствует рассчитанной Magento."
@@ -356,7 +318,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				. "\nСтоимость, рассчитанная Magento: %s."
 				. "\nМодуль «WEBPAY» уравняет эти суммы посредством изменения налога или скидки."
 				,$calculatedAmountTotalCorrected->getAsInteger()
-				,$this->getAmount()->getAsInteger()
+				,$this->amount()->getAsInteger()
 			);
 		}
 		return $this;
@@ -366,9 +328,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	private function isTestMode() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_01(
-					$this->getServiceConfig()->isTestMode()
-				||
-					$this->getServiceConfig()->isTestModeOnProduction()
+				$this->configS()->isTestMode() || $this->configS()->isTestModeOnProduction()
 			);
 		}
 		return $this->{__METHOD__};

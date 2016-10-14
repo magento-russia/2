@@ -1,6 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Hierarchy_Node_Collection
-	extends Mage_Core_Model_Mysql4_Collection_Abstract {
+class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Resource_Collection {
 	/**
 	 * Adding sub query for custom column to determine on which stores page active.
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node_Collection
@@ -51,17 +50,17 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	/**
 	 * Add Store Filter to assigned CMS pages
 	 *
-	 * @param int|Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM|int|string|bool|null $store
 	 * @param bool $withAdmin Include admin store or not
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	 */
 	public function addStoreFilter($store, $withAdmin = true) {
 		$this->addCmsPageInStoresColumn();
-		$this->_storeForFilter = Mage::app()->getStore($store);
+		$this->_storeForFilter = rm_store($store);
 		$this->_needAddAdminStoreToFilter = $withAdmin;
 		return $this;
 	}
-	/** @var Mage_Core_Model_Store */
+	/** @var Df_Core_Model_StoreM */
 	private $_storeForFilter;
 	/** @var bool */
 	private $_needAddAdminStoreToFilter = false;
@@ -104,6 +103,12 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	}
 
 	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Hierarchy_Node
+	 */
+	public function getResource() {return Df_Cms_Model_Resource_Hierarchy_Node::s();}
+
+	/**
 	 * Join Cms Page data to collection
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	 */
@@ -129,7 +134,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	public function joinMetaData() {
 		if (!$this->getFlag('meta_data_joined')) {
 			$this->getSelect()->joinLeft(
-				array('metadata_table' => rm_table('df_cms/hierarchy_metadata'))
+				array('metadata_table' => rm_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA))
 				,'main_table.node_id = metadata_table.node_id'
 				,array(
 					'pager_visibility'
@@ -207,13 +212,9 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	 */
 	protected function _afterLoad() {
-		foreach ($this->_items as $item) {
-			/** @var Mage_Core_Model_Abstract $item */
-			/**
-			 * Странно, что стандартный код этого не делает
-			 */
-			$item->afterLoad();
-		}
+		// cтранно, что стандартный код этого не делает
+		/** @uses Df_Cms_Model_Hierarchy_Node::afterLoad() */
+		$this->walk('afterLoad');
 		parent::_afterLoad();
 		return $this;
 	}
@@ -246,13 +247,9 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection
 				;
 				$this->getSelect()->having('main_table.page_id IS null OR page_in_stores IS NOT null');
 			}
-			$this->getSelect()
-				->columns(
-					array(
-						  'page_in_stores' => new Zend_Db_Expr('(' . $selectStores . ')')
-					)
-				)
-			;
+			$this->getSelect()->columns(array(
+				  'page_in_stores' => new Zend_Db_Expr('(' . $selectStores . ')')
+			));
 		}
 		return $this;
 	}
@@ -261,11 +258,6 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Cms_Model_Hierarchy_Node::mf(), Df_Cms_Model_Resource_Hierarchy_Node::mf());
-	}
-	const _CLASS = __CLASS__;
-	/** @return Df_Cms_Model_Resource_Hierarchy_Node_Collection */
-	public static function i() {return new self;}
+	protected function _construct() {$this->_itemObjectClass = Df_Cms_Model_Hierarchy_Node::_C;}
+	const _C = __CLASS__;
 }

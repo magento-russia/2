@@ -23,35 +23,32 @@ class Df_WalletOne_Model_Request_SignatureGenerator extends Df_Core_Model {
 		foreach ($params as $key => $value) {
 			/** @var string|int $key */
 			/** @var mixed $value */
-
 			$result[$key] =
 				is_array($value)
-				?
-					$this->convertParamsToWindows1251($value)
-				:
-					(
-							(
-									is_string($value)
-								&&
-									/**
-									 * Обратите внимание, что данный класс
-									 * используется в двух сценариях:
-									 *
-									 * при отсылке запроса на проведение платежа платёжной системе
-									 * и при получении от платёжной системы
-									 * подтверждения приёма оплаты от покупателя.
-									 *
-									 * Во втором сценарии платёжная система
-									 * присылает текстовые данные не в UTF-8,
-									 * а в Windows-1251, и тогда iconv не нужна и, более того,
-									 * приводит к сбою:
-									 * Detected an illegal character in input string
-									 */
-									mb_detect_encoding($value, 'UTF-8', true)
-							)
-						? df_text()->convertUtf8ToWindows1251($value)
-						: $value
-					)
+				? $this->convertParamsToWindows1251($value)
+				: (
+						(
+								is_string($value)
+							&&
+								/**
+								 * Обратите внимание, что данный класс
+								 * используется в двух сценариях:
+								 *
+								 * при отсылке запроса на проведение платежа платёжной системе
+								 * и при получении от платёжной системы
+								 * подтверждения приёма оплаты от покупателя.
+								 *
+								 * Во втором сценарии платёжная система
+								 * присылает текстовые данные не в UTF-8,
+								 * а в Windows-1251, и тогда iconv не нужна и, более того,
+								 * приводит к сбою:
+								 * Detected an illegal character in input string
+								 */
+								mb_detect_encoding($value, 'UTF-8', true)
+						)
+					? rm_1251_to($value)
+					: $value
+				)
 			;
 		}
 		df_result_array($result);
@@ -109,10 +106,8 @@ class Df_WalletOne_Model_Request_SignatureGenerator extends Df_Core_Model {
 			if (is_array($value)) {
 				usort($value, 'strcasecmp');
 			}
-
 			$result[$key] = $value;
 		}
-
 		uksort($result, 'strcasecmp');
 		df_result_array($result);
 		return $result;
@@ -125,11 +120,11 @@ class Df_WalletOne_Model_Request_SignatureGenerator extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ENCRYPTION_KEY, self::V_STRING_NE)
-			->_prop(self::P__SIGNATURE_PARAMS, self::V_ARRAY)
+			->_prop(self::P__ENCRYPTION_KEY, RM_V_STRING_NE)
+			->_prop(self::P__SIGNATURE_PARAMS, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ENCRYPTION_KEY = 'encryption_key';
 	const P__SIGNATURE_PARAMS = 'signature_params';
 	/**

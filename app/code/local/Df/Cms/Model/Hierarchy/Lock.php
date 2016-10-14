@@ -116,22 +116,18 @@ class Df_Cms_Model_Hierarchy_Lock extends Df_Core_Model {
 	protected $_session;
 
 	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Hierarchy_Lock
+	 */
+	protected function _getResource() {return Df_Cms_Model_Resource_Hierarchy_Lock::s();}
+
+	/**
 	 * Getter for session instance
 	 * @return Mage_Core_Model_Session_Abstract
 	 */
-	protected function _getSession() {
-		return $this->_session ? $this->_session : df_mage()->admin()->session();
-	}
+	protected function _getSession() {return $this->_session ? $this->_session : rm_admin_session();}
 
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Hierarchy_Lock::mf());
-	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ID = 'lock_id';
 	/**
 	 * @static

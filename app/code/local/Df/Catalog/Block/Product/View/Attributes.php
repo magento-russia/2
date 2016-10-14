@@ -13,24 +13,19 @@ class Df_Catalog_Block_Product_View_Attributes extends Mage_Catalog_Block_Produc
 	 */
 	public function getAdditionalData(array $excludeAttr = array()) {
 		/** @var string $cacheKey */
-		$cacheKey =
-			$this->getCacheRm()->makeKey(
-				__METHOD__, $this->getProduct()->getId() . implode($excludeAttr)
-			)
-		;
+		$cacheKey = $this->getCacheRm()->makeKey(
+			__METHOD__, $this->getProduct()->getId() . implode($excludeAttr)
+		);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var array(mixed => mixed) $result */
 			$result = $this->getCacheRm()->loadDataArray($cacheKey);
 			if (!is_array($result)) {
 				/** @var bool $needHideEmptyAttributes */
 				static $needHideEmptyAttributes;
-				if (!isset($needHideEmptyAttributes)) {
+				if (is_null($needHideEmptyAttributes)) {
 					$needHideEmptyAttributes =
-							df_module_enabled(Df_Core_Module::TWEAKS)
-						&&
-							df_enabled(Df_Core_Feature::TWEAKS)
-						&&
-							df_cfg()->tweaks()->catalog()->product()->view()->needHideEmptyAttributes()
+						df_module_enabled(Df_Core_Module::TWEAKS)
+						&& df_cfg()->tweaks()->catalog()->product()->view()->needHideEmptyAttributes()
 					;
 				}
 				$result =
@@ -58,20 +53,21 @@ class Df_Catalog_Block_Product_View_Attributes extends Mage_Catalog_Block_Produc
 		$data = array();
 		/** @var Mage_Catalog_Model_Product $product */
 		$product = $this->getProduct();
-		/** @var array $attributes */
+		/** @var array(string => Mage_Catalog_Model_Resource_Eav_Attribute)|Mage_Catalog_Model_Resource_Eav_Attribute[] $attributes */
 		$attributes = $product->getAttributes();
 		foreach ($attributes as $attribute) {
-			/** @var Mage_Eav_Model_Attribute $attribute */
+			/**
+			 * Проверял, класс именно этот.
+			 * @var Mage_Catalog_Model_Resource_Eav_Attribute $attribute
+			 */
 			if (
 					$attribute->getIsVisibleOnFront()
 				&&
 					!in_array($attribute->getAttributeCode(), $excludeAttr)
 			) {
-				/**
- 				 * Обратите внимание, что оба условия важны:
-				 * свойство может как отсутствовать у товара,
-				 * так и присутствовать со значением null
-				 */
+				// Обратите внимание, что оба условия важны:
+				// свойство может как отсутствовать у товара
+				// так и присутствовать со значением null.
 				if (
 						!$product->hasData($attribute->getAttributeCode())
 					||
@@ -92,7 +88,7 @@ class Df_Catalog_Block_Product_View_Attributes extends Mage_Catalog_Block_Produc
 					&&
 						is_string($value)
 				) {
-					$value = Mage::app()->getStore()->convertPrice($value, true);
+					$value = rm_store()->convertPrice($value, true);
 				}
 				if (is_string($value) && $value) {
 					$data[$attribute->getAttributeCode()] = array(

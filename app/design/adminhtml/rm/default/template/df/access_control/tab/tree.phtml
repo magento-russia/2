@@ -6,7 +6,7 @@
 		type="hidden"
 		name="rm.accessControl.selectedCategories"
 		id="rm.accessControl.selectedCategories"
-		value="<?php echo $this->getSelectedCategoriesAsString(); ?>"
+		value="<?php echo df_csv($this->selectedCategories()); ?>"
 	/>
 	<div id="rm.accessControl.categoryTree" class="tree"></div>
 	<script type="text/javascript">

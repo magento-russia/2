@@ -34,9 +34,11 @@ abstract class Df_Vk_Block_Frontend_Widget extends Df_Core_Block_Template {
 
 	/**
 	 * @override
-	 * @return string|null
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/vk/widget.phtml';}
+	protected function defaultTemplate() {return 'df/vk/widget.phtml';}
 
 	/**
 	 * @override
@@ -51,10 +53,10 @@ abstract class Df_Vk_Block_Frontend_Widget extends Df_Core_Block_Template {
 			 * и по 3 раза для @see Df_Vk_Block_Frontend_Widget_Groups
 			 * и @see Df_Vk_Block_Frontend_Widget_Comments.
 			 */
-			$this->{__METHOD__} = df_enabled(Df_Core_Feature::VK) && $this->getSettings()->getEnabled();
+			$this->{__METHOD__} = $this->getSettings()->getEnabled();
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

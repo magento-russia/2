@@ -111,6 +111,7 @@ class PHPExcel_Style_Color extends PHPExcel_Style_Supervisor implements PHPExcel
 	 *
 	 * @return PHPExcel_Style_Color
 	 */
+	/** @noinspection PhpInconsistentReturnPointsInspection */
 	public function getSharedComponent()
 	{
 		switch ($this->_parentPropertyName) {
@@ -308,8 +309,11 @@ class PHPExcel_Style_Color extends PHPExcel_Style_Supervisor implements PHPExcel
 			$green	+= (255 - $green) * $adjustPercentage;
 			$blue	+= (255 - $blue) * $adjustPercentage;
 		} else {
+			/** @noinspection PhpWrongStringConcatenationInspection */
 			$red	+= $red * $adjustPercentage;
+			/** @noinspection PhpWrongStringConcatenationInspection */
 			$green	+= $green * $adjustPercentage;
+			/** @noinspection PhpWrongStringConcatenationInspection */
 			$blue	+= $blue * $adjustPercentage;
 		}
 

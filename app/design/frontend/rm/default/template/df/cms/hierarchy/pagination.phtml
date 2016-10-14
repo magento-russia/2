@@ -9,23 +9,23 @@
             <?php endif;?>
         <?php endif;?>
         <?php if ($this->canShowOuter() && $this->canShowFirst()):?>
-            <li><a class="first" title="<?php echo df_text()->escapeHtml($this->getFirstNode()->getLabel())?>" href="<?php echo $this->getFirstNode()->getUrl()?>"><?php echo $this->getNodeLabel($this->getFirstNode())?></a></li>
+            <li><a class="first" title="<?php echo rm_e($this->getFirstNode()->getLabel())?>" href="<?php echo $this->getFirstNode()->getUrl()?>"><?php echo $this->getNodeLabel($this->getFirstNode())?></a></li>
         <?php endif;?>
         <?php if ($this->canShowPreviousJump()):?>
-            <li><a class="previous_jump" title="<?php echo df_text()->escapeHtml($this->getPreviousJumpNode()->getLabel())?>" href="<?php echo $this->getPreviousJumpNode()->getUrl()?>">...</a></li>
+            <li><a class="previous_jump" title="<?php echo rm_e($this->getPreviousJumpNode()->getLabel())?>" href="<?php echo $this->getPreviousJumpNode()->getUrl()?>">...</a></li>
         <?php endif;?>
         <?php foreach($this->getNodesInRange() as $node):?>
             <?php if ($node->getIsCurrent()):?>
                 <li class="current"><?php echo $this->getNodeLabel($node)?></li>
             <?php else: ?>
-                <li><a title="<?php echo df_text()->escapeHtml($node->getLabel())?>" href="<?php echo $node->getUrl()?>"><?php echo $this->getNodeLabel($node)?></a></li>
+                <li><a title="<?php echo rm_e($node->getLabel())?>" href="<?php echo $node->getUrl()?>"><?php echo $this->getNodeLabel($node)?></a></li>
             <?php endif; ?>
         <?php endforeach;?>
         <?php if ($this->canShowNextJump()):?>
-            <li><a class="next_jump" title="<?php echo df_text()->escapeHtml($this->getNextJumpNode()->getLabel())?>" href="<?php echo $this->getNextJumpNode()->getUrl()?>">...</a></li>
+            <li><a class="next_jump" title="<?php echo rm_e($this->getNextJumpNode()->getLabel())?>" href="<?php echo $this->getNextJumpNode()->getUrl()?>">...</a></li>
         <?php endif;?>
         <?php if ($this->canShowOuter() && $this->canShowLast()):?>
-          <li><a class="last" title="<?php echo df_text()->escapeHtml($this->getLastNode()->getLabel())?>" href="<?php echo $this->getLastNode()->getUrl()?>"><?php echo $this->getNodeLabel($this->getLastNode())?></a><li>
+          <li><a class="last" title="<?php echo rm_e($this->getLastNode()->getLabel())?>" href="<?php echo $this->getLastNode()->getUrl()?>"><?php echo $this->getNodeLabel($this->getLastNode())?></a><li>
         <?php endif;?>
         <?php if ($this->canShowSequence()):?>
             <?php if ($this->canShowNext()):?>

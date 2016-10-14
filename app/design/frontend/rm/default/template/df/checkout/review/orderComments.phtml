@@ -42,18 +42,12 @@
 	}
 </style>
 <?php
-    /** @var Df_Checkout_Helper_Settings_OrderComments $settings  */
+    /** @var Df_Checkout_Model_Settings_OrderComments $settings  */
 	$settings = df_cfg()->checkout()->orderComments();
 ?>
 <script type='text/javascript'>
 	rm.namespace('rm.checkout.orderComments');
-	jQuery
-		.extend(
-			rm.checkout.orderComments
-			,
-			{
-				position: '<?php echo $settings->getPositionRelativeToTheTerms(); ?>'
-			}
-		)
-	;
+	jQuery.extend(rm.checkout.orderComments, {
+		position: '<?php echo $settings->getPositionRelativeToTheTerms(); ?>'
+	});
 </script>

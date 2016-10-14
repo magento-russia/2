@@ -8,7 +8,7 @@ abstract class Df_Core_Model_Form extends Df_Core_Model {
 
 	/**
 	 * @param $key
-	 * @param string $default[optional]
+	 * @param string $default [optional]
 	 * @return mixed
 	 */
 	protected function getField($key, $default = null) {
@@ -29,7 +29,7 @@ abstract class Df_Core_Model_Form extends Df_Core_Model {
 	 * @param string $key
 	 * @return string[]
 	 */
-	protected function getTextareaParam($key) {return df_text()->parseTextarea($this->getField($key));}
+	protected function getTextareaParam($key) {return df_t()->parseTextarea($this->getField($key));}
 
 	/** @return Df_Zf_Form */
 	private function getZendForm() {
@@ -53,8 +53,7 @@ abstract class Df_Core_Model_Form extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ZEND_FORM_VALUES, self::V_ARRAY);
+		$this->_prop(self::P__ZEND_FORM_VALUES, RM_V_ARRAY);
 	}
-	const _CLASS = __CLASS__;
 	const P__ZEND_FORM_VALUES = 'zend_form_values';
 }

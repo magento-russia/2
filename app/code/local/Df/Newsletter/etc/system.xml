@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_newsletter translate='label' module='df_newsletter'>
+		<df_newsletter>
 			<label>Рассылка</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<subscription translate='label'>
+				<subscription>
 					<label>Подписка</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -18,7 +18,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<fix_subscriber_store translate='label'>
+						<fix_subscriber_store>
 							<label>
 								Устранить дефект подписки на рассылку покупателей,зарегистрированных администратором?
 							</label>
@@ -33,7 +33,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-newsletter</df_feature>
 						</fix_subscriber_store>
 					</fields>

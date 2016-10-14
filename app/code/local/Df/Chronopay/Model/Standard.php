@@ -1,4 +1,9 @@
 <?php
+/**
+ * @method Df_Sales_Model_Order|null getOrder()
+ * @method int getStore()
+ * @method Df_Chronopay_Model_Standard setOrder(Df_Sales_Model_Order $value)
+ */
 class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	protected $_code  = 'chronopay_standard';
 	protected $_formBlockType = 'df_chronopay/standard_form';
@@ -17,9 +22,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	 * @param null $quote
 	 * @return bool
 	 */
-	public function isAvailable($quote = null) {
-		return df_enabled(Df_Core_Feature::CHRONOPAY) && parent::isAvailable();
-	}
+	public function isAvailable($quote = null) {return parent::isAvailable();}
 
 	/**
 	 * @param string $field
@@ -28,10 +31,10 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	 */
 	public function getConfigData($field, $storeId = null) {
 		if (null === $storeId) {
-			$storeId = $this->getDataUsingMethod('store');
+			$storeId = $this->getStore();
 		}
 		/** @var string $path */
-		$path = rm_config_key('df_payment', $this->getCode(), $field);
+		$path = df_concat_xpath('df_payment', $this->getCode(), $field);
 		return Mage::getStoreConfig($path, $storeId);
 	}
 
@@ -55,78 +58,43 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	 * @param float $amount
 	 * @return Df_Chronopay_Model_Standard
 	 */
-	public function capture(Varien_Object $payment, $amount)
-	{
+	public function capture(Varien_Object $payment, $amount) {
 		$payment
-			->setStatus(
-				self::STATUS_APPROVED
-			)
-			->setLastTransId(
-				$this->getTransactionId()
-			)
+			->setStatus(self::STATUS_APPROVED)
+			->setLastTransId($this->getTransactionId())
 		;
 		return $this;
 	}
 
 	/** @return string */
-	public function getChronopayUrl()
-	{
-		return 'https://payments.chronopay.com/';
-	}
+	public function getChronopayUrl() {return 'https://payments.chronopay.com/';}
 
 	/** @return string */
-	protected function getSuccessURL()
-	{
+	protected function getSuccessURL() {
 		return Mage::getUrl('df_chronopay/standard/success', array('_secure' => false));
 	}
 
 	/** @return string */
-	protected function getNotificationURL()
-	{
+	protected function getNotificationURL() {
 		return Mage::getUrl('df_chronopay/standard/notify', array('_secure' => false));
 	}
 
 	/** @return string */
-	protected function getFailureURL()
-	{
+	protected function getFailureURL() {
 		return Mage::getUrl('df_chronopay/standard/failure', array('_secure' => false));
 	}
 
-	/**
-	 * @param string $name
-	 * @return Df_Chronopay_Block_Standard_Form
-	 */
-	public function createFormBlock($name) {
-		return
-			Df_Chronopay_Block_Standard_Form::i($name)
-				->setMethod($this->_code)
-				->setPayment($this->getPayment())
-		;
-	}
-
 	/** @return string */
-	public function getOrderPlaceRedirectUrl() {
-		return Mage::getUrl('df_chronopay/standard/redirect');
-	}
+	public function getOrderPlaceRedirectUrl() {return Mage::getUrl('df_chronopay/standard/redirect');}
 
-	/** @return Mage_Sales_Model_Order_Address */
-	public function getBillingAddress() {
-		return $this->getOrder()->getBillingAddress();
-	}
+	/** @return Df_Sales_Model_Order_Address */
+	public function getBillingAddress() {return $this->getOrder()->getBillingAddress();}
 
 	/** @return string */
 	public function getFirstName() {
-		return
-			$this->formatName(
-				rm_first(
-					explode(
-						' '
-						,df_nts($this->getBillingAddress()->getFirstname())
-					)
-				)
-				,'FIRSTNAME'
-			)
-		;
+		return $this->formatName(
+			rm_first(explode(' ', df_nts($this->getBillingAddress()->getFirstname()))), 'FIRSTNAME'
+		);
 	}
 
 	/** @return string */
@@ -134,12 +102,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 		$lastName = df_trim(df_nts($this->getBillingAddress()->getLastname()));
 		if (2 > mb_strlen($lastName)) {
 			/** @var string[] $firstNameExploded */
-			$firstNameExploded =
-				explode(
-					' '
-					,df_nts($this->getBillingAddress()->getFirstname())
-				)
-			;
+			$firstNameExploded = explode(' ', df_nts($this->getBillingAddress()->getFirstname()));
 			if (1 < count($firstNameExploded)) {
 				$lastName = rm_last($firstNameExploded);
 			}
@@ -150,15 +113,12 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	/** @return array */
 	public function getStandardCheckoutFormFields() {
 		$order = $this->getOrder();
-		if (!($order instanceof Mage_Sales_Model_Order)) {
+		if (!$order) {
 			Mage::throwException($this->_getHelper()->__('Cannot retrieve order object'));
 		}
-		/** @var Mage_Customer_Model_Address_Abstract $billingAddress */
+		/** @var Df_Sales_Model_Order_Address $billingAddress */
 		$billingAddress = $order->getBillingAddress();
-		$streets = $billingAddress->getStreet();
-		$street = isset($streets[0]) && $streets[0] != ''
-				  ? $streets[0]
-				  : (isset($streets[1]) && $streets[1] != '' ? $streets[1] : '');
+		$street = $billingAddress->getStreetAsText();
 //		if ($this->getConfigData('description')) {
 //			$transDescription = $this->getConfigData('description');
 //		} else {
@@ -172,7 +132,6 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 		} else {
 			$email = '';
 		}
-
 		$price =
 			number_format(
 				(float)$order->getBaseGrandTotal()
@@ -181,57 +140,44 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 				,''
 			)
 		;
-
 		/** @var string $postalCode */
 		$postalCode = df_trim(df_nts($billingAddress->getPostcode()));
 		if (2 > mb_strlen($postalCode)) {
 			$postalCode = '000000';
 		}
-		$fields =
-			array(
-				'product_id' => $this->getConfigData('product_id')
-				,'product_price' => $price
-				,'sign' =>
-					md5(
-						implode(
-							'-'
-							,array(
-								$this->getConfigData('product_id')
-								,$price
-								,df_mage()->coreHelper()->decrypt(
-									$this->getConfigData('shared_sec')
-								)
-							)
-						)
-					)
-				,'language' => strtolower($this->getConfigData('language'))
-				,'f_name'  => $this->getFirstName()
-				,'s_name' => $this->getLastName()
-				,'street' => $street
-				,'city' => $billingAddress->getCity()
-				,'zip' => $postalCode
-				,'country' => $billingAddress->getCountryModel()->getIso3Code()
-				,'phone' => $billingAddress->getTelephone()
-				,'email' => $email
-				,'cb_url' => $this->getNotificationURL()
-				,'cb_type' => 'P' // POST method used (G - GET method)
-				,'decline_url' => $this->getFailureURL()
-				,'success_url' => $this->getSuccessURL()
-				,'cs1' => df_mage()->coreHelper()->encrypt($order->getRealOrderId())
-			)
-		;
+		/** @var array(string => string) $fields */
+		$fields = array(
+			'product_id' => $this->getConfigData('product_id')
+			,'product_price' => $price
+			,'sign' => md5(implode('-', array(
+				$this->getConfigData('product_id')
+				,$price
+				,rm_decrypt($this->getConfigData('shared_sec'))
+			)))
+			,'language' => strtolower($this->getConfigData('language'))
+			,'f_name'  => $this->getFirstName()
+			,'s_name' => $this->getLastName()
+			,'street' => $street
+			,'city' => $billingAddress->getCity()
+			,'zip' => $postalCode
+			,'country' => $billingAddress->getCountryModel()->getIso3Code()
+			,'phone' => $billingAddress->getTelephone()
+			,'email' => $email
+			,'cb_url' => $this->getNotificationURL()
+			,'cb_type' => 'P' // POST method used (G - GET method)
+			,'decline_url' => $this->getFailureURL()
+			,'success_url' => $this->getSuccessURL()
+			,'cs1' => rm_encrypt($order->getRealOrderId())
+		);
 		/**
 		 * ChronoPay разрешает указывать код региона только для США и Канады
-		 * @link http://magento-forum.ru/topic/3294/
+		 * http://magento-forum.ru/topic/3294/
 		 */
-
 		/** @var string $countriesWithRecognizableRegions */
-		$countriesWithRecognizableRegions =
-			array(
-				Df_Directory_Helper_Country::ISO_2_CODE__USA
-				,Df_Directory_Helper_Country::ISO_2_CODE__CANADA
-			)
-		;
+		$countriesWithRecognizableRegions = array(
+			Df_Directory_Helper_Country::ISO_2_CODE__USA
+			,Df_Directory_Helper_Country::ISO_2_CODE__CANADA
+		);
 		if (
 			in_array(
 				$billingAddress->getCountryModel()->getIso2Code()
@@ -251,11 +197,14 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	/**
 	 * @throws Exception
 	 * @param array $data
-	 * @return Exception
+	 * @return Exception|null
 	 */
 	public function validateResponse(array $data) {
+		/** @var Exception|null $result */
+		$result = null;
+		/** @var Df_Sales_Model_Order $order */
 		$order = $this->getOrder();
-		if (!($order instanceof Mage_Sales_Model_Order)) {
+		if (!$order) {
 			Mage::throwException($this->_getHelper()->__('Cannot retrieve order object'));
 		}
 		try {
@@ -265,27 +214,25 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 				&& isset($data['site_id']) && $data['site_id'] != ''
 				&& isset($data['product_id']) && $data['product_id'] != '';
 			if (!$ok) {
-				throw new Exception('Cannot restore order or invalid order ID');
+				df_error('Cannot restore order or invalid order ID');
 			}
-
 			// validate site ID
 			if ($this->getConfigData('site_id') != $data['site_id']) {
-				throw new Exception('Invalid site ID');
+				df_error('Invalid site ID');
 			}
-
 			// validate product ID
 			if ($this->getConfigData('product_id') != $data['product_id']) {
-				throw new Exception('Invalid product ID');
+				df_error('Invalid product ID');
 			}
-
 			// Successful transaction type
 			if (!in_array($data['transaction_type'], array('initial', 'onetime', 'Purchase'))) {
-				throw new Exception('Transaction is not successful');
+				df_error('Transaction is not successful');
 			}
-
-		} catch (Exception $e) {
-			return $e;
 		}
+		catch (Exception $e) {
+			$result = $e;
+		}
+		return $result;
 	}
 
 	/**
@@ -304,7 +251,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

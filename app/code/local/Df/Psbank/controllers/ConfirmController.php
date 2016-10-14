@@ -5,18 +5,7 @@ class Df_Psbank_ConfirmController extends Mage_Core_Controller_Front_Action {
 	 * всех запрашиваемых интернет-магазином у платёжной системы операций
 	 * @return void
 	 */
-	public function indexAction() {$this->getAction()->process();}
-
-	/** @return Df_Psbank_Model_Action_Confirm */
-	private function getAction() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_model(
-				$this->getActionClass(), array(Df_Psbank_Model_Action_Confirm::P__CONTROLLER => $this)
-			);
-			df_assert($this->{__METHOD__} instanceof Df_Psbank_Model_Action_Confirm);
-		}
-		return $this->{__METHOD__};
-	}
+	public function indexAction() {rm_action($this, $this->getActionClass());}
 
 	/** @return string */
 	private function getActionClass() {
@@ -54,10 +43,10 @@ class Df_Psbank_ConfirmController extends Mage_Core_Controller_Front_Action {
 	private function getActionMap() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
-				0 => Df_Psbank_Model_Action_Confirm_Authorize::_CLASS
-				,1 => Df_Psbank_Model_Action_Confirm_Payment::_CLASS
-				,21 => Df_Psbank_Model_Action_Confirm_Capture::_CLASS
-				,22 => Df_Psbank_Model_Action_Confirm_Void::_CLASS
+				0 => Df_Psbank_Model_Action_Confirm_Authorize::_C
+				,1 => Df_Psbank_Model_Action_Confirm_Payment::_C
+				,21 => Df_Psbank_Model_Action_Confirm_Capture::_C
+				,22 => Df_Psbank_Model_Action_Confirm_Void::_C
 			);
 		}
 		return $this->{__METHOD__};

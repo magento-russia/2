@@ -3,12 +3,15 @@ require_once 'Mage/Checkout/controllers/OnepageController.php';
 class Df_Checkout_OnepageController extends Mage_Checkout_OnepageController {
 	/**
 	 * @override
+	 * @see Mage_Checkout_OnepageController::getOnepage()
 	 * @return Df_Checkout_Model_Type_Onepage
 	 */
 	public function getOnepage() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Checkout_Model_Type_Onepage::i();
-			$this->{__METHOD__}->setController($this);
+			/** @var Df_Checkout_Model_Type_Onepage $result */
+			$result = parent::getOnepage();
+			$result->setController($this);
+			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
@@ -28,13 +31,10 @@ class Df_Checkout_OnepageController extends Mage_Checkout_OnepageController {
 			$result will have erro data if shipping method is empty
 			*/
 			if (!$result) {
-				Mage::dispatchEvent(
-					'checkout_controller_onepage_save_shipping_method'
-					,array(
-						'request'=>$this->getRequest()
-						,'quote'=>$this->getOnepage()->getQuote()
-					)
-				);
+				Mage::dispatchEvent('checkout_controller_onepage_save_shipping_method', array(
+					'request'=>$this->getRequest()
+					,'quote'=>$this->getOnepage()->getQuote()
+				));
 				$this->getOnepage()->getQuote()->collectTotals();
 				$this->getResponse()->setBody(df_mage()->coreHelper()->jsonEncode($result));
 				$result['goto_section'] = 'payment';
@@ -44,7 +44,7 @@ class Df_Checkout_OnepageController extends Mage_Checkout_OnepageController {
 				/**
 				 * BEGIN PATCH
 				 */
-				Mage::app()->getCacheInstance()->banUse('layout');
+				rm_cache()->banUse('layout');
 				/** @var Exception $exception|null */
 				$exception = null;
 				try {
@@ -58,11 +58,11 @@ class Df_Checkout_OnepageController extends Mage_Checkout_OnepageController {
 						)
 					;
 				}
-				catch(Exception $e) {
+				catch (Exception $e) {
 					$exception = $e;
 				}
 				if (!is_null($exception)) {
-					throw $exception;
+					df_error($exception);
 				}
 				/**
 				 * END PATCH

@@ -5,6 +5,6 @@ class Df_Vk_Model_Widget_PageType extends Df_Core_Model {
 	const CATALOG_PRODUCT_VIEW = 'catalog_product_view';
 	const FRONT = 'front';
 	const OTHER = 'other';
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 
 }

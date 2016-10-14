@@ -120,6 +120,8 @@ class Df_Core_Helper_Mage extends Mage_Core_Helper_Abstract {
 	public function sendfriendHelper() {return Mage::helper('sendfriend');}
 	/** @return Mage_Shipping_Helper_Data */
 	public function shippingHelper() {return Mage::helper('shipping');}
+	/** @return Mage_Shipping_Model_Shipping */
+	public function shippingSingleton() {return Mage::getSingleton('shipping/shipping');}
 	/** @return Mage_Sitemap_Helper_Data */
 	public function sitemapHelper() {return Mage::helper('sitemap');}
 	/** @return Mage_Tag_Helper_Data */

@@ -13,5 +13,5 @@ class Df_Localization_Block_Admin_Theme_Processor_Applicable
 	 */
 	public function getLinkTitle() {return 'выполнить русификацию темы';}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

@@ -64,7 +64,7 @@ abstract class Df_Spl_Iterator_Directory extends Df_Core_Model implements Iterat
 			/** @var string $result */
 			$result = $this->cfg(self::P__PATH);
 			if (!is_dir($result)) {
-				df_error_internal('Программист ищет файлы в отсутствующей папке «%s».', $result);
+				df_error('Программист ищет файлы в отсутствующей папке «%s».', $result);
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -82,7 +82,7 @@ abstract class Df_Spl_Iterator_Directory extends Df_Core_Model implements Iterat
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__PATH, self::V_STRING_NE);
+		$this->_prop(self::P__PATH, RM_V_STRING_NE);
 	}
 	const P__PATH = 'path';
 }

@@ -4,10 +4,10 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 	protected function getUrlSettingsSuffix() {return '';}
 
 	/**
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return bool
 	 */
-	abstract protected function isStoreAffected(Mage_Core_Model_Store $store);
+	abstract protected function isStoreAffected(Df_Core_Model_StoreM $store);
 
 	/**
 	 * @override
@@ -28,14 +28,10 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = parent::getMessage();
 			if ($this->getUrlSettingsSuffix()) {
-				$this->{__METHOD__} .=
-					df_output()->processLink(
-						'<br/><span class="rm-url-settings">[[открыть раздел настроек]]</span>'
-						, rm_url_admin(
-							'adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix()
-						)
-					)
-				;
+				$this->{__METHOD__} .= df_output()->processLink(
+					'<br/><span class="rm-url-settings">[[открыть раздел настроек]]</span>'
+					, rm_url_admin('adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix())
+				);
 			}
 		}
 		return $this->{__METHOD__};
@@ -62,13 +58,13 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Core_Model_Store[] */
+	/** @return Df_Core_Model_StoreM[] */
 	private function getStoresAffected() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Store[] $result */
+			/** @var Df_Core_Model_StoreM[] $result */
 			$result = array();
 			foreach (Mage::app()->getStores() as $store) {
-				/** @var Mage_Core_Model_Store $store */
+				/** @var Df_Core_Model_StoreM $store */
 				if ($this->isStoreAffected($store)) {
 					$result[]= $store;
 				}

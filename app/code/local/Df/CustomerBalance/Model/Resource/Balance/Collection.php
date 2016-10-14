@@ -1,6 +1,5 @@
 <?php
-class Df_CustomerBalance_Model_Resource_Balance_Collection
-	extends Mage_Core_Model_Mysql4_Collection_Abstract {
+class Df_CustomerBalance_Model_Resource_Balance_Collection extends Df_Core_Model_Resource_Collection {
 	/**
 	 * @param array|int $websiteIds
 	 * @return Df_CustomerBalance_Model_Resource_Balance_Collection
@@ -9,6 +8,12 @@ class Df_CustomerBalance_Model_Resource_Balance_Collection
 		$this->getSelect()->where(rm_quote_into('main_table.website_id IN (?)', $websiteIds));
 		return $this;
 	}
+
+	/**
+	 * @override
+	 * @return Df_CustomerBalance_Model_Resource_Balance
+	 */
+	public function getResource() {return Df_CustomerBalance_Model_Resource_Balance::s();}
 
 	/**
 	 * @override
@@ -24,11 +29,6 @@ class Df_CustomerBalance_Model_Resource_Balance_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_CustomerBalance_Model_Balance::mf(), Df_CustomerBalance_Model_Resource_Balance::mf());
-	}
-	const _CLASS = __CLASS__;
-	/** @return Df_CustomerBalance_Model_Resource_Balance_Collection */
-	public static function i() {return new self;}
+	protected function _construct() {$this->_itemObjectClass = Df_CustomerBalance_Model_Balance::_C;}
+	const _C = __CLASS__;
 }

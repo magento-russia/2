@@ -6,9 +6,7 @@ class Df_Garantpost_Model_Request_Countries_ForDeliveryTime
 	 * @return array(string => string)
 	 */
 	protected function getHeaders() {
-		return array_merge(parent::getHeaders(),array(
-			'Referer' => 'http://www.garantpost.ru/tools/transint'
-		));
+		return array('Referer' => 'http://www.garantpost.ru/tools/transint') + parent::getHeaders();
 	}
 
 	/**
@@ -23,7 +21,6 @@ class Df_Garantpost_Model_Request_Countries_ForDeliveryTime
 	 */
 	protected function getQueryPath() {return '/tools/transint';}
 
-	const _CLASS = __CLASS__;
 	/** @return Df_Garantpost_Model_Request_Countries_ForDeliveryTime */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

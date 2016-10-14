@@ -8,9 +8,11 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 
 	/**
 	 * @override
-	 * @return null|string
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/localization/theme/processor.phtml';}
+	protected function defaultTemplate() {return 'df/localization/theme/processor.phtml';}
 
 	/** @return string */
 	protected function getLink() {return $this->getProcessor()->getLink();}
@@ -19,7 +21,12 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	protected function getLinksHtml() {
 		return implode(df_map(
 			'rm_tag'
-			,array_map(array('self', 'getLinkHtml'), $this->getLinksParameters())
+			/** @uses getLinkHtml() */
+			,array_map(
+				array(__CLASS__, 'getLinkHtml')
+				, array_keys($this->getLinksParameters())
+				, array_values($this->getLinksParameters())
+			)
 			,$paramsToAppend = array()
 			,$paramsToPrepend = array('div', array())
 		));
@@ -28,35 +35,19 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	/** @return string */
 	protected function getLinkTitle() {return '';}
 
-	/** @return Df_Localization_Model_Onetime_Processor */
+	/** @return Df_Localization_Onetime_Processor */
 	protected function getProcessor() {return $this->cfg(self::P__PROCESSOR);}
 
 	/** @return string */
-	protected function getTitle() {return df_escape($this->getProcessor()->getTitle());}
+	protected function getTitle() {return rm_e($this->getProcessor()->getTitle());}
 
 	/** @return array(array(string => string)) */
 	private function getLinksParameters() {
 		return array(
-			array(
-				Df_Core_Model_Output_Html_A::P__HREF => $this->getLink()
-				,Df_Core_Model_Output_Html_A::P__ANCHOR => $this->getActionTitle()
-				,Df_Core_Model_Output_Html_A::P__TITLE => $this->getLinkTitle()
-			)
-			,array(
-				Df_Core_Model_Output_Html_A::P__HREF => $this->getUrl_Demo()
-				,Df_Core_Model_Output_Html_A::P__ANCHOR => 'демо'
-				,Df_Core_Model_Output_Html_A::P__TARGET => '_blank'
-			)
-			,array(
-				Df_Core_Model_Output_Html_A::P__HREF => $this->getUrl_Forum()
-				,Df_Core_Model_Output_Html_A::P__ANCHOR => 'форум'
-				,Df_Core_Model_Output_Html_A::P__TARGET => '_blank'
-			)
-			,array(
-				Df_Core_Model_Output_Html_A::P__HREF => $this->getUrl_OfficialSite()
-				,Df_Core_Model_Output_Html_A::P__ANCHOR => 'купить'
-				,Df_Core_Model_Output_Html_A::P__TARGET => '_blank'
-			)
+			$this->getActionTitle() => array('href' => $this->getLink(), 'title' => $this->getLinkTitle())
+			,'демо' => array('href' => $this->getUrl_Demo(), 'target' => '_blank')
+			,'форум' => array('href' => $this->getUrl_Forum(), 'target' => '_blank')
+			,'купить' => array('href' => $this->getUrl_OfficialSite(), 'target' => '_blank')
 		);
 	}
 
@@ -68,7 +59,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 			$this->{__METHOD__} =
 				!$resultAsString
 				? array()
-				: df_text()->parseTextarea($resultAsString)
+				: df_t()->parseTextarea($resultAsString)
 			;
 		}
 		return $this->{__METHOD__};
@@ -86,69 +77,62 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__PROCESSOR, Df_Localization_Model_Onetime_Processor::_CLASS);
+		$this->_prop(self::P__PROCESSOR, Df_Localization_Onetime_Processor::_C);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__PROCESSOR = 'processor';
 
 	/**
-	 * @param Df_Localization_Model_Onetime_Processor $processor
+	 * @param Df_Localization_Onetime_Processor $processor
 	 * @return string
 	 */
-	public static function getBlockClass(Df_Localization_Model_Onetime_Processor $processor) {
-		return __CLASS__ . '_' . ucfirst($processor->getType());
+	public static function getBlockClass(Df_Localization_Onetime_Processor $processor) {
+		return __CLASS__ . '_' . rm_ucfirst($processor->getType());
 	}
 
 	/**
 	 * @param string[] $urls
-	 * @return array(array(string => string))
+	 * @return array(string => array(string => string))
 	 */
 	public static function getDemoLinksParameters(array $urls) {
-		/** @var array(array(string => string)) $result */
+		/** @var array(string => array(string => string)) $result */
 		$result = array();
 		/** @var int $i */
 		$i = 1;
 		foreach ($urls as $url) {
 			/** @var string $url */
-			$result[]= array(
-				Df_Core_Model_Output_Html_A::P__HREF => $url
-				,Df_Core_Model_Output_Html_A::P__ANCHOR => 'демо ' . $i++
-				,Df_Core_Model_Output_Html_A::P__TARGET => '_blank'
-			);
+			$result['демо ' . $i++] = array('href' => $url, 'target' => '_blank');
 		}
 		return $result;
 	}
 
 	/**
-	 * @param array(string => string|string[]) $parameters
+	 * @param string $content
+	 * @param array(string => string|string[]) $attributes
 	 * @return string
 	 */
-	private static function getLinkHtml(array $parameters) {
+	private static function getLinkHtml($content, array $attributes) {
 		/** @var string|string[]|null $href */
-		$href = df_a($parameters, Df_Core_Model_Output_Html_A::P__HREF);
+		$href = df_a($attributes, 'href');
 		if (is_array($href)) {
 			if (2 > count($href)) {
 				$href = rm_first($href);
-				$parameters[Df_Core_Model_Output_Html_A::P__HREF] = $href;
+				$attributes['href'] = $href;
 			}
 		}
 		/** @var string $elementId */
 		$elementId = 'dropdown-' . rm_uniqid(5);
+		/** разметка для плагина Dropdown: http://labs.abeautifulsite.net/jquery-dropdown/ */
 		return
 			!is_array($href)
-			? rm_tag_a($parameters)
+			? rm_tag('a', $attributes, $content)
 			:
-				/**
-			 	 * Разметка для плагина Dropdown:
-				 * @link http://labs.abeautifulsite.net/jquery-dropdown/
-			 	 */
-				rm_tag('a', df_clean(array_merge($parameters, array(
+				rm_tag('a', df_clean(array(
 					'href' => '#'
-					,'data-dropdown' => '#' . $elementId
-					,'target' => null
-					,'anchor' => null
-					,'class' => 'rm-dropdown'
-				))), df_a($parameters, Df_Core_Model_Output_Html_A::P__ANCHOR))
+					, 'data-dropdown' => '#' . $elementId
+					, 'target' => null
+					, 'class' => 'rm-dropdown'
+				) + $attributes), $content)
 			.
 				rm_tag(
 					'div'
@@ -158,7 +142,13 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 						, array('class' => 'dropdown-menu')
 						, implode(df_map(
 							'rm_tag'
-							, array_map('rm_tag_a', self::getDemoLinksParameters($href))
+							, df_map(
+								'rm_tag'
+								, self::getDemoLinksParameters($href)
+								, $paramsToAppend = array()
+								, $paramsToPrepend = array('a')
+								, $keyPosition = RM_AFTER
+							)
 							, $paramsToAppend = array()
 							, $paramsToPrepend = array('li', array())
 						))

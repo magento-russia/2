@@ -75,4 +75,4 @@ class PelJpegContent {
 	return $this->data->getBytes();
   }
 
-}?>
+}

@@ -13,7 +13,7 @@
             <fieldset>
                 <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
                 <ul>
-					<?php echo Df_Checkout_Block_Frontend_Ergonomic_Address::shipping()->toHtml(); ?>
+					<?php echo Df_Checkout_Block_Frontend_Ergonomic_Address::renderShipping(); ?>
 					<li class="no-display">
 						<input type="hidden" name="shipping[save_in_address_book]" value="1" />
 					</li>

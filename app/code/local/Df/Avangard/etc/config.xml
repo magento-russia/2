@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Avangard>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Банк Авангард</title>
+			<version>1.0.0</version>
 		</Df_Avangard>
 	</modules>
 	<global>
@@ -50,7 +51,7 @@
 		-->
 		<payment>
 			<df-avangard>
-				<model>df_avangard/payment</model>
+				<model>Df_Avangard_Model_Payment</model>
 			</df-avangard>
 		</payment>
 	</default>

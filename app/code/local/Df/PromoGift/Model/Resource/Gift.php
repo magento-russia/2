@@ -1,25 +1,18 @@
 <?php
-class Df_PromoGift_Model_Resource_Gift extends Mage_Core_Model_Mysql4_Abstract {
+class Df_PromoGift_Model_Resource_Gift extends Df_Core_Model_Resource {
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::MAIN_TABLE, Df_PromoGift_Model_Gift::P__ID);
-	}
-	const _CLASS = __CLASS__;
-	const MAIN_TABLE = 'df_promo_gift/gift';
+	protected function _construct() {$this->_init(self::TABLE, Df_PromoGift_Model_Gift::P__ID);}
 	/**
-	 * @see Df_PromoGift_Model_Gift::_construct()
-	 * @see Df_PromoGift_Model_Resource_Gift_Collection::_construct()
-	 * @return string
+	 * @used-by Df_PromoGift_Model_Resource_Indexer::_construct()
+	 * @used-by Df_PromoGift_Setup_1_0_0::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE = 'df_promo_gift/gift';
 	/** @return Df_PromoGift_Model_Resource_Gift */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

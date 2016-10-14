@@ -20,10 +20,9 @@ class Df_Logging_Model_Handler_Controllers
 	 */
 	public function postDispatchGeneric($config, $eventModel, $processorModel)
 	{
-		if ($collectedIds = $processorModel->getCollectedIds()) {
-			$eventModel->setInfo(
-				Df_Logging_Helper_Data::s()->implodeValues($collectedIds)
-			);
+		$collectedIds = $processorModel->getCollectedIds();
+		if ($collectedIds) {
+			$eventModel->setInfo(Df_Logging_Helper_Data::s()->implodeValues($collectedIds));
 			return true;
 		}
 		return false;
@@ -78,12 +77,11 @@ class Df_Logging_Model_Handler_Controllers
 		/** @var Df_Logging_Model_Event_Changes $change */
 		$change = Df_Logging_Model_Event_Changes::i();
 		//Collect skip encrypted fields
-		$encryptedNodeEntriesPaths = df_mage()->adminhtml()->getConfig()->getEncryptedNodeEntriesPaths(true);
+		$encryptedNodeEntriesPaths = rm_config_adminhtml()->getEncryptedNodeEntriesPaths(true);
 		$skipEncrypted = array();
 		foreach ($encryptedNodeEntriesPaths as $fieldName) {
 			$skipEncrypted[]= $fieldName['field'];
 		}
-
 		//For each group of current section creating separated event change
 		if (isset($postData['groups'])) {
 			foreach ($postData['groups'] as $groupName => $groupData) {
@@ -143,13 +141,14 @@ class Df_Logging_Model_Handler_Controllers
 	public function postDispatchForgotPassword($config, $eventModel)
 	{
 		if (Mage::app()->getRequest()->isPost()) {
-			if ($model = Mage::registry('df_logging_saved_model_adminhtml_index_forgotpassword')) {
+			$model = Mage::registry('df_logging_saved_model_adminhtml_index_forgotpassword');
+			if ($model) {
 				$info = $model->getId();
 			} else {
 				$info = Mage::app()->getRequest()->getParam('email');
 			}
 			$success = true;
-			$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+			$messages = rm_session()->getMessages()->getLastAddedMessage();
 			if ($messages) {
 				$success = 'error' != $messages->getType();
 			}
@@ -212,7 +211,9 @@ class Df_Logging_Model_Handler_Controllers
 		$request = Mage::app()->getRequest();
 		$filter = $request->getParam('filter');
 		//Filtering request data
-		$data = array_intersect_key($request->getParams(), array('report_from' => null, 'report_to' => null, 'report_period' => null, 'store' => null, 'website' => null, 'group' => null));
+		$data = df_select($request->getParams(), array(
+			'report_from', 'report_to', 'report_period', 'store', 'website', 'group'
+		));
 		//Need when in request data there are was no period info
 		if ($filter) {
 			$filterData = Mage::app()->getHelper('adminhtml')->prepareFilterString($filter);
@@ -278,7 +279,7 @@ class Df_Logging_Model_Handler_Controllers
 	{
 		$id = Mage::app()->getRequest()->getParam('subscriber');
 		if (is_array($id)) {
-			$id = df_concat_enum($id);
+			$id = df_csv($id);
 		}
 		return $eventModel->setInfo($id);
 	}
@@ -296,7 +297,7 @@ class Df_Logging_Model_Handler_Controllers
 			return false;
 		}
 		$success = true;
-		$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+		$messages = rm_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -325,7 +326,7 @@ class Df_Logging_Model_Handler_Controllers
 		if ($products) {
 			$processor->addEventChanges(clone $change->setSourceName('product')
 				->setOriginalData(array())
-				->setResultData(array('ids' => df_concat_enum($products))));
+				->setResultData(array('ids' => df_csv($products))));
 		}
 
 		$processor->addEventChanges(clone $change->setSourceName('inventory')
@@ -343,14 +344,14 @@ class Df_Logging_Model_Handler_Controllers
 		if ($websiteIds) {
 			$processor->addEventChanges(clone $change->setSourceName('remove_website_ids')
 				->setOriginalData(array())
-				->setResultData(array('ids' => df_concat_enum($websiteIds))));
+				->setResultData(array('ids' => df_csv($websiteIds))));
 		}
 
 		$websiteIds = $request->getParam('add_website', array());
 		if ($websiteIds) {
 			$processor->addEventChanges(clone $change->setSourceName('add_website_ids')
 				->setOriginalData(array())
-				->setResultData(array('ids' => df_concat_enum($websiteIds))));
+				->setResultData(array('ids' => df_csv($websiteIds))));
 		}
 		return $eventModel->setInfo(Df_Logging_Helper_Data::s()->__('Attributes Updated'));
 	}
@@ -373,7 +374,7 @@ class Df_Logging_Model_Handler_Controllers
 			$eventModel->setEventCode('tax_product_tax_classes');
 		}
 		$success = true;
-		$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+		$messages = rm_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -389,7 +390,8 @@ class Df_Logging_Model_Handler_Controllers
 	 */
 	public function postDispatchSystemBackupsCreate($config, $eventModel)
 	{
-		if ($backup = Mage::registry('backup_model')) {
+		$backup = Mage::registry('backup_model');
+		if ($backup) {
 			$eventModel->setIsSuccess($backup->exists())
 				->setInfo($backup->getFileName());
 		} else {
@@ -407,7 +409,8 @@ class Df_Logging_Model_Handler_Controllers
 	 */
 	public function postDispatchSystemBackupsDelete($config, $eventModel)
 	{
-		if ($backup = Mage::registry('backup_model')) {
+		$backup = Mage::registry('backup_model');
+		if ($backup) {
 			$eventModel->setIsSuccess(!$backup->exists())
 				->setInfo($backup->getFileName());
 		} else {
@@ -428,14 +431,11 @@ class Df_Logging_Model_Handler_Controllers
 		if (!Mage::app()->getRequest()->isPost()) {
 			return false;
 		}
-		$userIds = Mage::app()->getRequest()->getPost('unlock', array());
-		if (!is_array($userIds)) {
-			$userIds = array();
-		}
+		$userIds = df_nta(Mage::app()->getRequest()->getPost('unlock'));
 		if (!$userIds) {
 			return false;
 		}
-		return $eventModel->setInfo(df_concat_enum($userIds));
+		return $eventModel->setInfo(df_csv($userIds));
 	}
 
 	/**
@@ -451,7 +451,7 @@ class Df_Logging_Model_Handler_Controllers
 		if (!$processIds) {
 			return false;
 		}
-		return $eventModel->setInfo(is_array($processIds) ? df_concat_enum($processIds) : (int)$processIds);
+		return $eventModel->setInfo(is_array($processIds) ? df_csv($processIds) : (int)$processIds);
 	}
 
 	/**
@@ -468,7 +468,7 @@ class Df_Logging_Model_Handler_Controllers
 			return false;
 		}
 		$success = true;
-		$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+		$messages = rm_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -504,9 +504,9 @@ class Df_Logging_Model_Handler_Controllers
 
 		$processor->addEventChanges($change->setSourceName('rates')
 			->setOriginalData(array())
-			->setResultData(array('rates' => df_concat_enum($values))));
+			->setResultData(array('rates' => df_csv($values))));
 		$success = true;
-		$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+		$messages = rm_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -587,7 +587,7 @@ class Df_Logging_Model_Handler_Controllers
 					->setResultData(array('action' => $catalogAction)));
 		}
 		$success = true;
-		$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+		$messages = rm_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -607,7 +607,7 @@ class Df_Logging_Model_Handler_Controllers
 			return false;
 		}
 		$success = true;
-		$messages = df_mage()->adminhtml()->session()->getMessages()->getLastAddedMessage();
+		$messages = rm_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}

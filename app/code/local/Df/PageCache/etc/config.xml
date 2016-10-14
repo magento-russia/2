@@ -53,7 +53,7 @@
 			<core_clean_cache>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanExpiredCache</method>
 					</df_pagecache>
 				</observers>
@@ -61,7 +61,7 @@
 			<clean_cache_by_tags>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCacheByTags</method>
 					</df_pagecache>
 				</observers>
@@ -69,7 +69,7 @@
 			<model_save_commit_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>processEntityAction</method>
 					</df_pagecache>
 				</observers>
@@ -77,7 +77,7 @@
 			<model_delete_commit_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>processEntityAction</method>
 					</df_pagecache>
 				</observers>
@@ -85,7 +85,7 @@
 			<sales_order_place_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerNewOrder</method>
 					</df_pagecache>
 				</observers>
@@ -93,7 +93,7 @@
 			<catalog_category_save_before>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerCategorySave</method>
 					</df_pagecache>
 				</observers>
@@ -101,7 +101,7 @@
 			<review_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerReviewSave</method>
 					</df_pagecache>
 				</observers>
@@ -109,7 +109,7 @@
 			<review_delete_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerReviewDelete</method>
 					</df_pagecache>
 				</observers>
@@ -118,7 +118,7 @@
 			<cataloginventory_stock_full_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>invalidateCacheAfterFullReindex</method>
 					</df_pagecache>
 				</observers>
@@ -126,7 +126,7 @@
 			<catalog_product_price_full_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>invalidateCacheAfterFullReindex</method>
 					</df_pagecache>
 				</observers>
@@ -134,7 +134,7 @@
 			<catalog_product_flat_full_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>invalidateCacheAfterFullReindex</method>
 					</df_pagecache>
 				</observers>
@@ -142,7 +142,7 @@
 			<catalog_category_flat_full_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>invalidateCacheAfterFullReindex</method>
 					</df_pagecache>
 				</observers>
@@ -150,7 +150,7 @@
 			<catalog_category_product_full_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>invalidateCacheAfterFullReindex</method>
 					</df_pagecache>
 				</observers>
@@ -160,7 +160,7 @@
 			<cataloginventory_stock_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanProductsCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -168,7 +168,7 @@
 			<catalog_product_price_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanProductsCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -176,7 +176,7 @@
 			<catalog_product_flat_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanProductsCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -184,7 +184,7 @@
 			<catalog_category_product_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanProductsCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -192,7 +192,7 @@
 			<catalog_url_product_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanProductsCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -202,7 +202,7 @@
 			<catalog_category_flat_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanCategoriesCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -210,7 +210,7 @@
 			<catalog_url_category_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanCategoriesCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -218,7 +218,7 @@
 			<catalog_url_category_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanCacheByTags</method>
 					</df_pagecache>
 				</observers>
@@ -226,7 +226,7 @@
 			<rewrite_url_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>clearRequestCacheByTag</method>
 					</df_pagecache>
 				</observers>
@@ -234,7 +234,7 @@
 			<catalog_category_product_cat_partial_reindex>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer_index</class>
+						<class>Df_PageCache_Observer_Index</class>
 						<method>cleanCategoriesCacheAfterPartialReindex</method>
 					</df_pagecache>
 				</observers>
@@ -246,7 +246,7 @@
 			<redirect_save_commit_after>
 				<observers>
 					<invalidate_full_page_cache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>clearRequestCacheByTag</method>
 					</invalidate_full_page_cache>
 				</observers>
@@ -254,7 +254,7 @@
 			<redirect_delete_commit_after>
 				<observers>
 					<invalidate_full_page_cache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>clearRequestCacheByTag</method>
 					</invalidate_full_page_cache>
 				</observers>
@@ -262,7 +262,7 @@
 			<clean_media_cache_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCache</method>
 					</df_pagecache>
 				</observers>
@@ -270,7 +270,7 @@
 			<clean_catalog_images_cache_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCache</method>
 					</df_pagecache>
 				</observers>
@@ -278,7 +278,7 @@
 			<clean_configurable_swatches_cache_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCache</method>
 					</df_pagecache>
 				</observers>
@@ -286,7 +286,7 @@
 			<model_save_commit_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>validateDataChanges</method>
 					</df_pagecache>
 				</observers>
@@ -294,7 +294,7 @@
 			<model_delete_commit_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>validateDataDelete</method>
 					</df_pagecache>
 				</observers>
@@ -302,7 +302,7 @@
 			<tag_save_before>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCachedProductTagsForTags</method>
 					</df_pagecache>
 				</observers>
@@ -310,7 +310,7 @@
 			<tag_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCachedProductTagsForTags</method>
 					</df_pagecache>
 				</observers>
@@ -318,7 +318,7 @@
 			<tag_delete_before>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCachedProductTagsForTags</method>
 					</df_pagecache>
 				</observers>
@@ -326,7 +326,7 @@
 			<controller_action_postdispatch_adminhtml_system_currency_saveRates>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>invalidateCache</method>
 					</df_pagecache>
 				</observers>
@@ -334,7 +334,7 @@
 			<controller_action_postdispatch_adminhtml_system_config_save>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>invalidateCache</method>
 					</df_pagecache>
 				</observers>
@@ -342,7 +342,7 @@
 			<controller_action_postdispatch_adminhtml_system_currencysymbol_save>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>invalidateCache</method>
 					</df_pagecache>
 				</observers>
@@ -350,7 +350,7 @@
 			<catalogrule_after_apply>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCache</method>
 					</df_pagecache>
 				</observers>
@@ -358,7 +358,7 @@
 			<core_config_backend_design_exception_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerDesignExceptionsChange</method>
 					</df_pagecache>
 				</observers>
@@ -366,7 +366,7 @@
 			<core_config_backend_web_secure_offloaderheader_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerSslOffloaderChange</method>
 					</df_pagecache>
 				</observers>
@@ -374,7 +374,7 @@
 			<core_config_matcher_priority_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>invalidateCache</method>
 					</df_pagecache>
 				</observers>
@@ -382,7 +382,7 @@
 			<adminhtml_system_config_backend_cookie_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>invalidateCache</method>
 					</df_pagecache>
 				</observers>
@@ -390,7 +390,7 @@
 			<adminhtml_cache_refresh_type>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCache</method>
 					</df_pagecache>
 				</observers>
@@ -398,7 +398,7 @@
 			<adminhtml_cache_flush_system>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cleanCache</method>
 					</df_pagecache>
 				</observers>
@@ -406,7 +406,7 @@
 			<adminhtml_cache_flush_all>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>flushCache</method>
 					</df_pagecache>
 				</observers>
@@ -414,7 +414,7 @@
 			<wishlist_item_add_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerAdminWishlistChange</method>
 					</df_pagecache>
 				</observers>
@@ -445,7 +445,7 @@
 			<controller_response_redirect>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>checkMessages</method>
 					</df_pagecache>
 				</observers>
@@ -453,11 +453,11 @@
 			<controller_action_predispatch>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>processPreDispatch</method>
 					</df_pagecache>
 					<df_pagecache_form_key>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerCachedFormKey</method>
 					</df_pagecache_form_key>
 				</observers>
@@ -465,7 +465,7 @@
 			<controller_action_postdispatch_catalog_product_view>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>checkProductState</method>
 					</df_pagecache>
 				</observers>
@@ -473,7 +473,7 @@
 			<controller_action_postdispatch_catalog_category_view>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>checkCategoryState</method>
 					</df_pagecache>
 				</observers>
@@ -481,7 +481,7 @@
 			<controller_front_send_response_before>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>cacheResponse</method>
 					</df_pagecache>
 				</observers>
@@ -489,13 +489,13 @@
 			<core_block_abstract_to_html_after>
 				<observers>
 					<df_pagecache_register_block_tags>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerBlockTags</method>
 					</df_pagecache_register_block_tags>
 				</observers>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>renderBlockPlaceholder</method>
 					</df_pagecache>
 				</observers>
@@ -503,11 +503,11 @@
 			<customer_login>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>customerLogin</method>
 					</df_pagecache>
 					<df_pagecache_compare_list_change>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerCompareListChange</method>
 					</df_pagecache_compare_list_change>
 				</observers>
@@ -515,7 +515,7 @@
 			<customer_address_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>customerAddressUpdate</method>
 					</df_pagecache>
 				</observers>
@@ -523,7 +523,7 @@
 			<controller_action_postdispatch_customer_account_logoutSuccess>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>customerLogout</method>
 					</df_pagecache>
 				</observers>
@@ -531,7 +531,7 @@
 			<sales_quote_save_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerQuoteChange</method>
 					</df_pagecache>
 				</observers>
@@ -539,7 +539,7 @@
 			<sales_quote_remove_item>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerQuoteChange</method>
 					</df_pagecache>
 				</observers>
@@ -547,7 +547,7 @@
 			<catalog_product_compare_add_product>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerCompareListChange</method>
 					</df_pagecache>
 				</observers>
@@ -555,7 +555,7 @@
 			<catalog_product_compare_remove_product>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerCompareListChange</method>
 					</df_pagecache>
 				</observers>
@@ -563,7 +563,7 @@
 			<catalog_product_compare_item_collection_clear>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerCompareListChange</method>
 					</df_pagecache>
 				</observers>
@@ -571,7 +571,7 @@
 			<core_session_abstract_add_message>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>processNewMessage</method>
 					</df_pagecache>
 				</observers>
@@ -579,7 +579,7 @@
 			<core_session_abstract_clear_messages>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>processMessageClearing</method>
 					</df_pagecache>
 				</observers>
@@ -587,7 +587,7 @@
 			<wishlist_add_product>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerWishlistChange</method>
 					</df_pagecache>
 				</observers>
@@ -595,7 +595,7 @@
 			<wishlist_item_delete_commit_after>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerWishlistChange</method>
 					</df_pagecache>
 				</observers>
@@ -603,7 +603,7 @@
 			<poll_vote_add>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>registerPollChange</method>
 					</df_pagecache>
 				</observers>
@@ -611,7 +611,7 @@
 			<catalog_controller_product_init_before>
 				<observers>
 					<df_pagecache>
-						<class>df_pagecache/observer</class>
+						<class>Df_PageCache_Observer</class>
 						<method>updateProductInfo</method>
 					</df_pagecache>
 				</observers>

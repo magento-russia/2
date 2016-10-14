@@ -3,7 +3,7 @@
    <sections>
 		<df_payment>
 			<groups>
-				<alfabank translate='label' module='df_alfabank'>
+				<alfabank>
 					<label>Альфа-Банк</label>
 					<comment>
 					   <![CDATA[
@@ -20,7 +20,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -28,10 +28,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-alfabank</df_feature>
 						</active>
-						<payment_service__shop_id translate='label'>
+						<payment_service__shop_id>
 							<label>Cистемное имя магазина в рамках платёжного шлюза</label>
 							<comment>
 							   <![CDATA[назначается Альфа-Банком вручную]]>
@@ -45,7 +45,7 @@
 							<validate>required-entry</validate>
 							<validate>required-entry</validate>
 						</payment_service__shop_id>
-						<payment_service__request_password translate='label'>
+						<payment_service__request_password>
 							<label>Пароль магазина для обращений к платёжному шлюзу</label>
 							<comment><![CDATA[назначается Альфа-Банком вручную]]></comment>
 							<frontend_type>obscure</frontend_type>
@@ -54,11 +54,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__request_password>
-						<payment_service__test translate='label'>
+						<payment_service__test>
 							<label>Тестовый режим?</label>
 							<comment>
 								<![CDATA[
@@ -81,7 +81,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__test>
-						<frontend__title translate='label'>
+						<frontend__title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -97,7 +97,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</frontend__title>
-						<frontend__description translate='label'>
+						<frontend__description>
 							<label>Примечание к способу оплаты на экране оформления заказа</label>
 							<comment>
 								<![CDATA[
@@ -112,7 +112,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__description>
-						<frontend__message_failure translate='label'>
+						<frontend__message_failure>
 							<label>Шаблон сообщения покупателю при отказе платёжного шлюза провести оплату</label>
 							<comment>
 								<![CDATA[
@@ -137,7 +137,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__message_failure>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -156,7 +156,7 @@
 								validate-digits
 							</validate>
 						</frontend__sort_order>
-						<payment_service__card_payment_action translate='label'>
+						<payment_service__card_payment_action>
 							<label>Режим оплаты банковской картой</label>
 							<comment>
 							   <![CDATA[
@@ -173,7 +173,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
-							<source_model>df_payment/config_source_paymentCard_paymentAction</source_model>
+							<source_model>Df_Payment_Config_Source_PaymentCard_PaymentAction</source_model>
 							<sort_order>8000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -181,7 +181,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__card_payment_action>
-						<frontend__allowspecific translate='label'>
+						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
 								<![CDATA[
@@ -198,7 +198,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__allowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Допустимые страны покупателей</label>
 							<comment>
 								<![CDATA[

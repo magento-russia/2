@@ -1,10 +1,6 @@
 body.df-theme-templatemonster-45035 {
 	.block-cart-header {
-		h3 {
-			margin:{
-				top: 1px;
-			}
-		}
+		h3 {margin-top: 1px;}
 		.cart-content {
 			min-width: 290px;
 			.actions {
@@ -12,16 +8,8 @@ body.df-theme-templatemonster-45035 {
 					left: 10px;
 					right: 10px;
 				}
-				> button.button {
-					margin: {
-						right: 20px;
-					}
-				}
-				button.button + button.button {
-					margin: {
-						right: 0px;
-					}
-				}
+				> button.button {margin-right: 20px;}
+				button.button + button.button {margin-right: 0px;}
 			}
 		}
 	}

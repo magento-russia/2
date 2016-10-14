@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Rating>
-			<version>2.23.5</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.23.5</version>
 		</Df_Rating>
 	</modules>
 	<global>

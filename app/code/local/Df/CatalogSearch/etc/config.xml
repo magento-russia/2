@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_CatalogSearch>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_CatalogSearch>
 	</modules>
 	<global>
@@ -34,7 +34,9 @@
 		<translate>
 			<modules>
 				<Df_CatalogSearch>
-					<files><default>Df_CatalogSearch.csv</default></files>
+					<files>
+						<default>Df/CatalogSearch.csv</default>
+					</files>
 				</Df_CatalogSearch>
 			</modules>
 		</translate>

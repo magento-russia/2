@@ -3,7 +3,6 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	/**
 	 * @used-by rm_preg_match()
 	 * @used-by rm_preg_match_int()
-	 * @used-by matchInt()
 	 * Возвращает:
 	 * 1) string, если текст соответствует регулярному выражению
 	 * 2) string[], если текст соответствует регулярному выражению,
@@ -64,15 +63,10 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	public function matchInt() {
 		/** @var string|int|null|bool $matchedResult */
 		$result = $this->match();
-		if ($this->test()) {
-			if (!ctype_digit($result)) {
-				$this->throwNotMatch();
-			}
-			else {
-				$result = intval($result);
-			}
+		if ($this->test() && !ctype_digit($result)) {
+			$this->throwNotMatch();
 		}
-		return $result;
+		return (int)$result;
 	}
 
 	/**
@@ -122,7 +116,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 			$this->{__METHOD__} =
 				!$this->isSubjectTooLongToReport()
 				? $this->getSubject()
-				: implode("\n", array_slice(
+				: df_concat_n(array_slice(
 					$this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()
 				))
 			;
@@ -133,7 +127,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	/** @return string[] */
 	private function getSubjectSplitted() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_text()->splitOnLines($this->getSubject());
+			$this->{__METHOD__} = df_explode_n($this->getSubject());
 		}
 		return $this->{__METHOD__};
 	}
@@ -141,7 +135,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	/** @return bool */
 	private function isSubjectMultiline() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_text()->isMultiline($this->getSubject());
+			$this->{__METHOD__} = df_t()->isMultiline($this->getSubject());
 		}
 		return $this->{__METHOD__};
 	}
@@ -165,7 +159,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	private function needThrowOnNotMatch() {return $this->cfg(self::$P__THROW_ON_NOT_MATCH, false);}
 
 	/**
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return void
 	 */
 	private function throwInternalError() {
@@ -187,7 +181,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 			 * @see preg_last_error() возвращает уже какой-то полезный для диагностики код.
 			 * Пример из документации:
 			 * rm_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
-			 * @link http://php.net/manual/en/function.preg-last-error.php
+			 * http://php.net/manual/function.preg-last-error.php
 			 */
 			/** @var string|null $textCode */
 			$textCode = $this->translateErrorCode($numericCode);
@@ -238,11 +232,11 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 				);
 			}
 		}
-		df_error_internal($message);
+		df_error($message);
 	}
 
 	/**
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return void
 	 */
 	private function throwNotMatch() {
@@ -283,16 +277,14 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 				);
 			}
 		}
-		df_error_internal($message);
+		df_error($message);
 	}
 
 	/**
 	 * @param int $errorCode
 	 * @return string|null
 	 */
-	private function translateErrorCode($errorCode) {
-		return df_a(self::getErrorCodeMap(), $errorCode);
-	}
+	private function translateErrorCode($errorCode) {return df_a(self::getErrorCodeMap(), $errorCode);}
 
 	/**
 	 * @override
@@ -301,10 +293,10 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__PATTERN, self::V_STRING_NE)
-			->_prop(self::$P__SUBJECT, self::V_STRING)
-			->_prop(self::$P__THROW_ON_ERROR, self::V_BOOL, false)
-			->_prop(self::$P__THROW_ON_NOT_MATCH, self::V_BOOL, false)
+			->_prop(self::$P__PATTERN, RM_V_STRING_NE)
+			->_prop(self::$P__SUBJECT, RM_V_STRING)
+			->_prop(self::$P__THROW_ON_ERROR, RM_V_BOOL, false)
+			->_prop(self::$P__THROW_ON_NOT_MATCH, RM_V_BOOL, false)
 		;
 	}
 	/** @var string */
@@ -347,8 +339,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	private static function getErrorCodeMap() {
 		/** @var array(int => string) $result */
 		static $result;
-		if (!isset($result)) {
-			$result = array();
+		if (!$result) {
 			/** @var array(string => array(string => int)) $constants */
 			$constants = get_defined_constants(true);
 			foreach ($constants['pcre'] as $textCode => $numericCode) {

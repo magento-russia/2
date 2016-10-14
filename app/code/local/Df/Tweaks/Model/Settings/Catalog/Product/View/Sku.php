@@ -1,18 +1,18 @@
 <?php
 class Df_Tweaks_Model_Settings_Catalog_Product_View_Sku extends Df_Core_Model_Settings {
-	/** @return Df_Admin_Model_Config_Extractor_Font */
+	/** @return Df_Admin_Config_Font */
 	public function getLabelFont() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Admin_Model_Config_Extractor_Font::i(
+			$this->{__METHOD__} = Df_Admin_Config_Font::i(
 				self::CONFIG_GROUP_PATH, self::CONFIG_KEY_PREFIX__LABEL
 			);
 		}
 		return $this->{__METHOD__};
 	}
-	/** @return Df_Admin_Model_Config_Extractor_Font */
+	/** @return Df_Admin_Config_Font */
 	public function getSkuFont() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Admin_Model_Config_Extractor_Font::i(
+			$this->{__METHOD__} = Df_Admin_Config_Font::i(
 				self::CONFIG_GROUP_PATH, self::CONFIG_KEY_PREFIX__SKU
 			);
 		}

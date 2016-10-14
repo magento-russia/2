@@ -5,9 +5,7 @@ class Df_Robokassa_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {
-		return 'InvId';
-	}
+	protected function getRequestKeyOrderIncrementId() {return 'InvId';}
 
 	/**
 	 * @override
@@ -21,9 +19,7 @@ class Df_Robokassa_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @return string
 	 */
 	protected function getResponseTextForSuccess() {
-		return rm_sprintf(df_concat(
-			self::RESPONSE_TEXT__SUCCESS__PREFIX, $this->getRequestValueOrderIncrementId()
-		));
+		return self::RESPONSE_TEXT__SUCCESS__PREFIX . $this->getRequestValueOrderIncrementId();
 	}
 
 	/**
@@ -32,38 +28,22 @@ class Df_Robokassa_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var string $result */
-		$result =
-			md5(
-				implode(
-					self::SIGNATURE_PARTS_SEPARATOR
-					,array(
-						/**
-						 * 3 октября 2012 года заметил, что Робокасса стала передавать размер заказа
-						 * с 6 знаками после запятой вместо 2.
-						 * Например, даже если в платёжном запросе написано «0.01»,
-						 * Робокасса в подтверждении указывает размер заказа как «0.010000».
-						 * Поэтому для подписи надо использовать размер заказа в том формате,
-						 * как её передает Робокасса («0.010000»)
-						 */
-						$this->getRequestValuePaymentAmountAsString()
-						,$this->getRequestValueOrderIncrementId()
-						,$this->getResponsePassword()
-					)
-				)
-			)
-		;
+		$result = md5(implode(self::SIGNATURE_PARTS_SEPARATOR, array(
+			/**
+			 * 3 октября 2012 года заметил, что Робокасса стала передавать размер заказа
+			 * с 6 знаками после запятой вместо 2.
+			 * Например, даже если в платёжном запросе написано «0.01»,
+			 * Робокасса в подтверждении указывает размер заказа как «0.010000».
+			 * Поэтому для подписи надо использовать размер заказа в том формате,
+			 * как её передает Робокасса («0.010000»)
+			 */
+			$this->getRequestValuePaymentAmountAsString()
+			,$this->getRequestValueOrderIncrementId()
+			,$this->getResponsePassword()
+		)));
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
 	const RESPONSE_TEXT__SUCCESS__PREFIX = 'OK';
 	const SIGNATURE_PARTS_SEPARATOR = Df_Robokassa_Model_Request_Payment::SIGNATURE_PARTS_SEPARATOR;
-	/**
-	 * @static
-	 * @param Df_Robokassa_ConfirmController $controller
-	 * @return Df_Robokassa_Model_Action_Confirm
-	 */
-	public static function i(Df_Robokassa_ConfirmController $controller) {
-		return new self(array(self::P__CONTROLLER => $controller));
-	}
 }

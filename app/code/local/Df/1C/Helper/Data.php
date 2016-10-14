@@ -14,15 +14,6 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		);
 	}
 
-	/** @return Df_1C_Helper_Cml2 */
-	public function cml2() {return Df_1C_Helper_Cml2::s();}
-
-	/**
-	 * @param string|float|int $money
-	 * @return string
-	 */
-	public function formatMoney($money) {return rm_sprintf(rm_float($money), '.2f');}
-
 	/**
 	 * @param string $attributeLabel
 	 * @param string|null $prefix [optional]
@@ -30,37 +21,76 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 */
 	public function generateAttributeCode($attributeLabel, $prefix = null) {
 		df_param_string_not_empty($attributeLabel, 0);
-		return Df_Eav_Model_Entity_Attribute_Namer::i($attributeLabel, df_clean(array('rm_1c', $prefix)))
-			->getResult()
-		;
+		return Df_Eav_Model_Entity_Attribute_Namer::i(
+			$attributeLabel, array_filter(array('rm_1c', $prefix))
+		)->getResult();
 	}
 
 	/**
+	 * @see Df_Dataflow_Logger::log()
+	 * @override
 	 * @param string $message
-	 * @return Df_1C_Helper_Data
+	 * @return void
 	 */
 	public function log($message) {
-		if (df_cfg()->_1c()->general()->needLogging()) {
+		if (rm_1c_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			Df_1C_Model_Logger::s2()->log(rm_sprintf($arguments));
+			self::logger()->log(rm_format($arguments));
 		}
-		return $this;
 	}
 	
 	/**
 	 * @param string|array(string|int => string) $message
-	 * @return Df_1C_Helper_Data
+	 * @return void
 	 */
 	public function logRaw($message) {
-		if (df_cfg()->_1c()->general()->needLogging()) {
+		if (rm_1c_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			Df_1C_Model_Logger::s2()->logRaw(rm_sprintf($arguments));
+			self::logger()->logRaw(rm_format($arguments));
 		}
-		return $this;
+	}
+
+	/**
+	 * @used-by Df_1C_Cml2_Action_Orders_Export::processFinish()
+	 * @param string $path
+	 * @param string $value
+	 * @return void
+	 */
+	public function saveConfigValue($path, $value) {
+		Mage::getConfig()->saveConfig(
+			$path, $value, $scope = 'stores', $scopeId = rm_state()->getStoreProcessed()->getId()
+		);
+		rm_store()->setConfig($path, $value);
 	}
 
 	/** @return Df_1C_Helper_Data */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
+
+	/**
+	 * @used-by log()
+	 * @used-by logRaw()
+	 * @return Df_Core_Model_Logger
+	 */
+	private static function logger() {
+		/** @var Df_Core_Model_Logger $result */
+		static $result;
+		if (!$result) {
+			/** @var string $fileName */
+			$filePath = Df_1C_Cml2_Session_ByCookie_1C::s()->getFileName_Log();
+			if (!$filePath) {
+				$filePath = rm_file_name(
+					df_concat_path(
+						Mage::getBaseDir('var'), 'log'
+						, rm_1c_cfg()->general()->getLogFileNameTemplatePath()
+					)
+					, rm_1c_cfg()->general()->getLogFileNameTemplateBaseName()
+				);
+				Df_1C_Cml2_Session_ByCookie_1C::s()->setFileName_Log($filePath);
+			}
+			$result = Df_Core_Model_Logger::s($filePath);
+		}
+		return $result;
+	}
 }

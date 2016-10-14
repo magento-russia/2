@@ -5,47 +5,20 @@ class Df_WalletOne_Model_Form_Processor_AddPaymentMethods extends Df_Varien_Data
 		foreach ($this->getFieldValues() as $subFieldName => $subFieldValue) {
 			/** @var string|int $subFieldName */
 			/** @var string|array $subFieldValue */
-
-			if (!is_int($subFieldName)) {
-				df_assert_string($subFieldName);
-			}
-
-			if (!is_array($subFieldValue)) {
-				df_assert_string($subFieldValue);
-			}
-
-			$this->getForm()
-				->addHiddenField(
-					implode(
-						'_'
-						,array(
-							$this->getFieldName()
-							,df_string($subFieldName)
-						)
-					)
-					,$this->getFieldName()
-					,$subFieldValue
-				)
-			;
+			$this->getForm()->addHiddenField(
+				implode('_', array($this->getFieldName(), df_string($subFieldName)))
+				,$this->getFieldName()
+				,$subFieldValue
+			);
 		}
 		return $this;
 	}
 
 	/** @return string */
-	private function getFieldName() {
-		/** @var string $result */
-		$result = $this->cfg(self::P__FIELD_NAME);
-		df_result_string($result);
-		return $result;
-	}
+	private function getFieldName() {return $this->cfg(self::P__FIELD_NAME);}
 
 	/** @return array */
-	private function getFieldValues() {
-		/** @var array $result */
-		$result = $this->cfg(self::P__FIELD_VALUES);
-		df_result_array($result);
-		return $result;
-	}
+	private function getFieldValues() {return $this->cfg(self::P__FIELD_VALUES);}
 
 	/**
 	 * @override
@@ -54,11 +27,11 @@ class Df_WalletOne_Model_Form_Processor_AddPaymentMethods extends Df_Varien_Data
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__FIELD_NAME, self::V_STRING_NE)
-			->_prop(self::P__FIELD_VALUES, self::V_ARRAY)
+			->_prop(self::P__FIELD_NAME, RM_V_STRING_NE)
+			->_prop(self::P__FIELD_VALUES, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__FIELD_NAME = 'field_name';
 	const P__FIELD_VALUES = 'field_values';
 	/**

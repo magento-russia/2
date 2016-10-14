@@ -63,9 +63,8 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 					else {
 						throw new Exception(''); // not Mage_Core_Exception intentionally
 					}
-
 				}
-				catch(Mage_Core_Exception $e) {
+				catch (Mage_Core_Exception $e) {
 					if (Df_Invitation_Model_Invitation::ERROR_CUSTOMER_EXISTS === $e->getCode()) {
 						$customerExists++;
 					}
@@ -73,7 +72,7 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 						rm_session_customer()->addError(rm_ets($e));
 					}
 				}
-				catch(Exception $e) {
+				catch (Exception $e) {
 					rm_session_customer()->addError(df_h()->invitation()->__('Failed to send email to %s. Please try again later.', $email));
 				}
 			}
@@ -101,7 +100,8 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 		$this->loadLayout();
 		$this->_initLayoutMessages('customer/session');
 		$this->loadLayoutUpdates();
-		if ($block = $this->getLayout()->getBlock('invitations_list')) {
+		$block = $this->getLayout()->getBlock('invitations_list');
+		if ($block) {
 			$block->setRefererUrl($this->_getRefererUrl());
 		}
 		$this->renderLayout();

@@ -1,6 +1,6 @@
 <?php
 class Df_CustomerBalance_Model_Resource_Balance_History_Collection
-	extends Mage_Core_Model_Mysql4_Collection_Abstract {
+	extends Df_Core_Model_Resource_Collection {
 	/**
 	 * @param array|int $websiteIds
 	 * @return Df_CustomerBalance_Model_Resource_Balance_History_Collection
@@ -12,21 +12,25 @@ class Df_CustomerBalance_Model_Resource_Balance_History_Collection
 
 	/**
 	 * @override
+	 * @return Df_CustomerBalance_Model_Resource_Balance_History
+	 */
+	public function getResource() {return Df_CustomerBalance_Model_Resource_Balance_History::s();}
+
+	/**
+	 * @override
 	 * @return Df_CustomerBalance_Model_Resource_Balance_History_Collection
 	 */
 	protected function _initSelect() {
 		parent::_initSelect();
-		$this->getSelect()
-			->joinInner(
-				array('b' => rm_table('df_customerbalance/balance'))
-				,'main_table.balance_id = b.balance_id'
-				,array(
-					'customer_id' => 'b.customer_id'
-					,'website_id' => 'b.website_id'
-					,'base_currency_code' => 'b.base_currency_code'
-				)
+		$this->getSelect()->joinInner(
+			array('b' => rm_table(Df_CustomerBalance_Model_Resource_Balance::TABLE))
+			,'main_table.balance_id = b.balance_id'
+			,array(
+				'customer_id' => 'b.customer_id'
+				,'website_id' => 'b.website_id'
+				,'base_currency_code' => 'b.base_currency_code'
 			)
-		;
+		);
 		return $this;
 	}
 
@@ -35,14 +39,7 @@ class Df_CustomerBalance_Model_Resource_Balance_History_Collection
 	 * @return void
 	 */
 	protected function _construct() {
-		parent::_construct();
-		$this->_init(
-			Df_CustomerBalance_Model_Balance_History::mf()
-			,Df_CustomerBalance_Model_Resource_Balance_History::mf()
-		);
+		$this->_itemObjectClass = Df_CustomerBalance_Model_Balance_History::_C;
 	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_CustomerBalance_Model_Resource_Balance_History_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

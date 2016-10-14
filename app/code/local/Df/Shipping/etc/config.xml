@@ -2,8 +2,8 @@
 <config>
 	<modules>
 		<Df_Shipping>
-			<version>2.30.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>2.30.0</version>
 		</Df_Shipping>
 	</modules>
 	<df>
@@ -12,16 +12,10 @@
 		</attribute_set_processors>
 	</df>
 	<global>
-		<blocks><df_shipping><class>Df_Shipping_Block</class></df_shipping></blocks>
-		<helpers><df_shipping><class>Df_Shipping_Helper</class></df_shipping></helpers>
 		<models>
 			<df_shipping>
 				<class>Df_Shipping_Model</class>
-				<resourceModel>df_shipping_resource</resourceModel>
 			</df_shipping>
-			<df_shipping_resource>
-				<class>Df_Shipping_Model_Resource</class>
-			</df_shipping_resource>
 			<shipping>
 				<rewrite>
 					<!--
@@ -29,7 +23,7 @@
 						улучшение диагностики в тех ситуациях,
 						когда требуемый класс некоего модуля доставки отсутствует.
 					-->
-					<config>Df_Shipping_Model_Config</config>
+					<config>Df_Shipping_Model_ConfigM</config>
 				</rewrite>
 			</shipping>
 		</models>
@@ -102,13 +96,8 @@
 			</product>
 			<message>
 				<failure__general>
-<![CDATA[<p>В настоящий момент у нас не получается рассчитать
-стоимость доставки Вашего заказа
-{название службы и способа доставки в творительном падеже}.</p>
-<p>Если Вы хотите получить Ваш заказ именно этим способом —
-пожалуйста, позвоните нам по телефону <b>{телефон магазина}</b>.</p>
-<p>Вы можете также выбрать другой способ доставки Вашего заказа
-из перечисленных на этом экране.</p>]]>
+<![CDATA[<p>Для доставки Вашего заказа {название службы и способа доставки в творительном падеже},
+пожалуйста, позвоните нам по телефону <b>{телефон магазина}</b>.</p>]]>
 				</failure__general>
 				<failure__same_location>
 <![CDATA[<p>Мы тоже находимся <b>{в месте доставки}</b>, поэтому доставка
@@ -117,6 +106,11 @@
 <p>В случае затруднений оформите Ваш заказ по телефону <b>{телефон магазина}</b>.</p>]]>
 				</failure__same_location>
 			</message>
+			<in_house_processing>
+				<can_ship_today_untill>12</can_ship_today_untill>
+				<consider_days_off>0</consider_days_off>
+				<days>0</days>
+			</in_house_processing>
 		</df_shipping>
 		<shipping>
 			<!--

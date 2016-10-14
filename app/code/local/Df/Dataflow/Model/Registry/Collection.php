@@ -36,6 +36,8 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 * @return Mage_Core_Model_Abstract|null
 	 */
 	public function findByExternalId($externalId) {
+		// Обратите внимание, что если перед поиском коллекция ещё не была загружена,
+		// то она будет загружена автоматически.
 		return df_a($this->getMapFromExternalIdToEntity(), $externalId);
 	}
 
@@ -43,13 +45,21 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 * @param int $id
 	 * @return Mage_Core_Model_Abstract|null
 	 */
-	public function findById($id) {return $this->getCollectionRm()->getItemById($id);}
+	public function findById($id) {
+		// Обратите внимание, что если перед поиском коллекция ещё не была загружена,
+		// то она будет загружена автоматически.
+		return $this->getCollectionRm()->getItemById($id);
+	}
 
 	/**
 	 * @param string $label
 	 * @return Mage_Core_Model_Abstract|null
 	 */
-	public function findByLabel($label) {return df_a($this->getMapFromLabelToEntity(), $label);}
+	public function findByLabel($label) {
+		// Обратите внимание, что если перед поиском коллекция ещё не была загружена,
+		// то она будет загружена автоматически.
+		return df_a($this->getMapFromLabelToEntity(), $label);
+	}
 
 	/**
 	 * @override
@@ -67,22 +77,39 @@ abstract class Df_Dataflow_Model_Registry_Collection
 		$this->removeEntityFromLabelMap($entity);
 	}
 
-	/** @return void */
+	/**
+	 * @return void
+	 * @throws Df_Core_Exception_Batch|Exception
+	 */
 	public function save() {
+		/** @var Df_Core_Exception_Batch $batchException */
+		$batchException = new Df_Core_Exception_Batch();
 		rm_admin_begin();
-		foreach ($this->getCollectionRm() as $entity) {
-			/** @var Mage_Core_Model_Abstract $entity */
-			/**
-			 * Обратите внимание, что сохранение в Magento — интеллектуальное:
-			 * Magento сохраняет только те объекты, свойства которых изменились:
-			 * hasDataChanges = true.
-			 * Ну, и мы дополнительно вызываем hasDataChanges: не помешает.
-			 */
-			if ($entity->hasDataChanges()) {
-				$this->saveEntity($entity);
+		try {
+			foreach ($this->getCollectionRm() as $entity) {
+				/** @var Mage_Core_Model_Abstract $entity */
+				/**
+				 * Обратите внимание, что сохранение в Magento — интеллектуальное:
+				 * Magento сохраняет только те объекты, свойства которых изменились:
+				 * hasDataChanges = true.
+				 * Ну, и мы дополнительно вызываем hasDataChanges: не помешает.
+				 */
+				if ($entity->hasDataChanges()) {
+					try {
+						$this->saveEntity($entity);
+					}
+					catch (Exception $e) {
+						$batchException->addException(new Df_Core_Exception_Entity($entity, $e));
+					}
+				}
 			}
 		}
+		catch (Exception $e) {
+			rm_admin_end();
+			throw $e;
+		}
 		rm_admin_end();
+		$batchException->throwIfNeeed();
 	}
 
 	/** @return Varien_Data_Collection */
@@ -104,7 +131,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 * @return string|null
 	 */
 	protected function getEntityExternalId(Mage_Core_Model_Abstract $entity) {
-		return $entity->getData(Df_Eav_Const::ENTITY_EXTERNAL_ID);
+		return $entity->getData(Df_1C_Const::ENTITY_EXTERNAL_ID);
 	}
 
 	/**
@@ -113,8 +140,35 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 */
 	protected function getEntityLabel(Mage_Core_Model_Abstract $entity) {return null;}
 
-	/** @return Mage_Core_Model_Store */
-	protected function getStore() {
+	/** @return Df_Core_Model_StoreM */
+	protected function getStoreDefault() {return rm_store();}
+
+	/**
+	 * @param Mage_Core_Model_Abstract $entity
+	 * @return void
+	 */
+	protected function saveEntity(Mage_Core_Model_Abstract $entity) {
+		if (!$this->isScopeDefault()) {
+			$this->setStoreToEntity($entity, $this->store());
+		}
+		$entity->save();
+	}
+
+	/**
+	 * @param Mage_Core_Model_Abstract $entity
+	 * @param Df_Core_Model_StoreM $store
+	 * @return void
+	 */
+	protected function setStoreToEntity(Mage_Core_Model_Abstract $entity, Df_Core_Model_StoreM $store) {}
+
+	/**
+	 * @used-by isScopeDefault()
+	 * @used-by saveEntity()
+	 * @used-by Df_Dataflow_Model_Registry_Collection_Categories::createCollection()
+	 * @used-by Df_Dataflow_Model_Registry_Collection_Products::createCollection()
+	 * @return Df_Core_Model_StoreM
+	 */
+	protected function store() {
 		/**
 		 * Обратите внимание, что этот метод нельзя записать одной строкй так:
 		 * return $this->cfg(self::$P__STORE, $this->getStoreDefault());
@@ -123,7 +177,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 		 * и такая реализация возбудит исключительную ситуацию,
 		 * если система не сможет идентифицировать обрабатываемый магазин по URL.
 		 */
-		/** @var Mage_Core_Model_Store $result */
+		/** @var Df_Core_Model_StoreM $result */
 		$result = $this->cfg(self::$P__STORE);
 		if (!$result) {
 			$result = $this->getStoreDefault();
@@ -131,37 +185,14 @@ abstract class Df_Dataflow_Model_Registry_Collection
 		return $result;
 	}
 
-	/** @return Mage_Core_Model_Store */
-	protected function getStoreDefault() {return Mage::app()->getStore();}
-
 	/**
 	 * @param Mage_Core_Model_Abstract $entity
 	 * @return void
-	 */
-	protected function saveEntity(Mage_Core_Model_Abstract $entity) {
-		if (!$this->isScopeDefault()) {
-			$this->setStoreToEntity($entity, $this->getStore());
-		}
-		$entity->save();
-	}
-
-	/**
-	 * @param Mage_Core_Model_Abstract $entity
-	 * @param Mage_Core_Model_Store $store
-	 * @return Object
-	 */
-	protected function setStoreToEntity(
-		Mage_Core_Model_Abstract $entity, Mage_Core_Model_Store $store
-	) {}
-
-	/**
-	 * @param Mage_Core_Model_Abstract $entity
-	 * @return void
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 */
 	protected function validateEntity(Mage_Core_Model_Abstract $entity) {
 		if (!$this->getValidator()->isValid($entity)) {
-			df_error_internal(implode("\r\n", $this->getValidator()->getMessages()));
+			df_error(df_concat_n($this->getValidator()->getMessages()));
 		}
 	}
 
@@ -170,11 +201,12 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 * @return void
 	 */
 	private function addEntityToExternalIdMap(Mage_Core_Model_Abstract $entity) {
+		// перед добавлением нового элемента надо, разумеется, загрузить всю коллекцию (все элементы)
 		$this->getMapFromExternalIdToEntity();
 		/** @var string|null $externalId */
 		$externalId = $this->getEntityExternalId($entity);
 		if ($externalId) {
-			df_assert_string($externalId);
+			df_assert_string_not_empty($externalId);
 			$this->{__CLASS__ . '::getMapFromExternalIdToEntity'}[$externalId] = $entity;
 		}
 	}
@@ -184,11 +216,12 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 * @return void
 	 */
 	private function addEntityToLabelMap(Mage_Core_Model_Abstract $entity) {
+		// перед добавлением нового элемента надо, разумеется, загрузить всю коллекцию (все элементы)
 		$this->getMapFromLabelToEntity();
 		/** @var string|null $label */
 		$label = $this->getEntityLabel($entity);
 		if ($label) {
-			df_assert_string($label);
+			df_assert_string_not_empty($label);
 			$this->{__CLASS__ . '::getMapFromLabelToEntity'}[$label] = $entity;
 		}
 	}
@@ -243,7 +276,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	/** @return bool */
 	private function isScopeDefault() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getStore()->getId() === Mage::app()->getStore()->getId();
+			$this->{__METHOD__} = $this->store()->getId() === rm_store_id();
 		}
 		return $this->{__METHOD__};
 	}
@@ -282,10 +315,10 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__STORE, 'Mage_Core_Model_Store', $isRequired = false);
+		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C, false);
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/** @var string */
 	protected static $P__STORE = 'store';
 }

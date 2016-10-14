@@ -1,8 +1,0 @@
-<?php /** @var Df_Assist_Block_Api_PaymentConfirmation_Error $this */ ?>
-<?php echo df_output()->getXmlHeader(); ?>
-<pushpaymentresult 
-	firstcode='<?php echo $this->getFirstCode(); ?>'
-	secondcode='<?php echo $this->getSecondCode(); ?>'
->
-</pushpaymentresult>
-	

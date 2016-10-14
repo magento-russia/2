@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_EasyPay>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>EasyPay</title>
+			<version>1.0.0</version>
 		</Df_EasyPay>
 	</modules>
 	<global>
@@ -37,7 +38,7 @@
 		-->
 		<payment>
 			<df-easypay>
-				<model>df_easypay/payment</model>
+				<model>Df_EasyPay_Model_Payment</model>
 			</df-easypay>
 		</payment>
 	</default>

@@ -1,10 +1,10 @@
 <?php
-/**
- * @method int getBlockId()
- */
+/** @method int getBlockId() */
 class Df_Cms_Block_Block extends Mage_Cms_Block_Block {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Abstract::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -26,7 +26,7 @@ class Df_Cms_Block_Block extends Mage_Cms_Block_Block {
 			 * (и в полную противоположность Zend Framework
 			 * и всем остальным частям Magento, где используется кэширование)
 			 * означает, что блок не удет кэшироваться вовсе!
-			 * @see Mage_Core_Block_Abstract::_loadCache()
+			 * @used-by Mage_Core_Block_Abstract::_loadCache()
 			 */
 			'cache_lifetime' => Df_Core_Block_Template::CACHE_LIFETIME_STANDARD
 		));

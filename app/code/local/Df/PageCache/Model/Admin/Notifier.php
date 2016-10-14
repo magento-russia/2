@@ -23,19 +23,21 @@ class Df_PageCache_Model_Admin_Notifier extends Df_Admin_Model_Notifier_Settings
 
 	/**
 	 * @override
-	 * @param Mage_Core_Model_Store $store
+	 * @param Df_Core_Model_StoreM $store
 	 * @return bool
 	 */
-	protected function isStoreAffected(Mage_Core_Model_Store $store) {
+	protected function isStoreAffected(Df_Core_Model_StoreM $store) {
 		return !$this->isProcessorSpecifiedInConfigXml();
 	}
 
 	/** @return bool */
 	private function isProcessorSpecifiedInConfigXml() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var string $processorClass */
-			$processorClass = (string)Mage::getConfig()->getNode('global/cache/request_processors/rm');
-			$this->{__METHOD__} = 'Df_PageCache_Model_Processor' === $processorClass;
+			$this->{__METHOD__} =
+					'Df_PageCache_Model_Processor'
+				===
+					rm_leaf_s(rm_config_node('global/cache/request_processors/rm'))
+			;
 		}
 		return $this->{__METHOD__};
 	}

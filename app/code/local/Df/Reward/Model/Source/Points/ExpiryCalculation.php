@@ -1,12 +1,7 @@
 <?php
-/**
- * Source model for list of Expiry Calculation algorythms
- */
-class Df_Reward_Model_Source_Points_ExpiryCalculation
-{
-	public function toOptionArray()
-	{
-		return array(
-			array('value' => 'static', 'label' => df_h()->reward()->__('Static')),array('value' => 'dynamic', 'label' => df_h()->reward()->__('Dynamic')),);
+class Df_Reward_Model_Source_Points_ExpiryCalculation {
+	/** @return array(array(string => string)) */
+	public function toOptionArray() {
+		return rm_map_to_options(array('static' => 'Static', 'dynamic' => 'Dynamic'), $this);
 	}
 }

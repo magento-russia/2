@@ -8,8 +8,7 @@ class Df_Cms_Model_Resource_Page_Version_Collection
 	 * @param mixed $level
 	 * @return Df_Cms_Model_Resource_Page_Version_Collection
 	 */
-	public function addAccessLevelFilter($level)
-	{
+	public function addAccessLevelFilter($level) {
 		if (is_array($level)) {
 			$this->addFieldToFilter('access_level', array('in' => $level));
 		} else {
@@ -49,7 +48,7 @@ class Df_Cms_Model_Resource_Page_Version_Collection
 	{
 		if (!$this->getFlag('revisions_joined')) {
 			$this->getSelect()->joinLeft(
-				array('rev_table' => rm_table('df_cms/page_revision'))
+				array('rev_table' => rm_table(Df_Cms_Model_Resource_Page_Revision::TABLE))
 				,'rev_table.version_id = main_table.version_id'
 				, '*'
 			);
@@ -71,14 +70,17 @@ class Df_Cms_Model_Resource_Page_Version_Collection
 
 	/**
 	 * @override
+	 * @return Df_Cms_Model_Resource_Page_Version
+	 */
+	public function getResource() {return Df_Cms_Model_Resource_Page_Version::s();}
+
+	/**
+	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Cms_Model_Page_Version::mf(), Df_Cms_Model_Resource_Page_Version::mf());
+		$this->_itemObjectClass = Df_Cms_Model_Page_Version::_C;
 	}
-	const _CLASS = __CLASS__;
-
-	/** @return Df_Cms_Model_Resource_Page_Version_Collection */
-	public static function i() {return new self;}
+	const _C = __CLASS__;
 }

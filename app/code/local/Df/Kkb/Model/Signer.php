@@ -7,8 +7,8 @@ class Df_Kkb_Model_Signer extends Df_Core_Model {
 			$result = null;
 			/** @var resource |false $pKey */
 			$pKey = openssl_pkey_get_private(
-				$this->getServiceConfig()->getKeyPrivate()
-				,$this->getServiceConfig()->getKeyPrivatePassword()
+				$this->configS()->getKeyPrivate()
+				,$this->configS()->getKeyPrivatePassword()
 			);
 			if (!$pKey) {
 				df_error(
@@ -31,7 +31,7 @@ class Df_Kkb_Model_Signer extends Df_Core_Model {
 	private function getDocument() {return $this->cfg(self::P__DOCUMENT);}
 
 	/** @return Df_Kkb_Model_Config_Area_Service */
-	private function getServiceConfig() {return $this->cfg(self::P__SERVICE_CONFIG);}
+	private function configS() {return $this->cfg(self::P__SERVICE_CONFIG);}
 	
 	/**
 	 * @override
@@ -40,25 +40,25 @@ class Df_Kkb_Model_Signer extends Df_Core_Model {
 	protected function _construct() {
 		/** @var bool $openSslIsInstalled */
 		static $openSslIsInstalled;
-		if (!isset($openSslIsInstalled)) {
-			/** @link http://searchcode.com/codesearch/view/15451657 */
+		if (is_null($openSslIsInstalled)) {
+			/** http://searchcode.com/codesearch/view/15451657 */
 			$openSslIsInstalled = extension_loaded('openssl') && function_exists('openssl_sign');
 			if (!$openSslIsInstalled) {
 				df_error(
 					'Для работы модуля «Казкоммерцбанк» Вам нужно добавить к интерпретатору PHP'
 					. ' криптографическое расширение OpenSSL (http://php.net/openssl).'
-					. "\r\nИспользование OpenSSL является требованием Казкоммерцбанка,"
+					. "\nИспользование OpenSSL является требованием Казкоммерцбанка,"
 					. ' без этого работа модуля невозможна.'
 				);
 			}
 		}
 		parent::_construct();
 		$this
-		    ->_prop(self::P__DOCUMENT, self::V_STRING_NE)
-			->_prop(self::P__SERVICE_CONFIG, Df_Kkb_Model_Config_Area_Service::_CLASS)
+		    ->_prop(self::P__DOCUMENT, RM_V_STRING_NE)
+			->_prop(self::P__SERVICE_CONFIG, Df_Kkb_Model_Config_Area_Service::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__DOCUMENT = 'document';
 	const P__SERVICE_CONFIG = 'service_config';
 	/**

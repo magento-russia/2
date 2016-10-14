@@ -2,11 +2,8 @@
 <config>
 	<modules>
 		<Df_Phpquery>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
 		</Df_Phpquery>
 	</modules>
-	<global>
-		<helpers><df_phpquery><class>Df_Phpquery_Helper</class></df_phpquery></helpers>
-	</global>
 </config>

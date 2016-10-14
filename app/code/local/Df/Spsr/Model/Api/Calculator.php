@@ -5,26 +5,26 @@ class Df_Spsr_Model_Api_Calculator extends Df_Core_Model {
 		/** @var string $result */
 		$result = $this->getRateRequest()->getErrorMessage();
 		if ('Город получателя не найден' === $result) {
-			$result =
-				rm_sprintf(
-					'К сожалению, служба СПСР не отправляет грузы в населённый пункт «%s».'
-					,$this->getRequest()->getDestinationCity()
-				)
-			;
+			$result = sprintf(
+				'К сожалению, служба СПСР не отправляет грузы в населённый пункт «%s».'
+				, $this->rr()->getDestinationCity()
+			);
 		}
 		df_result_string($result);
 		return $result;
 	}
 
 	/** @return array(array(string => string|int)) */
-	public function getRates() {
-		return $this->getRateRequest()->getRates();
-	}
+	public function getRates() {return $this->getRateRequest()->getRates();}
+
+	/** @return Df_Checkout_Module_Config_Facade */
+	private function config() {return $this->cfg(self::P__RM_CONFIG);}
+
+	/** @return Df_Spsr_Model_Config_Area_Service */
+	private function configS() {return $this->config()->service();}
 
 	/** @return float */
-	private function getDeclaredValue() {
-		return $this->cfg(self::P__DECLARED_VALUE);
-	}
+	private function getDeclaredValue() {return $this->cfg(self::P__DECLARED_VALUE);}
 
 	/**
 	 * Обратите внимание, что результатом является не число,
@@ -33,7 +33,7 @@ class Df_Spsr_Model_Api_Calculator extends Df_Core_Model {
 	 */
 	private function getLocationDestinationId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getRequest()->getLocatorDestination()->getResult();
+			$this->{__METHOD__} = $this->rr()->getLocatorDestination()->getResult();
 		}
 		return $this->{__METHOD__};
 	}
@@ -45,7 +45,7 @@ class Df_Spsr_Model_Api_Calculator extends Df_Core_Model {
 	 */
 	private function getLocationOriginId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getRequest()->getLocatorOrigin()->getResult();
+			$this->{__METHOD__} = $this->rr()->getLocatorOrigin()->getResult();
 		}
 		return $this->{__METHOD__};
 	}
@@ -59,33 +59,27 @@ class Df_Spsr_Model_Api_Calculator extends Df_Core_Model {
 				,Df_Spsr_Model_Request_Rate::POST__LOCATION__DESTINATION =>
 					$this->getLocationDestinationId()
 				,Df_Spsr_Model_Request_Rate::POST__ENDORSE_DELIVERY_TIME =>
-					rm_nat0($this->getServiceConfig()->endorseDeliveryTime())
+					rm_nat0($this->configS()->endorseDeliveryTime())
 				,Df_Spsr_Model_Request_Rate::POST__NOTIFY_RECIPIENT_BY_SMS =>
-					rm_01($this->getServiceConfig()->enableSmsNotification())
+					rm_01($this->configS()->enableSmsNotification())
 				,Df_Spsr_Model_Request_Rate::POST__NOTIFY_SENDER_BY_SMS =>
-					rm_01($this->getServiceConfig()->enableSmsNotification())
+					rm_01($this->configS()->enableSmsNotification())
 				// 0 - страхование объявления
 				// 1 - тариф за объявленную стоимость
 				,Df_Spsr_Model_Request_Rate::POST__INSURANCE_TYPE =>
 					rm_01(
 							Df_Spsr_Model_Config_Source_Insurer::OPTION_VALUE__CARRIER
 						===
-							$this->getServiceConfig()->getInsurer()
+							$this->configS()->getInsurer()
 					)
-				,Df_Spsr_Model_Request_Rate::POST__WEIGHT => $this->getRequest()->getWeightInKilogrammes()
+				,Df_Spsr_Model_Request_Rate::POST__WEIGHT => $this->rr()->getWeightInKilogrammes()
 			));
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Shipping_Model_Rate_Request */
-	private function getRequest() {return $this->cfg(self::P__REQUEST);}
-
-	/** @return Df_Shipping_Model_Config_Facade */
-	private function getRmConfig() {return $this->cfg(self::P__RM_CONFIG);}
-
-	/** @return Df_Spsr_Model_Config_Area_Service */
-	private function getServiceConfig() {return $this->getRmConfig()->service();}
+	/** @return Df_Shipping_Rate_Request */
+	private function rr() {return $this->cfg(self::P__REQUEST);}
 
 	/**
 	 * @override
@@ -94,12 +88,12 @@ class Df_Spsr_Model_Api_Calculator extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__DECLARED_VALUE, self::V_FLOAT)
-			->_prop(self::P__REQUEST, Df_Shipping_Model_Rate_Request::_CLASS)
-			->_prop(self::P__RM_CONFIG, Df_Shipping_Model_Config_Facade::_CLASS)
+			->_prop(self::P__DECLARED_VALUE, RM_V_FLOAT)
+			->_prop(self::P__REQUEST, Df_Shipping_Rate_Request::_C)
+			->_prop(self::P__RM_CONFIG, Df_Checkout_Module_Config_Facade::_C)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__DECLARED_VALUE = 'declared_value';
 	const P__REQUEST = 'request';
 	const P__RM_CONFIG = 'rm_config';

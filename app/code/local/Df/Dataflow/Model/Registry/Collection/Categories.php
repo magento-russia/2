@@ -6,12 +6,11 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 	 */
 	protected function createCollection() {
 		/** @var Df_Catalog_Model_Resource_Category_Collection $result */
-		$result = Df_Catalog_Model_Resource_Category_Collection::i();
-		$result->setStore($this->getStore());
-		$result->addAttributeToSelect(Df_Eav_Const::ENTITY_EXTERNAL_ID);
+		$result = Df_Catalog_Model_Category::c();
+		$result->setStore($this->store());
 		/**
 		 * Раньше тут стояло
-		 * $result->addAttributeToSelect(Df_Eav_Const::ENTITY_EXTERNAL_ID);
+		 * $result->addAttributeToSelect(Df_1C_Const::ENTITY_EXTERNAL_ID);
 		 * потому что реестр использовался только модулем 1С:Управление торговлей.
 		 *
 		 * Теперь же реестр начинает использоваться прикладным решением «Lamoda»,
@@ -20,7 +19,7 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 		 *
 		 * 2014-09-18
 		 * Отныне реестр используется также модулем «Русификация» для перевода демо-данных
-		 * @see Df_Localization_Model_Onetime_Dictionary_Rule::getAllCategories()
+		 * @used-by Df_Localization_Onetime_Type_Category::getAllEntities()
 		 * А там вообще нам нужны все товарные свойства (чтобы переводить их).
 		 */
 		$result->addAttributeToSelect('*');
@@ -31,11 +30,11 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Catalog_Model_Category::_CLASS;}
+	protected function getEntityClass() {return Df_Catalog_Model_Category::_C;}
 
 	/**
 	 * @override
-	 * @return Mage_Core_Model_Store
+	 * @return Df_Core_Model_StoreM
 	 */
 	protected function getStoreDefault() {return df()->registry()->getStoreProcessed();}
 
@@ -51,17 +50,15 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Abstract|Df_Catalog_Model_Category $entity
-	 * @param Mage_Core_Model_Store $store
-	 * @return Object
+	 * @param Df_Core_Model_StoreM $store
+	 * @return void
 	 */
-	protected function setStoreToEntity(
-		Mage_Core_Model_Abstract $entity, Mage_Core_Model_Store $store
-	) {
+	protected function setStoreToEntity(Mage_Core_Model_Abstract $entity, Df_Core_Model_StoreM $store) {
 		$entity->setStoreId($store->getId());
 	}
 
 	/**
-	 * @param Mage_Core_Model_Store|null $store [optional]
+	 * @param Df_Core_Model_StoreM|null $store [optional]
 	 * @return void
 	 */
 	public static function reset($store = null) {
@@ -74,7 +71,7 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 	}
 
 	/**
-	 * @param Mage_Core_Model_Store|null $store [optional]
+	 * @param Df_Core_Model_StoreM|null $store [optional]
 	 * @return Df_Dataflow_Model_Registry_Collection_Categories
 	 */
 	public static function s($store = null) {

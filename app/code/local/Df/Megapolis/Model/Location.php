@@ -42,9 +42,9 @@ class Df_Megapolis_Model_Location extends Df_Shipping_Model_Location {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ID, self::V_INT);
+		$this->_prop(self::P__ID, RM_V_INT);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ID = 'id';
 	const P__NAME = 'name';
 	const P__REGION = 'location';

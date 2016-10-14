@@ -33,9 +33,9 @@ abstract class Df_UkrPoshta_Model_Method extends Df_Shipping_Model_Method_Ukrain
 				 * Похоже, что УкрПочта отправляет грузы только из Украины.
 				 * По крайней мере, стоимость отправки из других стран
 				 * официальный калькулятор не рассчитывает.
-				 * @link http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
+				 * http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
 				 * Как ни странно, тарифы УкрПочты не зависят от городов отправления и назначения.
-				 * @link http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
+				 * http://services.ukrposhta.com/CalcUtil/PostalMails.aspx
 				 */
 				$this->checkCountryOriginIsUkraine();
 			}

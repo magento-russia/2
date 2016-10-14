@@ -1,13 +1,7 @@
 <?php
 class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_Template {
 	/** @return string */
-	public function getApplicability() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getConfigValue('applicability');
-			df_result_string($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getApplicability() {return $this->getConfigValue('applicability');}
 
 	/** @return string */
 	public function getCssClassesAsText() {
@@ -27,18 +21,13 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	/** @return string */
 	public function getDomName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				rm_sprintf('%s[%s]', $this->getAddress()->getType(), $this->getType())
-			;
-			df_result_string($this->{__METHOD__});
+			$this->{__METHOD__} = sprintf('%s[%s]', $this->getAddress()->getType(), $this->getType());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
-	public function getLabel() {
-		return $this->escapeHtml(df_h()->checkout()->__($this->_getData(self::P__LABEL)));
-	}
+	public function getLabel() {return rm_e(df_h()->checkout()->__($this['label']));}
 
 	/** @return string */
 	public function getLabelHtml() {
@@ -46,7 +35,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 			$this->{__METHOD__} =
 				rm_tag(
 					'label'
-					,df_clean(array(
+					,array_filter(array(
 						'for' => $this->getDomId()
 						,'class' => ($this->isRequired() ? 'required' : null)
 					))
@@ -61,14 +50,13 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	}
 
 	/** @return int */
-	public function getOrderingInConfig() {return $this->cfg(self::P__ORDERING_IN_CONFIG);}
+	public function getOrderingInConfig() {return $this[self::$P__ORDERING];}
 
 	/** @return int */
 	public function getOrderingWeight() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_int($this->getConfigValue('ordering'));
+			$this->{__METHOD__} = rm_nat0($this->getConfigValue('ordering'));
 		}
-		return $this->{__METHOD__};
 	}
 
 	/**
@@ -85,20 +73,21 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 				// <customer_password>
 				// 		<template>df/checkout/ergonomic/address/field/password.phtml</template>
 				// </customer_password>
-				$this->hasData(self::P__TEMPLATE)
-				? $this->_getData(self::P__TEMPLATE)
-				: $this->getDefaultTemplate()
+				$this->hasData(self::$P__TEMPLATE)
+				? $this->_getData(self::$P__TEMPLATE)
+				: $this->defaultTemplate()
 			)
 		;
 	}
 
 	/**
-	 * public, потому что вызывается через walk
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Row::_toHtml()
+	 * @used-by Varien_Data_Collection::walk()
 	 * @return string
 	 */
-	public function getType() {return $this->cfg(self::P__TYPE);}
+	public function getType() {return $this[self::$P__TYPE];}
 
-	/** @return mixed */
+	/** @return string|null */
 	public function getValue() {
 		return $this->getAddress()->getAddress()->getDataUsingMethod($this->getType());
 	}
@@ -120,11 +109,9 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 		return
 				parent::needToShow()
 			&&
-				(
 					Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__NO
 				 !==
 					$this->getApplicability()
-				)
 			&&
 				$this->checkAuthenticationStatus()
 		;
@@ -134,53 +121,57 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	protected function checkAuthenticationStatus() {
 		/** @var bool $result */
 		$result =
-				(self::P__AUTHENTICATED__ANY === $this->getAuthenticated())
+				(self::$ANY === $this->getAuthenticated())
 			||
 				(
-						df_mage()->customer()->isLoggedIn()
+						rm_customer_logged_in()
 					&&
-						(self::P__AUTHENTICATED__YES === $this->getAuthenticated())
+						(self::$YES === $this->getAuthenticated())
 				)
 			||
 				(
-						!df_mage()->customer()->isLoggedIn()
+						!rm_customer_logged_in()
 					&&
-						(self::P__AUTHENTICATED__NO === $this->getAuthenticated())
+						(self::$NO === $this->getAuthenticated())
 				)
 		;
 		return $result;
 	}
 
 	/** @return Df_Checkout_Block_Frontend_Ergonomic_Address */
-	protected function getAddress() {return $this->cfg(self::P__ADDRESS);}
+	protected function getAddress() {return $this[self::$P__ADDRESS];}
 
 	/**
 	 * Кто может видеть данное поле: авторизованные, неавторизованные или все
 	 * @return string
 	 */
-	protected function getAuthenticated() {
-		return $this->cfg(self::P__AUTHENTICATED, self::P__AUTHENTICATED__ANY);
-	}
+	protected function getAuthenticated() {return $this->cfg('authenticated', self::$ANY);}
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Template::getCacheKeyInfo()
 	 * @return string|string[]
 	 */
-	protected function getCacheKeyParamsAdditional() {return $this->getDomId();}
+	protected function cacheKeySuffix() {return $this->getDomId();}
 
 	/**
 	 * Этот метод перекрывается в классе
-	 * Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Region_Dropdown
+	 * @see Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Region_Dropdown
+	 * @used-by getConfigValue()
 	 * @return string
 	 */
 	protected function getConfigShortKey() {return $this->getType();}
 
-	/** @return string[] */
+	/**
+	 * @used-by getCssClassesAsText()
+	 * @return string[]
+	 */
 	protected function getCssClasses() {
 		/** @var string[] $result */
-		$result = df_parse_csv($this->cfg(self::P__CSS_CLASSES));
+		$result = df_csv_parse($this[self::$P__CSS_CLASSES]);
 		if ($this->isRequired()) {
-			$result[]= 'required-entry';
+			$result[]= $this->getValidatorCssClass();
 		}
 		/**
 		 * 2015-02-15
@@ -193,26 +184,31 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 		return $result;
 	}
 
+	/** @return string */
+	protected function getValidatorCssClass() {return 'required-entry';}
+
 	/**
+	 * @used-by getApplicability()
+	 * @used-by getOrderingWeight()
 	 * @param string $paramName
 	 * @return string
 	 */
 	private function getConfigValue($paramName) {
-		df_param_string($paramName, 0);
-		/** @var string $key */
-		$key =
-			rm_config_key(
-				'df_checkout'
-				,implode('_', array($this->getAddress()->getType(), 'field', $paramName))
-				,$this->getConfigShortKey()
-			)
-		;
-		/** @var string $result */
-		$result = Mage::getStoreConfig($key);
-		if (!is_string($result)) {
-			df_error('Не могу прочитать значение настройки «%s»', $key);
+		df_param_string_not_empty($paramName, 0);
+		if (!isset($this->{__METHOD__}[$paramName])) {
+			/** @var string $fieldType */
+			$fieldType = $this->getConfigShortKey();
+			df_assert_string_not_empty($fieldType);
+			/** @var string $key */
+			$key = "df_checkout/{$this->getAddress()->getType()}_field_{$paramName}/{$fieldType}";
+			/** @var string $result */
+			$result = Mage::getStoreConfig($key);
+			if (!is_string($result)) {
+				df_error('Не могу прочитать значение настройки «%s»', $key);
+			}
+			$this->{__METHOD__}[$paramName] = $result;
 		}
-		return $result;
+		return $this->{__METHOD__}[$paramName];
 	}
 
 	/**
@@ -222,24 +218,52 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__CSS_CLASSES, self::V_STRING)
-			->_prop(self::P__ORDERING_IN_CONFIG, self::V_INT)
+			->_prop(self::$P__CSS_CLASSES, RM_V_STRING)
+			->_prop(self::$P__ORDERING, RM_V_NAT0)
+			->_prop(self::$P__TYPE, RM_V_STRING_NE)
 		;
 	}
-	const _CLASS = __CLASS__;
-	const P__ADDRESS = 'address';
-	const P__AUTHENTICATED = 'authenticated';
-	const P__AUTHENTICATED__ANY = 'any';
-	const P__AUTHENTICATED__NO = 'no';
-	const P__AUTHENTICATED__YES = 'yes';
-	const P__CSS_CLASSES = 'css-classes';
-	const P__LABEL = 'label';
-	const P__ORDERING_IN_CONFIG = 'ordering_in_config';
-	const P__TEMPLATE = 'template';
+	/** @var string */
+	private static $ANY = 'any';
+	/** @var string */
+	private static $NO = 'no';
+	/** @var string */
+	private static $P__ADDRESS = 'address';
+	/** @var string */
+	private static $P__CSS_CLASSES = 'css-classes';
+	/** @var string */
+	private static $P__ORDERING = 'ordering_in_config';
+	/** @var string */
+	private static $P__TEMPLATE = 'template';
 	/**
 	 * Ядро Magento использует поле «type» блоков для своих внутренних целей.
 	 * @see Mage_Core_Model_Layout::createBlock():
 	 * $block->setType($type);
+	 * Поэтому называем наше поле «rm__type».
+	 * @var string
 	 */
-	const P__TYPE = 'rm__type';
+	private static $P__TYPE = 'rm__type';
+	/** @var string */
+	private static $YES = 'yes';
+
+	/**
+	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field::fields()
+	 * @param string $class
+	 * @param Df_Checkout_Block_Frontend_Ergonomic_Address $address
+	 * @param string $type
+	 * @param int $ordering
+	 * @param array(string => string) $additional [optional]
+	 * @return Df_Checkout_Block_Frontend_Ergonomic_Address_Field
+	 */
+	public static function ic(
+		$class
+		, Df_Checkout_Block_Frontend_Ergonomic_Address $address
+		, $type
+		, $ordering
+		, array $additional = array()
+	) {
+		return rm_ic($class, __CLASS__, array(
+			self::$P__ADDRESS => $address, self::$P__TYPE => $type, self::$P__ORDERING => $ordering
+		) + $additional);
+	}
 }

@@ -6,5 +6,5 @@ abstract class Df_Parser_Model_Pq_Link extends Df_Parser_Model_Pq {
 	/** @return Zend_Uri_Http */
 	abstract public function getUri();
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

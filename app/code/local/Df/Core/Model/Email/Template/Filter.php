@@ -1,6 +1,6 @@
 <?php
 class Df_Core_Model_Email_Template_Filter extends Mage_Core_Model_Email_Template_Filter {
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

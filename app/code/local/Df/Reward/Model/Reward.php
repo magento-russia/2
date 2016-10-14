@@ -1,6 +1,13 @@
 <?php
 /**
+ * @method float|null getPointsBalance()
  * @method Df_Reward_Model_Resource_Reward getResource()
+ * @method Df_Reward_Model_Reward setAction(int $value)
+ * @method Df_Reward_Model_Reward setActionEntity(Varien_Object $value)
+ * @method Df_Reward_Model_Reward setCustomerId(int $value)
+ * @method Df_Reward_Model_Reward  setPointsDelta(float $value)
+ * @method Df_Reward_Model_Reward setStore(int $value)
+ * @method Df_Reward_Model_Reward setWebsiteId(int $value)
  */
 class Df_Reward_Model_Reward extends Df_Core_Model {
 	/** @return boolean */
@@ -35,7 +42,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 
 	/**
 	 * Delete orphan (points of deleted website) points by given customer
-	 * @param Mage_Customer_Model_Customer | integer | null $customer
+	 * @param Df_Customer_Model_Customer|int|null $customer [optional]
 	 * @return Df_Reward_Model_Reward
 	 */
 	public function deleteOrphanPointsByCustomer($customer = null) {
@@ -96,7 +103,8 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 				return null;
 			}
 		}
-		if ($instance = Mage::registry('_reward_actions' . $action)) {
+		$instance = Mage::registry('_reward_actions' . $action);
+		if ($instance) {
 			return $instance;
 		}
 		if (isset(self::$_actionModelClasses[$action])) {
@@ -131,11 +139,17 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 		return $this->_getData('customer');
 	}
 
+	/** @return integer */
+	public function getCustomerGroupId() {
+		if (!$this->_getData('customer_group_id') && $this->getCustomer()) {
+			$this->setData('customer_group_id', $this->getCustomer()->getGroupId());
+		}
+		return $this->_getData('customer_group_id');
+	}
+
 	/** @return string */
 	public function getFormatedCurrencyAmount() {
-		return df_zf_currency($this->getWebsiteCurrencyCode())->toCurrency(
-			$this->getCurrencyAmount(), array('precision' => rm_currency()->getPrecision())
-		);
+		return rm_money_fl($this->getCurrencyAmount(), $this->getWebsiteCurrencyCode());
 	}
 
 	/** @return Df_Reward_Model_Reward_History */
@@ -153,14 +167,6 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 			$this->_preparePointsDelta();
 		}
 		return $this->_getData('points_delta');
-	}
-
-	/** @return integer */
-	public function getCustomerGroupId() {
-		if (!$this->_getData('customer_group_id') && $this->getCustomer()) {
-			$this->setData('customer_group_id', $this->getCustomer()->getGroupId());
-		}
-		return $this->_getData('customer_group_id');
 	}
 
 	/**
@@ -230,9 +236,15 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	}
 
 	/**
+	 * @override
+	 * @return Df_Reward_Model_Resource_Reward_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
 	 * Getter for store (for emails etc)
 	 * Trying get store from customer if its not assigned
-	 * @return Mage_Core_Model_Store|null
+	 * @return Df_Core_Model_StoreM|null
 	 */
 	public function getStore() {
 		$store = null;
@@ -242,16 +254,14 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 			$store = $this->getCustomer()->getStore();
 			$this->setData('store', $store);
 		}
-		if ($store !== null) {
-			return is_object($store) ? $store : Mage::app()->getStore($store);
-		}
-		return $store;
+		// намеренно возвращаем null (так в оригинале)
+		return is_null($store) ? null : (is_object($store) ? $store : rm_store($store));
 	}
 
 	/** @return string */
 	public function getWebsiteCurrencyCode() {
 		if (!$this->_getData('website_currency_code')) {
-			$this->setData('website_currency_code', Mage::app()->getWebsite($this->getWebsiteId())
+			$this->setData('website_currency_code', rm_website($this->getWebsiteId())
 				->getBaseCurrencyCode());
 		}
 		return $this->_getData('website_currency_code');
@@ -327,15 +337,12 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 		if ($delta == 0) {
 			return $this;
 		}
-		$store = Mage::app()->getStore($this->getStore());
+		$store = rm_store($this->getStore());
 		/* @var Df_Core_Model_Email_Template $mail */
 		$mail = Df_Core_Model_Email_Template::i();
-		$mail->setDesignConfig(
-			array(
-			  'area' => Df_Core_Const_Design_Area::FRONTEND
-			  , 'store' => $store->getId()
-			)
-		);
+		$mail->setDesignConfig(array(
+			'area' => Df_Core_Const_Design_Area::FRONTEND, 'store' => $store->getId()
+		));
 		$templateVars = array(
 			'store' => $store
 			,'customer' => $this->getCustomer()
@@ -364,45 +371,34 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	public function sendBalanceWarningNotification($item) {
 		/* @var Mage_Core_Model_Email_Template $mail */
 		$mail = Df_Core_Model_Email_Template::i();
-		$mail
-			->setDesignConfig(
-				array(
-					'area' => Df_Core_Const_Design_Area::FRONTEND
-					,'store' => $item->getStoreId()
-				)
-			)
-		;
-		$store = Mage::app()->getStore($item->getStoreId());
-		$templateVars =
-			array(
-				'store' => $store
-				,'customer_name' => $item->getCustomerFirstname().' '.$item->getCustomerLastname()
-				,'unsubscription_url' =>
-					Df_Reward_Helper_Customer::s()->getUnsubscribeUrl('warning')
-				,'remaining_days' => $store->getConfig('df_reward/notification/expiry_day_before')
-				,'points_balance' => $item->getPointsBalanceTotal()
-				,'points_expiring' => $item->getTotalExpired()
-			)
-		;
-		$mail
-			->sendTransactional(
-				$store->getConfig(
-					self::XML_PATH_BALANCE_WARNING_TEMPLATE
-				)
-				,$store->getConfig(self::XML_PATH_EMAIL_IDENTITY)
-				,$item->getCustomerEmail()
-				,null
-				,$templateVars,$store->getId()
-			)
-		;
+		$mail->setDesignConfig(array(
+			'area' => Df_Core_Const_Design_Area::FRONTEND, 'store' => $item->getStoreId()
+		));
+		$store = rm_store($item->getStoreId());
+		$templateVars = array(
+			'store' => $store
+			,'customer_name' => $item->getCustomerFirstname().' '.$item->getCustomerLastname()
+			,'unsubscription_url' =>
+				Df_Reward_Helper_Customer::s()->getUnsubscribeUrl('warning')
+			,'remaining_days' => $store->getConfig('df_reward/notification/expiry_day_before')
+			,'points_balance' => $item->getPointsBalanceTotal()
+			,'points_expiring' => $item->getTotalExpired()
+		);
+		$mail->sendTransactional(
+			$store->getConfig(self::XML_PATH_BALANCE_WARNING_TEMPLATE)
+			,$store->getConfig(self::XML_PATH_EMAIL_IDENTITY)
+			,$item->getCustomerEmail()
+			,null
+			,$templateVars,$store->getId()
+		);
 		return $this;
 	}
 
 	/**
-	 * @param Mage_Customer_Model_Customer $customer
+	 * @param Df_Customer_Model_Customer $customer
 	 * @return Df_Reward_Model_Reward
 	 */
-	public function setCustomer($customer) {
+	public function setCustomer(Df_Customer_Model_Customer $customer) {
 		$this->setData('customer_id', $customer->getId());
 		$this->setData('customer_group_id', $customer->getGroupId());
 		$this->setData('customer', $customer);
@@ -478,6 +474,12 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	}
 
 	/**
+	 * @override
+	 * @return Df_Reward_Model_Resource_Reward
+	 */
+	protected function _getResource() {return Df_Reward_Model_Resource_Reward::s();}
+
+	/**
 	 * Prepare currency amount and currency delta
 	 * @return Df_Reward_Model_Reward
 	 */
@@ -543,30 +545,60 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_init(Df_Reward_Model_Resource_Reward::mf());
-		self::$_actionModelClasses =
-				self::$_actionModelClasses
-			+
-				array(
-					self::REWARD_ACTION_ADMIN => 'df_reward/action_admin'
-					,self::REWARD_ACTION_ORDER => 'df_reward/action_order'
-					,self::REWARD_ACTION_REGISTER => 'df_reward/action_register'
-					,self::REWARD_ACTION_NEWSLETTER => 'df_reward/action_newsletter'
-					,self::REWARD_ACTION_INVITATION_CUSTOMER => 'df_reward/action_invitationCustomer'
-					,self::REWARD_ACTION_INVITATION_ORDER => 'df_reward/action_invitationOrder'
-					,self::REWARD_ACTION_REVIEW	=> 'df_reward/action_review'
-					,self::REWARD_ACTION_TAG => 'df_reward/action_tag'
-					,self::REWARD_ACTION_ORDER_EXTRA => 'df_reward/action_orderExtra'
-					,self::REWARD_ACTION_CREDITMEMO => 'df_reward/action_creditmemo'
-					,self::REWARD_ACTION_SALESRULE => 'df_reward/action_salesrule'
-				)
-		;
+		/**
+		 * 2015-02-07
+		 * Операция «+» для массивов используется в оригинале.
+		 * Обратите внимание, что операция «+» игнорирует те элементы второго массива,
+		 * ключи которого присутствуют в первом массиве:
+		 * «The keys from the first array will be preserved.
+		 * If an array key exists in both arrays,
+		 * then the element from the first array will be used
+		 * and the matching key's element from the second array will be ignored.»
+		 * http://php.net/manual/function.array-merge.php
+		 * Например:
+		 * array(1,2,3) + array(3,4,5) вернёт array(1,2,3).
+		 * http://3v4l.org/utnNp
+		 *
+		 * Для ассоциативных массивов $b + $a по сути эквивалентно array_merge($a, $b)
+		 * То есть, в операции «$b + $a» для ассоциативных массивов
+		 * второй операнд (массив $a) выступает как бы «значениями по умолчанию»:
+		 * эти значения попадают в результат в том случае,
+		 * когда их ключи отсутствуют в первом операнде (массиве $b).
+		 * @see array_merge() для ассоциативных массивов работает так:
+		 * «If the input arrays have the same string keys,
+		 * then the later value for that key will overwrite the previous one.»
+		 * http://php.net/manual/function.array-merge.php
+		 * Например:
+				$a = array('a' => 1, 'b' => 2);
+				$b = array('a' => 3);
+				print_r(intval(($b + $a) === array_merge($a, $b)));
+		 * вернёт «1» («true»).
+		 * http://3v4l.org/hKICL
+		 * Про оператор «===» для массивов:
+		 * http://stackoverflow.com/a/5678990
+		 */
+		self::$_actionModelClasses = self::$_actionModelClasses + array(
+			// значения по умолчанию,
+			// смотрите комментарий выше о сути операции «+» для ассоциативных массивов
+			self::REWARD_ACTION_ADMIN => 'df_reward/action_admin'
+			,self::REWARD_ACTION_ORDER => 'df_reward/action_order'
+			,self::REWARD_ACTION_REGISTER => 'df_reward/action_register'
+			,self::REWARD_ACTION_NEWSLETTER => 'df_reward/action_newsletter'
+			,self::REWARD_ACTION_INVITATION_CUSTOMER => 'df_reward/action_invitationCustomer'
+			,self::REWARD_ACTION_INVITATION_ORDER => 'df_reward/action_invitationOrder'
+			,self::REWARD_ACTION_REVIEW	=> 'df_reward/action_review'
+			,self::REWARD_ACTION_TAG => 'df_reward/action_tag'
+			,self::REWARD_ACTION_ORDER_EXTRA => 'df_reward/action_orderExtra'
+			,self::REWARD_ACTION_CREDITMEMO => 'df_reward/action_creditmemo'
+			,self::REWARD_ACTION_SALESRULE => 'df_reward/action_salesrule'
+		);
 	}
 
 	/** @var bool */
 	protected $_modelLoadedByCustomer = false;
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Reward_Model_Resource_Reward_Collection::_construct() */
+	const _C = __CLASS__;
 	const P__ACTION = 'action';
 	const P__ACTION_ENTITY = 'action_entity';
 	const P__ID = 'reward_id';
@@ -587,7 +619,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	const XML_PATH_EMAIL_IDENTITY = 'df_reward/notification/email_sender';
 
 	/** @return Df_Reward_Model_Resource_Reward_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Reward_Model_Resource_Reward_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -601,11 +633,6 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	 * @return Df_Reward_Model_Reward
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/**
-	 * @see Df_Reward_Model_Resource_Reward_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Reward_Model_Reward */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 	/**

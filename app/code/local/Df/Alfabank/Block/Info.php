@@ -11,9 +11,9 @@ class Df_Alfabank_Block_Info extends Df_Payment_Block_Info {
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/alfabank/info.phtml';}
-
-	const _CLASS = __CLASS__;
+	protected function defaultTemplate() {return 'df/alfabank/info.phtml';}
 }

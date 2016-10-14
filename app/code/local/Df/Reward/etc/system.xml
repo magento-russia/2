@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_reward translate='label' module='df_reward'>
+		<df_reward>
 			<label>Reward Points</label>
 			<class>separator-top</class>
 			<tab>df</tab>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<general translate='label' module='df_reward'>
+				<general module='df_reward'>
 					<label>Основное</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -27,7 +27,7 @@
 						]]>
 					</comment>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -35,7 +35,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>0</show_in_website>
 							<show_in_store>0</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-reward</df_feature>
 							<comment>
 								<![CDATA[
@@ -43,7 +43,7 @@
 								]]>
 							</comment>
 						</enabled>
-						<enabled_on_front translate='label'>
+						<enabled_on_front>
 							<label>Включить для покупателей?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -60,7 +60,7 @@
 								]]>
 							</comment>
 						</enabled_on_front>
-						<publish_history translate='label'>
+						<publish_history>
 							<label>Показывать ли покупателю историю его накоплений?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -124,7 +124,7 @@
 						<expiration_days translate='label comment'>
 							<label>Срок годности баллов</label>
 							<frontend_type>text</frontend_type>
-							<backend_model>df_reward/system_config_backend_expiration</backend_model>
+							<backend_model>Df_Reward_Model_Config_Backend_Expiration</backend_model>
 							<sort_order>6000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -147,7 +147,7 @@
 						<expiry_calculation translate='label comment'>
 							<label>Способ контроля срока годности</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_reward/source_points_expiryCalculation</source_model>
+							<source_model>Df_Reward_Model_Source_Points_ExpiryCalculation</source_model>
 							<sort_order>7000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -184,7 +184,7 @@
 						</landing_page>
 					</fields>
 				</general>
-				<points translate='label' module='df_reward'>
+				<points module='df_reward'>
 					<label>Размеры начислений</label>
 					<comment>
 						<![CDATA[
@@ -210,7 +210,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-reward</df_feature>
 						</register>
 						<newsletter translate='label comment'>
@@ -283,20 +283,8 @@
 								]]>
 							</comment>
 						</invitation_order_limit>
-						<!--invitation_order_frequency translate='label comment'>
-							<label>Invitation Conversion to Order Reward</label>
-							<frontend_type>select</frontend_type>
-							<source_model>df_reward/source_points_invitationOrder</source_model>
-							<sort_order>50</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</invitation_order_frequency-->
 						<review translate='label comment'>
-							<label>
-								Количество начисляемых баллов
-								за написание отзыва (обзора) к товару
-							</label>
+							<label>Количество начисляемых баллов за написание отзыва (обзора) к товару</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>7000</sort_order>
 							<show_in_default>1</show_in_default>
@@ -351,7 +339,7 @@
 						</tag_limit>
 					</fields>
 				</points>
-				<notification translate='label' module='df_reward'>
+				<notification module='df_reward'>
 					<label>Почтовые уведомления</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>3000</sort_order>
@@ -368,7 +356,7 @@
 						]]>
 					</comment>
 					<fields>
-						<email_sender translate='label'>
+						<email_sender>
 							<label>Отправитель</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_email_identity</source_model>
@@ -376,7 +364,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-reward</df_feature>
 							<comment>
 								<![CDATA[
@@ -385,7 +373,7 @@
 								]]>
 							</comment>
 						</email_sender>
-						<subscribe_by_default translate='label'>
+						<subscribe_by_default>
 							<label>Подписывать покупателя автоматически?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -405,7 +393,7 @@
 								]]>
 							</comment>
 						</subscribe_by_default>
-						<balance_update_template translate='label'>
+						<balance_update_template>
 							<label>Шаблон письма об изменении количества баллов у покупателя</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_email_template</source_model>
@@ -420,7 +408,7 @@
 								]]>
 							</comment>
 						</balance_update_template>
-						<!--expiry_warning_template translate='label'>
+						<!--expiry_warning_template>
 							<label>Reward Points Expiry Warning Email</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_email_template</source_model>

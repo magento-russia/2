@@ -34,7 +34,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 		$result =
 			df_model(
 				$class
-				, array_merge(array(self::P__OBSERVER => $observer)
+				, array_merge(array(self::$P__OBSERVER => $observer)
 				, $additionalParams)
 			)
 		;
@@ -46,7 +46,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 	 * Извлекает свойство системного события из объекта класса Varien_Event_Observer,
 	 * вокруг которого мы сделали объект-обёртку
 	 * @param string $paramName						Название свойства
-	 * @param mixed  $defaultValue[optional]		Результат по умолчанию
+	 * @param mixed  $defaultValue [optional]		Результат по умолчанию
 	 * @return mixed
 	 */
 	public function getEventParam($paramName, $defaultValue = null) {
@@ -57,7 +57,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 	}
 
 	/** @return Varien_Event_Observer */
-	public function getObserver() {return $this->cfg(self::P__OBSERVER);}
+	public function getObserver() {return $this->cfg(self::$P__OBSERVER);}
 
 	/**
 	 * Ожидаемый системный тип события.
@@ -75,11 +75,6 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 	 */
 	protected function getExpectedEventSuffix() {return null;}
 
-	// Параметр конструктора: объект класса Varien_Event_Observer
-	const P__OBSERVER = 'observer';
-	// Тип параметра конструктора «observer»
-	const P__OBSERVER_TYPE = 'Varien_Event_Observer';
-
 	/**
 	 * @override
 	 * @return void
@@ -89,13 +84,25 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->validateEventType()
-			->_prop(self::P__OBSERVER, self::P__OBSERVER_TYPE)
+			->_prop(self::$P__OBSERVER, 'Varien_Event_Observer')
 		;
+	}
+	/** @var string */
+	private static $P__OBSERVER = 'observer';
+
+	/**
+	 * @used-by Df_Catalog_Model_Event_AttributeSet_GroupAdded::i()
+	 * @param $class
+	 * @param Varien_Event_Observer $observer
+	 * @return Df_Core_Model_Event
+	 */
+	protected static function ic($class, Varien_Event_Observer $observer) {
+		return rm_ic($class, __CLASS__, array(self::$P__OBSERVER => $observer));
 	}
 
 	/**
 	 * @return Df_Core_Model_Event
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 */
 	private function validateEventType() {
 		/** @var string $eventType */
@@ -105,7 +112,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 			&&
 				!rm_starts_with($eventType, $this->getExpectedEventPrefix())
 		) {
-			df_error_internal(
+			df_error(
 				'Объект класса «%s» ожидает событие с приставкой «%s», но получил событие «%s».'
 				,get_class($this)
 				,$this->getExpectedEventPrefix()
@@ -117,7 +124,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 			&&
 				!rm_ends_with($eventType, $this->getExpectedEventSuffix())
 		) {
-			df_error_internal(
+			df_error(
 				'Объект класса «%s» ожидает событие с окончанием «%s», но получил событие «%s».'
 				,get_class($this)
 				,$this->getExpectedEventSuffix()
@@ -125,12 +132,11 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 			);
 		}
 		if (!$this->getExpectedEventPrefix() && !$this->getExpectedEventSuffix()) {
-			df_error_internal(
+			df_error(
 				'Программист! Укажи префикс или суффикс события для класса %s!'
 				,get_class($this)
 			);
 		}
 		return $this;
 	}
-	const _CLASS = __CLASS__;
 }

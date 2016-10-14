@@ -13,16 +13,23 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 			try {
 				$result->save();
 			}
-			catch(Exception $e) {
+			catch (Exception $e) {
 				df_error('Не могу создать прикладной тип товара «%s».', $this->getName());
 			}
 			rm_nat($result->getId());
-			if (!is_null($this->getSkeletonId())) {
-				$result->initFromSkeleton($this->getSkeletonId());
-			}
-			else {
-				$this->addAttributesDefault($result);
-			}
+			/**
+			 * 2015-08-08
+			 * Раньше здесь стоял код код:
+					if (!is_null($this->getSkeletonId())) {
+						$result->initFromSkeleton($this->getSkeletonId());
+					}
+					else {
+						$this->addAttributesDefault($result);
+					}
+			 * Однако skeleton_id никто не задавал,
+			 * и поэтому первая ветка if никогда не работала.
+			 */
+			$this->addAttributesDefault($result);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
@@ -34,7 +41,9 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 	 */
 	private function addAttributesDefault(Mage_Eav_Model_Entity_Attribute_Set $attributeSet) {
 		df_h()->eav()->packetUpdateBegin();
-		foreach ($this->getAttributesDefaultData() as $attributeCode => $attributeData) {
+		/** @var array(string => array(string => string)) $attributes */
+		$attributes = Df_Catalog_Model_Resource_Installer_Attribute::s()->defaultProductAttributes();
+		foreach ($attributes as $attributeCode => $attributeData) {
 			/** @var string $attributeCode */
 			/** @var array $attributeData */
 			df_assert_string_not_empty($attributeCode);
@@ -55,7 +64,7 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 				df_assert_integer($sortOrder);
 			}
 			if ($groupName || !$isUserDefined) {
-				Df_Catalog_Model_Installer_AddAttributeToSet::processStatic(
+				Df_Catalog_Model_Installer_AddAttributeToSet::p(
 					$attributeCode
 					,$attributeSet->getId()
 					,$groupName ? $groupName : self::GROUP_NAME__GENERAL
@@ -63,46 +72,17 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 				);
 			}
 		}
-		df_h()->eav()->packetUpdateEnd();
 		// Здесь надо добавлять свои стандартные товарные свойства
-		$this->runBlankAttributeSetProcessors($attributeSet);
-	}
-
-	/** @return array */
-	private function getAttributesDefaultData() {
-		/** @var array $result */
-		$result =
-			df_a(
-				df_a(
-					Df_Catalog_Model_Resource_Installer_Attribute::s()->getDefaultEntities()
-					,'catalog_product'
-				)
-				,'attributes'
-			)
-		;
-		df_result_array($result);
-		return $result;
+		Df_Core_Setup_AttributeSet::runBlank($attributeSet);
+		df_h()->eav()->packetUpdateEnd();
+		rm_eav_reset();
 	}
 
 	/** @return string */
-	private function getName() {return $this->cfg(self::P__NAME);}
-
-	/** @return int|null */
-	private function getSkeletonId() {return $this->cfg(self::P__SKELETON_ID);}
+	private function getName() {return $this->cfg(self::$P__NAME);}
 
 	/** @return string */
-	private function needSkipReindexing() {return $this->cfg(self::P__SKIP_REINDEXING, false);}
-
-	/**
-	 * @param Mage_Eav_Model_Entity_Attribute_Set $attributeSet
-	 * @return void
-	 */
-	private function runBlankAttributeSetProcessors(Mage_Eav_Model_Entity_Attribute_Set $attributeSet) {
-		foreach (Df_Core_Model_Config::s()->getStringNodes('df/attribute_set_processors') as $class) {
-			/** @var string $class */
-			Df_Core_Model_Setup_AttributeSet::processByClass($class, $attributeSet);
-		}
-	}
+	private function needSkipReindexing() {return $this->cfg(self::$P__SKIP_REINDEXING, false);}
 
 	/**
 	 * @override
@@ -111,29 +91,26 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__NAME, self::V_STRING_NE)
-			->_prop(self::P__SKIP_REINDEXING, self::V_BOOL)
-			->_prop(self::P__SKELETON_ID, self::V_INT, false)
+			->_prop(self::$P__NAME, RM_V_STRING_NE)
+			->_prop(self::$P__SKIP_REINDEXING, RM_V_BOOL)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const GROUP_NAME__GENERAL = 'General';
-	const P__NAME = 'name';
-	const P__SKIP_REINDEXING = 'skip_reindexing';
-	const P__SKELETON_ID = 'skeleton_id';
+	/** @var string */
+	private static $P__NAME = 'name';
+	/** @var string */
+	private static $P__SKIP_REINDEXING = 'skip_reindexing';
 	/**
 	 * @static
+	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getAttributeSet()
+	 * @used-by Lamoda_Catalog_Setup_Shoes::getAttributeSet()
 	 * @param string $name
-	 * @param int|null $skeletonId [optional]
+	 * @param bool $skipReindexing [optional]
 	 * @return Df_Eav_Model_Entity_Attribute_Set
 	 */
-	public static function create($name, $skeletonId = null) {
-		return self::i(array(self::P__NAME => $name, self::P__SKELETON_ID => $skeletonId))->getResult();
+	public static function create($name, $skipReindexing = false) {
+		$i = new self(array(self::$P__NAME => $name, self::$P__SKIP_REINDEXING => $skipReindexing));
+		return $i->getResult();
 	}
-	/**
-	 * @static
-	 * @param array(string => mixed) $parameters
-	 * @return Df_Catalog_Model_Installer_AttributeSet
-	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
 }

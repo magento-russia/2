@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Adminhtml_Block_HtmlBefore getEvent()
- */
+/** @method Df_Core_Model_Event_Adminhtml_Block_HtmlBefore getEvent() */
 class Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -29,12 +27,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter extends Df_C
 				$values
 				,1
 				,0
-				,array(
-					array(
-						'value' => 'week'
-						,'label' => df_mage()->reportsHelper()->__('Week')
-					)
-				)
+				,array(rm_option('week', df_mage()->reportsHelper()->__('Week')))
 			)
 		;
 		$fieldPeriodType->setData('values', $values);
@@ -45,14 +38,11 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter extends Df_C
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {
-		return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_CLASS;
-	}
+	protected function getEventClass() {return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C;}
 
 	/** @return Mage_Adminhtml_Block_Report_Filter_Form */
-	private function getBlockAsReportFilterForm() {
-		return $this->getEvent()->getBlock();
-	}
+	private function getBlockAsReportFilterForm() {return $this->getEvent()->getBlock();}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Reports_Observer::adminhtml_block_html_before() */
+	const _C = __CLASS__;
 }

@@ -8,16 +8,11 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 	 * @return string
 	 */
 	public function __() {
+		/** @var mixed[] $fa */
 		$fa = func_get_args();
-		/**
-		 * Раньше вместо @see Df_Localization_Helper_Translation::translateByModule()
-		 * тут стоял вызов @see Df_Localization_Helper_Translation::translateByParent().
-		 * translateByModule точнее, потому что translateByParent не будет работать,
-		 * если класс Df_Catalog_Block_Product_List перекрыт его потомком
-		 * (такое бывает иногда при адаптации сторонних оформительских тем).
-		 */
+		/** @var string $result */
 		$result = rm_translate($fa, 'Mage_Catalog');
-		if (df_module_enabled(Df_Core_Module::TWEAKS) && df_enabled(Df_Core_Feature::TWEAKS)) {
+		if (df_module_enabled(Df_Core_Module::TWEAKS)) {
 			if (
 					(
 							rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
@@ -72,8 +67,6 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 			(
 					df_module_enabled(Df_Core_Module::TWEAKS)
 				&&
-					df_enabled(Df_Core_Feature::TWEAKS)
-				&&
 					(
 							rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 						||
@@ -91,6 +84,8 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -101,21 +96,16 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 			&&
 				df_cfg()->speed()->blockCaching()->catalogProductList()
 		) {
-			$result =
-				array_merge(
-					$result
-					,array(
-						get_class($this)
-						/**
-						 * Здесь md5 не нужно,
-						 * потому что @see Mage_Core_Block_Abstract::getCacheKey()
-						 * использует аналогичную md5 функцию sha1
-						 */
-						,$this->getRequest()->getRequestUri()
-						,Mage::app()->getStore()->getCurrentCurrencyCode()
-					)
-				)
-			;
+			$result = array_merge($result, array(
+				get_class($this)
+				/**
+				 * Здесь @see md5() не нужно,
+				 * потому что @used-by Mage_Core_Block_Abstract::getCacheKey()
+				 * использует аналогичную функцию @uses sha1()
+				 */
+				,$this->getRequest()->getRequestUri()
+				,rm_store()->getCurrentCurrencyCode()
+			));
 		}
 		return $result;
 	}
@@ -140,14 +130,14 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 				 * (и в полную противоположность Zend Framework
 				 * и всем остальным частям Magento, где используется кэширование)
 				 * означает, что блок не удет кэшироваться вовсе!
-				 * @see Mage_Core_Block_Abstract::_loadCache()
+				 * @used-by Mage_Core_Block_Abstract::_loadCache()
 				 */
 				'cache_lifetime' => Df_Core_Block_Template::CACHE_LIFETIME_STANDARD
 				/**
 				 * При такой инициализации тегов
 				 * (без перекрытия метода @see Mage_Core_Block_Abstract::getCacheTags())
-				 * тег Mage_Core_Block_Abstract::CACHE_GROUP будет добавлен автоматически.
-				 * @see Mage_Core_Block_Abstract::getCacheTags()
+				 * тег @see Mage_Core_Block_Abstract::CACHE_GROUP будет добавлен автоматически.
+				 * @used-by Mage_Core_Block_Abstract::getCacheTags()
 				 */
 				,'cache_tags' => array(Mage_Catalog_Model_Product::CACHE_TAG)
 			));

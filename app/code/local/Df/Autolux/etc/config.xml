@@ -2,8 +2,9 @@
 <config>
 	<modules>
 		<Df_Autolux>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Автолюкс</title>
+			<version>1.0.0</version>
 		</Df_Autolux>
 	</modules>
 	<global>
@@ -15,7 +16,7 @@
 		<carriers>
 			<df-autolux>
 				<active>0</active>
-				<model>df_autolux/carrier</model>
+				<model>Df_Autolux_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

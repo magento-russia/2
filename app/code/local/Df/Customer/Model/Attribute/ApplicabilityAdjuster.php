@@ -3,14 +3,12 @@ class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 	/** @return Df_Customer_Model_Attribute_ApplicabilityAdjuster */
 	public function adjust() {
 		if (!is_null($this->getApplicability())) {
-			$this->getAttribute()->addData(
-				array(
-					'is_required' => rm_01($this->isRequired())
-					,'scope_is_required' => rm_01($this->isRequired())
-					,'is_visible' => rm_01($this->isVisible())
-					,'scope_is_visible' => rm_01($this->isVisible())
-				)
-			);
+			$this->getAttribute()->addData(array(
+				'is_required' => rm_01($this->isRequired())
+				,'scope_is_required' => rm_01($this->isRequired())
+				,'is_visible' => rm_01($this->isVisible())
+				,'scope_is_visible' => rm_01($this->isVisible())
+			));
 		}
 		return $this;
 	}
@@ -35,7 +33,7 @@ class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 					 * мы все равно проверяем заполненность региона,
 					 * поэтому если заполненность региона требуется —
 					 * то у нас достаточно гарантий соблюдния этого требования.
-					 * @link http://magento-forum.ru/topic/3279/
+					 * http://magento-forum.ru/topic/3279/
 					 */
 					('region_id' !== $this->getAttribute()->getAttributeCode())
 				&&
@@ -101,11 +99,11 @@ class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ADDRESS, Df_Customer_Const::ADDRESS_ABSTRACT_CLASS)
-			->_prop(self::P__ATTRIBUTE, Df_Customer_Const::ATTRIBUTE_CLASS)
+			->_prop(self::P__ADDRESS, 'Mage_Customer_Model_Address_Abstract')
+			->_prop(self::P__ATTRIBUTE, 'Mage_Customer_Model_Attribute')
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ADDRESS = 'address';
 	const P__ATTRIBUTE = 'attribute';
 	/**

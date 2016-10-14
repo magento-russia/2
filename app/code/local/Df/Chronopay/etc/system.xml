@@ -28,7 +28,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-chronopay</df_feature>
 						</active>
 						<title translate='label'>
@@ -39,7 +39,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</title>
 						<site_id translate='label'>
 							<label>Site ID</label>
@@ -49,7 +49,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</site_id>
 						<product_id translate='label'>
 							<label>Product ID</label>
@@ -59,7 +59,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</product_id>
 						<shared_sec translate='label'>
 							<label>Shared Secret</label>
@@ -70,7 +70,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</shared_sec>
 						<description translate='label comment'>
 							<label>Transaction Description</label>
@@ -81,7 +81,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</description>
 						<currency translate='label'>
 							<label>Accepted currency</label>
@@ -92,18 +92,18 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</currency>
 						<language translate='label'>
 							<label>Customer Interface language</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_chronopay/source_language</source_model>
+							<source_model>Df_Chronopay_Model_Source_Language</source_model>
 							<sort_order>7</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</language>
 						<debug_flag translate='label'>
 							<label>Debug</label>
@@ -114,7 +114,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</debug_flag>
 						<order_status translate='label'>
 							<label>Status of New Order</label>
@@ -125,7 +125,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</order_status>
 						<allowspecific translate='label'>
 							<label>Payment from applicable countries</label>
@@ -136,7 +136,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</allowspecific>
 						<specificcountry translate='label'>
 							<label>Payment from Specific countries</label>
@@ -147,7 +147,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</specificcountry>
 						<frontend__sort_order translate='label'>
 							<label>Вес для упорядочивания</label>
@@ -163,7 +163,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								validate-digits
@@ -196,7 +196,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-chronopay</df_feature>
 						</active>
 						<title translate='label'>
@@ -207,7 +207,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</title>
 						<product_id translate='label'>
 							<label>Product ID</label>
@@ -217,7 +217,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</product_id>
 						<shared_sec translate='label'>
 							<label>Shared Secret</label>
@@ -228,7 +228,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</shared_sec>
 						<description translate='label comment'>
 							<label>Transaction Description</label>
@@ -239,7 +239,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</description>
 						<transaction_currency translate='label'>
 							<label>Transaction currency</label>
@@ -250,7 +250,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</transaction_currency>
 						<skip_client_callback translate='label'>
 							<label>Skip Client Callback</label>
@@ -266,7 +266,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</skip_client_callback>
 						<skip_customer_email translate='label'>
 							<label>Skip Customer Email</label>
@@ -283,7 +283,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</skip_customer_email>
 						<skip_rebill translate='label'>
 							<label>Skip Rebill</label>
@@ -299,7 +299,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</skip_rebill>
 						<order_status translate='label'>
 							<label>New order status</label>
@@ -310,7 +310,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</order_status>
 						<allowspecific translate='label'>
 							<label>Payment from applicable countries</label>
@@ -321,7 +321,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</allowspecific>
 						<specificcountry translate='label'>
 							<label>Payment from Specific countries</label>
@@ -332,7 +332,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</specificcountry>
 						<frontend__sort_order translate='label'>
 							<label>Вес для упорядочивания</label>
@@ -348,7 +348,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 							<validate>
 								validate-digits
@@ -364,7 +364,7 @@
 							<show_in_store>1</show_in_store>
 							<can_be_empty>1</can_be_empty>
 							<depends><active>1</active></depends>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</cctypes>
 					</fields>
 				</chronopay_gate>

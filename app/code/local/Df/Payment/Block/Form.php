@@ -22,9 +22,7 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	public function getArea() {return Df_Core_Const_Design_Area::FRONTEND;}
 
 	/** @return string */
-	public function getDescription() {
-		return $this->getMethod()->getRmConfig()->frontend()->getDescription();
-	}
+	public function getDescription() {return $this->getMethod()->configF()->getDescription();}
 
 	/**
 	 * заимствовано из Mage_Payment_Block_Form
@@ -33,16 +31,16 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @return string
 	 */
 	public function getInfoData($field) {
-		return df_text()->escapeHtml($this->getMethod()->getInfoInstance()->getData($field));
+		return rm_e($this->getMethod()->getInfoInstance()->getData($field));
 	}
 
 	/**
 	 * заимствовано из Mage_Payment_Block_Form
 	 * @see Mage_Payment_Block_Form::getMethod
-	 * @return Df_Payment_Model_Method_Base
+	 * @return Df_Payment_Model_Method
 	 */
 	public function getMethod() {
-		/** @var Df_Payment_Model_Method_Base $result */
+		/** @var Df_Payment_Model_Method $result */
 		$result = $this->getData('method');
 		if (!($result instanceof Mage_Payment_Model_Method_Abstract)) {
 			Mage::throwException($this->__('Cannot retrieve the payment method model object.'));
@@ -58,16 +56,16 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	public function getMethodCode() {return $this->getMethod()->getCode();}
 
 	/** @return bool */
-	public function isTestMode() {return $this->getMethod()->getRmConfig()->service()->isTestMode();}
+	public function isTestMode() {return $this->getMethod()->isTestMode();}
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/payment/form.phtml';}
+	protected function defaultTemplate() {return 'df/payment/form.phtml';}
 
-	/** @return Mage_Sales_Model_Quote */
-	protected function getQuote() {return rm_session_checkout()->getQuote();}
-
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Payment_Model_Method::getFormBlockType() */
+	const _C = __CLASS__;
 }

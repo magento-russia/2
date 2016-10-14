@@ -2,10 +2,20 @@
 <config>
 	<modules>
 		<Df_Invitation>
-			<version>1.0.0</version>
 			<author>Дмитрий Федюк</author>
+			<title>Приглашения</title>
+			<version>1.0.0</version>
 		</Df_Invitation>
 	</modules>
+	<df>
+		<features>
+			<df-invitation>
+				<module>df_invitation</module>
+				<title>Приглашения</title>
+				<url>http://magento-forum.ru/forum/189/</url>
+			</df-invitation>
+		</features>
+	</df>
 	<global>
 		<blocks><df_invitation><class>Df_Invitation_Block</class></df_invitation></blocks>
 		<helpers><df_invitation><class>Df_Invitation_Helper</class></df_invitation></helpers>
@@ -41,7 +51,7 @@
 			</email>
 		</template>
 	</global>
-   <admin>
+	<admin>
 		<routers>
 			<adminhtml>
 				<args>
@@ -60,7 +70,7 @@
 		</layout>
 		<translate>
 			<modules>
-				<Df_Invitation><files><default>Df_Invitation.csv</default></files></Df_Invitation>
+				<Df_Invitation><files><default>Df/Invitation.csv</default></files></Df_Invitation>
 			</modules>
 		</translate>
 	</adminhtml>
@@ -82,7 +92,7 @@
 		</layout>
 		<translate>
 			<modules>
-				<Df_Invitation><files><default>Df_Invitation.csv</default></files></Df_Invitation>
+				<Df_Invitation><files><default>Df/Invitation.csv</default></files></Df_Invitation>
 			</modules>
 		</translate>
 		<routers>
@@ -97,10 +107,10 @@
 		<events>
 			<customer_registration_is_allowed>
 				<observers>
-					<df_invitation>
-						<class>df_invitation/observer</class>
-						<method>restrictCustomerRegistration</method>
-					</df_invitation>
+					<Df_Invitation>
+						<class>Df_Invitation_Observer</class>
+						<method>customer_registration_is_allowed</method>
+					</Df_Invitation>
 				</observers>
 			</customer_registration_is_allowed>
 		</events>
@@ -124,13 +134,4 @@
 			</general>
 		</df_invitation>
 	</default>
-	<df>
-		<features>
-			<df-invitation>
-				<module>df_invitation</module>
-				<title>Приглашения</title>
-				<url>http://magento-forum.ru/forum/189/</url>
-			</df-invitation>
-		</features>
-	</df>
 </config>

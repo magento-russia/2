@@ -22,7 +22,7 @@ class Df_CustomerBalance_InfoController extends Mage_Core_Controller_Front_Actio
 	 */
 	public function indexAction()
 	{
-		if (!df_h()->customer()->balance()->isEnabled()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled()) {
 			$this->_redirect('customer/account/');
 			return;
 		}

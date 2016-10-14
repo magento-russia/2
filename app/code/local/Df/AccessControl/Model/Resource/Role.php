@@ -1,5 +1,5 @@
 <?php
-class Df_AccessControl_Model_Resource_Role extends Mage_Core_Model_Mysql4_Abstract {
+class Df_AccessControl_Model_Resource_Role extends Df_Core_Model_Resource {
 	/** @return Df_AccessControl_Model_Resource_Role */
 	public function prepareForInsert() {
 		$this->_useIsObjectNew = true;
@@ -29,30 +29,65 @@ class Df_AccessControl_Model_Resource_Role extends Mage_Core_Model_Mysql4_Abstra
 	}
 
 	/**
+	 * @param Mage_Core_Model_Resource_Setup $setup
+	 * @return void
+	 */
+	public function tableCreate(Mage_Core_Model_Resource_Setup $setup) {
+		$f_CATEGORIES = Df_AccessControl_Model_Role::P__CATEGORIES;
+		$f_ID = Df_AccessControl_Model_Role::P__ID;
+		$f_ROLE_ID = Df_Admin_Model_Role::P__ID;
+		$f_STORES = Df_AccessControl_Model_Role::P__STORES;
+		$t_DF_ACCESS_CONTROL_ROLE = rm_table(self::$TABLE);
+		$t_ADMIN_ROLE = rm_table(Df_Admin_Model_Resource_Role::TABLE);
+		// Обратите внимание, что удаление таблицы перед её созданием
+		// позволяет нам беспроблемно проводить одну и ту же установку много раз подряд
+		// (например, с целью тестирования или когда в процессе разработки
+		// перед выпуском версии требуется доработать
+		// ранее разработанный и запускавшийся доработать установщик).
+		rm_table_drop($t_DF_ACCESS_CONTROL_ROLE, $setup->getConnection());
+		/**
+		 * Не используем $this->getConnection()->newTable(),
+		 * потому что метод @see Varien_Db_Adapter_Pdo_Mysql::newTable()
+		 * отсутствует в Magento CE 1.4.0.1.
+		 */
+		$setup->run("
+			create table `{$t_DF_ACCESS_CONTROL_ROLE}` (
+				`{$f_ID}` int(10) unsigned not null primary key
+				,constraint `FK___DF__ACCESS_CONTROL_ROLE__ROLE`
+					foreign key (`{$f_ID}`)
+					references `{$t_ADMIN_ROLE}` (`{$f_ROLE_ID}`)
+					on delete cascade
+				--  Товарные разделы,
+				--  которыми будет ограничен доступ представителей данной роли к товарному каталогу.
+				,`{$f_CATEGORIES}` text
+				--  Магазины и витрины,
+				--  которыми будет ограничен доступ представителей данной роли.
+				,`{$f_STORES}` text
+			) engine=InnoDB default charset=utf8;
+		");
+		// После изменения структуры базы данных надо удалить кэш,
+		// потому что Magento кэширует структуру базы данных.
+		rm_cache_clean();
+	}
+
+	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::MAIN_TABLE, self::PRIMARY_KEY);
+		$this->_init(self::$TABLE, Df_AccessControl_Model_Role::P__ID);
 		$this->_isPkAutoIncrement = false;
 	}
-	const _CLASS = __CLASS__;
-	const FIELD__ROLE_ID = 'role_id';
-	const MAIN_TABLE = 'df_access_control/role';
-	const PRIMARY_KEY = 'role_id';
-
 	/**
-	 * Используется в
-	 * @see Df_AccessControl_Model_Role::_construct()
-	 * @see Df_AccessControl_Model_Resource_Role_Collection::_construct()
-	 * @return string
+	 * @used-by _construct()
+	 * @used-by tableCreate()
+	 * @var string
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	private static $TABLE = 'df_access_control/role';
+
 	/** @return Df_AccessControl_Model_Resource_Role */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

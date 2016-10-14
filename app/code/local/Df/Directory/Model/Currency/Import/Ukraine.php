@@ -35,5 +35,5 @@ class Df_Directory_Model_Currency_Import_Ukraine extends Df_Directory_Model_Curr
 	 * @return string
 	 */
 	protected function getUrl() {return 'http://bank-ua.com/export/currrate.xml';}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

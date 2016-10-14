@@ -5,17 +5,17 @@
 			<!--
 				данный блок используется лишь для модификации другого блока
 			-->
-            <block type='df_cms/adminhtml_cms_page' name='cms_page_extender' />
+            <block type='df_cms/admin_page' name='cms_page_extender' />
         </reference>
     </adminhtml_cms_page_index>
     <adminhtml_cms_page_edit>
         <reference name='cms_page_edit_tabs'>
             <block
-				type='df_cms/adminhtml_cms_page_edit'
+				type='df_cms/admin_page_edit'
 				name='cms_page_edit_extender'
 			/>
             <block
-				type='df_cms/adminhtml_cms_page_edit_tab_hierarchy'
+				type='df_cms/admin_page_edit_tab_hierarchy'
 				name='cms_page_edit_tab_hierarchy'
 				template='df/cms/page/tab/hierarchy.phtml'
 			></block>
@@ -48,7 +48,7 @@
 			>
 				<name>meta_section</name>
 			</action>
-			<block type='df_cms/adminhtml_cms_page_edit_tab_versions' name='cms_page_edit_tab_versions' />
+			<block type='df_cms/admin_page_edit_tab_versions' name='cms_page_edit_tab_versions' />
 			<action
 				method='addTab'
 				ifconfig='df_cms/versioning/enabled'
@@ -63,7 +63,7 @@
 -->
     <adminhtml_cms_page_versions>
         <remove name='root' />
-        <block type='df_cms/adminhtml_cms_page_edit_tab_versions'  output='toHtml' name='cms_page_edit_versions' />
+        <block type='df_cms/admin_page_edit_tab_versions'  output='toHtml' name='cms_page_edit_versions' />
     </adminhtml_cms_page_versions>
 <!--
     Revision edit interface
@@ -71,15 +71,15 @@
     <adminhtml_cms_page_revision_edit>
         <update handle='editor'/>
         <reference name='content'>
-            <block type='df_cms/adminhtml_cms_page_revision_edit' name='cms_page_revision_edit'>
-                <block type='df_cms/adminhtml_cms_page_revision_edit_info' name='revision_info' template='df/cms/page/revision/info.phtml' />
+            <block type='df_cms/admin_page_revision_edit' name='cms_page_revision_edit'>
+                <block type='df_cms/admin_page_revision_edit_info' name='revision_info' template='df/cms/page/revision/info.phtml' />
             </block>
         </reference>
         <reference name='left'>
-            <block type='df_cms/adminhtml_cms_page_revision_edit_tabs' name='cms_page_revision_edit_tabs'>
-                <action method='addTab'><name>content_section</name><block>df_cms/adminhtml_cms_page_revision_edit_tab_content</block></action>
-                <action method='addTab'><name>design_section</name><block>df_cms/adminhtml_cms_page_revision_edit_tab_design</block></action>
-                <action method='addTab'><name>meta_section</name><block>df_cms/adminhtml_cms_page_revision_edit_tab_meta</block></action>
+            <block type='df_cms/admin_page_revision_edit_tabs' name='cms_page_revision_edit_tabs'>
+                <action method='addTab'><name>content_section</name><block>df_cms/admin_page_revision_edit_tab_content</block></action>
+                <action method='addTab'><name>design_section</name><block>df_cms/admin_page_revision_edit_tab_design</block></action>
+                <action method='addTab'><name>meta_section</name><block>df_cms/admin_page_revision_edit_tab_meta</block></action>
             </block>
         </reference>
     </adminhtml_cms_page_revision_edit>
@@ -89,11 +89,11 @@
     <adminhtml_cms_page_revision_preview>
         <reference name='root'>
             <action method='setTemplate'><template>df/cms/page/preview.phtml</template></action>
-            <block type='df_cms/adminhtml_cms_page_preview_form' name='preview_form' />
+            <block type='df_cms/admin_page_preview_form' name='preview_form' />
             <block type='core/text_list' name='tools' as='tools'>
-                <block type='df_cms/adminhtml_cms_page_preview_store' name='store_switcher' template='df/cms/page/preview/store.phtml' />
-                <block type='df_cms/adminhtml_cms_page_preview_revision' name='revision_switcher' template='df/cms/page/preview/revision.phtml' />
-                <block type='df_cms/adminhtml_cms_page_preview_buttons' name='preview_control_buttons' />
+                <block type='df_cms/admin_page_preview_store' name='store_switcher' template='df/cms/page/preview/store.phtml' />
+                <block type='df_cms/admin_page_preview_revision' name='revision_switcher' template='df/cms/page/preview/revision.phtml' />
+                <block type='df_cms/admin_page_preview_buttons' name='preview_control_buttons' />
             </block>
         </reference>
     </adminhtml_cms_page_revision_preview>
@@ -102,8 +102,8 @@
 -->
     <adminhtml_cms_page_version_edit>
         <reference name='content'>
-            <block type='df_cms/adminhtml_cms_page_version_edit' name='cms_page_version_edit'>
-                <block type='df_cms/adminhtml_cms_page_version_edit_revisions' name='cms_page_version_edit_revisions_grid' />
+            <block type='df_cms/admin_page_version_edit' name='cms_page_version_edit'>
+                <block type='df_cms/admin_page_version_edit_revisions' name='cms_page_version_edit_revisions_grid' />
             </block>
         </reference>
     </adminhtml_cms_page_version_edit>
@@ -112,7 +112,7 @@
 -->
     <adminhtml_cms_page_version_revisions>
         <remove name='root' />
-        <block type='df_cms/adminhtml_cms_page_version_edit_revisions'  output='toHtml' name='cms_page_edit_version_edit_revisions' />
+        <block type='df_cms/admin_page_version_edit_revisions'  output='toHtml' name='cms_page_edit_version_edit_revisions' />
     </adminhtml_cms_page_version_revisions>
 <!--
     Main Page of Hierarchy Editor
@@ -122,8 +122,8 @@
             <action method='setCanLoadExtJs'><flag>1</flag></action>
         </reference>
         <reference name='content'>
-            <block type='df_cms/adminhtml_cms_hierarchy_edit' name='df_cms_hierarchy_edit_tree'>
-                <block type='df_cms/adminhtml_cms_hierarchy_edit_form_grid' name='cms_page_grid' />
+            <block type='df_cms/admin_hierarchy_edit' name='df_cms_hierarchy_edit_tree'>
+                <block type='df_cms/admin_hierarchy_edit_form_grid' name='cms_page_grid' />
             </block>
         </reference>
         <block type='adminhtml/store_switcher' name='store_switcher' />
@@ -141,6 +141,6 @@
 -->
     <adminhtml_cms_hierarchy_pagegrid>
         <remove name='root' />
-        <block type='df_cms/adminhtml_cms_hierarchy_edit_form_grid' name='cms_page_grid' output='toHtml' />
+        <block type='df_cms/admin_hierarchy_edit_form_grid' name='cms_page_grid' output='toHtml' />
     </adminhtml_cms_hierarchy_pagegrid>
 </layout>

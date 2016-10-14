@@ -16,10 +16,10 @@
 									?>
 										<li class="<?php echo $odd ? "df-odd" : "df-even"; ?>">
 											<div class="df-cell df-key">
-												<?php echo df_text()->escapeHtml($key); ?>
+												<?php echo rm_e($key); ?>
 											</div>
 											<div class="df-cell df-value">
-												<?php echo df_text()->escapeHtml($value); ?>
+												<?php echo rm_e($value); ?>
 											</div>
 										</li>
 									<?php

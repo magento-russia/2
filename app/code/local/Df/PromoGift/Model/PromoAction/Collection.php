@@ -5,8 +5,8 @@
 class Df_PromoGift_Model_PromoAction_Collection extends Df_Varien_Data_Collection {
 	/**
 	 * @override
-	 * @param bool $printQuery[optional]
-	 * @param bool $logQuery[optional]
+	 * @param bool $printQuery [optional]
+	 * @param bool $logQuery [optional]
 	 * @return  Varien_Data_Collection
 	 */
 	public function loadData($printQuery = false, $logQuery = false) {
@@ -17,7 +17,7 @@ class Df_PromoGift_Model_PromoAction_Collection extends Df_Varien_Data_Collectio
 			 * Наполняем коллекцию элементами
 			 */
 			foreach ($this->getApplicableGiftingRules() as $rule) {
-				/** @var Mage_SalesRule_Model_Rule $rule */
+				/** @var Df_PromoGift_Model_Rule $rule */
 				/** @var Df_PromoGift_Model_PromoAction $promoAction */
 				$promoAction = Df_PromoGift_Model_PromoAction::i($rule);
 				/**
@@ -38,30 +38,30 @@ class Df_PromoGift_Model_PromoAction_Collection extends Df_Varien_Data_Collectio
 		return $this;
 	}
 
-	/** @return Df_Varien_Data_Collection */
+	/** @return Df_PromoGift_Model_Resource_Rule_Collection */
 	private function getApplicableGiftingRules() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_PromoGift_Model_Resource_Rule_Collection $result */
-			$result = Df_PromoGift_Model_Resource_Rule_Collection::i();
+			$result = Df_PromoGift_Model_Rule::c();
 			// Отбраковываем правила, не относящиеся к обрабатываемому сайту $website
-			$result->addWebsiteFilter(array( Mage::app()->getWebsite()->getId()));
+			$result->addWebsiteFilter(array(rm_website_id()));
 			// Отбраковываем ещё не начавшиеся правила
 			$result->addNotStartedYetRulesExclusionFilter();
+			$result->filterByCurrentQuote();
 			// Отбираем применимые к данному заказу правила
-			$this->{__METHOD__} =
-				Df_PromoGift_Model_Filter_Rule_Collection_ByCurrentQuote::i()->filter($result)
-			;
+			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * @override
+	 * @see Df_Varien_Data_Collection::itemClass()
+	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function getItemClass() {return Df_PromoGift_Model_PromoAction::_CLASS;}
+	protected function itemClass() {return Df_PromoGift_Model_PromoAction::_C;}
 
-	const _CLASS = __CLASS__;
 	/** @return Df_PromoGift_Model_PromoAction_Collection */
 	public static function i() {return new self;}
 }

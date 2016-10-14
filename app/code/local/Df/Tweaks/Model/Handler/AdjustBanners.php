@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent()
- */
+/** @method Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter getEvent() */
 class Df_Tweaks_Model_Handler_AdjustBanners extends Df_Core_Model_Handler {
 	/**
 	 * Метод-обработчик события
@@ -9,21 +7,15 @@ class Df_Tweaks_Model_Handler_AdjustBanners extends Df_Core_Model_Handler {
 	 * @return void
 	 */
 	public function handle() {
-		/** @var Df_Tweaks_Model_Settings_Banners_Left $settingsLeft */
-		$settingsLeft = df_cfg()->tweaks()->banners()->left();
-		if (
-				$this->needRemove($settingsLeft)
-			||
-				(
-						$settingsLeft->removeFromAccount()
-					&&
-						rm_handle_presents(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
-				)
+		/** @var Df_Tweaks_Model_Settings_Banners_Left $s */
+		$s = Df_Tweaks_Model_Settings_Banners_Left::s();
+		if ($this->needRemove($s)
+			|| $s->removeFromAccount() && rm_handle_presents(Df_Core_Model_Layout_Handle::CUSTOMER_ACCOUNT)
 		) {
-			df()->layout()->removeBlock('left.permanent.callout');
+			rm_block_remove('left.permanent.callout');
 		}
-		if ($this->needRemove(df_cfg()->tweaks()->banners()->right())) {
-			df()->layout()->removeBlock('right.permanent.callout');
+		if ($this->needRemove(Df_Tweaks_Model_Settings_Banners_Right::s())) {
+			rm_block_remove('right.permanent.callout');
 		}
 	}
 
@@ -33,36 +25,37 @@ class Df_Tweaks_Model_Handler_AdjustBanners extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_CLASS;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
 	}
 
 	/**
-	 * @param Df_Tweaks_Model_Settings_Banners_Abstract $settings
+	 * @param Df_Tweaks_Model_Settings_Banners_Abstract $s
 	 * @return bool
 	 */
-	private function needRemove(Df_Tweaks_Model_Settings_Banners_Abstract $settings) {
+	private function needRemove(Df_Tweaks_Model_Settings_Banners_Abstract $s) {
 		return
-				$settings->removeFromAll()
+				$s->removeFromAll()
 			||
 				(
-						$settings->removeFromFrontpage()
+						$s->removeFromFrontpage()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 				)
 			||
 				(
-						$settings->removeFromCatalogProductList()
+						$s->removeFromCatalogProductList()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 				)
 			||
 				(
-						$settings->removeFromCatalogProductView()
+						$s->removeFromCatalogProductView()
 					&&
 						rm_handle_presents(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				)
 		;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

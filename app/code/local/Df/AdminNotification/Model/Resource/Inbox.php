@@ -14,25 +14,16 @@ class Df_AdminNotification_Model_Resource_Inbox extends Mage_AdminNotification_M
 		 * Для совместимости с модулем M-Turbo, который вызывает метод parse
 		 * прямо из установочного скрипта
 		 */
-		if (!function_exists('df_enabled')) {
+		if (!function_exists('df_cfg')) {
 			parent::parse($object, $data);
 		}
 		else {
 			/** @var bool $patchNeeded */
 			static $patchNeeded;
-			if (!isset($patchNeeded)) {
-				$patchNeeded =
-						df_enabled(Df_Core_Feature::TWEAKS_ADMIN)
-					&&
-						df_cfg()->admin()->system()->notifications()->getFixReminder()
-				;
+			if (is_null($patchNeeded)) {
+				$patchNeeded = df_cfg()->admin()->system()->notifications()->getFixReminder();
 			}
-			if ($patchNeeded) {
-				$this->parseDf($object, $data);
-			}
-			else {
-				parent::parse($object, $data);
-			}
+			$patchNeeded ? $this->parseDf($object, $data) : parent::parse($object, $data);
 		}
 	}
 
@@ -43,22 +34,17 @@ class Df_AdminNotification_Model_Resource_Inbox extends Mage_AdminNotification_M
 	public function parseDf(Mage_AdminNotification_Model_Inbox $object, array $data) {
 		/** @var Varien_Db_Adapter_Pdo_Mysql $adapter */
 		$adapter = $this->_getWriteAdapter();
-		/**
-		 * В Magento ранее версии 1.6 отсутствует интерфейс Varien_Db_Adapter_Interface,
-		 * поэтому там адаптер принадлежит к классу Varien_Db_Adapter_Pdo_Mysql
-		 */
 		foreach ($data as $item) {
 			/** @var array(string => string) $item */
 			df_assert_array($item);
 			/** @var Varien_Db_Select $select */
 			$select =
 				$adapter->select()
-					->from($this->getMainTable())
-					->where('url=? OR url IS null', $item['url'])
-					->where('title=?', $item['title'])
+					->from($this->getMainTable(), $this->getIdFieldName())
+					->where('(? = url) OR (url IS NULL)', $item['url'])
+					->where('? = title', $item['title'])
 			;
 			/** @var array|bool|null $row */
-			$row = false;
 			if (isset($item['internal'])) {
 				$row = false;
 				unset($item['internal']);
@@ -70,4 +56,17 @@ class Df_AdminNotification_Model_Resource_Inbox extends Mage_AdminNotification_M
 			}
 		}
 	}
+
+	/**
+	 * 2015-02-09
+	 * Возвращаем объект-одиночку именно таким способом,
+	 * потому что наш класс перекрывает посредством <rewrite>
+	 * системный класс @see Mage_AdminNotification_Model_Resource_Inbox,
+	 * и мы хотим, чтобы вызов @see Mage::getResourceSingleton() ядром Magento
+	 * возвращал тот же объект, что и наш метод @see s(),
+	 * сохраняя тем самым объект одиночкой (это важно, например, для производительности:
+	 * сохраняя объект одиночкой — мы сохраняем его кэш между всеми пользователями объекта).
+	 * @return Df_AdminNotification_Model_Resource_Inbox
+	 */
+	public static function s() {return Mage::getResourceSingleton('adminnotification/inbox');}
 }

@@ -1,6 +1,10 @@
 <?php
 /**
+ * @method bool|null getIsNewPage()
  * @method Df_Cms_Model_Resource_Page getResource()
+ * @method bool|null getUnderVersionControl()
+ * @method Df_Cms_Model_Page setIsNewPage(bool $value)
+ * @method Df_Cms_Model_Page setPublishedRevisionId($value)
  */
 class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 	/**
@@ -12,9 +16,9 @@ class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 		try {
 			$this->delete();
 		}
-		catch(Exception $e) {
+		catch (Exception $e) {
 			rm_admin_end();
-			throw $e;
+			df_error($e);
 		}
 		rm_admin_end();
 		return $this;
@@ -37,13 +41,25 @@ class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 
 	/**
 	 * @override
-	 * @return void
+	 * @return Df_Cms_Model_Resource_Page_Collection
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Cms_Model_Resource_Page::mf());
-	}
-	const _CLASS = __CLASS__;
+	public function getResourceCollection() {return self::c();}
+
+	/**
+	 * @override
+	 * @return Df_Cms_Model_Resource_Page
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
+	 */
+	protected function _getResource() {return Df_Cms_Model_Resource_Page::s();}
+
+	/**
+	 * @used-by Df_Cms_Model_Resource_Page_Collection::_construct()
+	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Page::getEntityClass()
+	 * @used-by Df_Localization_Onetime_Processor_Cms_Page::_construct()
+	 */
+	const _C = __CLASS__;
 	const P__IDENTIFIER = 'identifier';
 	const P__IS_ACTIVE = 'is_active';
 	const P__STORE_ID = 'store_id';
@@ -90,18 +106,13 @@ class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 		/**
 		 * Чтобы избежать сбоя при сохранении страницы:
 		 * «A page URL key for specified store already exists»
-		 * «Адрес страницы для указанного магазина уже существует»
+		 * («Адрес страницы для указанного магазина уже существует»)
 		 * @see Mage_Cms_Model_Resource_Page::getIsUniquePageToStores()
 		 */
 		$result->loadStoresInfo();
 		return $result->getId() ? $result : null;
 	}
 
-	/**
-	 * @see Df_Cms_Model_Resource_Page_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Cms_Model_Page */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

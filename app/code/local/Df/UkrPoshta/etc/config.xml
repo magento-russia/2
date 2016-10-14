@@ -15,7 +15,7 @@
 		<carriers>
 			<df-ukr-poshta>
 				<active>0</active>
-				<model>df_ukr_poshta/carrier</model>
+				<model>Df_UkrPoshta_Model_Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки
@@ -39,7 +39,7 @@
 	<df>
 		<features>
 			<df-ukr-poshta>
-				<module>df_ukr_poshta</module>
+				<module>Df_UkrPoshta</module>
 				<title>Укрпошта (Укрпочта)</title>
 				<url>http://magento-forum.ru/forum/256/</url>
 			</df-ukr-poshta>
@@ -54,23 +54,23 @@
 					-->
 					<lightweight-to-home>
 						<title>до квартиры / офиса</title>
-						<class>df_ukr_poshta/method_lightweight_toHome</class>
+						<class>Df_UkrPoshta_Model_Method_Lightweight_ToHome</class>
 					</lightweight-to-home>
 					<lightweight-to-point-of-issue>
 						<title>до пункта выдачи</title>
-						<class>df_ukr_poshta/method_lightweight_toPointOfIssue</class>
+						<class>Df_UkrPoshta_Model_Method_Lightweight_ToPointOfIssue</class>
 					</lightweight-to-point-of-issue>
 					<universal-air>
 						<title>авиадоставка до пункта выдачи</title>
-						<class>df_ukr_poshta/method_universal_air</class>
+						<class>Df_UkrPoshta_Model_Method_Universal_Air</class>
 					</universal-air>
 					<universal-ground-to-home>
 						<title>до квартиры / офиса</title>
-						<class>df_ukr_poshta/method_universal_ground_toHome</class>
+						<class>Df_UkrPoshta_Model_Method_Universal_Ground_ToHome</class>
 					</universal-ground-to-home>
 					<universal-ground-to-point-of-issue>
 						<title>до пункта выдачи</title>
-						<class>df_ukr_poshta/method_universal_ground_toPointOfIssue</class>
+						<class>Df_UkrPoshta_Model_Method_Universal_Ground_ToPointOfIssue</class>
 					</universal-ground-to-point-of-issue>
 				</allowed-methods>
 			</ukr-poshta>

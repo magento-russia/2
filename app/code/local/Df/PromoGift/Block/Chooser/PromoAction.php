@@ -6,40 +6,25 @@ class Df_PromoGift_Block_Chooser_PromoAction extends Df_Core_Block_Template_NoCa
 	}
 
 	/** @return Df_Varien_Data_Collection */
-	public function getGifts() {
-		return $this->getPromoAction()->getGifts();
-	}
+	public function getGifts() {return $this->getPromoAction()->getGifts();}
 
 	/** @return Df_PromoGift_Model_PromoAction */
-	public function getPromoAction() {
-		return $this->_promoAction;
-	}
+	public function getPromoAction() {return $this[self::$P__PROMO_ACTION];}
+
+	/** @var string */
+	private static $P__PROMO_ACTION = 'promo_action';
 
 	/**
-	 * @param Df_PromoGift_Model_Gift $gift
-	 * @param string $template
+	 * @used-by df/promo_gift/chooser/center/main.phtml
+	 * @used-by df/promo_gift/chooser/side/main.phtml
+	 * @param Df_PromoGift_Model_PromoAction $promoAction
+	 * @param $template
 	 * @return string
 	 */
-	public function renderGift(Df_PromoGift_Model_Gift $gift, $template) {
-		df_param_string($template, 1);
-		/** @var Df_PromoGift_Block_Chooser_Gift $block */
-		$block = Df_PromoGift_Block_Chooser_Gift::i();
-		$block->setGift($gift);
-		$block->setTemplate($template);
-		return $block->renderView();
+	public static function r(Df_PromoGift_Model_PromoAction $promoAction, $template) {
+		return rm_render(new self(array(
+			self::$P__PROMO_ACTION => $promoAction
+			, 'template' => "df/promo_gift/chooser/{$template}/promo-action.phtml"
+		)));
 	}
-
-	/**
-	 * @param Df_PromoGift_Model_PromoAction $promoAction
-	 * @return Df_PromoGift_Block_Chooser_PromoAction
-	 */
-	public function setPromoAction(Df_PromoGift_Model_PromoAction $promoAction) {
-		$this->_promoAction = $promoAction;
-		return $this;
-	}
-	/** @var Df_PromoGift_Model_PromoAction */
-	private $_promoAction;
-
-	/** @return Df_PromoGift_Block_Chooser_PromoAction */
-	public static function i() {return df_block(__CLASS__);}
 }

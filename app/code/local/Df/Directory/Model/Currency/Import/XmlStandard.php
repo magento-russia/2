@@ -85,10 +85,10 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 		if (!isset($this->{__METHOD__})) {
 			/** @var array $result */
 			$result = array();
-			/** @var Df_Varien_Simplexml_Element $currenciesAsSimpleXml */
+			/** @var Df_Core_Sxe $currenciesAsSimpleXml */
 			$currenciesAsSimpleXml = $this->getSimpleXml()->descendO($this->getTagName_CurrencyItem());
 			foreach ($currenciesAsSimpleXml as $currencyAsSimpleXml) {
-				/** @var Df_Varien_Simplexml_Element $currencyAsSimpleXml */
+				/** @var Df_Core_Sxe $currencyAsSimpleXml */
 				/**
 					<Valute ID="R01720">
 						<NumCode>980</NumCode>
@@ -141,18 +141,18 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 		return $result;
 	}
 
-	/** @return Df_Varien_Simplexml_Element */
+	/** @return Df_Core_Sxe */
 	private function getSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			try {
 				$this->{__METHOD__} = rm_xml(file_get_contents($this->getUrl()));
 			}
-			catch(Exception $e) {
+			catch (Exception $e) {
 				$this->throwServiceFailure($this->getUrl());
 			}
 		}
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

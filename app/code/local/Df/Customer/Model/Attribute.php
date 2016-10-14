@@ -6,17 +6,7 @@ class Df_Customer_Model_Attribute extends Mage_Customer_Model_Attribute {
 	 * @override
 	 * @return string
 	 */
-	public function getFrontendLabel() {
-		return
-			(
-					function_exists('df_enabled')
-				&&
-					df_enabled(Df_Core_Feature::LOCALIZATION)
-			)
-			? $this->getFrontendLabelDf()
-			: parent::getData(self::P__FRONTEND_LABEL)
-		;
-	}
+	public function getFrontendLabel() {return $this->getFrontendLabelDf();}
 
 	/** @return string */
 	private function getFrontendLabelDf() {

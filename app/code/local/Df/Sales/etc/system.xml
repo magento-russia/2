@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_sales translate='label' module='df_sales'>
+		<df_sales>
 			<label>Продажи</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -10,7 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-				<order_comments translate='label'>
+				<order_comments>
 					<label>Примечания к заказу</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>1000</sort_order>
@@ -35,10 +35,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-sales</df_feature>
 						</admin_order_create__comment_is_visible_on_front>
-						<preserve_line_breaks_in_customer_account translate='label'>
+						<preserve_line_breaks_in_customer_account>
 							<label>Сохранять ли переносы строк
 								при отображении комментария к заказу в Личном кабинете покупателя?
 							</label>
@@ -58,7 +58,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</preserve_line_breaks_in_customer_account>
-						<preserve_line_breaks_in_order_email translate='label'>
+						<preserve_line_breaks_in_order_email>
 							<label>
 								Разбивать ли текст примечания к заказу на строки в том виде,как их разбивал комментатор при создании примечения,при отображении примечания в письме-оповещении о заказе?
 							</label>
@@ -78,7 +78,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</preserve_line_breaks_in_order_email>
-						<wrap_in_standard_frame_in_order_email translate='label'>
+						<wrap_in_standard_frame_in_order_email>
 							<label>
 								Нарисовать ли вокруг примечания к заказу в письме-оповещении о заказе
 								точно такую же рамку, как и для других блоков письма?
@@ -97,7 +97,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</wrap_in_standard_frame_in_order_email>
-						<preserve_line_breaks_in_admin_order_view translate='label'>
+						<preserve_line_breaks_in_admin_order_view>
 							<label>
 								Разбивать ли текст примечания к заказу на строки в том виде,как их разбивал комментатор при создании примечения,при отображении примечания на административном экране заказа?
 							</label>
@@ -117,7 +117,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</preserve_line_breaks_in_admin_order_view>
-						<preserve_some_tags_in_admin_order_view translate='label'>
+						<preserve_some_tags_in_admin_order_view>
 							<label>
 								Сохранить ли безопасные теги
 								при отображении примечания к заказу
@@ -140,7 +140,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</preserve_some_tags_in_admin_order_view>
-						<tags_to_preserve_in_admin_order_view translate='label'>
+						<tags_to_preserve_in_admin_order_view>
 							<label>
 								Теги, которые система должна считать безопасными
 								при отображении примечания к заказу
@@ -164,7 +164,7 @@
 						</tags_to_preserve_in_admin_order_view>
 					</fields>
 				</order_comments>
-				<order_grid__product_column translate='label'>
+				<order_grid__product_column>
 					<label>Таблица заказов. Колонка с перечислением заказанных товаров</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>2000</sort_order>
@@ -172,7 +172,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<enabled translate='label'>
+						<enabled>
 							<label>Добавить колонку с перечислением заказанных товаров?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -180,10 +180,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-sales</df_feature>
 						</enabled>
-						<ordering translate='label'>
+						<ordering>
 							<label>Порядковый номер для колонки</label>
 							<comment>
 								<![CDATA[
@@ -204,7 +204,7 @@
 								validate-greater-than-zero
 							</validate>
 						</ordering>
-						<show_all_products translate='label'>
+						<show_all_products>
 							<label>Перечислять все товары без исключения?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -214,7 +214,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><enabled>1</enabled></depends>
 						</show_all_products>
-						<max_products_to_show translate='label'>
+						<max_products_to_show>
 							<label>Перечислить не более указанного количества товаров:</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>4000</sort_order>
@@ -230,7 +230,7 @@
 								validate-greater-than-zero
 							</validate>
 						</max_products_to_show>
-						<show_name translate='label'>
+						<show_name>
 							<label>Показывать названия товаров?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -242,7 +242,7 @@
 								<enabled>1</enabled>
 							</depends>
 						</show_name>
-						<chop_name translate='label'>
+						<chop_name>
 							<label>Обрезать названия товаров (для краткости)?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -255,7 +255,7 @@
 								<show_name>1</show_name>
 							</depends>
 						</chop_name>
-						<product_name_max_length translate='label'>
+						<product_name_max_length>
 							<label>Максимально допустимое количество символов в названии товара</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>7000</sort_order>
@@ -272,7 +272,7 @@
 								validate-greater-than-zero
 							</validate>
 						</product_name_max_length>
-						<name_width translate='label'>
+						<name_width>
 							<label>Ширина поля для названия товара</label>
 							<comment>
 								<![CDATA[
@@ -294,7 +294,7 @@
 								validate-percents
 							</validate>
 						</name_width>
-						<show_qty translate='label'>
+						<show_qty>
 							<label>Показывать заказанные количества товаров?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -304,7 +304,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><enabled>1</enabled></depends>
 						</show_qty>
-						<qty_width translate='label'>
+						<qty_width>
 							<label>Ширина поля для заказанного количества товара</label>
 							<comment>
 								<![CDATA[
@@ -326,7 +326,7 @@
 								validate-percents
 							</validate>
 						</qty_width>
-						<show_sku translate='label'>
+						<show_sku>
 							<label>Показывать артикулы?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -338,7 +338,7 @@
 								<enabled>1</enabled>
 							</depends>
 						</show_sku>
-						<sku_width translate='label'>
+						<sku_width>
 							<label>Ширина поля для артикула товара</label>
 							<comment>
 								<![CDATA[
@@ -360,10 +360,10 @@
 								validate-percents
 							</validate>
 						</sku_width>
-						<order_by translate='label'>
+						<order_by>
 							<label>Упорядочить товары по:</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_sales/system_config_source_orderGridColumnProductNames_orderBy</source_model>
+							<source_model>Df_Sales_Model_Config_Source_OrderBy</source_model>
 							<sort_order>13000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -372,10 +372,10 @@
 								<enabled>1</enabled>
 							</depends>
 						</order_by>
-						<order_direction translate='label'>
+						<order_direction>
 							<label>Направление упорядочивания</label>
 							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_orderingDirection</source_model>
+							<source_model>Df_Admin_Config_Source_OrderingDirection</source_model>
 							<sort_order>14000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>

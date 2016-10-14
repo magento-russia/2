@@ -11,7 +11,8 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 	/** @return string */
 	protected function enumerateBlocks() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = implode(', ', $this->getBlocks()->walk(array($this, 'getBlockTitle')));
+			/** @uses getBlockTitle() */
+			$this->{__METHOD__} = df_csv_pretty($this->getBlocks()->walk(array($this, 'getBlockTitle')));
 		}
 		return $this->{__METHOD__};
 	}
@@ -21,9 +22,11 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/cms/notifier/delete_orphan_blocks.phtml';}
+	protected function defaultTemplate() {return 'df/cms/notifier/delete_orphan_blocks.phtml';}
 
 	/** @return Df_Cms_Model_Resource_Block_Collection */
 	private function getBlocks() {return $this->cfg(self::$P__BLOCKS);}
@@ -34,7 +37,7 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__BLOCKS, Df_Cms_Model_Resource_Block_Collection::_CLASS);
+		$this->_prop(self::$P__BLOCKS, Df_Cms_Model_Resource_Block_Collection::_C);
 	}
 	/** @var string */
 	private static $P__BLOCKS = 'blocks';
@@ -43,6 +46,6 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 	 * @return string
 	 */
 	public static function render(Df_Cms_Model_Resource_Block_Collection $blocks) {
-		return df_block_render(__CLASS__, '', array(self::$P__BLOCKS => $blocks));
+		return rm_render(__CLASS__, array(self::$P__BLOCKS => $blocks));
 	}
 }

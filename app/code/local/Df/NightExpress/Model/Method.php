@@ -8,62 +8,41 @@ abstract class Df_NightExpress_Model_Method extends Df_Shipping_Model_Method_Ukr
 
 	/**
 	 * @override
-	 * @return string
+	 * @return void
+	 * @throws Exception
 	 */
-	public function getMethodTitle() {
-		return
-			implode(
-				' '
-				,array(
-					rm_sprintf('%s:', parent::getMethodTitle())
-					,rm_sprintf('%s', $this->formatTimeOfDelivery(1))
-				)
-			)
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsUkraine()
+			->checkCountryDestinationIsUkraine()
+			->checkCityOriginIsNotEmpty()
+			->checkCityDestinationIsNotEmpty()
+			->checkLocationIdOrigin()
+			->checkLocationIdDestination()
 		;
 	}
 
 	/**
 	 * @override
-	 * @return bool
-	 * @throws Exception
+	 * @used-by Df_Shipping_Model_Method::_getCost()
+	 * @return float
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsUkraine()
-					->checkCountryDestinationIsUkraine()
-					->checkCityOriginIsNotEmpty()
-					->checkCityDestinationIsNotEmpty()
-				;
-				if (!$this->getLocationIdOrigin()) {
-					$this->throwExceptionInvalidOrigin();
-				}
-				if (!$this->getLocationIdDestination()) {
-					$this->throwExceptionInvalidDestination();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
+	protected function getCost() {
+		/** @var float $result */
+		$result = $this->getApi()->getRate();
+		if ($this->configS()->needGetCargoFromTheShopStore()) {
+			$result += 25;
 		}
 		return $result;
 	}
 
 	/**
 	 * @override
-	 * @return float
+	 * @used-by Df_Shipping_Model_Method::_getDeliveryTime()
+	 * @return int|int[]
 	 */
-	protected function getCostInHryvnias() {
-		/** @var float $result */
-		$result = $this->getApi()->getRate();
-		if ($this->getRmConfig()->service()->needGetCargoFromTheShopStore()) {
-			$result += 25;
-		}
-		return $result;
-	}
+	protected function getDeliveryTime() {return 1;}
 
 	/**
 	 * @override
@@ -84,34 +63,26 @@ abstract class Df_NightExpress_Model_Method extends Df_Shipping_Model_Method_Ukr
 	/** @return array(string => string|int|float|bool) */
 	private function getPostParams() {
 		/** @var array(string => string|int|float|bool) $result */
-		$result =
-			array(
-				'to_door' => rm_bts($this->needDeliverToHome())
-				,'weight' =>
-					// Как ни странно, надо умножать именно на 100
-					100 * $this->getRequest()->getWeightInKilogrammes()
-				,'count' => $this->getRequest()->getDeclaredValueInHryvnias()
-				,'city_in' => $this->getLocationIdDestination()
-				,'city_out' => $this->getLocationIdOrigin()
-				,'vWeight' =>
-					/**
-					 * @link http://nightexpress.ua/delivery/answers?lang=ru
-					 */
-					250 * $this->getRequest()->getVolumeInCubicMetres()
-				/**
-				 * Здесь единицы тоже странноватые: сантиметры умноженные на 100.
-				 * Причем объемный вес рассчитывается из соотношения
-				 * 1 кг = 1 кубический дециметр.
-				 * Т.к. габариты мы простым образом посчитать не можем,
-				 * то подствляем такие, которые соответствуют массе.
-				 */
-				,'height' => 1000
-				,'width1' => 1000
-				,'width2' => 1000 * $this->getRequest()->getWeightInKilogrammes()
-			)
-		;
+		$result = array(
+			'to_door' => rm_bts($this->needDeliverToHome())
+			// Как ни странно, надо умножать именно на 100
+			,'weight' => 100 * $this->rr()->getWeightInKilogrammes()
+			,'count' => $this->rr()->getDeclaredValueInHryvnias()
+			,'city_in' => $this->getLocationIdDestination()
+			,'city_out' => $this->getLocationIdOrigin()
+			/** http://nightexpress.ua/delivery/answers?lang=ru */
+			,'vWeight' => 250 * $this->rr()->getVolumeInCubicMetres()
+			/**
+			 * Здесь единицы тоже странноватые: сантиметры умноженные на 100.
+			 * Причем объемный вес рассчитывается из соотношения
+			 * 1 кг = 1 кубический дециметр.
+			 * Т.к. габариты мы простым образом посчитать не можем,
+			 * то подствляем такие, которые соответствуют массе.
+			 */
+			,'height' => 1000
+			,'width1' => 1000
+			,'width2' => 1000 * $this->rr()->getWeightInKilogrammes()
+		);
 		return $result;
 	}
-
-	const _CLASS = __CLASS__;
 }

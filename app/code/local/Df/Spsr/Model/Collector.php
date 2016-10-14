@@ -1,17 +1,17 @@
 <?php
-class Df_Spsr_Model_Collector extends Df_Shipping_Model_Collector {
+class Df_Spsr_Model_Collector extends Df_Shipping_Collector {
 	/**
 	 * @override
 	 * @return Df_Shipping_Model_Method[]
 	 */
 	protected function getMethods() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Shipping_Model_Method[] $result */
-			$result = array();
 			$this->getRateRequest()->checkCountryOriginIs(Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA);
-			if (0 === count($this->getApi()->getRates())) {
+			/** @var Df_Shipping_Model_Method[] $result */
+			if (!$this->getApi()->getRates()) {
+				$result = array();
 				if (
-						$this->getCarrier()->getRmConfig()->frontend()->needDisplayDiagnosticMessages()
+						$this->main()->configF()->needDisplayDiagnosticMessages()
 					&&
 						$this->getApi()->getErrorMessage()
 				) {
@@ -19,13 +19,9 @@ class Df_Spsr_Model_Collector extends Df_Shipping_Model_Collector {
 				}
 			}
 			else {
-				foreach ($this->getApi()->getRates() as $rate) {
-					/** @var array $rate */
-					df_assert_array($rate);
-					$result[]= $this->createMethodByRate($rate);
-				}
+				/** @uses createMethodByRate() */
+				$result = array_map(array($this, 'createMethodByRate'), $this->getApi()->getRates());
 			}
-			df_result_array($result);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
@@ -44,29 +40,23 @@ class Df_Spsr_Model_Collector extends Df_Shipping_Model_Collector {
 		$result = Df_Spsr_Model_Method::i($rateTitle);
 		$result
 			->setRequest($this->getRateRequest())
-			->setCarrier($this->getCarrier()->getCarrierCode())
+			->setCarrier($this->main()->getCarrierCode())
 			/**
 			 * При оформлении заказа Magento игнорирует данное значение
 			 * и берёт заголовок способа доставки из реестра настроек:
-			 *
-				public function getCarrierName($carrierCode)
-				{
-					if ($name = Mage::getStoreConfig('carriers/'.$carrierCode.'/title')) {
-						return $name;
-					}
-					return $carrierCode;
-				}
+			 * @see Mage_Adminhtml_Block_Sales_Order_Create_Shipping_Method_Form::getCarrierName()
+			 * @see Mage_Checkout_Block_Cart_Shipping::getCarrierName()
+			 * @see Mage_Checkout_Block_Multishipping_Shipping::getCarrierName()
+			 * @see Mage_Checkout_Block_Onepage_Shipping_Method_Available::getCarrierName()
 			 */
-			->setCarrierTitle($this->getCarrier()->getTitle())
-			->addData(
-				array(
-					Df_Shipping_Model_Method::P__CARRIER_INSTANCE => $this->getCarrier()
-					,Df_Shipping_Model_Method::P__METHOD_TITLE => $rateTitle
-				)
-			)
+			->setCarrierTitle($this->main()->getTitle())
+			->addData(array(
+				Df_Shipping_Model_Method::P__CARRIER_INSTANCE => $this->main()
+				,Df_Shipping_Model_Method::P__METHOD_TITLE => $rateTitle
+			))
 		;
 		$result->setCost(
-			rm_currency()->convertFromRoublesToBase(
+			rm_currency_h()->convertFromRoublesToBase(
 				rm_float(df_a($rate, Df_Spsr_Model_Request_Rate::RATE__COST))
 				,$this->getRateRequest()->getStoreId()
 			)
@@ -86,12 +76,10 @@ class Df_Spsr_Model_Collector extends Df_Shipping_Model_Collector {
 			$this->{__METHOD__} = Df_Spsr_Model_Api_Calculator::i(array(
 				Df_Spsr_Model_Api_Calculator::P__REQUEST => $this->getRateRequest()
 				,Df_Spsr_Model_Api_Calculator::P__DECLARED_VALUE =>
-					rm_currency()->convertFromBaseToRoubles($this->declaredValueBase())
-				,Df_Spsr_Model_Api_Calculator::P__RM_CONFIG => $this->getRmConfig()
+					rm_currency_h()->convertFromBaseToRoubles($this->declaredValueBase())
+				,Df_Spsr_Model_Api_Calculator::P__RM_CONFIG => $this->config()
 			));
 		}
 		return $this->{__METHOD__};
 	}
-
-	const _CLASS = __CLASS__;
 }

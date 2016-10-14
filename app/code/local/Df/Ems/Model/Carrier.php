@@ -1,21 +1,18 @@
 <?php
-class Df_Ems_Model_Carrier extends Df_Shipping_Model_Carrier {
+class Df_Ems_Model_Carrier extends Df_Shipping_Carrier {
 	/**
 	 * @override
 	 * @return bool
 	 */
 	public function hasTheOnlyMethod() {return true;}
 	/**
-	 * Обратите внимание, что при браковке запроса в методе proccessAdditionalValidation
-	 * модуль может показать на экране оформления заказа диагностическое сообщение,
-	 * вернув из этого метода объект класса Mage_Shipping_Model_Rate_Result_Error.
-	 * При браковке запроса в методе collectRates модуль такой возможности лишён.
 	 * @override
+	 * @used-by Mage_Shipping_Model_Shipping::collectCarrierRates()
 	 * @param Mage_Shipping_Model_Rate_Request $request
-  	 * @return Df_Shipping_Model_Carrier|Mage_Shipping_Model_Rate_Result_Error|boolean
+  	 * @return Df_Shipping_Carrier|Mage_Shipping_Model_Rate_Result_Error|boolean
 	 */
 	public function proccessAdditionalValidation(Mage_Shipping_Model_Rate_Request $request) {
-		/** @var Df_Shipping_Model_Carrier|Mage_Shipping_Model_Rate_Result_Error|boolean $result */
+		/** @var Df_Shipping_Carrier|Mage_Shipping_Model_Rate_Result_Error|boolean $result */
 		$result = parent::proccessAdditionalValidation($request);
 		if (
 				(false !== $result)
@@ -23,7 +20,7 @@ class Df_Ems_Model_Carrier extends Df_Shipping_Model_Carrier {
 				!($result instanceof Mage_Shipping_Model_Rate_Result_Error)
 		) {
 			try {
-				/** @var Df_Shipping_Model_Rate_Request $rmRequest */
+				/** @var Df_Shipping_Rate_Request $rmRequest */
 				$rmRequest = $this->createRateRequest($request);
 				if (self::MAX_WEIGHT < $rmRequest->getWeightInKilogrammes()) {
 					df_error(
@@ -35,8 +32,8 @@ class Df_Ems_Model_Carrier extends Df_Shipping_Model_Carrier {
 					);
 				}
 			}
-			catch(Exception $e) {
-				$result = Df_Shipping_Model_Rate_Result_Error::i($this, rm_ets($e));
+			catch (Exception $e) {
+				$result = $this->createRateResultError($e);
 			}
 		}
 		return $result;

@@ -6,14 +6,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * «удалить», «не удалять», «удалить, если пуст»
 	 * @return string
 	 */
-	public function removeFromAccount() {
-		return
-			$this->getConfigValue(
-				'remove_from_account'
-				,Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__NO_REMOVE
-			)
-		;
-	}
+	public function removeFromAccount() {return $this->value('remove_from_account');}
 
 	/**
 	 * Метод возвращает значение типа string, а не boolean,
@@ -21,14 +14,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * «удалить», «не удалять», «удалить, если пуст»
 	 * @return string
 	 */
-	public function removeFromAll() {
-		return
-			$this->getConfigValue(
-				'remove_from_all'
-				,Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__NO_REMOVE
-			)
-		;
-	}
+	public function removeFromAll() {return $this->value('remove_from_all');}
 
 	/**
 	 * Метод возвращает значение типа string, а не boolean,
@@ -36,14 +22,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * «удалить», «не удалять», «удалить, если пуст»
 	 * @return string
 	 */
-	public function removeFromCatalogSearchResult() {
-		return
-			$this->getConfigValue(
-				'remove_from_catalog_search_result'
-				,Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__NO_REMOVE
-			)
-		;
-	}
+	public function removeFromCatalogSearchResult() {return $this->value('remove_from_catalog_search_result');}
 
 	/**
 	 * Метод возвращает значение типа string, а не boolean,
@@ -51,14 +30,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * «удалить», «не удалять», «удалить, если пуст»
 	 * @return string
 	 */
-	public function removeFromCatalogProductList() {
-		return
-			$this->getConfigValue(
-				'remove_from_catalog_product_list'
-				,Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__NO_REMOVE
-			)
-		;
-	}
+	public function removeFromCatalogProductList() {return $this->value('remove_from_catalog_product_list');}
 
 	/**
 	 * Метод возвращает значение типа string, а не boolean,
@@ -66,14 +38,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * «удалить», «не удалять», «удалить, если пуст»
 	 * @return string
 	 */
-	public function removeFromCatalogProductView() {
-		return
-			$this->getConfigValue(
-				'remove_from_catalog_product_view'
-				,Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__NO_REMOVE
-			)
-		;
-	}
+	public function removeFromCatalogProductView() {return $this->value('remove_from_catalog_product_view');}
 
 	/**
 	 * Метод возвращает значение типа string, а не boolean,
@@ -81,42 +46,27 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * «удалить», «не удалять», «удалить, если пуст»
 	 * @return string
 	 */
-	public function removeFromFrontpage() {
-		return
-			$this->getConfigValue(
-				'remove_from_frontpage'
-				,Df_Admin_Model_Config_Source_RemoveIfEmpty::VALUE__NO_REMOVE
-			)
-		;
-	}
-
-	/**
-	 * @param string $shortKey
-	 * @param string $defaultValue[optional]
-	 * @return string
-	 */
-	private function getConfigValue($shortKey, $defaultValue = '') {
-		df_param_string($defaultValue, 1);
-		/** @var string $result */
-		$result = Mage::getStoreConfig($this->translateConfigKeyFromShortToFull($shortKey));
-		if (is_null($result)) {
-			$result = $defaultValue;
-		}
-		df_result_string($result);
-		return $result;
-	}
+	public function removeFromFrontpage() {return $this->value('remove_from_frontpage');}
 
 	/** @return string */
-	private function getSection() {
-		return $this->cfg(self::P__SECTION);
-	}
+	private function getSection() {return $this->cfg(self::P__SECTION);}
 
 	/**
 	 * @param string $shortKey
 	 * @return string
 	 */
 	private function translateConfigKeyFromShortToFull($shortKey) {
-		return rm_config_key('df_tweaks', $this->getSection(), $shortKey);
+		return df_concat_xpath('df_tweaks', $this->getSection(), $shortKey);
+	}
+
+	/**
+	 * @param string $shortKey
+	 * @return string
+	 */
+	private function value($shortKey) {
+		/** @var string|null $result */
+		$result = Mage::getStoreConfig($this->translateConfigKeyFromShortToFull($shortKey));
+		return !is_null($result) ? $result : Df_Admin_Config_Source_RemoveIfEmpty::NO_REMOVE;
 	}
 
 	/**
@@ -125,9 +75,9 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__SECTION, self::V_STRING_NE);
+		$this->_prop(self::P__SECTION, RM_V_STRING_NE);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__SECTION = 'section';
 	/**
 	 * @static

@@ -8,45 +8,33 @@ abstract class Df_Autolux_Model_Method extends Df_Shipping_Model_Method_Ukraine 
 
 	/**
 	 * @override
-	 * @return bool
+	 * @return void
 	 * @throws Exception
 	 */
-	public function isApplicable() {
-		/** @var bool $result */
-		$result = parent::isApplicable();
-		if ($result) {
-			try {
-				$this
-					->checkCountryOriginIsUkraine()
-					->checkCountryDestinationIsUkraine()
-					->checkCityOriginIsNotEmpty()
-					->checkCityDestinationIsNotEmpty()
-				;
-				if (!$this->getLocationIdOrigin()) {
-					$this->throwExceptionInvalidOrigin();
-				}
-				if (!$this->getLocationIdDestination()) {
-					$this->throwExceptionInvalidDestination();
-				}
-			}
-			catch(Exception $e) {
-				if ($this->needDisplayDiagnosticMessages()) {throw $e;} else {$result = false;}
-			}
-		}
-		return $result;
+	protected function checkApplicability() {
+		parent::checkApplicability();
+		$this
+			->checkCountryOriginIsUkraine()
+			->checkCountryDestinationIsUkraine()
+			->checkCityOriginIsNotEmpty()
+			->checkCityDestinationIsNotEmpty()
+			->checkLocationIdOrigin()
+			->checkLocationIdDestination()
+		;
 	}
 
 	/**
 	 * @override
+	 * @used-by Df_Shipping_Model_Method::_getCost()
 	 * @return float
 	 */
-	protected function getCostInHryvnias() {
+	protected function getCost() {
 		/** @var float $result */
 		$result = $this->getCostInsurance() + $this->getRatePrimary();
 		if ($this->needDeliverToHome()) {
 			$result += 50;
 		}
-		if ($this->getRmConfig()->service()->needGetCargoFromTheShopStore()) {
+		if ($this->configS()->needGetCargoFromTheShopStore()) {
 			$result += 50;
 		}
 		// Стоимость отправки оплаты за груз составляет 14 грн. и 1% от суммы.
@@ -58,9 +46,7 @@ abstract class Df_Autolux_Model_Method extends Df_Shipping_Model_Method_Ukraine 
 	 * @override
 	 * @return array
 	 */
-	protected function getLocations() {
-		return Df_Autolux_Model_Request_Locations::s()->getLocations();
-	}
+	protected function getLocations() {return Df_Autolux_Model_Request_Locations::s()->getLocations();}
 
 	/** @return Df_Autolux_Model_Request_Rate */
 	private function getApi() {
@@ -71,9 +57,7 @@ abstract class Df_Autolux_Model_Method extends Df_Shipping_Model_Method_Ukraine 
 	}
 
 	/** @return float */
-	private function getCostInsurance() {
-		return max(1, 0.01 * $this->getRequest()->getDeclaredValueInHryvnias());
-	}
+	private function getCostInsurance() {return max(1, 0.01 * $this->rr()->getDeclaredValueInHryvnias());}
 
 	/** @return array */
 	private function getQueryParams() {
@@ -86,15 +70,9 @@ abstract class Df_Autolux_Model_Method extends Df_Shipping_Model_Method_Ukraine 
 	/** @return float */
 	private function getRatePrimary() {
 		/** @var float $rateByWeight */
-		$rateByWeight =
-			max(1, $this->getApi()->getFactorWeight() * $this->getRequest()->getWeightInKilogrammes())
-		;
+		$rateByWeight = max(1, $this->getApi()->getFactorWeight() * $this->rr()->getWeightInKilogrammes());
 		/** @var float $rateByVolume */
-		$rateByVolume =
-			max(1, $this->getApi()->getFactorVolume() * $this->getRequest()->getVolumeInCubicMetres())
-		;
+		$rateByVolume = max(1, $this->getApi()->getFactorVolume() * $this->rr()->getVolumeInCubicMetres());
 		return ceil(max($rateByWeight, $rateByVolume));
 	}
-
-	const _CLASS = __CLASS__;
 }

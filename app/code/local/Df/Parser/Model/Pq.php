@@ -21,6 +21,6 @@ abstract class Df_Parser_Model_Pq extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__PQ, 'phpQueryObject');
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__PQ = 'pq';
 }

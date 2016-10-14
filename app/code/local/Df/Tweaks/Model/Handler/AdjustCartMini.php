@@ -31,12 +31,13 @@ class Df_Tweaks_Model_Handler_AdjustCartMini extends Df_Tweaks_Model_Handler_Rem
 	/** @return Mage_Checkout_Block_Cart_Sidebar|null */
 	private function getBlock() {
 		/** @var Mage_Checkout_Block_Cart_Sidebar|null $result */
-		$result = rm_layout()->getBlock($this->getBlockName());
-		if (!($result instanceof Mage_Checkout_Block_Cart_Sidebar)) {
+		$result = rm_layout()->getBlock('cart_sidebar');
+		if (!$result instanceof Mage_Checkout_Block_Cart_Sidebar) {
 			$result = null;
 		}
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

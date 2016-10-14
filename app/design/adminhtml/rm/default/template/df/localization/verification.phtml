@@ -24,8 +24,8 @@
 					<ol class='df-files-body'>
 						<?php
 							foreach($this->getFiles() as $file) {
-								/** @var Df_Localization_Model_Translation_File $file  */
-								df_assert($file instanceof Df_Localization_Model_Translation_File);
+								/** @var Df_Localization_Translation_File $file  */
+								df_assert($file instanceof Df_Localization_Translation_File);
 								echo $this->renderFile($file);
 							}
 						?>

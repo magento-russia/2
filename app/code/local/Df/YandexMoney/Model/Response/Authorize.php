@@ -3,7 +3,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 	/**
 	 * «Адрес на который необходимо отправить пользователя для совершения необходимых действий
 	 * в случае ошибки ext_action_required.»
-	 * @link http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
+	 * http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
 	 * @return string|null
 	 */
 	public function getActionUrl() {
@@ -48,7 +48,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 			}
 			if ($this->isSuccessful()) {
 				$result = array_merge($result, array(
-					'Доступные методы платежа' => df_concat_enum($this->getMoneySources())
+					'Доступные методы платежа' => df_csv_pretty($this->getMoneySources())
 					,'Идентификатор платежа в платёжной системе' => $this->getOperationExternalId()
 					,'Описание платежа' => $this->getOperationDescription()
 				));
@@ -80,7 +80,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 	 * Дополнение от 2014-08-09:
 	 * Теперь вместо { "allowed":"true" } система возвращает { "allowed":true}.
 	 * Может быть, это связано с обновлением интерпретатора PHP?
-	 * @link http://magento-forum.ru/topic/4595/
+	 * http://magento-forum.ru/topic/4595/
 	 *
 	 * @return string[]
 	 */
@@ -106,9 +106,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {
-		return Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH;
-	}
+	public function getTransactionType() {return Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH;}
 
 	/**
 	 * @override
@@ -126,9 +124,9 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 				. '<br/>пользователь не принял Соглашение об использовании сервиса «Яндекс.Деньги».'
 			,'illegal_params' =>
 				"Обязательные параметры платежа отсутствуют или имеют недопустимые значения."
-				."\r\nТакой сбой возможен, в частности,"
+				."\nТакой сбой возможен, в частности,"
 				." когда кошелёк продавца совпадает с кошельком покупателя."
-				."\r\nДля проверки работы модуля используйте разные кошельки для продавца и покупателя."
+				."\nДля проверки работы модуля используйте разные кошельки для продавца и покупателя."
 			,'illegal_param_label' => 'Параметр «label» имеет недопустимое значение.'
 			,'illegal_param_to' => 'Параметр «to» имеет недопустимое значение.'
 			,'illegal_param_amount' => 'Параметр «amount» имеет недопустимое значение.'
@@ -163,40 +161,39 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 			$result = parent::getErrorMessage();
 		}
 		else {
-			/** @link http://magento-forum.ru/topic/4612/ */
+			/** http://magento-forum.ru/topic/4612/ */
 			df_assert_string_not_empty($this->getActionUrl());
-			$result =
-				strtr(
-					"16 мая 2014 года вступил в силу новый российский закон:"
-					." он вводит ограничения по электронным платежам для всех,"
-					." кто не прошел идентификацию."
-					."\r\nДля оплаты заказа посредством Яндекс.Денег"
-					." Вам надо пройти идентификацию на сайте Яндекс.Денег по адресу:"
-					."\r\n<a href='{адрес}'>{адрес}</a>"
-					."\r\nПосле идентификации Вы сможете оплатить Ваш заказ Яндекс.Деньгами."
-					."\r\nЕсли Вы не хотите проходить идентификацию,"
-					." то Вы можете оплатить Ваш заказ другим способом."
-					,array('{адрес}' => $this->getActionUrl())
-				)
-			;
+			$result = strtr(
+				"16 мая 2014 года вступил в силу новый российский закон:"
+				." он вводит ограничения по электронным платежам для всех,"
+				." кто не прошел идентификацию."
+				."\nДля оплаты заказа посредством Яндекс.Денег"
+				." Вам надо пройти идентификацию на сайте Яндекс.Денег по адресу:"
+				."\n<a href='{адрес}'>{адрес}</a>"
+				."\nПосле идентификации Вы сможете оплатить Ваш заказ Яндекс.Деньгами."
+				."\nЕсли Вы не хотите проходить идентификацию,"
+				." то Вы можете оплатить Ваш заказ другим способом."
+				,array('{адрес}' => $this->getActionUrl())
+			);
 		}
 		return $result;
 	}
 
 	/**
 	 * @override
-	 * @return Df_Payment_Exception_Response|Df_YandexMoney_Exception_ActionRequired
+	 * @return string
 	 */
-	protected function getExceptionInstance() {
+	protected function getExceptionClass() {
 		return
 			$this->isErrorCode_ActionRequired()
-			? new Df_YandexMoney_Exception_ActionRequired()
-			: parent::getExceptionInstance()
+			? Df_YandexMoney_Exception_ActionRequired::_C
+			: parent::getExceptionClass()
 		;
 	}
 
 	/** @return bool */
 	public function isErrorCode_ActionRequired() {return 'ext_action_required' === $this->getErrorCode();}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_YandexMoney_Model_Request_Capture::_construct() */
+	const _C = __CLASS__;
 }

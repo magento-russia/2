@@ -15,14 +15,12 @@ class Df_OnPay_Helper_Data extends Mage_Core_Helper_Data {
 	public function priceToString(Df_Core_Model_Money $price) {
 		return
 			$price->getOriginalAsFloat() === rm_float($price->getIntegerPart())
-			? number_format(
-				round($price->getOriginalAsFloat(), 1), 1, Df_Core_Const::T_PERIOD, ''
-			)
+			? number_format(round($price->getOriginalAsFloat(), 1), 1, '.', '')
 			: $price->getAsString()
 		;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const SIGNATURE_PARTS_SEPARATOR = ';';
 	/** @return Df_OnPay_Helper_Data */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

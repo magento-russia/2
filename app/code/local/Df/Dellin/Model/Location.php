@@ -69,11 +69,11 @@ class Df_Dellin_Model_Location extends Df_Shipping_Model_Location {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ID, self::V_STRING)
-			->_prop(self::P__IS_TERMINAL, self::V_BOOL)
+			->_prop(self::P__ID, RM_V_STRING)
+			->_prop(self::P__IS_TERMINAL, RM_V_BOOL)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__CITY = 'city';
 	const P__FULL_NAME = 'fullName';
 	const P__ID = 'code';

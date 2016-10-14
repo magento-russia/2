@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstract {
+class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Check identifier
 	 *
@@ -15,7 +15,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 		$select  = $adapter->select()
 			->from(array('main_table' => rm_table('cms/page')), array('page_id', 'website_root'))
 			->join(
-				array('cps' => rm_table('cms/page_store')),'main_table.page_id = `cps`.page_id',array())
+				array('cps' => rm_table('cms/page_store')),'main_table.page_id = `cps`.page_id', null)
 			->where('main_table.identifier = ?', $identifier)
 			->where('main_table.is_active=1 AND `cps`.store_id in (0, ?) ', $storeId)
 			->order('store_id DESC')
@@ -28,12 +28,12 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	}
 
 	/**
+	 * @used-by Df_Cms_Observer::cms_page_save_before()
 	 * @param int $pageId
-	 * @return Df_Cms_Model_Resource_Hierarchy_Node
+	 * @return void
 	 */
 	public function deleteNodesByPageId($pageId) {
-		$this->_getWriteAdapter()->delete($this->getMainTable(), rm_quote_into('? = page_id', $pageId));
-		return $this;
+		rm_table_delete($this->getMainTable(), 'page_id', $pageId);
 	}
 
 	/**
@@ -51,16 +51,11 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	/**
 	 * Remove nodes defined by id.
 	 * Which will also remove their child nodes by foreign key.
-	 *
-	 * @param int|array $nodeIds
-	 * @return Df_Cms_Model_Resource_Hierarchy_Node
+	 * @used-by Df_Cms_Model_Hierarchy_Node::collectTree()
+	 * @param int|int[] $nodeIds
+	 * @return void
 	 */
-	public function dropNodes($nodeIds) {
-		$this->_getWriteAdapter()->delete(
-			$this->getMainTable(), rm_quote_into('node_id IN (?)', $nodeIds)
-		);
-		return $this;
-	}
+	public function dropNodes($nodeIds) {rm_table_delete($this->getMainTable(), 'node_id', $nodeIds);}
 
 	/**
 	 * Retrieve tree meta data flags from secondary table.
@@ -72,9 +67,10 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	public function getTreeMetaData(Df_Cms_Model_Hierarchy_Node $object) {
 		$read = $this->_getReadAdapter();
 		$select = $read->select();
-		$xpath = explode('/', $object->getXpath());
-		$select->from($this->_metadataTable)
-			->where('node_id = ?', $xpath[0]);
+		$select
+			->from(rm_table(self::TABLE_META_DATA))
+			->where('node_id = ?', rm_first(df_explode_xpath($object->getXpath())))
+		;
 		return $read->fetchRow($select);
 	}
 
@@ -93,8 +89,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 		if ($this->_treeMaxDepth > 0 && $object->getLevel() > $this->_treeMaxDepth) {
 			return $tree;
 		}
-
-		$xpath = explode('/', $object->getXpath());
+		$xpath = df_explode_xpath($object->getXpath());
 		if (!$this->_treeIsBrief) {
 			array_pop($xpath); //remove self node
 		}
@@ -154,18 +149,13 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	 * @param int $pageId
 	 * @return array
 	 */
-	public function getTreeXpathsByPage($pageId)
-	{
-		$treeXpaths = array();
-		$select = $this->_getReadAdapter()->select()
+	public function getTreeXpathsByPage($pageId) {
+		$select = rm_select()
 			->from($this->getMainTable(), 'xpath')
-			->where('page_id=?', $pageId);
-		$rowset = $this->_getReadAdapter()->fetchAll($select);
-		$treeXpaths = array();
-		foreach ($rowset as $row) {
-			$treeXpaths[]= $row['xpath'];
-		}
-		return $treeXpaths;
+			->where('? = page_id', $pageId)
+		;
+		$rows = rm_conn()->fetchAll($select);
+		return array_column($rows, 'xpath');
 	}
 
 	/**
@@ -213,19 +203,6 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	}
 
 	/**
-	 * Remove children by root node.
-	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
-	 * @return Df_Cms_Model_Resource_Hierarchy_Node
-	 */
-	public function removeTreeChilds($object) {
-		$this->_getWriteAdapter()->delete(
-			$this->getMainTable(), rm_quote_into('parent_node_id=?', $object->getId())
-		);
-		return $this;
-	}
-
-	/**
 	 * Saving meta if such available for node (in case node is root node of three)
 	 *
 	 * @param Mage_Core_Model_Abstract $object
@@ -237,9 +214,9 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 		//if ($object->getParentNodeId()) {
 		//	return $this;
 		//}
-		$preparedData = $this->_prepareDataForTable($object, $this->_metadataTable);
+		$preparedData = $this->_prepareDataForTable($object, rm_table(self::TABLE_META_DATA));
 		$this->_getWriteAdapter()->insertOnDuplicate(
-			$this->_metadataTable, $preparedData, array_keys($preparedData));
+			rm_table(self::TABLE_META_DATA), $preparedData, array_keys($preparedData));
 		return $this;
 	}
 
@@ -338,17 +315,15 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	 *
 	 * @param Df_Cms_Model_Hierarchy_Node $object
 	 * @param string $fieldName Parent metadata field to use in filter
-	 * @param string $values Values for filter
+	 * @param string|string[] $values Values for filter
 	 * @return array|null
 	 */
-	public function getParentMetadataParams($object, $fieldName, $values)
-	{
-		$values = is_array($values) ? $values : array($values);
+	public function getParentMetadataParams($object, $fieldName, $values) {
 		$parentIds = preg_split('/\/{1}/', $object->getXpath(), 0, PREG_SPLIT_NO_EMPTY);
 		array_pop($parentIds); //remove self node
 		$select = $this->_getLoadSelectWithoutWhere()
 			->where($this->getMainTable().'.node_id IN (?)', $parentIds)
-			->where('metadata_table.'.$fieldName.' IN (?)', $values)
+			->where('metadata_table.'.$fieldName.' IN (?)', rm_array($values))
 			->order(array($this->getMainTable().'.level DESC'))
 			->limit(1);
 		$params = $this->_getReadAdapter()->fetchRow($select);
@@ -468,29 +443,23 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 		parent::_beforeSave($object);
 		/** @var array $additionalSettings */
 		$additionalSettings =
-			array_intersect_key(
-				$object->getData()
-				,array_flip(
-					Df_Cms_Model_Hierarchy_Node::getMetadataKeysAdditional()
-				)
-			)
+			df_select($object->getData(), Df_Cms_Model_Hierarchy_Node::getMetadataKeysAdditional())
 		;
-		$object
-			->setData(
-				Df_Cms_Model_Hierarchy_Node::P__ADDITIONAL_SETTINGS
-				/**
-				 * Zend_Json::encode использует json_encode при наличии расширения PHP JSON
-				 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-				 * @see Zend_Json::encode
-				 * @link http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-				 * Обратите внимание,
-				 * что расширение PHP JSON не входит в системные требования Magento.
-				 * @link http://www.magentocommerce.com/system-requirements
-				 * Поэтому использование Zend_Json::encode выглядит более правильным, чем json_encode.
-				 */
-				,Zend_Json::encode($additionalSettings)
-			)
-		;
+		/**
+		 * @see Zend_Json::encode() использует
+		 * @see json_encode() при наличии расширения PHP JSON
+		 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
+		 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
+		 * Обратите внимание,
+		 * что расширение PHP JSON не входит в системные требования Magento.
+		 * http://www.magentocommerce.com/system-requirements
+		 * Поэтому использование @see Zend_Json::encode()
+		 * выглядит более правильным, чем @see json_encode().
+		 */
+		$object->setData(
+			Df_Cms_Model_Hierarchy_Node::P__ADDITIONAL_SETTINGS
+			, Zend_Json::encode($additionalSettings)
+		);
 		return $this;
 	}
 
@@ -541,7 +510,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 			if ($path) {
 				$requestUrl = $path . '/' . $identifier;
 			} else {
-				$route = explode('/', $nodeRow['request_url']);
+				$route = df_explode_xpath($nodeRow['request_url']);
 				array_pop($route);
 				$route[]= $identifier;
 				$requestUrl = implode('/', $route);
@@ -599,8 +568,13 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 				,'page_identifier' => 'identifier'
 				,'page_is_active' => 'is_active'
 			))
-			->joinLeft(array('metadata_table' => $this->_metadataTable),$this->getMainTable() . '.' . $this->getIdFieldName() . ' = metadata_table.node_id',array(
-					'pager_visibility','pager_frame','pager_jump','menu_brief','menu_excluded','menu_levels_down','menu_ordered','menu_list_type'
+			->joinLeft(
+				array('metadata_table' => rm_table(self::TABLE_META_DATA))
+				,$this->getMainTable() . '.' . $this->getIdFieldName() . ' = metadata_table.node_id'
+				,array(
+					'pager_visibility','pager_frame','pager_jump'
+					,'menu_brief','menu_excluded','menu_levels_down'
+					,'menu_ordered','menu_list_type'
 				));
 		$this->_applyParamFilters($select);
 		return $select;
@@ -643,12 +617,6 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	protected $_isPkAutoIncrement = false;
 
 	/**
-	 * Secondary table for storing meta data
-	 * @var string
-	 */
-	protected $_metadataTable;
-
-	/**
 	 * Tree Detalization, i.e. brief or detailed
 	 * @var bool
 	 */
@@ -661,26 +629,21 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Mage_Core_Model_Mysql4_Abstra
 	protected $_treeMaxDepth = 0;
 
 	/**
+	 * Нельзя вызывать @see parent::_construct(),
+	 * потому что это метод в родительском классе — абстрактный.
+	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {
-		/**
-		 * Нельзя вызывать parent::_construct(),
-		 * потому что это метод в родительском классе — абстрактный.
-		 * @see Mage_Core_Model_Resource_Abstract::_construct()
-		 */
-		$this->_init(self::TABLE_NAME, Df_Cms_Model_Hierarchy_Node::P__ID);
-		$this->_metadataTable = rm_table('df_cms/hierarchy_metadata');
-	}
-	const _CLASS = __CLASS__;
-	const TABLE_NAME = 'df_cms/hierarchy_node';
+	protected function _construct() {$this->_init(self::TABLE, Df_Cms_Model_Hierarchy_Node::P__ID);}
+	/** used-by Df_Cms_Setup_2_0_0::_process() */
+	const TABLE = 'df_cms/hierarchy_node';
 	/**
-	 * @see Df_Cms_Model_Resource_Hierarchy_Node_Collection::_construct()
-	 * @see Df_Cms_Model_Hierarchy_Node::_construct()
-	 * @return string
+	 * @used-by Df_Cms_Model_Resource_Hierarchy_Node_Collection::joinMetaData()
+	 * @used-by Df_Cms_Setup_2_0_0::_process()
+	 * @used-by Df_Cms_Setup_2_0_1::_process()
 	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf_r(__CLASS__);}
+	const TABLE_META_DATA = 'df_cms/hierarchy_metadata';
 	/** @return Df_Cms_Model_Resource_Hierarchy_Node */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

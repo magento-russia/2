@@ -42,6 +42,12 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	}
 
 	/**
+	 * @override
+	 * @return Df_Rating_Model_Resource_Rating_Collection
+	 */
+	public function getResourceCollection() {return self::c();}
+
+	/**
 	 * @param int $value|null
 	 * @return Df_Rating_Model_Rating
 	 */
@@ -110,6 +116,12 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 		return $this;
 	}
 
+	/**
+	 * @override
+	 * @return Df_Rating_Model_Resource_Rating
+	 */
+	protected function _getResource() {return Df_Rating_Model_Resource_Rating::s();}
+
 	/** @return array(int => int) */
 	private function getMapFromCodeToOptionId() {
 		if (!isset($this->{__METHOD__})) {
@@ -125,14 +137,10 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	}
 
 	/**
-	 * @override
-	 * @return void
+	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Rating::getEntityClass()
+	 * @used-by Df_Rating_Model_Resource_Rating_Collection::_construct()
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_init(Df_Rating_Model_Resource_Rating::mf());
-	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__CUSTOMER_ID = 'customer_id';
 	const P__ENTITY_ID = 'entity_id';
 	const P__POSITION = 'position';
@@ -141,18 +149,13 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	const P__REVIEW_ID = 'review_id';
 
 	/** @return Df_Rating_Model_Resource_Rating_Collection */
-	public static function c() {return self::s()->getCollection();}
+	public static function c() {return new Df_Rating_Model_Resource_Rating_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return Df_Rating_Model_Rating
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/**
-	 * @see Df_Rating_Model_Resource_Rating_Collection::_construct()
-	 * @return string
-	 */
-	public static function mf() {static $r; return $r ? $r : $r = rm_class_mf(__CLASS__);}
 	/** @return Df_Rating_Model_Rating */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

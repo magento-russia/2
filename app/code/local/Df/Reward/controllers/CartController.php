@@ -4,8 +4,7 @@ class Df_Reward_CartController extends Mage_Core_Controller_Front_Action {
 	 * Only logged in users can use this functionality, * this function checks if user is logged in before all other actions
 	 *
 	 */
-	public function preDispatch()
-	{
+	public function preDispatch() {
 		parent::preDispatch();
 		if (!rm_session_customer()->authenticate($this)) {
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
@@ -16,16 +15,12 @@ class Df_Reward_CartController extends Mage_Core_Controller_Front_Action {
 	 * Remove Reward Points payment from current quote
 	 *
 	 */
-	public function removeAction()
-	{
-		if (!df_h()->reward()->isEnabledOnFront()
-			|| !df_h()->reward()->getHasRates()) {
-			return $this->_redirect('customer/account/');
+	public function removeAction() {
+		if (!df_h()->reward()->isEnabledOnFront() || !df_h()->reward()->getHasRates()) {
+			$this->_redirect('customer/account/');
 		}
-
-		$quote = rm_session_checkout()->getQuote();
-		if ($quote->getUseRewardPoints()) {
-			$quote->setUseRewardPoints(false)->collectTotals()->save();
+		if (rm_quote()->getUseRewardPoints()) {
+			rm_quote()->setUseRewardPoints(false)->collectTotals()->save();
 			rm_session_checkout()->addSuccess(
 				$this->__('Reward Points were successfully removed from your order.')
 			);

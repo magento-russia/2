@@ -255,7 +255,7 @@ class Df_PageCache_Model_Processor
 
 	/**
 	 * @used-by isDisabled()
-	 * @used-by Df_PageCache_Model_Observer::processPreDispatch()
+	 * @used-by Df_PageCache_Observer::processPreDispatch()
 	 * @return string
 	 */
 	public static function isDisabledByCurrentUri() {
@@ -276,7 +276,7 @@ class Df_PageCache_Model_Processor
 					 * 2015-03-21
 					 * Добавил на всякий случай значение «/checkout/onepage/».
 					 * Обратите внимание, что полностраничное кэширование отключается
-					 * @see Df_PageCache_Model_Observer::processPreDispatch():
+					 * @see Df_PageCache_Observer::processPreDispatch():
 							if (
 									$request->isPost()
 								||
@@ -656,7 +656,7 @@ class Df_PageCache_Model_Processor
 
 			if (isset($_GET[Mage_Core_Model_Session_Abstract::SESSION_ID_QUERY_PARAM])) {
 				Mage::getSingleton('df_pagecache/cookie')->updateCustomerCookies();
-				Mage::getModel('df_pagecache/observer')->updateCustomerProductIndex();
+				Mage::getModel('Df_PageCache_Observer')->updateCustomerProductIndex();
 
 			}
 		}

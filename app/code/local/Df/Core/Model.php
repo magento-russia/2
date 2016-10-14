@@ -4,16 +4,22 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * Обратите внимание,
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
 	 * потому что в родительском классе (и всех классах-предках)
-	 * метод __destruct() не объявлен.
+	 * метод @see __destruct() не объявлен.
 	 * @return void
 	 */
 	public function __destruct() {
 		/**
 		 * Для глобальных объекто-одиночек,
-		 * чей метод @see Df_Core_Model::isDestructableSingleton() возвращает true,
-		 * метод @see Df_Core_Model::_destruct()
+		 * чей метод @uses isDestructableSingleton() возвращает true,
+		 * метод @see _destruct()
 		 * будет вызван на событие «controller_front_send_response_after»:
-		 * @see Df_Core_Model_Dispatcher::controller_front_send_response_after().
+		 * @see Df_Core_Observer::controller_front_send_response_after().
+		 *
+		 * 2015-08-14
+		 * Как правило, это связано с кэшированием данных на диск.
+		 * Единственное на данный момент исключение:
+		 * метод @see Df_Eav_Model_Translator::_destruct(),
+		 * который использует деструктор не для кэширования на диск, а для логирования.
 		 */
 		if (!$this->isDestructableSingleton()) {
 			$this->_destruct();
@@ -22,129 +28,204 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 
 	/**
 	 * Размещайте программный код деинициализации объекта именно в этом методе,
-	 * а не в стандартном деструкторе __destruct().
+	 * а не в стандартном деструкторе @see __destruct().
 	 *
 	 * Не все потомки класса @see Df_Core_Model
 	 * деинициализируется посредством стандартного деструктора.
 	 *
 	 * В частности, глобальные объекты-одиночки
-	 * деинициализировать посредством глобального деструктора опасно,
+	 * деинициализировать посредством стандартного деструктора опасно,
 	 * потому что к моменту вызова стандартного деструктора
 	 * сборщик мусора Zend Engine мог уже уничтожить другие объекты,
 	 * которые требуются для деинициализации.
-	 *
-	 * Метод @see Df_Core_Model::_destruct() гарантированно
 	 *
 	 * Для глобальных объекто-одиночек,
 	 * чей метод @see Df_Core_Model::isDestructableSingleton() возвращает true,
 	 * метод @see Df_Core_Model::_destruct()
 	 * будет вызван на событие «controller_front_send_response_after»:
-	 * @see Df_Core_Model_Dispatcher::controller_front_send_response_after().
+	 * @see Df_Core_Observer::controller_front_send_response_after().
+	 *
+	 * 2015-08-14
+	 * Как правило, это связано с кэшированием данных на диск.
+	 * Единственное на данный момент исключение:
+	 * метод @see Df_Eav_Model_Translator::_destruct(),
+	 * который использует деструктор не для кэширования на диск, а для логирования.
 	 *
 	 * @override
+	 * @see Df_Core_Destructable::_destruct()
+	 * @used-by __destruct()
+	 * @used-by Df_Core_GlobalSingletonDestructor::process()
 	 * @return void
 	 */
 	public function _destruct() {$this->cacheSave();}
 
-	/** @return string */
-	public function _getModuleName() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a(explode('_', get_class($this)), 1);
+	/**
+	 * @param mixed[] $arguments
+	 * @return mixed
+	 * @throws Exception
+	 */
+	public function callByMixin(array $arguments) {
+		/** @var string $method */
+		$method = rm_first($arguments);
+		// Временно отключаем миксин для данного метод
+		// чтобы не попадать в бескнечную рекурсию.
+		$this->_disabledMixins[$method] = true;
+		/** @var mixed $result */
+		try {
+			$result = call_user_func_array(array($this, $method), rm_tail($arguments));
+			unset($this->_disabledMixins[$method]);
 		}
-		return $this->{__METHOD__};
+		catch (Exception $e) {
+			unset($this->_disabledMixins[$method]);
+			df_error($e);
+		}
+		return $result;
 	}
 
 	/**
+	 * Этот метод отличается от методов @see getData(), @see offsetGet(), @see _getData()
+	 * возможностью указать значение по умолчанию.
 	 * @param string $key
-	 * @param mixed $default[optional]
+	 * @param mixed $default [optional]
 	 * @return mixed
 	 */
 	public function cfg($key, $default = null) {
 		/** @var mixed $result */
 		/**
-		 * Обратите внимание,
-		 * что здесь нужно вызывать именно @see Df_Core_Model::getData(),
-		 * а не @see Varien_Object::_getData()
-		 * чтобы работали валидаторы.
+		 * 2015-03-26
+		 * Раньше здесь стоял вызов @see getData()
+		 * Однако при новой реализации @see getData()
+		 * разумнее вызывать сразу @uses offsetGet():
+		 * нам тогда не приходится обрабатывать ситуацию с пустым ключом $key:
+		 * при вызове @see cfg() ключ не может быть пустым.
+		 *
+		 * Обратите внимание, что вызывать @see _getData() здесь ошибочно,
+		 * потому что тогда могут не сработать валидаторы и фильтры.
 		 */
-		$result = $this->getData($key);
+		$result = $this->offsetGet($key);
 		// Некоторые фильтры заменяют null на некоторое другое значение,
 		// поэтому обязательно учитываем равенство null
 		// значения свойства ДО применения фильтров.
-		/** @var bool $valueWasNullBeforeFilters */
-		$valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		//
 		// Раньше вместо !is_null($result) стояло !$result.
 		// !is_null выглядит логичней.
-		return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
-	}
-
-	/** @return string */
-	public function getCurrentClassNameInMagentoFormat() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_h()->core()->reflection()->getModelNameInMagentoFormat(get_class($this))
-			;
-		}
-		return $this->{__METHOD__};
+		//
+		// 2015-02-10
+		// Раньше код был таким:
+		// $valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		// return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
+		// Изменил его ради ускорения.
+		// Неожиданным результатом стала простота и понятность нового кода.
+		return
+			null === $result
+			|| !isset($this->_valueWasNullBeforeFilters[$key])
+			|| $this->_valueWasNullBeforeFilters[$key]
+			? $default
+			: $result
+		;
 	}
 
 	/**
-	 * @throws Mage_Core_Exception
+	 * @override
+	 * Обратите внимание, что мы сознательно никак не используем параметр $index
+	 * и не поддерживаем сложные ключи $key, как это делает родительский метод.
+	 *
+	 * Фильтры и валидаторы для присутствующих в @see $_data ключей
+	 * уже были применены при вызове @see _prop(),
+	 * поэтому данные уже проверены и отфильтрованы,
+	 * и при вызове @see getData() без параметров
+	 * мы можем спокойно вернуть массив @see $_data.
+	 *
+	 * @see Varien_Object::getData()
 	 * @param string $key
 	 * @param null|string|int $index
 	 * @return mixed
 	 */
 	public function getData($key = '', $index = null) {
-		/** @var mixed $result */
-		if (('' === $key) || array_key_exists($key, $this->_data)) {
-			$result = parent::getData($key, $index);
-		}
-		else {
-			// Обрабатываем здесь только те случаи,
-			// когда запрашиваются значения неицициализированных свойств объекта
-			$result = $this->_applyFilters($key, null);
-			// Обратите внимание, что фильтры и валидаторы применяются только единократно,
-			// потому что повторно мы в эту ветку кода не попадём
-			// из-за срабатывания условия array_key_exists($key, $this->_data) выше
-			// (даже если фильтры для null вернут null, наличие ключа array('ключ' => null))
-			// достаточно, чтобы не попадать в данную точку программы повторно.
-			$this->_validate($key, $result);
-			$this->_data[$key] = $result;
-		}
-		return $result;
+		return '' === $key ? $this->_data : $this->offsetGet($key);
 	}
 
 	/**
 	 * @override
+	 * @see Varien_Object::getId()
+	 * @used-by Varien_Data_Collection::addItem()
 	 * @return string|int
 	 */
 	public function getId() {
-		/** @var mixed $result */
-		$result =
-				(
-						empty($this->_idFieldName)
-					&&
-						empty($this->_resourceName)
-					&&
-						is_null($this->_getData('id'))
-				)
-			?
-				/**
-				 * Объект родительского класса такую ситуации переводит в исключительную.
-				 * Мы же, для использования модели в коллекциях, создаём идентификатор.
-				 * Конечно, таким образом мы лишаемся возможности проверки объекта на новизну,
-				 * однако, раз ресурсная модель не установлена,
-				 * то такая проверка нам вроде бы и не нужна.
-				 */
-				$this->getAutoGeneratedId()
-			:
-				parent::getId()
+		return
+			empty($this->_idFieldName) && empty($this->_resourceName) && is_null($this->_getData('id'))
+			/**
+			 * Объект родительского класса такую ситуации переводит в исключительную.
+			 * Мы же, для использования модели в коллекциях, создаём идентификатор.
+			 * Конечно, таким образом мы лишаемся возможности проверки объекта на новизну,
+			 * однако, раз ресурсная модель не установлена,
+			 * то такая проверка нам вроде бы и не нужна.
+			 */
+			? $this->getAutoGeneratedId()
+			: parent::getId()
 		;
+	}
+
+	/**
+	 * 2015-02-09
+	 * Если потомки используют коллекции, то они должны перекрыть этот метод.
+	 * Отключаем унаследованную реализацию,
+	 * потому что в Российской сборке Magento другая архитетура работы с ресурсными моделями.
+	 * Смотрите также комментарии к методам:
+	 * @see Df_Core_Model::_getResource()
+	 * @see Df_Core_Model_Resource_Collection::getResource()
+	 * Родительский метод: @see Mage_Core_Model_Abstract::getResourceCollection()
+	 * @override
+	 * @return Df_Core_Model_Resource_Collection
+	 */
+	public function getResourceCollection() {df_abstract(__METHOD__);}
+
+	/**
+	 * 2015-02-09
+	 * Этот метод никто в Magento не использует.
+	 * Родительский метод: @see Mage_Core_Model_Abstract::getResourceName()
+	 * @override
+	 * @return void
+	 */
+	public function getResourceName() {df_should_not_be_here(__METHOD__);}
+
+	/**
+	 * @override
+	 * @used-by getData()
+	 * @see Varien_Object::offsetGet()
+	 * @see ArrayAccess::offsetGet()
+	 * @param string $offset
+	 * @return mixed
+	*/
+	public function offsetGet($offset) {
+		/** @var mixed $result */
+		if (array_key_exists($offset, $this->_data)) {
+			/**
+			 * Фильтры и валидаторы для присутствующих в @see $_data ключей
+			 * уже были применены при вызове @see _prop(),
+			 * поэтому данные уже проверены и отфильтрованы.
+			 */
+			$result = $this->_data[$offset];
+		}
+		else {
+			// Обратите внимание, что фильтры и валидаторы применяются только единократно,
+			// и повторно мы в эту ветку кода не попадём
+			// из-за срабатывания условия array_key_exists($key, $this->_data) выше
+			// (даже если фильтры для null вернут null, наличие ключа array('ключ' => null))
+			// достаточно, чтобы не попадать в данную точку программы повторно.
+			//
+			// Обрабатываем здесь только те случаи,
+			// когда запрашиваются значения неицициализированных свойств объекта
+			$result = $this->_applyFilters($offset, null);
+			$this->_validate($offset, $result);
+			$this->_data[$offset] = $result;
+		}
 		return $result;
 	}
 
 	/**
 	 * @override
+	 * @see Varien_Object::setData()
 	 * @param string|array(string => mixed) $key
 	 * @param mixed $value
 	 * @return Df_Core_Model
@@ -190,23 +271,47 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	}
 
 	/**
+	 * @param string $class
+	 * @return void
+	 */
+	public function setMixin($class) {
+		$this->_data[self::P__MIXIN] = Df_Core_Model_Mixin::ic($class, $this);
+	}
+
+	/**
 	 * @param string $key
 	 * @param Zend_Validate_Interface|Df_Zf_Validate_Type|string|mixed[] $validator
 	 * @param bool|null $isRequired [optional]
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return Df_Core_Model
 	 */
 	protected function _prop($key, $validator, $isRequired = null) {
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
 		/**
-		 * Обратите внимание, что если метод _prop() был вызван с двумя параметрами,
+		 * Полезная проверка!
+		 * Как-то раз ошибочно описал поле без значения:
+			private static $P__TYPE;
+		 * И при вызове $this->_prop(self::$P__TYPE, RM_V_STRING_NE)
+		 * получил диагностическое сообщение: «значение «» недопустимо для свойства «».»
+		 */
+		df_param_string_not_empty($key, 0);
+		/**
+		 * Обратите внимание, что если метод @see _prop() был вызван с двумя параметрами,
 		 * то и count($arguments) вернёт 2,
-		 * хотя в методе _prop() всегда доступен и 3-х параметр: $isRequired.
+		 * хотя в методе @see _prop() всегда доступен и 3-х параметр: $isRequired.
 		 * Другими словами, @see func_get_args() не возвращает параметры по умолчанию,
 		 * если они не были реально указаны при вызове текущего метода.
 		 */
-		if (2 < count($arguments)) {
+		/**
+		 * Хотя документация к PHP говорит,
+		 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
+		 * однако на самом деле @uses func_num_args() быть параметром других функций
+		 * в любых версиях PHP 5 и даже PHP 4.
+		 * http://3v4l.org/HKFP7
+		 * http://php.net/manual/function.func-num-args.php
+		 */
+		if (2 < func_num_args()) {
+			/** @var mixed[] $arguments */
+			$arguments = func_get_args();
 			$isRequired = rm_last($arguments);
 			/** @var bool $hasRequiredFlag */
 			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired);
@@ -223,44 +328,24 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var Zend_Filter_Interface[] $additionalFilters */
 		$additionalFilters = array();
 		if (!is_array($validator)) {
-			$validator =
-				$this->_resolveValidatorOrFilter(
-					$validator
-					, $key
-					/**
-					 * Если значение флага $isRequired не указано,
-					 * то ради ускорения системы используем в качестве валидатора объект-одиночку.
-					 * Если же значение флага $isRequired указано,
-					 * то использовать объект-одиночку нельзя:
-					 * ведь для каждого такого валидатора значение флага может быть своим
-					 */
-					, $useSingleton = is_null($isRequired)
-				)
-			;
+			$validator = Df_Core_Validator::resolveForProperty(
+				$this, $validator, $key, $skipOnNull = false === $isRequired
+			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 		}
 		else {
 			/** @var array(Zend_Validate_Interface|Df_Zf_Validate_Type|string) $additionalValidatorsRaw */
 			$additionalValidatorsRaw = rm_tail($validator);
-			$validator =
-				$this->_resolveValidatorOrFilter(
-					rm_first($validator)
-					, $key
-					/**
-					 * Если значение флага $isRequired не указано,
-					 * то ради ускорения системы используем в качестве валидатора объект-одиночку.
-					 * Если же значение флага $isRequired указано,
-					 * то использовать объект-одиночку нельзя:
-					 * ведь для каждого такого валидатора значение флага может быть своим
-					 */
-					, $useSingleton = is_null($isRequired)
-				)
-			;
+			$validator = Df_Core_Validator::resolveForProperty(
+				$this, rm_first($validator), $key, $skipOnNull = false === $isRequired
+			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 			foreach ($additionalValidatorsRaw as $additionalValidatorRaw) {
 				/** @var Zend_Validate_Interface|Zend_Filter_Interface|string $additionalValidatorsRaw */
 				/** @var Zend_Validate_Interface|Zend_Filter_Interface $additionalValidator */
-				$additionalValidator = $this->_resolveValidatorOrFilter($additionalValidatorRaw, $key);
+				$additionalValidator = Df_Core_Validator::resolveForProperty(
+					$this, $additionalValidatorRaw, $key
+				);
 				if ($additionalValidator instanceof Zend_Validate_Interface) {
 					$additionalValidators[]= $additionalValidator;
 				}
@@ -269,7 +354,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 				}
 			}
 		}
-		$this->_addValidator($key, $validator, $isRequired);
+		$this->_validators[$key][] = $validator;
 		if ($validator instanceof Zend_Filter_Interface) {
 			/** @var Zend_Filter_Interface $filter */
 			$filter = $validator;
@@ -281,12 +366,10 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		}
 		/**
 		 * Раньше мы проводили валидацию лишь при извлечении значения свойства,
-		 * в методе @see Df_Core_Model::getData().
+		 * в методе @see getData().
 		 * Однако затем мы сделали улучшение:
-		 * перенести валидацию на более раннюю стадию — инициализацию свойства
-		 * @see Df_Core_Model::setData(),
-		 * и инициализацию валидатора/фильтра
-		 * @see Df_Core_Model::_prop().
+		 * перенести валидацию на более раннюю стадию — инициализацию свойства @see setData(),
+		 * и инициализацию валидатора/фильтра @see _prop().
 		 * Это улучшило диагностику случаев установки объекту некорректных значений свойств,
 		 * потому что теперь мы возбуждаем исключительную ситуацию
 		 * сразу при попытке установки некорректного значения.
@@ -297,94 +380,187 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var bool $hasValueVorTheKey */
 		$hasValueVorTheKey = array_key_exists($key, $this->_data);
 		if ($hasValueVorTheKey) {
-			$this->_validateByConcreteValidator($key, $this->_data[$key], $validator);
+			Df_Core_Validator::checkProperty($this, $key, $this->_data[$key], $validator);
 		}
 		foreach ($additionalValidators as $additionalValidator) {
 			/** @var Zend_Validate_Interface $additionalValidator */
-			$this->_addValidator($key, $additionalValidator);
+			$this->_validators[$key][] = $additionalValidator;
 			if ($hasValueVorTheKey) {
-				$this->_validateByConcreteValidator($key, $this->_data[$key], $additionalValidator);
+				Df_Core_Validator::checkProperty($this, $key, $this->_data[$key], $additionalValidator);
 			}
 		}
 		return $this;
 	}
-	/** @var array(string => Zend_Filter_Interface[]) */
-	private $_filters = array();
-	/** @var array(string => Zend_Validate_Interface[]) */
-	private $_validators = array();
 
-	/** @return void */
+	/**
+	 * 2015-02-09
+	 * Если потомки используют ресурсную модель, то они должны перекрыть этот метод.
+	 * Отключаем унаследованную реализацию,
+	 * потому что в Российской сборке Magento другая архитетура работы с ресурсными моделями.
+	 * Смотрите также комментарии к методам:
+	 * @see Df_Core_Model::getResourceCollection()
+	 * @see Df_Core_Model_Resource_Collection::getResource().
+	 * Родительский метод: @see Mage_Core_Model_Abstract::_getResource()
+	 * @override
+	 * @return Df_Core_Model_Resource
+	 */
+	protected function _getResource() {df_abstract(__METHOD__);}
+
+	/**
+	 * 2015-02-09
+	 * Этот метод никто извне класса не использует,
+	 * и классы-предки тоже его не используют,
+	 * а классы-потомки не должны его использовать,
+	 * потому что архитектура инициализации моделей Российской сборке Magento
+	 * дне подразумевает использования метода @see _init().
+	 * Читайте комментарий к методу @see _getResource().
+	 * @see Df_Core_Model_Resource_Collection::::_init()
+	 * Родительский метод: @see Mage_Core_Model_Abstract::_init()
+	 * @override
+	 * @param string $resourceModel
+	 * @return Df_Core_Model
+	 */
+	protected function _init($resourceModel) {df_should_not_be_here(__METHOD__);}
+
+	/**
+	 * 2015-02-09
+	 * Этот метод никто в Magento не использует, кроме перекрытого нами метода
+	 * @see Mage_Core_Model_Abstract::_init().
+	 * Родительский метод: @see Mage_Core_Model_Abstract::_setResourceModel()
+	 * @param string $resourceName
+	 * @param string|null $resourceCollectionName [optional]
+	 * @return void
+	 */
+	protected function _setResourceModel($resourceName, $resourceCollectionName = null) {
+		df_should_not_be_here(__METHOD__);
+	}
+
+	/**
+	 * @used-by cachedI()
+	 * @return string[]
+	 */
+	protected function cached() {return array();}
+
+	/**
+	 * 2015-08-14
+	 * Отныне значения свойств по умолчанию кэшируются для каждой витрины отдельно.
+	 * Если нужно, чтобы кэшированным значением свойства
+	 * могли пользоваться сразу все витрины, то перечислите это свойсто массиве,
+	 * возвращаемом данным методом @see cachedGlobal()
+	 * @used-by cachedGlobalI()
+	 * @return string[]
+	 */
+	protected function cachedGlobal() {return array();}
+
+	/**
+	 * 2015-08-14
+	 * @used-by cachedGlobalObjectsI()
+	 * @return string[]
+	 */
+	protected function cachedGlobalObjects() {return array();}
+
+	/**
+	 * 2015-08-14
+	 * Отныне по умолчанию для кэшируемых свойств
+	 * используются упрощённые быстрый алгоритмы сериализации и десериализации
+	 * @uses json_encode() / @uses json_decode()
+	 * Эти алгоритмы быстры, но не умеют работать с объектами.
+	 *
+	 * Если Вам нужно кэшировать свойства, содержащее объекты,
+	 * то перечислите это свойсто массиве,
+	 * возвращаемом данным методом @see cachedObjects()
+	 * Тогда для сериализации и десериализации этих свойств
+	 * будут использоваться более медленные функции @see serialize() / @see unserialize().
+	 *
+	 * http://stackoverflow.com/a/7723730
+	 * http://stackoverflow.com/a/804053
+	 * @used-by cachedObjectsI()
+	 * @return string[]
+	 */
+	protected function cachedObjects() {return array();}
+
+	/**
+	 * @used-by cacheKeyGlobal()
+	 * @see Df_Core_Model_Cache_Store::cacheKeySuffix()
+	 * @see Df_Localization_Realtime_Dictionary::cacheKeySuffix()
+	 * @return string
+	 */
+	protected function cacheKeySuffix() {return '';}
+
+	/**
+	 * @used-by cacheSaveProperty()
+	 * @see Df_Core_Model_Geo_Cache::cacheLifetime()
+	 * @see Df_YandexMarket_Model_Category_Adviser::cacheLifetime()
+	 * @return int|null
+	 */
+	protected function cacheLifetime() {return null; /* пожизненно*/}
+
+	/**
+	 * @used-by cacheSave()
+	 * @return void
+	 */
 	protected function cacheSaveBefore() {}
 
-	/** @return string[] */
-	protected function getCacheKeyParamsAdditional() {return array();}
-
-	/** @return int|null */
-	protected function getCacheLifetime() {return null; /* пожизненно*/}
-
-	/** @return string[] */
-	protected function getCacheTagsRm() {return array();}
-
-	/** @return string */
-	protected function getCacheTypeRm() {return '';}
-
-	/** @return string[] */
-	protected function getPropertiesToCache() {return array();}
+	/**
+	 * @used-by cacheSaveProperty()
+	 * @return string|string[]
+	 */
+	protected function cacheTags() {return array();}
 
 	/**
-	 * Значения этих свойств кэшируются для каждого магазина отдельно
-	 * @return string[]
+	 * @used-by isCacheEnabled()
+	 * @return string
 	 */
-	protected function getPropertiesToCachePerStore() {return array();}
+	protected function cacheType() {return '';}
+
+	/** @return Df_Core_Model_Mixin */
+	protected function createMixin() {return Df_Core_Model_Mixin::ic(Df_Core_Model_Mixin::_C, $this);}
 
 	/**
-	 * Если требующее кэширование свойство не является объектом или массимом, содержащим объекты,
-	 * то перечислите это свойство в методе @see getPropertiesToCacheSimple(),
-	 * и тогда свойство будет кэшироваться быстрее,
-	 * потому что вместо функций @see serialize() / @see unserialize()
-	 * будут применены более быстрые функции @see json_encode() / @see json_decode().
-	 * вместо @see saveDataComplex() / @see loadDataComplex().
-	 * @link http://stackoverflow.com/a/7723730
-	 * @link http://stackoverflow.com/a/804053
-	 * @return string[]
+	 * @used-by cacheLoad()
+	 * @used-by cacheSave()
+	 * @used-by Df_Core_Model_Cache_Url::getUrl()
+	 * @return bool
 	 */
-	protected function getPropertiesToCacheSimple() {return array();}
+	protected function isCacheEnabled() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				$this->hasPropertiesToCache()
+				&& (!$this->cacheType() || rm_cache()->canUse($this->cacheType()))
+			;
+		}
+		return $this->{__METHOD__};
+	}
 
 	/**
 	 * Если этот метод вернёт true,
 	 * то система вызовет метод @see Df_Core_Model::_destruct()
 	 * не в стандартном деструкторе __destruct(),
 	 * а на событие «controller_front_send_response_after»:
-	 * @see Df_Core_Model_Dispatchercontroller_front_send_response_after().
+	 * @see Df_Core_Observer::controller_front_send_response_after().
 	 *
 	 * Опасно проводить деинициализацию глобальных объектов-одиночек
-	 * в стандартном деструкторе __destruct(),
+	 * в стандартном деструкторе @see __destruct(),
 	 * потому что к моменту вызова деструктора для данного объекта-одиночки
 	 * сборщик Zend Engine мог уже уничтожить другие глобальные объекты,
 	 * требуемые при деинициализации (например, для сохранения кэша).
 	 *
+	 * 2015-08-14
+	 * Как правило, это связано с кэшированием данных на диск.
+	 * Единственное на данный момент исключение:
+	 * метод @see Df_Eav_Model_Translator::_destruct(),
+	 * который использует деструктор не для кэширования на диск, а для логирования.
+	 *
+	 * @used-by __destruct()
+	 * @used-by _construct()
 	 * @return bool
 	 */
-	protected function isDestructableSingleton() {return false;}
-
-	/** @return bool */
-	protected function isCacheEnabled() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					(
-							!$this->getCacheTypeRm()
-						||
-							Mage::app()->getCacheInstance()->canUse($this->getCacheTypeRm())
-					)
-				&&
-					(
-							$this->getPropertiesToCache()
-						||
-							$this->getPropertiesToCachePerStore()
-					)
-			;
-		}
-		return $this->{__METHOD__};
+	protected function isDestructableSingleton() {
+		// 2015-08-14
+		// Я так понял, что если объекту нужно сохранить кэш на диск,
+		// то он — 100% должен делать это на событие «controller_front_send_response_after»
+		// а не когда стандартный сборщик мусора будет всё рушить.
+		return $this->hasPropertiesToCache();
 	}
 
 	/**
@@ -404,19 +580,56 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	}
 
 	/**
+	 * @param string $method
+	 * @return mixed|null
+	 */
+	protected function mixin($method) {
+		/** @var mixed[] $arguments */
+		$arguments = func_get_args();
+		/** @var string $method */
+		$method = rm_first($arguments);
+		return
+			isset($this->_disabledMixins[$method])
+			? null
+			: call_user_func_array(array($this->getMixin(), $method), rm_tail($arguments))
+		;
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by Df_Localization_Dictionary::e()
+	 * @param string $localPath [optional]
+	 * @return string
+	 */
+	protected function modulePath($localPath = '') {
+		if (!isset($this->{__METHOD__}[$localPath])) {
+			$this->{__METHOD__}[$localPath] = df_concat_path(
+				Mage::getConfig()->getModuleDir('', rm_module_name($this))
+				, df_path()->adjustSlashes($localPath)
+			);
+		}
+		return $this->{__METHOD__}[$localPath];
+	}
+
+	/**
+	 * @used-by Df_Catalog_Model_XmlExport_Product::getConfigurableParent()
+	 * @used-by Df_Core_Model_Action::getErrorMessage_moduleDisabledByAdmin()
+	 * @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin_SpecificCountry::validate()
+	 * @return string
+	 */
+	protected function moduleTitle() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Df_Core_Model_Reflection::s()->getModuleTitleByClass(get_class($this));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * @param string $key
-	 * @param Zend_Filter_Interface|string $filter
+	 * @param Zend_Filter_Interface $filter
 	 * @return void
 	 */
-	private function _addFilter($key, $filter) {
-		if (is_string($filter)) {
-			$filter = self::_getValidatorByName($filter);
-		}
-		df_assert(is_object($filter));
-		df_assert($filter instanceof Zend_Filter_Interface);
-		if (!isset($this->_filters[$key])) {
-			$this->_filters[$key] = array();
-		}
+	private function _addFilter($key, Zend_Filter_Interface $filter) {
 		$this->_filters[$key][] = $filter;
 		/**
 		 * Не используем @see isset(), потому что для массива
@@ -432,36 +645,12 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 
 	/**
 	 * @param string $key
-	 * @param Zend_Validate_Interface $validator
-	 * @param bool|null $isRequired [optional]
-	 * @return void
-	 */
-	private function _addValidator($key, Zend_Validate_Interface $validator, $isRequired = null) {
-		/**
-		 * Обратите внимание, что здесь ошибочно писать
-		 		$isRequired = rm_bool($isRequired);
-		 * потому что $isRequired может принимать не только значения true/false,
-		 * но и отличное от них по смыслу значение null.
-		 */
-		/**
-		 * Обратите внимание, что флаг $RM_VALIDATOR__REQUIRED надо устанавливать в любом случае,
-		 * потому что у нас подавляющее большинство валидаторов является объектами-одиночками,
-		 * и нам надо сбросить предыдущее значение $isRequired у этого объекта.
-		 */
-		$validator->{self::$RM_VALIDATOR__REQUIRED} = $isRequired;
-		if (!isset($this->_validators[$key])) {
-			$this->_validators[$key] = array();
-		}
-		$this->_validators[$key][] = $validator;
-	}
-
-	/**
-	 * @param string $key
 	 * @param mixed $value
 	 * @return mixed
 	 */
 	private function _applyFilters($key, $value) {
 		/** @var Zend_Filter_Interface[] $filters */
+		/** @noinspection PhpParamsInspection */
 		$filters = df_a($this->_filters, $key, array());
 		foreach ($filters as $filter) {
 			/** @var Zend_Filter_Interface $filter */
@@ -491,8 +680,6 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	private function _checkForNull($key, $value) {
 		$this->_valueWasNullBeforeFilters[$key] = is_null($value);
 	}
-	/** @var array(string => bool) */
-	private $_valueWasNullBeforeFilters = array();
 
 	/**
 	 * @param array(string => mixed) $params
@@ -507,58 +694,24 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	}
 
 	/**
-	 * @param Zend_Validate_Interface|Zend_Filter_Interface|string $validator
-	 * @param string $key
-	 * @param bool $useSingleton [optional]
-	 * @return Zend_Validate_Interface|Zend_Filter_Interface
-	 */
-	private function _resolveValidatorOrFilter($validator, $key, $useSingleton = true) {
-		/** @var Zend_Validate_Interface|Zend_Filter_Interface $result */
-		if (is_object($validator)) {
-			$result = $validator;
-		}
-		else if (is_string($validator)) {
-			$result = self::_getValidatorByName($validator, $useSingleton);
-		}
-		else {
-			df_error_internal(
-				'Валидатор/фильтр поля «%s» класса «%s» имеет недопустимый тип: «%s».'
-				,$key, get_class($this), gettype($validator)
-			);
-		}
-		if (
-				!($result instanceof Zend_Validate_Interface)
-			&&
-				!($result instanceof Zend_Filter_Interface)
-		) {
-			df_error_internal(
-				'Валидатор/фильтр поля «%s» класса «%s» имеет недопустимый класс «%s»,'
-				. ' у которого отсутствуют требуемые интерфейсы'
-				.' Zend_Validate_Interface и Zend_Filter_Interface.'
-				,$key, get_class($this), get_class($result)
-			);
-		}
-		return $result;
-	}
-
-	/**
 	 * @param string $key
 	 * @param mixed $value
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return void
 	 */
 	private function _validate($key, $value) {
 		/** @var @var array(Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
+		/** @noinspection PhpParamsInspection */
 		$validators = df_a($this->_validators, $key, array());
 		foreach ($validators as $validator) {
 			/** @var Zend_Validate_Interface|Df_Zf_Validate_Type $validator */
-			$this->_validateByConcreteValidator($key, $value, $validator);
+			Df_Core_Validator::checkProperty($this, $key, $value, $validator);
 		}
 	}
 
 	/**
 	 * @param array(string => mixed) $params
-	 * @throws Df_Core_Exception_Internal
+	 * @throws Df_Core_Exception
 	 * @return void
 	 */
 	private function _validateArray(array $params) {
@@ -570,73 +723,171 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	}
 
 	/**
-	 * @param string $key
-	 * @param mixed $value
-	 * @param Zend_Validate_Interface|Df_Zf_Validate_Type $validator
-	 * @throws Df_Core_Exception_Internal
-	 * @return void
+	 * 2015-08-14
+	 * @used-by hasPropertiesToCache()
+	 * @return string[]
 	 */
-	private function _validateByConcreteValidator($key, $value, Zend_Validate_Interface $validator) {
-		if (!(
-				is_null($value)
-			&&
-				/**
-				 * Обратите внимание, что если значение свойства равно NULL,
-				 * то isset($validator->{self::$RM_VALIDATOR__REQUIRED}) вернёт false,
-				 * в то время как @see property_exists() вернёт true.
-				 */
-				property_exists($validator, self::$RM_VALIDATOR__REQUIRED)
-			&&
-				/**
-				 * Здесь должна стоять проверка именно на false,
-				 * потому что помимо true/false
-				 * $validator->{self::$RM_VALIDATOR__REQUIRED})
-				 * может принимать значение null
-				 */
-				(false === $validator->{self::$RM_VALIDATOR__REQUIRED})
-		)) {
-			if (!$validator->isValid($value)) {
-				/** @var string $compositeMessage */
-				$compositeMessage =
-					rm_sprintf(
-						"«%s»: значение %s недопустимо для свойства «%s»."
-						. "\r\nСообщение проверяющего:\r\n%s"
-						,get_class($this)
-						,df_h()->qa()->convertValueToDebugString($value)
-						,$key
-						,implode(Df_Core_Const::T_NEW_LINE, $validator->getMessages())
-					)
-				;
-				$exception = new Df_Core_Exception_Internal($compositeMessage);
-				/** @var Mage_Core_Model_Message $coreMessage */
-				$coreMessage = df_model('core/message');
-				$exception->addMessage(
-					$coreMessage->error($compositeMessage, __CLASS__,  __METHOD__)
-				);
-				throw $exception;
-			}
+	private function cachedAll() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_merge($this->cachedAllGlobal(), $this->cachedAllPerStore());
 		}
+		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model */
+	/**
+	 * 2015-08-14
+	 * @used-by cachedAll() 
+	 * @used-by cacheLoad()
+	 * @used-by cacheSave()
+	 * @return string[]
+	 */
+	private function cachedAllGlobal() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_merge($this->cachedGlobalI(), $this->cachedGlobalObjectsI());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by cachedAll()
+	 * @used-by cacheLoad()
+	 * @used-by cacheSave()
+	 * @return string[]
+	 */
+	private function cachedAllPerStore() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_merge($this->cachedI(), $this->cachedObjectsI());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by _construct()
+	 * @return string[]
+	 */
+	private function cachedAllSimple() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_merge($this->cachedI(), $this->cachedGlobalI());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by cachedAllGlobal()
+	 * @return string[]
+	 */
+	private function cachedGlobalI() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->cachedGlobal();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by cachedAllGlobal()
+	 * @return string[]
+	 */
+	private function cachedGlobalObjectsI() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->cachedGlobalObjects();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by cacheLoad()
+	 * @used-by cacheSave()
+	 * @used-by isCacheEnabled()
+	 * @return string[]
+	 */
+	private function cachedI() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->cached();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-08-14
+	 * @used-by _construct()
+	 * @return string[]
+	 */
+	private function cachedObjectsI() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->cachedObjects();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by cacheKeyPerStore()
+	 * @used-by cacheLoad()
+	 * @used-by cacheSave()
+	 * @return string
+	 */
+	private function cacheKeyGlobal() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $suffix */
+			$suffix = (string)$this->cacheKeySuffix();
+			if ('' !== $suffix) {
+				/**
+				 * 2015-08-15
+				 * Не все символы позволены в качестве символов ключа кэширования.
+				 * Как ни странно, неизвестно, что быстрее: @uses md5() или @see sha1()
+				 * http://stackoverflow.com/questions/2722943
+				 */
+				$suffix = md5($suffix);
+			}
+			$this->{__METHOD__} = get_class($this) . $suffix;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by cacheLoad()
+	 * @used-by cacheSave()
+	 * @return string
+	 */
+	private function cacheKeyPerStore() {
+		if (!isset($this->{__METHOD__})) {
+			if (!Df_Core_State::s()->isStoreInitialized()) {
+				df_error(
+					'При кэшировании в разрезе магазина для объекта класса «%s» произошёл сбой,'
+					. ' потому что система ещё не инициализировала текущий магазин.'
+					, get_class($this)
+				);
+			}
+			$this->{__METHOD__} = $this->cacheKeyGlobal() . '[' . rm_store()->getCode() . ']';
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by _construct()
+	 * @return void
+	 */
 	private function cacheLoad() {
 		if ($this->isCacheEnabled()) {
-			$this->cacheLoadArea($this->getPropertiesToCache(), $this->getCacheKey());
+			$this->cacheLoadArea($this->cachedAllGlobal(), $this->cacheKeyGlobal());
 			/**
-			 * При вызове метода @see Df_Core_Model::getCacheKeyPerStore()
+			 * При вызове метода @uses Df_Core_Model::getCacheKeyPerStore()
 			 * может произойти исключительная ситуация в том случае,
 			 * когда текущий магазин системы ещё не инициализирован
 			 * (вызов Mage::app()->getStore() приводит к исключительной ситуации),
-			 * поэтому вызываем @see Df_Core_Model::getCacheKeyPerStore()
+			 * поэтому вызываем @uses Df_Core_Model::getCacheKeyPerStore()
 			 * только если в этом методе есть реальная потребность,
 			 * т.е. если класс действительно имеет свойства, подлежащие кэшированию в разрезе магазина,
 			 * и текущий магазин уже инициализирован.
 			 */
-			if ($this->getPropertiesToCachePerStore() && Df_Core_Model_State::s()->isStoreInitialized()) {
-				$this->cacheLoadArea($this->getPropertiesToCachePerStore(), $this->getCacheKeyPerStore());
+			if ($this->cachedAllPerStore() && Df_Core_State::s()->isStoreInitialized()) {
+				$this->cacheLoadArea($this->cachedAllPerStore(), $this->cacheKeyPerStore());
 			}
 		}
-		return $this;
 	}
 
 	/**
@@ -662,7 +913,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	private function cacheLoadProperty($propertyName, $cacheKey) {
 		$cacheKey =  $cacheKey . $propertyName;
 		/** @var string|bool $propertyValueSerialized */
-		$propertyValueSerialized = Mage::app()->getCacheInstance()->load($cacheKey);
+		$propertyValueSerialized = rm_cache()->load($cacheKey);
 		if ($propertyValueSerialized) {
 			/** @var mixed $propertyValue */
 			/**
@@ -682,26 +933,28 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		}
 	}
 
-	/** @return Df_Core_Model */
+	/**
+	 * @used-by _destruct()
+	 * @return void
+	 */
 	private function cacheSave() {
 		if ($this->isCacheEnabled()) {
 			$this->cacheSaveBefore();
-			$this->cacheSaveArea($this->getPropertiesToCache(), $this->getCacheKey());
+			$this->cacheSaveArea($this->cachedAllGlobal(), $this->cacheKeyGlobal());
 			/**
-			 * При вызове метода @see Df_Core_Model::getCacheKeyPerStore()
+			 * При вызове метода @uses Df_Core_Model::cacheKeyPerStore()
 			 * может произойти исключительная ситуация в том случае,
 			 * когда текущий магазин системы ещё не инициализирован
 			 * (вызов Mage::app()->getStore() приводит к исключительной ситуации),
-			 * поэтому вызываем @see Df_Core_Model::getCacheKeyPerStore()
+			 * поэтому вызываем @uses Df_Core_Model::cacheKeyPerStore()
 			 * только если в этом методе есть реальная потребность,
 			 * т.е. если класс действительно имеет свойства, подлежащие кэшированию в разрезе магазина,
 			 * и если текущий магазин уже инициализирован.
 			 */
-			if ($this->getPropertiesToCachePerStore() && Df_Core_Model_State::s()->isStoreInitialized()) {
-				$this->cacheSaveArea($this->getPropertiesToCachePerStore(), $this->getCacheKeyPerStore());
+			if ($this->cachedAllPerStore() && Df_Core_State::s()->isStoreInitialized()) {
+				$this->cacheSaveArea($this->cachedAllPerStore(), $this->cacheKeyPerStore());
 			}
 		}
-		return $this;
 	}
 
 	/**
@@ -744,18 +997,20 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 */
 	private function cacheSaveProperty($propertyName, $cacheKey) {
 		$cacheKey = $cacheKey . $propertyName;
+		/** @var mixed $propertyValue */
+		$propertyValue = $this->$propertyName;
 		/** @var string|bool $propertyValueSerialized */
 		$propertyValueSerialized =
 			isset($this->_cachedPropertiesSimpleMap[$propertyName])
-			? rm_serialize_simple($this->$propertyName)
-			: rm_serialize($this->$propertyName)
+			? rm_serialize_simple($propertyValue)
+			: rm_serialize($propertyValue)
 		;
 		if ($propertyValueSerialized) {
-			Mage::app()->getCacheInstance()->save(
+			rm_cache()->save(
 				$data = $propertyValueSerialized
 				,$id = $cacheKey
-				,$tags = $this->getCacheTagsRm()
-				,$lifeTime = $lifeTime = $this->getCacheLifetime()
+				,$tags = rm_array($this->cacheTags())
+				,$lifeTime = $this->cacheLifetime()
 			);
 		}
 	}
@@ -768,30 +1023,31 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	private function getCacheKey() {
+	/** @return Df_Core_Model_Mixin */
+	private function getMixin() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = implode('::', array_merge(
-				$this->getCacheKeyParams(), $this->getCacheKeyParamsAdditional()
-			));
+			/** @var Df_Core_Model_Mixin $result */
+			$result = $this->_getData(self::P__MIXIN);
+			if (!$result) {
+				$result = $this->createMixin();
+			}
+			else {
+				df_assert($result instanceof Df_Core_Model_Mixin);
+			}
+			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return string[] */
-	private function getCacheKeyParams() {return array(get_class($this));}
-
-	/** @return string */
-	private function getCacheKeyPerStore() {
+	/**
+	 * 2015-08-14
+	 * @used-by isDestructableSingleton()
+	 * @used-by isCacheEnabled()
+	 * @return bool
+	 */
+	private function hasPropertiesToCache() {
 		if (!isset($this->{__METHOD__})) {
-			if (!Df_Core_Model_State::s()->isStoreInitialized()) {
-				df_error(
-					'При кэшировании в разрезе магазина для объекта класса «%s» произошёл сбой,'
-					. ' потому что система ещё не инициализировала текущий магазин.'
-					, get_class($this)
-				);
-			}
-			$this->{__METHOD__} = $this->getCacheKey() . '[' . Mage::app()->getStore()->getCode() . ']';
+			$this->{__METHOD__} = !!$this->cachedAll();
 		}
 		return $this->{__METHOD__};
 	}
@@ -801,15 +1057,17 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * @return void
 	 */
 	protected function _construct() {
-		$this->_cachedPropertiesSimpleMap = array_flip($this->getPropertiesToCacheSimple());
+		$this->_cachedPropertiesSimpleMap = array_flip($this->cachedAllSimple());
 		if ($this->_data) {
 			$this->_checkForNullArray($this->_data);
-			// Обратите внимание, что Mage::getModel
-			// почему-то не устанавливает поле _hasModelChanged в true.
+			/**
+			 * Обратите внимание, что @see Mage::getModel()
+			 * почему-то не устанавливает поле @see _hasDataChanges в true.
+			 */
 			$this->setDataChanges(true);
 			/**
 			 * Фильтры мы здесь пока применять не можем,
-			 * потому что они ещё не инициализированны
+			 * потому что они ещё не инициализированы
 			 * (фильтры будут инициализированы потомками
 			 * уже после вызова @see Df_Core_Model::_construct()).
 			 * Вместо этого применяем фильтры для начальных данных
@@ -822,32 +1080,32 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		if ($this->isDestructableSingleton()) {
 			rm_destructable_singleton($this);
 		}
+		// Нельзя вызывать здесь $this->_prop(self::P__MIXIN, Df_Core_Model_Mixin::_C, false);
+		// потому что библиотеки Российской сборки ещё не инициализированы
+		// (по какой причине — не разбирался).
 	}
+
+	const P__MIXIN = 'mixin';
 
 	/** @var string  */
 	protected $_eventObject = 'object';
 	/** @var string  */
 	protected $_eventPrefix = 'df_core_abstract';
+
 	/** @var array(string => bool) */
 	private $_cachedPropertiesLoaded = array();
 	/** @var array(string => bool) */
 	private $_cachedPropertiesModified = array();
 	/** @var array(string => null) */
 	private $_cachedPropertiesSimpleMap;
-
-	/** @var string */
-	private static $RM_VALIDATOR__REQUIRED = 'rm__required';
-	const _CLASS = __CLASS__;
-	const ID_SUFFIX = '_id';
-	const F_TRIM = 'filter-trim';
-	const V_ARRAY = 'array';
-	const V_BOOL = 'boolean';
-	const V_FLOAT = 'float';
-	const V_INT = 'int';
-	const V_NAT = 'nat';
-	const V_NAT0 = 'nat0';
-	const V_STRING_NE = 'string';
-	const V_STRING = 'string_empty';
+	/** @var array(string => bool) */
+	private $_disabledMixins = array();
+	/** @var array(string => Zend_Filter_Interface[]) */
+	private $_filters = array();
+	/** @var array(string => Zend_Validate_Interface[]) */
+	private $_validators = array();
+	/** @var array(string => bool) */
+	private $_valueWasNullBeforeFilters = array();
 
 	/**
 	 * @param string $class
@@ -866,52 +1124,6 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		foreach ($functions as $function) {
 			/** @var string $function */
 			$result[]= $class . '::' . $function;
-		}
-		return $result;
-	}
-
-	/**
-	 * @static
-	 * @param string $validatorName
-	 * @param bool $useSingleton [optional]
-	 * @return Zend_Validate_Interface
-	 */
-	private static function _getValidatorByName($validatorName, $useSingleton = true) {
-		/** @var array(string => Zend_Validate_Interface) $map */
-		static $map;
-		if (!isset($map)) {
-			$map = array(
-				self::F_TRIM => Df_Zf_Filter_String_Trim::s()
-				,self::V_ARRAY => Df_Zf_Validate_Array::s()
-				,self::V_BOOL => Df_Zf_Validate_Boolean::s()
-				,self::V_FLOAT => Df_Zf_Validate_Float::s()
-				,self::V_INT => Df_Zf_Validate_Int::s()
-				,self::V_NAT => Df_Zf_Validate_Nat::s()
-				,self::V_NAT0 => Df_Zf_Validate_Nat0::s()
-				,self::V_STRING => Df_Zf_Validate_String::s()
-				,self::V_STRING_NE => Df_Zf_Validate_String_NotEmpty::s()
-			);
-		}
-		/** @var Zend_Validate_Interface $result */
-		$result = df_a($map, $validatorName);
-		if ($result) {
-			if (!$useSingleton) {
-				/** @var string $class */
-				$class = get_class($result);
-				$result = new $class;
-			}
-		}
-		else {
-			if (@class_exists($validatorName) || @interface_exists($validatorName)) {
-				$result =
-					$useSingleton
-					? Df_Zf_Validate_Class::s($validatorName)
-					: Df_Zf_Validate_Class::i($validatorName)
-				;
-			}
-			else {
-				df_error_internal('Система не смогла распознать валидатор «%s».', $validatorName);
-			}
 		}
 		return $result;
 	}

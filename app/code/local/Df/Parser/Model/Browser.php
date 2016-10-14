@@ -91,24 +91,34 @@ class Df_Parser_Model_Browser extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__AREA, self::V_STRING)
-			->_prop(self::P__MAX_ATTEMPT_COUNT, self::V_INT, false)
+			->_prop(self::P__AREA, RM_V_STRING)
+			->_prop(self::P__MAX_ATTEMPT_COUNT, RM_V_INT, false)
 			->_prop(self::P__VALIDATOR, 'Zend_Validate_Interface', false)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const DEFAULT__MAX_ATTEMPT_COUNT = 5;
 	const P__AREA = 'area';
 	const P__MAX_ATTEMPT_COUNT = 'max_attempt_count';
 	const P__VALIDATOR = 'validator';
+
 	/**
+	 * 2015-02-07
+	 * Обратите внимание, что в сигнатуре метода/функции
+	 * для параметров объектного типа со значением по умолчанию null
+	 * мы вправе, тем не менее, указывать тип-класс.
+	 * Проверял на всех поддерживаемых Российской сборкой Magento версиях интерпретатора PHP,
+	 * сбоев нет:
+	 * http://3v4l.org/ihOFp
 	 * @static
-	 * @param string|null $area[optional]
+	 * @param string|null $area [optional]
 	 * @param Zend_Validate_Interface|null $validator [optional]
 	 * @param int|null $maxAttemptCount [optional]
 	 * @return Df_Parser_Model_Browser
 	 */
-	public static function i($area = null, $validator = null, $maxAttemptCount = null) {
+	public static function i(
+		$area = null, Zend_Validate_Interface $validator = null, $maxAttemptCount = null
+	) {
 		return new self(array(
 			self::P__AREA => $area
 			, self::P__VALIDATOR => $validator
@@ -122,7 +132,7 @@ class Df_Parser_Model_Browser extends Df_Core_Model {
 	 */
 	public static function s($area = null) {
 		/** @var array(string => Df_Parser_Model_Browser) $instances */
-		static $instances = array();
+		static $instances;
 		if (!isset($instances[$area])) {
 			$instances[$area] = new self(array(self::P__AREA => $area));
 		}

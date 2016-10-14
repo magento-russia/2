@@ -1,0 +1,6 @@
+<?php /** @var Df_Reward_Block_Checkout_Payment $this */ ?>
+<?php if ((float)$this->getCanUseRewardPoints()): ?>
+<script type="text/javascript">
+	quoteBaseGrandTotal = <?php echo(float)rm_quote()->getBaseGrandTotal(); ?>;
+</script>
+<?php endif; ?>

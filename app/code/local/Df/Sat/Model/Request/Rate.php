@@ -22,7 +22,7 @@ class Df_Sat_Model_Request_Rate extends Df_Sat_Model_Request {
 	 */
 	protected function needConvertResponseFrom1251ToUtf8() {return true;}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

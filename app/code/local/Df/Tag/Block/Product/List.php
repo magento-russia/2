@@ -2,6 +2,8 @@
 class Df_Tag_Block_Product_List extends Mage_Tag_Block_Product_List {
 	/**
 	 * @override
+	 * @see Mage_Core_Block_Template::getCacheKeyInfo()
+	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return string[]
 	 */
 	public function getCacheKeyInfo() {
@@ -23,14 +25,14 @@ class Df_Tag_Block_Product_List extends Mage_Tag_Block_Product_List {
 			 * (и в полную противоположность Zend Framework
 			 * и всем остальным частям Magento, где используется кэширование)
 			 * означает, что блок не удет кэшироваться вовсе!
-			 * @see Mage_Core_Block_Abstract::_loadCache()
+			 * @used-by Mage_Core_Block_Abstract::_loadCache()
 			 */
 			'cache_lifetime' => Df_Core_Block_Template::CACHE_LIFETIME_STANDARD
 			/**
 			 * При такой инициализации тегов
 			 * (без перекрытия метода @see Mage_Core_Block_Abstract::getCacheTags())
-			 * тег Mage_Core_Block_Abstract::CACHE_GROUP будет добавлен автоматически.
-			 * @see Mage_Core_Block_Abstract::getCacheTags()
+			 * тег @see Mage_Core_Block_Abstract::CACHE_GROUP будет добавлен автоматически.
+			 * @used-by Mage_Core_Block_Abstract::getCacheTags()
 			 */
 			,'cache_tags' => array(Mage_Catalog_Model_Product::CACHE_TAG)
 		));

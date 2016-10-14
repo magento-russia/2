@@ -10,8 +10,30 @@ class Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData {
 	/** @return void */
 	public function process() {
 		if (!$this->isProcessed()) {
-			$this->processInternal();
+			$this->_process();
 			$this->setProcessed();
+		}
+	}
+
+	/** @return void */
+	private function _process() {
+		/**
+		 * 2014-12-15
+		 * Между 2014-10-12 (версия 2.39.2) и 2014-12-15 (версия 2.42.0)
+		 * массив идентификаторов товарных свойств по ошибке кэшировался в переменной.
+		 * Однако кэшировать этот массив нельзя,
+		 * потому что товарные свойства могли быть добавлены динамически
+		 * (так делает, например, установщик модуля «Яндекс.Маркет» и сторонние оформительские темы).
+		 * Получалось, что при установке Российской сборки Magento
+		 * товарные свойства модуля «Яндекс.Маркет» сначала добавлялись, а потом тут же удалялись.
+		 * А если Российская сборка Magento устанавливалась одновременно со стороней оформительской темой,
+		 * то то же происходило и с товарными свойствами сторонней оформительской темы.
+		 */
+		/** @var int[] $attributeIds */
+		$attributeIds = rm_fetch_col_int('eav/attribute', 'attribute_id');;
+		foreach ($this->getTablesToProcess() as $table) {
+			/** @var string $table */
+			rm_table_delete_not($table, 'attribute_id', $attributeIds);
 		}
 	}
 
@@ -24,7 +46,7 @@ class Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData {
 				/** @var string $type */
 				$result[]= $this->resource()->getTableByType($type);
 			}
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = array_unique($result);
 		}
 		return $this->{__METHOD__};
 	}
@@ -35,37 +57,6 @@ class Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData {
 			$this->{__METHOD__} = Mage::getStoreConfigFlag(self::$_CONFIG_PATH);
 		}
 		return $this->{__METHOD__};
-	}
-
-	/** @return void */
-	private function processInternal() {
-		/**
-		 * 2014-12-15
-		 * Между 2014-12-10 (версия 2.39.2) и 2014-12-15 (версия 2.42.0)
-		 * массив идентификаторов товарных свойств по ошибке кэшировался в переменной.
-		 * Однако кэшировать этот массив нельзя,
-		 * потому что товарные свойства могли быть добавлены динамически
-		 * (так делает, например, установщик модуля «Яндекс.Маркет» и сторонние оформительские темы).
-		 * Получалось, что при установке Российской сборки Magento
-		 * товарные свойства модуля «Яндекс.Маркет» сначала добавлялись, а потом тут же удалялись.
-		 * А если Российская сборка Magento устанавливалась одновременно со стороней оформительской темой,
-		 * то то же происходило и с товарными свойствами сторонней оформительской темы.
-		 */
-		/** @var int[] $attributeIds */
-		$attributeIds = rm_conn()->fetchCol(rm_select()->from(rm_table('eav/attribute'), 'attribute_id'));
-		foreach ($this->getTablesToProcess() as $table) {
-			/** @var string $table */
-			$this->processTable($table, $attributeIds);
-		}
-	}
-
-	/**
-	 * @param string $table
-	 * @param int[] $attributeIds
-	 * @return void
-	 */
-	private function processTable($table, $attributeIds) {
-		rm_conn()->delete($table, array('attribute_id NOT IN (?)' => $attributeIds));
 	}
 
 	/** @return Df_Catalog_Model_Resource_Category_Flat */

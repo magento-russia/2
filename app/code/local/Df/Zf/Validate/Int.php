@@ -12,7 +12,7 @@ class Df_Zf_Validate_Int extends Df_Zf_Validate_Type implements Zend_Filter_Inte
 			$result = rm_int($value, $allowNull = true);
 		}
 		catch (Exception $e) {
-			throw new Zend_Filter_Exception(rm_ets($e));
+			df_error(new Zend_Filter_Exception(rm_ets($e)));
 		}
 		return $result;
 	}
@@ -26,9 +26,9 @@ class Df_Zf_Validate_Int extends Df_Zf_Validate_Type implements Zend_Filter_Inte
 		$this->prepareValidation($value);
 		/**
 		 * Обратите внимание, что здесь нужно именно «==», а не «===».
-		 * @link http://php.net/manual/en/function.is-int.php#35820
+		 * http://php.net/manual/function.is-int.php#35820
 		 */
-		return is_numeric($value) && ($value == intval($value));
+		return is_numeric($value) && ($value == (int)$value);
 	}
 
 	/**

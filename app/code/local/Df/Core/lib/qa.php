@@ -47,6 +47,16 @@ function df_bt($levelsToSkip = 0) {
 	rm_report('bt-{date}-{time}.log', print_r($compactBT, true));
 }
 
+/** @return bool */
+function df_is_it_my_local_pc() {
+	/** @var bool $result  */
+	static $result;
+	if (is_null($result)) {
+		$result = rm_bool(df_a($_SERVER, 'RM_DEVELOPER'));
+	}
+	return $result;
+}
+
 /**
  * @used-by Df_1C_Cml2_Action_Catalog_Import::_process()
  * @used-by Df_Qa_Message::message()
@@ -69,6 +79,31 @@ function rm_context() {
 }
 
 /**
+ * 2015-04-05
+ * @used-by Df_Core_Exception_InvalidObjectProperty::__construct()
+ * @used-by Df_Core_Validator::check()
+ * @param mixed $value
+ * @param bool $addQuotes [optional]
+ * @return string
+ */
+function rm_debug_type($value, $addQuotes = true) {
+	/** @var string $result */
+	if (is_object($value)) {
+		$result = 'объект класса ' . get_class($value);
+	}
+	else if (is_array($value)) {
+		$result = sprintf('массив с %d элементами', count($value));
+	}
+	else if (is_null($value)) {
+		$result = 'NULL';
+	}
+	else {
+		$result = sprintf('%s (%s)', df_string($value), gettype($value));
+	}
+	return !$addQuotes ? $result : df_quote_russian($result);
+}
+
+/**
  * @param string $nameTemplate
  * @param string $message
  * @return void
@@ -76,3 +111,5 @@ function rm_context() {
 function rm_report($nameTemplate, $message) {
 	rm_file_put_contents(rm_file_name(Mage::getBaseDir('var') . DS . 'log', $nameTemplate), $message);
 }
+
+

@@ -2,17 +2,11 @@
 class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 	/**
 	 * @override
-	 * @return string[]
+	 * @see Df_Core_Block_Abstract::cacheKeySuffix()
+	 * @used-by Df_Core_Block_Abstract::getCacheKeyInfo()
+	 * @return string|string[]
 	 */
-	public function getCacheKeyInfo() {
-		return
-			array_merge(
-				parent::getCacheKeyInfo()
-				,array(get_class($this))
-				,rm_layout()->getUpdate()->getHandles()
-			)
-		;
-	}
+	public function cacheKeySuffix() {return rm_handles();}
 	
 	/** @return string */
 	public function getOptionsAsJson() {
@@ -63,9 +57,11 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 
 	/**
 	 * @override
+	 * @see Df_Core_Block_Template::defaultTemplate()
+	 * @used-by Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
-	protected function getDefaultTemplate() {return 'df/tweaks/js.phtml';}
+	protected function defaultTemplate() {return 'df/tweaks/js.phtml';}
 
 	/**
 	 * @override
@@ -81,9 +77,9 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 		 * (и в полную противоположность Zend Framework
 		 * и всем остальным частям Magento, где используется кэширование)
 		 * означает, что блок не удет кэшироваться вовсе!
-		 * @see Mage_Core_Block_Abstract::_loadCache()
+		 * @used-by Mage_Core_Block_Abstract::_loadCache()
 		 */
 		$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

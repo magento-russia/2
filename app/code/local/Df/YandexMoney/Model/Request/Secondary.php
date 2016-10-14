@@ -8,23 +8,6 @@ abstract class Df_YandexMoney_Model_Request_Secondary extends Df_Payment_Model_R
 
 	/**
 	 * @override
-	 * @return array(string => string)
-	 */
-	public function getParams() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getParamsUnique();
-			if ($this->getServiceConfig()->isTestMode()) {
-				$this->{__METHOD__} = array_merge($this->{__METHOD__}, array(
-					'test_payment' => 'true'
-					,'test_result' => 'success'
-				));
-			}
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @override
 	 * @return Zend_Uri_Http
 	 */
 	public function getUri() {
@@ -38,11 +21,26 @@ abstract class Df_YandexMoney_Model_Request_Secondary extends Df_Payment_Model_R
 
 	/**
 	 * @override
+	 * @see Df_Payment_Model_Request_Secondary::_params()
+	 * @used-by Df_Payment_Model_Request_Secondary::params()
+	 * @return array(string => string|int)
+	 */
+	protected function _params() {
+		/** @var array(string => string|int) $result */
+		$result = $this->getParamsUnique();
+		if ($this->configS()->isTestMode()) {
+			$result = array('test_payment' => 'true', 'test_result' => 'success') + $result;
+		}
+		return $result;
+	}
+
+	/**
+	 * @override
 	 * @return array(string => string|bool|int|float|array(string => string|bool|int|float))
 	 */
 	protected function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_json_decode($this->getHttpClient()->request()->getBody());
+			$this->{__METHOD__} = Zend_Json::decode($this->getHttpClient()->request()->getBody());
 		}
 		return $this->{__METHOD__};
 	}
@@ -76,7 +74,7 @@ abstract class Df_YandexMoney_Model_Request_Secondary extends Df_Payment_Model_R
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__TOKEN, self::V_STRING_NE);
+		$this->_prop(self::P__TOKEN, RM_V_STRING_NE);
 	}
 	const P__TOKEN = 'token';
 }

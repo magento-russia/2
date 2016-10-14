@@ -18,22 +18,17 @@
  */
 class Df_Catalog_Model_Event_Product_Collection_Load_Before extends Df_Core_Model_Event {
 	/** @return Df_Catalog_Model_Resource_Product_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection */
-	public function getCollection() {
-		/** @var Df_Catalog_Model_Resource_Product_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection $result */
-		$result = $this->getEventParam(self::EVENT_PARAM__COLLECTION);
-		df_h()->catalog()->assert()->productCollection($result);
-		return $result;
-	}
+	public function getCollection() {return $this->getEventParam('collection');}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedEventPrefix() {
-		return self::EXPECTED_EVENT_PREFIX;
-	}
+	protected function getExpectedEventPrefix() {return 'catalog_product_collection_load_before';}
 
-	const _CLASS = __CLASS__;
-	const EVENT_PARAM__COLLECTION = 'collection';
-	const EXPECTED_EVENT_PREFIX = 'catalog_product_collection_load_before';
+	/**
+	 * @used-by Df_AccessControl_Observer::catalog_product_collection_load_before()
+	 * @used-by Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbiddenProducts::getEventClass()
+	 */
+	const _C = __CLASS__;
 }

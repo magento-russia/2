@@ -12,7 +12,7 @@ class Df_CustomerBalance_Model_Total_Creditmemo_Customerbalance extends Mage_Sal
 		$creditmemo->setCustomerBalanceTotalRefunded(0);
 		$creditmemo->setBaseCustomerBalanceReturnMax(0);
 		$creditmemo->setCustomerBalanceReturnMax(0);
-		if (!df_h()->customer()->balance()->isEnabled()) {
+		if (!Df_CustomerBalance_Helper_Data::s()->isEnabled()) {
 			return $this;
 		}
 

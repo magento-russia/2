@@ -3,7 +3,7 @@
 	<sections>
 		<df_shipping>
 			<groups>
-				<cdek translate='label'>
+				<cdek>
 					<label>СДЭК</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>11000</sort_order>
@@ -18,7 +18,7 @@
 						]]>
 					</comment>
 					<fields>
-						<active translate='label'>
+						<active>
 							<label>Включить?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -26,11 +26,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-cdek</df_feature>
 							<config_path>carriers/df-cdek/active</config_path>
 						</active>
-						<title translate='label'>
+						<title>
 							<label>Название для этого способа оплаты</label>
 							<comment>
 								<![CDATA[
@@ -46,7 +46,7 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</title>
-						<frontend__show_method_name translate='label'>
+						<frontend__show_method_name>
 							<label><![CDATA[Показывать ли на витрине
 							название тарифа рядом со стоимостью и сроками доставки?]]></label>
 							<comment>
@@ -66,7 +66,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__show_method_name>
-						<service__shop_id translate='label'>
+						<service__shop_id>
 							<label><![CDATA[Идентификатор магазина в СДЭК]]></label>
 							<comment>
 								<![CDATA[
@@ -84,10 +84,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</service__shop_id>
-						<service__shop_password translate='label'>
+						<service__shop_password>
 							<label>Пароль магазина</label>
 							<comment>
 								<![CDATA[
@@ -105,55 +105,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<depends><active>1</active></depends>
 						</service__shop_password>
-						<admin__processing_before_shipping__days translate='label'>
-							<label><![CDATA[Сколько дней Вам требуется для передачи заказа покупателя в службу доставки?]]></label>
-							<comment><![CDATA[Указанное количество дней будет добавлено к срокам доставки
-								для показа совокупных сроков доставки покупателю]]>
-							</comment>
-							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
-							<df_min>0</df_min>
-							<df_max>5</df_max>
-							<df_step>1</df_step>
-							<sort_order>2500</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
-							<depends><active>1</active></depends>
-						</admin__processing_before_shipping__days>
-						<admin__processing_before_shipping__consider_today_untill translate='label'>
-							<label><![CDATA[До какого часа учитывать текущий день в сроках передачи заказа покупателя в службу доставки?]]></label>
-							<frontend_type>select</frontend_type>
-							<source_model>df_admin/config_source_selectNumberFromDropdown</source_model>
-							<df_min>8</df_min>
-							<df_max>18</df_max>
-							<df_step>1</df_step>
-							<sort_order>2550</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
-							<depends><active>1</active></depends>
-						</admin__processing_before_shipping__consider_today_untill>
-						<admin__processing_before_shipping__consider_days_off translate='label'>
-							<label><![CDATA[Учитывать ли в сроках передачи заказа в службу доставки
-							выходные дни Вашего магазина?]]></label>
-							<comment><![CDATA[Выходные дни магазина задаются в административном разделе
-							 «Система» → «Настройки» → «Основное» →
-							 «Региональные настройки» → «Выходные дни»]]></comment>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>2600</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<depends><active>1</active></depends>
-						</admin__processing_before_shipping__consider_days_off>
-						<admin__fee_percent translate='label'>
+						<admin__fee_percent>
 							<label>Относительная наценка</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>3000</sort_order>
@@ -172,7 +127,7 @@
 							</validate>
 							<depends><active>1</active></depends>
 						</admin__fee_percent>
-						<admin__fee_fixed translate='label'>
+						<admin__fee_fixed>
 							<label>Абсолютная наценка</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>4000</sort_order>
@@ -190,7 +145,7 @@
 							</validate>
 							<depends><active>1</active></depends>
 						</admin__fee_fixed>
-						<service__need_accept_cash_on_delivery translate='label'>
+						<service__need_accept_cash_on_delivery>
 							<label>Должна ли служба доставки принимать от покупателя оплату заказа?</label>
 							<comment>
 								<![CDATA[
@@ -207,7 +162,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__need_accept_cash_on_delivery>
-						<admin__declared_value_percent translate='label'>
+						<admin__declared_value_percent>
 							<label>Объявленная стоимость груза</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>6000</sort_order>
@@ -221,7 +176,7 @@
 							</validate>
 							<depends><active>1</active></depends>
 						</admin__declared_value_percent>
-						<service__need_get_cargo_from_the_shop_store translate='label'>
+						<service__need_get_cargo_from_the_shop_store>
 							<label>Должна ли служба доставки приезжать за грузом на склад магазина?</label>
 							<comment>
 								<![CDATA[
@@ -238,7 +193,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</service__need_get_cargo_from_the_shop_store>
-						<frontend__disable_for_shop_city translate='label'>
+						<frontend__disable_for_shop_city>
 							<label>Скрыть этот способ доставки для покупателей из города магазина?</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -248,7 +203,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__disable_for_shop_city>
-						<frontend__sort_order translate='label'>
+						<frontend__sort_order>
 							<label>Вес для упорядочивания</label>
 							<comment>
 								<![CDATA[
@@ -264,7 +219,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__sort_order>
-						<frontend__display_diagnostic_messages translate='label'>
+						<frontend__display_diagnostic_messages>
 							<label>Показывать ли способ доставки на витрине в том случае, когда он по каким-либо причинам неприменим к текущему заказу?</label>
 							<comment>
 								<![CDATA[
@@ -279,7 +234,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__display_diagnostic_messages>
-						<frontend__sallowspecific translate='label'>
+						<frontend__sallowspecific>
 							<label>Ограничить область доставки конкретными странами?</label>
 							<comment>
 								<![CDATA[
@@ -297,7 +252,7 @@
 							<show_in_store>1</show_in_store>
 							<depends><active>1</active></depends>
 						</frontend__sallowspecific>
-						<frontend__specificcountry translate='label'>
+						<frontend__specificcountry>
 							<label>Перечень стран, куда разрешена доставка данным способом</label>
 							<frontend_type>multiselect</frontend_type>
 							<sort_order>25000</sort_order>

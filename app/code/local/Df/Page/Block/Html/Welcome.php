@@ -35,7 +35,6 @@ class Df_Page_Block_Html_Welcome extends Df_Page_Block_Html_WelcomeM {
 			// Избегаем зависимости модуля Df_Page от наличия модуля Df_Tweaks
 			df_module_enabled(Df_Core_Module::TWEAKS)
 			&& df_installed()
-			&& df_enabled(Df_Core_Feature::TWEAKS)
 			&& rm_session_customer()->isLoggedIn()
 		) {
 			if (df_cfg()->tweaks()->header()->hideWelcomeFromLoggedIn()) {
@@ -43,7 +42,7 @@ class Df_Page_Block_Html_Welcome extends Df_Page_Block_Html_WelcomeM {
 			}
 			else {
 				if (df_cfg()->tweaks()->header()->showOnlyFirstName()) {
-					$result = sprintf(rm_translate('Welcome, %s!', 'Mage_Page'), df_escape(
+					$result = sprintf(rm_translate('Welcome, %s!', 'Mage_Page'), rm_e(
 						df_h()->tweaks()->customer()->getFirstNameWithPrefix())
 					);
 				}

@@ -10,7 +10,7 @@ class Df_Exline_Request extends Df_Shipping_Model_Request {
 
 	/**
 	 * @used-by Df_Exline_Locator::map()
-	 * @used-by Df_Exline_Model_Collector::json()
+	 * @used-by Df_Exline_Collector::json()
 	 * @param string $pathSuffix
 	 * @param array(string => string) $queryParams [optional]
 	 * @return Df_Exline_Request

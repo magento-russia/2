@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <config>
 	<sections>
-		<df_speed translate='label' module='df_speed'>
+		<df_speed>
 			<label>Ускорение</label>
 			<tab>df</tab>
 			<frontend_type>text</frontend_type>
@@ -18,7 +18,7 @@
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
 					<fields>
-						<catalog_product_list translate='label'>
+						<catalog_product_list>
 							<label>Кэшировать список товаров?</label>
 							<comment>
 								<![CDATA[
@@ -30,10 +30,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</catalog_product_list>
-						<page_html_topmenu translate='label'>
+						<page_html_topmenu>
 							<label>Кэшировать товарное меню?</label>
 							<comment>
 								<![CDATA[
@@ -45,10 +45,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</page_html_topmenu>
-						<checkout_cart_sidebar translate='label'>
+						<checkout_cart_sidebar>
 							<label>Кэшировать боковой блок корзины?</label>
 							<comment>
 								<![CDATA[
@@ -60,10 +60,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</checkout_cart_sidebar>
-						<catalog_product_compare_sidebar translate='label'>
+						<catalog_product_compare_sidebar>
 							<label>Кэшировать боковой блок сравнения товаров?</label>
 							<comment>
 								<![CDATA[
@@ -75,10 +75,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</catalog_product_compare_sidebar>
-						<wishlist_customer_sidebar translate='label'>
+						<wishlist_customer_sidebar>
 							<label>Кэшировать боковой блок планируемых покупок?</label>
 							<comment>
 								<![CDATA[
@@ -90,10 +90,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</wishlist_customer_sidebar>
-						<cms_page translate='label'>
+						<cms_page>
 							<label>Кэшировать самодельные страницы?</label>
 							<comment>
 								<![CDATA[
@@ -105,10 +105,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</cms_page>
-						<page_html_breadcrumbs translate='label'>
+						<page_html_breadcrumbs>
 							<label>Кэшировать хлебные крошки?</label>
 							<comment>
 								<![CDATA[
@@ -120,10 +120,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</page_html_breadcrumbs>
-						<page_switch translate='label'>
+						<page_switch>
 							<label>Кэшировать переключатели витрин и языков?</label>
 							<comment>
 								<![CDATA[
@@ -135,10 +135,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</page_switch>
-						<page_template_links translate='label'>
+						<page_template_links>
 							<label>Кэшировать ссылки в шапке и подвале?</label>
 							<comment>
 								<![CDATA[
@@ -150,10 +150,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</page_template_links>
-						<google_analytics translate='label'>
+						<google_analytics>
 							<label>Кэшировать код GoogleAnalytics?</label>
 							<comment>
 								<![CDATA[
@@ -165,7 +165,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</google_analytics>
 					</fields>
@@ -179,7 +179,7 @@
 					<show_in_store>1</show_in_store>
 					<fields>
 						<!--
-						<disable_visitor_logging translate='label'>
+						<disable_visitor_logging>
 							<label>Отключить учёт посетителей витрины?</label>
 							<comment>
 								<![CDATA[
@@ -196,11 +196,11 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</disable_visitor_logging>
 						-->
-						<disable_logging_last_visit_time translate='label'>
+						<disable_logging_last_visit_time>
 							<label>Отключить учёт времени последнего посещения магазина каждым посетителем?</label>
 							<comment>
 								<![CDATA[
@@ -216,10 +216,10 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</disable_logging_last_visit_time>
-						<enable_assertions translate='label'>
+						<enable_assertions>
 							<label>Выполнять самопроверку при вычислениях?</label>
 							<comment>
 								<![CDATA[
@@ -238,9 +238,9 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 						</enable_assertions>
-						<enable_zend_date_caching translate='label'>
+						<enable_zend_date_caching>
 							<label>Включить кэширование результатов календарных вычислений?</label>
 							<comment>
 								<![CDATA[
@@ -284,7 +284,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</enable_zend_date_caching>
-						<enable_php_scripts_load_checking translate='label'>
+						<enable_php_scripts_load_checking>
 							<label>Включить диагностику загрузки скриптов PHP?</label>
 							<comment>
 								<![CDATA[
@@ -297,7 +297,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-							<frontend_model>df_admin/system_config_form_field</frontend_model>
+							<frontend_model>Df_Admin_Block_Field</frontend_model>
 							<df_feature>df-speed</df_feature>
 						</enable_php_scripts_load_checking>
 					</fields>

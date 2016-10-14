@@ -1,12 +1,15 @@
 <?php
 class Df_Admin_NotificationController extends Df_Core_Controller_Admin {
-	/** @return void */
-	public function deleteDemoStoreAction() {
-		Df_Admin_Model_Action_DeleteDemoStore::i($this)->process();
-	}
 	/**
-	 * @see Df_Admin_Model_Notifier::getUrlSkip()
+	 * @uses Df_Admin_Model_Action_DeleteDemoStore
 	 * @return void
 	 */
-	public function skipAction() {Df_Admin_Model_Action_Notification_Skip::i($this)->process();}
+	public function deleteDemoStoreAction() {rm_action($this, 'DeleteDemoStore');}
+
+	/**
+	 * @see Df_Admin_Model_Notifier::getUrlSkip()
+	 * @uses Df_Admin_Model_Action_SkipNotification()
+	 * @return void
+	 */
+	public function skipAction() {rm_action($this, 'SkipNotification');}
 }

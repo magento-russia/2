@@ -1,4 +1,8 @@
 <?php
+/**
+ * @method Df_Sales_Model_Order|null getOrder()
+ * @method bool|null getIsLineItemsEnabled()
+ */
 class Df_Paypal_Model_Api_Standard extends Mage_Paypal_Model_Api_Standard {
 	/**
 	 * Цель перекрытия:
@@ -18,7 +22,7 @@ class Df_Paypal_Model_Api_Standard extends Mage_Paypal_Model_Api_Standard {
 		/** @var array(string => string) $result */
 		$result = parent::getStandardCheckoutRequest();
 		/** @var Df_Sales_Model_Order $order */
-		$order = $this->getDataUsingMethod('order');
+		$order = $this->getOrder();
 		/** @var float $additionalDiscount */
 		$additionalDiscount =
 				rm_float($order->getData('reward_currency_amount'))
@@ -37,7 +41,7 @@ class Df_Paypal_Model_Api_Standard extends Mage_Paypal_Model_Api_Standard {
 				)
 			;
 		}
-		if (rm_bool($this->getDataUsingMethod('is_line_items_enabled'))) {
+		if ($this->getIsLineItemsEnabled()) {
 			$result['amount'] =
 				$this->_filterAmount (
 					rm_float(df_a($result, 'amount')) - rm_float(df_a($result, 'shipping'))

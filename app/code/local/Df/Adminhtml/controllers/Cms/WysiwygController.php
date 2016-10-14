@@ -2,65 +2,47 @@
 require_once BP . '/app/code/core/Mage/Adminhtml/controllers/Cms/WysiwygController.php';
 class Df_Adminhtml_Cms_WysiwygController extends Mage_Adminhtml_Cms_WysiwygController {
 	/**
-	 * Template directives callback
 	 * @override
+	 * @see Mage_Adminhtml_Cms_WysiwygController::directiveAction()
+	 * @return void
 	 */
 	public function directiveAction() {
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
-		if (!isset($patchNeeded)) {
+		if (is_null($patchNeeded)) {
 			$patchNeeded = df_cfg()->admin()->editor()->fixHeadersAlreadySent();
 		}
-		if ($patchNeeded) {
-			$this->directiveActionDf();
-		}
-		else {
-			parent::directiveAction();
-		}
+		$patchNeeded ? $this->directiveActionDf() : parent::directiveAction();
 	}
 
-	/**
-	 * Template directives callback
-	 */
+	/** @return void */
 	private function directiveActionDf() {
+		/** @var string $directive */
 		$directive = $this->getRequest()->getParam('___directive');
 		$directive = df_mage()->coreHelper()->urlDecode($directive);
 		/** @var string $url */
 		$url = Df_Core_Model_Email_Template_Filter::i()->filter($directive);
+		// начало заплатки
 		try {
-			/*******************
-			 * BEGIN PATCH
-			 */
-			$image = new Df_Varien_Image_Adapter_Gd2();
-			$image->open($url);
-			$this->getResponse()
-				->setHeader(
-					Zend_Http_Client::CONTENT_TYPE
-					,$image->getMimeType()
-				)
-				->setBody($image->getOutput())
-			;
-			/********************
-			 * END PATCH
-			 */
+			$this->directiveActionDfInternal($url);
 		}
-		catch(Exception $e) {
-			/*******************
-			 * BEGIN PATCH
-			 */
-			$image = new Df_Varien_Image_Adapter_Gd2();
-			$image->open(Mage::getSingleton('cms/wysiwyg_config')->getSkinImagePlaceholderUrl());
-			$this->getResponse()
-				->setHeader(
-					Zend_Http_Client::CONTENT_TYPE
-					,$image->getMimeType()
-				)
-				->setBody($image->getOutput())
-			;
-			/********************
-			 * END PATCH
-			 */
+		catch (Exception $e) {
+			/** @var Mage_Cms_Model_Wysiwyg_Config $config */
+			$config = Mage::getSingleton('cms/wysiwyg_config');
+			$this->directiveActionDfInternal($config->getSkinImagePlaceholderUrl());
 		}
+		// конец заплатки
 	}
 
+	/**
+	 * @param string $url
+	 * @return void
+	 */
+	private function directiveActionDfInternal($url) {
+		/** @var Df_Varien_Image_Adapter_Gd2 $image */
+		$image = new Df_Varien_Image_Adapter_Gd2();
+		$image->open($url);
+		rm_response_content_type($this->getResponse(), $image->getMimeType());
+		$this->getResponse()->setBody($image->getOutput());
+	}
 }

@@ -10,14 +10,12 @@ class Df_PayOnline_Helper_Data extends Mage_Core_Helper_Data {
 		foreach ($params as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */
-			$result[]=
-				implode(self::SIGNATURE_KEY_VALUE_SEPARATOR, array($key, df_string($value)))
-			;
+			$result[]= implode(self::SIGNATURE_KEY_VALUE_SEPARATOR, array($key, df_string($value)));
 		}
 		return $result;
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const SIGNATURE_KEY_VALUE_SEPARATOR = '=';
 	const SIGNATURE_PARTS_SEPARATOR = '&';
 

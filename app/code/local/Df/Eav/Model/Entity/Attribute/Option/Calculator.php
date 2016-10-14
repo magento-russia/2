@@ -17,7 +17,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		 * А в следущем сеансе обмена данными (с другими настройками)
 		 * могут быть переданы другие значения из того же самого справочника,
 		 * но не передаваться переданные ранее.
-		 * @link http://magento-forum.ru/topic/3750/
+		 * http://magento-forum.ru/topic/3750/
 		 */
 		/** @var array $oldValues */
 		$oldValues = array();
@@ -26,25 +26,19 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		/** @var array $oldLabels */
 		$oldLabels = array();
 		/** @var string $updateMode */
-		$updateMode = df_cfg()->_1c()->referenceLists()->updateMode();
+		$updateMode = rm_1c_cfg()->referenceLists()->updateMode();
 		foreach ($this->getOptionsOld() as $oldOption) {
-			/** @var Mage_Eav_Model_Entity_Attribute_Option $oldOption */
+			/** @var Df_Eav_Model_Entity_Attribute_Option $oldOption */
 			/** @var int $value */
 			$value = rm_nat0($oldOption->getData('option_id'));
 			df_assert_integer($value);
-			if (
-					Df_1C_Model_Config_Source_ReferenceListUpdateMode::VALUE__NONE
-				!==
-					$updateMode
-			) {
+			if (!Df_1C_Config_Source_ReferenceListUpdateMode::isNone($updateMode)) {
+				// Сохраняем те старые опции, у которых нет идентификаторов из 1С,
+				// потому что они были введены администратором вручную.
 				if (
-					/**
-					 * Сохраняем те старые опции, у которых нет идентификаторов из 1С,
-					 * потому что они были введены администратором вручную.
-					 */
-						is_null($oldOption->getData(Df_Eav_Const::ENTITY_EXTERNAL_ID))
+						!$oldOption->get1CId()
 					||
-						(Df_1C_Model_Config_Source_ReferenceListUpdateMode::VALUE__ALL === $updateMode)
+						Df_1C_Config_Source_ReferenceListUpdateMode::isAll($updateMode)
 				) {
 					$oldValuesToPreserve[]= $value;
 				}
@@ -59,12 +53,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		$oldValueIds = array_keys($oldValues);
 		df_assert_array($oldValueIds);
 		/** @var array $oldMapFromLabelsToValueIds */
-		$oldMapFromLabelsToValueIds =
-			df_array_combine(
-				$this->labelsNormalize($oldLabels)
-				,$oldValueIds
-			)
-		;
+		$oldMapFromLabelsToValueIds = df_array_combine($this->labelsNormalize($oldLabels), $oldValueIds);
 		df_assert_array($oldMapFromLabelsToValueIds);
 		/** @var array $newLabels */
 		$newLabels = $this->extractLabelsFromValues($this->getOptionsValuesNew());
@@ -91,27 +80,15 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		df_assert_array($labelsToDelete);
 		/**
 		 * Сначала все старые значения помечаем нулём
-		 * @var array $actualDelete
+		 * @var array(int => 0|1) $actualDelete
 		 */
-		$actualDelete =
-			df_array_combine(
-				$oldValueIds
-				,df_array_fill(0, count($oldValueIds), 0)
-			)
-		;
-		/**
-		 * ... и лишь затем то, что надо удалить, помечаем единицей
-		 */
+		$actualDelete = array_fill_keys($oldValueIds, 0);
+		// ... и лишь затем то, что надо удалить, помечаем единицей
 		foreach ($labelsToDelete as $labelToDelete) {
 			/** @var string $labelToDelete */
 			df_assert_string($labelToDelete);
 			/** @var int $valueIdToDelete */
-			$valueIdToDelete =
-				df_a(
-					$oldMapFromLabelsToValueIds
-					,$this->labelNormalize($labelToDelete)
-				)
-			;
+			$valueIdToDelete = df_a($oldMapFromLabelsToValueIds, $this->labelNormalize($labelToDelete));
 			df_assert_integer($valueIdToDelete);
 			if (
 				!(
@@ -123,7 +100,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 					||
 						/**
 						 * В режим вставки программист указывает параметром
-						 * Df_Eav_Model_Entity_Attribute_Option_Calculator::P__OPTIONS_VALUES_NEW
+						 * @see Df_Eav_Model_Entity_Attribute_Option_Calculator::P__OPTIONS_VALUES_NEW
 						 * не все опции свойства, а лишь новые — те,
 						 * которые надо добавить к свойству
 						 */
@@ -140,10 +117,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		df_assert_array($actualLabels);
 		/** @var array $actualMapFromLabelsToValueIds */
 		$actualMapFromLabelsToValueIds =
-			df_array_combine(
-				$this->labelsNormalize($actualLabels)
-				,array_keys($actualValues)
-			)
+			df_array_combine($this->labelsNormalize($actualLabels), array_keys($actualValues))
 		;
 		df_assert_array($actualMapFromLabelsToValueIds);
 		/** @var array $actualLabelsToSort */
@@ -158,16 +132,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			$actualOrders[$valueId] = $order;
 			$order++;
 		}
-		/** @var array $result */
-		$result =
-			array(
-				'value' => $actualValues
-				,'order' => $actualOrders
-				,'delete' => $actualDelete
-			)
-		;
-		df_result_array($result);
-		return $result;
+		return array('value' => $actualValues, 'order' => $actualOrders, 'delete' => $actualDelete);
 	}
 
 	/**
@@ -196,14 +161,12 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			/** @var int $storeId */
 			$storeId = rm_nat0($this->getAttribute()->getDataUsingMethod('store_id'));
 			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $result */
-			$result = Df_Eav_Model_Resource_Entity_Attribute_Option_Collection::i();
-			df_h()->eav()->assert()->entityAttributeOptionCollection($result);
+			$result = Df_Eav_Model_Entity_Attribute_Option::c();
 			$result->setPositionOrder('asc');
 			$result->setAttributeFilter($attributeId);
 			$result->setStoreFilter($storeId);
 			$this->{__METHOD__} = $result;
 		}
-		df_h()->eav()->assert()->entityAttributeOptionCollection($this->{__METHOD__});
 		return $this->{__METHOD__};
 	}
 
@@ -236,39 +199,21 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 	 * @return string
 	 */
 	private function labelsDiff(array $labels1, array $labels2) {
+		$labels1Normalized = $this->labelsNormalize($labels1);
 		/** @var array $map */
-		$map = df_array_combine($this->labelsNormalize($labels1), $labels1);
-		df_assert_array($map);
+		$map = df_array_combine($labels1Normalized, $labels1);
 		/** @var array $diff */
-		$diff =
-			array_diff(
-				$this->labelsNormalize($labels1)
-				,$this->labelsNormalize($labels2)
-			)
-		;
-		df_assert_array($diff);
-		/** @var array $result */
-		$result = array();
-		foreach ($diff as $label) {
-			/** @var string $label */
-			$result[]= df_a($map, $label);
-		}
-		return $result;
+		$diff = array_diff($labels1Normalized, $this->labelsNormalize($labels2));
+		return df_select($map, $diff);
 	}
 
 	/**
-	 * @param array $labels
-	 * @return string
+	 * @param string[] $labels
+	 * @return string[]
 	 */
 	private function labelsNormalize(array $labels) {
-		/** @var string $result */
-		$result = array();
-		foreach ($labels as $label) {
-			/** @var string $label */
-			df_assert_string($label);
-			$result[]= $this->labelNormalize($label);
-		}
-		return $result;
+		/** @uses labelNormalize() */
+		return array_map(array($this, 'labelNormalize'), $labels);
 	}
 
 	/**
@@ -279,12 +224,12 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__ATTRIBUTE, 'Mage_Eav_Model_Entity_Attribute')
-			->_prop(self::P__MODE__CASE_INSENSITIVE, self::V_BOOL, false)
-			->_prop(self::P__MODE__INSERT, self::V_BOOL, false)
-			->_prop(self::P__OPTIONS_VALUES_NEW, self::V_ARRAY)
+			->_prop(self::P__MODE__CASE_INSENSITIVE, RM_V_BOOL, false)
+			->_prop(self::P__MODE__INSERT, RM_V_BOOL, false)
+			->_prop(self::P__OPTIONS_VALUES_NEW, RM_V_ARRAY)
 		;
 	}
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 	const P__ATTRIBUTE = 'attribute';
 	const P__MODE__CASE_INSENSITIVE = 'mode__case_insensitive';
 	const P__MODE__INSERT = 'mode__insert';
@@ -292,8 +237,8 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 	/**
 	 * @param Mage_Eav_Model_Entity_Attribute $attribute
 	 * @param array $optionsNew
-	 * @param bool $isModeInsert[optional]
-	 * @param bool $caseInsensitive[optional]
+	 * @param bool $isModeInsert [optional]
+	 * @param bool $caseInsensitive [optional]
 	 * @return array
 	 */
 	public static function calculateStatic(

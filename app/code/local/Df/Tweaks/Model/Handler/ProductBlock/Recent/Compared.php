@@ -26,5 +26,6 @@ class Df_Tweaks_Model_Handler_ProductBlock_Recent_Compared extends Df_Tweaks_Mod
 		return 0 !== $helper->getItemCount();
 	}
 
-	const _CLASS = __CLASS__;
+	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
+	const _C = __CLASS__;
 }

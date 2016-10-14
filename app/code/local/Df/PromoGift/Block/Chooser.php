@@ -4,45 +4,20 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 	public function getApplicablePromoActions() {return df_h()->promoGift()->getApplicablePromoActions();}
 
 	/**
-	 * @param Df_PromoGift_Model_PromoAction $promoAction
-	 * @param string $template
-	 * @return string
-	 */
-	public function renderPromoAction(Df_PromoGift_Model_PromoAction $promoAction, $template) {
-		df_param_string($template, 1);
-		/** @var Df_PromoGift_Block_Chooser_PromoAction $block */
-		$block = Df_PromoGift_Block_Chooser_PromoAction::i();
-		$block->setPromoAction($promoAction);
-		$block->setTemplate($template);
-		return $block->renderView();
-	}
-
-	/**
 	 * @override
 	 * @return bool
 	 */
 	protected function needToShow() {
 		return
-				parent::needToShow()
-			&&
-				df_enabled(Df_Core_Feature::PROMO_GIFT)
-			&&
-				df_cfg()->promotion()->gifts()->getEnabled()
-			&&
-				$this->isEnabledForCurrentPageType()
-			&&
-				$this->hasDataToShow()
+			parent::needToShow()
+			&& df_cfg()->promotion()->gifts()->getEnabled()
+			&& $this->isEnabledForCurrentPageType()
+			&& $this->hasDataToShow()
 		;
 	}
 
 	/** @return bool */
-	private function hasDataToShow() {
-		/**
-		 * Нельзя писать !!$this->getApplicablePromoActions(),
-		 * потому что $this->getApplicablePromoActions() возвращает не массив, а коллекцию.
-		 */
-		return 0 < $this->getApplicablePromoActions()->count();
-	}
+	private function hasDataToShow() {return $this->getApplicablePromoActions()->hasItems();}
 
 	/** @return bool */
 	private function isEnabledForCurrentPageType() {
@@ -79,13 +54,13 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 				/** @var string $position */
 				$position = df_cfg()->promotion()->gifts()->getChooserPositionOnProductViewPage();
 				$result =
-							(Df_Admin_Model_Config_Source_Layout_Column::OPTION_VALUE__LEFT === $position)
+							Df_Admin_Config_Source_Layout_Column::isLeft($position)
 						&&
-							('df_promo_gift.chooser.left' === $this->getNameInLayout())
+							'df_promo_gift.chooser.left' === $this->getNameInLayout()
 					||
-								(Df_Admin_Model_Config_Source_Layout_Column::OPTION_VALUE__RIGHT === $position)
-							&&
-								('df_promo_gift.chooser.right' === $this->getNameInLayout())
+							Df_Admin_Config_Source_Layout_Column::isRight($position)
+						&&
+							'df_promo_gift.chooser.right' === $this->getNameInLayout()
 				;
 			}
 			$this->{__METHOD__} = $result;
@@ -93,5 +68,5 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 		return $this->{__METHOD__};
 	}
 
-	const _CLASS = __CLASS__;
+	const _C = __CLASS__;
 }

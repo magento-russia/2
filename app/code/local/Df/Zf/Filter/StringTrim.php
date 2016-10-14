@@ -2,9 +2,9 @@
 /**
  * Обратите внимание, что класс Zend_Filter_StringTrim может работать некорректно
  * для строк, заканчивающихся заглавной кириллической буквой «Р».
- * @link http://framework.zend.com/issues/browse/ZF-11223
+ * http://framework.zend.com/issues/browse/ZF-11223
  * Однако решение, которое предложено по ссылке выше
- * (@link http://framework.zend.com/issues/browse/ZF-11223)
+ * (http://framework.zend.com/issues/browse/ZF-11223)
  * может приводить к падению интерпретатора PHP
  * для строк, начинающихся с заглавной кириллической буквы «Р».
  * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
@@ -82,7 +82,7 @@ class Df_Zf_Filter_StringTrim extends Zend_Filter_StringTrim {
 			$utfChars = str_split(iconv('UTF-8', 'UTF-32BE', $value), 4);
 		}
 		catch (Exception $e) {
-			df_error_internal(
+			df_error(
 				'Система получила строку в кодировке, отличной от требуемой кодировки UTF-8: «%s».'
 				,$value
 			);

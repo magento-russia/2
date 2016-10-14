@@ -13,34 +13,11 @@
             </block>
         </reference>
     </df_reward_customer_info>
-	<!--
-    <checkout_onepage_index>
-        <reference name='checkout.onepage.payment.methods_additional'>
-            <block
-				type='df_reward/checkout_payment_additional'
-				template='df/reward/checkout/onepage/payment/additional.phtml'
-				name='reward.points'
-				before='-'
-			/>
-        </reference>
-    </checkout_onepage_index>
-    <checkout_onepage_paymentmethod>
-        <reference name='checkout.onepage.payment.methods.scripts'>
-            <block
-				type='df_reward/checkout_payment_additional'
-				template='df/reward/checkout/onepage/payment/scripts.phtml'
-				name='reward.scripts'
-				after='-'
-			/>
-        </reference>
-    </checkout_onepage_paymentmethod>
-    -->
-    
     <checkout_multishipping_billing>
         <reference name='payment_methods_before'>
             <block
-				type='df_reward/checkout_payment_additional'
-				template='df/reward/checkout/multishipping/payment/additional.phtml'
+				type='df_reward/checkout_payment'
+				template='df/reward/checkout/payment/multishipping.phtml'
 				name='reward_points'
 				before='-'
 			/>
