@@ -68,7 +68,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Checkout_Block_Onepage_Abstract */
+	/** @return Mage_Checkout_Block_Onepage_Abstract|Mage_Checkout_Block_Onepage_Billing|Mage_Checkout_Block_Onepage_Shipping */
 	private function getOwner() {return $this->cfg(self::$P__OWNER);}
 
 	/** @return Df_Customer_Model_Address|null */
@@ -103,7 +103,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 			 * @uses Mage_Checkout_Block_Onepage_Billing::getAddress()
 			 * @uses Mage_Checkout_Block_Onepage_Shipping::getAddress()
 			 */
-			$this->{__METHOD__} = call_user_func(array($this->getOwner(), 'getAddress'));
+			$this->{__METHOD__} = $this->getOwner()->getAddress();
 		}
 		return $this->{__METHOD__};
 	}

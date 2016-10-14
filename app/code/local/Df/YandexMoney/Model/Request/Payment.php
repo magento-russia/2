@@ -95,11 +95,31 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 	}
 
 	/**
+	 * 2016-10-14
+	 * @override
+	 * @return void
+	 */
+	protected function _construct() {
+		parent::_construct();
+		$this->_prop(self::$P__ORDER, Df_Sales_Model_Order::_C);
+	}
+
+	/**
+	 * @override
+	 * @see Df_Payment_Model_Request_Payment::order()
+	 * @return Df_Sales_Model_Order
+	 */
+	protected function order() {return $this[self::$P__ORDER];}
+
+	/** @var string */
+	private static $P__ORDER = 'order';
+
+	/**
 	 * @static
 	 * @param Df_Sales_Model_Order $order
 	 * @return Df_YandexMoney_Model_Request_Payment
 	 */
 	public static function i(Df_Sales_Model_Order $order) {
-		return new self(array(self::P__ORDER => $order));
+		return new self(array(self::$P__ORDER => $order));
 	}
 }

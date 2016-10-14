@@ -64,11 +64,11 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 		/** @var Df_Adminhtml_Model_Config_Data_1401 $dfConfig */
 		$dfConfig = Df_Adminhtml_Model_Config_Data_1401::s();
 		$dfConfig->load();
-		foreach ($group->fields as $elements) {
+		foreach ($group->{'fields'} as $elements) {
 			$elements = (array)$elements;
 			// sort either by sort_order or by child node values bypassing the sort_order
-			if ($group->sort_fields && $group->sort_fields->by) {
-				$fieldset->setSortElementsByAttribute((string)$group->sort_fields->by,($group->sort_fields->direction_desc ? SORT_DESC : SORT_ASC)
+			if ($group->{'sort_fields'} && $group->{'sort_fields'}->by) {
+				$fieldset->setSortElementsByAttribute((string)$group->{'sort_fields'}->by,($group->{'sort_fields'}->direction_desc ? SORT_DESC : SORT_ASC)
 				);
 			} else {
 				usort($elements, array($this, '_sortForm'));

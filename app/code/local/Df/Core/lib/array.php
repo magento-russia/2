@@ -280,7 +280,7 @@ function df_clean(array $array, array $additionalValuesToClean = []) {
 	/** @var mixed[] $valuesToClean */
 	$valuesToClean = array_merge(array('', null, array()), $additionalValuesToClean);
 	/** @var bool $isAssoc */
-	$isAssoc = df_is_assoc($array);
+	$isAssoc = rm_is_assoc($array);
 	foreach ($array as $key => $value) {
 		/** @var int|string $key */
 		/** @var mixed $value */

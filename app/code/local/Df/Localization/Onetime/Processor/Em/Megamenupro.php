@@ -1,7 +1,6 @@
 <?php
-/**
- * @method EM_Megamenupro_Model_Megamenupro getEntity()
- */
+/** @noinspection PhpUndefinedClassInspection */
+/** @method EM_Megamenupro_Model_Megamenupro getEntity() */
 class Df_Localization_Onetime_Processor_Em_Megamenupro
 	extends Df_Localization_Onetime_Processor_Entity {
 	/**

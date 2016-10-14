@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpUndefinedClassInspection */
 class Df_Pbridge_Block_Checkout_Payment_Review_Container
 	extends Enterprise_Pbridge_Block_Checkout_Payment_Review_Container {
 	/**
@@ -32,6 +33,7 @@ class Df_Pbridge_Block_Checkout_Payment_Review_Container
 			&& $payment->getMethodInstance()->getDataUsingMethod('is_deferred3d_check')
 		) {
 			$this->setDataUsingMethod('method_code', $payment->getMethod());
+			/** @noinspection PhpUndefinedClassInspection */
 			$result = parent::_toHtml();
 		}
 		else {

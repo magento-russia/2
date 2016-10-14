@@ -1,5 +1,6 @@
 <?php
 class Df_Sales_Model_Quote_Address_Rate extends Mage_Sales_Model_Quote_Address_Rate {
+	/** @noinspection PhpUndefinedClassInspection */
 	/**
 	 * @used-by STUB::STUB()
 	 * @return Df_Shipping_Rate_Result_Method|null
@@ -19,13 +20,14 @@ class Df_Sales_Model_Quote_Address_Rate extends Mage_Sales_Model_Quote_Address_R
 	 */
 	public function importShippingRate(Mage_Shipping_Model_Rate_Result_Abstract $rate) {
 		parent::importShippingRate($rate);
-		if ($rate instanceof Df_Shipping_Rate_Result_Method) {
-			$this->_terms = $rate;
-		}
+		//if ($rate instanceof Df_Shipping_Rate_Result_Method) {
+		//	$this->_terms = $rate;
+		//}
 		return $this;
 	}
 
+	/** @noinspection PhpUndefinedClassInspection */
 	/** @var Df_Shipping_Rate_Result_Method|null $rate */
-	private $_terms;
+	private $_terms = [];
 }
 

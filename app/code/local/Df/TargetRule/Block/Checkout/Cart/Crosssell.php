@@ -1,5 +1,7 @@
 <?php
+/** @noinspection PhpUndefinedClassInspection */
 class Df_TargetRule_Block_Checkout_Cart_Crosssell extends Enterprise_TargetRule_Block_Checkout_Cart_Crosssell {
+	/** @noinspection PhpUndefinedClassInspection */
 	/**
 	 * Это свойство используется родительским классом без предварительной инициализации,
 	 * что в Российской сборке Magento ведёт к сбою:

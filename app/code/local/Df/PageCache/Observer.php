@@ -259,11 +259,7 @@ class Df_PageCache_Observer {
 		/** @var bool $result */
 		static $result;
 		if (!isset($result)) {
-			$result =
-					Mage::app()->useCache('full_page')
-				&&
-					df_enabled(Df_Core_Feature::FULL_PAGE_CACHING)
-			;
+			$result = Mage::app()->useCache('full_page');
 		}
 		return $result;
 	}

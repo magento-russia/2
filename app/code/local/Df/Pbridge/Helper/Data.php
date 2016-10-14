@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpUndefinedClassInspection */
 class Df_Pbridge_Helper_Data extends Enterprise_Pbridge_Helper_Data {
 	/**
 	 * Цель перекрытия —

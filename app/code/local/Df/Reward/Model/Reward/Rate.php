@@ -109,7 +109,8 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 	 * Calculate currency amount of given points by rate
 	 *
 	 * @param integer $points
-	 * @param bool Whether to round points to integer or not
+	 * @param bool
+	 * Whether to round points to integer or not
 	 * @return float
 	 */
 	public function calculateToCurrency($points, $rounded = true)

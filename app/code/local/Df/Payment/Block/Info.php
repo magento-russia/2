@@ -41,7 +41,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 			 * @uses Df_Payment_Block_Info::toPdf()
 			 */
 			if (method_exists($child, 'toPdf')) {
-				$result[] = call_user_func(array($child, 'toPdf'));
+				$result[] = $child->toPdf();
 			}
 		}
 		return $result;

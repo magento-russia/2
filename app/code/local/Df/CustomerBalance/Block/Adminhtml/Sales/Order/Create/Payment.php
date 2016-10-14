@@ -17,7 +17,7 @@ class Df_CustomerBalance_Block_Adminhtml_Sales_Order_Create_Payment
 	/**
 	 * Format value as price
 	 *
-	 * @param numeric $value
+	 * @param int|float $value
 	 * @return string
 	 */
 	public function formatPrice($value)

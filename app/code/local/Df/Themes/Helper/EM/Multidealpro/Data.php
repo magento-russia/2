@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpUndefinedClassInspection */
 class Df_Themes_Helper_EM_Multidealpro_Data extends EM_Multidealpro_Helper_Data {
 	/**
 	 * @override
@@ -14,6 +15,7 @@ class Df_Themes_Helper_EM_Multidealpro_Data extends EM_Multidealpro_Helper_Data 
 		 * return date_format(date_create($time), 'Y/m/d H:i:s');
 		 * в том случае, когда переменная $time = 0.
 		 */
+		/** @noinspection PhpUndefinedClassInspection */
 		return strtr(@parent::getClock($_product), array(
 			'>days<' => '>дней<'
 			, '>hours<' => '>часов<'

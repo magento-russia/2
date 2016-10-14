@@ -7,6 +7,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions_Em_Megamenupro
 	 */
 	protected function getEntityClass() {return 'EM_Megamenupro_Model_Megamenupro';}
 
+	/** @noinspection PhpUndefinedClassInspection */
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Abstract|EM_Megamenupro_Model_Megamenupro $entity

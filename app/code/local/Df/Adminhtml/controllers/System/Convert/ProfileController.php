@@ -85,6 +85,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 		$savedRowsCounter = 0;
 
 		// BEGIN PATCH
+		/** @var Mage_Catalog_Model_Convert_Adapter_Product|Mage_Customer_Model_Convert_Adapter_Customer|Df_Dataflow_Model_Convert_Adapter_Abstract|Df_Catalog_Model_Convert_Adapter_Category $adapter */
 		$adapter->setProfile(Df_Dataflow_Model_Convert_Profile::i());
 		$messages = array();
 		// END PATCH
@@ -111,7 +112,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 			}
 			try {
 				$importData = $batchImportModel->getBatchData();
-				call_user_func(array($adapter, 'saveRow'), $importData);
+				$adapter->saveRow($importData);
 			}
 			catch (Exception $e) {
 				$errors[]= rm_ets($e);

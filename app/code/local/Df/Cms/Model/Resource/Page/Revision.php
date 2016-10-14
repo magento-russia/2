@@ -94,7 +94,7 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	 * Aggregate data for version
 	 *
 	 * @param int $versionId
-	 * @return unknown_type
+	 * @return $this
 	 */
 	protected function _aggregateVersionData($versionId)
 	{

@@ -44,14 +44,14 @@ class Df_PageCache_Model_Cookie extends Mage_Core_Model_Cookie
 	/**
 	 * Encryption salt value
 	 *
-	 * @var sting
+	 * @var string
 	 */
 	protected $_salt = null;
 
 	/**
 	 * Retrieve encryption salt
 	 *
-	 * @return null|sting
+	 * @return null|string
 	 */
 	protected function _getSalt()
 	{

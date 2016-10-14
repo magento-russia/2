@@ -36,8 +36,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function downloadable() {return Df_Downloadable_Helper_Data::s();}
 	/** @return Df_Eav_Helper_Data */
 	public function eav() {return Df_Eav_Helper_Data::s();}
-	/** @return Df_Ems_Helper_Data */
-	public function ems() {return Df_Ems_Helper_Data::s();}
 	/** @return Df_Index_Helper_Data */
 	public function index() {return Df_Index_Helper_Data::s();}
 	/** @return Df_Invitation_Helper_Data */

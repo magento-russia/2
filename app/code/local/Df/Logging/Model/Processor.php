@@ -100,8 +100,8 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 				}
 			}
 		}
-		if (isset($this->_eventConfig->skip_on_back)) {
-			$addValue = array_keys($this->_eventConfig->skip_on_back->asArray());
+		if (isset($this->_eventConfig->{'skip_on_back'})) {
+			$addValue = array_keys($this->_eventConfig->{'skip_on_back'}->asArray());
 			$sessionValue = rm_admin_session()->getSkipLoggingAction();
 			if (!is_array($sessionValue) && $sessionValue) {
 				$sessionValue = df_csv_parse($sessionValue);
@@ -154,10 +154,10 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		if ($this->_skipNextAction) {
 			return;
 		}
-		$loggingEvent->setAction($this->_eventConfig->action);
+		$loggingEvent->setAction($this->_eventConfig->{'action'});
 		$loggingEvent->setEventCode($this->_eventConfig->getParent()->getParent()->getName());
 		try {
-			$callback = isset($this->_eventConfig->post_dispatch) ? (string)$this->_eventConfig->post_dispatch : false;
+			$callback = isset($this->_eventConfig->{'post_dispatch'}) ? (string)$this->_eventConfig->{'post_dispatch'} : false;
 			$defaulfCallback = 'postDispatchGeneric';
 			$classMap = $this->_getCallbackFunction($callback, $this->_controllerActionsHandler, $defaulfCallback);
 			$handler  = $classMap['handler'];
@@ -204,8 +204,8 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		}
 
 		//Exact models in exactly action node
-		$expectedModels = isset($this->_eventConfig->expected_models)
-			? $this->_eventConfig->expected_models : false;
+		$expectedModels = isset($this->_eventConfig->{'expected_models'})
+			? $this->_eventConfig->{'expected_models'} : false;
 		if (!$expectedModels || empty($expectedModels)) {
 			if (empty($defaultExpectedModels)) {
 				return;

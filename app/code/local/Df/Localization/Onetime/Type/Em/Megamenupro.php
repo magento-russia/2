@@ -1,11 +1,13 @@
 <?php
 class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetime_Type {
+	/** @noinspection PhpUndefinedClassInspection */
 	/**
 	 * @override
 	 * @return EM_Megamenupro_Model_Mysql4_Megamenupro_Collection
 	 */
 	public function getAllEntities() {
 		if (!isset($this->{__METHOD__})) {
+			/** @noinspection PhpUndefinedClassInspection */
 			$this->{__METHOD__} = new EM_Megamenupro_Model_Mysql4_Megamenupro_Collection();
 			$this->collectionAfterLoad();
 		}
@@ -24,16 +26,18 @@ class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetim
 	/** @return void */
 	private function collectionBeforeSave() {
 		foreach ($this->getAllEntities() as $menu) {
+			/** @noinspection PhpUndefinedClassInspection */
 			/** @var EM_Megamenupro_Model_Megamenupro $menu */
 			$this->entityBeforeSave($menu);
 		}
-	}
-
+	}/** @noinspection PhpUndefinedClassInspection */
 	/**
 	 * @param EM_Megamenupro_Model_Megamenupro $menu
 	 * @return void
 	 */
-	private function entityBeforeSave(EM_Megamenupro_Model_Megamenupro $menu) {
+	private function entityBeforeSave(
+		/** @noinspection PhpUndefinedClassInspection */
+		EM_Megamenupro_Model_Megamenupro $menu) {
 		/** @var array(array(string => mixed)) $content */
 		$content = $menu->getData('content');
 		if (is_array($content)) {
@@ -48,16 +52,21 @@ class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetim
 	/** @return void */
 	private function collectionAfterLoad() {
 		foreach ($this->{__CLASS__ . '::getAllEntities'} as $menu) {
+			/** @noinspection PhpUndefinedClassInspection */
 			/** @var EM_Megamenupro_Model_Megamenupro $menu */
 			$this->entityAfterLoad($menu);
 		}
 	}
 
+	/** @noinspection PhpUndefinedClassInspection */
 	/**
 	 * @param EM_Megamenupro_Model_Megamenupro $menu
 	 * @return void
 	 */
-	private function entityAfterLoad(EM_Megamenupro_Model_Megamenupro $menu) {
+	private function entityAfterLoad(
+		/** @noinspection PhpUndefinedClassInspection */
+		EM_Megamenupro_Model_Megamenupro $menu
+	) {
 		/** @var string|null $contentSerialized */
 		$contentSerialized = $menu->getData('content');
 		if ($contentSerialized) {

@@ -14,6 +14,7 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 	protected $_imageFile;
 	protected $_placeholder;
 	protected $_banner;
+	protected $_model;
 
 	/**
 	 * Reset all previos data

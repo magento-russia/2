@@ -17,7 +17,7 @@ class Df_Logging_Block_Details_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
 	/**
 	 * Prepare grid collection
-	 * @return Df_Logging_Block_Events_Archive_Grid
+	 * @return $this
 	 */
 	protected function _prepareCollection()
 	{
@@ -30,7 +30,7 @@ class Df_Logging_Block_Details_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
 	/**
 	 * Prepare grid columns
-	 * @return Df_Logging_Block_Events_Archive_Grid
+	 * @return $this
 	 */
 	protected function _prepareColumns()
 	{

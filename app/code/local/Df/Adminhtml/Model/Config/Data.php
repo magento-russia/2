@@ -63,8 +63,8 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			$groupConfig = $sections->descend($section.'/groups/'.$group);
 			$clonedFields = !empty($groupConfig->clone_fields);
 			if ($clonedFields) {
-				if ($groupConfig->clone_model) {
-					$cloneModel = df_model((string)$groupConfig->clone_model);
+				if ($groupConfig->{'clone_model'}) {
+					$cloneModel = df_model((string)$groupConfig->{'clone_model'});
 				} else {
 					Mage::throwException('Config form fieldset clone model required to be able to clone fields');
 				}
@@ -133,7 +133,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				* Look for custom defined field path
 				*/
 				if (is_object($fieldConfig)) {
-					$configPath = (string)$fieldConfig->config_path;
+					$configPath = (string)$fieldConfig->{'config_path'};
 					if (!empty($configPath) && strrpos($configPath, '/') > 0) {
 						// Extend old data with specified section group
 						$groupPath = substr($configPath, 0, strrpos($configPath, '/'));
@@ -220,8 +220,8 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			$groupConfig = $sections->descend($section.'/groups/'.$group);
 			$clonedFields = !empty($groupConfig->clone_fields);
 			if ($clonedFields) {
-				if ($groupConfig->clone_model) {
-					$cloneModel = df_model((string)$groupConfig->clone_model);
+				if ($groupConfig->{'clone_model'}) {
+					$cloneModel = df_model((string)$groupConfig->{'clone_model'});
 				}
 				else {
 					Mage::throwException('Config form fieldset clone model required to be able to clone fields');

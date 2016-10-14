@@ -16,7 +16,7 @@ class Df_PageCache_Model_Processor_Default
 	/**
 	 * Is cache allowed
 	 *
-	 * @var null|boll
+	 * @var null|bool
 	 */
 	protected $_allowCache = null;
 

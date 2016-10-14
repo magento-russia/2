@@ -1,12 +1,9 @@
 <?php
-/**
- * Controller for Customer account -> Store Credit ajax tab and all its contents
- *
- */
+// Controller for Customer account -> Store Credit ajax tab and all its contents
 class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminhtml_Controller_Action {
 	/**
 	 * Check is enabled module in config
-	 * @return Df_CatalogEvent_Adminhtml_Catalog_EventController
+	 * @return $this
 	 */
 	public function preDispatch()
 	{

@@ -37,7 +37,7 @@ class Df_YandexMarket_Model_Config_Backend_Currency extends Df_Admin_Config_Back
 	protected function _beforeSave() {
 		// Выполняем проверки только при включенности модуля.
 		if (rm_bool($this->getValue())) {
-			Df_YandexMarket_Model_System_Config_Source_Currency::check($this->getValue());
+			Df_YandexMarket_Model_Config_Source_Currency::check($this->getValue());
 		}
 		parent::_beforeSave();
 		return $this;
