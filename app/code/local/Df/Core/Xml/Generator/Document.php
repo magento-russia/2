@@ -20,7 +20,10 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 		return !is_null($result) ? $result : parent::getElement();
 	}
 
-	/** @return Df_Directory_Model_Currency */
+	/**
+	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup::getResult()
+	 * @return Df_Directory_Model_Currency
+	 */
 	public function getExportCurrency() {return $this->store()->getDefaultCurrency();}
 
 	/**

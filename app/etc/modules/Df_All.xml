@@ -87,24 +87,6 @@
 				<Mage_Payment/>
 			</depends>
 		</Df_Assist>
-		<Df_Autolux>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Autolux>
-		<Df_Autotrading>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Autotrading>
 		<Df_Avangard>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -171,15 +153,6 @@
 				<Mage_CatalogSearch/>
 			</depends>
 		</Df_CatalogSearch>
-		<Df_Cdek>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Cdek>
 		<Df_Checkout>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -267,24 +240,6 @@
 				<Mage_Dataflow/>
 			</depends>
 		</Df_Dataflow>
-		<Df_DeliveryUa>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_DeliveryUa>
-		<Df_Dellin>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Dellin>
 		<Df_Directory>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -319,24 +274,6 @@
 				<Mage_Eav/>
 			</depends>
 		</Df_Eav>
-		<Df_Ems>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Ems>
-		<Df_EuroExpress>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_EuroExpress>
 		<Df_Excel>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -344,24 +281,6 @@
 				<Df_Core/>
 			</depends>
 		</Df_Excel>
-		<Df_Exline>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Exline>
-		<Df_Garantpost>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Garantpost>
 		<Df_GoogleAnalytics>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -415,15 +334,6 @@
 				<Mage_Payment/>
 			</depends>
 		</Df_Interkassa>
-		<Df_InTime>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_InTime>
 		<Df_IPay>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -434,24 +344,6 @@
 				<Mage_Payment/>
 			</depends>
 		</Df_IPay>
-		<Df_Kazpost>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Kazpost>
-		<Df_KazpostEms>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_KazpostEms>
 		<Df_Kkb>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -487,15 +379,6 @@
 				<Mage_Log/>
 			</depends>
 		</Df_Log>
-		<Df_Megapolis>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Megapolis>
 		<Df_Moneta>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -522,23 +405,6 @@
 				<Mage_Newsletter/>
 			</depends>
 		</Df_Newsletter>
-		<Df_NightExpress>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_NightExpress>
-		<Df_NovaPoshta>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-				<Df_Shipping/>
-			</depends>
-		</Df_NovaPoshta>
 		<Df_OnPay>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -643,15 +509,6 @@
 				<Mage_Poll/>
 			</depends>
 		</Df_Poll>
-		<Df_PonyExpress>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_PonyExpress>
         <Df_PromoGift>
             <active>true</active>
             <codePool>local</codePool>
@@ -740,14 +597,6 @@
 
 			</depends>
         </Df_Robokassa>
-		<Df_RussianPost>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-				<Df_Shipping/>
-			</depends>
-		</Df_RussianPost>
 		<Df_Sales>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -764,15 +613,6 @@
 				<Mage_SalesRule/>
 			</depends>
 		</Df_SalesRule>
-		<Df_Sat>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Sat>
 		<Df_Seo>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -826,15 +666,6 @@
 				<Df_Core/>
 			</depends>
 		</Df_Spl>
-		<Df_Spsr>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_Spsr>
 		<Df_Tag>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -873,15 +704,6 @@
 				<Df_Core/>
 			</depends>
 		</Df_Tweaks>
-		<Df_UkrPoshta>
-			<active>true</active>
-			<codePool>local</codePool>
-			<depends>
-				<Df_Core/>
-
-				<Df_Shipping/>
-			</depends>
-		</Df_UkrPoshta>
 		<Df_Uniteller>
 			<active>true</active>
 			<codePool>local</codePool>

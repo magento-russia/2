@@ -33,9 +33,10 @@ class Df_1C_Cml2_File_CatalogComposite extends Df_1C_Cml2_File {
 
 	/**
 	 * @override
+	 * @see Df_1C_Cml2_File::getXmlDocument()
 	 * @return Df_1C_Cml2_Import_Data_Document_Catalog
 	 */
-	private function getXmlDocument() {
+	public function getXmlDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				Df_1C_Cml2_Import_Data_Document::create($this->getXml(), 'no path')

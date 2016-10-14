@@ -2,6 +2,13 @@
 class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override
+	 * @see Df_Core_Xml_Generator_Document::getExportCurrency()
+	 * @return Df_Directory_Model_Currency
+	 */
+	public function getExportCurrency() {return $this->getSettings()->general()->getCurrency();}
+
+	/**
+	 * @override
 	 * @return string
 	 */
 	public function getOperationNameInPrepositionalCase() {return 'формировании документа YML';}
@@ -87,12 +94,6 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 	protected function getEmailAddressesToNotify() {
 		return array(df_cfg()->yandexMarket()->general()->getNotificationEmail());
 	}
-
-	/**
-	 * @override
-	 * @return Df_Directory_Model_Currency
-	 */
-	protected function getExportCurrency() {return $this->getSettings()->general()->getCurrency();}
 
 	/**
 	 * Намеренно возвращаем пустое значение!
