@@ -69,7 +69,7 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 						$customerExists++;
 					}
 					else {
-						rm_session_customer()->addError(rm_ets($e));
+						rm_session_customer()->addError(df_ets($e));
 					}
 				}
 				catch (Exception $e) {

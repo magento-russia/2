@@ -251,7 +251,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 					,array(
 						'%method%' => __METHOD__
 						,'%destionationDirectory%' => $destDirectory
-						,'%exceptionMessage%»' => rm_ets($e)
+						,'%exceptionMessage%»' => df_ets($e)
 					)
 				);
 			}

@@ -12,7 +12,7 @@ class Df_Dataflow_Exception_Import_RequiredValueIsAbsent extends Df_Dataflow_Exc
 
 	/**
 	 * @used-by Df_1C_Cml2_Import_Processor_Product_Type_Simple::process()
-	 * @used-by getMessageRm()
+	 * @used-by message()
 	 * @return string
 	 */
 	public function getFieldName() {return $this->_fieldName;}
@@ -21,13 +21,13 @@ class Df_Dataflow_Exception_Import_RequiredValueIsAbsent extends Df_Dataflow_Exc
 	 * @override
 	 * @return string
 	 */
-	public function getMessageRm() {
+	public function message() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = sprintf(
 				'В строке импортируемых данных №%d требуется (и сейчас отсутствует) поле «%s».%s'
 				,$this->_rowOrdering
 				,$this->getFieldName()
-				,parent::getMessageRm()
+				,parent::message()
 			);
 		}
 		return $this->{__METHOD__};

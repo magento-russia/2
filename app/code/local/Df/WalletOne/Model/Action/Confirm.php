@@ -21,7 +21,7 @@ class Df_WalletOne_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @return string
 	 */
 	protected function getResponseTextForError(Exception $e) {
-		return 'WMI_RESULT=CANCEL&WMI_DESCRIPTION=' . urlencode(rm_ets($e));
+		return 'WMI_RESULT=CANCEL&WMI_DESCRIPTION=' . urlencode(df_ets($e));
 	}
 
 	/**

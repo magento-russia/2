@@ -45,7 +45,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 		catch (Exception $e) {
 			df_error(
 				'При назначении тэгу «%s» значения «%s» произошёл сбой: «%s».'
-				, $name, $value, rm_ets($e)
+				, $name, $value, df_ets($e)
 			);
 		}
 		return $result;
@@ -481,7 +481,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 			df_error(
 				"Не могу сконвертировать значение ключа «%s» в строку.\n%s"
 				, $keyAsString
-				, rm_ets($e)
+				, df_ets($e)
 			);
 		}
 		/** @var bool $needWrapInCData */

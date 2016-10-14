@@ -28,7 +28,7 @@ class Df_Qa_State extends Df_Core_Model {
 			}
 			catch (Exception $e) {
 				Mage::logException($e);
-				$this->{__METHOD__} = rm_ets($e);
+				$this->{__METHOD__} = df_ets($e);
 			}
 		}
 		return $this->{__METHOD__};

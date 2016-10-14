@@ -26,7 +26,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 				$this->error(
 					'При импорте товарного изображения для товара %s произошёл сбой: «%s».'
 					,$product->getTitle()
-					,rm_ets($e)
+					,df_ets($e)
 				);
 			}
 			$isPrimaryImage = false;

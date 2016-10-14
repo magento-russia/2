@@ -232,7 +232,7 @@ function df_xml($xml, $throw = true) {
 				. "********************\n"
 				. "%s\n"
 				. "********************\n"
-				, rm_ets($e)
+				, df_ets($e)
 				, df_trim($xml)
 			);
 		}

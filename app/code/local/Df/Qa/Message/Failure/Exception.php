@@ -6,7 +6,7 @@ final class Df_Qa_Message_Failure_Exception extends Df_Qa_Message_Failure {
 	 * @used-by Df_Qa_Message::report()
 	 * @return string
 	 */
-	protected function main() {return $this->e()->getMessageRm();}
+	protected function main() {return $this->e()->message();}
 
 	/**
 	 * @override

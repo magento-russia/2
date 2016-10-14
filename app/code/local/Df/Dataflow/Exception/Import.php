@@ -4,11 +4,11 @@ class Df_Dataflow_Exception_Import extends Df_Dataflow_Exception {
 	 * @override
 	 * @return string
 	 */
-	public function getMessageRm() {
+	public function message() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = sprintf(
 				"%s\nИмпортируемые данные:\n%s"
-				, parent::getMessageRm()
+				, parent::message()
 				, df_tab_multiline(df_print_params($this->getRow()->getAsArray()))
 			);
 		}

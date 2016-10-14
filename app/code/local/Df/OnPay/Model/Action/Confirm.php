@@ -46,7 +46,7 @@ class Df_OnPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				array(
 					'code' => 3
 					,$this->getRequestKeyOrderIncrementId() => $this->getRequestValueOrderIncrementId()
-					,'comment' => df_e(rm_ets($e))
+					,'comment' => df_e(df_ets($e))
 					,$this->getRequestKeySignature() => $this->getResponseSignature(3)
 				)
 				,!$this->needInvoice()

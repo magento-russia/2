@@ -115,7 +115,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 				$adapter->saveRow($importData);
 			}
 			catch (Exception $e) {
-				$errors[]= rm_ets($e);
+				$errors[]= df_ets($e);
 				continue;
 			}
 			$savedRowsCounter ++;
@@ -131,10 +131,10 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 			foreach ($exceptions as $exception) {
 				/** @var Varien_Convert_Exception $exception */
 				if (Mage_Dataflow_Model_Convert_Exception::NOTICE === $exception->getLevel()) {
-					$messages[]= rm_ets($exception);
+					$messages[]= df_ets($exception);
 				}
 				else {
-					$errors[]= rm_ets($exception);
+					$errors[]= df_ets($exception);
 				}
 			}
 		}

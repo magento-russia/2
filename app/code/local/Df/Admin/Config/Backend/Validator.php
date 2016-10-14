@@ -28,7 +28,7 @@ class Df_Admin_Config_Backend_Validator extends Df_Admin_Config_Backend {
 			// Сюда мы попадаем не тогда, когда валидация не пройдена,
 			// а когда программный код валидатора дал сбой.
 			df_notify_exception($e);
-			$this->getMessages()->addMessage(new Mage_Core_Model_Message_Error(rm_ets($e)));
+			$this->getMessages()->addMessage(new Mage_Core_Model_Message_Error(df_ets($e)));
 		}
 		// Показываем администратору все сообщения,
 		// которые валидатор счёл нужным предоставить.

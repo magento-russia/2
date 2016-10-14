@@ -1,5 +1,4 @@
 <?php
-namespace Df\Core;
 use \Exception as E;
 use Df_Qa_Message_Failure_Exception as QE;
 class Df_Core_Exception extends E implements \ArrayAccess {

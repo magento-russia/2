@@ -18,18 +18,6 @@ function rm_destructable_singleton(Df_Core_Destructable $object) {
 /* @return Mage_Core_Model_Design_Package */
 function rm_design_package() {return Mage::getSingleton('core/design_package');}
 
-/**
- * @param Exception|string $e
- * @return string
- */
-function rm_ets($e) {
-	return
-		is_string($e)
-		? $e
-		: ($e instanceof Df_Core_Exception ? $e->getMessageRm() : $e->getMessage())
-	;
-}
-
 /** @return Df_Core_Model_Units_Length */
 function rm_length() {return Df_Core_Model_Units_Length::s();}
 

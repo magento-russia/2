@@ -93,7 +93,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return rm_ets($e);}
+	protected function getResponseTextForError(Exception $e) {return df_ets($e);}
 
 	/** @return string */
 	protected function getResponseTextForSuccess() {return '';}
@@ -280,7 +280,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		$this->logFailureHighLevel(
 			"При взаимодействии с платёжным шлюзом призошёл сбой.\n%s"
 			."\nПараметры запроса:\n%s"
-			,rm_ets($e)
+			,df_ets($e)
 			,df_print_params($this->getRequest()->getParams())
 		);
 		// В низкоуровневый журнал исключительную ситуацию записываем
@@ -296,7 +296,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 */
 	protected function logExceptionToOrderHistory(Exception $e) {
 		if ($this->_order) {
-			$this->comment(df_no_escape(df_t()->nl2br(rm_ets($e))));
+			$this->comment(df_no_escape(df_t()->nl2br(df_ets($e))));
 		}
 	}
 
@@ -492,9 +492,9 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		rm_session_core()->addError(df_t()->nl2br(
 			$e instanceof Df_Payment_Exception && $e->needFraming()
 			? strtr($this->getMethod()->configF()->getMessageFailure(), array(
-				'{сообщение от платёжного шлюза}' => rm_ets($e))
+				'{сообщение от платёжного шлюза}' => df_ets($e))
 			)
-			: rm_ets($e)
+			: df_ets($e)
 		));
 	}
 

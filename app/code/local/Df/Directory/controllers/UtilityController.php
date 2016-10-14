@@ -40,7 +40,7 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 		catch (Exception $e) {
 			df_notify_exception($e);
 			//df_handle_entry_point_exception($e, false);
-			echo rm_ets($e);
+			echo df_ets($e);
 		}
 	}
 }

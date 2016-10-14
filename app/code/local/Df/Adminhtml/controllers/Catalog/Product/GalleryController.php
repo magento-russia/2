@@ -75,7 +75,7 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 				,'domain' => $this->_getSession()->getCookieDomain()
 			);
 		} catch (Exception $e) {
-			$result = array('error' => rm_ets($e), 'errorcode' => $e->getCode());
+			$result = array('error' => df_ets($e), 'errorcode' => $e->getCode());
 		}
 		$this->getResponse()->setBody(df_mage()->coreHelper()->jsonEncode($result));
 	}

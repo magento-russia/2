@@ -224,7 +224,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 		// дополнительные сбои нас уже не интересуют
 		catch (Exception $e) {}
 		$this->e()->appendChild(
-			rm_xml_node('Error')->appendChild(rm_xml_node('ErrorLine')->setCData(rm_ets($e)))
+			rm_xml_node('Error')->appendChild(rm_xml_node('ErrorLine')->setCData(df_ets($e)))
 		);
 		parent::processException($e);
 	}

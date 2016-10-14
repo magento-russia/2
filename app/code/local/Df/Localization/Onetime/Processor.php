@@ -214,7 +214,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 				Df_Localization_Onetime_Processor_Filesystem::i($filesystemOperation)->process();
 			}
 			catch (Exception $e) {
-				$messages[]= rm_ets($e);
+				$messages[]= df_ets($e);
 			}
 		}
 		if ($messages) {
@@ -283,7 +283,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 				. '<br/>После устранения сбоев — перезапустите русификацию оформительской темы повторно.'
 				. '{messages}'
 				, array(
-					'{messages}' => rm_tag_list(df_t()->nl2br($e->getMessagesRm()), false, 'rm-batch')
+					'{messages}' => rm_tag_list(df_t()->nl2br($e->messages()), false, 'rm-batch')
 					,'{theme}' => $this->getTitle()
 				)
 			));

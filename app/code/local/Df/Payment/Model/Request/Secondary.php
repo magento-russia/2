@@ -3,7 +3,7 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 	/**
 	 * Этот метод сделан публичным и вынесен в базовый класс,
 	 * потому что этот метод используется для диагностики:
-	 * @used-by Df_Payment_Exception_Response::getMessageRm()
+	 * @used-by Df_Payment_Exception_Response::message()
 	 * @return Zend_Uri_Http
 	 */
 	abstract public function getUri();
@@ -52,7 +52,7 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 	 * Потомки его переопределяют через @see _params(), потомки же его и используют.
 	 * Ядро Российской сборки Magento использует данный метод только для диагностики;
 	 * наличие этого метода в базовом классе позволяет обобщить диагностику:
-	 * @used-by Df_Payment_Exception_Response::getMessageRm()
+	 * @used-by Df_Payment_Exception_Response::message()
 	 * @return array(string => string|int)
 	 */
 	public function params() {

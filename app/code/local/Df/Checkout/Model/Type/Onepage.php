@@ -43,7 +43,7 @@ class Df_Checkout_Model_Type_Onepage extends Mage_Checkout_Model_Type_Onepage {
 			$result = parent::saveBilling($data, $customerAddressId);
 		}
 		catch (Exception $e) {
-			$result = array('error' => -1, 'message' => rm_ets($e));
+			$result = array('error' => -1, 'message' => df_ets($e));
 			df_handle_entry_point_exception($e, true);
 		}
 		return $result;

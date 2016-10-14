@@ -107,7 +107,7 @@ function df_model($modelClass = '', $parameters = array()) {
 				'%method%' => $methodNameWithClassName
 				,'%line%' => dfa(dfa($bt, 0), "line")
 				,'%modelClass%' => $modelClass
-				,'%message%' => rm_ets($e)
+				,'%message%' => df_ets($e)
 			)
 		);
 	}

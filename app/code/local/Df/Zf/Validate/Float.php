@@ -12,7 +12,7 @@ class Df_Zf_Validate_Float extends Df_Zf_Validate_Type implements Zend_Filter_In
 			$result = rm_float($value);
 		}
 		catch (Exception $e) {
-			df_error(new Zend_Filter_Exception(rm_ets($e)));
+			df_error(new Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}

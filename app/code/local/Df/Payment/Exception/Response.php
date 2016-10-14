@@ -13,7 +13,7 @@ class Df_Payment_Exception_Response extends Df_Payment_Exception {
 	 * @override
 	 * @return string
 	 */
-	public function getMessageRm() {
+	public function message() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_cc_n(
 				$this->getResponse()->getReport()

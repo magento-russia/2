@@ -75,7 +75,7 @@ class Df_Psbank_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Conf
 			 * потому что сообщения сессии checkout
 			 * не отображаются в стандартной теме на странице checkout/onepage
 			 */
-			rm_session_core()->addError(rm_ets($exception ? $exception : $newException));
+			rm_session_core()->addError(df_ets($exception ? $exception : $newException));
 		}
 
 	}

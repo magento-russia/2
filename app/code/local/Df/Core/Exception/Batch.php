@@ -20,10 +20,13 @@ class Df_Core_Exception_Batch extends Df_Core_Exception {
 	 * @override
 	 * @return string
 	 */
-	public function getMessageRm() {return df_cc_n($this->getMessagesRm());}
+	public function message() {return df_cc_n($this->messages());}
 
-	/** @return string[] */
-	public function getMessagesRm() {return array_filter(array_map('rm_ets', $this->_exceptions));}
+	/**
+	 * @used-by Df_Localization_Onetime_Processor::saveModifiedMagentoEntities()
+	 * @return string[]
+	 */
+	public function messages() {return array_filter(array_map('df_ets', $this->_exceptions));}
 
 	/** @return bool */
 	public function hasExceptions() {return !!$this->_exceptions;}

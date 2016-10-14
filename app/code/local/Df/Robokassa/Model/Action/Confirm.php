@@ -12,7 +12,7 @@ class Df_Robokassa_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return rm_ets($e);}
+	protected function getResponseTextForError(Exception $e) {return df_ets($e);}
 
 	/**
 	 * @override

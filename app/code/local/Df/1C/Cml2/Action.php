@@ -30,7 +30,7 @@ abstract class Df_1C_Cml2_Action extends Df_Core_Model_Action {
 	 */
 	protected function processException(Exception $e) {
 		/** @var string $diagnosticMessage */
-		$diagnosticMessage = rm_ets($e);
+		$diagnosticMessage = df_ets($e);
 		/** @var string|bool $output */
 		// Используем @, чтобы избежать сбоя «Failed to delete buffer zlib output compression».
 		// Такой сбой у меня возник на сервере moysklad.magento-demo.ru.

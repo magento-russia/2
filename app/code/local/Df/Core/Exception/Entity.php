@@ -6,7 +6,6 @@ class Df_Core_Exception_Entity extends Df_Core_Exception {
 	 * @override
 	 * @param Mage_Core_Model_Abstract $entity
 	 * @param Exception $exception
-	 * @return Df_Core_Exception_Entity
 	 */
 	public function __construct(Mage_Core_Model_Abstract $entity, Exception $exception) {
 		$this->_entity = $entity;
@@ -24,13 +23,13 @@ class Df_Core_Exception_Entity extends Df_Core_Exception {
 	 * @override
 	 * @return string
 	 */
-	public function getMessageRm() {
+	public function message() {
 		return strtr(
 			"При обработке объекта класса {class} с идентификатором «{id}» произошёл сбой:"
 			. "\n«{message}»", array(
 				'{class}' => get_class($this->getEntity())
 				,'{id}' => $this->getEntity()->getId()
-				,'{message}' => rm_ets($this->getException())
+				,'{message}' => df_ets($this->getException())
 			)
 		);
 	}

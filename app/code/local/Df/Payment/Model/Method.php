@@ -507,7 +507,7 @@ abstract class Df_Payment_Model_Method
 			$this->logFailureLowLevel($exception);
 			if ($exception instanceof Df_Core_Exception) {
 				/** @var Df_Core_Exception $exception */
-				$this->logFailureHighLevel(rm_ets($exception));
+				$this->logFailureHighLevel(df_ets($exception));
 			}
 			rm_exception_to_session($exception);
 			/**

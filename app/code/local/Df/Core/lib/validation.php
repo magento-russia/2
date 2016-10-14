@@ -787,7 +787,7 @@ function df_should_not_be_here($method) {df_error("Метод «{$method}» за
  */
 function df_warning($message = null) {
 	if ($message instanceof Exception) {
-		$message = rm_ets($message);
+		$message = df_ets($message);
 	}
 	else {
 		if (is_array($message)) {
@@ -864,7 +864,7 @@ function rm_bool($value) {
  */
 function rm_exception_to_session(Exception $exception) {
 	/** @var string $message */
-	$message = df_t()->nl2br(rm_xml_output_html(rm_ets($exception)));
+	$message = df_t()->nl2br(rm_xml_output_html(df_ets($exception)));
 	/** @var bool $isMagentoCoreException */
 	$isMagentoCoreException = $exception instanceof Mage_Core_Exception;
 	/** @var bool $isRmException */

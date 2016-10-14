@@ -22,7 +22,7 @@ class Df_Zf_Filter_String_Trim implements Zend_Filter_Interface {
 			$result = df_trim($value);
 		}
 		catch (Exception $e) {
-			df_error(new Zend_Filter_Exception(rm_ets($e)));
+			df_error(new Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}

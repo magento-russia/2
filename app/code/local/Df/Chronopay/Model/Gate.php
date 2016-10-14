@@ -43,7 +43,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 			$futureException =
 				$e instanceof Df_Chronopay_Model_Gate_Exception
 				? $e
-				: new Df_Chronopay_Model_Gate_Exception(array('message' => rm_ets($e)))
+				: new Df_Chronopay_Model_Gate_Exception(array('message' => df_ets($e)))
 			;
 			df_notify($futureException->getMessageForLog());
 			df_notify($futureException->getMessageForCustomer());

@@ -38,7 +38,7 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 			$result = round($this->convertInternal($currencyFrom, $currencyTo), 4);
 		}
 		catch (Exception $e) {
-			$this->_messages[]= rm_ets($e) ? rm_ets($e) : df_t()->nl2br(df_exception_get_trace($e));
+			$this->_messages[]= df_ets($e) ? df_ets($e) : df_t()->nl2br(df_exception_get_trace($e));
 			df_handle_entry_point_exception($e, $rethrow = false);
 		}
 		return $result;
