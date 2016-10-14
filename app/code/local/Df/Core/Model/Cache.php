@@ -80,7 +80,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 				 * P.S. Оно, конечно, правильнее, но @uses json_decode() работает заметно быстрее,
 				 * чем обёртка @see df_json_decode()
 				 */
-				$result = rm_unserialize_simple($serialized);
+				$result = df_unserialize_simple($serialized);
 				if (!is_array($result)) {
 					$result = false;
 				}
@@ -100,7 +100,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 			/** @var string|bool $serialized */
 			$serialized = $this->loadData($key);
 			if (false !== $serialized) {
-				$result = rm_unserialize($serialized);
+				$result = df_unserialize($serialized);
 			}
 		}
 		return $result;
@@ -272,7 +272,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 			 * P.S. Оно, конечно, правильнее, но @uses json_encode() работает заметно быстрее,
 			 * чем обёртка @see Zend_Json::encode()
 			 */
-			$this->saveData($key, rm_serialize_simple($value));
+			$this->saveData($key, df_serialize_simple($value));
 		}
 	}
 
@@ -283,7 +283,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 */
 	public function saveDataComplex($key, $value) {
 		if ($this->isEnabled()) {
-			$this->saveData($key, rm_serialize($value));
+			$this->saveData($key, df_serialize($value));
 		}
 	}
 

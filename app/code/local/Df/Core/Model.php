@@ -923,8 +923,8 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 			 */
 			$propertyValue =
 				isset($this->_cachedPropertiesSimpleMap[$propertyName])
-				? rm_unserialize_simple($propertyValueSerialized)
-				: df_ftn(rm_unserialize($propertyValueSerialized))
+				? df_unserialize_simple($propertyValueSerialized)
+				: df_ftn(df_unserialize($propertyValueSerialized))
 			;
 			if (!is_null($propertyValue)) {
 				$this->_cachedPropertiesLoaded[$propertyName] = true;
@@ -1002,8 +1002,8 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var string|bool $propertyValueSerialized */
 		$propertyValueSerialized =
 			isset($this->_cachedPropertiesSimpleMap[$propertyName])
-			? rm_serialize_simple($propertyValue)
-			: rm_serialize($propertyValue)
+			? df_serialize_simple($propertyValue)
+			: df_serialize($propertyValue)
 		;
 		if ($propertyValueSerialized) {
 			df_cache()->save(
