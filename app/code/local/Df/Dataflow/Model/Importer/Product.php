@@ -23,7 +23,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 			$result->setStoreId($this->storeId());
 			if (!$this->getRow()->isProductNew()) {
 				$result->load($this->getRow()->getId());
-				if (rm_nat0($result->getId()) !== rm_nat0($this->getRow()->getId())) {
+				if (df_nat0($result->getId()) !== df_nat0($this->getRow()->getId())) {
 					df_error(
 						'При обновлении данных товара произошёл сбой '
 						.'загрузки из базы данных товар с артикулом «%s»'
@@ -275,11 +275,11 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 			/** @var mixed $fieldValue */
 			if (1 === preg_match($pattern, $fieldName, $matches)) {
 				/** @var int $websiteId */
-				//$websiteId = rm_nat0(dfa($matches, 1));
+				//$websiteId = df_nat0(dfa($matches, 1));
 				/** @var int $customerGroupId */
-				$customerGroupId = rm_nat0(dfa($matches, 2));
+				$customerGroupId = df_nat0(dfa($matches, 2));
 				/** @var int $qty */
-				$qty = rm_nat0(dfa($matches, 3));
+				$qty = df_nat0(dfa($matches, 3));
 				$newTierPrices []=
 					array(
 						'website_id'  => 0

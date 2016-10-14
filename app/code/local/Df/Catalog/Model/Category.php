@@ -46,7 +46,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		/** @var string $result */
 		$result = df_nts($this->_getData('description'));
 		/** @var int $pageNumber */
-		$pageNumber = rm_nat0(rm_request('p'));
+		$pageNumber = df_nat0(rm_request('p'));
 		if (
 				1 < $pageNumber
 			&&

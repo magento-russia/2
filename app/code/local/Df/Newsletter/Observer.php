@@ -18,7 +18,7 @@ class Df_Newsletter_Observer {
 			 */
 			df_assert_class($subscriber, 'Mage_Newsletter_Model_Subscriber');
 			if (
-				0 === rm_nat0($subscriber->getStoreId())
+				0 === df_nat0($subscriber->getStoreId())
 				&& df_cfg()->newsletter()->subscription()->fixSubscriberStore()
 			) {
 				/** @var Df_Customer_Model_Customer $customer */

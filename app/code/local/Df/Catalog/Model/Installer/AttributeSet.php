@@ -16,7 +16,7 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 			catch (Exception $e) {
 				df_error('Не могу создать прикладной тип товара «%s».', $this->getName());
 			}
-			rm_nat($result->getId());
+			df_nat($result->getId());
 			/**
 			 * 2015-08-08
 			 * Раньше здесь стоял код код:

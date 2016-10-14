@@ -22,9 +22,9 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid
 				$minBalance = df_h()->reward()->getGeneralConfig('min_points_balance', (int)$website);
 				$maxBalance = df_h()->reward()->getGeneralConfig('max_points_balance', (int)$website);
 				$item->addData(array(
-					'min_points_balance' => rm_nat0($minBalance)
+					'min_points_balance' => df_nat0($minBalance)
 					,'max_points_balance' =>
-						! rm_nat0($maxBalance)
+						! df_nat0($maxBalance)
 						? df_mage()->adminhtmlHelper()->__('Unlimited')
 						: $maxBalance
 				));

@@ -41,7 +41,7 @@ class Df_Catalog_Model_Config_Backend_Conditions extends Df_Admin_Config_Backend
 			$result = df_model('catalogrule/rule');
 			if ($this->getRuleExistingId()) {
 				$result->load($this->getRuleExistingId());
-				rm_nat($result->getId());
+				df_nat($result->getId());
 			}
 			$result->addData(array(
 				'name' => 'Не редактировать'
@@ -55,7 +55,7 @@ class Df_Catalog_Model_Config_Backend_Conditions extends Df_Admin_Config_Backend
 	/** @return int */
 	private function getRuleExistingId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat0($this->getOldValue());
+			$this->{__METHOD__} = df_nat0($this->getOldValue());
 		}
 		return $this->{__METHOD__};
 	}

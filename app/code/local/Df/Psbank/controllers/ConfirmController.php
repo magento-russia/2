@@ -30,7 +30,7 @@ class Df_Psbank_ConfirmController extends Mage_Core_Controller_Front_Action {
 			if (!ctype_digit($result)) {
 				df_error('Код операции («TRTYPE») должен содержать только цифры');
 			}
-			$result = rm_nat0($result);
+			$result = df_nat0($result);
 			if (!in_array($result, array_keys($this->getActionMap()))) {
 				df_error('Системе непонятен код запрашиваемой операции: «%d»', $this->getActionCode());
 			}

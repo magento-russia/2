@@ -28,7 +28,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->comment($this->getPaymentStateMessage(rm_nat($this->getRequestValueServicePaymentState())));
+		$this->comment($this->getPaymentStateMessage(df_nat($this->getRequestValueServicePaymentState())));
 	}
 
 	/**
@@ -71,7 +71,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return self::PAYMENT_STATE__PROCESSED === rm_nat($this->getRequestValueServicePaymentState());
+		return self::PAYMENT_STATE__PROCESSED === df_nat($this->getRequestValueServicePaymentState());
 	}
 
 	/**

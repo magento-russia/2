@@ -52,7 +52,7 @@ class Df_Core_Setup_2_23_5 extends Df_Core_Setup {
 			if (is_null($hasCheckUniqueBug)) {
 				$hasCheckUniqueBug = df_magento_version('1.7.0.0', '<');
 			}
-			if (!$hasCheckUniqueBug || (0 < rm_nat0($entity->getId()))) {
+			if (!$hasCheckUniqueBug || (0 < df_nat0($entity->getId()))) {
 				$entity->setDataUsingMethod(
 					'name', $this->$translatorMethod($entity->getDataUsingMethod('name'))
 				);

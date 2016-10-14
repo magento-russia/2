@@ -19,7 +19,7 @@ class Df_Sales_Model_Resource_Order extends Mage_Sales_Model_Mysql4_Order {
 			->from($this->getTable('sales/order'), 'entity_id')
 			->where('? = protect_code', $protectCode)
 		;
-		return rm_nat0($this->getReadConnection()->fetchOne($select));
+		return df_nat0($this->getReadConnection()->fetchOne($select));
 	}
 
 	/** @return Df_Sales_Model_Resource_Order */

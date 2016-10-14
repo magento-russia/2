@@ -128,7 +128,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 			$originalName = self::getRegionName($region);
 			df_assert_string($originalName);
 			/** @var int $typeAsInteger */
-			$typeAsInteger = rm_nat0($region->getData('df_type'));
+			$typeAsInteger = df_nat0($region->getData('df_type'));
 			/** @var array $typesMap */
 			$typesMap = array(
 				1 => 'Республика'

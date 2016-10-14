@@ -60,7 +60,7 @@ class Df_Kkb_Model_RequestDocument_OrderItems extends Df_Core_Xml_Generator_Docu
 						, $item->getName()
 						/**
 						 * 2016-05-04
-						 * Раньше тут использовалось @see rm_nat0(),
+						 * Раньше тут использовалось @see df_nat0(),
 						 * однако количество заказанного товара
 						 * почему-то хранится в системе как вещественное число,
 						 * что приводит к сбою

@@ -267,6 +267,12 @@ function df_o($entity, $key, $default = null) {
 /** @return Df_Core_Helper_Output */
 function df_output() {return Df_Core_Helper_Output::s();}
 
+/**
+ * @param float|int $value
+ * @return int
+ */
+function df_round($value) {return (int)round($value);}
+
 /** @return Df_Core_Helper_Url */
 function df_url() {return Df_Core_Helper_Url::s();}
 

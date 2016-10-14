@@ -27,7 +27,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable
 			$optionValue = $offer->getOptionValues()->findByAttributeId($attribute['attribute_id']);
 			/** @var int $valueId */
 			$valueId = $optionValue->getValueId();
-			rm_nat($valueId);
+			df_nat($valueId);
 			$result[]= array(
 				'attribute_id' => $attribute['attribute_id']
 				,'pricing_value' => $offer->getProduct()->getPrice()

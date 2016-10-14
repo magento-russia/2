@@ -82,7 +82,7 @@ class Df_Alfabank_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Co
 		}
 		else {
 			$this->checkPaymentAmount();
-			if (810 !== rm_nat($this->getRequestValuePaymentCurrencyCode())) {
+			if (810 !== df_nat($this->getRequestValuePaymentCurrencyCode())) {
 				df_error('Заказ был оплачен не в рублях');
 			}
 			/** @var Mage_Sales_Model_Order_Invoice $invoice */

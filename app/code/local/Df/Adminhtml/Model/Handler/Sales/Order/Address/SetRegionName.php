@@ -56,7 +56,7 @@ class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Co
 			$regionName = dfa($address, 'region');
 			if (!$regionName) {
 				/** @var int $regionId */
-				$regionId = rm_nat0(dfa($address, 'region_id'));
+				$regionId = df_nat0(dfa($address, 'region_id'));
 				if (0 < $regionId) {
 					$address['region'] = Df_Directory_Model_Region::ld($regionId)->getName();
 				}

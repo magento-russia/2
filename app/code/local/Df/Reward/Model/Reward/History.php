@@ -169,7 +169,7 @@ class Df_Reward_Model_Reward_History extends Df_Core_Model {
 		));
 		$lifetime = (int)df_h()->reward()->getGeneralConfig('expiration_days', $this->getWebsiteId());
 		if ($lifetime > 0) {
-			$expired = $this->getResource()->formatDate(rm_today_add($lifetime));
+			$expired = $this->getResource()->formatDate(df_today_add($lifetime));
 			$this->addData(array('expired_at_static' => $expired, 'expired_at_dynamic' => $expired));
 		}
 		return parent::_beforeSave();

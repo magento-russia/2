@@ -19,9 +19,9 @@ class Df_Admin_Config_Source_SelectNumberFromDropdown extends Df_Admin_Config_So
 		/** @var int[][] $result */
 		$result = array();
 		/** @var int $max */
-		$max = rm_nat0($this->getFieldParam(self::$DF_MAX, 10));
+		$max = df_nat0($this->getFieldParam(self::$DF_MAX, 10));
 		/** @var int $step */
-		$step = rm_nat0($this->getFieldParam('df_step', 1));;
+		$step = df_nat0($this->getFieldParam('df_step', 1));;
 		for ($i = $this->getMin(); $i <= $max; $i += $step) {
 			$result[]= rm_option($i, $i);
 		}
@@ -29,7 +29,7 @@ class Df_Admin_Config_Source_SelectNumberFromDropdown extends Df_Admin_Config_So
 	}
 
 	/** @return int */
-	private function getMin() {return rm_nat0($this->getFieldParam('df_min', 1));}
+	private function getMin() {return df_nat0($this->getFieldParam('df_min', 1));}
 
 	/**
 	 * @used-by getAsOptionArray()

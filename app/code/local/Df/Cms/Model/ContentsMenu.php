@@ -19,7 +19,7 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 			foreach ($this->getApplicators() as $applicator) {
 				/** @var Df_Cms_Model_ContentsMenu_Applicator $applicator */
 				/** @var Df_Cms_Model_Hierarchy_Node $node */
-				$result[]= rm_nat($applicator->getNode()->getId());
+				$result[]= df_nat($applicator->getNode()->getId());
 			}
 			$this->{__METHOD__} = $result;
 		}

@@ -133,10 +133,10 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	/** @return int */
 	public function getAttributeSetId() {
 		/**
-		 * Нельзя использовать @rm_nat,
+		 * Нельзя использовать @df_nat,
 		 * http://magento-forum.ru/topic/4377/
 		 * 2014-07-27:
-		 * Заменил @see rm_nat0 на (int) ради ускорения.
+		 * Заменил @see df_nat0 на (int) ради ускорения.
 		 */
 		return (int)$this->_getData(self::P__ATTRIBUTE_SET_ID);
 	}
@@ -948,7 +948,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * @throws Exception
 	 */
 	public function saveAttributes(array $attributeValues, $storeId = null) {
-		rm_nat($this->getId());
+		df_nat($this->getId());
 		rm_admin_begin();
 		try {
 			/** @var Mage_Catalog_Model_Product_Action $productAction */

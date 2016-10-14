@@ -330,7 +330,7 @@ class Df_Cms_Observer {
 							/** @var int $sortOrder */
 							$sortOrder = df_int(dfa($row, 'sort_order'));
 							/** @var int $parentNodeId */
-							$parentNodeId = rm_nat0(dfa($row, 'parent_node_id'));
+							$parentNodeId = df_nat0(dfa($row, 'parent_node_id'));
 							$currentPageIsRoot = (0 === $parentNodeId);
 							if ($currentPageIsRoot) {
 								/**
@@ -377,7 +377,7 @@ class Df_Cms_Observer {
 					}
 					foreach ($nodesData as $row) {
 						/** @var int $parentNodeId */
-						$parentNodeId = rm_nat0(dfa($row, 'parent_node_id'));
+						$parentNodeId = df_nat0(dfa($row, 'parent_node_id'));
 						/**
 						 * В качестве типа данных используем строку,
 						 * потому что некоторые идентификаторы

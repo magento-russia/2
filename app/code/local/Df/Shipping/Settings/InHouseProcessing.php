@@ -16,7 +16,7 @@ class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
 	 * @used-by Df_Shipping_Rate_Result_Method::prepareMethodTitle()
 	 * @return Zend_Date
 	 */
-	public static function date() {static $r; return $r ? $r : $r = rm_today_add(self::days());}
+	public static function date() {static $r; return $r ? $r : $r = df_today_add(self::days());}
 
 	/**
 	 * Возвращает количество дней между текущей датой

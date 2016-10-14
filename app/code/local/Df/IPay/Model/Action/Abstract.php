@@ -475,7 +475,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	}
 
 	/** @return int */
-	private function getRequestParam_CurrencyId() {return rm_nat($this->getRequestParam('Currency'));}
+	private function getRequestParam_CurrencyId() {return df_nat($this->getRequestParam('Currency'));}
 
 	/** @return string */
 	private function getRequestParam_Language() {return $this->getRequestParamR('Language');}
@@ -487,7 +487,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	private function getRequestParam_RequestType() {return $this->getRequestParamR('RequestType');}
 
 	/** @return int */
-	private function getRequestParam_ShopId() {return rm_nat($this->getRequestParam('ServiceNo'));}
+	private function getRequestParam_ShopId() {return df_nat($this->getRequestParam('ServiceNo'));}
 
 	/** @return string */
 	private function getRequestParam_Signature() {
@@ -515,7 +515,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 
 	/** @return int */
 	private function getRequestParam_TransactionId() {
-		return rm_nat($this->getRequestParam('RequestId'));
+		return df_nat($this->getRequestParam('RequestId'));
 	}
 
 	/**
@@ -559,7 +559,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	 */
 	private function orderId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat0($this->getRequestParam('PersonalAccount'));
+			$this->{__METHOD__} = df_nat0($this->getRequestParam('PersonalAccount'));
 		}
 		return $this->{__METHOD__};
 	}

@@ -63,7 +63,7 @@ class Df_Tax_M extends Df_Core_Model {
 			/** @var int|null $result */
 			$result = dfa($rows[0], 'product_tax_class_id');
 			if (!is_null($result)) {
-				$result = rm_nat($result);
+				$result = df_nat($result);
 			}
 			$cache[$iso2][$rateS] = rm_n_set($result);
 		}

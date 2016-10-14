@@ -39,7 +39,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 	private function batchRunActionDf() {
 		df_assert($this->getRequest()->isPost());
 		/** @var int $batchId */
-		$batchId = rm_nat($this->getRequest()->getPost('batch_id'));
+		$batchId = df_nat($this->getRequest()->getPost('batch_id'));
 		/** @var array $rowIds */
 		$rowIds = $this->getRequest()->getPost('rows');
 		df_assert_array($rowIds);
@@ -48,7 +48,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 		$batchModel = df_mage()->dataflow()->batch();
 		$batchModel->load($batchId);
 		df_assert(!is_null($batchModel->getId()));
-		df_assert_eq($batchId, rm_nat($batchModel->getId()));
+		df_assert_eq($batchId, df_nat($batchModel->getId()));
 		/** @var string $adapterClassMf */
 		$adapterClassMf = $batchModel->getAdapter();
 		df_assert_string_not_empty($adapterClassMf);

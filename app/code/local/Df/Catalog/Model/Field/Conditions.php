@@ -72,7 +72,7 @@ class Df_Catalog_Model_Field_Conditions extends Df_Core_Model {
 	}
 
 	/** @return int */
-	private function getRuleId() {return rm_nat0($this->getElement()->getData('value'));}
+	private function getRuleId() {return df_nat0($this->getElement()->getData('value'));}
 
 	/**
 	 * @override

@@ -70,7 +70,7 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 	 */
 	private function calculateRate(array $currencyData) {
 		/** @var int $rateDenominator */
-		$rateDenominator = rm_nat0(dfa($currencyData, $this->getTagName_Denominator()));
+		$rateDenominator = df_nat0(dfa($currencyData, $this->getTagName_Denominator()));
 		/** @var float $rateRaw */
 		$rateRaw = rm_float(dfa($currencyData, $this->getTagName_Rate()));
 		df_assert_gt0($rateRaw);

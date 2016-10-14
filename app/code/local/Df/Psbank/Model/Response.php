@@ -273,7 +273,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 			$result = $this->cfg('RESULT');
 			df_assert(!is_null($result));
 			df_assert(ctype_digit($result));
-			$result = rm_nat0($result);
+			$result = df_nat0($result);
 			df_result_between($result, 0, 3);
 			$this->{__METHOD__} = $result;
 		}
@@ -306,7 +306,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 			$result = $this->cfg('TERMINAL');
 			df_assert_eq(8, strlen($result));
 			df_assert(ctype_digit($result));
-			$this->{__METHOD__} = rm_nat0($result);
+			$this->{__METHOD__} = df_nat0($result);
 		}
 		return $this->{__METHOD__};
 	}
@@ -347,7 +347,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 			df_result_string_not_empty($result);
 			df_assert(ctype_digit($result));
 			df_result_between(strlen($result), 1, 2);
-			$this->{__METHOD__} = rm_nat0($result);
+			$this->{__METHOD__} = df_nat0($result);
 		}
 		return $this->{__METHOD__};
 	}

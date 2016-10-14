@@ -176,12 +176,12 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 				$stockItem->assignProduct($this->getExistingMagentoProduct());
 			}
 			$result['is_in_stock'] =
-				(rm_nat0($stockItem->getMinQty()) < $this->getEntityOffer()->getQuantity())
+				(df_nat0($stockItem->getMinQty()) < $this->getEntityOffer()->getQuantity())
 			;
 		}
 		else {
 			/** @var int $minQty */
-			$minQty = rm_nat0($this->getStoreConfig(
+			$minQty = df_nat0($this->getStoreConfig(
 				Mage_CatalogInventory_Model_Stock_Item::XML_PATH_MIN_QTY
 			));
 			$result['is_in_stock'] = ($minQty < $this->getEntityOffer()->getQuantity());

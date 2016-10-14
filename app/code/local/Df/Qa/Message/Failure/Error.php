@@ -47,7 +47,7 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 	 */
 	private static function type($asString = false) {
 		/** @var int|string $result */
-		$result = rm_nat0(self::info('type'));
+		$result = df_nat0(self::info('type'));
 		return !$asString ? $result : dfa(self::map(), $result);
 	}
 

@@ -55,7 +55,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	/** @return int */
 	public function getOrderingWeight() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat0($this->getConfigValue('ordering'));
+			$this->{__METHOD__} = df_nat0($this->getConfigValue('ordering'));
 		}
 	}
 

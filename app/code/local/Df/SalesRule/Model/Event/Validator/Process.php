@@ -42,7 +42,7 @@ class Df_SalesRule_Model_Event_Validator_Process extends Df_Core_Model_Event {
 	 * [/code]
 	 * @return int
 	 */
-	public function getQty() {return rm_nat0($this->getEventParam('qty'));}
+	public function getQty() {return df_nat0($this->getEventParam('qty'));}
 
 	/**
 	 * Содержимое заказа

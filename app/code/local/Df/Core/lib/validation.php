@@ -1115,7 +1115,7 @@ function rm_is($variable, $class) {
  * @return int
  * @throws Df_Core_Exception
  */
-function rm_nat($value, $allow0 = false) {
+function df_nat($value, $allow0 = false) {
 	/** @var int $result */
 	$result = df_int($value, $allow0);
 	if ($allow0) {
@@ -1132,7 +1132,7 @@ function rm_nat($value, $allow0 = false) {
  * @return int
  * @throws Df_Core_Exception
  */
-function rm_nat0($value) {return rm_nat($value, $allow0 = true);}
+function df_nat0($value) {return df_nat($value, $allow0 = true);}
 
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.

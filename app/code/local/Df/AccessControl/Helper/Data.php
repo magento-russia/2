@@ -41,7 +41,7 @@ class Df_AccessControl_Helper_Data extends Mage_Core_Helper_Abstract {
 					. 'не в состоянии работать по причине некачественного стороннего модуля.'
 				);
 			}
-			$this->{__METHOD__} = rm_nat0($user->getRole()->getId());
+			$this->{__METHOD__} = df_nat0($user->getRole()->getId());
 		}
 		return $this->{__METHOD__};
 	}

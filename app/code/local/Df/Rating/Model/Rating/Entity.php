@@ -3,7 +3,7 @@ class Df_Rating_Model_Rating_Entity extends Mage_Rating_Model_Rating_Entity {
 	/** @return int */
 	public function getIdForProductRating() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat($this->getIdByCode('product'));
+			$this->{__METHOD__} = df_nat($this->getIdByCode('product'));
 		}
 		return $this->{__METHOD__};
 	}

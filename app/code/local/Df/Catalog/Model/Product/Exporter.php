@@ -339,7 +339,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 						/**
 						 * 2015-11-07
 						 * Тут раньше стояло
-						 * $storeId = rm_nat0(rm_state()->getStoreProcessed()->getId());
+						 * $storeId = df_nat0(rm_state()->getStoreProcessed()->getId());
 						 * и дальше шла выборка идентификатору магазина.
 						 * Это ошибочно и очевидно являлось недоразумением,
 						 * потому что даже в Magento CE 1.8.0.0
@@ -353,7 +353,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 							}
 						 */
 						/** @var int $websiteId */
-						$websiteId = rm_nat0(rm_state()->getStoreProcessed()->getWebsiteId());
+						$websiteId = df_nat0(rm_state()->getStoreProcessed()->getWebsiteId());
 						/**
 							[10704] => Array
 								(

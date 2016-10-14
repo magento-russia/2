@@ -97,9 +97,9 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 			// В данной точке программы $parentNodeId не должно принимать значение null,
 			// потому что чуть ниже значение $parentNodeId применяется в качестве ключа массива.
 			$parentNodeId = empty($v['parent_node_id']) ? 0 : $v['parent_node_id'];
-			$pageId = empty($v['page_id']) ? null : rm_nat0($v['page_id']);
+			$pageId = empty($v['page_id']) ? null : df_nat0($v['page_id']);
 			$_node = array(
-				'node_id' => mb_strpos($v['node_id'], '_') === 0 ? null : rm_nat0($v['node_id'])
+				'node_id' => mb_strpos($v['node_id'], '_') === 0 ? null : df_nat0($v['node_id'])
 				,'page_id' => $pageId
 				,'label' => !$pageId ? $v['label'] : null
 				,'identifier' => !$pageId ? $v['identifier'] : null

@@ -80,7 +80,7 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 			)
 		);
 		/** @var int $regionId */
-		$regionId = rm_nat(df_conn()->lastInsertId());
+		$regionId = df_nat(df_conn()->lastInsertId());
 		df_conn()->insert(
 			df_table(Df_Directory_Model_Resource_Region::TABLE__NAME)
 			,array(

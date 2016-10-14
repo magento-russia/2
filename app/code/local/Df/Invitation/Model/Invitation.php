@@ -336,7 +336,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 			else {
 				$this->unsetData('group_id');
 			}
-			if (0 === rm_nat0($this->getStoreId())) {
+			if (0 === df_nat0($this->getStoreId())) {
 				throw new Mage_Core_Exception(
 					df_h()->invitation()->__('Wrong store specified.')
 					,self::ERROR_INVALID_DATA

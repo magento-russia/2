@@ -50,7 +50,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 					 */
 					$varienNode->setData(self::$RM__ROOT, true);
 					$result->addNode($varienNode);
-					$this->_nodesMap[rm_nat($cmsNode->getId())] = $varienNode;
+					$this->_nodesMap[df_nat($cmsNode->getId())] = $varienNode;
 				}
 				else {
 					/**
@@ -64,7 +64,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 					$parentNode = $this->getParentForCmsNodeInVarienDataTree($cmsNode);
 					if (!is_null($parentNode)) {
 						$parentNode->addChild($varienNode);
-						$this->_nodesMap[rm_nat($cmsNode->getId())] = $varienNode;
+						$this->_nodesMap[df_nat($cmsNode->getId())] = $varienNode;
 					}
 				}
 			}

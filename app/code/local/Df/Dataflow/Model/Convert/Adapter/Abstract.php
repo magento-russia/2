@@ -22,8 +22,8 @@ abstract class Df_Dataflow_Model_Convert_Adapter_Abstract
 				$rowOrdering++;
 				$this->getBatchImportModel()->load($importId);
 				df_assert_eq(
-					rm_nat0($importId)
-					, rm_nat0($this->getBatchImportModel()->getId())
+					df_nat0($importId)
+					, df_nat0($this->getBatchImportModel()->getId())
 					, sprintf('Отсутствует пакет данных №%d.', $importId)
 				)
 				;

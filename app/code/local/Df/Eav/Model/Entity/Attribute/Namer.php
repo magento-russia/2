@@ -12,7 +12,7 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 			while (true) {
 				$result = $this->getResultByAttempt($attempt);
 				$attribute->loadByCode($this->getEntityTypeId(), $result);
-				if (0 === rm_nat0($attribute->getId())) {
+				if (0 === df_nat0($attribute->getId())) {
 					break;
 				}
 				$attribute->setData(array());

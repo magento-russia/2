@@ -30,7 +30,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		foreach ($this->getOptionsOld() as $oldOption) {
 			/** @var Df_Eav_Model_Entity_Attribute_Option $oldOption */
 			/** @var int $value */
-			$value = rm_nat0($oldOption->getData('option_id'));
+			$value = df_nat0($oldOption->getData('option_id'));
 			df_assert_integer($value);
 			if (!Df_1C_Config_Source_ReferenceListUpdateMode::isNone($updateMode)) {
 				// Сохраняем те старые опции, у которых нет идентификаторов из 1С,
@@ -157,9 +157,9 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 	private function getOptionsOld() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $attributeId */
-			$attributeId = rm_nat0($this->getAttribute()->getId());
+			$attributeId = df_nat0($this->getAttribute()->getId());
 			/** @var int $storeId */
-			$storeId = rm_nat0($this->getAttribute()->getDataUsingMethod('store_id'));
+			$storeId = df_nat0($this->getAttribute()->getDataUsingMethod('store_id'));
 			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $result */
 			$result = Df_Eav_Model_Entity_Attribute_Option::c();
 			$result->setPositionOrder('asc');

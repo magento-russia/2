@@ -46,7 +46,7 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 	 * @param $userId
 	 * @return bool
 	 */
-	public function isCurrentUserOwner($userId) {return rm_nat0($userId) === rm_admin_id();}
+	public function isCurrentUserOwner($userId) {return df_nat0($userId) === rm_admin_id();}
 
 	/**
 	 * @param string $type

@@ -27,7 +27,7 @@ class Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAcce
 					 */
 					->setId($this->getEvent()->getRoleId())
 				;
-				df_assert_eq(rm_nat0($this->getEvent()->getRoleId()), rm_nat0($this->getRole()->getId()));
+				df_assert_eq(df_nat0($this->getEvent()->getRoleId()), df_nat0($this->getRole()->getId()));
 			}
 			else {
 				if ($this->getRole()->isModuleEnabled()) {

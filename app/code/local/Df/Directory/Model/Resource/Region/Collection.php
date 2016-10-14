@@ -78,7 +78,7 @@ class Df_Directory_Model_Resource_Region_Collection extends Df_Core_Model_Resour
 	public function getIdByName($name) {
 		/** @var Df_Directory_Model_Region|null $region */
 		$region = $this->getItemByName($name);
-		return is_null($region) ? null : rm_nat0($region->getId());
+		return is_null($region) ? null : df_nat0($region->getId());
 	}
 
 	/**

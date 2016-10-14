@@ -4,7 +4,7 @@ class Df_Cms_Block_Admin_Page_Revision_Edit_Info extends Mage_Adminhtml_Block_Wi
 	public function getAuthor() {
 		$result = df_h()->cms()->__('N/A');
 		/** @var int $userId */
-		$userId = rm_nat0($this->_page->getUserId());
+		$userId = df_nat0($this->_page->getUserId());
 		if ($userId === rm_admin_id()) {
 			$result = rm_admin_name();
 		}

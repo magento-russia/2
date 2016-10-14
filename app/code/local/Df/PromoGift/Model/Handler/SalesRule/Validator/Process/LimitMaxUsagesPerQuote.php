@@ -30,7 +30,7 @@ class Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQu
 		 * @var int $maxUsagesPerQuote
 		 */
 		$maxUsagesPerQuote =
-			rm_nat0($this->getRule()->getData(Df_PromoGift_Model_Rule::P__MAX_USAGES_PER_QUOTE))
+			df_nat0($this->getRule()->getData(Df_PromoGift_Model_Rule::P__MAX_USAGES_PER_QUOTE))
 		;
 		/**
 		 * Дальше в коде мы можем «отнять» подарок.

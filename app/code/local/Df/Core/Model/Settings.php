@@ -19,14 +19,14 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return int
 	 */
-	public function getNatural($key, $store = null) {return rm_nat($this->value($key, $store));}
+	public function getNatural($key, $store = null) {return df_nat($this->value($key, $store));}
 
 	/**
 	 * @param string $key
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return int
 	 */
-	public function getNatural0($key, $store = null) {return rm_nat0($this->value($key, $store));}
+	public function getNatural0($key, $store = null) {return df_nat0($this->value($key, $store));}
 
 	/**
 	 * @param string $key

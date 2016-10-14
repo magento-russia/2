@@ -134,7 +134,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 					$product[$key] = dfa($attributeValues, $productOrdering);
 				}
 				/** @var int $index */
-				$index = rm_nat0(dfa($product, Df_Sales_Block_Admin_Grid_OrderItem::P__ORDER_ITEM_ID));
+				$index = df_nat0(dfa($product, Df_Sales_Block_Admin_Grid_OrderItem::P__ORDER_ITEM_ID));
 				$result[$index] = $product;
 			}
 			$result = $this->removeParents($result);
@@ -159,7 +159,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 			df_assert_integer($id);
 			df_assert_array($product);
 			/** @var int $parentId */
-			$parentId = rm_nat0(dfa(
+			$parentId = df_nat0(dfa(
 				$product, Df_Sales_Block_Admin_Grid_OrderItem::COLLECTION_ITEM_PARAM__PARENT_ID
 			));
 			if (0 !== $parentId) {

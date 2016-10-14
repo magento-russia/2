@@ -150,7 +150,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				Df_1C_Cml2_State::s()->export()->getProducts()->getProductById(
-					rm_nat($this->getOrderItem()->getProductId())
+					df_nat($this->getOrderItem()->getProductId())
 				)
 			;
 		}

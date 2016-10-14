@@ -8,7 +8,7 @@ class Df_Catalog_Model_ConditionsLoader extends Df_Core_Model {
 				$result = null;
 			}
 			else {
-				rm_nat($this->getRuleId());
+				df_nat($this->getRuleId());
 				$result = df_model('catalogrule/rule');
 				$result->load($this->getRuleId());
 				if (!$result->getId()) {

@@ -12,7 +12,7 @@ abstract class Df_Vk_Block_Frontend_Widget extends Df_Core_Block_Template {
 	/** @return int */
 	public function getApplicationId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat(
+			$this->{__METHOD__} = df_nat(
 				df_preg_match_int('#apiId: (\d+)#m', $this->getSettings()->getCode(), false)
 			);
 		}

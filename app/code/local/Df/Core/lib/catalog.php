@@ -93,7 +93,7 @@ function rm_product_id($product) {
 	return
 		$product instanceof Df_Catalog_Model_Product
 		? $product->getId()
-		: rm_nat($product)
+		: df_nat($product)
 	;
 }
 
@@ -198,7 +198,7 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
 function rm_stock_update($product, $qty) {
 	/** @var int $productId */
 	$productId = rm_product_id($product);
-	$qty = rm_nat0($qty);
+	$qty = df_nat0($qty);
 	/** @var Df_CatalogInventory_Model_Stock_Item $stockItem */
 	$stockItem = Df_CatalogInventory_Model_Stock_Item::i();
 	$stockItem->loadByProduct($productId);

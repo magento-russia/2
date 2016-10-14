@@ -116,7 +116,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	public function addCategoriesFilter(array $categoryIds) {
 		df_param_array($categoryIds, 0);
 		$this->_productLimitationFilters[self::$LIMITATION__CATEGORIES] = $categoryIds;
-		if (Mage_Core_Model_App::ADMIN_STORE_ID === rm_nat0($this->getStoreId())) {
+		if (Mage_Core_Model_App::ADMIN_STORE_ID === df_nat0($this->getStoreId())) {
 			$this->_applyZeroStoreProductLimitations();
 		} else {
 			$this->_applyProductLimitations();

@@ -286,7 +286,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		$nodes	  = array();
 		$rowSet	 = $select->query()->fetchAll();
 		foreach ($rowSet as $row) {
-			$nodes[rm_nat0($row['parent_node_id'])][$row[$this->getIdFieldName()]] = $row;
+			$nodes[df_nat0($row['parent_node_id'])][$row[$this->getIdFieldName()]] = $row;
 		}
 		if (!$nodes) {
 			return $this;

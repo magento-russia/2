@@ -109,7 +109,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		$r = preg_match($pattern, $timestamp, $matches);
 		df_assert_eq(1, $r);
 		/** @var int $hour */
-		$hour = rm_nat0(dfa($matches, 4));
+		$hour = df_nat0(dfa($matches, 4));
 		if ($offsetType) {
 			df_assert_in($offsetType, array('UTC', 'GMT'));
 			/** @var int $offsetFromGMT */
@@ -167,7 +167,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		if (is_null($date)) {
 			$date = Zend_Date::now();
 		}
-		return rm_nat0($date->toString(Zend_Date::WEEKDAY_8601, 'iso'));
+		return df_nat0($date->toString(Zend_Date::WEEKDAY_8601, 'iso'));
 	}
 
 	/**
@@ -200,7 +200,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		if (is_null($date)) {
 			$date = Zend_Date::now();
 		}
-		return rm_nat0($date->toString(Zend_Date::HOUR_SHORT, 'iso'));
+		return df_nat0($date->toString(Zend_Date::HOUR_SHORT, 'iso'));
 	}
 	
 	/** @return Zend_Date */
@@ -379,7 +379,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	public function yesterday() {return Zend_Date::now()->subDay(1);}
 
 	/** @return Zend_Date */
-	private function createTomorrow() {return rm_today_add(1);}
+	private function createTomorrow() {return df_today_add(1);}
 
 	/** @return Df_Core_Helper_Date */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

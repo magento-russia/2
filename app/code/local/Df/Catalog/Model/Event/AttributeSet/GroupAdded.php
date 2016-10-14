@@ -5,7 +5,7 @@
  */
 class Df_Catalog_Model_Event_AttributeSet_GroupAdded extends Df_Core_Model_Event {
 	/** @return int */
-	public function getAttributeSetId() {return rm_nat($this->getEventParam(self::$E__ATTRIBUTE_SET_ID));}
+	public function getAttributeSetId() {return df_nat($this->getEventParam(self::$E__ATTRIBUTE_SET_ID));}
 
 	/** @return Df_Eav_Model_Entity_Attribute_Set */
 	public function getAttributeSet() {

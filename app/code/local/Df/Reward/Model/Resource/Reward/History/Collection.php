@@ -196,7 +196,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 			? 'expired_at_static'
 			: 'expired_at_dynamic'
 		;
-		$expireAtLimit = $this->getResource()->formatDate(rm_today_add($inDays));
+		$expireAtLimit = $this->getResource()->formatDate(df_today_add($inDays));
 		$this->getSelect()
 			->columns(array('total_expired' => new Zend_Db_Expr('SUM(`points_delta`-`points_used`)')))
 			->where('`points_delta`-`points_used`>0')

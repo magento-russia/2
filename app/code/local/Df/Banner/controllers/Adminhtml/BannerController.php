@@ -24,7 +24,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 		/** @var Df_Banner_Model_Banner $model */
 		$model = Df_Banner_Model_Banner::i();
 		$model->load($id);
-		if ($model->getId() || (0 === rm_nat0($id))) {
+		if ($model->getId() || (0 === df_nat0($id))) {
 			$data = rm_session()->getFormData(true);
 			if (!empty($data)) {
 				$model->setData($data);

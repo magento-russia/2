@@ -26,7 +26,7 @@ abstract class Df_Core_Model_Entity extends Df_Core_Model {
 			$result = df_model($dependencyInfo->getEntityClassName());
 			df_assert($result instanceof Df_Core_Model_Entity);
 			/** @var int $dependencyId */
-			$dependencyId = rm_nat0($this->cfg($dependencyInfo->getEntityIdFieldName()));
+			$dependencyId = df_nat0($this->cfg($dependencyInfo->getEntityIdFieldName()));
 			if (0 < $dependencyId) {
 				$result->load($dependencyId);
 			}

@@ -15,7 +15,7 @@ class Df_Directory_Setup_Processor_Region extends Df_Core_Model {
 			,Df_Directory_Model_Region::P__DF_TYPE => $this->getRegion()->getType()
 		));
 		$region->save();
-		rm_nat($region->getId());
+		df_nat($region->getId());
 		$this
 			//->addRegionLocaleNameToDb($region, Mage_Core_Model_Locale::DEFAULT_LOCALE)
 			->addRegionLocaleNameToDb($region, 'ru_RU')

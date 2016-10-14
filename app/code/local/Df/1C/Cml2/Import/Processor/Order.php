@@ -72,7 +72,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 				// собираем идентификаторы только простых товаров
 				if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
 					/** @var int $productId */
-					$productId = rm_nat($orderItem->getProductId());
+					$productId = df_nat($orderItem->getProductId());
 					df_assert(is_null(dfa($result, $productId)));
 					$result[$productId] = $orderItem;
 				}

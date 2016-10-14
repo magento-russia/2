@@ -9,7 +9,7 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 			/** @var Df_Sales_Model_Order $result */
 			$result = Df_Sales_Model_Order::i();
 			$result->load($this->getOrderId());
-			if (rm_nat0($result->getId()) !== rm_nat0($this->getOrderId())) {
+			if (df_nat0($result->getId()) !== df_nat0($this->getOrderId())) {
 				df_error('Заказ №%d отсутствует в системе.', $this->getOrderId());
 			}
 			$this->{__METHOD__} = $result;
@@ -70,7 +70,7 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 				df_error('Заказ с кодом «%s» отсутствует в системе.', $this->getOrderProtectCode());
 			}
 			try {
-				$result = rm_nat($result);
+				$result = df_nat($result);
 			}
 			catch (Exception $e) {
 				df_error($this->getInvalidUrlMessage());

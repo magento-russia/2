@@ -91,7 +91,7 @@ class Df_Reward_Model_Action_OrderExtra extends Df_Reward_Model_Action_Abstract 
 			foreach ($rewardRules as $rewardRule) {
 				/** @var array|object $rewardRule */
 				/** @var int $ruleId */
-				$ruleId = rm_nat(dfa($rewardRule, 'rule_id'));
+				$ruleId = df_nat(dfa($rewardRule, 'rule_id'));
 				$rulesPoints[$ruleId] = dfa($rewardRule, 'points_delta', 0);
 			}
 			foreach (df_h()->reward()->getSalesRuleApplications() as $salesRuleApplication) {
@@ -100,12 +100,12 @@ class Df_Reward_Model_Action_OrderExtra extends Df_Reward_Model_Action_Abstract 
 				$rule = $salesRuleApplication->getData('rule');
 				df_assert($rule instanceof Mage_SalesRule_Model_Rule);
 				/** @var int $qty */
-				$qty = rm_nat0($salesRuleApplication->getData('qty'));
+				$qty = df_nat0($salesRuleApplication->getData('qty'));
 				/** @var int $maxQty */
-				$maxQty = rm_nat0($rule->getDiscountQty());
+				$maxQty = df_nat0($rule->getDiscountQty());
 				if (0 < $maxQty) {
 					/** @var int $usedQty */
-					$usedQty = rm_nat0($rule->getData('used_qty'));
+					$usedQty = df_nat0($rule->getData('used_qty'));
 					$qty = min ($qty, $maxQty - $usedQty);
 					/**
 					 * Обратите внимание, что, в отличие от других типов правил,

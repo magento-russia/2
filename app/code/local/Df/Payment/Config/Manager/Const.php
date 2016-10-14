@@ -66,7 +66,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	public function getRequestVarMaxLength($requestVar) {
 		df_param_string($requestVar, 0);
 		if (!isset($this->{__METHOD__}[$requestVar])) {
-			$this->{__METHOD__}[$requestVar] = rm_nat0($this->getValue(df_cc_path(
+			$this->{__METHOD__}[$requestVar] = df_nat0($this->getValue(df_cc_path(
 				'request/payment_page/params', $requestVar, 'max_length'
 			)));
 		}
