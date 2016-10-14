@@ -51,7 +51,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 */
 	public function getMapFromCodeToName($locale = null) {
 		/** @var string $localeCode */
-		$localeCode = rm_locale($locale);
+		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			$this->{__METHOD__}[$localeCode] =
 				rm_options_to_map($this->toOptionArrayRmCached(
@@ -81,7 +81,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 */
 	public function getMapFromCodeToNameUc($locale = null) {
 		/** @var string $localeCode */
-		$localeCode = rm_locale($locale);
+		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			$this->{__METHOD__}[$localeCode] =
 				df_t()->strtoupper($this->getMapFromCodeToName($localeCode))
@@ -107,7 +107,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 */
 	public function getMapFromNameToCode($locale = null) {
 		/** @var string $localeCode */
-		$localeCode = rm_locale($locale);
+		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			$this->{__METHOD__}[$localeCode] = array_flip($this->getMapFromCodeToName($localeCode));
 		}
@@ -131,7 +131,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 */
 	public function getMapFromNameToCodeUc($locale = null) {
 		/** @var string $localeCode */
-		$localeCode = rm_locale($locale);
+		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			$this->{__METHOD__}[$localeCode] = array_flip($this->getMapFromCodeToNameUc($localeCode));
 		}
@@ -235,7 +235,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 */
 	public function toOptionArrayRmCached($emptyLabel = ' ', $locale = null, $groupAndOrder = true) {
 		/** @var string $localeCode */
-		$localeCode = rm_locale($locale);
+		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$emptyLabel][$localeCode][$groupAndOrder])) {
 			/** @var array(array(string => string)) $result */
 			$result = null;
@@ -253,7 +253,7 @@ class Df_Directory_Model_Resource_Country_Collection
 			// то мы добавим в конец данного идентификатора идентификаторы значений этих параметров.
 			if (' ' !== $emptyLabel) {
 				$cacheKey = implode('_', array(
-					$cacheKey, (false === $emptyLabel ? 'false' : $emptyLabel), rm_locale($locale)
+					$cacheKey, (false === $emptyLabel ? 'false' : $emptyLabel), df_locale($locale)
 				));
 			}
 			/** @var bool $canUseCache */
@@ -278,7 +278,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 */
 	private function getMapFromIso2CodeToLocalizedName($localeCode = null) {
 		if (!$localeCode) {
-			$localeCode = rm_locale();
+			$localeCode = df_locale();
 		}
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			/** @var array(string => string) $result */
@@ -349,7 +349,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		/** @var array(string => string) $mapFromIso2ToLocalizedName */
 		$mapFromIso2ToLocalizedName = array();
 		/** @var Zend_Locale $zendLocale */
-		$zendLocale = new Zend_Locale(rm_locale($locale));
+		$zendLocale = new Zend_Locale(df_locale($locale));
 		foreach ($options as $option) {
 			/** @var @var array(string => string) $option */
 			/** @var string $iso2 */

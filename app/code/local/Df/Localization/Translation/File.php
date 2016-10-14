@@ -126,7 +126,7 @@ class Df_Localization_Translation_File extends Df_Core_Model {
 
 	/** @return Df_Localization_Translation_File_Collection */
 	private function getTranslatedFiles() {
-		return rm_translator()->getRussianFileStorage()->getFiles();
+		return df_translator()->getRussianFileStorage()->getFiles();
 	}
 
 	/**

@@ -42,7 +42,7 @@ class Df_Page_Block_Html_Welcome extends Df_Page_Block_Html_WelcomeM {
 			}
 			else {
 				if (df_cfg()->tweaks()->header()->showOnlyFirstName()) {
-					$result = sprintf(rm_translate('Welcome, %s!', 'Mage_Page'), df_e(
+					$result = sprintf(df_translate('Welcome, %s!', 'Mage_Page'), df_e(
 						df_h()->tweaks()->customer()->getFirstNameWithPrefix())
 					);
 				}

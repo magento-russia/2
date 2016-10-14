@@ -14,7 +14,7 @@
  * @return array(array(string => string|int))
  */
 function df_map_to_options(array $map, $module = null) {
-	return array_map('rm_option', array_keys($map), !$module ? $map : rm_translate_simple($map, $module));
+	return array_map('rm_option', array_keys($map), !$module ? $map : df_translate_simple($map, $module));
 }
 
 /**

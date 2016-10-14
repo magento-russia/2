@@ -44,7 +44,7 @@ class Df_Directory_Model_Resource_Region extends Df_Core_Model_Resource {
 	protected function _getLoadSelect($field, $value, $object) {
 		$select  = parent::_getLoadSelect($field, $value, $object);
 		$adapter = $this->_getReadAdapter();
-		$locale	   = rm_locale();
+		$locale	   = df_locale();
 		$systemLocale = Mage::app()->getDistroLocaleCode();
 		$regionField = df_db_quote($this->getMainTable() . '.' . $this->getIdFieldName());
 		$condition = df_db_quote_into('lrn.locale = ?', $locale);
@@ -84,7 +84,7 @@ class Df_Directory_Model_Resource_Region extends Df_Core_Model_Resource {
 	protected function _loadByCountry($object, $countryId, $value, $field)
 	{
 		$adapter		= $this->_getReadAdapter();
-		$locale		 = rm_locale();
+		$locale		 = df_locale();
 		$joinCondition  = df_db_quote_into('rname.region_id = region.region_id AND rname.locale = ?', $locale);
 		$select		 = $adapter->select()
 			->from(array('region' => $this->getMainTable()))

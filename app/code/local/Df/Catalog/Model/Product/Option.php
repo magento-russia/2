@@ -30,7 +30,7 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 			$original = mb_substr($original, 0, -1);
 		}
 		/** @var string $result */
-		$result = rm_translate($original, array('Df_Eav', 'Mage_Catalog'));
+		$result = df_translate($original, array('Df_Eav', 'Mage_Catalog'));
 		return !$endsWithSemicolon ? $result : $result . ':';
 	}
 

@@ -11,7 +11,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 		/** @var mixed[] $fa */
 		$fa = func_get_args();
 		/** @var string $result */
-		$result = rm_translate($fa, 'Mage_Catalog');
+		$result = df_translate($fa, 'Mage_Catalog');
 		if (df_module_enabled(Df_Core_Module::TWEAKS)) {
 			if (
 					(

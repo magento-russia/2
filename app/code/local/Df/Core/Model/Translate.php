@@ -107,7 +107,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	 *  
 	 * Если нужна поддержка @see Df_Localization_Realtime_Translator
 	 * и параметров переводимой строки , то используйте @see translateFast()
-	 * @used-by rm_translate_simple()
+	 * @used-by df_translate_simple()
 	 * @param string $text
 	 * @param string $moduleName
 	 * @return string
@@ -126,7 +126,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	 * Работает быстрее, чем @see Mage_Core_Model_Transtale::translate() 
 	 * Отличается от @see translateSimple() поддержкой параметров переводимой строки 
 	 * и @see
-	 * @used-by rm_translate()
+	 * @used-by df_translate()
 	 * @param string $text
 	 * @param string $moduleName
 	 * @param mixed[] $variables [optional]

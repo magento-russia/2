@@ -18,7 +18,7 @@ class Df_Localization_Realtime_Translator extends Df_Core_Model {
 				 * @see Df_Localization_Realtime_Dictionary_ModulePart_Term::original()
 				 * @see Df_Localization_Realtime_Dictionary_ModulePart_Term::translated()
 				 */
-				&& Mage_Core_Model_Locale::DEFAULT_LOCALE !== rm_locale()
+				&& Mage_Core_Model_Locale::DEFAULT_LOCALE !== df_locale()
 			;
 		}
 		return $this->{__METHOD__};

@@ -165,7 +165,7 @@ function rm_country_ctn($iso2, $locale = null) {
 		df_error(
 			'Система не смогла узнать название страны с кодом «%s» для локали «%s».'
 			, $iso2
-			, rm_locale($locale)
+			, df_locale($locale)
 		);
 	}
 	return $result;

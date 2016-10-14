@@ -4,7 +4,7 @@
  * @return string
  * @throws Df_Core_Exception
  */
-function rm_locale($locale = null) {
+function df_locale($locale = null) {
 	/** @var string $result */
 	if (!$locale) {
 		$result = Mage::app()->getLocale()->getLocaleCode();
@@ -21,8 +21,8 @@ function rm_locale($locale = null) {
 	}
 	else {
 		df_error(
-			'Функция rm_locale получила аргумент недопустимого типа «{type}».'
-			."\nАргумент функции rm_locale должен иметь один из следующих типов: {allowedTypes}."
+			'Функция df_locale получила аргумент недопустимого типа «{type}».'
+			."\nАргумент функции df_locale должен иметь один из следующих типов: {allowedTypes}."
 			,array(
 				'{type}' => df_string_debug($locale)
 				,'{allowedTypes}' => 'строка, null, Mage_Core_Model_Locale, Zend_Locale'
@@ -39,7 +39,7 @@ function rm_locale($locale = null) {
  * @param string|object|string[]|object[] $module
  * @return string|string[]
  */
-function rm_translate($text, $module) {
+function df_translate($text, $module) {
 	/** @var string|string[] $result */
 	if (is_array($module)) {
 		$result = Df_Localization_Helper_Translation::s()->translateByModules(df_array($text), $module);
@@ -77,14 +77,14 @@ function rm_translate($text, $module) {
 
 /**
  * 2015-03-10
- * Работает быстрее, чем @see rm_translate()
+ * Работает быстрее, чем @see df_translate()
  * Не поддерживает дополнительные параметры переводимой строки,
  * а также @see Df_Localization_Realtime_Translator.
  * @param string|string[] $text
  * @param string|object $module
  * @return string|string[]
  */
-function rm_translate_simple($text, $module) {
+function df_translate_simple($text, $module) {
 	/** @var Df_Core_Model_Translate $t */
 	static $t; if(!$t) {$t = Df_Core_Model_Translate::s();};
 	return
@@ -95,5 +95,5 @@ function rm_translate_simple($text, $module) {
 }
 
 /* @return Df_Localization_Helper_Translation */
-function rm_translator() {return Df_Localization_Helper_Translation::s();}
+function df_translator() {return Df_Localization_Helper_Translation::s();}
 

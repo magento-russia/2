@@ -76,7 +76,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 			df_assert_string($result);
 			/**
 			 * Раньше цикл выполнялся только при условии
-			 * if (Mage_Core_Model_Locale::DEFAULT_LOCALE !== rm_locale())
+			 * if (Mage_Core_Model_Locale::DEFAULT_LOCALE !== df_locale())
 			 * Условие было убрано для устранения дефекта:
 			 * http://magento-forum.ru/topic/2066/
 			 */
@@ -89,7 +89,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 				if ($prevModule === $module) {
 					break;
 				}
-				$result = rm_translate($args, $module);
+				$result = df_translate($args, $module);
 			}
 		}
 		df_result_string($result);
@@ -115,7 +115,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 				,$currentClass
 			);
 		}
-		return rm_translate($args, rm_module_name($parentClass));
+		return df_translate($args, rm_module_name($parentClass));
 	}
 
 	/** @return Df_Localization_Helper_Translation */

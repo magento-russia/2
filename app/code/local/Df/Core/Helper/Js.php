@@ -8,7 +8,7 @@ class Df_Core_Helper_Js extends Mage_Core_Helper_Js {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			/** @var string $cacheKey */
-			$cacheKey = $this->getCache()->makeKey(__METHOD__, rm_locale());
+			$cacheKey = $this->getCache()->makeKey(__METHOD__, df_locale());
 			$result = $this->getCache()->loadData($cacheKey);
 			if (!$result) {
 				$result = parent::getTranslatorScript();

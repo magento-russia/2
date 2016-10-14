@@ -46,7 +46,7 @@ class Df_Review_Observer {
 
 	/** @return string[] */
 	private static function messages() {
-		static $r; return $r ? $r : $r = rm_translate(array(
+		static $r; return $r ? $r : $r = df_translate(array(
 			'Your review has been accepted for moderation.'
 			// В Magento CE 1.4 в конце сообщения отсутствует точка.
 			,'Your review has been accepted for moderation'

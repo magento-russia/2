@@ -5,7 +5,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 	 * @see Mage_Core_Helper_Abstract::__()
 	 * @return string
 	 */
-	public function __() {$a = func_get_args(); return rm_translate($a, 'Mage_Core');}
+	public function __() {$a = func_get_args(); return df_translate($a, 'Mage_Core');}
 
 	/**
 	 * Ничем не отличается от родительского метода из Magento CE 1.4.0.1 - 1.8.1.0.

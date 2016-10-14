@@ -13,7 +13,7 @@ class Df_Localization_Helper_Locale extends Mage_Core_Helper_Abstract {
 	}
 
 	/** @return bool */
-	public function isRussian() {return 'ru_RU' === rm_locale();}
+	public function isRussian() {return 'ru_RU' === df_locale();}
 
 	const SEPARATOR = '_';
 

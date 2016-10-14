@@ -123,9 +123,9 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 			 * Изменил код ради ускорения.
 			 */
 			/** @var string $result */
-			$result = rm_translate_simple($label, 'Mage_Catalog');
+			$result = df_translate_simple($label, 'Mage_Catalog');
 			if ($result === $label) {
-				$result = rm_translate_simple($label, 'Df_Eav');
+				$result = df_translate_simple($label, 'Df_Eav');
 			}
 			if (
 					$logUntranslated
@@ -218,5 +218,5 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 	/** @var string[] */
 	private static $OPTION_LABEL_NAMES = array('title', 'default_title');
 	/** @var string */
-	private static $RM_TRANSLATED = 'rm_translated';
+	private static $RM_TRANSLATED = 'df_translated';
 }

@@ -16,7 +16,7 @@ class Mage_Core_Block_Abstract extends Mage_1930_Core_Block_Abstract {
 	 * @see Mage_1920_Core_Block_Abstract::__()
 	 * @return string
 	 */
-	public function __() {$a = func_get_args(); return rm_translate($a, $this->getModuleName());}
+	public function __() {$a = func_get_args(); return df_translate($a, $this->getModuleName());}
 
 	/**
 	 * 2015-03-30

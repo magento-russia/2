@@ -117,7 +117,7 @@ class Df_Directory_Model_Resource_Region_Collection extends Df_Core_Model_Resour
 	 */
 	protected function _initSelect() {
 		parent::_initSelect();
-		$this->addBindParam(':region_locale', rm_locale());
+		$this->addBindParam(':region_locale', df_locale());
 		$this->getSelect()->joinLeft(
 			array('rname' => $this->_regionNameTable)
 			,'main_table.region_id = rname.region_id AND rname.locale = :region_locale'

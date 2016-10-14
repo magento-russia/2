@@ -16,7 +16,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	 * @override
 	 * @return string
 	 */
-	public function __a() {$a = func_get_args(); return rm_translate($a, 'Mage_Adminhtml');}
+	public function __a() {$a = func_get_args(); return df_translate($a, 'Mage_Adminhtml');}
 
 	/** @return Df_Admin_Config_Source */
 	protected function reset() {
