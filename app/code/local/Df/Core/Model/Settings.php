@@ -259,7 +259,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * @return Df_Core_Model_Settings
 	 */
 	protected static function sc($class, $prefix = '', $store = null) {
-		return rm_sc($class, __CLASS__, array(
+		return df_sc($class, __CLASS__, array(
 			self::P__STORE => rm_store($store), self::$P__PREFIX => $prefix
 		), $prefix);
 	}

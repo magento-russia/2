@@ -18,5 +18,5 @@ class Df_Localization_ThemeController extends Df_Core_Controller_Admin {
 	}
 
 	/** @return void */
-	public function processAction() {rm_action($this, 'Df_Localization_Onetime_Action');}
+	public function processAction() {df_action($this, 'Df_Localization_Onetime_Action');}
 }

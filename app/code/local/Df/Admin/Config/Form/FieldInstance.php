@@ -151,6 +151,6 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 	public static function create(
 		Df_Admin_Block_Field_Custom $field, Varien_Data_Form_Element_Abstract $element, $class
 	) {
-		return rm_ic($class, __CLASS__, array(self::$P__FIELD => $field, self::$P__ELEMENT => $element));
+		return df_ic($class, __CLASS__, array(self::$P__FIELD => $field, self::$P__ELEMENT => $element));
 	}
 }

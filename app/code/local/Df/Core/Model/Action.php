@@ -38,7 +38,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 			 */
 			$head = df_head(rm_explode_class($this));
 			$head[]= $class;
-			$class = rm_concat_class($head);
+			$class = df_concat_class($head);
 		}
 		self::pc($class, $this->getController());
 	}
@@ -455,12 +455,12 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by delegate()
-	 * @used-by rm_action()
+	 * @used-by df_action()
 	 * @param string $class
 	 * @param Mage_Core_Controller_Varien_Action $c
 	 * @return void
 	 */
 	public static function pc($class, Mage_Core_Controller_Varien_Action $c) {
-		rm_ic($class, __CLASS__, array(self::P__CONTROLLER => $c))->process();
+		df_ic($class, __CLASS__, array(self::P__CONTROLLER => $c))->process();
 	}
 }

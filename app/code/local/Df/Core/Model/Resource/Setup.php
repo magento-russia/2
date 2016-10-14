@@ -42,7 +42,7 @@ class Df_Core_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup {
 		 * «Df_1C_Setup_3_0_0»
 		 * @var string $class
 		 */
-		$class = rm_concat_class($moduleName, 'Setup', str_replace('.', '_', $versionTo));
+		$class = df_concat_class($moduleName, 'Setup', str_replace('.', '_', $versionTo));
 		Df_Core_Setup::pc($class, $this);
 	}
 

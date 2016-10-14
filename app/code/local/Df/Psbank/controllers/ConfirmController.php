@@ -5,7 +5,7 @@ class Df_Psbank_ConfirmController extends Mage_Core_Controller_Front_Action {
 	 * всех запрашиваемых интернет-магазином у платёжной системы операций
 	 * @return void
 	 */
-	public function indexAction() {rm_action($this, $this->getActionClass());}
+	public function indexAction() {df_action($this, $this->getActionClass());}
 
 	/** @return string */
 	private function getActionClass() {

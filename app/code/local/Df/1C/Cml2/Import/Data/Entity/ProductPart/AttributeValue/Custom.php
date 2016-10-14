@@ -258,6 +258,6 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 * @return Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 */
 	public static function ic($class, Df_Core_Sxe $e, Df_1C_Cml2_Import_Data_Entity_Product $product) {
-		return rm_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PRODUCT => $product));
+		return df_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PRODUCT => $product));
 	}
 }

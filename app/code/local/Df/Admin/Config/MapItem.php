@@ -10,6 +10,6 @@ abstract class Df_Admin_Config_MapItem extends Df_Core_Model {
 	 * @return Df_Admin_Config_MapItem
 	 */
 	public static function ic($class, array $parameters = array()) {
-		return rm_ic($class, __CLASS__, $parameters);
+		return df_ic($class, __CLASS__, $parameters);
 	}
 }

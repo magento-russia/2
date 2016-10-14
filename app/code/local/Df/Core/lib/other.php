@@ -229,41 +229,6 @@ function df_nta($value, $skipEmptyCheck = false) {
  */
 function df_nts($value) {return !is_null($value) ? $value : '';}
 
-/**
- * @param object|Varien_Object $entity
- * @param string $key
- * @param mixed $default
- * @return mixed|null
- */
-function df_o($entity, $key, $default = null) {
-	/**
-	 * Раньше функция @see dfa() была универсальной:
-	 * она принимала в качестве аргумента $entity как массивы, так и объекты.
-	 * В 99.9% случаев в качестве параметра передавался массив.
-	 * Поэтому ради ускорения работы системы
-	 * вынес обработку объектов в отдельную функцию @see df_o()
-	 */
-	/** @var mixed $result */
-	if (!is_object($entity)) {
-		df_error('Попытка вызова df_o для переменной типа «%s».', gettype($entity));
-	}
-	if ($entity instanceof Varien_Object) {
-		$result = $entity->getData($key);
-		if (is_null($result)) {
-			$result = $default;
-		}
-	}
-	else {
-		/**
-		 * Например, @see stdClass.
-		 * Используется, например, методом
-		 * @used-by Df_Qiwi_Model_Action_Confirm::updateBill()
-		 */
-		$result = isset($entity->{$key}) ? $entity->{$key} : $default;
-	}
-	return $result;
-}
-
 /** @return Df_Core_Helper_Output */
 function df_output() {return Df_Core_Helper_Output::s();}
 
@@ -354,20 +319,6 @@ function rm_encrypt($value) {return df_mage()->coreHelper()->encrypt($value);}
 function rm_floor($value) {return (int)floor($value);}
 
 /**
- * @see rm_sc()
- * @param string $resultClass
- * @param string $expectedClass
- * @param array(string => mixed) $params [optional]
- * @return Varien_Object|object
- */
-function rm_ic($resultClass, $expectedClass, array $params = array()) {
-	/** @var Varien_Object|object $result */
-	$result = new $resultClass($params);
-	df_assert($result instanceof $expectedClass);
-	return $result;
-}
-
-/**
  * @param bool $condition
  * @param mixed $resultOnTrue
  * @param mixed|null $resultOnFalse [optional]
@@ -394,26 +345,6 @@ function rm_log($value) {Mage::log(df_dump($value));}
  */
 function rm_response_content_type(Mage_Core_Controller_Response_Http $httpResponse, $contentType) {
 	$httpResponse->setHeader('Content-Type', $contentType, $replace = true);
-}
-
-/**
- * 2015-03-23
- * @see rm_ic()
- * @param string $resultClass
- * @param string $expectedClass
- * @param array(string => mixed) $params [optional]
- * @param string $cacheKeySuffix [optional]
- * @return Varien_Object|object
- */
-function rm_sc($resultClass, $expectedClass, array $params = array(), $cacheKeySuffix = '') {
-	/** @var array(string => object) $cache */
-	static $cache;
-	/** @var string $key */
-	$key = $resultClass . $cacheKeySuffix;
-	if (!isset($cache[$key])) {
-		$cache[$key] = rm_ic($resultClass, $expectedClass, $params);
-	}
-	return $cache[$key];
 }
 
 /**

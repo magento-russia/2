@@ -33,6 +33,6 @@ class Df_Core_Model_Bridge extends Df_Core_Model {
 	 * @return Df_Core_Model_Bridge
 	 */
 	protected static function ic($class, Varien_Object $main) {
-		return rm_ic($class, __CLASS__, array(self::$P__MAIN => $main));
+		return df_ic($class, __CLASS__, array(self::$P__MAIN => $main));
 	}
 }

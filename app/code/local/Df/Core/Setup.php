@@ -142,6 +142,6 @@ class Df_Core_Setup extends Df_Core_Model {
 	 * @return void
 	 */
 	public static function pc($class, Df_Core_Model_Resource_Setup $setup = null) {
-		rm_ic($class, __CLASS__, array(self::$P__SETUP => $setup))->process();
+		df_ic($class, __CLASS__, array(self::$P__SETUP => $setup))->process();
 	}
 }

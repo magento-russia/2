@@ -262,7 +262,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 		, $ordering
 		, array $additional = array()
 	) {
-		return rm_ic($class, __CLASS__, array(
+		return df_ic($class, __CLASS__, array(
 			self::$P__ADDRESS => $address, self::$P__TYPE => $type, self::$P__ORDERING => $ordering
 		) + $additional);
 	}

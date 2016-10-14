@@ -10,15 +10,15 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 * Номер заказа надо указывать отдельным вызовом setParam,
 		 * потому что @see getRequestKeyShopId() уже будет использовать указанное значение
 		 */
-		$this->getRequest()->setParam($this->getRequestKeyOrderIncrementId(), df_o($params, 'txn'));
+		$this->getRequest()->setParam($this->getRequestKeyOrderIncrementId(), dfo($params, 'txn'));
 		$this->getRequest()->setParams(array(
-			$this->getRequestKeyShopId() => df_o($params, 'login')
-			,$this->getRequestKeySignature() => df_o($params, 'password')
+			$this->getRequestKeyShopId() => dfo($params, 'login')
+			,$this->getRequestKeySignature() => dfo($params, 'password')
 			/**
 			 * Df_Payment_Model_Action_Confirm::getRequestValueServicePaymentState
 			 * должен вернуть строку
 			 */
-			,$this->getRequestKeyServicePaymentState() => strval(df_o($params, 'status'))
+			,$this->getRequestKeyServicePaymentState() => strval(dfo($params, 'status'))
 		));
 		return 0;
 	}

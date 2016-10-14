@@ -68,5 +68,5 @@ abstract class Df_Localization_Onetime_Type extends Df_Core_Model {
 	 * @param string $classSuffix
 	 * @return Df_Localization_Onetime_Type
 	 */
-	public static function ic($classSuffix) {return rm_ic(__CLASS__ . "_{$classSuffix}", __CLASS__);}
+	public static function ic($classSuffix) {return df_ic(__CLASS__ . "_{$classSuffix}", __CLASS__);}
 }

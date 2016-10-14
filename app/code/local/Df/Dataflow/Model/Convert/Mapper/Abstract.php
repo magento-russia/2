@@ -159,7 +159,7 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 		 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 		 * потому что в данном случае нам не нужна поддержка UTF-8.
 		 */
-		return rm_ic(
+		return df_ic(
 			'Mage_Dataflow_Model_Batch_' . ucfirst($importOrExport)
 			,'Mage_Dataflow_Model_Batch_Abstract'
 			,array('batch_id' => $this->getBatchModel()->getId())

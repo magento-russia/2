@@ -115,6 +115,6 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 	 * @return Df_Payment_Model_Request_Secondary
 	 */
 	protected static function ic($class, Mage_Sales_Model_Order_Payment $payment) {
-		return rm_ic($class, __CLASS__, array(self::$P__PAYMENT => $payment));
+		return df_ic($class, __CLASS__, array(self::$P__PAYMENT => $payment));
 	}
 }

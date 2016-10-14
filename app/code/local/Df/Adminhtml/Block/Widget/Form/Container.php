@@ -46,7 +46,7 @@ abstract class Df_Adminhtml_Block_Widget_Form_Container
 
 	/** @return string */
 	private function getBlockClassSuffix() {
-		return df_trim_text_right(df_last(df_explode_xpath(rm_class_mf(get_class($this)))), '_edit');
+		return df_trim_text_right(df_last(df_explode_xpath(df_class_mf(get_class($this)))), '_edit');
 	}
 
 	/** @return Df_Core_Model_Entity */

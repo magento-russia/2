@@ -233,6 +233,24 @@ function df_assert_integer($value, $stackLevel = 0) {
 }
 
 /**
+ * 2016-07-10
+ * @param string|object $expectedAncestor
+ * @param string|object $classToTest
+ * @param string|\Exception $message [optional]
+ * @return void
+ * @throws Exception
+ */
+function df_assert_is($expectedAncestor, $classToTest, $message = null) {
+	if (df_enable_assertions()) {
+		$expectedAncestor = df_cts($expectedAncestor);
+		$classToTest = df_cts($classToTest);
+		if (!is_a($classToTest, $expectedAncestor, true)) {
+			df_error($message ?: "Expected class: «{$expectedAncestor}», given class: «{$classToTest}».");
+		}
+	}
+}
+
+/**
  * @param string $value
  * @param int $stackLevel [optional]
  * @return void

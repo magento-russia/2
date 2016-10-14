@@ -4,5 +4,5 @@ class Df_IPay_ConfirmPaymentByShopController extends Mage_Core_Controller_Front_
 	 * @uses Df_IPay_Model_Action_ConfirmPaymentByShop
 	 * @return void
 	 */
-	public function indexAction() {rm_action($this);}
+	public function indexAction() {df_action($this);}
 }

@@ -25,7 +25,7 @@ class Df_Core_Model_Convention extends Df_Core_Model {
 			/** @var string $callerModuleName */
 			$callerModuleName = rm_module_name($callerClassName);
 			/** @var string $class */
-			$class = rm_concat_class($callerModuleName, $classSuffix);
+			$class = df_concat_class($callerModuleName, $classSuffix);
 			/** @var string|null $result */
 			if (@class_exists($class)) {
 				$result = $class;

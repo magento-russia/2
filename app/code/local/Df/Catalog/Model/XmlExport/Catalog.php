@@ -147,6 +147,6 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends Df_Core_Xml_Generator_
 	 * @return Df_Catalog_Model_XmlExport_Catalog
 	 */
 	protected static function ic($class, Df_Catalog_Model_Resource_Product_Collection $products) {
-		return rm_ic($class, __CLASS__, array(self::$P__PRODUCTS => $products));
+		return df_ic($class, __CLASS__, array(self::$P__PRODUCTS => $products));
 	}
 }

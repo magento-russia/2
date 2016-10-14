@@ -97,7 +97,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 	 * @return Df_Core_Model_Event
 	 */
 	protected static function ic($class, Varien_Event_Observer $observer) {
-		return rm_ic($class, __CLASS__, array(self::$P__OBSERVER => $observer));
+		return df_ic($class, __CLASS__, array(self::$P__OBSERVER => $observer));
 	}
 
 	/**

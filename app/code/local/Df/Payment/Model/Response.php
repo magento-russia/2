@@ -107,7 +107,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 	protected function getExceptionClass() {return Df_Payment_Exception_Response::_C;}
 
 	/** @return string */
-	protected function getIdInPaymentInfo() {return rm_class_mf(get_class($this));}
+	protected function getIdInPaymentInfo() {return df_class_mf(get_class($this));}
 
 	/** @return string[] */
 	protected function getKeysToSuppress() {return array();}
@@ -197,7 +197,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 		/** @var string $class */
 		$class = str_replace('Request', 'Response', get_class($request));
 		/** @var Df_Payment_Model_Response $result */
-		$result = rm_ic($class, __CLASS__, $params);
+		$result = df_ic($class, __CLASS__, $params);
 		$result->setRequest($request);
 		return $result;
 	}

@@ -124,6 +124,6 @@ abstract class Df_1C_Cml2_Export_Processor_Catalog_Attribute
 	 * @return Df_1C_Cml2_Export_Processor_Catalog_Attribute
 	 */
 	public static function ic($class, Df_Core_Xml_Generator_Document $document) {
-		return rm_ic($class, __CLASS__, array(self::$P__DOCUMENT => $document));
+		return df_ic($class, __CLASS__, array(self::$P__DOCUMENT => $document));
 	}
 }

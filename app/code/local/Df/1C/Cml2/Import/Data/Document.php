@@ -82,7 +82,7 @@ abstract class Df_1C_Cml2_Import_Data_Document extends Df_Core_Xml_Parser_Entity
 				: df_error('Неизвестный тип документа.')
 			)
 		;
-		return rm_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PATH => $relativePath));
+		return df_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PATH => $relativePath));
 	}
 
 	/**

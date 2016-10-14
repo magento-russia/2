@@ -167,6 +167,6 @@ abstract class Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract
 	 * @return Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract
 	 */
 	public static function ic($class, Df_Core_Sxe $e) {
-		return rm_ic($class, __CLASS__, array(self::$P__E => $e));
+		return df_ic($class, __CLASS__, array(self::$P__E => $e));
 	}
 }

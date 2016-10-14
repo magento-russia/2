@@ -76,7 +76,7 @@ abstract class Df_Admin_Config_Extractor extends Df_Core_Model {
 	 * @return Df_Admin_Config_Extractor
 	 */
 	protected static function ic($class, $groupPath, $keyPrefix = '', $store = null) {
-		return rm_ic($class, __CLASS__, array(
+		return df_ic($class, __CLASS__, array(
 			self::$P__GROUP_PATH => $groupPath, self::$P__KEY_PREFIX => $keyPrefix, self::$P__STORE => $store
 		));
 	}

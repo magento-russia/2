@@ -39,6 +39,6 @@ abstract class Df_Admin_Config_Backend_Validator_Strategy extends Df_Core_Model 
 	 * @return Df_Admin_Config_Backend_Validator_Strategy
 	 */
 	public static function ic($class, Df_Admin_Config_Backend $backend, Df_Core_Model_StoreM $store) {
-		return rm_ic($class, __CLASS__, array(self::$P__BACKEND => $backend, self::$P__STORE => $store));
+		return df_ic($class, __CLASS__, array(self::$P__BACKEND => $backend, self::$P__STORE => $store));
 	}
 }

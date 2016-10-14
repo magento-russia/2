@@ -253,7 +253,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 		$key = $method->getCode();
 		if (!isset($cache[$key])) {
 			/** @var Df_Payment_Model_Request_Payment $i */
-			$i = rm_ic(rm_convention($method, 'Model_Request_Payment'), __CLASS__);
+			$i = df_ic(rm_convention($method, 'Model_Request_Payment'), __CLASS__);
 			$cache[$key] = $i->preprocessParams($i->_params());
 		}
 		return $cache[$key];

@@ -35,7 +35,7 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 			 * @var string $moduleName
 			 * Например: «Df_SalesRule»
 			 */
-			$moduleName = rm_concat_class(array_slice($classNameParts, 0, 2));
+			$moduleName = df_concat_class(array_slice($classNameParts, 0, 2));
 			/** @var string $entityType */
 			$entityType = strtolower(dfa($classNameParts, 2));
 			/**
@@ -61,7 +61,7 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 				&& 'data' === strtolower(dfa($classNameParts, 3))
 				? null
 				// +1, чтобы пропустить слово «model» или «block»
-				: rm_concat_class(df_t()->lcfirst(array_slice($classNameParts, 2 + 1)))
+				: df_concat_class(df_t()->lcfirst(array_slice($classNameParts, 2 + 1)))
 			;
 			$this->{__METHOD__}[$className] = df_ccc(self::$MODULE_NAME_SEPARATOR
 				,$moduleNameInMagentoFormat
@@ -80,7 +80,7 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 	 */
 	public function getModuleName($className) {
 		if (!isset($this->{__METHOD__}[$className])) {
-			$this->{__METHOD__}[$className] = rm_concat_class(
+			$this->{__METHOD__}[$className] = df_concat_class(
 				array_slice(rm_explode_class($className), 0, 2)
 			);
 			$this->markCachedPropertyAsModified(__METHOD__);
@@ -156,7 +156,7 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 			 * @var string $modelPrefix
 			 * Например: «Df_PromoGift_Model»
 			 */
-			$modelPrefix = rm_concat_class($moduleName, $entityTypeUcFirst[$entityType]);
+			$modelPrefix = df_concat_class($moduleName, $entityTypeUcFirst[$entityType]);
 			/** @var Varien_Simplexml_Element $config */
 			$config = Mage::getConfig()->getNode();
 			$nodes = $config->xpath(

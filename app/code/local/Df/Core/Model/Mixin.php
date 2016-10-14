@@ -34,6 +34,6 @@ class Df_Core_Model_Mixin extends Df_Core_Model {
 	 * @return Df_Core_Model_Mixin
 	 */
 	public static function ic($class, Df_Core_Model $parent) {
-		return rm_ic($class, __CLASS__, array(self::$P__PARENT => $parent));
+		return df_ic($class, __CLASS__, array(self::$P__PARENT => $parent));
 	}
 }

@@ -100,7 +100,7 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 			 * Аналогичное соглашение действует и для классов с настройками конкретных областей:
 			 * @see Df_Checkout_Module_Config_Area::sa()
 			 */
-			$class = rm_concat_class('Df', $main->getCheckoutModuleType(), 'Config_Manager');
+			$class = df_concat_class('Df', $main->getCheckoutModuleType(), 'Config_Manager');
 			$cache[$key] = self::ic($class, $main);
 			df_assert($cache[$key] instanceof Df_Checkout_Module_Config_Manager);
 		}

@@ -80,7 +80,7 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 		 */
 		$class = rm_convention($payment->getMethodInstance(), 'Model_Request_' . ucfirst($type));
 		/** @var Df_Payment_Model_Request_Transaction $i */
-		$i = rm_ic($class, 'Df_Payment_Model_Request_Transaction');
+		$i = df_ic($class, 'Df_Payment_Model_Request_Transaction');
 		$i->_doTransaction($payment, $amount);
 	}
 

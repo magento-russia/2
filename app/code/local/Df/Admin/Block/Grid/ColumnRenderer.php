@@ -9,7 +9,7 @@ class Df_Admin_Block_Grid_ColumnRender extends Df_Core_Block_Admin {
 	 * @return mixed
 	 */
 	protected function getColumnParam($paramName, $defaultValue = null) {
-		return df_o($this->getColumn(), $paramName, $defaultValue);
+		return dfo($this->getColumn(), $paramName, $defaultValue);
 	}
 
 	/** @return Varien_Object */
@@ -21,7 +21,7 @@ class Df_Admin_Block_Grid_ColumnRender extends Df_Core_Block_Admin {
 	 * @return mixed
 	 */
 	protected function getRowParam($paramName, $defaultValue = null) {
-		return df_o($this->getRow(), $paramName, $defaultValue);
+		return dfo($this->getRow(), $paramName, $defaultValue);
 	}
 
 	/** @return Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract */
@@ -53,7 +53,7 @@ class Df_Admin_Block_Grid_ColumnRender extends Df_Core_Block_Admin {
 	protected static function rc(
 		$class, Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract $renderer, Varien_Object $row
 	) {
-		return df_render(rm_ic($class, __CLASS__, array(
+		return df_render(df_ic($class, __CLASS__, array(
 			self::$P__RENDERER => $renderer, self::$P__ROW => $row
 		)));
 	}

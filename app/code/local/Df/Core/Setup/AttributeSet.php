@@ -59,7 +59,7 @@ abstract class Df_Core_Setup_AttributeSet extends Df_Core_Model {
 	 */
 	public static function pc($class, Mage_Eav_Model_Entity_Attribute_Set $attributeSet) {
 		/** @var Df_Core_Setup_AttributeSet $processor */
-		$processor = rm_ic($class, __CLASS__, array(self::$P__ATTRIBUTE_SET => $attributeSet));
+		$processor = df_ic($class, __CLASS__, array(self::$P__ATTRIBUTE_SET => $attributeSet));
 		$processor->_process();
 	}
 

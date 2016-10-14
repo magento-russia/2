@@ -35,7 +35,7 @@ abstract class Df_1C_Cml2_Import_Processor_Order_Item extends Df_1C_Cml2_Import_
 		, Df_1C_Cml2_Import_Data_Entity_Order_Item $orderItem
 		, Df_1C_Cml2_Import_Data_Entity_Order $order
 	) {
-		return rm_ic($class, __CLASS__, array(
+		return df_ic($class, __CLASS__, array(
 			self::$P__ENTITY => $orderItem, self::$P__ENTITY_ORDER => $order
 		));
 	}

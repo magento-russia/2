@@ -61,6 +61,6 @@ class Df_Localization_Onetime_Dictionary_Rule_Actions extends Df_Core_Xml_Parser
 	 * @return Df_Localization_Onetime_Dictionary_Rule_Actions
 	 */
 	public static function createConcrete($concreteClass, Df_Core_Sxe $e) {
-		return rm_ic($concreteClass, __CLASS__, array(self::$P__E => $e));
+		return df_ic($concreteClass, __CLASS__, array(self::$P__E => $e));
 	}
 }

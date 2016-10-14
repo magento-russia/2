@@ -54,6 +54,6 @@ abstract class Df_1C_Cml2_Import_Processor_Product extends Df_1C_Cml2_Import_Pro
 	 * @return Df_1C_Cml2_Import_Processor_Product
 	 */
 	protected static function ic($class, Df_1C_Cml2_Import_Data_Entity_Offer $offer) {
-		return rm_ic($class, __CLASS__, array(self::$P__ENTITY => $offer));
+		return df_ic($class, __CLASS__, array(self::$P__ENTITY => $offer));
 	}
 }

@@ -38,7 +38,7 @@ abstract class Df_Catalog_Model_XmlExport_Category extends Df_Core_Xml_Generator
 		,Df_Catalog_Model_Category $category
 		,Df_Core_Xml_Generator_Document $document
 	) {
-		return rm_ic($class, __CLASS__, array(
+		return df_ic($class, __CLASS__, array(
 			self::$P__DOCUMENT => $document, self::$P__CATEGORY => $category
 		));
 	}

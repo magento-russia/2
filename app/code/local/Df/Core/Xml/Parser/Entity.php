@@ -245,6 +245,6 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 	 * @return Df_Core_Xml_Parser_Entity
 	 */
 	public static function entity($e, $class = __CLASS__, array $params = array()) {
-		return rm_ic($class, __CLASS__, array(self::$P__E => $e) + $params);
+		return df_ic($class, __CLASS__, array(self::$P__E => $e) + $params);
 	}
 }

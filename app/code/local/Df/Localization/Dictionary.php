@@ -52,6 +52,6 @@ abstract class Df_Localization_Dictionary extends Df_Core_Xml_Parser_Entity {
 	 * @return Df_Localization_Onetime_Dictionary
 	 */
 	protected static function sc($className, $pathLocal) {
-		return rm_sc($className, __CLASS__, array(self::$P__PATH_LOCAL => $pathLocal), $pathLocal);
+		return df_sc($className, __CLASS__, array(self::$P__PATH_LOCAL => $pathLocal), $pathLocal);
 	}
 }

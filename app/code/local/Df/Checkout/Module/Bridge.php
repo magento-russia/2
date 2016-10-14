@@ -45,7 +45,7 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 	 */
 	protected static function convention(Df_Checkout_Module_Main $main, $suffix) {
 		/** @var string $default */
-		$default = rm_concat_class('Df', $main->getCheckoutModuleType(), $suffix);
+		$default = df_concat_class('Df', $main->getCheckoutModuleType(), $suffix);
 		/** @var string $resultClass */
 		$resultClass = rm_convention($main, $suffix, $default);
 		return self::ic($resultClass, $main);

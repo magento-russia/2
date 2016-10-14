@@ -107,6 +107,6 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 	 * @return Df_Core_Model_InputRequest
 	 */
 	public static function ic($class, Mage_Core_Controller_Request_Http $request) {
-		return rm_ic($class, __CLASS__, array(self::$P__REQUEST => $request));
+		return df_ic($class, __CLASS__, array(self::$P__REQUEST => $request));
 	}
 }

@@ -38,7 +38,7 @@
  * @param string|null $class [optional]
  * @return void
  */
-function rm_action(Mage_Core_Controller_Varien_Action $controller, $class = null) {
+function df_action(Mage_Core_Controller_Varien_Action $controller, $class = null) {
 	/** @var string $m */
 	$m = rm_module_name($controller);
 	/** @var bool $full */
@@ -47,7 +47,7 @@ function rm_action(Mage_Core_Controller_Varien_Action $controller, $class = null
 		// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
 		$class = df_trim_text_right(df_last(rm_explode_class($controller)), 'Controller');
 	}
-	Df_Core_Model_Action::pc($full ? $class : rm_concat_class($m, 'Model_Action', $class), $controller);
+	Df_Core_Model_Action::pc($full ? $class : df_concat_class($m, 'Model_Action', $class), $controller);
 }
 
 /**
@@ -56,7 +56,7 @@ function rm_action(Mage_Core_Controller_Varien_Action $controller, $class = null
  * @param string $className
  * @return string
  */
-function rm_class_mf($className) {
+function df_class_mf($className) {
 	return Df_Core_Model_Reflection::s()->getModelNameInMagentoFormat($className);
 }
 
@@ -64,7 +64,7 @@ function rm_class_mf($className) {
  * @param string|string[] $parts
  * @return string
  */
-function rm_concat_class($parts) {
+function df_concat_class($parts) {
 	/** @uses func_get_args() не может быть параметром другой функции */
 	$parts = is_array($parts) ? $parts : func_get_args();
 	return implode('_', $parts);

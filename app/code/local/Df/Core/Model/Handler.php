@@ -15,7 +15,7 @@ abstract class Df_Core_Model_Handler extends Df_Core_Model {
 	 * @return Df_Core_Model_Handler
 	 */
 	public static function create($class, Df_Core_Model_Event $event, $additionalParams = array()) {
-		return rm_ic($class, __CLASS__, array(self::P__EVENT => $event) + $additionalParams);
+		return df_ic($class, __CLASS__, array(self::P__EVENT => $event) + $additionalParams);
 	}
 
 	/**

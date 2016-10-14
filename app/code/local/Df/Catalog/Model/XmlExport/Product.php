@@ -390,7 +390,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 		,Df_Catalog_Model_Product $product
 		,Df_Core_Xml_Generator_Document $document
 	) {
-		return rm_ic($class, __CLASS__, array(
+		return df_ic($class, __CLASS__, array(
 			self::$P__DOCUMENT => $document, self::$P__PRODUCT => $product
 		));
 	}
