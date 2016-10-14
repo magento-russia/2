@@ -119,7 +119,11 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	/**
 	 * @override
 	 * @return Df_Rating_Model_Resource_Rating
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Rating_Model_Resource_Rating::s();}
 
 	/** @return array(int => int) */

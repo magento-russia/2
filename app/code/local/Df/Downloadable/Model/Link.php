@@ -31,7 +31,11 @@ class Df_Downloadable_Model_Link extends Mage_Downloadable_Model_Link {
 	/**
 	 * @override
 	 * @return Df_Downloadable_Model_Resource_Link
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Downloadable_Model_Resource_Link::s();}
 
 	/** @used-by Df_Downloadable_Model_Resource_Link_Collection::_construct() */

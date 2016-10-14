@@ -47,7 +47,11 @@ class Df_Widget_Model_Widget_Instance extends Mage_Widget_Model_Widget_Instance 
 	/**
 	 * @override
 	 * @return Df_Widget_Model_Resource_Widget_Instance
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Widget_Model_Resource_Widget_Instance::s();}
 
 	/**

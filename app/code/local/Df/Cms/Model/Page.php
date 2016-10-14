@@ -52,6 +52,7 @@ class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 	 * В родительском классе метод переобъявлен через PHPDoc,
 	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Cms_Model_Resource_Page::s();}
 
 	/**

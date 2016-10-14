@@ -36,7 +36,11 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 	/**
 	 * @override
 	 * @return Df_Core_Model_Resource_Store
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Core_Model_Resource_Store::s();}
 
 	/** @used-by Df_Core_Model_Resource_Store_Collection::_construct() */

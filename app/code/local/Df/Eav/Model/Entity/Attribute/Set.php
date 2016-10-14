@@ -132,7 +132,11 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 	/**
 	 * @override
 	 * @return Df_Eav_Model_Resource_Entity_Attribute_Set
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Eav_Model_Resource_Entity_Attribute_Set::s();}
 
 	/**

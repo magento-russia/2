@@ -9,7 +9,11 @@ class Df_Tax_Model_Calculation_Rate extends Mage_Tax_Model_Calculation_Rate {
 	/**
 	 * @override
 	 * @return Df_Tax_Model_Resource_Calculation_Rate
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен.
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Tax_Model_Resource_Calculation_Rate::s();}
 
 	/** @used-by Df_Tax_Model_Resource_Calculation_Rate_Collection::_construct() */

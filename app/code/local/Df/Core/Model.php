@@ -402,7 +402,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * @see Df_Core_Model_Resource_Collection::getResource().
 	 * Родительский метод: @see Mage_Core_Model_Abstract::_getResource()
 	 * @override
-	 * @return Df_Core_Model_Resource
+	 * @return void
 	 */
 	protected function _getResource() {df_abstract(__METHOD__);}
 

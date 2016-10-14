@@ -24,7 +24,11 @@ class Df_Customer_Model_Group extends Mage_Customer_Model_Group {
 	/**
 	 * @override
 	 * @return Df_Customer_Model_Resource_Group
+	 * 2016-10-14
+	 * В родительском классе метод переобъявлен через PHPDoc,
+	 * и поэтому среда разработки думает, что он публичен
 	 */
+	/** @noinspection PhpHierarchyChecksInspection */
 	protected function _getResource() {return Df_Customer_Model_Resource_Group::s();}
 
 	/**
