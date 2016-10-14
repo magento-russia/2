@@ -1,7 +1,7 @@
 <?php
 abstract class Df_1C_Setup extends Df_Core_Setup {
 	/**
-	 * Не забывайте после вызова этого метода вызывать @see rm_cache_clean().
+	 * Не забывайте после вызова этого метода вызывать @see df_cache_clean().
 	 * @used-by Df_1C_Setup_1_0_2::process()
 	 * @used-by Df_1C_Setup_2_44_0::process()
 	 * @param string $tablePlaceholder

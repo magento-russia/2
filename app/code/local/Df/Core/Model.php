@@ -526,7 +526,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				$this->hasPropertiesToCache()
-				&& (!$this->cacheType() || rm_cache()->canUse($this->cacheType()))
+				&& (!$this->cacheType() || df_cache_enabled($this->cacheType()))
 			;
 		}
 		return $this->{__METHOD__};
@@ -913,7 +913,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	private function cacheLoadProperty($propertyName, $cacheKey) {
 		$cacheKey =  $cacheKey . $propertyName;
 		/** @var string|bool $propertyValueSerialized */
-		$propertyValueSerialized = rm_cache()->load($cacheKey);
+		$propertyValueSerialized = df_cache()->load($cacheKey);
 		if ($propertyValueSerialized) {
 			/** @var mixed $propertyValue */
 			/**
@@ -1006,7 +1006,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 			: rm_serialize($propertyValue)
 		;
 		if ($propertyValueSerialized) {
-			rm_cache()->save(
+			df_cache()->save(
 				$data = $propertyValueSerialized
 				,$id = $cacheKey
 				,$tags = df_array($this->cacheTags())

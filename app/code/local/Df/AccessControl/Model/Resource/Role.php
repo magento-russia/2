@@ -67,7 +67,7 @@ class Df_AccessControl_Model_Resource_Role extends Df_Core_Model_Resource {
 		");
 		// После изменения структуры базы данных надо удалить кэш,
 		// потому что Magento кэширует структуру базы данных.
-		rm_cache_clean();
+		df_cache_clean();
 	}
 
 	/**

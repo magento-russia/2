@@ -13,8 +13,8 @@ class Df_Core_Setup_FirstRun extends Df_Core_Model {
 		$resource = Mage::getResourceSingleton('core/cache');
 		/** @var array(string => int) $options */
 		$options = $resource->getAllOptions();
-		rm_cache()->saveOptions(array_fill_keys(array_keys($options), 0));
-		rm_cache_clean();
+		df_cache()->saveOptions(array_fill_keys(array_keys($options), 0));
+		df_cache_clean();
 		return $this;
 	}
 

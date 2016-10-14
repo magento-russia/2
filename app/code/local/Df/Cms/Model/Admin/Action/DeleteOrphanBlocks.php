@@ -11,7 +11,7 @@ class Df_Cms_Model_Admin_Action_DeleteOrphanBlocks extends Df_Core_Model_Action_
 	 */
 	protected function _process() {
 		Df_Cms_Model_Resource_Block::s()->findOrphanBlocks()->walk('delete');
-		rm_cache_clean();
+		df_cache_clean();
 	}
 
 	/**

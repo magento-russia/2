@@ -22,7 +22,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 		self::deleteDemoData();
 		self::addRules();
 		self::настроитьДляСНГ();
-		rm_cache_clean();
+		df_cache_clean();
 		rm_store()->resetConfig();
 	}
 

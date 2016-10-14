@@ -116,7 +116,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 		$this->saveModifiedMagentoEntities();
 		$this->additionalProcessingAfterEntitiesSave();
 		$this->updateTimeOfLastProcessing();
-		rm_cache_clean();
+		df_cache_clean();
 		/*
 		 * 2014-12-06
 		 * Обязательно надо сделать,

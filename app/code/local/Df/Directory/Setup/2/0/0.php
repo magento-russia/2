@@ -20,7 +20,7 @@ class Df_Directory_Setup_2_0_0 extends Df_Core_Setup {
 		");
 		// После изменения структуры базы данных надо удалить кэш,
 		// потому что Magento кэширует структуру базы данных.
-		rm_cache_clean();
+		df_cache_clean();
 		$this->writeRussianRegionsToDb();
 		/**
 		 * 2015-02-19

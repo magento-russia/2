@@ -299,7 +299,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	}
 
 	/** @return Mage_Core_Model_Cache */
-	protected function getCache() {return rm_cache();}
+	protected function getCache() {return df_cache();}
 
 	/**
 	 * 2015-12-09

@@ -11,7 +11,7 @@ class Df_1C_Cml2_Action_Catalog_Import extends Df_1C_Cml2_Action_Catalog {
 	 */
 	protected function _process() {
 		// на всякий случай удаляем кэш до и после импорта
-		rm_cache_clean();
+		df_cache_clean();
 		// Добавляем версию схемы CommerceML
 		// к диагностическим отчётам в случае сбоя обмены данными.
 		rm_context('Cхема CommerceML', $this->getDocumentCurrent()->getSchemeVersion());
@@ -82,7 +82,7 @@ class Df_1C_Cml2_Action_Catalog_Import extends Df_1C_Cml2_Action_Catalog {
 		}
 		$this->setResponseSuccess();
 		// на всякий случай удаляем кэш до и после импорта
-		rm_cache_clean();
+		df_cache_clean();
 	}
 
 	/** @return Df_1C_Cml2_State_Import_Collections */

@@ -108,11 +108,11 @@ class Df_Core_Setup extends Df_Core_Model {
 		rm_admin_begin();
 		try {
 			$this->_process();
-			rm_cache_clean();
+			df_cache_clean();
 		}
 		catch (Exception $e) {
 			rm_admin_end();
-			rm_cache_clean();
+			df_cache_clean();
 			df_notify_exception($e);
 			df_error($e);
 		}

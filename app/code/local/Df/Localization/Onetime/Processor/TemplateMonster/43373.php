@@ -47,7 +47,7 @@ class Df_Localization_Onetime_Processor_TemplateMonster_43373
 				Df_Core_Model_Store::deleteStatic($stores['spanish']);
 			}
 			$this->deleteUnusedLocaleFolders();
-			rm_cache_clean();
+			df_cache_clean();
 			Mage::app()->reinitStores();
 		}
 	}

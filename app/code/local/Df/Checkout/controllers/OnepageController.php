@@ -44,7 +44,7 @@ class Df_Checkout_OnepageController extends Mage_Checkout_OnepageController {
 				/**
 				 * BEGIN PATCH
 				 */
-				rm_cache()->banUse('layout');
+				df_cache()->banUse('layout');
 				/** @var Exception $exception|null */
 				$exception = null;
 				try {

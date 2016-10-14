@@ -22,7 +22,7 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 	public function process() {
 		$this->regionsDelete();
 		$this->regionsInsert();
-		rm_cache_clean();
+		df_cache_clean();
 	}
 
 	/** @return Df_Core_Model_Resource_Setup */
