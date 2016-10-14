@@ -18,7 +18,7 @@ abstract class Df_Core_Model_Geo_Locator_Real extends Df_Core_Model_Geo_Locator 
 	 */
 	protected function convertXml($text) {
 		/** @var Df_Core_Sxe|null $xml */
-		$xml = rm_xml($text, $throw = false);
+		$xml = df_xml($text, $throw = false);
 		return !$xml ? array() : $xml->asCanonicalArray();
 	}
 

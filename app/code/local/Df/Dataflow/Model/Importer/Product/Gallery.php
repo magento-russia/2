@@ -33,7 +33,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 			;
 			foreach ($this->{__METHOD__} as &$image) {
 				/** @var string $image */
-				$image = df_path()->adjustSlashes($image);
+				$image = df_path_n($image);
 			}
 		}
 		return $this->{__METHOD__};

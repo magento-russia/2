@@ -217,7 +217,7 @@ function rm_leaf_sne(SimpleXMLElement $e = null, $default = '') {
  * @return Df_Core_Sxe|null
  * @throws Df_Core_Exception
  */
-function rm_xml($xml, $throw = true) {
+function df_xml($xml, $throw = true) {
 	df_param_string_not_empty($xml, 0);
 	/** @var Df_Core_Sxe $result */
 	$result = null;
@@ -366,8 +366,8 @@ function rm_xml_load_file($filename) {
 	libxml_use_internal_errors(true);
 	$result = @simplexml_load_file($filename, Df_Core_Sxe::_C);
 	if (!$result) {
-		rm_xml_throw_last(
-			"При разборе файла XML произошёл сбой.\nФайл: " . rm_fs_format($filename)
+		df_xml_throw_last(
+			"При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($filename)
 		);
 	}
 	return $result;
@@ -379,7 +379,7 @@ function rm_xml_load_file($filename) {
  * @param string $message
  * @throws Df_Core_Exception
  */
-function rm_xml_throw_last($message) {
+function df_xml_throw_last($message) {
 	/** @var LibXMLError[] LibXMLError */
 	$errors = libxml_get_errors();
 	/** @var string[] $messages */
@@ -398,7 +398,7 @@ function rm_xml_throw_last($message) {
  */
 function rm_xml_node($tag, array $attributes = array()) {
 	/** @var Df_Core_Sxe $result */
-	$result = rm_xml(df_sprintf('<%s/>', $tag));
+	$result = df_xml(df_sprintf('<%s/>', $tag));
 	foreach ($attributes as $name => $value) {
 		/** @var string $name */
 		/** @var string $value */

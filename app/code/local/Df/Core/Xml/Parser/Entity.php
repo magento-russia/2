@@ -65,7 +65,7 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 			/** @var Df_Core_Sxe $result */
 			$result = $this->_getData(self::$P__E);
 			if (is_string($result)) {
-				$result = rm_xml($result);
+				$result = df_xml($result);
 			}
 			if (!$result instanceof Df_Core_Sxe) {
 				df_error('Вместо Df_Core_Sxe получена переменная типа «%s».', gettype($result));

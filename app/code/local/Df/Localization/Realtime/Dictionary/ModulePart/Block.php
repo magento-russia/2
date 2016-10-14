@@ -32,7 +32,7 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Block extends Df_Core_Xml_P
 	 * @return bool
 	 */
 	public function matchTemplate($template) {
-		$template = df_path()->normalizeSlashes($template);
+		$template = df_path_n($template);
 		return
 			$this->isTemplateMatchesAll()
 			||

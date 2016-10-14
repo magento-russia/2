@@ -3,7 +3,7 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 	/** @return Df_Core_Sxe */
 	protected function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_xml($this->getXml());
+			$this->{__METHOD__} = df_xml($this->getXml());
 		}
 		return $this->{__METHOD__};
 	}

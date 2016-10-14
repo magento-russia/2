@@ -34,7 +34,7 @@ final class Df_Core_Model_Logger extends Df_Core_Model {
 			/** @var string $filePath */
 			$filePath = $this[self::$P__FILE_PATH];
 			if (!file_exists($filePath)) {
-				rm_file_put_contents($filePath, '');
+				df_file_put_contents($filePath, '');
 			}
 			/** @var Zend_Log_Writer_Stream $writer */
 			$writer = new Zend_Log_Writer_Stream($filePath);

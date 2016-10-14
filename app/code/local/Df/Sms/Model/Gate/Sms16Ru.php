@@ -79,7 +79,7 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	private function getRequestBodyAsSimpleXmlElement() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_xml(
+				df_xml(
 					"<?xml version='1.0' encoding='utf-8'?>"
 					."<request></request>"
 				)

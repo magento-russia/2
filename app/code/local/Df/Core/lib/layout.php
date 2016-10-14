@@ -397,7 +397,7 @@ function rm_render_simple_child(Mage_Core_Block_Template $parent, $templateShort
 		 * независимо от шаблона родителя и наоборот.
 		 * @var string $template
 		 */
-		rm_strip_ext($parent->getTemplate()) . "/{$templateShort}.phtml"
+		df_strip_ext($parent->getTemplate()) . "/{$templateShort}.phtml"
 		/** по аналогии с @see Mage_Core_Block_Template::getTemplateFile() */
 		, df_clean(array('_relative' => true, '_area' => $parent->getArea()))
 	), $params);

@@ -201,7 +201,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 		/** @var Df_Core_Sxe $result */
 		$result = $this->mixin(__FUNCTION__);
 		if (is_null($result)) {
-			$result = rm_xml(df_ccc("\n",
+			$result = df_xml(df_ccc("\n",
 				$this->getXmlHeader(), $this->getDocType(), $this->getTag()
 			));
 			$result->addAttributes($this->getAttributes());
@@ -296,7 +296,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	private function createLogger() {
 		/** @var string $prefix */
 		$prefix = implode('-', array_filter(array(rm_module_id($this, '.'), $this->getLogDocumentName())));
-		return Df_Core_Model_Logger::s(rm_file_name(
+		return Df_Core_Model_Logger::s(df_file_name(
 			Mage::getBaseDir('var') . DS . 'log'
 			, strtr('rm-{prefix}-{date}-{time}.log', array('{prefix}' => $prefix))
 			, $datePartsSeparator = '.'

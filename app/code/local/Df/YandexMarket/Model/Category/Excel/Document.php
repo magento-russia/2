@@ -73,7 +73,7 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model {
 				);
 			}
 		}
-		rm_file_put_contents($this->getFilePath(), $contents);
+		df_file_put_contents($this->getFilePath(), $contents);
 		return $this;
 	}
 

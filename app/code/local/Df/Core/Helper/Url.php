@@ -16,9 +16,7 @@ class Df_Core_Helper_Url {
 	 * @param string $path
 	 * @return string
 	 */
-	public function fromPath($path) {
-		return $this->encode(str_replace(DS, '/', df_path()->makeRelative($path)));
-	}
+	public function fromPath($path) {return $this->encode(df_path_relative($path));}
 
 	/**
 	 * @used-by Df_Dataflow_Model_Importer_Product_Images::getImages()

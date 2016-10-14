@@ -33,7 +33,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			$this->log(
 				'К товару %s добавлена картинка «%s».'
 				,$product->getTitle()
-				,df_path()->makeRelative($imagePath)
+				,df_path_relative($imagePath)
 			);
 			$needSave = true;
 			/**
@@ -152,7 +152,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 					, implode('.', array(md5($imageUrl), $imageType))
 				)
 			;
-			rm_file_put_contents($result, $response->getBody());
+			df_file_put_contents($result, $response->getBody());
 		}
 
 		df_result_string($result);

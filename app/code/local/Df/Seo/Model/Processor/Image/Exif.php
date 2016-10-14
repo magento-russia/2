@@ -181,7 +181,7 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 				/** @var PelIfd $ifdInterop */
 				$ifdInterop = new PelIfd(PelIfd::INTEROPERABILITY);
 				$this->getPelIfd0()->addSubIfd($ifdInterop);
-				rm_file_put_contents($this->getImagePath(), $this->getPelJpeg()->getBytes());
+				df_file_put_contents($this->getImagePath(), $this->getPelJpeg()->getBytes());
 			}
 			Df_Pel_Lib::s()->restoreErrorReporting();
 		}

@@ -7,7 +7,7 @@ class Df_1C_Cml2_Action_GenericImport_Upload extends Df_1C_Cml2_Action_GenericIm
 	 * @return void
 	 */
 	protected function _process() {
-		rm_file_put_contents($this->getFileCurrent()->getPathFull(), file_get_contents('php://input'));
+		df_file_put_contents($this->getFileCurrent()->getPathFull(), file_get_contents('php://input'));
 		$this->setResponseSuccess();
 	}
 }

@@ -135,7 +135,7 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model {
 
 	/**
 	 * Результатом всегда является непустая строка.
-	 * @used-by rm_file_name()
+	 * @used-by df_file_name()
 	 * @param string $directory
 	 * @param string $template
 	 * @param string $datePartsSeparator [optional]

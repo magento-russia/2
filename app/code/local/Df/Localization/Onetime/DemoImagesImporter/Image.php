@@ -11,7 +11,7 @@ class Df_Localization_Onetime_DemoImagesImporter_Image extends Df_Core_Model {
 		/** @var string $imageData */
 		$imageData = @file_get_contents($baseUrl . 'media/catalog/product' . $this->getPathLocal());
 		if ($imageData) {
-			rm_file_put_contents($this->getPathFull(), $imageData);
+			df_file_put_contents($this->getPathFull(), $imageData);
 		}
 	}
 

@@ -51,7 +51,7 @@ class Df_Core_Observer {
 	 */
 	public function controller_action_postdispatch_install_wizard_end() {
 		try {
-			rm_file_put_contents($this->getJustInstalledFlagFilePath(), 1);
+			df_file_put_contents($this->getJustInstalledFlagFilePath(), 1);
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e);

@@ -145,7 +145,7 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 	private function getSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			try {
-				$this->{__METHOD__} = rm_xml(file_get_contents($this->getUrl()));
+				$this->{__METHOD__} = df_xml(file_get_contents($this->getUrl()));
 			}
 			catch (Exception $e) {
 				$this->throwServiceFailure($this->getUrl());

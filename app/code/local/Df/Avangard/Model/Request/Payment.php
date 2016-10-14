@@ -109,7 +109,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 	/** @return Df_Core_Sxe */
 	private function getResponseAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_xml($this->getHttpResponse()->getBody());
+			$this->{__METHOD__} = df_xml($this->getHttpResponse()->getBody());
 			rm_report('registration-{date}-{time}.xml', $this->getHttpResponse()->getBody());
 		}
 		return $this->{__METHOD__};

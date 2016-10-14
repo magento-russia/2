@@ -261,7 +261,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 			df_assert_string_not_empty($file);
 		}
 		/** @var string $destionationFilePath */
-		$destionationFilePath = df_path()->adjustSlashes($this->_getConfig()->getMediaPath($file));
+		$destionationFilePath = df_path_n($this->_getConfig()->getMediaPath($file));
 		/** @var Df_Catalog_Model_Product $product */
 		$product = $this->getProduct();
 		df_assert($product instanceof Df_Catalog_Model_Product);
@@ -327,9 +327,9 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 				 */
 				'/'
 				,str_replace(
-					df_path()->adjustSlashes($this->_getConfig()->getBaseMediaPath())
+					df_path_n($this->_getConfig()->getBaseMediaPath())
 					,''
-					,df_path()->adjustSlashes($destionationFilePathOptimizedForSeoAndUnique)
+					,df_path_n($destionationFilePathOptimizedForSeoAndUnique)
 				)
 			)
 		;

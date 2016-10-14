@@ -605,7 +605,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		if (!isset($this->{__METHOD__}[$localPath])) {
 			$this->{__METHOD__}[$localPath] = df_cc_path(
 				Mage::getConfig()->getModuleDir('', rm_module_name($this))
-				, df_path()->adjustSlashes($localPath)
+				,df_path_n($localPath)
 			);
 		}
 		return $this->{__METHOD__}[$localPath];

@@ -76,7 +76,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	/** @return Df_Core_Model_Logger */
 	private function getLogger() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Logger::s(rm_file_name(
+			$this->{__METHOD__} = Df_Core_Model_Logger::s(df_file_name(
 				Mage::getBaseDir('var') . DS . 'log', 'rm.yandex.market-{date}-{time}.log'
 			));
 		}

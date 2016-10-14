@@ -109,7 +109,7 @@ function rm_debug_type($value, $addQuotes = true) {
  * @return void
  */
 function rm_report($nameTemplate, $message) {
-	rm_file_put_contents(rm_file_name(Mage::getBaseDir('var') . DS . 'log', $nameTemplate), $message);
+	df_file_put_contents(df_file_name(Mage::getBaseDir('var') . DS . 'log', $nameTemplate), $message);
 }
 
 

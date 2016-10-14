@@ -1,18 +1,6 @@
 <?php
 class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 	/**
-	 * @param string $path
-	 * @return string
-	 */
-	public function adjustSlashes($path) {
-		return
-			('\\' === DS)
-			? str_replace('/', DS, $path)
-			: str_replace('\\', DS, $path)
-		;
-	}
-
-	/**
 	 * @used-by Df_Admin_Model_Notifier_ClassRewriteConflicts::getModulesFromCodePool()
 	 * @used-by Df_Core_Lib::includeScripts()
 	 * 2015-02-06
@@ -69,59 +57,6 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 	public function delete($path) {
 		df_param_string_not_empty($path, 0);
 		Varien_Io_File::rmdirRecursive($path);
-	}
-
-	/**
-	 * @param string $path
-	 * @return mixed
-	 */
-	public function makeRelative($path) {
-		/** @var string $cleaned */
-		$cleaned = $this->clean($path);
-		/** @var string $base */
-		$base = BP . DS;
-		return df_starts_with($cleaned, $base) ? str_replace($base, '', $cleaned) : $cleaned;
-	}
-
-	/**
-	 * Заменяет все сиволы пути на /
-	 * @param string $path
-	 * @return string
-	 */
-	public function normalizeSlashes($path) {return str_replace('\\', '/', $path);}
-
-	/**
-	 * @param string $path
-	 * @return string
-	 */
-	public function removeTrailingSlash($path) {
-		return
-			!in_array(mb_substr($path, -1), array('/', DS))
-			? $path
-			: mb_substr($path, 0, -1)
-		;
-	}
-
-	/**
-	 * Function to strip additional / or \ in a path name
-	 * @param string $path
-	 * @param string $ds
-	 * @return string
-	 */
-	private function clean($path, $ds = DS) {
-		df_param_string($path, 0);
-		df_param_string($path, 1);
-		/** @var string $result */
-		$result = df_trim($path);
-		// Remove double slashes and backslahses
-		// and convert all slashes and backslashes to DS
-		$result = !$result ? BP : $this->adjustSlashes(preg_replace('#[/\\\\]+#u', $ds, $result));
-		if (!df_check_string($result)) {
-			df_error("[{method}]:\tНе могу обработать путь «{path}».", array(
-				'{method}%' => __METHOD__, '{path}' => $path
-			));
-		}
-		return $result;
 	}
 
 	/**

@@ -175,7 +175,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 				'{prefix}' => $prefix
 				,'{extension}' => $this->getResponseLogFileExtension()
 			));
-			$this->{__METHOD__} = rm_file_name($this->getResponseLogFileDir(), $template, '.');
+			$this->{__METHOD__} = df_file_name($this->getResponseLogFileDir(), $template, '.');
 		}
 		return $this->{__METHOD__};
 	}
@@ -393,7 +393,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	private function logResponse() {
-		rm_file_put_contents($this->getResponseLogFileName(), $this->getResponseBody($real = true));
+		df_file_put_contents($this->getResponseLogFileName(), $this->getResponseBody($real = true));
 	}
 
 	/**

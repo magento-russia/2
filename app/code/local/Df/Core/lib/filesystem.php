@@ -1,4 +1,48 @@
 <?php
+if (!defined('DS')) {
+	define('DS', DIRECTORY_SEPARATOR);
+}
+
+/**
+ * 2015-11-28
+ * http://stackoverflow.com/a/10368236
+ * @param string $fileName
+ * @return string
+ */
+function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);}
+
+/**
+ * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
+ * Результатом всегда является непустая строка.
+ * @used-by Autostyler_Import_Model_Action::getLogFilePath()
+ * @used-by Df_1C_Helper_Data::logger()
+ * @used-by rm_report()
+ * @used-by Df_Core_Model_Action::getResponseLogFileName()
+ * @used-by Df_Core_Xml_Generator_Document::createLogger()
+ * @used-by Df_YandexMarket_Helper_Data::getLogger()
+ * @param string $directory
+ * @param string $template
+ * @param string $datePartsSeparator [optional]
+ * @return string
+ */
+function df_file_name($directory, $template, $datePartsSeparator = '-') {
+	return Df_Core_Model_Fs_GetNotUsedFileName::r($directory, $template, $datePartsSeparator);
+}
+
+/**
+ * @param string $filePath
+ * @param string $contents
+ * @return void
+ * @throws Exception
+ */
+function df_file_put_contents($filePath, $contents) {
+	df_param_string_not_empty($filePath, 0);
+	df_path()->createAndMakeWritable($filePath);
+	/** @var int|bool $r */
+	$r = file_put_contents($filePath, $contents);
+	df_assert(false !== $r);
+}
+
 /**
  * 2015-11-29
  * Преобразует строку таким образом,
@@ -20,48 +64,28 @@ function df_fs_name($name, $spaceSubstitute = '-') {
 	return mb_ereg_replace("([\.]{2,})", '', $name);
 }
 
-/**
- * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
- * Результатом всегда является непустая строка.
- * @used-by Autostyler_Import_Model_Action::getLogFilePath()
- * @used-by Df_1C_Helper_Data::logger()
- * @used-by rm_report()
- * @used-by Df_Core_Model_Action::getResponseLogFileName()
- * @used-by Df_Core_Xml_Generator_Document::createLogger()
- * @used-by Df_YandexMarket_Helper_Data::getLogger()
- * @param string $directory
- * @param string $template
- * @param string $datePartsSeparator [optional]
- * @return string
- */
-function rm_file_name($directory, $template, $datePartsSeparator = '-') {
-	return Df_Core_Model_Fs_GetNotUsedFileName::r($directory, $template, $datePartsSeparator);
-}
-
-/**
- * @param string $filePath
- * @param string $contents
- * @return void
- * @throws Exception
- */
-function rm_file_put_contents($filePath, $contents) {
-	df_param_string_not_empty($filePath, 0);
-	df_path()->createAndMakeWritable($filePath);
-	/** @var int|bool $r */
-	$r = file_put_contents($filePath, $contents);
-	df_assert(false !== $r);
-}
-
-/**
- * 2015-08-24
- * @used-by rm_xml_load_file()
- * @param string $name
- * @return string
- */
-function rm_fs_format($name) {return df_path()->normalizeSlashes(df_path()->makeRelative($name));}
-
 /** @return Df_Core_Helper_Path */
 function df_path() {return Df_Core_Helper_Path::s();}
+
+/**
+ * Заменяет все сиволы пути на /
+ * @param string $path
+ * @return string
+ */
+function df_path_n($path) {return str_replace('\\', '/', $path);}
+
+/**
+ * 2015-12-06
+ * Левый «/» мы убираем.
+ * @param string $path
+ * @param string $base [optional]
+ * @return string
+ */
+function df_path_relative($path, $base = BP) {return
+	df_trim_ds_left(df_trim_text_left(
+		df_path_n($path), df_trim_ds_left(df_path_n($base))
+	))
+;}
 
 /**
  * 2015-04-01
@@ -73,7 +97,26 @@ function df_path() {return Df_Core_Helper_Path::s();}
  * @param string $file
  * @return mixed
  */
-function rm_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
+function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
 
+/**
+ * 2016-10-14
+ * @param string $path
+ * @return string
+ */
+function df_trim_ds($path) {return df_trim($path, '/');}
 
+/**
+ * 2015-11-30
+ * @param string $path
+ * @return string
+ */
+function df_trim_ds_left($path) {return df_trim_left($path, '/');}
+
+/**
+ * 2016-10-14
+ * @param string $path
+ * @return string
+ */
+function df_trim_ds_right($path) {return df_trim_right($path, '/');}
  
