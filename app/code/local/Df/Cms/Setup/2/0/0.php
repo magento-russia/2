@@ -8,14 +8,14 @@ class Df_Cms_Setup_2_0_0 extends Df_Core_Setup {
 	 * @throws Exception
 	 */
 	protected function _process() {
-		$t_ADMIN_USER = rm_table('admin/user');
-		$t_HIERARCHY_LOCK = rm_table(Df_Cms_Model_Resource_Hierarchy_Lock::TABLE);
-		$t_HIERARCHY_METADATA = rm_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA);
-		$t_HIERARCHY_NODE = rm_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE);
-		$t_INCREMENT = rm_table(Df_Cms_Model_Resource_Increment::TABLE);
-		$t_PAGE = rm_table('cms/page');
-		$t_PAGE_REVISION = rm_table(Df_Cms_Model_Resource_Page_Revision::TABLE);
-		$t_PAGE_VERSION = rm_table(Df_Cms_Model_Resource_Page_Version::TABLE);
+		$t_ADMIN_USER = df_table('admin/user');
+		$t_HIERARCHY_LOCK = df_table(Df_Cms_Model_Resource_Hierarchy_Lock::TABLE);
+		$t_HIERARCHY_METADATA = df_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA);
+		$t_HIERARCHY_NODE = df_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE);
+		$t_INCREMENT = df_table(Df_Cms_Model_Resource_Increment::TABLE);
+		$t_PAGE = df_table('cms/page');
+		$t_PAGE_REVISION = df_table(Df_Cms_Model_Resource_Page_Revision::TABLE);
+		$t_PAGE_VERSION = df_table(Df_Cms_Model_Resource_Page_Version::TABLE);
 		$this->run("
 			CREATE TABLE IF NOT EXISTS `{$t_PAGE_VERSION}` (
 				`version_id` INT(10) UNSIGNED NOT null AUTO_INCREMENT,

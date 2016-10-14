@@ -212,7 +212,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $productIds */
 			$productIds = array_keys($this->getItems());
-			$this->{__METHOD__} = !$productIds ? array() : rm_fetch_col_int_unique(
+			$this->{__METHOD__} = !$productIds ? array() : df_fetch_col_int_unique(
 				$this->_productCategoryTable, 'category_id', 'product_id', $productIds
 			);
 		}
@@ -327,14 +327,14 @@ class Df_Catalog_Model_Resource_Product_Collection
 			/** @var int|null $storeId */
 			$storeId = dfa($filters, 'store_id');
 			if (!is_null($storeId)) {
-				$conditions[]= rm_quote_into('? = cat_index.store_id', $storeId);
+				$conditions[]= df_db_quote_into('? = cat_index.store_id', $storeId);
 			}
 			if (
 					isset($filters['visibility'])
 				&&
 					!isset($filters['store_table'])
 			) {
-				$conditions[]= rm_quote_into('cat_index.visibility IN (?)', $filters['visibility']);
+				$conditions[]= df_db_quote_into('cat_index.visibility IN (?)', $filters['visibility']);
 			}
 			if ($this->hasCategoriesFilter()) {
 				$conditions[]=
@@ -347,11 +347,11 @@ class Df_Catalog_Model_Resource_Product_Collection
 				/** @var int|null $categoryId */
 				$categoryId = dfa($filters, 'category_id');
 				if ($categoryId && !$this->getFlag('disable_root_category_filter')) {
-					$conditions[] = rm_quote_into('? = cat_index.category_id', $categoryId);
+					$conditions[] = df_db_quote_into('? = cat_index.category_id', $categoryId);
 				}
 			}
 			if (isset($filters['category_is_anchor'])) {
-				$conditions[]= rm_quote_into('? = cat_index.is_parent', $filters['category_is_anchor']);
+				$conditions[]= df_db_quote_into('? = cat_index.is_parent', $filters['category_is_anchor']);
 			}
 			/** @var string $joinCond */
 			$joinCond = implode(' AND ', array_filter($conditions));
@@ -429,7 +429,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 		$joinCond = df_ccc(' AND '
 			,'cat_pro.product_id=e.entity_id'
 			,!$this->hasCategoriesFilter()
-			? rm_quote_into('? = cat_pro.category_id', $filters['category_id'])
+			? df_db_quote_into('? = cat_pro.category_id', $filters['category_id'])
 			: (
 				!$this->getCategoriesFilter()
 				? null
@@ -455,7 +455,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 		else {
 			$this->_catIndexPositionIsAvailable = !$this->hasCategoriesFilter();
 			$this->getSelect()->join(
-				array('cat_pro' => rm_table('catalog/category_product'))
+				array('cat_pro' => df_table('catalog/category_product'))
 				,$joinCond
 				/**
 				 * Обратите внимание, что синтаксис array() указывает на то,

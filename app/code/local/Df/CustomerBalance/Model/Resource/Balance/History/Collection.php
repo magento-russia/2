@@ -6,7 +6,7 @@ class Df_CustomerBalance_Model_Resource_Balance_History_Collection
 	 * @return Df_CustomerBalance_Model_Resource_Balance_History_Collection
 	 */
 	public function addWebsitesFilter($websiteIds) {
-		$this->getSelect()->where(rm_quote_into('b.website_id IN (?)', $websiteIds));
+		$this->getSelect()->where(df_db_quote_into('b.website_id IN (?)', $websiteIds));
 		return $this;
 	}
 
@@ -23,7 +23,7 @@ class Df_CustomerBalance_Model_Resource_Balance_History_Collection
 	protected function _initSelect() {
 		parent::_initSelect();
 		$this->getSelect()->joinInner(
-			array('b' => rm_table(Df_CustomerBalance_Model_Resource_Balance::TABLE))
+			array('b' => df_table(Df_CustomerBalance_Model_Resource_Balance::TABLE))
 			,'main_table.balance_id = b.balance_id'
 			,array(
 				'customer_id' => 'b.customer_id'

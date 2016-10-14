@@ -1,8 +1,36 @@
 <?php
 /** @return Varien_Db_Adapter_Pdo_Mysql|Varien_Db_Adapter_Interface */
-function rm_conn() {
-	static $r; return $r ? $r : $r = df_mage()->core()->resource()->getConnection('write');
+function df_conn() {return df_db_resource()->getConnection('write');}
+
+/**
+ * 2016-01-27
+ * @param string $identifier
+ * @return string
+ */
+function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier);}
+
+/**
+ * @param string $text
+ * @param mixed $value
+ * @param string|null $type [optional]
+ * @param int|null $count [optional]
+ * @return string
+ */
+function df_db_quote_into($text, $value, $type = null, $count = null) {
+	return df_conn()->quoteInto($text, $value, $type, $count);
 }
+
+/**
+ * 2016-03-26
+ * @return Mage_Core_Model_Resource_Transaction
+ */
+function df_db_transaction() {return df_model('core/resource_transaction');}
+
+/**
+ * 2015-09-29
+ * @return Mage_Core_Model_Resource
+ */
+function df_db_resource() {return df_mage()->core()->resource();}
 
 /**
  * 2015-04-14
@@ -11,18 +39,18 @@ function rm_conn() {
  * @param int|string|int[]|string[]|null $values [optional]
  * @return array(array(string => string))
  */
-function rm_fetch_all($table, $cCompare = null, $values = null) {
+function df_fetch_all($table, $cCompare = null, $values = null) {
 	/** @var Varien_Db_Select $select */
-	$select = rm_select()->from(rm_table($table));
+	$select = df_select()->from(df_table($table));
 	if (!is_null($values)) {
-		$select->where($cCompare . ' ' . rm_sql_predicate_simple($values), $values);
+		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
-	return rm_conn()->fetchAssoc($select);
+	return df_conn()->fetchAssoc($select);
 }
 
 /**
  * 2015-04-13
- * @used-by rm_fetch_col_int()
+ * @used-by df_fetch_col_int()
  * @used-by Df_Localization_Onetime_DemoImagesImporter_Image_Collection::loadInternal()
  * @param string $table
  * @param string $cSelect
@@ -31,22 +59,22 @@ function rm_fetch_all($table, $cCompare = null, $values = null) {
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function rm_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
+function df_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
 	/** @var Varien_Db_Select $select */
-	$select = rm_select()->from(rm_table($table), $cSelect);
+	$select = df_select()->from(df_table($table), $cSelect);
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
 		}
-		$select->where($cCompare . ' ' . rm_sql_predicate_simple($values), $values);
+		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
 	$select->distinct($distinct);
-	return rm_conn()->fetchCol($select, $cSelect);
+	return df_conn()->fetchCol($select, $cSelect);
 }
 
 /**
  * 2015-04-13
- * @used-by rm_fetch_col_int_unique()
+ * @used-by df_fetch_col_int_unique()
  * @used-by Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData::_process()
  * @used-by Df_Logging_Model_Resource_Event::getEventChangeIds()
  * @used-by Df_Tax_Setup_3_0_0::customerClassId()
@@ -59,9 +87,9 @@ function rm_fetch_col($table, $cSelect, $cCompare = null, $values = null, $disti
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function rm_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
+function df_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
 	/** намеренно не используем @see df_int() ради ускорения */
-	return df_int_simple(rm_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
+	return df_int_simple(df_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
 }
 
 /**
@@ -73,8 +101,69 @@ function rm_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $d
  * @param int|string|int[]|string[]|null $values [optional]
  * @return int[]|string[]
  */
-function rm_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {
-	return rm_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true);
+function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {
+	return df_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true);
+}
+
+/**
+ * 2016-01-26
+ * https://mage2.pro/t/557
+ * «How to get the maximum value of a database table's column programmatically».
+ * @param string $table
+ * @param string $cSelect
+ * @param string|null $cCompare [optional]
+ * @param int|string|int[]|string[]|null $values [optional]
+ * @return int|float
+ */
+function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
+	/** @var Varien_Db_Select $select */
+	$select = df_select()->from(df_table($table), "MAX($cSelect)");
+	if (!is_null($values)) {
+		if (!$cCompare) {
+			$cCompare = $cSelect;
+		}
+		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+	}
+	/**
+	 * 2016-03-01
+	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
+	 * https://mage2.pro/t/853
+	 */
+	return df_conn()->fetchOne($select, $cSelect) ?: 0;
+}
+
+/**
+ * 2015-11-03
+ * @param $table
+ * @param string $cSelect
+ * @param array(string => string) $cCompare
+ * @return string|null
+ */
+function df_fetch_one($table, $cSelect, $cCompare) {
+	/** @var Varien_Db_Select $select */
+	$select = df_select()->from(df_table($table), $cSelect);
+	foreach ($cCompare as $column => $value) {
+		/** @var string $column */
+		/** @var string $value */
+		$select->where('? = ' . $column, $value);
+	}
+	/**
+	 * 2016-03-01
+	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
+	 * https://mage2.pro/t/853
+	 */
+	return df_ftn(df_conn()->fetchOne($select));
+}
+
+/**
+ * 2015-11-03
+ * @param $table
+ * @param string $cSelect
+ * @param array(string => string) $cCompare
+ * @return int
+ */
+function df_fetch_one_int($table, $cSelect, $cCompare) {
+	return df_int(df_fetch_one($table, $cSelect, $cCompare));
 }
 
 /**
@@ -87,43 +176,32 @@ function rm_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
  * @param string $table
  * @return string|null
  */
-function rm_primary_key($table) {
+function df_primary_key($table) {
 	/** @var array(string => string|null) */
 	static $cache;
 	if (!isset($cache[$table])) {
 		$cache[$table] = rm_n_set(df_first(df_nta(dfa_deep(
-			rm_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
+			df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
 		))));
 	}
 	return rm_n_get($cache[$table]);
 }
 
 /**
- * @param string $text
- * @param mixed $value
- * @param string|null $type [optional]
- * @param int|null $count [optional]
- * @return string
- */
-function rm_quote_into($text, $value, $type = null, $count = null) {
-	return rm_conn()->quoteInto($text, $value, $type, $count);
-}
-
-/**
  * 2015-09-29
  * @return Varien_Db_Select
  */
-function rm_select() {return rm_conn()->select();}
+function df_select() {return df_conn()->select();}
 
 /**
  * 2015-04-13
- * @used-by rm_fetch_col()
- * @used-by rm_table_delete()
+ * @used-by df_fetch_col()
+ * @used-by df_table_delete()
  * @param int|string|int[]|string[] $values
  * @param bool $not [optional]
  * @return string
  */
-function rm_sql_predicate_simple($values, $not = false) {
+function df_sql_predicate_simple($values, $not = false) {
 	return is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?');
 }
 
@@ -135,14 +213,14 @@ function rm_sql_predicate_simple($values, $not = false) {
  * @param string|string[] $name
  * @return string
  */
-function rm_table($name) {
+function df_table($name) {
 	if (is_array($name)) {
 		/** @var string $message */
 		$message = sprintf(
-			'Метод rm_table вызван с параметром-массивом.'
+			'Метод df_table вызван с параметром-массивом.'
 			."\nТакой вызов не поддеживается в Magento CE 1.4."
 			. "\nРоссийская сборка Magento должна поддеживать эту версию Magento CE,"
-			. ' поэтому в качестве параметра rm_table используйте только строку.'
+			. ' поэтому в качестве параметра df_table используйте только строку.'
 			. "\nПараметр-массив:%s."
 			,print_r($name, $return = true)
 		);
@@ -164,7 +242,7 @@ function rm_table($name) {
 
 /**
  * 2015-04-12
- * @used-by rm_table_delete_not()
+ * @used-by df_table_delete_not()
  * @used-by Df_Bundle_Model_Resource_Bundle::deleteAllOptions()
  * @used-by Df_Tax_Setup_3_0_0::customerClassId()
  * @used-by Df_Tax_Setup_3_0_0::deleteDemoData()
@@ -182,10 +260,10 @@ function rm_table($name) {
  * @param bool $not [optional]
  * @return void
  */
-function rm_table_delete($table, $columnName, $values, $not = false) {
+function df_table_delete($table, $columnName, $values, $not = false) {
 	/** @var string $condition */
-	$condition = rm_sql_predicate_simple($values, $not);
-	rm_conn()->delete(rm_table($table), array("{$columnName} {$condition}" => $values));
+	$condition = df_sql_predicate_simple($values, $not);
+	df_conn()->delete(df_table($table), array("{$columnName} {$condition}" => $values));
 }
 
 /**
@@ -196,8 +274,8 @@ function rm_table_delete($table, $columnName, $values, $not = false) {
  * @param int|string|int[]|string[] $values
  * @return void
  */
-function rm_table_delete_not($table, $columnName, $values) {
-	rm_table_delete($table, $columnName, $values, $not = true);
+function df_table_delete_not($table, $columnName, $values) {
+	df_table_delete($table, $columnName, $values, $not = true);
 }
 
 /**
@@ -210,14 +288,14 @@ function rm_table_delete_not($table, $columnName, $values) {
  * а вручную мы можем забыть вызвать.
  * Обратите внимание, что имя таблицы должно быть уже в формате MySQL (например, «core_resource»).
  * Если у Вас имя таблицы — в формате Magento (например, «core/resource»),
- * то Вы должны предварительно перевести это имя в формат MySQL посредством вызова @see rm_table().
+ * то Вы должны предварительно перевести это имя в формат MySQL посредством вызова @see df_table().
  * @param string $table
  * @param Varien_Db_Adapter_Pdo_Mysql|Varien_Db_Adapter_Interface|null $adapter [optional]
  * @return void
  */
-function rm_table_drop($table, $adapter = null) {
-	$adapter = $adapter ? $adapter : rm_conn();
-	$adapter->raw_query('drop table if exists ' . $adapter->quoteIdentifier($table));
+function df_table_drop($table, $adapter = null) {
+	$adapter = $adapter ? $adapter : df_conn();
+	$adapter->raw_query('drop table if exists ' . df_db_quote($table));
 	/**
 	 * Обратите внимание, что изменение структуры базы данных может привести к тому,
 	 * что кэш слоя бизнес-логики также окажется устаревшим.
@@ -236,6 +314,6 @@ function rm_table_drop($table, $adapter = null) {
  * @param Varien_Db_Adapter_Pdo_Mysql|Varien_Db_Adapter_Interface|null $adapter [optional]
  * @return void
  */
-function rm_table_truncate($table, $adapter = null) {
+function df_table_truncate($table, $adapter = null) {
 	Df_Core_Helper_Db::s()->truncate($table, $adapter);
 }

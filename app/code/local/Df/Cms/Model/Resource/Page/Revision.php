@@ -98,7 +98,7 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	 */
 	protected function _aggregateVersionData($versionId)
 	{
-		$versionTable = rm_table(Df_Cms_Model_Resource_Page_Version::TABLE);
+		$versionTable = df_table(Df_Cms_Model_Resource_Page_Version::TABLE);
 		$select = 'UPDATE `' . $versionTable . '` SET `revisions_count` =
 			(SELECT count(*) from `' . $this->getMainTable() . '` where `version_id` = ' . (int)$versionId . ')
 			where `version_id` = ' . (int)$versionId;
@@ -116,7 +116,7 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	public function publish(Df_Cms_Model_Page_Revision $object, $targetId)
 	{
 		$data = $this->_prepareDataForTable($object, $this->_pageTable);
-		$condition = rm_quote_into('page_id = ?', $targetId);
+		$condition = df_db_quote_into('page_id = ?', $targetId);
 		$this->_getWriteAdapter()->update($this->_pageTable, $data, $condition);
 		return $this;
 	}
@@ -189,12 +189,12 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 			$select->reset(Zend_Db_Select::COLUMNS)->reset(Zend_Db_Select::WHERE);
 			// adding where conditions with restriction filter
 			$whereConditions = array($this->_getPermissionCondition($accessLevel, $userId));
-			$whereConditions[]= rm_quote_into($this->_versionTableAlias . '.version_id = ?', $versionId);
+			$whereConditions[]= df_db_quote_into($this->_versionTableAlias . '.version_id = ?', $versionId);
 			$select->where(implode(' AND ', $whereConditions));
 			//joining version table
 			$this->_joinVersionData($select, 'joinRight', '1 = 1');
 			//joining page table
-			$joinCondition = rm_quote_into($this->_pageTableAlias . '.page_id = ?', $pageId);
+			$joinCondition = df_db_quote_into($this->_pageTableAlias . '.page_id = ?', $pageId);
 			$this->_joinPageData($select, 'joinLeft', $joinCondition);
 			// adding page id column which we will not have as this is clean revision
 			// and this column is not specified in join
@@ -223,11 +223,11 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	{
 		$read = $this->_getReadAdapter();
 		$permissionCondition = array();
-		$permissionCondition[]= rm_quote_into($this->_versionTableAlias . '.user_id = ? ', $userId);
+		$permissionCondition[]= df_db_quote_into($this->_versionTableAlias . '.user_id = ? ', $userId);
 		if (is_array($accessLevel) && !empty($accessLevel)) {
-			$permissionCondition[]= rm_quote_into($this->_versionTableAlias . '.access_level in (?)', $accessLevel);
+			$permissionCondition[]= df_db_quote_into($this->_versionTableAlias . '.access_level in (?)', $accessLevel);
 		} else if ($accessLevel) {
-			$permissionCondition[]= rm_quote_into($this->_versionTableAlias . '.access_level = ?', $accessLevel);
+			$permissionCondition[]= df_db_quote_into($this->_versionTableAlias . '.access_level = ?', $accessLevel);
 		} else {
 			$permissionCondition[]= $this->_versionTableAlias . '.access_level = ""';
 		}
@@ -281,8 +281,8 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	 */
 	protected function _construct() {
 		$this->_init(self::TABLE, Df_Cms_Model_Page_Revision::P__ID);
-		$this->_pageTable = rm_table('cms/page');
-		$this->_versionTable = rm_table(Df_Cms_Model_Resource_Page_Version::TABLE);
+		$this->_pageTable = df_table('cms/page');
+		$this->_versionTable = df_table(Df_Cms_Model_Resource_Page_Version::TABLE);
 		$this->_pageTableAlias = 'page_table';
 		$this->_versionTableAlias = 'version_table';
 	}

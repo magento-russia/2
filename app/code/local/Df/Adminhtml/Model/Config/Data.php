@@ -49,9 +49,9 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		/* @var $sections Mage_Core_Model_Config_Element */
 		$sections = rm_config_adminhtml()->getSections();
 		$oldConfig = $this->_getConfig(true);
-		$deleteTransaction = df_model('core/resource_transaction');
+		$deleteTransaction = df_db_transaction();
 		/* @var $deleteTransaction Mage_Core_Model_Resource_Transaction */
-		$saveTransaction = df_model('core/resource_transaction');
+		$saveTransaction = df_db_transaction();
 		/* @var $saveTransaction Mage_Core_Model_Resource_Transaction */
 
 		// Extends for old config data
@@ -206,9 +206,9 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		$sections = df_mage()->adminhtml()->getConfig()->getSections();
 		/* @var $sections Mage_Core_Model_Config_Element */
 		$oldConfig = $this->_getConfig(true);
-		$deleteTransaction = df_model('core/resource_transaction');
+		$deleteTransaction = df_db_transaction();
 		/* @var $deleteTransaction Mage_Core_Model_Resource_Transaction */
-		$saveTransaction = df_model('core/resource_transaction');
+		$saveTransaction = df_db_transaction();
 		/* @var $saveTransaction Mage_Core_Model_Resource_Transaction */
 
 		// Extends for old config data

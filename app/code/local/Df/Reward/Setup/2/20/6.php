@@ -7,7 +7,7 @@ class Df_Reward_Setup_2_20_6 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_HISTORY = rm_table(Df_Reward_Model_Resource_Reward_History::TABLE);
+		$t_HISTORY = df_table(Df_Reward_Model_Resource_Reward_History::TABLE);
 		// здесь обязательно использовать именно двойные кавычки, а не одинарные
 		$this->getSetup()
 			->run("ALTER TABLE `{$t_HISTORY}` MODIFY `expired_at_static` datetime NULL DEFAULT NULL")

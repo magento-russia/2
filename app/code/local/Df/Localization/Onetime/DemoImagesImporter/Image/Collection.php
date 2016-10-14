@@ -14,7 +14,7 @@ class Df_Localization_Onetime_DemoImagesImporter_Image_Collection
 	 * @return void
 	 */
 	protected function loadInternal() {
-		foreach (rm_fetch_col('catalog/product_attribute_media_gallery', 'value') as $imageLocalPath) {
+		foreach (df_fetch_col('catalog/product_attribute_media_gallery', 'value') as $imageLocalPath) {
 			/** @var string $imageLocalPath */
 			$this->addItem(Df_Localization_Onetime_DemoImagesImporter_Image::i($imageLocalPath));
 		}

@@ -8,13 +8,13 @@ class Df_Cms_Model_Resource_Increment extends Df_Core_Model_Resource {
 	 * @return bool
 	 */
 	public function loadByTypeNodeLevel(Mage_Core_Model_Abstract $object, $type, $node, $level) {
-		$select = rm_select()->from($this->getMainTable())
+		$select = df_select()->from($this->getMainTable())
 			->forUpdate(true)
 			->where('? = type', $type)
 			->where('? = node', $node)
 			->where('? = level', $level)
 		;
-		$data = rm_conn()->fetchRow($select);
+		$data = df_conn()->fetchRow($select);
 		if (!$data) {
 			return false;
 		}

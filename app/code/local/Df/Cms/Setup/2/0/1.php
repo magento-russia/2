@@ -8,7 +8,7 @@ class Df_Cms_Setup_2_0_1 extends Df_Core_Setup {
 	 */
 	protected function _process() {
 		/** @var string $t_METADATA */
-		$t_METADATA = rm_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA);
+		$t_METADATA = df_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA);
 		// Общая колонка для дополнительных настроек рубрики.
 		// Не выделяем для этих настроек отдельные колонки,
 		// потому что таких настроек может быть много,

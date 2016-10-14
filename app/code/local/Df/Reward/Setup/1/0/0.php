@@ -7,14 +7,14 @@ class Df_Reward_Setup_1_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_CORE_STORE = rm_table('core_store');
-		$t_CORE_WEBSITE = rm_table('core_website');
-		$t_CUSTOMER_ENTITY = rm_table('customer_entity');
-		$t_REWARD = rm_table(Df_Reward_Model_Resource_Reward::TABLE);
-		$t_REWARD_HISTORY = rm_table(Df_Reward_Model_Resource_Reward_History::TABLE);
-		$t_REWARD_RATE = rm_table(Df_Reward_Model_Resource_Reward_Rate::TABLE);
-		$t_REWARD_SALES_RULE = rm_table('df_reward/reward_salesrule');
-		$t_SALES_RULE_RULE = rm_table('salesrule/rule');
+		$t_CORE_STORE = df_table('core_store');
+		$t_CORE_WEBSITE = df_table('core_website');
+		$t_CUSTOMER_ENTITY = df_table('customer_entity');
+		$t_REWARD = df_table(Df_Reward_Model_Resource_Reward::TABLE);
+		$t_REWARD_HISTORY = df_table(Df_Reward_Model_Resource_Reward_History::TABLE);
+		$t_REWARD_RATE = df_table(Df_Reward_Model_Resource_Reward_Rate::TABLE);
+		$t_REWARD_SALES_RULE = df_table('df_reward/reward_salesrule');
+		$t_SALES_RULE_RULE = df_table('salesrule/rule');
 		$this->run("
 			CREATE TABLE IF NOT EXISTS `{$t_REWARD}` (
 				`reward_id` int(11) unsigned NOT null AUTO_INCREMENT
@@ -131,10 +131,10 @@ class Df_Reward_Setup_1_0_0 extends Df_Core_Setup {
 		$this->addAttribute('order', 'reward_points_balance_to_refund', array('type' => 'int'));
 		$this->addAttribute('creditmemo', 'reward_points_balance_to_refund', array('type' => 'int'));
 		$this->addAttribute('order', 'reward_salesrule_points', array('type' => 'int'));
-		rm_table_delete('cms/page', 'identifier', 'reward-points');
+		df_table_delete('cms/page', 'identifier', 'reward-points');
 		$now = new Zend_Date(time());
 		$now = $now->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
-		$this->conn()->insert(rm_table('cms/page'), array(
+		$this->conn()->insert(df_table('cms/page'), array(
 			'title' => 'Накопительная программа'
 			,'root_template' => 'one_column'
 			,'identifier' => 'reward-points'
@@ -179,7 +179,7 @@ class Df_Reward_Setup_1_0_0 extends Df_Core_Setup {
 		',));
 		$pageId = $this->conn()->lastInsertId();
 		$this->conn()->insert(
-			rm_table('cms/page_store'), array('page_id' => $pageId, 'store_id' => 0)
+			df_table('cms/page_store'), array('page_id' => $pageId, 'store_id' => 0)
 		);
 		$columnsToMove = array('reward_update_notification','reward_warning_notification');
 		foreach ($columnsToMove as $column) {

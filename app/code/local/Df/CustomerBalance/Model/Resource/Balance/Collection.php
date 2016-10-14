@@ -5,7 +5,7 @@ class Df_CustomerBalance_Model_Resource_Balance_Collection extends Df_Core_Model
 	 * @return Df_CustomerBalance_Model_Resource_Balance_Collection
 	 */
 	public function addWebsitesFilter($websiteIds) {
-		$this->getSelect()->where(rm_quote_into('main_table.website_id IN (?)', $websiteIds));
+		$this->getSelect()->where(df_db_quote_into('main_table.website_id IN (?)', $websiteIds));
 		return $this;
 	}
 

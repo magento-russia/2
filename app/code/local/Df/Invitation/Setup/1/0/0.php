@@ -7,12 +7,12 @@ class Df_Invitation_Setup_1_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_CUSTOMER = rm_table('customer/entity');
-		$t_CUSTOMER_GROUP = rm_table('customer/customer_group');
-		$_HISTORY = rm_table(Df_Invitation_Model_Resource_Invitation_History::TABLE);
-		$t_INVITATION = rm_table(Df_Invitation_Model_Resource_Invitation::TABLE);
-		$t_TRACK = rm_table('df_invitation/invitation_track');
-		$t_STORE = rm_table('core_store');
+		$t_CUSTOMER = df_table('customer/entity');
+		$t_CUSTOMER_GROUP = df_table('customer/customer_group');
+		$_HISTORY = df_table(Df_Invitation_Model_Resource_Invitation_History::TABLE);
+		$t_INVITATION = df_table(Df_Invitation_Model_Resource_Invitation::TABLE);
+		$t_TRACK = df_table('df_invitation/invitation_track');
+		$t_STORE = df_table('core_store');
 		$this->dropTable($t_INVITATION);
 		$this->run("
 			create table if not exists `{$t_INVITATION}` (

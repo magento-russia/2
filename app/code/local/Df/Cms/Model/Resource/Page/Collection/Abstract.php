@@ -85,7 +85,7 @@ abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Df_Core_Mo
 		if (!$this->getFlag('user_name_column_joined')) {
 			$userField = new Zend_Db_Expr('IFnull(ut.username, -1)');
 			$this->getSelect()->joinLeft(
-				array('ut' => rm_table('admin/user'))
+				array('ut' => df_table('admin/user'))
 				,'ut.user_id = main_table.user_id'
 				,array('username' => $userField)
 			);

@@ -6,9 +6,9 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 	 */
 	public function getCategoriesLevelInfo(array $categoryIds) {
 		/** @var array(array(string => int)) $rows */
-		$rows = rm_conn()->fetchAll(
-			rm_select()
-				->from(rm_table('catalog/category'), array('level', 'entity_id'))
+		$rows = df_conn()->fetchAll(
+			df_select()
+				->from(df_table('catalog/category'), array('level', 'entity_id'))
 				->where('entity_id IN (?)', $categoryIds)
 			)
 		;
@@ -62,8 +62,8 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 	public function getRewritesForProducts(array $productIds, $storeId) {
 		$result = array();
 		/** @var Zend_Db_Statement_Pdo $query */
-		$query = rm_conn()->query(
-			rm_select()
+		$query = df_conn()->query(
+			df_select()
 				->from($this->getMainTable())
 				->where('? = store_id', $storeId)
 				->where('1 = is_system')
@@ -100,7 +100,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 		$this->_getWriteAdapter()->update(
 			$this->getMainTable()
 			, array('options' => 'RP', 'target_path' => $rewriteTo->getData('request_path'))
-			, rm_quote_into($this->getIdFieldName() . '=?', $rewriteFrom->getId())
+			, df_db_quote_into($this->getIdFieldName() . '=?', $rewriteFrom->getId())
 		);
 		$this->relinkRewrites($params);
 		return $this;
@@ -185,7 +185,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 		 */
 		$isActiveExpr = df()->db()->getCheckSql('c.value_id > 0', 'c.value', 'c.value');
 		$select = $adapter->select()
-			->from(array('main_table' => rm_table('catalog/category')), array(
+			->from(array('main_table' => df_table('catalog/category')), array(
 				'main_table.entity_id',
 				'main_table.parent_id',
 				'main_table.level',
@@ -209,12 +209,12 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 			;
 		}
 		/**
-		 * Нельзя использовать rm_table(array('catalog/category', 'int')),
+		 * Нельзя использовать df_table(array('catalog/category', 'int')),
 		 * потому что параметр-массив не поддерживается в Magento CE 1.4.
 		 * @uses Mage_Core_Model_Resource::getTableName()
 		 */
 		/** @var string $table */
-		$table = rm_table('catalog_category_entity_int');
+		$table = df_table('catalog_category_entity_int');
 		$select->joinLeft(array('d' => $table),
 				'd.attribute_id = :attribute_id AND d.store_id = 0 AND d.entity_id = main_table.entity_id',
 				array()
@@ -305,11 +305,11 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 		$rewriteFrom = dfa($params, 'from');
 		/** @var Varien_Object $rewriteTo */
 		$rewriteTo = dfa($params, 'to');
-		$where = rm_quote_into('(target_path=?)', $rewriteFrom->getData('request_path'));
+		$where = df_db_quote_into('(target_path=?)', $rewriteFrom->getData('request_path'));
 		if ($rewriteFrom->getData('store_id')) {
-			$where .= rm_quote_into(' AND (store_id=?)', $rewriteFrom->getData('store_id'));
+			$where .= df_db_quote_into(' AND (store_id=?)', $rewriteFrom->getData('store_id'));
 		}
-		$where .= rm_quote_into(' AND (request_path<>?)', $rewriteTo->getData('request_path'));
+		$where .= df_db_quote_into(' AND (request_path<>?)', $rewriteTo->getData('request_path'));
 		$this->_getWriteAdapter()->update(
 			$this->getMainTable()
 			,array('target_path' => $rewriteTo->getData('request_path'))

@@ -19,20 +19,20 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_E
 	public function attributeCodes_($setId) {
 		df_param_integer($setId, 0);
 		/** @var Zend_Db_Select $select */
-		$select = rm_select()
+		$select = df_select()
 			->from(
-				array('a' => rm_table('eav/attribute'))
+				array('a' => df_table('eav/attribute'))
 				, array('attribute_id', 'attribute_code')
 			)
 			->joinInner(
-				array('ea' => rm_table('eav/entity_attribute'))
+				array('ea' => df_table('eav/entity_attribute'))
 				, 'a.attribute_id = ea.attribute_id'
 				, null
 			)
 			->where('? = ea.attribute_set_id', $setId)
 		;
 		/** @var Zend_Db_Statement_Pdo $query */
-		$query = rm_conn()->query($select);
+		$query = df_conn()->query($select);
 		/** @var array(array(string => string)) $rows */
 		$rows = $query->fetchAll($style = Zend_Db::FETCH_ASSOC);
 		return array_column($rows, 'attribute_code', 'attribute_id');
@@ -70,15 +70,15 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_E
 	 */
 	public function mapFromNameToId_($type) {
 		/** @var Zend_Db_Select $select */
-		$select = rm_select()
+		$select = df_select()
 			->from(
-				array('s' => rm_table('eav/attribute_set'))
+				array('s' => df_table('eav/attribute_set'))
 				, array('attribute_set_id', 'attribute_set_name')
 			)
 			->where('? = s.entity_type_id', $type)
 		;
 		/** @var Zend_Db_Statement_Pdo $query */
-		$query = rm_conn()->query($select);
+		$query = df_conn()->query($select);
 		/** @var array(array(string => string)) $rows */
 		$rows = $query->fetchAll($style = Zend_Db::FETCH_ASSOC);
 		return array_column($rows, 'attribute_set_id', 'attribute_set_name');

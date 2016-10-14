@@ -9,7 +9,7 @@ abstract class Df_1C_Setup extends Df_Core_Setup {
 	 */
 	protected function add1CIdColumnToTable($tablePlaceholder) {
 		$f_1C_ID = Df_1C_Const::ENTITY_EXTERNAL_ID;
-		$t_TABLE = rm_table($tablePlaceholder);
+		$t_TABLE = df_table($tablePlaceholder);
 		$this->dropColumn($t_TABLE, Df_1C_Const::ENTITY_EXTERNAL_ID_OLD);
 		// Обратите внимание, что удаление колонки перед её созданием
 		// позволяет нам беспроблемно проводить одну и ту же установку много раз подряд

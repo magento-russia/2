@@ -80,7 +80,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 				$this->joinPageExistsNodeInfo($page);
 			}
 			$whereExpr = new Zend_Db_Expr(
-				rm_quote_into('clone.node_id IS NOT null OR main_table.node_id IN (?)', $nodeIds)
+				df_db_quote_into('clone.node_id IS NOT null OR main_table.node_id IN (?)', $nodeIds)
 			);
 			$this->getSelect()->where($whereExpr);
 			$this->setFlag('page_exists_or_node_id_filter_applied', true);
@@ -115,7 +115,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 	public function joinCmsPage() {
 		if (!$this->getFlag('cms_page_data_joined')) {
 			$this->getSelect()->joinLeft(
-				array('page_table' => rm_table('cms/page'))
+				array('page_table' => df_table('cms/page'))
 				,'main_table.page_id = page_table.page_id'
 				,array(
 					'page_title' => 'title'
@@ -134,7 +134,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 	public function joinMetaData() {
 		if (!$this->getFlag('meta_data_joined')) {
 			$this->getSelect()->joinLeft(
-				array('metadata_table' => rm_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA))
+				array('metadata_table' => df_table(Df_Cms_Model_Resource_Hierarchy_Node::TABLE_META_DATA))
 				,'main_table.node_id = metadata_table.node_id'
 				,array(
 					'pager_visibility'
@@ -167,11 +167,11 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 			$onClause = 'main_table.node_id = clone.parent_node_id AND clone.page_id = ?';
 			$ifPageExistExpr = new Zend_Db_Expr('IF(clone.node_id is null, 0, 1)');
 			$ifCurrentPageExpr = new Zend_Db_Expr(
-				rm_quote_into('IF(main_table.page_id = ?, 1, 0)', $page)
+				df_db_quote_into('IF(main_table.page_id = ?, 1, 0)', $page)
 			);
 			$this->getSelect()->joinLeft(
 				array('clone' => $this->getResource()->getMainTable())
-				,rm_quote_into($onClause, $page)
+				,df_db_quote_into($onClause, $page)
 				,array('page_exists' => $ifPageExistExpr, 'current_page' => $ifCurrentPageExpr)
 			);
 			$this->setFlag('page_exists_joined', true);
@@ -229,7 +229,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 			$selectStores =
 				$this->getConnection()->select()
 					->from(
-						array('store' => rm_table('cms/page_store'))
+						array('store' => df_table('cms/page_store'))
 						,new Zend_Db_Expr('GROUP_CONCAT(`store_id`)')
 					)
 					->where('store.page_id = main_table.page_id')

@@ -9,7 +9,7 @@ class Df_Invitation_Model_Resource_Invitation extends Df_Core_Model_Resource {
 		$inviterId = (int)$inviterId;
 		$referralId = (int)$referralId;
 		/** @var string $t_TRACK */
-		$t_TRACK = rm_table('df_invitation/invitation_track');
+		$t_TRACK = df_table('df_invitation/invitation_track');
 		$this->_getWriteAdapter()->query(
 			"REPLACE INTO {$t_TRACK} (inviter_id, referral_id)
 			VALUES ({$inviterId}, {$referralId})"

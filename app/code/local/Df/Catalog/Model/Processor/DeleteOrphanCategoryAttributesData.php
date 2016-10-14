@@ -30,10 +30,10 @@ class Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData {
 		 * то то же происходило и с товарными свойствами сторонней оформительской темы.
 		 */
 		/** @var int[] $attributeIds */
-		$attributeIds = rm_fetch_col_int('eav/attribute', 'attribute_id');;
+		$attributeIds = df_fetch_col_int('eav/attribute', 'attribute_id');;
 		foreach ($this->getTablesToProcess() as $table) {
 			/** @var string $table */
-			rm_table_delete_not($table, 'attribute_id', $attributeIds);
+			df_table_delete_not($table, 'attribute_id', $attributeIds);
 		}
 	}
 
@@ -41,7 +41,7 @@ class Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData {
 	private function getTablesToProcess() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array(rm_table('catalog/eav_attribute'));
+			$result = array(df_table('catalog/eav_attribute'));
 			foreach (Df_Catalog_Model_Resource_Category_Flat::getAttributeTypes() as $type) {
 				/** @var string $type */
 				$result[]= $this->resource()->getTableByType($type);

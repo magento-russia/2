@@ -13,12 +13,12 @@ class Df_Localization_Onetime_Processor_Db_Column extends Df_Core_Model {
 		/** @var string $column */
 		$column = $this->column()->getName();
 		/** @var Varien_Db_Select $select */
-		$select = rm_select()->from($this->tableName(), array($primaryKey, $column));
+		$select = df_select()->from($this->tableName(), array($primaryKey, $column));
 		if ($this->column()->where()) {
 			$select->where($this->column()->where());
 		}
 		/** @var array(array(string => string)) $rows */
-		$rows = rm_conn()->fetchAssoc($select);
+		$rows = df_conn()->fetchAssoc($select);
 		foreach ($rows as $row) {
 			self::$changed = false;
 			/** @var array(string => string) $row */
@@ -65,7 +65,7 @@ class Df_Localization_Onetime_Processor_Db_Column extends Df_Core_Model {
 				}
 			}
 			if (self::$changed) {
-				rm_conn()->update(
+				df_conn()->update(
 					$this->tableName()
 					, array($column => $this->column()->encode($valueAfter))
 					, array("? = {$primaryKey}" => $row[$primaryKey])

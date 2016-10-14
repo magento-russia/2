@@ -54,20 +54,20 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 		$setId = $this->getAttributeSetId($entityTypeId, $setId);
 		$groupId = $this->getAttributeGroupId($entityTypeId, $setId, $groupId);
 		$attributeId = $this->getAttributeId($entityTypeId, $attributeId);
-		$table = rm_table('eav/entity_attribute');
+		$table = df_table('eav/entity_attribute');
 		$bind = array(
 			'attribute_set_id' => $setId
 			, 'attribute_id' => $attributeId
 		);
-		$select = rm_select()
+		$select = df_select()
 			->from($table, array('attribute_group_id', 'entity_attribute_id'))
 			->where('attribute_set_id = :attribute_set_id')
 			->where('attribute_id = :attribute_id')
 		;
-		$row = rm_conn()->fetchRow($select, $bind);
+		$row = df_conn()->fetchRow($select, $bind);
 		if ($row) {
 			if ($row['attribute_group_id'] != $groupId) {
-				rm_conn()->update(
+				df_conn()->update(
 					$table
 					, array('attribute_group_id' => $groupId)
 					, array('? = entity_attribute_id ' => $row['entity_attribute_id'])
@@ -77,7 +77,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 			}
 		}
 		else {
-			rm_conn()->insert($table, array(
+			df_conn()->insert($table, array(
 				'entity_type_id' => $entityTypeId
 				,'attribute_set_id' => $setId
 				,'attribute_group_id' => $groupId

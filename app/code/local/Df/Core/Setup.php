@@ -30,7 +30,7 @@ class Df_Core_Setup extends Df_Core_Model {
 	 * @param string $table
 	 * @return void
 	 */
-	public function dropTable($table) {rm_table_drop($table, $this->conn());}
+	public function dropTable($table) {df_table_drop($table, $this->conn());}
 
 	/**
 	 * Метод публичен, потому что объекты данного класса могут передаваться в ресурсную модель,

@@ -7,10 +7,10 @@ class Df_PromoGift_Setup_1_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_CATALOG_PRODUCT_ENTITY = rm_table('catalog_product_entity');
-		$t_CORE_WEBSITE = rm_table('core/website');
-		$_PROMO_GIFT = rm_table(Df_PromoGift_Model_Resource_Gift::TABLE);
-		$t_SALES_RULE = rm_table('salesrule');
+		$t_CATALOG_PRODUCT_ENTITY = df_table('catalog_product_entity');
+		$t_CORE_WEBSITE = df_table('core/website');
+		$_PROMO_GIFT = df_table(Df_PromoGift_Model_Resource_Gift::TABLE);
+		$t_SALES_RULE = df_table('salesrule');
 		// Добавляем в таблицу «salesrule» поле «df_max_usages_per_quote»
 		// для ограничения числа применений правила для заказа
 		/** @var string $column */

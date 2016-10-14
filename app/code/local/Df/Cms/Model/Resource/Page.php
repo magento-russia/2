@@ -6,16 +6,16 @@ class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Mysql4_Page {
 	 * @return int[]
 	 */
 	public function findOrphanIds() {
-		return rm_conn()->fetchCol(
-			rm_select()
-				->from(array('p' => rm_table('cms_page')), 'page_id')
+		return df_conn()->fetchCol(
+			df_select()
+				->from(array('p' => df_table('cms_page')), 'page_id')
 				->joinLeft(
-					array('ps' => rm_table('cms_page_store'))
+					array('ps' => df_table('cms_page_store'))
 					, 'p.page_id = ps.page_id'
 					, null
 				)
 				// Отфильтровываем страницы, которые привязаны к ранее удалённым витринам.
-				->where(rm_conn()->prepareSqlCondition('ps.store_id', array(
+				->where(df_conn()->prepareSqlCondition('ps.store_id', array(
 					'nin' => array_keys(Mage::app()->getStores($withDefault = true, $codeKey = false))
 				)))
 				/**

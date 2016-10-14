@@ -7,9 +7,9 @@ class Df_Logging_Setup_1_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_LOG = rm_table(Df_Logging_Model_Resource_Event::TABLE);
-		$t_CHANGES = rm_table(Df_Logging_Model_Resource_Event_Changes::TABLE);
-		$t_USER = rm_table('admin/user');
+		$t_LOG = df_table(Df_Logging_Model_Resource_Event::TABLE);
+		$t_CHANGES = df_table(Df_Logging_Model_Resource_Event_Changes::TABLE);
+		$t_USER = df_table('admin/user');
 		$this->dropTable($t_LOG);
 		$this->run("
 			create table if not exists `{$t_LOG}` (

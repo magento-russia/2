@@ -9,7 +9,7 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 		if ($customerId) {
 			$this->_getWriteAdapter()->delete(
 				$this->getMainTable()
-				,rm_quote_into('customer_id = ?', $customerId) . ' AND `website_id` IS null'
+				,df_db_quote_into('customer_id = ?', $customerId) . ' AND `website_id` IS null'
 			);
 		}
 		return $this;
@@ -22,13 +22,13 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 	 */
 	public function getRewardSalesrule($rule) {
 		$data = array();
-		$select = rm_select()->from(rm_table('df_reward/reward_salesrule'));
+		$select = df_select()->from(df_table('df_reward/reward_salesrule'));
 		if (is_array($rule)) {
 			$select->where('rule_id IN (?)', $rule);
-			$data = rm_conn()->fetchAll($select);
+			$data = df_conn()->fetchAll($select);
 		} else if ($rule) {
 			$select->where('rule_id = ?', (int)$rule);
-			$data = rm_conn()->fetchRow($select);
+			$data = df_conn()->fetchRow($select);
 		}
 		return $data;
 	}
@@ -41,12 +41,12 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 	 * @return Df_Reward_Model_Resource_Reward
 	 */
 	public function loadByCustomerId(Df_Reward_Model_Reward $reward, $customerId, $websiteId) {
-		$select = rm_select()
+		$select = df_select()
 			->from($this->getMainTable())
 			->where('customer_id = ?', $customerId)
 			->where('website_id = ?', $websiteId)
 		;
-		$data = rm_conn()->fetchRow($select);
+		$data = df_conn()->fetchRow($select);
 		if ($data) {
 			$reward->addData($data);
 		}
@@ -66,7 +66,7 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 			$this->_getWriteAdapter()->update(
 				$this->getMainTable()
 				,array('website_id' => null, 'website_currency_code' => $baseCurrencyCode)
-				, rm_quote_into('website_id = ?', $websiteId)
+				, df_db_quote_into('website_id = ?', $websiteId)
 			);
 		}
 		return $this;
@@ -79,18 +79,18 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 	 * @return Df_Reward_Model_Resource_Reward
 	 */
 	public function saveRewardSalesrule($ruleId, $pointsDelta) {
-		$select = rm_select()
-			->from(rm_table('df_reward/reward_salesrule'), 'rule_id')
+		$select = df_select()
+			->from(df_table('df_reward/reward_salesrule'), 'rule_id')
 			->where('rule_id = ?', $ruleId);
-		if (rm_conn()->fetchOne($select)) {
-			rm_conn()->update(
-				rm_table('df_reward/reward_salesrule')
+		if (df_conn()->fetchOne($select)) {
+			df_conn()->update(
+				df_table('df_reward/reward_salesrule')
 				, array('points_delta' => $pointsDelta)
-				, rm_quote_into('rule_id = ?', $ruleId)
+				, df_db_quote_into('rule_id = ?', $ruleId)
 			);
 		}
 		else {
-			rm_conn()->insert(rm_table('df_reward/reward_salesrule'), array(
+			df_conn()->insert(df_table('df_reward/reward_salesrule'), array(
 				'rule_id' => $ruleId,'points_delta' => $pointsDelta
 			));
 		}

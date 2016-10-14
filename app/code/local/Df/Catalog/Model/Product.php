@@ -693,15 +693,15 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			 * В противном случае значение свойства minimal_price надо загрузить вручную.
 			 */
 			/** @var Zend_Db_Select $select */
-			$select = rm_select()
-				->from(array('maintable' => rm_table('catalog/product_index_price')), 'min_price')
+			$select = df_select()
+				->from(array('maintable' => df_table('catalog/product_index_price')), 'min_price')
 				->where('? = maintable.entity_id', $this->getId())
 				->where('? = maintable.website_id', $this->getStore()->getWebsiteId())
 				->where('? = maintable.customer_group_id', 0)
 				->where('? = maintable.tax_class_id', 0)
 			;
 			/** @var Zend_Db_Statement_Pdo $query */
-			$query = rm_conn()->query($select);
+			$query = df_conn()->query($select);
 			/** @var array(string => string) $row */
 			$row = $query->fetch($style = Zend_Db::FETCH_ASSOC);
 			if (is_array($row)) {

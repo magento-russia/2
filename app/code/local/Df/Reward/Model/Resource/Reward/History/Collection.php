@@ -10,7 +10,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 			return $this;
 		}
 		$this->getSelect()->joinInner(
-			array('reward_table' => rm_table(Df_Reward_Model_Resource_Reward::TABLE))
+			array('reward_table' => df_table(Df_Reward_Model_Resource_Reward::TABLE))
 			,'reward_table.reward_id = main_table.reward_id'
 			, array('customer_id', 'points_balance_total' => 'points_balance')
 		);
@@ -105,14 +105,14 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 			 )
 			->joinLeft(
 				array('clt' => $lastname->getBackend()->getTable())
-				, rm_quote_into(
+				, df_db_quote_into(
 					'clt.entity_id=reward_table.customer_id AND clt.attribute_id = ?'
 					, $lastname->getAttributeId())
 				, array('customer_lastname' => 'value')
 			 )
 			 ->joinLeft(
 				 array('cft' => $firstname->getBackend()->getTable())
-				 , rm_quote_into(
+				 , df_db_quote_into(
 					 'cft.entity_id=reward_table.customer_id AND cft.attribute_id = ?'
 					 , $firstname->getAttributeId()
 				 )

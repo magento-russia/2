@@ -6,8 +6,8 @@ class Df_PageCache_Model_Resource_Crawler extends Df_Core_Model_Resource {
 	 * @return Zend_Db_Statement
 	 */
 	public function getUrlStmt($storeId) {
-		return rm_conn()->query(rm_select()
-			->from(rm_table(Df_Catalog_Model_Resource_Url::TABLE), array('store_id', 'request_path'))
+		return df_conn()->query(df_select()
+			->from(df_table(Df_Catalog_Model_Resource_Url::TABLE), array('store_id', 'request_path'))
 			->where('? = store_id', $storeId)
 			->where('1 = is_system'))
 		;

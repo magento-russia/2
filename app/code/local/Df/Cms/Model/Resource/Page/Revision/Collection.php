@@ -22,7 +22,7 @@ class Df_Cms_Model_Resource_Page_Revision_Collection
 				$columns[]= $cols;
 			}
 			$this->getSelect()->joinInner(
-				array('ver_table' => rm_table(Df_Cms_Model_Resource_Page_Version::TABLE))
+				array('ver_table' => df_table(Df_Cms_Model_Resource_Page_Version::TABLE))
 				,'ver_table.version_id = main_table.version_id'
 				, $columns
 			);

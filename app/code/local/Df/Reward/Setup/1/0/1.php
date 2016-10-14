@@ -7,12 +7,12 @@ class Df_Reward_Setup_1_0_1 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$tableReward = rm_table(Df_Reward_Model_Resource_Reward::TABLE);
-		$tableRewardHistory = rm_table(Df_Reward_Model_Resource_Reward_History::TABLE);
-		$tableRewardRate = rm_table(Df_Reward_Model_Resource_Reward_Rate::TABLE);
-		$tableRewardWrong = rm_table($tableReward);
-		$tableRewardHistoryWrong = rm_table($tableRewardHistory);
-		$tableRewardRateWrong = rm_table($tableRewardRate);
+		$tableReward = df_table(Df_Reward_Model_Resource_Reward::TABLE);
+		$tableRewardHistory = df_table(Df_Reward_Model_Resource_Reward_History::TABLE);
+		$tableRewardRate = df_table(Df_Reward_Model_Resource_Reward_Rate::TABLE);
+		$tableRewardWrong = df_table($tableReward);
+		$tableRewardHistoryWrong = df_table($tableRewardHistory);
+		$tableRewardRateWrong = df_table($tableRewardRate);
 		/** @var array(string => string) $renames */
 		$renames = array(
 			$tableRewardWrong => $tableReward

@@ -18,10 +18,10 @@ class Df_Tax_M extends Df_Core_Model {
 			/** @var int|null $result */
 			$result = null;
 			/** @var Zend_Db_Select $select */
-			$select = rm_select()
-				->from(array('calc' => rm_table('tax_calculation')), 'product_tax_class_id')
+			$select = df_select()
+				->from(array('calc' => df_table('tax_calculation')), 'product_tax_class_id')
 				->joinInner(
-					array('rate' => rm_table('tax_calculation_rate'))
+					array('rate' => df_table('tax_calculation_rate'))
 					,'calc.tax_calculation_rate_id = rate.tax_calculation_rate_id'
 					,null
 				)
@@ -34,7 +34,7 @@ class Df_Tax_M extends Df_Core_Model {
 				->where('(? = rate.rate)', $rate)
 			;
 			/** @var Zend_Db_Statement_Pdo $query */
-			$query = rm_conn()->query($select);
+			$query = df_conn()->query($select);
 			/** @var array(array(string => string)) $rows */
 			$rows = $query->fetchAll($style = Zend_Db::FETCH_ASSOC);
 			/** @var int $count */

@@ -13,9 +13,9 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	public function checkIdentifier($identifier, $storeId) {
 		$adapter = $this->_getReadAdapter();
 		$select  = $adapter->select()
-			->from(array('main_table' => rm_table('cms/page')), array('page_id', 'website_root'))
+			->from(array('main_table' => df_table('cms/page')), array('page_id', 'website_root'))
 			->join(
-				array('cps' => rm_table('cms/page_store')),'main_table.page_id = `cps`.page_id', null)
+				array('cps' => df_table('cms/page_store')),'main_table.page_id = `cps`.page_id', null)
 			->where('main_table.identifier = ?', $identifier)
 			->where('main_table.is_active=1 AND `cps`.store_id in (0, ?) ', $storeId)
 			->order('store_id DESC')
@@ -33,7 +33,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @return void
 	 */
 	public function deleteNodesByPageId($pageId) {
-		rm_table_delete($this->getMainTable(), 'page_id', $pageId);
+		df_table_delete($this->getMainTable(), 'page_id', $pageId);
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	public function deleteRootNodesByPageId($pageId) {
 		$this->_getWriteAdapter()->delete(
 			$this->getMainTable()
-			, rm_quote_into('(? = page_id) AND (parent_node_id IS null)', $pageId)
+			, df_db_quote_into('(? = page_id) AND (parent_node_id IS null)', $pageId)
 		);
 		return $this;
 	}
@@ -55,7 +55,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @param int|int[] $nodeIds
 	 * @return void
 	 */
-	public function dropNodes($nodeIds) {rm_table_delete($this->getMainTable(), 'node_id', $nodeIds);}
+	public function dropNodes($nodeIds) {df_table_delete($this->getMainTable(), 'node_id', $nodeIds);}
 
 	/**
 	 * Retrieve tree meta data flags from secondary table.
@@ -68,7 +68,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		$read = $this->_getReadAdapter();
 		$select = $read->select();
 		$select
-			->from(rm_table(self::TABLE_META_DATA))
+			->from(df_table(self::TABLE_META_DATA))
 			->where('node_id = ?', df_first(df_explode_xpath($object->getXpath())))
 		;
 		return $read->fetchRow($select);
@@ -119,13 +119,13 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		if ($parentIds) {
 			$parentId = $parentIds[count($parentIds) -1];
 			if ($this->_treeIsBrief) {
-				$where = rm_quote_into($this->getMainTable().'.node_id IN (?)', $parentIds);
+				$where = df_db_quote_into($this->getMainTable().'.node_id IN (?)', $parentIds);
 				// Collect neighbours if there are no children
 				if (count($children) == 0) {
-					$where.= rm_quote_into(' OR parent_node_id=?', $object->getParentNodeId());
+					$where.= df_db_quote_into(' OR parent_node_id=?', $object->getParentNodeId());
 				}
 			} else {
-				$where = rm_quote_into('parent_node_id IN (?) OR parent_node_id IS null', $parentIds);
+				$where = df_db_quote_into('parent_node_id IN (?) OR parent_node_id IS null', $parentIds);
 			}
 		} else {
 			$where = 'parent_node_id IS null';
@@ -150,11 +150,11 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @return array
 	 */
 	public function getTreeXpathsByPage($pageId) {
-		$select = rm_select()
+		$select = df_select()
 			->from($this->getMainTable(), 'xpath')
 			->where('? = page_id', $pageId)
 		;
-		$rows = rm_conn()->fetchAll($select);
+		$rows = df_conn()->fetchAll($select);
 		return array_column($rows, 'xpath');
 	}
 
@@ -214,9 +214,9 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		//if ($object->getParentNodeId()) {
 		//	return $this;
 		//}
-		$preparedData = $this->_prepareDataForTable($object, rm_table(self::TABLE_META_DATA));
+		$preparedData = $this->_prepareDataForTable($object, df_table(self::TABLE_META_DATA));
 		$this->_getWriteAdapter()->insertOnDuplicate(
-			rm_table(self::TABLE_META_DATA), $preparedData, array_keys($preparedData));
+			df_table(self::TABLE_META_DATA), $preparedData, array_keys($preparedData));
 		return $this;
 	}
 
@@ -277,7 +277,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 			->from(
 				array('node_table' => $this->getMainTable()),array($this->getIdFieldName(), 'parent_node_id', 'page_id', 'identifier', 'request_url'))
 			->joinLeft(
-				array('page_table' => rm_table('cms/page')),'node_table.page_id=page_table.page_id',array(
+				array('page_table' => df_table('cms/page')),'node_table.page_id=page_table.page_id',array(
 					'page_identifier' => 'identifier',))
 			->where('xpath LIKE ?', $xpath. '/%')
 			->orWhere('xpath = ?', $xpath)
@@ -344,7 +344,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		if ($object->getParentNodeId() === null) {
 			$where = 'parent_node_id IS null';
 		} else {
-			$where = rm_quote_into('parent_node_id=?', $object->getParentNodeId());
+			$where = df_db_quote_into('parent_node_id=?', $object->getParentNodeId());
 		}
 		$select = $this->_getLoadSelectWithoutWhere()
 			->where($where)
@@ -367,7 +367,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 				'page_title'		=> 'title','page_identifier'   => 'identifier','page_is_active'	=> 'is_active'
 			);
 			$select = $this->_getReadAdapter()->select()
-				->from(rm_table('cms/page'), $columns)
+				->from(df_table('cms/page'), $columns)
 				->where('page_id=?', $pageId)
 				->limit(1);
 			$row = $this->_getReadAdapter()->fetchRow($select);
@@ -387,8 +387,8 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node
 	 */
 	public function removePageFromNodes($pageId, $nodes) {
-		$whereClause = rm_quote_into('page_id = ? AND ', $pageId);
-		$whereClause .= rm_quote_into('parent_node_id IN (?)', $nodes);
+		$whereClause = df_db_quote_into('page_id = ? AND ', $pageId);
+		$whereClause .= df_db_quote_into('parent_node_id IN (?)', $nodes);
 		$this->_getWriteAdapter()->delete($this->getMainTable(), $whereClause);
 		return $this;
 	}
@@ -426,7 +426,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 			// update xpath
 			$xpath = $object->getXpath() . $object->getId();
 			$bind = array('xpath' => $xpath);
-			$where = rm_quote_into($this->getIdFieldName() . '=?', $object->getId());
+			$where = df_db_quote_into($this->getIdFieldName() . '=?', $object->getId());
 			$this->_getWriteAdapter()->update($this->getMainTable(), $bind, $where);
 			$object->setXpath($xpath);
 		}
@@ -519,7 +519,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 				$this->_getWriteAdapter()->update(
 					$this->getMainTable()
 					, array('request_url' => $requestUrl)
-					, rm_quote_into($this->getIdFieldName().'=?', $nodeRow[$this->getIdFieldName()])
+					, df_db_quote_into($this->getIdFieldName().'=?', $nodeRow[$this->getIdFieldName()])
 				);
 			}
 
@@ -561,7 +561,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	{
 		$select = parent::_getLoadSelect($field, $value, $object);
 		$select->joinLeft(
-			array('page_table' => rm_table('cms/page'))
+			array('page_table' => df_table('cms/page'))
 			,$this->getMainTable() . '.page_id = page_table.page_id'
 			,array(
 				'page_title' => 'title'
@@ -569,7 +569,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 				,'page_is_active' => 'is_active'
 			))
 			->joinLeft(
-				array('metadata_table' => rm_table(self::TABLE_META_DATA))
+				array('metadata_table' => df_table(self::TABLE_META_DATA))
 				,$this->getMainTable() . '.' . $this->getIdFieldName() . ' = metadata_table.node_id'
 				,array(
 					'pager_visibility','pager_frame','pager_jump'

@@ -25,10 +25,10 @@ class Df_Cms_Model_Resource_Page_Version extends Df_Core_Model_Resource {
 	public function isVersionHasPublishedRevision(Mage_Core_Model_Abstract $object)
 	{
 		$select = $this->_getReadAdapter()->select();
-		$select->from(array('p' => rm_table('cms/page')), null)
+		$select->from(array('p' => df_table('cms/page')), null)
 			->where('p.page_id = ?', $object->getPageId())
 			->join(
-				array('r' => rm_table(Df_Cms_Model_Resource_Page_Revision::TABLE))
+				array('r' => df_table(Df_Cms_Model_Resource_Page_Revision::TABLE))
 				,'r.revision_id = p.published_revision_id'
 				, 'r.version_id'
 			)

@@ -16,8 +16,8 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 		 * (например, при назначении налоговой ставки товару)
 		 * не показывать администраторам интернет-магазинам одной страны налоговые ставки других стран).
 		 */
-		rm_conn()->addColumn(
-			rm_table('tax/tax_class'), Df_Tax_Model_Class::P__ISO2, 'varchar(2) null default null'
+		df_conn()->addColumn(
+			df_table('tax/tax_class'), Df_Tax_Model_Class::P__ISO2, 'varchar(2) null default null'
 		);
 		self::deleteDemoData();
 		self::addRules();
@@ -73,8 +73,8 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 			))->getId();
 			// Привязываем к только что созданному налоговому классу те категории покупателей,
 			// которые ранее были привязанны к демо-классам.
-			rm_conn()->update(
-				rm_table('customer/customer_group')
+			df_conn()->update(
+				df_table('customer/customer_group')
 				, array('tax_class_id' => $result)
 				, array('tax_class_id IN (?)' => self::demoCustomerTaxClassIds())
 			);
@@ -89,7 +89,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	private static function deleteCalculation($column, $ids) {
-		rm_table_delete('tax/tax_calculation', $column, $ids);
+		df_table_delete('tax/tax_calculation', $column, $ids);
 	}
 
 	/**
@@ -111,8 +111,8 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 		$t_RATE = 'tax/tax_calculation_rate';
 		$f_RATE_ID = 'tax_calculation_rate_id';
 		/** @var int[] $demoIds */
-		$demoIds = rm_fetch_col_int($t_RATE, $f_RATE_ID, 'tax_country_id', 'US');
-		rm_table_delete($t_RATE, $f_RATE_ID, $demoIds);
+		$demoIds = df_fetch_col_int($t_RATE, $f_RATE_ID, 'tax_country_id', 'US');
+		df_table_delete($t_RATE, $f_RATE_ID, $demoIds);
 		self::deleteCalculation($f_RATE_ID, $demoIds);
 	}
 
@@ -125,14 +125,14 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 		$t_RULE = 'tax/tax_calculation_rule';
 		$f_RULE_ID = 'tax_calculation_rule_id';
 		/** @var int[] $demoIds */
-		$demoIds = rm_fetch_col_int($t_RULE, $f_RULE_ID, 'code', array(
+		$demoIds = df_fetch_col_int($t_RULE, $f_RULE_ID, 'code', array(
 			'Retail Customer - Taxable Good - Rate 1',
 			'Wholesale Customer - Tax Exempt',
 			'Private Sales - Shipping Taxes',
 			'Private Sales - Taxable Goods - Rate 2',
 			'Not Logged In - Taxable Goods'
 		));
-		rm_table_delete($t_RULE, $f_RULE_ID, $demoIds);
+		df_table_delete($t_RULE, $f_RULE_ID, $demoIds);
 		self::deleteCalculation($f_RULE_ID, $demoIds);
 	}
 
@@ -143,7 +143,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	private static function deleteDemoTaxClasses() {
-		rm_table_delete('tax/tax_class', 'class_id', array_merge(
+		df_table_delete('tax/tax_class', 'class_id', array_merge(
 			self::demoCustomerTaxClassIds(), self::demoProductTaxClassIds()
 		));
 		self::deleteCalculation('customer_tax_class_id', self::demoCustomerTaxClassIds());
@@ -308,7 +308,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 	 * @return int[]
 	 */
 	private static function taxClassIds(array $names) {
-		return rm_fetch_col_int('tax/tax_class', 'class_id', 'class_name', $names);
+		return df_fetch_col_int('tax/tax_class', 'class_id', 'class_name', $names);
 	}
 
 	/**
@@ -317,7 +317,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 	 */
 	private static function настроитьДляСНГ() {
 		/** @var array(array(string => string)) $entries */
-		$entries = rm_fetch_all('core/config_data', 'path', 'general/store_information/merchant_country');
+		$entries = df_fetch_all('core/config_data', 'path', 'general/store_information/merchant_country');
 		foreach ($entries as $entry) {
 			/** @var array(string => string) $entry */
 			/** @var string $iso2 */

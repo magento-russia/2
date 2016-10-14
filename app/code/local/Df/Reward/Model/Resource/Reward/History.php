@@ -39,8 +39,8 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 	 */
 	public function isExistHistoryUpdate($customerId, $action, $websiteId, $entity)
 	{
-		$select = rm_select()
-			->from(array('reward_table' => rm_table(Df_Reward_Model_Resource_Reward::TABLE)), null)
+		$select = df_select()
+			->from(array('reward_table' => df_table(Df_Reward_Model_Resource_Reward::TABLE)), null)
 			->joinInner(array('history_table' => $this->getMainTable()),'history_table.reward_id = reward_table.reward_id', null)
 			->where('history_table.action = ?', $action)
 			->where('history_table.website_id = ?', $websiteId)
@@ -64,7 +64,7 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 	{
 		$select = $this->_getReadAdapter()->select()->from(array('history_table' => $this->getMainTable()), array('COUNT(*)'))
 			->joinInner(
-				array('reward_table' => rm_table(Df_Reward_Model_Resource_Reward::TABLE))
+				array('reward_table' => df_table(Df_Reward_Model_Resource_Reward::TABLE))
 				,'history_table.reward_id = reward_table.reward_id'
 				, null
 			)
@@ -142,7 +142,7 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 			$newValue = '0000-00-00 00:00:00';
 		}
 		$sql = "UPDATE `{$this->getMainTable()}` SET `expired_at_dynamic`={$newValue} WHERE ";
-		$sql.= rm_quote_into("`website_id` in (?)", df_array($websiteIds));
+		$sql.= df_db_quote_into("`website_id` in (?)", df_array($websiteIds));
 		$this->_getWriteAdapter()->query($sql);
 	}
 
@@ -214,7 +214,7 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 					)
 				;
 				$this->_getWriteAdapter()->update(
-					rm_table(Df_Reward_Model_Resource_Reward::TABLE)
+					df_table(Df_Reward_Model_Resource_Reward::TABLE)
 					, $bind
 					, array('? = reward_id' => $rewardId)
 				);

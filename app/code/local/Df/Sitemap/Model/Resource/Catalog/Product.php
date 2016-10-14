@@ -47,19 +47,19 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Mysql
 		$urCondions = array(
 			'e.entity_id=ur.product_id'
 			, $categoryCondition
-			, rm_quote_into('ur.store_id=?', $store->getId())
-			, rm_quote_into('ur.is_system=?', 1)
+			, df_db_quote_into('ur.store_id=?', $store->getId())
+			, df_db_quote_into('ur.is_system=?', 1)
 		);
 		$this->_select = $this->_getWriteAdapter()->select()
 			->from(array('e' => $this->getMainTable()), $this->getIdFieldName())
 			->join(
-				array('w' => rm_table('catalog/product_website'))
+				array('w' => df_table('catalog/product_website'))
 				,'e.entity_id=w.product_id'
 				,null
 			)
 			->where('w.website_id=?', $store->getWebsiteId())
 			->joinLeft(
-				array('ur' => rm_table(Df_Catalog_Model_Resource_Url::TABLE))
+				array('ur' => df_table(Df_Catalog_Model_Resource_Url::TABLE))
 				,implode(' AND ', $urCondions),array('url' => 'request_path')
 			)
 		;

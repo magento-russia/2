@@ -25,7 +25,7 @@ class Df_Core_Helper_Db extends Mage_Core_Helper_Abstract {
 	 * @return void
 	 */
 	public function truncate($table, $adapter = null) {
-		$adapter = $adapter ? $adapter : rm_conn();
+		$adapter = $adapter ? $adapter : df_conn();
 		/** @var bool $truncated */
 		$truncated = false;
 		/** @var string $method */

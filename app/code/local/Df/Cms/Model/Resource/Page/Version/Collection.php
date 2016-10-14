@@ -48,7 +48,7 @@ class Df_Cms_Model_Resource_Page_Version_Collection
 	{
 		if (!$this->getFlag('revisions_joined')) {
 			$this->getSelect()->joinLeft(
-				array('rev_table' => rm_table(Df_Cms_Model_Resource_Page_Revision::TABLE))
+				array('rev_table' => df_table(Df_Cms_Model_Resource_Page_Revision::TABLE))
 				,'rev_table.version_id = main_table.version_id'
 				, '*'
 			);

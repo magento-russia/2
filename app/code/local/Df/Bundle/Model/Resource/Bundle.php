@@ -9,7 +9,7 @@ class Df_Bundle_Model_Resource_Bundle extends Mage_Bundle_Model_Mysql4_Bundle {
 		//$this->dropAllUnneededSelections($productId, array());
 		// При удалении опции все данные опции из других таблиц удаляться автоматически
 		// (ON DELETE CASCADE)
-		rm_table_delete('bundle/option', 'parent_id', $productId);
+		df_table_delete('bundle/option', 'parent_id', $productId);
 	}
 
 	/** @return Df_Bundle_Model_Resource_Bundle */

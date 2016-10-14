@@ -141,7 +141,7 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
 		foreach ($websiteIds as $websiteId) {
 			/** @var int $websiteId */
 			if (!isset($mapFromWebsiteToAllProductIds[$websiteId])) {
-				$mapFromWebsiteToAllProductIds[$websiteId] = rm_fetch_col_int(
+				$mapFromWebsiteToAllProductIds[$websiteId] = df_fetch_col_int(
 					'catalog/product_website', 'product_id', 'website_id', $websiteId
 				);
 			}

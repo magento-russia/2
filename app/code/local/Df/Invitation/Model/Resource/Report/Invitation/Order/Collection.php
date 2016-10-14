@@ -53,7 +53,7 @@ class Df_Invitation_Model_Resource_Report_Invitation_Order_Collection
 	protected function _getPurchaseNumber($select) {
 		/** @var $select Zend_Db_Select */
 		$select->reset(Zend_Db_Select::COLUMNS)->joinRight(
-			array('o' => rm_table('sales/order'))
+			array('o' => df_table('sales/order'))
 			,'o.customer_id = main_table.referral_id AND o.store_id = main_table.store_id'
 			,array('COUNT(DISTINCT main_table.invitation_id)')
 		);

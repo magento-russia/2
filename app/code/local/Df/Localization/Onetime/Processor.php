@@ -188,12 +188,12 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 		$attributes = df_csv_parse((string)$dictionary->descendS('attributes/used_in_product_listing'));
 		if ($attributes) {
 			/** @var int[] $atttibuteIds */
-			$atttibuteIds = rm_fetch_col_int_unique(
+			$atttibuteIds = df_fetch_col_int_unique(
 				'eav/attribute', 'attribute_id', 'attribute_code', $attributes
 			);
 			if ($atttibuteIds) {
-				rm_conn()->update(
-					rm_table('catalog/eav_attribute')
+				df_conn()->update(
+					df_table('catalog/eav_attribute')
 					, array('used_in_product_listing' => 1)
 					, array('attribute_id IN (?)' => $atttibuteIds)
 				);

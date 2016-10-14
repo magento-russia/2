@@ -31,7 +31,7 @@ class Df_Directory_Setup_Processor_Region extends Df_Core_Model {
 	private function addRegionLocaleNameToDb(Mage_Directory_Model_Region $region, $localeCode) {
 		df_param_string($localeCode, 1);
 		/** @var Zend_Db_Select $select */
-		$select = rm_select()
+		$select = df_select()
 			->from(
 				array('maintable' => $this->getTableRegionName())
 				, Df_Directory_Model_Resource_Region::s()->getIdFieldName()
@@ -40,16 +40,16 @@ class Df_Directory_Setup_Processor_Region extends Df_Core_Model {
 			->where('? = maintable.region_id', $region->getId())
 		;
 		/** @var Zend_Db_Statement_Pdo $query */
-		$query = rm_conn()->query($select);
+		$query = df_conn()->query($select);
 		if (false === $query->fetch()) {
-			rm_conn()->insert($this->getTableRegionName(), array(
+			df_conn()->insert($this->getTableRegionName(), array(
 				Df_Directory_Model_Region::P__LOCALE =>	$localeCode
 				,Df_Directory_Model_Region::P__REGION_ID =>	$region->getId()
 				,Df_Directory_Model_Region::P__NAME => $this->getRegion()->getName()
 			));
 		}
 		else {
-			rm_conn()->update(
+			df_conn()->update(
 				$this->getTableRegionName()
 				,array(Df_Directory_Model_Region::P__NAME => $this->getRegion()->getName())
 				,array('? = locale' => $localeCode, '? = region_id' => $region->getId())
@@ -98,7 +98,7 @@ class Df_Directory_Setup_Processor_Region extends Df_Core_Model {
 
 	/** @return string */
 	private function getTableRegionName() {
-		return rm_table(Df_Directory_Model_Resource_Region::TABLE__NAME);
+		return df_table(Df_Directory_Model_Resource_Region::TABLE__NAME);
 	}
 
 	/**

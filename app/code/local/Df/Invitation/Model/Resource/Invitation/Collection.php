@@ -16,7 +16,7 @@ class Df_Invitation_Model_Resource_Invitation_Collection extends Df_Core_Model_R
 	/** @return Df_Invitation_Model_Resource_Invitation_Collection */
 	public function addInviteeInformation() {
 		$this->getSelect()->joinLeft(
-			array('c' => rm_table('customer/entity'))
+			array('c' => df_table('customer/entity'))
 			,'main_table.referral_id = c.entity_id'
 			,array('invitee_email' => 'c.email')
 		);
@@ -35,7 +35,7 @@ class Df_Invitation_Model_Resource_Invitation_Collection extends Df_Core_Model_R
 	/** @return Df_Invitation_Model_Resource_Invitation_Collection */
 	public function addWebsiteInformation() {
 		$this->getSelect()->joinInner(
-			array('w' => rm_table('core/store'))
+			array('w' => df_table('core/store'))
 			,'main_table.store_id = w.store_id'
 			,'w.website_id'
 		);

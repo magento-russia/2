@@ -43,7 +43,7 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 					$adapter->insert($this->getMainTable(), $data);
 				}
 				else {
-					$adapter->update($this->getMainTable(), $data, rm_quote_into(
+					$adapter->update($this->getMainTable(), $data, df_db_quote_into(
 						sprintf('%s = ?', $this->getIdFieldName())
 						,dfa(df_first($rows), $this->getIdFieldName())
 					));

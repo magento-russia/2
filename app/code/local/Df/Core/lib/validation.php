@@ -1036,7 +1036,7 @@ function df_int($value, $allowNull = true) {
  * 1) намеренно не проводит валидацию данных ради ускорения
  * 2) работает только с массивами
  * Ключи массива сохраняются: http://3v4l.org/NHgdK
- * @used-by rm_fetch_col_int()
+ * @used-by df_fetch_col_int()
  * @used-by rm_products_update()
  * @used-by Df_Catalog_Model_Product_Exporter::applyRule()
  * @used-by Df_Shipping_Rate_Request::getQty()

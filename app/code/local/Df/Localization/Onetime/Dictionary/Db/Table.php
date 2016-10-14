@@ -17,7 +17,7 @@ class Df_Localization_Onetime_Dictionary_Db_Table extends Df_Core_Xml_Parser_Ent
 	 */
 	public function getName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_table($this->getAttribute('name'));
+			$this->{__METHOD__} = df_table($this->getAttribute('name'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -31,7 +31,7 @@ class Df_Localization_Onetime_Dictionary_Db_Table extends Df_Core_Xml_Parser_Ent
 	 */
 	public function primaryKey() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_primary_key($this->getName());
+			$this->{__METHOD__} = df_primary_key($this->getName());
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

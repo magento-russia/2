@@ -61,7 +61,7 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 	 * @return void
 	 */
 	private function regionsDelete() {
-		rm_table_delete(Df_Directory_Model_Resource_Region::TABLE, 'country_id', $this->getCountryIso2Code());
+		df_table_delete(Df_Directory_Model_Resource_Region::TABLE, 'country_id', $this->getCountryIso2Code());
 	}
 
 	/**
@@ -69,8 +69,8 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 	 * @return Df_Directory_Setup_Processor_InstallRegions
 	 */
 	private function regionInsert(array $regionData) {
-		rm_conn()->insert(
-			rm_table(Df_Directory_Model_Resource_Region::TABLE)
+		df_conn()->insert(
+			df_table(Df_Directory_Model_Resource_Region::TABLE)
 			,array(
 				Df_Directory_Model_Region::P__COUNTRY_ID => $this->getCountryIso2Code()
 				,Df_Directory_Model_Region::P__CODE => dfa($regionData, self::REGION__CODE)
@@ -80,9 +80,9 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 			)
 		);
 		/** @var int $regionId */
-		$regionId = rm_nat(rm_conn()->lastInsertId());
-		rm_conn()->insert(
-			rm_table(Df_Directory_Model_Resource_Region::TABLE__NAME)
+		$regionId = rm_nat(df_conn()->lastInsertId());
+		df_conn()->insert(
+			df_table(Df_Directory_Model_Resource_Region::TABLE__NAME)
 			,array(
 				'locale' => $this->getLocaleCode()
 				,'region_id' => $regionId

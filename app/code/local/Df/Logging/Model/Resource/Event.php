@@ -7,9 +7,10 @@ class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 	 * @return array
 	 */
 	public function getAllFieldValues($field, $order = true) {
+		$field = df_db_quote($field);
 		return
 			$this->_getReadAdapter()->fetchCol(
-				"SELECT DISTINCT {$this->_getReadAdapter()->quoteIdentifier($field)}
+				"SELECT DISTINCT {$field}
 				FROM {$this->getMainTable()}"
 				. (null !== $order ? ' ORDER BY 1' . ($order ? '' : ' DESC') : '')
 			)
@@ -22,7 +23,7 @@ class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 	 * @return int[]
 	 */
 	public function getEventChangeIds($eventId) {
-		return rm_fetch_col_int(Df_Logging_Model_Resource_Event_Changes::TABLE, 'id', 'event_id', $eventId);
+		return df_fetch_col_int(Df_Logging_Model_Resource_Event_Changes::TABLE, 'id', 'event_id', $eventId);
 	}
 
 	/**
@@ -34,9 +35,9 @@ class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 		return $this->_getReadAdapter()->fetchCol(
 			$this->_getReadAdapter()->select()
 				->distinct()
-				->from(array('admins' => rm_table('admin/user')), 'username')
+				->from(array('admins' => df_table('admin/user')), 'username')
 				->joinInner(
-					array('events' => rm_table(self::TABLE))
+					array('events' => df_table(self::TABLE))
 					,'admins.username = events.user'
 					,null
 				))
@@ -55,7 +56,7 @@ class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 			/** @var Df_Logging_Model_Archive $archive */
 			$archive = Df_Logging_Model_Archive::i();
 			$archive->createNew();
-			$table = rm_table(self::TABLE);
+			$table = df_table(self::TABLE);
 			// get the latest log entry required to the moment
 			$clearBefore = $this->formatDate(time() - $lifetime);
 			$latestLogEntry = $this->_getWriteAdapter()->fetchOne("SELECT log_id FROM {$table}

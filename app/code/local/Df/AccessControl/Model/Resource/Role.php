@@ -37,14 +37,14 @@ class Df_AccessControl_Model_Resource_Role extends Df_Core_Model_Resource {
 		$f_ID = Df_AccessControl_Model_Role::P__ID;
 		$f_ROLE_ID = Df_Admin_Model_Role::P__ID;
 		$f_STORES = Df_AccessControl_Model_Role::P__STORES;
-		$t_DF_ACCESS_CONTROL_ROLE = rm_table(self::$TABLE);
-		$t_ADMIN_ROLE = rm_table(Df_Admin_Model_Resource_Role::TABLE);
+		$t_DF_ACCESS_CONTROL_ROLE = df_table(self::$TABLE);
+		$t_ADMIN_ROLE = df_table(Df_Admin_Model_Resource_Role::TABLE);
 		// Обратите внимание, что удаление таблицы перед её созданием
 		// позволяет нам беспроблемно проводить одну и ту же установку много раз подряд
 		// (например, с целью тестирования или когда в процессе разработки
 		// перед выпуском версии требуется доработать
 		// ранее разработанный и запускавшийся доработать установщик).
-		rm_table_drop($t_DF_ACCESS_CONTROL_ROLE, $setup->getConnection());
+		df_table_drop($t_DF_ACCESS_CONTROL_ROLE, $setup->getConnection());
 		/**
 		 * Не используем $this->getConnection()->newTable(),
 		 * потому что метод @see Varien_Db_Adapter_Pdo_Mysql::newTable()

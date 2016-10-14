@@ -41,9 +41,9 @@ class Df_YandexMarket_Setup_2_42_1 extends Df_Core_Setup {
 		 */
 		if (false === $this->conn()->fetchOne(
 			$this->conn()->select()
-				->from(array('ea' => rm_table('eav/attribute')), 'ea.attribute_id')
+				->from(array('ea' => df_table('eav/attribute')), 'ea.attribute_id')
 				->joinInner(
-					array('cea' => rm_table('catalog/eav_attribute'))
+					array('cea' => df_table('catalog/eav_attribute'))
 					, 'ea.attribute_id = cea.attribute_id'
 					, null
 				)
@@ -52,7 +52,7 @@ class Df_YandexMarket_Setup_2_42_1 extends Df_Core_Setup {
 					, Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
 				))
 		)) {
-			rm_table_delete('eav/attribute', 'attribute_code', array(
+			df_table_delete('eav/attribute', 'attribute_code', array(
 				Df_YandexMarket_Const::ATTRIBUTE__CATEGORY, Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
 			));
 			rm_eav_reset();

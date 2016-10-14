@@ -7,8 +7,8 @@ class Df_Banner_Setup_0_1_1 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_DF_BANNER = rm_table(Df_Banner_Model_Resource_Banner::TABLE);
-		$t_DF_BANNER_ITEM = rm_table(Df_Banner_Model_Resource_Banneritem::TABLE);
+		$t_DF_BANNER = df_table(Df_Banner_Model_Resource_Banner::TABLE);
+		$t_DF_BANNER_ITEM = df_table(Df_Banner_Model_Resource_Banneritem::TABLE);
 		// Обратите внимание, что удаление таблицы перед её созданием
 		// позволяет нам беспроблемно проводить одну и ту же установку много раз подряд
 		// (например, с целью тестирования или когда в процессе разработки

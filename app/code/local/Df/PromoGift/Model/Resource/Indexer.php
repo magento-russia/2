@@ -161,7 +161,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 	 * @return void
 	 */
 	private function deleteAllGifts() {
-		rm_table_truncate($this->getMainTable(), $this->_getWriteAdapter());
+		df_table_truncate($this->getMainTable(), $this->_getWriteAdapter());
 	}
 
 	/**
@@ -170,7 +170,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 	 * @return void
 	 */
 	private function deleteGiftsForProduct(Mage_Catalog_Model_Product $product) {
-		rm_table_delete($this->getMainTable(), 'product_id', $product->getId());
+		df_table_delete($this->getMainTable(), 'product_id', $product->getId());
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 	 * @return void
 	 */
 	private function deleteGiftsForRule(Mage_SalesRule_Model_Rule $rule) {
-		rm_table_delete($this->getMainTable(), 'rule_id', $rule->getId());
+		df_table_delete($this->getMainTable(), 'rule_id', $rule->getId());
 	}
 
 	/**
@@ -188,7 +188,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 	 * @return void
 	 */
 	private function deleteGiftsForWebsite(Mage_Core_Model_Website $website) {
-		rm_table_delete($this->getMainTable(), 'website_id', $website->getId());
+		df_table_delete($this->getMainTable(), 'website_id', $website->getId());
 	}
 
 	/**

@@ -19,7 +19,7 @@ class Df_CustomerBalance_Model_Resource_Balance_History extends Df_Core_Model_Re
 		$this->_getWriteAdapter()->update(
 			$this->getMainTable()
 			,array('is_customer_notified' => 1)
-			,rm_quote_into('history_id = ?', $id)
+			,df_db_quote_into('history_id = ?', $id)
 		);
 		return $this;
 	}

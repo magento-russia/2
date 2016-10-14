@@ -46,10 +46,10 @@ class Df_Directory_Model_Resource_Region extends Df_Core_Model_Resource {
 		$adapter = $this->_getReadAdapter();
 		$locale	   = rm_locale();
 		$systemLocale = Mage::app()->getDistroLocaleCode();
-		$regionField = $adapter->quoteIdentifier($this->getMainTable() . '.' . $this->getIdFieldName());
-		$condition = rm_quote_into('lrn.locale = ?', $locale);
+		$regionField = df_db_quote($this->getMainTable() . '.' . $this->getIdFieldName());
+		$condition = df_db_quote_into('lrn.locale = ?', $locale);
 		$select->joinLeft(
-			array('lrn' => rm_table(self::TABLE__NAME))
+			array('lrn' => df_table(self::TABLE__NAME))
 			,"{$regionField} = lrn.region_id AND {$condition}"
 			,array()
 		);
@@ -59,9 +59,9 @@ class Df_Directory_Model_Resource_Region extends Df_Core_Model_Resource {
 			 * поэтому используем вместо него @uses Df_Core_Helper_Db::getCheckSql()
 			 */
 			$nameExpr  = df()->db()->getCheckSql('lrn.region_id is null', 'srn.name', 'lrn.name');
-			$condition = rm_quote_into('srn.locale = ?', $systemLocale);
+			$condition = df_db_quote_into('srn.locale = ?', $systemLocale);
 			$select->joinLeft(
-				array('srn' => rm_table(self::TABLE__NAME))
+				array('srn' => df_table(self::TABLE__NAME))
 				,"{$regionField} = srn.region_id AND {$condition}"
 				,array('name' => $nameExpr)
 			);
@@ -85,11 +85,11 @@ class Df_Directory_Model_Resource_Region extends Df_Core_Model_Resource {
 	{
 		$adapter		= $this->_getReadAdapter();
 		$locale		 = rm_locale();
-		$joinCondition  = rm_quote_into('rname.region_id = region.region_id AND rname.locale = ?', $locale);
+		$joinCondition  = df_db_quote_into('rname.region_id = region.region_id AND rname.locale = ?', $locale);
 		$select		 = $adapter->select()
 			->from(array('region' => $this->getMainTable()))
 			->joinLeft(
-				array('rname' => rm_table(self::TABLE__NAME)),$joinCondition,array('name'))
+				array('rname' => df_table(self::TABLE__NAME)),$joinCondition,array('name'))
 			->where('region.country_id = ?', $countryId)
 			->where("region.{$field} = ?", $value);
 		$data = $adapter->fetchRow($select);

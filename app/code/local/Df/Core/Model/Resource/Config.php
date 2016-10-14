@@ -55,7 +55,7 @@ class Df_Core_Model_Resource_Config extends Df_Core_Model_Resource_ConfigM {
 		$query = strtr(
 			"UPDATE {table} SET value = {new_value} WHERE ({where}) and path = '{path}';"
 			, array(
-				'{table}' => rm_table('core/config_data')
+				'{table}' => df_table('core/config_data')
 				,'{path}' => $path
 				,'{new_value}' =>
 					df_strings_are_equal_ci($value, 'null')
@@ -65,7 +65,7 @@ class Df_Core_Model_Resource_Config extends Df_Core_Model_Resource_ConfigM {
 			)
 		);
 		try {
-			rm_conn()->query($query);
+			df_conn()->query($query);
 		}
 		catch (Exception $e) {
 			Mage::logException($e);

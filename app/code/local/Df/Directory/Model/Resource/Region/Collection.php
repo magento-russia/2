@@ -143,8 +143,8 @@ class Df_Directory_Model_Resource_Region_Collection extends Df_Core_Model_Resour
 	 */
 	protected function _construct() {
 		$this->_itemObjectClass = Df_Directory_Model_Region::_C;
-		$this->_countryTable = rm_table(Df_Directory_Model_Resource_Country::TABLE);
-		$this->_regionNameTable = rm_table(Df_Directory_Model_Resource_Region::TABLE__NAME);
+		$this->_countryTable = df_table(Df_Directory_Model_Resource_Country::TABLE);
+		$this->_regionNameTable = df_table(Df_Directory_Model_Resource_Region::TABLE__NAME);
 		$this->addOrder('name', Varien_Data_Collection::SORT_ORDER_ASC);
 		$this->addOrder('default_name', Varien_Data_Collection::SORT_ORDER_ASC);
 	}

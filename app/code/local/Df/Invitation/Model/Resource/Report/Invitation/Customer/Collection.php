@@ -13,7 +13,7 @@ class Df_Invitation_Model_Resource_Report_Invitation_Customer_Collection
 		$this->_reset();
 		$this->getSelect()
 			->join(
-				array('invitation' => rm_table('df_invitation/invitation'))
+				array('invitation' => df_table('df_invitation/invitation'))
 				, 'invitation.customer_id = e.entity_id'
 				, array(
 					'sent' => new Zend_Db_Expr('COUNT(invitation.invitation_id)')

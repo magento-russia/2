@@ -12,7 +12,7 @@ class Df_Checkout_Model_Resource_Cart extends Mage_Checkout_Model_Mysql4_Cart {
 	public function addExcludeProductFilter($collection, $quoteId) {
 		$adapter = $this->_getReadAdapter();
 		$exclusionSelect = $adapter->select()
-			->from(rm_table('sales/quote_item'), 'product_id')
+			->from(df_table('sales/quote_item'), 'product_id')
 			->where('? = quote_id', $quoteId);
 		$condition =
 			$adapter->prepareSqlCondition(

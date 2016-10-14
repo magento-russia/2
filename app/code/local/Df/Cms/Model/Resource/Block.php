@@ -13,16 +13,16 @@ class Df_Cms_Model_Resource_Block extends Mage_Cms_Model_Mysql4_Block {
 	 * @return int[]
 	 */
 	public function findOrphanIds() {
-		return rm_conn()->fetchCol(
-			rm_select()
-				->from(array('b' => rm_table('cms_block')), 'block_id')
+		return df_conn()->fetchCol(
+			df_select()
+				->from(array('b' => df_table('cms_block')), 'block_id')
 				->joinLeft(
-					array('bs' => rm_table('cms_block_store'))
+					array('bs' => df_table('cms_block_store'))
 					,'b.block_id = bs.block_id'
 					,array()
 				)
 				// Отфильтровываем блоки, которые привязаны к ранее удалённым витринам.
-				->where(rm_conn()->prepareSqlCondition('bs.store_id', array(
+				->where(df_conn()->prepareSqlCondition('bs.store_id', array(
 					'nin' => array_keys(Mage::app()->getStores($withDefault = true, $codeKey = false))
 				)))
 				/**

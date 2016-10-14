@@ -7,8 +7,8 @@ class Df_CustomerBalance_Setup_1_0_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		$t_BALANCE = rm_table(Df_CustomerBalance_Model_Resource_Balance::TABLE);
-		$t_HISTORY = rm_table(Df_CustomerBalance_Model_Resource_Balance_History::TABLE);
+		$t_BALANCE = df_table(Df_CustomerBalance_Model_Resource_Balance::TABLE);
+		$t_HISTORY = df_table(Df_CustomerBalance_Model_Resource_Balance_History::TABLE);
 		$this->dropTable($t_BALANCE);
 		$this->dropTable($t_HISTORY);
 		$this->run("
@@ -35,7 +35,7 @@ class Df_CustomerBalance_Setup_1_0_0 extends Df_Core_Setup {
 			'FK_CUSTOMERBALANCE_CUSTOMER'
 			, $t_BALANCE
 			, 'customer_id'
-			, rm_table('customer/entity')
+			, df_table('customer/entity')
 			, 'entity_id'
 		);
 		$this->conn()->addKey(
@@ -75,7 +75,7 @@ class Df_CustomerBalance_Setup_1_0_0 extends Df_Core_Setup {
 			'FK_CUSTOMERBALANCE_WEBSITE'
 			, $t_BALANCE
 			, 'website_id'
-			,rm_table('core/website')
+			,df_table('core/website')
 			, 'website_id'
 			, 'SET null'
 		);
@@ -89,7 +89,7 @@ class Df_CustomerBalance_Setup_1_0_0 extends Df_Core_Setup {
 			'FK_CUSTOMERBALANCE_WEBSITE'
 			, $t_BALANCE
 			, 'website_id'
-			, rm_table('core/website')
+			, df_table('core/website')
 			, 'website_id'
 		);
 		$this->addAttributes(array(
@@ -106,7 +106,7 @@ class Df_CustomerBalance_Setup_1_0_0 extends Df_Core_Setup {
 			'FK_CUSTOMERBALANCE_WEBSITE'
 			, $t_BALANCE
 			, 'website_id'
-			,rm_table('core/website')
+			,df_table('core/website')
 			, 'website_id'
 			, 'SET null'
 		);
