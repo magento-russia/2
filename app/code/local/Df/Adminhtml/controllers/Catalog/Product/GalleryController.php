@@ -35,14 +35,14 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 			$uploader->setAllowRenameFiles(true);
 			$uploader->setFilesDispersion(true);
 			/** @var string $imageName */
-			$imageName = df_a(df_a($_FILES, 'image', array()), 'name', '');
+			$imageName = dfa(dfa($_FILES, 'image', array()), 'name', '');
 			// Начало заплатки
 			/** @var string $imageName */
 			/**
 			 * Аналогичный алгоритм:
 			 * @see Df_Catalog_Model_Product_Attribute_Backend_Media::moveImageFromTmpDf()
 			 */
-			$imageName = rm_concat_clean('.'
+			$imageName = df_ccc('.'
 				,df_output()->transliterate(rm_strip_ext($imageName))
 				,df()->file()->getExt($imageName)
 			);

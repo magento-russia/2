@@ -15,7 +15,7 @@ class Df_Adminhtml_Model_System_Config_Source_Catalog_Search_Type
 		$translator = Df_CatalogSearch_Helper_Data::s();
 		foreach ($result as &$option) {
 			/** @var array(string => string|mixed) $option */
-			$option['label'] = $translator->__(df_a($option, 'label'));
+			$option['label'] = $translator->__(dfa($option, 'label'));
 		}
 		return $result;
 	}

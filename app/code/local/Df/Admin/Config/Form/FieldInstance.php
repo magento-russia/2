@@ -101,8 +101,8 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 					)
 			 * Берём первый элемент этого массива и вычленяем из этого элемента название секции.
 			 */
-			$this->{__METHOD__} = rm_first(df_explode_xpath(
-				rm_first(array_keys($this->getField()->getData('config_data')))
+			$this->{__METHOD__} = df_first(df_explode_xpath(
+				df_first(array_keys($this->getField()->getData('config_data')))
 			));
 			df_result_string_not_empty($this->{__METHOD__});
 		}
@@ -118,8 +118,8 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 	 */
 	private function getPartFromHtmlFieldName($partOrdering) {
 		if (!isset($this->{__METHOD__}[$partOrdering])) {
-			$this->{__METHOD__}[$partOrdering] = rm_first(
-				explode(']', df_a(explode('[', $this->getElement()->getData('name')), $partOrdering + 1))
+			$this->{__METHOD__}[$partOrdering] = df_first(
+				explode(']', dfa(explode('[', $this->getElement()->getData('name')), $partOrdering + 1))
 			);
 		}
 		return $this->{__METHOD__}[$partOrdering];

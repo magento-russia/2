@@ -11,7 +11,7 @@ class Df_1C_Config_Source_WhichDescriptionFieldToUpdate extends Df_Admin_Config_
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::V__DESCRIPTION => 'описание'
 			,self::V__SHORT_DESCRIPTION => 'краткое описание'
 			,self::V__BOTH => 'описание и краткое описание'

@@ -20,7 +20,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 			$attributeData = array_merge($attribute->getData(), array(
 				'frontend_label' => $this->getEntity()->getName()
 				,'option' => Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
-					$attribute, df_a($this->getEntity()->getOptionsInMagentoFormat(), 'value')
+					$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 				)
 			));
 			rm_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
@@ -32,7 +32,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 			 * @var string|null $standardCode
 			 */
 			$standardCode =
-				df_a(
+				dfa(
 					$this->getMapFromExternalNameToStandardAttributeCode()
 					,$this->getEntity()->getName()
 				)
@@ -55,7 +55,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 				$attributeData = array_merge($attribute->getData(), array(
 					Df_1C_Const::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
 					,'option' => Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
-						$attribute, df_a($this->getEntity()->getOptionsInMagentoFormat(), 'value')
+						$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 					)
 				));
 				rm_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());

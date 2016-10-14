@@ -84,7 +84,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	 * @return string|null
 	 */
 	protected function getRequestParam($paramName, $defaultValue = null) {
-		return df_a_deep($this->getRequestA(), $paramName, $defaultValue);
+		return dfa_deep($this->getRequestA(), $paramName, $defaultValue);
 	}
 
 	/** @return Df_IPay_Model_Request_Payment */
@@ -495,7 +495,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 			/** @var string[] $signatureHeaderAsArray */
 			$signatureHeaderAsArray = df_trim(explode(':', $this->getRequestHeader_Signature()));
 			/** @var string $signatureType */
-			$signatureType = df_a($signatureHeaderAsArray, 0);
+			$signatureType = dfa($signatureHeaderAsArray, 0);
 			df_assert_string($signatureType);
 			if (self::$SIGNATYPE_TYPE !== $signatureType) {
 				df_error(
@@ -506,7 +506,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 				);
 			}
 			/** @var string $result */
-			$result = df_a($signatureHeaderAsArray, 1);
+			$result = dfa($signatureHeaderAsArray, 1);
 			df_result_string($result);
 			$this->{__METHOD__} = $result;
 		}
@@ -529,7 +529,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	private function getRequestParamR($paramName, $defaultValue = null) {
 		df_param_string_not_empty($paramName, 0);
 		/** @var string|null $result */
-		$result = df_a_deep($this->getRequestA(), $paramName, $defaultValue);
+		$result = dfa_deep($this->getRequestA(), $paramName, $defaultValue);
 		df_result_string_not_empty($result);
 		return $result;
 	}

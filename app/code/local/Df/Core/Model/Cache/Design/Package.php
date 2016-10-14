@@ -4,7 +4,7 @@ class Df_Core_Model_Cache_Design_Package extends Df_Core_Model {
 	 * @param string $key
 	 * @return string|null
 	 */
-	public function cacheGet($key) {return df_a($this->_cache, $key);}
+	public function cacheGet($key) {return dfa($this->_cache, $key);}
 
 	/**
 	 * @param string $key

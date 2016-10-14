@@ -237,7 +237,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 	}
 
 	/** @return string|null */
-	private function getDemoImagesBaseUrl() {return df_a($this->getUrl(), 'demo_images_base');}
+	private function getDemoImagesBaseUrl() {return dfa($this->getUrl(), 'demo_images_base');}
 
 	/** @return Df_Localization_Onetime_Dictionary */
 	private function getDictionaryForTheme() {

@@ -64,7 +64,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 			 * Обновил регулярное выражение.
 			 */
 			/** @var string $fileName */
-			$fileName = rm_last(explode('/', $scriptName));
+			$fileName = df_last(explode('/', $scriptName));
 			/** @var string $pattern */
 			$pattern = '#^jquery(\-\d+\.\d+(\.\d+)?)?(\.min)?\.js$#ui';
 			/** @var string[] $matches */

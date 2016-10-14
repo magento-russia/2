@@ -28,9 +28,9 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 				!$settings->isRequired(Df_Checkout_Const_Field::CONFIRM_PASSWORD)
 			&&
 				// Убеждаемся, что поля «Пароль» и «Пароль повторно» не заполнены
-				!df_a($value, Df_Checkout_Const_Field::CUSTOMER_PASSWORD)
+				!dfa($value, Df_Checkout_Const_Field::CUSTOMER_PASSWORD)
 			&&
-				!df_a($value, Df_Checkout_Const_Field::CONFIRM_PASSWORD)
+				!dfa($value, Df_Checkout_Const_Field::CONFIRM_PASSWORD)
 		) {
 			$value[Df_Checkout_Const_Field::CUSTOMER_PASSWORD] = $this->getGeneratedPassword();
 			$value[Df_Checkout_Const_Field::CONFIRM_PASSWORD] = $this->getGeneratedPassword();

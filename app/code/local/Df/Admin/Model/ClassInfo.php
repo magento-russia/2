@@ -43,7 +43,7 @@ class Df_Admin_Model_ClassInfo extends Df_Core_Model {
 	private function getConstructor() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_a(
+				dfa(
 					array(
 						self::$TYPE__BLOCK => 'getBlockClassName'
 						, self::$TYPE__HELPER => 'getHelperClassName'

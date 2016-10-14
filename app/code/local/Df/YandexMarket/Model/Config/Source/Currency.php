@@ -21,7 +21,7 @@ class Df_YandexMarket_Model_Config_Source_Currency extends Df_Admin_Config_Sourc
 			foreach (self::$_currencies as $currencyCode) {
 				/** @var string $currencyCode */
 				/** @var string|null $label */
-				$label = df_a($optionCurrencyMap, $currencyCode);
+				$label = dfa($optionCurrencyMap, $currencyCode);
 				if (!is_null($label)) {
 					$result[]= rm_option($currencyCode, $label);
 				}

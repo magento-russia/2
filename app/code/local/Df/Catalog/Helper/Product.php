@@ -57,7 +57,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 	 * @return string|null
 	 */
 	public function getManufacturerNameByCode($manufacturerCode) {
-		return df_a($this->getMapFromManufacturerCodeToName(), $manufacturerCode);
+		return dfa($this->getMapFromManufacturerCodeToName(), $manufacturerCode);
 	}
 
 	/** @return Df_Catalog_Model_Resource_Product */

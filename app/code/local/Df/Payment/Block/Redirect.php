@@ -69,7 +69,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	/** @return Df_Sales_Model_Order */
 	private function order() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_last_order(false);
+			$this->{__METHOD__} = df_last_order(false);
 			if (!$this->{__METHOD__}) {
 				df_error('Пожалуйста, попробуйте оформить Ваш заказ повторно или оформите заказ по телефону.');
 			}

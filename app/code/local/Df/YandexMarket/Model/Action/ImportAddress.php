@@ -32,7 +32,7 @@ class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Action {
 	private function composeStreetPart($paramName, $paramLabel) {
 		/** @var string|null $paramValue */
 		$paramValue = $this->_post($paramName);
-		return !$paramValue ? null : rm_concat_clean(' ', $paramLabel, $paramValue);
+		return !$paramValue ? null : df_ccc(' ', $paramLabel, $paramValue);
 	}
 
 	/** @return array(string => string) */
@@ -78,7 +78,7 @@ class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Action {
 
 	/** @return string */
 	private function getStreet() {
-		return rm_concat_clean(', '
+		return df_ccc(', '
 			,$this->composeStreetPart('street', '')
 			,$this->composeStreetPart('building', 'дом')
 			,$this->composeStreetPart('suite', 'корпус')

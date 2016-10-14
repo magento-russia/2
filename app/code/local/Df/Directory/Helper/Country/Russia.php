@@ -32,7 +32,7 @@ class Df_Directory_Helper_Country_Russia extends Df_Directory_Helper_Country {
 	 */
 	public function isRegionalCenter($locationName) {
 		df_param_string($locationName, 0);
-		return !is_null(df_a($this->getMapFromCenterToRegion(), mb_strtoupper($locationName)));
+		return !is_null(dfa($this->getMapFromCenterToRegion(), mb_strtoupper($locationName)));
 	}
 
 	/** @return Df_Directory_Helper_Country_Russia */

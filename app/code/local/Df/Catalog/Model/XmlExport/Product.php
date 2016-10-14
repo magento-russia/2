@@ -61,7 +61,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 	 */
 	protected function getCategoryId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(rm_first($this->getCategoryIds()));
+			$this->{__METHOD__} = rm_n_set(df_first($this->getCategoryIds()));
 		}
 		return rm_n_get($this->{__METHOD__});
 	}
@@ -170,7 +170,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 	 * Товар может быть привязан к нескольким товарным разделам.
 	 * В том числе — к корневому, это я наблюдаю в магазине amilook.ru.
 	 * Так вот, раньше тут стоял следующий программный код:
-		$result = rm_first($this->getProduct()->getCategoryIds());
+		$result = df_first($this->getProduct()->getCategoryIds());
 	 * Если товар привязан к корневому товарному разделу,
 	 * то в большинстве случаев приведённый выше код вернёт
 	 * именно идентификатор корневого товарного раздела как наименьший.
@@ -189,8 +189,8 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 			? null
 			: (
 				(1 === count($categoryIds))
-				? rm_first($categoryIds)
-				: rm_first(array_diff(
+				? df_first($categoryIds)
+				: df_first(array_diff(
 					$categoryIds, array(rm_state()->getStoreProcessed()->getRootCategoryId())
 				))
 			)
@@ -218,7 +218,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 						)
 					);
 				}
-				$result = rm_first($this->getConfugurableParents());
+				$result = df_first($this->getConfugurableParents());
 			}
 			$this->{__METHOD__} = rm_n_set($result);
 		}
@@ -346,7 +346,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 	 * Товар может быть привязан к нескольким товарным разделам.
 	 * В том числе — к корневому, это я наблюдаю в магазине amilook.ru.
 	 * Так вот, раньше тут стоял следующий программный код:
-	 * [code] $result = rm_first($this->getProduct()->getCategoryIds()); [/code]
+	 * [code] $result = df_first($this->getProduct()->getCategoryIds()); [/code]
 	 * Если товар привязан к корневому товарному разделу,
 	 * то в большинстве случаев приведённый выше код вернёт
 	 * именно идентификатор корневого товарного раздела как наименьший.

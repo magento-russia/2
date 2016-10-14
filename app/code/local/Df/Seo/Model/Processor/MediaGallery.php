@@ -4,7 +4,7 @@ class Df_Seo_Model_Processor_MediaGallery extends Df_Core_Model {
 	public function process() {
 		/** @var Df_Catalog_Model_Product $product */
 		$product = $this->getProduct();
-		$product->setData(self::MEDIA_GALLERY_ATTRIBUTE, df_a(
+		$product->setData(self::MEDIA_GALLERY_ATTRIBUTE, dfa(
 			$this->getProduct()->getTypeInstance(true)->getSetAttributes($this->getProduct())
 			,'media_gallery'
 		));

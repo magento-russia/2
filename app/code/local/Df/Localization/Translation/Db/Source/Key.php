@@ -2,12 +2,12 @@
 class Df_Localization_Translation_Db_Source_Key extends Df_Core_Model {
 	/** @return string */
 	public function getModule() {
-		return df_a($this->getSplittedKey(), 0);
+		return dfa($this->getSplittedKey(), 0);
 	}
 
 	/** @return string */
 	public function getString() {
-		return df_a($this->getSplittedKey(), 1);
+		return dfa($this->getSplittedKey(), 1);
 	}
 
 	/** @return string */

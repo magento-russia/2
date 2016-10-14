@@ -26,7 +26,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 							df_h()->tweaks()->isItCatalogProductList()
 					)
 			) {
-				$textToTranslate = df_a($fa, 0);
+				$textToTranslate = dfa($fa, 0);
 				if (is_string($textToTranslate)) {
 					switch($textToTranslate) {
 						case 'Out of stock':
@@ -40,7 +40,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 				&&
 					df_cfg()->tweaks()->catalog()->product()->_list()->needReplaceAddToCartWithMore()
 			) {
-				$textToTranslate = df_a($fa, 0);
+				$textToTranslate = dfa($fa, 0);
 				if (is_string($textToTranslate)) {
 					switch($textToTranslate) {
 						case 'Add to Cart':

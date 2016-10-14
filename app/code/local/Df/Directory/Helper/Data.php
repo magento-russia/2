@@ -113,7 +113,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 		if (
 				!isset($this->_regionNameById[$regionId])
 			&&
-				!df_a($this->_regionNameByIdIsNull, $regionId, false)
+				!dfa($this->_regionNameByIdIsNull, $regionId, false)
 		) {
 			/** @var Mage_Directory_Model_Region|null $region */
 			$region = $this->getRegions()->getItemById($regionId);
@@ -121,7 +121,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 			$result =
 				is_null($region)
 				? null
-				: df_a(
+				: dfa(
 					$region->getData()
 					,Df_Directory_Model_Region::P__ORIGINAL_NAME
 					,$region->getName()

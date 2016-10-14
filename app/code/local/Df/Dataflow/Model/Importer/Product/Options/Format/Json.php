@@ -36,7 +36,7 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Json
 						 */
 						unset($customOptionData['option_id']);
 						/** @var array|null $optionValuesData */
-						$optionValuesData = df_a($customOptionData, '_values');
+						$optionValuesData = dfa($customOptionData, '_values');
 						if (!is_null($optionValuesData)) {
 							df_assert_array($optionValuesData);
 						}

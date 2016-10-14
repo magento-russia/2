@@ -21,7 +21,7 @@ class Df_Admin_Config_Source_Units_Weight extends Df_Admin_Config_Source {
 			$result = array();
 			foreach (rm_weight()->getUnitsSettings() as $unitId => $unitData) {
 				/** @var array(string => string|int) $unitData */
-				$result[]= rm_option($unitId, df_a($unitData, Df_Core_Model_Units_Weight::UNIT__LABEL));
+				$result[]= rm_option($unitId, dfa($unitData, Df_Core_Model_Units_Weight::UNIT__LABEL));
 			}
 			$this->{__METHOD__} = $result;
 		}

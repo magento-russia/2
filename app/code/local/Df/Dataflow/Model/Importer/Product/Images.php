@@ -143,9 +143,9 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		df_assert_string_not_empty($contentType);
 		/** @var string[] $contentTypeExploded */
 		$contentTypeExploded = df_explode_xpath($contentType);
-		if ('image' === rm_first($contentTypeExploded)) {
+		if ('image' === df_first($contentTypeExploded)) {
 			/** @var string $imageType */
-			$imageType = rm_last($contentTypeExploded);
+			$imageType = df_last($contentTypeExploded);
 			$result =
 				df_concat_path(
 					$this->getDownloadPath()
@@ -188,7 +188,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			$attributes = $product->getTypeInstance()->getSetAttributes();
 			df_assert_array($attributes);
 			/** @var Mage_Eav_Model_Entity_Attribute_Abstract|null $mediaGalleryAttribute */
-			$mediaGalleryAttribute = df_a($attributes, Df_Catalog_Model_Product::P__MEDIA_GALLERY);
+			$mediaGalleryAttribute = dfa($attributes, Df_Catalog_Model_Product::P__MEDIA_GALLERY);
 			if (!is_null($mediaGalleryAttribute)) {
 				df_assert($mediaGalleryAttribute instanceof Mage_Eav_Model_Entity_Attribute_Abstract);
 				/** @var Mage_Catalog_Model_Product_Attribute_Backend_Media $backend */
@@ -197,11 +197,11 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 				if (is_array($product->getMediaGallery())) {
 					$product->getMediaGalleryImages();
 					/** @var array|null $images */
-					$images = df_a($product->getMediaGallery(), 'images');
+					$images = dfa($product->getMediaGallery(), 'images');
 					if (is_array($images)) {
 						foreach ($images as $image){
 							/** @var string|null $fileName */
-							$fileName = df_a($image, 'file');
+							$fileName = dfa($image, 'file');
 							if ($fileName) {
 								$imageFileNames[]= $fileName;
 							}

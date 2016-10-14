@@ -47,7 +47,7 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 				self::MESSAGE_VAR__STORES_AFFECTED =>
 					Mage::app()->isSingleStoreMode()
 					? ''
-					: rm_concat_clean(' '
+					: df_ccc(' '
 						, (1 === $this->getStoresAffectedCount()) ? ' для магазина ' : 'для магазинов'
 						, Df_Core_Model_Resource_Store_Collection::getNamesStatic(
 							$this->getStoresAffected()

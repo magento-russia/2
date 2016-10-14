@@ -11,7 +11,7 @@ class Df_1C_Config_Source_ReferenceListUpdateMode extends Df_Admin_Config_Source
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::$VALUE__ALL => 'сохранять все'
 			,'manual-only' => 'сохранять только добавленные вручную администратором'
 			,self::$VALUE__NONE => 'не сохранять'

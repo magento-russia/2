@@ -65,7 +65,7 @@ class Df_Cms_Helper_Data extends Mage_Core_Helper_Abstract {
 		,$onChange
 		,$excludeTypes = array(Df_Varien_Data_Form_Element_Abstract::TYPE__HIDDEN))
 	{
-		$excludeTypes = rm_array($excludeTypes);
+		$excludeTypes = df_array($excludeTypes);
 		foreach ($container->getElements()as $element) {
 			if ('fieldset' === $element->getType()) {
 				$this->addOnChangeToFormElements($element, $onChange, $excludeTypes);

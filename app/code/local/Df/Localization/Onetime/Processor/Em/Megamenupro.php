@@ -31,7 +31,7 @@ class Df_Localization_Onetime_Processor_Em_Megamenupro
 				foreach ($this->getTranslatableProperties() as $propertyName) {
 					/** @var string $propertyName */
 					/** @var string|null $textOriginal */
-					$textOriginal = df_a($item, $propertyName);
+					$textOriginal = dfa($item, $propertyName);
 					if ($textOriginal) {
 						/** @var string|null $textProcessed */
 						$textProcessed = $term->translate($textOriginal);

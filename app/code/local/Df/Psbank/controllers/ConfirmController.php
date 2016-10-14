@@ -10,7 +10,7 @@ class Df_Psbank_ConfirmController extends Mage_Core_Controller_Front_Action {
 	/** @return string */
 	private function getActionClass() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getActionMap(), $this->getActionCode());
+			$this->{__METHOD__} = dfa($this->getActionMap(), $this->getActionCode());
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

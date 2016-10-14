@@ -185,7 +185,7 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 			));
 		}
 		if (!$this->hasVendorInfo()) {
-			$result['name'] = rm_cdata($this->getProduct()->getName());
+			$result['name'] = df_cdata($this->getProduct()->getName());
 		}
 		else {
 			$result = array_merge($result, array(
@@ -200,25 +200,25 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 				 * Warning: SimpleXMLElement::addChild()[simplexmlelement.addchild]:
 				 * unterminated entity reference
 				 */
-				'vendor' => rm_cdata($this->getProduct()->getManufacturerName())
+				'vendor' => df_cdata($this->getProduct()->getManufacturerName())
 				/**
 				 * В магазине contactlinza.com.ua случился сбой
 				 * при добавлении производителя «Johnson & Johnson»
 				 * Warning: SimpleXMLElement::addChild()[simplexmlelement.addchild]:
 				 * unterminated entity reference
 				 */
-				,'vendorCode' => rm_cdata($this->getProduct()->getManufacturerCode())
-				,'model' => rm_cdata($this->getProduct()->getName())
+				,'vendorCode' => df_cdata($this->getProduct()->getManufacturerCode())
+				,'model' => df_cdata($this->getProduct()->getName())
 			));
 		}
-		$result['description'] = rm_cdata(df_nts($this->getProduct()->getDescription()));
+		$result['description'] = df_cdata(df_nts($this->getProduct()->getDescription()));
 		/** @var string|null $salesNotes */
 		$salesNotes = $this->getProduct()->getData(Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES);
 		if (!$salesNotes) {
 			$salesNotes = df_cfg()->yandexMarket()->general()->getSalesNotes();
 		}
 		if ($salesNotes) {
-			$result['sales_notes'] = rm_cdata($salesNotes);
+			$result['sales_notes'] = df_cdata($salesNotes);
 		}
 		/**
 		 * Яндекс.Маркет допускает не все названия стран.

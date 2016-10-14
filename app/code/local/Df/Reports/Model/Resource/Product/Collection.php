@@ -39,7 +39,7 @@ class Df_Reports_Model_Resource_Product_Collection extends Mage_Reports_Model_My
 	 * @return mixed
 	 */
 	private function getRmData($paramName = null) {
-		return is_null($paramName) ?  $this->_rmData : df_a($this->_rmData, $paramName);
+		return is_null($paramName) ?  $this->_rmData : dfa($this->_rmData, $paramName);
 	}
 
 	const P__DISABLE_FLAT = 'disable_flat';

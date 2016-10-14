@@ -39,7 +39,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 				df_assert_string($methodCode);
 				df_assert_array($methodOptions);
 				/** @var string $methodTitle */
-				$methodTitle = df_a($methodOptions, 'title');
+				$methodTitle = dfa($methodOptions, 'title');
 				df_assert_string($methodTitle);
 				$result[]= rm_option($methodCode, $methodTitle);
 			}

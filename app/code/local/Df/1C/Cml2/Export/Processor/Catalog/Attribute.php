@@ -37,9 +37,9 @@ abstract class Df_1C_Cml2_Export_Processor_Catalog_Attribute
 			? null
 			: array(
 				'Ид' => $this->getИд()
-				,'Наименование' => rm_cdata($this->getНаименование())
+				,'Наименование' => df_cdata($this->getНаименование())
 				/**
-				 * @see rm_cdata() здесь намеренно не вызываем:
+				 * @see df_cdata() здесь намеренно не вызываем:
 				 * пусть свойство-потомок само решает,
 				 * нужно ли его значению CDATA.
 				 * Обратите внимание, что значением может быть guid,
@@ -54,7 +54,7 @@ abstract class Df_1C_Cml2_Export_Processor_Catalog_Attribute
 	public function getСвойство() {
 		return df_clean_xml(array(
 			'Ид' => $this->getИд()
-			,'Наименование' => rm_cdata($this->getНаименование())
+			,'Наименование' => df_cdata($this->getНаименование())
 			/**
 			 * Текущая версия 4.0.5.2 «Помощника импорта товаров с сайта»
 			 * дополнения 1С-Битрикс для обмена данными с интернет-магазином
@@ -63,7 +63,7 @@ abstract class Df_1C_Cml2_Export_Processor_Catalog_Attribute
 			 * однако это поле возможно по текущей версии 2.08 стандарта CommerceML 2
 			 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
 			 */
-			,'Описание' => rm_cdata($this->getОписание())
+			,'Описание' => df_cdata($this->getОписание())
 			/**
 			 * Пока не совсем понимаю, какое значение указывать для поля «Обязательное».
 			 * Первой мыслью было указать так:

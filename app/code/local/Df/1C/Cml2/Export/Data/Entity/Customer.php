@@ -26,7 +26,7 @@ class Df_1C_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 			!$this->getMagentoCustomer()
 			? ''
 			: df_nts(
-				df_a(
+				dfa(
 					array(
 						Df_Customer_Model_Customer::GENDER__FEMALE => 'F'
 						,Df_Customer_Model_Customer::GENDER__MALE => 'M'

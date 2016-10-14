@@ -73,7 +73,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 				if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
 					/** @var int $productId */
 					$productId = rm_nat($orderItem->getProductId());
-					df_assert(is_null(df_a($result, $productId)));
+					df_assert(is_null(dfa($result, $productId)));
 					$result[$productId] = $orderItem;
 				}
 			}
@@ -154,7 +154,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 		df_param_integer($productId, 0);
 		df_param_between($productId, 0, 1);
 		/** @var Mage_Sales_Model_Order_Item $result */
-		$result = df_a($this->getMapFromProductIdToSimpleOrderItem(), $productId);
+		$result = dfa($this->getMapFromProductIdToSimpleOrderItem(), $productId);
 		df_assert($result instanceof Mage_Sales_Model_Order_Item);
 		return $result;
 	}

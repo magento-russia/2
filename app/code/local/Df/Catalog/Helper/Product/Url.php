@@ -57,8 +57,8 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 			/** @var string[] $keys */
 			$keys = array_keys(self::$_russianUpdatesRaw);
 			$this->{__METHOD__} = array_merge(
-				df_array_combine($keys, $values)
-				,df_array_combine(df_t()->strtolower($keys), df_t()->strtolower($values))
+				array_combine($keys, $values)
+				,array_combine(df_t()->strtolower($keys), df_t()->strtolower($values))
 			);
 		}
 		return $this->{__METHOD__};
@@ -72,8 +72,8 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 			/** @var string[] $keys */
 			$keys = array_keys(self::$_russianUpdatesRaw);
 			$this->{__METHOD__} = array_merge(
-				df_array_combine($keys, $values)
-				,df_array_combine(df_t()->strtolower($keys), $values)
+				array_combine($keys, $values)
+				,array_combine(df_t()->strtolower($keys), $values)
 			);
 		}
 		return $this->{__METHOD__};

@@ -80,6 +80,25 @@ function df_assert_boolean($value, $stackLevel = 0) {
 }
 
 /**
+ * 2016-08-09
+ * @used-by df_map_k()
+ * @param mixed $v
+ * @param string|\Exception $message [optional]
+ * @return void
+ * @throws Exception
+ */
+function df_assert_callable($v, $message = null) {
+	if (df_enable_assertions()) {
+		if (!is_callable($v)) {
+			df_error($message ?:
+				"A variable is expected to be a callable, "
+				. "but actually it is a «%s».", gettype($v)
+			);
+		}
+	}
+}
+
+/**
  * @param object $value
  * @param string $class
  * @param int $stackLevel [optional]
@@ -318,6 +337,24 @@ function df_assert_string_not_empty($value, $stackLevel = 0) {
 }
 
 /**
+ * 2016-08-09
+ * @param mixed $v
+ * @param string|\Exception $message [optional]
+ * @return void
+ * @throws Exception
+ */
+function df_assert_traversable($v, $message = null) {
+	if (df_enable_assertions()) {
+		if (!df_check_traversable($v)) {
+			df_error($message ?:
+				"A variable is expected to be a traversable or an array, "
+				. "but actually it is a «%s».", gettype($v)
+			);
+		}
+	}
+}
+
+/**
  * @param mixed $value
  * @return bool
  */
@@ -380,6 +417,17 @@ function df_check_string($value) {return Df_Zf_Validate_String::s()->isValid($va
  * @return bool
  */
 function df_check_string_not_empty($value) {return Df_Zf_Validate_String_NotEmpty::s()->isValid($value);}
+
+/**
+ * 2016-08-09
+ * @see df_assert_traversable()
+ * @see df_check_array()
+ * @used-by df_map_k()
+ * http://stackoverflow.com/questions/31701517#comment59189177_31701556
+ * @param mixed $v
+ * @return bool
+ */
+function df_check_traversable($v) {return is_array($v) || $v instanceof \Traversable;}
 
 /** @return bool */
 function df_enable_assertions() {
@@ -1043,7 +1091,7 @@ function rm_is($variable, $class) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
 		/** @var string[] $classes */
-		$class = rm_tail($arguments);
+		$class = df_tail($arguments);
 	}
 	if (!is_array($class)) {
 		$result = $variable instanceof $class;

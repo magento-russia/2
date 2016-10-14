@@ -95,7 +95,7 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				'Покупатель оплатил заказ картой, однако система LiqPay ещё проверяет данный платёж.'
 		);
 		/** @var string $result */
-		$result = df_a($states, $code);
+		$result = dfa($states, $code);
 		df_result_string($result);
 		return $result;
 	}

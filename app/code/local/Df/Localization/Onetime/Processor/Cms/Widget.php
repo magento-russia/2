@@ -18,7 +18,7 @@ class Df_Localization_Onetime_Processor_Cms_Widget
 		foreach ($this->getTranslatableWidgetParameters() as $paramName) {
 			/** @var string $paramName */
 			/** @var string|mixed|null $textOriginal */
-			$textOriginal = df_a($widgetParams, $paramName);
+			$textOriginal = dfa($widgetParams, $paramName);
 			if ($textOriginal && is_string($textOriginal)) {
 				/** @var string|null $textProcessed */
 				$textProcessed = $term->translate($textOriginal);
@@ -34,12 +34,12 @@ class Df_Localization_Onetime_Processor_Cms_Widget
 			/** @var string $titleKey */
 			$titleKey = 'title_' . $i;
 			/** @var array(string => string)|null $titleValue */
-			$titleValue = df_a($widgetParams, $titleKey);
+			$titleValue = dfa($widgetParams, $titleKey);
 			if (!$titleValue || !is_array($titleValue)) {
 				break;
 			}
 			/** @var string|mixed|null $textOriginal */
-			$textOriginal = df_a($titleValue, 0);
+			$textOriginal = dfa($titleValue, 0);
 			if ($textOriginal && is_string($textOriginal)) {
 				/** @var string|null $textProcessed */
 				$textProcessed = $term->translate($textOriginal);

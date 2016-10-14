@@ -128,7 +128,7 @@ abstract class Df_Admin_Config_Backend_Cron extends Mage_Core_Model_Config_Data 
 	/** @return int */
 	private function getHour() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat0(df_trim_left(df_a($this->getTime(), 0), '0'));
+			$this->{__METHOD__} = rm_nat0(df_trim_left(dfa($this->getTime(), 0), '0'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -136,7 +136,7 @@ abstract class Df_Admin_Config_Backend_Cron extends Mage_Core_Model_Config_Data 
 	/** @return int */
 	private function getMinute() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_nat0(df_trim_left(df_a($this->getTime(), 1), '0'));
+			$this->{__METHOD__} = rm_nat0(df_trim_left(dfa($this->getTime(), 1), '0'));
 		}
 		return $this->{__METHOD__};
 	}

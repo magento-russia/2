@@ -51,7 +51,7 @@ class Df_Localization_Onetime_Processor_Attribute
 			}
 			else {
 				/** @var string|null $storeLabel */
-				$storeLabel = df_a($storeLabels, $store->getId());
+				$storeLabel = dfa($storeLabels, $store->getId());
 				if ($storeLabel) {
 					$storeLabels[$store->getId()] = $this->getActions()->getTitleNew();
 				}
@@ -75,9 +75,9 @@ class Df_Localization_Onetime_Processor_Attribute
 		/** @var array(string => array(int => array(int => string))) $propertyOption */
 		$propertyOption = df_nta($this->getEntity()->getData('option'));
 		/** @var array(int => array(int => string)) $propertyValue */
-		$propertyValue = df_a($propertyOption, 'value', array());
+		$propertyValue = dfa($propertyOption, 'value', array());
 		/** @var array(int => string) $propertyOptionId */
-		$propertyOptionId =  df_a($propertyValue, $option->getId(), array());
+		$propertyOptionId =  dfa($propertyValue, $option->getId(), array());
 		$propertyOptionId[$store->getId()] = $newLabel;
 		$propertyValue[$option->getId()] = $propertyOptionId;
 		$propertyOption['value'] = $propertyValue;

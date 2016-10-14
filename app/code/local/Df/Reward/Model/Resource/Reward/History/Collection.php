@@ -77,7 +77,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 	 * @return Df_Reward_Model_Resource_Reward_History_Collection
 	 */
 	public function addWebsiteFilter($websiteId) {
-		$this->getSelect()->where('main_table.website_id IN (?)', rm_array($websiteId));
+		$this->getSelect()->where('main_table.website_id IN (?)', df_array($websiteId));
 		return $this;
 	}
 

@@ -39,7 +39,7 @@ function df_is_admin($store = null) {return 'admin' === Mage::app()->getStore($s
  * @return string
  */
 function df_lang() {
-	static $r; return $r ? $r : $r = rm_first(explode('_', Mage::app()->getLocale()->getLocaleCode()));
+	static $r; return $r ? $r : $r = df_first(explode('_', Mage::app()->getLocale()->getLocaleCode()));
 }
 
 /**

@@ -93,7 +93,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	/** @return string */
 	public function getFirstName() {
 		return $this->formatName(
-			rm_first(explode(' ', df_nts($this->getBillingAddress()->getFirstname()))), 'FIRSTNAME'
+			df_first(explode(' ', df_nts($this->getBillingAddress()->getFirstname()))), 'FIRSTNAME'
 		);
 	}
 
@@ -104,7 +104,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 			/** @var string[] $firstNameExploded */
 			$firstNameExploded = explode(' ', df_nts($this->getBillingAddress()->getFirstname()));
 			if (1 < count($firstNameExploded)) {
-				$lastName = rm_last($firstNameExploded);
+				$lastName = df_last($firstNameExploded);
 			}
 		}
 		return $this->formatName(df_nts($lastName), 'LASTNAME');

@@ -19,7 +19,7 @@ class Df_Avangard_Model_Response_State extends Df_Avangard_Model_Response {
 
 	/** @return string */
 	public function getPaymentStatusMeaning() {
-		return df_a(
+		return dfa(
 			array(
 				0 => 'Заказ не найден'
 				,1 => 'Обрабатывается'
@@ -46,7 +46,7 @@ class Df_Avangard_Model_Response_State extends Df_Avangard_Model_Response {
 	/** @return string */
 	public function getVerificationMethodMeaning() {
 		return
-			df_a(
+			dfa(
 				array(
 					'CVV' => 'операция подтверждена посредством ввода кода CVV2/CVC2'
 					,'D3S' => 'операция подтверждена посредством 3D Secure (Verified by Visa/MasterCard Secure Code)'

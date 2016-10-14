@@ -54,7 +54,7 @@ class Df_Qa_State extends Df_Core_Model {
 			}
 			df_assert_lt(count($this->method()->getParameters()), $paramOrdering);
 			/** @var ReflectionParameter $result */
-			$result = df_a($this->method()->getParameters(), $paramOrdering);
+			$result = dfa($this->method()->getParameters(), $paramOrdering);
 			df_assert($result instanceof ReflectionParameter);
 			$this->{__METHOD__}[$paramOrdering] = $result;
 		}
@@ -86,11 +86,11 @@ class Df_Qa_State extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * 2015-04-03
-			 * Надо использовать именно @uses rm_concat_clean(),
+			 * Надо использовать именно @uses df_ccc(),
 			 * потому что для простых функций (не методов)
 			 * @uses className() вернёт пустое значение.
 			 */
-			$this->{__METHOD__} = rm_concat_clean('::', $this->className(), $this->functionName());
+			$this->{__METHOD__} = df_ccc('::', $this->className(), $this->functionName());
 		}
 		return $this->{__METHOD__};
 	}

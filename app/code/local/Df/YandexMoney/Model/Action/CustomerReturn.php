@@ -135,7 +135,7 @@ class Df_YandexMoney_Model_Action_CustomerReturn extends Df_Payment_Model_Action
 			/** @var string|null $errorCode */
 			$errorCode = $this->getRequest()->getParam('error');
 			if ($errorCode) {
-				$this->throwException(df_a(array(
+				$this->throwException(dfa(array(
 					'invalid_request' =>
 						'В запросе отсутствуют обязательные параметры,'
 						. ' либо параметры имеют некорректные или недопустимые значения.'

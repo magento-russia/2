@@ -28,13 +28,13 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 	 * @return string
 	 */
 	public function translateByModule($text, $module) {
-		$text = rm_array($text);
+		$text = df_array($text);
 		/**
 		 * Раньше тут стояло:
 		 * $expr = new Mage_Core_Model_Translate_Expr(array_shift($args), $module);
 		 * array_unshift($args, $expr);
 		 */
-		$text[0] = new Mage_Core_Model_Translate_Expr(df_a($text, 0), $module);
+		$text[0] = new Mage_Core_Model_Translate_Expr(dfa($text, 0), $module);
 		/** @var Mage_Core_Model_Translate $translator */
 		static $translator; if (!$translator) {$translator = Mage::app()->getTranslator();}
 		return $translator->translate($text);

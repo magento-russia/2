@@ -4,7 +4,7 @@ class Df_Catalog_Block_Frontend_Product_View_Sku extends Df_Core_Block_Template 
 	public function getOutput() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_concat_clean(': ', $this->getFormattedLabel(), $this->getFormattedValue())
+				df_ccc(': ', $this->getFormattedLabel(), $this->getFormattedValue())
 			;
 		}
 		return $this->{__METHOD__};

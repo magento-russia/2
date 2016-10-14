@@ -40,7 +40,7 @@ class Df_Adminhtml_Model_Config extends Mage_Adminhtml_Model_Config {
 			 * при том, что там такой же вызов xpath.
 			 */
 			if (is_array($sectionNode)) {
-				$sectionNode = rm_first($sectionNode);
+				$sectionNode = df_first($sectionNode);
 			}
 			if ($sectionNode) {
 				/** @var string $sectionName */

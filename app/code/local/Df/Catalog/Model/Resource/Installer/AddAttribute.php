@@ -16,13 +16,13 @@ class Df_Catalog_Model_Resource_Installer_AddAttribute extends Df_Catalog_Model_
 			,'note' => ''
 		), $attributeData);
 		// В Magento CE 1.4 значением поля «note» не может быть null
-		$attributeData['note'] = df_nts(df_a($attributeData, 'note'));
+		$attributeData['note'] = df_nts(dfa($attributeData, 'note'));
 		/**
 		 * В Magento CE 1.4, если поле «attribute_model» присутствует,
 		 * то его значение не может быть пустым
 		 * @see Mage_Eav_Model_Config::_createAttribute()
 		 */
-		if (!df_a($attributeData, Df_Eav_Model_Entity_Attribute::P__ATTRIBUTE_MODEL)) {
+		if (!dfa($attributeData, Df_Eav_Model_Entity_Attribute::P__ATTRIBUTE_MODEL)) {
 			unset($attributeData[Df_Eav_Model_Entity_Attribute::P__ATTRIBUTE_MODEL]);
 		}
 		/**
@@ -38,7 +38,7 @@ class Df_Catalog_Model_Resource_Installer_AddAttribute extends Df_Catalog_Model_
 			$this->_validateAttributeData($attributeData);
 		}
 		/** @var int|null $sortOrder */
-		$sortOrder = df_a($attributeData, 'sort_order');
+		$sortOrder = dfa($attributeData, 'sort_order');
 		$attributeId = $this->getAttribute(rm_eav_id_product(), $attributeCode, 'attribute_id');
 		if (!$attributeId) {
 			$this->_insertAttribute($attributeData);
@@ -54,7 +54,7 @@ class Df_Catalog_Model_Resource_Installer_AddAttribute extends Df_Catalog_Model_
 			);
 		}
 		/** @var array|null $options */
-		$options = df_a($attributeData, 'option');
+		$options = dfa($attributeData, 'option');
 		if (!is_null($options)) {
 			df_assert_array($options);
 			$options['attribute_id'] = $this->getAttributeId(rm_eav_id_product(), $attributeCode);

@@ -45,7 +45,7 @@ function rm_action(Mage_Core_Controller_Varien_Action $controller, $class = null
 	$full = $class && rm_starts_with($class, $m);
 	if (!$class) {
 		// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
-		$class = df_trim_text_right(rm_last(rm_explode_class($controller)), 'Controller');
+		$class = df_trim_text_right(df_last(rm_explode_class($controller)), 'Controller');
 	}
 	Df_Core_Model_Action::pc($full ? $class : rm_concat_class($m, 'Model_Action', $class), $controller);
 }
@@ -129,7 +129,7 @@ function rm_module_id(Varien_Object $object, $separator) {
 			// «Yandex.Market»
 			implode($separator, df_explode_camel(
 				// «YandexMarket»
-				df_a(rm_explode_class($className), 1)
+				dfa(rm_explode_class($className), 1)
 			)
 		));
 	}

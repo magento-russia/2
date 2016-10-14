@@ -113,10 +113,10 @@ class Df_Reward_Observer {
 			 */
 			$request = $o['request'];
 			/** @var array(string => mixed)|null $payment */
-			$payment = df_a($request, 'payment');
+			$payment = dfa($request, 'payment');
 			if ($payment) {
 				/** @var bool|null $usePoints */
-				$usePoints = df_a($payment, 'use_reward_points');
+				$usePoints = dfa($payment, 'use_reward_points');
 				if (!is_null($usePoints)) {
 					$this->_paymentDataImport($quote, $quote->getPayment(), !!$usePoints);
 				}
@@ -518,7 +518,7 @@ class Df_Reward_Observer {
 				;
 			}
 			/** @var int[] $ruleIds */
-			$ruleIds = rm_array_unique_fast(df_csv_parse_int($order->getAppliedRuleIds()));
+			$ruleIds = dfa_unique_fast(df_csv_parse_int($order->getAppliedRuleIds()));
 			$data = Df_Reward_Model_Resource_Reward::s()->getRewardSalesrule($ruleIds);
 			$pointsDelta = array_sum(rm_int(array_column($data, 'points_delta')));
 			if ($pointsDelta) {

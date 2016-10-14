@@ -42,24 +42,24 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 			df_error('Система не смогла распознать значение «%s» как веб-адрес.', $url);
 		}
 		/** @var string $scheme */
-		$scheme = rm_first($schemeAndOther);
+		$scheme = df_first($schemeAndOther);
 		/** @var string $schemeTail */
 		/**
 		 * Раньше тут стояло:
-		 * $schemeTail = rm_last($schemeAndOther).
+		 * $schemeTail = df_last($schemeAndOther).
 		 * Причина смены кода объяснена в предыдущем комментарии выше.
 		 */
-		$schemeTail = implode('//', rm_tail($schemeAndOther));
+		$schemeTail = implode('//', df_tail($schemeAndOther));
 		/** @var string[] $schemeTailExploded */
 		$schemeTailExploded = df_explode_url($schemeTail);
 		df_assert_ge(2, count($schemeTailExploded));
 		/** @var string $domainAndPort */
-		$domainAndPort = rm_first($schemeTailExploded);
+		$domainAndPort = df_first($schemeTailExploded);
 		if (df_cfg()->yandexMarket()->other()->useNonStandardDomain()) {
 			$domainAndPort = df_cfg()->yandexMarket()->other()->getDomain();
 		}
 		/** @var string[] $path */
-		$pathExploded = rm_tail($schemeTailExploded);
+		$pathExploded = df_tail($schemeTailExploded);
 		/** @var string $resultRaw */
 		$result =
 			$scheme . '//' . $domainAndPort . '/' . df_concat_url(array_map('urlencode', $pathExploded))
@@ -135,7 +135,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 					}
 					$result[]= array(
 						Df_Core_Sxe::ATTR => $attributes
-						,Df_Core_Sxe::CONTENT => rm_cdata(
+						,Df_Core_Sxe::CONTENT => df_cdata(
 							$category->getName() ? $category->getName() : $category->getId()
 						)
 					);

@@ -24,7 +24,7 @@ class Df_Adminhtml_Block_Page_Head extends Mage_Adminhtml_Block_Page_Head {
 			}
 			else {
 				$params = null;
-				df_array_unshift_assoc($this->_data['items'], $type . '/' . $name, array(
+				dfa_unshift_assoc($this->_data['items'], $type . '/' . $name, array(
 					'type' => $type
 					,'name' => $name
 					,'params' => $params
@@ -70,7 +70,7 @@ class Df_Adminhtml_Block_Page_Head extends Mage_Adminhtml_Block_Page_Head {
 		// потому что иначе система педупреждает:
 		// «Notice: Only variable references should be returned by reference»
 		/** @var string $result */
-		$result = rm_concat_clean("\n"
+		$result = df_ccc("\n"
 			,Df_Page_Head::prependTags($format, $staticItems)
 			,parent::_prepareStaticAndSkinElements($format, $staticItems, $skinItems, $mergeCallback)
 		);

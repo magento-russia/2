@@ -428,7 +428,7 @@ class Df_Qa_Method extends Mage_Core_Helper_Abstract {
 	 * @param int $stackLevel [optional]
 	 * @return Df_Qa_State
 	 */
-	private static function caller($stackLevel) {return Df_Qa_State::i(df_a(debug_backtrace(), $stackLevel + 2));}
+	private static function caller($stackLevel) {return Df_Qa_State::i(dfa(debug_backtrace(), $stackLevel + 2));}
 
 	/**
 	 * @param string $message

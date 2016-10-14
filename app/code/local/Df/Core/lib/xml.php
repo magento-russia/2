@@ -444,7 +444,7 @@ function rm_xml_output_html($text) {
  */
 function rm_xml_output_html_callback(array $matches) {
 	return strtr('<pre class="rm-xml">{contents}</div>', array(
-		'{contents}' => rm_e(rm_normalize(df_a($matches, 1, ''))))
+		'{contents}' => rm_e(rm_normalize(dfa($matches, 1, ''))))
 	);
 }
 

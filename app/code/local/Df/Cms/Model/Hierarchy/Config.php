@@ -8,7 +8,7 @@ class Df_Cms_Model_Hierarchy_Config {
 	 */
 	public function getContextMenuLayout($layoutCode) {
 		$this->_initContextMenuLayouts();
-		return df_a($this->_contextMenuLayouts, $layoutCode, false);
+		return dfa($this->_contextMenuLayouts, $layoutCode, false);
 	}
 	/** @var array(string => Varien_Object) */
 	protected $_contextMenuLayouts = null;

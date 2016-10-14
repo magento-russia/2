@@ -6,7 +6,7 @@
 class Df_Tax_Config_Source_AddressType {
 	/** @return array(array(string => string)) */
 	public function toOptionArray() {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			'shipping' => 'Shipping Address'
 			, 'billing' => 'Billing Address'
 			, 'origin' => 'Shipping Origin'

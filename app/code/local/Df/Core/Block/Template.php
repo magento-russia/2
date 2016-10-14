@@ -32,7 +32,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		//
 		// 2015-02-10
 		// Раньше код был таким:
-		// $valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		// $valueWasNullBeforeFilters = dfa($this->_valueWasNullBeforeFilters, $key, true);
 		// return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
 		// Изменил его ради ускорения.
 		// Неожиданным результатом стала простота и понятность нового кода.
@@ -116,7 +116,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			}
 			/** @var string|string[] $suffix */
 			$suffix = $this->cacheKeySuffix();
-			$this->{__METHOD__} = !$suffix ? $result : array_merge($result, rm_array($suffix));
+			$this->{__METHOD__} = !$suffix ? $result : array_merge($result, df_array($suffix));
 		}
 		return $this->{__METHOD__};
 	}
@@ -353,7 +353,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		if (2 < func_num_args()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$isRequired = rm_last($arguments);
+			$isRequired = df_last($arguments);
 			/** @var bool $hasRequiredFlag */
 			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired);
 			if ($hasRequiredFlag) {
@@ -361,7 +361,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			}
 			else {
 				$isRequired = null;
-				$validator = rm_tail($arguments);
+				$validator = df_tail($arguments);
 			}
 		}
 		/** @var Zend_Validate_Interface[] $additionalValidators */
@@ -376,9 +376,9 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		}
 		else {
 			/** @var array(Zend_Validate_Interface|Df_Zf_Validate_Type|string) $additionalValidatorsRaw */
-			$additionalValidatorsRaw = rm_tail($validator);
+			$additionalValidatorsRaw = df_tail($validator);
 			$validator = Df_Core_Validator::resolveForProperty(
-				$this, rm_first($validator), $key, $skipOnNull = false === $isRequired
+				$this, df_first($validator), $key, $skipOnNull = false === $isRequired
 			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 			foreach ($additionalValidatorsRaw as $additionalValidatorRaw) {
@@ -512,7 +512,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	private function _applyFilters($key, $value) {
 		/** @var Zend_Filter_Interface[] $filters */
 		/** @noinspection PhpParamsInspection */
-		$filters = df_a($this->_filters, $key, array());
+		$filters = dfa($this->_filters, $key, array());
 		foreach ($filters as $filter) {
 			/** @var Zend_Filter_Interface $filter */
 			$value = $filter->filter($value);
@@ -563,7 +563,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	private function _validate($key, $value) {
 		/** @var @var array(Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
 		/** @noinspection PhpParamsInspection */
-		$validators = df_a($this->_validators, $key, array());
+		$validators = dfa($this->_validators, $key, array());
 		foreach ($validators as $validator) {
 			/** @var Zend_Validate_Interface|Df_Zf_Validate_Type $validator */
 			Df_Core_Validator::checkProperty($this, $key, $value, $validator);
@@ -672,7 +672,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$functions = rm_tail($arguments);
+			$functions = df_tail($arguments);
 		}
 		foreach ($functions as $function) {
 			/** @var string $function */

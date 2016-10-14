@@ -160,7 +160,7 @@ function rm_country($iso2, $throw = true) {
 function rm_country_ctn($iso2, $locale = null) {
 	df_param_iso2($iso2, 0);
 	/** @var string $result */
-	$result = df_a(rm_countries_ctn($locale), $iso2);
+	$result = dfa(rm_countries_ctn($locale), $iso2);
 	if (!$result) {
 		df_error(
 			'Система не смогла узнать название страны с кодом «%s» для локали «%s».'
@@ -188,7 +188,7 @@ function rm_country_ctn_ru($iso2) {return rm_country_ctn($iso2, 'ru_RU');}
  */
 function rm_country_ntc($name, $locale = null) {
 	df_param_string_not_empty($name, 0);
-	return df_a(rm_countries_ntc($locale), mb_strtoupper(df_trim($name)));
+	return dfa(rm_countries_ntc($locale), mb_strtoupper(df_trim($name)));
 }
 
 /**

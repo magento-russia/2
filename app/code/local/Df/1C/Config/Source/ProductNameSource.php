@@ -11,7 +11,7 @@ class Df_1C_Config_Source_ProductNameSource extends Df_Admin_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			'name' => '«Наименование» («Рабочее наименование»)'
 			,self::$VALUE__NAME_FULL => '«Полное наименование» («Наименование для печати»)'
 		));

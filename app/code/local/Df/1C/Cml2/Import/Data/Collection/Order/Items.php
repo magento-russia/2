@@ -9,7 +9,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 		df_param_integer($productId, 0);
 		df_param_between($productId, 0, 1);
 		/** @var Df_1C_Cml2_Import_Data_Entity_Order_Item $result */
-		$result = df_a($this->getMapFromProductIdToOrderItem(), $productId);
+		$result = dfa($this->getMapFromProductIdToOrderItem(), $productId);
 		df_assert($result instanceof Df_1C_Cml2_Import_Data_Entity_Order_Item);
 		return $result;
 	}
@@ -34,7 +34,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 			$productId = $orderItem->getProduct()->getId();
 			df_assert_integer($productId);
 			/** @var Df_1C_Cml2_Import_Data_Entity_Order_Item[] $orderItemsForTheProduct */
-			$orderItemsForTheProduct = df_nta(df_a($mapFromProductsToOrderItems, $productId));
+			$orderItemsForTheProduct = df_nta(dfa($mapFromProductsToOrderItems, $productId));
 			$orderItemsForTheProduct[]= $orderItem;
 			$mapFromProductsToOrderItems[$productId] = $orderItemsForTheProduct;
 		}
@@ -45,7 +45,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 			df_assert_gt0($orderItemsCount);
 			$result[]=
 				1 === $orderItemsCount
-				? df_a($orderItemsForTheProduct, 0)
+				? dfa($orderItemsForTheProduct, 0)
 				: Df_1C_Cml2_Import_Data_Entity_Order_Item_Composite::i(
 					$this->getEntityOrder(), $orderItemsForTheProduct
 				)
@@ -96,7 +96,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 				/** @var int $productId */
 				$productId = $entityOrderItem->getProduct()->getId();
 				df_assert_gt0($productId);
-				df_assert(is_null(df_a($result, $productId)));
+				df_assert(is_null(dfa($result, $productId)));
 				$result[$productId] = $entityOrderItem;
 			}
 			$this->{__METHOD__} = $result;

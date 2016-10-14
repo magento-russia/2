@@ -65,7 +65,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			/** @var Df_Localization_Helper_Locale $helper */
 			$helper = Df_Localization_Helper_Locale::s();
 			foreach ($this->constManager()->getAllowedLocaleCodes() as $code) {
-				$result[]= rm_option($code, df_a($languages, $helper->getLanguageCodeByLocaleCode($code)));
+				$result[]= rm_option($code, dfa($languages, $helper->getLanguageCodeByLocaleCode($code)));
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -218,8 +218,8 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	public function getSelectedPaymentMethodCode() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_n_set(
-				df_a(
-					df_a(
+				dfa(
+					dfa(
 						$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
 						,$this->getSelectedPaymentMethod()
 						,array()
@@ -240,7 +240,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				array_column(
-					df_select(
+					dfa_select(
 						$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
 						,$this->getSelectedPaymentMethods()
 					)

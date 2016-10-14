@@ -24,7 +24,7 @@ class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Mysql4_Poll
 	 * @return mixed
 	 */
 	public function getRmData($paramName = null) {
-		return is_null($paramName) ?  $this->_rmData : df_a($this->_rmData, $paramName);
+		return is_null($paramName) ?  $this->_rmData : dfa($this->_rmData, $paramName);
 	}
 
 	/**

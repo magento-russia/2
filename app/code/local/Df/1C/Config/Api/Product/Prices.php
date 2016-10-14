@@ -9,7 +9,7 @@ class Df_1C_Config_Api_Product_Prices extends Df_1C_Config_Api_Cml2 {
 	 * @return Df_Customer_Model_Group|null
 	 */
 	public function getCustomerGroup($названиеТиповогоСоглашения) {
-		return df_a($this->_map(), $названиеТиповогоСоглашения);
+		return dfa($this->_map(), $названиеТиповогоСоглашения);
 	}
 
 	/**

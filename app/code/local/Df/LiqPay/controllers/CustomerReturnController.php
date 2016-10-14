@@ -56,7 +56,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	 */
 	private function processDelayed() {
 		$this->setRedirectUrl(rm_url_checkout_success());
-		rm_last_order()->comment(
+		df_last_order()->comment(
 			'Покупатель решил оплатить заказ через терминал Приватбанка. Ждём оплату.'
 		);
 	}

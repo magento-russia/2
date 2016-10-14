@@ -124,7 +124,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				$result = self::T__PAYMENT_STATE__CANCELLED__TIMEOUT;
 			}
 		}
-		return rm_concat_clean(' ', $result, "Код состояния платежа: «{$code}».");
+		return df_ccc(' ', $result, "Код состояния платежа: «{$code}».");
 	}
 
 	/** @return Df_Zf_Soap_Server */

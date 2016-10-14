@@ -330,7 +330,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 				if ($matchingProductIdsRaw) {
 					/** @var int[] $matchingProductIds */
 					/** @var int|array(int => int) $matchingProductIdRawTest */
-					$matchingProductIdRawTest = rm_first($matchingProductIdsRaw);
+					$matchingProductIdRawTest = df_first($matchingProductIdsRaw);
 					if (!is_array($matchingProductIdRawTest)) {
 						$matchingProductIds = rm_int_simple(array_values($matchingProductIdsRaw));
 					}
@@ -364,7 +364,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 						foreach ($matchingProductIdsRaw as $matchingProductId => $matchingProductIdRaw) {
 							/** @var int $matchingProductId */
 							/** @var array(int => int) $matchingProductIdRaw */
-							if ($matchingProductIdRaw && df_a($matchingProductIdRaw, $websiteId)) {
+							if ($matchingProductIdRaw && dfa($matchingProductIdRaw, $websiteId)) {
 								$matchingProductIds[]= (int)$matchingProductId;
 							}
 						}

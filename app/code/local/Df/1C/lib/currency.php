@@ -20,7 +20,7 @@ function rm_1c_currency_code_normalize($nonStandardCurrencyCode) {
  */
 function rm_1c_currency_code_to_1c_format($ccInMagentoFormat) {
 	df_param_string_not_empty($ccInMagentoFormat, 0);
-	$result = df_a(rm_1c_cfg()->general()->ссMapTo1C(), $ccInMagentoFormat, $ccInMagentoFormat);
+	$result = dfa(rm_1c_cfg()->general()->ссMapTo1C(), $ccInMagentoFormat, $ccInMagentoFormat);
 	/**
 	 * Раньше тут стояло df_result_string_not_empty,
 	 * однако в магазине belle.com.ua это привело к сбою:
@@ -47,7 +47,7 @@ function rm_1c_currency_code_to_magento_format($ccIn1CFormat) {
 	df_param_string_not_empty($ccIn1CFormat, 0);
 	/** @var string $normalized */
 	$normalized = rm_1c_currency_code_normalize($ccIn1CFormat);
-	return df_a(
+	return dfa(
 		rm_1c_cfg()->general()->ccMapFrom1C() + array('РУБ' => 'RUB', 'ГРН' => 'UAH')
 		,$normalized
 		,$normalized

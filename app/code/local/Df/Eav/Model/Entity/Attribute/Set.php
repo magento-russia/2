@@ -54,7 +54,7 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 	 * @return void
 	 */
 	public function addExternalIdAttribute($code, $label, $groupName, $groupOrdering) {
-		if (!df_a($this->_hasExternalId, $code)) {
+		if (!dfa($this->_hasExternalId, $code)) {
 			/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 			$attribute = rm_attributes()->createOrUpdate(array(
 				'entity_type_id' => rm_eav_id_product()

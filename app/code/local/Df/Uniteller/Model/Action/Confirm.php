@@ -83,7 +83,7 @@ class Df_Uniteller_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 		df_param_string($code, 0);
 		/** @var string $result */
 		$result =
-			df_a(
+			dfa(
 				array(
 					self::PAYMENT_STATE__AUTHORIZED => 'Cредства на карте покупателя заблокированы'
 					,self::PAYMENT_STATE__PAID => 'Оплата получена'

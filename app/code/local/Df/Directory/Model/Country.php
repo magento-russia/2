@@ -21,7 +21,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	public function getNameInCase($case, $defaultTemplate) {
 		if (!isset($this->{__METHOD__}[$case])) {
 			/** @var string $result */
-			$result = df_a($this->getNameInCases(), $case);
+			$result = dfa($this->getNameInCases(), $case);
 			if (!$result && $this->getMorpher()) {
 				$result = $this->getMorpher()->getInCase($case);
 			}
@@ -72,7 +72,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	public function getNumericCode() {
 		/** @var array(string => string) $map */
 		static $map; if (!$map) {$map = Zend_Locale::getTranslationList('numerictoterritory');}
-		return rm_int(df_a($map, $this->getIso2Code()));
+		return rm_int(dfa($map, $this->getIso2Code()));
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	private function getNameInCases() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_a(
+				dfa(
 					df_h()->directory()->country()->getMapFromIso2CodeToNameCases()
 					,$this->getIso2Code()
 					,array()

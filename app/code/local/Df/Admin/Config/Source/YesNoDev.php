@@ -11,7 +11,7 @@ class Df_Admin_Config_Source_YesNoDev extends Df_Admin_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::YES => 'да'
 			, self::NO => 'нет'
 			, self::DEVELOPER_MODE => sprintf(

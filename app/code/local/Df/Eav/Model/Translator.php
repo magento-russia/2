@@ -15,7 +15,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 			Mage::log(
 				'Добавьте в файл app/locale/ru_DF/Df/Eav.csv'
 				. " перевод следующих экранных названий свойств:\n"
-				. df_concat_n(rm_array_unique_fast($this->_untranslated))
+				. df_concat_n(dfa_unique_fast($this->_untranslated))
 				, null
 				, 'rm.translation.log'
 			);
@@ -51,7 +51,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 						)
 				)
 		) {
-			$attribute->addData($this->translateLabels(df_select($attribute->getData(), self::$LABEL_NAMES)));
+			$attribute->addData($this->translateLabels(dfa_select($attribute->getData(), self::$LABEL_NAMES)));
 			$attribute->{self::$RM_TRANSLATED} = true;
 		}
 		/**
@@ -87,22 +87,22 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 		if (
 				df_is_admin()
 			||
-				rm_bool(df_a($attributeData, 'is_visible_on_front'))
+				rm_bool(dfa($attributeData, 'is_visible_on_front'))
 			||
 				(
 						// Для свойства «Special Price» («special_price») is_visible_on_front = false,
 						// но is_visible = true
-						rm_bool(df_a($attributeData, 'is_visible'))
+						rm_bool(dfa($attributeData, 'is_visible'))
 					&&
 						// В магазине rukodeling.ru для нестандартного свойства «diametrdyr»
 						// is_visible почему-то равно true.
 						// Отбраковываем все нестандартные свойства,
 						// у которых is_visible_on_front = false.
-						!rm_bool(df_a($attributeData, 'is_user_defined'))
+						!rm_bool(dfa($attributeData, 'is_user_defined'))
 				)
 		) {
 			$attributeData =
-				$this->translateLabels(df_select($attributeData, self::$LABEL_NAMES)) + $attributeData
+				$this->translateLabels(dfa_select($attributeData, self::$LABEL_NAMES)) + $attributeData
 			;
 		}
 	}
@@ -201,7 +201,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 		foreach (self::$OPTION_LABEL_NAMES as $labelName) {
 			/** @var string $labelName */
 			/** @var string|null $labelValue */
-			$labelValue = df_a($optionData, $labelName);
+			$labelValue = dfa($optionData, $labelName);
 			if ($labelValue) {
 				$optionData[$labelName] = $this->translateLabel($labelValue);
 			}

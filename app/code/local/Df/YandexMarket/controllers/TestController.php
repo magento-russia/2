@@ -60,7 +60,7 @@ class Df_YandexMarket_TestController extends Mage_Core_Controller_Front_Action {
 		$document = Df_Core_Xml_Generator_Document::_i(array(
 			Df_Core_Xml_Generator_Document::P__CONTENTS_AS_ARRAY => array(
 				'a' => 'превед'
-				,'b' => rm_cdata('медвед')
+				,'b' => df_cdata('медвед')
 			)
 			,Df_Core_Xml_Generator_Document::P__TAG_NAME => 'тест'
 		));

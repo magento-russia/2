@@ -33,7 +33,7 @@ class Df_Core_Model_Design_Package extends Df_Core_Model {
 	 * @return string
 	 */
 	private function getPackageConfigParam($paramName, $defaultValue = null) {
-		return df_a($this->getPackageConfig(), $paramName, $defaultValue);
+		return dfa($this->getPackageConfig(), $paramName, $defaultValue);
 	}
 
 	const _C = __CLASS__;

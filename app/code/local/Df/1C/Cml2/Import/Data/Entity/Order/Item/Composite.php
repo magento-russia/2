@@ -26,7 +26,7 @@ class Df_1C_Cml2_Import_Data_Entity_Order_Item_Composite
 	public function leaf($name, $default = null) {return $this->getFirstItem()->leaf($name, $default);}
 
 	/** @return Df_1C_Cml2_Import_Data_Entity_Order_Item */
-	private function getFirstItem() {return df_a($this->getSimpleItems(), 0);}
+	private function getFirstItem() {return dfa($this->getSimpleItems(), 0);}
 
 	/**
 	 * Перекрываем этот метод лишь для того,

@@ -13,9 +13,9 @@ class Df_Zf_Log_Formatter_Benchmark extends Zend_Log_Formatter_Simple {
 		/** @var float $timePrev */
 		static $timePrev; if (!$timePrev) {$timePrev = $timeCurrent;}
 		/** @var string $message */
-		$message = df_a($event, 'message');
+		$message = dfa($event, 'message');
 		/** @var bool $isRaw */
-		$isRaw = df_a($event, self::FORMAT__RAW);
+		$isRaw = dfa($event, self::FORMAT__RAW);
 		/** @var string $result */
 		$result =
 			$isRaw

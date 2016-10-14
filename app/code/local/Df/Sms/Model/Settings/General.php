@@ -17,7 +17,7 @@ class Df_Sms_Model_Settings_General extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	public function getGateClass(Df_Core_Model_StoreM $store) {
-		return df_a(
+		return dfa(
 			array(Df_Sms_Model_Gate_Sms16Ru::RM__ID => Df_Sms_Model_Gate_Sms16Ru::_C)
 			,$this->getGate($store)
 		);

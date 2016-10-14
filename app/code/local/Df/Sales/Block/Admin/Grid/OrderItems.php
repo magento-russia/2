@@ -107,7 +107,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => array(string => mixed)) $parsedValues */
 			$parsedValues =
-				df_array_combine(
+				array_combine(
 					Df_Sales_Block_Admin_Grid_OrderItem::getKeysTarget()
 					/** @uses parseConcatenatedValues() */
 					,array_map(
@@ -119,7 +119,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 			/** @var array(int => array(string => mixed)) $result */
 			$result = array();
 			/** @var int $numProducts */
-			$numProducts = count(df_a($parsedValues,
+			$numProducts = count(dfa($parsedValues,
 				Df_Sales_Block_Admin_Grid_OrderItem::P__PRODUCT_NAME
 			));
 			for ($productOrdering = 0; $productOrdering < $numProducts; $productOrdering++) {
@@ -129,12 +129,12 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 					/** @var string $key */
 					df_assert_string($key);
 					/** @var array(string => mixed) $attributeValues */
-					$attributeValues = df_a($parsedValues, $key);
+					$attributeValues = dfa($parsedValues, $key);
 					df_assert_array($attributeValues);
-					$product[$key] = df_a($attributeValues, $productOrdering);
+					$product[$key] = dfa($attributeValues, $productOrdering);
 				}
 				/** @var int $index */
-				$index = rm_nat0(df_a($product, Df_Sales_Block_Admin_Grid_OrderItem::P__ORDER_ITEM_ID));
+				$index = rm_nat0(dfa($product, Df_Sales_Block_Admin_Grid_OrderItem::P__ORDER_ITEM_ID));
 				$result[$index] = $product;
 			}
 			$result = $this->removeParents($result);
@@ -159,7 +159,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 			df_assert_integer($id);
 			df_assert_array($product);
 			/** @var int $parentId */
-			$parentId = rm_nat0(df_a(
+			$parentId = rm_nat0(dfa(
 				$product, Df_Sales_Block_Admin_Grid_OrderItem::COLLECTION_ITEM_PARAM__PARENT_ID
 			));
 			if (0 !== $parentId) {

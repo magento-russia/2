@@ -11,7 +11,7 @@ class Df_Admin_Config_Source_LetterCase extends Df_Admin_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::_DEFAULT => 'не менять'
 			,self::$UCFIRST => 'с заглавной буквы'
 			,self::$UPPERCASE => 'заглавными буквами'
@@ -33,7 +33,7 @@ class Df_Admin_Config_Source_LetterCase extends Df_Admin_Config_Source {
 	 * @return string
 	 */
 	public static function css($value) {
-		return df_a(array(
+		return dfa(array(
 			self::_DEFAULT => 'none'
 			,self::$UPPERCASE => self::$UPPERCASE
 			,self::$LOWERCASE => self::$LOWERCASE

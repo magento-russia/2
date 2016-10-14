@@ -37,14 +37,14 @@ class Df_Paypal_Model_Api_Standard extends Mage_Paypal_Model_Api_Standard {
 			;
 			$result['discount_amount'] =
 				$this->_filterAmount (
-					rm_float(df_a($result, 'discount_amount')) + $additionalDiscountInUSD
+					rm_float(dfa($result, 'discount_amount')) + $additionalDiscountInUSD
 				)
 			;
 		}
 		if ($this->getIsLineItemsEnabled()) {
 			$result['amount'] =
 				$this->_filterAmount (
-					rm_float(df_a($result, 'amount')) - rm_float(df_a($result, 'shipping'))
+					rm_float(dfa($result, 'amount')) - rm_float(dfa($result, 'shipping'))
 				)
 			;
 		}

@@ -182,7 +182,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			$key = $this->_prepareDataString($key);
 			$value = $this->_prepareDataString($value);
 			/** @var string|bool|int|null $currentScope */
-			$currentScope = is_null($this->_dataScope) ? null : df_a($this->_dataScope, $key);
+			$currentScope = is_null($this->_dataScope) ? null : dfa($this->_dataScope, $key);
 			if ($scope && $currentScope && !$forceReload) {
 				// В словаре уже имеется перевод для фразы $key.
 				// Этот перевод принадлежит модулю $currentScope.
@@ -243,7 +243,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		$dictionary = parent::_getFileData($file);
 		/**
 		 * Массив $dictionary может оказаться пустым,
-		 * и тогда прямое применение @see array_combine() вместо @uses df_array_combine()
+		 * и тогда прямое применение @see array_combine() вместо @uses array_combine()
 		 * приведёт к сбою: «array_combine: Both parameters should have at least 1 element
 		 * in Df/Core/Model/Translate.php on line 226»
 		 * http://magento-forum.ru/topic/4815/
@@ -253,7 +253,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		 * и не надо заменять в ключе, потому что они не должны встречаться в ключе.
 		 * Из ключа мы переносы строк и символы табуляции удаляем в методе @see _getTranslatedString()
 		 */
-		return df_array_combine(
+		return array_combine(
 			array_keys($dictionary), $this->processSpecialCharacters(array_values($dictionary))
 		);
 	}

@@ -59,7 +59,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 */
 	public function addAttributeToSelect($attribute, $joinType = false) {
 		if ($this->isEnabledFlat() && ('*' !== $attribute)) {
-			$this->checkAttributesAreAvailableInFlatMode(rm_array($attribute));
+			$this->checkAttributesAreAvailableInFlatMode(df_array($attribute));
 		}
 		parent::addAttributeToSelect($attribute, $joinType);
 		return $this;
@@ -155,7 +155,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 					/** @var bool $hasDataChanges */
 					// запоминаем состояние изменённости/нетронутости товара
 					$hasDataChanges = $product->hasDataChanges();
-					$product->setCategoryIds(df_a($categoryIds, $product->getId(), array()));
+					$product->setCategoryIds(dfa($categoryIds, $product->getId(), array()));
 					$product->setDataChanges($hasDataChanges);
 				}
 				$this->setFlag('category_ids_added', true);
@@ -224,7 +224,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 * @return mixed
 	 */
 	public function getRmData($paramName = null) {
-		return is_null($paramName) ?  $this->_rmData : df_a($this->_rmData, $paramName);
+		return is_null($paramName) ?  $this->_rmData : dfa($this->_rmData, $paramName);
 	}
 
 	/**
@@ -275,7 +275,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	protected function _afterLoad() {
 		parent::_afterLoad();
 		if ($this->_idFilterClientSide) {
-			$this->_items = df_select($this->_items, $this->_idFilterClientSide);
+			$this->_items = dfa_select($this->_items, $this->_idFilterClientSide);
 		}
 		/** @uses Df_Catalog_Model_Product::markAsLoadedInCollection() */
 		df_each($this, 'markAsLoadedInCollection');
@@ -325,7 +325,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 			 * http://magento-forum.ru/topic/3748/
 			 */
 			/** @var int|null $storeId */
-			$storeId = df_a($filters, 'store_id');
+			$storeId = dfa($filters, 'store_id');
 			if (!is_null($storeId)) {
 				$conditions[]= rm_quote_into('? = cat_index.store_id', $storeId);
 			}
@@ -345,7 +345,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 			}
 			else {
 				/** @var int|null $categoryId */
-				$categoryId = df_a($filters, 'category_id');
+				$categoryId = dfa($filters, 'category_id');
 				if ($categoryId && !$this->getFlag('disable_root_category_filter')) {
 					$conditions[] = rm_quote_into('? = cat_index.category_id', $categoryId);
 				}
@@ -426,7 +426,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 		$filters = $this->_productLimitationFilters;
 		df_assert_array($filters);
 		/** @var string $joinCond */
-		$joinCond = rm_concat_clean(' AND '
+		$joinCond = df_ccc(' AND '
 			,'cat_pro.product_id=e.entity_id'
 			,!$this->hasCategoriesFilter()
 			? rm_quote_into('? = cat_pro.category_id', $filters['category_id'])
@@ -439,7 +439,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 		/** @var array(string => mixed) $fromPart */
 		$fromPart = $this->getSelect()->getPart(Zend_Db_Select::FROM);
 		/** @var array|null $catPro */
-		$catPro = df_a($fromPart, 'cat_pro');
+		$catPro = dfa($fromPart, 'cat_pro');
 		/**
 		 * При выборке товаров сразу по нескольким товарным разделам
 		 * надо использовать DISTINCT,
@@ -548,7 +548,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 						."\n(«Каталог» → «Типы и свойства» → «Свойства товаров»), указать «да»"
 						." в качестве значения опции «Загружать ли в товарные коллекции?»"
 						." и затем перестроить расчётные таблицы."
-						,rm_first($failedAttributes)
+						,df_first($failedAttributes)
 					);
 				}
 				else {
@@ -572,7 +572,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 
 	/** @return int[]|null */
 	private function getCategoriesFilter() {
-		return df_a($this->_productLimitationFilters, self::$LIMITATION__CATEGORIES);
+		return dfa($this->_productLimitationFilters, self::$LIMITATION__CATEGORIES);
 	}
 
 	/**

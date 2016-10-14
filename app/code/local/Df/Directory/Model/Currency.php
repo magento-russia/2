@@ -178,7 +178,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_n_set(
 				Df_Localization_Morpher::s()->getResponseSilent(
-					rm_last(explode(' ', $this->getName()))
+					df_last(explode(' ', $this->getName()))
 				)
 			);
 		}

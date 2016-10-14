@@ -19,7 +19,7 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 		try {
 			/** @var array(string => mixed) $data */
 			$data = $this->_prepareDataForTable($priceObject, $this->getMainTable());
-			if (df_a($data, $this->getIdFieldName())) {
+			if (dfa($data, $this->getIdFieldName())) {
 				parent::savePriceData($priceObject);
 			}
 			else {
@@ -32,7 +32,7 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 				$identificationFields = array(
 					'entity_id', 'customer_group_id', 'website_id', 'all_groups', 'qty'
 				);
-				foreach (df_select($data, $identificationFields) as $key => $value) {
+				foreach (dfa_select($data, $identificationFields) as $key => $value) {
 					/** @var string $key */
 					/** @var mixed $value */
 					$select->where("{$value} = ?", $key);
@@ -45,7 +45,7 @@ class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
 				else {
 					$adapter->update($this->getMainTable(), $data, rm_quote_into(
 						sprintf('%s = ?', $this->getIdFieldName())
-						,df_a(rm_first($rows), $this->getIdFieldName())
+						,dfa(df_first($rows), $this->getIdFieldName())
 					));
 				}
 			}

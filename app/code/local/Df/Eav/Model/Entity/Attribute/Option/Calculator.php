@@ -53,7 +53,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		$oldValueIds = array_keys($oldValues);
 		df_assert_array($oldValueIds);
 		/** @var array $oldMapFromLabelsToValueIds */
-		$oldMapFromLabelsToValueIds = df_array_combine($this->labelsNormalize($oldLabels), $oldValueIds);
+		$oldMapFromLabelsToValueIds = array_combine($this->labelsNormalize($oldLabels), $oldValueIds);
 		df_assert_array($oldMapFromLabelsToValueIds);
 		/** @var array $newLabels */
 		$newLabels = $this->extractLabelsFromValues($this->getOptionsValuesNew());
@@ -88,7 +88,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			/** @var string $labelToDelete */
 			df_assert_string($labelToDelete);
 			/** @var int $valueIdToDelete */
-			$valueIdToDelete = df_a($oldMapFromLabelsToValueIds, $this->labelNormalize($labelToDelete));
+			$valueIdToDelete = dfa($oldMapFromLabelsToValueIds, $this->labelNormalize($labelToDelete));
 			df_assert_integer($valueIdToDelete);
 			if (
 				!(
@@ -117,7 +117,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		df_assert_array($actualLabels);
 		/** @var array $actualMapFromLabelsToValueIds */
 		$actualMapFromLabelsToValueIds =
-			df_array_combine($this->labelsNormalize($actualLabels), array_keys($actualValues))
+			array_combine($this->labelsNormalize($actualLabels), array_keys($actualValues))
 		;
 		df_assert_array($actualMapFromLabelsToValueIds);
 		/** @var array $actualLabelsToSort */
@@ -128,7 +128,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			/** @var string $sortedLabel */
 			df_assert_string($sortedLabel);
 			/** @var string|int $valueId */
-			$valueId = df_a($actualMapFromLabelsToValueIds, $this->labelNormalize($sortedLabel));
+			$valueId = dfa($actualMapFromLabelsToValueIds, $this->labelNormalize($sortedLabel));
 			$actualOrders[$valueId] = $order;
 			$order++;
 		}
@@ -145,7 +145,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		foreach ($values as $label) {
 			/** @var string|array $label */
 			if (is_array($label)) {
-				$label = df_a($label, 0);
+				$label = dfa($label, 0);
 			}
 			df_assert_string($label);
 			$result[]= $label;
@@ -201,10 +201,10 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 	private function labelsDiff(array $labels1, array $labels2) {
 		$labels1Normalized = $this->labelsNormalize($labels1);
 		/** @var array $map */
-		$map = df_array_combine($labels1Normalized, $labels1);
+		$map = array_combine($labels1Normalized, $labels1);
 		/** @var array $diff */
 		$diff = array_diff($labels1Normalized, $this->labelsNormalize($labels2));
-		return df_select($map, $diff);
+		return dfa_select($map, $diff);
 	}
 
 	/**

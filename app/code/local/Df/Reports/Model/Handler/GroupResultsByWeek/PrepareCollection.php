@@ -38,7 +38,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 			/** @var array $column */
 			df_assert_array($column);
 			/** @var string|null $columnName */
-			$columnName = df_a($column, 2);
+			$columnName = dfa($column, 2);
 			if (!is_null($columnName)) {
 				df_assert_string($columnName);
 				if ('period' === $columnName) {

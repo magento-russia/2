@@ -95,7 +95,7 @@ class Df_Core_Setup_2_23_5 extends Df_Core_Setup {
 	 * @param array(string => string) $dictionary
 	 * @return string
 	 */
-	private function translate($name, array $dictionary) {return df_a($dictionary, $name, $name);}
+	private function translate($name, array $dictionary) {return dfa($dictionary, $name, $name);}
 
 	/**
 	 * @param string $name

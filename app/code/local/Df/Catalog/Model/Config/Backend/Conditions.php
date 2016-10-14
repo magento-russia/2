@@ -8,7 +8,7 @@ class Df_Catalog_Model_Config_Backend_Conditions extends Df_Admin_Config_Backend
 		try {
 			if ($this->validate()) {
 				$this->getRule()->loadPost(array(
-					'conditions' => df_a(df_a($this->getPost(), 'rule'), 'conditions')
+					'conditions' => dfa(dfa($this->getPost(), 'rule'), 'conditions')
 					,'website_ids' => $this->getWebsiteIds()
 				));
 				$this->getRule()->setDataChanges(true);

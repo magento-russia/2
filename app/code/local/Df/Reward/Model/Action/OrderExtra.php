@@ -83,7 +83,7 @@ class Df_Reward_Model_Action_OrderExtra extends Df_Reward_Model_Action_Abstract 
 				df_assert($rule instanceof Mage_SalesRule_Model_Rule);
 				$ruleIds[]= $rule->getId();
 			}
-			$ruleIds = rm_array_unique_fast($ruleIds);
+			$ruleIds = dfa_unique_fast($ruleIds);
 			/** @var array $rewardRules */
 			$rewardRules = Df_Reward_Model_Resource_Reward::s()->getRewardSalesrule($ruleIds);
 			/** @var array $rulesPoints */
@@ -91,8 +91,8 @@ class Df_Reward_Model_Action_OrderExtra extends Df_Reward_Model_Action_Abstract 
 			foreach ($rewardRules as $rewardRule) {
 				/** @var array|object $rewardRule */
 				/** @var int $ruleId */
-				$ruleId = rm_nat(df_a($rewardRule, 'rule_id'));
-				$rulesPoints[$ruleId] = df_a($rewardRule, 'points_delta', 0);
+				$ruleId = rm_nat(dfa($rewardRule, 'rule_id'));
+				$rulesPoints[$ruleId] = dfa($rewardRule, 'points_delta', 0);
 			}
 			foreach (df_h()->reward()->getSalesRuleApplications() as $salesRuleApplication) {
 				/** @var Varien_Object $salesRuleApplication */
@@ -115,7 +115,7 @@ class Df_Reward_Model_Action_OrderExtra extends Df_Reward_Model_Action_Abstract 
 					 */
 					$rule->setData('used_qty', $qty);
 				}
-				$pointsDelta += $qty * df_a($rulesPoints, $rule->getId());
+				$pointsDelta += $qty * dfa($rulesPoints, $rule->getId());
 				$ruleIds[]= $rule->getId();
 			}
 		}

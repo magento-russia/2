@@ -3,7 +3,7 @@ class Df_Customer_Model_Resource_Customer extends Mage_Customer_Model_Entity_Cus
 	/** @return array(array(string => string|int)) */
 	public function getGenderOptions() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_tail(
+			$this->{__METHOD__} = df_tail(
 				$this->getAttribute(Df_Customer_Model_Customer::P__GENDER)->getSource()->getAllOptions()
 			);
 		}

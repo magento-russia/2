@@ -83,9 +83,9 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 		return df_clean_xml(array(
 			'Ид' => $this->getКаталог_Ид()
 			,'ИдКлассификатора' => $this->getКлассификатор_Ид()
-			,'Наименование' => rm_cdata($this->getКаталог_Наименование())
+			,'Наименование' => df_cdata($this->getКаталог_Наименование())
 			,'Товары' => array('Товар' => array($this->getOutput_Products()))
-			,'Описание' => rm_cdata($this->getКаталог_Описание())
+			,'Описание' => df_cdata($this->getКаталог_Описание())
 		));
 	}
 
@@ -107,7 +107,7 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	private function getКлассификатор() {
 		return df_clean_xml(array(
 			'Ид' => $this->getКлассификатор_Ид()
-			,'Наименование' => rm_cdata($this->getКлассификатор_Наименование())
+			,'Наименование' => df_cdata($this->getКлассификатор_Наименование())
 			,'Группы' => $this->getКлассификатор_Группы()
 			,'Свойства' => array('Свойство' => $this->getКлассификатор_Свойства_Свойство())
 			,'ТипыЦен' => array('ТипЦены' => $this->getКлассификатор_ТипыЦен_ТипЦены())
@@ -172,7 +172,7 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	private function getПакетПредложений() {
 		return df_clean_xml(array(
 			'Ид' => $this->getПакетПредложений_Ид()
-			,'Наименование' => rm_cdata($this->getПакетПредложений_Наименование())
+			,'Наименование' => df_cdata($this->getПакетПредложений_Наименование())
 			,'ИдКаталога' => $this->getКаталог_Ид()
 			,'ИдКлассификатора' => $this->getКлассификатор_Ид()
 		));

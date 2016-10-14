@@ -85,7 +85,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @param string $key
 	 * @return string
 	 */
-	protected function adaptKey($key) {return rm_concat_clean('__', $this->getAreaPrefix(), $key);}
+	protected function adaptKey($key) {return df_ccc('__', $this->getAreaPrefix(), $key);}
 
 	/**
 	 * @used-by canProcessStandardKey()

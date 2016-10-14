@@ -47,7 +47,7 @@ abstract class Df_YandexMoney_Model_Response extends Df_Payment_Model_Response {
 		return
 			$this->isSuccessful()
 			? ''
-			: df_a($this->getErrorMap(), $this->getErrorCode(), $this->getErrorCode())
+			: dfa($this->getErrorMap(), $this->getErrorCode(), $this->getErrorCode())
 		;
 	}
 

@@ -99,7 +99,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 	public function defaultProductAttributes() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_a(df_a($this->getDefaultEntities(), 'catalog_product'), 'attributes')
+				dfa(dfa($this->getDefaultEntities(), 'catalog_product'), 'attributes')
 				/**
 				 * 2015-08-09
 				 * Родительский метод @uses Mage_Catalog_Model_Resource_Setup::getDefaultEntities()

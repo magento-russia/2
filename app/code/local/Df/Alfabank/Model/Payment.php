@@ -65,7 +65,7 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 	 * @used-by Df_Payment_Block_Redirect::getTargetURL()
 	 * @return string
 	 */
-	public function getPaymentPageUrl() {return df_a($this->getRegistrationResponse(), 'formUrl');}
+	public function getPaymentPageUrl() {return dfa($this->getRegistrationResponse(), 'formUrl');}
 
 	/** @return array(string => string) */
 	private function getRegistrationResponse() {
@@ -90,12 +90,12 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			}
 			df_result_array($result);
 			/** @var int $errorCode */
-			$errorCode = rm_int(df_a($result, 'errorCode'));
+			$errorCode = rm_int(dfa($result, 'errorCode'));
 			if ($errorCode) {
-				$this->registrationError(df_a($result, 'errorMessage'));
+				$this->registrationError(dfa($result, 'errorMessage'));
 			}
 			$this->getInfoInstance()->setAdditionalInformation(
-				self::INFO__PAYMENT_EXTERNAL_ID, df_a($result, 'orderId')
+				self::INFO__PAYMENT_EXTERNAL_ID, dfa($result, 'orderId')
 			);
 			$this->getInfoInstance()->save();
 			$this->{__METHOD__} = $result;

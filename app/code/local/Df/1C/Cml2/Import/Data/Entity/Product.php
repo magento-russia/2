@@ -210,7 +210,7 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 	private function vatRate() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $result */
-			$resultS = df_a($this->taxes(), 'НДС');
+			$resultS = dfa($this->taxes(), 'НДС');
 			$this->{__METHOD__} = rm_n_set(is_null($resultS) ? null : rm_float_positive0($resultS));
 		}
 		return rm_n_get($this->{__METHOD__});

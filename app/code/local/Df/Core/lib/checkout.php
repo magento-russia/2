@@ -5,27 +5,27 @@ define('RM_URL_CHECKOUT', 'checkout/onepage');
  * @param bool $throw [optional]
  * @return Df_Sales_Model_Order|null
  */
-function rm_last_order($throw = true) {
+function df_last_order($throw = true) {
 	static $r; return $r ? rm_n_get($r) : $r = rm_n_set(
-		Df_Sales_Model_Order::ldi(rm_last_order_iid(), $throw)
+		Df_Sales_Model_Order::ldi(df_last_order_iid(), $throw)
 	);
 }
 
 /**
  * 2015-03-14
  * В настоящее время эта функция никем не используется, она здесь только для справки.
- * Вместо этой функции все используют функцию @see rm_last_order_iid().
+ * Вместо этой функции все используют функцию @see df_last_order_iid().
  * Обратите внимание,
  * что ядро Magento инициалиализирует поля «last_order_id» и «last_real_order_id» всегда парно,
- * и функции @see rm_last_order_id() и @see rm_last_order_iid() возвращают идентфиикаторы одного и того же заказа,
- * просто @see  rm_last_order_id() возвращает короткий целочисленный идентификатор,
- * а rm_last_order_iid() — длинный символьный (хотя тоже состоящий, в основном, из цифр).
+ * и функции @see df_last_order_id() и @see df_last_order_iid() возвращают идентфиикаторы одного и того же заказа,
+ * просто @see  df_last_order_id() возвращает короткий целочисленный идентификатор,
+ * а df_last_order_iid() — длинный символьный (хотя тоже состоящий, в основном, из цифр).
  * @return int|null
  */
-function rm_last_order_id() {return rm_session_checkout()->getData('last_order_id');}
+function df_last_order_id() {return rm_session_checkout()->getData('last_order_id');}
 
 /** @return string|null */
-function rm_last_order_iid() {return rm_session_checkout()->getData('last_real_order_id');}
+function df_last_order_iid() {return rm_session_checkout()->getData('last_real_order_id');}
 
 /** @return void */
 function rm_redirect_to_checkout() {rm_controller()->setRedirectWithCookieCheck('checkout/onepage');}

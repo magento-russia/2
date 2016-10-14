@@ -211,7 +211,7 @@ class Df_Logging_Model_Handler_Controllers
 		$request = Mage::app()->getRequest();
 		$filter = $request->getParam('filter');
 		//Filtering request data
-		$data = df_select($request->getParams(), array(
+		$data = dfa_select($request->getParams(), array(
 			'report_from', 'report_to', 'report_period', 'store', 'website', 'group'
 		));
 		//Need when in request data there are was no period info

@@ -18,7 +18,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 		if (!isset($this->{__METHOD__}[$codeInServiceFormat])) {
 			$this->{__METHOD__}[$codeInServiceFormat] =
 				Df_Directory_Model_Currency::ld(
-					df_a(array('398' => 'KZT', '840' => 'USD'), $codeInServiceFormat)
+					dfa(array('398' => 'KZT', '840' => 'USD'), $codeInServiceFormat)
 				)
 			;
 		}
@@ -41,7 +41,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	 */
 	public function getCurrencyCodeInServiceFormat() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a(array('KZT' => '398', 'USD' => '840'), $this->getCurrencyCode());
+			$this->{__METHOD__} = dfa(array('KZT' => '398', 'USD' => '840'), $this->getCurrencyCode());
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

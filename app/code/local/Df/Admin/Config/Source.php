@@ -59,7 +59,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	 * @return string|mixed
 	 */
 	protected function getFieldParam($paramName, $defaultValue = '') {
-		return df_nts(df_a($this->getFieldConfigNodeAsCanonicalArray(), $paramName, $defaultValue));
+		return df_nts(dfa($this->getFieldConfigNodeAsCanonicalArray(), $paramName, $defaultValue));
 	}
 
 	/** @return string */
@@ -76,7 +76,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return string */
 	private function getFieldCode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getPathExploded(), 2);
+			$this->{__METHOD__} = dfa($this->getPathExploded(), 2);
 		}
 		return $this->{__METHOD__};
 	}
@@ -84,7 +84,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return Varien_Simplexml_Element */
 	private function getFieldConfigNode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_first($this->getGroupConfigNode()->xpath(df_concat_xpath(
+			$this->{__METHOD__} = df_first($this->getGroupConfigNode()->xpath(df_concat_xpath(
 				'fields', $this->getFieldCode())
 			));
 			df_assert($this->{__METHOD__});
@@ -113,7 +113,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return string */
 	private function getGroupCode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getPathExploded(), 1);
+			$this->{__METHOD__} = dfa($this->getPathExploded(), 1);
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
@@ -122,7 +122,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return Varien_Simplexml_Element */
 	private function getGroupConfigNode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_first($this->getSectionConfigNode()->xpath(df_concat_xpath(
+			$this->{__METHOD__} = df_first($this->getSectionConfigNode()->xpath(df_concat_xpath(
 				'groups', $this->getGroupCode())
 			));
 			df_assert($this->{__METHOD__});
@@ -132,7 +132,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return string */
 	private function getSectionCode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getPathExploded(), 0);
+			$this->{__METHOD__} = dfa($this->getPathExploded(), 0);
 		}
 		return $this->{__METHOD__};
 	}

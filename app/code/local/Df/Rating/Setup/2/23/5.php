@@ -22,7 +22,7 @@ class Df_Rating_Setup_2_23_5 extends Df_Core_Setup {
 	private function translate($ratingCode) {
 		df_param_string_not_empty($ratingCode, 0);
 		return
-			df_a(
+			dfa(
 				array(
 					'Price' => 'Цена'
 					,'Quality' => 'Качество'

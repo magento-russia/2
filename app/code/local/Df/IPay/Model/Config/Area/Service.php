@@ -10,7 +10,7 @@ class Df_IPay_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 		$result =
 			$this->isTestMode()
 			? parent::getUrlPaymentPage()
-			: df_a($this->getMobileNetworkOperatorParams(), 'payment-page')
+			: dfa($this->getMobileNetworkOperatorParams(), 'payment-page')
 		;
 		df_result_string($result);
 		return $result;
@@ -30,7 +30,7 @@ class Df_IPay_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	private function getMobileNetworkOperatorParams() {
 		/** @var array(string => string $result */
 		$result =
-			df_a(
+			dfa(
 				$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
 				,$this->getMobileNetworkOperator()
 			)

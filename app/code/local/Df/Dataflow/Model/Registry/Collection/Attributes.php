@@ -26,7 +26,7 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 		if ($code) {
 			$attributeData['attribute_code'] = $code;
 		}
-		$code = df_a($attributeData, 'attribute_code');
+		$code = dfa($attributeData, 'attribute_code');
 		df_assert_string_not_empty($code);
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = $this->findByCode($code);
@@ -46,7 +46,7 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	 * @param string $code
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
-	public function findByCode($code) {return df_a($this->getMapFromCodeToEntity(), $code);}
+	public function findByCode($code) {return dfa($this->getMapFromCodeToEntity(), $code);}
 
 	/**
 	 * @param Mage_Core_Model_Abstract|Df_Catalog_Model_Resource_Eav_Attribute $entity

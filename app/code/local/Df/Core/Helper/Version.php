@@ -124,7 +124,7 @@ class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
 	 */
 	private function translate($originalVersion, array $map) {
 		/** @var string $result */
-		$result = rm_last($map);
+		$result = df_last($map);
 		foreach ($map as $currentOriginalVersion => $currentCommunityVersion) {
 			/** @var string $currentOriginalVersion */
 			/** @var string $currentCommunityVersion */

@@ -21,7 +21,7 @@ class Df_Core_Model_Event_Controller_Action_Postdispatch extends Df_Core_Model_E
 	public function isClientExpectedHtml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_strings_are_equal_ci(
-				Zend_Mime::TYPE_HTML, df_a($this->getContentTypesExpectedByClient(), 0)
+				Zend_Mime::TYPE_HTML, dfa($this->getContentTypesExpectedByClient(), 0)
 			);
 		}
 		return $this->{__METHOD__};

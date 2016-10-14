@@ -42,7 +42,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 			df_error('Вместо двухсимвольного кода страны система получила значение «%s».', $iso2Code);
 		}
 		/** @var string|null $result */
-		$result = df_a(
+		$result = dfa(
 			Df_YandexMarket_Model_Config_Countries::s()
 				->getMapFromIso2CodeToCountryNameInYandexMarketFormat()
 			,$iso2Code

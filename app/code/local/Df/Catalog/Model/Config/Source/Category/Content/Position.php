@@ -2,7 +2,7 @@
 class Df_Catalog_Model_Config_Source_Category_Content_Position {
 	/** @return array(array(string => string|int)) */
 	public function toOptionArray() {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::DF_BEFORE_STATIC_BLOCK => 'Над самодельным блоком'
 			,self::DF_BEFORE_PRODUCTS => 'Под самодельным блоком, но над товарами'
 			,self::DF_AFTER_PRODUCTS => 'Под товарами'

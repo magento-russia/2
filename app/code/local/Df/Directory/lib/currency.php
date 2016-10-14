@@ -24,7 +24,7 @@ function rm_currency_precision() {
 	static $r; return isset($r) ? $r : $r = (
 		rm_loc()->needHideDecimals()
 		? 0
-		: df_a(df_mage()->core()->localeSingleton()->getJsPriceFormat(), 'requiredPrecision', 2)
+		: dfa(df_mage()->core()->localeSingleton()->getJsPriceFormat(), 'requiredPrecision', 2)
 	);
 }
 

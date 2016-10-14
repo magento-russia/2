@@ -48,7 +48,7 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 	private static function type($asString = false) {
 		/** @var int|string $result */
 		$result = rm_nat0(self::info('type'));
-		return !$asString ? $result : df_a(self::map(), $result);
+		return !$asString ? $result : dfa(self::map(), $result);
 	}
 
 	/**
@@ -98,7 +98,7 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 	 * @param string $key
 	 * @return string|int
 	 */
-	private static function info($key) {return df_a(error_get_last(), $key);}
+	private static function info($key) {return dfa(error_get_last(), $key);}
 
 	/**
 	 * @used-by check()

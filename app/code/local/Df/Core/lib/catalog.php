@@ -172,7 +172,7 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
 		foreach ($stores as $store) {
 			/** @var Df_Core_Model_StoreM $store */
 			/** @var int[]|null $productsByStore */
-			$productsByStore = df_a($mapFromWebsiteToProductIds, $store->getWebsiteId());
+			$productsByStore = dfa($mapFromWebsiteToProductIds, $store->getWebsiteId());
 			// Обратите внимание, что подлежащих обработке товаров для конкретной витрины может не быть
 			// в том случае, когда программист вызвал функцию без параметра $stores
 			// (ведь в этом случае алгоритм проходит в цикле по всем витринам системы).

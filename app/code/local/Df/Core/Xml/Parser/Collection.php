@@ -19,7 +19,7 @@ abstract class Df_Core_Xml_Parser_Collection
 	 */
 	public function findById($id) {
 		$this->getItems();
-		return df_a($this->_mapFromIdToEntity, $id);
+		return dfa($this->_mapFromIdToEntity, $id);
 	}
 	/**
 	 * @param string $name
@@ -27,7 +27,7 @@ abstract class Df_Core_Xml_Parser_Collection
 	 */
 	public function findByName($name) {
 		$this->getItems();
-		return rm_first($this->findByNameAll($name));
+		return df_first($this->findByNameAll($name));
 	}
 	/**
 	 * @param string $name
@@ -36,7 +36,7 @@ abstract class Df_Core_Xml_Parser_Collection
 	public function findByNameAll($name) {
 		$this->getItems();
 		/** @noinspection PhpParamsInspection */
-		return df_nta(df_a($this->_mapFromNameToEntity, $name));
+		return df_nta(dfa($this->_mapFromNameToEntity, $name));
 	}
 
 	/**

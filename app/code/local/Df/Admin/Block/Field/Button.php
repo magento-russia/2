@@ -80,7 +80,7 @@ abstract class Df_Admin_Block_Field_Button extends Df_Adminhtml_Block_Config_For
 	/**
 	 * Раньше код был таким:
 	 * $originalData = $element->getDataUsingMethod('original_data');
-	 * $caption = df_a($originalData, 'button_label');
+	 * $caption = dfa($originalData, 'button_label');
 	 * Однако в Magento CE 1.4 поле «original_data» отсутствует.
 	 * @return Mage_Core_Model_Config_Element
 	 */

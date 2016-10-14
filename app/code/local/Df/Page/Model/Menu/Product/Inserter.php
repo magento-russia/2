@@ -32,10 +32,10 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 		/** @var Df_Page_Model_MenuSource $result */
 		$result = null;
 		/** @var string $class */
-		$class = df_a($menuSourceAsArray, 'class');
+		$class = dfa($menuSourceAsArray, 'class');
 		df_assert_string_not_empty($class);
 		/** @var int $weight */
-		$weight = rm_nat0(df_a($menuSourceAsArray, 'weight', 0));
+		$weight = rm_nat0(dfa($menuSourceAsArray, 'weight', 0));
 		/** @var Df_Page_Model_MenuSource $result */
 		$result = df_model($class, array(Df_Page_Model_MenuSource::P__WEIGHT => $weight));
 		df_assert($result instanceof Df_Page_Model_MenuSource);

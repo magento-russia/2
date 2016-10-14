@@ -69,7 +69,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 				 * (например, мы не можем экспортировать описание товара)
 				 */
 				$result =
-					rm_extend(
+					df_extend(
 						$result
 						,array(
 								 /*
@@ -102,7 +102,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 											'ФорматHTML' => rm_bts(true)
 										)
 									,Df_Core_Sxe::CONTENT =>
-										rm_cdata(
+										df_cdata(
 											$this->getProduct()->getDescription()
 										)
 								)
@@ -114,7 +114,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 											array(
 												'Наименование' => 'Описание'
 												,'Значение' =>
-													rm_cdata(
+													df_cdata(
 														$this->getProduct()->getDescription()
 													)
 											)
@@ -179,7 +179,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 				$productOptions = $this->getOrderItem()->getProductOptions();
 				df_assert_array($productOptions);
 				/** @var array(array(string => string)) $customOptions */
-				$customOptions = df_nta(df_a($productOptions, 'options'));
+				$customOptions = df_nta(dfa($productOptions, 'options'));
 				if ($customOptions) {
 					/** @var string[] $customOptionsKeyValuePairsAsText */
 					$customOptionsKeyValuePairsAsText = array();
@@ -187,10 +187,10 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 						/** @var array(string => string) $customOption */
 						df_assert_array($customOption);
 						/** @var string $label */
-						$label = df_a($customOption, 'label');
+						$label = dfa($customOption, 'label');
 						df_assert_string($label);
 						/** @var string $value */
-						$value = df_a($customOption, 'value');
+						$value = dfa($customOption, 'value');
 						df_assert_string($value);
 						$customOptionsKeyValuePairsAsText[]= implode(' = ', array($label, $value));
 					}

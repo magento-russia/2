@@ -104,7 +104,7 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 				;
 				df_assert_integer($siblingIndex);
 				/** @var string|null $result */
-				$result = df_a($this->getBlockParent()->getSortedChildren() ,$siblingIndex);
+				$result = dfa($this->getBlockParent()->getSortedChildren() ,$siblingIndex);
 			}
 			$this->{__METHOD__} = rm_n_set($result);
 		}

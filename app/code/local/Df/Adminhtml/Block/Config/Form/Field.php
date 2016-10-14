@@ -196,8 +196,8 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 						/** @var string $rmValue */
 						/** @var string $rmLabel */
 						if (is_array($v)) {
-							$rmValue = df_a($v, 'value');
-							$rmLabel = df_a($v, 'label');
+							$rmValue = dfa($v, 'value');
+							$rmLabel = dfa($v, 'label');
 						}
 						else {
 							$rmValue = $k;

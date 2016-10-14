@@ -38,7 +38,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	public function findByExternalId($externalId) {
 		// Обратите внимание, что если перед поиском коллекция ещё не была загружена,
 		// то она будет загружена автоматически.
-		return df_a($this->getMapFromExternalIdToEntity(), $externalId);
+		return dfa($this->getMapFromExternalIdToEntity(), $externalId);
 	}
 
 	/**
@@ -58,7 +58,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	public function findByLabel($label) {
 		// Обратите внимание, что если перед поиском коллекция ещё не была загружена,
 		// то она будет загружена автоматически.
-		return df_a($this->getMapFromLabelToEntity(), $label);
+		return dfa($this->getMapFromLabelToEntity(), $label);
 	}
 
 	/**

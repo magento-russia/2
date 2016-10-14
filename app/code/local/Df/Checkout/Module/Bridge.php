@@ -31,7 +31,7 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 		/** @var array(string => string) $cache */
 		static $cache;
 		if (!isset($cache[$mainBaseClass])) {
-			$cache[$mainBaseClass] = df_a(rm_explode_class($mainBaseClass), 1);
+			$cache[$mainBaseClass] = dfa(rm_explode_class($mainBaseClass), 1);
 		}
 		return $cache[$mainBaseClass];
 	}

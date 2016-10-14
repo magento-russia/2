@@ -109,7 +109,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		$r = preg_match($pattern, $timestamp, $matches);
 		df_assert_eq(1, $r);
 		/** @var int $hour */
-		$hour = rm_nat0(df_a($matches, 4));
+		$hour = rm_nat0(dfa($matches, 4));
 		if ($offsetType) {
 			df_assert_in($offsetType, array('UTC', 'GMT'));
 			/** @var int $offsetFromGMT */
@@ -120,12 +120,12 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 			}
 		}
 		return new Zend_Date(array(
-			'year' => df_a($matches, 1)
-		   ,'month' => df_a($matches, 2)
-		   ,'day' => df_a($matches, 3)
+			'year' => dfa($matches, 1)
+		   ,'month' => dfa($matches, 2)
+		   ,'day' => dfa($matches, 3)
 		   ,'hour' => $hour
-		   ,'minute' => df_a($matches, 5)
-		   ,'second' => df_a($matches, 6)
+		   ,'minute' => dfa($matches, 5)
+		   ,'second' => dfa($matches, 6)
 		));
 	}
 

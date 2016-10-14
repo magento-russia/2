@@ -30,7 +30,7 @@ class Df_Catalog_Model_Resource_Category_Flat
 	 * @return array
 	 */
 	protected function _getAttributeValues($entityIds, $store_id) {
-		$entityIds = rm_array($entityIds);
+		$entityIds = df_array($entityIds);
 		/** @var array(int => mixed[]) $values */
 		$values = array_fill_keys($entityIds, array());
 		$attributes = $this->_getAttributes();

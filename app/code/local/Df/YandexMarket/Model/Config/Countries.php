@@ -15,11 +15,11 @@ class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model {
 				/** @var array $countryConfig */
 				$countryConfig = $countryConfigAsSimpleXml->asCanonicalArray();
 				/** @var string $iso2Code */
-				$iso2Code = df_a($countryConfig, self::XML_TAG__CODE);
+				$iso2Code = dfa($countryConfig, self::XML_TAG__CODE);
 				df_assert_string($iso2Code);
 				/** @var string $countryNameInYandexMarketFormat */
 				$countryNameInYandexMarketFormat =
-					df_a($countryConfig, self::XML_TAG__NAME__YANDEX_MARKET, '')
+					dfa($countryConfig, self::XML_TAG__NAME__YANDEX_MARKET, '')
 				;
 				$result[$iso2Code] = $countryNameInYandexMarketFormat;
 			}

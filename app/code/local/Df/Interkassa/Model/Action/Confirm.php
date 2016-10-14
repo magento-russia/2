@@ -61,7 +61,7 @@ class Df_Interkassa_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm
 		df_param_string_not_empty($code, 0);
 		/** @var string $result */
 		$result =
-			df_a(
+			dfa(
 				array(
 					self::PAYMENT_STATE__PAID => 'Оплата получена'
 					,self::PAYMENT_STATE__CANCELED => 'Покупатель отказался от оплаты'

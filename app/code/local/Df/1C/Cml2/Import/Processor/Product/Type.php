@@ -233,12 +233,12 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 				 * Правильно тут использовать @uses array_merge().
 				 * Т.к. ключи массива — целочисленные, то результат применения @uses array_merge()
 				 * может содержать повторяющиеся элементы,
-				 * которые мы удаляем посредством @uses rm_array_unique_fast().
+				 * которые мы удаляем посредством @uses dfa_unique_fast().
 				 * http://php.net/manual/function.array-merge.php
 				 * «If, however, the arrays contain numeric keys,
 				 * the later value will not overwrite the original value, but will be appended.»
 				 */
-				$result = rm_array_unique_fast(array_merge(
+				$result = dfa_unique_fast(array_merge(
 					$result, $this->getExistingMagentoProduct()->getCategoryIds()
 				));
 			}
@@ -577,7 +577,7 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 
 	/** @return string */
 	private function getVisibilityAsString() {
-		return df_a(Mage_Catalog_Model_Product_Visibility::getOptionArray(), $this->getVisibility());
+		return dfa(Mage_Catalog_Model_Product_Visibility::getOptionArray(), $this->getVisibility());
 	}
 
 	/**

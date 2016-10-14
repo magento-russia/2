@@ -9,7 +9,7 @@ class Df_Core_State {
 	 * @used-by Df_Localization_Realtime_Dictionary::handleForBlock()
 	 * @return Mage_Core_Block_Abstract|null
 	 */
-	public function block() {return rm_last($this->_blockStack);}
+	public function block() {return df_last($this->_blockStack);}
 
 	/**
 	 * @used-by Df_Core_Observer::core_block_abstract_to_html_before()

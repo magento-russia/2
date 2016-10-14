@@ -160,8 +160,8 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 						,'_theme' => 'priority'
 					)
 					,array(
-						'_package' => df_a($params, '_package')
-						,'_theme' => df_a($params, '_theme')
+						'_package' => dfa($params, '_package')
+						,'_theme' => dfa($params, '_theme')
 					)
 				)
 			)
@@ -181,7 +181,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 				 * В частности, сюда попадаем при установке темы EM Taobaus.
 				 * Российская сборка Magento во время работы установочного скрипта
 				 * еще не инициализирована, и работа установочного скрипта завершалась сбоем:
-				 * «Call to undefined function df_a()»
+				 * «Call to undefined function dfa()»
 				 * http://magento-forum.ru/topic/3779/
 				 */
 				'_package' => isset($params['_package']) ? $params['_package'] : null

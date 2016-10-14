@@ -10,7 +10,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 		foreach ($dataContainer as $ruleData) {
 			/** @var array $ruleData */
 			df_assert_array($ruleData);
-			$ruleQuoteItems= df_a($ruleData, self::KEY_RULE_QUOTE_ITEMS, array());
+			$ruleQuoteItems= dfa($ruleData, self::KEY_RULE_QUOTE_ITEMS, array());
 			df_assert_array($ruleQuoteItems);
 			$result = array_merge ($result, array_values($ruleQuoteItems));
 		}
@@ -42,7 +42,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 		/**
 		 * Учитываем подарочный товар
 		 */
-		$ruleQuoteItems = df_a($ruleData, self::KEY_RULE_QUOTE_ITEMS, array());
+		$ruleQuoteItems = dfa($ruleData, self::KEY_RULE_QUOTE_ITEMS, array());
 		$ruleQuoteItems[]= $quoteItemId;
 		$ruleData[self::KEY_RULE_QUOTE_ITEMS] = $ruleQuoteItems;
 		$ruleData[self::KEY_RULE_COUNTER] = $counterValue;
@@ -59,7 +59,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 		$ruleData = $this->getRuleData($ruleId);
 		df_assert_array($ruleData);
 		/** @var int $result */
-		$result = df_a($ruleData, self::KEY_RULE_COUNTER, 0);
+		$result = dfa($ruleData, self::KEY_RULE_COUNTER, 0);
 		df_result_integer($result);
 		return $result;
 	}
@@ -72,7 +72,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 		$dataContainer = $this->getDataContainer();
 		/** @var array $dataContainer */
 		df_assert_array($dataContainer);
-		$result = df_a($dataContainer, $ruleId);
+		$result = dfa($dataContainer, $ruleId);
 		if (is_null($result)) {
 			$result = array();
 			$dataContainer[$ruleId] = $result;

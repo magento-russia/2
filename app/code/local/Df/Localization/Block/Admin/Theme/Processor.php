@@ -55,7 +55,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	private function getUrl_Demo() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $resultAsString */
-			$resultAsString = df_trim(df_nts(df_a($this->getProcessor()->getUrl(), 'demo')));
+			$resultAsString = df_trim(df_nts(dfa($this->getProcessor()->getUrl(), 'demo')));
 			$this->{__METHOD__} =
 				!$resultAsString
 				? array()
@@ -66,10 +66,10 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	}
 
 	/** @return string|null */
-	protected function getUrl_Forum() {return df_a($this->getProcessor()->getUrl(), 'forum');}
+	protected function getUrl_Forum() {return dfa($this->getProcessor()->getUrl(), 'forum');}
 
 	/** @return string|null */
-	protected function getUrl_OfficialSite() {return df_a($this->getProcessor()->getUrl(), 'official_site');}
+	protected function getUrl_OfficialSite() {return dfa($this->getProcessor()->getUrl(), 'official_site');}
 
 	/**
 	 * @override
@@ -113,10 +113,10 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	 */
 	private static function getLinkHtml($content, array $attributes) {
 		/** @var string|string[]|null $href */
-		$href = df_a($attributes, 'href');
+		$href = dfa($attributes, 'href');
 		if (is_array($href)) {
 			if (2 > count($href)) {
-				$href = rm_first($href);
+				$href = df_first($href);
 				$attributes['href'] = $href;
 			}
 		}
@@ -147,7 +147,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 								, self::getDemoLinksParameters($href)
 								, $paramsToAppend = array()
 								, $paramsToPrepend = array('a')
-								, $keyPosition = RM_AFTER
+								, $keyPosition = DF_AFTER
 							)
 							, $paramsToAppend = array()
 							, $paramsToPrepend = array('li', array())

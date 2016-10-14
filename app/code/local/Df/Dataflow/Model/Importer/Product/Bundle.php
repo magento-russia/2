@@ -86,7 +86,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 	private function createBundleSelection(array $innerProduct) {
 		df_param_array($innerProduct, 0);
 		/** @var string $innerProductSku */
-		$innerProductSku = df_a($innerProduct, 'material');
+		$innerProductSku = dfa($innerProduct, 'material');
 		df_assert_string($innerProductSku);
 		/** @var int|null $innerProductId */
 		$innerProductId = df_h()->catalog()->product()->getIdBySku($innerProductSku);
@@ -105,7 +105,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 				'product_id' => $innerProductId
 				,'selection_price_value' => 0
 				,'selection_price_type' => 0
-				,'selection_qty' => df_a($innerProduct, 'Count')
+				,'selection_qty' => dfa($innerProduct, 'Count')
 				,'selection_can_change_qty' => 0
 				/**
 				 * Всегда 0, потому что других вариантов выбора у пользователя нет
@@ -129,7 +129,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 		df_param_array($innerProduct, 0);
 		df_param_integer($innerProductOrdering, 1);
 		/** @var string $innerProductSku */
-		$innerProductSku = df_a($innerProduct, 'material');
+		$innerProductSku = dfa($innerProduct, 'material');
 		df_assert_string($innerProductSku);
 		/** @var int|null $innerProductId */
 		$innerProductId = df_h()->catalog()->product()->getIdBySku($innerProductSku);
@@ -170,13 +170,13 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 	 * поэтому система присвоит сборному товару новый артикул, * добавив к оригинальному пртикулу суффикс  «-bundle».
 	 * @return string
 	 */
-	private function getBundleOriginalSku() {return df_a($this->getImportedRow(), 'vichy_original_sku');}
+	private function getBundleOriginalSku() {return dfa($this->getImportedRow(), 'vichy_original_sku');}
 
 	/** @return array */
 	private function getInnerProducts() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_json_decode(
-				df_a($this->getImportedRow(), Df_Dataflow_Model_Import_Product_Row::FIELD__BUNDLE)
+				dfa($this->getImportedRow(), Df_Dataflow_Model_Import_Product_Row::FIELD__BUNDLE)
 			);
 			df_result_array($this->{__METHOD__});
 		}

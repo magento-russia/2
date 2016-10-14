@@ -69,20 +69,20 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 
 	/** @return string */
 	private function getBaseName() {
-		return df_a($this->getFileInfo(), 'basename');
+		return dfa($this->getFileInfo(), 'basename');
 	}
 
 	/** @return string */
 	private function getCorrectedFileName() {
 		$result = $this->getImage()->getPath();
-		$dirname = df_a($this->getFileInfo(), 'dirname');
-		$extension = df_a($this->getFileInfo(), 'extension');
+		$dirname = dfa($this->getFileInfo(), 'dirname');
+		$extension = dfa($this->getFileInfo(), 'extension');
 		$key = $this->getProduct()->getData(Df_Seo_Model_Processor_MediaGallery::IMAGE_KEY);
 		$i = 1;
 		while (1) {
 			$result =
 				df_concat_path(
-					$dirname, rm_concat_clean('.', $this->generateOrderedKey($key, $i++), $extension)
+					$dirname, df_ccc('.', $this->generateOrderedKey($key, $i++), $extension)
 				)
 			;
 			if (!file_exists($result)) {

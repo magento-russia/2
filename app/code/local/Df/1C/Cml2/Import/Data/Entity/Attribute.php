@@ -48,7 +48,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 			,'Булево' => Df_1C_Cml2_Import_Data_Entity_Attribute_Boolean::_C
 			,self::TYPE__TEXT => Df_1C_Cml2_Import_Data_Entity_Attribute_Text::_C
 		);
-		return df_a($map, self::_type($e), Df_1C_Cml2_Import_Data_Entity_Attribute_Text::_C);
+		return dfa($map, self::_type($e), Df_1C_Cml2_Import_Data_Entity_Attribute_Text::_C);
 	}
 
 	/**
@@ -140,7 +140,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 			$result = self::TYPE__TEXT;
 		}
 		else {
-			$result = rm_leaf_s(rm_first($externalTypeNames));
+			$result = rm_leaf_s(df_first($externalTypeNames));
 		}
 		df_result_string($result);
 		return $result;

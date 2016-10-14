@@ -65,7 +65,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable_New
 				$result[]= array_merge($attribute, array(
 					'use_default' => 1
 					,'position' => 0
-					,'label' => df_a($attribute, 'frontend_label', $attribute['attribute_code'])
+					,'label' => dfa($attribute, 'frontend_label', $attribute['attribute_code'])
 				));
 			}
 			$this->{__METHOD__} = $result;
@@ -81,7 +81,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable_New
 			/** @var string[] $labels */
 			$labels = array();
 			/** @var Df_1C_Cml2_Import_Data_Entity_Offer|null $firstChild */
-			$firstChild = rm_first($this->getEntityOffer()->getConfigurableChildren());
+			$firstChild = df_first($this->getEntityOffer()->getConfigurableChildren());
 			if ($firstChild) {
 				foreach ($firstChild->getOptionValues() as $optionValue) {
 					/** @var Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue $optionValue */

@@ -42,7 +42,7 @@ function rm_locale($locale = null) {
 function rm_translate($text, $module) {
 	/** @var string|string[] $result */
 	if (is_array($module)) {
-		$result = Df_Localization_Helper_Translation::s()->translateByModules(rm_array($text), $module);
+		$result = Df_Localization_Helper_Translation::s()->translateByModules(df_array($text), $module);
 	}
 	else {
 		/** @var int $argumentsCount */

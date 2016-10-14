@@ -10,7 +10,7 @@ class Df_Core_Exception extends Exception {
 		/** @var mixed $args */
 		$args = func_get_args();
 		/** @var mixed|null $arg0 */
-		$arg0 = df_a($args, 0);
+		$arg0 = dfa($args, 0);
 		/** @var string|null $message */
 		if (is_string($arg0)) {
 			$message = $arg0;
@@ -23,7 +23,7 @@ class Df_Core_Exception extends Exception {
 		}
 		parent::__construct(isset($message) ? $message : null);
 		/** @var mixed|null $arg1 */
-		$arg1 = df_a($args, 1);
+		$arg1 = dfa($args, 1);
 		if ($arg1) {
 			is_int($arg1)
 				? $this->_stackLevelsCountToSkip = $arg1

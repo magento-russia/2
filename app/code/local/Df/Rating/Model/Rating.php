@@ -28,7 +28,7 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	public function getOptionIdByCode($code) {
 		df_param_integer($code, 0);
 		df_param_between($code, 0, 1, 5);
-		return rm_nat(df_a($this->getMapFromCodeToOptionId(), $code));
+		return rm_nat(dfa($this->getMapFromCodeToOptionId(), $code));
 	}
 
 	/** @return string|null */

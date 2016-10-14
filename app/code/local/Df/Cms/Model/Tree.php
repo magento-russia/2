@@ -210,7 +210,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 		// Результат может быть равен null,
 		// если родительская рубрика по каким-то причинам не должна отображаться в меню
 		// (например, если так указано в настройках рубрики).
-		return df_a($this->_nodesMap, $cmsNode->getParentNodeId());
+		return dfa($this->_nodesMap, $cmsNode->getParentNodeId());
 	}
 
 	/** @var Df_Cms_Varien_Data_Tree_Node[]  */

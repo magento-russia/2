@@ -39,7 +39,7 @@ class Df_CustomerBalance_Observer  {
 				/** @var Df_CustomerBalance_Model_Balance $balance */
 				$balance = Df_CustomerBalance_Model_Balance::i();
 				$balance->setCustomer($customer);
-				$balance->setWebsiteId(df_a($data, 'website_id', $customer->getWebsiteId()));
+				$balance->setWebsiteId(dfa($data, 'website_id', $customer->getWebsiteId()));
 				$balance->setAmountDelta($data['amount_delta']);
 				$balance->setComment($data['comment']);
 				if (isset($data['notify_by_email']) && isset($data['store_id'])) {
@@ -75,10 +75,10 @@ class Df_CustomerBalance_Observer  {
 			 */
 			$request = $o['request'];
 			/** @var array(string => mixed)|null $payment */
-			$payment = df_a($request, 'payment');
+			$payment = dfa($request, 'payment');
 			if ($payment) {
 				/** @var bool|null $useBalance */
-				$useBalance = df_a($payment, 'use_customer_balance');
+				$useBalance = dfa($payment, 'use_customer_balance');
 				if (!is_null($useBalance)) {
 					$this->importPaymentData($quote, $quote->getPayment(), !!$useBalance);
 				}

@@ -15,7 +15,7 @@ class Df_Themes_Block_Infortis_Dataporter_System_Config_Form_Field_Configimpex
 		$originalData = $element->getData('original_data');
 		/** @var Infortis_Dataporter_Helper_Data $helper */
 		$helper = Mage::helper('dataporter');
-		$originalData['sublabel'] = $helper->__(df_a($originalData, 'sublabel'));
+		$originalData['sublabel'] = $helper->__(dfa($originalData, 'sublabel'));
 		$element->setData('original_data', $originalData);
 		return strtr(parent::render($element), array(
 			'<span>export</span>' => '<span>экспорт</span>'

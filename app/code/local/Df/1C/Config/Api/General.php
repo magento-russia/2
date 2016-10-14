@@ -49,7 +49,7 @@ class Df_1C_Config_Api_General extends Df_1C_Config_Api_Cml2 {
 	/** @return string */
 	public function getLogFileNameTemplateBaseName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_last(explode(DS, $this->getLogFileNameTemplate()));
+			$this->{__METHOD__} = df_last(explode(DS, $this->getLogFileNameTemplate()));
 		}
 		return $this->{__METHOD__};
 	}

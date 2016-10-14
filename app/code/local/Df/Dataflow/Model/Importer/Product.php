@@ -275,11 +275,11 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 			/** @var mixed $fieldValue */
 			if (1 === preg_match($pattern, $fieldName, $matches)) {
 				/** @var int $websiteId */
-				//$websiteId = rm_nat0(df_a($matches, 1));
+				//$websiteId = rm_nat0(dfa($matches, 1));
 				/** @var int $customerGroupId */
-				$customerGroupId = rm_nat0(df_a($matches, 2));
+				$customerGroupId = rm_nat0(dfa($matches, 2));
 				/** @var int $qty */
-				$qty = rm_nat0(df_a($matches, 3));
+				$qty = rm_nat0(dfa($matches, 3));
 				$newTierPrices []=
 					array(
 						'website_id'  => 0
@@ -301,11 +301,11 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 					/** @var int $newTierPriceIndex */
 					/** @var array(string => int) $newTierPrice */
 					if (
-							df_a($existingTierPrice, 'website_id') == df_a($newTierPrices, 'website_id')
+							dfa($existingTierPrice, 'website_id') == dfa($newTierPrices, 'website_id')
 						&&
-							df_a($existingTierPrice, 'cust_group') == df_a($newTierPrices, 'cust_group')
+							dfa($existingTierPrice, 'cust_group') == dfa($newTierPrices, 'cust_group')
 						&&
-							df_a($existingTierPrice, 'price_qty') == df_a($newTierPrices, 'price_qty')
+							dfa($existingTierPrice, 'price_qty') == dfa($newTierPrices, 'price_qty')
 					) {
 						$matchedNewTierPriceIndex = $newTierPriceIndex;
 						break;
@@ -499,14 +499,14 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 						 * Это позволяет указывать в качестве значения не только строковое представление
 						 * (например: «Россия. НДС 10%»), но и уже готовый идентификатор.
 						 */
-						$valueToSet = df_a($map, $fieldValue, $fieldValue);
+						$valueToSet = dfa($map, $fieldValue, $fieldValue);
 					}
 					else {
 						foreach ($options as $option) {
 							/** @var array $option */
 							df_assert_array($option);
-							if (in_array(df_a($option, 'label'), $fieldValue)) {
-								$valueToSet[]= df_a($option, 'value');
+							if (in_array(dfa($option, 'label'), $fieldValue)) {
+								$valueToSet[]= dfa($option, 'value');
 							}
 						}
 					}

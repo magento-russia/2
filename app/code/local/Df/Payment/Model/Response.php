@@ -37,7 +37,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 	/** @return string */
 	public function getTransactionName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a(array(
+			$this->{__METHOD__} = dfa(array(
 				Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT =>
 					'прямое списание средств покупателя без предварительного блокирования'
 				,Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH =>
@@ -159,7 +159,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			// ранняя информация будет перезаписана новой
 			'transaction_id' => implode('-', array(
 				$orderPayment->getOrder()->getIncrementId()
-				,mb_strtolower(rm_last(rm_explode_class($this)))
+				,mb_strtolower(df_last(rm_explode_class($this)))
 				,df_dts(Zend_Date::now(), 'HH:mm:ss')
 			))
 			,'is_transaction_closed' => $this->isTransactionClosed()

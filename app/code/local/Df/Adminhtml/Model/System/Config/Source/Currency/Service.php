@@ -25,13 +25,13 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 				/** @var string $code */
 				df_assert_string_not_empty($code);
 				/** @var string $name */
-				$name = df_a($service, 'name');
+				$name = dfa($service, 'name');
 				df_assert_string_not_empty($name);
 				/**
 				 * Может быть отрицательным числом
 				 * @var int $ordering
 				 */
-				$ordering = rm_int(df_a($service, 'ordering', 0));
+				$ordering = rm_int(dfa($service, 'ordering', 0));
 				$result[$ordering]= rm_option($code, $name);
 			}
 			// Вот ради этого мы перекрыли родительский класс

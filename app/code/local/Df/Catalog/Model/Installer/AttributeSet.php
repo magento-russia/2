@@ -49,17 +49,17 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 			df_assert_string_not_empty($attributeCode);
 			df_assert_array($attributeData);
 			/** @var string|null $groupName */
-			$groupName = df_a($attributeData, 'group');
+			$groupName = dfa($attributeData, 'group');
 			if (!is_null($groupName)) {
 				df_assert_string($groupName);
 			}
 			/** @var bool|null $isUserDefined */
-			$isUserDefined = df_a($attributeData, 'user_defined');
+			$isUserDefined = dfa($attributeData, 'user_defined');
 			if (!is_null($isUserDefined)) {
 				df_assert_boolean($isUserDefined);
 			}
 			/** @var int|null $sortOrder */
-			$sortOrder = df_a($attributeData, 'sort_order');
+			$sortOrder = dfa($attributeData, 'sort_order');
 			if (!is_null($sortOrder)) {
 				df_assert_integer($sortOrder);
 			}

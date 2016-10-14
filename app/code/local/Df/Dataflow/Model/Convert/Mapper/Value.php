@@ -7,7 +7,7 @@ class Df_Dataflow_Model_Convert_Mapper_Value extends Df_Dataflow_Model_Convert_M
 	protected function processRow(array $row) {
 		df_param_array($row, 0);
 		/** @var string $valueBeforeProcessing */
-		$valueBeforeProcessing = df_a($row, $this->getAttributeName());
+		$valueBeforeProcessing = dfa($row, $this->getAttributeName());
 		if ($valueBeforeProcessing) {
 			/** @var string|null $valueAfterProcessing */
 			$valueAfterProcessing = null;

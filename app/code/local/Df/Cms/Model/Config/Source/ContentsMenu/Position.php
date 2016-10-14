@@ -11,7 +11,7 @@ class Df_Cms_Model_Config_Source_ContentsMenu_Position extends Df_Admin_Config_S
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::CONTENT => 'Content', self::LEFT => 'Left Column', self::RIGHT => 'Right Column'
 		), $this);
 	}

@@ -21,7 +21,7 @@ class Df_Adminhtml_Block_Catalog_Product_Attribute_Edit_Tab_Options
 	public function getLabelValues() {
 		$result = parent::getLabelValues();
 		/** @var string|array(string => string) $r0 */
-		$r0 = df_a($result, 0);
+		$r0 = dfa($result, 0);
 		return is_array($r0) ? $r0 : $result;
 	}
 }

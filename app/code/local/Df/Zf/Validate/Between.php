@@ -25,9 +25,9 @@ class Df_Zf_Validate_Between extends Zend_Validate_Between {
 		else {
 			/** @noinspection PhpParamsInspection */
 			parent::__construct(
-				df_a($options, 'min')
-				,df_a($options, 'max')
-				,df_a($options, 'inclusive')
+				dfa($options, 'min')
+				,dfa($options, 'max')
+				,dfa($options, 'inclusive')
 			);
 		}
 	}

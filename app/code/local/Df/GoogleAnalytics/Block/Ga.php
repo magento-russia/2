@@ -26,7 +26,7 @@ class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 					 */
 					,$this->getPageName()
 				)
-				,df_a($this->getData(), 'order_ids', array())
+				,dfa($this->getData(), 'order_ids', array())
 			);
 		}
 		return $result;

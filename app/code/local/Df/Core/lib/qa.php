@@ -23,25 +23,25 @@ function df_bt($levelsToSkip = 0) {
 	$nonStandardDS = DIRECTORY_SEPARATOR !== '/';
 	for ($traceIndex = 0; $traceIndex < $traceLength; $traceIndex++) {
 		/** @var array $currentState */
-		$currentState = df_a($bt, $traceIndex);
+		$currentState = dfa($bt, $traceIndex);
 		/** @var array(string => string) $nextState */
-		$nextState = df_a($bt, 1 + $traceIndex, array());
+		$nextState = dfa($bt, 1 + $traceIndex, array());
 		/** @var string $file */
-		$file = str_replace($bp, '', df_a($currentState, 'file'));
+		$file = str_replace($bp, '', dfa($currentState, 'file'));
 		if ($nonStandardDS) {
 			$file = str_replace(DIRECTORY_SEPARATOR, '/', $file);
 		}
 		$compactBT[]= array(
 			'Файл' => $file
-			,'Строка' => df_a($currentState, 'line')
+			,'Строка' => dfa($currentState, 'line')
 			,'Субъект' =>
 				!$nextState
 				? ''
-				: rm_concat_clean('::', df_a($nextState, 'class'), df_a($nextState, 'function'))
+				: df_ccc('::', dfa($nextState, 'class'), dfa($nextState, 'function'))
 			,'Объект' =>
 				!$currentState
 				? ''
-				: rm_concat_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
+				: df_ccc('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
 		);
 	}
 	rm_report('bt-{date}-{time}.log', print_r($compactBT, true));
@@ -52,7 +52,7 @@ function df_is_it_my_local_pc() {
 	/** @var bool $result  */
 	static $result;
 	if (is_null($result)) {
-		$result = rm_bool(df_a($_SERVER, 'RM_DEVELOPER'));
+		$result = rm_bool(dfa($_SERVER, 'RM_DEVELOPER'));
 	}
 	return $result;
 }
@@ -74,7 +74,7 @@ function rm_context() {
 	}
 	else {
 		df_assert_between($count, 2, 3);
-		Df_Qa_Context::add($args[0], $args[1], df_a($args, 2, 0));
+		Df_Qa_Context::add($args[0], $args[1], dfa($args, 2, 0));
 	}
 }
 

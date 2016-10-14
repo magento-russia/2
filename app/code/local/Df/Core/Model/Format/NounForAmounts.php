@@ -9,7 +9,7 @@ class Df_Core_Model_Format_NounForAmounts extends Df_Core_Model {
 		df_param_integer($amount, 0);
 		/** @var string $result */
 		$result =
-			df_a(
+			dfa(
 				$forms
 				,$this->getIndex($amount)
 			)

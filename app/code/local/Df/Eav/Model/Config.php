@@ -16,7 +16,7 @@ class Df_Eav_Model_Config extends Mage_Eav_Model_Config {
 		/** @var string $cacheKey */
 		$cacheKey = implode('-', array($entityType->getId(), $attributeSetId));
 		/** @var string[] $result */
-		$result = df_a($this->_attributeCodes, $cacheKey);
+		$result = dfa($this->_attributeCodes, $cacheKey);
 		if (!$result) {
 			/** @var string $cacheKeyRm */
 			/** @var string $resultFromCache */

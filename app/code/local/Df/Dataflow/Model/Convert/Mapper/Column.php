@@ -11,7 +11,7 @@ class Df_Dataflow_Model_Convert_Mapper_Column extends Df_Dataflow_Model_Convert_
 			/** @var string $value */
 			df_assert_string($key);
 			df_assert_string($value);
-			$row[$value] = df_a($row, $key);
+			$row[$value] = dfa($row, $key);
 			if ($key != $value) {
 				unset($row[$key]);
 			}

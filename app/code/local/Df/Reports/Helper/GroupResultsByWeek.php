@@ -4,7 +4,7 @@ class Df_Reports_Helper_GroupResultsByWeek extends Mage_Core_Helper_Abstract {
 	public function isSelectedInFilter() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var bool $result */
-			$this->{__METHOD__} = ('week' === df_a($this->getFilterAsArray(), 'period_type'));
+			$this->{__METHOD__} = ('week' === dfa($this->getFilterAsArray(), 'period_type'));
 		}
 		return $this->{__METHOD__};
 	}

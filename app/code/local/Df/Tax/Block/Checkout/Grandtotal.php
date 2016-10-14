@@ -104,7 +104,7 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	private function singleTax() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_n_set(
-				1 !== count($this->taxTotals()) ? null : rm_first($this->taxTotals())
+				1 !== count($this->taxTotals()) ? null : df_first($this->taxTotals())
 			);
 		}
 		return rm_n_get($this->{__METHOD__});

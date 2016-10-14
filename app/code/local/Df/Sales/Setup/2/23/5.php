@@ -28,7 +28,7 @@ class Df_Sales_Setup_2_23_5 extends Df_Core_Setup {
 	 */
 	private function translate($name) {
 		return
-			df_a(
+			dfa(
 				array(
 					'Processing' => 'заказ выполняется'
 					,'Pending Payment' => 'ждём оплату'

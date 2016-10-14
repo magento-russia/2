@@ -11,7 +11,7 @@ abstract class Df_Alfabank_Model_Response extends Df_Payment_Model_Response {
 
 	/** @return string */
 	public function getErrorCodeMeaning() {
-		return df_a($this->getErrorCodeMap(), $this->getErrorCode(), 'Неизвестно');
+		return dfa($this->getErrorCodeMap(), $this->getErrorCode(), 'Неизвестно');
 	}
 
 	/**

@@ -109,7 +109,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 			$result = array();
 		}
 		else {
-			$result = rm_array($value);
+			$result = df_array($value);
 			if ($escapeHtml) {
 				foreach ($result as $key => $item) {
 					/** @var string|int $key */

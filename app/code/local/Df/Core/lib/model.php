@@ -93,11 +93,11 @@ function df_model($modelClass = '', $parameters = array()) {
 		/** @var array $bt */
 		$bt = debug_backtrace();
 		/** @var array $caller */
-		$caller = df_a($bt, 1);
+		$caller = dfa($bt, 1);
 		/** @var string $className */
-		$className = df_a($caller, 'class');
+		$className = dfa($caller, 'class');
 		/** @var string $methodName */
-		$methodName = df_a($caller, 'function');
+		$methodName = dfa($caller, 'function');
 		/** @var string $methodNameWithClassName */
 		$methodNameWithClassName = implode('::', array($className, $methodName));
 		df_error(
@@ -105,7 +105,7 @@ function df_model($modelClass = '', $parameters = array()) {
 			."\nСообщение системы: «%message%»"
 			,array(
 				'%method%' => $methodNameWithClassName
-				,'%line%' => df_a(df_a($bt, 0), "line")
+				,'%line%' => dfa(dfa($bt, 0), "line")
 				,'%modelClass%' => $modelClass
 				,'%message%' => rm_ets($e)
 			)

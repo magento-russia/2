@@ -33,7 +33,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 		foreach ($result as &$item) {
 			/** @var array(string => string) $item */
 			/** @var string $label */
-			$label = df_a($item, $labelField);
+			$label = dfa($item, $labelField);
 			if ($label) {
 				$item[$labelField] = df_mage()->eavHelper()->__($label);
 			}

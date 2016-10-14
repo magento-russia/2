@@ -31,12 +31,12 @@ class Df_Chronopay_Model_Gate_Exception extends Mage_Core_Exception {
 
 	/** @return string */
 	private function getSpecificMessage($messageType) {
- 		return df_a($this->_params, $messageType, $this->getDefaultMessage());
+ 		return dfa($this->_params, $messageType, $this->getDefaultMessage());
 	}
 
 	/** @return string */
 	private function getDefaultMessage() {
- 		return df_a($this->_params, "message");
+ 		return dfa($this->_params, "message");
 	}
 
 }

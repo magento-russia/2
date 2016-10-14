@@ -236,8 +236,8 @@ class Df_Admin_Config_Backend_Table extends Df_Admin_Config_Backend {
 			 * к двумерному (ручной формат JSON):
 			 * array("RU", "UA") => array(array("RU"), array("UA")))
 			 */
-			/** @uses rm_array() */
-			$result = array_map('rm_array', $result);
+			/** @uses df_array() */
+			$result = array_map('df_array', $result);
 			/**
 			 * Теперь добавляем названия колонок:
 			 * array(array("RU"), array("UA"))) =>

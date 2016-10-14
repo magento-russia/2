@@ -25,7 +25,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 			/** @var mixed[] $relevancy */
 			df_assert_array($relevancy);
 			/** @var int $identicalPartLength */
-			$identicalPartLength = df_a($relevancy, self::INTERNAL_PARAM__IDENTICAL_PART_LENGTH);
+			$identicalPartLength = dfa($relevancy, self::INTERNAL_PARAM__IDENTICAL_PART_LENGTH);
 			df_assert_integer($identicalPartLength);
 			/** @var Df_Catalog_Model_Category|null $nodeToGrow */
 			$nodeToGrow = null;
@@ -36,9 +36,9 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 			}
 			else {
 				/** @var array $identicalPart */
-				$identicalPart = df_a($relevancy, self::INTERNAL_PARAM__IDENTICAL_PART);
+				$identicalPart = dfa($relevancy, self::INTERNAL_PARAM__IDENTICAL_PART);
 				df_assert_array($identicalPart);
-				$nodeToGrow = df_a($identicalPart, $identicalPartLength - 1);
+				$nodeToGrow = dfa($identicalPart, $identicalPartLength - 1);
 				if (!is_null($nodeToGrow)) {
 					df_assert($nodeToGrow instanceof Df_Catalog_Model_Category);
 				}
@@ -150,7 +150,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		if (0 === $rootId) {
 			$rootId = rm_store(Mage_Core_Model_App::DISTRO_STORE_ID)->getRootCategoryId();
 		}
-		return rm_concat_clean(self::PARTS_SEPARATOR, self::FIRST_PART_FOR_ROOT, $rootId);
+		return df_ccc(self::PARTS_SEPARATOR, self::FIRST_PART_FOR_ROOT, $rootId);
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	private function getIdenticalPartBetweenRootAndNewPath(Df_Catalog_Model_Category $root) {
 		/** @var array $result */
 		$result = array();
-		if ($root->getName() === df_a($this->getPathAsNamesArray(), 0)) {
+		if ($root->getName() === dfa($this->getPathAsNamesArray(), 0)) {
 			$result[]= $root;
 			/** @var int $depth */
 			$depth = 1;
@@ -183,7 +183,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 				$relevantChild = null;
 				foreach ($children as $child) {
 					/** @var Df_Catalog_Model_Category $child */
-					if ($child->getName() === df_a($this->getPathAsNamesArray(), $depth)) {
+					if ($child->getName() === dfa($this->getPathAsNamesArray(), $depth)) {
 						$relevantChild = $child;
 						$result[]= $relevantChild;
 						break;
@@ -204,7 +204,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/** @return string */
 	private function getLocalRootName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getPathAsNamesArray(), 0);
+			$this->{__METHOD__} = dfa($this->getPathAsNamesArray(), 0);
 			df_result_string($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
@@ -213,7 +213,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/** @return string */
 	private function getNodeName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getPathAsNamesArray(), $this->getNumParts() - 1);
+			$this->{__METHOD__} = dfa($this->getPathAsNamesArray(), $this->getNumParts() - 1);
 			df_result_string($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
@@ -299,7 +299,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		$result = true;
 		if (!empty($needle)) {
 			/** @var string $needleRoot */
-			$needleRoot = df_a($needle, 0);
+			$needleRoot = dfa($needle, 0);
 			df_assert_string($needleRoot);
 			/** @var int|bool $indexOfNeedleRootInHaystack */
 			$indexOfNeedleRootInHaystack =
@@ -315,12 +315,12 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 				for ($offset = 1; $offset < $this->getNumParts(); $offset++) {
 					/** @var int $offset */
 					/** @var string|null $currentNeedleValue */
-					$currentNeedleValue = df_a($needle, $offset);
+					$currentNeedleValue = dfa($needle, $offset);
 					if (!is_null($currentNeedleValue)) {
 						df_assert_string($currentNeedleValue);
 					}
 					/** @var string|null $currentHaystackValue */
-					$currentHaystackValue = df_a($haystack, $offset + $indexOfNeedleRootInHaystack);
+					$currentHaystackValue = dfa($haystack, $offset + $indexOfNeedleRootInHaystack);
 					if (!is_null($currentHaystackValue)) {
 						df_assert_string($currentHaystackValue);
 					}

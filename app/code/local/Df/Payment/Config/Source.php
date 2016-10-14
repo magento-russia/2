@@ -16,5 +16,5 @@ abstract class Df_Payment_Config_Source extends Df_Admin_Config_Source {
 	}
 
 	/** @return string */
-	private function getRmId() {return df_a($this->getPathExploded(), 1);}
+	private function getRmId() {return dfa($this->getPathExploded(), 1);}
 }

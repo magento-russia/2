@@ -253,10 +253,10 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 			foreach ($this->getAttribute()->getSource()->getAllOptions() as $option) {
 				/** @var array(string => string) $option */
 				/** @var string $value */
-				$value = df_a($option, 'value');
+				$value = dfa($option, 'value');
 				// не экспортируем опцию «-- выберите значение --» («-- Please Select --»)
 				if (!df_empty_string($value)) {
-					$values[]= rm_cdata(df_a($option, 'label'));
+					$values[]= df_cdata(dfa($option, 'label'));
 				}
 			}
 			$this->{__METHOD__} = array('Значение' => $values);
@@ -280,7 +280,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 					$option->save();
 				}
 				$values[] = array(
-					'ИдЗначения' => $option->get1CId(), 'Значение' => rm_cdata($option->getValue())
+					'ИдЗначения' => $option->get1CId(), 'Значение' => df_cdata($option->getValue())
 				);
 			}
 			$this->{__METHOD__} = array('Справочник' => $values);
@@ -319,7 +319,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 							$result = rm_number_2f($value);
 						}
 						else {
-							$result = rm_cdata($value);
+							$result = df_cdata($value);
 						}
 				}
 			}
@@ -347,7 +347,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 					default:
 						$result = $this->getAttribute()->getFrontend()->getOption($value);
 						df_result_string_not_empty($result);
-						$result = rm_cdata($result);
+						$result = df_cdata($result);
 				}
 			}
 		}

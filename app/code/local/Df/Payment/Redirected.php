@@ -43,7 +43,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	/** @return void */
 	private function cancelOrderIfExists() {
 		/** @var Df_Sales_Model_Order|null $order */
-		$order = rm_last_order(false);
+		$order = df_last_order(false);
 		if ($order) {
 			/**
 			 * После вызова @see Mage_Sales_Model_Order::cancel()

@@ -78,7 +78,7 @@ class Df_Core_Model_Settings_Group extends Df_Core_Model {
 	 */
 	private function implodePrefixes($configKeySuffix, $prefixes) {
 		df_param_string($configKeySuffix, 0);
-		return implode(self::PREFIX_SEPARATOR, array_merge(rm_array($prefixes), array($configKeySuffix)));
+		return implode(self::PREFIX_SEPARATOR, array_merge(df_array($prefixes), array($configKeySuffix)));
 	}
 
 	/**

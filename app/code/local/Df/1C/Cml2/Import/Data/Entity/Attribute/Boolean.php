@@ -14,7 +14,7 @@ class Df_1C_Cml2_Import_Data_Entity_Attribute_Boolean
 	 * @return string|int|float|bool|null
 	 */
 	public function convertValueToMagentoFormat($value) {
-		return df_a(array('true' => '1', 'false' => '0'), $value, '');
+		return dfa(array('true' => '1', 'false' => '0'), $value, '');
 	}
 
 	/**

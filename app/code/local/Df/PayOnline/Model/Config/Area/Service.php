@@ -7,8 +7,8 @@ class Df_PayOnline_Model_Config_Area_Service extends Df_Payment_Config_Area_Serv
 	public function getUrlPaymentPage() {
 		/** @var string $result */
 		$result =
-			df_a(
-				df_a(
+			dfa(
+				dfa(
 					$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
 					,$this->getSelectedPaymentMethod()
 				)

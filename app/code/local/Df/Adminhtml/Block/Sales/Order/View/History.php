@@ -31,7 +31,7 @@ class Df_Adminhtml_Block_Sales_Order_View_History extends Mage_Adminhtml_Block_S
 		 * «If, however, the arrays contain numeric keys,
 		 * the later value will not overwrite the original value, but will be appended.»
 		 */
-		$allowedTags = rm_array_unique_fast($allowedTags);
+		$allowedTags = dfa_unique_fast($allowedTags);
 		return parent::escapeHtml($data, $allowedTags);
 	}
 }

@@ -11,7 +11,7 @@ class Df_Sales_Model_Config_Source_OrderBy extends Df_Admin_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			Df_Sales_Block_Admin_Grid_OrderItem_Collection::ORDER_BY__NAME => 'названиям'
 			,Df_Sales_Block_Admin_Grid_OrderItem_Collection::ORDER_BY__SKU => 'артикулам'
 			,Df_Sales_Block_Admin_Grid_OrderItem_Collection::ORDER_BY__QTY => 'заказанным количествам'

@@ -22,9 +22,9 @@ class Df_Localization_Onetime_Processor_TemplateMonster_43373
 		/** @var array(string => Df_Core_Model_StoreM) $stores */
 		$stores = Mage::app()->getStores($withDefault = true, $codeKey = true);
 		/** @var Df_Core_Model_StoreM|null $english */
-		$english = df_a($stores, 'english');
+		$english = dfa($stores, 'english');
 		/** @var Df_Core_Model_StoreM|null $russian */
-		$russian = df_a($stores, 'russian');
+		$russian = dfa($stores, 'russian');
 		/** @var Df_Core_Model_StoreM|null $default */
 		$default = Mage::app()->getDefaultStoreView();
 		if (

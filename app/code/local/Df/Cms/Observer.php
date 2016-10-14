@@ -325,12 +325,12 @@ class Df_Cms_Observer {
 					/** @var bool $currentPageIsRoot */
 					$currentPageIsRoot = false;
 					foreach ($nodesData as $row) {
-						if (rm_bool(df_a($row, 'current_page'))) {
+						if (rm_bool(dfa($row, 'current_page'))) {
 							$currentPageIsOrphan = false;
 							/** @var int $sortOrder */
-							$sortOrder = rm_int(df_a($row, 'sort_order'));
+							$sortOrder = rm_int(dfa($row, 'sort_order'));
 							/** @var int $parentNodeId */
-							$parentNodeId = rm_nat0(df_a($row, 'parent_node_id'));
+							$parentNodeId = rm_nat0(dfa($row, 'parent_node_id'));
 							$currentPageIsRoot = (0 === $parentNodeId);
 							if ($currentPageIsRoot) {
 								/**
@@ -377,7 +377,7 @@ class Df_Cms_Observer {
 					}
 					foreach ($nodesData as $row) {
 						/** @var int $parentNodeId */
-						$parentNodeId = rm_nat0(df_a($row, 'parent_node_id'));
+						$parentNodeId = rm_nat0(dfa($row, 'parent_node_id'));
 						/**
 						 * В качестве типа данных используем строку,
 						 * потому что некоторые идентификаторы
@@ -389,7 +389,7 @@ class Df_Cms_Observer {
 						 *
 						 * @var string $nodeId
 						 */
-						$nodeId = df_string(df_a($row, 'node_id'));
+						$nodeId = df_string(dfa($row, 'node_id'));
 						/**
 						 * Странно названным флагом «page_exists»
 						 * обозначаются те разделы, где администратор поставил флажок
@@ -399,11 +399,11 @@ class Df_Cms_Observer {
 						 */
 						$markedAsParent =
 							rm_bool(
-								df_a($row, 'page_exists')
+								dfa($row, 'page_exists')
 							)
 						;
 						/** @var int $sortOrder */
-						$sortOrder = rm_int(df_a($row, 'sort_order'));
+						$sortOrder = rm_int(dfa($row, 'sort_order'));
 						if ($markedAsParent) {
 							$appendToNodes[$nodeId] = 0;
 						}

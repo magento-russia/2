@@ -29,7 +29,7 @@ class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model {
 	 * @return string[][]
 	 */
 	public function toOptionsArray($useEmpty = false) {
-		return array_merge(array(rm_option('', '')), rm_map_to_options($this->getOptions()));
+		return array_merge(array(rm_option('', '')), df_map_to_options($this->getOptions()));
 	}
 
 	const _C = __CLASS__;

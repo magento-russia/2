@@ -14,6 +14,6 @@ class Df_Admin_Config_Source_Layout_Shift_Direction_Horizontal extends Df_Admin_
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array('left' => 'влево', 'right' => 'вправо'));
+		return df_map_to_options(array('left' => 'влево', 'right' => 'вправо'));
 	}
 }

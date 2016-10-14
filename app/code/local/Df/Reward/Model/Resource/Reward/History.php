@@ -142,7 +142,7 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 			$newValue = '0000-00-00 00:00:00';
 		}
 		$sql = "UPDATE `{$this->getMainTable()}` SET `expired_at_dynamic`={$newValue} WHERE ";
-		$sql.= rm_quote_into("`website_id` in (?)", rm_array($websiteIds));
+		$sql.= rm_quote_into("`website_id` in (?)", df_array($websiteIds));
 		$this->_getWriteAdapter()->query($sql);
 	}
 

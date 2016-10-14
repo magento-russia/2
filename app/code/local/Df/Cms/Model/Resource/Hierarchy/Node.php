@@ -69,7 +69,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		$select = $read->select();
 		$select
 			->from(rm_table(self::TABLE_META_DATA))
-			->where('node_id = ?', rm_first(df_explode_xpath($object->getXpath())))
+			->where('node_id = ?', df_first(df_explode_xpath($object->getXpath())))
 		;
 		return $read->fetchRow($select);
 	}
@@ -323,7 +323,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		array_pop($parentIds); //remove self node
 		$select = $this->_getLoadSelectWithoutWhere()
 			->where($this->getMainTable().'.node_id IN (?)', $parentIds)
-			->where('metadata_table.'.$fieldName.' IN (?)', rm_array($values))
+			->where('metadata_table.'.$fieldName.' IN (?)', df_array($values))
 			->order(array($this->getMainTable().'.level DESC'))
 			->limit(1);
 		$params = $this->_getReadAdapter()->fetchRow($select);
@@ -443,7 +443,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		parent::_beforeSave($object);
 		/** @var array $additionalSettings */
 		$additionalSettings =
-			df_select($object->getData(), Df_Cms_Model_Hierarchy_Node::getMetadataKeysAdditional())
+			dfa_select($object->getData(), Df_Cms_Model_Hierarchy_Node::getMetadataKeysAdditional())
 		;
 		/**
 		 * @see Zend_Json::encode() использует

@@ -111,7 +111,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	 * @return void
 	 */
 	private function assignAdditionalFields(Varien_Object $from, Varien_Object $to) {
-		$to->addData(df_select($from->getData(), array(
+		$to->addData(dfa_select($from->getData(), array(
 			self::FIELD__CLIENT_LOCAL_TIME, self::FIELD__CLIENT_SCREEN_RESOLUTION
 		)));
 	}

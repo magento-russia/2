@@ -88,9 +88,9 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 	private function getRatio() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var mixed[] $productDefaultUnits */
-			$productDefaultUnits = df_a($this->getUnitsSettings(), $this->getDefaultUnits());
+			$productDefaultUnits = dfa($this->getUnitsSettings(), $this->getDefaultUnits());
 			df_assert_array($productDefaultUnits);
-			$this->{__METHOD__} = rm_float(df_a($productDefaultUnits, self::UNIT__RATIO));
+			$this->{__METHOD__} = rm_float(dfa($productDefaultUnits, self::UNIT__RATIO));
 		}
 		return $this->{__METHOD__};
 	}

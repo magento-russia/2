@@ -6,7 +6,7 @@ class Df_Dataflow_Model_Convert_Mapper_Url_Key extends Df_Dataflow_Model_Convert
 	 */
 	protected function processRow(array $row) {
 		$row[self::ATTRIBUTE_URL_KEY] =
-			Df_Catalog_Helper_Product_Url::s()->extendedFormat(df_a($row, self::ATTRIBUTE_NAME))
+			Df_Catalog_Helper_Product_Url::s()->extendedFormat(dfa($row, self::ATTRIBUTE_NAME))
 		;
 		return $row;
 	}

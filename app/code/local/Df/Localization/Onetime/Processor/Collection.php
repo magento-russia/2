@@ -18,7 +18,7 @@ class Df_Localization_Onetime_Processor_Collection extends Df_Varien_Data_Collec
 			/** @var array(string => string) $processorData */
 			/** @var string $className */
 			$processorData[Df_Localization_Onetime_Processor::P__ID] = $processorId;
-			$className = df_a($processorData, 'processor', Df_Localization_Onetime_Processor::_C);
+			$className = dfa($processorData, 'processor', Df_Localization_Onetime_Processor::_C);
 			/** @var Df_Localization_Onetime_Processor $processor */
 			$processor = new $className($processorData);
 			df_assert($processor instanceof Df_Localization_Onetime_Processor);

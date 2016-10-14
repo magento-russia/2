@@ -40,7 +40,7 @@ class Df_Cms_Helper_Hierarchy extends Mage_Core_Helper_Abstract {
 	 * @return array(string => mixed)
 	 */
 	protected function _forcedCopyMetaData($source, $target) {
-		return df_select(df_nta($source, true), Df_Cms_Model_Hierarchy_Node::getMetadataKeys()) + $target;
+		return dfa_select(df_nta($source, true), Df_Cms_Model_Hierarchy_Node::getMetadataKeys()) + $target;
 	}
 
 	/**

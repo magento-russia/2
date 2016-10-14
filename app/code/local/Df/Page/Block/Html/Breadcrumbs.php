@@ -18,8 +18,8 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 			Df_Tweaks_Model_Settings_Catalog_Product_View::s()->needHideProductNameFromBreadcrumbs()
 		;}
 		if (!$hide || 'product' !== $crumbName) {
-			$crumbInfo['label'] = $this->__(df_a($crumbInfo, 'label', ''));
-			$crumbInfo['title'] = $this->__(df_a($crumbInfo, 'title', ''));
+			$crumbInfo['label'] = $this->__(dfa($crumbInfo, 'label', ''));
+			$crumbInfo['title'] = $this->__(dfa($crumbInfo, 'title', ''));
 			parent::addCrumb($crumbName, $crumbInfo, $after);
 		}
 		return $this;

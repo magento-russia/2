@@ -13,7 +13,7 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model {
 				/** @var int $rowIndex */
 				/** @var string[] $row */
 			    $row =
-					rm_first(
+					df_first(
 						$sheet->rangeToArray(
 							$pRange = 'A' . $rowIndex . ':' . $highestColumn . $rowIndex
 							,$nullValue = ''

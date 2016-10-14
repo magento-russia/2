@@ -44,21 +44,21 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	private function getCategoryIds() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * С @see rm_array_unique_fast() постоянно возникакает проблема
+			 * С @see dfa_unique_fast() постоянно возникакает проблема
 			 * array_flip(): Can only flip STRING and INTEGER values
 			 * http://magento-forum.ru/topic/4695/
 			 * Лучше верну-ка старую добрую функцию @see array_unique()
 			 *
 			 * 2015-02-11
-			 * Функцию @see rm_array_unique_fast() доработал и ввёл в действите снова.
+			 * Функцию @see dfa_unique_fast() доработал и ввёл в действите снова.
 			 */
-			$this->{__METHOD__} = rm_array_unique_fast(df_each($this->getCategories(), 'getId'));
+			$this->{__METHOD__} = dfa_unique_fast(df_each($this->getCategories(), 'getId'));
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string|null */
-	private function getImportedValue() {return df_a($this->getImportedRow(), self::IMPORTED_KEY);}
+	private function getImportedValue() {return dfa($this->getImportedRow(), self::IMPORTED_KEY);}
 
 	/** @return Df_Dataflow_Model_Importer_Product_Categories_Parser[] */
 	private function getParsers() {

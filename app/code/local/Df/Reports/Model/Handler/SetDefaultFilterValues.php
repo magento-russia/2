@@ -41,7 +41,7 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 					/** @var array(string => string) $option */
 					if ($duration === rm_option_v($option))  {
 						/** @var array(string => int|string) $duration */
-						$result = df_a(
+						$result = dfa(
 							$option
 							,Df_Reports_Model_Config_Source_Duration::OPTION_PARAM__DURATION
 						);
@@ -90,12 +90,12 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 					 * и объект класса Zend_Date для более современных версий Magento
 					 */
 					$startDate->sub(
-						df_a(
+						dfa(
 							$this->getPeriodDuration()
 							,Df_Reports_Model_Config_Source_Duration
 								::OPTION_PARAM__DURATION__VALUE
 						)
-						,df_a(
+						,dfa(
 							$this->getPeriodDuration()
 							,Df_Reports_Model_Config_Source_Duration
 								::OPTION_PARAM__DURATION__DATEPART

@@ -55,7 +55,7 @@ class Df_Localization_Onetime_Processor_Db_Column extends Df_Core_Model {
 				$valueAfter = $valueBefore;
 				foreach ($this->column()->paths() as $path) {
 					/** @var Df_Localization_Onetime_Dictionary_Db_Path $path */
-					df_a_deep_walk(
+					dfa_deep_walk(
 						$valueAfter
 						, $path->value()
 						/** @uses translate() */
@@ -105,7 +105,7 @@ class Df_Localization_Onetime_Processor_Db_Column extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by df_a_deep_walk()
+	 * @used-by dfa_deep_walk()
 	 * @used-by process()
 	 * @param mixed $valueBefore
 	 * @param Df_Localization_Onetime_Dictionary_Terms $terms

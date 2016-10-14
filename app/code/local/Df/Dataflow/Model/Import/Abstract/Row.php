@@ -16,7 +16,7 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 			df_param_string($default, 2);
 		}
 		/** @var string|null $result */
-		$result = df_a($this->getAsArray(), $fieldName, $default);
+		$result = dfa($this->getAsArray(), $fieldName, $default);
 		if ($isRequired && is_null($result)) {
 			$this->error(new Df_Dataflow_Exception_Import_RequiredValueIsAbsent(
 				$fieldName, $this->getOrdering()

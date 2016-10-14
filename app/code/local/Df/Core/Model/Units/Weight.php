@@ -42,8 +42,8 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	private function getRatio() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string|int) $unitSettings */
-			$unitSettings = df_a($this->getUnitsSettings(), $this->getDefaultUnits());
-			$this->{__METHOD__} = rm_float(df_a($unitSettings, self::UNIT__RATIO));
+			$unitSettings = dfa($this->getUnitsSettings(), $this->getDefaultUnits());
+			$this->{__METHOD__} = rm_float(dfa($unitSettings, self::UNIT__RATIO));
 		}
 		return $this->{__METHOD__};
 	}

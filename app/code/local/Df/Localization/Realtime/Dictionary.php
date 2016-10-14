@@ -152,7 +152,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 	private function getModuleNameFromCode($code) {
 		/** @var string[] $codeParts */
 		$codeParts = explode(Mage_Core_Model_Translate::SCOPE_SEPARATOR, $code);
-		return 1 < count($codeParts) ? rm_first($codeParts) : '';
+		return 1 < count($codeParts) ? df_first($codeParts) : '';
 	}
 
 	/**

@@ -11,7 +11,7 @@ class Df_Checkout_Model_Config_Source_Alphabet extends Df_Admin_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::VALUE__RU => 'русский'
 			,self::VALUE__UA => 'украинский и русский'
 			,self::VALUE__KZ => 'казахский и русский'

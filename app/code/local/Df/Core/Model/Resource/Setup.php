@@ -31,7 +31,7 @@ class Df_Core_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup {
 		 * «3.0.0»
 		 * @var string $versionTo
 		 */
-		$versionTo = rm_last(explode('-', $basename));
+		$versionTo = df_last(explode('-', $basename));
 		/**
 		 * Подсмотрел алгоритм в @see Mage_Core_Model_Resource_Setup::__construct()
 		 * «Df_1C»

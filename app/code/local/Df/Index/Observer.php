@@ -29,7 +29,7 @@ class Df_Index_Observer {
 						if (!in_array($columnName, $notToChange)) {
 							df_assert_array($columnData);
 							/** @var string $columnDbType */
-							$columnDbType = df_a($columnData, $keyType);
+							$columnDbType = dfa($columnData, $keyType);
 							df_assert_string($columnDbType);
 							if ('varchar(255)' === $columnDbType) {
 								$columnDbType = sprintf('varchar(%d)', $varcharLength);

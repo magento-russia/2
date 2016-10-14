@@ -57,7 +57,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 			// then fill it with the first additional image
 			/** @var string[] $usedPrimaryImageSizes */
 			/**
-			 * С @see rm_array_unique_fast() постоянно возникакает проблема
+			 * С @see dfa_unique_fast() постоянно возникакает проблема
 			 * array_flip(): Can only flip STRING and INTEGER values
 			 * http://magento-forum.ru/topic/4695/
 			 * Лучше верну-ка старую добрую функцию @see array_unique()
@@ -68,7 +68,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 			if (count($unusedPrimaryImageSizes) && count($this->getAdditionalImages())) {
 				/** @var string $replacement */
 				$replacement =
-					df_a(
+					dfa(
 						$this->{__METHOD__}
 						,$this->getKeyOfMainImage()
 						,$this->getAdditionalImageForBorrowing()
@@ -173,7 +173,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 			$this->{__METHOD__} = rm_n_set(
 				!$this->getAdditionalImagesAsRawArray()
 				? null
-				: $this->addLeadingSlash(df_a($this->getAdditionalImagesAsRawArray(), 0))
+				: $this->addLeadingSlash(dfa($this->getAdditionalImagesAsRawArray(), 0))
 			);
 		}
 		return rm_n_get($this->{__METHOD__});
@@ -199,13 +199,13 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	 * @return string
 	 */
 	private function getImportedValue($key, $default = null) {
-		return df_a($this->getImportedRow(), $key, $default);
+		return dfa($this->getImportedRow(), $key, $default);
 	}
 
 	/** @return string */
 	private function getKeyOfMainImage() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a(array_values($this->getImageFields()), 0);
+			$this->{__METHOD__} = dfa(array_values($this->getImageFields()), 0);
 		}
 		return $this->{__METHOD__};
 	}

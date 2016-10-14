@@ -18,7 +18,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 	 * @return bool
 	 */
 	private function getStoreId_Df(array $importData) {
-		return df_a($importData, 'store', $this->getBatchParams('store'));
+		return dfa($importData, 'store', $this->getBatchParams('store'));
 	}
 
 	/**
@@ -168,7 +168,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		$exception = null;
 		df_assert_string($originalLocaleCode);
 		/** @var string|null $localeCodeFromBatchParams */
-		$localeCodeFromBatchParams = df_a($this->getBatchParams(), 'locale');
+		$localeCodeFromBatchParams = dfa($this->getBatchParams(), 'locale');
 		if (!is_null($localeCodeFromBatchParams)) {
 			df_assert_string($localeCodeFromBatchParams);
 			df_mage()->core()->translateSingleton()

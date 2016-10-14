@@ -27,7 +27,7 @@ abstract class Df_Admin_Config_Extractor extends Df_Core_Model {
 	private function getFullPrefix() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_concat_xpath(
-				$this->getGroupPath(), rm_concat_clean('__', $this->getKeyPrefix(), $this->getEntityName())
+				$this->getGroupPath(), df_ccc('__', $this->getKeyPrefix(), $this->getEntityName())
 			) . '__';
 		}
 		return $this->{__METHOD__};

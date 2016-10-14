@@ -8,7 +8,7 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	 * @param string $name
 	 * @return Varien_Object
 	 */
-	public function getObject($name) {return df_a($this->getObjects(), $name);}
+	public function getObject($name) {return dfa($this->getObjects(), $name);}
 
 	/** @return string */
 	public function process() {return strtr($this->getText(), $this->getMappings());}
@@ -33,8 +33,8 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 	private function createExpression(array $params) {
 		return Df_Seo_Model_Template_Expression::i(array(
 			Df_Seo_Model_Template_Expression::P__PROCESSOR => $this
-			,Df_Seo_Model_Template_Expression::P__RAW => df_a($params, 0)
-			,Df_Seo_Model_Template_Expression::P__CLEAN => df_a($params, 1)
+			,Df_Seo_Model_Template_Expression::P__RAW => dfa($params, 0)
+			,Df_Seo_Model_Template_Expression::P__CLEAN => dfa($params, 1)
 		));
 	}
 

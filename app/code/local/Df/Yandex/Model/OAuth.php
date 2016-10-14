@@ -13,7 +13,7 @@ abstract class Df_Yandex_Model_OAuth extends Df_Core_Model {
 	/** @return string */
 	public function getToken() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->getResponseAsArray(), 'access_token');
+			$this->{__METHOD__} = dfa($this->getResponseAsArray(), 'access_token');
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

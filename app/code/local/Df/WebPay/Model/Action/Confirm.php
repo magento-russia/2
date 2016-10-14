@@ -113,7 +113,7 @@ class Df_WebPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		df_param_integer($code, 0);
 		/** @var string $result */
 		$result =
-			df_a(
+			dfa(
 				array(
 					self::PAYMENT_STATE__COMPLETED => 'completed'
 					,self::PAYMENT_STATE__DECLINED => 'declined'

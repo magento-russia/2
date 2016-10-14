@@ -15,7 +15,7 @@ class Df_Psbank_Helper_Data extends Mage_Core_Helper_Data {
 		foreach ($paramNames as $paramName) {
 			/** @var string $paramName */
 			/** @var string $paramValue */
-			$paramValue = strval(df_a($data, $paramName));
+			$paramValue = strval(dfa($data, $paramName));
 			/** @var int $paramLength */
 			/**
 			 * Обратите внимание,

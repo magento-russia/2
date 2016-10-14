@@ -42,7 +42,7 @@ class Df_PromoGift_Model_Resource_Rule_Collection extends Df_SalesRule_Model_Res
 	public function filterByCurrentQuote() {
 		$this->load();
 		$this->_items =
-			df_select($this->_items, array_keys(array_filter($this->walk('isApplicableToQuote'))))
+			dfa_select($this->_items, array_keys(array_filter($this->walk('isApplicableToQuote'))))
 		;
 	}
 

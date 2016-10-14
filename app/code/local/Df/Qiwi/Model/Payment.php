@@ -6,7 +6,7 @@ class Df_Qiwi_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 	 * @return string
 	 */
 	public function getQiwiCustomerPhone() {
-		return rm_concat_clean(''
+		return df_ccc(''
 			,$this->getInfoInstance()->getAdditionalInformation(
 				self::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE
 			)

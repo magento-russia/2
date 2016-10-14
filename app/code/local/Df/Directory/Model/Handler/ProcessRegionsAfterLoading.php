@@ -60,7 +60,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 				);
 			}
 			$this->{__METHOD__} =
-				array_filter(df_select_ordered($this->getRegions()->getItems(), array_filter($ids)))
+				array_filter(dfa_select_ordered($this->getRegions()->getItems(), array_filter($ids)))
 			;
 		}
 		return $this->{__METHOD__};
@@ -139,10 +139,10 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 			);
 			df_assert_array($typesMap);
 			/** @var $typeAsString $result */
-			$typeAsString = df_a($typesMap, $typeAsInteger, '');
+			$typeAsString = dfa($typesMap, $typeAsInteger, '');
 			df_assert_string($typeAsString);
 			/** @var string $processedName */
-			$processedName = rm_concat_clean(' ', $originalName, $typeAsString);
+			$processedName = df_ccc(' ', $originalName, $typeAsString);
 			$region->addData(array(
 				Df_Directory_Model_Region::P__NAME => $processedName
 				,Df_Directory_Model_Region::P__DEFAULT_NAME => $processedName

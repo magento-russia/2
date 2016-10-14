@@ -66,13 +66,13 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 */
 	public function callByMixin(array $arguments) {
 		/** @var string $method */
-		$method = rm_first($arguments);
+		$method = df_first($arguments);
 		// Временно отключаем миксин для данного метод
 		// чтобы не попадать в бескнечную рекурсию.
 		$this->_disabledMixins[$method] = true;
 		/** @var mixed $result */
 		try {
-			$result = call_user_func_array(array($this, $method), rm_tail($arguments));
+			$result = call_user_func_array(array($this, $method), df_tail($arguments));
 			unset($this->_disabledMixins[$method]);
 		}
 		catch (Exception $e) {
@@ -112,7 +112,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		//
 		// 2015-02-10
 		// Раньше код был таким:
-		// $valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		// $valueWasNullBeforeFilters = dfa($this->_valueWasNullBeforeFilters, $key, true);
 		// return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
 		// Изменил его ради ускорения.
 		// Неожиданным результатом стала простота и понятность нового кода.
@@ -312,7 +312,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		if (2 < func_num_args()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$isRequired = rm_last($arguments);
+			$isRequired = df_last($arguments);
 			/** @var bool $hasRequiredFlag */
 			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired);
 			if ($hasRequiredFlag) {
@@ -320,7 +320,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 			}
 			else {
 				$isRequired = null;
-				$validator = rm_tail($arguments);
+				$validator = df_tail($arguments);
 			}
 		}
 		/** @var Zend_Validate_Interface[] $additionalValidators */
@@ -335,9 +335,9 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		}
 		else {
 			/** @var array(Zend_Validate_Interface|Df_Zf_Validate_Type|string) $additionalValidatorsRaw */
-			$additionalValidatorsRaw = rm_tail($validator);
+			$additionalValidatorsRaw = df_tail($validator);
 			$validator = Df_Core_Validator::resolveForProperty(
-				$this, rm_first($validator), $key, $skipOnNull = false === $isRequired
+				$this, df_first($validator), $key, $skipOnNull = false === $isRequired
 			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 			foreach ($additionalValidatorsRaw as $additionalValidatorRaw) {
@@ -587,11 +587,11 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
 		/** @var string $method */
-		$method = rm_first($arguments);
+		$method = df_first($arguments);
 		return
 			isset($this->_disabledMixins[$method])
 			? null
-			: call_user_func_array(array($this->getMixin(), $method), rm_tail($arguments))
+			: call_user_func_array(array($this->getMixin(), $method), df_tail($arguments))
 		;
 	}
 
@@ -651,7 +651,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	private function _applyFilters($key, $value) {
 		/** @var Zend_Filter_Interface[] $filters */
 		/** @noinspection PhpParamsInspection */
-		$filters = df_a($this->_filters, $key, array());
+		$filters = dfa($this->_filters, $key, array());
 		foreach ($filters as $filter) {
 			/** @var Zend_Filter_Interface $filter */
 			$value = $filter->filter($value);
@@ -702,7 +702,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	private function _validate($key, $value) {
 		/** @var @var array(Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
 		/** @noinspection PhpParamsInspection */
-		$validators = df_a($this->_validators, $key, array());
+		$validators = dfa($this->_validators, $key, array());
 		foreach ($validators as $validator) {
 			/** @var Zend_Validate_Interface|Df_Zf_Validate_Type $validator */
 			Df_Core_Validator::checkProperty($this, $key, $value, $validator);
@@ -1009,7 +1009,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 			rm_cache()->save(
 				$data = $propertyValueSerialized
 				,$id = $cacheKey
-				,$tags = rm_array($this->cacheTags())
+				,$tags = df_array($this->cacheTags())
 				,$lifeTime = $this->cacheLifetime()
 			);
 		}
@@ -1119,7 +1119,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$functions = rm_tail($arguments);
+			$functions = df_tail($arguments);
 		}
 		foreach ($functions as $function) {
 			/** @var string $function */

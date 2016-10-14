@@ -4,7 +4,7 @@ class Df_Adminhtml_Model_Translator_Config extends Df_Core_Model {
 	 * @param string $sectionName
 	 * @return string|null
 	 */
-	public function getHelperModuleMf($sectionName) {return df_a($this->getMap(), $sectionName);}
+	public function getHelperModuleMf($sectionName) {return dfa($this->getMap(), $sectionName);}
 
 	/** @return array(string => string) */
 	private function getMap() {

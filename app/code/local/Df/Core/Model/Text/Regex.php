@@ -23,7 +23,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 				if (1 === $matchResult) {
 					/**
 					 * Раньше тут стояло:
-					 * $result = df_a($matchResult, 1);
+					 * $result = dfa($matchResult, 1);
 					 * что не совсем правильно,
 					 * потому что если регулярное выражение не содержит круглые скобки,
 					 * то результирующий массив будет содержать всего один элемент.
@@ -35,7 +35,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 					 * 2015-03-23
 					 * Добавил поддержку нескольких пар круглых скобок.
 					 */
-					$result = count($matches) < 3 ? rm_last($matches) : rm_tail($matches);
+					$result = count($matches) < 3 ? df_last($matches) : df_tail($matches);
 				}
 				else {
 					if (!$this->needThrowOnNotMatch()) {
@@ -284,7 +284,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	 * @param int $errorCode
 	 * @return string|null
 	 */
-	private function translateErrorCode($errorCode) {return df_a(self::getErrorCodeMap(), $errorCode);}
+	private function translateErrorCode($errorCode) {return dfa(self::getErrorCodeMap(), $errorCode);}
 
 	/**
 	 * @override

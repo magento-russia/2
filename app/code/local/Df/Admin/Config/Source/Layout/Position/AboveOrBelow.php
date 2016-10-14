@@ -14,7 +14,7 @@ class Df_Admin_Config_Source_Layout_Position_AboveOrBelow extends Df_Admin_Confi
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array('above' => $this->l('above'), 'below' => $this->l('below')));
+		return df_map_to_options(array('above' => $this->l('above'), 'below' => $this->l('below')));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class Df_Admin_Config_Source_Layout_Position_AboveOrBelow extends Df_Admin_Confi
 	 * @return string
 	 */
 	private function l($simpleLabel) {
-		return df_h()->admin()->__(rm_concat_clean(' ', $simpleLabel, $this->getSuffix()));
+		return df_h()->admin()->__(df_ccc(' ', $simpleLabel, $this->getSuffix()));
 	}
 
 	/** @return string */

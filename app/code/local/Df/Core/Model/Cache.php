@@ -132,7 +132,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		/** @var bool $paramsIsArray */
 		$paramsIsArray = is_array($params);
 		/** @var bool $paramsIsAssoc */
-		$paramsIsAssoc = $paramsIsArray && rm_is_assoc($params);
+		$paramsIsAssoc = $paramsIsArray && df_is_assoc($params);
 		/** @var string|string[]|null $cacheKeyParams */
 		$cacheKeyParams = !$paramsIsAssoc ? $params : array_keys($params);
 		/** @var string $key */
@@ -175,10 +175,10 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		 */
 		if (is_array($method)) {
 			/** @var object $object */
-			$object = rm_first($method);
+			$object = df_first($method);
 			df_assert(is_object($object));
 			/** @var string $function */
-			$function = rm_last($method);
+			$function = df_last($method);
 			$method = implode('::', array(get_class($object), $function));
 		}
 		/** @var string[] $keyParts */
@@ -215,7 +215,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 * @param string $key
 	 * @return mixed|bool
 	 */
-	public function ramGet($key) {return df_a($this->_ram, $key, false);}
+	public function ramGet($key) {return dfa($this->_ram, $key, false);}
 
 	/**
 	 * 2015-08-10
@@ -304,7 +304,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	/**
 	 * 2015-12-09
 	 * Обратите внимание,
-	 * что мы намерернно используем @uses array_key_exists() вместо @see df_a()
+	 * что мы намерернно используем @uses array_key_exists() вместо @see dfa()
 	 * потому что в нашем случае null является полноценным значением и означает «кэшировать вечно»,
 	 * в то время как значение по умолчанию — «кэшировать на время, заданное в настройках ядра».
 	 * @return int|bool|null
@@ -435,7 +435,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		}
 		$tags =
 			$tags
-		 	? rm_array($tags)
+		 	? df_array($tags)
 			: ($type ? array($type) : array())
 		;
 		return new self(array(

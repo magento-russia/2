@@ -2,7 +2,7 @@
 class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getCustomerAddressAsCompositeString() {
-		return rm_e(rm_concat_clean(', '
+		return rm_e(df_ccc(', '
 			,$this->getCustomerAddress()->getPostcode()
 			,$this->getCustomerAddress()->getCity()
 			,$this->getCustomerAddress()->getStreetAsText()
@@ -11,7 +11,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 
 	/** @return string */
 	public function getCustomerName() {
-		return rm_e(rm_concat_clean(' '
+		return rm_e(df_ccc(' '
 			,$this->order()->getCustomerLastname()
 			,$this->order()->getCustomerFirstname()
 			,$this->order()->getCustomerMiddlename()

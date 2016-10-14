@@ -9,10 +9,10 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 		$arrFiles = array();
 		foreach ($this->getScopes() as $code) {
 			/** @var array|null $classes */
-			$arrFiles[$code] = array_keys(df_nta(df_a($this->getConfigMap(), $code), true));
+			$arrFiles[$code] = array_keys(df_nta(dfa($this->getConfigMap(), $code), true));
 			$statClasses = array();
 			/** @var string|null $statFileForTheCurrentScope */
-			$statFileForTheCurrentScope = df_a($this->getStatFiles(), $code);
+			$statFileForTheCurrentScope = dfa($this->getStatFiles(), $code);
 			if (!is_null($statFileForTheCurrentScope)) {
 				$statClassesAll = df_explode_n(file_get_contents($statFileForTheCurrentScope));
 				/** @var int $statClassesCount */
@@ -36,7 +36,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 				}
 			}
 			$arrFiles[$code] = array_merge($arrFiles[$code], $statClasses);
-			$arrFiles[$code] = rm_array_unique_fast($arrFiles[$code]);
+			$arrFiles[$code] = dfa_unique_fast($arrFiles[$code]);
 			sort($arrFiles[$code]);
 		}
 		foreach ($arrFiles as $scope => $classes) {

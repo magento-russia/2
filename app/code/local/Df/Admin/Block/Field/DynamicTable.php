@@ -116,7 +116,7 @@ abstract class Df_Admin_Block_Field_DynamicTable
 	*/
 	protected function _renderCellTemplate($columnName) {
 		/** @var Df_Admin_Config_DynamicTable_Column|array(string=>mixed)|null $column */
-		$column = df_a($this->_columns, $columnName);
+		$column = dfa($this->_columns, $columnName);
 		return
 			$column instanceof Df_Admin_Config_DynamicTable_Column
 			? $column->renderTemplate($this->getElement())

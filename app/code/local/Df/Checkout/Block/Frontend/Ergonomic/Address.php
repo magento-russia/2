@@ -88,7 +88,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 				/** @var array $fieldConfig */
 				df_assert_array($fieldConfig);
 				$result->addItem(Df_Checkout_Block_Frontend_Ergonomic_Address_Field::ic(
-					df_a($fieldConfig, 'block'), $this, $fieldType, $orderingInConfig++, $fieldConfig
+					dfa($fieldConfig, 'block'), $this, $fieldType, $orderingInConfig++, $fieldConfig
 				));
 			}
 			$result->removeHidden();

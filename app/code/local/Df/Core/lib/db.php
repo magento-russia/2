@@ -91,7 +91,7 @@ function rm_primary_key($table) {
 	/** @var array(string => string|null) */
 	static $cache;
 	if (!isset($cache[$table])) {
-		$cache[$table] = rm_n_set(rm_first(df_nta(df_a_deep(
+		$cache[$table] = rm_n_set(df_first(df_nta(dfa_deep(
 			rm_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
 		))));
 	}

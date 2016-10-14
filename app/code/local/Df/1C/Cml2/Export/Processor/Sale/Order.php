@@ -62,12 +62,12 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 	private function getDocumentData_CustomerAddress() {
 		/** @var array(string => mixed) $result */
 		$result = array(
-			'Представление' => rm_cdata(df_nts(
+			'Представление' => df_cdata(df_nts(
 				$this->getAddress()->format(Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT)
 			))
 			,'АдресноеПоле' => array(
 				$this->entry()->type('Почтовый индекс', $this->getAddress()->getPostcode())
-				,$this->entry()->type('Улица', rm_cdata($this->getAddress()->getStreetAsText()))
+				,$this->entry()->type('Улица', df_cdata($this->getAddress()->getStreetAsText()))
 				,$this->entry()->type('Страна', $this->getAddress()->getCountryModel()->getName())
 				,$this->entry()->type('Регион', $this->getAddress()->getRegion())
 				,$this->entry()->type('Район', '')

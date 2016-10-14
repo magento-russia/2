@@ -15,16 +15,16 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 				/** @var string[] $fileContentsAsRow */
 				$rowAsColumns = explode(';', $fileContentsAsRow);
 				/** @var string $countryCode */
-				$countryCode = df_a($rowAsColumns, 0);
+				$countryCode = dfa($rowAsColumns, 0);
 				df_assert_string_not_empty($countryCode, -1);
 				/** @var string $countryNameInNomicalCase */
-				$countryNameInNomicalCase = df_a($rowAsColumns, 1);
+				$countryNameInNomicalCase = dfa($rowAsColumns, 1);
 				df_assert_string_not_empty($countryNameInNomicalCase);
-				$countryNameInGenitiveCase = df_a($rowAsColumns, 2);
+				$countryNameInGenitiveCase = dfa($rowAsColumns, 2);
 				/** @var string $countryNameInGenitiveCase */
 				df_assert_string($countryNameInGenitiveCase);
 				/** @var string $countryNameInCaseDative */
-				$countryNameInCaseDative = df_a($rowAsColumns, 3);
+				$countryNameInCaseDative = dfa($rowAsColumns, 3);
 				df_assert_string($countryNameInCaseDative);
 				$fileContentsAsAssocArray[$countryCode] = array(
 					'nominative' => $countryNameInNomicalCase

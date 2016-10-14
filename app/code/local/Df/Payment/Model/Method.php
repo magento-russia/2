@@ -27,7 +27,7 @@ abstract class Df_Payment_Model_Method
 			/** @var string $customInformationKey */
 			df_assert_string($customInformationKey);
 			/** @var string|null $value */
-			$value = df_a($data, $customInformationKey);
+			$value = dfa($data, $customInformationKey);
 			if (!is_null($value)) {
 				$this->getInfoInstance()->setAdditionalInformation($customInformationKey, $value);
 			}

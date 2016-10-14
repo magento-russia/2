@@ -85,7 +85,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 		return
 			(mb_strlen($text) <= $requiredLength)
 			? $text
-			: rm_concat_clean(''
+			: df_ccc(''
 				,$this->trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
 				,$addDots ? '...' : null
 			)
@@ -285,7 +285,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			,self::QUOTE__SINGLE => array('\'', '\'')
 		);
 		/** @var string[] $quotes */
-		$quotes = df_a($quotesMap, $type);
+		$quotes = dfa($quotesMap, $type);
 		if (!is_array($quotes)) {
 			df_error('Неизвестный тип кавычки «%s».', $type);
 		}
@@ -538,6 +538,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 * @return string
 	 */
 	private static function nl2brCallback(array $matches) {
-		return str_replace('{rm-newline}', '{rm-newline-preserve}', df_a($matches, 0, ''));
+		return str_replace('{rm-newline}', '{rm-newline-preserve}', dfa($matches, 0, ''));
 	}
 }

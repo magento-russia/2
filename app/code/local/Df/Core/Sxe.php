@@ -182,7 +182,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 				$this->importString($key, $value, $wrapInCData);
 			}
 			else {
-				if (rm_is_assoc($value)) {
+				if (df_is_assoc($value)) {
 					/** @var Df_Core_Sxe $childNode */
 					$childNode =
 						$this->addChild(
@@ -198,7 +198,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 					$childData = $value;
 					// Данный программный код позволяет импортировать атрибуты тэгов
 					/** @var array(string => string)|null $attributes $attributes */
-					$attributes = df_a($value, self::ATTR);
+					$attributes = dfa($value, self::ATTR);
 					if (!is_null($attributes)) {
 						df_assert_array($attributes);
 						$childNode->addAttributes($attributes);
@@ -207,7 +207,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 						 * то дочерние значения должны содержаться
 						 * не непосредственно в $value, а в подмассиве с ключём self::CONTENT
 						 */
-						$childData = df_a($value, self::CONTENT);
+						$childData = dfa($value, self::CONTENT);
 					}
 					if (!is_null($childData)) {
 						/**
@@ -491,7 +491,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 			 * Поддержка синтаксиса
 				 array(
 					'Представление' =>
-						rm_cdata(
+						df_cdata(
 							$this->getAddress()->format(
 								Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT
 							)
@@ -500,7 +500,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 			 * Обратите внимание, что проверка на синтаксис[[]] должна предшествовать
 			 * проверке на принадлежность ключа $keyAsString в массиве $wrapInCData,
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
-			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис rm_cdata ([[]])
+			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
 			 * даже при $wrapInCDataAll = true, потому что маркеры [[ и ]] из данных надо удалять.
 			 */
 			/**
@@ -540,7 +540,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 							 * Обратите внимание, что мы намеренно не добавляем htmlspecialchars:
 							 * пусть вместо этого источник данных помечает те даннные, которые
 							 * могут содержать неразрешённые в качестве содержимого тегов XML
-							 * значения посредством @see rm_cdata()
+							 * значения посредством @see df_cdata()
 							 */
 							,$valueAsString
 						)

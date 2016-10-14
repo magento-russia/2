@@ -282,7 +282,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 
 	/** @return string */
 	public function getStatusMeaning() {
-		return df_a(
+		return dfa(
 			array(
 				0 => 'операция успешно завершена'
 				, 1 => 'запрос идентифицирован как повторный'
@@ -361,7 +361,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 			$this->{__METHOD__} =
 				$this->getRmTransactionType()
 				? $this->getRmTransactionType()
-				: df_a(array(
+				: dfa(array(
 					1 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT
 					,0 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
 					,21 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE

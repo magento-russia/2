@@ -27,7 +27,7 @@ class Df_ImportExport_Model_Export_Entity_Product
 	 */
 	protected function _updateDataWithCategoryColumns(&$dataRow, &$rowCategories, $productId) {
 		return
-			!df_a($rowCategories, $productId)
+			!dfa($rowCategories, $productId)
 			? false
 			: parent::_updateDataWithCategoryColumns($dataRow, $rowCategories, $productId)
 		;

@@ -21,7 +21,7 @@ class Df_Adminhtml_Block_Catalog_Product_Edit_Tab_Categories extends Mage_Adminh
 		) {
 			if (
 				!in_array(
-					df_a($result, 'id')
+					dfa($result, 'id')
 					,df_h()->accessControl()->getCurrentRole()->getCategoryIds()
 				)
 			) {

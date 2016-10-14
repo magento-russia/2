@@ -18,7 +18,7 @@ class Df_Shipping_Model_ConfigM extends Mage_Shipping_Model_Config {
 		/** @var Mage_Shipping_Model_Carrier_Abstract|bool result */
 		$result = false;
 		/** @var string|null $modelName */
-		$modelName = df_a($config, 'model');
+		$modelName = dfa($config, 'model');
 		if (!is_null($modelName)) {
 			/**
 			* Added protection from not existing models usage.

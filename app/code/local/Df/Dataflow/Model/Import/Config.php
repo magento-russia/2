@@ -17,7 +17,7 @@ class Df_Dataflow_Model_Import_Config extends Df_Core_Model {
 
 		/** @var string $result */
 		$result =
-			df_a($this->getParams(), $paramName, $defaultValue)
+			dfa($this->getParams(), $paramName, $defaultValue)
 		;
 		if (!is_null($result)) {
 			df_result_string($result);

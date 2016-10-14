@@ -20,6 +20,6 @@
 class Df_Tax_Config_Source_ApplyDiscountOnPrices {
 	/** @return array(array(string => string)) */
 	public function toOptionArray() {
-		return rm_map_to_options(array('Before Tax', 'After Tax'), 'Mage_Tax');
+		return df_map_to_options(array('Before Tax', 'After Tax'), 'Mage_Tax');
 	}
 }

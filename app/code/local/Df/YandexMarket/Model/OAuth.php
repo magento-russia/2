@@ -8,10 +8,10 @@ class Df_YandexMarket_Model_OAuth extends Df_Yandex_Model_OAuth {
 	 */
 	protected function checkResponse(array $response) {
 		/** @var string $errorType */
-		$errorType = df_a($response, 'error');
+		$errorType = dfa($response, 'error');
 		if ($errorType) {
 			/** @var string $errorMessage */
-			$errorMessage = df_a($response, 'error_description', $errorType);
+			$errorMessage = dfa($response, 'error_description', $errorType);
 			df_error(
 				'При получении токена Партнёрского API Яндекс.Маркета произошёл сбой: «%s».'
 				,$errorMessage

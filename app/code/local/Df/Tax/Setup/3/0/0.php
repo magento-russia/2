@@ -336,7 +336,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 				 * за исключением перевозок внутри Таможенного союза ЕАЭС).
 				 */
 				/** @var string $taxClassId */
-				$taxClassId = self::productClassId($iso2, rm_first(self::$rates[$iso2]));
+				$taxClassId = self::productClassId($iso2, df_first(self::$rates[$iso2]));
 				self::option('classes/shipping_tax_class', $taxClassId, $scope, $scopeId);
 				self::optionС('shipping_includes_tax', 1, $scope, $scopeId);
 				self::optionС('price_includes_tax', 1, $scope, $scopeId);

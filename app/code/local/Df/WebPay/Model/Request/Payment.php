@@ -165,10 +165,10 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				/** @var array $item */
 				df_assert_array($item);
 				/** @var Df_Core_Model_Money $price */
-				$price = df_a($item, 'price');
+				$price = dfa($item, 'price');
 				df_assert($price instanceof Df_Core_Model_Money);
 				/** @var int $qty */
-				$qty = df_a($item, 'qty');
+				$qty = dfa($item, 'qty');
 				df_assert_integer($qty);
 				$resultAsInteger += ($qty * $price->getAsInteger());
 			}

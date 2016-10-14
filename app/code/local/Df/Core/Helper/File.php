@@ -39,14 +39,14 @@ class Df_Core_Helper_File extends Mage_Core_Helper_Abstract {
 		$result = $fileName;
 		if (file_exists($fileName)) {
 			$fileInfo = pathinfo($fileName);
-			$dirname = df_a($fileInfo, 'dirname');
-			$extension = df_a($fileInfo, 'extension');
-			$key = df_a($fileInfo, 'filename');
+			$dirname = dfa($fileInfo, 'dirname');
+			$extension = dfa($fileInfo, 'extension');
+			$key = dfa($fileInfo, 'filename');
 			$i = 1;
 			while (1) {
 				$result =
 					$dirname . '/'
-					. rm_concat_clean('.', $this->generateOrderedKey($key, $i++), $extension)
+					. df_ccc('.', $this->generateOrderedKey($key, $i++), $extension)
 				;
 				if (!file_exists($result)) {
 					break;

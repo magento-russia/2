@@ -446,7 +446,7 @@ function rm_bts_r($value) {return $value ? 'да' : 'нет';}
  * @param string $text
  * @return string
  */
-function rm_cdata($text) {return Df_Core_Sxe::markAsCData($text);}
+function df_cdata($text) {return Df_Core_Sxe::markAsCData($text);}
 
 /**
  * 2015-04-17
@@ -773,7 +773,7 @@ function rm_sprintf($pattern) {
 	/** @var mixed[] $arguments */
 	if (is_array($pattern)) {
 		$arguments = $pattern;
-		$pattern = rm_first($arguments);
+		$pattern = df_first($arguments);
 	}
 	else {
 		$arguments = func_get_args();
@@ -803,7 +803,7 @@ function rm_sprintf_strict($pattern) {
 	/** @var mixed[] $arguments */
 	if (is_array($pattern)) {
 		$arguments = $pattern;
-		$pattern = rm_first($arguments);
+		$pattern = df_first($arguments);
 	}
 	else {
 		$arguments = func_get_args();
@@ -814,7 +814,7 @@ function rm_sprintf_strict($pattern) {
 	}
 	else {
 		try {
-			$result = vsprintf($pattern, rm_tail($arguments));
+			$result = vsprintf($pattern, df_tail($arguments));
 		}
 		catch (Exception $e) {
 			/** @var bool $inProcess */
@@ -828,7 +828,7 @@ function rm_sprintf_strict($pattern) {
 					,array(
 						'{message}' => rm_ets($e)
 						,'{pattern}' => $pattern
-						,'{params}' => print_r(rm_tail($arguments), true)
+						,'{params}' => print_r(df_tail($arguments), true)
 					)
 				);
 				$inProcess = false;
@@ -875,7 +875,7 @@ function rm_string_clean($string, $wordsToRemove) {
 	if (!is_array($wordsToRemove)) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$wordsToRemove = rm_tail($arguments);
+		$wordsToRemove = df_tail($arguments);
 	}
 	return str_replace($wordsToRemove, null, $string);
 }

@@ -91,10 +91,10 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 	 * @return Df_Catalog_Model_Url
 	 */
 	public function makeRedirect(array $params) {
-		$rewriteFrom = df_a($params, 'from');
+		$rewriteFrom = dfa($params, 'from');
 		/** @var Varien_Object $rewriteFrom */
 
-		$rewriteTo = df_a($params, 'to');
+		$rewriteTo = dfa($params, 'to');
 		/** @var Varien_Object $rewriteTo */
 		df_assert($rewriteFrom->getData('request_path') != $rewriteTo->getData('request_path'));
 		$this->_getWriteAdapter()->update(
@@ -178,7 +178,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 		);
 		$categories = array();
 		$adapter = $this->_getReadAdapter();
-		$categoryIds = rm_array($categoryIds);
+		$categoryIds = df_array($categoryIds);
 		/**
 		 * Метод @see Varien_Db_Adapter_Pdo_Mysql::getCheckSql() отсутствует в Magento CE 1.4,
 		 * поэтому используем вместо него @uses Df_Core_Helper_Db::getCheckSql()
@@ -302,9 +302,9 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 	 */
 	private function relinkRewrites(array $params) {
 		/** @var Varien_Object $rewriteFrom */
-		$rewriteFrom = df_a($params, 'from');
+		$rewriteFrom = dfa($params, 'from');
 		/** @var Varien_Object $rewriteTo */
-		$rewriteTo = df_a($params, 'to');
+		$rewriteTo = dfa($params, 'to');
 		$where = rm_quote_into('(target_path=?)', $rewriteFrom->getData('request_path'));
 		if ($rewriteFrom->getData('store_id')) {
 			$where .= rm_quote_into(' AND (store_id=?)', $rewriteFrom->getData('store_id'));

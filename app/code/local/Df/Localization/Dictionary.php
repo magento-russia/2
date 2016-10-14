@@ -20,7 +20,7 @@ abstract class Df_Localization_Dictionary extends Df_Core_Xml_Parser_Entity {
 			if (!file_exists($path)) {
 				df_error('Не найден требуемый файл «%s».', $path);
 			}
-			$this->{__METHOD__} = rm_first(rm_xml_load_file($path)->xpath('/dictionary'));
+			$this->{__METHOD__} = df_first(rm_xml_load_file($path)->xpath('/dictionary'));
 			df_assert($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

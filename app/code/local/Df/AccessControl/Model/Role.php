@@ -24,12 +24,12 @@ class Df_AccessControl_Model_Role extends Df_Core_Model {
 			 * 2015-02-06
 			 * Т.к. ключи массива — целочисленные, то результат применения @uses array_merge()
 			 * может содержать повторяющиеся элементы,
-			 * которые мы удаляем посредством @uses rm_array_unique_fast().
+			 * которые мы удаляем посредством @uses dfa_unique_fast().
 			 * http://php.net/manual/function.array-merge.php
 			 * «If, however, the arrays contain numeric keys,
 			 * the later value will not overwrite the original value, but will be appended.»
 			 */
-			$this->{__METHOD__} = rm_array_unique_fast($result);
+			$this->{__METHOD__} = dfa_unique_fast($result);
 		}
 		return $this->{__METHOD__};
 	}

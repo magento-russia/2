@@ -66,7 +66,7 @@ class Df_Kkb_Model_RequestDocument_Secondary extends Df_Kkb_Model_RequestDocumen
 		df_param_string_not_empty($transactionCodeInServiceFormat, 0);
 		/** @var string $result */
 		$result =
-			df_a(
+			dfa(
 				array(
 					self::TRANSACTION__CAPTURE =>
 						Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE

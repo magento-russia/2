@@ -46,17 +46,17 @@ class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Co
 	 */
 	private function processAddress(array &$order, $addressName) {
 		/** @var array(string => mixed)|null $result */
-		$address = df_a($order, $addressName);
+		$address = dfa($order, $addressName);
 		/**
 		 * Как ни странно, судя по отчетам $address — не всегда массив (может быть null).
 		 * http://magento-forum.ru/topic/3283/
 		 */
 		if (is_array($address)) {
 			/** @var string|null $regionName */
-			$regionName = df_a($address, 'region');
+			$regionName = dfa($address, 'region');
 			if (!$regionName) {
 				/** @var int $regionId */
-				$regionId = rm_nat0(df_a($address, 'region_id'));
+				$regionId = rm_nat0(dfa($address, 'region_id'));
 				if (0 < $regionId) {
 					$address['region'] = Df_Directory_Model_Region::ld($regionId)->getName();
 				}

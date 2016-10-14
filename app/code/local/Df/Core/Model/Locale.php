@@ -111,7 +111,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 	 * @return array(array(string => string))
 	 */
 	public function getTranslatedOptionLocales() {
-		return rm_map_to_options(array('ru_RU' => 'Русский', 'en_US' => 'English'));
+		return df_map_to_options(array('ru_RU' => 'Русский', 'en_US' => 'English'));
 	}
 
 	/**

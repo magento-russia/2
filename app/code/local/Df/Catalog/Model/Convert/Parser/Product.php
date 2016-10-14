@@ -42,9 +42,9 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 		/** @var string $result */
 		$result = '';
 		/** @var Df_Catalog_Model_Product $product */
-		$product = df_a($params, 'product');
+		$product = dfa($params, 'product');
 		/** @var array(string => mixed) $row */
-		$row = df_a($params, 'row');
+		$row = dfa($params, 'row');
 		/** @var array(string => mixed) $mediaGallery */
 		$mediaGallery = $product->getMediaGallery();
 		/** @var array(array(string => mixed)) $images */
@@ -56,7 +56,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				/** @var array(string => mixed) $image */
 				if (!$image['disabled']) {
 					/** @var string $imagePath */
-					$imagePath = df_a($image, 'file');
+					$imagePath = dfa($image, 'file');
 					df_assert_string_not_empty($imagePath);
 					$imagePath = $this->adjustImagePath($imagePath);
 					if (!(in_array($imagePath, $this->getPrimaryImages($row)))) {
@@ -76,13 +76,13 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 	private function getPrimaryImages(array $row) {
 		$result = array();
 		foreach ($this->getImageFields() as $field) {
-			$image = df_a($row, $field);
+			$image = dfa($row, $field);
 			if (!empty ($image)) {
 				$result[]= $this->adjustImagePath($image);
 			}
 		}
 		/**
-		 * С @see rm_array_unique_fast() постоянно возникакает проблема:
+		 * С @see dfa_unique_fast() постоянно возникакает проблема:
 		 * «array_flip(): Can only flip STRING and INTEGER values»
 		 * http://magento-forum.ru/topic/4695/
 		 * Лучше верну-ка старую добрую функцию @see array_unique()
@@ -117,7 +117,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 		return
 				is_array($value) && !empty($value)
 			?
-				df_array_combine(
+				array_combine(
 					array_keys($value)
 					/** @uses prepareForSerialization() */
 					,array_map(array($this, __FUNCTION__), $value)

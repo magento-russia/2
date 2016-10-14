@@ -47,7 +47,7 @@ class Df_Checkout_Block_Onepage_Shipping_Method_Available
 	private function renderCarriers() {
 		/** @noinspection PhpParamsInspection */
 		return df_concat_n(df_map(
-			'Df_Shipping_Block_Carrier::r', $this->getShippingRates(), array(), $this, RM_BEFORE
+			'Df_Shipping_Block_Carrier::r', $this->getShippingRates(), array(), $this, DF_BEFORE
 		));
 	}
 }

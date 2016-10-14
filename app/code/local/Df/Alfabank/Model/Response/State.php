@@ -42,7 +42,7 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 	/** @return string */
 	public function getPaymentStatusMeaning() {
 		return
-			df_a(
+			dfa(
 				array(
 					0 => 'Заказ зарегистрирован, но не оплачен'
 					,1 => 'Проведена предавторизация суммы заказа'

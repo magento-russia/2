@@ -87,7 +87,7 @@ class Df_Localization_Translation_File extends Df_Core_Model {
 					$translatedValue =
 						is_null($this->getTranslatedFile())
 						? null
-						: df_a($this->getTranslatedFile()->getEntries(), $entryKey)
+						: dfa($this->getTranslatedFile()->getEntries(), $entryKey)
 					;
 					if (!is_null($translatedValue)) {
 						df_assert_string($translatedValue);

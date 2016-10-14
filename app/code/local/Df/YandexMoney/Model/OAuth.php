@@ -8,10 +8,10 @@ class Df_YandexMoney_Model_OAuth extends Df_Yandex_Model_OAuth {
 	 */
 	protected function checkResponse(array $response) {
 		/** @var string $errorType */
-		$errorType = df_a($response, 'error');
+		$errorType = dfa($response, 'error');
 		if ($errorType) {
 			/** @var string $errorMessage */
-			$errorMessage = df_a(array(
+			$errorMessage = dfa(array(
 				'invalid_grant' =>
 					'В выдаче access_token отказано.'
 					. ' Временный токен не выдавался Яндекс.Деньгами, либо просрочен,'

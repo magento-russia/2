@@ -37,7 +37,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 	/**
 	 * 2015-02-06
 	 * Раньше реализация была такой:
-			mb_strtolower(rm_last(rm_explode_class(get_class($this->getOwner()))))
+			mb_strtolower(df_last(rm_explode_class(get_class($this->getOwner()))))
 	 * В принципе, она корректна, однако зависит от «магии» — имени класса, использующего наш класс.
 	 * Мало ли, какой рефакторинг потом произойдёт и как имена классов изменятся.
 	 * @return string
@@ -135,10 +135,10 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 			$result = $this->getQuoteAddress()->getCustomerAddressId();
 			if (!$result && $this->getPrimaryAddress() && $this->hasAddresses()) {
 				/** @var Df_Customer_Model_Address $address */
-				$address = df_a(
+				$address = dfa(
 					$this->getTypeAddresses()
 					, $this->getPrimaryAddress()->getId()
-					, rm_first($this->getTypeAddresses())
+					, df_first($this->getTypeAddresses())
 				);
 				$result = $address->getId();
 			}

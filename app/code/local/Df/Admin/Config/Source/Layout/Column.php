@@ -13,7 +13,7 @@ class Df_Admin_Config_Source_Layout_Column extends Df_Admin_Config_Source {
 	protected function toOptionArrayInternal($isMultiSelect = false) {
 		return array_merge(
 			$this->needShowOptionNo() ? array(rm_option('no', 'не показывать')) : array()
-			, rm_map_to_options(array(self::$LEFT => 'левая колонка', self::$RIGHT => 'правая колонка'))
+			, df_map_to_options(array(self::$LEFT => 'левая колонка', self::$RIGHT => 'правая колонка'))
 		);
 	}
 

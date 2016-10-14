@@ -38,20 +38,20 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		$attributes = $this->getTypeInstance()->getSetAttributes();
 		df_assert_array($attributes);
 		/** @var Mage_Eav_Model_Entity_Attribute_Abstract|null $mediaGalleryAttribute */
-		$mediaGalleryAttribute = df_a($attributes, self::P__MEDIA_GALLERY);
+		$mediaGalleryAttribute = dfa($attributes, self::P__MEDIA_GALLERY);
 		if (!is_null($mediaGalleryAttribute)) {
 			df_assert($mediaGalleryAttribute instanceof Mage_Eav_Model_Entity_Attribute_Abstract);
 			if (is_array($this->getMediaGallery())) {
 				$this->getMediaGalleryImages();
 				/** @var array|null $images */
-				$images = df_a($this->getMediaGallery(), 'images');
+				$images = dfa($this->getMediaGallery(), 'images');
 				if (is_array($images)) {
 					/** @var Mage_Catalog_Model_Product_Attribute_Backend_Media $backend */
 					$backend = $mediaGalleryAttribute->getBackend();
 					df_assert($backend instanceof Mage_Catalog_Model_Product_Attribute_Backend_Media);
 					foreach ($images as $image){
 						/** @var string|null $fileName */
-						$fileName = df_a($image, 'file');
+						$fileName = dfa($image, 'file');
 						if ($backend->getImage($this, $fileName)) {
 							$backend->removeImage($this, $fileName);
 						}
@@ -174,7 +174,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			$result = $this->getCategory();
 			if (!$result && $this->getCategoryIds()) {
 				$result = Df_Catalog_Model_Category::ld(
-					rm_first($this->getCategoryIds()), $this->getStore()
+					df_first($this->getCategoryIds()), $this->getStore()
 				);
 			}
 			$this->{__METHOD__} = rm_n_set($result);
@@ -578,11 +578,11 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			$result = array();
 			if (is_array($this->getMediaGallery())) {
 				/** @var array(string => string)|null $images */
-				$images = df_a($this->getMediaGallery(), 'images');
+				$images = dfa($this->getMediaGallery(), 'images');
 				if (is_array($images)) {
 					foreach ($images as $image){
 						/** @var string|null $fileName */
-						$fileName = df_a($image, 'file');
+						$fileName = dfa($image, 'file');
 						if ($fileName) {
 							$result[]= $this->getMediaConfig()->getMediaUrl($fileName);
 						}
@@ -652,7 +652,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					)
 				);
 			}
-			$result = is_null($key) ? $mediaGallery : df_a($mediaGallery, $key);
+			$result = is_null($key) ? $mediaGallery : dfa($mediaGallery, $key);
 		}
 		if (!is_null($result)) {
 			df_result_array($result);
@@ -705,7 +705,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			/** @var array(string => string) $row */
 			$row = $query->fetch($style = Zend_Db::FETCH_ASSOC);
 			if (is_array($row)) {
-				$result = df_a($row, 'min_price');
+				$result = dfa($row, 'min_price');
 				if (!is_null($result)) {
 					$result = rm_float($result);
 				}
@@ -1201,7 +1201,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			,Mage_Catalog_Model_Product_Type::TYPE_GROUPED => 'группа'
 			,Mage_Catalog_Model_Product_Type::TYPE_VIRTUAL => 'виртуальный'
 		);
-		return df_a($map, $typeId, 'неизвестный');
+		return dfa($map, $typeId, 'неизвестный');
 	}
 	/**
 	 * @static

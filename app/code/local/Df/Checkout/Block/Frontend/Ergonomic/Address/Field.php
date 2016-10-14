@@ -39,7 +39,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 						'for' => $this->getDomId()
 						,'class' => ($this->isRequired() ? 'required' : null)
 					))
-					,rm_concat_clean(''
+					,df_ccc(''
 						,($this->isRequired() ? '<em>*</em>' : null)
 						,$this->getLabel()
 					)

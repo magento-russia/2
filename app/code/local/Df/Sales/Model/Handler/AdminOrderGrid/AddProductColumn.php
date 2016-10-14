@@ -45,7 +45,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 	private function getPreviousColumnId() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_n_set(
-				df_a(
+				dfa(
 					array_keys($this->getEvent()->getGrid()->getColumns())
 					// Минус 2, потому что:
 					// самый левый столбец с флажками не учитывается

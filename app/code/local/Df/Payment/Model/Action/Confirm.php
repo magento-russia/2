@@ -512,7 +512,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	private function orderIId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
-			$result = rm_last_order_iid();
+			$result = df_last_order_iid();
 			/**
 			 * Вообще говоря, извлекать номер заказа из сессии — в корне ошибочно,
 			 * потому что подтверждение платежа может прийти в совершенно другой сессии
@@ -533,7 +533,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 				 * Такой эффект заметил только в версии 2.20.0 и только при включенной компиляции
 				 * в двух магазинах: antonshop.com и mamamallm.ru
 				 */
-				$result = df_a($this->getRequest()->getParams(), $this->getRequestKeyOrderIncrementId());
+				$result = dfa($this->getRequest()->getParams(), $this->getRequestKeyOrderIncrementId());
 			}
 			if (!$result) {
 				df_error(

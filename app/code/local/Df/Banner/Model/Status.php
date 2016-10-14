@@ -19,7 +19,7 @@ class Df_Banner_Model_Status extends Varien_Object {
 	 * @return array(array(int => string))
 	 */
 	public static function yesNo() {
-		return rm_map_to_options(array(self::STATUS_ENABLED => 'да', self::STATUS_DISABLED => 'нет'));
+		return df_map_to_options(array(self::STATUS_ENABLED => 'да', self::STATUS_DISABLED => 'нет'));
 	}
 
 	const STATUS_ENABLED = 1;

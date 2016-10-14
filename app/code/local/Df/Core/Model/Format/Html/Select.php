@@ -41,9 +41,9 @@ final class Df_Core_Model_Format_Html_Select extends Df_Core_Model {
 		}
 		else {
 			/** @var int|string|array(string => string)|array(array(string => string|array(string => string))) $value */
-			$value = df_a($option, 'value');
+			$value = dfa($option, 'value');
 			/** @var string $label */
-			$label = df_a($option, 'label');
+			$label = dfa($option, 'label');
 			if (!is_array($value)) {
 				// опция имеет формат array('label' => 'Россия', 'value' => 'RU')
 				$result = $this->renderOptionTag($value, $label);

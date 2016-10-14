@@ -64,7 +64,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 			 * так и быть простым ассициативным массивом PHP.
 			 */
 			/** @var string|array(string => mixed) $values */
-			$values = df_a($value, 'values');
+			$values = dfa($value, 'values');
 			/** @var bool $valuesWasEncoded */
 			$valuesWasEncoded = false;
 			if ($values && is_string($values)) {
@@ -104,7 +104,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 				// For duplicating we need copy original images.
 				foreach ($images as &$image) {
 					/** @var int|null $valueId */
-					$valueId = df_a($image, 'value_id');
+					$valueId = dfa($image, 'value_id');
 					if ($valueId) {
 						/** @var string $file */
 						$file = $image['file'];
@@ -122,7 +122,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 						 * in app/code/core/Mage/Catalog/Model/Product/Attribute/Backend/Media.php».
 						 */
 						$newImages[$file] = array(
-							'new_file' => $copy, 'label' => df_a($image, 'label')
+							'new_file' => $copy, 'label' => dfa($image, 'label')
 						);
 					}
 				}
@@ -160,7 +160,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 					$object->setData($mediaAttrCode, 'no_selection');
 				}
 				/** @var array(string => string)|null $attrDataValue */
-				$attrDataValue = df_a($newImages, $attrData);
+				$attrDataValue = dfa($newImages, $attrData);
 				if ($attrDataValue) {
 					/** @var string $newFile */
 					$newFile = $attrDataValue['new_file'];
@@ -172,11 +172,11 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 					 * В качестве быстрого простого решения
 					 * назначаем хоть какую-то (первую по списку) картинку главной.
 					 */
-					if ($object->getIsDuplicate() && !df_a($values, $mediaAttrCode)) {
+					if ($object->getIsDuplicate() && !dfa($values, $mediaAttrCode)) {
 						$values[$mediaAttrCode] = $newFile;
 					}
 				}
-				$attrDataValue = df_a($existImages, $attrData);
+				$attrDataValue = dfa($existImages, $attrData);
 				if ($attrDataValue) {
 					$object->setData($labelKey, $attrDataValue['label']);
 				}
@@ -273,7 +273,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 		$destionationFilePathOptimizedForSeo =
 			df_concat_path(
 				dirname($destionationFilePath)
-				,rm_concat_clean('.'
+				,df_ccc('.'
 					,df_output()->transliterate($product->getName())
 					, df()->file()->getExt($destionationFilePath)
 				)

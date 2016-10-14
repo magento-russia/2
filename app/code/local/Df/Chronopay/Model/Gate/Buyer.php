@@ -10,10 +10,10 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 
 	/** @return string */
 	public function getEmail() {
-		return rm_first(df_array_clean(
+		return df_first(df_clean([
 			$this->getOrder()->getCustomerEmail()
 			,$this->getBillingAddress()->getEmail()
-		));
+		]));
 	}
 
 	/** @return string */
@@ -22,10 +22,10 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 	}
 
 	/** @return string */
-	public function getFirstName() {return df_a($this->getCompositeName(), 0);}
+	public function getFirstName() {return dfa($this->getCompositeName(), 0);}
 
 	/** @return string */
-	public function getLastName() {return df_a($this->getCompositeName(), 1);}
+	public function getLastName() {return dfa($this->getCompositeName(), 1);}
 
 	/** @return string */
 	public function getLocalTime() {
@@ -77,7 +77,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 	}
 
 	/** @return string */
-	public function getUserAgent() {return df_a($_SERVER, "HTTP_USER_AGENT");}
+	public function getUserAgent() {return dfa($_SERVER, "HTTP_USER_AGENT");}
 
 	/**
 	 * @param string $text
@@ -103,7 +103,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 		;
 		df_assert(false !== $matchingResult);
 		if (0 < $matchingResult) {
-			$invalidSymbols = df_a($matches, 0);
+			$invalidSymbols = dfa($matches, 0);
 			if ($invalidSymbols) {
 				df_error(
 					df_concat_n(
@@ -142,7 +142,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 			$this->{__METHOD__} =
 				array(
 					implode(' ', array_slice($exploded, 0, $countExplodedParts - 1))
-					,df_a($exploded, $countExplodedParts - 1, '')
+					,dfa($exploded, $countExplodedParts - 1, '')
 				)
 			;
 		}

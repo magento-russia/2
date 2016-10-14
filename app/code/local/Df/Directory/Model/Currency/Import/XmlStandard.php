@@ -70,9 +70,9 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 	 */
 	private function calculateRate(array $currencyData) {
 		/** @var int $rateDenominator */
-		$rateDenominator = rm_nat0(df_a($currencyData, $this->getTagName_Denominator()));
+		$rateDenominator = rm_nat0(dfa($currencyData, $this->getTagName_Denominator()));
 		/** @var float $rateRaw */
-		$rateRaw = rm_float(df_a($currencyData, $this->getTagName_Rate()));
+		$rateRaw = rm_float(dfa($currencyData, $this->getTagName_Rate()));
 		df_assert_gt0($rateRaw);
 		/** @var float $rate */
 		$result = $rateRaw / $rateDenominator;
@@ -112,7 +112,7 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 				$currencyAsArray = $currencyAsSimpleXml->asArray();
 				df_assert_array($currencyAsArray);
 				/** @var string $currencyCode */
-				$currencyCode = df_a($currencyAsArray, $this->getTagName_CurrencyCode());
+				$currencyCode = dfa($currencyAsArray, $this->getTagName_CurrencyCode());
 				df_assert_string($currencyCode);
 				$result[$currencyCode] = $this->calculateRate($currencyAsArray);
 			}
@@ -131,7 +131,7 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 		$result =
 			($this->getBaseCurrencyCode() === $currencyCode)
 			? 1.0
-			: df_a($this->getMapFromCurrencyCodeToRate(), $currencyCode)
+			: dfa($this->getMapFromCurrencyCodeToRate(), $currencyCode)
 		;
 		if (is_null($result)) {
 			$this->throwNoRate($this->getBaseCurrencyCode(), $currencyCode);

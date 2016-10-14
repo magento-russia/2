@@ -454,7 +454,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * @return integer
 	 */
 	private function getCategoryNestingLevel(Varien_Object $rewrite) {
-		return df_a($this->_preloadedCategoriesLevelInfo, $rewrite->getData("category_id"), 0);
+		return dfa($this->_preloadedCategoriesLevelInfo, $rewrite->getData("category_id"), 0);
 	}
 
 	/**
@@ -548,7 +548,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			foreach ($productIds as $productId) {
 				/** @var int $productId */
 				$this->makeRedirectsToCanonicalProductUrlForConcreteProduct(
-					df_nta(df_a($rewrites, $productId)), $storeId
+					df_nta(dfa($rewrites, $productId)), $storeId
 				);
 			}
 
@@ -571,7 +571,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 				: $this->getIndexOfRewriteWithoutCategory($rewrites)
 			;
 			if (!is_null($indexOfMainRewrite)) {
-				$mainRewrite = df_a($rewrites, $indexOfMainRewrite);
+				$mainRewrite = dfa($rewrites, $indexOfMainRewrite);
 				/** @var Varien_Object $mainRewrite */
 				foreach ($rewrites as $index => $rewrite) {
 					if ($index !== $indexOfMainRewrite) {

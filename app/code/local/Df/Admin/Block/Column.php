@@ -39,7 +39,7 @@ abstract class Df_Admin_Block_Column extends Df_Core_Block_Admin {
 						var $select = $('.<?php echo $columnName; ?>', $row);
 				 */
 				$this->getColumn()->getName()
-				, df_a($attributes, 'class')
+				, dfa($attributes, 'class')
 				, $this->getAdditionalCssClass()
 			)));
 			$this->{__METHOD__} = array('name' => $this->getInputName()) + $attributes;
@@ -50,7 +50,7 @@ abstract class Df_Admin_Block_Column extends Df_Core_Block_Admin {
 	/** @return array(string => mixed) */
 	protected function getRenderOptions() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_extend(
+			$this->{__METHOD__} = df_extend(
 				$this->getDefaultRenderOptions(), $this->getColumn()->getRenderOptions()
 			);
 		}

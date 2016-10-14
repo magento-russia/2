@@ -81,7 +81,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 
 	/** @return string */
 	private function openTagWithAttributesAsText() {
-		return rm_concat_clean(' '
+		return df_ccc(' '
 			,$this->tag()
 			,$this->shouldAttributesBeMultiline() ? "\n" : null
 			,call_user_func(

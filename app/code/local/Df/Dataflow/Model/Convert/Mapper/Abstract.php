@@ -80,7 +80,7 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 			df_param_string($defaultValue, 3);
 		}
 		/** @var string|null $result */
-		$result = df_a($row, $fieldName);
+		$result = dfa($row, $fieldName);
 		if (!is_null($result)) {
 			df_result_string($result);
 		}

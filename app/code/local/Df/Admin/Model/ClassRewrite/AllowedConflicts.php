@@ -7,7 +7,7 @@ class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model {
 	 */
 	public function isAllowed($active, $inactive) {
 		/** @var string[]|null $inactives */
-		$inactives = df_a($this->getMap(), $active);
+		$inactives = dfa($this->getMap(), $active);
 		return $inactives && isset($inactives[$inactive]);
 	}
 

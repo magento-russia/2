@@ -46,7 +46,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 
 	/** @return string|null */
 	public function getGenderAsString() {
-		return df_a($this->getResource()->getMapFromGenderIdToGenderName(), $this->getGender());
+		return dfa($this->getResource()->getMapFromGenderIdToGenderName(), $this->getGender());
 	}
 
 	/** @return string */
@@ -89,7 +89,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 		}
 		else {
 			df_param_string($value, 0);
-			$value = df_a($this->getResource()->getMapFromGenderNameToGenderId(), $value);
+			$value = dfa($this->getResource()->getMapFromGenderNameToGenderId(), $value);
 			df_assert_integer($value);
 		}
 		/**

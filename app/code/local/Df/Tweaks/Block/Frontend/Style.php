@@ -51,7 +51,7 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 			if ($font->isUcFirst()) {
 				// тут нам удобнее работать с массивом,
 				// чем отдельно разбирать случаи массива и строки
-				$selector = rm_array($selector);
+				$selector = df_array($selector);
 				foreach ($selector as &$item) {
 					/** @var string $item */
 					// Строка не должна состоять из нескольких селекторов.

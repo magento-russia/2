@@ -7,7 +7,7 @@ class Df_Localization_Helper_Locale extends Mage_Core_Helper_Abstract {
 	public function getLanguageCodeByLocaleCode($localeCode) {
 		df_param_string_not_empty($localeCode, 0);
 		/** @var string $result */
-		$result = df_a(explode(self::SEPARATOR, $localeCode), 0);
+		$result = dfa(explode(self::SEPARATOR, $localeCode), 0);
 		df_result_string_not_empty($result);
 		return $result;
 	}

@@ -37,7 +37,7 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 			 */
 			$moduleName = rm_concat_class(array_slice($classNameParts, 0, 2));
 			/** @var string $entityType */
-			$entityType = strtolower(df_a($classNameParts, 2));
+			$entityType = strtolower(dfa($classNameParts, 2));
 			/**
 			 * @var string $moduleNameInMagentoFormat
 			 * Например: «df_sales_rule»
@@ -58,12 +58,12 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 				 */
 				'helper' === $entityType
 				&& 4 === count($classNameParts)
-				&& 'data' === strtolower(df_a($classNameParts, 3))
+				&& 'data' === strtolower(dfa($classNameParts, 3))
 				? null
 				// +1, чтобы пропустить слово «model» или «block»
 				: rm_concat_class(df_t()->lcfirst(array_slice($classNameParts, 2 + 1)))
 			;
-			$this->{__METHOD__}[$className] = rm_concat_clean(self::$MODULE_NAME_SEPARATOR
+			$this->{__METHOD__}[$className] = df_ccc(self::$MODULE_NAME_SEPARATOR
 				,$moduleNameInMagentoFormat
 				,$classNameWithoutModuleNameInMagentoFormat
 			);

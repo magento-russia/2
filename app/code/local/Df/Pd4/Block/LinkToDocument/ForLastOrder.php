@@ -6,7 +6,7 @@ class Df_Pd4_Block_LinkToDocument_ForLastOrder extends Df_Pd4_Block_LinkToDocume
 	 * @used-by Df_Pd4_Block_LinkToDocument_ForLastOrder::needToShow()
 	 * @return Df_Sales_Model_Order
 	 */
-	protected function order() {return rm_last_order();}
+	protected function order() {return df_last_order();}
 
 	/**
 	 * @override

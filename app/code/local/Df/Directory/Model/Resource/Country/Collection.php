@@ -32,7 +32,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	public function getItemById($idValue) {
 		/** по сути, берём реализацию из @see Varien_Data_Collection::getItemById() */
 		$this->load();
-		return df_a($this->_items, $idValue);
+		return dfa($this->_items, $idValue);
 	}
 
 	/**
@@ -385,7 +385,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		/** @var array(string => string) $popularMapFromIso2ToLocalizedName */
 		if ($groupAndOrder && $settings->isEnabled()) {
 			$popularMapFromIso2ToLocalizedName =
-				df_select_ordered($mapFromIso2ToLocalizedName, $settings->iso2Codes())
+				dfa_select_ordered($mapFromIso2ToLocalizedName, $settings->iso2Codes())
 			;
 			/**
 			 * 2015-08-08
@@ -408,7 +408,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		}
 		// КОНЕЦ ЗАПЛАТКИ
 		/** @var array(array(string => string)) $result */
-		$result = rm_map_to_options_reverse($mapFromLocalizedNameToIso2);
+		$result = df_map_to_options_reverse($mapFromLocalizedNameToIso2);
 		// НАЧАЛО ЗАПЛАТКИ
 		/**
 		 * 2015-08-08
@@ -421,7 +421,7 @@ class Df_Directory_Model_Resource_Country_Collection
 			$result = array(
 				array(
 					'label' => $settings->labelPopular()
-					, 'value' => rm_map_to_options($popularMapFromIso2ToLocalizedName)
+					, 'value' => df_map_to_options($popularMapFromIso2ToLocalizedName)
 				)
 				,array('label' => $settings->labelAll(), 'value' => $result)
 			);

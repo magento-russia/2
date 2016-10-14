@@ -14,7 +14,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Category extends Df_Catalog_Model_XmlE
 		/** @var array(string => mixed) $result */
 		$result = array(
 			'Ид' => $this->getExternalId()
-			,'Наименование' => rm_cdata($this->getCategory()->getName())
+			,'Наименование' => df_cdata($this->getCategory()->getName())
 		);
 		if ($this->getChildren()) {
 			$result['Группы'] = self::process($this->getChildren(), $this->getDocument());

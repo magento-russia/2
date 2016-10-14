@@ -90,7 +90,7 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 	/** @return string */
 	public function getExternalIdForConfigurableParent() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_first($this->getExternalIdExploded());
+			$this->{__METHOD__} = df_first($this->getExternalIdExploded());
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

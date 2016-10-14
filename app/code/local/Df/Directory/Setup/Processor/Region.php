@@ -77,8 +77,8 @@ class Df_Directory_Setup_Processor_Region extends Df_Core_Model {
 				,'Омская' => 'Омская область'
 			)
 		;
-		if (!is_null(df_a($mapFromMyToCifrum, $namePart))) {
-			$namePart = df_a($mapFromMyToCifrum, $namePart);
+		if (!is_null(dfa($mapFromMyToCifrum, $namePart))) {
+			$namePart = dfa($mapFromMyToCifrum, $namePart);
 		}
 		foreach (self::getRussianRegionsFromLegacyModules() as $region) {
 			/** @var Mage_Directory_Model_Region $region */

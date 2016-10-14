@@ -23,7 +23,7 @@ class Df_Admin_Model_Notifier_DeleteDemoStores extends Df_Admin_Model_Notifier {
 	private function getDemoStores() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_select(
+				dfa_select(
 					Mage::app()->getStores($withDefault = false, $codeKey = true)
 					, $this->getDemoStoreCodes()
 				)

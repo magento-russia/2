@@ -11,7 +11,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup
 	public function getResult() {
 		return df_clean_xml(array(
 			'Ид' => $this->getИд()
-			,'Наименование' => rm_cdata($this->getGroup()->getCustomerGroupCode())
+			,'Наименование' => df_cdata($this->getGroup()->getCustomerGroupCode())
 			,'Валюта' => $this->getDocument()->getExportCurrency()->getCode()
 			/**
 			 * Ветку «Налог» пока не добавляем.

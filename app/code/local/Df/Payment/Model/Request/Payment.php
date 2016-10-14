@@ -51,7 +51,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 
 	/** @return string */
 	protected function getCustomerNameFull() {
-		return rm_concat_clean(' '
+		return df_ccc(' '
 			,$this->order()->getCustomerLastname()
 			,$this->order()->getCustomerFirstname()
 			,$this->order()->getCustomerMiddlename()
@@ -133,7 +133,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	 * @used-by Df_Payment_Model_Request::payment()
 	 * @return Df_Sales_Model_Order
 	 */
-	protected function order() {return rm_last_order();}
+	protected function order() {return df_last_order();}
 
 	/**
 	 * @used-by Df_Assist_Model_Request_Payment::_params()

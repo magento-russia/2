@@ -71,7 +71,7 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 		/** @var bool $result */
 		/** @var string[] $applyTo */
 		$applyTo = $this->getApplyTo();
-		return !$applyTo || array_intersect($applyTo, rm_array($type));
+		return !$applyTo || array_intersect($applyTo, df_array($type));
 	}
 	
 	/**
@@ -85,7 +85,7 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 		return rm_attributes()->createOrUpdate(
 			array_merge($attribute->getData(), array('option' =>
 				Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
-					$attribute, rm_array($options), $isModeInsert = true, $caseInsensitive = true
+					$attribute, df_array($options), $isModeInsert = true, $caseInsensitive = true
 				)
 			))
 		);

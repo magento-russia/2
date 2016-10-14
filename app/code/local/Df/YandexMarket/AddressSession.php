@@ -7,7 +7,7 @@ class Df_YandexMarket_AddressSession extends Df_Core_Model {
 	 */
 	public static function get($type) {
 		df_param_string_not_empty($type, 0);
-		return df_a(self::_get(), $type, array());
+		return dfa(self::_get(), $type, array());
 	}
 
 	/**

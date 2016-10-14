@@ -49,7 +49,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_E
 	 */
 	public function idByName($name, $type = null) {
 		df_param_string_not_empty($name, 0);
-		return df_a($this->mapFromNameToId($type ? $type : rm_eav_id_product()), $name);
+		return dfa($this->mapFromNameToId($type ? $type : rm_eav_id_product()), $name);
 	}
 
 	/**

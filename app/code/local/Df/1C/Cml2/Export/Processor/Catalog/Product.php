@@ -45,7 +45,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 			 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
 			 */
 			,'ИдентификаторТовара' => $this->getOutput_ИдентификаторТовара()
-			,'Наименование' => rm_cdata($this->getProduct()->getName())
+			,'Наименование' => df_cdata($this->getProduct()->getName())
 			,'БазоваяЕдиница' => $this->entry()->unit()
 			/**
 			 * Текущая версия 4.0.5.2 «Помощника импорта товаров с сайта»
@@ -57,7 +57,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 			 */
 			,'ИдТовараУКонтрагента' => $this->getProduct()->getId()
 			,'Группы' => $this->getOutput_Группы()
-			,'Описание' => rm_cdata($this->getProduct()->getDescription())
+			,'Описание' => df_cdata($this->getProduct()->getDescription())
 			/**
 			 * Согласно стандарту CommerceML 2 (2.08) картинок может быть несколько:
 			 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
@@ -234,7 +234,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 	private function getOutput_Производитель() {
 		return df_clean_xml(array(
 			'Страна' => $this->getCountryNameRussian()
-			,'ТорговаяМарка' => rm_cdata($this->getProduct()->getManufacturerName())
+			,'ТорговаяМарка' => df_cdata($this->getProduct()->getManufacturerName())
 		));
 	}
 

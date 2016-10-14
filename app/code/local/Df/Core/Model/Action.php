@@ -36,7 +36,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 			 * array('Df', '1C', 'Cml2', 'Action')
 			 * @var string[] $head
 			 */
-			$head = rm_head(rm_explode_class($this));
+			$head = df_head(rm_explode_class($this));
 			$head[]= $class;
 			$class = rm_concat_class($head);
 		}

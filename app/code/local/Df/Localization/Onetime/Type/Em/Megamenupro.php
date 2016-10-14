@@ -43,7 +43,7 @@ class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetim
 		if (is_array($content)) {
 			foreach ($content as &$item) {
 				/** @var array(string => mixed) $item */
-				$item['text'] = base64_encode(df_a($item, 'text'));
+				$item['text'] = base64_encode(dfa($item, 'text'));
 			}
 			$menu->setData('content', serialize($content));
 		}
@@ -76,7 +76,7 @@ class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetim
 				foreach ($content as &$item) {
 					/** @var array(string => mixed) $item */
 					/** @var string $titleEncoded */
-					$titleEncoded = df_a($item, 'text');
+					$titleEncoded = dfa($item, 'text');
 					if ($titleEncoded) {
 						$item['text'] = base64_decode($titleEncoded);
 					}

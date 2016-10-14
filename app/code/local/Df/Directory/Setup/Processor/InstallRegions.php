@@ -39,12 +39,12 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 			df_assert_array($regionDataRaw);
 			/** @var array $region */
 			$region = array(
-				self::REGION__NAME__RUSSIAN => df_a($regionDataRaw, 0)
-				,self::REGION__NAME__LOCAL => df_a($regionDataRaw, 1)
-				,self::REGION__CENTER__RUSSIAN => df_a($regionDataRaw, 2)
-				,self::REGION__CENTER__LOCAL => df_a($regionDataRaw, 3)
+				self::REGION__NAME__RUSSIAN => dfa($regionDataRaw, 0)
+				,self::REGION__NAME__LOCAL => dfa($regionDataRaw, 1)
+				,self::REGION__CENTER__RUSSIAN => dfa($regionDataRaw, 2)
+				,self::REGION__CENTER__LOCAL => dfa($regionDataRaw, 3)
 				,self::REGION__CODE =>
-					df_a(
+					dfa(
 						$regionDataRaw
 						, 4
 						, rm_sprintf('%s-%02d', $this->getCountryIso2Code(), ++$ordering)
@@ -73,10 +73,10 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 			rm_table(Df_Directory_Model_Resource_Region::TABLE)
 			,array(
 				Df_Directory_Model_Region::P__COUNTRY_ID => $this->getCountryIso2Code()
-				,Df_Directory_Model_Region::P__CODE => df_a($regionData, self::REGION__CODE)
-				,Df_Directory_Model_Region::P__DEFAULT_NAME => df_a($regionData, self::REGION__NAME__RUSSIAN)
+				,Df_Directory_Model_Region::P__CODE => dfa($regionData, self::REGION__CODE)
+				,Df_Directory_Model_Region::P__DEFAULT_NAME => dfa($regionData, self::REGION__NAME__RUSSIAN)
 				,Df_Directory_Model_Region::P__DF_TYPE => 0
-				,Df_Directory_Model_Region::P__DF_CAPITAL => df_a($regionData, self::REGION__CENTER__RUSSIAN)
+				,Df_Directory_Model_Region::P__DF_CAPITAL => dfa($regionData, self::REGION__CENTER__RUSSIAN)
 			)
 		);
 		/** @var int $regionId */
@@ -86,7 +86,7 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 			,array(
 				'locale' => $this->getLocaleCode()
 				,'region_id' => $regionId
-				,'name' => df_a($regionData, self::REGION__NAME__LOCAL)
+				,'name' => dfa($regionData, self::REGION__NAME__LOCAL)
 			)
 		);
 		return $this;

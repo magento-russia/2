@@ -13,7 +13,7 @@ class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 	 * Например, «product» для выражения «product.manufacturer»
 	 * @return string
 	 */
-	public function getObjectName() {return mb_strtolower(df_a($this->getCleanParts(), 0));}
+	public function getObjectName() {return mb_strtolower(dfa($this->getCleanParts(), 0));}
 
 	/** @return Df_Seo_Model_Template_Processor */
 	public function getProcessor() {return $this->cfg(self::P__PROCESSOR);}
@@ -22,7 +22,7 @@ class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 	 * Например, «manufacturer» для выражения «product.manufacturer»
 	 * @return string
 	 */
-	public function getPropertyName() {return df_a($this->getCleanParts(), 1);}
+	public function getPropertyName() {return dfa($this->getCleanParts(), 1);}
 
 	/**
 	 * Результат вычисления выражения

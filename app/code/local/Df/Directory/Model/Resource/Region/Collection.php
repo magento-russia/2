@@ -86,7 +86,7 @@ class Df_Directory_Model_Resource_Region_Collection extends Df_Core_Model_Resour
 	 * @return Df_Directory_Model_Region|null
 	 */
 	public function getItemByName($name) {
-		return df_a($this->getMapFromNameToItem(), mb_strtoupper($name));
+		return dfa($this->getMapFromNameToItem(), mb_strtoupper($name));
 	}
 
 	/**

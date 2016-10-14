@@ -80,7 +80,7 @@ class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model {
 						::DF_BEFORE_AND_AFTER_PRODUCTS => null
 				);
 			}
-			$this->{__METHOD__} = rm_n_set(df_a($map, df_cfg()->catalog()->navigation()->getPosition()));
+			$this->{__METHOD__} = rm_n_set(dfa($map, df_cfg()->catalog()->navigation()->getPosition()));
 		}
 		return rm_n_get($this->{__METHOD__});
 	}

@@ -93,7 +93,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 					? $this->getElement()->asXMLPart()
 					: (
 						$reformat || $this->hasEncodingWindows1251()
-						? rm_concat_clean("\n",
+						? df_ccc("\n",
 							$this->getXmlHeader()
 							, $reformat
 								? $this->getElement()->asNiceXml()
@@ -201,7 +201,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 		/** @var Df_Core_Sxe $result */
 		$result = $this->mixin(__FUNCTION__);
 		if (is_null($result)) {
-			$result = rm_xml(rm_concat_clean("\n",
+			$result = rm_xml(df_ccc("\n",
 				$this->getXmlHeader(), $this->getDocType(), $this->getTag()
 			));
 			$result->addAttributes($this->getAttributes());

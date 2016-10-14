@@ -25,7 +25,7 @@ class Df_1C_Cml2_Session_ByIp extends Df_Core_Model_Session_Custom_Additional {
 		df_param_string_not_empty($type, 0);
 		df_param_string_not_empty($id, 1);
 		/** @var string $result */
-		$result = df_a($this->getFileMap($type), $id);
+		$result = dfa($this->getFileMap($type), $id);
 		if (!$result) {
 			df_error(
 				'По какой-то причине файл типа «%s» с идентификатором «%s»'
@@ -81,7 +81,7 @@ class Df_1C_Cml2_Session_ByIp extends Df_Core_Model_Session_Custom_Additional {
 		/** @var array(string => string) $maps */
 		$maps = $this->getData(self::$P__FILE_MAPS);
 		$maps = $maps ? $maps : array();
-		return !$type ? $maps : df_a($maps, $type, array());
+		return !$type ? $maps : dfa($maps, $type, array());
 	}
 
 	const NAME = __CLASS__;

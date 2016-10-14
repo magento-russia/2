@@ -11,7 +11,7 @@ class Df_Checkout_Model_Config_Source_Field_Applicability extends Df_Admin_Confi
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::VALUE__NO => 'убрать'
 			,self::VALUE__OPTIONAL => 'заполнять по желанию'
 			,self::VALUE__REQUIRED => 'заполнять обязательно'

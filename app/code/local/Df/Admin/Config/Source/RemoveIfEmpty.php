@@ -11,7 +11,7 @@ class Df_Admin_Config_Source_RemoveIfEmpty extends Df_Admin_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return rm_map_to_options(array(
+		return df_map_to_options(array(
 			self::NO_REMOVE => 'не удалять'
 			,self::REMOVE => 'удалить'
 			,self::REMOVE_IF_EMPTY => 'удалить, если пуст'

@@ -25,7 +25,7 @@ class Df_Widget_Model_Resource_Widget_Instance_Collection
 	 * @return mixed
 	 */
 	public function getRmData($paramName = null) {
-		return is_null($paramName) ?  $this->_rmData : df_a($this->_rmData, $paramName);
+		return is_null($paramName) ?  $this->_rmData : dfa($this->_rmData, $paramName);
 	}
 
 	/**
