@@ -383,8 +383,8 @@ function df_normalize($text) {return strtr($text, ["\r\n" => "\n", "\r" => "\n"]
 /**
  * Аналог @see str_pad() для Unicode.
  * http://stackoverflow.com/a/14773638
- * @used-by \Df\Qa\Context::render()
- * @used-by \Df\Qa\State::param()
+ * @used-by Df_Qa_Context::render()
+ * @used-by Df_Qa_State::param()
  * @param string $phrase
  * @param int $length
  * @param string $pattern
@@ -567,19 +567,19 @@ function df_sprintf($pattern) {
 
 /**
  * 2015-11-22
- * @param string|string[]|Phrase|Phrase[] $text
+ * @param string|string[] $text
  * @return string|string[]
  */
 function df_quote_double($text) {return df_t()->quote($text, Text::QUOTE__DOUBLE);}
 
 /**
- * @param string|string[]|Phrase|Phrase[] $text
+ * @param string|string[] $text
  * @return string|string[]
  */
 function df_quote_russian($text) {return df_t()->quote($text, Text::QUOTE__RUSSIAN);}
 
 /**
- * @param string|string[]|Phrase|Phrase[] $text
+ * @param string|string[] $text
  * @return string|string[]
  */
 function df_quote_single($text) {return df_t()->quote($text, Text::QUOTE__SINGLE);}
@@ -692,7 +692,7 @@ function df_string($value) {
 	if (is_object($value)) {
 		/**
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
-		 * потому что наличие @see \Magento\Framework\DataObject::__call()
+		 * потому что наличие @see Varien_Object::__call()
 		 * приводит к тому, что @see is_callable всегда возвращает true.
 		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
 		 * не гарантирует публичную доступность метода:
@@ -744,7 +744,7 @@ function df_string_debug($value) {
 	if (is_object($value)) {
 		/**
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
-		 * потому что наличие @see \Magento\Framework\DataObject::__call()
+		 * потому что наличие @see Varien_Object::__call()
 		 * приводит к тому, что @see is_callable всегда возвращает true.
 		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
 		 * не гарантирует публичную доступность метода:
