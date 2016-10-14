@@ -13,7 +13,7 @@ abstract class Df_Vk_Block_Frontend_Widget extends Df_Core_Block_Template {
 	public function getApplicationId() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = rm_nat(
-				rm_preg_match_int('#apiId: (\d+)#m', $this->getSettings()->getCode(), false)
+				df_preg_match_int('#apiId: (\d+)#m', $this->getSettings()->getCode(), false)
 			);
 		}
 		return $this->{__METHOD__};
@@ -22,8 +22,8 @@ abstract class Df_Vk_Block_Frontend_Widget extends Df_Core_Block_Template {
 	/** @return string */
 	public function getSettingsAsJson() {
 		return
-			rm_preg_match(
-				rm_sprintf(
+			df_preg_match(
+				df_sprintf(
 					'#%s\([^{)]*({[^}]*})#m'
 					, preg_quote($this->getJavaScriptObjectName())
 				)

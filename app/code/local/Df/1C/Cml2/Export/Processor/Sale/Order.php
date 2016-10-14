@@ -197,13 +197,13 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 				'Метод оплаты', $this->getOrder()->getPayment()->getMethodInstance()->getTitle()
 			);
 		}
-		$result[]= $this->entry()->name('Заказ оплачен', rm_bts(0 >= $this->getOrder()->getTotalDue()));
+		$result[]= $this->entry()->name('Заказ оплачен', df_bts(0 >= $this->getOrder()->getTotalDue()));
 		$result[]= $this->entry()->name('Способ доставки', $this->getOrder()->getShippingDescription());
-		$result[]= $this->entry()->name('Доставка разрешена', rm_bts($this->getOrder()->canShip()));
-		$result[]= $this->entry()->name('Отменен', rm_bts($this->getOrder()->isCanceled()));
+		$result[]= $this->entry()->name('Доставка разрешена', df_bts($this->getOrder()->canShip()));
+		$result[]= $this->entry()->name('Отменен', df_bts($this->getOrder()->isCanceled()));
 		$result[]= $this->entry()->name(
 			'Финальный статус'
-			, rm_bts(Mage_Sales_Model_Order::STATE_COMPLETE === $this->getOrder()->getState())
+			, df_bts(Mage_Sales_Model_Order::STATE_COMPLETE === $this->getOrder()->getState())
 		);
 		$result[]= $this->entry()->name(
 			'Статус заказа'
@@ -224,7 +224,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 		foreach ($this->getOrder()->getAllStatusHistory() as $historyItem) {
 			/** @var Mage_Sales_Model_Order_Status_History $historyItem */
 			if ($historyItem->getComment()) {
-				$comments[]= df_concat_n($historyItem->getCreatedAt(), $historyItem->getComment());
+				$comments[]= df_cc_n($historyItem->getCreatedAt(), $historyItem->getComment());
 			}
 		}
 		return implode("\n\n", $comments);

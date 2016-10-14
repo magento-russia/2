@@ -90,7 +90,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	 * @return string
 	 */
 	private function testable($variableName) {
-		return $this->isTestMode() ? df_concat($variableName, '__test') : $variableName;
+		return $this->isTestMode() ? df_cc($variableName, '__test') : $variableName;
 	}
 
 	/** @used-by Df_Kkb_Model_Signer::_construct */

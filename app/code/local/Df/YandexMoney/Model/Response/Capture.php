@@ -73,19 +73,19 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
 			$result = array();
-			$result['Успешна ли операция'] = rm_bts_r($this->isSuccessful());
+			$result['Успешна ли операция'] = df_bts_r($this->isSuccessful());
 			if (!$this->isSuccessful()) {
 				$result['Диагностическое сообщение'] = $this->getErrorMessage();
 			}
 			if ($this->isSuccessful()) {
 				if ($this->needRetry()) {
-					$result['Требуется повтор'] = rm_bts_r(true);
+					$result['Требуется повтор'] = df_bts_r(true);
 					$result['Рекомендуемая пауза (мс)'] = $this->getDelayInMilliseconds();
 				}
 				if ($this->need3DSecure()) {
-					$result['Требуется 3D-Secure'] = rm_bts_r(true);
+					$result['Требуется 3D-Secure'] = df_bts_r(true);
 					$result['Адрес 3D-Secure'] = $this->get3DSecureUri();
-					$result['Параметры 3D-Secure'] = "\n" . rm_print_params($this->get3DSecureParams());
+					$result['Параметры 3D-Secure'] = "\n" . df_print_params($this->get3DSecureParams());
 				}
 				$result = array_merge($result, array(
 					'Идентификатор платежа в Яндекс.Деньгах' => $this->getPaymentExternalId()

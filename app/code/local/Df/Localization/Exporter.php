@@ -95,7 +95,7 @@ class Df_Localization_Exporter extends Df_Core_Model {
 		$result = array();
 		/** @var string $filePath */
 		$filePath =
-			df_concat_path(
+			df_cc_path(
 				Mage::getBaseDir('locale')
 				,df_mage()->core()->translateSingleton()->getLocale()
 				,$module . '.csv'
@@ -136,7 +136,7 @@ class Df_Localization_Exporter extends Df_Core_Model {
 		df_assert_array($translation);
 		/** @var string $targetDir */
 		$targetDir =
-			df_concat_path(
+			df_cc_path(
 				Mage::getBaseDir('var')
 				,'translations'
 				,df_mage()->core()->translateSingleton()->getLocale()

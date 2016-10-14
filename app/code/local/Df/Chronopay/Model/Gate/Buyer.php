@@ -106,7 +106,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 			$invalidSymbols = dfa($matches, 0);
 			if ($invalidSymbols) {
 				df_error(
-					df_concat_n(
+					df_cc_n(
 						array_map(
 							array($this, "__")
 							,array(

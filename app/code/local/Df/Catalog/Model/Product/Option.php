@@ -25,7 +25,7 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 		/** @var string|null $original */
 		$original = $this['title'];
 		/** @var bool $endsWithSemicolon */
-		$endsWithSemicolon = rm_ends_with($original, ':');
+		$endsWithSemicolon = df_ends_with($original, ':');
 		if ($endsWithSemicolon) {
 			$original = mb_substr($original, 0, -1);
 		}

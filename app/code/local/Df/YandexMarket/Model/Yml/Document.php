@@ -62,7 +62,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 		$pathExploded = df_tail($schemeTailExploded);
 		/** @var string $resultRaw */
 		$result =
-			$scheme . '//' . $domainAndPort . '/' . df_concat_url(array_map('urlencode', $pathExploded))
+			$scheme . '//' . $domainAndPort . '/' . df_cc_path(array_map('urlencode', $pathExploded))
 		;
 		return $result;
 	}

@@ -147,7 +147,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			/** @var string $imageType */
 			$imageType = df_last($contentTypeExploded);
 			$result =
-				df_concat_path(
+				df_cc_path(
 					$this->getDownloadPath()
 					, implode('.', array(md5($imageUrl), $imageType))
 				)
@@ -168,7 +168,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		/** @var array $arguments */
 		$arguments = func_get_args();
 		/** @var string $message */
-		$message = rm_format($arguments);
+		$message = df_format($arguments);
 		$this->log($message);
 		df_error($message);
 	}
@@ -231,7 +231,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 	/** @return string */
 	private function getDownloadPath() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_path(Mage::getBaseDir('var'), 'rm', 'dataflow', 'images');
+			$this->{__METHOD__} = df_cc_path(Mage::getBaseDir('var'), 'rm', 'dataflow', 'images');
 			/** @var Varien_Io_File $file */
 			$file = new Varien_Io_File();
 			$file->setAllowCreateFolders(true);
@@ -271,7 +271,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		if (is_object($this->getLogger())) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$this->getLogger()->log(rm_format($arguments));
+			$this->getLogger()->log(df_format($arguments));
 		}
 		return $this;
 	}

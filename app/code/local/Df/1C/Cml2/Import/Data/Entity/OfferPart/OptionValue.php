@@ -121,7 +121,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $result */
 			$result = parent::getName();
-			if ($result && rm_ends_with($result, '))')) {
+			if ($result && df_ends_with($result, '))')) {
 				$result = df_trim(df_first(explode('(', $result)));
 			}
 			$this->{__METHOD__} = rm_n_set($result);

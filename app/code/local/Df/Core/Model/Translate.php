@@ -36,7 +36,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 				(
 						Df_Localization_Settings::s()->email()->isEnabled()
 					||
-						rm_contains($file, 'df' . DS)
+						df_contains($file, 'df' . DS)
 				)
 		) {
 			$localeCode = self::LOCALE__RU_DF;
@@ -499,7 +499,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			Df_Localization_Realtime_Translator::$watched
 			&& (
 				Df_Localization_Realtime_Translator::$needle
-				&& rm_contains_ci($text, Df_Localization_Realtime_Translator::$watched)
+				&& df_contains_ci($text, Df_Localization_Realtime_Translator::$watched)
 				|| $text === Df_Localization_Realtime_Translator::$watched
 			)
 		) {
@@ -551,7 +551,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 			/** @var bool $isItRmModule */
 			/**
 			 * Раньше тут стоял код:
-			 * $isItRmModule = rm_starts_with($file, 'Df_');
+			 * $isItRmModule = df_starts_with($file, 'Df_');
 			 * Измнил этот код ради ускорения.
 			 */
 			$isItRmModule = ('Df_' === substr($file, 0, 3));
@@ -619,7 +619,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 	private function getTemplateFilePathForLocale($localeCode, $fileType, $fileName) {
 		df_param_string_not_empty($localeCode, 0);
 		return
-			df_concat_path(
+			df_cc_path(
 				$this->getBaseDirLocale(), $localeCode, 'template', $fileType, $fileName
 			)
 		;

@@ -143,7 +143,7 @@ class Df_Admin_Config_Backend_Table extends Df_Admin_Config_Backend {
 	 */
 	public static function unserialize($value, $rowClass) {
 		/** @var array(string => array(string => string))|null $result */
-		if (!rm_contains($value, array('"', '[', '{'))) {
+		if (!df_contains($value, array('"', '[', '{'))) {
 			/**
 			 * Итак, мы имеем дело с простым форматом CSV, например:
 				<default>
@@ -273,8 +273,8 @@ class Df_Admin_Config_Backend_Table extends Df_Admin_Config_Backend {
 			 * они формируются так: '_' + d.getTime() + '_' + d.getMilliseconds()
 			 */
 			/** @var string[] $rowIds */
-			/** @uses rm_uniqid() */
-			$rowIds = array_map('rm_uniqid', array_fill(0, count($result), 10));
+			/** @uses df_uid() */
+			$rowIds = array_map('df_uid', array_fill(0, count($result), 10));
 			$result = array_combine($rowIds, $result);
 		}
 		return $result;

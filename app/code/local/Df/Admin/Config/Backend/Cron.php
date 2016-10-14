@@ -61,7 +61,7 @@ abstract class Df_Admin_Config_Backend_Cron extends Mage_Core_Model_Config_Data 
 		df_param_string($groupName, 0);
 		df_param_string($fieldName, 1);
 		/** @var mixed $result */
-		$result = $this->getData(df_concat_xpath('groups', $groupName, 'fields', $fieldName, 'value'));
+		$result = $this->getData(df_cc_path('groups', $groupName, 'fields', $fieldName, 'value'));
 		return $result;
 	}
 

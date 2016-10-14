@@ -332,7 +332,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 					/** @var int|array(int => int) $matchingProductIdRawTest */
 					$matchingProductIdRawTest = df_first($matchingProductIdsRaw);
 					if (!is_array($matchingProductIdRawTest)) {
-						$matchingProductIds = rm_int_simple(array_values($matchingProductIdsRaw));
+						$matchingProductIds = df_int_simple(array_values($matchingProductIdsRaw));
 					}
 					else {
 						$matchingProductIds = array();

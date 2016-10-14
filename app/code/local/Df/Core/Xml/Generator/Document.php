@@ -111,7 +111,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 				 */
 				$result = str_replace("\x0B", "&#x0B;", $result);
 				if ($this->hasEncodingWindows1251()) {
-					$result = rm_1251_to($result);
+					$result = df_1251_to($result);
 				}
 				if ($this->needRemoveLineBreaks()) {
 					$result = df_t()->removeLineBreaks($result);
@@ -140,7 +140,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 		if ($this->needLog()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$this->getLogger()->log(rm_format($arguments));
+			$this->getLogger()->log(df_format($arguments));
 		}
 	}
 
@@ -151,7 +151,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	public function notify($message) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$message = rm_format($arguments);
+		$message = df_format($arguments);
 		$this->log($message);
 		if (!df_is_it_my_local_pc() && $this->getEmailAddressesToNotify()) {
 			Df_Qa_Message_Notification::i(array(

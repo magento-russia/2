@@ -19,7 +19,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit extends Mage_Adminhtml_Block_Widget_Form
 			$confirmMessage = df_h()->cms()->__('Are you sure you want to break current lock?');
 			$this->addButton('break_lock',array(
 				'label'	=> df_h()->cms()->__('Unlock This Page')
-				,'onclick' => rm_sprintf(
+				,'onclick' => df_sprintf(
 					'confirmSetLocation(%s, %s)'
 					, df_quote_single($confirmMessage)
 					, df_quote_single($this->getUrl('*/*/lock'))

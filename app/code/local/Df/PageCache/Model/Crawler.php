@@ -35,7 +35,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 					if (!$row) {
 						break;
 					}
-					$urls[]= df_concat($baseUrl, $this->encodeUrlPath($row['request_path']));
+					$urls[]= df_cc($baseUrl, $this->encodeUrlPath($row['request_path']));
 					$urlsCount++;
 					$totalCount++;
 					if ($urlsCount==$threads) {
@@ -82,7 +82,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 	 */
 	private function encodeUrlPath($path) {
 		df_param_string($path, 0);
-		return df_concat_url(array_map('rawurlencode', df_explode_url($path)));
+		return df_cc_path(array_map('rawurlencode', df_explode_url($path)));
 	}
 
 	/** @return Varien_Http_Adapter_Curl */

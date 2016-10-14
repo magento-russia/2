@@ -59,7 +59,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 		$cleanedPartGroup = array();
 		foreach ($partGroup as $partGroupItem) {
 			if (is_string($partGroupItem)) {
-				if (rm_contains($partGroupItem, 'period')) {
+				if (df_contains($partGroupItem, 'period')) {
 					continue;
 				}
 			}

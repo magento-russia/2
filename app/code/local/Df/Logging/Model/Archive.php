@@ -31,7 +31,7 @@ class Df_Logging_Model_Archive extends Df_Core_Model {
 	 */
 	public function generateFilename($baseName) {
 		return
-			df_concat_path(
+			df_cc_path(
 				$this->getBasePath()
 				,mb_substr($baseName, 0, 4)
 				,mb_substr($baseName, 4, 2)
@@ -44,7 +44,7 @@ class Df_Logging_Model_Archive extends Df_Core_Model {
 	public function getBasePath() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_concat_path(Mage::getBaseDir('var'), 'log', 'df', 'admin', 'actions')
+				df_cc_path(Mage::getBaseDir('var'), 'log', 'df', 'admin', 'actions')
 			;
 		}
 		return $this->{__METHOD__};

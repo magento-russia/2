@@ -15,7 +15,7 @@ class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity 
 	public function isItLike() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_starts_with($this->getFrom(), '%') || rm_ends_with($this->getFrom(), '%')
+				df_starts_with($this->getFrom(), '%') || df_ends_with($this->getFrom(), '%')
 			;
 		}
 		return $this->{__METHOD__};
@@ -49,14 +49,14 @@ class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity 
 					// 2015-08-24
 					// Допускает выражение <from>%%</from>
 					df_empty_string($this->getFromForLike())
-					|| rm_contains($textOriginal, $this->getFromForLike())
+					|| df_contains($textOriginal, $this->getFromForLike())
 				)
 			) {
 				// Обратите внимание, что символ процента должен стоять с обеих сторон фразы.
 				$result = $this->getTo();
 			}
 			else if ($this->isItRegEx()) {
-				$textProcessed = rm_preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
+				$textProcessed = df_preg_replace($this->getFrom(), $this->getTo(), $textOriginal);
 				/**
 				 * Вызываем setData() только при реальном изменении значения свойства,
 				 * чтобы не менять попусту значение hasDataChanges
@@ -68,7 +68,7 @@ class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity 
 			}
 			else {
 				/** @var string $textOriginalNormalized */
-				$textOriginalNormalized = rm_normalize($textOriginal);
+				$textOriginalNormalized = df_normalize($textOriginal);
 				$textProcessed = str_replace(
 					$this->getFromNormalized(), $this->getTo(), $textOriginalNormalized
 				);
@@ -102,7 +102,7 @@ class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity 
 	/** @return string */
 	private function getFromNormalized() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_normalize($this->getFrom());
+			$this->{__METHOD__} = df_normalize($this->getFrom());
 		}
 		return $this->{__METHOD__};
 	}
@@ -123,7 +123,7 @@ class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity 
 	private function isItLike2() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_starts_with($this->getFrom(), '%') && rm_ends_with($this->getFrom(), '%')
+				df_starts_with($this->getFrom(), '%') && df_ends_with($this->getFrom(), '%')
 			;
 		}
 		return $this->{__METHOD__};

@@ -37,7 +37,7 @@ class Df_Core_Exception_Entity extends Df_Core_Exception {
 
 	/** @return void */
 	public function log() {
-		df_notify_exception($this, "Данные сбойного объекта:\n" . rm_dump($this->getEntity()));
+		df_notify_exception($this, "Данные сбойного объекта:\n" . df_dump($this->getEntity()));
 	}
 
 	/** @var Mage_Core_Model_Abstract */

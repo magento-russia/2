@@ -58,7 +58,7 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 					// Если нужно применить одно правило сразу к нескольким селекторам,
 					// то передавайте селекторы в виде массива $selector
 					// (другими словами, передавайте в качестве $selector не строку, а массив)
-					df_assert(!rm_contains($item, ','));
+					df_assert(!df_contains($item, ','));
 					$item = $item . ':first-letter';
 				}
 			}

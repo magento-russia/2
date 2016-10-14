@@ -12,7 +12,7 @@ class Df_Localization_Block_Admin_Theme_Processor_Processed
 	 * @return string
 	 */
 	public function getLinkTitle() {
-		return rm_e(
+		return df_e(
 			'уже применялся '
 			. df_dts($this->getProcessor()->getTimeOfLastProcessing(), 'dd.MM.y HH:mm:ss')
 		);

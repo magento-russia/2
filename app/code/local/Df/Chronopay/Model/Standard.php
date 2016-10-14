@@ -34,7 +34,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 			$storeId = $this->getStore();
 		}
 		/** @var string $path */
-		$path = df_concat_xpath('df_payment', $this->getCode(), $field);
+		$path = df_cc_path('df_payment', $this->getCode(), $field);
 		return Mage::getStoreConfig($path, $storeId);
 	}
 

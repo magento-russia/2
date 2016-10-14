@@ -9,7 +9,7 @@ class Df_Page_JQueryInjecter_Google extends Df_Page_JQueryInjecter {
 	 * @return string
 	 */
 	protected function _process($format, array &$staticItems) {
-		return df_concat_n(
+		return df_cc_n(
 			Df_Core_Model_Format_Html_Tag::scriptExternal($this->getPath())
 			,Df_Core_Model_Format_Html_Tag::scriptLocal(
 				// Инициализируем переменную $j для совместимости с Magento CE 1.9 (там так делается)

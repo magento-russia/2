@@ -271,7 +271,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 		 * @see Df_Adminhtml_Catalog_Product_GalleryController::uploadActionDf()
 		 */
 		$destionationFilePathOptimizedForSeo =
-			df_concat_path(
+			df_cc_path(
 				dirname($destionationFilePath)
 				,df_ccc('.'
 					,df_output()->transliterate($product->getName())

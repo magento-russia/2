@@ -99,7 +99,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 								array(
 									Df_Core_Sxe::ATTR =>
 										array(
-											'ФорматHTML' => rm_bts(true)
+											'ФорматHTML' => df_bts(true)
 										)
 									,Df_Core_Sxe::CONTENT =>
 										df_cdata(

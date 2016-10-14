@@ -114,7 +114,7 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 		else {
 			/** @uses func_get_args() не может быть параметром другой функции */
 			$arguments = is_array($arguments) ? $arguments : func_get_args();
-			$exception = new Df_Dataflow_Exception_Import(rm_format($arguments));
+			$exception = new Df_Dataflow_Exception_Import(df_format($arguments));
 		}
 		$exception->setRow($this);
 		df_error($exception);

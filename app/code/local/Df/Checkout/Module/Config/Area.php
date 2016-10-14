@@ -54,7 +54,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 				catch (Exception $e) {
 					/** @var Df_Core_Exception $e */
 					$e = Df_Core_Exception::wrap($e);
-					$e->comment(rm_print_params(array('Ключ' => $key)));
+					$e->comment(df_print_params(array('Ключ' => $key)));
 					throw $e;
 				}
 			}
@@ -164,7 +164,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 			 * Аналогичное соглашение действует и для общего менеджера настроек:
 			 * @see Df_Checkout_Module_Config_Manager::s()
 			 */
-			$cache[$key] = self::convention($main, 'Config_Area_' . rm_ucfirst($area));
+			$cache[$key] = self::convention($main, 'Config_Area_' . df_ucfirst($area));
 			df_assert($cache[$key] instanceof Df_Checkout_Module_Config_Area);
 		}
 		return $cache[$key];

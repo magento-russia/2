@@ -7,7 +7,7 @@ abstract class Df_Alfabank_Model_Response extends Df_Payment_Model_Response {
 	abstract protected function getKey_ErrorMessage();
 
 	/** @return int */
-	public function getErrorCode() {return rm_int($this->cfg($this->getKey_ErrorCode()));}
+	public function getErrorCode() {return df_int($this->cfg($this->getKey_ErrorCode()));}
 
 	/** @return string */
 	public function getErrorCodeMeaning() {

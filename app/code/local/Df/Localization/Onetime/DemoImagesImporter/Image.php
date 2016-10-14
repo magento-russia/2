@@ -27,7 +27,7 @@ class Df_Localization_Onetime_DemoImagesImporter_Image extends Df_Core_Model {
 	private function getPathFull() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_concat_path(Mage::getBaseDir('media'), 'catalog', 'product') . $this->getPathLocal()
+				df_cc_path(Mage::getBaseDir('media'), 'catalog', 'product') . $this->getPathLocal()
 			;
 		}
 		return $this->{__METHOD__};

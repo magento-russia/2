@@ -25,7 +25,7 @@ class Df_Reports_Model_Handler_RemoveTimezoneNotice extends Df_Core_Model_Handle
 				if (
 						(Mage_Core_Model_Message::NOTICE === $message->getType())
 					&&
-						rm_contains($message->getCode(), $textToFind)
+						df_contains($message->getCode(), $textToFind)
 				) {
 					continue;
 				}

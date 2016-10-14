@@ -141,7 +141,7 @@ function df_notify($message) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
 		Df_Qa_Message_Notification::i(array(
-			Df_Qa_Message_Notification::P__NOTIFICATION => rm_format($arguments)
+			Df_Qa_Message_Notification::P__NOTIFICATION => df_format($arguments)
 			,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => true
 			,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
 		))->log();
@@ -158,7 +158,7 @@ function df_notify_admin($message, $doLog = true) {
 		$doLog = true;
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$message = rm_format($arguments);
+		$message = df_format($arguments);
 	}
 	Df_Qa_Message_Notification::i(array(
 		Df_Qa_Message_Notification::P__NOTIFICATION => $message
@@ -198,7 +198,7 @@ function df_notify_me($message, $doLog = true) {
 		$doLog = true;
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$message = rm_format($arguments);
+		$message = df_format($arguments);
 	}
 	Df_Qa_Message_Notification::i(array(
 		Df_Qa_Message_Notification::P__NOTIFICATION => $message
@@ -375,7 +375,7 @@ function rm_if($condition, $resultOnTrue, $resultOnFalse = null) {
  * @param Varien_Object|mixed[]|mixed $value
  * @return void
  */
-function rm_log($value) {Mage::log(rm_dump($value));}
+function rm_log($value) {Mage::log(df_dump($value));}
 
 /**
  * При установке заголовка HTTP «Content-Type»

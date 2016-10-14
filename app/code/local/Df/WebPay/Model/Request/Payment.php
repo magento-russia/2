@@ -234,7 +234,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return string */
 	private function getOpenKey() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_uniqid();
+			$this->{__METHOD__} = df_uid();
 		}
 		return $this->{__METHOD__};
 	}
@@ -267,14 +267,14 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return int[] */
 	private function getOrderItemQtys() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_int($this->getOrderItems()->getColumnValues('qty_ordered'));
+			$this->{__METHOD__} = df_int($this->getOrderItems()->getColumnValues('qty_ordered'));
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
 	private function getSignature() {
-		return sha1(df_concat($this->preprocessParams(array(
+		return sha1(df_cc($this->preprocessParams(array(
 			self::REQUEST_VAR__OPEN_KEY => $this->getOpenKey()
 			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()

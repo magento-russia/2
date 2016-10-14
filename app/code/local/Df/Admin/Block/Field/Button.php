@@ -60,7 +60,7 @@ abstract class Df_Admin_Block_Field_Button extends Df_Adminhtml_Block_Config_For
 	 * @used-by df/admin/field/button/action.phtml
 	 * @return string
 	 */
-	protected function getCaption() {return rm_e($this->param('rm_button_label'));}
+	protected function getCaption() {return df_e($this->param('rm_button_label'));}
 
 	/**
 	 * @used-by df/admin/field/button/action.phtml

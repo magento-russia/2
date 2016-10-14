@@ -116,7 +116,7 @@ class Df_Core_Model_Resource_Db_UniqueChecker extends Df_Core_Model {
 			}
 			// 2015-08-03
 			// Добавляем дополнительное логирование.
-			df_notify_exception('Магазин не прошёл проверку на уникальность', rm_dump($model->getData()));
+			df_notify_exception('Магазин не прошёл проверку на уникальность', df_dump($model->getData()));
 			Mage::throwException($error);
 		}
 	}

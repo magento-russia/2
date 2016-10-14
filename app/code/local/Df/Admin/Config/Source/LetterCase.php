@@ -60,13 +60,13 @@ class Df_Admin_Config_Source_LetterCase extends Df_Admin_Config_Source {
 				/**
 				 * 2016-03-23
 				 * Раньше алгоритм был таким:
-				 * $result = rm_ucfirst(mb_strtolower(df_trim($text)));
+				 * $result = df_ucfirst(mb_strtolower(df_trim($text)));
 				 * Это приводило к тому, что настроечная опция
 				 * «Использовать ли HTTPS для административной части?»
 				 * отображались как «Использовать ли https для административной части?».
 				 * Уже не помню, зачем я ранее здесь использовал @see mb_strtolower
 				 */
-				$result = rm_ucfirst(df_trim($text));
+				$result = df_ucfirst(df_trim($text));
 				break;
 			default:
 				$result = $text;

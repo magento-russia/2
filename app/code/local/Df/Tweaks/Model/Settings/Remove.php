@@ -56,7 +56,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 * @return string
 	 */
 	private function translateConfigKeyFromShortToFull($shortKey) {
-		return df_concat_xpath('df_tweaks', $this->getSection(), $shortKey);
+		return df_cc_path('df_tweaks', $this->getSection(), $shortKey);
 	}
 
 	/**

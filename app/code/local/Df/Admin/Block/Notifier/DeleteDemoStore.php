@@ -6,7 +6,7 @@ class Df_Admin_Block_Notifier_DeleteDemoStore extends Df_Core_Block_Admin {
 	}
 
 	/** @return string */
-	protected function getTitle() {return rm_e($this->store()->getName());}
+	protected function getTitle() {return df_e($this->store()->getName());}
 
 	/**
 	 * @override

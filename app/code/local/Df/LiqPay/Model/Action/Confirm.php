@@ -41,7 +41,7 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		$result =
 			base64_encode(
 				sha1(
-					df_concat(
+					df_cc(
 						$this->configS()->getResponsePassword()
 						,$this->getResponseXml()
 						,$this->configS()->getResponsePassword()

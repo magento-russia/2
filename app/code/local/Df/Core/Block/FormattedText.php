@@ -27,7 +27,7 @@ class Df_Core_Block_FormattedText extends Df_Core_Block_Template_NoCache {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $id */
 			$id = $this->cfg(self::$P__DOM_ELEMENT_ID);
-			$this->{__METHOD__} = $id ? $id : implode('-', array('rm', rm_uniqid(5)));
+			$this->{__METHOD__} = $id ? $id : implode('-', array('rm', df_uid(5)));
 		}
 		return $this->{__METHOD__};
 	}

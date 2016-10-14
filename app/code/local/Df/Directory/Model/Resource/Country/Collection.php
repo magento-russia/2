@@ -296,7 +296,7 @@ class Df_Directory_Model_Resource_Country_Collection
 				 * /ldml/localeDisplayNames/territories/territory[@type='Кот-д'Ивуар'].
 				 * Поэтому с апострофами надо что-то делать.
 				 */
-				if (!rm_contains($country->getName(), "'")) {
+				if (!df_contains($country->getName(), "'")) {
 					$localizedName = Mage::app()->getLocale()->getLocale()->getTranslation(
 						$country->getName(), 'country', $localeCode
 					);

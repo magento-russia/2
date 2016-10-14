@@ -155,7 +155,7 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
 			// Если товары указаны, то нам нужно построить карту соответствия товаров сайтам,
 			// потому что конкретный товар может быть не привязан к конкретному сайту,
 			// и, соответственно, некорректно обновлять свойство данного товара для витрин данного сайта.
-			$ids = rm_int_simple($ids);
+			$ids = df_int_simple($ids);
 			$mapFromWebsiteToProductIds = array();
 			foreach ($ids as $id) {
 				/** @var int $id */

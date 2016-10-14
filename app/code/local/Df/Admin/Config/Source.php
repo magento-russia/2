@@ -84,7 +84,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return Varien_Simplexml_Element */
 	private function getFieldConfigNode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_first($this->getGroupConfigNode()->xpath(df_concat_xpath(
+			$this->{__METHOD__} = df_first($this->getGroupConfigNode()->xpath(df_cc_path(
 				'fields', $this->getFieldCode())
 			));
 			df_assert($this->{__METHOD__});
@@ -122,7 +122,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return Varien_Simplexml_Element */
 	private function getGroupConfigNode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_first($this->getSectionConfigNode()->xpath(df_concat_xpath(
+			$this->{__METHOD__} = df_first($this->getSectionConfigNode()->xpath(df_cc_path(
 				'groups', $this->getGroupCode())
 			));
 			df_assert($this->{__METHOD__});

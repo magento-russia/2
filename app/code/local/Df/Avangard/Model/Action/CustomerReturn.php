@@ -102,7 +102,7 @@ class Df_Avangard_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Co
 			$this->order()->setState(
 				Mage_Sales_Model_Order::STATE_PROCESSING
 				,Mage_Sales_Model_Order::STATE_PROCESSING
-				,rm_sprintf($this->getMessage(self::CONFIG_KEY__MESSAGE__SUCCESS), $invoice->getIncrementId())
+				,df_sprintf($this->getMessage(self::CONFIG_KEY__MESSAGE__SUCCESS), $invoice->getIncrementId())
 				,true
 			);
 			$this->order()->save();

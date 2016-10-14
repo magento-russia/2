@@ -11,7 +11,7 @@ class Df_Localization_Morpher_Response extends Df_Core_Xml_Parser_Entity {
 	 */
 	public function getId() {return $this->getInCaseNominative();}
 	/**
-	 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+	 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 	 * потому что в данном случае нам не нужна поддержка UTF-8.
 	 * @param string $case
 	 * @return string

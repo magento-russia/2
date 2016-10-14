@@ -97,7 +97,7 @@ class Df_Admin_Config_Form_FieldInstance_Info_Urls extends Df_Admin_Config_Form_
 				: $prefix . $this->getUrlPathBase()
 			;
 			if (!$this->needPassParametersAsQuery()) {
-				$result = df_concat_url($result, 'store-view', $store->getCode());
+				$result = df_cc_path($result, 'store-view', $store->getCode());
 			}
 		}
 		return $result;

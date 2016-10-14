@@ -82,7 +82,7 @@ class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 				,'balance_delta'  => $balance->getAmountDelta()
 			)
 		);
-		switch (rm_int($balance->getHistoryAction())) {
+		switch (df_int($balance->getHistoryAction())) {
 			case self::ACTION_CREATED:
 				// break intentionally omitted
 			case self::ACTION_UPDATED:
@@ -143,7 +143,7 @@ class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 					)
 				);
 		}
-		$this->setAction(rm_int($balance->getHistoryAction()));
+		$this->setAction(df_int($balance->getHistoryAction()));
 		return parent::_beforeSave();
 	}
 

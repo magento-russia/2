@@ -25,9 +25,9 @@
                 <td class="a-right"><?php echo $this->getCurrencyBalance($item)?></td>
                 <td class="a-right"><?php echo $this->getPointsDelta($item)?></td>
                 <td>
-                    <?php echo rm_e($this->getMessage($item))?>
+                    <?php echo df_e($this->getMessage($item))?>
                     <?php if ($explanation = $this->getExplanation($item)):?>
-                        <br /><small><?php echo rm_e($explanation);?></small>
+                        <br /><small><?php echo df_e($explanation);?></small>
                     <?php endif;?>
                 </td>
                 <td>

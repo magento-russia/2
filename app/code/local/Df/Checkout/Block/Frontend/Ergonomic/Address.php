@@ -50,7 +50,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	protected function _toHtml() {
 		/** @var string $result */
 		try {
-			$result = df_concat_n($this->rows()->walk('toHtml'));
+			$result = df_cc_n($this->rows()->walk('toHtml'));
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);

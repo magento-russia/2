@@ -44,7 +44,7 @@ abstract class Df_Admin_Config_DynamicTable_Column extends Df_Core_Model {
 	 * @return string
 	 */
 	public function renderTemplate(Varien_Data_Form_Element_Abstract $element) {
-		return rm_ejs(Df_Admin_Block_Column::render($this->getRendererClass(), $this, $element));
+		return df_ejs(Df_Admin_Block_Column::render($this->getRendererClass(), $this, $element));
 	}
 
 	/**

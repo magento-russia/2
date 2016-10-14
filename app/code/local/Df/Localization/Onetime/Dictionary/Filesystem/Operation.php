@@ -51,7 +51,7 @@ class Df_Localization_Onetime_Dictionary_Filesystem_Operation
 		/** @var string|null $result */
 		$result = null;
 		if ($pathRelative) {
-			$result = df_concat_path(Mage::getBaseDir(), $pathRelative);
+			$result = df_cc_path(Mage::getBaseDir(), $pathRelative);
 			/**
 			 * Обратите внимание, что мы намеренно не проверяем здесь,
 			 * присутствует ли файл, потому что он не обязан присутствовать,
@@ -70,7 +70,7 @@ class Df_Localization_Onetime_Dictionary_Filesystem_Operation
 	/** @return bool */
 	private function isSourceUrl() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_contains($this->getSourceRelative(), 'http');
+			$this->{__METHOD__} = df_contains($this->getSourceRelative(), 'http');
 		}
 		return $this->{__METHOD__};
 	}

@@ -86,7 +86,7 @@ abstract class Df_Core_Model_Geo_Locator_Real extends Df_Core_Model_Geo_Locator 
 	 */
 	protected function loadFromCache($propertyName) {
 		return dfa_deep(
-			Df_Core_Model_Geo_Cache::s()->cache, df_concat_xpath($this->getCacheKey(), $propertyName)
+			Df_Core_Model_Geo_Cache::s()->cache, df_cc_path($this->getCacheKey(), $propertyName)
 		);
 	}
 
@@ -112,7 +112,7 @@ abstract class Df_Core_Model_Geo_Locator_Real extends Df_Core_Model_Geo_Locator 
 	 * @return string
 	 */
 	private function getPathFull($pathRelative) {
-		return df_concat_xpath(df_clean(array($this->getPathBase(), $pathRelative)));
+		return df_cc_path(df_clean(array($this->getPathBase(), $pathRelative)));
 	}
 
 	/** @return string|null */

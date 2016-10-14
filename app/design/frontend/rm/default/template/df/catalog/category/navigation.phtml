@@ -17,9 +17,9 @@
 			}
 			$ordering++;
 			/** @var string $name */
-			$name = rm_e($category->getName());
+			$name = df_e($category->getName());
 			/** @var string $url */
-			$url = rm_e($category->getUrl());
+			$url = df_e($category->getUrl());
 			?>
 				<li class='<?php echo implode(' ', $itemClasses); ?>'>
 					<a href='<?php echo $url; ?>' title='<?php echo $name; ?>' class='df-image-link'>

@@ -31,7 +31,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 						."\nСбой произошёл при попытке установить товару следующие новые данные:\n%s"
 						,$this->getRow()->getSku()
 						,$this->getRow()->getId()
-						,rm_print_params($this->getRow()->getAsArray())
+						,df_print_params($this->getRow()->getAsArray())
 					);
 				}
 			}

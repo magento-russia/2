@@ -29,10 +29,10 @@ function rm_admin_button(array $params) {
  * @return string
  */
 function rm_admin_button_location($url) {
-	if (rm_contains($url, '*')) {
+	if (df_contains($url, '*')) {
 		$url = rm_url_admin($url);
 	}
-	$url = rm_ejs($url);
+	$url = df_ejs($url);
 	return "setLocation('{$url}');";
 }
 

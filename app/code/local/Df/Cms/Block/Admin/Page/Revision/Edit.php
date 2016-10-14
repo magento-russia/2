@@ -31,10 +31,10 @@ class Df_Cms_Block_Admin_Page_Revision_Edit extends Mage_Adminhtml_Block_Cms_Pag
 		/** @var string $revisionNumber */
 		$revisionNumber = Mage::registry('cms_page')->getRevisionNumber();
 		/** @var string $title */
-		$title = rm_e(Mage::registry('cms_page')->getTitle());
+		$title = df_e(Mage::registry('cms_page')->getTitle());
 		return
 			$revisionNumber
-			? df_h()->cms()->__("Edit Page '%s' Revision #%s", $title, rm_e($revisionNumber))
+			? df_h()->cms()->__("Edit Page '%s' Revision #%s", $title, df_e($revisionNumber))
 			: df_h()->cms()->__("Edit Page '%s' New Revision", $title)
 		;
 	}
@@ -78,7 +78,7 @@ class Df_Cms_Block_Admin_Page_Revision_Edit extends Mage_Adminhtml_Block_Cms_Pag
 			$this->_addButton('delete_revision', array(
 				'label' => df_h()->cms()->__('Delete')
 				,'class' => 'delete'
-				,'onclick' => rm_sprintf(
+				,'onclick' => df_sprintf(
 					'deleteConfirm(%s, %s)'
 					,df_quote_single(df_h()->cms()->__('Are you sure you want to delete this revision?'))
 					,df_quote_single($this->getDeleteUrl())
@@ -87,7 +87,7 @@ class Df_Cms_Block_Admin_Page_Revision_Edit extends Mage_Adminhtml_Block_Cms_Pag
 		}
 		$this->_addButton('preview', array(
 			'label' => df_h()->cms()->__('Preview')
-			,'onclick' => rm_sprintf(
+			,'onclick' => df_sprintf(
 				'previewAction(%s, editForm, %s)'
 				,df_quote_single('edit_form')
 				,df_quote_single($this->getPreviewUrl())
@@ -100,7 +100,7 @@ class Df_Cms_Block_Admin_Page_Revision_Edit extends Mage_Adminhtml_Block_Cms_Pag
 					'id' => 'publish_button'
 					,'label' => df_h()->cms()->__('Publish')
 					,'onclick' =>
-						rm_sprintf(
+						df_sprintf(
 							'publishAction(%s)'
 							,df_quote_single($this->getPublishUrl())
 						)
@@ -114,7 +114,7 @@ class Df_Cms_Block_Admin_Page_Revision_Edit extends Mage_Adminhtml_Block_Cms_Pag
 						'id' => 'save_publish_button'
 						,'label' => df_h()->cms()->__('Save and Publish')
 						,'onclick' =>
-							rm_sprintf(
+							df_sprintf(
 								'saveAndPublishAction(editForm, %s)'
 								,df_quote_single($this->getSaveUrl())
 							)
@@ -127,11 +127,11 @@ class Df_Cms_Block_Admin_Page_Revision_Edit extends Mage_Adminhtml_Block_Cms_Pag
 		}
 		if ($config->canCurrentUserSaveRevision()) {
 			$this->_updateButton('save', 'label', df_h()->cms()->__('Save'));
-			$this->_updateButton('save', 'onclick', rm_sprintf(
+			$this->_updateButton('save', 'onclick', df_sprintf(
 				'editForm.submit(%s);'
 				,df_quote_single($this->getSaveUrl())
 			));
-			$this->_updateButton('saveandcontinue', 'onclick', rm_sprintf(
+			$this->_updateButton('saveandcontinue', 'onclick', df_sprintf(
 				'editForm.submit(%s);'
 				,df_quote_single($this->getSaveUrl() . 'back/edit/')
 			));

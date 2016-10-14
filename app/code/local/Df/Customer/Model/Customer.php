@@ -42,7 +42,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	 * а в виде целого числа.
 	 * @return int
 	 */
-	public function getGender() {return rm_int($this->getData('gender'));}
+	public function getGender() {return df_int($this->getData('gender'));}
 
 	/** @return string|null */
 	public function getGenderAsString() {
@@ -85,7 +85,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 		 * http://magento-forum.ru/topic/4220/
 		 */
 		if (is_numeric($value) || is_null($value)) {
-			$value = rm_int($value);
+			$value = df_int($value);
 		}
 		else {
 			df_param_string($value, 0);

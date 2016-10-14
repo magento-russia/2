@@ -87,7 +87,7 @@ class Df_Core_Model_Settings_Group extends Df_Core_Model {
 	 */
 	private function expandConfigKey($configKeySuffix) {
 		df_param_string($configKeySuffix, 0);
-		return df_concat_xpath(
+		return df_cc_path(
 			$this->getSection()
 			,$this->getGroup()
 			,$this->implodePrefixes($configKeySuffix, $this->getPrefixesAsArray())

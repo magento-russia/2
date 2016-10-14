@@ -7,7 +7,7 @@ final class Df_Core_Model_Logger extends Df_Core_Model {
 	public function log($message) {
 		/** @var mixed[] $args */
 		$args = func_get_args();
-		$this->_logger()->log(rm_format($args), Zend_Log::DEBUG);
+		$this->_logger()->log(df_format($args), Zend_Log::DEBUG);
 	}
 
 	/**
@@ -18,7 +18,7 @@ final class Df_Core_Model_Logger extends Df_Core_Model {
 		/** @var mixed[] $args */
 		$args = func_get_args();
 		$this->_logger()->log(
-			rm_format($args)
+			df_format($args)
 			, Zend_Log::DEBUG
 			, array(Df_Zf_Log_Formatter_Benchmark::FORMAT__RAW => true)
 		);

@@ -113,7 +113,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		if ($offsetType) {
 			df_assert_in($offsetType, array('UTC', 'GMT'));
 			/** @var int $offsetFromGMT */
-			$offsetFromGMT = rm_round(rm_int(df_dts(Zend_Date::now(), Zend_Date::TIMEZONE_SECS)) / 3600);
+			$offsetFromGMT = rm_round(df_int(df_dts(Zend_Date::now(), Zend_Date::TIMEZONE_SECS)) / 3600);
 			$hour += $offsetFromGMT;
 			if ('UTC' === $offsetType) {
 				$hour++;

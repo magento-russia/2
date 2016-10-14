@@ -42,7 +42,7 @@ function rm_action(Mage_Core_Controller_Varien_Action $controller, $class = null
 	/** @var string $m */
 	$m = rm_module_name($controller);
 	/** @var bool $full */
-	$full = $class && rm_starts_with($class, $m);
+	$full = $class && df_starts_with($class, $m);
 	if (!$class) {
 		// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
 		$class = df_trim_text_right(df_last(rm_explode_class($controller)), 'Controller');

@@ -40,7 +40,7 @@ class Df_Banner_Block_Adminhtml_Banneritem_Edit extends Mage_Adminhtml_Block_Wid
 	public function getHeaderText() {
 		return
 			Mage::registry('df_banner_item_data') && Mage::registry('df_banner_item_data')->getId()
-			? sprintf('Объявление «%s»', rm_e(Mage::registry('df_banner_item_data')->getTitle()))
+			? sprintf('Объявление «%s»', df_e(Mage::registry('df_banner_item_data')->getTitle()))
 			: 'Составить новое объявление...'
 		;
 	}

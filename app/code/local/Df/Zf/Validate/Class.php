@@ -17,7 +17,7 @@ class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
 	 * @return string
 	 */
 	protected function getExpectedTypeInAccusativeCase() {
-		return rm_sprintf('объект класса «%s»', $this->getClassExpected());
+		return df_sprintf('объект класса «%s»', $this->getClassExpected());
 	}
 
 	/**
@@ -25,7 +25,7 @@ class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
 	 * @return string
 	 */
 	protected function getExpectedTypeInGenitiveCase() {
-		return rm_sprintf('объекта класса «%s»', $this->getClassExpected());
+		return df_sprintf('объекта класса «%s»', $this->getClassExpected());
 	}
 
 	/**

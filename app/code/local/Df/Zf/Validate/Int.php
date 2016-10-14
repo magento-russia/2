@@ -9,7 +9,7 @@ class Df_Zf_Validate_Int extends Df_Zf_Validate_Type implements Zend_Filter_Inte
 	public function filter($value) {
 		/** @var int $result */
 		try {
-			$result = rm_int($value, $allowNull = true);
+			$result = df_int($value, $allowNull = true);
 		}
 		catch (Exception $e) {
 			df_error(new Zend_Filter_Exception(rm_ets($e)));

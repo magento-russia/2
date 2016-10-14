@@ -12,7 +12,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return int
 	 */
-	public function getInteger($key, $store = null) {return rm_int($this->value($key, $store));}
+	public function getInteger($key, $store = null) {return df_int($this->value($key, $store));}
 
 	/**
 	 * @param string $key

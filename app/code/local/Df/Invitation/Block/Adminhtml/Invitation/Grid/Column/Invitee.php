@@ -18,7 +18,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_Grid_Column_Invitee
 			'<a href="'
 			. rm_url_admin('*/customer/edit', array('id' => $row->getReferralId()))
 			. '">'
-			. rm_e($customer->getName())
+			. df_e($customer->getName())
 			. '</a>'
 		;
 	}

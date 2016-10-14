@@ -39,7 +39,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 			if ($required) {
 				df_error(
 					'Требуется непустое значение для параметра «%s».'
-					, df_concat_xpath($this['path'], $name)
+					, df_cc_path($this['path'], $name)
 				);
 			}
 			else {

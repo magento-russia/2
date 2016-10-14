@@ -66,7 +66,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	public function getRequestVarMaxLength($requestVar) {
 		df_param_string($requestVar, 0);
 		if (!isset($this->{__METHOD__}[$requestVar])) {
-			$this->{__METHOD__}[$requestVar] = rm_nat0($this->getValue(df_concat_xpath(
+			$this->{__METHOD__}[$requestVar] = rm_nat0($this->getValue(df_cc_path(
 				'request/payment_page/params', $requestVar, 'max_length'
 			)));
 		}
@@ -81,7 +81,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 */
 	public function getUrl($key, $canBeTest = true, $default = '') {
 		/** @var string $key */
-		$key = df_concat_xpath('url', $key);
+		$key = df_cc_path('url', $key);
 		return $canBeTest ? $this->getValueT($key, $default) : $this->getValue($key, $default);
 	}
 
@@ -121,7 +121,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		df_param_string($currencyCodeInMagentoFormat, 0);
 		if (!isset($this->{__METHOD__}[$currencyCodeInMagentoFormat])) {
 			/** @var string $result */
-			$result = $this->getValue(df_concat_xpath(
+			$result = $this->getValue(df_cc_path(
 				self::$KEY__CURRENCIES, self::$KEY__CODE_TRANSLATION, $currencyCodeInMagentoFormat
 			));
 			if (!$result) {
@@ -152,7 +152,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		df_param_string($currencyCodeInPaymentSystemFormat, 0);
 		if (!isset($this->{__METHOD__}[$currencyCodeInPaymentSystemFormat])) {
 			/** @var string $result */
-			$result = $this->getValue(df_concat_xpath(
+			$result = $this->getValue(df_cc_path(
 				self::$KEY__CURRENCIES, 'code-translation-reversed', $currencyCodeInPaymentSystemFormat
 			));
 			if (!$result) {
@@ -173,7 +173,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		df_param_string($localeCodeInMagentoFormat, 0);
 		if (!isset($this->{__METHOD__}[$localeCodeInMagentoFormat])) {
 			/** @var string $result */
-			$result = $this->getValue(df_concat_xpath(
+			$result = $this->getValue(df_cc_path(
 				self::$KEY__LOCALES, self::$KEY__CODE_TRANSLATION, $localeCodeInMagentoFormat
 			));
 			if (!$result) {
@@ -201,7 +201,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	/** @return string */
 	private function getAllowedCurrencyCodesAsString() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getValue(df_concat_xpath(
+			$this->{__METHOD__} = $this->getValue(df_cc_path(
 				self::$KEY__CURRENCIES, self::$KEY__ALLOWED
 			));
 			df_result_string($this->{__METHOD__});
@@ -212,7 +212,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	/** @return string */
 	private function getAllowedLocaleCodesAsString() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getValue(df_concat_xpath(
+			$this->{__METHOD__} = $this->getValue(df_cc_path(
 				self::$KEY__LOCALES, self::$KEY__ALLOWED
 			));
 		}

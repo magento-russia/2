@@ -42,13 +42,13 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Block extends Df_Core_Xml_P
 					 // Использование такого синтаксиса должно дать прирост производительности
 					 // по сравнению с аналогичным регулярным выражением
 					 // template='#tierprices\.phtml$#'
-					$this->isTemplateEnd() && rm_ends_with($template, $this->getTemplateEnd())
+					$this->isTemplateEnd() && df_ends_with($template, $this->getTemplateEnd())
 					// 2015-10-16
 					// Поддержка синтаксиса template='*ajaxcart*'
 					||
 						$this->isTemplateWildcard()
-						&& rm_contains($template, $this->getTemplateWildcardBody())
-					|| $this->isTemplateRegex() && rm_preg_test($this->getTemplate(), $template)
+						&& df_contains($template, $this->getTemplateWildcardBody())
+					|| $this->isTemplateRegex() && df_preg_test($this->getTemplate(), $template)
 					|| ($this->getTemplate() === $template)
 				)
 		;
@@ -110,7 +110,7 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Block extends Df_Core_Xml_P
 	 */
 	private function isTemplateEnd() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_ends_with($this->getTemplate(), '$');
+			$this->{__METHOD__} = df_ends_with($this->getTemplate(), '$');
 		}
 		return $this->{__METHOD__};
 	}
@@ -131,8 +131,8 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Block extends Df_Core_Xml_P
 	private function isTemplateWildcard() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_starts_with($this->getTemplate(), '*')
-				&& rm_ends_with($this->getTemplate(), '*')
+				df_starts_with($this->getTemplate(), '*')
+				&& df_ends_with($this->getTemplate(), '*')
 			;
 		}
 		return $this->{__METHOD__};

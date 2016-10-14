@@ -22,7 +22,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_View extends Mage_Adminhtml_Block
 					,array(
 						'label' => df_h()->invitation()->__('Discard Invitation')
 						,'onclick' =>
-							rm_sprintf(
+							df_sprintf(
 								'deleteConfirm(%s, %s)'
 								,df_quote_single(
 									df_h()->invitation()->__(

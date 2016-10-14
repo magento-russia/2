@@ -178,7 +178,7 @@ class Df_Core_Model_Format_NumberInWords extends Df_Core_Model {
 	}
 
 	/** @return int */
-	private function getNumberIntegerPart() {return rm_int($this->getNumber());}
+	private function getNumberIntegerPart() {return df_int($this->getNumber());}
 
 	/** @return int */
 	private function getNumberIntegerPartForm() {

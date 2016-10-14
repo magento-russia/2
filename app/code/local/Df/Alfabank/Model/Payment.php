@@ -90,7 +90,7 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			}
 			df_result_array($result);
 			/** @var int $errorCode */
-			$errorCode = rm_int(dfa($result, 'errorCode'));
+			$errorCode = df_int(dfa($result, 'errorCode'));
 			if ($errorCode) {
 				$this->registrationError(dfa($result, 'errorMessage'));
 			}

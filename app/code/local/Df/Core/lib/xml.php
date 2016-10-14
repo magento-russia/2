@@ -10,6 +10,12 @@ function df_assert_leaf(SimpleXMLElement $e) {
 }
 
 /**
+ * @param string $text
+ * @return string
+ */
+function df_cdata($text) {return Df_Core_Sxe::markAsCData($text);}
+
+/**
  * 2015-02-27
  * Обратите внимание,
  * что метод @see SimpleXMLElement::count() появился только в PHP 5.3,
@@ -182,7 +188,7 @@ function rm_leaf_f(SimpleXMLElement $e = null) {return rm_float(rm_leaf($e));}
  * @param SimpleXMLElement|null $e [optional]
  * @return int
  */
-function rm_leaf_i(SimpleXMLElement $e = null) {return rm_int(rm_leaf($e));}
+function rm_leaf_i(SimpleXMLElement $e = null) {return df_int(rm_leaf($e));}
 
 /**
  * @param SimpleXMLElement|null $e [optional]
@@ -392,7 +398,7 @@ function rm_xml_throw_last($message) {
  */
 function rm_xml_node($tag, array $attributes = array()) {
 	/** @var Df_Core_Sxe $result */
-	$result = rm_xml(rm_sprintf('<%s/>', $tag));
+	$result = rm_xml(df_sprintf('<%s/>', $tag));
 	foreach ($attributes as $name => $value) {
 		/** @var string $name */
 		/** @var string $value */
@@ -419,7 +425,7 @@ function rm_xml_output_html($text) {
 		is_array($text)
 		? array_map(__FUNCTION__, $text)
 		: (
-			!rm_contains($text, RM_XML_BEGIN)
+			!df_contains($text, RM_XML_BEGIN)
 			? $text
 			: preg_replace_callback(
 				strtr(
@@ -444,7 +450,7 @@ function rm_xml_output_html($text) {
  */
 function rm_xml_output_html_callback(array $matches) {
 	return strtr('<pre class="rm-xml">{contents}</div>', array(
-		'{contents}' => rm_e(rm_normalize(dfa($matches, 1, ''))))
+		'{contents}' => df_e(df_normalize(dfa($matches, 1, ''))))
 	);
 }
 

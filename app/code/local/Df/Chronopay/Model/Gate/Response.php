@@ -14,7 +14,7 @@ class Df_Chronopay_Model_Gate_Response extends Df_Core_Xml_Parser_Entity {
 	/** @return string */
 	public function getDiagnosticMessage() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_n(
+			$this->{__METHOD__} = df_cc_n(
 				'Error in capturing the payment via ChronoPay.'
 				,'ChronoPay error code: ' . $this->getCode()
 				, 'ChronoPay extended error code: ' . $this->getExtendedCode()

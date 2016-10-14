@@ -72,7 +72,7 @@ class Df_RbkMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return self::PAYMENT_STATE__PROCESSING !== rm_int($this->getRequestValueServicePaymentState());
+		return self::PAYMENT_STATE__PROCESSING !== df_int($this->getRequestValueServicePaymentState());
 	}
 
 	/** @return string */

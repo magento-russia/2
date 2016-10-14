@@ -27,7 +27,7 @@ class Df_Avangard_Model_Response_Refund extends Df_Avangard_Model_Response {
 	 * @return string
 	 */
 	protected function getErrorMessage() {
-		return 303 !== $this->getResponseCode() ? parent::getErrorMessage() : rm_sprintf(
+		return 303 !== $this->getResponseCode() ? parent::getErrorMessage() : df_sprintf(
 			'Не удалось вернуть оплату.'
 			. '<br/>Обратите внимание, что платёжный шлюз Банка Авангард'
 			. ' неспособен возвращать оплату в тестовом режиме.'

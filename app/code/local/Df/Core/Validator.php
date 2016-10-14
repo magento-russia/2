@@ -11,8 +11,8 @@ class Df_Core_Validator {
 	public static function check($value, Zend_Validate_Interface $validator) {
 		if (!self::validate($value, $validator)) {
 			df_error(
-				new Df_Core_Exception(df_concat_n($validator->getMessages())
-				, rm_print_params(array(
+				new Df_Core_Exception(df_cc_n($validator->getMessages())
+				, df_print_params(array(
 					'Значение' => rm_debug_type($value)
 					,'Проверяющий' => get_class($value)
 				))
@@ -93,7 +93,7 @@ class Df_Core_Validator {
 			$result = self::resolve($validator, $skipOnNull);
 		}
 		catch (Df_Core_Exception $e) {
-			$e->comment(rm_print_params(array('Класс' => get_class($object), 'Свойство' => $key)));
+			$e->comment(df_print_params(array('Класс' => get_class($object), 'Свойство' => $key)));
 			throw $e;
 		}
 		return $result;

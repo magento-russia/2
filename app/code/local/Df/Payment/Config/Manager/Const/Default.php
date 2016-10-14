@@ -6,7 +6,7 @@ class Df_Payment_Config_Manager_Const_Default extends Df_Payment_Config_Manager_
 	 * @return string
 	 */
 	protected function adaptKey($key) {
-		return df_concat_xpath($this->getKeyBase(), 'default', parent::adaptKey($key));
+		return df_cc_path($this->getKeyBase(), 'default', parent::adaptKey($key));
 	}
 
 	/**

@@ -138,7 +138,7 @@ class Df_Eav_Model_Config extends Mage_Eav_Model_Config {
 	 * @param string $id
 	 * @return bool
 	 */
-	private function needCacheRm($id) {return rm_starts_with($id, 'ATTRIBUTE');}
+	private function needCacheRm($id) {return df_starts_with($id, 'ATTRIBUTE');}
 
 	/** @var string[] */
 	private $_cachedProductAttributeCodes = array();

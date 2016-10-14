@@ -9,7 +9,7 @@ class Df_Dataflow_Exception_Import extends Df_Dataflow_Exception {
 			$this->{__METHOD__} = sprintf(
 				"%s\nИмпортируемые данные:\n%s"
 				, parent::getMessageRm()
-				, df_tab_multiline(rm_print_params($this->getRow()->getAsArray()))
+				, df_tab_multiline(df_print_params($this->getRow()->getAsArray()))
 			);
 		}
 		return $this->{__METHOD__};

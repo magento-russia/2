@@ -28,7 +28,7 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 	 * @return string
 	 */
 	protected function adaptKey($key) {
-		return df_concat_xpath($this->getKeyBase(), $this->main()->getRmId(), $key);
+		return df_cc_path($this->getKeyBase(), $this->main()->getRmId(), $key);
 	}
 
 	/**
@@ -41,7 +41,7 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 		$result = $value;
 		/** @var bool $doing */
 		static $doing = false;
-		if (!$doing && is_string($result) && rm_contains($result, '{')) {
+		if (!$doing && is_string($result) && df_contains($result, '{')) {
 			// чтобы не попадать в рекурсию
 			$doing = true;
 			try {

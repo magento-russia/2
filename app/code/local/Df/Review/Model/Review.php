@@ -6,7 +6,7 @@
  */
 class Df_Review_Model_Review extends Mage_Review_Model_Review {
 	/** @return string */
-	public function getDetailAsHtml() {return df_t()->nl2br(rm_e($this->getDetail()));}
+	public function getDetailAsHtml() {return df_t()->nl2br(df_e($this->getDetail()));}
 
 	/** @return Df_Catalog_Model_Product */
 	public function getProduct() {

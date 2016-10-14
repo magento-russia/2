@@ -36,7 +36,7 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 	 * @return int|null
 	 */
 	public function descendI($path, $throw = false) {
-		return $this->descendWithCast($path, 'rm_int', 'целое', $throw);
+		return $this->descendWithCast($path, 'df_int', 'целое', $throw);
 	}
 
 	/**

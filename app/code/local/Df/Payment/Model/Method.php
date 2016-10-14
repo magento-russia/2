@@ -415,7 +415,7 @@ abstract class Df_Payment_Model_Method
 		if (is_string($message)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 		$this->log($message, $filename = $this->getFailureLogFileNameHighLevel());
 		return $this;
@@ -429,7 +429,7 @@ abstract class Df_Payment_Model_Method
 		if (is_string($message)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 		$this->log($message, $filename = $this->getFailureLogFileNameLowLevel());
 		return $this;

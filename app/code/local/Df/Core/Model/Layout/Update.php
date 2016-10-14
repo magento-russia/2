@@ -69,7 +69,7 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 					$errors[]= $error->message;
 				}
 				/** @var string $message */
-				$message = rm_sprintf(
+				$message = df_sprintf(
 					"Файл XML «%s» содержит синтаксические ошибки:\n«%s»\n%s"
 					,$filename
 					,implode("\n\n", $errors)

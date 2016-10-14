@@ -121,7 +121,7 @@ function df_assert_class($value, $class, $stackLevel = 0) {
 function df_assert_eq($expectedResult, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($expectedResult !== $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение «%s», однако получил значение «%s».'
 				, $expectedResult
 				, $valueToTest
@@ -151,7 +151,7 @@ function df_assert_float($value, $stackLevel = 0) {
 function df_assert_ge($lowBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($lowBound > $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
 				, $lowBound
 				, $valueToTest
@@ -170,7 +170,7 @@ function df_assert_ge($lowBound, $valueToTest, $message = null) {
 function df_assert_gt($lowBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($lowBound >= $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
 				, $lowBound
 				, $valueToTest
@@ -188,7 +188,7 @@ function df_assert_gt($lowBound, $valueToTest, $message = null) {
 function df_assert_gt0($valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if (0 >= $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал положительное значение, однако получил «%s».', $valueToTest
 			));
 		}
@@ -207,12 +207,12 @@ function df_assert_in($valueToTest, array $allowedResults, $message = null) {
 		if (!in_array($valueToTest, $allowedResults, $strict = true)) {
 			df_error($message ? $message : (
 				10 >= count($allowedResults)
-				? rm_sprintf(
+				? df_sprintf(
 					'Проверяющий ожидал значение из множества «%s», однако получил значение «%s».'
 					, df_csv_pretty($allowedResults)
 					, $valueToTest
 				)
-				: rm_sprintf(
+				: df_sprintf(
 					'Проверяющий получил значение «%s», отсутствующее в допустимом множестве значений.'
 					, $valueToTest
 				)
@@ -254,7 +254,7 @@ function df_assert_iso2($value, $stackLevel = 0) {
 function df_assert_le($highBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($highBound < $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
 				, $highBound
 				, $valueToTest
@@ -273,7 +273,7 @@ function df_assert_le($highBound, $valueToTest, $message = null) {
 function df_assert_lt($highBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($highBound <= $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
 				, $highBound
 				, $valueToTest
@@ -292,7 +292,7 @@ function df_assert_lt($highBound, $valueToTest, $message = null) {
 function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($notExpectedResult === $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
 				, $notExpectedResult
 			));
@@ -484,7 +484,7 @@ function df_error($message = null) {
 		else {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 		throw new Df_Core_Exception($message);
 	}
@@ -611,7 +611,7 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 				$validatorClass = __FUNCTION__
 				,$messages =
 					array(
-						rm_sprintf(
+						df_sprintf(
 							'Требуется строка, но вместо неё получена переменная типа «%s».'
 							,gettype($paramValue)
 						)
@@ -724,7 +724,7 @@ function df_result_string($resultValue, $stackLevel = 0) {
 		if (!is_string($resultValue)) {
 			Df_Qa_Method::raiseErrorResult(
 				$validatorClass = __FUNCTION__
-				,$messages = array(rm_sprintf(
+				,$messages = array(df_sprintf(
 					'Требуется строка, но вместо неё получена переменная типа «%s».'
 					, gettype($resultValue)
 				))
@@ -796,7 +796,7 @@ function df_warning($message = null) {
 		else {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 	}
 	df_notify_admin($message, $doLog = true);
@@ -813,7 +813,7 @@ function df_warning($message = null) {
  */
 function rm_01($value) {
 	/** @var int $result */
-	$result = rm_int($value);
+	$result = df_int($value);
 	df_assert_in($result, array(0, 1));
 	return $result;
 }
@@ -992,7 +992,7 @@ function rm_float_positive0($value) {return rm_float_positive($value, $allow0 = 
  * @return int|int[]
  * @throws Df_Core_Exception
  */
-function rm_int($value, $allowNull = true) {
+function df_int($value, $allowNull = true) {
 	/** @var int|int[] $result */
 	if (is_array($value)) {
 		$result = df_map(__FUNCTION__, $value, $allowNull);
@@ -1032,7 +1032,7 @@ function rm_int($value, $allowNull = true) {
 
 /**
  * 2015-04-13
- * В отличие от @see rm_int() функция rm_int_simple():
+ * В отличие от @see df_int() функция df_int_simple():
  * 1) намеренно не проводит валидацию данных ради ускорения
  * 2) работает только с массивами
  * Ключи массива сохраняются: http://3v4l.org/NHgdK
@@ -1043,7 +1043,7 @@ function rm_int($value, $allowNull = true) {
  * @param mixed[] $values
  * @return int[]
  */
-function rm_int_simple(array $values) {return array_map('intval', $values);}
+function df_int_simple(array $values) {return array_map('intval', $values);}
 
 /**
  * 2015-03-04
@@ -1117,7 +1117,7 @@ function rm_is($variable, $class) {
  */
 function rm_nat($value, $allow0 = false) {
 	/** @var int $result */
-	$result = rm_int($value, $allow0);
+	$result = df_int($value, $allow0);
 	if ($allow0) {
 		df_assert_ge(0, $result);
 	}

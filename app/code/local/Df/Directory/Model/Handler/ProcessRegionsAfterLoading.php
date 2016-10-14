@@ -82,7 +82,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 			df_assert_string($currentName);
 			$currentName = mb_strtoupper($currentName);
 			df_assert_string($currentName);
-			if (rm_contains($currentName, $name)) {
+			if (df_contains($currentName, $name)) {
 				$result = $region;
 				break;
 			}

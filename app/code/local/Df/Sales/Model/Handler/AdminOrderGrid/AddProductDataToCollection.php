@@ -53,7 +53,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection extends D
 						$this->createConcatExpression('row_total')
 					,self::COLLECTION_ITEM_PARAM__DF_PARENTS =>
 						new Zend_Db_Expr(
-							rm_sprintf(
+							df_sprintf(
 								'group_concat(
 									IFnull(`sales/order_item`.%s, 0) SEPARATOR "%s"
 								)'
@@ -75,7 +75,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection extends D
 		df_param_string($fieldName, 0);
 		return
 			new Zend_Db_Expr(
-				rm_sprintf(
+				df_sprintf(
 					'group_concat(`sales/order_item`.%s SEPARATOR "%s")'
 					,$fieldName
 					,self::T_UNIQUE_SEPARATOR

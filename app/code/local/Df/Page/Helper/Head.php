@@ -44,7 +44,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		 * Модуль Cmsmart_Ajaxsearch использует какую-то свою переделанную версию библиотеки jQuery
 		 * и размещает её в файлах со стандартными для jQuery именами.
 		 */
-		if (rm_starts_with($scriptName, 'cmsmart/ajaxsearch')) {
+		if (df_starts_with($scriptName, 'cmsmart/ajaxsearch')) {
 			$result = false;
 		}
 		else {
@@ -80,7 +80,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 * @param string $scriptName
 	 * @return bool
 	 */
-	private function isItJQueryMigrate($scriptName) {return rm_contains($scriptName, 'jquery-migrate');}
+	private function isItJQueryMigrate($scriptName) {return df_contains($scriptName, 'jquery-migrate');}
 
 	/**
 	 * @param string $scriptName
@@ -88,10 +88,10 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 	 */
 	private function isItJQueryNoConflict($scriptName) {
 		return
-			rm_contains(mb_strtolower($scriptName), 'noconflict.js')
+			df_contains(mb_strtolower($scriptName), 'noconflict.js')
 			// 2015-10-19
 			// Модуль Qaz_Qzoom, магазин chepe.ru
-			|| rm_contains($scriptName, 'jqueryNoconfig.js')
+			|| df_contains($scriptName, 'jqueryNoconfig.js')
 		;
 	}
 
@@ -150,7 +150,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 			$result =
 				$skip
 				&& in_array($type, array('skin_css', 'js_css'))
-				&& !rm_contains($name, 'df/')
+				&& !df_contains($name, 'df/')
 			;
 		}
 		return $result;

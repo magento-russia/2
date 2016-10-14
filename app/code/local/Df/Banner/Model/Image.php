@@ -177,7 +177,7 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 	{
 		$subDir = '';
 		if ($file) {
-			if (!rm_starts_with($file, '/', 0)) {
+			if (!df_starts_with($file, '/', 0)) {
 				$file = '/' . $file;
 			}
 
@@ -240,7 +240,7 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 			))
 		);
 		// append prepared filename
-		$this->_newFile = df_concat(df_concat_path($path), $file); // the $file contains heading slash
+		$this->_newFile = df_cc(df_cc_path($path), $file); // the $file contains heading slash
 		return $this;
 	}
 

@@ -72,7 +72,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	public function getNumericCode() {
 		/** @var array(string => string) $map */
 		static $map; if (!$map) {$map = Zend_Locale::getTranslationList('numerictoterritory');}
-		return rm_int(dfa($map, $this->getIso2Code()));
+		return df_int(dfa($map, $this->getIso2Code()));
 	}
 
 	/**

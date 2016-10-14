@@ -115,7 +115,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 
 	/** @return string */
 	private function getSessionKey() {
-		return rm_sprintf('%s_%s', get_class($this), $_REQUEST['batch_id']);
+		return df_sprintf('%s_%s', get_class($this), $_REQUEST['batch_id']);
 	}
 
 	/**

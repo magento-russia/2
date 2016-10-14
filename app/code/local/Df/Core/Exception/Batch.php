@@ -20,7 +20,7 @@ class Df_Core_Exception_Batch extends Df_Core_Exception {
 	 * @override
 	 * @return string
 	 */
-	public function getMessageRm() {return df_concat_n($this->getMessagesRm());}
+	public function getMessageRm() {return df_cc_n($this->getMessagesRm());}
 
 	/** @return string[] */
 	public function getMessagesRm() {return array_filter(array_map('rm_ets', $this->_exceptions));}

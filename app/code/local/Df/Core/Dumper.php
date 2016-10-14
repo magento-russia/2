@@ -1,7 +1,7 @@
 <?php
 class Df_Core_Dumper {
 	/**
-	 * @used-by rm_dump()
+	 * @used-by df_dump()
 	 * @param mixed $value
 	 * @return string
 	 */
@@ -14,7 +14,7 @@ class Df_Core_Dumper {
 	}
 
 	/**
-	 * @used-by rm_print_params()
+	 * @used-by df_print_params()
 	 * @used-by dumpArray()
 	 * @used-by dumpObject()
 	 * @param mixed[]|array(string => mixed) $array

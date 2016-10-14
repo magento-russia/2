@@ -25,7 +25,7 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Simple
 	 */
 	protected function getImportedKey() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_preg_match($this->getPattern(), parent::getImportedKey());
+			$this->{__METHOD__} = df_preg_match($this->getPattern(), parent::getImportedKey());
 		}
 		return $this->{__METHOD__};
 	}

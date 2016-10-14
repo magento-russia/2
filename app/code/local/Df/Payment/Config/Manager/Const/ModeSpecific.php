@@ -5,7 +5,7 @@ class Df_Payment_Config_Manager_Const_ModeSpecific extends Df_Payment_Config_Man
 	 * @return string
 	 */
 	protected function adaptKey($key) {
-		return df_concat_xpath($this->main()->isTestMode() ? 'test' : 'production', parent::adaptKey($key));
+		return df_cc_path($this->main()->isTestMode() ? 'test' : 'production', parent::adaptKey($key));
 	}
 
 	/**

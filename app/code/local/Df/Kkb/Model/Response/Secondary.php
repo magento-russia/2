@@ -7,7 +7,7 @@ class Df_Kkb_Model_Response_Secondary extends Df_Kkb_Model_Response {
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_clean(array(
-				'Операция выполнена успешно?' => rm_bts_r($this->isSuccessful())
+				'Операция выполнена успешно?' => df_bts_r($this->isSuccessful())
 				,'Диагностическое сообщение' => $this->getErrorMessage()
 				,'Код результата авторизации' => $this->onFail($this->getCode())
 			));

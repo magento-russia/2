@@ -1,452 +1,112 @@
 <?php
+use Df_Core_Helper_Text as Text;
+use Df_Core_Model_Text_Regex as Regex;
+
 /**
- * @see df_cc()
+ * @see df_1251_to()
+ * Если входной массив — ассоциативный и одномерный,
+ * то и результат будет ассоциативным массивом: @see array_map().
+ * @param string[] ...$args
+ * @return string|string[]|array(string => string)
+ */
+function df_1251_from(...$args) {return df_call_a(function($text) {
+	// Насколько я понимаю, данному вызову равноценно:
+	// iconv('windows-1251', 'utf-8', $s)
+	return mb_convert_encoding($text, 'UTF-8', 'Windows-1251');
+}, $args);}
+
+/**
+ * @see df_1251_from()
+ * Если входной массив — ассоциативный и одномерный,
+ * то и результат будет ассоциативным массивом: @uses array_map().
+ * @param string[] ...$args
+ * @return string|string[]|array(string => string)
+ */
+function df_1251_to(...$args) {return df_call_a(function($text) {
+	// Насколько я понимаю, данному вызову равноценно:
+	// iconv('utf-8', 'windows-1251', $s)
+	return mb_convert_encoding($text, 'Windows-1251', 'UTF-8');
+}, $args);}
+
+/**
+ * 2016-03-08
+ * Добавляет к строке $s окончание $tail,
+ * если она в этой строке отсутствует.
+ * @param string $s
+ * @param string $tail
  * @return string
  */
-function df_ccc() {
-	/** @var mixed[] $a */
-	$a = func_get_args();
-	/** @var string $glue */
-	$glue = array_shift($a);
-	return implode($glue, df_clean(dfa_flatten($a)));
-}
+function df_append($s, $tail) {return df_ends_with($s, $tail) ? $s : $s . $tail;}
+
+/**
+ * @param boolean $value
+ * @return string
+ */
+function df_bts($value) {return $value ? 'true' : 'false';}
+
+/**
+ * @param boolean $value
+ * @return string
+ */
+function df_bts_r($value) {return $value ? 'да' : 'нет';}
+
+// 2015-12-31
+// IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
+// https://en.wikipedia.org/wiki/Thin_space
+// Глобальные константы появились в PHP 5.3.
+// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
+const DF_THIN_SPACE = ' ';
+
+/**
+ * @see df_ccc()
+ * @param string $glue
+ * @param string|string[] ...$elements
+ * @return string
+ */
+function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements));}
+
+/**
+ * 2016-08-13
+ * @param string[] ...$args
+ * @return string
+ */
+function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
+
+/**
+ * @param string[] ...$args
+ * @return string
+ */
+function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 
 /**
  * 2015-12-01
  * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * @param string[] ...$args
  * @return string
  */
-function df_cc_path() {
-	/** @var mixed[] $a */
-	$a = func_get_args();
-	return df_ccc('/', dfa_flatten($a));
-}
+function df_cc_path(...$args) {return df_ccc('/', dfa_flatten($args));}
 
 /**
- * Эта функция отличается от @uses implode() тем,
- * что способна принимать переменное количество аргументов, например:
- * df_concat('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).
- * То есть, эта функция даёт только сокращение синтаксиса.
- * @param string|string[]|mixed[]  $arguments
+ * 2016-05-31
+ * @param string[] ...$args
  * @return string
  */
-function df_concat($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	/**
-	 * @uses implode() способна работать с одним аргументом,
-	 * и тогда параметр $glue считается равным пустой строке.
-	 * http://www.php.net//manual/function.implode.php
-	 */
-	return implode($arguments);
-}
+function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args)), '/');}
 
 /**
- * @param string|string[]|mixed[] $arguments
+ * 2016-08-10
+ * @param string[] ...$args
  * @return string
  */
-function df_concat_n($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode("\n", df_clean($arguments));
-}
+function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
 
 /**
- * @param ... $arguments
+ * @see df_cc()
+ * @param string $glue
+ * @param string[] ...$elements
  * @return string
  */
-function df_concat_path($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode(DS, $arguments);
-}
-
-/**
- * @param ... $arguments
- * @return string
- */
-function df_concat_url($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode('/', $arguments);
-}
-
-/**
- * @param ... $parts
- * @return string
- */
-function df_concat_xpath($parts) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$parts = is_array($parts) ? $parts : func_get_args();
-	return implode('/', $parts);
-}
-
-/**
- * 2015-02-07
- * Эта функция аналогична функции @see df_csv_pretty(),
- * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
- * Если обработчик данных допускает пробелы между элементами,
- * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param string[]|int[]|string|int $arguments
- * @return string
- */
-function df_csv($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode(',', $arguments);
-}
-
-/**
- * 2015-02-07
- * Второй параметр $delimiter используется, например методами:
- * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions::getTargetTypes()
- * @used-by Df_Sales_Block_Admin_Grid_OrderItems::parseConcatenatedValues()
- * @param string|null $string
- * @param string $delimiter [optional]
- * @return string[]
- */
-function df_csv_parse($string, $delimiter = ',') {return df_output()->parseCsv($string, $delimiter);}
-
-/**
- * @param string|null $string
- * @return int[]
- */
-function df_csv_parse_int($string) {return rm_int(df_csv_parse($string));}
-
-/**
- * 2015-02-07
- * Помимо данной функции имеется ещё аналогичная функция @see df_csv(),
- * которая предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
- * Если обработчик данных допускает пробелы между элементами,
- * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param string[]|int[]|string|int $arguments
- * @return string
- */
-function df_csv_pretty($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode(', ', $arguments);
-}
-
-/**
- * @param string[]|mixed[] $arguments
- * @return string
- */
-function df_csv_pretty_quote($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return df_csv_pretty(df_quote_russian($arguments));
-}
-
-/**
- * 'YandexMarket' => array('Yandex', 'Market')
- * 'NewNASAModule' => array('New', 'NASA', Module)
- * http://stackoverflow.com/a/17122207
- * @param string $name
- * @return string[]
- */
-function df_explode_camel($name) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);}
-
-/**
- * @param string $string
- * @return string[]
- */
-function df_explode_n($string) {return explode("\n", rm_normalize($string));}
-
-/**
- * @param string $url
- * @return string[]
- */
-function df_explode_url($url) {return explode('/', $url);}
-
-/**
- * @param string $xpath
- * @return string[]
- */
-function df_explode_xpath($xpath) {return explode('/', $xpath);}
-
-/**
- * @param mixed|false $value
- * @return mixed|null
- */
-function df_ftn($value) {return (false === $value) ? null : $value;}
-
-/**
- * @param string $text
- * @return string
- */
-function df_no_escape($text) {return df_t()->noEscape($text);}
-
-/**
- * @param string|string[] $text
- * @return string|string[]
- */
-function df_quote_russian($text) {return df_t()->quote($text, Df_Core_Helper_Text::QUOTE__RUSSIAN);}
-
-/**
- * @param string|string[] $text
- * @return string|string[]
- */
-function df_quote_single($text) {return df_t()->quote($text, Df_Core_Helper_Text::QUOTE__SINGLE);}
-
-/**
- * Иногда я для разработки использую заплатку ядра для xDebug —
- * отключаю set_error_handler для режима разработчика.
- *
- * Так вот, xDebug при обработке фатальных сбоев (в том числе и E_RECOVERABLE_ERROR),
- * выводит на экран диагностическое сообщение, и после этого останавливает работу интерпретатора.
- *
- * Конечно, если у нас сбой типов E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING,
- * E_COMPILE_ERROR, E_COMPILE_WARNING, то и set_error_handler не поможет
- * (не обрабатывает эти типы сбоев, согласно официальной документации PHP).
- *
- * Однако сбои типа E_RECOVERABLE_ERROR обработик сбоев Magento,
- * установленный посредством set_error_handler, переводит в исключительние ситуации.
- *
- * xDebug же при E_RECOVERABLE_ERROR останавивает работу интерпретатора, что нехорошо.
- *
- * Поэтому для функций, которые могут привести к E_RECOVERABLE_ERROR,
- * пишем обёртки, которые вместо E_RECOVERABLE_ERROR возбуждают исключительную ситуацию.
- * Одна из таких функций — df_string.
- *
- * @param mixed $value
- * @return string
- */
-function df_string($value) {
-	if (is_object($value)) {
-		/**
-		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
-		 * потому что наличие @see Varien_Object::__call()
-		 * приводит к тому, что @see is_callable всегда возвращает true.
-		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
-		 * не гарантирует публичную доступность метода:
-		 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
-		 * потому что он имеет доступность private или protected.
-		 * Пока эта проблема никак не решена.
-		 */
-		if (!method_exists($value, '__toString')) {
-			df_error(
-				'Программист ошибочно пытается трактовать объект класса %s как строку.'
-				,get_class($value)
-			);
-		}
-	}
-	else if (is_array($value)) {
-		df_error('Программист ошибочно пытается трактовать массив как строку.');
-	}
-	return strval($value);
-}
-
-/**
- * @param mixed $value
- * @return string
- */
-function df_string_debug($value) {
-	/** @var string $result */
-	$result = '';
-	if (is_object($value)) {
-		/**
-		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
-		 * потому что наличие @see Varien_Object::__call()
-		 * приводит к тому, что @see is_callable всегда возвращает true.
-		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
-		 * не гарантирует публичную доступность метода:
-		 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
-		 * потому что он имеет доступность private или protected.
-		 * Пока эта проблема никак не решена.
-		 */
-		if (!method_exists($value, '__toString')) {
-			$result = get_class($value);
-		}
-	}
-	else if (is_array($value)) {
-		$result = sprintf('<массив из %d элементов>', count($value));
-	}
-	else if (is_bool($value)) {
-		$result = $value ? 'логическое <да>' : 'логическое <нет>';
-	}
-	else {
-		$result = strval($value);
-	}
-	return $result;
-}
-
-/**
- * @param $string1
- * @param $string2
- * @return bool
- */
-function df_strings_are_equal_ci($string1, $string2) {
-	return 0 === strcmp(mb_strtolower($string1), mb_strtolower($string2));
-}
-
-/** @return Df_Core_Helper_Text */
-function df_t() {return Df_Core_Helper_Text::s();}
-
-/**
- * @param string|string[]|array(string => string) $text
- * @return string|string[]|array(string => string)
- */
-function df_tab($text) {return is_array($text) ? array_map(__FUNCTION__, $text) : "\t" . $text;}
-
-/**
- * @param string $text
- * @return string
- */
-function df_tab_multiline($text) {return df_concat_n(df_tab(df_explode_n($text)));}
-
-/**
- * Обратите внимание, что иногда вместо данной функции надо применять @see trim().
- * Например, @see df_trim() не умеет отсекать нулевые байты,
- * которые могут образовываться на конце строки
- * в результате шифрации, передачи по сети прямо в двоичном формате, и затем обратной дешифрации
- * посредством @see Varien_Crypt_Mcrypt.
- * @param string|string[] $string
- * @param string $charlist [optional]
- * @return string|string[]
- */
-function df_trim($string, $charlist = null) {return df_t()->trim($string, $charlist);}
-
-/**
- * Отсекает у строки $haystack подстроку $needle,
- * если она встречается в начале или в конце строки $haystack
- * @param string $haystack
- * @param string $needle
- * @return string
- */
-function df_trim_text($haystack, $needle) {
-	return df_trim_text_left(df_trim_text_right($haystack, $needle), $needle);
-}
-
-/**
- * Отсекает у строки $haystack заданное начало $needle
- * @param string $haystack
- * @param string $needle
- * @return string
- */
-function df_trim_text_left($haystack, $needle) {
-	/** @var int $length */
-	$length = mb_strlen($needle);
-	/** @see rm_starts_with() */
-	return
-		($needle === mb_substr($haystack, 0, $length))
-		? mb_substr($haystack, $length)
-		: $haystack
-	;
-}
-
-/**
- * Отсекает у строки $haystack заданное окончание $needle
- * @param string $haystack
- * @param string $needle
- * @return string
- */
-function df_trim_text_right($haystack, $needle) {
-	/** @var int $length */
-	$length = mb_strlen($needle);
-	/** @see rm_ends_with() */
-	return
-		(0 !== $length) && ($needle === mb_substr($haystack, -$length))
-		? mb_substr($haystack, 0, -$length)
-		: $haystack
-	;
-}
-
-/**
- * @param string $string
- * @param string $charlist [optional]
- * @return string
- */
-function df_trim_left($string, $charlist = null) {
-	// Пусть пока будет так.
-	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
-	return ltrim($string, $charlist);
-}
-
-/**
- * @param string $string
- * @param string $charlist [optional]
- * @return string
- */
-function df_trim_right($string, $charlist = null) {
-	// Пусть пока будет так.
-	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
-	return rtrim($string, $charlist);
-}
-
-/**
- * @see rm_1251_to()
- * Если входной массив — ассоциативный и одномерный,
- * то и результат будет ассоциативным массивом: @see array_map().
- * @param string|string[]|array(string => string) $text
- * @return string|string[]|array(string => string)
- */
-function rm_1251_from($text) {
-	/**
-	 * Хотя документация к PHP говорит,
-	 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
-	 * однако на самом деле @uses func_num_args() быть параметром других функций
-	 * в любых версиях PHP 5 и даже PHP 4.
-	 * http://3v4l.org/HKFP7
-	 * http://php.net/manual/function.func-num-args.php
-	 */
-	if (1 < func_num_args()) {
-		$text = func_get_args();
-	}
-	return
-		is_array($text)
-		? array_map(__FUNCTION__, $text)
-		// Насколько я понимаю, данному вызову равноценно:
-		// iconv('windows-1251', 'utf-8', $string)
-		: mb_convert_encoding($text, 'UTF-8', 'Windows-1251')
-	;
-}
-
-/**
- * @see rm_1251_from()
- * Если входной массив — ассоциативный и одномерный,
- * то и результат будет ассоциативным массивом: @uses array_map().
- * @param string|string[]|array(string => string) $text
- * @return string|string[]|array(string => string)
- */
-function rm_1251_to($text) {
-	/**
-	 * Хотя документация к PHP говорит,
-	 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
-	 * однако на самом деле @uses func_num_args() быть параметром других функций
-	 * в любых версиях PHP 5 и даже PHP 4.
-	 * http://3v4l.org/HKFP7
-	 * http://php.net/manual/function.func-num-args.php
-	 */
-	if (1 < func_num_args()) {
-		$text = func_get_args();
-	}
-	return
-		is_array($text)
-		? array_map(__FUNCTION__, $text)
-		// Насколько я понимаю, данному вызову равноценно:
-		// iconv('utf-8', 'windows-1251', $string)
-		: mb_convert_encoding($text, 'Windows-1251', 'UTF-8')
-	;
-}
-
-/**
- * @param boolean $value
- * @return string
- */
-function rm_bts($value) {return $value ? 'true' : 'false';}
-
-/**
- * @param boolean $value
- * @return string
- */
-function rm_bts_r($value) {return $value ? 'да' : 'нет';}
-
-/**
- * @param string $text
- * @return string
- */
-function df_cdata($text) {return Df_Core_Sxe::markAsCData($text);}
+function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten($elements)));}
 
 /**
  * 2015-04-17
@@ -459,7 +119,7 @@ function df_cdata($text) {return Df_Core_Sxe::markAsCData($text);}
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  */
-function rm_contains($haystack, $needle) {
+function df_contains($haystack, $needle) {
 	/** @var bool $result */
 	if (!is_array($needle)) {
 		$result = false !== strpos($haystack, $needle);
@@ -483,9 +143,54 @@ function rm_contains($haystack, $needle) {
  * @param string $needle
  * @return bool
  */
-function rm_contains_ci($haystack, $needle) {
-	return rm_contains(mb_strtoupper($haystack), mb_strtoupper($needle));
+function df_contains_ci($haystack, $needle) {
+	return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));
 }
+
+/**
+ * 2015-02-07
+ * Эта функция аналогична функции @see df_csv_pretty(),
+ * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
+ * Если обработчик данных допускает пробелы между элементами,
+ * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
+ * @param string[] ...$args
+ * @return string
+ */
+function df_csv(...$args) {return implode(',', df_args($args));}
+
+/**
+ * 2015-02-07
+ * Второй параметр $delimiter используется, например методами:
+ * @used-by Df_Localization_Model_Onetime_Dictionary_Rule_Conditions::getTargetTypes()
+ * @used-by Df_Sales_Block_Admin_Grid_OrderItems::parseConcatenatedValues()
+ * @param string|null $s
+ * @param string $delimiter [optional]
+ * @return string[]
+ */
+function df_csv_parse($s, $delimiter = ',') {return df_output()->parseCsv($s, $delimiter);}
+
+/**
+ * @param string|null $s
+ * @return int[]
+ */
+function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
+
+/**
+ * 2015-02-07
+ * Помимо данной функции имеется ещё аналогичная функция @see df_csv(),
+ * которая предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
+ * Если обработчик данных допускает пробелы между элементами,
+ * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
+ * @param string[] ...$args
+ * @return string
+ */
+function df_csv_pretty(...$args) {return implode(', ', df_args($args));}
+
+/**
+ * @param string[] ...$args
+ * @return string
+ */
+function df_csv_pretty_quote(...$args) {return df_csv_pretty(df_quote_russian(df_args($args)));}
 
 /**
  * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
@@ -494,7 +199,7 @@ function rm_contains_ci($haystack, $needle) {
  * @param Varien_Object|mixed[]|mixed $value
  * @return string
  */
-function rm_dump($value) {return Df_Core_Dumper::i()->dump($value);}
+function df_dump($value) {return Df_Core_Dumper::i()->dump($value);}
 
 /**
  * 2015-02-17
@@ -508,37 +213,13 @@ function rm_dump($value) {return Df_Core_Dumper::i()->dump($value);}
  * Российская сборка Magento использует при формировании HTML одиночные кавычки,
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
- * @see rm_ejs()
- * @param string|string[]|int|null $text
+ * @see df_ejs()
+ * @param string[] ...$args
  * @return string|string[]
  */
-function rm_e($text) {
-	return
-		is_array($text)
-		? array_map(__FUNCTION__, $text)
-		: htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false)
-	;
-}
-
-/**
- * 2015-02-17
- * Экранирует строку для вставки её в код на JavaScript.
- * @uses json_encode() рекомендуют
- * как самый правильный способ вставки строки из PHP в JavaScript:
- * http://stackoverflow.com/a/169035
- * Заменяем символ одинарной кавычки его кодом Unicode,
- * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки,
- * например:
-	var $name = '<?php echo rm_ejs($name); ?>';
- * @used-by rm_admin_button_location()
- * @used-by Df_Admin_Config_DynamicTable_Column::renderTemplate()
- * @used-by app/design/adminhtml/rm/default/template/df/admin/column/select.phtml
- * @used-by app/design/adminhtml/rm/default/template/df/admin/field/button.phtml
- * @used-by app/design/frontend/rm/default/template/df/checkout/onepage/shipping_method/available/js.phtml
- * @param string $text
- * @return string
- */
-function rm_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($text), '"'));}
+function df_e(...$args) {return df_call_a(function($text) {
+	return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false);
+}, $args);}
 
 /**
  * @param string $haystack
@@ -546,41 +227,96 @@ function rm_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @return bool
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
- * @see rm_starts_with()
+ * @see df_starts_with()
  */
-function rm_ends_with($haystack, $needle) {
+function df_ends_with($haystack, $needle) {
 	/** @var int $length */
 	$length = mb_strlen($needle);
 	return (0 === $length) || ($needle === mb_substr($haystack, -$length));
 }
 
 /**
- * @used-by rm_flits()
- * @param float $value
- * @param int $precision [optional]
- * @return string
+ * 'YandexMarket' => array('Yandex', 'Market')
+ * 'NewNASAModule' => array('New', 'NASA', Module)
+ * http://stackoverflow.com/a/17122207
+ *
+ * 2016-08-24
+ * http://php.net/manual/reference.pcre.pattern.modifiers.php
+ * x (PCRE_EXTENDED)
+ * 		If this modifier is set, whitespace data characters in the pattern are totally ignored
+ * 		except when escaped or inside a character class,
+ * 		and characters between an unescaped # outside a character class
+ * 		and the next newline character, inclusive, are also ignored.
+ *
+ * 		This is equivalent to Perl's /x modifier,
+ * 		and makes it possible to include commentary inside complicated patterns.
+ *
+ * 		Note, however, that this applies only to data characters.
+ * 		Whitespace characters may never appear within special character sequences in a pattern,
+ * 		for example within the sequence (?( which introduces a conditional subpattern.
+ *
+ * @param string[] ...$args
+ * @return string[]|string[][]
  */
-function rm_flts($value, $precision = 2) {return number_format($value, $precision, '.', '');}
+function df_explode_camel(...$args) {return df_call_a(function($name) {
+	return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);
+}, $args);}
 
 /**
- * @param int|float $value
- * @param int $precision [optional]
- * @return string
+ * 2016-03-25
+ * «charge.dispute.funds_reinstated» => [charge, dispute, funds, reinstated]
+ * @param string[] $delimiters
+ * @param string $s
+ * @return string[]
  */
-function rm_flits($value, $precision = 2) {
-	return is_int($value) ? (string)$value : rm_flts($value, $precision);
+function df_explode_multiple(array $delimiters, $s) {
+	/** @var string $main */
+	$main = array_shift($delimiters);
+	/**
+	 * 2016-03-25
+	 * «If search is an array and replace is a string,
+	 * then this replacement string is used for every value of search.»
+	 * http://php.net/manual/function.str-replace.php
+	 */
+	return explode($main, str_replace($delimiters, $main, $s));
 }
+
+/**
+ * @param string $s
+ * @return string[]
+ */
+function df_explode_n($s) {return explode("\n", df_normalize($s));}
+
+/**
+ * 2016-09-03
+ * Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
+ * @param string $path
+ * @return string[]
+ */
+function df_explode_path($path) {return df_explode_xpath(df_path_n($path));}
+
+/**
+ * @param string $url
+ * @return string[]
+ */
+function df_explode_url($url) {return explode('/', $url);}
+
+/**
+ * @param string $xpath
+ * @return string[]
+ */
+function df_explode_xpath($xpath) {return explode('/', $xpath);}
 
 /**
  * @used-by df_error()
  * @used-by Df_Core_Model_Logger::log()
  * @used-by Df_Core_Model_Logger::logRaw()
- * @used-by Df_Core_Xml_Generator_Part::log()
- * @used-by Df_Core_Xml_Generator_Part::notify()
+ * @used-by Df_Core_Model_SimpleXml_Generator_Part::log()
+ * @used-by Df_Core_Model_SimpleXml_Generator_Part::notify()
  * @param mixed[] $arguments
  * @return string
  */
-function rm_format(array $arguments) {
+function df_format(array $arguments) {
 	/** @var string $result */
 	$result = null;
 	/** @var int $count */
@@ -598,45 +334,64 @@ function rm_format(array $arguments) {
 			}
 			break;
 	}
-	return !is_null($result) ? $result : rm_sprintf($arguments);
+	return !is_null($result) ? $result : df_sprintf($arguments);
 }
+
+/**
+ * @param mixed|false $value
+ * @return mixed|null
+ */
+function df_ftn($value) {return (false === $value) ? null : $value;}
 
 /**
  * @param string $text
  * @return bool
  */
-function rm_has_russian_letters($text) {return rm_preg_test('#[А-Яа-яЁё]#mui', $text);}
+function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#mui', $text);}
 
 /**
- * @param string $value
+ * 2016-01-14
+ * @see df_ucfirst()
+ * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_lcfirst(...$args) {return df_call_a(function($s) {
+	return mb_strtolower(mb_substr($s, 0, 1)) . mb_substr($s, 1);
+}, $args);}
+
+/**
+ * 2015-12-25
+ * @param string $text
  * @return string
  */
-function rm_json_prettify($value) {
-	$value = df_t()->adjustCyrillicInJson($value);
-	/** @var bool $h */
-	static $h; if (is_null($h)) {$h = is_callable(array('Zend_Json', 'prettyPrint'));};
-	return $h ? Zend_Json::prettyPrint($value) : $value;
-}
+function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
+
+/**
+ * @param string $text
+ * @return string
+ */
+function df_no_escape($text) {return df_t()->noEscape($text);}
 
 /**
  * @param string $text
  * @return string
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
  */
-function rm_normalize($text) {return strtr($text, array("\r\n" => "\n", "\r" => "\n"));}
+function df_normalize($text) {return strtr($text, ["\r\n" => "\n", "\r" => "\n"]);}
 
 /**
  * Аналог @see str_pad() для Unicode.
  * http://stackoverflow.com/a/14773638
- * @used-by Df_Qa_Context::render()
- * @used-by Df_Qa_State::param()
+ * @used-by \Df\Qa\Context::render()
+ * @used-by \Df\Qa\State::param()
  * @param string $phrase
  * @param int $length
  * @param string $pattern
  * @param int $position
  * @return string
  */
-function rm_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
+function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
 	/** @var string $encoding */
 	$encoding = 'UTF-8';
 	/** @var string $result */
@@ -682,6 +437,18 @@ function rm_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
 }
 
 /**
+ * 2015-11-29
+ * Добавляет к строковому представлению целого числа нули слева.
+ * 2015-12-01
+ * Строковое представление может быть 16-ричным (код цвета), поэтому убрал @see df_int()
+ * http://stackoverflow.com/a/1699980
+ * @param int $length
+ * @param int|string $number
+ * @return string
+ */
+function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PAD_LEFT);}
+
+/**
  * 2015-03-23
  * Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
  * @param string $pattern
@@ -689,10 +456,8 @@ function rm_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
  * @param bool $throwOnNotMatch [optional]
  * @return string|string[]|null|bool
  */
-function rm_preg_match($pattern, $subject, $throwOnNotMatch = true) {
-	return Df_Core_Model_Text_Regex::i(
-		$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-	)->match();
+function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {
+	return Regex::i($pattern, $subject, $throwOnError = true, $throwOnNotMatch)->match();
 }
 
 /**
@@ -701,10 +466,8 @@ function rm_preg_match($pattern, $subject, $throwOnNotMatch = true) {
  * @param bool $throwOnNotMatch [optional]
  * @return int|null|bool
  */
-function rm_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
-	return Df_Core_Model_Text_Regex::i(
-		$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-	)->matchInt();
+function df_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
+	return Regex::i($pattern, $subject, $throwOnError = true, $throwOnNotMatch)->matchInt();
 }
 
 /**
@@ -715,25 +478,33 @@ function rm_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
  * @param string $subject
  * @return string
  */
-function rm_preg_replace($pattern, $replacement, $subject) {
+function df_preg_replace($pattern, $replacement, $subject) {
 	return Df_Core_Model_Text_Regex::i($pattern, $subject, $throwOnError = true)
 		->replace($replacement)
 	;
 }
 
 /**
- * @used-by rm_has_russian_letters()
+ * @used-by df_has_russian_letters()
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnError [optional]
  * @return bool
- * @throws Df_Core_Exception
+ * @throws \Exception
  */
-function rm_preg_test($pattern, $subject, $throwOnError = true) {
-	return Df_Core_Model_Text_Regex::i(
-		$pattern, $subject, $throwOnError, $throwOnNotMatch = false
-	)->test();
+function df_preg_test($pattern, $subject, $throwOnError = true) {
+	return Regex::i($pattern, $subject, $throwOnError, $throwOnNotMatch = false)->test();
 }
+
+/**
+ * 2016-03-08
+ * Добавляет к строке $s приставку $head,
+ * если она в этой строке отсутствует.
+ * @param string $s
+ * @param string $head
+ * @return string
+ */
+function df_prepend($s, $head) {return df_starts_with($s, $head) ? $s : $head . $s;}
 
 /**
  * Эта функция имеет 2 отличия от @see print_r():
@@ -761,14 +532,14 @@ function rm_preg_test($pattern, $subject, $throwOnError = true) {
  * @param array(string => string) $params
  * @return mixed
  */
-function rm_print_params(array $params) {return Df_Core_Dumper::i()->dumpArrayElements($params);}
+function df_print_params(array $params) {return Df_Core_Dumper::i()->dumpArrayElements($params);}
 
 /**
  * @param string|mixed[] $pattern
  * @return string
  * @throws Exception
  */
-function rm_sprintf($pattern) {
+function df_sprintf($pattern) {
 	/** @var string $result */
 	/** @var mixed[] $arguments */
 	if (is_array($pattern)) {
@@ -779,14 +550,14 @@ function rm_sprintf($pattern) {
 		$arguments = func_get_args();
 	}
 	try {
-		$result = rm_sprintf_strict($arguments);
+		$result = df_sprintf_strict($arguments);
 	}
 	catch (Exception $e) {
 		/** @var bool $inProcess */
 		static $inProcess = false;
 		if (!$inProcess) {
 			$inProcess = true;
-			df_notify_me(rm_ets($e));
+			//df_notify_me(df_ets($e));
 			$inProcess = false;
 		}
 		$result = $pattern;
@@ -795,11 +566,30 @@ function rm_sprintf($pattern) {
 }
 
 /**
+ * 2015-11-22
+ * @param string|string[]|Phrase|Phrase[] $text
+ * @return string|string[]
+ */
+function df_quote_double($text) {return df_t()->quote($text, Text::QUOTE__DOUBLE);}
+
+/**
+ * @param string|string[]|Phrase|Phrase[] $text
+ * @return string|string[]
+ */
+function df_quote_russian($text) {return df_t()->quote($text, Text::QUOTE__RUSSIAN);}
+
+/**
+ * @param string|string[]|Phrase|Phrase[] $text
+ * @return string|string[]
+ */
+function df_quote_single($text) {return df_t()->quote($text, Text::QUOTE__SINGLE);}
+
+/**
  * @param string|mixed[] $pattern
  * @return string
- * @throws Df_Core_Exception
+ * @throws \Exception
  */
-function rm_sprintf_strict($pattern) {
+function df_sprintf_strict($pattern) {
 	/** @var mixed[] $arguments */
 	if (is_array($pattern)) {
 		$arguments = $pattern;
@@ -823,13 +613,12 @@ function rm_sprintf_strict($pattern) {
 				$inProcess = true;
 				df_error(
 					'При выполнении sprintf произошёл сбой «{message}».'
-					. "\nШаблон: {pattern}."
+					. "\nШаблон: {$pattern}."
 					. "\nПараметры:\n{params}."
-					,array(
-						'{message}' => rm_ets($e)
-						,'{pattern}' => $pattern
+					,[
+						'{message}' => df_ets($e)
 						,'{params}' => print_r(df_tail($arguments), true)
-					)
+					]
 				);
 				$inProcess = false;
 			}
@@ -844,9 +633,9 @@ function rm_sprintf_strict($pattern) {
  * @return bool
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
- * @see rm_ends_with()
+ * @see df_ends_with()
  */
-function rm_starts_with($haystack, $needle) {
+function df_starts_with($haystack, $needle) {
 	/**
 	 * Утверждают, что код ниже работает быстрее, чем
 	 * return 0 === mb_strpos($haystack, $needle);
@@ -858,53 +647,267 @@ function rm_starts_with($haystack, $needle) {
 }
 
 /**
+ * 2016-05-22
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_strtolower(...$args) {return df_call_a(function($s) {
+	return mb_strtolower($s);
+}, $args);}
+
+/**
+ * 2016-05-19
+ * @see df_lcfirst
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_strtoupper(...$args) {return df_call_a(function($s) {
+	return mb_strtoupper($s);
+}, $args);}
+
+/**
+ * Иногда я для разработки использую заплатку ядра для xDebug —
+ * отключаю set_error_handler для режима разработчика.
+ *
+ * Так вот, xDebug при обработке фатальных сбоев (в том числе и E_RECOVERABLE_ERROR),
+ * выводит на экран диагностическое сообщение, и после этого останавливает работу интерпретатора.
+ *
+ * Конечно, если у нас сбой типов E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING,
+ * E_COMPILE_ERROR, E_COMPILE_WARNING, то и set_error_handler не поможет
+ * (не обрабатывает эти типы сбоев, согласно официальной документации PHP).
+ *
+ * Однако сбои типа E_RECOVERABLE_ERROR обработик сбоев Magento,
+ * установленный посредством set_error_handler, переводит в исключительние ситуации.
+ *
+ * xDebug же при E_RECOVERABLE_ERROR останавивает работу интерпретатора, что нехорошо.
+ *
+ * Поэтому для функций, которые могут привести к E_RECOVERABLE_ERROR,
+ * пишем обёртки, которые вместо E_RECOVERABLE_ERROR возбуждают исключительную ситуацию.
+ * Одна из таких функций — df_string.
+ *
+ * @param mixed $value
+ * @return string
+ */
+function df_string($value) {
+	if (is_object($value)) {
+		/**
+		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
+		 * потому что наличие @see \Magento\Framework\DataObject::__call()
+		 * приводит к тому, что @see is_callable всегда возвращает true.
+		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
+		 * не гарантирует публичную доступность метода:
+		 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
+		 * потому что он имеет доступность private или protected.
+		 * Пока эта проблема никак не решена.
+		 */
+		if (!method_exists($value, '__toString')) {
+			df_error(
+				'Программист ошибочно пытается трактовать объект класса %s как строку.'
+				,get_class($value)
+			);
+		}
+	}
+	else if (is_array($value)) {
+		df_error('Программист ошибочно пытается трактовать массив как строку.');
+	}
+	return strval($value);
+}
+
+/**
  * В настоящее время эта фукция не успользуется и осталасть только ради информации.
  * 2015-03-03
  * Раньше алгоритм был таким:
- 	 strtr($string, array_fill_keys($wordsToRemove, ''))
+ 	 strtr($s, array_fill_keys($wordsToRemove, ''))
  * Он корректен, но новый алгоритм быстрее, потому что не требует вызова нестандартных функций.
  * http://php.net/str_replace
  * «If replace has fewer values than search,
  * then an empty string is used for the rest of replacement values.»
  * http://3v4l.org/9qvC4
- * @param string $string
+ * @param string $s
  * @param string|string[] $wordsToRemove
  * @return string
  */
-function rm_string_clean($string, $wordsToRemove) {
+function df_string_clean($s, $wordsToRemove) {
 	if (!is_array($wordsToRemove)) {
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
-		$wordsToRemove = df_tail($arguments);
+		$wordsToRemove = df_tail(func_get_args());
 	}
-	return str_replace($wordsToRemove, null, $string);
+	return str_replace($wordsToRemove, null, $s);
 }
 
 /**
- * @param string $string
+ * @param mixed $value
+ * @return string
+ */
+function df_string_debug($value) {
+	/** @var string $result */
+	$result = '';
+	if (is_object($value)) {
+		/**
+		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
+		 * потому что наличие @see \Magento\Framework\DataObject::__call()
+		 * приводит к тому, что @see is_callable всегда возвращает true.
+		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
+		 * не гарантирует публичную доступность метода:
+		 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
+		 * потому что он имеет доступность private или protected.
+		 * Пока эта проблема никак не решена.
+		 */
+		if (!method_exists($value, '__toString')) {
+			$result = get_class($value);
+		}
+	}
+	else if (is_array($value)) {
+		$result = sprintf('<массив из %d элементов>', count($value));
+	}
+	else if (is_bool($value)) {
+		$result = $value ? 'логическое <да>' : 'логическое <нет>';
+	}
+	else {
+		$result = strval($value);
+	}
+	return $result;
+}
+
+/**
+ * @param string $s
  * @return array
  * http://us3.php.net/manual/en/function.str-split.php#107658
  */
-function rm_string_split($string) {return preg_split("//u", $string, -1, PREG_SPLIT_NO_EMPTY);}
+function df_string_split($s) {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
 
 /**
- * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
- * @param string|string[]|array(string => string) $string
+ * @param $s1
+ * @param $s2
+ * @return bool
+ */
+function df_strings_are_equal_ci($s1, $s2) {
+	return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));
+}
+
+/** @return Text */
+function df_t() {return Text::s();}
+
+/**
+ * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
-function rm_ucfirst($string) {
+function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}
+
+/**
+ * @param string $text
+ * @return string
+ */
+function df_tab_multiline($text) {return df_cc_n(df_tab(df_explode_n($text)));}
+
+/**
+ * Обратите внимание, что иногда вместо данной функции надо применять @see trim().
+ * Например, @see df_trim() не умеет отсекать нулевые байты,
+ * которые могут образовываться на конце строки
+ * в результате шифрации, передачи по сети прямо в двоичном формате, и затем обратной дешифрации
+ * посредством @see Varien_Crypt_Mcrypt.
+ * @see Df_Core_Model_RemoteControl_Coder::decode()
+ * @see Df_Core_Model_RemoteControl_Coder::encode()
+ * @param string|string[] $s
+ * @param string $charlist [optional]
+ * @return string|string[]
+ */
+function df_trim($s, $charlist = null) {return df_t()->trim($s, $charlist);}
+
+/**
+ * Отсекает у строки $haystack подстроку $needle,
+ * если она встречается в начале или в конце строки $haystack
+ * @param string $haystack
+ * @param string $needle
+ * @return string
+ */
+function df_trim_text($haystack, $needle) {
+	return df_trim_text_left(df_trim_text_right($haystack, $needle), $needle);
+}
+
+/**
+ * Отсекает у строки $haystack заданное начало $needle
+ * @param string $haystack
+ * @param string $needle
+ * @return string
+ */
+function df_trim_text_left($haystack, $needle) {
+	/** @var int $length */
+	$length = mb_strlen($needle);
+	/** @see df_starts_with() */
 	return
-		is_array($string)
-		? array_map(__FUNCTION__, $string)
-		: mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1)
+		($needle === mb_substr($haystack, 0, $length))
+		? mb_substr($haystack, $length)
+		: $haystack
 	;
 }
 
 /**
- * @param int|null $length [optional]
+ * Отсекает у строки $haystack заданное окончание $needle
+ * @param string $haystack
+ * @param string $needle
  * @return string
  */
-function rm_uniqid($length = null) {
+function df_trim_text_right($haystack, $needle) {
+	/** @var int $length */
+	$length = mb_strlen($needle);
+	/** @see df_ends_with() */
+	return
+		(0 !== $length) && ($needle === mb_substr($haystack, -$length))
+		? mb_substr($haystack, 0, -$length)
+		: $haystack
+	;
+}
+
+/**
+ * @param string $s
+ * @param string $charlist [optional]
+ * @return string
+ */
+function df_trim_left($s, $charlist = null) {
+	// Пусть пока будет так.
+	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
+	return ltrim($s, $charlist);
+}
+
+/**
+ * @param string $s
+ * @param string $charlist [optional]
+ * @return string
+ */
+function df_trim_right($s, $charlist = null) {
+	// Пусть пока будет так.
+	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
+	return rtrim($s, $charlist);
+}
+
+/**
+ * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
+ * @see df_lcfirst
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_ucfirst(...$args) {return df_call_a(function($s) {
+	return mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1);
+}, $args);}
+
+/**
+ * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
+ * http://php.net/manual/function.mb-convert-case.php
+ * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
+ * @see df_ucfirst
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_ucwords(...$args) {return df_call_a(function($s) {
+	return mb_convert_case($s, MB_CASE_TITLE, 'UTF-8');
+}, $args);}
+
+/**
+ * @param int|null $length [optional]
+ * @param string $prefix [optional]
+ * @return string
+ */
+function df_uid($length = null, $prefix = '') {
 	/** @var string $result */
 	/**
 	 * Важно использовать $more_entropy = true,
@@ -913,7 +916,15 @@ function rm_uniqid($length = null) {
 	 * uniqid будет иногда возвращать одинаковые значения
 	 * при некоторых двух последовательных вызовах.
 	 */
-	$result = uniqid($prefix = '', $more_entropy = true);
+	$result = uniqid($prefix, $more_entropy = true);
+	/**
+	 * 2016-07-05
+	 * При параметре $more_entropy = true значение будет содержать точку,
+	 * например: «4b340550242239.64159797».
+	 * Решил сегодня удалять эту точку из-за платёжной системы allPay,
+	 * которая требует, чтобы идентификаторы содержали только цифры и латинские буквы.
+	 */
+	$result = str_replace('.', '', $result);
 	if (!is_null($length)) {
 		/**
 		 * Обратите внимание, что уникальным является именно окончание uniqid, а не начало.
@@ -924,5 +935,32 @@ function rm_uniqid($length = null) {
 		 */
 		$result = substr($result, -$length);
 	}
-	return $result;
+	return $prefix . $result;
 }
+
+/**
+ * 2016-08-10
+ * REFUND_ISSUED => RefundIssued
+ * refund_issuED => RefundIssued
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
+	return implode(df_ucfirst(explode('_', mb_strtolower($s))));
+}, $args);}
+
+/**
+ * 2016-03-09
+ * Замещает переменные в тексте.
+ * 2016-08-07
+ * Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t()
+ * @param string $s
+ * @param array(string => string) $variables
+ * @param string|callable|null $onUnknown
+ * @return string
+ */
+function df_var($s, array $variables, $onUnknown = null) {return
+	preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {return
+		dfa($variables, dfa($m, 1, ''), $onUnknown)
+	;}, $s)
+;}

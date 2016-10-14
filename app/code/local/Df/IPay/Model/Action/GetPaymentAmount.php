@@ -5,7 +5,7 @@ class Df_IPay_Model_Action_GetPaymentAmount extends Df_IPay_Model_Action_Abstrac
 	 * @return string
 	 */
 	protected function getRequestAsXml_Test() {
-		return rm_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
+		return df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>ServiceInfo</RequestType>

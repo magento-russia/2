@@ -101,7 +101,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 		$pointsAmount = (int)$pointsAmount;
 		/** @var string $result */
 		$result =
-			rm_sprintf(
+			df_sprintf(
 				'%d %s'
 				,$pointsAmount
 				,df_t()->getNounForm($pointsAmount, array('балл', 'балла', 'баллов'))
@@ -196,10 +196,10 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 		/** @var string $result */
 		$result = $this->getPointsAmountAsText($points);
 		if (!is_null($amount)) {
-			$result = rm_sprintf(
+			$result = df_sprintf(
 				'%s (%s)'
 				,$result
-				,rm_sprintf($amountFormat, $this->formatAmount($amount, true, $storeId))
+				,df_sprintf($amountFormat, $this->formatAmount($amount, true, $storeId))
 			);
 		}
 		return $result;
@@ -275,7 +275,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 		$result =
 				is_null($currencyCode)
 			?
-				rm_sprintf(
+				df_sprintf(
 					'%.0F %s'
 					,$currencyAmount
 					,df_t()->getNounForm(rm_floor($currencyAmount), array(

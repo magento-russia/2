@@ -20,7 +20,7 @@ class Df_Zf_Log_Formatter_Benchmark extends Zend_Log_Formatter_Simple {
 		$result =
 			$isRaw
 			? $message . "\n"
-			: rm_sprintf(
+			: df_sprintf(
 				"%s [%s]: %s\n"
 				, df_dts(Zend_Date::now(), 'HH:mm:ss')
 				, $this->formatTime($timeCurrent - $timePrev)
@@ -36,7 +36,7 @@ class Df_Zf_Log_Formatter_Benchmark extends Zend_Log_Formatter_Simple {
 	 * @return string
 	 */
 	private function formatTime($timeAsFloatInSeconds) {
-		return rm_sprintf('%.3f', $timeAsFloatInSeconds);
+		return df_sprintf('%.3f', $timeAsFloatInSeconds);
 	}
 
 	/**

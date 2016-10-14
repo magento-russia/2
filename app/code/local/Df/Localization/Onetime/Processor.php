@@ -42,7 +42,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 			 * будут отображаться в общем списке
 			 * выше русификаторов стандартных оформительских тем.
 			 */
-			if (rm_contains($this->getDictionaryLocalPath(), 'Magento/')) {
+			if (df_contains($this->getDictionaryLocalPath(), 'Magento/')) {
 				$result += 8;
 			}
 			$this->{__METHOD__} = $result;
@@ -94,14 +94,14 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 			 * для расчёта папки темы.
 			 */
 			/** @var string $packageDir */
-			$packageDir = df_concat_path(Mage::getBaseDir('design'), 'frontend', $this->getPackage());
+			$packageDir = df_cc_path(Mage::getBaseDir('design'), 'frontend', $this->getPackage());
 			$this->{__METHOD__} =
 					is_dir($packageDir)
 				&&
 					(
 							!$this->getTheme()
 						||
-							is_dir(df_concat_path($packageDir, $this->getTheme()))
+							is_dir(df_cc_path($packageDir, $this->getTheme()))
 					)
 			;
 		}
@@ -226,7 +226,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 				. "\nВам нужно предоставить эти интерпретатору PHP,"
 				. " а затем запустить русификатор заново."
 				. "\nСбои перечислены ниже:\n"
-				. df_concat_n($messages)
+				. df_cc_n($messages)
 			));
 		}
 	}

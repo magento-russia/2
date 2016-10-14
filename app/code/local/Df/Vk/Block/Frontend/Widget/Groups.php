@@ -5,8 +5,8 @@ class Df_Vk_Block_Frontend_Widget_Groups extends Df_Vk_Block_Frontend_Widget {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				rm_nat(
-					rm_preg_match_int(
-						rm_sprintf(
+					df_preg_match_int(
+						df_sprintf(
 							'#%s\([^{)]*{[^}]*}, (\d+)#m'
 							,preg_quote($this->getJavaScriptObjectName())
 						)

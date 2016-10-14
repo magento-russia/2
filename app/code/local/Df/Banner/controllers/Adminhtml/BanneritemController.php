@@ -145,7 +145,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				}
 			}
 
-			if (isset($data['banner_order'])){ $data['banner_order']= rm_int($data['banner_order']); }
+			if (isset($data['banner_order'])){ $data['banner_order']= df_int($data['banner_order']); }
 
 			if (isset($_FILES['thumb_image']['name']) && $_FILES['thumb_image']['name'] != '') {
 				try {	

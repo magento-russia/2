@@ -81,7 +81,7 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 		$i = 1;
 		while (1) {
 			$result =
-				df_concat_path(
+				df_cc_path(
 					$dirname, df_ccc('.', $this->generateOrderedKey($key, $i++), $extension)
 				)
 			;

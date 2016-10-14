@@ -1,7 +1,7 @@
 <?php
 class Df_YandexMarket_Model_Categories extends Df_Core_Model {
 	/** @return string */
-	public function getNodesAsText() {return df_concat_n($this->getNodesAsTextArray());}
+	public function getNodesAsText() {return df_cc_n($this->getNodesAsTextArray());}
 
 	/** @return string[] */
 	public function getNodesAsTextArray() {

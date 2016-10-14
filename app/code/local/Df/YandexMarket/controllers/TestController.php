@@ -6,7 +6,7 @@ class Df_YandexMarket_TestController extends Mage_Core_Controller_Front_Action {
 			/** @var string $pattern */
 			$pattern = 'La scala ODB волокно бамбука 100% Евро %s';
 			/** @var string $result */
-			$result = rm_sprintf($pattern, '220х140');
+			$result = df_sprintf($pattern, '220х140');
 			$this
 				->getResponse()
 				->setHeader('Content-Type', 'text/plain; charset=UTF-8')
@@ -46,7 +46,7 @@ class Df_YandexMarket_TestController extends Mage_Core_Controller_Front_Action {
 			}
 			$this->getResponse()
 				->setHeader('Content-Type', 'text/plain; charset=UTF-8')
-				->setBody(rm_print_params($options))
+				->setBody(df_print_params($options))
 			;
 		}
 		catch (Exception $e) {

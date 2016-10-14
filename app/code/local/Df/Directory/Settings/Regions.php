@@ -25,7 +25,7 @@ class Df_Directory_Settings_Regions extends Df_Core_Model_Settings {
 	 */
 	private function getConfigKeyFull($configKeyShort) {
 		df_param_string($configKeyShort, 0);
-		return df_concat_xpath('df_directory', $this->getConfigKeyCountryPart(), $configKeyShort);
+		return df_cc_path('df_directory', $this->getConfigKeyCountryPart(), $configKeyShort);
 	}
 
 	/**
@@ -33,7 +33,7 @@ class Df_Directory_Settings_Regions extends Df_Core_Model_Settings {
 	 * @return int
 	 */
 	private function getPriorityRegionIdAtPosition($position) {
-		return rm_int(Mage::getStoreConfig($this->getConfigKeyFull('position_' . $position)));
+		return df_int(Mage::getStoreConfig($this->getConfigKeyFull('position_' . $position)));
 	}
 
 	/**

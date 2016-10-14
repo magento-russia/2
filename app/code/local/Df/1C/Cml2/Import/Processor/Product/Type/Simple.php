@@ -36,7 +36,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Simple
 					. "\nЗначения всех импортировавшихся свойств:\n%s"
 					, $name
 					, $e->getFieldName()
-					, df_tab_multiline(rm_print_params($e->getRow()->getAsArray()))
+					, df_tab_multiline(df_print_params($e->getRow()->getAsArray()))
 				);
 			}
 			catch (Exception $e) {

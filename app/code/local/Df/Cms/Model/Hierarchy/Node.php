@@ -103,8 +103,8 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 				,'page_id' => $pageId
 				,'label' => !$pageId ? $v['label'] : null
 				,'identifier' => !$pageId ? $v['identifier'] : null
-				,'level' => rm_int($v['level'])
-				,'sort_order' => rm_int($v['sort_order'])
+				,'level' => df_int($v['level'])
+				,'sort_order' => df_int($v['sort_order'])
 				,'request_url' => $v['identifier']
 			);
 			$nodes[$parentNodeId][$v['node_id']] =

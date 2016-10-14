@@ -88,7 +88,7 @@ function rm_ruri() {static $r; return $r ? $r : $r = Mage::app()->getRequest()->
  * @param string $needle
  * @return bool
  */
-function rm_ruri_contains($needle) {return rm_contains(rm_ruri(), $needle);}
+function rm_ruri_contains($needle) {return df_contains(rm_ruri(), $needle);}
 
 /**
  * @used-by rm_controller()

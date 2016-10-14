@@ -36,7 +36,7 @@ class Df_Core_Model_Format_Html_List extends Df_Core_Model {
 
 	/** @return string */
 	private function renderItems() {
-		return df_concat_n(array_map(array($this, 'renderItem'), $this->getItems()));
+		return df_cc_n(array_map(array($this, 'renderItem'), $this->getItems()));
 	}
 
 	/**

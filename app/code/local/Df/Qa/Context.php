@@ -57,9 +57,9 @@ class Df_Qa_Context {
 			foreach (self::$_items as $label => $item) {
 				/** @var string $label */
 				/** @var array(string => string|int) $item */
-				$rows[]= rm_pad($label . ':', $padSize) . $item[self::$VALUE];
+				$rows[]= df_pad($label . ':', $padSize) . $item[self::$VALUE];
 			}
-			$result = df_concat_n($rows);
+			$result = df_cc_n($rows);
 		}
 		return $result;
 	}

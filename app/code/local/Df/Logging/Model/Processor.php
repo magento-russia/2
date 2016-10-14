@@ -134,7 +134,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			,'user_id' => $userId
 			,'is_success' => empty($errors)
 			,'fullaction' => $this->_initAction
-			,'error_message' => df_concat_n(array_map(
+			,'error_message' => df_cc_n(array_map(
 				create_function('$a', 'return $a->toString();')
 				,$errors
 			))
@@ -238,7 +238,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			$className = Mage::getConfig()->getModelClassName(str_replace('__', '/', $expect));
 			if ($model instanceof $className){
 				/**
-				 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+				 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 				 * потому что в данном случае нам не нужна поддержка UTF-8.
 				 */
 				$classMap = $this->_getCallbackFunction(

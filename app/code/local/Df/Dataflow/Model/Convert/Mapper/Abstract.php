@@ -87,7 +87,7 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 		if (is_null($result)) {
 			df_assert(
 				!$isRequired
-				,rm_sprintf(
+				,df_sprintf(
 					'В строке импортируемых данных необходимо заполнить поле «%s»'
 					,$fieldName
 				)
@@ -156,7 +156,7 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 	 */
 	protected function createRowModel($importOrExport) {
 		/**
-		 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+		 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 		 * потому что в данном случае нам не нужна поддержка UTF-8.
 		 */
 		return rm_ic(
@@ -200,7 +200,7 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 	 * @return string
 	 */
 	private function convertBatchTableTypeToParamName($souceOrDestination) {
-		return rm_sprintf(self::DF_TABLE_TYPE_TEMPLATE, $souceOrDestination);
+		return df_sprintf(self::DF_TABLE_TYPE_TEMPLATE, $souceOrDestination);
 	}
 
 	const DF_TABLE_TYPE_TEMPLATE = 'df-table-%s';

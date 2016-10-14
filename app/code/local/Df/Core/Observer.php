@@ -208,7 +208,7 @@ class Df_Core_Observer {
 			/** @var bool $domainIsBlacklisted */
 			$domainIsBlacklisted =
 				in_array(rm_controller()->getRequest()->getHttpHost(), $blackDomains)
-				|| rm_contains(rm_controller()->getRequest()->getHttpHost(), 'garno.eu')
+				|| df_contains(rm_controller()->getRequest()->getHttpHost(), 'garno.eu')
 			;
 			if ($domainIsBlacklisted) {
 				$needPunish = true;

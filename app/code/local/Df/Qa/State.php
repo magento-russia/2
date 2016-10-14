@@ -24,7 +24,7 @@ class Df_Qa_State extends Df_Core_Model {
 				if ($this[self::$P__SHOW_CONTEXT] && $this->context()) {
 					$resultA[]= self::param(array('Контекст', "\n" . $this->context()));
 				}
-				$this->{__METHOD__} = df_concat_n($resultA);
+				$this->{__METHOD__} = df_cc_n($resultA);
 			}
 			catch (Exception $e) {
 				Mage::logException($e);
@@ -206,7 +206,7 @@ class Df_Qa_State extends Df_Core_Model {
 			/** @var string $label */
 			$label = $param[0];
 			/** @var string $pad */
-			$pad = rm_pad(' ', 12 - mb_strlen($label));
+			$pad = df_pad(' ', 12 - mb_strlen($label));
 			$result = "{$label}:{$pad}{$value}";
 		}
 		return $result;

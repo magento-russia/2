@@ -19,7 +19,7 @@
 		</div>
 		<script type='text/javascript'>
 			/** @type {Boolean} */
-			var enabled = <?php echo rm_bts($this->isModuleEnabled()); ?>;
+			var enabled = <?php echo df_bts($this->isModuleEnabled()); ?>;
 			document.observe('dom:loaded', function() {
 				/** @type {HTMLDivElement} */
 				var settings = $('rm.accessControl.settings');

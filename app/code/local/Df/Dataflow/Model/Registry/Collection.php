@@ -192,7 +192,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 */
 	protected function validateEntity(Mage_Core_Model_Abstract $entity) {
 		if (!$this->getValidator()->isValid($entity)) {
-			df_error(df_concat_n($this->getValidator()->getMessages()));
+			df_error(df_cc_n($this->getValidator()->getMessages()));
 		}
 	}
 

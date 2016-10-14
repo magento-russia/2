@@ -399,10 +399,10 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 		if (1 < func_num_args()) {
 			/** @var string[] $arguments */
 			$arguments = func_get_args();
-			$path = df_concat_xpath($arguments);
+			$path = df_cc_path($arguments);
 		}
 		else if (is_array($path)) {
-			$path = df_concat_xpath($path);
+			$path = df_cc_path($path);
 		}
 		df_param_string_not_empty($path, 0);
 		return parent::xpath($path);
@@ -424,10 +424,10 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 		if (1 < func_num_args()) {
 			/** @var string[] $arguments */
 			$arguments = func_get_args();
-			$path = df_concat_xpath($arguments);
+			$path = df_cc_path($arguments);
 		}
 		else if (is_array($path)) {
-			$path = df_concat_xpath($path);
+			$path = df_cc_path($path);
 		}
 		df_param_string_not_empty($path, 0);
 		/** @var Df_Core_Sxe[] $result */
@@ -505,9 +505,9 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 			 */
 			/**
 			 * Перед вызовом медленной функции @see preg_match
-			 * выполняем более быструю и простую проверку @see rm_contains
+			 * выполняем более быструю и простую проверку @see df_contains
 			 */
-			if (rm_contains($valueAsString, '[[') && rm_contains($valueAsString, ']]')) {
+			if (df_contains($valueAsString, '[[') && df_contains($valueAsString, ']]')) {
 				/** @var string $pattern */
 				$pattern = "#\[\[([\s\S]*)\]\]#mu";
 				/** @var string[] $matches */

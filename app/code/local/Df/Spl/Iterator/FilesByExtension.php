@@ -6,7 +6,7 @@ class Df_Spl_Iterator_FilesByExtension extends Df_Spl_Iterator_Directory {
 	 * @return bool
 	 */
 	protected function isValid(SplFileInfo $fileInfo) {
-		return $fileInfo->isFile() && rm_ends_with($fileInfo->getFilename(), $this->getExtension());
+		return $fileInfo->isFile() && df_ends_with($fileInfo->getFilename(), $this->getExtension());
 	}
 
 	/** @return string */
@@ -14,7 +14,7 @@ class Df_Spl_Iterator_FilesByExtension extends Df_Spl_Iterator_Directory {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			$result = $this->cfg(self::P__EXTENSION);
-			if (!rm_starts_with($result, '.')) {
+			if (!df_starts_with($result, '.')) {
 				$result = '.' . $result;
 			}
 			$this->{__METHOD__} = $result;

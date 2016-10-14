@@ -164,7 +164,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 						->toArray()
 				;
 			}
-			$row['df_custom_options'] = rm_json_prettify(Zend_Json::encode($optionsForSerialization));
+			$row['df_custom_options'] = df_json_prettify(Zend_Json::encode($optionsForSerialization));
 		}
 		return $this;
 	}

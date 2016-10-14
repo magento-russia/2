@@ -11,7 +11,7 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 		/** @var array(string => mixed) $attributes */
 		$attributes = array(
 			'id' => $this->getProduct()->getId()
-			,'available' => rm_bts($this->getProduct()->isInStock())
+			,'available' => df_bts($this->getProduct()->isInStock())
 		);
 		if ($this->hasVendorInfo()) {
 			$attributes['type'] = 'vendor.model';
@@ -179,9 +179,9 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 		}
 		if ($this->getSettings()->general()->hasPointsOfSale()) {
 			$result = array_merge($result, array(
-				'store' => rm_bts($this->getProduct()->isSalable())
-				,'pickup' => rm_bts($this->getSettings()->general()->isPickupAvailable())
-				,'delivery' => rm_bts(true)
+				'store' => df_bts($this->getProduct()->isSalable())
+				,'pickup' => df_bts($this->getSettings()->general()->isPickupAvailable())
+				,'delivery' => df_bts(true)
 			));
 		}
 		if (!$this->hasVendorInfo()) {

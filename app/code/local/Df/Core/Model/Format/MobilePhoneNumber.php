@@ -13,7 +13,7 @@ class Df_Core_Model_Format_MobilePhoneNumber extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				preg_replace(
-					rm_sprintf(
+					df_sprintf(
 						'#^(%s)#'
 						,df_ccc('|'
 							,$this->getCallingCode()

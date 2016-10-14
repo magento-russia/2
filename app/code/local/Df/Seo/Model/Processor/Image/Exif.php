@@ -48,7 +48,7 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 	/** @return void */
 	private function addTag_userComment() {
 		$this->getPelIfdExif()->addEntry(
-			new PelEntryUserComment(rm_1251_to(html_entity_decode(strip_tags(
+			new PelEntryUserComment(df_1251_to(html_entity_decode(strip_tags(
 				$this->getProduct()->getDescription()
 			))))
 		);

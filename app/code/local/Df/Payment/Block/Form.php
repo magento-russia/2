@@ -31,7 +31,7 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @return string
 	 */
 	public function getInfoData($field) {
-		return rm_e($this->getMethod()->getInfoInstance()->getData($field));
+		return df_e($this->getMethod()->getInfoInstance()->getData($field));
 	}
 
 	/**

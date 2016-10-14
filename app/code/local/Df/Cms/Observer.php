@@ -328,7 +328,7 @@ class Df_Cms_Observer {
 						if (rm_bool(dfa($row, 'current_page'))) {
 							$currentPageIsOrphan = false;
 							/** @var int $sortOrder */
-							$sortOrder = rm_int(dfa($row, 'sort_order'));
+							$sortOrder = df_int(dfa($row, 'sort_order'));
 							/** @var int $parentNodeId */
 							$parentNodeId = rm_nat0(dfa($row, 'parent_node_id'));
 							$currentPageIsRoot = (0 === $parentNodeId);
@@ -403,13 +403,13 @@ class Df_Cms_Observer {
 							)
 						;
 						/** @var int $sortOrder */
-						$sortOrder = rm_int(dfa($row, 'sort_order'));
+						$sortOrder = df_int(dfa($row, 'sort_order'));
 						if ($markedAsParent) {
 							$appendToNodes[$nodeId] = 0;
 						}
 
 						if (isset($appendToNodes[$parentNodeId])) {
-							if (rm_contains($nodeId, '_')) {
+							if (df_contains($nodeId, '_')) {
 								/**
 								 * Начальным символом подчёркивания обозначаются новые узлы дерева, * которые образуются при перемещении администратором страницы
 								 * в иерархии (при этом сама страница может быть не новой)

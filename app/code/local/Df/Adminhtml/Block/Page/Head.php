@@ -45,7 +45,7 @@ class Df_Adminhtml_Block_Page_Head extends Mage_Adminhtml_Block_Page_Head {
 	 * filenames, rather than render urls.
 	 * The merger callback is responsible for checking whether files exist, merging them and giving result URL
 	 *
-	 * @param string $format - HTML element format for rm_sprintf('<element src="%s"%s />', $src, $params)
+	 * @param string $format - HTML element format for df_sprintf('<element src="%s"%s />', $src, $params)
 	 * @param array $staticItems - array of relative names of static items to be grabbed from js/ folder
 	 * @param array $skinItems - array of relative names of skin items to be found in skins according to design config
 	 * @param callback $mergeCallback

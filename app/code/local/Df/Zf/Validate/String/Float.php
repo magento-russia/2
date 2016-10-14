@@ -18,7 +18,7 @@ class Df_Zf_Validate_String_Float extends Df_Zf_Validate_String_Parser {
 		 * поэтому функция @see rm_float()
 		 * сконвертирует строку «368.» в вещественное число без проблем.
 		 */
-		if (is_string($value) && rm_ends_with($value, '.') && ('.' !== $value)) {
+		if (is_string($value) && df_ends_with($value, '.') && ('.' !== $value)) {
 			$value .= '0';
 		}
 		return

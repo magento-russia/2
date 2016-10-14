@@ -281,7 +281,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 			"При взаимодействии с платёжным шлюзом призошёл сбой.\n%s"
 			."\nПараметры запроса:\n%s"
 			,rm_ets($e)
-			,rm_print_params($this->getRequest()->getParams())
+			,df_print_params($this->getRequest()->getParams())
 		);
 		// В низкоуровневый журнал исключительную ситуацию записываем
 		// только если это сбой в программном коде.
@@ -308,7 +308,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		if (is_string($message)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 		$this->getMethod()->logFailureHighLevel($message);
 	}
@@ -321,7 +321,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		if (is_string($message)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 		$this->getMethod()->logFailureLowLevel($message);
 	}
@@ -417,7 +417,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 				$this->order()->setState(
 					Mage_Sales_Model_Order::STATE_PROCESSING
 					,Mage_Sales_Model_Order::STATE_PROCESSING
-					,rm_sprintf(
+					,df_sprintf(
 						$this->getMessage(self::CONFIG_KEY__MESSAGE__SUCCESS), $invoice->getIncrementId()
 					)
 					,true
@@ -542,7 +542,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 					."\nЗначения всех параметров:"
 					."\n%s"
 					,$this->getRequestKeyOrderIncrementId()
-					,rm_print_params($this->getRequest()->getParams())
+					,df_print_params($this->getRequest()->getParams())
 				);
 			}
 			$this->{__METHOD__} = $result;

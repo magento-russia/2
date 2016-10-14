@@ -4,9 +4,9 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 	public function indexAction() {
 		try {
 			/** @var string $filePath */
-			$filePath = df_concat_path(Mage::getBaseDir('var'), 'log');
+			$filePath = df_cc_path(Mage::getBaseDir('var'), 'log');
 			/** @var string $fileContents */
-			$fileContents = file_get_contents(df_concat_path($filePath, 'countries.csv'));
+			$fileContents = file_get_contents(df_cc_path($filePath, 'countries.csv'));
 			/** @var string[] $fileContentsAsRows */
 			$fileContentsAsRows = df_explode_n($fileContents);
 			/** @var array(string => array(string => string)) $fileContentsAsAssocArray */
@@ -34,7 +34,7 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 				);
 			}
 			$resultAsJson = json_encode($fileContentsAsAssocArray, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT |JSON_FORCE_OBJECT);
-			rm_file_put_contents(df_concat_path($filePath, 'countries.json'), $resultAsJson);
+			rm_file_put_contents(df_cc_path($filePath, 'countries.json'), $resultAsJson);
 			$this->getResponse()->setBody('OK');
 		}
 		catch (Exception $e) {

@@ -7,7 +7,7 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 	public function getPosition() {return $this->getNodeMenuParam('position');}
 
 	/** @return int */
-	public function getVerticalOrdering() {return rm_int($this->getNodeMenuParam('vertical_ordering'));}
+	public function getVerticalOrdering() {return df_int($this->getNodeMenuParam('vertical_ordering'));}
 
 	/** @return bool */
 	public function isApplicableToTheCurrentPage() {

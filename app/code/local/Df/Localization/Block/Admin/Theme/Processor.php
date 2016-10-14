@@ -39,7 +39,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	protected function getProcessor() {return $this->cfg(self::P__PROCESSOR);}
 
 	/** @return string */
-	protected function getTitle() {return rm_e($this->getProcessor()->getTitle());}
+	protected function getTitle() {return df_e($this->getProcessor()->getTitle());}
 
 	/** @return array(array(string => string)) */
 	private function getLinksParameters() {
@@ -87,7 +87,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	 * @return string
 	 */
 	public static function getBlockClass(Df_Localization_Onetime_Processor $processor) {
-		return __CLASS__ . '_' . rm_ucfirst($processor->getType());
+		return __CLASS__ . '_' . df_ucfirst($processor->getType());
 	}
 
 	/**
@@ -121,7 +121,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 			}
 		}
 		/** @var string $elementId */
-		$elementId = 'dropdown-' . rm_uniqid(5);
+		$elementId = 'dropdown-' . df_uid(5);
 		/** разметка для плагина Dropdown: http://labs.abeautifulsite.net/jquery-dropdown/ */
 		return
 			!is_array($href)

@@ -110,7 +110,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 		if (
 				$this->getExpectedEventPrefix()
 			&&
-				!rm_starts_with($eventType, $this->getExpectedEventPrefix())
+				!df_starts_with($eventType, $this->getExpectedEventPrefix())
 		) {
 			df_error(
 				'Объект класса «%s» ожидает событие с приставкой «%s», но получил событие «%s».'
@@ -122,7 +122,7 @@ abstract class Df_Core_Model_Event extends Df_Core_Model {
 		if (
 				$this->getExpectedEventSuffix()
 			&&
-				!rm_ends_with($eventType, $this->getExpectedEventSuffix())
+				!df_ends_with($eventType, $this->getExpectedEventSuffix())
 		) {
 			df_error(
 				'Объект класса «%s» ожидает событие с окончанием «%s», но получил событие «%s».'

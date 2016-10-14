@@ -75,7 +75,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 			!is_string($data)
 			? parent::escapeHtml($data, $allowedTags)
 			: (
-				rm_starts_with($data, self::TAG__NO_ESCAPE)
+				df_starts_with($data, self::TAG__NO_ESCAPE)
 				? mb_substr($data, $tagLength)
 				: parent::escapeHtml($data, $allowedTags)
 			)

@@ -45,7 +45,7 @@ class Df_Core_Helper_Url {
 	 * @return string
 	 */
 	private function processParts($function, $url) {
-		return df_concat_url(array_map($function, explode('/', $url)));
+		return df_cc_path(array_map($function, explode('/', $url)));
 	}
 
 	/**

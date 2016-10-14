@@ -31,7 +31,7 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 				 * Может быть отрицательным числом
 				 * @var int $ordering
 				 */
-				$ordering = rm_int(dfa($service, 'ordering', 0));
+				$ordering = df_int(dfa($service, 'ordering', 0));
 				$result[$ordering]= rm_option($code, $name);
 			}
 			// Вот ради этого мы перекрыли родительский класс

@@ -74,7 +74,7 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 		$type, Mage_Sales_Model_Order_Payment $payment, $amount = 0.0
 	) {
 		/**
-		 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+		 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 		 * потому что в данном случае нам не нужна поддержка UTF-8.
 		 * @var string $class
 		 */

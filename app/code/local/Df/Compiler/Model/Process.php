@@ -130,9 +130,9 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 			$content = file_get_contents($file);
 			// Не компилируем закодированные посредством ionCube файлы
 			if (
-					rm_contains($content, 'ionCube Loader')
+					df_contains($content, 'ionCube Loader')
 				&&
-					rm_contains($content, "ioncube\_loader\_")
+					df_contains($content, "ioncube\_loader\_")
 			) {
 				continue;
 			}
@@ -144,7 +144,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 			$content = df_t()->bomRemove($content);
 			df_assert_string($content);
 			if ($content !== $contentBeforeRemovingBom) {
-				Mage::log(rm_sprintf(
+				Mage::log(df_sprintf(
 					'Российская сборка Magento предотвратила сбой компиляции,'
 					. ' удалив недопустимый символ BOM из файла %s.'
 					, $file
@@ -153,7 +153,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 			$content = ltrim($content, '<?php');
 			$content = rtrim($content, "\n\r\t?>");
 			$classesSource.=
-				rm_sprintf(
+				df_sprintf(
 					"\n\nif (!class_exists('%s', false) && !(interface_exists('%s', false))) {\n%s\n}"
 					,$className
 					,$className

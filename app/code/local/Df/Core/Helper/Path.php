@@ -80,7 +80,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 		$cleaned = $this->clean($path);
 		/** @var string $base */
 		$base = BP . DS;
-		return rm_starts_with($cleaned, $base) ? str_replace($base, '', $cleaned) : $cleaned;
+		return df_starts_with($cleaned, $base) ? str_replace($base, '', $cleaned) : $cleaned;
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 		}
 		catch (Exception $e) {
 			/** @var bool $isPermissionDenied */
-			$isPermissionDenied = rm_contains($e->getMessage(), 'Permission denied');
+			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
 				? "Операционная система запретила интерпретатору PHP {operation} «{path}»."
@@ -168,7 +168,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 		}
 		catch (Exception $e) {
 			/** @var bool $isPermissionDenied */
-			$isPermissionDenied = rm_contains($e->getMessage(), 'Permission denied');
+			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
 				? 'Операционная система запретила интерпретатору PHP создание папки «{dir}».'

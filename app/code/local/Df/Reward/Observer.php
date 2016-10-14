@@ -520,7 +520,7 @@ class Df_Reward_Observer {
 			/** @var int[] $ruleIds */
 			$ruleIds = dfa_unique_fast(df_csv_parse_int($order->getAppliedRuleIds()));
 			$data = Df_Reward_Model_Resource_Reward::s()->getRewardSalesrule($ruleIds);
-			$pointsDelta = array_sum(rm_int(array_column($data, 'points_delta')));
+			$pointsDelta = array_sum(df_int(array_column($data, 'points_delta')));
 			if ($pointsDelta) {
 				$order->setRewardSalesrulePoints($pointsDelta);
 			}
@@ -698,7 +698,7 @@ class Df_Reward_Observer {
 		try {
 			if (df_h()->reward()->isEnabledOnFront()) {
 				// чтобы коллекция не ругалась на элемент без идентификатора
-				$o['id'] = rm_uniqid();
+				$o['id'] = df_uid();
 				df_h()->reward()->getSalesRuleApplications()->addItem($o);
 			}
 		}

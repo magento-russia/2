@@ -13,7 +13,7 @@ class Df_Assist_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	protected function getResponseTextForError(Exception $e) {
-		return df_concat_n(
+		return df_cc_n(
 			df_output()->getXmlHeader()
 			,"<pushpaymentresult firstcode='1' secondcode='0'></pushpaymentresult>"
 		);
@@ -24,7 +24,7 @@ class Df_Assist_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	protected function getResponseTextForSuccess() {
-		return df_concat_n(
+		return df_cc_n(
 			df_output()->getXmlHeader()
 			,"<pushpaymentresult firstcode='0' secondcode='0'>
 				<order>
@@ -40,9 +40,9 @@ class Df_Assist_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	protected function getSignatureFromOwnCalculations() {
-		return strtoupper(md5(strtoupper(df_concat(
+		return strtoupper(md5(strtoupper(df_cc(
 			md5($this->getResponsePassword())
-			,md5(df_concat(
+			,md5(df_cc(
 				$this->getRequestValueShopId()
 				,$this->getRequestValueOrderIncrementId()
 				,$this->getRequestValuePaymentAmountAsString()

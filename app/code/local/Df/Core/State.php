@@ -137,7 +137,7 @@ class Df_Core_State {
 				/** @var string $storeCode */
 				$storeCode = rm_request('store-view');
 				if (is_null($storeCode)) {
-					$storeCode = rm_preg_match(
+					$storeCode = df_preg_match(
 						'#\/store\-view\/([^\/]+)\/#u', rm_ruri(), $needThrow = false
 					);
 				}

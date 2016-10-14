@@ -12,7 +12,7 @@ class Df_Core_Model_Fs_GetNotUsedFileName extends Df_Core_Model {
 			/** @var int $counter */
 			$counter = 1;
 			/** @var bool $hasOrderingPosition */
-			$hasOrderingPosition = rm_contains($this->getTemplate(), '{ordering}');
+			$hasOrderingPosition = df_contains($this->getTemplate(), '{ordering}');
 			while (true) {
 				/** @var string $fileName */
 				$fileName = strtr($this->getTemplate(), array_merge(

@@ -3,7 +3,7 @@
 	foreach ($this->getProcessors() as $processor) {
 		/** @var Df_Localization_Onetime_Processor $processor */
 		/** @var string $title */
-		$title = rm_e($processor->getTitle());
+		$title = df_e($processor->getTitle());
 		/** @var string $link */
 		$link = $processor->getLink();
 		?>

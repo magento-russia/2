@@ -40,9 +40,9 @@ class Df_Localization_Onetime_Dictionary_Config_Entry extends Df_Core_Xml_Parser
 	public function useLikeOperator() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					rm_starts_with($this->getValueOriginal(), '%')
+					df_starts_with($this->getValueOriginal(), '%')
 				||
-					rm_ends_with($this->getValueOriginal(), '%')
+					df_ends_with($this->getValueOriginal(), '%')
 			;
 		}
 		return $this->{__METHOD__};

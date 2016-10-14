@@ -60,8 +60,8 @@ function rm_fetch_col($table, $cSelect, $cCompare = null, $values = null, $disti
  * @return int[]|string[]
  */
 function rm_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	/** намеренно не используем @see rm_int() ради ускорения */
-	return rm_int_simple(rm_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
+	/** намеренно не используем @see df_int() ради ускорения */
+	return df_int_simple(rm_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
 }
 
 /**

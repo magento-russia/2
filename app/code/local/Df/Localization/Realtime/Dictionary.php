@@ -120,10 +120,10 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 			 * Добавил поддержку выражений типа <controller action='sales_transactions_*'>
 			 * 1) $trimmed === $pattern означает, что $pattern не заканчивается на *.
 			 * А учитывая, что $pattern !== $value, то _continue должна вернуть true.
-			 * 2) !rm_starts_with($value, $trimmed) означает, что $pattern заканчивается на *,
+			 * 2) !df_starts_with($value, $trimmed) означает, что $pattern заканчивается на *,
 			 * однако текст до * не совпадает с началом $value.
 			 */
-			$result = $trimmed === $pattern || !rm_starts_with($value, $trimmed);
+			$result = $trimmed === $pattern || !df_starts_with($value, $trimmed);
 		}
 		return $result;
 	}

@@ -68,7 +68,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 					foreach ($configFileBaseNames as $configFileBaseName) {
 						/** @var string $configFileBaseName */
 						$configFileName =
-							df_concat_path(
+							df_cc_path(
 								Mage::app()->getConfig()->getModuleDir('etc', $moduleName)
 								, $configFileBaseName
 							)

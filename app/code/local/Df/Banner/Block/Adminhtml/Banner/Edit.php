@@ -40,7 +40,7 @@ class Df_Banner_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Block_Widget_
 	public function getHeaderText() {
 		return
 			Mage::registry('df_banner_data') && Mage::registry('df_banner_data')->getId()
-			? sprintf('Настройка щита «%s»', rm_e(Mage::registry('df_banner_data')->getTitle()))
+			? sprintf('Настройка щита «%s»', df_e(Mage::registry('df_banner_data')->getTitle()))
 			: 'Повесить новый щит...'
 		;
 	}

@@ -10,7 +10,7 @@ function rm_config_a($path) {
 	if ($pathIsArray || (1 < func_num_args())) {
 		/** @var string[] $pathA */
 		$pathA = $pathIsArray ? $path : func_get_args();
-		$result = rm_config_a(df_concat_xpath($pathA));
+		$result = rm_config_a(df_cc_path($pathA));
 	}
 	else {
 		/** @var Mage_Core_Model_Config_Element|null $node */
@@ -70,7 +70,7 @@ function rm_config_node($path) {
 	if ($pathIsArray || (1 < func_num_args())) {
 		/** @var string[] $pathA */
 		$pathA = $pathIsArray ? $path : func_get_args();
-		$result = rm_config_node(df_concat_xpath($pathA));
+		$result = rm_config_node(df_cc_path($pathA));
 	}
 	else {
 		df_param_string_not_empty($path, 0);
@@ -122,7 +122,7 @@ function rm_config_adminhtml_field($path) {
 	$pathA = explode('/', $path);
 	df_assert_eq(3, count($pathA));
 	/** @var string $pathFull */
-	$pathFull = df_concat_xpath($pathA[0], 'groups', $pathA[1], 'fields', $pathA[2]);
+	$pathFull = df_cc_path($pathA[0], 'groups', $pathA[1], 'fields', $pathA[2]);
 	/** @var Mage_Core_Model_Config_Element $result */
 	$result = rm_config_adminhtml()->getSections()->descend($pathFull);
 	df_assert($result);

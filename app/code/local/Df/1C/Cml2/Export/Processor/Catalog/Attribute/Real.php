@@ -326,7 +326,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 			else {
 				switch ($this->getAttribute()->getSourceModel()) {
 					case 'eav/entity_attribute_source_boolean':
-						$result = rm_bts($value);
+						$result = df_bts($value);
 						break;
 					case 'eav/entity_attribute_source_table':
 						/**

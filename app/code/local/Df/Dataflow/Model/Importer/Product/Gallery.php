@@ -107,15 +107,15 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 		try {
 			/** @var resource|bool $rh */
 			$rh = fopen($file_source, 'rb');
-			df_assert(false !== $rh, rm_sprintf('Failed to download url: %s', $file_source));
+			df_assert(false !== $rh, df_sprintf('Failed to download url: %s', $file_source));
 			/** @var resource|bool $wh */
 			$wh = fopen($file_target, 'wb');
-			df_assert(false !== $wh, rm_sprintf('Failed to create file: %s', $file_target));
+			df_assert(false !== $wh, df_sprintf('Failed to create file: %s', $file_target));
 			while (!feof($rh)) {
 				$r = fwrite($wh, fread($rh, 1024));
 				df_assert(
 					false !== $r
-					,rm_sprintf(
+					,df_sprintf(
 						'Error while downloading url %s to destination %s'
 						,$file_source
 						,$file_target
@@ -141,7 +141,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	 * @return null|string
 	 */
 	private function downloadImage($imagePath) {
-		$result = df_concat_path($this->getDestinationBaseDir(), basename($imagePath));
+		$result = df_cc_path($this->getDestinationBaseDir(), basename($imagePath));
 		try {
 			$this->download($imagePath, $result);
 		}
@@ -217,7 +217,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	private function getRawImagesDelimiter() {
 		$defaultDelimiter = ';';
 		return
-			rm_contains($this->getAdditionalImagesAsString(), $defaultDelimiter)
+			df_contains($this->getAdditionalImagesAsString(), $defaultDelimiter)
 			? $defaultDelimiter
 			: ','
 		;
@@ -275,7 +275,7 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	private function removeNonExistent($imagePath) {
 		$result = !is_file($imagePath) ? null : $imagePath;
 		if (!$result) {
-			Mage::log(rm_sprintf('Imported image file %s does not exist', $imagePath));
+			Mage::log(df_sprintf('Imported image file %s does not exist', $imagePath));
 		}
 		return $result;
 	}

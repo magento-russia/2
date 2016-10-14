@@ -99,7 +99,7 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 	 * Retrieve how many links to pages to show as one frame in the pagination widget.
 	 * @return int
 	 */
-	public function getFrame() {return abs(rm_int($this->_getData('frame')));}
+	public function getFrame() {return abs(df_int($this->_getData('frame')));}
 
 	/**
 	 * Retrieve whether to show link to page number current + y

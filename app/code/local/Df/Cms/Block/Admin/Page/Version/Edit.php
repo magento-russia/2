@@ -19,7 +19,7 @@ class Df_Cms_Block_Admin_Page_Version_Edit extends Mage_Adminhtml_Block_Widget_F
 					'new'
 					,array(
 						'label' => df_h()->cms()->__('Save as New Version')
-						,rm_sprintf(
+						,df_sprintf(
 							'editForm.submit(%s);'
 							,df_quote_single($this->getNewUrl())
 						)
@@ -88,12 +88,12 @@ class Df_Cms_Block_Admin_Page_Version_Edit extends Mage_Adminhtml_Block_Widget_F
 	 */
 	public function getHeaderText() {
 		/** @var string $versionLabel */
-		$versionLabel = rm_e(Mage::registry('cms_page_version')->getLabel());
+		$versionLabel = df_e(Mage::registry('cms_page_version')->getLabel());
 		if (!$versionLabel) {
 			$versionLabel = df_h()->cms()->__('N/A');
 		}
 		return df_h()->cms()->__(
-			"Edit Page '%s' Version '%s'", rm_e(Mage::registry('cms_page')->getTitle()), $versionLabel
+			"Edit Page '%s' Version '%s'", df_e(Mage::registry('cms_page')->getTitle()), $versionLabel
 		);
 	}
 

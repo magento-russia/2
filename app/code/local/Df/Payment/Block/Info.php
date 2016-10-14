@@ -114,7 +114,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 				foreach ($result as $key => $item) {
 					/** @var string|int $key */
 					/** @var string|mixed $item */
-					$result[$key] = rm_e($item);
+					$result[$key] = df_e($item);
 				}
 			}
 		}

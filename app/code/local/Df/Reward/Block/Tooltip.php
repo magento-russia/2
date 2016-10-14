@@ -46,7 +46,7 @@ class Df_Reward_Block_Tooltip extends Df_Core_Block_Template_NoCache {
 	public function renderLearnMoreLink($format = '<a href="%1$s">%2$s</a>', $anchorText = null)
 	{
 		$anchorText = null === $anchorText ? df_h()->reward()->__('Learn more...') : $anchorText;
-		return rm_sprintf($format, $this->getLandingPageUrl(), $anchorText);
+		return df_sprintf($format, $this->getLandingPageUrl(), $anchorText);
 	}
 
 	/**

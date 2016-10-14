@@ -88,7 +88,7 @@ class Df_Core_Lib {
 	private function getLibDirCompiled() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * @see df_concat_path() здесь использовать ещё нельзя,
+			 * @see df_cc_path() здесь использовать ещё нельзя,
 			 * потому что библиотеки Российской сборки ещё не загружены
 			 */
 			$this->{__METHOD__} =
@@ -110,7 +110,7 @@ class Df_Core_Lib {
 	private function getLibDirStandard() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * @see df_concat_path() здесь использовать ещё нельзя,
+			 * @see df_cc_path() здесь использовать ещё нельзя,
 			 * потому что библиотеки Российской сборки ещё не загружены
 			 */
 			$this->{__METHOD__} = implode(DS, array(BP, 'app', 'code', 'local', $this->getLibDirLocal()));

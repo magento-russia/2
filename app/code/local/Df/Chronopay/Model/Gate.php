@@ -101,7 +101,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 			$storeId = $this->getStore();
 		}
 		/** @var string $path */
-		$path = df_concat_xpath('df_payment', $this->getCode(), $field);
+		$path = df_cc_path('df_payment', $this->getCode(), $field);
 		return Mage::getStoreConfig($path, $storeId);
 	}
 

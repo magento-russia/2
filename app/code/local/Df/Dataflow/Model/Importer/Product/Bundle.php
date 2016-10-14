@@ -92,7 +92,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 		$innerProductId = df_h()->catalog()->product()->getIdBySku($innerProductSku);
 		df_assert(
 			!is_null($innerProductId)
-			,rm_sprintf(
+			,df_sprintf(
 				'Перед импортом сборного товара «%s» '
 				. 'в системе уже должна пристутствовать его составная часть: простой товар «%s».'
 				,$this->getBundleOriginalSku()
@@ -135,7 +135,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 		$innerProductId = df_h()->catalog()->product()->getIdBySku($innerProductSku);
 		df_assert(
 			!is_null($innerProductId)
-			,rm_sprintf(
+			,df_sprintf(
 				'Перед импортом сборного товара «%s» '
 				. 'в системе уже должна пристутствовать его составная часть: простой товар «%s».'
 				,$this->getBundleOriginalSku()

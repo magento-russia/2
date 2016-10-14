@@ -16,7 +16,7 @@ class Df_Dataflow_Model_Convert_Mapper_Value extends Df_Dataflow_Model_Convert_M
 				/** @var string $replacement */
 				df_assert_string($occurence);
 				df_assert_string($replacement);
-				if (rm_contains($valueBeforeProcessing, $occurence)) {
+				if (df_contains($valueBeforeProcessing, $occurence)) {
 					$valueAfterProcessing = str_replace($valueBeforeProcessing, $occurence, $replacement);
 					break;
 				}

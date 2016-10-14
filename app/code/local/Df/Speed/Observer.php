@@ -43,7 +43,7 @@ class Df_Speed_Observer {
 				 * мы не можем вызывать @see df_is_admin()
 				 */
 				/** @var bool $isFrontendArea */
-				$isFrontendArea = !rm_contains(
+				$isFrontendArea = !df_contains(
 					Mage::app()->getRequest()->getOriginalPathInfo()
 					,rm_leaf_s(rm_config_node('admin/routers/adminhtml/args/frontName'))
 				);

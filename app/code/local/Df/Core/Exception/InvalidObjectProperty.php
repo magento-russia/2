@@ -18,7 +18,7 @@ class Df_Core_Exception_InvalidObjectProperty extends Df_Core_Exception {
 			,get_class($object)
 			,rm_debug_type($propertyValue)
 			,$propertyName
-			,df_concat_n($failedValidator->getMessages())
+			,df_cc_n($failedValidator->getMessages())
 		));
 	}
 }

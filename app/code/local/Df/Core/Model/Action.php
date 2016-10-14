@@ -30,7 +30,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	protected function delegate($class) {
-		if (!rm_starts_with($class, rm_module_name($this))) {
+		if (!df_starts_with($class, rm_module_name($this))) {
 			/**
 			 * 2015-08-04
 			 * array('Df', '1C', 'Cml2', 'Action')
@@ -147,7 +147,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 */
 	protected function getResponseLogFileDir() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_path(Mage::getBaseDir('var'), 'log');
+			$this->{__METHOD__} = df_cc_path(Mage::getBaseDir('var'), 'log');
 		}
 		return $this->{__METHOD__};
 	}
@@ -157,7 +157,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return string
 	 */
 	protected function getResponseLogFileExtension() {
-		return rm_contains($this->getContentType(), 'xml') ? 'xml' : 'txt';
+		return df_contains($this->getContentType(), 'xml') ? 'xml' : 'txt';
 	}
 
 	/**
@@ -272,7 +272,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		/** @var string|bool $output */
 		$output = @ob_get_clean();
 		if ($output) {
-			Mage::log(rm_sprintf("output buffer:\n«%s»", $output));
+			Mage::log(df_sprintf("output buffer:\n«%s»", $output));
 		}
 		if ($this->needAddExceptionToSession()) {
 			rm_exception_to_session($e);
@@ -373,7 +373,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		if ($this->needBenchmark()) {
 			/** @var float $timeSpent */
 			$timeSpent = microtime($get_as_float = true) - $this->_benchmarkTimeStart;
-			Mage::log(rm_sprintf('%s: %.3fs', get_class($this), $timeSpent));
+			Mage::log(df_sprintf('%s: %.3fs', get_class($this), $timeSpent));
 		}
 	}
 

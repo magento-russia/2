@@ -35,7 +35,7 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	protected function _toHtml() {
 		return
 			$this->includeTax() && $this->getTotalExclTax() >= 0
-			? df_concat_n(
+			? df_cc_n(
 				//$this->row('Grand Total Excl. Tax', $this->getTotalExclTax())
 				$this->row('Grand Total Incl. Tax', $this->getTotal()->getValue())
 				,$this->singleTax() ? $this->rowVAT() : $this->renderTotals('taxes', $this->getColspan())
@@ -87,7 +87,7 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	private function row($name, $value, $class = null) {
 		return rm_tag(
 			'tr', array('class' => $class)
-			, df_concat_n($this->cell_name($name)
+			, df_cc_n($this->cell_name($name)
 			, $this->cell_value($value))
 		);
 	}

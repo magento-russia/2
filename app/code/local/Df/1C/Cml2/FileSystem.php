@@ -3,7 +3,7 @@ class Df_1C_Cml2_FileSystem {
 	/** @return string */
 	public function getBaseDir() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_path(Mage::getBaseDir('var'), 'rm', '1c');
+			$this->{__METHOD__} = df_cc_path(Mage::getBaseDir('var'), 'rm', '1c');
 		}
 		return $this->{__METHOD__};
 	}
@@ -13,7 +13,7 @@ class Df_1C_Cml2_FileSystem {
 	 * @return string
 	 */
 	public function getFullPathByRelativePath($relativePath) {
-		return df_concat_path($this->getBaseDir(), $relativePath);
+		return df_cc_path($this->getBaseDir(), $relativePath);
 	}
 
 	/**

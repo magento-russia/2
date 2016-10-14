@@ -74,7 +74,7 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model {
 		 * и поэтому в идентификатор кэша надо включить какой-нибудь идентификатор страницы,
 		 * например, её веб-адрес.
 		 */
-		if (rm_contains($routePath, '*')) {
+		if (df_contains($routePath, '*')) {
 			$result[]= rm_ruri();
 		}
 		if (!is_null($routeParams)) {

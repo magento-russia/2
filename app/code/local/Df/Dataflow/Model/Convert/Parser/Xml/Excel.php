@@ -32,7 +32,7 @@ class Df_Dataflow_Model_Convert_Parser_Xml_Excel extends Mage_Dataflow_Model_Con
 			if (is_numeric($value)) {
 				$dataType = "Number";
 			}
-			$value = rm_sprintf("<![CDATA[%s]]>", $value);
+			$value = df_sprintf("<![CDATA[%s]]>", $value);
 			$xmlData[]= '<Cell><Data ss:Type="'.$dataType.'">'.$value.'</Data></Cell>';
 		}
 		$xmlData[]= '</Row>';

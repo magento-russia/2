@@ -32,7 +32,7 @@ abstract class Df_Core_Xml_Generator_Part extends Df_Core_Model {
 	protected function log($message) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$this->getDocument()->log(rm_format($arguments));
+		$this->getDocument()->log(df_format($arguments));
 	}
 
 	/**
@@ -42,7 +42,7 @@ abstract class Df_Core_Xml_Generator_Part extends Df_Core_Model {
 	protected function notify($message) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$this->getDocument()->notify(rm_format($arguments));
+		$this->getDocument()->notify(df_format($arguments));
 	}
 
 	/**

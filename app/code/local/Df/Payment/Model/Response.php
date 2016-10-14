@@ -26,7 +26,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 					: sprintf("{$key}: %s.", df_trim($value, '.'))
 				;
 			}
-			$this->{__METHOD__} = df_concat_n($reportRows);
+			$this->{__METHOD__} = df_cc_n($reportRows);
 		}
 		return $this->{__METHOD__};
 	}
@@ -143,7 +143,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			/** @var string $exceptionClass */
 			$exceptionClass = $this->getExceptionClass();
 			/** @var Df_Payment_Exception_Response $exception */
-			$exception = new $exceptionClass(rm_format($arguments), $this);
+			$exception = new $exceptionClass(df_format($arguments), $this);
 			df_assert($exception instanceof Df_Payment_Exception_Response);
 		}
 		df_error($exception);

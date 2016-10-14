@@ -142,7 +142,7 @@ class Df_Core_Model_Reflection extends Df_Core_Model {
 			static $entityTypeUcFirst = array();
 			if (!isset($entityTypeUcFirst[$entityType])) {
 				/**
-				 * Намеренно используем @uses ucfirst() вместо @see rm_ucfirst()
+				 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 				 * потому что в данном случае нам не нужна поддержка UTF-8.
 				 */
 				$entityTypeUcFirst[$entityType] = ucfirst($entityType);

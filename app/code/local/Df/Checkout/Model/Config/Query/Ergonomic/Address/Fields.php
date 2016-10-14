@@ -19,7 +19,7 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 	 * @return Mage_Core_Model_Config_Element
 	 */
 	private function getNodeByAddressType($addressType) {
-		return df_concat_xpath('df/checkout/address', $addressType, 'fields');
+		return df_cc_path('df/checkout/address', $addressType, 'fields');
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 	 * @return string
 	 */
 	private function getPathByAddressType($addressType) {
-		return df_concat_xpath('df/checkout/address', $addressType, 'fields');
+		return df_cc_path('df/checkout/address', $addressType, 'fields');
 	}
 
 	/** @return string */

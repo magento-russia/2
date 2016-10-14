@@ -3,12 +3,12 @@
 	<ol class='df-fields'>
 		<?php if (df_cfg()->sales()->orderGrid()->productColumn()->needShowName()) { ?>
 			<li class='df-field df-field-name'>
-				<?php echo rm_e($this->getProductNameToDisplay()); ?>
+				<?php echo df_e($this->getProductNameToDisplay()); ?>
 			</li>
 		<?php } ?>
 		<?php if (df_cfg()->sales()->orderGrid()->productColumn()->needShowSku()) { ?>
 			<li class='df-field df-field-sku'>
-				<?php echo rm_e($this->getProductSku()); ?>
+				<?php echo df_e($this->getProductSku()); ?>
 			</li>
 		<?php } ?>
 		<?php if (df_cfg()->sales()->orderGrid()->productColumn()->needShowQty()) { ?>

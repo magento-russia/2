@@ -4,7 +4,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	 * @param string $text
 	 * @return string
 	 */
-	public function _($text) {return rm_e($text);}
+	public function _($text) {return df_e($text);}
 
 	/**
 	 * @param string $string
@@ -69,7 +69,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	 */
 	public function processLink($text, $url, $quote = Df_Core_Helper_Text::QUOTE__DOUBLE) {
 		return
-			!rm_contains($text, '[[')
+			!df_contains($text, '[[')
 			? $text
 			: preg_replace("#\[\[([^\]]+)\]\]#u", rm_tag('a', array('href' => $url), '$1'), $text)
 		;

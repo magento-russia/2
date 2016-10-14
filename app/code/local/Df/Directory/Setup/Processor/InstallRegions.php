@@ -47,7 +47,7 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 					dfa(
 						$regionDataRaw
 						, 4
-						, rm_sprintf('%s-%02d', $this->getCountryIso2Code(), ++$ordering)
+						, df_sprintf('%s-%02d', $this->getCountryIso2Code(), ++$ordering)
 					)
 				,self::REGION__TYPE => 0
 			);

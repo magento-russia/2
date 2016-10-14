@@ -41,7 +41,7 @@ class Df_Core_Exception extends Exception {
 	 */
 	public function comment($comment) {
 		$args = func_get_args();
-		$this->_comments[]= rm_format($args);
+		$this->_comments[]= df_format($args);
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Df_Core_Exception extends Exception {
 	 */
 	public function commentPrepend($comment) {
 		$args = func_get_args();
-		array_unshift($this->_comments, rm_format($args));
+		array_unshift($this->_comments, df_format($args));
 	}
 
 	/**

@@ -41,7 +41,7 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 			$this->order()->setState(
 				Mage_Sales_Model_Order::STATE_PROCESSING
 				,Mage_Sales_Model_Order::STATE_PROCESSING
-				,rm_sprintf(
+				,df_sprintf(
 					$this->getMessage(Df_Payment_Model_Action_Confirm::CONFIG_KEY__MESSAGE__SUCCESS)
 					,$invoice->getIncrementId()
 				)
@@ -69,7 +69,7 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 
 	/** @return string */
 	private function getRequestAsXml_Test_Error() {
-		return rm_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
+		return df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>TransactionResult</RequestType>
@@ -88,7 +88,7 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 
 	/** @return string */
 	private function getRequestAsXml_Test_Success() {
-		return rm_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
+		return df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>TransactionResult</RequestType>

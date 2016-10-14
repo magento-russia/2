@@ -18,7 +18,7 @@ class Df_OnPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			,self::REQUEST_VAR__ORDER_CURRENCY =>
 				$this->configS()->getCurrencyCodeInServiceFormat()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
-			,self::REQUEST_VAR__PAYMENT_SERVICE__IS_FEE_PAYED_BY_SHOP => rm_bts(
+			,self::REQUEST_VAR__PAYMENT_SERVICE__IS_FEE_PAYED_BY_SHOP => df_bts(
 					Df_Payment_Config_Source_Service_FeePayer::VALUE__SHOP
 				===
 					$this->configS()->getFeePayer()

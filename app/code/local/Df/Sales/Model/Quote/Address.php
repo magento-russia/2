@@ -47,7 +47,7 @@ class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 		return
 			!is_array($this->getStreetFull())
 			? $this->getStreetFull()
-			: df_concat_n(df_clean($this->getStreetFull()))
+			: df_cc_n(df_clean($this->getStreetFull()))
 		;
 	}
 

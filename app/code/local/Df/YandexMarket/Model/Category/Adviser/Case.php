@@ -7,7 +7,7 @@ class Df_YandexMarket_Model_Category_Adviser_Case extends Df_Core_Model {
 			$result = array();
 			foreach (Df_YandexMarket_Model_Categories::s()->getNodesAsTextArray() as $path) {
 				/** @var string $path */
-				if (rm_contains($path, $this->getPiece())) {
+				if (df_contains($path, $this->getPiece())) {
 					$result[]= $path;
 				}
 			}

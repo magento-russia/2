@@ -9,7 +9,7 @@
 		/** @type string */
 		var elementId = '<?php echo $this->getHtmlId(); ?>';
 		/** @type string */
-		var url = '<?php echo rm_ejs($this->url()); ?>';
+		var url = '<?php echo df_ejs($this->url()); ?>';
 		/** @type {jQuery} HTMLButtonElement */
 		var $element = $('#' +  elementId);
 		$element.click(function() {window.open(url, '_blank');});

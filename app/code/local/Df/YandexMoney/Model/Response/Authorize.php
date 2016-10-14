@@ -42,7 +42,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
 			$result = array();
-			$result['Успешна ли операция'] = rm_bts_r($this->isSuccessful());
+			$result['Успешна ли операция'] = df_bts_r($this->isSuccessful());
 			if (!$this->isSuccessful()) {
 				$result['Диагностическое сообщение'] = $this->getErrorMessage();
 			}

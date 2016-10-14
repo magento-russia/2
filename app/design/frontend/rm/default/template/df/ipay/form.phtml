@@ -17,7 +17,7 @@
 						foreach($this->getPaymentOptions() as $optionCode => $optionParams) {
 							/** @var string $optionCode */
 							/** @var array $optionParams */
-							$optionName = rm_e(dfa($optionParams, 'title'));
+							$optionName = df_e(dfa($optionParams, 'title'));
 							?>
 								<li class='df-payment-option'>
 									<label>

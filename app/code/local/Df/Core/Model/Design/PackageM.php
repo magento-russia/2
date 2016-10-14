@@ -107,7 +107,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	public function getSkinUrl($file = null, array $params = array()) {
 		/** @var string $result */
 		$result = parent::getSkinUrl($file, $params);
-		if (rm_contains($result, '/rm/')) {
+		if (df_contains($result, '/rm/')) {
 			/**
 			 * Обратите внимание, что для ресурсов из папки js мы добавляем параметр v по-другому:
 			 * в методе Df_Page_Block_Html_Head::_prepareStaticAndSkinElements
@@ -129,7 +129,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 				if (!isset($packageUrlPart)) {
 					$packageUrlPart = sprintf('/%s/', Df_Core_Model_Design_Package::s()->getName());
 				}
-				if (rm_contains($result, $packageUrlPart)) {
+				if (df_contains($result, $packageUrlPart)) {
 					$result = df_url()->addVersionStamp(
 						$result, Df_Core_Model_Design_Package::s()->getVersion()
 					);

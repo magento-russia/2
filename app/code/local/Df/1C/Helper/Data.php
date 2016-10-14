@@ -36,7 +36,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		if (rm_1c_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			self::logger()->log(rm_format($arguments));
+			self::logger()->log(df_format($arguments));
 		}
 	}
 	
@@ -48,7 +48,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		if (rm_1c_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			self::logger()->logRaw(rm_format($arguments));
+			self::logger()->logRaw(df_format($arguments));
 		}
 	}
 
@@ -81,7 +81,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 			$filePath = Df_1C_Cml2_Session_ByCookie_1C::s()->getFileName_Log();
 			if (!$filePath) {
 				$filePath = rm_file_name(
-					df_concat_path(
+					df_cc_path(
 						Mage::getBaseDir('var'), 'log'
 						, rm_1c_cfg()->general()->getLogFileNameTemplatePath()
 					)

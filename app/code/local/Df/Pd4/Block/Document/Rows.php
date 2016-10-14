@@ -2,7 +2,7 @@
 class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getCustomerAddressAsCompositeString() {
-		return rm_e(df_ccc(', '
+		return df_e(df_ccc(', '
 			,$this->getCustomerAddress()->getPostcode()
 			,$this->getCustomerAddress()->getCity()
 			,$this->getCustomerAddress()->getStreetAsText()
@@ -11,7 +11,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 
 	/** @return string */
 	public function getCustomerName() {
-		return rm_e(df_ccc(' '
+		return df_e(df_ccc(' '
 			,$this->order()->getCustomerLastname()
 			,$this->order()->getCustomerFirstname()
 			,$this->order()->getCustomerMiddlename()
@@ -30,31 +30,31 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 
 	/** @return string */
 	public function getRecipientBankAccountNumber() {
-		return rm_e($this->configA()->getRecipientBankAccountNumber());
+		return df_e($this->configA()->getRecipientBankAccountNumber());
 	}
 
 	/** @return string */
-	public function getRecipientBankId() {return rm_e($this->configA()->getRecipientBankId());}
+	public function getRecipientBankId() {return df_e($this->configA()->getRecipientBankId());}
 
 	/** @return string */
-	public function getRecipientBankLoro() {return rm_e($this->configA()->getRecipientBankLoro());}
+	public function getRecipientBankLoro() {return df_e($this->configA()->getRecipientBankLoro());}
 
 	/** @return string */
 	public function getRecipientBankName() {
-		return rm_e($this->configA()->getRecipientBankName());
+		return df_e($this->configA()->getRecipientBankName());
 	}
 
 	/** @return string */
-	public function getRecipientName() {return rm_e($this->configA()->getRecipientName());}
+	public function getRecipientName() {return df_e($this->configA()->getRecipientName());}
 
 	/** @return string */
 	public function getRecipientTaxNumber() {
-		return rm_e($this->configA()->getRecipientTaxNumber());
+		return df_e($this->configA()->getRecipientTaxNumber());
 	}
 
 	/** @return string */
 	public function getPaymentPurpose() {
-		return rm_e(strtr($this->configA()->getPaymentPurposeTemplate(), array(
+		return df_e(strtr($this->configA()->getPaymentPurposeTemplate(), array(
 			self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_ID => $this->order()->getIncrementId()
 			,self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_DATE =>
 				df_dts($this->getOrderDate(), Df_Core_Model_Format_Date::FORMAT__RUSSIAN)
@@ -62,7 +62,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	}
 
 	/** @return int */
-	public function getOrderYear() {return rm_int(df_dts($this->getOrderDate(), Zend_Date::YEAR));}
+	public function getOrderYear() {return df_int(df_dts($this->getOrderDate(), Zend_Date::YEAR));}
 
 	/** @return Df_Pd4_Model_Config_Area_Admin */
 	protected function configA() {

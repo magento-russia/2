@@ -59,7 +59,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var string $result */
-		$result = strtoupper(md5(df_concat(
+		$result = strtoupper(md5(df_cc(
 			$this->adjustSignatureParamEncoding($this->getRequestValueOrderIncrementId())
 			,strtoupper(md5($this->adjustSignatureParamEncoding($this->getResponsePassword())))
 		)));
@@ -92,7 +92,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	private function adjustSignatureParamEncoding($signatureParam) {
 		df_param_string($signatureParam, 0);
-		return rm_1251_to($signatureParam);
+		return df_1251_to($signatureParam);
 	}
 
 	/**

@@ -27,7 +27,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	}
 
 	/** @return string */
-	public function getLabel() {return rm_e(df_h()->checkout()->__($this['label']));}
+	public function getLabel() {return df_e(df_h()->checkout()->__($this['label']));}
 
 	/** @return string */
 	public function getLabelHtml() {

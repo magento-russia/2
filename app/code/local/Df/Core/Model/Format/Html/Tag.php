@@ -35,7 +35,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 		if (is_array($value)) {
 			$value = implode(' ', array_filter($value));
 		}
-		$value = rm_e($value);
+		$value = df_e($value);
 		return '' === $value ? '' : "{$name}='{$value}'";
 	}
 
@@ -65,7 +65,7 @@ class Df_Core_Model_Format_Html_Tag extends Df_Core_Model {
 			$result = $this->cfg(self::$P__CONTENT, '');
 			$result = df_trim($result, "\n");
 			/** @var bool $isMultiline */
-			$isMultiline = rm_contains($result, "\n");
+			$isMultiline = df_contains($result, "\n");
 			if ($isMultiline) {
 				$result = "\n" . df_tab_multiline($result) . "\n";
 			}

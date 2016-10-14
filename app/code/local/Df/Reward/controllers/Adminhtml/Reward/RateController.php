@@ -70,7 +70,7 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 	public function editAction()
 	{
 		$rate = $this->_initRate();
-		$this->_title($rate->getRateId() ? rm_sprintf("#%s", $rate->getRateId()) : $this->__('New Rate'));
+		$this->_title($rate->getRateId() ? df_sprintf("#%s", $rate->getRateId()) : $this->__('New Rate'));
 		$this->_initAction()
 			->renderLayout();
 	}

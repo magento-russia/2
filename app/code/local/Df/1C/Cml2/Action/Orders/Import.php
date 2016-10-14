@@ -22,7 +22,7 @@ class Df_1C_Cml2_Action_Orders_Import extends Df_1C_Cml2_Action {
 
 	/** @return string */
 	private function getFileFullPath() {
-		return df_concat_path(Mage::getBaseDir('var'), 'log', 'site-to-my.xml');
+		return df_cc_path(Mage::getBaseDir('var'), 'log', 'site-to-my.xml');
 	}
 
 	/** @return Df_1C_Cml2_Import_Data_Collection_Orders */

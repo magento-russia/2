@@ -15,7 +15,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 			Mage::log(
 				'Добавьте в файл app/locale/ru_DF/Df/Eav.csv'
 				. " перевод следующих экранных названий свойств:\n"
-				. df_concat_n(dfa_unique_fast($this->_untranslated))
+				. df_cc_n(dfa_unique_fast($this->_untranslated))
 				, null
 				, 'rm.translation.log'
 			);

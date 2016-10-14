@@ -39,7 +39,7 @@ function rm_1c_is_external_id($string) {
 function rm_1c_log($arguments) {
 	/** @uses func_get_args() не может быть параметром другой функции */
 	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	rm_1c()->log(rm_format($arguments));
+	rm_1c()->log(df_format($arguments));
 }
 
 /**

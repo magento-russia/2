@@ -75,12 +75,12 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 	 * @param string $name
 	 * @return string
 	 */
-	private function getConfigPath($name) {return df_concat_xpath($this->getConfigPathBase(), $name);}
+	private function getConfigPath($name) {return df_cc_path($this->getConfigPathBase(), $name);}
 
 	/** @return string */
 	private function getConfigPathBase() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_xpath(
+			$this->{__METHOD__} = df_cc_path(
 				$this->getConfigSection(), $this->getConfigGroup(), $this->getConfigField()
 			);
 		}

@@ -33,7 +33,7 @@ class Df_Logging_Block_Details_Renderer_Diff
 			if (!$specialFlag) {
 				$html = '<dl>';
 				foreach ($data as $key => $value) {
-					$html .= '<dt>' . $key . '</dt><dd>' . rm_e($value) . '</dd>';
+					$html .= '<dt>' . $key . '</dt><dd>' . df_e($value) . '</dd>';
 				}
 				$html .= '</dl>';
 			}

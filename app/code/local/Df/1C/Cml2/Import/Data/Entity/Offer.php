@@ -46,7 +46,7 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 					, $this->getName()
 					, count($result)
 					/** @uses Df_1C_Cml2_Import_Data_Entity_Offer::getName() */
-					, df_concat_n(df_each($result, 'getName'))
+					, df_cc_n(df_each($result, 'getName'))
 				);
 			}
 			$this->{__METHOD__} = $result;

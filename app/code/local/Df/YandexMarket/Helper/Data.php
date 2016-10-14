@@ -68,7 +68,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 		if (df_cfg()->yandexMarket()->diagnostics()->isEnabled()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 			$this->getLogger()->log($message);
 		}
 	}
@@ -96,7 +96,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 			$nonStandardDomain = $this->settings()->other()->getDomain();
 			/** @var string $storeDomain */
 			$storeDomain = Df_Core_Model_Store::s()->getDomain(rm_state()->getStoreProcessed());
-			df_assert(rm_contains($url, $storeDomain));
+			df_assert(df_contains($url, $storeDomain));
 			$result = str_replace($storeDomain, $nonStandardDomain, $url);
 		}
 		df_result_string_not_empty($result);

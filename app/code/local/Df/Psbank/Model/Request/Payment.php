@@ -63,6 +63,6 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 
 	/** @return int */
 	private function getTransactionType() {
-		return rm_int($this->configS()->isCardPaymentActionCapture());
+		return df_int($this->configS()->isCardPaymentActionCapture());
 	}
 }

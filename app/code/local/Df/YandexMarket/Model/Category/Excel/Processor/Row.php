@@ -23,7 +23,7 @@ class Df_YandexMarket_Model_Category_Excel_Processor_Row extends Df_Core_Model {
 				$node =
 					new Df_YandexMarket_Model_Category_Node(
 						$data = array(
-							'id' => rm_uniqid()
+							'id' => df_uid()
 							,'name' => $nodeName
 						)
 						,$idField = 'id'

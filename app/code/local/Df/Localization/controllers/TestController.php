@@ -9,7 +9,7 @@ class Df_Localization_TestController extends Mage_Core_Controller_Front_Action {
 			//$response = Df_Localization_Morpher::s()->getResponse('ROBOKASSA');
 			$this
 				->getResponse()
-				->setBody(rm_print_params(array(
+				->setBody(df_print_params(array(
 					'откуда' => $response->getInFormOrigin()
 					,'куда' => $response->getInFormDestination()
 					,'множественное число' => $response->getPlural()->getInCaseNominative()

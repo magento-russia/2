@@ -15,11 +15,11 @@ class Df_Payment_Exception_Response extends Df_Payment_Exception {
 	 */
 	public function getMessageRm() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_n(
+			$this->{__METHOD__} = df_cc_n(
 				$this->getResponse()->getReport()
 				,"\nАдрес запроса: " . $this->getRequest()->getUri()->getUri()
-				,"\nПараметры запроса:" . rm_print_params($this->getRequest()->params())
-				,'Ответ сервера:'. rm_print_params($this->getResponse()->getData())
+				,"\nПараметры запроса:" . df_print_params($this->getRequest()->params())
+				,'Ответ сервера:'. df_print_params($this->getResponse()->getData())
 			);
 		}
 		return $this->{__METHOD__};

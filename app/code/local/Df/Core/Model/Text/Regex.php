@@ -1,8 +1,8 @@
 <?php
 class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	/**
-	 * @used-by rm_preg_match()
-	 * @used-by rm_preg_match_int()
+	 * @used-by df_preg_match()
+	 * @used-by df_preg_match_int()
 	 * Возвращает:
 	 * 1) string, если текст соответствует регулярному выражению
 	 * 2) string[], если текст соответствует регулярному выражению,
@@ -71,7 +71,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 
 	/**
 	 * 2015-08-24
-	 * @used-by rm_preg_replace()
+	 * @used-by df_preg_replace()
 	 * @param string $replacement
 	 * @throws Df_Core_Exception
 	 * @return string|null
@@ -101,7 +101,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 
 	/** @return bool */
 	private function getReportFilePath() {
-		return df_concat_path(Mage::getBaseDir('var'), 'log', $this->getReportFileName());
+		return df_cc_path(Mage::getBaseDir('var'), 'log', $this->getReportFileName());
 	}
 
 	/** @return string */
@@ -116,7 +116,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 			$this->{__METHOD__} =
 				!$this->isSubjectTooLongToReport()
 				? $this->getSubject()
-				: df_concat_n(array_slice(
+				: df_cc_n(array_slice(
 					$this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()
 				))
 			;
@@ -171,7 +171,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 			 * Обратите внимание, что при простых сбоях
 			 * @see preg_last_error() возвращает 0 (PREG_NO_ERROR).
 			 * Например, при таком:
-			 * rm_preg_test('#(#', 'тест');
+			 * df_preg_test('#(#', 'тест');
 			 */
 			$errorCodeForUser = '';
 		}
@@ -180,7 +180,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 			 * А вот при сложных сбоях
 			 * @see preg_last_error() возвращает уже какой-то полезный для диагностики код.
 			 * Пример из документации:
-			 * rm_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
+			 * df_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
 			 * http://php.net/manual/function.preg-last-error.php
 			 */
 			/** @var string|null $textCode */
@@ -345,7 +345,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 			foreach ($constants['pcre'] as $textCode => $numericCode) {
 				/** @var string $textCode */
 				/** @var int $numericCode */
-				if (rm_ends_with($textCode, '_ERROR')) {
+				if (df_ends_with($textCode, '_ERROR')) {
 					$result[$numericCode] = $textCode;
 				}
 			}
