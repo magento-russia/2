@@ -116,7 +116,7 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 	 *
 	 * 2016-05-26
 	 * Добавил @uses df_trim(), потому что с 2015-07-07
-	 * алгоритм @uses Df_Core_Helper_Text::removeLineBreaks() изменился,
+	 * алгоритм @uses \Df\Core\Helper\Text::removeLineBreaks() изменился,
 	 * и на концах документа стали образовываться пробелы.
 	 * http://magento-forum.ru/topic/5430/
 	 *

@@ -1,5 +1,6 @@
 <?php
-class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
+namespace Df\Core\Helper;
+class Text {
 	/**
 	 * @used-by df_json_prettify()
 	 * @param string $json
@@ -7,7 +8,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 */
 	public function adjustCyrillicInJson($json) {
 		/** @var array(string => string) $trans */
-		static $trans = array(
+		static $trans = [
 			'\u0430'=>'а', '\u0431'=>'б', '\u0432'=>'в', '\u0433'=>'г','\u0434'=>'д'
 			, '\u0435'=>'е', '\u0451'=>'ё', '\u0436'=>'ж','\u0437'=>'з', '\u0438'=>'и'
 			, '\u0439'=>'й', '\u043a'=>'к','\u043b'=>'л', '\u043c'=>'м'
@@ -23,7 +24,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			, '\u0429'=>'Щ', '\u042a'=>'Ъ','\u042b'=>'Ы', '\u042c'=>'Ь', '\u042d'=>'Э'
 			, '\u042e'=>'Ю','\u042f'=>'Я','\u0456'=>'і', '\u0406'=>'І', '\u0454'=>'є'
 			, '\u0404'=>'Є','\u0457'=>'ї', '\u0407'=>'Ї', '\u0491'=>'ґ', '\u0490'=>'Ґ'
-		);
+		];
 		return strtr($json, $trans);
 	}
 
@@ -67,12 +68,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string $text
-	 * @return string
-	 */
-	public function camelize($text) {return implode(df_ucfirst(df_explode_class(df_trim($text))));}
-
-	/**
-	 * @param string $text
 	 * @param int $requiredLength
 	 * @param bool $addDots [optional]
 	 * @return string
@@ -91,15 +86,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			)
 		;
 	}
-
-	/**
-	 * 'YandexMarket' => array('Yandex', 'Market')
-	 * 'NewNASAModule' => array('New', 'NASA', Module)
-	 * http://stackoverflow.com/a/17122207
-	 * @param string $text
-	 * @return string[]
-	 */
-	public function explodeCamel($text) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $text);}
 
 	/**
 	 * @param string $text
@@ -123,15 +109,6 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			}
 		}
 		return $result;
-	}
-
-	/**
-	 * @param string|float $float
-	 * @param int $decimals [optional]
-	 * @return string
-	 */
-	public function formatFloat($float, $decimals = 2) {
-		return number_format(df_float($float), $decimals, '.', '');
 	}
 
 	/**
@@ -197,50 +174,30 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * @param string|string[]|array(string => string) $string
+	 * @param string[] ...$args
 	 * @return string|string[]|array(string => string)
 	 */
-	public function lcfirst($string) {
-		return
-			is_array($string)
-			? array_map(array($this, __FUNCTION__), $string)
-			: mb_strtolower(mb_substr($string, 0, 1)) . mb_substr($string, 1)
-		;
-	}
-
-	/**
-	 * @param string|string[]|array(string => string) $text
-	 * @return string|string[]|array(string => string)
-	 */
-	public function nl2br($text){
-		/** @var string|string[] $result */
-		if (is_array($text)) {
-			$result = array_map(array($this, __FUNCTION__), $text);
+	public function nl2br(...$args) {return df_call_a(function($text) {
+		/** @var string $result */
+		$text = df_normalize($text);
+		/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
+		if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
+			$result  = nl2br($text);
 		}
 		else {
-			/** @var string $result */
-			$text = df_normalize($text);
-			/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
-			if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
-				$result  = nl2br($text);
-			}
-			else {
-				$text = str_replace("\n", '{rm-newline}', $text);
-				$text =
-					preg_replace_callback(
-						'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
-						, array(__CLASS__, 'nl2brCallback')
-						, $text
-					)
-				;
-				$result = strtr($text, array(
-					'{rm-newline}' => '<br/>'
-					,'{rm-newline-preserve}' => "\n"
-				));
-			}
+			$text = str_replace("\n", '{rm-newline}', $text);
+			$text = preg_replace_callback(
+				'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
+				, [__CLASS__, 'nl2brCallback']
+				, $text
+			);
+			$result = strtr($text, [
+				'{rm-newline}' => '<br/>'
+				,'{rm-newline-preserve}' => "\n"
+			]);
 		}
 		return $result;
-	}
+	}, $args);}
 
 	/**
 	 * @param string $text
@@ -279,29 +236,23 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			$type = self::QUOTE__SINGLE;
 		}
 		/** @var array(string => string[]) $quotesMap */
-		static $quotesMap = array(
-			self::QUOTE__DOUBLE => array('"', '"')
-			,self::QUOTE__RUSSIAN => array('«', '»')
-			,self::QUOTE__SINGLE => array('\'', '\'')
-		);
+		static $quotesMap = [
+			self::QUOTE__DOUBLE => ['"', '"']
+			,self::QUOTE__RUSSIAN => ['«', '»']
+			,self::QUOTE__SINGLE => ['\'', '\'']
+		];
 		/** @var string[] $quotes */
 		$quotes = dfa($quotesMap, $type);
 		if (!is_array($quotes)) {
 			df_error('Неизвестный тип кавычки «%s».', $type);
 		}
 		df_assert_array($quotes);
-		$result =
-			is_array($text)
-			? df_map(array($this, __FUNCTION__), $text, array($type))
-			:
-				/**
-				 * Обратите внимание на красоту решения:
-				 * мы «склеиваем кавычки»,
-				 * используя в качестве промежуточного звена исходную строку
-				 */
-				implode($text, $quotes)
-		;
-		return $result;
+		return df_call_a(function($text, $quotes) {
+			// Обратите внимание на красоту решения:
+			// мы «склеиваем кавычки»,
+			// используя в качестве промежуточного звена исходную строку
+			return implode($text, $quotes);
+		}, df_array($text), [$quotes]);
 	}
 
 	/**
@@ -344,7 +295,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 */
 	public function removeLineBreaks($text) {
 		/** @var string[] $symbolsToRemove */
-		static $symbolsToRemove = array("\r\n", "\r", "\n");
+		static $symbolsToRemove = ["\r\n", "\r", "\n"];
 		return str_replace($symbolsToRemove, ' ', $text);
 	}
 
@@ -369,7 +320,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			$i = 0;
 			$matched = 0;
 			/** @var string[] $matches */
-			$matches = array();
+			$matches = [];
 			while (1 === preg_match('/(.*)'.$search.'/Us',$lstr, $matches)) {
 				if ($i === $count ) {
 					break;
@@ -433,36 +384,11 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 */
 	public function singleLine($text) {
 		/** @var string[] $symbolsToRemove */
-		static $symbolsToRemove = array("\r\n", "\r", "\n", "\t");
+		static $symbolsToRemove = ["\r\n", "\r", "\n", "\t"];
 		return str_replace($symbolsToRemove, ' ', $text);
 	}
 
 	/**
-	 * @param string|string[]|array(string => string) $string
-	 * @return string|string[]|array(string => string)
-	 */
-	public function strtolower($string) {
-		return
-			is_array($string)
-			? array_map(array($this, __FUNCTION__), $string)
-			: mb_strtolower($string)
-		;
-	}
-
-	/**
-	 * @param string|string[]|array(string => string) $string
-	 * @return string|string[]|array(string => string)
-	 */
-	public function strtoupper($string) {
-		return
-			is_array($string)
-			? array_map(array($this, __FUNCTION__), $string)
-			: mb_strtoupper($string)
-		;
-	}
-
-	/**
-	 *
 	 * @param string|string[] $text
 	 * @param string $charlist [optional]
 	 * @return string|string[]
@@ -470,16 +396,16 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	public function trim($text, $charlist = null) {
 		/** @var string|string $result */
 		if (is_array($text)) {
-			$result = df_map(array($this, __FUNCTION__), $text, $charlist);
+			$result = df_map([$this, __FUNCTION__], $text, $charlist);
 		}
 		else {
 			if (!is_null($charlist)) {
 				/** @var string[] $addionalSymbolsToTrim */
-				$addionalSymbolsToTrim = array("\n", "\r", ' ');
+				$addionalSymbolsToTrim = ["\n", "\r", ' '];
 				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
 					/** @var string $addionalSymbolToTrim */
 					if (!df_contains($charlist, $addionalSymbolToTrim)) {
-						$charlist = df_cc($charlist, $addionalSymbolToTrim);
+						$charlist .= $addionalSymbolToTrim;
 					}
 				}
 			}
@@ -524,13 +450,11 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	public function xor_($string1, $string2) {
 		return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));
 	}
-
-
 	const QUOTE__DOUBLE = 'double';
 	const QUOTE__RUSSIAN = 'russian';
 	const QUOTE__SINGLE = 'single';
 
-	/** @return Df_Core_Helper_Text */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
 	/**

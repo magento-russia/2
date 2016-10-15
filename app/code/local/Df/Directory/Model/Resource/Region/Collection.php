@@ -131,7 +131,7 @@ class Df_Directory_Model_Resource_Region_Collection extends Df_Core_Model_Resour
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				/** @uses Df_Directory_Model_Region::getNameOriginal() */
-				array_combine(df_t()->strtoupper($this->walk('getNameOriginal')), $this->getItems())
+				array_combine(df_strtoupper($this->walk('getNameOriginal')), $this->getItems())
 			;
 		}
 		return $this->{__METHOD__};

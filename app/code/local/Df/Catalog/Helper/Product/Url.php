@@ -58,7 +58,7 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 			$keys = array_keys(self::$_russianUpdatesRaw);
 			$this->{__METHOD__} = array_merge(
 				array_combine($keys, $values)
-				,array_combine(df_t()->strtolower($keys), df_t()->strtolower($values))
+				,array_combine(df_strtolower($keys), df_strtolower($values))
 			);
 		}
 		return $this->{__METHOD__};
@@ -68,12 +68,12 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	private function getRussianUpdatesLc() {
  		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $values */
-			$values = df_t()->strtolower(array_values(self::$_russianUpdatesRaw));
+			$values = df_strtolower(array_values(self::$_russianUpdatesRaw));
 			/** @var string[] $keys */
 			$keys = array_keys(self::$_russianUpdatesRaw);
 			$this->{__METHOD__} = array_merge(
 				array_combine($keys, $values)
-				,array_combine(df_t()->strtolower($keys), $values)
+				,array_combine(df_strtolower($keys), $values)
 			);
 		}
 		return $this->{__METHOD__};

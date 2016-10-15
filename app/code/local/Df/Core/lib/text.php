@@ -1,5 +1,5 @@
 <?php
-use Df_Core_Helper_Text as Text;
+use Df\Core\Helper\Text as Text;
 use Df_Core_Model_Text_Regex as Regex;
 
 /**
@@ -49,6 +49,12 @@ function df_bts($value) {return $value ? 'true' : 'false';}
  * @return string
  */
 function df_bts_r($value) {return $value ? 'да' : 'нет';}
+
+/**
+ * @param string $text
+ * @return string
+ */
+function df_camelize($text) {return implode(df_ucfirst(df_explode_class(df_trim($text))));}
 
 // 2015-12-31
 // IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.

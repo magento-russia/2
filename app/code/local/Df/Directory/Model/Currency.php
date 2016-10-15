@@ -188,7 +188,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	/** @return string */
 	public function getName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_t()->lcfirst(df_currency_name($this->getCode()));
+			$this->{__METHOD__} = df_lcfirst(df_currency_name($this->getCode()));
 		}
 		return $this->{__METHOD__};
 	}

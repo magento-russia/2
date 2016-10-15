@@ -67,7 +67,7 @@ class Df_Core_Helper_Output extends Mage_Core_Helper_Abstract {
 	 * @param string $quote [optional]
 	 * @return string
 	 */
-	public function processLink($text, $url, $quote = Df_Core_Helper_Text::QUOTE__DOUBLE) {
+	public function processLink($text, $url, $quote = \Df\Core\Helper\Text::QUOTE__DOUBLE) {
 		return
 			!df_contains($text, '[[')
 			? $text

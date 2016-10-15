@@ -181,7 +181,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 			}
 			// вот здесь единственное отличие от родительского метода
 			/** @var string $camelizedKey */
-			$camelizedKey = df_t()->lcfirst(df_t()->camelize($key));
+			$camelizedKey = df_lcfirst(df_camelize($key));
 			$element->$camelizedKey = $value;
 		}
 	}

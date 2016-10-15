@@ -84,7 +84,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			$this->{__METHOD__}[$localeCode] =
-				df_t()->strtoupper($this->getMapFromCodeToName($localeCode))
+				df_strtoupper($this->getMapFromCodeToName($localeCode))
 			;
 		}
 		return $this->{__METHOD__}[$localeCode];
