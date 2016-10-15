@@ -1,8 +1,9 @@
 <?php
-class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
+namespace Df\Core\Helper;
+class Path {
 	/**
 	 * @used-by Df_Admin_Model_Notifier_ClassRewriteConflicts::getModulesFromCodePool()
-	 * @used-by Df_Core_Lib::includeScripts()
+	 * @used-by \Df\Core\Lib::includeScripts()
 	 * 2015-02-06
 	 * Этот метод возвращает массив непосредственных (дочерних) папок и файлов
 	 * внутри заданной папки $path.
@@ -56,16 +57,10 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 	 */
 	public function delete($path) {
 		df_param_string_not_empty($path, 0);
-		Varien_Io_File::rmdirRecursive($path);
+		\Varien_Io_File::rmdirRecursive($path);
 	}
 
 	/**
-	 * 2015-08-20
-	 * http://magento-forum.ru/topic/5197/
-	 * Обратите внимание, что для РС 2.х я сделал реализацию попроще:
-	 * http://code.dmitry-fedyuk.com/rm/2/commit/7bf8cfc71d3369b7cb33dacab8cf201758a7d11e
-	 * А для РС 3.х я написал этот метод давно: ещё в начале 2015 года.
-	 *
 	 * @param string $path
 	 * @throws \Df\Core\Exception
 	 */
@@ -74,7 +69,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 			$r = chmod($path, 0777);
 			df_throw_last_error($r);
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			/** @var bool $isPermissionDenied */
 			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
@@ -83,11 +78,11 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 				:
 					"Не удалась {operation} «{path}»."
 					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
-				,array(
+				,[
 					'{operation}' => is_dir($path) ? 'запись в папку' : 'запись файла'
 					,'{path}' => $path
 					,'{message}' => $e->getMessage()
-				)
+				]
 			);
 		}
 	}
@@ -101,23 +96,18 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 			$r = mkdir($dir, 0777, $recursive = true);
 			df_throw_last_error($r);
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			/** @var bool $isPermissionDenied */
 			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
-				? 'Операционная система запретила интерпретатору PHP создание папки «{dir}».'
-				:
-					"Не удалось создать папку «{dir}»."
-					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
-				,array(
-					'{dir}' => $dir
-					,'{message}' => $e->getMessage()
-				)
+				? "Операционная система запретила интерпретатору PHP создание папки «{$dir}»."
+				: "Не удалось создать папку «{$dir}»."
+				."\nДиагностическое сообщение интерпретатора PHP: «{$e->getMessage()}»."
 			);
 		}
 	}
 
-	/** @return Df_Core_Helper_Path */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

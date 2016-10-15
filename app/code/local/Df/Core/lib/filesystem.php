@@ -64,8 +64,8 @@ function df_fs_name($name, $spaceSubstitute = '-') {
 	return mb_ereg_replace("([\.]{2,})", '', $name);
 }
 
-/** @return Df_Core_Helper_Path */
-function df_path() {return Df_Core_Helper_Path::s();}
+/** @return \Df\Core\Helper\Path */
+function df_path() {return \Df\Core\Helper\Path::s();}
 
 /**
  * Заменяет все сиволы пути на /

@@ -129,7 +129,7 @@ class Df_Core_Lib {
 			$libPath = $this->getLibDir() . DS;
 			// Нельзя писать df_path()->children(),
 			// потому что библиотеки Российской сборки ещё не загружены
-			foreach (Df_Core_Helper_Path::s()->children($this->getLibDir()) as $child) {
+			foreach (\Df\Core\Helper\Path::s()->children($this->getLibDir()) as $child) {
 				/** @var string $child */
 				$fullPath = $libPath . $child;
 				if (is_file($fullPath)) {

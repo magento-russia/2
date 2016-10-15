@@ -2,8 +2,8 @@
 class Df_Core_Helper_File extends Mage_Core_Helper_Abstract {
 	/**
 	 * 2015-08-20
-	 * @used-by Df_Core_Helper_Path::getFilePath()
-	 * @used-by Df_Core_Helper_Path::chmodRecursive()
+	 * @used-by \Df\Core\Helper\Path::getFilePath()
+	 * @used-by \Df\Core\Helper\Path::chmodRecursive()
 	 * @used-by Df_Core_Model_Logger::getFilePath()
 	 * @param string $resource
 	 * @param int $mode [optional]
