@@ -2,7 +2,7 @@
 // 2016-08-31
 // Портировал из Российской сборки Magento
 namespace Df\Xml;
-final class G extends \Df\Core\O {
+final class G extends \Df_Core_Model {
 	/**
 	 * 2016-08-31
 	 * @param string $tag

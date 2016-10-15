@@ -28,7 +28,7 @@ function rm_loc() {static $r; return $r ? $r : $r = Df_Localization_Settings::s(
  * @param float|int|string $amount
  * @return Df_Core_Model_Money
  */
-function rm_money($amount) {return Df_Core_Model_Money::i($amount); }
+function df_money($amount) {return Df_Core_Model_Money::i($amount); }
 
 /**
  * @used-by rm_quote()

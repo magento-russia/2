@@ -371,7 +371,7 @@ function df_render_l($block, $params = array()) {
  * вместо @see Mage_Core_Block_Abstract::toHtml()
  *
  * @used-by df_render_simple_child()
- * @used-by Df_Qa_Message::message()
+ * @used-by \Df\Qa\Message::message()
  * @param string $template
  * @param string|array(string => mixed) $params [optional]
  * @return string

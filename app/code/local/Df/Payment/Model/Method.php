@@ -505,8 +505,8 @@ abstract class Df_Payment_Model_Method
 		}
 		catch (Exception $exception) {
 			$this->logFailureLowLevel($exception);
-			if ($exception instanceof Df_Core_Exception) {
-				/** @var Df_Core_Exception $exception */
+			if ($exception instanceof \Df\Core\Exception) {
+				/** @var \Df\Core\Exception $exception */
 				$this->logFailureHighLevel(df_ets($exception));
 			}
 			df_exception_to_session($exception);
@@ -569,11 +569,11 @@ abstract class Df_Payment_Model_Method
 			))->log();
 		}
 		else if (is_string($message)) {
-			Df_Qa_Message_Notification::i(array(
-					Df_Qa_Message_Notification::P__NOTIFICATION => $message
-					,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => true
-					,Df_Qa_Message_Notification::P__FILE_NAME => $filename
-					,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
+			\Df\Qa\Message\Notification::i(array(
+					\Df\Qa\Message\Notification::P__NOTIFICATION => $message
+					,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => true
+					,\Df\Qa\Message\Notification::P__FILE_NAME => $filename
+					,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => true
 			))->log();
 		}
 		else {

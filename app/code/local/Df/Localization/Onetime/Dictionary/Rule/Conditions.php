@@ -1,6 +1,6 @@
 <?php
 class Df_Localization_Onetime_Dictionary_Rule_Conditions
-	extends \Df\Xml\Parser\Entit {
+	extends \Df\Xml\Parser\Entity {
 	/** @return string[] */
 	public function getTargetTypes() {
 		if (!isset($this->{__METHOD__})) {

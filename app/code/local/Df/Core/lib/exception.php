@@ -1,5 +1,5 @@
 <?php
-use Df_Core_Exception as DFE;
+use \Df\Core\Exception as DFE;
 use Df\Qa\Message\Failure\Exception as QE;
 use Exception as E;
 /**
@@ -40,7 +40,7 @@ function df_exception_get_trace(E $exception, $showCodeContext = false) {
 }
 
 /**
- * @param Exception|Mage_Core_Exception|Df_Core_Exception $exception
+ * @param Exception|Mage_Core_Exception|\Df\Core\Exception $exception
  * @return void
  */
 function df_exception_to_session(Exception $exception) {
@@ -49,7 +49,7 @@ function df_exception_to_session(Exception $exception) {
 	/** @var bool $isMagentoCoreException */
 	$isMagentoCoreException = $exception instanceof Mage_Core_Exception;
 	/** @var bool $isRmException */
-	$isRmException = $exception instanceof Df_Core_Exception;
+	$isRmException = $exception instanceof \Df\Core\Exception;
 	/** @var bool $needNotifyDeveloper */
 	$needNotifyDeveloper = $isRmException && $exception->needNotifyDeveloper();
 	/** @var bool $needShowStackTrace */
@@ -94,11 +94,11 @@ function df_log_exception(E $e) {
 			Mage::log($errorMessage, Zend_Log::ERR);
 		}
  * @param bool $isOperationSuccessfull [optional]
- * @throws Df_Core_Exception
+ * @throws \Df\Core\Exception
  */
 function df_throw_last_error($isOperationSuccessfull = false) {
 	if (!$isOperationSuccessfull) {
-		Df_Qa_Message_Failure_Error::throwLast();
+		\Df\Qa\Message\Failure\Error::throwLast();
 	}
 }
 

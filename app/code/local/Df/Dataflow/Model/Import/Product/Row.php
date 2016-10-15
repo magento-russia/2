@@ -226,7 +226,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 	 * @param int $ordering
 	 * @param bool $treatedAsNew [optional]
 	 * @return void
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	private function throwPleaseFillTheField(
 		$fieldName, $profileFieldName, $ordering, $treatedAsNew = false

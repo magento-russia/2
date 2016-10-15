@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Localization_Dictionary extends \Df\Xml\Parser\Entit {
+abstract class Df_Localization_Dictionary extends \Df\Xml\Parser\Entity {
 	/**
 	 * @used-by pathFull()
 	 * @see Df_Localization_Onetime_Dictionary::type()
@@ -10,7 +10,7 @@ abstract class Df_Localization_Dictionary extends \Df\Xml\Parser\Entit {
 
 	/**
 	 * @override
-	 * @see \Df\Xml\Parser\Entit::e()
+	 * @see \Df\Xml\Parser\Entity::e()
 	 * @return \Df\Xml\X
 	 */
 	public function e() {

@@ -74,7 +74,7 @@ class Df_Alfabank_Model_Response_State extends Df_Alfabank_Model_Response {
 				,'Номер заказа' => $this->getOrderIncrementId()
 				,'Имя владельца карты' => $this->getCardholderName()
 				,'Номер карты' => $this->getCardNumberMasked()
-				,'Размер платежа' => rm_number_2f($this->getPaymentAmount() / 100)
+				,'Размер платежа' => df_number_2f($this->getPaymentAmount() / 100)
 				,'Код валюты' => $this->getCurrencyCode()
 				,'Адрес IP плательщика' => $this->getIpAddress()
 			));

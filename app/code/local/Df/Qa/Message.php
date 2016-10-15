@@ -1,6 +1,6 @@
 <?php
 namespace Df\Qa;
-abstract class Message extends \Df\Core\O {
+abstract class Message extends \Df_Core_Model {
 	/**
 	 * @used-by report()
 	 * @return string

@@ -47,7 +47,7 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 	 */
 	public function getPaymentAmount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money($this->cfg(self::$P__CREDIT_AMOUNT));
+			$this->{__METHOD__} = df_money($this->cfg(self::$P__CREDIT_AMOUNT));
 		}
 		return $this->{__METHOD__};
 	}

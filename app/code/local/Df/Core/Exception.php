@@ -1,7 +1,8 @@
 <?php
+namespace Df\Core;
 use \Exception as E;
 use Df\Qa\Message\Failure\Exception as QE;
-class Df_Core_Exception extends E implements \ArrayAccess {
+class Exception extends E implements \ArrayAccess {
 	/**
 	 * Обратите внимание, что PHP разрешает сигнатуре конструктора класса-потомка
 	 * отличаться от сигнатуры конструктора класса родителя:
@@ -47,7 +48,7 @@ class Df_Core_Exception extends E implements \ArrayAccess {
 	/**
 	 * @used-by __construct()
 	 * @used-by Df_Shipping_Collector::call()
-	 * @used-by Df_Core_Validator::resolveForProperty()
+	 * @used-by \Df\Core\Validator::resolveForProperty()
 	 * @param mixed ...$args
 	 * @return void
 	 */
@@ -242,7 +243,7 @@ class Df_Core_Exception extends E implements \ArrayAccess {
 	 * Это значение становится положительным,
 	 * когда исключительная ситуация возбуждается не в момент её возникновения,
 	 * а в некоей вспомогательной функции-обработчике, вызываемой в сбойном участке:
-	 * @see Df_Qa_Method::throwException()
+	 * @see \Df\Qa\Method::throwException()
 	 * @var int
 	 */
 	private $_stackLevelsCountToSkip = 0;

@@ -1,7 +1,7 @@
 <?php
 namespace Df\Xml\Parser;
 use Df\Xml\X;
-class Entity extends \Df\Core\O {
+class Entity extends \Df_Core_Model {
 	/**
 	 * Возвращает единственного ребёнка с указанными именем.
 	 * Контролирует отсутствие других детей с указанными именем.
@@ -228,10 +228,10 @@ class Entity extends \Df\Core\O {
 	protected static $P__E = 'e';
 	/**
 	 * Обратите внимание, что этот метод нельзя называть i(),
-	 * потому что от класса \Df\Xml\Parser\Entit наследуются другие классы,
+	 * потому что от класса \Df\Xml\Parser\Entity наследуются другие классы,
 	 * и у наследников спецификация метода i() другая, что приводит к сбою интерпретатора PHP:
 	 * «Strict Notice: Declaration of Df_Licensor_Model_File::i()
-	 * should be compatible with that of \Df\Xml\Parser\Entit::i()»
+	 * should be compatible with that of \Df\Xml\Parser\Entity::i()»
 	 *
 	 * @used-by \Df\Xml\Parser\Collection::createItem()
 	 * @used-by \Dfr\Translation\Realtime\Dictionary\Layout::i()

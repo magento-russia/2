@@ -21,7 +21,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @param mixed $default [optional]
 	 * @param Zend_Validate_Interface|Zend_Filter_Interface|string|null $validator [optional]
 	 * @return mixed|null
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	public final function getVar($key, $default = null, $validator = null) {
 		if (!isset($this->{__METHOD__}[$key])) {
@@ -33,7 +33,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 				}
 			}
 			else {
-				$validator = Df_Core_Validator::resolve($validator);
+				$validator = \Df\Core\Validator::resolve($validator);
 				try {
 					/** @var bool $isFilter */
 					$isFilter = $validator instanceof Zend_Filter_Interface;
@@ -48,12 +48,12 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 					// потому что фильтр либо привёл результат к допустимому валидатором значению,
 					// либо возбудил исключительную ситуацию.
 					if (!$isFilter && $validator instanceof Zend_Validate_Interface) {
-						Df_Core_Validator::check($result, $validator);
+						\Df\Core\Validator::check($result, $validator);
 					}
 				}
 				catch (Exception $e) {
-					/** @var Df_Core_Exception $e */
-					$e = Df_Core_Exception::wrap($e);
+					/** @var \Df\Core\Exception $e */
+					$e = \Df\Core\Exception::wrap($e);
 					$e->comment(df_print_params(array('Ключ' => $key)));
 					throw $e;
 				}

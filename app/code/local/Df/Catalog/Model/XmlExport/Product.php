@@ -120,7 +120,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 
 	/** @return string */
 	protected function getPriceAsText() {
-		return rm_number_2f($this->convertMoneyToExportCurrency($this->getPriceInBaseCurrency()));
+		return df_number_2f($this->convertMoneyToExportCurrency($this->getPriceInBaseCurrency()));
 	}
 
 	/** @return float */
@@ -319,7 +319,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 		 * то есть, с лишним  символом «/» после имени домена,
 		 * что оставалось незамеченным в данной точке программы и приводило к сбою в дальнейшем.
 		 */
-		if (!Df_Zf_Validate_Uri::s()->isValid($urlRaw)) {
+		if (!\Df\Zf\Validate\Uri::s()->isValid($urlRaw)) {
 			df_error('Товар {product} имеет недопустимый веб-адрес «{url}».', array(
 				'{name}' => $product->getTitle(), '{url}' => $urlRaw
 			));

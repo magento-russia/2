@@ -20,17 +20,17 @@ abstract class Df_Dataflow_Model_Registry_MultiCollection
 
 	/**
 	 * @return void
-	 * @throws Df_Core_Exception_Batch|Exception
+	 * @throws \Df\Core\Exception\Batch|Exception
 	 */
 	public function save() {
-		/** @var Df_Core_Exception_Batch $batchException */
-		$batchException = new Df_Core_Exception_Batch();
+		/** @var \Df\Core\Exception\Batch $batchException */
+		$batchException = new \Df\Core\Exception\Batch();
 		foreach ($this->getCollections() as $collection) {
 			/** @var Df_Dataflow_Model_Registry_Collection $collection */
 			try {
 				$collection->save();
 			}
-			catch (Df_Core_Exception_Batch $partialBatch) {
+			catch (\Df\Core\Exception\Batch $partialBatch) {
 				$batchException->addBatch($partialBatch);
 			}
 		}

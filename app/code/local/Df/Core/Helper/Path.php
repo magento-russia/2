@@ -67,7 +67,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 	 * А для РС 3.х я написал этот метод давно: ещё в начале 2015 года.
 	 *
 	 * @param string $path
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	private function chmod($path) {
 		try {
@@ -94,7 +94,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param string $dir
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	private function mkdir($dir) {
 		try {

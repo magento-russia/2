@@ -131,7 +131,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 			,'Роль' => 'Продавец'
 			,'Валюта' => rm_1c_currency_code_to_1c_format($this->getOrder()->getOrderCurrencyCode())
 			,'Курс' => 1
-			,'Сумма' => rm_number_2f($this->getOrder()->getGrandTotal())
+			,'Сумма' => df_number_2f($this->getOrder()->getGrandTotal())
 			,'Контрагенты' => array('Контрагент' => $this->getDocumentData_Customer())
 			/**
 			 * Раньше здесь использовался формат Zend_Date::TIME_MEDIUM.
@@ -173,9 +173,9 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 				'Ид' => 'ORDER_DELIVERY'
 				,'Наименование' => 'Доставка заказа'
 				,'БазоваяЕдиница' => $this->entry()->unit()
-				,'ЦенаЗаЕдиницу' => rm_number_2f($this->getOrder()->getShippingAmount())
+				,'ЦенаЗаЕдиницу' => df_number_2f($this->getOrder()->getShippingAmount())
 				,'Количество' => 1
-				,'Сумма' => rm_number_2f($this->getOrder()->getShippingAmount())
+				,'Сумма' => df_number_2f($this->getOrder()->getShippingAmount())
 				,'ЗначенияРеквизитов' => array(
 					'ЗначениеРеквизита' => array(
 						$this->entry()->name('ВидНоменклатуры', 'Услуга')

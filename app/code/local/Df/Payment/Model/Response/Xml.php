@@ -35,10 +35,10 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 	/** @return string */
 	protected function getXml() {return $this->cfg(self::P__XML);}
 	
-	/** @return \Df\Xml\Parser\Entit */
+	/** @return \Df\Xml\Parser\Entity */
 	protected function p() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\Xml\Parser\Entit::entity($this->e());
+			$this->{__METHOD__} = \Df\Xml\Parser\Entity::entity($this->e());
 		}
 		return $this->{__METHOD__};
 	}

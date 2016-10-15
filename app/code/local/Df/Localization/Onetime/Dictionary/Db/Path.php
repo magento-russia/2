@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Db_Path extends \Df\Xml\Parser\Entit {
+class Df_Localization_Onetime_Dictionary_Db_Path extends \Df\Xml\Parser\Entity {
 	/** @return string */
 	public function value() {return $this->getAttribute('value');}
 

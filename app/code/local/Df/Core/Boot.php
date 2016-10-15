@@ -185,8 +185,8 @@ class Df_Core_Boot {
 		ini_set('session.gc_probability', 1);
 		ini_set('session.gc_divisor', 100);
 		Df_Core_Lib::load('Core');
-		/** @uses Df_Qa_Message_Failure_Error::check() */
-		register_shutdown_function(array('Df_Qa_Message_Failure_Error', 'check'));
+		/** @uses \Df\Qa\Message\Failure\Error::check() */
+		register_shutdown_function(array('\Df\Qa\Message\Failure\Error', 'check'));
 		if (!ini_get('date.timezone')) {
 			/**
 			 * Временно устанавливаем в качестве часового пояса московский.

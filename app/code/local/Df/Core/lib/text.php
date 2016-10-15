@@ -383,8 +383,8 @@ function df_normalize($text) {return strtr($text, ["\r\n" => "\n", "\r" => "\n"]
 /**
  * Аналог @see str_pad() для Unicode.
  * http://stackoverflow.com/a/14773638
- * @used-by Df_Qa_Context::render()
- * @used-by Df_Qa_State::param()
+ * @used-by \Df\Qa\Context::render()
+ * @used-by \Df\Qa\State::param()
  * @param string $phrase
  * @param int $length
  * @param string $pattern

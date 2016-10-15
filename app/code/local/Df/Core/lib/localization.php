@@ -2,7 +2,7 @@
 /**
  * @param Mage_Core_Model_Locale|Zend_Locale|string|null $locale [optional]
  * @return string
- * @throws Df_Core_Exception
+ * @throws \Df\Core\Exception
  */
 function df_locale($locale = null) {
 	/** @var string $result */

@@ -9,7 +9,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	 * и регулярное выражение содержит несколько пар круглых скобок.
 	 * 3) null, если текст не соответствует регулярному выражению
 	 * 4) false, если при соответствии произошёл внутренний сбой функции @see preg_match()
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return string|string[]|null|bool
 	 */
 	public function match() {
@@ -73,7 +73,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	 * 2015-08-24
 	 * @used-by df_preg_replace()
 	 * @param string $replacement
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return string|null
 	 */
 	public function replace($replacement) {
@@ -159,7 +159,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	private function needThrowOnNotMatch() {return $this->cfg(self::$P__THROW_ON_NOT_MATCH, false);}
 
 	/**
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return void
 	 */
 	private function throwInternalError() {
@@ -236,7 +236,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 	}
 
 	/**
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return void
 	 */
 	private function throwNotMatch() {

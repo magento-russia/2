@@ -1,5 +1,5 @@
 <?php
-use Df_Core_Exception as E;
+use \Df\Core\Exception as E;
 use Df\Xml\X;
 use SimpleXMLElement as CX;
 use Varien_Simplexml_Element as MX;
@@ -421,7 +421,7 @@ function df_xml_output_html(...$args) {return df_call_a(function($text) {return
 ;}, $args);}
 
 /**
- * @used-by Df_Qa_Message::sections()
+ * @used-by \Df\Qa\Message::sections()
  * @param string[] $args
  * @return string|string[]
  */

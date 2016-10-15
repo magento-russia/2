@@ -61,17 +61,17 @@ class Df_Localization_Onetime_TypeManager extends Df_Core_Model {
 
 	/**
 	 * @return void
-	 * @throws Df_Core_Exception_Batch
+	 * @throws \Df\Core\Exception\Batch
 	 */
 	public function saveModifiedMagentoEntities() {
-		/** @var Df_Core_Exception_Batch $batchException */
-		$batchException = new Df_Core_Exception_Batch();
+		/** @var \Df\Core\Exception\Batch $batchException */
+		$batchException = new \Df\Core\Exception\Batch();
 		foreach ($this->_types as $type) {
 			/** @var Df_Localization_Onetime_Type $type */
 			try {
 				$type->saveModifiedEntities();
 			}
-			catch (Df_Core_Exception_Batch $partialBatch) {
+			catch (\Df\Core\Exception\Batch $partialBatch) {
 				$batchException->addBatch($partialBatch);
 			}
 		}

@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Realtime_Dictionary_ModulePart_Term extends \Df\Xml\Parser\Entit {
+class Df_Localization_Realtime_Dictionary_ModulePart_Term extends \Df\Xml\Parser\Entity {
 	/**
 	 * @override
 	 * @see Df_Core_Model::getId()

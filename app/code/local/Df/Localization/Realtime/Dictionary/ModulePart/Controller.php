@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Realtime_Dictionary_ModulePart_Controller extends \Df\Xml\Parser\Entit {
+class Df_Localization_Realtime_Dictionary_ModulePart_Controller extends \Df\Xml\Parser\Entity {
 	/** @return string|null */
 	public function getAction() {return $this->getAttribute('action');}
 

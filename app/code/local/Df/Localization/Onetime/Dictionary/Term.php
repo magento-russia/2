@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Term extends \Df\Xml\Parser\Entit {
+class Df_Localization_Onetime_Dictionary_Term extends \Df\Xml\Parser\Entity {
 	/**
 	 * @override
 	 * @return string

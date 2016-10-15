@@ -1,6 +1,6 @@
 <?php
 class Df_Localization_Onetime_Dictionary_Filesystem_Operation
-	extends \Df\Xml\Parser\Entit {
+	extends \Df\Xml\Parser\Entity {
 	/** @return string|null */
 	public function getDestinationFull() {
 		if (!isset($this->{__METHOD__})) {

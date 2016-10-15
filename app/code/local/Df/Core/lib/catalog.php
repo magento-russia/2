@@ -2,7 +2,7 @@
 /**
  * @param mixed $sku
  * @return bool
- * @throws Df_Core_Exception
+ * @throws \Df\Core\Exception
  */
 function df_assert_sku($sku) {
 	if (df_enable_assertions()) {
@@ -27,7 +27,7 @@ function df_check_sku($sku) {return Df_Catalog_Validate_Sku::s()->isValid($sku);
  */
 function df_param_sku($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Df_Qa_Method::validateParam(
+		\Df\Qa\Method::validateParam(
 			Df_Catalog_Validate_Sku::s(), $paramValue, $paramOrdering, $stackLevel + 1
 		);
 	}
@@ -74,7 +74,7 @@ function df_product($id = 0, $storeId = null) {
  */
 function df_result_sku($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Df_Qa_Method::validateResult(Df_Catalog_Validate_Sku::s(), $resultValue, $stackLevel + 1);
+		\Df\Qa\Method::validateResult(Df_Catalog_Validate_Sku::s(), $resultValue, $stackLevel + 1);
 	}
 }
 

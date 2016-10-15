@@ -1,19 +1,21 @@
 <?php
-class Df_Core_Exception_Entity extends Df_Core_Exception {
+namespace Df\Core\Exception;
+use Df\Core\Exception;
+class Entity extends Exception {
 	/**
 	 * @used-by Df_Dataflow_Model_Registry_Collection::save()
 	 * @used-by Df_Varien_Data_Collection::saveModified()
 	 * @override
-	 * @param Mage_Core_Model_Abstract $entity
+	 * @param \Mage_Core_Model_Abstract $entity
 	 * @param Exception $exception
 	 */
-	public function __construct(Mage_Core_Model_Abstract $entity, Exception $exception) {
+	public function __construct(\Mage_Core_Model_Abstract $entity, Exception $exception) {
 		$this->_entity = $entity;
 		$this->_exception = $exception;
 		parent::__construct();
 	}
 
-	/** @return Mage_Core_Model_Abstract */
+	/** @return \Mage_Core_Model_Abstract */
 	public function getEntity() {return $this->_entity;}
 
 	/** @return Exception*/
@@ -39,7 +41,7 @@ class Df_Core_Exception_Entity extends Df_Core_Exception {
 		df_notify_exception($this, "Данные сбойного объекта:\n" . df_dump($this->getEntity()));
 	}
 
-	/** @var Mage_Core_Model_Abstract */
+	/** @var \Mage_Core_Model_Abstract */
 	private $_entity;
 	/** @var Exception */
 	private $_exception;

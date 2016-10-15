@@ -10,10 +10,11 @@
  * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
  * Кто виноват: решение или исходный класс Zend_Filter_StringTrim — не знаю
  * (скорее, решение).
- * Поэтому мой класс Df_Zf_Filter_StringTrim дополняет решение по ссылке выше
+ * Поэтому мой класс \Df\Zf\Filter\StringTrim дополняет решение по ссылке выше
  * программным кодом из Zend Framework 2.0.
  */
-class Df_Zf_Filter_StringTrim extends Zend_Filter_StringTrim {
+namespace Df\Zf\Filter;
+class StringTrim extends \Zend_Filter_StringTrim {
 	/**
 	 * @override
 	 * @param string $value
@@ -27,8 +28,8 @@ class Df_Zf_Filter_StringTrim extends Zend_Filter_StringTrim {
 		else {
 			// Начало кода из Zend Framework 2.0
 			$chars = preg_replace(
-				array('/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'),
-				array('\\\\\\0', '\\', '\/'),
+				['/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'],
+				['\\\\\\0', '\\', '\/'],
 				$charlist
 			);
   			$pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
@@ -47,9 +48,9 @@ class Df_Zf_Filter_StringTrim extends Zend_Filter_StringTrim {
 				 * «/contacts/index/++++++++++++++++++++++++++++++++++++++++++Result:+�å+������ü+����û+��ÿ+�������è;»
 				 * Неверность кодировки объясняется, видимо, функциями ядра для работы с веб-адресами.
 				 */
-				df_notify_exception(
-					df_sprintf('Не получается выполнить стандартный trim для строки: «%s».', $value)
-				);
+				//df_notify_exception(
+				//	df_sprintf('Не получается выполнить стандартный trim для строки: «%s».', $value)
+				//);
 				$result = $this->_slowUnicodeTrim($value, $charlist);
 			}
 		}
@@ -81,7 +82,7 @@ class Df_Zf_Filter_StringTrim extends Zend_Filter_StringTrim {
 		try {
 			$utfChars = str_split(iconv('UTF-8', 'UTF-32BE', $value), 4);
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			df_error(
 				'Система получила строку в кодировке, отличной от требуемой кодировки UTF-8: «%s».'
 				,$value

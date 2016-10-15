@@ -6,7 +6,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	 * @used-by Df_YandexMarket_Model_Yml_Products::applyRule()
 	 * @param string|null $message
 	 * @return void
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	public function error_noOffers($message = null) {
 		if (!$message) {

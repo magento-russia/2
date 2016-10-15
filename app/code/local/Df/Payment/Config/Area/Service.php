@@ -23,7 +23,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 		/** @var float $amount */
 		$amount = (float)$amount;
 		return
-			rm_money(
+			df_money(
 				$currency->getCode() === $this->getCurrency()->getCode()
 				? $amount
 				: $currency->convert($amount, $this->getCurrency())

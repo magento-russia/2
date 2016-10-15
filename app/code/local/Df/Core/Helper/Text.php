@@ -494,11 +494,11 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 			 * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
 			 * Кто виноват: решение или исходный класс @see Zend_Filter_StringTrim — не знаю
 			 * (скорее, решение).
-			 * Поэтому мой класс @see Df_Zf_Filter_StringTrim дополняет решение по ссылке выше
+			 * Поэтому мой класс @see \Df\Zf\Filter\StringTrim дополняет решение по ссылке выше
 			 * программным кодом из Zend Framework 2.0.
 			 */
-			/** @var Df_Zf_Filter_StringTrim $filter */
-			$filter = new Df_Zf_Filter_StringTrim($charlist);
+			/** @var \Df\Zf\Filter\StringTrim $filter */
+			$filter = new \Df\Zf\Filter\StringTrim($charlist);
 			$result = $filter->filter($text);
 			/**
 			 * @see Zend_Filter_StringTrim::filter() теоретически может вернуть null,

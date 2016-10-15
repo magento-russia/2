@@ -5,7 +5,7 @@
  * @param string $curencyCode
  * @return string
  */
-function rm_money_fl($value, $curencyCode) {
+function df_money_fl($value, $curencyCode) {
 	return rm_currency_zf($curencyCode)->toCurrency(
 		$value, array('precision' => rm_currency_precision())
 	);
@@ -16,7 +16,7 @@ function rm_money_fl($value, $curencyCode) {
  * @param float|int $value
  * @return string
  */
-function rm_number_2f($value) {return sprintf('.2F', df_float($value));}
+function df_number_2f($value) {return sprintf('.2F', df_float($value));}
 
 /**
  * 2015-04-09
@@ -24,7 +24,7 @@ function rm_number_2f($value) {return sprintf('.2F', df_float($value));}
  * @param float|int $value
  * @return string
  */
-function rm_number_2fl($value) {return sprintf('.2f', df_float($value));}
+function df_number_2fl($value) {return sprintf('.2f', df_float($value));}
 
 /**
  * 2015-04-09
@@ -33,7 +33,7 @@ function rm_number_2fl($value) {return sprintf('.2f', df_float($value));}
  * @param float|int $value
  * @return string
  */
-function rm_number_f($value) {
+function df_number_f($value) {
 	/** @var float $valueF */
 	$valueF = df_float($value);
 	/** @var int $intPart */

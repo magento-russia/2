@@ -3,7 +3,7 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 	extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @see \Df\Xml\Parser\Entit::e()
+	 * @see \Df\Xml\Parser\Entity::e()
 	 * @return \Df\Xml\X
 	 */
 	public function e() {

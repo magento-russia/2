@@ -76,7 +76,7 @@ class Df_IPay_Model_Action_ConfirmPaymentByShop extends Df_IPay_Model_Action_Abs
 	/** @return Df_Core_Model_Money */
 	protected function getRequestParam_PaymentAmount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money($this->getRequestParam('TransactionStart/Amount'));
+			$this->{__METHOD__} = df_money($this->getRequestParam('TransactionStart/Amount'));
 		}
 		return $this->{__METHOD__};
 	}

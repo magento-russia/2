@@ -104,7 +104,7 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 	/**
 	 * @param string|string[]|mixed[]|Df_Dataflow_Exception_Import $arguments
 	 * @return void
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	protected function error($arguments) {
 		/** @var Df_Dataflow_Exception_Import $exception */

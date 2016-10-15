@@ -34,7 +34,7 @@ class Df_YandexMarket_Model_Config_Source_Currency extends Df_Admin_Config_Sourc
 	/**
 	 * @used-by Df_YandexMarket_Model_Config_Backend_Currency::_beforeSave()
 	 * @param string $code
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	public static function check($code) {
 		if (!in_array($code, self::$_currencies)) {

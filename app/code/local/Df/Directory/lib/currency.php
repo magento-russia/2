@@ -14,7 +14,7 @@ function rm_currency_name($code) {
 /**
  * 2015-03-25
  * @used-by Df_Adminhtml_Block_Sales_Order_View_Items_Renderer_Default::displayPricesDf()
- * @used-by rm_money_fl()
+ * @used-by df_money_fl()
  * @used-by Df_Directory_Model_Currency::formatDf()
  * @used-by Df_Directory_Model_Currency::formatTxtDf()
  * @used-by Df_Sales_Model_Order::formatPriceDf()

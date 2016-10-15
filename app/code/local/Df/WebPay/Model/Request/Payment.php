@@ -97,7 +97,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getAmountDiscountCorrected() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money(
+			$this->{__METHOD__} = df_money(
 					$this->getAmountDiscount()->getAsInteger()
 				-
 					/**
@@ -137,7 +137,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getAmountTaxCorrected() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money(
+			$this->{__METHOD__} = df_money(
 					$this->getAmountTax()->getAsInteger()
 				+
 					/**
@@ -172,7 +172,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				df_assert_integer($qty);
 				$resultAsInteger += ($qty * $price->getAsInteger());
 			}
-			$this->{__METHOD__} = rm_money($resultAsInteger);
+			$this->{__METHOD__} = df_money($resultAsInteger);
 		}
 		return $this->{__METHOD__};
 	}
@@ -180,7 +180,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getCalculatedAmountTotal() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money(
+			$this->{__METHOD__} = df_money(
 					$this->getCalculatedAmountSubtotal()->getAsInteger()
 				+
 					$this->getAmountShipping()->getAsInteger()
@@ -196,7 +196,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return Df_Core_Model_Money */
 	private function getCalculatedAmountTotalCorrected() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money(
+			$this->{__METHOD__} = df_money(
 					$this->getCalculatedAmountSubtotal()->getAsInteger()
 				+
 					$this->getAmountShipping()->getAsInteger()
@@ -213,7 +213,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	private function getAmountDelta() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Core_Model_Money $result */
-			$result = rm_money(
+			$result = df_money(
 				$this->amount()->getAsInteger() - $this->getCalculatedAmountTotal()->getAsInteger()
 			);
 			if (0 !== $result->getAsInteger()) {
@@ -296,7 +296,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 */
 	private function verifyAmount() {
 		/** @var Df_Core_Model_Money $calculatedAmountTotalCorrected */
-		$calculatedAmountTotalCorrected = rm_money(
+		$calculatedAmountTotalCorrected = df_money(
 				$this->getCalculatedAmountSubtotal()->getAsInteger()
 			+
 				$this->getAmountShipping()->getAsInteger()
@@ -306,7 +306,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				$this->getAmountDiscountCorrected()->getAsInteger()
 		);
 		/** @var Df_Core_Model_Money $deltaCorrected */
-		$deltaCorrected = rm_money(
+		$deltaCorrected = df_money(
 			$this->amount()->getAsInteger() - $this->getCalculatedAmountTotalCorrected()->getAsInteger()
 		);
 		if (0 !== $deltaCorrected->getAsInteger()) {

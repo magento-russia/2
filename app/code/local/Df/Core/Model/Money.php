@@ -77,7 +77,7 @@ class Df_Core_Model_Money extends Df_Core_Model {
 	private static $P__AMOUNT = 'amount';
 
 	/**
-	 * @used-by rm_money()
+	 * @used-by df_money()
 	 * @param float|int|string $amount
 	 * @return Df_Core_Model_Money
 	 */

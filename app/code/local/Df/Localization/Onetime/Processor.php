@@ -271,7 +271,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 		try {
 			Df_Localization_Onetime_TypeManager::s()->saveModifiedMagentoEntities();
 		}
-		catch (Df_Core_Exception_Batch $e) {
+		catch (\Df\Core\Exception\Batch $e) {
 			$e->log();
 			df_session()->addError(strtr(
 				'При обновлении базы данных в процессе русификации оформительской темы «{theme}»'

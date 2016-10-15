@@ -311,12 +311,12 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 						$result = $this->entry()->date($value);
 						break;
 					case 'price':
-						$result = rm_number_2f($value);
+						$result = df_number_2f($value);
 						break;
 					default:
 						// например, свойство «Вес»
 						if ('decimal' === $this->getAttribute()->getBackendType()) {
-							$result = rm_number_2f($value);
+							$result = df_number_2f($value);
 						}
 						else {
 							$result = df_cdata($value);

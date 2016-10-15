@@ -1,5 +1,5 @@
 <?php
-abstract class Df_1C_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entit {
+abstract class Df_1C_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entity {
 	/** @return string */
 	public function getExternalId() {
 		if (!isset($this->{__METHOD__})) {

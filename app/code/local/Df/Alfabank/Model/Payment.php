@@ -136,7 +136,7 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 
 	/**
 	 * @param string|null $message [optional]
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	private function registrationError($message = null) {
 		df_error($message ? $message :

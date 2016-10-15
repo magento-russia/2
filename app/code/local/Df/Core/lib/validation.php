@@ -1,5 +1,5 @@
 <?php
-use Df_Core_Exception as DFE;
+use \Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);
@@ -551,17 +551,11 @@ function df_error($message = null) {
  * @param string|string[]|mixed|Exception|null $message [optional]
  * @return DFE
  */
-function df_error_create($message = null) {
-	return
-		$message instanceof Exception
-		? df_ewrap($message)
-		: new DFE(
-			$message instanceof Phrase
-			? $message
-			: __(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args()))
-		)
-	;
-}
+function df_error_create($message = null) {return
+	$message instanceof Exception
+	? df_ewrap($message)
+	: new DFE(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args()))
+;}
 
 /**
  * 2016-08-02

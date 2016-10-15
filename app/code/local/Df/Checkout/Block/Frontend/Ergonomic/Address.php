@@ -152,7 +152,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__TYPE, Df_Zf_Validate_String_NotEmpty::s());
+		$this->_prop(self::$P__TYPE, \Df\Zf\Validate\StringT\NotEmpty::s());
 	}
 	/**
 	 * Ядро Magento использует поле «type» блоков для своих внутренних целей.

@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Validate_Sku extends Df_Zf_Validate_Type {
+class Df_Catalog_Validate_Sku extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @param mixed $value

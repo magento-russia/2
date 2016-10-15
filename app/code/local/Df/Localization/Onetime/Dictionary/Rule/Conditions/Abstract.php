@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract
-	extends \Df\Xml\Parser\Entit {
+	extends \Df\Xml\Parser\Entity {
 	/** @return string */
 	abstract protected function getEntityClass();
 

@@ -142,11 +142,11 @@ class Df_Varien_Data_Collection extends Varien_Data_Collection {
 	/**
 	 * @param Traversable|Mage_Core_Model_Abstract[] $collection
 	 * @return void
-	 * @throws Df_Core_Exception_Batch|Exception
+	 * @throws \Df\Core\Exception\Batch|Exception
 	 */
 	public static function saveModified($collection) {
-		/** @var Df_Core_Exception_Batch $batchException */
-		$batchException = new Df_Core_Exception_Batch();
+		/** @var \Df\Core\Exception\Batch $batchException */
+		$batchException = new \Df\Core\Exception\Batch();
 		df_admin_begin();
 		try {
 			foreach ($collection as $entity) {
@@ -168,7 +168,7 @@ class Df_Varien_Data_Collection extends Varien_Data_Collection {
 						$entity->save();
 					}
 					catch (Exception $e) {
-						$batchException->addException(new Df_Core_Exception_Entity($entity, $e));
+						$batchException->addException(new \Df\Core\Exception\Entity($entity, $e));
 					}
 				}
 			}

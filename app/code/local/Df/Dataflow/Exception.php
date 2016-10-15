@@ -1,2 +1,2 @@
 <?php
-class Df_Dataflow_Exception extends Df_Core_Exception {}
+class Df_Dataflow_Exception extends \Df\Core\Exception {}

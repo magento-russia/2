@@ -64,7 +64,7 @@ class ClassT extends Type {
 	/**
 	 * @used-by s()
 	 * @used-by Df_Dataflow_Model_Registry_Collection::getValidator()
-	 * @used-by Df_Core_Validator::byName()
+	 * @used-by \Df\Core\Validator::byName()
 	 * @param string $className
 	 * @return ClassT
 	 */
@@ -73,9 +73,9 @@ class ClassT extends Type {
 		return new self([self::$PARAM__CLASS => $className]);
 	}
 	/**
-	 * @used-by Df_Qa_Method::validateParamClass()
-	 * @used-by Df_Qa_Method::validateResultClass()
-	 * @used-by Df_Qa_Method::validateValueClass()
+	 * @used-by \Df\Qa\Method::validateParamClass()
+	 * @used-by \Df\Qa\Method::validateResultClass()
+	 * @used-by \Df\Qa\Method::validateValueClass()
 	 * @param string $className
 	 * @return ClassT
 	 */

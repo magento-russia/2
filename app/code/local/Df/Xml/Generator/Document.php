@@ -155,11 +155,11 @@ class Document extends \Df\Xml\Generator\Element {
 		$message = df_format($arguments);
 		$this->log($message);
 		if (!df_is_it_my_local_pc() && $this->getEmailAddressesToNotify()) {
-			Df_Qa_Message_Notification::i(array(
-				Df_Qa_Message_Notification::P__NOTIFICATION => $message
-				,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => false
-				,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => false
-				,Df_Qa_Message_Notification::P__RECIPIENTS =>
+			\Df\Qa\Message\Notification::i(array(
+				\Df\Qa\Message\Notification::P__NOTIFICATION => $message
+				,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => false
+				,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => false
+				,\Df\Qa\Message\Notification::P__RECIPIENTS =>
 					$this->getEmailAddressesToNotify()
 			))->log();
 		}
@@ -183,11 +183,11 @@ class Document extends \Df\Xml\Generator\Element {
 	 * @used-by Df_Catalog_Model_XmlExport_Catalog::getCategoriesAsTree()
 	 * Использование внутри:
 	 * @used-by getExportCurrency()
-	 * @return Df_Core_Model_StoreM
+	 * @return \Df_Core_Model_StoreM
 	 */
 	public function store() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Core_Model_StoreM $result */
+			/** @var \Df_Core_Model_StoreM $result */
 			$result = rm_state()->getStoreProcessed($needThrow = false);
 			$this->{__METHOD__} = $result ? $result : df_store();
 		}
@@ -293,7 +293,7 @@ class Document extends \Df\Xml\Generator\Element {
 		return !is_null($result) ? $result : $this->cfg(self::P__NEED_WRAP_IN_CDATA_ALL, false);
 	}
 
-	/** @return Df_Core_Model_Logger */
+	/** @return \Df_Core_Model_Logger */
 	private function createLogger() {
 		/** @var string $prefix */
 		$prefix = implode('-', array_filter(array(df_module_id($this, '.'), $this->getLogDocumentName())));

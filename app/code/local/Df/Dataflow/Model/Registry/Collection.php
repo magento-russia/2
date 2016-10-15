@@ -79,11 +79,11 @@ abstract class Df_Dataflow_Model_Registry_Collection
 
 	/**
 	 * @return void
-	 * @throws Df_Core_Exception_Batch|Exception
+	 * @throws \Df\Core\Exception\Batch|Exception
 	 */
 	public function save() {
-		/** @var Df_Core_Exception_Batch $batchException */
-		$batchException = new Df_Core_Exception_Batch();
+		/** @var \Df\Core\Exception\Batch $batchException */
+		$batchException = new \Df\Core\Exception\Batch();
 		df_admin_begin();
 		try {
 			foreach ($this->getCollectionRm() as $entity) {
@@ -99,7 +99,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 						$this->saveEntity($entity);
 					}
 					catch (Exception $e) {
-						$batchException->addException(new Df_Core_Exception_Entity($entity, $e));
+						$batchException->addException(new \Df\Core\Exception\Entity($entity, $e));
 					}
 				}
 			}
@@ -188,7 +188,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	/**
 	 * @param Mage_Core_Model_Abstract $entity
 	 * @return void
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	protected function validateEntity(Mage_Core_Model_Abstract $entity) {
 		if (!$this->getValidator()->isValid($entity)) {
@@ -268,7 +268,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	private function getValidator() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = new Zend_Validate();
-			$this->{__METHOD__}->addValidator(Df_Zf_Validate_Class::i($this->getEntityClass()));
+			$this->{__METHOD__}->addValidator(\Df\Zf\Validate\ClassT::i($this->getEntityClass()));
 		}
 		return $this->{__METHOD__};
 	}

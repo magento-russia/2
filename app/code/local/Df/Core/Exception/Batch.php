@@ -1,18 +1,20 @@
 <?php
-class Df_Core_Exception_Batch extends Df_Core_Exception {
+namespace Df\Core\Exception;
+use Df\Core\Exception;
+class Batch extends Exception {
 	/**
-	 * @param Df_Core_Exception_Batch $from
+	 * @param Batch $from
 	 * @return void
 	 */
-	public function addBatch(Df_Core_Exception_Batch $from) {
+	public function addBatch(Batch $from) {
 		$this->_exceptions = array_merge($this->_exceptions, $from->_exceptions);
 	}
 
 	/**
-	 * @param Df_Core_Exception_Entity $entityException
+	 * @param Entity $entityException
 	 * @return void
 	 */
-	public function addException(Df_Core_Exception_Entity $entityException) {
+	public function addException(Entity $entityException) {
 		$this->_exceptions[]= $entityException;
 	}
 
@@ -33,21 +35,18 @@ class Df_Core_Exception_Batch extends Df_Core_Exception {
 
 	/**
 	 * @used-by Df_Localization_Onetime_Processor::saveModifiedMagentoEntities()
-	 * @uses Df_Core_Exception_Entity::log()
+	 * @uses \Df\Core\Exception\Entity::log()
 	 * @return void
 	 */
 	public function log() {df_each($this->_exceptions, 'log');}
 
-	/**
-	 * @return null
-	 * @throws Df_Core_Exception_Batch
-	 */
+	/** @throws Batch */
 	public function throwIfNeeed() {
 		if ($this->hasExceptions()) {
 			throw $this;
 		}
 	}
 
-	/** @var Df_Core_Exception_Entity[] */
+	/** @var Entity[] */
 	private $_exceptions = array();
 }

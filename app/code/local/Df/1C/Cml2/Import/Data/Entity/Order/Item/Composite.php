@@ -18,7 +18,7 @@ class Df_1C_Cml2_Import_Data_Entity_Order_Item_Composite
 	extends Df_1C_Cml2_Import_Data_Entity_Order_Item {
 	/**
 	 * @override
-	 * @see \Df\Xml\Parser\Entit::leaf()
+	 * @see \Df\Xml\Parser\Entity::leaf()
 	 * @param string $name
 	 * @param string|null $default [optional]
 	 * @return mixed

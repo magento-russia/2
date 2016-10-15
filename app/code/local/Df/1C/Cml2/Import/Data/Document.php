@@ -3,7 +3,7 @@
  * Данный класс соответствует документу в формате XML,
  * передаваемому 1С в интернет-магазин.
  */
-abstract class Df_1C_Cml2_Import_Data_Document extends \Df\Xml\Parser\Entit {
+abstract class Df_1C_Cml2_Import_Data_Document extends \Df\Xml\Parser\Entity {
 	/**
 	 * 2015-08-04
 	 * @return string

@@ -18,7 +18,7 @@ class Df_1C_Cml2_Export_Entry extends Df_Core_Model {
 		return array(
 			'Наименование' => $name
 			,'УчтеноВСумме' => df_bts($includedInTotals)
-			,'Сумма' => rm_number_2f($value)
+			,'Сумма' => df_number_2f($value)
 		);
 	}
 

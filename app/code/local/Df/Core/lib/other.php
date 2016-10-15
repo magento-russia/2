@@ -141,10 +141,10 @@ function df_notify($message) {
 	else {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		Df_Qa_Message_Notification::i(array(
-			Df_Qa_Message_Notification::P__NOTIFICATION => df_format($arguments)
-			,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => true
-			,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
+		\Df\Qa\Message\Notification::i(array(
+			\Df\Qa\Message\Notification::P__NOTIFICATION => df_format($arguments)
+			,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => true
+			,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => true
 		))->log();
 	}
 }
@@ -161,12 +161,12 @@ function df_notify_admin($message, $doLog = true) {
 		$arguments = func_get_args();
 		$message = df_format($arguments);
 	}
-	Df_Qa_Message_Notification::i(array(
-		Df_Qa_Message_Notification::P__NOTIFICATION => $message
-		,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => $doLog
-		,Df_Qa_Message_Notification::P__FILE_NAME => 'rm.admin.log'
-		,Df_Qa_Message_Notification::P__NEED_NOTIFY_ADMIN => true
-		,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => false
+	\Df\Qa\Message\Notification::i(array(
+		\Df\Qa\Message\Notification::P__NOTIFICATION => $message
+		,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => $doLog
+		,\Df\Qa\Message\Notification::P__FILE_NAME => 'rm.admin.log'
+		,\Df\Qa\Message\Notification::P__NEED_NOTIFY_ADMIN => true
+		,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => false
 	))->log();
 }
 
@@ -201,11 +201,11 @@ function df_notify_me($message, $doLog = true) {
 		$arguments = func_get_args();
 		$message = df_format($arguments);
 	}
-	Df_Qa_Message_Notification::i(array(
-		Df_Qa_Message_Notification::P__NOTIFICATION => $message
-		,Df_Qa_Message_Notification::P__NEED_LOG_TO_FILE => $doLog
-		,Df_Qa_Message_Notification::P__FILE_NAME => 'rm.developer.log'
-		,Df_Qa_Message_Notification::P__NEED_NOTIFY_DEVELOPER => true
+	\Df\Qa\Message\Notification::i(array(
+		\Df\Qa\Message\Notification::P__NOTIFICATION => $message
+		,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => $doLog
+		,\Df\Qa\Message\Notification::P__FILE_NAME => 'rm.developer.log'
+		,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => true
 	))->log();
 }
 

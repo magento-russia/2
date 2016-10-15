@@ -36,7 +36,7 @@ class Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency
 				$value = df_float($value) * $this->_getRate($row);
 				/** @var string $sign */
 				$sign = $column->getDataUsingMethod('show_number_sign') && (0 < $value) ? '+' : '';
-				$result = $sign . rm_money_fl($value, $currencyCode);
+				$result = $sign . df_money_fl($value, $currencyCode);
 			}
 		}
 		return $result;

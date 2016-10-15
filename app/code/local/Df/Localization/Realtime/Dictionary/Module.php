@@ -1,6 +1,6 @@
 <?php
 class Df_Localization_Realtime_Dictionary_Module
-	extends \Df\Xml\Parser\Entit {
+	extends \Df\Xml\Parser\Entity {
 	/** @return Df_Localization_Realtime_Dictionary_ModulePart_Blocks */
 	public function getBlocks() {
 		if (!isset($this->{__METHOD__})) {

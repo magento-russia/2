@@ -115,7 +115,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 					 * @see Df_Core_Model::_validateByConcreteValidator()
 					 *
 					 * Конкретно для свойства типа @see Df_Core_Model::V_ISO2
-					 * я это исправил в методе @see Df_Zf_Validate_String_Iso2::filter(),
+					 * я это исправил в методе @see \Df\Zf\Validate\StringT\Iso2::filter(),
 					 * однако чтобы у нас не возникало в будущем сбоев для свойств других типов,
 					 * я добавил @uses df_clean().
 					 */

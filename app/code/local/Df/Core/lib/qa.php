@@ -59,7 +59,7 @@ function df_is_it_my_local_pc() {
 
 /**
  * @used-by Df_1C_Cml2_Action_Catalog_Import::_process()
- * @used-by Df_Qa_Message::message()
+ * @used-by \Df\Qa\Message::message()
  * @used-by Df_Shipping_Collector::call()
  * @return void
  */
@@ -74,14 +74,14 @@ function rm_context() {
 	}
 	else {
 		df_assert_between($count, 2, 3);
-		Df_Qa_Context::add($args[0], $args[1], dfa($args, 2, 0));
+		\Df\Qa\Context::add($args[0], $args[1], dfa($args, 2, 0));
 	}
 }
 
 /**
  * 2015-04-05
- * @used-by Df_Core_Exception_InvalidObjectProperty::__construct()
- * @used-by Df_Core_Validator::check()
+ * @used-by \Df\Core\Exception\InvalidObjectProperty::__construct()
+ * @used-by \Df\Core\Validator::check()
  * @param mixed $value
  * @param bool $addQuotes [optional]
  * @return string

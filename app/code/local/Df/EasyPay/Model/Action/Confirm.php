@@ -3,7 +3,7 @@ class Df_EasyPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 */
 	protected function checkPaymentAmount() {
 		if (

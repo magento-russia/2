@@ -30,7 +30,7 @@ abstract class Df_Localization_Onetime_Type extends Df_Core_Model {
 
 	/**
 	 * @return void
-	 * @throws Df_Core_Exception_Batch
+	 * @throws \Df\Core\Exception\Batch
 	 */
 	public function saveModifiedEntities() {
 		/** @var Df_Dataflow_Model_Registry_Collection|Df_Dataflow_Model_Registry_MultiCollection|Mage_Core_Model_Abstract[] $entities */

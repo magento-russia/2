@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Realtime_Dictionary_Layout extends \Df\Xml\Parser\Entit {
+class Df_Localization_Realtime_Dictionary_Layout extends \Df\Xml\Parser\Entity {
 	/**
 	 * @used-by Df_Localization_Realtime_Dictionary::handleForLayout()
 	 * @return Df_Localization_Realtime_Dictionary_ModulePart_Terms

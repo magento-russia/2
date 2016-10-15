@@ -149,7 +149,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 
 	/** @return string */
 	public function getFormatedCurrencyAmount() {
-		return rm_money_fl($this->getCurrencyAmount(), $this->getWebsiteCurrencyCode());
+		return df_money_fl($this->getCurrencyAmount(), $this->getWebsiteCurrencyCode());
 	}
 
 	/** @return Df_Reward_Model_Reward_History */

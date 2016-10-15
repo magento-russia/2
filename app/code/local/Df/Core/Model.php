@@ -280,9 +280,9 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 
 	/**
 	 * @param string $key
-	 * @param Zend_Validate_Interface|Df_Zf_Validate_Type|string|mixed[] $validator
+	 * @param Zend_Validate_Interface|\Df\Zf\Validate\Type|string|mixed[] $validator
 	 * @param bool|null $isRequired [optional]
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return Df_Core_Model
 	 */
 	protected function _prop($key, $validator, $isRequired = null) {
@@ -328,22 +328,22 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var Zend_Filter_Interface[] $additionalFilters */
 		$additionalFilters = array();
 		if (!is_array($validator)) {
-			$validator = Df_Core_Validator::resolveForProperty(
+			$validator = \Df\Core\Validator::resolveForProperty(
 				$this, $validator, $key, $skipOnNull = false === $isRequired
 			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 		}
 		else {
-			/** @var array(Zend_Validate_Interface|Df_Zf_Validate_Type|string) $additionalValidatorsRaw */
+			/** @var array(Zend_Validate_Interface|\Df\Zf\Validate\Type|string) $additionalValidatorsRaw */
 			$additionalValidatorsRaw = df_tail($validator);
-			$validator = Df_Core_Validator::resolveForProperty(
+			$validator = \Df\Core\Validator::resolveForProperty(
 				$this, df_first($validator), $key, $skipOnNull = false === $isRequired
 			);
 			df_assert($validator instanceof Zend_Validate_Interface);
 			foreach ($additionalValidatorsRaw as $additionalValidatorRaw) {
 				/** @var Zend_Validate_Interface|Zend_Filter_Interface|string $additionalValidatorsRaw */
 				/** @var Zend_Validate_Interface|Zend_Filter_Interface $additionalValidator */
-				$additionalValidator = Df_Core_Validator::resolveForProperty(
+				$additionalValidator = \Df\Core\Validator::resolveForProperty(
 					$this, $additionalValidatorRaw, $key
 				);
 				if ($additionalValidator instanceof Zend_Validate_Interface) {
@@ -380,13 +380,13 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var bool $hasValueVorTheKey */
 		$hasValueVorTheKey = array_key_exists($key, $this->_data);
 		if ($hasValueVorTheKey) {
-			Df_Core_Validator::checkProperty($this, $key, $this->_data[$key], $validator);
+			\Df\Core\Validator::checkProperty($this, $key, $this->_data[$key], $validator);
 		}
 		foreach ($additionalValidators as $additionalValidator) {
 			/** @var Zend_Validate_Interface $additionalValidator */
 			$this->_validators[$key][] = $additionalValidator;
 			if ($hasValueVorTheKey) {
-				Df_Core_Validator::checkProperty($this, $key, $this->_data[$key], $additionalValidator);
+				\Df\Core\Validator::checkProperty($this, $key, $this->_data[$key], $additionalValidator);
 			}
 		}
 		return $this;
@@ -696,22 +696,22 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	/**
 	 * @param string $key
 	 * @param mixed $value
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return void
 	 */
 	private function _validate($key, $value) {
-		/** @var @var array(Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
+		/** @var @var array(Zend_Validate_Interface|\Df\Zf\Validate\Type) $validators */
 		/** @noinspection PhpParamsInspection */
 		$validators = dfa($this->_validators, $key, array());
 		foreach ($validators as $validator) {
-			/** @var Zend_Validate_Interface|Df_Zf_Validate_Type $validator */
-			Df_Core_Validator::checkProperty($this, $key, $value, $validator);
+			/** @var Zend_Validate_Interface|\Df\Zf\Validate\Type $validator */
+			\Df\Core\Validator::checkProperty($this, $key, $value, $validator);
 		}
 	}
 
 	/**
 	 * @param array(string => mixed) $params
-	 * @throws Df_Core_Exception
+	 * @throws \Df\Core\Exception
 	 * @return void
 	 */
 	private function _validateArray(array $params) {

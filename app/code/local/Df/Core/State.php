@@ -111,7 +111,7 @@ class Df_Core_State {
 	 *
 	 * @param bool $needThrow [optional]
 	 * @return Df_Core_Model_StoreM|null
-	 * @throws Df_Core_Exception|Exception
+	 * @throws \Df\Core\Exception|Exception
 	 */
 	public function getStoreProcessed($needThrow = true) {
 		if (!isset($this->_storeProcessed)) {

@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Validate_Product extends Df_Zf_Validate {
+class Df_1C_Validate_Product extends \Df\Zf\Validate {
 	/**
 	 * @override
 	 * @param Df_Catalog_Model_Product $value
@@ -14,9 +14,9 @@ class Df_1C_Validate_Product extends Df_Zf_Validate {
 	 * @override
 	 * @return string
 	 */
-	protected function getMessageInternal() {
-		'Добавляемому в реестр товару должен быть присвоен внешний идентификатор';
-	}
+	protected function getMessageInternal() {return
+		'Добавляемому в реестр товару должен быть присвоен внешний идентификатор'
+	;}
 
 	/** @return Df_1C_Validate_Product */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
