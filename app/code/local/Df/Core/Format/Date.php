@@ -1,6 +1,7 @@
 <?php
-class Df_Core_Format_Date extends Df_Core_Model {
-	/** @return Zend_Date */
+namespace Df\Core\Format;
+class Date extends \Df_Core_Model {
+	/** @return \Zend_Date */
 	public function getDate() {
 		return $this->cfg(self::P__DATE);
 	}
@@ -8,7 +9,7 @@ class Df_Core_Format_Date extends Df_Core_Model {
 	/** @return string */
 	public function getDayWith2Digits() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_dts($this->getDate(), Zend_Date::DAY);
+			$this->{__METHOD__} = df_dts($this->getDate(), \Zend_Date::DAY);
 		}
 		return $this->{__METHOD__};
 	}
@@ -24,7 +25,7 @@ class Df_Core_Format_Date extends Df_Core_Model {
 	/** @return string */
 	public function getMonthInGenetiveCase() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getDate()->toString(Zend_Date::MONTH_NAME, null, 'ru_RU');
+			$this->{__METHOD__} = $this->getDate()->toString(\Zend_Date::MONTH_NAME, null, 'ru_RU');
 		}
 		return $this->{__METHOD__};
 	}
@@ -32,7 +33,7 @@ class Df_Core_Format_Date extends Df_Core_Model {
 	/** @return string */
 	public function getYear() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_dts($this->getDate(), Zend_Date::YEAR);
+			$this->{__METHOD__} = df_dts($this->getDate(), \Zend_Date::YEAR);
 		}
 		return $this->{__METHOD__};
 	}
@@ -51,7 +52,7 @@ class Df_Core_Format_Date extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Core_Format_Date
+	 * @return $this
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 }

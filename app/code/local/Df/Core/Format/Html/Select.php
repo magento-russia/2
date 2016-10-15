@@ -1,5 +1,6 @@
 <?php
-final class Df_Core_Format_Html_Select extends Df_Core_Model {
+namespace Df\Core\Format\Html;
+final class Select extends \Df_Core_Model {
 	/**
 	 * @used-by render()
 	 * @return string

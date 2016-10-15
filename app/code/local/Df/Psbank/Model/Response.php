@@ -317,7 +317,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	 */
 	public function getTime() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df()->date()->fromTimestamp14($this->getTimestamp(), 'UTC');
+			$this->{__METHOD__} = df_date_from_timestamp_14($this->getTimestamp(), 'UTC');
 		}
 		return $this->{__METHOD__};
 	}

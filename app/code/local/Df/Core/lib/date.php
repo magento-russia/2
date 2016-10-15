@@ -22,6 +22,44 @@ function df_date_format($date = null, $format = Mage_Core_Model_Locale::FORMAT_T
 }
 
 /**
+ * Создаёт объект-дату по строке вида «20131115153657».
+ * @param string $timestamp
+ * @param string|null $offsetType [optional]
+ * @return ZD
+ */
+function df_date_from_timestamp_14($timestamp, $offsetType = null) {
+	df_assert(ctype_digit($timestamp));
+	df_assert_eq(14, strlen($timestamp));
+	// Почему-то new Zend_Date($timestamp, 'yMMddHHmmss') у меня не работает
+	/** @var string $pattern */
+	$pattern = '#(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})#';
+	/** @var int[] $matches */
+	$matches = [];
+	/** @var int $r */
+	$r = preg_match($pattern, $timestamp, $matches);
+	df_assert_eq(1, $r);
+	/** @var int $hour */
+	$hour = df_nat0(dfa($matches, 4));
+	if ($offsetType) {
+		df_assert_in($offsetType, ['UTC', 'GMT']);
+		/** @var int $offsetFromGMT */
+		$offsetFromGMT = df_round(df_int(df_dts(ZD::now(), ZD::TIMEZONE_SECS)) / 3600);
+		$hour += $offsetFromGMT;
+		if ('UTC' === $offsetType) {
+			$hour++;
+		}
+	}
+	return new ZD([
+		'year' => dfa($matches, 1)
+	   ,'month' => dfa($matches, 2)
+	   ,'day' => dfa($matches, 3)
+	   ,'hour' => $hour
+	   ,'minute' => dfa($matches, 5)
+	   ,'second' => dfa($matches, 6)
+	]);
+}
+
+/**
  * 2016-07-19
  * Портировал из Российской сборки Magento.
  * @param ZD $date1
@@ -29,6 +67,12 @@ function df_date_format($date = null, $format = Mage_Core_Model_Locale::FORMAT_T
  * @return bool
  */
 function df_date_gt(ZD $date1, ZD $date2) {return $date1->getTimestamp() > $date2->getTimestamp();}
+
+/**
+ * 2016-10-15
+ * @return ZD
+ */
+function df_date_least() {return new ZD(0);}
 
 /**
  * 2016-07-19
@@ -335,5 +379,24 @@ function df_time_format($date = null, $format = Mage_Core_Model_Locale::FORMAT_T
  * @param int $add
  * @return ZD
  */
-function df_today_add($add) {return ZD::now()->addDay($add);}
+function df_today_add($add) {return df_date_reset_time(ZD::now()->addDay($add));}
+
+/**
+ * 2016-10-15
+ * @param int $sub
+ * @return ZD
+ */
+function df_today_sub($sub) {return df_date_reset_time(ZD::now()->subDay($sub));}
+
+/**
+ * 2016-10-15
+ * @return ZD
+ */
+function df_tomorrow() {return df_today_add(1);}
+
+/**
+ * 2016-10-15
+ * @return ZD
+ */
+function df_yesterday() {return df_today_sub(1);}
 

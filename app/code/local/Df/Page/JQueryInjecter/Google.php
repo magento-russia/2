@@ -10,12 +10,12 @@ class Df_Page_JQueryInjecter_Google extends Df_Page_JQueryInjecter {
 	 */
 	protected function _process($format, array &$staticItems) {
 		return df_cc_n(
-			Df_Core_Format_Html_Tag::scriptExternal($this->getPath())
-			,Df_Core_Format_Html_Tag::scriptLocal(
+			\Df\Core\Format\Html\Tag::scriptExternal($this->getPath())
+			,\Df\Core\Format\Html\Tag::scriptLocal(
 				// Инициализируем переменную $j для совместимости с Magento CE 1.9 (там так делается)
 				'var $j = jQuery.noConflict(); jQuery.migrateMute = true;'
 			)
-			,Df_Core_Format_Html_Tag::scriptExternal($this->getPathMigrate())
+			,\Df\Core\Format\Html\Tag::scriptExternal($this->getPathMigrate())
 			,''
 		);
 	}

@@ -1,5 +1,7 @@
 <?php
-class Df_Core_Format_NounForAmounts extends Df_Core_Model {
+namespace Df\Core\Format;
+/** @method static NounForAmounts s() */
+class NounForAmounts extends \Df_Core_Model {
 	/**
 	 * @param int $amount
 	 * @param array $forms
@@ -50,12 +52,7 @@ class Df_Core_Format_NounForAmounts extends Df_Core_Model {
 		df_result_integer($result);
 		return $result;
 	}
-
-
 	const NOUN_FORM_1 = 0;
 	const NOUN_FORM_2 = 1;
 	const NOUN_FORM_5 = 2;
-
-	/** @return Df_Core_Format_NounForAmounts */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

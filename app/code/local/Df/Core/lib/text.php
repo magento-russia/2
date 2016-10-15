@@ -212,7 +212,7 @@ function df_dump($value) {return Df_Core_Dumper::i()->dump($value);}
  * (в частности, в шаблонах *.phtml), поэтому, видимо, их устраивает режим ENT_COMPAT.
  * Российская сборка Magento использует при формировании HTML одиночные кавычки,
  * поэтому нам нужен режим ENT_QUOTES.
- * Это важно, например, в методе @used-by Df_Core_Format_Html_Tag::getAttributeAsText()
+ * Это важно, например, в методе @used-by \Df\Core\Format\Html\Tag::getAttributeAsText()
  * @see df_ejs()
  * @param string[] ...$args
  * @return string|string[]

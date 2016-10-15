@@ -1,16 +1,13 @@
 <?php
-class Df_Core_Format_NumberInWords extends Df_Core_Model {
+namespace Df\Core\Format;
+class NumberInWords extends \Df_Core_Model {
 	/** @return string */
 	public function getFractionalValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				(0 === $this->getNumberFractionalPart())
-				? ''
-				: implode(' ', array(
-					$this->getNumberFractionalPartInWords()
-					,dfa($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
-				))
-			;
+			$this->{__METHOD__} = 0 === $this->getNumberFractionalPart() ? '' : df_cc_s(
+				$this->getNumberFractionalPartInWords()
+				,dfa($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -18,14 +15,10 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	/** @return string */
 	public function getIntegerValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				(0 === $this->getNumberIntegerPart())
-				? ''
-				: implode(' ', array(
-					$this->getNumberIntegerPartInWords()
-					,dfa($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
-				))
-			;
+			$this->{__METHOD__} = 0 === $this->getNumberIntegerPart() ? '' : df_cc_s(
+				$this->getNumberIntegerPartInWords()
+				,dfa($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -77,37 +70,18 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	/** @return string */
 	public function getValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_ccc(' '
-				,$this->getIntegerValueInWords()
-				,$this->getFractionalValueInWords()
+			$this->{__METHOD__} = df_cc_s(
+				$this->getIntegerValueInWords(), $this->getFractionalValueInWords()
 			);
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::P__FRACTIONAL_PART_GENDER, DF_V_STRING_NE)
-			->_prop(self::P__FRACTIONAL_PART_PRECISION, DF_V_NAT0)
-			->_prop(self::P__FRACTIONAL_PART_UNITS, DF_V_ARRAY)
-			->_prop(self::P__INTEGER_PART_GENDER, DF_V_STRING_NE)
-			->_prop(self::P__INTEGER_PART_UNITS, DF_V_ARRAY)
-			// Обратите внимание, что целые числа не проходят валидацию is_float,
-			// но проходят валидацию Zend_Validate_Float
-			->_prop(self::P__NUMBER, DF_V_FLOAT)
-		;
 	}
 
 	/** @return string */
 	private function getFractionalPartGender() {
 		/** @var string $result */
 		$result = $this->cfg(self::P__FRACTIONAL_PART_GENDER);
-		df_assert_in($result, array(self::GENDER__MALE, self::GENDER__FEMALE));
+		df_assert_in($result, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		return $result;
 	}
 
@@ -121,7 +95,7 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	private function getIntegerPartGender() {
 		/** @var string $result */
 		$result = $this->cfg(self::P__INTEGER_PART_GENDER);
-		df_assert_in($result, array(self::GENDER__MALE, self::GENDER__FEMALE));
+		df_assert_in($result, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		return $result;
 	}
 
@@ -137,24 +111,11 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 		df_param_integer($number, 0);
 		df_param_between($number, 0, 0, self::MAX_NUMBER);
 		df_param_string($gender, 1);
-		df_assert_in(
-			$gender
-			,array(
-				Df_Core_Format_NumberInWords::GENDER__MALE
-				,Df_Core_Format_NumberInWords::GENDER__FEMALE
-			)
-		)
-		;
+		df_assert_in($gender, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		/** @var string $result */
 		$result = 'ноль';
 		if (0 !== $number) {
-			$result  =
-				preg_replace(
-					array('/s+/','/\s$/')
-					,array(' ','')
-					,$this->getNum1E9($number, $gender)
-				)
-			;
+			$result  = preg_replace(['/s+/','/\s$/'], [' ',''], $this->getNum1E9($number, $gender));
 		}
 		df_result_string($result);
 		return $result;
@@ -203,9 +164,9 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Core_Format_NumberInWords
+	 * @return \Df\Core\Format\NumberInWords
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(array $parameters = []) {return new self($parameters);}
 
 	/**
 	 * @static
@@ -215,27 +176,27 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	 */
 	private static function getNum100($number, $gender) {
 		/** @var array(string => array(string => string)) $words */
-		static $words = array(
-			self::GENDER__MALE => array(
+		static $words = [
+			self::GENDER__MALE => [
 				''
 				,'один','два','три','четыре','пять','шесть'
 				, 'семь','восемь','девять','десять','одиннадцать'
 				, 'двенадцать','тринадцать','четырнадцать','пятнадцать'
 				, 'шестнадцать','семнадцать','восемнадцать','девятнадцать'
-			)
-			,self::GENDER__FEMALE => array(
+			]
+			,self::GENDER__FEMALE => [
 				'','одна','две','три','четыре','пять','шесть'
 				, 'семь','восемь','девять','десять','одиннадцать'
 				, 'двенадцать','тринадцать','четырнадцать','пятнадцать'
 				, 'шестнадцать','семнадцать','восемнадцать','девятнадцать'
-			)
-		);
+			]
+		];
 		/** @var array(int => string) $words2 */
-		static $words2 = array(
+		static $words2 = [
 			''
 			,'десять','двадцать','тридцать','сорок','пятьдесят'
 			,'шестьдесят','семьдесят','восемьдесят','девяносто'
-		);
+		];
 		return
 			$number < 20
 			? dfa($words[$gender], $number)
@@ -252,11 +213,11 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	 */
 	private static function getNum1000($number, $gender) {
 		/** @var array(int => string) $words */
-		static $words = array(
+		static $words = [
 			''
 			,'сто','двести','триста','четыреста','пятьсот'
 			,'шестьсот','семьсот','восемьсот','девятьсот'
-		);
+		];
 		return
 			$number < 100
 			? self::getNum100($number, $gender)
@@ -307,16 +268,16 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	 */
 	private static function getNum1E6($number, $gender) {
 		/** @var array(int => string) */
-		static $words = array( 'тысяча', 'тысячи', 'тысяч');
+		static $words = ['тысяча', 'тысячи', 'тысяч'];
 		/** @var string $result */
 		$result =
 			(1000 > $number)
 			? self::getNum1000($number, $gender)
-			: implode(' ', array(
+			: df_cc_s(
 				self::getNum1000((int)($number / 1000), self::GENDER__MALE)
 				,dfa($words, self::getNum125((int)($number / 1000)))
 				,self::getNum1000($number % 1000, $gender)
-			))
+			)
 		;
 		df_result_string($result);
 		return $result;
@@ -329,15 +290,15 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	 */
 	private static function getNum1E9($number, $gender) {
 		/** @var array(int => string) $words */
-		static $words =	array('миллион', 'миллиона', 'миллионов');
+		static $words =	['миллион', 'миллиона', 'миллионов'];
 		return
 			$number < 1e6
 			? self::getNum1E6($number, $gender)
-			: implode(' ', array(
+			: df_cc_s(
 				self::getNum1000((int)($number / 1e6), self::GENDER__FEMALE)
 				,dfa($words, self::getNum125((int)($number / 1e6)))
 				,self::getNum1E6($number % 1e6, $gender)
-			))
+			)
 		;
 	}
 }

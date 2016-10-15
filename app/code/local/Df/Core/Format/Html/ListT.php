@@ -1,16 +1,17 @@
 <?php
-class Df_Core_Format_Html_List extends Df_Core_Model {
+namespace Df\Core\Format\Html;
+class ListT extends \Df_Core_Model {
 	/** @return string */
 	private function _render() {
 		return df_tag($this->getTag(), $this->getAttributes(), $this->renderItems());
 	}
 
 	/** @return array(string => string) */
-	private function getAttributes() {return array_filter(array('class' => $this->getCssClassForList()));}
+	private function getAttributes() {return array_filter(['class' => $this->getCssClassForList()]);}
 
 	/** @return array(string => string) */
 	private function getAttributesForItem() {
-		return array_filter(array('class' => $this->getCssClassForItem()));
+		return array_filter(['class' => $this->getCssClassForItem()]);
 	}
 
 	/** @return string|null */
@@ -36,7 +37,7 @@ class Df_Core_Format_Html_List extends Df_Core_Model {
 
 	/** @return string */
 	private function renderItems() {
-		return df_cc_n(array_map(array($this, 'renderItem'), $this->getItems()));
+		return df_cc_n(array_map([$this, 'renderItem'], $this->getItems()));
 	}
 
 	/**
@@ -52,7 +53,6 @@ class Df_Core_Format_Html_List extends Df_Core_Model {
 			->_prop(self::$P__ITEMS, DF_V_ARRAY)
 		;
 	}
-
 	/** @var string */
 	private static $P__CSS_CLASS_FOR_ITEM = 'css_class_for_item';
 	/** @var string */
@@ -73,13 +73,11 @@ class Df_Core_Format_Html_List extends Df_Core_Model {
 	public static function render(
 		array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
 	) {
-		/** @var Df_Core_Format_Html_List $i */
-		$i = new self(array(
+		return (new self([
 			self::$P__ITEMS => $items
 			,self::$P__IS_ORDERED => $isOrdered
 			,self::$P__CSS_CLASS_FOR_LIST => $cssClassForList
 			,self::$P__CSS_CLASS_FOR_ITEM => $cssClassForItem
-		));
-		return $i->_render();
+		]))->_render();
 	}
 }

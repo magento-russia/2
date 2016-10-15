@@ -1,12 +1,6 @@
 <?php
 class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	/**
-	 * @param Zend_Date $date
-	 * @return Zend_Date
-	 */
-	public function cleanTime(Zend_Date $date) {return $date->setHour(0)->setMinute(0)->setSecond(0);}
-
-	/**
 	 * @param int|int[] $arguments
 	 * @return Zend_Date
 	 */
@@ -26,26 +20,6 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 			);
 		}
 		return new Zend_Date(array_combine($paramKeys, $arguments));
-	}
-
-	/**
-	 * @param string $dateAsString
-	 * @param string $format [optional]
-	 * @throws Exception
-	 * @return Zend_Date
-	 */
-	public function createForDefaultTimezone($dateAsString, $format = Zend_Date::W3C) {
-		return $this->createForTimezone($dateAsString, $format, Mage_Core_Model_Locale::DEFAULT_TIMEZONE);
-	}
-
-	/**
-	 * @param string $dateAsString
-	 * @param string $format [optional]
-	 * @throws Exception
-	 * @return Zend_Date
-	 */
-	public function createForMoscow($dateAsString, $format = Zend_Date::W3C) {
-		return $this->createForTimezone($dateAsString, $format, 'Europe/Moscow');
 	}
 
 	/**
@@ -92,107 +66,6 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	}
 
 	/**
-	 * Создаёт объект-дату по строке вида «20131115153657».
-	 * @param string $timestamp
-	 * @param string|null $offsetType [optional]
-	 * @return Zend_Date
-	 */
-	public function fromTimestamp14($timestamp, $offsetType = null) {
-		df_assert(ctype_digit($timestamp));
-		df_assert_eq(14, strlen($timestamp));
-		// Почему-то new Zend_Date($timestamp, 'yMMddHHmmss') у меня не работает
-		/** @var string $pattern */
-		$pattern = '#(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})#';
-		/** @var int[] $matches */
-		$matches = array();
-		/** @var int $r */
-		$r = preg_match($pattern, $timestamp, $matches);
-		df_assert_eq(1, $r);
-		/** @var int $hour */
-		$hour = df_nat0(dfa($matches, 4));
-		if ($offsetType) {
-			df_assert_in($offsetType, array('UTC', 'GMT'));
-			/** @var int $offsetFromGMT */
-			$offsetFromGMT = df_round(df_int(df_dts(Zend_Date::now(), Zend_Date::TIMEZONE_SECS)) / 3600);
-			$hour += $offsetFromGMT;
-			if ('UTC' === $offsetType) {
-				$hour++;
-			}
-		}
-		return new Zend_Date(array(
-			'year' => dfa($matches, 1)
-		   ,'month' => dfa($matches, 2)
-		   ,'day' => dfa($matches, 3)
-		   ,'hour' => $hour
-		   ,'minute' => dfa($matches, 5)
-		   ,'second' => dfa($matches, 6)
-		));
-	}
-
-	/**
-	 * @param Zend_Date $startDate
-	 * @param int $numWorkingDays
-	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
-	 * @return int
-	 */
-	public function getNumCalendarDaysByNumWorkingDays(Zend_Date $startDate, $numWorkingDays, $store = null) {
-		/** @var int $result */
-		$result = $numWorkingDays;
-		if ((0 === $result) && $this->isDayOff($startDate)) {
-			$result++;
-		}
-		/** @var int[] $daysOff */
-		$daysOff = df()->date()->getDaysOff($store);
-		// все дни недели не могут быть выходными, иначе программа зависнет в цикле ниже
-		df_assert_lt(7, count($daysOff));
-		/** @var int $currentDayOfWeek */
-		$currentDayOfWeek = $this->getDayOfWeekAsDigit($startDate);
-		while (0 < $numWorkingDays) {
-			if (in_array($currentDayOfWeek, $daysOff)) {
-				$result++;
-			}
-			else {
-				$numWorkingDays--;
-			}
-			$currentDayOfWeek = 1 + ($currentDayOfWeek % 7);
-		}
-		return $result;
-	}
-
-	/**
-	 * @param Zend_Date|null $date [optional]
-	 * @return int
-	 */
-	public function getDayOfWeekAsDigit(Zend_Date $date = null) {
-		if (is_null($date)) {
-			$date = Zend_Date::now();
-		}
-		return df_nat0($date->toString(Zend_Date::WEEKDAY_8601, 'iso'));
-	}
-
-	/**
-	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
-	 * @return int[]
-	 */
-	public function getDaysOff($store = null) {
-		return df_csv_parse_int(
-			str_replace('0', '7', df_nts(Mage::getStoreConfig('general/locale/weekend', $store)))
-		);
-	}
-
-	/** @return string */
-	public function getFormatShort() {
-		/** @var string $r */
-		static $r;
-		if (!$r) {
-			$r = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
-			/** @see Mage_Core_Model_Locale::getDateFormat() может вернуть false */
-			df_result_string_not_empty($r);
-		}
-		return $r;
-	}
-
-	/**
 	 * @param Zend_Date|null $date [optional]
 	 * @return int
 	 */
@@ -202,57 +75,6 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		}
 		return df_nat0($date->toString(Zend_Date::HOUR_SHORT, 'iso'));
 	}
-	
-	/** @return Zend_Date */
-	public function getLeast() {
-		return new Zend_Date(0);
-	}
-
-	/** @return Zend_Date */
-	public function getNowInCurrentTimeZone() {
-		/** @var Zend_Date $result */
-		$result = Zend_Date::now();
-		$result->setTimezone(Mage::app()->getLocale()->getTimezone());
-		return $result;
-	}
-
-	/**
-	 * @param Zend_Date $date1
-	 * @param Zend_Date $date2
-	 * @return int
-	 */
-	public function getNumberOfDaysBetweenTwoDates(Zend_Date $date1, Zend_Date $date2) {
-		/** @var Zend_Date $dateMin */
-		$dateMin = $this->min($date1, $date2);
-		/** @var Zend_Date $dateMax */
-		$dateMax = $this->max($date1, $date2);
-		/**
-		 * http://stackoverflow.com/a/3118478
-		 */
-		/** @var Zend_Date $dateMinA */
-		$dateMinA = new Zend_Date($dateMin);
-		/** @var Zend_Date $dateMaxA */
-		$dateMaxA = new Zend_Date($dateMax);
-		$dateMinA->setHour(0)->setMinute(0)->setSecond(0);
-		$dateMaxA->setHour(0)->setMinute(0)->setSecond(0);
-		/**
-		 * Zend_Date::sub() возвращает число в виде строки для Magento CE 1.4.0.1
-		 * и объект класса Zend_Date для более современных версий Magento
-		 */
-		$dateMaxA->sub($dateMinA);
-		$result = df_round($dateMaxA->toValue() / 86400);
-		return $result;
-	}
-	
-	/** @return Zend_Date */
-	public function getUnlimited() {
-		$timezone = date_default_timezone_get();
-		date_default_timezone_set(Mage_Core_Model_Locale::DEFAULT_TIMEZONE);
-		/** @var Zend_Date $result */
-		$result = new Zend_Date('2050-01-01');
-		date_default_timezone_set($timezone);
-		return $result;
-	}
 
 	/**
 	 * @param Zend_Date $date1
@@ -261,53 +83,6 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	 */
 	public function gt(Zend_Date $date1, Zend_Date $date2) {
 		return $date1->getTimestamp() > $date2->getTimestamp();
-	}
-
-	/**
-	 * @param Zend_Date $date
-	 * @return bool
-	 */
-	public function isInFuture(Zend_Date $date) {
-		return $this->gt($date, Zend_Date::now());
-	}
-
-	/**
-	 * @param Zend_Date $date
-	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
-	 * @return bool
-	 */
-	public function isDayOff(Zend_Date $date, $store = null) {
-		return in_array($this->getDayOfWeekAsDigit($date), $this->getDaysOff($store));
-	}
-
-	/**
-	 * @param Zend_Date $date
-	 * @return bool
-	 */
-	public function isInPast(Zend_Date $date) {
-		return $this->lt($date, Zend_Date::now());
-	}
-	
-	/**           
-	 * @param Zend_Date $date
-	 * @return bool
-	 */
-	public function isLeast(Zend_Date $date) {
-		return $date->equals($this->getLeast());
-	}	
-
-	/**
-	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
-	 * @return bool
-	 */
-	public function isTodayOff($store = null) {return $this->isDayOff(Zend_Date::now(), $store);}
-
-	/**
-	 * @param Zend_Date $date
-	 * @return bool
-	 */
-	public function isUnlimited(Zend_Date $date) {
-		return $date->equals($this->getUnlimited());
 	}
 
 	/**
@@ -337,14 +112,6 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		return $this->lt($date1, $date2) ? $date1 : $date2;
 	}
 
-	/** @return string */
-	public function nowInMoscowAsText() {
-		/** @var Zend_Date $time */
-		$time = Zend_Date::now();
-		$time->setTimezone('Europe/Moscow');
-		return $time->toString('y-MM-dd HH:mm:ss z');
-	}
-
 	/**
 	 * @param Zend_Date $date
 	 * @param bool $inCurrentTimeZone [optional]
@@ -353,33 +120,6 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 	public function toDb(Zend_Date $date, $inCurrentTimeZone = true) {
 		return $date->toString($inCurrentTimeZone ? 'Y-MM-dd HH:mm:ss' : Zend_Date::ISO_8601);
 	}
-
-	/** @return string */
-	public function toDbNow() {return $this->toDb($this->getNowInCurrentTimeZone());}
-
-	/**
-	 * @param bool $new [optional]
-	 * @return Zend_Date
-	 */
-	public function tomorrow($new = false) {
-		/** @var Zend_Date $result */
-		if ($new) {
-			$result = $this->createTomorrow();
-		}
-		else {
-			if (!isset($this->{__METHOD__})) {
-				$this->{__METHOD__} = $this->createTomorrow();
-			}
-			$result = $this->{__METHOD__};
-		}
-		return $result;
-	}
-
-	/** @return Zend_Date */
-	public function yesterday() {return Zend_Date::now()->subDay(1);}
-
-	/** @return Zend_Date */
-	private function createTomorrow() {return df_today_add(1);}
 
 	/** @return Df_Core_Helper_Date */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

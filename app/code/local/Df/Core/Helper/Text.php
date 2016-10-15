@@ -144,8 +144,8 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 		return $this->getNounFormatter()->getForm($amount, $forms);
 	}
 
-	/** @return Df_Core_Format_NounForAmounts */
-	private function getNounFormatter() {return Df_Core_Format_NounForAmounts::s();}
+	/** @return \Df\Core\Format\NounForAmounts */
+	private function getNounFormatter() {return \Df\Core\Format\NounForAmounts::s();}
 
 	/**
 	 * http://php.net/manual/function.com-create-guid.php#99425

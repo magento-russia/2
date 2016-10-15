@@ -45,7 +45,4 @@ abstract class Df_Core_Controller_Admin extends Mage_Adminhtml_Controller_Action
 		$this->_removeDefaultTitle = true;
 		parent::_renderTitles();
 	}
-
-	/** @used-by Df_Core_Model_Action_Admin::_construct() */
-
 }

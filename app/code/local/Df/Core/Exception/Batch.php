@@ -14,9 +14,7 @@ class Batch extends Exception {
 	 * @param Entity $entityException
 	 * @return void
 	 */
-	public function addException(Entity $entityException) {
-		$this->_exceptions[]= $entityException;
-	}
+	public function addException(Entity $entityException) {$this->_exceptions[]= $entityException;}
 
 	/**
 	 * @override

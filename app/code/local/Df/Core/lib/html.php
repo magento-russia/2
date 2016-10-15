@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Format\Html;
 /**
  * @param string $class
  * @param string|null $content
@@ -16,7 +17,7 @@ function df_div($class, $content = null) {return df_tag('div', ['class' => $clas
  * @return string
  */
 function df_html_select(array $options, $selected = null, array $attributes = []) {
-	return Df_Core_Format_Html_Select::render($options, $selected, $attributes);
+	return Html\Select::render($options, $selected, $attributes);
 }
 
 /**
@@ -40,7 +41,7 @@ function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => '
 /**
  * 2015-04-16
  * Отныне значением атрибута может быть массив:
- * @see Df_Core_Format_Html_Tag::getAttributeAsText()
+ * @see \Df\Core\Format\Html\Tag::getAttributeAsText()
  * Передавать в качестве значения массив имеет смысл, например, для атрибута «class».
  *
  * 2016-05-30
@@ -58,11 +59,10 @@ function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
 	if (!is_array($attributes)) {
 		$attributes = ['class' => $attributes];
 	};
-	return Df_Core_Format_Html_Tag::render($tag, $attributes, $content, $multiline);
+	return Html\Tag::render($tag, $attributes, $content, $multiline);
 }
 
 /**
- * @used-by Df_Localization_Onetime_Processor::saveModifiedMagentoEntities()
  * @param string[] $items
  * @param bool $isOrdered [optional]
  * @param string|null $cssClassForList [optional]
@@ -72,7 +72,5 @@ function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
 function df_tag_list(
 	array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
 ) {
-	return Df_Core_Format_Html_List::render(
-		$items, $isOrdered, $cssClassForList, $cssClassForItem
-	);
+	return Html\ListT::render($items, $isOrdered, $cssClassForList, $cssClassForItem);
 }

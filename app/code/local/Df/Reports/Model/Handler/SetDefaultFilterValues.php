@@ -65,7 +65,7 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 			$this->getBlockAsReportFilterForm()->getForm()->getElement(self::$FORM_ELEMENT__TO)
 		;
 		if ($elementEndDate && !$elementEndDate->getValueInstance()) {
-			$elementEndDate->setValue(df()->date()->cleanTime(df()->date()->yesterday()));
+			$elementEndDate->setValue(df_yesterday());
 		}
 		return $this;
 	}

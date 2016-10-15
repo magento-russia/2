@@ -71,10 +71,10 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	 */
 	protected function defaultTemplate() {return 'df/qiwi/form.phtml';}
 
-	/** @return Df_Core_Format_MobilePhoneNumber */
+	/** @return \Df\Core\Format\MobilePhoneNumber */
 	private function getBillingAddressPhone() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Format_MobilePhoneNumber::fromQuoteAddress(
+			$this->{__METHOD__} = \Df\Core\Format\MobilePhoneNumber::fromQuoteAddress(
 				df_quote_address_billing()
 			);
 		}
@@ -100,10 +100,10 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 		return $result;
 	}
 
-	/** @return Df_Core_Format_MobilePhoneNumber */
+	/** @return \Df\Core\Format\MobilePhoneNumber */
 	private function getShippingAddressPhone() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Format_MobilePhoneNumber::i(
+			$this->{__METHOD__} = \Df\Core\Format\MobilePhoneNumber::i(
 				df_quote_address_shipping()->getTelephone()
 			);
 		};

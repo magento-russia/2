@@ -57,7 +57,7 @@ class Df_1C_Cml2_Action_Orders_Export extends Df_1C_Cml2_Action_GenericExport {
 					catch (Exception $e) {}
 				}
 			}
-			$this->{__METHOD__} = $result ? $result : df()->date()->getLeast();
+			$this->{__METHOD__} = $result ?: df_date_least();
 		}
 		return $this->{__METHOD__};
 	}

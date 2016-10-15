@@ -1,5 +1,6 @@
 <?php
-class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
+namespace Df\Core\Format;
+class MobilePhoneNumber extends \Df_Core_Model {
 	/** @return string */
 	public function getOnlyDigits() {
 		if (!isset($this->{__METHOD__})) {
@@ -66,9 +67,9 @@ class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Directory_Model_Country|null */
+	/** @return \Df_Directory_Model_Country|null */
 	private function getCountry() {
-		/** @var Df_Directory_Model_Country|null $result */
+		/** @var \Df_Directory_Model_Country|null $result */
 		$result = $this->cfg(self::P__COUNTRY);
 		// Не знаю, насколько хорошо данное архитектурное решение.
 		// Практика покажет.
@@ -86,7 +87,7 @@ class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__VALUE,	DF_V_STRING, false)
-			->_prop(self::P__COUNTRY, Df_Directory_Model_Country::class, false)
+			->_prop(self::P__COUNTRY, \Df_Directory_Model_Country::class, false)
 		;
 	}
 
@@ -95,10 +96,10 @@ class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
 	const P__COUNTRY = 'country';
 	const P__VALUE = 'value';
 	/**
-	 * @param Df_Sales_Model_Quote_Address|Mage_Sales_Model_Quote_Address $address
-	 * @return Df_Core_Format_MobilePhoneNumber
+	 * @param \Df_Sales_Model_Quote_Address|\Mage_Sales_Model_Quote_Address $address
+	 * @return $this
 	 */
-	public static function fromQuoteAddress(Df_Sales_Model_Quote_Address $address) {
+	public static function fromQuoteAddress(\Df_Sales_Model_Quote_Address $address) {
 		return self::i($address->getTelephone());
 	}
 	/** @return string[] */
@@ -118,8 +119,8 @@ class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param string|null $value
-	 * @param Df_Directory_Model_Country|null $country [optional]
-	 * @return Df_Core_Format_MobilePhoneNumber
+	 * @param \Df_Directory_Model_Country|null $country [optional]
+	 * @return $this
 	 */
 	public static function i($value = '', $country = null) {
 		return new self(array(self::P__VALUE => $value, self::P__COUNTRY => $country));

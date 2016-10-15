@@ -39,8 +39,8 @@ class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
 				$result++;
 			}
 			if ($s->getYesNo('consider_days_off')) {
-				$result = df()->date()->getNumCalendarDaysByNumWorkingDays(
-					$startDate = $canShipToday ? Zend_Date::now() : df()->date()->tomorrow()
+				$result = df_num_calendar_days_by_num_working_days(
+					$startDate = $canShipToday ? Zend_Date::now() : df_tomorrow()
 					,$numWorkingDays = $result
 					,$store = $s->store()
 				);

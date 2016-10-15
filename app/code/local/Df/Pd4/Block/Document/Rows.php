@@ -57,7 +57,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 		return df_e(strtr($this->configA()->getPaymentPurposeTemplate(), array(
 			self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_ID => $this->order()->getIncrementId()
 			,self::PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_DATE =>
-				df_dts($this->getOrderDate(), Df_Core_Format_Date::FORMAT__RUSSIAN)
+				df_dts($this->getOrderDate(), \Df\Core\Format\Date::FORMAT__RUSSIAN)
 		)));
 	}
 
