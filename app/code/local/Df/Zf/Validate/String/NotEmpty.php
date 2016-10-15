@@ -1,5 +1,7 @@
 <?php
-class Df_Zf_Validate_String_NotEmpty extends Df_Zf_Validate_Type {
+namespace Df\Zf\Validate\StringT;
+use Magento\Framework\Phrase;
+class NotEmpty extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @param mixed $value
@@ -14,8 +16,16 @@ class Df_Zf_Validate_String_NotEmpty extends Df_Zf_Validate_Type {
 		 * (без двусмысленностей, как, скажем, с вещественными числами)
 		 * конвертировать целые числа в строки,
 		 * поэтому пусть целые числа всегда проходят валидацию как непустые строки.
+		 *
+		 * 2016-07-01
+		 * Добавил «|| $value instanceof Phrase»
 		 */
-		return is_int($value) || (is_string($value) && ('' !== strval($value)));
+		return
+			is_int($value)
+			|| (
+				(is_string($value) || ($value instanceof Phrase))
+				&& ('' !== strval($value))
+			);
 	}
 
 	/**
@@ -30,6 +40,6 @@ class Df_Zf_Validate_String_NotEmpty extends Df_Zf_Validate_Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'непустой строки';}
 
-	/** @return Df_Zf_Validate_String_NotEmpty */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

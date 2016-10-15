@@ -5,6 +5,9 @@
  */
 function rm_admin_allowed($resourceId) {return rm_admin_session()->isAllowed($resourceId);}
 
+/** @return void */
+function df_admin_begin() {Df_Admin_Model_Mode::s()->begin();}
+
 /**
  * @used-by Df_Cms_Block_Admin_Hierarchy_Edit_Form::getPageGridButtonsHtml()
  * @used-by Df_Cms_Block_Admin_Hierarchy_Edit_Form::getTreeButtonsHtml()
@@ -35,6 +38,20 @@ function rm_admin_button_location($url) {
 	$url = df_ejs($url);
 	return "setLocation('{$url}');";
 }
+
+/**
+ * @param object $object
+ * @param string $method
+ * @param array(string => mixed) $parameters [optional]
+ * @return void
+ * @throws Exception
+ */
+function df_admin_call($object, $method, array $parameters = array()) {
+	Df_Admin_Model_Mode::s()->call($object, $method, $parameters);
+}
+
+/** @return void */
+function df_admin_end() {Df_Admin_Model_Mode::s()->end();}
 
 /**
  * 2015-03-08

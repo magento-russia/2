@@ -54,7 +54,7 @@ class Df_Reports_Model_Handler_RemoveTimezoneNotice extends Df_Core_Model_Handle
 	private function getMessagesBlock() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
-				df_empty_to_null($this->getEvent()->getLayout()->getBlock('messages'))
+				$this->getEvent()->getLayout()->getBlock('messages') ?: null
 			);
 		}
 		return df_n_get($this->{__METHOD__});

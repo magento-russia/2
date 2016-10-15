@@ -1,5 +1,7 @@
 <?php
-abstract class Df_Qa_Message_Failure extends Df_Qa_Message {
+namespace Df\Qa\Message;
+use Df\Qa\State;
+abstract class Failure extends \Df\Qa\Message {
 	/**
 	 * @abstract
 	 * @used-by states()
@@ -12,44 +14,70 @@ abstract class Df_Qa_Message_Failure extends Df_Qa_Message {
 	 * @used-by postface()
 	 * @return string
 	 */
-	public final function traceS() {return $this->sections($this->states());}
+	public final function traceS() {
+		/** @var int $count */
+		$count = count($this->states());
+		return implode(df_map_k($this->states(), function($index, State $state) use($count) {
+			$index++;
+			/** @var string $result */
+			$result = (string)$state;
+			if ($index !== $count) {
+				/** @var string $indexS */
+				$indexS = (string)$index;
+				/** @var int $indexLength */
+				$indexLength = strlen($indexS);
+				/** @var int $delimiterLength */
+				$delimiterLength = 36;
+				/** @var int $fillerLength */
+				$fillerLength = $delimiterLength - $indexLength;
+				/** @var int $fillerLengthL */
+				$fillerLengthL = floor($fillerLength / 2);
+				/** @var int $fillerLengthR */
+				$fillerLengthR = $fillerLength - $fillerLengthL;
+				/** @var string $delimiter */
+				$delimiter = str_repeat('*', $fillerLengthL) . $indexS . str_repeat('*', $fillerLengthR);
+				$result .= "\n" . $delimiter . "\n";
+			}
+			return $result;
+		}));
+	}
 
 	/**
 	 * @override
-	 * @see Df_Qa_Message::postface()
-	 * @used-by Df_Qa_Message::report()
+	 * @see \Df\Qa\Message::postface()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
 	protected function postface() {return $this->traceS();}
 
 	/**
 	 * @override
-	 * @see Df_Qa_Message::preface()
-	 * @used-by Df_Qa_Message::report()
+	 * @see \Df\Qa\Message::preface()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
 	protected function preface() {return $this[self::P__ADDITIONAL_MESSAGE];}
 
 	/**
 	 * @used-by states()
-	 * @see Df_Qa_Message_Failure_Exception::stackLevel()
-	 * @see Df_Qa_Message_Failure_Error::stackLevel()
+	 * @see \Df\Qa\Message\Failure\Exception::stackLevel()
+	 * @see \Df\Qa\Message\Failure\Error::stackLevel()
 	 * @return int
 	 */
 	protected function stackLevel() {return 0;}
 
-	/** @return Df_Qa_State[] */
+	/** @return State[] */
 	private function states() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Qa_State[] $result */
-			$result = array();
+			/** @var State[] $result */
+			$result = [];
 			/** @var array(array(string => string|int)) $trace */
 			$trace = array_slice($this->trace(), $this->stackLevel());
-			/** @var Df_Qa_State|null $state */
+			/** @var State|null $state */
 			$state = null;
 			foreach ($trace as $stateA) {
 				/** @var array(string => string|int) $stateA */
-				$state = Df_Qa_State::i($stateA, $state, $this->cfg(self::P__SHOW_CODE_CONTEXT, true));
+				$state = State::i($stateA, $state, $this->cfg(self::P__SHOW_CODE_CONTEXT, true));
 				$result[]= $state;
 			}
 			$this->{__METHOD__} = $result;
@@ -57,17 +85,6 @@ abstract class Df_Qa_Message_Failure extends Df_Qa_Message {
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::P__ADDITIONAL_MESSAGE, DF_V_STRING, false)
-			->_prop(self::P__SHOW_CODE_CONTEXT, DF_V_BOOL, false)
-		;
-	}
 	const P__ADDITIONAL_MESSAGE = 'additional_message';
 	const P__SHOW_CODE_CONTEXT = 'show_code_context';
 }

@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Zf_Validate_String_Parser extends Df_Zf_Validate_Type {
+namespace Df\Zf\Validate\StringT;
+abstract class Parser extends \Df\Zf\Validate\Type {
 	/** @return string */
 	abstract protected function getZendValidatorClass();
 
@@ -19,16 +20,16 @@ abstract class Df_Zf_Validate_String_Parser extends Df_Zf_Validate_Type {
 
 	/**
 	 * @param string $locale
-	 * @return Zend_Validate_Interface
+	 * @return \Zend_Validate_Interface
 	 */
 	protected function getZendValidator($locale) {
 		df_param_string_not_empty($locale, 0);
 		if (!isset($this->{__METHOD__}[$locale])) {
 			/** @var string $class */
 			$class = $this->getZendValidatorClass();
-			/** @var Zend_Validate_Interface $result */
+			/** @var \Zend_Validate_Interface $result */
 			$result = new $class($locale);
-			df_assert($result instanceof Zend_Validate_Interface);
+			df_assert($result instanceof \Zend_Validate_Interface);
 			$this->{__METHOD__}[$locale] = $result;
 		}
 		return $this->{__METHOD__}[$locale];

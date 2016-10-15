@@ -1,18 +1,19 @@
 <?php
-class Df_Zf_Validate_Boolean extends Df_Zf_Validate_Type implements Zend_Filter_Interface {
+namespace Df\Zf\Validate;
+class BooleanT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
-	 * @param  mixed $value
-	 * @throws Zend_Filter_Exception
+	 * @param mixed $value
+	 * @throws \Zend_Filter_Exception
 	 * @return bool
 	 */
 	public function filter($value) {
 		/** @var bool $result */
 		try {
-			$result = rm_bool($value);
+			$result = df_bool($value);
 		}
-		catch (Exception $e) {
-			df_error(new Zend_Filter_Exception(df_ets($e)));
+		catch (\Exception $e) {
+			df_error(new \Zend_Filter_Exception($e->getMessage()));
 		}
 		return $result;
 	}
@@ -42,6 +43,6 @@ class Df_Zf_Validate_Boolean extends Df_Zf_Validate_Type implements Zend_Filter_
 		return 'значения логического типа («да/нет»)';
 	}
 
-	/** @return Df_Zf_Validate_Boolean */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -1,6 +1,33 @@
 <?php
-use Varien_Object as DataObject;
 use Mage_Core_Model_Abstract as M;
+
+/**
+ * @param Varien_Object $object
+ * @param string[] $absentProperties [optional]
+ * @return Varien_Object
+ */
+function df_adapt_legacy_object(Varien_Object $object, $absentProperties = array()) {
+	foreach ($object->getData() as $key => $value) {
+		/** @var string $key */
+		/** @var mixed $value */
+		if (!isset($object->$key)) {
+			$object->$key = $value;
+		}
+	}
+	/**
+	 * Позволяет инициализировать те поля, которые отсутствуют в @uses Varien_Object::getData(),
+	 * но обращение к которым, тем не менее, происходит в дефектных оформительских темах.
+	 */
+	if ($absentProperties) {
+		foreach ($absentProperties as $absentProperty) {
+			/** @var string $absentProperty */
+			if (!isset($object->$absentProperty)) {
+				$object->$absentProperty = $object->getData($absentProperty);
+			}
+		}
+	}
+	return $object;
+}
 
 /**
  * 2016-05-06
@@ -79,7 +106,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * @param string $expectedClass
  * @param array(string => mixed) $params [optional]
  * @param string $cacheKeySuffix [optional]
- * @return DataObject|object
+ * @return Varien_Object|object
  */
 function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix = '') {
 	/** @var array(string => object) $cache */

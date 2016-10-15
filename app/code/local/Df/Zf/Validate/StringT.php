@@ -1,9 +1,11 @@
 <?php
-class Df_Zf_Validate_String extends Df_Zf_Validate_Type implements Zend_Filter_Interface {
+namespace Df\Zf\Validate;
+use Magento\Framework\Phrase;
+class StringT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $value
-	 * @throws Zend_Filter_Exception
+	 * @throws \Zend_Filter_Exception
 	 * @return string|mixed
 	 */
 	public function filter($value) {
@@ -24,8 +26,11 @@ class Df_Zf_Validate_String extends Df_Zf_Validate_Type implements Zend_Filter_I
 		 * (без двусмысленностей, как, скажем, с вещественными числами)
 		 * конвертировать целые числа и null в строки,
 		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
+		 *
+		 * 2016-07-01
+		 * Добавил «|| $value instanceof Phrase»
 		 */
-		return is_string($value) || is_int($value) || is_null($value);
+		return is_string($value) || is_int($value) || is_null($value) || $value instanceof Phrase;
 	}
 
 	/**
@@ -40,6 +45,6 @@ class Df_Zf_Validate_String extends Df_Zf_Validate_Type implements Zend_Filter_I
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'строки';}
 
-	/** @return Df_Zf_Validate_String */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -1,5 +1,15 @@
 <?php
-class Df_Zf_Validate_Array extends Df_Zf_Validate_Type {
+namespace Df\Zf\Validate;
+class ArrayT extends Type implements \Zend_Filter_Interface {
+	/**
+	 * 2016-08-31
+	 * @override
+	 * @see \Zend_Filter_Interface::filter()
+	 * @param mixed $value
+	 * @return array|mixed
+	 */
+	public function filter($value) {return df_nta($value);}
+
 	/**
 	 * @override
 	 * @param mixed $value
@@ -21,6 +31,6 @@ class Df_Zf_Validate_Array extends Df_Zf_Validate_Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'массива';}
 
-	/** @return Df_Zf_Validate_Array */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

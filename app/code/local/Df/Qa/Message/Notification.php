@@ -1,26 +1,19 @@
 <?php
-class Df_Qa_Message_Notification extends Df_Qa_Message {
+namespace Df\Qa\Message;
+class Notification extends \Df\Qa\Message {
 	/**
 	 * @override
-	 * @see Df_Qa_Message::main()
-	 * @used-by Df_Qa_Message::report()
+	 * @see \Df\Qa\Message::main()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
 	protected function main() {return $this[self::P__NOTIFICATION];}
 
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected final function _construct() {
-		parent::_construct();
-		$this->_prop(self::P__NOTIFICATION, DF_V_STRING_NE);
-	}
 	const P__NOTIFICATION = 'notification';
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Qa_Message_Notification
+	 * @return \Df\Qa\Message\Notification
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(array $parameters = []) {return new self($parameters);}
 }

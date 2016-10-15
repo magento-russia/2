@@ -11,7 +11,7 @@
 	***********************************
  *
  * Вызов
-		Df_Qa_Context::s()->addItem('Схема CommerceML', '2.0.8');
+		\Df\Qa\Context::s()->addItem('Схема CommerceML', '2.0.8');
  * добавит к заголовку отчёта о сбое версию схемы CommerceML, и заголовок будет выглядеть так:
 	URL:                http://localhost.com:831/df-1c/cml2/index/?type=catalog&mode=import&filename=offers___6dbd4e7d-7612-4427-8ebe-68cdb712e8d2.xml&
 	Версия Magento:     2.36.8 (1.9.0.1)
@@ -24,20 +24,21 @@
  *
  * @see Df_1C_Cml2_Action_Catalog_Import::_process()
  */
-class Df_Qa_Context {
+namespace Df\Qa;
+class Context {
 	/**
-	 * @used-by rm_context()
+	 * @used-by df_context()
 	 * @param string $label
 	 * @param string $value
 	 * @param int $weight [optional]
 	 * @param array(array(string => string|int)) $params $params
 	 */
 	public static function add($label, $value, $weight = 0) {
-		self::$_items[$label] = array(self::$VALUE => $value, self::$WEIGHT => $weight);
+		self::$_items[$label] = [self::$VALUE => $value, self::$WEIGHT => $weight];
 	}
 
 	/**
-	 * @used-by Df_Qa_Message::report()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
 	public static function render() {
@@ -48,12 +49,12 @@ class Df_Qa_Context {
 			$result = '';
 		}
 		else {
-			/** @uses Df_Qa_Context::sort() */
-			uasort(self::$_items, array(__CLASS__, 'sort'));
+			/** @uses \Df\Qa\Context::sort() */
+			uasort(self::$_items, [__CLASS__, 'sort']);
 			/** @var int $padSize */
 			$padSize = 2 + max(array_map('mb_strlen', array_keys(self::$_items)));
 			/** @var string[] $rows */
-			$rows = array();
+			$rows = [];
 			foreach (self::$_items as $label => $item) {
 				/** @var string $label */
 				/** @var array(string => string|int) $item */
@@ -80,7 +81,7 @@ class Df_Qa_Context {
 	private static function sort(array $a, array $b) {return $a[self::$WEIGHT] - $b[self::$WEIGHT];}
 
 	/** @var array(string => string) */
-	private static $_items = array();
+	private static $_items = [];
 
 	/** @var string */
 	private static $VALUE = 'value';

@@ -1,5 +1,6 @@
 <?php
-class Df_Zf_Validate_String_Int extends Df_Zf_Validate_Type {
+namespace Df\Zf\Validate\StringT;
+class IntT extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @param string $value
@@ -47,6 +48,6 @@ class Df_Zf_Validate_String_Int extends Df_Zf_Validate_Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
 
-	/** @return Df_Zf_Validate_String_Int */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -93,7 +93,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 	private function getBlock() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Page_Block_Template_Links|null $result */
-			$result = df_empty_to_null($this->getEvent()->getLayout()->getBlock('top.links'));
+			$result = $this->getEvent()->getLayout()->getBlock('top.links') ?: null;
 			if (!($result instanceof Df_Page_Block_Template_Links)) {
 				/** Кто-то перекрыл класс @see Mage_Page_Block_Template_Links */
 				$result = null;

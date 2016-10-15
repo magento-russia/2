@@ -1,5 +1,6 @@
 <?php
-class Df_Zf_Validate_String_Iso2 extends Df_Zf_Validate_Type implements Zend_Filter_Interface {
+namespace Df\Zf\Validate\StringT;
+class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 	/**
 	 * 2015-02-13
 	 * Преобразовываем пустую строку в null,
@@ -13,7 +14,7 @@ class Df_Zf_Validate_String_Iso2 extends Df_Zf_Validate_Type implements Zend_Fil
 	 * @see Df_Core_Model::_validateByConcreteValidator()
 	 * @override
 	 * @param mixed $value
-	 * @throws Zend_Filter_Exception
+	 * @throws \Zend_Filter_Exception
 	 * @return mixed|null
 	 */
 	public function filter($value) {return df_empty_string($value) ? null : $value;}
@@ -26,9 +27,11 @@ class Df_Zf_Validate_String_Iso2 extends Df_Zf_Validate_Type implements Zend_Fil
 	public function isValid($value) {
 		$this->prepareValidation($value);
 		return
-			is_string($value)
-			&& 2 === mb_strlen($value)
-			&& rm_countries()->isIso2CodePresent($value)
+				is_string($value)
+			&&
+				(2 === mb_strlen($value))
+			&&
+				df_countries()->isIso2CodePresent($value)
 		;
 	}
 
@@ -48,6 +51,6 @@ class Df_Zf_Validate_String_Iso2 extends Df_Zf_Validate_Type implements Zend_Fil
 		return '2-буквенного код страны под стандарту ISO 3166-1';
 	}
 
-	/** @return Df_Zf_Validate_String_Iso2 */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

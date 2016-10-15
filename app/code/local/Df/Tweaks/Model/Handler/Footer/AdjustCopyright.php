@@ -36,7 +36,7 @@ class Df_Tweaks_Model_Handler_Footer_AdjustCopyright extends Df_Core_Model_Handl
 	private function getBlock() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
-				df_empty_to_null($this->getEvent()->getLayout()->getBlock('footer'))
+				$this->getEvent()->getLayout()->getBlock('footer') ?: null
 			);
 		}
 		return df_n_get($this->{__METHOD__});

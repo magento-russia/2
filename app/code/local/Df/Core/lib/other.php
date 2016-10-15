@@ -2,83 +2,8 @@
 /** @return Df_Core_Helper_Data */
 function df() {static $r; return $r ? $r : $r = Df_Core_Helper_Data::s();}
 
-/**
- * @param Varien_Object $object
- * @param string[] $absentProperties [optional]
- * @return Varien_Object
- */
-function df_adapt_legacy_object(Varien_Object $object, $absentProperties = array()) {
-	foreach ($object->getData() as $key => $value) {
-		/** @var string $key */
-		/** @var mixed $value */
-		if (!isset($object->$key)) {
-			$object->$key = $value;
-		}
-	}
-	/**
-	 * Позволяет инициализировать те поля, которые отсутствуют в @uses Varien_Object::getData(),
-	 * но обращение к которым, тем не менее, происходит в дефектных оформительских темах.
-	 */
-	if ($absentProperties) {
-		foreach ($absentProperties as $absentProperty) {
-			/** @var string $absentProperty */
-			if (!isset($object->$absentProperty)) {
-				$object->$absentProperty = $object->getData($absentProperty);
-			}
-		}
-	}
-	return $object;
-}
-
-/** @return void */
-function df_admin_begin() {Df_Admin_Model_Mode::s()->begin();}
-
-/**
- * @param object $object
- * @param string $method
- * @param array(string => mixed) $parameters [optional]
- * @return void
- * @throws Exception
- */
-function df_admin_call($object, $method, array $parameters = array()) {
-	Df_Admin_Model_Mode::s()->call($object, $method, $parameters);
-}
-
-/** @return void */
-function df_admin_end() {Df_Admin_Model_Mode::s()->end();}
-
 /** @return Df_Admin_Model_Settings */
 function df_cfg() {return Df_Admin_Model_Settings::s();}
-
-/**
- * @param mixed $value
- * @return bool
- */
-function df_empty_string($value) {return '' === $value;}
-
-/**
- * @param mixed $value
- * @return mixed
- */
-function df_empty_to_null($value) {return $value ? $value : null;}
-
-
-/**
- * К сожалению, не можем перекрыть Exception::getTraceAsString(),
- * потому что этот метод — финальный
- *
- * @param Exception $exception
- * @param bool $showCodeContext [optional]
- * @return string
- */
-function df_exception_get_trace(Exception $exception, $showCodeContext = false) {
-	return Df_Qa_Message_Failure_Exception::i(array(
-		Df_Qa_Message_Failure_Exception::P__EXCEPTION => $exception
-		,Df_Qa_Message_Failure_Exception::P__NEED_LOG_TO_FILE => false
-		,Df_Qa_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => false
-		,Df_Qa_Message_Failure_Exception::P__SHOW_CODE_CONTEXT => $showCodeContext
-	))->traceS();
-}
 
 /**
  * Обработка исключительных ситуаций в точках сочленения моих модулей и ядра

@@ -1,13 +1,14 @@
 <?php
-abstract class Df_Zf_Validate implements Zend_Validate_Interface {
+namespace Df\Zf;
+abstract class Validate implements \Zend_Validate_Interface {
 	/** @return string */
 	abstract protected function getMessageInternal();
 
 	/**
 	 * @param array(string => mixed) $params
-	 * @return Df_Zf_Validate
+	 * @return \Df\Zf\Validate
 	 */
-	public function __construct(array $params = array()) {$this->_params = $params;}
+	public function __construct(array $params = []) {$this->_params = $params;}
 
 	/**
 	 * Этот метод присутствует для совместимости c устаревшими версиями Zend Framework
@@ -36,7 +37,7 @@ abstract class Df_Zf_Validate implements Zend_Validate_Interface {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getMessages() {return array(__CLASS__ => $this->getMessage());}
+	public function getMessages() {return [__CLASS__ => $this->getMessage()];}
 
 	/**
 	 * @param string $paramName
@@ -63,23 +64,23 @@ abstract class Df_Zf_Validate implements Zend_Validate_Interface {
 	protected function reset() {
 		unset($this->_message);
 		/**
-		 * Раньше тут стоял код $this->_params = array()
+		 * Раньше тут стоял код $this->_params = []
 		 * который сбрасывает сразу все значения параметров.
 		 * Однако этот код неверен!
 		 * Негоже родительскому классу безапелляционно решать за потомков,
 		 * какие данные им сбрасывать.
-		 * Например, потомок @see Df_Zf_Validate_Class
-		 * хранит в параметре @see Df_Zf_Validate_Class::$PARAM__CLASS
+		 * Например, потомок @see \Df\Zf\Validate\Class
+		 * хранит в параметре @see \Df\Zf\Validate\Class::$PARAM__CLASS
 		 * требуемый класс результата,
 		 * и сбрасывать это значение между разными валидациями не нужно!
 		 * Вместо сброса значения между разными валидациями
-		 * класс @see Df_Zf_Validate_Class ведёт статический кэш своих экземпляров
+		 * класс @see \Df\Zf\Validate\Class ведёт статический кэш своих экземпляров
 		 * для каждого требуемого класса результата:
-		 * @see Df_Zf_Validate_Class::s().
-		 * Сброс значения параметра @see Df_Zf_Validate_Class::$PARAM__CLASS
+		 * @see \Df\Zf\Validate\Class::s().
+		 * Сброс значения параметра @see \Df\Zf\Validate\Class::$PARAM__CLASS
 		 * не только не нужен, но и приведёт к сбою!
 		 * Пусть потомки сами решают
-		 * посредством перекрытия метода @see Df_Zf_Validate_Type::reset(),
+		 * посредством перекрытия метода @see \Df\Zf\Validate\Type::reset(),
 		 * значения каких параметров им надо сбрасывать между разными валидациями.
 		 */
 		unset($this->_params[self::$PARAM__VALUE]);
@@ -110,7 +111,7 @@ abstract class Df_Zf_Validate implements Zend_Validate_Interface {
 	/** @var string */
 	private $_message;
 	/** @var array(string => mixed) */
-	private $_params = array();
+	private $_params = [];
 
 	/** @var string */
 	private static $PARAM__EXPLANATION = 'explanation';

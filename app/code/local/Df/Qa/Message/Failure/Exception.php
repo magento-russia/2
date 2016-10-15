@@ -1,17 +1,22 @@
 <?php
-final class Df_Qa_Message_Failure_Exception extends Df_Qa_Message_Failure {
+namespace Df\Qa\Message\Failure;
+final class Exception extends \Df\Qa\Message\Failure {
 	/**
 	 * @override
-	 * @see Df_Qa_Message::main()
-	 * @used-by Df_Qa_Message::report()
+	 * @see \Df\Qa\Message::main()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	protected function main() {return $this->e()->message();}
+	protected function main() {
+		/** @var string $result */
+		$result = $this->e()->messageForLog();
+		return !$this->e()->isMessageHtml() ? $result : strip_tags($result);
+	}
 
 	/**
 	 * @override
-	 * @see Df_Qa_Message_Failure::postface()
-	 * @used-by Df_Qa_Message::report()
+	 * @see \Df\Qa\Message_Failure::postface()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
 	protected function postface() {
@@ -19,46 +24,48 @@ final class Df_Qa_Message_Failure_Exception extends Df_Qa_Message_Failure {
 	}
 
 	/**
+	 * 2016-08-20
 	 * @override
-	 * @see Df_Qa_Message_Failure::stackLevel()
-	 * @used-by Df_Qa_Message_Failure::states()
+	 * @see \Df\Qa\Message::reportNamePrefix()
+	 * @used-by \Df\Qa\Message::reportName()
+	 * @return string|string[]
+	 */
+	protected function reportNamePrefix() {return [df_module_name_lc($this->e()), 'exception'];}
+
+	/**
+	 * @override
+	 * @see \Df\Qa\Message_Failure::stackLevel()
+	 * @used-by \Df\Qa\Message_Failure::states()
 	 * @return int
 	 */
 	protected function stackLevel() {return $this->e()->getStackLevelsCountToSkip();}
 
 	/**
 	 * @override
-	 * @see Df_Qa_Message_Failure::trace()
-	 * @used-by Df_Qa_Message_Failure::states()
+	 * @see \Df\Qa\Message_Failure::trace()
+	 * @used-by \Df\Qa\Message_Failure::states()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace() {return $this->e()->getTraceRm();}
+	protected function trace() {return df_ef($this->e())->getTrace();}
 
 	/**
 	 * @used-by stackLevel()
 	 * @used-by trace()
-	 * @return Df_Core_Exception
+	 * @return \Df\Core\Exception
 	 */
 	private function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Exception::wrap($this[self::P__EXCEPTION]);
+			$this->{__METHOD__} = df_ewrap($this[self::P__EXCEPTION]);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::P__EXCEPTION, 'Exception');
-	}
+
 	const P__EXCEPTION = 'exception';
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Qa_Message_Failure_Exception
+	 * @return \Df\Qa\Message\Failure\Exception
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(array $parameters = []) {return new self($parameters);}
 }

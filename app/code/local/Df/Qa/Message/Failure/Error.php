@@ -1,13 +1,14 @@
 <?php
-final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
+namespace Df\Qa\Message\Failure;
+final class Error extends \Df\Qa\Message\Failure {
 	/**
 	 * 2015-04-04
 	 * Обратите внимание, что статичные методы @uses type() и @uses info()
 	 * мы намеренно вызываем нестатично ради синтаксиса {},
 	 * и мы вправе это делать: http://3v4l.org/jro9u
 	 * @override
-	 * @see Df_Qa_Message::main()
-	 * @used-by Df_Qa_Message::report()
+	 * @see \Df\Qa\Message::main()
+	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
 	protected function main() {
@@ -20,8 +21,8 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 
 	/**
 	 * @override
-	 * @see Df_Qa_Message_Failure::stackLevel()
-	 * @used-by Df_Qa_Message_Failure::states()
+	 * @see \Df\Qa\Message_Failure::stackLevel()
+	 * @used-by \Df\Qa\Message_Failure::states()
 	 * @return int
 	 */
 	protected function stackLevel() {return 13;}
@@ -31,12 +32,12 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 	 * @see register_shutdown_function()
 	 * Однако @uses xdebug_get_function_stack() — работает.
 	 * @override
-	 * @see Df_Qa_Message_Failure::trace()
-	 * @used-by Df_Qa_Message_Failure::states()
+	 * @see \Df\Qa\Message_Failure::trace()
+	 * @used-by \Df\Qa\Message_Failure::states()
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {
-		return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : array();
+		return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];
 	}
 
 	/**
@@ -66,13 +67,13 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 				self::i()->log();
 			}
 		}
-		catch (Exception $e) {
-			df_handle_entry_point_exception($e, false);
+		catch (\Exception $e) {
+			df_log(df_ets($e));
 		}
 	}
 
 	/**
-	 * @used-by rm_throw_last_error()
+	 * @used-by df_throw_last_error()
 	 * @return void
 	 * @throws Exception
 	 */
@@ -84,13 +85,9 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 	/**
 	 * @used-by check()
 	 * @used-by throwLast()
-	 * @return Df_Qa_Message_Failure_Error
+	 * @return \Df\Qa\Message\Failure\Error
 	 */
-	private static function i() {
-		return new self(array(
-			self::P__NEED_LOG_TO_FILE => true, self::P__NEED_NOTIFY_DEVELOPER => true
-		));
-	}
+	private static function i() {return new self;}
 
 	/**
 	 * @used-by main()
@@ -109,9 +106,9 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 		/** @var array(int => int) $map */
 		static $map;
 		if (!$map) {
-			$map = array(
+			$map = [
 				E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING
-			);
+			];
 			// xDebug при E_RECOVERABLE_ERROR останавивает работу интерпретатора
 			if (self::xdebug()) {
 				$map[]= E_RECOVERABLE_ERROR;
@@ -129,7 +126,7 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 		/** @var array(int => string) $result */
 		static $result;
 		if (!$result) {
-			$result = array(
+			$result = [
 				E_ERROR => 'E_ERROR'
 				,E_WARNING => 'E_WARNING'
 				,E_PARSE => 'E_PARSE'
@@ -143,7 +140,7 @@ final class Df_Qa_Message_Failure_Error extends Df_Qa_Message_Failure {
 				,E_USER_NOTICE => 'E_USER_NOTICE'
 				,E_STRICT => 'E_STRICT'
 				,E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR'
-			);
+			];
 			if (defined('E_DEPRECATED')) {
 				$result[E_DEPRECATED] = 'E_DEPRECATED';
 			}

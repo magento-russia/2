@@ -1,5 +1,6 @@
 <?php
-class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
+namespace Df\Zf\Validate;
+class ClassT extends Type {
 	/**
 	 * @override
 	 * @param object $value
@@ -35,22 +36,14 @@ class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
 	protected function getMessageInternal() {
 		return
 			is_null($this->getValue())
-			?
-				strtr(
-					'Система вместо объекта класса «{требуемый класс}» получила значение «NULL».'
-					,array('{требуемый класс}' => $this->getClassExpected())
-				)
+			? "Система вместо объекта класса «{$this->getClassExpected()}» получила значение «NULL»."
 			: (
 				is_object($this->getValue())
-				?
-					strtr(
-						'Система вместо требуемого класса «{требуемый класс}»'
-						. ' получила объект класса «{полученный класс}».'
-						,array(
-							'{полученный класс}' => get_class($this->getValue())
-							,'{требуемый класс}' => $this->getClassExpected()
-						)
-					)
+				? strtr(
+					"Система вместо требуемого класса «{$this->getClassExpected()}»"
+					. ' получила объект класса «{полученный класс}».'
+					,['{полученный класс}' => get_class($this->getValue())]
+				)
 				: parent::getMessageInternal()
 			)
 		;
@@ -73,21 +66,21 @@ class Df_Zf_Validate_Class extends Df_Zf_Validate_Type {
 	 * @used-by Df_Dataflow_Model_Registry_Collection::getValidator()
 	 * @used-by Df_Core_Validator::byName()
 	 * @param string $className
-	 * @return Df_Zf_Validate_Class
+	 * @return ClassT
 	 */
 	public static function i($className) {
 		df_param_string_not_empty($className, 0);
-		return new self(array(self::$PARAM__CLASS => $className));
+		return new self([self::$PARAM__CLASS => $className]);
 	}
 	/**
 	 * @used-by Df_Qa_Method::validateParamClass()
 	 * @used-by Df_Qa_Method::validateResultClass()
 	 * @used-by Df_Qa_Method::validateValueClass()
 	 * @param string $className
-	 * @return Df_Zf_Validate_Class
+	 * @return ClassT
 	 */
 	public static function s($className) {
-		/** @var array(string => Df_Zf_Validate_Class) */
+		/** @var array(string => \Df\Zf\Validate\Class) */
 		static $result;
 		if (!isset($result[$className])) {
 			$result[$className] = self::i($className);

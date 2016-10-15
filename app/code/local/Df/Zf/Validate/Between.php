@@ -1,5 +1,6 @@
 <?php
-class Df_Zf_Validate_Between extends Zend_Validate_Between {
+namespace Df\Zf\Validate;
+class Between extends \Zend_Validate_Between {
 	/**
 	 * Sets validator options
 	 * Accepts the following option keys:
@@ -7,7 +8,7 @@ class Df_Zf_Validate_Between extends Zend_Validate_Between {
 	 *   'max' => scalar, maximum border
 	 *   'inclusive' => boolean, inclusive border values
 	 * @override
-	 * @param array|Zend_Config $options
+	 * @param array|\Zend_Config $options
 	 */
 	public function __construct(array $options) {
 		/**
@@ -16,9 +17,9 @@ class Df_Zf_Validate_Between extends Zend_Validate_Between {
 		 * и Zend Framework 1.11.1 (Magento 1.5.0.1).
 		 *
 		 * Именно для устранения для пользователя данных различий
-		 * служит наш класс-посредник Df_Zf_Validate_Between
+		 * служит наш класс-посредник \Df\Zf\Validate\Between
 		 */
-		if (version_compare (Zend_Version::VERSION, '1.10', '>=')) {
+		if (version_compare(\Zend_Version::VERSION, '1.10', '>=')) {
 			/** @noinspection PhpParamsInspection */
 			parent::__construct($options);
 		}

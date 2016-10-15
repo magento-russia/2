@@ -1,9 +1,10 @@
 <?php
-class Df_Zf_Validate_Nat extends Df_Zf_Validate_Int {
+namespace Df\Zf\Validate;
+class Nat extends IntT {
 	/**
 	 * @override
 	 * @param  mixed $value
-	 * @throws Zend_Filter_Exception
+	 * @throws \Zend_Filter_Exception
 	 * @return int
 	 */
 	public function filter($value) {
@@ -11,8 +12,8 @@ class Df_Zf_Validate_Nat extends Df_Zf_Validate_Int {
 		try {
 			$result = df_nat($value);
 		}
-		catch (Exception $e) {
-			df_error(new Zend_Filter_Exception(df_ets($e)));
+		catch (\Exception $e) {
+			df_error(new \Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}
@@ -36,6 +37,6 @@ class Df_Zf_Validate_Nat extends Df_Zf_Validate_Int {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'натурального числа';}
 
-	/** @return Df_Zf_Validate_Nat */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

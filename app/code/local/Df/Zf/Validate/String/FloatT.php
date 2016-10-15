@@ -1,5 +1,6 @@
 <?php
-class Df_Zf_Validate_String_Float extends Df_Zf_Validate_String_Parser {
+namespace Df\Zf\Validate\StringT;
+class FloatT extends Parser {
 	/**
 	 * @override
 	 * @param string $value
@@ -15,7 +16,7 @@ class Df_Zf_Validate_String_Float extends Df_Zf_Validate_String_Parser {
 		 * конвертировать строки типа «368.» в вещественные числа без сбоев.
 		 *
 		 * Обратите внимание, что 368.0 === floatval('368.'),
-		 * поэтому функция @see rm_float()
+		 * поэтому функция @see df_float()
 		 * сконвертирует строку «368.» в вещественное число без проблем.
 		 */
 		if (is_string($value) && df_ends_with($value, '.') && ('.' !== $value)) {
@@ -46,6 +47,6 @@ class Df_Zf_Validate_String_Float extends Df_Zf_Validate_String_Parser {
 	 */
 	protected function getZendValidatorClass() {return 'Zend_Validate_Float';}
 
-	/** @return Df_Zf_Validate_String_Float */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

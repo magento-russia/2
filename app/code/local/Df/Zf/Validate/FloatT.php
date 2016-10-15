@@ -1,18 +1,19 @@
 <?php
-class Df_Zf_Validate_Float extends Df_Zf_Validate_Type implements Zend_Filter_Interface {
+namespace Df\Zf\Validate;
+class FloatT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
-	 * @param  mixed $value
-	 * @throws Zend_Filter_Exception
+	 * @param mixed $value
+	 * @throws \Zend_Filter_Exception
 	 * @return float
 	 */
 	public function filter($value) {
 		/** @var float $result */
 		try {
-			$result = rm_float($value);
+			$result = df_float($value);
 		}
-		catch (Exception $e) {
-			df_error(new Zend_Filter_Exception(df_ets($e)));
+		catch (\Exception $e) {
+			df_error(new \Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}
@@ -27,10 +28,10 @@ class Df_Zf_Validate_Float extends Df_Zf_Validate_Type implements Zend_Filter_In
 		/**
 		 * Обратите внимание, что строки не проходят валидацию,
 		 * однако мы реализуем интерфейс @see Zend_Filter_Interface
-		 * (@see Df_Zf_Validate_Float::filter()),
+		 * (@see \Df\Zf\Validate\FloatT::filter()),
 		 * чтобы пользователь данного класса, имеющий строку (число в виде строки),
 		 * мог предварительно сконвертировать её вещественное число
-		 * посредством вызова метода @see Df_Zf_Validate_Float::filter().
+		 * посредством вызова метода @see \Df\Zf\Validate\FloatT::filter().
 		 * Так поступает, например, класс @see Df_Core_Model:
 		 * при инициализации конкретного свойства данного класса
 		 * при наличии фильтра для данного свойства вызывается метод
@@ -51,6 +52,6 @@ class Df_Zf_Validate_Float extends Df_Zf_Validate_Type implements Zend_Filter_In
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'вещественного числа';}
 
-	/** @return Df_Zf_Validate_Float */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
