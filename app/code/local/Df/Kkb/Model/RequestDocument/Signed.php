@@ -63,11 +63,11 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getElementLetter() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_xml_node('merchant', $this->getLetterAttributes())
+				df_xml_node('merchant', $this->getLetterAttributes())
 					->importArray($this->getLetterBody())
 			;
 		}
@@ -90,10 +90,10 @@ abstract class Df_Kkb_Model_RequestDocument_Signed extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getElementSignature() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_xml_node('merchant_sign', array('type' => 'RSA'));
+			$this->{__METHOD__} = df_xml_node('merchant_sign', array('type' => 'RSA'));
 			$this->{__METHOD__}->setValue($this->getSigner()->getSignature());
 		}
 		return $this->{__METHOD__};

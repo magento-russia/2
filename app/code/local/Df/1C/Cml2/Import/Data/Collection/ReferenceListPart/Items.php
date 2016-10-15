@@ -3,11 +3,11 @@ class Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items
 	extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @return Df_Core_Sxe[]
+	 * @return \Df\Xml\X[]
 	 */
 	protected function getImportEntitiesAsSimpleXMLElementArray() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Core_Sxe[] $result */
+			/** @var \Df\Xml\X[] $result */
 			$result = parent::getImportEntitiesAsSimpleXMLElementArray();
 			$this->{__METHOD__} = $result ? $result : $this->e()->xpath($this->itemPath2());
 		}
@@ -16,7 +16,7 @@ class Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_ReferenceListPart_Item::_C;}
@@ -45,7 +45,7 @@ class Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items
 			</ТипыЗначений>
 		</Свойство>
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'ТипыЗначений/ТипЗначений/ВариантыЗначений/ВариантЗначения';}
@@ -76,8 +76,8 @@ class Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList::getItems()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items
 	 */
-	public static function i(Df_Core_Sxe $e) {return new self(array(self::$P__E => $e));}
+	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

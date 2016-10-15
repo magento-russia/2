@@ -23,7 +23,7 @@ class Df_Reward_Block_Tooltip extends Df_Core_Block_Template_NoCache {
 			$customer = df_session_customer()->getCustomer();
 			$this->_rewardInstance = Df_Reward_Model_Reward::s()
 				->setCustomer($customer)
-				->setWebsiteId(rm_website_id())
+				->setWebsiteId(df_website_id())
 				->loadByCustomer()
 			;
 			$this->_actionInstance = $this->_rewardInstance->getActionInstance($action, true);

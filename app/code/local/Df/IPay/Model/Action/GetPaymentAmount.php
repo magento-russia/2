@@ -24,7 +24,7 @@ class Df_IPay_Model_Action_GetPaymentAmount extends Df_IPay_Model_Action_Abstrac
 	 * @return void
 	 */
 	protected function _process() {
-		$this->e()->appendChild(rm_xml_node('ServiceInfo')->importArray(array(
+		$this->e()->appendChild(df_xml_node('ServiceInfo')->importArray(array(
 			'Name' => array(
 				'Surname' => $this->order()->getCustomerLastname()
 				,'FirstName' => $this->order()->getCustomerFirstname()

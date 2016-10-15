@@ -47,7 +47,7 @@ class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 				,$customer->getName()
 				,array(
 					'balance' =>
-						rm_website($this->getBalanceModel()->getWebsiteId())->getBaseCurrency()->format(
+						df_website($this->getBalanceModel()->getWebsiteId())->getBaseCurrency()->format(
 							$this->getBalanceModel()->getAmount(), array(), false
 						)
 					,'name'	=> $customer->getName()

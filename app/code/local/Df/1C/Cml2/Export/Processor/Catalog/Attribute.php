@@ -3,7 +3,7 @@
  * @method Df_1C_Cml2_Export_Document_Catalog getDocument()
  */
 abstract class Df_1C_Cml2_Export_Processor_Catalog_Attribute
-	extends Df_Core_Xml_Generator_Part {
+	extends \Df\Xml\Generator\Part {
 	/**
 	 * @param Df_Catalog_Model_Product $product
 	 * @return string|string[]|null
@@ -120,10 +120,10 @@ abstract class Df_1C_Cml2_Export_Processor_Catalog_Attribute
 	 * @used-by Df_1C_Cml2_Export_Document_Catalog::getProcessorsForVirtualAttributes()
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Attribute_Url::i()
 	 * @param string $class
-	 * @param Df_Core_Xml_Generator_Document $document
+	 * @param \Df\Xml\Generator\Document $document
 	 * @return Df_1C_Cml2_Export_Processor_Catalog_Attribute
 	 */
-	public static function ic($class, Df_Core_Xml_Generator_Document $document) {
+	public static function ic($class, \Df\Xml\Generator\Document $document) {
 		return df_ic($class, __CLASS__, array(self::$P__DOCUMENT => $document));
 	}
 }

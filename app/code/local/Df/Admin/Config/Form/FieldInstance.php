@@ -34,7 +34,7 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 	public function isConfigNodeExist($name) {
 		if (!isset($this->{__METHOD__}[$name])) {
 			df_param_string_not_empty($name, 0);
-			$this->{__METHOD__}[$name] = rm_xml_exists_child($this->getConfig(), $name);
+			$this->{__METHOD__}[$name] = df_xml_exists_child($this->getConfig(), $name);
 		}
 		return $this->{__METHOD__}[$name];
 	}
@@ -66,7 +66,7 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 	 */
 	private function getConfigParamInternal($paramName) {
 		if (!isset($this->{__METHOD__}[$paramName])) {
-			$this->{__METHOD__}[$paramName] = df_n_set(rm_leaf_child($this->getConfig(), $paramName));
+			$this->{__METHOD__}[$paramName] = df_n_set(df_leaf_child($this->getConfig(), $paramName));
 		}
 		return df_n_get($this->{__METHOD__}[$paramName]);
 	}

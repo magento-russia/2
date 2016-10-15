@@ -24,7 +24,7 @@ abstract class Df_Page_JQueryInjecter extends Df_Core_Model {
 	private function getConfigValue($key) {
 		if (!isset($this->{__METHOD__}[$key])) {
 			df_param_string_not_empty($key, 0);
-			$this->{__METHOD__}[$key] = rm_leaf_sne(rm_config_node(
+			$this->{__METHOD__}[$key] = df_leaf_sne(rm_config_node(
 				'df/jquery', $key, $this->getConfigSuffix()
 			));
 		}

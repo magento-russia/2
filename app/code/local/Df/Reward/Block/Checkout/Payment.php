@@ -11,7 +11,7 @@ class Df_Reward_Block_Checkout_Payment extends Df_Core_Block_Template_NoCache {
 		if (!$this->_getData('reward')) {
 			$reward = Df_Reward_Model_Reward::i()
 				->setCustomer($this->getCustomer())
-				->setWebsiteId(rm_website_id())
+				->setWebsiteId(df_website_id())
 				->loadByCustomer();
 			$this->setData('reward', $reward);
 		}
@@ -35,7 +35,7 @@ class Df_Reward_Block_Checkout_Payment extends Df_Core_Block_Template_NoCache {
 			|| !df_h()->reward()->isEnabledOnFront()) {
 			return false;
 		}
-		$minPointsToUse = df_h()->reward()->getGeneralConfig('min_points_balance', rm_website_id());
+		$minPointsToUse = df_h()->reward()->getGeneralConfig('min_points_balance', df_website_id());
 		$canUseRewadPoints = ($this->getPointsBalance() >= $minPointsToUse) ? true : false;
 		return(boolean)(((float)$this->getCurrencyAmount() > 0) && $canUseRewadPoints);
 	}

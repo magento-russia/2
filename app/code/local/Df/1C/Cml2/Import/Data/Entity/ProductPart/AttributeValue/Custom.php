@@ -253,11 +253,11 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem()
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::i()
 	 * @param string $class
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param Df_1C_Cml2_Import_Data_Entity_Product $product
 	 * @return Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 */
-	public static function ic($class, Df_Core_Sxe $e, Df_1C_Cml2_Import_Data_Entity_Product $product) {
+	public static function ic($class, \Df\Xml\X $e, Df_1C_Cml2_Import_Data_Entity_Product $product) {
 		return df_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PRODUCT => $product));
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Rule extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Onetime_Dictionary_Rule extends \Df\Xml\Parser\Entit {
 	/**
 	 * @param string $type
 	 * @return Df_Localization_Onetime_Dictionary_Rule_Actions

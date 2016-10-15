@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Localization_Dictionary extends Df_Core_Xml_Parser_Entity {
+abstract class Df_Localization_Dictionary extends \Df\Xml\Parser\Entit {
 	/**
 	 * @used-by pathFull()
 	 * @see Df_Localization_Onetime_Dictionary::type()
@@ -10,8 +10,8 @@ abstract class Df_Localization_Dictionary extends Df_Core_Xml_Parser_Entity {
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Entity::e()
-	 * @return Df_Core_Sxe
+	 * @see \Df\Xml\Parser\Entit::e()
+	 * @return \Df\Xml\X
 	 */
 	public function e() {
 		if (!isset($this->{__METHOD__})) {
@@ -20,7 +20,7 @@ abstract class Df_Localization_Dictionary extends Df_Core_Xml_Parser_Entity {
 			if (!file_exists($path)) {
 				df_error('Не найден требуемый файл «%s».', $path);
 			}
-			$this->{__METHOD__} = df_first(rm_xml_load_file($path)->xpath('/dictionary'));
+			$this->{__METHOD__} = df_first(df_xml_load_file($path)->xpath('/dictionary'));
 			df_assert($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

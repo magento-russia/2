@@ -201,7 +201,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	 * @return void
 	 */
 	public function saveRmInternal($store) {
-		$this->setStoreId(rm_store_id($store));
+		$this->setStoreId(df_store_id($store));
 		$this->save();
 	}
 
@@ -362,7 +362,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		/** @var Df_Catalog_Model_Category $result */
 		$result = self::i();
 		if (!is_null($store)) {
-			$result->setStoreId(rm_store_id($store));
+			$result->setStoreId(df_store_id($store));
 		}
 		return df_load($result, $id);
 	}

@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract
-	extends Df_Core_Xml_Parser_Entity {
+	extends \Df\Xml\Parser\Entit {
 	/** @return string */
 	abstract protected function getEntityClass();
 
@@ -163,10 +163,10 @@ abstract class Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract
 
 	/**
 	 * @param string $class
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract
 	 */
-	public static function ic($class, Df_Core_Sxe $e) {
+	public static function ic($class, \Df\Xml\X $e) {
 		return df_ic($class, __CLASS__, array(self::$P__E => $e));
 	}
 }

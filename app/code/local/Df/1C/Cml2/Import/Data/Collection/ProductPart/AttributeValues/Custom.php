@@ -3,11 +3,11 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::createItem()
-	 * @param Df_Core_Sxe $e
+	 * @see \Df\Xml\Parser\Collection::createItem()
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Import_Data_Entity
 	 */
-	protected function createItem(Df_Core_Sxe $e) {
+	protected function createItem(\Df\Xml\X $e) {
 		return Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::ic(
 			$this->itemClassAdvanced($e), $e, $this->getProduct()
 		);
@@ -17,11 +17,11 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	 * 2015-08-15
 	 * Класс элемента зависит от ветки XML.
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClassAdvanced()
-	 * @param Df_Core_Sxe $e
+	 * @see \Df\Xml\Parser\Collection::itemClassAdvanced()
+	 * @param \Df\Xml\X $e
 	 * @return string
 	 */
-	protected function itemClassAdvanced(Df_Core_Sxe $e) {
+	protected function itemClassAdvanced(\Df\Xml\X $e) {
 		/** @var string|null $valueId */
 		$valueId = $e->leaf('ИдЗначения');
 		if (!$valueId) {
@@ -80,7 +80,7 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'ЗначенияСвойств/ЗначенияСвойства';}
@@ -116,13 +116,13 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	 * http://www.hostcms.ru/forums/2/8746/
 	 *
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::postInitItems()
-	 * @used-by Df_Core_Xml_Parser_Collection::getItems()
+	 * @see \Df\Xml\Parser\Collection::postInitItems()
+	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @param Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {
-		/** @var Df_Core_Sxe|null $xmlManufacturer */
+		/** @var \Df\Xml\X|null $xmlManufacturer */
 		$xmlManufacturer = $this->e()->descend('Изготовитель');
 		if ($xmlManufacturer) {
 			$this->addItem(
@@ -149,11 +149,11 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getAttributeValuesCustom()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param Df_1C_Cml2_Import_Data_Entity_Product $product
 	 * @return Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	 */
-	public static function i(Df_Core_Sxe $e, Df_1C_Cml2_Import_Data_Entity_Product $product) {
+	public static function i(\Df\Xml\X $e, Df_1C_Cml2_Import_Data_Entity_Product $product) {
 		return new self(array(self::$P__E => $e, self::$P__PRODUCT => $product));
 	}
 }

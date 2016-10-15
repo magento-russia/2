@@ -75,7 +75,7 @@ abstract class Df_Admin_Block_Field_Button extends Df_Adminhtml_Block_Config_For
 	 * @param string $name
 	 * @return string|null
 	 */
-	protected function param($name) {return rm_leaf_child($this->getFieldConfig(), $name);}
+	protected function param($name) {return df_leaf_child($this->getFieldConfig(), $name);}
 
 	/**
 	 * Раньше код был таким:

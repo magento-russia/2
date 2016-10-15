@@ -61,8 +61,8 @@ class Df_1C_Cml2_Import_Data_Collection_Offers extends Df_1C_Cml2_Import_Data_Co
 	 *
 	 * 2015-08-04
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::postInitItems()
-	 * @used-by Df_Core_Xml_Parser_Collection::getItems()
+	 * @see \Df\Xml\Parser\Collection::postInitItems()
+	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @param Df_1C_Cml2_Import_Data_Entity_Offer[] $items
 	 * @return void
 	 */
@@ -77,14 +77,14 @@ class Df_1C_Cml2_Import_Data_Collection_Offers extends Df_1C_Cml2_Import_Data_Co
 	
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Offer::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {
@@ -95,8 +95,8 @@ class Df_1C_Cml2_Import_Data_Collection_Offers extends Df_1C_Cml2_Import_Data_Co
 	 * @used-by Df_1C_Cml2_State_Import_Collections::getOffers()
 	 * @used-by Df_1C_Cml2_State_Import_Collections::getOffersBase()
 	 * @static
-	 * @param Df_Core_Sxe $xml
+	 * @param \Df\Xml\X $xml
 	 * @return Df_1C_Cml2_Import_Data_Collection_Offers
 	 */
-	public static function i(Df_Core_Sxe $xml) {return new self(array(self::$P__E => $xml));}
+	public static function i(\Df\Xml\X $xml) {return new self(array(self::$P__E => $xml));}
 }

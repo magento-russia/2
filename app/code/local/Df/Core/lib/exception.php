@@ -45,7 +45,7 @@ function df_exception_get_trace(E $exception, $showCodeContext = false) {
  */
 function df_exception_to_session(Exception $exception) {
 	/** @var string $message */
-	$message = df_t()->nl2br(rm_xml_output_html(df_ets($exception)));
+	$message = df_t()->nl2br(df_xml_output_html(df_ets($exception)));
 	/** @var bool $isMagentoCoreException */
 	$isMagentoCoreException = $exception instanceof Mage_Core_Exception;
 	/** @var bool $isRmException */

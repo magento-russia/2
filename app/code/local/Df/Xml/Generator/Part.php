@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Core_Xml_Generator_Part extends Df_Core_Model {
+namespace Df\Xml\Generator;
+abstract class Part extends \Df_Core_Model {
 	/** @return array(string => mixed) */
 	abstract public function getResult();
 
@@ -14,10 +15,10 @@ abstract class Df_Core_Xml_Generator_Part extends Df_Core_Model {
 		return $this->getDocument()->convertMoneyToExportCurrency($amountInBaseCurrency);
 	}
 
-	/** @return Df_Core_Xml_Generator_Document */
+	/** @return \Df\Xml\Generator\Document */
 	protected function getDocument() {return $this->cfg(self::$P__DOCUMENT);}
 
-	/** @return Df_Directory_Model_Currency */
+	/** @return \Df_Directory_Model_Currency */
 	protected function getExportCurrency() {return $this->getDocument()->getExportCurrency();}
 
 	/** @return string */
@@ -64,7 +65,7 @@ abstract class Df_Core_Xml_Generator_Part extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__DOCUMENT, Df_Core_Xml_Generator_Document::_C);
+		$this->_prop(self::$P__DOCUMENT, \Df\Xml\Generator\Document::_C);
 	}
 	const _C = __CLASS__;
 	/** @var string */

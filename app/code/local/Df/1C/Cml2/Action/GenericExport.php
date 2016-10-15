@@ -2,7 +2,7 @@
 abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	/**
 	 * @used-by getDocument()
-	 * @return Df_Core_Xml_Generator_Document
+	 * @return \Df\Xml\Generator\Document
 	 */
 	abstract protected function createDocument();
 
@@ -23,8 +23,8 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	 * @return string
 	 */
 	protected function generateResponseBodyFake() {
-		/** @var Df_Core_Xml_Generator_Document $document */
-		$document = Df_Core_Xml_Generator_Document::_i();
+		/** @var \Df\Xml\Generator\Document $document */
+		$document = \Df\Xml\Generator\Document::_i();
 		$document->setMixin(Df_1C_Cml2_Export_DocumentMixin::_C);
 		return $document->getXml();
 	}
@@ -46,7 +46,7 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	 */
 	protected function needLogResponse() {return df_is_it_my_local_pc();}
 
-	/** @return Df_Core_Xml_Generator_Document */
+	/** @return \Df\Xml\Generator\Document */
 	private function getDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->createDocument();

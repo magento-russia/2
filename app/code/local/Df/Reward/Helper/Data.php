@@ -61,7 +61,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 				$this->isEnabled()
 			&&
 				$this->getGeneralConfig(
-					'enabled_on_front', (int)(is_null($websiteId) ? rm_website_id() : $websiteId)
+					'enabled_on_front', (int)(is_null($websiteId) ? df_website_id() : $websiteId)
 				)
 		;
 	}
@@ -75,8 +75,8 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @return mixed
 	 */
 	public function getConfigValue($section, $field, $websiteId = null) {
-		$websiteId = is_null($websiteId) ? rm_website_id() : $websiteId;
-		return rm_leaf_s(Mage::app()->getConfig()->getNode($section . $field, 'website', (int)$websiteId));
+		$websiteId = is_null($websiteId) ? df_website_id() : $websiteId;
+		return df_leaf_s(Mage::app()->getConfig()->getNode($section . $field, 'website', (int)$websiteId));
 	}
 
 	/**

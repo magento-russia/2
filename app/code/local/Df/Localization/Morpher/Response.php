@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Morpher_Response extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Morpher_Response extends \Df\Xml\Parser\Entit {
 	/** @return string */
 	public function getErrorMessage() {return $this->descendS('message');}
 
@@ -88,7 +88,7 @@ class Df_Localization_Morpher_Response extends Df_Core_Xml_Parser_Entity {
 	/**
 	 * @static
 	 * @param string $caseNominative
-	 * @param Df_Core_Sxe|string $xml
+	 * @param \Df\Xml\X|string $xml
 	 * @return Df_Localization_Morpher_Response
 	 */
 	public static function i($caseNominative, $xml) {return new self(array(

@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Realtime_Dictionary_ModulePart_Block extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Realtime_Dictionary_ModulePart_Block extends \Df\Xml\Parser\Entit {
 	/** @return string|null */
 	public function getBlockClass() {return $this->getAttribute('class');}
 
@@ -22,7 +22,7 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Block extends Df_Core_Xml_P
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Entity::getName()
+	 * @see \Df\Xml\Parser\Entit::getName()
 	 * @return string
 	 */
 	public function getName() {return df_nts($this->getAttribute('name'));}

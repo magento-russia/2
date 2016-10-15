@@ -21,12 +21,12 @@ class Df_Kkb_Model_RequestDocument_Secondary extends Df_Kkb_Model_RequestDocumen
 
 	/** @return array(string => mixed) */
 	private function getDocumentData_Command() {
-		return array(Df_Core_Sxe::ATTR => array('type' => $this->getTransactionType()));
+		return array(\Df\Xml\X::ATTR => array('type' => $this->getTransactionType()));
 	}
 
 	/** @return array(string => mixed) */
 	private function getDocumentData_Payment() {
-		return array(Df_Core_Sxe::ATTR => array(
+		return array(\Df\Xml\X::ATTR => array(
 			'reference' => $this->getRequest()->getPaymentExternalId()
 			,'approval_code' => $this->getResponsePayment()->getPaymentCodeApproval()
 			,'orderid' => $this->orderIId()

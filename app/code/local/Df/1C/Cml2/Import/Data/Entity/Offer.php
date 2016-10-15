@@ -210,12 +210,12 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 					 * так что надо молча корректно обрабатывать такую ситуацию,
 					 * а не принуждать администратора отключать опцию.
 					 */
-					/** @var Df_Core_Sxe[] $elements */
+					/** @var \Df\Xml\X[] $elements */
 					$elements = $this->e()->xpathA('Остатки/Остаток/Склад/Количество');
 					$result = 0;
 					foreach ($elements as $element) {
-						/** @var Df_Core_Sxe $element */
-						$result += rm_leaf_f($element);
+						/** @var \Df\Xml\X $element */
+						$result += df_leaf_f($element);
 					}
 				}
 				/**
@@ -266,11 +266,11 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 					 * чем решать проблемы с администраторами
 					 * (их много, ведь Российская сборка Magento — тиражируемый продукт).
 					 */
-					/** @var Df_Core_Sxe[] $elements */
+					/** @var \Df\Xml\X[] $elements */
 					$elements = $this->e()->xpathA('Склад');
 					$result = 0;
 					foreach ($elements as $element) {
-						/** @var Df_Core_Sxe $element */
+						/** @var \Df\Xml\X $element */
 						$result += df_float($element->getAttribute('КоличествоНаСкладе'));
 					}
 				}

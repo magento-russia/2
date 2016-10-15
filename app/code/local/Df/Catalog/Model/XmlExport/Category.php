@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Catalog_Model_XmlExport_Catalog getDocument() */
-abstract class Df_Catalog_Model_XmlExport_Category extends Df_Core_Xml_Generator_Part {
+abstract class Df_Catalog_Model_XmlExport_Category extends \Df\Xml\Generator\Part {
 	/** @return Df_Catalog_Model_Category */
 	protected function getCategory() {return $this->_getData(self::$P__CATEGORY);}
 
@@ -30,13 +30,13 @@ abstract class Df_Catalog_Model_XmlExport_Category extends Df_Core_Xml_Generator
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Category::process()
 	 * @param string $class
 	 * @param Df_Catalog_Model_Category $category
-	 * @param Df_Core_Xml_Generator_Document $document
+	 * @param \Df\Xml\Generator\Document $document
 	 * @return Df_Catalog_Model_XmlExport_Category
 	 */
 	protected static function ic(
 		$class
 		,Df_Catalog_Model_Category $category
-		,Df_Core_Xml_Generator_Document $document
+		,\Df\Xml\Generator\Document $document
 	) {
 		return df_ic($class, __CLASS__, array(
 			self::$P__DOCUMENT => $document, self::$P__CATEGORY => $category

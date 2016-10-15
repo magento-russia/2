@@ -18,14 +18,14 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_Images
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_ProductPart_Image::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'Картинка';}
@@ -33,8 +33,8 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_Images
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_ProductЖЖgetImages()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Import_Data_Collection_ProductPart_Images
 	 */
-	public static function i(Df_Core_Sxe $e) {return new self(array(self::$P__E => $e));}
+	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

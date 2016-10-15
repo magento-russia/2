@@ -1,6 +1,6 @@
 <?php
 abstract class Df_1C_Cml2_Import_Data_Collection
-	extends Df_Core_Xml_Parser_Collection {
+	extends \Df\Xml\Parser\Collection {
 	/**
 	 * @param string $externalId
 	 * @return Df_1C_Cml2_Import_Data_Entity|null

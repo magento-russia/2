@@ -84,7 +84,7 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 			if (df_is_admin()) {
 				Mage::throwException(Df_CustomerBalance_Helper_Data::s()->__('Website ID must be set.'));
 			}
-			$websiteId = rm_website_id();
+			$websiteId = df_website_id();
 		}
 		$this->getResource()->loadByCustomerAndWebsiteIds($this, $this->getCustomerId(), $websiteId);
 		return $this;

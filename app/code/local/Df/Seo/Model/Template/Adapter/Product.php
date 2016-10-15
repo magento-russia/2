@@ -23,7 +23,7 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 		if (!$node) {
 			$node = $this->getConfigNode('default');
 		}
-		return rm_leaf_sne($node);
+		return df_leaf_sne($node);
 	}
 
 	/**
@@ -31,7 +31,7 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 	 * @return Mage_Core_Model_Config_Element
 	*/
 	private function getConfigNode($propertyType) {
-		return rm_leaf_child(
+		return df_leaf_child(
 			rm_config_node('df/seo/template/objects', $this->getName(), 'properties'), $propertyType
 		);
 	}

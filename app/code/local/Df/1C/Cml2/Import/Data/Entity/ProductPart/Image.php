@@ -30,7 +30,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_Image extends Df_1C_Cml2_Import_
 	 */
 	public function getFilePathRelative($skipValidation = false) {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_leaf_s($this->e());
+			$this->{__METHOD__} = df_leaf_s($this->e());
 			if (!$skipValidation && !$this->{__METHOD__}) {
 				df_error(
 					'1C: Управление торговлей почему-то передала в интернет-магазин'
@@ -57,8 +57,8 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_Image extends Df_1C_Cml2_Import_
 
 	/**
 	 * От разультата этого метода зависит добавление данного объекта
-	 * в коллекцию @see Df_Core_Xml_Parser_Collection
-	 * @used-by Df_Core_Xml_Parser_Collection::getItems()
+	 * в коллекцию @see \Df\Xml\Parser\Collection
+	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @override
 	 * @return bool
 	 */

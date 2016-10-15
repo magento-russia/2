@@ -135,7 +135,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 			foreach ($websiteCodes as $websiteCode) {
 				/** @var string $websiteCode */
 				try {
-					$website = rm_website(trim($websiteCode));
+					$website = df_website(trim($websiteCode));
 					if (!in_array($website->getId(), $websiteIds)) {
 						$websiteIds[]= $website->getId();
 					}

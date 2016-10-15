@@ -56,12 +56,12 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	private function getRequestBodyAsArray() {
 		/** @var mixed[] $result */
 		$result = array(
-			'security' => array('token' => array(Df_Core_Sxe::ATTR => array('value' => $this->getToken())))
+			'security' => array('token' => array(\Df\Xml\X::ATTR => array('value' => $this->getToken())))
 			,'message' => array(
-				Df_Core_Sxe::ATTR => array('type' => 'sms')
-				,Df_Core_Sxe::CONTENT => array(
+				\Df\Xml\X::ATTR => array('type' => 'sms')
+				,\Df\Xml\X::CONTENT => array(
 					'sender' => $this->getSenderName()
-					,'abonent' => array(Df_Core_Sxe::ATTR => array(
+					,'abonent' => array(\Df\Xml\X::ATTR => array(
 						'phone' => $this->getMessage()->getReceiver()
 					))
 					,'text' => strtr($this->getMessage()->getBody(), array(
@@ -75,7 +75,7 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 		return $result;
 	}
 	
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getRequestBodyAsSimpleXmlElement() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =

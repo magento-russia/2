@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Onetime_Dictionary_Term extends \Df\Xml\Parser\Entit {
 	/**
 	 * @override
 	 * @return string
@@ -145,7 +145,7 @@ class Df_Localization_Onetime_Dictionary_Term extends Df_Core_Xml_Parser_Entity 
 
 	/**
 	 * @static
-	 * @param Df_Core_Sxe|string $e
+	 * @param \Df\Xml\X|string $e
 	 * @return Df_Localization_Onetime_Dictionary_Term
 	 */
 	public static function i($e) {return self::entity($e, __CLASS__);}

@@ -273,7 +273,7 @@ function df_version() {
 	static $result;
 	if (!$result) {
 		/** @var string $result */
-		$result = rm_leaf_sne(rm_config_node('df/version'));
+		$result = df_leaf_sne(rm_config_node('df/version'));
 	}
 	return $result;
 }

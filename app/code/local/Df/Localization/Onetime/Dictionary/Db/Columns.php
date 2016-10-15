@@ -1,15 +1,15 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Db_Columns extends Df_Core_Xml_Parser_Collection {
+class Df_Localization_Onetime_Dictionary_Db_Columns extends \Df\Xml\Parser\Collection {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Db_Column::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection:itemParams()
+	 * @see \Df\Xml\Parser\Collection:itemParams()
 	 * @return array(string => mixed)
 	 */
 	protected function itemParams() {return array(
@@ -18,7 +18,7 @@ class Df_Localization_Onetime_Dictionary_Db_Columns extends Df_Core_Xml_Parser_C
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string
 	 */
 	protected function itemPath() {return 'column';}
@@ -36,11 +36,11 @@ class Df_Localization_Onetime_Dictionary_Db_Columns extends Df_Core_Xml_Parser_C
 
 	/**
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param Df_Localization_Onetime_Dictionary_Db_Table $table
 	 * @return Df_Localization_Onetime_Dictionary_Db_Columns
 	 */
 	public static function i(
-		Df_Core_Sxe $e, Df_Localization_Onetime_Dictionary_Db_Table $table
+		\Df\Xml\X $e, Df_Localization_Onetime_Dictionary_Db_Table $table
 	) {return new self(array(self::$P__E => $e, self::$P__TABLE => $table));}
 }

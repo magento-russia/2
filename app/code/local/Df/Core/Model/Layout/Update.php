@@ -33,7 +33,7 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 	 * @return null|SimpleXMLElement
 	 */
 	public function getFileLayoutUpdatesXml_Df($area, $package, $theme, $storeId = null) {
-		$storeId = is_null($storeId) ? rm_store_id() : $storeId;
+		$storeId = is_null($storeId) ? df_store_id() : $storeId;
 		/* @var $design Mage_Core_Model_Design_Package */
 		$design = Mage::getSingleton('core/design_package');
 		$elementClass = $this->getElementClass();

@@ -17,7 +17,7 @@ class Df_CustomerBalance_Block_Checkout_Payment extends Df_Core_Block_Template_N
 			/** @var Df_CustomerBalance_Model_Balance $result */
 			$result = Df_CustomerBalance_Model_Balance::i();
 			$result->setCustomer($this->_getCustomer());
-			$result->setWebsiteId(rm_website_id());
+			$result->setWebsiteId(df_website_id());
 			//load customer balance for customer in case we have
 			//registered customer and this is not guest checkout
 			if ($this->_getCustomer()->getId()) {

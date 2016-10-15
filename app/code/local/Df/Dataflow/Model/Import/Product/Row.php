@@ -147,7 +147,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 				foreach ($websiteCodes as $websiteCode) {
 					/** @var string $websiteCode */
 					/** @var Mage_Core_Model_Website $website */
-					$website = rm_website(df_trim($websiteCode));
+					$website = df_website(df_trim($websiteCode));
 					if (!$website) {
 						$this->error(
 							'Сайт с кодом «%s», указанный в строке №%d, не найден в системе.',

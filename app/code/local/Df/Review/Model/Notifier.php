@@ -10,7 +10,7 @@ class Df_Review_Model_Notifier extends Df_Core_Model {
 			$result = df_model('core/email_template_mailer');
 			$result->addEmailInfo($this->getMailInfo());
 			$result->setSender(Mage::getStoreConfig('contacts/email/sender_email_identity'));
-			$result->setStoreId(rm_store_id());
+			$result->setStoreId(df_store_id());
 			$result->setTemplateId(Mage::getStoreConfig('df_tweaks_admin/reviews/notification_template'));
 			$result->setTemplateParams(array(
 				'review' => $this->getReview()

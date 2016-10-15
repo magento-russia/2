@@ -16,7 +16,7 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 		if ($this->hasVendorInfo()) {
 			$attributes['type'] = 'vendor.model';
 		}
-		return array(Df_Core_Sxe::ATTR => $attributes, Df_Core_Sxe::CONTENT => $this->getValue());
+		return array(\Df\Xml\X::ATTR => $attributes, \Df\Xml\X::CONTENT => $this->getValue());
 	}
 
 	/**

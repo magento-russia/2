@@ -110,7 +110,7 @@ class Df_Cms_Observer {
 								,'link'
 								,array(
 									'label' => df_h()->cms()->__('Currently Published Revision')
-									,'href' => rm_url_admin('*/cms_page_revision/edit', array(
+									,'href' => df_url_admin('*/cms_page_revision/edit', array(
 										'page_id' => $page->getId()
 										,'revision_id' => $page->getPublishedRevisionId()
 									))

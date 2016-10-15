@@ -46,7 +46,7 @@ class Df_Seo_Model_Template_Expression extends Df_Core_Model {
 	private function getAdapter() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_model(
-				rm_leaf_sne(rm_config_node('df/seo/template/objects', $this->getObjectName(), 'adapter'))
+				df_leaf_sne(rm_config_node('df/seo/template/objects', $this->getObjectName(), 'adapter'))
 				,array(Df_Seo_Model_Template_Adapter::P__EXPRESSION => $this)
 			);
 		}

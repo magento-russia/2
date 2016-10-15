@@ -101,7 +101,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 
 	/** @return int */
 	public function getStoreId() {
-		return $this->hasData('store_id') ? $this->_getData('store_id') : rm_store_id();
+		return $this->hasData('store_id') ? $this->_getData('store_id') : df_store_id();
 	}
 
 	/**
@@ -142,7 +142,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 		) {
 			throw new Mage_Core_Exception($messageInvalid, self::ERROR_STATUS);
 		}
-		$websiteId = is_null($websiteId) ? rm_website_id() : $websiteId;
+		$websiteId = is_null($websiteId) ? df_website_id() : $websiteId;
 		if ($websiteId != df_store($this->getStoreId())->getWebsiteId()) {
 			throw new Mage_Core_Exception($messageInvalid, self::ERROR_STATUS);
 		}

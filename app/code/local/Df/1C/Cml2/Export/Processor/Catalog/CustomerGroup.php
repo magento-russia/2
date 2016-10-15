@@ -3,7 +3,7 @@
  * @method Df_1C_Cml2_Export_Document_Catalog getDocument()
  */
 class Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup
-	extends Df_Core_Xml_Generator_Part {
+	extends \Df\Xml\Generator\Part {
 	/**
 	 * @override
 	 * @return array(string => string|mixed)
@@ -64,11 +64,11 @@ class Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup
 	 * @used-by Df_1C_Cml2_Export_Document_Catalog::getКлассификатор_ТипыЦен_ТипЦены()
 	 * @static
 	 * @param Df_Customer_Model_Group $group
-	 * @param Df_Core_Xml_Generator_Document $document
+	 * @param \Df\Xml\Generator\Document $document
 	 * @return Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup
 	 */
 	public static function i(
-		Df_Customer_Model_Group $group, Df_Core_Xml_Generator_Document $document
+		Df_Customer_Model_Group $group, \Df\Xml\Generator\Document $document
 	) {
 		return new self(array(self::$P__DOCUMENT => $document, self::$P__GROUP => $group));
 	}

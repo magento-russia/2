@@ -18,7 +18,7 @@ class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 				$result
 				, array(
 					get_class($this)
-					,rm_store_id()
+					,df_store_id()
 					/**
 					 * Здесь @see md5() не нужно,
 					 * потому что @used-by Mage_Core_Block_Abstract::getCacheKey()

@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Db_Table extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Onetime_Dictionary_Db_Table extends \Df\Xml\Parser\Entit {
 	/** @return Df_Localization_Onetime_Dictionary_Db_Columns */
 	public function columns() {
 		if (!isset($this->{__METHOD__})) {
@@ -12,7 +12,7 @@ class Df_Localization_Onetime_Dictionary_Db_Table extends Df_Core_Xml_Parser_Ent
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Entity::getName()
+	 * @see \Df\Xml\Parser\Entit::getName()
 	 * @return string
 	 */
 	public function getName() {

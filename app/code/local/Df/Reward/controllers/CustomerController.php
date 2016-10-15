@@ -95,7 +95,7 @@ class Df_Reward_CustomerController extends Mage_Core_Controller_Front_Action {
 	protected function _getReward() {
 		return Df_Reward_Model_Reward::i()
 			->setCustomer($this->_getCustomer())
-			->setWebsiteId(rm_website_id())
+			->setWebsiteId(df_website_id())
 			->loadByCustomer()
 		;
 	}

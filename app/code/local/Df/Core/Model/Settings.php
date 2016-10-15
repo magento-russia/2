@@ -160,7 +160,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * @return int
 	 */
 	private function storeIdCacheSuffix($store) {
-		return is_null($store) ? $this->_storeIdDefaultCacheSuffix : '$' . rm_store_id($store);
+		return is_null($store) ? $this->_storeIdDefaultCacheSuffix : '$' . df_store_id($store);
 	}
 
 	/**

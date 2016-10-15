@@ -1,6 +1,6 @@
 <?php
 class Df_1C_Cml2_Action_Catalog_Import extends Df_1C_Cml2_Action_Catalog {
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	protected function e() {return $this->getFileCurrent()->getXml();}
 
 	/**

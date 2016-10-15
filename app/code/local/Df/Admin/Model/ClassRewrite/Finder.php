@@ -8,11 +8,11 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 			foreach ($this->getModulesConfiguration() as $filePath => $moduleConfiguration) {
 				/** @var string $filePath */
 				/** @var Df_Varien_Simplexml_Config $moduleConfiguration */
-				/** @var Df_Core_Sxe $xmlGlobal */
+				/** @var \Df\Xml\X $xmlGlobal */
 				$xmlGlobal = $moduleConfiguration->getNode()->{'global'};
 				if ($xmlGlobal) {
 					foreach (Df_Admin_Model_ClassInfo::classTypeMap() as $xmlKey => $classType) {
-						/** @var Df_Core_Sxe $xmlBlocks */
+						/** @var \Df\Xml\X $xmlBlocks */
 						$xml = $xmlGlobal->{$xmlKey};
 						if ($xml) {
 							$this->parseRewrites(
@@ -34,7 +34,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	/** @return bool */
 	private function areLocalModulesDisabled() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_leaf_b(rm_config_node('global/disable_local_modules'));
+			$this->{__METHOD__} = df_leaf_b(rm_config_node('global/disable_local_modules'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -62,7 +62,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 						(
 								!$this->areLocalModulesDisabled()
 							||
-								('local' !== rm_leaf_s($moduleDeclaration->{'codePool'}))
+								('local' !== df_leaf_s($moduleDeclaration->{'codePool'}))
 						)
 				) {
 					foreach ($configFileBaseNames as $configFileBaseName) {
@@ -99,7 +99,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 			;
 			df_assert($resourceConnectionConfig instanceof Varien_Simplexml_Element);
 			/** @var string $resourceConfigNameSuffix */
-			$resourceConfigNameSuffix = rm_leaf_sne($resourceConnectionConfig->{'model'});
+			$resourceConfigNameSuffix = df_leaf_sne($resourceConnectionConfig->{'model'});
 			$this->{__METHOD__} = sprintf('config.%s.xml', $resourceConfigNameSuffix);
 		}
 		return $this->{__METHOD__};
@@ -107,7 +107,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 
 	/**
 	 * @param Df_Admin_Model_ClassRewrite_Collection $rewrites
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param string $type
 	 * @param string $moduleName
 	 * @param string $filePath
@@ -115,22 +115,22 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	 */
 	private function parseRewrites(
 		Df_Admin_Model_ClassRewrite_Collection $rewrites
-		,Df_Core_Sxe $e
+		,\Df\Xml\X $e
 		,$type
 		,$moduleName
 		,$filePath
 	) {
 		foreach ($e->children() as $moduleNameMf => $child) {
 			/** @var string $moduleNameMf */
-			/** @var Df_Core_Sxe $child */
-			/** @var Df_Core_Sxe $xmlRewrite */
+			/** @var \Df\Xml\X $child */
+			/** @var \Df\Xml\X $xmlRewrite */
 			$xmlRewrite = $child->{'rewrite'};
 			if ($xmlRewrite) {
 				foreach ($xmlRewrite->children() as $originSuffixMf => $xmlDestinationClassName) {
 					/** @var string $originSuffixMf */
-					/** @var Df_Core_Sxe $xmlDestinationClassName */
+					/** @var \Df\Xml\X $xmlDestinationClassName */
 					/** @var string $destinationClassName */
-					$destinationClassName = rm_leaf_s($xmlDestinationClassName);
+					$destinationClassName = df_leaf_s($xmlDestinationClassName);
 					/** @var string $originClassNameMf */
 					$originClassNameMf = $moduleNameMf . '/' . $originSuffixMf;
 					/** @var Df_Admin_Model_ClassRewrite|null $rewrite */

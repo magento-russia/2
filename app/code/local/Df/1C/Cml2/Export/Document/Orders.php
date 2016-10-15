@@ -1,11 +1,11 @@
 <?php
-class Df_1C_Cml2_Export_Document_Orders extends Df_Core_Xml_Generator_Document {
+class Df_1C_Cml2_Export_Document_Orders extends \Df\Xml\Generator\Document {
 	/**
 	 * @override
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	protected function createElement() {
-		/** @var Df_Core_Sxe $result */
+		/** @var \Df\Xml\X $result */
 		$result = parent::createElement();
 		foreach ($this->getOrders() as $order) {
 			/** @var Df_Sales_Model_Order $order */

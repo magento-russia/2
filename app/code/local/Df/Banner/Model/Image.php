@@ -327,10 +327,10 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 		}
 
 		$baseDir = df_mage()->catalog()->productMediaConfig()->getBaseMediaPath();
-		if (file_exists($baseDir . '/watermark/stores/' . rm_store_id() . $file)) {
-			$filename = $baseDir . '/watermark/stores/' . rm_store_id() . $file;
-		} else if (file_exists($baseDir . '/watermark/websites/' . rm_website_id() . $file)) {
-			$filename = $baseDir . '/watermark/websites/' . rm_website_id() . $file;
+		if (file_exists($baseDir . '/watermark/stores/' . df_store_id() . $file)) {
+			$filename = $baseDir . '/watermark/stores/' . df_store_id() . $file;
+		} else if (file_exists($baseDir . '/watermark/websites/' . df_website_id() . $file)) {
+			$filename = $baseDir . '/watermark/websites/' . df_website_id() . $file;
 		} else if (file_exists($baseDir . '/watermark/default/' . $file)) {
 			$filename = $baseDir . '/watermark/default/' . $file;
 		} else if (file_exists($baseDir . '/watermark/' . $file)) {

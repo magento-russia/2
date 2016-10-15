@@ -18,7 +18,7 @@ class Df_1C_Cml2_FileSystem {
 
 	/**
 	 * @param string $name
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	public function getXmlByRelativePath($name) {
 		return $this->getXmlDocumentByRelativePath($name)->e();

@@ -18,7 +18,7 @@ class Df_Reward_Block_Customer_Reward_Info extends Df_Core_Block_Template_NoCach
 		$this->_rewardInstance =
 			Df_Reward_Model_Reward::i()
 				->setCustomer($customer)
-				->setWebsiteId(rm_website_id())
+				->setWebsiteId(df_website_id())
 				->loadByCustomer()
 		;
 		if ($this->_rewardInstance->getId()) {

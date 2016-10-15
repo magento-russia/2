@@ -20,23 +20,23 @@ class Df_Kkb_Model_RequestDocument_Registration extends Df_Kkb_Model_RequestDocu
 	/** @return array(string => mixed) */
 	private function getDocumentData_Department() {
 		return array(
-			Df_Core_Sxe::ATTR => array(
+			\Df\Xml\X::ATTR => array(
 				'merchant_id' => $this->configS()->getShopId()
 				, 'amount' => $this->amount()
 			)
-			,Df_Core_Sxe::CONTENT => null
+			,\Df\Xml\X::CONTENT => null
 		);
 	}
 
 	/** @return array(string => mixed) */
 	private function getDocumentData_Order() {
 		return array(
-			Df_Core_Sxe::ATTR => array(
+			\Df\Xml\X::ATTR => array(
 				'order_id' => $this->orderIId()
 				,'amount' => $this->amount()
 				,'currency' => $this->getCurrencyCode()
 			)
-			,Df_Core_Sxe::CONTENT => array('department' => $this->getDocumentData_Department())
+			,\Df\Xml\X::CONTENT => array('department' => $this->getDocumentData_Department())
 		);
 	}
 

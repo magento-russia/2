@@ -69,7 +69,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	 * @return bool
 	 */
 	public function checkIdentifier($identifier, $storeId = null) {
-		return $this->getResource()->checkIdentifier($identifier, rm_store_id($storeId));
+		return $this->getResource()->checkIdentifier($identifier, df_store_id($storeId));
 	}
 
 	/**

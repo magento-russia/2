@@ -29,10 +29,10 @@ class Df_Page_Block_Template_Links extends Mage_Page_Block_Template_Links {
 		$label = $this->__($label);
 		$title = $this->__($title);
 		if ($beforeText instanceof SimpleXMLElement) {
-			$beforeText = rm_leaf_s($beforeText);
+			$beforeText = df_leaf_s($beforeText);
 		}
 		if ($afterText instanceof SimpleXMLElement) {
-			$afterText = rm_leaf_s($afterText);
+			$afterText = df_leaf_s($afterText);
 		}
 		parent::addLink(
 			$label, $url, $title, $prepare, $urlParams, $position

@@ -1,5 +1,5 @@
 <?php
-class Df_Chronopay_Model_Gate_Response extends Df_Core_Xml_Parser_Entity {
+class Df_Chronopay_Model_Gate_Response extends \Df\Xml\Parser\Entit {
 	/** @return Df_Chronopay_Model_Gate_Response */
 	public function check() {
 		if (0 != $this->getCode()) {

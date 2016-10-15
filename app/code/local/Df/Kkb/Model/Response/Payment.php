@@ -155,13 +155,13 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getElementCustomer() {return $this->getElement('bank/customer');}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getElementOrder() {return $this->getElement('bank/customer/merchant/order');}
 	
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getElementPayment() {return $this->getElement('bank/results/payment');}
 	
 	/** @return Df_Directory_Model_Currency */

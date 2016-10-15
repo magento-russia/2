@@ -56,13 +56,13 @@ class Df_YandexMarket_TestController extends Mage_Core_Controller_Front_Action {
 
 	/** @return void */
 	public function index3Action() {
-		/** @var Df_Core_Xml_Generator_Document $document */
-		$document = Df_Core_Xml_Generator_Document::_i(array(
-			Df_Core_Xml_Generator_Document::P__CONTENTS_AS_ARRAY => array(
+		/** @var \Df\Xml\Generator\Document $document */
+		$document = \Df\Xml\Generator\Document::_i(array(
+			\Df\Xml\Generator\Document::P__CONTENTS_AS_ARRAY => array(
 				'a' => 'превед'
 				,'b' => df_cdata('медвед')
 			)
-			,Df_Core_Xml_Generator_Document::P__TAG_NAME => 'тест'
+			,\Df\Xml\Generator\Document::P__TAG_NAME => 'тест'
 		));
 		try {
 			rm_report('test-{time}.xml', $document->getXml());

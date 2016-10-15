@@ -1,6 +1,6 @@
 <?php
 class Df_Localization_Onetime_Dictionary_Rule_Conditions
-	extends Df_Core_Xml_Parser_Entity {
+	extends \Df\Xml\Parser\Entit {
 	/** @return string[] */
 	public function getTargetTypes() {
 		if (!isset($this->{__METHOD__})) {
@@ -39,7 +39,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions
 	private function getConditions($type, $resultClass = null) {
 		if (!isset($this->{__METHOD__}[$type])) {
 			df_param_string_not_empty($type, 0);
-			/** @var Df_Core_Sxe|null $e */
+			/** @var \Df\Xml\X|null $e */
 			$e = $this->child($type);
 			$this->{__METHOD__}[$type] = df_n_set(
 				!$e ? null : Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract::ic(
@@ -58,8 +58,8 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions
 
 	/**
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_Localization_Onetime_Dictionary_Rule_Conditions
 	 */
-	public static function i(Df_Core_Sxe $e) {return new self(array(self::$P__E => $e));}
+	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

@@ -20,7 +20,7 @@ function rm_countries_allowed($store = null) {
 	/** @var array(int => Df_Directory_Model_Resource_Country_Collection) $cache */
 	static $cache;
 	/** @var int $storeId */
-	$storeId = rm_store_id($store);
+	$storeId = df_store_id($store);
 	if (!isset($cache[$storeId])) {
 		$cache[$storeId] = Df_Directory_Model_Country::c()->loadByStore($storeId);
 	}

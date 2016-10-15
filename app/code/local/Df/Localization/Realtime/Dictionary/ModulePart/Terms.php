@@ -1,15 +1,15 @@
 <?php
-class Df_Localization_Realtime_Dictionary_ModulePart_Terms extends Df_Core_Xml_Parser_Collection {
+class Df_Localization_Realtime_Dictionary_ModulePart_Terms extends \Df\Xml\Parser\Collection {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_Localization_Realtime_Dictionary_ModulePart_Term::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'term';}
@@ -19,8 +19,8 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Terms extends Df_Core_Xml_P
 	 * @used-by Df_Localization_Realtime_Dictionary_Layout::terms()
 	 * @used-by Df_Localization_Realtime_Dictionary_ModulePart_Block::terms()
 	 * @used-by Df_Localization_Realtime_Dictionary_ModulePart_Controller::terms()
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_Localization_Realtime_Dictionary_ModulePart_Terms
 	 */
-	public static function i(Df_Core_Sxe $e) {return new self(array(self::$P__E => $e));}
+	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

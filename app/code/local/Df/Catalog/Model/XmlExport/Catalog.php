@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Catalog_Model_XmlExport_Catalog extends Df_Core_Xml_Generator_Document {
+abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Document {
 	/** @return string */
 	abstract protected function getProcessorClass_products();
 

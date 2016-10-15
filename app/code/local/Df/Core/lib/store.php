@@ -96,7 +96,7 @@ function df_store($store = null) {
  * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
  * @return string
  */
-function rm_store_domain($store = null) {return rm_store_uri($store)->getHost();}
+function df_store_domain($store = null) {return df_store_uri($store)->getHost();}
 
 /**
  * 2015-02-04
@@ -106,15 +106,15 @@ function rm_store_domain($store = null) {return rm_store_uri($store)->getHost();
  * @return int
  * @throws Mage_Core_Model_Store_Exception
  */
-function rm_store_id($store = null) {return df_store($store)->getId();}
+function df_store_id($store = null) {return df_store($store)->getId();}
 
 /**
  * 2015-03-19
- * @used-by rm_store_domain()
+ * @used-by df_store_domain()
  * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
  * @return Zend_Uri_Http
  */
-function rm_store_uri($store = null) {
+function df_store_uri($store = null) {
 	$store = df_store($store);
 	/** @var string $key */
 	$key = $store->getId();
@@ -136,7 +136,7 @@ function rm_store_uri($store = null) {
  * @return Mage_Core_Model_Website
  * @throws Mage_Core_Exception
  */
-function rm_website($website = null) {return Mage::app()->getWebsite($website);}
+function df_website($website = null) {return Mage::app()->getWebsite($website);}
 
 /**
  * 2015-02-04
@@ -146,4 +146,4 @@ function rm_website($website = null) {return Mage::app()->getWebsite($website);}
  * @return int
  * @throws Mage_Core_Exception
  */
-function rm_website_id($website = null) {return rm_website($website)->getId();}
+function df_website_id($website = null) {return df_website($website)->getId();}

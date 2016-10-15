@@ -20,7 +20,7 @@ class Df_1C_Cml2_File_CatalogComposite extends Df_1C_Cml2_File {
 
 	/**
 	 * @override
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	public function getXml() {
 		if (!isset($this->{__METHOD__})) {

@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Onetime_Dictionary_Rule_Actions extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Onetime_Dictionary_Rule_Actions extends \Df\Xml\Parser\Entit {
 	/**
 	 * Обратите внимание, что для одного свойства может быть несколько нстатндартных правил,
 	 * например:
@@ -26,11 +26,11 @@ class Df_Localization_Onetime_Dictionary_Rule_Actions extends Df_Core_Xml_Parser
 		if (!isset($this->{__METHOD__}[$termName])) {
 			/** @var @var Df_Localization_Onetime_Dictionary_Term[] $terms */
 			$terms = array();
-			/** @var @var Df_Core_Sxe[] $nodes */
+			/** @var @var \Df\Xml\X[] $nodes */
 			$nodes = $this->e()->xpath($termName);
 			df_assert_ne(false, $nodes);
 			foreach ($nodes as $node) {
-				/** @var @var Df_Core_Sxe[] $node */
+				/** @var @var \Df\Xml\X[] $node */
 				$terms[]= Df_Localization_Onetime_Dictionary_Term::i($node);
 			}
 			$this->{__METHOD__}[$termName] = $terms;
@@ -57,10 +57,10 @@ class Df_Localization_Onetime_Dictionary_Rule_Actions extends Df_Core_Xml_Parser
 	/**
 	 * @static
 	 * @param string $concreteClass
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_Localization_Onetime_Dictionary_Rule_Actions
 	 */
-	public static function createConcrete($concreteClass, Df_Core_Sxe $e) {
+	public static function createConcrete($concreteClass, \Df\Xml\X $e) {
 		return df_ic($concreteClass, __CLASS__, array(self::$P__E => $e));
 	}
 }

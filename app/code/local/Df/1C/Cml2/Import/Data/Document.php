@@ -3,7 +3,7 @@
  * Данный класс соответствует документу в формате XML,
  * передаваемому 1С в интернет-магазин.
  */
-abstract class Df_1C_Cml2_Import_Data_Document extends Df_Core_Xml_Parser_Entity {
+abstract class Df_1C_Cml2_Import_Data_Document extends \Df\Xml\Parser\Entit {
 	/**
 	 * 2015-08-04
 	 * @return string
@@ -66,11 +66,11 @@ abstract class Df_1C_Cml2_Import_Data_Document extends Df_Core_Xml_Parser_Entity
 	 * @used-by Df_1C_Cml2_Import_Data_Document::create()
 	 * @used-by Df_1C_Cml2_File_CatalogComposite::getXmlDocument()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param string $relativePath
 	 * @return Df_1C_Cml2_Import_Data_Document
 	 */
-	public static function create(Df_Core_Sxe $e, $relativePath) {
+	public static function create(\Df\Xml\X $e, $relativePath) {
 		df_param_string_not_empty($relativePath, 1);
 		/** @var string $class */
 		$class =
@@ -86,13 +86,13 @@ abstract class Df_1C_Cml2_Import_Data_Document extends Df_Core_Xml_Parser_Entity
 	}
 
 	/**
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return bool
 	 */
-	private static function _isCatalog(Df_Core_Sxe $e) {return !!$e->descend('Каталог');}
+	private static function _isCatalog(\Df\Xml\X $e) {return !!$e->descend('Каталог');}
 	/**
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return bool
 	 */
-	private static function _isOffers(Df_Core_Sxe $e) {return !!$e->descend('ПакетПредложений');}
+	private static function _isOffers(\Df\Xml\X $e) {return !!$e->descend('ПакетПредложений');}
 }

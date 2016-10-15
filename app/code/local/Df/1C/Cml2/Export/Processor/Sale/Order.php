@@ -8,7 +8,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 		);
 	}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function e() {return $this->cfg(self::$P__E);}
 
 	/** @return Df_Sales_Model_Order_Address */
@@ -22,14 +22,14 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getDocument() {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * Обратите внимание, что
 			 * @sww SimpleXMLElement::addChild создаёт и возвращает не просто @see SimpleXMLElement,
 			 * как говорит документация, а объект класса родителя.
-			 * Поэтому в нашем случае addChild создаст объект @see Df_Core_Sxe.
+			 * Поэтому в нашем случае addChild создаст объект @see \Df\Xml\X.
 			 */
 			$this->{__METHOD__} = $this->e()->addChild('Документ');
 		}
@@ -238,7 +238,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 		parent::_construct();
 		$this
 			->_prop(self::$P__ORDER, Df_Sales_Model_Order::_C)
-			->_prop(self::$P__E, Df_Core_Sxe::_C)
+			->_prop(self::$P__E, \Df\Xml\X::_C)
 		;
 	}
 	/** @var string */
@@ -249,10 +249,10 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 	 * @used-by Df_1C_Cml2_Export_Document_Orders::createElement()
 	 * @static
 	 * @param Df_Sales_Model_Order $order
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Export_Processor_Sale_Order
 	 */
-	public static function i(Df_Sales_Model_Order $order, Df_Core_Sxe $e) {
+	public static function i(Df_Sales_Model_Order $order, \Df\Xml\X $e) {
 		return new self(array(self::$P__ORDER => $order, self::$P__E => $e));
 	}
 }

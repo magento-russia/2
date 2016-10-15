@@ -32,7 +32,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 	public function getRegionJson() {
 		Varien_Profiler::start('TEST: '.__METHOD__);
 		if (!$this->_regionJson) {
-			$cacheKey = 'DIRECTORY_REGIONS_JSON_STORE' . rm_store_id();
+			$cacheKey = 'DIRECTORY_REGIONS_JSON_STORE' . df_store_id();
 			if (Mage::app()->useCache('config')) {
 				$json = Mage::app()->loadCache($cacheKey);
 			}

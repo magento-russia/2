@@ -52,14 +52,14 @@ function df_product($id = 0, $storeId = null) {
 	else {
 		/**
 		 * Обратите внимание, что здесь нельзя упрощать код до
-		  	$result = Df_Catalog_Model_Product::ld($id, rm_store_id($storeId))
+		  	$result = Df_Catalog_Model_Product::ld($id, df_store_id($storeId))
 		 * потому что нам важно условие !is_null($storeId):
 		 * если в качестве $storeId передано null,
 		 * то это вовсе не означает, что мы хотим загрузить товар для текущего магазина:
 		 * а это означает, что мы хотим загрузить товар с глобальными значениями свойств.
 		 */
 		if (!is_null($storeId) && !df_check_integer($storeId)) {
-			$storeId = rm_store_id($storeId);
+			$storeId = df_store_id($storeId);
 		}
 		$result = Df_Catalog_Model_Product::ld($id, $storeId);
 	}

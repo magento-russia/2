@@ -29,7 +29,7 @@ class Df_1C_Cml2_File extends Df_Core_Model {
 	 */
 	public function getPathRelative() {return $this->cfg(self::$P__PATH_RELATIVE);}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	public function getXml() {return $this->getXmlDocument()->e();}
 
 	/** @return Df_1C_Cml2_Import_Data_Document */

@@ -49,12 +49,12 @@ class Df_1C_Cml2_Export_Entry extends Df_Core_Model {
 	/** @return array(string => string|array(string => string)) */
 	public function unit() {
 		return array(
-			Df_Core_Sxe::ATTR => array(
+			\Df\Xml\X::ATTR => array(
 				'Код' => '796'
 				, 'НаименованиеПолное' => 'Штука'
 				, 'МеждународноеСокращение' => 'PCE'
 			)
-			,Df_Core_Sxe::CONTENT => 'шт'
+			,\Df\Xml\X::CONTENT => 'шт'
 		);
 	}
 

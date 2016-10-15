@@ -10,7 +10,7 @@ class Df_PromoGift_Model_PromoAction extends Df_Core_Model {
 			$result = Df_PromoGift_Model_Gift::c()->addRuleFilter($this->getRule()->getId());
 			foreach ($result as $gift) {
 				/** @var Df_PromoGift_Model_Gift $gift */
-				$gift->setWebsite(rm_website());
+				$gift->setWebsite(df_website());
 				$gift->setRule($this->getRule());
 				/** @var Df_Catalog_Model_Product $product */
 				$product = $result->getProducts()->getItemById($gift->getProductId());

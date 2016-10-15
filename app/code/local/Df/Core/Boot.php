@@ -65,6 +65,7 @@ class Df_Core_Boot {
 			Df_Core_Lib::load('1C');
 			Df_Core_Lib::load('Directory');
 			Df_Core_Lib::load('Tax');
+			Df_Core_Lib::load('Xml');
 			self::$_done1 = true;
 		}
 		/**

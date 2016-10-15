@@ -45,7 +45,7 @@ class Df_Kkb_Model_Response_Secondary extends Df_Kkb_Model_Response {
 	/** @return string */
 	private function getCode() {return $this->getElementResponse()->getAttribute('code');}
 	
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getElementResponse() {return $this->getElement('bank/response');}
 
 	/** @return string */

@@ -73,7 +73,7 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Grid extends Mage_Adminhtml_Block_Wi
 			,$row->getPoints()
 			,$row->getCurrencyAmount()
 			// в оригинале здесь именно ==, а не ===
-			,(0 == $websiteId) ? null : rm_website($websiteId)->getBaseCurrencyCode()
+			,(0 == $websiteId) ? null : df_website($websiteId)->getBaseCurrencyCode()
 		);
 		return $result;
 	}

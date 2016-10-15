@@ -1,5 +1,5 @@
 <?php
-class Df_Localization_Realtime_Dictionary_Layout extends Df_Core_Xml_Parser_Entity {
+class Df_Localization_Realtime_Dictionary_Layout extends \Df\Xml\Parser\Entit {
 	/**
 	 * @used-by Df_Localization_Realtime_Dictionary::handleForLayout()
 	 * @return Df_Localization_Realtime_Dictionary_ModulePart_Terms
@@ -13,7 +13,7 @@ class Df_Localization_Realtime_Dictionary_Layout extends Df_Core_Xml_Parser_Enti
 
 	/**
 	 * @used-by Df_Localization_Realtime_Dictionary::layout()
-	 * @param Df_Core_Sxe|string $e
+	 * @param \Df\Xml\X|string $e
 	 * @return Df_Localization_Realtime_Dictionary_Layout
 	 */
 	public static function i($e) {return self::entity($e, __CLASS__);}

@@ -276,7 +276,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	/** @return bool */
 	private function isScopeDefault() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->store()->getId() === rm_store_id();
+			$this->{__METHOD__} = $this->store()->getId() === df_store_id();
 		}
 		return $this->{__METHOD__};
 	}

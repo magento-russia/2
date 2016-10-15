@@ -50,7 +50,7 @@ class Df_IPay_Model_Action_Confirm extends Df_IPay_Model_Action_Abstract {
 			$this->order()->save();
 			$this->order()->sendNewOrderEmail();
 		}
-		$this->e()->appendChild(rm_xml_node('TransactionResult')->importArray(array(
+		$this->e()->appendChild(df_xml_node('TransactionResult')->importArray(array(
 			'ServiceProvider_TrxId' => $this->order()->getIncrementId()
 			,'Info' => array(
 				'InfoLine' =>

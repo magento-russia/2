@@ -2,7 +2,7 @@
 class Df_1C_Cml2_Import_Data_Collection_Categories extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Category::_C;}
@@ -10,7 +10,7 @@ class Df_1C_Cml2_Import_Data_Collection_Categories extends Df_1C_Cml2_Import_Dat
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return $this->cfg(self::$P__XML_PATH_AS_ARRAY, 'Группы/Группа');}
@@ -29,11 +29,11 @@ class Df_1C_Cml2_Import_Data_Collection_Categories extends Df_1C_Cml2_Import_Dat
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Category::getChildren()
 	 * @used-by Df_1C_Cml2_State_Import_Collections::getCategories()
 	 * @static
-	 * @param Df_Core_Sxe $xml
+	 * @param \Df\Xml\X $xml
 	 * @param array|null $pathAsArray [optional]
 	 * @return Df_1C_Cml2_Import_Data_Collection_Categories
 	 */
-	public static function i(Df_Core_Sxe $xml, $pathAsArray = null) {
+	public static function i(\Df\Xml\X $xml, $pathAsArray = null) {
 		return new self(array(self::$P__E => $xml, self::$P__XML_PATH_AS_ARRAY => $pathAsArray));
 	}
 }

@@ -1,7 +1,8 @@
 <?php
+namespace Df\Xml\Generator;
 /**
  * Класс @see Df_1C_Cml2_Export_Document_Catalog
- * (потомок @see Df_Core_Xml_Generator_Document)
+ * (потомок @see \Df\Xml\Generator\Document)
  * должен наследовать как черты, общие для документов, передаваемых из интернет-магазина в 1C
  * (черты, общие для экспорта не только товаров, но и заказов),
  * так и черты, общие для экспорта товаров из интернет-магазина
@@ -24,10 +25,10 @@
  * приходится решать задачу множественного наследования своим кустарным способом.
  */
 /**
- * @method Df_Core_Xml_Generator_Document getParent()
+ * @method \Df\Xml\Generator\Document getParent()
  */
-class Df_Core_Xml_Generator_DocumentMixin extends Df_Core_Model_Mixin {
-	/** @return Df_Core_Sxe|null */
+class DocumentMixin extends \Df_Core_Model_Mixin {
+	/** @return \Df\Xml\X|null */
 	public function createElement() {return null;}
 
 	/** @return array(string => string)|null */
@@ -39,7 +40,7 @@ class Df_Core_Xml_Generator_DocumentMixin extends Df_Core_Model_Mixin {
 	/** @return string|null */
 	public function getDocType() {return null;}
 
-	/** @return Df_Core_Sxe|null */
+	/** @return \Df\Xml\X|null */
 	public function getElement() {return null;}
 
 	/** @return string|null */

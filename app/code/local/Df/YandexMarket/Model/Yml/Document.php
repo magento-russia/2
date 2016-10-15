@@ -2,7 +2,7 @@
 class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Generator_Document::getExportCurrency()
+	 * @see \Df\Xml\Generator\Document::getExportCurrency()
 	 * @return Df_Directory_Model_Currency
 	 */
 	public function getExportCurrency() {return $this->getSettings()->general()->getCurrency();}
@@ -134,8 +134,8 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 						$attributes['parentId'] = $category->getParentId();
 					}
 					$result[]= array(
-						Df_Core_Sxe::ATTR => $attributes
-						,Df_Core_Sxe::CONTENT => df_cdata(
+						\Df\Xml\X::ATTR => $attributes
+						,\Df\Xml\X::CONTENT => df_cdata(
 							$category->getName() ? $category->getName() : $category->getId()
 						)
 					);
@@ -149,7 +149,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 	/** @return array */
 	private function getOutput_Currencies() {
 		/** @var array $result */
-		$result = array(array(Df_Core_Sxe::ATTR => array(
+		$result = array(array(\Df\Xml\X::ATTR => array(
 			'id' => $this->getSettings()->general()->getCurrencyCode()
 			/**
 			 * Параметр rate указывает курс валюты к курсу основной валюты,

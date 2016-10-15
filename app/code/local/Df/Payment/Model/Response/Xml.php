@@ -1,6 +1,6 @@
 <?php
 abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	protected function e() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_xml($this->getXml());
@@ -10,14 +10,14 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 
 	/**
 	 * @param string $path
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	protected function getElement($path) {
 		df_param_string_not_empty($path, 0);
 		if (!isset($this->{__METHOD__}[$path])) {
-			/** @var Df_Core_Sxe $result */
+			/** @var \Df\Xml\X $result */
 			$result = $this->e()->descend($path);
-			if (!($result instanceof Df_Core_Sxe)) {
+			if (!($result instanceof \Df\Xml\X)) {
 				df_error(
 					"В документе XML отсутствует требуемый путь: «%s»\n"
 					. "********************\n"
@@ -35,10 +35,10 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 	/** @return string */
 	protected function getXml() {return $this->cfg(self::P__XML);}
 	
-	/** @return Df_Core_Xml_Parser_Entity */
+	/** @return \Df\Xml\Parser\Entit */
 	protected function p() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Xml_Parser_Entity::entity($this->e());
+			$this->{__METHOD__} = \Df\Xml\Parser\Entit::entity($this->e());
 		}
 		return $this->{__METHOD__};
 	}

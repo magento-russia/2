@@ -29,9 +29,9 @@ class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model {
 				foreach ($nodes as $node) {
 					/** @var Mage_Core_Model_Config_Element $node */
 					/** @var string $active */
-					$active = rm_leaf_sne($node->{'active'});
+					$active = df_leaf_sne($node->{'active'});
 					/** @var string $inactive */
-					$inactive = rm_leaf_sne($node->{'inactive'});
+					$inactive = df_leaf_sne($node->{'inactive'});
 					$result[$active][$inactive] = true;
 				}
 			}

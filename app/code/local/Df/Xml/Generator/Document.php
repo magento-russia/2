@@ -1,5 +1,6 @@
 <?php
-class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
+namespace Df\Xml\Generator;
+class Document extends \Df\Xml\Generator\Element {
 	/**
 	 * @param float $amountInBaseCurrency
 	 * @return float
@@ -12,23 +13,23 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 
 	/**
 	 * @override
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	public function getElement() {
-		/** @var Df_Core_Sxe $result */
+		/** @var \Df\Xml\X $result */
 		$result = $this->mixin(__FUNCTION__);
 		return !is_null($result) ? $result : parent::getElement();
 	}
 
 	/**
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup::getResult()
-	 * @return Df_Directory_Model_Currency
+	 * @return \Df_Directory_Model_Currency
 	 */
 	public function getExportCurrency() {return $this->store()->getDefaultCurrency();}
 
 	/**
 	 * Метод публичен, потому что его использует метод
-	 * @see Df_Core_Xml_Generator_Part::getOperationNameInPrepositionalCase()
+	 * @see \Df\Xml\Generator\Part::getOperationNameInPrepositionalCase()
 	 * @return string
 	 */
 	public function getOperationNameInPrepositionalCase() {
@@ -172,7 +173,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 
 	/**
 	 * Использование извне:
-	 * @used-by Df_Core_Xml_Generator_Part::store()
+	 * @used-by \Df\Xml\Generator\Part::store()
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Category::getExternalId()
 	 * Использование наследниками:
 	 * @used-by Df_1C_Cml2_Export_Document_Catalog::getКаталог_Наименование()
@@ -195,10 +196,10 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 
 	/**
 	 * @override
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	protected function createElement() {
-		/** @var Df_Core_Sxe $result */
+		/** @var \Df\Xml\X $result */
 		$result = $this->mixin(__FUNCTION__);
 		if (is_null($result)) {
 			$result = df_xml(df_ccc("\n",
@@ -296,17 +297,17 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	private function createLogger() {
 		/** @var string $prefix */
 		$prefix = implode('-', array_filter(array(df_module_id($this, '.'), $this->getLogDocumentName())));
-		return Df_Core_Model_Logger::s(df_file_name(
-			Mage::getBaseDir('var') . DS . 'log'
+		return \Df_Core_Model_Logger::s(df_file_name(
+			\Mage::getBaseDir('var') . DS . 'log'
 			, strtr('rm-{prefix}-{date}-{time}.log', array('{prefix}' => $prefix))
 			, $datePartsSeparator = '.'
 		));
 	}
 
-	/** @return Df_Core_Model_Logger */
+	/** @return \Df_Core_Model_Logger */
 	private function getLogger() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Core_Model_Logger $result */
+			/** @var \Df_Core_Model_Logger $result */
 			$result = $this->cfg(self::P__LOGGER);
 			if (!$result) {
 				$result = $this->createLogger();
@@ -351,7 +352,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 			->_prop(self::P__NEED_WRAP_IN_CDATA_ALL, DF_V_BOOL, false)
 		;
 	}
-	/** @used-by Df_Core_Xml_Generator_Part::_construct() */
+	/** @used-by \Df\Xml\Generator\Part::_construct() */
 	const _C = __CLASS__;
 	const P__CONTENTS_AS_ARRAY = 'contents_as_array';
 	const P__DOC_TYPE = 'doc_type';
@@ -364,7 +365,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	 * Добавил подчёркивание к названию этого метода,
 	 * чтобы метод не конфликтовал с методом i() дочерних классов.
 	 * @param array(string => mixed) $parameters
-	 * @return Df_Core_Xml_Generator_Document
+	 * @return \Df\Xml\Generator\Document
 	 */
 	public static function _i(array $parameters = array()) {return new self($parameters);}
 }

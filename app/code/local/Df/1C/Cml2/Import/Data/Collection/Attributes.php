@@ -2,13 +2,13 @@
 class Df_1C_Cml2_Import_Data_Collection_Attributes extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @return Df_Core_Sxe[]
+	 * @return \Df\Xml\X[]
 	 */
 	protected function getImportEntitiesAsSimpleXMLElementArray() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Core_Sxe[] $result */
+			/** @var \Df\Xml\X[] $result */
 			$result = parent::getImportEntitiesAsSimpleXMLElementArray();
-			/** @var Df_Core_Sxe[] $entitiesFromAdditionalPath */
+			/** @var \Df\Xml\X[] $entitiesFromAdditionalPath */
 			$entitiesFromAdditionalPath = $this->e()->xpath($this->itemPath2());
 			if (is_array($entitiesFromAdditionalPath)) {
 				$result = array_merge($result, $entitiesFromAdditionalPath);
@@ -21,17 +21,17 @@ class Df_1C_Cml2_Import_Data_Collection_Attributes extends Df_1C_Cml2_Import_Dat
 	/**
 	 * 2015-08-15
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClassAdvanced()
-	 * @param Df_Core_Sxe $e
+	 * @see \Df\Xml\Parser\Collection::itemClassAdvanced()
+	 * @param \Df\Xml\X $e
 	 * @return string
 	 */
-	protected function itemClassAdvanced(Df_Core_Sxe $e) {
+	protected function itemClassAdvanced(\Df\Xml\X $e) {
 		return Df_1C_Cml2_Import_Data_Entity_Attribute::getClass($e);
 	}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return '/КоммерческаяИнформация/Классификатор/Свойства/Свойство';}
@@ -66,8 +66,8 @@ class Df_1C_Cml2_Import_Data_Collection_Attributes extends Df_1C_Cml2_Import_Dat
 	/**
 	 * @used-by Df_1C_Cml2_State_Import_Collections::getAttributes()
 	 * @static
-	 * @param Df_Core_Sxe $xml
+	 * @param \Df\Xml\X $xml
 	 * @return Df_1C_Cml2_Import_Data_Collection_Attributes
 	 */
-	public static function i(Df_Core_Sxe $xml) {return new self(array(self::$P__E => $xml));}
+	public static function i(\Df\Xml\X $xml) {return new self(array(self::$P__E => $xml));}
 }

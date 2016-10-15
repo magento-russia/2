@@ -36,10 +36,10 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 	/**
 	 * @static
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_Attributes::itemClassAdvanced()
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Import_Data_Entity
 	 */
-	public static function getClass(Df_Core_Sxe $e) {
+	public static function getClass(\Df\Xml\X $e) {
 		/** @var array(string => string) $map */
 		static $map = array(
 			'Справочник' => Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList::_C
@@ -52,10 +52,10 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 	}
 
 	/**
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return string
 	 */
-	private static function _type(Df_Core_Sxe $e) {
+	private static function _type(\Df\Xml\X $e) {
 		/**
 		 * 1С:Управление торговлей 10.2 + дополнение от Битрикса:
 		 *
@@ -140,7 +140,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 			$result = self::TYPE__TEXT;
 		}
 		else {
-			$result = rm_leaf_s(df_first($externalTypeNames));
+			$result = df_leaf_s(df_first($externalTypeNames));
 		}
 		df_result_string($result);
 		return $result;

@@ -1,37 +1,43 @@
 <?php
-abstract class Df_Core_Xml_Parser_Collection
-	extends Df_Core_Xml_Parser_Entity implements IteratorAggregate, Countable {
+namespace Df\Xml\Parser;
+use Df\Xml\X;
+abstract class Collection extends Entity implements \IteratorAggregate, \Countable {
 	/**
 	 * @used-by getImportEntitiesAsSimpleXMLElementArray()
 	 * @return string|string[]
 	 */
 	abstract protected function itemPath();
+
 	/**
 	 * @override
+	 * @see \Countable::count()
 	 * @return int
 	 */
 	public function count() {return count($this->getItems());}
+
 	/**
 	 * Убрал @see df_assert()
-	 * ради ускорения работы метода @see Df_Localization_Realtime_Dictionary::translate()
+	 * ради ускорения работы метода @see Dfr\Translation\Realtime\Dictionary::translate()
 	 * @param int|string $id
-	 * @return Df_Core_Xml_Parser_Entity|null
+	 * @return Entity|null
 	 */
 	public function findById($id) {
 		$this->getItems();
 		return dfa($this->_mapFromIdToEntity, $id);
 	}
+
 	/**
 	 * @param string $name
-	 * @return Df_Core_Xml_Parser_Entity|null
+	 * @return Entity|null
 	 */
 	public function findByName($name) {
 		$this->getItems();
 		return df_first($this->findByNameAll($name));
 	}
+
 	/**
 	 * @param string $name
-	 * @return Df_Core_Xml_Parser_Entity[]
+	 * @return Entity[]
 	 */
 	public function findByNameAll($name) {
 		$this->getItems();
@@ -46,11 +52,11 @@ abstract class Df_Core_Xml_Parser_Collection
 	 */
 	public function getId() {return get_class($this);}
 
-	/** @return Df_Core_Xml_Parser_Entity[] */
+	/** @return Entity[] */
 	final public function getItems() {
 		if (!isset($this->_items)) {
-			/** @var Df_Core_Xml_Parser_Entity[] $result */
-			$this->_items = array();
+			/** @var Entity[] $result */
+			$this->_items = [];
 			$this->initItems();
 			$this->postInitItems($this->_items);
 		}
@@ -59,32 +65,33 @@ abstract class Df_Core_Xml_Parser_Collection
 
 	/**
 	 * @override
-	 * @return Traversable
+	 * @see \IteratorAggregate::getIterator()
+	 * @return \Traversable
 	 */
-	public function getIterator() {return new ArrayIterator($this->getItems());}
+	public function getIterator() {return new \ArrayIterator($this->getItems());}
 
 	/** @return bool */
 	public function hasItems() {return !!$this->getItems();}
 
 	/**
-	 * @param Df_Core_Xml_Parser_Entity $item
+	 * @param Entity $item
 	 * @return void
 	 */
-	protected function addItem(Df_Core_Xml_Parser_Entity $item) {
+	protected function addItem(Entity $item) {
 		$this->_items[]= $item;
 		$this->_mapFromIdToEntity[$item->getId()] = $item;
 		$this->_mapFromNameToEntity[$item->getName()][] = $item;
 	}
 
 	/**
-	 * @param Df_Core_Sxe $e
-	 * @return Df_Core_Xml_Parser_Entity
+	 * @param X $e
+	 * @return Entity
 	 */
-	protected function createItem(Df_Core_Sxe $e) {
-		return Df_Core_Xml_Parser_Entity::entity($e, $this->itemClassAdvanced($e), $this->itemParams());
+	protected function createItem(X $e) {
+		return Entity::entity($e, $this->itemClassAdvanced($e), $this->itemParams());
 	}
 
-	/** @return Df_Core_Sxe[] */
+	/** @return X[] */
 	protected function getImportEntitiesAsSimpleXMLElementArray() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->e()->xpathA($this->itemPath());
@@ -101,23 +108,23 @@ abstract class Df_Core_Xml_Parser_Collection
 	 * @used-by itemClassAdvanced()
 	 * @return string
 	 */
-	protected function itemClass() {df_abstract(__METHOD__);}
+	protected function itemClass() {df_abstract($this);}
 
 	/**
 	 * 2015-08-15
 	 * Перекрывайте этот метод, когда класс элемента должен зависеть от ветки XML.
 	 * @used-by createItem()
-	 * @param Df_Core_Sxe $e
+	 * @param X $e
 	 * @return string
 	 */
-	protected function itemClassAdvanced(Df_Core_Sxe $e) {return $this->itemClass();}
+	protected function itemClassAdvanced(X $e) {return $this->itemClass();}
 
 	/**
 	 * Позволяет добавлять к создаваемым элементам
 	 * дополнительные, единые для всех элементов, параметры
 	 * @return array(string => mixed)
 	 */
-	protected function itemParams() {return array();}
+	protected function itemParams() {return [];}
 
 	/**
 	 * @used-by getItems()
@@ -125,8 +132,8 @@ abstract class Df_Core_Xml_Parser_Collection
 	 */
 	protected function initItems() {
 		foreach ($this->getImportEntitiesAsSimpleXMLElementArray() as $e) {
-			/** @var Df_Core_Sxe $e */
-			/** @var Df_Core_Xml_Parser_Entity $item */
+			/** @var X $e */
+			/** @var Entity $item */
 			$item = $this->createItem($e);
 			if ($item->isValid()) {
 				$this->addItem($item);
@@ -146,13 +153,13 @@ abstract class Df_Core_Xml_Parser_Collection
 	 * Наш метод и его потомки менять напрямую содержимое массива не должны:
 	 * для добавления новых элементов в массив должен использоваться метод @see addItem(),
 	 * а для удаления (вернее, недобавления) элементов из массива должен перекрываться метод
-	 * @see Df_Core_Xml_Parser_Entity::isValid()
+	 * @see Entity::isValid()
 	 *
 	 * @used-by getItems()
 	 * @see Df_1C_Cml2_Import_Data_Collection_Offers::postInitItems()
 	 * @see Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues::postInitItems()
 	 * @see Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::postInitItems()
-	 * @param Df_Core_Xml_Parser_Entity[] $items
+	 * @param Entity[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {}
@@ -162,12 +169,11 @@ abstract class Df_Core_Xml_Parser_Collection
 	 * Временно сделал это свойство protected.
 	 * Потом надо будет переработать обработку заказов.
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_Order_Items::initItems()
-	 * @var Df_Core_Xml_Parser_Entity
+	 * @var Entity
 	 */
 	protected $_items;
-	/** @var array(int|string => Df_Core_Xml_Parser_Entity) */
-	private $_mapFromIdToEntity = array();
-	/** @var array(string => Df_Core_Xml_Parser_Entity[]) */
-	private $_mapFromNameToEntity = array();
-	const _C = __CLASS__;
+	/** @var array(int|string => Entity) */
+	private $_mapFromIdToEntity = [];
+	/** @var array(string => Entity[]) */
+	private $_mapFromNameToEntity = [];
 }

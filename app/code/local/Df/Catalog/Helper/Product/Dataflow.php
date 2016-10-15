@@ -66,7 +66,7 @@ class Df_Catalog_Helper_Product_Dataflow extends Mage_Catalog_Helper_Data {
 					</max_sale_qty>
 				 * Он указывает, для каких системых типов товаров применимы данные настройки.
 				 */
-				df_assert(rm_xml_exists_child($fieldConfig, 'product_type'));
+				df_assert(df_xml_exists_child($fieldConfig, 'product_type'));
 				$productTypesNode = $fieldConfig->{'product_type'};
 				/** @var string[] $productTypes */
 				$productTypes = array();

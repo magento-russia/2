@@ -57,7 +57,7 @@ class Df_Cms_Controller_Router extends Mage_Cms_Controller_Router {
 
 		/** @var Df_Cms_Model_Page $page */
 		$page = Df_Cms_Model_Page::i();
-		$pageId = $page->checkIdentifier($identifier, rm_store_id());
+		$pageId = $page->checkIdentifier($identifier, df_store_id());
 		if (!$pageId) {
 			return false;
 		}

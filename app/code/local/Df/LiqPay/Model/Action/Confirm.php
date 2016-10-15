@@ -71,7 +71,7 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $this->getPaymentInfoAsVarienXml()->asCanonicalArray();
 	}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function getPaymentInfoAsVarienXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_xml($this->getResponseXml());

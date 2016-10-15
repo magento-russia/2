@@ -7,11 +7,11 @@ class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model {
 			$countriesConfigAsSimpleXml =
 				$this->getFileAsSimpleXml()->getNode('df/yandex-market/countries/country')
 			;
-			df_assert($countriesConfigAsSimpleXml instanceof Df_Core_Sxe);
+			df_assert($countriesConfigAsSimpleXml instanceof \Df\Xml\X);
 			/** @var array(string => string) $result */
 			$result = array();
 			foreach ($countriesConfigAsSimpleXml as $countryConfigAsSimpleXml) {
-				/** @var Df_Core_Sxe $countryConfigAsSimpleXml */
+				/** @var \Df\Xml\X $countryConfigAsSimpleXml */
 				/** @var array $countryConfig */
 				$countryConfig = $countryConfigAsSimpleXml->asCanonicalArray();
 				/** @var string $iso2Code */

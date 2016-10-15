@@ -59,7 +59,7 @@ class Df_Invitation_Model_Config {
 	 * @return boolean
 	 */
 	public function isEnabled($storeId = null) {
-		$storeId = !is_null($storeId) ? $storeId : rm_store_id();
+		$storeId = !is_null($storeId) ? $storeId : df_store_id();
 		if (!isset($this->{__METHOD__}[$storeId])) {
 			$this->{__METHOD__}[$storeId] =
 				Mage::getStoreConfigFlag(self::XML_PATH_ENABLED, $storeId)

@@ -3,12 +3,12 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 	extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Entity::e()
-	 * @return Df_Core_Sxe
+	 * @see \Df\Xml\Parser\Entit::e()
+	 * @return \Df\Xml\X
 	 */
 	public function e() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Core_Sxe $result */
+			/** @var \Df\Xml\X $result */
 			$result = null;
 			if (
 				Df_1C_Cml2_State_Import::s()->getFileOffers()->getXml()
@@ -22,7 +22,7 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 			) {
 				$result = Df_1C_Cml2_State_Import::s()->getFileCatalogStructure()->getXml();
 			}
-			df_assert($result instanceof Df_Core_Sxe);
+			df_assert($result instanceof \Df\Xml\X);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
@@ -60,14 +60,14 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_PriceType::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {

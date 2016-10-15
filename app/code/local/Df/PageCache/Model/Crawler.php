@@ -109,7 +109,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 		foreach (Mage::app()->getStores() as $store) {
 			/** @var Df_Core_Model_StoreM $store */
 			/** @var Mage_Core_Model_Website $website */
-			$website = rm_website($store->getWebsiteId());
+			$website = df_website($store->getWebsiteId());
 			$defaultWebsiteStore = $website->getDefaultStore();
 			$defaultWebsiteBaseUrl = $defaultWebsiteStore->getBaseUrl();
 			$baseUrl = $store->getBaseUrl();

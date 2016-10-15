@@ -45,7 +45,7 @@ class Df_Speed_Observer {
 				/** @var bool $isFrontendArea */
 				$isFrontendArea = !df_contains(
 					Mage::app()->getRequest()->getOriginalPathInfo()
-					,rm_leaf_s(rm_config_node('admin/routers/adminhtml/args/frontName'))
+					,df_leaf_s(rm_config_node('admin/routers/adminhtml/args/frontName'))
 				);
 				if ($isFrontendArea) {
 					/** @var Mage_Core_Model_Config_Element $eventsConfig */

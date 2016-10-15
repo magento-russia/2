@@ -93,7 +93,7 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue::_C;}
@@ -110,15 +110,15 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'ХарактеристикиТовара/ХарактеристикаТовара';}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::postInitItems()
-	 * @used-by Df_Core_Xml_Parser_Collection::getItems()
+	 * @see \Df\Xml\Parser\Collection::postInitItems()
+	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @param Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue[] $items
 	 * @return void
 	 */
@@ -165,10 +165,10 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Offer::getOptionValues()
 	 * @static
 	 * @param Df_1C_Cml2_Import_Data_Entity_Offer $offer
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 */
-	public static function i(Df_1C_Cml2_Import_Data_Entity_Offer $offer, Df_Core_Sxe $e) {
+	public static function i(Df_1C_Cml2_Import_Data_Entity_Offer $offer, \Df\Xml\X $e) {
 		return new self(array(self::$P__OFFER => $offer, self::$P__E => $e));
 	}
 }

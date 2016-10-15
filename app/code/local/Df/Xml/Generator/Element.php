@@ -1,13 +1,14 @@
 <?php
+namespace Df\Xml\Generator;
 /**
  * 2014-03-21
  * Пометил этот класс как абстрактный, потому что, как показал анализ кода,
  * экземпляры данного класса нигде не создаются,
  * и единственное применение этого класса на данный момент —
- * служить родителем классу @see Df_Core_Xml_Generator_Document.
+ * служить родителем классу @see \Df\Xml\Generator\Document.
  */
-abstract class Df_Core_Xml_Generator_Element extends Df_Core_Model {
-	/** @return Df_Core_Sxe */
+abstract class Element extends \Df_Core_Model {
+	/** @return \Df\Xml\X */
 	public function getElement() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->createElement();
@@ -15,8 +16,8 @@ abstract class Df_Core_Xml_Generator_Element extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Sxe */
-	protected function createElement() {return rm_xml_node($this->getTagName(), $this->getAttributes());}
+	/** @return \Df\Xml\X */
+	protected function createElement() {return df_xml_node($this->getTagName(), $this->getAttributes());}
 
 	/** @return array(string => string) */
 	protected function getAttributes() {return $this->cfg(self::P__ATTRIBUTES, array());}

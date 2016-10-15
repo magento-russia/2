@@ -201,14 +201,14 @@ class Df_Reward_Observer {
 			if ($customer->getData('rm_object_new')) {
 				try {
 					$subscribeByDefault =
-						df_h()->reward()->getNotificationConfig('subscribe_by_default', rm_website_id())
+						df_h()->reward()->getNotificationConfig('subscribe_by_default', df_website_id())
 					;
 					/** @var Df_Reward_Model_Reward $reward */
 					$reward = Df_Reward_Model_Reward::i();
 					$reward->setCustomer($customer);
 					$reward->addData(array(
 						Df_Reward_Model_Reward::P__ACTION_ENTITY => $customer
-						,Df_Reward_Model_Reward::P__STORE => rm_store_id()
+						,Df_Reward_Model_Reward::P__STORE => df_store_id()
 						,Df_Reward_Model_Reward::P__ACTION => Df_Reward_Model_Reward::REWARD_ACTION_REGISTER
 					));
 					$reward->updateRewardPoints();
@@ -260,7 +260,7 @@ class Df_Reward_Observer {
 			/** @var Mage_Customer_Model_Session $session */
 			$session = $o['customer_session'];
 			$groupId = $session->getCustomer()->getGroupId();
-			$websiteId = rm_website_id();
+			$websiteId = df_website_id();
 			$rate = Df_Reward_Model_Reward_Rate::i();
 			$hasRates =
 					$rate->fetch(

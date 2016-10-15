@@ -21,7 +21,7 @@ class Df_CustomerBalance_Block_Adminhtml_Widget_Grid_Column_Renderer_Currency
 			return $orphanCurrency;
 		}
 		if (!isset(self::$_websiteBaseCurrencyCodes[$websiteId])) {
-			self::$_websiteBaseCurrencyCodes[$websiteId] = rm_website($websiteId)->getBaseCurrencyCode();
+			self::$_websiteBaseCurrencyCodes[$websiteId] = df_website($websiteId)->getBaseCurrencyCode();
 		}
 		return self::$_websiteBaseCurrencyCodes[$websiteId];
 	}

@@ -261,7 +261,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	/** @return string */
 	public function getWebsiteCurrencyCode() {
 		if (!$this->_getData('website_currency_code')) {
-			$this->setData('website_currency_code', rm_website($this->getWebsiteId())
+			$this->setData('website_currency_code', df_website($this->getWebsiteId())
 				->getBaseCurrencyCode());
 		}
 		return $this->_getData('website_currency_code');

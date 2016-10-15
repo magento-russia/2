@@ -15,7 +15,7 @@ class Df_Reward_Model_Config_Backend_Expiration extends Mage_Core_Model_Config_D
 
 		$websiteIds = array();
 		if ($this->getWebsiteCode()) {
-			$websiteIds = array(rm_website($this->getWebsiteCode())->getId());
+			$websiteIds = array(df_website($this->getWebsiteCode())->getId());
 		} else {
 			/** @var Mage_Core_Model_Resource_Config_Data_Collection $collection */
 			$collection = Df_Core_Model_Config_Data::c();
@@ -46,8 +46,8 @@ class Df_Reward_Model_Config_Backend_Expiration extends Mage_Core_Model_Config_D
 		parent::_beforeDelete();
 		if ($this->getWebsiteCode()) {
 			Df_Reward_Model_Resource_Reward_History::s()->updateExpirationDate(
-				rm_leaf_s(rm_config_node('default',  self::XML_PATH_EXPIRATION_DAYS))
-				, array(rm_website($this->getWebsiteCode())->getId())
+				df_leaf_s(rm_config_node('default',  self::XML_PATH_EXPIRATION_DAYS))
+				, array(df_website($this->getWebsiteCode())->getId())
 			);
 		}
 		return $this;

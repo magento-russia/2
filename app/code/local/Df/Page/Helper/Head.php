@@ -145,7 +145,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 			/** @var bool $skip */
 			static $skip;
 			if (is_null($skip)) {
-				$skip = rm_leaf_b(rm_config_node('df/page/skip_standard_css/', rm_action_name()));
+				$skip = df_leaf_b(rm_config_node('df/page/skip_standard_css/', rm_action_name()));
 			}
 			$result =
 				$skip

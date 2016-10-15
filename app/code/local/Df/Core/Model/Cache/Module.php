@@ -8,7 +8,7 @@ class Df_Core_Model_Cache_Module extends Df_Core_Model {
 		if (!isset($this->_cache[$moduleName])) {
 			/** @var Varien_Simplexml_Element|null $moduleConfig */
 			$moduleConfig = Mage::app()->getConfig()->getModuleConfig($moduleName);
-			$this->_cache[$moduleName] = $moduleConfig && rm_leaf_b($moduleConfig->{'active'});
+			$this->_cache[$moduleName] = $moduleConfig && df_leaf_b($moduleConfig->{'active'});
 			$this->markCachedPropertyAsModified(self::$F__CACHE);
 		}
 		return $this->_cache[$moduleName];

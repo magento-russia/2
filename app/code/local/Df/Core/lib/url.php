@@ -77,7 +77,7 @@ function df_url($routePath, array $routeParams = array()) {
  * @param array(string => mixed) $routeParams [optional]
  * @return string
  */
-function rm_url_admin($routePath, array $routeParams = array()) {
+function df_url_admin($routePath, array $routeParams = array()) {
 	/** @var Mage_Adminhtml_Model_Url $url */
 	$url = Mage::getModel('adminhtml/url');
 	return $url->getUrl($routePath, $routeParams);

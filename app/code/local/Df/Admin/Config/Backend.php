@@ -130,7 +130,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	 */
 	private function getFieldConfigParamInternal($name) {
 		if (!isset($this->{__METHOD__}[$name])) {
-			$this->{__METHOD__}[$name] = df_n_set(rm_leaf_child($this->getFieldConfig(), $name));
+			$this->{__METHOD__}[$name] = df_n_set(df_leaf_child($this->getFieldConfig(), $name));
 		}
 		return df_n_get($this->{__METHOD__}[$name]);
 	}
@@ -139,7 +139,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	private function getWebsites() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Mage_Core_Model_Resource_Website_Collection|Mage_Core_Model_Mysql4_Website_Collection $result */
-			$result = rm_website()->getResourceCollection();
+			$result = df_website()->getResourceCollection();
 			switch($this->getScope()) {
 				case self::$SCOPE__DEFAULT:
 					$result = Mage::app()->getWebsites($withDefault = false);

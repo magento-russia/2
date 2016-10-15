@@ -2,14 +2,14 @@
 class Df_1C_Cml2_Import_Data_Collection_Products extends Df_1C_Cml2_Import_Data_Collection {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Product::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return '/КоммерческаяИнформация/Каталог/Товары/Товар';}
@@ -17,8 +17,8 @@ class Df_1C_Cml2_Import_Data_Collection_Products extends Df_1C_Cml2_Import_Data_
 	/**
 	 * @used-by Df_1C_Cml2_State_Import_Collections::getProducts()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @return Df_1C_Cml2_Import_Data_Collection_Products
 	 */
-	public static function i(Df_Core_Sxe $e) {return new self(array(self::$P__E => $e));}
+	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

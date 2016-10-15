@@ -39,7 +39,6 @@
 			<Df_Speed_Model_Settings/>
 			<Df_Speed_Model_Settings_General/>
 			<Df_Speed_Observer/>
-			<Df_Core_Sxe/>
 			<Df_Zf_Validate/>
 			<Df_Zf_Validate_Array/>
 			<Df_Zf_Validate_Between/>
@@ -1862,8 +1861,6 @@
 			<Df_Core_Model_Money/>
 			<Df_Core_Model_Css_Rule/>
 			<Df_Core_Model_Css_Rule_Set/>
-			<Df_Core_Xml_Generator_Document/>
-			<Df_Core_Xml_Generator_Element/>
 			<Df_Core_Model_Units_Length/>
 			<Df_Core_Model_Units_Weight/>
 			<Df_Core_Module/>
@@ -1955,12 +1952,6 @@
 			<Df_PromoGift_Model_Validate_Rule_ApplicableToCurrentQuote/>
 			<Df_Promotion_Helper_Data/>
 			<Df_Promotion_Model_Settings/>
-			<Df_Qa_State/>
-			<Df_Qa_Message/>
-			<Df_Qa_Message_Failure/>
-			<Df_Qa_Message_Failure_Error/>
-			<\Df\Qa\Message\Failure\Exception/>
-			<Df_Qa_Message_Notification/>
 			<Df_Qiwi_Model_Payment/>
 			<Df_RbkMoney_Model_Payment/>
 			<Df_Reports_Helper_Data/>

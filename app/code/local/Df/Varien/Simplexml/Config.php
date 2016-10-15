@@ -5,7 +5,7 @@ class Df_Varien_Simplexml_Config extends Varien_Simplexml_Config {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			$result = '';
-			/** @var Df_Core_Sxe $xmlModules */
+			/** @var \Df\Xml\X $xmlModules */
 			$xmlModules = $this->getNode()->{'modules'};
 			if ($xmlModules) {
 				foreach ($xmlModules->children() as $moduleName => $child) {
@@ -18,6 +18,6 @@ class Df_Varien_Simplexml_Config extends Varien_Simplexml_Config {
 		return $this->{__METHOD__};
 	}
 	/** @var string */
-	protected $_elementClass = Df_Core_Sxe::_C;
+	protected $_elementClass = \Df\Xml\X::_C;
 	const _C = __CLASS__;
 }

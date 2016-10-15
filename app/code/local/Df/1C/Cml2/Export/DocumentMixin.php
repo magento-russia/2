@@ -1,5 +1,5 @@
 <?php
-class Df_1C_Cml2_Export_DocumentMixin extends Df_Core_Xml_Generator_DocumentMixin {
+class Df_1C_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	/**
 	 * @override
 	 * @return array(string => string)
@@ -52,10 +52,10 @@ class Df_1C_Cml2_Export_DocumentMixin extends Df_Core_Xml_Generator_DocumentMixi
 	 */
 	const DATE_FORMAT = 'y-MM-dd';
 	/**
-	 * @param Df_Core_Xml_Generator_Document $parent
+	 * @param \Df\Xml\Generator\Document $parent
 	 * @return Df_1C_Cml2_Export_DocumentMixin
 	 */
-	public static function i(Df_Core_Xml_Generator_Document $parent) {
+	public static function i(\Df\Xml\Generator\Document $parent) {
 		return self::ic(__CLASS__, $parent);
 	}
 }

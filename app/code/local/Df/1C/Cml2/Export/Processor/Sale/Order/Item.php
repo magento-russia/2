@@ -97,11 +97,11 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 							/**
 							'Описание' =>
 								array(
-									Df_Core_Sxe::ATTR =>
+									\Df\Xml\X::ATTR =>
 										array(
 											'ФорматHTML' => df_bts(true)
 										)
-									,Df_Core_Sxe::CONTENT =>
+									,\Df\Xml\X::CONTENT =>
 										df_cdata(
 											$this->getProduct()->getDescription()
 										)

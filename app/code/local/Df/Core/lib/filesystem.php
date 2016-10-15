@@ -18,7 +18,7 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
  * @used-by Df_1C_Helper_Data::logger()
  * @used-by rm_report()
  * @used-by Df_Core_Model_Action::getResponseLogFileName()
- * @used-by Df_Core_Xml_Generator_Document::createLogger()
+ * @used-by \Df\Xml\Generator\Document::createLogger()
  * @used-by Df_YandexMarket_Helper_Data::getLogger()
  * @param string $directory
  * @param string $template

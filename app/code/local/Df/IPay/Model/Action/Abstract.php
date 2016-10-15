@@ -27,7 +27,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	 * @used-by Df_IPay_Model_Action_Confirm::_process()
 	 * @used-by Df_IPay_Model_Action_ConfirmPaymentByShop::_process()
 	 * @used-by Df_IPay_Model_Action_GetPaymentAmount::_process()
-	 * @return Df_Core_Sxe
+	 * @return \Df\Xml\X
 	 */
 	protected function e() {
 		if (!isset($this->{__METHOD__})) {
@@ -224,7 +224,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 		// дополнительные сбои нас уже не интересуют
 		catch (Exception $e) {}
 		$this->e()->appendChild(
-			rm_xml_node('Error')->appendChild(rm_xml_node('ErrorLine')->setCData(df_ets($e)))
+			df_xml_node('Error')->appendChild(df_xml_node('ErrorLine')->setCData(df_ets($e)))
 		);
 		parent::processException($e);
 	}

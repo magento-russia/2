@@ -22,7 +22,7 @@ class Df_Admin_Config_Form_Element_Text extends Varien_Data_Form_Element_Text {
 	/** @return bool */
 	private function needAutocomplete() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_leaf_b($this->getFieldConfig()->{'rm_autocomplete'}, true);
+			$this->{__METHOD__} = df_leaf_b($this->getFieldConfig()->{'rm_autocomplete'}, true);
 		}
 		return $this->{__METHOD__};
 	}

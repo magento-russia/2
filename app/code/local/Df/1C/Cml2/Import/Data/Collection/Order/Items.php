@@ -16,8 +16,8 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::initItems()
-	 * @used-by Df_Core_Xml_Parser_Collection::getItems()
+	 * @see \Df\Xml\Parser\Collection::initItems()
+	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @return Df_1C_Cml2_Import_Data_Entity_Order_Item[]
 	 */
 	protected function initItems() {
@@ -26,7 +26,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 		/** @var Df_1C_Cml2_Import_Data_Entity_Order_Item[] $mapFromProductsToOrderItems */
 		$mapFromProductsToOrderItems = array();
 		foreach ($this->getImportEntitiesAsSimpleXMLElementArray() as $e) {
-			/** @var Df_Core_Sxe $e */
+			/** @var \Df\Xml\X $e */
 			/** @var Df_1C_Cml2_Import_Data_Entity_Order_Item $orderItem */
 			$orderItem = $this->createItem($e);
 			df_assert($orderItem instanceof Df_1C_Cml2_Import_Data_Entity_Order_Item);
@@ -61,7 +61,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Order_Item::_C;}
@@ -76,7 +76,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'Товары/Товар';}
@@ -117,11 +117,11 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Order::getItems()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param Df_1C_Cml2_Import_Data_Entity_Order $order
 	 * @return Df_1C_Cml2_Import_Data_Collection_Order_Items
 	 */
-	public static function i(Df_Core_Sxe $e, Df_1C_Cml2_Import_Data_Entity_Order $order) {
+	public static function i(\Df\Xml\X $e, Df_1C_Cml2_Import_Data_Entity_Order $order) {
 		return new self(array(self::$P__E => $e, self::$P__ENTITY_ORDER => $order));
 	}
 }

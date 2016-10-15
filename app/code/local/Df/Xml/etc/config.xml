@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Xml>
+			<author>Дмитрий Федюк</author>
+			<version>3.0.0</version>
+		</Df_Xml>
+	</modules>
+</config>

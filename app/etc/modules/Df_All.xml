@@ -782,6 +782,13 @@
 				<Mage_Wishlist/>
 			</depends>
 		</Df_Wishlist>
+		<Df_Xml>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+			</depends>
+		</Df_Xml>
 		<Df_XmlConnect>
 			<active>true</active>
 			<codePool>local</codePool>

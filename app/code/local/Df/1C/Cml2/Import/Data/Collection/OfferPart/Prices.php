@@ -7,14 +7,14 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_1C_Cml2_Impo
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemClass()
+	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
 	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_OfferPart_Price::_C;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Collection::itemPath()
+	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
 	protected function itemPath() {return 'Цены/Цена';}
@@ -35,11 +35,11 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_1C_Cml2_Impo
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Offer::getPrices()
 	 * @static
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param Df_1C_Cml2_Import_Data_Entity_Offer $offer
 	 * @return Df_1C_Cml2_Import_Data_Collection_OfferPart_Prices
 	 */
-	public static function i(Df_Core_Sxe $e, Df_1C_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\Xml\X $e, Df_1C_Cml2_Import_Data_Entity_Offer $offer) {
 		return new self(array(self::$P__E => $e, self::$P__OFFER => $offer));
 	}
 }

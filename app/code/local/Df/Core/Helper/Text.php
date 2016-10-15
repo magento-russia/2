@@ -220,7 +220,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 		else {
 			/** @var string $result */
 			$text = df_normalize($text);
-			/** обрабатываем тег <pre>, который добавляется функцией @see rm_xml_output_html() */
+			/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
 			if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
 				$result  = nl2br($text);
 			}

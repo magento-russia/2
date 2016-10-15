@@ -249,11 +249,11 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 	private function getAttributeCode() {return 'manufacturer';}
 
 	/**
-	 * @param Df_Core_Sxe $e
+	 * @param \Df\Xml\X $e
 	 * @param Df_1C_Cml2_Import_Data_Entity_Product $entityProduct
 	 * @return Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer
 	 */
-	public static function i(Df_Core_Sxe $e, Df_1C_Cml2_Import_Data_Entity_Product $entityProduct) {
+	public static function i(\Df\Xml\X $e, Df_1C_Cml2_Import_Data_Entity_Product $entityProduct) {
 		return self::ic(__CLASS__, $e, $entityProduct);
 	}
 }

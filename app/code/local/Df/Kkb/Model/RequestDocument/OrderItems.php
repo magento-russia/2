@@ -1,5 +1,5 @@
 <?php
-class Df_Kkb_Model_RequestDocument_OrderItems extends Df_Core_Xml_Generator_Document {
+class Df_Kkb_Model_RequestDocument_OrderItems extends \Df\Xml\Generator\Document {
 	/**
 	 * @override
 	 * @return array(string => mixed)
@@ -115,7 +115,7 @@ class Df_Kkb_Model_RequestDocument_OrderItems extends Df_Core_Xml_Generator_Docu
 		df_param_string_not_empty($name, 1);
 		df_param_integer($quantity, 2);
 		df_param_string_not_empty($amount, 3);
-		return array(Df_Core_Sxe::ATTR => array(
+		return array(\Df\Xml\X::ATTR => array(
 			'number' => $ordering
 			,'name' => $name
 			,'quantity' => $quantity

@@ -23,7 +23,7 @@ class Df_Newsletter_Observer {
 			) {
 				/** @var Df_Customer_Model_Customer $customer */
 				$customer = Df_Customer_Model_Customer::i();
-				$customer->setData('website_id', rm_website_id());
+				$customer->setData('website_id', df_website_id());
 				$customer->loadByEmail($subscriber->getSubscriberEmail());
 				/** @var bool $isSubscribeOwnEmail */
 				$isSubscribeOwnEmail =
@@ -32,7 +32,7 @@ class Df_Newsletter_Observer {
 						$customer->getId() === df_session_customer()->getId()
 				;
 				if ($isSubscribeOwnEmail) {
-					$subscriber->setStoreId(rm_store_id());
+					$subscriber->setStoreId(df_store_id());
 				}
 			}
 		}

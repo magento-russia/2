@@ -129,7 +129,7 @@ class Df_Reward_Model_Reward_History extends Df_Core_Model {
 				'points' => $this->getReward()->getRate()->getPoints()
 				,'currency_amount' => $this->getReward()->getRate()->getCurrencyAmount()
 				,'direction' => $this->getReward()->getRate()->getDirection()
-				,'currency_code' => rm_website($this->getReward()->getWebsiteId())->getBaseCurrencyCode()
+				,'currency_code' => df_website($this->getReward()->getWebsiteId())->getBaseCurrencyCode()
 			)
 		));
 		if ($this->getReward()->getIsCappedReward()) {
@@ -155,7 +155,7 @@ class Df_Reward_Model_Reward_History extends Df_Core_Model {
 	 */
 	protected function _beforeSave() {
 		if ($this->getWebsiteId()) {
-			$this->setBaseCurrencyCode(rm_website($this->getWebsiteId())->getBaseCurrencyCode());
+			$this->setBaseCurrencyCode(df_website($this->getWebsiteId())->getBaseCurrencyCode());
 		}
 		if ($this->getPointsDelta() < 0) {
 			$this->_spendAvailablePoints($this->getPointsDelta());

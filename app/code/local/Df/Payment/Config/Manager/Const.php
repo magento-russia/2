@@ -91,14 +91,14 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @param mixed $default [optional]
 	 * @return mixed
 	 */
-	public function getValue($key, $default = null) {return rm_leaf($this->getNode($key), $default);}
+	public function getValue($key, $default = null) {return df_leaf($this->getNode($key), $default);}
 
 	/**
 	 * @param string $key
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function getValueT($key, $default = '') {return rm_leaf($this->getNodeT($key), $default);}
+	public function getValueT($key, $default = '') {return df_leaf($this->getNodeT($key), $default);}
 
 	/** @return bool */
 	public function hasCurrencySetRestriction() {return !!$this->getAllowedCurrencyCodes();}
@@ -190,7 +190,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @param string $key
 	 * @return string|null
 	 */
-	protected function _getValue($key) {return rm_leaf_s(rm_config_node($key));}
+	protected function _getValue($key) {return df_leaf_s(rm_config_node($key));}
 
 	/**
 	 * @override
@@ -238,8 +238,8 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		/**
 		 * 2015-08-04
 		 * Раньше тут стояло
-		 * $result && rm_xml_exists($result)
-		 * что, видимо, неправильно, потому что @see rm_xml_exists()
+		 * $result && df_xml_exists($result)
+		 * что, видимо, неправильно, потому что @see df_xml_exists()
 		 * возвращает false для текстовых узлов.
 		 */
 		return
@@ -260,8 +260,8 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		/**
 		 * 2015-08-04
 		 * Раньше тут стояло
-		 * $result && rm_xml_exists($result)
-		 * что, видимо, неправильно, потому что @see rm_xml_exists()
+		 * $result && df_xml_exists($result)
+		 * что, видимо, неправильно, потому что @see df_xml_exists()
 		 * возвращает false для текстовых узлов.
 		 */
 		return $result ? $result : $this->getNode($key);

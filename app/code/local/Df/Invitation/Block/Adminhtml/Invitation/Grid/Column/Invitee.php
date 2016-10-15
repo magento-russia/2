@@ -16,7 +16,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_Grid_Column_Invitee
 		$customer = Df_Customer_Model_Customer::ld($row->getReferralId());
 		return
 			'<a href="'
-			. rm_url_admin('*/customer/edit', array('id' => $row->getReferralId()))
+			. df_url_admin('*/customer/edit', array('id' => $row->getReferralId()))
 			. '">'
 			. df_e($customer->getName())
 			. '</a>'

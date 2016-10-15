@@ -1,5 +1,5 @@
 <?php
-class Df_Avangard_Model_RequestDocument extends Df_Core_Xml_Generator_Document {
+class Df_Avangard_Model_RequestDocument extends \Df\Xml\Generator\Document {
 	/**
 	 * @override
 	 * @return array(string => mixed)

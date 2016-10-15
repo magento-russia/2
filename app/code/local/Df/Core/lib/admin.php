@@ -33,7 +33,7 @@ function rm_admin_button(array $params) {
  */
 function rm_admin_button_location($url) {
 	if (df_contains($url, '*')) {
-		$url = rm_url_admin($url);
+		$url = df_url_admin($url);
 	}
 	$url = df_ejs($url);
 	return "setLocation('{$url}');";

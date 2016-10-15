@@ -98,7 +98,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			parent::createPostAction();
 			$customerId = $customer->getId();
 			if ($customerId) {
-				$invitation->accept(rm_website_id(), $customerId);
+				$invitation->accept(df_website_id(), $customerId);
 				Mage::dispatchEvent('df_invitation_customer_accepted', array(
 				   'customer' => $customer,   'invitation' => $invitation
 				));

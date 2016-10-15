@@ -16,7 +16,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 		);
 	}
 
-	/** @return Df_Core_Sxe */
+	/** @return \Df\Xml\X */
 	private function e() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_xml(base64_decode($this->getRequest()->getParam('operation_xml')));
@@ -27,7 +27,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	/** @return string */
 	private function getProcessorMethodName() {
 		/** @var string $status */
-		$status = rm_leaf_child($this->e(), 'status');
+		$status = df_leaf_child($this->e(), 'status');
 		if (Df_LiqPay_Model_Action_Confirm::PAYMENT_STATE__WAIT_SECURE === $status) {
 			$status = Df_LiqPay_Model_Action_Confirm::PAYMENT_STATE__SUCCESS;
 		}

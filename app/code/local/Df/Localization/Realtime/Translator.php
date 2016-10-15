@@ -103,7 +103,7 @@ class Df_Localization_Realtime_Translator extends Df_Core_Model {
 			,rm_design_package()->getPackageName()
 			,df_mage()->core()->design()->getThemeFrontend()
 		);
-		return !$configNode ? null : rm_leaf_sne($configNode);
+		return !$configNode ? null : df_leaf_sne($configNode);
 	}
 
 	/** @return Df_Localization_Realtime_Translator */

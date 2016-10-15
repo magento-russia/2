@@ -193,13 +193,13 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 			if (Mage_Core_Model_Store::ADMIN_CODE === $this->getStore()->getCode()) {
 				$websiteCodes = array();
 				foreach ($product->getWebsiteIds() as $websiteId) {
-					$websiteCode = rm_website($websiteId)->getCode();
+					$websiteCode = df_website($websiteId)->getCode();
 					$websiteCodes[$websiteCode] = $websiteCode;
 				}
 				$row['websites'] = df_csv($websiteCodes);
 			}
 			else {
-				$row['websites'] = rm_website()->getCode();
+				$row['websites'] = df_website()->getCode();
 				if ($this->getVar('url_field')) {
 					$row['url'] = $product->getProductUrl(false);
 				}

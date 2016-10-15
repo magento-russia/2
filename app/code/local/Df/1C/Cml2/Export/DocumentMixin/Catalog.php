@@ -30,10 +30,10 @@ class Df_1C_Cml2_Export_DocumentMixin_Catalog extends Df_1C_Cml2_Export_Document
 
 	/**
 	 * @used-by Df_1C_Cml2_Export_Document_Catalog::createMixin()
-	 * @param Df_Core_Xml_Generator_Document $parent
+	 * @param \Df\Xml\Generator\Document $parent
 	 * @return Df_1C_Cml2_Export_DocumentMixin_Catalog
 	 */
-	public static function i(Df_Core_Xml_Generator_Document $parent) {
+	public static function i(\Df\Xml\Generator\Document $parent) {
 		return self::ic(__CLASS__, $parent);
 	}
 }

@@ -3,8 +3,8 @@ class Df_1C_Cml2_Import_Data_Entity_AttributeValue_Barcode
 	extends Df_1C_Cml2_Import_Data_Entity_AttributeValue_OfferPart {
 	/**
 	 * @override
-	 * @see Df_Core_Xml_Parser_Entity::e()
-	 * @return Df_Core_Sxe
+	 * @see \Df\Xml\Parser\Entit::e()
+	 * @return \Df\Xml\X
 	 */
 	public function e() {return $this->getOffer()->e();}
 

@@ -44,7 +44,7 @@ class Df_PromoGift_Model_PromoAction_Collection extends Df_Varien_Data_Collectio
 			/** @var Df_PromoGift_Model_Resource_Rule_Collection $result */
 			$result = Df_PromoGift_Model_Rule::c();
 			// Отбраковываем правила, не относящиеся к обрабатываемому сайту $website
-			$result->addWebsiteFilter(array(rm_website_id()));
+			$result->addWebsiteFilter(array(df_website_id()));
 			// Отбраковываем ещё не начавшиеся правила
 			$result->addNotStartedYetRulesExclusionFilter();
 			$result->filterByCurrentQuote();

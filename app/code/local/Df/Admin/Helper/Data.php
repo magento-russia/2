@@ -3,8 +3,8 @@ class Df_Admin_Helper_Data extends Mage_Adminhtml_Helper_Data {
 	/** @return string */
 	public function getAdminUrl() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cc_path(Mage::getBaseUrl(), rm_leaf_sne(rm_config_node(
-				rm_leaf_b(rm_config_node(self::XML_PATH_USE_CUSTOM_ADMIN_PATH))
+			$this->{__METHOD__} = df_cc_path(Mage::getBaseUrl(), df_leaf_sne(rm_config_node(
+				df_leaf_b(rm_config_node(self::XML_PATH_USE_CUSTOM_ADMIN_PATH))
 				? self::XML_PATH_CUSTOM_ADMIN_PATH
 				: self::XML_PATH_ADMINHTML_ROUTER_FRONTNAME
 			)));

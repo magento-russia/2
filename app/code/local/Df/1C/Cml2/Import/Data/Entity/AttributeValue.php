@@ -28,7 +28,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_AttributeValue
 	/**
 	 * Добавил к названию метода окончание «Magento»,
 	 * чтобы избежать конфликта с родительским методом
-	 * Df_Core_Xml_Parser_Entity::getAttribute()
+	 * \Df\Xml\Parser\Entit::getAttribute()
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	public function getAttributeMagento() {
