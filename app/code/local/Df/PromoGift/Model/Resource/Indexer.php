@@ -102,7 +102,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 			$toDateAsString = (string)$toDateAsDbExpr;
 			if (!df_h()->zf()->db()->isNull($toDateAsString)) {
 				/** @var Zend_Date|null $toDate */
-				$toDate = df()->date()->fromDb($toDateAsString, $throw = false);
+				$toDate = df_date_from_db($toDateAsString, $throw = false);
 				$isValid = !is_null($toDate) && !df_is_date_expired($toDate);
 			}
 			if ($isValid) {

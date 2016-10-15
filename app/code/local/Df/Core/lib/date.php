@@ -12,6 +12,24 @@ use Zend_Date as ZD;
 function df_date(ZD $date = null) {return $date ?: ZD::now();}
 
 /**
+ * @param int[] $args
+ * @return ZD
+ */
+function df_date_create(...$args) {
+	/** @var int $numberOfArguments */
+	$numberOfArguments = count($args);
+	/** @var string[] $paramKeys */
+	$paramKeys = ['year', 'month', 'day', 'hour', 'minute', 'second'];
+	/** @var int $countOfParamKeys */
+	$countOfParamKeys = count($paramKeys);
+	df_assert_between($numberOfArguments, 1, $countOfParamKeys);
+	if ($countOfParamKeys > $numberOfArguments) {
+		$args = array_merge($args, array_fill(0, $countOfParamKeys - $numberOfArguments, 0));
+	}
+	return new ZD(array_combine($paramKeys, $args));
+}
+
+/**
  * 2015-12-04
  * @param Zend_Date $date [optional]
  * @param string $format [optional]
@@ -19,6 +37,29 @@ function df_date(ZD $date = null) {return $date ?: ZD::now();}
  */
 function df_date_format($date = null, $format = Mage_Core_Model_Locale::FORMAT_TYPE_LONG) {
 	return df_mage()->coreHelper()->formatDate($date, $format);
+}
+
+/**
+ * @param string $datetime
+ * @param bool $throw [optional]
+ * @return ZD|null
+ * @throws Exception
+ */
+function df_date_from_db($datetime, $throw = true) {
+	df_param_string_not_empty($datetime, 0);
+	/** @var ZD|null $result */
+	$result = null;
+	if ($datetime) {
+		try {
+			$result = new ZD($datetime, ZD::ISO_8601);
+		}
+		catch (Exception $e) {
+			if ($throw) {
+				df_error($e);
+			}
+		}
+	}
+	return $result;
 }
 
 /**
@@ -164,6 +205,15 @@ function df_date_time($date = null) {
 }
 
 /**
+ * @param ZD $date
+ * @param bool $inCurrentTimeZone [optional]
+ * @return string
+ */
+function df_date_to_db(ZD $date, $inCurrentTimeZone = true) {
+	return $date->toString($inCurrentTimeZone ? 'Y-MM-dd HH:mm:ss' : ZD::ISO_8601);
+}
+
+/**
  * @param int $days
  * @return string
  */
@@ -275,6 +325,12 @@ function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty 
 	}
 	return $result;
 }
+
+/**
+ * @param ZD|null $date [optional]
+ * @return int
+ */
+function df_hour(ZD $date = null) {return df_nat0(df_date($date)->toString(ZD::HOUR_SHORT, 'iso'));}
 
 /**
  * 2016-07-19

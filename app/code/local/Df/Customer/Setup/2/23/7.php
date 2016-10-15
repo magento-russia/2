@@ -70,7 +70,7 @@ class Df_Customer_Setup_2_23_7 extends Df_Core_Setup {
 				->setEmail(self::$TEST_ACCOUNT__EMAIL)
 				->setPassword('demo-shopper')
 				->setGender(Df_Customer_Model_Customer::GENDER__MALE)
-				->setDob(df()->date()->create(1982, 7, 8))
+				->setDob(df_date_create(1982, 7, 8))
 				->setGroupId(Df_Customer_Model_Group::ID__GENERAL)
 				->setWebsiteId($website->getId())
 				->save()

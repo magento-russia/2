@@ -46,7 +46,7 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	/** @return Zend_Date */
 	public function getDateCreated() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df()->date()->fromDb($this->getCreatedAt());
+			$this->{__METHOD__} = df_date_from_db($this->getCreatedAt());
 		}
 		return $this->{__METHOD__};
 	}

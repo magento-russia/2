@@ -4,8 +4,6 @@ class Df_Core_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function assert() {return Df_Core_Helper_Assert::s();}
 	/** @return Df_Core_Helper_Check */
 	public function check() {return Df_Core_Helper_Check::s();}
-	/** @return Df_Core_Helper_Date */
-	public function date() {return Df_Core_Helper_Date::s();}
 	/** @return Df_Core_Helper_Db */
 	public function db() {return Df_Core_Helper_Db::s();}
 	/** @return Df_Core_Helper_File */

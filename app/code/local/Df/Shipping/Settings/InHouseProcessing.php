@@ -34,7 +34,7 @@ class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
 			/** @var int $result */
 			$result = $s->getNatural0('days');
 			/** @var bool $canShipToday */
-			$canShipToday = df()->date()->getHour() < $s->getNatural('can_ship_today_untill');
+			$canShipToday = df_hour() < $s->getNatural('can_ship_today_untill');
 			if (!$canShipToday) {
 				$result++;
 			}

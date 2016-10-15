@@ -26,7 +26,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	public function getDateOfBirth() {
 		/** @var string|null $dateAsString */
 		$dateAsString = $this->_getData('dob');
-		return !$dateAsString ? null : df()->date()->fromDb($dateAsString, $throw = false);
+		return !$dateAsString ? null : df_date_from_db($dateAsString, $throw = false);
 	}
 
 	/**

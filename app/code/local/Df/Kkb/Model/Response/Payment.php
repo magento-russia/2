@@ -207,7 +207,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 	/** @return Zend_Date */
 	private function getTime() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df()->date()->createForTimezone(
+			$this->{__METHOD__} = df_date_parse(
 				$this->getTimeAsString(), 'y-MM-dd HH:mm:ss', 'Asia/Almaty'
 			);
 		}
