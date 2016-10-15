@@ -132,6 +132,6 @@ class Df_Invitation_Adminhtml_Report_InvitationController
 	 * @return boolean
 	 */
 	protected function _isAllowed() {
-		return df_h()->invitation()->config()->isEnabled() && rm_admin_allowed('report/df_invitation');
+		return df_h()->invitation()->config()->isEnabled() && df_admin_allowed('report/df_invitation');
 	}
 }

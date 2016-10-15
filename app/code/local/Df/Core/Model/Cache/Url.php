@@ -75,7 +75,7 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model {
 		 * например, её веб-адрес.
 		 */
 		if (df_contains($routePath, '*')) {
-			$result[]= rm_ruri();
+			$result[]= df_ruri();
 		}
 		if (!is_null($routeParams)) {
 			/**

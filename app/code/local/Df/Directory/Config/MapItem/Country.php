@@ -3,7 +3,7 @@ class Df_Directory_Config_MapItem_Country extends Df_Admin_Config_MapItem {
 	/** @return Df_Directory_Model_Country|null */
 	public function getCountry() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(rm_country($this->getIso2(), $throwIfAbsent = false));
+			$this->{__METHOD__} = df_n_set(df_country($this->getIso2(), $throwIfAbsent = false));
 		}
 		return df_n_get($this->{__METHOD__});
 	}

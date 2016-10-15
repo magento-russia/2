@@ -10,7 +10,7 @@
  */
 class Df_1C_Setup_1_0_2 extends Df_1C_Setup {
 	/**
-	 * Для товаров свойство «1С ID» добавляется функцией @see rm_1c_add_external_id_attribute_to_set()
+	 * Для товаров свойство «1С ID» добавляется функцией @see df_1c_add_external_id_attribute_to_set()
 	 * @override
 	 * @see Df_Core_Setup::_process()
 	 * @used-by Df_Core_Setup::process()
@@ -18,7 +18,7 @@ class Df_1C_Setup_1_0_2 extends Df_1C_Setup {
 	 */
 	protected function _process() {
 		$this->add1CIdToEntity('catalog_category', 'General Information');
-		rm_eav_reset_categories();
+		df_eav_reset_categories();
 		$this->add1CIdColumnToTable('eav/attribute_option');
 		$this->add1CIdColumnToTable('catalog/eav_attribute');
 	}
@@ -37,8 +37,8 @@ class Df_1C_Setup_1_0_2 extends Df_1C_Setup {
 		df_param_string($groupName, 1);
 		df_param_integer($ordering, 2);
 		self::attribute()->cleanCache();
-		rm_remove_attribute($entityType, Df_1C_Const::ENTITY_EXTERNAL_ID_OLD);
-		rm_remove_attribute($entityType, Df_1C_Const::ENTITY_EXTERNAL_ID);
+		df_remove_attribute($entityType, Df_1C_Const::ENTITY_EXTERNAL_ID_OLD);
+		df_remove_attribute($entityType, Df_1C_Const::ENTITY_EXTERNAL_ID);
 		/** @var int $entityTypeId */
 		$entityTypeId = self::attribute()->getEntityTypeId($entityType);
 		/** @var int $attributeSetId */

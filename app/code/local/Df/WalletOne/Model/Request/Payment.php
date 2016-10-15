@@ -59,8 +59,8 @@ class Df_WalletOne_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 				// блокировать, но не списывать сразу средства с кошелька покупателя
 				,self::REQUEST_VAR__PAYMENT_SERVICE__PAYMENT_ACTION => 0
 				,self::REQUEST_VAR__SHOP_ID => $this->shopId()
-				,self::REQUEST_VAR__URL_RETURN_OK => rm_url_checkout_success()
-				,self::REQUEST_VAR__URL_RETURN_NO => rm_url_checkout_fail()
+				,self::REQUEST_VAR__URL_RETURN_OK => df_url_checkout_success()
+				,self::REQUEST_VAR__URL_RETURN_NO => df_url_checkout_fail()
 				,self::$METHODS_ENABLED =>
 					Df_WalletOne_Model_Form_Processor_AddPaymentMethods::i(array(
 						Df_WalletOne_Model_Form_Processor_AddPaymentMethods::P__FIELD_NAME =>

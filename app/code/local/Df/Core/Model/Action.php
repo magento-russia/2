@@ -327,7 +327,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	protected function processRedirect() {
 		if ($this->getRedirectLocation()) {
 			self::$REDIRECT_LOCATION__REFERER === $this->getRedirectLocation()
-			? $this->redirectRaw(rm_referer())
+			? $this->redirectRaw(df_referer())
 			: $this->redirect($this->getRedirectLocation(), $this->getRedirectParams());
 		}
 	}

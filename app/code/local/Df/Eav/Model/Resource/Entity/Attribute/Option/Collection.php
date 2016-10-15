@@ -16,7 +16,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 	 */
 	public function toOptionArray($valueKey = 'value') {
 		return
-			rm_loc()->isEnabled()
+			df_loc()->isEnabled()
 			? $this->toOptionArrayDf($valueKey)
 			: parent::toOptionArray($valueKey)
 		;

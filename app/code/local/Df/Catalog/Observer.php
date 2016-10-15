@@ -48,7 +48,7 @@ class Df_Catalog_Observer {
 	 * @param Varien_Event_Observer $o
 	 * @return void
 	 */
-	public function rm__config_after_save__catalog__frontend__flat_catalog_category(
+	public function df__config_after_save__catalog__frontend__flat_catalog_category(
 		Varien_Event_Observer $o
 	) {
 		try {
@@ -71,7 +71,7 @@ class Df_Catalog_Observer {
 	 * @param Varien_Event_Observer $o
 	 * @return void
 	 */
-	public function rm__config_after_save__catalog__frontend__flat_catalog_product(
+	public function df__config_after_save__catalog__frontend__flat_catalog_product(
 		Varien_Event_Observer $o
 	) {
 		try {
@@ -101,7 +101,7 @@ class Df_Catalog_Observer {
 	 * @used-by Mage_Core_Model_App::_callObserverMethod()
 	 * @return void
 	 */
-	public function rm__magento_ce_has_just_been_installed() {
+	public function df__magento_ce_has_just_been_installed() {
 		try {
 			Df_Catalog_Setup_2_23_5::p();
 		}

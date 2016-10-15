@@ -50,7 +50,7 @@ class Df_YandexMarket_Model_Action_Front extends Df_YandexMarket_Model_Action {
 	 * @used-by Df_Core_Model_Action::getStoreConfig()
 	 * @return Df_Core_Model_StoreM
 	 */
-	protected function store() {return rm_state()->getStoreProcessed();}
+	protected function store() {return df_state()->getStoreProcessed();}
 
 	/** @return Df_YandexMarket_Model_Yml_Document */
 	private function getDocument() {

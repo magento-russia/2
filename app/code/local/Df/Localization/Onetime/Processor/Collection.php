@@ -13,7 +13,7 @@ class Df_Localization_Onetime_Processor_Collection extends Df_Varien_Data_Collec
 	 * @return void
 	 */
 	protected function loadInternal() {
-		foreach (rm_config_a('rm/design-theme-processors') as $processorId => $processorData) {
+		foreach (df_config_a('rm/design-theme-processors') as $processorId => $processorData) {
 			/** @var string $processorId */
 			/** @var array(string => string) $processorData */
 			/** @var string $className */

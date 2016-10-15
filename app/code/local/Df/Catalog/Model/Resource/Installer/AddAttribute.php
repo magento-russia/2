@@ -11,7 +11,7 @@ class Df_Catalog_Model_Resource_Installer_AddAttribute extends Df_Catalog_Model_
 	public function addAttributeRm($attributeCode, array $attributeData) {
 		df_param_string($attributeCode, 0);
 		$attributeData = array_merge(array(
-			'entity_type_id' => rm_eav_id_product()
+			'entity_type_id' => df_eav_id_product()
 			,'attribute_code' => $attributeCode
 			,'note' => ''
 		), $attributeData);
@@ -39,14 +39,14 @@ class Df_Catalog_Model_Resource_Installer_AddAttribute extends Df_Catalog_Model_
 		}
 		/** @var int|null $sortOrder */
 		$sortOrder = dfa($attributeData, 'sort_order');
-		$attributeId = $this->getAttribute(rm_eav_id_product(), $attributeCode, 'attribute_id');
+		$attributeId = $this->getAttribute(df_eav_id_product(), $attributeCode, 'attribute_id');
 		if (!$attributeId) {
 			$this->_insertAttribute($attributeData);
-			rm_eav_reset();
+			df_eav_reset();
 		}
 		else {
 			$this->updateAttribute(
-				rm_eav_id_product()
+				df_eav_id_product()
 				,$attributeId
 				,$attributeData
 				,$value = null
@@ -57,13 +57,13 @@ class Df_Catalog_Model_Resource_Installer_AddAttribute extends Df_Catalog_Model_
 		$options = dfa($attributeData, 'option');
 		if (!is_null($options)) {
 			df_assert_array($options);
-			$options['attribute_id'] = $this->getAttributeId(rm_eav_id_product(), $attributeCode);
+			$options['attribute_id'] = $this->getAttributeId(df_eav_id_product(), $attributeCode);
 			$this->addAttributeOption($options);
 		}
 		df_h()->catalog()->product()->getResource()->loadAllAttributes();
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = Df_Catalog_Model_Resource_Eav_Attribute::i();
-		$result->loadByCode(rm_eav_id_product(), $attributeCode);
+		$result->loadByCode(df_eav_id_product(), $attributeCode);
 		return $result;
 	}
 

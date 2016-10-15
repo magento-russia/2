@@ -468,13 +468,13 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @used-by Df_Psbank_Model_Action_CustomerReturn::_process()
 	 * @return void
 	 */
-	protected function redirectToFail() {$this->redirectRaw(rm_url_checkout_fail());}
+	protected function redirectToFail() {$this->redirectRaw(df_url_checkout_fail());}
 
 	/**
 	 * @used-by Df_Alfabank_Model_Action_CustomerReturn::_process()
 	 * @return void
 	 */
-	protected function redirectToSuccess() {$this->redirectRaw(rm_url_checkout_success());}
+	protected function redirectToSuccess() {$this->redirectRaw(df_url_checkout_success());}
 
 	/**
 	 * @param Exception|Df_Payment_Exception $e

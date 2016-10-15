@@ -53,8 +53,8 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 	protected function throwNoRate($currencyCodeFrom, $currencyCodeTo) {
 		df_error(
 			'Система не в состоянии узнать курс обмена валюты «%s» на валюту «%s» от сервиса «%s»'
-			,rm_currency_name($currencyCodeFrom)
-			,rm_currency_name($currencyCodeTo)
+			,df_currency_name($currencyCodeFrom)
+			,df_currency_name($currencyCodeTo)
 			,$this->getName()
 		);
 	}

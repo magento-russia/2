@@ -28,9 +28,9 @@ class Df_Shipping_Model_Processor_AddDimensionsToProductAttributeSet
 	 */
 	private function getAttribute($code, $label, $ordering) {
 		if (!isset($this->{__METHOD__}[$code])) {
-			$this->{__METHOD__}[$code] = rm_attributes()->createOrUpdate(array(
+			$this->{__METHOD__}[$code] = df_attributes()->createOrUpdate(array(
 				// Класс объектов для свойства (товары, покупатели...)
-				'entity_type_id' => rm_eav_id_product()
+				'entity_type_id' => df_eav_id_product()
 				// Код свойства
 				,'attribute_code' => $code
 				// Область действия значения свойства: «всеобщая», «витрина», «сайт»

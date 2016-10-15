@@ -124,13 +124,13 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 				(self::$ANY === $this->getAuthenticated())
 			||
 				(
-						rm_customer_logged_in()
+						df_customer_logged_in()
 					&&
 						(self::$YES === $this->getAuthenticated())
 				)
 			||
 				(
-						!rm_customer_logged_in()
+						!df_customer_logged_in()
 					&&
 						(self::$NO === $this->getAuthenticated())
 				)
@@ -239,10 +239,10 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	 * Ядро Magento использует поле «type» блоков для своих внутренних целей.
 	 * @see Mage_Core_Model_Layout::createBlock():
 	 * $block->setType($type);
-	 * Поэтому называем наше поле «rm__type».
+	 * Поэтому называем наше поле «df__type».
 	 * @var string
 	 */
-	private static $P__TYPE = 'rm__type';
+	private static $P__TYPE = 'df__type';
 	/** @var string */
 	private static $YES = 'yes';
 

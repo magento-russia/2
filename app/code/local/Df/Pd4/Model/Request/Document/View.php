@@ -83,7 +83,7 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 	/** @return integer */
 	private function getOrderProtectCode() {
 		/** @var integer $result */
-		$result = rm_request(Df_Pd4_Block_LinkToDocument::URL_PARAM__ORDER_PROTECT_CODE);
+		$result = df_request(Df_Pd4_Block_LinkToDocument::URL_PARAM__ORDER_PROTECT_CODE);
 		df_assert(!is_null($result), $this->getInvalidUrlMessage());
 		return $result;
 	}

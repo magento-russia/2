@@ -47,11 +47,11 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	 */
 	public function toOptionArrayWithEmpty($isMultiSelect = false) {
 		$this->reset();
-		return array_merge(array(rm_option('', '')), $this->toOptionArrayInternal($isMultiSelect));
+		return array_merge(array(df_option('', '')), $this->toOptionArrayInternal($isMultiSelect));
 	}
 
 	/** @return array(string|int => string) */
-	public function toOptionArrayAssoc() {return rm_options_to_map($this->toOptionArray());}
+	public function toOptionArrayAssoc() {return df_options_to_map($this->toOptionArray());}
 
 	/**
 	 * @param string $paramName
@@ -140,7 +140,7 @@ abstract class Df_Admin_Config_Source extends Df_Core_Model {
 	/** @return Varien_Simplexml_Element */
 	private function getSectionConfigNode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_config_adminhtml()->getSection($this->getSectionCode());
+			$this->{__METHOD__} = df_config_adminhtml()->getSection($this->getSectionCode());
 			df_assert($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

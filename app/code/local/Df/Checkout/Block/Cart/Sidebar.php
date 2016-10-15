@@ -30,7 +30,7 @@ class Df_Checkout_Block_Cart_Sidebar extends Mage_Checkout_Block_Cart_Sidebar {
 		 * Так вот, если у предзаказа нет товаров,
 		 * то не нужно тратить ресурсы на вызов @uses getAdditionalKeys()
 		 */
-		if (rm_quote()->getId() && rm_quote()->getItemsCount()) {
+		if (df_quote()->getId() && df_quote()->getItemsCount()) {
 			$result = array_merge($result, $this->getAdditionalKeys());
 		}
 		return $result;

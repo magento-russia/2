@@ -3,7 +3,7 @@ class Df_Tax_M extends Df_Core_Model {
 	/**
 	 * 2015-08-09
 	 * Находит в БД или создаёт при отсутствии заданную налоговую ставку.
-	 * @used-by rm_product_tax_class_id()
+	 * @used-by df_product_tax_class_id()
 	 * @param float $rate
 	 * @return int|null
 	 */
@@ -11,7 +11,7 @@ class Df_Tax_M extends Df_Core_Model {
 		/** @var array(string => array(string => int)) $cache */
 		static $cache;
 		/** @var string $iso2 */
-		$iso2 = rm_shop_iso2(rm_state()->getStoreProcessed());
+		$iso2 = df_shop_iso2(df_state()->getStoreProcessed());
 		/** @var string $rateS */
 		$rateS = (string)$rate;
 		if (!isset($cache[$iso2][$rateS])) {
@@ -41,7 +41,7 @@ class Df_Tax_M extends Df_Core_Model {
 			$count = count($rows);
 			if (1 !== $count) {
 				/** @var string $countryName */
-				$countryName = rm_country_ctn_ru($iso2);
+				$countryName = df_country_ctn_ru($iso2);
 				/**
 				 * 2015-08-09
 				 * PHP сам отбросит нули в конце ставки:

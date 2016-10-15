@@ -26,7 +26,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		/** @var array $oldLabels */
 		$oldLabels = array();
 		/** @var string $updateMode */
-		$updateMode = rm_1c_cfg()->referenceLists()->updateMode();
+		$updateMode = df_1c_cfg()->referenceLists()->updateMode();
 		foreach ($this->getOptionsOld() as $oldOption) {
 			/** @var Df_Eav_Model_Entity_Attribute_Option $oldOption */
 			/** @var int $value */

@@ -17,7 +17,7 @@ class Df_Eav_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function isAttributeBelongsToProduct(Mage_Eav_Model_Entity_Attribute_Abstract $attribute) {
-		return rm_eav_id_product() === (int)$attribute->getEntityTypeId();
+		return df_eav_id_product() === (int)$attribute->getEntityTypeId();
 	}
 
 	/** @return Df_Eav_Helper_Data */

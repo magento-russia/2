@@ -1,7 +1,7 @@
 <?php
 class Df_Directory_Helper_Country extends Mage_Core_Helper_Abstract {
 	/** @return Df_Directory_Model_Country */
-	public function getKazakhstan() {return rm_country(self::ISO_2_CODE__KAZAKHSTAN);}
+	public function getKazakhstan() {return df_country(self::ISO_2_CODE__KAZAKHSTAN);}
 
 	/** @return array(string => array(string => string)) */
 	public function getMapFromIso2CodeToNameCases() {
@@ -36,10 +36,10 @@ class Df_Directory_Helper_Country extends Mage_Core_Helper_Abstract {
 	}
 
 	/** @return Df_Directory_Model_Country */
-	public function getRussia() {return rm_country(self::ISO_2_CODE__RUSSIA);}
+	public function getRussia() {return df_country(self::ISO_2_CODE__RUSSIA);}
 
 	/** @return Df_Directory_Model_Country */
-	public function getUkraine() {return rm_country(self::ISO_2_CODE__UKRAINE);}
+	public function getUkraine() {return df_country(self::ISO_2_CODE__UKRAINE);}
 
 	/** @return Df_Directory_Helper_Country_Russia */
 	public function russia() {return Df_Directory_Helper_Country_Russia::s();}

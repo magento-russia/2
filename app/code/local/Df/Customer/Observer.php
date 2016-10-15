@@ -15,7 +15,7 @@ class Df_Customer_Observer {
 			if (is_null($ge_1_8_0_0)) {
 				$ge_1_8_0_0 = df_magento_version('1.8.0.0', '>=');
 			}
-			if ($ge_1_8_0_0 && !rm_request('form_key')) {
+			if ($ge_1_8_0_0 && !df_request('form_key')) {
 				df_session_customer()->addError(
 					'К сожалению, система авторизации дала сбой.'
 					.'<br/>Пожалуйста, попробуйте войти повторно, используя форму ниже на этой странице.'
@@ -62,7 +62,7 @@ class Df_Customer_Observer {
 			if (
 					df_h()->customer()->check()->formAttributeCollection($o['collection'])
 				&&
-					rm_checkout_ergonomic()
+					df_checkout_ergonomic()
 			) {
 				df_handle_event(
 					Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability::class

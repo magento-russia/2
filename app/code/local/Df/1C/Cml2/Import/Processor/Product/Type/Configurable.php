@@ -116,7 +116,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable
 			else {
 				$result = $this->getEntityProduct()->getSku();
 				if (!$result) {
-					rm_1c_log(
+					df_1c_log(
 						'У товара «%s» в 1С отсутствует артикул.', $this->getEntityProduct()->getName()
 					);
 					$result = $this->getEntityOffer()->getExternalId();
@@ -126,7 +126,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable
 					/** @var Df_Catalog_Model_Product $existingProduct */
 					$existingProduct = df_product($result);
 					// Вдруг товар с данным артикулом уже присутствует в системе?
-					rm_1c_log(
+					df_1c_log(
 						'В магазине уже присутствует товар с артикулом «{артикул}»:'
 						. ' он имеет номер {идентификатор уже имеющегося товара},'
 						. ' название «{название уже имеющегося товара}»'
@@ -169,16 +169,16 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable
 		/** @var int $count */
 		$count = count($this->getEntityOffer()->getConfigurableChildren());
 		if (!$count) {
-			rm_1c_log('Простые варианты настраиваемых товаров отсутствуют.');
+			df_1c_log('Простые варианты настраиваемых товаров отсутствуют.');
 		}
 		else {
-			rm_1c_log('Найдено простых вариантов настраиваемых товаров: %d.', $count);
-			rm_1c_log('Импорт простых вариантов настраиваемых товаров начат.');
+			df_1c_log('Найдено простых вариантов настраиваемых товаров: %d.', $count);
+			df_1c_log('Импорт простых вариантов настраиваемых товаров начат.');
 			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
 				/** @var Df_1C_Cml2_Import_Data_Entity_Offer $offer */
 				Df_1C_Cml2_Import_Processor_Product_Type_Configurable_Child::p($offer);
 			}
-			rm_1c_log('Импорт простых вариантов настраиваемых товаров завершён.');
+			df_1c_log('Импорт простых вариантов настраиваемых товаров завершён.');
 		}
 	}
 

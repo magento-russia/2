@@ -12,7 +12,7 @@ class Df_Adminhtml_Block_Sales_Order_View_Items_Renderer_Default extends Mage_Ad
 	 */
 	public function displayPrices($basePrice, $price, $strong = false, $separator = '<br />') {
 		return
-			rm_loc()->needHideDecimals()
+			df_loc()->needHideDecimals()
 			? $this->displayPricesDf($basePrice, $price, $strong, $separator)
 			: parent::displayPrices($basePrice, $price, $strong, $separator)
 		;
@@ -27,7 +27,7 @@ class Df_Adminhtml_Block_Sales_Order_View_Items_Renderer_Default extends Mage_Ad
 	 */
 	private function displayPricesDf($basePrice, $price, $strong = false, $separator = '<br />') {
 		return $this->displayRoundedPrices(
-			$basePrice, $price, rm_currency_precision(), $strong, $separator
+			$basePrice, $price, df_currency_precision(), $strong, $separator
 		);
 	}
 }

@@ -112,7 +112,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	 * @return string
 	 */
 	public function getPageGridButtonsHtml() {
-		return rm_admin_button(array(
+		return df_admin_button(array(
 			'id' => 'add_cms_pages'
 			,'label' => df_h()->cms()->__('Add Selected Page(s) to Tree')
 			,'onclick' => 'hierarchyNodes.pageGridAddSelected()'
@@ -127,21 +127,21 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	 */
 	public function getPagePropertiesButtons() {
 		return implode(' ', array(
-			rm_admin_button(array(
+			df_admin_button(array(
 				'id' => 'delete_node_button'
 				,'label' => df_h()->cms()->__('Remove From Tree')
 				,'onclick' => 'hierarchyNodes.deleteNodePage()'
 				,'class' => 'delete' . (($this->isLockedByOther()) ? ' disabled' : '')
 				,'disabled' => $this->isLockedByOther()
 			))
-			,rm_admin_button(array(
+			,df_admin_button(array(
 				'id' => 'cancel_node_button'
 				,'label' => df_h()->cms()->__('Cancel')
 				,'onclick' => 'hierarchyNodes.cancelNodePage()'
 				,'class' => 'delete' . (($this->isLockedByOther()) ? ' disabled' : '')
 				,'disabled'  => $this->isLockedByOther()
 			))
-			,rm_admin_button(array(
+			,df_admin_button(array(
 				'id' => 'save_node_button'
 				,'label' => df_h()->cms()->__('Save')
 				,'onclick' => 'hierarchyNodes.saveNodePage()'
@@ -168,7 +168,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 
 	/** @return string */
 	public function getTreeButtonsHtml() {
-		return rm_admin_button(array(
+		return df_admin_button(array(
 			'id' => 'new_node_button'
 			,'label' => df_h()->cms()->__('Add Node...')
 			,'onclick' => 'hierarchyNodes.newNodePage()'

@@ -8,7 +8,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Region_Text
 	public function getValue() {
 		/** @var string|null $result */
 		$result = parent::getValue();
-		return $result ? $result :rm_visitor_location()->getRegionName();
+		return $result ? $result :df_visitor_location()->getRegionName();
 	}
 
 	/**

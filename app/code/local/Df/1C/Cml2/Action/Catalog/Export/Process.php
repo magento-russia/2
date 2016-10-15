@@ -13,7 +13,7 @@ class Df_1C_Cml2_Action_Catalog_Export_Process extends Df_1C_Cml2_Action_Generic
 	protected function createDocument() {
 		return Df_1C_Cml2_Export_Document_Catalog::i(
 			Df_Catalog_Model_Product_Exporter::i(array(
-				Df_Catalog_Model_Product_Exporter::P__RULE => rm_1c_cfg()->catalogExport()->getRule()
+				Df_Catalog_Model_Product_Exporter::P__RULE => df_1c_cfg()->catalogExport()->getRule()
 				// нам нужны все свойства, потому что мы их экспортируем
 				,Df_Catalog_Model_Product_Exporter::P__NEED_LOAD_ALL_ATTRIBUTES => true
 			))->getResult()

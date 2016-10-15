@@ -31,7 +31,7 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	protected function getEventClass() {return Df_Checkout_Model_Event_SaveOrder_Abstract::class;}
 
 	/** @return string */
-	private function getOrderComment() {return df_trim(rm_request('df_order_comment', ''));}
+	private function getOrderComment() {return df_trim(df_request('df_order_comment', ''));}
 
 	/**
 	 * @used-by Df_Checkout_Observer::checkout_type_multishipping_create_orders_single()

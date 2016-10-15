@@ -103,7 +103,7 @@ class Df_LiqPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/** @return string */
 	private function getResponseXml() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = base64_decode(rm_request('operation_xml'));
+			$this->{__METHOD__} = base64_decode(df_request('operation_xml'));
 			// base64_decode возвращает false в случае сбоя
 			df_result_string($this->{__METHOD__});
 		}

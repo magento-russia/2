@@ -3,7 +3,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Country
 	extends Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Dropdown {
 	/** @return string */
 	public function getDropdownAsHtml() {
-		return df_html_select(rm_countries_options(), $this->getValue(), $this->getAttributes());
+		return df_html_select(df_countries_options(), $this->getValue(), $this->getAttributes());
 	}
 
 	/**

@@ -27,7 +27,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter extends Df_C
 				$values
 				,1
 				,0
-				,array(rm_option('week', df_mage()->reportsHelper()->__('Week')))
+				,array(df_option('week', df_mage()->reportsHelper()->__('Week')))
 			)
 		;
 		$fieldPeriodType->setData('values', $values);

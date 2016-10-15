@@ -36,7 +36,7 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 			// Добавляем к прикладному типу товаров свойство «внешний идентификатор 1С».
 			// Все требуемые для такого добавления операции выполняются только при необходимости
 			// (свойство добавляется, только если оно ещё не было добавлено ранее)
-			rm_1c_add_external_id_attribute_to_set($result);
+			df_1c_add_external_id_attribute_to_set($result);
 			df_assert(!is_null($this->getAttributeSets()->findByLabel($this->getAppliedTypeName())));
 			$this->{__METHOD__} = $result;
 		}
@@ -80,7 +80,7 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 			/** @var string $result */
 			$result = $this->leaf('Описание');
 			if (!$result) {
-				$result = rm_1c_cfg()->product()->description()->getDefault();
+				$result = df_1c_cfg()->product()->description()->getDefault();
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -120,7 +120,7 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 		if (!isset($this->{__METHOD__})) {
 			/** @var float|null $rate */
 			$rate = $this->vatRate();
-			$this->{__METHOD__} = df_n_set(is_null($rate) ? null : rm_product_tax_class_id($rate));
+			$this->{__METHOD__} = df_n_set(is_null($rate) ? null : df_product_tax_class_id($rate));
 		}
 		return df_n_get($this->{__METHOD__});
 	}

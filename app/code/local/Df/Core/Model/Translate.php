@@ -158,7 +158,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		static $allowInterference;
 		if (is_null($allowInterference)) {
 			/** @var string $allowInterferenceAsString */
-			$allowInterferenceAsString = rm_loc()->allowInterference();
+			$allowInterferenceAsString = df_loc()->allowInterference();
 			if (is_null($allowInterferenceAsString)) {
 				/**
 				 * Как ни странно, в магазине shop.d-m-t.ru
@@ -638,9 +638,9 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		if (!isset($this->{__METHOD__})) {
 			/** @var bool $result */
 			$result = false;
-			foreach (rm_config_a('df/disable-translation') as $suffix) {
+			foreach (df_config_a('df/disable-translation') as $suffix) {
 				/** @var string $suffix */
-				if (rm_ruri_contains($suffix)) {
+				if (df_ruri_contains($suffix)) {
 					$result = true;
 					break;
 				}
@@ -668,7 +668,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 							// и назначаем основным
 							!$this->isRuRuExist()
 						||
-							rm_loc()->isEnabled()
+							df_loc()->isEnabled()
 					)
 			;
 		}
@@ -690,7 +690,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 					// и назначаем основным
 					!$this->isRuRuExist()
 				||
-					rm_loc()->needSetAsPrimary()
+					df_loc()->needSetAsPrimary()
 			;
 		}
 		return $result;

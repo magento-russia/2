@@ -51,7 +51,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 	public function getJsPriceFormat() {
 		/** @var array(string => string|int) $result */
 		$result = parent::getJsPriceFormat();
-		if (rm_loc()->needHideDecimals()) {
+		if (df_loc()->needHideDecimals()) {
 			$result['requiredPrecision'] = 0;
 		}
 		return $result;
@@ -81,7 +81,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 		ksort($zones);
 		foreach ($zones as $code => $name) {
 			$name = trim($name);
-			$options[]= rm_option($code, empty($name) ? $code : $name . ' (' . $code . ')');
+			$options[]= df_option($code, empty($name) ? $code : $name . ' (' . $code . ')');
 		}
 		return $this->_sortOptionArray($options);
 	}

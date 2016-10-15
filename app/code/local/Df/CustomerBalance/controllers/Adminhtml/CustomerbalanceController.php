@@ -70,5 +70,5 @@ class Df_CustomerBalance_Adminhtml_CustomerbalanceController extends Mage_Adminh
 	 * Check is allowed customer management
 	 * @return bool
 	 */
-	protected function _isAllowed() {return rm_admin_allowed('customer/manage');}
+	protected function _isAllowed() {return df_admin_allowed('customer/manage');}
 }

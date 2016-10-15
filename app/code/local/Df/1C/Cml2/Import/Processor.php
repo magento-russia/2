@@ -23,7 +23,7 @@ abstract class Df_1C_Cml2_Import_Processor extends Df_1C_Cml2 {
 	 * @used-by Df_1C_Cml2_Import_Processor_Product_Type::getTierPricesInImporterFormat()
 	 * @return Df_Core_Model_StoreM
 	 */
-	protected function store() {return rm_state()->getStoreProcessed();}
+	protected function store() {return df_state()->getStoreProcessed();}
 
 	/**
 	 * @used-by Df_1C_Cml2_Import_Processor_Category::process()

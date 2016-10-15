@@ -9,7 +9,7 @@ class Df_Core_Observer {
 			if (file_exists($this->getJustInstalledFlagFilePath())) {
 				unlink($this->getJustInstalledFlagFilePath());
 				Df_Core_Setup_FirstRun::i()->process();
-				Mage::dispatchEvent('rm__magento_ce_has_just_been_installed');
+				Mage::dispatchEvent('df__magento_ce_has_just_been_installed');
 			}
 		}
 		catch (Exception $e) {
@@ -28,7 +28,7 @@ class Df_Core_Observer {
 	 * @return void
 	 */
 	public function controller_action_layout_generate_blocks_after() {
-		rm_state()->blocksHasBeenGenerated();
+		df_state()->blocksHasBeenGenerated();
 	}
 
 	/**
@@ -36,12 +36,12 @@ class Df_Core_Observer {
 	 * @return void
 	 */
 	public function controller_action_layout_generate_blocks_before() {
-		rm_state()->blocksGenerationStarted();
+		df_state()->blocksGenerationStarted();
 	}
 
 	/** @return void */
 	public function controller_action_layout_render_before() {
-		try {rm_state()->layoutRenderingHasBeenStarted();}
+		try {df_state()->layoutRenderingHasBeenStarted();}
 		catch(Exception $e) {df_handle_entry_point_exception($e);}
 	}
 
@@ -72,7 +72,7 @@ class Df_Core_Observer {
 		// «Notice: The language 'en_US' has to be added before it can be used.»
 		@Zend_Registry::set('Zend_Translate', Mage::app()->getTranslator()->getTranslate());
 		try {
-			rm_state()->setController($o['controller_action']);
+			df_state()->setController($o['controller_action']);
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
@@ -117,7 +117,7 @@ class Df_Core_Observer {
 	 */
 	public function core_block_abstract_to_html_after() {
 		try {
-			rm_state()->blockSetPrev();
+			df_state()->blockSetPrev();
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
@@ -131,7 +131,7 @@ class Df_Core_Observer {
 	 */
 	public function core_block_abstract_to_html_before(Varien_Event_Observer $o) {
 		try {
-			rm_state()->blockSet($o['block']);
+			df_state()->blockSet($o['block']);
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
@@ -159,7 +159,7 @@ class Df_Core_Observer {
 	/** @return string */
 	private function getJustInstalledFlagFilePath() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::getBaseDir('var') . '/log/rm__magento_ce_has_just_been_installed';
+			$this->{__METHOD__} = Mage::getBaseDir('var') . '/log/df__magento_ce_has_just_been_installed';
 		}
 		return $this->{__METHOD__};
 	}
@@ -204,11 +204,11 @@ class Df_Core_Observer {
 			,'kupiinosi.ru'
 			,'largomoda.ru'
 		);
-		if (rm_controller()) {
+		if (df_controller()) {
 			/** @var bool $domainIsBlacklisted */
 			$domainIsBlacklisted =
-				in_array(rm_controller()->getRequest()->getHttpHost(), $blackDomains)
-				|| df_contains(rm_controller()->getRequest()->getHttpHost(), 'garno.eu')
+				in_array(df_controller()->getRequest()->getHttpHost(), $blackDomains)
+				|| df_contains(df_controller()->getRequest()->getHttpHost(), 'garno.eu')
 			;
 			if ($domainIsBlacklisted) {
 				$needPunish = true;

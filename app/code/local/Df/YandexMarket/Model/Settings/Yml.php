@@ -17,7 +17,7 @@ abstract class Df_YandexMarket_Model_Settings_Yml extends Df_Core_Model_Settings
 			 * (например, при подсказке администратору категории товарного предложения
 			 * или при заполнении покупателем адреса).
 			 */
-			$result = rm_state()->getStoreProcessed($needThrow = false);
+			$result = df_state()->getStoreProcessed($needThrow = false);
 			if (!$result) {
 				$result = parent::store();
 			}

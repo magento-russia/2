@@ -44,7 +44,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			else {
 				foreach ($currenciesAllowedInSystem as $option) {
 					/** @var array(string => string) $option */
-					if (in_array(rm_option_v($option), $this->constManager()->getAllowedCurrencyCodes())) {
+					if (in_array(df_option_v($option), $this->constManager()->getAllowedCurrencyCodes())) {
 						$result[]= $option;
 					}
 				}
@@ -65,7 +65,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			/** @var Df_Localization_Helper_Locale $helper */
 			$helper = Df_Localization_Helper_Locale::s();
 			foreach ($this->constManager()->getAllowedLocaleCodes() as $code) {
-				$result[]= rm_option($code, dfa($languages, $helper->getLanguageCodeByLocaleCode($code)));
+				$result[]= df_option($code, dfa($languages, $helper->getLanguageCodeByLocaleCode($code)));
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -107,7 +107,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	public function getDisabledPaymentMethods() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_diff(
-				rm_option_values($this->getAvailablePaymentMethodsAsOptionArray())
+				df_option_values($this->getAvailablePaymentMethodsAsOptionArray())
 				,$this->getSelectedPaymentMethods()
 			);
 		}
@@ -259,7 +259,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			df_assert_string($resultAsString);
 			$this->{__METHOD__} =
 				Df_Admin_Config_Form_Element_Multiselect::isAll($resultAsString)
-				? rm_option_values($this->getAvailablePaymentMethodsAsOptionArray())
+				? df_option_values($this->getAvailablePaymentMethodsAsOptionArray())
 				: df_csv_parse($resultAsString)
 			;
 			df_result_array($this->{__METHOD__});

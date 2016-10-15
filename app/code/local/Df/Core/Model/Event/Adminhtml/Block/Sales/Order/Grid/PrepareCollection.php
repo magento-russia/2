@@ -1,11 +1,11 @@
 <?php
 /**
- * Cообщение:		«rm_adminhtml_block_sales_order_grid__prepare_collection»
+ * Cообщение:		«df_adminhtml_block_sales_order_grid__prepare_collection»
  * Источник:		Df_Adminhtml_Block_Sales_Order_Grid::setCollection()
  * [code]
 		Mage
 			::dispatchEvent(
-				'rm_adminhtml_block_sales_order_grid__prepare_collection'
+				'df_adminhtml_block_sales_order_grid__prepare_collection'
 				,array(
 					'collection' => $collection
 				)
@@ -25,14 +25,14 @@ class Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection
 	protected function getExpectedEventPrefix() {return self::$EVENT;}
 
 	/**
-	 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_collection()
+	 * @used-by Df_Sales_Observer::df_adminhtml_block_sales_order_grid__prepare_collection()
 	 * @used-by Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::getEventClass()
 	 */
 
 	/** @var string  */
 	private static $E__COLLECTION = 'collection';
 	/** @var string */
-	private static $EVENT = 'rm_adminhtml_block_sales_order_grid__prepare_collection';
+	private static $EVENT = 'df_adminhtml_block_sales_order_grid__prepare_collection';
 
 	/**
 	 * @param Varien_Data_Collection|Mage_Sales_Model_Resource_Order_Grid_Collection|Mage_Sales_Model_Mysql4_Order_Collection $collection

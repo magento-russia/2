@@ -6,7 +6,7 @@ class Df_Core_Model_Design_Package extends Df_Core_Model {
 	}
 
 	/** @return string */
-	public function getName() {return rm_design_package()->getPackageName();}
+	public function getName() {return df_design_package()->getPackageName();}
 
 	/** @return bool */
 	public function hasConfiguration() {return !!$this->getPackageConfig();}
@@ -20,8 +20,8 @@ class Df_Core_Model_Design_Package extends Df_Core_Model {
 	/** @return array(string => mixed) */
 	private function getPackageConfig() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->isCustom() ? array() : rm_config_a(
-				'rm/design/package', rm_design_package()->getPackageName()
+			$this->{__METHOD__} = !$this->isCustom() ? array() : df_config_a(
+				'rm/design/package', df_design_package()->getPackageName()
 			);
 		}
 		return $this->{__METHOD__};

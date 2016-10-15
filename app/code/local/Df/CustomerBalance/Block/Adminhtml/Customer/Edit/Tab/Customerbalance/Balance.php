@@ -32,9 +32,9 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Balan
 				Mage::registry('current_customer')->getId()
 			)
 			? ''
-			: rm_admin_button(array(
+			: df_admin_button(array(
 				'label' => Df_CustomerBalance_Helper_Data::s()->__('Delete Orphan Balances')
-				,'onclick' => rm_admin_button_location($this->getDeleteOrphanBalancesUrl())
+				,'onclick' => df_admin_button_location($this->getDeleteOrphanBalancesUrl())
 				,'class' => 'scalable delete'
 			))
 		;

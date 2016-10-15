@@ -10,7 +10,7 @@ class Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency
 	 * @return string
 	 */
 	public function render(Varien_Object $row) {
-		return rm_loc()->needHideDecimals() ? $this->renderDf($row) : parent::render($row);
+		return df_loc()->needHideDecimals() ? $this->renderDf($row) : parent::render($row);
 	}
 
 	/**

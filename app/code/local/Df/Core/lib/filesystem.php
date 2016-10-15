@@ -16,7 +16,7 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
  * Результатом всегда является непустая строка.
  * @used-by Autostyler_Import_Model_Action::getLogFilePath()
  * @used-by Df_1C_Helper_Data::logger()
- * @used-by rm_report()
+ * @used-by df_report()
  * @used-by Df_Core_Model_Action::getResponseLogFileName()
  * @used-by \Df\Xml\Generator\Document::createLogger()
  * @used-by Df_YandexMarket_Helper_Data::getLogger()

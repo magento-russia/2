@@ -191,7 +191,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 				(1 === count($categoryIds))
 				? df_first($categoryIds)
 				: df_first(array_diff(
-					$categoryIds, array(rm_state()->getStoreProcessed()->getRootCategoryId())
+					$categoryIds, array(df_state()->getStoreProcessed()->getRootCategoryId())
 				))
 			)
 		;

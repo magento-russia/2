@@ -14,7 +14,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Url
 	 * @override
 	 * @return string
 	 */
-	protected function getИд() {return 'rm__url';}
+	protected function getИд() {return 'df__url';}
 
 	/**
 	 * @override

@@ -11,7 +11,7 @@ class Df_Eav_Observer {
 			// а не в обработчике события.
 			// Это позволяет нам не создавать обработчики событий для каждой коллекции.
 			$collection = $o['collection'];
-			if (rm_loc()->isEnabled() && self::isEntityAttributeCollection($collection)) {
+			if (df_loc()->isEnabled() && self::isEntityAttributeCollection($collection)) {
 				/** @uses Df_Eav_Model_Translator::translateAttribute() */
 				df_map(array(Df_Eav_Model_Translator::s(), 'translateAttribute'), $collection);
 			}
@@ -28,7 +28,7 @@ class Df_Eav_Observer {
 	 */
 	public function eav_entity_attribute_load_after(Varien_Event_Observer $o) {
 		try {
-			if (rm_loc()->isEnabled()) {
+			if (df_loc()->isEnabled()) {
 				Df_Eav_Model_Translator::s()->translateAttribute($o['attribute']);
 			}
 		}

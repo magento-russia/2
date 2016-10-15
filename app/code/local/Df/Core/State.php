@@ -29,7 +29,7 @@ class Df_Core_State {
 	public function blockSetPrev() {array_pop($this->_blockStack);}
 
 	/**
-	 * @used-by rm_controller()
+	 * @used-by df_controller()
 	 * @return Mage_Core_Controller_Varien_Action|null
 	 */
 	public function getController() {return $this->_controller;}
@@ -76,7 +76,7 @@ class Df_Core_State {
 	/** @return string */
 	public function getCurrentDesignPackage() {
 		/** @var string $result */
-		$result = rm_design_package()->getPackageName();
+		$result = df_design_package()->getPackageName();
 		if (!$result) {
 			$result = Mage_Core_Model_Design_Package::DEFAULT_PACKAGE;
 		}
@@ -86,7 +86,7 @@ class Df_Core_State {
 	/** @return string */
 	public function getCurrentDesignTheme() {
 		/** @var string $result */
-		$result = rm_design_package()->getTheme('default');
+		$result = df_design_package()->getTheme('default');
 		if (!$result) {
 			$result = Mage_Core_Model_Design_Package::DEFAULT_THEME;
 		}
@@ -135,10 +135,10 @@ class Df_Core_State {
 				 * 2) http://localhost.com:686/df-1c/cml2/index/store-view/store_686/
 				 */
 				/** @var string $storeCode */
-				$storeCode = rm_request('store-view');
+				$storeCode = df_request('store-view');
 				if (is_null($storeCode)) {
 					$storeCode = df_preg_match(
-						'#\/store\-view\/([^\/]+)\/#u', rm_ruri(), $needThrow = false
+						'#\/store\-view\/([^\/]+)\/#u', df_ruri(), $needThrow = false
 					);
 				}
 				if (!$storeCode) {

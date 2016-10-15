@@ -28,7 +28,7 @@ class Df_Eav_Model_Config extends Mage_Eav_Model_Config {
 					 * Раньше тут стояло еще условие:
 					  &&
 							(
-									(rm_eav_id_product() !== intval($entityType->getId()))
+									(df_eav_id_product() !== intval($entityType->getId()))
 								||
 									!array_diff($resultFromCache, $this->_cachedProductAttributeCodes)
 							)

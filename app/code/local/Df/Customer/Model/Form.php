@@ -25,11 +25,11 @@ class Df_Customer_Model_Form extends Mage_Customer_Model_Form {
 			if ($this->getEntity() instanceof Mage_Customer_Model_Address_Abstract) {
 				$result = $this->getEntity();
 			}
-			else if (rm_ruri_contains('saveBilling')) {
-				$result = rm_quote_address_billing();
+			else if (df_ruri_contains('saveBilling')) {
+				$result = df_quote_address_billing();
 			}
-			else if (rm_ruri_contains('saveShipping')) {
-				$result = rm_quote_address_shipping();
+			else if (df_ruri_contains('saveShipping')) {
+				$result = df_quote_address_shipping();
 			}
 			$this->{__METHOD__} = df_n_set($result);
 		}

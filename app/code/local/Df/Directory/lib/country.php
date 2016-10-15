@@ -4,11 +4,11 @@
  * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
  * @return Df_Directory_Model_Resource_Country_Collection
  */
-function rm_countries($allowedOnly = false, $store = null) {
+function df_countries($allowedOnly = false, $store = null) {
 	return
 		!$allowedOnly
 		? Df_Directory_Model_Resource_Country_Collection::s()
-		: rm_countries_allowed($store)
+		: df_countries_allowed($store)
 	;
 }
 
@@ -16,7 +16,7 @@ function rm_countries($allowedOnly = false, $store = null) {
  * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
  * @return Df_Directory_Model_Resource_Country_Collection
  */
-function rm_countries_allowed($store = null) {
+function df_countries_allowed($store = null) {
 	/** @var array(int => Df_Directory_Model_Resource_Country_Collection) $cache */
 	static $cache;
 	/** @var int $storeId */
@@ -40,13 +40,13 @@ function rm_countries_allowed($store = null) {
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return array(string => string)
  */
-function rm_countries_ctn($locale = null) {return rm_countries()->getMapFromCodeToName($locale);}
+function df_countries_ctn($locale = null) {return df_countries()->getMapFromCodeToName($locale);}
 
 /**
- * @uses rm_countries_ctn()
+ * @uses df_countries_ctn()
  * @return array(string => string)
  */
-function rm_countries_ctn_ru() {return rm_countries_ctn('ru_RU');}
+function df_countries_ctn_ru() {return df_countries_ctn('ru_RU');}
 
 /**
  * Возвращает массив,
@@ -62,13 +62,13 @@ function rm_countries_ctn_ru() {return rm_countries_ctn('ru_RU');}
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return array(string => string)
  */
-function rm_countries_ctn_uc($locale = null) {return rm_countries()->getMapFromCodeToNameUc($locale);}
+function df_countries_ctn_uc($locale = null) {return df_countries()->getMapFromCodeToNameUc($locale);}
 
 /**
- * @uses rm_countries_ctn_uc()
+ * @uses df_countries_ctn_uc()
  * @return array(string => string)
  */
-function rm_countries_ctn_uc_ru() {return rm_countries_ctn_uc('ru_RU');}
+function df_countries_ctn_uc_ru() {return df_countries_ctn_uc('ru_RU');}
 
 /**
  * Возвращает массив,
@@ -84,13 +84,13 @@ function rm_countries_ctn_uc_ru() {return rm_countries_ctn_uc('ru_RU');}
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return array(string => string)
  */
-function rm_countries_ntc($locale = null) {return rm_countries()->getMapFromNameToCode($locale);}
+function df_countries_ntc($locale = null) {return df_countries()->getMapFromNameToCode($locale);}
 
 /**
- * @uses rm_countries_ntc()
+ * @uses df_countries_ntc()
  * @return array(string => string)
  */
-function rm_countries_ntc_ru() {return rm_countries_ntc('ru_RU');}
+function df_countries_ntc_ru() {return df_countries_ntc('ru_RU');}
 
 /**
  * Возвращает массив,
@@ -106,13 +106,13 @@ function rm_countries_ntc_ru() {return rm_countries_ntc('ru_RU');}
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return array(string => string)
  */
-function rm_countries_ntc_uc($locale = null) {return rm_countries()->getMapFromNameToCodeUc($locale);}
+function df_countries_ntc_uc($locale = null) {return df_countries()->getMapFromNameToCodeUc($locale);}
 
 /**
- * @uses rm_countries_ntc_uc()
+ * @uses df_countries_ntc_uc()
  * @return array(string => string)
  */
-function rm_countries_ntc_uc_ru() {return rm_countries_ntc_uc('ru_RU');}
+function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
 
 /**
  * $emptyLabel задаёт заголовок пустой опции.
@@ -121,8 +121,8 @@ function rm_countries_ntc_uc_ru() {return rm_countries_ntc_uc('ru_RU');}
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return array(array(string => string))
  */
-function rm_countries_options($emptyLabel = ' ', $locale = null) {
-	return rm_countries()->toOptionArrayRmCached($emptyLabel, $locale, $groupAndOrder = true);
+function df_countries_options($emptyLabel = ' ', $locale = null) {
+	return df_countries()->toOptionArrayRmCached($emptyLabel, $locale, $groupAndOrder = true);
 }
 
 /**
@@ -132,12 +132,12 @@ function rm_countries_options($emptyLabel = ' ', $locale = null) {
  * @param bool $throw [optional]
  * @return Df_Directory_Model_Country|null
  */
-function rm_country($iso2, $throw = true) {
+function df_country($iso2, $throw = true) {
 	/** @var array(string => Df_Directory_Model_Country|string) */
 	static $cache;
 	if (!isset($cache[$iso2])) {
 		/** @var Df_Directory_Model_Country|null $result */
-		$result = !df_check_iso2($iso2) ? null : rm_countries()->getItemById($iso2);
+		$result = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
 		if ($result) {
 			df_assert($result instanceof Df_Directory_Model_Country);
 		}
@@ -157,10 +157,10 @@ function rm_country($iso2, $throw = true) {
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return string
  */
-function rm_country_ctn($iso2, $locale = null) {
+function df_country_ctn($iso2, $locale = null) {
 	df_param_iso2($iso2, 0);
 	/** @var string $result */
-	$result = dfa(rm_countries_ctn($locale), $iso2);
+	$result = dfa(df_countries_ctn($locale), $iso2);
 	if (!$result) {
 		df_error(
 			'Система не смогла узнать название страны с кодом «%s» для локали «%s».'
@@ -172,11 +172,11 @@ function rm_country_ctn($iso2, $locale = null) {
 }
 
 /**
- * @uses rm_country_ctn()
+ * @uses df_country_ctn()
  * @param string $iso2
  * @return string
  */
-function rm_country_ctn_ru($iso2) {return rm_country_ctn($iso2, 'ru_RU');}
+function df_country_ctn_ru($iso2) {return df_country_ctn($iso2, 'ru_RU');}
 
 /**
  * Возвращает 2-буквенный код страны по стандарту ISO 3166-1 alpha-2
@@ -186,15 +186,15 @@ function rm_country_ctn_ru($iso2) {return rm_country_ctn($iso2, 'ru_RU');}
  * @param Mage_Core_Model_Locale|string|null $locale [optional]
  * @return string|null
  */
-function rm_country_ntc($name, $locale = null) {
+function df_country_ntc($name, $locale = null) {
 	df_param_string_not_empty($name, 0);
-	return dfa(rm_countries_ntc($locale), mb_strtoupper(df_trim($name)));
+	return dfa(df_countries_ntc($locale), mb_strtoupper(df_trim($name)));
 }
 
 /**
- * @uses rm_country_ntc()
+ * @uses df_country_ntc()
  * @param string $name
  * @return string|null
  */
-function rm_country_ntc_ru($name) {return rm_country_ntc($name, 'ru_RU');}
+function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
 

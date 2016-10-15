@@ -32,7 +32,7 @@ class Df_Admin_Config_Source_HideFromAnonymous extends Df_Admin_Config_Source {
 	public static function needHide($value) {
 		return
 			self::$V__HIDE === (int)$value
-			|| !rm_customer_logged_in() && self::$V__HIDE_FROM_ANONYMOUS === $value
+			|| !df_customer_logged_in() && self::$V__HIDE_FROM_ANONYMOUS === $value
 		;
 	}
 }

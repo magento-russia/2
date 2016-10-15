@@ -94,7 +94,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 	 */
 	public function getDefaultCountry($store = null)  {
 		/** @var string|null $result */
-		$result = df_is_admin() ? null : rm_visitor_location()->getCountryIso2();
+		$result = df_is_admin() ? null : df_visitor_location()->getCountryIso2();
 		/**
 		 * Не вызываем родительский метод @see Mage_Core_Helper_Data::getDefaultCountry(),
 		 * потому что он отсутствует в Magento 1.4.0.1.

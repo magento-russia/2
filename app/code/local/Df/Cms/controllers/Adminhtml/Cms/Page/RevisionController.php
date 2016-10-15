@@ -254,7 +254,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			$data = $this->_filterPostData($data);
 			// init model and set data
 			$revision = $this->_initRevision();
-			$revision->setData($data)->setUserId(rm_admin_id());
+			$revision->setData($data)->setUserId(df_admin_id());
 			// try to save it
 			try {
 				// save the data
@@ -318,7 +318,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 		}
 		/** @var Df_Cms_Model_Page_Revision $revision */
 		$revision = Df_Cms_Model_Page_Revision::i();
-		$userId = rm_admin_id();
+		$userId = df_admin_id();
 		$accessLevel = Df_Cms_Model_Config::s()->getAllowedAccessLevel();
 		if ($revisionId) {
 			$revision->loadWithRestrictions($accessLevel, $userId, $revisionId);
@@ -354,7 +354,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				$result = Df_Cms_Model_Config::s()->canCurrentUserDeleteRevision();
 				break;
 			default:
-				$result = rm_admin_allowed('cms/page');
+				$result = df_admin_allowed('cms/page');
 				break;
 		}
 		return $result;

@@ -32,7 +32,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return bool
 	 */
-	protected function needToShow() {return rm_customer_logged_in();}
+	protected function needToShow() {return df_customer_logged_in();}
 
 	/**
 	 * 2015-02-06
@@ -61,7 +61,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 			 */
 			foreach ($this->getTypeAddresses() as $address) {
 				/** @var Df_Customer_Model_Address $address */
-				$result[]= rm_option($address->getId(), $address->format('oneline'));
+				$result[]= df_option($address->getId(), $address->format('oneline'));
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -156,7 +156,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(int => Df_Customer_Model_Address) $result */
 			$result = $this->getCustomer()->getAddresses();
-			if (rm_checkout_ergonomic()) {
+			if (df_checkout_ergonomic()) {
 				/** @var Df_Checkout_Model_Filter_Ergonomic_Address $filter */
 				$filter = Df_Checkout_Model_Filter_Ergonomic_Address::i($this->getAddressType());
 				$result = $filter->filter($result);

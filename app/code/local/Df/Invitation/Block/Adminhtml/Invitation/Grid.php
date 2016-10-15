@@ -56,7 +56,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_Grid extends Mage_Adminhtml_Block
 					,'index' => 'invitee_email'
 					,'type' => 'text'
 					,'renderer' =>
-						rm_admin_allowed('customer/manage')
+						df_admin_allowed('customer/manage')
 						? 'df_invitation/adminhtml_invitation_grid_column_invitee'
 						: false
 				)

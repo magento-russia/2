@@ -2,7 +2,7 @@
 class Df_1C_Cml2_Import_Data_Entity_OfferPart_Price extends Df_1C_Cml2_Import_Data_Entity {
 	/** @return string */
 	public function getCurrencyCode() {
-		return rm_1c_currency_code_to_magento_format($this->leafSne('Валюта'));
+		return df_1c_currency_code_to_magento_format($this->leafSne('Валюта'));
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_Price extends Df_1C_Cml2_Import_Da
 			$this->{__METHOD__} = df_n_set(
 				is_null($this->getPrice())
 				? null
-				: rm_currency_h()->convertToBase($this->getPrice(), $this->getCurrencyCode())
+				: df_currency_h()->convertToBase($this->getPrice(), $this->getCurrencyCode())
 			);
 		}
 		return df_n_get($this->{__METHOD__});

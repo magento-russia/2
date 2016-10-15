@@ -39,7 +39,7 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 				$duration = df_cfg()->reports()->common()->getPeriodDuration();
 				foreach ($configDuration->toOptionArray() as $option) {
 					/** @var array(string => string) $option */
-					if ($duration === rm_option_v($option))  {
+					if ($duration === df_option_v($option))  {
 						/** @var array(string => int|string) $duration */
 						$result = dfa(
 							$option

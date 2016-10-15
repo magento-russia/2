@@ -77,7 +77,7 @@ class Df_Logging_Model_Handler_Controllers
 		/** @var Df_Logging_Model_Event_Changes $change */
 		$change = Df_Logging_Model_Event_Changes::i();
 		//Collect skip encrypted fields
-		$encryptedNodeEntriesPaths = rm_config_adminhtml()->getEncryptedNodeEntriesPaths(true);
+		$encryptedNodeEntriesPaths = df_config_adminhtml()->getEncryptedNodeEntriesPaths(true);
 		$skipEncrypted = array();
 		foreach ($encryptedNodeEntriesPaths as $fieldName) {
 			$skipEncrypted[]= $fieldName['field'];

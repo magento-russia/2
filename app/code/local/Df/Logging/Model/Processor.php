@@ -88,13 +88,13 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		 * customer page.
 		 */
 		/** @var bool $doNotLog */
-		$doNotLog = rm_admin_session()->getSkipLoggingAction();
+		$doNotLog = df_admin_session()->getSkipLoggingAction();
 		if ($doNotLog) {
 			if (is_array($doNotLog)) {
 				$key = array_search($fullActionName, $doNotLog);
 				if ($key !== false) {
 					unset($doNotLog[$key]);
-					rm_admin_session()->setSkipLoggingAction($doNotLog);
+					df_admin_session()->setSkipLoggingAction($doNotLog);
 					$this->_skipNextAction = true;
 					return;
 				}
@@ -102,7 +102,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		}
 		if (isset($this->_eventConfig->{'skip_on_back'})) {
 			$addValue = array_keys($this->_eventConfig->{'skip_on_back'}->asArray());
-			$sessionValue = rm_admin_session()->getSkipLoggingAction();
+			$sessionValue = df_admin_session()->getSkipLoggingAction();
 			if (!is_array($sessionValue) && $sessionValue) {
 				$sessionValue = df_csv_parse($sessionValue);
 			}
@@ -110,7 +110,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 				$sessionValue = array();
 			}
 			$merge = array_merge($addValue, $sessionValue);
-			rm_admin_session()->setSkipLoggingAction($merge);
+			df_admin_session()->setSkipLoggingAction($merge);
 		}
 	}
 
@@ -123,12 +123,12 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			return;
 		}
 		/** @var string|null $username */
-		$username = rm_admin_name(false);
+		$username = df_admin_name(false);
 		/** @var int|null $userId */
-		$userId = rm_admin_id(false);
+		$userId = df_admin_id(false);
 		$errors = df_model('adminhtml/session')->getMessages()->getErrors();
 		$loggingEvent = df_model('df_logging/event')->setData(array(
-			'ip' => rm_visitor_ip()
+			'ip' => df_visitor_ip()
 			,'x_forwarded_ip' => Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_FOR')
 			,'user' => $username
 			,'user_id' => $userId

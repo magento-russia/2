@@ -17,7 +17,7 @@ class Df_Directory_Block_Field_CountriesOrdered extends Df_Admin_Block_Field_Dyn
 		$this->addColumnRm(Df_Admin_Config_DynamicTable_Column_Select::i(
 			Df_Directory_Config_MapItem_Country::P__ISO2
 			, 'страна'
-			, rm_countries_options('-- выберите страну --')
+			, df_countries_options('-- выберите страну --')
 			, array()
 			, array('width' => 180, 'dropdownCss' => array('width' => 200))
 		));

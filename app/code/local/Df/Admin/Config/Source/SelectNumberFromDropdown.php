@@ -23,7 +23,7 @@ class Df_Admin_Config_Source_SelectNumberFromDropdown extends Df_Admin_Config_So
 		/** @var int $step */
 		$step = df_nat0($this->getFieldParam('df_step', 1));;
 		for ($i = $this->getMin(); $i <= $max; $i += $step) {
-			$result[]= rm_option($i, $i);
+			$result[]= df_option($i, $i);
 		}
 		return $result;
 	}

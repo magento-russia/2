@@ -27,8 +27,8 @@ class Df_Assist_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			,'TestMode' => df_01($this->getMethod()->isTestMode())
 			,'RecurringIndicator' => 0
 			,'Merchant_ID' => $this->shopId()
-			,'URL_RETURN_OK' => rm_url_checkout_success()
-			,'URL_RETURN_NO' => rm_url_checkout_fail()
+			,'URL_RETURN_OK' => df_url_checkout_success()
+			,'URL_RETURN_NO' => df_url_checkout_fail()
 		);
 	}
 }

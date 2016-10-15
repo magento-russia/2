@@ -7,7 +7,7 @@ class Df_Catalog_Model_Resource_Product_Flat_Indexer
 	 * @override
 	 * @return string[]
 	 */
-	public function getAttributeCodes() {return rm_eav_cache($this, __FUNCTION__);}
+	public function getAttributeCodes() {return df_eav_cache($this, __FUNCTION__);}
 
 	/**
 	 * @see getAttributeCodes()

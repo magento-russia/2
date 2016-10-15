@@ -13,7 +13,7 @@ class Df_Customer_Model_Resource_Customer extends Mage_Customer_Model_Entity_Cus
 	/** @return array(int => string) */
 	public function getMapFromGenderIdToGenderName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_options_to_map($this->getGenderOptions());
+			$this->{__METHOD__} = df_options_to_map($this->getGenderOptions());
 		}
 		return $this->{__METHOD__};
 	}

@@ -27,7 +27,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 				,$ordering
 			);
 		}
-		rm_eav_reset();
+		df_eav_reset();
 	}
 
 	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
@@ -75,12 +75,12 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 	 */
 	private function getAttributeAdministrative($code, $label, $ordering, array $params = array()) {
 		if (!isset($this->{__METHOD__}[$code])) {
-			$this->{__METHOD__}[$code] = rm_attributes()->createOrUpdate(
+			$this->{__METHOD__}[$code] = df_attributes()->createOrUpdate(
 				Df_Catalog_Model_Attribute_Preset::administrative($params + array(
 					// Код свойства
 					'attribute_code' => $code
 					// Класс объектов для свойства (товары, покупатели...)
-					,'entity_type_id' => rm_eav_id_product()
+					,'entity_type_id' => df_eav_id_product()
 					,'frontend_label' => $label
 					,'sort_order' => $ordering
 				))

@@ -17,10 +17,10 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 		/** @var Df_Checkout_Model_Settings_Field_Applicability $settings */
 		$settings = df_cfg()->checkout()->applicabilityBilling();
 		if (
-				rm_checkout_ergonomic()
+				df_checkout_ergonomic()
 			&&
 				// Убеждаемся, что покупатель неавторизован
-				!rm_customer_logged_in()
+				!df_customer_logged_in()
 			&&
 				// Убеждаемся, что поля «Пароль» и «Пароль повторно» необязательны для заполнения
 				!$settings->isRequired(Df_Checkout_Const_Field::CUSTOMER_PASSWORD)

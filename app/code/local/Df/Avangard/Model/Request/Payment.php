@@ -78,7 +78,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 				,'client_email' => $this->email()
 				,'client_ip' => $this->getCustomerIpAddress()
 			));
-			rm_report('registration-request-{date}-{time}.xml', $this->{__METHOD__}->getXml());
+			df_report('registration-request-{date}-{time}.xml', $this->{__METHOD__}->getXml());
 		}
 		return $this->{__METHOD__};
 	}
@@ -110,7 +110,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 	private function getResponseAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_xml_parse($this->getHttpResponse()->getBody());
-			rm_report('registration-{date}-{time}.xml', $this->getHttpResponse()->getBody());
+			df_report('registration-{date}-{time}.xml', $this->getHttpResponse()->getBody());
 		}
 		return $this->{__METHOD__};
 	}

@@ -41,6 +41,6 @@ class Df_Admin_Block_Field_Button_Action extends Df_Admin_Block_Field_Button {
 		$action = $this->param('rm_action');
 		/** @var Mage_Core_Model_Url $urlModel */
 		$urlModel = Mage::getModel(('admin' === $area) ? 'adminhtml/url' : 'core/url');
-		return $urlModel->getUrl($action, df_clean(array('store-view' => rm_request('store'))));
+		return $urlModel->getUrl($action, df_clean(array('store-view' => df_request('store'))));
 	}
 }

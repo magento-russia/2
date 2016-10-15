@@ -21,7 +21,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 			$this->log('Термин найден.');
 			$isProcessing = true;
 			try {
-				if (!rm_state()->hasBlocksBeenGenerated()) {
+				if (!df_state()->hasBlocksBeenGenerated()) {
 					if (!Mage::app()->getRequest()->isXmlHttpRequest()) {
 						/**
 						 * Вызов из макета.
@@ -29,7 +29,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 						 * Не помню, почему.
 						 * Надо выяснить и изложить причину в комментарии.
 						 */
-						if (rm_state()->hasBlocksGenerationBeenStarted()) {
+						if (df_state()->hasBlocksGenerationBeenStarted()) {
 							$this->log('блоки создаются');
 							$result = $this->handleForLayout($text, $code);
 						}
@@ -44,7 +44,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 					}
 				}
 				else {
-					if (!rm_state()->hasLayoutRenderingBeenStarted()) {
+					if (!df_state()->hasLayoutRenderingBeenStarted()) {
 						// Вызов из контроллера.
 						$this->log('рисование не началось');
 						$result = $this->handleForController($text, $code);
@@ -52,7 +52,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 					else {
 						// Вызов из шаблона.
 						$this->log('рисование шаблона');
-						if (rm_state()->block()) {
+						if (df_state()->block()) {
 							$result = $this->handleForTemplate($text, $code);
 						}
 						if (is_null($result)) {
@@ -165,7 +165,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 		/** @var string $result */
 		$result = null;
 		/** @var Mage_Core_Controller_Varien_Action|null $controller */
-		$controller = rm_controller();
+		$controller = df_controller();
 		if ($controller) {
 			/** @var string|null $currentModuleName */
 			/**
@@ -184,7 +184,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 				 * например: «checkout_onepage_index»
 				 * @var string $currentControllerAction
 				 */
-				$currentControllerAction = rm_action_name();
+				$currentControllerAction = df_action_name();
 				foreach ($currentModule->getControllers() as $entry) {
 					/** @var Df_Localization_Realtime_Dictionary_ModulePart_Controller $entry */
 					if ($this->_continue($entry->getAction(), $currentControllerAction)
@@ -235,7 +235,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 		/** @var string $result */
 		$result = null;
 		/** @var Mage_Core_Block_Abstract|null $currentBlock */
-		$currentBlock = rm_state()->block();
+		$currentBlock = df_state()->block();
 		/** @var string|null $currentModuleName */
 		$currentModuleName =
 			/**

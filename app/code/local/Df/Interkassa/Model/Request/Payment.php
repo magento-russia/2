@@ -18,8 +18,8 @@ class Df_Interkassa_Model_Request_Payment extends Df_Payment_Model_Request_Payme
 			,'ik_paysystem_alias' => ''
 			,'ik_shop_id' => $this->shopId()
 			,'ik_status_url' => $this->urlConfirm()
-			,'ik_success_url' => rm_url_checkout_success()
-			,'ik_fail_url' => rm_url_checkout_fail()
+			,'ik_success_url' => df_url_checkout_success()
+			,'ik_fail_url' => df_url_checkout_fail()
 		);
 	}
 }

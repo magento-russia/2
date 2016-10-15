@@ -56,7 +56,7 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 		$result = null;
 		try {
 			$convertedPrice =
-				rm_currency_h()->getBase()->convert(
+				df_currency_h()->getBase()->convert(
 					$this->getBaseGrandTotal()
 					,$this->method()->getChronopayCurrency()
 				)

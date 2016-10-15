@@ -143,8 +143,6 @@ function df_notify($message) {
 		$arguments = func_get_args();
 		\Df\Qa\Message\Notification::i(array(
 			\Df\Qa\Message\Notification::P__NOTIFICATION => df_format($arguments)
-			,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => true
-			,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => true
 		))->log();
 	}
 }
@@ -163,10 +161,6 @@ function df_notify_admin($message, $doLog = true) {
 	}
 	\Df\Qa\Message\Notification::i(array(
 		\Df\Qa\Message\Notification::P__NOTIFICATION => $message
-		,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => $doLog
-		,\Df\Qa\Message\Notification::P__FILE_NAME => 'rm.admin.log'
-		,\Df\Qa\Message\Notification::P__NEED_NOTIFY_ADMIN => true
-		,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => false
 	))->log();
 }
 
@@ -184,8 +178,6 @@ function df_notify_exception($exception, $additionalMessage = null) {
 	\Df\Qa\Message\Failure\Exception::i(array(
 		\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $exception
 		,\Df\Qa\Message\Failure\Exception::P__ADDITIONAL_MESSAGE => $additionalMessage
-		,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => true
-		,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => true
 	))->log();
 }
 
@@ -203,9 +195,6 @@ function df_notify_me($message, $doLog = true) {
 	}
 	\Df\Qa\Message\Notification::i(array(
 		\Df\Qa\Message\Notification::P__NOTIFICATION => $message
-		,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => $doLog
-		,\Df\Qa\Message\Notification::P__FILE_NAME => 'rm.developer.log'
-		,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => true
 	))->log();
 }
 
@@ -273,7 +262,7 @@ function df_version() {
 	static $result;
 	if (!$result) {
 		/** @var string $result */
-		$result = df_leaf_sne(rm_config_node('df/version'));
+		$result = df_leaf_sne(df_config_node('df/version'));
 	}
 	return $result;
 }

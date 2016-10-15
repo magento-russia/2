@@ -1,6 +1,6 @@
 <?php
 /**
- * Cообщение:		«rm_adminhtml_block_sales_order_grid__prepare_columns_after»
+ * Cообщение:		«df_adminhtml_block_sales_order_grid__prepare_columns_after»
  * Источник:		Df_Adminhtml_Block_Sales_Order_Grid::_prepareColumns()
  * [code]
 		Mage::dispatchEvent(
@@ -20,12 +20,12 @@ class Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter
 	protected function getExpectedEventPrefix() {return self::EVENT;}
 
 	/**
-	 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_columns_after()
+	 * @used-by Df_Sales_Observer::df_adminhtml_block_sales_order_grid__prepare_columns_after()
 	 * @used-by Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn::getEventClass()_
 	 */
 
 	/**
 	 * @used-by Df_Adminhtml_Block_Sales_Order_Grid::_prepareColumns()
 	 */
-	const EVENT = 'rm_adminhtml_block_sales_order_grid__prepare_columns_after';
+	const EVENT = 'df_adminhtml_block_sales_order_grid__prepare_columns_after';
 }

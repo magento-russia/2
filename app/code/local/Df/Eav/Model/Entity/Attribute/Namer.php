@@ -37,7 +37,7 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 	}
 
 	/** @return int */
-	private function getEntityTypeId() {return $this->cfg(self::P__ENTITY_TYPE_ID, rm_eav_id_product());}
+	private function getEntityTypeId() {return $this->cfg(self::P__ENTITY_TYPE_ID, df_eav_id_product());}
 
 	/** @return string */
 	private function getNameDesired() {return $this->cfg(self::P__NAME_DESIRED);}

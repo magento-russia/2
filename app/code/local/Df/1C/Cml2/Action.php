@@ -19,7 +19,7 @@ abstract class Df_1C_Cml2_Action extends Df_Core_Model_Action {
 	 * @used-by Df_Core_Model_Action::checkAccessRights()
 	 * @return bool
 	 */
-	protected function isModuleEnabledByAdmin() {return rm_1c_cfg()->general()->isEnabled();}
+	protected function isModuleEnabledByAdmin() {return df_1c_cfg()->general()->isEnabled();}
 
 	/**
 	 * @override
@@ -97,7 +97,7 @@ abstract class Df_1C_Cml2_Action extends Df_Core_Model_Action {
 	 * @used-by Df_Core_Model_Action::getStoreConfig()
 	 * @return Df_Core_Model_StoreM
 	 */
-	protected function store() {return rm_state()->getStoreProcessed();}
+	protected function store() {return df_state()->getStoreProcessed();}
 
 	/**
 	 * 2015-03-13

@@ -282,6 +282,6 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 	 * @return boolean
 	 */
 	protected function _isAllowed() {
-		return df_h()->invitation()->config()->isEnabled() && rm_admin_allowed('customer/df_invitation');
+		return df_h()->invitation()->config()->isEnabled() && df_admin_allowed('customer/df_invitation');
 	}
 }

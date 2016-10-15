@@ -6,7 +6,7 @@ class Document extends \Df\Xml\Generator\Element {
 	 * @return float
 	 */
 	public function convertMoneyToExportCurrency($amountInBaseCurrency) {
-		return df_float(rm_currency_h()->convertFromBase(
+		return df_float(df_currency_h()->convertFromBase(
 			$amountInBaseCurrency, $this->getExportCurrency(), $this->store()
 		));
 	}
@@ -154,15 +154,6 @@ class Document extends \Df\Xml\Generator\Element {
 		$arguments = func_get_args();
 		$message = df_format($arguments);
 		$this->log($message);
-		if (!df_is_it_my_local_pc() && $this->getEmailAddressesToNotify()) {
-			\Df\Qa\Message\Notification::i(array(
-				\Df\Qa\Message\Notification::P__NOTIFICATION => $message
-				,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => false
-				,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => false
-				,\Df\Qa\Message\Notification::P__RECIPIENTS =>
-					$this->getEmailAddressesToNotify()
-			))->log();
-		}
 	}
 
 	/**
@@ -188,7 +179,7 @@ class Document extends \Df\Xml\Generator\Element {
 	public function store() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Df_Core_Model_StoreM $result */
-			$result = rm_state()->getStoreProcessed($needThrow = false);
+			$result = df_state()->getStoreProcessed($needThrow = false);
 			$this->{__METHOD__} = $result ? $result : df_store();
 		}
 		return $this->{__METHOD__};
@@ -234,9 +225,6 @@ class Document extends \Df\Xml\Generator\Element {
 		$result = $this->mixin(__FUNCTION__);
 		return !is_null($result) ? $result : $this->cfg(self::P__DOC_TYPE, '');
 	}
-
-	/** @return string[] */
-	protected function getEmailAddressesToNotify() {return array();}
 
 	/**
 	 * «Df_1C_Cml2_Export_Document_Catalog» => «export.document.catalog»

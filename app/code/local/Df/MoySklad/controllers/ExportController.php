@@ -39,7 +39,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 	 */
 	public function productAction() {
 		/** @var int $id */
-		$id = rm_request('id');
+		$id = df_request('id');
 		/** @var Df_Catalog_Model_Product $p */
 		$p = df_product($id);
 		df_log($this->sessionGet('prev'));
@@ -71,7 +71,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 				,'value' => 100
 			)
 		));
-		rm_report(df_fs_name($p->getName()) . '.json', df_json_prettify($response->getBody()));
+		df_report(df_fs_name($p->getName()) . '.json', df_json_prettify($response->getBody()));
 		$responseA = df_json_decode($response->getBody());
 		/** @var bool $isSuccessful */
 		$isSuccessful = 200 === $response->getStatus();

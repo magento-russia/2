@@ -7,7 +7,7 @@ class Df_Parser_Setup_2_40_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		rm_remove_category_attribute(Df_Catalog_Model_Category::P__EXTERNAL_URL);
-		rm_eav_reset_categories();
+		df_remove_category_attribute(Df_Catalog_Model_Category::P__EXTERNAL_URL);
+		df_eav_reset_categories();
 	}
 }

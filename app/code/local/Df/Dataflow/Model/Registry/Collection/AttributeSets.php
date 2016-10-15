@@ -9,7 +9,7 @@ class Df_Dataflow_Model_Registry_Collection_AttributeSets extends Df_Dataflow_Mo
 	 * @return Df_Eav_Model_Resource_Entity_Attribute_Set_Collection
 	 */
 	protected function createCollection() {
-		return Df_Eav_Model_Entity_Attribute_Set::c()->setEntityTypeFilter(rm_eav_id_product());
+		return Df_Eav_Model_Entity_Attribute_Set::c()->setEntityTypeFilter(df_eav_id_product());
 	}
 
 	/**

@@ -140,12 +140,12 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		 * http://magento-forum.ru/topic/5206/
 		 */
 		/** @var bool $result */
-		$result = !!rm_action_name();
+		$result = !!df_action_name();
 		if ($result) {
 			/** @var bool $skip */
 			static $skip;
 			if (is_null($skip)) {
-				$skip = df_leaf_b(rm_config_node('df/page/skip_standard_css/', rm_action_name()));
+				$skip = df_leaf_b(df_config_node('df/page/skip_standard_css/', df_action_name()));
 			}
 			$result =
 				$skip
@@ -179,9 +179,9 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		return
 				!df_is_admin()
 			&&
-				'checkout_onepage_index' === rm_action_name()
+				'checkout_onepage_index' === df_action_name()
 			&&
-				rm_checkout_ergonomic()
+				df_checkout_ergonomic()
 			&&
 				(in_array($name, array(
 					'js/fancybox/jquery.fancybox-1.3.4.js'

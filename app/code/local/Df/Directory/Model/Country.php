@@ -60,10 +60,10 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	}
 
 	/** @return string */
-	public function getNameLocalized() {return rm_country_ctn($this->getIso2Code());}
+	public function getNameLocalized() {return df_country_ctn($this->getIso2Code());}
 
 	/** @return string */
-	public function getNameRussian() {return rm_country_ctn_ru($this->getIso2Code());}
+	public function getNameRussian() {return df_country_ctn_ru($this->getIso2Code());}
 
 	/**
 	 * @return int

@@ -45,9 +45,9 @@ class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model {
 	/** @return int|null */
 	private function getLandingPageId() {
 		return
-			!rm_state()->hasCategory()
+			!df_state()->hasCategory()
 			? null
-			: rm_state()->getCurrentCategory()->getData('landing_page')
+			: df_state()->getCurrentCategory()->getData('landing_page')
 		;
 	}
 
@@ -95,7 +95,7 @@ class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model {
 	private function isItCategoryStaticBlock() {
 		return
 			$this->getBlock() instanceof Mage_Cms_Block_Block
-			&& rm_state()->hasCategory()
+			&& df_state()->hasCategory()
 			&& $this->getBlockId()
 			&& $this->getBlockId() === $this->getLandingPageId()
 		;

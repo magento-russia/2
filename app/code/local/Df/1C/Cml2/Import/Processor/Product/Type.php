@@ -266,7 +266,7 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 	private function getDescriptionAbstract($productField, array $fieldsToUpdate) {
 		df_param_string_not_empty($productField, 0);
 		/** @var string $result */
-		$result = rm_1c_cfg()->product()->description()->getDefault();
+		$result = df_1c_cfg()->product()->description()->getDefault();
 		/** @var string|null $currentDescription */
 		$currentDescription =
 			!$this->getExistingMagentoProduct()
@@ -275,11 +275,11 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 		;
 		/** @var bool $canUpdateCurrentDescription */
 		$canUpdateCurrentDescription =
-				!rm_1c_cfg()->product()->description()->preserveInUnique()
+				!df_1c_cfg()->product()->description()->preserveInUnique()
 			||
 				!$currentDescription
 			||
-				($currentDescription === rm_1c_cfg()->product()->description()->getDefault())
+				($currentDescription === df_1c_cfg()->product()->description()->getDefault())
 		;
 		// Обрабатываем случай,
 		// когда в 1С на товарной карточке заполнено поле «Файл описания для сайта».
@@ -295,7 +295,7 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 			;
 		}
 		else if (
-			!in_array(rm_1c_cfg()->product()->description()->whichFieldToUpdate(), $fieldsToUpdate)
+			!in_array(df_1c_cfg()->product()->description()->whichFieldToUpdate(), $fieldsToUpdate)
 		) {
 			if ($currentDescription) {
 				$result = $currentDescription;
@@ -377,7 +377,7 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 				||
 						/** http://magento-forum.ru/topic/3655/ */
 						Df_1C_Config_Source_ProductNameSource::isFull(
-							rm_1c_cfg()->product()->name()->getSource()
+							df_1c_cfg()->product()->name()->getSource()
 						)
 					&&
 						// Небольшая тонкость.
@@ -499,7 +499,7 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 		/** @var array(string => string|int|float|bool|null) $result */
 		$result = array();
 		if ($this->getEntityOffer()->getOptionValues()->hasItems()) {
-			rm_1c()->create1CAttributeGroupIfNeeded(
+			df_1c()->create1CAttributeGroupIfNeeded(
 				$this->getEntityProduct()->getAttributeSet()->getId()
 			);
 		}
@@ -588,6 +588,6 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 	private function taxClassId() {
 		/** @var int|null $result */
 		$result = $this->getEntityProduct()->taxClassId();
-		return $result ? $result : rm_tax_h()->__('None');
+		return $result ? $result : df_tax_h()->__('None');
 	}
 }

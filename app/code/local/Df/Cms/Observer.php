@@ -95,7 +95,7 @@ class Df_Cms_Observer {
 					$revision = Df_Cms_Model_Page_Revision::i();
 					$revision
 						->loadWithRestrictions(
-							$accessLevel, rm_admin_id(), $page->getPublishedRevisionId()
+							$accessLevel, df_admin_id(), $page->getPublishedRevisionId()
 						)
 					;
 					if ($revision->getId()) {
@@ -121,7 +121,7 @@ class Df_Cms_Observer {
 					}
 				}
 			}
-			if ($revisionAvailable && !rm_admin_allowed('cms/page/save_revision')) {
+			if ($revisionAvailable && !df_admin_allowed('cms/page/save_revision')) {
 				/** @uses Varien_Data_Form_Element_Abstract::setData() */
 				df_each($baseFieldset->getElements(), 'setData', 'disabled', true);
 			}
@@ -245,7 +245,7 @@ class Df_Cms_Observer {
 					->setLabel($page->getTitle())
 					->setAccessLevel(Df_Cms_Model_Page_Version::ACCESS_LEVEL_PUBLIC)
 					->setPageId($page->getId())
-					->setUserId(rm_admin_id())
+					->setUserId(df_admin_id())
 					->setInitialRevisionData($revisionInitialData)
 					->save()
 				;

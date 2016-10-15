@@ -74,9 +74,9 @@ class Df_PromoGift_Model_Rule extends Df_SalesRule_Model_Rule {
 			$conditions = $this->getConditions();
 			/** @var Varien_Object $container */
 			$container = new Varien_Object(array(
-				'quote' => rm_quote()
+				'quote' => df_quote()
 				/** для @see Mage_SalesRule_Model_Rule_Condition_Product_Found */
-				,'all_items' => rm_quote()->getAllItems()
+				,'all_items' => df_quote()->getAllItems()
 			));
 			$result = $conditions->validate($container);
 		}
@@ -99,7 +99,7 @@ class Df_PromoGift_Model_Rule extends Df_SalesRule_Model_Rule {
 			if ($usesPerCustomer) {
 				df_assert_integer($usesPerCustomer);
 				/** @var int $customerId */
-				$customerId = rm_quote()->getCustomerId();
+				$customerId = df_quote()->getCustomerId();
 				df_assert_integer($customerId);
 				// Смотрим, сколько раз данный покупатель уже получал
 				// (не просто кладя в корзину, успешно завершая оформление заказа!)

@@ -16,8 +16,8 @@ class Df_RbkMoney_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 			,'orderId' => $this->orderIId()
 			,'language' => $this->localeCode()
 			,'eshopId' => $this->shopId()
-			,'successUrl' => rm_url_checkout_success()
-			,'failUrl' => rm_url_checkout_fail()
+			,'successUrl' => df_url_checkout_success()
+			,'failUrl' => df_url_checkout_fail()
 			,'version' => 2
 		);
 		if ($this->configS()->getSelectedPaymentMethod()) {

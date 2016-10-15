@@ -46,7 +46,7 @@ class Df_Kkb_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/** @return Df_Kkb_Model_Response_Payment */
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Kkb_Model_Response_Payment::i(rm_request('response'));
+			$this->{__METHOD__} = Df_Kkb_Model_Response_Payment::i(df_request('response'));
 		}
 		return $this->{__METHOD__};
 	}

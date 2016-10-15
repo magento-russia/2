@@ -19,7 +19,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	/** @return mixed[] */
 	public function getAvailablePaymentMethodsAsCanonicalConfigArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_config_a($this->getNode('payment-methods'));
+			$this->{__METHOD__} = df_config_a($this->getNode('payment-methods'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -41,7 +41,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 				/** @var string $methodTitle */
 				$methodTitle = dfa($methodOptions, 'title');
 				df_assert_string($methodTitle);
-				$result[]= rm_option($methodCode, $methodTitle);
+				$result[]= df_option($methodCode, $methodTitle);
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -190,7 +190,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @param string $key
 	 * @return string|null
 	 */
-	protected function _getValue($key) {return df_leaf_s(rm_config_node($key));}
+	protected function _getValue($key) {return df_leaf_s(df_config_node($key));}
 
 	/**
 	 * @override
@@ -234,7 +234,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 */
 	private function getNode($key) {
 		/** @var Mage_Core_Model_Config_Element|null $result */
-		$result = rm_config_node($this->adaptKey($key));
+		$result = df_config_node($this->adaptKey($key));
 		/**
 		 * 2015-08-04
 		 * Раньше тут стояло

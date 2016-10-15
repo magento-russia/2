@@ -29,7 +29,7 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Catalog_Model_Resource_Eav_Attribute) $result */
 			$result = array();
-			foreach (rm_attributes() as $attribute) {
+			foreach (df_attributes() as $attribute) {
 				/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 				df_assert($attribute->hasAttributeSetInfo());
 				if ($attribute->isInSet($this->getId())) {
@@ -56,8 +56,8 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 	public function addExternalIdAttribute($code, $label, $groupName, $groupOrdering) {
 		if (!dfa($this->_hasExternalId, $code)) {
 			/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-			$attribute = rm_attributes()->createOrUpdate(array(
-				'entity_type_id' => rm_eav_id_product()
+			$attribute = df_attributes()->createOrUpdate(array(
+				'entity_type_id' => df_eav_id_product()
 				,'attribute_code' => $code
 				/**
 				 * В Magento CE 1.4, если поле «attribute_model» присутствует,

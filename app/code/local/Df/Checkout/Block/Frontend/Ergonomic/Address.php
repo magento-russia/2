@@ -10,15 +10,15 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Sales_Model_Quote_Address $result */
 			$result = null;
-			if (!rm_customer_logged_in()
+			if (!df_customer_logged_in()
 				&& df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
 			) {
 				$result = $this->addressFromYandexMarket();
 			}
 			if (!$result) {
 				$result =
-					rm_customer_logged_in()
-					? ($this->isBilling() ? rm_quote_address_billing() : rm_quote_address_shipping())
+					df_customer_logged_in()
+					? ($this->isBilling() ? df_quote_address_billing() : df_quote_address_shipping())
 					: Df_Sales_Model_Quote_Address::i()
 				;
 			}
@@ -158,10 +158,10 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	 * Ядро Magento использует поле «type» блоков для своих внутренних целей.
 	 * @see Mage_Core_Model_Layout::createBlock():
 	 * $block->setType($type);
-	 * Поэтому называем наше поле «rm__type».
+	 * Поэтому называем наше поле «df__type».
 	 * @var string
 	 */
-	private static $P__TYPE = 'rm__type';
+	private static $P__TYPE = 'df__type';
 	/** @used-by Df_YandexMarket_Model_Action_ImportAddress::getAddressType() */
 	const TYPE__BILLING = 'billing';
 	/** @used-by Df_YandexMarket_Model_Action_ImportAddress::getAddressType() */

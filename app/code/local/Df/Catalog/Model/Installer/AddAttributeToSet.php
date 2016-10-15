@@ -12,7 +12,7 @@ class Df_Catalog_Model_Installer_AddAttributeToSet extends Df_Core_Model {
 			$this->getSetId(), $this->getGroupName()
 		);
 		return Df_Catalog_Model_Resource_Installer_Attribute::s()->addAttributeToSetRm(
-			rm_eav_id_product()
+			df_eav_id_product()
 			, $this->getSetId()
 			, $this->getGroupName()
 			, $this->getAttributeCode()

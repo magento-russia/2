@@ -118,17 +118,17 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update
 		$values = array();
 		$nonEscapableNbspChar = html_entity_decode('&#160;', ENT_NOQUOTES, 'UTF-8');
 		foreach ($stores as $websiteId => $website) {
-			$values[]= rm_option(array(), $website['label']);
+			$values[]= df_option(array(), $website['label']);
 			if (isset($website['children']) && is_array($website['children'])) {
 				foreach ($website['children'] as $groupId => $group) {
 					if (isset($group['children']) && is_array($group['children'])) {
 						$options = array();
 						foreach ($group['children'] as $storeId => $store) {
-							$options[]= rm_option(
+							$options[]= df_option(
 								$store['value'], str_repeat($nonEscapableNbspChar, 4) . $store['label']
 							);
 						}
-						$values[]= rm_option($options, str_repeat($nonEscapableNbspChar, 4) . $group['label']);
+						$values[]= df_option($options, str_repeat($nonEscapableNbspChar, 4) . $group['label']);
 					}
 				}
 			}

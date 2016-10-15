@@ -21,14 +21,14 @@ class Df_Reward_Adminhtml_Customer_RewardController extends Mage_Adminhtml_Contr
 	 */
 	public function historyAction() {
 		$this->getResponse()->setBody(
-			Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History::i(rm_request('id', 0))->toHtml()
+			Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History::i(df_request('id', 0))->toHtml()
 		);
 	}
 
 	/** @return void */
 	public function historyGridAction() {
 		$this->getResponse()->setBody(
-			Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History_Grid::i(rm_request('id', 0))->toHtml()
+			Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_History_Grid::i(df_request('id', 0))->toHtml()
 		);
 	}
 
@@ -53,5 +53,5 @@ class Df_Reward_Adminhtml_Customer_RewardController extends Mage_Adminhtml_Contr
 	 * Acl check for admin
 	 * @return boolean
 	 */
-	protected function _isAllowed() {return rm_admin_allowed('df_reward/balance');}
+	protected function _isAllowed() {return df_admin_allowed('df_reward/balance');}
 }

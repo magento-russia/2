@@ -19,7 +19,7 @@ class Df_Themes_Observer {
 				/** @var string $phrase */
 				$phrase = "Please specify the product's required option(s).";
 				/** @var Mage_Core_Controller_Response_Http $response */
-				$response = rm_controller()->getResponse();
+				$response = df_controller()->getResponse();
 				$response->setBody(str_replace(
 					$phrase, Mage::helper('ajax')->__($phrase), $response->getBody()
 				));
@@ -45,7 +45,7 @@ class Df_Themes_Observer {
 				/** @var string $phrase */
 				$phrase = 'No products exists';
 				/** @var Mage_Core_Controller_Response_Http $response */
-				$response = rm_controller()->getResponse();
+				$response = df_controller()->getResponse();
 				$response->setBody(str_replace(
 					$phrase, Mage::helper('ves_autosearch')->__($phrase), $response->getBody()
 				));

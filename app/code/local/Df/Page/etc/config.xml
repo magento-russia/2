@@ -102,14 +102,14 @@
 					</Df_Page>
 				</observers>
 			</page_block_html_topmenu_gethtml_before>
-			<rm_menu_top_add_submenu>
+			<df_menu_top_add_submenu>
 				<observers>
 					<Df_Page>
 						<class>Df_Page_Observer</class>
-						<method>rm_menu_top_add_submenu</method>
+						<method>df_menu_top_add_submenu</method>
 					</Df_Page>
 				</observers>
-			</rm_menu_top_add_submenu>
+			</df_menu_top_add_submenu>
 		</events>
 	</frontend>
 	<default>

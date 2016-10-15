@@ -74,7 +74,7 @@ class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 
 	/** @return bool */
 	private function isCustomValidationNeeded() {
-		return rm_checkout_ergonomic() && $this->getAddressType();
+		return df_checkout_ergonomic() && $this->getAddressType();
 	}
 
 	/** @return Df_Customer_Model_Address_Validator */

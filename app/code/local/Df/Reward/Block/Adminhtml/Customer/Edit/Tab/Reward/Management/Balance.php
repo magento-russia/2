@@ -16,7 +16,7 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance exte
 	 */
 	protected function _prepareLayout()
 	{
-		if (!rm_admin_allowed('df_reward/balance')) {
+		if (!df_admin_allowed('df_reward/balance')) {
 			// unset template to get empty output
 			$this->setTemplate(null);
 		}

@@ -42,7 +42,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue_Anonymous
 	 */
 	protected function getAttributeCodeGenerated() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_1c()->generateAttributeCode(
+			$this->{__METHOD__} = df_1c()->generateAttributeCode(
 				'Вариант'
 				// Намеренно поставил второй параметр ($this->getEntityProduct()->getAppliedTypeName()),
 				// потому что счёл ненужным в данном случае

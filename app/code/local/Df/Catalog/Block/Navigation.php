@@ -5,7 +5,7 @@ class Df_Catalog_Block_Navigation extends Mage_Catalog_Block_Navigation {
 	 * предоставление возможности сторонним модулям
 	 * добавлять свои пункты в товарное меню
 	 * посредством подписки на создаваемое этим методом
-	 * оповещение «rm_menu_top_add_submenu».
+	 * оповещение «df_menu_top_add_submenu».
 	 * @override
 	 * @return Varien_Data_Tree_Node_Collection|Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection|Varien_Data_Collection|array
 	 */
@@ -25,7 +25,7 @@ class Df_Catalog_Block_Navigation extends Mage_Catalog_Block_Navigation {
 			||
 				$result instanceof Varien_Data_Collection
 		);
-		Mage::dispatchEvent('rm_menu_top_add_submenu', array('menu' => $this->getAdditionalRoot()));
+		Mage::dispatchEvent('df_menu_top_add_submenu', array('menu' => $this->getAdditionalRoot()));
 		if ($isArray || $isNodeCollection) {
 			foreach ($this->getAdditionalRoot()->getNodes() as $node) {
 				/** @var Varien_Data_Tree_Node $node */

@@ -147,7 +147,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real
 	protected function getИд() {
 		if (!isset($this->{__METHOD__})) {
 			if (!$this->getAttribute()->get1CId()) {
-				$this->setData(self::$P__ATTRIBUTE, rm_attributes()->createOrUpdate(array(
+				$this->setData(self::$P__ATTRIBUTE, df_attributes()->createOrUpdate(array(
 					Df_1C_Const::ENTITY_EXTERNAL_ID => df_t()->guid()
 				), $this->getAttribute()->getName()));
 			}

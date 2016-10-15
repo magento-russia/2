@@ -55,7 +55,7 @@ class Df_Catalog_Setup_2_23_5 extends Df_Core_Setup {
 	}
 
 	/**
-	 * @used-by Df_Catalog_Observer::rm__magento_ce_has_just_been_installed()
+	 * @used-by Df_Catalog_Observer::df__magento_ce_has_just_been_installed()
 	 * @return void
 	 */
 	public static function p() {self::pc(__CLASS__);}

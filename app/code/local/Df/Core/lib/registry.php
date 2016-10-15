@@ -26,5 +26,5 @@
  * @used-by Lamoda_Catalog_Setup_Shoes::addReferenceList()
  * @return Df_Dataflow_Model_Registry_Collection_Attributes
  */
-function rm_attributes() {return Df_Dataflow_Model_Registry_Collection_Attributes::s();}
+function df_attributes() {return Df_Dataflow_Model_Registry_Collection_Attributes::s();}
 

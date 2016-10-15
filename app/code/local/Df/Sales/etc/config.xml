@@ -176,26 +176,26 @@
 				(в более поздних версиях Magento понять можно, потому что
 				коллекция, используемая для таблицы заказов, принадлежит особому классу)
 			-->
-			<rm_adminhtml_block_sales_order_grid__prepare_collection>
+			<df_adminhtml_block_sales_order_grid__prepare_collection>
 				<observers>
 					<Df_Sales>
 						<class>Df_Sales_Observer</class>
-						<method>rm_adminhtml_block_sales_order_grid__prepare_collection</method>
+						<method>df_adminhtml_block_sales_order_grid__prepare_collection</method>
 					</Df_Sales>
 				</observers>
-			</rm_adminhtml_block_sales_order_grid__prepare_collection>
+			</df_adminhtml_block_sales_order_grid__prepare_collection>
 			<!--
 				Это событие вызывается методом
 				@see Df_Adminhtml_Block_Sales_Order_Grid::_prepareColumns()
 			-->
-			<rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+			<df_adminhtml_block_sales_order_grid__prepare_columns_after>
 				<observers>
 					<Df_Sales>
 						<class>Df_Sales_Observer</class>
-						<method>rm_adminhtml_block_sales_order_grid__prepare_columns_after</method>
+						<method>df_adminhtml_block_sales_order_grid__prepare_columns_after</method>
 					</Df_Sales>
 				</observers>
-			</rm_adminhtml_block_sales_order_grid__prepare_columns_after>
+			</df_adminhtml_block_sales_order_grid__prepare_columns_after>
 		</events>
 	</adminhtml>
 	<default>

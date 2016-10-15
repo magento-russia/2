@@ -563,17 +563,11 @@ abstract class Df_Payment_Model_Method
 		if ($message instanceof Exception) {
 			\Df\Qa\Message\Failure\Exception::i(array(
 				\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $message
-				,\Df\Qa\Message\Failure\Exception::P__FILE_NAME => $filename
-				,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => true
-				,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => true
 			))->log();
 		}
 		else if (is_string($message)) {
 			\Df\Qa\Message\Notification::i(array(
-					\Df\Qa\Message\Notification::P__NOTIFICATION => $message
-					,\Df\Qa\Message\Notification::P__NEED_LOG_TO_FILE => true
-					,\Df\Qa\Message\Notification::P__FILE_NAME => $filename
-					,\Df\Qa\Message\Notification::P__NEED_NOTIFY_DEVELOPER => true
+				\Df\Qa\Message\Notification::P__NOTIFICATION => $message
 			))->log();
 		}
 		else {

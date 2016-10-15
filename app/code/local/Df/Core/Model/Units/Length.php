@@ -71,7 +71,7 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 	/** @return array(string => array(string => string|int)) */
 	public function getUnitsSettings() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_config_a('df/units/length');
+			$this->{__METHOD__} = df_config_a('df/units/length');
 		}
 		return $this->{__METHOD__};
 	}

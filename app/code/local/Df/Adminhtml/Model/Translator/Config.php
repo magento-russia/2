@@ -9,7 +9,7 @@ class Df_Adminhtml_Model_Translator_Config extends Df_Core_Model {
 	/** @return array(string => string) */
 	private function getMap() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_config_a('adminhtml/translate/sections');
+			$this->{__METHOD__} = df_config_a('adminhtml/translate/sections');
 		}
 		return $this->{__METHOD__};
 	}

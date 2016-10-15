@@ -100,7 +100,7 @@ class Df_Admin_Config_BackendChecker_CurrencyIsSupported
 				,array(
 					'{module}' => $this->getBackend()->getModuleName()
 					,'{baseCurrenciesOrigin}' => $this->getFailedBaseCurrenciesInFormOrigin()
-					,'{currency}' => rm_currency_name($this->getCurrencyCode())
+					,'{currency}' => df_currency_name($this->getCurrencyCode())
 					,'{currencyInstrumental}' => $this->getCurrency()->getNameInCaseInstrumental()
 					,'{stores}' => $this->getFailedStoreNames()
 					/**

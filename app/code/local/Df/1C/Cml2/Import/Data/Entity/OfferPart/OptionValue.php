@@ -19,7 +19,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 					 */
 					(self::$VALUE__UNKNOWN !== $this->getValue())
 			)  {
-				$result = rm_attributes()->findByExternalId($this->getEntityAttribute()->getExternalId());
+				$result = df_attributes()->findByExternalId($this->getEntityAttribute()->getExternalId());
 				df_assert($result);
 			}
 			else {
@@ -27,7 +27,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 			}
 			if (!$this->getEntityAttribute()) {
 				$this->setupOption($result);
-				rm_attributes()->addEntity($result);
+				df_attributes()->addEntity($result);
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -135,7 +135,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 				[option_id] => 35
 				[attribute_id] => 148
 				[sort_order] => 2
-				[rm_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
+				[df_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
 				[default_value] => натуральная кожа
 				[store_default_value] =>
 				[value] => натуральная кожа
@@ -205,7 +205,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 	/** @return string */
 	protected function getAttributeCodeGenerated() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_1c()->generateAttributeCode(
+			$this->{__METHOD__} = df_1c()->generateAttributeCode(
 				$this->getName()
 				// Намеренно убрал второй параметр ($this->getEntityProduct()->getAppliedTypeName()),
 				// потому что счёл ненужным в данном случае
@@ -227,7 +227,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 
 	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
 	protected function setupAttribute() {
-		return rm_attributes()->createOrUpdate($this->getAttributeData());
+		return df_attributes()->createOrUpdate($this->getAttributeData());
 	}
 
 	/**
@@ -247,7 +247,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $attribute */
 			$attribute =
-				rm_attributes()->findByExternalId(
+				df_attributes()->findByExternalId(
 					$this->getEntityAttribute()
 					? $this->getEntityAttribute()->getExternalId()
 					: $this->getAttributeExternalId()
@@ -271,7 +271,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 					))
 				:
 					array(
-						'entity_type_id' => rm_eav_id_product()
+						'entity_type_id' => df_eav_id_product()
 						,'attribute_code' => $this->getAttributeCodeGenerated()
 						/**
 						 * В Magento CE 1.4, если поле «attribute_model» присутствует,

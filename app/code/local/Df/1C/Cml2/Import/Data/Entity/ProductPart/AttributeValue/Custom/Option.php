@@ -20,7 +20,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				 */
 				/** @var string|null $value */
 				$value = $this->leaf('Значение');
-				if (rm_1c_is_external_id($value)) {
+				if (df_1c_is_external_id($value)) {
 					$result = $value;
 				}
 			}
@@ -39,7 +39,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				[option_id] => 35
 				[attribute_id] => 148
 				[sort_order] => 2
-				[rm_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
+				[df_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
 				[default_value] => натуральная кожа
 				[store_default_value] =>
 				[value] => натуральная кожа
@@ -67,7 +67,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				[option_id] => 35
 				[attribute_id] => 148
 				[sort_order] => 2
-				[rm_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
+				[df_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
 				[default_value] => натуральная кожа
 				[store_default_value] =>
 				[value] => натуральная кожа
@@ -90,7 +90,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				[option_id] => 35
 				[attribute_id] => 148
 				[sort_order] => 2
-				[rm_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
+				[df_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
 				[default_value] => натуральная кожа
 				[store_default_value] =>
 				[value] => натуральная кожа
@@ -111,7 +111,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 			if (!$options->count()) {
 				// Из 1С:Управление торговлей в интернет-магазин передано справочное значение,
 				// отсутствующее в соответствующем справочнике интернет-магазина.
-				rm_1c_log(
+				df_1c_log(
 					"Из «1С:Управление торговлей» в интернет-магазин передано"
 					. " значение «{value}» свойства {attribute}"
 					. " для товара «{productName}» [{productSku}],"
@@ -132,10 +132,10 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				$optionsAll->setPositionOrder('asc');
 				$optionsAll->setAttributeFilter($this->getAttributeMagento()->getId());
 				$optionsAll->setStoreFilter($this->getAttributeMagento()->getStoreId());
-				rm_1c_log('Допустимые значения свойства %s:', $this->getAttributeMagento()->getTitle());
+				df_1c_log('Допустимые значения свойства %s:', $this->getAttributeMagento()->getTitle());
 				foreach ($optionsAll as $option) {
 					/** @var Df_Eav_Model_Entity_Attribute_Option $option */
-					rm_1c_log('«{optionLabel}» («{optionExternalId}»)', array(
+					df_1c_log('«{optionLabel}» («{optionExternalId}»)', array(
 						'{optionLabel}' => $option->getValue()
 						,'{optionExternalId}' => $option->get1CId()
 					));

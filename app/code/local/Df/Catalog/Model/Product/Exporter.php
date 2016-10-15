@@ -64,7 +64,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 * @see Df_YandexMarket_Model_Yml_Processor_Offer::getPrice()
 			 * http://magento-forum.ru/topic/3800/
 			 */
-			$result->addStoreFilter(rm_state()->getStoreProcessed());
+			$result->addStoreFilter(df_state()->getStoreProcessed());
 			$this->{__METHOD__} = $result;
 			$this->applyRule();
 			/**
@@ -102,7 +102,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 */
 			if (!Mage::getStoreConfig(
 				Mage_Catalog_Helper_Product::XML_PATH_PRODUCT_URL_USE_CATEGORY
-				, rm_state()->getStoreProcessed()
+				, df_state()->getStoreProcessed()
 			)) {
 				$result->addUrlRewrite();
 			}
@@ -339,7 +339,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 						/**
 						 * 2015-11-07
 						 * Тут раньше стояло
-						 * $storeId = df_nat0(rm_state()->getStoreProcessed()->getId());
+						 * $storeId = df_nat0(df_state()->getStoreProcessed()->getId());
 						 * и дальше шла выборка идентификатору магазина.
 						 * Это ошибочно и очевидно являлось недоразумением,
 						 * потому что даже в Magento CE 1.8.0.0
@@ -353,7 +353,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 							}
 						 */
 						/** @var int $websiteId */
-						$websiteId = df_nat0(rm_state()->getStoreProcessed()->getWebsiteId());
+						$websiteId = df_nat0(df_state()->getStoreProcessed()->getWebsiteId());
 						/**
 							[10704] => Array
 								(

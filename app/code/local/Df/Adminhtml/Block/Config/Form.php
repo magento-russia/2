@@ -46,7 +46,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_merge(
 				parent::_getAdditionalElementTypes()
-				, rm_config_a('df/admin/config-form/element-types')
+				, df_config_a('df/admin/config-form/element-types')
 			);
 		}
 		return $this->{__METHOD__};
@@ -197,7 +197,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 						} else {
 							$optionArray = array();
 							foreach ($sourceModel->$method() as $value => $label) {
-								$optionArray[]= rm_option($value, $label);
+								$optionArray[]= df_option($value, $label);
 							}
 						}
 					}

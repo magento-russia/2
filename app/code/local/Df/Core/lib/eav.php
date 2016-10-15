@@ -4,8 +4,8 @@
  * @param Mage_Eav_Model_Entity_Attribute $attribute
  * @return array(string => string)
  */
-function rm_attribute_options(Mage_Eav_Model_Entity_Attribute $attribute) {
-	return rm_eav_cache_ram(null, __FUNCTION__, array($attribute->getAttributeCode() => $attribute));
+function df_attribute_options(Mage_Eav_Model_Entity_Attribute $attribute) {
+	return df_eav_cache_ram(null, __FUNCTION__, array($attribute->getAttributeCode() => $attribute));
 }
 
 /**
@@ -13,7 +13,7 @@ function rm_attribute_options(Mage_Eav_Model_Entity_Attribute $attribute) {
  * @param Mage_Eav_Model_Entity_Attribute $attribute
  * @return array(string => string)
  */
-function rm_attribute_options_(Mage_Eav_Model_Entity_Attribute $attribute) {
+function df_attribute_options_(Mage_Eav_Model_Entity_Attribute $attribute) {
 	df_assert($attribute->usesSource());
 	/**
 	 * Как ни странно, хотя базовый интерфейс определяет
@@ -31,7 +31,7 @@ function rm_attribute_options_(Mage_Eav_Model_Entity_Attribute $attribute) {
  * 2015-08-10
  * @return Df_Eav_Model_Resource_Entity_Attribute_Set
  */
-function rm_attribute_set() {
+function df_attribute_set() {
 	return Df_Eav_Model_Resource_Entity_Attribute_Set::s();
 }
 
@@ -48,7 +48,7 @@ function rm_attribute_set() {
  * @param bool $ramOnly [optional]
  * @return mixed|false
  */
-function rm_eav_cache($object, $function, $params = null, $complex = false, $ramOnly = false) {
+function df_eav_cache($object, $function, $params = null, $complex = false, $ramOnly = false) {
 	return Df_Eav_Model_Cache::s()->p($object, $function, $params, $complex, $ramOnly);
 }
 
@@ -56,14 +56,14 @@ function rm_eav_cache($object, $function, $params = null, $complex = false, $ram
  * 2015-08-11
  * Кэширование только в оперативной памяти.
  * Позволяет избежать дисковых операций по чтению-записи постоянного кэша.
- * @used-by rm_attribute_options()
+ * @used-by df_attribute_options()
  * @param object|null $object
  * @param string $function
  * @param string|string[]|null|array(string => mixed) $params [optional]
  * @param bool $complex [optional]
  * @return mixed|false
  */
-function rm_eav_cache_ram($object, $function, $params = null, $complex = false) {
+function df_eav_cache_ram($object, $function, $params = null, $complex = false) {
 	return Df_Eav_Model_Cache::s()->p($object, $function, $params, $complex, $ramOnly = true);
 }
 
@@ -74,7 +74,7 @@ function rm_eav_cache_ram($object, $function, $params = null, $complex = false) 
  * @param bool $reindexFlatCategories [optional]
  * @return void
  */
-function rm_eav_reset($reindexFlatProducts = true, $reindexFlatCategories = false) {
+function df_eav_reset($reindexFlatProducts = true, $reindexFlatCategories = false) {
 	if (!df_h()->eav()->isPacketUpdate()) {
 		Mage::unregister('_singleton/eav/config');
 		Df_Eav_Model_Cache::s()->clean();
@@ -88,15 +88,15 @@ function rm_eav_reset($reindexFlatProducts = true, $reindexFlatCategories = fals
 }
 
 /**
- * @uses rm_eav_reset()
+ * @uses df_eav_reset()
  * @return void
  */
-function rm_eav_reset_categories() {
-	rm_eav_reset($reindexFlatProducts = false, $reindexFlatCategories = true);
+function df_eav_reset_categories() {
+	df_eav_reset($reindexFlatProducts = false, $reindexFlatCategories = true);
 }
 
 /** @return int */
-function rm_eav_id_product() {
+function df_eav_id_product() {
 	static $r; return $r ? $r : $r = Df_Eav_Model_Entity::product()->getTypeId();
 }
 
@@ -105,8 +105,8 @@ function rm_eav_id_product() {
  * Обратите внимание, что метод @uses Mage_Eav_Model_Entity_Setup::removeAttribute()
  * сам проверяет, присутствует ли свойство, и выполняет работу только при наличии свойства,
  * поэтому вручную проверять присутствие свойства не нужно.
- * @used-by rm_remove_category_attribute()
- * @used-by rm_remove_product_attribute()
+ * @used-by df_remove_category_attribute()
+ * @used-by df_remove_product_attribute()
  * @used-by Df_1C_Setup_1_0_2::add1CIdToEntity()
  * $entityTypeId может быть как символьным идентификатором (например, «catalog_product») ,
  * так и числовым (например, «3»):
@@ -118,7 +118,7 @@ function rm_eav_id_product() {
  * @param string $attributeCode
  * @return void
  */
-function rm_remove_attribute($entityTypeId, $attributeCode) {
+function df_remove_attribute($entityTypeId, $attributeCode) {
 	Df_Catalog_Model_Resource_Installer_Attribute::s()->removeAttribute($entityTypeId, $attributeCode);
 }
 
@@ -128,13 +128,13 @@ function rm_remove_attribute($entityTypeId, $attributeCode) {
  * @param string $code
  * @return void
  */
-function rm_remove_category_attribute($code) {rm_remove_attribute('catalog_category', $code);}
+function df_remove_category_attribute($code) {df_remove_attribute('catalog_category', $code);}
 
 /**
  * @used-by Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::findMagentoAttributeInRegistry()
  * @param string $code
  * @return void
  */
-function rm_remove_product_attribute($code) {rm_remove_attribute('catalog_product', $code);}
+function df_remove_product_attribute($code) {df_remove_attribute('catalog_product', $code);}
 
 

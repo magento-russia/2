@@ -22,7 +22,7 @@ function df_store($store = null) {
 		 */
 		if ('admin' === $coreCurrentStore->getCode()) {
 			/** @var int|null $storeIdFromRequest */
-			$storeIdFromRequest = rm_request('store');
+			$storeIdFromRequest = df_request('store');
 			if ($storeIdFromRequest) {
 				$result = Mage::app()->getStore($result);
 			}
@@ -61,7 +61,7 @@ function df_store($store = null) {
 			if (!$recursionLevel) {
 				$recursionLevel++;
 				try {
-					$result = rm_state()->getStoreProcessed($needThrow = false);
+					$result = df_state()->getStoreProcessed($needThrow = false);
 				}
 				catch (Exception $e) {
 					$recursionLevel--;

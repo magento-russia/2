@@ -48,6 +48,6 @@ class Df_Catalog_Setup_1_0_0 extends Df_Core_Setup {
 				,4
 			);
 		}
-		rm_eav_reset_categories();
+		df_eav_reset_categories();
 	}
 }

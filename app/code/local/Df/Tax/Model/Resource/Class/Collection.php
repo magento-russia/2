@@ -7,7 +7,7 @@ class Df_Tax_Model_Resource_Class_Collection extends Mage_Tax_Model_Mysql4_Class
 	 */
 	public function filterByShopCountry() {
 		/** @var string|null $shopIso2 */
-		$shopIso2 = rm_shop_iso2();
+		$shopIso2 = df_shop_iso2();
 		if ($shopIso2) {
 			/**
 			 * Выпадающий список должен отображать не только налоговые классы страны магазина,

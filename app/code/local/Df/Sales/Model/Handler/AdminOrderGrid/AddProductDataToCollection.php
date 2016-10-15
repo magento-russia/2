@@ -94,7 +94,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection extends D
 	}
 
 	/**
-	 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_collection()
+	 * @used-by Df_Sales_Observer::df_adminhtml_block_sales_order_grid__prepare_collection()
 	 * @used-by Df_Sales_Observer::sales_order_grid_collection_load_before()
 	 */
 

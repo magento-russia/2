@@ -37,7 +37,7 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 		/* @var $design Mage_Core_Model_Design_Package */
 		$design = Mage::getSingleton('core/design_package');
 		$elementClass = $this->getElementClass();
-		$updatesRoot = rm_config_node($area, 'layout/updates');
+		$updatesRoot = df_config_node($area, 'layout/updates');
 		Mage::dispatchEvent('core_layout_update_updates_get_after', array('updates' => $updatesRoot));
 		$updateFiles = array();
 		foreach ($updatesRoot->children() as $updateNode) {

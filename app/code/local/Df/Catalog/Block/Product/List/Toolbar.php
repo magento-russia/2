@@ -11,10 +11,10 @@ class Df_Catalog_Block_Product_List_Toolbar extends Mage_Catalog_Block_Product_L
 			$this->{__METHOD__} = array_merge(parent::getCacheKeyInfo(), array(
 				/**
 				 * Обратите внимание, что товарный список может отображаться на главной странице,
-				 * и тогда rm_state()->getCurrentCategoryId()
+				 * и тогда df_state()->getCurrentCategoryId()
 				 * вернёт идентификатор корневого товарного раздела.
 				 */
-				rm_state()->getCurrentCategoryId()
+				df_state()->getCurrentCategoryId()
 				/**
 				 * К ключу кэширования надо также добавить
 				 * значение текущего ключа пошаговой фильтрации.

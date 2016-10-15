@@ -69,7 +69,7 @@ abstract class Df_Core_Setup_AttributeSet extends Df_Core_Model {
 	 * @return void
 	 */
 	public static function runBlank(Mage_Eav_Model_Entity_Attribute_Set $attributeSet) {
-		foreach (rm_config_a('df/attribute_set_processors') as $class) {
+		foreach (df_config_a('df/attribute_set_processors') as $class) {
 			/** @var string $class */
 			self::pc($class, $attributeSet);
 		}

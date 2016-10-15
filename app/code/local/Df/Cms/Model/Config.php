@@ -46,7 +46,7 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 	 * @param $userId
 	 * @return bool
 	 */
-	public function isCurrentUserOwner($userId) {return df_nat0($userId) === rm_admin_id();}
+	public function isCurrentUserOwner($userId) {return df_nat0($userId) === df_admin_id();}
 
 	/**
 	 * @param string $type
@@ -63,7 +63,7 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 	 * @param string $action
 	 * @return bool
 	 */
-	private function _isAllowedAction($action) {return rm_admin_allowed('cms/page/' . $action);}
+	private function _isAllowedAction($action) {return df_admin_allowed('cms/page/' . $action);}
 
 
 	const XML_PATH_CONTENT_VERSIONING = 'df_cms/versioning/default';

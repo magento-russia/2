@@ -32,7 +32,7 @@ class Df_Review_Observer {
 			// На всякий случай, перестраховываемся, и ещё проверяем,
 			// что текущая операция — «review_product_post».
 			if (
-				'review_product_post' === rm_action_name()
+				'review_product_post' === df_action_name()
 				&& $lastAddedMessage
 				&& in_array($lastAddedMessage->getCode(), self::messages())
 			) {

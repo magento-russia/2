@@ -32,7 +32,7 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 	*/
 	private function getConfigNode($propertyType) {
 		return df_leaf_child(
-			rm_config_node('df/seo/template/objects', $this->getName(), 'properties'), $propertyType
+			df_config_node('df/seo/template/objects', $this->getName(), 'properties'), $propertyType
 		);
 	}
 	/** @used-by Df_Seo_Model_Template_Property_Product::_construct() */

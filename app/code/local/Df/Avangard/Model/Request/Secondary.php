@@ -82,7 +82,7 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 				->setUri($this->getUri())
 				->setConfig(array('timeout' => 3))
 			;
-			rm_report(
+			df_report(
 				$this->getRequestId() . '-request-{date}-{time}.xml'
 				, $this->getRequestDocument()->getXml()
 			);
@@ -113,7 +113,7 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 	private function getResponseAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_xml_parse($this->getHttpResponse()->getBody());
-			rm_report(
+			df_report(
 				$this->getRequestId() . '-response-{date}-{time}.xml'
 				,$this->getHttpResponse()->getBody()
 			);

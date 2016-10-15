@@ -19,7 +19,7 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[][] $result */
 			$result = array();
-			foreach (rm_config_a('global/currency/import/services') as $code => $service) {
+			foreach (df_config_a('global/currency/import/services') as $code => $service) {
 				/** @var array $service */
 				df_assert_array($service);
 				/** @var string $code */
@@ -32,7 +32,7 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 				 * @var int $ordering
 				 */
 				$ordering = df_int(dfa($service, 'ordering', 0));
-				$result[$ordering]= rm_option($code, $name);
+				$result[$ordering]= df_option($code, $name);
 			}
 			// Вот ради этого мы перекрыли родительский класс
 			ksort($result);

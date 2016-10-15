@@ -46,11 +46,11 @@ class Df_Kkb_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			,'email' =>  $this->getCustomerEmail()
 			// из документации:
 			// «Линк для возврата покупателя в магазин (на сайт) после успешного проведения оплаты»
-			,'BackLink' => rm_url_checkout_success()
+			,'BackLink' => df_url_checkout_success()
 			// из документации:
 			// «Линк для возврата покупателя в магазин (на сайт)
 			// после оплаты в случае неудачной авторизации»
-			,'FailureBackLink' => rm_url_checkout_fail()
+			,'FailureBackLink' => df_url_checkout_fail()
 			// из документации:
 			// «Линк для отправки результата авторизации в магазин.
 			// Результат авторизации представлен в виде расширенного XML документа»

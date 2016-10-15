@@ -140,7 +140,7 @@ class Df_Logging_Observer extends Df_Core_Model {
 		/** @var Df_Logging_Model_Event $result */
 		$result = Df_Logging_Model_Event::s();
 		$result->setData(array(
-			'ip' => rm_visitor_ip()
+			'ip' => df_visitor_ip()
 			,'user' => $username
 			,'user_id' => $userId
 			,'is_success' => $success

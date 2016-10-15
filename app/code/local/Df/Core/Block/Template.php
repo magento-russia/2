@@ -104,14 +104,14 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 				/**
 				 * 2015-08-25
 				 * Раньше тут стояло:
-				 * $result[]= rm_action_name();
+				 * $result[]= df_action_name();
 				 * Крайне неряшливый модуль Ves_Blog
 				 * оформительской темы Ves Super Store (ThemeForest 8002349)
 				 * ломает инициализацию системы, и в данной точке программы
 				 * контроллер может быть ещё не инициализирован.
 				 */
 				/** @var string $a */
-				$a = rm_action_name();
+				$a = df_action_name();
 				$result[]= $a ? $a : df_current_url();
 			}
 			/** @var string|string[] $suffix */

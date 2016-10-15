@@ -5,9 +5,9 @@
  * @param string $code
  * @return string
  */
-function rm_currency_name($code) {
+function df_currency_name($code) {
 	/** @var Zend_Currency|null $currency */
-	$currency = rm_currency_zf($code, false);
+	$currency = df_currency_zf($code, false);
 	return $currency ? $currency->getName() : $code;
 }
 
@@ -20,16 +20,16 @@ function rm_currency_name($code) {
  * @used-by Df_Sales_Model_Order::formatPriceDf()
  * @return int
  */
-function rm_currency_precision() {
+function df_currency_precision() {
 	static $r; return isset($r) ? $r : $r = (
-		rm_loc()->needHideDecimals()
+		df_loc()->needHideDecimals()
 		? 0
 		: dfa(df_mage()->core()->localeSingleton()->getJsPriceFormat(), 'requiredPrecision', 2)
 	);
 }
 
 /** @return Df_Directory_Helper_Currency */
-function rm_currency_h() {return Df_Directory_Helper_Currency::s();}
+function df_currency_h() {return Df_Directory_Helper_Currency::s();}
 
 /**
  * @param string $code
@@ -37,7 +37,7 @@ function rm_currency_h() {return Df_Directory_Helper_Currency::s();}
  * @return Zend_Currency|null
  * @throws Zend_Currency_Exception
  */
-function rm_currency_zf($code, $throw = true) {
+function df_currency_zf($code, $throw = true) {
 	/** @var Zend_Currency|null $result */
 	try {
 		$result = Mage::app()->getLocale()->currency($code);

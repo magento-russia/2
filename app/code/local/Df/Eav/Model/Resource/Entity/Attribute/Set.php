@@ -7,7 +7,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_E
 	 * @return array(int => string)
 	 * Ключами возвращаемого массива являются идентификаторы свойств.
 	 */
-	public function attributeCodes($setId) {return rm_eav_cache($this, __FUNCTION__, $setId);}
+	public function attributeCodes($setId) {return df_eav_cache($this, __FUNCTION__, $setId);}
 
 	/**
 	 * 2015-08-10
@@ -49,7 +49,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_E
 	 */
 	public function idByName($name, $type = null) {
 		df_param_string_not_empty($name, 0);
-		return dfa($this->mapFromNameToId($type ? $type : rm_eav_id_product()), $name);
+		return dfa($this->mapFromNameToId($type ? $type : df_eav_id_product()), $name);
 	}
 
 	/**
@@ -59,7 +59,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_E
 	 * @return array(string => int)
 	 * Ключами возвращаемого массива являются идентификаторы свойств.
 	 */
-	public function mapFromNameToId($type) {return rm_eav_cache($this, __FUNCTION__, $type);}
+	public function mapFromNameToId($type) {return df_eav_cache($this, __FUNCTION__, $type);}
 
 	/**
 	 * 2015-08-10

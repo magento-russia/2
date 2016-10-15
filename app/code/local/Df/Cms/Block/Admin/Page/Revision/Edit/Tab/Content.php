@@ -70,7 +70,7 @@ class Df_Cms_Block_Admin_Page_Revision_Edit_Tab_Content
 		$this->getForm()->setValues($model->getData());
 		// setting current user id for new version functionality.
 		// in posted data there will be current user
-		$this->getForm()->getElement('user_id')->setValue(rm_admin_id());
+		$this->getForm()->getElement('user_id')->setValue(df_admin_id());
 		return $this;
 	}
 

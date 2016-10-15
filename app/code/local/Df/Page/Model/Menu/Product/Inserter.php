@@ -4,7 +4,7 @@
  * Обратите внимание, что объект данного класса всегда является одиночкой,
  * потому что создётся при обработке события, которое случается лишь единократно:
  * @used-by Df_Page_Observer::page_block_html_topmenu_gethtml_before()
- * @used-by Df_Page_Observer::rm_menu_top_add_submenu()
+ * @used-by Df_Page_Observer::df_menu_top_add_submenu()
  */
 class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 	/**
@@ -47,7 +47,7 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Page_Model_MenuSource[] $result  */
 			$result = array();
-			foreach (rm_config_a('df/menu/product') as $menuSourceAsArray) {
+			foreach (df_config_a('df/menu/product') as $menuSourceAsArray) {
 				/** @var array(string => string|int) $menuSourceAsArray */
 				/** @var Df_Page_Model_MenuSource $menuSource */
 				$menuSource = $this->createMenuSource($menuSourceAsArray);
@@ -94,7 +94,7 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 	 * 2015-08-15
 	 * Обратите внимание, что объект данного класса всегда является одиночкой:
 	 * @used-by Df_Page_Observer::page_block_html_topmenu_gethtml_before()
-	 * @used-by Df_Page_Observer::rm_menu_top_add_submenu()
+	 * @used-by Df_Page_Observer::df_menu_top_add_submenu()
 	 * @param Df_Page_Model_Menu_Product $menu
 	 * @return void
 	 */

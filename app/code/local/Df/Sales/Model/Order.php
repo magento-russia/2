@@ -34,7 +34,7 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	 */
 	public function formatPrice($price, $addBrackets = false) {
 		return
-			rm_loc()->needHideDecimals()
+			df_loc()->needHideDecimals()
 			? $this->formatPriceDf($price, $addBrackets)
 			: parent::formatPrice($price, $addBrackets)
 		;
@@ -133,7 +133,7 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	 * @return string
 	 */
 	private function formatPriceDf($price, $addBrackets = false) {
-		return $this->formatPricePrecision($price, rm_currency_precision(), $addBrackets);
+		return $this->formatPricePrecision($price, df_currency_precision(), $addBrackets);
 	}
 
 	/** @var bool */

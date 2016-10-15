@@ -65,7 +65,7 @@ class Df_YandexMarket_TestController extends Mage_Core_Controller_Front_Action {
 			,\Df\Xml\Generator\Document::P__TAG_NAME => 'тест'
 		));
 		try {
-			rm_report('test-{time}.xml', $document->getXml());
+			df_report('test-{time}.xml', $document->getXml());
 			$this->getResponse()
 				->setHeader('Content-Type', 'text/xml')
 				->setBody($document->getXml())

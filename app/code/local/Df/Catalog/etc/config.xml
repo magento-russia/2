@@ -30,7 +30,7 @@
 						добавлять свои пункты в товарное меню
 						посредством подписки на создаваемое методом
 						@see Df_Catalog_Block_Navigation::getStoreCategories()
-						оповещение «rm_menu_top_add_submenu».
+						оповещение «df_menu_top_add_submenu».
 					-->
 					<navigation>Df_Catalog_Block_Navigation</navigation>
 					<!--
@@ -403,30 +403,30 @@
 			</modules>
 		</translate>
 		<events>
-			<rm__config_after_save__catalog__frontend__flat_catalog_category>
+			<df__config_after_save__catalog__frontend__flat_catalog_category>
 				<observers>
 					<Df_Catalog>
 						<class>Df_Catalog_Observer</class>
-						<method>rm__config_after_save__catalog__frontend__flat_catalog_category</method>
+						<method>df__config_after_save__catalog__frontend__flat_catalog_category</method>
 					</Df_Catalog>
 				</observers>
-			</rm__config_after_save__catalog__frontend__flat_catalog_category>
-			<rm__config_after_save__catalog__frontend__flat_catalog_product>
+			</df__config_after_save__catalog__frontend__flat_catalog_category>
+			<df__config_after_save__catalog__frontend__flat_catalog_product>
 				<observers>
 					<Df_Catalog>
 						<class>Df_Catalog_Observer</class>
-						<method>rm__config_after_save__catalog__frontend__flat_catalog_product</method>
+						<method>df__config_after_save__catalog__frontend__flat_catalog_product</method>
 					</Df_Catalog>
 				</observers>
-			</rm__config_after_save__catalog__frontend__flat_catalog_product>
-			<rm__magento_ce_has_just_been_installed>
+			</df__config_after_save__catalog__frontend__flat_catalog_product>
+			<df__magento_ce_has_just_been_installed>
 				<observers>
 					<Df_Catalog>
 						<class>Df_Catalog_Observer</class>
-						<method>rm__magento_ce_has_just_been_installed</method>
+						<method>df__magento_ce_has_just_been_installed</method>
 					</Df_Catalog>
 				</observers>
-			</rm__magento_ce_has_just_been_installed>
+			</df__magento_ce_has_just_been_installed>
 		</events>
 	</adminhtml>
 	<default>

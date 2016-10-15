@@ -6,7 +6,7 @@
  * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
  * @return string|null
  */
-function rm_shop_iso2($store = null) {
+function df_shop_iso2($store = null) {
 	/**
 	 * 2015-08-09
 	 * Константа @see Mage_Core_Helper_Data::XML_PATH_MERCHANT_COUNTRY_CODE

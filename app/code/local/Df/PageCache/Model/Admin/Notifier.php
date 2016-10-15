@@ -36,7 +36,7 @@ class Df_PageCache_Model_Admin_Notifier extends Df_Admin_Model_Notifier_Settings
 			$this->{__METHOD__} =
 					'Df_PageCache_Model_Processor'
 				===
-					df_leaf_s(rm_config_node('global/cache/request_processors/rm'))
+					df_leaf_s(df_config_node('global/cache/request_processors/rm'))
 			;
 		}
 		return $this->{__METHOD__};

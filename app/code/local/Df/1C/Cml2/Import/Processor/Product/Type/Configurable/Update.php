@@ -38,9 +38,9 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable_Update
 		$product->setCategoryIds($this->getEntityProduct()->getCategoryIds());
 		$product->saveRm($isMassUpdate = true);
 		$product->reload();
-		rm_1c_reindex_product($product);
+		df_1c_reindex_product($product);
 		df()->registry()->products()->addEntity($product);
-		rm_1c_log('Обновлён товар %s.', $product->getTitle());
+		df_1c_log('Обновлён товар %s.', $product->getTitle());
 	}
 
 	/**

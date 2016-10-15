@@ -16,7 +16,7 @@ class Df_Catalog_Block_Product_List_Upsell extends Mage_Catalog_Block_Product_Li
 	 */
 	protected function _construct() {
 		parent::_construct();
-		if (!rm_quote_has_items()) {
+		if (!df_quote_has_items()) {
 			$this->addData(array(
 				/**
 				 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

@@ -124,7 +124,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 */
 	public function format($price, $options=array(), $includeContainer = true, $addBrackets = false) {
 		return
-			rm_loc()->needHideDecimals()
+			df_loc()->needHideDecimals()
 			? $this->formatDf($price, $options, $includeContainer, $addBrackets)
 			: parent::format($price, $options, $includeContainer, $addBrackets)
 		;
@@ -138,7 +138,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 */
 	public function formatTxt($price, $options=array()) {
 		return
-			rm_loc()->needHideDecimals()
+			df_loc()->needHideDecimals()
 			? $this->formatTxtDf($price, $options)
 			: parent::formatTxt($price, $options)
 		;
@@ -188,7 +188,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	/** @return string */
 	public function getName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_t()->lcfirst(rm_currency_name($this->getCode()));
+			$this->{__METHOD__} = df_t()->lcfirst(df_currency_name($this->getCode()));
 		}
 		return $this->{__METHOD__};
 	}
@@ -265,7 +265,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 */
 	private function formatDf($price, $options = array(), $includeContainer = true, $addBrackets = false) {
 		return $this->formatPrecision(
-			$price, rm_currency_precision(), $options, $includeContainer, $addBrackets
+			$price, df_currency_precision(), $options, $includeContainer, $addBrackets
 		);
 	}
 
@@ -275,7 +275,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * @return string
 	 */
 	private function formatTxtDf($price, $options = array()) {
-		return parent::formatTxt($price, array('precision' => rm_currency_precision()) + $options);
+		return parent::formatTxt($price, array('precision' => df_currency_precision()) + $options);
 	}
 
 

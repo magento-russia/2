@@ -72,7 +72,7 @@ function df_url($routePath, array $routeParams = array()) {
  * Пример: @see Df_Payment_Model_Method_WithRedirect::getCustomerReturnUrl()
  *
  * В Magento в большинстве случаев оба варианта равноценны, но надо понимать разницу между ними!
- * @used-by rm_admin_button_location()
+ * @used-by df_admin_button_location()
  * @param string $routePath
  * @param array(string => mixed) $routeParams [optional]
  * @return string

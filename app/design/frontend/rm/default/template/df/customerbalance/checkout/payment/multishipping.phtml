@@ -10,7 +10,7 @@
     //<![CDATA[
         var customerBalanceSubstracted = <?php if ($this->isCustomerBalanceUsed()): ?>true<?php else: ?>false<?php endif; ?>;
         if (customerBalanceSubstracted) {
-            quoteBaseGrandTotal += <?php echo(float)rm_quote()->getBaseCustomerBalanceAmountUsed(); ?>;
+            quoteBaseGrandTotal += <?php echo(float)df_quote()->getBaseCustomerBalanceAmountUsed(); ?>;
             customerBalanceSubstracted = false;
         }
         function switchCustomerBalanceCheckbox() {

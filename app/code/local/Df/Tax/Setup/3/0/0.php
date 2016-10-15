@@ -162,7 +162,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 		$products->addAttributeToFilter('tax_class_id', array('in' => self::demoProductTaxClassIds()));
 		/** @var int[] $ids */
 		$ids = $products->getAllIds();
-		rm_products_update(array('tax_class_id' => '0'), $ids);
+		df_products_update(array('tax_class_id' => '0'), $ids);
 	}
 
 	/**
@@ -275,7 +275,7 @@ class Df_Tax_Setup_3_0_0 extends Df_Core_Setup {
 	 * @return string
 	 */
 	private static function rateCode($iso2, $rate) {
-		return sprintf('%s. НДС %s%%', rm_country_ctn_ru($iso2), df_number_f($rate));
+		return sprintf('%s. НДС %s%%', df_country_ctn_ru($iso2), df_number_f($rate));
 	}
 
 	/**

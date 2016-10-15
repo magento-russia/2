@@ -10,7 +10,7 @@ class Df_Seo_Model_Template_Property_Product_Price extends Df_Seo_Model_Template
 			 */
 			Mage_Core_Helper_Data::currency(
 				$value =
-					rm_tax_h()->getPrice(
+					df_tax_h()->getPrice(
 						$product = $this->getProduct()
 						/**
 						 * Обратите внимание,

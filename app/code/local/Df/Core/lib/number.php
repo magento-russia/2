@@ -6,8 +6,8 @@
  * @return string
  */
 function df_money_fl($value, $curencyCode) {
-	return rm_currency_zf($curencyCode)->toCurrency(
-		$value, array('precision' => rm_currency_precision())
+	return df_currency_zf($curencyCode)->toCurrency(
+		$value, array('precision' => df_currency_precision())
 	);
 }
 

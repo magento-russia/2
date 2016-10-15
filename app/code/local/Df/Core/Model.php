@@ -1078,7 +1078,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		parent::_construct();
 		$this->cacheLoad();
 		if ($this->isDestructableSingleton()) {
-			rm_destructable_singleton($this);
+			df_destructable_singleton($this);
 		}
 		// Нельзя вызывать здесь $this->_prop(self::P__MIXIN, Df_Core_Model_Mixin::class, false);
 		// потому что библиотеки Российской сборки ещё не инициализированы

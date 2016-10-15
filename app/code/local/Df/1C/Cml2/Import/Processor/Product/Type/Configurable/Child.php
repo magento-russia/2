@@ -10,8 +10,8 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable_Child
 			$this->getImporter()->import();
 			/** @var Df_Catalog_Model_Product $product */
 			$product = $this->getImporter()->getProduct();
-			rm_1c_reindex_product($product);
-			rm_1c_log(
+			df_1c_reindex_product($product);
+			df_1c_log(
 				'%s товар %s.'
 				,!is_null($this->getExistingMagentoProduct()) ? 'Обновлён' : 'Создан'
 				,$product->getTitle()

@@ -16,7 +16,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 		if (!isset($this->{__METHOD__}[$attributeSetId][$groupName])) {
 			Df_Catalog_Model_Resource_Installer_Attribute::s()
 				->addAttributeGroup(
-					rm_eav_id_product()
+					df_eav_id_product()
 					,$attributeSetId
 					,$groupName
 					,$sortOrder
@@ -92,7 +92,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 				/** @var Mage_Eav_Model_Entity_Attribute_Source_Interface $source */
 				$source = $manufacturerAttribute->getSource();
 				df_assert($source instanceof Mage_Eav_Model_Entity_Attribute_Source_Interface);
-				$result = rm_options_to_map($source->getAllOptions());
+				$result = df_options_to_map($source->getAllOptions());
 			}
 			$this->{__METHOD__} = $result;
 		}

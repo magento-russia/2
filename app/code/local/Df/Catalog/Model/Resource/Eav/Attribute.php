@@ -81,8 +81,8 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 	 */
 	public static function addOptions($attributeCode, $options) {
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-		$attribute = rm_attributes()->findByCode($attributeCode);
-		return rm_attributes()->createOrUpdate(
+		$attribute = df_attributes()->findByCode($attributeCode);
+		return df_attributes()->createOrUpdate(
 			array_merge($attribute->getData(), array('option' =>
 				Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
 					$attribute, df_array($options), $isModeInsert = true, $caseInsensitive = true

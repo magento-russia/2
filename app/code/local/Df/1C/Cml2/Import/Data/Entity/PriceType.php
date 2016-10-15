@@ -7,12 +7,12 @@ class Df_1C_Cml2_Import_Data_Entity_PriceType extends Df_1C_Cml2_Import_Data_Ent
 	 */
 	public function convertPriceToBase($originalPrice) {
 		df_param_float($originalPrice, 0);
-		return rm_currency_h()->convertToBase($originalPrice, $this->getCurrencyCode());
+		return df_currency_h()->convertToBase($originalPrice, $this->getCurrencyCode());
 	}
 
 	/** @return string */
 	public function getCurrencyCode() {
-		return rm_1c_currency_code_to_magento_format($this->leafSne('Валюта'));
+		return df_1c_currency_code_to_magento_format($this->leafSne('Валюта'));
 	}
 
 	/** @return Df_Customer_Model_Group|null */
@@ -45,7 +45,7 @@ class Df_1C_Cml2_Import_Data_Entity_PriceType extends Df_1C_Cml2_Import_Data_Ent
 	}
 
 	/** @return Df_1C_Config_Api_Product_Prices */
-	private function getConfigPrices() {return rm_1c_cfg()->product()->prices();}
+	private function getConfigPrices() {return df_1c_cfg()->product()->prices();}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_PriceTypes::itemClass() */
 

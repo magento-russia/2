@@ -9,7 +9,7 @@ class Df_1C_Cml2_State_Export_Products extends Df_Varien_Data_Collection {
 		/** @var Df_Catalog_Model_Product $result */
 		$result = $this->getItemById($productId);
 		if (!$result) {
-			$result = df_product($productId, rm_state()->getStoreProcessed()->getId());
+			$result = df_product($productId, df_state()->getStoreProcessed()->getId());
 			$this->addItem($result);
 		}
 		return $result;

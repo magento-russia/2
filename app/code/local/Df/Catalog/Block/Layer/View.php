@@ -31,7 +31,7 @@ class Df_Catalog_Block_Layer_View extends Mage_Catalog_Block_Layer_View {
 		 */
 		/** @var Df_Catalog_Model_Category $result */
 		$result = Mage::registry('current_category_filter');
-		return $result ? $result : rm_state()->getCurrentCategory();
+		return $result ? $result : df_state()->getCurrentCategory();
 	}
 
 	/**

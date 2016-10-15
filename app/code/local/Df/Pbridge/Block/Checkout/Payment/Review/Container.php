@@ -28,7 +28,7 @@ class Df_Pbridge_Block_Checkout_Payment_Review_Container
 		 * Смотрите также @see Df_Pbridge_Helper_Data::getReviewButtonTemplate().
 		 */
 		/** @var Mage_Sales_Model_Quote_Payment $payment */
-		$payment = rm_quote()->getPayment();
+		$payment = df_quote()->getPayment();
 		if ($payment->getMethod()
 			&& $payment->getMethodInstance()->getDataUsingMethod('is_deferred3d_check')
 		) {

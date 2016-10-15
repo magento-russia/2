@@ -29,7 +29,7 @@ class Df_Cms_Block_Admin_Page_Version_Edit extends Mage_Adminhtml_Block_Widget_F
 			;
 			$this->_addButton('new_revision', array(
 				'label' => df_h()->cms()->__('New Revision...')
-				,'onclick' => rm_admin_button_location($this->getNewRevisionUrl())
+				,'onclick' => df_admin_button_location($this->getNewRevisionUrl())
 				,'class' => 'new'
 			));
 		}

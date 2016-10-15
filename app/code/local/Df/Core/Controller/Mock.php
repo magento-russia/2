@@ -11,7 +11,7 @@
  */
 final class Df_Core_Controller_Mock extends Mage_Core_Controller_Varien_Action {
 	/**
-	 * @used-by rm_referer()
+	 * @used-by df_referer()
 	 * @return string
 	 */
 	public static function getRefererUrl() {

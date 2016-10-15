@@ -89,7 +89,7 @@ function df_sku_adapt($sku) {return Df_Catalog_Model_Product_Sku::s()->adapt($sk
  * @param Df_Catalog_Model_Product|int $product
  * @return int
  */
-function rm_product_id($product) {
+function df_product_id($product) {
 	return
 		$product instanceof Df_Catalog_Model_Product
 		? $product->getId()
@@ -106,7 +106,7 @@ function rm_product_id($product) {
  * @param mixed[]|Df_Core_Model_StoreM[] $stores [optional]
  * @return void
  */
-function rm_products_update(array $data, array $ids = array(), array $stores = array()) {
+function df_products_update(array $data, array $ids = array(), array $stores = array()) {
 	df_admin_begin();
 	try {
 		// Если витрины не указаны — то обновляем свойства для всех витрин.
@@ -195,9 +195,9 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
  * @param int $qty
  * @return void
  */
-function rm_stock_update($product, $qty) {
+function df_stock_update($product, $qty) {
 	/** @var int $productId */
-	$productId = rm_product_id($product);
+	$productId = df_product_id($product);
 	$qty = df_nat0($qty);
 	/** @var Df_CatalogInventory_Model_Stock_Item $stockItem */
 	$stockItem = Df_CatalogInventory_Model_Stock_Item::i();

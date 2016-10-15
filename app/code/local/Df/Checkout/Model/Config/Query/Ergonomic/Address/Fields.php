@@ -5,9 +5,9 @@ class Df_Checkout_Model_Config_Query_Ergonomic_Address_Fields extends Df_Core_Mo
 		if (!isset($this->{__METHOD__})) {
 			// Обязательно клонируем объект,
 			// потому что Magento кэширует настроечные узлы
-			$this->{__METHOD__} = clone rm_config_node($this->getPathByAddressType('default'));
+			$this->{__METHOD__} = clone df_config_node($this->getPathByAddressType('default'));
 			$this->{__METHOD__}->extend(
-				rm_config_node($this->getPathByAddressType($this->getAddressType()))
+				df_config_node($this->getPathByAddressType($this->getAddressType()))
 				,$overwrite = true
 			);
 		}

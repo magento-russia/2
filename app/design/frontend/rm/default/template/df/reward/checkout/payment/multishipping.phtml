@@ -10,7 +10,7 @@
 //<![CDATA[
     var rewardPointsSubstracted = <?php if ($this->useRewardPoints()): ?>true<?php else: ?>false<?php endif; ?>;
     if (rewardPointsSubstracted) {
-        quoteBaseGrandTotal += <?php echo(float)rm_quote()->getBaseRewardCurrencyAmount(); ?>;
+        quoteBaseGrandTotal += <?php echo(float)df_quote()->getBaseRewardCurrencyAmount(); ?>;
         rewardPointsSubstracted = false;
     }
     function switchRewardPointsCheckbox()

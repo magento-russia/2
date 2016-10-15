@@ -22,7 +22,7 @@ class Df_Reward_Block_Checkout_Payment extends Df_Core_Block_Template_NoCache {
 	 * Return flag from quote to use reward points or not
 	 * @return boolean
 	 */
-	public function useRewardPoints() {return !!rm_quote()->getUseRewardPoints();}
+	public function useRewardPoints() {return !!df_quote()->getUseRewardPoints();}
 
 	/**
 	 * Return true if customer can use his reward points.
@@ -64,7 +64,7 @@ class Df_Reward_Block_Checkout_Payment extends Df_Core_Block_Template_NoCache {
 	 */
 	public function isEnoughPoints()
 	{
-		$baseGrandTotal = rm_quote()->getBaseGrandTotal() + rm_quote()->getBaseRewardCurrencyAmount();
+		$baseGrandTotal = df_quote()->getBaseGrandTotal() + df_quote()->getBaseRewardCurrencyAmount();
 		return $this->getReward()->isEnoughPointsToCoverAmount($baseGrandTotal);
 	}
 

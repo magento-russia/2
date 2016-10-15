@@ -54,21 +54,21 @@ function df_lang() {
  * @used-by Df_Localization_Realtime_Dictionary::handleForController()
  * @return string
  */
-function rm_action_name() {return !rm_controller() ? '' : rm_controller()->getFullActionName();}
+function df_action_name() {return !df_controller() ? '' : df_controller()->getFullActionName();}
 
 /**
- * @used-by rm_action_name()
+ * @used-by df_action_name()
  * @used-by Df_1C_Observer::df_catalog__attribute_set__group_added()
  * @used-by Df_Chronopay_Model_Gate_Buyer::getIpAddress()
  * @used-by Df_Core_Observer::piratesCheck()
- * @used-by rm_redirect_to_checkout()
+ * @used-by df_redirect_to_checkout()
  * @used-by Df_Localization_Realtime_Dictionary::handleForController()
  * @used-by Df_Payment_Model_Request_Payment::getCustomerIpAddress()
  * @used-by Df_Themes_Observer::controller_action_postdispatch_ajax_index_options()
  * @used-by Df_Chronopay_Model_Gate_Buyer::getIpAddress()
  * @return Mage_Core_Controller_Varien_Action|null
  */
-function rm_controller() {return rm_state()->getController();}
+function df_controller() {return df_state()->getController();}
 
 /** @return bool */
 function df_installed() {
@@ -88,23 +88,23 @@ function df_installed() {
  * @param string $default [optional]
  * @return string
  */
-function rm_request($key, $default = null) {return Mage::app()->getRequest()->getParam($key, $default);}
+function df_request($key, $default = null) {return Mage::app()->getRequest()->getParam($key, $default);}
 
 /**
  * 2015-08-14
  * @return string
  */
-function rm_ruri() {static $r; return $r ? $r : $r = Mage::app()->getRequest()->getRequestUri();}
+function df_ruri() {static $r; return $r ? $r : $r = Mage::app()->getRequest()->getRequestUri();}
 
 /**
  * 2015-08-14
  * @param string $needle
  * @return bool
  */
-function rm_ruri_contains($needle) {return df_contains(rm_ruri(), $needle);}
+function df_ruri_contains($needle) {return df_contains(df_ruri(), $needle);}
 
 /**
- * @used-by rm_controller()
+ * @used-by df_controller()
  * @return Df_Core_State
  */
-function rm_state() {static $r; return $r ? $r : $r = Df_Core_State::s();}
+function df_state() {static $r; return $r ? $r : $r = Df_Core_State::s();}

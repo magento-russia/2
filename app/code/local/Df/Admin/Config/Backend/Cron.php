@@ -43,7 +43,7 @@ abstract class Df_Admin_Config_Backend_Cron extends Mage_Core_Model_Config_Data 
 				)
 			;
 			$this->saveConfigKey(
-				$this->getCronModelPath(), df_leaf_s(rm_config_node($this->getCronModelPath()))
+				$this->getCronModelPath(), df_leaf_s(df_config_node($this->getCronModelPath()))
 			);
 		}
 		catch (Exception $e) {

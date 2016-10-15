@@ -314,7 +314,7 @@ function df_page_skin_js($file) {
  * 2) класс блока в стандартном формате
  * 3) класс блока в формате Magento
  * 4) пустое значение: в таком случае будет создан блок типа @see Mage_Core_Block_Template
- * @used-by rm_admin_button()
+ * @used-by df_admin_button()
  * @used-by df_render_l()
  * @used-by df_render_simple()
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address::r()

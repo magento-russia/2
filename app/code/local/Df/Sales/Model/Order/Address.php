@@ -52,7 +52,7 @@ class Df_Sales_Model_Order_Address extends Mage_Sales_Model_Order_Address {
 
 	/** @return bool */
 	private function isCustomValidationNeeded() {
-		return rm_checkout_ergonomic() && $this->getAddressType();
+		return df_checkout_ergonomic() && $this->getAddressType();
 	}
 
 

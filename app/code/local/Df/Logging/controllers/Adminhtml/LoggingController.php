@@ -103,14 +103,14 @@ class Df_Logging_Adminhtml_LoggingController extends Mage_Adminhtml_Controller_A
 			case 'archive':
 			case 'download':
 			case 'archiveGrid':
-				$result = rm_admin_allowed('admin/system/df_logging/backups');
+				$result = df_admin_allowed('admin/system/df_logging/backups');
 				break;
 			case 'grid':
 			case 'exportCsv':
 			case 'exportXml':
 			case 'details':
 			case 'index':
-				$result = rm_admin_allowed('admin/system/df_logging/events');
+				$result = df_admin_allowed('admin/system/df_logging/events');
 				break;
 		}
 		return $result;

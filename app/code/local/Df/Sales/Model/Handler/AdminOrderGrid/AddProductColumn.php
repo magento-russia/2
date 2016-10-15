@@ -66,7 +66,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 		return Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter::class;
 	}
 
-	/** @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_columns_after() */
+	/** @used-by Df_Sales_Observer::df_adminhtml_block_sales_order_grid__prepare_columns_after() */
 
 	/** @var string */
 	private static $COLUMN_TYPE = 'df_order_grid_products';

@@ -88,7 +88,7 @@ class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 			case self::ACTION_UPDATED:
 				if (!$balance->getUpdatedActionAdditionalInfo()) {
 					/** @var string|null $name */
-					$name = rm_admin_name(false);
+					$name = df_admin_name(false);
 					if ($name) {
 						/** @var Df_CustomerBalance_Helper_Data $t */
 						$t = Df_CustomerBalance_Helper_Data::s();

@@ -7,7 +7,7 @@ class Df_Shipping_Model_Origin extends Df_Core_Model {
 	/** @return Df_Directory_Model_Country|null */
 	public function getCountry() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(!$this->getCountryId() ? null : rm_country($this->getCountryId()));
+			$this->{__METHOD__} = df_n_set(!$this->getCountryId() ? null : df_country($this->getCountryId()));
 		}
 		return df_n_get($this->{__METHOD__});
 	}

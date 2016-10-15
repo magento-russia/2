@@ -27,7 +27,7 @@ class Df_Cms_Model_Hierarchy_Config {
 
 	/** @return Df_Cms_Model_Hierarchy_Config */
 	protected function _initContextMenuLayouts() {
-		$config = rm_config_node(self::XML_PATH_CONTEXT_MENU_LAYOUTS);
+		$config = df_config_node(self::XML_PATH_CONTEXT_MENU_LAYOUTS);
 		if ($this->_contextMenuLayouts !== null || !$config) {
 			return $this;
 		}

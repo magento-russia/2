@@ -46,7 +46,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 
 	/** @return string */
 	public function getCustomerIpAddress() {
-		return !rm_controller() ? '' : rm_controller()->getRequest()->getClientIp();
+		return !df_controller() ? '' : df_controller()->getRequest()->getClientIp();
 	}
 
 	/** @return string */

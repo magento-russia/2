@@ -10,6 +10,6 @@ class Df_IPay_CustomerReturnController extends Mage_Core_Controller_Front_Action
 			df_handle_entry_point_exception($e, false);
 			$success = false;
 		}
-		$this->getResponse()->setRedirect($success ? rm_url_checkout_success() : rm_url_checkout_fail());
+		$this->getResponse()->setRedirect($success ? df_url_checkout_success() : df_url_checkout_fail());
 	}
 }

@@ -27,7 +27,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			$this->norouteAction();
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
-		else if (rm_customer_logged_in()) {
+		else if (df_customer_logged_in()) {
 			$this->_redirect('customer/account/');
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}

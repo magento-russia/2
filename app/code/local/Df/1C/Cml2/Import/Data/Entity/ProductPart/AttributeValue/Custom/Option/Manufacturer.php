@@ -52,9 +52,9 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 					,$caseInsensitive = true
 				)
 			));
-			rm_1c_log('Обновление справочника «%s».', 'Изготовитель');
-			$result = rm_attributes()->createOrUpdate($attributeData);
-			rm_1c_log('Добавили в справочник «%s» значение «%s».', 'Изготовитель', $this->getName());
+			df_1c_log('Обновление справочника «%s».', 'Изготовитель');
+			$result = df_attributes()->createOrUpdate($attributeData);
+			df_1c_log('Добавили в справочник «%s» значение «%s».', 'Изготовитель', $this->getName());
 			// Назначаем новому справочному значению идентификатор из 1С
 			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
 			$options = Df_Eav_Model_Entity_Attribute_Option::c();
@@ -149,7 +149,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 		$referenceList = new Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList();
 		/** @var mixed[] $attributeData */
 		$attributeData = array(
-			'entity_type_id' => rm_eav_id_product()
+			'entity_type_id' => df_eav_id_product()
 			,'attribute_code' => $this->getAttributeCode()
 			/**
 			 * В Magento CE 1.4, если поле «attribute_model» присутствует,
@@ -190,9 +190,9 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 			,Df_1C_Const::ENTITY_EXTERNAL_ID => 'Изготовитель'
 		);
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
-		$result = rm_attributes()->createOrUpdate($attributeData);
+		$result = df_attributes()->createOrUpdate($attributeData);
 		df_assert($result->_getData(Df_1C_Const::ENTITY_EXTERNAL_ID));
-		rm_1c_log('Добавлено свойство «%s».', 'Изготовитель');
+		df_1c_log('Добавлено свойство «%s».', 'Изготовитель');
 		return $result;
 	}
 
@@ -201,23 +201,23 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
 	protected function findMagentoAttributeInRegistry() {
-		//rm_1c__manufacturer
+		//df_1c__manufacturer
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
-		$result = rm_attributes()->findByCode($this->getAttributeCode());
+		$result = df_attributes()->findByCode($this->getAttributeCode());
 		/** @var bool $oldAttributeProcessed */
 		static $oldAttributeProcessed = false;
 		if (!$oldAttributeProcessed) {
 			/** @var string $oldCode */
-			$oldCode = 'rm_1c__manufacturer';
+			$oldCode = 'df_1c__manufacturer';
 			/** @var Df_Catalog_Model_Resource_Eav_Attribute $oldAttribute */
-			$oldAttribute = rm_attributes()->findByCode($oldCode);
+			$oldAttribute = df_attributes()->findByCode($oldCode);
 			if ($oldAttribute) {
-				rm_remove_product_attribute($oldCode);
-				rm_attributes()->removeEntity($oldAttribute);
+				df_remove_product_attribute($oldCode);
+				df_attributes()->removeEntity($oldAttribute);
 			}
 			// Русифицируем свойство
 			if ($result && ('Manufacturer' === $result->getFrontendLabel())) {
-				$result = rm_attributes()->createOrUpdate(
+				$result = df_attributes()->createOrUpdate(
 					array('frontend_label' => 'Производитель'), $this->getAttributeCode()
 				);
 			}

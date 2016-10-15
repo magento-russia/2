@@ -36,7 +36,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	}
 
 	/**
-	 * @used-by rm_countries_ctn()
+	 * @used-by df_countries_ctn()
 	 * Возвращает массив,
 	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
@@ -54,7 +54,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		$localeCode = df_locale($locale);
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			$this->{__METHOD__}[$localeCode] =
-				rm_options_to_map($this->toOptionArrayRmCached(
+				df_options_to_map($this->toOptionArrayRmCached(
 					// Обратите внимание, что в качестве $groupAndOrder надо передать значение «false»,
 					// чтобы в результате опции не были сгруппированы.
 					$emptyLabel = false, $localeCode, $groupAndOrder = false
@@ -65,7 +65,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	}
 
 	/**
-	 * @used-by rm_countries_ctn_uc()
+	 * @used-by df_countries_ctn_uc()
 	 * Возвращает массив,
 	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
 	 * а значениями — названия стран в верхнем регистре для заданной локали
@@ -91,7 +91,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	}
 
 	/**
-	 * @used-by rm_countries_ntc()
+	 * @used-by df_countries_ntc()
 	 * Возвращает массив,
 	 * в котором ключами являются
 	 * названия стран для заданной локали (или системной локали по умолчанию)
@@ -115,7 +115,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	}
 
 	/**
-	 * @used-by rm_countries_ntc_uc()
+	 * @used-by df_countries_ntc_uc()
 	 * Возвращает массив,
 	 * в котором ключами являются
 	 * названия стран в верхнем регистре для заданной локали (или системной локали по умолчанию)
@@ -227,7 +227,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 * $emptyLabel задаёт заголовок пустой опции.
 	 * Если в качестве $emptyLabel передать false, то результат не будет содержать пустой опции.
 	 *
-	 * @used-by rm_countries_options()
+	 * @used-by df_countries_options()
 	 * @param string|bool $emptyLabel [optional]
 	 * @param Mage_Core_Model_Locale|string|null $locale [optional]
 	 * @param bool $groupAndOrder [optional]
@@ -428,7 +428,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		}
 		// КОНЕЦ ЗАПЛАТКИ
 		if ($result && (false !== $emptyLabel)) {
-			array_unshift($result, rm_option('', $emptyLabel));
+			array_unshift($result, df_option('', $emptyLabel));
 		}
 		return $result;
 	}
@@ -440,7 +440,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	protected function _construct() {$this->_itemObjectClass = Df_Directory_Model_Country::class;}
 
 	/**
-	 * @used-by rm_countries()
+	 * @used-by df_countries()
 	 * @used-by Df_Directory_Model_Country::cs()
 	 * @return Df_Directory_Model_Resource_Country_Collection
 	 */

@@ -55,7 +55,7 @@ class Df_YandexMarket_Setup_2_42_1 extends Df_Core_Setup {
 			df_table_delete('eav/attribute', 'attribute_code', array(
 				Df_YandexMarket_Const::ATTRIBUTE__CATEGORY, Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
 			));
-			rm_eav_reset();
+			df_eav_reset();
 		}
 	}
 }

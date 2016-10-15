@@ -12,7 +12,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 			df_handle_entry_point_exception($e, false);
 		}
 		$this->getResponse()->setRedirect(
-			isset($this->_redirectUrl) ? $this->_redirectUrl : rm_url_checkout_success()
+			isset($this->_redirectUrl) ? $this->_redirectUrl : df_url_checkout_success()
 		);
 	}
 
@@ -55,7 +55,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	 * @return void
 	 */
 	private function processDelayed() {
-		$this->setRedirectUrl(rm_url_checkout_success());
+		$this->setRedirectUrl(df_url_checkout_success());
 		df_last_order()->comment(
 			'Покупатель решил оплатить заказ через терминал Приватбанка. Ждём оплату.'
 		);
@@ -71,7 +71,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	 * http://3v4l.org/OipEQ
 	 * @return void
 	 */
-	private function processFailure() {$this->setRedirectUrl(rm_url_checkout_fail());}
+	private function processFailure() {$this->setRedirectUrl(df_url_checkout_fail());}
 
 	/**
 	 * @uses processDelayed()
@@ -93,7 +93,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	 * http://3v4l.org/OipEQ
 	 * @return void
 	 */
-	private function processSuccess() {$this->setRedirectUrl(rm_url_checkout_success());}
+	private function processSuccess() {$this->setRedirectUrl(df_url_checkout_success());}
 
 	/**
 	 * @param string $redirectUrl

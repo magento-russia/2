@@ -1,7 +1,7 @@
 <?php
 class Df_Core_Model_Cache extends Df_Core_Model {
 	/**
-	 * @used-by rm_eav_reset()
+	 * @used-by df_eav_reset()
 	 * @return Df_Core_Model_Cache
 	 */
 	public function clean() {
@@ -9,7 +9,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 		/**
 		 * 2015-08-10
 		 * Централизованный сброс кэша оперативной памяти.
-		 * Это особенно важно в сценарии @used-by rm_eav_reset()
+		 * Это особенно важно в сценарии @used-by df_eav_reset()
 		 */
 		$this->ramReset();
 		return $this;
@@ -120,7 +120,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	/**
 	 * 2015-08-10
 	 * Этот метод значительно упрощает двуступенчатое кэширование.
-	 * @used-by rm_eav_cache()
+	 * @used-by df_eav_cache()
 	 * @param object|null $object
 	 * @param string $function
 	 * @param string|string[]|null|array(string => mixed) $params [optional]
@@ -334,7 +334,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 * 2015-08-10
 	 * Централизованный кэш в оперативной памяти.
 	 * Централизация кэша позволяет нам централизованно его сбрасывать:
-	 * в частности, в случае @see rm_eav_reset()
+	 * в частности, в случае @see df_eav_reset()
 	 * @used-by ramGet()
 	 * @used-by ramReset()
 	 * @used-by ramSet()

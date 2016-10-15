@@ -7,7 +7,7 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 	 * @return void
 	 */
 	public function handle() {
-		if (rm_checkout_ergonomic() && $this->getGeneratedPassword()) {
+		if (df_checkout_ergonomic() && $this->getGeneratedPassword()) {
  			$this->getMailer()->send();
 			// Важно!
 			// Удаляем пароль из сессии после отсылки,

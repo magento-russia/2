@@ -96,7 +96,7 @@ class Df_AccessControl_Block_Admin_Tab_Tree	extends Mage_Adminhtml_Block_Catalog
 	 * @used-by getLoadTreeUrl()
 	 * @return int|null
 	 */
-	private function roleId() {return rm_request('rid');}
+	private function roleId() {return df_request('rid');}
 
 	/**
 	 * @used-by Df_AccessControl_AdminController::getChildrenNodes()

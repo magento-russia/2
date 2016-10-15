@@ -30,14 +30,14 @@ class Df_1C_Cml2_Import_Data_Entity_AttributeValue_Barcode
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
 	protected function findMagentoAttributeInRegistry() {
-		return rm_attributes()->findByCode($this->getAttributeCodeNew());
+		return df_attributes()->findByCode($this->getAttributeCodeNew());
 	}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getAttributeCodeNew() {return 'rm_1c__barcode';}
+	protected function getAttributeCodeNew() {return 'df_1c__barcode';}
 
 	/**
 	 * @override

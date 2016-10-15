@@ -47,7 +47,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 					$accessLevel = Df_Cms_Model_Config::s()->getAllowedAccessLevel();
 					foreach ($ids as $id) {
 						$version = Df_Cms_Model_Page_Version::s()->loadWithRestrictions(
-							$accessLevel, rm_admin_id(), $id
+							$accessLevel, df_admin_id(), $id
 						);
 						if ($version->getId()) {
 							$version->delete();

@@ -16,7 +16,7 @@ class Df_Cms_Model_Handler_ContentsMenu_Insert extends Df_Core_Model_Handler {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Cms_Model_ContentsMenu_Collection $result */
 			/** @var string $cacheKey */
-			$cacheKey = Df_Cms_Model_Cache::s()->makeKey(__METHOD__, rm_action_name());
+			$cacheKey = Df_Cms_Model_Cache::s()->makeKey(__METHOD__, df_action_name());
 			$result = Df_Cms_Model_Cache::s()->loadDataComplex($cacheKey);
 			if (!$result) {
 				$result = Df_Cms_Model_ContentsMenu_Collection::i();

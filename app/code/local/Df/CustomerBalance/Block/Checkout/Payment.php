@@ -84,16 +84,16 @@ class Df_CustomerBalance_Block_Checkout_Payment extends Df_Core_Block_Template_N
 	 */
 	public function getAmountToCharge() {
 		if ($this->isCustomerBalanceUsed()) {
-			return rm_quote()->getCustomerBalanceAmountUsed();
+			return df_quote()->getCustomerBalanceAmountUsed();
 		}
-		return min($this->getBalance(), rm_quote()->getBaseGrandTotal());
+		return min($this->getBalance(), df_quote()->getBaseGrandTotal());
 	}
 
 	/**
 	 * Check whether customer balance is used in current quote
 	 * @return bool
 	 */
-	public function isCustomerBalanceUsed() {return rm_quote()->getUseCustomerBalance();}
+	public function isCustomerBalanceUsed() {return df_quote()->getUseCustomerBalance();}
 
 	/**
 	 * Check whether customer balance fully covers quote
@@ -101,7 +101,7 @@ class Df_CustomerBalance_Block_Checkout_Payment extends Df_Core_Block_Template_N
 	 */
 	public function isFullyPaidAfterApplication()
 	{
-		return $this->_getBalanceModel()->isFullAmountCovered(rm_quote(), true);
+		return $this->_getBalanceModel()->isFullAmountCovered(df_quote(), true);
 	}
 
 	/**

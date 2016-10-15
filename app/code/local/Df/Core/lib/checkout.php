@@ -28,13 +28,13 @@ function df_last_order_id() {return df_session_checkout()->getData('last_order_i
 function df_last_order_iid() {return df_session_checkout()->getData('last_real_order_id');}
 
 /** @return void */
-function rm_redirect_to_checkout() {rm_controller()->setRedirectWithCookieCheck('checkout/onepage');}
+function df_redirect_to_checkout() {df_controller()->setRedirectWithCookieCheck('checkout/onepage');}
 
 /**
  * 2015-03-31
- * @used-by rm_quote_address_billing()
- * @used-by rm_quote_address_shipping()
- * @used-by rm_quote_has_items()
+ * @used-by df_quote_address_billing()
+ * @used-by df_quote_address_shipping()
+ * @used-by df_quote_has_items()
  * @used-by Df_Checkout_Block_Cart_Sidebar::getCacheKeyInfo()
  * @used-by Df_CustomerBalance_Block_Checkout_Payment::_getQuote()
  * @used-by Df_Pbridge_Block_Checkout_Payment_Review_Container::_toHtml()
@@ -56,7 +56,7 @@ function rm_redirect_to_checkout() {rm_controller()->setRedirectWithCookieCheck(
  * @used-by df/reward/checkout/payment/multishipping.phtml
  * @return Mage_Sales_Model_Quote|Df_Sales_Model_Quote
  */
-function rm_quote() {return df_session_checkout()->getQuote();}
+function df_quote() {return df_session_checkout()->getQuote();}
 
 /**
  * 2015-03-31
@@ -68,7 +68,7 @@ function rm_quote() {return df_session_checkout()->getQuote();}
  * @used-by Df_Qiwi_Block_Form::getBillingAddressPhone()
  * @return Df_Sales_Model_Quote_Address
  */
-function rm_quote_address_billing() {return rm_quote()->getBillingAddress();}
+function df_quote_address_billing() {return df_quote()->getBillingAddress();}
 
 /**
  * 2015-03-31
@@ -81,7 +81,7 @@ function rm_quote_address_billing() {return rm_quote()->getBillingAddress();}
  * @used-by df/checkout/ergonomic/dashboard.phtml
  * @return Df_Sales_Model_Quote_Address
  */
-function rm_quote_address_shipping() {return rm_quote()->getShippingAddress();}
+function df_quote_address_shipping() {return df_quote()->getShippingAddress();}
 
 /**
  * 2015-03-31
@@ -89,10 +89,10 @@ function rm_quote_address_shipping() {return rm_quote()->getShippingAddress();}
  * @used-by Df_Catalog_Block_Product_List_Upsell::_construct()
  * @return bool
  */
-function rm_quote_has_items() {
+function df_quote_has_items() {
 	df_module_enabled('Mage_Checkout')
 	&& df_session_checkout()->getQuoteId()
-	&& rm_quote()->getItemsCount();
+	&& df_quote()->getItemsCount();
 }
 
 /**
@@ -104,7 +104,7 @@ function rm_quote_has_items() {
  * @used-by Df_IPay_CustomerReturnController::indexAction()
  * @return string
  */
-function rm_url_checkout_fail() {
+function df_url_checkout_fail() {
 	static $r; return $r ? $r : $r = Mage::getUrl('df-payment/cancel', array('_nosid' => true));
 }
 
@@ -117,7 +117,7 @@ function rm_url_checkout_fail() {
  * @used-by Df_IPay_CustomerReturnController::indexAction()
  * @return string
  */
-function rm_url_checkout_success() {
+function df_url_checkout_success() {
 	static $r; return $r ? $r : $r = Mage::getUrl('checkout/onepage/success', array('_nosid' => true));
 }
 

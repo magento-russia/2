@@ -11,7 +11,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_View extends Mage_Adminhtml_Block
 		);
 		$this->_addButton('back', array(
 			'label' => df_h()->invitation()->__('Back')
-			,'onclick' => rm_admin_button_location('*/*/')
+			,'onclick' => df_admin_button_location('*/*/')
 			,'class' => 'back'
 		), -1);
 		if ($invitation->canBeCanceled()) {
@@ -53,7 +53,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_View extends Mage_Adminhtml_Block
 			$massResendUrl = $this->getUrl('*/*/massResend', array('_query' => http_build_query(array('invitations' => array($invitation->getId())))));
 			$this->_addButton('resend', array(
 				'label' => df_h()->invitation()->__('Send Invitation')
-				,'onclick' => rm_admin_button_location($massResendUrl)
+				,'onclick' => df_admin_button_location($massResendUrl)
 			), -1);
 		}
 		parent::_prepareLayout();

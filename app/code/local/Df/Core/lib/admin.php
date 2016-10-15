@@ -3,7 +3,7 @@
  * @param string $resourceId
  * @return bool
  */
-function rm_admin_allowed($resourceId) {return rm_admin_session()->isAllowed($resourceId);}
+function df_admin_allowed($resourceId) {return df_admin_session()->isAllowed($resourceId);}
 
 /** @return void */
 function df_admin_begin() {Df_Admin_Model_Mode::s()->begin();}
@@ -17,7 +17,7 @@ function df_admin_begin() {Df_Admin_Model_Mode::s()->begin();}
  * @param array(string => mixed) $params
  * @return string
  */
-function rm_admin_button(array $params) {
+function df_admin_button(array $params) {
 	return df_render('Mage_Adminhtml_Block_Widget_Button', $params);
 }
 
@@ -31,7 +31,7 @@ function rm_admin_button(array $params) {
  * @param string $url
  * @return string
  */
-function rm_admin_button_location($url) {
+function df_admin_button_location($url) {
 	if (df_contains($url, '*')) {
 		$url = df_url_admin($url);
 	}
@@ -68,13 +68,13 @@ function df_admin_end() {Df_Admin_Model_Mode::s()->end();}
  * @param bool $required [optional]
  * @return int
  */
-function rm_admin_id($required = true) {
+function df_admin_id($required = true) {
 	/** @var Mage_Admin_Model_User|null $user */
-	$user = rm_admin_user($required);
+	$user = df_admin_user($required);
 	/** @var int|string|null $result */
 	$result = $user->getId();
 	if (is_null($result) && $required) {
-		rm_admin_user_error();
+		df_admin_user_error();
 	}
 	return is_null($result) ? null : (int)$result;
 }
@@ -83,35 +83,35 @@ function rm_admin_id($required = true) {
  * @param bool $required [optional]
  * @return string|null
  */
-function rm_admin_name($required = true) {
+function df_admin_name($required = true) {
 	/** @var Mage_Admin_Model_User|null $user */
-	$user = rm_admin_user($required);
+	$user = df_admin_user($required);
 	return $user ? $user->getUsername() : null;
 }
 
 /** @return Mage_Admin_Model_Session */
-function rm_admin_session() {return Mage::getSingleton('admin/session');}
+function df_admin_session() {return Mage::getSingleton('admin/session');}
 
 /**
  * @param bool $required [optional]
  * @return Mage_Admin_Model_User|null $user
  */
-function rm_admin_user($required = true) {
+function df_admin_user($required = true) {
 	/** @var Mage_Admin_Model_User|null $user $result */
-	$result = rm_admin_session()->getData('user');
+	$result = df_admin_session()->getData('user');
 	if (!$result && $required) {
-		rm_admin_user_error();
+		df_admin_user_error();
 	}
 	return $result;
 }
 
 /**
- * @used-by rm_admin_id()
- * @used-by rm_admin_user()
+ * @used-by df_admin_id()
+ * @used-by df_admin_user()
  * @return void
  * @throws Exception
  */
-function rm_admin_user_error() {
+function df_admin_user_error() {
 	df_error(
 		'Программа пытается узнать данные администратора, однако администратор ещё не авторизован.'
 		. "\nЭто ошибка программиста."

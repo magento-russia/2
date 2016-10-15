@@ -8,10 +8,10 @@ class Df_Logging_Block_Grid_Filter_User extends Mage_Adminhtml_Block_Widget_Grid
 	 * @return array
 	 */
 	public function _getOptions() {
-		$options = array(rm_option('', Df_Logging_Helper_Data::s()->__('All Users')));
+		$options = array(df_option('', Df_Logging_Helper_Data::s()->__('All Users')));
 		foreach (Df_Logging_Model_Resource_Event::s()->getUserNames() as $username) {
 			/** @var string $username */
-			$options[]= rm_option($username, $username);
+			$options[]= df_option($username, $username);
 		}
 		return $options;
 	}

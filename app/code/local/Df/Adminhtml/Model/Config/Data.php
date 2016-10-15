@@ -47,7 +47,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			return $this;
 		}
 		/* @var $sections Mage_Core_Model_Config_Element */
-		$sections = rm_config_adminhtml()->getSections();
+		$sections = df_config_adminhtml()->getSections();
 		$oldConfig = $this->_getConfig(true);
 		$deleteTransaction = df_db_transaction();
 		/* @var $deleteTransaction Mage_Core_Model_Resource_Transaction */

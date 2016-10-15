@@ -44,7 +44,7 @@ function df_bt($levelsToSkip = 0) {
 				: df_ccc('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
 		);
 	}
-	rm_report('bt-{date}-{time}.log', print_r($compactBT, true));
+	df_report('bt-{date}-{time}.log', print_r($compactBT, true));
 }
 
 /** @return bool */
@@ -63,7 +63,7 @@ function df_is_it_my_local_pc() {
  * @used-by Df_Shipping_Collector::call()
  * @return void
  */
-function rm_context() {
+function df_context() {
 	/** @var mixed[] $args */
 	$args = func_get_args();
 	/** @var int $count */
@@ -86,7 +86,7 @@ function rm_context() {
  * @param bool $addQuotes [optional]
  * @return string
  */
-function rm_debug_type($value, $addQuotes = true) {
+function df_debug_type($value, $addQuotes = true) {
 	/** @var string $result */
 	if (is_object($value)) {
 		$result = 'объект класса ' . get_class($value);
@@ -108,7 +108,7 @@ function rm_debug_type($value, $addQuotes = true) {
  * @param string $message
  * @return void
  */
-function rm_report($nameTemplate, $message) {
+function df_report($nameTemplate, $message) {
 	df_file_put_contents(df_file_name(Mage::getBaseDir('var') . DS . 'log', $nameTemplate), $message);
 }
 

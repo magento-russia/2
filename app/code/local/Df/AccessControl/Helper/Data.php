@@ -25,7 +25,7 @@ class Df_AccessControl_Helper_Data extends Mage_Core_Helper_Abstract {
 	private function getCurrentRoleId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Mage_Admin_Model_User|null $user */
-			$user = rm_admin_user(false);
+			$user = df_admin_user(false);
 			/**
 			 * Здесь вполне может произойти исключительная ситуация
 			 * по вине некачественных сторонних модулей,

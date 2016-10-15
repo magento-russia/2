@@ -19,9 +19,9 @@ class Df_Admin_Config_Source_Units_Length extends Df_Admin_Config_Source {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string)) $result */
 			$result = array();
-			foreach (rm_length()->getUnitsSettings() as $unitId => $unitData) {
+			foreach (df_length()->getUnitsSettings() as $unitId => $unitData) {
 				/** @var array(string => string) $unit */
-				$result[]= rm_option($unitId, dfa($unitData, Df_Core_Model_Units_Length::UNIT__LABEL));
+				$result[]= df_option($unitId, dfa($unitData, Df_Core_Model_Units_Length::UNIT__LABEL));
 			}
 			$this->{__METHOD__} = $result;
 		}

@@ -126,7 +126,7 @@ class Df_AccessControl_Model_Role extends Df_Core_Model {
 			/** @var Df_AccessControl_Model_Role $result */
 			$result = new self;
 			/** @var int|null $id */
-			$id = rm_request('rid');
+			$id = df_request('rid');
 			if ($id) {
 				$result->load($id);
 			}

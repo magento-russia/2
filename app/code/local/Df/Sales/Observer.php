@@ -29,7 +29,7 @@ class Df_Sales_Observer {
 	 * @param Varien_Event_Observer $o
 	 * @return void
 	 */
-	public function rm_adminhtml_block_sales_order_grid__prepare_collection(Varien_Event_Observer $o) {
+	public function df_adminhtml_block_sales_order_grid__prepare_collection(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
 				Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::class
@@ -47,7 +47,7 @@ class Df_Sales_Observer {
 	 * @param Varien_Event_Observer $o
 	 * @return void
 	 */
-	public function rm_adminhtml_block_sales_order_grid__prepare_columns_after(Varien_Event_Observer $o) {
+	public function df_adminhtml_block_sales_order_grid__prepare_columns_after(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
 				Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn::class

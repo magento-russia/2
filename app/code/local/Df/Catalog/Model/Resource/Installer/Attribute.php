@@ -73,7 +73,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 					, array('? = entity_attribute_id ' => $row['entity_attribute_id'])
 				);
 				$result = self::ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP;
-				rm_eav_reset();
+				df_eav_reset();
 			}
 		}
 		else {
@@ -87,7 +87,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 				)
 			));
 			$result = self::ADD_ATTRIBUTE_TO_SET__ADDED;
-			rm_eav_reset();
+			df_eav_reset();
 		}
 		return $result;
 	}
@@ -195,7 +195,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 	 * @see Df_YandexMarket_Setup_AttributeSet
 	 * В целом, оно заключается в загрузке/создании/изменении свойства
 	 * вызовом @see Df_Dataflow_Model_Registry_Collection_Attributes::createOrUpdate()
-	 * (rm_attributes()->createOrUpdate())
+	 * (df_attributes()->createOrUpdate())
 	 * и затем ручной привязкой свойства к конкретному прикладному типу товаров,
 	 * а когда надо привязать свойство сразу ко всем прикладным типам товаров,
 	 * то это делается в цикле с вызовом соответствующего настройщика прикладного типа товаров.
@@ -232,7 +232,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 		 * Обратите внимание, что метод @uses Mage_Eav_Model_Entity_Setup::removeAttribute()
 		 * сам проверяет, присутствует ли свойство, и выполняет работу только при наличии свойства,
 		 * поэтому вручную проверять присутствие свойства не нужно.
-		 * @see rm_remove_attribute()
+		 * @see df_remove_attribute()
 		 */
 		$this->removeAttribute($entityType, $attributeId);
 		/** @var int $entityTypeId */

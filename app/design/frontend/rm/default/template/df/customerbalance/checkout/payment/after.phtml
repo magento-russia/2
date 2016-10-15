@@ -2,7 +2,7 @@
 <?php if ($this->isAllowed()): ?>
 <script type='text/javascript'>
 	isFullyPaidAfterCustomerBalanceApplication = <?php echo($this->isFullyPaidAfterApplication() ? 'true' : 'false'); ?>;
-	quoteBaseGrandTotal = <?php echo(float)rm_quote()->getBaseGrandTotal(); ?>;
+	quoteBaseGrandTotal = <?php echo(float)df_quote()->getBaseGrandTotal(); ?>;
 	function setCustomerBalanceAvailable(balance, formattedBalance) {
 		if ($('customerbalance_placer')) {
 			if (balance == 0) {

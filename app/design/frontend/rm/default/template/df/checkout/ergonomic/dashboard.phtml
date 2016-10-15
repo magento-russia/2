@@ -19,12 +19,12 @@
 	$blockLogin = $this->getChild('login');
 	/**
 	 * 2015-03-31
-	 * Обратите внимание, что функция @uses rm_quote_address_shipping()
+	 * Обратите внимание, что функция @uses df_quote_address_shipping()
 	 * не кэширует свой результат и в то же время является ресурсоёмкой,
 	 * ибо @uses Mage_Sales_Model_Quote::_getAddressByType() использует foreach.
 	 * @var Df_Sales_Model_Quote_Address $shippingAddress
 	 */
-	$shippingAddress = rm_quote_address_shipping();
+	$shippingAddress = df_quote_address_shipping();
 	$shippingAddress->setCollectShippingRates(true);
 	// Пусть система заодно зарегистрирует покупателя.
 	// Только вот что если он потом авторизуется?

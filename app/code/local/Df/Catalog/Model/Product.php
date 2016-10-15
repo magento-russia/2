@@ -192,7 +192,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 				case Mage_Catalog_Model_Product_Type::TYPE_VIRTUAL:
 					/** @var float $priceWithoutTax */
 					$priceWithoutTax = $this->getPriceModel()->getFinalPrice($qty = 1, $product = $this);
-					$result = rm_tax_h()->getPrice(
+					$result = df_tax_h()->getPrice(
 						$product = $this
 						,$price =  $priceWithoutTax
 						,$includingTax = true
@@ -204,7 +204,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					);
 					break;
 				case Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE:
-					$result = rm_tax_h()->getPrice(
+					$result = df_tax_h()->getPrice(
 						$product = $this
 						,$price = $this->getMinimalPrice()
 						,$includingTax = true
@@ -276,7 +276,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 								,$takeTierPrice = false
 							)
 						:
-							rm_tax_h()->getPrice(
+							df_tax_h()->getPrice(
 								$this
 								, $priceModel->getPrices($this, $which = 'min'), $includingTax = true
 							)
@@ -299,7 +299,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					/** @var float $priceWithoutTax */
 					$priceWithoutTax = $this->getPriceModel()->getFinalPrice($qty = 1, $product = $this);
 					$result =
-						rm_tax_h()->getPrice(
+						df_tax_h()->getPrice(
 							$product = $this
 							,$price =  $priceWithoutTax
 							,$includingTax = true
@@ -368,9 +368,9 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					 * заменив стандартный справочник стран на нестандартные текстовые названия стран.
 					 * http://magento-forum.ru/index.php?app=members&module=messaging&section=view&do=showConversation&topicID=2105
 					 */
-					$code = rm_country_ntc_ru($code);
+					$code = df_country_ntc_ru($code);
 				}
-				$result = $code ? rm_country($code) : null;
+				$result = $code ? df_country($code) : null;
 			}
 			$this->{__METHOD__} = df_n_set($result);
 		}
@@ -838,7 +838,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	}
 
 	/** @return float */
-	public function getWeightInKilogrammes() {return rm_weight()->inKilogrammes($this->getWeight());}
+	public function getWeightInKilogrammes() {return df_weight()->inKilogrammes($this->getWeight());}
 
 	/**
 	 * Обратите внимание, что этот метод надлежит использовать только для простых товаров!
@@ -1043,7 +1043,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 
 	/** @return string|null */
 	private function getCategoryTail() {
-		return !rm_state()->hasCategory() ? null : rm_state()->getCurrentCategory()->getName();
+		return !df_state()->hasCategory() ? null : df_state()->getCurrentCategory()->getName();
 	}
 
 	/** @return boolean */
@@ -1142,7 +1142,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	const P__META_TITLE = 'meta_title';
 	const P__NAME = 'name';
 	const P__PRICE = 'price';
-	const P__RM__LOADED_IN_COLLECTION = 'rm__loaded_in_collection';
+	const P__RM__LOADED_IN_COLLECTION = 'df__loaded_in_collection';
 	const P__RM_CATEGORY_ID = 'rm_category_id';
 	const P__SHORT_DESCRIPTION = 'short_description';
 	const P__SKU = 'sku';

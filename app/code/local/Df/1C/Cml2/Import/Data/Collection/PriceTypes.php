@@ -34,7 +34,7 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 			if (!$this->hasItems()) {
 				$this->throwError_noPriceTypes();
 			}
-			$this->{__METHOD__} = $this->findByName(rm_1c_cfg()->product()->prices()->getMain());
+			$this->{__METHOD__} = $this->findByName(df_1c_cfg()->product()->prices()->getMain());
 			if (!$this->{__METHOD__}) {
 				df_error(
 					  'Модуль «1С:Управление торговлей» для Magento'
@@ -51,7 +51,7 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 					. ' узла обмена в «1С:Управление торговлей».'
 					. "\nИнструкция по настройке типового соглашения «1С:Управление торговлей»"
 					. ' для обмена данными с интернет-магазином: http://magento-forum.ru/topic/3100/'
-					,array('{название типового соглашения}' => rm_1c_cfg()->product()->prices()->getMain())
+					,array('{название типового соглашения}' => df_1c_cfg()->product()->prices()->getMain())
 				);
 			}
 		}

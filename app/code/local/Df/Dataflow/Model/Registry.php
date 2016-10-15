@@ -17,7 +17,7 @@ class Df_Dataflow_Model_Registry extends Df_Core_Model {
 			 * Обратите внимание, что магазин можно установить вручную
 			 * методом @see Df_Dataflow_Model_Registry::setStoreProcessed()
 			 */
-			$this->_storeProcessed = rm_state()->getStoreProcessed();
+			$this->_storeProcessed = df_state()->getStoreProcessed();
 		}
 		return $this->_storeProcessed;
 	}

@@ -45,11 +45,11 @@ class Df_Speed_Observer {
 				/** @var bool $isFrontendArea */
 				$isFrontendArea = !df_contains(
 					Mage::app()->getRequest()->getOriginalPathInfo()
-					,df_leaf_s(rm_config_node('admin/routers/adminhtml/args/frontName'))
+					,df_leaf_s(df_config_node('admin/routers/adminhtml/args/frontName'))
 				);
 				if ($isFrontendArea) {
 					/** @var Mage_Core_Model_Config_Element $eventsConfig */
-					$eventsConfig = rm_config_node(Df_Core_Const_Design_Area::FRONTEND)->{'events'};
+					$eventsConfig = df_config_node(Df_Core_Const_Design_Area::FRONTEND)->{'events'};
 					/** @var SimpleXMLElement[]|bool $logNodes */
 					$logNodes = $eventsConfig->xpath('//observers/log');
 					if (is_array($logNodes)) {

@@ -19,8 +19,8 @@ class Df_Reward_CartController extends Mage_Core_Controller_Front_Action {
 		if (!df_h()->reward()->isEnabledOnFront() || !df_h()->reward()->getHasRates()) {
 			$this->_redirect('customer/account/');
 		}
-		if (rm_quote()->getUseRewardPoints()) {
-			rm_quote()->setUseRewardPoints(false)->collectTotals()->save();
+		if (df_quote()->getUseRewardPoints()) {
+			df_quote()->setUseRewardPoints(false)->collectTotals()->save();
 			df_session_checkout()->addSuccess(
 				$this->__('Reward Points were successfully removed from your order.')
 			);

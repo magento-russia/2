@@ -35,7 +35,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 				[option_id] => 35
 				[attribute_id] => 148
 				[sort_order] => 2
-				[rm_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
+				[df_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
 				[default_value] => натуральная кожа
 				[store_default_value] =>
 				[value] => натуральная кожа
@@ -59,7 +59,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 				[option_id] => 35
 				[attribute_id] => 148
 				[sort_order] => 2
-				[rm_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
+				[df_1c_id] => 14ed8b52-55bd-11d9-848a-00112f43529a
 				[default_value] => натуральная кожа
 				[store_default_value] =>
 				[value] => натуральная кожа
@@ -137,7 +137,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	protected function findMagentoAttributeInRegistry() {
-		return rm_attributes()->findByExternalId($this->getAttributeExternalId());
+		return df_attributes()->findByExternalId($this->getAttributeExternalId());
 	}
 
 	/**
@@ -146,7 +146,7 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 */
 	protected function getAttributeCodeNew() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_1c()->generateAttributeCode(
+			$this->{__METHOD__} = df_1c()->generateAttributeCode(
 				$this->getAttributeEntity()->getName()
 				// Намеренно убрал второй параметр ($this->getProduct()->getAppliedTypeName()),
 				// потому что счёл ненужным в данном случае
@@ -206,13 +206,13 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 			/** @var bool $result */
 			$result = false;
 			/** @var Mage_Eav_Model_Entity_Attribute|null $attribute */
-			$attribute = rm_attributes()->findByExternalId($this->getAttributeExternalId());
+			$attribute = df_attributes()->findByExternalId($this->getAttributeExternalId());
 			if ($attribute) {
 				df_assert($attribute instanceof Mage_Eav_Model_Entity_Attribute);
 				// Смотрим, принадлежит ли свойство типу товара
 				/** @var Mage_Eav_Model_Resource_Entity_Attribute_Collection $attributes */
 				$attributes = Mage::getResourceModel('eav/entity_attribute_collection');
-				$attributes->setEntityTypeFilter(rm_eav_id_product());
+				$attributes->setEntityTypeFilter(df_eav_id_product());
 				$attributes->addSetInfo();
 				$attributes->addFieldToFilter('attribute_code', $attribute->getAttributeCode());
 				$attributes->load();

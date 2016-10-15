@@ -15,7 +15,7 @@ class Df_Reports_Helper_GroupResultsByWeek extends Mage_Core_Helper_Abstract {
 			/** @var array(string => string) $result */
 			$result = array();
 			/** @var string|null $f$filterAsStringilter */
-			$filterAsString = rm_request('filter');
+			$filterAsString = df_request('filter');
 			if (!is_null($filterAsString)) {
 				df_assert_string($filterAsString);
 				/** @var array $result */

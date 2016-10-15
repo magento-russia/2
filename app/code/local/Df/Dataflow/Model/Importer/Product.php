@@ -12,7 +12,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 			/**
 			 * 2015-08-11
 			 * Раньше здесь стояло:
-			 * rm_eav_reset($reindexFlatProducts = false);
+			 * df_eav_reset($reindexFlatProducts = false);
 			 * Однако если предшествующий код работал с кэшем правильно,
 			 * то нам вовсе нет необходимости грохать здесь кэш полностью.
 			 * А если предшествующий код работал с кэшем неправильно,
@@ -483,7 +483,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 				}
 				if ($fieldAttribute->usesSource()) {
 					/** @var array $options */
-					$options = rm_attribute_options($fieldAttribute);
+					$options = df_attribute_options($fieldAttribute);
 					df_assert_array($options);
 					if (!$isArray) {
 						/**
@@ -492,7 +492,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 						 * вдруг набор опций изменится?
 						 * @var array(string => string|int) $map
 						 */
-						$map = rm_options_to_map_reverse($options);
+						$map = df_options_to_map_reverse($options);
 						/**
 						 * 2015-08-10
 						 * Сделал значенем по умолчанию само значение.
@@ -559,7 +559,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 	 */
 	private function getAttributeForField($code) {
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $result */
-		$result = rm_attributes()->findByCode($code);
+		$result = df_attributes()->findByCode($code);
 		// 2015-08-10
 		// Некоторые свойства являются виртуальными.
 		// Пример: «websites».

@@ -13,7 +13,7 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * Раньше тут стояло
-			 * $theme = rm_design_package()->getTheme('skin');
+			 * $theme = df_design_package()->getTheme('skin');
 			 * То есть, мы использовали в качестве идентификатора темы
 			 * значение опции «Нестандартная папка браузерных файлов».
 			 * Однако в оформительской теме Gala TitanShop в одном из демо-примеров
@@ -22,16 +22,16 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 			 * в то время как опция «Нестандартная папка темы» имеет правильное значение
 			 * «galatitanshop».
 			 * Поэтому вместо
-			 * $theme = rm_design_package()->getTheme('skin');
+			 * $theme = df_design_package()->getTheme('skin');
 			 * я решил использовать
-			 * $theme = rm_design_package()->getTheme('default');
+			 * $theme = df_design_package()->getTheme('default');
 			 * Передавая в метод getTheme() параметр «default», мы извлекаем значение опции
 			 * «Нестандартная папка темы».
 			 */
 			/** @var array(string => string) $options */
 			$options = array(
-				'package' => rm_state()->getCurrentDesignPackage()
-				,'theme' => rm_state()->getCurrentDesignTheme()
+				'package' => df_state()->getCurrentDesignPackage()
+				,'theme' => df_state()->getCurrentDesignTheme()
 			);
 			/**
 			 * С другой стороны, значение опции «Нестандартная папка браузерных файлов»
@@ -41,7 +41,7 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 			 * только не в ключе «theme», а в ключе «skin».
 			 */
 			/** @var string $skin */
-			$skin = rm_design_package()->getTheme('skin');
+			$skin = df_design_package()->getTheme('skin');
 			if ($skin) {
 				$options['skin'] = $skin;
 			}

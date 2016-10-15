@@ -34,7 +34,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	/** @return bool */
 	private function areLocalModulesDisabled() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_leaf_b(rm_config_node('global/disable_local_modules'));
+			$this->{__METHOD__} = df_leaf_b(df_config_node('global/disable_local_modules'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -45,7 +45,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 			/** @var array(string => Df_Varien_Simplexml_Config) $result */
 			$result = array();
 			/** @var array(string => Mage_Core_Model_Config_Element) $moduleDeclarations */
-			$moduleDeclarations = rm_config_node('modules')->children();
+			$moduleDeclarations = df_config_node('modules')->children();
 			/** @var string[] $configFileBaseNames */
 			$configFileBaseNames = array('config.xml', $this->getResourceConfigFileName());
 			foreach ($moduleDeclarations as $moduleName => $moduleDeclaration) {

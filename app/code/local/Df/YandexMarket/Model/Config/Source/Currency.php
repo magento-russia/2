@@ -15,7 +15,7 @@ class Df_YandexMarket_Model_Config_Source_Currency extends Df_Admin_Config_Sourc
 	private function getAsOptionArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $optionCurrencyMap */
-			$optionCurrencyMap = rm_options_to_map(Mage::app()->getLocale()->getOptionCurrencies());
+			$optionCurrencyMap = df_options_to_map(Mage::app()->getLocale()->getOptionCurrencies());
 			/** @var string[][] $result */
 			$result = array();
 			foreach (self::$_currencies as $currencyCode) {
@@ -23,7 +23,7 @@ class Df_YandexMarket_Model_Config_Source_Currency extends Df_Admin_Config_Sourc
 				/** @var string|null $label */
 				$label = dfa($optionCurrencyMap, $currencyCode);
 				if (!is_null($label)) {
-					$result[]= rm_option($currencyCode, $label);
+					$result[]= df_option($currencyCode, $label);
 				}
 			}
 			$this->{__METHOD__} = $result;
@@ -38,7 +38,7 @@ class Df_YandexMarket_Model_Config_Source_Currency extends Df_Admin_Config_Sourc
 	 */
 	public static function check($code) {
 		if (!in_array($code, self::$_currencies)) {
-			df_error('Яндекс.Маркет не допускает указанную Вами валюту «%s».', rm_currency_name($code));
+			df_error('Яндекс.Маркет не допускает указанную Вами валюту «%s».', df_currency_name($code));
 		}
 	}
 

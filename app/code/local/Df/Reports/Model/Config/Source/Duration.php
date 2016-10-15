@@ -28,7 +28,7 @@ class Df_Reports_Model_Config_Source_Duration extends Df_Admin_Config_Source {
 	 */
 	private function option($value, $label, $durationDatePart = null, $durationValue = null) {
 		/** @var array(string => string|array(string|int)) $result */
-		$result = rm_option($value, $label);
+		$result = df_option($value, $label);
 		if ($durationDatePart) {
 			$result += array(self::OPTION_PARAM__DURATION => array(
 				self::OPTION_PARAM__DURATION__DATEPART => $durationDatePart

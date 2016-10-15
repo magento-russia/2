@@ -28,7 +28,7 @@ class Df_Localization_Onetime_Action extends Df_Core_Model_Action_Admin {
 	}
 
 	/** @return string */
-	private function getProcessorId() {return rm_request(self::RP__PROCESSOR);}
+	private function getProcessorId() {return df_request(self::RP__PROCESSOR);}
 
 	const RP__PROCESSOR = 'processor';
 }

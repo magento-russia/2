@@ -46,7 +46,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		/** @var string $result */
 		$result = df_nts($this->_getData('description'));
 		/** @var int $pageNumber */
-		$pageNumber = df_nat0(rm_request('p'));
+		$pageNumber = df_nat0(df_request('p'));
 		if (
 				1 < $pageNumber
 			&&
@@ -262,7 +262,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 
 	const P__DISPLAY_MODE = 'display_mode';
 	const P__EXCLUDE_URL_REWRITE = 'exclude_url_rewrite';
-	const P__EXTERNAL_URL = 'rm__external_url';
+	const P__EXTERNAL_URL = 'df__external_url';
 	const P__ID = Mage_Eav_Model_Entity::DEFAULT_ENTITY_ID_FIELD;
 	const P__IS_ACTIVE = 'is_active';
 	const P__IS_ANCHOR = 'is_anchor';

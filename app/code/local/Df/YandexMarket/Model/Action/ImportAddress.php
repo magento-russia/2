@@ -71,7 +71,7 @@ class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Action {
 	}
 	
 	/** @return string|null */
-	private function getCountryId() {return rm_country_ntc_ru($this->_post('country'));}
+	private function getCountryId() {return df_country_ntc_ru($this->_post('country'));}
 
 	/** @return Mage_Checkout_Model_Session */
 	private function getSession() {return df_session_checkout();}

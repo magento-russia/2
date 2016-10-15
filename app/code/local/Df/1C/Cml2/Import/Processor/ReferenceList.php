@@ -13,7 +13,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 		 * Обратите внимание, что класс — именно этот даже в Magento 1.4.0.1
 		 * @var Df_Catalog_Model_Resource_Eav_Attribute $attribute
 		 */
-		$attribute = rm_attributes()->findByExternalId($this->getEntity()->getExternalId());
+		$attribute = df_attributes()->findByExternalId($this->getEntity()->getExternalId());
 		/** @var mixed[] $attributeData */
 		if ($attribute) {
 			self::removeDuplicateOptionsWithTheSameExternalId($attribute);
@@ -23,7 +23,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 					$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 				)
 			));
-			rm_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
+			df_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
 		}
 		else {
 			/**
@@ -41,7 +41,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 				// Убеждаемся, что стандартное свойство не удалено
 				/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 				$attribute = Df_Catalog_Model_Resource_Eav_Attribute::i();
-				$attribute->loadByCode(rm_eav_id_product(), $standardCode);
+				$attribute->loadByCode(df_eav_id_product(), $standardCode);
 				if (!$attribute->getId()) {
 					$attribute = null;
 				}
@@ -58,12 +58,12 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 						$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 					)
 				));
-				rm_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
+				df_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
 			}
 			else {
 				$attributeData = array(
-					'entity_type_id' => rm_eav_id_product()
-					,'attribute_code' => rm_1c()->generateAttributeCode($this->getEntity()->getName())
+					'entity_type_id' => df_eav_id_product()
+					,'attribute_code' => df_1c()->generateAttributeCode($this->getEntity()->getName())
 					/**
 					 * В Magento CE 1.4, если поле «attribute_model» присутствует,
 					 * то его значение не может быть пустым
@@ -90,7 +90,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 					,'is_filterable' => 1
 					,'is_comparable' => 1
 					,'is_visible_on_front' =>
-						df_01(rm_1c_cfg()->product()->other()->showAttributesOnProductPage())
+						df_01(df_1c_cfg()->product()->other()->showAttributesOnProductPage())
 					,'is_html_allowed_on_front' => 0
 					,'is_used_for_price_rules' => 0
 					,'is_filterable_in_search' => 1
@@ -113,11 +113,11 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 					,Df_1C_Const::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
 					,'option' => $this->getEntity()->getOptionsInMagentoFormat()
 				);
-				rm_1c_log('Создание справочника «%s».', $this->getEntity()->getName());
+				df_1c_log('Создание справочника «%s».', $this->getEntity()->getName());
 			}
 		}
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-		$attribute = rm_attributes()->createOrUpdate($attributeData);
+		$attribute = df_attributes()->createOrUpdate($attributeData);
 		if (!$attribute->get1CId()) {
 			df_error(
 				'У свойства «%s» в данной точке программы'
@@ -127,7 +127,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 		}
 		// Назначаем справочным значениям идентификаторы из 1С
 		$this->assignExternalIdToOptions($attribute);
-		df_assert(!!rm_attributes()->findByExternalId($attribute->get1CId()));
+		df_assert(!!df_attributes()->findByExternalId($attribute->get1CId()));
 	}
 
 	/**

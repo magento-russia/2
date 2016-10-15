@@ -25,7 +25,7 @@ class Df_Admin_Model_Notifier_Collection extends Df_Varien_Data_Collection_Singl
 	}
 
 	/** @return array(string => string) */
-	private function getClasses() {return rm_config_a('df/admin/notifiers');}
+	private function getClasses() {return df_config_a('df/admin/notifiers');}
 
 	/** @return Df_Admin_Model_Notifier_Collection */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

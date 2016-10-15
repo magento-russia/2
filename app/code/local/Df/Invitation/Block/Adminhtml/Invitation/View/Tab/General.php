@@ -205,5 +205,5 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General
 	 * Check whether can show referral link
 	 * @return bool
 	 */
-	public function canShowReferralLink() {return rm_admin_allowed('customer/manage');}
+	public function canShowReferralLink() {return df_admin_allowed('customer/manage');}
 }

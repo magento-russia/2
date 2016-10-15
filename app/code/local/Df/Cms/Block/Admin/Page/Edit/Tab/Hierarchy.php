@@ -150,7 +150,7 @@ class Df_Cms_Block_Admin_Page_Edit_Tab_Hierarchy
 		return
 			$this->getPage()->getId()
 			&& df_cfg()->cms()->hierarchy()->isEnabled()
-			&& rm_admin_allowed('cms/hierarchy')
+			&& df_admin_allowed('cms/hierarchy')
 		;
 	}
 

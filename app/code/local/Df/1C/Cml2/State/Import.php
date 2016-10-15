@@ -292,7 +292,7 @@ class Df_1C_Cml2_State_Import extends Df_Core_Model {
 	private function getRootCategoryId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $result */
-			$result = df_nat0(rm_state()->getStoreProcessed()->getRootCategoryId());
+			$result = df_nat0(df_state()->getStoreProcessed()->getRootCategoryId());
 			if (0 === $result) {
 				df_error('В обрабатываемом магазине должен присутствовать корневой товарный раздел');
 			}

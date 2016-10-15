@@ -18,7 +18,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 
 	/** @return string */
 	public function getIpAddress() {
-		return !rm_controller() ? '' : rm_controller()->getRequest()->getClientIp();
+		return !df_controller() ? '' : df_controller()->getRequest()->getClientIp();
 	}
 
 	/** @return string */

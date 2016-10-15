@@ -14,7 +14,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 		/** @var int $attributeSetId */
 		$attributeSetId = $this->getAttributeSetId();
 		/** @var array(int => string) $attributeCodes */
-		$attributeCodes = rm_attribute_set()->attributeCodes($attributeSetId);
+		$attributeCodes = df_attribute_set()->attributeCodes($attributeSetId);
 		/** @var string[] $missed */
 		$missed = array_diff($this->helper()->getRequiredFields(), $attributeCodes);
 		if ($missed) {
@@ -40,7 +40,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 			$result = null;
 			if (!is_null($this->getAttributeSetName())) {
 				/** @var int $result */
-				$result = rm_attribute_set()->idByName($this->getAttributeSetName());
+				$result = df_attribute_set()->idByName($this->getAttributeSetName());
 				if (!$result) {
 					$this->error(
 						'Прикладной тип товара «%s», '

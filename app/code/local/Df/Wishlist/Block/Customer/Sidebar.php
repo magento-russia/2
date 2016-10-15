@@ -50,6 +50,6 @@ class Df_Wishlist_Block_Customer_Sidebar extends Mage_Wishlist_Block_Customer_Si
 		// Исключение попытки получения плана покупок для неавторизованных посетителей
 		// значительно ускоряет систему.
 		/** @uses Mage_Wishlist_Model_Item::getProductId() */
-		return !rm_customer_logged_in() ? array() : $this->getWishlistItems()->walk('getProductId');
+		return !df_customer_logged_in() ? array() : $this->getWishlistItems()->walk('getProductId');
 	}
 }

@@ -24,7 +24,7 @@ class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model {
 			/** @var array(string => array(string => bool) $result */
 			$result = array();
 			/** @var Mage_Core_Model_Config_Element[]|bool $nodes */
-			$nodes = rm_config_node('df/admin/class_rewrite_conflicts/skip/conflict');
+			$nodes = df_config_node('df/admin/class_rewrite_conflicts/skip/conflict');
 			if ($nodes) {
 				foreach ($nodes as $node) {
 					/** @var Mage_Core_Model_Config_Element $node */

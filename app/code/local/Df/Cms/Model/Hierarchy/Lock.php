@@ -125,7 +125,7 @@ class Df_Cms_Model_Hierarchy_Lock extends Df_Core_Model {
 	 * Getter for session instance
 	 * @return Mage_Core_Model_Session_Abstract
 	 */
-	protected function _getSession() {return $this->_session ? $this->_session : rm_admin_session();}
+	protected function _getSession() {return $this->_session ? $this->_session : df_admin_session();}
 
 
 	const P__ID = 'lock_id';

@@ -88,14 +88,6 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 	protected function getDocType() {return "<!DOCTYPE yml_catalog SYSTEM 'shops.dtd'>";}
 
 	/**
-	 * @override
-	 * @return string[]
-	 */
-	protected function getEmailAddressesToNotify() {
-		return array(df_cfg()->yandexMarket()->general()->getNotificationEmail());
-	}
-
-	/**
 	 * Намеренно возвращаем пустое значение!
 	 * @override
 	 * @return string
@@ -173,7 +165,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 			'name' => $this->getSettings()->shop()->getNameForClients()
 			,'company' => $this->getSettings()->shop()->getNameForAdministration()
 			,'url' => $this->preprocessUrl(
-				rm_state()->getStoreProcessed()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
+				df_state()->getStoreProcessed()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
 			)
 			,'platform' => 'Российская сборка Magento'
 			,'version' => df_version()

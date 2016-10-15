@@ -22,7 +22,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	public function generateAttributeCode($attributeLabel, $prefix = null) {
 		df_param_string_not_empty($attributeLabel, 0);
 		return Df_Eav_Model_Entity_Attribute_Namer::i(
-			$attributeLabel, array_filter(array('rm_1c', $prefix))
+			$attributeLabel, array_filter(array('df_1c', $prefix))
 		)->getResult();
 	}
 
@@ -33,7 +33,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 * @return void
 	 */
 	public function log($message) {
-		if (rm_1c_cfg()->general()->needLogging()) {
+		if (df_1c_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
 			self::logger()->log(df_format($arguments));
@@ -45,7 +45,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 * @return void
 	 */
 	public function logRaw($message) {
-		if (rm_1c_cfg()->general()->needLogging()) {
+		if (df_1c_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
 			self::logger()->logRaw(df_format($arguments));
@@ -60,7 +60,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 */
 	public function saveConfigValue($path, $value) {
 		Mage::getConfig()->saveConfig(
-			$path, $value, $scope = 'stores', $scopeId = rm_state()->getStoreProcessed()->getId()
+			$path, $value, $scope = 'stores', $scopeId = df_state()->getStoreProcessed()->getId()
 		);
 		df_store()->setConfig($path, $value);
 	}
@@ -83,9 +83,9 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 				$filePath = df_file_name(
 					df_cc_path(
 						Mage::getBaseDir('var'), 'log'
-						, rm_1c_cfg()->general()->getLogFileNameTemplatePath()
+						, df_1c_cfg()->general()->getLogFileNameTemplatePath()
 					)
-					, rm_1c_cfg()->general()->getLogFileNameTemplateBaseName()
+					, df_1c_cfg()->general()->getLogFileNameTemplateBaseName()
 				);
 				Df_1C_Cml2_Session_ByCookie_1C::s()->setFileName_Log($filePath);
 			}

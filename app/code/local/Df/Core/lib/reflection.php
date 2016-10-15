@@ -395,7 +395,7 @@ function df_module_name_lc($class = null, $delimiter = '_') {
 function df_module_title($class = null) {
 	/** @var string $moduleName */
 	$moduleName = df_module_name($class);
-	return df_leaf_s(rm_config_node('modules', $moduleName,  'title'), $moduleName);
+	return df_leaf_s(df_config_node('modules', $moduleName,  'title'), $moduleName);
 }
 
 

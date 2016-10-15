@@ -98,9 +98,9 @@ class Df_Localization_Realtime_Translator extends Df_Core_Model {
 	 */
 	private function themeDictionaryPath() {
 		/** @var Mage_Core_Model_Config_Element $configNode */
-		$configNode = rm_config_node(
+		$configNode = df_config_node(
 			'rm/translation'
-			,rm_design_package()->getPackageName()
+			,df_design_package()->getPackageName()
 			,df_mage()->core()->design()->getThemeFrontend()
 		);
 		return !$configNode ? null : df_leaf_sne($configNode);

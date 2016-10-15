@@ -86,5 +86,5 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	 * @used-by on()
 	 * @var string
 	 */
-	private static $REDIRECTED = 'rm__redirected_to_payment_system';
+	private static $REDIRECTED = 'df__redirected_to_payment_system';
 }

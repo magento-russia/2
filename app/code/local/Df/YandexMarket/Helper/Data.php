@@ -55,9 +55,9 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 		 * приводит к запросу из базы данных одного и того же списка стран
 		 * для каждого товара:
 			SELECT `main_table`.* FROM `directory_country` AS `main_table`
-		 * Наш новый способ @uses rm_country_ctn_ru() эффективнее.
+		 * Наш новый способ @uses df_country_ctn_ru() эффективнее.
 		 */
-		return $result ? $result : rm_country_ctn_ru($iso2Code);
+		return $result ? $result : df_country_ctn_ru($iso2Code);
 	}
 
 	/**
@@ -95,7 +95,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 			/** @var string $nonStandardDomain */
 			$nonStandardDomain = $this->settings()->other()->getDomain();
 			/** @var string $storeDomain */
-			$storeDomain = Df_Core_Model_Store::s()->getDomain(rm_state()->getStoreProcessed());
+			$storeDomain = Df_Core_Model_Store::s()->getDomain(df_state()->getStoreProcessed());
 			df_assert(df_contains($url, $storeDomain));
 			$result = str_replace($storeDomain, $nonStandardDomain, $url);
 		}

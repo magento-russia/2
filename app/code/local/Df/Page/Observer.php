@@ -19,7 +19,7 @@ class Df_Page_Observer {
 	 * @param Varien_Event_Observer $o
 	 * @return void
 	 */
-	public function rm_menu_top_add_submenu(Varien_Event_Observer $o) {
+	public function df_menu_top_add_submenu(Varien_Event_Observer $o) {
 		try {
 			Df_Page_Model_Menu_Product_Inserter::p(Df_Page_Model_Menu_Product_Old::i($o['menu']));
 		}

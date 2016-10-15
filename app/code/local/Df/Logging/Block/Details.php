@@ -75,7 +75,7 @@ class Df_Logging_Block_Details extends Mage_Adminhtml_Block_Widget_Container {
 		parent::_construct();
 		$this->_addButton('back', array(
 			'label' => Df_Logging_Helper_Data::s()->__('Back')
-			,'onclick' => rm_admin_button_location('*/*/')
+			,'onclick' => df_admin_button_location('*/*/')
 			,'class' => 'back'
 		));
 	}

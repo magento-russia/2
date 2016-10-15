@@ -2,7 +2,7 @@
 class Df_1C_Config_Api_General extends Df_1C_Config_Api_Cml2 {
 	/**
 	 * @used-by ссMapTo1C()
-	 * @used-by rm_1c_currency_code_to_magento_format()
+	 * @used-by df_1c_currency_code_to_magento_format()
 	 * @return array(string => string)
 	 */
 	public function ccMapFrom1C() {
@@ -20,7 +20,7 @@ class Df_1C_Config_Api_General extends Df_1C_Config_Api_Cml2 {
 	}
 
 	/**
-	 * @used-by rm_1c_currency_code_to_1c_format()
+	 * @used-by df_1c_currency_code_to_1c_format()
 	 * @return array(string => string)
 	 */
 	public function ссMapTo1C() {
@@ -38,8 +38,8 @@ class Df_1C_Config_Api_General extends Df_1C_Config_Api_Cml2 {
 			$this->{__METHOD__} = strtr(
 				df_trim_ds_left(df_path_n($this->getString('log_file_name_template')))
 				,array(
-					'{store-view}' => rm_state()->getStoreProcessed()->getCode()
-					,'{node}' => rm_request('node')
+					'{store-view}' => df_state()->getStoreProcessed()->getCode()
+					,'{node}' => df_request('node')
 				)
 			);
 		}

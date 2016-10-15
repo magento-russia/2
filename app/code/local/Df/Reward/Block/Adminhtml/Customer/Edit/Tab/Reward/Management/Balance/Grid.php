@@ -50,9 +50,9 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Balance_Grid
 	protected function _afterToHtml($html) {
 		$html = parent::_afterToHtml($html);
 		if ($this->_customerHasOrphanPoints) {
-			$html .= rm_admin_button(array(
+			$html .= df_admin_button(array(
 				'label' => df_h()->reward()->__('Delete Orphan Points')
-				,'onclick' => rm_admin_button_location($this->getDeleteOrphanPointsUrl())
+				,'onclick' => df_admin_button_location($this->getDeleteOrphanPointsUrl())
 				,'class' => 'scalable delete'
 			));
 		}

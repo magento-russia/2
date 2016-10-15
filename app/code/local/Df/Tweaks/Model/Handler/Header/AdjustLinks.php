@@ -23,7 +23,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 			&&
 				$this->getBlock()
 			&&
-				!rm_customer_logged_in()
+				!df_customer_logged_in()
 		) {
 			$this->getBlock()->removeLinkByUrl($this->getBlock()->getUrl('customer/account'));
 		}
@@ -38,7 +38,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 				 * @see Df_Tweaks_Model_Handler_Header_AdjustLinks::replaceAccountLinkTitleWithCustomerName()
 				 * для анонимных покупателей ускоряет для таких покупателей работу системы.
 				 */
-				rm_customer_logged_in()
+				df_customer_logged_in()
 		) {
 			$this->replaceAccountLinkTitleWithCustomerName();
 		}

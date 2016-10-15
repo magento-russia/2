@@ -6,7 +6,7 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 			/** @var Df_Eav_Model_Entity_Attribute_Set $result */
 			$result = Df_Eav_Model_Entity_Attribute_Set::i();
 			$result
-				->setEntityTypeId(rm_eav_id_product())
+				->setEntityTypeId(df_eav_id_product())
 				->setAttributeSetName($this->getName())
 				->validate()
 			;
@@ -75,7 +75,7 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 		// Здесь надо добавлять свои стандартные товарные свойства
 		Df_Core_Setup_AttributeSet::runBlank($attributeSet);
 		df_h()->eav()->packetUpdateEnd();
-		rm_eav_reset();
+		df_eav_reset();
 	}
 
 	/** @return string */

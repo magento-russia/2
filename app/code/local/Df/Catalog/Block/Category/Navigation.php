@@ -110,7 +110,7 @@ class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 			/** @var Df_Catalog_Model_Category $result */
 			$result = $this['category'];
 			if (!$result) {
-				$result = rm_state()->getCurrentCategory();
+				$result = df_state()->getCurrentCategory();
 			}
 			df_assert($result instanceof Df_Catalog_Model_Category);
 			$this->{__METHOD__} = $result;

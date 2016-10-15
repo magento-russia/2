@@ -214,7 +214,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 				);
 			}
 			else {
-				rm_report($this->getReportFileName(), $this->getSubject());
+				df_report($this->getReportFileName(), $this->getSubject());
 				$message = strtr(
 					"При применении регулярного выражения «{pattern}»"
 					." произошёл сбой{errorCodeForUser}."
@@ -262,7 +262,7 @@ class Df_Core_Model_Text_Regex extends Df_Core_Model {
 				);
 			}
 			else {
-				rm_report($this->getReportFileName(), $this->getSubject());
+				df_report($this->getReportFileName(), $this->getSubject());
 				$message = strtr(
 					"Текст не отвечает регулярному выражению «{pattern}»."
 					."\nТекст смотрите в файле {reportFilePath}."

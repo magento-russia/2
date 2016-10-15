@@ -14,11 +14,11 @@ class Df_CustomerBalance_CartController extends Mage_Core_Controller_Front_Actio
 			$this->_redirect('customer/account/');
 		}
 		else {
-			if (rm_quote()->getUseCustomerBalance()) {
+			if (df_quote()->getUseCustomerBalance()) {
 				df_session_checkout()->addSuccess(
 					$this->__('Store Credit payment was successfully removed from your shopping cart.')
 				);
-				rm_quote()->setUseCustomerBalance(false)->collectTotals()->save();
+				df_quote()->setUseCustomerBalance(false)->collectTotals()->save();
 			} else {
 				df_session_checkout()->addError(
 					$this->__('Store Credit payment is not being used in your shopping cart.')

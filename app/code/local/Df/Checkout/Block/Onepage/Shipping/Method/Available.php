@@ -16,7 +16,7 @@ class Df_Checkout_Block_Onepage_Shipping_Method_Available
 	 */
 	public function getShippingRates() {
 		return
-			isset($this->_rates) || df_is_admin() || !rm_checkout_ergonomic()
+			isset($this->_rates) || df_is_admin() || !df_checkout_ergonomic()
 			? parent::getShippingRates()
 			: $this->_rates = $this->getAddress()->getGroupedAllShippingRates()
 		;

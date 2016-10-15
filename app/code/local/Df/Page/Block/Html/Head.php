@@ -46,14 +46,14 @@ class Df_Page_Block_Html_Head extends Mage_Page_Block_Html_Head {
 			/**
 			 * 2015-08-25
 			 * Раньше тут стояло:
-			 * $result[]= rm_action_name();
+			 * $result[]= df_action_name();
 			 * Крайне неряшливый модуль Ves_Blog
 			 * оформительской темы Ves Super Store (ThemeForest 8002349)
 			 * ломает инициализацию системы, и в данной точке программы
 			 * контроллер может быть ещё не инициализирован.
 			 */
 			/** @var string $a */
-			$a = rm_action_name();
+			$a = df_action_name();
 			/** @var string $cacheKey */
 			$cacheKey = $this->getCache()->makeKey(__METHOD__, $a ? $a : df_current_url());
 			$result = $this->getCache()->loadData($cacheKey);

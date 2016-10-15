@@ -145,7 +145,7 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_globalSkipFields = df_clean(df_csv_parse(df_leaf_s(rm_config_node(
+		$this->_globalSkipFields = df_clean(df_csv_parse(df_leaf_s(df_config_node(
 			self::XML_PATH_SKIP_GLOBAL_FIELDS
 		))));
 	}

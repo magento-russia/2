@@ -111,7 +111,7 @@ class Df_Adminhtml_Observer  {
 			 * Встретил такое в магазине atletica.baaton.com
 			 */
 			if (
-					rm_loc()->isEnabled()
+					df_loc()->isEnabled()
 				&&
 					$controller instanceof Mage_Adminhtml_Controller_Action
 				&&

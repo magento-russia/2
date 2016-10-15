@@ -81,7 +81,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				$accessLevel = Df_Cms_Model_Config::s()->getAllowedAccessLevel();
 				foreach ($ids as $id) {
 					$revision = Df_Cms_Model_Page_Revision::s()->loadWithRestrictions(
-						$accessLevel, rm_admin_id(), $id
+						$accessLevel, df_admin_id(), $id
 					);
 					if ($revision->getId()) {
 						$revision->delete();
@@ -115,7 +115,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 			$version->addData($data)->unsetData($version->getIdFieldName());
 			// only if user not specified we set current user as owner
 			if (!$version->getUserId()) {
-				$version->setUserId(rm_admin_id());
+				$version->setUserId(df_admin_id());
 			}
 			if (isset($data['revision_id'])) {
 				$data = $this->_filterPostData($data);
@@ -243,7 +243,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 		$version = Df_Cms_Model_Page_Version::i();
 		if ($versionId) {
 			$accessLevel = Df_Cms_Model_Config::s()->getAllowedAccessLevel();
-			$version->loadWithRestrictions($accessLevel, rm_admin_id(), $versionId);
+			$version->loadWithRestrictions($accessLevel, df_admin_id(), $versionId);
 		}
 		Mage::register('cms_page_version', $version);
 		return $version;
@@ -269,7 +269,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				$result = Df_Cms_Model_Config::s()->canCurrentUserDeleteRevision();
 				break;
 			default:
-				$result = rm_admin_allowed('cms/page');
+				$result = df_admin_allowed('cms/page');
 				break;
 		}
 		return $result;

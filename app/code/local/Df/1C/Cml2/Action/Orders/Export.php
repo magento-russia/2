@@ -25,7 +25,7 @@ class Df_1C_Cml2_Action_Orders_Export extends Df_1C_Cml2_Action_GenericExport {
 	 */
 	protected function processFinish() {
 		parent::processFinish();
-		rm_1c()->saveConfigValue(self::$LAST_PROCESSED_KEY, df_dts(Zend_Date::now()));
+		df_1c()->saveConfigValue(self::$LAST_PROCESSED_KEY, df_dts(Zend_Date::now()));
 	}
 
 	/**

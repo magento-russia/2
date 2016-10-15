@@ -61,5 +61,5 @@ class Df_Reward_Block_Customer_Reward_Info extends Df_Core_Block_Template_NoCach
 	 * @used-by Df_Core_Block_Abstract::getCacheKey()
 	 * @return bool
 	 */
-	protected function needToShow() {return rm_customer_logged_in();}
+	protected function needToShow() {return df_customer_logged_in();}
 }

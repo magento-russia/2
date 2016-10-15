@@ -29,7 +29,7 @@ class Df_Cms_Block_Admin_Page_Edit_Tab_Versions
 		$collection = Df_Cms_Model_Page_Version::c();
 		$collection
 			->addPageFilter($this->getPage())
-			->addVisibilityFilter(rm_admin_id(), Df_Cms_Model_Config::s()->getAllowedAccessLevel())
+			->addVisibilityFilter(df_admin_id(), Df_Cms_Model_Config::s()->getAllowedAccessLevel())
 			->addUserColumn()
 			->addUserNameColumn()
 		;

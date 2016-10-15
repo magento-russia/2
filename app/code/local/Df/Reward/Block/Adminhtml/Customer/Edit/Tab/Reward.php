@@ -23,7 +23,7 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward
 	 */
 	public function canShowTab() {
 		$customer = Mage::registry('current_customer');
-		return $customer->getId() && df_h()->reward()->isEnabled() && rm_admin_allowed('df_reward/balance');
+		return $customer->getId() && df_h()->reward()->isEnabled() && df_admin_allowed('df_reward/balance');
 	}
 
 	/**

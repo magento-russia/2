@@ -27,7 +27,7 @@ class Df_Newsletter_Observer {
 				$customer->loadByEmail($subscriber->getSubscriberEmail());
 				/** @var bool $isSubscribeOwnEmail */
 				$isSubscribeOwnEmail =
-						rm_customer_logged_in()
+						df_customer_logged_in()
 					&&
 						$customer->getId() === df_session_customer()->getId()
 				;

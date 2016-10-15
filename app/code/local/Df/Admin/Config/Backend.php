@@ -17,7 +17,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 			 * поле «field_config» незаполнено.
 			 * Однако заполнено поле «path», и мы можем получить узел настроек через него.
 			 */
-			$this->{__METHOD__} = $result ? $result : rm_config_adminhtml_field($this['path']);
+			$this->{__METHOD__} = $result ? $result : df_config_adminhtml_field($this['path']);
 		}
 		return $this->{__METHOD__};
 	}
@@ -58,7 +58,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 			/** @var string[] $configPathAsArray */
 			$configPathAsArray = df_explode_xpath($configPath);
 			df_assert_eq(3, count($configPathAsArray));
-			$this->{__METHOD__} = rm_config_adminhtml()->getSystemConfigNodeLabel(
+			$this->{__METHOD__} = df_config_adminhtml()->getSystemConfigNodeLabel(
 				$configPathAsArray[0], $configPathAsArray[1]
 			);
 			df_result_string_not_empty($this->{__METHOD__});
