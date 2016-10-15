@@ -14,10 +14,10 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 			foreach ($storesInfo as $info) {
 				$options	= array(CURLOPT_USERAGENT => self::USER_AGENT);
 				$storeId	= $info['store_id'];
-				if (!rm_store($storeId)->getConfig(self::XML_PATH_CRAWLER_ENABLED)) {
+				if (!df_store($storeId)->getConfig(self::XML_PATH_CRAWLER_ENABLED)) {
 					continue;
 				}
-				$threads = (int)rm_store($storeId)->getConfig(self::XML_PATH_CRAWLER_THREADS);
+				$threads = (int)df_store($storeId)->getConfig(self::XML_PATH_CRAWLER_THREADS);
 				if (!$threads) {
 					$threads = 1;
 				}

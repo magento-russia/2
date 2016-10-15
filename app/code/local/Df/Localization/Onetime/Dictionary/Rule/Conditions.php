@@ -41,7 +41,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions
 			df_param_string_not_empty($type, 0);
 			/** @var Df_Core_Sxe|null $e */
 			$e = $this->child($type);
-			$this->{__METHOD__}[$type] = rm_n_set(
+			$this->{__METHOD__}[$type] = df_n_set(
 				!$e ? null : Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract::ic(
 					$resultClass
 					? $resultClass
@@ -51,7 +51,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions
 				)
 			);
 		}
-		return rm_n_get($this->{__METHOD__}[$type]);
+		return df_n_get($this->{__METHOD__}[$type]);
 	}
 
 	const _C = __CLASS__;

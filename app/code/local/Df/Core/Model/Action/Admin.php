@@ -32,7 +32,7 @@ abstract class Df_Core_Model_Action_Admin extends Df_Core_Model_Action {
 	 * @return void
 	 */
 	protected function processFinish() {
-		rm_admin_end();
+		df_admin_end();
 		parent::processFinish();
 	}
 
@@ -44,7 +44,7 @@ abstract class Df_Core_Model_Action_Admin extends Df_Core_Model_Action {
 	 */
 	protected function processPrepare() {
 		parent::processPrepare();
-		rm_admin_begin();
+		df_admin_begin();
 	}
 
 	/**

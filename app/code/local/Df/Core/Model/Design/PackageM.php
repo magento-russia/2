@@ -112,7 +112,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 			 * Обратите внимание, что для ресурсов из папки js мы добавляем параметр v по-другому:
 			 * в методе Df_Page_Block_Html_Head::_prepareStaticAndSkinElements
 			 */
-			$result = df_url()->addVersionStamp($result);
+			$result = df_url_h()->addVersionStamp($result);
 		}
 		else {
 			/** @var bool */
@@ -130,7 +130,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 					$packageUrlPart = sprintf('/%s/', Df_Core_Model_Design_Package::s()->getName());
 				}
 				if (df_contains($result, $packageUrlPart)) {
-					$result = df_url()->addVersionStamp(
+					$result = df_url_h()->addVersionStamp(
 						$result, Df_Core_Model_Design_Package::s()->getVersion()
 					);
 				}

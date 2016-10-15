@@ -16,7 +16,7 @@ class Df_Invitation_Model_Config_Backend_Limited extends Mage_Core_Model_Config_
 				$value = 1;
 			}
 			$this->setValue($value);
-			rm_session()->addNotice(
+			df_session()->addNotice(
 				df_h()->invitation()->__('Invalid value used for "%s" parameter. Previous value saved.', $parameter)
 			);
 		}

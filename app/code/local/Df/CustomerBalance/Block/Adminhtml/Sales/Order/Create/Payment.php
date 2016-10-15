@@ -80,7 +80,7 @@ class Df_CustomerBalance_Block_Adminhtml_Sales_Order_Create_Payment
 			/** @var Df_CustomerBalance_Model_Balance $result */
 			$result = Df_CustomerBalance_Model_Balance::i();
 			$result->setCustomerId($quote->getCustomerId());
-			$result->setWebsiteId(rm_store($quote->getStoreId())->getWebsiteId());
+			$result->setWebsiteId(df_store($quote->getStoreId())->getWebsiteId());
 			$result->loadByCustomer();
 			$this->_balanceInstance = $result;
 		}

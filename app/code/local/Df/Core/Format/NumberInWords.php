@@ -34,7 +34,7 @@ class Df_Core_Format_NumberInWords extends Df_Core_Model {
 	public function getNumberFractionalPart() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_round(
+				df_round(
 						pow(10, $this->getFractionalPartPrecision())
 					*
 						(

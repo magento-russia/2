@@ -12,7 +12,7 @@ class Df_Catalog_Block_Product_Price extends Mage_Catalog_Block_Product_Price {
 			,$this->getProduct()->getId()
 			,(int)($this->getDisplayMinimalPrice())
 			,$this->getIdSuffix()
-			,rm_store()->getCurrentCurrencyCode()
+			,df_store()->getCurrentCurrencyCode()
 		));
 	}
 

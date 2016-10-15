@@ -130,7 +130,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 
 	/** @return mixed[] */
 	private function getSessionStorage() {
-		$result = rm_session_core()->getData($this->getSessionKey());
+		$result = df_session_core()->getData($this->getSessionKey());
 		if (!$result) {
 			$result = array();
 		}
@@ -142,7 +142,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 	 * @return Df_Dataflow_Model_Convert_Adapter_Dropdown
 	 */
 	private function setSessionStorage(array $storage) {
-		rm_session_core()->setData($this->getSessionKey(), $storage);
+		df_session_core()->setData($this->getSessionKey(), $storage);
 		return $this;
 	}
 

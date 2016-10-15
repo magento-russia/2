@@ -32,7 +32,7 @@ class Df_Downloadable_Model_Url extends Df_Core_Model {
 		return strtr('{base-media}downloadable/files/{folder}/{relative}', array(
 			'{base-media}' => Mage::getBaseUrl('media')
 			, '{folder}' => $this->isSample() ? 'link_samples' : 'links'
-			, '{relative}' => df_url()->fromPath(df_trim_left($this->getPath(), '/'))
+			, '{relative}' => df_url_h()->fromPath(df_trim_left($this->getPath(), '/'))
 		));
 	}
 

@@ -20,7 +20,7 @@
 				$result = $cachedResult;
 			}
 			else {
-				$result = ('admin' === rm_store($store)->getCode());
+				$result = ('admin' === df_store($store)->getCode());
 				if ($forCurrentStore) {
 					$cachedResult = $result;
 				}

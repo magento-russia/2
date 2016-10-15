@@ -113,7 +113,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		if ($offsetType) {
 			df_assert_in($offsetType, array('UTC', 'GMT'));
 			/** @var int $offsetFromGMT */
-			$offsetFromGMT = rm_round(df_int(df_dts(Zend_Date::now(), Zend_Date::TIMEZONE_SECS)) / 3600);
+			$offsetFromGMT = df_round(df_int(df_dts(Zend_Date::now(), Zend_Date::TIMEZONE_SECS)) / 3600);
 			$hour += $offsetFromGMT;
 			if ('UTC' === $offsetType) {
 				$hour++;
@@ -240,7 +240,7 @@ class Df_Core_Helper_Date extends Mage_Core_Helper_Abstract {
 		 * и объект класса Zend_Date для более современных версий Magento
 		 */
 		$dateMaxA->sub($dateMinA);
-		$result = rm_round($dateMaxA->toValue() / 86400);
+		$result = df_round($dateMaxA->toValue() / 86400);
 		return $result;
 	}
 	

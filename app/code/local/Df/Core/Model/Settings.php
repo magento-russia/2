@@ -38,7 +38,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 		/** @var string $cacheKey */
 		$cacheKey = $key . $this->storeIdCacheSuffix($store);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
-			$this->{__METHOD__}[$cacheKey] = rm_decrypt($this->value($key, $store));
+			$this->{__METHOD__}[$cacheKey] = df_decrypt($this->value($key, $store));
 		}
 		return $this->{__METHOD__}[$cacheKey];
 	}
@@ -144,7 +144,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 */
 	protected function store() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_store($this->cfg(self::P__STORE));
+			$this->{__METHOD__} = df_store($this->cfg(self::P__STORE));
 		}
 		return $this->{__METHOD__};
 	}
@@ -168,11 +168,11 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * чем напрашивающаяся оптимизация:
 			$result = @$this->_valueCacheable[$key][$storeId];
 			if (!is_null($result)) {
-				$result = rm_n_get($result);
+				$result = df_n_get($result);
 			}
 			else {
 				$result = Mage::getStoreConfig($this->adaptKey($key), $store);
-				$this->_valueCacheable[$key][$storeId] = rm_n_set($result);
+				$this->_valueCacheable[$key][$storeId] = df_n_set($result);
 			}
 			return $result;
 	 *
@@ -211,21 +211,21 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * объединив ключи $key и $storeId в единый ключ кэша.
 	 * Раньше код был таким:
 			if (!isset($this->_valueCacheable[$key][$storeId])) {
-				$this->_valueCacheable[$key][$storeId] = rm_n_set($store->getConfig($this->adaptKey($key)));
+				$this->_valueCacheable[$key][$storeId] = df_n_set($store->getConfig($this->adaptKey($key)));
 			}
-			return rm_n_get($this->_valueCacheable[$key][$storeId]);
+			return df_n_get($this->_valueCacheable[$key][$storeId]);
 	 * @param string $key
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return mixed|null
 	 */
 	private function value($key, $store = null) {
-		$store = rm_store($store);
+		$store = df_store($store);
 		/** @var string $cacheKey */
 		$cacheKey = $key . $this->storeIdCacheSuffix($store);
 		if (!isset($this->_cache[$cacheKey])) {
-			$this->_cache[$cacheKey] = rm_n_set($store->getConfig($this->adaptKey($key)));
+			$this->_cache[$cacheKey] = df_n_set($store->getConfig($this->adaptKey($key)));
 		}
-		return rm_n_get($this->_cache[$cacheKey]);
+		return df_n_get($this->_cache[$cacheKey]);
 	}
 
 	/**
@@ -260,7 +260,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 */
 	protected static function sc($class, $prefix = '', $store = null) {
 		return df_sc($class, __CLASS__, array(
-			self::P__STORE => rm_store($store), self::$P__PREFIX => $prefix
+			self::P__STORE => df_store($store), self::$P__PREFIX => $prefix
 		), $prefix);
 	}
 }

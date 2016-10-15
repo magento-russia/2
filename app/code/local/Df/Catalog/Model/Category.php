@@ -63,11 +63,11 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	/** @return Zend_Uri_Http|null */
 	public function getExternalUri() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$this->getExternalUrl() ? null : Zend_Uri::factory($this->getExternalUrl())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 				,array('{category}' => $this->getTitle())
 			);
 		}
-		rm_admin_call($this, 'saveRmInternal', array($store));
+		df_admin_call($this, 'saveRmInternal', array($store));
 		return $this;
 	}
 
@@ -339,16 +339,16 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		 * CONSTRAINT `FK_CAT_CTGR_FLAT_STORE_1_ENTT_ID_CAT_CTGR_ENTT_ENTT_ID`
 		 * FOREIGN KEY (`entity_id`) REFERENCES `catalog_category_entity` (`en)
 		 */
-		rm_admin_begin();
+		df_admin_begin();
 		/** @var Df_Catalog_Model_Category $result */
 		try {
 			$result = new self($parameters);
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			df_error($e);
 		}
-		rm_admin_end();
+		df_admin_end();
 		return $result;
 	}
 
@@ -390,7 +390,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	/**
 	 * Нельзя кэшировать результат этого метода,
 	 * потому что результат метода может меняться в зависимости от контекста:
-	 * самый яркий пример — зависимость от вызова @see rm_admin_begin()
+	 * самый яркий пример — зависимость от вызова @see df_admin_begin()
 	 * (в административном режиме денормализация никогда не используется,
 	 * а после выхода из административного режима денормализация может использоваться снова).
 	 * @return bool

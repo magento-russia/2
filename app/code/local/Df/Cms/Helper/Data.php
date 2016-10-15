@@ -3,17 +3,17 @@ class Df_Cms_Helper_Data extends Mage_Core_Helper_Abstract {
 	/** @return Df_Cms_Model_Hierarchy_Node|null */
 	public function getCurrentNode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(Mage::registry('current_cms_hierarchy_node'));
+			$this->{__METHOD__} = df_n_set(Mage::registry('current_cms_hierarchy_node'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Mage_Cms_Model_Page|null */
 	public function getCurrentPage() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(Mage::registry('cms_page'));
+			$this->{__METHOD__} = df_n_set(Mage::registry('cms_page'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_Cms_Model_Tree */

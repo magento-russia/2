@@ -188,5 +188,5 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	 * @used-by Df_YandexMoney_Model_Request_Payment::getTransactionDescriptionParams()
 	 * @return Df_Core_Model_StoreM
 	 */
-	protected function store() {return rm_store($this->method()->getStore());}
+	protected function store() {return df_store($this->method()->getStore());}
 }

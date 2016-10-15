@@ -7,7 +7,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				$model = Df_Banner_Model_Banneritem::i();
 				$model->setId($this->getRequest()->getParam('id'));
 				$model->delete();
-				rm_session()->addSuccess(df_mage()->adminhtml()->__('Item was successfully deleted'));
+				df_session()->addSuccess(df_mage()->adminhtml()->__('Item was successfully deleted'));
 				$this->_redirect('*/*/');
 			} catch (Exception $e) {
 				rm_exception_to_session($e);
@@ -23,7 +23,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 		$model = Df_Banner_Model_Banneritem::i();
 		$model->load($id);
 		if ($model->getId() || (0 === df_nat0($id))) {
-			$data = rm_session()->getFormData(true);
+			$data = df_session()->getFormData(true);
 			if (!empty($data)) {
 				$model->setData($data);
 			}
@@ -40,7 +40,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 			;
 			$this->renderLayout();
 		} else {
-			rm_session()->addError(df_h()->banner()->__('Banner Item does not exist'));
+			df_session()->addError(df_h()->banner()->__('Banner Item does not exist'));
 			$this->_redirect('*/*/');
 		}
 	}
@@ -64,7 +64,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 		/** @var int[] $dfBannerIds */
 		$dfBannerIds = $this->getRequest()->getParam('df_banner_item');
 		if (!is_array($dfBannerIds)) {
-			rm_session()->addError(df_mage()->adminhtml()->__('Please select banner item(s)'));
+			df_session()->addError(df_mage()->adminhtml()->__('Please select banner item(s)'));
 		}
 		else {
 			try {
@@ -74,7 +74,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 					$dfBanner = Df_Banner_Model_Banneritem::ld($dfBannerId);
 					$dfBanner->delete();
 				}
-				rm_session()->addSuccess(df_mage()->adminhtml()->__(
+				df_session()->addSuccess(df_mage()->adminhtml()->__(
 					'Total of %d record(s) were successfully deleted', count($dfBannerIds)
 				));
 			}
@@ -89,7 +89,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 	{
 		$dfBannerIds = $this->getRequest()->getParam('df_banner_item');
 		if (!is_array($dfBannerIds)) {
-			rm_session()->addError($this->__('Please select banner item(s)'));
+			df_session()->addError($this->__('Please select banner item(s)'));
 		}
 		else {
 			try {
@@ -100,7 +100,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 						->save()
 					;
 				}
-				rm_session()->addSuccess($this->__(
+				df_session()->addSuccess($this->__(
 					'Total of %d record(s) were successfully updated', count($dfBannerIds)
 				));
 			}
@@ -192,8 +192,8 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 					$model->setUpdateTime(now());
 				}
 				$model->save();
-				rm_session()->addSuccess('Объявление сохранено.');
-				rm_session()->setFormData(false);
+				df_session()->addSuccess('Объявление сохранено.');
+				df_session()->setFormData(false);
 				if ($this->getRequest()->getParam('back')) {
 					$this->_redirect('*/*/edit', array('id' => $model->getId()));
 					return;
@@ -202,12 +202,12 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				return;
 			} catch (Exception $e) {
 				rm_exception_to_session($e);
-				rm_session()->setFormData($data);
+				df_session()->setFormData($data);
 				$this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
 				return;
 			}
 		}
-		rm_session()->addError(df_h()->banner()->__('Unable to find banner item to save'));
+		df_session()->addError(df_h()->banner()->__('Unable to find banner item to save'));
 		$this->_redirect('*/*/');
 	}
 
@@ -215,7 +215,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 		$params = $this->getRequest()->getParam('items');
 		//var_dump($params);exit;
 		if (!$params) {
-			rm_session()->addError(df_mage()->adminhtml()->__('Please select item(s)'));
+			df_session()->addError(df_mage()->adminhtml()->__('Please select item(s)'));
 		}
 		else {
 			try {
@@ -233,7 +233,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 						$model->save();
 					}
 				}
-				rm_session()->addSuccess(df_mage()->adminhtml()->__(
+				df_session()->addSuccess(df_mage()->adminhtml()->__(
 					'Total of %d record(s) were successfully deleted', count($params)
 				));
 			}
@@ -254,7 +254,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 		$response->setHeader('Last-Modified', date('r'));
 		$response->setHeader('Accept-Ranges', 'bytes');
 		$response->setHeader('Content-Length', strlen($content));
-		rm_response_content_type($response, $contentType);
+		df_response_content_type($response, $contentType);
 		$response->setBody($content);
 		$response->sendResponse();
 		die;

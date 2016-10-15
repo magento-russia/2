@@ -11,13 +11,13 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 			 ->_title($this->__('Manage Hierarchy'));
 		$this->_getLockModel()->revalidate();
 		if ($this->_getLockModel()->isLockedByMe()) {
-			rm_session()->addNotice(
+			df_session()->addNotice(
 				df_h()->cms()->__('This Page is locked by you.')
 			);
 		}
 
 		if ($this->_getLockModel()->isLockedByOther()) {
-			rm_session()->addNotice(
+			df_session()->addNotice(
 				df_h()->cms()->__("This Page is locked by '%s'.", $this->_getLockModel()->getUserName())
 			);
 		}
@@ -73,7 +73,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 	public function saveAction() {
 		if ($this->getRequest()->isPost()) {
 			if (Df_Cms_Model_Hierarchy_Lock::i()->isLockedByOther()) {
-				rm_session()->addError(
+				df_session()->addError(
 					df_h()->cms()->__('This page is currently locked.')
 				);
 				$this->_redirect('*/*/');
@@ -95,7 +95,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 				}
 				$node->collectTree($nodesData, $removedNodes);
 				$hasError = false;
-				rm_session()->addSuccess(
+				df_session()->addSuccess(
 					df_h()->cms()->__('Hierarchy has been successfully saved.')
 				);
 			}
@@ -103,7 +103,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 				rm_exception_to_session($e);
 			}
 			catch (Exception $e) {
-				rm_session()->addException($e, df_h()->cms()->__('Error in saving hierarchy.'));
+				df_session()->addException($e, df_h()->cms()->__('Error in saving hierarchy.'));
 				Mage::logException($e);
 			}
 			if ($hasError) {

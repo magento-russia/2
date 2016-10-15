@@ -10,9 +10,9 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 	 */
 	public function child($name, $required = false) {
 		if (!isset($this->{__METHOD__}[$name])) {
-			$this->{__METHOD__}[$name] = rm_n_set($this->e()->child($name, $required));
+			$this->{__METHOD__}[$name] = df_n_set($this->e()->child($name, $required));
 		}
-		return rm_n_get($this->{__METHOD__}[$name]);
+		return df_n_get($this->{__METHOD__}[$name]);
 	}
 
 	/**
@@ -54,9 +54,9 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 			if (!$found && $throw) {
 				df_error('В документе XML отсутствует путь «%s».', $path);
 			}
-			$this->{__METHOD__}[$path] = rm_n_set($found ? rm_leaf_s($element) : null);
+			$this->{__METHOD__}[$path] = df_n_set($found ? rm_leaf_s($element) : null);
 		}
-		return rm_n_get($this->{__METHOD__}[$path]);
+		return df_n_get($this->{__METHOD__}[$path]);
 	}
 
 	/** @return Df_Core_Sxe */
@@ -133,10 +133,10 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 		/** @var string $key */
 		$key = $name . '::' . $function;
 		if (!isset($this->{__METHOD__}[$key])) {
-			$this->{__METHOD__}[$key] = rm_n_set(call_user_func($function, $this->e()->{$name}));
+			$this->{__METHOD__}[$key] = df_n_set(call_user_func($function, $this->e()->{$name}));
 		}
 		/** @var string|null $result */
-		$result = rm_n_get($this->{__METHOD__}[$key]);
+		$result = df_n_get($this->{__METHOD__}[$key]);
 		return is_null($result) ? $default : $result;
 	}
 
@@ -211,9 +211,9 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 	 */
 	private function getAttributeInternal($name) {
 		if (!isset($this->{__METHOD__}[$name])) {
-			$this->{__METHOD__}[$name] = rm_n_set($this->e()->getAttribute($name));
+			$this->{__METHOD__}[$name] = df_n_set($this->e()->getAttribute($name));
 		}
-		return rm_n_get($this->{__METHOD__}[$name]);
+		return df_n_get($this->{__METHOD__}[$name]);
 	}
 
 	/**

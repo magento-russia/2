@@ -180,11 +180,11 @@ function df_primary_key($table) {
 	/** @var array(string => string|null) */
 	static $cache;
 	if (!isset($cache[$table])) {
-		$cache[$table] = rm_n_set(df_first(df_nta(dfa_deep(
+		$cache[$table] = df_n_set(df_first(df_nta(dfa_deep(
 			df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
 		))));
 	}
-	return rm_n_get($cache[$table]);
+	return df_n_get($cache[$table]);
 }
 
 /**

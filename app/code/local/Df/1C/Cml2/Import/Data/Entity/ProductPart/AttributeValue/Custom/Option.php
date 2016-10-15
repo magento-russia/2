@@ -144,12 +144,12 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 			else {
 				$result = $options->fetchItem();
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 			if ($result) {
 				df_assert($result instanceof Df_Eav_Model_Entity_Attribute_Option);
 			}
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem() */

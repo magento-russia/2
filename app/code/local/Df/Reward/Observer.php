@@ -72,7 +72,7 @@ class Df_Reward_Observer {
 				}
 				$reward = Df_Reward_Model_Reward::i()
 					->setCustomer($customer)
-					->setWebsiteId(rm_store($data['store_id'])->getWebsiteId())
+					->setWebsiteId(df_store($data['store_id'])->getWebsiteId())
 					->loadByCustomer()
 				;
 				if (!empty($data['points_delta'])) {
@@ -283,7 +283,7 @@ class Df_Reward_Observer {
 	public function df_invitation_save_commit_after(Varien_Event_Observer $o) {
 		/* @var Df_Invitation_Model_Invitation $invitation */
 		$invitation = $o['invitation'];
-		$websiteId = rm_store($invitation->getStoreId())->getWebsiteId();
+		$websiteId = df_store($invitation->getStoreId())->getWebsiteId();
 		if (df_h()->reward()->isEnabledOnFront($websiteId)
 			&& $invitation->getCustomerId()
 			&& $invitation->getReferralId()
@@ -308,7 +308,7 @@ class Df_Reward_Observer {
 		$subscriber = $o['subscriber'];
 		// reward only new subscribtions
 		if ($subscriber->isObjectNew() && $subscriber->getCustomerId()) {
-			$websiteId = rm_store($subscriber->getStoreId())->getWebsiteId();
+			$websiteId = df_store($subscriber->getStoreId())->getWebsiteId();
 			if (df_h()->reward()->isEnabledOnFront($websiteId)) {
 				/** @var Df_Reward_Model_Reward $reward */
 				$reward = Df_Reward_Model_Reward::i();
@@ -364,7 +364,7 @@ class Df_Reward_Observer {
 	public function review_save_commit_after(Varien_Event_Observer $o) {
 		/* @var Mage_Review_Model_Review|Df_Review_Model_Review $review */
 		$review = $o['object'];
-		$websiteId = rm_store($review->getStoreId())->getWebsiteId();
+		$websiteId = df_store($review->getStoreId())->getWebsiteId();
 		if (
 			df_h()->reward()->isEnabledOnFront($websiteId)
 			&& $review->isApproved()
@@ -510,7 +510,7 @@ class Df_Reward_Observer {
 			if ($order->getBaseRewardCurrencyAmount() > 0) {
 				Df_Reward_Model_Reward::i()
 					->setCustomerId($order->getCustomerId())
-					->setWebsiteId(rm_store($order->getStoreId())->getWebsiteId())
+					->setWebsiteId(df_store($order->getStoreId())->getWebsiteId())
 					->setPointsDelta(-$order->getRewardPointsBalance())
 					->setAction(Df_Reward_Model_Reward::REWARD_ACTION_ORDER)
 					->setActionEntity($order)
@@ -537,7 +537,7 @@ class Df_Reward_Observer {
 			/** @var Df_Sales_Model_Order $order */
 			$order = $o['order'];
 			if ($order->getRewardPointsBalance() > 0) {
-				$websiteId = rm_store($order->getStoreId())->getWebsiteId();
+				$websiteId = df_store($order->getStoreId())->getWebsiteId();
 				/* @var Df_Reward_Model_Reward $reward */
 				$reward = Df_Reward_Model_Reward::i()
 					->setCustomerId($order->getCustomerId())
@@ -763,7 +763,7 @@ class Df_Reward_Observer {
 	public function tag_save_commit_after(Varien_Event_Observer $o) {
 		/* @var Mage_Tag_Model_Tag $tag */
 		$tag = $o['object'];
-		$websiteId = rm_store($tag->getFirstStoreId())->getWebsiteId();
+		$websiteId = df_store($tag->getFirstStoreId())->getWebsiteId();
 		if (
 			df_h()->reward()->isEnabledOnFront($websiteId)
 			&& $tag->getApprovedStatus() == $tag->getStatus()

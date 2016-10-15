@@ -219,7 +219,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 			? null
 			: (
 				$asCurrency
-				? rm_store($storeId)->convertPrice($amount, true, false)
+				? df_store($storeId)->convertPrice($amount, true, false)
 				: rm_number_2f($amount)
 			)
 		;
@@ -278,7 +278,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 				df_sprintf(
 					'%.0F %s'
 					,$currencyAmount
-					,df_t()->getNounForm(rm_floor($currencyAmount), array(
+					,df_t()->getNounForm(df_floor($currencyAmount), array(
 						'валютная единица'
 						,'валютных единицы'
 						,'валютных единиц'

@@ -6,11 +6,11 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	/** @return Df_Localization_Morpher_Response|null */
 	public function getMorpher() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Localization_Morpher::s()->getResponseSilent($this->getNameLocalized())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

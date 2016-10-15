@@ -28,9 +28,9 @@ class Df_YandexMoney_Model_Response_Capture extends Df_YandexMoney_Model_Respons
 	 */
 	public function getCustomerAccountId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->cfg('payer'));
+			$this->{__METHOD__} = df_n_set($this->cfg('payer'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

@@ -16,7 +16,7 @@ class Df_Customer_Observer {
 				$ge_1_8_0_0 = df_magento_version('1.8.0.0', '>=');
 			}
 			if ($ge_1_8_0_0 && !rm_request('form_key')) {
-				rm_session_customer()->addError(
+				df_session_customer()->addError(
 					'К сожалению, система авторизации дала сбой.'
 					.'<br/>Пожалуйста, попробуйте войти повторно, используя форму ниже на этой странице.'
 					.'<br/>Если сбой повторится, то оформите Ваш заказ по телефону.'

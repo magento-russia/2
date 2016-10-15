@@ -172,11 +172,11 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General
 
 	/** @return string */
 	public function getWebsiteName() {
-		return rm_store($this->getInvitation()->getStoreId())->getWebsite()->getName();
+		return df_store($this->getInvitation()->getStoreId())->getWebsite()->getName();
 	}
 
 	/** @return string */
-	public function getStoreName() {return rm_store($this->getInvitation()->getStoreId())->getName();}
+	public function getStoreName() {return df_store($this->getInvitation()->getStoreId())->getName();}
 
 	/**
 	 * Get invitation URL in case if it can be accepted
@@ -185,7 +185,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_View_Tab_General
 	public function getInvitationUrl()
 	{
 		if (!$this->getInvitation()->canBeAccepted(
-			rm_store($this->getInvitation()->getStoreId())->getWebsiteId())) {
+			df_store($this->getInvitation()->getStoreId())->getWebsiteId())) {
 			return false;
 		}
 		return df_h()->invitation()->getInvitationUrl($this->getInvitation());

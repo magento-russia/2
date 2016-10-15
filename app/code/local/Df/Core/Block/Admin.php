@@ -7,7 +7,7 @@
  */
 class Df_Core_Block_Admin extends Df_Core_Block_Template_NoCache {
 	/** @return mixed */
-	public function getFormKey() {return rm_session_core()->getFormKey();}
+	public function getFormKey() {return df_session_core()->getFormKey();}
 
 	/**
 	* Check whether or not the module output is enabled

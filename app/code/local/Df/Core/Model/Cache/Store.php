@@ -8,10 +8,10 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model {
 		if (!isset($this->_config[$path])) {
 			/** @var string|null $result */
 			$result = $this->store()->getConfigParent($path);
-			$this->_config[$path] = rm_n_set($result);
+			$this->_config[$path] = df_n_set($result);
 			$this->markCachedPropertyAsModified('_config');
 		}
-		return rm_n_get($this->_config[$path]);
+		return df_n_get($this->_config[$path]);
 	}
 	/** @var array(string => string) */
 	protected $_config;

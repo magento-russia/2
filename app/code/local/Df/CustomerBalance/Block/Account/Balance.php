@@ -4,7 +4,7 @@ class Df_CustomerBalance_Block_Account_Balance extends Df_Core_Block_Template_No
 	public function getBalance() {
 		/** @var float $result */
 		$result = 0.0;
-		$customerId = rm_session_customer()->getCustomerId();
+		$customerId = df_session_customer()->getCustomerId();
 		if ($customerId) {
 			/** @var Df_CustomerBalance_Model_Balance $balance */
 			$balance = Df_CustomerBalance_Model_Balance::i();

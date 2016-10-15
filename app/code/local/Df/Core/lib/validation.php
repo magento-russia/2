@@ -820,7 +820,7 @@ function df_warning($message = null) {
 	df_notify_admin($message, $doLog = true);
 	df_notify_me($message, $doLog = false);
 	if (df_is_admin()) {
-		rm_session()->addWarning($message);
+		df_session()->addWarning($message);
 	}
 }
 
@@ -892,20 +892,20 @@ function rm_exception_to_session(Exception $exception) {
 	/** @var bool $needShowStackTrace */
 	$needShowStackTrace = $needNotifyDeveloper && (df_is_admin() || df_is_it_my_local_pc());
 	if ($message) {
-		rm_session()->addError($message);
+		df_session()->addError($message);
 	}
 	else if ($isMagentoCoreException && $exception->getMessages()) {
 		foreach ($exception->getMessages() as $subMessage) {
 			/** @var Mage_Core_Model_Message_Abstract $subMessage */
-			rm_session()->addError($subMessage->getText());
+			df_session()->addError($subMessage->getText());
 		}
 	}
 	else if (!$needShowStackTrace) {
 		// Надо хоть какое-то сообщение показать
-		rm_session()->addError('Произошёл внутренний сбой.');
+		df_session()->addError('Произошёл внутренний сбой.');
 	}
 	if ($needShowStackTrace) {
-		rm_session()->addError(df_t()->nl2br(df_exception_get_trace($exception)));
+		df_session()->addError(df_t()->nl2br(df_exception_get_trace($exception)));
 	}
 	if ($needNotifyDeveloper) {
 		df_notify_exception($exception);

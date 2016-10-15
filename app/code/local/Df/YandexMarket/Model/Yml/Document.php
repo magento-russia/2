@@ -176,7 +176,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 				rm_state()->getStoreProcessed()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
 			)
 			,'platform' => 'Российская сборка Magento'
-			,'version' => rm_version()
+			,'version' => df_version()
 			,'agency' => $this->getSettings()->shop()->getAgency()
 			,'email' => $this->getSettings()->shop()->getSupportEmail()
 			,'currencies' => array('currency' => $this->getOutput_Currencies())

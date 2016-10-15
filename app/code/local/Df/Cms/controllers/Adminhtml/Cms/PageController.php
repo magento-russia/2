@@ -7,7 +7,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	public function editAction()
 	{
 		$page = $this->_initPage();
-		$data = rm_session()->getFormData(true);
+		$data = df_session()->getFormData(true);
 		if (! empty($data)) {
 			$page->setData($data);
 		}
@@ -40,7 +40,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 		else {
 			$ids = $this->getRequest()->getParam('version');
 			if (!is_array($ids)) {
-				rm_session()->addError($this->__('Please select version(s)'));
+				df_session()->addError($this->__('Please select version(s)'));
 			}
 			else {
 				try {
@@ -53,7 +53,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 							$version->delete();
 						}
 					}
-					rm_session()->addSuccess($this->__(
+					df_session()->addSuccess($this->__(
 						'Total of %d record(s) were successfully deleted', count($ids)
 					));
 				}
@@ -62,7 +62,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 				}
 				catch (Exception $e) {
 					Mage::logException($e);
-					rm_session()->addError(df_h()->cms()->__(
+					df_session()->addError(df_h()->cms()->__(
 						'Error while deleting versions. Please try again later.'
 					));
 				}

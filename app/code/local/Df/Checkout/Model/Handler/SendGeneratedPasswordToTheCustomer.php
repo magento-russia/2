@@ -12,7 +12,7 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 			// Важно!
 			// Удаляем пароль из сессии после отсылки,
 			// чтобы потом система не пыталась создавать клиенту пароль повторно.
-			rm_session_customer()->unsetData(Df_Customer_Const_Session::GENERATED_PASSWORD);
+			df_session_customer()->unsetData(Df_Customer_Const_Session::GENERATED_PASSWORD);
 		}
 	}
 
@@ -66,7 +66,7 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 
 	/** @return string */
 	private function getGeneratedPassword() {
-		return df_string(rm_session_customer()->getData(Df_Customer_Const_Session::GENERATED_PASSWORD));
+		return df_string(df_session_customer()->getData(Df_Customer_Const_Session::GENERATED_PASSWORD));
 	}
 
 	/** @return Df_Core_Model_StoreM */

@@ -51,14 +51,14 @@ class Df_Tweaks_Model_Handler_Footer_AdjustLinks extends Df_Core_Model_Handler {
 	private function getBlock() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Page_Block_Template_Links|null $result */
-			$result = rm_empty_to_null($this->getEvent()->getLayout()->getBlock('footer_links'));
+			$result = df_empty_to_null($this->getEvent()->getLayout()->getBlock('footer_links'));
 			if (!($result instanceof Df_Page_Block_Template_Links)) {
 				/** Кто-то перекрыл класс @see Mage_Page_Block_Template_Links */
 				$result = null;
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */

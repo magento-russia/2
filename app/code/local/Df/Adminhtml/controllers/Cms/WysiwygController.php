@@ -42,7 +42,7 @@ class Df_Adminhtml_Cms_WysiwygController extends Mage_Adminhtml_Cms_WysiwygContr
 		/** @var Df_Varien_Image_Adapter_Gd2 $image */
 		$image = new Df_Varien_Image_Adapter_Gd2();
 		$image->open($url);
-		rm_response_content_type($this->getResponse(), $image->getMimeType());
+		df_response_content_type($this->getResponse(), $image->getMimeType());
 		$this->getResponse()->setBody($image->getOutput());
 	}
 }

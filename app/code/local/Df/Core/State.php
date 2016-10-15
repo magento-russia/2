@@ -120,8 +120,8 @@ class Df_Core_State {
 			if (Mage::app()->isSingleStoreMode()) {
 				/**
 				 * 2015-08-10
-				 * Нельзя использовать здесь @see rm_store(),
-				 * потому что @see rm_store() сам использует @see getStoreProcessed(), и получится зависание.
+				 * Нельзя использовать здесь @see df_store(),
+				 * потому что @see df_store() сам использует @see getStoreProcessed(), и получится зависание.
 				 */
 				$result = Mage::app()->getStore(true);
 			}
@@ -156,8 +156,8 @@ class Df_Core_State {
 					try {
 						/**
 						 * 2015-08-10
-						 * Нельзя использовать здесь @see rm_store(),
-						 * потому что @see rm_store() сам использует @see getStoreProcessed(), и получится зависание.
+						 * Нельзя использовать здесь @see df_store(),
+						 * потому что @see df_store() сам использует @see getStoreProcessed(), и получится зависание.
 						 */
 						$result = Mage::app()->getStore($storeCode);
 					}
@@ -182,9 +182,9 @@ class Df_Core_State {
 					df_assert($result->getWebsiteId());
 				}
 			}
-			$this->_storeProcessed = rm_n_set($result);
+			$this->_storeProcessed = df_n_set($result);
 		}
-		return rm_n_get($this->_storeProcessed);
+		return df_n_get($this->_storeProcessed);
 	}
 
 	/** @return bool */
@@ -205,7 +205,7 @@ class Df_Core_State {
 		static $result = false;
 		if (!$result) {
 			try {
-				rm_store();
+				df_store();
 				$result = true;
 			}
 			catch (Mage_Core_Model_Store_Exception $e) {}
@@ -231,7 +231,7 @@ class Df_Core_State {
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return void
 	 */
-	public function setStoreProcessed($store = null) {$this->_storeProcessed = rm_store($store);}
+	public function setStoreProcessed($store = null) {$this->_storeProcessed = df_store($store);}
 
 	/** @var bool */
 	private $_blocksGenerationStarted = false;

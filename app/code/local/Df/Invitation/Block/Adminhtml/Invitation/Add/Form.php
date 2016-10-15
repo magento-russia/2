@@ -101,5 +101,5 @@ class Df_Invitation_Block_Adminhtml_Invitation_Add_Form extends Mage_Adminhtml_B
 	 * Return adminhtml session
 	 * @return Mage_Adminhtml_Model_Session
 	 */
-	protected function _getSession() {return rm_session();}
+	protected function _getSession() {return df_session();}
 }

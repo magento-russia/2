@@ -55,7 +55,7 @@ abstract class Df_Dataflow_Model_Convert_Adapter_Abstract
 	 */
 	public function saveRow(array $rowAsArray) {
 		try {
-			$this->saveRowInternal($rowAsArray, rm_session()->getData(Df_Dataflow_Const::P__COUNTER));
+			$this->saveRowInternal($rowAsArray, df_session()->getData(Df_Dataflow_Const::P__COUNTER));
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e, true);

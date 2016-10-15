@@ -188,7 +188,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Core_Model_StoreM $result */
 			$result = rm_state()->getStoreProcessed($needThrow = false);
-			$this->{__METHOD__} = $result ? $result : rm_store();
+			$this->{__METHOD__} = $result ? $result : df_store();
 		}
 		return $this->{__METHOD__};
 	}

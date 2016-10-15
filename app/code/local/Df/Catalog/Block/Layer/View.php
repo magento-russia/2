@@ -17,7 +17,7 @@ class Df_Catalog_Block_Layer_View extends Mage_Catalog_Block_Layer_View {
 	public function getCacheKeyInfo() {
 		return array_merge(parent::getCacheKeyInfo(), array(
 			$this->getCategoryRm()->getId()
-			,rm_session_customer()->getCustomerGroupId()
+			,df_session_customer()->getCustomerGroupId()
 			,rm_store_id()
 			,http_build_query($this->getRequest()->getParams())
 		));

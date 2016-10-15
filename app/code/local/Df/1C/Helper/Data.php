@@ -62,7 +62,7 @@ class Df_1C_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		Mage::getConfig()->saveConfig(
 			$path, $value, $scope = 'stores', $scopeId = rm_state()->getStoreProcessed()->getId()
 		);
-		rm_store()->setConfig($path, $value);
+		df_store()->setConfig($path, $value);
 	}
 
 	/** @return Df_1C_Helper_Data */

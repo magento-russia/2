@@ -65,9 +65,9 @@ class Df_Banner_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_Adminhtml_Bloc
 			,'wysiwyg' => false
 			,'required' => false
 		));
-		if (rm_session()->getDfBannerData()) {
-			$form->setValues(rm_session()->getDfBannerData());
-			rm_session()->setDfBannerData(null);
+		if (df_session()->getDfBannerData()) {
+			$form->setValues(df_session()->getDfBannerData());
+			df_session()->setDfBannerData(null);
 		}
 		else if (Mage::registry('df_banner_data')) {
 			$form->setValues(Mage::registry('df_banner_data')->getData());

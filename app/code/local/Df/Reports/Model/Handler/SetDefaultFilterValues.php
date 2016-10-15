@@ -53,9 +53,9 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 			if (!is_null($result)) {
 				df_assert_array($result);
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_Reports_Model_Handler_SetDefaultFilterValues */

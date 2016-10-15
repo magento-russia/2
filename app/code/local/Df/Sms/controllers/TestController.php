@@ -4,11 +4,11 @@ class Df_Sms_TestController extends Mage_Core_Controller_Front_Action {
 	public function indexAction() {
 		try {
 			df_h()->sms()->send(
-				$receiver = df_cfg()->sms()->general()->getAdministratorPhone(rm_store())
+				$receiver = df_cfg()->sms()->general()->getAdministratorPhone(df_store())
 				,$message = 'давай дружить :-)'
-				,rm_store()
+				,df_store()
 			);
-			rm_response_content_type($this->getResponse(), 'text/plain; charset=UTF-8');
+			df_response_content_type($this->getResponse(), 'text/plain; charset=UTF-8');
 			$this->getResponse()->setBody(__METHOD__);
 		}
 		catch (Exception $e) {

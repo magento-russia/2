@@ -11,5 +11,5 @@ class Df_Reward_Block_Customer_Reward_Subscription extends Df_Core_Block_Templat
 	}
 
 	/** @return Df_Customer_Model_Customer */
-	protected function _getCustomer() {return rm_session_customer()->getCustomer();}
+	protected function _getCustomer() {return df_session_customer()->getCustomer();}
 }

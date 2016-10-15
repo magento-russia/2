@@ -18,7 +18,7 @@ class Df_Core_Sxe extends Varien_Simplexml_Element {
 			df_assert_string($name);
 			// убрал strval($value) для ускорения системы
 			if (is_object($value) || is_array($value)) {
-				rm_log($attributes);
+				df_log($attributes);
 				df_error(
 					'Значение поля «%s» должно быть строкой, однако является %s.'
 					, $name

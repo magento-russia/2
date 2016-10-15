@@ -94,7 +94,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	public function getCacheKeyInfo() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array(get_class($this), rm_store()->getCode(), $this->getArea());
+			$result = array(get_class($this), df_store()->getCode(), $this->getArea());
 			/** @var string|null $template */
 			$template = $this->getTemplate();
 			if ($template) {

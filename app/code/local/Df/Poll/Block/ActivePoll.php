@@ -40,7 +40,7 @@ class Df_Poll_Block_ActivePoll extends Mage_Poll_Block_ActivePoll {
 	public function getCacheKeyInfo() {
 		return array(
 			get_class($this)
-   			, rm_store()->getCode()
+   			, df_store()->getCode()
 			,serialize($this->_templates)
 			,implode('-', $this->getVotedPollsIds())
 			, (int)Mage::getSingleton('core/session')->getJustVotedPoll()

@@ -172,7 +172,7 @@ class Df_Cms_Observer {
 			/** @var string $requestUrl */
 			$requestUrl = $condition['identifier'];
 			$node->loadByRequestUrl($requestUrl);
-			if ($node->checkIdentifier($requestUrl, rm_store())) {
+			if ($node->checkIdentifier($requestUrl, df_store())) {
 				$condition['continue'] = false;
 			}
 			if (!$node->getId()) {

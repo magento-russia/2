@@ -32,7 +32,7 @@ class Df_CustomerBalance_Block_Checkout_Payment extends Df_Core_Block_Template_N
 	 * Get customer instance
 	 * @return Df_Customer_Model_Customer
 	 */
-	protected function _getCustomer() {return rm_session_customer()->getCustomer();}
+	protected function _getCustomer() {return df_session_customer()->getCustomer();}
 
 	/**
 	 * Can display customer balance container

@@ -91,7 +91,7 @@ class Df_Reward_Block_Customer_Reward_History extends Df_Core_Block_Template_NoC
 	protected function _getCollection() {
 		if (!$this->_collection) {
 			$this->_collection = Df_Reward_Model_Reward_History::c()
-				->addCustomerFilter(rm_session_customer()->getCustomerId())
+				->addCustomerFilter(df_session_customer()->getCustomerId())
 				->addWebsiteFilter(rm_website_id())
 				->setExpiryConfig(df_h()->reward()->getExpiryConfig())
 				->addExpirationDate(rm_website_id())

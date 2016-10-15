@@ -14,7 +14,7 @@ class Df_Reward_Block_Customer_Reward_Info extends Df_Core_Block_Template_NoCach
 	 * @return string
 	 */
 	protected function _toHtml() {
-		$customer = rm_session_customer()->getCustomer();
+		$customer = df_session_customer()->getCustomer();
 		$this->_rewardInstance =
 			Df_Reward_Model_Reward::i()
 				->setCustomer($customer)

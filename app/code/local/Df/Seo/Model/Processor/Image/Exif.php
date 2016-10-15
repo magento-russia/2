@@ -78,9 +78,9 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 					$result = null;
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return PelExif */
@@ -135,9 +135,9 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 					$result = null;
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return PelTiff */

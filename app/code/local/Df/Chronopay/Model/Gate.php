@@ -119,7 +119,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	/** @return Df_Chronopay_Model_Settings_Gateway */
 	private function cfg() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Chronopay_Model_Settings_Gateway::i(rm_store($this->getStore()));
+			$this->{__METHOD__} = Df_Chronopay_Model_Settings_Gateway::i(df_store($this->getStore()));
 		}
 		return $this->{__METHOD__};
 	}

@@ -149,25 +149,25 @@ class Df_1C_Cml2_Import_Data_Document_Catalog extends Df_1C_Cml2_Import_Data_Doc
 	/** @return string|null */
 	private function getIdAttributes() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->descendS('Классификатор/Ид'));
+			$this->{__METHOD__} = df_n_set($this->descendS('Классификатор/Ид'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */
 	private function getIdProducts() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->descendS('Каталог/Ид'));
+			$this->{__METHOD__} = df_n_set($this->descendS('Каталог/Ид'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */
 	private function getIdStructure() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->descendS('Классификатор/Ид'));
+			$this->{__METHOD__} = df_n_set($this->descendS('Классификатор/Ид'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Document::create() */

@@ -8,9 +8,9 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 	 */
 	public function getActionUrl() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->cfg('ext_action_uri'));
+			$this->{__METHOD__} = df_n_set($this->cfg('ext_action_uri'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

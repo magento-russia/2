@@ -67,13 +67,13 @@ class Df_Qa_State extends Df_Core_Model {
 	 */
 	public function method() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				($this->className() && $this->functionName())
 				? new ReflectionMethod($this->className(), $this->functionName())
 				: null
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

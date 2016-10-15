@@ -9,7 +9,7 @@ class Df_YandexMoney_Model_Config_Area_Service extends Df_Payment_Config_Area_Se
 	/** @return string */
 	public function getAppId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_decrypt($this->getVar('app_id'));
+			$this->{__METHOD__} = df_decrypt($this->getVar('app_id'));
 			df_assert_eq(64, strlen($this->{__METHOD__}));
 		}
 		return $this->{__METHOD__};
@@ -18,7 +18,7 @@ class Df_YandexMoney_Model_Config_Area_Service extends Df_Payment_Config_Area_Se
 	/** @return string */
 	public function getAppPassword() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_decrypt($this->getVar('app_password'));
+			$this->{__METHOD__} = df_decrypt($this->getVar('app_password'));
 			df_assert_eq(128, strlen($this->{__METHOD__}));
 		}
 		return $this->{__METHOD__};

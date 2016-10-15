@@ -20,7 +20,7 @@ class Df_Reward_Block_Tooltip extends Df_Core_Block_Template_NoCache {
 	 */
 	public function initRewardType($action){
 		if ($action && df_h()->reward()->isEnabledOnFront()) {
-			$customer = rm_session_customer()->getCustomer();
+			$customer = df_session_customer()->getCustomer();
 			$this->_rewardInstance = Df_Reward_Model_Reward::s()
 				->setCustomer($customer)
 				->setWebsiteId(rm_website_id())

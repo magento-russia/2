@@ -119,9 +119,9 @@ class Df_Localization_Translation_File extends Df_Core_Model {
 	/** @return Df_Localization_Translation_File|null */
 	private function getTranslatedFile() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__}  = rm_n_set($this->getTranslatedFiles()->getItemById($this->getName()));
+			$this->{__METHOD__}  = df_n_set($this->getTranslatedFiles()->getItemById($this->getName()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_Localization_Translation_File_Collection */

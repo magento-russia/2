@@ -7,7 +7,7 @@
  * @return Df_Core_Model_StoreM
  * @throws Mage_Core_Model_Store_Exception|Exception
  */
-function rm_store($store = null) {
+function df_store($store = null) {
 	/** @var Df_Core_Model_StoreM $result */
 	$result = $store;
 	if (is_null($result)) {
@@ -53,7 +53,7 @@ function rm_store($store = null) {
 		if (is_null($result)) {
 			/**
 			 * @uses Df_Core_State::getStoreProcessed()
-			 * может вызывать @see rm_store() опосредованно: например, через @see df_assert().
+			 * может вызывать @see df_store() опосредованно: например, через @see df_assert().
 			 * Поэтому нам важно отслеживать рекурсию и не зависнуть.
 			 */
 			/** @var int $recursionLevel */
@@ -106,7 +106,7 @@ function rm_store_domain($store = null) {return rm_store_uri($store)->getHost();
  * @return int
  * @throws Mage_Core_Model_Store_Exception
  */
-function rm_store_id($store = null) {return rm_store($store)->getId();}
+function rm_store_id($store = null) {return df_store($store)->getId();}
 
 /**
  * 2015-03-19
@@ -115,7 +115,7 @@ function rm_store_id($store = null) {return rm_store($store)->getId();}
  * @return Zend_Uri_Http
  */
 function rm_store_uri($store = null) {
-	$store = rm_store($store);
+	$store = df_store($store);
 	/** @var string $key */
 	$key = $store->getId();
 	/** @var array(int => Zend_Uri_Http) $cache */

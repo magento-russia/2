@@ -27,9 +27,9 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_Price extends Df_1C_Cml2_Import_Da
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $result */
 			$resultS = $this->leaf('ЦенаЗаЕдиницу');
-			$this->{__METHOD__} = rm_n_set(!$resultS ? null : rm_float($resultS));
+			$this->{__METHOD__} = df_n_set(!$resultS ? null : rm_float($resultS));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -46,13 +46,13 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_Price extends Df_1C_Cml2_Import_Da
 	 */
 	public function getPriceBase() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				is_null($this->getPrice())
 				? null
 				: rm_currency_h()->convertToBase($this->getPrice(), $this->getCurrencyCode())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_1C_Cml2_Import_Data_Entity_PriceType */

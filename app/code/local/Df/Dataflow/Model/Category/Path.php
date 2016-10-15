@@ -148,7 +148,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 		$rootId = $this->store()->getRootCategoryId();
 		df_assert_integer($rootId);
 		if (0 === $rootId) {
-			$rootId = rm_store(Mage_Core_Model_App::DISTRO_STORE_ID)->getRootCategoryId();
+			$rootId = df_store(Mage_Core_Model_App::DISTRO_STORE_ID)->getRootCategoryId();
 		}
 		return df_ccc(self::PARTS_SEPARATOR, self::FIRST_PART_FOR_ROOT, $rootId);
 	}

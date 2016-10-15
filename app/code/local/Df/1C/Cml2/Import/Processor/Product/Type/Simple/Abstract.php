@@ -16,13 +16,13 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type_Simple_Abstract
 	 */
 	protected function getPrice() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				is_null($this->getEntityOffer()->getPrices()->getMain())
 				? null
 				: $this->getEntityOffer()->getPrices()->getMain()->getPriceBase()
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

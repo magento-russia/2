@@ -315,7 +315,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		 */
 		set_time_limit($this->getTimeLimit());
 		ini_set('memory_limit', $this->getMemoryLimit());
-		rm_response_content_type($this->getResponse(), $this->getContentType());
+		df_response_content_type($this->getResponse(), $this->getContentType());
 		$this->benchmarkStart();
 		$this->checkAccessRights();
 	}
@@ -357,7 +357,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @used-by Df_Admin_Model_Action_DeleteDemoStore::_process()
 	 * @return Df_Core_Model_StoreM
 	 */
-	protected function store() {return rm_store();}
+	protected function store() {return df_store();}
 
 	/**
 	 * @used-by Df_1C_Cml2_Action_Orders_Export::getOrders()

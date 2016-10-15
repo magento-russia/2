@@ -90,10 +90,10 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 			$rate->addData($data);
 			try {
 				$rate->save();
-				rm_session()->addSuccess(df_h()->reward()->__('Rate saved successfully.'));
+				df_session()->addSuccess(df_h()->reward()->__('Rate saved successfully.'));
 			} catch (Exception $e) {
 				df_handle_entry_point_exception($e, false);
-				rm_session()->addError($this->__('Cannot save Rate.'));
+				df_session()->addError($this->__('Cannot save Rate.'));
 				return $this->_redirect('*/*/edit', array('rate_id' => $rate->getId(), '_current' => true));
 			}
 		}
@@ -109,7 +109,7 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 		if ($rate->getId()) {
 			try {
 				$rate->delete();
-				rm_session()->addSuccess(df_h()->reward()->__('Rate deleted successfully.'));
+				df_session()->addSuccess(df_h()->reward()->__('Rate deleted successfully.'));
 			} catch (Exception $e) {
 				rm_exception_to_session($e);
 				$this->_redirect('*/*/*', array('_current' => true));
@@ -157,7 +157,7 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 		}
 
 		if ($message) {
-			rm_session()->addError($message);
+			df_session()->addError($message);
 			$this->_initLayoutMessages('adminhtml/session');
 			$response->setError(true);
 			$response->setMessage($this->getLayout()->getMessagesBlock()->getGroupedHtml());

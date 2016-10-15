@@ -37,7 +37,7 @@ abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Requ
 			,'orderId' => $this->getPaymentExternalId()
 		);
 		if ($this->hasAmount()) {
-			$result['amount'] = rm_round(100 * $this->amount()->getAsFixedFloat());
+			$result['amount'] = df_round(100 * $this->amount()->getAsFixedFloat());
 		}
 		return $result;
 	}

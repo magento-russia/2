@@ -36,7 +36,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 	protected function getCategory() {
 		if (!isset($this->{__METHOD__})) {
 			// Должно работать быстрее, чем Df_Catalog_Model_Category::ld($this->getCategoryId());
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				/**
 				 * Видимо, разумнее использовать @uses is_null(), а не !,
 				 * потому что корневой товарный раздел имеет идентификатор 0.
@@ -50,7 +50,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 				: $this->getDocument()->getCategories()->getItemById($this->getCategoryId())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -61,9 +61,9 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 	 */
 	protected function getCategoryId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(df_first($this->getCategoryIds()));
+			$this->{__METHOD__} = df_n_set(df_first($this->getCategoryIds()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return int[] */
@@ -94,7 +94,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 	/** @return string|null */
 	protected function getImageUrl() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$this->getImage()
 				? null
 				: $this->preprocessUrl($this->getProduct()->getMediaConfig()->getMediaUrl(
@@ -102,7 +102,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 				))
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string[] */
@@ -220,9 +220,9 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 				}
 				$result = df_first($this->getConfugurableParents());
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return array(int => Df_Catalog_Model_Product) */
@@ -249,9 +249,9 @@ abstract class Df_Catalog_Model_XmlExport_Product extends Df_Core_Xml_Generator_
 			if ((!$result || ('no_selection' === $result)) && $this->getConfigurableParent()) {
 				$result = $this->getImageForProduct($this->getConfigurableParent());
 			}
-			$this->{__METHOD__} = rm_n_set(('no_selection' !== $result) ? $result : null);
+			$this->{__METHOD__} = df_n_set(('no_selection' !== $result) ? $result : null);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

@@ -13,7 +13,7 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 			return;
 		}
 
-		if (!rm_session_customer()->authenticate($this)) {
+		if (!df_session_customer()->authenticate($this)) {
 			$this->getResponse()->setRedirect(Mage::helper('customer')->getLoginUrl());
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
@@ -24,7 +24,7 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 		/** @var mixed[]|null $data */
 		$data = $this->getRequest()->getPost();
 		if ($data) {
-			$customer = rm_session_customer()->getCustomer();
+			$customer = df_session_customer()->getCustomer();
 			$invPerSend = df_h()->invitation()->config()->getMaxInvitationsPerSend();
 			$attempts = 0;
 			$sent	 = 0;
@@ -50,7 +50,7 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 					;
 					$invitation->save();
 					if ($invitation->sendInvitationEmail()) {
-						rm_session_customer()
+						df_session_customer()
 							->addSuccess(
 								df_h()->invitation()->__(
 									'Invitation for %s has been sent successfully.'
@@ -69,15 +69,15 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 						$customerExists++;
 					}
 					else {
-						rm_session_customer()->addError(df_ets($e));
+						df_session_customer()->addError(df_ets($e));
 					}
 				}
 				catch (Exception $e) {
-					rm_session_customer()->addError(df_h()->invitation()->__('Failed to send email to %s. Please try again later.', $email));
+					df_session_customer()->addError(df_h()->invitation()->__('Failed to send email to %s. Please try again later.', $email));
 				}
 			}
 			if ($customerExists) {
-				rm_session_customer()->addNotice(
+				df_session_customer()->addNotice(
 					df_h()->invitation()->__('%d invitation(s) were not sent, because customer accounts already exist for specified email addresses.', $customerExists)
 				);
 			}

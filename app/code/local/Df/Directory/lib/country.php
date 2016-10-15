@@ -133,7 +133,7 @@ function rm_countries_options($emptyLabel = ' ', $locale = null) {
  * @return Df_Directory_Model_Country|null
  */
 function rm_country($iso2, $throw = true) {
-	/** @var array(string => Df_Directory_Model_Country|RM_NULL) */
+	/** @var array(string => Df_Directory_Model_Country|string) */
 	static $cache;
 	if (!isset($cache[$iso2])) {
 		/** @var Df_Directory_Model_Country|null $result */
@@ -144,9 +144,9 @@ function rm_country($iso2, $throw = true) {
 		else if ($throw) {
 			df_error('Не могу найти страну по 2-буквенному коду «%s».', $iso2);
 		}
-		$cache[$iso2] = rm_n_set($result);
+		$cache[$iso2] = df_n_set($result);
 	}
-	return rm_n_get($cache[$iso2]);
+	return df_n_get($cache[$iso2]);
 }
 
 /**

@@ -10,7 +10,7 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 			df_assert($store->getId());
 		}
 		else {
-			$store = rm_store($store);
+			$store = df_store($store);
 		}
 		if (!isset($this->{__METHOD__}[$store->getId()])) {
 			/** @var string $storeBaseUriAsText */

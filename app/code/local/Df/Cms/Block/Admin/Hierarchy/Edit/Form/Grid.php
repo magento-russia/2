@@ -76,7 +76,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form_Grid extends Mage_Adminhtml_Block_W
 	 * @return Df_Core_Model_StoreM
 	 */
 	protected function _getStore() {
-		return rm_store(df_nat0($this->getRequest()->getParam('store', 0)));
+		return df_store(df_nat0($this->getRequest()->getParam('store', 0)));
 	}
 
 	/**

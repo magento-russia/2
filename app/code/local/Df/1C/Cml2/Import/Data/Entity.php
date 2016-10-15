@@ -65,9 +65,9 @@ abstract class Df_1C_Cml2_Import_Data_Entity extends Df_Core_Xml_Parser_Entity {
 	 */
 	public function getName() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->leaf('Наименование'));
+			$this->{__METHOD__} = df_n_set($this->leaf('Наименование'));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

@@ -58,9 +58,9 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 					throw $e;
 				}
 			}
-			$this->{__METHOD__}[$key] = rm_n_set($result);
+			$this->{__METHOD__}[$key] = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__}[$key]);
+		return df_n_get($this->{__METHOD__}[$key]);
 	}
 
 	/**

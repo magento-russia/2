@@ -5,7 +5,7 @@ function rm_checkout_ergonomic() {
 }
 
 /** @return bool */
-function rm_customer_logged_in() {return rm_session_customer()->isLoggedIn();}
+function rm_customer_logged_in() {return df_session_customer()->isLoggedIn();}
 
 /**
  * @param Df_Core_Destructable $object
@@ -34,13 +34,13 @@ function rm_money($amount) {return Df_Core_Model_Money::i($amount); }
  * @used-by rm_quote()
  * @return Mage_Checkout_Model_Session
  */
-function rm_session_checkout() {return Mage::getSingleton('checkout/session');}
+function df_session_checkout() {return Mage::getSingleton('checkout/session');}
 
 /** @return Mage_Core_Model_Session */
-function rm_session_core() {return Mage::getSingleton('core/session');}
+function df_session_core() {return Mage::getSingleton('core/session');}
 
 /** @return Mage_Customer_Model_Session */
-function rm_session_customer() {return Mage::getSingleton('customer/session');}
+function df_session_customer() {return Mage::getSingleton('customer/session');}
 
 /** @return Mage_Tax_Helper_Data */
 function rm_tax_h() {static $r; return $r ? $r : $r = Mage::helper('tax');}

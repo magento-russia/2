@@ -111,13 +111,13 @@ class Df_1C_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 	/** @return Df_Customer_Model_Customer|null */
 	private function getMagentoCustomer() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$this->getOrder()->getCustomerId()
 				? null
 				: Df_Customer_Model_Customer::ld($this->getOrder()->getCustomerId())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_Sales_Model_Order */

@@ -43,7 +43,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 		$store = false;
 		if (empty($importData['store'])) {
 			if (!is_null($this->getBatchParams('store'))) {
-				$store = rm_store($this->getBatchParams('store'));
+				$store = df_store($this->getBatchParams('store'));
 			} else {
 				$message = df_mage()->catalogHelper()->__('Skip import row, required field "%s" not defined', 'store');
 				Mage::throwException($message);

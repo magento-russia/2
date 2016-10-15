@@ -17,7 +17,7 @@ class Df_Core_Helper_File extends Mage_Core_Helper_Abstract {
 		if (!$r) {
 			// Видимо, надо кого-то оповестить?
 			// Но сам я пока не хочу такие оповещения получать: завалят ими.
-			rm_log('Не могу установить права %o для %s.', $mode, $resource);
+			df_log('Не могу установить права %o для %s.', $mode, $resource);
 		}
 	}
 

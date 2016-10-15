@@ -8,7 +8,7 @@ class Df_Core_Helper_Url {
 	 * @return string
 	 */
 	public function addVersionStamp($url, $version = null) {
-		return $url . '?v=' . ($version ? $version : rm_version());
+		return $url . '?v=' . ($version ? $version : df_version());
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Df_Core_Helper_Url {
 	}
 
 	/**
-	 * @used-by df_url()
+	 * @used-by df_url_h()
 	 * @return Df_Core_Helper_Url
 	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

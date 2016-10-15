@@ -14,11 +14,11 @@ class Df_1C_Cml2_Import_Data_Entity_Order extends Df_1C_Cml2_Import_Data_Entity 
 	/** @return Df_Sales_Model_Order|null */
 	public function getOrder() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Sales_Model_Order::ldi($this->getIncrementId(), $throwOnError = false)
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

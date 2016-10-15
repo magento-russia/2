@@ -862,7 +862,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 					, get_class($this)
 				);
 			}
-			$this->{__METHOD__} = $this->cacheKeyGlobal() . '[' . rm_store()->getCode() . ']';
+			$this->{__METHOD__} = $this->cacheKeyGlobal() . '[' . df_store()->getCode() . ']';
 		}
 		return $this->{__METHOD__};
 	}

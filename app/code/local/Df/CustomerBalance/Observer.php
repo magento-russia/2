@@ -243,7 +243,7 @@ class Df_CustomerBalance_Observer  {
 			$order = $creditmemo->getOrder();
 			$order->setBaseCustomerBalanceTotalRefunded($order->getBaseCustomerBalanceTotalRefunded() + $creditmemo->getBaseCustomerBalanceTotalRefunded());
 			$order->setCustomerBalanceTotalRefunded($order->getCustomerBalanceTotalRefunded() + $creditmemo->getCustomerBalanceTotalRefunded());
-			$websiteId = rm_store($order->getStoreId())->getWebsiteId();
+			$websiteId = df_store($order->getStoreId())->getWebsiteId();
 			$balance = Df_CustomerBalance_Model_Balance::i()
 				->setCustomerId($order->getCustomerId())
 				->setWebsiteId($websiteId)
@@ -303,7 +303,7 @@ class Df_CustomerBalance_Observer  {
 			/** @var Df_Sales_Model_Order $order */
 			$order = $o['order'];
 			if ($order->getBaseCustomerBalanceAmount() > 0) {
-				$websiteId = rm_store($order->getStoreId())->getWebsiteId();
+				$websiteId = df_store($order->getStoreId())->getWebsiteId();
 				Df_CustomerBalance_Model_Balance::i()
 					->setCustomerId($order->getCustomerId())
 					->setWebsiteId($websiteId)
@@ -325,7 +325,7 @@ class Df_CustomerBalance_Observer  {
 			/** @var Df_Sales_Model_Order $order */
 			$order = $o['order'];
 			if (0 < $order->getBaseCustomerBalanceAmount()) {
-				$websiteId = rm_store($order->getStoreId())->getWebsiteId();
+				$websiteId = df_store($order->getStoreId())->getWebsiteId();
 				$balance = Df_CustomerBalance_Model_Balance::i()
 					->setCustomerId($order->getCustomerId())
 					->setWebsiteId($websiteId)
@@ -414,7 +414,7 @@ class Df_CustomerBalance_Observer  {
 	 * @param bool $shouldUseBalance
 	 */
 	private function importPaymentData($quote, $payment, $shouldUseBalance)  {
-		$store = rm_store($quote->getStoreId());
+		$store = df_store($quote->getStoreId());
 		if (!$quote || !$quote->getCustomerId()) {
 			return;
 		}

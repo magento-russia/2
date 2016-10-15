@@ -120,7 +120,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 
 	/** @return Mage_Customer_Model_Session */
 	private function getSession() {
-		return rm_session_customer();
+		return df_session_customer();
 	}
 
 	const _C = __CLASS__;

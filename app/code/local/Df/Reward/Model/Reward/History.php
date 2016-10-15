@@ -113,7 +113,7 @@ class Df_Reward_Model_Reward_History extends Df_Core_Model {
 	public function prepareFromReward() {
 		$store = $this->getReward()->getStore();
 		if (is_null($store)) {
-			$store = rm_store();
+			$store = df_store();
 		}
 		$this->setRewardId($this->getReward()->getId())
 			->setWebsiteId($this->getReward()->getWebsiteId())

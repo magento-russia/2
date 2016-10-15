@@ -31,7 +31,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 
 	/** @return void */
 	private function batchFinishActionDf() {
-		rm_session()->unsetData(Df_Dataflow_Const::P__COUNTER);
+		df_session()->unsetData(Df_Dataflow_Const::P__COUNTER);
 		parent::batchFinishAction();
 	}
 
@@ -99,12 +99,12 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 			/** @var int $importId */
 			df_assert_integer($importId);
 			/** @var int|null $counter */
-			$counter = rm_session()->getData(Df_Dataflow_Const::P__COUNTER);
+			$counter = df_session()->getData(Df_Dataflow_Const::P__COUNTER);
 			if (is_null($counter)) {
 				$counter = 0;
 			}
 			$counter++;
-			rm_session()->setData(Df_Dataflow_Const::P__COUNTER, $counter);
+			df_session()->setData(Df_Dataflow_Const::P__COUNTER, $counter);
 			$batchImportModel->load($importId);
 			if (is_null($batchImportModel->getId())) {
 				$errors[]= df_mage()->dataflowHelper()->__('Skip undefined row.');

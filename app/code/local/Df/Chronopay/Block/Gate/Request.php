@@ -23,7 +23,7 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getHash() {
 		return md5(implode('-', array(
-			rm_decrypt($this->getConfigParam('shared_sec'))
+			df_decrypt($this->getConfigParam('shared_sec'))
 			,$this->getOperationCode()
 			,$this->getProductId()
 		)));

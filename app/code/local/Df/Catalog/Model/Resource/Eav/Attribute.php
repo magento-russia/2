@@ -31,7 +31,7 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 	 * @return Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 	 */
 	public function getOptions($store = null) {
-		$store = rm_store(is_null($store) ? $this->getStoreId() : $store);
+		$store = df_store(is_null($store) ? $this->getStoreId() : $store);
 		if (!isset($this->_options[$store->getId()])) {
 			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $result */
 			$result = Df_Eav_Model_Entity_Attribute_Option::c();

@@ -7,7 +7,7 @@ class Df_Themes_Block_Sns_ProductList_List extends Sns_ProductList_Block_List {
 	 */
 	protected function _getProductCollection() {
 		if (is_null($this->{'_productCollection'})) {
-			rm_adapt_legacy_object($this);
+			df_adapt_legacy_object($this);
 		}
 		/** @noinspection PhpUndefinedClassInspection */
 		return parent::_getProductCollection();

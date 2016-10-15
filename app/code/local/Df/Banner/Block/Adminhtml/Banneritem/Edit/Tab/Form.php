@@ -78,9 +78,9 @@ class Df_Banner_Block_Adminhtml_Banneritem_Edit_Tab_Form extends Mage_Adminhtml_
 			,'wysiwyg' => false
 			,'required' => false
 		));
-		if (rm_session()->getDfBannerItemData()) {
-			$form->setValues(rm_session()->getDfBannerItemData());
-			rm_session()->setDfBannerItemData(null);
+		if (df_session()->getDfBannerItemData()) {
+			$form->setValues(df_session()->getDfBannerItemData());
+			df_session()->setDfBannerItemData(null);
 		}
 		else if (Mage::registry('df_banner_item_data')) {
 			$form->setValues(Mage::registry('df_banner_item_data')->getData());

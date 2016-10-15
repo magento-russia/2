@@ -67,7 +67,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 			$this->{__METHOD__} = Df_Avangard_Model_RequestDocument::registration(array(
 				'shop_id' => $this->shopId()
 				,'shop_passwd' => $this->password()
-				,'amount' => rm_round(100 * $this->amount()->getAsFixedFloat())
+				,'amount' => df_round(100 * $this->amount()->getAsFixedFloat())
 				,'order_number' => $this->orderIId()
 				,'order_description' => $this->getTransactionDescription()
 				,'language' => 'RU'

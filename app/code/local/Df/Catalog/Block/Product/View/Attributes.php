@@ -88,7 +88,7 @@ class Df_Catalog_Block_Product_View_Attributes extends Mage_Catalog_Block_Produc
 					&&
 						is_string($value)
 				) {
-					$value = rm_store()->convertPrice($value, true);
+					$value = df_store()->convertPrice($value, true);
 				}
 				if (is_string($value) && $value) {
 					$data[$attribute->getAttributeCode()] = array(

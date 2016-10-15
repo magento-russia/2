@@ -105,18 +105,18 @@ class Df_Core_Setup extends Df_Core_Model {
 		 * Возможно, этот же сбой можно устранить и временным отключением денормализации.
 		 * http://magento-forum.ru/topic/4178/
 		 */
-		rm_admin_begin();
+		df_admin_begin();
 		try {
 			$this->_process();
 			df_cache_clean();
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			df_cache_clean();
 			df_notify_exception($e);
 			df_error($e);
 		}
-		rm_admin_end();
+		df_admin_end();
 	}
 
 	/**

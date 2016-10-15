@@ -8,8 +8,8 @@ class Df_Localization_Onetime_Action extends Df_Core_Model_Action_Admin {
 	 */
 	protected function _process() {
 		$this->getProcessor()->process();
-		if (!rm_session()->getMessages()->getErrors()) {
-			rm_session()->addSuccess(sprintf(
+		if (!df_session()->getMessages()->getErrors()) {
+			df_session()->addSuccess(sprintf(
 				'Оформительская тема «%s» успешно русифицирована.', $this->getProcessor()->getTitle()
 			));
 		}

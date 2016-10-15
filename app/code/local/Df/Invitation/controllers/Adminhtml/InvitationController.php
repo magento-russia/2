@@ -78,7 +78,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				Mage::throwException(df_h()->invitation()->__('Specify at least one email.'));
 			}
 			if (Mage::app()->isSingleStoreMode()) {
-				$storeId = rm_store(true)->getId();
+				$storeId = df_store(true)->getId();
 			}
 			else {
 				$storeId = $this->getRequest()->getParam('store_id');
@@ -122,13 +122,13 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				}
 			}
 			if ($sentCount) {
-				rm_session()->addSuccess(df_h()->invitation()->__('%d invitation(s) were sent.', $sentCount));
+				df_session()->addSuccess(df_h()->invitation()->__('%d invitation(s) were sent.', $sentCount));
 			}
 			if ($failedCount) {
-				rm_session()->addError(df_h()->invitation()->__('Failed to send %1$d of %2$d invitation(s).', $failedCount, count($emails)));
+				df_session()->addError(df_h()->invitation()->__('Failed to send %1$d of %2$d invitation(s).', $failedCount, count($emails)));
 			}
 			if ($customerExistsCount) {
-				rm_session()->addNotice(df_h()->invitation()->__('%d invitation(s) were not sent, because customer accounts already exist for specified email addresses.', $customerExistsCount));
+				df_session()->addNotice(df_h()->invitation()->__('%d invitation(s) were not sent, because customer accounts already exist for specified email addresses.', $customerExistsCount));
 			}
 			$this->_getSession()->unsInvitationFormData();
 			$this->_redirect('*/*/');
@@ -156,7 +156,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				//checking if there was validation
 				if (is_array($result) && !empty($result)) {
 					foreach ($result as $message) {
-						rm_session()->addError($message);
+						df_session()->addError($message);
 					}
 					$this->_redirect('*/*/view', array('_current' => true));
 					return;
@@ -164,7 +164,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 
 				//If there was no validation errors trying to save
 				$invitation->save();
-				rm_session()->addSuccess(df_h()->invitation()->__('Invitation was successfully saved.'));
+				df_session()->addSuccess(df_h()->invitation()->__('Invitation was successfully saved.'));
 			}
 		}
 		catch (Mage_Core_Exception $e) {
@@ -211,17 +211,17 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				}
 			}
 			if (!$found) {
-				rm_session()->addError(df_h()->invitation()->__('No invitations have been resent'));
+				df_session()->addError(df_h()->invitation()->__('No invitations have been resent'));
 			}
 			if ($sent) {
-				rm_session()->addSuccess(df_h()->invitation()->__('%1$d of %2$d invitations were sent.', $sent, $found));
+				df_session()->addSuccess(df_h()->invitation()->__('%1$d of %2$d invitations were sent.', $sent, $found));
 			}
 			$failed = $found - $sent;
 			if ($failed) {
-				rm_session()->addError(df_h()->invitation()->__('Failed to send %d invitation(s).', $failed));
+				df_session()->addError(df_h()->invitation()->__('Failed to send %d invitation(s).', $failed));
 			}
 			if ($customerExists) {
-				rm_session()->addNotice(
+				df_session()->addNotice(
 					df_h()->invitation()->__('%d invitation(s) cannot be sent, because customer already exists for their emails. These invitations were discarded.', $customerExists)
 				);
 			}
@@ -264,11 +264,11 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 				}
 			}
 			if ($cancelled) {
-				rm_session()->addSuccess(df_h()->invitation()->__('%1$d of %2$d invitations were discarded.', $cancelled, $found));
+				df_session()->addSuccess(df_h()->invitation()->__('%1$d of %2$d invitations were discarded.', $cancelled, $found));
 			}
 			$failed = $found - $cancelled;
 			if ($failed) {
-				rm_session()->addNotice(df_h()->invitation()->__('%d of selected invitation(s) were skipped.', $failed));
+				df_session()->addNotice(df_h()->invitation()->__('%d of selected invitation(s) were skipped.', $failed));
 			}
 		}
 		catch (Mage_Core_Exception $e) {

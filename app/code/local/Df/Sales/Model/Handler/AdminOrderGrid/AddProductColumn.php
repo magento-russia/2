@@ -44,7 +44,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 	/** @return string|null */
 	private function getPreviousColumnId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				dfa(
 					array_keys($this->getEvent()->getGrid()->getColumns())
 					// Минус 2, потому что:
@@ -54,7 +54,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 				)
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

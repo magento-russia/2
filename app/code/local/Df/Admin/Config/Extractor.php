@@ -42,7 +42,7 @@ abstract class Df_Admin_Config_Extractor extends Df_Core_Model {
 	/** @return Df_Core_Model_StoreM */
 	private function store() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_store($this->cfg(self::$P__STORE));
+			$this->{__METHOD__} = df_store($this->cfg(self::$P__STORE));
 			df_assert($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

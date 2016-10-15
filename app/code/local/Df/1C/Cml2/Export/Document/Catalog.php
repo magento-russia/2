@@ -101,7 +101,7 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	private function getКаталог_Наименование() {return $this->store()->getFrontendName();}
 
 	/** @return string */
-	private function getКаталог_Описание() {return 'Российская сборка Magento ' . rm_version_full();}
+	private function getКаталог_Описание() {return 'Российская сборка Magento ' . df_version_full();}
 
 	/** @return array(string => mixed) */
 	private function getКлассификатор() {

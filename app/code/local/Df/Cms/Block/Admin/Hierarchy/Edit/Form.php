@@ -15,7 +15,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	/** @return string */
 	public function getCurrentStoreUrlParam() {
 		/* @var Df_Core_Model_StoreM $store */
-		$store = $this->_currentStore ? rm_store($this->_currentStore) : Mage::app()->getAnyStoreView();
+		$store = $this->_currentStore ? df_store($this->_currentStore) : Mage::app()->getAnyStoreView();
 		return '?___store=' . $store->getCode();
 	}
 
@@ -154,7 +154,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	/** @return string */
 	public function getStoreBaseUrl() {
 		/* @var Df_Core_Model_StoreM $store */
-		$store = $this->_currentStore ? rm_store($this->_currentStore) : Mage::app()->getAnyStoreView();
+		$store = $this->_currentStore ? df_store($this->_currentStore) : Mage::app()->getAnyStoreView();
 		return $store->getBaseUrl();
 	}
 

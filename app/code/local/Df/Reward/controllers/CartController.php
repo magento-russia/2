@@ -6,7 +6,7 @@ class Df_Reward_CartController extends Mage_Core_Controller_Front_Action {
 	 */
 	public function preDispatch() {
 		parent::preDispatch();
-		if (!rm_session_customer()->authenticate($this)) {
+		if (!df_session_customer()->authenticate($this)) {
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
 	}
@@ -21,11 +21,11 @@ class Df_Reward_CartController extends Mage_Core_Controller_Front_Action {
 		}
 		if (rm_quote()->getUseRewardPoints()) {
 			rm_quote()->setUseRewardPoints(false)->collectTotals()->save();
-			rm_session_checkout()->addSuccess(
+			df_session_checkout()->addSuccess(
 				$this->__('Reward Points were successfully removed from your order.')
 			);
 		} else {
-			rm_session_checkout()->addError(
+			df_session_checkout()->addError(
 				$this->__('Reward Points will not be used in this order.')
 			);
 		}

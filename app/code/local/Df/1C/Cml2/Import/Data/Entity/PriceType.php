@@ -18,9 +18,9 @@ class Df_1C_Cml2_Import_Data_Entity_PriceType extends Df_1C_Cml2_Import_Data_Ent
 	/** @return Df_Customer_Model_Group|null */
 	public function getCustomerGroup() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->getConfigPrices()->getCustomerGroup($this->getName()));
+			$this->{__METHOD__} = df_n_set($this->getConfigPrices()->getCustomerGroup($this->getName()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return int|null */

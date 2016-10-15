@@ -30,7 +30,7 @@ class Df_CustomerBalance_Model_Total_Quote_Customerbalance
 		$baseBalance = $balance = 0;
 		if ($quote->getCustomer()->getId()) {
 			if ($quote->getUseCustomerBalance()) {
-				$store = rm_store($quote->getStoreId());
+				$store = df_store($quote->getStoreId());
 				$baseBalance = Df_CustomerBalance_Model_Balance::i()
 					->setCustomer($quote->getCustomer())
 					->setWebsiteId($store->getWebsiteId())

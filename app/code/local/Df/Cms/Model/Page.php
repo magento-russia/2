@@ -12,15 +12,15 @@ class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 	 * @throws Exception
 	 */
 	public function deleteRm() {
-		rm_admin_begin();
+		df_admin_begin();
 		try {
 			$this->delete();
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			df_error($e);
 		}
-		rm_admin_end();
+		df_admin_end();
 		return $this;
 	}
 

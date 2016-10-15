@@ -16,7 +16,7 @@ class Df_Alfabank_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {return array(
-		'amount' => rm_round(100 * $this->amountF())
+		'amount' => df_round(100 * $this->amountF())
 		,'currency' => 810
 		,'orderNumber' => $this->orderIId()
 		,'password' => $this->password()

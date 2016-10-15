@@ -8,7 +8,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 				$model = Df_Banner_Model_Banner::i();
 				$model->setId($this->getRequest()->getParam('id'));
 				$model->delete();
-				rm_session()->addSuccess(df_mage()->adminhtml()->__('Item was successfully deleted'));
+				df_session()->addSuccess(df_mage()->adminhtml()->__('Item was successfully deleted'));
 				$this->_redirect('*/*/');
 			} catch (Exception $e) {
 				rm_exception_to_session($e);
@@ -25,7 +25,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 		$model = Df_Banner_Model_Banner::i();
 		$model->load($id);
 		if ($model->getId() || (0 === df_nat0($id))) {
-			$data = rm_session()->getFormData(true);
+			$data = df_session()->getFormData(true);
 			if (!empty($data)) {
 				$model->setData($data);
 			}
@@ -41,7 +41,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 			;
 			$this->renderLayout();
 		} else {
-			rm_session()->addError(df_h()->banner()->__('Item does not exist'));
+			df_session()->addError(df_h()->banner()->__('Item does not exist'));
 			$this->_redirect('*/*/');
 		}
 	}
@@ -64,7 +64,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 		/** @var int[] $dfBannerIds */
 		$dfBannerIds = $this->getRequest()->getParam('df_banner');
 		if (!is_array($dfBannerIds)) {
-			rm_session()->addError(df_mage()->adminhtml()->__('Please select banner(s)'));
+			df_session()->addError(df_mage()->adminhtml()->__('Please select banner(s)'));
 		}
 		else {
 			try {
@@ -74,7 +74,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 					$dfBanner = Df_Banner_Model_Banner::ld($dfBannerId);
 					$dfBanner->delete();
 				}
-				rm_session()->addSuccess(df_mage()->adminhtml()->__(
+				df_session()->addSuccess(df_mage()->adminhtml()->__(
 					'Total of %d record(s) were successfully deleted', count($dfBannerIds)
 				));
 			}
@@ -90,7 +90,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 	{
 		$dfBannerIds = $this->getRequest()->getParam('df_banner');
 		if (!is_array($dfBannerIds)) {
-			rm_session()->addError($this->__('Please select banner(s)'));
+			df_session()->addError($this->__('Please select banner(s)'));
 		}
 		else {
 			try {
@@ -101,7 +101,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 						->save()
 					;
 				}
-				rm_session()->addSuccess($this->__(
+				df_session()->addSuccess($this->__(
 					'Total of %d record(s) were successfully updated', count($dfBannerIds)
 				));
 			}
@@ -156,8 +156,8 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 					$model->setUpdateTime(now());
 				}
 				$model->save();
-				rm_session()->addSuccess('Рекламный щит утверждён');
-				rm_session()->setFormData(false);
+				df_session()->addSuccess('Рекламный щит утверждён');
+				df_session()->setFormData(false);
 				if ($this->getRequest()->getParam('back')) {
 					$this->_redirect('*/*/edit', array('id' => $model->getId()));
 					return;
@@ -166,12 +166,12 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 				return;
 			} catch (Exception $e) {
 				rm_exception_to_session($e);
-				rm_session()->setFormData($data);
+				df_session()->setFormData($data);
 				$this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
 				return;
 			}
 		}
-		rm_session()->addError(df_h()->banner()->__('Unable to find banner to save'));
+		df_session()->addError(df_h()->banner()->__('Unable to find banner to save'));
 		$this->_redirect('*/*/');
 	}
 
@@ -200,7 +200,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 		$response->setHeader('Last-Modified', date('r'));
 		$response->setHeader('Accept-Ranges', 'bytes');
 		$response->setHeader('Content-Length', strlen($content));
-		rm_response_content_type($response, $contentType);
+		df_response_content_type($response, $contentType);
 		$response->setBody($content);
 		$response->sendResponse();
 		die;

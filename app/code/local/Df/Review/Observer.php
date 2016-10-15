@@ -21,14 +21,14 @@ class Df_Review_Observer {
 			/**
 			 * Обратите внимание,
 			 * что событие «core_session_abstract_add_message» вовсе не означает,
-			 * что сообщение было добавлено именно в сессию @see rm_session_core().
+			 * что сообщение было добавлено именно в сессию @see df_session_core().
 			 * Оно могло быть добавлено совсем в другую сессию
 			 * (например, при добавлении товара в корзину),
-			 * и тогда rm_session_core()->getMessages()->getLastAddedMessage() вернёт null!
+			 * и тогда df_session_core()->getMessages()->getLastAddedMessage() вернёт null!
 			 * http://magento-forum.ru/topic/4688/
 			 */
 			/** @var Mage_Core_Model_Message_Abstract|null $lastAddedMessage */
-			$lastAddedMessage = rm_session_core()->getMessages()->getLastAddedMessage();
+			$lastAddedMessage = df_session_core()->getMessages()->getLastAddedMessage();
 			// На всякий случай, перестраховываемся, и ещё проверяем,
 			// что текущая операция — «review_product_post».
 			if (

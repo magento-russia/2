@@ -6,7 +6,7 @@ define('RM_URL_CHECKOUT', 'checkout/onepage');
  * @return Df_Sales_Model_Order|null
  */
 function df_last_order($throw = true) {
-	static $r; return $r ? rm_n_get($r) : $r = rm_n_set(
+	static $r; return $r ? df_n_get($r) : $r = df_n_set(
 		Df_Sales_Model_Order::ldi(df_last_order_iid(), $throw)
 	);
 }
@@ -22,10 +22,10 @@ function df_last_order($throw = true) {
  * а df_last_order_iid() — длинный символьный (хотя тоже состоящий, в основном, из цифр).
  * @return int|null
  */
-function df_last_order_id() {return rm_session_checkout()->getData('last_order_id');}
+function df_last_order_id() {return df_session_checkout()->getData('last_order_id');}
 
 /** @return string|null */
-function df_last_order_iid() {return rm_session_checkout()->getData('last_real_order_id');}
+function df_last_order_iid() {return df_session_checkout()->getData('last_real_order_id');}
 
 /** @return void */
 function rm_redirect_to_checkout() {rm_controller()->setRedirectWithCookieCheck('checkout/onepage');}
@@ -56,7 +56,7 @@ function rm_redirect_to_checkout() {rm_controller()->setRedirectWithCookieCheck(
  * @used-by df/reward/checkout/payment/multishipping.phtml
  * @return Mage_Sales_Model_Quote|Df_Sales_Model_Quote
  */
-function rm_quote() {return rm_session_checkout()->getQuote();}
+function rm_quote() {return df_session_checkout()->getQuote();}
 
 /**
  * 2015-03-31
@@ -91,7 +91,7 @@ function rm_quote_address_shipping() {return rm_quote()->getShippingAddress();}
  */
 function rm_quote_has_items() {
 	df_module_enabled('Mage_Checkout')
-	&& rm_session_checkout()->getQuoteId()
+	&& df_session_checkout()->getQuoteId()
 	&& rm_quote()->getItemsCount();
 }
 

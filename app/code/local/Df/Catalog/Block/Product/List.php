@@ -104,7 +104,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 				 * использует аналогичную функцию @uses sha1()
 				 */
 				,$this->getRequest()->getRequestUri()
-				,rm_store()->getCurrentCurrencyCode()
+				,df_store()->getCurrentCurrencyCode()
 			));
 		}
 		return $result;

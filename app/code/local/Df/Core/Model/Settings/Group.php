@@ -24,7 +24,7 @@ class Df_Core_Model_Settings_Group extends Df_Core_Model {
 			df_param_array($prefixes, 1);
 		}
 		/** @var string|null $result */
-		$result = rm_store($store)->getConfig($this->expandConfigKey($this->implodePrefixes(
+		$result = df_store($store)->getConfig($this->expandConfigKey($this->implodePrefixes(
 			$configKeySuffix, $prefixes
 		)));
 		return is_null($result) ? $defaultValue : $result;

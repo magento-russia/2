@@ -62,7 +62,7 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 			$this->{__METHOD__} = $this->getVar($this->testable('key_private_password'));
 			// Тестовое значение хранится в config.xml в открытом виде,
 			// поэтому для него дешифрация не нужна и приведёт к повреждению данных.
-			$this->{__METHOD__} = $this->isTestMode() ? $result : rm_decrypt($result);
+			$this->{__METHOD__} = $this->isTestMode() ? $result : df_decrypt($result);
 		}
 		return $this->{__METHOD__};
 	}

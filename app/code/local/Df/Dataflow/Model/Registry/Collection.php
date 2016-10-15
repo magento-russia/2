@@ -84,7 +84,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	public function save() {
 		/** @var Df_Core_Exception_Batch $batchException */
 		$batchException = new Df_Core_Exception_Batch();
-		rm_admin_begin();
+		df_admin_begin();
 		try {
 			foreach ($this->getCollectionRm() as $entity) {
 				/** @var Mage_Core_Model_Abstract $entity */
@@ -105,10 +105,10 @@ abstract class Df_Dataflow_Model_Registry_Collection
 			}
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			throw $e;
 		}
-		rm_admin_end();
+		df_admin_end();
 		$batchException->throwIfNeeed();
 	}
 
@@ -141,7 +141,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	protected function getEntityLabel(Mage_Core_Model_Abstract $entity) {return null;}
 
 	/** @return Df_Core_Model_StoreM */
-	protected function getStoreDefault() {return rm_store();}
+	protected function getStoreDefault() {return df_store();}
 
 	/**
 	 * @param Mage_Core_Model_Abstract $entity

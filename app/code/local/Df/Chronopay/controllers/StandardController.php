@@ -4,14 +4,14 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 	public function getOrder() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Sales_Model_Order::i();
-			$this->{__METHOD__}->loadByIncrementId(rm_session_checkout()->getLastRealOrderId());
+			$this->{__METHOD__}->loadByIncrementId(df_session_checkout()->getLastRealOrderId());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return void */
 	public function redirectAction() {
-		rm_session_checkout()->setChronopayStandardQuoteId(rm_session_checkout()->getQuoteId());
+		df_session_checkout()->setChronopayStandardQuoteId(df_session_checkout()->getQuoteId());
 		$order = $this->getOrder();
 		if (!$order->getId()) {
 			$this->norouteAction();
@@ -25,13 +25,13 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 			->save()
 		;
 		$this->getResponse()->setBody(Df_Chronopay_Block_Standard_Redirect::r($order));
-		rm_session_checkout()->unsQuoteId();
+		df_session_checkout()->unsQuoteId();
 	}
 
 	/** @return void */
 	public function  successAction()
 	{
-		$session = rm_session_checkout();
+		$session = df_session_checkout();
 		$session->setQuoteId($session->getChronopayStandardQuoteId());
 		$session->unsChronopayStandardQuoteId();
 		$order = $this->getOrder();
@@ -60,7 +60,7 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 			else {
 				/** @var Df_Sales_Model_Order $order */
 				$order = Df_Sales_Model_Order::i();
-				$order->loadByIncrementId(rm_decrypt($postData['cs1']));
+				$order->loadByIncrementId(df_decrypt($postData['cs1']));
 				if (!$order->getId()) {
 					df_error("invalid order id");
 				}
@@ -184,7 +184,7 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 			$order->save();
 			$this->loadLayout();
 			$this->renderLayout();
-			rm_session_checkout()->unsLastRealOrderId();
+			df_session_checkout()->unsLastRealOrderId();
 		}
 	}
 }

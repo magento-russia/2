@@ -255,7 +255,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 			$this->setData('store', $store);
 		}
 		// намеренно возвращаем null (так в оригинале)
-		return is_null($store) ? null : (is_object($store) ? $store : rm_store($store));
+		return is_null($store) ? null : (is_object($store) ? $store : df_store($store));
 	}
 
 	/** @return string */
@@ -337,7 +337,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 		if ($delta == 0) {
 			return $this;
 		}
-		$store = rm_store($this->getStore());
+		$store = df_store($this->getStore());
 		/* @var Df_Core_Model_Email_Template $mail */
 		$mail = Df_Core_Model_Email_Template::i();
 		$mail->setDesignConfig(array(
@@ -374,7 +374,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 		$mail->setDesignConfig(array(
 			'area' => Df_Core_Const_Design_Area::FRONTEND, 'store' => $item->getStoreId()
 		));
-		$store = rm_store($item->getStoreId());
+		$store = df_store($item->getStoreId());
 		$templateVars = array(
 			'store' => $store
 			,'customer_name' => $item->getCustomerFirstname().' '.$item->getCustomerLastname()

@@ -3,13 +3,13 @@ class Df_YandexMarket_Model_Settings_Products extends Df_YandexMarket_Model_Sett
 	/** @return Mage_CatalogRule_Model_Rule|null */
 	public function getRule() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Catalog_Model_ConditionsLoader::i(
 					$this->getRuleId(), 'Яндекс.Маркет', '«Яндекс.Маркет» → «Товары» → «Условия»'
 				)->getRule()
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return bool */

@@ -55,9 +55,9 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $resultAsString */
 			$resultAsString = Mage::getStoreConfig($this->getConfigPath_TimeOfLastProcessing());
-			$this->{__METHOD__} = rm_n_set(!$resultAsString ? null : new Zend_Date($resultAsString));
+			$this->{__METHOD__} = df_n_set(!$resultAsString ? null : new Zend_Date($resultAsString));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string */
@@ -125,7 +125,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 		 * Раньше тут стояло Mage::getConfig()->reinit();
 		 * что не решало проблему.
 		 */
-		rm_store()->resetConfig();
+		df_store()->resetConfig();
 		$this->importDemoImages();
 	}
 
@@ -218,7 +218,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 			}
 		}
 		if ($messages) {
-			rm_session()->addError(df_t()->nl2br(
+			df_session()->addError(df_t()->nl2br(
 				"В процессе русификации оформительской темы"
 				. " некоторые операции с файловой системой завершились сбойно."
 				. "\nКак правило, причиной сбоя является отсутствие у интерпрататора PHP"
@@ -273,7 +273,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 		}
 		catch (Df_Core_Exception_Batch $e) {
 			$e->log();
-			rm_session()->addError(strtr(
+			df_session()->addError(strtr(
 				'При обновлении базы данных в процессе русификации оформительской темы «{theme}»'
 				. ' прозошли перечисленные ниже сбои.'
 				. '<br/>Подробные диагностические отчёты о каждом сбое записаны в подпапку var/log'

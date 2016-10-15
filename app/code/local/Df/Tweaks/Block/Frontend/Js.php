@@ -47,8 +47,8 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 			}
 			// быстро узнать версию движка при просмотре страницы
 			// нам важно для диагностики
-			$options['version'] = array('rm' => rm_version(), 'core' => Mage::getVersion());
-			$options['formKey'] = rm_session_core()->getFormKey();
+			$options['version'] = array('rm' => df_version(), 'core' => Mage::getVersion());
+			$options['formKey'] = df_session_core()->getFormKey();
 			/** @var string $result */
 			$this->{__METHOD__} = df_output()->json($options);
 		}

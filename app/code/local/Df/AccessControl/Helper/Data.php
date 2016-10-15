@@ -3,13 +3,13 @@ class Df_AccessControl_Helper_Data extends Mage_Core_Helper_Abstract {
 	/** @return Df_AccessControl_Model_Role|null */
 	public function getCurrentRole() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				$this->getCurrentRoleId()
 				? Df_AccessControl_Model_Role::ld($this->getCurrentRoleId())
 				: null
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return int */

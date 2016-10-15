@@ -42,7 +42,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 		$id = rm_request('id');
 		/** @var Df_Catalog_Model_Product $p */
 		$p = df_product($id);
-		rm_log($this->sessionGet('prev'));
+		df_log($this->sessionGet('prev'));
 		$this->sessionSet('prev', $p->getName());
 		/** @var Zend_Http_Response $response */
 		$response = $this->request(Zend_Http_Client::POST, '', array(
@@ -147,7 +147,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 	 * @param string $key
 	 * @return mixed
 	 */
-	private function sessionGet($key) {return rm_session()->getData($key);}
+	private function sessionGet($key) {return df_session()->getData($key);}
 
 	/**
 	 * 2016-10-11
@@ -155,5 +155,5 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 	 * @param mixed $value
 	 * @return void
 	 */
-	private function sessionSet($key, $value) {rm_session()->setData($key, $value);}
+	private function sessionSet($key, $value) {df_session()->setData($key, $value);}
 }

@@ -248,7 +248,7 @@ class Df_Directory_Model_Resource_Country_Collection
 			 * @see Mage_XmlConnect_Block_Checkout_Address_Form::_getCountryOptions()
 			 * @see Mage_XmlConnect_Model_Simplexml_Form_Element_CountryListSelect::_getCountryOptions()
 			 */
-			$cacheKey = 'DIRECTORY_COUNTRY_SELECT_STORE_' . rm_store()->getCode();
+			$cacheKey = 'DIRECTORY_COUNTRY_SELECT_STORE_' . df_store()->getCode();
 			// Если в наш метод переданы нестандартные значения параметров $emptyLabel и $locale,
 			// то мы добавим в конец данного идентификатора идентификаторы значений этих параметров.
 			if (' ' !== $emptyLabel) {

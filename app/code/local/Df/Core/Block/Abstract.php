@@ -64,7 +64,7 @@ abstract class Df_Core_Block_Abstract extends Mage_Core_Block_Abstract {
 	public function getCacheKeyInfo() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array(get_class($this), $this->getNameInLayout(), rm_store()->getCode());
+			$result = array(get_class($this), $this->getNameInLayout(), df_store()->getCode());
 			if (isset($this->_nameInLayout) && $this->_nameInLayout) {
 				$result[]= $this->_nameInLayout;
 			}

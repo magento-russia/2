@@ -29,7 +29,7 @@ class Df_Newsletter_Observer {
 				$isSubscribeOwnEmail =
 						rm_customer_logged_in()
 					&&
-						$customer->getId() === rm_session_customer()->getId()
+						$customer->getId() === df_session_customer()->getId()
 				;
 				if ($isSubscribeOwnEmail) {
 					$subscriber->setStoreId(rm_store_id());

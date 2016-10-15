@@ -107,7 +107,7 @@ function rm_product_id($product) {
  * @return void
  */
 function rm_products_update(array $data, array $ids = array(), array $stores = array()) {
-	rm_admin_begin();
+	df_admin_begin();
 	try {
 		// Если витрины не указаны — то обновляем свойства для всех витрин.
 		if (!$stores) {
@@ -127,7 +127,7 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
 		else {
 			foreach ($stores as &$store) {
 				/** @var mixed $store */
-				$store = rm_store($store);
+				$store = df_store($store);
 			}
 		}
 		/** @var int[] $websiteIds */
@@ -182,10 +182,10 @@ function rm_products_update(array $data, array $ids = array(), array $stores = a
 		}
 	}
 	catch (Exception $e) {
-		rm_admin_end();
+		df_admin_end();
 		df_error($e);
 	}
-	rm_admin_end();
+	df_admin_end();
 }
 
 /**

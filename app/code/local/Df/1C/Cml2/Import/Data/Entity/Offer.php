@@ -281,9 +281,9 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 					}
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_1C_Cml2_Import_Data_Entity_Offer[] */

@@ -306,13 +306,13 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 	 */
 	private function layout() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$this->isChildExist('layout')
 				? null
 				: Df_Localization_Realtime_Dictionary_Layout::i($this->e()->{'layout'})
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

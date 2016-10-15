@@ -40,7 +40,7 @@ class Df_Cms_Model_Registry extends Df_Core_Model {
 			/** @var Df_Cms_Model_Resource_Hierarchy_Node_Collection $result */
 			$result = Df_Cms_Model_Hierarchy_Node::c();
 			$result
-				->addStoreFilter(rm_store(), false)
+				->addStoreFilter(df_store(), false)
 				->addRootNodeFilter()
 				->joinMetaData()
 				->joinCmsPage()

@@ -73,7 +73,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 		/** @var Df_Catalog_Model_Resource_Category_Collection $result */
 		$result = Df_Catalog_Model_Category::c();
 		$result
-			->setStore(rm_store())
+			->setStore(df_store())
 			->addAttributeToSelect('name')
 			->addAttributeToSelect('url_key')
 			->addFieldToFilter('entity_id', array('in' => $pathIds))

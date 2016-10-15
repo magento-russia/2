@@ -54,9 +54,9 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 			if (!is_null($result)) {
 				df_result_integer($result);
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */
@@ -70,9 +70,9 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 	public function getId() {
 		if (!isset($this->{__METHOD__})) {
 			// Идентификатор отсутствует у новых товаров.
-			$this->{__METHOD__} = rm_n_set(df_h()->catalog()->product()->getIdBySku($this->getSku()));
+			$this->{__METHOD__} = df_n_set(df_h()->catalog()->product()->getIdBySku($this->getSku()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -130,9 +130,9 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 			if ($result) {
 				df_result_sku($result);
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Mage_Core_Model_Website[] */
@@ -190,7 +190,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 			}
 			df_assert_string($storeCode);
 			/** @var Df_Core_Model_StoreM $result */
-			$result = rm_store($storeCode);
+			$result = df_store($storeCode);
 			if (!$result) {
 				$this->error(
 					"В строке импортируемых данных №%d указан несуществующий магазин «%s»."

@@ -73,7 +73,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	public function getStores() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Mage_Core_Model_Resource_Store_Collection|Mage_Core_Model_Mysql4_Store_Collection $result */
-			$result = rm_store()->getResourceCollection();
+			$result = df_store()->getResourceCollection();
 			df()->assert()->storeCollection($result);
 			switch($this->getScope()) {
 				case self::$SCOPE__DEFAULT:
@@ -104,7 +104,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 					$result = array_keys(Mage::app()->getWebsites($withDefault = false, $codeKey = false));
 					break;
 				case self::$SCOPE__STORES:
-					$result = array(rm_store($this->getScopeId())->getWebsiteId());
+					$result = array(df_store($this->getScopeId())->getWebsiteId());
 					break;
 				case self::$SCOPE__WEBSITES:
 					$result = array($this->getScopeId());
@@ -130,9 +130,9 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	 */
 	private function getFieldConfigParamInternal($name) {
 		if (!isset($this->{__METHOD__}[$name])) {
-			$this->{__METHOD__}[$name] = rm_n_set(rm_leaf_child($this->getFieldConfig(), $name));
+			$this->{__METHOD__}[$name] = df_n_set(rm_leaf_child($this->getFieldConfig(), $name));
 		}
-		return rm_n_get($this->{__METHOD__}[$name]);
+		return df_n_get($this->{__METHOD__}[$name]);
 	}
 
 	/** @return Mage_Core_Model_Resource_Website_Collection|Mage_Core_Model_Mysql4_Website_Collection */

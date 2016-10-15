@@ -83,9 +83,9 @@ function rm_config_node($path) {
 		/** @var array(string => Mage_Core_Model_Config_Element|null) $cache */
 		static $cache;
 		if (!isset($cache[$path])) {
-			$cache[$path] = rm_n_set(df_ftn(Mage::getConfig()->getNode($path)));
+			$cache[$path] = df_n_set(df_ftn(Mage::getConfig()->getNode($path)));
 		}
-		$result = rm_n_get($cache[$path]);
+		$result = df_n_get($cache[$path]);
 	}
 	return $result;
 }

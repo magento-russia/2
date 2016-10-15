@@ -20,7 +20,7 @@ class Df_Psbank_Model_Config_Area_Service extends Df_Payment_Config_Area_Service
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->getVar('shop_name');
 			if (!$this->{__METHOD__})  {
-				$this->{__METHOD__} = mb_substr(rm_store()->getFrontendName(), 0, 30);
+				$this->{__METHOD__} = mb_substr(df_store()->getFrontendName(), 0, 30);
 			}
 		}
 		return $this->{__METHOD__};
@@ -43,7 +43,7 @@ class Df_Psbank_Model_Config_Area_Service extends Df_Payment_Config_Area_Service
 		/** @var string $resultEncoded */
 		$resultEncoded = $this->getVar('request_password_part_' . $partIndex);
 		df_assert_string_not_empty($resultEncoded);
-		return rm_decrypt($resultEncoded);
+		return df_decrypt($resultEncoded);
 	}
 
 	/**

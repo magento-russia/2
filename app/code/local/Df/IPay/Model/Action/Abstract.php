@@ -144,7 +144,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 					$store = $this->order()->getStore();
 				}
 				catch (Exception $e) {
-					$store = rm_store();
+					$store = df_store();
 				}
 				$result = Df_IPay_Model_Payment::i($store);
 			}
@@ -193,7 +193,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 				df_error(
 					'Заказ номер %d не существует. Начните оплату заново с сайта %s'
 					,$this->orderId()
-					,rm_current_domain()
+					,df_current_domain()
 				);
 			}
 			$this->{__METHOD__} = $result;
@@ -255,7 +255,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	 */
 	protected function store() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->orderId() ? rm_store() : $this->order()->getStore();
+			$this->{__METHOD__} = !$this->orderId() ? df_store() : $this->order()->getStore();
 		}
 		return $this->{__METHOD__};
 	}

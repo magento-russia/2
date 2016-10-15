@@ -3,11 +3,11 @@ class Df_1C_Config_MapItem_PriceType extends Df_Admin_Config_MapItem {
 	/** @return Df_Customer_Model_Group|null */
 	public function getCustomerGroup() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Customer_Model_Group::cs()->getItemById($this->getCustomerGroupId())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */

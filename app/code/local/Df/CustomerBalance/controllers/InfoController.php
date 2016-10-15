@@ -11,7 +11,7 @@ class Df_CustomerBalance_InfoController extends Mage_Core_Controller_Front_Actio
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		if (!rm_session_customer()->authenticate($this)) {
+		if (!df_session_customer()->authenticate($this)) {
 			$this->setFlag('', 'no-dispatch', true);
 		}
 	}

@@ -484,12 +484,12 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		/**
 		 * Обратите внимание,
 		 * что при возвращении на страницу RM_URL_CHECKOUT
-		 * диагностическое сообщение надо добавлять в rm_session_core(),
-		 * а не в rm_session_checkout(),
+		 * диагностическое сообщение надо добавлять в df_session_core(),
+		 * а не в df_session_checkout(),
 		 * потому что сообщения сессии checkout
 		 * не отображаются в стандартной теме на странице checkout/onepage
 		 */
-		rm_session_core()->addError(df_t()->nl2br(
+		df_session_core()->addError(df_t()->nl2br(
 			$e instanceof Df_Payment_Exception && $e->needFraming()
 			? strtr($this->getMethod()->configF()->getMessageFailure(), array(
 				'{сообщение от платёжного шлюза}' => df_ets($e))

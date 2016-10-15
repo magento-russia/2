@@ -74,7 +74,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	}
 
 	/** @return Mage_Checkout_Model_Session */
-	private static function session() {return rm_session_checkout();}
+	private static function session() {return df_session_checkout();}
 
 	/**
 	 * Флаг @see $REDIRECTED предназначен для отслеживания возвращения покупателя

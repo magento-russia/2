@@ -14,7 +14,7 @@ class Df_Invitation_Block_Customer_Form_Register extends Mage_Customer_Block_For
 	{
 		$data = $this->_getData('form_data');
 		if (is_null($data)) {
-			$customerFormData = rm_session_customer()->getCustomerFormData(true);
+			$customerFormData = df_session_customer()->getCustomerFormData(true);
 			$data = new Varien_Object($customerFormData);
 			if (empty($customerFormData)) {
 				$invitation = $this->getCustomerInvitation();

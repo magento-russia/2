@@ -41,7 +41,7 @@ class Df_Reward_Adminhtml_Customer_RewardController extends Mage_Adminhtml_Contr
 		if ($customerId) {
 			try {
 				Df_Reward_Model_Reward::i()->deleteOrphanPointsByCustomer($customerId);
-				rm_session()->addSuccess(df_h()->reward()->__('Orphan points removed successfully.'));
+				df_session()->addSuccess(df_h()->reward()->__('Orphan points removed successfully.'));
 			} catch (Exception $e) {
 				rm_exception_to_session($e);
 			}

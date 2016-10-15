@@ -25,9 +25,9 @@ abstract class Df_YandexMoney_Model_Response extends Df_Payment_Model_Response {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $resultAsString */
 			$resultAsString = $this->cfg('balance');
-			$this->{__METHOD__} = rm_n_set(!$resultAsString ? null : rm_money(rm_float($resultAsString)));
+			$this->{__METHOD__} = df_n_set(!$resultAsString ? null : rm_money(rm_float($resultAsString)));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */

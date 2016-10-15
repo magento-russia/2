@@ -23,7 +23,7 @@ class Df_Reward_Block_Adminhtml_Sales_Order_Create_Payment extends Df_Core_Block
 				(float)$this->getCurrencyAmount()
 			&&
 				df_h()->reward()->isEnabledOnFront(
-					rm_store($this->getQuote()->getStoreId())->getWebsiteId()
+					df_store($this->getQuote()->getStoreId())->getWebsiteId()
 				)
 		;
 	}

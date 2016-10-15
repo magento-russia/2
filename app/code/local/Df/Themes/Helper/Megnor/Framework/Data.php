@@ -8,6 +8,6 @@ class Df_Themes_Helper_Megnor_Framework_Data extends Megnor_Framework_Helper_Dat
 	 */
 	public function isSpecialProduct($_product) {
 		/** @noinspection PhpUndefinedClassInspection */
-		return parent::isSpecialProduct(rm_adapt_legacy_object($_product, array('_rule_price')));
+		return parent::isSpecialProduct(df_adapt_legacy_object($_product, array('_rule_price')));
 	}
 }

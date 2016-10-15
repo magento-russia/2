@@ -81,17 +81,17 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		$excludeUrlRewritePrev = $this->getExcludeUrlRewrite();
 		$this->setIsMassupdate($isMassUpdate);
 		$this->setExcludeUrlRewrite($isMassUpdate);
-		rm_admin_begin();
+		df_admin_begin();
 		try {
 			$this->delete();
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			$this->setIsMassupdate($isMassupdatePrev);
 			$this->setExcludeUrlRewrite($excludeUrlRewritePrev);
 			df_error($e);
 		}
-		rm_admin_end();
+		df_admin_end();
 		$this->setIsMassupdate($isMassupdatePrev);
 		$this->setExcludeUrlRewrite($excludeUrlRewritePrev);
 		return $this;
@@ -103,7 +103,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * @return Df_Catalog_Model_Product
 	 */
 	public function forStore($storeId) {
-		rm_admin_begin();
+		df_admin_begin();
 		/**
 		 * На случай, если сторонним модулям
 		 * потребуется перекрыть класс Df_Catalog_Model_Product наследником
@@ -113,7 +113,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		$result = new $class();
 		$result->setStoreId($storeId);
 		$result = df_load($result, $this->getId());
-		rm_admin_end();
+		df_admin_end();
 		return $result;
 	}
 
@@ -177,9 +177,9 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					df_first($this->getCategoryIds()), $this->getStore()
 				);
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return float */
@@ -372,9 +372,9 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 				}
 				$result = $code ? rm_country($code) : null;
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -429,9 +429,9 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					$result[$link->getId()] = $link;
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -949,7 +949,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 */
 	public function saveAttributes(array $attributeValues, $storeId = null) {
 		df_nat($this->getId());
-		rm_admin_begin();
+		df_admin_begin();
 		try {
 			/** @var Mage_Catalog_Model_Product_Action $productAction */
 			$productAction = Mage::getSingleton('catalog/product_action');
@@ -959,10 +959,10 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			$productAction->updateAttributes(array($this->getId()), $attributeValues, $storeId);
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			df_error($e);
 		}
-		rm_admin_end();
+		df_admin_end();
 		return $this;
 	}
 
@@ -978,7 +978,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		$excludeUrlRewritePrev = $this->getExcludeUrlRewrite();
 		$this->setIsMassupdate($isMassUpdate);
 		$this->setExcludeUrlRewrite($isMassUpdate);
-		rm_admin_begin();
+		df_admin_begin();
 		/**
 		 * Эта странная заплатка устраняет дефект Magento CE/EE:
 		 * без неё в результате сохранения товара при незаполненности свойства 'tier_price'
@@ -994,7 +994,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			$this->save();
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			$this->setIsMassupdate($isMassupdatePrev);
 			$this->setExcludeUrlRewrite($excludeUrlRewritePrev);
 			if ($tierPriceIsNull) {
@@ -1002,7 +1002,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			}
 			df_error($e);
 		}
-		rm_admin_end();
+		df_admin_end();
 		$this->setIsMassupdate($isMassupdatePrev);
 		$this->setExcludeUrlRewrite($excludeUrlRewritePrev);
 		if ($tierPriceIsNull) {
@@ -1172,14 +1172,14 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * @return Df_Catalog_Model_Product
 	 */
 	public static function createNew($storeId = null) {
-		rm_admin_begin();
+		df_admin_begin();
 		/** @var Df_Catalog_Model_Product $result */
 		$result = self::i();
 		if (!is_null($storeId)) {
 			$result->setStoreId($storeId);
 		}
 		$result->setStockItem(Df_CatalogInventory_Model_Stock_Item::i());
-		rm_admin_end();
+		df_admin_end();
 		return $result;
 	}
 
@@ -1217,7 +1217,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * @return Df_Catalog_Model_Product
 	 */
 	public static function ld($id, $storeId = null) {
-		rm_admin_begin();
+		df_admin_begin();
 		/** @var Df_Catalog_Model_Product $result */
 		$result = self::i();
 		if (!is_null($storeId)) {
@@ -1238,7 +1238,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			df_assert_integer($id);
 		}
 		df_load($result, $id);
-		rm_admin_end();
+		df_admin_end();
 		return $result;
 	}
 	/** @return void */

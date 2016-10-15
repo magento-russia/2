@@ -66,7 +66,7 @@ class Df_Catalog_Model_Config_Backend_Conditions extends Df_Admin_Config_Backend
 		$validateResult = $this->getRule()->validateData(new Varien_Object($this->getPost()));
 		if (true !== $validateResult) {
 			/** @uses Mage_Core_Model_Session_Abstract::addError() */
-			array_map(array(rm_session(), 'addError'), $validateResult);
+			array_map(array(df_session(), 'addError'), $validateResult);
 		}
 		return (true === $validateResult);
 	}

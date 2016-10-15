@@ -19,7 +19,7 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 	 * @used-by Df_Shipping_Config_Area_Admin::isTodayOff()
 	 * @return Df_Core_Model_StoreM
 	 */
-	protected function store() {return rm_store($this->main()->getStore());}
+	protected function store() {return df_store($this->main()->getStore());}
 
 	/**
 	 * @used-by Df_Payment_Model_Method::getCheckoutModuleType()

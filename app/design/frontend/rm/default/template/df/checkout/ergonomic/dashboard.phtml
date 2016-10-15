@@ -32,7 +32,7 @@
 		Mage_Checkout_Model_Type_Onepage::METHOD_REGISTER
 	);
 	$shippingAddress->setSameAsBilling(true);
-	//rm_session_checkout()->setStepData('review', 'allow', true);
+	//df_session_checkout()->setStepData('review', 'allow', true);
 ?>
 <div class='df'>
 	<div class='df-checkout-ergonomic'>
@@ -48,7 +48,7 @@
 		<div style='display:none;'>
 			<?php
 				echo df_render('customer/form_login', 'df/checkout/ergonomic/login.phtml');
-				rm_session_customer()->setBeforeAuthUrl(
+				df_session_customer()->setBeforeAuthUrl(
 					Mage::getUrl(
 						'checkout/onepage'
 						// Иначе возникают проблемы при включенном кэшировании

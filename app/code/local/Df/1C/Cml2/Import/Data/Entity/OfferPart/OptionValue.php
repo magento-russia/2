@@ -124,9 +124,9 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 			if ($result && df_ends_with($result, '))')) {
 				$result = df_trim(df_first(explode('(', $result)));
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -392,9 +392,9 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 			if (!$result instanceof Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList) {
 				$result = null;
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

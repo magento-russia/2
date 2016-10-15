@@ -152,7 +152,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 			,'sign' => md5(implode('-', array(
 				$this->getConfigData('product_id')
 				,$price
-				,rm_decrypt($this->getConfigData('shared_sec'))
+				,df_decrypt($this->getConfigData('shared_sec'))
 			)))
 			,'language' => strtolower($this->getConfigData('language'))
 			,'f_name'  => $this->getFirstName()
@@ -167,7 +167,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 			,'cb_type' => 'P' // POST method used (G - GET method)
 			,'decline_url' => $this->getFailureURL()
 			,'success_url' => $this->getSuccessURL()
-			,'cs1' => rm_encrypt($order->getRealOrderId())
+			,'cs1' => df_encrypt($order->getRealOrderId())
 		);
 		/**
 		 * ChronoPay разрешает указывать код региона только для США и Канады

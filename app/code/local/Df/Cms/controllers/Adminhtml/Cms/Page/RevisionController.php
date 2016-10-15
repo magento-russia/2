@@ -15,7 +15,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				$revision = $this->_initRevision();
 				$revision->delete();
 				// display success message
-				rm_session()->addSuccess(df_h()->cms()->__('Revision was successfully deleted.'));
+				df_session()->addSuccess(df_h()->cms()->__('Revision was successfully deleted.'));
 				$this->_redirect('*/cms_page_version/edit', array(
 						'page_id' => $revision->getPageId(),'version_id' => $revision->getVersionId()
 					));
@@ -26,7 +26,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				$error = true;
 			} catch (Exception $e) {
 				Mage::logException($e);
-				rm_session()->addError(df_h()->cms()->__('Error while deleting revision. Please try again later.'));
+				df_session()->addError(df_h()->cms()->__('Error while deleting revision. Please try again later.'));
 				$error = true;
 			}
 
@@ -37,7 +37,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			}
 		}
 		// display error message
-		rm_session()->addError(df_h()->cms()->__('Unable to find a revision to delete.'));
+		df_session()->addError(df_h()->cms()->__('Unable to find a revision to delete.'));
 		// go to grid
 		$this->_redirect('*/cms_page/edit', array('_current' => true));
 	}
@@ -100,7 +100,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			 * Emulating front environment
 			 */
 			Mage::app()->getLocale()->emulate($selectedStoreId);
-			Mage::app()->setCurrentStore(rm_store($selectedStoreId));
+			Mage::app()->setCurrentStore(df_store($selectedStoreId));
 			Mage::getDesign()->setArea('frontend')
 				->setStore($selectedStoreId);
 			$designChange = Mage::getSingleton('core/design')
@@ -128,12 +128,12 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 		$revisionId = $this->getRequest()->getParam('revision_id');
 		$revision = $this->_initRevision($revisionId);
 		if ($revisionId && !$revision->getId()) {
-			rm_session()->addError(
+			df_session()->addError(
 				df_h()->cms()->__('Could not load specified revision.'));
 			$this->_redirect('*/cms_page/edit',array('page_id' => $this->getRequest()->getParam('page_id')));
 			return;
 		}
-		$data = rm_session()->getFormData(true);
+		$data = df_session()->getFormData(true);
 		if (!empty($data)) {
 			$_data = $revision->getData();
 			$_data = array_merge($_data, $data);
@@ -228,7 +228,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 		try {
 			$revision->publish();
 			// display success message
-			rm_session()->addSuccess(df_h()->cms()->__('Revision was successfully published.'));
+			df_session()->addSuccess(df_h()->cms()->__('Revision was successfully published.'));
 			$this->_redirect('*/cms_page/edit', array('page_id' => $revision->getPageId()));
 			return;
 		} catch (Exception $e) {
@@ -260,9 +260,9 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				// save the data
 				$revision->save();
 				// display success message
-				rm_session()->addSuccess(df_h()->cms()->__('Revision was successfully saved.'));
+				df_session()->addSuccess(df_h()->cms()->__('Revision was successfully saved.'));
 				// clear previously saved data from session
-				rm_session()->setFormData(false);
+				df_session()->setFormData(false);
 				// check if 'Save and Continue'
 				if ($this->getRequest()->getParam('back')) {
 					$this->_redirect('*/*/' . $this->getRequest()->getParam('back'),array(
@@ -279,7 +279,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				// display error message
 				rm_exception_to_session($e);
 				// save data in session
-				rm_session()->setFormData($data);
+				df_session()->setFormData($data);
 				// redirect to edit form
 				$this->_redirect('*/*/edit',array(
 						'page_id' => $this->getRequest()->getParam('page_id'),'revision_id' => $this->getRequest()->getParam('revision_id'),));

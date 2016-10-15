@@ -44,9 +44,9 @@ class Df_Core_Model_Convention extends Df_Core_Model {
 					}
 				}
 			}
-			$this->{__METHOD__}[$cacheKey] = rm_n_set($result);
+			$this->{__METHOD__}[$cacheKey] = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__}[$cacheKey]);
+		return df_n_get($this->{__METHOD__}[$cacheKey]);
 	}
 
 	/** @return Df_Core_Model_Convention */

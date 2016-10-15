@@ -60,9 +60,9 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	/** @return Mage_Core_Block_Abstract|null */
 	private function getBlockParent() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(df_layout()->getBlock($this->getPosition()));
+			$this->{__METHOD__} = df_n_set(df_layout()->getBlock($this->getPosition()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */
@@ -106,9 +106,9 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 				/** @var string|null $result */
 				$result = dfa($this->getBlockParent()->getSortedChildren() ,$siblingIndex);
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

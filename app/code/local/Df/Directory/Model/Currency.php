@@ -40,7 +40,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 				// но зато запросто можно выполнить конвертацию через промежуточное посредничество
 				// базовой (третьей) валюты.
 				/** @var Df_Directory_Model_Currency $baseCurrency */
-				$baseCurrency = rm_store()->getBaseCurrency();
+				$baseCurrency = df_store()->getBaseCurrency();
 				if ($this->getCode() !== $baseCurrency->getCode()) {
 					$toCurrency = is_object($toCurrency) ? $toCurrency : self::ld($toCurrency);
 					if ($toCurrency->getCode() !== $baseCurrency->getCode()) {
@@ -147,11 +147,11 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	/** @return Df_Localization_Morpher_Response|null */
 	public function getMorpher() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Localization_Morpher::s()->getResponseSilent($this->getName())
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 	
 	/**
@@ -176,13 +176,13 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 */
 	public function getMorpherShort() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Localization_Morpher::s()->getResponseSilent(
 					df_last(explode(' ', $this->getName()))
 				)
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string */
@@ -253,7 +253,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 	 * @return bool
 	 */
 	public function isAvailable($store = null) {
-		return in_array($this->getCode(), rm_store($store)->getAvailableCurrencyCodes());
+		return in_array($this->getCode(), df_store($store)->getAvailableCurrencyCodes());
 	}
 
 	/**

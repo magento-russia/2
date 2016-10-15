@@ -5,7 +5,7 @@ class Df_YandexMarket_Model_Settings_Other extends Df_YandexMarket_Model_Setting
 		// Второй параметр тут важен,
 		// потому что иначе мы на товарной карточке получим неявный сбой
 		// про неуказанный текущий магазин.
-		return $this->getString('categories_reference_book_url', rm_store());
+		return $this->getString('categories_reference_book_url', df_store());
 	}
 
 	/** @return string */

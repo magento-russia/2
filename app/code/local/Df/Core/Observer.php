@@ -149,7 +149,7 @@ class Df_Core_Observer {
 		try {
 			/** @var Mage_Core_Model_Config_Data $config */
 			$config = $o['data_object'];
-			rm_store()->setConfig($config->getPath(), $config->getValue());
+			df_store()->setConfig($config->getPath(), $config->getValue());
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e);

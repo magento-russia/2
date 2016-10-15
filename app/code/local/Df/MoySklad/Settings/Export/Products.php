@@ -12,11 +12,11 @@ class Df_MoySklad_Settings_Export_Products extends Df_Core_Model_Settings {
 	 * 2016-10-09
 	 * @return Mage_CatalogRule_Model_Rule|null 
 	 */
-	public function rule() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = rm_n_set(
+	public function rule() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_n_set(
 		Df_Catalog_Model_ConditionsLoader::i(
 			$this->getNatural0('conditions'), 'МойСклад', '«МойСклад» → «Экспорт товаров» → «Условия»'
 		)->getRule()
-	);}return rm_n_get($this->{__METHOD__});}
+	);}return df_n_get($this->{__METHOD__});}
 	/**
 	 * @override
 	 * @return string

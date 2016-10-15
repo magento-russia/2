@@ -1,7 +1,7 @@
 <?php
 class Df_Reward_Block_Checkout_Payment extends Df_Core_Block_Template_NoCache {
 	/** @return Df_Customer_Model_Customer */
-	public function getCustomer() {return rm_session_customer()->getCustomer();}
+	public function getCustomer() {return df_session_customer()->getCustomer();}
 
 	/**
 	 * Getter

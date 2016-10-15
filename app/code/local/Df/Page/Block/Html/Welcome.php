@@ -35,7 +35,7 @@ class Df_Page_Block_Html_Welcome extends Df_Page_Block_Html_WelcomeM {
 			// Избегаем зависимости модуля Df_Page от наличия модуля Df_Tweaks
 			df_module_enabled(Df_Core_Module::TWEAKS)
 			&& df_installed()
-			&& rm_session_customer()->isLoggedIn()
+			&& df_session_customer()->isLoggedIn()
 		) {
 			if (df_cfg()->tweaks()->header()->hideWelcomeFromLoggedIn()) {
 				$result = '';

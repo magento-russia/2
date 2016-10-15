@@ -17,7 +17,7 @@ class Df_Core_Model_Money extends Df_Core_Model {
 	/** @return int */
 	public function getAsInteger() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_round($this->getAsFixedFloat());
+			$this->{__METHOD__} = df_round($this->getAsFixedFloat());
 		}
 		return $this->{__METHOD__};
 	}
@@ -33,7 +33,7 @@ class Df_Core_Model_Money extends Df_Core_Model {
 	/** @return int */
 	public function getFractionalPart() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_round(100 * ($this->getAsFixedFloat() - $this->getIntegerPart()));
+			$this->{__METHOD__} = df_round(100 * ($this->getAsFixedFloat() - $this->getIntegerPart()));
 		}
 		return $this->{__METHOD__};
 	}

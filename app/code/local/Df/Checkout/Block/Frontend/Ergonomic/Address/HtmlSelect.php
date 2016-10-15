@@ -82,13 +82,13 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 			 * который может вернуть false.
 			 * По этой причине преобразуем результат посредством @uses df_ftn()
 			 */
-			$this->{__METHOD__} = rm_n_set(df_ftn(
+			$this->{__METHOD__} = df_n_set(df_ftn(
 				'billing' === $this->getAddressType()
 				? $this->getCustomer()->getPrimaryBillingAddress()
 				: $this->getCustomer()->getPrimaryShippingAddress()
 			));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Mage_Sales_Model_Quote_Address */
@@ -142,9 +142,9 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 				);
 				$result = $address->getId();
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

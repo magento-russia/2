@@ -16,7 +16,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 			try {
 				$version->delete();
 				// display success message
-				rm_session()->addSuccess(df_h()->cms()->__('Version was successfully deleted.'));
+				df_session()->addSuccess(df_h()->cms()->__('Version was successfully deleted.'));
 				$this->_redirect('*/cms_page/edit', array('page_id' => $version->getPageId()));
 				return;
 			} catch (Mage_Core_Exception $e) {
@@ -25,7 +25,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				$error = true;
 			} catch (Exception $e) {
 				Mage::logException($e);
-				rm_session()->addError(df_h()->cms()->__('Error while deleting version. Please try again later.'));
+				df_session()->addError(df_h()->cms()->__('Error while deleting version. Please try again later.'));
 				$error = true;
 			}
 
@@ -36,7 +36,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 			}
 		}
 		// display error message
-		rm_session()->addError(df_h()->cms()->__('Unable to find a version to delete.'));
+		df_session()->addError(df_h()->cms()->__('Unable to find a version to delete.'));
 		// go to grid
 		$this->_redirect('*/cms_page/edit', array('_current' => true));
 	}
@@ -49,13 +49,13 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 	{
 		$version = $this->_initVersion();
 		if (!$version->getId()) {
-			rm_session()->addError(
+			df_session()->addError(
 				df_h()->cms()->__('Could not load specified version.'));
 			$this->_redirect('*/cms_page/edit',array('page_id' => $this->getRequest()->getParam('page_id')));
 			return;
 		}
 		$page = $this->_initPage();
-		$data = rm_session()->getFormData(true);
+		$data = df_session()->getFormData(true);
 		if (!empty($data)) {
 			$_data = $version->getData();
 			$_data = array_merge($_data, $data);
@@ -74,7 +74,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 	{
 		$ids = $this->getRequest()->getParam('revision');
 		if (!is_array($ids)) {
-			rm_session()->addError($this->__('Please select revision(s)'));
+			df_session()->addError($this->__('Please select revision(s)'));
 		}
 		else {
 			try {
@@ -87,14 +87,14 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 						$revision->delete();
 					}
 				}
-				rm_session()->addSuccess(
+				df_session()->addSuccess(
 					$this->__('Total of %d record(s) were successfully deleted', count($ids))
 				);
 			} catch (Mage_Core_Exception $e) {
 				rm_exception_to_session($e);
 			} catch (Exception $e) {
 				Mage::logException($e);
-				rm_session()->addError(df_h()->cms()->__('Error while deleting revisions. Please try again later.'));
+				df_session()->addError(df_h()->cms()->__('Error while deleting revisions. Please try again later.'));
 			}
 		}
 		$this->_redirect('*/*/edit', array('_current' => true, 'tab' => 'revisions'));
@@ -125,9 +125,9 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 			try {
 				$version->save();
 				// display success message
-				rm_session()->addSuccess(df_h()->cms()->__('New version was successfully created.'));
+				df_session()->addSuccess(df_h()->cms()->__('New version was successfully created.'));
 				// clear previously saved data from session
-				rm_session()->setFormData(false);
+				df_session()->setFormData(false);
 				if (isset($data['revision_id'])) {
 					$this->_redirect('*/cms_page_revision/edit', array(
 						'page_id' => $version->getPageId(),'revision_id' => $version->getLastRevision()->getId()
@@ -143,7 +143,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				rm_exception_to_session($e);
 				if ($this->_getRefererUrl()) {
 					// save data in session
-					rm_session()->setFormData($data);
+					df_session()->setFormData($data);
 				}
 				// redirect to edit form
 				$this->_redirectReferer($this->getUrl('*/cms_page/edit',array('page_id' => $this->getRequest()->getParam('page_id'))));
@@ -186,9 +186,9 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				// save the data
 				$version->save();
 				// display success message
-				rm_session()->addSuccess(df_h()->cms()->__('Version was successfully saved.'));
+				df_session()->addSuccess(df_h()->cms()->__('Version was successfully saved.'));
 				// clear previously saved data from session
-				rm_session()->setFormData(false);
+				df_session()->setFormData(false);
 				// check if 'Save and Continue'
 				if ($this->getRequest()->getParam('back')) {
 					$this->_redirect('*/*/' . $this->getRequest()->getParam('back'),array(
@@ -203,7 +203,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				// display error message
 				rm_exception_to_session($e);
 				// save data in session
-				rm_session()->setFormData($data);
+				df_session()->setFormData($data);
 				// redirect to edit form
 				$this->_redirect('*/*/edit',array(
 						'page_id' => $this->getRequest()->getParam('page_id'),'version_id' => $this->getRequest()->getParam('version_id'),));

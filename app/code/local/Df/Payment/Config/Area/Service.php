@@ -209,15 +209,15 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			if ('no' === $result) {
 				$result = null;
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string|null */
 	public function getSelectedPaymentMethodCode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				dfa(
 					dfa(
 						$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
@@ -228,7 +228,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 				)
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -454,7 +454,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 					.' в настройках платёжного модуля.'
 				);
 			}
-			$this->{__METHOD__}[$field] = rm_decrypt($encrypted);
+			$this->{__METHOD__}[$field] = df_decrypt($encrypted);
 		}
 		return $this->{__METHOD__}[$field];
 	}

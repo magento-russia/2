@@ -50,9 +50,9 @@ abstract class Df_Core_Model_Geo_Locator_Real extends Df_Core_Model_Geo_Locator 
 					$this->saveToCache($path, $result);
 				}
 			}
-			$this->{__METHOD__}[$path] = rm_n_set($result);
+			$this->{__METHOD__}[$path] = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__}[$path]);
+		return df_n_get($this->{__METHOD__}[$path]);
 	}
 
 	/**
@@ -118,9 +118,9 @@ abstract class Df_Core_Model_Geo_Locator_Real extends Df_Core_Model_Geo_Locator 
 	/** @return string|null */
 	private function getResponse() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(df_ftn(@file_get_contents($this->getUrl())));
+			$this->{__METHOD__} = df_n_set(df_ftn(@file_get_contents($this->getUrl())));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string */

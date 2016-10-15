@@ -50,8 +50,8 @@ class Df_Payment_RedirectController extends Mage_Core_Controller_Front_Action {
 			/**
 			 * Обратите внимание,
 			 * что при возвращении на страницу RM_URL_CHECKOUT
-			 * диагностическое сообщение надо добавлять в rm_session_core(),
-			 * а не в rm_session_checkout(),
+			 * диагностическое сообщение надо добавлять в df_session_core(),
+			 * а не в df_session_checkout(),
 			 * потому что сообщения сессии checkout
 			 * не отображаются в стандартной теме на странице checkout/onepage
 			 */

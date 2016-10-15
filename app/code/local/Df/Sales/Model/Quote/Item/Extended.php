@@ -91,9 +91,9 @@ class Df_Sales_Model_Quote_Item_Extended extends Df_Core_Model {
 	/** @return Mage_Sales_Model_Order_Item|null */
 	private function getParent() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->getQuoteItem()->getParentItem());
+			$this->{__METHOD__} = df_n_set($this->getQuoteItem()->getParentItem());
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

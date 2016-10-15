@@ -66,9 +66,9 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 	 */
 	private function getConfigParamInternal($paramName) {
 		if (!isset($this->{__METHOD__}[$paramName])) {
-			$this->{__METHOD__}[$paramName] = rm_n_set(rm_leaf_child($this->getConfig(), $paramName));
+			$this->{__METHOD__}[$paramName] = df_n_set(rm_leaf_child($this->getConfig(), $paramName));
 		}
-		return rm_n_get($this->{__METHOD__}[$paramName]);
+		return df_n_get($this->{__METHOD__}[$paramName]);
 	}
 
 	/**

@@ -54,7 +54,7 @@ class Df_MoySklad_Product_Exporter extends Df_Catalog_Model_Product_Exporter {
 	 * @return void
 	 */
 	protected function noMatchingProductIds() {
-		rm_log(
+		df_log(
 			'Заданным администратором в графе'
 			.' «Система» → «Настройки» → «Российская сборка» → «МойСклад»'
 			. ' → «Экспорт товаров» → «Условия» условиям публикации товаров'

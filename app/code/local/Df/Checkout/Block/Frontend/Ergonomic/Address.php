@@ -63,9 +63,9 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string))|null $address */
 			$address = Df_YandexMarket_AddressSession::get($this->getType());
-			$this->{__METHOD__} = rm_n_set(!$address ? null : Df_Sales_Model_Quote_Address::i($address));
+			$this->{__METHOD__} = df_n_set(!$address ? null : Df_Sales_Model_Quote_Address::i($address));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return Df_Checkout_Model_Collection_Ergonomic_Address_Field */

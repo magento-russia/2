@@ -125,7 +125,7 @@ abstract class Df_Qa_Message extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			rm_context(
 				array('URL', df_current_url(), -100)
-				,array('Версия Magento', rm_version_full(), -99)
+				,array('Версия Magento', df_version_full(), -99)
 				,array('Версия PHP', phpversion(), -98)
 				,array('Время', df()->date()->nowInMoscowAsText(), -97)
 			);

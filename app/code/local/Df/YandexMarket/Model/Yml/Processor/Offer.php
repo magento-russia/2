@@ -132,9 +132,9 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 					}
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

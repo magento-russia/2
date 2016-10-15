@@ -170,13 +170,13 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	/** @return string|null */
 	private function getAdditionalImageForBorrowing() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$this->getAdditionalImagesAsRawArray()
 				? null
 				: $this->addLeadingSlash(dfa($this->getAdditionalImagesAsRawArray(), 0))
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string */

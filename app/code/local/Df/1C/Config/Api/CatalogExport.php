@@ -3,7 +3,7 @@ class Df_1C_Config_Api_CatalogExport extends Df_1C_Config_Api_Cml2 {
 	/** @return Mage_CatalogRule_Model_Rule|null */
 	public function getRule() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				Df_Catalog_Model_ConditionsLoader::i(
 					$this->getRuleId()
 					, '1С:Управление торговлей'
@@ -11,7 +11,7 @@ class Df_1C_Config_Api_CatalogExport extends Df_1C_Config_Api_Cml2 {
 				)->getRule()
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

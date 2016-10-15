@@ -544,9 +544,9 @@ abstract class Df_1C_Cml2_Import_Processor_Product_Type
 					$result = $skuFrom1C;
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return mixed[] */

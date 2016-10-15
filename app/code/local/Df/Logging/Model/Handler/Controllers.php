@@ -148,7 +148,7 @@ class Df_Logging_Model_Handler_Controllers
 				$info = Mage::app()->getRequest()->getParam('email');
 			}
 			$success = true;
-			$messages = rm_session()->getMessages()->getLastAddedMessage();
+			$messages = df_session()->getMessages()->getLastAddedMessage();
 			if ($messages) {
 				$success = 'error' != $messages->getType();
 			}
@@ -297,7 +297,7 @@ class Df_Logging_Model_Handler_Controllers
 			return false;
 		}
 		$success = true;
-		$messages = rm_session()->getMessages()->getLastAddedMessage();
+		$messages = df_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -374,7 +374,7 @@ class Df_Logging_Model_Handler_Controllers
 			$eventModel->setEventCode('tax_product_tax_classes');
 		}
 		$success = true;
-		$messages = rm_session()->getMessages()->getLastAddedMessage();
+		$messages = df_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -468,7 +468,7 @@ class Df_Logging_Model_Handler_Controllers
 			return false;
 		}
 		$success = true;
-		$messages = rm_session()->getMessages()->getLastAddedMessage();
+		$messages = df_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -506,7 +506,7 @@ class Df_Logging_Model_Handler_Controllers
 			->setOriginalData(array())
 			->setResultData(array('rates' => df_csv($values))));
 		$success = true;
-		$messages = rm_session()->getMessages()->getLastAddedMessage();
+		$messages = df_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -587,7 +587,7 @@ class Df_Logging_Model_Handler_Controllers
 					->setResultData(array('action' => $catalogAction)));
 		}
 		$success = true;
-		$messages = rm_session()->getMessages()->getLastAddedMessage();
+		$messages = df_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}
@@ -607,7 +607,7 @@ class Df_Logging_Model_Handler_Controllers
 			return false;
 		}
 		$success = true;
-		$messages = rm_session()->getMessages()->getLastAddedMessage();
+		$messages = df_session()->getMessages()->getLastAddedMessage();
 		if ($messages) {
 			$success = 'error' != $messages->getType();
 		}

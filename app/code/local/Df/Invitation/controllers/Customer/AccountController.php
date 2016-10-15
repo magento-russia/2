@@ -111,16 +111,16 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			);
 			if (in_array($e->getCode(), $_definedErrorCodes)) {
 				rm_exception_to_session($e);
-				rm_session()->setCustomerFormData($this->getRequest()->getPost());
+				df_session()->setCustomerFormData($this->getRequest()->getPost());
 			} else {
 				if (Mage::helper('customer')->isRegistrationAllowed()) {
-					rm_session()->addError(
+					df_session()->addError(
 						df_h()->invitation()->__('Your invitation is not valid. Please create an account.')
 					);
 					$this->_redirect('customer/account/create');
 					return;
 				} else {
-					rm_session()->addError(
+					df_session()->addError(
 						df_h()->invitation()->__('Your invitation is not valid. Please contact us at %s.', Mage::getStoreConfig('trans_email/ident_support/email'))
 					);
 					$this->_redirect('customer/account/login');

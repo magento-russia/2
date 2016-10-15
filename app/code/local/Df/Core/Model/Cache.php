@@ -187,7 +187,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 			$keyParts[]= $this->getType();
 		}
 		$keyParts[]= $method;
-		$keyParts[]= rm_store()->getCode();
+		$keyParts[]= df_store()->getCode();
 		if ($params) {
 			if (!is_array($params)) {
 				$keyParts[]= $params;

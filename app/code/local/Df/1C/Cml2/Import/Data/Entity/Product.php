@@ -120,9 +120,9 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 		if (!isset($this->{__METHOD__})) {
 			/** @var float|null $rate */
 			$rate = $this->vatRate();
-			$this->{__METHOD__} = rm_n_set(is_null($rate) ? null : rm_product_tax_class_id($rate));
+			$this->{__METHOD__} = df_n_set(is_null($rate) ? null : rm_product_tax_class_id($rate));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return float */
@@ -211,9 +211,9 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $result */
 			$resultS = dfa($this->taxes(), 'НДС');
-			$this->{__METHOD__} = rm_n_set(is_null($resultS) ? null : rm_float_positive0($resultS));
+			$this->{__METHOD__} = df_n_set(is_null($resultS) ? null : rm_float_positive0($resultS));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

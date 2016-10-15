@@ -143,7 +143,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 			throw new Mage_Core_Exception($messageInvalid, self::ERROR_STATUS);
 		}
 		$websiteId = is_null($websiteId) ? rm_website_id() : $websiteId;
-		if ($websiteId != rm_store($this->getStoreId())->getWebsiteId()) {
+		if ($websiteId != df_store($this->getStoreId())->getWebsiteId()) {
 			throw new Mage_Core_Exception($messageInvalid, self::ERROR_STATUS);
 		}
 	}
@@ -187,7 +187,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	 * @return void
 	 */
 	public function makeSureCustomerNotExists($email = null, $websiteId = null) {
-		$websiteId = !is_null($websiteId) ? $websiteId : rm_store($this->getStoreId())->getWebsiteId();
+		$websiteId = !is_null($websiteId) ? $websiteId : df_store($this->getStoreId())->getWebsiteId();
 		if (!$websiteId) {
 			throw new Mage_Core_Exception(
 				df_h()->invitation()->__('Unable to determine proper website.')
@@ -236,7 +236,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 		/** @var bool $result */
 		$result = false;
 		$this->makeSureCanBeSent();
-		$store = rm_store($this->getStoreId());
+		$store = df_store($this->getStoreId());
 		/** @var Df_Core_Model_Email_Template $mail */
 		$mail = Df_Core_Model_Email_Template::i();
 		$mail->setDesignConfig(array(

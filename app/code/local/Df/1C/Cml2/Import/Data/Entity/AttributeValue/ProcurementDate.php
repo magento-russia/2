@@ -85,11 +85,11 @@ class Df_1C_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 	/** @return Df_1C_Cml2_Import_Data_Entity_RequisiteValue|null */
 	private function getRequisiteDDValue() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				$this->getOffer()->getRequisiteValues()->findByName('Планируемая дата поступления')
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -125,14 +125,14 @@ class Df_1C_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 	 */
 	private function getValue() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$this->getRequisiteDDValue()
 				? null
 				// Обратите внимание, что формат именно H, а не HH: «28.08.2014 0:00:00»
 				: new Zend_Date($this->getRequisiteDDValue()->getValue(), 'y-MM-dd H:mm:ss')
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**

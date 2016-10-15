@@ -11,7 +11,7 @@ class Df_Reward_CustomerController extends Mage_Core_Controller_Front_Action {
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		if (!rm_session_customer()->authenticate($this)) {
+		if (!df_session_customer()->authenticate($this)) {
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
 		if (!df_h()->reward()->isEnabledOnFront()
@@ -86,7 +86,7 @@ class Df_Reward_CustomerController extends Mage_Core_Controller_Front_Action {
 	}
 
 	/** @return Mage_Customer_Model_Session */
-	protected function _getSession() {return rm_session_customer();}
+	protected function _getSession() {return df_session_customer();}
 
 	/** @return Df_Customer_Model_Customer */
 	protected function _getCustomer() {return $this->_getSession()->getCustomer();}

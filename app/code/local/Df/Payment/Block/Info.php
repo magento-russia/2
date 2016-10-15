@@ -162,7 +162,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment $paymentInfo */
 			$paymentInfo = $this->getInfo();
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				!$paymentInfo instanceof Mage_Sales_Model_Order_Payment
 				? null
 				: $paymentInfo->getOrder()

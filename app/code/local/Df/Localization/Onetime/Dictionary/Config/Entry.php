@@ -6,11 +6,11 @@ class Df_Localization_Onetime_Dictionary_Config_Entry extends Df_Core_Xml_Parser
 	/** @return int|null */
 	public function getStoreId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
-				!$this->getStoreCode() ? null : rm_store($this->getStoreCode())->getId()
+			$this->{__METHOD__} = df_n_set(
+				!$this->getStoreCode() ? null : df_store($this->getStoreCode())->getId()
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string */

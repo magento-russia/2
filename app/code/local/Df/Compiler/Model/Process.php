@@ -18,7 +18,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 				/** @var int $statClassesCount */
 				$statClassesCount = count($statClassesAll);
 				/** @var int $statClassesLimit */
-				$statClassesLimit = rm_round(1.0 * $statClassesCount);
+				$statClassesLimit = df_round(1.0 * $statClassesCount);
 				$popularStatClasses = array();
 				foreach ($statClassesAll as $classInfo) {
 					$classInfo = explode(':', $classInfo);

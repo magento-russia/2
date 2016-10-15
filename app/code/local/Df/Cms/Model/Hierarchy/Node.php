@@ -268,7 +268,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 			!$store
 			// для ускорения
 			? Mage::getUrl('', $urlParams)
-			: rm_store($store)->getUrl('', $urlParams);
+			: df_store($store)->getUrl('', $urlParams);
 	}
 
 	/** @return bool */

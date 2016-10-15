@@ -9,7 +9,7 @@ class Df_Invitation_Block_Customer_List extends Mage_Customer_Block_Account_Dash
 			/** @var Df_Invitation_Model_Resource_Invitation_Collection $collection */
 			$collection = Df_Invitation_Model_Invitation::c();
 			$collection->addOrder('invitation_id', Varien_Data_Collection::SORT_ORDER_DESC);
-			$collection->loadByCustomerId(rm_session_customer()->getCustomerId());
+			$collection->loadByCustomerId(df_session_customer()->getCustomerId());
 			$this
 				->setData(
 					'invitation_collection'

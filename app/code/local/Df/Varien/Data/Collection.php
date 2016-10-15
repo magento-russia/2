@@ -147,7 +147,7 @@ class Df_Varien_Data_Collection extends Varien_Data_Collection {
 	public static function saveModified($collection) {
 		/** @var Df_Core_Exception_Batch $batchException */
 		$batchException = new Df_Core_Exception_Batch();
-		rm_admin_begin();
+		df_admin_begin();
 		try {
 			foreach ($collection as $entity) {
 				/** @var Mage_Core_Model_Abstract $entity */
@@ -174,10 +174,10 @@ class Df_Varien_Data_Collection extends Varien_Data_Collection {
 			}
 		}
 		catch (Exception $e) {
-			rm_admin_end();
+			df_admin_end();
 			throw $e;
 		}
-		rm_admin_end();
+		df_admin_end();
 		$batchException->throwIfNeeed();
 	}
 

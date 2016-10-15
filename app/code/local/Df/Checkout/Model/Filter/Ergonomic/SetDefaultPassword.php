@@ -34,7 +34,7 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 		) {
 			$value[Df_Checkout_Const_Field::CUSTOMER_PASSWORD] = $this->getGeneratedPassword();
 			$value[Df_Checkout_Const_Field::CONFIRM_PASSWORD] = $this->getGeneratedPassword();
-			rm_session_customer()->setData(
+			df_session_customer()->setData(
 				Df_Customer_Const_Session::GENERATED_PASSWORD, $this->getGeneratedPassword()
 			);
 		}

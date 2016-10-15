@@ -22,7 +22,7 @@ class Df_WalletOne_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 	/** @return array(string => string|int) */
 	private function getParamsForSignature() {
 		return
-				array('form_key' => rm_session_core()->getFormKey())
+				array('form_key' => df_session_core()->getFormKey())
 			+
 				$this->preprocessParams(array(
 					self::$METHODS_ENABLED => $this->configS()->getSelectedPaymentMethods()

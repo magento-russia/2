@@ -4,9 +4,9 @@ class Df_Localization_Onetime_Dictionary_Filesystem_Operation
 	/** @return string|null */
 	public function getDestinationFull() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set($this->getPathFull($this->getDestinationRelative()));
+			$this->{__METHOD__} = df_n_set($this->getPathFull($this->getDestinationRelative()));
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return string */
@@ -35,9 +35,9 @@ class Df_Localization_Onetime_Dictionary_Filesystem_Operation
 					}
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return bool */

@@ -74,7 +74,7 @@ abstract class Df_1C_Cml2_Action extends Df_Core_Model_Action {
 	 * @return void
 	 */
 	protected function setResponseLines($lines) {
-		rm_response_content_type($this->getResponse(), 'text/plain; charset=windows-1251');
+		df_response_content_type($this->getResponse(), 'text/plain; charset=windows-1251');
 		$lines = is_array($lines) ? $this->flatResponseLines($lines) : func_get_args();
 		$this->getResponse()->setBody(df_1251_to(df_cc_n($lines)));
 	}

@@ -17,7 +17,7 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 		 * Кэшировать курсы не надо,
 		 * потому что это делает системный метод @see Mage_Directory_Model_Currency::getRate()
 		 */
-		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $customCurrency);
+		return df_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $customCurrency);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 	 */
 	public function convertFromBaseToHryvnias($amountInBaseCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getHryvnia());
+		return df_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getHryvnia());
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 	 */
 	public function convertFromBaseToRoubles($amountInBaseCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getRouble());
+		return df_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getRouble());
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 	 */
 	public function convertFromBaseToTenge($amountInBaseCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
-		return rm_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getTenge());
+		return df_store($store)->getBaseCurrency()->convert($amountInBaseCurrency, $this->getTenge());
 	}
 
 	/**
@@ -104,7 +104,7 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 			 */
 				$amountInCustomCurrency
 			*
-				(1 / rm_store($store)->getBaseCurrency()->convert(doubleval(1), $customCurrency))
+				(1 / df_store($store)->getBaseCurrency()->convert(doubleval(1), $customCurrency))
 		;
 		return $result;
 	}

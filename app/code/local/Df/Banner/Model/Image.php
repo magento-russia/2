@@ -299,7 +299,7 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 
 	/** @return Df_Banner_Model_Image */
 	public function rotate($angle) {
-		$angle = rm_round($angle);
+		$angle = df_round($angle);
 		$this->getImageProcessor()->rotate($angle);
 		return $this;
 	}

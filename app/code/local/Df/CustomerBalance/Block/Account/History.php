@@ -27,7 +27,7 @@ class Df_CustomerBalance_Block_Account_History extends Df_Core_Block_Template_No
 		/** @var Df_CustomerBalance_Model_Resource_Balance_History_Collection|bool $result */
 		$result = false;
 		/** @var int $customerId */
-		$customerId = rm_session_customer()->getCustomerId();
+		$customerId = df_session_customer()->getCustomerId();
 		if ($customerId) {
 			$result = Df_CustomerBalance_Model_Balance_History::c();
 			$result->addFieldToFilter('customer_id', $customerId);

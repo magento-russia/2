@@ -56,7 +56,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 	 */
 	public function addStoreFilter($store, $withAdmin = true) {
 		$this->addCmsPageInStoresColumn();
-		$this->_storeForFilter = rm_store($store);
+		$this->_storeForFilter = df_store($store);
 		$this->_needAddAdminStoreToFilter = $withAdmin;
 		return $this;
 	}

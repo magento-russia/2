@@ -65,9 +65,9 @@ class Df_Tax_M extends Df_Core_Model {
 			if (!is_null($result)) {
 				$result = df_nat($result);
 			}
-			$cache[$iso2][$rateS] = rm_n_set($result);
+			$cache[$iso2][$rateS] = df_n_set($result);
 		}
-		return rm_n_get($cache[$iso2][$rateS]);
+		return df_n_get($cache[$iso2][$rateS]);
 	}
 
 	/**

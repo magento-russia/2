@@ -137,7 +137,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 			$incrementId = $this->getIncrementId();
 			$this->{__METHOD__} = implode('@', array(
 				$incrementId ? $incrementId : time()
-				,rm_store()->getConfig(self::XML_PATH_DEFAULT_EMAIL_DOMAIN)
+				,df_store()->getConfig(self::XML_PATH_DEFAULT_EMAIL_DOMAIN)
 			));
 		}
 		return $this->{__METHOD__};
