@@ -1,5 +1,5 @@
 <?php
-class Df_Widget_Model_Resource_Widget_Instance extends Mage_Widget_Model_Mysql4_Widget_Instance {
+class Df_Widget_Model_Resource_Widget_Instance extends Mage_Widget_Model_Resource_Widget_Instance {
 	/**
 	 * @param Mage_Core_Model_Abstract|Df_Widget_Model_Widget_Instance $object
 	 * @return Df_Widget_Model_Resource_Widget_Instance

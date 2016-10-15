@@ -33,19 +33,13 @@
 					<config>Df_Eav_Model_Config</config>
 				</rewrite>
 			</eav>
-			<eav_mysql4>
-				<!-- Для Magento версии меньше 1.6 -->	
+			<eav_resource>
+				<!-- Для Magento версии 1.6 и выше -->
 				<rewrite>
 					<!--
 						Цель перекрытия —
 						перевод значений товарных свойств типа «выпадающий список».
 					-->
-					<entity_attribute_option_collection>Df_Eav_Model_Resource_Entity_Attribute_Option_Collection</entity_attribute_option_collection>
-				</rewrite>
-			</eav_mysql4>
-			<eav_resource>
-				<!-- Для Magento версии 1.6 и выше -->
-				<rewrite>
 					<entity_attribute_option_collection>Df_Eav_Model_Resource_Entity_Attribute_Option_Collection</entity_attribute_option_collection>
 				</rewrite>
 			</eav_resource>

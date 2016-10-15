@@ -5,7 +5,8 @@
  * некоторые сторонние оформительские темы не поддерживают режим денормализации,
  * поэтому желательно иметь возможность отключать режим денормализации для конкретных коллекций.
  */
-class Df_Reports_Model_Resource_Product_Collection extends Mage_Reports_Model_Mysql4_Product_Collection {
+class Df_Reports_Model_Resource_Product_Collection 
+	extends Mage_Reports_Model_Resource_Product_Collection {
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Abstract|array(string => mixed) $resource

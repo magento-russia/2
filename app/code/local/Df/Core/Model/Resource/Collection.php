@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract {
+abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract {
 	/**
 	 * 2015-02-13
 	 * Цель перекрытия —

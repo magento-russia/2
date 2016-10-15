@@ -1,6 +1,6 @@
 <?php
 class Df_Catalog_Model_Resource_Category_Collection
-	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection {
+	extends Mage_Catalog_Model_Resource_Category_Collection {
 	/**
 	 * Добавляет к коллекции разделы-предки.
 	 * @used-by Df_Catalog_Model_XmlExport_Catalog::getCategories()

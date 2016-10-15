@@ -1,5 +1,6 @@
 <?php
-class Df_Poll_Model_Resource_Poll_Answer_Collection extends Mage_Poll_Model_Mysql4_Poll_Answer_Collection {
+class Df_Poll_Model_Resource_Poll_Answer_Collection 
+	extends Mage_Poll_Model_Resource_Poll_Answer_Collection {
 	/**
 	 * @override
 	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::getResource()

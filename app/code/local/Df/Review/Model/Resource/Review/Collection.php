@@ -1,5 +1,5 @@
 <?php
-class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Mysql4_Review_Collection {
+class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Resource_Review_Collection {
 	/**
 	 * В Magento CE 1.4 класс @see Mage_Review_Model_Mysql4_Review_Collection
 	 * унаследован напрямую от класса @see Varien_Data_Collection_Db

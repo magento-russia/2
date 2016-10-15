@@ -1,6 +1,6 @@
 <?php
 class Df_Eav_Model_Resource_Entity_Attribute_Set_Collection
-	extends Mage_Eav_Model_Mysql4_Entity_Attribute_Set_Collection {
+	extends Mage_Eav_Model_Resource_Entity_Attribute_Set_Collection {
 	/**
 	 * @override
 	 * @return Df_Eav_Model_Resource_Entity_Attribute_Set

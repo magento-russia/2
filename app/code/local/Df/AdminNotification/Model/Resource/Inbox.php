@@ -1,5 +1,5 @@
 <?php
-class Df_AdminNotification_Model_Resource_Inbox extends Mage_AdminNotification_Model_Mysql4_Inbox {
+class Df_AdminNotification_Model_Resource_Inbox extends Mage_AdminNotification_Model_Resource_Inbox {
 	/**
 	 * Цель перекрытия —
 	 * скрывать «Reminder: Change Magento`s default phone numbers»

@@ -1,6 +1,6 @@
 <?php
 class Df_Directory_Model_Resource_Country_Collection
-	extends Mage_Directory_Model_Mysql4_Country_Collection {
+	extends Mage_Directory_Model_Resource_Country_Collection {
 	/**
 	 * Обратите внимание, что родительский метод @see getItemById() реализован очень странно
 	 * (и, видимо, ошибочно):

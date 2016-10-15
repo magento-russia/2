@@ -1,5 +1,5 @@
 <?php
-class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Mysql4_Catalog_Product {
+class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Resource_Catalog_Product {
 	/**
 	 * Цель перекрытия —
 	 * заплатка для перенаправления посетителей на «правильный», канонический адрес товара.

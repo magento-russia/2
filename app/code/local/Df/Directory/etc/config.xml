@@ -75,35 +75,6 @@
 					<currency>Df_Directory_Model_Currency</currency>
 				</rewrite>
 			</directory>
-			<!-- Для Magento версии меньше 1.6 -->
-			<directory_mysql4>
-				<rewrite>
-					<!--
-						Цель перекрытия —
-						добавление возможности ставить популярные страны выше остальных
-						в списке стран
-					-->
-					<country_collection>Df_Directory_Model_Resource_Country_Collection</country_collection>
-					<!--
-						В Magento CE < 1.6
-						класс Mage_Directory_Model_Mysql4_Region
-						не наследован от Mage_Core_Model_Mysql4_Abstract,
-						что приводит к сбоям моего установочного скрипта
-						при вызове метода save().
-
-						Поэтому для Magento CE < 1.6
-						перекрываем класс Mage_Directory_Model_Mysql4_Region
-						классом Df_Directory_Model_Resource_Region,
-						программный код которого взят из
-						класса Mage_Directory_Model_Resource_Region для Magento CE >= 1.6
-					-->
-					<region>Df_Directory_Model_Resource_Region</region>
-					<!--
-						Добавляем поддержку события «core_collection_abstract_load_before»
-					-->
-					<region_collection>Df_Directory_Model_Resource_Region_Collection</region_collection>
-				</rewrite>
-			</directory_mysql4>
 			<directory_resource>
 				<rewrite>
 					<!--

@@ -153,7 +153,7 @@
 					<url_rewrite>Df_Core_Model_Url_Rewrite</url_rewrite>
 				</rewrite>
 			</core>
-			<core_mysql4>
+			<core_resource>
 				<rewrite>
 					<!--
 						Цель перекрытия —
@@ -186,13 +186,6 @@
 						при сохранении административного магазина
 						в устаревших версиях Magento CE (например, 1.6.1.0).
 					-->
-					<store>Df_Core_Model_Resource_Store</store>
-				</rewrite>
-			</core_mysql4>
-			<core_resource>
-				<rewrite>
-					<config>Df_Core_Model_Resource_ConfigM</config>
-					<config_data>Df_Core_Model_Resource_Config_Data</config_data>
 					<store>Df_Core_Model_Resource_Store</store>
 				</rewrite>
 			</core_resource>

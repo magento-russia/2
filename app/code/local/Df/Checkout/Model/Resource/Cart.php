@@ -1,5 +1,5 @@
 <?php
-class Df_Checkout_Model_Resource_Cart extends Mage_Checkout_Model_Mysql4_Cart {
+class Df_Checkout_Model_Resource_Cart extends Mage_Checkout_Model_Resource_Cart {
 	/**
 	 * Цель перекрытия —
 	 * устранение сбоя, который, видимо, иногда происходил в методе

@@ -1,6 +1,6 @@
 <?php
 class Df_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection
-	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Type_Configurable_Attribute_Collection {
+	extends Mage_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection {
 	/**
 	 * Решает проблему перевода экранных названий опций
 	 * (которые являются товарными свойствами) настраиваемых товаров.

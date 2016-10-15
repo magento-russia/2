@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Resource_Store_Collection extends Mage_Core_Model_Mysql4_Store_Collection {
+class Df_Core_Model_Resource_Store_Collection extends Mage_Core_Model_Resource_Store_Collection {
 	/** @return string */
 	public function getNames() {
 		return df_csv_pretty_quote($this->getColumnValues(Df_Core_Model_Store::P__NAME));

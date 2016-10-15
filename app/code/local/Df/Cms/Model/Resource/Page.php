@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Mysql4_Page {
+class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Resource_Page {
 	/**
 	 * Возвращает идентификаторы страниц, не привязанных ни к одной из витрин.
 	 * Метод выполнен по аналогии с методом @see Df_Cms_Model_Resource_Block::findOrphanBlockIds()

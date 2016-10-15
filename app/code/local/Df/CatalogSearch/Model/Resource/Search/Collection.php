@@ -1,6 +1,6 @@
 <?php
 class Df_CatalogSearch_Model_Resource_Search_Collection
-	extends Mage_CatalogSearch_Model_Mysql4_Search_Collection {
+	extends Mage_CatalogSearch_Model_Resource_Search_Collection {
 	/**
 	 * Цель перекрытия —
 	 * отключить для этой коллекции режим денормализации для устранения сбоя

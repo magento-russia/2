@@ -1,6 +1,6 @@
 <?php
 class Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice
-	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Attribute_Backend_Tierprice {
+	extends Mage_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice {
 	/**
 	 * Цель перекрытия —
 	 * устранение следующего дефекта Magento CE/EE:

@@ -27,7 +27,7 @@
 			<df_reports_resource>
 				<class>Df_Reports_Model_Resource</class>
 			</df_reports_resource>
-			<reports_mysql4>
+			<reports_resource>
 				<rewrite>
 					<!--
 						Цель перекрытия —
@@ -35,11 +35,6 @@
 						поэтому желательно иметь возможность отключать режим денормализации
 						для конкретных коллекций.
 					-->
-					<product_collection>Df_Reports_Model_Resource_Product_Collection</product_collection>
-				</rewrite>
-			</reports_mysql4>
-			<reports_resource>
-				<rewrite>
 					<product_collection>Df_Reports_Model_Resource_Product_Collection</product_collection>
 				</rewrite>
 			</reports_resource>

@@ -1,5 +1,6 @@
 <?php
-class Df_Core_Model_Resource_Store_Group_Collection extends Mage_Core_Model_Mysql4_Store_Group_Collection {
+class Df_Core_Model_Resource_Store_Group_Collection
+	extends Mage_Core_Model_Resource_Store_Group_Collection {
 	/**
 	 * @override
 	 * @return Df_Core_Model_Resource_Store_Group

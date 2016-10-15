@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Resource_Store extends Mage_Core_Model_Mysql4_Store {
+class Df_Core_Model_Resource_Store extends Mage_Core_Model_Resource_Store {
 	/**
 	 * 2015-08-03
 	 * Обратите внимание,

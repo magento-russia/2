@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Mysql4_Block_Collection {
+class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Resource_Block_Collection {
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Db_Abstract|array(string => mixed) $resource

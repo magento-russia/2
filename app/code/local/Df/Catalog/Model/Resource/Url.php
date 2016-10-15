@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysql4_Url {
+class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	/**
 	 * @param int[] $categoryIds
 	 * @return array(int => int)

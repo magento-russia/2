@@ -1,5 +1,5 @@
 <?php
-class Df_SalesRule_Model_Resource_Rule_Collection extends Mage_SalesRule_Model_Mysql4_Rule_Collection {
+class Df_SalesRule_Model_Resource_Rule_Collection extends Mage_SalesRule_Model_Resource_Rule_Collection {
 	/**
 	 * @override
 	 * @return Df_SalesRule_Model_Resource_Rule

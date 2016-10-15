@@ -1,5 +1,5 @@
 <?php
-class Df_Tax_Model_Resource_Class_Collection extends Mage_Tax_Model_Mysql4_Class_Collection {
+class Df_Tax_Model_Resource_Class_Collection extends Mage_Tax_Model_Resource_Class_Collection {
 	/**
 	 * 2015-04-11
 	 * @used-by Df_Tax_Model_Class_Source_Product::getAllOptions()

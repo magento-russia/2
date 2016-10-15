@@ -1,5 +1,5 @@
 <?php
-class Df_Core_Model_Resource_ConfigM extends Mage_Core_Model_Mysql4_Config {
+class Df_Core_Model_Resource_ConfigM extends Mage_Core_Model_Resource_Config {
 	/**
 	 * Цель перекрытия —
 	 * улучшение функциональности загрузки настроечных опций.

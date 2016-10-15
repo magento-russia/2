@@ -1,5 +1,5 @@
 <?php
-class Df_Sales_Model_Resource_Order_Collection extends Mage_Sales_Model_Mysql4_Order_Collection {
+class Df_Sales_Model_Resource_Order_Collection extends Mage_Sales_Model_Resource_Order_Collection {
 	/**
 	 * @override
 	 * @return Df_Sales_Model_Resource_Order

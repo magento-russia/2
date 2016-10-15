@@ -322,20 +322,6 @@
 					<url>Df_Catalog_Model_Resource_Url</url>
 				</rewrite>
 			</catalog_resource>
-			<!-- Для Magento версии меньше 1.6 -->
-			<catalog_resource_eav_mysql4>
-				<rewrite>
-					<category_flat>Df_Catalog_Model_Resource_Category_Flat</category_flat>
-					<product_attribute_backend_tierprice>Df_Catalog_Model_Resource_Product_Attribute_Backend_Tierprice</product_attribute_backend_tierprice>
-					<product_attribute_collection>Df_Catalog_Model_Resource_Product_Attribute_Collection</product_attribute_collection>
-					<product_collection>Df_Catalog_Model_Resource_Product_Collection</product_collection>
-					<product_flat_indexer>Df_Catalog_Model_Resource_Product_Flat_Indexer</product_flat_indexer>
-					<product_link_product_collection>Df_Catalog_Model_Resource_Product_Link_Product_Collection</product_link_product_collection>
-					<product_option_collection>Df_Catalog_Model_Resource_Product_Option_Collection</product_option_collection>
-					<product_type_configurable_attribute_collection>Df_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection</product_type_configurable_attribute_collection>
-					<url>Df_Catalog_Model_Resource_Url</url>
-				</rewrite>
-			</catalog_resource_eav_mysql4>
 			<df_catalog>
 				<class>Df_Catalog_Model</class>
 				<resourceModel>df_catalog_resource</resourceModel>

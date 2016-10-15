@@ -1,6 +1,6 @@
 <?php
 class Df_Invitation_Model_Resource_Report_Invitation_Customer_Collection
-	extends Mage_Reports_Model_Mysql4_Customer_Collection {
+	extends Mage_Reports_Model_Resource_Customer_Collection {
 	/**
 	 * Joins Invitation report data, and filter by date
 	 *

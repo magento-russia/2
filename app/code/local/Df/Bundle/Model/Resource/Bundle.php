@@ -1,5 +1,5 @@
 <?php
-class Df_Bundle_Model_Resource_Bundle extends Mage_Bundle_Model_Mysql4_Bundle {
+class Df_Bundle_Model_Resource_Bundle extends Mage_Bundle_Model_Resource_Bundle {
 	/**
 	 * @param int $productId
 	 * @return void

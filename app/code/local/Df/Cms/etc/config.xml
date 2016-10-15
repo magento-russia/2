@@ -60,18 +60,13 @@
 					<template_filter>Df_Widget_Model_Template_Filter</template_filter>
 				</rewrite>
 			</cms>
-			<cms_mysql4>
+			<cms_resource>
 				<rewrite>
 					<!--
 						Цель перекрытия —
 						устранение дефекта показа картинок в редакторе.
 						http://magento-forum.ru/topic/2320/
 					-->
-					<page>Df_Cms_Model_Resource_Page</page>
-				</rewrite>
-			</cms_mysql4>
-			<cms_resource>
-				<rewrite>
 					<page>Df_Cms_Model_Resource_Page</page>
 				</rewrite>
 			</cms_resource>

@@ -1,9 +1,8 @@
 <?php
-class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Mysql4_Poll_Collection {
+class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Resource_Poll_Collection {
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Db_Abstract|array(string => mixed) $resource
-	 * @return Df_Poll_Model_Resource_Poll_Collection
 	 */
 	public function __construct($resource = null) {
 		if (is_array($resource)) {

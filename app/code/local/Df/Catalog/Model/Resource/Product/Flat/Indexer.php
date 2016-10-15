@@ -1,6 +1,6 @@
 <?php
-class Df_Catalog_Model_Resource_Product_Flat_Indexer
-	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Flat_Indexer {
+class Df_Catalog_Model_Resource_Product_Flat_Indexer 
+	extends Mage_Catalog_Model_Resource_Product_Flat_Indexer {
 	/**
 	 * Цель перекрытия —
 	 * кэширование товарных свойств при включенном режиме денормализации.

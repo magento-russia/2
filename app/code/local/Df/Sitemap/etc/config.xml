@@ -11,8 +11,8 @@
 		<helpers><df_sitemap><class>Df_Sitemap_Helper</class></df_sitemap></helpers>
 		<models>
 			<df_sitemap><class>Df_Sitemap_Model</class></df_sitemap>
-			<!-- Для Magento версии меньше 1.6 -->
-			<sitemap_mysql4>
+			<!-- Для Magento версии 1.6 и выше -->
+			<sitemap_resource>
 				<rewrite>
 					<!--
 						Цель перекрытия —
@@ -22,12 +22,6 @@
 						обработка вынесена в класс
 						@see Df_Catalog_Helper_Product_Url_Rewrite
 					-->
-					<catalog_product>Df_Sitemap_Model_Resource_Catalog_Product</catalog_product>
-				</rewrite>
-			</sitemap_mysql4>
-			<!-- Для Magento версии 1.6 и выше -->
-			<sitemap_resource>
-				<rewrite>
 					<catalog_product>Df_Sitemap_Model_Resource_Catalog_Product</catalog_product>
 				</rewrite>
 			</sitemap_resource>

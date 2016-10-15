@@ -3,8 +3,7 @@
  * Обратите внимание, что класс @see Mage_Sales_Model_Mysql4_Order_Status_Collection
  * отсутствует в Magento CE 1.4.
  */
-class Df_Sales_Model_Resource_Order_Status_Collection
-	extends Mage_Sales_Model_Mysql4_Order_Status_Collection {
+class Df_Sales_Model_Resource_Order_Status_Collection extends Mage_Sales_Model_Resource_Order_Status {
 	/**
 	 * @override
 	 * @return Df_Sales_Model_Resource_Order_Status

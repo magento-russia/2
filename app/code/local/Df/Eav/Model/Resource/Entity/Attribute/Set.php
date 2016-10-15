@@ -1,5 +1,5 @@
 <?php
-class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Mysql4_Entity_Attribute_Set {
+class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Resource_Entity_Attribute_Set {
 	/**
 	 * 2015-08-10
 	 * @used-by Df_Eav_Model_Entity_Attribute_Set::attributeCodes()

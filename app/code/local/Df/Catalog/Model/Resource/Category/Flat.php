@@ -1,6 +1,5 @@
 <?php
-class Df_Catalog_Model_Resource_Category_Flat
-	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Flat {
+class Df_Catalog_Model_Resource_Category_Flat extends Mage_Catalog_Model_Resource_Category_Flat {
 	/**
 	 * @param string $type
 	 * @return string

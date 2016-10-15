@@ -1,10 +1,9 @@
 <?php
-class Df_Catalog_Model_Resource_Product_Collection
-	extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection {
+class Df_Catalog_Model_Resource_Product_Collection 
+	extends Mage_Catalog_Model_Resource_Product_Collection {
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Abstract|array(string => mixed) $resource
-	 * @return Df_Catalog_Model_Resource_Product_Collection
 	 */
 	public function __construct($resource = null) {
 		if (is_array($resource)) {

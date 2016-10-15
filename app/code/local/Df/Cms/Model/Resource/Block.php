@@ -1,5 +1,5 @@
 <?php
-class Df_Cms_Model_Resource_Block extends Mage_Cms_Model_Mysql4_Block {
+class Df_Cms_Model_Resource_Block extends Mage_Cms_Model_Resource_Block {
 	/** @return Df_Cms_Model_Resource_Block_Collection */
 	public function findOrphanBlocks() {
 		/** @var Df_Cms_Model_Resource_Block_Collection $result */

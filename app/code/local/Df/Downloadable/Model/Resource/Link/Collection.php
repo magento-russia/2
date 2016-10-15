@@ -1,6 +1,6 @@
 <?php
 class Df_Downloadable_Model_Resource_Link_Collection
-	extends Mage_Downloadable_Model_Mysql4_Link_Collection {
+	extends Mage_Downloadable_Model_Resource_Link_Collection {
 	/**
 	 * @override
 	 * @return Df_Downloadable_Model_Resource_Link

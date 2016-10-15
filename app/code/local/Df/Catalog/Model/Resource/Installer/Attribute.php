@@ -1,5 +1,5 @@
 <?php
-class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_Resource_Eav_Mysql4_Setup {
+class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_Resource_Setup {
 	/**
 	 * @param string $attributeId
 	 * @param string $attributeLabel

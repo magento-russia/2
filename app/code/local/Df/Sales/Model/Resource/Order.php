@@ -1,5 +1,5 @@
 <?php
-class Df_Sales_Model_Resource_Order extends Mage_Sales_Model_Mysql4_Order {
+class Df_Sales_Model_Resource_Order extends Mage_Sales_Model_Resource_Order {
 	/**
 	 * @param string $protectCode
 	 * @return int
