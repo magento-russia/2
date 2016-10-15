@@ -175,7 +175,7 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 				$websiteId = $this->getWebsiteId();
 			}
 			$currencyCode = df_website($websiteId)->getBaseCurrencyCode();
-			return df_currency ($currencyCode)->toCurrency($amount);
+			return df_currency_zf($currencyCode)->toCurrency($amount);
 		}
 		return $amount;
 	}

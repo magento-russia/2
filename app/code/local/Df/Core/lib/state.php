@@ -84,6 +84,13 @@ function df_installed() {
 }
 
 /**
+ * 2015-12-09
+ * https://mage2.pro/t/299
+ * @return bool
+ */
+function df_is_dev() {return Mage::getIsDeveloperMode();
+
+/**
  * @param string $key
  * @param string $default [optional]
  * @return string

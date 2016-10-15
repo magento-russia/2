@@ -72,6 +72,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				$fieldsConfig = $sections->descend($section.'/groups/'.$group.'/fields');
 				if ($fieldsConfig->hasChildren()) {
 					foreach ($fieldsConfig->children() as $field => $node) {
+						/** @noinspection PhpUndefinedVariableInspection */
 						foreach ($cloneModel->getPrefixes() as $prefix) {
 							$mappedFields[$prefix['field'].(string)$field] = (string)$field;
 						}
@@ -230,6 +231,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				$fieldsConfig = $sections->descend($section.'/groups/'.$group.'/fields');
 				if ($fieldsConfig->hasChildren()) {
 					foreach ($fieldsConfig->children() as $field => $node) {
+						/** @noinspection PhpUndefinedVariableInspection */
 						foreach ($cloneModel->getPrefixes() as $prefix) {
 							$mappedFields[$prefix['field'].(string)$field] = (string)$field;
 						}

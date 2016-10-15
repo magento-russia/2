@@ -51,6 +51,13 @@ class Df_IPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	}
 
 	/**
+	 * @override
+	 * @see Df_Payment_Model_Request_Payment::order()
+	 * @return Df_Sales_Model_Order
+	 */
+	protected function order() {return $this->_order ?: parent::order();}
+
+	/**
 	 * Без _nosid система будет формировать ссылку c ?___SID=U.
 	 * На всякий случай избегаем этого.
 	 * @return string
@@ -58,4 +65,24 @@ class Df_IPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	private function getUrlReturn() {
 		return Mage::getUrl($this->getMethod()->getCode() . '/customerReturn', array('_nosid' => true));
 	}
+
+	/**
+	 * 2016-10-15
+	 * @used-by Df_IPay_Model_Action_Abstract::getRequestPayment()
+	 * @param Df_Sales_Model_Order $o
+	 * @return self
+	 */
+	public static function i(Df_Sales_Model_Order $o) {
+		$result = new self;
+		$result->_order = $o;
+		return $result;
+	}
+
+	/**
+	 * 2016-10-15
+	 * @used-by i()
+	 * @used-by order()
+	 * @var Df_Sales_Model_Order
+	 */
+	private $_order;
 }

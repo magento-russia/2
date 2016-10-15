@@ -343,7 +343,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 		if (!$hasQtyYoInvoice) {
 			/** @var Mage_Sales_Model_Order_Payment $payment */
 			try {
-				$payment = $this->getPayment();
+				$payment = $this->payment();
 			}
 			catch (Exception $e) {
 				$this->logOrderMessage('Заказ номер %orderId% не предназначен для оплаты.');
