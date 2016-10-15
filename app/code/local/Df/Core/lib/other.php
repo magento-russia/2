@@ -51,13 +51,6 @@ function df_admin_end() {Df_Admin_Model_Mode::s()->end();}
 function df_cfg() {return Df_Admin_Model_Settings::s();}
 
 /**
- * @see df_encrypt()
- * @param $value
- * @return string
- */
-function df_decrypt($value) {return df_mage()->coreHelper()->decrypt($value);}
-
-/**
  * @param mixed $value
  * @return bool
  */
@@ -69,12 +62,6 @@ function df_empty_string($value) {return '' === $value;}
  */
 function df_empty_to_null($value) {return $value ? $value : null;}
 
-/**
- * @see df_decrypt()
- * @param $value
- * @return string
- */
-function df_encrypt($value) {return df_mage()->coreHelper()->encrypt($value);}
 
 /**
  * К сожалению, не можем перекрыть Exception::getTraceAsString(),
