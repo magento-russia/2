@@ -180,10 +180,11 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Eav_Mysq
 		$adapter = $this->_getReadAdapter();
 		$categoryIds = df_array($categoryIds);
 		/**
+		 * 2016-10-16
 		 * Метод @see Varien_Db_Adapter_Pdo_Mysql::getCheckSql() отсутствует в Magento CE 1.4,
-		 * поэтому используем вместо него @uses Df_Core_Helper_Db::getCheckSql()
+		 * однако Magento CE 1.4 больше не поддерживаем.
 		 */
-		$isActiveExpr = df()->db()->getCheckSql('c.value_id > 0', 'c.value', 'c.value');
+		$isActiveExpr = $adapter->getCheckSql('c.value_id > 0', 'c.value', 'c.value');
 		$select = $adapter->select()
 			->from(array('main_table' => df_table('catalog/category')), array(
 				'main_table.entity_id',

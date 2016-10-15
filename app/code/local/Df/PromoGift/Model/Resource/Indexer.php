@@ -158,11 +158,13 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 
 	/**
 	 * @used-by reindexAll()
-	 * @return void
+	 * @return void  
+	 * 
+	 * 2016-10-16
+	 * Метод @uses Varien_Db_Adapter_Pdo_Mysql::truncateTable() появился только в Magento CE 1.6.0.0.
+	 * Однако более старые версии Magento CE мы отныне не поддерживаем.
 	 */
-	private function deleteAllGifts() {
-		df_table_truncate($this->getMainTable(), $this->_getWriteAdapter());
-	}
+	private function deleteAllGifts() {df_table_truncate($this->getMainTable());}
 
 	/**
 	 * @used-by reindexProduct()

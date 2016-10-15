@@ -55,10 +55,11 @@ class Df_Directory_Model_Resource_Region extends Df_Core_Model_Resource {
 		);
 		if ($locale != $systemLocale) {
 			/**
+			 * 2016-10-16
 			 * Метод @see Varien_Db_Adapter_Pdo_Mysql::getCheckSql() отсутствует в Magento CE 1.4,
-			 * поэтому используем вместо него @uses Df_Core_Helper_Db::getCheckSql()
+			 * однако Magento CE 1.4 больше не поддерживаем.
 			 */
-			$nameExpr  = df()->db()->getCheckSql('lrn.region_id is null', 'srn.name', 'lrn.name');
+			$nameExpr = $adapter->getCheckSql('lrn.region_id is null', 'srn.name', 'lrn.name');
 			$condition = df_db_quote_into('srn.locale = ?', $systemLocale);
 			$select->joinLeft(
 				array('srn' => df_table(self::TABLE__NAME))
