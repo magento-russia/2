@@ -46,5 +46,5 @@ abstract class Df_Psbank_Model_Action_Confirm extends Df_Payment_Model_Action_Co
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 }

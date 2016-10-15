@@ -14,5 +14,5 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Term extends \Df\Xml\Parser
 	public function translated() {return $this->leaf(df_locale());}
 
 	/** @used-by Df_Localization_Realtime_Dictionary_ModulePart_Terms::itemClass() */
-	const _C = __CLASS__;
+
 }

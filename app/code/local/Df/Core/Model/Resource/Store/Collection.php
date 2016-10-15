@@ -17,9 +17,9 @@ class Df_Core_Model_Resource_Store_Collection extends Mage_Core_Model_Mysql4_Sto
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_Core_Model_Store::_C;
+		$this->_itemObjectClass = Df_Core_Model_Store::class;
 	}
-	const _C = __CLASS__;
+
 
 	/**
 	 * @param Df_Core_Model_StoreM[] $stores

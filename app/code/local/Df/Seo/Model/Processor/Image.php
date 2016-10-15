@@ -22,10 +22,10 @@ class Df_Seo_Model_Processor_Image extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::$P__IMAGE, 'Varien_Object')
-			->_prop(self::$P__PRODUCT, Df_Catalog_Model_Product::_C)
+			->_prop(self::$P__PRODUCT, Df_Catalog_Model_Product::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__IMAGE = 'image';
 	/** @var string */

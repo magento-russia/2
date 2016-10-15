@@ -148,7 +148,7 @@ class Df_Cms_Model_Admin_Config_Node_ContentsMenu_VisibilitySettings_PageType
 			->_prop(self::P__VERTICAL_ORDERING__LABEL, DF_V_STRING_NE)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__ENABLED__LABEL = 'enabled__label';
 	const P__FIELDSET = 'fieldset';
 	const P__PAGE_TYPE_ID = 'page_type_id';

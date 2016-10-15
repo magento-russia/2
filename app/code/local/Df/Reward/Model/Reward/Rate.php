@@ -206,7 +206,7 @@ class Df_Reward_Model_Reward_Rate extends Df_Core_Model {
 	protected function _getResource() {return Df_Reward_Model_Resource_Reward_Rate::s();}
 
 	/** @used-by Df_Reward_Model_Resource_Reward_Rate_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'rate_id';
 
 	/** @return Df_Reward_Model_Resource_Reward_Rate_Collection */

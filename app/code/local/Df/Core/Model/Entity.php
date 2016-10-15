@@ -78,7 +78,7 @@ abstract class Df_Core_Model_Entity extends Df_Core_Model {
 	protected function initDependenciesInfo() {return $this;}
 
 	/** @used-by Df_Core_Model_Form_Builder::_construct() */
-	const _C = __CLASS__;
+
 	const DEPENDENCY_INFO__CLASS_NAME_MF = 'class_name';
 	const DEPENDENCY_INFO__DELETE_CASCADE = 'delete_cascade';
 	const DEPENDENCY_INFO__ID_FIELD_NAME = 'id_field_name';

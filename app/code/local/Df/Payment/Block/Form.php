@@ -67,5 +67,5 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	protected function defaultTemplate() {return 'df/payment/form.phtml';}
 
 	/** @used-by Df_Payment_Model_Method::getFormBlockType() */
-	const _C = __CLASS__;
+
 }

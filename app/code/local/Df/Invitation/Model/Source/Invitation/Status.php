@@ -32,7 +32,7 @@ class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model {
 		return array_merge(array(rm_option('', '')), df_map_to_options($this->getOptions()));
 	}
 
-	const _C = __CLASS__;
+
 	/** @return Df_Invitation_Model_Source_Invitation_Status */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -58,5 +58,5 @@ abstract class Df_Vk_Block_Frontend_Widget extends Df_Core_Block_Template {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+	
 }

@@ -139,5 +139,5 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Block extends \Df\Xml\Parse
 	}
 
 	/** @used-by Df_Localization_Realtime_Dictionary_ModulePart_Blocks::itemClass() */
-	const _C = __CLASS__;
+
 }

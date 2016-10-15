@@ -25,7 +25,7 @@ class Df_Checkout_Model_Event_CheckoutTypeMultishipping_CreateOrdersSingle
 	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
 
 	/** @used-by Df_Checkout_Observer::checkout_type_multishipping_create_orders_single() */
-	const _C = __CLASS__;
+
 	const EVENT_PARAM__ADDRESS = 'address';
 	const EXPECTED_EVENT_PREFIX = 'checkout_type_multishipping_create_orders_single';
 }

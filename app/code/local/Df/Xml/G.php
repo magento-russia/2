@@ -52,12 +52,12 @@ final class G extends \Df_Core_Model {
 		/** @var string $result */
 		/**
 		 * Обратите внимание, что метод ядра Magento CE
-		 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+		 * @see \Varien_Simplexml_Element::asNiceXml()
 		 * не сохраняет в документе XML блоки CDATA,
 		 * а вместо этого заменяет недопустимые для XML символы их допустимыми кодами,
 		 * например: & => &amp;
 		 *
-		 * Также @see \Magento\Framework\Simplexml\Element::asNiceXml()
+		 * Также @see \Varien_Simplexml_Element::asNiceXml()
 		 * не добавляет к документу заголовок XML: его надо добавить вручную.
 		 *
 		 * 2015-02-27

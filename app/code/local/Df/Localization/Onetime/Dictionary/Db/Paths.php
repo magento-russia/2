@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Db_Paths extends \Df\Xml\Parser\Collect
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Db_Path::_C;}
+	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Db_Path::class;}
 
 	/**
 	 * @override

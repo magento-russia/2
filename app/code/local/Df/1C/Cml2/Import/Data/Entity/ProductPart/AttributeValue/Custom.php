@@ -239,13 +239,13 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCT, Df_1C_Cml2_Import_Data_Entity_Product::_C);
+		$this->_prop(self::$P__PRODUCT, Df_1C_Cml2_Import_Data_Entity_Product::class);
 	}
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::itemClass()
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem()
 	 */
-	const _C = __CLASS__;
+
 	/** @var string  */
 	private static $P__PRODUCT = 'product';
 

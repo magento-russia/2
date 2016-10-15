@@ -106,13 +106,13 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__NODE, Df_Cms_Model_Hierarchy_Node::_C);
+		$this->_prop(self::P__NODE, Df_Cms_Model_Hierarchy_Node::class);
 	}
 	/**
 	 * @used-by Df_Cms_Model_ContentsMenu::_construct()
 	 * @used-by Df_Cms_Model_ContentsMenu_Applicator_Collection::itemClass()
 	 */
-	const _C = __CLASS__;
+
 	const P__NODE = 'node';
 	/**
 	 * @static

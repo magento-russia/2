@@ -36,7 +36,7 @@ class Df_Core_Model_Design_Package extends Df_Core_Model {
 		return dfa($this->getPackageConfig(), $paramName, $defaultValue);
 	}
 
-	const _C = __CLASS__;
+
 	const PACKAGE_PARAM__DEFAULT_ROUTE = 'default-route';
 	const PACKAGE_PARAM__VERSION = 'version';
 

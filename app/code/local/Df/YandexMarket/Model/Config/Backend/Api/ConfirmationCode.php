@@ -35,5 +35,5 @@ class Df_YandexMarket_Model_Config_Backend_Api_ConfirmationCode
 		)->getToken();
 	}
 
-	const _C = __CLASS__;
+	
 }

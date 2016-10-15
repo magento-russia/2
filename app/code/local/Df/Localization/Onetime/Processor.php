@@ -315,7 +315,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 	 * @used-by Df_Localization_Onetime_Processor_Collection::itemClass()
 	 * @used-by Df_Localization_Onetime_Processor_Collection::loadInternal()
 	 */
-	const _C = __CLASS__;
+
 	const P__ID = 'id';
 
 	/** @var string */

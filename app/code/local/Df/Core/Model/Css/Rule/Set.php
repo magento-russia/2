@@ -32,10 +32,10 @@ class Df_Core_Model_Css_Rule_Set extends Df_Varien_Data_Collection {
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Core_Model_Css_Rule::_C;}
+	protected function itemClass() {return Df_Core_Model_Css_Rule::class;}
 
 	/** @used-by Df_Core_Model_Css_Selector::_construct() */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @used-by Df_Core_Model_Css::addSelectorSimple()

@@ -11,6 +11,6 @@ class Df_Tax_Model_Resource_Calculation_Rate_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Tax_Model_Calculation_Rate::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Tax_Model_Calculation_Rate::class;}
 }
 

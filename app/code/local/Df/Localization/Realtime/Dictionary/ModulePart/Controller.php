@@ -27,5 +27,5 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Controller extends \Df\Xml\
 	}
 
 	/** @used-by Df_Localization_Realtime_Dictionary_ModulePart_Controllers::itemClass() */
-	const _C = __CLASS__;
+
 }

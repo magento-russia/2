@@ -7,7 +7,7 @@ abstract class Df_Localization_Onetime_Type extends Df_Core_Model {
 	public function getActionsClass() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $defaultResult */
-			$defaultResult = Df_Localization_Onetime_Dictionary_Rule_Actions::_C;
+			$defaultResult = Df_Localization_Onetime_Dictionary_Rule_Actions::class;
 			/** @var string $concreteResult */
 			$concreteResult = $defaultResult . '_' . $this->getName();
 			$this->{__METHOD__} = @class_exists($concreteResult) ? $concreteResult : $defaultResult;

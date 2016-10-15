@@ -163,7 +163,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	 * @used-by Df_Admin_Config_BackendChecker::_construct()
 	 * @used-by Df_Admin_Config_Backend_Validator_Strategy::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $SCOPE__DEFAULT = 'default';
 	/** @var string */

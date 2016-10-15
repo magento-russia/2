@@ -45,7 +45,7 @@ class Df_1C_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	}
 
 	/** @used-by Df_1C_Cml2_Action_GenericExport::generateResponseBodyFake() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by Df_1C_Cml2_Export_Processor_Sale_Order::getDocumentData_Order()
 	 * @used-by Df_1C_Cml2_Export_Data_Entity_Customer::getDateOfBirthAsString()

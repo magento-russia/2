@@ -1,8 +1,8 @@
 <?php
 namespace Df\Xml;
-use \Exception as E;
-use \SimpleXMLElement as CX;
-use Magento\Framework\Simplexml\Element as MX;
+use Exception as E;
+use SimpleXMLElement as CX;
+use Varien_Simplexml_Element as MX;
 class X extends MX {
 	/** @return void */
 	public function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
@@ -102,7 +102,7 @@ class X extends MX {
 		if (!isset(self::$_canonicalArray[$_this])) {
 			self::$_canonicalArray[$_this] = parent::asCanonicalArray();
 			/**
-			 * @uses \Magento\Framework\Simplexml\Element::asCanonicalArray()
+			 * @uses \Varien_Simplexml_Element::asCanonicalArray()
 			 * может возвращать строку в случае,
 			 * когда структура исходных данных не соответствует массиву.
 			 */
@@ -114,7 +114,7 @@ class X extends MX {
 	/**
 	 * 2016-09-01
 	 * @override
-	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+	 * @see \Varien_Simplexml_Element::asNiceXml()
 	 * Родительсктй метод задаёт вложенность тремя пробелами,
 	 * а я предпочитаю символ табуляции.
 	 * @param string $filename [optional]
@@ -225,7 +225,7 @@ class X extends MX {
 	 *
 	 * По этой причине не используем кэширование результата.
 	 *
-	 * в комментарии к свойству @see \Magento\Framework\Simplexml\Element::$_parent
+	 * в комментарии к свойству @see \Varien_Simplexml_Element::$_parent
 	 * дана рекомендация использования функции @see spl_object_hash(),
 	 * однако это слишком сложно и необчевидно, ускорит ли работу системы
 	 * (также могут быть проблемы с расходом оперативной памяти).
@@ -435,7 +435,6 @@ class X extends MX {
 
 	/**
 	 * 2015-08-15
-	 * @used-by \Dfr\Translation\Realtime\Dictionary::hasEntry()
 	 * @param string $path
 	 * @return string[]
 	 */
@@ -691,7 +690,7 @@ class X extends MX {
 	 * если дерево XML содержит несколько одноимённых дочерних узлов,
 	 * то родительский метод при конвертации дерева XML в массив
 	 * перетирает содержимое дочерних узлов друг другом:
-	 * @see \Magento\Framework\Simplexml\Element::_asArray():
+	 * @see \Varien_Simplexml_Element::_asArray():
 	 * $result[$childName] = $child->_asArray($isCanonical);
 	 * Например, дерево XML
 		<url>
@@ -742,12 +741,12 @@ class X extends MX {
 		/** @var array(string => string|array()) $result */
 		$result = [];
 		if (!$e->hasChildren()) {
-			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
+			/** Просто повторяем алгоритм метода @see \Varien_Simplexml_Element::_asArray() */
 			$result = $e->_asArray($isCanonical);
 		}
 		else {
 			if (!$isCanonical) {
-				/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
+				/** Просто повторяем алгоритм метода @see \Varien_Simplexml_Element::_asArray() */
 				foreach ($e->attributes() as $attributeName => $attribute) {
 					/** @var string $attributeName */
 					/** @var MX $attribute */
@@ -759,7 +758,7 @@ class X extends MX {
 			else {
 				/**
 				 * Обратите внимание, что,
-				 * в отличие от метода @see \Magento\Framework\Simplexml\Element::_asArray(),
+				 * в отличие от метода @see \Varien_Simplexml_Element::_asArray(),
 				 * мы не можем использовать синтаксис
 				 * foreach ($e->children() as $childName => $child) {
 				 * потому что при таком синтаксисе мы не сможем получить доступ
@@ -774,7 +773,7 @@ class X extends MX {
 					if (!isset($result[$childName])) {
 						/**
 						 * Просто повторяем алгоритм метода
-						 * @see \Magento\Framework\Simplexml\Element::_asArray()
+						 * @see \Varien_Simplexml_Element::_asArray()
 						 */
 						$result[$childName] = $childAsArray;
 					}

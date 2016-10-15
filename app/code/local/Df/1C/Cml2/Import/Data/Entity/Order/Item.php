@@ -55,13 +55,13 @@ class Df_1C_Cml2_Import_Data_Entity_Order_Item extends Df_1C_Cml2_Import_Data_En
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ENTITY_ORDER, Df_1C_Cml2_Import_Data_Entity_Order::_C);
+		$this->_prop(self::P__ENTITY_ORDER, Df_1C_Cml2_Import_Data_Entity_Order::class);
 	}
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_Order_Items::itemClass()
 	 * @used-by Df_1C_Cml2_Import_Processor_Order_Item::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Order_Item_Composite::itemParams()
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Order_Item_Composite::i()

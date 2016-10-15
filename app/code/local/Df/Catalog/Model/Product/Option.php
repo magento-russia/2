@@ -45,7 +45,7 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 	protected function _getResource() {return Df_Catalog_Model_Resource_Product_Option::s();}
 
 	/** @used-by Df_Catalog_Model_Resource_Product_Option_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__TITLE = 'title';
 
 	/** @return Df_Catalog_Model_Resource_Product_Option_Collection */

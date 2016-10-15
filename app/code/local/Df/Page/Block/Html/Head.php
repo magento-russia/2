@@ -117,6 +117,6 @@ class Df_Page_Block_Html_Head extends Mage_Page_Block_Html_Head {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	const P__CAN_LOAD_TINY_MCE = 'can_load_tiny_mce';
 }

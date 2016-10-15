@@ -54,7 +54,7 @@ class Df_Core_Model_Css extends Df_Varien_Data_Collection {
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Core_Model_Css_Selector::_C;}
+	protected function itemClass() {return Df_Core_Model_Css_Selector::class;}
 
 	/**
 	 * @used-by Df_Tweaks_Block_Frontend_Style::getStyle()

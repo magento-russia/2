@@ -29,6 +29,6 @@ class Df_CustomerBalance_Model_Resource_Balance_Collection extends Df_Core_Model
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_CustomerBalance_Model_Balance::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_CustomerBalance_Model_Balance::class;}
+
 }

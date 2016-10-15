@@ -147,7 +147,7 @@ abstract class Df_Localization_Onetime_Processor_Entity extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ACTIONS, Df_Localization_Onetime_Dictionary_Rule_Actions::_C);
+		$this->_prop(self::$P__ACTIONS, Df_Localization_Onetime_Dictionary_Rule_Actions::class);
 		$this->_prop(self::$P__ENTITY, 'Mage_Core_Model_Abstract');
 	}
 	/** @var string */

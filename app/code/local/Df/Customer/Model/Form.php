@@ -36,5 +36,5 @@ class Df_Customer_Model_Form extends Mage_Customer_Model_Form {
 		return df_n_get($this->{__METHOD__});
 	}
 
-	const _C = __CLASS__;
+
 }

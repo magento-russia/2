@@ -132,7 +132,7 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 		;
 	}
 	/** @used-by Df_Dataflow_Model_Importer_Row::_construct() */
-	const _C = __CLASS__;
+
 	const P__ORDERING = 'ordering';
 	const P__ROW_AS_ARRAY = 'rowAsArray';
 }

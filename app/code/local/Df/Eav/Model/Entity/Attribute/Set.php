@@ -144,7 +144,7 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 	 * @used-by Df_Eav_Model_Resource_Entity_Attribute_Set_Collection::_construct()
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_AttributeSet::getEntityClass()
 	 */
-	const _C = __CLASS__;
+
 	const P__NAME = 'attribute_set_name';
 
 	/** @var array(string => bool) */

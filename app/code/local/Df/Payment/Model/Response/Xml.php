@@ -3,7 +3,7 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 	/** @return \Df\Xml\X */
 	protected function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml($this->getXml());
+			$this->{__METHOD__} = df_xml_parse($this->getXml());
 		}
 		return $this->{__METHOD__};
 	}
@@ -51,6 +51,6 @@ abstract class Df_Payment_Model_Response_Xml extends Df_Payment_Model_Response {
 		parent::_construct();
 		$this->_prop(self::P__XML, DF_V_STRING_NE);
 	}
-	const _C = __CLASS__;
+
 	const P__XML = 'xml';
 }

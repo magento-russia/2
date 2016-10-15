@@ -341,7 +341,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 	 */
 	protected $_skipFieldsByModel = array();
 
-	const _C = __CLASS__;
+
 	/**
 	 * @deprecated after 1.6.0.0
 	 */

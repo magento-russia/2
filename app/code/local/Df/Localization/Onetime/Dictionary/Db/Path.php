@@ -12,7 +12,7 @@ class Df_Localization_Onetime_Dictionary_Db_Path extends \Df\Xml\Parser\Entity {
 	}
 
 	/** @used-by Df_Localization_Onetime_Dictionary_Db_Paths::itemClass() */
-	const _C = __CLASS__;
+
 }
 
 

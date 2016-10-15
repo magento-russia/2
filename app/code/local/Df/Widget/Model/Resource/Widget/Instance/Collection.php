@@ -55,10 +55,10 @@ class Df_Widget_Model_Resource_Widget_Instance_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Widget_Model_Widget_Instance::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Widget_Model_Widget_Instance::class;}
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _C = __CLASS__;
+	
 	/** @var string */
 	private static $P__FOR_UPDATING = 'for_updating';
 

@@ -72,7 +72,7 @@ class Df_Cms_Model_ContentsMenu_Collection extends Df_Varien_Data_Collection {
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Cms_Model_ContentsMenu::_C;}
+	protected function itemClass() {return Df_Cms_Model_ContentsMenu::class;}
 
 	/** @return void */
 	private function addItemsForTheCurrentPageApplicators() {
@@ -120,7 +120,7 @@ class Df_Cms_Model_ContentsMenu_Collection extends Df_Varien_Data_Collection {
 	 */
 	private function mergeItemsWithTheSamePosition() {$this->getPositions()->walk('mergeItems');}
 
-	const _C = __CLASS__;
+
 	const P__ID = 'id';
 	/** @return Df_Cms_Model_ContentsMenu_Collection */
 	public static function i() {return new self;}

@@ -65,7 +65,7 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 	 */
 	private function _isAllowedAction($action) {return rm_admin_allowed('cms/page/' . $action);}
 
-	const _C = __CLASS__;
+
 	const XML_PATH_CONTENT_VERSIONING = 'df_cms/versioning/default';
 	/** @var string[][] */
 	protected $_revisionControlledAttributes = array('page' => array(

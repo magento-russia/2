@@ -97,7 +97,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 					$backendClass = $sections->descend($section.'/groups/'.$group.'/fields/'.$mappedFields[$field].'/backend_model');
 				}
 				if (!$backendClass) {
-					$backendClass = Df_Core_Model_Config_Data::_C;
+					$backendClass = Df_Core_Model_Config_Data::class;
 				}
 				$dataObject = df_model($backendClass);
 				if (!$dataObject instanceof Mage_Core_Model_Config_Data) {
@@ -269,7 +269,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				$backendClass =
 					isset($fieldConfig->backend_model)
 					? $fieldConfig->backend_model
-					: Df_Core_Model_Config_Data::_C
+					: Df_Core_Model_Config_Data::class
 				;
 				/******************************
 				 * END PATCH

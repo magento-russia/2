@@ -43,7 +43,7 @@ class Df_Checkout_Model_Settings_Field_Applicability extends Df_Core_Model_Setti
 			->addData(array(self::P__SECTION => 'df_checkout'))
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__ADDRESS_TYPE = 'address_type';
 	/**
 	 * @static

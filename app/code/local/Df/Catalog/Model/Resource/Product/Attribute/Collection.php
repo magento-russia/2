@@ -54,6 +54,6 @@ class Df_Catalog_Model_Resource_Product_Attribute_Collection
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {$this->_itemObjectClass = Df_Catalog_Model_Resource_Eav_Attribute::_C;}
-	const _C = __CLASS__;
+	public function _construct() {$this->_itemObjectClass = Df_Catalog_Model_Resource_Eav_Attribute::class;}
+
 }

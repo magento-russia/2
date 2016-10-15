@@ -425,7 +425,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 			->_prop(self::P__RM_TRANSACTION_TYPE, DF_V_STRING, false)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__RM_TRANSACTION_TYPE = 'rm_transaction_type';
 	/** @var string */
 	private static $P__DESC = 'DESC';

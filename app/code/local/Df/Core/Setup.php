@@ -125,7 +125,7 @@ class Df_Core_Setup extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__SETUP, Df_Core_Model_Resource_Setup::_C, false);
+		$this->_prop(self::$P__SETUP, Df_Core_Model_Resource_Setup::class, false);
 	}
 	/** @var string */
 	private static $P__SETUP = 'setup';

@@ -19,8 +19,8 @@ class Df_Reports_Observer {
 				&& df_cfg()->reports()->common()->enableGroupByWeek()
 			) {
 				df_handle_event(
-					Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter::_C
-					,Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C
+					Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter::class
+					,Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::class
 					,$o
 				);
 			}
@@ -29,8 +29,8 @@ class Df_Reports_Observer {
 				&& df_cfg()->reports()->common()->needSetEndDateToTheYesterday()
 			) {
 				df_handle_event(
-					Df_Reports_Model_Handler_SetDefaultFilterValues::_C
-					,Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C
+					Df_Reports_Model_Handler_SetDefaultFilterValues::class
+					,Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::class
 					,$o
 				);
 			}
@@ -39,8 +39,8 @@ class Df_Reports_Observer {
 				&& df_h()->reports()->groupResultsByWeek()->isSelectedInFilter()
 			) {
 				df_handle_event(
-					Df_Reports_Model_Handler_GroupResultsByWeek_SetColumnRenderer::_C
-					,Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C
+					Df_Reports_Model_Handler_GroupResultsByWeek_SetColumnRenderer::class
+					,Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::class
 					,$o
 				);
 			}
@@ -59,8 +59,8 @@ class Df_Reports_Observer {
 		try {
 			if (df_cfg()->reports()->common()->needRemoveTimezoneNotice()) {
 				df_handle_event(
-					Df_Reports_Model_Handler_RemoveTimezoneNotice::_C
-					,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C
+					Df_Reports_Model_Handler_RemoveTimezoneNotice::class
+					,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class
 					,$o
 				);
 			}
@@ -78,8 +78,8 @@ class Df_Reports_Observer {
 	public function core_collection_abstract_load_before(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection::_C
-				,Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_C
+				Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection::class
+				,Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::class
 				,$o
 			);
 		}

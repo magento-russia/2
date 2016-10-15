@@ -11,7 +11,7 @@ class Df_Catalog_Model_Resource_Category_Flat_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Catalog_Model_Category::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Catalog_Model_Category::class;}
 
-	const _C = __CLASS__;
+
 }

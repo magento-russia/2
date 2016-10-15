@@ -38,7 +38,7 @@ class Df_Logging_Model_Event extends Df_Core_Model {
 	protected function _getResource() {return Df_Logging_Model_Resource_Event::s();}
 
 	/** @used-by Df_Logging_Model_Resource_Event_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'log_id';
 	const RESULT_SUCCESS = 'success';
 	const RESULT_FAILURE = 'failure';

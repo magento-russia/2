@@ -64,10 +64,10 @@ class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Mysql4_Poll
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {$this->_itemObjectClass = Df_Poll_Model_Poll::_C;}
+	public function _construct() {$this->_itemObjectClass = Df_Poll_Model_Poll::class;}
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _C = __CLASS__;
+
 	const P__STORE_IDS = 'store_ids';
 	const P__STORES = 'stores';
 	/**

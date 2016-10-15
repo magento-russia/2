@@ -46,7 +46,7 @@ class Df_Core_Model_Entity_Dependency extends Df_Core_Model {
 	}
 
 	/** @used-by Df_Core_Model_Entity_Dependency_Collection::itemClass() */
-	const _C = __CLASS__;
+
 	const P__ACTION_SAVE__CLASS_NAME = 'action_save__class_name';
 	const P__CLASS_NAME = 'class_name';
 	const P__DELETE_CASCADE = 'delete_cascade';

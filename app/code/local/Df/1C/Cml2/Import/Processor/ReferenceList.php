@@ -185,7 +185,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList::_C);
+		$this->_prop(self::$P__ENTITY, Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList::class);
 	}
 	/**
 	 * @static

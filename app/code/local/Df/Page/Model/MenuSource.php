@@ -22,7 +22,7 @@ abstract class Df_Page_Model_MenuSource extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__WEIGHT, DF_V_INT);
 	}
-	const _C = __CLASS__;
+
 	const P__WEIGHT = 'weight';
 	/**
 	 * @param Df_Page_Model_MenuSource $a

@@ -60,7 +60,7 @@ class Df_PromoGift_Model_PromoAction_Collection extends Df_Varien_Data_Collectio
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_PromoGift_Model_PromoAction::_C;}
+	protected function itemClass() {return Df_PromoGift_Model_PromoAction::class;}
 
 	/** @return Df_PromoGift_Model_PromoAction_Collection */
 	public static function i() {return new self;}

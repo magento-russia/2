@@ -8,5 +8,5 @@ class Df_1C_Cml2_Import_Data_Entity_Category extends Df_1C_Cml2_Import_Data_Enti
 		return $this->{__METHOD__};
 	}
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_Categories::itemClass() */
-	const _C = __CLASS__;
+
 }

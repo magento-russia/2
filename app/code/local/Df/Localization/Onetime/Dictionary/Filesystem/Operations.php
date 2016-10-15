@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Filesystem_Operations extends \Df\Xml\P
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Filesystem_Operation::_C;}
+	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Filesystem_Operation::class;}
 
 	/**
 	 * @override

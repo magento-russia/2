@@ -1,6 +1,6 @@
 <?php
 class Df_Eav_Model_Entity extends Mage_Eav_Model_Entity {
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

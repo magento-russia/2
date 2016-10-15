@@ -110,7 +110,7 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	const T_FIELD_LABEL__QIWI_CUSTOMER_ID = 'Номер телефона';
 	const T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE = 'Код:';
 	const T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX = 'Номер:';

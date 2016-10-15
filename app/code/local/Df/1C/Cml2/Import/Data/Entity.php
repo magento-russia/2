@@ -138,5 +138,5 @@ abstract class Df_1C_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entity {
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Attribute::create()
 	 * @used-by Df_1C_Cml2_Import_Processor::_construct
 	 */
-	const _C = __CLASS__;
+
 }

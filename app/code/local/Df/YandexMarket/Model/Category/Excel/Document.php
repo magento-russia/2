@@ -95,7 +95,7 @@ class Df_YandexMarket_Model_Category_Excel_Document extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+	
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

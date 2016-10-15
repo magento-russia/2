@@ -28,7 +28,7 @@ class Df_Invitation_Model_Invitation_History extends Df_Core_Model {
 	protected function _getResource() {return Df_Invitation_Model_Resource_Invitation_History::s();}
 
 	/** @used-by Df_Invitation_Model_Resource_Invitation_History_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'history_id';
 
 	/** @return Df_Invitation_Model_Resource_Invitation_History_Collection */

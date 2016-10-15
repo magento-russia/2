@@ -21,6 +21,6 @@ class Df_Parser_Model_Category_Node extends Df_Varien_Data_Tree_Node {
 	/** @return Zend_Uri_Http */
 	public function getUri() {return $this->getCategory()->getUri();}
 
-	const _C = __CLASS__;
+
 	const P__CATEGORY = 'category';
 }

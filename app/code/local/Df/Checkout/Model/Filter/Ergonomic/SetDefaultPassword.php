@@ -49,7 +49,7 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

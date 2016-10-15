@@ -23,7 +23,7 @@ class Df_1C_Config_Api_Product_Prices extends Df_1C_Config_Api_Cml2 {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->map(
 				'map'
-				, Df_1C_Config_MapItem_PriceType::_C
+				, Df_1C_Config_MapItem_PriceType::class
 				/** @uses Df_1C_Config_MapItem_PriceType::getCustomerGroup() */
 				, 'getCustomerGroup'
 				/** @uses Df_1C_Config_MapItem_PriceType::getНазваниеТиповогоСоглашения() */

@@ -65,7 +65,7 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	 * @return string
 	 */
 	protected function getProcessorClass_products() {
-		return Df_1C_Cml2_Export_Processor_Catalog_Product::_C;
+		return Df_1C_Cml2_Export_Processor_Catalog_Product::class;
 	}
 
 	/**
@@ -193,7 +193,7 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	private function getVirtualAttributeProcessorClasses() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
-				Df_1C_Cml2_Export_Processor_Catalog_Attribute_Url::_C
+				Df_1C_Cml2_Export_Processor_Catalog_Attribute_Url::class
 			);
 		}
 		return $this->{__METHOD__};
@@ -203,7 +203,7 @@ class Df_1C_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup::_construct()
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real::_construct()
 	 */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @used-by Df_1C_Cml2_Action_Catalog_Export_Process::createDocument()

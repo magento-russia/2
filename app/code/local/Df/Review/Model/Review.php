@@ -99,7 +99,7 @@ class Df_Review_Model_Review extends Mage_Review_Model_Review {
 	 * @used-by Df_Review_Model_Resource_Review_Collection::__construct()
 	 * @used-by Df_Review_Model_Resource_Review_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const P__CUSTOMER_ID = 'customer_id';
 	const P__DETAIL = 'detail';
 	const P__NICKNAME = 'nickname';

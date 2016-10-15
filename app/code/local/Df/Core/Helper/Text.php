@@ -525,7 +525,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 		return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));
 	}
 
-	const _C = __CLASS__;
+
 	const QUOTE__DOUBLE = 'double';
 	const QUOTE__RUSSIAN = 'russian';
 	const QUOTE__SINGLE = 'single';

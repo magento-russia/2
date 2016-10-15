@@ -18,5 +18,5 @@ class Df_Localization_Block_Admin_Theme_Processor_Processed
 		);
 	}
 
-	const _C = __CLASS__;
+
 }

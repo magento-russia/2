@@ -104,9 +104,9 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__INSTALLER, Df_Core_Model_Resource_Setup::_C);
+		$this->_prop(self::P__INSTALLER, Df_Core_Model_Resource_Setup::class);
 	}
-	const _C = __CLASS__;
+
 	const P__INSTALLER = 'installer';
 	const REGION__CENTER__LOCAL = 'center_local';
 	const REGION__CENTER__RUSSIAN = 'center_russian';

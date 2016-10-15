@@ -35,7 +35,7 @@ class Df_Core_Model_Config_Data extends Mage_Core_Model_Config_Data {
 	 * @used-by Df_Adminhtml_Model_Config_Data::save_patchFor_1_7_0_2()
 	 * @used-by Df_Core_Model_Resource_Config_Data_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__PATH = 'path';
 	/** @var string */

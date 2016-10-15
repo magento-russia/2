@@ -49,8 +49,8 @@ class Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam extends D
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Sales_Model_Event_OrderStatusHistory_SaveBefore::_C;}
+	protected function getEventClass() {return Df_Sales_Model_Event_OrderStatusHistory_SaveBefore::class;}
 
 	/** @used-by Df_Sales_Observer::sales_order_status_history_save_before() */
-	const _C = __CLASS__;
+
 }

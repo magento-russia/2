@@ -18,7 +18,7 @@ class Df_Core_Setup_FirstRun extends Df_Core_Model {
 		return $this;
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

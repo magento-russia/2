@@ -278,7 +278,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 		return parent::formatTxt($price, array('precision' => rm_currency_precision()) + $options);
 	}
 
-	const _C = __CLASS__;
+
 	const BYR = 'BYR';
 	const RUB = 'RUB';
 	const KZT = 'KZT';

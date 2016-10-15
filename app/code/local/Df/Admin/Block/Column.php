@@ -78,7 +78,7 @@ abstract class Df_Admin_Block_Column extends Df_Core_Block_Admin {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__COLUMN, Df_Admin_Config_DynamicTable_Column::_C)
+			->_prop(self::$P__COLUMN, Df_Admin_Config_DynamicTable_Column::class)
 			->_prop(self::$P__FIELD, 'Varien_Data_Form_Element_Abstract')
 		;
 	}

@@ -153,5 +153,5 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem() */
-	const _C = __CLASS__;
+
 }

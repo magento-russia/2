@@ -49,7 +49,7 @@ class Df_Localization_Onetime_DemoImagesImporter_Image extends Df_Core_Model {
 	private static $P__LOCAL_PATH = 'local_path';
 
 	/** @used-by Df_Localization_Onetime_DemoImagesImporter_Image_Collection::itemClass() */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @param string $localPath

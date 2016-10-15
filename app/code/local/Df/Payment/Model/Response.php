@@ -104,7 +104,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 	}
 
 	/** @return string */
-	protected function getExceptionClass() {return Df_Payment_Exception_Response::_C;}
+	protected function getExceptionClass() {return Df_Payment_Exception_Response::class;}
 
 	/** @return string */
 	protected function getIdInPaymentInfo() {return df_cts_lc_camel($this, '_');}

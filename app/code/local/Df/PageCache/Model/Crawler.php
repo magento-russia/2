@@ -147,7 +147,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 		return $this;
 	}
 
-	const _C = __CLASS__;
+
 	const XML_PATH_CRAWL_MULTICURRENCY = 'df_speed/page_cache/auto_crawling__multicurrency';
 	const XML_PATH_CRAWLER_ENABLED	 = 'df_speed/page_cache/auto_crawling__enabled';
 	const XML_PATH_CRAWLER_THREADS	 = 'df_speed/page_cache/auto_crawling__num_threads';

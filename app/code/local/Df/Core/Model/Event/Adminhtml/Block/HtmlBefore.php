@@ -21,5 +21,5 @@ class Df_Core_Model_Event_Adminhtml_Block_HtmlBefore extends Df_Core_Model_Event
 	 * @used-by Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter::getEventClass()
 	 * @used-by Df_Reports_Model_Handler_GroupResultsByWeek_SetColumnRenderer::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

@@ -76,5 +76,5 @@ class DocumentMixin extends \Df_Core_Model_Mixin {
 	/** @return bool|null */
 	public function needWrapInCDataAll() {return null;}
 
-	const _C = __CLASS__;
+	
 }

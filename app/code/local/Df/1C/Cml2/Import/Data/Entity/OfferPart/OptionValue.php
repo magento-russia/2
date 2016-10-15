@@ -431,11 +431,11 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__OFFER, Df_1C_Cml2_Import_Data_Entity_Offer::_C);
+		$this->_prop(self::P__OFFER, Df_1C_Cml2_Import_Data_Entity_Offer::class);
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues::itemClass() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by _construct()
 	 * @used-by getOffer()

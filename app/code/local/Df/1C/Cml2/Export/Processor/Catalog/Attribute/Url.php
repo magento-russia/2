@@ -35,7 +35,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Attribute_Url
 	protected function getТипЗначений() {return 'Строка';}
 
 	/** @used-by Df_1C_Cml2_Export_Document_Catalog::getVirtualAttributeProcessorClasses() */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @static

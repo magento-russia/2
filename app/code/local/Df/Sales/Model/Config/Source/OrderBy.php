@@ -19,5 +19,5 @@ class Df_Sales_Model_Config_Source_OrderBy extends Df_Admin_Config_Source {
 				'стоимостям строк заказа'
 		));
 	}
-	const _C = __CLASS__;
+
 }

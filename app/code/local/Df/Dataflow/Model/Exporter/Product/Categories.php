@@ -125,7 +125,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__PRODUCT, self::P__PRODUCT_TYPE);
 	}
-	const _C = __CLASS__;
+
 	const P__PRODUCT = 'product';
 	const P__PRODUCT_TYPE = 'Mage_Catalog_Model_Product';
 	/**

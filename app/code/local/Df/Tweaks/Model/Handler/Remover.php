@@ -36,7 +36,7 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class;
 	}
 
 	/** @return string[] */
@@ -85,5 +85,5 @@ abstract class Df_Tweaks_Model_Handler_Remover extends Df_Core_Model_Handler {
 		return !!array_intersect($this->getApplicableConfigValues(), $this->getInvisibleStates());
 	}
 
-	const _C = __CLASS__;
+	
 }

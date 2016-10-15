@@ -75,7 +75,7 @@ class Df_Page_Block_Switch extends Mage_Page_Block_Switch {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	const TEMPLATE__FLAGS = 'page/switch/flags.phtml';
 	const TEMPLATE__LANGUAGES = 'page/switch/languages.phtml';
 	const TEMPLATE__STORES = 'page/switch/stores.phtml';

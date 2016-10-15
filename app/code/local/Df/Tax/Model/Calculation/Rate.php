@@ -17,7 +17,7 @@ class Df_Tax_Model_Calculation_Rate extends Mage_Tax_Model_Calculation_Rate {
 	protected function _getResource() {return Df_Tax_Model_Resource_Calculation_Rate::s();}
 
 	/** @used-by Df_Tax_Model_Resource_Calculation_Rate_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @return Df_Tax_Model_Resource_Calculation_Rate_Collection

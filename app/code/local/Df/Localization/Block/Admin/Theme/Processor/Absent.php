@@ -13,5 +13,5 @@ class Df_Localization_Block_Admin_Theme_Processor_Absent
 	 */
 	public function getLink() {return '';}
 
-	const _C = __CLASS__;
+
 }

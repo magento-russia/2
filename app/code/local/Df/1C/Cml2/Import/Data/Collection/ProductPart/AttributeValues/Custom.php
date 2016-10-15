@@ -73,8 +73,8 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 		}
 		return
 			!$valueId
-			? Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::_C
-			: Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option::_C
+			? Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::class
+			: Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option::class
 		;
 	}
 
@@ -142,7 +142,7 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCT, Df_1C_Cml2_Import_Data_Entity_Product::_C);
+		$this->_prop(self::$P__PRODUCT, Df_1C_Cml2_Import_Data_Entity_Product::class);
 	}
 	/** @var string */
 	private static $P__PRODUCT = 'product';

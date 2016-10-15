@@ -88,7 +88,7 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Catalog_Model_Product::_C;}
+	protected function getEntityClass() {return Df_Catalog_Model_Product::class;}
 
 	/**
 	 * @override

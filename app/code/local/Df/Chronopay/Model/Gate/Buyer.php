@@ -163,7 +163,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__PAYMENT, 'Mage_Payment_Model_Info');
 	}
-	const _C = __CLASS__;
+
 	const P__PAYMENT = 'payment';
 	/**
 	 * @static

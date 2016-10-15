@@ -47,7 +47,7 @@ class Df_Cms_Model_Resource_Increment extends Df_Core_Model_Resource {
 	 * @return void
 	 */
 	protected function _construct() {$this->_init(self::TABLE, Df_Cms_Model_Increment::P__ID);}
-	const _C = __CLASS__;
+
 	/** @used-by Df_Cms_Setup_2_0_0::_process() */
 	const TABLE = 'df_cms/increment';
 	/** @return Df_Cms_Model_Resource_Increment */

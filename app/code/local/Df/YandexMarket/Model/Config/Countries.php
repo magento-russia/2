@@ -67,7 +67,7 @@ class Df_YandexMarket_Model_Config_Countries extends Df_Core_Model {
 		}
 		return $this->{__METHOD__};
 	}
-	const _C = __CLASS__;
+	
 	const FILE_DIR = 'etc';
 	const MODULE_NAME = 'Df_YandexMarket';
 	const XML_TAG__CODE = 'code';

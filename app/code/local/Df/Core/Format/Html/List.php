@@ -52,7 +52,7 @@ class Df_Core_Format_Html_List extends Df_Core_Model {
 			->_prop(self::$P__ITEMS, DF_V_ARRAY)
 		;
 	}
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__CSS_CLASS_FOR_ITEM = 'css_class_for_item';
 	/** @var string */

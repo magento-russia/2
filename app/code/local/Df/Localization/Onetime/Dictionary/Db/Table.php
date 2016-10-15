@@ -42,7 +42,7 @@ class Df_Localization_Onetime_Dictionary_Db_Table extends \Df\Xml\Parser\Entity 
 	 * @used-by Df_Localization_Onetime_Dictionary_Db_Columns::_construct()
 	 * @used-by Df_Localization_Onetime_Dictionary_Db_Tables::itemClass()
 	 */
-	const _C = __CLASS__;
+
 }
 
 

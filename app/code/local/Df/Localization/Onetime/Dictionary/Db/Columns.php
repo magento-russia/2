@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Db_Columns extends \Df\Xml\Parser\Colle
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Db_Column::_C;}
+	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Db_Column::class;}
 
 	/**
 	 * @override
@@ -29,7 +29,7 @@ class Df_Localization_Onetime_Dictionary_Db_Columns extends \Df\Xml\Parser\Colle
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__TABLE, Df_Localization_Onetime_Dictionary_Db_Table::_C);
+		$this->_prop(self::$P__TABLE, Df_Localization_Onetime_Dictionary_Db_Table::class);
 	}
 	/** @var string */
 	private static $P__TABLE = 'table';

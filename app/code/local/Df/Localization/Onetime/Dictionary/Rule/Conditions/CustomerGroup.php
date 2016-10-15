@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions_CustomerGroup
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Customer_Model_Group::_C;}
+	protected function getEntityClass() {return Df_Customer_Model_Group::class;}
 
 	/**
 	 * @override

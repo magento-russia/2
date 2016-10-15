@@ -6,7 +6,7 @@ class Df_Admin_Model_Notifier_Collection extends Df_Varien_Data_Collection_Singl
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Admin_Model_Notifier::_C;}
+	protected function itemClass() {return Df_Admin_Model_Notifier::class;}
 
 	/**
 	 * @override

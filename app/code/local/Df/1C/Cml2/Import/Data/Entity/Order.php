@@ -28,5 +28,5 @@ class Df_1C_Cml2_Import_Data_Entity_Order extends Df_1C_Cml2_Import_Data_Entity 
 	 * @used-by Df_1C_Cml2_Import_Processor_Order::_construct()
 	 * @used-by Df_1C_Cml2_Import_Processor_Order_Item::_construct()
 	 */
-	const _C = __CLASS__;
+
 }

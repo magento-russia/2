@@ -32,8 +32,8 @@ class Df_Directory_Observer {
 			) {
 				try {
 					df_handle_event(
-						Df_Directory_Model_Handler_ProcessRegionsAfterLoading::_C
-						,Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_C
+						Df_Directory_Model_Handler_ProcessRegionsAfterLoading::class
+						,Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::class
 						,$o
 					);
 				}
@@ -66,8 +66,8 @@ class Df_Directory_Observer {
 		if (self::isRegionCollection($collection)) {
 			try {
 				df_handle_event(
-					Df_Directory_Model_Handler_OrderRegions::_C
-					,Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_C
+					Df_Directory_Model_Handler_OrderRegions::class
+					,Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::class
 					,$o
 				);
 			}

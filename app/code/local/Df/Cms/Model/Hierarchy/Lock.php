@@ -127,7 +127,7 @@ class Df_Cms_Model_Hierarchy_Lock extends Df_Core_Model {
 	 */
 	protected function _getSession() {return $this->_session ? $this->_session : rm_admin_session();}
 
-	const _C = __CLASS__;
+
 	const P__ID = 'lock_id';
 	/**
 	 * @static

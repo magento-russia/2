@@ -31,7 +31,7 @@ class Df_Directory_Model_Region extends Mage_Directory_Model_Region {
 	protected function _getResource() {return Df_Directory_Model_Resource_Region::s();}
 
 	/** @used-by Df_Directory_Model_Resource_Region_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__COUNTRY_ID = 'country_id';
 	const P__CODE = 'code';
 	const P__DEFAULT_NAME = 'default_name';

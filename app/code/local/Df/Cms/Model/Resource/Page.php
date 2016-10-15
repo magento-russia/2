@@ -41,7 +41,7 @@ class Df_Cms_Model_Resource_Page extends Mage_Cms_Model_Mysql4_Page {
 		return 1 === preg_match($pattern, $object->getData('identifier'));
 	}
 
-	const _C = __CLASS__;
+
 
 	/**
 	 * 2015-02-09

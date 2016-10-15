@@ -64,5 +64,5 @@ class Df_Localization_Block_Admin_Verification extends Df_Core_Block_Admin {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 }

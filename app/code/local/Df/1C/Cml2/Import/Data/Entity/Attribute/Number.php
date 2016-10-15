@@ -26,5 +26,5 @@ class Df_1C_Cml2_Import_Data_Entity_Attribute_Number
 	public function getSourceModel() {return '';}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Entity_Attribute::getTypeMap() */
-	const _C = __CLASS__;
+
 }

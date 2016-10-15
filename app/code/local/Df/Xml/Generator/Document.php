@@ -202,7 +202,7 @@ class Document extends \Df\Xml\Generator\Element {
 		/** @var \Df\Xml\X $result */
 		$result = $this->mixin(__FUNCTION__);
 		if (is_null($result)) {
-			$result = df_xml(df_ccc("\n",
+			$result = df_xml_parse(df_ccc("\n",
 				$this->getXmlHeader(), $this->getDocType(), $this->getTag()
 			));
 			$result->addAttributes($this->getAttributes());
@@ -353,7 +353,7 @@ class Document extends \Df\Xml\Generator\Element {
 		;
 	}
 	/** @used-by \Df\Xml\Generator\Part::_construct() */
-	const _C = __CLASS__;
+	
 	const P__CONTENTS_AS_ARRAY = 'contents_as_array';
 	const P__DOC_TYPE = 'doc_type';
 	const P__LOGGER = 'logger';

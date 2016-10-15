@@ -6,7 +6,7 @@ class Df_Localization_Translation_File_Collection extends Df_Varien_Data_Collect
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Translation_File::_C;}
+	protected function itemClass() {return Df_Localization_Translation_File::class;}
 
 	/** @return Df_Localization_Translation_File_Collection */
 	public static function i() {return new self;}

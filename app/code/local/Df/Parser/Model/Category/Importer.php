@@ -51,11 +51,11 @@ class Df_Parser_Model_Category_Importer extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__TREE, Df_Parser_Model_Category_Tree::_C)
-			->_prop(self::P__STORE, Df_Core_Model_StoreM::_C)
+			->_prop(self::P__TREE, Df_Parser_Model_Category_Tree::class)
+			->_prop(self::P__STORE, Df_Core_Model_StoreM::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__STORE = 'store';
 	const P__TREE = 'tree';
 	/**

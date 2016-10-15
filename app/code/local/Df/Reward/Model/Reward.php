@@ -598,7 +598,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	protected $_modelLoadedByCustomer = false;
 
 	/** @used-by Df_Reward_Model_Resource_Reward_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ACTION = 'action';
 	const P__ACTION_ENTITY = 'action_entity';
 	const P__ID = 'reward_id';

@@ -45,8 +45,8 @@ abstract class Df_Dataflow_Model_Importer_Row extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__ROW, Df_Dataflow_Model_Import_Abstract_Row::_C);
+		$this->_prop(self::P__ROW, Df_Dataflow_Model_Import_Abstract_Row::class);
 	}
-	const _C = __CLASS__;
+
 	const P__ROW = 'row';
 }

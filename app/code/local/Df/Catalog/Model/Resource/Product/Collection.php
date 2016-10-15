@@ -601,7 +601,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 * @return Df_Catalog_Model_Resource_Category_Collection
 	 */
 	protected function _init($model, $entityModel = null) {
-		$this->_itemObjectClass = Df_Catalog_Model_Product::_C;
+		$this->_itemObjectClass = Df_Catalog_Model_Product::class;
 		$this->_entity =
 			$this->isEnabledFlat()
 			? Df_Catalog_Model_Resource_Product_Flat::s()
@@ -615,7 +615,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	/** @var array(string => mixed) */
 	private $_rmData = array();
 	/** @used-by Df_Catalog_Model_XmlExport_Catalog::_construct() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $LIMITATION__CATEGORIES = 'df_categories';
 	/**

@@ -55,7 +55,7 @@ abstract class Part extends \Df_Core_Model {
 	/**
 	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Attribute_Real::getВариантыЗначений_SourceTable()
 	 * @used-by Df_Catalog_Model_XmlExport_Product::removeRootCategoryId()
-	 * @return Df_Core_Model_StoreM
+	 * @return \Df_Core_Model_StoreM
 	 */
 	protected function store() {return $this->getDocument()->store();}
 
@@ -65,9 +65,9 @@ abstract class Part extends \Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__DOCUMENT, \Df\Xml\Generator\Document::_C);
+		$this->_prop(self::$P__DOCUMENT, \Df\Xml\Generator\Document::class);
 	}
-	const _C = __CLASS__;
+	
 	/** @var string */
 	protected static $P__DOCUMENT = 'document';
 }

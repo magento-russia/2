@@ -10,5 +10,5 @@ class Df_Banner_Model_Resource_Banner_Collection extends Df_Core_Model_Resource_
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Banner_Model_Banner::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Banner_Model_Banner::class;}
 }

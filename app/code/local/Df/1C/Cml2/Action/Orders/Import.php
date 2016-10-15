@@ -28,7 +28,7 @@ class Df_1C_Cml2_Action_Orders_Import extends Df_1C_Cml2_Action {
 	/** @return Df_1C_Cml2_Import_Data_Collection_Orders */
 	private function getOrders() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_1C_Cml2_Import_Data_Collection_Orders::i(df_xml($this->getXml()));
+			$this->{__METHOD__} = Df_1C_Cml2_Import_Data_Collection_Orders::i(df_xml_parse($this->getXml()));
 		}
 		return $this->{__METHOD__};
 	}

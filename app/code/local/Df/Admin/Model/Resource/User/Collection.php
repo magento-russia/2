@@ -10,5 +10,5 @@ class Df_Admin_Model_Resource_User_Collection extends Mage_Admin_Model_Mysql4_Us
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Admin_Model_User::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Admin_Model_User::class;}
 }

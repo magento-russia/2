@@ -166,7 +166,7 @@ class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 	}
 
 	/** @used-by Df_CustomerBalance_Model_Resource_Balance_History_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const ACTION_UPDATED = 1;
 	const ACTION_CREATED = 2;
 	const ACTION_USED = 3;

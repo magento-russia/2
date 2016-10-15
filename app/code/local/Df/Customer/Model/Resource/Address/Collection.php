@@ -10,6 +10,6 @@ class Df_Customer_Model_Resource_Address_Collection extends Mage_Customer_Model_
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Address::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Address::class;}
+
 }

@@ -19,7 +19,7 @@ class Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_ReferenceListPart_Item::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_ReferenceListPart_Item::class;}
 
 	/**
 	 * 1С:Управление торговлей 10.2 + дополнение от Битрикса:

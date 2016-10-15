@@ -144,7 +144,7 @@ class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {
 	}
 
 	/** @used-by Df_Customer_Model_Resource_Customer_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const GENDER__FEMALE = 'Female';
 	const GENDER__MALE = 'Male';
 	const P__CREATED_IN = 'created_in';

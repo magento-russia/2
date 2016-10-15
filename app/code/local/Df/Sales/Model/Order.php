@@ -144,7 +144,7 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	 * @used-by Df_Payment_Model_Request_Payment::_construct()
 	 * @used-by Df_Sales_Model_Resource_Order_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const P__ADJUSTMENT_NEGATIVE = 'adjustment_negative';
 	const P__ADJUSTMENT_POSITIVE = 'adjustment_positive';
 	const P__APPLIED_RULE_IDS = 'applied_rule_ids';

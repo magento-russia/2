@@ -123,7 +123,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 		return df_session_customer();
 	}
 
-	const _C = __CLASS__;
+
 	const SESSION_CONTAINER_KEY = 'promo_gift_counter';
 	const KEY_RULE_COUNTER = 'counter';
 	const KEY_RULE_QUOTE_ITEMS = 'quote_items';

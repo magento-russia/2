@@ -145,7 +145,7 @@ class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	const PAYMENT_STATE__BILL_CREATED = 50;
 	const PAYMENT_STATE__PROCESSING = 52;
 	const PAYMENT_STATE__PROCESSED = 60;

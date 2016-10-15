@@ -28,5 +28,5 @@ class Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before extends Df
 	 * @used-by Df_Adminhtml_Observer::adminhtml_sales_order_create_process_data_before()
 	 * @used-by Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

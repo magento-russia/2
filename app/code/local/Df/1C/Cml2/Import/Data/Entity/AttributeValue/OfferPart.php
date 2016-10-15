@@ -16,7 +16,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_AttributeValue_OfferPart
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__OFFER, Df_1C_Cml2_Import_Data_Entity_Offer::_C);
+		$this->_prop(self::P__OFFER, Df_1C_Cml2_Import_Data_Entity_Offer::class);
 	}
 	const P__OFFER = 'offer';
 }

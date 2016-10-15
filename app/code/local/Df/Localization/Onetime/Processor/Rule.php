@@ -30,7 +30,7 @@ class Df_Localization_Onetime_Processor_Rule extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__RULE, Df_Localization_Onetime_Dictionary_Rule::_C);
+		$this->_prop(self::$P__RULE, Df_Localization_Onetime_Dictionary_Rule::class);
 	}
 	/** @var string */
 	protected static $P__RULE = 'rule';

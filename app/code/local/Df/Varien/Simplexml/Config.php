@@ -18,6 +18,6 @@ class Df_Varien_Simplexml_Config extends Varien_Simplexml_Config {
 		return $this->{__METHOD__};
 	}
 	/** @var string */
-	protected $_elementClass = \Df\Xml\X::_C;
-	const _C = __CLASS__;
+	protected $_elementClass = \Df\Xml\X::class;
+	
 }

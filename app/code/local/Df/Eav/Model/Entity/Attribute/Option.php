@@ -45,7 +45,7 @@ class Df_Eav_Model_Entity_Attribute_Option extends Mage_Eav_Model_Entity_Attribu
 	protected function _getResource() {return Df_Eav_Model_Resource_Entity_Attribute_Option::s();}
 
 	/** @used-by Df_Eav_Model_Resource_Entity_Attribute_Option_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/** @return Df_Eav_Model_Resource_Entity_Attribute_Option_Collection */
 	public static function c() {return new Df_Eav_Model_Resource_Entity_Attribute_Option_Collection;}
 }

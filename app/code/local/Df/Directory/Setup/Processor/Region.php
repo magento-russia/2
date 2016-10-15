@@ -108,11 +108,11 @@ class Df_Directory_Setup_Processor_Region extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__REGION, Df_Directory_Setup_Entity_Region::_C)
-			->_prop(self::$P__INSTALLER, Df_Core_Model_Resource_Setup::_C)
+			->_prop(self::$P__REGION, Df_Directory_Setup_Entity_Region::class)
+			->_prop(self::$P__INSTALLER, Df_Core_Model_Resource_Setup::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__INSTALLER = 'installer';
 	/** @var string */

@@ -235,12 +235,12 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__STORE, Df_Core_Model_StoreM::_C, false)
+			->_prop(self::P__STORE, Df_Core_Model_StoreM::class, false)
 			->_prop(self::$P__PREFIX, DF_V_STRING, false)
 		;
 		$this->_storeIdDefaultCacheSuffix = '$' . $this->store()->getId();
 	}
-	const _C = __CLASS__;
+
 	const P__STORE = 'store';
 
 	/** @var array(string => array(int => mixed)) */

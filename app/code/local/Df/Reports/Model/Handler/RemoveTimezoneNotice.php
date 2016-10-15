@@ -40,7 +40,7 @@ class Df_Reports_Model_Handler_RemoveTimezoneNotice extends Df_Core_Model_Handle
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class;
 	}
 
 	/** @return Mage_Core_Model_Message_Collection|null */
@@ -61,5 +61,5 @@ class Df_Reports_Model_Handler_RemoveTimezoneNotice extends Df_Core_Model_Handle
 	}
 
 	/** @used-by Df_Reports_Observer::controller_action_layout_generate_blocks_after() */
-	const _C = __CLASS__;
+
 }

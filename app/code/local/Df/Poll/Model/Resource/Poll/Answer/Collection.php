@@ -12,6 +12,6 @@ class Df_Poll_Model_Resource_Poll_Answer_Collection extends Mage_Poll_Model_Mysq
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {$this->_itemObjectClass = Df_Poll_Model_Poll_Answer::_C;}
-	const _C = __CLASS__;
+	public function _construct() {$this->_itemObjectClass = Df_Poll_Model_Poll_Answer::class;}
+
 } 

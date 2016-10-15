@@ -297,10 +297,10 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__IMPORTED_ROW, DF_V_ARRAY)
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__IMPORTED_ROW = 'importedRow';
 	const P__PRODUCT = 'product';
 	/**

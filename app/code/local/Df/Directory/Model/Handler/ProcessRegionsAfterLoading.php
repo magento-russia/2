@@ -18,7 +18,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_C;}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::class;}
 
 	/**
 	 * Очищаем коллекцию, но не используем для этого
@@ -110,7 +110,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 		$originalCollection->walk(array($this->getRegions(), 'addItem'));
 	}
 	/** @used-by Df_Directory_Observer::core_collection_abstract_load_after() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by handle()
 	 * @used-by Df_Directory_Config_Source_Region_Kazakhstan::getAsOptionArray()

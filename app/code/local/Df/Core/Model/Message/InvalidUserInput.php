@@ -14,5 +14,5 @@ class Df_Core_Model_Message_InvalidUserInput extends Mage_Core_Model_Message_Err
 	/** @var Zend_Form_Element */
 	private $_element;
 
-	const _C = __CLASS__;
+
 }

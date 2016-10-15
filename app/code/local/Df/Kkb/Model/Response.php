@@ -92,5 +92,5 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 }

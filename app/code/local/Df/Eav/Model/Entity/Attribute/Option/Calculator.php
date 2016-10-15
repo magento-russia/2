@@ -229,7 +229,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			->_prop(self::P__OPTIONS_VALUES_NEW, DF_V_ARRAY)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__ATTRIBUTE = 'attribute';
 	const P__MODE__CASE_INSENSITIVE = 'mode__case_insensitive';
 	const P__MODE__INSERT = 'mode__insert';

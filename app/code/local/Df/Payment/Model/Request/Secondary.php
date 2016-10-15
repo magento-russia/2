@@ -95,7 +95,7 @@ abstract class Df_Payment_Model_Request_Secondary extends Df_Payment_Model_Reque
 		$this->_prop(self::$P__PAYMENT, 'Mage_Sales_Model_Order_Payment');
 	}
 	/** @used-by Df_Kkb_Model_RequestDocument_Secondary::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by _construct()
 	 * @used-by getPayment()

@@ -16,5 +16,5 @@ class Df_Directory_Config_Source_Region_Kazakhstan extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 }

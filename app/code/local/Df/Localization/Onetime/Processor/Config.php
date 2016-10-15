@@ -55,7 +55,7 @@ class Df_Localization_Onetime_Processor_Config extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTRY, Df_Localization_Onetime_Dictionary_Config_Entry::_C);
+		$this->_prop(self::$P__ENTRY, Df_Localization_Onetime_Dictionary_Config_Entry::class);
 	}
 	/** @var string */
 	protected static $P__ENTRY = 'entry';

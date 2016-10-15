@@ -49,5 +49,5 @@ class Df_1C_Cml2_Import_Data_Entity_RequisiteValue extends Df_1C_Cml2_Import_Dat
 	public function getValue() {return $this->leaf('Значение');}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_RequisiteValues::itemClass() */
-	const _C = __CLASS__;
+
 }

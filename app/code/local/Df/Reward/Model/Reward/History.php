@@ -194,7 +194,7 @@ class Df_Reward_Model_Reward_History extends Df_Core_Model {
 	protected $_reward = null;
 
 	/** @used-by Df_Reward_Model_Resource_Reward_History_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'history_id';
 	/** @return Df_Reward_Model_Resource_Reward_History_Collection */
 	public static function c() {return new Df_Reward_Model_Resource_Reward_History_Collection;}

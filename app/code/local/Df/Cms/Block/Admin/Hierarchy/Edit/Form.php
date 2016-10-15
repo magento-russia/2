@@ -689,5 +689,5 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	 */
 	protected $_currentStore = null;
 
-	const _C = __CLASS__;
+
 }

@@ -16,7 +16,7 @@ class Df_Catalog_Model_Product_Option_Title extends Df_Core_Model {
 	 * @used-by Df_Catalog_Model_Resource_Product_Option_Title_Collection::_construct()
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Product_Option::getEntityClass()
 	 */
-	const _C = __CLASS__;
+
 	const P__ID = 'option_title_id';
 	const P__TITLE = 'title';
 

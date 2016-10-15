@@ -224,8 +224,8 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward_History::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward_History::class;}
 	/** @var array */
 	protected $_expiryConfig = array();
-	const _C = __CLASS__;
+
 }

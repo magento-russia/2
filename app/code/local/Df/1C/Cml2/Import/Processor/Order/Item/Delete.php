@@ -8,5 +8,5 @@ class Df_1C_Cml2_Import_Processor_Order_Item_Delete
 	 */
 	public function process() {}
 
-	const _C = __CLASS__;
+
 }

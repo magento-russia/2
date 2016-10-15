@@ -54,8 +54,8 @@ class Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DOCUMENT, Df_1C_Cml2_Export_Document_Catalog::_C)
-			->_prop(self::$P__GROUP, Df_Customer_Model_Group::_C)
+			->_prop(self::$P__DOCUMENT, Df_1C_Cml2_Export_Document_Catalog::class)
+			->_prop(self::$P__GROUP, Df_Customer_Model_Group::class)
 		;
 	}
 	/** @var string */

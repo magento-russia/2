@@ -56,7 +56,7 @@ class Df_Pd4_Model_Config_Area_Admin extends Df_Payment_Config_Area_Admin {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 	const KEY__VAR__PAYMENT_PURPOSE_TEMPLATE = 'payment_purpose_template';
 	const KEY__VAR__RECIPIENT_BANK_ACCOUNT_NUMBER = 'recipient_bank_account_number';
 	const KEY__VAR__RECIPIENT_BANK_ID = 'recipient_bank_id';

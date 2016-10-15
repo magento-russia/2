@@ -55,6 +55,6 @@ class Df_PromoGift_Model_Resource_Gift_Collection extends Df_Core_Model_Resource
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_PromoGift_Model_Gift::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_PromoGift_Model_Gift::class;}
+
 }

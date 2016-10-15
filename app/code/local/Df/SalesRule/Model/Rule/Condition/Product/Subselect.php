@@ -20,6 +20,6 @@ class Df_SalesRule_Model_Rule_Condition_Product_Subselect extends Mage_SalesRule
 		}
 		return $this;
 	}
-	const _C = __CLASS__;
+
 	const DF_FIELD_VALUE_OPTION = 'value_option';
 }

@@ -32,8 +32,8 @@ class Df_Sales_Observer {
 	public function rm_adminhtml_block_sales_order_grid__prepare_collection(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::_C
-				,Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection::_C
+				Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::class
+				,Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection::class
 				,$o
 			);
 		}
@@ -50,8 +50,8 @@ class Df_Sales_Observer {
 	public function rm_adminhtml_block_sales_order_grid__prepare_columns_after(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn::_C
-				,Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter::_C
+				Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn::class
+				,Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareColumnsAfter::class
 				,$o
 			);
 		}
@@ -68,8 +68,8 @@ class Df_Sales_Observer {
 	public function sales_order_grid_collection_load_before(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::_C
-				,Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_C
+				Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::class
+				,Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::class
 				,$o
 			);
 		}
@@ -86,8 +86,8 @@ class Df_Sales_Observer {
 	public function sales_order_status_history_save_before(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam::_C
-				,Df_Sales_Model_Event_OrderStatusHistory_SaveBefore::_C
+				Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam::class
+				,Df_Sales_Model_Event_OrderStatusHistory_SaveBefore::class
 				,$o
 			);
 		}

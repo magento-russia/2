@@ -38,7 +38,7 @@ class Df_Chronopay_Model_Gate_Response extends \Df\Xml\Parser\Entity {
 	/** @return int */
 	public function getTransactionId() {return $this->descendI('Transaction');}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param string $xml

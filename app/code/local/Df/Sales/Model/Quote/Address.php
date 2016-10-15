@@ -85,7 +85,7 @@ class Df_Sales_Model_Quote_Address extends Mage_Sales_Model_Quote_Address {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	const P__STREET = 'street';
 	/**
 	 * @static

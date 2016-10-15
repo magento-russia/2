@@ -70,5 +70,5 @@ abstract class Df_Admin_Block_Field_Custom extends Df_Adminhtml_Block_Config_For
 	/** @var Df_Admin_Config_Form_FieldInstance  */
 	private $_instance;
 	/** @used-by Df_Admin_Config_Form_FieldInstance::_construct() */
-	const _C = __CLASS__;
+
 }

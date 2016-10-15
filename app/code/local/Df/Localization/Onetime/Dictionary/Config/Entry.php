@@ -52,7 +52,7 @@ class Df_Localization_Onetime_Dictionary_Config_Entry extends \Df\Xml\Parser\Ent
 	 * @used-by Df_Localization_Onetime_Dictionary_Config_Entries::itemClass()
 	 * @used-by Df_Localization_Onetime_Processor_Config::_construct()
 	 */
-	const _C = __CLASS__;
+
 }
 
 

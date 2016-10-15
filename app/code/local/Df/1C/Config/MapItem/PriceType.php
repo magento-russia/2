@@ -39,7 +39,7 @@ class Df_1C_Config_MapItem_PriceType extends Df_Admin_Config_MapItem {
 		;
 	}
 	/** @used-by Df_1C_Config_Api_Product_Prices::_getMap() */
-	const _C = __CLASS__;
+
 
 	/** @used-by Df_1C_Config_Api_Product_Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
 	const P__CUSTOMER_GROUP = 'customer_group';

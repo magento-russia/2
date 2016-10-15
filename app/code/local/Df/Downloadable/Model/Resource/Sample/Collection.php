@@ -11,6 +11,6 @@ class Df_Downloadable_Model_Resource_Sample_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Downloadable_Model_Sample::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Downloadable_Model_Sample::class;}
+
 }

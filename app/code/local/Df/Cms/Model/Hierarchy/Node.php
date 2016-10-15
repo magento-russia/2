@@ -533,7 +533,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 	 * @used-by Df_Cms_Model_ContentsMenu_Applicator::_construct()
 	 * @used-by Df_Cms_Model_Resource_Hierarchy_Node_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const META_NODE_TYPE_CHAPTER = 'chapter';
 	const META_NODE_TYPE_SECTION = 'section';
 	const META_NODE_TYPE_FIRST = 'start';

@@ -11,7 +11,7 @@ class Df_Admin_Config_DynamicTable_Column_Select
 	 * @override
 	 * @return string
 	 */
-	protected function getRendererClass() {return Df_Admin_Block_Column_Select::_C;}
+	protected function getRendererClass() {return Df_Admin_Block_Column_Select::class;}
 
 	/**
 	 * @override
@@ -24,7 +24,7 @@ class Df_Admin_Config_DynamicTable_Column_Select
 	/** @var string */
 	private static $P__OPTIONS = 'options';
 	/** @used-by Df_Admin_Block_Column_Select::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * @param string $name
 	 * @param string $label

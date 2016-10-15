@@ -167,7 +167,7 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	protected $_difference = null;
 
 	/** @used-by Df_Logging_Model_Resource_Event_Changes_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'id';
 	const XML_PATH_SKIP_GLOBAL_FIELDS = 'adminhtml/df/logging/skip_fields';
 

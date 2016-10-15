@@ -90,7 +90,7 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Catalog_Model_Resource_Eav_Attribute::_C;}
+	protected function getEntityClass() {return Df_Catalog_Model_Resource_Eav_Attribute::class;}
 
 	/**
 	 * @override

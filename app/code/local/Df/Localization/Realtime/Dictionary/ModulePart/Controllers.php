@@ -5,7 +5,7 @@ class Df_Localization_Realtime_Dictionary_ModulePart_Controllers extends \Df\Xml
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Realtime_Dictionary_ModulePart_Controller::_C;}
+	protected function itemClass() {return Df_Localization_Realtime_Dictionary_ModulePart_Controller::class;}
 
 	/**
 	 * @override

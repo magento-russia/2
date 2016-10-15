@@ -104,5 +104,5 @@ class Df_1C_Cml2_Import_Data_Entity_ProductPart_Image extends Df_1C_Cml2_Import_
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_Images::itemClass() */
-	const _C = __CLASS__;
+
 }

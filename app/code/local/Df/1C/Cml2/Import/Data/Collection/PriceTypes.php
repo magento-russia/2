@@ -63,7 +63,7 @@ class Df_1C_Cml2_Import_Data_Collection_PriceTypes
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_PriceType::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_PriceType::class;}
 
 	/**
 	 * @override

@@ -61,5 +61,5 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_Price extends Df_1C_Cml2_Import_Da
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_OfferPart_Prices::itemClass() */
-	const _C = __CLASS__;
+
 }

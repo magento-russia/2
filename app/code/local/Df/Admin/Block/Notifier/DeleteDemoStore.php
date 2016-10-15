@@ -25,7 +25,7 @@ class Df_Admin_Block_Notifier_DeleteDemoStore extends Df_Core_Block_Admin {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C);
+		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::class);
 	}
 	/** @var string */
 	private static $P__STORE = 'store';

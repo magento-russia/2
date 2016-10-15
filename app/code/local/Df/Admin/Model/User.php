@@ -22,7 +22,7 @@ class Df_Admin_Model_User extends Mage_Admin_Model_User {
 	protected function _getResource() {return Df_Admin_Model_Resource_User::s();}
 
 	/** @used-by Df_Admin_Model_Resource_User_Collection::_construct() */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @used-by Df_Cms_Helper_Data::getUsersArray()

@@ -17,5 +17,5 @@ class Df_Cms_Model_MenuSource extends Df_Page_Model_MenuSource {
 		;
 	}
 
-	const _C = __CLASS__;
+
 }

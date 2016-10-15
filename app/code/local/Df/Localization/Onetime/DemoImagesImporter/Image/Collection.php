@@ -7,7 +7,7 @@ class Df_Localization_Onetime_DemoImagesImporter_Image_Collection
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Onetime_DemoImagesImporter_Image::_C;}
+	protected function itemClass() {return Df_Localization_Onetime_DemoImagesImporter_Image::class;}
 
 	/**
 	 * @override

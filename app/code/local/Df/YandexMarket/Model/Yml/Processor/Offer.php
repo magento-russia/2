@@ -274,5 +274,5 @@ class Df_YandexMarket_Model_Yml_Processor_Offer extends Df_Catalog_Model_XmlExpo
 	}
 
 	/** @used-by Df_YandexMarket_Model_Yml_Document::getProcessorClass_products() */
-	const _C = __CLASS__;
+	
 }

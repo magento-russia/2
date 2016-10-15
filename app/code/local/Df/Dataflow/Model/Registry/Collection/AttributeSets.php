@@ -16,7 +16,7 @@ class Df_Dataflow_Model_Registry_Collection_AttributeSets extends Df_Dataflow_Mo
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Eav_Model_Entity_Attribute_Set::_C;}
+	protected function getEntityClass() {return Df_Eav_Model_Entity_Attribute_Set::class;}
 
 	/**
 	 * @override

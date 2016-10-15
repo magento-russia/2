@@ -27,11 +27,11 @@ abstract class Df_Sms_Model_Gate extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__MESSAGE, Df_Sms_Model_Message::_C)
-			->_prop(self::P__STORE, Df_Core_Model_StoreM::_C)
+			->_prop(self::P__MESSAGE, Df_Sms_Model_Message::class)
+			->_prop(self::P__STORE, Df_Core_Model_StoreM::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__MESSAGE = 'message';
 	const P__STORE = 'store';
 }

@@ -437,7 +437,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Directory_Model_Country::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Directory_Model_Country::class;}
 
 	/**
 	 * @used-by rm_countries()

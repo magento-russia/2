@@ -144,7 +144,7 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Rating::getEntityClass()
 	 * @used-by Df_Rating_Model_Resource_Rating_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const P__CUSTOMER_ID = 'customer_id';
 	const P__ENTITY_ID = 'entity_id';
 	const P__POSITION = 'position';

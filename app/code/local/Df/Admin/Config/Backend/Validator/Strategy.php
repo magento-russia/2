@@ -22,8 +22,8 @@ abstract class Df_Admin_Config_Backend_Validator_Strategy extends Df_Core_Model 
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__BACKEND, Df_Admin_Config_Backend::_C)
-			->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C)
+			->_prop(self::$P__BACKEND, Df_Admin_Config_Backend::class)
+			->_prop(self::$P__STORE, Df_Core_Model_StoreM::class)
 		;
 	}
 	/** @var string */

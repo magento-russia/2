@@ -11,5 +11,5 @@ class Df_Sales_Block_Admin_Grid_OrderItemsWrapper
 	}
 
 	/** @used-by Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn::registerProductColumnRenderer() */
-	const _C = __CLASS__;
+
 }

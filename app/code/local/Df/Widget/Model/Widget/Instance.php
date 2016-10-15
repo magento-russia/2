@@ -59,7 +59,7 @@ class Df_Widget_Model_Widget_Instance extends Mage_Widget_Model_Widget_Instance 
 	 * @used-by Df_Localization_Onetime_Processor_Cms_Widget::_construct()
 	 * @used-by Df_Widget_Model_Resource_Widget_Instance_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+	
 	/** @var bool */
 	private static $P__NEED_SAVE_RELATIONS = 'need_save_relations';
 	/**

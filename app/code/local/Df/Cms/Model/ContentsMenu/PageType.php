@@ -7,5 +7,5 @@ class Df_Cms_Model_ContentsMenu_PageType extends Df_Core_Model {
 	const CMS_OWN = 'cms_own';
 	const FRONT = 'front';
 	const OTHER = 'other';
-	const _C = __CLASS__;
+
 }

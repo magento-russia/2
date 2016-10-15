@@ -39,5 +39,5 @@ class Df_Tweaks_Model_Handler_AdjustCartMini extends Df_Tweaks_Model_Handler_Rem
 	}
 
 	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
-	const _C = __CLASS__;
+
 }

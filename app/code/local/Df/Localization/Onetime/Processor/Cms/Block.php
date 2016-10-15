@@ -13,6 +13,6 @@ class Df_Localization_Onetime_Processor_Cms_Block
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_Cms_Model_Block::_C);
+		$this->_prop(self::$P__ENTITY, Df_Cms_Model_Block::class);
 	}
 }

@@ -79,7 +79,7 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	private function getRequestBodyAsSimpleXmlElement() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_xml(
+				df_xml_parse(
 					"<?xml version='1.0' encoding='utf-8'?>"
 					."<request></request>"
 				)
@@ -93,7 +93,7 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	private function getToken() {return df_cfg()->sms()->sms16ru()->getToken($this->store());}
 
 	/** @used-by Df_Sms_Model_Settings_General::getGateClass() */
-	const _C = __CLASS__;
+
 	const RM__ID = 'sms16.ru';
 	/**
 	 * @static

@@ -21,7 +21,7 @@ class Df_1C_Cml2_Import_Data_Collection_ProductPart_Images
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_ProductPart_Image::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_ProductPart_Image::class;}
 
 	/**
 	 * @override

@@ -17,7 +17,7 @@ class Df_Core_Model_Store_Group extends Mage_Core_Model_Store_Group {
 	protected function _getResource() {return Df_Core_Model_Resource_Store_Group::s();}
 
 	/** @used-by Df_Core_Model_Resource_Store_Group_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param bool $loadDefault [optional]

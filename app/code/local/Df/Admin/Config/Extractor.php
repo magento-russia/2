@@ -57,7 +57,7 @@ abstract class Df_Admin_Config_Extractor extends Df_Core_Model {
 		$this
 			->_prop(self::$P__KEY_PREFIX, DF_V_STRING)
 			->_prop(self::$P__GROUP_PATH, DF_V_STRING_NE)
-			->_prop(self::$P__STORE,	Df_Core_Model_StoreM::_C, false)
+			->_prop(self::$P__STORE,	Df_Core_Model_StoreM::class, false)
 		;
 	}
 	/** @var string */

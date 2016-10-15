@@ -45,7 +45,7 @@ class Df_Core_Format_Date extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__DATE, 'Zend_Date');
 	}
-	const _C = __CLASS__;
+
 	const FORMAT__RUSSIAN = 'dd.MM.yyyy';
 	const P__DATE = 'date';
 	/**

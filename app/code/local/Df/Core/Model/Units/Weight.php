@@ -48,7 +48,7 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	const UNIT__LABEL = 'label';
 	const UNIT__RATIO = 'ratio';
 	const VALUE__GRAM = 'gram';

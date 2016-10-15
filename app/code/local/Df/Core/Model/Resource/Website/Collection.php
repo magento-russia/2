@@ -12,7 +12,7 @@ class Df_Core_Model_Resource_Website_Collection extends Mage_Core_Model_Mysql4_W
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_Core_Model_Website::_C;
+		$this->_itemObjectClass = Df_Core_Model_Website::class;
 	}
-	const _C = __CLASS__;
+
 }

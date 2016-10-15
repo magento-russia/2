@@ -35,5 +35,5 @@ class Df_Directory_Model_Currency_Import_Belarus extends Df_Directory_Model_Curr
 	 * @return string
 	 */
 	protected function getUrl() {return 'http://www.nbrb.by/Services/XmlExRates.aspx';}
-	const _C = __CLASS__;
+
 }

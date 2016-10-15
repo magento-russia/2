@@ -117,7 +117,7 @@ function df_each($collection, $method, ...$params) {
 
 /**
  * 2015-02-18
- * По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
+ * По смыслу функция @see df_extend() аналогична методу @see \Varien_Simplexml_Element::extend()
  * и предназначена для слияния настроечных опций,
  * только, в отличие от @see Varien_Simplexml_Element::extend(),
  * @see df_extend() сливает не XML, а ассоциативные массивы.

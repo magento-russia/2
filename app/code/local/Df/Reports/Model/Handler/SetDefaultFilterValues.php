@@ -18,7 +18,7 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C;}
+	protected function getEventClass() {return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::class;}
 
 	/** @return Mage_Adminhtml_Block_Report_Filter_Form */
 	private function getBlockAsReportFilterForm() {return $this->getEvent()->getBlock();}
@@ -109,7 +109,7 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 	}
 
 	/** @used-by Df_Reports_Observer::adminhtml_block_html_before() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $FORM_ELEMENT__TO = 'to';
 }

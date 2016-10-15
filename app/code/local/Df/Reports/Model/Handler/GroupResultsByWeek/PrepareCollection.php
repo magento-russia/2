@@ -26,7 +26,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_C;}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::class;}
 
 	/** @return Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection */
 	private function adjustColumns() {
@@ -97,5 +97,5 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	}
 
 	/** @used-by Df_Reports_Observer::core_collection_abstract_load_before() */
-	const _C = __CLASS__;
+
 }

@@ -80,7 +80,7 @@ class Df_Cms_Model_Resource_Page_Version_Collection
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_Cms_Model_Page_Version::_C;
+		$this->_itemObjectClass = Df_Cms_Model_Page_Version::class;
 	}
-	const _C = __CLASS__;
+
 }

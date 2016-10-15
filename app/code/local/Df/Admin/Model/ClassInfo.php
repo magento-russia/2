@@ -77,7 +77,7 @@ class Df_Admin_Model_ClassInfo extends Df_Core_Model {
 	 * @used-by Df_Admin_Model_ClassRewrite::_construct()
 	 * @used-by Df_Admin_Model_ClassInfo_Collection::itemClass()
 	 */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__CONFIG_FILE_PATH = 'config_file_path';
 	/** @var string */

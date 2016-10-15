@@ -20,13 +20,13 @@ abstract class Df_Seo_Model_Template_Property extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__ADAPTER, Df_Seo_Model_Template_Adapter::_C)
+			->_prop(self::P__ADAPTER, Df_Seo_Model_Template_Adapter::class)
 			->_prop(self::P__NAME, DF_V_STRING_NE)
 		;
 	}
 
 	const P__ADAPTER = 'adapter';
 	const P__NAME = 'name';
-	const _C = __CLASS__;
+
 
 }

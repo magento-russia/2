@@ -454,8 +454,8 @@ class Df_Cms_Observer {
 		try {
 			if (df_cfg()->cms()->hierarchy()->isEnabled()) {
 				df_handle_event(
-					Df_Cms_Model_Handler_ContentsMenu_Insert::_C
-					,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C
+					Df_Cms_Model_Handler_ContentsMenu_Insert::class
+					,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class
 					,$o
 				);
 			}

@@ -21,7 +21,7 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter::_C;}
+	protected function getEventClass() {return Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter::class;}
 
 
 	/** @return Df_Core_Model_Email_Template_Mailer */
@@ -73,5 +73,5 @@ class Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer extends Df_Co
 	private function store() {return $this->getEvent()->getOrder()->getStore();}
 
 	/** @used-by Df_Checkout_Observer::checkout_type_onepage_save_order_after() */
-	const _C = __CLASS__;
+
 }

@@ -103,7 +103,7 @@ class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 			->_prop(self::P__ATTRIBUTE, 'Mage_Customer_Model_Attribute')
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__ADDRESS = 'address';
 	const P__ATTRIBUTE = 'attribute';
 	/**

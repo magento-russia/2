@@ -20,7 +20,7 @@ class Df_Core_Model_Website extends Mage_Core_Model_Website {
 	 * @used-by Df_Core_Model_Resource_Website_Collection::_construct()
 	 * @used-by Df_PromoGift_Model_Gift::getWebsite()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param bool $loadDefault [optional]

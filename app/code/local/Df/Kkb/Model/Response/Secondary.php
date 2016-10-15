@@ -51,7 +51,7 @@ class Df_Kkb_Model_Response_Secondary extends Df_Kkb_Model_Response {
 	/** @return string */
 	private function getMessage() {return $this->getElementResponse()->getAttribute('message');}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param string $xml [optional]

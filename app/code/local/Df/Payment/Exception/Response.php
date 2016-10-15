@@ -35,5 +35,5 @@ class Df_Payment_Exception_Response extends Df_Payment_Exception {
 	private $_response;
 
 	/** @used-by Df_Payment_Model_Response::getExceptionClass() */
-	const _C = __CLASS__;
+
 }

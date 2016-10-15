@@ -94,5 +94,5 @@ class Df_1C_Cml2_Import_Data_Entity_ReferenceListPart_Item
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_ReferenceListPart_Items::itemClass() */
-	const _C = __CLASS__;
+
 }

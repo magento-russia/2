@@ -73,5 +73,5 @@ class Df_SalesRule_Model_Event_Validator_Process extends Df_Core_Model_Event {
 	 * @used-by Df_PromoGift_Observer::salesrule_validator_process()
 	 * @used-by Df_PromoGift_Model_Handler_SalesRule_Validator_Process_Abstract::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

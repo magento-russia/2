@@ -31,7 +31,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	 */
 	protected function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml(
+			$this->{__METHOD__} = df_xml_parse(
 				"<?xml version='1.0' encoding='utf-8'?>"
 				."<ServiceProvider_Response></ServiceProvider_Response>"
 			);
@@ -452,7 +452,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	 */
 	private function getRequestA() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml($this->getRequestAsXml())->asCanonicalArray();
+			$this->{__METHOD__} = df_xml_parse($this->getRequestAsXml())->asCanonicalArray();
 		}
 		return $this->{__METHOD__};
 	}

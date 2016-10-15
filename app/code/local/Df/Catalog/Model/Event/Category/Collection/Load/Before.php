@@ -30,5 +30,5 @@ class Df_Catalog_Model_Event_Category_Collection_Load_Before extends Df_Core_Mod
 	 * @used-by Df_AccessControl_Observer::catalog_category_collection_load_before()
 	 * @used-by Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbiddenCategories::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

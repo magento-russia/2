@@ -42,7 +42,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ATTRIBUTE, Df_Catalog_Model_Resource_Eav_Attribute::_C);
+		$this->_prop(self::$P__ATTRIBUTE, Df_Catalog_Model_Resource_Eav_Attribute::class);
 	}
 	/** @var string */
 	private static $P__ATTRIBUTE = 'attribute';

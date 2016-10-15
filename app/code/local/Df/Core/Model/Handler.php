@@ -44,6 +44,6 @@ abstract class Df_Core_Model_Handler extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__EVENT, $this->getEventClass());
 	}
-	const _C = __CLASS__;
+
 	const P__EVENT = 'event';
 }

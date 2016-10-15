@@ -52,10 +52,9 @@ class Df_PromoGift_Model_Resource_Rule_Collection extends Df_SalesRule_Model_Res
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_PromoGift_Model_Rule::_C;
+		$this->_itemObjectClass = Df_PromoGift_Model_Rule::class;
 	}
 
-	const _C =  __CLASS__;
 	/** @return Df_PromoGift_Model_Resource_Rule_Collection */
 	public static function i() {return new self;}
 }

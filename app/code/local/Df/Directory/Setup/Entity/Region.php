@@ -29,7 +29,7 @@ class Df_Directory_Setup_Entity_Region extends Df_Core_Model {
 	}	
 
 	/** @used-by Df_Directory_Setup_Processor_Region::_construct() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__CAPITAL = 'capital';
 	/** @var string */

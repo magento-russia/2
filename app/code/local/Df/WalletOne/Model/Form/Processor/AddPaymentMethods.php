@@ -31,7 +31,7 @@ class Df_WalletOne_Model_Form_Processor_AddPaymentMethods extends Df_Varien_Data
 			->_prop(self::P__FIELD_VALUES, DF_V_ARRAY)
 		;
 	}
-	const _C = __CLASS__;
+	
 	const P__FIELD_NAME = 'field_name';
 	const P__FIELD_VALUES = 'field_values';
 	/**

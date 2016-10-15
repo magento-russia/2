@@ -5,7 +5,7 @@ class Df_1C_Cml2_Import_Data_Collection_Orders extends Df_1C_Cml2_Import_Data_Co
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Order::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Order::class;}
 
 	/**
 	 * @override

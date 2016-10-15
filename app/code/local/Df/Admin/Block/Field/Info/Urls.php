@@ -39,7 +39,7 @@ class Df_Admin_Block_Field_Info_Urls extends Df_Admin_Block_Field_Custom {
 	 * @override
 	 * @return string
 	 */
-	protected function getInstanceClass() {return Df_Admin_Config_Form_FieldInstance_Info_Urls::_C;}
+	protected function getInstanceClass() {return Df_Admin_Config_Form_FieldInstance_Info_Urls::class;}
 
 	/** @return array(string => string) */
 	protected function getUrls() {return $this->getInstance()->getUrls();}

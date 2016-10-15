@@ -172,7 +172,7 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 	protected $_eventPrefix = 'df_cms_revision';
 
 	/** @used-by Df_Cms_Model_Resource_Page_Revision_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'revision_id';
 
 	/** @return Df_Cms_Model_Resource_Page_Revision_Collection */

@@ -24,7 +24,7 @@ class Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter
 	 * @used-by Df_Checkout_Observer::checkout_type_onepage_save_order_after()
 	 * @used-by Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 	const EVENT_PARAM__QUOTE = 'quote';
 	const EXPECTED_EVENT_PREFIX = 'checkout_type_onepage_save_order_after';
 }

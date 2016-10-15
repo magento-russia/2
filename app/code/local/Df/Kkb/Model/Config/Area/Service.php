@@ -94,5 +94,5 @@ class Df_Kkb_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	}
 
 	/** @used-by Df_Kkb_Model_Signer::_construct */
-	const _C = __CLASS__;
+
 }

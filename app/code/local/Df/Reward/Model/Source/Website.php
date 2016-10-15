@@ -26,7 +26,7 @@ class Df_Reward_Model_Source_Website extends Df_Core_Model {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 
 	/** @return Df_Reward_Model_Source_Website */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

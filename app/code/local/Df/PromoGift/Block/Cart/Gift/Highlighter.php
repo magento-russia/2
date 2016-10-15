@@ -7,5 +7,5 @@ class Df_PromoGift_Block_Cart_Gift_Highlighter extends Df_Core_Block_Template_No
 		}
 		return $this->{__METHOD__};
 	}
-	const _C = __CLASS__;
+
 }

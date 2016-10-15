@@ -251,7 +251,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

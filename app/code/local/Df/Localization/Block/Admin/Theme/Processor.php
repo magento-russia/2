@@ -77,9 +77,9 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__PROCESSOR, Df_Localization_Onetime_Processor::_C);
+		$this->_prop(self::P__PROCESSOR, Df_Localization_Onetime_Processor::class);
 	}
-	const _C = __CLASS__;
+
 	const P__PROCESSOR = 'processor';
 
 	/**

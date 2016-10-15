@@ -9,5 +9,5 @@ class Df_1C_Cml2_Import_Processor_Order_Item_Update
 	public function process() {}
 
 	/** @used-by Df_1C_Cml2_Import_Processor_Order::orderItemsUpdate() */
-	const _C = __CLASS__;
+
 }

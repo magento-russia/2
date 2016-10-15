@@ -178,10 +178,10 @@ class Df_Admin_Model_ClassRewrite extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ORIGIN, Df_Admin_Model_ClassInfo::_C);
+		$this->_prop(self::$P__ORIGIN, Df_Admin_Model_ClassInfo::class);
 	}
 	/** @used-by Df_Admin_Model_ClassRewrite_Collection::itemClass() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__ORIGIN = 'origin';
 

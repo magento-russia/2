@@ -36,5 +36,5 @@ class Df_AccessControl_Model_Event_Permissions_Role_Saverole
 	 * @used-by Df_AccessControl_Observer::controller_action_postdispatch_adminhtml_permissions_role_saverole()
 	 * @used-by Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAccessRights::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

@@ -26,5 +26,5 @@ class Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore extends Df_Core_Mo
 	 * @used-by Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection::getEventClass()
 	 * @used-by Df_Sales_Observer::sales_order_grid_collection_load_before()
 	 */
-	const _C = __CLASS__;
+
 }

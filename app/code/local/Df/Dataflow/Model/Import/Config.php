@@ -39,7 +39,7 @@ class Df_Dataflow_Model_Import_Config extends Df_Core_Model {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

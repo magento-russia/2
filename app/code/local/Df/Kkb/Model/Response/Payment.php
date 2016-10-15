@@ -235,7 +235,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param string $xml [optional]

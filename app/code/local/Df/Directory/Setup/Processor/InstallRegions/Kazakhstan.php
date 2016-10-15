@@ -40,7 +40,7 @@ class Df_Directory_Setup_Processor_InstallRegions_Kazakhstan
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param Df_Core_Model_Resource_Setup $setup

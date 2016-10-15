@@ -130,7 +130,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	 * @used-by Df_Directory_Model_Resource_Country_Collection::_construct()
 	 * @used-by Df_RussianPost_Model_Official_Request_International::_construct()
 	 */
-	const _C = __CLASS__;
+
 
 	/** @return Df_Directory_Model_Resource_Country_Collection */
 	public static function c() {return new Df_Directory_Model_Resource_Country_Collection;}

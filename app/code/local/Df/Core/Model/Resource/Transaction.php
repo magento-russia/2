@@ -6,7 +6,7 @@
  * (ни от Mage_Core_Model_Abstract, ни от Varien_Object).
  */
 class Df_Core_Model_Resource_Transaction extends Mage_Core_Model_Resource_Transaction {
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by Df_Chronopay_StandardController::saveInvoice()
 	 * @used-by Df_Payment_Model_Action_Abstract::saveInvoice()

@@ -117,13 +117,13 @@ class Df_Localization_Onetime_Dictionary_Db_Column extends \Df\Xml\Parser\Entity
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__TABLE, Df_Localization_Onetime_Dictionary_Db_Table::_C);
+		$this->_prop(self::P__TABLE, Df_Localization_Onetime_Dictionary_Db_Table::class);
 	}
 	/**
 	 * @used-by Df_Localization_Onetime_Dictionary_Db_Columns::itemClass()
 	 * @used-by Df_Localization_Onetime_Processor_Db_Column::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/** @used-by Df_Localization_Model_Onetime_Dictionary_Db_Columns::itemParams() */
 	const P__TABLE = 'table';
 

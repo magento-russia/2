@@ -118,7 +118,7 @@ class Df_1C_Cml2_Import_Data_Document_Offers extends Df_1C_Cml2_Import_Data_Docu
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Document::create() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by storeInSession()
 	 * @used-by Df_1C_Cml2_State_Import::getFileOffersBase()

@@ -22,5 +22,5 @@ class Df_Psbank_Model_Action_Confirm_Void extends Df_Psbank_Model_Action_Confirm
 	protected function needInvoice() {return false;}
 
 	/** @used-by Df_Psbank_ConfirmController::getActionMap() */
-	const _C = __CLASS__;
+
 }

@@ -64,7 +64,7 @@ class Df_Localization_Morpher extends Df_Core_Model {
 		return $this->{__METHOD__}[$word];
 	}
 
-	const _C = __CLASS__;
+
 
 	/** @return Df_Localization_Morpher */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions_Product
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Catalog_Model_Product::_C;}
+	protected function getEntityClass() {return Df_Catalog_Model_Product::class;}
 
 	/**
 	 * @override

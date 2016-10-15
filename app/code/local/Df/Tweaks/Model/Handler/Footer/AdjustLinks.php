@@ -44,7 +44,7 @@ class Df_Tweaks_Model_Handler_Footer_AdjustLinks extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class;
 	}
 
 	/** @return Df_Page_Block_Template_Links|null */
@@ -62,5 +62,5 @@ class Df_Tweaks_Model_Handler_Footer_AdjustLinks extends Df_Core_Model_Handler {
 	}
 
 	/** @used-by Df_Tweaks_Observer::controller_action_layout_generate_blocks_after() */
-	const _C = __CLASS__;
+
 }

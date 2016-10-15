@@ -22,7 +22,7 @@ class Df_Psbank_Model_Action_Confirm_Capture extends Df_Psbank_Model_Action_Conf
 	protected function needInvoice() {return false;}
 
 	/** @used-by Df_Psbank_ConfirmController::getActionMap() */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @param Df_Psbank_ConfirmController $c

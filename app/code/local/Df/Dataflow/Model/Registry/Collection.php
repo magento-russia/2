@@ -315,10 +315,10 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C, false);
+		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::class, false);
 	}
 
-	const _C = __CLASS__;
+
 	/** @var string */
 	protected static $P__STORE = 'store';
 }

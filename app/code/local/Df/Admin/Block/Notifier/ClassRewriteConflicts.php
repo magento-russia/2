@@ -17,7 +17,7 @@ class Df_Admin_Block_Notifier_ClassRewriteConflicts extends Df_Core_Block_Admin 
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__CONFLICTS, Df_Admin_Model_ClassRewrite_Collection::_C);
+		$this->_prop(self::$P__CONFLICTS, Df_Admin_Model_ClassRewrite_Collection::class);
 	}
 	/** @var string */
 	private static $P__CONFLICTS = 'conflicts';

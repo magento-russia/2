@@ -52,7 +52,7 @@ class Df_1C_Cml2_FileSystem {
 					 * Если не удалить «xmlns="urn:1C.ru:commerceml_2»,
 					 * то прежний код для @see SimpleXMLElement::xpath() перстаёт работать.
 					 */
-					df_xml(str_replace('xmlns="urn:1C.ru:commerceml_2"', '', $contents))
+					df_xml_parse(str_replace('xmlns="urn:1C.ru:commerceml_2"', '', $contents))
 					, $relativePath
 				)
 			;

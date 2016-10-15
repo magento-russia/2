@@ -36,7 +36,7 @@ class Df_Customer_Model_Group extends Mage_Customer_Model_Group {
 	 * @used-by Df_Customer_Model_Resource_Group_Collection::_construct()
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_CustomerGroup::getEntityClass()
 	 */
-	const _C = __CLASS__;
+
 	const ID__GENERAL = 1;
 
 	/** @return Df_Customer_Model_Resource_Group_Collection */

@@ -79,7 +79,7 @@ class Df_Seo_Model_Template_Processor extends Df_Core_Model {
 		;
 	}
 	/** @used-by Df_Seo_Model_Template_Expression::_construct() */
-	const _C = __CLASS__;
+
 	const P__OBJECTS = 'objects';
 	const P__TEXT = 'text';
 	/**

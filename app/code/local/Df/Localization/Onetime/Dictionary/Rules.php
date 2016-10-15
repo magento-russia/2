@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Rules extends \Df\Xml\Parser\Collection
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Rule::_C;}
+	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Rule::class;}
 
 	/**
 	 * @override

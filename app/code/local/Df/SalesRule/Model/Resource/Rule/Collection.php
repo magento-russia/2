@@ -12,8 +12,8 @@ class Df_SalesRule_Model_Resource_Rule_Collection extends Mage_SalesRule_Model_M
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_SalesRule_Model_Rule::_C;
+		$this->_itemObjectClass = Df_SalesRule_Model_Rule::class;
 	}
 
-	const _C = __CLASS__;
+
 }

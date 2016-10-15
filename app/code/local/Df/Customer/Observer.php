@@ -65,8 +65,8 @@ class Df_Customer_Observer {
 					rm_checkout_ergonomic()
 			) {
 				df_handle_event(
-					Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability::_C
-					,Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_C
+					Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability::class
+					,Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::class
 					,$o
 				);
 			}

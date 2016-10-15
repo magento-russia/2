@@ -112,5 +112,5 @@ class Df_Core_Model_StoreM extends Mage_Core_Model_Store {
 	 * @used-by Df_Sms_Model_Gate::_construct()
 	 * @used-by Lamoda_Parser_Model_Importer_Product::_construct()
 	 */
-	const _C = __CLASS__;
+
 }

@@ -171,7 +171,7 @@ class Df_1C_Cml2_Import_Data_Document_Catalog extends Df_1C_Cml2_Import_Data_Doc
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Document::create() */
-	const _C = __CLASS__;
+
 	/**
 	 * 2015-08-04
 	 * Раньше (модуль 1С-Битрикс 4 / CommerceML 2.08)

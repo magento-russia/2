@@ -23,7 +23,7 @@ class Df_Parser_Model_Category_Tree extends Df_Varien_Data_Tree {
 	}
 
 	/** @used-by Df_Parser_Model_Category_Importer::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

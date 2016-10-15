@@ -43,7 +43,7 @@ class Df_YandexMoney_Model_Request_Capture extends Df_YandexMoney_Model_Request_
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__RESPONSE_AUTHORIZE, Df_YandexMoney_Model_Response_Authorize::_C);
+		$this->_prop(self::P__RESPONSE_AUTHORIZE, Df_YandexMoney_Model_Response_Authorize::class);
 	}
 	const P__RESPONSE_AUTHORIZE = 'response_authorize';
 	/**

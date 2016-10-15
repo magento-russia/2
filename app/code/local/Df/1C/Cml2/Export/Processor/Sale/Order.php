@@ -237,8 +237,8 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ORDER, Df_Sales_Model_Order::_C)
-			->_prop(self::$P__E, \Df\Xml\X::_C)
+			->_prop(self::$P__ORDER, Df_Sales_Model_Order::class)
+			->_prop(self::$P__E, \Df\Xml\X::class)
 		;
 	}
 	/** @var string */

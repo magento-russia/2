@@ -98,8 +98,8 @@ class Df_PromoGift_Observer {
 		try {
 			if (self::enabled()) {
 				df_handle_event(
-					Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQuote::_C
-					,Df_SalesRule_Model_Event_Validator_Process::_C
+					Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQuote::class
+					,Df_SalesRule_Model_Event_Validator_Process::class
 					,$o
 				);
 			}
@@ -118,8 +118,8 @@ class Df_PromoGift_Observer {
 		try {
 			if (self::enabled()) {
 				df_handle_event(
-					Df_PromoGift_Model_Handler_Adminhtml_Block_Actions_PrepareForm_AddInputMaxUsagesPerQuote::_C
-					,Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm::_C
+					Df_PromoGift_Model_Handler_Adminhtml_Block_Actions_PrepareForm_AddInputMaxUsagesPerQuote::class
+					,Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm::class
 					,$o
 				);
 			}

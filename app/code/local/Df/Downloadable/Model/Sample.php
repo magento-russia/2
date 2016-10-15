@@ -27,7 +27,7 @@ class Df_Downloadable_Model_Sample extends Mage_Downloadable_Model_Sample {
 	protected function _getResource() {return Df_Downloadable_Model_Resource_Sample::s();}
 
 	/** @used-by Df_Downloadable_Model_Resource_Sample_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/** @return Df_Downloadable_Model_Resource_Sample_Collection */
 	public static function c() {return new Df_Downloadable_Model_Resource_Sample_Collection;}
 	/**

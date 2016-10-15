@@ -22,7 +22,7 @@ class Df_Sms_Model_Message extends Df_Core_Model {
 		;
 	}
 	/** @used-by Df_Sms_Model_Gate::_construct() */
-	const _C = __CLASS__;
+
 	const P__BODY = 'body';
 	const P__RECEIVER = 'receiver';
 	/**

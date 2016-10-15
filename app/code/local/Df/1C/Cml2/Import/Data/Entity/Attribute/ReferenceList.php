@@ -59,5 +59,5 @@ class Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Attribute::getTypeMap()
 	 * @used-by Df_1C_Cml2_Import_Processor_ReferenceList::_construct()
 	 */
-	const _C = __CLASS__;
+
 }

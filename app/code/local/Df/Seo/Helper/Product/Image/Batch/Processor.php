@@ -18,7 +18,7 @@ class Df_Seo_Helper_Product_Image_Batch_Processor extends Mage_Core_Helper_Abstr
 		return $this;
 	}
 
-	const _C = __CLASS__;
+
 
 	/** @return Df_Seo_Helper_Product_Image_Batch_Processor */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

@@ -10,7 +10,7 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_1C_Cml2_Impo
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_OfferPart_Price::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_OfferPart_Price::class;}
 
 	/**
 	 * @override
@@ -28,7 +28,7 @@ class Df_1C_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_1C_Cml2_Impo
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OFFER, Df_1C_Cml2_Import_Data_Entity_Offer::_C);
+		$this->_prop(self::$P__OFFER, Df_1C_Cml2_Import_Data_Entity_Offer::class);
 	}
 	/** @var string */
 	private static $P__OFFER = 'offer';

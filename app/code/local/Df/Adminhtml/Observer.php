@@ -39,8 +39,8 @@ class Df_Adminhtml_Observer  {
 		try {
 			/** http://magento-forum.ru/topic/2612/ */
 			df_handle_event(
-				Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName::_C
-				,Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before::_C
+				Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName::class
+				,Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before::class
 				,$o
 			);
 		}

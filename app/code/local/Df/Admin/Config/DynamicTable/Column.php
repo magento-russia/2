@@ -72,7 +72,7 @@ abstract class Df_Admin_Config_DynamicTable_Column extends Df_Core_Model {
 		;
 	}
 	/** @used-by Df_Admin_Block_Column::_construct() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	protected static $P__HTML_ATTRIBUTES = 'html_attributes';
 	/** @var string */

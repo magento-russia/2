@@ -47,5 +47,5 @@ abstract class Df_Core_Controller_Admin extends Mage_Adminhtml_Controller_Action
 	}
 
 	/** @used-by Df_Core_Model_Action_Admin::_construct() */
-	const _C = __CLASS__;
+
 }

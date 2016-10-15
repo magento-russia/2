@@ -149,7 +149,7 @@ class Df_Cms_Model_Page_Version extends Df_Core_Model {
 	protected $_eventObject = 'version';
 
 	/** @used-by Df_Cms_Model_Resource_Page_Version_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * Access level constants
 	 */

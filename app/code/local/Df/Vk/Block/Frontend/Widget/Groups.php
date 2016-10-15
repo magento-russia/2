@@ -93,5 +93,5 @@ class Df_Vk_Block_Frontend_Widget_Groups extends Df_Vk_Block_Frontend_Widget {
 		);
 	}
 
-	const _C = __CLASS__;
+	
 }

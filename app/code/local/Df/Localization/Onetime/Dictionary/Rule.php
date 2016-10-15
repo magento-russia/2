@@ -60,5 +60,5 @@ class Df_Localization_Onetime_Dictionary_Rule extends \Df\Xml\Parser\Entity {
 	 * @used-by Df_Localization_Onetime_Dictionary_Rules::itemClass()
 	 * @used-by Df_Localization_Onetime_Processor_Rule::_construct()
 	 */
-	const _C = __CLASS__;
+
 }

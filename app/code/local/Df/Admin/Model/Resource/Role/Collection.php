@@ -10,5 +10,5 @@ class Df_Admin_Model_Resource_Role_Collection extends Mage_Admin_Model_Mysql4_Ro
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Admin_Model_Role::_C;}
+	protected function _construct() {$this->_itemObjectClass = Df_Admin_Model_Role::class;}
 }

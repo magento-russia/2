@@ -10,6 +10,6 @@ class Df_Reward_Model_Resource_Reward_Rate_Collection extends Df_Core_Model_Reso
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward_Rate::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward_Rate::class;}
+
 }

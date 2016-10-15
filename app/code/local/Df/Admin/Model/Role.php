@@ -17,7 +17,7 @@ class Df_Admin_Model_Role extends Mage_Admin_Model_Role {
 	protected function _getResource() {return Df_Admin_Model_Resource_Role::s();}
 
 	/** @used-by Df_Admin_Model_Resource_Role_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by Df_AccessControl_Model_Role::P__ID
 	 * @used-by Df_AccessControl_Model_Setup_1_0_0::process()

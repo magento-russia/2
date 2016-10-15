@@ -28,7 +28,7 @@ class Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection
 	 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_collection()
 	 * @used-by Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 	/** @var string  */
 	private static $E__COLLECTION = 'collection';
 	/** @var string */

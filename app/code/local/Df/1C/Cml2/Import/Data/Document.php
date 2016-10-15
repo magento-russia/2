@@ -75,10 +75,10 @@ abstract class Df_1C_Cml2_Import_Data_Document extends \Df\Xml\Parser\Entity {
 		/** @var string $class */
 		$class =
 			self::_isCatalog($e)
-			? Df_1C_Cml2_Import_Data_Document_Catalog::_C
+			? Df_1C_Cml2_Import_Data_Document_Catalog::class
 			: (
 				self::_isOffers($e)
-				? Df_1C_Cml2_Import_Data_Document_Offers::_C
+				? Df_1C_Cml2_Import_Data_Document_Offers::class
 				: df_error('Неизвестный тип документа.')
 			)
 		;

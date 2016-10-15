@@ -30,5 +30,5 @@ class Df_Seo_Model_Template_Property_Product_Price extends Df_Seo_Model_Template
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 }

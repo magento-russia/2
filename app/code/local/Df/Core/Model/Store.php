@@ -44,7 +44,7 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 	protected function _getResource() {return Df_Core_Model_Resource_Store::s();}
 
 	/** @used-by Df_Core_Model_Resource_Store_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__NAME = 'name';
 	/**
 	 * @static

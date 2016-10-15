@@ -30,7 +30,7 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Catalog_Model_Category::_C;}
+	protected function getEntityClass() {return Df_Catalog_Model_Category::class;}
 
 	/**
 	 * @override

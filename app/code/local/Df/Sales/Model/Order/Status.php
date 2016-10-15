@@ -26,7 +26,7 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	protected function _getResource() {return Df_Sales_Model_Resource_Order_Status::s();}
 
 	/** @used-by Df_Sales_Model_Resource_Order_Status_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__LABEL = 'label';
 
 	/** @return Df_Sales_Model_Resource_Order_Status_Collection */

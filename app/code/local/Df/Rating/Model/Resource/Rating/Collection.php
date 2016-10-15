@@ -13,6 +13,6 @@ class Df_Rating_Model_Resource_Rating_Collection extends Mage_Rating_Model_Mysql
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {$this->_itemObjectClass = Df_Rating_Model_Rating::_C;}
-	const _C = __CLASS__;
+	public function _construct() {$this->_itemObjectClass = Df_Rating_Model_Rating::class;}
+
 }

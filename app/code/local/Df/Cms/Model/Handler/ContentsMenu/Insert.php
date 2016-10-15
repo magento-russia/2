@@ -34,9 +34,9 @@ class Df_Cms_Model_Handler_ContentsMenu_Insert extends Df_Core_Model_Handler {
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C;
+		return Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class;
 	}
 
 	/** @used-by Df_Cms_Observer::controller_action_layout_generate_blocks_after() */
-	const _C = __CLASS__;
+
 }

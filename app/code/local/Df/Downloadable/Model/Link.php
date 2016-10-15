@@ -39,7 +39,7 @@ class Df_Downloadable_Model_Link extends Mage_Downloadable_Model_Link {
 	protected function _getResource() {return Df_Downloadable_Model_Resource_Link::s();}
 
 	/** @used-by Df_Downloadable_Model_Resource_Link_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/** @return Df_Downloadable_Model_Resource_Link_Collection */
 	public static function c() {return new Df_Downloadable_Model_Resource_Link_Collection;}
 	/**

@@ -514,7 +514,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	protected function cacheType() {return '';}
 
 	/** @return Df_Core_Model_Mixin */
-	protected function createMixin() {return Df_Core_Model_Mixin::ic(Df_Core_Model_Mixin::_C, $this);}
+	protected function createMixin() {return Df_Core_Model_Mixin::ic(Df_Core_Model_Mixin::class, $this);}
 
 	/**
 	 * @used-by cacheLoad()
@@ -1080,7 +1080,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		if ($this->isDestructableSingleton()) {
 			rm_destructable_singleton($this);
 		}
-		// Нельзя вызывать здесь $this->_prop(self::P__MIXIN, Df_Core_Model_Mixin::_C, false);
+		// Нельзя вызывать здесь $this->_prop(self::P__MIXIN, Df_Core_Model_Mixin::class, false);
 		// потому что библиотеки Российской сборки ещё не инициализированы
 		// (по какой причине — не разбирался).
 	}

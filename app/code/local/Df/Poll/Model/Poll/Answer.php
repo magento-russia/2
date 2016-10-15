@@ -38,7 +38,7 @@ class Df_Poll_Model_Poll_Answer extends Mage_Poll_Model_Poll_Answer {
 	protected function _getResource() {return Df_Poll_Model_Resource_Poll_Answer::s();}
 
 	/** @used-by Df_Poll_Model_Resource_Poll_Answer_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/** @return Df_Poll_Model_Resource_Poll_Answer_Collection */
 	public static function c() {return new Df_Poll_Model_Resource_Poll_Answer_Collection;}
 	/** @return Df_Poll_Model_Poll_Answer */

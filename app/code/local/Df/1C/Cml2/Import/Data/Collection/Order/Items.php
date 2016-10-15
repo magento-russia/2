@@ -64,7 +64,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Order_Item::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Order_Item::class;}
 
 	/**
 	 * @override
@@ -110,7 +110,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY_ORDER, Df_1C_Cml2_Import_Data_Entity_Order::_C);
+		$this->_prop(self::$P__ENTITY_ORDER, Df_1C_Cml2_Import_Data_Entity_Order::class);
 	}
 	/** @var string */
 	private static $P__ENTITY_ORDER = 'entity_order';

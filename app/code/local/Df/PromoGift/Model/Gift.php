@@ -3,7 +3,7 @@
 class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	/** @return Df_Catalog_Model_Product */
 	public function getProduct() {
-		return $this->getParamAsModel(self::P__PRODUCT, Df_Catalog_Model_Product::_C);
+		return $this->getParamAsModel(self::P__PRODUCT, Df_Catalog_Model_Product::class);
 	}
 
 	/** @return int */
@@ -17,7 +17,7 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 
 	/** @return Mage_SalesRule_Model_Rule|Df_SalesRule_Model_Rule */
 	public function getRule() {
-		return $this->getParamAsModel(self::P__RULE, Df_SalesRule_Model_Rule::_C);
+		return $this->getParamAsModel(self::P__RULE, Df_SalesRule_Model_Rule::class);
 	}
 
 	/** @return int */
@@ -25,7 +25,7 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 
 	/** @return Mage_Core_Model_Website */
 	public function getWebsite() {
-		return $this->getParamAsModel(self::P__WEBSITE, Df_Core_Model_Website::_C);
+		return $this->getParamAsModel(self::P__WEBSITE, Df_Core_Model_Website::class);
 	}
 
 	/** @return int */
@@ -140,14 +140,14 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C, false)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::class, false)
 			->_prop(self::P__RULE, 'Mage_SalesRule_Model_Rule', false)
 			->_prop(self::P__WEBSITE, 'Mage_Core_Model_Website', false)
 		;
 	}
 
 	/** @used-by Df_PromoGift_Model_Resource_Gift_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const ID_SUFFIX = '_id';
 	const P__ID = 'gift_id';
 	const P__PRODUCT = 'product';

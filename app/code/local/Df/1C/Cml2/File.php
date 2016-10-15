@@ -65,7 +65,7 @@ class Df_1C_Cml2_File extends Df_Core_Model {
 	}
 
 	/** @used-by Df_1C_Cml2_File_CatalogComposite::_construct() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__PATH_RELATIVE = 'path_relative';
 

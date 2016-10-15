@@ -58,7 +58,7 @@ class Df_1C_Cml2_Import_Processor_Category extends Df_1C_Cml2_Import_Processor {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PARENT, Df_Catalog_Model_Category::_C);
+		$this->_prop(self::$P__PARENT, Df_Catalog_Model_Category::class);
 	}
 	/** @var string */
 	private static $P__PARENT = 'parent';

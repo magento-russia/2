@@ -35,5 +35,5 @@ class Df_Directory_Model_Currency_Import_Kazakhstan extends Df_Directory_Model_C
 	 * @return string
 	 */
 	protected function getUrl() {return 'http://www.nationalbank.kz/rss/rates_all.xml';}
-	const _C = __CLASS__;
+
 }

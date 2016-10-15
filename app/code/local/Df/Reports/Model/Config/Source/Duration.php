@@ -38,7 +38,7 @@ class Df_Reports_Model_Config_Source_Duration extends Df_Admin_Config_Source {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 	const OPTION_PARAM__DURATION = 'duration';
 	const OPTION_PARAM__DURATION__DATEPART = 'datePart';
 	const OPTION_PARAM__DURATION__VALUE = 'value';

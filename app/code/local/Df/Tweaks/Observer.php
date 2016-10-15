@@ -11,21 +11,21 @@ class Df_Tweaks_Observer {
 				array(
 					// Обратите внимание, что перечисленные ниже 3 класса
 					// Df_Tweaks_Model_Handler_*_AdjustLinks — разные
-					Df_Tweaks_Model_Handler_Account_AdjustLinks::_C
-					,Df_Tweaks_Model_Handler_Header_AdjustLinks::_C
-					,Df_Tweaks_Model_Handler_Footer_AdjustLinks::_C
-					,Df_Tweaks_Model_Handler_Footer_AdjustCopyright::_C
-					,Df_Tweaks_Model_Handler_ProductBlock_Recent_Compared::_C
-					,Df_Tweaks_Model_Handler_ProductBlock_Recent_Viewed::_C
-					,Df_Tweaks_Model_Handler_ProductBlock_Wishlist::_C
-					,Df_Tweaks_Model_Handler_AdjustBanners::_C
-					,Df_Tweaks_Model_Handler_AdjustPaypalLogo::_C
-					,Df_Tweaks_Model_Handler_AdjustPoll::_C
-					,Df_Tweaks_Model_Handler_AdjustNewsletterSubscription::_C
-					,Df_Tweaks_Model_Handler_AdjustCartMini::_C
-					,Df_Tweaks_Model_Handler_AdjustCartPage::_C
+					Df_Tweaks_Model_Handler_Account_AdjustLinks::class
+					,Df_Tweaks_Model_Handler_Header_AdjustLinks::class
+					,Df_Tweaks_Model_Handler_Footer_AdjustLinks::class
+					,Df_Tweaks_Model_Handler_Footer_AdjustCopyright::class
+					,Df_Tweaks_Model_Handler_ProductBlock_Recent_Compared::class
+					,Df_Tweaks_Model_Handler_ProductBlock_Recent_Viewed::class
+					,Df_Tweaks_Model_Handler_ProductBlock_Wishlist::class
+					,Df_Tweaks_Model_Handler_AdjustBanners::class
+					,Df_Tweaks_Model_Handler_AdjustPaypalLogo::class
+					,Df_Tweaks_Model_Handler_AdjustPoll::class
+					,Df_Tweaks_Model_Handler_AdjustNewsletterSubscription::class
+					,Df_Tweaks_Model_Handler_AdjustCartMini::class
+					,Df_Tweaks_Model_Handler_AdjustCartPage::class
 				)
-				,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::_C
+				,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class
 				,$observer
 			);
 			if (

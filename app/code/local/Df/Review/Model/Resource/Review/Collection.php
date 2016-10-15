@@ -13,7 +13,7 @@ class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Mysql
 	public function __construct() {
 		parent::__construct();
 		if (self::isOldInterface()) {
-			$this->setItemObjectClass(Df_Review_Model_Review::_C);
+			$this->setItemObjectClass(Df_Review_Model_Review::class);
 		}
 	}
 
@@ -37,11 +37,11 @@ class Df_Review_Model_Resource_Review_Collection extends Mage_Review_Model_Mysql
 	protected function _construct() {
 		if (!self::isOldInterface()) {
 			parent::_construct();
-			$this->_itemObjectClass = Df_Review_Model_Review::_C;
+			$this->_itemObjectClass = Df_Review_Model_Review::class;
 		}
 	}
 
-	const _C = __CLASS__;
+
 
 	/**
 	 * В Magento CE 1.4 класс @see Mage_Review_Model_Mysql4_Review_Collection

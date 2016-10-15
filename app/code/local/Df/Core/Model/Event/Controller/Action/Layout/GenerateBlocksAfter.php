@@ -36,5 +36,5 @@ class Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter
 	 * @used-by Df_Tweaks_Model_Handler_ProductBlock_Wishlist::getEventClass()
 	 * @used-by Df_Tweaks_Model_Handler_ProductBlock_Recent_Viewed::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

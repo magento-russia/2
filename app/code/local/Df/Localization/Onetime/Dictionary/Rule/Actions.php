@@ -53,7 +53,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Actions extends \Df\Xml\Parser\Ent
 	 * @used-by Df_Localization_Onetime_Type::getActionsClass()
 	 * @used-by Df_Localization_Onetime_Processor_Entity::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param string $concreteClass

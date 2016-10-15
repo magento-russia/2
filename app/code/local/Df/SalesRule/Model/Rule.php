@@ -20,7 +20,7 @@ class Df_SalesRule_Model_Rule extends Mage_SalesRule_Model_Rule {
 	 * @used-by Df_PromoGift_Model_Gift::getRule()
 	 * @used-by Df_SalesRule_Model_Resource_Rule_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const ENTITY = 'salesrule_rule';
 	const P__BASE_DISCOUNT_AMOUNT = 'base_discount_amount';
 	const P__IS_ACTIVE = 'is_active';

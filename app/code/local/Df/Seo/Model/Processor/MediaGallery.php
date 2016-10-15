@@ -24,9 +24,9 @@ class Df_Seo_Model_Processor_MediaGallery extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C);
+		$this->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::class);
 	}
-	const _C = __CLASS__;
+
 	const P__PRODUCT = 'product';
 	/**
 	 * @used-by process()

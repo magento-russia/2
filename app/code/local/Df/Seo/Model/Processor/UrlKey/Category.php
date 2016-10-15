@@ -20,5 +20,5 @@ class Df_Seo_Model_Processor_UrlKey_Category extends Mage_Dataflow_Model_Convert
 		$this->addException('Все товарные разделы обработаны.');
 	}
 
-	const _C = __CLASS__;
+
 }

@@ -1,6 +1,6 @@
 <?php
 class Df_Chronopay_Model_Gate_Config extends Varien_Object {
-	const _C = __CLASS__;
+
 
 	/**
 	 * @param string $field

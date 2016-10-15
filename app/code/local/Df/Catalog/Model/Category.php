@@ -259,7 +259,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Category::getEntityClass()
 	 * @used-by Df_Localization_Onetime_Processor_Catalog_Category::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const P__DISPLAY_MODE = 'display_mode';
 	const P__EXCLUDE_URL_REWRITE = 'exclude_url_rewrite';
 	const P__EXTERNAL_URL = 'rm__external_url';

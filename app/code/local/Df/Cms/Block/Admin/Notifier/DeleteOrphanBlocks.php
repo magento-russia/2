@@ -37,7 +37,7 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__BLOCKS, Df_Cms_Model_Resource_Block_Collection::_C);
+		$this->_prop(self::$P__BLOCKS, Df_Cms_Model_Resource_Block_Collection::class);
 	}
 	/** @var string */
 	private static $P__BLOCKS = 'blocks';

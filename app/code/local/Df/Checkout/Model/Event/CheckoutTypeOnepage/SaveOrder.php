@@ -19,7 +19,7 @@ class Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrder
 	protected function getExpectedEventPrefix() {return self::EXPECTED_EVENT_PREFIX;}
 
 	/** @used-by Df_Checkout_Observer::checkout_type_onepage_save_order() */
-	const _C = __CLASS__;
+
 	const EVENT_PARAM__QUOTE = 'quote';
 	const EXPECTED_EVENT_PREFIX = 'checkout_type_onepage_save_order';
 }

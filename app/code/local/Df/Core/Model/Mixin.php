@@ -22,7 +22,7 @@ class Df_Core_Model_Mixin extends Df_Core_Model {
 		$this->_prop(self::$P__PARENT, 'Df_Core_Model');
 	}
 	/** @used-by Df_Core_Model::createMixin() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__PARENT = 'parent';
 

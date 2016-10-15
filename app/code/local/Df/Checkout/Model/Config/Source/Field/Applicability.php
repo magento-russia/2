@@ -17,7 +17,7 @@ class Df_Checkout_Model_Config_Source_Field_Applicability extends Df_Admin_Confi
 			,self::VALUE__REQUIRED => 'заполнять обязательно'
 		));
 	}
-	const _C = __CLASS__;
+
 	const VALUE__NO = 'no';
 	const VALUE__OPTIONAL = 'optional';
 	const VALUE__REQUIRED = 'required';

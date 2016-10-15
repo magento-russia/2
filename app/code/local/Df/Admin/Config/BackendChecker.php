@@ -26,7 +26,7 @@ abstract class Df_Admin_Config_BackendChecker extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__BACKEND, Df_Admin_Config_Backend::_C);
+		$this->_prop(self::$P__BACKEND, Df_Admin_Config_Backend::class);
 	}
 	/**
 	 * @used-by Df_Admin_Config_BackendChecker_CurrencyIsSupported::_check()

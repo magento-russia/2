@@ -113,5 +113,5 @@ class Df_PromoGift_Model_Handler_SalesRule_Validator_Process_LimitMaxUsagesPerQu
 	}
 
 	/** @used-by Df_PromoGift_Observer::salesrule_validator_process() */
-	const _C = __CLASS__;
+
 }

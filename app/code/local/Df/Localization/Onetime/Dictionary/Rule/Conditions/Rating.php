@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions_Rating
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Rating_Model_Rating::_C;}
+	protected function getEntityClass() {return Df_Rating_Model_Rating::class;}
 
 	/**
 	 * @override

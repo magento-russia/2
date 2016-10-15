@@ -2,16 +2,16 @@
 /** @var Df_Core_Model_Resource_Setup $this */
 $this->startSetup();
 /**
- * Этот код обновлял модуль Яндекс.Маркет
- * с версии 2.17.33 (2013-06-28) до версии 2.17.46 (2013-07-17).
- * Здесь стоял пограммный код:
+ * пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 2.17.33 (2013-06-28) пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 2.17.46 (2013-07-17).
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ:
 		Df_Catalog_Model_Resource_Installer_Attribute::s()->updateAttribute(
 			$entityTypeId = Mage_Catalog_Model_Product::ENTITY
 			,$id = Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
 			,$field = 'backend_model'
-			,$value = Df_YandexMarket_Model_Config_Backend_Category::_C
+			,$value = Df_YandexMarket_Model_Config_Backend_Category::class
 		);
- * Теперь программный код добавления и настройки товарных свойств перенесён в
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ
  * @see Df_YandexMarket_Setup_AttributeSet::p()
  */
 $this->endSetup();

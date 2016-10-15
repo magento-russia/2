@@ -28,7 +28,7 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Checkout_Model_Event_SaveOrder_Abstract::_C;}
+	protected function getEventClass() {return Df_Checkout_Model_Event_SaveOrder_Abstract::class;}
 
 	/** @return string */
 	private function getOrderComment() {return df_trim(rm_request('df_order_comment', ''));}
@@ -37,5 +37,5 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	 * @used-by Df_Checkout_Observer::checkout_type_multishipping_create_orders_single()
 	 * @used-by Df_Checkout_Observer::checkout_type_onepage_save_order()
 	 */
-	const _C = __CLASS__;
+
 }

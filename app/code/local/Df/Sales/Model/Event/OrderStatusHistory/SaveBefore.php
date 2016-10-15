@@ -35,5 +35,5 @@ class Df_Sales_Model_Event_OrderStatusHistory_SaveBefore extends Df_Core_Model_E
 	 * @used-by Df_Sales_Observer::sales_order_status_history_save_before()
 	 * @used-by Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

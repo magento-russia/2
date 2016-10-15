@@ -38,7 +38,7 @@ class Df_Poll_Model_Poll extends Mage_Poll_Model_Poll {
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Poll::getEntityClass()
 	 * @used-by Df_Poll_Model_Resource_Poll_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param bool $loadStoresInfo [optional]

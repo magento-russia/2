@@ -81,5 +81,5 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 		 */
 		$this->setData('cache_lifetime', Df_Core_Block_Template::CACHE_LIFETIME_STANDARD);
 	}
-	const _C = __CLASS__;
+
 }

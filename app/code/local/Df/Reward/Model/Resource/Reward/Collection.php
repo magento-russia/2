@@ -19,6 +19,6 @@ class Df_Reward_Model_Resource_Reward_Collection extends Df_Core_Model_Resource_
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward::class;}
+
 }

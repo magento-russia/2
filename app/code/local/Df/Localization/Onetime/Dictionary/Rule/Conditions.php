@@ -54,7 +54,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions
 		return df_n_get($this->{__METHOD__}[$type]);
 	}
 
-	const _C = __CLASS__;
+
 
 	/**
 	 * @static

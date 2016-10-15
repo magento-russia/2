@@ -18,8 +18,8 @@ class Df_Customer_Model_Resource_Group_Collection extends Mage_Customer_Model_En
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Group::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Group::class;}
+
 
 	/** @return Df_Customer_Model_Resource_Group_Collection */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

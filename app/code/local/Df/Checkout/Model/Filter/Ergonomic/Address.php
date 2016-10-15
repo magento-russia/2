@@ -32,7 +32,7 @@ class Df_Checkout_Model_Filter_Ergonomic_Address
 		parent::_construct();
 		$this->_prop(self::$P__ADDRESS_TYPE, DF_V_STRING_NE);
 	}
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__ADDRESS_TYPE = 'address_type';
 	/**

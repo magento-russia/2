@@ -22,5 +22,5 @@ class Df_Psbank_Model_Action_Confirm_Payment extends Df_Psbank_Model_Action_Conf
 	protected function needInvoice() {return true;}
 
 	/** @used-by Df_Psbank_ConfirmController::getActionMap() */
-	const _C = __CLASS__;
+
 }

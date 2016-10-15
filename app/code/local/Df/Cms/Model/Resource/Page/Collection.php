@@ -90,11 +90,11 @@ class Df_Cms_Model_Resource_Page_Collection extends Mage_Cms_Model_Mysql4_Page_C
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_Cms_Model_Page::_C;
+		$this->_itemObjectClass = Df_Cms_Model_Page::class;
 	}
 	/** @var array(string => mixed) */
 	private $_rmData = array();
-	const _C = __CLASS__;
+
 	/**
 	 * Если Вы намерены изменять (обновлять, сохранять) элементы коллекции,
 	 * то при создании коллекции укажите параметр load_stores_info = true,

@@ -183,7 +183,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param Df_Catalog_Model_Product $product

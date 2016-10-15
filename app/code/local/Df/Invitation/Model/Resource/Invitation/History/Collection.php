@@ -12,7 +12,7 @@ class Df_Invitation_Model_Resource_Invitation_History_Collection
 	 * @return void
 	 */
 	protected function _construct() {
-		$this->_itemObjectClass = Df_Invitation_Model_Invitation_History::_C;
+		$this->_itemObjectClass = Df_Invitation_Model_Invitation_History::class;
 	}
-	const _C = __CLASS__;
+
 }

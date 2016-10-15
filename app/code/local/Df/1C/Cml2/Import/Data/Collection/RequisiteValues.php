@@ -44,7 +44,7 @@ class Df_1C_Cml2_Import_Data_Collection_RequisiteValues extends Df_1C_Cml2_Impor
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_RequisiteValue::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_RequisiteValue::class;}
 
 	/**
 	 * @override

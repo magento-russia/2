@@ -8,8 +8,8 @@ class Df_Checkout_Observer {
 	public function checkout_type_multishipping_create_orders_single(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Checkout_Model_Handler_SaveOrderComment::_C
-				,Df_Checkout_Model_Event_CheckoutTypeMultishipping_CreateOrdersSingle::_C
+				Df_Checkout_Model_Handler_SaveOrderComment::class
+				,Df_Checkout_Model_Event_CheckoutTypeMultishipping_CreateOrdersSingle::class
 				,$o
 			);
 		}
@@ -26,8 +26,8 @@ class Df_Checkout_Observer {
 	public function checkout_type_onepage_save_order(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Checkout_Model_Handler_SaveOrderComment::_C
-				,Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrder::_C
+				Df_Checkout_Model_Handler_SaveOrderComment::class
+				,Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrder::class
 				,$o
 			);
 		}
@@ -44,8 +44,8 @@ class Df_Checkout_Observer {
 	public function checkout_type_onepage_save_order_after(Varien_Event_Observer $o) {
 		try {
 			df_handle_event(
-				Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer::_C
-				,Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter::_C
+				Df_Checkout_Model_Handler_SendGeneratedPasswordToTheCustomer::class
+				,Df_Checkout_Model_Event_CheckoutTypeOnepage_SaveOrderAfter::class
 				,$o
 			);
 		}

@@ -19,11 +19,11 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_SetColumnRenderer extends Df_C
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::_C;}
+	protected function getEventClass() {return Df_Core_Model_Event_Adminhtml_Block_HtmlBefore::class;}
 
 	/** @return Mage_Adminhtml_Block_Report_Grid_Abstract */
 	private function getBlockAsReportGrid() {return $this->getEvent()->getBlock();}
 
 	/** @used-by Df_Reports_Observer::adminhtml_block_html_before() */
-	const _C = __CLASS__;
+
 }

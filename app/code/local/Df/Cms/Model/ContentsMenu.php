@@ -117,10 +117,10 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__APPLICATOR, Df_Cms_Model_ContentsMenu_Applicator::_C);
+		$this->_prop(self::$P__APPLICATOR, Df_Cms_Model_ContentsMenu_Applicator::class);
 	}
 	/** @used-by Df_Cms_Model_ContentsMenu_Collection::itemClass() */
-	const _C = __CLASS__;
+
 	const POSITION__CONTENT = 'content';
 	const POSITION__LEFT = 'left';
 	const POSITION__RIGHT = 'right';

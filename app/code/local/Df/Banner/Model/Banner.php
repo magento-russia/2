@@ -61,7 +61,7 @@ class Df_Banner_Model_Banner extends Df_Core_Model {
 		;
 	}
 	/** @used-by Df_Banner_Model_Resource_Banner_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/** @used-by Df_Banner_Model_Resource_Banner::_construct() */
 	const P__ID = 'banner_id';
 	/** @var string */

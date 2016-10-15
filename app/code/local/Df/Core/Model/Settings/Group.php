@@ -117,7 +117,7 @@ class Df_Core_Model_Settings_Group extends Df_Core_Model {
 			->_prop(self::P__PREFIXES, DF_V_ARRAY, false)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__GROUP = 'group';
 	const P__PREFIXES = 'prefixes';
 	const P__SECTION = 'section';

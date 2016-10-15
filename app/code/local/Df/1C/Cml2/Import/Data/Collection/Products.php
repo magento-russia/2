@@ -5,7 +5,7 @@ class Df_1C_Cml2_Import_Data_Collection_Products extends Df_1C_Cml2_Import_Data_
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Product::_C;}
+	protected function itemClass() {return Df_1C_Cml2_Import_Data_Entity_Product::class;}
 
 	/**
 	 * @override

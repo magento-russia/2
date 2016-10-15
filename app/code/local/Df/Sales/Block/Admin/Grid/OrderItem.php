@@ -66,7 +66,7 @@ class Df_Sales_Block_Admin_Grid_OrderItem extends Df_Core_Block_Admin {
 	}
 
 	/** @used-by Df_Sales_Block_Admin_Grid_OrderItem_Collection::itemClass() */
-	const _C = __CLASS__;
+
 	const COLLECTION_ITEM_PARAM__PARENT_ID = 'parent_id';
 	const P__PRODUCT_ID = 'product_id';
 	const P__ORDER_ITEM_ID = 'order_item_id';

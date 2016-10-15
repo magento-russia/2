@@ -139,7 +139,7 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+	
 	/**
 	 * Кошелек покупателя
 	 */

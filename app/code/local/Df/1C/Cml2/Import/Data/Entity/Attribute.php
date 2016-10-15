@@ -42,13 +42,13 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 	public static function getClass(\Df\Xml\X $e) {
 		/** @var array(string => string) $map */
 		static $map = array(
-			'Справочник' => Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList::_C
-			,'Дата' => Df_1C_Cml2_Import_Data_Entity_Attribute_Date::_C
-			,'Число' => Df_1C_Cml2_Import_Data_Entity_Attribute_Number::_C
-			,'Булево' => Df_1C_Cml2_Import_Data_Entity_Attribute_Boolean::_C
-			,self::TYPE__TEXT => Df_1C_Cml2_Import_Data_Entity_Attribute_Text::_C
+			'Справочник' => Df_1C_Cml2_Import_Data_Entity_Attribute_ReferenceList::class
+			,'Дата' => Df_1C_Cml2_Import_Data_Entity_Attribute_Date::class
+			,'Число' => Df_1C_Cml2_Import_Data_Entity_Attribute_Number::class
+			,'Булево' => Df_1C_Cml2_Import_Data_Entity_Attribute_Boolean::class
+			,self::TYPE__TEXT => Df_1C_Cml2_Import_Data_Entity_Attribute_Text::class
 		);
-		return dfa($map, self::_type($e), Df_1C_Cml2_Import_Data_Entity_Attribute_Text::_C);
+		return dfa($map, self::_type($e), Df_1C_Cml2_Import_Data_Entity_Attribute_Text::class);
 	}
 
 	/**
@@ -147,7 +147,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_Attribute extends Df_1C_Cml2_Import
 	}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_Attributes::itemClass() */
-	const _C = __CLASS__;
+
 	/**
 	 * 2015-08-04
 	 * Почему-то PHP не разрешает использовать приватную станическую переменную

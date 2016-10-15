@@ -31,10 +31,10 @@ class Df_Admin_Model_ClassRewrite_Collection extends Df_Varien_Data_Collection {
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Admin_Model_ClassRewrite::_C;}
+	protected function itemClass() {return Df_Admin_Model_ClassRewrite::class;}
 
 	/** @used-by Df_Admin_Block_Notifier_ClassRewriteConflicts::_construct() */
-	const _C = __CLASS__;
+
 
 	/** @return Df_Admin_Model_ClassRewrite_Collection */
 	public static function i() {return new self;}

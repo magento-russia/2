@@ -10,7 +10,7 @@ class Df_Catalog_Model_Resource_Product_Option_Title extends Df_Core_Model_Resou
 	protected function _construct() {
 		$this->_init(self::TABLE, Df_Catalog_Model_Product_Option_Title::P__ID);
 	}
-	const _C = __CLASS__;
+
 	const TABLE = 'catalog/product_option_title';
 	/** @return Df_Catalog_Model_Resource_Product_Option_Title */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

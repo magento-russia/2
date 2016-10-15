@@ -88,7 +88,7 @@ class Df_Localization_Onetime_Processor_Db_Column extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__COLUMN, Df_Localization_Onetime_Dictionary_Db_Column::_C);
+		$this->_prop(self::$P__COLUMN, Df_Localization_Onetime_Dictionary_Db_Column::class);
 	}
 	/** @var string */
 	protected static $P__COLUMN = 'column';

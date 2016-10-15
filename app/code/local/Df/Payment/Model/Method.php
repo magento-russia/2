@@ -329,7 +329,7 @@ abstract class Df_Payment_Model_Method
 	 * @return string
 	 */
 	public function getFormBlockType() {
-		return df_con($this, 'Block_Form', Df_Payment_Block_Form::_C);
+		return df_con($this, 'Block_Form', Df_Payment_Block_Form::class);
 	}
 
 	/**
@@ -339,7 +339,7 @@ abstract class Df_Payment_Model_Method
 	 * @return string
 	 */
 	public function getInfoBlockType() {
-		return df_con($this, 'Block_Info', Df_Payment_Block_Info::_C);
+		return df_con($this, 'Block_Info', Df_Payment_Block_Info::class);
 	}
 
 	/**
@@ -585,7 +585,7 @@ abstract class Df_Payment_Model_Method
 	 * @used-by Df_Payment_Config_ManagerBase::_construct()
 	 * @used-by Df_Payment_Model_Request::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by getCustomInformationKeys()
 	 * @used-by getSubmethod()

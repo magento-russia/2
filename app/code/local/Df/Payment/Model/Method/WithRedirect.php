@@ -82,6 +82,6 @@ abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Met
 	 */
 	public function isInitializeNeeded() {return true;}
 
-	const _C = __CLASS__;
+
 	const REQUEST_PARAM__ORDER_INCREMENT_ID = 'magentoOrderIncrementId';
 }

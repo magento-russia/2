@@ -95,5 +95,5 @@ class Df_Kkb_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	}
 
 	/** @used-by Df_Kkb_Model_RequestDocument_OrderItems::_construct() */
-	const _C = __CLASS__;
+
 }

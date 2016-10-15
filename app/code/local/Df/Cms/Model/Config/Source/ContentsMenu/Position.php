@@ -15,7 +15,7 @@ class Df_Cms_Model_Config_Source_ContentsMenu_Position extends Df_Admin_Config_S
 			self::CONTENT => 'Content', self::LEFT => 'Left Column', self::RIGHT => 'Right Column'
 		), $this);
 	}
-	const _C = __CLASS__;
+
 	const CONTENT = 'content';
 	const LEFT = 'left';
 	const RIGHT = 'right';

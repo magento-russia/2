@@ -25,7 +25,7 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	protected function generateResponseBodyFake() {
 		/** @var \Df\Xml\Generator\Document $document */
 		$document = \Df\Xml\Generator\Document::_i();
-		$document->setMixin(Df_1C_Cml2_Export_DocumentMixin::_C);
+		$document->setMixin(Df_1C_Cml2_Export_DocumentMixin::class);
 		return $document->getXml();
 	}
 

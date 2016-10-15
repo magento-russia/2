@@ -36,5 +36,5 @@ class Df_Seo_Model_Template_Adapter_Product extends Df_Seo_Model_Template_Adapte
 		);
 	}
 	/** @used-by Df_Seo_Model_Template_Property_Product::_construct() */
-	const _C = __CLASS__;
+
 }

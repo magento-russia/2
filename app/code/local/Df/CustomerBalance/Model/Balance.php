@@ -226,7 +226,7 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	protected $_eventObject = 'balance';
 
 	/** @used-by Df_CustomerBalance_Model_Resource_Balance_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__ID = 'balance_id';
 
 	/** @return Df_CustomerBalance_Model_Resource_Balance_Collection */

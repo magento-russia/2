@@ -68,5 +68,5 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+
 }

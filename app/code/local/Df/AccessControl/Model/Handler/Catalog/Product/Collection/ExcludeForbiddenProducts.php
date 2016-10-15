@@ -34,8 +34,8 @@ class Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbidden
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Catalog_Model_Event_Product_Collection_Load_Before::_C;}
+	protected function getEventClass() {return Df_Catalog_Model_Event_Product_Collection_Load_Before::class;}
 
 	/** @used-by Df_AccessControl_Observer::catalog_product_collection_load_before() */
-	const _C = __CLASS__;
+
 }

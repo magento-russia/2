@@ -143,9 +143,9 @@ class Df_Kkb_Model_RequestDocument_OrderItems extends \Df\Xml\Generator\Document
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST_PAYMENT, Df_Kkb_Model_Request_Payment::_C);
+		$this->_prop(self::P__REQUEST_PAYMENT, Df_Kkb_Model_Request_Payment::class);
 	}
-	const _C = __CLASS__;
+
 	const P__REQUEST_PAYMENT = 'request_payment';
 	/**
 	 * @static

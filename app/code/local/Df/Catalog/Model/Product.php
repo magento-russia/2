@@ -1120,7 +1120,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * @used-by Df_Seo_Model_Processor_Image_Exif::_construct()
 	 * @used-by Df_Seo_Model_Processor_Image_Renamer::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @see app/code/core/Mage/Catalog/sql/catalog_setup/install-1.6.0.0.php:
 		->addColumn('sku', Varien_Db_Ddl_Table::TYPE_TEXT, 64, array(), 'SKU')

@@ -17,7 +17,7 @@ class Df_Checkout_Model_Config_Source_Alphabet extends Df_Admin_Config_Source {
 			,self::VALUE__KZ => 'казахский и русский'
 		));
 	}
-	const _C = __CLASS__;
+
 	const VALUE__KZ = 'kz';
 	const VALUE__RU = 'ru';
 	const VALUE__UA = 'ua';

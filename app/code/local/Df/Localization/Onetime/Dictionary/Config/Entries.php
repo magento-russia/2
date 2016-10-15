@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Config_Entries extends \Df\Xml\Parser\C
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Config_Entry::_C;}
+	protected function itemClass() {return Df_Localization_Onetime_Dictionary_Config_Entry::class;}
 
 	/**
 	 * @override

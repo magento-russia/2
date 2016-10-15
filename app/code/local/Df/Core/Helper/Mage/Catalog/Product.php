@@ -15,7 +15,7 @@ class Df_Core_Helper_Mage_Catalog_Product extends Mage_Core_Helper_Abstract {
 		return Mage::getSingleton('catalog/product_visibility');
 	}
 
-	const _C = __CLASS__;
+
 	/** @return Df_Core_Helper_Mage_Catalog_Product */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

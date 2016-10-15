@@ -86,7 +86,7 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MENU, Df_Page_Model_Menu_Product::_C);
+		$this->_prop(self::$P__MENU, Df_Page_Model_Menu_Product::class);
 	}
 	/** @var string */
 	private static $P__MENU = 'menu';

@@ -162,7 +162,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 	/** @return void */
 	private function orderItemsAdd() {
 		$this->orderItemsProcess(
-			$this->getProductIdsToAdd(), Df_1C_Cml2_Import_Processor_Order_Item_Add::_C
+			$this->getProductIdsToAdd(), Df_1C_Cml2_Import_Processor_Order_Item_Add::class
 		);
 	}
 
@@ -172,7 +172,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 //			->orderItemsProcess(
 //				$this->getProductIdsToDelete()
 //				,
-//				Df_1C_Cml2_Import_Processor_Order_Item_Delete::_C
+//				Df_1C_Cml2_Import_Processor_Order_Item_Delete::class
 //			)
 //		;
 		foreach ($this->getProductIdsToDelete() as $productId) {
@@ -221,7 +221,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 	/** @return void */
 	private function orderItemsUpdate() {
 		$this->orderItemsProcess(
-			$this->getProductIdsToUpdate(), Df_1C_Cml2_Import_Processor_Order_Item_Update::_C
+			$this->getProductIdsToUpdate(), Df_1C_Cml2_Import_Processor_Order_Item_Update::class
 		);
 	}
 
@@ -231,7 +231,7 @@ class Df_1C_Cml2_Import_Processor_Order extends Df_1C_Cml2_Import_Processor {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_1C_Cml2_Import_Data_Entity_Order::_C);
+		$this->_prop(self::$P__ENTITY, Df_1C_Cml2_Import_Data_Entity_Order::class);
 	}
 	/**
 	 * @static

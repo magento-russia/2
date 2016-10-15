@@ -90,14 +90,14 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection extends D
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection::_C;
+		return Df_Core_Model_Event_Adminhtml_Block_Sales_Order_Grid_PrepareCollection::class;
 	}
 
 	/**
 	 * @used-by Df_Sales_Observer::rm_adminhtml_block_sales_order_grid__prepare_collection()
 	 * @used-by Df_Sales_Observer::sales_order_grid_collection_load_before()
 	 */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by handle()
 	 * @used-by Df_Sales_Block_Admin_Grid_OrderItem::getMapFromSourceKeysToTargetKeys()

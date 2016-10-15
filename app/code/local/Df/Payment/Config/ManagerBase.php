@@ -16,6 +16,6 @@ abstract class Df_Payment_Config_ManagerBase extends Df_Checkout_Module_Config_M
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Payment_Model_Method::_C);
+		$this->_prop(self::$P__MAIN, Df_Payment_Model_Method::class);
 	}
 }

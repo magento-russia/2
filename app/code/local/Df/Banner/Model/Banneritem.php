@@ -25,7 +25,7 @@ class Df_Banner_Model_Banneritem extends Df_Core_Model {
 	protected function _getResource() {return Df_Banner_Model_Resource_Banneritem::s();}
 
 	/** @used-by Df_Banner_Model_Resource_Banneritem_Collection::_construct() */
-	const _C = __CLASS__;
+
 	/** @used-by Df_Banner_Model_Resource_Banneritem::_construct() */
 	const P__ID = 'banner_item_id';
 

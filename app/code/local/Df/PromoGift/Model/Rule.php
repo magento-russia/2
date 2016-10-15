@@ -119,7 +119,7 @@ class Df_PromoGift_Model_Rule extends Df_SalesRule_Model_Rule {
 	 * @used-by Df_PromoGift_Model_PromoAction::_construct()
 	 * @used-by Df_PromoGift_Model_Resource_Rule_Collection::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const P__MAX_USAGES_PER_QUOTE = 'df_max_usages_per_quote';
 	/** @return Df_PromoGift_Model_Resource_Rule_Collection */
 	public static function c() {return new Df_PromoGift_Model_Resource_Rule_Collection;}

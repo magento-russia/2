@@ -38,7 +38,7 @@ abstract class Df_1C_Cml2_Import_Processor extends Df_1C_Cml2 {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_1C_Cml2_Import_Data_Entity::_C);
+		$this->_prop(self::$P__ENTITY, Df_1C_Cml2_Import_Data_Entity::class);
 	}
 	/**
 	 * @used-by _construct()

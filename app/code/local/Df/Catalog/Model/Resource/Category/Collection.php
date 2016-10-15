@@ -98,7 +98,7 @@ class Df_Catalog_Model_Resource_Category_Collection
 	 * @return Df_Catalog_Model_Resource_Category_Collection
 	 */
 	protected function _init($model, $entityModel = null) {
-		$this->_itemObjectClass = Df_Catalog_Model_Category::_C;
+		$this->_itemObjectClass = Df_Catalog_Model_Category::class;
 		$this->_entity = Df_Catalog_Model_Resource_Category::s();
 		return $this;
 	}
@@ -112,5 +112,5 @@ class Df_Catalog_Model_Resource_Category_Collection
 	 */
 	protected $_disableFlat = false;
 
-	const _C = __CLASS__;
+
 }

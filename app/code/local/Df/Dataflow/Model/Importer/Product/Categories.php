@@ -109,9 +109,9 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__STORE, Df_Core_Model_StoreM::_C);
+		$this->_prop(self::P__STORE, Df_Core_Model_StoreM::class);
 	}
-	const _C = __CLASS__;
+
 	const IMPORTED_KEY = 'df_categories';
 	const P__STORE = 'store';
 	/**

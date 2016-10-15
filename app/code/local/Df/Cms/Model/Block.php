@@ -39,7 +39,7 @@ class Df_Cms_Model_Block extends Mage_Cms_Model_Block {
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Block::getEntityClass()
 	 * @used-by Df_Localization_Onetime_Processor_Cms_Block::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const P__IDENTIFIER = 'identifier';
 	const P__STORE_ID = 'store_id';
 	const P__STORES = 'stores';

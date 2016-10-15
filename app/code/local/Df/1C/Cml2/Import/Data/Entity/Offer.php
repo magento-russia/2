@@ -451,5 +451,5 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Offer_ParentStub::_construct()
 	 * @used-by Df_1C_Cml2_Import_Processor_Product::_construct()
 	 */
-	const _C = __CLASS__;
+
 }

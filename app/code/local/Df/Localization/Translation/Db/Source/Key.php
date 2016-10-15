@@ -32,7 +32,7 @@ class Df_Localization_Translation_Db_Source_Key extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__KEY, DF_V_STRING_NE);
 	}
-	const _C = __CLASS__;
+
 	const P__KEY = 'key';
 	/**
 	 * @param string $key

@@ -3,7 +3,7 @@ namespace Df\Qa;
 use ReflectionFunction as RF;
 use ReflectionFunctionAbstract as RFA;
 use ReflectionMethod as RM;
-class State extends \Df\Core\O {
+class State extends \Df_Core_Model {
 	/**
 	 * @used-by \Df\Qa\Message_Failure::traceS()
 	 * @override

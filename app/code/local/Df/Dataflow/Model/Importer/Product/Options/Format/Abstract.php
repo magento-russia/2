@@ -42,7 +42,7 @@ abstract class Df_Dataflow_Model_Importer_Product_Options_Format_Abstract
 			->_prop(self::P__PRODUCT, self::P__PRODUCT_TYPE)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__IMPORTED_KEY = 'importedKey';
 	const P__IMPORTED_VALUE = 'importedValue';
 	const P__PRODUCT = 'product';

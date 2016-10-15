@@ -10,7 +10,7 @@ class Df_Payment_Config_Source_Service_FeePayer extends Df_Payment_Config_Source
 			self::VALUE__SHOP => 'магазин', self::VALUE__BUYER => 'покупатель'
 		));
 	}
-	const _C = __CLASS__;
+
 	const VALUE__BUYER = 'buyer';
 	const VALUE__SHOP = 'shop';
 }

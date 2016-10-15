@@ -46,9 +46,9 @@ class Df_Admin_Block_Column_Select extends Df_Admin_Block_Column {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__COLUMN, Df_Admin_Config_DynamicTable_Column_Select::_C);
+		$this->_prop(self::$P__COLUMN, Df_Admin_Config_DynamicTable_Column_Select::class);
 	}
 
 	/** @used-by Df_Admin_Config_DynamicTable_Column_Select::getRendererClass() */
-	const _C = __CLASS__;
+
 }

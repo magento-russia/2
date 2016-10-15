@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions_Poll
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Poll_Model_Poll::_C;}
+	protected function getEntityClass() {return Df_Poll_Model_Poll::class;}
 
 	/**
 	 * @override

@@ -709,7 +709,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		;
 	}
 
-	const _C = __CLASS__;
+
 	const LOCALE__RU_DF = 'ru_DF';
 	/** @return Df_Core_Model_Translate */
 	public static function s() {return Mage::getSingleton('core/translate');}

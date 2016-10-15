@@ -55,7 +55,7 @@ class Df_Sales_Model_Order_Address extends Mage_Sales_Model_Order_Address {
 		return rm_checkout_ergonomic() && $this->getAddressType();
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

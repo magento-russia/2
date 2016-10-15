@@ -9,8 +9,8 @@ class Df_AccessControl_Observer {
 		try {
 			if (df_is_admin()) {
 				df_handle_event(
-					Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbiddenProducts::_C
-					,Df_Catalog_Model_Event_Product_Collection_Load_Before::_C
+					Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbiddenProducts::class
+					,Df_Catalog_Model_Event_Product_Collection_Load_Before::class
 					,$o
 				);
 			}
@@ -29,8 +29,8 @@ class Df_AccessControl_Observer {
 		try {
 			if (df_is_admin()) {
 				df_handle_event(
-					Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbiddenCategories::_C
-					,Df_Catalog_Model_Event_Category_Collection_Load_Before::_C
+					Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbiddenCategories::class
+					,Df_Catalog_Model_Event_Category_Collection_Load_Before::class
 					,$o
 				);
 			}
@@ -68,8 +68,8 @@ class Df_AccessControl_Observer {
 	) {
 		try {
 			df_handle_event(
-				Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAccessRights::_C
-				,Df_AccessControl_Model_Event_Permissions_Role_Saverole::_C
+				Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAccessRights::class
+				,Df_AccessControl_Model_Event_Permissions_Role_Saverole::class
 				,$o
 			);
 		}

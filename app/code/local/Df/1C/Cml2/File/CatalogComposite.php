@@ -62,9 +62,9 @@ class Df_1C_Cml2_File_CatalogComposite extends Df_1C_Cml2_File {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__FILE_ATTRIBUTES, Df_1C_Cml2_File::_C)
-			->_prop(self::$P__FILE_PRODUCTS, Df_1C_Cml2_File::_C)
-			->_prop(self::$P__FILE_STRUCTURE, Df_1C_Cml2_File::_C)
+			->_prop(self::$P__FILE_ATTRIBUTES, Df_1C_Cml2_File::class)
+			->_prop(self::$P__FILE_PRODUCTS, Df_1C_Cml2_File::class)
+			->_prop(self::$P__FILE_STRUCTURE, Df_1C_Cml2_File::class)
 		;
 	}
 	/** @var string */

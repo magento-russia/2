@@ -133,7 +133,7 @@ class Df_Admin_Config_Form_FieldInstance extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::$P__ELEMENT, 'Varien_Data_Form_Element_Abstract')
-			->_prop(self::$P__FIELD, Df_Admin_Block_Field_Custom::_C)
+			->_prop(self::$P__FIELD, Df_Admin_Block_Field_Custom::class)
 		;
 	}
 	/** @var string */

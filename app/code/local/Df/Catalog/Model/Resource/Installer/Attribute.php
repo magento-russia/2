@@ -264,7 +264,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 		);
 	}
 
-	const _C = __CLASS__;
+
 	const ADD_ATTRIBUTE_TO_SET__ADDED = 'added';
 	const ADD_ATTRIBUTE_TO_SET__NOT_CHANGED = 'not_changed';
 	const ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP = 'changed_group';

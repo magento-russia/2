@@ -10,6 +10,6 @@ class Df_Localization_Onetime_Processor_Catalog_Product
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_Catalog_Model_Product::_C);
+		$this->_prop(self::$P__ENTITY, Df_Catalog_Model_Product::class);
 	}
 }

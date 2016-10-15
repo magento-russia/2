@@ -8,5 +8,5 @@ class Df_1C_Cml2_Import_Processor_Order_Item_Add extends Df_1C_Cml2_Import_Proce
 	public function process() {}
 
 	/** @used-by Df_1C_Cml2_Import_Processor_Order::orderItemsAdd() */
-	const _C = __CLASS__;
+
 }

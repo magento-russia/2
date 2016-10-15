@@ -92,6 +92,6 @@ class Df_Invitation_Model_Resource_Invitation_Collection extends Df_Core_Model_R
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Invitation_Model_Invitation::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Invitation_Model_Invitation::class;}
+
 }

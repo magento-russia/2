@@ -7,7 +7,7 @@ interface Df_Dataflow_Logger {
 	public function log($message);
 
 	/**
-	 * Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::_C,
+	 * Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::class,
 	 * однако это привело к сбою:
 	 * «%s»
 	 * Fatal error: Cannot inherit previously-inherited or override constant _CLASS

@@ -72,7 +72,7 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	}
 
 	/** @used-by Df_Admin_Model_Notifier_Collection::itemClass() */
-	const _C = __CLASS__;
+
 	/**
 	 * @used-by getConfigPathSkip()
 	 * @used-by Df_Admin_Model_Action_SkipNotification::getConfigPath()

@@ -303,5 +303,5 @@ class Df_1C_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 	}
 
 	/** @used-by Df_1C_Cml2_Export_Document_Catalog::getProcessorClass_products() */
-	const _C = __CLASS__;
+
 }

@@ -184,5 +184,5 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	protected $_paymentSpecificInformation = null;
 
 	/** @used-by Df_Payment_Model_Method::getInfoBlockType() */
-	const _C = __CLASS__;
+
 }

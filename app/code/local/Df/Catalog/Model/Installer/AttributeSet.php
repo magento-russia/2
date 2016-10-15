@@ -95,7 +95,7 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 			->_prop(self::$P__SKIP_REINDEXING, DF_V_BOOL)
 		;
 	}
-	const _C = __CLASS__;
+
 	const GROUP_NAME__GENERAL = 'General';
 	/** @var string */
 	private static $P__NAME = 'name';

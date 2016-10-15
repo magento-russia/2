@@ -241,7 +241,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 		);
 	}
 
-	const _C = __CLASS__;
+
 	const FIELD__ATTRIBUTE_SET = 'attribute_set';
 	const FIELD__BUNDLE = 'df_bundle';
 	const FIELD__CATEGORY_IDS = 'category_ids';

@@ -34,5 +34,5 @@ class Df_Localization_Realtime_Dictionary_Module
 	public function getId() {return $this->getAttribute('name');}
 
 	/** @used-by Df_Localization_Realtime_Dictionary_Modules::itemClass() */
-	const _C = __CLASS__;
+
 }

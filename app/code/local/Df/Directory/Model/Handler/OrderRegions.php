@@ -17,8 +17,8 @@ class Df_Directory_Model_Handler_OrderRegions extends Df_Core_Model_Handler {
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::_C;}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadBefore::class;}
 
 	/** @used-by Df_Directory_Observer::core_collection_abstract_load_before() */
-	const _C = __CLASS__;
+
 }

@@ -40,7 +40,7 @@ class Df_Kkb_Model_RequestDocument_Registration extends Df_Kkb_Model_RequestDocu
 		);
 	}
 
-	const _C = __CLASS__;
+
 	/**
 	 * @static
 	 * @param Df_Kkb_Model_Request_Payment $requestPayment

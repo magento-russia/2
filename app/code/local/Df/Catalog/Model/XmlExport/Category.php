@@ -18,11 +18,11 @@ abstract class Df_Catalog_Model_XmlExport_Category extends \Df\Xml\Generator\Par
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DOCUMENT, Df_Catalog_Model_XmlExport_Catalog::_C)
-			->_prop(self::$P__CATEGORY, Df_Catalog_Model_Category::_C)
+			->_prop(self::$P__DOCUMENT, Df_Catalog_Model_XmlExport_Catalog::class)
+			->_prop(self::$P__CATEGORY, Df_Catalog_Model_Category::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__CATEGORY = 'product';
 

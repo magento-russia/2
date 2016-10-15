@@ -106,7 +106,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 	 * @override
 	 * @return string
 	 */
-	protected function getProcessorClass_products() {return Df_YandexMarket_Model_Yml_Processor_Offer::_C;}
+	protected function getProcessorClass_products() {return Df_YandexMarket_Model_Yml_Processor_Offer::class;}
 
 	/**
 	 * @override

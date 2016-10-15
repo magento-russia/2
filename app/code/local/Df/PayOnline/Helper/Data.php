@@ -15,7 +15,7 @@ class Df_PayOnline_Helper_Data extends Mage_Core_Helper_Data {
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 	const SIGNATURE_KEY_VALUE_SEPARATOR = '=';
 	const SIGNATURE_PARTS_SEPARATOR = '&';
 

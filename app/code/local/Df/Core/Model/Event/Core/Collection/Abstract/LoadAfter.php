@@ -24,5 +24,5 @@ class Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter extends Df_Core_Mod
 	 * @used-by Df_Directory_Observer::core_collection_abstract_load_after()
 	 * @used-by Df_Directory_Model_Handler_ProcessRegionsAfterLoading::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

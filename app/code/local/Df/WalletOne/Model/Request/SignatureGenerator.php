@@ -124,7 +124,7 @@ class Df_WalletOne_Model_Request_SignatureGenerator extends Df_Core_Model {
 			->_prop(self::P__SIGNATURE_PARAMS, DF_V_ARRAY)
 		;
 	}
-	const _C = __CLASS__;
+	
 	const P__ENCRYPTION_KEY = 'encryption_key';
 	const P__SIGNATURE_PARAMS = 'signature_params';
 	/**

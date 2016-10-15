@@ -79,7 +79,7 @@ class Df_Localization_Onetime_Dictionary_Filesystem_Operation
 	 * @used-by Df_Localization_Onetime_Dictionary_Filesystem_Operations::itemClass()
 	 * @used-by Df_Localization_Onetime_Processor_Filesystem::_construct()
 	 */
-	const _C = __CLASS__;
+
 }
 
 

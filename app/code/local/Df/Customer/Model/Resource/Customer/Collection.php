@@ -10,8 +10,8 @@ class Df_Customer_Model_Resource_Customer_Collection extends Mage_Customer_Model
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Customer::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Customer::class;}
+
 }
 
 

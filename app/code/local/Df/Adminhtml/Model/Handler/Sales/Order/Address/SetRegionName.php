@@ -36,7 +36,7 @@ class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Co
 	 * @return string
 	 */
 	protected function getEventClass() {
-		return Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before::_C;
+		return Df_Adminhtml_Model_Event_Sales_Order_Create_Process_Data_Before::class;
 	}
 
 	/**
@@ -66,5 +66,5 @@ class Df_Adminhtml_Model_Handler_Sales_Order_Address_SetRegionName extends Df_Co
 	}
 
 	/** @used-by Df_Adminhtml_Observer::adminhtml_sales_order_create_process_data_before() */
-	const _C = __CLASS__;
+
 }

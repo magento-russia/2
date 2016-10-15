@@ -96,7 +96,7 @@ class Df_Parser_Model_Browser extends Df_Core_Model {
 			->_prop(self::P__VALIDATOR, 'Zend_Validate_Interface', false)
 		;
 	}
-	const _C = __CLASS__;
+
 	const DEFAULT__MAX_ATTEMPT_COUNT = 5;
 	const P__AREA = 'area';
 	const P__MAX_ATTEMPT_COUNT = 'max_attempt_count';

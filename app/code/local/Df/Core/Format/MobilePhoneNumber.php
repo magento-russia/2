@@ -86,10 +86,10 @@ class Df_Core_Format_MobilePhoneNumber extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__VALUE,	DF_V_STRING, false)
-			->_prop(self::P__COUNTRY, Df_Directory_Model_Country::_C, false)
+			->_prop(self::P__COUNTRY, Df_Directory_Model_Country::class, false)
 		;
 	}
-	const _C = __CLASS__;
+
 	const MAX_LENGTH = 15;
 	const MIN_LENGTH = 11;
 	const P__COUNTRY = 'country';

@@ -50,7 +50,7 @@ class Df_Core_Model_Css_Rule extends Df_Core_Model {
 		;
 	}
 	/** @used-by Df_Core_Model_Css_Rule_Set::itemClass() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__NAME = 'name';
 	/** @var string */

@@ -53,9 +53,9 @@ class Df_Kkb_Model_RequestDocument_Secondary extends Df_Kkb_Model_RequestDocumen
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST, Df_Kkb_Model_Request_Secondary::_C);
+		$this->_prop(self::P__REQUEST, Df_Kkb_Model_Request_Secondary::class);
 	}
-	const _C = __CLASS__;
+
 	const TRANSACTION__CAPTURE = 'complete';
 	const TRANSACTION__VOID = 'reverse';
 	/**

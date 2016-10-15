@@ -284,15 +284,15 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		parent::_construct();
 		$this
 			->_prop(self::P__IMAGES, DF_V_ARRAY)
-			// Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::_C,
+			// Раньше вместо 'Df_Dataflow_Logger' использовалось Df_Dataflow_Logger::class,
 			// однако это привело к сбою:
 			// «Fatal error: Cannot inherit previously-inherited or override constant _CLASS
 			// from interface Df_Dataflow_Logger in app/code/local/Df/1C/Helper/Data.php on line 2»
 			->_prop(self::P__LOGGER, 'Df_Dataflow_Logger', false)
-			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::_C)
+			->_prop(self::P__PRODUCT, Df_Catalog_Model_Product::class)
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__IMAGES = 'images';
 	const P__LOGGER = 'logger';
 	const P__PRODUCT = 'product';

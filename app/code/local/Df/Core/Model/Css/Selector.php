@@ -47,12 +47,12 @@ class Df_Core_Model_Css_Selector extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__RULE_SET, Df_Core_Model_Css_Rule_Set::_C, false)
+			->_prop(self::$P__RULE_SET, Df_Core_Model_Css_Rule_Set::class, false)
 			->_prop(self::$P__SELECTOR, DF_V_STRING)
 		;
 	}
 	/** @used-by Df_Core_Model_Css::itemClass() */
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__RULE_SET = 'rule_set';
 	/** @var string */

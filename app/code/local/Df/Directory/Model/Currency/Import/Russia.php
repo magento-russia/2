@@ -38,5 +38,5 @@ class Df_Directory_Model_Currency_Import_Russia extends Df_Directory_Model_Curre
 	 * @return string
 	 */
 	protected function getUrl() {return 'http://www.cbr.ru/scripts/XML_daily.asp';}
-	const _C = __CLASS__;
+
 }

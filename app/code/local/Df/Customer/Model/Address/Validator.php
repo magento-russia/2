@@ -138,7 +138,7 @@ class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__ADDRESS, 'Mage_Customer_Model_Address_Abstract');
 	}
-	const _C = __CLASS__;
+
 	const P__ADDRESS = 'address';
 	/**
 	 * @static

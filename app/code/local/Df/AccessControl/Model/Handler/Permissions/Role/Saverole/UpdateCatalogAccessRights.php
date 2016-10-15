@@ -56,8 +56,8 @@ class Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAcce
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_AccessControl_Model_Event_Permissions_Role_Saverole::_C;}
+	protected function getEventClass() {return Df_AccessControl_Model_Event_Permissions_Role_Saverole::class;}
 
 	/** @used-by Df_AccessControl_Observer::controller_action_postdispatch_adminhtml_permissions_role_saverole() */
-	const _C = __CLASS__;
+
 }

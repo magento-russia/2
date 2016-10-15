@@ -52,11 +52,11 @@ class Df_YandexMarket_Model_Category_Excel_Processor_Row extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__TREE, Df_YandexMarket_Model_Category_Tree::_C)
+			->_prop(self::$P__TREE, Df_YandexMarket_Model_Category_Tree::class)
 			->_prop(self::$P__ROW, DF_V_ARRAY)
 		;
 	}
-	const _C = __CLASS__;
+	
 	/** @var string */
 	private static $P__ROW = 'row';
 	/** @var string */

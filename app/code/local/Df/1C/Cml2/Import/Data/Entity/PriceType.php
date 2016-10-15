@@ -48,5 +48,5 @@ class Df_1C_Cml2_Import_Data_Entity_PriceType extends Df_1C_Cml2_Import_Data_Ent
 	private function getConfigPrices() {return rm_1c_cfg()->product()->prices();}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Collection_PriceTypes::itemClass() */
-	const _C = __CLASS__;
+
 }

@@ -141,7 +141,7 @@ class Df_Localization_Onetime_Dictionary_Term extends \Df\Xml\Parser\Entity {
 	private function needFromBeEmpty() {return '{empty}' === $this->getFrom();}
 
 	/** @used-by Df_Localization_Onetime_Dictionary_Terms::itemClass() */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @static

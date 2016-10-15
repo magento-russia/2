@@ -27,7 +27,7 @@ class Df_Core_Model_Entity_Dependency_Collection extends Df_Varien_Data_Collecti
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Core_Model_Entity_Dependency::_C;}
+	protected function itemClass() {return Df_Core_Model_Entity_Dependency::class;}
 
 	/** @return Df_Core_Model_Entity_Dependency_Collection */
 	public static function i() {return new self;}

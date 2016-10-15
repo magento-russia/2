@@ -39,7 +39,7 @@ class Df_CustomerBalance_Model_Resource_Balance_History_Collection
 	 * @return void
 	 */
 	protected function _construct() {
-		$this->_itemObjectClass = Df_CustomerBalance_Model_Balance_History::_C;
+		$this->_itemObjectClass = Df_CustomerBalance_Model_Balance_History::class;
 	}
-	const _C = __CLASS__;
+
 }

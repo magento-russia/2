@@ -36,7 +36,7 @@ abstract class Element extends \Df_Core_Model {
 			->_prop(self::P__TAG_NAME, DF_V_STRING_NE)
 		;
 	}
-	const _C = __CLASS__;
+	
 	const P__ATTRIBUTES = 'attributes';
 	const P__TAG_NAME = 'tag_name';
 }

@@ -15,6 +15,6 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set_Collection
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Set::_C;}
-	const _C = __CLASS__;
+	public function _construct() {$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Set::class;}
+
 }

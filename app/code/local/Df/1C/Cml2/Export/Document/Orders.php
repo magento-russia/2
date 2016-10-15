@@ -26,7 +26,7 @@ class Df_1C_Cml2_Export_Document_Orders extends \Df\Xml\Generator\Document {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ORDERS, Df_Sales_Model_Resource_Order_Collection::_C);
+		$this->_prop(self::$P__ORDERS, Df_Sales_Model_Resource_Order_Collection::class);
 	}
 	/** @var string */
 	private static $P__ORDERS = 'orders';

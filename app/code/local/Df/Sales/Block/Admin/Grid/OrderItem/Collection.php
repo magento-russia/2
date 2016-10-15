@@ -42,7 +42,7 @@ class Df_Sales_Block_Admin_Grid_OrderItem_Collection extends Df_Varien_Data_Coll
 	 * @used-by Df_Varien_Data_Collection::addItem()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_Sales_Block_Admin_Grid_OrderItem::_C;}
+	protected function itemClass() {return Df_Sales_Block_Admin_Grid_OrderItem::class;}
 
 	/**
 	 * Этот метод может быть приватным,
@@ -127,7 +127,7 @@ class Df_Sales_Block_Admin_Grid_OrderItem_Collection extends Df_Varien_Data_Coll
 		return strcmp($product1->getProductSku(), $product2->getProductSku());
 	}
 
-	const _C = __CLASS__;
+
 	const ORDER_BY__NAME = 'name';
 	const ORDER_BY__QTY = 'qty';
 	const ORDER_BY__ROW_TOTAL = 'row_total';

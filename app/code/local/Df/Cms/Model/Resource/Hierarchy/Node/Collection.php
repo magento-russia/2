@@ -258,6 +258,6 @@ class Df_Cms_Model_Resource_Hierarchy_Node_Collection extends Df_Core_Model_Reso
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_itemObjectClass = Df_Cms_Model_Hierarchy_Node::_C;}
-	const _C = __CLASS__;
+	protected function _construct() {$this->_itemObjectClass = Df_Cms_Model_Hierarchy_Node::class;}
+
 }

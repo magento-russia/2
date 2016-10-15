@@ -52,7 +52,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model {
 		/**
 		 * Здесь мы ещё не можем использовать @see store(),
 		 * потому что @used-by Df_Core_Model::cacheLoad() вызывается перед
-		 * $this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C);
+		 * $this->_prop(self::$P__STORE, Df_Core_Model_StoreM::class);
 		 */
 		/** @var Df_Core_Model_StoreM $store */
 		$store = $this->_getData(self::$P__STORE);
@@ -92,7 +92,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::_C);
+		$this->_prop(self::$P__STORE, Df_Core_Model_StoreM::class);
 		/**
 		 * Обратите внимание,
 		 * что $configCache может быть равно null, если кэш устарел.

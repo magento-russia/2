@@ -186,7 +186,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 	protected function getExceptionClass() {
 		return
 			$this->isErrorCode_ActionRequired()
-			? Df_YandexMoney_Exception_ActionRequired::_C
+			? Df_YandexMoney_Exception_ActionRequired::class
 			: parent::getExceptionClass()
 		;
 	}
@@ -195,5 +195,5 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 	public function isErrorCode_ActionRequired() {return 'ext_action_required' === $this->getErrorCode();}
 
 	/** @used-by Df_YandexMoney_Model_Request_Capture::_construct() */
-	const _C = __CLASS__;
+	
 }

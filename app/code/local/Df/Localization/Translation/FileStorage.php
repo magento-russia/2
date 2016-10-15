@@ -37,7 +37,7 @@ class Df_Localization_Translation_FileStorage extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__CODE, DF_V_STRING_NE);
 	}
-	const _C = __CLASS__;
+
 	const P__CODE = 'code';
 	/**
 	 * @param string $code

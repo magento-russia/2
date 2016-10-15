@@ -48,5 +48,5 @@ class Df_Varien_Data_Tree extends Varien_Data_Tree {
 		return $this->{__METHOD__};
 	}
 
-	const _C = __CLASS__;
+	
 }

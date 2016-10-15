@@ -21,7 +21,7 @@ class Df_Parser_Model_Category extends Df_Core_Model {
 			->_prop(self::P__URI, 'Zend_Uri_Http')
 		;
 	}
-	const _C = __CLASS__;
+
 	const P__NAME = 'name';
 	const P__URI = 'uri';
 	/**

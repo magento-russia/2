@@ -19,7 +19,7 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	/** @return \Df\Xml\X */
 	private function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml(base64_decode($this->getRequest()->getParam('operation_xml')));
+			$this->{__METHOD__} = df_xml_parse(base64_decode($this->getRequest()->getParam('operation_xml')));
 		}
 		return $this->{__METHOD__};
 	}

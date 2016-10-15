@@ -20,7 +20,7 @@ class Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability exte
 	 * @override
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::_C;}
+	protected function getEventClass() {return Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter::class;}
 
 	/**
 	 * @param Mage_Customer_Model_Attribute $attribute
@@ -43,5 +43,5 @@ class Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability exte
 	}
 
 	/** @used-by Df_Customer_Observer::form_attribute_collection__load_after() */
-	const _C = __CLASS__;
+
 }

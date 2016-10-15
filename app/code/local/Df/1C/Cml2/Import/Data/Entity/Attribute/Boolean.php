@@ -42,5 +42,5 @@ class Df_1C_Cml2_Import_Data_Entity_Attribute_Boolean
 	public function getSourceModel() {return 'eav/entity_attribute_source_boolean';}
 
 	/** @used-by Df_1C_Cml2_Import_Data_Entity_Attribute::getTypeMap() */
-	const _C = __CLASS__;
+
 }

@@ -5,7 +5,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Conditions_Block
 	 * @override
 	 * @return string
 	 */
-	protected function getEntityClass() {return Df_Cms_Model_Block::_C;}
+	protected function getEntityClass() {return Df_Cms_Model_Block::class;}
 
 	/**
 	 * @override

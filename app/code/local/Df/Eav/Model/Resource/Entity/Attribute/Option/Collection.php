@@ -49,7 +49,7 @@ class Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 	 */
 	public function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Option::_C;
+		$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Option::class;
 	}
-	const _C = __CLASS__;
+
 }

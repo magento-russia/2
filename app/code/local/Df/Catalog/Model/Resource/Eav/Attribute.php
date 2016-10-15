@@ -111,7 +111,7 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 	 * @used-by Df_Dataflow_Model_Registry_Collection_Attributes::getEntityClass()
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Attribute::getEntityClass()
 	 */
-	const _C = __CLASS__;
+
 
 	/**
 	 * @static

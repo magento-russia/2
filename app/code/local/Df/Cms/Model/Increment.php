@@ -56,7 +56,7 @@ class Df_Cms_Model_Increment extends Df_Core_Model {
 	 */
 	protected function _getResource() {return Df_Cms_Model_Resource_Increment::s();}
 
-	const _C = __CLASS__;
+
 	/*
 	 * Increment levels
 	 */

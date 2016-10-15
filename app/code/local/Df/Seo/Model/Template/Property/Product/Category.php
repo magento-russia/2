@@ -13,5 +13,5 @@ class Df_Seo_Model_Template_Property_Product_Category
 		return $result;
 	}
 
-	const _C = __CLASS__;
+
 }

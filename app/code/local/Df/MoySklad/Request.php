@@ -43,7 +43,7 @@ class Df_MoySklad_Request extends Df_Core_Model {
 			->_prop(self::$P__PATH, DF_V_STRING)
 		;
 	}
-	const _C = __CLASS__;
+
 	/** @var string */
 	private static $P__METHOD = 'method';
 	/** @var string */

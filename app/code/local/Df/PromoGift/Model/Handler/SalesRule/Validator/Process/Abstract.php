@@ -48,5 +48,5 @@ abstract class Df_PromoGift_Model_Handler_SalesRule_Validator_Process_Abstract
 	 * Класс события (для валидации события)
 	 * @return string
 	 */
-	protected function getEventClass() {return Df_SalesRule_Model_Event_Validator_Process::_C;}
+	protected function getEventClass() {return Df_SalesRule_Model_Event_Validator_Process::class;}
 }

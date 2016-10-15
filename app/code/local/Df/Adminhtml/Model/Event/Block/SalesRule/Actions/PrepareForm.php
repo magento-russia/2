@@ -55,5 +55,5 @@ class Df_Adminhtml_Model_Event_Block_SalesRule_Actions_PrepareForm extends Df_Co
 	 * @used-by Df_PromoGift_Observer::adminhtml_block_salesrule_actions_prepareform()
 	 * @used-by Df_PromoGift_Model_Handler_Adminhtml_Block_Actions_PrepareForm_AddInputMaxUsagesPerQuote::getEventClass()
 	 */
-	const _C = __CLASS__;
+
 }

@@ -128,13 +128,13 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCTS, Df_Catalog_Model_Resource_Product_Collection::_C);
+		$this->_prop(self::$P__PRODUCTS, Df_Catalog_Model_Resource_Product_Collection::class);
 	}
 	/**
 	 * @used-by Df_Catalog_Model_XmlExport_Category::_construct()
 	 * @used-by Df_Catalog_Model_XmlExport_Product::_construct()
 	 */
-	const _C = __CLASS__;
+
 	const CATEGORY__CHILDREN = 'rm_xml_export__children';
 
 	/** @var string */

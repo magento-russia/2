@@ -27,7 +27,7 @@ class Df_YandexMarket_Model_Category_Adviser_Case extends Df_Core_Model {
 		parent::_construct();
 		$this->_prop(self::P__PIECE, DF_V_STRING_NE);
 	}
-	const _C = __CLASS__;
+	
 	const P__PIECE = 'piece';
 	/**
 	 * @static

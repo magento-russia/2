@@ -20,7 +20,7 @@ class Df_Core_Model_Url_Rewrite extends Mage_Core_Model_Url_Rewrite {
 		);
 	}
 
-	const _C = __CLASS__;
+
 	const P__ID = 'url_rewrite_id';
 	const P__ID_PATH = 'id_path';
 	const P__IS_SYSTEM = 'is_system';

@@ -128,7 +128,7 @@ class Df_1C_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ORDER, Df_Sales_Model_Order::_C);
+		$this->_prop(self::$P__ORDER, Df_Sales_Model_Order::class);
 	}
 	/** @var string */
 	private static $P__ORDER = 'order';

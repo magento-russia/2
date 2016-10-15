@@ -51,7 +51,7 @@ class Df_Core_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup {
 	 * @used-by Df_Directory_Setup_Processor_InstallRegions::_construct()
 	 * @used-by Df_Directory_Setup_Processor_Region::_construct()
 	 */
-	const _C = __CLASS__;
+
 	/** @return Df_Core_Model_Resource_Setup */
 	public static function s() {static $r; return $r ? $r : $r = new self('df_core_setup');}
 }

@@ -33,10 +33,10 @@ class Df_PromoGift_Model_PromoAction extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__RULE, Df_PromoGift_Model_Rule::_C);
+		$this->_prop(self::P__RULE, Df_PromoGift_Model_Rule::class);
 	}
 	/** @used-by Df_PromoGift_Model_PromoAction_Collection::itemClass() */
-	const _C = __CLASS__;
+
 	const P__RULE = 'rule';
 	/**
 	 * @param Df_PromoGift_Model_Rule $rule

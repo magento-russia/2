@@ -65,7 +65,7 @@ class Df_Customer_Model_Address extends Mage_Customer_Model_Address {
 	}
 
 	/** @used-by Df_Customer_Model_Resource_Address_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const P__CITY = 'city';
 	const P__COUNTRY_ID = 'country_id';
 	const P__FIRSTNAME = 'firstname';

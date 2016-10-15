@@ -41,7 +41,7 @@ class Df_Localization_Onetime_Processor_Filesystem extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OPERATION, Df_Localization_Onetime_Dictionary_Filesystem_Operation::_C);
+		$this->_prop(self::$P__OPERATION, Df_Localization_Onetime_Dictionary_Filesystem_Operation::class);
 	}
 	/** @var string */
 	protected static $P__OPERATION = 'operation';

@@ -221,5 +221,5 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::_construct()
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::_construct()
 	 */
-	const _C = __CLASS__;
+
 }

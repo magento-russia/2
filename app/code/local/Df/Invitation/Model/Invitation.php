@@ -369,7 +369,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	protected $_eventPrefix = 'df_invitation';
 
 	/** @used-by Df_Invitation_Model_Resource_Invitation_Collection::_construct() */
-	const _C = __CLASS__;
+
 	const ERROR_CUSTOMER_EXISTS = 3;
 	const ERROR_INVALID_DATA = 2;
 	const ERROR_STATUS = 1;

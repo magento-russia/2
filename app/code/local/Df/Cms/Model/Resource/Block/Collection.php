@@ -74,14 +74,14 @@ class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Mysql4_Block
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_itemObjectClass = Df_Cms_Model_Block::_C;
+		$this->_itemObjectClass = Df_Cms_Model_Block::class;
 	}
 
 	/** @var array(string => mixed) */
 	private $_rmData = array();
 
 	/** @used-by Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks::_construct() */
-	const _C = __CLASS__;
+
 	/**
 	 * По аналогии с @see Df_Cms_Model_Resource_Page_Collection
 	 * Правда, не проверял, имеется ли при сохранении самодельных блоков без информации о витринах
