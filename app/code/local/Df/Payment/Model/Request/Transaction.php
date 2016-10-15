@@ -78,7 +78,7 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 		 * потому что в данном случае нам не нужна поддержка UTF-8.
 		 * @var string $class
 		 */
-		$class = rm_convention($payment->getMethodInstance(), 'Model_Request_' . ucfirst($type));
+		$class = df_con($payment->getMethodInstance(), 'Model_Request_' . ucfirst($type));
 		/** @var Df_Payment_Model_Request_Transaction $i */
 		$i = df_ic($class, 'Df_Payment_Model_Request_Transaction');
 		$i->_doTransaction($payment, $amount);

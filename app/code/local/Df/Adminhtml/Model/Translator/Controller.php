@@ -9,12 +9,12 @@ class Df_Adminhtml_Model_Translator_Controller extends Df_Core_Model {
 		$controllerClass = get_class($controller);
 		if (!isset($this->{__METHOD__}[$controllerClass])) {
 			/** @var string[] $classNameParts */
-			$classNameParts = rm_explode_class($controllerClass);
+			$classNameParts = df_explode_class($controllerClass);
 			if ('Mage' !== $classNameParts[0]) {
-				$result = rm_module_name($controllerClass);
+				$result = df_module_name($controllerClass);
 			}
 			else {
-				$result = df_concat_class($classNameParts[0], $classNameParts[2]);
+				$result = df_cc_class_($classNameParts[0], $classNameParts[2]);
 				/**
 				 * Однако же, данного модуля может не существовать.
 				 * Например, для адреса http://localhost.com:656/index.php/admin/system_design/
@@ -24,7 +24,7 @@ class Df_Adminhtml_Model_Translator_Controller extends Df_Core_Model {
 				 * (по сути, для стандартного кода возвращаем «Mage_Adminhtml»)
 				 */
 				if (!df_module_enabled($result)) {
-					$result = rm_module_name($controllerClass);
+					$result = df_module_name($controllerClass);
 				}
 			}
 			df_result_string($result);

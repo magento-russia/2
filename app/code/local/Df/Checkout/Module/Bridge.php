@@ -31,7 +31,7 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 		/** @var array(string => string) $cache */
 		static $cache;
 		if (!isset($cache[$mainBaseClass])) {
-			$cache[$mainBaseClass] = dfa(rm_explode_class($mainBaseClass), 1);
+			$cache[$mainBaseClass] = dfa(df_explode_class($mainBaseClass), 1);
 		}
 		return $cache[$mainBaseClass];
 	}
@@ -45,9 +45,9 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 	 */
 	protected static function convention(Df_Checkout_Module_Main $main, $suffix) {
 		/** @var string $default */
-		$default = df_concat_class('Df', $main->getCheckoutModuleType(), $suffix);
+		$default = df_cc_class_('Df', $main->getCheckoutModuleType(), $suffix);
 		/** @var string $resultClass */
-		$resultClass = rm_convention($main, $suffix, $default);
+		$resultClass = df_con($main, $suffix, $default);
 		return self::ic($resultClass, $main);
 	}
 }

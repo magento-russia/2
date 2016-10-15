@@ -30,15 +30,15 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	protected function delegate($class) {
-		if (!df_starts_with($class, rm_module_name($this))) {
+		if (!df_starts_with($class, df_module_name($this))) {
 			/**
 			 * 2015-08-04
 			 * array('Df', '1C', 'Cml2', 'Action')
 			 * @var string[] $head
 			 */
-			$head = df_head(rm_explode_class($this));
+			$head = df_head(df_explode_class($this));
 			$head[]= $class;
-			$class = df_concat_class($head);
+			$class = df_cc_class_($head);
 		}
 		self::pc($class, $this->getController());
 	}
@@ -139,7 +139,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @used-by getResponseLogFileName()
 	 * @return string
 	 */
-	protected function getResponseLogActionName() {return rm_model_id($this, '.');}
+	protected function getResponseLogActionName() {return df_cts_lc_camel($this, '.');}
 
 	/**
 	 * @used-by getResponseLogFileName()
@@ -168,7 +168,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $prefix */
 			$prefix = implode('-', array_filter(array(
-				rm_module_id($this, '.'), $this->getResponseLogActionName()
+				df_module_id($this, '.'), $this->getResponseLogActionName()
 			)));
 			/** @var string $template */
 			$template = strtr('rm-{prefix}-{date}-{time}.{extension}', array(

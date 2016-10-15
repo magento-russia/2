@@ -42,7 +42,7 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 			if ($isRequired) {
 				df_error(
 					'В файле «config.xml» модуля «%s» отсутствует требуемый ключ «%s».'
-					, rm_module_name($this->method()), $key
+					, df_module_name($this->method()), $key
 				);
 			}
 			$result = $default;

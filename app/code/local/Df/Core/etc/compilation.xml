@@ -20,7 +20,6 @@
 			<Df_Core_Observer/>
 			<Df_Core_Model_Layout_Update/>
 			<Df_Core_Model_Locale/>
-			<Df_Core_Model_Reflection/>
 			<Df_Core_Model_Settings_Group/>
 			<Df_Core_Model_Translate/>
 			<Df_Core_Model_Url_Rewrite/>

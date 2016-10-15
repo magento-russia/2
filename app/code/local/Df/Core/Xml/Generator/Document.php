@@ -244,7 +244,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	protected function getLogDocumentName() {
 		/** @var string $result */
 		$result = $this->mixin(__FUNCTION__);
-		return !is_null($result) ? $result : rm_model_id($this, '.');
+		return !is_null($result) ? $result : df_cts_lc_camel($this, '.');
 	}
 
 	/**
@@ -295,7 +295,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	/** @return Df_Core_Model_Logger */
 	private function createLogger() {
 		/** @var string $prefix */
-		$prefix = implode('-', array_filter(array(rm_module_id($this, '.'), $this->getLogDocumentName())));
+		$prefix = implode('-', array_filter(array(df_module_id($this, '.'), $this->getLogDocumentName())));
 		return Df_Core_Model_Logger::s(df_file_name(
 			Mage::getBaseDir('var') . DS . 'log'
 			, strtr('rm-{prefix}-{date}-{time}.log', array('{prefix}' => $prefix))

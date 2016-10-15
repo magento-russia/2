@@ -37,7 +37,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 	/**
 	 * 2015-02-06
 	 * Раньше реализация была такой:
-			mb_strtolower(df_last(rm_explode_class(get_class($this->getOwner()))))
+			mb_strtolower(df_last(df_explode_class(get_class($this->getOwner()))))
 	 * В принципе, она корректна, однако зависит от «магии» — имени класса, использующего наш класс.
 	 * Мало ли, какой рефакторинг потом произойдёт и как имена классов изменятся.
 	 * @return string

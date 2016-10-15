@@ -604,7 +604,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	protected function modulePath($localPath = '') {
 		if (!isset($this->{__METHOD__}[$localPath])) {
 			$this->{__METHOD__}[$localPath] = df_cc_path(
-				Mage::getConfig()->getModuleDir('', rm_module_name($this))
+				Mage::getConfig()->getModuleDir('', df_module_name($this))
 				,df_path_n($localPath)
 			);
 		}
@@ -619,7 +619,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 */
 	protected function moduleTitle() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_Reflection::s()->getModuleTitleByClass(get_class($this));
+			$this->{__METHOD__} = df_module_title();
 		}
 		return $this->{__METHOD__};
 	}

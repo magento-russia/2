@@ -66,7 +66,7 @@ function df_translate($text, $module) {
 			$variables = array();
 		}
 		if (is_object($module)) {
-			$module = rm_module_name($module);
+			$module = df_module_name($module);
 		}
 		/** @var Df_Core_Model_Translate $t */
 		static $t; if(!$t) {$t = Df_Core_Model_Translate::s();};
@@ -90,7 +90,7 @@ function df_translate_simple($text, $module) {
 	return
 		is_array($text)
 		? df_map(__FUNCTION__, $text, $module)
-		: $t->translateSimple($text, is_object($module) ? rm_module_name($module) : $module)
+		: $t->translateSimple($text, is_object($module) ? df_module_name($module) : $module)
 	;
 }
 

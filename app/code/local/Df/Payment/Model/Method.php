@@ -329,7 +329,7 @@ abstract class Df_Payment_Model_Method
 	 * @return string
 	 */
 	public function getFormBlockType() {
-		return rm_convention($this, 'Block_Form', Df_Payment_Block_Form::_C);
+		return df_con($this, 'Block_Form', Df_Payment_Block_Form::_C);
 	}
 
 	/**
@@ -339,7 +339,7 @@ abstract class Df_Payment_Model_Method
 	 * @return string
 	 */
 	public function getInfoBlockType() {
-		return rm_convention($this, 'Block_Info', Df_Payment_Block_Info::_C);
+		return df_con($this, 'Block_Info', Df_Payment_Block_Info::_C);
 	}
 
 	/**
@@ -351,7 +351,7 @@ abstract class Df_Payment_Model_Method
 	 */
 	public function getRmId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_module_id($this, '-');
+			$this->{__METHOD__} = df_module_id($this, '-');
 		}
 		return $this->{__METHOD__};
 	}

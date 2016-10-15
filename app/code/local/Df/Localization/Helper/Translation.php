@@ -115,7 +115,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 				,$currentClass
 			);
 		}
-		return df_translate($args, rm_module_name($parentClass));
+		return df_translate($args, df_module_name($parentClass));
 	}
 
 	/** @return Df_Localization_Helper_Translation */

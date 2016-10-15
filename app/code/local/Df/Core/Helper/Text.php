@@ -69,7 +69,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 * @param string $text
 	 * @return string
 	 */
-	public function camelize($text) {return implode(df_ucfirst(rm_explode_class(df_trim($text))));}
+	public function camelize($text) {return implode(df_ucfirst(df_explode_class(df_trim($text))));}
 
 	/**
 	 * @param string $text

@@ -107,7 +107,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 	protected function getExceptionClass() {return Df_Payment_Exception_Response::_C;}
 
 	/** @return string */
-	protected function getIdInPaymentInfo() {return df_class_mf(get_class($this));}
+	protected function getIdInPaymentInfo() {return df_cts_lc_camel($this, '_');}
 
 	/** @return string[] */
 	protected function getKeysToSuppress() {return array();}
@@ -159,7 +159,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			// ранняя информация будет перезаписана новой
 			'transaction_id' => implode('-', array(
 				$orderPayment->getOrder()->getIncrementId()
-				,mb_strtolower(df_last(rm_explode_class($this)))
+				,mb_strtolower(df_last(df_explode_class($this)))
 				,df_dts(Zend_Date::now(), 'HH:mm:ss')
 			))
 			,'is_transaction_closed' => $this->isTransactionClosed()

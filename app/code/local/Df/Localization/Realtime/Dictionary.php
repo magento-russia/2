@@ -174,7 +174,7 @@ class Df_Localization_Realtime_Dictionary extends Df_Localization_Dictionary {
 			 */
 			$currentModuleName = $this->getModuleNameFromCode($code);
 			if (!$currentModuleName) {
-				$currentModuleName = rm_module_name($controller);
+				$currentModuleName = df_module_name($controller);
 			}
 			df_assert_string_not_empty($currentModuleName);
 			/** @var Df_Localization_Realtime_Dictionary_Module|null $currentModule */
