@@ -44,7 +44,7 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 			 */
 			$imageName = df_ccc('.'
 				,df_output()->transliterate(df_strip_ext($imageName))
-				,df()->file()->getExt($imageName)
+				,df_file_ext($imageName)
 			);
 			// Конец заплатки
 			$result =

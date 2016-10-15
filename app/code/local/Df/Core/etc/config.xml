@@ -80,7 +80,7 @@
 						крайне существенное (поров в 21000 раз)
 						ускорение работы строковых функций, используемых ядром Magento.
 					-->
-					<string>Df_Core_Helper_String</string>
+					<string>Df_Core_Helper_StringM</string>
 				</rewrite>
 			</core>
 			<df_core><class>Df_Core_Helper</class></df_core>

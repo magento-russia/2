@@ -132,7 +132,7 @@
  * но и в других местах, а особенно широко — через библиотеку Zend Framework.
  * Но лучше хоть так, чем ничего, когда администатор не в состоянии следовать по первому пути.
  */
-class Df_Core_Helper_String extends Mage_Core_Helper_String {
+class Df_Core_Helper_StringM extends Mage_Core_Helper_String {
 	/**
 	 * @override
 	 * @param string $string

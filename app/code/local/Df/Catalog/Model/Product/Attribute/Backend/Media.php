@@ -223,6 +223,50 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 	private function getProduct() {return $this->_product;}
 
 	/**
+	 * @param string $fileName
+	 * @return string
+	 */
+	private function getUniqueFileName($fileName) {
+		$result = $fileName;
+		if (file_exists($fileName)) {
+			$fileInfo = pathinfo($fileName);
+			$dirname = dfa($fileInfo, 'dirname');
+			$extension = dfa($fileInfo, 'extension');
+			$key = dfa($fileInfo, 'filename');
+			$i = 1;
+			while (1) {
+				$result =
+					$dirname . '/'
+					. df_ccc('.', $this->generateOrderedKey($key, $i++), $extension)
+				;
+				if (!file_exists($result)) {
+					break;
+				}
+			}
+		}
+		df_result_string_not_empty($result);
+		/**
+		 * Раз путь к файлу уникален —
+		 * значит, не должно быть уже загруженного файла с таким путём
+		 */
+		df_assert(!is_file($result));
+		return $result;
+	}
+
+	/**
+	 * @param string $key
+	 * @param int $ordering
+	 * @return string
+	 */
+	private function generateOrderedKey($key, $ordering) {
+		return
+			(1 === $ordering)
+			? $key
+			: implode('-', array($key, $ordering))
+		;
+	}
+
+	/**
 	 * @param string $file
 	 * @return string
 	 */
@@ -275,13 +319,13 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 				dirname($destionationFilePath)
 				,df_ccc('.'
 					,df_output()->transliterate($product->getName())
-					, df()->file()->getExt($destionationFilePath)
+					,df_file_ext($destionationFilePath)
 				)
 			)
 		;
 		/** @var string $destionationFilePathOptimizedForSeoAndUnique */
 		$destionationFilePathOptimizedForSeoAndUnique =
-			df()->file()->getUniqueFileName($destionationFilePathOptimizedForSeo)
+			$this->getUniqueFileName($destionationFilePathOptimizedForSeo)
 		;
 		/** @var string $sourceFilePath */
 		$sourceFilePath = $this->_getConfig()->getTmpMediaPath($file);

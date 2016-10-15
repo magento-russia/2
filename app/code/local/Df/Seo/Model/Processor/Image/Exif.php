@@ -55,7 +55,7 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 	}
 
 	/** @return string */
-	private function getImageExtension() {return df()->file()->getExt($this->getImagePath());}
+	private function getImageExtension() {return df_file_ext($this->getImagePath());}
 
 	/** @return string */
 	private function getImagePath() {return $this->cfg(self::$P__IMAGE_PATH);}

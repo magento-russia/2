@@ -4,8 +4,6 @@ class Df_Core_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function assert() {return Df_Core_Helper_Assert::s();}
 	/** @return Df_Core_Helper_Check */
 	public function check() {return Df_Core_Helper_Check::s();}
-	/** @return Df_Core_Helper_File */
-	public function file() {return Df_Core_Helper_File::s();}
 
 	/** @return Df_Core_Helper_Data */
 	public function forbid() {
