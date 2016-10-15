@@ -89,7 +89,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable
 				 */
 				if (0 < $currentPrice) {
 					/** @var float $currentPriceAsFloat */
-					$currentPriceAsFloat = rm_float($currentPrice);
+					$currentPriceAsFloat = df_float($currentPrice);
 					if (is_null($result) || ($result > $currentPriceAsFloat)) {
 						$result = $currentPriceAsFloat;
 					}

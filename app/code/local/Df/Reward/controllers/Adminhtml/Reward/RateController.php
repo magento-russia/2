@@ -111,7 +111,7 @@ class Df_Reward_Adminhtml_Reward_RateController extends Mage_Adminhtml_Controlle
 				$rate->delete();
 				df_session()->addSuccess(df_h()->reward()->__('Rate deleted successfully.'));
 			} catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				$this->_redirect('*/*/*', array('_current' => true));
 				return;
 			}

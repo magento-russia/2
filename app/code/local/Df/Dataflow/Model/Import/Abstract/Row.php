@@ -64,7 +64,7 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 		/** @var float $result */
 		$result = null;
 		if (!is_string($value)) {
-			$result = rm_float($value);
+			$result = df_float($value);
 		}
 		else {
 			/** @var array $allowedSymbols */
@@ -93,7 +93,7 @@ class Df_Dataflow_Model_Import_Abstract_Row extends Df_Core_Model {
 				;
 			}
 			/** @var float $result */
-			$result = rm_float($resultAsString);
+			$result = df_float($resultAsString);
 		}
 		return $result;
 	}

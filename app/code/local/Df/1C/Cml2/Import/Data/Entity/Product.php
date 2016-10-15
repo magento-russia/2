@@ -128,7 +128,7 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 	/** @return float */
 	public function getWeight() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_float($this->getRequisiteValue('Вес'));
+			$this->{__METHOD__} = df_float($this->getRequisiteValue('Вес'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -211,7 +211,7 @@ class Df_1C_Cml2_Import_Data_Entity_Product extends Df_1C_Cml2_Import_Data_Entit
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $result */
 			$resultS = dfa($this->taxes(), 'НДС');
-			$this->{__METHOD__} = df_n_set(is_null($resultS) ? null : rm_float_positive0($resultS));
+			$this->{__METHOD__} = df_n_set(is_null($resultS) ? null : df_float_positive0($resultS));
 		}
 		return df_n_get($this->{__METHOD__});
 	}

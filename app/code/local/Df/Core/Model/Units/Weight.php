@@ -6,7 +6,7 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	 */
 	public function inGrammes($weightInDefaultUnits) {
 		/** @var float $weight*/
-		$weight = rm_float($weightInDefaultUnits);
+		$weight = df_float($weightInDefaultUnits);
 		return self::VALUE__GRAM === $this->getDefaultUnits() ? $weight : $this->getRatio() * $weight;
 	}
 
@@ -17,7 +17,7 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	public function inKilogrammes($weightInDefaultUnits) {
 		return
 			self::VALUE__KILOGRAM === $this->getDefaultUnits()
-			? rm_float($weightInDefaultUnits)
+			? df_float($weightInDefaultUnits)
 			: 0.001 * $this->inGrammes($weightInDefaultUnits)
 		;
 	}
@@ -43,7 +43,7 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string|int) $unitSettings */
 			$unitSettings = dfa($this->getUnitsSettings(), $this->getDefaultUnits());
-			$this->{__METHOD__} = rm_float(dfa($unitSettings, self::UNIT__RATIO));
+			$this->{__METHOD__} = df_float(dfa($unitSettings, self::UNIT__RATIO));
 		}
 		return $this->{__METHOD__};
 	}

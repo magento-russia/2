@@ -14,7 +14,7 @@ class Df_OnPay_Helper_Data extends Mage_Core_Helper_Data {
 	 */
 	public function priceToString(Df_Core_Model_Money $price) {
 		return
-			$price->getOriginalAsFloat() === rm_float($price->getIntegerPart())
+			$price->getOriginalAsFloat() === df_float($price->getIntegerPart())
 			? number_format(round($price->getOriginalAsFloat(), 1), 1, '.', '')
 			: $price->getAsString()
 		;

@@ -250,12 +250,12 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 				 * Обратите внимание,
 				 * что блок может быть не только класса $templateMelaMenuClass,
 				 * но и класса одного из потомков класса $templateMelaMenuClass,
-				 * поэтому @uses rm_is() точнее, чем
+				 * поэтому @uses df_is() точнее, чем
 						$templateMelaMenuClass
 				  ===
 						Mage::getConfig()->getBlockClassName('catalog/navigation')
 				 */
-				if (rm_is($navigationBlock, $templateMelaMenuClass)) {
+				if (df_is($navigationBlock, $templateMelaMenuClass)) {
 					$result = true;
 					break;
 				}

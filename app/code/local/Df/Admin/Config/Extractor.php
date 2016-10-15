@@ -10,7 +10,7 @@ abstract class Df_Admin_Config_Extractor extends Df_Core_Model {
 	 * @param string $suffix
 	 * @return bool
 	 */
-	protected function getYesNo($suffix) {return rm_bool($this->getValue($suffix));}
+	protected function getYesNo($suffix) {return df_bool($this->getValue($suffix));}
 
 	/**
 	 * @param string $suffix

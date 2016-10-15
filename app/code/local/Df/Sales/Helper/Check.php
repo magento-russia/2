@@ -5,7 +5,7 @@ class Df_Sales_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function orderCollection(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Sales_Model_Resource_Order_Collection'
 			, 'Mage_Sales_Model_Mysql4_Order_Collection'
 		);
@@ -16,7 +16,7 @@ class Df_Sales_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function orderGridCollection(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Sales_Model_Resource_Order_Grid_Collection'
 			, 'Mage_Sales_Model_Mysql4_Order_Collection'
 		);
@@ -27,7 +27,7 @@ class Df_Sales_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function quoteAddressItemCollection(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Sales_Model_Resource_Quote_Address_Item_Collection'
 			, 'Mage_Sales_Model_Mysql4_Quote_Address_Item_Collection'
 		);

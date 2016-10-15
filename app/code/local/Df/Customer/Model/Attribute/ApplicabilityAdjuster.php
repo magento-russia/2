@@ -4,10 +4,10 @@ class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 	public function adjust() {
 		if (!is_null($this->getApplicability())) {
 			$this->getAttribute()->addData(array(
-				'is_required' => rm_01($this->isRequired())
-				,'scope_is_required' => rm_01($this->isRequired())
-				,'is_visible' => rm_01($this->isVisible())
-				,'scope_is_visible' => rm_01($this->isVisible())
+				'is_required' => df_01($this->isRequired())
+				,'scope_is_required' => df_01($this->isRequired())
+				,'is_visible' => df_01($this->isVisible())
+				,'scope_is_visible' => df_01($this->isVisible())
 			));
 		}
 		return $this;

@@ -23,7 +23,7 @@ class Df_Admin_Config_Source_YesNoDev extends Df_Admin_Config_Source {
 
 	/** @return bool */
 	private function needEnableInDeveloperMode() {
-		return rm_bool($this->getFieldParam('df_enable_in_developer_mode', 1));
+		return df_bool($this->getFieldParam('df_enable_in_developer_mode', 1));
 	}
 	/**
 	 * @used-by toOptionArrayInternal()

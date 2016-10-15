@@ -10,7 +10,7 @@ class Df_Cms_Helper_Hierarchy extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function isEnabled() {
-		return rm_bool(Mage::getStoreConfigFlag(self::XML_PATH_HIERARCHY_ENABLED));
+		return df_bool(Mage::getStoreConfigFlag(self::XML_PATH_HIERARCHY_ENABLED));
 	}
 
 	/**

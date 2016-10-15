@@ -10,7 +10,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				df_session()->addSuccess(df_mage()->adminhtml()->__('Item was successfully deleted'));
 				$this->_redirect('*/*/');
 			} catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				$this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
 			}
 		}
@@ -79,7 +79,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				));
 			}
 			catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			}
 		}
 		$this->_redirect('*/*/index');
@@ -105,7 +105,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				));
 			}
 			catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			}
 		}
 		$this->_redirect('*/*/index');
@@ -138,7 +138,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				} catch (Exception $e) {
 				}
 			} else {
-				if (rm_bool(dfa(dfa($data, 'image', array()),'delete'))) {
+				if (df_bool(dfa(dfa($data, 'image', array()),'delete'))) {
 					 $data['image'] = '';
 				} else {
 					unset($data['image']);
@@ -168,7 +168,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				}
 
 			} else {
-				if (rm_bool(dfa(dfa($data, 'thumb_image', array()), 'delete'))) {
+				if (df_bool(dfa(dfa($data, 'thumb_image', array()), 'delete'))) {
 					 $data['thumb_image'] = '';
 				} else {
 					unset($data['thumb_image']);
@@ -201,7 +201,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				$this->_redirect('*/*/');
 				return;
 			} catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				df_session()->setFormData($data);
 				$this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
 				return;
@@ -238,7 +238,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				));
 			}
 			catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			}
 		}
 		$this->_redirect('*/*/index');

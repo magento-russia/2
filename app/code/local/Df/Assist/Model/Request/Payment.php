@@ -22,9 +22,9 @@ class Df_Assist_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			,'OrderAmount' => $this->amountS()
 			,'OrderCurrency' => $this->currencyCode()
 			,'OrderNumber' => $this->orderIId()
-			,'Delay' => rm_01($this->configS()->isCardPaymentActionAuthorize())
+			,'Delay' => df_01($this->configS()->isCardPaymentActionAuthorize())
 			,'Language' => $this->localeCode()
-			,'TestMode' => rm_01($this->getMethod()->isTestMode())
+			,'TestMode' => df_01($this->getMethod()->isTestMode())
 			,'RecurringIndicator' => 0
 			,'Merchant_ID' => $this->shopId()
 			,'URL_RETURN_OK' => rm_url_checkout_success()

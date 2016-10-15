@@ -30,7 +30,7 @@ class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	}
 
 	/** @return float */
-	public function getAmount() {return rm_float($this->_getData('amount'));}
+	public function getAmount() {return df_float($this->_getData('amount'));}
 
 	/**
 	 * Get customer orphan balances count

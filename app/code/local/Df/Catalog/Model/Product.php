@@ -497,7 +497,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 */
 	public function getHeight() {
 		/** @var float $result */
-		$result = rm_float(parent::_getData(self::P__HEIGHT));
+		$result = df_float(parent::_getData(self::P__HEIGHT));
 		return $result ? $result : df_cfg()->shipping()->product()->getDefaultHeight();
 	}
 
@@ -603,10 +603,10 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	public function getLength() {
 		/** @var float $result */
 		$result = parent::_getData(self::P__LENGTH);
-		if (is_null($result) || (0.0 === rm_float($result))) {
+		if (is_null($result) || (0.0 === df_float($result))) {
 			$result = df_cfg()->shipping()->product()->getDefaultLength();
 		}
-		$result = rm_float($result);
+		$result = df_float($result);
 		return $result;
 	}
 
@@ -707,7 +707,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			if (is_array($row)) {
 				$result = dfa($row, 'min_price');
 				if (!is_null($result)) {
-					$result = rm_float($result);
+					$result = df_float($result);
 				}
 				$this->setData('minimal_price', $result);
 			}
@@ -793,7 +793,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		 */
 		/** @var float $result */
 		$result = parent::getWeight();
-		if ((is_null($result) || (0.0 === rm_float($result)))) {
+		if ((is_null($result) || (0.0 === df_float($result)))) {
 			// Обратите внимание, что для некоторых типов (например, виртуальных и скачиваемых)
 			// нормально не иметь вес.
 			// Думаю, что перезагружать товар для уточнения веса
@@ -829,12 +829,12 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 						$inRecursion = false;
 					}
 				}
-				if ($canUseConfig && (is_null($result) || (0.0 === rm_float($result)))) {
+				if ($canUseConfig && (is_null($result) || (0.0 === df_float($result)))) {
 					$result = df_cfg()->shipping()->product()->getDefaultWeight($this->getStore());
 				}
 			}
 		}
-		return rm_float($result);
+		return df_float($result);
 	}
 
 	/** @return float */
@@ -848,7 +848,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 */
 	public function getWidth() {
 		/** @var float $result */
-		$result = rm_float(parent::_getData(self::P__WIDTH));
+		$result = df_float(parent::_getData(self::P__WIDTH));
 		return $result ? $result : df_cfg()->shipping()->product()->getDefaultWidth();
 	}
 
@@ -886,7 +886,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 
 	/** @return bool */
 	public function isLoadedInCollection() {
-		return rm_bool($this->_getData(self::P__RM__LOADED_IN_COLLECTION));
+		return df_bool($this->_getData(self::P__RM__LOADED_IN_COLLECTION));
 	}
 
 	/** @return Df_Catalog_Model_Product */

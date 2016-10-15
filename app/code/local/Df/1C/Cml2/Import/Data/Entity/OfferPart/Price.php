@@ -27,7 +27,7 @@ class Df_1C_Cml2_Import_Data_Entity_OfferPart_Price extends Df_1C_Cml2_Import_Da
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $result */
 			$resultS = $this->leaf('ЦенаЗаЕдиницу');
-			$this->{__METHOD__} = df_n_set(!$resultS ? null : rm_float($resultS));
+			$this->{__METHOD__} = df_n_set(!$resultS ? null : df_float($resultS));
 		}
 		return df_n_get($this->{__METHOD__});
 	}

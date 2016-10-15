@@ -1,6 +1,6 @@
 <?php
 use \Exception as E;
-use Df_Qa_Message_Failure_Exception as QE;
+use Df\Qa\Message\Failure\Exception as QE;
 class Df_Core_Exception extends E implements \ArrayAccess {
 	/**
 	 * Обратите внимание, что PHP разрешает сигнатуре конструктора класса-потомка
@@ -60,13 +60,13 @@ class Df_Core_Exception extends E implements \ArrayAccess {
 	public function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::preface()
+	 * @used-by \Df\Qa\Message\Failure\Exception::preface()
 	 * @return string[]
 	 */
 	public function comments() {return $this->_comments;}
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::stackLevel()
+	 * @used-by \Df\Qa\Message\Failure\Exception::stackLevel()
 	 * @return int
 	 */
 	public function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
@@ -80,7 +80,7 @@ class Df_Core_Exception extends E implements \ArrayAccess {
 
 	/**
 	 * 2016-07-31
-	 * @used-by Df_Qa_Message_Failure_Exception::main()
+	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @return bool
 	 */
 	public function isMessageHtml() {return $this->_messageIsHtml;}
@@ -134,7 +134,7 @@ class Df_Core_Exception extends E implements \ArrayAccess {
 
 	/**
 	 * 2016-08-19
-	 * @used-by Df_Qa_Message_Failure_Exception::main()
+	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @return string
 	 */
 	public function messageForLog() {return $this->messageForDeveloper();}
@@ -248,7 +248,7 @@ class Df_Core_Exception extends E implements \ArrayAccess {
 	private $_stackLevelsCountToSkip = 0;
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::e()
+	 * @used-by \Df\Qa\Message\Failure\Exception::e()
 	 * @used-by Df_Shipping_Collector::call()
 	 * @param \Exception $e
 	 * @return $this

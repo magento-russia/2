@@ -55,7 +55,7 @@ class Df_Payment_RedirectController extends Mage_Core_Controller_Front_Action {
 			 * потому что сообщения сессии checkout
 			 * не отображаются в стандартной теме на странице checkout/onepage
 			 */
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 			df_notify_exception($e);
 			Df_Payment_Redirected::restoreQuote();
 			$this->_redirect(RM_URL_CHECKOUT);

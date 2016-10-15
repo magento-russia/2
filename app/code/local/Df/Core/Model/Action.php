@@ -275,7 +275,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 			Mage::log(df_sprintf("output buffer:\n«%s»", $output));
 		}
 		if ($this->needAddExceptionToSession()) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		df_handle_entry_point_exception($e, $this->needRethrowException());
 	}

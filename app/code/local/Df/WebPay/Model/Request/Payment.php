@@ -327,7 +327,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/** @return int */
 	private function isTestMode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_01(
+			$this->{__METHOD__} = df_01(
 				$this->configS()->isTestMode() || $this->configS()->isTestModeOnProduction()
 			);
 		}

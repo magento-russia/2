@@ -53,7 +53,7 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return bool
 	 */
-	protected function needInvoice() {return !rm_bool($this->getRequest()->getParam('LMI_PREREQUEST'));}
+	protected function needInvoice() {return !df_bool($this->getRequest()->getParam('LMI_PREREQUEST'));}
 
 	/**
 	 * @override

@@ -161,7 +161,7 @@ abstract class Df_1C_Cml2_Import_Data_Entity_AttributeValue
 	/** @return int */
 	protected function isAttributeVisibleOnFront() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_01(rm_1c_cfg()->product()->other()->showAttributesOnProductPage());
+			$this->{__METHOD__} = df_01(rm_1c_cfg()->product()->other()->showAttributesOnProductPage());
 		}
 		return $this->{__METHOD__};
 	}

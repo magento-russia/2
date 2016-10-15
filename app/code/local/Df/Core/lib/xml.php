@@ -162,7 +162,7 @@ function rm_leaf(SimpleXMLElement $e = null, $default = null) {
  * @param bool $default [optional]
  * @return bool
  */
-function rm_leaf_b(SimpleXMLElement $e = null, $default = false) {return rm_bool(rm_leaf($e, $default));}
+function rm_leaf_b(SimpleXMLElement $e = null, $default = false) {return df_bool(rm_leaf($e, $default));}
 
 /**
  * @param SimpleXMLElement $e
@@ -180,7 +180,7 @@ function rm_leaf_child(SimpleXMLElement $e, $child, $default = null) {
  * @param SimpleXMLElement|null $e [optional]
  * @return float
  */
-function rm_leaf_f(SimpleXMLElement $e = null) {return rm_float(rm_leaf($e));}
+function rm_leaf_f(SimpleXMLElement $e = null) {return df_float(rm_leaf($e));}
 
 /**
  * 2015-08-16
@@ -416,7 +416,7 @@ define('RM_XML_BEGIN', '{rm-xml}');
 define('RM_XML_END', '{/rm-xml}');
 
 /**
- * @used-by rm_exception_to_session()
+ * @used-by df_exception_to_session()
  * @param string|string[] $text
  * @return string|string[]
  */

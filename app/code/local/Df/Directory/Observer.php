@@ -84,7 +84,7 @@ class Df_Directory_Observer {
 	 * @return bool
 	 */
 	private static function isRegionCollection(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Directory_Model_Resource_Region_Collection'
 			,'Df_Directory_Model_Resource_Region_Collection'
 		);

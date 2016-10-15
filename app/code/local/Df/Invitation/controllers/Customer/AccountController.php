@@ -73,7 +73,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			return;
 		}
 		catch (Mage_Core_Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		$this->_redirect('customer/account/login');
 	}
@@ -110,7 +110,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 				Df_Invitation_Model_Invitation::ERROR_CUSTOMER_EXISTS,Df_Invitation_Model_Invitation::ERROR_INVALID_DATA
 			);
 			if (in_array($e->getCode(), $_definedErrorCodes)) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				df_session()->setCustomerFormData($this->getRequest()->getPost());
 			} else {
 				if (Mage::helper('customer')->isRegistrationAllowed()) {

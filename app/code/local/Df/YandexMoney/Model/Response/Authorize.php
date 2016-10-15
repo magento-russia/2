@@ -94,7 +94,7 @@ class Df_YandexMoney_Model_Response_Authorize extends Df_YandexMoney_Model_Respo
 				/** @var array(string => bool|string) $sourceProperties */
 				df_assert_string_not_empty($sourceName);
 				df_assert_array($sourceProperties);
-				if (rm_bool(dfa($sourceProperties, 'allowed'))) {
+				if (df_bool(dfa($sourceProperties, 'allowed'))) {
 					$this->{__METHOD__}[]= $sourceName;
 				}
 			}

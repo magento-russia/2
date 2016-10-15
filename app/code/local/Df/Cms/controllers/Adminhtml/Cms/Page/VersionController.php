@@ -21,7 +21,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				return;
 			} catch (Mage_Core_Exception $e) {
 				// display error message
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				$error = true;
 			} catch (Exception $e) {
 				Mage::logException($e);
@@ -91,7 +91,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 					$this->__('Total of %d record(s) were successfully deleted', count($ids))
 				);
 			} catch (Mage_Core_Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			} catch (Exception $e) {
 				Mage::logException($e);
 				df_session()->addError(df_h()->cms()->__('Error while deleting revisions. Please try again later.'));
@@ -140,7 +140,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				return;
 			} catch (Exception $e) {
 				// display error message
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				if ($this->_getRefererUrl()) {
 					// save data in session
 					df_session()->setFormData($data);
@@ -201,7 +201,7 @@ class Df_Cms_Adminhtml_Cms_Page_VersionController extends Df_Cms_Adminhtml_Cms_P
 				return;
 			} catch (Exception $e) {
 				// display error message
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				// save data in session
 				df_session()->setFormData($data);
 				// redirect to edit form

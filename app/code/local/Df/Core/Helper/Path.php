@@ -72,7 +72,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 	private function chmod($path) {
 		try {
 			$r = chmod($path, 0777);
-			rm_throw_last_error($r);
+			df_throw_last_error($r);
 		}
 		catch (Exception $e) {
 			/** @var bool $isPermissionDenied */
@@ -99,7 +99,7 @@ class Df_Core_Helper_Path extends Mage_Core_Helper_Abstract {
 	private function mkdir($dir) {
 		try {
 			$r = mkdir($dir, 0777, $recursive = true);
-			rm_throw_last_error($r);
+			df_throw_last_error($r);
 		}
 		catch (Exception $e) {
 			/** @var bool $isPermissionDenied */

@@ -357,7 +357,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			$resultAsString = $this->getVar('test');
 			// Eсли в настройках отсутствует ключ «test»,
 			// то модуль будет всегда находиться в рабочем режиме.
-			$this->{__METHOD__} = is_null($resultAsString) ? false : rm_bool($resultAsString);
+			$this->{__METHOD__} = is_null($resultAsString) ? false : df_bool($resultAsString);
 		}
 		return $this->{__METHOD__};
 	}

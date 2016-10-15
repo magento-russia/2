@@ -271,13 +271,13 @@ class Df_1C_Cml2_Import_Data_Entity_Offer extends Df_1C_Cml2_Import_Data_Entity 
 					$result = 0;
 					foreach ($elements as $element) {
 						/** @var Df_Core_Sxe $element */
-						$result += rm_float($element->getAttribute('КоличествоНаСкладе'));
+						$result += df_float($element->getAttribute('КоличествоНаСкладе'));
 					}
 				}
 				else {
 					$result = $this->leaf('Количество');
 					if (!is_null($result)) {
-						$result = rm_float($result);
+						$result = df_float($result);
 					}
 				}
 			}

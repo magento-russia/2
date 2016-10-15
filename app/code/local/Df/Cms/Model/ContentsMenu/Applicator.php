@@ -14,7 +14,7 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				df_cfg()->cms()->hierarchy()->isEnabled()
-				&& rm_bool($this->getNodeMenuParam('enabled'))
+				&& df_bool($this->getNodeMenuParam('enabled'))
 			;
 		}
 		return $this->{__METHOD__};

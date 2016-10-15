@@ -82,7 +82,7 @@ class Df_Core_Setup extends Df_Core_Model {
 			 * вернёт объект класса @see Mage_Sales_Model_Resource_Setup,
 			 * а в старых версиях — объект класса @see Mage_Sales_Model_Mysql4_Setup.
 			 */
-			df_assert(rm_is($result, 'Mage_Sales_Model_Resource_Setup', 'Mage_Sales_Model_Mysql4_Setup'));
+			df_assert(df_is($result, 'Mage_Sales_Model_Resource_Setup', 'Mage_Sales_Model_Mysql4_Setup'));
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};

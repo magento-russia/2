@@ -13,7 +13,7 @@ abstract class Df_Admin_Config_BackendChecker extends Df_Core_Model {
 		}
 		catch (Exception $e) {
 			$this->getBackend()->handleCheckerException($e);
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 	}
 

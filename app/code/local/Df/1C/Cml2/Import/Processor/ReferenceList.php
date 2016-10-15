@@ -90,7 +90,7 @@ class Df_1C_Cml2_Import_Processor_ReferenceList extends Df_1C_Cml2_Import_Proces
 					,'is_filterable' => 1
 					,'is_comparable' => 1
 					,'is_visible_on_front' =>
-						rm_01(rm_1c_cfg()->product()->other()->showAttributesOnProductPage())
+						df_01(rm_1c_cfg()->product()->other()->showAttributesOnProductPage())
 					,'is_html_allowed_on_front' => 0
 					,'is_used_for_price_rules' => 0
 					,'is_filterable_in_search' => 1

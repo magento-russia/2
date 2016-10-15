@@ -22,7 +22,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				return;
 			} catch (Mage_Core_Exception $e) {
 				// display error message
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				$error = true;
 			} catch (Exception $e) {
 				Mage::logException($e);
@@ -233,7 +233,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 			return;
 		} catch (Exception $e) {
 			// display error message
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 			// redirect to edit form
 			$this->_redirect('*/*/edit', array(
 					'page_id' => $this->getRequest()->getParam('page_id'),'revision_id' => $this->getRequest()->getParam('revision_id')
@@ -277,7 +277,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 				return;
 			} catch (Exception $e) {
 				// display error message
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				// save data in session
 				df_session()->setFormData($data);
 				// redirect to edit form

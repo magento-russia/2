@@ -27,7 +27,7 @@ class Df_Core_Xml_Parser_Entity extends Df_Core_Model {
 	 * @return float|null
 	 */
 	public function descendF($path, $throw = false) {
-		return $this->descendWithCast($path, 'rm_float', 'вещественное', $throw);
+		return $this->descendWithCast($path, 'df_float', 'вещественное', $throw);
 	}
 
 	/**

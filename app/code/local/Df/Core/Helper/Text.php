@@ -131,7 +131,7 @@ class Df_Core_Helper_Text extends Mage_Core_Helper_Abstract {
 	 * @return string
 	 */
 	public function formatFloat($float, $decimals = 2) {
-		return number_format(rm_float($float), $decimals, '.', '');
+		return number_format(df_float($float), $decimals, '.', '');
 	}
 
 	/**

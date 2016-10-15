@@ -83,7 +83,7 @@ class Df_Sales_Model_Quote_Item_Extended extends Df_Core_Model {
 	 * @param string $key
 	 * @return float
 	 */
-	private function _getF($key) {return rm_float($this->_get($key));}
+	private function _getF($key) {return df_float($this->_get($key));}
 
 	/** @return Mage_Sales_Model_Quote_Item */
 	private function getQuoteItem() {return $this->cfg(self::P__QUOTE_ITEM);}

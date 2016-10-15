@@ -20,7 +20,7 @@ class Df_YandexMarket_Model_Config_Backend_Api_ConfirmationCode
 			}
 		}
 		catch (Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		parent::_beforeSave();
 		return $this;

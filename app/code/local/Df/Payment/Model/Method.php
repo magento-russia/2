@@ -220,7 +220,7 @@ abstract class Df_Payment_Model_Method
 		 * потому что
 		 */
 		if (df_is_admin()) {
-			$this->doTransaction(__FUNCTION__, $payment, rm_float($amount));
+			$this->doTransaction(__FUNCTION__, $payment, df_float($amount));
 		}
 		return $this;
 	}
@@ -473,7 +473,7 @@ abstract class Df_Payment_Model_Method
 		 * то Mage_Payment_Model_Method_Abstract::refund() возбудит исключительную ситуацию.
 		 */
 		parent::refund($payment, $amount);
-		$this->doTransaction(__FUNCTION__, $payment, rm_float($amount));
+		$this->doTransaction(__FUNCTION__, $payment, df_float($amount));
 		return $this;
 	}
 
@@ -509,7 +509,7 @@ abstract class Df_Payment_Model_Method
 				/** @var Df_Core_Exception $exception */
 				$this->logFailureHighLevel(df_ets($exception));
 			}
-			rm_exception_to_session($exception);
+			df_exception_to_session($exception);
 			/**
 			 * Перевозбуждаем исключительную ситуацию,
 			 * потому что в случае неуспеха нам нужно прервать
@@ -561,11 +561,11 @@ abstract class Df_Payment_Model_Method
 	 */
 	private function log($message, $filename) {
 		if ($message instanceof Exception) {
-			Df_Qa_Message_Failure_Exception::i(array(
-				Df_Qa_Message_Failure_Exception::P__EXCEPTION => $message
-				,Df_Qa_Message_Failure_Exception::P__FILE_NAME => $filename
-				,Df_Qa_Message_Failure_Exception::P__NEED_LOG_TO_FILE => true
-				,Df_Qa_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => true
+			\Df\Qa\Message\Failure\Exception::i(array(
+				\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $message
+				,\Df\Qa\Message\Failure\Exception::P__FILE_NAME => $filename
+				,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => true
+				,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => true
 			))->log();
 		}
 		else if (is_string($message)) {

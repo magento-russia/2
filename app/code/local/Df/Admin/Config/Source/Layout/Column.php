@@ -18,7 +18,7 @@ class Df_Admin_Config_Source_Layout_Column extends Df_Admin_Config_Source {
 	}
 
 	/** @return bool */
-	private function needShowOptionNo() {return rm_bool($this->getFieldParam('df_option_no', false));}
+	private function needShowOptionNo() {return df_bool($this->getFieldParam('df_option_no', false));}
 
 	/**
 	 * @param string $value

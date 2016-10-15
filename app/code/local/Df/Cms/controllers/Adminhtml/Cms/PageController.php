@@ -58,7 +58,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 					));
 				}
 				catch (Mage_Core_Exception $e) {
-					rm_exception_to_session($e);
+					df_exception_to_session($e);
 				}
 				catch (Exception $e) {
 					Mage::logException($e);

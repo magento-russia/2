@@ -26,7 +26,7 @@ class Df_Admin_Config_Backend_Currency extends Df_Admin_Config_Backend {
 	 */
 	protected function _beforeSave() {
 		// Выполняем проверки только при включенности модуля.
-		if (rm_bool($this->getValue())) {
+		if (df_bool($this->getValue())) {
 			Df_Admin_Config_BackendChecker_CurrencyIsSupported::_check($this, $this->getValue());
 		}
 		parent::_beforeSave();

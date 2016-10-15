@@ -7,7 +7,7 @@ class Df_1C_Observer {
 	 */
 	public function df_catalog__attribute_set__group_added(Varien_Event_Observer $o) {
 		try {
-			if (rm_is(rm_controller(), 'Df_1C_Cml2Controller')) {
+			if (df_is(rm_controller(), 'Df_1C_Cml2Controller')) {
 				/** @var Df_Catalog_Model_Event_AttributeSet_GroupAdded $event */
 				$event = Df_Catalog_Model_Event_AttributeSet_GroupAdded::i($o);
 				rm_1c_log(

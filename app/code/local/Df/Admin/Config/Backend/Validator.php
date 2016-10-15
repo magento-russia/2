@@ -20,7 +20,7 @@ class Df_Admin_Config_Backend_Validator extends Df_Admin_Config_Backend {
 	protected function _beforeSave() {
 		try {
 			// Проводим валидацию только в том случае, если административная опция включена
-			if (rm_bool($this->getValue())) {
+			if (df_bool($this->getValue())) {
 				$this->validate();
 			}
 		}
@@ -60,7 +60,7 @@ class Df_Admin_Config_Backend_Validator extends Df_Admin_Config_Backend {
 			}
 		}
 		// Если валидация не пройдена, то отключаем опцию.
-		$this->setValue($isValid && rm_bool($this->getValue()));
+		$this->setValue($isValid && df_bool($this->getValue()));
 		return $this;
 	}
 

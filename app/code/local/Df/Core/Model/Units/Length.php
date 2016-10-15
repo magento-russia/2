@@ -21,7 +21,7 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 			? array_map(array($this, __FUNCTION__), $lengthInDefaultUnits)
 			: (
 				self::VALUE__CENTIMETRE === $this->getDefaultUnits()
-				? rm_float($lengthInDefaultUnits)
+				? df_float($lengthInDefaultUnits)
 				: 0.1 * $this->inMillimetres($lengthInDefaultUnits)
 			)
 		;
@@ -48,7 +48,7 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 			? array_map(array($this, __FUNCTION__), $lengthInDefaultUnits)
 			: (
 				self::VALUE__METRE === $this->getDefaultUnits()
-				? rm_float($lengthInDefaultUnits)
+				? df_float($lengthInDefaultUnits)
 				: 0.001 * $this->inMillimetres($lengthInDefaultUnits)
 			)
 		;
@@ -60,7 +60,7 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 	 */
 	public function inMillimetres($lengthInDefaultUnits) {
 		/** @var float $length*/
-		$length = rm_float($lengthInDefaultUnits);
+		$length = df_float($lengthInDefaultUnits);
 		return
 			self::VALUE__MILLIMETRE === $this->getDefaultUnits()
 			? $length
@@ -90,7 +90,7 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 			/** @var mixed[] $productDefaultUnits */
 			$productDefaultUnits = dfa($this->getUnitsSettings(), $this->getDefaultUnits());
 			df_assert_array($productDefaultUnits);
-			$this->{__METHOD__} = rm_float(dfa($productDefaultUnits, self::UNIT__RATIO));
+			$this->{__METHOD__} = df_float(dfa($productDefaultUnits, self::UNIT__RATIO));
 		}
 		return $this->{__METHOD__};
 	}

@@ -1960,7 +1960,7 @@
 			<Df_Qa_Message/>
 			<Df_Qa_Message_Failure/>
 			<Df_Qa_Message_Failure_Error/>
-			<Df_Qa_Message_Failure_Exception/>
+			<\Df\Qa\Message\Failure\Exception/>
 			<Df_Qa_Message_Notification/>
 			<Df_Qiwi_Model_Payment/>
 			<Df_RbkMoney_Model_Payment/>

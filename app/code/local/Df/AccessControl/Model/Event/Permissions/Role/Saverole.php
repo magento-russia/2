@@ -3,7 +3,7 @@ class Df_AccessControl_Model_Event_Permissions_Role_Saverole
 	extends Df_Core_Model_Event_Controller_Action_Postdispatch {
 	/** @return bool */
 	public function isModuleEnabledForRole() {
-		return rm_bool($this->getController()->getRequest()->getParam('df_accessControl_enable'));
+		return df_bool($this->getController()->getRequest()->getParam('df_accessControl_enable'));
 	}
 
 	/** @return int */

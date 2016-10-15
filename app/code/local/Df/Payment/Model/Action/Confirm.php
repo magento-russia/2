@@ -191,7 +191,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	/** @return Df_Core_Model_Money */
 	protected function getRequestValuePaymentAmount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_money(rm_float($this->getRequestValuePaymentAmountAsString()));
+			$this->{__METHOD__} = rm_money(df_float($this->getRequestValuePaymentAmountAsString()));
 		}
 		return $this->{__METHOD__};
 	}

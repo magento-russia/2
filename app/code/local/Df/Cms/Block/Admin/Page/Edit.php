@@ -49,7 +49,7 @@ class Df_Cms_Block_Admin_Page_Edit extends Df_Core_Block_Admin {
 									(
 											Mage_Cms_Model_Page::STATUS_ENABLED
 										===
-											rm_01($page->getIsActive())
+											df_01($page->getIsActive())
 									)
 							) {
 								if (!Df_Cms_Model_Config::s()->canCurrentUserPublishRevision()) {

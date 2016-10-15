@@ -55,7 +55,7 @@ class Df_Core_Model_Settings_Group extends Df_Core_Model {
 		}
 		/** @var bool $result */
 		$result =
-			rm_bool(
+			df_bool(
 				$this->getValue(
 					$configKeySuffix
 					,$prefixes

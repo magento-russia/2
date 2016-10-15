@@ -16,7 +16,7 @@ function rm_money_fl($value, $curencyCode) {
  * @param float|int $value
  * @return string
  */
-function rm_number_2f($value) {return sprintf('.2F', rm_float($value));}
+function rm_number_2f($value) {return sprintf('.2F', df_float($value));}
 
 /**
  * 2015-04-09
@@ -24,7 +24,7 @@ function rm_number_2f($value) {return sprintf('.2F', rm_float($value));}
  * @param float|int $value
  * @return string
  */
-function rm_number_2fl($value) {return sprintf('.2f', rm_float($value));}
+function rm_number_2fl($value) {return sprintf('.2f', df_float($value));}
 
 /**
  * 2015-04-09
@@ -35,7 +35,7 @@ function rm_number_2fl($value) {return sprintf('.2f', rm_float($value));}
  */
 function rm_number_f($value) {
 	/** @var float $valueF */
-	$valueF = rm_float($value);
+	$valueF = df_float($value);
 	/** @var int $intPart */
 	$intPart = (int)$valueF;
 	// намеренно используем «==»

@@ -12,7 +12,7 @@ class Df_Pd4_IndexController extends Mage_Core_Controller_Front_Action {
 		}
 		catch (Exception $e) {
 			df_notify_exception($e);
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 			$this->_redirect('');
 		}
 	}

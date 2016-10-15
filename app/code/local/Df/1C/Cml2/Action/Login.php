@@ -30,7 +30,7 @@ class Df_1C_Cml2_Action_Login extends Df_1C_Cml2_Action {
 			catch (Exception $e) {
 				df_error('Авторизация не удалась: неверно системное имя «%s», либо пароль к нему.', $userName);
 			}
-			if (!rm_bool($apiUser->getIsActive())) {
+			if (!df_bool($apiUser->getIsActive())) {
 				df_error('Администратор «%s» не допущен к работе', $userName);
 			}
 			if (!$this->sessionMagentoAPI()->isAllowed('rm/_1c')) {

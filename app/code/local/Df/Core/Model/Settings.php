@@ -5,7 +5,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
-	public function getFloat($key, $store = null) {return rm_float($this->value($key, $store));}
+	public function getFloat($key, $store = null) {return df_float($this->value($key, $store));}
 
 	/**
 	 * @param string $key
@@ -63,7 +63,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return bool
 	 */
-	public function getYesNo($key, $store = null) {return rm_bool($this->value($key, $store));}
+	public function getYesNo($key, $store = null) {return df_bool($this->value($key, $store));}
 
 	/**
 	 * @used-by adaptKey()

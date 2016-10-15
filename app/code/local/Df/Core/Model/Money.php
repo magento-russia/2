@@ -60,7 +60,7 @@ class Df_Core_Model_Money extends Df_Core_Model {
 	/** @return float */
 	public function getOriginalAsFloat() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_float($this->getOriginal());
+			$this->{__METHOD__} = df_float($this->getOriginal());
 		}
 		return $this->{__METHOD__};
 	}

@@ -5,7 +5,7 @@ class Df_Core_Xml_Generator_Document extends Df_Core_Xml_Generator_Element {
 	 * @return float
 	 */
 	public function convertMoneyToExportCurrency($amountInBaseCurrency) {
-		return rm_float(rm_currency_h()->convertFromBase(
+		return df_float(rm_currency_h()->convertFromBase(
 			$amountInBaseCurrency, $this->getExportCurrency(), $this->store()
 		));
 	}

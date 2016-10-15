@@ -36,18 +36,18 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 				(
 						df_is_admin()
 					||
-						rm_bool($attribute->getIsVisibleOnFront())
+						df_bool($attribute->getIsVisibleOnFront())
 					||
 						(
 								// Для свойства «Special Price» («special_price») is_visible_on_front = false,
 								// но is_visible = true
-								rm_bool($attribute->getData('is_visible'))
+								df_bool($attribute->getData('is_visible'))
 							&&
 								// В магазине rukodeling.ru для нестандартного свойства «diametrdyr»
 								// is_visible почему-то равно true.
 								// Отбраковываем все нестандартные свойства,
 								// у которых is_visible_on_front = false.
-								!rm_bool($attribute->getData('is_user_defined'))
+								!df_bool($attribute->getData('is_user_defined'))
 						)
 				)
 		) {
@@ -87,18 +87,18 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 		if (
 				df_is_admin()
 			||
-				rm_bool(dfa($attributeData, 'is_visible_on_front'))
+				df_bool(dfa($attributeData, 'is_visible_on_front'))
 			||
 				(
 						// Для свойства «Special Price» («special_price») is_visible_on_front = false,
 						// но is_visible = true
-						rm_bool(dfa($attributeData, 'is_visible'))
+						df_bool(dfa($attributeData, 'is_visible'))
 					&&
 						// В магазине rukodeling.ru для нестандартного свойства «diametrdyr»
 						// is_visible почему-то равно true.
 						// Отбраковываем все нестандартные свойства,
 						// у которых is_visible_on_front = false.
-						!rm_bool(dfa($attributeData, 'is_user_defined'))
+						!df_bool(dfa($attributeData, 'is_user_defined'))
 				)
 		) {
 			$attributeData =

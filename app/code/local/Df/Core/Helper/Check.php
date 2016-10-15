@@ -5,7 +5,7 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function resourceDbCollectionAbstract(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Core_Model_Resource_Db_Collection_Abstract'
 			,'Mage_Core_Model_Mysql4_Collection_Abstract'
 		);
@@ -32,7 +32,7 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function storeCollection(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Core_Model_Resource_Store_Collection'
 			,'Mage_Core_Model_Mysql4_Store_Collection'
 		);
@@ -43,7 +43,7 @@ class Df_Core_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @return bool
 	 */
 	public function websiteCollection(Varien_Data_Collection_Db $collection) {
-		return rm_is($collection,
+		return df_is($collection,
 			'Mage_Core_Model_Resource_Website_Collection'
 			,'Mage_Core_Model_Mysql4_Website_Collection'
 		);

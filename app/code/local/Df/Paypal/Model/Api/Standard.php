@@ -25,9 +25,9 @@ class Df_Paypal_Model_Api_Standard extends Mage_Paypal_Model_Api_Standard {
 		$order = $this->getOrder();
 		/** @var float $additionalDiscount */
 		$additionalDiscount =
-				rm_float($order->getData('reward_currency_amount'))
+				df_float($order->getData('reward_currency_amount'))
 			+
-				rm_float($order->getData('customer_balance_amount'))
+				df_float($order->getData('customer_balance_amount'))
 		;
 		if (0 < $additionalDiscount) {
 			$additionalDiscountInUSD =
@@ -37,14 +37,14 @@ class Df_Paypal_Model_Api_Standard extends Mage_Paypal_Model_Api_Standard {
 			;
 			$result['discount_amount'] =
 				$this->_filterAmount (
-					rm_float(dfa($result, 'discount_amount')) + $additionalDiscountInUSD
+					df_float(dfa($result, 'discount_amount')) + $additionalDiscountInUSD
 				)
 			;
 		}
 		if ($this->getIsLineItemsEnabled()) {
 			$result['amount'] =
 				$this->_filterAmount (
-					rm_float(dfa($result, 'amount')) - rm_float(dfa($result, 'shipping'))
+					df_float(dfa($result, 'amount')) - df_float(dfa($result, 'shipping'))
 				)
 			;
 		}

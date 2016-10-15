@@ -6,7 +6,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 			$this->{__METHOD__} =
 				$this->formatWidthForCss(
 					$this->settings()->getNameWidth()
-					* rm_01($this->settings()->needShowName())
+					* df_01($this->settings()->needShowName())
 					* $this->widthNormalizationRatio()
 				)
 			;
@@ -20,7 +20,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 			$this->{__METHOD__} =
 				$this->formatWidthForCss(
 					$this->settings()->getQtyWidth()
-					* rm_01($this->settings()->needShowQty())
+					* df_01($this->settings()->needShowQty())
 					* $this->widthNormalizationRatio()
 				)
 			;
@@ -34,7 +34,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 			$this->{__METHOD__} =
 				$this->formatWidthForCss(
 					$this->settings()->getSkuWidth()
-					* rm_01($this->settings()->needShowSku())
+					* df_01($this->settings()->needShowSku())
 					* $this->widthNormalizationRatio()
 				)
 			;
@@ -186,9 +186,9 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 	private function totalWidthPercent() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				$this->settings()->getNameWidth() * rm_01($this->settings()->needShowName())
-				+ $this->settings()->getSkuWidth() * rm_01($this->settings()->needShowSku())
-				+ $this->settings()->getQtyWidth() * rm_01($this->settings()->needShowQty())
+				$this->settings()->getNameWidth() * df_01($this->settings()->needShowName())
+				+ $this->settings()->getSkuWidth() * df_01($this->settings()->needShowSku())
+				+ $this->settings()->getQtyWidth() * df_01($this->settings()->needShowQty())
 			;
 			df_result_integer($this->{__METHOD__});
 		}
@@ -198,7 +198,7 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 	/** @return float */
 	private function widthNormalizationRatio() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = 100.0 / rm_float($this->totalWidthPercent());
+			$this->{__METHOD__} = 100.0 / df_float($this->totalWidthPercent());
 		}
 		return $this->{__METHOD__};
 	}

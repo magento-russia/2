@@ -11,7 +11,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 				df_session()->addSuccess(df_mage()->adminhtml()->__('Item was successfully deleted'));
 				$this->_redirect('*/*/');
 			} catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				$this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
 			}
 		}
@@ -79,7 +79,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 				));
 			}
 			catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			}
 		}
 		$this->_redirect('*/*/index');
@@ -106,7 +106,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 				));
 			}
 			catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			}
 		}
 		$this->_redirect('*/*/index');
@@ -165,7 +165,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 				$this->_redirect('*/*/');
 				return;
 			} catch (Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 				df_session()->setFormData($data);
 				$this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
 				return;

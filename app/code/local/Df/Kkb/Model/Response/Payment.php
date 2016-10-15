@@ -15,7 +15,7 @@ class Df_Kkb_Model_Response_Payment extends Df_Kkb_Model_Response {
 
 	/** @return float */
 	public function getPaymentAmount() {
-		return rm_float($this->getElementPayment()->getAttribute('amount'));
+		return df_float($this->getElementPayment()->getAttribute('amount'));
 	}
 	
 	/** @return Df_Core_Model_Money */

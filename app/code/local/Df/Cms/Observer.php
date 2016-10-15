@@ -325,7 +325,7 @@ class Df_Cms_Observer {
 					/** @var bool $currentPageIsRoot */
 					$currentPageIsRoot = false;
 					foreach ($nodesData as $row) {
-						if (rm_bool(dfa($row, 'current_page'))) {
+						if (df_bool(dfa($row, 'current_page'))) {
 							$currentPageIsOrphan = false;
 							/** @var int $sortOrder */
 							$sortOrder = df_int(dfa($row, 'sort_order'));
@@ -398,7 +398,7 @@ class Df_Cms_Observer {
 						 * @var bool $markedAsParent
 						 */
 						$markedAsParent =
-							rm_bool(
+							df_bool(
 								dfa($row, 'page_exists')
 							)
 						;

@@ -18,7 +18,7 @@ class Df_Catalog_Model_Config_Backend_Conditions extends Df_Admin_Config_Backend
 		}
 		catch (Exception $e) {
 			df_notify_exception($e);
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		parent::_beforeSave();
 		return $this;

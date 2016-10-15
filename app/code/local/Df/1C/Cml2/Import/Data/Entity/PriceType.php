@@ -37,7 +37,7 @@ class Df_1C_Cml2_Import_Data_Entity_PriceType extends Df_1C_Cml2_Import_Data_Ent
 	 */
 	public function isVatIncluded() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_bool(
+			$this->{__METHOD__} = df_bool(
 				dfa($this->e()->map('Налог', 'Наименование', 'УчтеноВСумме'), 'НДС')
 			);
 		}

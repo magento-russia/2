@@ -359,7 +359,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 				$this->throwOrderNotExists();
 			}
 			else {
-				if (0.0 === rm_float($this->order()->getBaseGrandTotal())) {
+				if (0.0 === df_float($this->order()->getBaseGrandTotal())) {
 					$this->logOrderMessage(
 						'Заказ номер %orderId% не предназначен для оплаты,'
 						.' потому что он бесплатен.'

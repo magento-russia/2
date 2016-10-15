@@ -100,7 +100,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 				);
 			}
 			catch (Mage_Core_Exception $e) {
-				rm_exception_to_session($e);
+				df_exception_to_session($e);
 			}
 			catch (Exception $e) {
 				df_session()->addException($e, df_h()->cms()->__('Error in saving hierarchy.'));

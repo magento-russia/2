@@ -70,6 +70,19 @@ function rm_action_name() {return !rm_controller() ? '' : rm_controller()->getFu
  */
 function rm_controller() {return rm_state()->getController();}
 
+/** @return bool */
+function df_installed() {
+	/** @var bool $result */
+	static $result;
+	if (is_null($result)) {
+		/** @var string $timezone */
+		$timezone = date_default_timezone_get();
+		$result = Mage::isInstalled();
+		date_default_timezone_set($timezone);
+	}
+	return $result;
+}
+
 /**
  * @param string $key
  * @param string $default [optional]

@@ -101,14 +101,14 @@ class Df_1C_Cml2_Export_Processor_Sale_Order extends Df_1C_Cml2_Export_Processor
 			$this->entry()->discount('Скидка', abs($this->getOrder()->getDiscountAmount()), true)
 		);
 		/** @var float $rewardAmount */
-		$rewardAmount = rm_float($this->getOrder()->getData(
+		$rewardAmount = df_float($this->getOrder()->getData(
 			Df_Sales_Model_Order::P__REWARD_CURRENCY_AMOUNT
 		));
 		if (0 < $rewardAmount) {
 			$result[]= $this->entry()->discount('Бонусная скидка', $rewardAmount, false);
 		}
 		/** @var float $customerBalanceAmount */
-		$customerBalanceAmount = rm_float($this->getOrder()->getData(
+		$customerBalanceAmount = df_float($this->getOrder()->getData(
 			Df_Sales_Model_Order::P__CUSTOMER_BALANCE_AMOUNT
 		));
 		if (0 < $customerBalanceAmount) {

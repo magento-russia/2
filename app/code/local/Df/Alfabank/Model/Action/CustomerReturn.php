@@ -31,7 +31,7 @@ class Df_Alfabank_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Co
 	 * @return string
 	 */
 	protected function getRequestValuePaymentAmountAsString() {
-		return strval(rm_float(parent::getRequestValuePaymentAmountAsString()) / 100);
+		return strval(df_float(parent::getRequestValuePaymentAmountAsString()) / 100);
 	}
 
 	/**

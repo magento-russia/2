@@ -181,11 +181,11 @@ function df_notify_exception($exception, $additionalMessage = null) {
 	if (is_string($exception)) {
 		$exception = new Exception($exception);
 	}
-	Df_Qa_Message_Failure_Exception::i(array(
-		Df_Qa_Message_Failure_Exception::P__EXCEPTION => $exception
-		,Df_Qa_Message_Failure_Exception::P__ADDITIONAL_MESSAGE => $additionalMessage
-		,Df_Qa_Message_Failure_Exception::P__NEED_LOG_TO_FILE => true
-		,Df_Qa_Message_Failure_Exception::P__NEED_NOTIFY_DEVELOPER => true
+	\Df\Qa\Message\Failure\Exception::i(array(
+		\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $exception
+		,\Df\Qa\Message\Failure\Exception::P__ADDITIONAL_MESSAGE => $additionalMessage
+		,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => true
+		,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => true
 	))->log();
 }
 

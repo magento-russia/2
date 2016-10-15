@@ -42,7 +42,7 @@ class Df_Eav_Observer {
 	 * @return bool
 	 */
 	private static function isEntityAttributeCollection(Varien_Data_Collection_Db $c) {
-		return rm_is($c,
+		return df_is($c,
 			'Mage_Eav_Model_Resource_Entity_Attribute_Collection'
 			,'Mage_Eav_Model_Mysql4_Entity_Attribute_Collection'
 		);

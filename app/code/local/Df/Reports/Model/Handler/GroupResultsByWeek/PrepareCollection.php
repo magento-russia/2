@@ -88,7 +88,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	/** @return bool */
 	private function isItReportCollection() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_is($this->getEvent()->getCollection(),
+			$this->{__METHOD__} = df_is($this->getEvent()->getCollection(),
 				'Mage_Sales_Model_Resource_Report_Collection_Abstract'
 				,'Mage_Sales_Model_Mysql4_Report_Collection_Abstract'
 			);

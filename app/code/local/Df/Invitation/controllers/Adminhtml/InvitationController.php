@@ -38,7 +38,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			$this->renderLayout();
 		}
 		catch (Mage_Core_Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 			$this->_redirect('*/*/');
 		}
 	}
@@ -135,7 +135,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			return;
 		}
 		catch (Mage_Core_Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		$this->_redirect('*/*/new');
 	}
@@ -168,7 +168,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			}
 		}
 		catch (Mage_Core_Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		$this->_redirect('*/*/view', array('_current' => true));
 	}
@@ -227,7 +227,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			}
 		}
 		catch (Mage_Core_Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		$this->_redirect('*/*/');
 	}
@@ -272,7 +272,7 @@ class Df_Invitation_Adminhtml_InvitationController extends Mage_Adminhtml_Contro
 			}
 		}
 		catch (Mage_Core_Exception $e) {
-			rm_exception_to_session($e);
+			df_exception_to_session($e);
 		}
 		$this->_redirect('*/*/');
 	}
