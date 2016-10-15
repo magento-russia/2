@@ -14,7 +14,7 @@
 			data = {};
 		}
 		/** @type {String} */
-		var urlBase = '<?php echo df_ejs(df_url_admin('df_moysklad/export/')); ?>';
+		var urlBase = '<?php echo df_ejs(df_url_backend('df_moysklad/export/')); ?>';
 		data['df-session'] = sessionKey;
 		$.getJSON(urlBase + suffix, data, callback);
 	};

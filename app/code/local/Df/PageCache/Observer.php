@@ -58,7 +58,7 @@ class Df_PageCache_Observer {
 		$httpHost = Mage::app()->getFrontController()->getRequest()->getHttpHost();
 		$urlHost = parse_url($url, PHP_URL_HOST);
 		if ($httpHost != $urlHost && Mage::getSingleton('core/session')->getMessages()->count() > 0) {
-			$transport->setUrl(Mage::helper('core/url')->addRequestParam(
+			$transport->setUrl(df_url_h()->addRequestParam(
 				$url,
 				array(Df_PageCache_Model_Cache::REQUEST_MESSAGE_GET_PARAM => null)
 			));

@@ -247,7 +247,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 			$result = array();
 			foreach ($this->cfg(self::P__IMAGES) as $image) {
 				/** @var string $image */
-				if (df_url_h()->is($image)) {
+				if (df_check_url($image)) {
 					$image = $this->download($image);
 				}
 				$result[]= $image;

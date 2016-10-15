@@ -10,7 +10,7 @@ class Df_Page_Head {
 		foreach ($staticItems as &$rows) {
 			foreach ($rows as &$name) {
 				if (0 === strpos($name, 'df/')) {
-					$name = df_url_h()->addVersionStamp($name);
+					$name = df_url_add_version_stamp($name);
 				}
 			}
 		}

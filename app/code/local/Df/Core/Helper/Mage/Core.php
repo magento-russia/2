@@ -27,8 +27,6 @@ class Df_Core_Helper_Mage_Core extends Mage_Core_Helper_Abstract {
 	public function resource() {return Mage::getSingleton('core/resource');}
 	/** @return Mage_Core_Model_Translate */
 	public function translateSingleton() {return Mage::getSingleton('core/translate');}
-	/** @return Mage_Core_Helper_Url */
-	public function url() {return Mage::helper('core/url');}
 	/** @return Mage_Core_Model_Url */
 	public function urlSingleton() {return Mage::getSingleton('core/url');}
 	/** @return Df_Core_Helper_Mage_Core */

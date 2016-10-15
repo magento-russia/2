@@ -9,7 +9,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 	/** @return string */
 	public function getLink() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_url_admin('df_localization/theme/process', array(
+			$this->{__METHOD__} = df_url_backend('df_localization/theme/process', array(
 				Df_Localization_Onetime_Action::RP__PROCESSOR => $this->getId()
 			));
 		}

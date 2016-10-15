@@ -1,7 +1,7 @@
 <?php
 class Df_Cms_Model_Admin_Action_DeleteOrphanBlocks extends Df_Core_Model_Action_Admin {
 	/** @return string */
-	public function getLink() {return df_url_admin('df_cms_admin/notification/deleteOrphanBlocks');}
+	public function getLink() {return df_url_backend('df_cms_admin/notification/deleteOrphanBlocks');}
 
 	/**
 	 * @override

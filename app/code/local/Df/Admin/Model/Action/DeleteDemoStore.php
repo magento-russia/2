@@ -17,7 +17,7 @@ class Df_Admin_Model_Action_DeleteDemoStore extends Df_Core_Model_Action_Admin {
 	 * @return string
 	 */
 	public static function getLink(Df_Core_Model_StoreM $store) {
-		return df_url_admin('df_admin/notification/deleteDemoStore', array(
+		return df_url_backend('df_admin/notification/deleteDemoStore', array(
 			self::$RP__STORE => $store->getCode()
 		));
 	}

@@ -30,7 +30,7 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 			if ($this->getUrlSettingsSuffix()) {
 				$this->{__METHOD__} .= df_output()->processLink(
 					'<br/><span class="rm-url-settings">[[открыть раздел настроек]]</span>'
-					, df_url_admin('adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix())
+					, df_url_backend('adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix())
 				);
 			}
 		}
