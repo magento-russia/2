@@ -22,8 +22,6 @@ class Df_Core_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function path() {return \Df\Core\Helper\Path::s();}
 	/** @return Df_Dataflow_Model_Registry */
 	public function registry() {return Df_Dataflow_Model_Registry::s();}
-	/** @return Df_Core_Helper_Request */
-	public function request() {return Df_Core_Helper_Request::s();}
 	/** @return Df_Core_Helper_Version */
 	public function version() {return Df_Core_Helper_Version::s();}
 	/** @return Df_Core_Helper_Data */
