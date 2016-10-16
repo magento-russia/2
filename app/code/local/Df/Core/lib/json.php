@@ -43,7 +43,7 @@ function df_json_decode($string, $throw = true) {
 		$result = json_decode($string, true);
 		if (is_null($result) && $throw) {
 			df_assert_ne(JSON_ERROR_NONE, json_last_error());
-			df_error(__("Parsing a JSON document failed with the message «%1».", json_last_error_msg()));
+			df_error("Parsing a JSON document failed with the message «%1».", json_last_error_msg());
 		}
 	}
 	return $result;

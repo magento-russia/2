@@ -12,6 +12,7 @@ class Df_Admin_Model_Acl extends Mage_Admin_Model_Acl {
 	 */
 	public function add(Zend_Acl_Resource_Interface $resource, $parent = null) {
 		if (!$this->has($resource)) {
+			/** @noinspection PhpDeprecationInspection */
 			parent::add($resource);
 		}
 		return $this;

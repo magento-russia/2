@@ -105,7 +105,7 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 	 * @override
 	 * @param Mage_Core_Model_Abstract|Df_Catalog_Model_Product $entity
 	 * @param Df_Core_Model_StoreM $store
-	 * @return Object
+	 * @return void
 	 */
 	protected function setStoreToEntity(Mage_Core_Model_Abstract $entity, Df_Core_Model_StoreM $store) {
 		$entity->setStoreId($store->getId());

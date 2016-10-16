@@ -13,6 +13,7 @@ class Df_Logging_Block_Grid_Filter_Ip extends Mage_Adminhtml_Block_Widget_Grid_C
 		if (1 === preg_match('/^(\d+\.){3}\d+$/', $value)) {
 			return ip2long($value);
 		}
+		/** @noinspection PhpDeprecationInspection */
 		return array('field_expr' => 'INET_NTOA(#?)', 'like' => "%{$this->_escapeValue($value)}%");
 	}
 }

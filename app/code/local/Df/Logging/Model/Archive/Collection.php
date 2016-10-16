@@ -6,7 +6,6 @@ class Df_Logging_Model_Archive_Collection extends Varien_Data_Collection_Filesys
 	 * поэтому у нашего класса нет метода _construct,
 	 * и мы перекрываем именно конструктор
 	 * @override
-	 * @return Df_Logging_Model_Archive_Collection
 	 */
 	public function __construct() {
 		parent::__construct();

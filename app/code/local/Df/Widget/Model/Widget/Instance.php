@@ -42,6 +42,7 @@ class Df_Widget_Model_Widget_Instance extends Mage_Widget_Model_Widget_Instance 
 			Mage::dispatchEvent('model_save_before', array('object' => $this));
 			Mage::dispatchEvent($this->_eventPrefix.'_save_before', $this->_getEventData());
 		}
+		return $this;
 	}
 
 	/**

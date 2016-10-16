@@ -322,7 +322,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	/**
 	 * @param array $rewriteData
 	 * @param Varien_Object $rewrite
-	 * @return Mage_Catalog_Model_Resource_Url
+	 * @return void
 	 */
 	private function saveRewriteHistory_DfLegacyPatch($rewriteData, $rewrite) {
 		if ($rewrite instanceof Varien_Object && $rewrite->getId()) {
@@ -337,7 +337,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 
 	/**
 	 * @param array(string => mixed) $rewriteData
-	 * @return Df_Catalog_Model_Resource_Url
+	 * @return void
 	 */
 	private function saveRewriteHistory_DfLegacyPatch2($rewriteData) {
 		$rewriteData = new Varien_Object($rewriteData);
@@ -347,7 +347,6 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 			// create permanent redirect
 			$this->_getWriteAdapter()->insert($this->getMainTable(), $rewriteData->getData());
 		}
-		return $this;
 	}
 
 	const TABLE = 'core/url_rewrite';

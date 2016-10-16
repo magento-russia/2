@@ -8,6 +8,7 @@ class Df_Widget_Model_Resource_Widget_Instance extends Mage_Widget_Model_Resourc
 		if ($object->needSaveRelations()) {
 			parent::_afterSave($object);
 		}
+		return $this;
 	}
 
 	/** @return Df_Widget_Model_Resource_Widget_Instance */

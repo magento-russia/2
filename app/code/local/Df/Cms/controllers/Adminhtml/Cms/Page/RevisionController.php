@@ -146,7 +146,7 @@ class Df_Cms_Adminhtml_Cms_Page_RevisionController extends Df_Cms_Adminhtml_Cms_
 
 	/**
 	 * New Revision action
-	 * @return Df_Cms_Adminhtml_Cms_Page_RevisionController
+	 * @return void
 	 */
 	public function newAction()
 	{

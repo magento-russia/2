@@ -17,7 +17,7 @@ class Df_AccessControl_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param int $roleId
-	 * @return Df_AccessControl_Helper_Data
+	 * @return void
 	 */
 	public function setLastSavedRoleId($roleId) {$this->_lastSavedRoleId = $roleId;}
 

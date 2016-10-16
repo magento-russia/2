@@ -1,6 +1,8 @@
 <?php
 /**
+ * @method string|null getCreatedTime()
  * @method Df_Banner_Model_Resource_Banner getResource()
+ * @method string|null getUpdateTime()
  * @method $this setCreatedTime(string $value)
  * @method $this setIsMassupdate(bool $value)
  * @method $this setStatus(string $value)

@@ -3,7 +3,6 @@ class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Resource_Blo
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Db_Abstract|array(string => mixed) $resource
-	 * @return Df_Cms_Model_Resource_Block_Collection
 	 */
 	public function __construct($resource = null) {
 		if (is_array($resource)) {

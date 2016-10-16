@@ -78,6 +78,7 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Resou
 		$query = $this->_getWriteAdapter()->query($this->_select);
 		/** @noinspection PhpAssignmentInConditionInspection */
 		while ($row = $query->fetch()) {
+			/** @noinspection PhpDeprecationInspection */
 			$product = $this->_prepareProduct($row);
 			$products[$product->getId()] = $product;
 		}

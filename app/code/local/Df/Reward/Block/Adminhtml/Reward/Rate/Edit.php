@@ -5,7 +5,6 @@ class Df_Reward_Block_Adminhtml_Reward_Rate_Edit extends Mage_Adminhtml_Block_Wi
 	 * потому что родительский класс пихает инициализацию именно в конструктор.
 	 * @see Mage_Adminhtml_Block_Widget_Form_Container::__construct()
 	 * @override
-	 * @return Df_Reward_Block_Adminhtml_Reward_Rate_Edit
 	 */
 	public function __construct() {
 		parent::__construct();

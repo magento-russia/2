@@ -7,7 +7,6 @@ class Df_CustomerBalance_Model_Total_Quote_Customerbalance
 	 * поэтому у нашего класса нет метода _construct,
 	 * и мы перекрываем именно конструктор
 	 * @override
-	 * @return Df_CustomerBalance_Model_Total_Quote_Customerbalance
 	 */
 	public function __construct() {$this->setCode('customerbalance');}
 

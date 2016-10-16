@@ -15,6 +15,7 @@ class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model {
 		if ($result) {
 			call_user_func(array($this, $this->getMethodOfUpdate()), $this->contentNew());
 		}
+		return $result;
 	}
 
 	/**

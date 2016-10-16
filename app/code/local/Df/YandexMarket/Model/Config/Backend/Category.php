@@ -22,5 +22,6 @@ class Df_YandexMarket_Model_Config_Backend_Category
 		catch (Exception $e) {
 			df_exception_to_session($e);
 		}
+		return $this;
 	}
 }

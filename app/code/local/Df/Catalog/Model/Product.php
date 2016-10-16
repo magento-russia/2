@@ -266,6 +266,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 						 */
 						$hasMethod_getTotalPrices = method_exists($priceModel, 'getTotalPrices');
 					}
+					/** @noinspection PhpDeprecationInspection */
 					$result =
 						$hasMethod_getTotalPrices
 						?

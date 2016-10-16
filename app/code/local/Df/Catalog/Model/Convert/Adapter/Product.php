@@ -181,6 +181,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 				if (in_array($field, $this->_inventoryFields)) {
 					continue;
 				}
+				/** @noinspection PhpDeprecationInspection */
 				if (in_array($field, $this->_imageFields)) {
 					continue;
 				}

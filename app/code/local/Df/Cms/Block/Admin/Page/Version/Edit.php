@@ -5,7 +5,6 @@ class Df_Cms_Block_Admin_Page_Version_Edit extends Mage_Adminhtml_Block_Widget_F
 	 * потому что родительский класс пихает инициализацию именно в конструктор.
 	 * @see Mage_Adminhtml_Block_Widget_Form_Container::__construct()
 	 * @override
-	 * @return Df_Cms_Block_Admin_Page_Version_Edit
 	 */
 	public function __construct() {
 		parent::__construct();

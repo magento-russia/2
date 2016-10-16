@@ -16,8 +16,6 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	public function count() {return count($this->getItems());}
 
 	/**
-	 * Убрал @see df_assert()
-	 * ради ускорения работы метода @see Dfr\Translation\Realtime\Dictionary::translate()
 	 * @param int|string $id
 	 * @return Entity|null
 	 */

@@ -25,7 +25,9 @@ class Df_YandexMoney_Model_Config_Area_Service extends Df_Payment_Config_Area_Se
 	}
 
 	/** @return string */
-	public function getTransactionDescriptionForShop() {$this->getVar('transaction_description_for_shop', '');}
+	public function getTransactionDescriptionForShop() {return
+		$this->getVar('transaction_description_for_shop', '')
+	;}
 
 	/** @return string */
 	public function getTransactionTag() {

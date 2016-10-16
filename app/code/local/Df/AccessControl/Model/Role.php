@@ -76,11 +76,12 @@ class Df_AccessControl_Model_Role extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @return Df_Core_Model
+	 * @return Df_AccessControl_Model_Role
 	 */
 	protected function _beforeSave() {
 		$this->setData(self::P__CATEGORIES, df_csv_parse_int($this->getCategoryIds()));
 		parent::_beforeSave();
+		return $this;
 	}
 
 	/** @return Df_Catalog_Model_Resource_Category_Collection */

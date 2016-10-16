@@ -57,6 +57,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_nat0($this->getConfigValue('ordering'));
 		}
+		return $this->{__METHOD__};
 	}
 
 	/**

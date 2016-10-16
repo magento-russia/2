@@ -727,7 +727,7 @@ class Df_Reward_Observer {
 
 	/**
 	 * Send scheduled low balance warning notifications
-	 * @return Df_Reward_Observer
+	 * @return void
 	 */
 	public function scheduledBalanceExpireNotification() {
 		if (df_h()->reward()->isEnabled()) {
@@ -794,7 +794,7 @@ class Df_Reward_Observer {
 	 * Update inviter points balance after referral's order completed
 	 *
 	 * @param Varien_Event_Observer $observer
-	 * @return Df_Reward_Observer
+	 * @return void
 	 */
 	private function _invitationToOrder(Varien_Event_Observer $observer)
 	{

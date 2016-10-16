@@ -83,6 +83,7 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 				df_h()->cms()->__('Revision #%s could not be removed because it is published.', $this->getRevisionNumber())
 			);
 		}
+		return $this;
 	}
 
 	/**

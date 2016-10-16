@@ -97,6 +97,7 @@ class Df_Cms_Block_Admin_Hierarchy_Widget_Chooser extends Df_Core_Block_Admin {
 		$uniqId = df_mage()->coreHelper()->uniqHash($element->getId());
 		$sourceUrl = $this->getUrl('*/cms_hierarchy_widget/chooser', array('uniq_id' => $uniqId));
 		$params = new Varien_Object;;
+		/** @noinspection PhpUndefinedMethodInspection */
 		$params
 			->setElement($element)
 			->setTranslationHelper($this->getTranslationHelper())
@@ -104,9 +105,12 @@ class Df_Cms_Block_Admin_Hierarchy_Widget_Chooser extends Df_Core_Block_Admin {
 			->setFieldsetId($this->getFieldsetId())
 			->setSourceUrl($sourceUrl)
 			->setUniqId($uniqId);
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getValue()) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$node = Df_Cms_Model_Hierarchy_Node::i()->load($element->getValue());
 			if ($node->getId()) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$params->setLabel($node->getLabel());
 			}
 		}

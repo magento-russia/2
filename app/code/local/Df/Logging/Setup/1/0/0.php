@@ -28,6 +28,7 @@ class Df_Logging_Setup_1_0_0 extends Df_Core_Setup {
 				,PRIMARY KEY (`log_id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		");
+		/** @noinspection PhpDeprecationInspection */
 		$this->conn()->addConstraint(
 			'FK_LOGGING_EVENT_USER'
 			,$t_LOG
@@ -36,6 +37,7 @@ class Df_Logging_Setup_1_0_0 extends Df_Core_Setup {
 			,'user_id'
 			,'SET null'
 		);
+		/** @noinspection PhpDeprecationInspection */
 		$this->conn()->addKey($t_LOG, 'IDX_LOGGING_EVENT_USERNAME', 'user');
 		$this->dropTable($t_CHANGES);
 		$this->run("

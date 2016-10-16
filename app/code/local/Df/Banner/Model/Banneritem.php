@@ -1,15 +1,19 @@
 <?php
 /**
  * @method string|null getContent()
+ * @method string|null getCreatedTime()
  * @method string|null getImageFileName()
  * @method string|null getImageUrl()
  * @method Df_Banner_Model_Resource_Banneritem getResource()
  * @method string|null getThumbnailFileName()
  * @method string|null getThumbnailUrl()
  * @method string|null getTitle()
+ * @method string|null getUpdateTime()
  * @method string|null getUrl()
- * @method Df_Banner_Model_Banneritem setIsMassupdate(bool $value)
- * @method Df_Banner_Model_Banneritem setStatus(int $value)
+ * @method $this setCreatedTime(string $value)
+ * @method $this setIsMassupdate(bool $value)
+ * @method $this setStatus(int $value)
+ * @method $this setUpdateTime(string $value)
  */
 class Df_Banner_Model_Banneritem extends Df_Core_Model {
 	/**

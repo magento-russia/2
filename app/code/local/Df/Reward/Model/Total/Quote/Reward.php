@@ -6,7 +6,6 @@ class Df_Reward_Model_Total_Quote_Reward extends Mage_Sales_Model_Quote_Address_
 	 * поэтому у нашего класса нет метода _construct,
 	 * и мы перекрываем именно конструктор
 	 * @override
-	 * @return Df_Reward_Model_Total_Quote_Reward
 	 */
 	public function __construct() {$this->setCode('reward');}
 

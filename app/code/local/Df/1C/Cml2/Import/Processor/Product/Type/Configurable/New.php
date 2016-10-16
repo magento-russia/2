@@ -114,6 +114,6 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable_New
 		 * Objects of the same type will have access to each others private and protected members
 		 * even though they are not the same instances.»
 		 */
-		self::ic(__CLASS__, $masterProcessor->getEntityOffer())->process();
+		return self::ic(__CLASS__, $masterProcessor->getEntityOffer())->process();
 	}
 }

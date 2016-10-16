@@ -234,7 +234,7 @@ class Entity extends \Df_Core_Model {
 	 * should be compatible with that of \Df\Xml\Parser\Entity::i()»
 	 *
 	 * @used-by \Df\Xml\Parser\Collection::createItem()
-	 * @used-by \Dfr\Translation\Realtime\Dictionary\Layout::i()
+	 * @used-by \Df_Localization_Realtime_Dictionary_Layout::i()
 	 * @static
 	 * @param X|string $e
 	 * @param string $class [optional]

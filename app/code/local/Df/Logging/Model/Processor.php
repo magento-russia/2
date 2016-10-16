@@ -24,6 +24,8 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		}
 		$clearData = array();
 		foreach ($data as $key=>$value) {
+			/** @noinspection PhpDeprecationInspection */
+			/** @noinspection PhpDeprecationInspection */
 			if (!in_array($key, $this->_skipFields) && !in_array($key, $this->_skipFieldsByModel) && !is_array($value) && !is_object($value)) {
 				$clearData[$key] = $value;
 			}

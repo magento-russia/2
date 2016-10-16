@@ -5,7 +5,6 @@ class Df_Cms_Block_Admin_Hierarchy_Edit extends Mage_Adminhtml_Block_Widget_Form
 	 * потому что родительский класс пихает инициализацию именно в конструктор.
 	 * @see Mage_Adminhtml_Block_Widget_Form_Container::__construct()
 	 * @override
-	 * @return Df_Cms_Block_Admin_Hierarchy_Edit
 	 */
 	public function __construct() {
 		$this->_objectId   = 'node_id';

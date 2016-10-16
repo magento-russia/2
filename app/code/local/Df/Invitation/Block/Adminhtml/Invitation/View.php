@@ -57,6 +57,7 @@ class Df_Invitation_Block_Adminhtml_Invitation_View extends Mage_Adminhtml_Block
 			), -1);
 		}
 		parent::_prepareLayout();
+		return $this;
 	}
 
 	/**

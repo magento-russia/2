@@ -59,6 +59,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 		$result = Df_Core_Model_Cache_Design_Package::s()->cacheGet($cacheKey);
 		if (!$result) {
 			//Mage::log('cache miss!');
+			/** @noinspection PhpDeprecationInspection */
 			$result = $this->_fallback($file, $params, array(
 				array(),
 				array('_theme' => $this->getFallbackTheme()),

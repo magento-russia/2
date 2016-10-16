@@ -89,11 +89,11 @@ function df_quote_address_shipping() {return df_quote()->getShippingAddress();}
  * @used-by Df_Catalog_Block_Product_List_Upsell::_construct()
  * @return bool
  */
-function df_quote_has_items() {
+function df_quote_has_items() {return
 	df_module_enabled('Mage_Checkout')
 	&& df_session_checkout()->getQuoteId()
-	&& df_quote()->getItemsCount();
-}
+	&& df_quote()->getItemsCount()
+;}
 
 /**
  * Без _nosid система будет формировать ссылку вида

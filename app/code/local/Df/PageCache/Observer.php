@@ -346,17 +346,15 @@ class Df_PageCache_Observer {
 	 * Register add wishlist item from cart in admin
 	 *
 	 * @param Varien_Event_Observer $observer
-	 * @return Df_PageCache_Observer
+	 * @return void
 	 */
 	public function registerAdminWishlistChange(Varien_Event_Observer $observer)
 	{
-		if (!$this->isCacheEnabled()) {
-			return $this;
+		if ($this->isCacheEnabled()) {
+			$this->_cacheInstance->clean(
+				$observer->getEvent()->getWishlist()->getCacheIdTags()
+			);
 		}
-
-		$this->_cacheInstance->clean(
-			$observer->getEvent()->getWishlist()->getCacheIdTags()
-		);
 	}
 
 	/**

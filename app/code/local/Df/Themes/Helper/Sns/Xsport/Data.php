@@ -3,7 +3,6 @@
 class Df_Themes_Helper_Sns_Xsport_Data extends Sns_Xsport_Helper_Data {
 	/**
 	 * @override
-	 * @return Df_Themes_Helper_Sns_Xsport_Data
 	 */
 	public function __construct() {
 		/** @noinspection PhpUndefinedClassInspection */

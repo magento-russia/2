@@ -21,6 +21,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 	public function parse()
 	{
 		$batchModel = df_mage()->dataflow()->batch();
+		/** @var Mage_Dataflow_Model_Batch_Import $batchImportModel */
 		$batchImportModel = $batchModel->getBatchImportModel();
 		$importIds = $batchImportModel->getIdCollection();
 		foreach ($importIds as $importId) {

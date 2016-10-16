@@ -12,6 +12,7 @@ class Df_Reward_Block_Tooltip_Checkout extends Df_Reward_Block_Tooltip {
 	{
 		parent::initRewardType($action);
 		if ($this->_actionInstance) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->_actionInstance->setQuote(df_quote());
 		}
 	}

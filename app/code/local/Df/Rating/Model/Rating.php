@@ -10,7 +10,6 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	 * @see Mage_Rating_Model_Rating::__construct()
 	 * Возвращаем конструктор из @see Varien_Object::__construct()
 	 * @override
-	 * @return Df_Rating_Model_Rating
 	 */
 	public function __construct() {
 		$args = func_get_args();

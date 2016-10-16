@@ -44,7 +44,7 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 
 	/**
 	 * Add context menu params to block data
-	 * @return Mage_Core_Block_Template
+	 * @return void
 	 */
 	protected function _loadNodePaginationParams() {
 		$this->setPaginationEnabled(false);

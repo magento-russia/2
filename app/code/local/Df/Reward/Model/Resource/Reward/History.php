@@ -132,7 +132,7 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 	/**
 	 * @param int $days
 	 * @param int|int[] $websiteIds
-	 * @return Df_Reward_Model_Resource_Reward_History
+	 * @return void
 	 */
 	public function updateExpirationDate($days, $websiteIds) {
 		$days = (int)abs($days);

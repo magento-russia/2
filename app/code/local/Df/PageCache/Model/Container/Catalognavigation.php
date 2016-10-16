@@ -111,10 +111,12 @@ class Df_PageCache_Model_Container_Catalognavigation extends Df_PageCache_Model_
 			$result = '';
 		}
 		else {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$block->setSkipRenderTag(true);
 
 			$categoryId = $this->_getCategoryId();
 			if (!Mage::registry('current_category') && $categoryId) {
+				/** @var Df_Catalog_Model_Category $category */
 				$category = Mage::getModel('catalog/category')->load($categoryId);
 				Mage::register('current_category', $category);
 				Mage::register('current_entity_key', $category->getPath());

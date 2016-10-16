@@ -2,7 +2,6 @@
 class Df_Varien_Data_Collection extends Varien_Data_Collection {
 	/**
 	 * @override
-	 * @return Df_Varien_Data_Collection
 	 */
 	public function __construct() {
 		parent::__construct();

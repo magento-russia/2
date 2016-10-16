@@ -3,7 +3,6 @@ class Df_Dataflow_Exception_Import_RequiredValueIsAbsent extends Df_Dataflow_Exc
 	/**
 	 * @param string $fieldName
 	 * @param int $rowOrdering
-	 * @return Df_Dataflow_Exception_Import_RequiredValueIsAbsent
 	 */
 	public function __construct($fieldName, $rowOrdering) {
 		$this->_fieldName = $fieldName;

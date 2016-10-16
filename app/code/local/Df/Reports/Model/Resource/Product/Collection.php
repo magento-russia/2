@@ -10,7 +10,6 @@ class Df_Reports_Model_Resource_Product_Collection
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Abstract|array(string => mixed) $resource
-	 * @return Df_Reports_Model_Resource_Product_Collection
 	 */
 	public function __construct($resource = null) {
 		if (is_array($resource)) {

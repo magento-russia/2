@@ -1,7 +1,7 @@
 <?php
 /**
  * @param mixed $sku
- * @return bool
+ * @return void
  * @throws \Df\Core\Exception
  */
 function df_assert_sku($sku) {

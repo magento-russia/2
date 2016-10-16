@@ -7,7 +7,6 @@ class Df_Chronopay_Model_Gate_Exception extends Mage_Core_Exception {
 	/**
 	 * @override
 	 * @param mixed[] $params
-	 * @return Df_Chronopay_Model_Gate_Exception
 	 */
 	public function __construct(array $params = array()) {
 		$this->_params = $params;

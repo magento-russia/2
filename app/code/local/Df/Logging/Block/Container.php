@@ -5,9 +5,12 @@ class Df_Logging_Block_Container extends Mage_Adminhtml_Block_Widget_Grid_Contai
 	 * @return object Df_Logging_Model_Event
 	 */
 	public function getEventData() {
+		/** @noinspection PhpDeprecationInspection */
 		if (!$this->_eventData) {
+			/** @noinspection PhpDeprecationInspection */
 			$this->_eventData = Mage::registry('current_event');
 		}
+		/** @noinspection PhpDeprecationInspection */
 		return $this->_eventData;
 	}
 

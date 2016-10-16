@@ -30,5 +30,6 @@ class Df_Admin_Config_Backend_Currency extends Df_Admin_Config_Backend {
 			Df_Admin_Config_BackendChecker_CurrencyIsSupported::_check($this, $this->getValue());
 		}
 		parent::_beforeSave();
+		return $this;
 	}
 }

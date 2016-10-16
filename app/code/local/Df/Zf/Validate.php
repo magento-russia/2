@@ -6,7 +6,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 
 	/**
 	 * @param array(string => mixed) $params
-	 * @return \Df\Zf\Validate
 	 */
 	public function __construct(array $params = []) {$this->_params = $params;}
 

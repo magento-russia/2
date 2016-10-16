@@ -11,9 +11,10 @@ class Df_PageCache_Model_Container_CatalogProductList
 	{
 		$productId = $this->_getProductId();
 		if ($productId && !Mage::registry('product')) {
-			$product = Mage::getModel('catalog/product')
-				->setStoreId(Mage::app()->getStore()->getId())
-				->load($productId);
+			/** @var Df_Catalog_Model_Product $product */
+			$product = Mage::getModel('catalog/product');
+			$product->setStoreId(Mage::app()->getStore()->getId());
+			$product->load($productId);
 			if ($product) {
 				Mage::register('product', $product);
 			}

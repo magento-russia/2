@@ -19,6 +19,7 @@ class Df_Page_Block_Html_Header extends Mage_Page_Block_Html_Header {
 	public function getWelcome() {
 		/** @var string|null $result */
 		$result = Df_Page_Block_Html_Welcome::welcome();
+		/** @noinspection PhpDeprecationInspection */
 		return !is_null($result) ? $result : parent::getWelcome();
 	}
 }

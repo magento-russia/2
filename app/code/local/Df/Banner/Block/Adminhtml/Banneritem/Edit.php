@@ -5,7 +5,6 @@ class Df_Banner_Block_Adminhtml_Banneritem_Edit extends Mage_Adminhtml_Block_Wid
 	 * потому что родительский класс пихает инициализацию именно в конструктор.
 	 * @see Mage_Adminhtml_Block_Widget_Form_Container::__construct()
 	 * @override
-	 * @return Df_Banner_Block_Adminhtml_Banneritem_Edit
 	 */
 	public function __construct() {
 		parent::__construct();

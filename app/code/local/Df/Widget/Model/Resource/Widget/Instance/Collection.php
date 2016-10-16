@@ -4,7 +4,6 @@ class Df_Widget_Model_Resource_Widget_Instance_Collection
 	/**
 	 * @override
 	 * @param Mage_Core_Model_Resource_Db_Abstract|array(string => mixed) $resource
-	 * @return Df_Widget_Model_Resource_Widget_Instance_Collection
 	 */
 	public function __construct($resource = null) {
 		if (is_array($resource)) {

@@ -38,7 +38,7 @@ class Df_PromoGift_Model_Resource_Rule_Collection extends Df_SalesRule_Model_Res
 		return $this;
 	}
 
-	/** @return Df_PromoGift_Model_Resource_Rule_Collection */
+	/** @return void */
 	public function filterByCurrentQuote() {
 		$this->load();
 		$this->_items =

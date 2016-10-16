@@ -7,7 +7,9 @@ class Df_Chronopay_Model_Gate_Card extends Df_Core_Model {
 	public function getBankPhone() {return "+14564967654321";}
 
 	/** @return int */
-	public function getCvv() {return $this->getPayment()->getCcCid();}
+	public function getCvv() {
+		/** @noinspection PhpUndefinedMethodInspection */
+		return $this->getPayment()->getCcCid();}
 
 	/** @return string */
 	public function getExpirationDate() {
@@ -15,9 +17,11 @@ class Df_Chronopay_Model_Gate_Card extends Df_Core_Model {
 	}
 
 	/** @return int */
-	public function getNumber() {return $this->getPayment()->getCcNumber();}
+	public function getNumber() {
+		/** @noinspection PhpUndefinedMethodInspection */
+		return $this->getPayment()->getCcNumber();}
 
-	/** @return Mage_Payment_Model_Info */
+	/** @return Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment */
 	private function getPayment() {return $this->_getData(self::P__PAYMENT);}
 
 	/**

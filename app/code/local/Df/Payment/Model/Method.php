@@ -5,7 +5,6 @@ abstract class Df_Payment_Model_Method
 	implements Df_Checkout_Module_Main {
 	/**
 	 * @override
-	 * @return Df_Payment_Model_Method
 	 */
 	public function __construct() {
 		parent::__construct();

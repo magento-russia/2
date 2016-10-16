@@ -83,7 +83,7 @@ class Df_PageCache_Model_Container_Placeholder
 	 * Set attribute by specific code
 	 * @param $code string
 	 * @param $value
-	 * @return string
+	 * @return void
 	 */
 	public function setAttribute($code, $value)
 	{

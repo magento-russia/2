@@ -432,7 +432,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	/**
 	 * Потомки могут перекрывать это поведение.
 	 * Так делает Единая Касса.
-	 * @return Df_Payment_Model_Action_Confirm
+	 * @return void
 	 * @throws Mage_Core_Exception
 	 */
 	protected function processOrderCanNotInvoice() {

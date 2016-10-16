@@ -18,7 +18,7 @@ class Df_1C_Cml2_Import_Data_Collection_Order_Items
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::initItems()
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
-	 * @return Df_1C_Cml2_Import_Data_Entity_Order_Item[]
+	 * @return void
 	 */
 	protected function initItems() {
 		/** @var Df_1C_Cml2_Import_Data_Entity_Order_Item[] $result */

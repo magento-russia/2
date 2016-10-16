@@ -33,6 +33,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 			$this->_setActiveMenu('df_banner/banneritems');
 			$this->_addBreadcrumb(df_mage()->adminhtml()->__('Рекламные объявления'), df_mage()->adminhtml()->__('Рекламные объявления'));
 			$this->_addBreadcrumb(df_mage()->adminhtml()->__('Banner Item News'), df_mage()->adminhtml()->__('Banner Item News'));
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 			$this
 				->_addContent(df_block_l(new Df_Banner_Block_Adminhtml_Banneritem_Edit))

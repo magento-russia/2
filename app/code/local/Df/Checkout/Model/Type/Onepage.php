@@ -61,7 +61,7 @@ class Df_Checkout_Model_Type_Onepage extends Mage_Checkout_Model_Type_Onepage {
 
 	/**
 	 * @param Mage_Checkout_Controller_Action $controller
-	 * @return Mage_Checkout_Controller_Action
+	 * @return void
 	 */
 	public function setController(Mage_Checkout_Controller_Action $controller) {
 		$this->_controller = $controller;

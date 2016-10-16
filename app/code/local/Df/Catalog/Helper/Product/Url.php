@@ -9,7 +9,6 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	 * поэтому у нашего класса нет метода _construct,
 	 * и мы перекрываем именно конструктор
 	 * @override
-	 * @return Df_Catalog_Helper_Product_Url
 	 */
 	public function __construct() {
 		if (df_cfg()->seo()->common()->getEnhancedRussianTransliteration()) {

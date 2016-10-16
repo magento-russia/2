@@ -21,6 +21,7 @@ class Df_Page_Block_Html_Topmenu extends Mage_Page_Block_Html_Topmenu {
 			$result = $this->getCacheRm()->loadData($cacheKey);
 		}
 		if (!$result) {
+			/** @noinspection PhpDeprecationInspection */
 			$result = parent::_getHtml($menuTree, $childrenWrapClass);
 			if ($needCacheRm) {
 				$this->getCacheRm()->saveData($cacheKey, $result);

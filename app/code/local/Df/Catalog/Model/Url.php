@@ -398,6 +398,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		) {
 			parent::_refreshProductRewrite($product, $category);
 		}
+		return $this;
 	}
 
 	/**

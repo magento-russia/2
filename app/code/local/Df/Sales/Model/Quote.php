@@ -4,9 +4,11 @@
  * @method Df_CustomerBalance_Model_Balance|null getCustomerBalanceInstance()
  * @method Df_Reward_Model_Reward|null getRewardInstance()
  * @method bool|null getUseCustomerBalance()
- * @method Df_Sales_Model_Quote setCustomerBalanceCollected(bool $value)
- * @method Df_Sales_Model_Quote setRewardPointsTotalReseted(bool $value)
- * @method Df_Sales_Model_Quote setUseCustomerBalance(bool $value)
+ * @method bool|null getUseRewardPoints()
+ * @method $this setCustomerBalanceCollected(bool $value)
+ * @method $this setRewardPointsTotalReseted(bool $value)
+ * @method $this setUseCustomerBalance(bool $value)
+ * @method $this setUseRewardPoints(bool $value)
  */
 class Df_Sales_Model_Quote extends Mage_Sales_Model_Quote {
 	/**
