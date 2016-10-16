@@ -36,7 +36,9 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 					,'messageForLog' => $this->getChronopayResponse()->getDiagnosticMessage()
 				)));
 			}
+			/** @noinspection PhpUndefinedMethodInspection */
 			$payment->setStatus(self::STATUS_APPROVED);
+			/** @noinspection PhpUndefinedMethodInspection */
 			$payment->setLastTransId($this->getChronopayResponse()->getTransactionId());
 		}
 		catch (Exception $e) {
@@ -50,7 +52,9 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 			// The code below does not work for Magento 1.4
 			// because Magento 1.4 rollbacks update/insert transaction if exception occured
 			if (df_magento_version('1.4', '<')) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$payment->setStatus(self::STATUS_ERROR);
+				/** @noinspection PhpUndefinedMethodInspection */
 				$payment
 					->getOrder()
 						->setState(Mage_Sales_Model_Order::STATE_HOLDED)
@@ -59,6 +63,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 							,$futureException->getMessageForStatus()
 						)
 				;
+				/** @noinspection PhpUndefinedMethodInspection */
 				$payment->getOrder()->save();
 			}
 			else {
@@ -76,7 +81,9 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	public function isAvailable($quote = null) {
 		$result = parent::isAvailable();
 		if (!$result) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			if ($this->getConfigData('active', ($quote ? $quote->getStoreId() : null))) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				df_assert(
 					$this->getConfigData('cctypes', ($quote ? $quote->getStoreId() : null))
 					,'Администратору: выберите для способа оплаты ChoronoPay Gateway'

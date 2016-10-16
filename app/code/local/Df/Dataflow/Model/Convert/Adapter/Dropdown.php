@@ -23,9 +23,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 		if (!$this->getRowIndex()) {
 			$this->deleteAllOptions();
 		}
-		$this
-			->getAttribute()
-			->addData(
+		$this->getAttribute()->addData(
 				array(
 					'option' =>
 						array(
@@ -43,9 +41,8 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 
 						)
 				)
-			)
-			->save()
-		;
+			);
+		$this->getAttribute()->save();
 		$this->setSessionParam('rowIndex', 1 + $this->getRowIndex());
 		return $this;
 	}

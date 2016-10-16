@@ -82,6 +82,7 @@ class Df_Chronopay_StandardController extends Mage_Core_Controller_Front_Action 
 						}
 						else {
 							$order->sendNewOrderEmail();
+							/** @noinspection PhpUndefinedMethodInspection */
 							$order->getPayment()->getMethodInstance()->setTransactionId($postData['transaction_id']);
 							if ($this->saveInvoice($order)) {
 								$order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true);

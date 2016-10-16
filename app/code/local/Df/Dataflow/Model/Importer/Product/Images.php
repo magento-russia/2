@@ -214,6 +214,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 						/** @var $productWithScopedValues $productWithDefaultValues */
 						$productWithScopedValues = $product->forStore($storeToExcludeFrom);
 						foreach ($imageFileNames as $imageFileName) {
+							/** @noinspection PhpParamsInspection */
 							$backend->updateImage(
 								$productWithScopedValues
 								, $imageFileName

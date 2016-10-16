@@ -138,6 +138,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 
 				if ($e->depends) {
 					foreach ($e->depends->children() as $dependent) {
+						/** @noinspection PhpUndefinedMethodInspection */
 						$dependentId = $section->getName() . '_' . $group->getName() . '_' . $fieldPrefix . $dependent->getName();
 						$dependentValue = (string) $dependent;
 						$this->_getDependence()
@@ -173,6 +174,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 				}
 
 				if (isset($e->frontend_type) && 'multiselect' === (string)$e->frontend_type && isset($e->can_be_empty)) {
+					/** @noinspection PhpUndefinedMethodInspection */
 					$field->setCanBeEmpty(true);
 				}
 
@@ -190,6 +192,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 					}
 					$sourceModel = Mage::getSingleton($factoryName);
 					if ($sourceModel instanceof Varien_Object) {
+						/** @noinspection PhpUndefinedMethodInspection */
 						$sourceModel->setPath($path);
 					}
 					if ($method) {
@@ -203,8 +206,10 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 						}
 					}
 					else {
+						/** @noinspection PhpUndefinedMethodInspection */
 						$optionArray = $sourceModel->toOptionArray('multiselect' === $fieldType);
 					}
+					/** @noinspection PhpUndefinedMethodInspection */
 					$field->setValues($optionArray);
 				}
 			}

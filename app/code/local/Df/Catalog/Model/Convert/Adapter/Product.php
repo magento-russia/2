@@ -39,6 +39,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		 * @see Mage_Catalog_Model_Convert_Adapter_Product::getAttribute
 		 */
 		$this->_productModel = Mage::objects()->save($product);
+		/** @var Df_Core_Model_Store|bool $store */
 		$store = false;
 		if (empty($importData['store'])) {
 			if (!is_null($this->getBatchParams('store'))) {
@@ -82,6 +83,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 				);
 				Mage::throwException($message);
 			}
+			/** @noinspection PhpUndefinedMethodInspection */
 			$product->setTypeId($productTypes[strtolower($importData['type'])]);
 			/**
 			 * Check product define attribute set
@@ -96,6 +98,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 			$product->setAttributeSetId($productAttributeSets[$importData['attribute_set']]);
 			foreach ($this->_requiredFields as $field) {
 				$attribute = $this->getAttribute($field);
+				/** @noinspection PhpUndefinedMethodInspection */
 				if (!isset($importData[$field]) && $attribute && $attribute->getIsRequired()) {
 					$message = df_mage()->catalogHelper()->__(
 						'Skipping import row, required field "%s" for new products is not defined.',$field
@@ -252,7 +255,9 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		/***************************
 		 * Конец заплатки для локали
 		 */
+		/** @noinspection PhpUndefinedMethodInspection */
 		if (!$product->getVisibility()) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$product->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE);
 		}
 		$stockData = array();

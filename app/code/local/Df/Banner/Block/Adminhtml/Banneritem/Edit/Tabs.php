@@ -21,6 +21,7 @@ class Df_Banner_Block_Adminhtml_Banneritem_Edit_Tabs extends Mage_Adminhtml_Bloc
 		parent::_construct();
 		$this->setId('df_banner_item_tabs');
 		$this->setDestElementId('edit_form');
+		/** @noinspection PhpUndefinedMethodInspection */
 		$this->setTitle('Настройки');
 	}
 }

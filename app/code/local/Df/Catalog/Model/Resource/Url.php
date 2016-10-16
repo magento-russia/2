@@ -226,6 +226,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 			)
 		;
 		if ($storeId !== null) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$rootCategoryPath = $this->getStores($storeId)->getRootCategoryPath();
 			$rootCategoryPathLength = mb_strlen($rootCategoryPath);
 		}
@@ -250,6 +251,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 
 			$category = new Varien_Object($row);
 			$category->setIdFieldName('entity_id');
+			/** @noinspection PhpUndefinedMethodInspection */
 			$category->setStoreId($storeId);
 			$this->_prepareCategoryParentId($category);
 
@@ -259,6 +261,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 
 		if ($storeId !== null && $categories) {
 			foreach (array('name', 'url_key', 'url_path') as $attributeCode) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$attributes = $this->_getCategoryAttribute($attributeCode, array_keys($categories),
 				$category->getStoreId());
 				foreach ($attributes as $categoryId => $attributeValue) {
@@ -328,6 +331,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	private function saveRewriteHistory_DfLegacyPatch($rewriteData, $rewrite) {
 		if ($rewrite instanceof Varien_Object && $rewrite->getId()) {
 			$rewriteData['target_path'] = $rewriteData['request_path'];
+			/** @noinspection PhpUndefinedMethodInspection */
 			$rewriteData['request_path'] = $rewrite->getRequestPath();
 			$rewriteData['id_path'] = $this->generateUniqueIdPath_DfLegacyPatch();
 			$rewriteData['is_system'] = 0;
@@ -343,6 +347,8 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	private function saveRewriteHistory_DfLegacyPatch2($rewriteData) {
 		$rewriteData = new Varien_Object($rewriteData);
 		// check if rewrite exists with save request_path
+		/** @noinspection PhpUndefinedMethodInspection */
+		/** @noinspection PhpUndefinedMethodInspection */
 		$rewrite = $this->getRewriteByRequestPath($rewriteData->getRequestPath(), $rewriteData->getStoreId());
 		if ($rewrite === false) {
 			// create permanent redirect

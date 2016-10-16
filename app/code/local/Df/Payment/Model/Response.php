@@ -164,6 +164,7 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			))
 			,'is_transaction_closed' => $this->isTransactionClosed()
 		));
+		/** @noinspection PhpParamsInspection */
 		$orderPayment->setTransactionAdditionalInfo(
 			Mage_Sales_Model_Order_Payment_Transaction::RAW_DETAILS
 			,$this->getReportAsArray()

@@ -12,10 +12,9 @@
  * @method int|null getTaxClassId()
  * @method string|null getUrlKey()
  * @method Df_Catalog_Model_Resource_Product getResource()
- * @method Df_Catalog_Model_Product setAttributeSetId(int $value)
- * @method Df_Catalog_Model_Product setExcludeUrlRewrite(bool $value)
- * @method Df_Catalog_Model_Product setIsMassupdate(bool $value)
- * @method Df_Catalog_Model_Product setWebsiteIds(array $value)
+ * @method $this setAttributeSetId(int $value)
+ * @method $this setExcludeUrlRewrite(bool $value)
+ * @method $this setIsMassupdate(bool $value)
  *
  * Обратите внимание, что ядро Magento иногда для обратной совместимости
  * пихает в качестве параметра объект класса Varien_Object,
@@ -25,11 +24,13 @@
 		 $object = new Varien_Object(array('is_in_stock' => $product->getData('is_salable')));
 		 $product->setStockItem($object);
 	 }
- * @method Df_Catalog_Model_Product setStockItem(Varien_Object $value)
- * @method Df_Catalog_Model_Product setStoreId(int $value)
+ * @method $this setStockData(array $value)
+ * @method $this setStockItem(Varien_Object $value)
+ * @method $this setStoreId(int $value)
  * $value: array(string => int|float)|null
- * @method Df_Catalog_Model_Product setTierPrice(array $value)
- * @method Df_Catalog_Model_Product setUrlKey(string $value)
+ * @method $this setTierPrice(array $value)
+ * @method $this setUrlKey(string $value)
+ * @method $this setWebsiteIds(array $value)
  */
 class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	/** @return Df_Catalog_Model_Product */

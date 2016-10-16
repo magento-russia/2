@@ -13,6 +13,7 @@ class Df_Banner_Block_Adminhtml_Banneritem_Edit_Form extends Mage_Adminhtml_Bloc
 			, 'method' => 'post'
 			, 'enctype' => 'multipart/form-data'
 		));
+		/** @noinspection PhpUndefinedMethodInspection */
 		$form->setUseContainer(true);
 		$this->setForm($form);
 		parent::_prepareForm();

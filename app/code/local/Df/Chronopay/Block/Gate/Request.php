@@ -92,7 +92,7 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 		return $value ? $value : $default;
 	}
 
-	/** @return Mage_Payment_Model_Info */
+	/** @return Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment */
 	private function info() {return $this[self::$P__INFO];}
 
 	/** @return Df_Chronopay_Model_Gate */

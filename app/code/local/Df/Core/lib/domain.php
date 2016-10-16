@@ -32,7 +32,7 @@ function df_money($amount) {return Df_Core_Model_Money::i($amount); }
 
 /**
  * @used-by df_quote()
- * @return Mage_Checkout_Model_Session
+ * @return Mage_Checkout_Model_Session|Df_Checkout_Model_Session
  */
 function df_session_checkout() {return Mage::getSingleton('checkout/session');}
 

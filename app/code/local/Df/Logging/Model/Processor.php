@@ -57,6 +57,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			 * «Warning: array_flip(): Can only flip STRING and INTEGER values!».
 			 * http://magento-forum.ru/topic/4600/
 			 */
+			/** @noinspection PhpParamsInspection */
 			$uniqueIds = array_unique($classIds);
 			$ids = array_merge($ids, $uniqueIds);
 			$this->_collectedIds[$className] = $uniqueIds;
@@ -93,6 +94,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		$doNotLog = df_admin_session()->getSkipLoggingAction();
 		if ($doNotLog) {
 			if (is_array($doNotLog)) {
+				/** @noinspection PhpParamsInspection */
 				$key = array_search($fullActionName, $doNotLog);
 				if ($key !== false) {
 					unset($doNotLog[$key]);

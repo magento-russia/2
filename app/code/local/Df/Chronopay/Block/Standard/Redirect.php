@@ -10,6 +10,7 @@ class Df_Chronopay_Block_Standard_Redirect extends Df_Core_Block_Abstract_NoCach
 		/** @var Df_Chronopay_Model_Standard $standard */
 		$standard = Df_Chronopay_Model_Standard::i();
 		$form = new Varien_Data_Form();
+		/** @noinspection PhpUndefinedMethodInspection */
 		$form
 			->setAction($standard->getChronopayUrl())
 			->setId('chronopay_standard_checkout')

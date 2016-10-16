@@ -103,7 +103,7 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 	private function getRequestDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Avangard_Model_RequestDocument::i(
-				$this->getParams(), $this->getRequestId()
+				$this->params(), $this->getRequestId()
 			);
 		}
 		return $this->{__METHOD__};
@@ -125,7 +125,7 @@ abstract class Df_Avangard_Model_Request_Secondary extends Df_Payment_Model_Requ
 	private function getResponseRegistration() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Avangard_Model_Response_Registration::i();
-			$this->{__METHOD__}->loadFromPaymentInfo($this->getPayment());
+			$this->{__METHOD__}->loadFromPaymentInfo($this->payment());
 		}
 		return $this->{__METHOD__};
 	}

@@ -60,27 +60,33 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 	 */
 	public function render(Varien_Data_Form_Element_Abstract $element) {
 		$id = $element->getHtmlId();
-		$html = '<td class="label"><label for="'.$id.'">'.$element->getLabel().'</label></td>';
-		$isMultiple = $element->getExtType()==='multiple';
+		/** @noinspection PhpUndefinedMethodInspection */
+		$html = '<td class="label"><label for="' . $id . '">' . $element->getLabel() . '</label></td>';
+		/** @noinspection PhpUndefinedMethodInspection */
+		$isMultiple = $element->getExtType() === 'multiple';
 
 		// replace [value] with [inherit]
 		$namePrefix = preg_replace('#\[value\](\[\])?$#', '', $element->getName());
-
+		/** @noinspection PhpUndefinedMethodInspection */
 		$options = $element->getValues();
 
 		$addInheritCheckbox = false;
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getCanUseWebsiteValue()) {
 			$addInheritCheckbox = true;
 			$checkboxLabel = Mage::helper('adminhtml')->__('Use Website');
 		}
+		/** @noinspection PhpUndefinedMethodInspection */
 		elseif ($element->getCanUseDefaultValue()) {
 			$addInheritCheckbox = true;
 			$checkboxLabel = Mage::helper('adminhtml')->__('Use Default');
 		}
 
 		if ($addInheritCheckbox) {
-			$inherit = $element->getInherit()==1 ? 'checked="checked"' : '';
+			/** @noinspection PhpUndefinedMethodInspection */
+			$inherit = $element->getInherit() == 1 ? 'checked="checked"' : '';
 			if ($inherit) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$element->setDisabled(true);
 			}
 		}
@@ -90,9 +96,11 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 		 * однако это не является проблемой,
 		 * потому что для устаревших версий Magento CE  getTooltip() просто вернёт null.
 		 */
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getTooltip()) {
 			$html .= '<td class="value with-tooltip">';
 			$html .= $this->_getElementHtml($element);
+			/** @noinspection PhpUndefinedMethodInspection */
 			$html .= '<div class="field-tooltip"><div>' . $element->getTooltip() . '</div></div>';
 		} else {
 			$html .= '<td class="value">';
@@ -106,7 +114,7 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 		$html.= '</td>';
 
 		if ($addInheritCheckbox) {
-
+			/** @noinspection PhpUndefinedMethodInspection */
 			$defText = $element->getDefaultValue();
 			if ($options) {
 				$defTextArr = array();
@@ -224,14 +232,18 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 		}
 
 		$html.= '<td class="scope-label">';
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getScope()) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$html .= $element->getScopeLabel();
 		}
 		$html.= '</td>';
 
 		$html.= '<td class="">';
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getHint()) {
 			$html.= '<div class="hint" >';
+			/** @noinspection PhpUndefinedMethodInspection */
 			$html.= '<div style="display: none;">' . $element->getHint() . '</div>';
 			$html.= '</div>';
 		}

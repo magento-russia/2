@@ -116,6 +116,7 @@ class Df_Banner_Block_Adminhtml_Banneritem_Grid extends Mage_Adminhtml_Block_Wid
 	protected function _prepareMassaction() {
 		parent::_prepareMassaction();
 		$this->setMassactionIdField('banner_item_id');
+		/** @noinspection PhpUndefinedMethodInspection */
 		$this->getMassactionBlock()->setFormFieldName('df_banner_item');
 		$this->getMassactionBlock()->addItem('delete', array(
 			'label'	=> df_h()->banner()->__('Delete')

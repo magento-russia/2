@@ -101,17 +101,22 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * @return string
 	 */
 	public function getProductRequestPath($product, $category) {
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($product->getUrlKey() == '') {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$urlKey = $this->getProductModel()->formatUrlKey($product->getName());
 		} else {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$urlKey = $this->getProductModel()->formatUrlKey($product->getUrlKey());
 		}
+		/** @noinspection PhpUndefinedMethodInspection */
 		$storeId = $category->getStoreId();
 		$suffix  = $this->getProductUrlSuffix($storeId);
 		$idPath  = $this->generatePath('id', $product, $category);
 		/**
 		* Prepare product base request path
 		*/
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($category->getLevel() > 1) {
 			// НАЧАЛО ЗАПЛАТКИ
 			/** @var bool $exists_addCategoryUrlPath */
@@ -124,8 +129,10 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 				$this->_addCategoryUrlPath($category);
 			}
 			// КОНЕЦ ЗАПЛАТКИ
-			$categoryUrl = Mage::helper('catalog/category')->getCategoryUrlPath($category->getUrlPath(),
-			false, $storeId);
+			/** @noinspection PhpUndefinedMethodInspection */
+			$categoryUrl = df_mage()->catalog()->categoryHelper()->getCategoryUrlPath(
+				$category->getUrlPath(), false, $storeId
+			);
 			$requestPath = $categoryUrl . '/' . $urlKey;
 		} else {
 			$requestPath = $urlKey;
@@ -163,6 +170,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		if (isset($this->_rewrites[$idPath])) {
 
 			$this->_rewrite = $this->_rewrites[$idPath];
+			/** @noinspection PhpUndefinedMethodInspection */
 			$existingRequestPath = $this->_rewrites[$idPath]->getRequestPath();
 
 			if ($existingRequestPath == $requestPath . $suffix) {
@@ -172,6 +180,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			/**
 			* Check if existing request past can be used
 			*/
+			/** @noinspection PhpUndefinedMethodInspection */
 			if ($product->getUrlKey() == '' && !empty($requestPath)
 				&& strpos($existingRequestPath, $requestPath) === 0
 			) {
@@ -179,6 +188,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 				'/^' . preg_quote($requestPath, '/') . '/', '', $existingRequestPath
 				);
 				if (preg_match('#^-([0-9]+)$#i', $existingRequestPath)) {
+					/** @noinspection PhpUndefinedMethodInspection */
 					return $this->_rewrites[$idPath]->getRequestPath();
 				}
 			}
@@ -265,6 +275,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		}
 		if (isset($this->_rewrites[$idPath])) {
 			$this->_rewrite = $this->_rewrites[$idPath];
+			/** @noinspection PhpUndefinedMethodInspection */
 			if ($requestPath === $this->_rewrites[$idPath]->getRequestPath()) {
 				return $requestPath;
 			}

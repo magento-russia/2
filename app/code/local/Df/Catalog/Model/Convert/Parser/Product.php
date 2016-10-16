@@ -153,6 +153,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 		if ($product->getOptions()) {
 			$optionsForSerialization = array();
 			foreach ($product->getOptions() as $optionKey => $option) {
+				/** @var Mage_Catalog_Model_Product_Option $option */
 				$optionsForSerialization[$optionKey]=
 					$option
 						->setData('_values', $this->prepareForSerialization($option->getValues()))
@@ -173,9 +174,10 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 	private function unparseRm() {
 		$entityIds = $this->getData();
 		foreach ($entityIds as $i => $entityId) {
-			$product = $this->getProductModel()
-				->setStoreId($this->getStoreId())
-				->load($entityId);
+			/** @var Df_Catalog_Model_Product $product */
+			$product = $this->getProductModel();
+			$product->setStoreId($this->getStoreId());
+			$product->load($entityId);
 			$this->setProductTypeInstance($product);
 			$this->_currentProduct = $product;
 			/* @var Df_Catalog_Model_Product $product */
@@ -277,6 +279,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				;
 			}
 			// END PATCH: Export of product categories
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->getBatchExportModel()
 				->setId(null)
 				->setBatchId($this->getBatchModel()->getId())

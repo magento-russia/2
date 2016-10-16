@@ -77,15 +77,19 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 				$pathArr = df_explode_xpath($cat->getPath());
 				$namePath = '';
 				for ($i=2, $l=sizeof($pathArr); $i<$l; $i++) {
+					/** @noinspection PhpUndefinedMethodInspection */
 					$name = $collection->getItemById($pathArr[$i])->getName();
 					$namePath .= (empty($namePath) ? '' : '/').trim($name);
 				}
+				/** @noinspection PhpUndefinedMethodInspection */
 				$cat->setNamePath($namePath);
 			}
 
 			$cache = array();
 			foreach ($collection as $cat) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$cache[mb_strtolower($cat->getNamePath())] = $cat;
+				/** @noinspection PhpUndefinedMethodInspection */
 				$cat->unsNamePath();
 			}
 			$this->_categoryCache[$store->getId()] = $cache;
@@ -131,6 +135,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 					,Df_Catalog_Model_Category::P__DISPLAY_MODE => $dispMode
 				), $store->getId());
 			}
+			/** @noinspection PhpUndefinedMethodInspection */
 			$catId = $cache[$namePath]->getId();
 			$path .= '/'.$catId;
 			$i++;

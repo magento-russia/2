@@ -54,6 +54,7 @@ class Df_Cms_Block_Admin_Page_Edit_Tab_Hierarchy
 						,'page_id' => $v['page_id']
 						,'current_page' => !!$v['current_page']
 					);
+					/** @var Df_Cms_Model_Hierarchy_Node $item */
 					$item = $collection->getItemById($v['node_id']);
 					$node['assigned_to_stores'] = !$item ? array() : $this->getPageStoreIds($item);
 					$this->_nodes[]= $node;

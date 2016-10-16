@@ -21,6 +21,7 @@ class Df_Banner_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Block_Wi
 				)
 			)
 		;
+		/** @noinspection PhpUndefinedMethodInspection */
 		$form->setUseContainer(true);
 		$this->setForm($form);
 		parent::_prepareForm();

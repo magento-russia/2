@@ -397,7 +397,7 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 	}
 
 	/**
-	 * @param Df_Customer_Model_Customer $customer
+	 * @param Df_Customer_Model_Customer|Mage_Customer_Model_Customer $customer
 	 * @return Df_Reward_Model_Reward
 	 */
 	public function setCustomer(Df_Customer_Model_Customer $customer) {

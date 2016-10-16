@@ -56,6 +56,7 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 				)
 			;
 			if (df_magento_version('1.5.0.1')) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$result['file'] =
 					Mage::helper('core/file_storage_database')->saveUploadedFile($result)
 				;

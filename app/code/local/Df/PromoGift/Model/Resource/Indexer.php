@@ -213,6 +213,7 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 		$result->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED);
 		// Фильтр по наличию на складе
 		// С типом аргумента всё в порядке
+		/** @noinspection PhpParamsInspection */
 		df_mage()->catalogInventory()->stockSingleton()->addInStockFilterToCollection($result);
 		return $result;
 	}

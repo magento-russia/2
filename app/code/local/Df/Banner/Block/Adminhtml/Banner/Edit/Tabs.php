@@ -1,4 +1,5 @@
 <?php
+/** @method $this setTitle(string $value) */
 class Df_Banner_Block_Adminhtml_Banner_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs {
 	/**
 	 * @override

@@ -8,6 +8,7 @@ class Df_Catalog_Model_Indexer_Url extends Mage_Catalog_Model_Indexer_Url {
 	 * @param Mage_Index_Model_Event $event
 	 */
 	protected function _registerCategoryEvent(Mage_Index_Model_Event $event) {
+		/** @noinspection PhpUndefinedMethodInspection */
 		if (!$event->getDataObject()->getExcludeUrlRewrite()) {
 			//
 			// Мы ввели для товарного раздела дополнительный флаг «exclude_url_rewrite»

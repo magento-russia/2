@@ -41,6 +41,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	/** @return Df_Chronopay_Model_Standard */
 	public function validate() {
 		parent::validate();
+		/** @var Mage_Sales_Model_Order_Payment|Mage_Sales_Model_Quote_Payment $paymentInfo */
 		$paymentInfo = $this->getInfoInstance();
 		if ($paymentInfo instanceof Mage_Sales_Model_Order_Payment) {
 			$currency_code = $paymentInfo->getOrder()->getBaseCurrencyCode();
@@ -59,6 +60,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 	 * @return Df_Chronopay_Model_Standard
 	 */
 	public function capture(Varien_Object $payment, $amount) {
+		/** @noinspection PhpUndefinedMethodInspection */
 		$payment
 			->setStatus(self::STATUS_APPROVED)
 			->setLastTransId($this->getTransactionId())
