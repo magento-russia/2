@@ -34,6 +34,7 @@ class Df_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Act
 			$this->_setActiveMenu('df_banner/banners');
 			$this->_addBreadcrumb(df_mage()->adminhtml()->__('Рекламные щиты'), df_mage()->adminhtml()->__('Рекламные щиты'));
 			$this->_addBreadcrumb(df_mage()->adminhtml()->__('Banner News'), df_mage()->adminhtml()->__('Banner News'));
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 			$this
 				->_addContent(df_block_l(new Df_Banner_Block_Adminhtml_Banner_Edit))

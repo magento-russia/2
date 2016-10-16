@@ -14,7 +14,7 @@ abstract class Df_Psbank_Model_Action_Confirm extends Df_Payment_Model_Action_Co
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Psbank_Model_Response::i($this->getRequest()->getParams());
-			$this->{__METHOD__}->postProcess($this->getPayment());
+			$this->{__METHOD__}->postProcess($this->payment());
 		}
 		return $this->{__METHOD__};
 	}

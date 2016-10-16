@@ -32,9 +32,10 @@ class Df_PageCache_Model_Container_Breadcrumbs extends Df_PageCache_Model_Contai
 		$product = null;
 
 		if ($productId) {
-			$product = Mage::getModel('catalog/product')
-				->setStoreId(Mage::app()->getStore()->getId())
-				->load($productId);
+			/** @var Df_Catalog_Model_Product $product */
+			$product = Mage::getModel('catalog/product');
+			$product->setStoreId(Mage::app()->getStore()->getId());
+			$product->load($productId);
 			if ($product) {
 				Mage::register('current_product', $product);
 			}

@@ -1,16 +1,24 @@
 <?php
 /**
+ * @method getAmountDelta()
+ * @method Mage_Customer_Model_Customer|null getCustomer()
  * @method int|null getCustomerId()
+ * @method bool getNotifyByEmail()
  * @method Df_CustomerBalance_Model_Resource_Balance getResource()
  * @method int|null getWebsiteId()
+ * @method bool hasAmountDelta()
+ * @method bool hasHistoryAction()
+ * @method bool hasStoreId()
  * @method bool hasWebsiteId()
- * @method Df_CustomerBalance_Model_Balance setAmountDelta(float $value)
- * @method Df_CustomerBalance_Model_Balance setComment(string $value)
- * @method Df_CustomerBalance_Model_Balance setCustomer(Mage_Customer_Model_Customer $value)
- * @method Df_CustomerBalance_Model_Balance setCustomerId(int $value)
- * @method Df_CustomerBalance_Model_Balance setHistoryAction(int $value)
- * @method Df_CustomerBalance_Model_Balance setOrder(Df_Sales_Model_Order $value)
- * @method Df_CustomerBalance_Model_Balance setWebsiteId(int $value)
+ * @method $this setAmount(float $value)
+ * @method $this setAmountDelta(float $value)
+ * @method $this setComment(string $value)
+ * @method $this setCustomer(Mage_Customer_Model_Customer $value)
+ * @method $this setCustomerId(int $value)
+ * @method $this setHistoryAction(int $value)
+ * @method $this setOrder(Df_Sales_Model_Order $value)
+ * @method $this setStoreId(int $value)
+ * @method $this setWebsiteId(int $value)
  */
 class Df_CustomerBalance_Model_Balance extends Df_Core_Model {
 	/**

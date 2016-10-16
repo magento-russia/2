@@ -1,7 +1,8 @@
 <?php
 /**
  * @method Df_CustomerBalance_Model_Resource_Balance_History getResource()
- * @method Df_CustomerBalance_Model_Balance_History setUpdatedAt(string $value)
+ * @method $this setBalanceModel(Df_CustomerBalance_Model_Balance $value)
+ * @method $this setUpdatedAt(string $value)
  */
 class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 	/** @return array(int => string) */

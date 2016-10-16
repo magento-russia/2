@@ -1,4 +1,8 @@
 <?php
+/**
+ * @method $this setBaseName(string $value)
+ * @method $this unsBaseName()
+ */
 class Df_Logging_Model_Archive extends Df_Core_Model {
 	/**
 	 * Attempt to create a new file using specified base name
@@ -15,7 +19,8 @@ class Df_Logging_Model_Archive extends Df_Core_Model {
 		}
 		$file = new Varien_Io_File();
 		$filename = $this->generateFilename($baseName);
-		$file->setAllowCreateFolders(true)->createDestinationDir(dirname($filename));
+		$file->setAllowCreateFolders(true);
+		$file->createDestinationDir(dirname($filename));
 		unset($file);
 		if (!touch($filename)) {
 			return false;

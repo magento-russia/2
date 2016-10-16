@@ -1,6 +1,10 @@
 <?php
 /**
  * @method Df_Banner_Model_Resource_Banner getResource()
+ * @method $this setCreatedTime(string $value)
+ * @method $this setIsMassupdate(bool $value)
+ * @method $this setStatus(string $value)
+ * @method $this setUpdateTime(string $value)
  */
 class Df_Banner_Model_Banner extends Df_Core_Model {
 	/** @return int */

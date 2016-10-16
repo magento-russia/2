@@ -130,6 +130,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 	/** @return string */
 	private function getCompositeName() {
 		if (!isset($this->{__METHOD__})) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$name = strtr(
 				mb_strtoupper($this->getPayment()->getCcOwner())
 				,df_h()->chronopay()->cartholderNameConversionConfig()->getConversionTable()
