@@ -100,7 +100,7 @@ function df_mage() {return Df_Core_Helper_Mage::s();}
  * @return string|boolean
  */
 function df_magento_version($param1 = null, $param2 = null) {
-	return df()->version()->magentoVersion($param1, $param2);
+	return \Df\Core\Version::s()->get($param1, $param2);
 }
 
 /**

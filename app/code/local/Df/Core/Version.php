@@ -1,48 +1,13 @@
 <?php
-class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
-	/** @return bool */
-	public function isCommunityEdition() {
-		return !$this->isEnterpriseEdition() && !$this->isProfessionalEdition();
-	}
-
-	/** @return bool */
-	private function isEnterpriseEdition() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')
-				&&
-					Mage::getConfig()->getModuleConfig('Enterprise_AdminGws')
-				&&
-					Mage::getConfig()->getModuleConfig('Enterprise_Checkout')
-				&&
-					Mage::getConfig()->getModuleConfig('Enterprise_Customer')
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return bool */
-	private function isProfessionalEdition() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')
-				&&
-					!Mage::getConfig()->getModuleConfig('Enterprise_AdminGws')
-				&&
-					!Mage::getConfig()->getModuleConfig('Enterprise_Checkout')
-				&&
-					!Mage::getConfig()->getModuleConfig('Enterprise_Customer')
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
+namespace Df\Core;
+use Mage;
+class Version {
 	/**
 	 * @param string|null $param1 [optional]
 	 * @param string|null $param2 [optional]
 	 * @return string|boolean
 	 */
-	public function magentoVersion($param1 = null, $param2 = null) {
+	public function get($param1 = null, $param2 = null) {
 		if (!isset($this->{__METHOD__}[$param1][$param2])) {
 			$this->{__METHOD__}[$param1][$param2] =
 				is_null($param1)
@@ -72,6 +37,37 @@ class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
 			;
 		}
 		return $this->{__METHOD__}[$param1][$param2];
+	}
+
+	/** @return bool */
+	private function isCommunityEdition() {
+		return !$this->isEnterpriseEdition() && !$this->isProfessionalEdition();
+	}
+
+	/** @return bool */
+	private function isEnterpriseEdition() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')
+				&& Mage::getConfig()->getModuleConfig('Enterprise_AdminGws')
+				&& Mage::getConfig()->getModuleConfig('Enterprise_Checkout')
+				&& Mage::getConfig()->getModuleConfig('Enterprise_Customer')
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/** @return bool */
+	private function isProfessionalEdition() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				Mage::getConfig()->getModuleConfig('Enterprise_Enterprise')
+				&& !Mage::getConfig()->getModuleConfig('Enterprise_AdminGws')
+				&& !Mage::getConfig()->getModuleConfig('Enterprise_Checkout')
+				&& !Mage::getConfig()->getModuleConfig('Enterprise_Customer')
+			;
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**
@@ -137,6 +133,6 @@ class Df_Core_Helper_Version extends Mage_Core_Helper_Abstract {
 		return $result;
 	}
 
-	/** @return Df_Core_Helper_Version */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
