@@ -74,7 +74,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Mage_Core_Model_Resource_Store_Collection $result */
 			$result = df_store()->getResourceCollection();
-			df()->assert()->storeCollection($result);
+			df_assert($result instanceof Mage_Core_Model_Resource_Store_Collection);
 			switch($this->getScope()) {
 				case self::$SCOPE__DEFAULT:
 					$result->setWithoutDefaultFilter();
@@ -90,7 +90,6 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 			}
 			$this->{__METHOD__} = $result;
 		}
-		df()->assert()->storeCollection($this->{__METHOD__});
 		return $this->{__METHOD__};
 	}
 
