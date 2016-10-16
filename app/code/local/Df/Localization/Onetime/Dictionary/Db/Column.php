@@ -124,7 +124,7 @@ class Df_Localization_Onetime_Dictionary_Db_Column extends \Df\Xml\Parser\Entity
 	 * @used-by Df_Localization_Onetime_Processor_Db_Column::_construct()
 	 */
 
-	/** @used-by Df_Localization_Model_Onetime_Dictionary_Db_Columns::itemParams() */
+	/** @used-by Df_Localization_Onetime_Dictionary_Db_Columns::itemParams() */
 	const P__TABLE = 'table';
 
 	/**

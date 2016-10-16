@@ -302,7 +302,7 @@
 				<package>default</package>
 				<theme>theme454</theme>
 				<dictionary>TemplateMonster/43373.xml</dictionary>
-				<processor>Df_Localization_Model_Onetime_Processor_TemplateMonster_43373</processor>
+				<processor>Df_Localization_Onetime_Processor_TemplateMonster_43373</processor>
 				<url>
 					<demo>http://templatemonster-43373.magento-demo.ru/</demo>
 					<forum>http://magento-forum.ru/forum/364/</forum>

@@ -416,25 +416,6 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by processRedirect()
-	 * @used-by Df_Core_Model_Action_Admin_Entity_Save::processRedirect()
-	 * @param string $path
-	 * @param array(string => mixed) $arguments [optional]
-	 * @return void
-	 */
-	protected function redirect($path, array $arguments = array()) {
-		$this->getController()->setRedirectWithCookieCheck($path, $arguments);
-	}
-
-	/**
-	 * @used-by processRedirect()
-	 * @used-by Df_Payment_Model_Action_Confirm::redirectToSuccess()
-	 * @param string $path
-	 * @return void
-	 */
-	protected function redirectRaw($path) {$this->getResponse()->setRedirect($path);}
-
-	/**
 	 * @override
 	 * @return void
 	 */
