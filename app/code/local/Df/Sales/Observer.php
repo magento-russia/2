@@ -102,6 +102,7 @@ class Df_Sales_Observer {
 	 * @return void
 	 */
 	public function sales_quote_address_save_before(Varien_Event_Observer $o) {
+		/** @var Df_Sales_Model_Quote_Address $quoteAddress */
 		$quoteAddress = $o['data_object'];
 		if ($quoteAddress) {
 			$quoteAddress->convertStreetToText();

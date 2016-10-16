@@ -310,7 +310,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 			$arguments = func_get_args();
 			$message = df_format($arguments);
 		}
-		$this->getMethod()->logFailureHighLevel($message);
+		$this->method()->logFailureHighLevel($message);
 	}
 
 	/**
@@ -323,7 +323,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 			$arguments = func_get_args();
 			$message = df_format($arguments);
 		}
-		$this->getMethod()->logFailureLowLevel($message);
+		$this->method()->logFailureLowLevel($message);
 	}
 
 	/** @return bool */
@@ -491,7 +491,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		 */
 		df_session_core()->addError(df_t()->nl2br(
 			$e instanceof Df_Payment_Exception && $e->needFraming()
-			? strtr($this->getMethod()->configF()->getMessageFailure(), array(
+			? strtr($this->method()->configF()->getMessageFailure(), array(
 				'{сообщение от платёжного шлюза}' => df_ets($e))
 			)
 			: df_ets($e)

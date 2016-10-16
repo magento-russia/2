@@ -37,7 +37,7 @@ abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_T
 	public function getResponse() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Kkb_Model_Response_Secondary::i($this->getResponseAsXml());
-			$this->{__METHOD__}->postProcess($this->getPayment());
+			$this->{__METHOD__}->postProcess($this->payment());
 		}
 		return $this->{__METHOD__};
 	}
@@ -46,7 +46,7 @@ abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_T
 	public function getResponsePayment() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Kkb_Model_Response_Payment::i()->loadFromPaymentInfo($this->getPayment())
+				Df_Kkb_Model_Response_Payment::i()->loadFromPaymentInfo($this->payment())
 			;
 		}
 		return $this->{__METHOD__};

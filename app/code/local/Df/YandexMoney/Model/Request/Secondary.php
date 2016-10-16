@@ -59,7 +59,7 @@ abstract class Df_YandexMoney_Model_Request_Secondary extends Df_Payment_Model_R
 				->setUri($this->getUri()->getUri())
 				->setConfig(array('timeout' => 10))
 				->setMethod(Zend_Http_Client::POST)
-				->setParameterPost($this->getParams())
+				->setParameterPost($this->params())
 			;
 		}
 		return $this->{__METHOD__};

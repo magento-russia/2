@@ -32,7 +32,7 @@ class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetim
 		}
 	}/** @noinspection PhpUndefinedClassInspection */
 	/**
-	 * @param EM_Megamenupro_Model_Megamenupro $menu
+	 * @param EM_Megamenupro_Model_Megamenupro|Varien_Object $menu
 	 * @return void
 	 */
 	private function entityBeforeSave(
@@ -60,7 +60,7 @@ class Df_Localization_Onetime_Type_Em_Megamenupro extends Df_Localization_Onetim
 
 	/** @noinspection PhpUndefinedClassInspection */
 	/**
-	 * @param EM_Megamenupro_Model_Megamenupro $menu
+	 * @param EM_Megamenupro_Model_Megamenupro|Varien_Object $menu
 	 * @return void
 	 */
 	private function entityAfterLoad(

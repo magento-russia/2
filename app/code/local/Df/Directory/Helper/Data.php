@@ -215,7 +215,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 			)
 		);
 		foreach ($collection as $region) {
-			/** @var Mage_Directory_Model_Region $region */
+			/** @var Mage_Directory_Model_Region|Df_Directory_Model_Region $region */
 			if (!$region->getRegionId()) {
 				continue;
 			}

@@ -11,7 +11,9 @@ class Df_Tweaks_Helper_Customer extends Mage_Core_Helper_Abstract {
 		$result = '';
 		/** @var Mage_Eav_Model_Config $config */
 		$config = df_mage()->eav()->configSingleton();
+		/** @noinspection PhpUndefinedMethodInspection */
 		if ($config->getAttribute('customer', 'prefix')->getIsVisible() && $customer->getPrefix()) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$result .= $customer->getPrefix() . ' ';
 		}
 		$result .= $customer->getFirstname();

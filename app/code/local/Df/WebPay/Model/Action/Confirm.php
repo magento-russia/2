@@ -5,7 +5,7 @@ class Df_WebPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->addAndSaveStatusHistoryComment(
+		$this->order()->comment(
 			$this->getPaymentStateMessage(df_int($this->getRequestValueServicePaymentState()))
 		);
 	}

@@ -8,17 +8,17 @@ class Df_Page_JQueryInjecter_Google extends Df_Page_JQueryInjecter {
 	 * @param mixed[] $staticItems
 	 * @return string
 	 */
-	protected function _process($format, array &$staticItems) {
-		return df_cc_n(
-			\Df\Core\Format\Html\Tag::scriptExternal($this->getPath())
-			,\Df\Core\Format\Html\Tag::scriptLocal(
+	protected function _process($format, array &$staticItems) {return
+		df_cc_n(
+			df_script_external($this->getPath())
+			,df_script_local(
 				// Инициализируем переменную $j для совместимости с Magento CE 1.9 (там так делается)
 				'var $j = jQuery.noConflict(); jQuery.migrateMute = true;'
 			)
-			,\Df\Core\Format\Html\Tag::scriptExternal($this->getPathMigrate())
+			,df_script_external($this->getPathMigrate())
 			,''
-		);
-	}
+		)
+	;}
 
 	/**
 	 * @override

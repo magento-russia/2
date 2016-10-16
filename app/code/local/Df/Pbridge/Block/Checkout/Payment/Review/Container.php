@@ -32,6 +32,7 @@ class Df_Pbridge_Block_Checkout_Payment_Review_Container
 		if ($payment->getMethod()
 			&& $payment->getMethodInstance()->getDataUsingMethod('is_deferred3d_check')
 		) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->setDataUsingMethod('method_code', $payment->getMethod());
 			/** @noinspection PhpUndefinedClassInspection */
 			$result = parent::_toHtml();

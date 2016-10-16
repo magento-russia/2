@@ -5,7 +5,7 @@ class Df_WalletOne_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->addAndSaveStatusHistoryComment('Покупатель отказался от оплаты');
+		$this->order()->comment('Покупатель отказался от оплаты');
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Df_WalletOne_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 */
 	protected function processOrderCanNotInvoice() {
 		// Единая Касса любит присылать повторные оповещения об оплате
-		$this->addAndSaveStatusHistoryComment('Единая Касса повторно прислала оповещение об оплате');
+		$this->order()->comment('Единая Касса повторно прислала оповещение об оплате');
 		$this->getResponse()->setBody($this->getResponseTextForSuccess());
 		return $this;
 	}

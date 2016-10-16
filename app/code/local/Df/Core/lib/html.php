@@ -31,6 +31,22 @@ function df_html_select_yesno($selected = null, array $attributes = []) {
 }
 
 /**
+ * @param string $src
+ * @return string
+ */
+function df_script_external($src) {return
+	!$src ? '' : df_tag('script', ['src' => $src, 'type' => 'text/javascript'])
+;}
+
+/**
+ * @param string $body
+ * @return string
+ */
+function df_script_local($body) {return
+	!$body ? '' : df_tag('script', ['type' => 'text/javascript'], $body)
+;}
+
+/**
  * 2015-12-21
  * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
  * @param string $css

@@ -7,5 +7,5 @@ class Df_Psbank_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	 * на страницу checkout/onepage в случае неуспешной оплаты
 	 * @return void
 	 */
-	public function indexAction() {Df_Psbank_Model_Action_CustomerReturn::i($this)->process();}
+	public function indexAction() {df_action($this);}
 }

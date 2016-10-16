@@ -85,6 +85,6 @@ class Df_Kkb_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function processResponseForSuccess() {
 		parent::processResponseForSuccess();
-		$this->getResponseAsObject()->postProcess($this->getPayment());
+		$this->getResponseAsObject()->postProcess($this->payment());
 	}
 }

@@ -3,10 +3,12 @@
 class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 	/** @return string */
 	public function process() {
+		/** @noinspection PhpUndefinedMethodInspection */
 		$result = $this->getImage()->getPath();
 		if (is_file($result)) {
 			if ($this->needCorrections()) {
 				$correctedFileName = $this->getCorrectedFileName();
+				/** @noinspection PhpUndefinedMethodInspection */
 				$r =
 					copy(
 						$this->getImage()->getPath()
@@ -29,6 +31,7 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 						)
 					;
 					// Remove previous image
+					/** @noinspection PhpUndefinedMethodInspection */
 					$this
 						->getProduct()
 						->getData(Df_Seo_Model_Processor_MediaGallery::MEDIA_GALLERY_ATTRIBUTE)
@@ -38,11 +41,13 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 							,$this->getImage()->getFile()
 						)
 					;
+					/** @noinspection PhpUndefinedMethodInspection */
 					if (
 						file_exists(
 							$this->getImage()->getPath()
 						)
 					) {
+						/** @noinspection PhpUndefinedMethodInspection */
 						unlink(
 							$this->getImage()->getPath()
 						)
@@ -74,6 +79,7 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 
 	/** @return string */
 	private function getCorrectedFileName() {
+		/** @noinspection PhpUndefinedMethodInspection */
 		$result = $this->getImage()->getPath();
 		$dirname = dfa($this->getFileInfo(), 'dirname');
 		$extension = dfa($this->getFileInfo(), 'extension');
@@ -97,6 +103,7 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 		$result = array();
 		$fields = array("image", "small_image", "thumbnail");
 		foreach ($fields as $field) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			if ($this->getImage()->getFile() === $this->getProduct()->getData($field)) {
 				$result[]= $field;
 			}
@@ -107,6 +114,7 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 	/** @return array */
 	private function getFileInfo() {
 		if (!isset($this->{__METHOD__})) {
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->{__METHOD__} = pathinfo ($this->getImage()->getPath());
 		}
 		return $this->{__METHOD__};

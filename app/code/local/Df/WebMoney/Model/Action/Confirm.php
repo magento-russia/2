@@ -5,7 +5,7 @@ class Df_WebMoney_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->addAndSaveStatusHistoryComment(
+		$this->order()->comment(
 			'Предварительная проверка платёжной системой работоспособности магазина'
 		);
 	}

@@ -10,6 +10,7 @@ class Df_Varien_Data_Tree extends Varien_Data_Tree {
 		$result = null;
 		foreach ($this->getNodes() as $node) {
 			/** @var Varien_Data_Tree_Node $node */
+			/** @noinspection PhpUndefinedMethodInspection */
 			if (
 					(
 							(is_null($parent) && is_null($node->getParent()))

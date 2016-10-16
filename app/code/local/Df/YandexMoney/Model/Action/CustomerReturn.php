@@ -89,7 +89,7 @@ class Df_YandexMoney_Model_Action_CustomerReturn extends Df_Payment_Model_Action
 	private function getRequestAuthorize() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_YandexMoney_Model_Request_Authorize::i(
-				$this->getPayment(), $this->getToken()
+				$this->payment(), $this->getToken()
 			);
 		}
 		return $this->{__METHOD__};
@@ -99,7 +99,7 @@ class Df_YandexMoney_Model_Action_CustomerReturn extends Df_Payment_Model_Action
 	private function getRequestCapture() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_YandexMoney_Model_Request_Capture::i(
-				$this->getPayment(), $this->getResponseAuthorize(), $this->getToken()
+				$this->payment(), $this->getResponseAuthorize(), $this->getToken()
 			);
 		}
 		return $this->{__METHOD__};

@@ -33,6 +33,7 @@ class Df_Invitation_Block_Link extends Df_Core_Block_Template_NoCache {
 		if (df_h()->invitation()->config()->isEnabledOnFront()) {
 			$blockInstance = $this->getLayout()->getBlock($block);
 			if ($blockInstance) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$blockInstance->addLink($label, $url, $title, $prepare, $urlParams,$position, $liParams, $aParams, $beforeText, $afterText);
 			}
 		}
@@ -55,6 +56,7 @@ class Df_Invitation_Block_Link extends Df_Core_Block_Template_NoCache {
 		if (df_h()->invitation()->config()->isEnabledOnFront()) {
 			$blockInstance = $this->getLayout()->getBlock($block);
 			if ($blockInstance) {
+				/** @noinspection PhpUndefinedMethodInspection */
 				$blockInstance->addLink($name, $path, $label, $urlParams);
 			}
 		}

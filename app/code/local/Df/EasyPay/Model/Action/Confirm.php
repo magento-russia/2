@@ -82,11 +82,4 @@ class Df_EasyPay_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 */
 		$this->getResponse()->setRawHeader('HTTP/1.0 200 OK');
 	}
-
-	/**
-	 * @static
-	 * @param Df_EasyPay_ConfirmController $c
-	 * @return Df_EasyPay_Model_Action_Confirm
-	 */
-	public static function i(Df_EasyPay_ConfirmController $c) {return self::ic(__CLASS__, $c);}
 }
