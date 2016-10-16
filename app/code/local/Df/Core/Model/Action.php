@@ -270,6 +270,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		 * в другой точке программы при аналогичном вызове @uses ob_get_clean().
 		 */
 		/** @var string|bool $output */
+		/** @noinspection PhpUsageOfSilenceOperatorInspection */
 		$output = @ob_get_clean();
 		if ($output) {
 			Mage::log(df_sprintf("output buffer:\n«%s»", $output));
@@ -295,6 +296,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		 * в другой точке программы при аналогичном вызове @uses ob_get_clean().
 		 */
 		/** @var string|bool $output */
+		/** @noinspection PhpUsageOfSilenceOperatorInspection */
 		$output = @ob_get_clean();
 		if ($output) {
 			ob_start();

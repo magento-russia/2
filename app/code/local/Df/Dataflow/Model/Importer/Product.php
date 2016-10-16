@@ -293,6 +293,12 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		/** @var array(array(string => int))|null $existingTierPrices */
 		$existingTierPrices = $this->getProduct()->getTierPrice();
 		if ($existingTierPrices) {
+			/**
+			 * 2016-10-16
+			 * Метод @uses Mage_Catalog_Model_Product::getTierPrice() реально возвращает массив,
+			 * несмотря на свой ошибочный PHPDoc.
+			 */
+			/** @noinspection PhpWrongForeachArgumentTypeInspection */
 			foreach ($existingTierPrices as $existingTierPrice) {
 				/** @var array(string => int) $existingTierPrice */
 				/** @var int|null $matchedNewTierPrice */
