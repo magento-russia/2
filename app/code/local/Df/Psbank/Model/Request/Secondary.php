@@ -119,7 +119,7 @@ abstract class Df_Psbank_Model_Request_Secondary extends Df_Payment_Model_Reques
 				'AMOUNT' => $this->getResponsePayment()->amount()->getAsString()
 				,'BACKREF' => ''
 				,'CURRENCY' => 'RUB'
-				,'EMAIL' => Df_Core_Helper_Mail::s()->getCurrentStoreMailAddress()
+				,'EMAIL' => df_store_mail_address()
 				,'INT_REF' => $this->getPaymentExternalId()
 				,'NONCE' => Df_Psbank_Helper_Data::s()->generateNonce()
 				,'ORDER' => $this->order()->getIncrementId()

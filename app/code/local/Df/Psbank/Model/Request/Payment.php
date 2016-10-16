@@ -35,7 +35,7 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				, 'TRTYPE' => $this->getTransactionType()
 				, 'MERCH_NAME' => $this->configS()->getShopName()
 				, 'MERCHANT' => $this->shopId()
-				, 'EMAIL' => Df_Core_Helper_Mail::s()->getCurrentStoreMailAddress()
+				, 'EMAIL' => df_store_mail_address()
 				, 'TIMESTAMP' => Df_Psbank_Helper_Data::s()->getTimestamp()
 				, 'NONCE' => Df_Psbank_Helper_Data::s()->generateNonce()
 				, 'BACKREF' => $this->urlCustomerReturn()

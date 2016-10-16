@@ -233,14 +233,6 @@
 					</Df_Core>
 				</observers>
 			</controller_action_predispatch>
-			<controller_action_postdispatch>
-				<observers>
-					<Df_Core>
-						<class>Df_Core_Observer</class>
-						<method>controller_action_postdispatch</method>
-					</Df_Core>
-				</observers>
-			</controller_action_postdispatch>
 			<!--
 				2015-08-03
 				При установке РСМ одновременно с CE

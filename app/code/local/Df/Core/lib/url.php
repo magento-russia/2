@@ -1,4 +1,5 @@
 <?php
+use Mage_Core_Model_Store as Store;
 /**
  * @param array(string => mixed) $params [optional]
  * @return array(string => mixed)
@@ -8,9 +9,9 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
 /**
  * 2016-07-12
  * @param string $url
- * @param string|E $message [optional]
+ * @param string|Exception $message [optional]
  * @return void
- * @throws E|LE
+ * @throws Exception
  */
 function df_assert_https($url, $message = null) {
 	if (df_enable_assertions() && !df_check_https($url)) {
@@ -45,15 +46,38 @@ function df_check_https($url) {return 'https' === df_zuri($url)->getScheme();}
 function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);}
 
 /**
- * @used-by Df_IPay_Model_Action_Abstract::order()
- * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
+ * @param int|string|null|bool|Store $store [optional]
  * @return string
  */
-function df_current_domain($store = null) {
-	/** @var string $baseUrl */
-	$baseUrl = df_store($store)->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
-	return Zend_Uri_Http::fromString($baseUrl)->getHost();
-}
+function df_current_domain($store = null) {return dfcf(function($store = null) {
+	/** @var Zend_View_Helper_ServerUrl $helper */
+	$helper = new Zend_View_Helper_ServerUrl();
+	/** @var string|null $result */
+	$result = $helper->getHost();
+	if (!$result) {
+		// Magento запущена с командной строки (например, планировщиком задач)
+		/** @var string|null $baseUrl */
+		$baseUrl = Mage::getStoreConfig(Mage_Core_Model_Store::XML_PATH_UNSECURE_BASE_URL);
+		/**
+		 * Тут уже нам некуда деваться:
+		 * пусть уж администратор указывает базовый адрес в настройках.
+		 */
+		/** @var string $errorMessage */
+		$errorMessage = 'Укажите полный корневой адрес магазина в административных настройках';
+		df_assert($baseUrl, $errorMessage);
+		try {
+			/** @var Zend_Uri_Http $uri */
+			$uri = Zend_Uri::factory($baseUrl);
+			$result = $uri->getHost();
+			df_assert_string_not_empty($result);
+		}
+		catch (Exception $e) {
+			df_error($errorMessage);
+		}
+	}
+	df_result_string_not_empty($result);
+	return $result;
+}, func_get_args());}
 
 /** @return string */
 function df_current_url() {return df_url_h()->getCurrentUrl();}
