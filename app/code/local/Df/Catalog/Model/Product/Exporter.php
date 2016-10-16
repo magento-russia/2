@@ -169,6 +169,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 				 * Однако значением опции «В наличии ли данный товар?» может быть «в наличии»
 				 * даже при нулевом складском остатке!
 				 */
+				/** @noinspection PhpParamsInspection */
 				df_mage()->catalogInventory()->stockSingleton()->addInStockFilterToCollection($result);
 			}
 			/**

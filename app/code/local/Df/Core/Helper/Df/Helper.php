@@ -26,8 +26,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function compiler() {return Df_Compiler_Helper_Data::s();}
 	/** @return Df_Connect_Helper_Data */
 	public function connect() {return Df_Connect_Helper_Data::s();}
-	/** @return Df_Customer_Helper_Data */
-	public function customer() {return Df_Customer_Helper_Data::s();}
 	/** @return Df_Dataflow_Helper_Data */
 	public function dataflow() {return Df_Dataflow_Helper_Data::s();}
 	/** @return Df_Directory_Helper_Data */

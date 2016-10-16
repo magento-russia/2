@@ -10,7 +10,9 @@ class Df_Customer_Model_Form extends Mage_Customer_Model_Form {
 	protected function _getFormAttributeCollection() {
 		/** @var Mage_Core_Model_Abstract|bool $result */
 		$result = parent::_getFormAttributeCollection();
-		if (df_h()->customer()->check()->formAttributeCollection($result) && $this->getAddress()) {
+		if (
+			$result instanceof Mage_Customer_Model_Resource_Form_Attribute_Collection
+			&& $this->getAddress()) {
 			/** @var Mage_Customer_Model_Resource_Form_Attribute_Collection|Mage_Customer_Model_Entity_Form_Attribute_Collection $result */
 			$result->setFlag(Df_Customer_Const_Form_Attribute_Collection::P__ADDRESS, $this->getAddress());
 		}

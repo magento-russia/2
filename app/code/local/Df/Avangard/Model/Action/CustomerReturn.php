@@ -79,7 +79,7 @@ class Df_Avangard_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Co
 				$resultCode = $this->getRequest()->getParam('result_code');
 				/** @var Df_Avangard_Model_Response_Registration $responseRegistration */
 				$responseRegistration = Df_Avangard_Model_Response_Registration::i();
-				$responseRegistration->loadFromPaymentInfo($this->getPayment());
+				$responseRegistration->loadFromPaymentInfo($this->payment());
 				if ($responseRegistration->getPasswordForPaymentResponseSuccess() !== $resultCode) {
 					$this->throwException('Заказ не был оплачен.');
 				}
@@ -129,9 +129,7 @@ class Df_Avangard_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Co
 	/** @return Df_Avangard_Model_Request_State */
 	private function getRequestState() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Avangard_Model_Request_State::i(
-				$this->getMethod(), $this->getPayment()
-			);
+			$this->{__METHOD__} = Df_Avangard_Model_Request_State::i($this->payment());
 		}
 		return $this->{__METHOD__};
 	}

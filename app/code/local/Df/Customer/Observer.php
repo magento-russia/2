@@ -60,9 +60,8 @@ class Df_Customer_Observer {
 			 * Это позволяет нам не создавать обработчики событий для каждой коллекции.
 			 */
 			if (
-					df_h()->customer()->check()->formAttributeCollection($o['collection'])
-				&&
-					df_checkout_ergonomic()
+				$o['collection'] instanceof Mage_Customer_Model_Resource_Form_Attribute_Collection
+				&& df_checkout_ergonomic()
 			) {
 				df_handle_event(
 					Df_Customer_Model_Handler_FormAttributeCollection_AdjustApplicability::class

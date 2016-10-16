@@ -15,6 +15,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 						/** @var \Df\Xml\X $xmlBlocks */
 						$xml = $xmlGlobal->{$xmlKey};
 						if ($xml) {
+							/** @noinspection PhpParamsInspection */
 							$this->parseRewrites(
 								$result
 								, $xml
