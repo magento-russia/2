@@ -52,10 +52,6 @@ class Df_Core_Helper_Mage extends Mage_Core_Helper_Abstract {
 	public function coreHelper() {return Mage::helper('core');}
 	/** @return Mage_Cron_Helper_Data */
 	public function cronHelper() {return Mage::helper('cron');}
-	/** @return Df_Core_Helper_Mage_Customer */
-	public function customer() {return Df_Core_Helper_Mage_Customer::s();}
-	/** @return Mage_Customer_Helper_Data */
-	public function customerHelper() {return Mage::helper('customer');}
 	/** @return Df_Core_Helper_Mage_Dataflow */
 	public function dataflow() {return Df_Core_Helper_Mage_Dataflow::s();}
 	/** @return Mage_Dataflow_Helper_Data */
@@ -72,8 +68,6 @@ class Df_Core_Helper_Mage extends Mage_Core_Helper_Abstract {
 	public function giftMessageHelper() {return Mage::helper('giftmessage');}
 	/** @return Mage_GoogleAnalytics_Helper_Data */
 	public function googleAnalyticsHelper() {return Mage::helper('googleanalytics');}
-	/** @return Df_Core_Helper_Mage_Helper */
-	public function helper() {return Df_Core_Helper_Mage_Helper::s();}
 	/** @return Mage_ImportExport_Helper_Data */
 	public function importExportHelper() {return Mage::helper('importexport');}
 	/** @return Df_Core_Helper_Mage_Index */

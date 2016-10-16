@@ -104,7 +104,7 @@ class Df_Invitation_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function isRegistrationAllowed($isAllowed = null)
 	{
 		if ($isAllowed === null && $this->_isRegistrationAllowed === null) {
-			$result = Mage::helper('customer')->isRegistrationAllowed();
+			$result = df_customer_h()->isRegistrationAllowed();
 			if ($this->_isRegistrationAllowed === null) {
 				$this->_isRegistrationAllowed = $result;
 			}

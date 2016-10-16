@@ -13,11 +13,7 @@ abstract class Df_PageCache_Model_Container_Abstract
 	 */
 	protected $_placeholder;
 
-	/**
-	 * Placeholder block instance
-	 *
-	 * @var Mage_Core_Block_Abstract
-	 */
+	/** @var Mage_Core_Block_Template */
 	protected $_placeholderBlock;
 
 	/**
@@ -84,7 +80,7 @@ abstract class Df_PageCache_Model_Container_Abstract
 		}
 
 		if (Mage::getStoreConfig(Df_PageCache_Model_Processor::XML_PATH_CACHE_DEBUG)) {
-			$debugBlock = new Df_PageCache_Block_Debug();
+			$debugBlock = new Df_PageCache_Block_Debug;
 			$debugBlock->setDynamicBlockContent($blockContent);
 			$debugBlock->setTags($this->_getPlaceHolderBlock()->getCacheTags());
 
@@ -257,6 +253,7 @@ abstract class Df_PageCache_Model_Container_Abstract
 			$this->_placeholderBlock = new $blockName;
 			$this->_placeholderBlock->setTemplate($this->_placeholder->getAttribute('template'));
 			$this->_placeholderBlock->setLayout(Mage::app()->getLayout());
+			/** @noinspection PhpUndefinedMethodInspection */
 			$this->_placeholderBlock->setSkipRenderTag(true);
 		}
 		return $this->_placeholderBlock;

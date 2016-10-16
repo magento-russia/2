@@ -14,7 +14,7 @@ class Df_Invitation_IndexController extends Mage_Core_Controller_Front_Action {
 		}
 
 		if (!df_session_customer()->authenticate($this)) {
-			$this->getResponse()->setRedirect(Mage::helper('customer')->getLoginUrl());
+			$this->getResponse()->setRedirect(df_customer_h()->getLoginUrl());
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
 	}

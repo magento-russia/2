@@ -13,10 +13,7 @@ class Df_Page_Block_Html_WelcomeM extends Mage_Page_Block_Html_Welcome {
 	 *
 	 * @return Mage_Customer_Model_Session
 	 */
-	protected function _getSession()
-	{
-		return Mage::getSingleton('customer/session');
-	}
+	protected function _getSession() { return df_session_customer();}
 
 	/**
 	 * Get block message

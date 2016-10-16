@@ -85,6 +85,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 	public function createPostAction()
 	{
 		try {
+			/** @var Df_Invitation_Model_Invitation $invitation */
 			$invitation = $this->_initInvitation();
 			/** @var Df_Customer_Model_Customer $customer */
 			$customer = Df_Customer_Model_Customer::i();
@@ -113,7 +114,7 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 				df_exception_to_session($e);
 				df_session()->setCustomerFormData($this->getRequest()->getPost());
 			} else {
-				if (Mage::helper('customer')->isRegistrationAllowed()) {
+				if (df_customer_h()->isRegistrationAllowed()) {
 					df_session()->addError(
 						df_h()->invitation()->__('Your invitation is not valid. Please create an account.')
 					);
@@ -129,8 +130,8 @@ class Df_Invitation_Customer_AccountController extends Mage_Customer_AccountCont
 			}
 		}
 		catch (Exception $e) {
-			$this->_getSession()->setCustomerFormData($this->getRequest()->getPost())
-				->addException($e, Mage::helper('customer')->__('Can\'t save customer'));
+			df_session_customer()->setCustomerFormData($this->getRequest()->getPost())
+				->addException($e, df_customer_h()->__('Can\'t save customer'));
 		}
 		$this->_redirectError('');
 	}

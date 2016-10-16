@@ -57,7 +57,7 @@ class Df_Customer_Model_Address_Validator extends Df_Core_Model {
 			$result = array();
 			foreach ($this->getException()->getMessages() as $message) {
 				/** @var Mage_Core_Model_Message_Abstract $message */
-				$result[]= df_mage()->customerHelper()->__($message->getText());
+				$result[]= df_customer_h()->__($message->getText());
 			}
 		}
 		if (!is_array($result)) {

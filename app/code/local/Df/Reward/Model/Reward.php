@@ -1,11 +1,13 @@
 <?php
 /**
+ * @method int|null getCustomerId()
  * @method float|null getPointsBalance()
  * @method Df_Reward_Model_Resource_Reward getResource()
+ *
  * @method Df_Reward_Model_Reward setAction(int $value)
  * @method Df_Reward_Model_Reward setActionEntity(Varien_Object $value)
  * @method Df_Reward_Model_Reward setCustomerId(int $value)
- * @method Df_Reward_Model_Reward  setPointsDelta(float $value)
+ * @method Df_Reward_Model_Reward setPointsDelta(float $value)
  * @method Df_Reward_Model_Reward setStore(int $value)
  * @method Df_Reward_Model_Reward setWebsiteId(int $value)
  */

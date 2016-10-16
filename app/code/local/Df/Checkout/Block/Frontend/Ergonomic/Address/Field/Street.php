@@ -17,7 +17,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Street
 	public function getDomName() {return parent::getDomName() . '[]';}
 
 	/** @return int */
-	public function getLinesCount() {return df_mage()->customer()->addressHelper()->getStreetLines();}
+	public function getLinesCount() {return df_address_h()->getStreetLines();}
 
 	/**
 	 * @override

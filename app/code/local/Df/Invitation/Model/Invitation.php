@@ -1,6 +1,8 @@
 <?php
 /**
  * @method int|null getCustomerId()
+ * @method string|null getEmail()
+ * @method int|null getGroupId()
  * @method int|null getReferralId()
  */
 class Df_Invitation_Model_Invitation extends Df_Core_Model {

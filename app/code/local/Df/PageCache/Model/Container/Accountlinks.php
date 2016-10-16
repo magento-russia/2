@@ -41,6 +41,7 @@ class Df_PageCache_Model_Container_Accountlinks extends Df_PageCache_Model_Conta
 			if ($links) {
 				$links = unserialize(base64_decode($links));
 				foreach ($links as $position => $linkInfo) {
+					/** @noinspection PhpUndefinedMethodInspection */
 					$block->addLink($linkInfo['label'], $linkInfo['url'], $linkInfo['title'], false, array(), $position,
 							$linkInfo['li_params'], $linkInfo['a_params'], $linkInfo['before_text'],
 							$linkInfo['after_text']);

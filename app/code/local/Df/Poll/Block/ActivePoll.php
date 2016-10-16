@@ -43,7 +43,7 @@ class Df_Poll_Block_ActivePoll extends Mage_Poll_Block_ActivePoll {
    			, df_store()->getCode()
 			,serialize($this->_templates)
 			,implode('-', $this->getVotedPollsIds())
-			, (int)Mage::getSingleton('core/session')->getJustVotedPoll()
+			, (int)df_session_core()->getJustVotedPoll()
 		);
 	}
 

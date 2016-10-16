@@ -10,7 +10,7 @@ class Df_Customer_Model_Attribute extends Mage_Customer_Model_Attribute {
 
 	/** @return string */
 	private function getFrontendLabelDf() {
-		return df_mage()->customerHelper()->__(parent::getData(self::P__FRONTEND_LABEL));
+		return df_customer_h()->__(parent::getData(self::P__FRONTEND_LABEL));
 	}
 
 	const P__FRONTEND_LABEL = 'frontend_label';

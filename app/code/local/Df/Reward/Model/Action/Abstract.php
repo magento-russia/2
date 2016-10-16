@@ -1,6 +1,6 @@
 <?php
 /**
- * Reward action model
+ * @method int|null getAction()
  */
 abstract class Df_Reward_Model_Action_Abstract extends Varien_Object {
 	/**
@@ -39,7 +39,7 @@ abstract class Df_Reward_Model_Action_Abstract extends Varien_Object {
 	public function canAddRewardPoints()
 	{
 		$exist = $this->getHistory()->isExistHistoryUpdate(
-			$this->getReward()->getCustomerId(),$this->getAction(),$this->getReward()->getWebsiteId(),$this->getEntity()->getId()
+			$this->getReward()->getCustomerId(), $this->getAction(), $this->getReward()->getWebsiteId(),$this->getEntity()->getId()
 		);
 		$exceeded = $this->isRewardLimitExceeded();
 		return !$exist && !$exceeded;

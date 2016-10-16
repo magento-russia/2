@@ -1,6 +1,7 @@
 <?php
 /**
  * @method Df_Reward_Model_Resource_Reward_History getResource()
+ * @method Df_Reward_Model_Reward_History setEntity(int $value)
  */
 class Df_Reward_Model_Reward_History extends Df_Core_Model {
 	/**

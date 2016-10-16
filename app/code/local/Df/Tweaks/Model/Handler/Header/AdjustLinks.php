@@ -64,7 +64,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 	/** @return Df_Tweaks_Model_Handler_Header_AdjustLinks */
 	private function replaceAccountLinkTitleWithCustomerName() {
 		/** @var string $accountUrl */
-		$accountUrl = df_mage()->helper()->getCustomer()->getAccountUrl();
+		$accountUrl = df_customer_h()->getAccountUrl();
 		/** @var string $customerName */
 		$customerName =
 			df_cfg()->tweaks()->header()->showOnlyFirstName()

@@ -235,7 +235,7 @@ function df_response_content_type(Mage_Core_Controller_Response_Http $httpRespon
 	$httpResponse->setHeader('Content-Type', $contentType, $replace = true);
 }
 
-/** @return Mage_Core_Model_Session_Abstract */
+/** @return Mage_Core_Model_Session_Abstract|Df_Core_Model_Session_Abstract */
 function df_session() {
 	/** @var Mage_Core_Model_Session_Abstract $result */
 	static $result;

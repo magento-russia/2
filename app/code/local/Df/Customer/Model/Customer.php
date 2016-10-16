@@ -19,6 +19,7 @@
  * @method Df_Customer_Model_Customer setPassword(string $value)
  * @method Df_Customer_Model_Customer setRewardUpdateNotification(bool $value)
  * @method Df_Customer_Model_Customer setRewardWarningNotification(bool $value)
+ * @method $this setSkipConfirmationIfEmail(string $value)
  * @method Df_Customer_Model_Customer setWebsiteId(int $value)
  */
 class Df_Customer_Model_Customer extends Mage_Customer_Model_Customer {

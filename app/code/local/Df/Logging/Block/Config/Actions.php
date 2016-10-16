@@ -25,6 +25,9 @@
  * @see Df_Adminhtml_Block_Config_Form_Field::render()
 		$html .= '<td class="value">';
 		$html .= $this->_getElementHtml($element);
+ *
+ * @method $this setHtmlId(string $value)
+ * @method $this setNamePrefix(string $value)
  */
 class Df_Logging_Block_Config_Actions extends Df_Adminhtml_Block_Config_Form_Field {
 	/**
