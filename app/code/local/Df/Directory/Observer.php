@@ -15,12 +15,12 @@ class Df_Directory_Observer {
 		$collection = $o['collection'];
 		/**
 		 * 2015-03-24
-		 * Проверку @uses isRegionCollection() надо обязательно выполнить до вызова @uses df_cfg(),
+		 * Проверку надо обязательно выполнить до вызова @uses df_cfg(),
 		 * потому что если событие «core_collection_abstract_load_after»
 		 * относится к коллекции магазинов @see Mage_Core_Model_App::_initStores(),
 		 * то использовать @uses df_cfg() ещё нельзя: текущий магазие ещё не инициализирован.
 		 */
-		if (self::isRegionCollection($collection)) {
+		if ($collection instanceof Mage_Directory_Model_Resource_Region_Collection) {
 			/** @var Df_Directory_Settings $cfg */
 			static $cfg; if (!$cfg) {$cfg = df_cfg()->directory();};
 			if (
@@ -63,7 +63,7 @@ class Df_Directory_Observer {
 		 * Это позволяет нам не создавать обработчики событий для каждой коллекции.
 		 */
 		$collection = $o['collection'];
-		if (self::isRegionCollection($collection)) {
+		if ($collection instanceof Mage_Directory_Model_Resource_Region_Collection) {
 			try {
 				df_handle_event(
 					Df_Directory_Model_Handler_OrderRegions::class
@@ -75,18 +75,5 @@ class Df_Directory_Observer {
 				df_handle_entry_point_exception($e);
 			}
 		}
-	}
-
-	/**
-	 * @used-by core_collection_abstract_load_after()
-	 * @used-by core_collection_abstract_load_before()
-	 * @var Varien_Data_Collection_Db $collection
-	 * @return bool
-	 */
-	private static function isRegionCollection(Varien_Data_Collection_Db $collection) {
-		return df_is($collection,
-			'Mage_Directory_Model_Resource_Region_Collection'
-			,'Df_Directory_Model_Resource_Region_Collection'
-		);
 	}
 }

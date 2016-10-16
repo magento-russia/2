@@ -255,7 +255,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 				  ===
 						Mage::getConfig()->getBlockClassName('catalog/navigation')
 				 */
-				if (df_is($navigationBlock, $templateMelaMenuClass)) {
+				if ($navigationBlock instanceof $templateMelaMenuClass) {
 					$result = true;
 					break;
 				}

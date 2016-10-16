@@ -4,10 +4,10 @@ class Df_Catalog_Helper_Check extends Mage_Core_Helper_Abstract {
 	 * @var Varien_Data_Collection_Db $c
 	 * @return bool
 	 */
-	public function categoryCollection(Varien_Data_Collection_Db $c) {return df_is($c,
-		Mage_Catalog_Model_Resource_Category_Collection::class
-		,Mage_Catalog_Model_Resource_Category_Flat_Collection::class
-	);}
+	public function categoryCollection(Varien_Data_Collection_Db $c) {return
+		$c instanceof Mage_Catalog_Model_Resource_Category_Collection
+		|| $c instanceof Mage_Catalog_Model_Resource_Category_Flat_Collection
+	;}
 
 	/**
 	 * @var Mage_Core_Model_Resource_Abstract $r
