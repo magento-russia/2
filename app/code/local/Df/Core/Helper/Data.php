@@ -1,16 +1,5 @@
 <?php
 class Df_Core_Helper_Data extends Mage_Core_Helper_Abstract {
-	/** @return Df_Core_Helper_Data */
-	public function forbid() {
-		$this->_isUsageForbidden = true;
-		return $this;
-	}
-
-	/** @return bool */
-	public function isUsageForbidden() {return $this->_isUsageForbidden;}
-	/** @var bool */
-	private $_isUsageForbidden = false;
-
 	/** @return Df_Core_Helper_Mail */
 	public function mail() {return Df_Core_Helper_Mail::s();}
 	/** @return \Df\Core\Helper\Path */
