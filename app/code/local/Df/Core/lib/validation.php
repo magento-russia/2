@@ -1114,21 +1114,3 @@ function df_result_between($resultValue, $min = null, $max = null, $stackLevel =
  * @throws DFE
  */
 function df_should_not_be_here() {df_error_html('The method %s is not allowed to call.', df_caller_mh());}
-
-/**
- * Эта функция используется, как правило, при отключенном режиме разработчика.
- * @see mageCoreErrorHandler():
-		if (Mage::getIsDeveloperMode()) {
-			throw new Exception($errorMessage);
-		}
- 		else {
-			Mage::log($errorMessage, Zend_Log::ERR);
-		}
- * @param bool $isOperationSuccessfull [optional]
- * @throws DFE
- */
-function df_throw_last_error($isOperationSuccessfull = false) {
-	if (!$isOperationSuccessfull) {
-		\Df\Qa\Message\Failure\Error::throwLast();
-	}
-}

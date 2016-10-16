@@ -76,16 +76,6 @@ function df_handle_event($handlerClass, $eventClass, Varien_Event_Observer $obse
 }
 
 /**
- * @param bool $condition
- * @param mixed $resultOnTrue
- * @param mixed|null $resultOnFalse [optional]
- * @return mixed
- */
-function df_if($condition, $resultOnTrue, $resultOnFalse = null) {
-	return $condition ? $resultOnTrue : $resultOnFalse;
-}
-
-/**
  * @param Varien_Object|mixed[]|mixed $value
  * @return void
  */
@@ -112,23 +102,6 @@ function df_module_enabled($moduleName) {
 	static $c; if(!$c) {$c = Df_Core_Model_Cache_Module::s();}
 	return $c->isEnabled($moduleName);
 }
-
-/**
- * @param mixed|string $value
- * @return mixed|null
- */
-function df_n_get($value) {return 'df-null' === $value ? null : $value;}
-/**
- * @param mixed|null $value
- * @return mixed|string
- */
-function df_n_set($value) {return is_null($value) ? 'df-null' : $value;}
-
-/**
- * @param mixed $argument
- * @return mixed
- */
-function df_nop($argument) {return $argument;}
 
 /**
  * @param string|Exception $message
@@ -197,27 +170,6 @@ function df_notify_me($message, $doLog = true) {
 		\Df\Qa\Message\Notification::P__NOTIFICATION => $message
 	))->log();
 }
-
-/**
- * @param mixed|null $value
- * @param bool $skipEmptyCheck [optional]
- * @return mixed[]
- */
-function df_nta($value, $skipEmptyCheck = false) {
-	if (!is_array($value)) {
-		if (!$skipEmptyCheck) {
-			df_assert(empty($value));
-		}
-		$value = array();
-	}
-	return $value;
-}
-
-/**
- * @param mixed|null $value
- * @return mixed
- */
-function df_nts($value) {return !is_null($value) ? $value : '';}
 
 /** @return Df_Core_Helper_Output */
 function df_output() {return Df_Core_Helper_Output::s();}

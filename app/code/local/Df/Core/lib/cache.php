@@ -44,7 +44,7 @@ function df_cache_clean() {df_cache()->flush();}
  * @param string $type
  * @return bool
  */
-function df_cache_enabled($type) {return df_cache()->canUse($this->cacheType());}
+function df_cache_enabled($type) {return df_cache()->canUse($type);}
 
 /**
  * 2016-07-18
