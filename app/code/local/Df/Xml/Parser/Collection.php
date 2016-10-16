@@ -50,8 +50,12 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 */
 	public function getId() {return get_class($this);}
 
-	/** @return Entity[] */
-	final public function getItems() {
+	/**
+	 * @return Entity[]
+	 * 2016-10-16
+	 * Убрал final, чтобы классы-потомки могли уточнять тип результата через PHPDoc.
+	 */
+	public function getItems() {
 		if (!isset($this->_items)) {
 			/** @var Entity[] $result */
 			$this->_items = [];

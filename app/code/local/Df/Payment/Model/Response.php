@@ -165,8 +165,8 @@ abstract class Df_Payment_Model_Response extends Df_Core_Model {
 			,'is_transaction_closed' => $this->isTransactionClosed()
 		));
 		$orderPayment->setTransactionAdditionalInfo(
-			$key = Mage_Sales_Model_Order_Payment_Transaction::RAW_DETAILS
-			,$value = $this->getReportAsArray()
+			Mage_Sales_Model_Order_Payment_Transaction::RAW_DETAILS
+			,$this->getReportAsArray()
 		);
 		/** @var Mage_Sales_Model_Order_Payment_Transaction $paymentTransaction */
 		$paymentTransaction = $orderPayment->addTransaction(

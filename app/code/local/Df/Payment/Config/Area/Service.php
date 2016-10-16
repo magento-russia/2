@@ -1,7 +1,7 @@
 <?php
 class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	/**
-	 * @param Df_Sales_Model_Order $order
+	 * @param Df_Sales_Model_Order|Mage_Sales_Model_Order $order
 	 * @param float|string $amountInOrderCurrency
 	 * @return Df_Core_Model_Money
 	 */

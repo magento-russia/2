@@ -2,7 +2,7 @@
 use Mage_Core_Model_Abstract as M;
 
 /**
- * @param Varien_Object $object
+ * @param Varien_Object|object $object
  * @param string[] $absentProperties [optional]
  * @return Varien_Object
  */

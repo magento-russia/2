@@ -287,6 +287,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 			/** @var Df_Catalog_Model_Resource_Product_Collection $products */
 			$products = Df_Catalog_Model_Product::c();
 			$products->setStoreId($storeId);
+			/** @noinspection PhpParamsInspection */
 			$products->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE);
 			$this->{__METHOD__}[$storeId] = $products->getAllIds();
 		}

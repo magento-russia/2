@@ -15,6 +15,7 @@ class Df_YandexMarket_Model_Config_Source_Currency extends Df_Admin_Config_Sourc
 	private function getAsOptionArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $optionCurrencyMap */
+			/** @noinspection PhpParamsInspection */
 			$optionCurrencyMap = df_options_to_map(Mage::app()->getLocale()->getOptionCurrencies());
 			/** @var string[][] $result */
 			$result = array();

@@ -16,10 +16,10 @@ class Df_Cms_Model_Admin_Action_DeleteOrphanBlocks extends Df_Core_Model_Action_
 
 	/**
 	 * @static
-	 * @param Df_Admin_NotificationController $c
+	 * @param Df_Cms_Admin_NotificationController $c
 	 * @return Df_Cms_Model_Admin_Action_DeleteOrphanBlocks
 	 */
-	public static function i(Df_Admin_NotificationController $c) {return self::ic(__CLASS__, $c);}
+	public static function i(Df_Cms_Admin_NotificationController $c) {return self::ic(__CLASS__, $c);}
 
 	/** @return Df_Cms_Model_Admin_Action_DeleteOrphanBlocks */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

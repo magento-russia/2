@@ -1,4 +1,5 @@
 <?php
+/** @method Df_1C_Cml2_Import_Data_Entity_AttributeValue[] getItems() */
 class Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	extends Df_1C_Cml2_Import_Data_Collection {
 	/**

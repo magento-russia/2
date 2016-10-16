@@ -152,6 +152,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 				 * потому что @uses Varien_Data_Form_Element_Fieldset::addField()
 				 * возвращает не $fieldset, а созданное поле.
 				 */
+				/** @noinspection PhpParamsInspection */
 				$field = $fieldset->addField($id, $fieldType, array(
 					'name' => $name
 					,'label' => $label

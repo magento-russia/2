@@ -52,6 +52,7 @@ class Df_PageCache_Model_Container_Messages extends Df_PageCache_Model_Container
 
 		$types = unserialize($this->_placeholder->getAttribute('storage_types'));
 		foreach ($types as $type) {
+			/** @noinspection PhpParamsInspection */
 			$this->_addMessagesToBlock($type, $block);
 		}
 		Mage::dispatchEvent('render_block', array('block' => $block, 'placeholder' => $this->_placeholder));

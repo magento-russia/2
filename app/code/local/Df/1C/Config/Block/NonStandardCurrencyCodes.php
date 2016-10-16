@@ -9,6 +9,7 @@ class Df_1C_Config_Block_NonStandardCurrencyCodes extends Df_Admin_Block_Field_D
 		$this->addColumn(Df_1C_Config_MapItem_CurrencyCode::P__NON_STANDARD, array(
 			'label' => 'код', 'style' => 'width:3em'
 		));
+		/** @noinspection PhpParamsInspection */
 		$this->addColumnRm(Df_Admin_Config_DynamicTable_Column_Select::i(
 			Df_1C_Config_MapItem_CurrencyCode::P__STANDARD
 			, 'валюта'
