@@ -40,7 +40,7 @@ class Df_YandexMoney_Model_Request_Authorize extends Df_YandexMoney_Model_Reques
 	 * @override
 	 * @return string
 	 */
-	protected function getPaymentExternalId() {df_should_not_be_here(__METHOD__);}
+	protected function getPaymentExternalId() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override

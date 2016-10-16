@@ -9,7 +9,7 @@ class Df_Core_Setup_FirstRun extends Df_Core_Model {
 
 	/** @return Df_Core_Setup_FirstRun */
 	private function disableAndCleanCache() {
-		/** @var Mage_Core_Model_Mysql4_Cache $resource */
+		/** @var Mage_Core_Model_Resource_Cache $resource */
 		$resource = Mage::getResourceSingleton('core/cache');
 		/** @var array(string => int) $options */
 		$options = $resource->getAllOptions();

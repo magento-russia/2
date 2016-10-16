@@ -47,13 +47,14 @@ class Df_Catalog_Model_Resource_Product_Attribute_Collection
 	}
 
 	/**
-	 * Вынуждены делать данный метод публичным,
-	 * потому что родительский метод
+	 * Родительский метод
 	 * @see Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Attribute_Collection::_construct()
 	 * публичен в Magento CE 1.4.0.1
+	 * Однако отныне (2016-10-16) мы эту версию больше не поддерживаем.
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {$this->_itemObjectClass = Df_Catalog_Model_Resource_Eav_Attribute::class;}
-
+	protected function _construct() {
+		$this->_itemObjectClass = Df_Catalog_Model_Resource_Eav_Attribute::class;
+	}
 }

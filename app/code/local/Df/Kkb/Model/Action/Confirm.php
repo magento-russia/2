@@ -71,7 +71,7 @@ class Df_Kkb_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {df_should_not_be_here(__METHOD__);}
+	protected function getSignatureFromOwnCalculations() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override

@@ -1034,7 +1034,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * 2015-02-09
 	 * Родительский метод: @see Mage_Catalog_Model_Product::_getResource()
 	 * Обратите внимание, что родительский метод никогда не возвращает
-	 * ресурсную модель @see Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Flat
+	 * ресурсную модель @see Mage_Catalog_Model_Resource_Product_Flat
 	 * эта ресурсная модель (для режима денормализации) используется только коллекцией.
 	 * @override
 	 * @return Df_Catalog_Model_Resource_Product

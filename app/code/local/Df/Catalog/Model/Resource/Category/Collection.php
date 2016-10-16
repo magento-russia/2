@@ -80,18 +80,17 @@ class Df_Catalog_Model_Resource_Category_Collection
 
 	/**
 	 * 2015-02-09
-	 * Родительский метод: @see Df_Catalog_Model_Resource_Category_Collection::setEntity()
-
 	 * @override
+	 * @see Df_Catalog_Model_Resource_Category_Collection::setEntity()
 	 * @param Mage_Eav_Model_Entity_Abstract $entity
-	 * @return Df_Catalog_Model_Resource_Category_Collection
+	 * @return void
 	 */
-	public function setEntity($entity) {df_should_not_be_here(__METHOD__);}
+	public function setEntity($entity) {df_should_not_be_here(); return null;}
 
 	/**
 	 * 2015-02-09
 	 * Родительский метод не вызываем намеренно.
-	 * Родительский метод: @see Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection::_init()
+	 * Родительский метод: @see Mage_Catalog_Model_Resource_Category_Collection::_init()
 	 * @override
 	 * @param string $model
 	 * @param string|null $entityModel [optional]

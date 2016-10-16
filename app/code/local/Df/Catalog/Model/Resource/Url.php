@@ -40,7 +40,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	 *
 	 * @override
 	 * @param int $storeId
-	 * @return Mage_Catalog_Model_Resource_Url|Mage_Catalog_Model_Resource_Eav_Mysql4_Url
+	 * @return Mage_Catalog_Model_Resource_Url
 	 */
 	public function clearStoreInvalidRewrites($storeId)
 	{
@@ -111,7 +111,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	 *
 	 * @param array $rewriteData
 	 * @param Varien_Object $rewrite
-	 * @return Mage_Catalog_Model_Resource_Url|Mage_Catalog_Model_Resource_Eav_Mysql4_Url
+	 * @return Mage_Catalog_Model_Resource_Url
 	 */
 	public function saveRewrite($rewriteData, $rewrite)
 	{
@@ -322,7 +322,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	/**
 	 * @param array $rewriteData
 	 * @param Varien_Object $rewrite
-	 * @return Mage_Catalog_Model_Resource_Url|Mage_Catalog_Model_Resource_Eav_Mysql4_Url
+	 * @return Mage_Catalog_Model_Resource_Url
 	 */
 	private function saveRewriteHistory_DfLegacyPatch($rewriteData, $rewrite) {
 		if ($rewrite instanceof Varien_Object && $rewrite->getId()) {

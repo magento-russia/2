@@ -25,7 +25,7 @@ class Df_Reward_Model_Action_Newsletter extends Df_Reward_Model_Action_Abstract 
 			return false;
 		}
 
-		/* @var $subscribers Mage_Newsletter_Model_Mysql4_Subscriber_Collection */
+		/* @var $subscribers Mage_Newsletter_Model_Resource_Subscriber_Collection */
 		$subscribers = Mage::getResourceModel('newsletter/subscriber_collection')
 			->addFieldToFilter('customer_id', $subscriber->getCustomerId())
 			->load();

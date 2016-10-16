@@ -12,7 +12,7 @@
  * [/code]
  */
 class Df_Core_Model_Event_Core_Collection_Abstract_LoadAfter extends Df_Core_Model_Event {
-	/** @return Mage_Core_Model_Resource_Db_Collection_Abstract|Mage_Core_Model_Mysql4_Collection_Abstract */
+	/** @return Mage_Core_Model_Resource_Db_Collection_Abstract */
 	public function getCollection() {return $this->getEventParam('collection');}
 
 	/** @return string */

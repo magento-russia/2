@@ -1,4 +1,9 @@
 <?php
+/**
+ * Класс @see Mage_Sales_Model_Mysql4_Order_Status отсутствует в Magento CE 1.4
+ * 2016-10-16
+ * Magento CE 1.4 отныне не поддерживаем.
+ */
 class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	/** @return string|null */
 	public function getLabel() {return $this->_getData(self::P__LABEL);}
@@ -30,16 +35,7 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	const P__LABEL = 'label';
 
 	/** @return Df_Sales_Model_Resource_Order_Status_Collection */
-	public static function c() {
-		if (self::isOldInterface()) {
-			df_error(
-				'Этот метод нельзя вызывать в данной версии Magento Community Edition.'
-				."\nВам надо обновить Magento Community Edition"
-				." либо обратиться в службу поддежки Российской сборки Magento."
-			);
-		}
-		return new Df_Sales_Model_Resource_Order_Status_Collection;
-	}
+	public static function c() {return new Df_Sales_Model_Resource_Order_Status_Collection;}
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
@@ -48,14 +44,4 @@ class Df_Sales_Model_Order_Status extends Mage_Sales_Model_Order_Status {
 	public static function i(array $parameters = array()) {return new self($parameters);}
 	/** @return Df_Sales_Model_Order_Status */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
-
-	/**
-	 * Класс @see Mage_Sales_Model_Mysql4_Order_Status отсутствует в Magento CE 1.4.
-	 * @return bool
-	 */
-	private static function isOldInterface() {
-		static $r; return !is_null($r) ? $r : $r =
-			!@class_exists('Mage_Sales_Model_Mysql4_Order_Status')
-		;
-	}
 }

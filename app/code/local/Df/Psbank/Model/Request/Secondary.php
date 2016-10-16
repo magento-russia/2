@@ -83,7 +83,7 @@ abstract class Df_Psbank_Model_Request_Secondary extends Df_Payment_Model_Reques
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getResponseAsArray() {df_abstract(__METHOD__);}
+	protected function getResponseAsArray() {df_abstract($this); return null;}
 	
 	/** @return Df_Psbank_Model_Response */
 	private function getResponsePayment() {

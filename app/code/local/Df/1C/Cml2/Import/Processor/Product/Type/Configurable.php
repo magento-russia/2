@@ -101,7 +101,7 @@ class Df_1C_Cml2_Import_Processor_Product_Type_Configurable
 	}
 
 	/** @return Df_Catalog_Model_Product */
-	protected function getProductMagento() {df_abstract(__METHOD__);}
+	protected function getProductMagento() {df_abstract($this); return null;}
 
 	/**
 	 * @override

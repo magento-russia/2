@@ -159,7 +159,7 @@ class Df_Directory_Model_Resource_Country_Collection
 	 * $emptyLabel задаёт заголовок пустой опции.
 	 * Если в качестве $emptyLabel передать false, то результат не будет содержать пустой опции.
 	 * @override
-	 * @see Mage_Directory_Model_Mysql4_Country_Collection::toOptionArray()
+	 * @see Mage_Directory_Model_Resource_Country_Collection::toOptionArray()
 	 * @used-by Mage_Adminhtml_Model_System_Config_Source_Country::toOptionArray()
 	 *
 	 * При инициализации поля «Перечень стран, куда разрешена доставка данным способом»:

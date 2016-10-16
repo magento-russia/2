@@ -33,6 +33,12 @@ abstract class Df_Core_Model_Handler extends Df_Core_Model {
 	 */
 	abstract protected function getEventClass();
 
+	/**
+	 * 2016-10-16
+	 * @return Mage_Core_Model_Resource_Db_Collection_Abstract
+	 */
+	protected function c() {return $this->getEvent()->getCollection();}
+
 	/** @return Df_Core_Model_Event */
 	protected function getEvent() {return $this->cfg(self::P__EVENT);}
 

@@ -124,46 +124,6 @@ class Df_Catalog_Model_Resource_Product_Collection
 	}
 
 	/**
-	 * Метод Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::addCategoryIds
-	 * отсутствует в Magento CE 1.4.0.1
-	 * @return Df_Catalog_Model_Resource_Product_Collection
-	 */
-	public function addCategoryIdsRm() {
-		if (!$this->getFlag('category_ids_added')) {
-			/** @var int[] $ids */
-			$ids = array_keys($this->_items);
-			if ($ids) {
-				/** @var Zend_Db_Select $select */
-				$select = $this->getConnection()->select();
-				$select->from($this->_productCategoryTable, array('product_id', 'category_id'));
-				$select->where('product_id IN (?)', $ids);
-				/** @var array[] $data */
-				$data = $this->getConnection()->fetchAll($select);
-				/** @var array $categoryIds */
-				$categoryIds = array();
-				foreach ($data as $info) {
-					/** @var string[] $info */
-					if (isset($categoryIds[$info['product_id']])) {
-						$categoryIds[$info['product_id']][]= $info['category_id'];
-					} else {
-						$categoryIds[$info['product_id']] = array($info['category_id']);
-					}
-				}
-				foreach ($this->getItems() as $product) {
-					/** @var Df_Catalog_Model_Product $product */
-					/** @var bool $hasDataChanges */
-					// запоминаем состояние изменённости/нетронутости товара
-					$hasDataChanges = $product->hasDataChanges();
-					$product->setCategoryIds(dfa($categoryIds, $product->getId(), array()));
-					$product->setDataChanges($hasDataChanges);
-				}
-				$this->setFlag('category_ids_added', true);
-			}
-		}
-		return $this;
-	}
-
-	/**
 	 * Этот метод отличается от родительского метода addIdFilter тем,
 	 * что фильтр по идентификаторам не добавляется к запросу SQL,
 	 * а вместо этого фильтрация производится средствами PHP
@@ -260,12 +220,12 @@ class Df_Catalog_Model_Resource_Product_Collection
 
 	/**
 	 * 2015-02-09
-	 * Родительский метод: @see Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::setEntity()
 	 * @override
+	 * @see Mage_Catalog_Model_Resource_Product_Collection::setEntity()
 	 * @param Mage_Eav_Model_Entity_Abstract $entity
-	 * @return Df_Catalog_Model_Resource_Product_Collection
+	 * @return void
 	 */
-	public function setEntity($entity) {df_should_not_be_here(__METHOD__);}
+	public function setEntity($entity) {df_should_not_be_here();}
 
 	/**
 	 * @override
@@ -288,7 +248,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 * for different combinations of store_id/category_id/visibility filter states
 	 *
 	 * Method supports multiple changes in one collection object for this parameters
-	 * @return Df_Catalog_Model_Resource_Product_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection
+	 * @return Df_Catalog_Model_Resource_Product_Collection
 	 */
 	protected function _applyProductLimitations() {
 		/**
@@ -418,7 +378,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 * Method allows using one time category product table
 	 * for combinations of category_id filter states
 	 * @override
-	 * @return Df_Catalog_Model_Resource_Product_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection
+	 * @return Df_Catalog_Model_Resource_Product_Collection
 	 */
 	protected function _applyZeroStoreProductLimitations() {
 		/** @var array $filters */
@@ -593,8 +553,8 @@ class Df_Catalog_Model_Resource_Product_Collection
 	/**
 	 * 2015-02-09
 	 * Родительский метод не вызываем намеренно.
-	 * Родительский метод: @see Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::_init()
 	 * @override
+	 * @see Mage_Catalog_Model_Resource_Product_Collection::_init()
 	 * @param string $model
 	 * @param string|null $entityModel [optional]
 	 * @return Df_Catalog_Model_Resource_Category_Collection

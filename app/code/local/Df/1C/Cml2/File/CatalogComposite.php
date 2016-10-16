@@ -4,19 +4,19 @@ class Df_1C_Cml2_File_CatalogComposite extends Df_1C_Cml2_File {
 	 * @override
 	 * @return string
 	 */
-	public function getNameBase() {df_should_not_be_here(__METHOD__);}
+	public function getNameBase() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getPathFull() {df_should_not_be_here(__METHOD__);}
+	public function getPathFull() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getPathRelative() {df_should_not_be_here(__METHOD__);}
+	public function getPathRelative() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override

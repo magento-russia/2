@@ -9,7 +9,7 @@ class Df_Localization_Onetime_Processor_Attribute
 	 * @override
 	 * @return string
 	 */
-	protected function getTitlePropertyName() {df_should_not_be_here(__METHOD__);}
+	protected function getTitlePropertyName() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @param Df_Localization_Onetime_Dictionary_Term $term

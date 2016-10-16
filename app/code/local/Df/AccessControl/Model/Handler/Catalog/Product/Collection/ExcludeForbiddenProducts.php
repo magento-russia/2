@@ -20,7 +20,7 @@ class Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbidden
 		}
 		if ($needHandle && df_h()->accessControl()->getCurrentRole()->isModuleEnabled()) {
 			// Добавляем фильтр по разрешённым товарным разделам.
-			/** @var Df_Catalog_Model_Resource_Product_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection $collection */
+			/** @var Df_Catalog_Model_Resource_Product_Collection $collection */
 			$collection = $this->getEvent()->getCollection();
 			if ($collection instanceof Df_Catalog_Model_Resource_Product_Collection) {
 				/** @var Df_Catalog_Model_Resource_Product_Collection $collection */

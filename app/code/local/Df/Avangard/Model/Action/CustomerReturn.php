@@ -30,7 +30,7 @@ class Df_Avangard_Model_Action_CustomerReturn extends Df_Payment_Model_Action_Co
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {df_should_not_be_here(__METHOD__);}
+	protected function getSignatureFromOwnCalculations() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override

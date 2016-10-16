@@ -73,29 +73,18 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	}
 
 	/** @return Varien_Db_Select */
-	private function getSelect() {
-		return $this->getReportCollection()->getSelect();
-	}
+	private function getSelect() {return $this->getReportCollection()->getSelect();}
 
-	/** @return Mage_Sales_Model_Resource_Report_Collection_Abstract|Mage_Sales_Model_Mysql4_Report_Collection_Abstract */
+	/** @return Mage_Sales_Model_Resource_Report_Collection_Abstract */
 	private function getReportCollection() {
 		/** @var Mage_Sales_Model_Resource_Report_Collection_Abstract $result */
-		$result = $this->getEvent()->getCollection();
+		$result = $this->c();
 		df_assert($this->isItReportCollection());
 		return $result;
 	}
 
 	/** @return bool */
-	private function isItReportCollection() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_is($this->getEvent()->getCollection(),
-				'Mage_Sales_Model_Resource_Report_Collection_Abstract'
-				,'Mage_Sales_Model_Mysql4_Report_Collection_Abstract'
-			);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @used-by Df_Reports_Observer::core_collection_abstract_load_before() */
-
+	private function isItReportCollection() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} =
+		$this->c() instanceof Mage_Sales_Model_Resource_Report_Collection_Abstract;
+	}return $this->{__METHOD__};}
 }

@@ -153,7 +153,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Mage_Eav_Model_Resource_Entity_Attribute_Option_Collection|Mage_Eav_Model_Mysql4_Entity_Attribute_Option_Collection */
+	/** @return Mage_Eav_Model_Resource_Entity_Attribute_Option_Collection */
 	private function getOptionsOld() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $attributeId */

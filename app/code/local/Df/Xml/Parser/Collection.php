@@ -108,7 +108,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @used-by itemClassAdvanced()
 	 * @return string
 	 */
-	protected function itemClass() {df_abstract($this);}
+	protected function itemClass() {df_abstract($this); return null;}
 
 	/**
 	 * 2015-08-15

@@ -3,7 +3,7 @@ class Df_Checkout_Model_Resource_Cart extends Mage_Checkout_Model_Resource_Cart 
 	/**
 	 * Цель перекрытия —
 	 * устранение сбоя, который, видимо, иногда происходил в методе
-	 * @see Mage_Checkout_Model_Mysql4_Cart::addExcludeProductFilter()
+	 * @see Mage_Checkout_Model_Resource_Cart::addExcludeProductFilter()
 	 * @override
 	 * @param Mage_Catalog_Model_Resource_Product_Collection $collection
 	 * @param int $quoteId

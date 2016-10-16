@@ -68,11 +68,11 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 
 	/**
 	 * Возвращает перечень магазинов, к которым относится текущее значение настройки
-	 * @return Mage_Core_Model_Resource_Store_Collection|Mage_Core_Model_Mysql4_Store_Collection
+	 * @return Mage_Core_Model_Resource_Store_Collection
 	 */
 	public function getStores() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Resource_Store_Collection|Mage_Core_Model_Mysql4_Store_Collection $result */
+			/** @var Mage_Core_Model_Resource_Store_Collection $result */
 			$result = df_store()->getResourceCollection();
 			df()->assert()->storeCollection($result);
 			switch($this->getScope()) {
@@ -135,10 +135,10 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 		return df_n_get($this->{__METHOD__}[$name]);
 	}
 
-	/** @return Mage_Core_Model_Resource_Website_Collection|Mage_Core_Model_Mysql4_Website_Collection */
+	/** @return Mage_Core_Model_Resource_Website_Collection */
 	private function getWebsites() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Core_Model_Resource_Website_Collection|Mage_Core_Model_Mysql4_Website_Collection $result */
+			/** @var Mage_Core_Model_Resource_Website_Collection $result */
 			$result = df_website()->getResourceCollection();
 			switch($this->getScope()) {
 				case self::$SCOPE__DEFAULT:

@@ -21,7 +21,7 @@ class Df_Core_Model_Resource_Db_UniqueChecker extends Df_Core_Model {
 	/** @return Mage_Core_Model_Abstract */
 	private function getModel() {return $this->cfg(self::$P__MODEL);}
 
-	/** @return Mage_Core_Model_Mysql4_Abstract */
+	/** @return Mage_Core_Model_Resource_Db_Abstract */
 	private function getResourceForModel() {return $this->getModel()->getResource();}
 
 	/** @return Varien_Db_Adapter_Interface */

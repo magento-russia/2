@@ -20,7 +20,7 @@ class Df_Invitation_Model_Resource_Report_Invitation_Order_Collection
 
 	/**
 	 * Additional data manipulation after collection was loaded
-	 * @return Mage_Core_Model_Mysql4_Collection_Abstract
+	 * @return $this
 	 */
 	protected function _afterLoad()
 	{

@@ -3,7 +3,7 @@ class Df_Catalog_Model_Resource_Product_Option_Title extends Df_Core_Model_Resou
 	/**
 	 * Нельзя вызывать @see parent::_construct(),
 	 * потому что это метод в родительском классе — абстрактный.
-	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
+	 * @see Mage_Core_Model_Resource_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */

@@ -10,20 +10,15 @@ class Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbidde
 	 * @return void
 	 */
 	public function handle() {
-		if (
-				df_cfg()->admin()->access_control()->getEnabled()
-			&&
-				!is_null(df_h()->accessControl()->getCurrentRole())
+		if (df_cfg()->admin()->access_control()->getEnabled()
+			&& !is_null(df_h()->accessControl()->getCurrentRole())
+			&& df_h()->accessControl()->getCurrentRole()->isModuleEnabled()
 		) {
-			if (df_h()->accessControl()->getCurrentRole()->isModuleEnabled()) {
-				// добавляем фильтр по разрешённым товарным разделам
-				/** @var Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection $collection */
-				$collection = $this->getEvent()->getCollection();
-				if (!Df_AccessControl_Helper_Data::disable($collection)) {
-					$collection->addIdFilter(
-						df_h()->accessControl()->getCurrentRole()->getCategoryIdsWithAncestors()
-					);
-				}
+			// добавляем фильтр по разрешённым товарным разделам
+			/** @var Mage_Catalog_Model_Resource_Category_Collection $c */
+			$c = $this->getEvent()->getCollection();
+			if (!Df_AccessControl_Helper_Data::disable($c)) {
+				$c->addIdFilter(df_h()->accessControl()->getCurrentRole()->getCategoryIdsWithAncestors());
 			}
 		}
 	}

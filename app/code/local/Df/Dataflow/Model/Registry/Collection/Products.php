@@ -73,14 +73,12 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 		 *
 		 * Метод Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::addCategoryIds
 		 * отсутствует в Magento CE 1.4.0.1
+		 *
+		 * 2016-10-16
+		 * Однако Magento CE 1.4.0.1 мы уже не поддерживаем.
 		 */
 		$result->load();
-		if (method_exists($result, 'addCategoryIds')) {
-			call_user_func(array($result, 'addCategoryIds'));
-		}
-		else {
-			$result->addCategoryIdsRm();
-		}
+		$result->addCategoryIds();
 		return $result;
 	}
 

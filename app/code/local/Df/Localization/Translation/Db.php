@@ -12,7 +12,7 @@ class Df_Localization_Translation_Db extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Core_Model_Resource_Translate|Mage_Core_Model_Mysql4_Translate */
+	/** @return Mage_Core_Model_Resource_Translate */
 	private function getCoreTranslateResource() {
 		return df_mage()->core()->translateSingleton()->getResource();
 	}

@@ -7,10 +7,10 @@ class Df_Catalog_Block_Navigation extends Mage_Catalog_Block_Navigation {
 	 * посредством подписки на создаваемое этим методом
 	 * оповещение «df_menu_top_add_submenu».
 	 * @override
-	 * @return Varien_Data_Tree_Node_Collection|Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection|Varien_Data_Collection|array
+	 * @return Varien_Data_Tree_Node_Collection|Mage_Catalog_Model_Resource_Category_Collection|Varien_Data_Collection|array
 	 */
 	public function getStoreCategories() {
-		/** @var Varien_Data_Tree_Node_Collection|Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection|Varien_Data_Collection|array $result */
+		/** @var Varien_Data_Tree_Node_Collection|Mage_Catalog_Model_Resource_Category_Collection|Varien_Data_Collection|array $result */
 		$result = parent::getStoreCategories();
 		/** @var bool $isNodeCollection */
 		$isNodeCollection = $result instanceof Varien_Data_Tree_Node_Collection;

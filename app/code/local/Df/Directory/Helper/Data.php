@@ -161,7 +161,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 
 	/**
 	 * @param Varien_Data_Collection_Db $regions
-	 * @return Mage_Directory_Model_Resource_Region_Collection|Mage_Directory_Model_Mysql4_Region_Collection
+	 * @return Mage_Directory_Model_Resource_Region_Collection
 	 */
 	public function normalizeRegions(Varien_Data_Collection_Db $regions) {
 		/** @var bool $needNormalize */

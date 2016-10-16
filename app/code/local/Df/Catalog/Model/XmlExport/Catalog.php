@@ -89,10 +89,7 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	}
 
 	/** @return string */
-	protected function getProcessorClass_attributes() {
-		df_abstract(__METHOD__);
-		return '';
-	}
+	protected function getProcessorClass_attributes() {df_abstract($this); return null;}
 
 	/**
 	 * Класс-потомок должен вернуть true, если он намерен обновлять товарные разделы.

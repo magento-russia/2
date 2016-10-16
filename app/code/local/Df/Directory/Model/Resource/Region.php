@@ -7,6 +7,9 @@
  * Поэтому для Magento CE < 1.6 перекрываем класс Mage_Directory_Model_Mysql4_Region
  * классом Df_Directory_Model_Resource_Region, программный код которого взят из
  * класса Mage_Directory_Model_Resource_Region для Magento CE >= 1.6
+ *
+ * 2016-10-16
+ * Упомянутые выше устаревшие версии Magento CE мы отныне не поддерживаем.
  */
 class Df_Directory_Model_Resource_Region extends Mage_Directory_Model_Resource_Region {
 	/**

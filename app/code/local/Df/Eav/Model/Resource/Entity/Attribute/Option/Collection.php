@@ -43,13 +43,16 @@ class Df_Eav_Model_Resource_Entity_Attribute_Option_Collection
 
 	/**
 	 * Вынуждены сделать этот метод публичным, потому что в Magento CE 1.4.0.1 публичен родительский.
-	 * @see Mage_Eav_Model_Mysql4_Entity_Attribute_Option_Collection::_construct()
+	 * @see Mage_Eav_Model_Mysql4_Entity_Attribute_Option_Collection::_construct()       
+	 * 
+	 * 2016-10-16
+	 * Magento CE 1.4.0.1 отныне не поддерживаем.
+	 * 
 	 * @override
 	 * @return void
 	 */
-	public function _construct() {
+	protected function _construct() {
 		parent::_construct();
 		$this->_itemObjectClass = Df_Eav_Model_Entity_Attribute_Option::class;
 	}
-
 }

@@ -178,16 +178,16 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * @override
 	 * @return Df_Core_Model_Resource_Collection
 	 */
-	public function getResourceCollection() {df_abstract(__METHOD__);}
+	public function getResourceCollection() {df_abstract($this); return null;}
 
 	/**
 	 * 2015-02-09
 	 * Этот метод никто в Magento не использует.
 	 * Родительский метод: @see Mage_Core_Model_Abstract::getResourceName()
 	 * @override
-	 * @return void
+	 * @return string
 	 */
-	public function getResourceName() {df_should_not_be_here(__METHOD__);}
+	public function getResourceName() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override
@@ -404,7 +404,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * @override
 	 * @return void
 	 */
-	protected function _getResource() {df_abstract(__METHOD__);}
+	protected function _getResource() {df_abstract($this); return null;}
 
 	/**
 	 * 2015-02-09
@@ -420,7 +420,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * @param string $resourceModel
 	 * @return Df_Core_Model
 	 */
-	protected function _init($resourceModel) {df_should_not_be_here(__METHOD__);}
+	protected function _init($resourceModel) {df_should_not_be_here(); return null;}
 
 	/**
 	 * 2015-02-09
@@ -432,7 +432,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	 * @return void
 	 */
 	protected function _setResourceModel($resourceName, $resourceCollectionName = null) {
-		df_should_not_be_here(__METHOD__);
+		df_should_not_be_here();
 	}
 
 	/**

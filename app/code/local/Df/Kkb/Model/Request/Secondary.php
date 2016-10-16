@@ -79,7 +79,7 @@ abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_T
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getResponseAsArray() {df_abstract(__METHOD__);}
+	protected function getResponseAsArray() {df_abstract($this); return null;}
 
 	/** @return string */
 	private function getHost() {

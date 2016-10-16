@@ -2,8 +2,7 @@
 /**
  * Cообщение:		«catalog_category_collection_load_before»
  *
- * Источник:		Mage_Core_Model_Mysql4_Collection_Abstract::_beforeLoad()
- * 					Mage_Core_Model_Resource_Collection_Abstract::_beforeLoad()
+ * Источник:		Mage_Core_Model_Resource_Collection_Abstract::_beforeLoad()
  * [code]
 		parent::_beforeLoad();
 		Mage::dispatchEvent('core_collection_abstract_load_before', array('collection' => $this));
@@ -18,7 +17,7 @@
  * 					перед её загрузкой
  */
 class Df_Catalog_Model_Event_Category_Collection_Load_Before extends Df_Core_Model_Event {
-	/** @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
+	/** @return Mage_Catalog_Model_Resource_Category_Collection */
 	public function getCollection() {return $this->getEventParam('category_collection');}
 	/**
 	 * @override

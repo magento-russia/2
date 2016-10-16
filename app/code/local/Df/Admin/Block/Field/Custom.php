@@ -37,7 +37,7 @@ abstract class Df_Admin_Block_Field_Custom extends Df_Adminhtml_Block_Config_For
 	 * @override
 	 * @return string
 	 */
-	public function getTemplate() {return df_abstract(__METHOD__);}
+	public function getTemplate() {return df_abstract($this);}
 
 	/**
 	 * @override

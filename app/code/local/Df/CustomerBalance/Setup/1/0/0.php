@@ -115,15 +115,14 @@ class Df_CustomerBalance_Setup_1_0_0 extends Df_Core_Setup {
 	/**
 	 * @param array(array(string|array(string => string))) $attributesData
 	 * @return void
+	 *
+	 * 2014-02-10
+	 * Не приходит в голову, как здесь использовать @see array_map().
+	 * Вариант array_map(array($this->getSetupSales(), 'addAttribute'), $attributesData);
+	 * неправильный, потому что тогда метод @uses Mage_Sales_Model_Resource_Setup::addAttribute()
+	 * получит всего один параметр из массива.
 	 */
 	private function addAttributes(array $attributesData) {
-		/**
-		 * 2014-02-10
-		 * Не приходит в голову, как здесь использовать @see array_map().
-		 * Вариант array_map(array($this->getSetupSales(), 'addAttribute'), $attributesData);
-		 * неправильный, потому что тогда метод @uses Mage_Sales_Model_Mysql4_Setup::addAttribute()
-		 * получит всего один параметр из массива.
-		 */
 		foreach ($attributesData as $attributeData) {
 			/** @var array(string|array(string => string)) $attributeData */
 			call_user_func_array(array($this->getSetupSales(), 'addAttribute'), $attributeData);

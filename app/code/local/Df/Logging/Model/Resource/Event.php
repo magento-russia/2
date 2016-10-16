@@ -93,7 +93,7 @@ class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 	/**
 	 * Нельзя вызывать @see parent::_construct(),
 	 * потому что это метод в родительском классе — абстрактный.
-	 * @see Mage_Core_Model_Mysql4_Abstract::_construct()
+	 * @see Mage_Core_Model_Resource_Abstract::_construct()
 	 * @override
 	 * @return void
 	 */

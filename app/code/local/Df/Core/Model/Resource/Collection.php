@@ -29,12 +29,12 @@ abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Resourc
 	/**
 	 * 2015-02-09
 	 * Этот метод никто в Magento не использует.
-	 * Родительский метод: @see Mage_Core_Model_Mysql4_Collection_Abstract::getModelName()
 	 * @override
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::getModelName()
 	 * @param mixed $args [optional]
-	 * @return string
+	 * @return void
 	 */
-	public function getModelName($args = array()) {df_should_not_be_here(__METHOD__);}
+	public function getModelName($args = array()) {df_should_not_be_here();}
 
 	/**
 	 * 2015-02-09
@@ -69,7 +69,7 @@ abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Resourc
 	 * Обратите внимание, что имеется возможность обойти этот недостаток
 	 * посредством указания ресурсной модели в качестве параметра конструктора коллекции.
 	 * Обратите внимание на реализацию родительского конструктора
-	 * @see Mage_Core_Model_Mysql4_Collection_Abstract::__construct():
+	 * @see @see Mage_Core_Model_Resource_Db_Collection_Abstract::setModel()::__construct():
 		public function __construct($resource = null) {
 			parent::__construct();
 			$this->_construct();
@@ -81,7 +81,7 @@ abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Resourc
 	 * мы таким образом инициализируем ресурсню модель коллекции объектом-одиночкой.
 	 *
 	 * 2) Второй альтернативой является перекрытие родительского конструктора
-	 * @see Mage_Core_Model_Mysql4_Collection_Abstract::__construct().
+	 * @see @see Mage_Core_Model_Resource_Db_Collection_Abstract::setModel()::__construct().
 	 * Снова обратите внимание на устройство родительского конструктора:
 			public function __construct($resource = null) {
 				parent::__construct();
@@ -102,43 +102,43 @@ abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Resourc
 	 * Однако есть более хитрый способ перекрытия родительского конструктора:
 	 * можно в нашем конструкторе сначала вызвать родительский конструктор,
 	 * но не без параметров, а с параметром в виде объекта-одиночки ресурсной модели.
-	 * Родительский метод: @see Mage_Core_Model_Mysql4_Collection_Abstract::getResource().
 	 * @override
+	 * @see Mage_Core_Model_Mysql4_Collection_Abstract::getResource()
 	 * @return Df_Core_Model_Resource
 	 */
-	public function getResource() {df_abstract(__METHOD__);}
+	public function getResource() {df_abstract($this); return null;}
 
 	/**
 	 * 2015-02-09
-	 * Этот метод никто в Magento не использует, кроме перекрытого нами родительского метода
-	 * @see Mage_Core_Model_Mysql4_Collection_Abstract::getResource().
-	 * Родительский метод: @see Mage_Core_Model_Mysql4_Collection_Abstract::getResourceModelName().
+	 * Этот метод никто в Magento не использует, кроме перекрытого нами родительского метода.
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::getResource().
 	 * @override
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::getResourceModelName()
 	 * @return string
 	 */
-	public function getResourceModelName() {df_should_not_be_here(__METHOD__);}
+	public function getResourceModelName() {df_should_not_be_here(); return null;}
 
 	/**
 	 * 2015-02-09
 	 * Этот метод никто в Magento не использует, кроме перекрытого нами метода
-	 * @see Mage_Core_Model_Mysql4_Collection_Abstract::_init().
-	 * Родительский метод: @see Mage_Core_Model_Mysql4_Collection_Abstract::setModel().
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_init().
 	 * @override
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::setModel()
 	 * @param string $model
 	 * @return Df_Core_Model_Resource_Collection
 	 */
-	public function setModel($model) {df_should_not_be_here(__METHOD__);}
+	public function setModel($model) {df_should_not_be_here(); return null;}
 
 	/**
 	 * 2015-02-09
 	 * Этот метод никто в Magento не использует, кроме перекрытого нами метода
-	 * @see Mage_Core_Model_Mysql4_Collection_Abstract::_init().
-	 * Родительский метод: @see Mage_Core_Model_Mysql4_Collection_Abstract::setResourceModel().
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_init().
 	 * @override
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::setResourceModel()
 	 * @param string $model
 	 * @return void
 	 */
-	public function setResourceModel($model) {df_should_not_be_here(__METHOD__);}
+	public function setResourceModel($model) {df_should_not_be_here();}
 
 	/**
 	 * 2015-02-09
@@ -149,13 +149,13 @@ abstract class Df_Core_Model_Resource_Collection extends Mage_Core_Model_Resourc
 	 * дне подразумевает использования метода @see _init().
 	 * Читайте комментарий к методу @see getResource().
 	 * @see Df_Core_Model::::_init()
-	 * Родительский метод: @see Mage_Core_Model_Mysql4_Collection_Abstract::_init().
 	 * @override
+	 * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_init()
 	 * @param string $model
 	 * @param string|null $resourceModel [optional]
 	 * @return Df_Core_Model_Resource_Collection
 	 */
-	protected function _init($model, $resourceModel = null) {df_should_not_be_here(__METHOD__);}
+	protected function _init($model, $resourceModel = null) {df_should_not_be_here(); return null;}
 
 }
 

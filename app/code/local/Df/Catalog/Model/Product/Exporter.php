@@ -204,12 +204,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 */
 			//$result->printLogQuery(false, true);
 			$result->load();
-			if (method_exists($result, 'addCategoryIds')) {
-				call_user_func(array($result, 'addCategoryIds'));
-			}
-			else {
-				$result->addCategoryIdsRm();
-			}
+			$result->addCategoryIds();
 		}
 		return $this->{__METHOD__};
 	}
