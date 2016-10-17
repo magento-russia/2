@@ -10,7 +10,7 @@ class Df_Avangard_Model_RequestDocument extends \Df\Xml\Generator\Document {
 	 * @override
 	 * @return string
 	 */
-	protected function getTagName() {return $this->cfg(self::$P__TAG_NAME);}
+	protected function tag() {return $this->cfg(self::$P__TAG_NAME);}
 
 	/**
 	 * Документы предназначены не для людей, а для платёжного шлюза,

@@ -10,7 +10,7 @@ class Df_Kkb_Model_RequestDocument_OrderItems extends \Df\Xml\Generator\Document
 	 * @overide
 	 * @return string
 	 */
-	protected function getTagName() {return 'document';}
+	protected function tag() {return 'document';}
 
 	/** @return bool */
 	protected function needDecodeEntities() {return true;}

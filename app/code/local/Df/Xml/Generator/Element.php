@@ -9,21 +9,18 @@ namespace Df\Xml\Generator;
  */
 abstract class Element extends \Df_Core_Model {
 	/** @return \Df\Xml\X */
-	public function getElement() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->createElement();
-		}
-		return $this->{__METHOD__};
-	}
+	public function getElement() {return dfc($this, function() {return $this->createElement();});}
 
 	/** @return \Df\Xml\X */
-	protected function createElement() {return df_xml_node($this->getTagName(), $this->getAttributes());}
+	protected function createElement() {return
+		df_xml_node($this->tag(), $this->getAttributes())
+	;}
 
 	/** @return array(string => string) */
-	protected function getAttributes() {return $this->cfg(self::P__ATTRIBUTES, array());}
+	protected function getAttributes() {return $this[self::P__ATTRIBUTES];}
 
 	/** @return string */
-	protected function getTagName() {return $this->cfg(self::P__TAG_NAME);}
+	protected function tag() {return $this[self::P__TAG_NAME];}
 
 	/**
 	 * @override

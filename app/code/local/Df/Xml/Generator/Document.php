@@ -1,6 +1,6 @@
 <?php
 namespace Df\Xml\Generator;
-class Document extends \Df\Xml\Generator\Element {
+class Document extends Element {
 	/**
 	 * @param float $amountInBaseCurrency
 	 * @return float
@@ -194,7 +194,7 @@ class Document extends \Df\Xml\Generator\Element {
 		$result = $this->mixin(__FUNCTION__);
 		if (is_null($result)) {
 			$result = df_xml_parse(df_ccc("\n",
-				$this->getXmlHeader(), $this->getDocType(), $this->getTag()
+				$this->getXmlHeader(), $this->getDocType(), sprintf('<%s/>', $this->tag())
 			));
 			$result->addAttributes($this->getAttributes());
 			$result->importArray($this->getContentsAsArray(), $this->needWrapInCDataAll());
@@ -249,10 +249,10 @@ class Document extends \Df\Xml\Generator\Element {
 	 * @override
 	 * @return string
 	 */
-	protected function getTagName() {
+	protected function tag() {
 		/** @var string $result */
 		$result = $this->mixin(__FUNCTION__);
-		return !is_null($result) ? $result : parent::getTagName();
+		return !is_null($result) ? $result : parent::tag();
 	}
 
 	/** @return bool */
@@ -313,9 +313,6 @@ class Document extends \Df\Xml\Generator\Element {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/** @return string */
-	private function getTag() {return sprintf('<%s/>', $this->getTagName());}
 
 	/** @return string */
 	private function getXmlHeader() {

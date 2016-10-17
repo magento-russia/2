@@ -104,7 +104,7 @@ class Df_YandexMarket_Model_Yml_Document extends Df_Catalog_Model_XmlExport_Cata
 	 * @override
 	 * @return string
 	 */
-	protected function getTagName() {return 'yml_catalog';}
+	protected function tag() {return 'yml_catalog';}
 
 	/**
 	 * @override

@@ -20,7 +20,7 @@ class Df_1C_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	 * @override
 	 * @return string
 	 */
-	public function getTagName() {return 'КоммерческаяИнформация';}
+	public function tag() {return 'КоммерческаяИнформация';}
 
 	/**
 	 * Документы в кодировке UTF-8 должны передаваться в 1С:Управление торговлей

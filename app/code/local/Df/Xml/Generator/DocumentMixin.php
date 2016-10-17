@@ -50,7 +50,7 @@ class DocumentMixin extends \Df_Core_Model_Mixin {
 	public function getOperationNameInPrepositionalCase() {return null;}
 
 	/** @return string|null */
-	public function getTagName() {return null;}
+	public function tag() {return null;}
 
 	/**
 	 * @param bool $reformat [optional]
