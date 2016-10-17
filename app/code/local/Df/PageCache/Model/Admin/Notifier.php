@@ -8,12 +8,13 @@
 class Df_PageCache_Model_Admin_Notifier extends Df_Admin_Model_Notifier_Settings {
 	/**
 	 * @override
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
-		return 'Настройте [[полностраничное кэширование]] — '
-		. 'это значительно ускорит Ваш интернет-магазин.';
-	}
+	protected function messageTemplate() {return
+		'Настройте [[полностраничное кэширование]] — '
+		. 'это значительно ускорит Ваш интернет-магазин.'
+	;}
 
 	/**
 	 * @override

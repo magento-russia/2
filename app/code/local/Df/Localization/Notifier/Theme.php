@@ -12,12 +12,13 @@ class Df_Localization_Notifier_Theme extends Df_Admin_Model_Notifier {
 	}
 
 	/**
-	 * @override
+	 * @override  
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
-		return Df_Localization_Block_Admin_Theme_Notifier::render($this->getProcessors());
-	}
+	protected function messageTemplate() {return
+		Df_Localization_Block_Admin_Theme_Notifier::render($this->getProcessors())
+	;}
 
 	/** @return Df_Localization_Onetime_Processor[] */
 	private function getProcessors() {

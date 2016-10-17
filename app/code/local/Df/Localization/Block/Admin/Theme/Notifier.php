@@ -9,7 +9,7 @@ class Df_Localization_Block_Admin_Theme_Notifier extends Df_Core_Block_Admin {
 	protected function defaultTemplate() {return 'df/localization/theme/notifier.phtml';}
 
 	/** @return Df_Localization_Onetime_Processor[] */
-	protected function getProcessors() {return $this->cfg(self::$P__PROCESSORS);}
+	protected function processors() {return $this->cfg(self::$P__PROCESSORS);}
 
 	/**
 	 * @override
@@ -25,9 +25,9 @@ class Df_Localization_Block_Admin_Theme_Notifier extends Df_Core_Block_Admin {
 	 * @param Df_Localization_Onetime_Processor[] $processors
 	 * @return string
 	 */
-	public static function render(array $processors) {
-		return df_render(__CLASS__, array(self::$P__PROCESSORS => $processors));
-	}
+	public static function render(array $processors) {return
+		df_render(__CLASS__, array(self::$P__PROCESSORS => $processors))
+	;}
 }
 
 

@@ -18,14 +18,13 @@ abstract class Df_Catalog_Model_Admin_Notifier_Flat extends Df_Admin_Model_Notif
 
 	/**
 	 * @override
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
-		return
-			'[[Денормализуйте]] таблицы {тип таблиц} {перечисление магазинов}:'
-			. ' это значительно ускорит Ваш интернет-магазин.'
-		;
-	}
+	protected function messageTemplate() {return
+		'[[Денормализуйте]] таблицы {тип таблиц} {перечисление магазинов}:'
+		. ' это значительно ускорит Ваш интернет-магазин.'
+	;}
 
 	/**
 	 * @override

@@ -13,11 +13,12 @@ class Df_Admin_Model_Notifier_DeleteDemoStores extends Df_Admin_Model_Notifier {
 
 	/**
 	 * @override
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
-		return implode('<br/>', Df_Admin_Block_Notifier_DeleteDemoStore::renderA($this->getDemoStores()));
-	}
+	protected function messageTemplate() {return
+		df_cc_br(Df_Admin_Block_Notifier_DeleteDemoStore::renderA($this->getDemoStores()))
+	;}
 
 	/** @return Df_Core_Model_StoreM[] */
 	private function getDemoStores() {

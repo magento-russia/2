@@ -13,11 +13,12 @@ class Df_Cms_Model_Admin_Notifier_DeleteOrphanBlocks extends Df_Admin_Model_Noti
 
 	/**
 	 * @override
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
-		return Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks::render($this->getOrphanBlocks());
-	}
+	protected function messageTemplate() {return
+		Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks::render($this->getOrphanBlocks())
+	;}
 
 	/** @return Df_Core_Model_Cache */
 	private function getCache() {

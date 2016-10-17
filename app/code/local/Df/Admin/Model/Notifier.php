@@ -1,7 +1,7 @@
 <?php
 abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	/** @return string */
-	abstract protected function getMessageTemplate();
+	abstract protected function messageTemplate();
 
 	/**
 	 * @used-by app/design/adminhtml/rm/default/template/df/core/notifications.phtml
@@ -10,7 +10,7 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	public function getMessage() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_output()->processLink(
-				strtr($this->getMessageTemplate(), $this->getMessageVariables()), $this->getUrlHelp()
+				strtr($this->messageTemplate(), $this->getMessageVariables()), $this->getUrlHelp()
 			);
 		}
 		return $this->{__METHOD__};
@@ -79,5 +79,7 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	 * @param string $class
 	 * @return string
 	 */
-	public static function getConfigPathSkipByClass($class) {return 'df/admin/notifiers/skip/' . $class;}
+	public static function getConfigPathSkipByClass($class) {return
+		'df/admin/notifiers/skip/' . $class;
+	}
 }

@@ -5,11 +5,12 @@ abstract class Df_Page_Model_Admin_Notifier_Merge extends Df_Admin_Model_Notifie
 
 	/**
 	 * @override
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
-		return '[[Объедините файлы {тип файлов}:]] это значительно ускорит Ваш интернет-магазин.';
-	}
+	protected function messageTemplate() {return
+		'[[Объедините файлы {тип файлов}:]] это значительно ускорит Ваш интернет-магазин.'
+	;}
 
 	/**
 	 * @override

@@ -26,9 +26,10 @@ class Df_Admin_Model_Notifier_ClassRewriteConflicts extends Df_Admin_Model_Notif
 
 	/**
 	 * @override
+	 * @see Df_Admin_Model_Notifier::messageTemplate()
 	 * @return string
 	 */
-	protected function getMessageTemplate() {
+	protected function messageTemplate() {
 		return implode(array(
 			Df_Admin_Block_Notifier_ClassRewriteConflicts::render($this->getConflicts())
 			,'[[чем это опасно и как устранить проблему?]]'
