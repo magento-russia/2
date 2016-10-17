@@ -12,7 +12,7 @@ class Df_Bundle_Block_Adminhtml_Catalog_Product_Edit_Tab_Bundle_Option_Selection
 	 * @return string
 	 */
 	protected function _toHtml() {
-		return df_cc(
+		return df_c(
 			parent::_toHtml()
 			,"<script type='text/javascript'>
 				jQuery(window).trigger('bundle.product.edit.bundle.option.selection');

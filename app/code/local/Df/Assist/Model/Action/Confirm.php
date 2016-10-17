@@ -40,9 +40,9 @@ class Df_Assist_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	protected function getSignatureFromOwnCalculations() {
-		return strtoupper(md5(strtoupper(df_cc(
+		return strtoupper(md5(strtoupper(df_c(
 			md5($this->getResponsePassword())
-			,md5(df_cc(
+			,md5(df_c(
 				$this->getRequestValueShopId()
 				,$this->getRequestValueOrderIncrementId()
 				,$this->getRequestValuePaymentAmountAsString()

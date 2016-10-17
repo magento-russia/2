@@ -222,32 +222,32 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 			}
 
 			// default value
-			$html.= '<td class="use-default">';
-			$html.= '<input id="' . $id . '_inherit" name="'
+			$html .= '<td class="use-default">';
+			$html .= '<input id="' . $id . '_inherit" name="'
 			. $namePrefix . '[inherit]" type="checkbox" value="1" class="checkbox config-inherit" '
 			. $inherit . ' onclick="toggleValueElements(this, Element.previous(this.parentNode))" /> ';
-			$html.= '<label for="' . $id . '_inherit" class="inherit" title="'
+			$html .= '<label for="' . $id . '_inherit" class="inherit" title="'
 			. htmlspecialchars($defText) . '">' . $checkboxLabel . '</label>';
-			$html.= '</td>';
+			$html .= '</td>';
 		}
 
-		$html.= '<td class="scope-label">';
+		$html .= '<td class="scope-label">';
 		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getScope()) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$html .= $element->getScopeLabel();
 		}
-		$html.= '</td>';
+		$html .= '</td>';
 
-		$html.= '<td class="">';
+		$html .= '<td class="">';
 		/** @noinspection PhpUndefinedMethodInspection */
 		if ($element->getHint()) {
-			$html.= '<div class="hint" >';
+			$html .= '<div class="hint" >';
 			/** @noinspection PhpUndefinedMethodInspection */
-			$html.= '<div style="display: none;">' . $element->getHint() . '</div>';
-			$html.= '</div>';
+			$html .= '<div style="display: none;">' . $element->getHint() . '</div>';
+			$html .= '</div>';
 		}
-		$html.= '</td>';
+		$html .= '</td>';
 
 		return $this->_decorateRowHtml($element, $html);
 	}

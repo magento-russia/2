@@ -21,7 +21,7 @@ class Df_Alfabank_Model_Config_Area_Service extends Df_Payment_Config_Area_Servi
 	public function getUri($action) {
 		/** @var Zend_Uri_Http $result */
 		$result = Zend_Uri::factory('https');
-		$result->setHost(df_cc($this->isTestMode() ? 'test' : 'engine', '.paymentgate.ru'));
+		$result->setHost(($this->isTestMode() ? 'test' : 'engine') . '.paymentgate.ru');
 		$result->setPath(strtr('/{path}/rest/{action}.do', array(
 			'{path}' => $this->isTestMode() ? 'testpayment' : 'payment'
 			,'{action}' => $action

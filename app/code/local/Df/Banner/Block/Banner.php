@@ -26,7 +26,7 @@ class Df_Banner_Block_Banner extends Df_Core_Block_Template {
 		return
 			is_null($bannerItem->getImageFileName())
 			? $bannerItem->getImageUrl()
-			: df_cc(
+			: df_c(
 				Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)
 				,$bannerItem->getImageFileName()
 			)

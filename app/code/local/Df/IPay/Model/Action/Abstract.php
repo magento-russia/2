@@ -263,7 +263,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 	/** @return string */
 	private function calculateRequestSignature() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = strtoupper(md5(df_cc(
+			$this->{__METHOD__} = strtoupper(md5(df_c(
 				$this->configS()->getRequestPassword()
 				,$this->preprocessXmlForSignature($this->getRequestAsXmlInWindows1251())
 			)));
@@ -439,7 +439,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 
 	/** @return string */
 	private function generateResponseSignature() {
-		return strtoupper(md5(df_cc(
+		return strtoupper(md5(df_c(
 			$this->configS()->getResponsePassword()
 			,$this->preprocessXmlForSignature(df_1251_to($this->getResponseBody()))
 		)));
@@ -536,7 +536,7 @@ abstract class Df_IPay_Model_Action_Abstract extends Df_Payment_Model_Action_Abs
 
 	/** @return string */
 	private function getResponseHeader_Signature() {
-		return df_cc(self::$SIGNATYPE_TYPE, ': ', $this->generateResponseSignature());
+		return df_c(self::$SIGNATYPE_TYPE, ': ', $this->generateResponseSignature());
 	}
 
 	/**

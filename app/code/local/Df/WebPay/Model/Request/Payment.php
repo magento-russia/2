@@ -274,7 +274,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 
 	/** @return string */
 	private function getSignature() {
-		return sha1(df_cc($this->preprocessParams(array(
+		return sha1(df_c($this->preprocessParams(array(
 			self::REQUEST_VAR__OPEN_KEY => $this->getOpenKey()
 			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()

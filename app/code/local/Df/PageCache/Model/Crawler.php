@@ -35,7 +35,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 					if (!$row) {
 						break;
 					}
-					$urls[]= df_cc($baseUrl, $this->encodeUrlPath($row['request_path']));
+					$urls[]= df_c($baseUrl, $this->encodeUrlPath($row['request_path']));
 					$urlsCount++;
 					$totalCount++;
 					if ($urlsCount==$threads) {

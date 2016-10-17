@@ -3,7 +3,7 @@ class Df_WalletOne_Model_Request_SignatureGenerator extends Df_Core_Model {
 	/** @return string */
 	public function getSignature() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = base64_encode(pack('H*',md5(df_cc(
+			$this->{__METHOD__} = base64_encode(pack('H*',md5(df_c(
 				$this->implodeParams(
 					$this->convertParamsToWindows1251($this->sortParams($this->getSignatureParams()))
 				)

@@ -240,7 +240,7 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 			))
 		);
 		// append prepared filename
-		$this->_newFile = df_cc(df_cc_path($path), $file); // the $file contains heading slash
+		$this->_newFile = df_c(df_cc_path($path), $file); // the $file contains heading slash
 		return $this;
 	}
 

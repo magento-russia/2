@@ -32,8 +32,8 @@ class Df_Catalog_Block_Admin_Conditions extends Df_Adminhtml_Block_Config_Form_F
 	 * @param Varien_Data_Form_Element_Abstract $element
 	 * @return string
 	 */
-	protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element) {
-		return df_cc(
+	protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element) {return
+		df_c(
 		   Df_Catalog_Model_Field_Conditions::i($element, $this)->getHtml()
 			, sprintf('<input type="hidden" value="0" name="%s"/>', $element->getData('name'))
 		);

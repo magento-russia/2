@@ -153,7 +153,7 @@ class Df_Cms_Block_Frontend_Menu_Contents extends Df_Core_Block_Abstract {
 	 */
 	private function renderNode(Df_Cms_Varien_Data_Tree_Node $node, $menuLevelsDown = null) {
 		return
-			df_cc(
+			df_c(
 				$this->renderLabel($node)
 				,$this->renderChildren($node, is_null($menuLevelsDown) ? null : $menuLevelsDown - 1)
 			)

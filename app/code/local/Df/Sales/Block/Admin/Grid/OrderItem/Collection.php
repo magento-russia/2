@@ -11,7 +11,7 @@ class Df_Sales_Block_Admin_Grid_OrderItem_Collection extends Df_Varien_Data_Coll
 		df_param_string($direction, 1);
 		parent::setOrder($field, $direction);
 		/** @var string $method */
-		$method = df_cc('compareBy', df_camelize($field));
+		$method = df_c('compareBy', df_camelize($field));
 		/**
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
 		 * потому что наличие @see Varien_Object::__call()
