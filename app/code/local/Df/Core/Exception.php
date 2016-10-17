@@ -42,7 +42,7 @@ class Exception extends E implements \ArrayAccess {
 		if (is_null($message)) {
 			$message = $prev ? df_ets($prev) : 'No message';
 		}
-		parent::__construct($message, $prev);
+		parent::__construct($message, 0, $prev);
 	}
 
 	/**
