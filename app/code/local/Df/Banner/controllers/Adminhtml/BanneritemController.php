@@ -139,7 +139,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				} catch (Exception $e) {
 				}
 			} else {
-				if (df_bool(dfa(dfa($data, 'image', array()),'delete'))) {
+				if (dfa(dfa($data, 'image', array()),'delete')) {
 					 $data['image'] = '';
 				} else {
 					unset($data['image']);
@@ -169,7 +169,7 @@ class Df_Banner_Adminhtml_BanneritemController extends Mage_Adminhtml_Controller
 				}
 
 			} else {
-				if (df_bool(dfa(dfa($data, 'thumb_image', array()), 'delete'))) {
+				if (dfa(dfa($data, 'thumb_image', array()), 'delete')) {
 					 $data['thumb_image'] = '';
 				} else {
 					unset($data['thumb_image']);

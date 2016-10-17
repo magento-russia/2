@@ -59,10 +59,10 @@ class Df_YandexMarket_Model_Action_ImportAddress extends Df_Core_Model_Action {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			$result = '';
-			if (df_bool($this->getRequest()->getCookie('rm_yandex_market_address_billing'))) {
+			if ($this->getRequest()->getCookie('rm_yandex_market_address_billing')) {
 				$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__BILLING;
 			}
-			else if (df_bool($this->getRequest()->getCookie('rm_yandex_market_address_shipping'))) {
+			else if ($this->getRequest()->getCookie('rm_yandex_market_address_shipping')) {
 				$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__SHIPPING;
 			}
 			$this->{__METHOD__} = $result;

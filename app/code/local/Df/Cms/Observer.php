@@ -325,7 +325,7 @@ class Df_Cms_Observer {
 					/** @var bool $currentPageIsRoot */
 					$currentPageIsRoot = false;
 					foreach ($nodesData as $row) {
-						if (df_bool(dfa($row, 'current_page'))) {
+						if (dfa($row, 'current_page')) {
 							$currentPageIsOrphan = false;
 							/** @var int $sortOrder */
 							$sortOrder = df_int(dfa($row, 'sort_order'));
