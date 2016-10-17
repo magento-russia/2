@@ -204,6 +204,15 @@ class Document extends \Df\Xml\Generator\Element {
 
 	/**
 	 * @override
+	 * @see Df_Core_Model::createMixin()
+	 * @return DocumentMixin
+	 */
+	protected function createMixin() {return
+		\Df_Core_Model_Mixin::ic(DocumentMixin::class, $this);
+	}
+
+	/**
+	 * @override
 	 * @return array(string => string)
 	 */
 	protected function getAttributes() {

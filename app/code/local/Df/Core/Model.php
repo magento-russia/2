@@ -68,7 +68,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 		/** @var string $method */
 		$method = df_first($arguments);
 		// Временно отключаем миксин для данного метод
-		// чтобы не попадать в бескнечную рекурсию.
+		// чтобы не попадать в бесконечную рекурсию.
 		$this->_disabledMixins[$method] = true;
 		/** @var mixed $result */
 		try {
