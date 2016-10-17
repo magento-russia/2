@@ -3,7 +3,7 @@ class Df_YandexMoney_Model_OAuth extends Df_Yandex_Model_OAuth {
 	/**
 	 * @override
 	 * @param array(string => string) $response
-	 * @return Df_YandexMarket_Model_OAuth
+	 * @return Df_YandexMarket_OAuth
 	 * @throws Exception
 	 */
 	protected function checkResponse(array $response) {

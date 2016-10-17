@@ -372,7 +372,7 @@ class Df_Psbank_Model_Response extends Df_Payment_Model_Response {
 	}
 
 	/**
-	 * @used-by Df_Psbank_Model_Action_CustomerReturn::getRedirect()
+	 * @used-by Df_Psbank_Action_CustomerReturn::getRedirect()
 	 * @override
 	 * @return bool
 	 */

@@ -325,7 +325,7 @@ function df_explode_class_lc_camel($class = null) {return
 function df_interceptor_name($class = null) {return df_cts($class) . '\Interceptor';}
 
 /**
- * «Df_YandexMarket_Model_Yml_Document» => «yandex.market»
+ * «Df_YandexMarket_Yml_Document» => «yandex.market»
  * «Df_1C_Cml2_Export_Document_Catalog» => «1c»
  * @param Varien_Object $object
  * @param string $separator

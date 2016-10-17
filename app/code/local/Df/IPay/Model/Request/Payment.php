@@ -9,7 +9,7 @@ class Df_IPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
 	 * @see Df_Payment_Model_Request::amount()
-	 * @used-by Df_IPay_Model_Action_GetPaymentAmount::_process()
+	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
 	 * @return Df_Core_Model_Money
 	 */
 	public function amount() {return parent::amount();}
@@ -18,9 +18,9 @@ class Df_IPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @used-by Df_IPay_Model_Action_GetPaymentAmount::_process()
-	 * @used-by Df_IPay_Model_Action_ConfirmPaymentByShop::_process()
-	 * @used-by Df_IPay_Model_Action_GetPaymentAmount::_process()
+	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
+	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::_process()
+	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
 	 * @see Df_Payment_Model_Request_Payment::getTransactionDescription()
 	 * @return string
 	 */
@@ -68,7 +68,7 @@ class Df_IPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 
 	/**
 	 * 2016-10-15
-	 * @used-by Df_IPay_Model_Action_Abstract::getRequestPayment()
+	 * @used-by Df_IPay_Action_Abstract::getRequestPayment()
 	 * @param Df_Sales_Model_Order $o
 	 * @return self
 	 */

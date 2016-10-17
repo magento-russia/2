@@ -157,7 +157,7 @@ class Df_Core_Lib {
 	/**
 	 * @used-by Df_Core_Boot::run()
 	 * @used-by Df_Core_Boot::initCore()
-	 * @used-by Df_YandexMarket_Model_Category_Excel_Document::getPhpExcel()
+	 * @used-by Df_YandexMarket_Category_Excel_Document::getPhpExcel()
 	 * @param string $key
 	 * @return Df_Core_Lib
 	 */

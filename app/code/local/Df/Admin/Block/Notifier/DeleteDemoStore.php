@@ -2,7 +2,7 @@
 class Df_Admin_Block_Notifier_DeleteDemoStore extends Df_Core_Block_Admin {
 	/** @return string */
 	protected function getLink() {
-		return Df_Admin_Model_Action_DeleteDemoStore::getLink($this->store());
+		return Df_Admin_Action_DeleteDemoStore::getLink($this->store());
 	}
 
 	/** @return string */

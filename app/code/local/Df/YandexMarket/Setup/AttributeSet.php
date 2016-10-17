@@ -37,7 +37,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 			, 'Категория Яндекс.Маркета'
 			, self::$ORDERING__CATEGORY
 			, array(
-				'backend_model' => 'Df_YandexMarket_Model_Config_Backend_Category'
+				'backend_model' => 'Df_YandexMarket_Config_Backend_Category'
 				,'note' =>
 'Начните вводить первые символы — и система сама предложит Вам правильные варианты.
 <br/>Указание категории упростит Яндекс.Маркету размещение Вашего товара в правильном разделе.'

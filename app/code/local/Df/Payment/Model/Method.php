@@ -71,7 +71,7 @@ abstract class Df_Payment_Model_Method
 	/**
 	 * Важно для витрины вернуть true, чтобы
 	 * @see Df_Payment_Model_Action_Confirm::process() и другие аналогичные методы
-	 * (например, @see Df_Alfabank_Model_Action_CustomerReturn::process())
+	 * (например, @see Df_Alfabank_Action_CustomerReturn::process())
 	 * могли вызвать @see Mage_Sales_Model_Order_Invoice::capture().
 	 *
 	 * Для административной части возвращайте true только в том случае,

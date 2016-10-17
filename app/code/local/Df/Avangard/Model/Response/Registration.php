@@ -29,7 +29,7 @@ class Df_Avangard_Model_Response_Registration extends Df_Avangard_Model_Response
 	public function getTransactionType() {return Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT;}
 
 	/**
-	 * @used-by Df_Avangard_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
 	 * @used-by Df_Avangard_Model_Request_Payment::getResponse()
 	 * @used-by Df_Avangard_Model_Request_Secondary::getResponseRegistration()
 	 * @param array(string => mixed) $parameters [optional]

@@ -8,7 +8,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	abstract protected function _params();
 
 	/**
-	 * @used-by Df_IPay_Model_Action_GetPaymentAmount::_process()
+	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
 	 * @used-by Df_Assist_Model_Request_Payment::_params()
 	 * @return string
 	 */

@@ -37,7 +37,7 @@
 				<resourceModel>df_yandex_market_resource</resourceModel>
 			</df_yandex_market>
 			<df_yandex_market_resource>
-				<class>Df_YandexMarket_Model_Resource</class>
+				<class>Df_YandexMarket_Resource</class>
 			</df_yandex_market_resource>
 		</models>
 		<resources>

@@ -18,7 +18,7 @@ class Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks extends Df_Core_Block_Admin
 	}
 
 	/** @return string */
-	protected function getLink() {return Df_Cms_Model_Admin_Action_DeleteOrphanBlocks::s()->getLink();}
+	protected function getLink() {return Df_Cms_Admin_Action_DeleteOrphanBlocks::s()->getLink();}
 
 	/**
 	 * @override

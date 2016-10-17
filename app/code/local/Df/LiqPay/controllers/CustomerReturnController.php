@@ -28,8 +28,8 @@ class Df_LiqPay_CustomerReturnController extends Mage_Core_Controller_Front_Acti
 	private function getProcessorMethodName() {
 		/** @var string $status */
 		$status = df_leaf_child($this->e(), 'status');
-		if (Df_LiqPay_Model_Action_Confirm::PAYMENT_STATE__WAIT_SECURE === $status) {
-			$status = Df_LiqPay_Model_Action_Confirm::PAYMENT_STATE__SUCCESS;
+		if (Df_LiqPay_Action_Confirm::PAYMENT_STATE__WAIT_SECURE === $status) {
+			$status = Df_LiqPay_Action_Confirm::PAYMENT_STATE__SUCCESS;
 		}
 		/** @var string $result */
 		$result = 'process' . ucfirst($status);

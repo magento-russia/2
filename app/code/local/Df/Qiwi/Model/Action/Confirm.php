@@ -1,5 +1,5 @@
 <?php
-class Df_Qiwi_Model_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @used-by Zend_Soap_Server::handle()
 	 * @param stdClass $params

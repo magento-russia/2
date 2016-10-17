@@ -11,7 +11,7 @@ class Df_YandexMarket_AddressSession extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_YandexMarket_Model_Action_ImportAddress::_process()
+	 * @used-by Df_YandexMarket_Action_ImportAddress::_process()
 	 * @param string $type
 	 * @param array(string => string) $address
 	 * @return void

@@ -162,9 +162,9 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	 * @var string
 	 */
 	private static $P__TYPE = 'df__type';
-	/** @used-by Df_YandexMarket_Model_Action_ImportAddress::getAddressType() */
+	/** @used-by Df_YandexMarket_Action_ImportAddress::getAddressType() */
 	const TYPE__BILLING = 'billing';
-	/** @used-by Df_YandexMarket_Model_Action_ImportAddress::getAddressType() */
+	/** @used-by Df_YandexMarket_Action_ImportAddress::getAddressType() */
 	const TYPE__SHIPPING = 'shipping';
 
 	/**

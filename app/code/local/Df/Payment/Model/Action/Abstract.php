@@ -10,12 +10,12 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 	abstract protected function order();
 
 	/**
-	 * @used-by Df_Interkassa_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
-	 * @used-by Df_LiqPay_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
-	 * @used-by Df_OnPay_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_Interkassa_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_LiqPay_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_OnPay_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by Df_Payment_Model_Action_Abstract::_process()
 	 * @used-by Df_Payment_Model_Action_Confirm::logExceptionToOrderHistory()
-	 * @used-by Df_Qiwi_Model_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by Df_Qiwi_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @param string $comment
 	 * @param bool $isCustomerNotified [optional]
 	 * @return void
@@ -51,7 +51,7 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 	}
 
 	/**
-	 * @used-by Df_Psbank_Model_Action_CustomerReturn::getResponseByTransactionType()
+	 * @used-by Df_Psbank_Action_CustomerReturn::getResponseByTransactionType()
 	 * @return Mage_Payment_Model_Info
 	 */
 	protected function info() {return $this->method()->getInfoInstance();}
@@ -109,11 +109,11 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 	}
 
 	/**
-	 * @used-by Df_Alfabank_Model_Action_CustomerReturn::_process()
-	 * @used-by Df_Avangard_Model_Action_CustomerReturn::_process()
-	 * @used-by Df_IPay_Model_Action_Confirm::_process()
+	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
+	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
+	 * @used-by Df_IPay_Action_Confirm::_process()
 	 * @used-by Df_Payment_Model_Action_Confirm::_process()
-	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()
 	 * @param Mage_Sales_Model_Order_Invoice $invoice
 	 * @return void
 	 */

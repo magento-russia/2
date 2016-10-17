@@ -2,8 +2,8 @@
 class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	/**
 	 * 2015-11-07
-	 * @used-by Df_YandexMarket_Model_Yml_Document::getDocumentData_Shop()
-	 * @used-by Df_YandexMarket_Model_Yml_Products::applyRule()
+	 * @used-by Df_YandexMarket_Yml_Document::getDocumentData_Shop()
+	 * @used-by Df_YandexMarket_Yml_Products::applyRule()
 	 * @param string|null $message
 	 * @return void
 	 * @throws \Df\Core\Exception
@@ -43,7 +43,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 		}
 		/** @var string|null $result */
 		$result = dfa(
-			Df_YandexMarket_Model_Config_Countries::s()
+			Df_YandexMarket_Config_Countries::s()
 				->getMapFromIso2CodeToCountryNameInYandexMarketFormat()
 			,$iso2Code
 		);
@@ -103,7 +103,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 		return $result;
 	}
 
-	/** @return Df_YandexMarket_Model_Settings */
+	/** @return Df_YandexMarket_Settings */
 	private function settings() {return df_cfg()->yandexMarket();}
 
 	

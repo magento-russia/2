@@ -29,7 +29,7 @@ class Df_IPay_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			$key = self::XML_PATH_PAYMENT_METHODS.'/'.$code.'/model';
 			$class = Mage::getStoreConfig($key);
 			return Mage::getModel($class);
-	 * @used-by Df_IPay_Model_Action_Abstract::method()
+	 * @used-by Df_IPay_Action_Abstract::method()
 	 * @param Df_Core_Model_StoreM $store
 	 * @return Df_IPay_Model_Payment
 	 */

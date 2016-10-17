@@ -11,7 +11,7 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	public function getCatalogAttributes() {return $this->getProducts()->getAttributes();}
 
 	/**
-	 * @used-by Df_YandexMarket_Model_Yml_Processor_Offer::getYandexMarketCategoryName()
+	 * @used-by Df_YandexMarket_Yml_Processor_Offer::getYandexMarketCategoryName()
 	 * @return Df_Catalog_Model_Resource_Category_Collection
 	 */
 	public function getCategories() {

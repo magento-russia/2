@@ -62,7 +62,7 @@ class Df_YandexMoney_Model_Request_Authorize extends Df_YandexMoney_Model_Reques
 	}
 
 	/**
-	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::getRequestAuthorize()
+	 * @used-by Df_YandexMoney_Action_CustomerReturn::getRequestAuthorize()
 	 * @param Mage_Sales_Model_Order_Payment $orderPayment
 	 * @param string $token
 	 * @return Df_YandexMoney_Model_Request_Authorize

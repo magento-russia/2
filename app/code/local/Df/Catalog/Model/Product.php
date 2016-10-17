@@ -293,7 +293,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					 * На самом деле, конкретно для модуля Яндекс.Маркет самым правильным
 					 * (и реализованным теперь) решением
 					 * стала просто отбраковка нестандартных системных типов товаров:
-					 * @see Df_YandexMarket_Model_Yml_Processor_Offer::isEnabled()
+					 * @see Df_YandexMarket_Yml_Processor_Offer::isEnabled()
 					 */
 					if (df_is_it_my_local_pc()) {
 						Mage::log(sprintf('Неизвестный тип товара: «%s».', $this->getTypeId()));
@@ -318,7 +318,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 			 * 2015-10-28
 			 * Методы ядра могут мутить разное,
 			 * но нам обязательно нужно вещественное (не целое) число.
-			 * @used-by Df_YandexMarket_Model_Yml_Processor_Offer::isEnabled()
+			 * @used-by Df_YandexMarket_Yml_Processor_Offer::isEnabled()
 			 */
 			$this->{__METHOD__} = floatval($result);
 		}

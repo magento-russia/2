@@ -9,7 +9,7 @@ $this->startSetup();
 			$entityTypeId = Mage_Catalog_Model_Product::ENTITY
 			,$id = Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
 			,$field = 'backend_model'
-			,$value = Df_YandexMarket_Model_Config_Backend_Category::class
+			,$value = Df_YandexMarket_Config_Backend_Category::class
 		);
  * ������ ����������� ��� ���������� � ��������� �������� ������� �������� �
  * @see Df_YandexMarket_Setup_AttributeSet::p()

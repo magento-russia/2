@@ -22,7 +22,7 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	 */
 	public function getUrlSkip() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Admin_Model_Action_SkipNotification::getLink(get_class($this));
+			$this->{__METHOD__} = Df_Admin_Action_SkipNotification::getLink(get_class($this));
 		}
 		return $this->{__METHOD__};
 	}
@@ -75,7 +75,7 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 
 	/**
 	 * @used-by getConfigPathSkip()
-	 * @used-by Df_Admin_Model_Action_SkipNotification::getConfigPath()
+	 * @used-by Df_Admin_Action_SkipNotification::getConfigPath()
 	 * @param string $class
 	 * @return string
 	 */

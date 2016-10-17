@@ -25,11 +25,11 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	public static function is() {return df_bool(self::session()->getData(self::$REDIRECTED));}
 
 	/**
-	 * @used-by Df_Alfabank_Model_Action_CustomerReturn::_process()
-	 * @used-by Df_Avangard_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
+	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
 	 * @used-by Df_Checkout_Observer::controller_action_predispatch_checkout()
 	 * @used-by Df_Payment_Model_Action_Confirm::_process()
-	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::_process()
+	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()
 	 * @return void
 	 */
 	public static function off() {self::session()->unsetData(self::$REDIRECTED);}

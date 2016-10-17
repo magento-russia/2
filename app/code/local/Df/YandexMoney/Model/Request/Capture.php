@@ -47,7 +47,7 @@ class Df_YandexMoney_Model_Request_Capture extends Df_YandexMoney_Model_Request_
 	}
 	const P__RESPONSE_AUTHORIZE = 'response_authorize';
 	/**
-	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::getRequestCapture()
+	 * @used-by Df_YandexMoney_Action_CustomerReturn::getRequestCapture()
 	 * @param Mage_Sales_Model_Order_Payment $orderPayment
 	 * @param Df_YandexMoney_Model_Response_Authorize $responseAuthorize
 	 * @param string $token

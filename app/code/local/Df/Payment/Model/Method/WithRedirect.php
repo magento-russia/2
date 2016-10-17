@@ -2,7 +2,7 @@
 abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Method {
 	/**
 	 * @used-by Df_Payment_Model_Request_Payment::urlCustomerReturn()
-	 * @used-by Df_YandexMoney_Model_Action_CustomerReturn::getToken()
+	 * @used-by Df_YandexMoney_Action_CustomerReturn::getToken()
 	 * @param Df_Sales_Model_Order $order
 	 * @return string
 	 */

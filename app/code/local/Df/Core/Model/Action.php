@@ -102,7 +102,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by getRmRequest()
-	 * @used-by Df_Alfabank_Model_Action_CustomerReturn::getRequest()
+	 * @used-by Df_Alfabank_Action_CustomerReturn::getRequest()
 	 * @return Mage_Core_Controller_Request_Http
 	 */
 	protected function getRequest() {return $this->getController()->getRequest();}
@@ -117,7 +117,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by _process()
-	 * @used-by Df_IPay_Model_Action_Abstract::processBeforeRedirect()
+	 * @used-by Df_IPay_Action_Abstract::processBeforeRedirect()
 	 * @param bool $real [optional]
 	 * @return string
 	 */
@@ -182,7 +182,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by Df_1C_Cml2_Action_Front::_process()
-	 * @used-by Df_YandexMarket_Model_Action_Category_Suggest::getQuery()
+	 * @used-by Df_YandexMarket_Action_Category_Suggest::getQuery()
 	 * @return Df_Core_Model_InputRequest
 	 */
 	protected function getRmRequest() {
@@ -356,7 +356,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	/**
 	 * @used-by checkAccessRights()
 	 * @used-by getStoreConfig()
-	 * @used-by Df_Admin_Model_Action_DeleteDemoStore::_process()
+	 * @used-by Df_Admin_Action_DeleteDemoStore::_process()
 	 * @return Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_store();}
@@ -431,7 +431,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	protected static $REDIRECT_LOCATION__REFERER = 'referer';
 	/**
 	 * @used-by Df_1C_Cml2_Action_GenericExport::getContentType()
-	 * @used-by Df_YandexMarket_Model_Action_Front::getContentType()
+	 * @used-by Df_YandexMarket_Action_Front::getContentType()
 	 * @var string
 	 */
 	protected static $CONTENT_TYPE__XML__UTF_8 = 'application/xml; charset=utf-8';
