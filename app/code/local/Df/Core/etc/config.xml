@@ -10,12 +10,19 @@
 		<version>3.0.0</version>
 		<jquery>
 			<core>
-				<cdn>http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js</cdn>
+				<!--
+					2016-10-18
+					jQuery 3.x использовать опасно:
+					он требует совсем другой версии библиотеки jQuery Migrate,
+					которая несовместима с кодом, написанным для версий jQuery ниже 1.9:
+					https://github.com/jquery/jquery-migrate/
+				-->
+				<cdn>http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js</cdn>
 				<local>df/js/system/jquery.js</local>
 			</core>
 			<migrate>
-				<cdn>http://code.jquery.com/jquery-migrate-1.2.1.js</cdn>
-				<local>df/js/system/jquery-migrate-1.2.1.js</local>
+				<cdn>http://code.jquery.com/jquery-migrate-1.4.1.js</cdn>
+				<local>df/js/system/jquery-migrate-1.4.1.js</local>
 			</migrate>
 		</jquery>
 		<units>
