@@ -7,4 +7,15 @@
 			<version>3.0.0</version>
 		</Df_Accounting>
 	</modules>
+	<default>
+		<df_accounting>
+			<vat>
+				<!--
+					2016-10-19
+					«Российская сборка» → «Учёт» → «НДС» → «Выделять ли НДС?»
+				-->
+				<show>1</show>
+			</vat>
+		</df_accounting>
+	</default>
 </config>

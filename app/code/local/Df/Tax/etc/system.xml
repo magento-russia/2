@@ -31,11 +31,26 @@
 							]]></comment>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>1000</sort_order>
+							<sort_order>1</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</enabled>
+						<show>
+							<label>Выделять ли НДС?</label>
+							<comment><![CDATA[
+Для России рекомендуемым значением является «<span class='rm-recommendation'>да</span>».
+<br/>Опция применяется к корзине, экрану оформления заказа и ко всем документам.
+<br/>Опция <b>не применяется</b>, если НДС равен 0 или не применяется: в такой ситуации система руководствуется значением опции «<b>Выделять ли НДС при нулевой ставке и показывать ли пометку «без налога (НДС)» при неприменимости НДС?</b>» в подразделах «<b>Корзина и оформление заказа</b>» и «<b>Документы</b>» раздела «<b>Система</b>» → «<b>Настройки</b>» → «<b>Продажи</b>» → «<b>НДС</b>».
+]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><enabled>1</enabled></depends>
+						</show>
 						<eacu>
 							<label>Страны ЕАЭС</label>
 							<comment><![CDATA[
@@ -47,7 +62,7 @@
 							<frontend_model>Df_Directory_Block_Field_CountriesOrdered</frontend_model>
 							<backend_model>Df_Admin_Config_Backend_Table</backend_model>
 							<rm_type>Df_Directory_Config_MapItem_Country</rm_type>
-							<sort_order>2000</sort_order>
+							<sort_order>3</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
