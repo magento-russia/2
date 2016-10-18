@@ -68,11 +68,10 @@
 	}
 }
 #checkout-review-table {
-	th {
-		text: {
-			transform: lowercase;
-		}
-	}
+	// 2016-10-18
+	// Чтобы цена позиции заказа была выровнена горизонтально так же, как и итоговые цены.
+	td.last{text-align: right;}
+	th {text-transform: lowercase;}
 }
 #checkout-step-login {
 	.col-2 {

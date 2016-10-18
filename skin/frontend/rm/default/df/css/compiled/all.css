@@ -685,6 +685,8 @@ body.customer-account-create .account-create {
   display: block;
   margin: 0.5em 0; }
 
+#checkout-review-table td.last {
+  text-align: right; }
 #checkout-review-table th {
   text-transform: lowercase; }
 
