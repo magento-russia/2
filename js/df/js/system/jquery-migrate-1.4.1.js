@@ -20,9 +20,15 @@ jQuery.migrateWarnings = [];
 
 // Show a message on the console so devs know we're active
 if ( window.console && window.console.log ) {
+	// 2016-10-18
+	// Диагностические сообщения библиотеки Migrate мы и так подавляем флагом migrateMute
+	// (который у нас записан внизу файла jQuery), а код ниже я закомментировал,
+	// чтобы из консоли пропала отвлекающая меня фраза "JQMIGRATE: Migrate is installed".
+	/*
 	window.console.log( "JQMIGRATE: Migrate is installed" +
 		( jQuery.migrateMute ? "" : " with logging active" ) +
 		", version " + jQuery.migrateVersion );
+		*/
 }
 
 // Set to false to disable traces that appear with warnings
