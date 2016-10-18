@@ -32,17 +32,15 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @see Mage_Core_Block_Template::_toHtml()
 	 * @return string
 	 */
-	protected function _toHtml() {
-		return
-			$this->includeTax() && $this->getTotalExclTax() >= 0
-			? df_cc_n(
-				//$this->row('Grand Total Excl. Tax', $this->getTotalExclTax())
-				$this->row('Grand Total Incl. Tax', $this->getTotal()->getValue())
-				,$this->singleTax() ? $this->rowVAT() : $this->renderTotals('taxes', $this->getColspan())
-			)
-			: $this->row($this->getTotal()->getTitle(), $this->getTotal()->getValue())
-		;
-	}
+	protected function _toHtml() {return
+		$this->includeTax() && $this->getTotalExclTax() >= 0
+		? df_cc_n(
+			//$this->row('Grand Total Excl. Tax', $this->getTotalExclTax())
+			$this->row('Grand Total Incl. Tax', $this->getTotal()->getValue())
+			,$this->singleTax() ? $this->rowVAT() : $this->renderTotals('taxes', $this->getColspan())
+		)
+		: $this->row($this->getTotal()->getTitle(), $this->getTotal()->getValue())
+	;}
 
 	/**
 	 * @used-by renderCell_name()
@@ -51,12 +49,12 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @param bool $useColspan [optional]
 	 * @return string
 	 */
-	private function cell($value, $useColspan = false) {
-		return df_tag('td', array(
+	private function cell($value, $useColspan = false) {return
+		df_tag('td', [
 			'class' => 'a-right'
 			,'colspan' => $useColspan ? $this->getColspan() : null
 			, 'style' => $this->getStyle()
-		), df_tag('strong', array(), $value));
+		], df_tag('strong', [], $value));
 	}
 
 	/**
@@ -64,18 +62,18 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @param string $name
 	 * @return string
 	 */
-	private function cell_name($name) {
-		return $this->cell(df_mage()->taxHelper()->__($name), $useColspan = true);
-	}
+	private function cell_name($name) {return
+		$this->cell(df_mage()->taxHelper()->__($name), $useColspan = true)
+	;}
 
 	/**
 	 * @used-by row()
 	 * @param float $value
 	 * @return string
 	 */
-	private function cell_value($value) {
-		return $this->cell(df_mage()->checkoutHelper()->formatPrice($value), $useColspan = false);
-	}
+	private function cell_value($value) {return
+		$this->cell(df_mage()->checkoutHelper()->formatPrice($value), $useColspan = false)
+	;}
 
 	/**
 	 * @used-by _toHtml()
@@ -84,31 +82,22 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @param string|null $class [optional]
 	 * @return string
 	 */
-	private function row($name, $value, $class = null) {
-		return df_tag(
-			'tr', array('class' => $class)
-			, df_cc_n($this->cell_name($name)
-			, $this->cell_value($value))
-		);
-	}
+	private function row($name, $value, $class = null) {return
+		df_tag('tr', ['class' => $class], df_cc_n($this->cell_name($name), $this->cell_value($value)))
+	;}
 
 	/**
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	private function rowVAT() {
-		return $this->row('Including VAT', $this->singleTax()->getValue(), 'df-vat');
-	}
+	private function rowVAT() {return
+		$this->row('Including VAT', $this->singleTax()->getValue(), 'df-vat')
+	;}
 
 	/** @return Df_Sales_Model_Quote_Address_Total|Mage_Sales_Model_Quote_Address_Total|null */
-	private function singleTax() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				1 !== count($this->taxTotals()) ? null : df_first($this->taxTotals())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function singleTax() {return dfc($this, function() {return
+		1 !== count($this->taxTotals()) ? null : df_first($this->taxTotals())
+	;});}
 
 	/**
 	 * @used-by getTemplate()
@@ -118,18 +107,10 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	private function t($fileName) {return "df/tax/checkout/grandtotal/{$fileName}.phtml";}
 
 	/** @return array(Df_Sales_Model_Quote_Address_Total|Mage_Sales_Model_Quote_Address_Total) */
-	private function taxTotals() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var array(Df_Sales_Model_Quote_Address_Total|Mage_Sales_Model_Quote_Address_Total) $result */
-			$result = array();
-			foreach ($this->getTotals() as $total) {
-				/** @var Df_Sales_Model_Quote_Address_Total|Mage_Sales_Model_Quote_Address_Total $total */
-				if ('taxes' === $total->getArea()) {
-					$result[]= $total;
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	private function taxTotals() {return dfc($this, function() {return
+		array_filter($this->getTotals(), function($total) {
+			/** @var Df_Sales_Model_Quote_Address_Total|Mage_Sales_Model_Quote_Address_Total $total */
+			return 'taxes' === $total->getArea();
+		})
+	;});}
 }
