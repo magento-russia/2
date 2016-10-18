@@ -200,7 +200,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 		df_param_string($text, 0);
 		df_param_string($requestVarName, 1);
 		/** @var int $maxLength */
-		$maxLength = $this->method()->constManager()->getRequestVarMaxLength($requestVarName);
+		$maxLength = $this->method()->constManager()->requestVarMaxLength($requestVarName);
 		/** @var string $result */
 		$result =
 			(0 >= $maxLength)

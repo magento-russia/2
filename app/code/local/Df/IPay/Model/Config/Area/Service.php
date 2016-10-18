@@ -31,7 +31,7 @@ class Df_IPay_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 		/** @var array(string => string $result */
 		$result =
 			dfa(
-				$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
+				$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
 				,$this->getMobileNetworkOperator()
 			)
 		;

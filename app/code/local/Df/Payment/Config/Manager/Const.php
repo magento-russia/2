@@ -1,52 +1,47 @@
 <?php
 class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	/** @return string[] */
-	public function getAllowedCurrencyCodes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_csv_parse($this->getAllowedCurrencyCodesAsString());
+	public function allowedCurrencyCodes() {return dfc($this, function() {
+		/** @var string $resultS */
+		$resultS = $this->getValue(df_cc_path(self::$KEY__CURRENCIES, self::$KEY__ALLOWED));
+		if (!df_check_string_not_empty($resultS)) {
+			df_error(
+				'Программисту платёжного модуля «%s» требуется указать допустимые валюты.'
+				,df_module_name($this->main())
+			);
 		}
-		return $this->{__METHOD__};
-	}
+		return df_csv_parse($resultS);
+	});}
 
 	/** @return string[] */
-	public function getAllowedLocaleCodes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_csv_parse($this->getAllowedLocaleCodesAsString());
-		}
-		return $this->{__METHOD__};
-	}
+	public function allowedLocaleCodes() {return dfc($this, function() {return
+		df_csv_parse($this->getValue(df_cc_path(self::$KEY__LOCALES, self::$KEY__ALLOWED)))
+	;});}
 
 	/** @return mixed[] */
-	public function getAvailablePaymentMethodsAsCanonicalConfigArray() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_config_a($this->getNode('payment-methods'));
-		}
-		return $this->{__METHOD__};
-	}
+	public function availablePaymentMethodsAsCanonicalConfigArray() {return dfc($this, function() {return
+		df_config_a($this->getNode('payment-methods'))
+	;});}
 
 	/**
 	 * Способы оплаты, предоставляемые данной платёжной системой
 	 * @return array(string => array(string => string))
 	 */
-	public function getAvailablePaymentMethodsAsOptionArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => array(string => string)) $result */
-			$result = array();
-			foreach ($this->getAvailablePaymentMethodsAsCanonicalConfigArray()
-				as $methodCode => $methodOptions) {
-				/** @var string $methodCode */
-				/** @var array $methodOptions */
-				df_assert_string($methodCode);
-				df_assert_array($methodOptions);
-				/** @var string $methodTitle */
-				$methodTitle = dfa($methodOptions, 'title');
-				df_assert_string($methodTitle);
-				$result[]= df_option($methodCode, $methodTitle);
-			}
-			$this->{__METHOD__} = $result;
+	public function availablePaymentMethodsAsOptionArray() {return dfc($this, function() {
+		/** @var array(string => array(string => string)) $result */
+		$result = array();
+		foreach ($this->availablePaymentMethodsAsCanonicalConfigArray() as $methodCode => $methodOptions) {
+			/** @var string $methodCode */
+			/** @var array $methodOptions */
+			df_assert_string($methodCode);
+			df_assert_array($methodOptions);
+			/** @var string $methodTitle */
+			$methodTitle = dfa($methodOptions, 'title');
+			df_assert_string($methodTitle);
+			$result[]= df_option($methodCode, $methodTitle);
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * @used-by Df_Payment_Config_Area::getConst()
@@ -55,23 +50,17 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function getConst($key, $canBeTest = true, $default = '') {
-		return $canBeTest ? $this->getValueT($key, $default) : $this->getValue($key, $default);
-	}
+	public function getConst($key, $canBeTest = true, $default = '') {return
+		$canBeTest ? $this->getValueT($key, $default) : $this->getValue($key, $default)
+	;}
 
 	/**
-	 * @param string $requestVar
+	 * @param string $v
 	 * @return int
 	 */
-	public function getRequestVarMaxLength($requestVar) {
-		df_param_string($requestVar, 0);
-		if (!isset($this->{__METHOD__}[$requestVar])) {
-			$this->{__METHOD__}[$requestVar] = df_nat0($this->getValue(df_cc_path(
-				'request/payment_page/params', $requestVar, 'max_length'
-			)));
-		}
-		return $this->{__METHOD__}[$requestVar];
-	}
+	public function requestVarMaxLength($v) {return dfc($this, function($v) {return
+		df_nat0($this->getValue("request/payment_page/params/{$v}/"))
+	;}, func_get_args());}
 
 	/**
 	 * @param string $key
@@ -101,7 +90,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	public function getValueT($key, $default = '') {return df_leaf($this->getNodeT($key), $default);}
 
 	/** @return bool */
-	public function hasCurrencySetRestriction() {return !!$this->getAllowedCurrencyCodes();}
+	public function hasCurrencySetRestriction() {return !!$this->allowedCurrencyCodes();}
 
 	/**
 	 * Переводит код валюты из стандарта Magento в стандарт платёжной системы.
@@ -114,24 +103,12 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * потому что кодам в формате платёжной системы «U» и «D»
 	 * соответствует единый код в формате Magento — «USD» — и использование translateCurrencyCode
 	 * просто невозможно в силу неоднозначности перевода «USD» (неясно, переводить в «U» или в «D»).
-	 * @param string $currencyCodeInMagentoFormat
+	 * @param string $c
 	 * @return string
 	 */
-	public function translateCurrencyCode($currencyCodeInMagentoFormat) {
-		df_param_string($currencyCodeInMagentoFormat, 0);
-		if (!isset($this->{__METHOD__}[$currencyCodeInMagentoFormat])) {
-			/** @var string $result */
-			$result = $this->getValue(df_cc_path(
-				self::$KEY__CURRENCIES, self::$KEY__CODE_TRANSLATION, $currencyCodeInMagentoFormat
-			));
-			if (!$result) {
-				$result = $currencyCodeInMagentoFormat;
-			}
-			df_result_string($result);
-			$this->{__METHOD__}[$currencyCodeInMagentoFormat] = $result;
-		}
-		return $this->{__METHOD__}[$currencyCodeInMagentoFormat];
-	}
+	public function translateCurrencyCode($c) {return dfc($this, function($c) {return
+		$this->getValue(df_cc_path(self::$KEY__CURRENCIES, self::$KEY__CODE_TRANSLATION, $c)) ?: $c
+	;}, func_get_args());}
 
 	/**
 	 * Переводит код валюты из стандарта платёжной системы в стандарт Magento.
@@ -145,45 +122,21 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * соответствует единый код в формате Magento — «USD» — и использование translateCurrencyCode
 	 * просто невозможно в силу необдозначности перевода «USD» (неясно, переводить в «U» или в «D»).
 	 *
-	 * @param string $currencyCodeInPaymentSystemFormat
+	 * @param string $c
 	 * @return string
 	 */
-	public function translateCurrencyCodeReversed($currencyCodeInPaymentSystemFormat) {
-		df_param_string($currencyCodeInPaymentSystemFormat, 0);
-		if (!isset($this->{__METHOD__}[$currencyCodeInPaymentSystemFormat])) {
-			/** @var string $result */
-			$result = $this->getValue(df_cc_path(
-				self::$KEY__CURRENCIES, 'code-translation-reversed', $currencyCodeInPaymentSystemFormat
-			));
-			if (!$result) {
-				$result = $currencyCodeInPaymentSystemFormat;
-			}
-			df_result_string($result);
-			$this->{__METHOD__}[$currencyCodeInPaymentSystemFormat] = $result;
-		}
-		return $this->{__METHOD__}[$currencyCodeInPaymentSystemFormat];
-	}
+	public function translateCurrencyCodeReversed($c) {return dfc($this, function($c) {return
+		$this->getValue(df_cc_path(self::$KEY__CURRENCIES, 'code-translation-reversed', $c)) ?: $c
+	;}, func_get_args());}
 
 	/**
 	 * Переводит код локали из стандарта Magento в стандарт платёжной системы
-	 * @param string $localeCodeInMagentoFormat
+	 * @param string $c
 	 * @return string
 	 */
-	public function translateLocaleCode($localeCodeInMagentoFormat) {
-		df_param_string($localeCodeInMagentoFormat, 0);
-		if (!isset($this->{__METHOD__}[$localeCodeInMagentoFormat])) {
-			/** @var string $result */
-			$result = $this->getValue(df_cc_path(
-				self::$KEY__LOCALES, self::$KEY__CODE_TRANSLATION, $localeCodeInMagentoFormat
-			));
-			if (!$result) {
-				$result = $localeCodeInMagentoFormat;
-			}
-			df_result_string($result);
-			$this->{__METHOD__}[$localeCodeInMagentoFormat] = $result;
-		}
-		return $this->{__METHOD__}[$localeCodeInMagentoFormat];
-	}
+	public function translateLocaleCode($c) {return dfc($this, function($c) {return
+		$this->getValue(df_cc_path(self::$KEY__LOCALES, self::$KEY__CODE_TRANSLATION, $c)) ?: $c
+	;}, func_get_args());}
 
 	/**
 	 * @override
@@ -197,23 +150,6 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @return string
 	 */
 	protected function getKeyBase() {return 'df/payment';}
-
-	/** @return string */
-	private function getAllowedCurrencyCodesAsString() {return dfc($this, function() {
-		/** @var string $result */
-		$result = $this->getValue(df_cc_path(self::$KEY__CURRENCIES, self::$KEY__ALLOWED));
-		if (!df_check_string_not_empty($result)) {
-			df_error(
-				'Программисту платёжного модуля «%s» требуется указать допустимые валюты.'
-				,df_module_name($this->main())
-			);
-		}
-	});}
-
-	/** @return string */
-	private function getAllowedLocaleCodesAsString() {return dfc($this, function() {return
-		$this->getValue(df_cc_path(self::$KEY__LOCALES, self::$KEY__ALLOWED))
-	;});}
 
 	/**
 	 * @see isDefault()
@@ -231,36 +167,19 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @param string $key
 	 * @return Mage_Core_Model_Config_Element|null
 	 */
-	private function getNode($key) {
-		/** @var Mage_Core_Model_Config_Element|null $result */
-		$result = df_config_node($this->adaptKey($key));
-		/**
-		 * 2015-08-04
-		 * Раньше тут стояло
-		 * $result && df_xml_exists($result)
-		 * что, видимо, неправильно, потому что @see df_xml_exists()
-		 * возвращает false для текстовых узлов.
-		 */
-		return $result ?: ($this->isDefault() ? null : $this->getDefault()->getNode($key));
-	}
+	private function getNode($key) {return
+		df_config_node($this->adaptKey($key)) ?:
+			($this->isDefault() ? null : $this->getDefault()->getNode($key))
+	;}
 
 	/**
 	 * @override
 	 * @param string $key
 	 * @return Mage_Core_Model_Config_Element|null
 	 */
-	private function getNodeT($key) {
-		/** @var Mage_Core_Model_Config_Element|null $result */
-		$result = $this->getModeSpecific()->getNode($key);
-		/**
-		 * 2015-08-04
-		 * Раньше тут стояло
-		 * $result && df_xml_exists($result)
-		 * что, видимо, неправильно, потому что @see df_xml_exists()
-		 * возвращает false для текстовых узлов.
-		 */
-		return $result ? $result : $this->getNode($key);
-	}
+	private function getNodeT($key) {return
+		$this->getModeSpecific()->getNode($key) ?: $this->getNode($key)
+	;}
 
 	/**
 	 * 2016-10-18

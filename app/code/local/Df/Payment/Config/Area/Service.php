@@ -44,7 +44,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			else {
 				foreach ($currenciesAllowedInSystem as $option) {
 					/** @var array(string => string) $option */
-					if (in_array(df_option_v($option), $this->constManager()->getAllowedCurrencyCodes())) {
+					if (in_array(df_option_v($option), $this->constManager()->allowedCurrencyCodes())) {
 						$result[]= $option;
 					}
 				}
@@ -64,7 +64,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			$languages = df_h()->localization()->getLanguages();
 			/** @var Df_Localization_Helper_Locale $helper */
 			$helper = Df_Localization_Helper_Locale::s();
-			foreach ($this->constManager()->getAllowedLocaleCodes() as $code) {
+			foreach ($this->constManager()->allowedLocaleCodes() as $code) {
 				$result[]= df_option($code, dfa($languages, $helper->getLanguageCodeByLocaleCode($code)));
 			}
 			$this->{__METHOD__} = $result;
@@ -76,8 +76,8 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	 * Способы оплаты, предоставляемые данной платёжной системой
 	 * @return array(string => array(string => string))
 	 */
-	public function getAvailablePaymentMethodsAsOptionArray() {
-		return $this->constManager()->getAvailablePaymentMethodsAsOptionArray();
+	public function availablePaymentMethodsAsOptionArray() {
+		return $this->constManager()->availablePaymentMethodsAsOptionArray();
 	}
 
 	/** @return string */
@@ -107,7 +107,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	public function getDisabledPaymentMethods() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_diff(
-				df_option_values($this->getAvailablePaymentMethodsAsOptionArray())
+				df_option_values($this->availablePaymentMethodsAsOptionArray())
 				,$this->getSelectedPaymentMethods()
 			);
 		}
@@ -220,7 +220,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			$this->{__METHOD__} = df_n_set(
 				dfa(
 					dfa(
-						$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
+						$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
 						,$this->getSelectedPaymentMethod()
 						,array()
 					)
@@ -241,7 +241,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			$this->{__METHOD__} =
 				array_column(
 					dfa_select(
-						$this->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray()
+						$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
 						,$this->getSelectedPaymentMethods()
 					)
 					,'code'
@@ -259,7 +259,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			df_assert_string($resultAsString);
 			$this->{__METHOD__} =
 				Df_Admin_Config_Form_Element_Multiselect::isAll($resultAsString)
-				? df_option_values($this->getAvailablePaymentMethodsAsOptionArray())
+				? df_option_values($this->availablePaymentMethodsAsOptionArray())
 				: df_csv_parse($resultAsString)
 			;
 			df_result_array($this->{__METHOD__});

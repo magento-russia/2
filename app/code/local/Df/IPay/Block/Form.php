@@ -3,7 +3,7 @@
 class Df_IPay_Block_Form extends Df_Payment_Block_Form {
 	/** @return array */
 	public function getPaymentOptions() {
-		return $this->getMethod()->constManager()->getAvailablePaymentMethodsAsCanonicalConfigArray();
+		return $this->getMethod()->constManager()->availablePaymentMethodsAsCanonicalConfigArray();
 	}
 
 	/**
