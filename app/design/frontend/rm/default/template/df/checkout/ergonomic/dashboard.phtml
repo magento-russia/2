@@ -37,7 +37,7 @@
 <div class='df'>
 	<div class='df-checkout-ergonomic'>
 		<h1><?php echo $this->__('Checkout Page') ?></h1>
-		<?php if (!df_mage()->customer()->isLoggedIn()) { ?>
+		<?php if (!df_customer_logged_in()) { ?>
 			<a class='df-login' href='#df-login'><?php echo $this->__('Log In') ?></a> <?php echo $this->__('If you have purchased something before') ?>
 			<?php
 				if ($blockLogin instanceof Mage_Checkout_Block_Onepage_Login) {
