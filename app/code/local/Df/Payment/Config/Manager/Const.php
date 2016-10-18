@@ -199,33 +199,32 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	protected function getKeyBase() {return 'df/payment';}
 
 	/** @return string */
-	private function getAllowedCurrencyCodesAsString() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getValue(df_cc_path(
-				self::$KEY__CURRENCIES, self::$KEY__ALLOWED
-			));
-			df_result_string($this->{__METHOD__});
+	private function getAllowedCurrencyCodesAsString() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->getValue(df_cc_path(self::$KEY__CURRENCIES, self::$KEY__ALLOWED));
+		if (!df_check_string_not_empty($result)) {
+			df_error(
+				'Программисту платёжного модуля «%s» требуется указать допустимые валюты.'
+				,df_module_name($this->main())
+			);
 		}
-		return $this->{__METHOD__};
-	}
+	});}
 
 	/** @return string */
-	private function getAllowedLocaleCodesAsString() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getValue(df_cc_path(
-				self::$KEY__LOCALES, self::$KEY__ALLOWED
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	private function getAllowedLocaleCodesAsString() {return dfc($this, function() {return
+		$this->getValue(df_cc_path(self::$KEY__LOCALES, self::$KEY__ALLOWED))
+	;});}
 
-	/** @return Df_Payment_Config_Manager_Const_Default */
+	/**
+	 * @see isDefault()
+	 * @return Df_Payment_Config_Manager_Const_Default
+	 */
 	private function getDefault() {return Df_Payment_Config_Manager_Const_Default::s($this->main());}
 
 	/** @return Df_Payment_Config_Manager_Const_ModeSpecific */
-	private function getModeSpecific() {
-		return Df_Payment_Config_Manager_Const_ModeSpecific::s($this->main());
-	}
+	private function getModeSpecific() {return
+		Df_Payment_Config_Manager_Const_ModeSpecific::s($this->main())
+	;}
 
 	/**
 	 * @override
@@ -242,11 +241,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		 * что, видимо, неправильно, потому что @see df_xml_exists()
 		 * возвращает false для текстовых узлов.
 		 */
-		return
-			$result
-			? $result
-			: $this->getDefault()->getNode($key)
-		;
+		return $result ?: ($this->isDefault() ? null : $this->getDefault()->getNode($key));
 	}
 
 	/**
@@ -266,6 +261,15 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 		 */
 		return $result ? $result : $this->getNode($key);
 	}
+
+	/**
+	 * 2016-10-18
+	 * Не очень красивое, временное решение.
+	 * @see getDefault()
+	 * @used-by getNode()
+	 * @return bool
+	 */
+	private function isDefault() {return $this instanceof Df_Payment_Config_Manager_Const_Default;}
 
 	/** @var string */
 	private static $KEY__ALLOWED = 'allowed';

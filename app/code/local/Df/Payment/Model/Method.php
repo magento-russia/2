@@ -350,7 +350,12 @@ abstract class Df_Payment_Model_Method
 	 */
 	public function getRmId() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_module_id($this, '-');
+			/**
+			 * 2016-10-18
+			 * Разделитель должен быть именно пустой строкой:
+			 * «LiqPay» => «liqpay»
+			 */
+			$this->{__METHOD__} = df_module_id($this, '');
 		}
 		return $this->{__METHOD__};
 	}

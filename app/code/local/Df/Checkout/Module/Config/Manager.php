@@ -120,7 +120,7 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 	 */
 	protected static function sc($class, Df_Checkout_Module_Main $main) {
 		/** @var string $key */
-		$key = get_class($main) . '::' . $class;
+		$key = df_ckey(get_class($main), $class);
 		/** @var array(string => Df_Checkout_Module_Config_Manager) */
 		static $cache;
 		if (!isset($cache[$key])) {
