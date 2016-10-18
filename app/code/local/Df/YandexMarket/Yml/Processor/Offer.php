@@ -231,7 +231,10 @@ class Df_YandexMarket_Yml_Processor_Offer extends Df_Catalog_Model_XmlExport_Pro
 		return $result;
 	}
 
-	/** @return bool */
+	/**
+	 * @see Mage_Catalog_Model_Product_Visibility
+	 * @return bool
+	 */
 	private function hasProperVisibility() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var bool $result */
