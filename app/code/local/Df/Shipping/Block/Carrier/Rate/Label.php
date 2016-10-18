@@ -35,7 +35,9 @@ class Df_Shipping_Block_Carrier_Rate_Label extends Df_Core_Block_Abstract_NoCach
 		/** @var Df_Shipping_Rate_Result_Method|null $terms */
 		$terms = $this->rate()->terms();
 		if ($terms) {
-			//$result = df_days_interval(df_days_left($terms->dateMin()), df_days_left($terms->dateMax()));
+			$result = df_days_interval(
+				df_days_left($terms->dateMin()), df_days_left($terms->dateMax())
+			);
 		}
 		return isset($result) ? $result : '';
 	}
