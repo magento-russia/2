@@ -27,9 +27,9 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 	 * @param string $key
 	 * @return string
 	 */
-	protected function adaptKey($key) {
-		return df_cc_path($this->getKeyBase(), $this->main()->getRmId(), $key);
-	}
+	protected function adaptKey($key) {return
+		df_cc_path($this->getKeyBase(), $this->main()->getRmId(), $key)
+	;}
 
 	/**
 	 * @param mixed $value

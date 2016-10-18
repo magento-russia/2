@@ -1,7 +1,7 @@
 <?php
-class Df_Core_Model_Bridge extends Df_Core_Model {
+abstract class Df_Core_Model_Bridge extends Df_Core_Model {
 	/** @return Varien_Object */
-	protected function main() {return $this->cfg(self::$P__MAIN);}
+	protected function main() {return $this[self::$P__MAIN];}
 
 	/**
 	 * @override
@@ -9,7 +9,7 @@ class Df_Core_Model_Bridge extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, 'Varien_Object');
+		$this->_prop(self::$P__MAIN, Varien_Object::class);
 	}
 	/**
 	 * @used-by Df_Checkout_Module_Bridge::_construct()
@@ -32,7 +32,7 @@ class Df_Core_Model_Bridge extends Df_Core_Model {
 	 * @param Varien_Object|object $main
 	 * @return Df_Core_Model_Bridge
 	 */
-	protected static function ic($class, Varien_Object $main) {
-		return df_ic($class, __CLASS__, array(self::$P__MAIN => $main));
-	}
+	protected static function ic($class, Varien_Object $main) {return
+		df_ic($class, __CLASS__, [self::$P__MAIN => $main])
+	;}
 }

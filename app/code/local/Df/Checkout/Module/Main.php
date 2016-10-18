@@ -46,13 +46,4 @@ interface Df_Checkout_Module_Main {
 	 * @return string
 	 */
 	public function getTitle();
-
-	/**
-	 * Нельзя называть эту константу «_CLASS»,
-	 * потому что иначе мы получим сбой для классов, реализующих этот интерфейс:
-	 * «Cannot inherit previously-inherited or override constant _CLASS
-	 * from interface Df_Checkout_Module_Main»
-	 * @used-by Df_Checkout_Module_Config_Facade::_construct()
-	 */
-	const _INTERFACE = __CLASS__;
 }

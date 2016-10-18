@@ -3,11 +3,12 @@
 class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 	/**
 	 * @override
+	 * @see Df_Core_Model_Bridge::_construct()
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Checkout_Module_Main::_INTERFACE);
+		$this->_prop(self::$P__MAIN, Df_Checkout_Module_Main::class);
 	}
 
 	/**
@@ -31,14 +32,13 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 		/** @var array(string => string) $cache */
 		static $cache;
 		if (!isset($cache[$mainBaseClass])) {
-			$cache[$mainBaseClass] = dfa(df_explode_class($mainBaseClass), 1);
+			$cache[$mainBaseClass] = df_class_second($mainBaseClass);
 		}
 		return $cache[$mainBaseClass];
 	}
 
 	/**
 	 * @used-by Df_Checkout_Module_Config_Area::s()
-	 * @static
 	 * @param Df_Checkout_Module_Main $main
 	 * @param string $suffix
 	 * @return Df_Checkout_Module_Bridge
