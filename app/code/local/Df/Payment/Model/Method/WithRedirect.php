@@ -6,13 +6,13 @@ abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Met
 	 * @param Df_Sales_Model_Order $order
 	 * @return string
 	 */
-	public function getCustomerReturnUrl(Df_Sales_Model_Order $order) {
-		return Mage::getUrl(df_cc_path($this->getCode(), 'customerReturn'), array(
-			'_query' => array(self::REQUEST_PARAM__ORDER_INCREMENT_ID => $order->getIncrementId())
+	public function getCustomerReturnUrl(Df_Sales_Model_Order $order) {return
+		Mage::getUrl(df_cc_path($this->getCode(), 'customerReturn'), [
+			'_query' => [self::REQUEST_PARAM__ORDER_INCREMENT_ID => $order->getIncrementId()]
 			// Без _nosid система будет формировать ссылку вида
 			// http://localhost.com:811/df-avangard/customerReturn/?___SID=U&magentoOrderIncrementId=100000053
 			,'_nosid' => true
-		));
+		]);
 	}
 
 	/**

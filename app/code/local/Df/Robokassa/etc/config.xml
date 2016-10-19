@@ -67,11 +67,7 @@
 		<payment>
 			<robokassa>
 				<currencies>
-					<allowed>RUB,USD</allowed>
-					<code-translation>
-						<RUB>MerchantR</RUB>
-						<USD>MerchantU</USD>
-					</code-translation>
+					<allowed>EUR,KZT,RUB,USD</allowed>
 				</currencies>
 				<production>
 					<url>
