@@ -41,7 +41,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	public static function on() {self::session()->setData(self::$REDIRECTED, true);}
 
 	/** @return void */
-	private function cancelOrderIfExists() {
+	private static function cancelOrderIfExists() {
 		/** @var Df_Sales_Model_Order|null $order */
 		$order = df_last_order(false);
 		if ($order) {
