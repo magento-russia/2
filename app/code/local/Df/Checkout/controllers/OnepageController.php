@@ -49,14 +49,10 @@ class Df_Checkout_OnepageController extends Mage_Checkout_OnepageController {
 				$exception = null;
 				try {
 					$this->loadLayout('checkout_onepage_review');
-					$result['df_update_sections'] =
-						array(
-							array(
-								'name' => 'review','html' =>
-									$this->getLayout()->getBlock('root')->toHtml()
-							)
-						)
-					;
+					$result['df_update_sections'] = [[
+						'name' => 'review',
+						'html' => $this->getLayout()->getBlock('root')->toHtml()
+					]];
 				}
 				catch (Exception $e) {
 					$exception = $e;

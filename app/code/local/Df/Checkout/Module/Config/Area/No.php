@@ -15,7 +15,7 @@ class Df_Checkout_Module_Config_Area_No extends Df_Checkout_Module_Config_Area {
 		/** @var array(string => Df_Checkout_Module_Config_Area_No) $cache */
 		static $cache;
 		/** @var string $key */
-		$key = $main->getCheckoutModuleType();
+		$key = get_class($main);
 		if (!isset($cache[$key])) {
 			$cache[$key] = self::ic(__CLASS__, $main);
 		}
