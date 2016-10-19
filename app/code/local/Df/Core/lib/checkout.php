@@ -1,14 +1,21 @@
 <?php
+use Df_Sales_Model_Order as Order;
 define('RM_URL_CHECKOUT', 'checkout/onepage');
 
 /**
  * @param bool $throw [optional]
- * @return Df_Sales_Model_Order|null
+ * @return Order|null
  */
 function df_last_order($throw = true) {
-	static $r; return $r ? df_n_get($r) : $r = df_n_set(
-		Df_Sales_Model_Order::ldi(df_last_order_iid(), $throw)
-	);
+	/** @var Order|null $result */
+	if (!$throw) {
+		$result = dfcf(function() {return Order::ldi(df_last_order_iid(), false);});
+	}
+	else {
+		$result = df_last_order(false);
+		df_assert($result);
+	}
+	return $result;
 }
 
 /**
