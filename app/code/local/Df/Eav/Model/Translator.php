@@ -7,7 +7,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 	 */
 	public function _destruct() {
 		if (
-			df_is_it_my_local_pc()
+			df_my_local()
 			&& !df_is_admin()
 			&& Mage::isInstalled()
 			&& $this->_untranslated
@@ -130,7 +130,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 			if (
 					$logUntranslated
 				&&
-					df_is_it_my_local_pc()
+					df_my_local()
 				&&
 					($result === $label)
 				&&

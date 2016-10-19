@@ -229,16 +229,15 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	 * @param MethodR $method
 	 * @return array(string => string|int)
 	 */
-	public static function params(MethodR $method) {
-		/** @var array(string => array(string => string|int)) */
-		static $cache;
-		/** @var string $key */
-		$key = $method->getCode();
-		if (!isset($cache[$key])) {
-			/** @var Df_Payment_Model_Request_Payment $i */
-			$i = df_ic(df_con($method, 'Model_Request_Payment'), __CLASS__);
-			$cache[$key] = $i->preprocessParams($i->_params());
+	public static function params(MethodR $method) {return dfcf(function($class) {
+		/** @var $this $i */
+		$i = df_ic(df_con($class, 'Model_Request_Payment'), __CLASS__);
+		$result = $i->preprocessParams($i->_params());
+		if (df_my_local()) {
+			/** @var string $module */
+			$module = df_module_name($class);
+			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty($result));
 		}
-		return $cache[$key];
-	}
+		return $result;
+	}, [get_class($method)]);}
 }

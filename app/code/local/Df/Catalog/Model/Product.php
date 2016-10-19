@@ -295,7 +295,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					 * стала просто отбраковка нестандартных системных типов товаров:
 					 * @see Df_YandexMarket_Yml_Processor_Offer::isEnabled()
 					 */
-					if (df_is_it_my_local_pc()) {
+					if (df_my_local()) {
 						Mage::log(sprintf('Неизвестный тип товара: «%s».', $this->getTypeId()));
 					}
 					/** @var float $priceWithoutTax */

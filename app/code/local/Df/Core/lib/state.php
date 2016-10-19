@@ -90,6 +90,9 @@ function df_installed() {
  */
 function df_is_dev() {return Mage::getIsDeveloperMode();};
 
+/** @return bool */
+function df_my_local() {return dfcf(function() {return df_bool(dfa($_SERVER, 'RM_DEVELOPER'));});}
+
 /**
  * @param string $key
  * @param string $default [optional]

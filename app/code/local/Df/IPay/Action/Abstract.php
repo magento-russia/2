@@ -411,7 +411,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 
 	/** @return void */
 	private function checkSignature() {
-		if (!df_is_it_my_local_pc()) {
+		if (!df_my_local()) {
 			if ($this->getRequestParam_Signature() !== $this->calculateRequestSignature()) {
 				df_error(
 					"Запрос от iPay подписан неверно.
@@ -463,7 +463,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	/** @return string */
 	private function getRequestAsXmlInWindows1251() {
 		return
-			df_is_it_my_local_pc()
+			df_my_local()
 			? $this->getRequestAsXml_Test()
 			: $this->getRequest()->getParam('XML')
 		;

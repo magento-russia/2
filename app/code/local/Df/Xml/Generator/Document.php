@@ -266,7 +266,7 @@ class Document extends Element {
 	protected function needLog() {
 		/** @var bool $result */
 		$result = $this->mixin(__FUNCTION__);
-		return !is_null($result) ? $result : df_is_it_my_local_pc();
+		return !is_null($result) ? $result : df_my_local();
 	}
 
 	/** @return bool */

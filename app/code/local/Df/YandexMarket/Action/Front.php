@@ -33,7 +33,7 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 	 * @override
 	 * @return bool
 	 */
-	protected function needBenchmark() {return df_is_it_my_local_pc();}
+	protected function needBenchmark() {return df_my_local();}
 
 	/**
 	 * @override
@@ -41,7 +41,7 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 	 * @used-by Df_Core_Model_Action::processFinish()
 	 * @return bool
 	 */
-	protected function needLogResponse() {return df_is_it_my_local_pc();}
+	protected function needLogResponse() {return df_my_local();}
 
 	/**
 	 * @override

@@ -10,7 +10,7 @@ class Df_1C_Cml2_Action_Orders_Import extends Df_1C_Cml2_Action {
 	 * @return void
 	 */
 	protected function _process() {
-		if (df_is_it_my_local_pc()) {
+		if (df_my_local()) {
 			$this->logXml();
 		}
 		foreach ($this->getOrders() as $entityOrder) {

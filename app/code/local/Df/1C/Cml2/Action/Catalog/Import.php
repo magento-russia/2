@@ -120,7 +120,7 @@ class Df_1C_Cml2_Action_Catalog_Import extends Df_1C_Cml2_Action_Catalog {
 				df_1c_log('Настраиваемые товары отсутствуют.');
 			}
 			else {
-				if (df_is_it_my_local_pc()) {
+				if (df_my_local()) {
 					Mage::log(
 						'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!'
 					);

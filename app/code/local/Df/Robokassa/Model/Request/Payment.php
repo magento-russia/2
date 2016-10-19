@@ -31,7 +31,7 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 		// «E-Mail покупателя автоматически подставляется в платёжную форму ROBOKASSA.
 		// Пользователь может изменить его в процессе оплаты.»
 		// http://docs.robokassa.ru/#1202
-		,'Email' => null
+		,'Email' => $this->email()
 	];}
 
 	/**

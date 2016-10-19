@@ -36,7 +36,7 @@ class Df_1C_Cml2_Action_Orders_Export extends Df_1C_Cml2_Action_GenericExport {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Zend_Date $result */
 			// для некоторых сценариев тестирования
-			if (true && df_is_it_my_local_pc()) {
+			if (true && df_my_local()) {
 				$result = Zend_Date::now();
 				/**
 				 * Zend_Date::sub() возвращает число в виде строки для Magento CE 1.4.0.1

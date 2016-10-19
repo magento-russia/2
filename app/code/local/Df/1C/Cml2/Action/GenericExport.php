@@ -44,7 +44,7 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	 * @used-by Df_Core_Model_Action::processFinish()
 	 * @return bool
 	 */
-	protected function needLogResponse() {return df_is_it_my_local_pc();}
+	protected function needLogResponse() {return df_my_local();}
 
 	/** @return \Df\Xml\Generator\Document */
 	private function getDocument() {

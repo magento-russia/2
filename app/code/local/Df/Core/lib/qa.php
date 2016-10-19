@@ -47,16 +47,6 @@ function df_bt($levelsToSkip = 0) {
 	df_report('bt-{date}-{time}.log', print_r($compactBT, true));
 }
 
-/** @return bool */
-function df_is_it_my_local_pc() {
-	/** @var bool $result  */
-	static $result;
-	if (is_null($result)) {
-		$result = df_bool(dfa($_SERVER, 'RM_DEVELOPER'));
-	}
-	return $result;
-}
-
 /**
  * @used-by Df_1C_Cml2_Action_Catalog_Import::_process()
  * @used-by \Df\Qa\Message::message()

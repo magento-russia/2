@@ -11,7 +11,7 @@ class Df_1C_Cml2Controller extends Mage_Core_Controller_Front_Action {
 	 * @return void
 	 */
 	public function indexAction() {
-		if (df_is_it_my_local_pc()) {
+		if (df_my_local()) {
 			Mage::log(df_last(explode('?', df_ruri())));
 		}
 		df_action($this, 'Df_1C_Cml2_Action_Front');

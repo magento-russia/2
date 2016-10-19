@@ -13,7 +13,7 @@ class Df_Admin_Config_BackendChecker_CurrencyIsSupported
 		$isAvailable = in_array($this->getCurrencyCode(), $store->getAvailableCurrencyCodes());
 		/** @var bool $hasRate */
 		$hasRate = (false !== $store->getBaseCurrency()->getRate($this->getCurrencyCode()));
-		if (df_is_it_my_local_pc()) {
+		if (df_my_local()) {
 			if (!$isAvailable) {
 				Mage::log(sprintf('%s is not available.', $this->getCurrencyCode()));
 			}

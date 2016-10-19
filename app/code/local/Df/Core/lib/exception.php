@@ -53,7 +53,7 @@ function df_exception_to_session(Exception $exception) {
 	/** @var bool $needNotifyDeveloper */
 	$needNotifyDeveloper = $isRmException && $exception->needNotifyDeveloper();
 	/** @var bool $needShowStackTrace */
-	$needShowStackTrace = $needNotifyDeveloper && (df_is_admin() || df_is_it_my_local_pc());
+	$needShowStackTrace = $needNotifyDeveloper && (df_is_admin() || df_my_local());
 	if ($message) {
 		df_session()->addError($message);
 	}
