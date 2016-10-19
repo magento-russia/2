@@ -1,7 +1,7 @@
 <?php
 /**
  * 2015-02-17
- * Этот класс используется в файлах etc/system.xml».
+ * Этот класс используется в файлах etc/system.xml.
  * Обратите внимание, что Magento не создаёт отдельные экземпляры данного класса
  * для вывода каждого поля!
  * Magento использует ЕДИНСТВЕННЫЙ экземпляр данного класса для вывода всех полей!
@@ -27,14 +27,12 @@ class Df_Admin_Block_Field
 	 * @param Varien_Data_Form_Element_Abstract $element
 	 * @return string
 	 */
-	public function render(Varien_Data_Form_Element_Abstract $element) {
-		return
-			$this
-				->setElement(Df_Admin_Model_Form_Element::i($element))
-				->setTemplate('df/admin/field.phtml')
-				->toHtml()
-		;
-	}
+	public function render(Varien_Data_Form_Element_Abstract $element) {return
+		$this
+			->setElement(Df_Admin_Model_Form_Element::i($element))
+			->setTemplate('df/admin/field.phtml')
+			->toHtml()
+	;}
 
 	/**
 	 * @param Df_Admin_Model_Form_Element $element

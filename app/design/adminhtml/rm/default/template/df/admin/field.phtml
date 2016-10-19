@@ -11,17 +11,9 @@
 	</td>
 	<td class='value'>
 		<?php echo $element->getHtml(); ?>
-		<?php
-			if ($element->getComment()) {
-				?>
-					<p class='note'>
-						<span>
-							<?php echo $element->getComment(); ?>
-						</span>
-					</p>
-				<?php
-			}
-		?>
+		<?php if ($element->getComment()) { ?>
+			<div class='note'><?php echo $element->getComment(); ?></div>
+		<?php } ?>
 	</td>
 	<?php if ($element->needToAddInheritBox()) { ?>
 		<td class='use-default'>
