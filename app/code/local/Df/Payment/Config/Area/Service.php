@@ -309,13 +309,12 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	}
 
 	/** @return string */
-	public function getUrlPaymentPage() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->constManager()->getUrl('payment_page', $canBeTest = true);
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getUrlPaymentPage() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->constManager()->getUrl('payment_page', $canBeTest = true);
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/** @return bool */
 	public function isCardPaymentActionAuthorize() {
