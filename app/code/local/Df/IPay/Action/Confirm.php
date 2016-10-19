@@ -55,7 +55,7 @@ class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
 			,'Info' => array(
 				'InfoLine' =>
 					is_null($this->getRequestParam_ErrorText())
-					? $this->getRequestPayment()->getTransactionDescription()
+					? $this->getRequestPayment()->description()
 					: 'Операция отменена'
 			)
 		)));

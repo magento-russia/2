@@ -7,89 +7,48 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 	 * @used-by Df_Payment_Model_Request_Payment::params()
 	 * @return array(string => string|int)
 	 */
-	protected function _params() {
-		return array(
-			self::REQUEST_VAR__SHOP_ID => $this->shopId()
-			,self::REQUEST_VAR__PAYMENT_AMOUNT => $this->amountS()
-			,self::REQUEST_VAR__ORDER_ID => $this->orderIId()
-			,self::REQUEST_VAR__DESCRIPTION => $this->getPaymentDescription()
-			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
-			,self::REQUEST_VAR__CURRENCY => $this->configS()->getCurrencyCodeInServiceFormat()
-			,self::REQUEST_VAR__EMAIL => null
-		);
-	}
+	protected function _params() {return [
+		'MerchantLogin' => $this->shopId()
+		,'OutSum' => $this->amountS()
+		,'InvId' => $this->orderIId()
+		,'InvDesc' => $this->getPaymentDescription()
+		,'IsTest' => 1
+		,'SignatureValue' => $this->signature()
+		,'IncCurrLabel' => $this->configS()->getCurrencyCodeInServiceFormat()
+		,'Email' => null
+	];}
 
 	/**
 	 * @param Mage_Sales_Model_Order_Item $orderItem
 	 * @return string
 	 */
-	private function getOrderItemDescription(Mage_Sales_Model_Order_Item $orderItem) {
-		return sprintf(
-			'%s (%d)'
-			,$orderItem->getName()
-			,Df_Sales_Model_Order_Item_Extended::i($orderItem)->getQtyOrdered()
-		);
-	}
-
-	/** @return string[] */
-	private function getOrderItemDescriptions() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $result */
-			$result = array();
-			foreach ($this->order()->getItemsCollection(array(), true) as $orderItem) {
-				/** @var Mage_Sales_Model_Order_Item $orderItem */
-				$result[]= $this->getOrderItemDescription($orderItem);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return float */
-	private function getPaymentAmount() {return round($this->amount()->getOriginal(), 2);}
+	private function getOrderItemDescription(Mage_Sales_Model_Order_Item $orderItem) {return sprintf(
+		'%s (%d)'
+		,$orderItem->getName()
+		,Df_Sales_Model_Order_Item_Extended::i($orderItem)->getQtyOrdered()
+	);}
 
 	/** @return string */
 	private function getPaymentDescription() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_csv_pretty($this->getOrderItemDescriptions());
+			/** @var string[] $resultA */
+			$resultA = [];
+			foreach ($this->order()->getItemsCollection(array(), true) as $orderItem) {
+				/** @var Mage_Sales_Model_Order_Item $orderItem */
+				$resultA[]= $this->getOrderItemDescription($orderItem);
+			}
+			$this->{__METHOD__} = df_csv_pretty($resultA);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
-	private function getSignature() {
-		return md5(implode(self::SIGNATURE_PARTS_SEPARATOR, $this->preprocessParams(
-			array(
-			self::REQUEST_VAR__SHOP_ID => $this->shopId()
-			,self::REQUEST_VAR__PAYMENT_AMOUNT => $this->amountS()
-			,self::REQUEST_VAR__ORDER_ID => $this->orderIId()
+	private function signature() {return
+		md5(implode(':', $this->preprocessParams([
+			'MerchantLogin' => $this->shopId()
+			,'OutSum' => $this->amountS()
+			,'InvId' => $this->orderIId()
 			,'dummy-1' => $this->password()
-			)
-		)));
-	}
-
-	/**
-	 * @used-by _params()
-	 * @used-by getSignature()
-	 * @return array(string => string|int)
-	 */
-	private function paramsForSignature() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				self::REQUEST_VAR__SHOP_ID => $this->shopId()
-				,self::REQUEST_VAR__PAYMENT_AMOUNT => $this->amountS()
-				,self::REQUEST_VAR__ORDER_ID => $this->orderIId()
-			);
-		}
-		return $this->{__METHOD__};
-	}
-
-	const REQUEST_VAR__CURRENCY = 'sIncCurrLabel';
-	const REQUEST_VAR__DESCRIPTION = 'Desc';
-	const REQUEST_VAR__EMAIL = 'sEmail';
-	const REQUEST_VAR__ORDER_ID = 'InvId';
-	const REQUEST_VAR__PAYMENT_AMOUNT = 'OutSum';
-	const REQUEST_VAR__SHOP_ID = 'MrchLogin';
-	const REQUEST_VAR__SIGNATURE = 'SignatureValue';
-	const SIGNATURE_PARTS_SEPARATOR = ':';
+		])))
+	;}
 }

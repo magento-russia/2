@@ -22,7 +22,7 @@ class Df_Uniteller_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 			,self::REQUEST_VAR__CUSTOMER__STATE => $this->regionCode()
 			,self::REQUEST_VAR__CUSTOMER__ZIP => $this->postCode()
 			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
-			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
 			,self::REQUEST_VAR__SHOP_ID => $this->shopId()

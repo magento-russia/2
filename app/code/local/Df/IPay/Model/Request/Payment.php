@@ -21,10 +21,10 @@ class Df_IPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
 	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::_process()
 	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
-	 * @see Df_Payment_Model_Request_Payment::getTransactionDescription()
+	 * @see Df_Payment_Model_Request_Payment::description()
 	 * @return string
 	 */
-	public function getTransactionDescription() {return parent::getTransactionDescription();}
+	public function description() {return parent::description();}
 
 	/**
 	 * @override

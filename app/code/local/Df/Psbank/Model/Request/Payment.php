@@ -5,9 +5,9 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionDescription() {
+	public function description() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = mb_substr(parent::getTransactionDescription(), 0, 50);
+			$this->{__METHOD__} = mb_substr(parent::description(), 0, 50);
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
@@ -30,7 +30,7 @@ class Df_Psbank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 				'AMOUNT' => $this->amountS()
 				, 'CURRENCY' => 'RUB'
 				, 'ORDER' => $this->orderIId()
-				, 'DESC' => $this->getTransactionDescription()
+				, 'DESC' => $this->description()
 				, 'TERMINAL' => $this->configS()->getTerminalId()
 				, 'TRTYPE' => $this->getTransactionType()
 				, 'MERCH_NAME' => $this->configS()->getShopName()

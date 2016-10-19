@@ -14,8 +14,8 @@ class Df_EasyPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment 
 			// EASYPAY требует, чтобы суммы были целыми числами
 			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amount()->getAsInteger()
 			,'EP_Expires' => 3
-			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
-			,'EP_OrderInfo' => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
+			,'EP_OrderInfo' => $this->description()
 			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
 			,self::REQUEST_VAR__URL_RETURN_OK => df_url_checkout_success()
 			,self::REQUEST_VAR__URL_RETURN_NO => df_url_checkout_fail()

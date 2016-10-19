@@ -33,7 +33,7 @@ class Df_IPay_Action_ConfirmPaymentByShop extends Df_IPay_Action_Abstract {
 		$this->checkPaymentAmount();
 		$this->e()->appendChild(df_xml_node('TransactionStart')->importArray(array(
 			'ServiceProvider_TrxId' => $this->order()->getIncrementId()
-			,'Info' => array('InfoLine' => $this->getRequestPayment()->getTransactionDescription())
+			,'Info' => array('InfoLine' => $this->getRequestPayment()->description())
 		)));
 	}
 

@@ -11,7 +11,7 @@ class Df_Moneta_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		/** @var array(string => string) $result */
 		$result = array(
 			self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
-			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
 			,self::REQUEST_VAR__ORDER_CURRENCY =>
 				$this->configS()->getCurrencyCodeInServiceFormat()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()

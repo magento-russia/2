@@ -69,7 +69,7 @@ class Df_Avangard_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 				,'shop_passwd' => $this->password()
 				,'amount' => df_round(100 * $this->amount()->getAsFixedFloat())
 				,'order_number' => $this->orderIId()
-				,'order_description' => $this->getTransactionDescription()
+				,'order_description' => $this->description()
 				,'language' => 'RU'
 				,'back_url' => $this->urlCustomerReturn()
 				,'client_name' => $this->getCustomerNameFull()

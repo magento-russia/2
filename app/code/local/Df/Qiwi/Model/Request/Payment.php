@@ -14,7 +14,7 @@ class Df_Qiwi_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			,'currency' => $this->currencyCode()
 			,'lifetime' => 24 * 45
 			,'txn_id' => $this->orderIId()
-			,'com' => $this->getTransactionDescription()
+			,'com' => $this->description()
 			,'from'=> $this->shopId()
 			,'check_agt' => 0
 		);

@@ -25,12 +25,9 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	 * (чем меньше публичных методов — тем проще понимать систему).
 	 * @return Df_Core_Model_Money
 	 */
-	protected function amount() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->configS()->getOrderAmountInServiceCurrency($this->order());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function amount() {return dfc($this, function() {return
+		$this->configS()->getOrderAmountInServiceCurrency($this->order())
+	;});}
 
 	/** @return string */
 	protected function amountF() {return $this->amount()->getOriginalAsFloat();}
@@ -44,18 +41,10 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	/** @return Df_Payment_Config_Area_Service */
 	protected function configS() {return $this->method()->configS();}
 
-	/**
-	 * @used-by
-	 * @return string
-	 */
-	protected function description() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = strtr($this->configS()->getTransactionDescription(), array(
-				'{order.id}' => $this->orderIId()
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return string */
+	protected function description() {return dfc($this, function() {return
+		strtr($this->configS()->description(), ['{order.id}' => $this->orderIId()])
+	;});}
 
 	/**
 	 * @used-by Df_Alfabank_Model_Request_Payment::getResponseAsArray()
@@ -70,21 +59,19 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	 * @used-by getInfoInstance()
 	 * @return Df_Payment_Model_Method_WithRedirect
 	 */
-	protected function method() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Payment_Model_Method_WithRedirect $result */
-			$result = $this->payment()->getMethodInstance();
-			if (!$result instanceof Df_Payment_Model_Method_WithRedirect) {
-				df_error(
-					'Заказ №«%s» не предназначен для оплаты каким-либо из платёжных модулей
-					Российской сборки Magento.'
-					,$this->order()->getIncrementId()
-				);
-			}
-			$this->{__METHOD__} = $result;
+	protected function method() {return dfc($this, function() {
+		/** @var Mage_Sales_Model_Order_Payment $result */
+		/** @var Df_Payment_Model_Method_WithRedirect $result */
+		$result = $this->payment()->getMethodInstance();
+		if (!$result instanceof Df_Payment_Model_Method_WithRedirect) {
+			df_error(
+				'Заказ №«%s» не предназначен для оплаты каким-либо из платёжных модулей
+				Российской сборки Magento.'
+				,$this->order()->getIncrementId()
+			);
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * 2015-02-19
@@ -167,13 +154,12 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	 * @used-by method()
 	 * @return Mage_Sales_Model_Order_Payment
 	 */
-	protected function payment() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->order()->getPayment();
-			df_assert($this->{__METHOD__} instanceof Mage_Sales_Model_Order_Payment);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function payment() {return dfc($this, function() {
+		/** @var Mage_Sales_Model_Order_Payment $result */
+		$result = $this->order()->getPayment();
+		df_assert($result instanceof Mage_Sales_Model_Order_Payment);
+		return $result;
+	});}
 
 	/**
 	 * 2015-03-15
@@ -185,7 +171,7 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	protected function shopId() {return $this->configS()->getShopId();}
 
 	/**
-	 * @used-by Df_YandexMoney_Model_Request_Payment::getTransactionDescriptionParams()
+	 * @used-by Df_YandexMoney_Model_Request_Payment::descriptionParams()
 	 * @return Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_store($this->method()->getStore());}

@@ -28,7 +28,7 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var string $result */
-		$result = md5(implode(self::SIGNATURE_PARTS_SEPARATOR, array(
+		$result = md5(implode(':', array(
 			/**
 			 * 3 октября 2012 года заметил, что Робокасса стала передавать размер заказа
 			 * с 6 знаками после запятой вместо 2.
@@ -45,5 +45,4 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	}
 
 	const RESPONSE_TEXT__SUCCESS__PREFIX = 'OK';
-	const SIGNATURE_PARTS_SEPARATOR = Df_Robokassa_Model_Request_Payment::SIGNATURE_PARTS_SEPARATOR;
 }

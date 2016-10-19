@@ -8,9 +8,9 @@ class Df_PayOnline_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 	 * @override
 	 * @return string
 	 */
-	 public function getTransactionDescription() {
+	 public function description() {
 		return preg_replace(
-			'#[^a-zA-Zа-яА-Я0-9 \,\!\?\;\:\%\*\(\)-]#u', '', parent::getTransactionDescription()
+			'#[^a-zA-Zа-яА-Я0-9 \,\!\?\;\:\%\*\(\)-]#u', '', parent::description()
 		);
 	}
 
@@ -29,7 +29,7 @@ class Df_PayOnline_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 			,self::REQUEST_VAR__CUSTOMER__ZIP => $this->postCode()
 			,self::REQUEST_VAR__ENCODING => 'utf-8'
 			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
-			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
 			,self::REQUEST_VAR__ORDER_CURRENCY => $this->configS()->getCurrencyCodeInServiceFormat()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
@@ -47,7 +47,7 @@ class Df_PayOnline_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__ORDER_AMOUNT  => $this->amountS()
 			,self::REQUEST_VAR__ORDER_CURRENCY => $this->configS()->getCurrencyCodeInServiceFormat()
-			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
 			,self::SIGNATURE_PARAM__PRIVATE_SECURITY_KEY => $this->password()
 		);
 		return strtolower(md5(implode(

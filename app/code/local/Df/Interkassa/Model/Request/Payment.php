@@ -13,7 +13,7 @@ class Df_Interkassa_Model_Request_Payment extends Df_Payment_Model_Request_Payme
 			,'ik_success_method' => 'POST'
 			,'ik_fail_method' => 'POST'
 			,'ik_payment_amount' => $this->amountS()
-			,'ik_payment_desc' => $this->getTransactionDescription()
+			,'ik_payment_desc' => $this->description()
 			,'ik_payment_id' => $this->orderIId()
 			,'ik_paysystem_alias' => ''
 			,'ik_shop_id' => $this->shopId()

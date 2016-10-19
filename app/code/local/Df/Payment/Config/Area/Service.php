@@ -290,7 +290,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	 * @used-by
 	 * @return string
 	 */
-	public function getTransactionDescription() {
+	public function description() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $domain */
 			$domain = df_store_domain($this->store());

@@ -1,4 +1,5 @@
 <?php
+use Df_Payment_Model_Method_WithRedirect as MethodR;
 abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request {
 	/**
 	 * @abstract
@@ -26,17 +27,18 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	 */
 	protected function currencyCode() {return $this->configS()->getCurrencyCodeInServiceFormat();}
 
-	/** @return string */
-	protected function getTransactionDescription() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = str_replace(
-				array_keys($this->getTransactionDescriptionParams())
-				,array_values($this->getTransactionDescriptionParams())
-				,$this->configS()->getTransactionDescription()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * @override
+	 * @see Df_Payment_Model_Request::description()
+	 * @return string
+	 */
+	protected function description() {return dfc($this, function() {return
+		str_replace(
+			array_keys($this->descriptionParams())
+			,array_values($this->descriptionParams())
+			,$this->configS()->description()
+		)
+	;});}
 
 	/**
 	 * @used-by Df_Assist_Model_Request_Payment::_params()
@@ -45,52 +47,36 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	protected function email() {return $this->order()->getCustomerEmail();}
 
 	/** @return string */
-	public function getCustomerIpAddress() {
-		return !df_controller() ? '' : df_controller()->getRequest()->getClientIp();
-	}
+	public function getCustomerIpAddress() {return
+		!df_controller() ? '' : df_controller()->getRequest()->getClientIp()
+	;}
 
 	/** @return string */
-	protected function getCustomerNameFull() {
-		return df_ccc(' '
-			,$this->order()->getCustomerLastname()
-			,$this->order()->getCustomerFirstname()
-			,$this->order()->getCustomerMiddlename()
-		);
-	}
+	protected function getCustomerNameFull() {return df_cc_s(
+		$this->order()->getCustomerLastname()
+		,$this->order()->getCustomerFirstname()
+		,$this->order()->getCustomerMiddlename()
+	);}
 
 	/** @return string */
-	protected function urlCustomerReturn() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->method()->getCustomerReturnUrl($this->order());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function urlCustomerReturn() {return dfc($this, function() {return
+		$this->method()->getCustomerReturnUrl($this->order())
+	;});}
 
 	/**
-	 * @used-by getTransactionDescription
+	 * @used-by description
 	 * @return Zend_Uri_Http
 	 */
-	protected function getStoreUri() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Uri_Http $result */
-			$this->{__METHOD__} = Zend_Uri_Http::fromString(
-				$this->store()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getStoreUri() {return dfc($this, function() {return
+		Zend_Uri_Http::fromString($this->store()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB))
+	;});}
 
 	/** @return array(string => string) */
-	protected function getTransactionDescriptionParams() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				'{order.id}' => $this->order()->getIncrementId()
-				,'{shop.domain}' => $this->getStoreUri()->getHost()
-				,'{shop.name}' => $this->store()->getName()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function descriptionParams() {return dfc($this, function() {return [
+		'{order.id}' => $this->order()->getIncrementId()
+		,'{shop.domain}' => $this->getStoreUri()->getHost()
+		,'{shop.name}' => $this->store()->getName()
+	];});}
 
 	/**
 	 * @used-by Df_Assist_Model_Request_Payment::_params()
@@ -174,12 +160,9 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	 * @used-by Df_WebPay_Model_Request_Payment::_params()
 	 * @return string
 	 */
-	protected function urlConfirm() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::getUrl($this->method()->getCode() . '/confirm');
-		}
-		return $this->{__METHOD__};
-	}
+	protected function urlConfirm() {return dfc($this, function() {return
+		Mage::getUrl($this->method()->getCode() . '/confirm')
+	;});}
 
 	/**
 	 * @used-by city()
@@ -216,7 +199,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	 */
 	private function chopParams(array $params) {
 		/** @var array(string => mixed) $result */
-		$result = array();
+		$result = [];
 		foreach ($params as $paramName => $paramValue) {
 			/** @var string $paramName */
 			/** @var mixed $paramValue */
@@ -243,10 +226,10 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 
 	/**
 	 * @used-by Df_Payment_Model_Method_WithRedirect::getPaymentPageParams()
-	 * @param Df_Payment_Model_Method_WithRedirect $method
+	 * @param MethodR $method
 	 * @return array(string => string|int)
 	 */
-	public static function params(Df_Payment_Model_Method_WithRedirect $method) {
+	public static function params(MethodR $method) {
 		/** @var array(string => array(string => string|int)) */
 		static $cache;
 		/** @var string $key */

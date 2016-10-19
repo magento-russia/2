@@ -6,23 +6,23 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
 	 * @used-by Df_YandexMoney_Model_Request_Authorize::getParamsUnique()
-	 * @see Df_Payment_Model_Request_Payment::getTransactionDescription()
+	 * @see Df_Payment_Model_Request_Payment::description()
 	 * @return string
 	 */
-	public function getTransactionDescription() {return parent::getTransactionDescription();}
+	public function description() {return parent::description();}
 
 	/**
 	 * @used-by Df_YandexMoney_Model_Request_Authorize::getParamsUnique()
 	 * @return string
 	 */
-	public function getTransactionDescriptionForShop() {
+	public function descriptionForShop() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				!$this->configS()->getTransactionDescriptionForShop()
-				? $this->getTransactionDescription()
+				!$this->configS()->descriptionForShop()
+				? $this->description()
 				: strtr(
-					$this->configS()->getTransactionDescriptionForShop()
-					,$this->getTransactionDescriptionParams()
+					$this->configS()->descriptionForShop()
+					,$this->descriptionParams()
 				)
 			;
 		}
@@ -38,8 +38,8 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				str_replace(
-					array_keys($this->getTransactionDescriptionParams())
-					,array_values($this->getTransactionDescriptionParams())
+					array_keys($this->descriptionParams())
+					,array_values($this->descriptionParams())
 					,$this->configS()->getTransactionTag()
 				)
 			;
@@ -69,9 +69,9 @@ class Df_YandexMoney_Model_Request_Payment extends Df_Payment_Model_Request_Paym
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getTransactionDescriptionParams() {
+	protected function descriptionParams() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_merge(parent::getTransactionDescriptionParams(), array(
+			$this->{__METHOD__} = array_merge(parent::descriptionParams(), array(
 				'{website.domain}' => $this->getStoreUri()->getHost()
 				,'{website.name}' => $this->store()->getWebsite()->getName()
 				,'{website.code}' => $this->store()->getWebsite()->getCode()

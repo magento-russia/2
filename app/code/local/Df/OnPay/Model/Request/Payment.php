@@ -14,7 +14,7 @@ class Df_OnPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		return array(
 			self::REQUEST_VAR__CUSTOMER__EMAIL => $this->email()
 			,self::REQUEST_VAR__ORDER_AMOUNT => df_h()->onPay()->priceToString($this->amount())
-			,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+			,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
 			,self::REQUEST_VAR__ORDER_CURRENCY =>
 				$this->configS()->getCurrencyCodeInServiceFormat()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()

@@ -24,7 +24,7 @@ class Df_LiqPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 			,'amount' => $this->amountS()
 			// Раньше LiqPay запрещал кириллицу в описании платежа,
 			// но теперь, вроде, разрешает.
-			,'description' => $this->getTransactionDescription()
+			,'description' => $this->description()
 			,'currency' => $this->currencyCode()
 			,'order_id' => $this->orderIId()
 			,'merchant_id' => $this->shopId()

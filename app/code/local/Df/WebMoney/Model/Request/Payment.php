@@ -16,7 +16,7 @@ class Df_WebMoney_Model_Request_Payment extends Df_Payment_Model_Request_Payment
 			,self::REQUEST_VAR__HTTP_METHOD__RETURN_OK => self::REQUEST_VALUE__HTTP_METHOD_POST
 			,self::REQUEST_VAR__HTTP_METHOD__RETURN_NO => self::REQUEST_VALUE__HTTP_METHOD_POST
 			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
-			,self::REQUEST_VAR__ORDER_COMMENT => base64_encode($this->getTransactionDescription())
+			,self::REQUEST_VAR__ORDER_COMMENT => base64_encode($this->description())
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
 			,self::REQUEST_VAR__URL_CONFIRM => $this->urlConfirm()

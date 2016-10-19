@@ -32,7 +32,7 @@ class Df_IPay_Action_GetPaymentAmount extends Df_IPay_Action_Abstract {
 			)
 			,'Amount' => array('Debt' => $this->getRequestPayment()->amount()->getAsInteger())
 			,'Address' => array('City' => $this->getRequestPayment()->city())
-			,'Info' => array('InfoLine' => $this->getRequestPayment()->getTransactionDescription())
+			,'Info' => array('InfoLine' => $this->getRequestPayment()->description())
 		)));
 	}
 

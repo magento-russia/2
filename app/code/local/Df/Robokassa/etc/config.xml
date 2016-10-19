@@ -75,12 +75,12 @@
 				</currencies>
 				<production>
 					<url>
-						<payment_page>https://merchant.roboxchange.com/Index.aspx</payment_page>
+						<payment_page>https://auth.robokassa.ru/Merchant/Index.aspx</payment_page>
 					</url>
 				</production>
 				<test>
 					<url>
-						<payment_page>http://test.robokassa.ru/Index.aspx</payment_page>
+						<payment_page>https://auth.robokassa.ru/Merchant/Index.aspx</payment_page>
 					</url>
 				</test>
 				<request>

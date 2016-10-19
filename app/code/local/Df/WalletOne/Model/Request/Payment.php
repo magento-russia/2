@@ -15,8 +15,8 @@ class Df_WalletOne_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionDescription() {
-		return 'BASE64:' . base64_encode(parent::getTransactionDescription());
+	public function description() {
+		return 'BASE64:' . base64_encode(parent::description());
 	}
 
 	/** @return array(string => string|int) */
@@ -52,7 +52,7 @@ class Df_WalletOne_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
 				self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
-				,self::REQUEST_VAR__ORDER_COMMENT => $this->getTransactionDescription()
+				,self::REQUEST_VAR__ORDER_COMMENT => $this->description()
 				,self::REQUEST_VAR__ORDER_CURRENCY =>
 					$this->configS()->getCurrencyCodeInServiceFormat()
 				,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()

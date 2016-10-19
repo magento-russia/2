@@ -25,7 +25,7 @@ class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 		$result = array(
 			'*scart' => ''
 			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
-			,self::REQUEST_VAR__SHOP_NAME => $this->getTransactionDescription()
+			,self::REQUEST_VAR__SHOP_NAME => $this->description()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__ORDER_CURRENCY =>
 				$this->configS()->getCurrencyCodeInServiceFormat()

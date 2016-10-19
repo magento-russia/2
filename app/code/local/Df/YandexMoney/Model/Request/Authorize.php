@@ -24,8 +24,8 @@ class Df_YandexMoney_Model_Request_Authorize extends Df_YandexMoney_Model_Reques
 			 * http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
 			 */
 			, $this->getAmountFieldName() => $this->amountS()
-			, 'comment' => $this->getRequestPayment()->getTransactionDescription()
-			, 'message' => $this->getRequestPayment()->getTransactionDescriptionForShop()
+			, 'comment' => $this->getRequestPayment()->description()
+			, 'message' => $this->getRequestPayment()->descriptionForShop()
 			, 'label' => $this->getRequestPayment()->getTransactionTag()
 		);
 	}
