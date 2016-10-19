@@ -130,9 +130,7 @@ class Df_PageCache_Model_Cookie extends Mage_Core_Model_Cookie
 	 */
 	public function updateCustomerRatesCookie()
 	{
-		/** @var $taxConfig Mage_Tax_Model_Config */
-		$taxConfig = Mage::getSingleton('tax/config');
-		if ($taxConfig->getPriceDisplayType() > 1) {
+		if (df_tax_c()->getPriceDisplayType() > 1) {
 			/** @var $taxCalculationModel Mage_Tax_Model_Calculation */
 			$taxCalculationModel = Mage::getSingleton('tax/calculation');
 			$request = $taxCalculationModel->getRateRequest();

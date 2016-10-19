@@ -47,12 +47,13 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @used-by renderCell_value()
 	 * @param string $value
 	 * @param bool $useColspan [optional]
+	 * @param int $colspanAdd [optional]
 	 * @return string
 	 */
-	private function cell($value, $useColspan = false) {return
+	private function cell($value, $useColspan = false, $colspanAdd = 0) {return
 		df_tag('td', [
 			'class' => 'a-right'
-			,'colspan' => $useColspan ? $this->getColspan() : null
+			,'colspan' => $useColspan ? $this->getColspan() + $colspanAdd : null
 			, 'style' => $this->getStyle()
 		], df_tag('strong', [], $value));
 	}
@@ -72,7 +73,7 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @return string
 	 */
 	private function cell_value($value) {return
-		$this->cell(df_mage()->checkoutHelper()->formatPrice($value), $useColspan = false)
+		$this->cell(df_mage()->checkoutHelper()->formatPrice($value))
 	;}
 
 	/**
@@ -82,8 +83,30 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	private function needShowTax() {return
 		parent::includeTax()
 		&& $this->getTotalExclTax() >= 0
-		&& (!$this->singleTax() || VAT::s()->enabled() && VAT::s()->show())
+		&& (
+			// 2016-18-19
+			// Если налогов несколько (не только НДС)
+			!$this->singleTax()
+			// 2016-18-19
+			// Если магазин является плательщиком НДС внутри страны и хочет показывать НДС.
+			|| VAT::s()->enabled() && VAT::s()->show()
+			// 2016-18-19
+			// Если налог только один (НДС), имеет нулевую ставку либо не применяется
+			// и покупатель явно хочет это показать.
+			|| $this->needShowZeroVAT()
+		)
 	;}
+
+	/**
+	 * 2016-10-19
+	 * @usec-by needShowTax()
+	 * @return bool
+	 */
+	private function needShowZeroVAT() {return dfc($this, function() {return
+		$this->singleTax()
+		&& !$this->singleTax()->getValue()
+		&& df_tax_c()->displayCartZeroTax($this->getStore())
+	;});}
 
 	/**
 	 * @used-by _toHtml()
@@ -101,7 +124,9 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @return string
 	 */
 	private function rowVAT() {return
-		$this->row('Including VAT', $this->singleTax()->getValue(), 'df-vat')
+		!$this->needShowZeroVAT()
+		? $this->row('Including VAT', $this->singleTax()->getValue(), 'df-vat')
+		: df_tag('tr', ['class' => 'df-vat'], $this->cell(df_mage()->taxHelper()->__('No VAT'), true, 1))
 	;}
 
 	/** @return Df_Sales_Model_Quote_Address_Total|Mage_Sales_Model_Quote_Address_Total|null */
