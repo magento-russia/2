@@ -11,7 +11,7 @@ class Df_Tax_M extends Df_Core_Model {
 		/** @var array(string => array(string => int)) $cache */
 		static $cache;
 		/** @var string $iso2 */
-		$iso2 = df_shop_iso2(df_state()->getStoreProcessed());
+		$iso2 = df_store_iso2(df_state()->getStoreProcessed());
 		/** @var string $rateS */
 		$rateS = (string)$rate;
 		if (!isset($cache[$iso2][$rateS])) {

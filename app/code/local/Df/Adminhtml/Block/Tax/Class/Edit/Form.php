@@ -22,7 +22,7 @@ class Df_Adminhtml_Block_Tax_Class_Edit_Form extends Mage_Adminhtml_Block_Tax_Cl
 		/** @var string $value */
 		$value = $class[Df_Tax_Model_Class::P__ISO2];
 		if (!$value) {
-			$value = df_shop_iso2('general/store_information/merchant_country');
+			$value = df_store_iso2('general/store_information/merchant_country');
 		}
 		$fieldset->addField(Df_Tax_Model_Class::P__ISO2, 'select', array(
 			'name'  => Df_Tax_Model_Class::P__ISO2

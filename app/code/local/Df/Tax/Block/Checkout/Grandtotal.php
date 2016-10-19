@@ -1,4 +1,5 @@
 <?php
+use Df_Accounting_Settings_Vat as VAT;
 /**
  * @method int|null getColspan()
  * @see Mage_Checkout_Block_Cart_Totals::renderTotal():
@@ -33,9 +34,8 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 * @return string
 	 */
 	protected function _toHtml() {return
-		$this->includeTax() && $this->getTotalExclTax() >= 0
+		$this->needShowTax()
 		? df_cc_n(
-			//$this->row('Grand Total Excl. Tax', $this->getTotalExclTax())
 			$this->row('Grand Total Incl. Tax', $this->getTotal()->getValue())
 			,$this->singleTax() ? $this->rowVAT() : $this->renderTotals('taxes', $this->getColspan())
 		)
@@ -73,6 +73,16 @@ class Df_Tax_Block_Checkout_Grandtotal extends Mage_Tax_Block_Checkout_Grandtota
 	 */
 	private function cell_value($value) {return
 		$this->cell(df_mage()->checkoutHelper()->formatPrice($value), $useColspan = false)
+	;}
+
+	/**
+	 * 2016-10-19
+	 * @return bool
+	 */
+	private function needShowTax() {return
+		parent::includeTax()
+		&& $this->getTotalExclTax() >= 0
+		&& (!$this->singleTax() || VAT::s()->enabled() && VAT::s()->show())
 	;}
 
 	/**

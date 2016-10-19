@@ -1,4 +1,6 @@
 <?php
+use Mage_Core_Helper_Data as H;
+
 /**
  * 2015-02-04
  * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $store = null,
@@ -107,6 +109,25 @@ function df_store_domain($store = null) {return df_store_uri($store)->getHost();
  * @throws Mage_Core_Model_Store_Exception
  */
 function df_store_id($store = null) {return df_store($store)->getId();}
+
+/**
+ * 2015-04-14
+ * @used-by Df_Tax_Model_Resource_Class_Collection::filterByShopCountry()
+ * @used-by Df_Tax_Model_Resource_Class_Collection::filterByShopCountry()
+ * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
+ * @return string|null
+ * 
+ * 2015-08-09
+ * Константа @see Mage_Core_Helper_Data::XML_PATH_MERCHANT_COUNTRY_CODE
+ * отсутствует в Magento CE 1.4.0.1:
+ * https://github.com/OpenMage/magento-mirror/blob/1.4.0.1/app/code/core/Mage/Core/Helper/Data.php
+ * 
+ * 2016-10-19
+ * Magento CE 1.4.0.1 больше не поддерживаем.
+ */
+function df_store_iso2($store = null) {return
+	Mage::getStoreConfig(H::XML_PATH_MERCHANT_COUNTRY_CODE, df_store($store))
+;}
 
 /**
  * 2015-03-19
