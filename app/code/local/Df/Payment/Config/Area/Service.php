@@ -1,13 +1,12 @@
 <?php
+use Df_Sales_Model_Order as O;
 class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	/**
-	 * @param Df_Sales_Model_Order|Mage_Sales_Model_Order $order
+	 * @param Mage_Sales_Model_Order|O $order
 	 * @param float|string $amountInOrderCurrency
 	 * @return Df_Core_Model_Money
 	 */
-	public function convertAmountFromOrderCurrencyToServiceCurrency(
-		Df_Sales_Model_Order $order, $amountInOrderCurrency
-	) {
+	public function convertAmountFromOrderCurrencyToServiceCurrency(O $order, $amountInOrderCurrency) {
 		return $this->convertAmountToServiceCurrency(
 			$order->getOrderCurrency(), $amountInOrderCurrency
 		);
@@ -142,22 +141,21 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	}
 
 	/**
-	 * @param Df_Sales_Model_Order $order
+	 * Если вызов данного метода происходит
+	 * при формировании запроса к платёжной системе,
+	 * то поле total_due заказа непусто, и используем его.
+	 *
+	 * Если же вызов данного метода происходит в других ситуациях
+	 * (например, при просмотре формы ПД-4), то поле total_due пусто,
+	 * и используем поле grand_total.
+	 *
+	 * Может, всегда использовать grand_total?
+	 *
+	 * @param O $order
 	 * @return Df_Core_Model_Money
 	 */
-	public function getOrderAmountInServiceCurrency(Df_Sales_Model_Order $order) {
-		/**
-		 * Если вызов данного метода происходит
-		 * при формировании запроса к платёжной системе,
-		 * то поле total_due заказа непусто, и используем его.
-		 *
-		 * Если же вызов данного метода происходит в других ситуациях
-		 * (например, при просмотре формы ПД-4), то поле total_due пусто,
-		 * и используем поле grand_total.
-		 *
-		 * Может, всегда использовать grand_total?
-		 */
-		return $this->convertAmountFromOrderCurrencyToServiceCurrency(
+	public function getOrderAmountInServiceCurrency(O $order) {return
+		$this->convertAmountFromOrderCurrencyToServiceCurrency(
 			$order
 			,(double)(!is_null($order->getTotalDue()) ? $order->getTotalDue() : $order->getGrandTotal())
 		);
@@ -268,10 +266,10 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	}
 
 	/**
-	 * @param Df_Sales_Model_Order $order
+	 * @param O $order
 	 * @return Df_Core_Model_Money
 	 */
-	public function geShippingAmountInServiceCurrency(Df_Sales_Model_Order $order) {
+	public function geShippingAmountInServiceCurrency(O $order) {
 		return $this->convertAmountFromOrderCurrencyToServiceCurrency(
 			$order, (double)($order->getShippingAmount())
 		);
