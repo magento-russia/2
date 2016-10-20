@@ -7,17 +7,11 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function checkPaymentAmount() {
 		if (
-				$this->getRequestValuePaymentAmount()->getAsInteger()
+				$this->rAmount()->getAsInteger()
 			!==
 				$this->getPaymentAmountFromOrder()->getAsInteger()
 		) {
-			df_error(
-				$this->getMessage(self::CONFIG_KEY__MESSAGE__INVALID__PAYMENT_AMOUNT)
-				,$this->getPaymentAmountFromOrder()->getAsInteger()
-				,$this->configS()->getCurrencyCode()
-				,$this->getRequestValuePaymentAmount()->getAsInteger()
-				,$this->configS()->getCurrencyCode()
-			);
+			$this->errorInvalidAmount();
 		}
 	}
 
@@ -41,7 +35,7 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			 * но EasyPay присылает его в формате с двумя знаками после запятой.
 			 * Например: «103.00», а не «103».
 			 *
-			 * Поэтому не используем $this->getRequestValuePaymentAmount()->getAsInteger()
+			 * Поэтому не используем $this->rAmount()->getAsInteger()
 			 */
 			$this->getRequest()->getParam('sum')
 			,$this->getRequestValueShopId()

@@ -17,17 +17,11 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function checkPaymentAmount() {
 		if (
-				$this->getRequestValuePaymentAmount()->getAsInteger()
+				$this->rAmount()->getAsInteger()
 			!==
 				$this->getPaymentAmountFromOrder()->getAsInteger()
 		) {
-			df_error(
-				$this->getMessage(self::CONFIG_KEY__MESSAGE__INVALID__PAYMENT_AMOUNT)
-				,$this->getPaymentAmountFromOrder()->getAsInteger()
-				,$this->configS()->getCurrencyCode()
-				,$this->getRequestValuePaymentAmount()->getAsInteger()
-				,$this->configS()->getCurrencyCode()
-			);
+			$this->errorInvalidAmount();
 		}
 	}
 
@@ -46,8 +40,8 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
 			$this->getRequestValueServicePaymentDate()
-			,$this->getRequestValuePaymentCurrencyCode()
-			,$this->getRequestValuePaymentAmount()->getAsInteger()
+			,$this->rCurrencyC()
+			,$this->rAmount()->getAsInteger()
 			,$this->getRequest()->getParam('payment_method')
 			,$this->getRequest()->getParam('order_id')
 			,$this->getRequestValueOrderIncrementId()

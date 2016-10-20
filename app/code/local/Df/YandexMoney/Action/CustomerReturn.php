@@ -66,7 +66,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 			$this->order()->setState(
 				Mage_Sales_Model_Order::STATE_PROCESSING
 				,Mage_Sales_Model_Order::STATE_PROCESSING
-				,df_sprintf($this->getMessage(self::CONFIG_KEY__MESSAGE__SUCCESS), $invoice->getIncrementId())
+				,df_sprintf($this->messageSuccess(), $invoice->getIncrementId())
 				,true
 			);
 			$this->order()->save();

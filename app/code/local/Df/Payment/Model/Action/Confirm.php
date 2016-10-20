@@ -1,4 +1,5 @@
 <?php
+use Mage_Sales_Model_Order_Invoice as Invoice;
 abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_Abstract {
 	/**
 	 * @abstract
@@ -31,18 +32,12 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 				$this->needCheckPaymentAmount()
 			&&
 				(
-						$this->getRequestValuePaymentAmount()->getAsString()
+						$this->rAmount()->getAsString()
 					!==
 						$this->getPaymentAmountFromOrder()->getAsString()
 				)
 		) {
-			df_error(
-				$this->getMessage(self::CONFIG_KEY__MESSAGE__INVALID__PAYMENT_AMOUNT)
-				,$this->getPaymentAmountFromOrder()->getAsString()
-				,$this->configS()->getCurrencyCode()
-				,$this->getRequestValuePaymentAmount()->getAsString()
-				,$this->configS()->getCurrencyCode()
-			);
+			$this->errorInvalidAmount();
 		}
 	}
 
@@ -54,10 +49,10 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		if (!df_t()->areEqualCI(
 			$this->getSignatureFromOwnCalculations(), $this->getRequestValueSignature()
 		)) {
-			df_error($this->getMessage(self::CONFIG_KEY__MESSAGE__INVALID__SIGNATURE), array(
+			df_error($this->message('invalid/signature'), [
 				'{полученная подпись}' => $this->getRequestValueSignature()
 				,'{ожидаемая подпись}' => $this->getSignatureFromOwnCalculations()
-			));
+			]);
 		}
 	}
 
@@ -70,15 +65,41 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 */
 	protected function getContentType() {return $this->const_('response/content-type');}
 
-	/**
-	 * @param string $configKey
+	/**           
+	 * 2016-10-20            
+	 * @used-by checkPaymentAmount()
+	 * @used-by Df_EasyPay_Action_Confirm::checkPaymentAmount()  
+	 * @used-by Df_WebPay_Action_Confirm::checkPaymentAmount() 
+	 * @throws Df\Core\Exception
+	 */
+	protected function errorInvalidAmount() {
+		df_error(
+			$this->message('invalid/payment-amount')
+			,$this->getPaymentAmountFromOrder()->getAsString()
+			,$this->configS()->getCurrencyCode()
+			,$this->rAmount()->getAsString()
+			,$this->configS()->getCurrencyCode()
+		);		
+	}
+	
+	/**                          
+	 * @used-by checkSignature() 
+	 * @used-by errorInvalidAmount()
+	 * @used-by messageSuccess()
+	 * @param string $key
 	 * @return string
 	 */
-	protected function getMessage($configKey) {
-		df_param_string($configKey, 0);
-		return str_replace('\n', "<br/>", $this->const_($configKey));
-	}
+	private function message($key) {return str_replace('\n', "<br/>", $this->const_('message/' . $key));}
 
+	/**
+	 * 2016-10-20
+	 * @param Invoice $invoice
+	 * @return string
+	 */
+	protected function messageSuccess(Invoice $invoice) {return
+		df_sprintf($this->message('success'), $invoice->getIncrementId())
+	;}	
+	
 	/** @return Df_Core_Model_Money */
 	protected function getPaymentAmountFromOrder() {
 		if (!isset($this->{__METHOD__})) {
@@ -99,45 +120,31 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	/** @return Df_Payment_Config_Area_Service */
 	protected function configS() {return $this->method()->configS();}
 
-	/** @return string */
-	protected function getRequestKeyCustomerEmail() {
-		return $this->const_(self::CONFIG_KEY__CUSTOMER__EMAIL);
-	}
+	/**
+	 * @used-by rAmountS()
+	 * @used-by Df_PayOnline_Action_Confirm::getSignatureFromOwnCalculations()
+	 * @return string
+	 */
+	protected function rkAmount() {return $this->const_('payment/amount');}
+
+	/**
+	 * @used-by Df_PayOnline_Action_Confirm::getSignatureFromOwnCalculations()
+	 * @return string
+	 */
+	protected function rkCurrency() {return $this->const_('payment/currency-code');}
 
 	/** @return string */
-	protected function getRequestKeyCustomerName() {
-		return $this->const_(self::CONFIG_KEY__CUSTOMER__NAME);
-	}
+	protected function getRequestKeyPaymentTest() {return $this->const_('payment/test');}
 
 	/** @return string */
-	protected function getRequestKeyCustomerPhone() {
-		return $this->const_(self::CONFIG_KEY__CUSTOMER__PHONE);
-	}
+	protected function getRequestKeyServicePaymentDate() {return
+		$this->const_('payment_service/payment/date')
+	;}
 
 	/** @return string */
-	protected function getRequestKeyPaymentAmount() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT__AMOUNT);
-	}
-
-	/** @return string */
-	protected function getRequestKeyPaymentCurrencyCode() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT__CURRENCY_CODE);
-	}
-
-	/** @return string */
-	protected function getRequestKeyPaymentTest() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT__TEST);
-	}
-
-	/** @return string */
-	protected function getRequestKeyServicePaymentDate() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__DATE);
-	}
-
-	/** @return string */
-	protected function getRequestKeyServicePaymentId() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__ID);
-	}
+	protected function getRequestKeyServicePaymentId() {return
+		$this->const_('payment_service/payment/id')
+	;}
 
 	/** @return string */
 	protected function getRequestKeyServicePaymentState() {return
@@ -151,28 +158,13 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	protected function getRequestKeySignature() {return $this->const_('request/signature');}
 
 	/** @return string */
-	protected function getRequestValueCustomerEmail() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyCustomerEmail());
-		df_result_string($result);
-		return $result;
-	}
+	protected function getRequestValueCustomerEmail() {return $this->paramC('customer/email');}
 
 	/** @return string */
-	protected function getRequestValueCustomerName() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyCustomerName());
-		df_result_string($result);
-		return $result;
-	}
+	protected function getRequestValueCustomerName() {return $this->paramC('customer/name');}
 
 	/** @return string */
-	protected function getRequestValueOrderCustomerPhone() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyCustomerPhone());
-		df_result_string($result);
-		return $result;
-	}
+	protected function getRequestValueOrderCustomerPhone() {return $this->paramC('customer/phone');}
 
 	/** @return string */
 	protected function getRequestValueOrderIncrementId() {
@@ -183,22 +175,18 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	}
 
 	/** @return Df_Core_Model_Money */
-	protected function getRequestValuePaymentAmount() {
+	protected function rAmount() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_money(df_float($this->getRequestValuePaymentAmountAsString()));
+			$this->{__METHOD__} = df_money(df_float($this->rAmountS()));
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
-	protected function getRequestValuePaymentAmountAsString() {
-		return $this->getRequest()->getParam($this->getRequestKeyPaymentAmount());
-	}
+	protected function rAmountS() {return $this->param($this->rkAmount());}
 
 	/** @return string */
-	protected function getRequestValuePaymentCurrencyCode() {
-		return $this->getRequest()->getParam($this->getRequestKeyPaymentCurrencyCode());
-	}
+	protected function rCurrencyC() {return $this->param($this->rkCurrency());}
 
 	/** @return string */
 	protected function getRequestValuePaymentTest() {
@@ -416,9 +404,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 				$this->order()->setState(
 					Mage_Sales_Model_Order::STATE_PROCESSING
 					,Mage_Sales_Model_Order::STATE_PROCESSING
-					,df_sprintf(
-						$this->getMessage(self::CONFIG_KEY__MESSAGE__SUCCESS), $invoice->getIncrementId()
-					)
+					,$this->messageSuccess($invoice)
 					,true
 				);
 				$this->order()->save();
@@ -550,23 +536,25 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	}
 
 	/**
+	 * 2016-10-20
+	 * @param string $key
+	 * @param string|null $d [optional]
+	 * @return string
+	 */
+	private function param($key, $d = null) {return $this->getRequest()->getParam($key, $d);}
+
+	/**
+	 * 2016-10-20
+	 * @param string $key
+	 * @param string|null $d [optional]
+	 * @return string
+	 */
+	private function paramC($key, $d = null) {return $this->param($this->const_($key), $d);}
+
+	/**
 	 * @used-by logExceptionToOrderHistory()
 	 * @used-by order()
 	 * @var Df_Sales_Model_Order
 	 */
 	private $_order = null;
-
-	const CONFIG_KEY__ADMIN__ORDER__INCREMENT_ID = 'admin/order/increment-id';
-	const CONFIG_KEY__CUSTOMER__EMAIL = 'customer/email';
-	const CONFIG_KEY__CUSTOMER__NAME = 'customer/name';
-	const CONFIG_KEY__CUSTOMER__PHONE = 'customer/phone';
-	const CONFIG_KEY__MESSAGE__INVALID__ORDER = 'message/invalid/order';
-	const CONFIG_KEY__MESSAGE__INVALID__PAYMENT_AMOUNT = 'message/invalid/payment-amount';
-	const CONFIG_KEY__MESSAGE__INVALID__SIGNATURE = 'message/invalid/signature';
-	const CONFIG_KEY__MESSAGE__SUCCESS = 'message/success';
-	const CONFIG_KEY__PAYMENT__AMOUNT = 'payment/amount';
-	const CONFIG_KEY__PAYMENT__CURRENCY_CODE = 'payment/currency-code';
-	const CONFIG_KEY__PAYMENT__TEST = 'payment/test';
-	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__DATE = 'payment_service/payment/date';
-	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__ID = 'payment_service/payment/id';
 }

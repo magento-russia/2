@@ -37,7 +37,7 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			 * Поэтому для подписи надо использовать размер заказа в том формате,
 			 * как её передает Робокасса («0.010000»)
 			 */
-			$this->getRequestValuePaymentAmountAsString()
+			$this->rAmountS()
 			,$this->getRequestValueOrderIncrementId()
 			,$this->getResponsePassword()
 		)));

@@ -24,14 +24,14 @@ class Df_PayOnline_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function getSignatureFromOwnCalculations() {
 		/** @var array(string => mixed) $signatureParams */
-		$signatureParams = array(
+		$signatureParams = [
 			$this->getRequestKeyServicePaymentDate() => $this->getRequestValueServicePaymentDate()
 			,$this->getRequestKeyServicePaymentId() => $this->getRequestValueServicePaymentId()
 			,$this->getRequestKeyOrderIncrementId() => $this->getRequestValueOrderIncrementId()
-			,$this->getRequestKeyPaymentAmount() => $this->getRequestValuePaymentAmountAsString()
-			,$this->getRequestKeyPaymentCurrencyCode() => $this->getRequestValuePaymentCurrencyCode()
+			,$this->rkAmount() => $this->rAmountS()
+			,$this->rkCurrency() => $this->rCurrencyC()
 			,'PrivateSecurityKey' => $this->getResponsePassword()
-		);
+		];
 		/** @var string $result */
 		$result = md5(implode(
 			Df_PayOnline_Helper_Data::SIGNATURE_PARTS_SEPARATOR

@@ -50,8 +50,8 @@ class Df_Moneta_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			$this->getRequestValueShopId()
 			,$this->getRequestValueOrderIncrementId()
 			,$this->getRequestValueServicePaymentId()
-			,$this->getRequestValuePaymentAmountAsString()
-			,$this->getRequestValuePaymentCurrencyCode()
+			,$this->rAmountS()
+			,$this->rCurrencyC()
 			,$this->getRequestValuePaymentTest()
 			,$this->getResponsePassword()
 		);

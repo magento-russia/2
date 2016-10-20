@@ -45,8 +45,8 @@ class Df_Assist_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			,md5(df_c(
 				$this->getRequestValueShopId()
 				,$this->getRequestValueOrderIncrementId()
-				,$this->getRequestValuePaymentAmountAsString()
-				,$this->getRequestValuePaymentCurrencyCode()
+				,$this->rAmountS()
+				,$this->rCurrencyC()
 				,$this->getRequestValueServicePaymentState()
 			))
 		))));

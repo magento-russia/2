@@ -9,7 +9,7 @@ class Df_Core_Model_Money extends Df_Core_Model {
 	/** @return float */
 	public function getAsFixedFloat() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = round($this->getOriginalAsFloat(), 2);;
+			$this->{__METHOD__} = round($this->getOriginalAsFloat(), 2);
 		}
 		return $this->{__METHOD__};
 	}

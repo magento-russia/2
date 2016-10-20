@@ -41,10 +41,7 @@ class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
 			$this->order()->setState(
 				Mage_Sales_Model_Order::STATE_PROCESSING
 				,Mage_Sales_Model_Order::STATE_PROCESSING
-				,df_sprintf(
-					$this->getMessage(Df_Payment_Model_Action_Confirm::CONFIG_KEY__MESSAGE__SUCCESS)
-					,$invoice->getIncrementId()
-				)
+				,df_sprintf($this->getMessage('message/success'), $invoice->getIncrementId())
 				,true
 			);
 			$this->order()->save();

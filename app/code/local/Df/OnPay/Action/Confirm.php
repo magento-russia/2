@@ -108,8 +108,8 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			array_merge(
 				$signatureParams
 				,array(
-					$this->getRequestValuePaymentAmountAsString()
-					,$this->getRequestValuePaymentCurrencyCode()
+					$this->rAmountS()
+					,$this->rCurrencyC()
 					,$this->getResponsePassword()
 				)
 			)
@@ -159,8 +159,8 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			));
 		}
 		$signatureParams = array_merge($signatureParams, array(
-			$this->getRequestValuePaymentAmountAsString()
-			,$this->getRequestValuePaymentCurrencyCode()
+			$this->rAmountS()
+			,$this->rCurrencyC()
 			,$code
 			,$this->getResponsePassword()
 		));

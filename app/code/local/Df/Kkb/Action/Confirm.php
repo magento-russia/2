@@ -39,7 +39,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestValuePaymentAmountAsString() {
+	protected function rAmountS() {
 		return $this->getResponseAsObject()->getPaymentAmountInServiceCurrency()->getAsString();
 	}
 	

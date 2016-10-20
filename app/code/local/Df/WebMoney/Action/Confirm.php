@@ -36,7 +36,7 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		/** @var array $signatureParams */
 		$signatureParams = array(
 			$this->getRequestValueShopId()
-			,$this->getRequestValuePaymentAmountAsString()
+			,$this->rAmountS()
 			,$this->getRequestValueOrderIncrementId()
 			,$this->getRequestValueServicePaymentTest()
 			,$this->getRequest()->getParam('LMI_SYS_INVS_NO')

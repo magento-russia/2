@@ -54,9 +54,7 @@ class Df_IPay_Action_ConfirmPaymentByShop extends Df_IPay_Action_Abstract {
 				$this->getPaymentAmountFromOrder()->getAsInteger()
 		) {
 			df_error(
-				$this->getMessage(
-					Df_Payment_Model_Action_Confirm::CONFIG_KEY__MESSAGE__INVALID__PAYMENT_AMOUNT
-				)
+				$this->getMessage('message/invalid/payment-amount')
 				,$this->getPaymentAmountFromOrder()->getAsInteger()
 				,$this->configS()->getCurrencyCode()
 				,$this->getRequestParam_PaymentAmount()->getAsInteger()

@@ -23,7 +23,7 @@ class Df_Interkassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
 			$this->getRequestValueShopId()
-			,$this->getRequestValuePaymentAmountAsString()
+			,$this->rAmountS()
 			,$this->getRequestValueOrderIncrementId()
 			,$this->getRequest()->getParam('ik_paysystem_alias')
 			,$this->getRequest()->getParam('ik_baggage_fields')

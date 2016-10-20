@@ -30,8 +30,8 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestValuePaymentAmountAsString() {
-		return strval(df_float(parent::getRequestValuePaymentAmountAsString()) / 100);
+	protected function rAmountS() {
+		return strval(df_float(parent::rAmountS()) / 100);
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 		}
 		else {
 			$this->checkPaymentAmount();
-			if (810 !== df_nat($this->getRequestValuePaymentCurrencyCode())) {
+			if (810 !== df_nat($this->rCurrencyC())) {
 				df_error('Заказ был оплачен не в рублях');
 			}
 			/** @var Mage_Sales_Model_Order_Invoice $invoice */
@@ -105,10 +105,7 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 			$this->order()->setState(
 				Mage_Sales_Model_Order::STATE_PROCESSING
 				,Mage_Sales_Model_Order::STATE_PROCESSING
-				,df_sprintf(
-					$this->getMessage(self::CONFIG_KEY__MESSAGE__SUCCESS)
-					,$invoice->getIncrementId()
-				)
+				,$this->messageSuccess($invoice)
 				,true
 			);
 			$this->order()->save();
