@@ -377,6 +377,11 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @return void
 	 */
 	protected function _process() {
+		if (df_my()) {
+			/** @var string $module */
+			$module = df_module_name();
+			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty(df_request()));
+		}
 		/**
 		 * TODO Надо ли это здесь?
 		 * Ведь запрос платёжной системы к магазину не относится к сессии покупателя.

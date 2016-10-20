@@ -233,7 +233,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 		/** @var $this $i */
 		$i = df_ic(df_con($class, 'Model_Request_Payment'), __CLASS__);
 		$result = $i->preprocessParams($i->_params());
-		if (df_my_local()) {
+		if (df_my()) {
 			/** @var string $module */
 			$module = df_module_name($class);
 			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty($result));

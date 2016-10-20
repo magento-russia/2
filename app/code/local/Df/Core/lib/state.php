@@ -104,11 +104,27 @@ function df_my() {return dfcf(function() {return df_bool(dfa($_SERVER, 'DF_DEVEL
 function df_my_local() {return dfcf(function() {return df_my() && df_is_localhost();});}
 
 /**
- * @param string $key
- * @param string $default [optional]
- * @return string
+ * @param string|null $key [optional]
+ * @param string|null|callable $default [optional]
+ * @return string|array(string => string)
  */
-function df_request($key, $default = null) {return Mage::app()->getRequest()->getParam($key, $default);}
+function df_request($key = null, $default = null) {
+	/** @var string|array(string => string) $result */
+	if (is_null($key)) {
+		$result = df_request_o()->getParams();
+	}
+	else {
+		$result = df_request_o()->getParam($key);
+		$result = df_if1(is_null($result) || '' === $result, $default, $result);
+	}
+	return $result;
+}
+
+/**
+ * 2015-08-14
+ * @return Mage_Core_Controller_Request_Http
+ */
+function df_request_o() {return Mage::app()->getRequest();}
 
 /**
  * 2015-08-14
