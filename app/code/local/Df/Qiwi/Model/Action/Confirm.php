@@ -8,17 +8,17 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	public function updateBill($params) {
 		/**
 		 * Номер заказа надо указывать отдельным вызовом setParam,
-		 * потому что @see getRequestKeyShopId() уже будет использовать указанное значение
+		 * потому что @see rkShopId() уже будет использовать указанное значение
 		 */
-		$this->getRequest()->setParam($this->getRequestKeyOrderIncrementId(), dfo($params, 'txn'));
+		$this->getRequest()->setParam($this->rkOII(), dfo($params, 'txn'));
 		$this->getRequest()->setParams(array(
-			$this->getRequestKeyShopId() => dfo($params, 'login')
-			,$this->getRequestKeySignature() => dfo($params, 'password')
+			$this->rkShopId() => dfo($params, 'login')
+			,$this->rkSignature() => dfo($params, 'password')
 			/**
-			 * Df_Payment_Model_Action_Confirm::getRequestValueServicePaymentState
+			 * Df_Payment_Model_Action_Confirm::rState
 			 * должен вернуть строку
 			 */
-			,$this->getRequestKeyServicePaymentState() => strval(dfo($params, 'status'))
+			,$this->rkState() => strval(dfo($params, 'status'))
 		));
 		return 0;
 	}
@@ -28,7 +28,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->comment($this->getPaymentStateMessage(df_nat($this->getRequestValueServicePaymentState())));
+		$this->comment($this->getPaymentStateMessage(df_nat($this->rState())));
 	}
 
 	/**
@@ -36,14 +36,14 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'order_increment_id';}
+	protected function rkOII() {return 'order_increment_id';}
 
 	/**
 	 * @override
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {
+	protected function responseTextForError(Exception $e) {
 		return $this->getSoapServer()->getLastResponse();
 	}
 
@@ -51,16 +51,16 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {return $this->getSoapServer()->getLastResponse();}
+	protected function responseTextForSuccess() {return $this->getSoapServer()->getLastResponse();}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string $result */
 		$result = strtoupper(md5(df_c(
-			$this->adjustSignatureParamEncoding($this->getRequestValueOrderIncrementId())
+			$this->adjustSignatureParamEncoding($this->rOII())
 			,strtoupper(md5($this->adjustSignatureParamEncoding($this->getResponsePassword())))
 		)));
 		return $result;
@@ -71,7 +71,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return self::PAYMENT_STATE__PROCESSED === df_nat($this->getRequestValueServicePaymentState());
+		return self::PAYMENT_STATE__PROCESSED === df_nat($this->rState());
 	}
 
 	/**

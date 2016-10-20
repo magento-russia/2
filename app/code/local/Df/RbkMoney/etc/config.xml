@@ -155,25 +155,6 @@
 								<increment-id>orderId</increment-id>
 							</order>
 						</admin>
-						<customer>
-							<!--
-								Адрес электронной почты покупателя.
-								Df_Payment: не используется.
-								Df_RbkMoney: обязательный параметр.
-							-->
-							<email>userEmail</email>
-							<!--
-								Имя покупателя.
-								Df_Payment: не используется.
-								Df_RbkMoney: обязательный параметр.
-							-->
-							<name>userName</name>
-							<!--
-								Телефон покупателя.
-								Df_Payment: не используется.
-							-->
-							<phone></phone>
-						</customer>
 						<payment>
 							<!--
 								Размер платежа.

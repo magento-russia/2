@@ -16,18 +16,18 @@ class Df_PayOnline_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'OrderId';}
+	protected function rkOII() {return 'OrderId';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var array(string => mixed) $signatureParams */
 		$signatureParams = [
-			$this->getRequestKeyServicePaymentDate() => $this->getRequestValueServicePaymentDate()
-			,$this->getRequestKeyServicePaymentId() => $this->getRequestValueServicePaymentId()
-			,$this->getRequestKeyOrderIncrementId() => $this->getRequestValueOrderIncrementId()
+			$this->rkTime() => $this->rTime()
+			,$this->rkExternalId() => $this->rExternalId()
+			,$this->rkOII() => $this->rOII()
 			,$this->rkAmount() => $this->rAmountS()
 			,$this->rkCurrency() => $this->rCurrencyC()
 			,'PrivateSecurityKey' => $this->getResponsePassword()

@@ -6,7 +6,7 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
 		$this->order()->comment(
-			$this->getPaymentStateMessage(df_int($this->getRequestValueServicePaymentState()))
+			$this->getPaymentStateMessage(df_int($this->rState()))
 		);
 	}
 
@@ -19,7 +19,7 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		if (
 				$this->rAmount()->getAsInteger()
 			!==
-				$this->getPaymentAmountFromOrder()->getAsInteger()
+				$this->amountFromOrder()->getAsInteger()
 		) {
 			$this->errorInvalidAmount();
 		}
@@ -30,23 +30,23 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'site_order_id';}
+	protected function rkOII() {return 'site_order_id';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueServicePaymentDate()
+			$this->rTime()
 			,$this->rCurrencyC()
 			,$this->rAmount()->getAsInteger()
 			,$this->getRequest()->getParam('payment_method')
 			,$this->getRequest()->getParam('order_id')
-			,$this->getRequestValueOrderIncrementId()
-			,$this->getRequestValueServicePaymentId()
-			,$this->getRequestValueServicePaymentState()
+			,$this->rOII()
+			,$this->rExternalId()
+			,$this->rState()
 			,$this->getRequest()->getParam('rrn')
 			,$this->getResponsePassword()
 		);
@@ -59,7 +59,7 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function needInvoice() {
 		return in_array(
-			$this->getRequestValueServicePaymentState()
+			$this->rState()
 			,array(self::PAYMENT_STATE__AUTHORIZED, self::PAYMENT_STATE__COMPLETED)
 		);
 	}

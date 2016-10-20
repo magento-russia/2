@@ -9,7 +9,7 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		if (
 				$this->rAmount()->getAsInteger()
 			!==
-				$this->getPaymentAmountFromOrder()->getAsInteger()
+				$this->amountFromOrder()->getAsInteger()
 		) {
 			$this->errorInvalidAmount();
 		}
@@ -20,16 +20,16 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'order_mer_code';}
+	protected function rkOII() {return 'order_mer_code';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueOrderIncrementId()
+			$this->rOII()
 			,/**
 			 * Обратите внимание, что хотя размер платежа всегда является целым числом,
 			 * но EasyPay присылает его в формате с двумя знаками после запятой.
@@ -38,9 +38,9 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			 * Поэтому не используем $this->rAmount()->getAsInteger()
 			 */
 			$this->getRequest()->getParam('sum')
-			,$this->getRequestValueShopId()
+			,$this->rShopId()
 			,$this->getRequest()->getParam('card')
-			,$this->getRequestValueServicePaymentDate()
+			,$this->rTime()
 			,$this->getResponsePassword()
 		);
 		return md5(implode($signatureParams));

@@ -5,7 +5,7 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->comment($this->getPaymentStateMessage($this->getRequestValueServicePaymentState()));
+		$this->comment($this->getPaymentStateMessage($this->rState()));
 	}
 
 	/**
@@ -32,28 +32,28 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'pay_for';}
+	protected function rkOII() {return 'pay_for';}
 
 	/**
 	 * @override
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {
+	protected function responseTextForError(Exception $e) {
 		/** @var array(string => string|int) $responseParams */
 		$responseParams =
 			array_merge(
 				array(
 					'code' => 3
-					,$this->getRequestKeyOrderIncrementId() => $this->getRequestValueOrderIncrementId()
+					,$this->rkOII() => $this->rOII()
 					,'comment' => df_e(df_ets($e))
-					,$this->getRequestKeySignature() => $this->getResponseSignature(3)
+					,$this->rkSignature() => $this->getResponseSignature(3)
 				)
 				,!$this->needInvoice()
 				? array()
 				: array(
-					$this->getRequestKeyServicePaymentId() => $this->getRequestValueServicePaymentId()
-					,'order_id' => $this->getRequestValueOrderIncrementId()
+					$this->rkExternalId() => $this->rExternalId()
+					,'order_id' => $this->rOII()
 				)
 			)
 		;
@@ -67,21 +67,21 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {
+	protected function responseTextForSuccess() {
 		/** @var array(string => string|int) $responseParams */
 		$responseParams =
 			array_merge(
 				array(
 					'code' => 0
-					,$this->getRequestKeyOrderIncrementId() => $this->getRequestValueOrderIncrementId()
+					,$this->rkOII() => $this->rOII()
 					,'comment' => 'OK'
-					,$this->getRequestKeySignature() => $this->getResponseSignature(0)
+					,$this->rkSignature() => $this->getResponseSignature(0)
 				)
 				,!$this->needInvoice()
 				? array()
 				: array(
-					$this->getRequestKeyServicePaymentId() => $this->getRequestValueServicePaymentId()
-					,'order_id' => $this->getRequestValueOrderIncrementId()
+					$this->rkExternalId() => $this->rExternalId()
+					,'order_id' => $this->rOII()
 				)
 			)
 		;
@@ -95,14 +95,14 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueServicePaymentState()
-			,$this->getRequestValueOrderIncrementId()
+			$this->rState()
+			,$this->rOII()
 		);
 		if ($this->needInvoice()) {
-			$signatureParams[]= $this->getRequestValueServicePaymentId();
+			$signatureParams[]= $this->rExternalId();
 		}
 		$signatureParams =
 			array_merge(
@@ -125,7 +125,7 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return self::PAYMENT_STATE__CHECK !== $this->getRequestValueServicePaymentState();
+		return self::PAYMENT_STATE__CHECK !== $this->rState();
 	}
 
 	/**
@@ -149,13 +149,13 @@ class Df_OnPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		df_param_integer($code, 0);
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueServicePaymentState()
-			,$this->getRequestValueOrderIncrementId()
+			$this->rState()
+			,$this->rOII()
 		);
 		if ($this->needInvoice()) {
 			$signatureParams = array_merge($signatureParams, array(
-				$this->getRequestValueServicePaymentId()
-				,$this->getRequestValueOrderIncrementId()
+				$this->rExternalId()
+				,$this->rOII()
 			));
 		}
 		$signatureParams = array_merge($signatureParams, array(

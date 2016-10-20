@@ -21,7 +21,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {
+	protected function rkOII() {
 		// Номер заказа мы получаем не традиционным способом (по ключу в ассоциативном массиве),
 		// а через $this->getResponseAsObject()->getOrderIncrementId()
 		return 'отсутствует';
@@ -31,7 +31,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestValueOrderIncrementId() {
+	protected function rOII() {
 		return $this->getResponseAsObject()->getOrderIncrementId();
 	}
 	
@@ -56,13 +56,13 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return 0;}
+	protected function responseTextForError(Exception $e) {return 0;}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {return 0;}
+	protected function responseTextForSuccess() {return 0;}
 	
 	/**
 	 * Стандартная проверка подписи нам не нужна,
@@ -71,7 +71,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {df_should_not_be_here(); return null;}
+	protected function signatureOwn() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override

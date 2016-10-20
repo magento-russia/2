@@ -9,7 +9,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {
+	protected function rkOII() {
 		return Df_Payment_Model_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
 	}
 
@@ -17,7 +17,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {df_should_not_be_here(); return null;}
+	protected function signatureOwn() {df_should_not_be_here(); return null;}
 
 	/**
 	 * @override

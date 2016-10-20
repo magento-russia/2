@@ -6,7 +6,7 @@ class Df_LiqPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
 		parent::alternativeProcessWithoutInvoicing();
-		$this->comment($this->getPaymentStateMessage($this->getRequestValueServicePaymentState()));
+		$this->comment($this->getPaymentStateMessage($this->rState()));
 	}
 
 	/**
@@ -30,13 +30,13 @@ class Df_LiqPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'order_id';}
+	protected function rkOII() {return 'order_id';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string $result */
 		$result =
 			base64_encode(
@@ -63,7 +63,7 @@ class Df_LiqPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return self::PAYMENT_STATE__SUCCESS === $this->getRequestValueServicePaymentState();
+		return self::PAYMENT_STATE__SUCCESS === $this->rState();
 	}
 
 	/** @return array(string => string) */

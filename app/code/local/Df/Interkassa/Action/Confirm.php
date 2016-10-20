@@ -5,7 +5,7 @@ class Df_Interkassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->comment($this->getPaymentStateMessage($this->getRequestValueServicePaymentState()));
+		$this->comment($this->getPaymentStateMessage($this->rState()));
 	}
 
 	/**
@@ -13,22 +13,22 @@ class Df_Interkassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'ik_payment_id';}
+	protected function rkOII() {return 'ik_payment_id';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueShopId()
+			$this->rShopId()
 			,$this->rAmountS()
-			,$this->getRequestValueOrderIncrementId()
+			,$this->rOII()
 			,$this->getRequest()->getParam('ik_paysystem_alias')
 			,$this->getRequest()->getParam('ik_baggage_fields')
-			,$this->getRequestValueServicePaymentState()
-			,$this->getRequestValueServicePaymentId()
+			,$this->rState()
+			,$this->rExternalId()
 			,$this->getRequest()->getParam('ik_currency_exch')
 			,$this->getRequest()->getParam('ik_fees_payer')
 			,$this->getResponsePassword()
@@ -49,7 +49,7 @@ class Df_Interkassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return
 				$this->order()->canInvoice()
 			&&
-				self::PAYMENT_STATE__PAID === $this->getRequestValueServicePaymentState()
+				self::PAYMENT_STATE__PAID === $this->rState()
 		;
 	}
 

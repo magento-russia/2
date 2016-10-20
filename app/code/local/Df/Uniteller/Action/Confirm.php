@@ -6,7 +6,7 @@ class Df_Uniteller_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
 		$this->order()->comment(
-			$this->getPaymentStateMessage($this->getRequestValueServicePaymentState())
+			$this->getPaymentStateMessage($this->rState())
 		);
 	}
 
@@ -15,7 +15,7 @@ class Df_Uniteller_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'Order_ID';}
+	protected function rkOII() {return 'Order_ID';}
 
 	/**
 	 * После успешной оплаты картой Покупателя
@@ -43,11 +43,11 @@ class Df_Uniteller_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var array $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueOrderIncrementId()
-			,$this->getRequestValueServicePaymentState()
+			$this->rOII()
+			,$this->rState()
 			,$this->getResponsePassword()
 		);
 		return strtoupper(md5(implode($signatureParams)));
@@ -69,7 +69,7 @@ class Df_Uniteller_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				$this->order()->canInvoice()
 			&&
 				in_array(
-					$this->getRequestValueServicePaymentState()
+					$this->rState()
 					,array(self::PAYMENT_STATE__AUTHORIZED, self::PAYMENT_STATE__PAID)
 				)
 		;

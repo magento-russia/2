@@ -5,14 +5,14 @@ class Df_Assist_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'ordernumber';}
+	protected function rkOII() {return 'ordernumber';}
 
 	/**
 	 * @override
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {
+	protected function responseTextForError(Exception $e) {
 		return df_cc_n(
 			df_output()->getXmlHeader()
 			,"<pushpaymentresult firstcode='1' secondcode='0'></pushpaymentresult>"
@@ -23,13 +23,13 @@ class Df_Assist_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {
+	protected function responseTextForSuccess() {
 		return df_cc_n(
 			df_output()->getXmlHeader()
 			,"<pushpaymentresult firstcode='0' secondcode='0'>
 				<order>
-					<billnumber>{$this->getRequestValueServicePaymentId()}</billnumber>
-					<packetdate>{$this->getRequestValueServicePaymentDate()}</packetdate>
+					<billnumber>{$this->rExternalId()}</billnumber>
+					<packetdate>{$this->rTime()}</packetdate>
 				</order>
 			</pushpaymentresult>"
 		);
@@ -39,15 +39,15 @@ class Df_Assist_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		return strtoupper(md5(strtoupper(df_c(
 			md5($this->getResponsePassword())
 			,md5(df_c(
-				$this->getRequestValueShopId()
-				,$this->getRequestValueOrderIncrementId()
+				$this->rShopId()
+				,$this->rOII()
 				,$this->rAmountS()
 				,$this->rCurrencyC()
-				,$this->getRequestValueServicePaymentState()
+				,$this->rState()
 			))
 		))));
 	}

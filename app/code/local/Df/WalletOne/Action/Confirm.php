@@ -13,14 +13,14 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'WMI_PAYMENT_NO';}
+	protected function rkOII() {return 'WMI_PAYMENT_NO';}
 
 	/**
 	 * @override
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {
+	protected function responseTextForError(Exception $e) {
 		return 'WMI_RESULT=CANCEL&WMI_DESCRIPTION=' . urlencode(df_ets($e));
 	}
 
@@ -28,13 +28,13 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {return 'WMI_RESULT=OK';}
+	protected function responseTextForSuccess() {return 'WMI_RESULT=OK';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		return $this->getSignatureGenerator()->getSignature();
 	}
 
@@ -43,7 +43,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return 'accepted' === mb_strtolower($this->getRequestValueServicePaymentState());
+		return 'accepted' === mb_strtolower($this->rState());
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	protected function processOrderCanNotInvoice() {
 		// Единая Касса любит присылать повторные оповещения об оплате
 		$this->order()->comment('Единая Касса повторно прислала оповещение об оплате');
-		$this->getResponse()->setBody($this->getResponseTextForSuccess());
+		$this->getResponse()->setBody($this->responseTextForSuccess());
 		return $this;
 	}
 
@@ -67,7 +67,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				,Df_WalletOne_Model_Request_SignatureGenerator::P__SIGNATURE_PARAMS =>
 					array_diff_key(
 						$this->getRequest()->getParams()
-						,array($this->getRequestKeySignature() => null)
+						,array($this->rkSignature() => null)
 					)
 			));
 		}

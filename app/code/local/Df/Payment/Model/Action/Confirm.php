@@ -5,7 +5,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @abstract
 	 * @return string
 	 */
-	abstract protected function getSignatureFromOwnCalculations();
+	abstract protected function signatureOwn();
 
 	/**
 	 * Вынуждены делать метод абстрактным.
@@ -13,7 +13,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @abstract
 	 * @return string
 	 */
-	abstract protected function getRequestKeyOrderIncrementId();
+	abstract protected function rkOII();
 
 	/** @return void */
 	protected function alternativeProcessWithoutInvoicing() {}
@@ -25,7 +25,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	protected function checkPaymentAmount() {
 		/**
 		 * Проверяем размер оплаты только в случае создание объекта-счёта.
-		 * Если счёт уже был создан ранее, то $this->getPaymentAmountFromOrder() может вернуть 0,
+		 * Если счёт уже был создан ранее, то $this->amountFromOrder() может вернуть 0,
 		 * и проверка в том виде, как она есть сейчас, всё равно не сработает.
 		 */
 		if (
@@ -34,7 +34,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 				(
 						$this->rAmount()->getAsString()
 					!==
-						$this->getPaymentAmountFromOrder()->getAsString()
+						$this->amountFromOrder()->getAsString()
 				)
 		) {
 			$this->errorInvalidAmount();
@@ -47,11 +47,11 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 */
 	protected function checkSignature() {
 		if (!df_t()->areEqualCI(
-			$this->getSignatureFromOwnCalculations(), $this->getRequestValueSignature()
+			$this->signatureOwn(), $this->rSignature()
 		)) {
 			df_error($this->message('invalid/signature'), [
-				'{полученная подпись}' => $this->getRequestValueSignature()
-				,'{ожидаемая подпись}' => $this->getSignatureFromOwnCalculations()
+				'{полученная подпись}' => $this->rSignature()
+				,'{ожидаемая подпись}' => $this->signatureOwn()
 			]);
 		}
 	}
@@ -75,7 +75,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	protected function errorInvalidAmount() {
 		df_error(
 			$this->message('invalid/payment-amount')
-			,$this->getPaymentAmountFromOrder()->getAsString()
+			,$this->amountFromOrder()->getAsString()
 			,$this->configS()->getCurrencyCode()
 			,$this->rAmount()->getAsString()
 			,$this->configS()->getCurrencyCode()
@@ -101,7 +101,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	;}	
 	
 	/** @return Df_Core_Model_Money */
-	protected function getPaymentAmountFromOrder() {
+	protected function amountFromOrder() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->configS()->getOrderAmountInServiceCurrency($this->order());
 		}
@@ -112,67 +112,50 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return df_ets($e);}
+	protected function responseTextForError(Exception $e) {return df_ets($e);}
 
 	/** @return string */
-	protected function getResponseTextForSuccess() {return '';}
+	protected function responseTextForSuccess() {return '';}
 
 	/** @return Df_Payment_Config_Area_Service */
 	protected function configS() {return $this->method()->configS();}
 
 	/**
 	 * @used-by rAmountS()
-	 * @used-by Df_PayOnline_Action_Confirm::getSignatureFromOwnCalculations()
+	 * @used-by Df_PayOnline_Action_Confirm::signatureOwn()
 	 * @return string
 	 */
 	protected function rkAmount() {return $this->const_('payment/amount');}
 
 	/**
-	 * @used-by Df_PayOnline_Action_Confirm::getSignatureFromOwnCalculations()
+	 * @used-by Df_PayOnline_Action_Confirm::signatureOwn()
 	 * @return string
 	 */
 	protected function rkCurrency() {return $this->const_('payment/currency-code');}
 
 	/** @return string */
-	protected function getRequestKeyPaymentTest() {return $this->const_('payment/test');}
+	protected function rkTime() {return $this->const_('payment_service/payment/date');}
 
 	/** @return string */
-	protected function getRequestKeyServicePaymentDate() {return
-		$this->const_('payment_service/payment/date')
-	;}
+	protected function rkExternalId() {return $this->const_('payment_service/payment/id');}
+
+	/**
+	 * @used-by Df_Qiwi_Action_Confirm::updateBill()
+	 * @return string
+	 */
+	protected function rkState() {return $this->const_('payment_service/payment/state');}
+
+	/**
+	 * @used-by Df_Qiwi_Action_Confirm::updateBill()
+	 * @return string
+	 */
+	protected function rkShopId() {return $this->const_('payment_service/shop/id');}
 
 	/** @return string */
-	protected function getRequestKeyServicePaymentId() {return
-		$this->const_('payment_service/payment/id')
-	;}
+	protected function rkSignature() {return $this->const_('request/signature');}
 
 	/** @return string */
-	protected function getRequestKeyServicePaymentState() {return
-		$this->const_('payment_service/payment/state')
-	;}
-
-	/** @return string */
-	protected function getRequestKeyShopId() {return $this->const_('payment_service/shop/id');}
-
-	/** @return string */
-	protected function getRequestKeySignature() {return $this->const_('request/signature');}
-
-	/** @return string */
-	protected function getRequestValueCustomerEmail() {return $this->paramC('customer/email');}
-
-	/** @return string */
-	protected function getRequestValueCustomerName() {return $this->paramC('customer/name');}
-
-	/** @return string */
-	protected function getRequestValueOrderCustomerPhone() {return $this->paramC('customer/phone');}
-
-	/** @return string */
-	protected function getRequestValueOrderIncrementId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyOrderIncrementId());
-		df_result_string($result);
-		return $result;
-	}
+	protected function rOII() {return $this->param($this->rkOII());}
 
 	/** @return Df_Core_Model_Money */
 	protected function rAmount() {
@@ -189,52 +172,24 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	protected function rCurrencyC() {return $this->param($this->rkCurrency());}
 
 	/** @return string */
-	protected function getRequestValuePaymentTest() {
+	protected function rTime() {return $this->param($this->rkTime());}
+
+	/** @return string */
+	protected function rExternalId() {
 		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyPaymentTest());
+		$result = $this->getRequest()->getParam($this->rkExternalId());
 		df_result_string($result);
 		return $result;
 	}
 
 	/** @return string */
-	protected function getRequestValueServicePaymentDate() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyServicePaymentDate());
-		df_result_string($result);
-		return $result;
-	}
+	protected function rState() {return $this->param($this->rkState());}
 
 	/** @return string */
-	protected function getRequestValueServicePaymentId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyServicePaymentId());
-		df_result_string($result);
-		return $result;
-	}
+	protected function rShopId() {return $this->param($this->rkShopId());}
 
 	/** @return string */
-	protected function getRequestValueServicePaymentState() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyServicePaymentState());
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string */
-	protected function getRequestValueShopId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyShopId());
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string */
-	protected function getRequestValueSignature() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeySignature());
-		df_result_string($result);
-		return $result;
-	}
+	protected function rSignature() {return $this->param($this->rkSignature());}
 
 	/** @return string */
 	protected function getResponsePassword() {return $this->configS()->getResponsePassword();}
@@ -323,7 +278,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @used-by Df_Payment_Model_Action_Abstract::addAndSaveStatusHistoryComment()
 	 * @used-by Df_Payment_Model_Action_Abstract::getMethod()
 	 * @used-by Df_Payment_Model_Action_Abstract::getPayment()
-	 * @used-by getPaymentAmountFromOrder()
+	 * @used-by amountFromOrder()
 	 * @used-by _process()
 	 * @return Df_Sales_Model_Order
 	 */
@@ -429,14 +384,32 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @return void
 	 */
 	protected function processResponseForError(Exception $e) {
-		$this->getResponse()->setBody($this->getResponseTextForError($e));
+		$this->getResponse()->setBody($this->responseTextForError($e));
 	}
 
 	/** @return Df_Payment_Model_Action_Confirm */
 	protected function processResponseForSuccess() {
-		$this->getResponse()->setBody($this->getResponseTextForSuccess());
+		$this->getResponse()->setBody($this->responseTextForSuccess());
 		return $this;
 	}
+
+	/**
+	 * 2016-10-20
+	 * @param string $key
+	 * @param string|null $d [optional]
+	 * @return string
+	 */
+	protected function param($key, $d = null) {return $this->getRequest()->getParam($key, $d);}
+
+	/**
+	 * 2016-10-20
+	 * @used-by Df_Moneta_Action_Confirm::signatureOwn()
+	 * @used-by Df_RbkMoney_Action_Confirm::signatureOwn()
+	 * @param string $key
+	 * @param string|null $d [optional]
+	 * @return string
+	 */
+	protected function paramC($key, $d = null) {return $this->param($this->const_($key), $d);}
 
 	/**
 	 * @used-by Df_Alfabank_Action_CustomerReturn::processException()
@@ -505,20 +478,20 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 			 * Оставляем извлечение из сессии только ради обратной совместимости.
 			 */
 			if (!$result) {
-				$result = $this->getRequestValueOrderIncrementId();
+				$result = $this->rOII();
 			}
 			if (!$result) {
 				/**
 				 * Мистика.
 				 * Почему то при включенной компиляции
-				 * вызов $this->getRequestValueOrderIncrementId() возвращает пустое значение,
+				 * вызов $this->rOII() возвращает пустое значение,
 				 * и в то же время $this->getRequest()->getParams() содержит требуемое значение.
 				 * Сидел, думал — не смог объяснить,
 				 * поэтому добавил возможность получения $orderIncrementId через df_a.
 				 * Такой эффект заметил только в версии 2.20.0 и только при включенной компиляции
 				 * в двух магазинах: antonshop.com и mamamallm.ru
 				 */
-				$result = dfa($this->getRequest()->getParams(), $this->getRequestKeyOrderIncrementId());
+				$result = dfa($this->getRequest()->getParams(), $this->rkOII());
 			}
 			if (!$result) {
 				df_error(
@@ -526,7 +499,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 					."\nНазвание параметра, который должен содержать номер заказа: «%s»"
 					."\nЗначения всех параметров:"
 					."\n%s"
-					,$this->getRequestKeyOrderIncrementId()
+					,$this->rkOII()
 					,df_print_params($this->getRequest()->getParams())
 				);
 			}
@@ -534,22 +507,6 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2016-10-20
-	 * @param string $key
-	 * @param string|null $d [optional]
-	 * @return string
-	 */
-	private function param($key, $d = null) {return $this->getRequest()->getParam($key, $d);}
-
-	/**
-	 * 2016-10-20
-	 * @param string $key
-	 * @param string|null $d [optional]
-	 * @return string
-	 */
-	private function paramC($key, $d = null) {return $this->param($this->const_($key), $d);}
 
 	/**
 	 * @used-by logExceptionToOrderHistory()

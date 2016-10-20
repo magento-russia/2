@@ -26,22 +26,22 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'LMI_PAYMENT_NO';}
+	protected function rkOII() {return 'LMI_PAYMENT_NO';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var array $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueShopId()
+			$this->rShopId()
 			,$this->rAmountS()
-			,$this->getRequestValueOrderIncrementId()
+			,$this->rOII()
 			,$this->getRequestValueServicePaymentTest()
 			,$this->getRequest()->getParam('LMI_SYS_INVS_NO')
-			,$this->getRequestValueServicePaymentId()
-			,$this->getRequestValueServicePaymentDate()
+			,$this->rExternalId()
+			,$this->rTime()
 			,$this->getResponsePassword()
 			,$this->getRequestValueServiceCustomerAccountId()
 			,$this->getRequestValueServiceCustomerId()

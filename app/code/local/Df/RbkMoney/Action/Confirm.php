@@ -5,7 +5,7 @@ class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'orderId';}
+	protected function rkOII() {return 'orderId';}
 
 	/**
 	 * Даже в случае сбоя отсылаем код успешного завершения операции,
@@ -35,31 +35,31 @@ class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return 'OK';}
+	protected function responseTextForError(Exception $e) {return 'OK';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {return 'OK';}
+	protected function responseTextForSuccess() {return 'OK';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var mixed[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueShopId()
-			,$this->getRequestValueOrderIncrementId()
+			$this->rShopId()
+			,$this->rOII()
 			,$this->getRequestValuePaymentDescription()
 			,$this->getRequestValueShopAccountId()
 			,$this->rAmountS()
 			,$this->rCurrencyC()
-			,$this->getRequestValueServicePaymentState()
-			,$this->getRequestValueCustomerName()
-			,$this->getRequestValueCustomerEmail()
-			,$this->getRequestValueServicePaymentDate()
+			,$this->rState()
+			,$this->param('userName')
+			,$this->param('userEmail')
+			,$this->rTime()
 			,$this->getResponsePassword()
 		);
 		/** @var string $result */
@@ -72,7 +72,7 @@ class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {
-		return self::PAYMENT_STATE__PROCESSING !== df_int($this->getRequestValueServicePaymentState());
+		return self::PAYMENT_STATE__PROCESSING !== df_int($this->rState());
 	}
 
 	/** @return string */

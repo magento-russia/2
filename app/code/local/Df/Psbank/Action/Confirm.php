@@ -8,7 +8,7 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'ORDER';}
+	protected function rkOII() {return 'ORDER';}
 	
 	/** @return Df_Psbank_Model_Response */
 	protected function getResponseAsObject() {
@@ -23,18 +23,18 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {return 'OK';}
+	protected function responseTextForSuccess() {return 'OK';}
 	
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * Опосредовано вызывает @see Df_Payment_Model_Response::postProcess()
 			 * Лучшего способа вызвать postProcess,
-			 * чем запихнуть в getSignatureFromOwnCalculations() — не придумал.
+			 * чем запихнуть в signatureOwn() — не придумал.
 			 */
 			$this->getResponseAsObject();
 			$this->{__METHOD__} = Df_Psbank_Helper_Data::s()->generateSignature(

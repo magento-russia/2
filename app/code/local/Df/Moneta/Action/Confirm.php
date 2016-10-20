@@ -5,7 +5,7 @@ class Df_Moneta_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'MNT_TRANSACTION_ID';}
+	protected function rkOII() {return 'MNT_TRANSACTION_ID';}
 
 	/**
 	 * Если система «MONETA.RU» не смогла получить ответ от обработчика,
@@ -21,7 +21,7 @@ class Df_Moneta_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return 'SUCCESS';}
+	protected function responseTextForError(Exception $e) {return 'SUCCESS';}
 
 	/**
 	 * О результате приема отчета об оплате
@@ -38,21 +38,21 @@ class Df_Moneta_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {return 'SUCCESS';}
+	protected function responseTextForSuccess() {return 'SUCCESS';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string[] $signatureParams */
 		$signatureParams = array(
-			$this->getRequestValueShopId()
-			,$this->getRequestValueOrderIncrementId()
-			,$this->getRequestValueServicePaymentId()
+			$this->rShopId()
+			,$this->rOII()
+			,$this->rExternalId()
 			,$this->rAmountS()
 			,$this->rCurrencyC()
-			,$this->getRequestValuePaymentTest()
+			,$this->paramC('payment/test')
 			,$this->getResponsePassword()
 		);
 		return md5(implode($signatureParams));

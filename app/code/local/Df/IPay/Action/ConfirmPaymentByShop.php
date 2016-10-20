@@ -51,11 +51,11 @@ class Df_IPay_Action_ConfirmPaymentByShop extends Df_IPay_Action_Abstract {
 		if (
 				$this->getRequestParam_PaymentAmount()->getAsInteger()
 			!==
-				$this->getPaymentAmountFromOrder()->getAsInteger()
+				$this->amountFromOrder()->getAsInteger()
 		) {
 			df_error(
 				$this->getMessage('message/invalid/payment-amount')
-				,$this->getPaymentAmountFromOrder()->getAsInteger()
+				,$this->amountFromOrder()->getAsInteger()
 				,$this->configS()->getCurrencyCode()
 				,$this->getRequestParam_PaymentAmount()->getAsInteger()
 				,$this->configS()->getCurrencyCode()
@@ -64,7 +64,7 @@ class Df_IPay_Action_ConfirmPaymentByShop extends Df_IPay_Action_Abstract {
 	}
 
 	/** @return Df_Core_Model_Money */
-	protected function getPaymentAmountFromOrder() {
+	protected function amountFromOrder() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->configS()->getOrderAmountInServiceCurrency($this->order());
 		}

@@ -5,28 +5,28 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestKeyOrderIncrementId() {return 'InvId';}
+	protected function rkOII() {return 'InvId';}
 
 	/**
 	 * @override
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function getResponseTextForError(Exception $e) {return df_ets($e);}
+	protected function responseTextForError(Exception $e) {return df_ets($e);}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseTextForSuccess() {
-		return self::RESPONSE_TEXT__SUCCESS__PREFIX . $this->getRequestValueOrderIncrementId();
+	protected function responseTextForSuccess() {
+		return self::RESPONSE_TEXT__SUCCESS__PREFIX . $this->rOII();
 	}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getSignatureFromOwnCalculations() {
+	protected function signatureOwn() {
 		/** @var string $result */
 		$result = md5(implode(':', array(
 			/**
@@ -38,7 +38,7 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			 * как её передает Робокасса («0.010000»)
 			 */
 			$this->rAmountS()
-			,$this->getRequestValueOrderIncrementId()
+			,$this->rOII()
 			,$this->getResponsePassword()
 		)));
 		return $result;
