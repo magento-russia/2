@@ -68,9 +68,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {
-		return $this->getConst(self::CONFIG_KEY__RESPONSE__CONTENT_TYPE);
-	}
+	protected function getContentType() {return $this->getConst('response/content-type');}
 
 	/**
 	 * @param string $configKey
@@ -142,19 +140,15 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	}
 
 	/** @return string */
-	protected function getRequestKeyServicePaymentState() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__STATE);
-	}
+	protected function getRequestKeyServicePaymentState() {return
+		$this->getConst('payment_service/payment/state')
+	;}
 
 	/** @return string */
-	protected function getRequestKeyShopId() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__SHOP__ID);
-	}
+	protected function getRequestKeyShopId() {return $this->getConst('payment_service/shop/id');}
 
 	/** @return string */
-	protected function getRequestKeySignature() {
-		return $this->getConst(self::CONFIG_KEY__REQUEST__SIGNATURE);
-	}
+	protected function getRequestKeySignature() {return $this->getConst('request/signature');}
 
 	/** @return string */
 	protected function getRequestValueCustomerEmail() {
@@ -575,8 +569,4 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	const CONFIG_KEY__PAYMENT__TEST = 'payment/test';
 	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__DATE = 'payment_service/payment/date';
 	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__ID = 'payment_service/payment/id';
-	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__STATE = 'payment_service/payment/state';
-	const CONFIG_KEY__PAYMENT_SERVICE__SHOP__ID = 'payment_service/shop/id';
-	const CONFIG_KEY__REQUEST__SIGNATURE = 'request/signature';
-	const CONFIG_KEY__RESPONSE__CONTENT_TYPE = 'response/content-type';
 }

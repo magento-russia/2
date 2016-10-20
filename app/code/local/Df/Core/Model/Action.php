@@ -69,7 +69,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @used-by redirect()
 	 * @return Mage_Core_Controller_Varien_Action
 	 */
-	protected function getController() {return $this->cfg(self::P__CONTROLLER);}
+	protected function getController() {return $this[self::$P__CONTROLLER];}
 
 	/**
 	 * @used-by checkAccessRights()
@@ -421,20 +421,25 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CONTROLLER, 'Mage_Core_Controller_Varien_Action');
+		$this->_prop(self::$P__CONTROLLER, Mage_Core_Controller_Varien_Action::class);
 	}
-	const P__CONTROLLER = 'controller';
-	/** @var float */
-	private $_benchmarkTimeStart;
 
-	/** @var string */
-	protected static $REDIRECT_LOCATION__REFERER = 'referer';
 	/**
 	 * @used-by Df_1C_Cml2_Action_GenericExport::getContentType()
 	 * @used-by Df_YandexMarket_Action_Front::getContentType()
 	 * @var string
 	 */
 	protected static $CONTENT_TYPE__XML__UTF_8 = 'application/xml; charset=utf-8';
+	/**
+	 * @used-by Df_Core_Model_Action_Admin::_construct()
+	 * @var string
+	 */
+	protected static $P__CONTROLLER = 'controller';
+	/** @var string */
+	protected static $REDIRECT_LOCATION__REFERER = 'referer';
+
+	/** @var float */
+	private $_benchmarkTimeStart;
 
 	/**
 	 * @used-by delegate()
@@ -444,6 +449,6 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	public static function pc($class, Mage_Core_Controller_Varien_Action $c) {
-		df_ic($class, __CLASS__, array(self::P__CONTROLLER => $c))->process();
+		df_ic($class, __CLASS__, [self::$P__CONTROLLER => $c])->process();
 	}
 }

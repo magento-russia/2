@@ -53,6 +53,6 @@ abstract class Df_Core_Model_Action_Admin extends Df_Core_Model_Action {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__CONTROLLER, Df_Core_Controller_Admin::class);
+		$this->_prop(self::$P__CONTROLLER, Df_Core_Controller_Admin::class);
 	}
 }
