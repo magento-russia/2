@@ -59,9 +59,9 @@ abstract class Message extends \Df_Core_Model {
 	 * @used-by \Df\Qa\Message::log()
 	 * @return string
 	 */
-	protected function reportName() {
-		return 'mage2.pro/' . df_ccc('-', $this->reportNamePrefix(), '{date}--{time}.log');
-	}
+	protected function reportName() {return
+		'rm/' . df_ccc('-', $this->reportNamePrefix(), '{date}--{time}.log')
+	;}
 
 	/**
 	 * 2016-08-20

@@ -316,7 +316,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	protected function _process() {
 		if (df_my()) {
 			/** @var string $module */
-			$module = df_module_name();
+			$module = df_module_name($this);
 			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty(df_request()));
 		}
 		/**
