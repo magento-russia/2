@@ -61,6 +61,7 @@ class Df_Core_Boot {
 	 */
 	public static function run() {
 		if (!self::$_done1) {
+			Df_Core_Autoload::register();
 			self::init1();
 			Df_Core_Lib::load('1C');
 			Df_Core_Lib::load('Customer');
@@ -217,9 +218,6 @@ class Df_Core_Boot {
 		// после предыдущего вызова $defaultTimezone может быть пустым значением
 		if ($defaultTimezone) {
 			date_default_timezone_set($defaultTimezone);
-		}
-		if (Df_Speed_Model_Settings_General::s()->enablePhpScriptsLoadChecking()) {
-			Df_Core_Autoload::register();
 		}
 	}
 

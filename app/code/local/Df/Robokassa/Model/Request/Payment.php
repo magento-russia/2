@@ -10,6 +10,23 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {return $this->paramsBasic() + [
+		// 2016-10-19
+		// «E-Mail покупателя автоматически подставляется в платёжную форму ROBOKASSA.
+		// Пользователь может изменить его в процессе оплаты.»
+		// http://docs.robokassa.ru/#1202
+		'Email' => $this->email()
+		/**
+		 * 2016-10-19
+		 * «Кодировка, в которой отображается страница ROBOKASSA.
+		 * По умолчанию: windows-1251.
+		 * тот же параметр влияет на корректность отображения описания покупки (InvDesc)
+		 * в интерфейсе ROBOKASSA, и на правильность передачи
+		 * Дополнительных пользовательских параметров,
+		 * если в их значениях присутствует язык отличный от английского.»
+		 * http://docs.robokassa.ru/#1201
+		 * В примере значение именно строчными буквами: http://docs.robokassa.ru/#1236
+		 */
+		,'Encoding' => 'utf-8'
 		/**
 		 * 2016-10-19
 		 * «Описание покупки, можно использовать только символы английского или русского алфавита,
@@ -19,7 +36,7 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 		 * Корректность отображения зависит от необязательного параметра Encoding»
 		 * http://docs.robokassa.ru/#1189
 		 */
-		'InvDesc' => $this->description()
+		,'InvDesc' => $this->description()
 		// 2016-10-19
 		// http://docs.robokassa.ru/#2387
 		,'IsTest' => $this->configS()->isTestMode() ? 1 : 0
@@ -27,11 +44,6 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 		// «Контрольная сумма»
 		// http://docs.robokassa.ru/#1190
 		,'SignatureValue' => $this->signature()
-		// 2016-10-19
-		// «E-Mail покупателя автоматически подставляется в платёжную форму ROBOKASSA.
-		// Пользователь может изменить его в процессе оплаты.»
-		// http://docs.robokassa.ru/#1202
-		,'Email' => $this->email()
 	];}
 
 	/**

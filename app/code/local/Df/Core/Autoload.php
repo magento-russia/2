@@ -14,6 +14,14 @@ class Df_Core_Autoload extends Varien_Autoload {
 			? $class
 			: str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $class)))
 		;
+		/**
+		 * 2016-10-20
+		 * Поддержка для классов с namespace:
+		 * иначе Magento будет пытаться образаться к файлам типа Df\Core\Helper\Path.php,
+		 * что приведёт к сбою в Unix-подобных операционных системах
+		 * из-за неправильно разделителя файловых путей.
+		 */
+		$classFile = str_replace('\\', '/', $classFile);
 		$classFile .= '.php';
 		// начало заплатки
 		ob_start();
