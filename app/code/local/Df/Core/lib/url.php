@@ -179,6 +179,25 @@ function df_url_backend_ns($path = null, array $params = []) {return
 function df_url_backend_o() {return Mage::getModel('adminhtml/url');}
 
 /**
+ * 2016-07-12
+ * @param string $routePath
+ * @param bool $requireHTTPS [optional]
+ * @return string
+ */
+function df_url_callback($routePath, $requireHTTPS = false) {
+	/** @var string $result */
+	$result =
+		df_my_local()
+		? df_cc_path_t('https://mage2.pro/sandbox2', $routePath)
+		: df_url_frontend($routePath, ['_secure' => $requireHTTPS ? true : null])
+	;
+	if ($requireHTTPS && !df_my_local()) {
+		df_assert_https($result);
+	}
+	return $result;
+}
+
+/**
  * @used-by Df_Downloadable_Model_Url::getUrlByPath()
  * @param string $path
  * @return string

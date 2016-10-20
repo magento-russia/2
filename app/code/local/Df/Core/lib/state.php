@@ -90,8 +90,18 @@ function df_installed() {
  */
 function df_is_dev() {return Mage::getIsDeveloperMode();};
 
+/**
+ * 2016-05-15
+ * http://stackoverflow.com/a/2053295
+ * @return bool
+ */
+function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
+
 /** @return bool */
-function df_my_local() {return dfcf(function() {return df_bool(dfa($_SERVER, 'RM_DEVELOPER'));});}
+function df_my() {return dfcf(function() {return df_bool(dfa($_SERVER, 'DF_DEVELOPER'));});}
+
+/** @return bool */
+function df_my_local() {return dfcf(function() {return df_my() && df_is_localhost();});}
 
 /**
  * @param string $key
