@@ -68,7 +68,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {return $this->getConst('response/content-type');}
+	protected function getContentType() {return $this->const_('response/content-type');}
 
 	/**
 	 * @param string $configKey
@@ -76,7 +76,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 */
 	protected function getMessage($configKey) {
 		df_param_string($configKey, 0);
-		return str_replace('\n', "<br/>", $this->getConst($configKey));
+		return str_replace('\n', "<br/>", $this->const_($configKey));
 	}
 
 	/** @return Df_Core_Model_Money */
@@ -101,54 +101,54 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 
 	/** @return string */
 	protected function getRequestKeyCustomerEmail() {
-		return $this->getConst(self::CONFIG_KEY__CUSTOMER__EMAIL);
+		return $this->const_(self::CONFIG_KEY__CUSTOMER__EMAIL);
 	}
 
 	/** @return string */
 	protected function getRequestKeyCustomerName() {
-		return $this->getConst(self::CONFIG_KEY__CUSTOMER__NAME);
+		return $this->const_(self::CONFIG_KEY__CUSTOMER__NAME);
 	}
 
 	/** @return string */
 	protected function getRequestKeyCustomerPhone() {
-		return $this->getConst(self::CONFIG_KEY__CUSTOMER__PHONE);
+		return $this->const_(self::CONFIG_KEY__CUSTOMER__PHONE);
 	}
 
 	/** @return string */
 	protected function getRequestKeyPaymentAmount() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT__AMOUNT);
+		return $this->const_(self::CONFIG_KEY__PAYMENT__AMOUNT);
 	}
 
 	/** @return string */
 	protected function getRequestKeyPaymentCurrencyCode() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT__CURRENCY_CODE);
+		return $this->const_(self::CONFIG_KEY__PAYMENT__CURRENCY_CODE);
 	}
 
 	/** @return string */
 	protected function getRequestKeyPaymentTest() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT__TEST);
+		return $this->const_(self::CONFIG_KEY__PAYMENT__TEST);
 	}
 
 	/** @return string */
 	protected function getRequestKeyServicePaymentDate() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__DATE);
+		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__DATE);
 	}
 
 	/** @return string */
 	protected function getRequestKeyServicePaymentId() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__ID);
+		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__ID);
 	}
 
 	/** @return string */
 	protected function getRequestKeyServicePaymentState() {return
-		$this->getConst('payment_service/payment/state')
+		$this->const_('payment_service/payment/state')
 	;}
 
 	/** @return string */
-	protected function getRequestKeyShopId() {return $this->getConst('payment_service/shop/id');}
+	protected function getRequestKeyShopId() {return $this->const_('payment_service/shop/id');}
 
 	/** @return string */
-	protected function getRequestKeySignature() {return $this->getConst('request/signature');}
+	protected function getRequestKeySignature() {return $this->const_('request/signature');}
 
 	/** @return string */
 	protected function getRequestValueCustomerEmail() {

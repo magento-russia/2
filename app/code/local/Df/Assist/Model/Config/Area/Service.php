@@ -12,7 +12,7 @@ class Df_Assist_Model_Config_Area_Service extends Df_Payment_Config_Area_Service
 	 */
 	private function getDomain() {
 		/** @var string $result */
-		$result = $this->isTestMode() ? $this->getConst('domain') : $this->getVar('domain');
+		$result = $this->isTestMode() ? $this->const_('domain') : $this->getVar('domain');
 		df_result_string_not_empty($result);
 		return $result;
 	}

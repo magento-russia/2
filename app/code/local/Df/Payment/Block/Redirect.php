@@ -36,7 +36,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	 * @return string
 	 */
 	public function getMethod() {
-		return $this->getPaymentMethod()->getConst('request/method', false, Zend_Form::METHOD_POST);
+		return $this->getPaymentMethod()->const_('request/method', false, Zend_Form::METHOD_POST);
 	}
 
 	/**

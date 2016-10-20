@@ -10,8 +10,8 @@ abstract class Df_Payment_Config_Area extends Df_Checkout_Module_Config_Area {
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function getConst($key, $canBeTest = true, $default = '') {
-		return $this->constManager()->getConst($key, $canBeTest, $default);
+	public function const_($key, $canBeTest = true, $default = '') {
+		return $this->constManager()->const_($key, $canBeTest, $default);
 	}
 
 	/**

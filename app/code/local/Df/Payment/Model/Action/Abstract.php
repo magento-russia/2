@@ -33,11 +33,11 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	protected function getConst($configKey, $isRequired = true, $default = '') {
+	protected function const_($configKey, $isRequired = true, $default = '') {
 		/** @var string $key */
 		$key = 'request/confirmation/' . $configKey;
 		/** @var string $result */
-		$result = $this->method()->getConst($key, $canBeTest = false);
+		$result = $this->method()->const_($key, $canBeTest = false);
 		if ('' === $result) {
 			if ($isRequired) {
 				df_error(

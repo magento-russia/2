@@ -77,12 +77,12 @@ class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 
 	/** @return string */
 	private function getRequestKeyPaymentDescription() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT__DESCRIPTION);
+		return $this->const_(self::CONFIG_KEY__PAYMENT__DESCRIPTION);
 	}
 
 	/** @return string */
 	private function getRequestKeyShopAccountId() {
-		return $this->getConst(self::CONFIG_KEY__SHOP__ACCOUNT_ID);
+		return $this->const_(self::CONFIG_KEY__SHOP__ACCOUNT_ID);
 	}
 
 	/** @return string */

@@ -75,7 +75,7 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	private function getRequestKeyServiceCustomerAccountId() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ACCOUNT_ID);
+		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ACCOUNT_ID);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	private function getRequestKeyServiceCustomerId() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ID);
+		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ID);
 	}
 
 	/**
@@ -97,7 +97,7 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @return string
 	 */
 	private function getRequestKeyServicePaymentTest() {
-		return $this->getConst(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__TEST);
+		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__TEST);
 	}
 
 	/**

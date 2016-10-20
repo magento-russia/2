@@ -317,8 +317,8 @@ abstract class Df_Payment_Model_Method
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function getConst($key, $canBeTest = true, $default = '') {
-		return $this->constManager()->getConst($key, $canBeTest, $default);
+	public function const_($key, $canBeTest = true, $default = '') {
+		return $this->constManager()->const_($key, $canBeTest, $default);
 	}
 
 	/**
@@ -540,22 +540,22 @@ abstract class Df_Payment_Model_Method
 
 	/** @return string */
 	private function getNameInCaseDative() {
-		return $this->getConst('names/dative', $canBeTest = false, $default = $this->getTitle());
+		return $this->const_('names/dative', $canBeTest = false, $default = $this->getTitle());
 	}
 
 	/** @return string */
 	private function getNameInCaseGenitive() {
-		return $this->getConst('names/genitive', $canBeTest = false, $default = $this->getTitle());
+		return $this->const_('names/genitive', $canBeTest = false, $default = $this->getTitle());
 	}
 
 	/** @return string */
 	private function getNameInCaseInstrumental() {
-		return $this->getConst('names/instrumental', $canBeTest = false, $default = $this->getTitle());
+		return $this->const_('names/instrumental', $canBeTest = false, $default = $this->getTitle());
 	}
 
 	/** @return string */
 	private function getNameInNominativeCase() {
-		return $this->getConst('names/nominative', $canBeTest = false, $default = $this->getTitle());
+		return $this->const_('names/nominative', $canBeTest = false, $default = $this->getTitle());
 	}
 
 	/**

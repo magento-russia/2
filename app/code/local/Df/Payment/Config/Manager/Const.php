@@ -50,7 +50,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function getConst($key, $canBeTest = true, $default = '') {return
+	public function const_($key, $canBeTest = true, $default = '') {return
 		$canBeTest ? $this->getValueT($key, $default) : $this->getValue($key, $default)
 	;}
 

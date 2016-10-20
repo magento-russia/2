@@ -69,7 +69,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	 * @return string
 	 */
 	protected function getMessage($configKey) {
-		return str_replace('<br/>', "\n", $this->getConst($configKey));
+		return str_replace('<br/>', "\n", $this->const_($configKey));
 	}
 
 	/**
