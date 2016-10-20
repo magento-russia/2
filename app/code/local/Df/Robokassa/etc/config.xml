@@ -67,7 +67,20 @@
 		<payment>
 			<robokassa>
 				<currencies>
-					<allowed>EUR,KZT,RUB,USD</allowed>
+					<!--
+2016-10-20
+Как выяснил сегодня в техподдержке ROBOKASSSA,
+у магазина нет возможности выставлять покупателю счёт не в рублях:
+https://partner.robokassa.ru/Support/Requests/29f54a98-5c8e-4608-85f6-748fb3a2cbf9
+
+При этом в API есть параметр «OutSumCurrency»: http://docs.robokassa.ru/#1204
+«Способ указать валюту, в которой магазин выставляет стоимость заказа.»
+Однако этот параметр на самом деле лишь позволяет указывать «OutSum» в нестандартной валюте,
+однако стоимость заказа будет всё равно пересчитана в рубли.
+
+http://magento-forum.ru/topic/1629/#entry20178
+					-->
+					<allowed>RUB</allowed>
 				</currencies>
 				<production>
 					<url>

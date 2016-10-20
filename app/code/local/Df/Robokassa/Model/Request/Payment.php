@@ -59,12 +59,6 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 
 	/**
 	 * 2016-10-19
-	 * @return bool
-	 */
-	private function isRUB() {return 'RUB' === $this->configS()->getCurrencyCodeInServiceFormat();}
-
-	/**
-	 * 2016-10-19
 	 * @return array(string => string)
 	 */
 	private function paramsBasic() {return dfc($this, function() {return [
@@ -93,15 +87,19 @@ class Df_Robokassa_Model_Request_Payment extends Df_Payment_Model_Request_Paymen
 		 * то оно может быть слишком длинным.
 		 */
 		,'InvId' => $this->orderIId()
-	] + ($this->isRUB() ? [] : [
 		/**
-		 * 2016-10-19
+		 * 2016-10-20
+		 * Как выяснил сегодня в техподдержке ROBOKASSSA,
+		 * у магазина нет возможности выставлять покупателю счёт не в рублях:
+		 * https://partner.robokassa.ru/Support/Requests/29f54a98-5c8e-4608-85f6-748fb3a2cbf9
+		 *
+		 * При этом в API есть параметр «OutSumCurrency»: http://docs.robokassa.ru/#1204
 		 * «Способ указать валюту, в которой магазин выставляет стоимость заказа.»
-		 * http://docs.robokassa.ru/#1204
-		 * При этом значение RUB передавать нельзя.
+		 * Однако этот параметр на самом деле лишь позволяет указывать «OutSum» в нестандартной валюте,
+		 * однако стоимость заказа будет всё равно пересчитана в рубли.
+		 * http://magento-forum.ru/topic/1629/#entry20178
 		 */
-		'OutSumCurrency' => $this->configS()->getCurrencyCodeInServiceFormat()
-	]);});}
+	];});}
 
 	/** @return string */
 	private function signature() {return md5(implode(':', $this->preprocessParams(
