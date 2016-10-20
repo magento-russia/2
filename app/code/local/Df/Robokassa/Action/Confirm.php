@@ -18,9 +18,7 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function responseTextForSuccess() {
-		return self::RESPONSE_TEXT__SUCCESS__PREFIX . $this->rOII();
-	}
+	protected function responseTextForSuccess() {return 'OK' . $this->rOII();}
 
 	/**
 	 * @override
@@ -43,6 +41,4 @@ class Df_Robokassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		)));
 		return $result;
 	}
-
-	const RESPONSE_TEXT__SUCCESS__PREFIX = 'OK';
 }
