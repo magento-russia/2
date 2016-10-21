@@ -6,7 +6,6 @@
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
-
 			</depends>
 		</Df_1C>
 		<Df_AccessControl>
@@ -281,6 +280,10 @@
 				<Df_Core/>
 			</depends>
 		</Df_Excel>
+		<Df_Framework>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Df_Framework>
 		<Df_GoogleAnalytics>
 			<active>true</active>
 			<codePool>local</codePool>

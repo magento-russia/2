@@ -813,13 +813,6 @@ License: MIT
   background: white;
   padding: 2px 0 2px 0.75em;
   width: 300px; }
-  .entry-edit .form-list td.value .df-config-info-urls .df-url {
-    display: block;
-    width: 35em;
-    background: white;
-    cursor: pointer; }
-  .entry-edit .form-list td.value .df-config-info-urls .df-url.hover {
-    background: #FFF9E9; }
   .entry-edit .form-list td.value .df-config-info-urls li {
     display: block;
     background: white;
@@ -830,8 +823,15 @@ License: MIT
       width: 7em;
       padding: 4px 0; }
     .entry-edit .form-list td.value .df-config-info-urls li .df-url {
-      padding: 4px 0.75em;
       margin-left: 8em; }
+.entry-edit .form-list td.value .df-url {
+  display: block;
+  width: 35em;
+  padding: 4px 0.75em;
+  background: white;
+  cursor: pointer; }
+  .entry-edit .form-list td.value .df-url:hover {
+    background: #FFF9E9; }
 .entry-edit .form-list td.value .grid table tr td:last-child, .entry-edit .form-list td.value .grid table tr th:last-child {
   width: 100px;
   text-transform: lowercase; }

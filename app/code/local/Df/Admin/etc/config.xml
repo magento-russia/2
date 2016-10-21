@@ -51,6 +51,8 @@
 					<df-color>Df_Admin_Config_Form_Element_Color</df-color>
 					<df-multiselect>Df_Admin_Config_Form_Element_Multiselect</df-multiselect>
 					<df-text>Df_Admin_Config_Form_Element_Text</df-text>
+					<!-- 2016-10-21 -->
+					<df-webhook>Df\Framework\Form\Element\Webhook</df-webhook>
 				</element-types>
 			</config-form>
 			<notifiers>

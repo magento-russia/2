@@ -53,10 +53,9 @@
 						</payment_service__shop_id>
 						<payment_service__test>
 							<label>Тестовый режим?</label>
-							<comment>
-							   <![CDATA[
-									В тестовом режиме денежные средства с покупателя не списываются.
-							   ]]>
+							<comment><![CDATA[
+								В тестовом режиме денежные средства с покупателя не списываются.
+						   ]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
@@ -168,6 +167,48 @@
 							<depends><active>1</active></depends>
 							<validate>required-entry</validate>
 						</payment_service__response_password>
+						<url_result>
+							<label>Result Url</label>
+							<comment><![CDATA[Укажите этот адрес в личном кабинете магазина в ROBOKASSA.]]></comment>
+							<frontend_type>df-webhook</frontend_type>
+							<dfWebhook_routePath>df-robokassa/confirm</dfWebhook_routePath>
+							<backend_model>core/config_data</backend_model>
+							<sort_order>8100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</url_result>
+						<url_success>
+							<label>Success Url</label>
+							<comment><![CDATA[Укажите этот адрес в личном кабинете магазина в ROBOKASSA.]]></comment>
+							<frontend_type>df-webhook</frontend_type>
+							<dfWebhook_routePath>df-payment/success</dfWebhook_routePath>
+							<backend_model>core/config_data</backend_model>
+							<sort_order>8101</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</url_success>
+						<url_fail>
+							<label>Fail Url</label>
+							<comment><![CDATA[Укажите этот адрес в личном кабинете магазина в ROBOKASSA.]]></comment>
+							<frontend_type>df-webhook</frontend_type>
+							<dfWebhook_routePath>df-payment/cancel</dfWebhook_routePath>
+							<backend_model>core/config_data</backend_model>
+							<sort_order>8102</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</url_fail>
 						<frontend__allowspecific>
 							<label>Ограничить доступность способа оплаты покупателями из конкретных стран?</label>
 							<comment>
