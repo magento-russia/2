@@ -19,5 +19,11 @@
  */
 class Df_Payment_SuccessController extends Mage_Core_Controller_Front_Action {
 	/** @return void */
-	public function indexAction() {$this->_redirect('checkout/onepage/success');}
+	public function indexAction() {
+		/** @var Df_Sales_Model_Order|null $order */
+		$order = df_last_order(false);
+		$this->_redirect('checkout/onepage/success', [
+			'store' => $order ? $order->getStoreId() : df_store_id()
+		]);
+	}
 }
