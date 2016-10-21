@@ -13,11 +13,6 @@
 		<models><df_robokassa><class>Df_Robokassa_Model</class></df_robokassa></models>
 	</global>
 	<frontend>
-		<!--
-		<secure_url>
-			<df_robokassa>/df-robokassa</df_robokassa>
-		</secure_url>
-		-->
 		<routers>
 			<df_robokassa>
 				<use>standard</use>
@@ -82,88 +77,18 @@ http://magento-forum.ru/topic/1629/#entry20178
 					-->
 					<allowed>RUB</allowed>
 				</currencies>
-				<production>
-					<url>
-						<payment_page>https://auth.robokassa.ru/Merchant/Index.aspx</payment_page>
-					</url>
-				</production>
-				<test>
-					<url>
-						<payment_page>https://auth.robokassa.ru/Merchant/Index.aspx</payment_page>
-					</url>
-				</test>
+				<url>
+					<payment_page>https://auth.robokassa.ru/Merchant/Index.aspx</payment_page>
+				</url>
 				<request>
 					<confirmation>
-						<admin>
-							<order>
-								<!--
-									Пользовательский номер заказа в Magento.
-									Обязательный параметр.
-								-->
-								<increment-id>InvId</increment-id>
-							</order>
-						</admin>
-						<customer>
-							<!--
-								Адрес электронной почты покупателя.
-								Df_Payment: не используется.
-							-->
-							<email></email>
-							<!--
-								Имя покупателя.
-								Df_Payment: не используется.
-							-->
-							<name></name>
-							<!--
-								Телефон покупателя.
-								Df_Payment: не используется.
-							-->
-							<phone></phone>
-						</customer>
 						<payment>
 							<!--
 								Размер платежа.
 								Обязательный параметр.
 							-->
 							<amount>OutSum</amount>
-							<!--
-								Код валюты платежа.
-								Df_Payment: не используется.
-								Df_Robokassa: не используется.
-							-->
-							<currency-code></currency-code>
 						</payment>
-						<payment_service>
-							<payment>
-								<!--
-									Дата и время проведения
-									или изменения состояния платежа платёжной системой.
-									Df_Payment: не используется.
-									Df_Robokassa: не используется.
-								-->
-								<date></date>
-								<!--
-									Идентификатор платежа в платёжной системе.
-									Df_Payment: не используется.
-									Df_Robokassa: не используется.
-								-->
-								<id></id>
-								<!--
-									Состояние обработки платежа в платёжной системе.
-									Df_Payment: не используется.
-									Df_Robokassa: не используется.
-								-->
-								<state></state>
-							</payment>
-							<shop>
-								<!--
-									Идентификатор магазина в платёжной системе.
-									Df_Payment: не используется.
-									Df_Robokassa: не используется.
-								-->
-								<id></id>
-							</shop>
-						</payment_service>
 						<request>
 							<!--
 								Подпись подтверждения платёжной системой магазину оплаты заказа.
