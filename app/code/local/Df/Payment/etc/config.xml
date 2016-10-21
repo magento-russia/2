@@ -24,6 +24,22 @@
 			</payment>
 		</helpers>
 		<models><df_payment><class>Df_Payment_Model</class></df_payment></models>
+		<request>
+			<direct_front_name>
+<!--
+2016-10-21
+Позволяет администратору магазина указывать в личном кабинете платёжной системы
+адреса checkout/onepage/success и df-payment/cancel без указания в них кода магазина.
+Это важно для таких платёжных модулей как ROBOKASSA:
+там адреса checkout/onepage/success и df-payment/cancel нужно указывать в личном кабинете,
+и нельзя задавать их динамически.
+https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/Controller/Request/Http.php#L37
+https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/Controller/Request/Http.php#L161-L170
+-->
+				<checkout/>
+				<df-payment/>
+			</direct_front_name>
+		</request>
 	</global>
 	<frontend>
 		<layout>
