@@ -42,12 +42,12 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			$this->rTime()
 			,$this->rCurrencyC()
 			,$this->rAmount()->getAsInteger()
-			,$this->getRequest()->getParam('payment_method')
-			,$this->getRequest()->getParam('order_id')
+			,$this->param('payment_method')
+			,$this->param('order_id')
 			,$this->rOII()
 			,$this->rExternalId()
 			,$this->rState()
-			,$this->getRequest()->getParam('rrn')
+			,$this->param('rrn')
 			,$this->getResponsePassword()
 		);
 		return md5(implode($signatureParams));
@@ -81,7 +81,7 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 * отсылка запросов прекращается, о чем интернет-ресурс также извещается электронным письмом.
 		 * https://mail.google.com/mail/u/0/?ui=2&ik=a7a1e9bc54&view=att&th=135800f28b66a0b2&attid=0.0&disp=inline&safe=1&zw
 		 */
-		$this->getResponse()->setHttpResponseCode(500);
+		$this->response()->setHttpResponseCode(500);
 		return $this;
 	}
 
@@ -95,7 +95,7 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 * Интернет-ресурс в случае оповещения, должен ответить кодом 200 ("HTTP/1.0 200 OK")
 		 * https://mail.google.com/mail/u/0/?ui=2&ik=a7a1e9bc54&view=att&th=135800f28b66a0b2&attid=0.0&disp=inline&safe=1&zw
 		 */
-		$this->getResponse()->setRawHeader('HTTP/1.0 200 OK');
+		$this->response()->setRawHeader('HTTP/1.0 200 OK');
 		return $this;
 	}
 

@@ -128,12 +128,12 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 	private function getTokenTemporary() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $errorDescripion */
-			$errorDescripion = $this->getRequest()->getParam('error_description');
+			$errorDescripion = $this->param('error_description');
 			if ($errorDescripion) {
 				$this->throwException($errorDescripion);
 			}
 			/** @var string|null $errorCode */
-			$errorCode = $this->getRequest()->getParam('error');
+			$errorCode = $this->param('error');
 			if ($errorCode) {
 				$this->throwException(dfa(array(
 					'invalid_request' =>
@@ -149,7 +149,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 					,'access_denied' => 'Пользователь отклонил запрос авторизации приложения.'
 				), $errorCode, $errorCode));
 			}
-			$this->{__METHOD__} = $this->getRequest()->getParam('code');
+			$this->{__METHOD__} = $this->param('code');
 			df_result_string_not_empty($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

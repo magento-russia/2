@@ -22,9 +22,9 @@ class Df_1C_Cml2_Action_Catalog_Export_Process extends Df_1C_Cml2_Action_Generic
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getResponseLogActionName()
-	 * @used-by Df_Core_Model_Action::getResponseLogFileName()
+	 * @see Df_Core_Model_Action::responseLogActionName()
+	 * @used-by Df_Core_Model_Action::responseLogName()
 	 * @return string
 	 */
-	protected function getResponseLogActionName() {return 'catalog.export';}
+	protected function responseLogActionName() {return 'catalog.export';}
 }

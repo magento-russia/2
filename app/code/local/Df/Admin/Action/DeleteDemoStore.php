@@ -9,7 +9,7 @@ class Df_Admin_Action_DeleteDemoStore extends Df_Core_Model_Action_Admin {
 	protected function _process() {Df_Core_Model_Store::deleteStatic($this->store());}
 
 	/** @return string */
-	private function getStoreCode() {return df_request(self::$RP__STORE);}
+	private function getStoreCode() {return $this->param(self::$RP__STORE);}
 
 	/**
 	 * @used-by Df_Admin_Block_Notifier_DeleteDemoStore::getLink()

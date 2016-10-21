@@ -25,12 +25,12 @@ class Df_Interkassa_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			$this->rShopId()
 			,$this->rAmountS()
 			,$this->rOII()
-			,$this->getRequest()->getParam('ik_paysystem_alias')
-			,$this->getRequest()->getParam('ik_baggage_fields')
+			,$this->param('ik_paysystem_alias')
+			,$this->param('ik_baggage_fields')
 			,$this->rState()
 			,$this->rExternalId()
-			,$this->getRequest()->getParam('ik_currency_exch')
-			,$this->getRequest()->getParam('ik_fees_payer')
+			,$this->param('ik_currency_exch')
+			,$this->param('ik_fees_payer')
 			,$this->getResponsePassword()
 		);
 		/** @var string $result */

@@ -4,7 +4,7 @@ class Df_YandexMarket_Action_ImportAddress extends Df_Core_Model_Action {
 	 * @override
 	 * @return string
 	 */
-	protected function getRedirectLocation() {return RM_URL_CHECKOUT;}
+	protected function redirectLocation() {return RM_URL_CHECKOUT;}
 
 	/**
 	 * @override
@@ -22,7 +22,7 @@ class Df_YandexMarket_Action_ImportAddress extends Df_Core_Model_Action {
 	 * @param string $key
 	 * @return string|null
 	 */
-	private function _post($key) {return $this->getRequest()->getPost($key);}
+	private function _post($key) {return $this->request()->getPost($key);}
 
 	/**
 	 * @param string $paramName
@@ -59,10 +59,10 @@ class Df_YandexMarket_Action_ImportAddress extends Df_Core_Model_Action {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
 			$result = '';
-			if ($this->getRequest()->getCookie('rm_yandex_market_address_billing')) {
+			if ($this->request()->getCookie('rm_yandex_market_address_billing')) {
 				$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__BILLING;
 			}
-			else if ($this->getRequest()->getCookie('rm_yandex_market_address_shipping')) {
+			else if ($this->request()->getCookie('rm_yandex_market_address_shipping')) {
 				$result = Df_Checkout_Block_Frontend_Ergonomic_Address::TYPE__SHIPPING;
 			}
 			$this->{__METHOD__} = $result;

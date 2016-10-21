@@ -3,19 +3,19 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::generateResponseBody()
-	 * @used-by Df_Core_Model_Action::getResponseBody()
+	 * @used-by Df_Core_Model_Action::responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBody() {return $this->getDocument()->getXml();}
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getContentType()
+	 * @see Df_Core_Model_Action::contentType()
 	 * @used-by Df_Core_Model_Action::getResponseLogFileExtension()
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {
+	protected function contentType() {
 		return
 			$this->getDocument()->hasEncodingWindows1251()
 			? 'application/xml; charset=windows-1251'
@@ -27,7 +27,7 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 	 * @override
 	 * @return string
 	 */
-	protected function getResponseLogFileName() {return 'yandex.market.xml';}
+	protected function responseLogName() {return 'yandex.market.xml';}
 
 	/**
 	 * @override

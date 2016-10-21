@@ -3,15 +3,15 @@
 class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getRequest()
+	 * @see Df_Core_Model_Action::request()
 	 * @return Zend_Controller_Request_Abstract
 	 */
-	protected function getRequest() {
+	protected function request() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Zend_Controller_Request_Abstract $result */
-			$this->{__METHOD__} = new Zend_Controller_Request_Http();
+			$this->{__METHOD__} = new Zend_Controller_Request_Http;
 			$this->{__METHOD__}->setParams(
-				$this->getRequestState()->getResponse()->getData() + parent::getRequest()->getParams()
+				$this->getRequestState()->getResponse()->getData() + parent::request()->getParams()
 			);
 		}
 		return $this->{__METHOD__};

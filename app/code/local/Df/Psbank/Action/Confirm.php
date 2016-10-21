@@ -13,7 +13,7 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	/** @return Df_Psbank_Model_Response */
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Psbank_Model_Response::i($this->getRequest()->getParams());
+			$this->{__METHOD__} = Df_Psbank_Model_Response::i($this->params());
 			$this->{__METHOD__}->postProcess($this->payment());
 		}
 		return $this->{__METHOD__};
@@ -38,7 +38,7 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 			 */
 			$this->getResponseAsObject();
 			$this->{__METHOD__} = Df_Psbank_Helper_Data::s()->generateSignature(
-				$this->getRequest()->getParams()
+				$this->params()
 				,$this->getParamsForSignature()
 				,$this->configS()->getRequestPassword()
 			);

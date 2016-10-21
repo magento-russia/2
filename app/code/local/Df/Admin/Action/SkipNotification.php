@@ -8,7 +8,7 @@ class Df_Admin_Action_SkipNotification extends Df_Core_Model_Action_Admin {
 	 */
 	protected function _process() {
 		Mage::getConfig()->saveConfig(
-			Df_Admin_Model_Notifier::getConfigPathSkipByClass(df_request(self::$RP__CLASS)), 1
+			Df_Admin_Model_Notifier::getConfigPathSkipByClass($this->param(self::$RP__CLASS)), 1
 		);
 		Mage::getConfig()->reinit();
 	}

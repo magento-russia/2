@@ -7,7 +7,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 	 */
 	public function getParam($paramName, $defaultValue = null) {
 		/** @var string|null $result */
-		$result = $this->getRequest()->getParam($paramName, $defaultValue);
+		$result = $this->request()->getParam($paramName, $defaultValue);
 		if (!is_null($result)) {
 			df_result_string($result);
 		}
@@ -57,7 +57,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 			,array(
 				'{paramName}' => $paramName
 				,'{prefix}' => $this->getErrorMessagePrefix()
-				,'{url}' => $this->getRequest()->getRequestUri()
+				,'{url}' => $this->request()->getRequestUri()
 			)
 		);
 	}
@@ -78,7 +78,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 				,'{paramName}' => $paramName
 				,'{paramValue}' => $paramValue
 				,'{prefix}' => $this->getErrorMessagePrefix()
-				,'{url}' => $this->getRequest()->getRequestUri()
+				,'{url}' => $this->request()->getRequestUri()
 			)
 		);
 	}
@@ -87,7 +87,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 	protected function getErrorMessagePrefix() {return '';}
 
 	/** @return Mage_Core_Controller_Request_Http */
-	protected function getRequest() {return $this->cfg(self::$P__REQUEST);}
+	protected function request() {return $this[self::$P__REQUEST];}
 
 	/**
 	 * @override
@@ -101,7 +101,7 @@ class Df_Core_Model_InputRequest extends Df_Core_Model {
 	private static $P__REQUEST = 'request';
 
 	/**
-	 * @used-by Df_Core_Model_Action::getRmRequest()
+	 * @used-by Df_Core_Model_Action::rmRequest()
 	 * @param string $class
 	 * @param Mage_Core_Controller_Request_Http $request
 	 * @return Df_Core_Model_InputRequest

@@ -3,22 +3,22 @@ class Df_YandexMarket_Action_Category_Suggest extends Df_Core_Model_Action {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::generateResponseBody()
-	 * @used-by Df_Core_Model_Action::getResponseBody()
+	 * @used-by Df_Core_Model_Action::responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBody() {return $this->getSuggestionsAsJson();}
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getContentType()
+	 * @see Df_Core_Model_Action::contentType()
 	 * @used-by Df_Core_Model_Action::getResponseLogFileExtension()
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {return 'application/json';}
+	protected function contentType() {return 'application/json';}
 
 	/** @return string */
-	private function getQuery() {return $this->getRmRequest()->getParam('query');}
+	private function getQuery() {return $this->rmRequest()->getParam('query');}
 	
 	/** @return array(string => string|string[]) */
 	private function getSuggestions() {

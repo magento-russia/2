@@ -37,9 +37,9 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			 *
 			 * Поэтому не используем $this->rAmount()->getAsInteger()
 			 */
-			$this->getRequest()->getParam('sum')
+			$this->param('sum')
 			,$this->rShopId()
-			,$this->getRequest()->getParam('card')
+			,$this->param('card')
 			,$this->rTime()
 			,$this->getResponsePassword()
 		);
@@ -59,7 +59,7 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 * Недопустимо отвечать кодом "HTTP/1.0 200 OK" на необработанное уведомление.
 		 * https://ssl.easypay.by/notify/
 		 */
-		$this->getResponse()->setHttpResponseCode(500);
+		$this->response()->setHttpResponseCode(500);
 	}
 
 	/**
@@ -74,6 +74,6 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 * то есть не ответит ему кодом "HTTP/1.0 200 OK".
 		 * https://ssl.easypay.by/notify/
 		 */
-		$this->getResponse()->setRawHeader('HTTP/1.0 200 OK');
+		$this->response()->setRawHeader('HTTP/1.0 200 OK');
 	}
 }

@@ -54,7 +54,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	protected function processOrderCanNotInvoice() {
 		// Единая Касса любит присылать повторные оповещения об оплате
 		$this->order()->comment('Единая Касса повторно прислала оповещение об оплате');
-		$this->getResponse()->setBody($this->responseTextForSuccess());
+		$this->response()->setBody($this->responseTextForSuccess());
 		return $this;
 	}
 
@@ -65,10 +65,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 				Df_WalletOne_Model_Request_SignatureGenerator::P__ENCRYPTION_KEY =>
 					$this->configS()->getResponsePassword()
 				,Df_WalletOne_Model_Request_SignatureGenerator::P__SIGNATURE_PARAMS =>
-					array_diff_key(
-						$this->getRequest()->getParams()
-						,array($this->rkSignature() => null)
-					)
+					array_diff_key($this->params(), [$this->rkSignature() => null])
 			));
 		}
 		return $this->{__METHOD__};

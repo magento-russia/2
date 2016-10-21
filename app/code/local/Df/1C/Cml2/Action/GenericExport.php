@@ -9,7 +9,7 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::generateResponseBody()
-	 * @used-by Df_Core_Model_Action::getResponseBody()
+	 * @used-by Df_Core_Model_Action::responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBody() {
@@ -19,7 +19,7 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::generateResponseBodyFake()
-	 * @used-by Df_Core_Model_Action::getResponseBody()
+	 * @used-by Df_Core_Model_Action::responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBodyFake() {
@@ -31,12 +31,12 @@ abstract class Df_1C_Cml2_Action_GenericExport extends Df_1C_Cml2_Action {
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getContentType()
+	 * @see Df_Core_Model_Action::contentType()
 	 * @used-by Df_Core_Model_Action::getResponseLogFileExtension()
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {return 'UTF-8';}
+	protected function contentType() {return 'UTF-8';}
 
 	/**
 	 * @override

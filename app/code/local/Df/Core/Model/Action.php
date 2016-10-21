@@ -1,10 +1,11 @@
 <?php
+use Mage_Core_Controller_Request_Http as Request;
 abstract class Df_Core_Model_Action extends Df_Core_Model {
 	/**
 	 * @used-by process()
 	 * @return void
 	 */
-	protected function _process() {$this->getResponse()->setBody($this->getResponseBody());}
+	protected function _process() {$this->response()->setBody($this->responseBody());}
 
 	/**
 	 * @used-by processPrepare()
@@ -12,9 +13,19 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 */
 	protected function checkAccessRights() {
 		if (!$this->isModuleEnabledByAdmin()) {
-			df_error($this->getErrorMessage_moduleDisabledByAdmin());
+			df_error(strtr(
+				'Модуль «{название модуля}» отключен в административной части магазина.'
+				, array('{название модуля}' => $this->moduleTitle())
+			));
 		}
 	}
+
+	/**
+	 * @used-by getResponseLogFileExtension()
+	 * @used-by processPrepare()
+	 * @return string
+	 */
+	protected function contentType() {return 'text/plain; charset=UTF-8';}
 
 	/**
 	 * 2015-03-13
@@ -40,179 +51,20 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 			$head[]= $class;
 			$class = df_cc_class_($head);
 		}
-		self::pc($class, $this->getController());
+		self::pc($class, $this->controller());
 	}
 
 	/**
-	 * @used-by getResponseBody()
+	 * @used-by responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBody() {return '';}
 
 	/**
-	 * @used-by getResponseBody()
+	 * @used-by responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBodyFake() {return '';}
-
-	/**
-	 * @used-by getResponseLogFileExtension()
-	 * @used-by processPrepare()
-	 * @return string
-	 */
-	protected function getContentType() {return 'text/plain; charset=UTF-8';}
-
-	/**
-	 * @used-by getRequest()
-	 * @used-by getResponse()
-	 * @used-by getRmRequest()
-	 * @used-by redirect()
-	 * @return Mage_Core_Controller_Varien_Action
-	 */
-	protected function getController() {return $this[self::$P__CONTROLLER];}
-
-	/**
-	 * @used-by checkAccessRights()
-	 * @return string
-	 */
-	protected function getErrorMessage_moduleDisabledByAdmin() {
-		return strtr(
-			'Модуль «{название модуля}» отключен в административной части магазина.'
-			, array('{название модуля}' => $this->moduleTitle())
-		);
-	}
-
-	/**
-	 * @used-by processPrepare()
-	 * @return int
-	 */
-	protected function getMemoryLimit() {return -1;}
-
-	/**
-	 * @used-by processRedirect()
-	 * @return string
-	 */
-	protected function getRedirectLocation() {return '';}
-
-	/**
-	 * @used-by processRedirect()
-	 * @return array(string => string|array())
-	 */
-	protected function getRedirectParams() {return array();}
-
-	/**
-	 * @used-by getRmRequest()
-	 * @used-by Df_Alfabank_Action_CustomerReturn::getRequest()
-	 * @return Mage_Core_Controller_Request_Http
-	 */
-	protected function getRequest() {return $this->getController()->getRequest();}
-
-	/**
-	 * @used-by _process()
-	 * @used-by processPrepare()
-	 * @used-by redirectRaw()
-	 * @return Mage_Core_Controller_Response_Http
-	 */
-	protected function getResponse() {return $this->getController()->getResponse();}
-
-	/**
-	 * @used-by _process()
-	 * @used-by Df_IPay_Action_Abstract::processBeforeRedirect()
-	 * @param bool $real [optional]
-	 * @return string
-	 */
-	protected function getResponseBody($real = null) {
-		if (is_null($real)) {
-			$real = !$this->needGenerateFakeResponse();
-		}
-		if (!isset($this->{__METHOD__}[$real])) {
-			$this->{__METHOD__}[$real] =
-				$real ? $this->generateResponseBody() : $this->generateResponseBodyFake()
-			;
-			df_result_string($this->{__METHOD__}[$real]);
-		}
-		return $this->{__METHOD__}[$real];
-	}
-
-	/**
-	 * «Df_1C_Cml2_Action_Catalog_Export_Process» => «cml2.action.catalog.export.process»
-	 * @used-by getResponseLogFileName()
-	 * @return string
-	 */
-	protected function getResponseLogActionName() {return df_cts_lc_camel($this, '.');}
-
-	/**
-	 * @used-by getResponseLogFileName()
-	 * @return string
-	 */
-	protected function getResponseLogFileDir() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cc_path(Mage::getBaseDir('var'), 'log');
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @used-by getResponseLogFileName()
-	 * @return string
-	 */
-	protected function getResponseLogFileExtension() {
-		return df_contains($this->getContentType(), 'xml') ? 'xml' : 'txt';
-	}
-
-	/**
-	 * @used-by logResponse()
-	 * @return string
-	 */
-	protected function getResponseLogFileName() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $prefix */
-			$prefix = implode('-', array_filter(array(
-				df_module_id($this, '.'), $this->getResponseLogActionName()
-			)));
-			/** @var string $template */
-			$template = strtr('rm-{prefix}-{date}-{time}.{extension}', array(
-				'{prefix}' => $prefix
-				,'{extension}' => $this->getResponseLogFileExtension()
-			));
-			$this->{__METHOD__} = df_file_name($this->getResponseLogFileDir(), $template, '.');
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @used-by Df_1C_Cml2_Action_Front::_process()
-	 * @used-by Df_YandexMarket_Action_Category_Suggest::getQuery()
-	 * @return Df_Core_Model_InputRequest
-	 */
-	protected function getRmRequest() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Core_Model_InputRequest::ic(
-				$this->getRmRequestClass(), $this->getController()->getRequest()
-			);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @used-by getRmRequest()
-	 * @uses Df_Core_Model_InputRequest
-	 * @return string
-	 */
-	protected function getRmRequestClass() {return 'Df_Core_Model_InputRequest';}
-
-	/**
-	 * @used-by Df_1C_Cml2_Action::getLastProcessedTimeAsString()
-	 * @param string $key
-	 * @return mixed
-	 */
-	protected function getStoreConfig($key) {return $this->store()->getConfig($key);}
-
-	/**
-	 * @used-by processPrepare()
-	 * @return int
-	 */
-	protected function getTimeLimit() {return 0;}
 
 	/**
 	 * @used-by checkAccessRights()
@@ -234,7 +86,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	protected function needBenchmark() {return false;}
 
 	/**
-	 * @used-by getResponseBody()
+	 * @used-by responseBody()
 	 * @return bool
 	 */
 	protected function needGenerateFakeResponse() {return false;}
@@ -251,6 +103,49 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return bool
 	 */
 	protected function needRethrowException() {return true;}
+
+	/**
+	 * 2016-10-20
+	 * @param string $key
+	 * @param string|null $d [optional]
+	 * @return string|null
+	 */
+	protected function param($key, $d = null) {return $this->request()->getParam($key, $d);}
+
+	/**
+	 * 2016-10-20
+	 * @return array(string => string)
+	 */
+	protected function params() {return $this->request()->getParams();}
+
+	/**
+	 * 2016-10-21
+	 * @used-by request()
+	 * @return array(string => string)
+	 */
+	protected function paramsCustom() {return [];}
+
+	/**
+	 * 2016-10-21
+	 * @used-by request()
+	 * @return array(string => string)
+	 */
+	protected function paramsLocal() {return dfc($this, function() {
+		/** @var array(string => string) $result */
+		$result = [];
+		if (df_my_local()) {
+			/** @var string $basename */
+			$basename = df_class_last($this);
+			/** @var string $module */
+			$module = df_module_name_short($this);
+			/** @var string $file */
+			$file = BP . "/_my/test/{$module}/{$basename}.json";
+			if (file_exists($file)) {
+				$result = df_json_decode(file_get_contents($file));
+			}
+		}
+		return $result;
+	});}
 
 	/**
 	 * @used-by process()
@@ -315,9 +210,9 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 		 * дополнительно отменить ограничение на max_input_time
 		 * http://www.php.net/manual/en/info.configuration.php
 		 */
-		set_time_limit($this->getTimeLimit());
-		ini_set('memory_limit', $this->getMemoryLimit());
-		df_response_content_type($this->getResponse(), $this->getContentType());
+		set_time_limit(0);
+		ini_set('memory_limit', -1);
+		df_response_content_type($this->response(), $this->contentType());
 		$this->benchmarkStart();
 		$this->checkAccessRights();
 	}
@@ -327,12 +222,115 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	protected function processRedirect() {
-		if ($this->getRedirectLocation()) {
-			self::$REDIRECT_LOCATION__REFERER === $this->getRedirectLocation()
+		if ($this->redirectLocation()) {
+			self::$REDIRECT_LOCATION__REFERER === $this->redirectLocation()
 			? $this->redirectRaw(df_referer())
-			: $this->redirect($this->getRedirectLocation(), $this->getRedirectParams());
+			: $this->redirect($this->redirectLocation());
 		}
 	}
+
+	/**
+	 * @used-by processRedirect()
+	 * @return string
+	 */
+	protected function redirectLocation() {return '';}
+
+	/**
+	 * @used-by rmRequest()
+	 * @used-by Df_Alfabank_Action_CustomerReturn::getRequest()
+	 * @return Request
+	 */
+	protected function request() {return dfc($this, function() {
+		/** @var  $result */
+		$result = $this->controller()->getRequest();
+		/**
+		 * 2016-10-21
+		 * 1) @see Request::clearParams() намеренно не вызываем.
+		 * 2) paramsLocal() сильнее и перетирает значения @see paramsCustom.
+		 */
+		$result->setParams($this->paramsLocal() + $this->paramsCustom());
+		return $result;
+	});}
+
+	/**
+	 * @used-by _process()
+	 * @used-by processPrepare()
+	 * @used-by redirectRaw()
+	 * @return Mage_Core_Controller_Response_Http
+	 */
+	protected function response() {return $this->controller()->getResponse();}
+
+	/**
+	 * @used-by _process()
+	 * @used-by Df_IPay_Action_Abstract::processBeforeRedirect()
+	 * @param bool $real [optional]
+	 * @return string
+	 */
+	protected function responseBody($real = null) {
+		if (is_null($real)) {
+			$real = !$this->needGenerateFakeResponse();
+		}
+		if (!isset($this->{__METHOD__}[$real])) {
+			$this->{__METHOD__}[$real] =
+				$real ? $this->generateResponseBody() : $this->generateResponseBodyFake()
+			;
+			df_result_string($this->{__METHOD__}[$real]);
+		}
+		return $this->{__METHOD__}[$real];
+	}
+
+	/**
+	 * «Df_1C_Cml2_Action_Catalog_Export_Process» => «cml2.action.catalog.export.process»
+	 * @used-by responseLogName()
+	 * @return string
+	 */
+	protected function responseLogActionName() {return df_cts_lc_camel($this, '.');}
+
+	/**
+	 * @used-by logResponse()
+	 * @return string
+	 */
+	protected function responseLogName() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $prefix */
+			$prefix = implode('-', array_filter(array(
+				df_module_id($this, '.'), $this->responseLogActionName()
+			)));
+			/** @var string $template */
+			$template = strtr('rm-{prefix}-{date}-{time}.{extension}', array(
+				'{prefix}' => $prefix
+				,'{extension}' => df_contains($this->contentType(), 'xml') ? 'xml' : 'txt'
+			));
+			$this->{__METHOD__} = df_file_name(df_cc_path(Mage::getBaseDir('var'), 'log'), $template, '.');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by Df_1C_Cml2_Action_Front::_process()
+	 * @used-by Df_YandexMarket_Action_Category_Suggest::getQuery()
+	 * @return Df_Core_Model_InputRequest
+	 */
+	protected function rmRequest() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Df_Core_Model_InputRequest::ic($this->rmRequestClass(), $this->request());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * @used-by rmRequest()
+	 * @uses Df_Core_Model_InputRequest
+	 * @return string
+	 */
+	protected function rmRequestClass() {return Df_Core_Model_InputRequest::class;}
+
+	/**
+	 * @used-by Df_1C_Cml2_Action::getLastProcessedTimeAsString()
+	 * @param string $key
+	 * @return mixed
+	 */
+	protected function storeConfig($key) {return $this->store()->getConfig($key);}
 
 	/**
 	 * @used-by processRedirect()
@@ -342,7 +340,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	protected function redirect($path, array $arguments = array()) {
-		$this->getController()->setRedirectWithCookieCheck($path, $arguments);
+		$this->controller()->setRedirectWithCookieCheck($path, $arguments);
 	}
 
 	/**
@@ -351,7 +349,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @param string $path
 	 * @return void
 	 */
-	protected function redirectRaw($path) {$this->getResponse()->setRedirect($path);}
+	protected function redirectRaw($path) {$this->response()->setRedirect($path);}
 
 	/**
 	 * @used-by checkAccessRights()
@@ -391,11 +389,20 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	}
 
 	/**
+	 * @used-by getRequest()
+	 * @used-by getResponse()
+	 * @used-by rmRequest()
+	 * @used-by redirect()
+	 * @return Mage_Core_Controller_Varien_Action
+	 */
+	private function controller() {return $this[self::$P__CONTROLLER];}
+
+	/**
 	 * @used-by processFinish()
 	 * @return void
 	 */
 	private function logResponse() {
-		df_file_put_contents($this->getResponseLogFileName(), $this->getResponseBody($real = true));
+		df_file_put_contents($this->responseLogName(), $this->responseBody($real = true));
 	}
 
 	/**
@@ -425,8 +432,8 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_1C_Cml2_Action_GenericExport::getContentType()
-	 * @used-by Df_YandexMarket_Action_Front::getContentType()
+	 * @used-by Df_1C_Cml2_Action_GenericExport::contentType()
+	 * @used-by Df_YandexMarket_Action_Front::contentType()
 	 * @var string
 	 */
 	protected static $CONTENT_TYPE__XML__UTF_8 = 'application/xml; charset=utf-8';

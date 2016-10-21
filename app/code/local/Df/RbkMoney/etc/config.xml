@@ -167,13 +167,6 @@
 								Df_RbkMoney: обязательный параметр.
 							-->
 							<currency-code>recipientCurrency</currency-code>
-							<!--
-								В этом поле передается назначение платежа
-								в соответствии с системой учета продавца,полученного системой с веб-сайта продавца.
-								Df_Payment: не используется.
-								Df_RbkMoney: обязательный параметр.
-							-->
-							<description>serviceName</description>
 						</payment>
 						<payment_service>
 							<payment>

@@ -47,7 +47,7 @@ class Df_1C_Cml2_Action_Orders_Export extends Df_1C_Cml2_Action_GenericExport {
 			else {
 				$result = null;
 				/** @var string $timeS */
-				$timeS = df_nts($this->getStoreConfig(self::$LAST_PROCESSED_KEY));
+				$timeS = df_nts($this->storeConfig(self::$LAST_PROCESSED_KEY));
 				if ($timeS) {
 					try {
 						// Мы вправе рассчитывать на стандартный для Zend_Date формат даты,

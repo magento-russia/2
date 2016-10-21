@@ -38,13 +38,27 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			$this->rShopId()
 			,$this->rAmountS()
 			,$this->rOII()
-			,$this->getRequestValueServicePaymentTest()
-			,$this->getRequest()->getParam('LMI_SYS_INVS_NO')
+			/**
+			 * 2016-10-21
+			 * Указывает, в каком режиме выполнялась обработка запроса на платеж.
+			 * Может принимать два значения:
+			 * 	0:	Платеж выполнялся в реальном режиме,
+			 * 		средства переведены с кошелька покупателя
+			 * 		на кошелек продавца;
+			 * 	1:	Платеж выполнялся в тестовом режиме,
+			 * 		средства реально не переводились.
+			 */
+			,$this->param('LMI_MODE')
+			,$this->param('LMI_SYS_INVS_NO')
 			,$this->rExternalId()
 			,$this->rTime()
 			,$this->getResponsePassword()
-			,$this->getRequestValueServiceCustomerAccountId()
-			,$this->getRequestValueServiceCustomerId()
+			// 2016-10-21
+			// Кошелек покупателя
+			,$this->param('LMI_PAYER_PURSE')
+			// 2016-10-21
+			// WMId покупателя
+			,$this->param('LMI_PAYER_WM')
 		);
 		return md5(implode($signatureParams));
 	}
@@ -53,7 +67,7 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return bool
 	 */
-	protected function needInvoice() {return !df_bool($this->getRequest()->getParam('LMI_PREREQUEST'));}
+	protected function needInvoice() {return !df_bool($this->param('LMI_PREREQUEST'));}
 
 	/**
 	 * @override
@@ -61,7 +75,7 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 */
 	protected function processPrepare() {
 		parent::processPrepare();
-		if (!$this->getRequest()->getParams()) {
+		if (!$this->params()) {
 			df_error(
 				"Платёжная система WebMoney прислала подтверждение оплаты безо всяких параметров.
 				\nВидимо, администратор магазина некачественно настроил Личный кабинет WebMoney:
@@ -69,94 +83,4 @@ class Df_WebMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			);
 		}
 	}
-
-	/**
-	 * Кошелек покупателя
-	 * @return string
-	 */
-	private function getRequestKeyServiceCustomerAccountId() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ACCOUNT_ID);
-	}
-
-	/**
-	 * WMId покупателя
-	 * @return string
-	 */
-	private function getRequestKeyServiceCustomerId() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ID);
-	}
-
-	/**
-	 * Указывает, в каком режиме выполнялась обработка запроса на платеж.
-	 * Может принимать два значения:
-	 * 	0:	Платеж выполнялся в реальном режиме,
-	 * 		средства переведены с кошелька покупателя
-	 * 		на кошелек продавца;
-	 * 	1:	Платеж выполнялся в тестовом режиме,
-	 * 		средства реально не переводились.
-	 * @return string
-	 */
-	private function getRequestKeyServicePaymentTest() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__TEST);
-	}
-
-	/**
-	 * Кошелек покупателя
-	 * @return string
-	 */
-	private function getRequestValueServiceCustomerAccountId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyServiceCustomerAccountId());
-		df_result_string($result);
-		return $result;
-	}
-
-	/**
-	 * WMId покупателя
-	 * @return string
-	 */
-	private function getRequestValueServiceCustomerId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyServiceCustomerId());
-		df_result_string($result);
-		return $result;
-	}
-
-	/**
-	 * Указывает, в каком режиме выполнялась обработка запроса на платеж.
-	 * Может принимать два значения:
-	 * 	0:	Платеж выполнялся в реальном режиме,
-	 * 		средства переведены с кошелька покупателя
-	 * 		на кошелек продавца;
-	 * 	1:	Платеж выполнялся в тестовом режиме,
-	 * 		средства реально не переводились.
-	 * @return string
-	 */
-	private function getRequestValueServicePaymentTest() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyServicePaymentTest());
-		df_result_string($result);
-		return $result;
-	}
-
-	
-	/**
-	 * Кошелек покупателя
-	 */
-	const CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ACCOUNT_ID = 'payment_service/customer/account-id';
-
-	/**
-	 * WMId покупателя
-	 */
-	const CONFIG_KEY__PAYMENT_SERVICE__CUSTOMER__ID = 'payment_service/customer/id';
-	/**
-	 * Указывает, в каком режиме выполнялась обработка запроса на платеж.
-	 * Может принимать два значения:
-	 * 	0:	Платеж выполнялся в реальном режиме,
-	 * 		средства переведены с кошелька покупателя
-	 * 		на кошелек продавца;
-	 * 	1:	Платеж выполнялся в тестовом режиме,
-	 * 		средства реально не переводились.
-	 */
-	const CONFIG_KEY__PAYMENT_SERVICE__PAYMENT__TEST = 'payment_service/payment/test';
 }

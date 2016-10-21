@@ -13,14 +13,13 @@ class Df_LiqPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * @override
 	 * @return Zend_Controller_Request_Abstract
 	 */
-	protected function getRequest() {
+	protected function request() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Zend_Controller_Request_Abstract $result */
 			$this->{__METHOD__} = new Zend_Controller_Request_Http();
-			$this->{__METHOD__}->setParams(array_merge(
-				parent::getRequest()->getParams()
-				, $this->getPaymentInfoAsArray()
-			));
+			$this->{__METHOD__}->setParams(
+				$this->getPaymentInfoAsArray() + parent::request()->getParams()
+			);
 		}
 		return $this->{__METHOD__};
 	}

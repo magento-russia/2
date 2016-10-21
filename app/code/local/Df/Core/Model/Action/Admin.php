@@ -6,11 +6,11 @@ abstract class Df_Core_Model_Action_Admin extends Df_Core_Model_Action {
 	 * как правило, разумно перенаправлять администратора на тот экран,
 	 * с которого он запускал обработку.
 	 * @override
-	 * @see Df_Core_Model_Action::getRedirectLocation()
+	 * @see Df_Core_Model_Action::redirectLocation()
 	 * @used-by Df_Core_Model_Action::processRedirect()
 	 * @return string
 	 */
-	protected function getRedirectLocation() {return self::$REDIRECT_LOCATION__REFERER;}
+	protected function redirectLocation() {return self::$REDIRECT_LOCATION__REFERER;}
 
 	/**
 	 * Для административных обработок,

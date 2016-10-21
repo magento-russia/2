@@ -58,12 +58,12 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getContentType()
+	 * @see Df_Core_Model_Action::contentType()
 	 * @used-by Df_Core_Model_Action::getResponseLogFileExtension()
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {return $this->const_('response/content-type');}
+	protected function contentType() {return $this->const_('response/content-type');}
 
 	/**           
 	 * 2016-10-20            
@@ -175,12 +175,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	protected function rTime() {return $this->param($this->rkTime());}
 
 	/** @return string */
-	protected function rExternalId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->rkExternalId());
-		df_result_string($result);
-		return $result;
-	}
+	protected function rExternalId() {return $this->param($this->rkExternalId());}
 
 	/** @return string */
 	protected function rState() {return $this->param($this->rkState());}
@@ -218,7 +213,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 			"При взаимодействии с платёжным шлюзом призошёл сбой.\n%s"
 			."\nПараметры запроса:\n%s"
 			,df_ets($e)
-			,df_print_params($this->getRequest()->getParams())
+			,df_print_params($this->params())
 		);
 		// В низкоуровневый журнал исключительную ситуацию записываем
 		// только если это сбой в программном коде.
@@ -317,7 +312,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		if (df_my()) {
 			/** @var string $module */
 			$module = df_module_name($this);
-			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty(df_request()));
+			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty($this->params()));
 		}
 		/**
 		 * TODO Надо ли это здесь?
@@ -384,22 +379,14 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @return void
 	 */
 	protected function processResponseForError(Exception $e) {
-		$this->getResponse()->setBody($this->responseTextForError($e));
+		$this->response()->setBody($this->responseTextForError($e));
 	}
 
 	/** @return Df_Payment_Model_Action_Confirm */
 	protected function processResponseForSuccess() {
-		$this->getResponse()->setBody($this->responseTextForSuccess());
+		$this->response()->setBody($this->responseTextForSuccess());
 		return $this;
 	}
-
-	/**
-	 * 2016-10-20
-	 * @param string $key
-	 * @param string|null $d [optional]
-	 * @return string
-	 */
-	protected function param($key, $d = null) {return $this->getRequest()->getParam($key, $d);}
 
 	/**
 	 * 2016-10-20
@@ -407,7 +394,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	 * @used-by Df_RbkMoney_Action_Confirm::signatureOwn()
 	 * @param string $key
 	 * @param string|null $d [optional]
-	 * @return string
+	 * @return string|null
 	 */
 	protected function paramC($key, $d = null) {return $this->param($this->const_($key), $d);}
 
@@ -491,7 +478,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 				 * Такой эффект заметил только в версии 2.20.0 и только при включенной компиляции
 				 * в двух магазинах: antonshop.com и mamamallm.ru
 				 */
-				$result = dfa($this->getRequest()->getParams(), $this->rkOII());
+				$result = dfa($this->params(), $this->rkOII());
 			}
 			if (!$result) {
 				df_error(
@@ -500,7 +487,7 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 					."\nЗначения всех параметров:"
 					."\n%s"
 					,$this->rkOII()
-					,df_print_params($this->getRequest()->getParams())
+					,df_print_params($this->params())
 				);
 			}
 			$this->{__METHOD__} = $result;

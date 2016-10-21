@@ -42,12 +42,12 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	/**
 	 * Обратите внимание, что IPay требует именно «text/xml».
 	 * @override
-	 * @see Df_Core_Model_Action::getContentType()
+	 * @see Df_Core_Model_Action::contentType()
 	 * @used-by Df_Core_Model_Action::getResponseLogFileExtension()
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function getContentType() {return 'text/xml';}
+	protected function contentType() {return 'text/xml';}
 
 	/**
 	 * Похоже, нам не надо здесь вызывать df_t()->convertUtf8ToWindows1251,
@@ -55,7 +55,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	 * в ту кодировку, которая указана в заголовке XML.
 	 * @override
 	 * @see Df_Core_Model_Action::generateResponseBody()
-	 * @used-by Df_Core_Model_Action::getResponseBody()
+	 * @used-by Df_Core_Model_Action::responseBody()
 	 * @return string
 	 */
 	protected function generateResponseBody() {
@@ -206,9 +206,9 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	 * @return void
 	 */
 	protected function processBeforeRedirect() {
-		$this->getResponse()
+		$this->response()
 			->setHeader(self::$HEADER__SIGNATURE, $this->getResponseHeader_Signature())
-			->setBody($this->getResponseBody())
+			->setBody($this->responseBody())
 		;
 	}
 
@@ -441,7 +441,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	private function generateResponseSignature() {
 		return strtoupper(md5(df_c(
 			$this->configS()->getResponsePassword()
-			,$this->preprocessXmlForSignature(df_1251_to($this->getResponseBody()))
+			,$this->preprocessXmlForSignature(df_1251_to($this->responseBody()))
 		)));
 	}
 
@@ -462,16 +462,12 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 
 	/** @return string */
 	private function getRequestAsXmlInWindows1251() {
-		return
-			df_my_local()
-			? $this->getRequestAsXml_Test()
-			: $this->getRequest()->getParam('XML')
-		;
+		return df_my_local() ? $this->getRequestAsXml_Test() : $this->param('XML');
 	}
 
 	/** @return string */
 	private function getRequestHeader_Signature() {
-		return $this->getController()->getRequest()->getHeader(self::$HEADER__SIGNATURE);
+		return $this->request()->getHeader(self::$HEADER__SIGNATURE);
 	}
 
 	/** @return int */

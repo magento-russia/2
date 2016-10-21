@@ -52,8 +52,12 @@ class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		$signatureParams = array(
 			$this->rShopId()
 			,$this->rOII()
-			,$this->getRequestValuePaymentDescription()
-			,$this->getRequestValueShopAccountId()
+			// 2016-10-21
+			// Назначение платежа в соответствии с системой учета продавца.
+			,$this->param('serviceName')
+			// 2016-10-21
+			// Номер кошелька магазина в системе RBK Money.
+			,$this->param('eshopAccount')
 			,$this->rAmountS()
 			,$this->rCurrencyC()
 			,$this->rState()
@@ -75,34 +79,6 @@ class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return self::PAYMENT_STATE__PROCESSING !== df_int($this->rState());
 	}
 
-	/** @return string */
-	private function getRequestKeyPaymentDescription() {
-		return $this->const_(self::CONFIG_KEY__PAYMENT__DESCRIPTION);
-	}
-
-	/** @return string */
-	private function getRequestKeyShopAccountId() {
-		return $this->const_(self::CONFIG_KEY__SHOP__ACCOUNT_ID);
-	}
-
-	/** @return string */
-	private function getRequestValuePaymentDescription() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyPaymentDescription());
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string */
-	private function getRequestValueShopAccountId() {
-		/** @var string $result */
-		$result = $this->getRequest()->getParam($this->getRequestKeyShopAccountId());
-		df_result_string($result);
-		return $result;
-	}
-
-	const CONFIG_KEY__PAYMENT__DESCRIPTION = 'payment/description';
-	const CONFIG_KEY__SHOP__ACCOUNT_ID = 'shop/account-id';
 	const PAYMENT_STATE__PROCESSED = 5;
 	const PAYMENT_STATE__PROCESSING = 3;
 	const SIGNATURE_SEPARATOR = '::';

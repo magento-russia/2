@@ -7,13 +7,13 @@ class Df_1C_Cml2_Action_Front extends Df_1C_Cml2_Action {
 	 * @return void
 	 */
 	protected function _process() {
-		if ($this->getRmRequest()->isCheckAuth()) {
+		if ($this->rmRequest()->isCheckAuth()) {
 			/** @uses Df_1C_Cml2_Action_Login */
 			$this->delegate('Login');
 		}
 		else {
 			$this->checkLoggedIn();
-			switch ($this->getRmRequest()->getType()) {
+			switch ($this->rmRequest()->getType()) {
 				case Df_1C_Cml2_InputRequest_Generic::TYPE__GET_CATALOG:
 					$this->action_catalogExport();
 					break;
@@ -32,7 +32,7 @@ class Df_1C_Cml2_Action_Front extends Df_1C_Cml2_Action {
 
 	/** @return void */
 	private function action_catalog() {
-		switch($this->getRmRequest()->getMode()) {
+		switch($this->rmRequest()->getMode()) {
 			/**
 			 * Этот режим имеется в версии 4.0.2.3 модуля 1С-Битрикс для обмена с сайтом:
 				Процедура ДобавитьПараметрыПротоколаОбменаВСтруктуру(СтруктураПараметров)
@@ -71,7 +71,7 @@ class Df_1C_Cml2_Action_Front extends Df_1C_Cml2_Action {
 	 * @throws Exception
 	 */
 	private function action_catalogExport() {
-		switch($this->getRmRequest()->getMode()) {
+		switch($this->rmRequest()->getMode()) {
 			case Df_1C_Cml2_InputRequest_Generic::MODE__INIT:
 				$this->action_init();
 				$this->flag_catalogHasJustBeenExported(false);
@@ -103,7 +103,7 @@ class Df_1C_Cml2_Action_Front extends Df_1C_Cml2_Action {
 
 	/** @return void */
 	private function action_orders() {
-		switch($this->getRmRequest()->getMode()) {
+		switch($this->rmRequest()->getMode()) {
 			case Df_1C_Cml2_InputRequest_Generic::MODE__FILE:
 				/** @uses Df_1C_Cml2_Action_Orders_Import */
 				$this->delegate('Orders_Import');
@@ -123,7 +123,7 @@ class Df_1C_Cml2_Action_Front extends Df_1C_Cml2_Action {
 
 	/** @return void */
 	private function action_reference() {
-		switch($this->getRmRequest()->getMode()) {
+		switch($this->rmRequest()->getMode()) {
 			case Df_1C_Cml2_InputRequest_Generic::MODE__FILE:
 				$this->action_upload();
 				break;

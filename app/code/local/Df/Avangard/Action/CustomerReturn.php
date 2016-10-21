@@ -5,14 +5,13 @@ class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 	 * @override
 	 * @return Zend_Controller_Request_Abstract
 	 */
-	protected function getRequest() {
+	protected function request() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Zend_Controller_Request_Abstract $result */
-			$this->{__METHOD__} = new Zend_Controller_Request_Http();
-			$this->{__METHOD__}->setParams(array_merge(
-				parent::getRequest()->getParams()
-				,$this->getRequestState()->getResponse()->getData()
-			));
+			$this->{__METHOD__} = new Zend_Controller_Request_Http;
+			$this->{__METHOD__}->setParams(
+				$this->getRequestState()->getResponse()->getData() + parent::request()->getParams()
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -76,7 +75,7 @@ class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 			$this->getResponseState()->throwOnFailure();
 			if ($this->getResponseState()->isPaymentServiceError()) {
 				/** @var string $resultCode */
-				$resultCode = $this->getRequest()->getParam('result_code');
+				$resultCode = $this->param('result_code');
 				/** @var Df_Avangard_Model_Response_Registration $responseRegistration */
 				$responseRegistration = Df_Avangard_Model_Response_Registration::i();
 				$responseRegistration->loadFromPaymentInfo($this->payment());

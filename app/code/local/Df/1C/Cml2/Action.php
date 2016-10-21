@@ -1,17 +1,17 @@
 <?php
-/** @method Df_1C_Cml2_InputRequest_Generic getRmRequest() */
+/** @method Df_1C_Cml2_InputRequest_Generic rmRequest() */
 abstract class Df_1C_Cml2_Action extends Df_Core_Model_Action {
 	/** @return Df_1C_Cml2_State */
 	protected function getState() {return Df_1C_Cml2_State::s();}
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::getRmRequestClass()
-	 * @used-by Df_Core_Model_Action::getRmRequest()
+	 * @see Df_Core_Model_Action::rmRequestClass()
+	 * @used-by Df_Core_Model_Action::rmRequest()
 	 * @uses Df_1C_Cml2_InputRequest_Generic
 	 * @return string
 	 */
-	protected function getRmRequestClass() {return 'Df_1C_Cml2_InputRequest_Generic';}
+	protected function rmRequestClass() {return 'Df_1C_Cml2_InputRequest_Generic';}
 
 	/**
 	 * @override
@@ -74,9 +74,9 @@ abstract class Df_1C_Cml2_Action extends Df_Core_Model_Action {
 	 * @return void
 	 */
 	protected function setResponseLines($lines) {
-		df_response_content_type($this->getResponse(), 'text/plain; charset=windows-1251');
+		df_response_content_type($this->response(), 'text/plain; charset=windows-1251');
 		$lines = is_array($lines) ? $this->flatResponseLines($lines) : func_get_args();
-		$this->getResponse()->setBody(df_1251_to(df_cc_n($lines)));
+		$this->response()->setBody(df_1251_to(df_cc_n($lines)));
 	}
 
 	/**

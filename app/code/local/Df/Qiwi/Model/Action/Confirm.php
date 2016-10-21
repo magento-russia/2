@@ -10,8 +10,8 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		 * Номер заказа надо указывать отдельным вызовом setParam,
 		 * потому что @see rkShopId() уже будет использовать указанное значение
 		 */
-		$this->getRequest()->setParam($this->rkOII(), dfo($params, 'txn'));
-		$this->getRequest()->setParams(array(
+		$this->request()->setParam($this->rkOII(), dfo($params, 'txn'));
+		$this->request()->setParams([
 			$this->rkShopId() => dfo($params, 'login')
 			,$this->rkSignature() => dfo($params, 'password')
 			/**
@@ -19,7 +19,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 			 * должен вернуть строку
 			 */
 			,$this->rkState() => strval(dfo($params, 'status'))
-		));
+		]);
 		return 0;
 	}
 
