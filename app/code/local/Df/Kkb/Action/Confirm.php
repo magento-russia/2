@@ -81,6 +81,8 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 
 	/**
 	 * @override
+	 * @see Df_Payment_Model_Action_Confirm::processResponseForSuccess()
+	 * @used-by _process()
 	 * @return void
 	 */
 	protected function processResponseForSuccess() {

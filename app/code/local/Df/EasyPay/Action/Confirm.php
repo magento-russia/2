@@ -63,17 +63,17 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	}
 
 	/**
+	 * Уведомление Поставщика о совершенном платеже осуществляется запросом,
+	 * который будет отсылаться до тех пор, пока Поставщик его не примет,
+	 * то есть не ответит ему кодом "HTTP/1.0 200 OK".
+	 * https://ssl.easypay.by/notify/
 	 * @override
+	 * @see Df_Payment_Model_Action_Confirm::processResponseForSuccess()
+	 * @used-by _process()
 	 * @return void
 	 */
 	protected function processResponseForSuccess() {
 		parent::processResponseForSuccess();
-		/**
-		 * Уведомление Поставщика о совершенном платеже осуществляется запросом,
-		 * который будет отсылаться до тех пор, пока Поставщик его не примет,
-		 * то есть не ответит ему кодом "HTTP/1.0 200 OK".
-		 * https://ssl.easypay.by/notify/
-		 */
 		$this->response()->setRawHeader('HTTP/1.0 200 OK');
 	}
 }

@@ -410,6 +410,11 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * @return void
 	 */
 	private function process() {
+		/** @var string $logName */
+		if (df_my()) {
+			$logName = df_module_name($this) . "-{date}-{time}";
+			df_report("{$logName}.log", df_json_encode_pretty($this->params()));
+		}
 		try {
 			$this->processPrepare();
 			$this->_process();
@@ -419,6 +424,9 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 			$this->processException($e);
 		}
 		$this->processBeforeRedirect();
+		if (df_my()) {
+			df_report("{$logName}-response.log", $this->response()->getBody());
+		}
 		$this->processRedirect();
 	}
 

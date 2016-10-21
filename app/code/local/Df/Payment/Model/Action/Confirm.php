@@ -305,15 +305,10 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::_process()
-	 * @used-by Df_Core_Model_Action::process()
+	 * @used-by process()
 	 * @return void
 	 */
 	protected function _process() {
-		if (df_my()) {
-			/** @var string $module */
-			$module = df_module_name($this);
-			df_report("{$module}-{date}-{time}.log", df_json_encode_pretty($this->params()));
-		}
 		/**
 		 * TODO Надо ли это здесь?
 		 * Ведь запрос платёжной системы к магазину не относится к сессии покупателя.
@@ -382,10 +377,12 @@ abstract class Df_Payment_Model_Action_Confirm extends Df_Payment_Model_Action_A
 		$this->response()->setBody($this->responseTextForError($e));
 	}
 
-	/** @return Df_Payment_Model_Action_Confirm */
+	/**
+	 * @used-by _process()
+	 * @return void
+	 */
 	protected function processResponseForSuccess() {
 		$this->response()->setBody($this->responseTextForSuccess());
-		return $this;
 	}
 
 	/**
