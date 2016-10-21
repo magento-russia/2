@@ -32,16 +32,11 @@
 							<df_feature>df-qiwi</df_feature>
 						</active>
 						<payment_service__shop_id>
-							<label>Номер магазина в системе QIWI Кошелёк</label>
-							<comment>
-							   <![CDATA[
-									<a
-										target='_blank'
-										href='http://magento-forum.ru/topic/1712/'
-										title='инструкция с картинками'
-									>как узнать номер моего магазина?</a>
-							   ]]>
-						   </comment>
+							<label>API ID</label>
+							<comment><![CDATA[
+<a target='_blank' href='http://magento-forum.ru/topic/5490/' title='инструкция с картинками'
+>как его узнать?</a>
+]]></comment>
 							<frontend_type>text</frontend_type>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
@@ -55,14 +50,11 @@
 							</validate>
 						</payment_service__shop_id>
 						<payment_service__response_password>
-							<label>
-								Пароль к Личному кабинету магазина в системе QIWI Кошелёк
-							</label>
-							<comment>
-							   <![CDATA[
-									Этот пароль необходим модулю как для обращения к QIWI Кошелёк,так и для проверки подлинности ответов от QIWI Кошелёк.
-							   ]]>
-						   </comment>
+							<label>Пароль к API ID</label>
+							<comment><![CDATA[
+<a target='_blank' href='http://magento-forum.ru/topic/5490/' title='инструкция с картинками'
+>как его узнать?</a>
+]]></comment>
 							<frontend_type>obscure</frontend_type>
 							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
 							<sort_order>3000</sort_order>
