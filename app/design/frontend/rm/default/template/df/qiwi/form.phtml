@@ -1,5 +1,5 @@
-<?php /** @var Df_Qiwi_Block_Form $this */ ?>
 <?php
+	/** @var Df_Qiwi_Block_Form $this */
 	/**
 	 * Нижеследующая стандартная для Magento разметка HTML
  	 * вместо простого echo $this->getDescription();
@@ -24,14 +24,14 @@
 					<label
 						for='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE; ?>'
 						class='required'
-					><em>*</em><?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE); ?></label>
+					><em>*</em>Код:</label>
 					<div class='df-network-code-input-frame'>
 						<div class='df-bracket df-bracket-open'>(</div>
 						<input
 							type='text'
 							id='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE; ?>'
 							name='payment[<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE; ?>]'
-							title='<?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE); ?>'
+							title='Код'
 							class='<?php echo $this->getQiwiCustomerPhoneNetworkCodeCssClassesAsString(); ?>'
 							value='<?php echo $this->getQiwiCustomerPhoneNetworkCode(); ?>'
 							maxlength='3'
@@ -43,12 +43,12 @@
 					<label
 						for='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX; ?>'
 						class='required'
-					><em>*</em><?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX); ?></label>
+					><em>*</em>Номер:</label>
 					<input
 						type='text'
 						id='<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX; ?>'
 						name='payment[<?php echo Df_Qiwi_Model_Payment::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX; ?>]'
-						title='<?php echo $this->__(Df_Qiwi_Block_Form::T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX); ?>'
+						title='Номер'
 						class='<?php echo $this->getQiwiCustomerPhoneSuffixCssClassesAsString(); ?>'
 						value='<?php echo $this->getQiwiCustomerPhoneSuffix(); ?>'
 						maxlength='7'

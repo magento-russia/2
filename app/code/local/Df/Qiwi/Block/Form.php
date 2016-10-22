@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Format\MobilePhoneNumber as PhoneNumber;
 /** @method Df_Qiwi_Model_Payment getMethod() */
 class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	/** @return string */
@@ -41,15 +42,10 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	 */
 	protected function defaultTemplate() {return 'df/qiwi/form.phtml';}
 
-	/** @return \Df\Core\Format\MobilePhoneNumber */
-	private function getBillingAddressPhone() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\Core\Format\MobilePhoneNumber::fromQuoteAddress(
-				df_quote_address_billing()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return PhoneNumber */
+	private function getBillingAddressPhone() {return dfc($this, function() {return
+		PhoneNumber::fromQuoteAddress(df_quote_address_billing())
+	;});}
 
 	/** @return string */
 	private function getQiwiCustomerPhone() {
@@ -66,22 +62,11 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 				$result = '';
 			}
 		}
-		df_result_string($result);
 		return $result;
 	}
 
 	/** @return \Df\Core\Format\MobilePhoneNumber */
-	private function getShippingAddressPhone() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\Core\Format\MobilePhoneNumber::i(
-				df_quote_address_shipping()->getTelephone()
-			);
-		};
-		return $this->{__METHOD__};
-	}
-
-
-	const T_FIELD_LABEL__QIWI_CUSTOMER_ID = 'Номер телефона';
-	const T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__NETWORK_CODE = 'Код:';
-	const T_FIELD_LABEL__QIWI_CUSTOMER_PHONE__SUFFIX = 'Номер:';
+	private function getShippingAddressPhone() {return dfc($this, function() {return
+		PhoneNumber::i(df_quote_address_shipping()->getTelephone())
+	;});}
 }
