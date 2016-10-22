@@ -46,10 +46,10 @@ abstract class Url extends Element {
 	protected function messageForOthers() {return
 		!$this->requireHttps() || df_check_https($this->url())
 			? $this->url()
-			: 'Looks like your <a href="https://mage2.pro/t/topic/1723" target="_blank">'
-			 . '«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b> '
-			 . ' → «<b>Secure Base URL</b>»</a>'
-			 . ' option is misconfigured (does not start with «https»).'
+			: 'Опция <a href="http://magento-forum.ru/topic/5492/" target="_blank">'
+			 . '«<b>Общие</b>» → «<b>Интернет</b>» → «<b>HTTPS</b>'
+			 . ' → «<b>Общая часть веб-адресов системы</b>»</a>'
+			 . ' Вашего магазина настроена неправильно: её значение должно начинаться с «<b>https</b>»).'
 
 	;}
 
@@ -57,12 +57,9 @@ abstract class Url extends Element {
 	 * 2016-05-30
 	 * @return string|null
 	 */
-	protected function routePath() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_fe_fc($this, 'dfWebhook_routePath'));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	protected function routePath() {return dfc($this, function() {return
+		df_fe_fc($this, 'dfWebhook_routePath')
+	;});}
 
 	/**
 	 * 2016-05-30
@@ -74,50 +71,39 @@ abstract class Url extends Element {
 		}
 	 * @return string
 	 */
-	protected function url() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers()
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	protected function url() {return dfc($this, function() {return
+		df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers()
+	;});}
 
 	/**
 	 * 2016-05-31
 	 * @return string
 	 */
-	protected function urlForMyLocalPc() {
-		return df_cc_path_t('https://mage2.pro/sandbox2', $this->routePath());
-	}
+	protected function urlForMyLocalPc() {return
+		df_cc_path_t('https://mage2.pro/sandbox2', $this->routePath())
+	;}
 
 	/**
 	 * 2016-05-31
 	 * @return string
 	 */
-	protected function urlForOthers() {
-		return df_url_frontend($this->routePath(), ['_secure' => $this->requireHttps() ? true : null]);
-	}
+	protected function urlForOthers() {return
+		df_url_frontend($this->routePath(), ['_secure' => $this->requireHttps() ? true : null])
+	;}
 
 	/**
 	 * 2016-05-30
 	 * @return bool
 	 */
-	private function requireHttps() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_fe_fc_b($this, 'dfWebhook_requireHTTPS') && !df_is_localhost();
-		}
-		return $this->{__METHOD__};
-	}
+	protected function requireHttps() {return dfc($this, function() {return
+		!df_is_localhost() && df_fe_fc_b($this, 'dfWebhook_requireHTTPS')
+	;});}
 
 	/**
 	 * 2016-05-30
 	 * @return bool
 	 */
-	private function thirdPartyLocalhost() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_is_localhost() && !df_my();
-		}
-		return $this->{__METHOD__};
-	}
+	protected function thirdPartyLocalhost() {return dfc($this, function() {return
+		df_is_localhost() && !df_my()
+	;});}
 }
