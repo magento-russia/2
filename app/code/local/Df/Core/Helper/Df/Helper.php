@@ -60,8 +60,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function promoGift() {return Df_PromoGift_Helper_Data::s();}
 	/** @return Df_Promotion_Helper_Data */
 	public function promotion() {return Df_Promotion_Helper_Data::s();}
-	/** @return Df_Qiwi_Helper_Data */
-	public function qiwi() {return Df_Qiwi_Helper_Data::s();}
 	/** @return Df_Rating_Helper_Data */
 	public function rating() {return Df_Rating_Helper_Data::s();}
 	/** @return Df_Reports_Helper_Data */

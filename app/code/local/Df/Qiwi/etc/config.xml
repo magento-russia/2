@@ -11,6 +11,20 @@
 		<blocks><df_qiwi><class>Df_Qiwi_Block</class></df_qiwi></blocks>
 		<helpers><df_qiwi><class>Df_Qiwi_Helper</class></df_qiwi></helpers>
 		<models><df_qiwi><class>Df_Qiwi_Model</class></df_qiwi></models>
+		<request>
+			<direct_front_name>
+<!--
+2016-10-22
+Позволяет администратору магазина указывать в личном кабинете платёжной системы
+адрес для оповещений (df-qiwi/confirm) без указания в нём кода магазина.
+Таким образом, если в системе присутствует несколько магазинов,
+то исчезает путаница: код какого магазина использовать в адресах оповещений.
+https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/Controller/Request/Http.php#L37
+https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/Controller/Request/Http.php#L161-L170
+-->
+				<df-robokassa/>
+			</direct_front_name>
+		</request>
 	</global>
 	<default>
 		<!--

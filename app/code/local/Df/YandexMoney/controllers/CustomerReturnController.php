@@ -1,8 +1,6 @@
 <?php
-class Df_YandexMoney_CustomerReturnController extends Mage_Core_Controller_Front_Action {
-	/**
-	 * Яндекс.Деньги передают сюда результат авторизации приложения
-	 * @return void
-	 */
-	public function indexAction() {df_action($this);}
-}
+/**
+ * Яндекс.Деньги передают сюда результат авторизации приложения
+ * @uses Df_YandexMoney_Action_CustomerReturn
+ */
+class Df_YandexMoney_CustomerReturnController extends \Df\Core\Controller {}

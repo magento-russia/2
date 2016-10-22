@@ -1,8 +1,3 @@
 <?php
-class Df_RbkMoney_ConfirmController extends Mage_Core_Controller_Front_Action {
-	/**
-	 * Платёжная система присылает сюда подтверждение приёма оплаты от покупателя.
-	 * @return void
-	 */
-	public function indexAction() {df_action($this);}
-}
+/** @uses Df_RbkMoney_Action_Confirm */
+class Df_RbkMoney_ConfirmController extends \Df\Core\Controller {}

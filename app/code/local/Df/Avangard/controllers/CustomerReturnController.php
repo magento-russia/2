@@ -1,8 +1,3 @@
 <?php
-class Df_Avangard_CustomerReturnController extends Mage_Core_Controller_Front_Action {
-	/**
-	 * @uses Df_Avangard_Action_CustomerReturn
-	 * @return void
-	 */
-	public function indexAction() {df_action($this);}
-}
+/** @uses Df_Avangard_Action_CustomerReturn */
+class Df_Avangard_CustomerReturnController extends \Df\Core\Controller {}
