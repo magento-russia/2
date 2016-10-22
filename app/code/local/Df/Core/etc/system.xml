@@ -286,6 +286,14 @@
 ]]>
 							</comment>
 						</base_url>
+						<offloader_header>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Значение играет роль только при использовании технологии <a href='http://www.google.com/search?q=ssl+offloading' target='_blank'>SSL Offloading</a>.
+]]>
+							</comment>
+						</offloader_header>
 						<use_in_adminhtml>
 							<!-- 2016-03-23 -->
 							<comment>
