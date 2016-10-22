@@ -227,23 +227,146 @@
 			<groups>
 				<secure>
 					<fields>
-						<!-- 2016-03-23 -->
-						<use_in_adminhtml>
+						<base_js_url>
+							<!-- 2016-10-22 -->
 							<comment>
-								<![CDATA[
+<![CDATA[
+Корневая папка «js» содержит статичные (не требующие обработки интерпретатором PHP) файлы, не относящиеся к какой-либо отдельной оформительской теме.<br/>Например, это основные для Magento библиотеки JavaScript: они используются сразу всеми оформительскими темами.
+<br/>Magento использует это значение при программном формировании веб-адресов этих файлов.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» и «URL_TYPE_LINK» (а также «URL_TYPE_SKIN», «URL_TYPE_JS», «URL_TYPE_MEDIA») при программном формировании веб-адресов'>URL_TYPE_JS</a></b>».
+<br/>Для большинства магазинов рекомендую стандартное значение: «<span class='rm-recommendation'>{{secure_base_url}}js/</span>».
+<br/>Другие (нестандартные) значения используются для реализации <a href='https://ru.wikipedia.org/wiki/Content_Delivery_Network' target='_blank' title='Content Delivery Network: сеть доставки (и дистрибуции) контента'>CDN</a>: географически распределённой сети доставки (и дистрибуции) контента.
+<br/>При этом CDN рекомендую делать на поддомене магазина из-за <a href='https://ru.wikipedia.org/wiki/Правило_ограничения_домена' target='_blank' title='Same-origin policy'>правила ограничения домена</a> интерпретаторов JavaScript.
+]]>
+							</comment>
+						</base_js_url>
+						<base_link_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Рекомендуемое значение: «<span class='rm-recommendation'>{{secure_base_url}}</span>».
+<br/>Magento использует это значение при программном формировании тех веб-адресов, обращение посетителей к которым должно обрабатываться интерпретатором PHP.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» vs «URL_TYPE_LINK» при программном формировании веб-адресов'>URL_TYPE_LINK</a></b>».
+]]>
+							</comment>
+						</base_link_url>
+						<base_media_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Корневая папка «media» содержит: <ul><li>товарные изображения</li><li>картинки, загружаемые администратором в статьи посредством визуального текстового редактора административной части</li><li>некоторые другие статичные (не требующие обработки интерпретатором PHP) файлы, размещаемые там различными модулями</li></ul> Magento использует это значение при программном формировании веб-адресов этих файлов.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» и «URL_TYPE_LINK» (а также «URL_TYPE_SKIN», «URL_TYPE_JS», «URL_TYPE_MEDIA») при программном формировании веб-адресов'>URL_TYPE_MEDIA</a></b>».
+<br/>Для большинства магазинов рекомендую стандартное значение: «<span class='rm-recommendation'>{{secure_base_url}}media/</span>».
+<br/>Другие (нестандартные) значения используются для реализации <a href='https://ru.wikipedia.org/wiki/Content_Delivery_Network' target='_blank' title='Content Delivery Network: сеть доставки (и дистрибуции) контента'>CDN</a>: географически распределённой сети доставки (и дистрибуции) контента.
+]]>
+							</comment>
+						</base_media_url>
+						<base_skin_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Корневая папка «skin» содержит статичные (не требующие обработки интерпретатором PHP) файлы оформительских тем.<br/>В основном, это файлы JavaScript, CSS и графические элементы (картинки) оформительских тем.
+<br/>Magento использует это значение при программном формировании веб-адресов этих файлов.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» и «URL_TYPE_LINK» (а также «URL_TYPE_SKIN», «URL_TYPE_JS», «URL_TYPE_MEDIA») при программном формировании веб-адресов'>URL_TYPE_SKIN</a></b>».
+<br/>Для большинства магазинов рекомендую стандартное значение: «<span class='rm-recommendation'>{{secure_base_url}}skin/</span>».
+<br/>Другие (нестандартные) значения используются для реализации <a href='https://ru.wikipedia.org/wiki/Content_Delivery_Network' target='_blank' title='Content Delivery Network: сеть доставки (и дистрибуции) контента'>CDN</a>: географически распределённой сети доставки (и дистрибуции) контента.
+<br/>При этом CDN рекомендую делать на поддомене магазина из-за <a href='https://ru.wikipedia.org/wiki/Правило_ограничения_домена' target='_blank' title='Same-origin policy'>правила ограничения домена</a> интерпретаторов JavaScript.
+]]>
+							</comment>
+						</base_skin_url>
+						<base_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Значение должно заканчивается <b>косой чертой</b>: «<b>/</b>».
+<br/>Например «http://example.ru/» или «http://example.ru/magento/».
+<br/>Magento использует это значение в <b>2 случаях</b>:
+<ol><li>когда администратор магазина явно ссылается на него кодом <b>{{secure_base_url}}</b>: в качестве примера смотрите значения опций ниже.</li>
+<li>когда программист формирует какой-либо веб-адрес с параметром «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» vs «URL_TYPE_LINK» при программном формировании веб-адресов'>URL_TYPE_WEB</a></b>».</li></ol>
+]]>
+							</comment>
+						</base_url>
+						<use_in_adminhtml>
+							<!-- 2016-03-23 -->
+							<comment>
+<![CDATA[
 Предварительно Вы должны установить и правильно настроить сертификат SSL, <b>иначе Ваш магазин перестанет работать правильно</b>.<br/>Вы можете заказать стандартную услугу «<a href="http://magento-forum.ru/topic/5145/">Настройка HTTPS (установка сертификата SSL)</a>».
-								]]>
+]]>
 							</comment>
 						</use_in_adminhtml>
 						<use_in_frontend>
+							<!-- 2016-03-23 -->
 							<comment>
-								<![CDATA[
+<![CDATA[
 Предварительно Вы должны установить и правильно настроить сертификат SSL, <b>иначе Ваш магазин перестанет работать правильно</b>.<br/>Вы можете заказать стандартную услугу «<a href="http://magento-forum.ru/topic/5145/">Настройка HTTPS (установка сертификата SSL)</a>».
-								]]>
+]]>
 							</comment>
 						</use_in_frontend>
 					</fields>
 				</secure>
+				<unsecure>
+					<fields>
+						<base_js_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Корневая папка «js» содержит статичные (не требующие обработки интерпретатором PHP) файлы, не относящиеся к какой-либо отдельной оформительской теме.<br/>Например, это основные для Magento библиотеки JavaScript: они используются сразу всеми оформительскими темами.
+<br/>Magento использует это значение при программном формировании веб-адресов этих файлов.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» и «URL_TYPE_LINK» (а также «URL_TYPE_SKIN», «URL_TYPE_JS», «URL_TYPE_MEDIA») при программном формировании веб-адресов'>URL_TYPE_JS</a></b>».
+<br/>Для большинства магазинов рекомендую стандартное значение: «<span class='rm-recommendation'>{{unsecure_base_url}}js/</span>».
+<br/>Другие (нестандартные) значения используются для реализации <a href='https://ru.wikipedia.org/wiki/Content_Delivery_Network' target='_blank' title='Content Delivery Network: сеть доставки (и дистрибуции) контента'>CDN</a>: географически распределённой сети доставки (и дистрибуции) контента.
+<br/>При этом CDN рекомендую делать на поддомене магазина из-за <a href='https://ru.wikipedia.org/wiki/Правило_ограничения_домена' target='_blank' title='Same-origin policy'>правила ограничения домена</a> интерпретаторов JavaScript.
+]]>
+							</comment>
+						</base_js_url>
+						<base_link_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Рекомендуемое значение: «<span class='rm-recommendation'>{{unsecure_base_url}}</span>».
+<br/>Magento использует это значение при программном формировании тех веб-адресов, обращение посетителей к которым должно обрабатываться интерпретатором PHP.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» vs «URL_TYPE_LINK» при программном формировании веб-адресов'>URL_TYPE_LINK</a></b>».
+]]>
+							</comment>
+						</base_link_url>
+						<base_media_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Корневая папка «media» содержит: <ul><li>товарные изображения</li><li>картинки, загружаемые администратором в статьи посредством визуального текстового редактора административной части</li><li>некоторые другие статичные (не требующие обработки интерпретатором PHP) файлы, размещаемые там различными модулями</li></ul> Magento использует это значение при программном формировании веб-адресов этих файлов.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» и «URL_TYPE_LINK» (а также «URL_TYPE_SKIN», «URL_TYPE_JS», «URL_TYPE_MEDIA») при программном формировании веб-адресов'>URL_TYPE_MEDIA</a></b>».
+<br/>Для большинства магазинов рекомендую стандартное значение: «<span class='rm-recommendation'>{{unsecure_base_url}}media/</span>».
+<br/>Другие (нестандартные) значения используются для реализации <a href='https://ru.wikipedia.org/wiki/Content_Delivery_Network' target='_blank' title='Content Delivery Network: сеть доставки (и дистрибуции) контента'>CDN</a>: географически распределённой сети доставки (и дистрибуции) контента.
+]]>
+							</comment>
+						</base_media_url>
+						<base_skin_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Корневая папка «skin» содержит статичные (не требующие обработки интерпретатором PHP) файлы оформительских тем.<br/>В основном, это файлы JavaScript, CSS и графические элементы (картинки) оформительских тем.
+<br/>Magento использует это значение при программном формировании веб-адресов этих файлов.
+<br/>В программном коде ему соответствует константа «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» и «URL_TYPE_LINK» (а также «URL_TYPE_SKIN», «URL_TYPE_JS», «URL_TYPE_MEDIA») при программном формировании веб-адресов'>URL_TYPE_SKIN</a></b>».
+<br/>Для большинства магазинов рекомендую стандартное значение: «<span class='rm-recommendation'>{{unsecure_base_url}}skin/</span>».
+<br/>Другие (нестандартные) значения используются для реализации <a href='https://ru.wikipedia.org/wiki/Content_Delivery_Network' target='_blank' title='Content Delivery Network: сеть доставки (и дистрибуции) контента'>CDN</a>: географически распределённой сети доставки (и дистрибуции) контента.
+<br/>При этом CDN рекомендую делать на поддомене магазина из-за <a href='https://ru.wikipedia.org/wiki/Правило_ограничения_домена' target='_blank' title='Same-origin policy'>правила ограничения домена</a> интерпретаторов JavaScript.
+]]>
+							</comment>
+						</base_skin_url>
+						<base_url>
+							<!-- 2016-10-22 -->
+							<comment>
+<![CDATA[
+Значение должно заканчивается <b>косой чертой</b>: «<b>/</b>».
+<br/>Например «http://example.ru/» или «http://example.ru/magento/».
+<br/>Magento использует это значение в <b>2 случаях</b>:
+<ol><li>когда администратор магазина явно ссылается на него кодом <b>{{unsecure_base_url}}</b>: в качестве примера смотрите значения опций ниже.</li>
+<li>когда программист формирует какой-либо веб-адрес с параметром «Mage_Core_Model_Store::<b><a href='http://magento-forum.ru/topic/5491/' target='_blank' title='Разница между «URL_TYPE_WEB» vs «URL_TYPE_LINK» при программном формировании веб-адресов'>URL_TYPE_WEB</a></b>».</li></ol>
+]]>
+							</comment>
+						</base_url>
+					</fields>
+				</unsecure>
 			</groups>
 		</web>
 	</sections>

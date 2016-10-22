@@ -11,23 +11,21 @@ abstract class Url extends Element {
 	abstract protected function messageForThirdPartyLocalhost();
 	/**
 	 * 2016-05-30
+	 * 2016-06-07
+	 * 'id' => $this->getId() нужно для совместимости с 2.0.6,
+	 * иначе там сбой в выражении inputs = $(idTo).up(this._config.levels_up)
+	 * https://mail.google.com/mail/u/0/#search/maged%40wrapco.com.au/15510135c446afdb
 	 * @override
 	 * @see \Varien_Data_Form_Element_Abstract::getElementHtml()
 	 * @return string
 	 */
-	public function getElementHtml() {
-		/**
-		 * 2016-06-07
-		 * 'id' => $this->getId() нужно для совместимости с 2.0.6,
-		 * иначе там сбой в выражении inputs = $(idTo).up(this._config.levels_up)
-		 * https://mail.google.com/mail/u/0/#search/maged%40wrapco.com.au/15510135c446afdb
-		 */
-		return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
+	public function getElementHtml() {return
+		df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
 			$this->thirdPartyLocalhost()
 			? $this->messageForThirdPartyLocalhost()
 			: $this->messageForOthers()
-		);
-	}
+		)
+	;}
 
 	/**
 	 * 2016-05-30
@@ -45,15 +43,15 @@ abstract class Url extends Element {
 	 * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
 	 * @return string
 	 */
-	protected function messageForOthers() {
-		return !$this->requireHttps() || df_check_https($this->url())
+	protected function messageForOthers() {return
+		!$this->requireHttps() || df_check_https($this->url())
 			? $this->url()
 			: 'Looks like your <a href="https://mage2.pro/t/topic/1723" target="_blank">'
 			 . '«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b> '
 			 . ' → «<b>Secure Base URL</b>»</a>'
 			 . ' option is misconfigured (does not start with «https»).'
-		;
-	}
+
+	;}
 
 	/**
 	 * 2016-05-30
