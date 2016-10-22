@@ -2,66 +2,36 @@
 /** @method Df_Qiwi_Model_Payment getMethod() */
 class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	/** @return string */
-	public function getQiwiCustomerPhoneNetworkCode() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = substr($this->getQiwiCustomerPhone(), 0, 3);
-			if (false === $this->{__METHOD__}) {
-				$this->{__METHOD__} = '';
-			}
-		}
-		return $this->{__METHOD__};
-	}
+	public function getQiwiCustomerPhoneNetworkCode() {return dfc($this, function() {return
+		strval(substr($this->getQiwiCustomerPhone(), 0, 3))
+	;});}
 
 	/** @return string */
-	public function getQiwiCustomerPhoneSuffix() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = substr($this->getQiwiCustomerPhone(), 3);
-			if (false === $this->{__METHOD__}) {
-				$this->{__METHOD__} = '';
-			}
-		}
-		return $this->{__METHOD__};
-	}
+	public function getQiwiCustomerPhoneSuffix() {return dfc($this, function() {return
+		strval(substr($this->getQiwiCustomerPhone(), 3))
+	;});}
 
 	/** @return string */
-	public function getQiwiCustomerPhoneNetworkCodeCssClassesAsString() {
-		/** @var string $result */
-		$result =
-			df_output()->getCssClassesAsString(
-				array(
-					'input-text'
-					,'df-phone-network-code'
-					,'required-entry'
-					,'validate-digits'
-					,'validate-length'
-					,'minimum-length-3'
-					,'maximum-length-3'
-				)
-			)
-		;
-		df_result_string($result);
-		return $result;
-	}
+	public function getQiwiCustomerPhoneNetworkCodeCssClassesAsString() {return df_cc_s([
+		'input-text'
+		,'df-phone-network-code'
+		,'required-entry'
+		,'validate-digits'
+		,'validate-length'
+		,'minimum-length-3'
+		,'maximum-length-3'
+	]);}
 
 	/** @return string */
-	public function getQiwiCustomerPhoneSuffixCssClassesAsString() {
-		/** @var string $result */
-		$result =
-			df_output()->getCssClassesAsString(
-				array(
-					'input-text'
-					,'df-phone-suffix'
-					,'required-entry'
-					,'validate-digits'
-					,'validate-length'
-					,'minimum-length-7'
-					,'maximum-length-7'
-				)
-			)
-		;
-		df_result_string($result);
-		return $result;
-	}
+	public function getQiwiCustomerPhoneSuffixCssClassesAsString() {return df_cc_s([
+		'input-text'
+		,'df-phone-suffix'
+		,'required-entry'
+		,'validate-digits'
+		,'validate-length'
+		,'minimum-length-7'
+		,'maximum-length-7'
+	]);}
 
 	/**
 	 * @override

@@ -4,9 +4,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 	public function getApplicability() {return $this->getConfigValue('applicability');}
 
 	/** @return string */
-	public function getCssClassesAsText() {
-		return df_output()->getCssClassesAsString($this->getCssClasses());
-	}
+	public function getCssClassesAsText() {return df_cc_s($this->getCssClasses());}
 
 	/** @return string */
 	public function getDomId() {

@@ -1,16 +1,10 @@
-<?php /** @var Df_Localization_Block_Admin_Verification_File $this */ ?>
 <?php
-	/** @var array $fileClasses  */
-	$fileClasses = array('df-file');
-	if ($this->isFullyTranslated()) {
-		$fileClasses []= 'df-file-fully-translated';
-	}
-	/** @var string $fileClassesAsString  */
-	$fileClassesAsString = df_output()->getCssClassesAsString($fileClasses);
-	df_assert_string($fileClassesAsString);
+	/** @var Df_Localization_Block_Admin_Verification_File $this */
+	/** @var string $fileClassesS  */
+	$fileClassesS = df_cc_s('df-file', $this->isFullyTranslated() ? 'df-file-fully-translated' : null);
 ?>
 <li
-	class='<?php echo $fileClassesAsString; ?>'
+	class='<?php echo $fileClassesS; ?>'
 >
 	<ol class='df-file-properties'>
 		<li class='df-file-property df-name'>

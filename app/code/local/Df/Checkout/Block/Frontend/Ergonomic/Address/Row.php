@@ -35,14 +35,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Row extends Df_Core_Block_Abs
 	protected function needToShow() {return $this->getFields()->hasItems();}
 
 	/** @return string */
-	private function getCssClassesAsText() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_output()->getCssClassesAsString(array(
-				!$this->hasSingleField() ? 'fields' : 'wide'
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	private function getCssClassesAsText() {return !$this->hasSingleField() ? 'fields' : 'wide';}
 
 	/** @return bool */
 	private function hasSingleField() {
@@ -64,9 +57,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Row extends Df_Core_Block_Abs
 	 * @param string $fieldType
 	 * @return string
 	 */
-	private function wrapField($fieldAsHtml, $fieldType) {
-		return df_tag('div', array('class' => df_output()->getCssClassesAsString(array(
-			'field', 'df-field-' . $fieldType
-		))), $fieldAsHtml);
-	}
+	private function wrapField($fieldAsHtml, $fieldType) {return
+		df_tag('div', ['class' => df_cc_s('field', 'df-field-' . $fieldType)], $fieldAsHtml)
+	;}
 }
