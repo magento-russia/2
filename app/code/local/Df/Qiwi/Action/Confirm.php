@@ -28,7 +28,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
 	 * @return void
 	 */
 	protected function alternativeProcessWithoutInvoicing() {
-		$this->comment($this->getPaymentStateMessage(df_nat($this->rState())));
+		$this->comment($this->stateMessage(df_nat($this->rState())));
 	}
 
 	/**
@@ -43,36 +43,30 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
 	 * @param Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {
-		return $this->getSoapServer()->getLastResponse();
-	}
+	protected function responseTextForError(Exception $e) {return $this->soap()->getLastResponse();}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function responseTextForSuccess() {return $this->getSoapServer()->getLastResponse();}
+	protected function responseTextForSuccess() {return $this->soap()->getLastResponse();}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function signatureOwn() {
-		/** @var string $result */
-		$result = strtoupper(md5(df_c(
+	protected function signatureOwn() {return
+		strtoupper(md5(df_c(
 			$this->adjustSignatureParamEncoding($this->rOII())
 			,strtoupper(md5($this->adjustSignatureParamEncoding($this->getResponsePassword())))
-		)));
-		return $result;
-	}
+		)))
+	;}
 
 	/**
 	 * @override
 	 * @return bool
 	 */
-	protected function needInvoice() {
-		return self::PAYMENT_STATE__PROCESSED === df_nat($this->rState());
-	}
+	protected function needInvoice() {return self::$PROCESSED === df_nat($this->rState());}
 
 	/**
 	 * @override
@@ -82,7 +76,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
 	 */
 	protected function _process() {
 		/** @uses updateBill() */
-		$this->getSoapServer()->handle();
+		$this->soap()->handle();
 		parent::_process();
 	}
 
@@ -96,71 +90,54 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
 	}
 
 	/**
-	 * @param int $code
+	 * @param int $c
 	 * @return string
 	 */
-	private function getPaymentStateMessage($code) {
-		df_param_integer($code, 0);
+	private function stateMessage($c) {
+		df_param_integer($c, 0);
 		/** @var string $result */
 		$result = '';
-		if ($code <= self::PAYMENT_STATE__BILL_CREATED) {
-			$result = self::T__PAYMENT_STATE__BILL_CREATED;
+		if ($c <= 50) {
+			$result = 'Счёт выставлен.';
 		}
-		else if ($code < self::PAYMENT_STATE__PROCESSED) {
-			$result = self::T__PAYMENT_STATE__PROCESSING;
+		else if ($c < 52) {
+			$result = 'Проводится платёж...';
 		}
-		else if ($code === self::PAYMENT_STATE__PROCESSED) {
-			$result = self::T__PAYMENT_STATE__PROCESSED;
+		else if ($c === self::$PROCESSED) {
+			$result = 'Счёт оплачен.';
 		}
-		else if ($code >= self::PAYMENT_STATE__CANCELLED) {
-			$result = self::T__PAYMENT_STATE__CANCELLED__OTHER;
-			if ($code === self::PAYMENT_STATE__CANCELLED__TERMINAL_ERROR) {
-				$result = self::T__PAYMENT_STATE__CANCELLED__TERMINAL_ERROR;
+		else if ($c >= 100) {
+			if ($c === 150) {
+				$result = 'Счёт отменён из-за сбоя на терминале.';
 			}
-			else if ($code === self::PAYMENT_STATE__CANCELLED__AUTH_ERROR) {
-				$result = self::T__PAYMENT_STATE__CANCELLED__AUTH_ERROR;
+			else if ($c === 151) {
+				$result = 'Счёт отменён. Возможные причины: недостаточно средств на балансе,отклонен абонентом при оплате с лицевого счета оператора сотовой связи и т.п.';
 			}
-			else if ($code === self::PAYMENT_STATE__CANCELLED__TIMEOUT) {
-				$result = self::T__PAYMENT_STATE__CANCELLED__TIMEOUT;
+			else if ($c === 161) {
+				$result = 'Счёт отменён, т.к. истекло время его оплаты.';
+			}
+			else {
+				$result = 'Счёт отменён.';
 			}
 		}
-		return df_ccc(' ', $result, "Код состояния платежа: «{$code}».");
+		return df_cc_s($result, "Код состояния платежа: «{$c}».");
 	}
 
 	/** @return Df_Zf_Soap_Server */
-	private function getSoapServer() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Zf_Soap_Server $result */
-			$result = new Df_Zf_Soap_Server(
-				Mage::getConfig()->getModuleDir('etc', 'Df_Qiwi') . DS. 'IShopClientWS.wsdl'
-				,array('encoding' => 'UTF-8')
-			);
-			// Soap 1.2 и так является значением по умолчанию,
-			// но данным выражением мы явно это подчёркиваем.
-			$result->setSoapVersion(SOAP_1_2);
-			$result->setObject($this);
-			$result->setReturnResponse(true);
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	private function soap() {return dfc($this, function() {
+		/** @var Df_Zf_Soap_Server $result */
+		$result = new Df_Zf_Soap_Server(
+			Mage::getConfig()->getModuleDir('etc', 'Df_Qiwi') . DS. 'IShopClientWS.wsdl'
+			,['encoding' => 'UTF-8']
+		);
+		// Soap 1.2 и так является значением по умолчанию,
+		// но данным выражением мы явно это подчёркиваем.
+		$result->setSoapVersion(SOAP_1_2);
+		$result->setObject($this);
+		$result->setReturnResponse(true);
+		return $result;
+	});}
 
-
-	const PAYMENT_STATE__BILL_CREATED = 50;
-	const PAYMENT_STATE__PROCESSING = 52;
-	const PAYMENT_STATE__PROCESSED = 60;
-	const PAYMENT_STATE__CANCELLED = 100;
-	const PAYMENT_STATE__CANCELLED__TERMINAL_ERROR = 150;
-	const PAYMENT_STATE__CANCELLED__AUTH_ERROR = 151;
-	const PAYMENT_STATE__CANCELLED__OTHER = 160;
-	const PAYMENT_STATE__CANCELLED__TIMEOUT = 161;
-	const T__PAYMENT_STATE__BILL_CREATED = 'Счёт выставлен.';
-	const T__PAYMENT_STATE__PROCESSING = 'Проводится платёж...';
-	const T__PAYMENT_STATE__PROCESSED = 'Счёт оплачен.';
-	const T__PAYMENT_STATE__CANCELLED__TERMINAL_ERROR = 'Счёт отменён из-за сбоя на терминале.';
-	const T__PAYMENT_STATE__CANCELLED__AUTH_ERROR =
-		'Счёт отменён. Возможные причины: недостаточно средств на балансе,отклонен абонентом при оплате с лицевого счета оператора сотовой связи и т.п.'
-	;
-	const T__PAYMENT_STATE__CANCELLED__OTHER = 'Счёт отменён.';
-	const T__PAYMENT_STATE__CANCELLED__TIMEOUT = 'Счёт отменён, т.к. истекло время его оплаты.';
+	/** @var int */
+	private static $PROCESSED = 60;
 }
