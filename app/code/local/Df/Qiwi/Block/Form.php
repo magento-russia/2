@@ -1,6 +1,6 @@
 <?php
 use Df\Core\Format\MobilePhoneNumber as PhoneNumber;
-/** @method Df_Qiwi_Method getMethod() */
+/** @method Df_Qiwi_Method method() */
 class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	/**
 	 * @override
@@ -16,7 +16,7 @@ class Df_Qiwi_Block_Form extends Df_Payment_Block_Form {
 	 */
 	protected function phone() {return dfc($this, function() {
 		/** @var string $result */
-		$result = $this->getMethod()->qPhone();
+		$result = $this->method()->qPhone();
 		if (!$result) {
 			/** @var PhoneNumber $bPhone */
 			$bPhone = PhoneNumber::fromQuoteAddress(df_quote_address_billing());

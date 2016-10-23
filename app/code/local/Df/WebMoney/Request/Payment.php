@@ -1,7 +1,7 @@
 <?php
 /**
  * @method Df_WebMoney_Config_Area_Service configS()
- * @method Df_WebMoney_Method getMethod()
+ * @method Df_WebMoney_Method method()
  */
 class Df_WebMoney_Request_Payment extends Df_Payment_Request_Payment {
 	/**

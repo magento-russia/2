@@ -1,13 +1,6 @@
 <?php
+/** @method Df_LiqPay_Method method() */
 class Df_LiqPay_Block_Form extends Df_Payment_Block_Form {
-	/**
-	 * Перекрываем метод лишь для того,
-	 * чтобы среда разработки знала класс способа оплаты
-	 * @override
-	 * @return Df_LiqPay_Method
-	 */
-	public function getMethod() {return parent::getMethod();}
-
 	/**
 	 * @override
 	 * @see Df_Core_Block_Template::defaultTemplate()

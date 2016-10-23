@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Psbank_Method getMethod() */
+/** @method Df_Psbank_Method method() */
 class Df_Psbank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
@@ -56,7 +56,7 @@ class Df_Psbank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 			 * потому что сообщения сессии checkout
 			 * не отображаются в стандартной теме на странице checkout/onepage
 			 */
-			df_session_core()->addError(strtr($this->getMethod()->configF()->getMessageFailure(), array(
+			df_session_core()->addError(strtr($this->method()->configF()->getMessageFailure(), array(
 				'{сообщение от платёжного шлюза}' => $this->getResponsePayment()->getStatusMeaning()
 			)));
 		}

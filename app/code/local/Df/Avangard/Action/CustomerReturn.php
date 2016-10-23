@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Avangard_Method getMethod() */
+/** @method Df_Avangard_Method method() */
 class Df_Avangard_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	/**
 	 * @override

@@ -67,7 +67,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	/** @return Df_Pd4_Config_Area_Admin */
 	protected function configA() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getActionDf()->getMethod()->configA();
+			$this->{__METHOD__} = $this->getActionDf()->method()->configA();
 		}
 		return $this->{__METHOD__};
 	}

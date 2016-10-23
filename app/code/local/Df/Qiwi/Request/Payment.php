@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Qiwi_Method getMethod() */
+/** @method Df_Qiwi_Method method() */
 class Df_Qiwi_Request_Payment extends Df_Payment_Request_Payment {
 	/**
 	 * @override
@@ -21,7 +21,7 @@ class Df_Qiwi_Request_Payment extends Df_Payment_Request_Payment {
 	/** @return string */
 	private function qPhone() {
 		/** @var string $result */
-		$result = $this->getMethod()->qPhone();
+		$result = $this->method()->qPhone();
 		df_assert_eq(10, strlen($result));
 		df_result_string($result);
 		return $result;

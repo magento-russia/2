@@ -10,6 +10,6 @@ class Df_Payment_Config_Source_PaymentPage_Locale extends Df_Payment_Config_Sour
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return $this->getMethod()->configS()->getAllowedLocalesAsOptionArray();
+		return $this->method()->configS()->getAllowedLocalesAsOptionArray();
 	}
 }

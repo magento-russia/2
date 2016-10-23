@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_IPay_Method getMethod()
+ * @method Df_IPay_Method method()
  * @method Df_IPay_Config_Area_Service configS()
  */
 class Df_IPay_Request_Payment extends Df_Payment_Request_Payment {
@@ -63,7 +63,7 @@ class Df_IPay_Request_Payment extends Df_Payment_Request_Payment {
 	 * @return string
 	 */
 	private function getUrlReturn() {
-		return Mage::getUrl($this->getMethod()->getCode() . '/customerReturn', array('_nosid' => true));
+		return Mage::getUrl($this->method()->getCode() . '/customerReturn', array('_nosid' => true));
 	}
 
 	/**

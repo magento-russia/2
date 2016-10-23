@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Avangard_Method getMethod() */
+/** @method Df_Avangard_Method method() */
 abstract class Df_Avangard_Request_Secondary extends Df_Payment_Request_Transaction {
 	/** @return string */
 	abstract protected function getRequestId();

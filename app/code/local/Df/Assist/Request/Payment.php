@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Assist_Method getMethod() */
+/** @method Df_Assist_Method method() */
 class Df_Assist_Request_Payment extends Df_Payment_Request_Payment {
 	/**
 	 * @override
@@ -24,7 +24,7 @@ class Df_Assist_Request_Payment extends Df_Payment_Request_Payment {
 			,'OrderNumber' => $this->orderIId()
 			,'Delay' => df_01($this->configS()->isCardPaymentActionAuthorize())
 			,'Language' => $this->localeCode()
-			,'TestMode' => df_01($this->getMethod()->isTestMode())
+			,'TestMode' => df_01($this->method()->isTestMode())
 			,'RecurringIndicator' => 0
 			,'Merchant_ID' => $this->shopId()
 			,'URL_RETURN_OK' => df_url_checkout_success()

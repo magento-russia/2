@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Alfabank_Method getMethod() */
+/** @method Df_Alfabank_Method method() */
 class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	/**
 	 * @override

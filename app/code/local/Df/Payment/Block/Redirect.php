@@ -4,7 +4,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	 * @override
 	 * @return array(string => string|int)
 	 */
-	public function getFormFields() {return $this->getPaymentMethod()->getPaymentPageParams();}
+	public function getFormFields() {return $this->method()->getPaymentPageParams();}
 
 	/**
 	 * @override
@@ -33,19 +33,11 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 
 	/**
 	 * @override
-	 * @return string
-	 */
-	public function getMethod() {
-		return $this->getPaymentMethod()->const_('request/method', false, Zend_Form::METHOD_POST);
-	}
-
-	/**
-	 * @override
 	 * @see Mage_Page_Block_Redirect::getTargetURL()
 	 * @used-by app/design/frontend/base/default/template/page/redirect.phtml
 	 * @return string
 	 */
-	public function getTargetURL() {return $this->getPaymentMethod()->getPaymentPageUrl();}
+	public function getTargetURL() {return $this->method()->getPaymentPageUrl();}
 
 	/** @return Df_Varien_Data_Form */
 	private function getForm() {
@@ -56,7 +48,9 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 			$result
 				->setAction($this->getTargetURL())
 				->setName($this->getFormId())
-				->setMethod($this->getMethod())
+				->setMethod($this->method()->const_(
+					'request/method', false, Zend_Form::METHOD_POST
+				))
 				->setUseContainer(true)
 				->addHiddenFields($this->_getFormFields())
 				->addAdditionalHtmlAttribute('accept-charset', 'UTF-8')
@@ -78,5 +72,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	}
 
 	/** @return Df_Payment_Method_WithRedirect */
-	private function getPaymentMethod() {return $this->order()->getPayment()->getMethodInstance();}
+	private function method() {return dfc($this, function() {return
+		$this->order()->getPayment()->getMethodInstance()
+	;});}
 }

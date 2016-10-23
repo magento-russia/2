@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_Psbank_Method getMethod()
+ * @method Df_Psbank_Method method()
  * @method Df_Psbank_Config_Area_Service configS()
  */
 abstract class Df_Psbank_Request_Secondary extends Df_Payment_Request_Transaction {

@@ -6,9 +6,9 @@
  */
 abstract class Df_Payment_Config_Source extends Df_Admin_Config_Source {
 	/** @return Df_Payment_Method */
-	protected function getMethod() {
-		return df_mage()->paymentHelper()->getMethodInstance($this->getPaymentMethodCode());
-	}
+	protected function method() {return
+		df_mage()->paymentHelper()->getMethodInstance($this->getPaymentMethodCode())
+	;}
 
 	/** @return string */
 	private function getPaymentMethodCode() {

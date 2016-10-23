@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Kkb_Method getMethod() */
+/** @method Df_Kkb_Method method() */
 abstract class Df_Kkb_Request_Secondary extends Df_Payment_Request_Transaction {
 	/** @return string */
 	abstract public function getTransactionType();
@@ -82,9 +82,9 @@ abstract class Df_Kkb_Request_Secondary extends Df_Payment_Request_Transaction {
 	protected function getResponseAsArray() {df_abstract($this); return null;}
 
 	/** @return string */
-	private function getHost() {
-		return $this->getMethod()->isTestMode() ? '3dsecure.kkb.kz' : 'epay.kkb.kz';
-	}
+	private function getHost() {return
+		$this->method()->isTestMode() ? '3dsecure.kkb.kz' : 'epay.kkb.kz'
+	;}
 	
 	/** @return Df_Kkb_RequestDocument_Secondary */
 	private function getRequestDocument() {

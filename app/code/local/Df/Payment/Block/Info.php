@@ -85,10 +85,10 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	 * @override
 	 * @return Df_Payment_Method
 	 */
-	public function getMethod() {return $this->getInfo()->getMethodInstance();}
+	public function method() {return $this->getInfo()->getMethodInstance();}
 
 	/** @return string */
-	public function getMethodTitle() {return $this->getMethod()->getTitle();}
+	public function getMethodTitle() {return $this->method()->getTitle();}
 
 	/**
 	 * заимствовано из Mage_Payment_Block_Info

@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Moneta_Method getMethod() */
+/** @method Df_Moneta_Method method() */
 class Df_Moneta_Request_Payment extends Df_Payment_Request_Payment {
 	/**
 	 * @override
@@ -18,7 +18,7 @@ class Df_Moneta_Request_Payment extends Df_Payment_Request_Payment {
 			,self::REQUEST_VAR__PAYMENT_SERVICE__PAYMENT_METHOD =>
 				$this->configS()->getSelectedPaymentMethodCode()
 			,self::REQUEST_VAR__PAYMENT_SERVICE__PAYMENT_METHODS => $this->getPaymentMethodsAllowed()
-			,self::REQUEST_VAR__REQUEST__TEST_MODE => df_01($this->getMethod()->isTestMode())
+			,self::REQUEST_VAR__REQUEST__TEST_MODE => df_01($this->method()->isTestMode())
 			,self::REQUEST_VAR__SIGNATURE => $this->getSignature()
 			,self::REQUEST_VAR__SHOP_ID => $this->shopId()
 			,self::REQUEST_VAR__URL_RETURN_OK => df_url_checkout_success()
@@ -42,7 +42,7 @@ class Df_Moneta_Request_Payment extends Df_Payment_Request_Payment {
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__ORDER_AMOUNT => $this->amountS()
 			,self::REQUEST_VAR__ORDER_CURRENCY => $this->configS()->getCurrencyCodeInServiceFormat()
-			,self::REQUEST_VAR__REQUEST__TEST_MODE => df_01($this->getMethod()->isTestMode())
+			,self::REQUEST_VAR__REQUEST__TEST_MODE => df_01($this->method()->isTestMode())
 			,self::SIGNATURE_PARAM__ENCRYPTION_KEY => $this->password()
 		))));
 	}

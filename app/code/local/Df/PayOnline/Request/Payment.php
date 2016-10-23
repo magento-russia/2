@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_PayOnline_Method getMethod()
+ * @method Df_PayOnline_Method method()
  * @method Df_PayOnline_Config_Area_Service configS()
  */
 class Df_PayOnline_Request_Payment extends Df_Payment_Request_Payment {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_YandexMoney_Method getMethod()
+ * @method Df_YandexMoney_Method method()
  * @method Df_YandexMoney_Config_Area_Service configS()
  */
 class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
@@ -118,7 +118,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 				$this->configS()->getAppId()
 				, $this->configS()->getAppPassword()
 				, $this->getTokenTemporary()
-				, $this->getMethod()->getCustomerReturnUrl($this->order())
+				, $this->method()->getCustomerReturnUrl($this->order())
 			)->getToken();
 		}
 		return $this->{__METHOD__};

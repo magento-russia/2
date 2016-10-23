@@ -1,9 +1,9 @@
 <?php
-/** @method Df_IPay_Method getMethod() */
+/** @method Df_IPay_Method method() */
 class Df_IPay_Block_Form extends Df_Payment_Block_Form {
 	/** @return array */
 	public function getPaymentOptions() {
-		return $this->getMethod()->constManager()->availablePaymentMethodsAsCanonicalConfigArray();
+		return $this->method()->constManager()->availablePaymentMethodsAsCanonicalConfigArray();
 	}
 
 	/**

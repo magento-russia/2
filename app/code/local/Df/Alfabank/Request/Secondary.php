@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_Alfabank_Method getMethod()
+ * @method Df_Alfabank_Method method()
  * @method Df_Alfabank_Response getResponse()
  * @method Df_Alfabank_Config_Area_Service configS()
  */

@@ -1,5 +1,5 @@
 <?php
-/** @method Df_LiqPay_Method getMethod() */
+/** @method Df_LiqPay_Method method() */
 class Df_LiqPay_Request_Payment extends Df_Payment_Request_Payment {
 	/**
 	 * @override
@@ -33,8 +33,8 @@ class Df_LiqPay_Request_Payment extends Df_Payment_Request_Payment {
 			// не поддерживают разные веб-адреса для успешного и неуспешного сценариев оплаты
 			,'result_url'=> $this->urlReturn()
 		);
-		if ($this->getMethod()->getSubmethod()) {
-			$result['pay_way'] = $this->getMethod()->getSubmethod();
+		if ($this->method()->getSubmethod()) {
+			$result['pay_way'] = $this->method()->getSubmethod();
 		}
 		return $result;
 	}
@@ -44,9 +44,9 @@ class Df_LiqPay_Request_Payment extends Df_Payment_Request_Payment {
 	 * На всякий случай избегаем этого.
 	 * @return string
 	 */
-	private function urlReturn() {
-		return Mage::getUrl($this->getMethod()->getCode() . '/customerReturn', array('_nosid' => true));
-	}
+	private function urlReturn() {return
+		Mage::getUrl($this->method()->getCode() . '/customerReturn', array('_nosid' => true))
+	;}
 
 	/** @return string */
 	private function xml() {

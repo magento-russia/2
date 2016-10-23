@@ -271,7 +271,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	 * @override
 	 * @see Df_Payment_Action_Abstract::order()
 	 * @used-by Df_Payment_Action_Abstract::addAndSaveStatusHistoryComment()
-	 * @used-by Df_Payment_Action_Abstract::getMethod()
+	 * @used-by Df_Payment_Action_Abstract::method()
 	 * @used-by Df_Payment_Action_Abstract::getPayment()
 	 * @used-by amountFromOrder()
 	 * @used-by _process()

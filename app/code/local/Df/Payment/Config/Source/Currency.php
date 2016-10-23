@@ -10,6 +10,6 @@ class Df_Payment_Config_Source_Currency extends Df_Payment_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return $this->getMethod()->configS()->getAllowedCurrenciesAsOptionArray();
+		return $this->method()->configS()->getAllowedCurrenciesAsOptionArray();
 	}
 }

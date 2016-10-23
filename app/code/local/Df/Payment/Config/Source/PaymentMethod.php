@@ -11,6 +11,6 @@ class Df_Payment_Config_Source_PaymentMethod extends Df_Payment_Config_Source {
 	 * @return array(array(string => string))
 	 */
 	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return $this->getMethod()->configS()->availablePaymentMethodsAsOptionArray();
+		return $this->method()->configS()->availablePaymentMethodsAsOptionArray();
 	}
 }

@@ -12,7 +12,7 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @return bool
 	 */
 	public function canCreateBillingAgreement() {
-		return $this->getMethod()->canCreateBillingAgreement();
+		return $this->method()->canCreateBillingAgreement();
 	}
 
 	/**
@@ -22,7 +22,7 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	public function getArea() {return Df_Core_Const_Design_Area::FRONTEND;}
 
 	/** @return string */
-	public function getDescription() {return $this->getMethod()->configF()->getDescription();}
+	public function getDescription() {return $this->method()->configF()->getDescription();}
 
 	/**
 	 * заимствовано из Mage_Payment_Block_Form
@@ -31,7 +31,7 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @return string
 	 */
 	public function getInfoData($field) {return
-		df_e($this->getMethod()->getInfoInstance()->getData($field))
+		df_e($this->method()->getInfoInstance()->getData($field))
 	;}
 
 	/**
@@ -39,7 +39,7 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @see Mage_Payment_Block_Form::getMethod
 	 * @return Df_Payment_Method
 	 */
-	public function getMethod() {
+	public function method() {
 		/** @var Df_Payment_Method $result */
 		$result = $this->getData('method');
 		if (!($result instanceof Mage_Payment_Model_Method_Abstract)) {
@@ -53,10 +53,10 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @see Mage_Payment_Block_Form::getMethodCode
 	 * @return string
 	 */
-	public function getMethodCode() {return $this->getMethod()->getCode();}
+	public function getMethodCode() {return $this->method()->getCode();}
 
 	/** @return bool */
-	public function isTestMode() {return $this->getMethod()->isTestMode();}
+	public function isTestMode() {return $this->method()->isTestMode();}
 
 	/**
 	 * @override

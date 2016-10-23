@@ -1,5 +1,5 @@
 <?php
-/** @method Df_RbkMoney_Method getMethod() */
+/** @method Df_RbkMoney_Method method() */
 class Df_RbkMoney_Request_Payment extends Df_Payment_Request_Payment {
 	/**
 	 * @override
