@@ -1,5 +1,5 @@
 <?php
-/** @method Df_YandexMoney_Model_Response_Authorize getResponse() */
+/** @method Df_YandexMoney_Response_Authorize getResponse() */
 class Df_YandexMoney_Exception_ActionRequired extends Df_Payment_Exception_Response {
 	/** @return string */
 	public function getActionUrl() {
@@ -17,6 +17,6 @@ class Df_YandexMoney_Exception_ActionRequired extends Df_Payment_Exception_Respo
 	 */
 	public function needFraming() {return false;}
 
-	/** @used-by Df_YandexMoney_Model_Response_Authorize::getExceptionClass() */
+	/** @used-by Df_YandexMoney_Response_Authorize::getExceptionClass() */
 	
 }

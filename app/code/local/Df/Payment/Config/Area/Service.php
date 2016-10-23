@@ -13,7 +13,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	}
 
 	/**
-	 * @used-by Df_Payment_Model_Request_Transaction::getAmount()
+	 * @used-by Df_Payment_Request_Transaction::getAmount()
 	 * @param Mage_Directory_Model_Currency $currency
 	 * @param float|string $amount
 	 * @return Df_Core_Model_Money
@@ -459,7 +459,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	/**
 	 * @var string
 	 * @used-by getRequestPassword()
-	 * @used-by Df_Psbank_Model_Config_Area_Service::getRequestPassword()
+	 * @used-by Df_Psbank_Config_Area_Service::getRequestPassword()
 	 */
 	protected static $V__REQUEST_PASSWORD = 'request_password';
 

@@ -1,5 +1,5 @@
 <?php
-class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+class Df_EasyPay_Action_Confirm extends Df_Payment_Action_Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -68,7 +68,7 @@ class Df_EasyPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * то есть не ответит ему кодом "HTTP/1.0 200 OK".
 	 * https://ssl.easypay.by/notify/
 	 * @override
-	 * @see Df_Payment_Model_Action_Confirm::processResponseForSuccess()
+	 * @see Df_Payment_Action_Confirm::processResponseForSuccess()
 	 * @used-by _process()
 	 * @return void
 	 */

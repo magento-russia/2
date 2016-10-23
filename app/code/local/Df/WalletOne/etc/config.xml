@@ -8,9 +8,7 @@
 		</Df_WalletOne>
 	</modules>
 	<global>
-		<blocks><df_wallet_one><class>Df_WalletOne_Block</class></df_wallet_one></blocks>
 		<helpers><df_wallet_one><class>Df_WalletOne_Helper</class></df_wallet_one></helpers>
-		<models><df_wallet_one><class>Df_WalletOne_Model</class></df_wallet_one></models>
 	</global>
 	<default>
 		<!--

@@ -1,5 +1,5 @@
 <?php
-class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+class Df_WalletOne_Action_Confirm extends Df_Payment_Action_Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -48,7 +48,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 
 	/**
 	 * @override
-	 * @return Df_Payment_Model_Action_Confirm
+	 * @return Df_Payment_Action_Confirm
 	 * @throws Mage_Core_Exception
 	 */
 	protected function processOrderCanNotInvoice() {
@@ -58,13 +58,13 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $this;
 	}
 
-	/** @return Df_WalletOne_Model_Request_SignatureGenerator */
+	/** @return Df_WalletOne_Request_SignatureGenerator */
 	private function getSignatureGenerator() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_WalletOne_Model_Request_SignatureGenerator::i(array(
-				Df_WalletOne_Model_Request_SignatureGenerator::P__ENCRYPTION_KEY =>
+			$this->{__METHOD__} = Df_WalletOne_Request_SignatureGenerator::i(array(
+				Df_WalletOne_Request_SignatureGenerator::P__ENCRYPTION_KEY =>
 					$this->configS()->getResponsePassword()
-				,Df_WalletOne_Model_Request_SignatureGenerator::P__SIGNATURE_PARAMS =>
+				,Df_WalletOne_Request_SignatureGenerator::P__SIGNATURE_PARAMS =>
 					array_diff_key($this->params(), [$this->rkSignature() => null])
 			));
 		}

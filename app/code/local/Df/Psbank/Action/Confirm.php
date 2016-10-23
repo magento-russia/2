@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+abstract class Df_Psbank_Action_Confirm extends Df_Payment_Action_Confirm {
 	/** @return string[] */
 	abstract protected function getParamsForSignature();
 
@@ -10,10 +10,10 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	 */
 	protected function rkOII() {return 'ORDER';}
 	
-	/** @return Df_Psbank_Model_Response */
+	/** @return Df_Psbank_Response */
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Psbank_Model_Response::i($this->params());
+			$this->{__METHOD__} = Df_Psbank_Response::i($this->params());
 			$this->{__METHOD__}->postProcess($this->payment());
 		}
 		return $this->{__METHOD__};
@@ -32,7 +32,7 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Model_Action_Confirm 
 	protected function signatureOwn() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * Опосредовано вызывает @see Df_Payment_Model_Response::postProcess()
+			 * Опосредовано вызывает @see Df_Payment_Response::postProcess()
 			 * Лучшего способа вызвать postProcess,
 			 * чем запихнуть в signatureOwn() — не придумал.
 			 */

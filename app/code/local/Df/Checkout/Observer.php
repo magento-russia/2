@@ -94,7 +94,7 @@ class Df_Checkout_Observer {
 				'checkout_onepage_success' === $controller->getFullActionName()
 				/**
 				 * В отличие от метода
-				 * @see Df_Payment_Model_Action_Confirm::process()
+				 * @see Df_Payment_Action_Confirm::process()
 				 * здесь необходимость вызова
 				 * @uses Df_Payment_Redirected::off() не вызывает сомнений,
 				 * потому что @see Df_Checkout_Observer:controller_action_predispatch_checkout()

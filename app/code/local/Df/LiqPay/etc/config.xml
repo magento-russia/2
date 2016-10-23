@@ -10,7 +10,6 @@
 	<global>
 		<blocks><df_liqpay><class>Df_LiqPay_Block</class></df_liqpay></blocks>
 		<helpers><df_liqpay><class>Df_LiqPay_Helper</class></df_liqpay></helpers>
-		<models><df_liqpay><class>Df_LiqPay_Model</class></df_liqpay></models>
 	</global>
 	<default>
 		<!--

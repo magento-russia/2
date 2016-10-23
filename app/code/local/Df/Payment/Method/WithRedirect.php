@@ -1,7 +1,7 @@
 <?php
 abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
 	/**
-	 * @used-by Df_Payment_Model_Request_Payment::urlCustomerReturn()
+	 * @used-by Df_Payment_Request_Payment::urlCustomerReturn()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::getToken()
 	 * @param Df_Sales_Model_Order $order
 	 * @return string
@@ -49,7 +49,7 @@ abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
 	 * @used-by Df_Payment_Block_Redirect::getFormFields()
 	 * @return array(string => string|int)
 	 */
-	public function getPaymentPageParams() {return Df_Payment_Model_Request_Payment::params($this);}
+	public function getPaymentPageParams() {return Df_Payment_Request_Payment::params($this);}
 
 	/**
 	 * @used-by Df_Payment_Block_Redirect::getTargetURL()

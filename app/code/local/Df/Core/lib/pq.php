@@ -28,7 +28,7 @@ function df_pq($arguments, $context = null) {
 }
 
 /**
- * @used-by Df_Shipping_Model_Response::options()
+ * @used-by Df_Shipping_Response::options()
  * @param phpQueryObject $pqOptions
  * @return array(string => string)
  */

@@ -8,9 +8,7 @@
 		</Df_Interkassa>
 	</modules>
 	<global>
-		<blocks><df_interkassa><class>Df_Interkassa_Block</class></df_interkassa></blocks>
 		<helpers><df_interkassa><class>Df_Interkassa_Helper</class></df_interkassa></helpers>
-		<models><df_interkassa><class>Df_Interkassa_Model</class></df_interkassa></models>
 	</global>
 	<default>
 		<!--

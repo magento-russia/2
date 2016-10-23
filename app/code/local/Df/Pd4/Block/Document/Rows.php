@@ -64,7 +64,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	/** @return int */
 	public function getOrderYear() {return df_int(df_dts($this->getOrderDate(), Zend_Date::YEAR));}
 
-	/** @return Df_Pd4_Model_Config_Area_Admin */
+	/** @return Df_Pd4_Config_Area_Admin */
 	protected function configA() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->getActionDf()->getMethod()->configA();
@@ -80,7 +80,7 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	 */
 	protected function defaultTemplate() {return 'df/pd4/document/rows.phtml';}
 
-	/** @return Df_Pd4_Model_Request_Document_View */
+	/** @return Df_Pd4_Request_Document_View */
 	private function getActionDf() {return df_h()->pd4()->getDocumentViewAction();}
 
 	/** @return Df_Sales_Model_Order */

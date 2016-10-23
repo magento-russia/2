@@ -1,6 +1,6 @@
 <?php
-/** @method Df_IPay_Model_Config_Area_Service configS() */
-abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract {
+/** @method Df_IPay_Config_Area_Service configS() */
+abstract class Df_IPay_Action_Abstract extends Df_Payment_Action_Abstract {
 	/**
 	 * @abstract
 	 * @used-by checkRequestType()
@@ -87,10 +87,10 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 		return dfa_deep($this->getRequestA(), $paramName, $defaultValue);
 	}
 
-	/** @return Df_IPay_Model_Request_Payment */
+	/** @return Df_IPay_Request_Payment */
 	protected function getRequestPayment() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_IPay_Model_Request_Payment::i($this->order());
+			$this->{__METHOD__} = Df_IPay_Request_Payment::i($this->order());
 		}
 		return $this->{__METHOD__};
 	}
@@ -115,19 +115,19 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_IPay_Model_TransactionState */
+	/** @return Df_IPay_TransactionState */
 	protected function getTransactionState() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_IPay_Model_TransactionState::i($this->payment());
+			$this->{__METHOD__} = Df_IPay_TransactionState::i($this->payment());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * @override
-	 * @see Df_Payment_Model_Action_Abstract::method()
-	 * @used-by Df_Payment_Model_Action_Abstract::getConst()
-	 * @used-by Df_Payment_Model_Action_Abstract::info()
+	 * @see Df_Payment_Action_Abstract::method()
+	 * @used-by Df_Payment_Action_Abstract::getConst()
+	 * @used-by Df_Payment_Action_Abstract::info()
 	 * @return Df_IPay_Method
 	 */
 	protected function method() {
@@ -168,13 +168,13 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	/**
 	 * 2015-03-17
 	 * Обратите внимание, что, в отличие от большинства остальных модулей оплаты
-	 * @see Df_Payment_Model_Action_Confirm::order()
+	 * @see Df_Payment_Action_Confirm::order()
 	 * в данном случае мы загружаем заказ не по increment_id, а по id.
 	 * @override
-	 * @see Df_Payment_Model_Action_Abstract::order()
-	 * @used-by Df_Payment_Model_Action_Abstract::comment()
-	 * @used-by Df_Payment_Model_Action_Abstract::method()
-	 * @used-by Df_Payment_Model_Action_Abstract::payment()
+	 * @see Df_Payment_Action_Abstract::order()
+	 * @used-by Df_Payment_Action_Abstract::comment()
+	 * @used-by Df_Payment_Action_Abstract::method()
+	 * @used-by Df_Payment_Action_Abstract::payment()
 	 * @used-by checkOrderState()
 	 * @used-by checkTransactionState()
 	 * @used-by config()

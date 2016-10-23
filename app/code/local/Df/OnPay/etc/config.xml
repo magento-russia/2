@@ -8,9 +8,7 @@
 		</Df_OnPay>
 	</modules>
 	<global>
-		<blocks><df_onpay><class>Df_OnPay_Block</class></df_onpay></blocks>
 		<helpers><df_onpay><class>Df_OnPay_Helper</class></df_onpay></helpers>
-		<models><df_onpay><class>Df_OnPay_Model</class></df_onpay></models>
 	</global>
 	<default>
 		<!--

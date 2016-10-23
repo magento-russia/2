@@ -8,9 +8,7 @@
 		</Df_YandexMoney>
 	</modules>
 	<global>
-		<blocks><df_yandex_money><class>Df_YandexMoney_Block</class></df_yandex_money></blocks>
 		<helpers><df_yandex_money><class>Df_YandexMoney_Helper</class></df_yandex_money></helpers>
-		<models><df_yandex_money><class>Df_YandexMoney_Model</class></df_yandex_money></models>
 	</global>
 	<default>
 		<!--

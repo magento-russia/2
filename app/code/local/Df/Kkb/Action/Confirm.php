@@ -1,5 +1,5 @@
 <?php
-class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+class Df_Kkb_Action_Confirm extends Df_Payment_Action_Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -9,7 +9,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		/**
 		 * Стандартная проверка подписи нам не нужна,
 		 * потому что специфическая для Казкоммерцбанка проверка подписи
-		 * производится в классе @see Df_Kkb_Model_Response_Payment
+		 * производится в классе @see Df_Kkb_Response_Payment
 		 */
 		if (!$this->getResponseAsObject()->isSuccessful()) {
 			df_error('Заказ не был оплачен.');
@@ -43,10 +43,10 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 		return $this->getResponseAsObject()->getPaymentAmountInServiceCurrency()->getAsString();
 	}
 	
-	/** @return Df_Kkb_Model_Response_Payment */
+	/** @return Df_Kkb_Response_Payment */
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Kkb_Model_Response_Payment::i(df_request('response'));
+			$this->{__METHOD__} = Df_Kkb_Response_Payment::i(df_request('response'));
 		}
 		return $this->{__METHOD__};
 	}
@@ -67,7 +67,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * Стандартная проверка подписи нам не нужна,
 	 * потому что специфическая для Казкоммерцбанка проверка подписи
-	 * производится в классе @see Df_Kkb_Model_Response_Payment
+	 * производится в классе @see Df_Kkb_Response_Payment
 	 * @override
 	 * @return string
 	 */
@@ -81,7 +81,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Model_Action_Confirm::processResponseForSuccess()
+	 * @see Df_Payment_Action_Confirm::processResponseForSuccess()
 	 * @used-by _process()
 	 * @return void
 	 */

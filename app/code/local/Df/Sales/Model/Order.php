@@ -12,7 +12,7 @@
 class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	/**
 	 * @used-by Df_LiqPay_CustomerReturnController::processDelayed()
-	 * @used-by Df_Payment_Model_Action_Abstract::commentOrder()
+	 * @used-by Df_Payment_Action_Abstract::commentOrder()
 	 * @used-by Df_Reward_Observer::applyRewardSalesrulePoints()
 	 * @used-by Df_Reward_Observer::orderCompleted()
 	 * @param string $comment
@@ -141,7 +141,7 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	/**
 	 * @used-by Df_1C_Cml2_Export_Data_Entity_Customer::_construct()
 	 * @used-by Df_1C_Cml2_Export_Processor_Sale_Order::_construct()
-	 * @used-by Df_Payment_Model_Request_Payment::_construct()
+	 * @used-by Df_Payment_Request_Payment::_construct()
 	 * @used-by Df_Sales_Model_Resource_Order_Collection::_construct()
 	 */
 

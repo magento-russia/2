@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Psbank_Model_Request_Payment getRequestPayment() */
+/** @method Df_Psbank_Request_Payment getRequestPayment() */
 class Df_Psbank_Method extends Df_Payment_Method_WithRedirect {
 	/**
 	 * @see Df_Payment_Method::canCapture()

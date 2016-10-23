@@ -426,7 +426,7 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
  * что все вместо нескольких параметров принимает массив из параметров.
  * Это бывает удобно в функциональном программировании, например:
  * @used-by Df_Dataflow_Model_Registry_MultiCollection::getEntities()
- * @used-by Df_Dellin_Model_Request_Rate::getDates()
+ * @used-by Df_Dellin_Request_Rate::getDates()
  * @param array(array(int|string => mixed)) $arrays
  * @return array(int|string => mixed)
  */

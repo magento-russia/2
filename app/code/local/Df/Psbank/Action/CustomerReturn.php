@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Psbank_Method getMethod() */
-class Df_Psbank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
+class Df_Psbank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
@@ -29,7 +29,7 @@ class Df_Psbank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Model_Action_Confirm::_process()
+	 * @see Df_Payment_Action_Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
@@ -80,10 +80,10 @@ class Df_Psbank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
 
 	}
 	
-	/** @return Df_Psbank_Model_Response */
+	/** @return Df_Psbank_Response */
 	private function getResponsePayment() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Psbank_Model_Response $result */
+			/** @var Df_Psbank_Response $result */
 			$result =
 				$this->getResponseByTransactionType(
 					Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
@@ -110,9 +110,9 @@ class Df_Psbank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
 
 	/**
 	 * @param string $transactionType
-	 * @return Df_Psbank_Model_Response
+	 * @return Df_Psbank_Response
 	 */
 	private function getResponseByTransactionType($transactionType) {return
-		Df_Psbank_Model_Response::i($transactionType)->loadFromPaymentInfo($this->ii())
+		Df_Psbank_Response::i($transactionType)->loadFromPaymentInfo($this->ii())
 	;}
 }

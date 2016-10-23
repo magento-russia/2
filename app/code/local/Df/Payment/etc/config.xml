@@ -23,7 +23,6 @@
 				</rewrite>
 			</payment>
 		</helpers>
-		<models><df_payment><class>Df_Payment_Model</class></df_payment></models>
 		<request>
 			<direct_front_name>
 <!--

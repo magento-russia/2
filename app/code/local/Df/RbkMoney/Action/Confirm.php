@@ -1,5 +1,5 @@
 <?php
-class Df_RbkMoney_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+class Df_RbkMoney_Action_Confirm extends Df_Payment_Action_Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override

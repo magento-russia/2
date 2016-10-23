@@ -10,7 +10,6 @@
 	<global>
 		<blocks><df_qiwi><class>Df_Qiwi_Block</class></df_qiwi></blocks>
 		<helpers><df_qiwi><class>Df_Qiwi_Helper</class></df_qiwi></helpers>
-		<models><df_qiwi><class>Df_Qiwi_Model</class></df_qiwi></models>
 		<request>
 			<direct_front_name>
 <!--

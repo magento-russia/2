@@ -28,7 +28,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
 	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
 	 * @used-by Df_Checkout_Observer::controller_action_predispatch_checkout()
-	 * @used-by Df_Payment_Model_Action_Confirm::_process()
+	 * @used-by Df_Payment_Action_Confirm::_process()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()
 	 * @return void
 	 */

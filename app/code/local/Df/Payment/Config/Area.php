@@ -30,10 +30,10 @@ abstract class Df_Payment_Config_Area extends Df_Checkout_Module_Config_Area {
 
 	/**
 	 * @used-by getConst()
-	 * @used-by Df_Assist_Model_Config_Area_Service::getUrl()
-	 * @used-by Df_IPay_Model_Config_Area_Service
+	 * @used-by Df_Assist_Config_Area_Service::getUrl()
+	 * @used-by Df_IPay_Config_Area_Service
 	 * @used-by Df_Payment_Config_Area_Service
-	 * @used-by Df_PayOnline_Model_Config_Area_Service
+	 * @used-by Df_PayOnline_Config_Area_Service
 	 * @return Df_Payment_Config_Manager_Const
 	 */
 	protected function constManager() {return $this->main()->constManager();}

@@ -8,9 +8,7 @@
 		</Df_EasyPay>
 	</modules>
 	<global>
-		<blocks><df_easypay><class>Df_EasyPay_Block</class></df_easypay></blocks>
 		<helpers><df_easypay><class>Df_EasyPay_Helper</class></df_easypay></helpers>
-		<models><df_easypay><class>Df_EasyPay_Model</class></df_easypay></models>
 	</global>
 	<default>
 		<!--

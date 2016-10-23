@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Avangard_Method getMethod() */
-class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
+class Df_Avangard_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	/**
 	 * @override
 	 * @return Zend_Controller_Request_Abstract
@@ -49,7 +49,7 @@ class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 
 	/**
 	 * @override
-	 * @see Df_Payment_Model_Action_Confirm::_process()
+	 * @see Df_Payment_Action_Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
@@ -76,8 +76,8 @@ class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 			if ($this->getResponseState()->isPaymentServiceError()) {
 				/** @var string $resultCode */
 				$resultCode = $this->param('result_code');
-				/** @var Df_Avangard_Model_Response_Registration $responseRegistration */
-				$responseRegistration = Df_Avangard_Model_Response_Registration::i();
+				/** @var Df_Avangard_Response_Registration $responseRegistration */
+				$responseRegistration = Df_Avangard_Response_Registration::i();
 				$responseRegistration->loadFromPaymentInfo($this->payment());
 				if ($responseRegistration->getPasswordForPaymentResponseSuccess() !== $resultCode) {
 					$this->throwException('Заказ не был оплачен.');
@@ -109,7 +109,7 @@ class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 			$this->redirectToSuccess();
 			/**
 			 * В отличие от метода
-			 * @see Df_Payment_Model_Action_Confirm::process()
+			 * @see Df_Payment_Action_Confirm::process()
 			 * здесь необходимость вызова @uses Df_Payment_Redirected::off()
 			 * не вызывает сомнений, потому что @see Df_Avangard_Action_CustomerReturn:process()
 			 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
@@ -125,14 +125,14 @@ class Df_Avangard_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 	 */
 	protected function processResponseForError(Exception $e) {$this->redirectToFail();}
 	
-	/** @return Df_Avangard_Model_Request_State */
+	/** @return Df_Avangard_Request_State */
 	private function getRequestState() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Avangard_Model_Request_State::i($this->payment());
+			$this->{__METHOD__} = Df_Avangard_Request_State::i($this->payment());
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Avangard_Model_Response_State */
+	/** @return Df_Avangard_Response_State */
 	private function getResponseState() {return $this->getRequestState()->getResponse();}
 }

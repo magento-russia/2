@@ -8,9 +8,7 @@
 		</Df_Moneta>
 	</modules>
 	<global>
-		<blocks><df_moneta><class>Df_Moneta_Block</class></df_moneta></blocks>
 		<helpers><df_moneta><class>Df_Moneta_Helper</class></df_moneta></helpers>
-		<models><df_moneta><class>Df_Moneta_Model</class></df_moneta></models>
 	</global>
 	<default>
 		<!--

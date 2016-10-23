@@ -73,13 +73,13 @@ abstract class Df_Payment_Method
 
 	/**
 	 * Важно для витрины вернуть true, чтобы
-	 * @see Df_Payment_Model_Action_Confirm::process() и другие аналогичные методы
+	 * @see Df_Payment_Action_Confirm::process() и другие аналогичные методы
 	 * (например, @see Df_Alfabank_Action_CustomerReturn::process())
 	 * могли вызвать @see Mage_Sales_Model_Order_Invoice::capture().
 	 *
 	 * Для административной части возвращайте true только в том случае,
 	 * если метод оплаты реально поддерживает операцию capture
-	 * (т.е. имеет класс Df_XXX_Model_Request_Capture).
+	 * (т.е. имеет класс Df_XXX_Request_Capture).
 	 * Реализация этого класса позволит проводить двуступенчатую оплату:
 	 * резервирование средств непосредственно в процессе оформления заказа
 	 * и снятие средств посредством нажатия кнопки «Принять оплату» («Capture»)
@@ -215,10 +215,10 @@ abstract class Df_Payment_Method
 		 * 2015-03-09
 		 * Сюда мы попадаем при вызове $invoice->capture();
 		 * Такой вызов может происходить не только при нажатии кнопки «capture» администратором,
-		 * но и при работе класса @see Df_Payment_Model_Action_Confirm и его потомков.
+		 * но и при работе класса @see Df_Payment_Action_Confirm и его потомков.
 		 * Так вот, во втором случае мы не должны выполнять транзакцию
 		 * (хотя бы потому что большинство наших способов оплаты вообще не умеют выполнять транзации,
-		 * да и в сценарии с @see Df_Payment_Model_Action_Confirm транзация не задумывалась).
+		 * да и в сценарии с @see Df_Payment_Action_Confirm транзация не задумывалась).
 		 * потому что
 		 */
 		if (df_is_admin()) {
@@ -243,13 +243,13 @@ abstract class Df_Payment_Method
 	/**
 	 * @used-by getTitle()
 	 * @used-by Df_Payment_Block_Form::getDescription()
-	 * @used-by Df_Payment_Model_Action_Confirm::showExceptionOnCheckoutScreen()
+	 * @used-by Df_Payment_Action_Confirm::showExceptionOnCheckoutScreen()
 	 * @return Df_Payment_Config_Area_Frontend()
 	 */
 	public function configF() {return $this->config()->frontend();}
 
 	/**
-	 * @used-by Df_Kkb_Model_Response::configS()
+	 * @used-by Df_Kkb_Response::configS()
 	 * @used-by Df_Payment_Block_Form::isTestMode()
 	 * @return Df_Payment_Config_Area_Service
 	 */
@@ -257,7 +257,7 @@ abstract class Df_Payment_Method
 
 	/**
 	 * @used-by Df_IPay_Block_Form::getPaymentOptions()
-	 * @used-by Df_Payment_Model_Request_Payment::chopParam()
+	 * @used-by Df_Payment_Request_Payment::chopParam()
 	 * @return Df_Payment_Config_Manager_Const
 	 */
 	public function constManager() {
@@ -367,7 +367,7 @@ abstract class Df_Payment_Method
 	 * Используется для того, чтобы предложить покупателю на странице оформления заказа
 	 * меню из вариантов оплаты, предоставляемых одним и тем же платёжным шлюзом.
 	 * Пока эта возможность используется только модулем LiqPay:
-	 * @used-by Df_LiqPay_Model_Request_Payment::getParamsForXml()
+	 * @used-by Df_LiqPay_Request_Payment::getParamsForXml()
 	 * @todo Надо бы задействовать эту возможность и для других платёжных модулей,
 	 * особенно для тех, которые работают с платёжными агрегаторами
 	 * (потому что уж они то заведомо предоставляют несколько вариантов оплаты).
@@ -541,7 +541,7 @@ abstract class Df_Payment_Method
 	 */
 	private function doTransaction($type, Mage_Sales_Model_Order_Payment $payment, $amount = 0.0) {
 		try {
-			Df_Payment_Model_Request_Transaction::doTransaction($type, $payment, $amount);
+			Df_Payment_Request_Transaction::doTransaction($type, $payment, $amount);
 		}
 		catch (Exception $exception) {
 			$this->logFailureLowLevel($exception);
@@ -617,7 +617,7 @@ abstract class Df_Payment_Method
 	}
 	/**
 	 * @used-by Df_Payment_Config_ManagerBase::_construct()
-	 * @used-by Df_Payment_Model_Request::_construct()
+	 * @used-by Df_Payment_Request::_construct()
 	 */
 
 	/**

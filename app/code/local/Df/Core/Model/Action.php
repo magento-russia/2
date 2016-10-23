@@ -345,7 +345,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by processRedirect()
-	 * @used-by Df_Payment_Model_Action_Confirm::redirectToSuccess()
+	 * @used-by Df_Payment_Action_Confirm::redirectToSuccess()
 	 * @param string $path
 	 * @return void
 	 */

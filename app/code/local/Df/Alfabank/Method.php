@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Alfabank_Model_Config_Area_Service configS() */
+/** @method Df_Alfabank_Config_Area_Service configS() */
 class Df_Alfabank_Method extends Df_Payment_Method_WithRedirect {
 	/**
 	 * @see Df_Payment_Method::canCapture()
@@ -145,7 +145,7 @@ class Df_Alfabank_Method extends Df_Payment_Method_WithRedirect {
 
 	/**
 	 * @used-by getRegistrationResponse()
-	 * @used-by Df_Alfabank_Model_Request_Secondary::getPaymentExternalId()
+	 * @used-by Df_Alfabank_Request_Secondary::getPaymentExternalId()
 	 */
 	const INFO__PAYMENT_EXTERNAL_ID = 'order_external_id';
 }

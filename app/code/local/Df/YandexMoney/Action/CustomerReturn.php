@@ -1,9 +1,9 @@
 <?php
 /**
  * @method Df_YandexMoney_Method getMethod()
- * @method Df_YandexMoney_Model_Config_Area_Service configS()
+ * @method Df_YandexMoney_Config_Area_Service configS()
  */
-class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
+class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
@@ -39,7 +39,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 
 	/**
 	 * @override
-	 * @see Df_Payment_Model_Action_Confirm::_process()
+	 * @see Df_Payment_Action_Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
@@ -55,7 +55,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 			/**
 			 * Вызывать $this->getResponseCapture()->throwOnFailure()
 			 * здесь не надо, потому что throwOnFailure() автоматически вызывается в методе
-			 * @see Df_Payment_Model_Request_Secondary::getResponse()
+			 * @see Df_Payment_Request_Secondary::getResponse()
 			 * опосредованно через postProcess()
 			 */
 			/** @var Mage_Sales_Model_Order_Invoice $invoice */
@@ -74,7 +74,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 			$this->redirectToSuccess();
 			/**
 			 * В отличие от метода
-			 * @see Df_Payment_Model_Action_Confirm::process()
+			 * @see Df_Payment_Action_Confirm::process()
 			 * здесь необходимость вызова
 			 * @uses Df_Payment_Redirected::off() не вызывает сомнений,
 			 * потому что @see Df_YandexMoney_Action_CustomerReturn::process()
@@ -85,36 +85,36 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 		$this->redirectToSuccess();
 	}
 
-	/** @return Df_YandexMoney_Model_Request_Authorize */
+	/** @return Df_YandexMoney_Request_Authorize */
 	private function getRequestAuthorize() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_Model_Request_Authorize::i(
+			$this->{__METHOD__} = Df_YandexMoney_Request_Authorize::i(
 				$this->payment(), $this->getToken()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_YandexMoney_Model_Request_Capture */
+	/** @return Df_YandexMoney_Request_Capture */
 	private function getRequestCapture() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_Model_Request_Capture::i(
+			$this->{__METHOD__} = Df_YandexMoney_Request_Capture::i(
 				$this->payment(), $this->getResponseAuthorize(), $this->getToken()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_YandexMoney_Model_Response_Authorize */
+	/** @return Df_YandexMoney_Response_Authorize */
 	private function getResponseAuthorize() {return $this->getRequestAuthorize()->getResponse();}
 
-	/** @return Df_YandexMoney_Model_Response_Capture */
+	/** @return Df_YandexMoney_Response_Capture */
 	private function getResponseCapture() {return $this->getRequestCapture()->getResponse();}
 
 	/** @return string */
 	private function getToken() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_Model_OAuth::i(
+			$this->{__METHOD__} = Df_YandexMoney_OAuth::i(
 				$this->configS()->getAppId()
 				, $this->configS()->getAppPassword()
 				, $this->getTokenTemporary()

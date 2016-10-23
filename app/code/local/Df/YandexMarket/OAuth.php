@@ -1,5 +1,5 @@
 <?php
-class Df_YandexMarket_OAuth extends Df_Yandex_Model_OAuth {
+class Df_YandexMarket_OAuth extends Df_Yandex_OAuth {
 	/**
 	 * @override
 	 * @param array(string => string) $response

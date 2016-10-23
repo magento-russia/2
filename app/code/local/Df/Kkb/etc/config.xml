@@ -7,9 +7,7 @@
 		</Df_Kkb>
 	</modules>
 	<global>
-		<blocks><df_kkb><class>Df_Kkb_Block</class></df_kkb></blocks>
 		<helpers><df_kkb><class>Df_Kkb_Helper</class></df_kkb></helpers>
-		<models><df_kkb><class>Df_Kkb_Model</class></df_kkb></models>
 	</global>
 	<default>
 		<!--

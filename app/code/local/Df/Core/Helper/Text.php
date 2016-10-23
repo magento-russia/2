@@ -415,7 +415,7 @@ class Text {
 			 * (http://framework.zend.com/issues/browse/ZF-11223)
 			 * может приводить к падению интерпретатора PHP
 			 * для строк, начинающихся с заглавной кириллической буквы «Р».
-			 * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
+			 * Такое у меня происходило в методе @see Df_Autotrading_Request_Locations::parseLocation()
 			 * Кто виноват: решение или исходный класс @see Zend_Filter_StringTrim — не знаю
 			 * (скорее, решение).
 			 * Поэтому мой класс @see \Df\Zf\Filter\StringTrim дополняет решение по ссылке выше

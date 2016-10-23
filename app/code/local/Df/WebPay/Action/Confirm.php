@@ -1,5 +1,5 @@
 <?php
-class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
+class Df_WebPay_Action_Confirm extends Df_Payment_Action_Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -89,7 +89,7 @@ class Df_WebPay_Action_Confirm extends Df_Payment_Model_Action_Confirm {
 	 * Интернет-ресурс в случае оповещения, должен ответить кодом 200 ("HTTP/1.0 200 OK")
 	 * https://mail.google.com/mail/u/0/?ui=2&ik=a7a1e9bc54&view=att&th=135800f28b66a0b2&attid=0.0&disp=inline&safe=1&zw
 	 * @override
-	 * @see Df_Payment_Model_Action_Confirm::processResponseForSuccess()
+	 * @see Df_Payment_Action_Confirm::processResponseForSuccess()
 	 * @used-by _process()
 	 * @return void
 	 */

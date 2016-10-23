@@ -8,9 +8,7 @@
 		</Df_WebMoney>
 	</modules>
 	<global>
-		<blocks><df_webmoney><class>Df_WebMoney_Block</class></df_webmoney></blocks>
 		<helpers><df_webmoney><class>Df_WebMoney_Helper</class></df_webmoney></helpers>
-		<models><df_webmoney><class>Df_WebMoney_Model</class></df_webmoney></models>
 	</global>
 	<default>
 		<!--

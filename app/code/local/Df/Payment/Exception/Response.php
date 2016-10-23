@@ -2,9 +2,9 @@
 class Df_Payment_Exception_Response extends Df_Payment_Exception {
 	/**
 	 * @param string $message
-	 * @param Df_Payment_Model_Response $response
+	 * @param Df_Payment_Response $response
 	 */
-	public function __construct($message, Df_Payment_Model_Response $response) {
+	public function __construct($message, Df_Payment_Response $response) {
 		parent::__construct($message);
 		$this->_response = $response;
 	}
@@ -25,15 +25,15 @@ class Df_Payment_Exception_Response extends Df_Payment_Exception {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Payment_Model_Response */
+	/** @return Df_Payment_Response */
 	protected function getResponse() {return $this->_response;}
 
-	/** @return Df_Payment_Model_Request_Secondary */
+	/** @return Df_Payment_Request_Secondary */
 	private function getRequest() {return $this->getResponse()->getRequest();}
 
-	/** @var Df_Payment_Model_Response */
+	/** @var Df_Payment_Response */
 	private $_response;
 
-	/** @used-by Df_Payment_Model_Response::getExceptionClass() */
+	/** @used-by Df_Payment_Response::getExceptionClass() */
 
 }

@@ -8,9 +8,7 @@
 		</Df_Avangard>
 	</modules>
 	<global>
-		<blocks><df_avangard><class>Df_Avangard_Block</class></df_avangard></blocks>
-		<helpers><df_avangard><class>Df_Avangard_Helper</class></df_avangard></helpers>
-		<models><df_avangard><class>Df_Avangard_Model</class></df_avangard></models>
+		<helpers><df_avangard><class>Df_Avangard_Helper</class></df_avangard></helpers>>
 	</global>
 	<default>
 		<!--

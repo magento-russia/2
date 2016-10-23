@@ -8,9 +8,7 @@
 		</Df_Assist>
 	</modules>
 	<global>
-		<blocks><df_assist><class>Df_Assist_Block</class></df_assist></blocks>
 		<helpers><df_assist><class>Df_Assist_Helper</class></df_assist></helpers>
-		<models><df_assist><class>Df_Assist_Model</class></df_assist></models>
 	</global>
 	<default>
 		<!--
