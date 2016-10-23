@@ -16,7 +16,7 @@ class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
 		return
 			!$errorMessage
 			? df_cc_n($this->htmlInput(), $this->htmlLabel())
-			: df_tag_list(df_tag_list(array($errorMessage)), false, 'messages', 'error-msg')
+			: df_tag_list([df_tag_list([$errorMessage])], false, 'messages', 'error-msg')
 		;
 	}
 

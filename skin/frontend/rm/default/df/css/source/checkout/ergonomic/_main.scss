@@ -236,9 +236,13 @@
 			.sp-methods {
 				margin: 0 0 8px;
 				.error-msg {
-					padding:{
-						left: 8px !important;
-					}
+					// 2016-10-23
+					// Оформительская тема Ultimo норовит установить 25px !important,
+					// что явно много.
+					// Раньше тут стояло правило только для левого края:
+					// padding:{left: 8px !important;}
+					// Уже не помню, для чего оно было.
+					padding: 8px !important;
 				}
 				dt {
 					margin:13px 0 5px;

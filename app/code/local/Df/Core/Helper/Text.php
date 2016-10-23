@@ -200,16 +200,6 @@ class Text {
 	}, $args);}
 
 	/**
-	 * @param string $text
-	 * @return string
-	 */
-	public function noEscape($text) {return
-		df_starts_with($text, \Df_Core_Helper_DataM::TAG__NO_ESCAPE)
-		? $text
-		: \Df_Core_Helper_DataM::TAG__NO_ESCAPE . $text
-	;}
-
-	/**
 	 * @param string $name
 	 * @return string
 	 */

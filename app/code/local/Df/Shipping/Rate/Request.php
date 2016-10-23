@@ -682,7 +682,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
 		df_error(new Df_Shipping_Exception_MethodNotApplicable(
-			df_no_escape($this->evaluateMessage(df_format($arguments))
+			$this->evaluateMessage(df_format($arguments)
 		)));
 	}
 

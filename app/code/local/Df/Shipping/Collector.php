@@ -350,7 +350,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	private function addError($message) {
 		if (!$this->_result()->getError()) {
 			$this->_result()->append(new Mage_Shipping_Model_Rate_Result_Error(array(
-				'error' => true, 'error_message' => df_no_escape($message)
+				'error' => true, 'error_message' => $message
 			) + $this->resultCommon()));
 		}
 	}

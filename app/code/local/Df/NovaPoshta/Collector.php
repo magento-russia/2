@@ -61,7 +61,7 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 			$matches = rm_preg_match('#(\d{1,2}) (\w+) (\d{4})#u', $dateS);
 			df_assert_eq(3, count($matches));
 			/** @var int $month */
-			$month = 1 + df_a(array_flip(array(
+			$month = 1 + dfa(array_flip(array(
 				'января', 'февраля', 'марта', 'апреля', 'мая', 'июня'
 				, 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декаюря'
 			)), $matches[1]);

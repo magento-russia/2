@@ -300,7 +300,7 @@ body.customer-account-create .account-create {
     .df .df-checkout-ergonomic .df-body #co-shipping-method-form .sp-methods {
       margin: 0 0 8px; }
       .df .df-checkout-ergonomic .df-body #co-shipping-method-form .sp-methods .error-msg {
-        padding-left: 8px !important; }
+        padding: 8px !important; }
       .df .df-checkout-ergonomic .df-body #co-shipping-method-form .sp-methods dt {
         margin: 13px 0 5px;
         font-weight: bold; }

@@ -8,7 +8,7 @@ class Df_Kazpost_Collector_Foreign extends Df_Shipping_Collector_Child {
 	 */
 	protected function _collect() {
 		/** @var int|null $zone */
-		$zone = df_a(Df_Kazpost_Zones::$a, $this->countryDestUc());
+		$zone = dfa(Df_Kazpost_Zones::$a, $this->countryDestUc());
 		if (!$zone) {
 			$this->errorInvalidCountryDest();
 		}

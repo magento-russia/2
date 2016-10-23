@@ -384,7 +384,11 @@ function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
  * @param string $text
  * @return string
  */
-function df_no_escape($text) {return df_t()->noEscape($text);}
+function df_no_escape($text) {return
+	df_starts_with($text, \Df_Core_Helper_DataM::TAG__NO_ESCAPE)
+	? $text
+	: \Df_Core_Helper_DataM::TAG__NO_ESCAPE . $text
+;}
 
 /**
  * @param string $text

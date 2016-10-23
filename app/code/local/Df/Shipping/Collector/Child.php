@@ -71,7 +71,7 @@ abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
 		$m = df_module_name($parent->main());
 		/** @var bool $full */
 		$full = $class && df_starts_with($class, $m);
-		$class = $full ? $class : df_cc_class_($m, 'Model_Collector', $class);
+		$class = $full ? $class : df_cc_class_($m, 'Collector', $class);
 		/** @var Df_Shipping_Collector_Child $i */
 		$i = df_ic($class, __CLASS__, array(self::$P__PARENT => $parent) + $parent->getData());
 		$i->_collect();
