@@ -1,4 +1,7 @@
 <?php
+use Mage_Payment_Model_Info as I;
+use Mage_Sales_Model_Quote_Payment as QP;
+use Mage_Sales_Model_Order_Payment as OP;
 /** @method int getStore() */
 abstract class Df_Payment_Model_Method
 	extends Mage_Payment_Model_Method_Abstract
@@ -28,7 +31,7 @@ abstract class Df_Payment_Model_Method
 			/** @var string|null $value */
 			$value = dfa($data, $customInformationKey);
 			if (!is_null($value)) {
-				$this->getInfoInstance()->setAdditionalInformation($customInformationKey, $value);
+				$this->iiaSet($customInformationKey, $value);
 			}
 		}
 		return $this;
@@ -370,14 +373,7 @@ abstract class Df_Payment_Model_Method
 	 * (потому что уж они то заведомо предоставляют несколько вариантов оплаты).
 	 * @return string|null
 	 */
-	public function getSubmethod() {
-		/** @var string|null $result */
-		$result = $this->getInfoInstance()->getAdditionalInformation(self::INFO_KEY__SUBMETHOD);
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
+	public function getSubmethod() {return $this->iia(self::INFO_KEY__SUBMETHOD);}
 
 	/** @return string */
 	public function getTemplateSuccess() {return '';}
@@ -389,7 +385,6 @@ abstract class Df_Payment_Model_Method
 	 * @return string
 	 */
 	public function getTitle() {return $this->configF()->getTitle();}
-
 
 	/**
 	 * Насколько я понял, isGateway должно возвращать true,
@@ -496,6 +491,47 @@ abstract class Df_Payment_Model_Method
 
 	/** @return string[] */
 	protected function getCustomInformationKeys() {return array(self::INFO_KEY__SUBMETHOD);}
+
+	/**
+	 * 2016-03-06
+	 * @param string|null $key [optional]
+	 * @return I|OP|QP|mixed
+	 */
+	protected function ii($key = null) {
+		/** @var I|OP|QP $result */
+		$result = $this->getInfoInstance();
+		return is_null($key) ? $result : $result[$key];
+	}
+
+	/**
+	 * 2016-03-06
+	 * @param string[] ...$keys
+	 * @return mixed|array(string => mixed)
+	 */
+	protected function iia(...$keys) {return dfp_iia($this->ii(), $keys);}
+
+	/**
+	 * 2016-07-10
+	 * @param array(string => mixed) $values
+	 * @return void
+	 */
+	protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
+
+	/**
+	 * 2016-03-06
+	 * @param string|array(string => mixed) $k [optional]
+	 * @param mixed|null $v [optional]
+	 * @return void
+	 */
+	protected function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
+
+	/**
+	 * 2016-08-14
+	 * @param string|array(string => mixed) $k [optional]
+	 * @param mixed|null $v [optional]
+	 * @return void
+	 */
+	protected function iiaUnset($k, $v = null) {$this->ii()->unsAdditionalInformation($k, $v);}
 
 	/**
 	 * @param string $type

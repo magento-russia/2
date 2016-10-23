@@ -90,7 +90,7 @@ abstract class Df_Psbank_Model_Request_Secondary extends Df_Payment_Model_Reques
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = Df_Psbank_Model_Response::i(
 				Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
-			)->loadFromPaymentInfo($this->getInfoInstance());
+			)->loadFromPaymentInfo($this->ii());
 		}
 		return $this->{__METHOD__};
 	}

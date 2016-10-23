@@ -94,10 +94,8 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			if ($errorCode) {
 				$this->registrationError(dfa($result, 'errorMessage'));
 			}
-			$this->getInfoInstance()->setAdditionalInformation(
-				self::INFO__PAYMENT_EXTERNAL_ID, dfa($result, 'orderId')
-			);
-			$this->getInfoInstance()->save();
+			$this->iiaSet(self::INFO__PAYMENT_EXTERNAL_ID, dfa($result, 'orderId'));
+			$this->ii()->save();
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};

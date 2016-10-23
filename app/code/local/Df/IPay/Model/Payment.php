@@ -1,9 +1,9 @@
 <?php
 class Df_IPay_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 	/** @return string|null */
-	public function getMobileNetworkOperator() {
-		return $this->getInfoInstance()->getAdditionalInformation(self::INFO_KEY__MOBILE_NETWORK_OPERATOR);
-	}
+	public function getMobileNetworkOperator() {return
+		$this->iia(self::INFO_KEY__MOBILE_NETWORK_OPERATOR)
+	;}
 
 	/**
 	 * @override

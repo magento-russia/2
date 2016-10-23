@@ -2,20 +2,20 @@
 class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	/** @return double */
 	public function getBaseGrandTotal() {
-		return $this->info()->getOrder()->getBaseGrandTotal();
+		return $this->ii()->getOrder()->getBaseGrandTotal();
 	}
 
 	/** @return Df_Chronopay_Model_Gate_Buyer */
 	public function getBuyer() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Buyer::i($this->info());
+			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Buyer::i($this->ii());
 		}
 		return $this->{__METHOD__};
 	}
 	/** @return Df_Chronopay_Model_Gate_Card */
 	public function getCard() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Card::i($this->info());
+			$this->{__METHOD__} = Df_Chronopay_Model_Gate_Card::i($this->ii());
 		}
 		return $this->{__METHOD__};
 	}
@@ -93,7 +93,7 @@ class Df_Chronopay_Block_Gate_Request extends Df_Core_Block_Template_NoCache {
 	}
 
 	/** @return Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment */
-	private function info() {return $this[self::$P__INFO];}
+	private function ii() {return $this[self::$P__INFO];}
 
 	/** @return Df_Chronopay_Model_Gate */
 	private function method() {return $this[self::$P__METHOD];}

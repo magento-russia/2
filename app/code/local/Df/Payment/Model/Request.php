@@ -51,12 +51,12 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	 * @used-by Df_Psbank_Model_Request_Secondary::getResponsePayment()
 	 * @return Mage_Payment_Model_Info
 	 */
-	protected function getInfoInstance() {return $this->method()->getInfoInstance();}
+	protected function ii() {return $this->method()->getInfoInstance();}
 
 	/**
 	 * @override
 	 * @used-by configS()
-	 * @used-by getInfoInstance()
+	 * @used-by ii()
 	 * @return Df_Payment_Model_Method_WithRedirect
 	 */
 	protected function method() {return dfc($this, function() {

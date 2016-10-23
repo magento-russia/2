@@ -30,9 +30,9 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 * @param string $field
 	 * @return string
 	 */
-	public function getInfoData($field) {
-		return df_e($this->getMethod()->getInfoInstance()->getData($field));
-	}
+	public function getInfoData($field) {return
+		df_e($this->getMethod()->getInfoInstance()->getData($field))
+	;}
 
 	/**
 	 * заимствовано из Mage_Payment_Block_Form

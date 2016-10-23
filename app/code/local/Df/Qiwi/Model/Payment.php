@@ -5,16 +5,9 @@ class Df_Qiwi_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 	 * @used-by Df_Qiwi_Model_Request_Payment::::getQiwiCustomerPhone()
 	 * @return string
 	 */
-	public function getQiwiCustomerPhone() {
-		return df_ccc(''
-			,$this->getInfoInstance()->getAdditionalInformation(
-				self::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE
-			)
-			,$this->getInfoInstance()->getAdditionalInformation(
-				self::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX
-			)
-		);
-	}
+	public function getQiwiCustomerPhone() {return df_ccc('', $this->iia(
+		self::KEY__PHONE_NETWORK_CODE, self::KEY__PHONE_SUFFIX
+	));}
 
 	/**
 	 * @override
@@ -25,13 +18,13 @@ class Df_Qiwi_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			array_merge(
 				parent::getCustomInformationKeys()
 				,array(
-					self::INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE
-					,self::INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX
+					self::KEY__PHONE_NETWORK_CODE
+					,self::KEY__PHONE_SUFFIX
 				)
 			)
 		;
 	}
 
-	const INFO_KEY__QIWI_CUSTOMER_PHONE__NETWORK_CODE = 'df_qiwi__qiwi_customer_phone__network_code';
-	const INFO_KEY__QIWI_CUSTOMER_PHONE__SUFFIX = 'df_qiwi__qiwi_customer_phone__suffix';
+	const KEY__PHONE_NETWORK_CODE = 'df_qiwi__qiwi_customer_phone__network_code';
+	const KEY__PHONE_SUFFIX = 'df_qiwi__qiwi_customer_phone__suffix';
 }

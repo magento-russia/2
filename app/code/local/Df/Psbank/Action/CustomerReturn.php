@@ -112,7 +112,7 @@ class Df_Psbank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
 	 * @param string $transactionType
 	 * @return Df_Psbank_Model_Response
 	 */
-	private function getResponseByTransactionType($transactionType) {
-		return Df_Psbank_Model_Response::i($transactionType)->loadFromPaymentInfo($this->info());
-	}
+	private function getResponseByTransactionType($transactionType) {return
+		Df_Psbank_Model_Response::i($transactionType)->loadFromPaymentInfo($this->ii())
+	;}
 }
