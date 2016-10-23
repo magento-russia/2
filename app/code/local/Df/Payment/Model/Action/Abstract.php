@@ -59,13 +59,13 @@ abstract class Df_Payment_Model_Action_Abstract extends Df_Core_Model_Action {
 	/**
 	 * @used-by getConst()
 	 * @used-by info()
-	 * @return Df_Payment_Model_Method_WithRedirect
+	 * @return Df_Payment_Method_WithRedirect
 	 */
 	protected function method() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Payment_Model_Method_WithRedirect $result */
+			/** @var Df_Payment_Method_WithRedirect $result */
 			$result = $this->payment()->getMethodInstance();
-			if (!$result instanceof Df_Payment_Model_Method_WithRedirect) {
+			if (!$result instanceof Df_Payment_Method_WithRedirect) {
 				df_error(
 					'Платёжная система прислала сообщение относительно заказа №«%s»,'
 					. ' который не предназначен для оплаты последством данной платёжной системы.'

@@ -41,7 +41,7 @@
 		-->
 		<payment>
 			<df-onpay>
-				<model>Df_OnPay_Model_Payment</model>
+				<model>Df_OnPay_Method</model>
 			</df-onpay>
 		</payment>
 	</default>

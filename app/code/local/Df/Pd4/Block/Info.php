@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Pd4_Model_Payment getMethod() */
+/** @method Df_Pd4_Method getMethod() */
 class Df_Pd4_Block_Info extends Df_Payment_Block_Info {
 	/** @return string */
 	public function getLinkToDocumentAsHtml() {

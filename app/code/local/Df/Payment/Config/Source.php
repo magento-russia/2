@@ -5,14 +5,14 @@
  * Не забывайте об этом при реализации кеширования результатов вычислений внутри этого класса!
  */
 abstract class Df_Payment_Config_Source extends Df_Admin_Config_Source {
-	/** @return Df_Payment_Model_Method */
+	/** @return Df_Payment_Method */
 	protected function getMethod() {
 		return df_mage()->paymentHelper()->getMethodInstance($this->getPaymentMethodCode());
 	}
 
 	/** @return string */
 	private function getPaymentMethodCode() {
-		return Df_Payment_Model_Method::getCodeByRmId($this->getRmId());
+		return Df_Payment_Method::getCodeByRmId($this->getRmId());
 	}
 
 	/** @return string */

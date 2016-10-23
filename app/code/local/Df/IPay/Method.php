@@ -1,5 +1,5 @@
 <?php
-class Df_IPay_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
+class Df_IPay_Method extends Df_Payment_Method_WithRedirect {
 	/** @return string|null */
 	public function getMobileNetworkOperator() {return
 		$this->iia(self::INFO_KEY__MOBILE_NETWORK_OPERATOR)
@@ -31,7 +31,7 @@ class Df_IPay_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			return Mage::getModel($class);
 	 * @used-by Df_IPay_Action_Abstract::method()
 	 * @param Df_Core_Model_StoreM $store
-	 * @return Df_IPay_Model_Payment
+	 * @return Df_IPay_Method
 	 */
 	public static function i(Df_Core_Model_StoreM $store) {return new self(array('store' => $store));}
 }

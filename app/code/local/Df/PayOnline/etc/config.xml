@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-payonline>
-				<model>Df_PayOnline_Model_Payment</model>
+				<model>Df_PayOnline_Method</model>
 			</df-payonline>
 		</payment>
 	</default>

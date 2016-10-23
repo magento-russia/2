@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Uniteller_Model_Payment getMethod() */
+/** @method Df_Uniteller_Method getMethod() */
 class Df_Uniteller_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override

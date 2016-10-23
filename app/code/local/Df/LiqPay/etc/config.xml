@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-liqpay>
-				<model>Df_LiqPay_Model_Payment</model>
+				<model>Df_LiqPay_Method</model>
 			</df-liqpay>
 		</payment>
 	</default>

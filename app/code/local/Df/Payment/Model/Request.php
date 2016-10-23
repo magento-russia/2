@@ -57,13 +57,13 @@ abstract class Df_Payment_Model_Request extends Df_Core_Model {
 	 * @override
 	 * @used-by configS()
 	 * @used-by ii()
-	 * @return Df_Payment_Model_Method_WithRedirect
+	 * @return Df_Payment_Method_WithRedirect
 	 */
 	protected function method() {return dfc($this, function() {
 		/** @var Mage_Sales_Model_Order_Payment $result */
-		/** @var Df_Payment_Model_Method_WithRedirect $result */
+		/** @var Df_Payment_Method_WithRedirect $result */
 		$result = $this->payment()->getMethodInstance();
-		if (!$result instanceof Df_Payment_Model_Method_WithRedirect) {
+		if (!$result instanceof Df_Payment_Method_WithRedirect) {
 			df_error(
 				'Заказ №«%s» не предназначен для оплаты каким-либо из платёжных модулей
 				Российской сборки Magento.'

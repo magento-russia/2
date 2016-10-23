@@ -51,7 +51,7 @@
 		-->
 		<payment>
 			<df-avangard>
-				<model>Df_Avangard_Model_Payment</model>
+				<model>Df_Avangard_Method</model>
 			</df-avangard>
 		</payment>
 	</default>

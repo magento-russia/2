@@ -31,7 +31,7 @@ abstract class Df_Pd4_Block_LinkToDocument extends Df_Core_Block_Template_NoCach
 			&&
 				$this->order()->getPayment()
 			&&
-				$this->order()->getPayment()->getMethodInstance() instanceof Df_Pd4_Model_Payment
+				$this->order()->getPayment()->getMethodInstance() instanceof Df_Pd4_Method
 		;
 	}
 

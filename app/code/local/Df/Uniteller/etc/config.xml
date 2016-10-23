@@ -38,7 +38,7 @@
 		-->
 		<payment>
 			<df-uniteller>
-				<model>Df_Uniteller_Model_Payment</model>
+				<model>Df_Uniteller_Method</model>
 			</df-uniteller>
 		</payment>
 	</default>

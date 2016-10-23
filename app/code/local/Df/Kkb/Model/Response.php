@@ -9,7 +9,7 @@ abstract class Df_Kkb_Model_Response extends Df_Payment_Model_Response_Xml {
 			 * лишь потому, что от него мы получаем только те данные,
 			 * которые не зависят от области действия настроек.
 			 */
-			$this->{__METHOD__} = Df_Kkb_Model_Payment::i()->configS();
+			$this->{__METHOD__} = Df_Kkb_Method::i()->configS();
 		}
 		return $this->{__METHOD__};
 	}

@@ -57,7 +57,7 @@
 		-->
 		<payment>
 			<df-psbank>
-				<model>Df_Psbank_Model_Payment</model>
+				<model>Df_Psbank_Method</model>
 			</df-psbank>
 		</payment>
 	</default>

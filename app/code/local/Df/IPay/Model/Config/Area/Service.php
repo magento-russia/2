@@ -1,5 +1,5 @@
 <?php
-/** @method Df_IPay_Model_Payment main() */
+/** @method Df_IPay_Method main() */
 class Df_IPay_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	/**
 	 * @override

@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-rbk-money>
-				<model>Df_RbkMoney_Model_Payment</model>
+				<model>Df_RbkMoney_Method</model>
 			</df-rbk-money>
 		</payment>
 	</default>

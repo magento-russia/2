@@ -128,11 +128,11 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	 * @see Df_Payment_Model_Action_Abstract::method()
 	 * @used-by Df_Payment_Model_Action_Abstract::getConst()
 	 * @used-by Df_Payment_Model_Action_Abstract::info()
-	 * @return Df_IPay_Model_Payment
+	 * @return Df_IPay_Method
 	 */
 	protected function method() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_IPay_Model_Payment $result */
+			/** @var Df_IPay_Method $result */
 			try {
 				$result = parent::method();
 			}
@@ -146,7 +146,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 				catch (Exception $e) {
 					$store = df_store();
 				}
-				$result = Df_IPay_Model_Payment::i($store);
+				$result = Df_IPay_Method::i($store);
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -352,7 +352,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 			/** @var Mage_Payment_Model_Method_Abstract $paymentMethod */
 			$paymentMethod = $payment->getMethodInstance();
 			df_assert($paymentMethod instanceof Mage_Payment_Model_Method_Abstract);
-			if (!($paymentMethod instanceof Df_IPay_Model_Payment)) {
+			if (!($paymentMethod instanceof Df_IPay_Method)) {
 				$this->logOrderMessage(
 					'Заказ номер %orderId% не предназначен для оплаты посредством iPay.'
 				);
@@ -391,7 +391,7 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Model_Action_Abstract 
 	/** @return void */
 	private function checkOrderPaymentMethod() {
 		// надо писать именно так, а не $this->payment()
-		if (!$this->payment()->getMethodInstance() instanceof Df_IPay_Model_Payment) {
+		if (!$this->payment()->getMethodInstance() instanceof Df_IPay_Method) {
 			$this->throwOrderNotExists();
 		}
 	}

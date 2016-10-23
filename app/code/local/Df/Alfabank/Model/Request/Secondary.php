@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_Alfabank_Model_Payment getMethod()
+ * @method Df_Alfabank_Method getMethod()
  * @method Df_Alfabank_Model_Response getResponse()
  * @method Df_Alfabank_Model_Config_Area_Service configS()
  */
@@ -49,7 +49,7 @@ abstract class Df_Alfabank_Model_Request_Secondary extends Df_Payment_Model_Requ
 	protected function getPaymentExternalId() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->payment()->getAdditionalInformation(
-				Df_Alfabank_Model_Payment::INFO__PAYMENT_EXTERNAL_ID
+				Df_Alfabank_Method::INFO__PAYMENT_EXTERNAL_ID
 			);
 			df_result_string_not_empty($this->{__METHOD__});
 		}

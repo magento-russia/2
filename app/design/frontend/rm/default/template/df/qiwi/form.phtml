@@ -21,15 +21,15 @@
 				<div class='df-prefix'>+7</div>
 				<div class='df-network-code-container'>
 					<label
-						for='<?php echo Df_Qiwi_Model_Payment::KEY__PHONE_NETWORK_CODE; ?>'
+						for='<?php echo Df_Qiwi_Method::KEY__PHONE_NETWORK_CODE; ?>'
 						class='required'
 					><em>*</em>Код:</label>
 					<div class='df-network-code-input-frame'>
 						<div class='df-bracket df-bracket-open'>(</div>
 						<input
 							type='text'
-							id='<?php echo Df_Qiwi_Model_Payment::KEY__PHONE_NETWORK_CODE; ?>'
-							name='payment[<?php echo Df_Qiwi_Model_Payment::KEY__PHONE_NETWORK_CODE; ?>]'
+							id='<?php echo Df_Qiwi_Method::KEY__PHONE_NETWORK_CODE; ?>'
+							name='payment[<?php echo Df_Qiwi_Method::KEY__PHONE_NETWORK_CODE; ?>]'
 							title='Код'
 							class='<?php echo $cssCommon . 'df-phone-network-code minimum-length-3 maximum-length-3' ?>'
 							value='<?php echo strval(substr($this->phone(), 0, 3)); ?>'
@@ -40,13 +40,13 @@
 				</div>
 				<div class='df-suffix-container'>
 					<label
-						for='<?php echo Df_Qiwi_Model_Payment::KEY__PHONE_SUFFIX; ?>'
+						for='<?php echo Df_Qiwi_Method::KEY__PHONE_SUFFIX; ?>'
 						class='required'
 					><em>*</em>Номер:</label>
 					<input
 						type='text'
-						id='<?php echo Df_Qiwi_Model_Payment::KEY__PHONE_SUFFIX; ?>'
-						name='payment[<?php echo Df_Qiwi_Model_Payment::KEY__PHONE_SUFFIX; ?>]'
+						id='<?php echo Df_Qiwi_Method::KEY__PHONE_SUFFIX; ?>'
+						name='payment[<?php echo Df_Qiwi_Method::KEY__PHONE_SUFFIX; ?>]'
 						title='Номер'
 						class='<?php echo $cssCommon . 'df-phone-suffix minimum-length-7 maximum-length-7';?>'
 						value='<?php echo strval(substr($this->phone(), 3)); ?>'

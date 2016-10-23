@@ -1,7 +1,7 @@
 <?php
 /**
  * @method Df_WebPay_Model_Config_Area_Service configS()
- * @method Df_WebPay_Model_Payment getMethod()
+ * @method Df_WebPay_Method getMethod()
  */
 class Df_WebPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**

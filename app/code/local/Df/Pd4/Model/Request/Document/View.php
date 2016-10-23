@@ -31,10 +31,10 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Pd4_Model_Payment */
+	/** @return Df_Pd4_Method */
 	public function getMethod() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Pd4_Model_Payment $result */
+			/** @var Df_Pd4_Method $result */
 			$result = null;
 			/**
 			 * Раньше здесь стояло if(!is_null($this->order()->getPayment()))
@@ -44,7 +44,7 @@ class Df_Pd4_Model_Request_Document_View extends Df_Core_Model {
 			if ($this->order()->getPayment() instanceof Mage_Sales_Model_Order_Payment) {
 				$result = $this->order()->getPayment()->getMethodInstance();
 			}
-			if (!$result instanceof Df_Pd4_Model_Payment) {
+			if (!$result instanceof Df_Pd4_Method) {
 				df_error(
 					"Заказ №{$this->getOrderId()} не предназначен для оплаты через банковскую кассу."
 				);

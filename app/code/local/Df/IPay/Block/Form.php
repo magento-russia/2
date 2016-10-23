@@ -1,5 +1,5 @@
 <?php
-/** @method Df_IPay_Model_Payment getMethod() */
+/** @method Df_IPay_Method getMethod() */
 class Df_IPay_Block_Form extends Df_Payment_Block_Form {
 	/** @return array */
 	public function getPaymentOptions() {

@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Alfabank_Model_Payment getMethod() */
+/** @method Df_Alfabank_Method getMethod() */
 class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
 	/**
 	 * @override
@@ -23,7 +23,7 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm 
 	 * @return string
 	 */
 	protected function rkOII() {return
-		Df_Payment_Model_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID
+		Df_Payment_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID
 	;}
 
 	/**

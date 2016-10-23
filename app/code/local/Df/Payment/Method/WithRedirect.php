@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Method {
+abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
 	/**
 	 * @used-by Df_Payment_Model_Request_Payment::urlCustomerReturn()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::getToken()
@@ -37,12 +37,12 @@ abstract class Df_Payment_Model_Method_WithRedirect extends Df_Payment_Model_Met
 	}
 
 	/**
-	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Model_Payment)
+	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Method)
 	 * не нуждается в получении параметров при перенаправлении на него покупателя.
 	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом
-	 * @see Df_Alfabank_Model_Payment::getRegistrationResponse()
+	 * @see Df_Alfabank_Method::getRegistrationResponse()
 	 * и платёжный шлюз возвращает модулю уникальный веб-адрес
-	 * @see Df_Alfabank_Model_Payment::getPaymentPageUrl()
+	 * @see Df_Alfabank_Method::getPaymentPageUrl()
 	 * на который модуль перенаправляет покупателя без параметров.
 	 * Если в других модулях потребуется такое же поведение (перенаправление без параметров),
 	 * то посмотрите, как устроен модуль Альфа-Банк.

@@ -3,7 +3,7 @@ use Mage_Payment_Model_Info as I;
 use Mage_Sales_Model_Quote_Payment as QP;
 use Mage_Sales_Model_Order_Payment as OP;
 /** @method int getStore() */
-abstract class Df_Payment_Model_Method
+abstract class Df_Payment_Method
 	extends Mage_Payment_Model_Method_Abstract
 	implements Df_Checkout_Module_Main {
 	/**
@@ -17,7 +17,7 @@ abstract class Df_Payment_Model_Method
 	/**
 	 * @override
 	 * @param array|Varien_Object $data
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function assignData($data) {
 		parent::assignData($data);
@@ -59,7 +59,7 @@ abstract class Df_Payment_Model_Method
 	 * Для получения значения этой настройки вызывается метод
 	 * @see Mage_Payment_Model_Method_Abstract::getConfigPaymentAction().
 	 *
-	 * Обратите внимание, что Df_Payment_Model_Method::getConfigPaymentAction()
+	 * Обратите внимание, что Df_Payment_Method::getConfigPaymentAction()
 	 * всегда возвращает true, тем самым метод @see Mage_Sales_Model_Order_Payment::place()
 	 * не вызывает authorize/capture/order.
 	 *
@@ -86,8 +86,8 @@ abstract class Df_Payment_Model_Method
 	 * на административной странице счёта.
 	 *
 	 * Обратите внимание, что двуступенчатая оплата
-	 * имеет смысл не только для дочернего данному класса @see Df_Payment_Model_Method_WithRedirect,
-	 * но и для других прямых детей класса @see Df_Payment_Model_Method.
+	 * имеет смысл не только для дочернего данному класса @see Df_Payment_Method_WithRedirect,
+	 * но и для других прямых детей класса @see Df_Payment_Method.
 	 * @todo Например, правильным будет сделать оплату двуступенчатой для модуля «Квитанция Сбербанка»,
 	 * потому что непосредственно по завершению заказа
 	 * неправильно переводить счёт в состояние «Оплачен»
@@ -196,7 +196,7 @@ abstract class Df_Payment_Model_Method
 	 * @override
 	 * @param Varien_Object $payment
 	 * @param string $amount
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function capture(Varien_Object $payment, $amount) {
 		/** @var Mage_Sales_Model_Order_Payment $payment */
@@ -206,7 +206,7 @@ abstract class Df_Payment_Model_Method
 		 * @see Mage_Payment_Model_Method_Abstract::capture()
 		 * контролирует допустимость вызова метода capture():
 		 * если способ оплаты не поддерживает возврат средств покупателю
-		 * (@see Df_Payment_Model_Method::canCapture()),
+		 * (@see Df_Payment_Method::canCapture()),
 		 * то Mage_Payment_Model_Method_Abstract::capture() возбудит исключительную ситуацию.
 		 */
 		parent::capture($payment, $amount);
@@ -392,7 +392,7 @@ abstract class Df_Payment_Model_Method
 	 * без перенаправления на страницу платёжной системы.
 	 * В Российской сборке Magento так пока работает только метод @see Df_Chronopay_Model_Gate,
 	 * однако он изготовлен давно и по устаревшей технологии,
-	 * и поэтому не является наследником класса @see Df_Payment_Model_Method
+	 * и поэтому не является наследником класса @see Df_Payment_Method
 	 * @override
 	 * @return bool
 	 */
@@ -408,7 +408,7 @@ abstract class Df_Payment_Model_Method
 
 	/**
 	 * @param string|Exception $message
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function logFailureHighLevel($message) {
 		if (is_string($message)) {
@@ -422,7 +422,7 @@ abstract class Df_Payment_Model_Method
 
 	/**
 	 * @param string|Exception $message
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function logFailureLowLevel($message) {
 		if (is_string($message)) {
@@ -458,7 +458,7 @@ abstract class Df_Payment_Model_Method
 	 * @override
 	 * @param Varien_Object $payment
 	 * @param string $amount
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function refund(Varien_Object $payment, $amount) {
 		/** @var Mage_Sales_Model_Order_Payment $payment */
@@ -468,7 +468,7 @@ abstract class Df_Payment_Model_Method
 		 * @see Mage_Payment_Model_Method_Abstract::refund()
 		 * контролирует допустимость вызова метода refund():
 		 * если способ оплаты не поддерживает возврат средств покупателю
-		 * (@see Df_Payment_Model_Method::canRefund()),
+		 * (@see Df_Payment_Method::canRefund()),
 		 * то Mage_Payment_Model_Method_Abstract::refund() возбудит исключительную ситуацию.
 		 */
 		parent::refund($payment, $amount);
@@ -481,7 +481,7 @@ abstract class Df_Payment_Model_Method
 	 	$this->getMethodInstance()->setStore($order->getStoreId())->$gatewayCallback($this);
 	 * @override
 	 * @param Mage_Sales_Model_Order_Payment|Varien_Object $payment
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function void(Varien_Object $payment) {
 		parent::void($payment);
@@ -597,7 +597,7 @@ abstract class Df_Payment_Model_Method
 	/**
 	 * @param string|Exception $message
 	 * @param string $filename
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	private function log($message, $filename) {
 		if ($message instanceof Exception) {

@@ -77,6 +77,6 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Payment_Model_Method_WithRedirect */
+	/** @return Df_Payment_Method_WithRedirect */
 	private function getPaymentMethod() {return $this->order()->getPayment()->getMethodInstance();}
 }

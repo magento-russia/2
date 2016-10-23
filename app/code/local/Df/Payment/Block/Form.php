@@ -37,10 +37,10 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	/**
 	 * заимствовано из Mage_Payment_Block_Form
 	 * @see Mage_Payment_Block_Form::getMethod
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function getMethod() {
-		/** @var Df_Payment_Model_Method $result */
+		/** @var Df_Payment_Method $result */
 		$result = $this->getData('method');
 		if (!($result instanceof Mage_Payment_Model_Method_Abstract)) {
 			Mage::throwException($this->__('Cannot retrieve the payment method model object.'));
@@ -66,6 +66,6 @@ class Df_Payment_Block_Form extends Df_Core_Block_Template_NoCache {
 	 */
 	protected function defaultTemplate() {return 'df/payment/form.phtml';}
 
-	/** @used-by Df_Payment_Model_Method::getFormBlockType() */
+	/** @used-by Df_Payment_Method::getFormBlockType() */
 
 }

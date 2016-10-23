@@ -51,7 +51,7 @@
 		-->
 		<payment>
 			<df-alfabank>
-				<model>Df_Alfabank_Model_Payment</model>
+				<model>Df_Alfabank_Method</model>
 			</df-alfabank>
 		</payment>
 	</default>

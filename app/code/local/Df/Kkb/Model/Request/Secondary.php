@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Kkb_Model_Payment getMethod() */
+/** @method Df_Kkb_Method getMethod() */
 abstract class Df_Kkb_Model_Request_Secondary extends Df_Payment_Model_Request_Transaction {
 	/** @return string */
 	abstract public function getTransactionType();

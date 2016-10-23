@@ -38,7 +38,7 @@
 		-->
 		<payment>
 			<df-interkassa>
-				<model>Df_Interkassa_Model_Payment</model>
+				<model>Df_Interkassa_Method</model>
 			</df-interkassa>
 		</payment>
 	</default>

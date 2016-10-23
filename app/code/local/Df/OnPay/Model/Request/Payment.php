@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_OnPay_Model_Payment getMethod()
+ * @method Df_OnPay_Method getMethod()
  * @method Df_OnPay_Model_Config_Area_Service configS()
  */
 class Df_OnPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_Payment_Model_Method main()
+ * @method Df_Payment_Method main()
  * @method Df_Payment_Config_Manager manager()
  */
 abstract class Df_Payment_Config_Area extends Df_Checkout_Module_Config_Area {

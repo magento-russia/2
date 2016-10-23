@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Qiwi_Model_Payment getMethod() */
+/** @method Df_Qiwi_Method getMethod() */
 class Df_Qiwi_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override
@@ -9,7 +9,7 @@ class Df_Qiwi_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	 */
 	protected function _params() {
 		return array(
-			'to' => $this->getQiwiCustomerPhone()
+			'to' => $this->qPhone()
 			,'summ' => $this->amountS()
 			,'currency' => $this->currencyCode()
 			,'lifetime' => 24 * 45
@@ -21,9 +21,9 @@ class Df_Qiwi_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	}
 
 	/** @return string */
-	private function getQiwiCustomerPhone() {
+	private function qPhone() {
 		/** @var string $result */
-		$result = $this->getMethod()->getQiwiCustomerPhone();
+		$result = $this->getMethod()->qPhone();
 		df_assert_eq(10, strlen($result));
 		df_result_string($result);
 		return $result;

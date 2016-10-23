@@ -1,11 +1,11 @@
 <?php
 /**
- * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Model_Payment)
+ * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Method)
  * не нуждается в получении параметров при перенаправлении на него покупателя.
  * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом
- * @see Df_Alfabank_Model_Payment::getRegistrationResponse()
+ * @see Df_Alfabank_Method::getRegistrationResponse()
  * и платёжный шлюз возвращает модулю уникальный веб-адрес
- * @see Df_Alfabank_Model_Payment::getPaymentPageUrl()
+ * @see Df_Alfabank_Method::getPaymentPageUrl()
  * на который модуль перенаправляет покупателя без параметров.
  */
 class Df_Alfabank_Model_Request_Payment extends Df_Payment_Model_Request_Payment {

@@ -1,8 +1,8 @@
 <?php
 /** @method Df_Alfabank_Model_Config_Area_Service configS() */
-class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
+class Df_Alfabank_Method extends Df_Payment_Method_WithRedirect {
 	/**
-	 * @see Df_Payment_Model_Method::canCapture()
+	 * @see Df_Payment_Method::canCapture()
 	 * @override
 	 * @return bool
 	 */
@@ -45,15 +45,15 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 	public function canVoid(Varien_Object $payment) {return true;}
 
 	/**
-	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Model_Payment)
+	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Method)
 	 * не нуждается в получении параметров при перенаправлении на него покупателя.
 	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом
-	 * @see Df_Alfabank_Model_Payment::getRegistrationResponse()
+	 * @see Df_Alfabank_Method::getRegistrationResponse()
 	 * и платёжный шлюз возвращает модулю уникальный веб-адрес
-	 * @see Df_Alfabank_Model_Payment::getPaymentPageUrl()
+	 * @see Df_Alfabank_Method::getPaymentPageUrl()
 	 * на который модуль перенаправляет покупателя без параметров.
 	 * @override
-	 * @see Df_Payment_Model_Method_WithRedirect::getPaymentPageParams()
+	 * @see Df_Payment_Method_WithRedirect::getPaymentPageParams()
 	 * @used-by Df_Payment_Block_Redirect::getFormFields()
 	 * @return array(string => string|int)
 	 */
@@ -61,7 +61,7 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Model_Method_WithRedirect::getPaymentPageUrl()
+	 * @see Df_Payment_Method_WithRedirect::getPaymentPageUrl()
 	 * @used-by Df_Payment_Block_Redirect::getTargetURL()
 	 * @return string
 	 */
@@ -117,7 +117,7 @@ class Df_Alfabank_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
 			$httpClient
 				/**
 				 * Обратите внимание, что вызывать нужно именно родительский метод
-				 * @uses Df_Payment_Model_Method_WithRedirect::getPaymentPageParams(),
+				 * @uses Df_Payment_Method_WithRedirect::getPaymentPageParams(),
 				 * а не getPaymentPageParams()
 				 */
 				->setUri($this->configS()->getRegistrationUri(parent::getPaymentPageParams()))

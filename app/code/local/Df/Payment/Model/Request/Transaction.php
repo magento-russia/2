@@ -3,8 +3,8 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 	/**
 	 * 2015-03-09
 	 * Обратите внимание, что @uses hasAmount() возвращает true при выполнении операций:
-	 * @see Df_Payment_Model_Method::capture()
-	 * @see Df_Payment_Model_Method::refund()
+	 * @see Df_Payment_Method::capture()
+	 * @see Df_Payment_Method::refund()
 	 * В обоих случаях $this->cfg(self::$P__AMOUNT) — это не валюта заказа,
 	 * а базовая (учётная) валюта магазина.
 	 * Смотрите комментарии к указанным методам.
@@ -28,8 +28,8 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 	/**
 	 * @see doTransaction()
 	 * Возвращает true при выполнении операций:
-	 * @see Df_Payment_Model_Method::capture()
-	 * @see Df_Payment_Model_Method::refund()
+	 * @see Df_Payment_Method::capture()
+	 * @see Df_Payment_Method::refund()
 	 * @used-by getAmount()
 	 * @used-by Df_Alfabank_Model_Request_Secondary::getParams()
 	 * @return bool
@@ -56,15 +56,15 @@ abstract class Df_Payment_Model_Request_Transaction extends Df_Payment_Model_Req
 		 * 2015-03-09
 		 * Обратите внимание, что значение параметра self::$P__AMOUNT
 		 * присутствует для операций
-		 * @see Df_Payment_Model_Method::capture()
-		 * @see Df_Payment_Model_Method::refund()
-		 * но отсутствует для операции @see Df_Payment_Model_Method::void()
+		 * @see Df_Payment_Method::capture()
+		 * @see Df_Payment_Method::refund()
+		 * но отсутствует для операции @see Df_Payment_Method::void()
 		 */
 		$this->_prop(self::$P__AMOUNT, DF_V_FLOAT, false);
 	}
 
 	/**
-	 * @used-by Df_Payment_Model_Method::doTransaction()
+	 * @used-by Df_Payment_Method::doTransaction()
 	 * @param string $type
 	 * @param Mage_Sales_Model_Order_Payment $payment
 	 * @param float $amount [optional]

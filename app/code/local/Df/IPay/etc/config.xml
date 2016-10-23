@@ -38,7 +38,7 @@
 		-->
 		<payment>
 			<df-ipay>
-				<model>Df_IPay_Model_Payment</model>
+				<model>Df_IPay_Method</model>
 			</df-ipay>
 		</payment>
 	</default>

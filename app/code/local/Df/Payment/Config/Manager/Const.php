@@ -200,10 +200,10 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	private static $KEY__LOCALES = 'locales';
 
 	/**
-	 * @used-by Df_Payment_Model_Method::constManager()
-	 * @param Df_Payment_Model_Method|Df_Checkout_Module_Main $method
+	 * @used-by Df_Payment_Method::constManager()
+	 * @param Df_Payment_Method|Df_Checkout_Module_Main $method
 	 * 2016-10-18
-	 * Тип параметра — всегда @see Df_Payment_Model_Method,
+	 * Тип параметра — всегда @see Df_Payment_Method,
 	 * но в сигнатуре вынуждены указать @see Df_Checkout_Module_Main
 	 * для совместимости с унаследованным методом @see Df_Checkout_Module_Config_Manager::s()
 	 * @return Df_Payment_Config_Manager_Const

@@ -79,7 +79,7 @@
 		-->
 		<payment>
 			<df-pd4>
-				<model>Df_Pd4_Model_Payment</model>
+				<model>Df_Pd4_Method</model>
 			</df-pd4>
 		</payment>
 	</default>

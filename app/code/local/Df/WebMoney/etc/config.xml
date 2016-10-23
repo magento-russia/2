@@ -37,7 +37,7 @@
 		-->
 		<payment>
 			<df-webmoney>
-				<model>Df_WebMoney_Model_Payment</model>
+				<model>Df_WebMoney_Method</model>
 			</df-webmoney>
 		</payment>
 	</default>

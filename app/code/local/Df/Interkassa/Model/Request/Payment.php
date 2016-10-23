@@ -1,5 +1,5 @@
 <?php
-/** @method Df_Interkassa_Model_Payment getMethod() */
+/** @method Df_Interkassa_Method getMethod() */
 class Df_Interkassa_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override

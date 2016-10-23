@@ -1,5 +1,5 @@
 <?php
-/** @method Df_EasyPay_Model_Payment getMethod() */
+/** @method Df_EasyPay_Method getMethod() */
 class Df_EasyPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override

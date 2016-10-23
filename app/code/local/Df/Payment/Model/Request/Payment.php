@@ -1,5 +1,5 @@
 <?php
-use Df_Payment_Model_Method_WithRedirect as MethodR;
+use Df_Payment_Method_WithRedirect as MethodR;
 abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request {
 	/**
 	 * @abstract
@@ -225,7 +225,7 @@ abstract class Df_Payment_Model_Request_Payment extends Df_Payment_Model_Request
 	private function region() {return $this->address()->getRegionModel();}
 
 	/**
-	 * @used-by Df_Payment_Model_Method_WithRedirect::getPaymentPageParams()
+	 * @used-by Df_Payment_Method_WithRedirect::getPaymentPageParams()
 	 * @param MethodR $method
 	 * @return array(string => string|int)
 	 */

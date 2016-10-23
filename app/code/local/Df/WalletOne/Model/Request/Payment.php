@@ -1,5 +1,5 @@
 <?php
-/** @method Df_WalletOne_Model_Payment getMethod() */
+/** @method Df_WalletOne_Method getMethod() */
 class Df_WalletOne_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override

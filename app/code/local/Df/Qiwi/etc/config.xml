@@ -52,7 +52,7 @@ https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/
 		-->
 		<payment>
 			<df-qiwi>
-				<model>Df_Qiwi_Model_Payment</model>
+				<model>Df_Qiwi_Method</model>
 			</df-qiwi>
 		</payment>
 	</default>

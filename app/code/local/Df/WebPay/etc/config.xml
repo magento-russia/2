@@ -41,7 +41,7 @@
 		-->
 		<payment>
 			<df-webpay>
-				<model>Df_WebPay_Model_Payment</model>
+				<model>Df_WebPay_Method</model>
 			</df-webpay>
 		</payment>
 	</default>

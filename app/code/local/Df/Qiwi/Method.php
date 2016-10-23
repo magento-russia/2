@@ -1,11 +1,11 @@
 <?php
-class Df_Qiwi_Model_Payment extends Df_Payment_Model_Method_WithRedirect {
+class Df_Qiwi_Method extends Df_Payment_Method_WithRedirect {
 	/**
-	 * @used-by Df_Qiwi_Block_Form::getQiwiCustomerPhone()
-	 * @used-by Df_Qiwi_Model_Request_Payment::::getQiwiCustomerPhone()
+	 * @used-by Df_Qiwi_Block_Form::phone()
+	 * @used-by Df_Qiwi_Model_Request_Payment::qPhone()
 	 * @return string
 	 */
-	public function getQiwiCustomerPhone() {return df_ccc('', $this->iia(
+	public function qPhone() {return df_ccc('', $this->iia(
 		self::KEY__PHONE_NETWORK_CODE, self::KEY__PHONE_SUFFIX
 	));}
 

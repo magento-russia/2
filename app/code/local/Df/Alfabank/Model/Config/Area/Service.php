@@ -1,7 +1,7 @@
 <?php
 class Df_Alfabank_Model_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	/**
-	 * @used-by Df_Alfabank_Model_Payment::getRegistrationResponseJson()
+	 * @used-by Df_Alfabank_Method::getRegistrationResponseJson()
 	 * @param array(string => string|int) $params
 	 * @return Zend_Uri_Http
 	 */

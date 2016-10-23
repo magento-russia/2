@@ -1,6 +1,6 @@
 <?php
 /**
- * @method Df_YandexMoney_Model_Payment getMethod()
+ * @method Df_YandexMoney_Method getMethod()
  * @method Df_YandexMoney_Model_Config_Area_Service configS()
  */
 class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confirm {
@@ -10,7 +10,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Model_Action_Confi
 	 * @return string
 	 */
 	protected function rkOII() {
-		return Df_Payment_Model_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
+		return Df_Payment_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
 	}
 
 	/**

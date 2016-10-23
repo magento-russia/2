@@ -15,9 +15,9 @@ class Df_Checkout_Block_Onepage_Success extends Mage_Checkout_Block_Onepage_Succ
 				/** @var Df_Sales_Model_Order|null $order */
 				$order = df_last_order(false);
 				if ($order && $order->getPayment()) {
-					/** @var Mage_Payment_Model_Method_Abstract|Df_Payment_Model_Method|null $method */
+					/** @var Mage_Payment_Model_Method_Abstract|Df_Payment_Method|null $method */
 					$method = $order->getPayment()->getMethodInstance();
-					if ($method instanceof Df_Payment_Model_Method && $method->getTemplateSuccess()) {
+					if ($method instanceof Df_Payment_Method && $method->getTemplateSuccess()) {
 						$result = $method->getTemplateSuccess();
 					}
 				}

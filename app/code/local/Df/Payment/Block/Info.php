@@ -83,7 +83,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	 * заимствовано из Mage_Payment_Block_Info
 	 * @see Mage_Payment_Block_Info::getMethod
 	 * @override
-	 * @return Df_Payment_Model_Method
+	 * @return Df_Payment_Method
 	 */
 	public function getMethod() {return $this->getInfo()->getMethodInstance();}
 
@@ -183,6 +183,6 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	/** @var Varien_Object|null */
 	protected $_paymentSpecificInformation = null;
 
-	/** @used-by Df_Payment_Model_Method::getInfoBlockType() */
+	/** @used-by Df_Payment_Method::getInfoBlockType() */
 
 }

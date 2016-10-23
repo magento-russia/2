@@ -12,7 +12,7 @@ class Df_Checkout_Module_Config_Facade extends Df_Checkout_Module_Bridge {
 			if ($carrier->getConfigData('shipment_requesttype')) {
 	 		(...)
 			if ($carrier->getConfigData('showmethod') == 0 && $result->getError()) {
-	 * @used-by Df_Payment_Model_Method::getConfigData()
+	 * @used-by Df_Payment_Method::getConfigData()
 	 * @used-by Df_Shipping_Carrier::getConfigData()
 	 * @override
 	 * @param string $key

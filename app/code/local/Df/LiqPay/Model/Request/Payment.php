@@ -1,5 +1,5 @@
 <?php
-/** @method Df_LiqPay_Model_Payment getMethod() */
+/** @method Df_LiqPay_Method getMethod() */
 class Df_LiqPay_Model_Request_Payment extends Df_Payment_Model_Request_Payment {
 	/**
 	 * @override
