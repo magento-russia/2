@@ -220,7 +220,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 			: (
 				$asCurrency
 				? df_store($storeId)->convertPrice($amount, true, false)
-				: df_number_2f($amount)
+				: df_f2($amount)
 			)
 		;
 	}

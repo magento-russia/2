@@ -120,7 +120,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 
 	/** @return string */
 	protected function getPriceAsText() {
-		return df_number_2f($this->convertMoneyToExportCurrency($this->getPriceInBaseCurrency()));
+		return df_f2($this->convertMoneyToExportCurrency($this->getPriceInBaseCurrency()));
 	}
 
 	/** @return float */

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_NovaPoshta>
+			<version>1.0.0</version>
+			<author>Дмитрий Федюк</author>
+		</Df_NovaPoshta>
+	</modules>
+	<default>
+		<carriers>
+			<df-nova-poshta>
+				<active>0</active>
+				<model>Df_NovaPoshta_Carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>Нова Пошта</title>
+			</df-nova-poshta>
+		</carriers>
+		<df_shipping>
+			<nova-poshta>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__declared_value_percent>0</admin__declared_value_percent>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>1</frontend__sallowspecific>
+				<frontend__specificcountry>UA</frontend__specificcountry>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</nova-poshta>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-nova-poshta>
+				<module>Df_NovaPoshta</module>
+				<title>Нова Пошта</title>
+				<url>http://magento-forum.ru/forum/257/</url>
+			</df-nova-poshta>
+		</features>
+	</df>
+</config>

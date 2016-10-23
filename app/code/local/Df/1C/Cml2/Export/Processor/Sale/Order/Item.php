@@ -9,13 +9,13 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 				,'Наименование' => $this->getProductNameForExport()
 				//$this->getProduct()->getName()
 				,'БазоваяЕдиница' => $this->entry()->unit()
-				,'ЦенаЗаЕдиницу' => df_number_2f($this->getOrderItemExtended()->getPrice())
+				,'ЦенаЗаЕдиницу' => df_f2($this->getOrderItemExtended()->getPrice())
 				,'Количество' => $this->getOrderItemExtended()->getQtyOrdered()
 				/**
 				 * @uses Df_Sales_Model_Order_Item_Extended::getRowTotal() —
 				 * это без налогов и скидок
 				 */
-				,'Сумма' => df_number_2f(
+				,'Сумма' => df_f2(
 						$this->getOrderItemExtended()->getRowTotal()
 					+
 						$this->getOrderItemExtended()->getTaxAmount()
@@ -25,7 +25,7 @@ class Df_1C_Cml2_Export_Processor_Sale_Order_Item extends Df_1C_Cml2_Export_Proc
 				,'СтавкиНалогов' => array(
 					'СтавкаНалога' => array(
 						'Наименование' => 'НДС'
-						,'Ставка' => df_number_2f(
+						,'Ставка' => df_f2(
 								100
 							*
 								$this->getOrderItemExtended()->getTaxAmount()

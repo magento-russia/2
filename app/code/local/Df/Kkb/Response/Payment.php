@@ -65,7 +65,7 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 					,'Владелец карты' => $this->getCustomerName()
 					,'E-mail покупателя' => $this->getCustomerEmail()
 					,'Телефон покупателя' => $this->getCustomerPhone()
-					,'Размер платежа' => df_number_2f($this->getPaymentAmount())
+					,'Размер платежа' => df_f2($this->getPaymentAmount())
 					,'Валюта платежа' => $this->getOrderCurrency()->getName()
 					,'Была ли проверка 3-D Secure / SecureCode' => df_bts_r($this->isPaymentUsed3DSecure())
 					,'Код авторизации' => $this->getPaymentCodeApproval()

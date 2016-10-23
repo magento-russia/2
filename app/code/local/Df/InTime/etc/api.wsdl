@@ -1,0 +1,3253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+		xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/"
+		xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+		xmlns:tns="http://www.reality.sh/in-time/Api20"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:xsd1="http://www.reality.sh/in-time/integration"
+		xmlns:xsd2="http://inr.intime.ua/in-time/integration20"
+		xmlns:xsd3="http://www.reality.sh/in-time/Api20"
+		name="API20"
+		targetNamespace="http://www.reality.sh/in-time/Api20">
+	<types>
+		<xs:schema xmlns:tns="http://www.reality.sh/in-time/integration"
+				xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				targetNamespace="http://www.reality.sh/in-time/integration"
+				attributeFormDefault="unqualified"
+				elementFormDefault="qualified">
+			<xs:complexType name="AddRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="TTN"
+							type="tns:TTN"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AddRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TTNState"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="AssociatedDocument"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="Labels"
+							type="tns:Label"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Cost"
+							type="tns:Cost"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Amount"
+							type="xs:decimal"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AuthData">
+				<xs:sequence>
+					<xs:element name="ID"
+							type="xs:string"/>
+					<xs:element name="KEY"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CalculateRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="CalculateTTN"
+							type="tns:CalculateTTN"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CalculateRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="DeliveryDate"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="Cost"
+							type="tns:Cost"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Amount"
+							type="xs:decimal"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CalculateTTN">
+				<xs:sequence>
+					<xs:element name="Sender"
+							type="tns:Sender"/>
+					<xs:element name="Receiver"
+							type="tns:Receiver"/>
+					<xs:element name="PaymentType"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="DispatchDate"
+							type="xs:string"/>
+					<xs:element name="POD"
+							type="tns:POD"
+							nillable="true"/>
+					<xs:element name="ContractorPaysThird"
+							type="tns:ContractorPaysThird"
+							nillable="true"/>
+					<xs:element name="InsuranceCost"
+							type="xs:decimal"/>
+					<xs:element name="TransportationType"
+							type="xs:string"/>
+					<xs:element name="Packages"
+							type="tns:Package"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Cargo"
+							type="tns:Cargo"/>
+					<xs:element name="CargoParams"
+							type="tns:CargoParams"
+							nillable="true"/>
+					<xs:element name="Wheels"
+							type="tns:Wheel"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="PaymentMethod"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Cargo">
+				<xs:sequence>
+					<xs:element name="CargoType"
+							type="xs:string"/>
+					<xs:element name="CargoDescription"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CargoParams">
+				<xs:sequence>
+					<xs:element name="Quantity"
+							type="xs:int"/>
+					<xs:element name="Weight"
+							type="xs:int"/>
+					<xs:element name="Volume"
+							type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CargoType">
+				<xs:sequence>
+					<xs:element name="CargoTypeCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="CargoTypeName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CargoTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CargoTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="CargoType"
+							type="tns:CargoType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChangeRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"/>
+					<xs:element name="ChangesType"
+							type="xs:string"/>
+					<xs:element name="FieldsToChange"
+							type="tns:FieldToChange"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Message"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChangeRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="TTNState"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CheckRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CheckRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Number"
+							type="xs:string"/>
+					<xs:element name="TTNState"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="AssociatedDocument"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="City">
+				<xs:sequence>
+					<xs:element name="CityCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="CityName"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="Region"
+							type="tns:Region"/>
+					<xs:element name="Warehouse"
+							type="tns:Warehouse"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractorPaysThird">
+				<xs:sequence>
+					<xs:element name="ContractorPaysThird"
+							type="xs:string"/>
+					<xs:element name="WarehousePaysThird"
+							type="xs:string"/>
+					<xs:element name="PhonePaysThird"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Cost">
+				<xs:sequence>
+					<xs:element name="CostType"
+							type="xs:string"/>
+					<xs:element name="CostValue"
+							type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Error">
+				<xs:sequence>
+					<xs:element name="ErrorCode"
+							type="xs:string"/>
+					<xs:element name="ErrorMessage"
+							type="xs:string"/>
+					<xs:element name="Interface"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FieldToChange">
+				<xs:sequence>
+					<xs:element name="Field"
+							type="xs:string"/>
+					<xs:element name="Value"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GenerateLabelsRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="FileType"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GenerateLabelsRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="URL"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GenerateTTNRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="FileType"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GenerateTTNRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="URL"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetErrorsListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetErrorsListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Error"
+							type="tns:Error"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Label">
+				<xs:sequence>
+					<xs:element name="Barcode"
+							type="xs:string"/>
+					<xs:element name="City"
+							type="xs:string"/>
+					<xs:element name="LogistickZone"
+							type="xs:string"/>
+					<xs:element name="Sender"
+							type="xs:string"/>
+					<xs:element name="Receiver"
+							type="xs:string"/>
+					<xs:element name="LabelNumber"
+							type="xs:string"/>
+					<xs:element name="TotalLabelsCount"
+							type="xs:string"/>
+					<xs:element name="Weight"
+							type="xs:string"/>
+					<xs:element name="Volume"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="POD">
+				<xs:sequence>
+					<xs:element name="PodPays"
+							type="xs:string"/>
+					<xs:element name="PodAmount"
+							type="xs:decimal"/>
+					<xs:element name="ReceiverPODThird"
+							type="tns:ReceiverPODThird"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Package">
+				<xs:sequence>
+					<xs:element name="Package"
+							type="xs:string"/>
+					<xs:element name="PackageQuantity"
+							type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagesType">
+				<xs:sequence>
+					<xs:element name="PackagesTypeCode"
+							type="xs:string"/>
+					<xs:element name="PackagesTypeName"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagesTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagesTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="PackagesType"
+							type="tns:PackagesType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PaymentType">
+				<xs:sequence>
+					<xs:element name="PaymentCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PaymentName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PaymentsTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PaymentsTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="PaymentType"
+							type="tns:PaymentType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Receiver">
+				<xs:sequence>
+					<xs:element name="Receiver"
+							type="xs:string"/>
+					<xs:element name="WarehouseReceiver"
+							type="xs:string"/>
+					<xs:element name="ReceiverAddress"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhoneReceiver"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReceiverPODThird">
+				<xs:sequence>
+					<xs:element name="ReceiverPODThird"
+							type="xs:string"/>
+					<xs:element name="WarehouseReceiverPODThird"
+							type="xs:string"/>
+					<xs:element name="PhoneReceiverPODThird"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Region">
+				<xs:sequence>
+					<xs:element name="RegionCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="RegionName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReserveNumbersRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Quantity"
+							type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReserveNumbersRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Number"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Sender">
+				<xs:sequence>
+					<xs:element name="WarehouseSender"
+							type="xs:string"/>
+					<xs:element name="SenderAddress"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhoneSender"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TTN">
+				<xs:sequence>
+					<xs:element name="Sender"
+							type="tns:Sender"/>
+					<xs:element name="Receiver"
+							type="tns:Receiver"/>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PaymentType"
+							type="xs:string"/>
+					<xs:element name="DispatchDate"
+							type="xs:string"/>
+					<xs:element name="POD"
+							type="tns:POD"
+							nillable="true"/>
+					<xs:element name="ContractorPaysThird"
+							type="tns:ContractorPaysThird"
+							nillable="true"/>
+					<xs:element name="InsuranceCost"
+							type="xs:decimal"/>
+					<xs:element name="TransportationType"
+							type="xs:string"/>
+					<xs:element name="Packages"
+							type="tns:Package"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Cargo"
+							type="tns:Cargo"/>
+					<xs:element name="CargoParams"
+							type="tns:CargoParams"
+							nillable="true"/>
+					<xs:element name="Wheels"
+							type="tns:Wheel"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="PaymentMethod"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransportationType">
+				<xs:sequence>
+					<xs:element name="TransportationTypeCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TransportationTypeName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransportationTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransportationTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="TransportationType"
+							type="tns:TransportationType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Warehouse">
+				<xs:sequence>
+					<xs:element name="WarehouseCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseName"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehousePhoneNumber"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseAddress"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseNumber"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseLogistickZone"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WarehousesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WarehousesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="City"
+							type="tns:City"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Wheel">
+				<xs:sequence>
+					<xs:element name="WheelCode"
+							type="xs:string"/>
+					<xs:element name="WheelsQuantity"
+							type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WheelType">
+				<xs:sequence>
+					<xs:element name="WheelCode"
+							type="xs:string"/>
+					<xs:element name="WheelName"
+							type="xs:string"/>
+					<xs:element name="CargoTypeCode"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WheelsTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WheelsTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="WheelType"
+							type="tns:WheelType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:tns="http://inr.intime.ua/in-time/integration20"
+				xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				targetNamespace="http://inr.intime.ua/in-time/integration20"
+				attributeFormDefault="unqualified"
+				elementFormDefault="qualified">
+			<xs:complexType name="ActOfReconciliationRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="StartDate"
+							type="xs:date"/>
+					<xs:element name="EndDate"
+							type="xs:date"/>
+					<xs:element name="MutualOffset"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Cashless"
+							type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ActOfReconciliationRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Reconciliation"
+							type="tns:Reconciliation"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AddTTNRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="TTN"
+							type="tns:TTN"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AddTTNRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="TTNState"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="DeliveryDate"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="Cost"
+							type="tns:Cost"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Amount"
+							type="xs:decimal"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="AppendFields"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Labels"
+							type="tns:Label"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalServices">
+				<xs:sequence>
+					<xs:element name="AdditionalServicesCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="AdditionalServicesParametr"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllCatalog">
+				<xs:sequence>
+					<xs:element name="CatalogNameRus"
+							type="xs:string"/>
+					<xs:element name="CatalogNameEng"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllCatalogRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllCatalogRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="AllCatalog"
+							type="tns:AllCatalog"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AppendField">
+				<xs:sequence>
+					<xs:element name="AppendFieldName"
+							type="xs:string"/>
+					<xs:element name="AppendFieldValue"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AuthData">
+				<xs:sequence>
+					<xs:element name="ID"
+							type="xs:string"/>
+					<xs:element name="KEY"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CalculateRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="CalculateTTN"
+							type="tns:CalculateTTN"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CalculateRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="DeliveryDate"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="Cost"
+							type="tns:Cost"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Amount"
+							type="xs:decimal"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="AppendFields"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CalculateTTN">
+				<xs:sequence>
+					<xs:element name="Sender"
+							type="tns:Sender"/>
+					<xs:element name="Receiver"
+							type="tns:Receiver"/>
+					<xs:element name="PaymentType"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="DispatchDate"
+							type="xs:date"/>
+					<xs:element name="POD"
+							type="tns:POD"
+							nillable="true"/>
+					<xs:element name="ContractorPaysThird"
+							type="tns:ContractorPaysThird"
+							nillable="true"/>
+					<xs:element name="InsuranceCost"
+							type="xs:decimal"/>
+					<xs:element name="TransportationType"
+							type="xs:string"/>
+					<xs:element name="PaymentMethod"
+							type="xs:string"/>
+					<xs:element name="Packages"
+							type="tns:Package"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="AdditionalServices"
+							type="tns:AdditionalServices"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Cargo"
+							type="tns:Cargo"/>
+					<xs:element name="CargoParams"
+							type="tns:CargoParams"
+							nillable="true"/>
+					<xs:element name="CargoItems"
+							type="tns:Item"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="PAS"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Cargo">
+				<xs:sequence>
+					<xs:element name="CargoType"
+							type="xs:string"/>
+					<xs:element name="CargoDescription"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CargoParams">
+				<xs:sequence>
+					<xs:element name="Quantity"
+							type="xs:int"/>
+					<xs:element name="Weight"
+							type="xs:int"/>
+					<xs:element name="Volume"
+							type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CatalogElement">
+				<xs:sequence>
+					<xs:element name="CatalogNameEng"
+							type="xs:string"/>
+					<xs:element name="Code"
+							type="xs:string"/>
+					<xs:element name="Name"
+							type="xs:string"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CatalogListRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="CatalogNameEng"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CatalogListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="ListCatalog"
+							type="tns:ListCatalog"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChangeRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="ChangesType"
+							type="xs:string"/>
+					<xs:element name="FieldsToChange"
+							type="tns:FieldToChange"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Message"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChangeRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Status"
+							type="xs:string"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CheckoutRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CheckoutRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="URL"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Message"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ClaimRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="ClaimCode"
+							type="xs:string"/>
+					<xs:element name="DocumentsNumber"
+							type="xs:string"/>
+					<xs:element name="ClaimComment"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ClaimRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Status"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractorPaysThird">
+				<xs:sequence>
+					<xs:element name="ContractorPaysThird"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehousePaysThird"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhonePaysThird"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Cost">
+				<xs:sequence>
+					<xs:element name="CostType"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="CostValue"
+							type="xs:decimal"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreatingReferenceRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="NumberTTN"
+							type="xs:string"/>
+					<xs:element name="SenderClient"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReceiverClient"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhoneReceiverClient"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="SettlementReceiverCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseReceiverCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PaymentType"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PaymentMethod"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TransportationType"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="POD"
+							type="tns:POD"
+							nillable="true"/>
+					<xs:element name="ContractorPaysThird"
+							type="tns:ContractorPaysThird"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="AdditionalServices"
+							type="tns:AdditionalServices"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Comments"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreatingReferenceRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Message"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="ReferenceNumberDocument"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DayOfDeliveryRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="WarehouseSender"
+							type="xs:string"/>
+					<xs:element name="WarehouseReceiver"
+							type="xs:string"/>
+					<xs:element name="SettlementCodeSender"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="SettlementCodeReceiver"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="Data"
+							type="xs:date"/>
+					<xs:element name="TransportationType"
+							type="xs:string"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DayOfDeliveryRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="DayOfDelivery"
+							type="xs:date"
+							minOccurs="0"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeleteTTNRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="NumberTTN"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeleteTTNRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Status"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="DetailStateTTN"
+							type="tns:TTNState"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentDataTransferCargo">
+				<xs:sequence>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="Date"
+							type="xs:date"
+							nillable="true"/>
+					<xs:element name="Sender"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseSender"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TabularSection"
+							type="tns:TabularSectionTransferCargo"
+							nillable="true"
+							maxOccurs="unbounded"/>
+					<xs:element name="DocumentStatus"
+							type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Error">
+				<xs:sequence>
+					<xs:element name="ErrorCode"
+							type="xs:string"/>
+					<xs:element name="ErrorMessage"
+							type="xs:string"/>
+					<xs:element name="Interface"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FieldToChange">
+				<xs:sequence>
+					<xs:element name="Field"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="Value"
+							type="xs:string"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoNumber">
+				<xs:sequence>
+					<xs:element name="Number"
+							type="xs:string"/>
+					<xs:element name="NumberState"
+							type="xs:string"/>
+					<xs:element name="TTNState"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="AssociatedDocument"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoTTNExtRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoTTNExtRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="TTNClient"
+							type="tns:TTNClient"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoTTNLiteRequest">
+				<xs:sequence>
+					<xs:element name="Number"
+							type="tns:Number"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoTTNLiteRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="InfoNumber"
+							type="tns:InfoNumber"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoTTNRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="InformationField"
+							type="tns:InformationField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InfoTTNRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"/>
+					<xs:element name="TTNClient"
+							type="tns:TTNClient"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InformationField">
+				<xs:sequence>
+					<xs:element name="InformationName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Item">
+				<xs:sequence>
+					<xs:element name="CargoItemsCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="CargoItemsQuantity"
+							type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Label">
+				<xs:sequence>
+					<xs:element name="Barcode"
+							type="xs:string"/>
+					<xs:element name="City"
+							type="xs:string"/>
+					<xs:element name="LogistickZone"
+							type="xs:string"/>
+					<xs:element name="Sender"
+							type="xs:string"/>
+					<xs:element name="Receiver"
+							type="xs:string"/>
+					<xs:element name="LabelNumber"
+							type="xs:string"/>
+					<xs:element name="TotalLabelsCount"
+							type="xs:string"/>
+					<xs:element name="Weight"
+							type="xs:string"/>
+					<xs:element name="Volume"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ListCatalog">
+				<xs:sequence>
+					<xs:element name="Catalog"
+							type="tns:CatalogElement"
+							maxOccurs="unbounded"/>
+					<xs:element name="CatalogState"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ListInformationTTNFieldRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ListInformationTTNFieldRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="InformationField"
+							type="tns:InformationField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ListTTNRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="StartDate"
+							type="xs:date"/>
+					<xs:element name="EndDate"
+							type="xs:date"/>
+					<xs:element name="Requisition"
+							type="xs:boolean"/>
+					<xs:element name="InformationField"
+							type="tns:InformationField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ListTTNRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="TTNClient"
+							type="tns:TTNClient"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Number">
+				<xs:sequence>
+					<xs:element name="Number"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="POD">
+				<xs:sequence>
+					<xs:element name="PodPays"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PodAmount"
+							type="xs:decimal"/>
+					<xs:element name="ReceiverPODThird"
+							type="tns:ReceiverPODThird"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Package">
+				<xs:sequence>
+					<xs:element name="PackagesTypeCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PackageQuantity"
+							type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagingClient">
+				<xs:sequence>
+					<xs:element name="CodePackaging"
+							type="xs:string"/>
+					<xs:element name="VolumePackagin"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagingClientBack">
+				<xs:sequence>
+					<xs:element name="CodePackaging"
+							type="xs:string"/>
+					<xs:element name="VolumePackagin"
+							type="xs:string"/>
+					<xs:element name="PackagingBack"
+							type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagingClientRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PackagingClientRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="PackagingClient"
+							type="tns:PackagingClient"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PaymentType">
+				<xs:sequence>
+					<xs:element name="PaymentCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PaymentName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PaymentsTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PaymentsTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="PaymentType"
+							type="tns:PaymentType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintLabelsExt">
+				<xs:sequence>
+					<xs:element name="LableDate"
+							type="xs:date"/>
+					<xs:element name="LableTime"
+							type="xs:time"/>
+					<xs:element name="PlaceOverall"
+							type="xs:string"/>
+					<xs:element name="Place"
+							type="xs:string"/>
+					<xs:element name="Barcode"
+							type="xs:string"/>
+					<xs:element name="Weight"
+							type="xs:string"/>
+					<xs:element name="Volume"
+							type="xs:decimal"/>
+					<xs:element name="Cargo"
+							type="xs:string"/>
+					<xs:element name="WarehouseSender"
+							type="xs:string"/>
+					<xs:element name="NumberWarehouseSender"
+							type="xs:string"/>
+					<xs:element name="CityReceiver"
+							type="xs:string"/>
+					<xs:element name="WarehouseReceiver"
+							type="xs:string"/>
+					<xs:element name="NumberWarehouseReceiver"
+							type="xs:string"/>
+					<xs:element name="NumberTTN"
+							type="xs:string"/>
+					<xs:element name="NameClient"
+							type="xs:string"/>
+					<xs:element name="LogisticsName"
+							type="xs:string"/>
+					<xs:element name="LogisticsNumber"
+							type="xs:string"/>
+					<xs:element name="Sign30"
+							type="xs:string"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintLabelsExtRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintLabelsExtRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="PrintLabelsExt"
+							type="tns:PrintLabelsExt"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintLabelsRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintLabelsRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="URL"
+							type="xs:string"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintTTNExt">
+				<xs:sequence>
+					<xs:element name="NomerDocument"
+							type="xs:string"/>
+					<xs:element name="DataDocument"
+							type="xs:dateTime"/>
+					<xs:element name="NomerKvitantsii"
+							type="xs:string"/>
+					<xs:element name="Zayavka"
+							type="xs:string"/>
+					<xs:element name="Firm"
+							type="xs:string"/>
+					<xs:element name="Liter"
+							type="xs:string"/>
+					<xs:element name="Sekyurpark"
+							type="xs:string"/>
+					<xs:element name="SummaPropisyu"
+							type="xs:string"/>
+					<xs:element name="GorodOtprevitel"
+							type="xs:string"/>
+					<xs:element name="AdresPodrazdileniyaOtpr"
+							type="xs:string"/>
+					<xs:element name="OplachivaetOtpravitel"
+							type="xs:string"/>
+					<xs:element name="TelPodrazdeleniyaOtpr"
+							type="xs:string"/>
+					<xs:element name="GorodPoluchatel"
+							type="xs:string"/>
+					<xs:element name="DataDostavki"
+							type="xs:date"/>
+					<xs:element name="AdresPodrazdileniyaPoluch"
+							type="xs:string"/>
+					<xs:element name="OplachivaetPoluchatel"
+							type="xs:string"/>
+					<xs:element name="TelPodrazdeleniyaPoluch"
+							type="xs:string"/>
+					<xs:element name="Otpravitel"
+							type="xs:string"/>
+					<xs:element name="KontLitsOtpravitelya"
+							type="xs:string"/>
+					<xs:element name="TelefonOtpravitelya"
+							type="xs:string"/>
+					<xs:element name="AdresOtpravitelya"
+							type="xs:string"/>
+					<xs:element name="DocumentOtpravitelya"
+							type="xs:string"/>
+					<xs:element name="TelOtpravkiSMSOtpr"
+							type="xs:string"/>
+					<xs:element name="Poluchatel"
+							type="xs:string"/>
+					<xs:element name="KontLitsPolychatelya"
+							type="xs:string"/>
+					<xs:element name="TelefonPolychatelya"
+							type="xs:string"/>
+					<xs:element name="AdresPolychatelya"
+							type="xs:string"/>
+					<xs:element name="DocumentPolychatelya"
+							type="xs:string"/>
+					<xs:element name="MelkiyTekst"
+							type="xs:string"/>
+					<xs:element name="MelkiyKol"
+							type="xs:string"/>
+					<xs:element name="TelOtpravkiSMSPoluch"
+							type="xs:string"/>
+					<xs:element name="OpisanieGruza"
+							type="xs:string"/>
+					<xs:element name="KvoMest"
+							type="xs:string"/>
+					<xs:element name="Ves"
+							type="xs:string"/>
+					<xs:element name="Obem"
+							type="xs:string"/>
+					<xs:element name="SPSZaRahNadpis"
+							type="xs:string"/>
+					<xs:element name="OplataTretimLitsomNadpis"
+							type="xs:string"/>
+					<xs:element name="RasporjazhenieOtpraviteljaS"
+							type="xs:string"/>
+					<xs:element name="VozvratTaryZashet"
+							type="xs:string"/>
+					<xs:element name="OplataTretimLitsom"
+							type="xs:string"/>
+					<xs:element name="VozvratPSNa"
+							type="xs:boolean"/>
+					<xs:element name="PrintTTNParametr"
+							type="tns:PrintTTNParametr"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Oplata"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintTTNExtRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintTTNExtRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="PrintTTNExt"
+							type="tns:PrintTTNExt"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintTTNParametr">
+				<xs:sequence>
+					<xs:element name="ParametrName"
+							type="xs:string"/>
+					<xs:element name="ParametrValue"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintTTNRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Number"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrintTTNRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="URL"
+							type="xs:string"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Receiver">
+				<xs:sequence>
+					<xs:element name="ReceiverClient"
+							type="xs:string"/>
+					<xs:element name="WarehouseReceiverCode"
+							type="xs:string"/>
+					<xs:element name="SettlementCode"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="ReceiverAddress"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhoneReceiver"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReceiverPODThird">
+				<xs:sequence>
+					<xs:element name="ReceiverPODThird"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="WarehouseReceiverPODThird"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhoneReceiverPODThird"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Reconciliation">
+				<xs:sequence>
+					<xs:element name="Document"
+							type="xs:string"/>
+					<xs:element name="Debit"
+							type="xs:double"/>
+					<xs:element name="Credit"
+							type="xs:double"/>
+					<xs:element name="PaymentMethod"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceList">
+				<xs:sequence>
+					<xs:element name="ReferenceNumberDocument"
+							type="xs:string"/>
+					<xs:element name="DateTime"
+							type="xs:dateTime"/>
+					<xs:element name="DateTimeProcessed"
+							type="xs:dateTime"/>
+					<xs:element name="Processed"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceListRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="StartDate"
+							type="xs:date"/>
+					<xs:element name="EndDate"
+							type="xs:date"/>
+					<xs:element name="Processed"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="ReferenceList"
+							type="tns:ReferenceList"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Region">
+				<xs:sequence>
+					<xs:element name="RegionCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="RegionName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReserveNumbersRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+					<xs:element name="Quantity"
+							type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReserveNumbersRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Number"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReservedField">
+				<xs:sequence>
+					<xs:element name="ReservedFieldName"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReservedFieldValue"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Sender">
+				<xs:sequence>
+					<xs:element name="WarehouseSenderCode"
+							type="xs:string"/>
+					<xs:element name="SettlementCode"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="SenderAddress"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PhoneSender"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Settlement">
+				<xs:sequence>
+					<xs:element name="SettlementCode"
+							type="xs:string"/>
+					<xs:element name="AreaCode"
+							type="xs:string"/>
+					<xs:element name="Area"
+							type="xs:string"/>
+					<xs:element name="WarehouseCode"
+							type="xs:string"/>
+					<xs:element name="CityAreaWarehouse"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Status">
+				<xs:sequence>
+					<xs:element name="WrongDocs"
+							type="xs:string"
+							maxOccurs="unbounded"/>
+					<xs:element name="Messages"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TTN">
+				<xs:sequence>
+					<xs:element name="Sender"
+							type="tns:Sender"/>
+					<xs:element name="Receiver"
+							type="tns:Receiver"/>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="PaymentType"
+							type="xs:string"/>
+					<xs:element name="DispatchDate"
+							type="xs:date"/>
+					<xs:element name="POD"
+							type="tns:POD"
+							nillable="true"/>
+					<xs:element name="ContractorPaysThird"
+							type="tns:ContractorPaysThird"
+							nillable="true"/>
+					<xs:element name="InsuranceCost"
+							type="xs:decimal"
+							nillable="true"/>
+					<xs:element name="TransportationType"
+							type="xs:string"/>
+					<xs:element name="PaymentMethod"
+							type="xs:string"/>
+					<xs:element name="Packages"
+							type="tns:Package"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="AdditionalServices"
+							type="tns:AdditionalServices"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Cargo"
+							type="tns:Cargo"/>
+					<xs:element name="CargoParams"
+							type="tns:CargoParams"
+							nillable="true"/>
+					<xs:element name="CargoItems"
+							type="tns:Item"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="PAS"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReceiverCompany"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="SenderCompany"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TTNClient">
+				<xs:sequence>
+					<xs:element name="InformationField"
+							type="tns:InformationField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Number"
+							type="xs:string"/>
+					<xs:element name="Number2"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TTNState"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="DeliveryDate"
+							type="xs:date"
+							nillable="true"/>
+					<xs:element name="Message"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReturnPostService"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="ReturnsWaybill"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TTNState">
+				<xs:sequence>
+					<xs:element name="Number"
+							type="xs:string"/>
+					<xs:element name="State"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TabularSectionTransferCargo">
+				<xs:sequence>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TTN"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="FactFromClient"
+							type="xs:decimal"
+							nillable="true"/>
+					<xs:element name="FactFromIntime"
+							type="xs:decimal"
+							nillable="true"/>
+					<xs:element name="PlanFromClient"
+							type="xs:decimal"
+							nillable="true"/>
+					<xs:element name="Weight"
+							type="xs:decimal"
+							nillable="true"/>
+					<xs:element name="Volume"
+							type="xs:decimal"
+							nillable="true"/>
+					<xs:element name="WarehouseReceiver"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TakingBackVolume">
+				<xs:sequence>
+					<xs:element name="City"
+							type="xs:string"/>
+					<xs:element name="AddressLoading"
+							type="xs:string"/>
+					<xs:element name="ContactName"
+							type="xs:string"/>
+					<xs:element name="ContactPhone"
+							type="xs:string"/>
+					<xs:element name="DateTakingBack"
+							type="xs:date"/>
+					<xs:element name="Comment"
+							type="xs:string"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargo">
+				<xs:sequence>
+					<xs:element name="NumberTTN"
+							type="xs:string"/>
+					<xs:element name="QuantityCargoPlan"
+							type="xs:decimal"/>
+					<xs:element name="QuantityCargoFact"
+							type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoList">
+				<xs:sequence>
+					<xs:element name="DateTime"
+							type="xs:dateTime"/>
+					<xs:element name="SenderCompany"
+							type="xs:string"/>
+					<xs:element name="ReceiverCompany"
+							type="xs:string"/>
+					<xs:element name="Documents"
+							type="xs:string"/>
+					<xs:element name="IntimeTakingBack"
+							type="xs:boolean"/>
+					<xs:element name="Unloaded"
+							type="xs:boolean"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoListRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="StartDate"
+							type="xs:date"/>
+					<xs:element name="EndDate"
+							type="xs:date"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="TransferCargoList"
+							type="tns:TransferCargoList"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="DateTime"
+							type="xs:dateTime"/>
+					<xs:element name="ReceiverDepartment"
+							type="xs:string"/>
+					<xs:element name="TransferCargo"
+							type="tns:TransferCargo"
+							maxOccurs="unbounded"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Comment"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="Status"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="DocumentNumber"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="DocumentNumberTransfer"
+							type="xs:string"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoVerificationRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"/>
+					<xs:element name="DocumentNumberTransfer"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoVerificationRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="DocumentNumberTransfer"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="DataTime"
+							type="xs:dateTime"
+							minOccurs="0"/>
+					<xs:element name="SenderCompany"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="ReceiverCompany"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="TransferCargo"
+							type="tns:TransferCargo"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="PackagingClient"
+							type="tns:PackagingClient"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoViewRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"
+							nillable="true"/>
+					<xs:element name="Number"
+							type="xs:string"
+							nillable="true"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransferCargoViewRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="Status"
+							type="xs:string"
+							nillable="true"
+							minOccurs="0"/>
+					<xs:element name="DocumentData"
+							type="tns:DocumentDataTransferCargo"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransportationType">
+				<xs:sequence>
+					<xs:element name="TransportationTypeCode"
+							type="xs:string"
+							nillable="true"/>
+					<xs:element name="TransportationTypeName"
+							type="xs:string"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransportationTypesListRequest">
+				<xs:sequence>
+					<xs:element name="Auth"
+							type="tns:AuthData"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TransportationTypesListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="TransportationType"
+							type="tns:TransportationType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UserWarningList">
+				<xs:sequence>
+					<xs:element name="Data"
+							type="xs:dateTime"/>
+					<xs:element name="TypeDocument"
+							type="xs:string"/>
+					<xs:element name="NumberDocument"
+							type="xs:string"/>
+					<xs:element name="Problem"
+							type="xs:string"/>
+					<xs:element name="AppendField"
+							type="tns:AppendField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Agreed"
+							type="xs:boolean"/>
+					<xs:element name="DateTimeAgreed"
+							type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UserWarningListRequest">
+				<xs:sequence>
+					<xs:element name="AuthData"
+							type="tns:AuthData"
+							nillable="true"/>
+					<xs:element name="StartDate"
+							type="xs:date"
+							nillable="true"/>
+					<xs:element name="EndDate"
+							type="xs:date"
+							nillable="true"/>
+					<xs:element name="ReservedField"
+							type="tns:ReservedField"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UserWarningListRespond">
+				<xs:sequence>
+					<xs:element name="InterfaceState"
+							type="xs:string"/>
+					<xs:element name="UserWarningList"
+							type="tns:UserWarningList"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:xs1="http://www.reality.sh/in-time/integration"
+				xmlns:xs2="http://inr.intime.ua/in-time/integration20"
+				xmlns:xs3="http://www.reality.sh/in-time/Api20"
+				targetNamespace="http://www.reality.sh/in-time/Api20"
+				elementFormDefault="qualified">
+			<xs:import namespace="http://www.reality.sh/in-time/integration"/>
+			<xs:import namespace="http://inr.intime.ua/in-time/integration20"/>
+			<xs:element name="AddTTN">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AddRequest"
+								type="xs2:AddTTNRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddTTNResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:AddTTNRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CalculateTTN">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CalculateRequest"
+								type="xs2:CalculateRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CalculateTTNResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:CalculateRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintLabel">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="GenerateLabelsRequest"
+								type="xs2:PrintLabelsRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintLabelResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:PrintLabelsRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintTTN">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PrintTTNRequest"
+								type="xs2:PrintTTNRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintTTNResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:PrintTTNRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ReserveNumbers">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReserveNumbersRequest"
+								type="xs1:ReserveNumbersRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ReserveNumbersResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ReserveNumbersRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteTTN">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DeleteRequest"
+								type="xs2:DeleteTTNRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteTTNResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:DeleteTTNRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintTTNExt">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PrintTTNExtRequest"
+								type="xs2:PrintTTNExtRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintTTNExtResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:PrintTTNExtRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintLabelsExt">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="GenerateLabelsExtRequest"
+								type="xs2:PrintLabelsExtRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PrintLabelsExtResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:PrintLabelsExtRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeliveryDay">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DayOfDeliveryRequest"
+								type="xs2:DayOfDeliveryRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeliveryDayResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:DayOfDeliveryRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AllCatalog">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AllCatalogRequest"
+								type="xs2:AllCatalogRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AllCatalogResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:AllCatalogRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CatalogList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CatalogListRequest"
+								type="xs2:CatalogListRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CatalogListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:CatalogListRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ListTTN">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ListTTNRequest"
+								type="xs2:ListTTNRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ListTTNResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ListTTNRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TransferCargo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TransferCargoRequest"
+								type="xs2:TransferCargoRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TransferCargoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:TransferCargoRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TransferCargoList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TransferCargoListRequest"
+								type="xs2:TransferCargoListRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TransferCargoListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:TransferCargoListRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Checkout">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CheckoutRequest"
+								type="xs2:CheckoutRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CheckoutResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:CheckoutRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Change">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CreatingReferenceRequest"
+								type="xs2:CreatingReferenceRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ChangeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:CreatingReferenceRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ChangeTTNList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReferenceListRequest"
+								type="xs2:ReferenceListRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ChangeTTNListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ReferenceListRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ActOfReconciliation">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ActOfReconciliationRequest"
+								type="xs2:ActOfReconciliationRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ActOfReconciliationResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ActOfReconciliationRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InfoTTN">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="InfoTTNRequest"
+								type="xs2:InfoTTNRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InfoTTNResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:InfoTTNRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TransferCargoView">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TransferCarcoViewRequest"
+								type="xs2:TransferCargoViewRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TransferCargoViewResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:TransferCargoViewRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Claim">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ClaimRequest"
+								type="xs2:ClaimRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ClaimResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ClaimRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="UserWarning">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserWarningRequest"
+								type="xs2:UserWarningListRequest"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="UserWarningResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:UserWarningListRespond"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</types>
+	<message name="AddTTNRequestMessage">
+		<part name="parameters"
+				element="tns:AddTTN"/>
+	</message>
+	<message name="AddTTNResponseMessage">
+		<part name="parameters"
+				element="tns:AddTTNResponse"/>
+	</message>
+	<message name="CalculateTTNRequestMessage">
+		<part name="parameters"
+				element="tns:CalculateTTN"/>
+	</message>
+	<message name="CalculateTTNResponseMessage">
+		<part name="parameters"
+				element="tns:CalculateTTNResponse"/>
+	</message>
+	<message name="PrintLabelRequestMessage">
+		<part name="parameters"
+				element="tns:PrintLabel"/>
+	</message>
+	<message name="PrintLabelResponseMessage">
+		<part name="parameters"
+				element="tns:PrintLabelResponse"/>
+	</message>
+	<message name="PrintTTNRequestMessage">
+		<part name="parameters"
+				element="tns:PrintTTN"/>
+	</message>
+	<message name="PrintTTNResponseMessage">
+		<part name="parameters"
+				element="tns:PrintTTNResponse"/>
+	</message>
+	<message name="ReserveNumbersRequestMessage">
+		<part name="parameters"
+				element="tns:ReserveNumbers"/>
+	</message>
+	<message name="ReserveNumbersResponseMessage">
+		<part name="parameters"
+				element="tns:ReserveNumbersResponse"/>
+	</message>
+	<message name="DeleteTTNRequestMessage">
+		<part name="parameters"
+				element="tns:DeleteTTN"/>
+	</message>
+	<message name="DeleteTTNResponseMessage">
+		<part name="parameters"
+				element="tns:DeleteTTNResponse"/>
+	</message>
+	<message name="PrintTTNExtRequestMessage">
+		<part name="parameters"
+				element="tns:PrintTTNExt"/>
+	</message>
+	<message name="PrintTTNExtResponseMessage">
+		<part name="parameters"
+				element="tns:PrintTTNExtResponse"/>
+	</message>
+	<message name="PrintLabelsExtRequestMessage">
+		<part name="parameters"
+				element="tns:PrintLabelsExt"/>
+	</message>
+	<message name="PrintLabelsExtResponseMessage">
+		<part name="parameters"
+				element="tns:PrintLabelsExtResponse"/>
+	</message>
+	<message name="DeliveryDayRequestMessage">
+		<part name="parameters"
+				element="tns:DeliveryDay"/>
+	</message>
+	<message name="DeliveryDayResponseMessage">
+		<part name="parameters"
+				element="tns:DeliveryDayResponse"/>
+	</message>
+	<message name="AllCatalogRequestMessage">
+		<part name="parameters"
+				element="tns:AllCatalog"/>
+	</message>
+	<message name="AllCatalogResponseMessage">
+		<part name="parameters"
+				element="tns:AllCatalogResponse"/>
+	</message>
+	<message name="CatalogListRequestMessage">
+		<part name="parameters"
+				element="tns:CatalogList"/>
+	</message>
+	<message name="CatalogListResponseMessage">
+		<part name="parameters"
+				element="tns:CatalogListResponse"/>
+	</message>
+	<message name="ListTTNRequestMessage">
+		<part name="parameters"
+				element="tns:ListTTN"/>
+	</message>
+	<message name="ListTTNResponseMessage">
+		<part name="parameters"
+				element="tns:ListTTNResponse"/>
+	</message>
+	<message name="TransferCargoRequestMessage">
+		<part name="parameters"
+				element="tns:TransferCargo"/>
+	</message>
+	<message name="TransferCargoResponseMessage">
+		<part name="parameters"
+				element="tns:TransferCargoResponse"/>
+	</message>
+	<message name="TransferCargoListRequestMessage">
+		<part name="parameters"
+				element="tns:TransferCargoList"/>
+	</message>
+	<message name="TransferCargoListResponseMessage">
+		<part name="parameters"
+				element="tns:TransferCargoListResponse"/>
+	</message>
+	<message name="CheckoutRequestMessage">
+		<part name="parameters"
+				element="tns:Checkout"/>
+	</message>
+	<message name="CheckoutResponseMessage">
+		<part name="parameters"
+				element="tns:CheckoutResponse"/>
+	</message>
+	<message name="ChangeRequestMessage">
+		<part name="parameters"
+				element="tns:Change"/>
+	</message>
+	<message name="ChangeResponseMessage">
+		<part name="parameters"
+				element="tns:ChangeResponse"/>
+	</message>
+	<message name="ChangeTTNListRequestMessage">
+		<part name="parameters"
+				element="tns:ChangeTTNList"/>
+	</message>
+	<message name="ChangeTTNListResponseMessage">
+		<part name="parameters"
+				element="tns:ChangeTTNListResponse"/>
+	</message>
+	<message name="ActOfReconciliationRequestMessage">
+		<part name="parameters"
+				element="tns:ActOfReconciliation"/>
+	</message>
+	<message name="ActOfReconciliationResponseMessage">
+		<part name="parameters"
+				element="tns:ActOfReconciliationResponse"/>
+	</message>
+	<message name="InfoTTNRequestMessage">
+		<part name="parameters"
+				element="tns:InfoTTN"/>
+	</message>
+	<message name="InfoTTNResponseMessage">
+		<part name="parameters"
+				element="tns:InfoTTNResponse"/>
+	</message>
+	<message name="TransferCargoViewRequestMessage">
+		<part name="parameters"
+				element="tns:TransferCargoView"/>
+	</message>
+	<message name="TransferCargoViewResponseMessage">
+		<part name="parameters"
+				element="tns:TransferCargoViewResponse"/>
+	</message>
+	<message name="ClaimRequestMessage">
+		<part name="parameters"
+				element="tns:Claim"/>
+	</message>
+	<message name="ClaimResponseMessage">
+		<part name="parameters"
+				element="tns:ClaimResponse"/>
+	</message>
+	<message name="UserWarningRequestMessage">
+		<part name="parameters"
+				element="tns:UserWarning"/>
+	</message>
+	<message name="UserWarningResponseMessage">
+		<part name="parameters"
+				element="tns:UserWarningResponse"/>
+	</message>
+	<portType name="API20PortType">
+		<operation name="AddTTN">
+			<input message="tns:AddTTNRequestMessage"/>
+			<output message="tns:AddTTNResponseMessage"/>
+		</operation>
+		<operation name="CalculateTTN">
+			<input message="tns:CalculateTTNRequestMessage"/>
+			<output message="tns:CalculateTTNResponseMessage"/>
+		</operation>
+		<operation name="PrintLabel">
+			<input message="tns:PrintLabelRequestMessage"/>
+			<output message="tns:PrintLabelResponseMessage"/>
+		</operation>
+		<operation name="PrintTTN">
+			<input message="tns:PrintTTNRequestMessage"/>
+			<output message="tns:PrintTTNResponseMessage"/>
+		</operation>
+		<operation name="ReserveNumbers">
+			<input message="tns:ReserveNumbersRequestMessage"/>
+			<output message="tns:ReserveNumbersResponseMessage"/>
+		</operation>
+		<operation name="DeleteTTN">
+			<input message="tns:DeleteTTNRequestMessage"/>
+			<output message="tns:DeleteTTNResponseMessage"/>
+		</operation>
+		<operation name="PrintTTNExt">
+			<input message="tns:PrintTTNExtRequestMessage"/>
+			<output message="tns:PrintTTNExtResponseMessage"/>
+		</operation>
+		<operation name="PrintLabelsExt">
+			<input message="tns:PrintLabelsExtRequestMessage"/>
+			<output message="tns:PrintLabelsExtResponseMessage"/>
+		</operation>
+		<operation name="DeliveryDay">
+			<input message="tns:DeliveryDayRequestMessage"/>
+			<output message="tns:DeliveryDayResponseMessage"/>
+		</operation>
+		<operation name="AllCatalog">
+			<input message="tns:AllCatalogRequestMessage"/>
+			<output message="tns:AllCatalogResponseMessage"/>
+		</operation>
+		<operation name="CatalogList">
+			<input message="tns:CatalogListRequestMessage"/>
+			<output message="tns:CatalogListResponseMessage"/>
+		</operation>
+		<operation name="ListTTN">
+			<input message="tns:ListTTNRequestMessage"/>
+			<output message="tns:ListTTNResponseMessage"/>
+		</operation>
+		<operation name="TransferCargo">
+			<input message="tns:TransferCargoRequestMessage"/>
+			<output message="tns:TransferCargoResponseMessage"/>
+		</operation>
+		<operation name="TransferCargoList">
+			<input message="tns:TransferCargoListRequestMessage"/>
+			<output message="tns:TransferCargoListResponseMessage"/>
+		</operation>
+		<operation name="Checkout">
+			<input message="tns:CheckoutRequestMessage"/>
+			<output message="tns:CheckoutResponseMessage"/>
+		</operation>
+		<operation name="Change">
+			<input message="tns:ChangeRequestMessage"/>
+			<output message="tns:ChangeResponseMessage"/>
+		</operation>
+		<operation name="ChangeTTNList">
+			<input message="tns:ChangeTTNListRequestMessage"/>
+			<output message="tns:ChangeTTNListResponseMessage"/>
+		</operation>
+		<operation name="ActOfReconciliation">
+			<input message="tns:ActOfReconciliationRequestMessage"/>
+			<output message="tns:ActOfReconciliationResponseMessage"/>
+		</operation>
+		<operation name="InfoTTN">
+			<input message="tns:InfoTTNRequestMessage"/>
+			<output message="tns:InfoTTNResponseMessage"/>
+		</operation>
+		<operation name="TransferCargoView">
+			<input message="tns:TransferCargoViewRequestMessage"/>
+			<output message="tns:TransferCargoViewResponseMessage"/>
+		</operation>
+		<operation name="Claim">
+			<input message="tns:ClaimRequestMessage"/>
+			<output message="tns:ClaimResponseMessage"/>
+		</operation>
+		<operation name="UserWarning">
+			<input message="tns:UserWarningRequestMessage"/>
+			<output message="tns:UserWarningResponseMessage"/>
+		</operation>
+	</portType>
+	<binding name="API20SoapBinding"
+			type="tns:API20PortType">
+		<soapbind:binding style="document"
+				transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="AddTTN">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:AddTTN"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CalculateTTN">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:CalculateTTN"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintLabel">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintLabel"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintTTN">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintTTN"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ReserveNumbers">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ReserveNumbers"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeleteTTN">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:DeleteTTN"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintTTNExt">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintTTNExt"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintLabelsExt">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintLabelsExt"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeliveryDay">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:DeliveryDay"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="AllCatalog">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:AllCatalog"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CatalogList">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:CatalogList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ListTTN">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ListTTN"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TransferCargo">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:TransferCargo"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TransferCargoList">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:TransferCargoList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Checkout">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:Checkout"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Change">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:Change"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ChangeTTNList">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ChangeTTNList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ActOfReconciliation">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ActOfReconciliation"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="InfoTTN">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:InfoTTN"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TransferCargoView">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:TransferCargoView"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Claim">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:Claim"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="UserWarning">
+			<soapbind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:UserWarning"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<binding name="API20Soap12Binding"
+			type="tns:API20PortType">
+		<soap12bind:binding style="document"
+				transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="AddTTN">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:AddTTN"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CalculateTTN">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:CalculateTTN"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintLabel">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintLabel"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintTTN">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintTTN"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ReserveNumbers">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ReserveNumbers"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeleteTTN">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:DeleteTTN"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintTTNExt">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintTTNExt"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PrintLabelsExt">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:PrintLabelsExt"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeliveryDay">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:DeliveryDay"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="AllCatalog">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:AllCatalog"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CatalogList">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:CatalogList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ListTTN">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ListTTN"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TransferCargo">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:TransferCargo"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TransferCargoList">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:TransferCargoList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Checkout">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:Checkout"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Change">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:Change"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ChangeTTNList">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ChangeTTNList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ActOfReconciliation">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:ActOfReconciliation"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="InfoTTN">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:InfoTTN"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TransferCargoView">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:TransferCargoView"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Claim">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:Claim"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="UserWarning">
+			<soap12bind:operation style="document"
+					soapAction="http://www.reality.sh/in-time/Api20#API20:UserWarning"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="API20">
+		<port name="API20Soap"
+				binding="tns:API20SoapBinding">
+			<documentation> 
+				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/"
+						conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+			</documentation>
+			<soapbind:address location="https://ws.intime.ua/API/ws/API20/"/>
+		</port>
+		<port name="API20Soap12"
+				binding="tns:API20Soap12Binding">
+			<soap12bind:address location="https://ws.intime.ua/API/ws/API20/"/>
+		</port>
+	</service>
+</definitions>

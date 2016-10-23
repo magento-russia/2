@@ -280,6 +280,14 @@
 				<Df_Core/>
 			</depends>
 		</Df_Excel>
+		<Df_Exline>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_Exline>
 		<Df_Framework>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -337,6 +345,14 @@
 				<Mage_Payment/>
 			</depends>
 		</Df_Interkassa>
+		<Df_InTime>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_InTime>
 		<Df_IPay>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -347,6 +363,22 @@
 				<Mage_Payment/>
 			</depends>
 		</Df_IPay>
+		<Df_Kazpost>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_Kazpost>
+		<Df_KazpostEms>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_KazpostEms>
 		<Df_Kkb>
 			<active>true</active>
 			<codePool>local</codePool>
@@ -408,6 +440,14 @@
 				<Mage_Newsletter/>
 			</depends>
 		</Df_Newsletter>
+		<Df_NovaPoshta>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_NovaPoshta>
 		<Df_OnPay>
 			<active>true</active>
 			<codePool>local</codePool>
