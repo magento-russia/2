@@ -20,11 +20,10 @@ class Df_Exline_Collector extends Df_Shipping_Collector_Kz {
 	 * @used-by Df_Shipping_Collector::collect()
 	 * @return void
 	 */
-	protected function _collect() {
-		/** @uses _addRate() */
-		$this->call('_addRate', 1, 'express', 'экспресс');
-		$this->call('_addRate', 2, 'standard', 'стандартный');
-	}
+	protected function _collect() {$this->call(function() {
+		$this->_addRate(1, 'express', 'экспресс');
+		$this->_addRate(2, 'standard', 'стандартный');
+	});}
 
 	/**
 	 * @see Df_Shipping_Collector::allowedOrigIso2Additional()

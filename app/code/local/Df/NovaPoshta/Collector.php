@@ -28,9 +28,10 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 		 */
 		$this->checkWeightIsLE(30);
 		$this->checkCityDest();
-		/** @uses _addRate() */
-		$this->call('_addRate', true, 'to-home', 'до дома');
-		$this->call('_addRate', false, 'to-warehouse', 'до пункта выдачи');
+		$this->call(function() {
+			$this->_addRate(true, 'to-home', 'до дома');
+			$this->_addRate(false, 'to-warehouse', 'до пункта выдачи');
+		});
 	}
 
 	/**

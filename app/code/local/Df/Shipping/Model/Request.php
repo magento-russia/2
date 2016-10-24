@@ -164,7 +164,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 				 * Например, для метода @see getRate() будет вызван метод @see _getRate().
 				 */
 				/** @var mixed $result */
-				$result = call_user_func(array($this, '_' . $method));
+				$result = call_user_func([$this, '_' . $method]);
 				/**
 				 * Выполняем фильтрацию и проверку результата.
 				 * Например, для метода @see getRate() будет вызван метод @see _filterRate().
@@ -172,7 +172,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 				/** @var string $filter */
 				$filter = '_filter' . df_trim_text_left($method, 'get');
 				if (method_exists($this, $filter)) {
-					$result = call_user_func(array($this, $filter), $result);
+					$result = call_user_func([$this, $filter], $result);
 				}
 				$this->{__METHOD__}[$method] = $result;
 			}

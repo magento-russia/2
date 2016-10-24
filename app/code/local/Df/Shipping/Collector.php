@@ -32,7 +32,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = new Df_Shipping_Rate_Result;
 			/** @uses collect() */
-			$this->call('collect');
+			$this->call(function() {$this->collect();});
 		}
 		return $this->{__METHOD__};
 	}
@@ -62,18 +62,17 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	 * @used-by collect()
 	 * @return string|string[]
 	 */
-	protected function allowedOrigIso2Additional() {return array();}
+	protected function allowedOrigIso2Additional() {return [];}
 
 	/**
 	 * @used-by _result()
 	 * @used-by Df_Exline_Collector::_collect()
+	 * @param \Closure $f
 	 * @return void
 	 */
-	protected function call() {
+	protected function call(\Closure $f) {
 		try {
-			/** @var mixed[] $args */
-			$args = func_get_args();
-			call_user_func_array(array($this, df_first($args)), df_tail($args));
+			$f();
 		}
 		catch (Df_Shipping_Exception $e) {
 			$this->addError($e->getMessage() ? $e->getMessage() : $this->messageFailureGeneral());
