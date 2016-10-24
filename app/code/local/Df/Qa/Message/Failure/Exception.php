@@ -9,7 +9,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 */
 	protected function main() {
 		/** @var string $result */
-		$result = $this->e()->messageForLog();
+		$result = $this->e()->messageL();
 		return !$this->e()->isMessageHtml() ? $result : strip_tags($result);
 	}
 
@@ -30,7 +30,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::reportName()
 	 * @return string|string[]
 	 */
-	protected function reportNamePrefix() {return [df_module_name_lc($this->e()), 'exception'];}
+	protected function reportNamePrefix() {return $this->e()->reportNamePrefix();}
 
 	/**
 	 * @override

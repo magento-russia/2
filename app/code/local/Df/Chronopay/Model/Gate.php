@@ -27,13 +27,13 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 		try {
 			if (0 != $this->getChronopayResponse()->getCode()) {
 				df_error(new Df_Chronopay_Model_Gate_Exception(array(
-					'messageForCustomer' => Df_Chronopay_Block_Gate_Response::r(
+					'messageC' => Df_Chronopay_Block_Gate_Response::r(
 						$this->getChronopayResponse(), 'df/chronopay/gate/response/customer.phtml'
 					)
 					,'messageForStatus' => Df_Chronopay_Block_Gate_Response::r(
 						$this->getChronopayResponse(), 'df/chronopay/gate/response/admin/status.phtml'
 					)
-					,'messageForLog' => $this->getChronopayResponse()->getDiagnosticMessage()
+					,'messageL' => $this->getChronopayResponse()->getDiagnosticMessage()
 				)));
 			}
 			/** @noinspection PhpUndefinedMethodInspection */

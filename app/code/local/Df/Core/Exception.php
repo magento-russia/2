@@ -123,22 +123,28 @@ class Exception extends E implements \ArrayAccess {
 
 	/**
 	 * A message for a buyer.
-	 * @return string
+	 * 2016-10-24
+	 * Раньше этот метод возвращал $this->message().
+	 * Теперь я думаю, что null логичнее:
+	 * низкоуровневые сообщения покупателям показывать всегда неправильно,
+	 * а потомки этого класса могут переопределить у себя этот метод
+	 * (так, в частности, поступают потмки в платёжных модулях).
+	 * @return string|null
 	 */
-	public function messageForCustomer() {return $this->message();}
+	public function messageC() {return null;}
 
 	/**
 	 * A message for a developer.
 	 * @return string
 	 */
-	public function messageForDeveloper() {return $this->message();}
+	public function messageD() {return $this->message();}
 
 	/**
 	 * 2016-08-19
 	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @return string
 	 */
-	public function messageForLog() {return $this->messageForDeveloper();}
+	public function messageL() {return $this->messageD();}
 
 	/**
 	 * @return bool
@@ -186,6 +192,13 @@ class Exception extends E implements \ArrayAccess {
 	 * @return void
 	 */
 	public function offsetUnset($offset) {unset($this->_data[$offset]);}
+
+	/**
+	 * 2016-10-24
+	 * @used-by \Df\Qa\Message::reportNamePrefix()
+	 * @return string|string[]
+	 */
+	public function reportNamePrefix() {return [df_module_name_lc($this), 'exception'];}
 
 	/**
 	 * 2015-11-27

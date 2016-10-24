@@ -1,4 +1,5 @@
 <?php
+use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
 abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	/**
 	 * @used-by collect()
@@ -74,34 +75,31 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 		try {
 			$f();
 		}
-		catch (Df_Shipping_Exception $e) {
-			$this->addError($e->getMessage() ? $e->getMessage() : $this->messageFailureGeneral());
-		}
-		catch (Exception $e) {
-			/**
-			 * 2015-03-27
-			 * Случился сбой в программом коде.
-			 * Надо:
-			 * 1) оповестить программиста
-			 * 2) создать диагностический отчёт локально
-			 * 3) показать сообщение покупателю
-			 */
-			$this->_result()->markInternalError();
+		catch (\Exception $e) {
 			df_context('Служба доставки', $this->main()->getTitle());
-			/** @var \Df\Core\Exception $e */
-			$e = \Df\Core\Exception::wrap($e);
-			/** @var array(string => mixed) $params */
-			$params = $this->rr()->getData();
-			unset($params['all_items']);
-			$e->comment(df_print_params($params));
-			df_notify_exception($e);
-			$this->addError($this->messageFailureGeneral());
+			/** @var \Exception|\Df\Shipping\Exception $e) */
+			/** @var bool $isSpecific */
+			$isSpecific = $e instanceof \Df\Shipping\Exception;
+			if (!$isSpecific) {
+				$e = df_ewrap(df_ef($e));
+			}
+			$e->comment(df_print_params(dfa_unset($this->rr()->getData(), 'all_items')));
+			df_log($e);
+			/** @var string $mc */
+			if ($isSpecific && $e->messageC()) {
+				$mc = $e->messageC();
+			}
+			else {
+				$this->_result()->markInternalError();
+				$mc = $this->messageFailureGeneral();
+			}
+			$this->addError($mc);
 		}
 	}
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkCityDest() {
 		if (!$this->cityDest()) {
@@ -111,7 +109,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkCityOrig() {
 		if (!$this->cityOrig()) {
@@ -123,7 +121,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	 * @used-by Df_NovaPoshta_Collector::_collect()
 	 * @param string|string[] $allowedIso2
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkCountryDestIs($allowedIso2) {
 		$allowedIso2 = df_array($allowedIso2);
@@ -135,7 +133,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	/**
 	 * @used-by Df_InTime_Collector::_collect()
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkStreetDest() {
 		if (!$this->streetDest()) {
@@ -146,7 +144,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	/**
 	 * @param int|float $weightInKilogrammes
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkWeightIsLE($weightInKilogrammes) {
 		if ($this->rr()->getWeightInKilogrammes() > $weightInKilogrammes) {
@@ -254,7 +252,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function errorInvalidCityDest() {
 		$this->error(
@@ -265,7 +263,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function errorInvalidCityOrig() {
 		$this->error(
@@ -276,7 +274,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	protected function errorInvalidCountryDest() {
 		$this->error('Доставка <b>%s</b> невозможна.', $this->rr()->вСтрану());
@@ -357,7 +355,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	/**
 	 * @used-by collect()
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	private function checkCountryDest() {
 		if (!$this->rr()->getDestinationCountry()) {
@@ -368,7 +366,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	/**
 	 * @used-by collect()
 	 * @return void
-	 * @throws Df_Shipping_Exception
+	 * @throws \Df\Shipping\Exception
 	 */
 	private function checkCountryOrig() {
 		if (!$this->rr()->getOriginCountry()) {
@@ -416,19 +414,19 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 */
 	private function error() {
-		/** @var mixed $args */
-		$args = func_get_args();
-		throw new Df_Shipping_Exception_MethodNotApplicable(call_user_func_array('sprintf', $args));
+		throw new EMethodNotApplicable(
+			$this->main(), call_user_func_array('sprintf', func_get_args())
+		);
 	}
 
 	/**
 	 * @used-by checkWeightIsLE()
 	 * @param int|float $maxWeightInKilogrammes
 	 * @param string $conditionAsText
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 */
 	private function errorInvalidWeight($maxWeightInKilogrammes, $conditionAsText) {
 		$this->error(strtr(

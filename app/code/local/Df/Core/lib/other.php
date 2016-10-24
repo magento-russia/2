@@ -1,4 +1,6 @@
 <?php
+use Exception as E;
+
 /** @return Df_Core_Helper_Data */
 function df() {static $r; return $r ? $r : $r = Df_Core_Helper_Data::s();}
 
@@ -76,10 +78,10 @@ function df_handle_event($handlerClass, $eventClass, Varien_Event_Observer $obse
 }
 
 /**
- * @param Varien_Object|mixed[]|mixed $value
+ * @param Varien_Object|mixed[]|mixed|E $v
  * @return void
  */
-function df_log($value) {Mage::log(df_dump($value));}
+function df_log($v) {$v instanceof E ? df_log_exception($v) : Mage::log(df_dump($v));}
 
 /** @return Df_Core_Helper_Mage */
 function df_mage() {return Df_Core_Helper_Mage::s();}
@@ -89,9 +91,9 @@ function df_mage() {return Df_Core_Helper_Mage::s();}
  * @param string $param2 [optional]
  * @return string|boolean
  */
-function df_magento_version($param1 = null, $param2 = null) {
-	return \Df\Core\Version::s()->get($param1, $param2);
-}
+function df_magento_version($param1 = null, $param2 = null) {return
+	\Df\Core\Version::s()->get($param1, $param2)
+;}
 
 /**
  * @param string $moduleName

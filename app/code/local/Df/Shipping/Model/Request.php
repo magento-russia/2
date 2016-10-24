@@ -1,6 +1,21 @@
 <?php
 class Df_Shipping_Model_Request extends Df_Core_Model {
 	/**
+	 * @used-by \Df\Shipping\Exception\Request::carrier()
+	 * @return Df_Shipping_Carrier
+	 */
+	public function getCarrier() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $className */
+			$className = df_con($this, 'Carrier');
+			$this->{__METHOD__} = new $className;
+			df_assert($this->{__METHOD__} instanceof Df_Shipping_Carrier);
+			$this->{__METHOD__}->setStore(df_store());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * Не все запросы к серверу предназначены для получения срока доставки,
 	 * однако иметь метод @see getDeliveryTime() в базовом классе выгодно:
 	 * смотрите комментарий к методу @see getRate()
@@ -218,18 +233,6 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Df_Shipping_Carrier */
-	protected function getCarrier() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $className */
-			$className = df_con($this, 'Model_Carrier');
-			$this->{__METHOD__} = new $className;
-			df_assert($this->{__METHOD__} instanceof Df_Shipping_Carrier);
-			$this->{__METHOD__}->setStore(df_store());
-		}
-		return $this->{__METHOD__};
-	}
-
 	/**
 	 * 2015-02-21
 	 * Этот метод предназначен для перекрытия потомками.
@@ -421,7 +424,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 
 	/**
 	 * @return string
-	 * @throws Df_Shipping_Exception_NoResponse
+	 * @throws \Df\Shipping\Exception\NoResponse
 	 */
 	private function getResponseAsText() {
 		if (!isset($this->{__METHOD__})) {
@@ -436,7 +439,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 				}
 				catch (Exception $e) {
 					$this->removeCache();
-					throw new Df_Shipping_Exception_NoResponse($e, $this);
+					throw new \Df\Shipping\Exception\NoResponse($e, $this);
 				}
 				if ($this->needCacheResponse()) {
 					$this->getCache()->saveData($this->getCacheKey_Shipping(), $result);

@@ -1,4 +1,5 @@
 <?php
+use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
 class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	/**
 	 * @param string $countryIso2Code
@@ -18,7 +19,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 */
 	public function checkPostalCodeDestinationIsRussian() {
 		$this->checkPostalCodeIsRussian(
@@ -30,7 +31,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/**
 	 * @return void
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 */
 	public function checkPostalCodeOriginIsRussian() {
 		$this->checkPostalCodeIsRussian(
@@ -675,19 +676,16 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	/**
 	 * @param string $message
 	 * @return void
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 */
 	public function throwException($message) {
-		/** @see func_get_args() не может быть параметром другой функции */
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
-		df_error(new Df_Shipping_Exception_MethodNotApplicable(
-			$this->evaluateMessage(df_format($arguments)
-		)));
+		df_error(new EMethodNotApplicable(
+			$this->getCarrier(), $this->evaluateMessage(df_format(func_get_args()))
+		));
 	}
 
 	/**
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 * @return void
 	 */
 	public function throwExceptionInvalidDestination() {
@@ -698,7 +696,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 
 	/**
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 * @return void
 	 */
 	public function throwExceptionInvalidOrigin() {
@@ -763,7 +761,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * @param string $messageForEmpty
 	 * @param string $messageForInvalid
 	 * @return void
-	 * @throws Df_Shipping_Exception_MethodNotApplicable
+	 * @throws EMethodNotApplicable
 	 */
 	private function checkPostalCodeIsRussian($value, $messageForEmpty, $messageForInvalid) {
 		if (!$value) {
