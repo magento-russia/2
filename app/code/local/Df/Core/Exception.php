@@ -195,7 +195,7 @@ class Exception extends E implements \ArrayAccess {
 
 	/**
 	 * 2016-10-24
-	 * @used-by \Df\Qa\Message::reportNamePrefix()
+	 * @used-by \Df\Qa\Message\Failure\Exception::reportNamePrefix()
 	 * @return string|string[]
 	 */
 	public function reportNamePrefix() {return [df_module_name_lc($this), 'exception'];}
