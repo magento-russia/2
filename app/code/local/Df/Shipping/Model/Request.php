@@ -308,11 +308,18 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 		return $result;
 	}
 
+	/**
+	 * 2016-10-24
+	 * @used-by Df_Shipping_Model_Request::getUri()
+	 * @return string
+	 */
+	protected function scheme() {return 'http';}
+
 	/** @return Zend_Uri_Http */
 	protected function getUri() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Zend_Uri_Http $result */
-			$result = Zend_Uri::factory('http');
+			$result = Zend_Uri::factory($this->scheme());
 			$result->setHost($this->getQueryHost());
 			if ($this->getQueryPort()) {
 				$result->setPort($this->getQueryPort());
@@ -401,7 +408,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 			 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->getUri())
 			 * порт отсутствует.
 			 */
-			if (!self::uriAreEqual($this->getUri(), $this->getHttpClient()->getUri())) {
+			if (!Df\Zf\UriComparator::c($this->getUri(), $this->getHttpClient()->getUri())) {
 				/**
 				 * Сервер службы доставки перенаправил нас на новый адрес.
 				 * С большой вероятностью, это означает, что изменился программный интерфейс службы доставки
@@ -487,50 +494,4 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	const P__QUERY_PATH = 'query_path';
 	const P__REQUEST_METHOD = 'request_method';
 	const T__ERROR_MESSAGE__DEFAULT = 'Обращение к программному интерфейсу службы доставки привело к сбою.';
-
-	/**
-	 * @used-by uriAreEqual()
-	 * @param string $host
-	 * @return string
-	 */
-	private static function uriAdjustHost($host) {return df_trim_text_left($host, 'www.');}
-
-	/**
-	 * @used-by uriAreEqual()
-	 * @param int|string|bool $port
-	 * @return string
-	 */
-	private static function uriAdjustPort($port) {return (string)('80' === strval($port) ? '' : $port);}
-
-	/**
-	 * Обратите внимание,
-	 * что обычное @see Zend_Uri::__toString() здесь для сравнения использовать нельзя,
-	 * потому что Zend Framework свежих версий Magento CE (заметил в Magento CE 1.9.0.1)
-	 * зачем-то добавляет ко второму веб-адресу $this->getHttpClient()->getUri()
-	 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->getUri())
-	 * порт отсутствует.
-	 *
-	 * 2015-03-20
-	 * Более того, некоторые службы доставки со временем меняют своё решение
-	 * относительно использования «.www» в домене, и тогда мы получаем мусорные предупреждения
-	 * о неравенстве веб-адресов типа:
-			«http://kazpost.kz/calc/cost.php?from=4&obcen=1&obcentenge=35245&to=11&v=1&w=1»
-			«http://www.kazpost.kz:80/calc/cost.php?from=4&obcen=1&obcentenge=35245&to=11&v=1&w=1».
-	 * @used-by getHttpResponse()
-	 * @param Zend_Uri_Http $uri1
-	 * @param Zend_Uri_Http $uri2
-	 * @return bool
-	 */
-	private static function uriAreEqual(Zend_Uri_Http $uri1, Zend_Uri_Http $uri2) {
-		return
-			$uri1->getScheme() === $uri2->getScheme()
-			&& self::uriAdjustHost($uri1->getHost()) === self::uriAdjustHost($uri2->getHost())
-			&& self::uriAdjustPort($uri1->getPort()) === self::uriAdjustPort($uri2->getPort())
-			/**
-			 * 2015-03-23
-			 * Бывают в разном регистре.
-			 */
-			&& df_strings_are_equal_ci($uri1->getQuery(), $uri2->getQuery())
-		;
-	}
 }

@@ -18,4 +18,13 @@ class Df_NovaPoshta_Request extends Df_Shipping_Model_Request {
 	 * @return string
 	 */
 	protected function getQueryHost() {return 'novaposhta.ua';}
+
+	/**
+	 * 2016-10-24
+	 * @override
+	 * @see Df_Shipping_Model_Request::scheme()
+	 * @used-by Df_Shipping_Model_Request::getUri()
+	 * @return string
+	 */
+	protected function scheme() {return 'https';}
 }

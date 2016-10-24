@@ -59,14 +59,14 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 			$dateS = df_trim($request->response()->pq('.highlight > b')->text());
 			df_assert_string_not_empty($dateS);
 			/** @var array(string|int) $matches */
-			$matches = rm_preg_match('#(\d{1,2}) (\w+) (\d{4})#u', $dateS);
+			$matches = df_preg_match('#(\d{1,2}) (\w+) (\d{4})#u', $dateS);
 			df_assert_eq(3, count($matches));
 			/** @var int $month */
 			$month = 1 + dfa(array_flip(array(
 				'января', 'февраля', 'марта', 'апреля', 'мая', 'июня'
 				, 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декаюря'
 			)), $matches[1]);
-			$this->{__METHOD__} = df()->date()->create(rm_nat($matches[2]), $month, rm_nat($matches[0]));
+			$this->{__METHOD__} = df_date_create(df_nat($matches[2]), $month, df_nat($matches[0]));
 		}
 		return $this->{__METHOD__};
 	}
@@ -93,14 +93,14 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 	 * @used-by rate()
 	 * @return string
 	 */
-	private function locationDestId() {return rm_first($this->locationDest());}
+	private function locationDestId() {return df_first($this->locationDest());}
 
 	/**
 	 * @used-by date()
 	 * @used-by rate()
 	 * @return string
 	 */
-	private function locationDestName() {return rm_last($this->locationDest());}
+	private function locationDestName() {return df_last($this->locationDest());}
 
 	/**
 	 * @used-by locationOrigId()
@@ -124,14 +124,14 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 	 * @used-by rate()
 	 * @return string
 	 */
-	private function locationOrigId() {return rm_first($this->locationOrig());}
+	private function locationOrigId() {return df_first($this->locationOrig());}
 
 	/**
 	 * @used-by date()
 	 * @used-by rate()
 	 * @return string
 	 */
-	private function locationOrigName() {return rm_last($this->locationOrig());}
+	private function locationOrigName() {return df_last($this->locationOrig());}
 
 	/**
 	 * @used-by _collect()
@@ -174,8 +174,8 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 					 * http://novaposhta.ua/posulku
 					 * «(Длина(см)×Ширина(см)×Высота(см)) / 4000, или объем груза, м³×250.»
 					 */
-					,'volume_weight' => rm_flts(250 * $this->rr()->getVolumeInCubicMetres())
-					,'weight' => rm_flts($this->weightKg())
+					,'volume_weight' => df_f2(250 * $this->rr()->getVolumeInCubicMetres())
+					,'weight' => df_f2($this->weightKg())
 				))
 			));
 			/**
@@ -185,7 +185,7 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 			$rateS = $request->response()->pq('.final')->text();
 			$rateS = df_trim_text_left($rateS, 'Итого: ');
 			$rateS = df_trim_text_right($rateS, ' грн *');
-			$this->{__METHOD__}[$toHome] = rm_float_positive($rateS);
+			$this->{__METHOD__}[$toHome] = df_float_positive($rateS);
 		}
 		return $this->{__METHOD__}[$toHome];
 	}
