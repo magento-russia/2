@@ -93,9 +93,9 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 					df_error(
 						'Администратор магазина должен добавить %s в перечень разрешённых к использованию валют'
 						. ' в административном разделе'
-						. ' «Система» -> «Настройки» -> «Общие» -> «Валюты» ->'
+						. ' «Система» → «Настройки» → «Общие» → «Валюты» →'
 						. " «Разрешённые к использованию валюты»,\nа затем указать курс обмена %s на %s"
-						.' в административном разделе «Система» -> «Валюты» -> «Курсы».'
+						.' в административном разделе «Система» → «Валюты» → «Курсы».'
 						,implode(' и ', df_each($notAvailableCurrencies, 'getNameInCaseAccusative'))
 						,$this->getNameInFormOrigin()
 						,$toCurrency->getNameInFormDestination()
