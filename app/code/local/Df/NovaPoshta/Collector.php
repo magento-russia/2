@@ -138,55 +138,52 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 	 * @param bool $toHome
 	 * @return float
 	 */
-	private function rate($toHome) {
-		if (!isset($this->{__METHOD__}[$toHome])) {
-			/**
-			 * Двери-Двери => 1
-			 * Двери-Склад => 2
-			 * Склад-Двери => 3
-			 * Склад-Склад => 4
-			 * @var int $mode
-			 */
-			$mode = 1 + (int)!$toHome + 2 * (int)!$this->приезжатьНаСкладМагазина();
-			/** @var Df_NovaPoshta_Request $request */
-			$request = new Df_NovaPoshta_Request(array(
-				Df_NovaPoshta_Request::P__QUERY_PATH => '/delivery'
-				,Df_NovaPoshta_Request::P__REQUEST_METHOD => Zend_Http_Client::POST
-				,Df_NovaPoshta_Request::P__POST_PARAMS => array('DeliveryForm' => array(
-					'TimeIntervals' => 0
-					,'backDelivery' => 0
-					,'cargoType' => 'Cargo'
-					,'deliveryTechnology_id' => $mode
-					,'depth' => $this->rr()->getLengthRoughInCentimeters()
-					,'height' => $this->rr()->getHeightRoughInCentimeters()
-					,'width' => $this->rr()->getWidthRoughInCentimeters()
-					,'is_agent' => 1
-					,'packing_service' => 0
-					,'palletizing' => 0
-					,'places_count' => 1
-					,'publicPrice' => $this->declaredValue()
-					,'recipientCity' => $this->locationDestName()
-					,'recipientCity_id' => $this->locationDestId()
-					,'saturdayDelivery' => 0
-					,'senderCity' => $this->locationOrigName()
-					,'senderCity_id' => $this->locationOrigId()
-					/**
-					 * http://novaposhta.ua/posulku
-					 * «(Длина(см)×Ширина(см)×Высота(см)) / 4000, или объем груза, м³×250.»
-					 */
-					,'volume_weight' => df_f2(250 * $this->rr()->getVolumeInCubicMetres())
-					,'weight' => df_f2($this->weightKg())
-				))
-			));
-			/**
-			 * «Итого: 200.00 грн *»
-			 * @var string $rateS
-			 */
-			$rateS = $request->response()->pq('.final')->text();
-			$rateS = df_trim_text_left($rateS, 'Итого: ');
-			$rateS = df_trim_text_right($rateS, ' грн *');
-			$this->{__METHOD__}[$toHome] = df_float_positive($rateS);
-		}
-		return $this->{__METHOD__}[$toHome];
-	}
+	private function rate($toHome) {return dfc($this, function($toHome) {
+		/**
+		 * Двери-Двери => 1
+		 * Двери-Склад => 2
+		 * Склад-Двери => 3
+		 * Склад-Склад => 4
+		 * @var int $mode
+		 */
+		$mode = 1 + (int)!$toHome + 2 * (int)!$this->приезжатьНаСкладМагазина();
+		/** @var Df_NovaPoshta_Request $request */
+		$request = new Df_NovaPoshta_Request([
+			Df_NovaPoshta_Request::P__QUERY_PATH => '/ru/delivery'
+			,Df_NovaPoshta_Request::P__REQUEST_METHOD => Zend_Http_Client::POST
+			,Df_NovaPoshta_Request::P__POST_PARAMS => ['DeliveryForm' => [
+				'TimeIntervals' => 0
+				,'backDelivery' => 0
+				,'cargoType' => 'Cargo'
+				,'deliveryTechnology_id' => $mode
+				,'depth' => $this->rr()->getLengthRoughInCentimeters()
+				,'height' => $this->rr()->getHeightRoughInCentimeters()
+				,'width' => $this->rr()->getWidthRoughInCentimeters()
+				,'is_agent' => 1
+				,'packing_service' => 0
+				,'palletizing' => 0
+				,'places_count' => 1
+				,'publicPrice' => $this->declaredValue()
+				,'recipientCity' => $this->locationDestName()
+				,'recipientCity_id' => $this->locationDestId()
+				,'saturdayDelivery' => 0
+				,'senderCity' => $this->locationOrigName()
+				,'senderCity_id' => $this->locationOrigId()
+				/**
+				 * http://novaposhta.ua/posulku
+				 * «(Длина(см)×Ширина(см)×Высота(см)) / 4000, или объем груза, м³×250.»
+				 */
+				,'volume_weight' => df_f2(250 * $this->rr()->getVolumeInCubicMetres())
+				,'weight' => df_f2($this->weightKg())
+			]]
+		]);
+		/**
+		 * «Итого: 200.00 грн *»
+		 * @var string $rateS
+		 */
+		$rateS = $request->response()->pq('.final')->text();
+		$rateS = df_trim_text_left($rateS, 'Итого: ');
+		$rateS = df_trim_text_right($rateS, ' грн *');
+		return df_float_positive($rateS);
+	}, func_get_args());}
 }

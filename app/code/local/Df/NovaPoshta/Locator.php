@@ -78,9 +78,9 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 		static $r;
 		if (!$r) {
 			/** @var Df_NovaPoshta_Request $request */
-			$request = new Df_NovaPoshta_Request(array(
-				Df_NovaPoshta_Request::P__QUERY_PATH => '/delivery'
-			));
+			$request = new Df_NovaPoshta_Request([
+				Df_NovaPoshta_Request::P__QUERY_PATH => '/ru/delivery'
+			]);
 			$r = $request->response();
 		}
 		return $r;
