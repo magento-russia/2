@@ -254,23 +254,13 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
-	protected function errorInvalidCityDest() {
-		$this->error(
-			'Доставка <b>%s</b> невозможна, либо название населённого пункта написано неверно.'
-			, $this->rr()->вМесто()
-		);
-	}
+	protected function errorInvalidCityDest() {$this->errorInvalidCity($to = true);}
 
 	/**
 	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
-	protected function errorInvalidCityOrig() {
-		$this->error(
-			'Доставка <b>%s</b> невозможна, либо название населённого пункта написано неверно.'
-			, $this->rr()->изМеста()
-		);
-	}
+	protected function errorInvalidCityOrig() {$this->errorInvalidCity($to = false);}
 
 	/**
 	 * @return void
@@ -421,6 +411,19 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
 			$this->main(), call_user_func_array('sprintf', func_get_args())
 		);
 	}
+
+	/**
+	 * 2016-10-24
+	 * @used-by errorInvalidCityDest()
+	 * @used-by errorInvalidCityOrig()
+	 * @param bool $to
+	 * @return void
+	 * @throws \Df\Shipping\Exception
+	 */
+	private function errorInvalidCity($to) {$this->error(
+		'Доставка <b>%s</b> невозможна, либо название населённого пункта написано неверно.'
+		, $to ? $this->rr()->вМесто() : $this->rr()->изМеста()
+	);}
 
 	/**
 	 * @used-by checkWeightIsLE()

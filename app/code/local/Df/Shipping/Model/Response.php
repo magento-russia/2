@@ -162,7 +162,7 @@ class Df_Shipping_Model_Response extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__REQUEST, Df_Shipping_Model_Request::_C)
+			->_prop(self::P__REQUEST, Df_Shipping_Model_Request::class)
 			->_prop(self::P__TEXT, DF_V_STRING_NE)
 		;
 	}
@@ -186,7 +186,6 @@ class Df_Shipping_Model_Response extends Df_Core_Model {
 	/** @var string */
 	private static $TYPE__XML = 'xml';
 
-	const _C = __CLASS__;
 	const P__REQUEST = 'request';
 	const P__TEXT = 'text';
 	/**

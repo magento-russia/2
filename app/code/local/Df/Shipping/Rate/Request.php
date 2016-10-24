@@ -1,4 +1,5 @@
 <?php
+use Df_Catalog_Model_Product as P;
 use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
 class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	/**
@@ -53,40 +54,26 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	public function getCarrier() {return $this->_carrier;}
 
 	/** @return float */
-	public function declaredValueBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getPackageValue()
-				* $this->getCarrier()->configA()->getDeclaredValuePercent()
-				/ 100.0
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function declaredValueBase() {return dfc($this, function() {return
+		$this->getPackageValue()
+		* $this->getCarrier()->configA()->getDeclaredValuePercent()
+		/ 100.0
+	;});}
 	
 	/** @return float */
-	public function getDeclaredValueInHryvnias() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_currency_h()->convertFromBaseToHryvnias($this->declaredValueBase());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getDeclaredValueInHryvnias() {return dfc($this, function() {return
+		df_currency_h()->convertFromBaseToHryvnias($this->declaredValueBase())
+	;});}
 
 	/** @return float */
-	public function getDeclaredValueInRoubles() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_currency_h()->convertFromBaseToRoubles($this->declaredValueBase());
-		}
-		return $this->{__METHOD__};
-	}
-	
+	public function getDeclaredValueInRoubles() {return dfc($this, function() {return
+		df_currency_h()->convertFromBaseToRoubles($this->declaredValueBase())
+	;});}
+
 	/** @return float */
-	public function getDeclaredValueInTenge() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_currency_h()->convertFromBaseToTenge($this->declaredValueBase());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getDeclaredValueInTenge() {return dfc($this, function() {return
+		df_currency_h()->convertFromBaseToTenge($this->declaredValueBase())
+	;});}
 
 	/** @return string|null */
 	public function getDestinationCity() {
@@ -115,28 +102,18 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 	
 	/** @return Df_Localization_Morpher_Response|null */
-	public function getDestinationCityMorpher() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!$this->getDestinationCity()
-				? null
-				: Df_Localization_Morpher::s()->getResponseSilent($this->getDestinationCity())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getDestinationCityMorpher() {return dfc($this, function() {return
+		!$this->getDestinationCity()
+		? null
+		: Df_Localization_Morpher::s()->getResponseSilent($this->getDestinationCity())
+	;});}
 
 	/** @return Df_Directory_Model_Country|null */
-	public function getDestinationCountry() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!$this->getDestinationCountryId()
-				? null
-				: Df_Directory_Model_Country::ld($this->getDestinationCountryId())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getDestinationCountry() {return dfc($this, function() {return
+		!$this->getDestinationCountryId()
+		? null
+		: Df_Directory_Model_Country::ld($this->getDestinationCountryId())
+	;});}
 
 	/**
 	 * Возвращает 2-буквенный код страны, куда должна осуществляться доставка,
@@ -164,25 +141,16 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 
 	/** @return Df_Directory_Model_Region|null */
-	public function getDestinationRegion() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				df_h()->directory()->getRegions()->getItemById(
-					$this->getDestinationRegionId()
-				)
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getDestinationRegion() {return dfc($this, function() {return
+		df_h()->directory()->getRegions()->getItemById($this->getDestinationRegionId())
+	;});}
 
 	/** @return string|null */
-	public function getDestinationRegionalCenter() {
-		return
-			is_null($this->getDestinationRegion())
-			? null
-			: $this->getDestinationRegion()->getData('df_capital')
-		;
-	}
+	public function getDestinationRegionalCenter() {return
+		is_null($this->getDestinationRegion())
+		? null
+		: $this->getDestinationRegion()->getData('df_capital')
+	;}
 
 	/** @return int|null */
 	public function getDestinationRegionId() {
@@ -195,130 +163,99 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 
 	/** @return string|null */
-	public function getDestinationRegionName() {
-		return
-			!$this->getDestinationRegionId()
-			? $this->getDestRegionCode()
-			: df_h()->directory()->getRegionNameById($this->getDestinationRegionId())
-		;
-	}
+	public function getDestinationRegionName() {return
+		!$this->getDestinationRegionId()
+		? $this->getDestRegionCode()
+		: df_h()->directory()->getRegionNameById($this->getDestinationRegionId())
+	;}
 	
 	/** @return float */
-	public function getDimensionMaxRoughInMetres() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inMetres(max($this->getDimensionsRough()));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getDimensionMaxRoughInMetres() {return dfc($this, function() {return
+		df_length()->inMetres(max($this->getDimensionsRough()))
+	;});}
 	
 	/** @return float */
-	public function getDimensionMinRoughInMetres() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inMetres(min($this->getDimensionsRough()));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getDimensionMinRoughInMetres() {return dfc($this, function() {return
+		df_length()->inMetres(min($this->getDimensionsRough()))
+	;});}
 
 	/**
 	 * Примерные габариты (очень грубый алгоритм)
 	 * @return float[]
 	 */
-	public function getDimensionsRough() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var float[] $result */
-			$result = array();
-			foreach ($this->getQuoteItemsSimple() as $quoteItem) {
-				/** @var Mage_Sales_Model_Quote_Item $quoteItem */
-				/** @var Df_Catalog_Model_Product $product */
-				$product = $this->getProductsWithDimensions()->getItemById($quoteItem->getProductId());
-				df_assert($product);
-				/** @var array(string => float) $productDimensions */
-				$productDimensions = array(
-					Df_Catalog_Model_Product::P__WIDTH => $product->getWidth()
-					,Df_Catalog_Model_Product::P__HEIGHT => $product->getHeight()
-					,Df_Catalog_Model_Product::P__LENGTH => $product->getLength()
-				);
-				foreach ($productDimensions as $dimensionName => $productDimension) {
-					/** @var string $dimensionName */
-					df_assert_string($dimensionName);
-					/** @var float $productDimension */
-					df_assert_float($productDimension);
-					$result[$dimensionName] =
-						max(dfa($result, $dimensionName, 0), $productDimension)
-					;
-				}
+	public function getDimensionsRough() {return dfc($this, function() {
+		/** @var float[] $result */
+		$result = [];
+		foreach ($this->getQuoteItemsSimple() as $quoteItem) {
+			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			/** @var P $product */
+			$product = $this->getProductsWithDimensions()->getItemById($quoteItem->getProductId());
+			df_assert($product);
+			/** @var array(string => float) $productDimensions */
+			$productDimensions = [
+				P::P__WIDTH => $product->getWidth()
+				,P::P__HEIGHT => $product->getHeight()
+				,P::P__LENGTH => $product->getLength()
+			];
+			foreach ($productDimensions as $dimensionName => $productDimension) {
+				/** @var string $dimensionName */
+				df_assert_string($dimensionName);
+				/** @var float $productDimension */
+				df_assert_float($productDimension);
+				$result[$dimensionName] =
+					max(dfa($result, $dimensionName, 0), $productDimension)
+				;
 			}
-			df_result_array($result);
-			$this->{__METHOD__} = $result;
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/** @return float */
-	public function getDimensionsRoughInMetres() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inMetres($this->getDimensionsRough());
-		}
-		return $this->{__METHOD__};
-	}
-	
-	/** @return float */
-	public function getDimensionsSumRoughInMetres() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inMetres(array_sum($this->getDimensionsRough()));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getDimensionsRoughInMetres() {return dfc($this, function() {return
+		df_length()->inMetres($this->getDimensionsRough())
+	;});}
 
 	/** @return float */
-	public function getHeightRough() {
-		return dfa($this->getDimensionsRough(), Df_Catalog_Model_Product::P__HEIGHT);
-	}
-	
-	/** @return float */
-	public function getHeightRoughInCentimeters() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inCentimetres($this->getHeightRough());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getDimensionsSumRoughInMetres() {return dfc($this, function() {return
+		df_length()->inMetres(array_sum($this->getDimensionsRough()))
+	;});}
 
 	/** @return float */
-	public function getLengthRough() {
-		return dfa($this->getDimensionsRough(), Df_Catalog_Model_Product::P__LENGTH);
-	}
+	public function getHeightRough() {return dfa($this->getDimensionsRough(), P::P__HEIGHT);}
 	
 	/** @return float */
-	public function getLengthRoughInCentimeters() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inCentimetres($this->getLengthRough());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getHeightRoughInCentimeters() {return dfc($this, function() {return
+		df_length()->inCentimetres($this->getHeightRough())
+	;});}
+
+	/** @return float */
+	public function getLengthRough() {return dfa($this->getDimensionsRough(), P::P__LENGTH);}
+	
+	/** @return float */
+	public function getLengthRoughInCentimeters() {return dfc($this, function() {return
+		df_length()->inCentimetres($this->getLengthRough())
+	;});}
 
 	/** @return array(string => string) */
-	public function getMessageVariables() {
-		if (!isset($this->{__METHOD__})) { $this->{__METHOD__} = array(
-			'{phone}' => df_cfg()->base()->getStorePhone($this->getStoreId())
-			,'{телефон магазина}' => df_cfg()->base()->getStorePhone($this->getStoreId())
-			,'{в месте доставки}' =>
-				!$this->getDestinationCityMorpher()
-				? sprintf('в населённом пункте «%s»', $this->getDestinationCity())
-				: $this->getDestinationCityMorpher()->getWhere()
-			,'{в место доставки}' => $this->вМесто()
-			,'{из места отправки}' => $this->изМеста()
-			,'{в месте отправки}' =>
-				!$this->getOriginCityMorpher()
-				? sprintf('в населённом пункте «%s»', $this->getOriginCity())
-				: $this->getOriginCityMorpher()->getWhere()
-			,'{в страну доставки}' => $this->вСтрану()
-			,'{из страны отправки}' =>
-				!$this->getOriginCountry()
-				? '{из страны отправки}'
-				: $this->getOriginCountry()->getNameInFormOrigin()
-		); }
-		return $this->{__METHOD__};
-	}
+	public function getMessageVariables() {return dfc($this, function() {return [
+		'{phone}' => df_cfg()->base()->getStorePhone($this->getStoreId())
+		,'{телефон магазина}' => df_cfg()->base()->getStorePhone($this->getStoreId())
+		,'{в месте доставки}' =>
+			!$this->getDestinationCityMorpher()
+			? sprintf('в населённом пункте «%s»', $this->getDestinationCity())
+			: $this->getDestinationCityMorpher()->getWhere()
+		,'{в место доставки}' => $this->вМесто()
+		,'{из места отправки}' => $this->изМеста()
+		,'{в месте отправки}' =>
+			!$this->getOriginCityMorpher()
+			? sprintf('в населённом пункте «%s»', $this->getOriginCity())
+			: $this->getOriginCityMorpher()->getWhere()
+		,'{в страну доставки}' => $this->вСтрану()
+		,'{из страны отправки}' =>
+			!$this->getOriginCountry()
+			? '{из страны отправки}'
+			: $this->getOriginCountry()->getNameInFormOrigin()
+	];});}
 
 	/** @return string */
 	public function getOriginCity() {
@@ -353,28 +290,18 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 	
 	/** @return Df_Localization_Morpher_Response|null */
-	public function getOriginCityMorpher() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!$this->getOriginCity()
-				? null
-				: Df_Localization_Morpher::s()->getResponseSilent($this->getOriginCity())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getOriginCityMorpher() {return dfc($this, function() {return
+		!$this->getOriginCity()
+		? null
+		: Df_Localization_Morpher::s()->getResponseSilent($this->getOriginCity())
+	;});}
 	
 	/** @return Df_Directory_Model_Country|null */
-	public function getOriginCountry() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!$this->getOriginCountryId()
-				? null
-				: Df_Directory_Model_Country::ld($this->getOriginCountryId())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getOriginCountry() {return dfc($this, function() {return
+		!$this->getOriginCountryId()
+		? null
+		: Df_Directory_Model_Country::ld($this->getOriginCountryId())
+	;});}
 
 	/**
 	 * Возвращает 2-буквенный код страны, из которой осуществляется доставка
@@ -388,25 +315,18 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	public function getOriginPostalCode() {return $this->_getData(self::P__ORIGIN__POSTAL_CODE);}
 	
 	/** @return Df_Directory_Model_Region|null */
-	public function getOriginRegion() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!$this->getOriginRegionId()
-				? null
-				: df_h()->directory()->getRegions()->getItemById($this->getOriginRegionId())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getOriginRegion() {return dfc($this, function() {return
+		!$this->getOriginRegionId()
+		? null
+		: df_h()->directory()->getRegions()->getItemById($this->getOriginRegionId())
+	;});}
 
 	/** @return string */
-	public function getOriginRegionalCenter() {
-		return df_nts(
-			is_null($this->getOriginRegion())
-			? null
-			: $this->getOriginRegion()->getData('df_capital')
-		);
-	}
+	public function getOriginRegionalCenter() {return df_nts(
+		is_null($this->getOriginRegion())
+		? null
+		: $this->getOriginRegion()->getData('df_capital')
+	);}
 
 	/**
 	 * @param bool $throwExceptionIfNotFound [optional]
@@ -460,43 +380,35 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 
 	/** @return Df_Catalog_Model_Resource_Product_Collection */
-	public function getProductsWithDimensions() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Catalog_Model_Resource_Product_Collection $result */
-			$result = Df_Catalog_Model_Product::c();
-			$result
-				->addIdFilter($this->getProductIds())
-				/**
-				 * При включенном режиме денормализации
-				 * габариты не будут загружены в коллекцию,
-				 * если у свойств габаритов не включена опция
-				 * «used_in_product_listing»
-				 * (а до версии 2.16.2 Российской сборки эта опция была выключена).
-				 * Версия 2.16.2 устраняет проблему.
-				 * @see Df_Shipping_Setup_2_16_2
-				 */
-				->addAttributeToSelect(array(
-					Df_Catalog_Model_Product::P__WIDTH
-					,Df_Catalog_Model_Product::P__HEIGHT
-					,Df_Catalog_Model_Product::P__LENGTH
-					// 2013-10-05
-					// Важно! Вес используется модулями доставки
-					,Df_Catalog_Model_Product::P__WEIGHT
-				))
-			;
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getProductsWithDimensions() {return dfc($this, function() {
+		/** @var Df_Catalog_Model_Resource_Product_Collection $result */
+		$result = P::c();
+		$result
+			->addIdFilter($this->getProductIds())
+			/**
+			 * При включенном режиме денормализации
+			 * габариты не будут загружены в коллекцию,
+			 * если у свойств габаритов не включена опция
+			 * «used_in_product_listing»
+			 * (а до версии 2.16.2 Российской сборки эта опция была выключена).
+			 * Версия 2.16.2 устраняет проблему.
+			 * @see Df_Shipping_Setup_2_16_2
+			 *
+			 * 2013-10-05
+			 * P::P__WEIGHT используется модулями доставки
+			 */
+			->addAttributeToSelect([P::P__WIDTH, P::P__HEIGHT, P::P__LENGTH, P::P__WEIGHT])
+		;
+		return $result;
+	});}
 
-	/** @return int */
-	public function getQty() {
-		if (!isset($this->{__METHOD__})) {
-			/** @uses Mage_Sales_Model_Quote_Item::getQty() */
-			$this->{__METHOD__} = array_sum(df_int_simple(df_each($this->getQuoteItemsSimple(), 'getQty')));
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * @uses Mage_Sales_Model_Quote_Item::getQty()
+	 * @return int
+	 */
+	public function getQty() {return dfc($this, function() {return
+		array_sum(df_int_simple(df_each($this->getQuoteItemsSimple(), 'getQty')))
+	;});}
 
 	/**
 	 * Обратите внимание, что если заказ содержит настраиваемый товар,
@@ -532,63 +444,51 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * @see Mage_Sales_Model_Resource_Order_Item_Collection::_afterLoad
 	 * @return Mage_Sales_Model_Quote_Item[]
 	 */
-	public function getQuoteItemsSimple() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Sales_Model_Quote_Item[] $result */
-			$result = array();
-			foreach ($this->getAllItems() as $quoteItem) {
-				/** @var Mage_Sales_Model_Quote_Item $quoteItem */
-				if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $quoteItem->getProductType()) {
-					$result[]= $quoteItem;
-				}
+	public function getQuoteItemsSimple() {return dfc($this, function() {
+		/** @var Mage_Sales_Model_Quote_Item[] $result */
+		$result = [];
+		foreach ($this->getAllItems() as $quoteItem) {
+			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $quoteItem->getProductType()) {
+				$result[]= $quoteItem;
 			}
-			$this->{__METHOD__} = $result;
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/** @return float */
-	public function getVolumeBoxInCubicCentimeters() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_product(array(
-				$this->getLengthRoughInCentimeters()
-				, $this->getWidthRoughInCentimeters()
-				, $this->getHeightRoughInCentimeters()
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getVolumeBoxInCubicCentimeters() {return dfc($this, function() {return
+		array_product([
+			$this->getLengthRoughInCentimeters()
+			, $this->getWidthRoughInCentimeters()
+			, $this->getHeightRoughInCentimeters()
+		])
+	;});}
 	
 	/** @return float */
-	public function getVolumeInCubicMetres() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var float $result */
-			$result = 0.0;
-			foreach ($this->getQuoteItemsSimple() as $quoteItem) {
-				/** @var Mage_Sales_Model_Quote_Item $quoteItem */
-				/** @var int $qty */
-				$qty = Df_Sales_Model_Quote_Item_Extended::i($quoteItem)->getQty();
-				/** @var Df_Catalog_Model_Product $product */
-				$product = $this->getProductsWithDimensions()->getItemById($quoteItem->getProductId());
-				df_assert($product);
-				/** @var float $productVolume */
-				$productVolume = array_product(df_length()->inMetres(
-					$product->getWidth(), $product->getHeight(), $product->getLength()
-				));
-				$result += ($qty * $productVolume);
-			}
-			$this->{__METHOD__} = $result;
+	public function getVolumeInCubicMetres() {return dfc($this, function() {
+		/** @var float $result */
+		$result = 0.0;
+		foreach ($this->getQuoteItemsSimple() as $quoteItem) {
+			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			/** @var int $qty */
+			$qty = Df_Sales_Model_Quote_Item_Extended::i($quoteItem)->getQty();
+			/** @var P $product */
+			$product = $this->getProductsWithDimensions()->getItemById($quoteItem->getProductId());
+			df_assert($product);
+			/** @var float $productVolume */
+			$productVolume = array_product(df_length()->inMetres(
+				$product->getWidth(), $product->getHeight(), $product->getLength()
+			));
+			$result += ($qty * $productVolume);
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/** @return float */
-	public function getWeightInGrammes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_weight()->inGrammes($this->getPackageWeight());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getWeightInGrammes() {return dfc($this, function() {return
+		df_weight()->inGrammes($this->getPackageWeight())
+	;});}
 
 	/** @return float */
 	public function getWeightInKilogrammes() {return $this->getWeightInGrammes() / 1000;}
@@ -600,78 +500,52 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	public function getWeightKgSD() {return df_f2i($this->getWeightInKilogrammes(), 1);}
 
 	/** @return float */
-	public function getWidthRough() {
-		return dfa($this->getDimensionsRough(), Df_Catalog_Model_Product::P__WIDTH);
-	}
+	public function getWidthRough() {return dfa($this->getDimensionsRough(), P::P__WIDTH);}
 	
 	/** @return float */
-	public function getWidthRoughInCentimeters() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_length()->inCentimetres($this->getWidthRough());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getWidthRoughInCentimeters() {return dfc($this, function() {return
+		df_length()->inCentimetres($this->getWidthRough())
+	;});}
 
 	/** @return bool */
-	public function isDestinationMoscow() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->isMoscow(array(
-				$this->getDestinationCity(), $this->getDestinationRegionName()
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function isDestinationMoscow() {return dfc($this, function() {return
+		$this->isMoscow([$this->getDestinationCity(), $this->getDestinationRegionName()])
+	;});}
 
 	/** @return bool */
-	public function isDestinationRussia() {
-		return Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getDestinationCountryId();
-	}
+	public function isDestinationRussia() {return
+		Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getDestinationCountryId()
+	;}
 
 	/** @return bool */
-	public function isDestinationCityRegionalCenter() {
-		return
-				$this->getDestinationCity()
-			&&
-				df_t()->areEqualCI($this->getDestinationCity(), $this->getDestinationRegionalCenter())
-		;
-	}
+	public function isDestinationCityRegionalCenter() {return
+		$this->getDestinationCity()
+		&& df_t()->areEqualCI($this->getDestinationCity(), $this->getDestinationRegionalCenter())
+	;}
 
 	/** @return bool */
-	public function isDomestic() {
-		return $this->getDestinationCountryId() === $this->getOriginCountryId();
-	}
+	public function isDomestic() {return $this->getDestinationCountryId() === $this->getOriginCountryId();}
 
 	/** @return bool */
-	public function isOriginMoscow() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->isMoscow(array(
-				$this->getOriginCity(), $this->getOriginRegionName()
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function isOriginMoscow() {return dfc($this, function() {return
+		$this->isMoscow([$this->getOriginCity(), $this->getOriginRegionName()])
+	;});}
 
 	/** @return bool */
-	public function isOriginCityRegionalCenter() {
-		return
-				$this->getOriginCity()
-			&&
-				df_t()->areEqualCI($this->getOriginCity(), $this->getOriginRegionalCenter())
-		;
-	}
+	public function isOriginCityRegionalCenter() {return
+		$this->getOriginCity()
+		&& df_t()->areEqualCI($this->getOriginCity(), $this->getOriginRegionalCenter())
+	;}
 
 	/** @return bool */
-	public function isOriginRussia() {
-		return Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getOriginCountryId();
-	}
+	public function isOriginRussia() {return
+		Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getOriginCountryId()
+	;}
 
 	/** @return bool */
-	public function isOriginTheSameAsDestination() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_t()->areEqualCI($this->getDestinationCity(), $this->getOriginCity());
-		}
-		return $this->{__METHOD__};
-	}
+	public function isOriginTheSameAsDestination() {return dfc($this, function() {return
+		df_t()->areEqualCI($this->getDestinationCity(), $this->getOriginCity())
+	;});}
 
 	/**
 	 * @param string $message
@@ -711,48 +585,33 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::errorInvalidCityDest()
 	 * @return string
 	 */
-	public function вМесто() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!$this->getDestinationCityMorpher()
-				? 'в ' . $this->getDestinationCity()
-				: $this->getDestinationCityMorpher()->getInFormDestination()
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function вМесто() {return dfc($this, function() {return
+		!$this->getDestinationCityMorpher()
+		? 'в ' . $this->getDestinationCity()
+		: $this->getDestinationCityMorpher()->getInFormDestination()
+	;});}
 
 	/**
 	 * @used-by getMessageVariables()
 	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::errorInvalidCountryDest()
 	 * @return string
 	 */
-	public function вСтрану() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!$this->getDestinationCountry()
-				? '{в страну доставки}'
-				: $this->getDestinationCountry()->getNameInFormDestination()
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function вСтрану() {return dfc($this, function() {return
+		!$this->getDestinationCountry()
+		? '{в страну доставки}'
+		: $this->getDestinationCountry()->getNameInFormDestination()
+	;});}
 
 	/**
 	 * @used-by getMessageVariables()
 	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::errorInvalidCityOrig()
 	 * @return string
 	 */
-	public function изМеста() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!$this->getOriginCityMorpher()
-				? 'из ' . $this->getOriginCity()
-				: $this->getOriginCityMorpher()->getInFormOrigin()
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function изМеста() {return dfc($this, function() {return
+		!$this->getOriginCityMorpher()
+		? 'из ' . $this->getOriginCity()
+		: $this->getOriginCityMorpher()->getInFormOrigin()
+	;});}
 
 	/**
 	 * @used-by checkPostalCodeDestinationIsRussian()
@@ -775,32 +634,26 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	}
 
 	/** @return int|float[] */
-	private function getDimensionDefaultValues() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Shipping_Settings_Product $settings */
-			$settings = df_cfg()->shipping()->product();
-			$this->{__METHOD__} = array(
-				Df_Catalog_Model_Product::P__WIDTH => $settings->getDefaultWidth()
-				,Df_Catalog_Model_Product::P__HEIGHT => $settings->getDefaultHeight()
-				,Df_Catalog_Model_Product::P__LENGTH =>	$settings->getDefaultLength()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	private function getDimensionDefaultValues() {return dfc($this, function() {
+		/** @var Df_Shipping_Settings_Product $s */
+		$s = df_cfg()->shipping()->product();
+		return [
+			P::P__WIDTH => $s->getDefaultWidth()
+			,P::P__HEIGHT => $s->getDefaultHeight()
+			,P::P__LENGTH => $s->getDefaultLength()
+		];
+	});}
 
 	/** @return int[] */
-	private function getProductIds() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var int[] $result */
-			$result = array();
-			foreach ($this->getAllItems() as $quoteItem) {
-				/** @var Mage_Sales_Model_Quote_Item $quoteItem */
-				$result[]= (int)$quoteItem->getProduct()->getId();
-			}
-			$this->{__METHOD__} = $result;
+	private function getProductIds() {return dfc($this, function() {
+		/** @var int[] $result */
+		$result = [];
+		foreach ($this->getAllItems() as $quoteItem) {
+			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			$result[]= (int)$quoteItem->getProduct()->getId();
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * @param string[] $variants
@@ -808,18 +661,6 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 */
 	private function isMoscow(array $variants) {return in_array('МОСКВА', df_strtoupper($variants));}
 
-	/**
-	 * @used-by Df_Autotrading_Model_Api_Calculator::_construct()
-	 * @used-by Df_Exline_Model_Locator::_construct()
-	 * @used-by Df_Exline_Model_Request_Rate::_construct()
-	 * @used-by Df_Kazpost_Model_Request_Rate::_construct()
-	 * @used-by Df_KazpostEms_Model_Request_Rate::_construct()
-	 * @used-by Df_Pec_Model_Api_Calculator::_construct()
-	 * @used-by Df_PonyExpress_Model_Request_Rate::_construct()
-	 * @used-by Df_Shipping_Model_Locator::_construct()
-	 * @used-by Df_Spsr_Model_Api_Calculator::_construct()
-	 */
-	const _C = __CLASS__;
 	const P__DESTINATION__CITY = 'dest_city';
 	const P__DESTINATION__COUNTRY_ID = 'dest_country_id';
 	const P__DESTINATION__POSTAL_CODE = 'dest_postcode';

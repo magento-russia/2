@@ -484,8 +484,6 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	/** @var bool */
 	private $_responseFailureChecked = false;
 
-	/** @used-by Df_Shipping_Model_Response::_construct() */
-	const _C = __CLASS__;
 	const CACHE_TYPE = 'rm_shipping';
 	const MESSAGE__ERROR_PARSING_BODY = 'Error parsing body - doesn\'t seem to be a chunked message';
 	const P__POST_PARAMS = 'post_params';

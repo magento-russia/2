@@ -7,6 +7,6 @@ class Df_Shipping_Model_Bridge extends Df_Checkout_Module_Bridge {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::_C);
+		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::class);
 	}
 }

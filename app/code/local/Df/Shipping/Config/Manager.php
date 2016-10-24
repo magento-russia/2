@@ -33,6 +33,6 @@ class Df_Shipping_Config_Manager extends Df_Checkout_Module_Config_Manager {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::_C);
+		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::class);
 	}
 }

@@ -65,6 +65,6 @@ abstract class Df_Shipping_Config_Area extends Df_Checkout_Module_Config_Area {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::_C);
+		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::class);
 	}
 }

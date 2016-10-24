@@ -232,13 +232,4 @@ abstract class Df_Shipping_Carrier
 	 * @var Df_Shipping_Rate_Result|null
 	 */
 	private $_lastRateResult = null;
-
-	/**
-	 * @used-by Df_Checkout_Module_Config_Facade::_construct()
-	 * @used-by Df_PonyExpress_Model_Request_Rate::_construct()
-	 * @used-by Df_Shipping_Model_Bridge::_construct()
-	 * @used-by Df_Shipping_Config_Area::_construct()
-	 * @used-by Df_Shipping_Config_Manager::_construct()
-	 */
-	const _C = __CLASS__;
 }
