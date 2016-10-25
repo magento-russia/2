@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Shipping_Carrier main() */
-class Df_Shipping_Model_Bridge extends Df_Checkout_Module_Bridge {
+class Df_Shipping_Bridge extends Df_Checkout_Module_Bridge {
 	/**
 	 * @override
 	 * @return void

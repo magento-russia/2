@@ -8,13 +8,13 @@
 	</modules>
 	<df>
 		<attribute_set_processors>
-			<shipping>Df_Shipping_Model_Processor_AddDimensionsToProductAttributeSet</shipping>
+			<shipping>Df_Shipping_Processor_AddDimensionsToProductAttributeSet</shipping>
 		</attribute_set_processors>
 	</df>
 	<global>
 		<models>
 			<df_shipping>
-				<class>Df_Shipping_Model</class>
+				<class>Df_Shipping</class>
 			</df_shipping>
 			<shipping>
 				<rewrite>
@@ -23,7 +23,7 @@
 						улучшение диагностики в тех ситуациях,
 						когда требуемый класс некоего модуля доставки отсутствует.
 					-->
-					<config>Df_Shipping_Model_ConfigM</config>
+					<config>Df_Shipping_ConfigM</config>
 				</rewrite>
 			</shipping>
 		</models>

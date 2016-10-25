@@ -28,6 +28,7 @@ class Df_Core_Autoload extends Varien_Autoload {
 		/**
 		 * 2016-10-25
 		 * http://stackoverflow.com/a/20713159
+		 * https://github.com/sebastianbergmann/phpunit/issues/1207#issuecomment-38786491
 		 */
 		static $isPHPUnit;
 		if (!isset($isPHPUnit)) {

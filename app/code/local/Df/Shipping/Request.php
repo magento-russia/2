@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_Request extends Df_Core_Model {
+class Df_Shipping_Request extends Df_Core_Model {
 	/**
 	 * @used-by \Df\Shipping\Exception\Request::carrier()
 	 * @return Df_Shipping_Carrier
@@ -53,7 +53,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	 * это позволяет не дублировать данную функциональность в тех классах-потомках, где она требуется.
 	 * Другими словами, у нас ситуация: метод @see getRate() нужен примерно половине классов-потомков,
 	 * однако мы не можем вынести метод @see getRate() в общий подкласс-родитель той половины
-	 * классов потомков класса @see Df_Shipping_Model_Request, которым требуется метод @see @see getRate(),
+	 * классов потомков класса @see Df_Shipping_Request, которым требуется метод @see @see getRate(),
 	 * потому что у этих классов уже есть своя иерархия (иерархия по службе доставки: у API каждой службы
 	 * доставки ведь своя специфика и своя общая функциональность для всех потомков).
 	 * @uses _filterRate()
@@ -66,7 +66,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	 * Веб-сервисы служб доставки часто возвращают данные в формате,
 	 * очень похожем на JSON, но требующем некоторых корректировок
 	 * перед вызовом @see Zend_Json::decode()
-	 * @used-by Df_Shipping_Model_Response::json()
+	 * @used-by Df_Shipping_Response::json()
 	 * @param string $responseAsText
 	 * @return string
 	 */
@@ -97,38 +97,38 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 
 	/**
 	 * @used-by Df_Exline_Locator::_map()
-	 * @return Df_Shipping_Model_Response
+	 * @return Df_Shipping_Response
 	 */
 	public function response() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Shipping_Model_Response::i($this, $this->getResponseAsText());
+			$this->{__METHOD__} = Df_Shipping_Response::i($this, $this->getResponseAsText());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @used-by Df_Shipping_Model_Request::getDeliveryTime()
+	 * @used-by Df_Shipping_Request::getDeliveryTime()
 	 * @param string|int $value
 	 * @return int
 	 */
 	protected function _filterDeliveryTime($value) {return df_nat($value);}
 
 	/**
-	 * @used-by Df_Shipping_Model_Request::getDeliveryTimeMax()
+	 * @used-by Df_Shipping_Request::getDeliveryTimeMax()
 	 * @param string|int $value
 	 * @return int
 	 */
 	protected function _filterDeliveryTimeMax($value) {return $this->_filterDeliveryTime($value);}
 
 	/**
-	 * @used-by Df_Shipping_Model_Request::getDeliveryTimeMin()
+	 * @used-by Df_Shipping_Request::getDeliveryTimeMin()
 	 * @param string|int $value
 	 * @return int
 	 */
 	protected function _filterDeliveryTimeMin($value) {return $this->_filterDeliveryTime($value);}
 
 	/**
-	 * @used-by Df_Shipping_Model_Request::getRate()
+	 * @used-by Df_Shipping_Request::getRate()
 	 * @param float|int|string $value
 	 * @return float
 	 */
@@ -136,14 +136,14 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 
 	/**
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @used-by Df_Shipping_Model_Request::getDeliveryTime()
+	 * @used-by Df_Shipping_Request::getDeliveryTime()
 	 * @return int|string
 	 */
 	protected function _getDeliveryTime() {df_abstract($this); return 0;}
 
 	/**
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @used-by Df_Shipping_Model_Request::getRate()
+	 * @used-by Df_Shipping_Request::getRate()
 	 * @return float|int|string
 	 */
 	protected function _getRate() {df_abstract($this); return 0;}
@@ -236,7 +236,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 	/**
 	 * 2015-02-21
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @used-by Df_Shipping_Model_Request::getDeliveryTime()
+	 * @used-by Df_Shipping_Request::getDeliveryTime()
 	 * @return int
 	 */
 	protected function getDeliveryTimeInternal() {df_abstract($this); return 0;}
@@ -310,7 +310,7 @@ class Df_Shipping_Model_Request extends Df_Core_Model {
 
 	/**
 	 * 2016-10-24
-	 * @used-by Df_Shipping_Model_Request::getUri()
+	 * @used-by Df_Shipping_Request::getUri()
 	 * @return string
 	 */
 	protected function scheme() {return 'http';}

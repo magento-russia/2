@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_ConfigM extends Mage_Shipping_Model_Config {
+class Df_Shipping_ConfigM extends Mage_Shipping_Model_Config {
 	/**
 	 * Цель перекрытия —
 	 * улучшение диагностики в тех ситуациях,

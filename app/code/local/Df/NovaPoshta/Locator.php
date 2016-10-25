@@ -71,10 +71,10 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 
 	/**
 	 * @used-by _map()
-	 * @return Df_Shipping_Model_Response
+	 * @return Df_Shipping_Response
 	 */
 	private static function response() {
-		/** @var Df_Shipping_Model_Response $r */
+		/** @var Df_Shipping_Response $r */
 		static $r;
 		if (!$r) {
 			/** @var Df_NovaPoshta_Request $request */

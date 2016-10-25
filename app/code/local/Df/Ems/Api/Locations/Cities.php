@@ -1,5 +1,5 @@
 <?php
-class Df_Ems_Api_Locations_Cities extends Df_Ems_Api_Locations_Abstract {
+class Df_Ems_Api_Locations_Cities extends Df_Ems_Api_Locations {
 	/**
 	 * @override
 	 * @return string

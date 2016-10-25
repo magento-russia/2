@@ -1,9 +1,9 @@
 <?php
-class Df_Exline_Request extends Df_Shipping_Model_Request {
+class Df_Exline_Request extends Df_Shipping_Request {
 	/**
 	 * @override
-	 * @see Df_Shipping_Model_Request::getQueryHost()
-	 * @used-by Df_Shipping_Model_Request::getUri()
+	 * @see Df_Shipping_Request::getQueryHost()
+	 * @used-by Df_Shipping_Request::getUri()
 	 * @return string
 	 */
 	protected function getQueryHost() {return 'calculator.exline.kz';}

@@ -1,6 +1,6 @@
 <?php
 use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
-abstract class Df_Shipping_Collector extends Df_Shipping_Model_Bridge {
+abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	/**
 	 * @used-by collect()
 	 * @see Df_Shipping_Collector_Conditional::_collect()

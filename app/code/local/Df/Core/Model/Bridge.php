@@ -15,7 +15,7 @@ abstract class Df_Core_Model_Bridge extends Df_Core_Model {
 	 * @used-by Df_Checkout_Module_Bridge::_construct()
 	 * @used-by Df_Checkout_Module_Config_Facade::_construct()
 	 * @used-by Df_Payment_Config_ManagerBase::_construct()
-	 * @used-by Df_Shipping_Model_Bridge::_construct()
+	 * @used-by Df_Shipping_Bridge::_construct()
 	 * @used-by Df_Shipping_Config_Manager::_construct()
 	 * @var string
 	 */

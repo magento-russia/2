@@ -1,5 +1,5 @@
 <?php
-class Df_Ems_Api_Locations_Regions extends Df_Ems_Api_Locations_Abstract {
+class Df_Ems_Api_Locations_Regions extends Df_Ems_Api_Locations {
 	/**
 	 * @override
 	 * @return string
@@ -30,7 +30,7 @@ class Df_Ems_Api_Locations_Regions extends Df_Ems_Api_Locations_Abstract {
 		if (!isset($this->{__METHOD__})) {
 			// Я думаю, будет нормальным обновлять кэш раз в месяц.
 			// Уж пожизненно его точно не стоит хранить, ибо тарифы служб доставки меняются.
-			$this->{__METHOD__} = Df_Core_Model_Cache::i(Df_Shipping_Model_Request::CACHE_TYPE, 30 * 86400);
+			$this->{__METHOD__} = Df_Core_Model_Cache::i(Df_Shipping_Request::CACHE_TYPE, 30 * 86400);
 		}
 		return $this->{__METHOD__};
 	}
@@ -41,7 +41,7 @@ class Df_Ems_Api_Locations_Regions extends Df_Ems_Api_Locations_Abstract {
 			/** @var Df_Directory_Model_Resource_Region_Collection $regions */
 			$regions = df_h()->directory()->getRussianRegions();
 			$this->{__METHOD__} = array_combine(
-				df_t()->strtoupper($regions->walk('getName')), $regions->walk('getId')
+				df_strtoupper($regions->walk('getName')), $regions->walk('getId')
 			);
 		}
 		return $this->{__METHOD__};

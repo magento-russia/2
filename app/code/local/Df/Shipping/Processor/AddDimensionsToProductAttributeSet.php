@@ -1,5 +1,5 @@
 <?php
-class Df_Shipping_Model_Processor_AddDimensionsToProductAttributeSet
+class Df_Shipping_Processor_AddDimensionsToProductAttributeSet
 	extends Df_Core_Setup_AttributeSet {
 	/**
 	 * @override

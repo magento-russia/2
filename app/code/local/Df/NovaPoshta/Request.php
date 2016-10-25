@@ -1,9 +1,9 @@
 <?php
-class Df_NovaPoshta_Request extends Df_Shipping_Model_Request {
+class Df_NovaPoshta_Request extends Df_Shipping_Request {
 	/**
 	 * @override
-	 * @see Df_Shipping_Model_Request::adjustHttpClient()
-	 * @used-by Df_Shipping_Model_Request::getHttpClient()
+	 * @see Df_Shipping_Request::adjustHttpClient()
+	 * @used-by Df_Shipping_Request::getHttpClient()
 	 * @param Zend_Http_Client $httpClient
 	 * @return void
 	 */
@@ -13,8 +13,8 @@ class Df_NovaPoshta_Request extends Df_Shipping_Model_Request {
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Model_Request::getQueryHost()
-	 * @used-by Df_Shipping_Model_Request::getUri()
+	 * @see Df_Shipping_Request::getQueryHost()
+	 * @used-by Df_Shipping_Request::getUri()
 	 * @return string
 	 */
 	protected function getQueryHost() {return 'novaposhta.ua';}
@@ -22,8 +22,8 @@ class Df_NovaPoshta_Request extends Df_Shipping_Model_Request {
 	/**
 	 * 2016-10-24
 	 * @override
-	 * @see Df_Shipping_Model_Request::scheme()
-	 * @used-by Df_Shipping_Model_Request::getUri()
+	 * @see Df_Shipping_Request::scheme()
+	 * @used-by Df_Shipping_Request::getUri()
 	 * @return string
 	 */
 	protected function scheme() {return 'https';}

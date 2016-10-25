@@ -1,6 +1,6 @@
 <?php
 /** @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin */
-class Df_Shipping_Model_Origin extends Df_Core_Model {
+class Df_Shipping_Origin extends Df_Core_Model {
 	/** @return string */
 	public function getCity() {return $this->cfg(self::P__CITY);}
 
@@ -65,7 +65,7 @@ class Df_Shipping_Model_Origin extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Shipping_Model_Origin
+	 * @return Df_Shipping_Origin
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 }

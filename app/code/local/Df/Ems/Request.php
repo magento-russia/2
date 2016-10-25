@@ -1,5 +1,5 @@
 <?php
-class Df_Ems_Request extends Df_Shipping_Model_Request {
+class Df_Ems_Request extends Df_Shipping_Request {
 	/**
 	 * @param string $paramName
 	 * @param mixed $default [optional]

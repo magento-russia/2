@@ -1,7 +1,7 @@
 <?php
 namespace Df\Shipping\Exception;
-use Df_Shipping_Model_Request as Req;
-use Df_Shipping_Model_Response as Res;
+use Df_Shipping_Request as Req;
+use Df_Shipping_Response as Res;
 use \Exception as E;
 class UnexpectedResponse extends Request {
 	/**
