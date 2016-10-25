@@ -14,7 +14,7 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	 * @param float $weightInDefaultUnits
 	 * @return float
 	 */
-	public function inKilogrammes($weightInDefaultUnits) {
+	public function inKg($weightInDefaultUnits) {
 		return
 			self::VALUE__KILOGRAM === $this->getDefaultUnits()
 			? df_float($weightInDefaultUnits)

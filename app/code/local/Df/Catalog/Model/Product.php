@@ -840,7 +840,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	}
 
 	/** @return float */
-	public function getWeightInKilogrammes() {return df_weight()->inKilogrammes($this->getWeight());}
+	public function getWeightInKg() {return df_weight()->inKg($this->getWeight());}
 
 	/**
 	 * Обратите внимание, что этот метод надлежит использовать только для простых товаров!

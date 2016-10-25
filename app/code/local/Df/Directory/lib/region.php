@@ -1,4 +1,5 @@
 <?php
+use Df_Directory_Model_Region as Region;
 /**
  * 2016-10-25
  * В случае отсутствия значения намеренно возвращаем 0, а не null,
@@ -17,5 +18,26 @@ function df_region_id_by_name_ru($nameUc) {
 	}
 	return dfa($map, $nameUc, 0);
 }
+
+/**
+ * 2016-10-25
+ * @param int|Region $r
+ * @return Region
+ */
+function df_region($r) {return is_object($r) ? $r : Region::ld($r);}
+
+/**
+ * 2016-10-25
+ * @param int|Region $r
+ * @return string
+ */
+function df_region_name($r) {return df_region($r)->getName();}
+
+/**
+ * 2016-10-25
+ * @param int|Region $r
+ * @return string
+ */
+function df_region_name_uc($r) {return df_strtoupper(df_region_name($r));}
 
 

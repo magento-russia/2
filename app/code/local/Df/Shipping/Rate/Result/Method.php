@@ -36,7 +36,7 @@ class Df_Shipping_Rate_Result_Method extends Mage_Shipping_Model_Rate_Result_Met
 			, 'method_title' => $title
 			, 'cost' => $costBase
 			, 'price' => $price
-			, self::$P__DATE_MAX = self::date($dateMax)
+			, self::$P__DATE_MAX => self::date($dateMax)
 			, self::$P__DATE_MIN => self::date($dateMin)
 		) + $additional);
 	}

@@ -1,5 +1,6 @@
 <?php
 use Df_Catalog_Model_Product as P;
+use Df_Directory_Model_Country as Country;
 use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
 class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	/**
@@ -108,11 +109,11 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		: Df_Localization_Morpher::s()->getResponseSilent($this->getDestinationCity())
 	;});}
 
-	/** @return Df_Directory_Model_Country|null */
+	/** @return Country|null */
 	public function getDestinationCountry() {return dfc($this, function() {return
 		!$this->getDestinationCountryId()
 		? null
-		: Df_Directory_Model_Country::ld($this->getDestinationCountryId())
+		: Country::ld($this->getDestinationCountryId())
 	;});}
 
 	/**
@@ -262,28 +263,10 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		/** @var string $result */
 		$result = $this->_getData(self::P__ORIGIN__CITY);
 		if (!$result) {
-			/**
-			 * Обратите внимание, что на странице корзины
-			 * покупатель не может указать город в форме для расчёта тарифа доставки:
-			 * в этой форме всего 3 поля: страна, субъект федерации (область) и почтовый индекс.
-			 * При этом многие модули доставки неспособны рассчитывать тариф, не зная города.
-			 * Однако, если субъект федерации — Москва или Санкт-Петербург,
-			 * то мы можем подставить название субъекта федерации в качестве названия города.
-			 */
-			if (
-				in_array(
-					$this->getOriginRegionName()
-					,df_h()->directory()->country()->russia()->getFederalCities()
-				)
-			){
-				$result = $this->getOriginRegionName();
-			}
-		}
-		if (!$result) {
 			$this->throwException(
-				'Администратор магазина должен указать город магазина в графе
-				«Система» → «Настройки» → «Продажи» → «Доставка:
-				общие настройки»→ «Расположение магазина» → «Город».'
+				'Администратор магазина должен указать город магазина в графе'
+				. ' «Система» → «Настройки» → «Продажи» → «Доставка:'
+				. ' общие настройки» → «Расположение магазина» → «Город».'
 			);
 		}
 		return $result;
@@ -296,11 +279,9 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		: Df_Localization_Morpher::s()->getResponseSilent($this->getOriginCity())
 	;});}
 	
-	/** @return Df_Directory_Model_Country|null */
+	/** @return Country */
 	public function getOriginCountry() {return dfc($this, function() {return
-		!$this->getOriginCountryId()
-		? null
-		: Df_Directory_Model_Country::ld($this->getOriginCountryId())
+		df_country($this->getOriginCountryId())
 	;});}
 
 	/**
@@ -309,7 +290,18 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * @return string
 	 */
-	public function getOriginCountryId() {return $this->_getData(self::P__ORIGIN__COUNTRY_ID);}
+	public function getOriginCountryId() {
+		/** @var string $result */
+		$result = $this->_getData(self::P__ORIGIN__COUNTRY_ID);
+		if (!$result) {
+			$this->throwException(
+				'Администратор магазина должен указать страну магазина в графе
+				«Система» → «Настройки» → «Продажи» → «Доставка:
+				общие настройки»→ «Расположение магазина» → «Страна».'
+			);
+		}
+		return $result;
+	}
 
 	/** @return string|null */
 	public function getOriginPostalCode() {return $this->_getData(self::P__ORIGIN__POSTAL_CODE);}
@@ -491,13 +483,13 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	;});}
 
 	/** @return float */
-	public function getWeightInKilogrammes() {return $this->getWeightInGrammes() / 1000;}
+	public function getWeightInKg() {return $this->getWeightInGrammes() / 1000;}
 
 	/**
 	 * @used-by Df_Shipping_Collector::errorInvalidWeight()
 	 * @return string
 	 */
-	public function getWeightKgSD() {return df_f2i($this->getWeightInKilogrammes(), 1);}
+	public function getWeightKgSD() {return df_f2i($this->getWeightInKg(), 1);}
 
 	/** @return float */
 	public function getWidthRough() {return dfa($this->getDimensionsRough(), P::P__WIDTH);}
@@ -553,7 +545,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * @throws EMethodNotApplicable
 	 */
 	public function throwException($message) {
-		df_error(new EMethodNotApplicable(
+		df_error_html(new EMethodNotApplicable(
 			$this->getCarrier(), $this->evaluateMessage(df_format(func_get_args()))
 		));
 	}

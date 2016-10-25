@@ -1,7 +1,5 @@
 <?php
-/**
- * @method Df_Directory_Model_Resource_Country getResource()
- */
+/** @method Df_Directory_Model_Resource_Country getResource() */
 class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	/** @return Df_Localization_Morpher_Response|null */
 	public function getMorpher() {
@@ -147,7 +145,7 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	 * @param string $isoCode
 	 * @return Df_Directory_Model_Country
 	 */
-	public static function ld($isoCode) {return self::i()->loadByCode($isoCode);}
+	public static function ld($isoCode) {return df_country($isoCode);}
 	/** @return Df_Directory_Model_Country */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

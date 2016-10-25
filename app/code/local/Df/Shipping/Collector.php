@@ -147,7 +147,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkWeightIsLE($weightInKilogrammes) {
-		if ($this->rr()->getWeightInKilogrammes() > $weightInKilogrammes) {
+		if ($this->rr()->getWeightInKg() > $weightInKilogrammes) {
 			$this->errorInvalidWeight($weightInKilogrammes, 'не больше');
 		}
 	}
@@ -216,12 +216,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by Df_Kazpost_Collector::collectForeign()
 	 * @return string
 	 */
-	protected function countryDestUc() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = mb_strtoupper($this->countryDest());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function countryDestUc() {return mb_strtoupper($this->countryDest());}
 
 	/**
 	 * @used-by Df_NovaPoshta_Collector::responseRate()
@@ -311,7 +306,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by weightKgS()
 	 * @return float
 	 */
-	protected function weightKg() {return $this->rr()->getWeightInKilogrammes();}
+	protected function weightKg() {return $this->rr()->getWeightInKg();}
 
 	/**
 	 * @used-by Df_Exline_Collector::_collect()
@@ -519,9 +514,9 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @param float $amount
 	 * @return float
 	 */
-	private function toBase($amount) {
-		return df_currency_h()->convertToBase($amount, $this->currencyCode(), $this->store());
-	}
+	private function toBase($amount) {return
+		df_currency_h()->convertToBase($amount, $this->currencyCode(), $this->store())
+	;}
 
 	/**
 	 * @override

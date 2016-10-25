@@ -46,14 +46,14 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 	 * @param string $cityNameUc
 	 * @return string[]|null
 	 */
-	public static function findD($cityNameUc) {return self::_find(__CLASS__, self::$D, $cityNameUc);}
+	public static function findD($cityNameUc) {return self::_find(self::$D, $cityNameUc);}
 
 	/**
 	 * @used-by Df_NovaPoshta_Collector::locationOrigId()
 	 * @param string $cityNameUc
 	 * @return string[]|null
 	 */
-	public static function findO($cityNameUc) {return self::_find(__CLASS__, self::$O, $cityNameUc);}
+	public static function findO($cityNameUc) {return self::_find(self::$O, $cityNameUc);}
 
 	/**
 	 * @param string $type

@@ -275,7 +275,7 @@ class Request extends \Df_Core_Model {
 	protected function host() {return $this->cfg(self::P__QUERY_HOST, '');}
 
 	/** @return array(string => string) */
-	protected function paramsQuery() {return $this->cfg(self::P__PARAMS_QUERY, array());}
+	protected function paramsQuery() {return $this->cfg(self::P__PARAMS_QUERY, []);}
 
 	/** @return string */
 	protected function path() {return $this->cfg(self::P__QUERY_PATH, '');}

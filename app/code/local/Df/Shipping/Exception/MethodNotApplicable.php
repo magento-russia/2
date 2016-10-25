@@ -13,16 +13,12 @@ class MethodNotApplicable extends \Df\Shipping\Exception {
 	}
 
 	/**
+	 * 2016-10-25
 	 * @override
-	 * @return bool
+	 * @see  \Df\Shipping\Exception::messageC()
+	 * @return string
 	 */
-	public function needNotifyAdmin() {return false;}
-
-	/**
-	 * @override
-	 * @return bool
-	 */
-	public function needNotifyDeveloper() {return false;}
+	public function messageC() {return $this->message();}
 
 	/**
 	 * 2016-10-24

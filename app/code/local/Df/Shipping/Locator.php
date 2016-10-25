@@ -26,24 +26,24 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 	 * @used-by Df_InTime_Locator::find()
 	 * @used-by Df_NovaPoshta_Locator::findD()
 	 * @used-by Df_NovaPoshta_Locator::findO()
-	 * @param string
 	 * @param string $type
-	 * @param string $nameUc
+	 * @param string $name
 	 * @param bool $starts [optional]
 	 * @return string|int|array(string|int)|null
 	 */
-	protected static function _find($class, $type, $nameUc, $starts = false) {
+	protected static function _find($type, $name, $starts = false) {
 		/** @var Df_Shipping_Locator $s */
-		static $s; if (!$s) {$s = df_sc($class, __CLASS__);}
+		static $s; if (!$s) {$s = df_sc(static::class, __CLASS__);}
+		$name = mb_strtoupper($name);
 		/** @var string|mixed $result */
 		if (!$starts) {
-			$result = dfa($s->map($type), $nameUc);
+			$result = dfa($s->map($type), $name);
 		}
 		else {
 			foreach ($s->map($type) as $key => $value) {
 				/** @var string $key */
 				/** @var string $value */
-				if (df_starts_with($key, $nameUc)) {
+				if (df_starts_with($key, $name)) {
 					$result = $value;
 					break;
 				}

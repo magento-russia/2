@@ -298,7 +298,7 @@ class Df_1C_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 		return
 			!$this->getProduct()->getWeightRaw($canLoadFull = false, $canUseConfig = false)
 			? null
-			: df_f2($this->getProduct()->getWeightInKilogrammes())
+			: df_f2($this->getProduct()->getWeightInKg())
 		;
 	}
 
