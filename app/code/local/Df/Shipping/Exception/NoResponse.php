@@ -1,4 +1,4 @@
 <?php
 namespace Df\Shipping\Exception;
-/** @used-by Df_Shipping_Request::getResponseAsText() */
+/** @used-by \Df\Shipping\Request::getResponseAsText() */
 class NoResponse extends Request {}

@@ -1,6 +1,6 @@
 <?php
 namespace Df\Shipping\Exception;
-use Df_Shipping_Request as R;
+use \Df\Shipping\Request as R;
 use \Exception as E;
 abstract class Request extends \Df\Shipping\Exception {
 	/**

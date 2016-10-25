@@ -145,7 +145,7 @@ class Df_Shipping_Response extends Df_Core_Model {
 		return $result;
 	}
 		
-	/** @return Df_Shipping_Request */
+	/** @return \Df\Shipping\Request */
 	protected function getRequest() {return $this->cfg(self::P__REQUEST);}
 
 	/** @return string */
@@ -162,7 +162,7 @@ class Df_Shipping_Response extends Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__REQUEST, Df_Shipping_Request::class)
+			->_prop(self::P__REQUEST, \Df\Shipping\Request::class)
 			->_prop(self::P__TEXT, DF_V_STRING_NE)
 		;
 	}
@@ -190,11 +190,11 @@ class Df_Shipping_Response extends Df_Core_Model {
 	const P__TEXT = 'text';
 	/**
 	 * @static
-	 * @param Df_Shipping_Request $request
+	 * @param \Df\Shipping\Request $request
 	 * @param string $text
 	 * @return Df_Shipping_Response
 	 */
-	public static function i(Df_Shipping_Request $request, $text) {
+	public static function i(\Df\Shipping\Request $request, $text) {
 		return new self(array(self::P__REQUEST => $request, self::P__TEXT => $text));
 	}
 }

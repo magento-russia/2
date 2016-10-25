@@ -30,7 +30,7 @@ class Df_Ems_Api_Locations_Regions extends Df_Ems_Api_Locations {
 		if (!isset($this->{__METHOD__})) {
 			// Я думаю, будет нормальным обновлять кэш раз в месяц.
 			// Уж пожизненно его точно не стоит хранить, ибо тарифы служб доставки меняются.
-			$this->{__METHOD__} = Df_Core_Model_Cache::i(Df_Shipping_Request::CACHE_TYPE, 30 * 86400);
+			$this->{__METHOD__} = Df_Core_Model_Cache::i(\Df\Shipping\Request::CACHE_TYPE, 30 * 86400);
 		}
 		return $this->{__METHOD__};
 	}

@@ -9,8 +9,8 @@ class Df_Shipping_Setup_2_30_0 extends Df_Core_Setup {
 	protected function _process() {
 		/** @var array(string => int) $cacheOptions */
 		$cacheOptions = Mage::app()->useCache();
-		if (!dfa($cacheOptions, Df_Shipping_Request::CACHE_TYPE)) {
-			$cacheOptions[Df_Shipping_Request::CACHE_TYPE] = 1;
+		if (!dfa($cacheOptions, \Df\Shipping\Request::CACHE_TYPE)) {
+			$cacheOptions[\Df\Shipping\Request::CACHE_TYPE] = 1;
 			Mage::app()->saveUseCache($cacheOptions);
 		}
 	}

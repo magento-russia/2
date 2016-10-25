@@ -1,6 +1,6 @@
 <?php
 namespace Df\Shipping\Exception;
-use Df_Shipping_Request as Req;
+use \Df\Shipping\Request as Req;
 use Df_Shipping_Response as Res;
 use \Exception as E;
 class UnexpectedResponse extends Request {

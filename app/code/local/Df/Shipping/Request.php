@@ -1,19 +1,21 @@
 <?php
-class Df_Shipping_Request extends Df_Core_Model {
+namespace Df\Shipping;
+use \Df_Shipping_Carrier as Carrier;
+use \Df_Shipping_Response as Response;
+class Request extends \Df_Core_Model {
 	/**
 	 * @used-by \Df\Shipping\Exception\Request::carrier()
-	 * @return Df_Shipping_Carrier
+	 * @return Carrier
 	 */
-	public function getCarrier() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $className */
-			$className = df_con($this, 'Carrier');
-			$this->{__METHOD__} = new $className;
-			df_assert($this->{__METHOD__} instanceof Df_Shipping_Carrier);
-			$this->{__METHOD__}->setStore(df_store());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getCarrier() {return dfc($this, function() {
+		/** @var string $className */
+		$className = df_con($this, 'Carrier');
+		/** @var Carrier $result */
+		$result = new $className;
+		df_assert($result instanceof Carrier);
+		$result->setStore(df_store());
+		return $result;
+	});}
 
 	/**
 	 * Не все запросы к серверу предназначены для получения срока доставки,
@@ -53,7 +55,7 @@ class Df_Shipping_Request extends Df_Core_Model {
 	 * это позволяет не дублировать данную функциональность в тех классах-потомках, где она требуется.
 	 * Другими словами, у нас ситуация: метод @see getRate() нужен примерно половине классов-потомков,
 	 * однако мы не можем вынести метод @see getRate() в общий подкласс-родитель той половины
-	 * классов потомков класса @see Df_Shipping_Request, которым требуется метод @see @see getRate(),
+	 * классов потомков класса @see \Df\Shipping\Request, которым требуется метод @see @see getRate(),
 	 * потому что у этих классов уже есть своя иерархия (иерархия по службе доставки: у API каждой службы
 	 * доставки ведь своя специфика и своя общая функциональность для всех потомков).
 	 * @uses _filterRate()
@@ -97,38 +99,38 @@ class Df_Shipping_Request extends Df_Core_Model {
 
 	/**
 	 * @used-by Df_Exline_Locator::_map()
-	 * @return Df_Shipping_Response
+	 * @return Response
 	 */
 	public function response() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Shipping_Response::i($this, $this->getResponseAsText());
+			$this->{__METHOD__} = Response::i($this, $this->getResponseAsText());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @used-by Df_Shipping_Request::getDeliveryTime()
+	 * @used-by \Df\Shipping\Request::getDeliveryTime()
 	 * @param string|int $value
 	 * @return int
 	 */
 	protected function _filterDeliveryTime($value) {return df_nat($value);}
 
 	/**
-	 * @used-by Df_Shipping_Request::getDeliveryTimeMax()
+	 * @used-by \Df\Shipping\Request::getDeliveryTimeMax()
 	 * @param string|int $value
 	 * @return int
 	 */
 	protected function _filterDeliveryTimeMax($value) {return $this->_filterDeliveryTime($value);}
 
 	/**
-	 * @used-by Df_Shipping_Request::getDeliveryTimeMin()
+	 * @used-by \Df\Shipping\Request::getDeliveryTimeMin()
 	 * @param string|int $value
 	 * @return int
 	 */
 	protected function _filterDeliveryTimeMin($value) {return $this->_filterDeliveryTime($value);}
 
 	/**
-	 * @used-by Df_Shipping_Request::getRate()
+	 * @used-by \Df\Shipping\Request::getRate()
 	 * @param float|int|string $value
 	 * @return float
 	 */
@@ -136,14 +138,14 @@ class Df_Shipping_Request extends Df_Core_Model {
 
 	/**
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @used-by Df_Shipping_Request::getDeliveryTime()
+	 * @used-by \Df\Shipping\Request::getDeliveryTime()
 	 * @return int|string
 	 */
 	protected function _getDeliveryTime() {df_abstract($this); return 0;}
 
 	/**
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @used-by Df_Shipping_Request::getRate()
+	 * @used-by \Df\Shipping\Request::getRate()
 	 * @return float|int|string
 	 */
 	protected function _getRate() {df_abstract($this); return 0;}
@@ -152,10 +154,10 @@ class Df_Shipping_Request extends Df_Core_Model {
 	 * Этот метод предназначен для перекрытия потомкими.
 	 * @see Df_RussianPost_Model_Official_Request_International::adjustHttpClient()
 	 * @used-by getHttpClient()
-	 * @param Zend_Http_Client $httpClient
+	 * @param \Zend_Http_Client $httpClient
 	 * @return void
 	 */
-	protected function adjustHttpClient(Zend_Http_Client $httpClient) {}
+	protected function adjustHttpClient(\Zend_Http_Client $httpClient) {}
 
 	/**
 	 * @used-by getDeliveryTime()
@@ -167,52 +169,48 @@ class Df_Shipping_Request extends Df_Core_Model {
 	 * @return mixed
 	 * @throws Exception
 	 */
-	protected function call($method) {
-		if (!isset($this->{__METHOD__}[$method])) {
-			try {
-				if (false === $this->_responseFailureChecked) {
-					$this->responseFailureDetect();
-					$this->_responseFailureChecked = true;
-				}
-				/**
-				 * Вызываем внутренний метод для извлечения данных из ответа сервера.
-				 * Например, для метода @see getRate() будет вызван метод @see _getRate().
-				 */
-				/** @var mixed $result */
-				$result = call_user_func([$this, '_' . $method]);
-				/**
-				 * Выполняем фильтрацию и проверку результата.
-				 * Например, для метода @see getRate() будет вызван метод @see _filterRate().
-				 */
-				/** @var string $filter */
-				$filter = '_filter' . df_trim_text_left($method, 'get');
-				if (method_exists($this, $filter)) {
-					$result = call_user_func([$this, $filter], $result);
-				}
-				$this->{__METHOD__}[$method] = $result;
+	protected function call($method) {return dfc($this, function($method) {
+		try {
+			if (false === $this->_responseFailureChecked) {
+				$this->responseFailureDetect();
+				$this->_responseFailureChecked = true;
 			}
-			catch (Exception $e) {
-				// В случае сбоя на стороне службы доставки расчёта тарифа
-				// (например, служба Деловые Линии может выдавать ответ:
-				// «Сервис временно недоступен. Попробуйте посчитать стоимость доставки чуть позже.»)
-				// надо удалить кэш,
-				// чтобы при следующем оформлении заказа модуль сделал запрос тарифа заново.
-				$this->removeCache();
-				throw $e;
+			/**
+			 * Вызываем внутренний метод для извлечения данных из ответа сервера.
+			 * Например, для метода @see getRate() будет вызван метод @see _getRate().
+			 */
+			/** @var mixed $result */
+			$result = call_user_func([$this, '_' . $method]);
+			/**
+			 * Выполняем фильтрацию и проверку результата.
+			 * Например, для метода @see getRate() будет вызван метод @see _filterRate().
+			 */
+			/** @var string $filter */
+			$filter = '_filter' . df_trim_text_left($method, 'get');
+			if (method_exists($this, $filter)) {
+				$result = call_user_func([$this, $filter], $result);
 			}
+			return $result;
 		}
-		return $this->{__METHOD__}[$method];
-	}
+		catch (Exception $e) {
+			// В случае сбоя на стороне службы доставки расчёта тарифа
+			// (например, служба Деловые Линии может выдавать ответ:
+			// «Сервис временно недоступен. Попробуйте посчитать стоимость доставки чуть позже.»)
+			// надо удалить кэш,
+			// чтобы при следующем оформлении заказа модуль сделал запрос тарифа заново.
+			$this->removeCache();
+			throw $e;
+		}
+	}, func_get_args());}
 
-	/** @return Df_Core_Model_Cache */
-	protected function getCache() {
-		if (!isset($this->{__METHOD__})) {
-			// Я думаю, будет нормальным обновлять кэш раз в месяц.
-			// Уж пожизненно его точно не стоит хранить, ибо тарифы служб доставки меняются.
-			$this->{__METHOD__} = Df_Core_Model_Cache::i(self::CACHE_TYPE, 30 * 86400);
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * Я думаю, будет нормальным обновлять кэш раз в месяц.
+	 * Уж пожизненно его точно не стоит хранить, ибо тарифы служб доставки меняются.
+	 * @return \Df_Core_Model_Cache
+	 */
+	protected function getCache() {return dfc($this, function() {return
+		\Df_Core_Model_Cache::i(self::CACHE_TYPE, 30 * 86400)
+	;});}
 
 	/** @return string[] */
 	protected function getCacheKeyParams() {
@@ -236,7 +234,7 @@ class Df_Shipping_Request extends Df_Core_Model {
 	/**
 	 * 2015-02-21
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @used-by Df_Shipping_Request::getDeliveryTime()
+	 * @used-by \Df\Shipping\Request::getDeliveryTime()
 	 * @return int
 	 */
 	protected function getDeliveryTimeInternal() {df_abstract($this); return 0;}
@@ -249,25 +247,20 @@ class Df_Shipping_Request extends Df_Core_Model {
 		'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0'
 	);}
 
-	/** @return Zend_Http_Client */
-	protected function getHttpClient() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * Обратите внимание,
-			 * что мы используем класс Zend_Http_Client, а не Varien_Http_Client,
-			 * потому что применение Varien_Http_Client зачастую приводит к сбою:
-			 * Error parsing body - doesn't seem to be a chunked message
-			 * @var Zend_Http_Client $httpClient
-			 */
-			$this->{__METHOD__} = new Zend_Http_Client();
-			$this->{__METHOD__}
-				->setHeaders($this->getHeaders())
-				->setConfig($this->getRequestConfuguration() + array('timeout' => 10))
-			;
-			$this->adjustHttpClient($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * Используем класс Zend_Http_Client, а не Varien_Http_Client,
+	 * потому что применение Varien_Http_Client зачастую приводит к сбою:
+	 * Error parsing body - doesn't seem to be a chunked message
+	 * @return \Zend_Http_Client
+	 */
+	protected function getHttpClient() {return dfc($this, function() {
+		/** @var \Zend_Http_Client $result */
+		$result = new \Zend_Http_Client();
+		$result->setHeaders($this->getHeaders());
+		$result->setConfig($this->getRequestConfuguration() + array('timeout' => 10));
+		$this->adjustHttpClient($result);
+		return $result;
+	});}
 
 	/** @return array(string => string) */
 	protected function getPostParameters() {return $this->cfg(self::P__POST_PARAMS, array());}
@@ -294,9 +287,9 @@ class Df_Shipping_Request extends Df_Core_Model {
 	protected function getRequestConfuguration() {return array();}
 
 	/** @return string */
-	protected function getRequestMethod() {
-		return $this->cfg(self::P__REQUEST_METHOD, Zend_Http_Client::GET);
-	}
+	protected function getRequestMethod() {return
+		$this->cfg(self::P__REQUEST_METHOD, \Zend_Http_Client::GET)
+	;}
 
 	/** @return string */
 	protected function getResponseAsTextInternal() {
@@ -310,26 +303,23 @@ class Df_Shipping_Request extends Df_Core_Model {
 
 	/**
 	 * 2016-10-24
-	 * @used-by Df_Shipping_Request::getUri()
+	 * @used-by \Df\Shipping\Request::getUri()
 	 * @return string
 	 */
 	protected function scheme() {return 'http';}
 
-	/** @return Zend_Uri_Http */
-	protected function getUri() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Uri_Http $result */
-			$result = Zend_Uri::factory($this->scheme());
-			$result->setHost($this->getQueryHost());
-			if ($this->getQueryPort()) {
-				$result->setPort($this->getQueryPort());
-			}
-			$result->setPath($this->getQueryPath());
-			$result->setQuery($this->getQuery());
-			$this->{__METHOD__} = $result;
+	/** @return \Zend_Uri_Http */
+	protected function getUri() {return dfc($this, function() {
+		/** @var \Zend_Uri_Http $result */
+		$result = \Zend_Uri::factory($this->scheme());
+		$result->setHost($this->getQueryHost());
+		if ($this->getQueryPort()) {
+			$result->setPort($this->getQueryPort());
 		}
-		return $this->{__METHOD__};
-	}
+		$result->setPath($this->getQueryPath());
+		$result->setQuery($this->getQuery());
+		return $result;
+	});}
 
 	/** @return bool */
 	protected function needCacheResponse() {return $this->getCache()->isEnabled();}
@@ -355,110 +345,102 @@ class Df_Shipping_Request extends Df_Core_Model {
 	 */
 	protected function responseFailureDetect() {}
 
-	/** @return string */
-	private function getCacheKey_Shipping() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * Обратите внимание, что ключ кэширования не должен содержать русские буквы,
-			 * потому что когда кэш хранится в файлах, то русские буквы будут заменены на символ «_»,
-			 * и имя файла будет выглядеть как «mage---b26_DF_LOCALIZATION_MODEL_MORPHER________».
-			 * Чтобы избавиться от русских букв при сохранении уникальности ключа, испольузем функцию md5.
-			 * @var string $cacheKey
-			 */
-			$this->{__METHOD__} = md5(implode('--', $this->getCacheKeyParams()));
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * Ключ кэширования не должен содержать русские буквы,
+	 * потому что когда кэш хранится в файлах, то русские буквы будут заменены на символ «_»,
+	 * и имя файла будет выглядеть как «mage---b26_DF_LOCALIZATION_MODEL_MORPHER________».
+	 * Чтобы избавиться от русских букв при сохранении уникальности ключа, испольузем функцию md5.
+	 * @return string
+	 */
+	private function getCacheKey_Shipping() {return dfc($this, function() {return
+		md5(implode('--', $this->getCacheKeyParams()))
+	;});}
 	
-	/** @return Zend_Http_Response */
-	private function getResponse() {
-		if (!isset($this->{__METHOD__})) {
-			$this->getHttpClient()->setUri($this->getUri());
-			if ($this->isItPost()) {
-				if ($this->getPostRawData()) {
-					$this->getHttpClient()->setRawData($this->getPostRawData());
+	/** @return \Zend_Http_Response */
+	private function getResponse() {return dfc($this, function() {
+		$this->getHttpClient()->setUri($this->getUri());
+		if ($this->isItPost()) {
+			if ($this->getPostRawData()) {
+				$this->getHttpClient()->setRawData($this->getPostRawData());
+			}
+			else {
+				if (!$this->needPostKeysWithSameName()) {
+					$this->getHttpClient()->setParameterPost($this->getPostParameters());
 				}
 				else {
-					if (!$this->needPostKeysWithSameName()) {
-						$this->getHttpClient()->setParameterPost($this->getPostParameters());
-					}
-					else {
-						$this->getHttpClient()->setRawData(
-							/**
-							 * Некоторые калькуляторы допускают несколько одноимённых опций.
-							 * http_build_query кодирует их как a[0]=1&a[1]=2&a[2]=3
-							 * Чтобы убрать квадратные скобки, используем регулярное выражение
-							 * http://www.php.net/manual/en/function.http-build-query.php#78603
-							 */
-							preg_replace(
-								'#%5B(?:[0-9]|[1-9][0-9]+)%5D=#u'
-								,'='
-								,http_build_query($this->getPostParameters(), '', '&')
-							)
-						);
-					}
+					$this->getHttpClient()->setRawData(
+						/**
+						 * Некоторые калькуляторы допускают несколько одноимённых опций.
+						 * http_build_query кодирует их как a[0]=1&a[1]=2&a[2]=3
+						 * Чтобы убрать квадратные скобки, используем регулярное выражение
+						 * http://www.php.net/manual/en/function.http-build-query.php#78603
+						 */
+						preg_replace(
+							'#%5B(?:[0-9]|[1-9][0-9]+)%5D=#u'
+							,'='
+							,http_build_query($this->getPostParameters(), '', '&')
+						)
+					);
 				}
 			}
-			$this->{__METHOD__} = $this->getHttpClient()->request($this->getRequestMethod());
-			/**
-			 * Обратите внимание,
-			 * что обычное @see Zend_Uri::__toString() здесь для сравнения использовать нельзя,
-			 * потому что Zend Framework свежих версий Magento CE (заметил в Magento CE 1.9.0.1)
-			 * зачем-то добавляет ко второму веб-адресу $this->getHttpClient()->getUri()
-			 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->getUri())
-			 * порт отсутствует.
-			 */
-			if (!Df\Zf\UriComparator::c($this->getUri(), $this->getHttpClient()->getUri())) {
-				/**
-				 * Сервер службы доставки перенаправил нас на новый адрес.
-				 * С большой вероятностью, это означает, что изменился программный интерфейс службы доставки
-				 * (или изменился веб-интерфейс калькулятора службы доставки,
-				 * если модуль работает посредством парсинга веб-интерфейса калькулятора).
-				 * Извещаем об этом разработчика.
-				 */
-				df_notify_me(
-					'Сервер службы доставки «%s»'
-					. ' перенаправил запрос «%s» с адреса «%s» на неожиданный адрес «%s».'
-					, $this->getCarrier()->getTitle()
-					, get_class($this)
-					, $this->getUri()->__toString()
-					, $this->getHttpClient()->getUri()->__toString()
-				);
-			}
 		}
-		return $this->{__METHOD__};
-	}
+		/** @var \Zend_Http_Response $result */
+		$result = $this->getHttpClient()->request($this->getRequestMethod());
+		/**
+		 * Обратите внимание,
+		 * что обычное @see Zend_Uri::__toString() здесь для сравнения использовать нельзя,
+		 * потому что Zend Framework свежих версий Magento CE (заметил в Magento CE 1.9.0.1)
+		 * зачем-то добавляет ко второму веб-адресу $this->getHttpClient()->getUri()
+		 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->getUri())
+		 * порт отсутствует.
+		 */
+		if (!\Df\Zf\UriComparator::c($this->getUri(), $this->getHttpClient()->getUri())) {
+			/**
+			 * Сервер службы доставки перенаправил нас на новый адрес.
+			 * С большой вероятностью, это означает, что изменился программный интерфейс службы доставки
+			 * (или изменился веб-интерфейс калькулятора службы доставки,
+			 * если модуль работает посредством парсинга веб-интерфейса калькулятора).
+			 * Извещаем об этом разработчика.
+			 */
+			df_notify_me(
+				'Сервер службы доставки «%s»'
+				. ' перенаправил запрос «%s» с адреса «%s» на неожиданный адрес «%s».'
+				, $this->getCarrier()->getTitle()
+				, get_class($this)
+				, $this->getUri()->__toString()
+				, $this->getHttpClient()->getUri()->__toString()
+			);
+		}
+		return $result;
+	});}
 
 	/**
 	 * @return string
 	 * @throws \Df\Shipping\Exception\NoResponse
 	 */
-	private function getResponseAsText() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$result = false;
-			if ($this->needCacheResponse()) {
-				$result = $this->getCache()->loadData($this->getCacheKey_Shipping());
-			}
-			if (false === $result) {
-				try {
-					$result = $this->getResponseAsTextInternal();
-				}
-				catch (Exception $e) {
-					$this->removeCache();
-					throw new \Df\Shipping\Exception\NoResponse($e, $this);
-				}
-				if ($this->needCacheResponse()) {
-					$this->getCache()->saveData($this->getCacheKey_Shipping(), $result);
-				}
-			}
-			$this->{__METHOD__} = $result;
+	private function getResponseAsText() {return dfc($this, function() {
+		/** @var string $result */
+		$result = false;
+		if ($this->needCacheResponse()) {
+			$result = $this->getCache()->loadData($this->getCacheKey_Shipping());
 		}
-		return $this->{__METHOD__};
-	}
+		if (false === $result) {
+			try {
+				$result = $this->getResponseAsTextInternal();
+			}
+			catch (Exception $e) {
+				$this->removeCache();
+				throw new \Df\Shipping\Exception\NoResponse($e, $this);
+			}
+			if ($this->needCacheResponse()) {
+				$this->getCache()->saveData($this->getCacheKey_Shipping(), $result);
+			}
+		}
+		return $result;
+	});}
 
 	/** @return bool */
-	private function isItPost() {return Zend_Http_Client::POST === $this->getRequestMethod();}
+	private function isItPost() {return \Zend_Http_Client::POST === $this->getRequestMethod();}
 
 	/** @return void */
 	private function removeCache() {
