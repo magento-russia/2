@@ -9,24 +9,21 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Abstract::cachedGlobal()
+	 * @see Df_Core_Model::cachedGlobal()
 	 * @return string[]
 	 */
 	protected function cachedGlobal() {return self::m(__CLASS__, 'map');}
 
 	/**
 	 * @used-by _find()
-	 * @used-by Df_Core_Model_Abstract::cacheLoadProperty()
-	 * @used-by Df_Core_Model_Abstract::cacheSaveProperty()
+	 * @used-by Df_Core_Model::cacheLoadProperty()
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @param string $type
 	 * @return array(string => string|int|array(string|int))
 	 */
-	protected function map($type) {
-		if (!isset($this->{__METHOD__}[$type])) {
-			$this->{__METHOD__}[$type] = df_key_uc($this->_map($type));
-		}
-		return $this->{__METHOD__}[$type];
-	}
+	protected function map($type) {return dfc($this, function($type) {return
+		df_key_uc($this->_map($type))
+	;}, func_get_args());}
 
 	/**
 	 * @used-by Df_Exline_Locator::findD()
@@ -41,15 +38,16 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 	 * @return string|int|array(string|int)|null
 	 */
 	protected static function _find($class, $type, $cityNameUc, $starts = false) {
-		/** Df_Shipping_Locator $s */
+		/** @var Df_Shipping_Locator $s */
 		static $s; if (!$s) {$s = df_sc($class, __CLASS__);}
 		/** @var string|mixed $result */
 		if (!$starts) {
 			$result = dfa($s->map($type), $cityNameUc);
 		}
 		else {
-			$result = null;
 			foreach ($s->map($type) as $key => $value) {
+				/** @var string $key */
+				/** @var string $value */
 				if (df_starts_with($key, $cityNameUc)) {
 					$result = $value;
 					break;
@@ -83,9 +81,9 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 	 * @param array(string => mixed)
 	 * @return array(string => mixed)
 	 */
-	protected static function cleanParenthesesK($map) {
-		return array_combine(self::cleanParentheses(array_keys($map)), array_values($map));
-	}
+	protected static function cleanParenthesesK($map) {return
+		array_combine(self::cleanParentheses(array_keys($map)), array_values($map))
+	;}
 
 	/**
 	 * 2015-03-24
@@ -94,11 +92,7 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 	 * @param string|string[] $name
 	 * @return string|string[]
 	 */
-	private static function cleanParentheses($name) {
-		return
-			is_array($name)
-			? array_map(__METHOD__, $name)
-			: df_first(self::explodeParentheses($name))
-		;
-	}
+	private static function cleanParentheses($name) {return
+		is_array($name) ? array_map(__METHOD__, $name) : df_first(self::explodeParentheses($name))
+	;}
 }

@@ -273,6 +273,14 @@
 				<Mage_Eav/>
 			</depends>
 		</Df_Eav>
+		<Df_Ems>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_Ems>
 		<Df_Excel>
 			<active>true</active>
 			<codePool>local</codePool>

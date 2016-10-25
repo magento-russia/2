@@ -84,6 +84,13 @@ function df_installed() {
 }
 
 /**
+ * 2016-10-25
+ * http://stackoverflow.com/a/1042533
+ * @return bool
+ */
+function df_is_cli() {return 'cli' === php_sapi_name();}
+
+/**
  * 2015-12-09
  * https://mage2.pro/t/299
  * @return bool

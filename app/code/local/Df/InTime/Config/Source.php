@@ -2,8 +2,8 @@
 class Df_InTime_Config_Source extends Df_Core_Model {
 	/**
 	 * @used-by Mage_Adminhtml_Block_System_Config_Form::initFields()
-	 * @used-by Df_Core_Model_Abstract::cacheLoadProperty()
-	 * @used-by Df_Core_Model_Abstract::cacheSaveProperty()
+	 * @used-by Df_Core_Model::cacheLoadProperty()
+	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @return array(string => string)
 	 */
 	public function departments() {
@@ -34,7 +34,7 @@ class Df_InTime_Config_Source extends Df_Core_Model {
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Abstract::cachedGlobal()
+	 * @see Df_Core_Model::cachedGlobal()
 	 * @return string[]
 	 */
 	protected function cachedGlobal() {return self::m(__CLASS__, 'departments');}

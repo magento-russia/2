@@ -40,7 +40,7 @@ abstract class Df_Core_Model_Session_Custom_Additional extends Df_Core_Model_Ses
 	private function isSessionStarted() {
 		/** http://php.net/manual/function.session-status.php#111945 */
 		return
-				('cli' !== php_sapi_name())
+				!df_is_cli()
 			&&
 				(
 						(function_exists('session_status'))

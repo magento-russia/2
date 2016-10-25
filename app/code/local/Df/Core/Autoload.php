@@ -25,8 +25,20 @@ class Df_Core_Autoload extends Varien_Autoload {
 		$classFile .= '.php';
 		// начало заплатки
 		ob_start();
+		/**
+		 * 2016-10-25
+		 * http://stackoverflow.com/a/20713159
+		 */
+		static $isPHPUnit;
+		if (!isset($isPHPUnit)) {
+			$isPHPUnit = 'cli' === php_sapi_name() && false !== strpos($_SERVER['argv'][0], 'phpunit');
+		}
 		/** @var mixed|null $result */
-		$result = include($classFile);
+		$result =
+			$isPHPUnit && 0 === strpos($classFile, 'Composer')
+			? false
+			: include($classFile)
+		;
 		/** @var string|bool $errorMessage */
 		/**
 		 * Используем @, чтобы избежать сбоя «Failed to delete buffer zlib output compression».
