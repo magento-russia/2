@@ -44,7 +44,7 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 			$request = new Df_NovaPoshta_Request(array(
 				Df_NovaPoshta_Request::P__QUERY_PATH => '/onlineorder/estimatedate'
 				,Df_NovaPoshta_Request::P__REQUEST_METHOD => Zend_Http_Client::POST
-				,Df_NovaPoshta_Request::P__POST_PARAMS => array('EstimateDateForm' => array(
+				,Df_NovaPoshta_Request::P__PARAMS_POST => array('EstimateDateForm' => array(
 					'date' => Zend_Date::now()->toString('dd.MM.yyyy')
 					,'recipientCityId' => $this->locationDestId()
 					,'recipientCity' => $this->locationDestName()
@@ -151,7 +151,7 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 		$request = new Df_NovaPoshta_Request([
 			Df_NovaPoshta_Request::P__QUERY_PATH => '/ru/delivery'
 			,Df_NovaPoshta_Request::P__REQUEST_METHOD => Zend_Http_Client::POST
-			,Df_NovaPoshta_Request::P__POST_PARAMS => ['DeliveryForm' => [
+			,Df_NovaPoshta_Request::P__PARAMS_POST => ['DeliveryForm' => [
 				'TimeIntervals' => 0
 				,'backDelivery' => 0
 				,'cargoType' => 'Cargo'

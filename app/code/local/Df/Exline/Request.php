@@ -2,11 +2,11 @@
 class Df_Exline_Request extends \Df\Shipping\Request {
 	/**
 	 * @override
-	 * @see \Df\Shipping\Request::getQueryHost()
+	 * @see \Df\Shipping\Request::host()
 	 * @used-by \Df\Shipping\Request::getUri()
 	 * @return string
 	 */
-	protected function getQueryHost() {return 'calculator.exline.kz';}
+	protected function host() {return 'calculator.exline.kz';}
 
 	/**
 	 * @used-by Df_Exline_Locator::map()
@@ -18,7 +18,7 @@ class Df_Exline_Request extends \Df\Shipping\Request {
 	public static function i($pathSuffix, array $queryParams = array()) {
 		return new self(array(
 			self::P__QUERY_PATH => '/api/' .$pathSuffix
-			,self::P__QUERY_PARAMS => $queryParams
+			,self::P__PARAMS_QUERY => $queryParams
 		));
 	}
 }

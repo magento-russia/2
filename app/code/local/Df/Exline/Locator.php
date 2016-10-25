@@ -30,7 +30,7 @@ class Df_Exline_Locator extends Df_Shipping_Locator {
 			/** @var string $name */
 			/** @var int $id */
 			/** @var string[] $parts */
-			$parts = self::explodeParentheses($name);
+			$parts = df_parentheses_explode($name);
 			if (1 < count($parts)) {
 				$unset[]= $name;
 				$alts[$parts[0]] = $id;

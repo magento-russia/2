@@ -1,10 +1,10 @@
 <?php
-class Df_Ems_Api_GetConditions extends Df_Ems_Request {
+class Df_Ems_Api_GetConditions extends \Df\Ems\Request {
 	/**
 	 * @override
 	 * @return float
 	 */
-	protected function _getRate() {return $this->getResponseParam('price');}
+	protected function _getRate() {return $this->p('price');}
 
 	/**
 	 * Для международных отправлений калькулятор EMS не сообщает сроки
@@ -18,19 +18,19 @@ class Df_Ems_Api_GetConditions extends Df_Ems_Request {
 	 * @override
 	 * @return int
 	 */
-	protected function _getDeliveryTimeMax() {return $this->getResponseParam('term/max');}
+	protected function _getDeliveryTimeMax() {return $this->p('term/max');}
 
 	/**
 	 * @override
 	 * @return int
 	 */
-	protected function _getDeliveryTimeMin() {return $this->getResponseParam('term/min');}
+	protected function _getDeliveryTimeMin() {return $this->p('term/min');}
 
 	/**
 	 * @override
 	 * @return array(string => string|int|float|bool)
 	 */
-	protected function getQueryParams() {
+	protected function paramsQuery() {
 		return array(
 			'method' => 'ems.calculate'
 			,'from' => $this->getSource()

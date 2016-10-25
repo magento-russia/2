@@ -84,7 +84,7 @@ class Request extends \Df_Core_Model {
 			,'Адрес: ' . $this->getUri()->__toString()
 		);
 		/** @var array(string => string) $params */
-		$params = $this->getPostParameters() + $this->getQueryParams();
+		$params = $this->paramsPost() + $this->paramsQuery();
 		if ($params || $this->getPostRawData()) {
 			$parts[]= 'Параметры:';
 			if ($params) {
@@ -218,14 +218,14 @@ class Request extends \Df_Core_Model {
 		$result = array(get_class($this), md5($this->getUri()->__toString()));
 		if ($this->isItPost()) {
 			/**
-			 * Обратите внимание, что $this->getPostParameters()
+			 * Обратите внимание, что $this->paramsPost()
 			 * может вернуть многомерный массив (например, так происходит в модуле Df_Pec).
 			 * Поэтому мы не используем "в лоб" array_merge, а используем http_build_query.
 			 */
 			$result['post'] =
 				$this->getPostRawData()
 				? $this->getPostRawData()
-				: http_build_query($this->getPostParameters())
+				: http_build_query($this->paramsPost())
 			;
 		}
 		return $result;
@@ -263,25 +263,25 @@ class Request extends \Df_Core_Model {
 	});}
 
 	/** @return array(string => string) */
-	protected function getPostParameters() {return $this->cfg(self::P__POST_PARAMS, array());}
+	protected function paramsPost() {return $this->cfg(self::P__PARAMS_POST, array());}
 
 	/** @return string */
 	protected function getPostRawData() {return '';}
 
 	/** @return string|array(string => string) */
-	protected function getQuery() {return df_clean($this->getQueryParams());}
+	protected function getQuery() {return df_clean($this->paramsQuery());}
 
 	/** @return string */
-	protected function getQueryHost() {return $this->cfg(self::P__QUERY_HOST, '');}
+	protected function host() {return $this->cfg(self::P__QUERY_HOST, '');}
 
 	/** @return array(string => string) */
-	protected function getQueryParams() {return $this->cfg(self::P__QUERY_PARAMS, array());}
+	protected function paramsQuery() {return $this->cfg(self::P__PARAMS_QUERY, array());}
 
 	/** @return string */
-	protected function getQueryPath() {return $this->cfg(self::P__QUERY_PATH, '');}
+	protected function path() {return $this->cfg(self::P__QUERY_PATH, '');}
 
 	/** @return int|null */
-	protected function getQueryPort() {return null;}
+	protected function port() {return null;}
 
 	/** @return array */
 	protected function getRequestConfuguration() {return array();}
@@ -312,11 +312,11 @@ class Request extends \Df_Core_Model {
 	protected function getUri() {return dfc($this, function() {
 		/** @var \Zend_Uri_Http $result */
 		$result = \Zend_Uri::factory($this->scheme());
-		$result->setHost($this->getQueryHost());
-		if ($this->getQueryPort()) {
-			$result->setPort($this->getQueryPort());
+		$result->setHost($this->host());
+		if ($this->port()) {
+			$result->setPort($this->port());
 		}
-		$result->setPath($this->getQueryPath());
+		$result->setPath($this->path());
 		$result->setQuery($this->getQuery());
 		return $result;
 	});}
@@ -365,7 +365,7 @@ class Request extends \Df_Core_Model {
 			}
 			else {
 				if (!$this->needPostKeysWithSameName()) {
-					$this->getHttpClient()->setParameterPost($this->getPostParameters());
+					$this->getHttpClient()->setParameterPost($this->paramsPost());
 				}
 				else {
 					$this->getHttpClient()->setRawData(
@@ -378,7 +378,7 @@ class Request extends \Df_Core_Model {
 						preg_replace(
 							'#%5B(?:[0-9]|[1-9][0-9]+)%5D=#u'
 							,'='
-							,http_build_query($this->getPostParameters(), '', '&')
+							,http_build_query($this->paramsPost(), '', '&')
 						)
 					);
 				}
@@ -456,9 +456,9 @@ class Request extends \Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__POST_PARAMS, DF_V_ARRAY, false)
+			->_prop(self::P__PARAMS_POST, DF_V_ARRAY, false)
 			->_prop(self::P__QUERY_HOST, DF_V_STRING, false)
-			->_prop(self::P__QUERY_PARAMS, DF_V_ARRAY, false)
+			->_prop(self::P__PARAMS_QUERY, DF_V_ARRAY, false)
 			->_prop(self::P__QUERY_PATH, DF_V_STRING, false)
 			->_prop(self::P__REQUEST_METHOD, DF_V_STRING, false)
 		;
@@ -468,9 +468,9 @@ class Request extends \Df_Core_Model {
 
 	const CACHE_TYPE = 'rm_shipping';
 	const MESSAGE__ERROR_PARSING_BODY = 'Error parsing body - doesn\'t seem to be a chunked message';
-	const P__POST_PARAMS = 'post_params';
+	const P__PARAMS_POST = 'post_params';
 	const P__QUERY_HOST = 'query_host';
-	const P__QUERY_PARAMS = 'query_params';
+	const P__PARAMS_QUERY = 'query_params';
 	const P__QUERY_PATH = 'query_path';
 	const P__REQUEST_METHOD = 'request_method';
 	const T__ERROR_MESSAGE__DEFAULT = 'Обращение к программному интерфейсу службы доставки привело к сбою.';

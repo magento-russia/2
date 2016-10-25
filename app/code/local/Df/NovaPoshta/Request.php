@@ -13,11 +13,11 @@ class Df_NovaPoshta_Request extends \Df\Shipping\Request {
 
 	/**
 	 * @override
-	 * @see \Df\Shipping\Request::getQueryHost()
+	 * @see \Df\Shipping\Request::host()
 	 * @used-by \Df\Shipping\Request::getUri()
 	 * @return string
 	 */
-	protected function getQueryHost() {return 'novaposhta.ua';}
+	protected function host() {return 'novaposhta.ua';}
 
 	/**
 	 * 2016-10-24

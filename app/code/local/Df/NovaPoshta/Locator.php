@@ -20,7 +20,7 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 			$nameOriginal = $domLi->textContent;
 			df_assert_string_not_empty($nameOriginal);
 			/** @var string $nameNormalized */
-			$nameNormalized = df_first(self::explodeParentheses($nameOriginal));
+			$nameNormalized = df_first(df_parentheses_explode($nameOriginal));
 			df_assert_string_not_empty($nameNormalized);
 			df_assert($domLi->attributes);
 			/** @var DOMNode|null $domValue */

@@ -1,7 +1,7 @@
 <?php
 // 2016-10-25
 namespace Df\Ems;
-class Localtor extends \Df_Shipping_Locator {
+class Locator extends \Df_Shipping_Locator {
 	/**
 	 * 2016-10-25
 	 * @override
