@@ -11,6 +11,7 @@ class Df_Ems_Collector extends Df_Shipping_Collector_Ru {
 	 * @return void
 	 */
 	protected function _collect() {
+		$this->checkWeightIsLE(31.5);
 		$this->addRate(
 			$this->cond()->getRate()
 			, null
