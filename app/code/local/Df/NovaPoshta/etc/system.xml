@@ -6,7 +6,16 @@
 				<nova-poshta>
 					<label>Украина. Нова Пошта</label>
 					<frontend_type>text</frontend_type>
-					<sort_order>51000</sort_order>
+<!--
+2016-10-26
+1) Первая цифра — код страны: Россия: 1, Украина: 2, Казахстан: 3
+2) Вторая цифра: 1, если название модуля начинается с русской буквы, 0 если иначе.
+3) Далее следуют 4 цифры: по 2 на каждую из первых 2-х букв названия,
+в соответствии с порядковым номером буквы в английском либо русском алфавите:
+https://en.wikipedia.org/wiki/English_alphabet
+https://ru.wikipedia.org/wiki/Русский_алфавит
+-->
+					<sort_order>211516</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
 					<show_in_store>1</show_in_store>
