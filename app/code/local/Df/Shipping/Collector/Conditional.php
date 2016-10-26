@@ -2,6 +2,7 @@
 abstract class Df_Shipping_Collector_Conditional extends Df_Shipping_Collector {
 	/**
 	 * @used-by _collect()
+	 * @see Df_Shipping_Collector_Conditional_WithForeign::childClass()
 	 * @return string
 	 */
 	abstract protected function childClass();

@@ -395,6 +395,11 @@ function df_module_id(Varien_Object $object, $separator) {
  * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * 2016-10-26
+ * Функция успешно работает с короткими именами классов:
+ * «A\B\C» => «A_B»
+ * «A» => A»
+ * https://3v4l.org/Jstvc
  * @param string|object $class [optional]
  * @param string $delimiter [optional]
  * @return string

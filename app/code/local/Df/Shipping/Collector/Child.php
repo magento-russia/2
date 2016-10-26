@@ -55,7 +55,7 @@ abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PARENT, 'Df_Shipping_Collector_Conditional');
+		$this->_prop(self::$P__PARENT, Df_Shipping_Collector_Conditional::class);
 	}
 	/** @var string */
 	private static $P__PARENT = 'parent';

@@ -7,7 +7,7 @@ abstract class Df_Shipping_Collector_Conditional_WithForeign
 	 * @used-by Df_Shipping_Collector_Conditional::_collect()
 	 * @return string
 	 */
-	protected function childClass() {
-		return $this->domesticIso2() === $this->countryDestIso2() ? 'Domestic' : 'Foreign';
-	}
+	protected function childClass() {return
+		$this->domesticIso2() === $this->countryDestIso2() ? 'Domestic' : 'Foreign'
+	;}
 }
