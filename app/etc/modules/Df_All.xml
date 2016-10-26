@@ -239,6 +239,14 @@
 				<Mage_Dataflow/>
 			</depends>
 		</Df_Dataflow>
+		<Df_Dellin>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_Dellin>
 		<Df_Directory>
 			<active>true</active>
 			<codePool>local</codePool>

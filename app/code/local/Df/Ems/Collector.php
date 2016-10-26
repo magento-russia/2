@@ -73,5 +73,3 @@ class Df_Ems_Collector extends Df_Shipping_Collector_Ru {
 		return $result;
 	});}
 }
-
-

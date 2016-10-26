@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<config>
+	<modules>
+		<Df_Dellin>
+			<author>Дмитрий Федюк</author>
+			<title>Деловые Линии</title>
+			<version>1.0.0</version>
+		</Df_Dellin>
+	</modules>
+	<global>
+		<blocks><df_dellin><class>Df_Dellin_Block</class></df_dellin></blocks>
+		<helpers><df_dellin><class>Df_Dellin_Helper</class></df_dellin></helpers>
+		<models><df_dellin><class>Df_Dellin</class></df_dellin></models>
+	</global>
+	<default>
+		<carriers>
+			<df-dellin>
+				<active>0</active>
+				<model>Df_Dellin_Carrier</model>
+				<!--
+					Заголовок для способа доставки.
+					Система отображает его при оформлении доставки
+					над перечнем тарифов данного способа доставки.
+				-->
+				<title>Деловые Линии</title>
+			</df-dellin>
+		</carriers>
+		<df_shipping>
+			<dellin>
+				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
+				<frontend__sort_order>0</frontend__sort_order>
+				<admin__declared_value_percent>0</admin__declared_value_percent>
+				<admin__fee_percent>0</admin__fee_percent>
+				<admin__fee_fixed>0</admin__fee_fixed>
+				<frontend__sallowspecific>0</frontend__sallowspecific>
+				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
+			</dellin>
+		</df_shipping>
+	</default>
+	<df>
+		<features>
+			<df-dellin>
+				<module>df_dellin</module>
+				<title>Деловые Линии</title>
+				<url>http://magento-forum.ru/forum/208/</url>
+			</df-dellin>
+		</features>
+	</df>
+</config>
