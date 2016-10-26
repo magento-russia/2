@@ -24,7 +24,7 @@ abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
 	 * @override
 	 * @see Df_Shipping_Collector::domesticIso2()
 	 * @used-by Df_Shipping_Collector::_result()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::childClass()
+	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::suffix()
 	 * @return string
 	 */
 	protected function domesticIso2() {return $this->parent()->domesticIso2();}
@@ -62,18 +62,15 @@ abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
 
 	/**
 	 * @used-by Df_Shipping_Collector_Conditional::_collect()
-	 * @param string $class
+	 * @param string $suffix
 	 * @param Df_Shipping_Collector_Conditional $parent
 	 * @return void
 	 */
-	public static function s_collect($class, Df_Shipping_Collector_Conditional $parent) {
-		/** @var string $m */
-		$m = df_module_name($parent->main());
-		/** @var bool $full */
-		$full = $class && df_starts_with($class, $m);
-		$class = $full ? $class : df_cc_class_($m, 'Collector', $class);
+	public static function s_collect($suffix, Df_Shipping_Collector_Conditional $parent) {
+		/** @var string $class */
+		$class = df_cts($parent) . df_class_delimiter($parent) . $suffix;
 		/** @var Df_Shipping_Collector_Child $i */
-		$i = df_ic($class, __CLASS__, array(self::$P__PARENT => $parent) + $parent->getData());
+		$i = df_ic($class, __CLASS__, [self::$P__PARENT => $parent] + $parent->getData());
 		$i->_collect();
 	}
 }

@@ -207,7 +207,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	protected function countryDest() {return $this->rr()->getDestinationCountry()->getNameRussian();}
 
 	/**
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::childClass()
+	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::suffix()
 	 * @return string|null
 	 */
 	protected function countryDestIso2() {return $this->rr()->getDestinationCountryId();}

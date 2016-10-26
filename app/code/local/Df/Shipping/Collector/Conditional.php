@@ -2,10 +2,10 @@
 abstract class Df_Shipping_Collector_Conditional extends Df_Shipping_Collector {
 	/**
 	 * @used-by _collect()
-	 * @see Df_Shipping_Collector_Conditional_WithForeign::childClass()
+	 * @see Df_Shipping_Collector_Conditional_WithForeign::suffix()
 	 * @return string
 	 */
-	abstract protected function childClass();
+	abstract protected function suffix();
 
 	/**
 	 * @override
@@ -15,7 +15,7 @@ abstract class Df_Shipping_Collector_Conditional extends Df_Shipping_Collector {
 	 */
 	protected function _collect() {
 		$this->collectPrepare();
-		Df_Shipping_Collector_Child::s_collect($this->childClass(), $this);
+		Df_Shipping_Collector_Child::s_collect($this->suffix(), $this);
 	}
 
 	/**

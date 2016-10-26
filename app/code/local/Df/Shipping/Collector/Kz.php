@@ -13,7 +13,7 @@ abstract class Df_Shipping_Collector_Kz extends Df_Shipping_Collector {
 	 * @override
 	 * @see Df_Shipping_Collector::domesticIso2()
 	 * @used-by Df_Shipping_Collector::collect()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::childClass()
+	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::suffix()
 	 * @return string
 	 */
 	protected function domesticIso2() {return 'KZ';}
