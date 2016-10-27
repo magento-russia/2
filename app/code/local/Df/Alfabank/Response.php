@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Alfabank_Response extends \Df\Payment\Response {
+namespace Df\Alfabank;
+abstract class Response extends \Df\Payment\Response {
 	/** @return string */
 	abstract protected function getKey_ErrorCode();
 
@@ -10,9 +11,9 @@ abstract class Df_Alfabank_Response extends \Df\Payment\Response {
 	public function getErrorCode() {return df_int($this->cfg($this->getKey_ErrorCode()));}
 
 	/** @return string */
-	public function getErrorCodeMeaning() {
-		return dfa($this->getErrorCodeMap(), $this->getErrorCode(), 'Неизвестно');
-	}
+	public function getErrorCodeMeaning() {return
+		dfa($this->getErrorCodeMap(), $this->getErrorCode(), 'Неизвестно')
+	;}
 
 	/**
 	 * @override
@@ -27,12 +28,10 @@ abstract class Df_Alfabank_Response extends \Df\Payment\Response {
 	protected function isSuccessful() {return 0 === $this->getErrorCode();}
 
 	/** @return array(int => string) */
-	protected function getErrorCodeMap() {
-		return array(
-			0 => 'Обработка запроса прошла без системных ошибок'
-			,5 => 'Ошибка значения параметра запроса'
-			,6 => 'Незарегистрированный OrderId'
-			,7 => 'Системная ошибка'
-		);
-	}
+	protected function getErrorCodeMap() {return [
+		0 => 'Обработка запроса прошла без системных ошибок'
+		,5 => 'Ошибка значения параметра запроса'
+		,6 => 'Незарегистрированный OrderId'
+		,7 => 'Системная ошибка'
+	];}
 }

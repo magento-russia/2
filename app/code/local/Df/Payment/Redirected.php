@@ -28,7 +28,7 @@ class Redirected extends \Df_Core_Model {
 	public static function is() {return df_bool(self::session()->getData(self::$REDIRECTED));}
 
 	/**
-	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
+	 * @used-by \Df\Alfabank\Action\CustomerReturn::_process()
 	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
 	 * @used-by Df_Checkout_Observer::controller_action_predispatch_checkout()
 	 * @used-by \Df\Payment\Action\Confirm::_process()

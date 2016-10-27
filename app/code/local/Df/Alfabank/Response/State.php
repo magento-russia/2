@@ -1,5 +1,7 @@
 <?php
-class Df_Alfabank_Response_State extends Df_Alfabank_Response {
+namespace Df\Alfabank\Response;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+class State extends \Df\Alfabank\Response {
 	/** @return int */
 	public function getAuthCode() {return $this->cfg(self::$P__AUTHCODE);}
 	/** @return string */
@@ -65,22 +67,17 @@ class Df_Alfabank_Response_State extends Df_Alfabank_Response {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getReportAsArray() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_filter(array(
-				'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
-				,'Состояние платежа' => $this->getPaymentStatusMeaning()
-				,'Детали сбоя' => $this->onFail($this->getErrorCodeMeaning())
-				,'Номер заказа' => $this->getOrderIncrementId()
-				,'Имя владельца карты' => $this->getCardholderName()
-				,'Номер карты' => $this->getCardNumberMasked()
-				,'Размер платежа' => df_f2($this->getPaymentAmount() / 100)
-				,'Код валюты' => $this->getCurrencyCode()
-				,'Адрес IP плательщика' => $this->getIpAddress()
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getReportAsArray() {return dfc($this, function() {return array_filter([
+		'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
+		,'Состояние платежа' => $this->getPaymentStatusMeaning()
+		,'Детали сбоя' => $this->onFail($this->getErrorCodeMeaning())
+		,'Номер заказа' => $this->getOrderIncrementId()
+		,'Имя владельца карты' => $this->getCardholderName()
+		,'Номер карты' => $this->getCardNumberMasked()
+		,'Размер платежа' => df_f2($this->getPaymentAmount() / 100)
+		,'Код валюты' => $this->getCurrencyCode()
+		,'Адрес IP плательщика' => $this->getIpAddress()
+	]);});}
 
 	/**
 	 * @override
@@ -96,13 +93,9 @@ class Df_Alfabank_Response_State extends Df_Alfabank_Response {
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {
-		return
-			$this->isTransactionClosed()
-			? Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT
-			: Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
-		;
-	}
+	public function getTransactionType() {return
+		$this->isTransactionClosed() ? T::TYPE_PAYMENT : T::TYPE_AUTH
+	;}
 
 	/**
 	 * @override
@@ -168,8 +161,8 @@ class Df_Alfabank_Response_State extends Df_Alfabank_Response {
 	/** @var string */
 	private static $P__PAYMENT_STATUS = 'OrderStatus';
 	/**
-	 * @used-by Df_Alfabank_Block_Info::getState()
-	 * @return Df_Alfabank_Response_State
+	 * @used-by \Df\Alfabank\Block\Info::getState()
+	 * @return \Df\Alfabank\Response\State
 	 */
 	public static function i() {return new self;}
 }

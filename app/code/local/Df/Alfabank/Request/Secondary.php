@@ -1,10 +1,11 @@
 <?php
+namespace Df\Alfabank\Request;
 /**
- * @method Df_Alfabank_Method method()
- * @method Df_Alfabank_Response getResponse()
- * @method Df_Alfabank_Config_Area_Service configS()
+ * @method \Df\Alfabank\Method method()
+ * @method \Df\Alfabank\Response getResponse()
+ * @method \Df\Alfabank\Config\Area\Service configS()
  */
-abstract class Df_Alfabank_Request_Secondary extends \Df\Payment\Request\Transaction {
+abstract class Secondary extends \Df\Payment\Request\Transaction {
 	/**
 	 * @used-by getUri()
 	 * @return string
@@ -13,7 +14,7 @@ abstract class Df_Alfabank_Request_Secondary extends \Df\Payment\Request\Transac
 
 	/**
 	 * @override
-	 * @return Zend_Uri_Http
+	 * @return \Zend_Uri_Http
 	 */
 	public function getUri() {
 		if (!isset($this->{__METHOD__})) {
@@ -49,7 +50,7 @@ abstract class Df_Alfabank_Request_Secondary extends \Df\Payment\Request\Transac
 	protected function getPaymentExternalId() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->payment()->getAdditionalInformation(
-				Df_Alfabank_Method::INFO__PAYMENT_EXTERNAL_ID
+				\Df\Alfabank\Method::INFO__PAYMENT_EXTERNAL_ID
 			);
 			df_result_string_not_empty($this->{__METHOD__});
 		}

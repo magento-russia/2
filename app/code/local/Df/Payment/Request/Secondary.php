@@ -111,7 +111,7 @@ abstract class Secondary extends \Df\Payment\Request {
 	protected static $P__PAYMENT = 'payment';
 
 	/**
-	 * @used-by Df_Alfabank_Request_State::i()
+	 * @used-by \Df\Alfabank\Request\State::i()
 	 * @used-by Df_Avangard_Request_State::i()
 	 * @param string $class
 	 * @param OP $payment

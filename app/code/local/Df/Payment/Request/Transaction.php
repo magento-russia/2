@@ -34,7 +34,7 @@ abstract class Transaction extends Secondary  {
 	 * @see \Df\Payment\Method::capture()
 	 * @see \Df\Payment\Method::refund()
 	 * @used-by getAmount()
-	 * @used-by Df_Alfabank_Request_Secondary::getParams()
+	 * @used-by \Df\Alfabank\Request\Secondary::getParams()
 	 * @return bool
 	 */
 	protected function hasAmount() {return !!$this->cfg(self::$P__AMOUNT);}

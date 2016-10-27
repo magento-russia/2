@@ -39,12 +39,12 @@ abstract class WithRedirect extends \Df\Payment\Method {
 	;}
 
 	/**
-	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Method)
+	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see \Df\Alfabank\Method)
 	 * не нуждается в получении параметров при перенаправлении на него покупателя.
 	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом
-	 * @see Df_Alfabank_Method::getRegistrationResponse()
+	 * @see \Df\Alfabank\Method::getRegistrationResponse()
 	 * и платёжный шлюз возвращает модулю уникальный веб-адрес
-	 * @see Df_Alfabank_Method::getPaymentPageUrl()
+	 * @see \Df\Alfabank\Method::getPaymentPageUrl()
 	 * на который модуль перенаправляет покупателя без параметров.
 	 * Если в других модулях потребуется такое же поведение (перенаправление без параметров),
 	 * то посмотрите, как устроен модуль Альфа-Банк.

@@ -399,7 +399,7 @@ abstract class Confirm extends \Df\Payment\Action {
 	protected function paramC($key, $d = null) {return $this->param($this->const_($key), $d);}
 
 	/**
-	 * @used-by Df_Alfabank_Action_CustomerReturn::processException()
+	 * @used-by \Df\Alfabank\Action\CustomerReturn::processException()
 	 * @used-by Df_Avangard_Action_CustomerReturn::processException()
 	 * @used-by Df_Psbank_Action_CustomerReturn::processException()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::processException()
@@ -408,7 +408,7 @@ abstract class Confirm extends \Df\Payment\Action {
 	protected function redirectToCheckout() {$this->redirect(RM_URL_CHECKOUT);}
 
 	/**
-	 * @used-by Df_Alfabank_Action_CustomerReturn::processResponseForError()
+	 * @used-by \Df\Alfabank\Action\CustomerReturn::processResponseForError()
 	 * @used-by Df_Avangard_Action_CustomerReturn::processResponseForError()
 	 * @used-by Df_Psbank_Action_CustomerReturn::_process()
 	 * @return void
@@ -416,7 +416,7 @@ abstract class Confirm extends \Df\Payment\Action {
 	protected function redirectToFail() {$this->redirectRaw(df_url_checkout_fail());}
 
 	/**
-	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
+	 * @used-by \Df\Alfabank\Action\CustomerReturn::_process()
 	 * @return void
 	 */
 	protected function redirectToSuccess() {$this->redirectRaw(df_url_checkout_success());}

@@ -51,7 +51,7 @@ abstract class Request extends \Df_Core_Model {
 	;});}
 
 	/**
-	 * @used-by Df_Alfabank_Request_Payment::getResponseAsArray()
+	 * @used-by \Df\Alfabank\Request\Payment::getResponseAsArray()
 	 * @used-by Df_Psbank_Request_Secondary::getResponsePayment()
 	 * @return \Mage_Payment_Model_Info
 	 */
@@ -110,7 +110,7 @@ abstract class Request extends \Df_Core_Model {
 	 * а какой-нибудь из сущностей Magento, соответсвующих платежу:
 	 * возможно, @see Mage_Sales_Model_Order_Payment
 	 * @used-by description()
-	 * @used-by Df_Alfabank_Request_Payment::_params()
+	 * @used-by \Df\Alfabank\Request\Payment::_params()
 	 * @used-by Df_Assist_Request_Payment::_params()
 	 * @used-by Df_Avangard_Request_Payment::getRequestDocument()
 	 * @used-by Df_EasyPay_Request_Payment::_params()

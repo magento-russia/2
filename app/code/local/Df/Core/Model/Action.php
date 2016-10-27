@@ -237,7 +237,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by rmRequest()
-	 * @used-by Df_Alfabank_Action_CustomerReturn::getRequest()
+	 * @used-by \Df\Alfabank\Action\CustomerReturn::getRequest()
 	 * @return Request
 	 */
 	protected function request() {return dfc($this, function() {

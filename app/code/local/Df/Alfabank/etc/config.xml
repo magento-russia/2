@@ -8,7 +8,6 @@
 		</Df_Alfabank>
 	</modules>
 	<global>
-		<blocks><df_alfabank><class>Df_Alfabank_Block</class></df_alfabank></blocks>
 		<helpers><df_alfabank><class>Df_Alfabank_Helper</class></df_alfabank></helpers>
 	</global>
 	<default>
@@ -50,7 +49,7 @@
 		-->
 		<payment>
 			<df-alfabank>
-				<model>Df_Alfabank_Method</model>
+				<model>Df\Alfabank\Method</model>
 			</df-alfabank>
 		</payment>
 	</default>

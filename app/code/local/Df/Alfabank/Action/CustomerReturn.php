@@ -1,15 +1,16 @@
 <?php
-/** @method Df_Alfabank_Method method() */
-class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
+namespace Df\Alfabank\Action;
+/** @method \Df\Alfabank\Method method() */
+class CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::request()
-	 * @return Zend_Controller_Request_Abstract
+	 * @return \Zend_Controller_Request_Abstract
 	 */
 	protected function request() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Controller_Request_Abstract $result */
-			$this->{__METHOD__} = new Zend_Controller_Request_Http;
+			/** @var \Zend_Controller_Request_Abstract $result */
+			$this->{__METHOD__} = new \Zend_Controller_Request_Http;
 			$this->{__METHOD__}->setParams(
 				$this->getRequestState()->getResponse()->getData() + parent::request()->getParams()
 			);
@@ -42,15 +43,15 @@ class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		if ($e instanceof \Df\Payment\Exception && isset($this->{__CLASS__ . '::getRequestState'})) {
 			$this->logException($e);
 		}
 		else {
-			Mage::logException($e);
+			\Mage::logException($e);
 		}
 		$this->showExceptionOnCheckoutScreen($e);
 		$this->redirectToCheckout();
@@ -85,7 +86,7 @@ class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			if (810 !== df_nat($this->rCurrencyC())) {
 				df_error('Заказ был оплачен не в рублях');
 			}
-			/** @var Mage_Sales_Model_Order_Invoice $invoice */
+			/** @var \Mage_Sales_Model_Order_Invoice $invoice */
 			$invoice = $this->order()->prepareInvoice();
 			$invoice->register();
 			/**
@@ -103,8 +104,8 @@ class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			}
 			$this->saveInvoice($invoice);
 			$this->order()->setState(
-				Mage_Sales_Model_Order::STATE_PROCESSING
-				,Mage_Sales_Model_Order::STATE_PROCESSING
+				\Mage_Sales_Model_Order::STATE_PROCESSING
+				,\Mage_Sales_Model_Order::STATE_PROCESSING
 				,$this->messageSuccess($invoice)
 				,true
 			);
@@ -116,7 +117,7 @@ class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			 * @see \Df\Payment\Action\Confirm::process()
 			 * здесь необходимость вызова
 			 * @uses \Df\Payment\Redirected::off() не вызывает сомнений,
-			 * потому что @see Df_Alfabank_Action_CustomerReturn:process()
+			 * потому что @see \Df\Alfabank\Action\CustomerReturn:process()
 			 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
 			 */
 			\Df\Payment\Redirected::off();
@@ -125,19 +126,19 @@ class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processResponseForError(Exception $e) {$this->redirectToFail();}
+	protected function processResponseForError(\Exception $e) {$this->redirectToFail();}
 	
-	/** @return Df_Alfabank_Request_State */
+	/** @return \Df\Alfabank\Request\State */
 	private function getRequestState() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Alfabank_Request_State::i($this->payment());
+			$this->{__METHOD__} = \Df\Alfabank\Request\State::i($this->payment());
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Alfabank_Response_State */
+	/** @return \Df\Alfabank\Response\State */
 	private function getResponseState() {return $this->getRequestState()->getResponse();}
 }

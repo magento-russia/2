@@ -1,9 +1,10 @@
 <?php
-class Df_Alfabank_Block_Info extends \Df\Payment\Block\Info {
-	/** @return Df_Alfabank_Response_State */
+namespace Df\Alfabank\Block;
+class Info extends \Df\Payment\Block\Info {
+	/** @return \Df\Alfabank\Response\State */
 	public function getState() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Alfabank_Response_State::i();
+			$this->{__METHOD__} = \Df\Alfabank\Response\State::i();
 			$this->{__METHOD__}->loadFromPaymentInfo($this->getInfo());
 		}
 		return $this->{__METHOD__};

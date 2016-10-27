@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Alfabank_Config_Area_Service configS() */
-class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
+namespace Df\Alfabank;
+/** @method \Df\Alfabank\Config\Area\Service configS() */
+class Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @see \Df\Payment\Method::canCapture()
 	 * @override
@@ -39,18 +40,18 @@ class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
 	 * автоматизированное разблокирование (возврат покупателю)
 	 * ранее зарезервированных (но не снятых со счёта покупателя) средств
 	 * @override
-	 * @param Varien_Object $payment
+	 * @param \Varien_Object $payment
 	 * @return bool
 	 */
-	public function canVoid(Varien_Object $payment) {return true;}
+	public function canVoid(\Varien_Object $payment) {return true;}
 
 	/**
-	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Method)
+	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see \Df\Alfabank\Method)
 	 * не нуждается в получении параметров при перенаправлении на него покупателя.
 	 * Вместо этого модуль Альфа-Банк передаёт эти параметры предварительным запросом
-	 * @see Df_Alfabank_Method::getRegistrationResponse()
+	 * @see \Df\Alfabank\Method::getRegistrationResponse()
 	 * и платёжный шлюз возвращает модулю уникальный веб-адрес
-	 * @see Df_Alfabank_Method::getPaymentPageUrl()
+	 * @see \Df\Alfabank\Method::getPaymentPageUrl()
 	 * на который модуль перенаправляет покупателя без параметров.
 	 * @override
 	 * @see \Df\Payment\Method\WithRedirect::getPaymentPageParams()
@@ -78,9 +79,9 @@ class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
 			 * и внутри try расположен только вызов @uses Zend_Json::decode()
 			 */
 			try {
-				$result = Zend_Json::decode($json);
+				$result = \Zend_Json::decode($json);
 			}
-			catch (Zend_Json_Exception $e) {
+			catch (\Zend_Json_Exception $e) {
 				$this->logFailureHighLevel(
 					'Платёжный шлюз при регистрации заказа в системе вернул недопустимый ответ: «%s».'
 					,$this->getRegistrationResponseJson()
@@ -112,8 +113,8 @@ class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
 			 * Российской сборки Magento, и хочется, чтобы здесь всё было надёжно, устойчиво,
 			 * и в случае сбоев диагностика была предельно ясной.
 			 */
-			/** @var Zend_Http_Client $httpClient */
-			$httpClient = new Zend_Http_Client();
+			/** @var \Zend_Http_Client $httpClient */
+			$httpClient = new \Zend_Http_Client();
 			$httpClient
 				/**
 				 * Обратите внимание, что вызывать нужно именно родительский метод
@@ -121,7 +122,7 @@ class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
 				 * а не getPaymentPageParams()
 				 */
 				->setUri($this->configS()->getRegistrationUri(parent::getPaymentPageParams()))
-				->setMethod(Zend_Http_Client::GET)
+				->setMethod(\Zend_Http_Client::GET)
 			;
 			/** @var string $responseAsJson */
 			$this->{__METHOD__} = $httpClient->request()->getBody();
@@ -145,7 +146,7 @@ class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
 
 	/**
 	 * @used-by getRegistrationResponse()
-	 * @used-by Df_Alfabank_Request_Secondary::getPaymentExternalId()
+	 * @used-by \Df\Alfabank\Request\Secondary::getPaymentExternalId()
 	 */
 	const INFO__PAYMENT_EXTERNAL_ID = 'order_external_id';
 }

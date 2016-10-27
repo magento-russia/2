@@ -75,7 +75,7 @@ abstract class Method
 	/**
 	 * Важно для витрины вернуть true, чтобы
 	 * @see \Df\Payment\Action\Confirm::process() и другие аналогичные методы
-	 * (например, @see Df_Alfabank_Action_CustomerReturn::process())
+	 * (например, @see \Df\Alfabank\Action\CustomerReturn::process())
 	 * могли вызвать @see Mage_Sales_Model_Order_Invoice::capture().
 	 *
 	 * Для административной части возвращайте true только в том случае,
@@ -262,7 +262,7 @@ abstract class Method
 	 */
 	public function constManager() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df\Payment\Config\Manager\ConstT::s($this);
+			$this->{__METHOD__} = \Df\Payment\Config\Manager\ConstT::s($this);
 		}
 		return $this->{__METHOD__};
 	}
@@ -283,12 +283,10 @@ abstract class Method
 	 * @override
 	 * @see Mage_Payment_Model_Method_Abstract::getConfigData()
 	 * @param string $field
-	 * @param Df_Core_Model_StoreM|int|string|bool|null $storeId [optional]
+	 * @param \Df_Core_Model_StoreM|int|string|bool|null $storeId [optional]
 	 * @return mixed
 	 */
-	public function getConfigData($field, $storeId = null) {
-		return $this->config()->getVar($field);
-	}
+	public function getConfigData($field, $storeId = null) {return $this->config()->getVar($field);}
 
 	/**
 	 * @override
@@ -330,9 +328,7 @@ abstract class Method
 	 * @override
 	 * @return string
 	 */
-	public function getFormBlockType() {return
-		df_con($this, 'Block\Form', \Df\Payment\Block\Form::class)
-	;}
+	public function getFormBlockType() {return df_con($this, 'Block\Form', Block\Form::class);}
 
 	/**
 	 * Этот метод вызывается только одним методом:
@@ -340,9 +336,7 @@ abstract class Method
 	 * @override
 	 * @return string
 	 */
-	public function getInfoBlockType() {return
-		df_con($this, 'Block\Info', \Df\Payment\Block\Info::class)
-	;}
+	public function getInfoBlockType() {return df_con($this, 'Block\Info', Block\Info::class);}
 
 	/**
 	 * @override

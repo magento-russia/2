@@ -1,5 +1,6 @@
 <?php
-class Df_Alfabank_Request_Void extends Df_Alfabank_Request_Secondary {
+namespace Df\Alfabank\Request;
+class Void extends \Df\Alfabank\Request\Secondary {
 	/**
 	 * @override
 	 * @return string
@@ -8,7 +9,7 @@ class Df_Alfabank_Request_Void extends Df_Alfabank_Request_Secondary {
 
 	/**
 	 * @override
-	 * @used-by Df_Alfabank_Request_Secondary::getUri()
+	 * @used-by \Df\Alfabank\Request\Secondary::getUri()
 	 * @return string
 	 */
 	protected function getServiceName() {return 'reverse';}

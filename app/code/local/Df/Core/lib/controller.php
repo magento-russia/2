@@ -42,11 +42,11 @@ function df_action(Mage_Core_Controller_Varien_Action $controller, $class = null
 	/** @var string $m */
 	$m = df_module_name($controller);
 	/** @var bool $full */
-	$full = $class && df_starts_with($class, $m);
+	$full = $class && df_class_my($class);
 	if (!$class) {
 		// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
-		$class = df_trim_text_right(df_last(df_explode_class($controller)), 'Controller');
+		$class = df_trim_text_right(df_class_last($controller), 'Controller');
 	}
-	Df_Core_Model_Action::pc($full ? $class : df_cc_class_($m, 'Action', $class), $controller);
+	Df_Core_Model_Action::pc($full ? $class : df_cc_class($m, 'Action', $class), $controller);
 }
 
