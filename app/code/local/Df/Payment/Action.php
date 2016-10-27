@@ -14,7 +14,7 @@ abstract class Action extends \Df_Core_Model_Action {
 	abstract protected function order();
 
 	/**
-	 * @used-by Df_Interkassa_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by \Df\Interkassa\Action\Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by Df_LiqPay_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by Df_OnPay_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by \Df\Payment\Action::_process()

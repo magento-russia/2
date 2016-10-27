@@ -1,2 +1,3 @@
 <?php
-class Df_Interkassa_Method extends \Df\Payment\Method\WithRedirect {}
+namespace Df\Interkassa;
+class Method extends \Df\Payment\Method\WithRedirect {}

@@ -115,7 +115,7 @@ abstract class Request extends \Df_Core_Model {
 	 * @used-by \Df\Avangard\Request\Payment::getRequestDocument()
 	 * @used-by \Df\EasyPay\Request\Payment::_params()
 	 * @used-by \Df\EasyPay\Request\Payment::getSignature()
-	 * @used-by Df_Interkassa_Request_Payment::_params()
+	 * @used-by \Df\Interkassa\Request\Payment::_params()
 	 * @used-by Df_Kkb_Request_Payment::orderIId()
 	 * @used-by Df_LiqPay_Request_Payment::getParamsForXml()
 	 * @used-by Df_Moneta_Request_Payment::_params()

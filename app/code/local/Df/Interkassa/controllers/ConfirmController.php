@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_Interkassa_Action_Confirm */
+/** @uses \Df\Interkassa\Action\Confirm */
 class Df_Interkassa_ConfirmController extends \Df\Core\Controller {}
