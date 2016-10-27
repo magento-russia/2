@@ -1,2 +1,3 @@
 <?php
-class Df_Assist_Method extends \Df\Payment\Method\WithRedirect {}
+namespace Df\Assist;
+class Method extends \Df\Payment\Method\WithRedirect {}

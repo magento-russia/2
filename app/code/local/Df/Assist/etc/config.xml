@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-assist>
-				<model>Df_Assist_Method</model>
+				<model>Df\Assist\Method</model>
 			</df-assist>
 		</payment>
 	</default>

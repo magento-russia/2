@@ -11,7 +11,7 @@ abstract class Payment extends \Df\Payment\Request {
 
 	/**
 	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	public function city() {return $this->address()->getCity();}
@@ -23,7 +23,7 @@ abstract class Payment extends \Df\Payment\Request {
 	protected function countryName() {return $this->address()->getCountryModel()->getName();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function currencyCode() {return $this->configS()->getCurrencyCodeInServiceFormat();}
@@ -42,7 +42,7 @@ abstract class Payment extends \Df\Payment\Request {
 	;});}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function email() {return $this->order()->getCustomerEmail();}
@@ -80,13 +80,13 @@ abstract class Payment extends \Df\Payment\Request {
 	];});}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function iso3() {return $this->address()->getCountryModel()->getIso3Code();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @used-by Df_OnPay_Request_Payment::_params()
 	 * @used-by Df_RbkMoney_Request_Payment::_params()
 	 * @used-by Df_WebPay_Request_Payment::_params()
@@ -95,19 +95,19 @@ abstract class Payment extends \Df\Payment\Request {
 	protected function localeCode() {return $this->configS()->getLocaleCodeInServiceFormat();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function nameFirst() {return $this->order()->getCustomerFirstname();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function nameLast() {return $this->order()->getCustomerLastname();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function nameMiddle() {return $this->order()->getCustomerMiddlename();}
@@ -123,13 +123,13 @@ abstract class Payment extends \Df\Payment\Request {
 	protected function order() {return df_last_order();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function phone() {return df_nts($this->address()->getTelephone());}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function postCode() {return df_nts($this->address()->getPostcode());}
@@ -141,13 +141,13 @@ abstract class Payment extends \Df\Payment\Request {
 	protected function preprocessParams(array $params) {return $this->chopParams($params);}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function regionCode() {return $this->region()->getCode();}
 
 	/**
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function street() {return implode(' ', df_clean($this->address()->getStreet()));}

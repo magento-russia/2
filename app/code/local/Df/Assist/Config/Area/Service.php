@@ -1,5 +1,6 @@
 <?php
-class Df_Assist_Config_Area_Service extends \Df\Payment\Config\Area\Service {
+namespace Df\Assist\Config\Area;
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @override
 	 * @return string
@@ -23,8 +24,8 @@ class Df_Assist_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	 */
 	private function getUrl($type) {
 		df_param_string_not_empty($type, 0);
-		/** @var Zend_Uri_Http $uri */
-		$uri = Zend_Uri::factory();
+		/** @var \Zend_Uri_Http $uri */
+		$uri = \Zend_Uri::factory();
 		$uri->setHost($this->getDomain());
 		$uri->setPath('/' . $this->constManager()->getUrl($type, false));
 		/** @var string $result */

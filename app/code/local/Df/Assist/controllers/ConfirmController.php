@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_Assist_Action_Confirm */
+/** @uses \Df\Assist\Action\Confirm */
 class Df_Assist_ConfirmController extends \Df\Core\Controller {}

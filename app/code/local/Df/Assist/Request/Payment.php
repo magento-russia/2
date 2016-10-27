@@ -1,14 +1,15 @@
 <?php
-/** @method Df_Assist_Method method() */
-class Df_Assist_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\Assist\Request;
+/** @method \Df\Assist\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()
 	 * @used-by \Df\Payment\Request\Payment::params()
 	 * @return array(string => string|int)
 	 */
-	protected function _params() {
-		return array_fill_keys($this->configS()->getDisabledPaymentMethods(), 0) + array(
+	protected function _params() {return
+		array_fill_keys($this->configS()->getDisabledPaymentMethods(), 0) + [
 			'Address' => $this->street()
 			,'City' => $this->city()
 			,'Country' => $this->iso3()
@@ -29,6 +30,6 @@ class Df_Assist_Request_Payment extends \Df\Payment\Request\Payment {
 			,'Merchant_ID' => $this->shopId()
 			,'URL_RETURN_OK' => df_url_checkout_success()
 			,'URL_RETURN_NO' => df_url_checkout_fail()
-		);
-	}
+		]
+	;}
 }

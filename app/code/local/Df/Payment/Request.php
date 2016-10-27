@@ -111,7 +111,7 @@ abstract class Request extends \Df_Core_Model {
 	 * возможно, @see Mage_Sales_Model_Order_Payment
 	 * @used-by description()
 	 * @used-by \Df\Alfabank\Request\Payment::_params()
-	 * @used-by Df_Assist_Request_Payment::_params()
+	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @used-by Df_Avangard_Request_Payment::getRequestDocument()
 	 * @used-by Df_EasyPay_Request_Payment::_params()
 	 * @used-by Df_EasyPay_Request_Payment::getSignature()
