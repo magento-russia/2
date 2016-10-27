@@ -1,14 +1,15 @@
 <?php
-/** @method Df_Avangard_Method method() */
-class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
+namespace Df\Avangard\Action;
+/** @method \Df\Avangard\Method method() */
+class CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
-	 * @return Zend_Controller_Request_Abstract
+	 * @return \Zend_Controller_Request_Abstract
 	 */
 	protected function request() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Controller_Request_Abstract $result */
-			$this->{__METHOD__} = new Zend_Controller_Request_Http;
+			/** @var \Zend_Controller_Request_Abstract $result */
+			$this->{__METHOD__} = new \Zend_Controller_Request_Http;
 			$this->{__METHOD__}->setParams(
 				$this->getRequestState()->getResponse()->getData() + parent::request()->getParams()
 			);
@@ -21,9 +22,7 @@ class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function rkOII() {
-		return \Df\Payment\Method\WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
-	}
+	protected function rkOII() {return \Df\Payment\Method\WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;}
 
 	/**
 	 * @override
@@ -33,15 +32,15 @@ class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		if ($e instanceof \Df\Payment\Exception && isset($this->{__CLASS__ . '::getRequestState'})) {
 			$this->logException($e);
 		}
 		else {
-			Mage::logException($e);
+			\Mage::logException($e);
 		}
 		$this->showExceptionOnCheckoutScreen($e);
 		$this->redirectToCheckout();
@@ -76,14 +75,14 @@ class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			if ($this->getResponseState()->isPaymentServiceError()) {
 				/** @var string $resultCode */
 				$resultCode = $this->param('result_code');
-				/** @var Df_Avangard_Response_Registration $responseRegistration */
-				$responseRegistration = Df_Avangard_Response_Registration::i();
+				/** @var \Df\Avangard\Response\Registration $responseRegistration */
+				$responseRegistration = \Df\Avangard\Response\Registration::i();
 				$responseRegistration->loadFromPaymentInfo($this->payment());
 				if ($responseRegistration->getPasswordForPaymentResponseSuccess() !== $resultCode) {
 					$this->throwException('Заказ не был оплачен.');
 				}
 			}
-			/** @var Mage_Sales_Model_Order_Invoice $invoice */
+			/** @var \Mage_Sales_Model_Order_Invoice $invoice */
 			$invoice = $this->order()->prepareInvoice();
 			$invoice->register();
 			/**
@@ -99,8 +98,8 @@ class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			$invoice->capture();
 			$this->saveInvoice($invoice);
 			$this->order()->setState(
-				Mage_Sales_Model_Order::STATE_PROCESSING
-				,Mage_Sales_Model_Order::STATE_PROCESSING
+				\Mage_Sales_Model_Order::STATE_PROCESSING
+				,\Mage_Sales_Model_Order::STATE_PROCESSING
 				,$this->messageSuccess($invoice)
 				,true
 			);
@@ -111,7 +110,7 @@ class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			 * В отличие от метода
 			 * @see \Df\Payment\Action\Confirm::process()
 			 * здесь необходимость вызова @uses \Df\Payment\Redirected::off()
-			 * не вызывает сомнений, потому что @see Df_Avangard_Action_CustomerReturn:process()
+			 * не вызывает сомнений, потому что @see \Df\Avangard\Action\CustomerReturn:process()
 			 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
 			 */
 			\Df\Payment\Redirected::off();
@@ -120,19 +119,19 @@ class Df_Avangard_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processResponseForError(Exception $e) {$this->redirectToFail();}
+	protected function processResponseForError(\Exception $e) {$this->redirectToFail();}
 	
-	/** @return Df_Avangard_Request_State */
+	/** @return \Df\Avangard\Request\State */
 	private function getRequestState() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Avangard_Request_State::i($this->payment());
+			$this->{__METHOD__} = \Df\Avangard\Request\State::i($this->payment());
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Avangard_Response_State */
+	/** @return \Df\Avangard\Response\State */
 	private function getResponseState() {return $this->getRequestState()->getResponse();}
 }

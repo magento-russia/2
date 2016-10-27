@@ -1,5 +1,7 @@
 <?php
-class Df_Avangard_Request_State extends Df_Avangard_Request_Secondary {
+namespace Df\Avangard\Request;
+use Mage_Sales_Model_Order_Payment as OP;
+class State extends Secondary {
 	/**
 	 * @override
 	 * @return string
@@ -15,8 +17,8 @@ class Df_Avangard_Request_State extends Df_Avangard_Request_Secondary {
 	protected function getRequestId() {return 'get_order_info';}
 
 	/**
-	 * @param Mage_Sales_Model_Order_Payment $payment
-	 * @return Df_Avangard_Request_State
+	 * @param OP $payment
+	 * @return self
 	 */
-	public static function i(Mage_Sales_Model_Order_Payment $payment) {return self::ic(__CLASS__, $payment);}
+	public static function i(OP $payment) {return self::ic(__CLASS__, $payment);}
 }

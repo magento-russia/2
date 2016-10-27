@@ -112,7 +112,7 @@ abstract class Secondary extends \Df\Payment\Request {
 
 	/**
 	 * @used-by \Df\Alfabank\Request\State::i()
-	 * @used-by Df_Avangard_Request_State::i()
+	 * @used-by \Df\Avangard\Request\State::i()
 	 * @param string $class
 	 * @param OP $payment
 	 * @return self

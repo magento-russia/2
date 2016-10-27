@@ -1,5 +1,6 @@
 <?php
-class Df_Avangard_Method extends \Df\Payment\Method\WithRedirect {
+namespace Df\Avangard;
+class Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @see \Df\Payment\Method::canCapture()
 	 * @override

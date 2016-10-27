@@ -1,5 +1,6 @@
 <?php
-class Df_Avangard_Request_Refund extends Df_Avangard_Request_Secondary {
+namespace Df\Avangard\Request;
+class Refund extends Secondary {
 	/**
 	 * @override
 	 * @return string

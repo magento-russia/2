@@ -29,7 +29,7 @@ class Redirected extends \Df_Core_Model {
 
 	/**
 	 * @used-by \Df\Alfabank\Action\CustomerReturn::_process()
-	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
+	 * @used-by \Df\Avangard\Action\CustomerReturn::_process()
 	 * @used-by Df_Checkout_Observer::controller_action_predispatch_checkout()
 	 * @used-by \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()

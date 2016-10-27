@@ -1,5 +1,6 @@
 <?php
-class Df_Avangard_RequestDocument extends \Df\Xml\Generator\Document {
+namespace Df\Avangard;
+class RequestDocument extends \Df\Xml\Generator\Document {
 	/**
 	 * @override
 	 * @return array(string => mixed)
@@ -38,22 +39,20 @@ class Df_Avangard_RequestDocument extends \Df\Xml\Generator\Document {
 	private static $P__TAG_NAME = 'tag_name';
 
 	/**
-	 * @used-by Df_Avangard_Request_Secondary::getRequestDocument()
+	 * @used-by \Df\Avangard\Request\Secondary::getRequestDocument()
 	 * @param mixed[] $requestParameters
 	 * @param string $tagName
-	 * @return Df_Avangard_RequestDocument
+	 * @return self
 	 */
-	public static function i(array $requestParameters, $tagName) {
-		return new self(array(
-			self::$P__REQUEST_PARAMS => $requestParameters, self::$P__TAG_NAME => $tagName
-		));
-	}
+	public static function i(array $requestParameters, $tagName) {return new self([
+		self::$P__REQUEST_PARAMS => $requestParameters, self::$P__TAG_NAME => $tagName
+	]);}
 	/**
-	 * @used-by Df_Avangard_Request_Payment::getRequestDocument()
+	 * @used-by \Df\Avangard\Request\Payment::getRequestDocument()
 	 * @param mixed[] $requestParameters
-	 * @return Df_Avangard_RequestDocument
+	 * @return self
 	 */
-	public static function registration(array $requestParameters) {
-		return self::i($requestParameters, 'new_order');
-	}
+	public static function registration(array $requestParameters) {return
+		self::i($requestParameters, 'new_order')
+	;}
 }

@@ -1,5 +1,7 @@
 <?php
-class Df_Avangard_Response_Registration extends Df_Avangard_Response {
+namespace Df\Avangard\Response;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+class Registration extends \Df\Avangard\Response {
 	/** @return string */
 	public function getPasswordForPaymentResponseError() {return $this->cfg('failure_code');}
 	/** @return string */
@@ -11,29 +13,24 @@ class Df_Avangard_Response_Registration extends Df_Avangard_Response {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getReportAsArray() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_filter(array(
-				'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
-				,'Номер запроса в банке' => $this->getRequestExternalId()
-				,'Идентификатор платежа в банке' => $this->getPaymentExternalId()
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getReportAsArray() {return dfc($this, function() {return array_filter([
+		'Диагностическое сообщение' => $this->onFail($this->getErrorMessage())
+		,'Номер запроса в банке' => $this->getRequestExternalId()
+		,'Идентификатор платежа в банке' => $this->getPaymentExternalId()
+	]);});}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {return Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT;}
+	public function getTransactionType() {return T::TYPE_PAYMENT;}
 
 	/**
-	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
-	 * @used-by Df_Avangard_Request_Payment::getResponse()
-	 * @used-by Df_Avangard_Request_Secondary::getResponseRegistration()
+	 * @used-by \Df\Avangard\Action\CustomerReturn::_process()
+	 * @used-by \Df\Avangard\Request\Payment::getResponse()
+	 * @used-by \Df\Avangard\Request\Secondary::getResponseRegistration()
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Avangard_Response_Registration
+	 * @return self
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 }

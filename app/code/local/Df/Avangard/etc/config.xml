@@ -49,7 +49,7 @@
 		-->
 		<payment>
 			<df-avangard>
-				<model>Df_Avangard_Method</model>
+				<model>Df\Avangard\Method</model>
 			</df-avangard>
 		</payment>
 	</default>

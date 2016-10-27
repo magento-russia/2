@@ -4,16 +4,11 @@ class Df_Kkb_Response_Secondary extends Df_Kkb_Response {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getReportAsArray() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_clean(array(
-				'Операция выполнена успешно?' => df_bts_r($this->isSuccessful())
-				,'Диагностическое сообщение' => $this->getErrorMessage()
-				,'Код результата авторизации' => $this->onFail($this->getCode())
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getReportAsArray() {return dfc($this, function() {return array_filter([
+		'Операция выполнена успешно?' => df_bts_r($this->isSuccessful())
+		,'Диагностическое сообщение' => $this->getErrorMessage()
+		,'Код результата авторизации' => $this->onFail($this->getCode())
+	]);});}
 
 	/**
 	 * @override

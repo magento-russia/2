@@ -400,7 +400,7 @@ abstract class Confirm extends \Df\Payment\Action {
 
 	/**
 	 * @used-by \Df\Alfabank\Action\CustomerReturn::processException()
-	 * @used-by Df_Avangard_Action_CustomerReturn::processException()
+	 * @used-by \Df\Avangard\Action\CustomerReturn::processException()
 	 * @used-by Df_Psbank_Action_CustomerReturn::processException()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::processException()
 	 * @return void
@@ -409,7 +409,7 @@ abstract class Confirm extends \Df\Payment\Action {
 
 	/**
 	 * @used-by \Df\Alfabank\Action\CustomerReturn::processResponseForError()
-	 * @used-by Df_Avangard_Action_CustomerReturn::processResponseForError()
+	 * @used-by \Df\Avangard\Action\CustomerReturn::processResponseForError()
 	 * @used-by Df_Psbank_Action_CustomerReturn::_process()
 	 * @return void
 	 */

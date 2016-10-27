@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Avangard_Response extends \Df\Payment\Response {
+namespace Df\Avangard;
+abstract class Response extends \Df\Payment\Response {
 	/** @return int */
 	public function getRequestExternalId() {return $this->cfg(self::$_ID);}
 	/** @return int */
