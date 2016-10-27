@@ -1,4 +1,4 @@
-<?php /** @var Df_IPay_Block_Form $this */ ?>
+<?php /** @var \Df\IPay\Block\Form $this */ ?>
 <?php
 	/**
 	 * Нижеследующая стандартная для Magento разметка HTML
@@ -23,7 +23,7 @@
 									<label>
 										<input
 											type='radio'
-											name='payment[<?php echo Df_IPay_Method::INFO_KEY__MOBILE_NETWORK_OPERATOR; ?>]'
+											name='payment[<?php echo \Df\IPay\Method::OPERATOR; ?>]'
 											value='<?php echo $optionCode; ?>'
 										/>
 										<span><?php echo $optionName; ?></span>

@@ -20,7 +20,7 @@ class ConstT extends \Df\Payment\Config\ManagerBase {
 	;});}
 
 	/** @return mixed[] */
-	public function availablePaymentMethodsAsCanonicalConfigArray() {return dfc($this, function() {return
+	public function methodsCA() {return dfc($this, function() {return
 		df_config_a($this->getNode('payment-methods'))
 	;});}
 
@@ -31,7 +31,7 @@ class ConstT extends \Df\Payment\Config\ManagerBase {
 	public function availablePaymentMethodsAsOptionArray() {return dfc($this, function() {
 		/** @var array(string => array(string => string)) $result */
 		$result = array();
-		foreach ($this->availablePaymentMethodsAsCanonicalConfigArray() as $methodCode => $methodOptions) {
+		foreach ($this->methodsCA() as $methodCode => $methodOptions) {
 			/** @var string $methodCode */
 			/** @var array $methodOptions */
 			df_assert_string($methodCode);

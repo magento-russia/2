@@ -1,6 +1,10 @@
 <?php
-/** @method Df_IPay_Config_Area_Service configS() */
-abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
+namespace Df\IPay;
+use Df_Sales_Model_Order as O;
+use Mage_Sales_Model_Order_Item as OI;
+use Mage_Sales_Model_Order_Payment as OP;
+/** @method \Df\IPay\Config\Area\Service configS() */
+abstract class Action extends \Df\Payment\Action {
 	/**
 	 * @abstract
 	 * @used-by checkRequestType()
@@ -24,20 +28,15 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	 * "parser error : switching encoding: encoder error"
 	 * @used-by generateResponseBody()
 	 * @used-by processException()
-	 * @used-by Df_IPay_Action_Confirm::_process()
-	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::_process()
-	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
+	 * @used-by \Df\IPay\Action\Confirm::_process()
+	 * @used-by \Df\IPay\Action\ConfirmPaymentByShop::_process()
+	 * @used-by \Df\IPay\Action\GetPaymentAmount::_process()
 	 * @return \Df\Xml\X
 	 */
-	protected function e() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml_parse(
-				"<?xml version='1.0' encoding='utf-8'?>"
-				."<ServiceProvider_Response></ServiceProvider_Response>"
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function e() {return dfc($this, function() {return df_xml_parse(
+		"<?xml version='1.0' encoding='utf-8'?>"
+		."<ServiceProvider_Response></ServiceProvider_Response>"
+	);});}
 
 	/**
 	 * Обратите внимание, что IPay требует именно «text/xml».
@@ -58,100 +57,85 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	 * @used-by Df_Core_Model_Action::responseBody()
 	 * @return string
 	 */
-	protected function generateResponseBody() {
-		return str_replace('utf-8', 'windows-1251', $this->e()->asXml());
-	}
+	protected function generateResponseBody() {return
+		str_replace('utf-8', 'windows-1251', $this->e()->asXML())
+	;}
 
 	/**
-	 * @used-by Df_IPay_Action_Confirm::_process()
-	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::checkPaymentAmount()
+	 * @used-by \Df\IPay\Action\Confirm::_process()
+	 * @used-by \Df\IPay\Action\ConfirmPaymentByShop::checkPaymentAmount()
 	 * @param string $configKey
 	 * @return string
 	 */
-	protected function getMessage($configKey) {
-		return str_replace('<br/>', "\n", $this->const_($configKey));
-	}
+	protected function getMessage($configKey) {return
+		str_replace('<br/>', "\n", $this->const_($configKey))
+	;}
 
 	/**
 	 * @used-by getRequestParam_CurrencyId()
 	 * @used-by getRequestParam_ShopId()
 	 * @used-by getRequestParam_TransactionId()
 	 * @used-by orderId()
-	 * @used-by Df_IPay_Action_Confirm::getRequestParam_ErrorText()
-	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::getRequestParam_PaymentAmount()
+	 * @used-by \Df\IPay\Action\Confirm::getRequestParam_ErrorText()
+	 * @used-by \Df\IPay\Action\ConfirmPaymentByShop::getRequestParam_PaymentAmount()
 	 * @param string $paramName
 	 * @param string|null $defaultValue
 	 * @return string|null
 	 */
-	protected function getRequestParam($paramName, $defaultValue = null) {
-		return dfa_deep($this->getRequestA(), $paramName, $defaultValue);
-	}
+	protected function getRequestParam($paramName, $defaultValue = null) {return
+		dfa_deep($this->getRequestA(), $paramName, $defaultValue)
+	;}
 
-	/** @return Df_IPay_Request_Payment */
-	protected function getRequestPayment() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_IPay_Request_Payment::i($this->order());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return \Df\IPay\Request\Payment */
+	protected function getRequestPayment() {return dfc($this, function() {return
+		\Df\IPay\Request\Payment::i($this->order())
+	;});}
 
 	/** @return string */
-	protected function getStoreDomain() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getStoreUri()->getHost();
-			/** @see Zend_Uri_Http::getHost может вернуть false. */
-			df_result_string($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getStoreDomain() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->getStoreUri()->getHost();
+		/** @see Zend_Uri_Http::getHost может вернуть false. */
+		df_result_string($result);
+		return $result;
+	});}
 
-	/** @return Zend_Uri_Http */
-	protected function getStoreUri() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Uri_Http::fromString(
-				$this->store()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return \Zend_Uri_Http */
+	protected function getStoreUri() {return dfc($this, function() {return
+		\Zend_Uri_Http::fromString($this->store()->getBaseUrl(\Mage_Core_Model_Store::URL_TYPE_WEB))
+	;});}
 
-	/** @return Df_IPay_TransactionState */
-	protected function getTransactionState() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_IPay_TransactionState::i($this->payment());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return TransactionState */
+	protected function getTransactionState() {return dfc($this, function() {return
+		TransactionState::i($this->payment())
+	;});}
 
 	/**
 	 * @override
 	 * @see \Df\Payment\Action::method()
 	 * @used-by \Df\Payment\Action::getConst()
 	 * @used-by \Df\Payment\Action::info()
-	 * @return Df_IPay_Method
+	 * @return Method
 	 */
-	protected function method() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_IPay_Method $result */
-			try {
-				$result = parent::method();
-			}
-			catch (Exception $e) {
-				// Сюда мы попадаем, например, когда нам нужно сформировать цифровую подпись
-				// для ответа о несуществующем заказе
-				/** @var Df_Core_Model_StoreM $store */
-				try {
-					$store = $this->order()->getStore();
-				}
-				catch (Exception $e) {
-					$store = df_store();
-				}
-				$result = Df_IPay_Method::i($store);
-			}
-			$this->{__METHOD__} = $result;
+	protected function method() {return dfc($this, function() {
+		/** @var Method $result */
+		try {
+			$result = parent::method();
 		}
-		return $this->{__METHOD__};
-	}
+		catch (\Exception $e) {
+			// Сюда мы попадаем, например, когда нам нужно сформировать цифровую подпись
+			// для ответа о несуществующем заказе
+			/** @var \Df_Core_Model_StoreM $store */
+			try {
+				$store = $this->order()->getStore();
+			}
+			catch (\Exception $e) {
+				$store = df_store();
+			}
+			$result = Method::i($store);
+		}
+		return $result;
+	});}
 
 	/**
 	 * @override
@@ -183,23 +167,14 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	 * @used-by logOrderMessage()
 	 * @used-by throwOrderAlreadyPayed()
 	 * @used-by throwOrderNotExists()
-	 * @return Df_Sales_Model_Order
+	 * @return O
 	 */
-	protected function order() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Sales_Model_Order|null $result */
-			$result = Df_Sales_Model_Order::ld($this->orderId(), null, false);
-			if (!$result) {
-				df_error(
-					'Заказ номер %d не существует. Начните оплату заново с сайта %s'
-					,$this->orderId()
-					,df_current_domain()
-				);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	protected function order() {return dfc($this, function() {return
+		O::ld($this->orderId(), null, false) ?: df_error(
+			"Заказ номер {$this->orderId()} не существует. Начните оплату заново с сайта "
+			. df_current_domain()
+		)
+	;});}
 
 	/**
 	 * @override
@@ -214,15 +189,15 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		try {
 			$this->getTransactionState()->restore();
 		}
 		// дополнительные сбои нас уже не интересуют
-		catch (Exception $e) {}
+		catch (\Exception $e) {}
 		$this->e()->appendChild(
 			df_xml_node('Error')->appendChild(df_xml_node('ErrorLine')->setCData(df_ets($e)))
 		);
@@ -251,25 +226,19 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	 * @used-by Df_Core_Model_Action::checkAccessRights()
 	 * @used-by Df_Core_Model_Action::getStoreConfig()
 	 * @used-by getStoreUri()
-	 * @return Df_Core_Model_StoreM
+	 * @return \Df_Core_Model_StoreM
 	 */
-	protected function store() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->orderId() ? df_store() : $this->order()->getStore();
-		}
-		return $this->{__METHOD__};
-	}
+	protected function store() {return dfc($this, function() {return
+		!$this->orderId() ? df_store() : $this->order()->getStore()
+	;});}
 
 	/** @return string */
-	private function calculateRequestSignature() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = strtoupper(md5(df_c(
-				$this->configS()->getRequestPassword()
-				,$this->preprocessXmlForSignature($this->getRequestAsXmlInWindows1251())
-			)));
-		}
-		return $this->{__METHOD__};
-	}
+	private function calculateRequestSignature() {return dfc($this, function() {return
+		strtoupper(md5(df_c(
+			$this->configS()->getRequestPassword()
+			,$this->preprocessXmlForSignature($this->getRequestAsXmlInWindows1251())
+		)))
+	;});}
 
 	/**
 	 * Обратите внимание, что не при всяком запросе
@@ -310,13 +279,13 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 			);
 			$this->throwOrderNotExists();
 		}
-		if (Mage_Sales_Model_Order::STATE_COMPLETE === $this->order()->getState()) {
+		if (O::STATE_COMPLETE === $this->order()->getState()) {
 			$this->logOrderMessage(
 				'Заказ номер %orderId% не предназначен для оплаты, потому что он выполнен.'
 			);
 			$this->throwOrderAlreadyPayed();
 		}
-		if (Mage_Sales_Model_Order::STATE_CLOSED === $this->order()->getState()) {
+		if (O::STATE_CLOSED === $this->order()->getState()) {
 			$this->logOrderMessage(
 				'Заказ номер %orderId% не предназначен для оплаты, потому что он закрыт.'
 			);
@@ -325,7 +294,7 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 		if (
 				false
 			===
-				$this->order()->getActionFlag(Mage_Sales_Model_Order::ACTION_FLAG_INVOICE)
+				$this->order()->getActionFlag(O::ACTION_FLAG_INVOICE)
 		) {
 			$this->logOrderMessage(
 				'Заказ номер %orderId% помечен системой как непредназначенный для оплаты.'
@@ -334,25 +303,25 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 		}
 		$hasQtyYoInvoice = false;
 		foreach ($this->order()->getAllItems() as $item) {
-			/** @var Mage_Sales_Model_Order_Item $item */
+			/** @var OI $item */
 			if (0 < $item->getQtyToInvoice() && !$item->getLockedDoInvoice()) {
 				$hasQtyYoInvoice = true;
 				break;
 			}
 		}
 		if (!$hasQtyYoInvoice) {
-			/** @var Mage_Sales_Model_Order_Payment $payment */
+			/** @var OP $payment */
 			try {
 				$payment = $this->payment();
 			}
-			catch (Exception $e) {
+			catch (\Exception $e) {
 				$this->logOrderMessage('Заказ номер %orderId% не предназначен для оплаты.');
 				$this->throwOrderNotExists();
 			}
-			/** @var Mage_Payment_Model_Method_Abstract $paymentMethod */
+			/** @var \Mage_Payment_Model_Method_Abstract $paymentMethod */
 			$paymentMethod = $payment->getMethodInstance();
-			df_assert($paymentMethod instanceof Mage_Payment_Model_Method_Abstract);
-			if (!($paymentMethod instanceof Df_IPay_Method)) {
+			df_assert($paymentMethod instanceof \Mage_Payment_Model_Method_Abstract);
+			if (!($paymentMethod instanceof \Df\IPay\Method)) {
 				$this->logOrderMessage(
 					'Заказ номер %orderId% не предназначен для оплаты посредством iPay.'
 				);
@@ -391,7 +360,7 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	/** @return void */
 	private function checkOrderPaymentMethod() {
 		// надо писать именно так, а не $this->payment()
-		if (!$this->payment()->getMethodInstance() instanceof Df_IPay_Method) {
+		if (!$this->payment()->getMethodInstance() instanceof \Df\IPay\Method) {
 			$this->throwOrderNotExists();
 		}
 	}
@@ -450,25 +419,22 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	 * @used-by getRequestParamR()
 	 * @return array(string => mixed)
 	 */
-	private function getRequestA() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml_parse($this->getRequestAsXml())->asCanonicalArray();
-		}
-		return $this->{__METHOD__};
-	}
+	private function getRequestA() {return dfc($this, function() {return
+		df_xml_parse($this->getRequestAsXml())->asCanonicalArray()
+	;});}
 
 	/** @return string */
 	private function getRequestAsXml() {return df_1251_from($this->getRequestAsXmlInWindows1251());}
 
 	/** @return string */
-	private function getRequestAsXmlInWindows1251() {
-		return df_my_local() ? $this->getRequestAsXml_Test() : $this->param('XML');
-	}
+	private function getRequestAsXmlInWindows1251() {return
+		df_my_local() ? $this->getRequestAsXml_Test() : $this->param('XML')
+	;}
 
 	/** @return string */
-	private function getRequestHeader_Signature() {
-		return $this->request()->getHeader(self::$HEADER__SIGNATURE);
-	}
+	private function getRequestHeader_Signature() {return
+		$this->request()->getHeader(self::$HEADER__SIGNATURE)
+	;}
 
 	/** @return int */
 	private function getRequestParam_CurrencyId() {return df_nat($this->getRequestParam('Currency'));}
@@ -486,33 +452,30 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	private function getRequestParam_ShopId() {return df_nat($this->getRequestParam('ServiceNo'));}
 
 	/** @return string */
-	private function getRequestParam_Signature() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $signatureHeaderAsArray */
-			$signatureHeaderAsArray = df_trim(explode(':', $this->getRequestHeader_Signature()));
-			/** @var string $signatureType */
-			$signatureType = dfa($signatureHeaderAsArray, 0);
-			df_assert_string($signatureType);
-			if (self::$SIGNATYPE_TYPE !== $signatureType) {
-				df_error(
-					'Модуль ожидает «%s» в качестве типа цифровой подписи,'
-					.' однако подпись от iPay имеет тип «%s».'
-					,self::$SIGNATYPE_TYPE
-					,$signatureType
-				);
-			}
-			/** @var string $result */
-			$result = dfa($signatureHeaderAsArray, 1);
-			df_result_string($result);
-			$this->{__METHOD__} = $result;
+	private function getRequestParam_Signature() {return dfc($this, function() {
+		/** @var string[] $signatureHeaderAsArray */
+		$signatureHeaderAsArray = df_trim(explode(':', $this->getRequestHeader_Signature()));
+		/** @var string $signatureType */
+		$signatureType = dfa($signatureHeaderAsArray, 0);
+		df_assert_string($signatureType);
+		if (self::$SIGNATYPE_TYPE !== $signatureType) {
+			df_error(
+				'Модуль ожидает «%s» в качестве типа цифровой подписи,'
+				.' однако подпись от iPay имеет тип «%s».'
+				,self::$SIGNATYPE_TYPE
+				,$signatureType
+			);
 		}
-		return $this->{__METHOD__};
-	}
+		/** @var string $result */
+		$result = dfa($signatureHeaderAsArray, 1);
+		df_result_string($result);
+		return $result;
+	});}
 
 	/** @return int */
-	private function getRequestParam_TransactionId() {
-		return df_nat($this->getRequestParam('RequestId'));
-	}
+	private function getRequestParam_TransactionId() {return
+		df_nat($this->getRequestParam('RequestId'))
+	;}
 
 	/**
 	 * @used-by getRequestParam_Language()
@@ -531,9 +494,9 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	}
 
 	/** @return string */
-	private function getResponseHeader_Signature() {
-		return df_c(self::$SIGNATYPE_TYPE, ': ', $this->generateResponseSignature());
-	}
+	private function getResponseHeader_Signature() {return
+		df_c(self::$SIGNATYPE_TYPE, ': ', $this->generateResponseSignature())
+	;}
 
 	/**
 	 * @param string $message
@@ -553,13 +516,9 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	 * @used-by throwOrderNotExists()
 	 * @return int
 	 */
-	private function orderId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_nat0($this->getRequestParam('PersonalAccount'));
-		}
-		return $this->{__METHOD__};
-	}
-
+	private function orderId() {return dfc($this, function() {return
+		df_nat0($this->getRequestParam('PersonalAccount'))
+	;});}
 
 	/**
 	 * @param string $xml
@@ -580,13 +539,13 @@ abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	}
 	/**
 	 * @used-by checkTransactionState()
-	 * @used-by Df_IPay_Action_GetPaymentAmount::getExpectedRequestType()
+	 * @used-by \Df\IPay\Action\GetPaymentAmount::getExpectedRequestType()
 	 * @var string
 	 */
 	protected static $TRANSACTION_STATE__SERVICE_INFO = 'ServiceInfo';
 	/**
 	 * @used-by checkTransactionState()
-	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::getExpectedRequestType()
+	 * @used-by \Df\IPay\Action\ConfirmPaymentByShop::getExpectedRequestType()
 	 * @var string
 	 */
 	protected static $TRANSACTION_STATE__START = 'TransactionStart';

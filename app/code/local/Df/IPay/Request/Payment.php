@@ -1,16 +1,18 @@
 <?php
+namespace Df\IPay\Request;
+use Df_Sales_Model_Order as O;
 /**
- * @method Df_IPay_Method method()
- * @method Df_IPay_Config_Area_Service configS()
+ * @method \Df\IPay\Method method()
+ * @method \Df\IPay\Config\Area\Service configS()
  */
-class Df_IPay_Request_Payment extends \Df\Payment\Request\Payment {
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
 	 * @see \Df\Payment\Request::amount()
-	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
-	 * @return Df_Core_Model_Money
+	 * @used-by \Df\IPay\Action\GetPaymentAmount::_process()
+	 * @return \Df_Core_Model_Money
 	 */
 	public function amount() {return parent::amount();}
 
@@ -18,9 +20,9 @@ class Df_IPay_Request_Payment extends \Df\Payment\Request\Payment {
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
-	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::_process()
-	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
+	 * @used-by \Df\IPay\Action\GetPaymentAmount::_process()
+	 * @used-by \Df\IPay\Action\ConfirmPaymentByShop::_process()
+	 * @used-by \Df\IPay\Action\GetPaymentAmount::_process()
 	 * @see \Df\Payment\Request\Payment::description()
 	 * @return string
 	 */
@@ -53,7 +55,7 @@ class Df_IPay_Request_Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::order()
-	 * @return Df_Sales_Model_Order
+	 * @return O
 	 */
 	protected function order() {return $this->_order ?: parent::order();}
 
@@ -63,16 +65,16 @@ class Df_IPay_Request_Payment extends \Df\Payment\Request\Payment {
 	 * @return string
 	 */
 	private function getUrlReturn() {
-		return Mage::getUrl($this->method()->getCode() . '/customerReturn', array('_nosid' => true));
+		return \Mage::getUrl($this->method()->getCode() . '/customerReturn', array('_nosid' => true));
 	}
 
 	/**
 	 * 2016-10-15
-	 * @used-by Df_IPay_Action_Abstract::getRequestPayment()
-	 * @param Df_Sales_Model_Order $o
+	 * @used-by \Df\IPay\Action::getRequestPayment()
+	 * @param O $o
 	 * @return self
 	 */
-	public static function i(Df_Sales_Model_Order $o) {
+	public static function i(O $o) {
 		$result = new self;
 		$result->_order = $o;
 		return $result;
@@ -82,7 +84,7 @@ class Df_IPay_Request_Payment extends \Df\Payment\Request\Payment {
 	 * 2016-10-15
 	 * @used-by i()
 	 * @used-by order()
-	 * @var Df_Sales_Model_Order
+	 * @var O
 	 */
 	private $_order;
 }

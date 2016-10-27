@@ -1,11 +1,12 @@
 <?php
-class Df_IPay_Action_GetPaymentAmount extends Df_IPay_Action_Abstract {
+namespace Df\IPay\Action;
+class GetPaymentAmount extends \Df\IPay\Action {
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestAsXml_Test() {
-		return df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
+	protected function getRequestAsXml_Test() {return
+		df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>ServiceInfo</RequestType>
@@ -14,13 +15,13 @@ class Df_IPay_Action_GetPaymentAmount extends Df_IPay_Action_Abstract {
 	<Currency>974</Currency>
 	<RequestId>9221</RequestId>
 </ServiceProvider_Request>
-		");
-	}
+		")
+	;}
 
 	/**
 	 * @override
-	 * @see Df_Core_Model_Action::_process()
-	 * @used-by Df_Core_Model_Action::process()
+	 * @see \Df_Core_Model_Action::_process()
+	 * @used-by \Df_Core_Model_Action::process()
 	 * @return void
 	 */
 	protected function _process() {

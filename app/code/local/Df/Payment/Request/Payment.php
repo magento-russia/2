@@ -10,7 +10,7 @@ abstract class Payment extends \Df\Payment\Request {
 	abstract protected function _params();
 
 	/**
-	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
+	 * @used-by \Df\IPay\Action\GetPaymentAmount::_process()
 	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @return string
 	 */

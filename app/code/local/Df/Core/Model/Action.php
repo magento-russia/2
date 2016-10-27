@@ -262,7 +262,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by _process()
-	 * @used-by Df_IPay_Action_Abstract::processBeforeRedirect()
+	 * @used-by \Df\IPay\Action::processBeforeRedirect()
 	 * @param bool $real [optional]
 	 * @return string
 	 */

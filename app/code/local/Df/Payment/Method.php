@@ -256,7 +256,7 @@ abstract class Method
 	public function configS() {return $this->config()->service();}
 
 	/**
-	 * @used-by Df_IPay_Block_Form::getPaymentOptions()
+	 * @used-by \Df\IPay\Block\Form::getPaymentOptions()
 	 * @used-by \Df\Payment\Request\Payment::chopParam()
 	 * @return \Df\Payment\Config\Manager\ConstT
 	 */

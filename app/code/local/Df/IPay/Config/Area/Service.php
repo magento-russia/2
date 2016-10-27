@@ -1,41 +1,15 @@
 <?php
-/** @method Df_IPay_Method main() */
-class Df_IPay_Config_Area_Service extends \Df\Payment\Config\Area\Service {
+namespace Df\IPay\Config\Area;
+/** @method \Df\IPay\Method main() */
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @override
+	 * @see \Df\Payment\Config\Area\Service::getUrlPaymentPage()
 	 * @return string
 	 */
-	public function getUrlPaymentPage() {
-		/** @var string $result */
-		$result =
-			$this->isTestMode()
-			? parent::getUrlPaymentPage()
-			: dfa($this->getMobileNetworkOperatorParams(), 'payment-page')
-		;
-		df_result_string($result);
-		return $result;
-	}
-
-	/** @return string|null */
-	private function getMobileNetworkOperator() {
-		/** @var string|null $result */
-		$result = $this->main()->getMobileNetworkOperator();
-		if (!is_null($result)) {
-			df_result_string($result);
-		}
-		return $result;
-	}
-
-	/** @return array(string => string) */
-	private function getMobileNetworkOperatorParams() {
-		/** @var array(string => string $result */
-		$result =
-			dfa(
-				$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
-				,$this->getMobileNetworkOperator()
-			)
-		;
-		df_result_array($result);
-		return $result;
-	}
+	public function getUrlPaymentPage() {return dfc($this, function() {return
+		$this->isTestMode()
+		? parent::getUrlPaymentPage()
+		: dfa_deep($this->constManager()->methodsCA(), [$this->main()->operator(), 'payment-page'])
+	;});}
 }

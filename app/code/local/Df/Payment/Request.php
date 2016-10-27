@@ -21,7 +21,7 @@ abstract class Request extends \Df_Core_Model {
 	 * 2015-03-09
 	 * Обратите внимание, что 2 платёжных модуля (IPay и Kkb)
 	 * повышают видимость данного метода до публичной:
-	 * @used-by Df_IPay_Request_Payment::getAmount()
+	 * @used-by \Df\IPay\Request\Payment::getAmount()
 	 * @used-by Df_Kkb_Request_Payment::getAmount()
 	 * @used-by Df_Kkb_Request_Secondary::getAmount()
 	 * Намеренно не делаем данный метод публичным в базовом классе
@@ -90,7 +90,7 @@ abstract class Request extends \Df_Core_Model {
 	 * используют именно @see orderIId(), а не @see orderId().
 	 * Однако некоторые платёжные системы накладывают ограничения на длину идентификатора запроса,
 	 * которым @see orderIId() может не удовлетворять. И вот тогда используется @see orderId().
-	 * @used-by Df_IPay_Request_Payment::_params()
+	 * @used-by \Df\IPay\Request\Payment::_params()
 	 * @used-by STUB::_params()
 	 * @used-by STUB::_params()
 	 * @return string

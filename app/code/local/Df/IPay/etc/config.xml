@@ -8,7 +8,6 @@
 		</Df_IPay>
 	</modules>
 	<global>
-		<blocks><df_ipay><class>Df_IPay_Block</class></df_ipay></blocks>
 		<helpers><df_ipay><class>Df_IPay_Helper</class></df_ipay></helpers>
 	</global>
 	<default>
@@ -37,7 +36,7 @@
 		-->
 		<payment>
 			<df-ipay>
-				<model>Df_IPay_Method</model>
+				<model>Df\IPay\Method</model>
 			</df-ipay>
 		</payment>
 	</default>

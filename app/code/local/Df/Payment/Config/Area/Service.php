@@ -224,7 +224,7 @@ class Service extends \Df\Payment\Config\Area {
 			$this->{__METHOD__} = df_n_set(
 				dfa(
 					dfa(
-						$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
+						$this->constManager()->methodsCA()
 						,$this->getSelectedPaymentMethod()
 						,array()
 					)
@@ -245,7 +245,7 @@ class Service extends \Df\Payment\Config\Area {
 			$this->{__METHOD__} =
 				array_column(
 					dfa_select(
-						$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
+						$this->constManager()->methodsCA()
 						,$this->getSelectedPaymentMethods()
 					)
 					,'code'

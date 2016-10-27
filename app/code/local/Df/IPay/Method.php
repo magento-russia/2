@@ -1,26 +1,26 @@
 <?php
-class Df_IPay_Method extends \Df\Payment\Method\WithRedirect {
-	/** @return string|null */
-	public function getMobileNetworkOperator() {return
-		$this->iia(self::INFO_KEY__MOBILE_NETWORK_OPERATOR)
-	;}
+namespace Df\IPay;
+class Method extends \Df\Payment\Method\WithRedirect {
+	/**
+	 * @used-by \Df\IPay\Config\Area\Service::getUrlPaymentPage()
+	 * @return string|null
+	 */
+	public function operator() {return $this->iia(self::OPERATOR);}
 
 	/**
 	 * @override
 	 * @return array
 	 */
-	protected function getCustomInformationKeys() {
-		return array_merge(
-			array(self::INFO_KEY__MOBILE_NETWORK_OPERATOR), parent::getCustomInformationKeys()
-		);
-	}
+	protected function getCustomInformationKeys() {return array_merge(
+		[self::OPERATOR], parent::getCustomInformationKeys()
+	);}
 
 	/**
-	 * @self getCustomInformationKeys()
-	 * @used-by getMobileNetworkOperator()
+	 * @used-by getCustomInformationKeys()
+	 * @used-by operator()
 	 * @used-by app/design/frontend/rm/default/template/df/ipay/form.phtml
 	 */
-	const INFO_KEY__MOBILE_NETWORK_OPERATOR = 'df_ipay__mobile_network_operator';
+	const OPERATOR = 'df_ipay__operator';
 	/**
 	 * 2015-03-17
 	 * Обратите внимание, что мы вправе создавать наш объект таким способом,
@@ -29,9 +29,9 @@ class Df_IPay_Method extends \Df\Payment\Method\WithRedirect {
 			$key = self::XML_PATH_PAYMENT_METHODS.'/'.$code.'/model';
 			$class = Mage::getStoreConfig($key);
 			return Mage::getModel($class);
-	 * @used-by Df_IPay_Action_Abstract::method()
-	 * @param Df_Core_Model_StoreM $store
-	 * @return Df_IPay_Method
+	 * @used-by \Df\IPay\Action::method()
+	 * @param \Df_Core_Model_StoreM $store
+	 * @return self
 	 */
-	public static function i(Df_Core_Model_StoreM $store) {return new self(array('store' => $store));}
+	public static function i(\Df_Core_Model_StoreM $store) {return new self(['store' => $store]);}
 }

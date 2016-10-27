@@ -1,15 +1,14 @@
 <?php
-/** @method Df_IPay_Method method() */
-class Df_IPay_Block_Form extends \Df\Payment\Block\Form {
+namespace Df\IPay\Block;
+/** @method \Df\IPay\Method method() */
+class Form extends \Df\Payment\Block\Form {
 	/** @return array */
-	public function getPaymentOptions() {
-		return $this->method()->constManager()->availablePaymentMethodsAsCanonicalConfigArray();
-	}
+	public function getPaymentOptions() {return $this->method()->constManager()->methodsCA();}
 
 	/**
 	 * @override
-	 * @see Df_Core_Block_Template::defaultTemplate()
-	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @see \Df_Core_Block_Template::defaultTemplate()
+	 * @used-by \Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
 	protected function defaultTemplate() {return 'df/ipay/form.phtml';}

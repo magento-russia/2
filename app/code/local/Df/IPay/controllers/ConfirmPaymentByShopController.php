@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_IPay_Action_ConfirmPaymentByShop */
+/** @uses \Df\IPay\Action\ConfirmPaymentByShop */
 class Df_IPay_ConfirmPaymentByShopController extends \Df\Core\Controller {}

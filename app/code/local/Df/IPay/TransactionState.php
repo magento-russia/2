@@ -1,47 +1,36 @@
 <?php
-class Df_IPay_TransactionState extends Df_Core_Model {
-	/** @return Df_IPay_TransactionState */
-	public function clear() {
-		$this->getPayment()
-			->unsAdditionalInformation(self::PAYMENT_PARAM__STATE)
-			->save()
-		;
-		return $this;
-	}
+namespace Df\IPay;
+use Mage_Payment_Model_Info as II;
+class TransactionState extends \Df_Core_Model {
+	/** @return void */
+	public function clear() {$this->ii()->unsAdditionalInformation(self::$KEY)->save();}
 
 	/** @return string|null */
-	public function get() {
-		return $this->getPayment()->getAdditionalInformation(self::PAYMENT_PARAM__STATE);
-	}
+	public function get() {return $this->ii()->getAdditionalInformation(self::$KEY);}
 
-	/** @return Df_IPay_TransactionState */
+	/** @return void */
 	public function restore() {
 		if ($this->_previousState) {
 			$this->update($this->_previousState);
 		}
-		return $this;
 	}
 
 	/**
 	 * @param string $newState
-	 * @return Df_IPay_TransactionState
+	 * @return void
 	 */
 	public function update($newState) {
 		df_param_string($newState, 0);
 		$this->_previousState = $this->get();
 		// Обратите внимание, что хранить состояние транзации в сессии было бы неправильно:
 		// это не защищает при одновременной оплате одного заказа несколькими пользователями
-		$this->getPayment()
-			->setAdditionalInformation(self::PAYMENT_PARAM__STATE, $newState)
-			->save()
-		;
-		return $this;
+		$this->ii()->setAdditionalInformation(self::$KEY, $newState)->save();
 	}
 	/** @var string|null */
 	private $_previousState = null;
 
-	/** @return Mage_Payment_Model_Info */
-	private function getPayment() {return $this->cfg(self::P__PAYMENT);}
+	/** @return II */
+	private function ii() {return $this[self::$P__PAYMENT];}
 
 	/**
 	 * @override
@@ -49,17 +38,17 @@ class Df_IPay_TransactionState extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__PAYMENT, 'Mage_Payment_Model_Info');
+		$this->_prop(self::$P__PAYMENT, II::class);
 	}
 
-	const P__PAYMENT = 'payment';
-	const PAYMENT_PARAM__STATE = 'df_ipay__transaction_state';
+	/** @var string */
+	private static $P__PAYMENT = 'payment';
+	/** @var string */
+	private static $KEY = 'df_ipay__transaction_state';
 	/**
 	 * @static
-	 * @param Mage_Payment_Model_Info $paymentInfo
-	 * @return Df_IPay_TransactionState
+	 * @param II $paymentInfo
+	 * @return self
 	 */
-	public static function i(Mage_Payment_Model_Info $paymentInfo) {
-		return new self(array(self::P__PAYMENT => $paymentInfo));
-	}
+	public static function i(II $paymentInfo) {return new self([self::$P__PAYMENT => $paymentInfo]);}
 }

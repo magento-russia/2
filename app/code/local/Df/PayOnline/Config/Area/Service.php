@@ -9,7 +9,7 @@ class Df_PayOnline_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 		$result =
 			dfa(
 				dfa(
-					$this->constManager()->availablePaymentMethodsAsCanonicalConfigArray()
+					$this->constManager()->methodsCA()
 					,$this->getSelectedPaymentMethod()
 				)
 				,'url'

@@ -1,16 +1,15 @@
 <?php
-class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
+namespace Df\IPay\Action;
+class Confirm extends \Df\IPay\Action {
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getRequestAsXml_Test() {
-		return
-			true//0 === rand (0, 1)
-			? $this->getRequestAsXml_Test_Error()
-			: $this->getRequestAsXml_Test_Success()
-		;
-	}
+	protected function getRequestAsXml_Test() {return
+		true//0 === rand (0, 1)
+		? $this->getRequestAsXml_Test_Error()
+		: $this->getRequestAsXml_Test_Success()
+	;}
 
 	/**
 	 * @override
@@ -33,14 +32,14 @@ class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
 			if (!$this->order()->canInvoice()) {
 				df_error('Заказ номер %d уже оплачен', $this->order()->getId());
 			}
-			/** @var Mage_Sales_Model_Order_Invoice $invoice */
+			/** @var \Mage_Sales_Model_Order_Invoice $invoice */
 			$invoice = $this->order()->prepareInvoice();
 			$invoice->register();
 			$invoice->capture();
 			$this->saveInvoice($invoice);
 			$this->order()->setState(
-				Mage_Sales_Model_Order::STATE_PROCESSING
-				,Mage_Sales_Model_Order::STATE_PROCESSING
+				\Mage_Sales_Model_Order::STATE_PROCESSING
+				,\Mage_Sales_Model_Order::STATE_PROCESSING
 				,df_sprintf($this->getMessage('message/success'), $invoice->getIncrementId())
 				,true
 			);
@@ -65,8 +64,8 @@ class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
 	protected function getExpectedRequestType() {return 'TransactionResult';}
 
 	/** @return string */
-	private function getRequestAsXml_Test_Error() {
-		return df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
+	private function getRequestAsXml_Test_Error() {return
+		df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>TransactionResult</RequestType>
@@ -80,12 +79,12 @@ class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
 		<ErrorText>Операция отменена</ErrorText>
 	</TransactionResult>
 </ServiceProvider_Request>
-		");
-	}
+		")
+	;}
 
 	/** @return string */
-	private function getRequestAsXml_Test_Success() {
-		return df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
+	private function getRequestAsXml_Test_Success() {return
+		df_1251_to("<?xml version='1.0' encoding='windows-1251' ?>
 <ServiceProvider_Request>
 	<Version>1</Version>
 	<RequestType>TransactionResult</RequestType>
@@ -98,11 +97,11 @@ class Df_IPay_Action_Confirm extends Df_IPay_Action_Abstract {
 		<ServiceProvider_TrxId>8571502</ServiceProvider_TrxId>
 	</TransactionResult>
 </ServiceProvider_Request>
-		");
-	}
+		")
+	;}
 
 	/** @return string|null */
-	private function getRequestParam_ErrorText() {
-		return $this->getRequestParam('TransactionResult/ErrorText');
-	}
+	private function getRequestParam_ErrorText() {return
+		$this->getRequestParam('TransactionResult/ErrorText')
+	;}
 }
