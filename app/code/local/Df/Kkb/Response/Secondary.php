@@ -1,5 +1,6 @@
 <?php
-class Df_Kkb_Response_Secondary extends Df_Kkb_Response {
+namespace Df\Kkb\Response;
+class Secondary extends \Df\Kkb\Response {
 	/**
 	 * @override
 	 * @return array(string => string)
@@ -17,7 +18,7 @@ class Df_Kkb_Response_Secondary extends Df_Kkb_Response {
 	public function getTransactionType() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Kkb_RequestDocument_Secondary::convertTransactionCodeToMagentoFormat(
+				\Df\Kkb\RequestDocument\Secondary::convertTransactionCodeToMagentoFormat(
 					$this->getElement('bank/merchant/command')->getAttribute('type')
 				)
 			;
@@ -50,7 +51,7 @@ class Df_Kkb_Response_Secondary extends Df_Kkb_Response {
 	/**
 	 * @static
 	 * @param string $xml [optional]
-	 * @return Df_Kkb_Response_Secondary
+	 * @return \Df\Kkb\Response\Secondary
 	 */
 	public static function i($xml = null) {return new self(array(self::P__XML => $xml));}
 }

@@ -1,52 +1,46 @@
 <?php
-class Df_Kkb_Response_Payment extends Df_Kkb_Response {
+namespace Df\Kkb\Response;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+class Payment extends \Df\Kkb\Response {
 	/** @return string */
-	public function getOrderIncrementId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->getErrorMessage()
-				? $this->e()->getAttribute('order_id')
-				: $this->getElementOrder()->getAttribute('order_id')
-			;
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getOrderIncrementId() {return dfc($this, function() {
+		/** @var string $result */
+		$result =
+			$this->getErrorMessage()
+			? $this->e()->getAttribute('order_id')
+			: $this->getElementOrder()->getAttribute('order_id')
+		;
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/** @return float */
-	public function getPaymentAmount() {
-		return df_float($this->getElementPayment()->getAttribute('amount'));
-	}
+	public function getPaymentAmount() {return
+		df_float($this->getElementPayment()->getAttribute('amount'))
+	;}
 	
-	/** @return Df_Core_Model_Money */
-	public function getPaymentAmountInServiceCurrency() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->configS()->convertAmountToServiceCurrency(
-					$this->getOrderCurrency(), $this->getPaymentAmount()
-				)
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return \Df_Core_Model_Money */
+	public function getPaymentAmountInServiceCurrency() {return dfc($this, function() {return
+		$this->configS()->convertAmountToServiceCurrency(
+			$this->getOrderCurrency(), $this->getPaymentAmount()
+		)
+	;});}
 
 	/** @return string */
-	public function getPaymentCodeApproval() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getElementPayment()->getAttribute('approval_code');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getPaymentCodeApproval() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->getElementPayment()->getAttribute('approval_code');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/** @return string */
-	public function getPaymentId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getElementPayment()->getAttribute('reference');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getPaymentId() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->getElementPayment()->getAttribute('reference');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * @override
@@ -77,18 +71,14 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 	}
 	
 	/**
+	 * Тип должен быть именно таким!
+	 * Если вернуть Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT,
+	 * то функция разблокировки средств из административного интерфейса не будет доступна.
+	 * @see Mage_Sales_Model_Order_Payment::getAuthorizationTransaction()
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {
-		/**
-		 * Тип должен быть именно таким!
-		 * Если вернуть Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT,
-		 * то функция разблокировки средств из административного интерфейса не будет доступна.
-		 * @see Mage_Sales_Model_Order_Payment::getAuthorizationTransaction()
-		 */
-		return Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH;
-	}
+	public function getTransactionType() {return T::TYPE_AUTH;}
 
 	/**
 	 * @override
@@ -114,8 +104,8 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 	protected function getErrorMessage() {return $this->p()->descendS('response/error');}
 
 	/**
-	 * @throws Exception
-	 * @return Df_Kkb_Response_Payment
+	 * @throws \Exception
+	 * @return void
 	 */
 	private function checkPaymentCodeResponse() {
 		if ('00' !== $this->getPaymentCodeResponse()) {
@@ -124,7 +114,6 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 				,$this->getPaymentCodeResponse()
 			);
 		}
-		return $this;
 	}
 	
 	/** @return string */
@@ -164,7 +153,7 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 	/** @return \Df\Xml\X */
 	private function getElementPayment() {return $this->getElement('bank/results/payment');}
 	
-	/** @return Df_Directory_Model_Currency */
+	/** @return \Df_Directory_Model_Currency */
 	private function getOrderCurrency() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $currencyCodeInPaymentSystemFormat */
@@ -204,7 +193,7 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Zend_Date */
+	/** @return \Zend_Date */
 	private function getTime() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_date_parse(
@@ -239,7 +228,7 @@ class Df_Kkb_Response_Payment extends Df_Kkb_Response {
 	/**
 	 * @static
 	 * @param string $xml [optional]
-	 * @return Df_Kkb_Response_Payment
+	 * @return self
 	 */
 	public static function i($xml = null) {return new self(array(self::P__XML => $xml));}
 }

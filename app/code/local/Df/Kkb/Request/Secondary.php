@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Kkb_Method method() */
-abstract class Df_Kkb_Request_Secondary extends \Df\Payment\Request\Transaction {
+namespace Df\Kkb\Request;
+/** @method \Df\Kkb\Method method() */
+abstract class Secondary extends \Df\Payment\Request\Transaction {
 	/** @return string */
 	abstract public function getTransactionType();
 
@@ -9,9 +10,9 @@ abstract class Df_Kkb_Request_Secondary extends \Df\Payment\Request\Transaction 
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
 	 * @see \Df\Payment\Request\Transaction::amount()
-	 * @used-by Df_Kkb_RequestDocument_Signed::amount()
-	 * @see Df_Kkb_Request_Payment::amount()
-	 * @return Df_Core_Model_Money
+	 * @used-by \Df\Kkb\RequestDocument\Signed::amount()
+	 * @see \Df\Kkb\Request\Payment::amount()
+	 * @return \Df_Core_Model_Money
 	 */
 	public function amount() {return parent::amount();}
 
@@ -32,45 +33,34 @@ abstract class Df_Kkb_Request_Secondary extends \Df\Payment\Request\Transaction 
 	
 	/**
 	 * @override
-	 * @return Df_Kkb_Response_Secondary
+	 * @return \Df\Kkb\Response\Secondary
 	 */
-	public function getResponse() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Kkb_Response_Secondary::i($this->getResponseAsXml());
-			$this->{__METHOD__}->postProcess($this->payment());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getResponse() {return dfc($this, function() {
+		/** @var \Df\Kkb\Response\Secondary $result */
+		$result = \Df\Kkb\Response\Secondary::i($this->getResponseAsXml());
+		$result->postProcess($this->payment());
+		return $result;
+	});}
 
-	/** @return Df_Kkb_Response_Payment */
-	public function getResponsePayment() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Kkb_Response_Payment::i()->loadFromPaymentInfo($this->payment())
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return \Df\Kkb\Response\Payment */
+	public function getResponsePayment() {return dfc($this, function() {return
+		\Df\Kkb\Response\Payment::i()->loadFromPaymentInfo($this->payment())
+	;});}
 
 	/**
 	 * @override
-	 * @return Zend_Uri_Http
+	 * @return \Zend_Uri_Http
 	 */
-	public function getUri() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Uri::factory(
-				strtr('https://{host}/jsp/remote/control.jsp?{document}', array(
-					'{host}' => $this->getHost()
-					,'{document}' => rawurlencode($this->getRequestDocument()->getXml())
-				)
-			));
-		}
-		return $this->{__METHOD__};
-	}
+	public function getUri() {return dfc($this, function() {return
+		\Zend_Uri::factory(
+			"https://{$this->getHost()}/jsp/remote/control.jsp?"
+			. rawurlencode($this->getRequestDocument()->getXml())
+		)
+	;});}
 
 	/**
-	 * @used-by Df_Kkb_RequestDocument_Signed::getOrderId()
-	 * @see Df_Kkb_Request_Payment::orderId()
+	 * @used-by \Df\Kkb\RequestDocument\Signed::getOrderId()
+	 * @see \Df\Kkb\Request\Payment::orderId()
 	 * @return string
 	 */
 	public function orderId() {return $this->order()->getIncrementId();}
@@ -86,29 +76,27 @@ abstract class Df_Kkb_Request_Secondary extends \Df\Payment\Request\Transaction 
 		$this->method()->isTestMode() ? '3dsecure.kkb.kz' : 'epay.kkb.kz'
 	;}
 	
-	/** @return Df_Kkb_RequestDocument_Secondary */
+	/** @return \Df\Kkb\RequestDocument\Secondary */
 	private function getRequestDocument() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Kkb_RequestDocument_Secondary::i($this);
+			$this->{__METHOD__} = \Df\Kkb\RequestDocument\Secondary::i($this);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return string */
-	private function getResponseAsXml() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Http_Client $httpClient */
-			$httpClient = new Zend_Http_Client();
-			$httpClient
-				->setHeaders(array())
-				->setUri($this->getUri())
-				->setConfig(array('timeout' => 10))
-				->setMethod(Zend_Http_Client::GET)
-			;
-			/** @var Zend_Http_Response $response */
-			$this->{__METHOD__} = df_trim($httpClient->request()->getBody());
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	private function getResponseAsXml() {return dfc($this, function() {
+		/** @var \Zend_Http_Client $httpClient */
+		$httpClient = new \Zend_Http_Client();
+		$httpClient
+			->setHeaders(array())
+			->setUri($this->getUri())
+			->setConfig(array('timeout' => 10))
+			->setMethod(\Zend_Http_Client::GET)
+		;
+		/** @var string $result */
+		$result = df_trim($httpClient->request()->getBody());
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 }

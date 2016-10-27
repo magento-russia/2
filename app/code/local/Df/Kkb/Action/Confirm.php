@@ -1,5 +1,6 @@
 <?php
-class Df_Kkb_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\Kkb\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -9,7 +10,7 @@ class Df_Kkb_Action_Confirm extends \Df\Payment\Action\Confirm {
 		/**
 		 * Стандартная проверка подписи нам не нужна,
 		 * потому что специфическая для Казкоммерцбанка проверка подписи
-		 * производится в классе @see Df_Kkb_Response_Payment
+		 * производится в классе @see \Df\Kkb\Response\Payment
 		 */
 		if (!$this->getResponseAsObject()->isSuccessful()) {
 			df_error('Заказ не был оплачен.');
@@ -18,45 +19,38 @@ class Df_Kkb_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * Использовать @see getConst() нельзя из-за рекурсии.
+	 * Номер заказа мы получаем не традиционным способом (по ключу в ассоциативном массиве),
+	 * а через $this->getResponseAsObject()->getOrderIncrementId()
 	 * @override
 	 * @return string
 	 */
-	protected function rkOII() {
-		// Номер заказа мы получаем не традиционным способом (по ключу в ассоциативном массиве),
-		// а через $this->getResponseAsObject()->getOrderIncrementId()
-		return 'отсутствует';
-	}
+	protected function rkOII() {return 'отсутствует';}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function rOII() {
-		return $this->getResponseAsObject()->getOrderIncrementId();
-	}
+	protected function rOII() {return $this->getResponseAsObject()->getOrderIncrementId();}
 	
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function rAmountS() {
-		return $this->getResponseAsObject()->getPaymentAmountInServiceCurrency()->getAsString();
-	}
+	protected function rAmountS() {return
+		$this->getResponseAsObject()->getPaymentAmountInServiceCurrency()->getAsString()
+	;}
 	
-	/** @return Df_Kkb_Response_Payment */
-	protected function getResponseAsObject() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Kkb_Response_Payment::i(df_request('response'));
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return \Df\Kkb\Response\Payment */
+	protected function getResponseAsObject() {return dfc($this, function() {return
+		\Df\Kkb\Response\Payment::i(df_request('response'))
+	;});}
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {return 0;}
+	protected function responseTextForError(\Exception $e) {return 0;}
 
 	/**
 	 * @override
@@ -67,7 +61,7 @@ class Df_Kkb_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * Стандартная проверка подписи нам не нужна,
 	 * потому что специфическая для Казкоммерцбанка проверка подписи
-	 * производится в классе @see Df_Kkb_Response_Payment
+	 * производится в классе @see \Df\Kkb\Response\Payment
 	 * @override
 	 * @return string
 	 */

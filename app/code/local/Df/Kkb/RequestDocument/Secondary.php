@@ -1,44 +1,45 @@
 <?php
-/** @method Df_Kkb_Request_Secondary getRequest() */
-class Df_Kkb_RequestDocument_Secondary extends Df_Kkb_RequestDocument_Signed {
+namespace Df\Kkb\RequestDocument;
+use Df\Xml\X as X;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+/** @method \Df\Kkb\Request\Secondary getRequest() */
+class Secondary extends Signed {
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getLetterAttributes() {return array('id' => $this->configS()->getShopId());}
+	protected function getLetterAttributes() {return ['id' => $this->configS()->getShopId()];}
 
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
-	protected function getLetterBody() {
-		return array_filter(array(
-			'command' => $this->getDocumentData_Command()
-			,'payment' => $this->getDocumentData_Payment()
-			,'reason' => $this->getDocumentData_Reason()
-		));
-	}
+	protected function getLetterBody() {return array_filter([
+		'command' => $this->getDocumentData_Command()
+		,'payment' => $this->getDocumentData_Payment()
+		,'reason' => $this->getDocumentData_Reason()
+	]);}
 
 	/** @return array(string => mixed) */
-	private function getDocumentData_Command() {
-		return array(\Df\Xml\X::ATTR => array('type' => $this->getTransactionType()));
-	}
+	private function getDocumentData_Command() {return [
+		X::ATTR => ['type' => $this->getTransactionType()]
+	];}
 
 	/** @return array(string => mixed) */
-	private function getDocumentData_Payment() {
-		return array(\Df\Xml\X::ATTR => array(
+	private function getDocumentData_Payment() {return [
+		X::ATTR => [
 			'reference' => $this->getRequest()->getPaymentExternalId()
 			,'approval_code' => $this->getResponsePayment()->getPaymentCodeApproval()
 			,'orderid' => $this->orderIId()
 			,'amount' => $this->amount()
 			,'currency_code' => $this->getCurrencyCode()
-		));
-	}
+		]
+	];}
 
 	/** @return string|null */
 	private function getDocumentData_Reason() {return $this->isCapture() ? null : 'отмена заказа';}
 
-	/** @return Df_Kkb_Response_Payment */
+	/** @return \Df\Kkb\Response\Payment */
 	private function getResponsePayment() {return $this->getRequest()->getResponsePayment();}
 
 	/** @return string */
@@ -53,7 +54,7 @@ class Df_Kkb_RequestDocument_Secondary extends Df_Kkb_RequestDocument_Signed {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST, Df_Kkb_Request_Secondary::class);
+		$this->_prop(self::P__REQUEST, \Df\Kkb\Request\Secondary::class);
 	}
 
 	const TRANSACTION__CAPTURE = 'complete';
@@ -67,12 +68,10 @@ class Df_Kkb_RequestDocument_Secondary extends Df_Kkb_RequestDocument_Signed {
 		/** @var string $result */
 		$result =
 			dfa(
-				array(
-					self::TRANSACTION__CAPTURE =>
-						Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE
-					,self::TRANSACTION__VOID =>
-						Mage_Sales_Model_Order_Payment_Transaction::TYPE_VOID
-				)
+				[
+					self::TRANSACTION__CAPTURE => T::TYPE_CAPTURE
+					, self::TRANSACTION__VOID => T::TYPE_VOID
+				]
 				,$transactionCodeInServiceFormat
 			)
 		;
@@ -81,10 +80,10 @@ class Df_Kkb_RequestDocument_Secondary extends Df_Kkb_RequestDocument_Signed {
 	}
 	/**
 	 * @static
-	 * @param Df_Kkb_Request_Secondary $requestSecondary
-	 * @return Df_Kkb_RequestDocument_Secondary
+	 * @param \Df\Kkb\Request\Secondary $requestSecondary
+	 * @return \Df\Kkb\RequestDocument\Secondary
 	 */
-	public static function i(Df_Kkb_Request_Secondary $requestSecondary) {
-		return new self(array(self::P__REQUEST => $requestSecondary));
-	}
+	public static function i(\Df\Kkb\Request\Secondary $requestSecondary) {return
+		new self([self::P__REQUEST => $requestSecondary])
+	;}
 }

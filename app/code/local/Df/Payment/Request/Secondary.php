@@ -97,7 +97,7 @@ abstract class Secondary extends \Df\Payment\Request {
 		parent::_construct();
 		$this->_prop(self::$P__PAYMENT, 'Mage_Sales_Model_Order_Payment');
 	}
-	/** @used-by Df_Kkb_RequestDocument_Secondary::_construct() */
+	/** @used-by \Df\Kkb\RequestDocument\Secondary::_construct() */
 
 	/**
 	 * @used-by _construct()

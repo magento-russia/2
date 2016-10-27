@@ -1,15 +1,16 @@
 <?php
-abstract class Df_Kkb_Response extends \Df\Payment\Response\Xml {
-	/** @return Df_Kkb_Config_Area_Service */
+namespace Df\Kkb;
+abstract class Response extends \Df\Payment\Response\Xml {
+	/** @return \Df\Kkb\Config\Area\Service */
 	protected function configS() {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * Обратите внимание, что таким туповатым способом
-			 * мы вправе создавать объект класса @see Df_Kkb_Config_Area_Service
+			 * мы вправе создавать объект класса @see \Df\Kkb\Config\Area\Service
 			 * лишь потому, что от него мы получаем только те данные,
 			 * которые не зависят от области действия настроек.
 			 */
-			$this->{__METHOD__} = Df_Kkb_Method::i()->configS();
+			$this->{__METHOD__} = \Df\Kkb\Method::i()->configS();
 		}
 		return $this->{__METHOD__};
 	}

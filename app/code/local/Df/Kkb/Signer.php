@@ -1,5 +1,6 @@
 <?php
-class Df_Kkb_Signer extends Df_Core_Model {
+namespace Df\Kkb;
+class Signer extends Df_Core_Model {
 	/** @return string */
 	public function getSignature() {
 		if (!isset($this->{__METHOD__})) {
@@ -30,7 +31,7 @@ class Df_Kkb_Signer extends Df_Core_Model {
 	/** @return string */
 	private function getDocument() {return $this->cfg(self::P__DOCUMENT);}
 
-	/** @return Df_Kkb_Config_Area_Service */
+	/** @return \Df\Kkb\Config\Area\Service */
 	private function configS() {return $this->cfg(self::P__SERVICE_CONFIG);}
 	
 	/**
@@ -55,7 +56,7 @@ class Df_Kkb_Signer extends Df_Core_Model {
 		parent::_construct();
 		$this
 		    ->_prop(self::P__DOCUMENT, DF_V_STRING_NE)
-			->_prop(self::P__SERVICE_CONFIG, Df_Kkb_Config_Area_Service::class)
+			->_prop(self::P__SERVICE_CONFIG, \Df\Kkb\Config\Area\Service::class)
 		;
 	}
 
@@ -64,10 +65,10 @@ class Df_Kkb_Signer extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param string $document
-	 * @param Df_Kkb_Config_Area_Service $serviceConfig
-	 * @return Df_Kkb_Signer
+	 * @param \Df\Kkb\Config\Area\Service $serviceConfig
+	 * @return \Df\Kkb\Signer
 	 */
-	public static function i($document, Df_Kkb_Config_Area_Service $serviceConfig) {
+	public static function i($document, \Df\Kkb\Config\Area\Service $serviceConfig) {
 		return new self(array(
 			self::P__DOCUMENT => $document, self::P__SERVICE_CONFIG => $serviceConfig
 		));

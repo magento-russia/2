@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Kkb_RequestDocument_Signed extends Df_Core_Model {
+namespace Df\Kkb\RequestDocument;
+abstract class Signed extends \Df_Core_Model {
 	/**                               
 	 * @abstract
 	 * @return array(string => string)
@@ -13,14 +14,9 @@ abstract class Df_Kkb_RequestDocument_Signed extends Df_Core_Model {
 	abstract protected function getLetterBody();
 	
 	/** @return string */
-	public function getXml() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				'<document>' . $this->getLetter() . $this->getSignature() . '</document>'
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getXml() {return dfc($this, function() {return
+		'<document>' . $this->getLetter() . $this->getSignature() . '</document>'
+	;});}
 
 	/**
 	 * В документации о формате суммы платежа ничего не сказано.
@@ -35,22 +31,20 @@ abstract class Df_Kkb_RequestDocument_Signed extends Df_Core_Model {
 	 */
 	protected function amount() {return $this->getRequest()->amount()->getAsString();}
 
-	/** @return Df_Kkb_Config_Area_Service */
+	/** @return \Df\Kkb\Config\Area\Service */
 	protected function configS() {return $this->getRequest()->configS();}
 
 	/** @return string */
-	protected function getCurrencyCode() {
-		return $this->configS()->getCurrencyCodeInServiceFormat();
-	}
+	protected function getCurrencyCode() {return $this->configS()->getCurrencyCodeInServiceFormat();}
 
-	/** @return Df_Kkb_Request_Payment|Df_Kkb_Request_Secondary */
-	protected function getRequest() {return $this->cfg(self::P__REQUEST);}
+	/** @return \Df\Kkb\Request\Payment|\Df\Kkb\Request\Secondary */
+	protected function getRequest() {return $this[self::P__REQUEST];}
 
 	/**
-	 * @used-by Df_Kkb_RequestDocument_Registration::getDocumentData_Order()
-	 * @used-by Df_Kkb_RequestDocument_Secondary::getDocumentData_Payment()
-	 * @uses Df_Kkb_Request_Payment::orderIId()
-	 * @uses Df_Kkb_Request_Secondary::orderIId()
+	 * @used-by \Df\Kkb\RequestDocument\Registration::getDocumentData_Order()
+	 * @used-by \Df\Kkb\RequestDocument\Secondary::getDocumentData_Payment()
+	 * @uses \Df\Kkb\Request\Payment::orderIId()
+	 * @uses \Df\Kkb\Request\Secondary::orderIId()
 	 * @return string
 	 */
 	protected function orderIId() {
@@ -64,49 +58,32 @@ abstract class Df_Kkb_RequestDocument_Signed extends Df_Core_Model {
 	}
 
 	/** @return \Df\Xml\X */
-	private function getElementLetter() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_xml_node('merchant', $this->getLetterAttributes())
-					->importArray($this->getLetterBody())
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getElementLetter() {return dfc($this, function() {return
+		df_xml_node('merchant', $this->getLetterAttributes())->importArray($this->getLetterBody())
+	;});}
 	
 	/** @return string */
-	private function getLetter() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->postProcessXml($this->getElementLetter()->asXMLPart());
-		}
-		return $this->{__METHOD__};
-	}
+	private function getLetter() {return dfc($this, function() {return
+		$this->postProcessXml($this->getElementLetter()->asXMLPart())
+	;});}
 	
 	/** @return string */
-	private function getSignature() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->postProcessXml($this->getElementSignature()->asXMLPart());
-		}
-		return $this->{__METHOD__};
-	}
+	private function getSignature() {return dfc($this, function() {return
+		$this->postProcessXml($this->getElementSignature()->asXMLPart())
+	;});}
 
 	/** @return \Df\Xml\X */
-	private function getElementSignature() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_xml_node('merchant_sign', array('type' => 'RSA'));
-			$this->{__METHOD__}->setValue($this->getSigner()->getSignature());
-		}
-		return $this->{__METHOD__};
-	}
+	private function getElementSignature() {return dfc($this, function() {
+		/** @var \Df\Xml\X $result */
+		$result = df_xml_node('merchant_sign', array('type' => 'RSA'));
+		$result->setValue($this->getSigner()->getSignature());
+		return $result;
+	});}
 
-	/** @return Df_Kkb_Signer */
-	private function getSigner() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				Df_Kkb_Signer::i($this->getLetter(), $this->configS());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return \Df\Kkb\Signer */
+	private function getSigner() {return dfc($this, function() {return
+		\Df\Kkb\Signer::i($this->getLetter(), $this->configS())
+	;});}
 
 	/**
 	 * Из документации:

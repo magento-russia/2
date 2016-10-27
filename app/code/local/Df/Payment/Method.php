@@ -249,7 +249,7 @@ abstract class Method
 	public function configF() {return $this->config()->frontend();}
 
 	/**
-	 * @used-by Df_Kkb_Response::configS()
+	 * @used-by \Df\Kkb\Response::configS()
 	 * @used-by \Df\Payment\Block\Form::isTestMode()
 	 * @return \Df\Payment\Config\Area\Service
 	 */

@@ -22,8 +22,8 @@ abstract class Request extends \Df_Core_Model {
 	 * Обратите внимание, что 2 платёжных модуля (IPay и Kkb)
 	 * повышают видимость данного метода до публичной:
 	 * @used-by \Df\IPay\Request\Payment::getAmount()
-	 * @used-by Df_Kkb_Request_Payment::getAmount()
-	 * @used-by Df_Kkb_Request_Secondary::getAmount()
+	 * @used-by \Df\Kkb\Request\Payment::getAmount()
+	 * @used-by \Df\Kkb\Request\Secondary::getAmount()
 	 * Намеренно не делаем данный метод публичным в базовом классе
 	 * ради упрощения понимания системы
 	 * (чем меньше публичных методов — тем проще понимать систему).
@@ -116,7 +116,7 @@ abstract class Request extends \Df_Core_Model {
 	 * @used-by \Df\EasyPay\Request\Payment::_params()
 	 * @used-by \Df\EasyPay\Request\Payment::getSignature()
 	 * @used-by \Df\Interkassa\Request\Payment::_params()
-	 * @used-by Df_Kkb_Request_Payment::orderIId()
+	 * @used-by \Df\Kkb\Request\Payment::orderIId()
 	 * @used-by Df_LiqPay_Request_Payment::getParamsForXml()
 	 * @used-by Df_Moneta_Request_Payment::_params()
 	 * @used-by Df_Moneta_Request_Payment::getSignature()

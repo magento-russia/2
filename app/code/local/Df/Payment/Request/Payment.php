@@ -155,7 +155,7 @@ abstract class Payment extends \Df\Payment\Request {
 	/**
 	 * Этот метод используют только потомки:
 	 * @used-by \Df\Interkassa\Request\Payment::_params()
-	 * @used-by Df_Kkb_Request_Payment::_params()
+	 * @used-by \Df\Kkb\Request\Payment::_params()
 	 * @used-by Df_LiqPay_Request_Payment::getParamsForXml()
 	 * @used-by Df_WebMoney_Request_Payment::_params()
 	 * @used-by Df_WebPay_Request_Payment::_params()

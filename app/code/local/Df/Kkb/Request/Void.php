@@ -1,5 +1,6 @@
 <?php
-class Df_Kkb_Request_Void extends Df_Kkb_Request_Secondary {
+namespace Df\Kkb\Request;
+class Void extends Secondary {
 	/**
 	 * @override
 	 * @return string
@@ -10,7 +11,7 @@ class Df_Kkb_Request_Void extends Df_Kkb_Request_Secondary {
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {return Df_Kkb_RequestDocument_Secondary::TRANSACTION__VOID;}
+	public function getTransactionType() {return \Df\Kkb\RequestDocument\Secondary::TRANSACTION__VOID;}
 }
 
 

@@ -1,5 +1,6 @@
 <?php
-class Df_Kkb_Method extends \Df\Payment\Method\WithRedirect {
+namespace Df\Kkb;
+class Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @see \Df\Payment\Method::canCapture()
 	 * @override
@@ -20,7 +21,7 @@ class Df_Kkb_Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Kkb_Method
+	 * @return self
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 }
