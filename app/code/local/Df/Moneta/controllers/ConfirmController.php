@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_Moneta_Action_Confirm */
+/** @uses \Df\Moneta\Action\Confirm */
 class Df_Moneta_ConfirmController extends \Df\Core\Controller {}

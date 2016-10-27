@@ -1,5 +1,6 @@
 <?php
-class Df_Moneta_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\Moneta\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
@@ -18,10 +19,10 @@ class Df_Moneta_Action_Confirm extends \Df\Payment\Action\Confirm {
 	 * потому что всё равно мы в реальном времени причину сбоя не устраним,
 	 * а вот «MONETA.RU» нас повторными запросами задолбает.
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {return 'SUCCESS';}
+	protected function responseTextForError(\Exception $e) {return 'SUCCESS';}
 
 	/**
 	 * О результате приема отчета об оплате

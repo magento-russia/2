@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Moneta_Method method() */
-class Df_Moneta_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\Moneta\Request;
+/** @method \Df\Moneta\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()

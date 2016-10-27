@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-moneta>
-				<model>Df_Moneta_Method</model>
+				<model>Df\Moneta\Method</model>
 			</df-moneta>
 		</payment>
 	</default>
