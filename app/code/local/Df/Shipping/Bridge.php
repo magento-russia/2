@@ -1,12 +1,13 @@
 <?php
-/** @method Df_Shipping_Carrier main() */
-class Df_Shipping_Bridge extends Df_Checkout_Module_Bridge {
+namespace Df\Shipping;
+/** @method \Df\Shipping\Carrier main() */
+class Bridge extends \Df\Checkout\Module\Bridge {
 	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::class);
+		$this->_prop(self::$P__MAIN, Carrier::class);
 	}
 }

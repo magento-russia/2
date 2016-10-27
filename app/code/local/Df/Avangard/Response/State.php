@@ -98,7 +98,7 @@ class Df_Avangard_Response_State extends Df_Avangard_Response {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Df_Payment_Exception_Response
+	 * @throws \Df\Payment\Exception\Response
 	 */
 	public function throwOnFailure() {
 		if (!$this->isPaymentServiceError()) {

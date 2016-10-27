@@ -1,52 +1,53 @@
 <?php
+namespace Df\Shipping;
 /**
  * @method int|null getStore()
- * @see Mage_Shipping_Model_Shipping::getCarrierByCode():
+ * @see \Mage_Shipping_Model_Shipping::getCarrierByCode():
 	if ($storeId) {
 		$obj->setStore($storeId);
 	}
  * @method setStore(int $value)
  */
-abstract class Df_Shipping_Carrier
-	extends Mage_Shipping_Model_Carrier_Abstract
-	implements Mage_Shipping_Model_Carrier_Interface, Df_Checkout_Module_Main {
+abstract class Carrier
+	extends \Mage_Shipping_Model_Carrier_Abstract
+	implements \Mage_Shipping_Model_Carrier_Interface, \Df\Checkout\Module\Main {
 	/**
 	 * Обратите внимание, что при браковке запроса в методе @see proccessAdditionalValidation()
 	 * модуль может показать на экране оформления заказа диагностическое сообщение,
 	 * вернув из этого метода объект класса @see Mage_Shipping_Model_Rate_Result_Error.
 	 * При браковке запроса в методе @see collectRates() модуль такой возможности лишён.
 	 * @override
-	 * @used-by Mage_Shipping_Model_Shipping::collectCarrierRates()
+	 * @used-by \Mage_Shipping_Model_Shipping::collectCarrierRates()
 	 * Родительский метод (абстрактный): Mage_Shipping_Model_Carrier_Abstract::collectRates()
-	 * @param Mage_Shipping_Model_Rate_Request $request
-	 * @return Mage_Shipping_Model_Rate_Result|bool|null
+	 * @param \Mage_Shipping_Model_Rate_Request $request
+	 * @return \Mage_Shipping_Model_Rate_Result|bool|null
 	 */
-	public function collectRates(Mage_Shipping_Model_Rate_Request $request) {
-		return $this->_lastRateResult = Df_Shipping_Collector::r($this, $request);
-	}
+	public function collectRates(\Mage_Shipping_Model_Rate_Request $request) {return
+		$this->_lastRateResult = \Df\Shipping\Collector::r($this, $request)
+	;}
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::config()
-	 * @return Df_Checkout_Module_Config_Facade
+	 * @see \Df\Checkout\Module\Main::config()
+	 * @return \Df\Checkout\Module\Config\Facade
 	 */
-	public function config() {return Df_Checkout_Module_Config_Facade::s($this);}
+	public function config() {return \Df\Checkout\Module\Config\Facade::s($this);}
 
 	/**
-	 * @used-by Df_Shipping_Rate_Request::getDeclaredValue()
-	 * @return Df_Shipping_Config_Area_Admin
+	 * @used-by \Df\Shipping\Rate\Request::getDeclaredValue()
+	 * @return \Df\Shipping\Config\Area\Admin
 	 */
 	public function configA() {return $this->config()->admin();}
 
 	/**
-	 * @used-by Df_Shipping_Rate_Request::evaluateMessage()
+	 * @used-by \Df\Shipping\Rate\Request::evaluateMessage()
 	 * @param string $message
 	 * @param array(string => string) $variables [optional]
 	 * @return string
 	 */
-	public function evaluateMessage($message, array $variables = array()) {
-		return strtr($message, $variables + $this->getMessageVariables());
-	}
+	public function evaluateMessage($message, array $variables = []) {return
+		strtr($message, $variables + $this->getMessageVariables())
+	;}
 
 	/**
 	 * @see Mage_Shipping_Model_Carrier_Interface::getAllowedMethods()
@@ -61,7 +62,7 @@ abstract class Df_Shipping_Carrier
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getAllowedMethods() {return array();}
+	public function getAllowedMethods() {return [];}
 
 	/**
 	 * Получаем заданное ранее администратором
@@ -93,15 +94,13 @@ abstract class Df_Shipping_Carrier
 	 * @param string $field
 	 * @return mixed
 	 */
-	public function getConfigData($field) {
-		return
-			'showmethod' === $field
-			&& $this->_lastRateResult
-			&& $this->_lastRateResult->isInternalError()
-				? true
-				: $this->config()->getVar($field)
-		;
-	}
+	public function getConfigData($field) {return
+		'showmethod' === $field
+		&& $this->_lastRateResult
+		&& $this->_lastRateResult->isInternalError()
+			? true
+			: $this->config()->getVar($field)
+	;}
 
 	/**
 	 * Получаем заданное ранее администратором
@@ -114,38 +113,35 @@ abstract class Df_Shipping_Carrier
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getRmId()
+	 * @see \Df\Checkout\Module\Main::getRmId()
 	 * @used-by isActive()
-	 * @used-by Df_Checkout_Module_Config_Manager::adaptKey()
+	 * @used-by \Df\Checkout\Module\Config\Manager::adaptKey()
 	 * @return string
 	 */
-	final public function getRmId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_module_id($this, '-');
-		}
-		return $this->{__METHOD__};
-	}
+	final public function getRmId() {return dfc($this, function() {return
+		df_module_id($this, '-')
+	;});}
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getCheckoutModuleType()
-	 * @used-by Df_Checkout_Module_Bridge::convention()
-	 * @used-by Df_Checkout_Module_Config_Manager::s()
-	 * @used-by Df_Checkout_Module_Config_Area_No::s()
+	 * @see \Df\Checkout\Module\Main::getCheckoutModuleType()
+	 * @used-by \Df\Checkout\Module\Bridge::convention()
+	 * @used-by \Df\Checkout\Module\Config\Manager::s()
+	 * @used-by \Df\Checkout\Module\Config\Area_No::s()
 	 * @return string
 	 */
-	public function getCheckoutModuleType() {return Df_Checkout_Module_Bridge::_type(__CLASS__);}
+	public function getCheckoutModuleType() {return \Df\Checkout\Module\Bridge::_type(__CLASS__);}
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getConfigTemplates()
-	 * @used-by Df_Checkout_Module_Config_Manager::getTemplates()
+	 * @see \Df\Checkout\Module\Main::getConfigTemplates()
+	 * @used-by \Df\Checkout\Module\Config\Manager::getTemplates()
 	 * @return array(string => string)
 	 */
 	public function getConfigTemplates() {return array();}
 
 	/**
-	 * @see Df_Checkout_Module_Main::getTitle()
+	 * @see \Df\Checkout\Module\Main::getTitle()
 	 * @override
 	 * @override
 	 * @return string
@@ -153,26 +149,20 @@ abstract class Df_Shipping_Carrier
 	public function getTitle() {return $this->configF()->getTitle();}
 
 	/** @return array(string => string) */
-	protected function getMessageVariables() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				'{carrier}' => $this->getTitle()
-				,'{название службы доставки в именительном падеже}' => $this->getTitle()
-				,'{phone}' => df_cfg()->base()->getStorePhone($this->getStore())
-				,'{телефон магазина}' => df_cfg()->base()->getStorePhone($this->getStore())
-				,'{название службы доставки в творительном падеже}' =>
-					$this->названиеВТворительномПадеже()
-				,'{название службы и способа доставки в творительном падеже}' =>
-					$this->названиеВТворительномПадеже()
-
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getMessageVariables() {return dfc($this, function() {return [
+		'{carrier}' => $this->getTitle()
+		,'{название службы доставки в именительном падеже}' => $this->getTitle()
+		,'{phone}' => df_cfg()->base()->getStorePhone($this->getStore())
+		,'{телефон магазина}' => df_cfg()->base()->getStorePhone($this->getStore())
+		,'{название службы доставки в творительном падеже}' =>
+			$this->названиеВТворительномПадеже()
+		,'{название службы и способа доставки в творительном падеже}' =>
+			$this->названиеВТворительномПадеже()
+	];});}
 
 	/**
 	 * @used-by getTitle()
-	 * @return Df_Shipping_Config_Area_Frontend
+	 * @return \Df\Shipping\Config\Area\Frontend
 	 */
 	private function configF() {return $this->config()->frontend();}
 
@@ -180,32 +170,21 @@ abstract class Df_Shipping_Carrier
 	 * @used-by getMessageVariables()
 	 * @return string
 	 */
-	private function названиеВТворительномПадеже() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$this->{__METHOD__} =
-				$this->titleMorhper()
-					? "<b>{$this->titleMorhper()->getInCaseInstrumental()}</b>"
-					: "службой «<b>{$this->getTitle()}</b>»"
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function названиеВТворительномПадеже() {return dfc($this, function() {return
+		$this->titleMorhper()
+		? "<b>{$this->titleMorhper()->getInCaseInstrumental()}</b>"
+		: "службой «<b>{$this->getTitle()}</b>»"
+	;});}
 
 	/**
 	 * @used-by названиеВТворительномПадеже()
-	 * @return Df_Localization_Morpher_Response|null
+	 * @return \Df_Localization_Morpher_Response|null
 	 */
-	private function titleMorhper() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!df_has_russian_letters($this->getTitle())
-				? null
-				: Df_Localization_Morpher::s()->getResponseSilent($this->getTitle())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function titleMorhper() {return dfc($this, function() {return
+		!df_has_russian_letters($this->getTitle())
+		? null
+		: \Df_Localization_Morpher::s()->getResponseSilent($this->getTitle())
+	;});}
 
 	/**
 	 * Обратите внимание, что родительский класс нигде не инициализирует
@@ -229,7 +208,7 @@ abstract class Df_Shipping_Carrier
 	/**
 	 * @used-by collectRates()
 	 * @used-by getConfigData()
-	 * @var Df_Shipping_Rate_Result|null
+	 * @var \Df\Shipping\Rate\Result|null
 	 */
 	private $_lastRateResult = null;
 }

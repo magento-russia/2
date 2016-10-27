@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Shipping_Locator extends Df_Core_Model {
+namespace Df\Shipping;
+abstract class \Df\Shipping\Locator extends \Df_Core_Model {
 	/**
 	 * @used-by map()
 	 * @param string $type
@@ -9,8 +10,8 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 
 	/**
 	 * @used-by _find()
-	 * @used-by Df_Core_Model::cacheLoadProperty()
-	 * @used-by Df_Core_Model::cacheSaveProperty()
+	 * @used-by \Df_Core_Model::cacheLoadProperty()
+	 * @used-by \Df_Core_Model::cacheSaveProperty()
 	 * @param string $type
 	 * @return array(string => string|int|array(string|int))
 	 */
@@ -32,7 +33,7 @@ abstract class Df_Shipping_Locator extends Df_Core_Model {
 	 * @return string|int|array(string|int)|null
 	 */
 	protected static function _find($type, $name, $starts = false) {
-		/** @var Df_Shipping_Locator $s */
+		/** @var \Df\Shipping\Locator $s */
 		static $s; if (!$s) {$s = df_sc(static::class, __CLASS__);}
 		$name = mb_strtoupper($name);
 		/** @var string|mixed $result */

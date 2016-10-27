@@ -107,7 +107,7 @@ class Df_Alfabank_Response_State extends Df_Alfabank_Response {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Df_Payment_Exception_Response
+	 * @throws \Df\Payment\Exception\Response
 	 */
 	public function throwOnFailure() {
 		parent::throwOnFailure();

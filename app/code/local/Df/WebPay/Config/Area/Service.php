@@ -1,5 +1,5 @@
 <?php
-class Df_WebPay_Config_Area_Service extends Df_Payment_Config_Area_Service {
+class Df_WebPay_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 *  Использовать ли промышленный платёжный сервис WEBPAY в тестовом режиме?
 		Укажите в данном поле значение «да»,

@@ -1,18 +1,18 @@
 <?php
-/** @method Df_Shipping_Carrier main() */
-class Df_Shipping_Config_Manager extends Df_Checkout_Module_Config_Manager {
+namespace Df\Shipping\Config;
+/** @method \Df\Shipping\Carrier main() */
+class Manager extends \Df\Checkout\Module\Config\Manager {
 	/**
-	 * @used-by Df_Shipping_Config_Area::getVar()
+	 * @used-by Area::getVar()
 	 * @param string $key
-	 * @param mixed $default [optional]
+	 * @param mixed $d [optional]
 	 * @return mixed
 	 */
-	public function getValueLegacy($key, $default = null) {
-		return $this->legacy()->getValue($key, $default);
-	}
+	public function getValueLegacy($key, $d = null) {return $this->legacy()->getValue($key, $d);}
 
 	/**
 	 * @override
+	 * @see \Df\Checkout\Module\Config\Manager::_getValue()
 	 * @param string $key
 	 * @return string|null
 	 */
@@ -20,12 +20,13 @@ class Df_Shipping_Config_Manager extends Df_Checkout_Module_Config_Manager {
 
 	/**
 	 * @override
+	 * @see \Df\Checkout\Module\Config\Manager::getKeyBase()
 	 * @return string
 	 */
 	protected function getKeyBase() {return 'df_shipping';}
 
-	/** @return Df_Shipping_Config_Manager_Legacy */
-	private function legacy() {return Df_Shipping_Config_Manager_Legacy::s($this->main());}
+	/** @return Manager\Legacy */
+	private function legacy() {return Manager\Legacy::s($this->main());}
 	
 	/**
 	 * @override
@@ -33,6 +34,6 @@ class Df_Shipping_Config_Manager extends Df_Checkout_Module_Config_Manager {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::class);
+		$this->_prop(self::$P__MAIN, \Df\Shipping\Carrier::class);
 	}
 }

@@ -10,7 +10,7 @@
 		<carriers>
 			<df-in-time>
 				<active>0</active>
-				<model>Df_InTime_Carrier</model>
+				<model>Df\InTime\Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

@@ -22,7 +22,7 @@ class Df_Admin_Config_Form_Element_Multiselect extends Varien_Data_Form_Element_
 	private static $RM__ALL = 'df-all';
 
 	/**
-	 * @used-by Df_Payment_Config_Area_Service::getSelectedPaymentMethods()
+	 * @used-by \Df\Payment\Config\Area\Service::getSelectedPaymentMethods()
 	 * @param mixed $value
 	 * @return bool
 	 */

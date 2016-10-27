@@ -1,5 +1,5 @@
 <?php
-class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
+class Df_Qiwi_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @used-by Zend_Soap_Server::handle()
 	 * @param stdClass $params
@@ -15,7 +15,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
 			$this->rkShopId() => dfo($params, 'login')
 			,$this->rkSignature() => dfo($params, 'password')
 			/**
-			 * Df_Payment_Action_Confirm::rState
+			 * \Df\Payment\Action\Confirm::rState
 			 * должен вернуть строку
 			 */
 			,$this->rkState() => strval(dfo($params, 'status'))
@@ -70,7 +70,7 @@ class Df_Qiwi_Action_Confirm extends Df_Payment_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Confirm::_process()
+	 * @see \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */

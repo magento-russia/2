@@ -106,7 +106,7 @@ function df_quote_has_items() {return
  * Без _nosid система будет формировать ссылку вида
  * http://localhost.com:656/df-payment/cancel/?___SID=U,
  * и тогда, в частности, Единая Касса неверно вычисляет ЭЦП.
- * @used-by Df_Payment_Action_Confirm::redirectToFail()
+ * @used-by \Df\Payment\Action\Confirm::redirectToFail()
  * @used-by Df_LiqPay_CustomerReturnController::processFailure()
  * @used-by Df_IPay_CustomerReturnController::indexAction()
  * @return string
@@ -119,7 +119,7 @@ function df_url_checkout_fail() {
  * Без _nosid система будет формировать ссылку вида
  * http://localhost.com:656/checkout/onepage/success/?___SID=U,
  * и тогда, в частности, Единая Касса неверно вычисляет ЭЦП.
- * @used-by Df_Payment_Action_Confirm::redirectToSuccess()
+ * @used-by \Df\Payment\Action\Confirm::redirectToSuccess()
  * @used-by Df_LiqPay_CustomerReturnController::processSuccess()
  * @used-by Df_IPay_CustomerReturnController::indexAction()
  * @return string

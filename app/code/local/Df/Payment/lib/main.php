@@ -38,4 +38,3 @@ function dfp_iia(I $payment, $keys = null) {
 	}
 	return $result;
 }
-

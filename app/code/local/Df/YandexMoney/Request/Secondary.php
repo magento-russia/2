@@ -1,5 +1,5 @@
 <?php
-abstract class Df_YandexMoney_Request_Secondary extends Df_Payment_Request_Secondary {
+abstract class Df_YandexMoney_Request_Secondary extends \Df\Payment\Request\Secondary {
 	/** @return array(string => string) */
 	abstract protected function getParamsUnique();
 
@@ -21,8 +21,8 @@ abstract class Df_YandexMoney_Request_Secondary extends Df_Payment_Request_Secon
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Secondary::_params()
-	 * @used-by Df_Payment_Request_Secondary::params()
+	 * @see \Df\Payment\Request\Secondary::_params()
+	 * @used-by \Df\Payment\Request\Secondary::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {

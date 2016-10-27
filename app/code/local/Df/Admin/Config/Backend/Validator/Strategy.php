@@ -10,7 +10,7 @@ abstract class Df_Admin_Config_Backend_Validator_Strategy extends Df_Core_Model 
 	protected function getBackend() {return $this->cfg(self::$P__BACKEND);}
 
 	/**
-	 * @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin::getShippingOriginParam()
+	 * @used-by \Df\Shipping\Config\Backend\Validator\Strategy\Origin::getShippingOriginParam()
 	 * @return Df_Core_Model_StoreM
 	 */
 	protected function store() {return $this->cfg(self::$P__STORE);}

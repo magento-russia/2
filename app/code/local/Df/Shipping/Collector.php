@@ -1,9 +1,10 @@
 <?php
+namespace Df\Shipping;
 use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
-abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
+abstract class Collector extends Bridge {
 	/**
 	 * @used-by collect()
-	 * @see Df_Shipping_Collector_Conditional::_collect()
+	 * @see \Df\Shipping\Collector\Conditional::_collect()
 	 * @return void
 	 */
 	abstract protected function _collect();
@@ -22,16 +23,16 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	abstract protected function domesticIso2();
 
 	/**
-	 * @used-by Df_Shipping_Collector_Child::_result()
+	 * @used-by \Df\Shipping\Collector\Child::_result()
 	 * @used-by addError()
 	 * @used-by addRate()
 	 * @used-by call()
 	 * @used-by r()
-	 * @return Df_Shipping_Rate_Result
+	 * @return \Df\Shipping\Rate\Result
 	 */
 	protected function _result() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = new Df_Shipping_Rate_Result;
+			$this->{__METHOD__} = new \Df\Shipping\Rate\Result;
 			/** @uses collect() */
 			$this->call(function() {$this->collect();});
 		}
@@ -42,8 +43,8 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @param float $cost
 	 * @param string|null $code [optional]
 	 * @param string|null $title [optional]
-	 * @param Zend_Date|int|null $timeMin [optional]
-	 * @param Zend_Date|int|null $timeMax [optional]
+	 * @param \Zend_Date|int|null $timeMin [optional]
+	 * @param \Zend_Date|int|null $timeMax [optional]
 	 */
 	protected function addRate($cost, $code = null, $title = null, $timeMin = null, $timeMax = null) {
 		$cost = df_float_positive($cost);
@@ -54,7 +55,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 		$costBase = $this->toBase($cost + $this->feeFixed()) + $this->feeDeclaredValueBase();
 		/** @var float $price */
 		$price = $this->roundPrice($costBase + $this->feeHandling($costBase));
-		$this->_result()->append(Df_Shipping_Rate_Result_Method::i(
+		$this->_result()->append(\Df\Shipping\Rate\Result\Method::i(
 			$code, $title, $costBase, $price, $this->resultCommon(), $timeMin, $timeMax
 		));
 	}
@@ -158,15 +159,10 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 */
 	protected function cityDest() {return $this->rr()->getDestinationCity();}
 
-	/**
-	 * @return string
-	 */
-	protected function cityDestUc() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = mb_strtoupper($this->cityDest());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return string */
+	protected function cityDestUc() {return dfc($this, function() {return
+		mb_strtoupper($this->cityDest())
+	;});}
 
 	/**
 	 * @used-by cityOrigUc()
@@ -181,23 +177,18 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 */
 	protected function countryOrigIso2() {return $this->rr()->getOriginCountryId();}
 
-	/**
-	 * @return string
-	 */
-	protected function cityOrigUc() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = mb_strtoupper($this->cityOrig());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return string */
+	protected function cityOrigUc() {return dfc($this, function() {return
+		mb_strtoupper($this->cityOrig())
+	;});}
 
-	/** @return Df_Shipping_Config_Area_Admin */
+	/** @return \Df\Shipping\Config\Area\Admin */
 	protected function configA() {return $this->config()->admin();}
 
-	/** @return Df_Shipping_Config_Area_Frontend */
+	/** @return \Df\Shipping\Config\Area\Frontend */
 	protected function configF() {return $this->config()->frontend();}
 
-	/** @return Df_Shipping_Config_Area_Service */
+	/** @return \Df\Shipping\Config\Area\Service */
 	protected function configS() {return $this->config()->service();}
 
 	/**
@@ -207,7 +198,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	protected function countryDest() {return $this->rr()->getDestinationCountry()->getNameRussian();}
 
 	/**
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::suffix()
+	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::suffix()
 	 * @return string|null
 	 */
 	protected function countryDestIso2() {return $this->rr()->getDestinationCountryId();}
@@ -222,16 +213,11 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by Df_NovaPoshta_Collector::responseRate()
 	 * @return float
 	 */
-	protected function declaredValue() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->fromBase(
-				$this->rr()->getPackageValue()
-				* $this->configA()->getDeclaredValuePercent()
-				/ 100
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function declaredValue() {return dfc($this, function() {return
+		$this->rr()->getPackageValue()
+		* $this->configA()->getDeclaredValuePercent()
+		/ 100
+	;});}
 
 	/**
 	 * @used-by addRate()
@@ -265,20 +251,13 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 		$this->error('Доставка <b>%s</b> невозможна.', $this->rr()->вСтрану());
 	}
 
-	/**
-	 * @return bool
-	 */
-	protected function isInCity() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_strings_are_equal_ci(
-				$this->rr()->getData('city'), $this->rr()->getDestCity()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return bool */
+	protected function isInCity() {return dfc($this, function() {return
+		df_strings_are_equal_ci($this->rr()->getData('city'), $this->rr()->getDestCity())
+	;});}
 
 	/**
-	 * перекрывается методом @see Df_Shipping_Collector_Child::rateDefaultCode()
+	 * перекрывается методом @see \Df\Shipping\Collector\Child::rateDefaultCode()
 	 * @used-by addRate()
 	 * @return string
 	 */
@@ -286,7 +265,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 
 	/**
 	 * @used-by Df_NovaPoshta_Collector::responseRate()
-	 * @return Df_Shipping_Rate_Request
+	 * @return \Df\Shipping\Rate\Request
 	 */
 	protected function rr() {return $this[self::$P__RATE_REQUEST];}
 
@@ -318,9 +297,9 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by Df_NovaPoshta_Collector::responseRate()
 	 * @return bool
 	 */
-	protected function приезжатьНаСкладМагазина() {
-		return $this->configS()->needGetCargoFromTheShopStore();
-	}
+	protected function приезжатьНаСкладМагазина() {return
+		$this->configS()->needGetCargoFromTheShopStore()
+	;}
 
 	/**
 	 * 2015-03-22
@@ -331,9 +310,9 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 */
 	private function addError($message) {
 		if (!$this->_result()->getError()) {
-			$this->_result()->append(new Mage_Shipping_Model_Rate_Result_Error(array(
+			$this->_result()->append(new \Mage_Shipping_Model_Rate_Result_Error([
 				'error' => true, 'error_message' => $message
-			) + $this->resultCommon()));
+			] + $this->resultCommon()));
 		}
 	}
 
@@ -366,7 +345,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	private function collect() {
 		$this->checkCountryOrig();
 		if (in_array($this->countryOrigIso2(), array_merge(
-			array($this->domesticIso2()), df_array($this->allowedOrigIso2Additional())
+			[$this->domesticIso2()], df_array($this->allowedOrigIso2Additional())
 		))) {
 			$this->checkCountryDest();
 			$this->_collect();
@@ -377,7 +356,7 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by configA()
 	 * @used-by configF()
 	 * @used-by configS()
-	 * @return Df_Checkout_Module_Config_Facade
+	 * @return \Df\Checkout\Module\Config\Facade
 	 */
 	private function config() {return $this->main()->config();}
 
@@ -386,16 +365,11 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by feeDeclaredValueBase()
 	 * @return float
 	 */
-	private function declaredValueBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->rr()->getPackageValue()
-				* $this->configA()->getDeclaredValuePercent()
-				/ 100
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function declaredValueBase() {return dfc($this, function() {return
+		$this->rr()->getPackageValue()
+		* $this->configA()->getDeclaredValuePercent()
+		/ 100
+	;});}
 
 	/**
 	 * @return void
@@ -442,65 +416,55 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 * @used-by addRate()
 	 * @return float
 	 */
-	private function feeDeclaredValueBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->declaredValueBase() * 0.01 * $this->feePercentOfDeclaredValue();
-		}
-		return $this->{__METHOD__};
-	}
+	private function feeDeclaredValueBase() {return dfc($this, function() {return
+		$this->declaredValueBase() * 0.01 * $this->feePercentOfDeclaredValue()
+	;});}
 
 	/**
 	 * @used-by addRate()
 	 * @param float $costBase
 	 * @return float
 	 */
-	private function feeHandling($costBase) {
-		return $costBase * 0.01 * $this->configA()->feePercent() + $this->configA()->feeFixed();
-	}
+	private function feeHandling($costBase) {return
+		$costBase * 0.01 * $this->configA()->feePercent() + $this->configA()->feeFixed()
+	;}
 
 	/**
 	 * @used-by addRate()
 	 * @param float $amount
 	 * @return float
 	 */
-	private function fromBase($amount) {
-		return df_currency_h()->convertFromBase($amount, $this->currencyCode(), $this->store());
-	}
+	private function fromBase($amount) {return
+		df_currency_h()->convertFromBase($amount, $this->currencyCode(), $this->store())
+	;}
 
 	/**
 	 * @used-by call()
 	 * @return string
 	 */
-	private function messageFailureGeneral() {
-		return $this->main()->evaluateMessage(
-			df_cfg()->shipping()->message()->getFailureGeneral($this->store())
-		);
-	}
+	private function messageFailureGeneral() {return $this->main()->evaluateMessage(
+		df_cfg()->shipping()->message()->getFailureGeneral($this->store())
+	);}
 
 	/**
 	 * @used-by addError()
 	 * @used-by addRate()
 	 * @return array(string => string)
 	 */
-	private function resultCommon() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				/** @used-by Mage_Sales_Model_Quote_Address_Rate::importShippingRate() */
-				'carrier' => $this->main()->getCarrierCode()
-				/**
-				 * @used-by Mage_Sales_Model_Quote_Address_Rate::importShippingRate()
-				 * При оформлении заказа Magento игнорирует данное значение
-				 * и берёт заголовок способа доставки из реестра настроек:
-				 * @see Mage_Adminhtml_Block_Sales_Order_Create_Shipping_Method_Form::getCarrierName()
-				 * @see Mage_Checkout_Block_Cart_Shipping::getCarrierName()
-				 * @see Mage_Checkout_Block_Multishipping_Shipping::getCarrierName()
-				 * @see Mage_Checkout_Block_Onepage_Shipping_Method_Available::getCarrierName()
-				 */
-				,'carrier_title' => $this->main()->getTitle()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	private function resultCommon() {return dfc($this, function() {return [
+		/** @used-by Mage_Sales_Model_Quote_Address_Rate::importShippingRate() */
+		'carrier' => $this->main()->getCarrierCode()
+		/**
+		 * @used-by Mage_Sales_Model_Quote_Address_Rate::importShippingRate()
+		 * При оформлении заказа Magento игнорирует данное значение
+		 * и берёт заголовок способа доставки из реестра настроек:
+		 * @see Mage_Adminhtml_Block_Sales_Order_Create_Shipping_Method_Form::getCarrierName()
+		 * @see Mage_Checkout_Block_Cart_Shipping::getCarrierName()
+		 * @see Mage_Checkout_Block_Multishipping_Shipping::getCarrierName()
+		 * @see Mage_Checkout_Block_Onepage_Shipping_Method_Available::getCarrierName()
+		 */
+		,'carrier_title' => $this->main()->getTitle()
+	];});}
 
 	/**
 	 * @used-by addRate()
@@ -524,24 +488,22 @@ abstract class Df_Shipping_Collector extends Df_Shipping_Bridge {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__RATE_REQUEST, 'Df_Shipping_Rate_Request');
+		$this->_prop(self::$P__RATE_REQUEST, '\Df\Shipping\Rate\Request');
 	}
 	/** @var string */
 	private static $P__RATE_REQUEST = 'rate_request';
 
 	/**
-	 * @used-by Df_Shipping_Carrier::collectRates()
-	 * @param Df_Shipping_Carrier $carrier
-	 * @param Mage_Shipping_Model_Rate_Request $rr
-	 * @return Df_Shipping_Rate_Result
+	 * @used-by \Df\Shipping\Carrier::collectRates()
+	 * @param \Df\Shipping\Carrier $carrier
+	 * @param \Mage_Shipping_Model_Rate_Request $rr
+	 * @return \Df\Shipping\Rate\Result
 	 */
-	public static function r(
-		Df_Shipping_Carrier $carrier, Mage_Shipping_Model_Rate_Request $rr
-	) {
-		/** @var Df_Shipping_Collector $i */
+	public static function r(\Df\Shipping\Carrier $carrier, \Mage_Shipping_Model_Rate_Request $rr) {
+		/** @var self $i */
 		$i = df_ic(df_con($carrier, 'Collector', __CLASS__), __CLASS__, array(
 			self::$P__MAIN => $carrier
-			, self::$P__RATE_REQUEST => Df_Shipping_Rate_Request::i($carrier, $rr->getData())
+			, self::$P__RATE_REQUEST => \Df\Shipping\Rate\Request::i($carrier, $rr->getData())
 		));
 		return $i->_result();
 	}

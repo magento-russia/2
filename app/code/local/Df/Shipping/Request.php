@@ -1,7 +1,5 @@
 <?php
 namespace Df\Shipping;
-use \Df_Shipping_Carrier as Carrier;
-use \Df_Shipping_Response as Response;
 class Request extends \Df_Core_Model {
 	/**
 	 * @used-by \Df\Shipping\Exception\Request::carrier()
@@ -68,7 +66,7 @@ class Request extends \Df_Core_Model {
 	 * Веб-сервисы служб доставки часто возвращают данные в формате,
 	 * очень похожем на JSON, но требующем некоторых корректировок
 	 * перед вызовом @see Zend_Json::decode()
-	 * @used-by Df_Shipping_Response::json()
+	 * @used-by \Df\Shipping\Response::json()
 	 * @param string $responseAsText
 	 * @return string
 	 */
@@ -79,10 +77,10 @@ class Request extends \Df_Core_Model {
 	 */
 	public function report() {
 		/** @var string[] $parts */
-		$parts = array(
+		$parts = [
 			'Модуль: ' . $this->getCarrier()->getTitle()
 			,'Адрес: ' . $this->getUri()->__toString()
-		);
+		];
 		/** @var array(string => string) $params */
 		$params = $this->paramsPost() + $this->paramsQuery();
 		if ($params || $this->getPostRawData()) {
@@ -101,12 +99,9 @@ class Request extends \Df_Core_Model {
 	 * @used-by Df_Exline_Locator::_map()
 	 * @return Response
 	 */
-	public function response() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Response::i($this, $this->getResponseAsText());
-		}
-		return $this->{__METHOD__};
-	}
+	public function response() {return dfc($this, function() {return
+		Response::i($this, $this->getResponseAsText())
+	;});}
 
 	/**
 	 * @used-by \Df\Shipping\Request::getDeliveryTime()

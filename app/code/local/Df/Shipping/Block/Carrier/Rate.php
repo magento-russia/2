@@ -1,13 +1,16 @@
 <?php
+namespace Df\Shipping\Block\Carrier;
+use Df\Shipping\Block\Carrier as Carrier;
+use Mage_Sales_Model_Quote_Address_Rate as QuoteAddressRate;
 /**
- * @method Df_Checkout_Block_Onepage_Shipping_Method_Available grandParent()
- * @method Df_Shipping_Block_Carrier parent()
+ * @method \Df_Checkout_Block_Onepage_Shipping_Method_Available grandParent()
+ * @method Carrier parent()
  */
-class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
+class Rate extends \Df_Core_Block_Abstract_NoCache {
 	/**
 	 * @override
-	 * @see Mage_Core_Block_Abstract::_toHtml()
-	 * @used-by Mage_Core_Block_Abstract::toHtml()
+	 * @see \Mage_Core_Block_Abstract::_toHtml()
+	 * @used-by \Mage_Core_Block_Abstract::toHtml()
 	 * @return string
 	 */
 	protected function _toHtml() {
@@ -24,30 +27,22 @@ class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	private function htmlInput() {
-		/** @var string $result */
-		$result = df_tag('input', array(
+	private function htmlInput() {return
+		df_tag_if(df_tag('input', [
 			'name' => 'shipping_method'
 			,'type' => 'radio'
 			,'value' => $this->code()
 			,'id' => $this->inputId()
 			,'class' => $this->isSole() ? null : 'radio'
 			,'checked' => $this->isSelected() ? 'checked' : null
-		));
-		return
-			!$this->isSole()
-			? $result
-			: df_tag('span', array('class' => 'no-display'), $result)
-		;
-	}
+		]), $this->isSole(), 'span', ['class' => 'no-display'])
+	;}
 
 	/**
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	private function htmlLabel() {
-		return df_tag('label', array('for' => $this->inputId()), $this->label());
-	}
+	private function htmlLabel() {return df_tag('label', ['for' => $this->inputId()], $this->label());}
 
 	/**
 	 * @used-by htmlInput()
@@ -62,20 +57,15 @@ class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
 	 * @used-by htmlLabel()
 	 * @return string
 	 */
-	private function inputId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = 's_method_' . $this->code();
-		}
-		return $this->{__METHOD__};
-	}
+	private function inputId() {return 's_method_' . $this->code();}
 
 	/**
 	 * @used-by htmlInput()
 	 * @return bool
 	 */
-	private function isSelected() {
-		return $this->isSole() || $this->code() === $this->grandParent()->getAddressShippingMethod();
-	}
+	private function isSelected() {return
+		$this->isSole() || $this->code() === $this->grandParent()->getAddressShippingMethod()
+	;}
 
 	/**
 	 * @used-by htmlInput()
@@ -87,13 +77,13 @@ class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
 	 * @used-by htmlLabel()
 	 * @return string
 	 */
-	private function label() {return Df_Shipping_Block_Carrier_Rate_Label::r($this, $this->rate());}
+	private function label() {return Rate\Label::r($this, $this->rate());}
 
 	/**
 	 * @used-by code()
 	 * @used-by label()
 	 * @used-by priceS()
-	 * @return Mage_Sales_Model_Quote_Address_Rate
+	 * @return \Mage_Sales_Model_Quote_Address_Rate
 	 */
 	private function rate() {return $this[self::$P__RATE];}
 
@@ -105,7 +95,7 @@ class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
 		parent::_construct();
 		$this
 			->_prop(self::$P__IS_SOLE, DF_V_BOOL)
-			->_prop(self::$P__RATE, Mage_Sales_Model_Quote_Address_Rate::class)
+			->_prop(self::$P__RATE, QuoteAddressRate::class)
 		;
 	}
 	/** @var string */
@@ -114,17 +104,13 @@ class Df_Shipping_Block_Carrier_Rate extends Df_Core_Block_Abstract_NoCache {
 	private static $P__RATE = 'rate';
 
 	/**
-	 * @used-by Df_Shipping_Block_Carrier::renderRate()
-	 * @param Df_Shipping_Block_Carrier $parent
-	 * @param Mage_Sales_Model_Quote_Address_Rate $rate
+	 * @used-by \Df\Shipping\Block\Carrier::renderRate()
+	 * @param Carrier $parent
+	 * @param QuoteAddressRate $rate
 	 * @param bool $isSole
 	 * @return string
 	 */
-	public static function r(
-		Df_Shipping_Block_Carrier $parent, Mage_Sales_Model_Quote_Address_Rate $rate, $isSole
-	) {
-		return df_render_child($parent, new self(array(
-			self::$P__RATE => $rate, self::$P__IS_SOLE => $isSole
-		)));
+	public static function r(Carrier $parent, QuoteAddressRate $rate, $isSole) {return
+		df_render_child($parent, new self([self::$P__RATE => $rate, self::$P__IS_SOLE => $isSole]));
 	}
 }

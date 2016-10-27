@@ -1,3 +1,4 @@
 <?php
 // 2016-10-26
-class Df_Dellin_Carrier extends Df_Shipping_Carrier {}
+namespace Df\Dellin;
+class Carrier extends \Df\Shipping\Carrier {}

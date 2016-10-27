@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Pd4_Method method() */
-class Df_Pd4_Block_Info extends Df_Payment_Block_Info {
+class Df_Pd4_Block_Info extends \Df\Payment\Block\Info {
 	/** @return string */
 	public function getLinkToDocumentAsHtml() {
 		if (!isset($this->{__METHOD__})) {

@@ -4,7 +4,7 @@ abstract class Exception extends \Df\Core\Exception {
 	/**
 	 * 2016-10-24
 	 * @used-by \Df\Shipping\Exception::reportNamePrefix()
-	 * @return \Df_Shipping_Carrier
+	 * @return \Df\Shipping\Carrier
 	 */
 	abstract protected function carrier();
 

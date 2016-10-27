@@ -1,4 +1,5 @@
 <?php
+use Df\Shipping\Request as R;
 class Df_Shipping_Setup_2_30_0 extends Df_Core_Setup {
 	/**
 	 * @override
@@ -7,11 +8,11 @@ class Df_Shipping_Setup_2_30_0 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		/** @var array(string => int) $cacheOptions */
-		$cacheOptions = Mage::app()->useCache();
-		if (!dfa($cacheOptions, \Df\Shipping\Request::CACHE_TYPE)) {
-			$cacheOptions[\Df\Shipping\Request::CACHE_TYPE] = 1;
-			Mage::app()->saveUseCache($cacheOptions);
+		/** @var array(string => int) $o */
+		$o = Mage::app()->useCache();
+		if (!dfa($o, R::CACHE_TYPE)) {
+			$o[R::CACHE_TYPE] = 1;
+			Mage::app()->saveUseCache($o);
 		}
 	}
 }

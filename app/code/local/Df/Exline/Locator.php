@@ -1,9 +1,9 @@
 <?php
-class Df_Exline_Locator extends Df_Shipping_Locator {
+class Df_Exline_Locator extends \Df\Shipping\Locator {
 	/**
 	 * @override
-	 * @see Df_Shipping_Locator:: _map()
-	 * @used-by Df_Shipping_Locator::map()
+	 * @see \Df\Shipping\Locator:: _map()
+	 * @used-by \Df\Shipping\Locator::map()
 	 * @param string $type
 	 * @return array(string => int)
 	 */

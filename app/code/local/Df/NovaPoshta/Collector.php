@@ -1,8 +1,9 @@
 <?php
-class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
+namespace Df\NovaPoshta;
+class Collector extends \Df\Shipping\Collector\Ua {
 	/**
 	 * @used-by _collect()
-	 * @used-by Df_Shipping_Collector::call()
+	 * @used-by \Df\Shipping\Collector::call()
 	 * @param bool $toHome
 	 * @param string $methodCode
 	 * @param int $methodName
@@ -14,8 +15,8 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
 	protected function _collect() {
@@ -36,16 +37,16 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 
 	/**
 	 * @used-by _addRate()
-	 * @return Zend_Date
+	 * @return \Zend_Date
 	 */
 	private function date() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_NovaPoshta_Request $request */
-			$request = new Df_NovaPoshta_Request(array(
-				Df_NovaPoshta_Request::P__QUERY_PATH => '/onlineorder/estimatedate'
-				,Df_NovaPoshta_Request::P__REQUEST_METHOD => Zend_Http_Client::POST
-				,Df_NovaPoshta_Request::P__PARAMS_POST => array('EstimateDateForm' => array(
-					'date' => Zend_Date::now()->toString('dd.MM.yyyy')
+			/** @var Request $request */
+			$request = new Request(array(
+				Request::P__QUERY_PATH => '/onlineorder/estimatedate'
+				,Request::P__REQUEST_METHOD => \Zend_Http_Client::POST
+				,Request::P__PARAMS_POST => array('EstimateDateForm' => array(
+					'date' => \Zend_Date::now()->toString('dd.MM.yyyy')
 					,'recipientCityId' => $this->locationDestId()
 					,'recipientCity' => $this->locationDestName()
 					,'senderCityId' => $this->locationOrigId()
@@ -79,7 +80,7 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 	private function locationDest() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = Df_NovaPoshta_Locator::findD($this->cityDestUc());
+			$result = Locator::findD($this->cityDestUc());
 			if (!$result) {
 				$this->errorInvalidCityDest();
 			}
@@ -110,7 +111,7 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 	private function locationOrig() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = Df_NovaPoshta_Locator::findO($this->cityOrigUc());
+			$result = Locator::findO($this->cityOrigUc());
 			if (!$result) {
 				$this->errorInvalidCityOrig();
 			}
@@ -147,11 +148,11 @@ class Df_NovaPoshta_Collector extends Df_Shipping_Collector_Ua {
 		 * @var int $mode
 		 */
 		$mode = 1 + (int)!$toHome + 2 * (int)!$this->приезжатьНаСкладМагазина();
-		/** @var Df_NovaPoshta_Request $request */
-		$request = new Df_NovaPoshta_Request([
-			Df_NovaPoshta_Request::P__QUERY_PATH => '/ru/delivery'
-			,Df_NovaPoshta_Request::P__REQUEST_METHOD => Zend_Http_Client::POST
-			,Df_NovaPoshta_Request::P__PARAMS_POST => ['DeliveryForm' => [
+		/** @var Request $request */
+		$request = new Request([
+			Request::P__QUERY_PATH => '/ru/delivery'
+			,Request::P__REQUEST_METHOD => \Zend_Http_Client::POST
+			,Request::P__PARAMS_POST => ['DeliveryForm' => [
 				'TimeIntervals' => 0
 				,'backDelivery' => 0
 				,'cargoType' => 'Cargo'

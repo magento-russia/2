@@ -1,5 +1,5 @@
 <?php
-class Df_Pd4_Config_Area_Admin extends Df_Payment_Config_Area_Admin {
+class Df_Pd4_Config_Area_Admin extends \Df\Payment\Config\Area\Admin {
 	/** @return string */
 	public function getPaymentPurposeTemplate() {
 		/** @var string $result */

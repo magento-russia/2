@@ -1,18 +1,19 @@
 <?php
+namespace Df\Payment\Config;
 /**
- * @method Df_Payment_Method main()
- * @method Df_Payment_Config_Manager manager()
+ * @method \Df\Payment\Method main()
+ * @method \Df\Payment\Config\Manager manager()
  */
-abstract class Df_Payment_Config_Area extends Df_Checkout_Module_Config_Area {
+abstract class Area extends \Df\Checkout\Module\Config\Area {
 	/**
 	 * @param string $key
 	 * @param bool $canBeTest [optional]
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function const_($key, $canBeTest = true, $default = '') {
-		return $this->constManager()->const_($key, $canBeTest, $default);
-	}
+	public function const_($key, $canBeTest = true, $default = '') {return
+		$this->constManager()->const_($key, $canBeTest, $default)
+	;}
 
 	/**
 	 * Получаем заданное ранее администратором
@@ -22,19 +23,17 @@ abstract class Df_Payment_Config_Area extends Df_Checkout_Module_Config_Area {
 	 * @param string $default [optional]
 	 * @return string
 	 */
-	public function getVarWithDefaultConst($key, $default = '') {
-		return $this->getVar(
-			$key, $this->constManager()->getValue($this->getAreaPrefix(), $key, $default)
-		);
+	public function getVarWithDefaultConst($key, $default = '') {return
+		$this->getVar($key, $this->constManager()->getValue($this->getAreaPrefix(), $key, $default));
 	}
 
 	/**
 	 * @used-by getConst()
 	 * @used-by Df_Assist_Config_Area_Service::getUrl()
 	 * @used-by Df_IPay_Config_Area_Service
-	 * @used-by Df_Payment_Config_Area_Service
+	 * @used-by \Df\Payment\Config\Area\Service
 	 * @used-by Df_PayOnline_Config_Area_Service
-	 * @return Df_Payment_Config_Manager_Const
+	 * @return \Df\Payment\Config\Manager\ConstT
 	 */
 	protected function constManager() {return $this->main()->constManager();}
 }

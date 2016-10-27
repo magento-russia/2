@@ -1,5 +1,7 @@
 <?php
-class Df_Checkout_Module_Config_Area_No extends Df_Checkout_Module_Config_Area {
+namespace Df\Checkout\Module\Config\Area;
+use Df\Checkout\Module\Main as Main;
+class No extends \Df\Checkout\Module\Config\Area {
 	/**
 	 * @override
 	 * @return string
@@ -7,12 +9,12 @@ class Df_Checkout_Module_Config_Area_No extends Df_Checkout_Module_Config_Area {
 	protected function getAreaPrefix() {return '';}
 
 	/**
-	 * @used-by Df_Checkout_Module_Config_Facade::area()
-	 * @param Df_Checkout_Module_Main $main
-	 * @return Df_Checkout_Module_Config_Area_No
+	 * @used-by \Df\Checkout\Module\Config\Facade::area()
+	 * @param Main $main
+	 * @return self
 	 */
-	public static function s(Df_Checkout_Module_Main $main) {
-		/** @var array(string => Df_Checkout_Module_Config_Area_No) $cache */
+	public static function s(Main $main) {
+		/** @var array(string => self) $cache */
 		static $cache;
 		/** @var string $key */
 		$key = get_class($main);

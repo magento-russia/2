@@ -47,7 +47,7 @@ class Exception extends E implements \ArrayAccess {
 
 	/**
 	 * @used-by __construct()
-	 * @used-by Df_Shipping_Collector::call()
+	 * @used-by \Df\Shipping\Collector::call()
 	 * @used-by \Df\Core\Validator::resolveForProperty()
 	 * @param mixed ...$args
 	 * @return void
@@ -263,7 +263,7 @@ class Exception extends E implements \ArrayAccess {
 
 	/**
 	 * @used-by \Df\Qa\Message\Failure\Exception::e()
-	 * @used-by Df_Shipping_Collector::call()
+	 * @used-by \Df\Shipping\Collector::call()
 	 * @param \Exception $e
 	 * @return $this
 	 */

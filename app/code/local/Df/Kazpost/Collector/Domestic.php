@@ -1,9 +1,10 @@
 <?php
-class Df_Kazpost_Collector_Domestic extends Df_Shipping_Collector_Child {
+namespace Df\Kazpost\Collector;
+class Domestic extends Child {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector_Child::s_collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector\Child::s_collect()
 	 * @return void
 	 */
 	protected function _collect() {
@@ -29,8 +30,8 @@ class Df_Kazpost_Collector_Domestic extends Df_Shipping_Collector_Child {
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::feeFixed()
-	 * @used-by Df_Shipping_Collector::addRate()
+	 * @see \Df\Shipping\Collector::feeFixed()
+	 * @used-by \Df\Shipping\Collector::addRate()
 	 * «Прием/доставка посылок на дом, в офис за 1 ед. отправления (при наличии возможности): 600»
 	 * http://www.kazpost.kz/uploads/content/files/СТАНДАРТ%20Тарифы%20по%20почтовым%20услугам.docx
 	 * @return int|float

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Kkb_Response extends Df_Payment_Response_Xml {
+abstract class Df_Kkb_Response extends \Df\Payment\Response\Xml {
 	/** @return Df_Kkb_Config_Area_Service */
 	protected function configS() {
 		if (!isset($this->{__METHOD__})) {

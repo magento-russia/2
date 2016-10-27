@@ -1,4 +1,5 @@
 <?php
+use Df_Catalog_Model_Product as P;
 class Df_Shipping_Setup_2_16_3 extends Df_Core_Setup {
 	/**
 	 * @override
@@ -7,20 +8,9 @@ class Df_Shipping_Setup_2_16_3 extends Df_Core_Setup {
 	 * @return void
 	 */
 	protected function _process() {
-		/** @var string[] $attributeCodes */
-		$attributeCodes = array(
-			Df_Catalog_Model_Product::P__WIDTH
-			,Df_Catalog_Model_Product::P__HEIGHT
-			,Df_Catalog_Model_Product::P__LENGTH
-		);
-		foreach ($attributeCodes as $attributeCode) {
-			/** @var string $attributeCode */
-			self::attribute()->updateAttribute(
-				$entityTypeId = Mage_Catalog_Model_Product::ENTITY
-				,$id = $attributeCode
-				,$field = 'is_user_defined'
-				,$value = 0
-			);
+		foreach ([P::P__WIDTH, P::P__HEIGHT, P::P__LENGTH] as $code) {
+			/** @var string $code */
+			self::attribute()->updateAttribute(P::ENTITY, $code, 'is_user_defined', 0);
 		}
 		df_eav_reset();
 	}

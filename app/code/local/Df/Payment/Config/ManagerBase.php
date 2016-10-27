@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Payment_Method main() */
-abstract class Df_Payment_Config_ManagerBase extends Df_Checkout_Module_Config_Manager {
+namespace Df\Payment\Config;
+/** @method \Df\Payment\Method main() */
+abstract class ManagerBase extends \Df\Checkout\Module\Config\Manager {
 	/**
 	 * @override
 	 * @param string $key
@@ -16,6 +17,6 @@ abstract class Df_Payment_Config_ManagerBase extends Df_Checkout_Module_Config_M
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Payment_Method::class);
+		$this->_prop(self::$P__MAIN, \Df\Payment\Method::class);
 	}
 }

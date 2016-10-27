@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Avangard_Method method() */
-abstract class Df_Avangard_Request_Secondary extends Df_Payment_Request_Transaction {
+abstract class Df_Avangard_Request_Secondary extends \Df\Payment\Request\Transaction {
 	/** @return string */
 	abstract protected function getRequestId();
 
@@ -21,8 +21,8 @@ abstract class Df_Avangard_Request_Secondary extends Df_Payment_Request_Transact
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Secondary::_params()
-	 * @used-by Df_Payment_Request_Secondary::params()
+	 * @see \Df\Payment\Request\Secondary::_params()
+	 * @used-by \Df\Payment\Request\Secondary::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {

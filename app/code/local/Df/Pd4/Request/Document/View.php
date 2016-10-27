@@ -100,7 +100,7 @@ class Df_Pd4_Request_Document_View extends Df_Core_Model {
 		);
 	}
 
-	/** @return Df_Payment_Config_Area_Service */
+	/** @return \Df\Payment\Config\Area\Service */
 	private function configS() {return $this->method()->configS();}
 
 	/** @return Df_Pd4_Request_Document_View */

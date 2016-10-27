@@ -1,6 +1,6 @@
 <?php
 /** @method Df_LiqPay_Method method() */
-class Df_LiqPay_Block_Form extends Df_Payment_Block_Form {
+class Df_LiqPay_Block_Form extends \Df\Payment\Block\Form {
 	/**
 	 * @override
 	 * @see Df_Core_Block_Template::defaultTemplate()

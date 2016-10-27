@@ -1,5 +1,6 @@
 <?php
-class Df_InTime_Config_Area_Service extends Df_Shipping_Config_Area_Service {
+namespace Df\InTime\Config\Area;
+class Service extends \Df\Shipping\Config\Area\Service {
 	/**
 	 * @used-by Df_InTime_Collector::_collect()
 	 * @return int

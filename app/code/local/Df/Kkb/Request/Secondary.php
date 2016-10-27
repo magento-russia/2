@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Kkb_Method method() */
-abstract class Df_Kkb_Request_Secondary extends Df_Payment_Request_Transaction {
+abstract class Df_Kkb_Request_Secondary extends \Df\Payment\Request\Transaction {
 	/** @return string */
 	abstract public function getTransactionType();
 
@@ -8,7 +8,7 @@ abstract class Df_Kkb_Request_Secondary extends Df_Payment_Request_Transaction {
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @see Df_Payment_Request_Transaction::amount()
+	 * @see \Df\Payment\Request\Transaction::amount()
 	 * @used-by Df_Kkb_RequestDocument_Signed::amount()
 	 * @see Df_Kkb_Request_Payment::amount()
 	 * @return Df_Core_Model_Money
@@ -18,8 +18,8 @@ abstract class Df_Kkb_Request_Secondary extends Df_Payment_Request_Transaction {
 	/**
 	 * Используется только для диагностики!
 	 * @override
-	 * @see Df_Payment_Request_Secondary::_params()
-	 * @used-by Df_Payment_Request_Secondary::params()
+	 * @see \Df\Payment\Request\Secondary::_params()
+	 * @used-by \Df\Payment\Request\Secondary::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {return array('document' => $this->getRequestDocument()->getXml());}

@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Alfabank_Response extends Df_Payment_Response {
+abstract class Df_Alfabank_Response extends \Df\Payment\Response {
 	/** @return string */
 	abstract protected function getKey_ErrorCode();
 

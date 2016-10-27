@@ -8,8 +8,8 @@
 		</reference>
 		<reference name='content'>
 			<block
-				type='df_payment/redirect'
-				name='df_payment_redirect'
+				type='Df\Payment\Block\Redirect'
+				name='Df\Payment\Block\Redirect'
 				template='page/redirect.phtml'
 			></block>
 		</reference>

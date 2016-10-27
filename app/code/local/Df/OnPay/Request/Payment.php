@@ -3,11 +3,11 @@
  * @method Df_OnPay_Method method()
  * @method Df_OnPay_Config_Area_Service configS()
  */
-class Df_OnPay_Request_Payment extends Df_Payment_Request_Payment {
+class Df_OnPay_Request_Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::_params()
-	 * @used-by Df_Payment_Request_Payment::params()
+	 * @see \Df\Payment\Request\Payment::_params()
+	 * @used-by \Df\Payment\Request\Payment::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {
@@ -19,7 +19,7 @@ class Df_OnPay_Request_Payment extends Df_Payment_Request_Payment {
 				$this->configS()->getCurrencyCodeInServiceFormat()
 			,self::REQUEST_VAR__ORDER_NUMBER => $this->orderIId()
 			,self::REQUEST_VAR__PAYMENT_SERVICE__IS_FEE_PAYED_BY_SHOP => df_bts(
-					Df_Payment_Config_Source_Service_FeePayer::VALUE__SHOP
+					\Df\Payment\Config\Source\FeePayer::VALUE__SHOP
 				===
 					$this->configS()->getFeePayer()
 			)

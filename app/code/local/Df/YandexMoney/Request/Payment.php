@@ -1,12 +1,12 @@
 <?php
 /** @method Df_YandexMoney_Config_Area_Service configS() */
-class Df_YandexMoney_Request_Payment extends Df_Payment_Request_Payment {
+class Df_YandexMoney_Request_Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
 	 * @used-by Df_YandexMoney_Request_Authorize::getParamsUnique()
-	 * @see Df_Payment_Request_Payment::description()
+	 * @see \Df\Payment\Request\Payment::description()
 	 * @return string
 	 */
 	public function description() {return parent::description();}
@@ -49,8 +49,8 @@ class Df_YandexMoney_Request_Payment extends Df_Payment_Request_Payment {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::_params()
-	 * @used-by Df_Payment_Request_Payment::params()
+	 * @see \Df\Payment\Request\Payment::_params()
+	 * @used-by \Df\Payment\Request\Payment::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {
@@ -106,7 +106,7 @@ class Df_YandexMoney_Request_Payment extends Df_Payment_Request_Payment {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::order()
+	 * @see \Df\Payment\Request\Payment::order()
 	 * @return Df_Sales_Model_Order
 	 */
 	protected function order() {return $this[self::$P__ORDER];}

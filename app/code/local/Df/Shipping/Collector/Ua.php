@@ -1,19 +1,20 @@
 <?php
-abstract class Df_Shipping_Collector_Ua extends Df_Shipping_Collector {
+namespace Df\Shipping\Collector;
+abstract class Ua extends \Df\Shipping\Collector {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::currencyCode()
-	 * @used-by Df_Shipping_Collector::fromBase()
-	 * @used-by Df_Shipping_Collector::toBase()
+	 * @see \Df\Shipping\Collector::currencyCode()
+	 * @used-by \Df\Shipping\Collector::fromBase()
+	 * @used-by \Df\Shipping\Collector::toBase()
 	 * @return string
 	 */
 	protected function currencyCode() {return 'UAH';}
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::domesticIso2()
-	 * @used-by Df_Shipping_Collector::collect()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::suffix()
+	 * @see \Df\Shipping\Collector::domesticIso2()
+	 * @used-by \Df\Shipping\Collector::collect()
+	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::suffix()
 	 * @return string
 	 */
 	protected function domesticIso2() {return 'UA';}

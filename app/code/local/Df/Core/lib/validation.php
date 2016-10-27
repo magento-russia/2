@@ -733,7 +733,7 @@ function df_int($v, $allowNull = true) {
  * @used-by df_fetch_col_int()
  * @used-by df_products_update()
  * @used-by Df_Catalog_Model_Product_Exporter::applyRule()
- * @used-by Df_Shipping_Rate_Request::getQty()
+ * @used-by \Df\Shipping\Rate\Request::getQty()
  * @param mixed[] $values
  * @return int[]
  */

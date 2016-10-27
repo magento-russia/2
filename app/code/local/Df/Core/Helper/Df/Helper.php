@@ -16,8 +16,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function catalogInventory() {return Df_CatalogInventory_Helper_Data::s();}
 	/** @return Df_CatalogSearch_Helper_Data */
 	public function catalogSearch() {return Df_CatalogSearch_Helper_Data::s();}
-	/** @return Df_Checkout_Helper_Data */
-	public function checkout() {return Df_Checkout_Helper_Data::s();}
 	/** @return Df_Chronopay_Helper_Data */
 	public function chronopay() {return Df_Chronopay_Helper_Data::s();}
 	/** @return Df_Cms_Helper_Data */
@@ -50,8 +48,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function pageCache() {return Df_PageCache_Helper_Data::s();}
 	/** @return Df_Parser_Helper_Data */
 	public function parser() {return Df_Parser_Helper_Data::s();}
-	/** @return Df_Payment_Helper_Data */
-	public function payment() {return Df_Payment_Helper_Data::s();}
 	/** @return Df_PayOnline_Helper_Data */
 	public function payOnline() {return Df_PayOnline_Helper_Data::s();}
 	/** @return Df_Pd4_Helper_Data */

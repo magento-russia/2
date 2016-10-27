@@ -88,20 +88,20 @@ class Df_Checkout_Observer {
 	 */
 	public function controller_action_predispatch_checkout(Varien_Event_Observer $o) {
 		try {
-			if (Df_Payment_Redirected::is()) {
+			if (\Df\Payment\Redirected::is()) {
 				/** @var Mage_Core_Controller_Varien_Action $controller */
 				$controller = $o['controller_action'];
 				'checkout_onepage_success' === $controller->getFullActionName()
 				/**
 				 * В отличие от метода
-				 * @see Df_Payment_Action_Confirm::process()
+				 * @see \Df\Payment\Action\Confirm::process()
 				 * здесь необходимость вызова
-				 * @uses Df_Payment_Redirected::off() не вызывает сомнений,
+				 * @uses \Df\Payment\Redirected::off() не вызывает сомнений,
 				 * потому что @see Df_Checkout_Observer:controller_action_predispatch_checkout()
 				 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
 				 */
-				? Df_Payment_Redirected::off()
-				: Df_Payment_Redirected::restoreQuote();
+				? \Df\Payment\Redirected::off()
+				: \Df\Payment\Redirected::restoreQuote();
 			}
 		}
 		catch (Exception $e) {

@@ -50,7 +50,7 @@ function df_bt($levelsToSkip = 0) {
 /**
  * @used-by Df_1C_Cml2_Action_Catalog_Import::_process()
  * @used-by \Df\Qa\Message::message()
- * @used-by Df_Shipping_Collector::call()
+ * @used-by \Df\Shipping\Collector::call()
  * @return void
  */
 function df_context() {

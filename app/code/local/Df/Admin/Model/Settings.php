@@ -34,8 +34,8 @@ class Df_Admin_Model_Settings extends Df_Core_Model_Settings {
 	public function sales() {return Df_Sales_Model_Settings::s();}
 	/** @return Df_Seo_Model_Settings */
 	public function seo() {return Df_Seo_Model_Settings::s();}
-	/** @return Df_Shipping_Settings */
-	public function shipping() {return Df_Shipping_Settings::s();}
+	/** @return \Df\Shipping\Settings */
+	public function shipping() {return \Df\Shipping\Settings::s();}
 	/** @return Df_Sms_Model_Settings */
 	public function sms() {return Df_Sms_Model_Settings::s();}
 	/** @return Df_Speed_Model_Settings */

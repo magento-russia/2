@@ -1,5 +1,5 @@
 <?php
-class Df_Kkb_Config_Area_Service extends Df_Payment_Config_Area_Service {
+class Df_Kkb_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	/** @return string */
 	public function getCertificateId() {
 		if (!isset($this->{__METHOD__})) {

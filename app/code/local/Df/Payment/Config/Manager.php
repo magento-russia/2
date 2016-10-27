@@ -1,5 +1,6 @@
 <?php
-class Df_Payment_Config_Manager extends Df_Payment_Config_ManagerBase {
+namespace Df\Payment\Config;
+class Manager extends ManagerBase {
 	/**
 	 * @override
 	 * @param string $key

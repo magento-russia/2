@@ -131,7 +131,7 @@ abstract class Df_Kkb_RequestDocument_Signed extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__REQUEST, Df_Payment_Request::class);
+		$this->_prop(self::P__REQUEST, \Df\Payment\Request::class);
 	}
 	const P__REQUEST = 'request';
 }

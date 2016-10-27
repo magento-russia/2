@@ -1,16 +1,19 @@
 <?php
-abstract class Df_Payment_Request_Transaction extends Df_Payment_Request_Secondary  {
+namespace Df\Payment\Request;
+use Df_Core_Model_Money as Money;
+use Mage_Sales_Model_Order_Payment as OP;
+abstract class Transaction extends Secondary  {
 	/**
 	 * 2015-03-09
 	 * Обратите внимание, что @uses hasAmount() возвращает true при выполнении операций:
-	 * @see Df_Payment_Method::capture()
-	 * @see Df_Payment_Method::refund()
+	 * @see \Df\Payment\Method::capture()
+	 * @see \Df\Payment\Method::refund()
 	 * В обоих случаях $this->cfg(self::$P__AMOUNT) — это не валюта заказа,
 	 * а базовая (учётная) валюта магазина.
 	 * Смотрите комментарии к указанным методам.
 	 * @override
-	 * @see Df_Payment_Request::amount()
-	 * @return Df_Core_Model_Money
+	 * @see \Df\Payment\Request::amount()
+	 * @return Money
 	 */
 	protected function amount() {
 		if (!isset($this->{__METHOD__})) {
@@ -28,8 +31,8 @@ abstract class Df_Payment_Request_Transaction extends Df_Payment_Request_Seconda
 	/**
 	 * @see doTransaction()
 	 * Возвращает true при выполнении операций:
-	 * @see Df_Payment_Method::capture()
-	 * @see Df_Payment_Method::refund()
+	 * @see \Df\Payment\Method::capture()
+	 * @see \Df\Payment\Method::refund()
 	 * @used-by getAmount()
 	 * @used-by Df_Alfabank_Request_Secondary::getParams()
 	 * @return bool
@@ -37,11 +40,11 @@ abstract class Df_Payment_Request_Transaction extends Df_Payment_Request_Seconda
 	protected function hasAmount() {return !!$this->cfg(self::$P__AMOUNT);}
 
 	/**
-	 * @param Mage_Sales_Model_Order_Payment $payment
+	 * @param OP $payment
 	 * @param float $amount [optional]
 	 * @return void
 	 */
-	private function _doTransaction(Mage_Sales_Model_Order_Payment $payment, $amount = 0.0) {
+	private function _doTransaction(OP $payment, $amount = 0.0) {
 		$this->addData(array(self::$P__PAYMENT => $payment, self::$P__AMOUNT => $amount));
 		$this->getResponse();
 	}
@@ -56,31 +59,29 @@ abstract class Df_Payment_Request_Transaction extends Df_Payment_Request_Seconda
 		 * 2015-03-09
 		 * Обратите внимание, что значение параметра self::$P__AMOUNT
 		 * присутствует для операций
-		 * @see Df_Payment_Method::capture()
-		 * @see Df_Payment_Method::refund()
-		 * но отсутствует для операции @see Df_Payment_Method::void()
+		 * @see \Df\Payment\Method::capture()
+		 * @see \Df\Payment\Method::refund()
+		 * но отсутствует для операции @see \Df\Payment\Method::void()
 		 */
 		$this->_prop(self::$P__AMOUNT, DF_V_FLOAT, false);
 	}
 
 	/**
-	 * @used-by Df_Payment_Method::doTransaction()
+	 * @used-by \Df\Payment\Method::doTransaction()
 	 * @param string $type
-	 * @param Mage_Sales_Model_Order_Payment $payment
+	 * @param OP $payment
 	 * @param float $amount [optional]
 	 * @return void
 	 */
-	public static function doTransaction(
-		$type, Mage_Sales_Model_Order_Payment $payment, $amount = 0.0
-	) {
+	public static function doTransaction($type, OP $payment, $amount = 0.0) {
 		/**
 		 * Намеренно используем @uses ucfirst() вместо @see df_ucfirst()
 		 * потому что в данном случае нам не нужна поддержка UTF-8.
 		 * @var string $class
 		 */
 		$class = df_con($payment->getMethodInstance(), 'Request_' . ucfirst($type));
-		/** @var Df_Payment_Request_Transaction $i */
-		$i = df_ic($class, Df_Payment_Request_Transaction::class);
+		/** @var $this $i */
+		$i = df_ic($class, self::class);
 		$i->_doTransaction($payment, $amount);
 	}
 

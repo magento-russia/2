@@ -1,11 +1,15 @@
 <?php
-abstract class Df_Payment_Action_Abstract extends Df_Core_Model_Action {
+namespace Df\Payment;
+use Df_Sales_Model_Order as O;
+use Mage_Sales_Model_Order_Invoice as Invoice;
+use Mage_Sales_Model_Order_Payment as OP;
+abstract class Action extends \Df_Core_Model_Action {
 	/**
 	 * @abstract
 	 * @used-by comment()
 	 * @used-by method()
 	 * @used-by payment()
-	 * @return Df_Sales_Model_Order
+	 * @return O
 	 */
 	abstract protected function order();
 
@@ -13,8 +17,8 @@ abstract class Df_Payment_Action_Abstract extends Df_Core_Model_Action {
 	 * @used-by Df_Interkassa_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by Df_LiqPay_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by Df_OnPay_Action_Confirm::alternativeProcessWithoutInvoicing()
-	 * @used-by Df_Payment_Action_Abstract::_process()
-	 * @used-by Df_Payment_Action_Confirm::logExceptionToOrderHistory()
+	 * @used-by \Df\Payment\Action::_process()
+	 * @used-by \Df\Payment\Action\Confirm::logExceptionToOrderHistory()
 	 * @used-by Df_Qiwi_Action_Confirm::alternativeProcessWithoutInvoicing()
 	 * @param string $comment
 	 * @param bool $isCustomerNotified [optional]
@@ -24,7 +28,7 @@ abstract class Df_Payment_Action_Abstract extends Df_Core_Model_Action {
 		$this->order()->comment($comment, $isCustomerNotified);
 	}
 
-	/** @return Df_Payment_Config_Area_Service */
+	/** @return \Df\Payment\Config\Area\Service */
 	protected function configS() {return $this->method()->configS();}
 
 	/**
@@ -52,20 +56,20 @@ abstract class Df_Payment_Action_Abstract extends Df_Core_Model_Action {
 
 	/**
 	 * @used-by Df_Psbank_Action_CustomerReturn::getResponseByTransactionType()
-	 * @return Mage_Payment_Model_Info
+	 * @return \Mage_Payment_Model_Info
 	 */
 	protected function ii() {return $this->method()->getInfoInstance();}
 
 	/**
 	 * @used-by getConst()
 	 * @used-by info()
-	 * @return Df_Payment_Method_WithRedirect
+	 * @return \Df\Payment\Method\WithRedirect
 	 */
 	protected function method() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Payment_Method_WithRedirect $result */
+			/** @var \Df\Payment\Method\WithRedirect $result */
 			$result = $this->payment()->getMethodInstance();
-			if (!$result instanceof Df_Payment_Method_WithRedirect) {
+			if (!$result instanceof \Df\Payment\Method\WithRedirect) {
 				df_error(
 					'Платёжная система прислала сообщение относительно заказа №«%s»,'
 					. ' который не предназначен для оплаты последством данной платёжной системы.'
@@ -84,19 +88,19 @@ abstract class Df_Payment_Action_Abstract extends Df_Core_Model_Action {
 	 * 2) Результат @uses Mage_Sales_Model_Order::getPayment() разумно кэшировать
 	 * в силу реализации этого метода (там используется foreach).
 	 * @used-by method()
-	 * @see Df_Payment_Request::getPayment()
-	 * @return Mage_Sales_Model_Order_Payment
+	 * @see \Df\Payment\Request::getPayment()
+	 * @return OP
 	 */
 	protected function payment() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Sales_Model_Order_Payment|bool $result */
+			/** @var OP|bool $result */
 			$result = $this->order()->getPayment();
 			/**
 			 * Не используем тут @see df_assert(), потому что эта функция может быть отключена,
 			 * а нам важно показать правильное диагностическое сообщение,
 			 * а не «Call to a member function getMethodInstance() on a non-object»
 			 */
-			if (!$result instanceof Mage_Sales_Model_Order_Payment) {
+			if (!$result instanceof OP) {
 				df_error(
 					'Платёжная система прислала сообщение
 					относительно заказа №«%s», который не предназначен для оплаты.'
@@ -112,14 +116,14 @@ abstract class Df_Payment_Action_Abstract extends Df_Core_Model_Action {
 	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
 	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
 	 * @used-by Df_IPay_Action_Confirm::_process()
-	 * @used-by Df_Payment_Action_Confirm::_process()
+	 * @used-by \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()
-	 * @param Mage_Sales_Model_Order_Invoice $invoice
+	 * @param Invoice $invoice
 	 * @return void
 	 */
-	protected function saveInvoice(Mage_Sales_Model_Order_Invoice $invoice) {
-		/** @var Df_Core_Model_Resource_Transaction $transaction */
-		$transaction = Df_Core_Model_Resource_Transaction::i();
+	protected function saveInvoice(Invoice $invoice) {
+		/** @var \Df_Core_Model_Resource_Transaction $transaction */
+		$transaction = \Df_Core_Model_Resource_Transaction::i();
 		$transaction
 			->addObject($invoice)
 			->addObject($invoice->getOrder())

@@ -1,2 +1,3 @@
 <?php
-class Df_InTime_Carrier extends Df_Shipping_Carrier {}
+namespace Df\InTime;
+class Carrier extends \Df\Shipping\Carrier {}

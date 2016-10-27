@@ -1,8 +1,8 @@
 <?php
 /** @method Df_Psbank_Request_Payment getRequestPayment() */
-class Df_Psbank_Method extends Df_Payment_Method_WithRedirect {
+class Df_Psbank_Method extends \Df\Payment\Method\WithRedirect {
 	/**
-	 * @see Df_Payment_Method::canCapture()
+	 * @see \Df\Payment\Method::canCapture()
 	 * @override
 	 * @return bool
 	 */

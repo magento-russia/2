@@ -1,6 +1,6 @@
 <?php
 /** @method Df_IPay_Config_Area_Service configS() */
-abstract class Df_IPay_Action_Abstract extends Df_Payment_Action_Abstract {
+abstract class Df_IPay_Action_Abstract extends \Df\Payment\Action {
 	/**
 	 * @abstract
 	 * @used-by checkRequestType()
@@ -125,9 +125,9 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Action_Abstract {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Abstract::method()
-	 * @used-by Df_Payment_Action_Abstract::getConst()
-	 * @used-by Df_Payment_Action_Abstract::info()
+	 * @see \Df\Payment\Action::method()
+	 * @used-by \Df\Payment\Action::getConst()
+	 * @used-by \Df\Payment\Action::info()
 	 * @return Df_IPay_Method
 	 */
 	protected function method() {
@@ -168,13 +168,13 @@ abstract class Df_IPay_Action_Abstract extends Df_Payment_Action_Abstract {
 	/**
 	 * 2015-03-17
 	 * Обратите внимание, что, в отличие от большинства остальных модулей оплаты
-	 * @see Df_Payment_Action_Confirm::order()
+	 * @see \Df\Payment\Action\Confirm::order()
 	 * в данном случае мы загружаем заказ не по increment_id, а по id.
 	 * @override
-	 * @see Df_Payment_Action_Abstract::order()
-	 * @used-by Df_Payment_Action_Abstract::comment()
-	 * @used-by Df_Payment_Action_Abstract::method()
-	 * @used-by Df_Payment_Action_Abstract::payment()
+	 * @see \Df\Payment\Action::order()
+	 * @used-by \Df\Payment\Action::comment()
+	 * @used-by \Df\Payment\Action::method()
+	 * @used-by \Df\Payment\Action::payment()
 	 * @used-by checkOrderState()
 	 * @used-by checkTransactionState()
 	 * @used-by config()

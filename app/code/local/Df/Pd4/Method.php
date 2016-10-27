@@ -1,5 +1,5 @@
 <?php
-class Df_Pd4_Method extends Df_Payment_Method {
+class Df_Pd4_Method extends \Df\Payment\Method {
 	/**
 	 * @override
 	 * @return bool
@@ -19,7 +19,7 @@ class Df_Pd4_Method extends Df_Payment_Method {
 	 * http://magento-forum.ru/topic/5394/
 	 * @param Varien_Object $payment
 	 * @param string $amount
-	 * @return Df_Payment_Method
+	 * @return \Df\Payment\Method
 	 */
 	public function capture(Varien_Object $payment, $amount) {return $this;}
 
@@ -30,7 +30,7 @@ class Df_Pd4_Method extends Df_Payment_Method {
 	 * http://magento-forum.ru/topic/5394/
 	 * @param Varien_Object $payment
 	 * @param string $amount
-	 * @return Df_Payment_Method
+	 * @return \Df\Payment\Method
 	 */
 	public function refund(Varien_Object $payment, $amount) {return $this;}
 }

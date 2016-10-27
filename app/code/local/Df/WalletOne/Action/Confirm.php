@@ -1,5 +1,5 @@
 <?php
-class Df_WalletOne_Action_Confirm extends Df_Payment_Action_Confirm {
+class Df_WalletOne_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -48,7 +48,7 @@ class Df_WalletOne_Action_Confirm extends Df_Payment_Action_Confirm {
 
 	/**
 	 * @override
-	 * @return Df_Payment_Action_Confirm
+	 * @return \Df\Payment\Action\Confirm
 	 * @throws Mage_Core_Exception
 	 */
 	protected function processOrderCanNotInvoice() {

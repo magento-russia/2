@@ -115,7 +115,7 @@ function df_url_h() {return Mage::helper('core/url');}
  * array('_query' => array('paramName' => 'paramValue')),
  * то в веб-адресе эти параметры будут содержаться стандартным для PHP способом:
  * ?paramName=paramValue.
- * Пример: @see Df_Payment_Method_WithRedirect::getCustomerReturnUrl()
+ * Пример: @see \Df\Payment\Method\WithRedirect::getCustomerReturnUrl()
  *
  * В Magento в большинстве случаев оба варианта равноценны, но надо понимать разницу между ними!
  *
@@ -137,7 +137,7 @@ function df_url($path = null, array $params = []) {return
  * array('_query' => array('paramName' => 'paramValue')),
  * то в веб-адресе эти параметры будут содержаться стандартным для PHP способом:
  * ?paramName=paramValue.
- * Пример: @see Df_Payment_Method_WithRedirect::getCustomerReturnUrl()
+ * Пример: @see \Df\Payment\Method\WithRedirect::getCustomerReturnUrl()
  *
  * В Magento в большинстве случаев оба варианта равноценны, но надо понимать разницу между ними!
  * @used-by df_admin_button_location()

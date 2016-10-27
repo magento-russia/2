@@ -1,5 +1,6 @@
 <?php
-class Df_InTime_Config_Source extends Df_Core_Model {
+namespace Df\InTime\Config;
+class Source extends \Df_Core_Model {
 	/**
 	 * @used-by Mage_Adminhtml_Block_System_Config_Form::initFields()
 	 * @used-by Df_Core_Model::cacheLoadProperty()
@@ -9,7 +10,7 @@ class Df_InTime_Config_Source extends Df_Core_Model {
 	public function departments() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
-			foreach (Df_InTime_Api::s()->представительства() as $department) {
+			foreach (\Df\InTime\Api::s()->представительства() as $department) {
 				/** @var array(string => mixed) $department */
 				/** @var array(string => mixed) $data */
 				$data = $department['AppendField'];

@@ -10,7 +10,7 @@
 		<carriers>
 			<df-nova-poshta>
 				<active>0</active>
-				<model>Df_NovaPoshta_Carrier</model>
+				<model>Df\NovaPoshta\Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

@@ -1,5 +1,6 @@
 <?php
-class Df_Payment_Config_Source_PaymentCard_PaymentAction extends Df_Payment_Config_Source {
+namespace Df\Payment\Config\Source;
+class Action extends \Df\Payment\Config\Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect

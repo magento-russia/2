@@ -10,7 +10,7 @@
 		<carriers>
 			<df-kazpost-ems>
 				<active>0</active>
-				<model>Df_KazpostEms_Carrier</model>
+				<model>Df\KazpostEms\Carrier</model>
 				<title>Казпочта EMS</title>
 			</df-kazpost-ems>
 		</carriers>

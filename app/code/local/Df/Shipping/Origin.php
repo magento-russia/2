@@ -1,46 +1,34 @@
 <?php
-/** @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin */
-class Df_Shipping_Origin extends Df_Core_Model {
+namespace Df\Shipping;
+use Df_Directory_Model_Region as Region;
+/** @used-by \Df\Shipping\Config\Backend\Validator\Strategy\Origin; */
+class Origin extends \Df_Core_Model {
 	/** @return string */
-	public function getCity() {return $this->cfg(self::P__CITY);}
+	public function getCity() {return $this[self::P__CITY];}
 
-	/** @return Df_Directory_Model_Country|null */
-	public function getCountry() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(!$this->getCountryId() ? null : df_country($this->getCountryId()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
-
-	/** @return string */
-	public function getCountryId() {return $this->cfg(self::P__COUNTRY_ID);}
+	/** @return \Df_Directory_Model_Country|null */
+	public function getCountry() {return dfc($this, function() {return
+		!$this->getCountryId() ? null : df_country($this->getCountryId())
+	;});}
 
 	/** @return string */
-	public function getPostalCode() {return $this->cfg(self::P__POSTAL_CODE);}
+	public function getCountryId() {return $this[self::P__COUNTRY_ID];}
 
-	/** @return Df_Directory_Model_Region|null */
-	private function getRegion() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				!$this->getRegionId()
-				? null
-				: Df_Directory_Model_Region::ld($this->getRegionId())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	/** @return string */
+	public function getPostalCode() {return $this[self::P__POSTAL_CODE];}
+
+	/** @return Region|null */
+	public function getRegion() {return dfc($this, function() {return
+		!$this->getRegionId() ? null : Region::ld($this->getRegionId())
+	;});}
 
 	/** @return int */
 	public function getRegionId() {return $this->cfg(self::P__REGION_ID);}
 
 	/** @return string */
-	public function getRegionName() {
-		return
-			!is_null($this->getRegion())
-			? $this->getRegion()->getName()
-			: $this->cfg(self::P__REGION_NAME)
-		;
-	}
+	public function getRegionName() {return
+		$this->getRegion() ? $this->getRegion()->getName() : $this[self::P__REGION_NAME]
+	;}
 
 	/**
 	 * @override
@@ -65,7 +53,7 @@ class Df_Shipping_Origin extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Shipping_Origin
+	 * @return self
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(array $parameters = []) {return new self($parameters);}
 }

@@ -12,21 +12,21 @@ abstract class Df_Core_Model_Bridge extends Df_Core_Model {
 		$this->_prop(self::$P__MAIN, Varien_Object::class);
 	}
 	/**
-	 * @used-by Df_Checkout_Module_Bridge::_construct()
-	 * @used-by Df_Checkout_Module_Config_Facade::_construct()
-	 * @used-by Df_Payment_Config_ManagerBase::_construct()
-	 * @used-by Df_Shipping_Bridge::_construct()
-	 * @used-by Df_Shipping_Config_Manager::_construct()
+	 * @used-by \Df\Checkout\Module\Bridge::_construct()
+	 * @used-by \Df\Checkout\Module\Config\Facade::_construct()
+	 * @used-by \Df\Payment\Config\ManagerBase::_construct()
+	 * @used-by \Df\Shipping\Bridge::_construct()
+	 * @used-by \Df\Shipping\Config\Manager::_construct()
 	 * @var string
 	 */
 	protected static $P__MAIN = 'main';
 
 	/**
-	 * @used-by Df_Checkout_Module_Bridge::convention()
-	 * @used-by Df_Checkout_Module_Config_Facade::s()
-	 * @used-by Df_Checkout_Module_Config_Manager::s()
-	 * @used-by Df_Checkout_Module_Config_Manager::sc()
-	 * @used-by Df_Checkout_Module_Config_Area_No::s()
+	 * @used-by \Df\Checkout\Module\Bridge::convention()
+	 * @used-by \Df\Checkout\Module\Config\Facade::s()
+	 * @used-by \Df\Checkout\Module\Config\Manager::s()
+	 * @used-by \Df\Checkout\Module\Config\Manager::sc()
+	 * @used-by \Df\Checkout\Module\Config\Area_No::s()
 	 * @static
 	 * @param string $class
 	 * @param Varien_Object|object $main

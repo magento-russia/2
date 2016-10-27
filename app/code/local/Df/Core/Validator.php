@@ -3,7 +3,7 @@ namespace Df\Core;
 class Validator {
 	/**
 	 * 2015-04-05
-	 * @used-by Df_Checkout_Module_Config_Area::getVar()
+	 * @used-by \Df\Checkout\Module\Config\Area::getVar()
 	 * @param mixed $value
 	 * @param \Zend_Validate_Interface $validator
 	 * @throws \Df\Core\Exception
@@ -40,7 +40,7 @@ class Validator {
 
 	/**
 	 * 2015-04-05
-	 * @used-by Df_Checkout_Module_Config_Area::getVar()
+	 * @used-by \Df\Checkout\Module\Config\Area::getVar()
 	 * @used-by resolveForProperty
 	 * @param \Zend_Validate_Interface|\Zend_Filter_Interface|string $validator
 	 * @param bool $skipOnNull [optional]

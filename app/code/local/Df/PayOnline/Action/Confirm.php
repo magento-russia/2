@@ -1,5 +1,5 @@
 <?php
-class Df_PayOnline_Action_Confirm extends Df_Payment_Action_Confirm {
+class Df_PayOnline_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void

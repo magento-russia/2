@@ -1,11 +1,11 @@
 <?php
 /**
- * Не перекрываем метод @see Df_Payment_Config_Area_Service::getShopId()
+ * Не перекрываем метод @see \Df\Payment\Config\Area\Service::getShopId()
  * ради дополнительной валидации,
  * потому что цифр в номере счёта Яндекс.Денег может быть не только 14:
  * http://magento-forum.ru/topic/4315/
  */
-class Df_YandexMoney_Config_Area_Service extends Df_Payment_Config_Area_Service {
+class Df_YandexMoney_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	/** @return string */
 	public function getAppId() {
 		if (!isset($this->{__METHOD__})) {

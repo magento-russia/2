@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Payment_Response_Xml extends Df_Payment_Response {
+namespace Df\Payment\Response;
+abstract class Xml extends \Df\Payment\Response {
 	/** @return \Df\Xml\X */
 	protected function e() {
 		if (!isset($this->{__METHOD__})) {

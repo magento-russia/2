@@ -1,9 +1,11 @@
 <?php
-class Df_Checkout_Module_Config_Facade extends Df_Checkout_Module_Bridge {
-	/** @return Df_Checkout_Module_Config_Area */
+namespace Df\Checkout\Module\Config;
+use Df\Checkout\Module\Main as Main;
+class Facade extends \Df\Checkout\Module\Bridge {
+	/** @return Area */
 	public function admin() {return $this->area(__FUNCTION__);}
 
-	/** @return Df_Checkout_Module_Config_Area */
+	/** @return Area */
 	public function frontend() {return $this->area(__FUNCTION__);}
 
 	/**
@@ -12,37 +14,37 @@ class Df_Checkout_Module_Config_Facade extends Df_Checkout_Module_Bridge {
 			if ($carrier->getConfigData('shipment_requesttype')) {
 	 		(...)
 			if ($carrier->getConfigData('showmethod') == 0 && $result->getError()) {
-	 * @used-by Df_Payment_Method::getConfigData()
-	 * @used-by Df_Shipping_Carrier::getConfigData()
+	 * @used-by \Df\Payment\Method::getConfigData()
+	 * @used-by \Df\Shipping\Carrier::getConfigData()
 	 * @override
 	 * @param string $key
 	 * @param mixed $default [optional]
 	 * @return mixed
 	 */
-	public function getVar($key, $default = null) {
-		return $this->getAreaForStandardKey($key)->getVar($key, $default);
-	}
+	public function getVar($key, $default = null) {return
+		$this->getAreaForStandardKey($key)->getVar($key, $default)
+	;}
 
-	/** @return Df_Checkout_Module_Config_Area */
+	/** @return Area */
 	public function service() {return $this->area(__FUNCTION__);}
 
 	/**
 	 * @param string $area
-	 * @return Df_Checkout_Module_Config_Area
+	 * @return Area
 	 */
-	private function area($area) {return Df_Checkout_Module_Config_Area::sa($this->main(), $area);}
+	private function area($area) {return Area::sa($this->main(), $area);}
 
 	/**
 	 * @param string $key
-	 * @return Df_Checkout_Module_Config_Area
+	 * @return Area
 	 */
 	private function getAreaForStandardKey($key) {
 		df_param_string_not_empty($key, 0);
 		if (!isset($this->{__METHOD__}[$key])) {
-			/** @var Df_Checkout_Module_Config_Area $result */
-			$result = Df_Checkout_Module_Config_Area_No::s($this->main());
+			/** @var Area $result */
+			$result = Area\No::s($this->main());
 			foreach ($this->getAreas() as $area) {
-				/** @var Df_Checkout_Module_Config_Area $area */
+				/** @var Area $area */
 				if ($area->canProcessStandardKey($key)) {
 					$result = $area;
 					break;
@@ -53,7 +55,7 @@ class Df_Checkout_Module_Config_Facade extends Df_Checkout_Module_Bridge {
 		return $this->{__METHOD__}[$key];
 	}
 
-	/** @return Df_Checkout_Module_Config_Area[] */
+	/** @return Area[] */
 	private function getAreas() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array($this->frontend(), $this->admin(), $this->service());
@@ -62,11 +64,11 @@ class Df_Checkout_Module_Config_Facade extends Df_Checkout_Module_Bridge {
 	}
 
 	/**
-	 * @param Df_Checkout_Module_Main $main
-	 * @return Df_Checkout_Module_Config_Facade
+	 * @param Main $main
+	 * @return self
 	 */
-	public static function s(Df_Checkout_Module_Main $main) {
-		/** @var array(string => Df_Checkout_Module_Config_Facade) $cache */
+	public static function s(Main $main) {
+		/** @var array(string => self) $cache */
 		static $cache;
 		/** @var string $key */
 		$key = get_class($main);

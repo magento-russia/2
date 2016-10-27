@@ -1,5 +1,5 @@
 <?php
-class Df_IPay_Method extends Df_Payment_Method_WithRedirect {
+class Df_IPay_Method extends \Df\Payment\Method\WithRedirect {
 	/** @return string|null */
 	public function getMobileNetworkOperator() {return
 		$this->iia(self::INFO_KEY__MOBILE_NETWORK_OPERATOR)

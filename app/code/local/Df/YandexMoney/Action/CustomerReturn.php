@@ -3,14 +3,14 @@
  * @method Df_YandexMoney_Method method()
  * @method Df_YandexMoney_Config_Area_Service configS()
  */
-class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
+class Df_YandexMoney_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
 	 * @return string
 	 */
 	protected function rkOII() {
-		return Df_Payment_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
+		return \Df\Payment\Method\WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
 	}
 
 	/**
@@ -26,7 +26,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	 */
 	protected function processException(Exception $e) {
 		/** @var bool $isPaymentException */
-		$isPaymentException = ($e instanceof Df_Payment_Exception);
+		$isPaymentException = ($e instanceof \Df\Payment\Exception);
 		if ($isPaymentException) {
 			$this->logException($e);
 		}
@@ -39,7 +39,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Confirm::_process()
+	 * @see \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
@@ -55,7 +55,7 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 			/**
 			 * Вызывать $this->getResponseCapture()->throwOnFailure()
 			 * здесь не надо, потому что throwOnFailure() автоматически вызывается в методе
-			 * @see Df_Payment_Request_Secondary::getResponse()
+			 * @see \Df\Payment\Request\Secondary::getResponse()
 			 * опосредованно через postProcess()
 			 */
 			/** @var Mage_Sales_Model_Order_Invoice $invoice */
@@ -74,13 +74,13 @@ class Df_YandexMoney_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 			$this->redirectToSuccess();
 			/**
 			 * В отличие от метода
-			 * @see Df_Payment_Action_Confirm::process()
+			 * @see \Df\Payment\Action\Confirm::process()
 			 * здесь необходимость вызова
-			 * @uses Df_Payment_Redirected::off() не вызывает сомнений,
+			 * @uses \Df\Payment\Redirected::off() не вызывает сомнений,
 			 * потому что @see Df_YandexMoney_Action_CustomerReturn::process()
 			 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
 			 */
-			Df_Payment_Redirected::off();
+			\Df\Payment\Redirected::off();
 		}
 		$this->redirectToSuccess();
 	}

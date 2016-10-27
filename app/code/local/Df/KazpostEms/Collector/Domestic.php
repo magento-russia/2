@@ -1,36 +1,34 @@
 <?php
-class Df_KazpostEms_Collector_Domestic extends Df_KazpostEms_Collector_Child {
+namespace Df\KazpostEms\Collector;
+use Df\KazpostEms\Data\Domestic as D;
+class Domestic extends Child {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector_Child::s_collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector\Child::s_collect()
 	 * @return void
 	 */
 	protected function _collect() {
 		$this->checkCityOrig();
 		/** @var int|null $cityIdOrig */
-		$cityIdOrig = dfa(Df_KazpostEms_Data_Domestic::$cities, $this->cityOrigUc());
+		$cityIdOrig = dfa(D::$cities, $this->cityOrigUc());
 		if (!$cityIdOrig) {
 			$this->errorInvalidCityOrig();
 		}
 		$this->checkCityDest();
 		/** @var int|null $cityIdDest */
-		$cityIdDest = dfa(Df_KazpostEms_Data_Domestic::$cities, $this->cityDestUc());
+		$cityIdDest = dfa(D::$cities, $this->cityDestUc());
 		if (!$cityIdDest) {
 			$this->errorInvalidCityDest();
 		}
-		df_assert(isset(Df_KazpostEms_Data_Domestic::$zones[$cityIdOrig][$cityIdDest]));
-		$this->addRate($this->choose(
-			Df_KazpostEms_Data_Domestic::$_rates
-			, Df_KazpostEms_Data_Domestic::$_ratesMore
-			, Df_KazpostEms_Data_Domestic::$zones[$cityIdOrig][$cityIdDest]
-		));
+		df_assert(isset(D::$zones[$cityIdOrig][$cityIdDest]));
+		$this->addRate($this->choose(D::$_rates, D::$_ratesMore, D::$zones[$cityIdOrig][$cityIdDest]));
 	}
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::feeFixed()
-	 * @used-by Df_Shipping_Collector::addRate()
+	 * @see \Df\Shipping\Collector::feeFixed()
+	 * @used-by \Df\Shipping\Collector::addRate()
 	 * «Заказное уведомление EMS отправлений: 400»
 	 * http://www.kazpost.kz/uploads/content/files/УСЛУГИ%20УСКОРЕННОЙ%20И%20КУРЬЕРСКОЙ%20ПОЧТЫ.docx
 	 * @return int|float

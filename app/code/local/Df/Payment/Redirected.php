@@ -1,5 +1,8 @@
 <?php
-class Df_Payment_Redirected extends Df_Core_Model {
+namespace Df\Payment;
+use Df_Sales_Model_Order as O;
+use Df_Sales_Model_Quote as Q;
+class Redirected extends \Df_Core_Model {
 	/**
 	 * @used-by Df_Checkout_Observer::controller_action_predispatch_checkout()
 	 * @used-by Df_Payment_CancelController::indexAction()
@@ -13,7 +16,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	}
 
 	/**
-	 * Флаг Df_Payment_Redirected::SESSION_PARAM__REDIRECTED_TO_PAYMENT_SYSTEM
+	 * Флаг \Df\Payment\Redirected::SESSION_PARAM__REDIRECTED_TO_PAYMENT_SYSTEM
 	 * предназначен для отслеживания возвращения покупателя
 	 * с сайта платёжной системы без оплаты.
 	 * Если этот флаг установлен — значит, покупатель был перенаправлен
@@ -28,7 +31,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 	 * @used-by Df_Alfabank_Action_CustomerReturn::_process()
 	 * @used-by Df_Avangard_Action_CustomerReturn::_process()
 	 * @used-by Df_Checkout_Observer::controller_action_predispatch_checkout()
-	 * @used-by Df_Payment_Action_Confirm::_process()
+	 * @used-by \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()
 	 * @return void
 	 */
@@ -42,7 +45,7 @@ class Df_Payment_Redirected extends Df_Core_Model {
 
 	/** @return void */
 	private static function cancelOrderIfExists() {
-		/** @var Df_Sales_Model_Order|null $order */
+		/** @var O|null $order */
 		$order = df_last_order(false);
 		if ($order) {
 			/**
@@ -52,9 +55,9 @@ class Df_Payment_Redirected extends Df_Core_Model {
 			 * используем низкоуровневую реализацию.
 			 */
 			$order->cancel();
-			/** @var Mage_Sales_Model_Order_Status_History $history */
+			/** @var \Mage_Sales_Model_Order_Status_History $history */
 			$history = $order->addStatusHistoryComment(
-				'Оплата заказа была прервана покупателем.', Mage_Sales_Model_Order::STATE_CANCELED
+				'Оплата заказа была прервана покупателем.', O::STATE_CANCELED
 			);
 			$history->setIsCustomerNotified(false);
 			$order->save();
@@ -66,14 +69,14 @@ class Df_Payment_Redirected extends Df_Core_Model {
 		/** @var int|null $quoteId */
 		$quoteId = self::session()->getData('last_success_quote_id');
 		if ($quoteId) {
-			/** @var Df_Sales_Model_Quote $result */
-			$quote = Df_Sales_Model_Quote::ld($quoteId);
+			/** @var Q $result */
+			$quote = Q::ld($quoteId);
 			$quote->setIsActive(true);
 			$quote->save();
 		}
 	}
 
-	/** @return Mage_Checkout_Model_Session */
+	/** @return \Mage_Checkout_Model_Session */
 	private static function session() {return df_session_checkout();}
 
 	/**

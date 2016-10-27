@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Avangard_Response extends Df_Payment_Response {
+abstract class Df_Avangard_Response extends \Df\Payment\Response {
 	/** @return int */
 	public function getRequestExternalId() {return $this->cfg(self::$_ID);}
 	/** @return int */

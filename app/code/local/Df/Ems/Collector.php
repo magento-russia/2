@@ -1,13 +1,13 @@
 <?php
 // 2016-10-25
+namespace Df\Ems;
 use Df_Directory_Model_Country as Country;
-use Df\Ems\Conditions as Conditions;
-class Df_Ems_Collector extends Df_Shipping_Collector_Ru {
+class Collector extends \Df\Shipping\Collector\Ru {
 	/**
 	 * 2016-10-25
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
 	protected function _collect() {

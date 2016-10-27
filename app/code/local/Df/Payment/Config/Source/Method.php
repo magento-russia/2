@@ -4,7 +4,7 @@
  * Система создаёт объект-одиночку для потомков этого класса.
  * Не забывайте об этом при реализации кеширования результатов вычислений внутри этого класса!
  */
-class Df_Payment_Config_Source_PaymentMethod extends Df_Payment_Config_Source {
+class Method extends \Df\Payment\Config\Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect

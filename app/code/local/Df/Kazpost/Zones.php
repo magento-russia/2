@@ -1,5 +1,6 @@
 <?php
-class Df_Kazpost_Zones {
+namespace Df\Kazpost;
+class Zones {
 	/** @var array(string => int) */
 	public static $a = array(
 		'АВСТРАЛИЯ' => 4

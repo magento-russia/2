@@ -1,14 +1,15 @@
 <?php
-class Df_Kazpost_Collector_Foreign extends Df_Shipping_Collector_Child {
+namespace Df\Kazpost\Collector;
+class Foreign extends Child {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector_Child::s_collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector\Child::s_collect()
 	 * @return void
 	 */
 	protected function _collect() {
 		/** @var int|null $zone */
-		$zone = dfa(Df_Kazpost_Zones::$a, $this->countryDestUc());
+		$zone = dfa(\Df\Kazpost\Zones::$a, $this->countryDestUc());
 		if (!$zone) {
 			$this->errorInvalidCountryDest();
 		}
@@ -40,8 +41,8 @@ class Df_Kazpost_Collector_Foreign extends Df_Shipping_Collector_Child {
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::feeFixed()
-	 * @used-by Df_Shipping_Collector::addRate()
+	 * @see \Df\Shipping\Collector::feeFixed()
+	 * @used-by \Df\Shipping\Collector::addRate()
 	 * «Прием/доставка посылок на дом, в офис за 1 ед. отправления (при наличии возможности): 600»
 	 * «Экспедиционный сбор независимо от  веса и объявленной ценности: 400»
 	 * «Простое уведомление международных почтовых отправлений: 310»

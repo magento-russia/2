@@ -1,11 +1,12 @@
 <?php
+namespace Df\Shipping\Rate;
 use Df_Catalog_Model_Product as P;
 use Df_Directory_Model_Country as Country;
 use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
-class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
+class Request extends \Mage_Shipping_Model_Rate_Request {
 	/**
 	 * @param string $countryIso2Code
-	 * @return Df_Shipping_Rate_Request
+	 * @return void
 	 */
 	public function checkCountryOriginIs($countryIso2Code) {
 		df_param_iso2($countryIso2Code, 0);
@@ -16,7 +17,6 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 				, df_country($countryIso2Code)->getNameInFormOrigin()
 			);
 		}
-		return $this;
 	}
 
 	/**
@@ -47,11 +47,11 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * @param string $message
 	 * @return string
 	 */
-	public function evaluateMessage($message) {
-		return $this->getCarrier()->evaluateMessage($message, $this->getMessageVariables());
-	}
+	public function evaluateMessage($message) {return
+		$this->getCarrier()->evaluateMessage($message, $this->getMessageVariables())
+	;}
 
-	/** @return Df_Shipping_Carrier */
+	/** @return \Df\Shipping\Carrier */
 	public function getCarrier() {return $this->_carrier;}
 
 	/** @return float */
@@ -102,11 +102,11 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		return $result;
 	}
 	
-	/** @return Df_Localization_Morpher_Response|null */
+	/** @return \Df_Localization_Morpher_Response|null */
 	public function getDestinationCityMorpher() {return dfc($this, function() {return
 		!$this->getDestinationCity()
 		? null
-		: Df_Localization_Morpher::s()->getResponseSilent($this->getDestinationCity())
+		: \Df_Localization_Morpher::s()->getResponseSilent($this->getDestinationCity())
 	;});}
 
 	/** @return Country|null */
@@ -141,7 +141,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		return $result;
 	}
 
-	/** @return Df_Directory_Model_Region|null */
+	/** @return \Df_Directory_Model_Region|null */
 	public function getDestinationRegion() {return dfc($this, function() {return
 		df_h()->directory()->getRegions()->getItemById($this->getDestinationRegionId())
 	;});}
@@ -188,7 +188,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		/** @var float[] $result */
 		$result = [];
 		foreach ($this->getQuoteItemsSimple() as $quoteItem) {
-			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			/** @var \Mage_Sales_Model_Quote_Item $quoteItem */
 			/** @var P $product */
 			$product = $this->getProductsWithDimensions()->getItemById($quoteItem->getProductId());
 			df_assert($product);
@@ -272,11 +272,11 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		return $result;
 	}
 	
-	/** @return Df_Localization_Morpher_Response|null */
+	/** @return \Df_Localization_Morpher_Response|null */
 	public function getOriginCityMorpher() {return dfc($this, function() {return
 		!$this->getOriginCity()
 		? null
-		: Df_Localization_Morpher::s()->getResponseSilent($this->getOriginCity())
+		: \Df_Localization_Morpher::s()->getResponseSilent($this->getOriginCity())
 	;});}
 	
 	/** @return Country */
@@ -306,7 +306,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	/** @return string|null */
 	public function getOriginPostalCode() {return $this->_getData(self::P__ORIGIN__POSTAL_CODE);}
 	
-	/** @return Df_Directory_Model_Region|null */
+	/** @return \Df_Directory_Model_Region|null */
 	public function getOriginRegion() {return dfc($this, function() {return
 		!$this->getOriginRegionId()
 		? null
@@ -371,9 +371,9 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		return $result;
 	}
 
-	/** @return Df_Catalog_Model_Resource_Product_Collection */
+	/** @return \Df_Catalog_Model_Resource_Product_Collection */
 	public function getProductsWithDimensions() {return dfc($this, function() {
-		/** @var Df_Catalog_Model_Resource_Product_Collection $result */
+		/** @var \Df_Catalog_Model_Resource_Product_Collection $result */
 		$result = P::c();
 		$result
 			->addIdFilter($this->getProductIds())
@@ -434,14 +434,14 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	 * Обратите также внимание что связь между родительским и дочерники строками заказа
 	 * устанавливается автоматически при загрузке коллекции:
 	 * @see Mage_Sales_Model_Resource_Order_Item_Collection::_afterLoad
-	 * @return Mage_Sales_Model_Quote_Item[]
+	 * @return \Mage_Sales_Model_Quote_Item[]
 	 */
 	public function getQuoteItemsSimple() {return dfc($this, function() {
-		/** @var Mage_Sales_Model_Quote_Item[] $result */
+		/** @var \Mage_Sales_Model_Quote_Item[] $result */
 		$result = [];
 		foreach ($this->getAllItems() as $quoteItem) {
-			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
-			if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $quoteItem->getProductType()) {
+			/** @var \Mage_Sales_Model_Quote_Item $quoteItem */
+			if (\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $quoteItem->getProductType()) {
 				$result[]= $quoteItem;
 			}
 		}
@@ -462,9 +462,9 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		/** @var float $result */
 		$result = 0.0;
 		foreach ($this->getQuoteItemsSimple() as $quoteItem) {
-			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			/** @var \Mage_Sales_Model_Quote_Item $quoteItem */
 			/** @var int $qty */
-			$qty = Df_Sales_Model_Quote_Item_Extended::i($quoteItem)->getQty();
+			$qty = \Df_Sales_Model_Quote_Item_Extended::i($quoteItem)->getQty();
 			/** @var P $product */
 			$product = $this->getProductsWithDimensions()->getItemById($quoteItem->getProductId());
 			df_assert($product);
@@ -486,7 +486,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	public function getWeightInKg() {return $this->getWeightInGrammes() / 1000;}
 
 	/**
-	 * @used-by Df_Shipping_Collector::errorInvalidWeight()
+	 * @used-by \Df\Shipping\Collector::errorInvalidWeight()
 	 * @return string
 	 */
 	public function getWeightKgSD() {return df_f2i($this->getWeightInKg(), 1);}
@@ -506,7 +506,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/** @return bool */
 	public function isDestinationRussia() {return
-		Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getDestinationCountryId()
+		\Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getDestinationCountryId()
 	;}
 
 	/** @return bool */
@@ -531,7 +531,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/** @return bool */
 	public function isOriginRussia() {return
-		Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getOriginCountryId()
+		\Df_Directory_Helper_Country::ISO_2_CODE__RUSSIA === $this->getOriginCountryId()
 	;}
 
 	/** @return bool */
@@ -574,7 +574,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/**
 	 * @used-by getMessageVariables()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::errorInvalidCityDest()
+	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::errorInvalidCityDest()
 	 * @return string
 	 */
 	public function вМесто() {return dfc($this, function() {return
@@ -585,7 +585,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/**
 	 * @used-by getMessageVariables()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::errorInvalidCountryDest()
+	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::errorInvalidCountryDest()
 	 * @return string
 	 */
 	public function вСтрану() {return dfc($this, function() {return
@@ -596,7 +596,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/**
 	 * @used-by getMessageVariables()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::errorInvalidCityOrig()
+	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::errorInvalidCityOrig()
 	 * @return string
 	 */
 	public function изМеста() {return dfc($this, function() {return
@@ -618,8 +618,8 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		if (!$value) {
 			$this->throwException($messageForEmpty);
 		}
-		/** @var Zend_Validate_PostCode $validator */
-		$validator = new Zend_Validate_PostCode(array('locale' => 'ru_RU'));
+		/** @var \Zend_Validate_PostCode $validator */
+		$validator = new \Zend_Validate_PostCode(array('locale' => 'ru_RU'));
 		if (!$validator->isValid($value)) {
 			$this->throwException($messageForInvalid, $value);
 		}
@@ -627,7 +627,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 
 	/** @return int|float[] */
 	private function getDimensionDefaultValues() {return dfc($this, function() {
-		/** @var Df_Shipping_Settings_Product $s */
+		/** @var \Df\Shipping\Settings\Product $s */
 		$s = df_cfg()->shipping()->product();
 		return [
 			P::P__WIDTH => $s->getDefaultWidth()
@@ -641,7 +641,7 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 		/** @var int[] $result */
 		$result = [];
 		foreach ($this->getAllItems() as $quoteItem) {
-			/** @var Mage_Sales_Model_Quote_Item $quoteItem */
+			/** @var \Mage_Sales_Model_Quote_Item $quoteItem */
 			$result[]= (int)$quoteItem->getProduct()->getId();
 		}
 		return $result;
@@ -665,17 +665,17 @@ class Df_Shipping_Rate_Request extends Mage_Shipping_Model_Rate_Request {
 	/**
 	 * @used-by getCarrier()
 	 * @used-by i()
-	 * @var Df_Shipping_Carrier
+	 * @var \Df\Shipping\Carrier
 	 */
 	private $_carrier;
 
 	/**
 	 * @static
-	 * @param Df_Shipping_Carrier $carrier
+	 * @param \Df\Shipping\Carrier $carrier
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_Shipping_Rate_Request
+	 * @return self
 	 */
-	public static function i(Df_Shipping_Carrier $carrier, array $parameters = array()) {
+	public static function i(\Df\Shipping\Carrier $carrier, array $parameters = array()) {
 		$result = new self($parameters);
 		$result->_carrier = $carrier;
 		return $result;

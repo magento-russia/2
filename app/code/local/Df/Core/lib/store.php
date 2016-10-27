@@ -94,7 +94,7 @@ function df_store($store = null) {
 
 /**
  * 2015-03-19
- * @used-by Df_Payment_Config_Area_Service::description()
+ * @used-by \Df\Payment\Config\Area\Service::description()
  * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
  * @return string
  */

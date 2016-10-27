@@ -19,7 +19,7 @@
  * На данный момент (2014-09-29) такие классы-настройщики есть у двух модулей:
  *
  * 1) Df_Shipping
- * Класс-настройщик @see Df_Shipping_Processor_AddDimensionsToProductAttributeSet
+ * Класс-настройщик @see \Df\Shipping\Processor\AddDimensionsToProductAttributeSet
  * добавляет к прикладному типу товара свойства «длина», «ширина» и «высота».
  *
  * 2) Df_YandexMarket
@@ -51,7 +51,7 @@ abstract class Df_Core_Setup_AttributeSet extends Df_Core_Model {
 
 	/**
 	 * @used-by runBlank()
-	 * @used-by Df_Shipping_Processor_AddDimensionsToProductAttributeSet::process()
+	 * @used-by \Df\Shipping\Processor\AddDimensionsToProductAttributeSet::process()
 	 * @used-by Df_YandexMarket_Setup_AttributeSet::p()
 	 * @param string $class
 	 * @param Mage_Eav_Model_Entity_Attribute_Set $attributeSet

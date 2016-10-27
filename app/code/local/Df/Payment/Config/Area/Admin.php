@@ -1,5 +1,6 @@
 <?php
-class Df_Payment_Config_Area_Admin extends Df_Payment_Config_Area {
+namespace Df\Payment\Config\Area;
+class Admin extends \Df\Payment\Config\Area {
 	/**
 	 * @override
 	 * @return string
@@ -10,7 +11,7 @@ class Df_Payment_Config_Area_Admin extends Df_Payment_Config_Area {
 	 * @override
 	 * @return string[]
 	 */
-	protected function getStandardKeys() {
-		return array_merge(parent::getStandardKeys(), array('order_status','payment_action'));
-	}
+	protected function getStandardKeys() {return
+		array_merge(parent::getStandardKeys(), ['order_status','payment_action'])
+	;}
 }

@@ -1,2 +1,3 @@
 <?php
-class Df_KazpostEms_Carrier extends Df_Shipping_Carrier {}
+namespace Df\KazpostEms;
+class Carrier extends \Df\Shipping\Carrier {}

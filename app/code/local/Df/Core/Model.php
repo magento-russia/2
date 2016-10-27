@@ -614,7 +614,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	/**
 	 * @used-by Df_Catalog_Model_XmlExport_Product::getConfigurableParent()
 	 * @used-by Df_Core_Model_Action::getErrorMessage_moduleDisabledByAdmin()
-	 * @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin_SpecificCountry::validate()
+	 * @used-by \Df\Shipping\Config\Backend\Validator\Strategy\Origin\SpecificCountry::validate()
 	 * @return string
 	 */
 	protected function moduleTitle() {

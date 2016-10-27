@@ -1,6 +1,6 @@
 <?php
 /** @method Df_Alfabank_Method method() */
-class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
+class Df_Alfabank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::request()
@@ -23,7 +23,7 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	 * @return string
 	 */
 	protected function rkOII() {return
-		Df_Payment_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID
+		\Df\Payment\Method\WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID
 	;}
 
 	/**
@@ -46,7 +46,7 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 	 * @return void
 	 */
 	protected function processException(Exception $e) {
-		if ($e instanceof Df_Payment_Exception && isset($this->{__CLASS__ . '::getRequestState'})) {
+		if ($e instanceof \Df\Payment\Exception && isset($this->{__CLASS__ . '::getRequestState'})) {
 			$this->logException($e);
 		}
 		else {
@@ -58,7 +58,7 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Confirm::_process()
+	 * @see \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
@@ -113,13 +113,13 @@ class Df_Alfabank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 			$this->redirectToSuccess();
 			/**
 			 * В отличие от метода
-			 * @see Df_Payment_Action_Confirm::process()
+			 * @see \Df\Payment\Action\Confirm::process()
 			 * здесь необходимость вызова
-			 * @uses Df_Payment_Redirected::off() не вызывает сомнений,
+			 * @uses \Df\Payment\Redirected::off() не вызывает сомнений,
 			 * потому что @see Df_Alfabank_Action_CustomerReturn:process()
 			 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
 			 */
-			Df_Payment_Redirected::off();
+			\Df\Payment\Redirected::off();
 		}
 	}
 

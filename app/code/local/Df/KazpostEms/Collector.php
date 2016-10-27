@@ -1,5 +1,6 @@
 <?php
-class Df_KazpostEms_Collector extends Df_Shipping_Collector_Conditional_Kz {
+namespace Df\KazpostEms;
+class Collector extends \Df\Shipping\Collector\Conditional\Kz {
 	/**
 	 * 2015-03-20
 	 * В прежней версии сайта (январь 2014 года) было написано:
@@ -7,8 +8,8 @@ class Df_KazpostEms_Collector extends Df_Shipping_Collector_Conditional_Kz {
 	 * http://www.kazpost.kz/ru/ekspress-dostavka-otpravleniy-ems
 	 * Думаю, с тех пор ограничение не изменилось.
 	 * @override
-	 * @see Df_Shipping_Collector_Conditional::collectPrepare()
-	 * @used-by Df_Shipping_Collector_Conditional::collect()
+	 * @see \Df\Shipping\Collector\Conditional::collectPrepare()
+	 * @used-by \Df\Shipping\Collector\Conditional::collect()
 	 * @return void
 	 */
 	protected function collectPrepare() {$this->checkWeightIsLE(20);}

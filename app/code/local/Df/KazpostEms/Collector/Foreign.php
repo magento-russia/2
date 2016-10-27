@@ -1,26 +1,26 @@
 <?php
-class Df_KazpostEms_Collector_Foreign extends Df_KazpostEms_Collector_Child {
+namespace Df\KazpostEms\Collector;
+use Df\KazpostEms\Data\Foreign as D;
+class Foreign extends Child {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector_Child::s_collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector\Child::s_collect()
 	 * @return void
 	 */
 	protected function _collect() {
 		/** @var int|null $zone */
-		$zone = dfa(Df_KazpostEms_Data_Foreign::$countries, $this->countryDestUc());
+		$zone = dfa(D::$countries, $this->countryDestUc());
 		if (is_null($zone)) {
 			$this->errorInvalidCountryDest();
 		}
-		$this->addRate($this->choose(
-			Df_KazpostEms_Data_Foreign::$_rates, Df_KazpostEms_Data_Foreign::$_ratesMore, $zone
-		));
+		$this->addRate($this->choose(D::$_rates, D::$_ratesMore, $zone));
 	}
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::feeFixed()
-	 * @used-by Df_Shipping_Collector::addRate()
+	 * @see \Df\Shipping\Collector::feeFixed()
+	 * @used-by \Df\Shipping\Collector::addRate()
 	 * «Заказное уведомление EMS отправлений: 400»
 	 * http://www.kazpost.kz/uploads/content/files/УСЛУГИ%20УСКОРЕННОЙ%20И%20КУРЬЕРСКОЙ%20ПОЧТЫ.docx
 	 * @return int|float

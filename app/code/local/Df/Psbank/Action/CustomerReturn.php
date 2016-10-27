@@ -1,13 +1,13 @@
 <?php
 /** @method Df_Psbank_Method method() */
-class Df_Psbank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
+class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
 	 * @return string
 	 */
 	protected function rkOII() {
-		return Df_Payment_Method_WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
+		return \Df\Payment\Method\WithRedirect::REQUEST_PARAM__ORDER_INCREMENT_ID;
 	}
 
 	/**
@@ -29,7 +29,7 @@ class Df_Psbank_Action_CustomerReturn extends Df_Payment_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Confirm::_process()
+	 * @see \Df\Payment\Action\Confirm::_process()
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */

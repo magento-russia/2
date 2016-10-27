@@ -25,8 +25,8 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	/**
 	 * @used-by Df_Admin_Config_Backend_Table::_afterLoad()
 	 * @used-by Df_Admin_Config_Backend_Validator::getStrategyClass()
-	 * @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin::getStrategyClass()
-	 * @used-by Df_Shipping_Config_Backend_Validator_Strategy_Origin_SpecificCountry::getLimitationCountry(
+	 * @used-by \Df\Shipping\Config\Backend\Validator\Strategy\Origin::getStrategyClass()
+	 * @used-by \Df\Shipping\Config\Backend\Validator\Strategy\Origin\SpecificCountry::getLimitationCountry(
 	 * @param string $name
 	 * @param bool $required [optional]
 	 * @param string|int|float|null $defaultValue [optional]

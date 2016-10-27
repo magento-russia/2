@@ -1,5 +1,5 @@
 <?php
-abstract class Df_Psbank_Action_Confirm extends Df_Payment_Action_Confirm {
+abstract class Df_Psbank_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/** @return string[] */
 	abstract protected function getParamsForSignature();
 
@@ -32,7 +32,7 @@ abstract class Df_Psbank_Action_Confirm extends Df_Payment_Action_Confirm {
 	protected function signatureOwn() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * Опосредовано вызывает @see Df_Payment_Response::postProcess()
+			 * Опосредовано вызывает @see \Df\Payment\Response::postProcess()
 			 * Лучшего способа вызвать postProcess,
 			 * чем запихнуть в signatureOwn() — не придумал.
 			 */

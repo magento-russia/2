@@ -191,7 +191,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 	 *
 	 * Поэтому правильное решение для товаров
 	 * смотрите у наследников класса @see Df_Core_Setup_AttributeSet:
-	 * @see Df_Shipping_Processor_AddDimensionsToProductAttributeSet
+	 * @see \Df\Shipping\Processor\AddDimensionsToProductAttributeSet
 	 * @see Df_YandexMarket_Setup_AttributeSet
 	 * В целом, оно заключается в загрузке/создании/изменении свойства
 	 * вызовом @see Df_Dataflow_Model_Registry_Collection_Attributes::createOrUpdate()

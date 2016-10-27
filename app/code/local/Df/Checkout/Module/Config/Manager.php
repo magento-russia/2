@@ -1,5 +1,7 @@
 <?php
-abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Bridge {
+namespace Df\Checkout\Module\Config;
+use Df\Checkout\Module\Main as Main;
+abstract class Manager extends \Df\Checkout\Module\Bridge {
 	/**
 	 * @param mixed $key
 	 * @return mixed
@@ -34,7 +36,7 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 	/**
 	 * @param mixed $value
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	private function adaptValue($value) {
 		/** @var mixed $result */
@@ -47,7 +49,7 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 			try {
 				$result = strtr($result, $this->getTemplates());
 			}
-			catch (Exception $e) {
+			catch (\Exception $e) {
 				$doing = false;
 				throw $e;
 			}
@@ -77,51 +79,51 @@ abstract class Df_Checkout_Module_Config_Manager extends Df_Checkout_Module_Brid
 	private function isValueEmpty($value) {return is_null($value) || df_empty_string($value);}
 
 	/**
-	 * @used-by Df_Checkout_Module_Config_Area::manager()
+	 * @used-by \Df\Checkout\Module\Config\Area::manager()
 	 * @static
-	 * @param Df_Checkout_Module_Main $main
-	 * @return Df_Checkout_Module_Config_Manager
+	 * @param Main $main
+	 * @return self
 	 */
-	public static function s(Df_Checkout_Module_Main $main) {
-		/** @var array(string => Df_Checkout_Module_Config_Manager) */
+	public static function s(Main $main) {
+		/** @var array(string => self) */
 		static $cache;
 		/** @var string $key */
 		$key = get_class($main);
 		if (!isset($cache[$key])) {
 			/**
 			 * @var string $class
-			 * @see Df_Payment_Config_Manager
-			 * @see Df_Shipping_Config_Manager
+			 * @see \Df\Payment\Config\Manager
+			 * @see \Df\Shipping\Config\Manager
 			 */
 			/**
 			 * 2015-04-05
 			 * Менеджер настроек конкретного модуля должен иметь имя по шаблону
-			 * <Имя модуля>Config_Manager
+			 * <Имя модуля>\Config\Manager
 			 * Аналогичное соглашение действует и для классов с настройками конкретных областей:
-			 * @see Df_Checkout_Module_Config_Area::sa()
+			 * @see \Df\Checkout\Module\Config\Area::sa()
 			 */
-			$class = df_cc_class_('Df', $main->getCheckoutModuleType(), 'Config_Manager');
+			$class = df_cc_class('Df', $main->getCheckoutModuleType(), 'Config\Manager');
 			$cache[$key] = self::ic($class, $main);
-			df_assert($cache[$key] instanceof Df_Checkout_Module_Config_Manager);
+			df_assert($cache[$key] instanceof self);
 		}
 		return $cache[$key];
 	}
 
 	/**
-	 * @used-by Df_Shipping_Config_Manager::s()
-	 * @used-by Df_Shipping_Config_Manager_Legacy::s()
-	 * @used-by Df_Payment_Config_Manager_Const::s()
-	 * @used-by Df_Payment_Config_Manager_Const_Default::s()
-	 * @used-by Df_Payment_Config_Manager_Const_ModeSpecific::s()
+	 * @used-by \Df\Shipping\Config\Manager::s()
+	 * @used-by \Df\Shipping\Config\Manager\Legacy::s()
+	 * @used-by \Df\Payment\Config\Manager\ConstT::s()
+	 * @used-by \Df\Payment\Config\Manager\ConstT\DefaultT::s()
+	 * @used-by \Df\Payment\Config\Manager\ConstT\ModeSpecific::s()
 	 * @static
 	 * @param string $class
-	 * @param Df_Checkout_Module_Main $main
-	 * @return Df_Checkout_Module_Config_Manager
+	 * @param Main $main
+	 * @return self
 	 */
-	protected static function sc($class, Df_Checkout_Module_Main $main) {
+	protected static function sc($class, Main $main) {
 		/** @var string $key */
 		$key = df_ckey(get_class($main), $class);
-		/** @var array(string => Df_Checkout_Module_Config_Manager) */
+		/** @var array(string => self) */
 		static $cache;
 		if (!isset($cache[$key])) {
 			$cache[$key] = self::ic($class, $main);

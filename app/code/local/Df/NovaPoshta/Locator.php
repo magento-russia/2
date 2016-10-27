@@ -1,20 +1,21 @@
 <?php
-class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
+namespace Df\NovaPoshta;
+class Locator extends \Df\Shipping\Locator {
 	/**
 	 * @override
-	 * @see Df_Shipping_Locator:: _map()
-	 * @used-by Df_Shipping_Locator::map()
+	 * @see \Df\Shipping\Locator:: _map()
+	 * @used-by \Df\Shipping\Locator::map()
 	 * @param string $type
 	 * @return array(string => string[])
 	 */
 	protected function _map($type) {
 		/** @var array(string -> string[]) $result */
 		$result = array();
-		/** @var phpQueryObject $pqItems */
+		/** @var \phpQueryObject $pqItems */
 		$pqItems = self::response()->pq('#' . self::getInputIdByType($type))->parent()->find('li');
 		df_assert_gt0(count($pqItems));
 		foreach ($pqItems as $domLi) {
-			/** @var DOMNode $domLi */
+			/** @var \DOMNode $domLi */
 			/** @var string $value */
 			/** @var string $nameOriginal */
 			$nameOriginal = $domLi->textContent;
@@ -23,7 +24,7 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 			$nameNormalized = df_first(df_parentheses_explode($nameOriginal));
 			df_assert_string_not_empty($nameNormalized);
 			df_assert($domLi->attributes);
-			/** @var DOMNode|null $domValue */
+			/** @var \DOMNode|null $domValue */
 			$domValue = $domLi->attributes->getNamedItem('data-value');
 			df_assert($domValue);
 			/** @var string $label */
@@ -71,17 +72,13 @@ class Df_NovaPoshta_Locator extends Df_Shipping_Locator {
 
 	/**
 	 * @used-by _map()
-	 * @return Df_Shipping_Response
+	 * @return \Df\Shipping\Response
 	 */
 	private static function response() {
-		/** @var Df_Shipping_Response $r */
+		/** @var \Df\Shipping\Response $r */
 		static $r;
 		if (!$r) {
-			/** @var Df_NovaPoshta_Request $request */
-			$request = new Df_NovaPoshta_Request([
-				Df_NovaPoshta_Request::P__QUERY_PATH => '/ru/delivery'
-			]);
-			$r = $request->response();
+			$r = (new Request([Request::P__QUERY_PATH => '/ru/delivery']))->response();
 		}
 		return $r;
 	}

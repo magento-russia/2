@@ -1,5 +1,7 @@
 <?php
-abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge {
+namespace Df\Checkout\Module\Config;
+use Df\Checkout\Module\Main as Main;
+abstract class Area extends \Df\Checkout\Module\Bridge {
 	/**
 	 * @abstract
 	 * @return string
@@ -7,7 +9,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	abstract protected function getAreaPrefix();
 
 	/**
-	 * @used-by Df_Checkout_Module_Config_Facade::getAreaForStandardKey()
+	 * @used-by \Df\Checkout\Module\Config\Facade::getAreaForStandardKey()
 	 * @param string $key
 	 * @return bool
 	 */
@@ -19,7 +21,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 * @used-by getNat0()
 	 * @param string $key
 	 * @param mixed $default [optional]
-	 * @param Zend_Validate_Interface|Zend_Filter_Interface|string|null $validator [optional]
+	 * @param \Zend_Validate_Interface|\Zend_Filter_Interface|string|null $validator [optional]
 	 * @return mixed|null
 	 * @throws \Df\Core\Exception
 	 */
@@ -36,7 +38,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 				$validator = \Df\Core\Validator::resolve($validator);
 				try {
 					/** @var bool $isFilter */
-					$isFilter = $validator instanceof Zend_Filter_Interface;
+					$isFilter = $validator instanceof \Zend_Filter_Interface;
 					// не фильтруем результат, если он равен null и указано $default
 					if ($isFilter && !(is_null($result) && !is_null($default))) {
 						$result = $validator->filter($result);
@@ -47,11 +49,11 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 					// Если мы уже применили фильтр, то не применяем валидатор,
 					// потому что фильтр либо привёл результат к допустимому валидатором значению,
 					// либо возбудил исключительную ситуацию.
-					if (!$isFilter && $validator instanceof Zend_Validate_Interface) {
+					if (!$isFilter && $validator instanceof \Zend_Validate_Interface) {
 						\Df\Core\Validator::check($result, $validator);
 					}
 				}
-				catch (Exception $e) {
+				catch (\Exception $e) {
 					/** @var \Df\Core\Exception $e */
 					$e = \Df\Core\Exception::wrap($e);
 					$e->comment(df_print_params(array('Ключ' => $key)));
@@ -72,7 +74,7 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 
 	/**
 	 * @used-by getVar()
-	 * Перекрывается методом @see Df_Shipping_Config_Area::_getVar()
+	 * Перекрывается методом @see \Df\Shipping\Config\Area::_getVar()
 	 * @param string $key
 	 * @param mixed $default [optional]
 	 * @return mixed
@@ -108,8 +110,8 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	 */
 	protected function int($key, $default = 0) {return $this->getVar($key, $default, DF_V_INT);}
 
-	/** @return Df_Checkout_Module_Config_Manager */
-	protected function manager() {return Df_Checkout_Module_Config_Manager::s($this->main());}
+	/** @return Manager */
+	protected function manager() {return Manager::s($this->main());}
 
 	/**
 	 * 2015-04-05
@@ -140,19 +142,19 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 	/**
 	 * @used-by _construct()
 	 * @used-by canProcessStandardKey()
-	 * @used-by Df_Shipping_Config_Area::translateStandardKey()
+	 * @used-by \Df\Shipping\Config\Area::translateStandardKey()
 	 * @var array(string|int => string)
 	 */
 	protected $_standardKeysFlipped;
 
 	/**
-	 * @used-by Df_Checkout_Module_Config_Facade::area()
-	 * @param Df_Checkout_Module_Main $main
+	 * @used-by \Df\Checkout\Module\Config\Facade::area()
+	 * @param Main $main
 	 * @param string $area
-	 * @return Df_Checkout_Module_Config_Area
+	 * @return self
 	 */
-	public static function sa(Df_Checkout_Module_Main $main, $area) {
-		/** @var array(string => Df_Checkout_Module_Config_Area) $cache */
+	public static function sa(Main $main, $area) {
+		/** @var array(string => self) $cache */
 		static $cache;
 		/** @var string $key */
 		$key = get_class($main) . '::' . $area;
@@ -162,10 +164,10 @@ abstract class Df_Checkout_Module_Config_Area extends Df_Checkout_Module_Bridge 
 			 * Классы с настройками конкретных моделей должны иметь имя по шаблону
 			 * <Имя модуля>_Config_Area_<Область действия настроек>
 			 * Аналогичное соглашение действует и для общего менеджера настроек:
-			 * @see Df_Checkout_Module_Config_Manager::s()
+			 * @see \Df\Checkout\Module\Config\Manager::s()
 			 */
-			$cache[$key] = self::convention($main, 'Config_Area_' . df_ucfirst($area));
-			df_assert($cache[$key] instanceof Df_Checkout_Module_Config_Area);
+			$cache[$key] = self::convention($main, 'Config\Area\\' . df_ucfirst($area));
+			df_assert($cache[$key] instanceof self);
 		}
 		return $cache[$key];
 	}

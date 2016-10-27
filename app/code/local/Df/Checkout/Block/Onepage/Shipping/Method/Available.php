@@ -41,13 +41,11 @@ class Df_Checkout_Block_Onepage_Shipping_Method_Available
 
 	/**
 	 * @used-by _toHtml()
-	 * @uses Df_Shipping_Block_Carrier::r()
 	 * @return string
 	 */
-	private function renderCarriers() {
-		/** @noinspection PhpParamsInspection */
-		return df_cc_n(df_map(
-			'Df_Shipping_Block_Carrier::r', $this->getShippingRates(), array(), $this, DF_BEFORE
-		));
-	}
+	private function renderCarriers() {/** @noinspection PhpParamsInspection */ return
+		df_cc_n(df_map(function($code, array $rates) {return
+			\Df\Shipping\Block\Carrier::r($this, $code, $rates)
+		;}, $this->getShippingRates(), [], [], DF_BEFORE))
+	;}
 }

@@ -4,7 +4,7 @@
  * @method Df_Alfabank_Response getResponse()
  * @method Df_Alfabank_Config_Area_Service configS()
  */
-abstract class Df_Alfabank_Request_Secondary extends Df_Payment_Request_Transaction {
+abstract class Df_Alfabank_Request_Secondary extends \Df\Payment\Request\Transaction {
 	/**
 	 * @used-by getUri()
 	 * @return string
@@ -25,8 +25,8 @@ abstract class Df_Alfabank_Request_Secondary extends Df_Payment_Request_Transact
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Secondary::_params()
-	 * @used-by Df_Payment_Request_Secondary::params()
+	 * @see \Df\Payment\Request\Secondary::_params()
+	 * @used-by \Df\Payment\Request\Secondary::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {

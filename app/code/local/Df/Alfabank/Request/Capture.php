@@ -2,8 +2,8 @@
 class Df_Alfabank_Request_Capture extends Df_Alfabank_Request_Secondary {
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Secondary::getGenericFailureMessageUniquePart()
-	 * @used-by Df_Payment_Request_Secondary::getGenericFailureMessage()
+	 * @see \Df\Payment\Request\Secondary::getGenericFailureMessageUniquePart()
+	 * @used-by \Df\Payment\Request\Secondary::getGenericFailureMessage()
 	 * @return string
 	 */
 	protected function getGenericFailureMessageUniquePart() {

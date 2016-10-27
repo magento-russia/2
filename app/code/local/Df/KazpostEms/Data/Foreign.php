@@ -1,5 +1,6 @@
 <?php
-class Df_KazpostEms_Data_Foreign {
+namespace Df\KazpostEms\Data;
+class Foreign {
 	/** @var array(string => int) */
 	public static $countries = array(
 		'АВСТРИЯ' => 1

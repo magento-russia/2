@@ -1,5 +1,6 @@
 <?php
-class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
+namespace Df\Payment\Config\Manager;
+class ConstT extends \Df\Payment\Config\ManagerBase {
 	/** @return string[] */
 	public function allowedCurrencyCodes() {return dfc($this, function() {
 		/** @var string $resultS */
@@ -44,7 +45,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	});}
 
 	/**
-	 * @used-by Df_Payment_Config_Area::getConst()
+	 * @used-by \Df\Payment\Config\Area::getConst()
 	 * @param string $key
 	 * @param bool $canBeTest [optional]
 	 * @param string $default [optional]
@@ -153,19 +154,19 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 
 	/**
 	 * @see isDefault()
-	 * @return Df_Payment_Config_Manager_Const_Default
+	 * @return \Df\Payment\Config\Manager\ConstT\DefaultT
 	 */
-	private function getDefault() {return Df_Payment_Config_Manager_Const_Default::s($this->main());}
+	private function getDefault() {return \Df\Payment\Config\Manager\ConstT\DefaultT::s($this->main());}
 
-	/** @return Df_Payment_Config_Manager_Const_ModeSpecific */
+	/** @return \Df\Payment\Config\Manager\ConstT\ModeSpecific */
 	private function getModeSpecific() {return
-		Df_Payment_Config_Manager_Const_ModeSpecific::s($this->main())
+		\Df\Payment\Config\Manager\ConstT\ModeSpecific::s($this->main())
 	;}
 
 	/**
 	 * @override
 	 * @param string $key
-	 * @return Mage_Core_Model_Config_Element|null
+	 * @return \Mage_Core_Model_Config_Element|null
 	 */
 	private function getNode($key) {return
 		df_config_node($this->adaptKey($key)) ?:
@@ -175,7 +176,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	/**
 	 * @override
 	 * @param string $key
-	 * @return Mage_Core_Model_Config_Element|null
+	 * @return \Mage_Core_Model_Config_Element|null
 	 */
 	private function getNodeT($key) {return
 		$this->getModeSpecific()->getNode($key) ?: $this->getNode($key)
@@ -188,7 +189,7 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	 * @used-by getNode()
 	 * @return bool
 	 */
-	private function isDefault() {return $this instanceof Df_Payment_Config_Manager_Const_Default;}
+	private function isDefault() {return $this instanceof \Df\Payment\Config\Manager\ConstT\DefaultT;}
 
 	/** @var string */
 	private static $KEY__ALLOWED = 'allowed';
@@ -200,13 +201,13 @@ class Df_Payment_Config_Manager_Const extends Df_Payment_Config_ManagerBase {
 	private static $KEY__LOCALES = 'locales';
 
 	/**
-	 * @used-by Df_Payment_Method::constManager()
-	 * @param Df_Payment_Method|Df_Checkout_Module_Main $method
+	 * @used-by \Df\Payment\Method::constManager()
+	 * @param \Df\Payment\Method|\Df\Checkout\Module\Main $method
 	 * 2016-10-18
-	 * Тип параметра — всегда @see Df_Payment_Method,
-	 * но в сигнатуре вынуждены указать @see Df_Checkout_Module_Main
-	 * для совместимости с унаследованным методом @see Df_Checkout_Module_Config_Manager::s()
-	 * @return Df_Payment_Config_Manager_Const
+	 * Тип параметра — всегда @see \Df\Payment\Method,
+	 * но в сигнатуре вынуждены указать @see \Df\Checkout\Module\Main
+	 * для совместимости с унаследованным методом @see \Df\Checkout\Module\Config\Manager::s()
+	 * @return self
 	 */
-	public static function s(Df_Checkout_Module_Main $method) {return self::sc(__CLASS__, $method);}
+	public static function s(\Df\Checkout\Module\Main $method) {return self::sc(__CLASS__, $method);}
 }

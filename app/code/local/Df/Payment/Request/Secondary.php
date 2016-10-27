@@ -1,10 +1,13 @@
 <?php
-abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
+namespace Df\Payment\Request;
+use Df_Sales_Model_Order as O;
+use Mage_Sales_Model_Order_Payment as OP;
+abstract class Secondary extends \Df\Payment\Request {
 	/**
 	 * Этот метод сделан публичным и вынесен в базовый класс,
 	 * потому что этот метод используется для диагностики:
-	 * @used-by Df_Payment_Exception_Response::message()
-	 * @return Zend_Uri_Http
+	 * @used-by \Df\Payment\Exception\Response::message()
+	 * @return \Zend_Uri_Http
 	 */
 	abstract public function getUri();
 
@@ -38,11 +41,11 @@ abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request::order()
-	 * @used-by Df_Payment_Request::amount()
-	 * @used-by Df_Payment_Request::method()
-	 * @used-by Df_Payment_Request::payment()
-	 * @return Df_Sales_Model_Order
+	 * @see \Df\Payment\Request::order()
+	 * @used-by \Df\Payment\Request::amount()
+	 * @used-by \Df\Payment\Request::method()
+	 * @used-by \Df\Payment\Request::payment()
+	 * @return O
 	 */
 	protected function order() {return $this->payment()->getOrder();}
 
@@ -52,7 +55,7 @@ abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
 	 * Потомки его переопределяют через @see _params(), потомки же его и используют.
 	 * Ядро Российской сборки Magento использует данный метод только для диагностики;
 	 * наличие этого метода в базовом классе позволяет обобщить диагностику:
-	 * @used-by Df_Payment_Exception_Response::message()
+	 * @used-by \Df\Payment\Exception\Response::message()
 	 * @return array(string => string|int)
 	 */
 	public function params() {
@@ -62,10 +65,10 @@ abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Payment_Response */
+	/** @return \Df\Payment\Response */
 	public function getResponse() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $response = Df_Payment_Response::ic(
+			$this->{__METHOD__} = $response = \Df\Payment\Response::ic(
 				$this, $this->getResponseAsArray()
 			);
 			$response->postProcess($this->payment());
@@ -80,9 +83,9 @@ abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request::payment()
-	 * @used-by Df_Payment_Request::method()
-	 * @return Mage_Sales_Model_Order_Payment
+	 * @see \Df\Payment\Request::payment()
+	 * @used-by \Df\Payment\Request::method()
+	 * @return OP
 	 */
 	protected function payment() {return $this->cfg(self::$P__PAYMENT);}
 	
@@ -100,7 +103,7 @@ abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
 	 * @used-by _construct()
 	 * @used-by getPayment()
 	 * @used-by ic()
-	 * @used-by Df_Payment_Request_Transaction::doTransaction()
+	 * @used-by \Df\Payment\Request\Transaction::doTransaction()
 	 * @used-by Df_YandexMoney_Request_Authorize::i()
 	 * @used-by Df_YandexMoney_Request_Capture::i()
 	 * @var string
@@ -111,10 +114,10 @@ abstract class Df_Payment_Request_Secondary extends Df_Payment_Request {
 	 * @used-by Df_Alfabank_Request_State::i()
 	 * @used-by Df_Avangard_Request_State::i()
 	 * @param string $class
-	 * @param Mage_Sales_Model_Order_Payment $payment
-	 * @return Df_Payment_Request_Secondary
+	 * @param OP $payment
+	 * @return self
 	 */
-	protected static function ic($class, Mage_Sales_Model_Order_Payment $payment) {
-		return df_ic($class, __CLASS__, array(self::$P__PAYMENT => $payment));
-	}
+	protected static function ic($class, OP $payment) {return
+		df_ic($class, __CLASS__, [self::$P__PAYMENT => $payment])
+	;}
 }

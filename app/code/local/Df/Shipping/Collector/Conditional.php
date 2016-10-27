@@ -1,21 +1,22 @@
 <?php
-abstract class Df_Shipping_Collector_Conditional extends Df_Shipping_Collector {
+namespace Df\Shipping\Collector;
+abstract class Conditional extends \Df\Shipping\Collector {
 	/**
 	 * @used-by _collect()
-	 * @see Df_Shipping_Collector_Conditional_WithForeign::suffix()
+	 * @see \Df\Shipping\Collector\Conditional\WithForeign::suffix()
 	 * @return string
 	 */
 	abstract protected function suffix();
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
 	protected function _collect() {
 		$this->collectPrepare();
-		Df_Shipping_Collector_Child::s_collect($this->suffix(), $this);
+		Child::s_collect($this->suffix(), $this);
 	}
 
 	/**

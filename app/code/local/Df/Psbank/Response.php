@@ -1,5 +1,5 @@
 <?php
-class Df_Psbank_Response extends Df_Payment_Response {
+class Df_Psbank_Response extends \Df\Payment\Response {
 	/**
 	 * Назначение: сумма операции.
 	 * Присутствует во всех ответах.

@@ -1,9 +1,10 @@
 <?php
+namespace Df\Shipping\Config;
 /**
- * @method Df_Shipping_Carrier main()
- * @method Df_Shipping_Config_Manager manager()
+ * @method \Df\Shipping\Carrier main()
+ * @method Manager manager()
  */
-abstract class Df_Shipping_Config_Area extends Df_Checkout_Module_Config_Area {
+abstract class Area extends \Df\Checkout\Module\Config\Area {
 	/**
 	 * Ключи, значения которых хранятся по стандартному для Magento пути,
 	 * в отличие от стандартного для Российской сборки пути.
@@ -16,8 +17,8 @@ abstract class Df_Shipping_Config_Area extends Df_Checkout_Module_Config_Area {
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Config_Area::_getVar()
-	 * @used-by Df_Checkout_Module_Config_Area::getVar()
+	 * @see \Df\Checkout\Module\Config\Area::_getVar()
+	 * @used-by \Df\Checkout\Module\Config\Area::getVar()
 	 * Иногда возникает потребность давать ключу другое имя, нежели стандартное для Magento CE.
 	 * Например, такая потребность возникает для стандартного ключа «showmethod»,
 	 * потому что для ключа с этим именем ядро Magento
@@ -65,6 +66,6 @@ abstract class Df_Shipping_Config_Area extends Df_Checkout_Module_Config_Area {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Shipping_Carrier::class);
+		$this->_prop(self::$P__MAIN, \Df\Shipping\Carrier::class);
 	}
 }

@@ -1,2 +1,2 @@
 <?php
-class Df_OnPay_Method extends Df_Payment_Method_WithRedirect {}
+class Df_OnPay_Method extends \Df\Payment\Method\WithRedirect {}

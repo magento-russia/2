@@ -1,8 +1,8 @@
 <?php
 /** @method Df_Alfabank_Config_Area_Service configS() */
-class Df_Alfabank_Method extends Df_Payment_Method_WithRedirect {
+class Df_Alfabank_Method extends \Df\Payment\Method\WithRedirect {
 	/**
-	 * @see Df_Payment_Method::canCapture()
+	 * @see \Df\Payment\Method::canCapture()
 	 * @override
 	 * @return bool
 	 */
@@ -53,16 +53,16 @@ class Df_Alfabank_Method extends Df_Payment_Method_WithRedirect {
 	 * @see Df_Alfabank_Method::getPaymentPageUrl()
 	 * на который модуль перенаправляет покупателя без параметров.
 	 * @override
-	 * @see Df_Payment_Method_WithRedirect::getPaymentPageParams()
-	 * @used-by Df_Payment_Block_Redirect::getFormFields()
+	 * @see \Df\Payment\Method\WithRedirect::getPaymentPageParams()
+	 * @used-by \Df\Payment\Block\Redirect::getFormFields()
 	 * @return array(string => string|int)
 	 */
 	public function getPaymentPageParams() {return array();}
 
 	/**
 	 * @override
-	 * @see Df_Payment_Method_WithRedirect::getPaymentPageUrl()
-	 * @used-by Df_Payment_Block_Redirect::getTargetURL()
+	 * @see \Df\Payment\Method\WithRedirect::getPaymentPageUrl()
+	 * @used-by \Df\Payment\Block\Redirect::getTargetURL()
 	 * @return string
 	 */
 	public function getPaymentPageUrl() {return dfa($this->getRegistrationResponse(), 'formUrl');}
@@ -117,7 +117,7 @@ class Df_Alfabank_Method extends Df_Payment_Method_WithRedirect {
 			$httpClient
 				/**
 				 * Обратите внимание, что вызывать нужно именно родительский метод
-				 * @uses Df_Payment_Method_WithRedirect::getPaymentPageParams(),
+				 * @uses \Df\Payment\Method\WithRedirect::getPaymentPageParams(),
 				 * а не getPaymentPageParams()
 				 */
 				->setUri($this->configS()->getRegistrationUri(parent::getPaymentPageParams()))

@@ -1,5 +1,6 @@
 <?php
-class Df_InTime_Api extends Df_Core_Model {
+namespace Df\InTime;
+class Api extends \Df_Core_Model {
 	/**
 		array(
 			[0] => array(
@@ -465,11 +466,11 @@ class Df_InTime_Api extends Df_Core_Model {
 	 * @return void
 	 */
 	protected function _construct() {
-		$this->_soap = new SoapClient(Mage::getModuleDir('etc', 'Df_InTime') . DS . 'api.wsdl');
+		$this->_soap = new \SoapClient(\Mage::getModuleDir('etc', 'Df_InTime') . DS . 'api.wsdl');
 	}
-	/** @var SoapClient  */
+	/** @var \SoapClient  */
 	private $_soap;
 
-	/** @return Df_InTime_Api */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

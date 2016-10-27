@@ -10,7 +10,7 @@
 		<carriers>
 			<df-kazpost>
 				<active>0</active>
-				<model>Df_Kazpost_Carrier</model>
+				<model>Df\Kazpost\Carrier</model>
 				<title>Казпочта</title>
 			</df-kazpost>
 		</carriers>

@@ -3,12 +3,12 @@
  * @method Df_IPay_Method method()
  * @method Df_IPay_Config_Area_Service configS()
  */
-class Df_IPay_Request_Payment extends Df_Payment_Request_Payment {
+class Df_IPay_Request_Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @see Df_Payment_Request::amount()
+	 * @see \Df\Payment\Request::amount()
 	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
 	 * @return Df_Core_Model_Money
 	 */
@@ -21,15 +21,15 @@ class Df_IPay_Request_Payment extends Df_Payment_Request_Payment {
 	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
 	 * @used-by Df_IPay_Action_ConfirmPaymentByShop::_process()
 	 * @used-by Df_IPay_Action_GetPaymentAmount::_process()
-	 * @see Df_Payment_Request_Payment::description()
+	 * @see \Df\Payment\Request\Payment::description()
 	 * @return string
 	 */
 	public function description() {return parent::description();}
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::_params()
-	 * @used-by Df_Payment_Request_Payment::params()
+	 * @see \Df\Payment\Request\Payment::_params()
+	 * @used-by \Df\Payment\Request\Payment::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {
@@ -52,7 +52,7 @@ class Df_IPay_Request_Payment extends Df_Payment_Request_Payment {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::order()
+	 * @see \Df\Payment\Request\Payment::order()
 	 * @return Df_Sales_Model_Order
 	 */
 	protected function order() {return $this->_order ?: parent::order();}

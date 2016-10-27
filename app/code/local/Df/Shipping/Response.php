@@ -1,6 +1,7 @@
 <?php
+namespace Df\Shipping;
 use Df\Xml\X;
-class Df_Shipping_Response extends Df_Core_Model {
+class Response extends \Df_Core_Model {
 	/**
 	 * @param string $needle
 	 * @return bool
@@ -15,7 +16,7 @@ class Df_Shipping_Response extends Df_Core_Model {
 	public function json($path = null, $defaultValue = null) {
 		$this->_type = self::$TYPE__JSON;
 		if (!isset($this->_jsonDecoded)) {
-			$this->_jsonDecoded = Zend_Json::decode($this->getRequest()->preprocessJson($this->text()));
+			$this->_jsonDecoded = df_json_decode($this->getRequest()->preprocessJson($this->text()));
 			df_result_array($this->_jsonDecoded);
 		}
 		/** @var mixed[]|mixed $result */
@@ -46,9 +47,9 @@ class Df_Shipping_Response extends Df_Core_Model {
 	 * @param bool $needThrow [optional]
 	 * @return string|null
 	 */
-	public function match($pattern, $needThrow = true) {
-		return df_preg_match($pattern, $this->text(), $needThrow);
-	}
+	public function match($pattern, $needThrow = true) {return
+		df_preg_match($pattern, $this->text(), $needThrow)
+	;}
 
 	/**
 	 * @param string $selector
@@ -78,14 +79,14 @@ class Df_Shipping_Response extends Df_Core_Model {
 
 	/**
 	 * @param string|null $selector [optional]
-	 * @return phpQueryObject
+	 * @return \phpQueryObject
 	 */
 	public function pq($selector = null) {
 		$this->_type = self::$TYPE__HTML;
 		if (!isset($this->_pq)) {
 			$this->_pq = df_pq($this->text());
 		}
-		/** @var phpQueryObject $result */
+		/** @var \phpQueryObject $result */
 		if (is_null($selector)) {
 			$result = $this->_pq;
 		}
@@ -102,15 +103,12 @@ class Df_Shipping_Response extends Df_Core_Model {
 	/**
 	 * @return string
 	 */
-	public function report() {
-		return
-				(self::$TYPE__JSON === $this->_type)
-			&&
-				isset($this->_jsonDecoded) && is_array($this->_jsonDecoded)
-			? df_print_params($this->_jsonDecoded)
-			: $this->text()
-		;
-	}
+	public function report() {return
+		(self::$TYPE__JSON === $this->_type)
+		&& isset($this->_jsonDecoded) && is_array($this->_jsonDecoded)
+		? df_print_params($this->_jsonDecoded)
+		: $this->text()
+	;}
 
 	/** @return string */
 	public function text() {return $this->cfg(self::P__TEXT);}
@@ -172,7 +170,7 @@ class Df_Shipping_Response extends Df_Core_Model {
 	private $_jsonDecoded;
 	/** @var string */
 	private $_type = 'txt';
-	/** @var phpQueryObject */
+	/** @var \phpQueryObject */
 	private $_pq;
 	/** @var array(string => phpQueryObject) */
 	private $_pqCache = array();
@@ -192,9 +190,9 @@ class Df_Shipping_Response extends Df_Core_Model {
 	 * @static
 	 * @param \Df\Shipping\Request $request
 	 * @param string $text
-	 * @return Df_Shipping_Response
+	 * @return self
 	 */
-	public static function i(\Df\Shipping\Request $request, $text) {
-		return new self(array(self::P__REQUEST => $request, self::P__TEXT => $text));
-	}
+	public static function i(\Df\Shipping\Request $request, $text) {return
+		new self([self::P__REQUEST => $request, self::P__TEXT => $text])
+	;}
 }

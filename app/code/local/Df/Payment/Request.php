@@ -1,15 +1,19 @@
 <?php
+namespace Df\Payment;
+use Df_Core_Model_Money as Money;
+use Df_Sales_Model_Order as O;
+use Mage_Sales_Model_Order_Payment as OP;
 /**
  * 2015-03-15
  * Обратите внимание, что данный класс не имеет какого-либо внешнего интерфейса
  * (не имеет ни одного публичного метода), и его единственная цель —
  * предоставлять общие методы своим потомкам.
  */
-abstract class Df_Payment_Request extends Df_Core_Model {
+abstract class Request extends \Df_Core_Model {
 	/**
 	 * @used-by amount()
 	 * @used-by getPayment()
-	 * @return Df_Sales_Model_Order
+	 * @return O
 	 */
 	abstract protected function order();
 
@@ -23,7 +27,7 @@ abstract class Df_Payment_Request extends Df_Core_Model {
 	 * Намеренно не делаем данный метод публичным в базовом классе
 	 * ради упрощения понимания системы
 	 * (чем меньше публичных методов — тем проще понимать систему).
-	 * @return Df_Core_Model_Money
+	 * @return Money
 	 */
 	protected function amount() {return dfc($this, function() {return
 		$this->configS()->getOrderAmountInServiceCurrency($this->order())
@@ -38,7 +42,7 @@ abstract class Df_Payment_Request extends Df_Core_Model {
 	/** @return string */
 	protected function amountS() {return $this->amount()->getAsString();}
 
-	/** @return Df_Payment_Config_Area_Service */
+	/** @return \Df\Payment\Config\Area\Service */
 	protected function configS() {return $this->method()->configS();}
 
 	/** @return string */
@@ -49,7 +53,7 @@ abstract class Df_Payment_Request extends Df_Core_Model {
 	/**
 	 * @used-by Df_Alfabank_Request_Payment::getResponseAsArray()
 	 * @used-by Df_Psbank_Request_Secondary::getResponsePayment()
-	 * @return Mage_Payment_Model_Info
+	 * @return \Mage_Payment_Model_Info
 	 */
 	protected function ii() {return $this->method()->getInfoInstance();}
 
@@ -57,13 +61,12 @@ abstract class Df_Payment_Request extends Df_Core_Model {
 	 * @override
 	 * @used-by configS()
 	 * @used-by ii()
-	 * @return Df_Payment_Method_WithRedirect
+	 * @return \Df\Payment\Method\WithRedirect
 	 */
 	protected function method() {return dfc($this, function() {
-		/** @var Mage_Sales_Model_Order_Payment $result */
-		/** @var Df_Payment_Method_WithRedirect $result */
+		/** @var \Df\Payment\Method\WithRedirect $result */
 		$result = $this->payment()->getMethodInstance();
-		if (!$result instanceof Df_Payment_Method_WithRedirect) {
+		if (!$result instanceof \Df\Payment\Method\WithRedirect) {
 			df_error(
 				'Заказ №«%s» не предназначен для оплаты каким-либо из платёжных модулей
 				Российской сборки Magento.'
@@ -150,14 +153,14 @@ abstract class Df_Payment_Request extends Df_Core_Model {
 	 * 1) @uses Mage_Sales_Model_Order::getPayment() может иногда возвращать false
 	 * 2) Результат @uses Mage_Sales_Model_Order::getPayment() разумно кэшировать
 	 * в силу реализации этого метода (там используется foreach).
-	 * @see Df_Payment_Action_Abstract::getPayment()
+	 * @see \Df\Payment\Action::getPayment()
 	 * @used-by method()
-	 * @return Mage_Sales_Model_Order_Payment
+	 * @return OP
 	 */
 	protected function payment() {return dfc($this, function() {
-		/** @var Mage_Sales_Model_Order_Payment $result */
+		/** @var OP $result */
 		$result = $this->order()->getPayment();
-		df_assert($result instanceof Mage_Sales_Model_Order_Payment);
+		df_assert($result instanceof OP);
 		return $result;
 	});}
 
@@ -172,7 +175,7 @@ abstract class Df_Payment_Request extends Df_Core_Model {
 
 	/**
 	 * @used-by Df_YandexMoney_Request_Payment::descriptionParams()
-	 * @return Df_Core_Model_StoreM
+	 * @return \Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_store($this->method()->getStore());}
 }

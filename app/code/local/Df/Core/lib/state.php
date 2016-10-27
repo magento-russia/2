@@ -63,7 +63,7 @@ function df_action_name() {return !df_controller() ? '' : df_controller()->getFu
  * @used-by Df_Core_Observer::piratesCheck()
  * @used-by df_redirect_to_checkout()
  * @used-by Df_Localization_Realtime_Dictionary::handleForController()
- * @used-by Df_Payment_Request_Payment::getCustomerIpAddress()
+ * @used-by \Df\Payment\Request\Payment::getCustomerIpAddress()
  * @used-by Df_Themes_Observer::controller_action_postdispatch_ajax_index_options()
  * @used-by Df_Chronopay_Model_Gate_Buyer::getIpAddress()
  * @return Mage_Core_Controller_Varien_Action|null

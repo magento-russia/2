@@ -1,10 +1,10 @@
 <?php
 /** @method Df_Moneta_Method method() */
-class Df_Moneta_Request_Payment extends Df_Payment_Request_Payment {
+class Df_Moneta_Request_Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::_params()
-	 * @used-by Df_Payment_Request_Payment::params()
+	 * @see \Df\Payment\Request\Payment::_params()
+	 * @used-by \Df\Payment\Request\Payment::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {

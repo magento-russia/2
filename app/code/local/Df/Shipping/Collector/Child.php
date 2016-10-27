@@ -1,30 +1,31 @@
 <?php
-abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
+namespace Df\Shipping\Collector;
+abstract class Child extends \Df\Shipping\Collector {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_result()
-	 * @used-by Df_Shipping_Collector::addError()
-	 * @used-by Df_Shipping_Collector::addRate()
-	 * @used-by Df_Shipping_Collector::call()
-	 * @used-by Df_Shipping_Collector::r()
-	 * @return Mage_Shipping_Model_Rate_Result
+	 * @see \Df\Shipping\Collector::_result()
+	 * @used-by \Df\Shipping\Collector::addError()
+	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::call()
+	 * @used-by \Df\Shipping\Collector::r()
+	 * @return \Mage_Shipping_Model_Rate_Result
 	 */
 	public function _result() {return $this->parent()->_result();}
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::currencyCode()
-	 * @used-by Df_Shipping_Collector::fromBase()
-	 * @used-by Df_Shipping_Collector::toBase()
+	 * @see \Df\Shipping\Collector::currencyCode()
+	 * @used-by \Df\Shipping\Collector::fromBase()
+	 * @used-by \Df\Shipping\Collector::toBase()
 	 * @return string
 	 */
 	protected function currencyCode() {return $this->parent()->currencyCode();}
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::domesticIso2()
-	 * @used-by Df_Shipping_Collector::_result()
-	 * @used-by Df_Shipping_Collector_Conditional_WithForeign::suffix()
+	 * @see \Df\Shipping\Collector::domesticIso2()
+	 * @used-by \Df\Shipping\Collector::_result()
+	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::suffix()
 	 * @return string
 	 */
 	protected function domesticIso2() {return $this->parent()->domesticIso2();}
@@ -33,21 +34,18 @@ abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
 	 * @used-by currencyCode()
 	 * @used-by domesticIso2()
 	 * @used-by getRateResult()
-	 * @return Df_Shipping_Collector_Conditional
+	 * @return Conditional
 	 */
-	private function parent() {return $this->cfg(self::$P__PARENT);}
+	private function parent() {return $this[self::$P__PARENT];}
 
 	/**
-	 * @see Df_Shipping_Collector::rateDefaultCode()
-	 * @used-by Df_Shipping_Collector::addRate()
+	 * @see \Df\Shipping\Collector::rateDefaultCode()
+	 * @used-by \Df\Shipping\Collector::addRate()
 	 * @return string
 	 */
-	protected function rateDefaultCode() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = mb_strtoupper(df_last(df_explode_class($this)));
-		}
-		return $this->{__METHOD__};
-	}
+	protected function rateDefaultCode() {return dfc($this, function() {
+		return mb_strtoupper(df_last(df_explode_class($this)));
+	});}
 
 	/**
 	 * @override
@@ -55,21 +53,21 @@ abstract class Df_Shipping_Collector_Child extends Df_Shipping_Collector {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PARENT, Df_Shipping_Collector_Conditional::class);
+		$this->_prop(self::$P__PARENT, Conditional::class);
 	}
 	/** @var string */
 	private static $P__PARENT = 'parent';
 
 	/**
-	 * @used-by Df_Shipping_Collector_Conditional::_collect()
+	 * @used-by \Df\Shipping\Collector\Conditional::_collect()
 	 * @param string $suffix
-	 * @param Df_Shipping_Collector_Conditional $parent
+	 * @param Conditional $parent
 	 * @return void
 	 */
-	public static function s_collect($suffix, Df_Shipping_Collector_Conditional $parent) {
+	public static function s_collect($suffix, Conditional $parent) {
 		/** @var string $class */
 		$class = df_cts($parent) . df_class_delimiter($parent) . $suffix;
-		/** @var Df_Shipping_Collector_Child $i */
+		/** @var self $i */
 		$i = df_ic($class, __CLASS__, [self::$P__PARENT => $parent] + $parent->getData());
 		$i->_collect();
 	}

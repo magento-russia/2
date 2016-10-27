@@ -1,10 +1,16 @@
 <?php
+namespace Df\Payment\Config\Area;
+use Df_Core_Model_Money as Money;
+use Df_Directory_Model_Currency as Currency;
+use Df\Payment\Config\Source\Action as Action;
+use Df\Payment\Config\Source\FeePayer as FeePayer;
 use Df_Sales_Model_Order as O;
-class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
+use Mage_Sales_Model_Order_Item as OI;
+class Service extends \Df\Payment\Config\Area {
 	/**
-	 * @param Mage_Sales_Model_Order|O $order
+	 * @param \Mage_Sales_Model_Order|O $order
 	 * @param float|string $amountInOrderCurrency
-	 * @return Df_Core_Model_Money
+	 * @return Money
 	 */
 	public function convertAmountFromOrderCurrencyToServiceCurrency(O $order, $amountInOrderCurrency) {
 		return $this->convertAmountToServiceCurrency(
@@ -13,12 +19,12 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	}
 
 	/**
-	 * @used-by Df_Payment_Request_Transaction::getAmount()
-	 * @param Mage_Directory_Model_Currency $currency
+	 * @used-by \Df\Payment\Request\Transaction::getAmount()
+	 * @param Currency|\Mage_Directory_Model_Currency $currency
 	 * @param float|string $amount
-	 * @return Df_Core_Model_Money
+	 * @return Money
 	 */
-	public function convertAmountToServiceCurrency(Mage_Directory_Model_Currency $currency, $amount) {
+	public function convertAmountToServiceCurrency(Currency $currency, $amount) {
 		/** @var float $amount */
 		$amount = (float)$amount;
 		return
@@ -34,7 +40,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	public function getAllowedCurrenciesAsOptionArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string)) $currenciesAllowedInSystem */
-			$currenciesAllowedInSystem = Mage::app()->getLocale()->getOptionCurrencies();
+			$currenciesAllowedInSystem = \Mage::app()->getLocale()->getOptionCurrencies();
 			/** @var array(array(string => string)) $result */
 			$result = array();
 			if (!$this->constManager()->hasCurrencySetRestriction()) {
@@ -61,8 +67,8 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			$result = array();
 			/** @var array(string => string) $languages */
 			$languages = df_h()->localization()->getLanguages();
-			/** @var Df_Localization_Helper_Locale $helper */
-			$helper = Df_Localization_Helper_Locale::s();
+			/** @var \Df_Localization_Helper_Locale $helper */
+			$helper = \Df_Localization_Helper_Locale::s();
 			foreach ($this->constManager()->allowedLocaleCodes() as $code) {
 				$result[]= df_option($code, dfa($languages, $helper->getLanguageCodeByLocaleCode($code)));
 			}
@@ -82,8 +88,8 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	/** @return string */
 	public function getCardPaymentAction() {return $this->getVar('card_payment_action');}
 
-	/** @return Df_Directory_Model_Currency */
-	public function getCurrency() {return Df_Directory_Model_Currency::ld($this->getCurrencyCode());}
+	/** @return Currency */
+	public function getCurrency() {return Currency::ld($this->getCurrencyCode());}
 
 	/**
 	 * Валюта платёжной системы.
@@ -152,7 +158,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	 * Может, всегда использовать grand_total?
 	 *
 	 * @param O $order
-	 * @return Df_Core_Model_Money
+	 * @return Money
 	 */
 	public function getOrderAmountInServiceCurrency(O $order) {return
 		$this->convertAmountFromOrderCurrencyToServiceCurrency(
@@ -162,10 +168,10 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	}
 
 	/**
-	 * @param Mage_Sales_Model_Order_Item $orderItem
-	 * @return Df_Core_Model_Money
+	 * @param OI $orderItem
+	 * @return Money
 	 */
-	public function getOrderItemAmountInServiceCurrency(Mage_Sales_Model_Order_Item $orderItem) {
+	public function getOrderItemAmountInServiceCurrency(OI $orderItem) {
 		return $this->convertAmountFromOrderCurrencyToServiceCurrency(
 			$orderItem->getOrder(), (double)$orderItem->getRowTotalInclTax()
 		);
@@ -256,7 +262,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 			$resultAsString = $this->getVar('payment_methods');
 			df_assert_string($resultAsString);
 			$this->{__METHOD__} =
-				Df_Admin_Config_Form_Element_Multiselect::isAll($resultAsString)
+				\Df_Admin_Config_Form_Element_Multiselect::isAll($resultAsString)
 				? df_option_values($this->availablePaymentMethodsAsOptionArray())
 				: df_csv_parse($resultAsString)
 			;
@@ -267,7 +273,7 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 
 	/**
 	 * @param O $order
-	 * @return Df_Core_Model_Money
+	 * @return Money
 	 */
 	public function geShippingAmountInServiceCurrency(O $order) {
 		return $this->convertAmountFromOrderCurrencyToServiceCurrency(
@@ -315,32 +321,20 @@ class Df_Payment_Config_Area_Service extends Df_Payment_Config_Area {
 	});}
 
 	/** @return bool */
-	public function isCardPaymentActionAuthorize() {
-		return
-				Df_Payment_Config_Source_PaymentCard_PaymentAction::VALUE__AUTHORIZE
-			===
-				$this->getCardPaymentAction()
-		;
-	}
+	public function isCardPaymentActionAuthorize() {return
+		Action::VALUE__AUTHORIZE === $this->getCardPaymentAction()
+	;}
 
 	/** @return bool */
-	public function isCardPaymentActionCapture() {
-		return
-				Df_Payment_Config_Source_PaymentCard_PaymentAction::VALUE__CAPTURE
-			===
-				$this->getCardPaymentAction()
-		;
-	}
+	public function isCardPaymentActionCapture() {return
+		Action::VALUE__CAPTURE === $this->getCardPaymentAction()
+	;}
 
 	/** @return bool */
-	public function isFeePayedByBuyer() {
-		return Df_Payment_Config_Source_Service_FeePayer::VALUE__BUYER === $this->getFeePayer();
-	}
+	public function isFeePayedByBuyer() {return FeePayer::VALUE__BUYER === $this->getFeePayer();}
 
 	/** @return bool */
-	public function isFeePayedByShop() {
-		return Df_Payment_Config_Source_Service_FeePayer::VALUE__SHOP === $this->getFeePayer();
-	}
+	public function isFeePayedByShop() {return FeePayer::VALUE__SHOP === $this->getFeePayer();}
 
 	/**
 	 * Работает ли модуль в тестовом режиме?

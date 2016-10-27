@@ -188,7 +188,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
-							<source_model>Df_Payment_Config_Source_Currency</source_model>
+							<source_model>Df\Payment\Config\Source\Currency</source_model>
 							<sort_order>9000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -200,7 +200,7 @@
 						<payment_service__payment_page_locale>
 							<label>Язык платёжной формы на сайте «Монета.Ру»</label>
 							<frontend_type>select</frontend_type>
-							<source_model>Df_Payment_Config_Source_PaymentPage_Locale</source_model>
+							<source_model>Df\Payment\Config\Source\Locale</source_model>
 							<sort_order>10000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -218,7 +218,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>df-multiselect</frontend_type>
-							<source_model>Df_Payment_Config_Source_PaymentMethod</source_model>
+							<source_model>Df\Payment\Config\Source\Method</source_model>
 							<sort_order>11000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -235,7 +235,7 @@
 							   ]]>
 						   </comment>
 							<frontend_type>select</frontend_type>
-							<source_model>Df_Payment_Config_Source_PaymentMethod</source_model>
+							<source_model>Df\Payment\Config\Source\Method</source_model>
 							<sort_order>12000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>

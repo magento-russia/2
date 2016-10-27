@@ -1,5 +1,6 @@
 <?php
-class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
+namespace Df\Payment\Block;
+class Redirect extends \Mage_Page_Block_Redirect {
 	/**
 	 * @override
 	 * @return array(string => string|int)
@@ -15,7 +16,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	/**
 	 * @override
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function getHtmlFormRedirect() {
 		/** @var string $result */
@@ -25,7 +26,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 				,$this->getFormId()
 			);
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			df_handle_entry_point_exception($e, true);
 		}
 		return $result;
@@ -39,17 +40,17 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 	 */
 	public function getTargetURL() {return $this->method()->getPaymentPageUrl();}
 
-	/** @return Df_Varien_Data_Form */
+	/** @return \Df_Varien_Data_Form */
 	private function getForm() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Varien_Data_Form $result */
-			$result = new Df_Varien_Data_Form();
+			/** @var \Df_Varien_Data_Form $result */
+			$result = new \Df_Varien_Data_Form();
 			$result->setId($this->getFormId());
 			$result
 				->setAction($this->getTargetURL())
 				->setName($this->getFormId())
 				->setMethod($this->method()->const_(
-					'request/method', false, Zend_Form::METHOD_POST
+					'request/method', false, \Zend_Form::METHOD_POST
 				))
 				->setUseContainer(true)
 				->addHiddenFields($this->_getFormFields())
@@ -60,7 +61,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Sales_Model_Order */
+	/** @return \Df_Sales_Model_Order */
 	private function order() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_last_order(false);
@@ -71,7 +72,7 @@ class Df_Payment_Block_Redirect extends Mage_Page_Block_Redirect {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Payment_Method_WithRedirect */
+	/** @return \Df\Payment\Method\WithRedirect */
 	private function method() {return dfc($this, function() {return
 		$this->order()->getPayment()->getMethodInstance()
 	;});}

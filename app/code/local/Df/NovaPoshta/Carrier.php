@@ -1,2 +1,3 @@
 <?php
-class Df_NovaPoshta_Carrier extends Df_Shipping_Carrier {}
+namespace Df\NovaPoshta;
+class Carrier extends \Df\Shipping\Carrier {}

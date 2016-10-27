@@ -1,5 +1,5 @@
 <?php
-class Df_Qiwi_Method extends Df_Payment_Method_WithRedirect {
+class Df_Qiwi_Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @used-by Df_Qiwi_Block_Form::phone()
 	 * @used-by Df_Qiwi_Request_Payment::qPhone()
@@ -11,7 +11,7 @@ class Df_Qiwi_Method extends Df_Payment_Method_WithRedirect {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Method::getCustomInformationKeys()
+	 * @see \Df\Payment\Method::getCustomInformationKeys()
 	 * @return array
 	 */
 	protected function getCustomInformationKeys() {return array_merge(

@@ -1,9 +1,10 @@
 <?php
+namespace Df\Payment\Config\Source;
 /**
  * @singleton
  * В этом классе нельзя кешировать результаты вычислений!
  */
-class Df_Payment_Config_Source_PaymentPage_Locale extends Df_Payment_Config_Source {
+class Locale extends \Df\Payment\Config\Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect

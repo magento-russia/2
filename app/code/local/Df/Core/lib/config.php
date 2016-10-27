@@ -97,7 +97,7 @@ function df_config_node($path) {
  * @used-by Df_Adminhtml_Model_Config_Data::save_patchFor_1_4_0_1()
  * @used-by Df_Adminhtml_Model_Config_Data::save_patchFor_1_7_0_2()
  * @used-by Df_Logging_Model_Handler_Controllers::postDispatchConfigSave()
- * @used-by Df_Shipping_Config_Backend_Validator_Strategy::moduleTitle()
+ * @used-by \Df\Shipping\Config\Backend\Validator\Strategy::moduleTitle()
  * @return Mage_Adminhtml_Model_Config
  */
 function df_config_adminhtml() {

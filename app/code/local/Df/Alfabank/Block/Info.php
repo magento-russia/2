@@ -1,5 +1,5 @@
 <?php
-class Df_Alfabank_Block_Info extends Df_Payment_Block_Info {
+class Df_Alfabank_Block_Info extends \Df\Payment\Block\Info {
 	/** @return Df_Alfabank_Response_State */
 	public function getState() {
 		if (!isset($this->{__METHOD__})) {

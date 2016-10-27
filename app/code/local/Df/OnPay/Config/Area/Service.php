@@ -1,5 +1,5 @@
 <?php
-class Df_OnPay_Config_Area_Service extends Df_Payment_Config_Area_Service {
+class Df_OnPay_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	/** @return string */
 	public function getReceiptCurrency() {
 		if (!isset($this->{__METHOD__})) {

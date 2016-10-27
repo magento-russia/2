@@ -1,11 +1,11 @@
 <?php
 /** @method Df_Kkb_Config_Area_Service configS() */
-class Df_Kkb_Request_Payment extends Df_Payment_Request_Payment {
+class Df_Kkb_Request_Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @see Df_Payment_Request::amount()
+	 * @see \Df\Payment\Request::amount()
 	 * @used-by Df_Kkb_RequestDocument_Signed::amount()
 	 * @see Df_Kkb_Request_Secondary::amount()
 	 * @return Df_Core_Model_Money
@@ -16,7 +16,7 @@ class Df_Kkb_Request_Payment extends Df_Payment_Request_Payment {
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @see Df_Payment_Request_Payment::orderIId()
+	 * @see \Df\Payment\Request\Payment::orderIId()
 	 * @used-by Df_Kkb_RequestDocument_Signed::orderIId()
 	 * @see Df_Kkb_Request_Secondary::orderIId()
 	 * @return string
@@ -25,8 +25,8 @@ class Df_Kkb_Request_Payment extends Df_Payment_Request_Payment {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Payment::_params()
-	 * @used-by Df_Payment_Request_Payment::params()
+	 * @see \Df\Payment\Request\Payment::_params()
+	 * @used-by \Df\Payment\Request\Payment::params()
 	 * @return array(string => string|int)
 	 */
 	protected function _params() {

@@ -34,8 +34,8 @@ class Df_YandexMoney_Request_Authorize extends Df_YandexMoney_Request_Secondary 
 	 * На самом деле, данный запрос является не вторичным, а первичным,
 	 * поэтому внешний идентификатор платежа у нас ещё отсутствует.
 	 * Мы унаследовали данный класс от @see Df_YandexMoney_Request_Secondary
-	 * и @see Df_Payment_Request_Secondary просто ради удобства.
-	 * Видимо, семантика класса @see Df_Payment_Request_Secondary
+	 * и @see \Df\Payment\Request\Secondary просто ради удобства.
+	 * Видимо, семантика класса @see \Df\Payment\Request\Secondary
 	 * на данный момент не вполне соответствует его названию.
 	 * @override
 	 * @return string

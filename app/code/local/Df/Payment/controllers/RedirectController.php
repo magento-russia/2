@@ -36,12 +36,12 @@ class Df_Payment_RedirectController extends Mage_Core_Controller_Front_Action {
 			 * @see Df_Payment_RedirectController::indexAction
 			 * @see Df_Checkout_Observer::controller_action_predispatch_checkout
 			 */
-			if (Df_Payment_Redirected::is()) {
-				Df_Payment_Redirected::restoreQuote();
+			if (\Df\Payment\Redirected::is()) {
+				\Df\Payment\Redirected::restoreQuote();
 				$this->_redirect(RM_URL_CHECKOUT);
 			}
 			else {
-				Df_Payment_Redirected::on();
+				\Df\Payment\Redirected::on();
 				$this->loadLayout();
 				$this->renderLayout();
 			}
@@ -57,7 +57,7 @@ class Df_Payment_RedirectController extends Mage_Core_Controller_Front_Action {
 			 */
 			df_exception_to_session($e);
 			df_notify_exception($e);
-			Df_Payment_Redirected::restoreQuote();
+			\Df\Payment\Redirected::restoreQuote();
 			$this->_redirect(RM_URL_CHECKOUT);
 		}
 	}

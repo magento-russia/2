@@ -1,5 +1,6 @@
 <?php
-class Df_Payment_Config_Area_Frontend extends Df_Payment_Config_Area {
+namespace Df\Payment\Config\Area;
+class Frontend extends \Df\Payment\Config\Area {
 	/** @return string */
 	public function getDescription() {return $this->getVar('description', '');}
 

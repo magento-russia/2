@@ -16,7 +16,7 @@
 		<carriers>
 			<df-ems>
 				<active>0</active>
-				<model>Df_Ems_Carrier</model>
+				<model>Df\Ems\Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

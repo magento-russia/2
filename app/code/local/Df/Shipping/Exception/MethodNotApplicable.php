@@ -1,6 +1,6 @@
 <?php
 namespace Df\Shipping\Exception;
-use \Df_Shipping_Carrier as Carrier;
+use Df\Shipping\Carrier as Carrier;
 class MethodNotApplicable extends \Df\Shipping\Exception {
 	/**
 	 * 2016-10-24
@@ -25,7 +25,7 @@ class MethodNotApplicable extends \Df\Shipping\Exception {
 	 * @override
 	 * @see \Df\Shipping\Exception::carrier()
 	 * @used-by \Df\Shipping\Exception::reportNamePrefix()
-	 * @return \Df_Shipping_Carrier
+	 * @return \Df\Shipping\Carrier
 	 */
 	protected function carrier() {return $this->_carrier;}
 

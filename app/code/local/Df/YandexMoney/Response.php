@@ -3,7 +3,7 @@
  * http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
  * http://api.yandex.ru/money/doc/dg/reference/process-payment.xml
  */
-abstract class Df_YandexMoney_Response extends Df_Payment_Response {
+abstract class Df_YandexMoney_Response extends \Df\Payment\Response {
 	/** @return array(string => string) */
 	abstract protected function getErrorMap();
 

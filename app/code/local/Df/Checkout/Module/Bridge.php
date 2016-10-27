@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Checkout_Module_Main main() */
-class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
+namespace Df\Checkout\Module;
+/** @method Main main() */
+class Bridge extends \Df_Core_Model_Bridge {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Bridge::_construct()
@@ -8,23 +9,23 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__MAIN, Df_Checkout_Module_Main::class);
+		$this->_prop(self::$P__MAIN, Main::class);
 	}
 
 	/**
 	 * Использование потомками:
-	 * @used-by Df_Checkout_Module_Config_Manager::getTemplates()
-	 * @used-by Df_Payment_Config_Manager::_getValue()
-	 * @used-by Df_Shipping_Config_Manager::_getValue()
-	 * @used-by Df_Shipping_Config_Area_Admin::getProcessingBeforeShippingDays()
-	 * @used-by Df_Shipping_Config_Area_Admin::isTodayOff()
-	 * @return Df_Core_Model_StoreM
+	 * @used-by \Df\Checkout\Module\Config\Manager::getTemplates()
+	 * @used-by \Df\Payment\Config\Manager::_getValue()
+	 * @used-by \Df\Shipping\Config\Manager::_getValue()
+	 * @used-by \Df\Shipping\Config\Area\Admin::getProcessingBeforeShippingDays()
+	 * @used-by \Df\Shipping\Config\Area\Admin::isTodayOff()
+	 * @return \Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_store($this->main()->getStore());}
 
 	/**
-	 * @used-by Df_Payment_Method::getCheckoutModuleType()
-	 * @used-by Df_Shipping_Carrier::getCheckoutModuleType()
+	 * @used-by \Df\Payment\Method::getCheckoutModuleType()
+	 * @used-by \Df\Shipping\Carrier::getCheckoutModuleType()
 	 * @param string $mainBaseClass
 	 * @return string
 	 */
@@ -38,14 +39,14 @@ class Df_Checkout_Module_Bridge extends Df_Core_Model_Bridge {
 	}
 
 	/**
-	 * @used-by Df_Checkout_Module_Config_Area::s()
-	 * @param Df_Checkout_Module_Main $main
+	 * @used-by \Df\Checkout\Module\Config\Area::s()
+	 * @param Main $main
 	 * @param string $suffix
-	 * @return Df_Checkout_Module_Bridge
+	 * @return self
 	 */
-	protected static function convention(Df_Checkout_Module_Main $main, $suffix) {
+	protected static function convention(Main $main, $suffix) {
 		/** @var string $default */
-		$default = df_cc_class_('Df', $main->getCheckoutModuleType(), $suffix);
+		$default = df_cc_class('Df', $main->getCheckoutModuleType(), $suffix);
 		/** @var string $resultClass */
 		$resultClass = df_con($main, $suffix, $default);
 		return self::ic($resultClass, $main);

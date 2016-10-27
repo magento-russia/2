@@ -1,10 +1,10 @@
 <?php
-abstract class Df_Shipping_Collector_Conditional_WithForeign
-	extends Df_Shipping_Collector_Conditional {
+namespace Df\Shipping\Collector\Conditional;
+abstract class WithForeign extends \Df\Shipping\Collector\Conditional {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector_Conditional::suffix()
-	 * @used-by Df_Shipping_Collector_Conditional::_collect()
+	 * @see \Df\Shipping\Collector\Conditional::suffix()
+	 * @used-by \Df\Shipping\Collector\Conditional::_collect()
 	 * @return string
 	 */
 	protected function suffix() {return

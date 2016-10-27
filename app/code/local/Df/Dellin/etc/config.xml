@@ -16,7 +16,7 @@
 		<carriers>
 			<df-dellin>
 				<active>0</active>
-				<model>Df_Dellin_Carrier</model>
+				<model>Df\Dellin\Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки

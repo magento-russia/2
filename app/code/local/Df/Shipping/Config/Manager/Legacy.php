@@ -1,7 +1,9 @@
 <?php
-class Df_Shipping_Config_Manager_Legacy extends Df_Shipping_Config_Manager {
+namespace Df\Shipping\Config\Manager;
+class Legacy extends \Df\Shipping\Config\Manager {
 	/**
 	 * @override
+	 * @see \Df\Shipping\Config\Manager::adaptKey()
 	 * @param string $key
 	 * @return string
 	 */
@@ -11,11 +13,11 @@ class Df_Shipping_Config_Manager_Legacy extends Df_Shipping_Config_Manager {
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Config_Manager::s()
-	 * @used-by Df_Shipping_Config_Manager::legacy()
+	 * @see \Df\Checkout\Module\Config\Manager::s()
+	 * @used-by \Df\Shipping\Config\Manager::legacy()
 	 * @static
-	 * @param Df_Checkout_Module_Main|Df_Shipping_Carrier $main
-	 * @return Df_Shipping_Config_Manager_Legacy
+	 * @param \Df\Checkout\Module\Main|\Df\Shipping\Carrier $main
+	 * @return self
 	 */
-	public static function s(Df_Checkout_Module_Main $main) {return self::sc(__CLASS__, $main);}
+	public static function s(\Df\Checkout\Module\Main $main) {return self::sc(__CLASS__, $main);}
 }

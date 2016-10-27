@@ -1,5 +1,10 @@
 <?php
-abstract class Df_Payment_Response extends Df_Core_Model {
+namespace Df\Payment;
+use Df\Payment\Exception\Response as EResponse;
+use Df\Payment\Request\Secondary as Secondary;
+use Mage_Sales_Model_Order_Payment as OP;
+use Mage_Sales_Model_Order_Payment_Transaction as Transaction;
+abstract class Response extends \Df_Core_Model {
 	/** @return array(string => string) */
 	abstract public function getReportAsArray();
 	/** @return string */
@@ -31,20 +36,20 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Payment_Request_Secondary */
+	/** @return Secondary */
 	public function getRequest() {return $this->_request;}
 
 	/** @return string */
 	public function getTransactionName() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = dfa(array(
-				Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT =>
+				Transaction::TYPE_PAYMENT =>
 					'прямое списание средств покупателя без предварительного блокирования'
-				,Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH =>
+				,Transaction::TYPE_AUTH =>
 					'блокирование средств покупателя'
-				,Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE =>
+				,Transaction::TYPE_CAPTURE =>
 					'приём ранее блокированных средств покупателя'
-				,Mage_Sales_Model_Order_Payment_Transaction::TYPE_VOID =>
+				,Transaction::TYPE_VOID =>
 					'возврат ранее блокированных средств покупателю'
 			), $this->getTransactionType());
 		}
@@ -52,16 +57,16 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 	}
 
 	/**
-	 * Используется методом @see Df_Payment_Request_Secondary::logAsPaymentTransaction()
+	 * Используется методом @see \Df\Payment\Request\Secondary::logAsPaymentTransaction()
 	 * @return bool
 	 */
 	public function isTransactionClosed() {return true;}
 
 	/**
-	 * @param Mage_Payment_Model_Info $paymentInfo
-	 * @return Df_Payment_Response
+	 * @param \Mage_Payment_Model_Info $paymentInfo
+	 * @return $this
 	 */
-	public function loadFromPaymentInfo(Mage_Payment_Model_Info $paymentInfo) {
+	public function loadFromPaymentInfo(\Mage_Payment_Model_Info $paymentInfo) {
 		/** @var array(string => string)|null $data */
 		$data = $paymentInfo->getAdditionalInformation($this->getIdInPaymentInfo());
 		if (!is_null($data)) {
@@ -72,10 +77,10 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 	}
 
 	/**
-	 * @param Mage_Sales_Model_Order_Payment $orderPayment
-	 * @return Df_Payment_Response
+	 * @param OP $orderPayment
+	 * @return $this
 	 */
-	public function postProcess(Mage_Sales_Model_Order_Payment $orderPayment) {
+	public function postProcess(OP $orderPayment) {
 		$this->logAsPaymentTransaction($orderPayment);
 		$this->saveInPaymentInfo($orderPayment->getMethodInstance()->getInfoInstance());
 		$this->throwOnFailure();
@@ -84,18 +89,16 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 
 	/**
 	 * Для диагностики
-	 * @param Df_Payment_Request_Secondary $request
+	 * @param Secondary $request
 	 * @return void
 	 */
-	public function setRequest(Df_Payment_Request_Secondary $request) {
-		$this->_request = $request;
-	}
-	/** @var Df_Payment_Request_Secondary */
+	public function setRequest(Secondary $request) {$this->_request = $request;}
+	/** @var Secondary */
 	private $_request;
 
 	/**
 	 * @return void
-	 * @throws Df_Payment_Exception_Response
+	 * @throws EResponse
 	 */
 	public function throwOnFailure() {
 		if (!$this->isSuccessful()) {
@@ -104,7 +107,7 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 	}
 
 	/** @return string */
-	protected function getExceptionClass() {return Df_Payment_Exception_Response::class;}
+	protected function getExceptionClass() {return EResponse::class;}
 
 	/** @return string */
 	protected function getIdInPaymentInfo() {return df_cts_lc_camel($this, '_');}
@@ -128,13 +131,13 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 	protected function onSucc($reportRow) {return $this->isSuccessful() ? $reportRow : null;}
 
 	/**
-	 * @param Df_Payment_Exception_Response|string $message
+	 * @param EResponse|string $message
 	 * @return void
-	 * @throws Df_Payment_Exception_Response
+	 * @throws EResponse
 	 */
 	protected function throwException($message) {
-		/** @var Df_Payment_Exception_Response $exception */
-		if ($message instanceof Df_Payment_Exception_Response) {
+		/** @var EResponse $exception */
+		if ($message instanceof EResponse) {
 			$exception = $message;
 		}
 		else {
@@ -142,34 +145,33 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 			$arguments = func_get_args();
 			/** @var string $exceptionClass */
 			$exceptionClass = $this->getExceptionClass();
-			/** @var Df_Payment_Exception_Response $exception */
+			/** @var EResponse $exception */
 			$exception = new $exceptionClass(df_format($arguments), $this);
-			df_assert($exception instanceof Df_Payment_Exception_Response);
+			df_assert($exception instanceof EResponse);
 		}
 		df_error($exception);
 	}
 
 	/**
-	 * @param Mage_Sales_Model_Order_Payment $orderPayment
+	 * @param OP $orderPayment
 	 * @return void
 	 */
-	private function logAsPaymentTransaction(Mage_Sales_Model_Order_Payment $orderPayment) {
+	private function logAsPaymentTransaction(OP $orderPayment) {
 		$orderPayment->addData(array(
 			// Обратите внимание, что при совпадении этих идентификаторов
 			// ранняя информация будет перезаписана новой
 			'transaction_id' => implode('-', array(
 				$orderPayment->getOrder()->getIncrementId()
 				,mb_strtolower(df_last(df_explode_class($this)))
-				,df_dts(Zend_Date::now(), 'HH:mm:ss')
+				,df_dts(\Zend_Date::now(), 'HH:mm:ss')
 			))
 			,'is_transaction_closed' => $this->isTransactionClosed()
 		));
 		/** @noinspection PhpParamsInspection */
 		$orderPayment->setTransactionAdditionalInfo(
-			Mage_Sales_Model_Order_Payment_Transaction::RAW_DETAILS
-			,$this->getReportAsArray()
+			Transaction::RAW_DETAILS, $this->getReportAsArray()
 		);
-		/** @var Mage_Sales_Model_Order_Payment_Transaction $paymentTransaction */
+		/** @var Transaction $paymentTransaction */
 		$paymentTransaction = $orderPayment->addTransaction(
 			$type = $this->getTransactionType(), $salesDocument = $orderPayment->getOrder()
 		);
@@ -177,10 +179,10 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 	}
 
 	/**
-	 * @param Mage_Payment_Model_Info $paymentInfo
-	 * @return Df_Payment_Response
+	 * @param \Mage_Payment_Model_Info $paymentInfo
+	 * @return $this
 	 */
-	private function saveInPaymentInfo(Mage_Payment_Model_Info $paymentInfo) {
+	private function saveInPaymentInfo(\Mage_Payment_Model_Info $paymentInfo) {
 		$paymentInfo
 			->setAdditionalInformation($this->getIdInPaymentInfo(), $this->getData())
 			->save()
@@ -189,15 +191,15 @@ abstract class Df_Payment_Response extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_Payment_Request_Secondary::getResponse()
-	 * @param Df_Payment_Request_Secondary $request
+	 * @used-by \Df\Payment\Request\Secondary::getResponse()
+	 * @param Secondary $request
 	 * @param array(string => string) $params
-	 * @return Df_Payment_Response
+	 * @return self
 	 */
-	public static function ic(Df_Payment_Request_Secondary $request, array $params) {
+	public static function ic(Secondary $request, array $params) {
 		/** @var string $class */
 		$class = str_replace('Request', 'Response', get_class($request));
-		/** @var Df_Payment_Response $result */
+		/** @var self $result */
 		$result = df_ic($class, __CLASS__, $params);
 		$result->setRequest($request);
 		return $result;

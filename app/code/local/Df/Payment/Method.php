@@ -1,11 +1,12 @@
 <?php
+namespace Df\Payment;
 use Mage_Payment_Model_Info as I;
 use Mage_Sales_Model_Quote_Payment as QP;
 use Mage_Sales_Model_Order_Payment as OP;
 /** @method int getStore() */
-abstract class Df_Payment_Method
-	extends Mage_Payment_Model_Method_Abstract
-	implements Df_Checkout_Module_Main {
+abstract class Method
+	extends \Mage_Payment_Model_Method_Abstract
+	implements \Df\Checkout\Module\Main {
 	/**
 	 * @override
 	 */
@@ -16,13 +17,13 @@ abstract class Df_Payment_Method
 
 	/**
 	 * @override
-	 * @param array|Varien_Object $data
-	 * @return Df_Payment_Method
+	 * @param array|\Varien_Object $data
+	 * @return $this
 	 */
 	public function assignData($data) {
 		parent::assignData($data);
 		if (!is_array($data)) {
-			df_assert($data instanceof Varien_Object);
+			df_assert($data instanceof \Varien_Object);
 			$data = $data->getData();
 		}
 		foreach ($this->getCustomInformationKeys() as $customInformationKey) {
@@ -59,7 +60,7 @@ abstract class Df_Payment_Method
 	 * Для получения значения этой настройки вызывается метод
 	 * @see Mage_Payment_Model_Method_Abstract::getConfigPaymentAction().
 	 *
-	 * Обратите внимание, что Df_Payment_Method::getConfigPaymentAction()
+	 * Обратите внимание, что \Df\Payment\Method::getConfigPaymentAction()
 	 * всегда возвращает true, тем самым метод @see Mage_Sales_Model_Order_Payment::place()
 	 * не вызывает authorize/capture/order.
 	 *
@@ -73,7 +74,7 @@ abstract class Df_Payment_Method
 
 	/**
 	 * Важно для витрины вернуть true, чтобы
-	 * @see Df_Payment_Action_Confirm::process() и другие аналогичные методы
+	 * @see \Df\Payment\Action\Confirm::process() и другие аналогичные методы
 	 * (например, @see Df_Alfabank_Action_CustomerReturn::process())
 	 * могли вызвать @see Mage_Sales_Model_Order_Invoice::capture().
 	 *
@@ -86,8 +87,8 @@ abstract class Df_Payment_Method
 	 * на административной странице счёта.
 	 *
 	 * Обратите внимание, что двуступенчатая оплата
-	 * имеет смысл не только для дочернего данному класса @see Df_Payment_Method_WithRedirect,
-	 * но и для других прямых детей класса @see Df_Payment_Method.
+	 * имеет смысл не только для дочернего данному класса @see \Df\Payment\Method\WithRedirect,
+	 * но и для других прямых детей класса @see \Df\Payment\Method.
 	 * @todo Например, правильным будет сделать оплату двуступенчатой для модуля «Квитанция Сбербанка»,
 	 * потому что непосредственно по завершению заказа
 	 * неправильно переводить счёт в состояние «Оплачен»
@@ -137,20 +138,20 @@ abstract class Df_Payment_Method
 	 * функциональность одобрения / отклонения платежей
 	 * (в частности, такая функция есть в PayPal).
 	 * @override
-	 * @param Mage_Payment_Model_Info $payment
+	 * @param \Mage_Payment_Model_Info $payment
 	 * @return bool
 	 */
-	public function canReviewPayment(Mage_Payment_Model_Info $payment) {return false;}
+	public function canReviewPayment(\Mage_Payment_Model_Info $payment) {return false;}
 
 	/**
 	 * Результат метода говорит системе о том, поддерживает ли способ оплаты
 	 * автоматизированное разблокирование (возврат покупателю)
 	 * ранее зарезервированных (но не снятых со счёта покупателя) средств
 	 * @override
-	 * @param Varien_Object $payment
+	 * @param \Varien_Object $payment
 	 * @return bool
 	 */
-	public function canVoid(Varien_Object $payment) {return false;}
+	public function canVoid(\Varien_Object $payment) {return false;}
 
 	/**
 	 * Этот метод вызывается только при двуступенчатой оплате,
@@ -194,19 +195,18 @@ abstract class Df_Payment_Method
 			$amountToCapture = $this->_formatAmount($invoice->getBaseGrandTotal());
 	 *
 	 * @override
-	 * @param Varien_Object $payment
+	 * @param \Varien_Object|OP $payment
 	 * @param string $amount
-	 * @return Df_Payment_Method
+	 * @return $this
 	 */
-	public function capture(Varien_Object $payment, $amount) {
-		/** @var Mage_Sales_Model_Order_Payment $payment */
+	public function capture(\Varien_Object $payment, $amount) {
 		/** @var string $amount */
-		df_assert($payment instanceof Mage_Sales_Model_Order_Payment);
+		df_assert($payment instanceof OP);
 		/**
 		 * @see Mage_Payment_Model_Method_Abstract::capture()
 		 * контролирует допустимость вызова метода capture():
 		 * если способ оплаты не поддерживает возврат средств покупателю
-		 * (@see Df_Payment_Method::canCapture()),
+		 * (@see \Df\Payment\Method::canCapture()),
 		 * то Mage_Payment_Model_Method_Abstract::capture() возбудит исключительную ситуацию.
 		 */
 		parent::capture($payment, $amount);
@@ -215,10 +215,10 @@ abstract class Df_Payment_Method
 		 * 2015-03-09
 		 * Сюда мы попадаем при вызове $invoice->capture();
 		 * Такой вызов может происходить не только при нажатии кнопки «capture» администратором,
-		 * но и при работе класса @see Df_Payment_Action_Confirm и его потомков.
+		 * но и при работе класса @see \Df\Payment\Action\Confirm и его потомков.
 		 * Так вот, во втором случае мы не должны выполнять транзакцию
 		 * (хотя бы потому что большинство наших способов оплаты вообще не умеют выполнять транзации,
-		 * да и в сценарии с @see Df_Payment_Action_Confirm транзация не задумывалась).
+		 * да и в сценарии с @see \Df\Payment\Action\Confirm транзация не задумывалась).
 		 * потому что
 		 */
 		if (df_is_admin()) {
@@ -228,54 +228,54 @@ abstract class Df_Payment_Method
 	}
 
 	/**
-	 * @see Df_Checkout_Module_Main::config()
+	 * @see \Df\Checkout\Module\Main::config()
 	 * @override
-	 * @return Df_Checkout_Module_Config_Facade
+	 * @return \Df\Checkout\Module\Config\Facade
 	 */
-	public function config() {return Df_Checkout_Module_Config_Facade::s($this);}
+	public function config() {return \Df\Checkout\Module\Config\Facade::s($this);}
 
 	/**
 	 * @used-by Df_Pd4_Block_Document_Rows::configA()
-	 * @return Df_Payment_Config_Area_Admin()
+	 * @return \Df\Payment\Config\Area\Admin
 	 */
 	public function configA() {return $this->config()->admin();}
 
 	/**
 	 * @used-by getTitle()
-	 * @used-by Df_Payment_Block_Form::getDescription()
-	 * @used-by Df_Payment_Action_Confirm::showExceptionOnCheckoutScreen()
-	 * @return Df_Payment_Config_Area_Frontend()
+	 * @used-by \Df\Payment\Block\Form::getDescription()
+	 * @used-by \Df\Payment\Action\Confirm::showExceptionOnCheckoutScreen()
+	 * @return \Df\Payment\Config\Area\Frontend
 	 */
 	public function configF() {return $this->config()->frontend();}
 
 	/**
 	 * @used-by Df_Kkb_Response::configS()
-	 * @used-by Df_Payment_Block_Form::isTestMode()
-	 * @return Df_Payment_Config_Area_Service
+	 * @used-by \Df\Payment\Block\Form::isTestMode()
+	 * @return \Df\Payment\Config\Area\Service
 	 */
 	public function configS() {return $this->config()->service();}
 
 	/**
 	 * @used-by Df_IPay_Block_Form::getPaymentOptions()
-	 * @used-by Df_Payment_Request_Payment::chopParam()
-	 * @return Df_Payment_Config_Manager_Const
+	 * @used-by \Df\Payment\Request\Payment::chopParam()
+	 * @return \Df\Payment\Config\Manager\ConstT
 	 */
 	public function constManager() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Payment_Config_Manager_Const::s($this);
+			$this->{__METHOD__} = Df\Payment\Config\Manager\ConstT::s($this);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getCheckoutModuleType()
-	 * @used-by Df_Checkout_Module_Bridge::convention()
-	 * @used-by Df_Checkout_Module_Config_Manager::s()
-	 * @used-by Df_Checkout_Module_Config_Area_No::s()
+	 * @see \Df\Checkout\Module\Main::getCheckoutModuleType()
+	 * @used-by \Df\Checkout\Module\Bridge::convention()
+	 * @used-by \Df\Checkout\Module\Config\Manager::s()
+	 * @used-by \Df\Checkout\Module\Config\Area_No::s()
 	 * @return string
 	 */
-	public function getCheckoutModuleType() {return Df_Checkout_Module_Bridge::_type(__CLASS__);}
+	public function getCheckoutModuleType() {return \Df\Checkout\Module\Bridge::_type(__CLASS__);}
 
 	/**
 	 * Получаем заданное ранее администратором
@@ -300,8 +300,8 @@ abstract class Df_Payment_Method
 	
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getConfigTemplates()
-	 * @used-by Df_Checkout_Module_Config_Manager::getTemplates()
+	 * @see \Df\Checkout\Module\Main::getConfigTemplates()
+	 * @used-by \Df\Checkout\Module\Config\Manager::getTemplates()
 	 * @return array(string => string)
 	 */
 	public function getConfigTemplates() {
@@ -330,9 +330,9 @@ abstract class Df_Payment_Method
 	 * @override
 	 * @return string
 	 */
-	public function getFormBlockType() {
-		return df_con($this, 'Block_Form', Df_Payment_Block_Form::class);
-	}
+	public function getFormBlockType() {return
+		df_con($this, 'Block\Form', \Df\Payment\Block\Form::class)
+	;}
 
 	/**
 	 * Этот метод вызывается только одним методом:
@@ -340,15 +340,15 @@ abstract class Df_Payment_Method
 	 * @override
 	 * @return string
 	 */
-	public function getInfoBlockType() {
-		return df_con($this, 'Block_Info', Df_Payment_Block_Info::class);
-	}
+	public function getInfoBlockType() {return
+		df_con($this, 'Block\Info', \Df\Payment\Block\Info::class)
+	;}
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getRmId()
+	 * @see \Df\Checkout\Module\Main::getRmId()
 	 * @used-by isAvailable()
-	 * @used-by Df_Checkout_Module_Config_Manager::adaptKey()
+	 * @used-by \Df\Checkout\Module\Config\Manager::adaptKey()
 	 * @return string
 	 */
 	public function getRmId() {
@@ -380,7 +380,7 @@ abstract class Df_Payment_Method
 
 	/**
 	 * @override
-	 * @see Df_Checkout_Module_Main::getTitle()
+	 * @see \Df\Checkout\Module\Main::getTitle()
 	 * @override
 	 * @return string
 	 */
@@ -392,7 +392,7 @@ abstract class Df_Payment_Method
 	 * без перенаправления на страницу платёжной системы.
 	 * В Российской сборке Magento так пока работает только метод @see Df_Chronopay_Model_Gate,
 	 * однако он изготовлен давно и по устаревшей технологии,
-	 * и поэтому не является наследником класса @see Df_Payment_Method
+	 * и поэтому не является наследником класса @see \Df\Payment\Method
 	 * @override
 	 * @return bool
 	 */
@@ -408,7 +408,7 @@ abstract class Df_Payment_Method
 
 	/**
 	 * @param string|Exception $message
-	 * @return Df_Payment_Method
+	 * @return $this
 	 */
 	public function logFailureHighLevel($message) {
 		if (is_string($message)) {
@@ -422,7 +422,7 @@ abstract class Df_Payment_Method
 
 	/**
 	 * @param string|Exception $message
-	 * @return Df_Payment_Method
+	 * @return $this
 	 */
 	public function logFailureLowLevel($message) {
 		if (is_string($message)) {
@@ -456,19 +456,18 @@ abstract class Df_Payment_Method
 			$amountToCapture = $this->_formatAmount($invoice->getBaseGrandTotal());
 	 *
 	 * @override
-	 * @param Varien_Object $payment
+	 * @param \Varien_Object|OP $payment
 	 * @param string $amount
-	 * @return Df_Payment_Method
+	 * @return $this
 	 */
-	public function refund(Varien_Object $payment, $amount) {
-		/** @var Mage_Sales_Model_Order_Payment $payment */
+	public function refund(\Varien_Object $payment, $amount) {
 		/** @var string $amount */
-		df_assert($payment instanceof Mage_Sales_Model_Order_Payment);
+		df_assert($payment instanceof OP);
 		/**
 		 * @see Mage_Payment_Model_Method_Abstract::refund()
 		 * контролирует допустимость вызова метода refund():
 		 * если способ оплаты не поддерживает возврат средств покупателю
-		 * (@see Df_Payment_Method::canRefund()),
+		 * (@see \Df\Payment\Method::canRefund()),
 		 * то Mage_Payment_Model_Method_Abstract::refund() возбудит исключительную ситуацию.
 		 */
 		parent::refund($payment, $amount);
@@ -480,10 +479,10 @@ abstract class Df_Payment_Method
 	 * Этот метод вызывается только из метода @see Mage_Sales_Model_Order_Payment::_void():
 	 	$this->getMethodInstance()->setStore($order->getStoreId())->$gatewayCallback($this);
 	 * @override
-	 * @param Mage_Sales_Model_Order_Payment|Varien_Object $payment
-	 * @return Df_Payment_Method
+	 * @param \Mage_Sales_Model_Order_Payment|\Varien_Object $payment
+	 * @return \Df\Payment\Method
 	 */
-	public function void(Varien_Object $payment) {
+	public function void(\Varien_Object $payment) {
 		parent::void($payment);
 		$this->doTransaction(__FUNCTION__, $payment);
 		return $this;
@@ -535,13 +534,13 @@ abstract class Df_Payment_Method
 
 	/**
 	 * @param string $type
-	 * @param Mage_Sales_Model_Order_Payment $payment
+	 * @param OP $payment
 	 * @param float $amount [optional]
 	 * @throws Exception
 	 */
-	private function doTransaction($type, Mage_Sales_Model_Order_Payment $payment, $amount = 0.0) {
+	private function doTransaction($type, OP $payment, $amount = 0.0) {
 		try {
-			Df_Payment_Request_Transaction::doTransaction($type, $payment, $amount);
+			\Df\Payment\Request\Transaction::doTransaction($type, $payment, $amount);
 		}
 		catch (Exception $exception) {
 			$this->logFailureLowLevel($exception);
@@ -597,7 +596,7 @@ abstract class Df_Payment_Method
 	/**
 	 * @param string|Exception $message
 	 * @param string $filename
-	 * @return Df_Payment_Method
+	 * @return $this
 	 */
 	private function log($message, $filename) {
 		if ($message instanceof Exception) {
@@ -616,8 +615,8 @@ abstract class Df_Payment_Method
 		return $this;
 	}
 	/**
-	 * @used-by Df_Payment_Config_ManagerBase::_construct()
-	 * @used-by Df_Payment_Request::_construct()
+	 * @used-by \Df\Payment\Config\ManagerBase::_construct()
+	 * @used-by \Df\Payment\Request::_construct()
 	 */
 
 	/**
@@ -629,7 +628,7 @@ abstract class Df_Payment_Method
 	/**
 	 * @static
 	 * @used-by __construct()
-	 * @used-by Df_Payment_Config_Source::getPaymentMethodCode()
+	 * @used-by \Df\Payment\Config\Source::getPaymentMethodCode()
 	 * @param string $rmId
 	 * @return string
 	 */

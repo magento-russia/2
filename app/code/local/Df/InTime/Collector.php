@@ -1,10 +1,11 @@
 <?php
-/** @method Df_InTime_Config_Area_Service configS() */
-class Df_InTime_Collector extends Df_Shipping_Collector_Ua {
+namespace Df\InTime;
+/** @method \Df_InTime_Config_Area_Service configS() */
+class Collector extends \Df\Shipping\Collector\Ua {
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
 	protected function _collect() {
@@ -22,7 +23,7 @@ class Df_InTime_Collector extends Df_Shipping_Collector_Ua {
 		//rm_log(Df_InTime_Api::s()->грузыЕдиничные());
 		//rm_log(Df_InTime_Api::s()->условияДоставки());
 		/** @var array(string => mixed) $terms */
-		$terms = Df_InTime_Api::s()->условияДоставки(array(
+		$terms = Api::s()->условияДоставки(array(
 			'Sender' => array(
 				'WarehouseSenderCode' => $this->configS()->кодСкладаОтправителя()
 				// Почему-то SettlementCode вроде бы на тариф не влияет
@@ -44,7 +45,7 @@ class Df_InTime_Collector extends Df_Shipping_Collector_Ua {
 				,'PhoneReceiver' => '067-617-22-28'
 			)
 			,'PaymentType' => 'OTP'
-			,'DispatchDate' => Zend_Date::now()->toString('yyyy-MM-dd+03:00')
+			,'DispatchDate' => \Zend_Date::now()->toString('yyyy-MM-dd+03:00')
 			,'POD' => array(
 				'PodPays' => ''
 				,'PodAmount' => 0
@@ -86,11 +87,11 @@ class Df_InTime_Collector extends Df_Shipping_Collector_Ua {
 				,'CargoItemsQuantity' => ''
 			)
 		));
-		/** @var Zend_Date|null $date */
+		/** @var \Zend_Date|null $date */
 		try {
-			$date = new Zend_Date($terms['DeliveryDate'], 'yyyy-MM-ddTHH:mm:ss');
+			$date = new \Zend_Date($terms['DeliveryDate'], 'yyyy-MM-ddTHH:mm:ss');
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			$date = null;
 		}
 		$this->addRate($terms['Amount'], null, null, $date);

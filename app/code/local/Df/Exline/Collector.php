@@ -1,8 +1,8 @@
 <?php
-class Df_Exline_Collector extends Df_Shipping_Collector_Kz {
+class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 	/**
 	 * @used-by _collect()
-	 * @used-by Df_Shipping_Collector::call()
+	 * @used-by \Df\Shipping\Collector::call()
 	 * @param int $id
 	 * @param string $methodCode
 	 * @param int $methodName
@@ -16,8 +16,8 @@ class Df_Exline_Collector extends Df_Shipping_Collector_Kz {
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
 	protected function _collect() {$this->call(function() {
@@ -26,16 +26,16 @@ class Df_Exline_Collector extends Df_Shipping_Collector_Kz {
 	});}
 
 	/**
-	 * @see Df_Shipping_Collector::allowedOrigIso2Additional()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::allowedOrigIso2Additional()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return string|string[]
 	 */
 	protected function allowedOrigIso2Additional() {return 'RU';}
 
 	/**
 	 * @override
-	 * @see Df_Shipping_Collector::feePercentOfDeclaredValue()
-	 * @used-by Df_Shipping_Collector::addRate()
+	 * @see \Df\Shipping\Collector::feePercentOfDeclaredValue()
+	 * @used-by \Df\Shipping\Collector::addRate()
 	 * «Сумма расчета не включает в себя сбор в размере 0.8% от суммы объявленной стоимости.
 	 * Минимальная сумма объявленной стоимости составляет 15000 тенге.»
 	 * http://www.exline.kz/ru/calculations

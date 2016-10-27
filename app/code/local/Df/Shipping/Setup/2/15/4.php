@@ -9,7 +9,7 @@ class Df_Shipping_Setup_2_15_4 extends Df_Core_Setup {
 	protected function _process() {
 		foreach (df()->registry()->attributeSets() as $attributeSet) {
 			/** @var Mage_Eav_Model_Entity_Attribute_Set $attributeSet */
-			Df_Shipping_Processor_AddDimensionsToProductAttributeSet::process($attributeSet);
+			\Df\Shipping\Processor\AddDimensionsToProductAttributeSet::process($attributeSet);
 		}
 		df_eav_reset();
 	}

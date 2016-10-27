@@ -1,6 +1,6 @@
 <?php
 /** @method Df_IPay_Method main() */
-class Df_IPay_Config_Area_Service extends Df_Payment_Config_Area_Service {
+class Df_IPay_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @override
 	 * @return string

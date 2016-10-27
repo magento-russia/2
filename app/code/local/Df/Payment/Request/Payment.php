@@ -1,6 +1,7 @@
 <?php
-use Df_Payment_Method_WithRedirect as MethodR;
-abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
+namespace Df\Payment\Request;
+use \Df\Payment\Method\WithRedirect as MethodR;
+abstract class Payment extends \Df\Payment\Request {
 	/**
 	 * @abstract
 	 * @used-by params()
@@ -29,7 +30,7 @@ abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request::description()
+	 * @see \Df\Payment\Request::description()
 	 * @return string
 	 */
 	protected function description() {return dfc($this, function() {return
@@ -65,10 +66,10 @@ abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
 
 	/**
 	 * @used-by description
-	 * @return Zend_Uri_Http
+	 * @return \Zend_Uri_Http
 	 */
 	protected function getStoreUri() {return dfc($this, function() {return
-		Zend_Uri_Http::fromString($this->store()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB))
+		\Zend_Uri_Http::fromString($this->store()->getBaseUrl(\Mage_Core_Model_Store::URL_TYPE_WEB))
 	;});}
 
 	/** @return array(string => string) */
@@ -113,11 +114,11 @@ abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request::order()
-	 * @used-by Df_Payment_Request::amount()
-	 * @used-by Df_Payment_Request::method()
-	 * @used-by Df_Payment_Request::payment()
-	 * @return Df_Sales_Model_Order
+	 * @see \Df\Payment\Request::order()
+	 * @used-by \Df\Payment\Request::amount()
+	 * @used-by \Df\Payment\Request::method()
+	 * @used-by \Df\Payment\Request::payment()
+	 * @return \Df_Sales_Model_Order
 	 */
 	protected function order() {return df_last_order();}
 
@@ -161,7 +162,7 @@ abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
 	 * @return string
 	 */
 	protected function urlConfirm() {return dfc($this, function() {return
-		Mage::getUrl($this->method()->getCode() . '/confirm')
+		\Mage::getUrl($this->method()->getCode() . '/confirm')
 	;});}
 
 	/**
@@ -170,7 +171,7 @@ abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
 	 * @used-by phone()
 	 * @used-by region()
 	 * @used-by street()
-	 * @return Df_Sales_Model_Order_Address
+	 * @return \Df_Sales_Model_Order_Address
 	 */
 	private function address() {return $this->order()->getBillingAddress();}
 
@@ -220,12 +221,12 @@ abstract class Df_Payment_Request_Payment extends Df_Payment_Request {
 
 	/**
 	 * @used-by regionCode()
-	 * @return Mage_Directory_Model_Region
+	 * @return \Mage_Directory_Model_Region
 	 */
 	private function region() {return $this->address()->getRegionModel();}
 
 	/**
-	 * @used-by Df_Payment_Method_WithRedirect::getPaymentPageParams()
+	 * @used-by \Df\Payment\Method\WithRedirect::getPaymentPageParams()
 	 * @param MethodR $method
 	 * @return array(string => string|int)
 	 */

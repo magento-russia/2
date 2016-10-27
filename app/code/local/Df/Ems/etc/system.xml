@@ -39,8 +39,8 @@ https://ru.wikipedia.org/wiki/Русский_алфавит
 								с 23 декабря 2012 года (версия 2.14.0).
 							-->
 							<backend_model>Df_Admin_Config_Backend_Validator</backend_model>
-							<df_backend_validator_strategy>Df_Shipping_Config_Backend_Validator_Strategy_Origin</df_backend_validator_strategy>
-							<df_origin_validator>Df_Shipping_Config_Backend_Validator_Strategy_Origin_SpecificCountry</df_origin_validator>
+							<df_backend_validator_strategy>Df\Shipping\Config\Backend\Validator\Strategy\Origin</df_backend_validator_strategy>
+							<df_origin_validator>Df\Shipping\Config\Backend\Validator\Strategy\Origin\SpecificCountry</df_origin_validator>
 							<df_origin_country>RU</df_origin_country>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>

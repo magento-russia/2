@@ -1,17 +1,20 @@
 <?php
-class Df_Shipping_Processor_AddDimensionsToProductAttributeSet
-	extends Df_Core_Setup_AttributeSet {
+namespace Df\Shipping\Processor;
+use Df_Catalog_Model_Product as Product;
+use Df_Catalog_Model_Resource_Eav_Attribute as Attribute;
+use Mage_Eav_Model_Entity_Attribute_Set as AttributeSet;
+class AddDimensionsToProductAttributeSet extends \Df_Core_Setup_AttributeSet {
 	/**
 	 * @override
-	 * @see Df_Core_Setup_AttributeSet::_process()
-	 * @used-by Df_Core_Setup_AttributeSet::pc()
+	 * @see \Df_Core_Setup_AttributeSet::_process()
+	 * @used-by \Df_Core_Setup_AttributeSet::pc()
 	 * @return void
 	 */
 	protected function _process() {
 		foreach ($this->getAttributeMap() as $ordering => $attribute) {
 			/** @var int $ordering */
-			/** @var Mage_Eav_Model_Entity_Attribute $attribute */
-			Df_Catalog_Model_Installer_AddAttributeToSet::p(
+			/** @var \Mage_Eav_Model_Entity_Attribute $attribute */
+			\Df_Catalog_Model_Installer_AddAttributeToSet::p(
 				$attribute->getAttributeCode()
 				,$this->getAttributeSet()->getId()
 				,null
@@ -24,7 +27,7 @@ class Df_Shipping_Processor_AddDimensionsToProductAttributeSet
 	 * @param string $code
 	 * @param string $label
 	 * @param int $ordering
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return Attribute
 	 */
 	private function getAttribute($code, $label, $ordering) {
 		if (!isset($this->{__METHOD__}[$code])) {
@@ -34,7 +37,7 @@ class Df_Shipping_Processor_AddDimensionsToProductAttributeSet
 				// Код свойства
 				,'attribute_code' => $code
 				// Область действия значения свойства: «всеобщая», «витрина», «сайт»
-				,'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL
+				,'is_global' => \Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL
 				// Элемент управления для администратора
 				,'frontend_input' => 'text'
 				// Значение по умолчанию
@@ -117,44 +120,34 @@ class Df_Shipping_Processor_AddDimensionsToProductAttributeSet
 		return $this->{__METHOD__}[$code];
 	}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
-	private function getAttributeHeight() {
-		return $this->getAttribute(
-			Df_Catalog_Model_Product::P__HEIGHT, 'Высота', self::$ORDERING_OFFSET + 2
-		);
-	}
+	/** @return Attribute */
+	private function getAttributeHeight() {return
+		$this->getAttribute(Product::P__HEIGHT, 'Высота', self::$ORDERING_OFFSET + 2)
+	;}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
-	private function getAttributeLength() {
-		return $this->getAttribute(
-			Df_Catalog_Model_Product::P__LENGTH, 'Длина', self::$ORDERING_OFFSET
-		);
-	}
+	/** @return Attribute */
+	private function getAttributeLength() {return
+		$this->getAttribute(Product::P__LENGTH, 'Длина', self::$ORDERING_OFFSET)
+	;}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute[] */
-	private function getAttributeMap() {
-		return array(
-			self::$ORDERING_OFFSET => $this->getAttributeLength()
-			,self::$ORDERING_OFFSET + 1 => $this->getAttributeWidth()
-			,self::$ORDERING_OFFSET + 2 => $this->getAttributeHeight()
-		);
-	}
+	/** @return Attribute[] */
+	private function getAttributeMap() {return [
+		self::$ORDERING_OFFSET => $this->getAttributeLength()
+		,self::$ORDERING_OFFSET + 1 => $this->getAttributeWidth()
+		,self::$ORDERING_OFFSET + 2 => $this->getAttributeHeight()
+	];}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
-	private function getAttributeWidth() {
-		return $this->getAttribute(
-			Df_Catalog_Model_Product::P__WIDTH, 'Ширина', self::$ORDERING_OFFSET + 1
-		);
-	}
+	/** @return Attribute */
+	private function getAttributeWidth() {return
+		$this->getAttribute(Product::P__WIDTH, 'Ширина', self::$ORDERING_OFFSET + 1)
+	;}
 
 	/** @var int */
 	private static $ORDERING_OFFSET = 100;
 
 	/**
-	 * @param Mage_Eav_Model_Entity_Attribute_Set $attributeSet
+	 * @param AttributeSet $set
 	 * @return void
 	 */
-	public static function process(Mage_Eav_Model_Entity_Attribute_Set $attributeSet) {
-		self::pc(__CLASS__, $attributeSet);
-	}
+	public static function process(AttributeSet $set) {self::pc(__CLASS__, $set);}
 }

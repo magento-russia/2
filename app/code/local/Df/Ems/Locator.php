@@ -3,7 +3,7 @@
 namespace Df\Ems;
 use Df_Directory_Model_Country as Country;
 // http://www.emspost.ru/ru/corp_clients/dogovor_docements/api/
-class Locator extends \Df_Shipping_Locator {
+class Locator extends \Df\Shipping\Locator {
 	/**
 	 * 2016-10-25
 	 * @param Country|null $country
@@ -29,8 +29,8 @@ class Locator extends \Df_Shipping_Locator {
 	/**
 	 * 2016-10-25
 	 * @override
-	 * @see \Df_Shipping_Locator::_map()
-	 * @used-by \Df_Shipping_Locator::map()
+	 * @see \Df\Shipping\Locator::_map()
+	 * @used-by \Df\Shipping\Locator::map()
 	 * @param string $type
 	 * @return array(string => string|int|array(string|int))
 	 */

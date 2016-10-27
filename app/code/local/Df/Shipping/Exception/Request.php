@@ -32,7 +32,7 @@ abstract class Request extends \Df\Shipping\Exception {
 	 * @override
 	 * @see \Df\Shipping\Exception::carrier()
 	 * @used-by \Df\Shipping\Exception::reportNamePrefix()
-	 * @return \Df_Shipping_Carrier
+	 * @return \Df\Shipping\Carrier
 	 */
 	protected function carrier() {return $this->getRequest()->getCarrier();}
 

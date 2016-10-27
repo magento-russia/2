@@ -1,16 +1,17 @@
 <?php
+namespace Df\Payment\Block;
 /**
- * Обратите внимание, что класс @see Df_Payment_Block_Info не унаследован от @see Mage_Payment_Block_Info
+ * Обратите внимание, что класс @see \Df\Payment\Block\Info не унаследован от @see Mage_Payment_Block_Info
  * но реализует полностью его интерфейс.
  * Намеренно наследуемся от @see Df_Core_Block_Template,
  * чтобы пользоваться всеми возможностями этого класса.
  */
-class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
+class Info extends \Df_Core_Block_Template_NoCache {
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getArea() {return Df_Core_Const_Design_Area::FRONTEND;}
+	public function getArea() {return \Df_Core_Const_Design_Area::FRONTEND;}
 
 	/**
 	 * Заимствовано из @see Mage_Payment_Block_Info::getChildPdfAsArray()
@@ -20,7 +21,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 		/** @var string[] $result */
 		$result = array();
 		foreach ($this->getChild() as $child) {
-			/** @var Mage_Core_Block_Abstract $child */
+			/** @var \Mage_Core_Block_Abstract $child */
 			/**
 			 * 2015-02-02
 			 * Метод ядра @see Mage_Payment_Block_Info::getChildPdfAsArray()
@@ -38,7 +39,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 			 */
 			/**
 			 * @uses Mage_Payment_Block_Info::toPdf()
-			 * @uses Df_Payment_Block_Info::toPdf()
+			 * @uses \Df\Payment\Block\Info::toPdf()
 			 */
 			if (method_exists($child, 'toPdf')) {
 				$result[] = $child->toPdf();
@@ -50,13 +51,13 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	/**
 	 * Заимствовано из:
 	 * @see Mage_Payment_Block_Info::getInfo()
-	 * @return Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment
+	 * @return \Mage_Payment_Model_Info|\Mage_Sales_Model_Order_Payment
 	 */
 	public function getInfo() {
-		/** @var Mage_Payment_Model_Info $result */
+		/** @var \Mage_Payment_Model_Info $result */
 		$result = $this->getData('info');
-		if (!($result instanceof Mage_Payment_Model_Info)) {
-			Mage::throwException($this->__('Cannot retrieve the payment info model object.'));
+		if (!($result instanceof \Mage_Payment_Model_Info)) {
+			\Mage::throwException($this->__('Cannot retrieve the payment info model object.'));
 		}
 		return $result;
 	}
@@ -72,7 +73,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 		if (!$payment = $this->getInfo()) {
 			return true;
 		}
-		/** @var Mage_Payment_Model_Method_Abstract $method */
+		/** @var \Mage_Payment_Model_Method_Abstract $method */
 		if (!$method = $payment->getMethodInstance()) {
 			return true;
 		}
@@ -83,7 +84,7 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	 * заимствовано из Mage_Payment_Block_Info
 	 * @see Mage_Payment_Block_Info::getMethod
 	 * @override
-	 * @return Df_Payment_Method
+	 * @return \Df\Payment\Method
 	 */
 	public function method() {return $this->getInfo()->getMethodInstance();}
 
@@ -124,18 +125,18 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	/**
 	 * заимствовано из Mage_Payment_Block_Info
 	 * @see Mage_Payment_Block_Info::_prepareSpecificInformation
-	 * @param Varien_Object|array $transport
-	 * @return Varien_Object
+	 * @param \Varien_Object|array $transport
+	 * @return \Varien_Object
 	 */
 	protected function _prepareSpecificInformation($transport = null) {
 		if (null === $this->_paymentSpecificInformation) {
 			if (null === $transport) {
-				$transport = new Varien_Object;
+				$transport = new \Varien_Object;
 			}
 			elseif (is_array($transport)) {
-				$transport = new Varien_Object($transport);
+				$transport = new \Varien_Object($transport);
 			}
-			Mage::dispatchEvent('payment_info_block_prepare_specific_information', array(
+			\Mage::dispatchEvent('payment_info_block_prepare_specific_information', array(
 				'transport' => $transport
 				,'payment'   => $this->getInfo()
 				,'block'     => $this
@@ -156,14 +157,14 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 	/**
 	 * @used-by Df_Pd4_Block_Info::capableLinkToOrder()
 	 * @used-by Df_Pd4_Block_Info::getLinkBlock()
-	 * @return Df_Sales_Model_Order|null
+	 * @return \Df_Sales_Model_Order|null
 	 */
 	protected function order() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Payment_Model_Info|Mage_Sales_Model_Order_Payment $paymentInfo */
+			/** @var \Mage_Payment_Model_Info|\Mage_Sales_Model_Order_Payment $paymentInfo */
 			$paymentInfo = $this->getInfo();
 			$this->{__METHOD__} = df_n_set(
-				!$paymentInfo instanceof Mage_Sales_Model_Order_Payment
+				!$paymentInfo instanceof \Mage_Sales_Model_Order_Payment
 				? null
 				: $paymentInfo->getOrder()
 			);
@@ -180,9 +181,9 @@ class Df_Payment_Block_Info extends Df_Core_Block_Template_NoCache {
 		return $this->toHtml();
 	}
 
-	/** @var Varien_Object|null */
+	/** @var \Varien_Object|null */
 	protected $_paymentSpecificInformation = null;
 
-	/** @used-by Df_Payment_Method::getInfoBlockType() */
+	/** @used-by \Df\Payment\Method::getInfoBlockType() */
 
 }

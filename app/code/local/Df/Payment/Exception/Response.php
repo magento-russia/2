@@ -1,10 +1,12 @@
 <?php
-class Df_Payment_Exception_Response extends Df_Payment_Exception {
+namespace Df\Payment\Exception;
+use Df\Payment\Response as R;
+class Response extends \Df\Payment\Exception {
 	/**
 	 * @param string $message
-	 * @param Df_Payment_Response $response
+	 * @param R $response
 	 */
-	public function __construct($message, Df_Payment_Response $response) {
+	public function __construct($message, R $response) {
 		parent::__construct($message);
 		$this->_response = $response;
 	}
@@ -25,15 +27,15 @@ class Df_Payment_Exception_Response extends Df_Payment_Exception {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Payment_Response */
+	/** @return R */
 	protected function getResponse() {return $this->_response;}
 
-	/** @return Df_Payment_Request_Secondary */
+	/** @return \Df\Payment\Request\Secondary */
 	private function getRequest() {return $this->getResponse()->getRequest();}
 
-	/** @var Df_Payment_Response */
+	/** @var R */
 	private $_response;
 
-	/** @used-by Df_Payment_Response::getExceptionClass() */
+	/** @used-by \Df\Payment\Response::getExceptionClass() */
 
 }

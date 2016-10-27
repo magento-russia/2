@@ -1,6 +1,9 @@
 <?php
+namespace Df\Payment\Action;
+use Df_Core_Model_Money as Money;
+use Df_Sales_Model_Order as O;
 use Mage_Sales_Model_Order_Invoice as Invoice;
-abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
+abstract class Confirm extends \Df\Payment\Action {
 	/**
 	 * @abstract
 	 * @return string
@@ -20,7 +23,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 
 	/**
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function checkPaymentAmount() {
 		/**
@@ -70,7 +73,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	 * @used-by checkPaymentAmount()
 	 * @used-by Df_EasyPay_Action_Confirm::checkPaymentAmount()  
 	 * @used-by Df_WebPay_Action_Confirm::checkPaymentAmount() 
-	 * @throws Df\Core\Exception
+	 * @throws \Df\Core\Exception
 	 */
 	protected function errorInvalidAmount() {
 		df_error(
@@ -100,7 +103,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 		df_sprintf($this->message('success'), $invoice->getIncrementId())
 	;}	
 	
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	protected function amountFromOrder() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->configS()->getOrderAmountInServiceCurrency($this->order());
@@ -109,15 +112,15 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	}
 
 	/**
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {return df_ets($e);}
+	protected function responseTextForError(\Exception $e) {return df_ets($e);}
 
 	/** @return string */
 	protected function responseTextForSuccess() {return '';}
 
-	/** @return Df_Payment_Config_Area_Service */
+	/** @return \Df\Payment\Config\Area\Service */
 	protected function configS() {return $this->method()->configS();}
 
 	/**
@@ -157,7 +160,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	/** @return string */
 	protected function rOII() {return $this->param($this->rkOII());}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	protected function rAmount() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_money(df_float($this->rAmountS()));
@@ -196,19 +199,19 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	protected function needInvoice() {return true;}
 
 	/**
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function logException(Exception $e) {
+	protected function logException(\Exception $e) {
 		$this->logExceptionStandard($e);
 		$this->logExceptionToOrderHistory($e);
 	}
 
 	/**
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function logExceptionStandard(Exception $e) {
+	protected function logExceptionStandard(\Exception $e) {
 		$this->logFailureHighLevel(
 			"При взаимодействии с платёжным шлюзом призошёл сбой.\n%s"
 			."\nПараметры запроса:\n%s"
@@ -217,23 +220,23 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 		);
 		// В низкоуровневый журнал исключительную ситуацию записываем
 		// только если это сбой в программном коде.
-		if (!($e instanceof Df_Payment_Exception)) {
+		if (!($e instanceof \Df\Payment\Exception)) {
 			$this->logFailureLowLevel($e);
 		}
 	}
 
 	/**
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function logExceptionToOrderHistory(Exception $e) {
+	protected function logExceptionToOrderHistory(\Exception $e) {
 		if ($this->_order) {
 			$this->comment(df_no_escape(df_t()->nl2br(df_ets($e))));
 		}
 	}
 
 	/**
-	 * @param string|Exception $message
+	 * @param string|\Exception $message
 	 * @return void
 	 */
 	protected function logFailureHighLevel($message) {
@@ -246,7 +249,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	}
 
 	/**
-	 * @param string|Exception $message
+	 * @param string|\Exception $message
 	 * @return void
 	 */
 	protected function logFailureLowLevel($message) {
@@ -269,17 +272,17 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Abstract::order()
-	 * @used-by Df_Payment_Action_Abstract::addAndSaveStatusHistoryComment()
-	 * @used-by Df_Payment_Action_Abstract::method()
-	 * @used-by Df_Payment_Action_Abstract::getPayment()
+	 * @see \Df\Payment\Action::order()
+	 * @used-by \Df\Payment\Action::addAndSaveStatusHistoryComment()
+	 * @used-by \Df\Payment\Action::method()
+	 * @used-by \Df\Payment\Action::getPayment()
 	 * @used-by amountFromOrder()
 	 * @used-by _process()
-	 * @return Df_Sales_Model_Order
+	 * @return O
 	 */
 	protected function order() {
 		if (!$this->_order) {
-			$this->_order = Df_Sales_Model_Order::ldi($this->orderIId(), false);
+			$this->_order = O::ldi($this->orderIId(), false);
 			if (!$this->_order) {
 				df_error(
 					"Некто пытается подтвердить оплату отсутствующего в системе заказа «%s»."
@@ -293,10 +296,10 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		$this->logException($e);
 		$this->processResponseForError($e);
 		parent::processException($e);
@@ -314,7 +317,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 		 * Ведь запрос платёжной системы к магазину не относится к сессии покупателя.
 		 * По-правильному здесь надо как-то загружать сессию покупателя.
 		 */
-		Df_Payment_Redirected::off();
+		\Df\Payment\Redirected::off();
 		$this->checkSignature();
 		if ($this->needInvoice() && !$this->order()->canInvoice()) {
 			/**
@@ -339,7 +342,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 				$this->alternativeProcessWithoutInvoicing();
 			}
 			else {
-				/** @var Mage_Sales_Model_Order_Invoice $invoice */
+				/** @var Invoice $invoice */
 				$invoice = $this->order()->prepareInvoice();
 				$invoice->register();
 				if ($this->needCapture()) {
@@ -347,8 +350,8 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 				}
 				$this->saveInvoice($invoice);
 				$this->order()->setState(
-					Mage_Sales_Model_Order::STATE_PROCESSING
-					,Mage_Sales_Model_Order::STATE_PROCESSING
+					O::STATE_PROCESSING
+					,O::STATE_PROCESSING
 					,$this->messageSuccess($invoice)
 					,true
 				);
@@ -363,17 +366,17 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	 * Потомки могут перекрывать это поведение.
 	 * Так делает Единая Касса.
 	 * @return void
-	 * @throws Mage_Core_Exception
+	 * @throws \Mage_Core_Exception
 	 */
 	protected function processOrderCanNotInvoice() {
 		df_error('Платёжная система зачем-то повторно прислала оповещение об оплате.');
 	}
 
 	/**
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processResponseForError(Exception $e) {
+	protected function processResponseForError(\Exception $e) {
 		$this->response()->setBody($this->responseTextForError($e));
 	}
 
@@ -419,10 +422,10 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	protected function redirectToSuccess() {$this->redirectRaw(df_url_checkout_success());}
 
 	/**
-	 * @param Exception|Df_Payment_Exception $e
+	 * @param \Exception|\Df\Payment\Exception $e
 	 * @return void
 	 */
-	protected function showExceptionOnCheckoutScreen(Exception $e) {
+	protected function showExceptionOnCheckoutScreen(\Exception $e) {
 		/**
 		 * Обратите внимание,
 		 * что при возвращении на страницу RM_URL_CHECKOUT
@@ -432,7 +435,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 		 * не отображаются в стандартной теме на странице checkout/onepage
 		 */
 		df_session_core()->addError(df_t()->nl2br(
-			$e instanceof Df_Payment_Exception && $e->needFraming()
+			$e instanceof \Df\Payment\Exception && $e->needFraming()
 			? strtr($this->method()->configF()->getMessageFailure(), array(
 				'{сообщение от платёжного шлюза}' => df_ets($e))
 			)
@@ -443,9 +446,9 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	/**
 	 * @param string $message
 	 * @return void
-	 * @throws Df_Payment_Exception
+	 * @throws \Df\Payment\Exception
 	 */
-	protected function throwException($message) {df_error(new Df_Payment_Exception($message));}
+	protected function throwException($message) {df_error(new \Df\Payment\Exception($message));}
 
 	/**
 	 * @used-by order()
@@ -495,7 +498,7 @@ abstract class Df_Payment_Action_Confirm extends Df_Payment_Action_Abstract {
 	/**
 	 * @used-by logExceptionToOrderHistory()
 	 * @used-by order()
-	 * @var Df_Sales_Model_Order
+	 * @var O
 	 */
 	private $_order = null;
 }

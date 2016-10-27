@@ -7,7 +7,6 @@
 		</Df_Payment>
 	</modules>
 	<global>
-		<blocks><df_payment><class>Df_Payment_Block</class></df_payment></blocks>
 		<helpers>
 			<df_payment><class>Df_Payment_Helper</class></df_payment>
 			<payment>

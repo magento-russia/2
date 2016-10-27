@@ -1,6 +1,6 @@
 <?php
 // 2016-10-20
-class Df_Robokassa_Config_Area_Service extends Df_Payment_Config_Area_Service {
+class Df_Robokassa_Config_Area_Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * 2016-10-20
 	 * Пришлось перекрыть родительский метод,
@@ -9,7 +9,7 @@ class Df_Robokassa_Config_Area_Service extends Df_Payment_Config_Area_Service {
 	 * (и поэтому недопустимое теперь) значение опции payment_service__currency,
 	 * которое нам надо проигнорировать.
 	 * @override
-	 * @see Df_Payment_Config_Area_Service::getCurrencyCode()
+	 * @see \Df\Payment\Config\Area\Service::getCurrencyCode()
 	 * @return string
 	 */
 	public function getCurrencyCode() {return 'RUB';}

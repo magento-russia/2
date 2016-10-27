@@ -1,5 +1,5 @@
 <?php
-class Df_Kkb_Action_Confirm extends Df_Payment_Action_Confirm {
+class Df_Kkb_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -81,7 +81,7 @@ class Df_Kkb_Action_Confirm extends Df_Payment_Action_Confirm {
 
 	/**
 	 * @override
-	 * @see Df_Payment_Action_Confirm::processResponseForSuccess()
+	 * @see \Df\Payment\Action\Confirm::processResponseForSuccess()
 	 * @used-by _process()
 	 * @return void
 	 */

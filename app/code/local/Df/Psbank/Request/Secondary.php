@@ -3,14 +3,14 @@
  * @method Df_Psbank_Method method()
  * @method Df_Psbank_Config_Area_Service configS()
  */
-abstract class Df_Psbank_Request_Secondary extends Df_Payment_Request_Transaction {
+abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transaction {
 	/** @return int */
 	abstract protected function getTransactionType();
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Secondary::_params()
-	 * @used-by Df_Payment_Request_Secondary::params()
+	 * @see \Df\Payment\Request\Secondary::_params()
+	 * @used-by \Df\Payment\Request\Secondary::params()
 	 * @return array(string => string|int)
 	 */
 	public function _params() {
@@ -72,7 +72,7 @@ abstract class Df_Psbank_Request_Secondary extends Df_Payment_Request_Transactio
 
 	/**
 	 * @override
-	 * @see Df_Payment_Request_Secondary::getPaymentExternalId()
+	 * @see \Df\Payment\Request\Secondary::getPaymentExternalId()
 	 * @return string
 	 */
 	protected function getPaymentExternalId() {

@@ -1,5 +1,6 @@
 <?php
-class Df_KazpostEms_Data_Domestic {
+namespace Df\KazpostEms\Data;
+class Domestic {
 	/** @var array(string => int) */
 	public static $cities = array(
 		'АСТАНА' => 1

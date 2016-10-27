@@ -1,5 +1,6 @@
 <?php
-class Df_Alfabank_Config_Area_Service extends Df_Payment_Config_Area_Service {
+namespace Df\Alfabank\Config\Area;
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @used-by Df_Alfabank_Method::getRegistrationResponseJson()
 	 * @param array(string => string|int) $params

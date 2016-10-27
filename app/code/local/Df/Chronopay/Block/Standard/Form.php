@@ -1,5 +1,5 @@
 <?php
-class Df_Chronopay_Block_Standard_Form extends Df_Payment_Block_Form {
+class Df_Chronopay_Block_Standard_Form extends \Df\Payment\Block\Form {
 	/**
 	 * @override
 	 * @return string

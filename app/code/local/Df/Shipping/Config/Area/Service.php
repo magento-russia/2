@@ -1,5 +1,6 @@
 <?php
-class Df_Shipping_Config_Area_Service extends Df_Shipping_Config_Area {
+namespace Df\Shipping\Config\Area;
+class Service extends \Df\Shipping\Config\Area {
 	/** @return bool */
 	public function enableSmsNotification() {return $this->getVarFlag('enable_sms_notification');}
 

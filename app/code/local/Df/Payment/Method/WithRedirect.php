@@ -1,13 +1,15 @@
 <?php
-abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
+namespace Df\Payment\Method;
+use Df_Sales_Model_Order as O;
+abstract class WithRedirect extends \Df\Payment\Method {
 	/**
-	 * @used-by Df_Payment_Request_Payment::urlCustomerReturn()
+	 * @used-by \Df\Payment\Request\Payment::urlCustomerReturn()
 	 * @used-by Df_YandexMoney_Action_CustomerReturn::getToken()
-	 * @param Df_Sales_Model_Order $order
+	 * @param O $order
 	 * @return string
 	 */
-	public function getCustomerReturnUrl(Df_Sales_Model_Order $order) {return
-		Mage::getUrl(df_cc_path($this->getCode(), 'customerReturn'), [
+	public function getCustomerReturnUrl(O $order) {return
+		\Mage::getUrl(df_cc_path($this->getCode(), 'customerReturn'), [
 			'_query' => [self::REQUEST_PARAM__ORDER_INCREMENT_ID => $order->getIncrementId()]
 			// Без _nosid система будет формировать ссылку вида
 			// http://localhost.com:811/df-avangard/customerReturn/?___SID=U&magentoOrderIncrementId=100000053
@@ -32,9 +34,9 @@ abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
 				->setLastRealOrderId($order->getIncrementId());
 	 * @return string
 	 */
-	public function getOrderPlaceRedirectUrl() {
-		return Mage::getUrl('df-payment/redirect', array('_secure' => true));
-	}
+	public function getOrderPlaceRedirectUrl() {return
+		\Mage::getUrl('df-payment/redirect', ['_secure' => true])
+	;}
 
 	/**
 	 * Обратите внимание, что платёжный шлюз Альфа-Банка (@see Df_Alfabank_Method)
@@ -46,13 +48,13 @@ abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
 	 * на который модуль перенаправляет покупателя без параметров.
 	 * Если в других модулях потребуется такое же поведение (перенаправление без параметров),
 	 * то посмотрите, как устроен модуль Альфа-Банк.
-	 * @used-by Df_Payment_Block_Redirect::getFormFields()
+	 * @used-by \Df\Payment\Block\Redirect::getFormFields()
 	 * @return array(string => string|int)
 	 */
-	public function getPaymentPageParams() {return Df_Payment_Request_Payment::params($this);}
+	public function getPaymentPageParams() {return \Df\Payment\Request\Payment::params($this);}
 
 	/**
-	 * @used-by Df_Payment_Block_Redirect::getTargetURL()
+	 * @used-by \Df\Payment\Block\Redirect::getTargetURL()
 	 * @return string
 	 */
 	public function getPaymentPageUrl() {return $this->configS()->getUrlPaymentPage();}
@@ -62,15 +64,15 @@ abstract class Df_Payment_Method_WithRedirect extends Df_Payment_Method {
 	 * if flag isInitilizeNeeded set to true
 	 * @override
 	 * @param string|bool|null $paymentAction
-	 * @param Varien_Object $stateObject
-	 * @return Mage_Payment_Model_Method_Abstract
+	 * @param \Varien_Object $stateObject
+	 * @return \Mage_Payment_Model_Method_Abstract
 	 */
 	public function initialize($paymentAction, $stateObject) {
-		df_assert($stateObject instanceof Varien_Object);
+		df_assert($stateObject instanceof \Varien_Object);
 		parent::initialize($paymentAction, $stateObject);
 		$stateObject->addData(array(
-			'state' => Mage_Sales_Model_Order::STATE_PENDING_PAYMENT
-			,'status' => Mage_Sales_Model_Order::STATE_PENDING_PAYMENT
+			'state' => O::STATE_PENDING_PAYMENT
+			,'status' => O::STATE_PENDING_PAYMENT
 			,'is_notified' => false
 		));
 		return $this;

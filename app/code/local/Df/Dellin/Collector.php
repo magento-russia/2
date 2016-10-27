@@ -1,11 +1,12 @@
 <?php
 // 2016-10-26
-class Df_Dellin_Collector extends Df_Shipping_Collector_Ru {
+namespace Df\Dellin;
+class Collector extends \Df\Shipping\Collector\Ru {
 	/**
 	 * 2016-10-26
 	 * @override
-	 * @see Df_Shipping_Collector::_collect()
-	 * @used-by Df_Shipping_Collector::collect()
+	 * @see \Df\Shipping\Collector::_collect()
+	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
 	protected function _collect() {

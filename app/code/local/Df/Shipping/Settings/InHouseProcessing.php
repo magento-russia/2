@@ -1,5 +1,6 @@
 <?php
-class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
+namespace Df\Shipping\Settings;
+class InHouseProcessing extends \Df_Core_Model_Settings {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Settings::getKeyPrefix()
@@ -13,8 +14,8 @@ class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
 	 * Возвращает планируемую дату передачи заказа интернет-магазином в службу доставки
 	 * (к текущей дате прибавляются сроки обработки заказа интернет-магазином
 	 * и нерабочие дни интернет-магазина).
-	 * @used-by Df_Shipping_Rate_Result_Method::prepareMethodTitle()
-	 * @return Zend_Date
+	 * @used-by \Df\Shipping\Rate\Result\Method::prepareMethodTitle()
+	 * @return \Zend_Date
 	 */
 	public static function date() {static $r; return $r ? $r : $r = df_today_add(self::days());}
 
@@ -23,13 +24,13 @@ class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
 	 * и датой передачи заказа интернет-магазином в службу доставки
 	 * (к текущей дате прибавляются сроки обработки заказа интернет-магазином
 	 * и нерабочие дни интернет-магазина)
-	 * @used-by Df_Shipping_Rate_Result_Method::prepareMethodTitle()
+	 * @used-by \Df\Shipping\Rate\Result\Method::prepareMethodTitle()
 	 * @return int
 	 */
 	public static function days() {
 		static $result;
 		if (is_null($result)) {
-			/** @var Df_Shipping_Settings_InHouseProcessing $s */
+			/** @var $this $s */
 			$s = new self;
 			/** @var int $result */
 			$result = $s->getNatural0('days');
@@ -40,7 +41,7 @@ class Df_Shipping_Settings_InHouseProcessing extends Df_Core_Model_Settings {
 			}
 			if ($s->getYesNo('consider_days_off')) {
 				$result = df_num_calendar_days_by_num_working_days(
-					$startDate = $canShipToday ? Zend_Date::now() : df_tomorrow()
+					$startDate = $canShipToday ? \Zend_Date::now() : df_tomorrow()
 					,$numWorkingDays = $result
 					,$store = $s->store()
 				);
