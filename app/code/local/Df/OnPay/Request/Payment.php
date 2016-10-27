@@ -1,9 +1,10 @@
 <?php
+namespace Df\OnPay\Request;
 /**
- * @method Df_OnPay_Method method()
- * @method Df_OnPay_Config_Area_Service configS()
+ * @method \Df\OnPay\Method method()
+ * @method \Df\OnPay\Config\Area\Service configS()
  */
-class Df_OnPay_Request_Payment extends \Df\Payment\Request\Payment {
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()
@@ -48,7 +49,7 @@ class Df_OnPay_Request_Payment extends \Df\Payment\Request\Payment {
 	/** @return string */
 	private function needConvertReceipts() {
 		return
-				Df_OnPay_Config_Source_ReceiptCurrency::VALUE__BILL
+				\Df\OnPay\Config\Source\ReceiptCurrency::VALUE__BILL
 			===
 				$this->configS()->getReceiptCurrency()
 			? 'yes'

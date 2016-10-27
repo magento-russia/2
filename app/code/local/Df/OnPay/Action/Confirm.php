@@ -1,5 +1,6 @@
 <?php
-class Df_OnPay_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\OnPay\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -11,7 +12,7 @@ class Df_OnPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Mage_Core_Exception
+	 * @throws \Mage_Core_Exception
 	 */
 	protected function checkPaymentAmount() {
 		if (
@@ -36,10 +37,10 @@ class Df_OnPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {
+	protected function responseTextForError(\Exception $e) {
 		/** @var array(string => string|int) $responseParams */
 		$responseParams =
 			array_merge(
@@ -58,7 +59,7 @@ class Df_OnPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 			)
 		;
 		/** @var string $result */
-		$result = $this->responseObjectToXml(new Varien_Object($responseParams));
+		$result = $this->responseObjectToXml(new \Varien_Object($responseParams));
 		df_result_string($result);
 		return $result;
 	}
@@ -86,7 +87,7 @@ class Df_OnPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 			)
 		;
 		/** @var string $result */
-		$result = $this->responseObjectToXml(new Varien_Object($responseParams));
+		$result = $this->responseObjectToXml(new \Varien_Object($responseParams));
 		df_result_string($result);
 		return $result;
 	}
@@ -168,10 +169,10 @@ class Df_OnPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 	}
 
 	/**
-	 * @param Varien_Object $responseAsVarienObject
+	 * @param \Varien_Object $responseAsVarienObject
 	 * @return string
 	 */
-	private function responseObjectToXml(Varien_Object $responseAsVarienObject) {
+	private function responseObjectToXml(\Varien_Object $responseAsVarienObject) {
 		return $responseAsVarienObject->toXml(
 			array()  // все свойства
 			, 'result' // корневой тэг

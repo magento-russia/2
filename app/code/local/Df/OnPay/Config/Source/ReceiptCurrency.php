@@ -1,5 +1,6 @@
 <?php
-class Df_OnPay_Config_Source_ReceiptCurrency extends \Df\Payment\Config\Source {
+namespace Df\OnPay\Config\Source;
+class ReceiptCurrency extends \Df\Payment\Config\Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect

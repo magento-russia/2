@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-onpay>
-				<model>Df_OnPay_Method</model>
+				<model>Df\OnPay\Method</model>
 			</df-onpay>
 		</payment>
 	</default>
