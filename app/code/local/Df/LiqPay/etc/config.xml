@@ -8,7 +8,6 @@
 		</Df_LiqPay>
 	</modules>
 	<global>
-		<blocks><df_liqpay><class>Df_LiqPay_Block</class></df_liqpay></blocks>
 		<helpers><df_liqpay><class>Df_LiqPay_Helper</class></df_liqpay></helpers>
 	</global>
 	<default>
@@ -38,7 +37,7 @@
 		-->
 		<payment>
 			<df-liqpay>
-				<model>Df_LiqPay_Method</model>
+				<model>Df\LiqPay\Method</model>
 			</df-liqpay>
 		</payment>
 	</default>

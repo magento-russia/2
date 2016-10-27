@@ -1,5 +1,6 @@
 <?php
-class Df_LiqPay_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\LiqPay\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -11,12 +12,12 @@ class Df_LiqPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @return Zend_Controller_Request_Abstract
+	 * @return \Zend_Controller_Request_Abstract
 	 */
 	protected function request() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Controller_Request_Abstract $result */
-			$this->{__METHOD__} = new Zend_Controller_Request_Http();
+			/** @var \Zend_Controller_Request_Abstract $result */
+			$this->{__METHOD__} = new \Zend_Controller_Request_Http();
 			$this->{__METHOD__}->setParams(
 				$this->getPaymentInfoAsArray() + parent::request()->getParams()
 			);

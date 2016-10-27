@@ -1,6 +1,7 @@
 <?php
-/** @method Df_LiqPay_Method method() */
-class Df_LiqPay_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\LiqPay\Request;
+/** @method \Df\LiqPay\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()
@@ -45,18 +46,18 @@ class Df_LiqPay_Request_Payment extends \Df\Payment\Request\Payment {
 	 * @return string
 	 */
 	private function urlReturn() {return
-		Mage::getUrl($this->method()->getCode() . '/customerReturn', array('_nosid' => true))
+		\Mage::getUrl($this->method()->getCode() . '/customerReturn', array('_nosid' => true))
 	;}
 
 	/** @return string */
 	private function xml() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Varien_Object $object */
-			$object = new Varien_Object($this->getParamsForXml());
+			/** @var \Varien_Object $object */
+			$object = new \Varien_Object($this->getParamsForXml());
 			$this->{__METHOD__} = $object->toXml(
 				// все свойства
 				$arrAttributes = array()
-				// корневой тэг
+				// корневой тег
 				, $rootName = 'request'
 				/* не добавлять <?xml version="1.0" encoding="UTF-8"?> */
 				, $addOpenTag = false

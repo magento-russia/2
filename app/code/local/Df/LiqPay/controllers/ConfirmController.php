@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_LiqPay_Action_Confirm */
+/** @uses \Df\LiqPay\Action\Confirm */
 class Df_LiqPay_ConfirmController extends \Df\Core\Controller {}
