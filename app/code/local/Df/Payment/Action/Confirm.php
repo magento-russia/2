@@ -71,7 +71,7 @@ abstract class Confirm extends \Df\Payment\Action {
 	/**           
 	 * 2016-10-20            
 	 * @used-by checkPaymentAmount()
-	 * @used-by Df_EasyPay_Action_Confirm::checkPaymentAmount()  
+	 * @used-by \Df\EasyPay\Action\Confirm::checkPaymentAmount()
 	 * @used-by Df_WebPay_Action_Confirm::checkPaymentAmount() 
 	 * @throws \Df\Core\Exception
 	 */

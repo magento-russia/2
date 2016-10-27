@@ -36,7 +36,7 @@
 		-->
 		<payment>
 			<df-easypay>
-				<model>Df_EasyPay_Method</model>
+				<model>Df\EasyPay\Method</model>
 			</df-easypay>
 		</payment>
 	</default>

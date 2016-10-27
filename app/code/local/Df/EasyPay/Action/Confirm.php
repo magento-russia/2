@@ -1,16 +1,13 @@
 <?php
-class Df_EasyPay_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\EasyPay\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
 	 * @throws \Df\Core\Exception
 	 */
 	protected function checkPaymentAmount() {
-		if (
-				$this->rAmount()->getAsInteger()
-			!==
-				$this->amountFromOrder()->getAsInteger()
-		) {
+		if ($this->rAmount()->getAsInteger() !== $this->amountFromOrder()->getAsInteger()) {
 			$this->errorInvalidAmount();
 		}
 	}
@@ -26,32 +23,27 @@ class Df_EasyPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 	 * @override
 	 * @return string
 	 */
-	protected function signatureOwn() {
-		/** @var string[] $signatureParams */
-		$signatureParams = array(
-			$this->rOII()
-			,/**
-			 * Обратите внимание, что хотя размер платежа всегда является целым числом,
-			 * но EasyPay присылает его в формате с двумя знаками после запятой.
-			 * Например: «103.00», а не «103».
-			 *
-			 * Поэтому не используем $this->rAmount()->getAsInteger()
-			 */
-			$this->param('sum')
-			,$this->rShopId()
-			,$this->param('card')
-			,$this->rTime()
-			,$this->getResponsePassword()
-		);
-		return md5(implode($signatureParams));
-	}
+	protected function signatureOwn() {return md5(implode([
+		$this->rOII()
+		/**
+		 * Размер платежа всегда является целым числом,
+		 * но EasyPay присылает его в формате с двумя знаками после запятой.
+		 * Например: «103.00», а не «103».
+		 * Поэтому не используем $this->rAmount()->getAsInteger()
+		 */
+		,$this->param('sum')
+		,$this->rShopId()
+		,$this->param('card')
+		,$this->rTime()
+		,$this->getResponsePassword()
+	]));}
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		parent::processException($e);
 		/**
 		 * В случае, если Поставщик не может по техническим или другим причинам обработать уведомление,
