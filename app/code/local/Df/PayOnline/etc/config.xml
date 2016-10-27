@@ -8,9 +8,7 @@
 		</Df_PayOnline>
 	</modules>
 	<global>
-		<blocks><df_payonline><class>Df_PayOnline_Block</class></df_payonline></blocks>
 		<helpers><df_payonline><class>Df_PayOnline_Helper</class></df_payonline></helpers>
-		<models><df_payonline><class>Df_PayOnline_Model</class></df_payonline></models>
 	</global>
 	<default>
 		<!--
@@ -39,7 +37,7 @@
 		-->
 		<payment>
 			<df-payonline>
-				<model>Df_PayOnline_Method</model>
+				<model>Df\PayOnline\Method</model>
 			</df-payonline>
 		</payment>
 	</default>

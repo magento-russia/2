@@ -1,5 +1,6 @@
 <?php
-class Df_PayOnline_Config_Area_Service extends \Df\Payment\Config\Area\Service {
+namespace Df\PayOnline\Config\Area;
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @override
 	 * @return string

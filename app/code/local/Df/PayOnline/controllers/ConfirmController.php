@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_PayOnline_Action_Confirm */
+/** @uses \Df\PayOnline\Action\Confirm */
 class Df_PayOnline_ConfirmController extends \Df\Core\Controller {}

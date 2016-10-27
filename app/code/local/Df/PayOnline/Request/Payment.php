@@ -1,9 +1,10 @@
 <?php
+namespace Df\PayOnline\Request;
 /**
- * @method Df_PayOnline_Method method()
- * @method Df_PayOnline_Config_Area_Service configS()
+ * @method \Df\PayOnline\Method method()
+ * @method \Df\PayOnline\Config\Area\Service configS()
  */
-class Df_PayOnline_Request_Payment extends \Df\Payment\Request\Payment {
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @return string
@@ -51,7 +52,7 @@ class Df_PayOnline_Request_Payment extends \Df\Payment\Request\Payment {
 			,self::SIGNATURE_PARAM__PRIVATE_SECURITY_KEY => $this->password()
 		);
 		return strtolower(md5(implode(
-			Df_PayOnline_Helper_Data::SIGNATURE_PARTS_SEPARATOR
+			\Df_PayOnline_Helper_Data::SIGNATURE_PARTS_SEPARATOR
 			,df_h()->payOnline()->preprocessSignatureParams(
 				$this->preprocessParams($params)
 			)

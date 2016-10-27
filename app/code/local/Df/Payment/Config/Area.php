@@ -32,7 +32,7 @@ abstract class Area extends \Df\Checkout\Module\Config\Area {
 	 * @used-by \Df\Assist\Config\Area\Service::getUrl()
 	 * @used-by \Df\IPay\Config\Area\Service
 	 * @used-by \Df\Payment\Config\Area\Service
-	 * @used-by Df_PayOnline_Config_Area_Service
+	 * @used-by \Df\PayOnline\Config\Area\Service
 	 * @return \Df\Payment\Config\Manager\ConstT
 	 */
 	protected function constManager() {return $this->main()->constManager();}

@@ -125,13 +125,13 @@ abstract class Confirm extends \Df\Payment\Action {
 
 	/**
 	 * @used-by rAmountS()
-	 * @used-by Df_PayOnline_Action_Confirm::signatureOwn()
+	 * @used-by \Df\PayOnline\Action\Confirm::signatureOwn()
 	 * @return string
 	 */
 	protected function rkAmount() {return $this->const_('payment/amount');}
 
 	/**
-	 * @used-by Df_PayOnline_Action_Confirm::signatureOwn()
+	 * @used-by \Df\PayOnline\Action\Confirm::signatureOwn()
 	 * @return string
 	 */
 	protected function rkCurrency() {return $this->const_('payment/currency-code');}

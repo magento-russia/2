@@ -1,9 +1,10 @@
 <?php
-class Df_PayOnline_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\PayOnline\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Mage_Core_Exception
+	 * @throws \Mage_Core_Exception
 	 */
 	protected function checkSignature() {
 		if ($this->needInvoice()) {
@@ -34,7 +35,7 @@ class Df_PayOnline_Action_Confirm extends \Df\Payment\Action\Confirm {
 		];
 		/** @var string $result */
 		$result = md5(implode(
-			Df_PayOnline_Helper_Data::SIGNATURE_PARTS_SEPARATOR
+			\Df_PayOnline_Helper_Data::SIGNATURE_PARTS_SEPARATOR
 			,df_h()->payOnline()->preprocessSignatureParams($signatureParams)
 		));
 		return $result;
