@@ -1,6 +1,9 @@
 <?php
-/** @method Df_WalletOne_Method method() */
-class Df_WalletOne_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\WalletOne\Request;
+use Df\WalletOne\AddPaymentMethods as A;
+use Df\WalletOne\Request\SignatureGenerator as G;
+/** @method \Df\WalletOne\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()
@@ -34,14 +37,12 @@ class Df_WalletOne_Request_Payment extends \Df\Payment\Request\Payment {
 	/** @return string */
 	private function getSignature() {return $this->getSignatureGenerator()->getSignature();}
 
-	/** @return Df_WalletOne_Request_SignatureGenerator */
+	/** @return G */
 	private function getSignatureGenerator() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_WalletOne_Request_SignatureGenerator::i(array(
-				Df_WalletOne_Request_SignatureGenerator::P__ENCRYPTION_KEY =>
-					$this->password()
-				,Df_WalletOne_Request_SignatureGenerator::P__SIGNATURE_PARAMS =>
-					$this->getParamsForSignature()
+			$this->{__METHOD__} = G::i(array(
+				G::P__ENCRYPTION_KEY => $this->password()
+				,G::P__SIGNATURE_PARAMS => $this->getParamsForSignature()
 			));
 		}
 		return $this->{__METHOD__};
@@ -62,18 +63,14 @@ class Df_WalletOne_Request_Payment extends \Df\Payment\Request\Payment {
 				,self::REQUEST_VAR__URL_RETURN_OK => df_url_checkout_success()
 				,self::REQUEST_VAR__URL_RETURN_NO => df_url_checkout_fail()
 				,self::$METHODS_ENABLED =>
-					Df_WalletOne_AddPaymentMethods::i(array(
-						Df_WalletOne_AddPaymentMethods::P__FIELD_NAME =>
-							self::$METHODS_ENABLED
-						,Df_WalletOne_AddPaymentMethods::P__FIELD_VALUES =>
-							$this->configS()->getSelectedPaymentMethods()
+					A::i(array(
+						A::P__FIELD_NAME => self::$METHODS_ENABLED
+						,A::P__FIELD_VALUES => $this->configS()->getSelectedPaymentMethods()
 					))
 				,self::$METHODS_DISABLED =>
-					Df_WalletOne_AddPaymentMethods::i(array(
-						Df_WalletOne_AddPaymentMethods::P__FIELD_NAME =>
-							self::$METHODS_DISABLED
-						,Df_WalletOne_AddPaymentMethods::P__FIELD_VALUES =>
-							$this->configS()->getDisabledPaymentMethods()
+					A::i(array(
+						A::P__FIELD_NAME => self::$METHODS_DISABLED
+						,A::P__FIELD_VALUES => $this->configS()->getDisabledPaymentMethods()
 					))
 			);
 		}

@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_WalletOne_Action_Confirm */
+/** @uses \Df\WalletOne\Action\Confirm */
 class Df_WalletOne_ConfirmController extends \Df\Core\Controller {}

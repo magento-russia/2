@@ -37,7 +37,7 @@
 		-->
 		<payment>
 			<df-wallet-one>
-				<model>Df_WalletOne_Method</model>
+				<model>Df\WalletOne\Method</model>
 			</df-wallet-one>
 		</payment>
 	</default>

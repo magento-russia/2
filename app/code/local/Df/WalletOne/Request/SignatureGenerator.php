@@ -1,5 +1,6 @@
 <?php
-class Df_WalletOne_Request_SignatureGenerator extends Df_Core_Model {
+namespace Df\WalletOne\Request;
+class SignatureGenerator extends \Df_Core_Model {
 	/** @return string */
 	public function getSignature() {
 		if (!isset($this->{__METHOD__})) {
@@ -130,7 +131,7 @@ class Df_WalletOne_Request_SignatureGenerator extends Df_Core_Model {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_WalletOne_Request_SignatureGenerator
+	 * @return self
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 

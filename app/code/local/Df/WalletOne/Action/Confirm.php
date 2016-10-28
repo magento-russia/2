@@ -1,5 +1,7 @@
 <?php
-class Df_WalletOne_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\WalletOne\Action;
+use Df\WalletOne\Request\SignatureGenerator as G;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -17,10 +19,10 @@ class Df_WalletOne_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {
+	protected function responseTextForError(\Exception $e) {
 		return 'WMI_RESULT=CANCEL&WMI_DESCRIPTION=' . urlencode(df_ets($e));
 	}
 
@@ -49,7 +51,7 @@ class Df_WalletOne_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return \Df\Payment\Action\Confirm
-	 * @throws Mage_Core_Exception
+	 * @throws \Mage_Core_Exception
 	 */
 	protected function processOrderCanNotInvoice() {
 		// Единая Касса любит присылать повторные оповещения об оплате
@@ -58,13 +60,12 @@ class Df_WalletOne_Action_Confirm extends \Df\Payment\Action\Confirm {
 		return $this;
 	}
 
-	/** @return Df_WalletOne_Request_SignatureGenerator */
+	/** @return G */
 	private function getSignatureGenerator() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_WalletOne_Request_SignatureGenerator::i(array(
-				Df_WalletOne_Request_SignatureGenerator::P__ENCRYPTION_KEY =>
-					$this->configS()->getResponsePassword()
-				,Df_WalletOne_Request_SignatureGenerator::P__SIGNATURE_PARAMS =>
+			$this->{__METHOD__} = G::i(array(
+				G::P__ENCRYPTION_KEY => $this->configS()->getResponsePassword()
+				,G::P__SIGNATURE_PARAMS =>
 					array_diff_key($this->params(), [$this->rkSignature() => null])
 			));
 		}

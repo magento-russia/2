@@ -1,6 +1,7 @@
 <?php
-class Df_WalletOne_AddPaymentMethods extends Df_Varien_Data_Form_Processor {
-	/** @return Df_WalletOne_AddPaymentMethods */
+namespace Df\WalletOne;
+class AddPaymentMethods extends \Df_Varien_Data_Form_Processor {
+	/** @return void */
 	public function process() {
 		foreach ($this->getFieldValues() as $subFieldName => $subFieldValue) {
 			/** @var string|int $subFieldName */
@@ -11,7 +12,6 @@ class Df_WalletOne_AddPaymentMethods extends Df_Varien_Data_Form_Processor {
 				,$subFieldValue
 			);
 		}
-		return $this;
 	}
 
 	/** @return string */
@@ -37,7 +37,7 @@ class Df_WalletOne_AddPaymentMethods extends Df_Varien_Data_Form_Processor {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_WalletOne_AddPaymentMethods
+	 * @return self
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 

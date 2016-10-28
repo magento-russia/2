@@ -74,8 +74,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function tweaks() {return Df_Tweaks_Helper_Data::s();}
 	/** @return Df_Vk_Helper_Data */
 	public function vk() {return Df_Vk_Helper_Data::s();}
-	/** @return Df_WalletOne_Helper_Data */
-	public function walletOne() {return Df_WalletOne_Helper_Data::s();}
 	/** @return Df_Wishlist_Helper_Data */
 	public function wishlist() {return Df_Wishlist_Helper_Data::s();}
 	/** @return Df_YandexMarket_Helper_Data */
