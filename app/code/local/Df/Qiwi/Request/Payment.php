@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Qiwi_Method method() */
-class Df_Qiwi_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\Qiwi\Request;
+/** @method \Df\Qiwi\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()

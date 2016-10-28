@@ -1,8 +1,9 @@
 <?php
-class Df_Qiwi_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\Qiwi\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
-	 * @used-by Zend_Soap_Server::handle()
-	 * @param stdClass $params
+	 * @used-by \Zend_Soap_Server::handle()
+	 * @param \stdClass $params
 	 * @return int
 	 */
 	public function updateBill($params) {
@@ -40,10 +41,10 @@ class Df_Qiwi_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {return $this->soap()->getLastResponse();}
+	protected function responseTextForError(\Exception $e) {return $this->soap()->getLastResponse();}
 
 	/**
 	 * @override
@@ -123,11 +124,11 @@ class Df_Qiwi_Action_Confirm extends \Df\Payment\Action\Confirm {
 		return df_cc_s($result, "Код состояния платежа: «{$c}».");
 	}
 
-	/** @return Df_Zf_Soap_Server */
+	/** @return \Df_Zf_Soap_Server */
 	private function soap() {return dfc($this, function() {
-		/** @var Df_Zf_Soap_Server $result */
-		$result = new Df_Zf_Soap_Server(
-			Mage::getConfig()->getModuleDir('etc', 'Df_Qiwi') . DS. 'IShopClientWS.wsdl'
+		/** @var \Df_Zf_Soap_Server $result */
+		$result = new \Df_Zf_Soap_Server(
+			\Mage::getConfig()->getModuleDir('etc', 'Df_Qiwi') . DS. 'IShopClientWS.wsdl'
 			,['encoding' => 'UTF-8']
 		);
 		// Soap 1.2 и так является значением по умолчанию,

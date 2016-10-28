@@ -1,8 +1,9 @@
 <?php
-class Df_Qiwi_Method extends \Df\Payment\Method\WithRedirect {
+namespace Df\Qiwi;
+class Method extends \Df\Payment\Method\WithRedirect {
 	/**
-	 * @used-by Df_Qiwi_Block_Form::phone()
-	 * @used-by Df_Qiwi_Request_Payment::qPhone()
+	 * @used-by \Df\Qiwi\Block\Form::phone()
+	 * @used-by \Df\Qiwi\Request\Payment::qPhone()
 	 * @return string
 	 */
 	public function qPhone() {return df_ccc('', $this->iia(

@@ -8,7 +8,6 @@
 		</Df_Qiwi>
 	</modules>
 	<global>
-		<blocks><df_qiwi><class>Df_Qiwi_Block</class></df_qiwi></blocks>
 		<helpers><df_qiwi><class>Df_Qiwi_Helper</class></df_qiwi></helpers>
 		<request>
 			<direct_front_name>
@@ -51,7 +50,7 @@ https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/
 		-->
 		<payment>
 			<df-qiwi>
-				<model>Df_Qiwi_Method</model>
+				<model>Df\Qiwi\Method</model>
 			</df-qiwi>
 		</payment>
 	</default>

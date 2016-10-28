@@ -72,7 +72,7 @@ function df_quote() {return df_session_checkout()->getQuote();}
  * ибо @uses Mage_Sales_Model_Quote::_getAddressByType() использует foreach
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address::getAddress()
  * @used-by Df_Customer_Model_Form::getAddress()
- * @used-by Df_Qiwi_Block_Form::getBillingAddressPhone()
+ * @used-by \Df\Qiwi\Block\Form::getBillingAddressPhone()
  * @return Df_Sales_Model_Quote_Address
  */
 function df_quote_address_billing() {return df_quote()->getBillingAddress();}
@@ -84,7 +84,7 @@ function df_quote_address_billing() {return df_quote()->getBillingAddress();}
  * ибо @uses Mage_Sales_Model_Quote::_getAddressByType() использует foreach
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address::getAddress()
  * @used-by Df_Customer_Model_Form::getAddress()
- * @used-by Df_Qiwi_Block_Form::getShippingAddressPhone()
+ * @used-by \Df\Qiwi\Block\Form::getShippingAddressPhone()
  * @used-by df/checkout/ergonomic/dashboard.phtml
  * @return Df_Sales_Model_Quote_Address
  */

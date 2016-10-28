@@ -147,7 +147,7 @@ function dfo($entity, $key, $default = null) {
 		/**
 		 * Например, @see stdClass.
 		 * Используется, например, методом
-		 * @used-by Df_Qiwi_Action_Confirm::updateBill()
+		 * @used-by \Df\Qiwi\Action\Confirm::updateBill()
 		 */
 		$result = isset($entity->{$key}) ? $entity->{$key} : df_call_if($default, $key);
 	}

@@ -1,7 +1,8 @@
 <?php
+namespace Df\Qiwi\Block;
 use Df\Core\Format\MobilePhoneNumber as PhoneNumber;
-/** @method Df_Qiwi_Method method() */
-class Df_Qiwi_Block_Form extends \Df\Payment\Block\Form {
+/** @method \Df\Qiwi\Method method() */
+class Form extends \Df\Payment\Block\Form {
 	/**
 	 * @override
 	 * @see Df_Core_Block_Template::defaultTemplate()

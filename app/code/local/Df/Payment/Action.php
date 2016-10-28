@@ -19,7 +19,7 @@ abstract class Action extends \Df_Core_Model_Action {
 	 * @used-by \Df\OnPay\Action\Confirm::alternativeProcessWithoutInvoicing()
 	 * @used-by \Df\Payment\Action::_process()
 	 * @used-by \Df\Payment\Action\Confirm::logExceptionToOrderHistory()
-	 * @used-by Df_Qiwi_Action_Confirm::alternativeProcessWithoutInvoicing()
+	 * @used-by \Df\Qiwi\Action\Confirm::alternativeProcessWithoutInvoicing()
 	 * @param string $comment
 	 * @param bool $isCustomerNotified [optional]
 	 * @return void

@@ -143,13 +143,13 @@ abstract class Confirm extends \Df\Payment\Action {
 	protected function rkExternalId() {return $this->const_('payment_service/payment/id');}
 
 	/**
-	 * @used-by Df_Qiwi_Action_Confirm::updateBill()
+	 * @used-by \Df\Qiwi\Action\Confirm::updateBill()
 	 * @return string
 	 */
 	protected function rkState() {return $this->const_('payment_service/payment/state');}
 
 	/**
-	 * @used-by Df_Qiwi_Action_Confirm::updateBill()
+	 * @used-by \Df\Qiwi\Action\Confirm::updateBill()
 	 * @return string
 	 */
 	protected function rkShopId() {return $this->const_('payment_service/shop/id');}
