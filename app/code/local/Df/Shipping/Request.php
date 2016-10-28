@@ -96,7 +96,7 @@ class Request extends \Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_Exline_Locator::_map()
+	 * @used-by \Df\Exline\Locator::_map()
 	 * @return Response
 	 */
 	public function response() {return dfc($this, function() {return

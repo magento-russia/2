@@ -68,7 +68,7 @@ abstract class Collector extends Bridge {
 
 	/**
 	 * @used-by _result()
-	 * @used-by Df_Exline_Collector::_collect()
+	 * @used-by \Df\Exline\Collector::_collect()
 	 * @param \Closure $f
 	 * @return void
 	 */
@@ -119,7 +119,7 @@ abstract class Collector extends Bridge {
 	}
 
 	/**
-	 * @used-by Df_NovaPoshta_Collector::_collect()
+	 * @used-by \Df\NovaPoshta\Collector::_collect()
 	 * @param string|string[] $allowedIso2
 	 * @return void
 	 * @throws \Df\Shipping\Exception
@@ -132,7 +132,7 @@ abstract class Collector extends Bridge {
 	}
 
 	/**
-	 * @used-by Df_InTime_Collector::_collect()
+	 * @used-by \Df\InTime\Collector::_collect()
 	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
@@ -172,7 +172,7 @@ abstract class Collector extends Bridge {
 
 	/**
 	 * @used-by collect()
-	 * @used-by Df_Exline_Collector::locationOrigId()
+	 * @used-by \Df\Exline\Collector::locationOrigId()
 	 * @return string|null
 	 */
 	protected function countryOrigIso2() {return $this->rr()->getOriginCountryId();}
@@ -210,7 +210,7 @@ abstract class Collector extends Bridge {
 	protected function countryDestUc() {return mb_strtoupper($this->countryDest());}
 
 	/**
-	 * @used-by Df_NovaPoshta_Collector::responseRate()
+	 * @used-by \Df\NovaPoshta\Collector::responseRate()
 	 * @return float
 	 */
 	protected function declaredValue() {return dfc($this, function() {return
@@ -264,13 +264,13 @@ abstract class Collector extends Bridge {
 	protected function rateDefaultCode() {return 'standard';}
 
 	/**
-	 * @used-by Df_NovaPoshta_Collector::responseRate()
+	 * @used-by \Df\NovaPoshta\Collector::responseRate()
 	 * @return \Df\Shipping\Rate\Request
 	 */
 	protected function rr() {return $this[self::$P__RATE_REQUEST];}
 
 	/**
-	 * @used-by Df_InTime_Collector::_collect()
+	 * @used-by \Df\InTime\Collector::_collect()
 	 * @used-by checkStreetDest()
 	 * @return string
 	 */
@@ -288,13 +288,13 @@ abstract class Collector extends Bridge {
 	protected function weightKg() {return $this->rr()->getWeightInKg();}
 
 	/**
-	 * @used-by Df_Exline_Collector::_collect()
+	 * @used-by \Df\Exline\Collector::_collect()
 	 * @return string
 	 */
 	protected function weightKgS() {return df_f2($this->weightKg());}
 
 	/**
-	 * @used-by Df_NovaPoshta_Collector::responseRate()
+	 * @used-by \Df\NovaPoshta\Collector::responseRate()
 	 * @return bool
 	 */
 	protected function приезжатьНаСкладМагазина() {return

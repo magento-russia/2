@@ -458,7 +458,7 @@ function df_key_uc(array $array) {return dfa_change_key_case($array, CASE_UPPER)
 function df_last(array $array) {return !$array ? null : end($array);}
 
 /**
- * @used-by Df_InTime_Api::call()
+ * @used-by \Df\InTime\Api::call()
  * http://stackoverflow.com/a/18576902
  * @param mixed $value
  * @return array

@@ -11,17 +11,17 @@ class Collector extends \Df\Shipping\Collector\Ua {
 	protected function _collect() {
 		$this->checkCountryDestIs('UA');
 		$this->checkStreetDest();
-		//rm_log(Df_InTime_Api::s()->списокСправочников());
-		//rm_log(Df_InTime_Api::s()->подразделения());
-		//rm_log(Df_InTime_Api::s()->населённыеПункты());
-		//rm_log(Df_InTime_Api::s()->типыОплаты());
-		//rm_log(Df_InTime_Api::s()->типыОплатыПостСервис());
-		//rm_log(Df_InTime_Api::s()->видыПеревозок());
-		//rm_log(Df_InTime_Api::s()->упаковки());
-		//rm_log(Df_InTime_Api::s()->дополнительныеУслуги());
-		//rm_log(Df_InTime_Api::s()->грузы());
-		//rm_log(Df_InTime_Api::s()->грузыЕдиничные());
-		//rm_log(Df_InTime_Api::s()->условияДоставки());
+		//rm_log(\Df\InTime\Api::s()->списокСправочников());
+		//rm_log(\Df\InTime\Api::s()->подразделения());
+		//rm_log(\Df\InTime\Api::s()->населённыеПункты());
+		//rm_log(\Df\InTime\Api::s()->типыОплаты());
+		//rm_log(\Df\InTime\Api::s()->типыОплатыПостСервис());
+		//rm_log(\Df\InTime\Api::s()->видыПеревозок());
+		//rm_log(\Df\InTime\Api::s()->упаковки());
+		//rm_log(\Df\InTime\Api::s()->дополнительныеУслуги());
+		//rm_log(\Df\InTime\Api::s()->грузы());
+		//rm_log(\Df\InTime\Api::s()->грузыЕдиничные());
+		//rm_log(\Df\InTime\Api::s()->условияДоставки());
 		/** @var array(string => mixed) $terms */
 		$terms = Api::s()->условияДоставки(array(
 			'Sender' => array(

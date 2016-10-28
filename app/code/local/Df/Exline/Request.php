@@ -10,8 +10,8 @@ class Request extends \Df\Shipping\Request {
 	protected function host() {return 'calculator.exline.kz';}
 
 	/**
-	 * @used-by Df_Exline_Locator::map()
-	 * @used-by Df_Exline_Collector::json()
+	 * @used-by \Df\Exline\Locator::map()
+	 * @used-by \Df\Exline\Collector::json()
 	 * @param string $pathSuffix
 	 * @param array(string => string) $queryParams [optional]
 	 * @return self

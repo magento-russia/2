@@ -34,24 +34,14 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	 * Широко используется модулем «1C:Управление торговлей».
 	 * В качестве $class можно передавать как полный класс дочернего обработчика,
 	 * так и суффикс класса.
-	 * Например, если в качестве $class передан суффикс «Catalog_Deactivate»,
-	 * а класс $this —  «Df_1C_Cml2_Action_Front»,
-	 * то класс дочернего обработчика будет «Df_1C_Cml2_Action_Catalog_Deactivate»
-	 * @param string $class
+	 * Например, если в качестве $class передан суффикс «Catalog\Deactivate»,
+	 * а класс $this —  «Df\1C\Cml2\Action\Front»,
+	 * то класс дочернего обработчика будет «Df\1C\Cml2\Action\Catalog\Deactivate»
+	 * @param string $c
 	 * @return void
 	 */
-	protected function delegate($class) {
-		if (!df_starts_with($class, df_module_name($this))) {
-			/**
-			 * 2015-08-04
-			 * array('Df', '1C', 'Cml2', 'Action')
-			 * @var string[] $head
-			 */
-			$head = df_head(df_explode_class($this));
-			$head[]= $class;
-			$class = df_cc_class_($head);
-		}
-		self::pc($class, $this->controller());
+	protected function delegate($c) {
+		self::pc(df_class_my($c) ? $c : df_class_replace_last($this, $c), $this->controller());
 	}
 
 	/**

@@ -14,7 +14,7 @@ class Df_Adminhtml_Model_Translator_Controller extends Df_Core_Model {
 				$result = df_module_name($controllerClass);
 			}
 			else {
-				$result = df_cc_class_($classNameParts[0], $classNameParts[2]);
+				$result = $classNameParts[0] . '_' . $classNameParts[2];
 				/**
 				 * Однако же, данного модуля может не существовать.
 				 * Например, для адреса http://localhost.com:656/index.php/admin/system_design/

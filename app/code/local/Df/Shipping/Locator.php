@@ -22,11 +22,11 @@ abstract class Locator extends \Df_Core_Model {
 	;}, func_get_args());}
 
 	/**
-	 * @used-by Df_Exline_Locator::findD()
-	 * @used-by Df_Exline_Locator::findO()
-	 * @used-by Df_InTime_Locator::find()
-	 * @used-by Df_NovaPoshta_Locator::findD()
-	 * @used-by Df_NovaPoshta_Locator::findO()
+	 * @used-by \Df\Exline\Locator::findD()
+	 * @used-by \Df\Exline\Locator::findO()
+	 * @used-by \Df\InTime\Locator::find()
+	 * @used-by \Df\NovaPoshta\Locator::findD()
+	 * @used-by \Df\NovaPoshta\Locator::findO()
 	 * @param string $type
 	 * @param string $name
 	 * @param bool $starts [optional]

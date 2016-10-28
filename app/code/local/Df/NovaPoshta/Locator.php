@@ -35,7 +35,7 @@ class Locator extends \Df\Shipping\Locator {
 			 * потому что иначе расчёт сроков доставки приводил к сбою,
 			 * когда в качестве параметра «recipientCity» было указано «Хмельник»
 			 * вместо «Хмельник (Винницкая обл.)».
-			 * @see Df_NovaPoshta_Collector::date()
+			 * @see \Df\NovaPoshta\Collector::date()
 			 */
 			$result[$nameNormalized] = array($value, $nameOriginal);
 		}
@@ -43,14 +43,14 @@ class Locator extends \Df\Shipping\Locator {
 	}
 
 	/**
-	 * @used-by Df_NovaPoshta_Collector::locationDestId()
+	 * @used-by \Df\NovaPoshta\Collector::locationDestId()
 	 * @param string $cityNameUc
 	 * @return string[]|null
 	 */
 	public static function findD($cityNameUc) {return self::_find(self::$D, $cityNameUc);}
 
 	/**
-	 * @used-by Df_NovaPoshta_Collector::locationOrigId()
+	 * @used-by \Df\NovaPoshta\Collector::locationOrigId()
 	 * @param string $cityNameUc
 	 * @return string[]|null
 	 */

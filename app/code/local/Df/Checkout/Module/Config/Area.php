@@ -115,7 +115,7 @@ abstract class Area extends \Df\Checkout\Module\Bridge {
 
 	/**
 	 * 2015-04-05
-	 * @used-by Df_InTime_Config_Area_Service::кодСкладаОтправителя()
+	 * @used-by \Df\InTime\Config\Area\Service::кодСкладаОтправителя()
 	 * @param string $key
 	 * @return int
 	 */
