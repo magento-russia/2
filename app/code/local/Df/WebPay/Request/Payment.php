@@ -1,9 +1,11 @@
 <?php
+namespace Df\WebPay\Request;
+use Df_Core_Model_Money as Money;
 /**
- * @method Df_WebPay_Config_Area_Service configS()
- * @method Df_WebPay_Method method()
+ * @method \Df\WebPay\Config\Area\Service configS()
+ * @method \Df\WebPay\Method method()
  */
-class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()
@@ -62,7 +64,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
 	 * http://3v4l.org/OipEQ
 	 * @param float|string $amountInOrderCurrency
-	 * @return Df_Core_Model_Money
+	 * @return Money
 	 */
 	private function convertAmountFromOrderCurrencyToServiceCurrency($amountInOrderCurrency) {
 		return $this->configS()->convertAmountFromOrderCurrencyToServiceCurrency(
@@ -70,7 +72,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		);
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getAmountDiscount() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
@@ -94,7 +96,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getAmountDiscountCorrected() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_money(
@@ -114,7 +116,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getAmountShipping() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->convertAmountFromOrderCurrencyToServiceCurrency(
@@ -124,7 +126,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getAmountTax() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->convertAmountFromOrderCurrencyToServiceCurrency(
@@ -134,7 +136,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getAmountTaxCorrected() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_money(
@@ -152,7 +154,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getCalculatedAmountSubtotal() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $resultAsInteger */
@@ -164,9 +166,9 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 			foreach ($tuple as $item) {
 				/** @var array $item */
 				df_assert_array($item);
-				/** @var Df_Core_Model_Money $price */
+				/** @var Money $price */
 				$price = dfa($item, 'price');
-				df_assert($price instanceof Df_Core_Model_Money);
+				df_assert($price instanceof Money);
 				/** @var int $qty */
 				$qty = dfa($item, 'qty');
 				df_assert_integer($qty);
@@ -177,7 +179,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getCalculatedAmountTotal() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_money(
@@ -193,7 +195,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getCalculatedAmountTotalCorrected() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_money(
@@ -209,10 +211,10 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money */
+	/** @return Money */
 	private function getAmountDelta() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Core_Model_Money $result */
+			/** @var Money $result */
 			$result = df_money(
 				$this->amount()->getAsInteger() - $this->getCalculatedAmountTotal()->getAsInteger()
 			);
@@ -239,7 +241,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Sales_Model_Resource_Order_Item_Collection */
+	/** @return \Mage_Sales_Model_Resource_Order_Item_Collection */
 	private function getOrderItems() {return $this->order()->getItemsCollection();}
 
 	/** @return string[] */
@@ -250,7 +252,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Core_Model_Money[] */
+	/** @return Money[] */
 	private function getOrderItemPrices() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
@@ -292,10 +294,10 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 	 * если wsb_total и посчитанное значения товаров не будут совпадать.
 	 * Покупателю будет отображена ошибка.»
 	 * Выявляем эту проблему на максимально ранней стадии.
-	 * @return Df_WebPay_Request_Payment
+	 * @return void
 	 */
 	private function verifyAmount() {
-		/** @var Df_Core_Model_Money $calculatedAmountTotalCorrected */
+		/** @var Money $calculatedAmountTotalCorrected */
 		$calculatedAmountTotalCorrected = df_money(
 				$this->getCalculatedAmountSubtotal()->getAsInteger()
 			+
@@ -305,7 +307,7 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 			-
 				$this->getAmountDiscountCorrected()->getAsInteger()
 		);
-		/** @var Df_Core_Model_Money $deltaCorrected */
+		/** @var Money $deltaCorrected */
 		$deltaCorrected = df_money(
 			$this->amount()->getAsInteger() - $this->getCalculatedAmountTotalCorrected()->getAsInteger()
 		);
@@ -321,7 +323,6 @@ class Df_WebPay_Request_Payment extends \Df\Payment\Request\Payment {
 				,$this->amount()->getAsInteger()
 			);
 		}
-		return $this;
 	}
 
 	/** @return int */

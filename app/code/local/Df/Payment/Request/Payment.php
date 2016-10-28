@@ -89,7 +89,7 @@ abstract class Payment extends \Df\Payment\Request {
 	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @used-by \Df\OnPay\Request\Payment::_params()
 	 * @used-by \Df\RbkMoney\Request\Payment::_params()
-	 * @used-by Df_WebPay_Request_Payment::_params()
+	 * @used-by \Df\WebPay\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function localeCode() {return $this->configS()->getLocaleCodeInServiceFormat();}
@@ -158,7 +158,7 @@ abstract class Payment extends \Df\Payment\Request {
 	 * @used-by \Df\Kkb\Request\Payment::_params()
 	 * @used-by \Df\LiqPay\Request\Payment::getParamsForXml()
 	 * @used-by \Df\WebMoney\Request\Payment::_params()
-	 * @used-by Df_WebPay_Request_Payment::_params()
+	 * @used-by \Df\WebPay\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function urlConfirm() {return dfc($this, function() {return

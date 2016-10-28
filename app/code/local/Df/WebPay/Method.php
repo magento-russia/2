@@ -1,2 +1,3 @@
 <?php
-class Df_WebPay_Method extends \Df\Payment\Method\WithRedirect {}
+namespace Df\WebPay;
+class Method extends \Df\Payment\Method\WithRedirect {}

@@ -1,5 +1,6 @@
 <?php
-class Df_WebPay_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\WebPay\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -13,7 +14,7 @@ class Df_WebPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Mage_Core_Exception
+	 * @throws \Mage_Core_Exception
 	 */
 	protected function checkPaymentAmount() {
 		if (
@@ -66,8 +67,8 @@ class Df_WebPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
-	 * @return Df_WebPay_Action_Confirm
+	 * @param \Exception $e
+	 * @return void
 	 */
 	protected function processException(Exception $e) {
 		parent::processException($e);
@@ -82,7 +83,6 @@ class Df_WebPay_Action_Confirm extends \Df\Payment\Action\Confirm {
 		 * https://mail.google.com/mail/u/0/?ui=2&ik=a7a1e9bc54&view=att&th=135800f28b66a0b2&attid=0.0&disp=inline&safe=1&zw
 		 */
 		$this->response()->setHttpResponseCode(500);
-		return $this;
 	}
 
 	/**

@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_WebPay_Action_Confirm */
+/** @uses \Df\WebPay\Action\Confirm */
 class Df_WebPay_ConfirmController extends \Df\Core\Controller {}

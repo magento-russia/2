@@ -39,7 +39,7 @@
 		-->
 		<payment>
 			<df-webpay>
-				<model>Df_WebPay_Method</model>
+				<model>Df\WebPay\Method</model>
 			</df-webpay>
 		</payment>
 	</default>
