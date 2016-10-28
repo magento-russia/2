@@ -1,5 +1,6 @@
 <?php
-class Df_RbkMoney_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\RbkMoney\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override

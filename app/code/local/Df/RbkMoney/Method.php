@@ -1,5 +1,6 @@
 <?php
-class Df_RbkMoney_Method extends \Df\Payment\Method\WithRedirect {
+namespace Df\RbkMoney;
+class Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @override
 	 * @return string

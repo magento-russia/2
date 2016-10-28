@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_RbkMoney_Action_Confirm */
+/** @uses \Df\RbkMoney\Action\Confirm */
 class Df_RbkMoney_ConfirmController extends \Df\Core\Controller {}

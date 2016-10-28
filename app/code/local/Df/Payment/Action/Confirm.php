@@ -391,7 +391,7 @@ abstract class Confirm extends \Df\Payment\Action {
 	/**
 	 * 2016-10-20
 	 * @used-by \Df\Moneta\Action\Confirm::signatureOwn()
-	 * @used-by Df_RbkMoney_Action_Confirm::signatureOwn()
+	 * @used-by \Df\RbkMoney\Action\Confirm::signatureOwn()
 	 * @param string $key
 	 * @param string|null $d [optional]
 	 * @return string|null

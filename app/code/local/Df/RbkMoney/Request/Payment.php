@@ -1,6 +1,7 @@
 <?php
-/** @method Df_RbkMoney_Method method() */
-class Df_RbkMoney_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\RbkMoney\Request;
+/** @method \Df\RbkMoney\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()

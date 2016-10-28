@@ -8,9 +8,7 @@
 		</Df_RbkMoney>
 	</modules>
 	<global>
-		<blocks><df_rbk_money><class>Df_RbkMoney_Block</class></df_rbk_money></blocks>
 		<helpers><df_rbk_money><class>Df_RbkMoney_Helper</class></df_rbk_money></helpers>
-		<models><df_rbk_money><class>Df_RbkMoney_Model</class></df_rbk_money></models>
 	</global>
 	<default>
 		<!--
@@ -39,7 +37,7 @@
 		-->
 		<payment>
 			<df-rbk-money>
-				<model>Df_RbkMoney_Method</model>
+				<model>Df\RbkMoney\Method</model>
 			</df-rbk-money>
 		</payment>
 	</default>

@@ -126,7 +126,7 @@ abstract class Request extends \Df_Core_Model {
 	 * @used-by \Df\PayOnline\Request\Payment::getSignature()
 	 * @used-by \Df\Psbank\Request\Payment::getParamsForSignature()
 	 * @used-by \Df\Qiwi\Request\Payment::_params()
-	 * @used-by Df_RbkMoney_Request_Payment::_params()
+	 * @used-by \Df\RbkMoney\Request\Payment::_params()
 	 * @used-by Df_Robokassa_Request_Payment::_params()
 	 * @used-by Df_Robokassa_Request_Payment::getSignature()
 	 * @used-by Df_Uniteller_Request_Payment::_params()

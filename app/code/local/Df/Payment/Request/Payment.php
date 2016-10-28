@@ -88,7 +88,7 @@ abstract class Payment extends \Df\Payment\Request {
 	/**
 	 * @used-by \Df\Assist\Request\Payment::_params()
 	 * @used-by \Df\OnPay\Request\Payment::_params()
-	 * @used-by Df_RbkMoney_Request_Payment::_params()
+	 * @used-by \Df\RbkMoney\Request\Payment::_params()
 	 * @used-by Df_WebPay_Request_Payment::_params()
 	 * @return string
 	 */
