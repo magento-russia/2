@@ -1,5 +1,6 @@
 <?php
-class Df_Psbank_Action_Confirm_Void extends Df_Psbank_Action_Confirm {
+namespace Df\Psbank\Action\Confirm;
+class Void extends \Df\Psbank\Action\Confirm {
 	/**
 	 * @override
 	 * @return string[]
@@ -20,7 +21,4 @@ class Df_Psbank_Action_Confirm_Void extends Df_Psbank_Action_Confirm {
 	 * @return bool
 	 */
 	protected function needInvoice() {return false;}
-
-	/** @used-by Df_Psbank_ConfirmController::getActionMap() */
-
 }

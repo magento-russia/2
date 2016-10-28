@@ -43,10 +43,10 @@ class Df_Psbank_ConfirmController extends Mage_Core_Controller_Front_Action {
 	private function getActionMap() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
-				0 => Df_Psbank_Action_Confirm_Authorize::class
-				,1 => Df_Psbank_Action_Confirm_Payment::class
-				,21 => Df_Psbank_Action_Confirm_Capture::class
-				,22 => Df_Psbank_Action_Confirm_Void::class
+				0 => \Df\Psbank\Action\Confirm\Authorize::class
+				,1 => \Df\Psbank\Action\Confirm\Payment::class
+				,21 => \Df\Psbank\Action\Confirm\Capture::class
+				,22 => \Df\Psbank\Action\Confirm\Void::class
 			);
 		}
 		return $this->{__METHOD__};

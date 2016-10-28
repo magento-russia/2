@@ -1,5 +1,6 @@
 <?php
-abstract class Df_Psbank_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\Psbank\Action;
+abstract class Confirm extends \Df\Payment\Action\Confirm {
 	/** @return string[] */
 	abstract protected function getParamsForSignature();
 
@@ -10,10 +11,10 @@ abstract class Df_Psbank_Action_Confirm extends \Df\Payment\Action\Confirm {
 	 */
 	protected function rkOII() {return 'ORDER';}
 	
-	/** @return Df_Psbank_Response */
+	/** @return \Df\Psbank\Response */
 	protected function getResponseAsObject() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Psbank_Response::i($this->params());
+			$this->{__METHOD__} = \Df\Psbank\Response::i($this->params());
 			$this->{__METHOD__}->postProcess($this->payment());
 		}
 		return $this->{__METHOD__};
@@ -37,7 +38,7 @@ abstract class Df_Psbank_Action_Confirm extends \Df\Payment\Action\Confirm {
 			 * чем запихнуть в signatureOwn() — не придумал.
 			 */
 			$this->getResponseAsObject();
-			$this->{__METHOD__} = Df_Psbank_Helper_Data::s()->generateSignature(
+			$this->{__METHOD__} = \Df_Psbank_Helper_Data::s()->generateSignature(
 				$this->params()
 				,$this->getParamsForSignature()
 				,$this->configS()->getRequestPassword()

@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Psbank_Request_Payment getRequestPayment() */
-class Df_Psbank_Method extends \Df\Payment\Method\WithRedirect {
+namespace Df\Psbank;
+/** @method \Df\Psbank\Request\Payment getRequestPayment() */
+class Method extends \Df\Payment\Method\WithRedirect {
 	/**
 	 * @see \Df\Payment\Method::canCapture()
 	 * @override
@@ -13,8 +14,8 @@ class Df_Psbank_Method extends \Df\Payment\Method\WithRedirect {
 	 * автоматизированное разблокирование (возврат покупателю)
 	 * ранее зарезервированных (но не снятых со счёта покупателя) средств
 	 * @override
-	 * @param Varien_Object $payment
+	 * @param \Varien_Object $payment
 	 * @return bool
 	 */
-	public function canVoid(Varien_Object $payment) {return true;}
+	public function canVoid(\Varien_Object $payment) {return true;}
 }

@@ -8,9 +8,7 @@
 		</Df_Psbank>
 	</modules>
 	<global>
-		<blocks><df_psbank><class>Df_Psbank_Block</class></df_psbank></blocks>
 		<helpers><df_psbank><class>Df_Psbank_Helper</class></df_psbank></helpers>
-		<models><df_psbank><class>Df_Psbank_Model</class></df_psbank></models>
 	</global>
 	<default>
 		<!--
@@ -57,7 +55,7 @@
 		-->
 		<payment>
 			<df-psbank>
-				<model>Df_Psbank_Method</model>
+				<model>Df\Psbank\Method</model>
 			</df-psbank>
 		</payment>
 	</default>

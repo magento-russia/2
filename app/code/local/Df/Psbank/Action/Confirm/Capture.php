@@ -1,5 +1,6 @@
 <?php
-class Df_Psbank_Action_Confirm_Capture extends Df_Psbank_Action_Confirm {
+namespace Df\Psbank\Action\Confirm;
+class Capture extends \Df\Psbank\Action\Confirm {
 	/**
 	 * @override
 	 * @return string[]

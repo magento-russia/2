@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Psbank_Config_Area_Service configS() */
-class Df_Psbank_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\Psbank\Request;
+/** @method \Df\Psbank\Config\Area\Service configS() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @return string
@@ -36,8 +37,8 @@ class Df_Psbank_Request_Payment extends \Df\Payment\Request\Payment {
 				, 'MERCH_NAME' => $this->configS()->getShopName()
 				, 'MERCHANT' => $this->shopId()
 				, 'EMAIL' => df_store_mail_address()
-				, 'TIMESTAMP' => Df_Psbank_Helper_Data::s()->getTimestamp()
-				, 'NONCE' => Df_Psbank_Helper_Data::s()->generateNonce()
+				, 'TIMESTAMP' => \Df_Psbank_Helper_Data::s()->getTimestamp()
+				, 'NONCE' => \Df_Psbank_Helper_Data::s()->generateNonce()
 				, 'BACKREF' => $this->urlCustomerReturn()
 			);
 		}
@@ -48,7 +49,7 @@ class Df_Psbank_Request_Payment extends \Df\Payment\Request\Payment {
 	private function getSignature() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Psbank_Helper_Data::s()->generateSignature(
+				\Df_Psbank_Helper_Data::s()->generateSignature(
 					$this->getParamsForSignature()
 					,array(
 						'AMOUNT', 'CURRENCY', 'ORDER', 'MERCH_NAME', 'MERCHANT', 'TERMINAL', 'EMAIL'

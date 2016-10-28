@@ -1,5 +1,6 @@
 <?php
-class Df_Psbank_Config_Area_Service extends \Df\Payment\Config\Area\Service {
+namespace Df\Psbank\Config\Area;
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @override
 	 * @return string

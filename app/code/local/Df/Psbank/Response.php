@@ -1,13 +1,16 @@
 <?php
-class Df_Psbank_Response extends \Df\Payment\Response {
+namespace Df\Psbank;
+use Df_Directory_Model_Currency as Currency;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+class Response extends \Df\Payment\Response {
 	/**
 	 * Назначение: сумма операции.
 	 * Присутствует во всех ответах.
 	 * Формат данных: числовой с десятичной точкой.
 	 * Длина данных: 1-11.
 	 * @used-by getReportAsArray()
-	 * @used-by Df_Psbank_Request_Secondary::getParamsForSignature()
-	 * @return Df_Core_Model_Money
+	 * @used-by \Df\Psbank\Request\Secondary::getParamsForSignature()
+	 * @return \Df_Core_Model_Money
 	 */
 	public function amount() {
 		if (!isset($this->{__METHOD__})) {
@@ -99,15 +102,15 @@ class Df_Psbank_Response extends \Df\Payment\Response {
 	 * Присутствует во всех ответах.
 	 * Формат данных: символьный.
 	 * Длина данных: 3.
-	 * @return Df_Directory_Model_Currency
+	 * @return Currency
 	 */
 	public function getCurrency() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $currencyCode */
 			$currencyCode = $this->cfg('CURRENCY');
 			// Платёжный шлюз Промсвязьбанка работает только с рублём
-			df_assert(Df_Directory_Model_Currency::RUB === $currencyCode);
-			$this->{__METHOD__} = Df_Directory_Model_Currency::ld($currencyCode);
+			df_assert(Currency::RUB === $currencyCode);
+			$this->{__METHOD__} = Currency::ld($currencyCode);
 		}
 		return $this->{__METHOD__};
 	}
@@ -151,7 +154,7 @@ class Df_Psbank_Response extends \Df\Payment\Response {
 	 * Присутствует во всех ответах.
 	 * Формат данных: символьный.
 	 * Длина данных: 1-32.
-	 * @used-by Df_Psbank_Request_Secondary::getPaymentExternalId()
+	 * @used-by \Df\Psbank\Request\Secondary::getPaymentExternalId()
 	 * @return string
 	 */
 	public function getOperationExternalId() {
@@ -313,7 +316,7 @@ class Df_Psbank_Response extends \Df\Payment\Response {
 
 	/**
 	 * Назначение: время операции.
-	 * @return Zend_Date
+	 * @return \Zend_Date
 	 */
 	public function getTime() {
 		if (!isset($this->{__METHOD__})) {
@@ -362,17 +365,17 @@ class Df_Psbank_Response extends \Df\Payment\Response {
 				$this->getRmTransactionType()
 				? $this->getRmTransactionType()
 				: dfa(array(
-					1 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT
-					,0 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
-					,21 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE
-					,22 => Mage_Sales_Model_Order_Payment_Transaction::TYPE_VOID
+					1 => T::TYPE_PAYMENT
+					,0 => T::TYPE_AUTH
+					,21 => T::TYPE_CAPTURE
+					,22 => T::TYPE_VOID
 				), $this->getTransactionCode());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @used-by Df_Psbank_Action_CustomerReturn::getRedirect()
+	 * @used-by \Df\Psbank\Action\CustomerReturn::getRedirect()
 	 * @override
 	 * @return bool
 	 */
@@ -382,9 +385,7 @@ class Df_Psbank_Response extends \Df\Payment\Response {
 	 * @override
 	 * @return bool
 	 */
-	public function isTransactionClosed() {
-		return Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH !== $this->getTransactionType();
-	}
+	public function isTransactionClosed() {return T::TYPE_AUTH !== $this->getTransactionType();}
 
 	/**
 	 * @override
@@ -438,7 +439,7 @@ class Df_Psbank_Response extends \Df\Payment\Response {
 	/**
 	 * @static
 	 * @param string|mixed[] $parameters [optional]
-	 * @return Df_Psbank_Response
+	 * @return \Df\Psbank\Response
 	 */
 	public static function i($parameters = array()) {
 		return new self(

@@ -55,7 +55,7 @@ abstract class Action extends \Df_Core_Model_Action {
 	}
 
 	/**
-	 * @used-by Df_Psbank_Action_CustomerReturn::getResponseByTransactionType()
+	 * @used-by \Df\Psbank\Action\CustomerReturn::getResponseByTransactionType()
 	 * @return \Mage_Payment_Model_Info
 	 */
 	protected function ii() {return $this->method()->getInfoInstance();}

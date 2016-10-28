@@ -1,9 +1,11 @@
 <?php
+namespace Df\Psbank\Request;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
 /**
- * @method Df_Psbank_Method method()
- * @method Df_Psbank_Config_Area_Service configS()
+ * @method \Df\Psbank\Method method()
+ * @method \Df\Psbank\Config\Area\Service configS()
  */
-abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transaction {
+abstract class Secondary extends \Df\Payment\Request\Transaction {
 	/** @return int */
 	abstract protected function getTransactionType();
 
@@ -19,19 +21,19 @@ abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transacti
 
 	/**
 	 * @override
-	 * @return Zend_Uri_Http
+	 * @return \Zend_Uri_Http
 	 */
 	public function getUri() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Uri::factory($this->configS()->getUrlPaymentPage());
+			$this->{__METHOD__} = \Zend_Uri::factory($this->configS()->getUrlPaymentPage());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/** @return void */
 	public function process() {
-		/** @var Zend_Http_Client $httpClient */
-		$httpClient = new Zend_Http_Client();
+		/** @var \Zend_Http_Client $httpClient */
+		$httpClient = new \Zend_Http_Client();
 		if (!in_array('tls', stream_get_transports())) {
 			df_error(
 				'Для работы модуля Промсвязьбанк'
@@ -64,7 +66,7 @@ abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transacti
 				, 'adapter' => 'Zend_Http_Client_Adapter_Socket'
 				, 'timeout' => 10
 			))
-			->setMethod(Zend_Http_Client::POST)
+			->setMethod(\Zend_Http_Client::POST)
 			->setParameterPost($this->params())
 		;
 		$httpClient->request();
@@ -85,12 +87,12 @@ abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transacti
 	 */
 	protected function getResponseAsArray() {df_abstract($this); return null;}
 	
-	/** @return Df_Psbank_Response */
+	/** @return \Df\Psbank\Response */
 	private function getResponsePayment() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Psbank_Response::i(
-				Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
-			)->loadFromPaymentInfo($this->ii());
+			$this->{__METHOD__} = \Df\Psbank\Response::i(T::TYPE_AUTH)
+				->loadFromPaymentInfo($this->ii())
+			;
 		}
 		return $this->{__METHOD__};
 	}
@@ -99,7 +101,7 @@ abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transacti
 	private function getSignature() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Psbank_Helper_Data::s()->generateSignature(
+				\Df_Psbank_Helper_Data::s()->generateSignature(
 					$this->paramsForSignature()
 					,array(
 						'ORDER', 'AMOUNT', 'CURRENCY', 'ORG_AMOUNT', 'RRN', 'INT_REF', 'TRTYPE'
@@ -121,12 +123,12 @@ abstract class Df_Psbank_Request_Secondary extends \Df\Payment\Request\Transacti
 				,'CURRENCY' => 'RUB'
 				,'EMAIL' => df_store_mail_address()
 				,'INT_REF' => $this->getPaymentExternalId()
-				,'NONCE' => Df_Psbank_Helper_Data::s()->generateNonce()
+				,'NONCE' => \Df_Psbank_Helper_Data::s()->generateNonce()
 				,'ORDER' => $this->order()->getIncrementId()
 				,'ORG_AMOUNT' => $this->getResponsePayment()->amount()->getAsString()
 				,'RRN' => $this->getResponsePayment()->getRetrievalReferenceNumber()
 				,'TERMINAL' => $this->configS()->getTerminalId()
-				,'TIMESTAMP' => Df_Psbank_Helper_Data::s()->getTimestamp()
+				,'TIMESTAMP' => \Df_Psbank_Helper_Data::s()->getTimestamp()
 				,'TRTYPE' => $this->getTransactionType()
 			);
 		}

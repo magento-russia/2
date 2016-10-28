@@ -1,5 +1,6 @@
 <?php
-class Df_Psbank_Request_Void extends Df_Psbank_Request_Secondary {
+namespace Df\Psbank\Request;
+class Void extends \Df\Psbank\Request\Secondary {
 	/**
 	 * @override
 	 * @return string

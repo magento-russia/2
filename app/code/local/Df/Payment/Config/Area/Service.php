@@ -453,7 +453,7 @@ class Service extends \Df\Payment\Config\Area {
 	/**
 	 * @var string
 	 * @used-by getRequestPassword()
-	 * @used-by Df_Psbank_Config_Area_Service::getRequestPassword()
+	 * @used-by \Df\Psbank\Config\Area\Service::getRequestPassword()
 	 */
 	protected static $V__REQUEST_PASSWORD = 'request_password';
 

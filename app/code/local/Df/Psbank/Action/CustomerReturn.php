@@ -1,6 +1,8 @@
 <?php
-/** @method Df_Psbank_Method method() */
-class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
+namespace Df\Psbank\Action;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+/** @method \Df\Psbank\Method method() */
+class CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
@@ -18,11 +20,11 @@ class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
-		Mage::logException($e);
+	protected function processException(\Exception $e) {
+		\Mage::logException($e);
 		$this->addErrorMessageToSession($e);
 		$this->redirectToCheckout();
 	}
@@ -44,7 +46,7 @@ class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 	}
 
 	/**
-	 * @param Exception|null $exception [optional]
+	 * @param \Exception|null $exception [optional]
 	 */
 	private function addErrorMessageToSession($exception = null) {
 		try {
@@ -60,7 +62,7 @@ class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 				'{сообщение от платёжного шлюза}' => $this->getResponsePayment()->getStatusMeaning()
 			)));
 		}
-		catch (Exception $newException) {
+		catch (\Exception $newException) {
 			if ($exception) {
 				df_notify_exception($newException);
 			}
@@ -80,21 +82,13 @@ class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	}
 	
-	/** @return Df_Psbank_Response */
+	/** @return \Df\Psbank\Response */
 	private function getResponsePayment() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Psbank_Response $result */
-			$result =
-				$this->getResponseByTransactionType(
-					Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH
-				)
-			;
+			/** @var \Df\Psbank\Response $result */
+			$result = $this->getResponseByTransactionType(T::TYPE_AUTH);
 			if (!df_check_string_not_empty($result->getData('RESULT'))) {
-				$result =
-					$this->getResponseByTransactionType(
-						Mage_Sales_Model_Order_Payment_Transaction::TYPE_PAYMENT
-					)
-				;
+				$result = $this->getResponseByTransactionType(T::TYPE_PAYMENT);
 			}
 			if (!df_check_string_not_empty($result->getData('RESULT'))) {
 				df_error(
@@ -110,9 +104,9 @@ class Df_Psbank_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @param string $transactionType
-	 * @return Df_Psbank_Response
+	 * @return \Df\Psbank\Response
 	 */
 	private function getResponseByTransactionType($transactionType) {return
-		Df_Psbank_Response::i($transactionType)->loadFromPaymentInfo($this->ii())
+		\Df\Psbank\Response::i($transactionType)->loadFromPaymentInfo($this->ii())
 	;}
 }
