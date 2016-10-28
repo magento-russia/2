@@ -1,6 +1,7 @@
 <?php
-/** @method Df_YandexMoney_Response_Authorize getResponse() */
-class Df_YandexMoney_Exception_ActionRequired extends \Df\Payment\Exception\Response {
+namespace Df\YandexMoney\Exception;
+/** @method \Df\YandexMoney\Response\Authorize getResponse() */
+class ActionRequired extends \Df\Payment\Exception\Response {
 	/** @return string */
 	public function getActionUrl() {
 		if (!isset($this->{__METHOD__})) {
@@ -16,7 +17,4 @@ class Df_YandexMoney_Exception_ActionRequired extends \Df\Payment\Exception\Resp
 	 * @return bool
 	 */
 	public function needFraming() {return false;}
-
-	/** @used-by Df_YandexMoney_Response_Authorize::getExceptionClass() */
-	
 }

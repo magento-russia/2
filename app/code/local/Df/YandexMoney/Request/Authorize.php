@@ -1,6 +1,8 @@
 <?php
-/** @method Df_YandexMoney_Config_Area_Service configS() */
-class Df_YandexMoney_Request_Authorize extends Df_YandexMoney_Request_Secondary {
+namespace Df\YandexMoney\Request;
+use Mage_Sales_Model_Order_Payment as OP;
+/** @method \Df\YandexMoney\Config\Area\Service configS() */
+class Authorize extends Secondary {
 	/**
 	 * @override
 	 * @return string
@@ -33,7 +35,7 @@ class Df_YandexMoney_Request_Authorize extends Df_YandexMoney_Request_Secondary 
 	/**
 	 * На самом деле, данный запрос является не вторичным, а первичным,
 	 * поэтому внешний идентификатор платежа у нас ещё отсутствует.
-	 * Мы унаследовали данный класс от @see Df_YandexMoney_Request_Secondary
+	 * Мы унаследовали данный класс от @see \Df\YandexMoney\Request\Secondary
 	 * и @see \Df\Payment\Request\Secondary просто ради удобства.
 	 * Видимо, семантика класса @see \Df\Payment\Request\Secondary
 	 * на данный момент не вполне соответствует его названию.
@@ -53,21 +55,21 @@ class Df_YandexMoney_Request_Authorize extends Df_YandexMoney_Request_Secondary 
 		return $this->configS()->isFeePayedByBuyer() ? 'amount_due' : 'amount';
 	}
 
-	/** @return Df_YandexMoney_Request_Payment */
+	/** @return Payment */
 	private function getRequestPayment() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_Request_Payment::i($this->order());
+			$this->{__METHOD__} = Payment::i($this->order());
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @used-by Df_YandexMoney_Action_CustomerReturn::getRequestAuthorize()
-	 * @param Mage_Sales_Model_Order_Payment $orderPayment
+	 * @used-by \Df\YandexMoney\Action\CustomerReturn::getRequestAuthorize()
+	 * @param OP $orderPayment
 	 * @param string $token
-	 * @return Df_YandexMoney_Request_Authorize
+	 * @return self
 	 */
-	public static function i(Mage_Sales_Model_Order_Payment $orderPayment, $token) {
+	public static function i(OP $orderPayment, $token) {
 		return new self(array(self::$P__PAYMENT => $orderPayment, self::P__TOKEN => $token));
 	}
 }

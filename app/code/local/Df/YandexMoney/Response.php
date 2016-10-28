@@ -1,9 +1,10 @@
 <?php
+namespace Df\YandexMoney;
 /**
  * http://api.yandex.ru/money/doc/dg/reference/request-payment.xml
  * http://api.yandex.ru/money/doc/dg/reference/process-payment.xml
  */
-abstract class Df_YandexMoney_Response extends \Df\Payment\Response {
+abstract class Response extends \Df\Payment\Response {
 	/** @return array(string => string) */
 	abstract protected function getErrorMap();
 
@@ -19,7 +20,7 @@ abstract class Df_YandexMoney_Response extends \Df\Payment\Response {
 	 * Присутствует при выполнении следующих условий:
 	 * 		метод выполнен успешно;
 	 * 		токен авторизации обладает правом account-info.»
-	 * @return Df_Core_Model_Money|null
+	 * @return \Df_Core_Model_Money|null
 	 */
 	public function getCustomerBalance() {
 		if (!isset($this->{__METHOD__})) {

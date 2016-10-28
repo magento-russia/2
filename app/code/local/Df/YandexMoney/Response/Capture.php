@@ -1,5 +1,7 @@
 <?php
-class Df_YandexMoney_Response_Capture extends Df_YandexMoney_Response {
+namespace Df\YandexMoney\Response;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+class Capture extends \Df\YandexMoney\Response {
 	/**
 	 * Параметры авторизации по технологии 3D-Secure в формате коллекции имя-значение.
 	 * Поле присутствует если для завершения транзакции с использованием банковской карты
@@ -43,7 +45,7 @@ class Df_YandexMoney_Response_Capture extends Df_YandexMoney_Response {
 	/**
 	 * «Сумма, полученная на счет получателем.
 	 * Присутствует при успешном переводе средств на счет другого пользователя Яндекс.Денег.»
-	 * @return Df_Core_Model_Money|null
+	 * @return \Df_Core_Model_Money|null
 	 */
 	public function getPaymentAmount() {
 		if (!isset($this->{__METHOD__})) {
@@ -107,9 +109,7 @@ class Df_YandexMoney_Response_Capture extends Df_YandexMoney_Response {
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {
-		return Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE;
-	}
+	public function getTransactionType() {return T::TYPE_CAPTURE;}
 
 	/**
 	 * «Для завершения авторизации платежа с использованием банковской карты

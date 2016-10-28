@@ -1,10 +1,11 @@
 <?php
-class Df_YandexMoney_OAuth extends Df_Yandex_OAuth {
+namespace Df\YandexMoney;
+class OAuth extends \Df_Yandex_OAuth {
 	/**
 	 * @override
 	 * @param array(string => string) $response
-	 * @return Df_YandexMarket_OAuth
-	 * @throws Exception
+	 * @return void
+	 * @throws \Exception
 	 */
 	protected function checkResponse(array $response) {
 		/** @var string $errorType */
@@ -27,7 +28,6 @@ class Df_YandexMoney_OAuth extends Df_Yandex_OAuth {
 			), $errorType, $errorType);
 			df_error('При получении токена Яндекс.Денег произошёл сбой: «%s».', $errorMessage);
 		}
-		return $this;
 	}
 
 	/**

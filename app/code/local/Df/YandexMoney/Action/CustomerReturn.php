@@ -1,9 +1,10 @@
 <?php
+namespace Df\YandexMoney\Action;
 /**
- * @method Df_YandexMoney_Method method()
- * @method Df_YandexMoney_Config_Area_Service configS()
+ * @method \Df\YandexMoney\Method method()
+ * @method \Df\YandexMoney\Config\Area\Service configS()
  */
-class Df_YandexMoney_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
+class CustomerReturn extends \Df\Payment\Action\Confirm {
 	/**
 	 * Использовать getConst нельзя из-за рекурсии.
 	 * @override
@@ -21,17 +22,17 @@ class Df_YandexMoney_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		/** @var bool $isPaymentException */
 		$isPaymentException = ($e instanceof \Df\Payment\Exception);
 		if ($isPaymentException) {
 			$this->logException($e);
 		}
 		else {
-			Mage::logException($e);
+			\Mage::logException($e);
 		}
 		$this->showExceptionOnCheckoutScreen($e);
 		$this->redirectToCheckout();
@@ -58,15 +59,15 @@ class Df_YandexMoney_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			 * @see \Df\Payment\Request\Secondary::getResponse()
 			 * опосредованно через postProcess()
 			 */
-			/** @var Mage_Sales_Model_Order_Invoice $invoice */
+			/** @var \Mage_Sales_Model_Order_Invoice $invoice */
 			$invoice = $this->order()->prepareInvoice();
 			$invoice->register();
 			$invoice->capture();
 			$this->saveInvoice($invoice);
 			$this->order()->setState(
-				Mage_Sales_Model_Order::STATE_PROCESSING
-				,Mage_Sales_Model_Order::STATE_PROCESSING
-				,df_sprintf($this->messageSuccess(), $invoice->getIncrementId())
+				\Mage_Sales_Model_Order::STATE_PROCESSING
+				,\Mage_Sales_Model_Order::STATE_PROCESSING
+				,df_sprintf($this->messageSuccess($invoice), $invoice->getIncrementId())
 				,true
 			);
 			$this->order()->save();
@@ -77,7 +78,7 @@ class Df_YandexMoney_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 			 * @see \Df\Payment\Action\Confirm::process()
 			 * здесь необходимость вызова
 			 * @uses \Df\Payment\Redirected::off() не вызывает сомнений,
-			 * потому что @see Df_YandexMoney_Action_CustomerReturn::process()
+			 * потому что @see \Df\YandexMoney\Action\CustomerReturn::process()
 			 * обрабатывает именно сессию покупателя, а не запрос платёжной системы
 			 */
 			\Df\Payment\Redirected::off();
@@ -85,36 +86,36 @@ class Df_YandexMoney_Action_CustomerReturn extends \Df\Payment\Action\Confirm {
 		$this->redirectToSuccess();
 	}
 
-	/** @return Df_YandexMoney_Request_Authorize */
+	/** @return \Df\YandexMoney\Request\Authorize */
 	private function getRequestAuthorize() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_Request_Authorize::i(
+			$this->{__METHOD__} = \Df\YandexMoney\Request\Authorize::i(
 				$this->payment(), $this->getToken()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_YandexMoney_Request_Capture */
+	/** @return \Df\YandexMoney\Request\Capture */
 	private function getRequestCapture() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_Request_Capture::i(
+			$this->{__METHOD__} = \Df\YandexMoney\Request\Capture::i(
 				$this->payment(), $this->getResponseAuthorize(), $this->getToken()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_YandexMoney_Response_Authorize */
+	/** @return \Df\YandexMoney\Response\Authorize */
 	private function getResponseAuthorize() {return $this->getRequestAuthorize()->getResponse();}
 
-	/** @return Df_YandexMoney_Response_Capture */
+	/** @return \Df\YandexMoney\Response\Capture */
 	private function getResponseCapture() {return $this->getRequestCapture()->getResponse();}
 
 	/** @return string */
 	private function getToken() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMoney_OAuth::i(
+			$this->{__METHOD__} = \Df\YandexMoney\OAuth::i(
 				$this->configS()->getAppId()
 				, $this->configS()->getAppPassword()
 				, $this->getTokenTemporary()

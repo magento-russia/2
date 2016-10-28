@@ -1,18 +1,20 @@
 <?php
-/** @method Df_YandexMoney_Config_Area_Service configS() */
-class Df_YandexMoney_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\YandexMoney\Request;
+use Df_Sales_Model_Order as O;
+/** @method \Df\YandexMoney\Config\Area\Service configS() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * 2015-03-09
 	 * Переопределяем метод с целью сделать его публичным конкретно для данного класса.
 	 * @override
-	 * @used-by Df_YandexMoney_Request_Authorize::getParamsUnique()
+	 * @used-by \Df\YandexMoney\Request\Authorize::getParamsUnique()
 	 * @see \Df\Payment\Request\Payment::description()
 	 * @return string
 	 */
 	public function description() {return parent::description();}
 
 	/**
-	 * @used-by Df_YandexMoney_Request_Authorize::getParamsUnique()
+	 * @used-by \Df\YandexMoney\Request\Authorize::getParamsUnique()
 	 * @return string
 	 */
 	public function descriptionForShop() {
@@ -31,7 +33,7 @@ class Df_YandexMoney_Request_Payment extends \Df\Payment\Request\Payment {
 
 	/**
 	 * Метод публичен, потому что его иногда использует сторонний класс:
-	 * @see Df_YandexMoney_Request_Authorize::getRequestParams()
+	 * @see \Df\YandexMoney\Request\Authorize::getRequestParams()
 	 * @return string
 	 */
 	public function getTransactionTag() {
@@ -101,13 +103,13 @@ class Df_YandexMoney_Request_Payment extends \Df\Payment\Request\Payment {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ORDER, Df_Sales_Model_Order::class);
+		$this->_prop(self::$P__ORDER, O::class);
 	}
 
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::order()
-	 * @return Df_Sales_Model_Order
+	 * @return O
 	 */
 	protected function order() {return $this[self::$P__ORDER];}
 
@@ -116,10 +118,8 @@ class Df_YandexMoney_Request_Payment extends \Df\Payment\Request\Payment {
 
 	/**
 	 * @static
-	 * @param Df_Sales_Model_Order $order
-	 * @return Df_YandexMoney_Request_Payment
+	 * @param O $order
+	 * @return self
 	 */
-	public static function i(Df_Sales_Model_Order $order) {
-		return new self(array(self::$P__ORDER => $order));
-	}
+	public static function i(O $order) {return new self(array(self::$P__ORDER => $order));}
 }

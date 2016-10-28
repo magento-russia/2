@@ -1,5 +1,7 @@
 <?php
-class Df_YandexMoney_Response_Authorize extends Df_YandexMoney_Response {
+namespace Df\YandexMoney\Response;
+use Mage_Sales_Model_Order_Payment_Transaction as T;
+class Authorize extends \Df\YandexMoney\Response {
 	/**
 	 * «Адрес на который необходимо отправить пользователя для совершения необходимых действий
 	 * в случае ошибки ext_action_required.»
@@ -106,7 +108,7 @@ class Df_YandexMoney_Response_Authorize extends Df_YandexMoney_Response {
 	 * @override
 	 * @return string
 	 */
-	public function getTransactionType() {return Mage_Sales_Model_Order_Payment_Transaction::TYPE_AUTH;}
+	public function getTransactionType() {return T::TYPE_AUTH;}
 
 	/**
 	 * @override
@@ -186,7 +188,7 @@ class Df_YandexMoney_Response_Authorize extends Df_YandexMoney_Response {
 	protected function getExceptionClass() {
 		return
 			$this->isErrorCode_ActionRequired()
-			? Df_YandexMoney_Exception_ActionRequired::class
+			? \Df\YandexMoney\Exception\ActionRequired::class
 			: parent::getExceptionClass()
 		;
 	}
@@ -194,6 +196,6 @@ class Df_YandexMoney_Response_Authorize extends Df_YandexMoney_Response {
 	/** @return bool */
 	public function isErrorCode_ActionRequired() {return 'ext_action_required' === $this->getErrorCode();}
 
-	/** @used-by Df_YandexMoney_Request_Capture::_construct() */
+	/** @used-by \Df\YandexMoney\Request\Capture::_construct() */
 	
 }

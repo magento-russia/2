@@ -4,7 +4,7 @@ use Df_Sales_Model_Order as O;
 abstract class WithRedirect extends \Df\Payment\Method {
 	/**
 	 * @used-by \Df\Payment\Request\Payment::urlCustomerReturn()
-	 * @used-by Df_YandexMoney_Action_CustomerReturn::getToken()
+	 * @used-by \Df\YandexMoney\Action\CustomerReturn::getToken()
 	 * @param O $order
 	 * @return string
 	 */

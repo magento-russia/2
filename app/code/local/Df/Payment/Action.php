@@ -117,7 +117,7 @@ abstract class Action extends \Df_Core_Model_Action {
 	 * @used-by \Df\Avangard\Action\CustomerReturn::_process()
 	 * @used-by \Df\IPay\Action\Confirm::_process()
 	 * @used-by \Df\Payment\Action\Confirm::_process()
-	 * @used-by Df_YandexMoney_Action_CustomerReturn::_process()
+	 * @used-by \Df\YandexMoney\Action\CustomerReturn::_process()
 	 * @param Invoice $invoice
 	 * @return void
 	 */

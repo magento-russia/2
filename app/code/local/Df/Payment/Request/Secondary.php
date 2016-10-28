@@ -104,8 +104,8 @@ abstract class Secondary extends \Df\Payment\Request {
 	 * @used-by getPayment()
 	 * @used-by ic()
 	 * @used-by \Df\Payment\Request\Transaction::doTransaction()
-	 * @used-by Df_YandexMoney_Request_Authorize::i()
-	 * @used-by Df_YandexMoney_Request_Capture::i()
+	 * @used-by \Df\YandexMoney\Request\Authorize::i()
+	 * @used-by \Df\YandexMoney\Request\Capture::i()
 	 * @var string
 	 */
 	protected static $P__PAYMENT = 'payment';

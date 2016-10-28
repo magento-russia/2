@@ -3,7 +3,7 @@ abstract class Df_Yandex_OAuth extends Df_Core_Model {
 	/**
 	 * @abstract
 	 * @param array(string => string) $response
-	 * @return Df_Yandex_OAuth
+	 * @return void
 	 * @throws Exception
 	 */
 	abstract protected function checkResponse(array $response);

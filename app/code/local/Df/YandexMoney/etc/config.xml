@@ -53,7 +53,7 @@
 		-->
 		<payment>
 			<df-yandex-money>
-				<model>Df_YandexMoney_Method</model>
+				<model>Df\YandexMoney\Method</model>
 			</df-yandex-money>
 		</payment>
 	</default>

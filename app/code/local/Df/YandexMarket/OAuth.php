@@ -3,7 +3,7 @@ class Df_YandexMarket_OAuth extends Df_Yandex_OAuth {
 	/**
 	 * @override
 	 * @param array(string => string) $response
-	 * @return Df_YandexMarket_OAuth
+	 * @return void
 	 * @throws Exception
 	 */
 	protected function checkResponse(array $response) {
@@ -17,7 +17,6 @@ class Df_YandexMarket_OAuth extends Df_Yandex_OAuth {
 				,$errorMessage
 			);
 		}
-		return $this;
 	}
 
 	/**

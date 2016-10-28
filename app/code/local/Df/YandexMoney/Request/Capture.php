@@ -1,6 +1,8 @@
 <?php
-/** @method Df_YandexMoney_Config_Area_Service configS() */
-class Df_YandexMoney_Request_Capture extends Df_YandexMoney_Request_Secondary {
+namespace Df\YandexMoney\Request;
+use Mage_Sales_Model_Order_Payment as OP;
+/** @method \Df\YandexMoney\Config\Area\Service configS() */
+class Capture extends Secondary {
 	/**
 	 * @override
 	 * @return string
@@ -34,7 +36,7 @@ class Df_YandexMoney_Request_Capture extends Df_YandexMoney_Request_Secondary {
 	 */
 	protected function getRequestType() {return 'process-payment';}
 
-	/** @return Df_YandexMoney_Response_Authorize */
+	/** @return \Df\YandexMoney\Response\Authorize */
 	private function getResponseAuthorize() {return $this->cfg(self::P__RESPONSE_AUTHORIZE);}
 
 	/**
@@ -43,19 +45,19 @@ class Df_YandexMoney_Request_Capture extends Df_YandexMoney_Request_Secondary {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__RESPONSE_AUTHORIZE, Df_YandexMoney_Response_Authorize::class);
+		$this->_prop(self::P__RESPONSE_AUTHORIZE, \Df\YandexMoney\Response\Authorize::class);
 	}
 	const P__RESPONSE_AUTHORIZE = 'response_authorize';
 	/**
-	 * @used-by Df_YandexMoney_Action_CustomerReturn::getRequestCapture()
-	 * @param Mage_Sales_Model_Order_Payment $orderPayment
-	 * @param Df_YandexMoney_Response_Authorize $responseAuthorize
+	 * @used-by \Df\YandexMoney\Action\CustomerReturn::getRequestCapture()
+	 * @param OP $orderPayment
+	 * @param \Df\YandexMoney\Response\Authorize $responseAuthorize
 	 * @param string $token
-	 * @return Df_YandexMoney_Request_Capture
+	 * @return self
 	 */
 	public static function i(
-		Mage_Sales_Model_Order_Payment $orderPayment
-		, Df_YandexMoney_Response_Authorize $responseAuthorize
+		OP $orderPayment
+		, \Df\YandexMoney\Response\Authorize $responseAuthorize
 		, $token
 	) {
 		return new self(array(

@@ -1,5 +1,6 @@
 <?php
-abstract class Df_YandexMoney_Request_Secondary extends \Df\Payment\Request\Secondary {
+namespace Df\YandexMoney\Request;
+abstract class Secondary extends \Df\Payment\Request\Secondary {
 	/** @return array(string => string) */
 	abstract protected function getParamsUnique();
 
@@ -8,12 +9,12 @@ abstract class Df_YandexMoney_Request_Secondary extends \Df\Payment\Request\Seco
 
 	/**
 	 * @override
-	 * @return Zend_Uri_Http
+	 * @return \Zend_Uri_Http
 	 */
 	public function getUri() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Zend_Uri::factory('https://money.yandex.ru/api/' . $this->getRequestType())
+				\Zend_Uri::factory('https://money.yandex.ru/api/' . $this->getRequestType())
 			;
 		}
 		return $this->{__METHOD__};
@@ -40,15 +41,15 @@ abstract class Df_YandexMoney_Request_Secondary extends \Df\Payment\Request\Seco
 	 */
 	protected function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Json::decode($this->getHttpClient()->request()->getBody());
+			$this->{__METHOD__} = \Zend_Json::decode($this->getHttpClient()->request()->getBody());
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Zend_Http_Client */
+	/** @return \Zend_Http_Client */
 	private function getHttpClient() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = new Zend_Http_Client();
+			$this->{__METHOD__} = new \Zend_Http_Client();
 			$this->{__METHOD__}
 				->setHeaders(array(
 					'Accept' => 'application/json'
@@ -58,7 +59,7 @@ abstract class Df_YandexMoney_Request_Secondary extends \Df\Payment\Request\Seco
 				))
 				->setUri($this->getUri()->getUri())
 				->setConfig(array('timeout' => 10))
-				->setMethod(Zend_Http_Client::POST)
+				->setMethod(\Zend_Http_Client::POST)
 				->setParameterPost($this->params())
 			;
 		}

@@ -402,7 +402,7 @@ abstract class Confirm extends \Df\Payment\Action {
 	 * @used-by \Df\Alfabank\Action\CustomerReturn::processException()
 	 * @used-by \Df\Avangard\Action\CustomerReturn::processException()
 	 * @used-by \Df\Psbank\Action\CustomerReturn::processException()
-	 * @used-by Df_YandexMoney_Action_CustomerReturn::processException()
+	 * @used-by \Df\YandexMoney\Action\CustomerReturn::processException()
 	 * @return void
 	 */
 	protected function redirectToCheckout() {$this->redirect(RM_URL_CHECKOUT);}

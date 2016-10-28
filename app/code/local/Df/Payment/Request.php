@@ -174,7 +174,7 @@ abstract class Request extends \Df_Core_Model {
 	protected function shopId() {return $this->configS()->getShopId();}
 
 	/**
-	 * @used-by Df_YandexMoney_Request_Payment::descriptionParams()
+	 * @used-by \Df\YandexMoney\Request\Payment::descriptionParams()
 	 * @return \Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_store($this->method()->getStore());}
