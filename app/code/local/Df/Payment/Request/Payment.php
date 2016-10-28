@@ -17,7 +17,7 @@ abstract class Payment extends \Df\Payment\Request {
 	public function city() {return $this->address()->getCity();}
 
 	/**
-	 * @used-by Df_Uniteller_Request_Payment::_params()
+	 * @used-by \Df\Uniteller\Request\Payment::_params()
 	 * @return string
 	 */
 	protected function countryName() {return $this->address()->getCountryModel()->getName();}

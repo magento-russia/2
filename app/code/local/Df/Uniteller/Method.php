@@ -1,2 +1,3 @@
 <?php
-class Df_Uniteller_Method extends \Df\Payment\Method\WithRedirect {}
+namespace Df\Uniteller;
+class Method extends \Df\Payment\Method\WithRedirect {}

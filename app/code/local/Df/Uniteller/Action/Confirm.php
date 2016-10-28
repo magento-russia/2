@@ -1,5 +1,6 @@
 <?php
-class Df_Uniteller_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\Uniteller\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void

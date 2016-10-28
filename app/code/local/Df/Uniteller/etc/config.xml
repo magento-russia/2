@@ -8,9 +8,7 @@
 		</Df_Uniteller>
 	</modules>
 	<global>
-		<blocks><df_uniteller><class>Df_Uniteller_Block</class></df_uniteller></blocks>
 		<helpers><df_uniteller><class>Df_Uniteller_Helper</class></df_uniteller></helpers>
-		<models><df_uniteller><class>Df_Uniteller_Model</class></df_uniteller></models>
 	</global>
 	<default>
 		<!--
@@ -38,7 +36,7 @@
 		-->
 		<payment>
 			<df-uniteller>
-				<model>Df_Uniteller_Method</model>
+				<model>Df\Uniteller\Method</model>
 			</df-uniteller>
 		</payment>
 	</default>

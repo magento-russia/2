@@ -1,6 +1,7 @@
 <?php
-/** @method Df_Uniteller_Method method() */
-class Df_Uniteller_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\Uniteller\Request;
+/** @method \Df\Uniteller\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()

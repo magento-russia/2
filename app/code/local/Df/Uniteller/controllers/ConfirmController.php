@@ -1,3 +1,3 @@
 <?php
-/** @uses Df_Uniteller_Action_Confirm */
+/** @uses \Df\Uniteller\Action\Confirm */
 class Df_Uniteller_ConfirmController extends \Df\Core\Controller {}
