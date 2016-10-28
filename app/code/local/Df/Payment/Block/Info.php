@@ -155,8 +155,8 @@ class Info extends \Df_Core_Block_Template_NoCache {
 	protected function defaultTemplate() {return 'df/payment/info.phtml';}
 
 	/**
-	 * @used-by Df_Pd4_Block_Info::capableLinkToOrder()
-	 * @used-by Df_Pd4_Block_Info::getLinkBlock()
+	 * @used-by \Df\Pd4\Block\Info::capableLinkToOrder()
+	 * @used-by \Df\Pd4\Block\Info::getLinkBlock()
 	 * @return \Df_Sales_Model_Order|null
 	 */
 	protected function order() {

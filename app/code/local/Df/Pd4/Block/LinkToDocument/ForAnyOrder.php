@@ -1,11 +1,12 @@
 <?php
-class Df_Pd4_Block_LinkToDocument_ForAnyOrder extends Df_Pd4_Block_LinkToDocument {
+namespace Df\Pd4\Block\LinkToDocument;
+class ForAnyOrder extends \Df\Pd4\Block\LinkToDocument {
 	/**
 	 * @override
-	 * @see Df_Pd4_Block_LinkToDocument::order()
-	 * @used-by Df_Pd4_Block_LinkToDocument::getPaymentDocumentUrl()
-	 * @used-by Df_Pd4_Block_LinkToDocument::needToShow()
-	 * @return Df_Sales_Model_Order
+	 * @see \Df\Pd4\Block\LinkToDocument::order()
+	 * @used-by \Df\Pd4\Block\LinkToDocument::getPaymentDocumentUrl()
+	 * @used-by \Df\Pd4\Block\LinkToDocument::needToShow()
+	 * @return \Df_Sales_Model_Order
 	 */
 	public function order() {return $this[self::$P__ORDER];}
 
@@ -21,11 +22,11 @@ class Df_Pd4_Block_LinkToDocument_ForAnyOrder extends Df_Pd4_Block_LinkToDocumen
 	private static $P__ORDER = 'order';
 
 	/**
-	 * @used-by Df_Pd4_Block_Info::getLinkToDocumentAsHtml()
-	 * @param Df_Sales_Model_Order $order
+	 * @used-by \Df\Pd4\Block\Info::getLinkToDocumentAsHtml()
+	 * @param \Df_Sales_Model_Order $order
 	 * @return string
 	 */
-	public static function r(Df_Sales_Model_Order $order) {
+	public static function r(\Df_Sales_Model_Order $order) {
 		return df_render(new self(array(self::$P__ORDER => $order)));
 	}
 }

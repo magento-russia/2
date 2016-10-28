@@ -235,7 +235,7 @@ abstract class Method
 	public function config() {return \Df\Checkout\Module\Config\Facade::s($this);}
 
 	/**
-	 * @used-by Df_Pd4_Block_Document_Rows::configA()
+	 * @used-by \Df\Pd4\Block\Document\Rows::configA()
 	 * @return \Df\Payment\Config\Area\Admin
 	 */
 	public function configA() {return $this->config()->admin();}

@@ -1,5 +1,6 @@
 <?php
-class Df_Pd4_Request_Payment extends \Df\Payment\Request\Payment {
+namespace Df\Pd4\Request;
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()

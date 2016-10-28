@@ -1,13 +1,14 @@
 <?php
-/** @method Df_Pd4_Method method() */
-class Df_Pd4_Block_Info extends \Df\Payment\Block\Info {
+namespace Df\Pd4\Block;
+/** @method \Df\Pd4\Method method() */
+class Info extends \Df\Payment\Block\Info {
 	/** @return string */
 	public function getLinkToDocumentAsHtml() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				!$this->capableLinkToOrder()
 				? ''
-				: Df_Pd4_Block_LinkToDocument_ForAnyOrder::r($this->order())
+				: LinkToDocument\ForAnyOrder::r($this->order())
 			;
 		}
 		return $this->{__METHOD__};
@@ -20,8 +21,8 @@ class Df_Pd4_Block_Info extends \Df\Payment\Block\Info {
 
 	/**
 	 * @override
-	 * @see Df_Core_Block_Template::defaultTemplate()
-	 * @used-by Df_Core_Block_Template::getTemplate()
+	 * @see \Df_Core_Block_Template::defaultTemplate()
+	 * @used-by \Df_Core_Block_Template::getTemplate()
 	 * @return string
 	 */
 	protected function defaultTemplate() {return 'df/pd4/info.phtml';}

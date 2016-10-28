@@ -22,7 +22,6 @@
 		</page>
 	</df>
 	<global>
-		<blocks><df_pd4><class>Df_Pd4_Block</class></df_pd4></blocks>
 		<helpers><df_pd4><class>Df_Pd4_Helper</class></df_pd4></helpers>
 	</global>
 	<frontend>
@@ -78,7 +77,7 @@
 		-->
 		<payment>
 			<df-pd4>
-				<model>Df_Pd4_Method</model>
+				<model>Df\Pd4\Method</model>
 			</df-pd4>
 		</payment>
 	</default>

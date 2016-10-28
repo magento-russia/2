@@ -1,9 +1,10 @@
 <?php
-class Df_Pd4_Block_Document extends Df_Core_Block_Template_NoCache {
+namespace Df\Pd4\Block;
+class Document extends \Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getRowsHtml() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_render(new Df_Pd4_Block_Document_Rows);
+			$this->{__METHOD__} = df_render(new Document\Rows);
 		}
 		return $this->{__METHOD__};
 	}

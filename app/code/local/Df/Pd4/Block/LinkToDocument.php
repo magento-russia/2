@@ -1,10 +1,11 @@
 <?php
-abstract class Df_Pd4_Block_LinkToDocument extends Df_Core_Block_Template_NoCache {
+namespace Df\Pd4\Block;
+abstract class LinkToDocument extends \Df_Core_Block_Template_NoCache {
 	/**
 	 * @abstract
 	 * @used-by getPaymentDocumentUrl()
 	 * @used-by needToShow()
-	 * @return Df_Sales_Model_Order
+	 * @return \Df_Sales_Model_Order
 	 */
 	abstract protected function order();
 
@@ -12,7 +13,7 @@ abstract class Df_Pd4_Block_LinkToDocument extends Df_Core_Block_Template_NoCach
 	 * @override
 	 * @return string
 	 */
-	public function getArea() {return Df_Core_Const_Design_Area::FRONTEND;}
+	public function getArea() {return \Df_Core_Const_Design_Area::FRONTEND;}
 
 	/** @return string */
 	public function getPaymentDocumentUrl() {
@@ -31,7 +32,7 @@ abstract class Df_Pd4_Block_LinkToDocument extends Df_Core_Block_Template_NoCach
 			&&
 				$this->order()->getPayment()
 			&&
-				$this->order()->getPayment()->getMethodInstance() instanceof Df_Pd4_Method
+				$this->order()->getPayment()->getMethodInstance() instanceof \Df\Pd4\Method
 		;
 	}
 

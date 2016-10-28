@@ -1,13 +1,18 @@
 <?php
-class Df_Pd4_Request_Document_View extends Df_Core_Model {
+namespace Df\Pd4\Request\Document;
+use Df\Pd4\Method as Method;
+use Df_Sales_Model_Order as O;
+use Df_Sales_Model_Resource_Order as RO;
+use Mage_Sales_Model_Order_Payment as OP;
+class View extends \Df_Core_Model {
 	/**
-	 * @used-by Df_Pd4_Block_Document_Rows::order()
-	 * @return Df_Sales_Model_Order
+	 * @used-by \Df\Pd4\Block\Document\Rows::order()
+	 * @return O
 	 */
 	public function order() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Sales_Model_Order $result */
-			$result = Df_Sales_Model_Order::i();
+			/** @var O $result */
+			$result = O::i();
 			$result->load($this->getOrderId());
 			if (df_nat0($result->getId()) !== df_nat0($this->getOrderId())) {
 				df_error('Заказ №%d отсутствует в системе.', $this->getOrderId());
@@ -18,9 +23,9 @@ class Df_Pd4_Request_Document_View extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_Pd4_Block_Document_Rows::getOrderAmountFractionalPartAsString()
-	 * @used-by Df_Pd4_Block_Document_Rows::getOrderAmountIntegerPartAsString()
-	 * @return Df_Core_Model_Money
+	 * @used-by \Df\Pd4\Block\Document\Rows::getOrderAmountFractionalPartAsString()
+	 * @used-by \Df\Pd4\Block\Document\Rows::getOrderAmountIntegerPartAsString()
+	 * @return \Df_Core_Model_Money
 	 */
 	public function amount() {
 		if (!isset($this->{__METHOD__})) {
@@ -31,20 +36,20 @@ class Df_Pd4_Request_Document_View extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Pd4_Method */
+	/** @return Method */
 	public function method() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Pd4_Method $result */
+			/** @var Method $result */
 			$result = null;
 			/**
 			 * Раньше здесь стояло if(!is_null($this->order()->getPayment()))
 			 * Как ни странно, иногда $this->order()->getPayment() возвращает и не null,
 			 * и не объект.
 			 */
-			if ($this->order()->getPayment() instanceof Mage_Sales_Model_Order_Payment) {
+			if ($this->order()->getPayment() instanceof OP) {
 				$result = $this->order()->getPayment()->getMethodInstance();
 			}
-			if (!$result instanceof Df_Pd4_Method) {
+			if (!$result instanceof Method) {
 				df_error(
 					"Заказ №{$this->getOrderId()} не предназначен для оплаты через банковскую кассу."
 				);
@@ -60,19 +65,15 @@ class Df_Pd4_Request_Document_View extends Df_Core_Model {
 			/** @var int $result */
 			$result = null;
 			try {
-				$result =
-					Df_Sales_Model_Resource_Order::s()->getOrderIdByProtectCode(
-						$this->getOrderProtectCode()
-					)
-				;
+				$result = RO::s()->getOrderIdByProtectCode($this->getOrderProtectCode());
 			}
-			catch (Exception $e) {
+			catch (\Exception $e) {
 				df_error('Заказ с кодом «%s» отсутствует в системе.', $this->getOrderProtectCode());
 			}
 			try {
 				$result = df_nat($result);
 			}
-			catch (Exception $e) {
+			catch (\Exception $e) {
 				df_error($this->getInvalidUrlMessage());
 			}
 			$this->{__METHOD__} = $result;
@@ -83,7 +84,7 @@ class Df_Pd4_Request_Document_View extends Df_Core_Model {
 	/** @return integer */
 	private function getOrderProtectCode() {
 		/** @var integer $result */
-		$result = df_request(Df_Pd4_Block_LinkToDocument::URL_PARAM__ORDER_PROTECT_CODE);
+		$result = df_request(\Df\Pd4\Block\LinkToDocument::URL_PARAM__ORDER_PROTECT_CODE);
 		df_assert(!is_null($result), $this->getInvalidUrlMessage());
 		return $result;
 	}
@@ -103,6 +104,6 @@ class Df_Pd4_Request_Document_View extends Df_Core_Model {
 	/** @return \Df\Payment\Config\Area\Service */
 	private function configS() {return $this->method()->configS();}
 
-	/** @return Df_Pd4_Request_Document_View */
+	/** @return self */
 	public static function i() {return new self;}
 }

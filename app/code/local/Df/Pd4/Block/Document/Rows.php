@@ -1,5 +1,6 @@
 <?php
-class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
+namespace Df\Pd4\Block\Document;
+class Rows extends \Df_Core_Block_Template_NoCache {
 	/** @return string */
 	public function getCustomerAddressAsCompositeString() {
 		return df_e(df_ccc(', '
@@ -62,9 +63,9 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	}
 
 	/** @return int */
-	public function getOrderYear() {return df_int(df_dts($this->getOrderDate(), Zend_Date::YEAR));}
+	public function getOrderYear() {return df_int(df_dts($this->getOrderDate(), \Zend_Date::YEAR));}
 
-	/** @return Df_Pd4_Config_Area_Admin */
+	/** @return \Df\Pd4\Config\Area\Admin */
 	protected function configA() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->getActionDf()->method()->configA();
@@ -80,15 +81,15 @@ class Df_Pd4_Block_Document_Rows extends Df_Core_Block_Template_NoCache {
 	 */
 	protected function defaultTemplate() {return 'df/pd4/document/rows.phtml';}
 
-	/** @return Df_Pd4_Request_Document_View */
+	/** @return \Df\Pd4\Request\Document\View */
 	private function getActionDf() {return df_h()->pd4()->getDocumentViewAction();}
 
-	/** @return Df_Sales_Model_Order */
+	/** @return \Df_Sales_Model_Order */
 	private function order() {return $this->getActionDf()->order();}
-	/** @return Df_Sales_Model_Order_Address */
+	/** @return \Df_Sales_Model_Order_Address */
 	private function getCustomerAddress() {return $this->order()->getBillingAddress();}
 
-	/** @return Zend_Date */
+	/** @return \Zend_Date */
 	private function getOrderDate() {return $this->order()->getDateCreated();}
 
 	const PAYMENT_PURPOSE_TEMPLATE__PARAM__ORDER_ID = '{order.id}';

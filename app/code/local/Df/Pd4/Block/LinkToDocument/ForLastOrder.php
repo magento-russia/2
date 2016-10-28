@@ -1,10 +1,11 @@
 <?php
-class Df_Pd4_Block_LinkToDocument_ForLastOrder extends Df_Pd4_Block_LinkToDocument {
+namespace Df\Pd4\Block\LinkToDocument;
+class ForLastOrder extends \Df\Pd4\Block\LinkToDocument {
 	/**
 	 * @override
-	 * @used-by Df_Pd4_Block_LinkToDocument_ForLastOrder::getPaymentDocumentUrl()
-	 * @used-by Df_Pd4_Block_LinkToDocument_ForLastOrder::needToShow()
-	 * @return Df_Sales_Model_Order
+	 * @used-by \Df\Pd4\Block\LinkToDocument\ForLastOrder::getPaymentDocumentUrl()
+	 * @used-by \Df\Pd4\Block\LinkToDocument\ForLastOrder::needToShow()
+	 * @return \Df_Sales_Model_Order
 	 */
 	protected function order() {return df_last_order();}
 
