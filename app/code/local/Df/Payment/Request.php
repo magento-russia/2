@@ -132,7 +132,7 @@ abstract class Request extends \Df_Core_Model {
 	 * @used-by \Df\Uniteller\Request\Payment::_params()
 	 * @used-by \Df\Uniteller\Request\Payment::getSignature()
 	 * @used-by \Df\WalletOne\Request\Payment::paramsCommon()
-	 * @used-by Df_WebMoney_Request_Payment::orderIId()
+	 * @used-by \Df\WebMoney\Request\Payment::orderIId()
 	 * @used-by Df_WebPay_Request_Payment::_params()
 	 * @used-by Df_WebPay_Request_Payment::getSignature()
 	 * @return string

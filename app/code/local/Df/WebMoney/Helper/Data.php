@@ -1,4 +1,2 @@
 <?php
-class Df_WebMoney_Helper_Data extends Mage_Core_Helper_Data {
-	
-}
+class Df_WebMoney_Helper_Data extends Mage_Core_Helper_Data {}

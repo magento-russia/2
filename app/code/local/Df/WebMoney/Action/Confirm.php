@@ -1,5 +1,6 @@
 <?php
-class Df_WebMoney_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\WebMoney\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
@@ -13,7 +14,7 @@ class Df_WebMoney_Action_Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Mage_Core_Exception
+	 * @throws \Mage_Core_Exception
 	 */
 	protected function checkSignature() {
 		if ($this->needInvoice()) {

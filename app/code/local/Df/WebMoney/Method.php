@@ -1,2 +1,3 @@
 <?php
-class Df_WebMoney_Method extends \Df\Payment\Method\WithRedirect {}
+namespace Df\WebMoney;
+class Method extends \Df\Payment\Method\WithRedirect {}

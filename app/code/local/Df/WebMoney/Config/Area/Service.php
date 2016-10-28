@@ -1,5 +1,6 @@
 <?php
-class Df_WebMoney_Config_Area_Service extends \Df\Payment\Config\Area\Service {
+namespace Df\WebMoney\Config\Area;
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * @override
 	 * @return string

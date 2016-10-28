@@ -1,9 +1,10 @@
 <?php
+namespace Df\WebMoney\Request;
 /**
- * @method Df_WebMoney_Config_Area_Service configS()
- * @method Df_WebMoney_Method method()
+ * @method \Df\WebMoney\Config\Area\Service configS()
+ * @method \Df\WebMoney\Method method()
  */
-class Df_WebMoney_Request_Payment extends \Df\Payment\Request\Payment {
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()
