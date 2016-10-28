@@ -1,5 +1,6 @@
 <?php
-class Df_Robokassa_Action_Confirm extends \Df\Payment\Action\Confirm {
+namespace Df\Robokassa\Action;
+class Confirm extends \Df\Payment\Action\Confirm {
 	/**
 	 * @override
 	 * @return string
@@ -8,10 +9,10 @@ class Df_Robokassa_Action_Confirm extends \Df\Payment\Action\Confirm {
 
 	/**
 	 * @override
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return string
 	 */
-	protected function responseTextForError(Exception $e) {return df_ets($e);}
+	protected function responseTextForError(\Exception $e) {return df_ets($e);}
 
 	/**
 	 * @override

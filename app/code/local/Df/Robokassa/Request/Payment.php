@@ -1,8 +1,9 @@
 <?php
+namespace Df\Robokassa\Request;
 use Df_Sales_Model_Order_Item_Extended as OIE;
 use Mage_Sales_Model_Order_Item as OI;
-/** @method Df_Robokassa_Method method() */
-class Df_Robokassa_Request_Payment extends \Df\Payment\Request\Payment {
+/** @method \Df\Robokassa\Method method() */
+class Payment extends \Df\Payment\Request\Payment {
 	/**
 	 * @override
 	 * @see \Df\Payment\Request\Payment::_params()

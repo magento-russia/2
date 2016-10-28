@@ -1,6 +1,7 @@
 <?php
+namespace Df\Robokassa\Config\Area;
 // 2016-10-20
-class Df_Robokassa_Config_Area_Service extends \Df\Payment\Config\Area\Service {
+class Service extends \Df\Payment\Config\Area\Service {
 	/**
 	 * 2016-10-20
 	 * Пришлось перекрыть родительский метод,

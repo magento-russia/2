@@ -8,9 +8,7 @@
 		</Df_Robokassa>
 	</modules>
 	<global>
-		<blocks><df_robokassa><class>Df_Robokassa_Block</class></df_robokassa></blocks>
 		<helpers><df_robokassa><class>Df_Robokassa_Helper</class></df_robokassa></helpers>
-		<models><df_robokassa><class>Df_Robokassa_Model</class></df_robokassa></models>
 		<request>
 			<direct_front_name>
 <!--
@@ -65,7 +63,7 @@ https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/app/code/core/Mage/Core/
 		-->
 		<payment>
 			<df-robokassa>
-				<model>Df_Robokassa_Method</model>
+				<model>Df\Robokassa\Method</model>
 			</df-robokassa>
 		</payment>
 	</default>
