@@ -1,2 +1,3 @@
 <?php
-class Df_Exline_Carrier extends \Df\Shipping\Carrier {}
+namespace Df\Exline;
+class Carrier extends \Df\Shipping\Carrier {}

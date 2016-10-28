@@ -10,7 +10,7 @@
 		<carriers>
 			<df-exline>
 				<active>0</active>
-				<model>Df_Exline_Carrier</model>
+				<model>Df\Exline\Carrier</model>
 				<title>EXLINE</title>
 			</df-exline>
 		</carriers>

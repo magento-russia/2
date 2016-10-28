@@ -1,5 +1,6 @@
 <?php
-class Df_Exline_Locator extends \Df\Shipping\Locator {
+namespace Df\Exline;
+class Locator extends \Df\Shipping\Locator {
 	/**
 	 * @override
 	 * @see \Df\Shipping\Locator:: _map()
@@ -9,7 +10,7 @@ class Df_Exline_Locator extends \Df\Shipping\Locator {
 	 */
 	protected function _map($type) {
 		/** @var array(string => string|int) $json */
-		$json = Df_Exline_Request::i('regions/' . $type)->response()->json('regions');
+		$json = Request::i('regions/' . $type)->response()->json('regions');
 		return $this->postProcess(array_column($json, 'id', 'name'));
 	}
 

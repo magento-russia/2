@@ -1,6 +1,6 @@
 <?php
 namespace Df\InTime;
-/** @method \Df_InTime_Config_Area_Service configS() */
+/** @method \Df\InTime\Config\Area\Service configS() */
 class Collector extends \Df\Shipping\Collector\Ua {
 	/**
 	 * @override

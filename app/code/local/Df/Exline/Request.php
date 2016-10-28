@@ -1,5 +1,6 @@
 <?php
-class Df_Exline_Request extends \Df\Shipping\Request {
+namespace Df\Exline;
+class Request extends \Df\Shipping\Request {
 	/**
 	 * @override
 	 * @see \Df\Shipping\Request::host()
@@ -13,7 +14,7 @@ class Df_Exline_Request extends \Df\Shipping\Request {
 	 * @used-by Df_Exline_Collector::json()
 	 * @param string $pathSuffix
 	 * @param array(string => string) $queryParams [optional]
-	 * @return Df_Exline_Request
+	 * @return self
 	 */
 	public static function i($pathSuffix, array $queryParams = array()) {
 		return new self(array(

@@ -1,5 +1,6 @@
 <?php
-class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
+namespace Df\Exline;
+class Collector extends \Df\Shipping\Collector\Kz {
 	/**
 	 * @used-by _collect()
 	 * @used-by \Df\Shipping\Collector::call()
@@ -9,7 +10,7 @@ class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 	 * @return void
 	 */
 	protected function _addRate($id, $methodCode, $methodName) {
-		/** @var Zend_Date[] $time */
+		/** @var \Zend_Date[] $time */
 		$time = $this->time($id);
 		$this->addRate($this->rate($id), $methodCode, $methodName, df_first($time), df_last($time));
 	}
@@ -55,7 +56,7 @@ class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 	 */
 	private function json($uriSuffix, $serviceId, $jsonPath, array $additional = array()) {
 		/** @var array(string => string) $result */
-		$result = Df_Exline_Request::i($uriSuffix, $additional + array(
+		$result = Request::i($uriSuffix, $additional + array(
 			'origin' => $this->locationOrigId()
 			, 'destination' => $this->locationDestId()
 			, 'service_id' => $serviceId
@@ -71,7 +72,7 @@ class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 	private function locationDestId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $result */
-			$result = (int)Df_Exline_Locator::findD($this->cityDestUc());
+			$result = (int)Locator::findD($this->cityDestUc());
 			if (0 >= $result) {
 				$this->errorInvalidCityDest();
 			}
@@ -89,11 +90,11 @@ class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 			/** @var int $result */
 			switch ($this->countryOrigIso2()) {
 				case 'RU':
-					$result = (int)Df_Exline_Locator::findO('РОССИЯ');
+					$result = (int)Locator::findO('РОССИЯ');
 					df_assert_gt0($result);
 					break;
 				case 'KZ':
-					$result = (int)Df_Exline_Locator::findO($this->cityOrigUc());
+					$result = (int)Locator::findO($this->cityOrigUc());
 					if (0 >= $result) {
 						$this->errorInvalidCityOrig();
 					}
@@ -127,16 +128,16 @@ class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 	/**
 	 * @used-by _addRate()
 	 * @param int $id
-	 * @return Zend_Date[]
+	 * @return \Zend_Date[]
 	 */
 	private function time($id) {
-		/** @var Zend_Date[] $result */
+		/** @var \Zend_Date[] $result */
 		try {
 			/** @var array(string => mixed) $a */
 			$a = $this->json('deadline', $id, 'trail');
 			$result = array(self::date(dfa($a, 'min_date')), self::date(dfa($a, 'max_date')));
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			$result = array();
 		}
 		return $result;
@@ -145,10 +146,10 @@ class Df_Exline_Collector extends \Df\Shipping\Collector\Kz {
 	/**
 	 * @used-by time()
 	 * @param string $value
-	 * @return Zend_Date
+	 * @return \Zend_Date
 	 */
 	private static function date($value) {
 		df_param_string_not_empty($value, 0);
-		return new Zend_Date($value, 'yyyy-MM-dd');
+		return new \Zend_Date($value, 'yyyy-MM-dd');
 	}
 }

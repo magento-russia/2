@@ -1,6 +1,6 @@
 <?php
 namespace Df\Shipping;
-abstract class \Df\Shipping\Locator extends \Df_Core_Model {
+abstract class Locator extends \Df_Core_Model {
 	/**
 	 * @used-by map()
 	 * @param string $type
