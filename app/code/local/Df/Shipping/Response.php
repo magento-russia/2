@@ -160,7 +160,7 @@ class Response extends \Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__REQUEST, \Df\Shipping\Request::class)
+			->_prop(self::P__REQUEST, Request::class)
 			->_prop(self::P__TEXT, DF_V_STRING_NE)
 		;
 	}
@@ -192,7 +192,7 @@ class Response extends \Df_Core_Model {
 	 * @param string $text
 	 * @return self
 	 */
-	public static function i(\Df\Shipping\Request $request, $text) {return
+	public static function i(Request $request, $text) {return
 		new self([self::P__REQUEST => $request, self::P__TEXT => $text])
 	;}
 }

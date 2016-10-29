@@ -1,6 +1,13 @@
 <?php
 namespace Df\Shipping;
-class Request extends \Df_Core_Model {
+abstract class Request extends \Df_Core_Model {
+	/**
+	 * 2016-10-29
+	 * @used-by zuri()
+	 * @return string
+	 */
+	abstract protected function uri();
+
 	/**
 	 * @used-by \Df\Shipping\Exception\Request::carrier()
 	 * @return Carrier
@@ -79,17 +86,17 @@ class Request extends \Df_Core_Model {
 		/** @var string[] $parts */
 		$parts = [
 			'Модуль: ' . $this->getCarrier()->getTitle()
-			,'Адрес: ' . $this->getUri()->__toString()
+			,'Адрес: ' . $this->zuri()->__toString()
 		];
 		/** @var array(string => string) $params */
 		$params = $this->paramsPost() + $this->paramsQuery();
-		if ($params || $this->getPostRawData()) {
+		if ($params || $this->postRaw()) {
 			$parts[]= 'Параметры:';
 			if ($params) {
 				$parts[]= df_print_params($params);
 			}
-			if ($this->getPostRawData()) {
-				$parts[]= $this->getPostRawData();
+			if ($this->postRaw()) {
+				$parts[]= $this->postRaw();
 			}
 		}
 		return(df_cc_n($parts));
@@ -187,13 +194,22 @@ class Request extends \Df_Core_Model {
 			}
 			return $result;
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			// В случае сбоя на стороне службы доставки расчёта тарифа
 			// (например, служба Деловые Линии может выдавать ответ:
 			// «Сервис временно недоступен. Попробуйте посчитать стоимость доставки чуть позже.»)
 			// надо удалить кэш,
 			// чтобы при следующем оформлении заказа модуль сделал запрос тарифа заново.
 			$this->removeCache();
+			df_context('Адрес запроса', $this->zuri()->__toString(), 1);
+			/** @var array(string => string) $params */
+			$params = $this->paramsPost() + $this->paramsQuery();
+			if ($params) {
+				df_context('Параметры запроса', df_print_params($params), 2);
+			}
+			if ($this->postRaw()) {
+				df_context('Тело запроса', $this->postRaw(), 3);
+			}
 			throw $e;
 		}
 	}, func_get_args());}
@@ -206,25 +222,6 @@ class Request extends \Df_Core_Model {
 	protected function getCache() {return dfc($this, function() {return
 		\Df_Core_Model_Cache::i(self::CACHE_TYPE, 30 * 86400)
 	;});}
-
-	/** @return string[] */
-	protected function getCacheKeyParams() {
-		/** @var string[] $result */
-		$result = array(get_class($this), md5($this->getUri()->__toString()));
-		if ($this->isItPost()) {
-			/**
-			 * Обратите внимание, что $this->paramsPost()
-			 * может вернуть многомерный массив (например, так происходит в модуле Df_Pec).
-			 * Поэтому мы не используем "в лоб" array_merge, а используем http_build_query.
-			 */
-			$result['post'] =
-				$this->getPostRawData()
-				? $this->getPostRawData()
-				: http_build_query($this->paramsPost())
-			;
-		}
-		return $result;
-	}
 
 	/**
 	 * 2015-02-21
@@ -257,34 +254,23 @@ class Request extends \Df_Core_Model {
 		return $result;
 	});}
 
-	/** @return array(string => string) */
-	protected function paramsPost() {return $this->cfg(self::P__PARAMS_POST, array());}
-
-	/** @return string */
-	protected function getPostRawData() {return '';}
-
 	/** @return string|array(string => string) */
 	protected function getQuery() {return df_clean($this->paramsQuery());}
 
 	/** @return string */
-	protected function host() {return $this->cfg(self::P__QUERY_HOST, '');}
+	protected function method() {return $this->cfg(self::P__METHOD, \Zend_Http_Client::GET);}
 
 	/** @return array(string => string) */
-	protected function paramsQuery() {return $this->cfg(self::P__PARAMS_QUERY, []);}
+	protected function paramsPost() {return $this->cfg(self::P__POST, array());}
+
+	/** @return array(string => string) */
+	protected function paramsQuery() {return $this->cfg(self::P__QUERY, []);}
 
 	/** @return string */
-	protected function path() {return $this->cfg(self::P__QUERY_PATH, '');}
-
-	/** @return int|null */
-	protected function port() {return null;}
+	protected function postRaw() {return '';}
 
 	/** @return array */
 	protected function getRequestConfuguration() {return array();}
-
-	/** @return string */
-	protected function getRequestMethod() {return
-		$this->cfg(self::P__REQUEST_METHOD, \Zend_Http_Client::GET)
-	;}
 
 	/** @return string */
 	protected function getResponseAsTextInternal() {
@@ -295,26 +281,6 @@ class Request extends \Df_Core_Model {
 		}
 		return $result;
 	}
-
-	/**
-	 * 2016-10-24
-	 * @used-by \Df\Shipping\Request::getUri()
-	 * @return string
-	 */
-	protected function scheme() {return 'http';}
-
-	/** @return \Zend_Uri_Http */
-	protected function getUri() {return dfc($this, function() {
-		/** @var \Zend_Uri_Http $result */
-		$result = \Zend_Uri::factory($this->scheme());
-		$result->setHost($this->host());
-		if ($this->port()) {
-			$result->setPort($this->port());
-		}
-		$result->setPath($this->path());
-		$result->setQuery($this->getQuery());
-		return $result;
-	});}
 
 	/** @return bool */
 	protected function needCacheResponse() {return $this->getCache()->isEnabled();}
@@ -341,22 +307,37 @@ class Request extends \Df_Core_Model {
 	protected function responseFailureDetect() {}
 
 	/**
+	 * 2016-10-29
+	 * @used-by zuri()
+	 * @return string|null
+	 */
+	protected function suffix() {return $this[self::P__SUFFIX];}
+
+	/**
 	 * Ключ кэширования не должен содержать русские буквы,
 	 * потому что когда кэш хранится в файлах, то русские буквы будут заменены на символ «_»,
 	 * и имя файла будет выглядеть как «mage---b26_DF_LOCALIZATION_MODEL_MORPHER________».
 	 * Чтобы избавиться от русских букв при сохранении уникальности ключа, испольузем функцию md5.
+	 *
+	 * $this->paramsPost() может вернуть многомерный массив
+	 * (например, так происходит в модуле Df_Pec).
+	 * Поэтому мы не используем "в лоб" array_merge, а используем http_build_query.
+	 *
 	 * @return string
 	 */
-	private function getCacheKey_Shipping() {return dfc($this, function() {return
-		md5(implode('--', $this->getCacheKeyParams()))
-	;});}
+	private function cacheKey() {return dfc($this, function() {return
+		dfa_hashm(array_merge(
+			[get_class($this), $this->zuri()->__toString()]
+			,!$this->isItPost() ? [] : [$this->postRaw() ?: $this->paramsPost()]
+		));
+	});}
 	
 	/** @return \Zend_Http_Response */
 	private function getResponse() {return dfc($this, function() {
-		$this->getHttpClient()->setUri($this->getUri());
+		$this->getHttpClient()->setUri($this->zuri());
 		if ($this->isItPost()) {
-			if ($this->getPostRawData()) {
-				$this->getHttpClient()->setRawData($this->getPostRawData());
+			if ($this->postRaw()) {
+				$this->getHttpClient()->setRawData($this->postRaw());
 			}
 			else {
 				if (!$this->needPostKeysWithSameName()) {
@@ -380,16 +361,16 @@ class Request extends \Df_Core_Model {
 			}
 		}
 		/** @var \Zend_Http_Response $result */
-		$result = $this->getHttpClient()->request($this->getRequestMethod());
+		$result = $this->getHttpClient()->request($this->method());
 		/**
 		 * Обратите внимание,
 		 * что обычное @see Zend_Uri::__toString() здесь для сравнения использовать нельзя,
 		 * потому что Zend Framework свежих версий Magento CE (заметил в Magento CE 1.9.0.1)
 		 * зачем-то добавляет ко второму веб-адресу $this->getHttpClient()->getUri()
-		 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->getUri())
+		 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->zuri())
 		 * порт отсутствует.
 		 */
-		if (!\Df\Zf\UriComparator::c($this->getUri(), $this->getHttpClient()->getUri())) {
+		if (!\Df\Zf\UriComparator::c($this->zuri(), $this->getHttpClient()->getUri())) {
 			/**
 			 * Сервер службы доставки перенаправил нас на новый адрес.
 			 * С большой вероятностью, это означает, что изменился программный интерфейс службы доставки
@@ -402,7 +383,7 @@ class Request extends \Df_Core_Model {
 				. ' перенаправил запрос «%s» с адреса «%s» на неожиданный адрес «%s».'
 				, $this->getCarrier()->getTitle()
 				, get_class($this)
-				, $this->getUri()->__toString()
+				, $this->zuri()->__toString()
 				, $this->getHttpClient()->getUri()->__toString()
 			);
 		}
@@ -417,7 +398,7 @@ class Request extends \Df_Core_Model {
 		/** @var string $result */
 		$result = false;
 		if ($this->needCacheResponse()) {
-			$result = $this->getCache()->loadData($this->getCacheKey_Shipping());
+			$result = $this->getCache()->loadData($this->cacheKey());
 		}
 		if (false === $result) {
 			try {
@@ -428,21 +409,30 @@ class Request extends \Df_Core_Model {
 				throw new \Df\Shipping\Exception\NoResponse($e, $this);
 			}
 			if ($this->needCacheResponse()) {
-				$this->getCache()->saveData($this->getCacheKey_Shipping(), $result);
+				$this->getCache()->saveData($this->cacheKey(), $result);
 			}
 		}
 		return $result;
 	});}
 
 	/** @return bool */
-	private function isItPost() {return \Zend_Http_Client::POST === $this->getRequestMethod();}
+	private function isItPost() {return \Zend_Http_Client::POST === $this->method();}
 
 	/** @return void */
 	private function removeCache() {
 		if ($this->needCacheResponse()) {
-			$this->getCache()->removeData($this->getCacheKey_Shipping());
+			$this->getCache()->removeData($this->cacheKey());
 		}
 	}
+
+	/** @return \Zend_Uri_Http */
+	private function zuri() {return dfc($this, function() {
+		/** @var \Zend_Uri_Http $result */
+		$result = \Zend_Uri::factory($this->uri());
+		$result->setPath($result->getPath() . $this->suffix());
+		$result->setQuery($this->getQuery());
+		return $result;
+	});}
 
 	/**
 	 * @override
@@ -451,22 +441,21 @@ class Request extends \Df_Core_Model {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::P__PARAMS_POST, DF_V_ARRAY, false)
-			->_prop(self::P__QUERY_HOST, DF_V_STRING, false)
-			->_prop(self::P__PARAMS_QUERY, DF_V_ARRAY, false)
-			->_prop(self::P__QUERY_PATH, DF_V_STRING, false)
-			->_prop(self::P__REQUEST_METHOD, DF_V_STRING, false)
+			->_prop(self::P__METHOD, DF_V_STRING, false)
+			->_prop(self::P__POST, DF_V_ARRAY, false)
+			->_prop(self::P__QUERY, DF_V_ARRAY, false)
+			->_prop(self::P__SUFFIX, DF_V_STRING, false)
 		;
 	}
 	/** @var bool */
 	private $_responseFailureChecked = false;
-
+	/**
+	 * @used-by \Df_Shipping_Setup_2_30_0::_process()
+	 * @used-by getCache()
+	 */
 	const CACHE_TYPE = 'rm_shipping';
-	const MESSAGE__ERROR_PARSING_BODY = 'Error parsing body - doesn\'t seem to be a chunked message';
-	const P__PARAMS_POST = 'post_params';
-	const P__QUERY_HOST = 'query_host';
-	const P__PARAMS_QUERY = 'query_params';
-	const P__QUERY_PATH = 'query_path';
-	const P__REQUEST_METHOD = 'request_method';
-	const T__ERROR_MESSAGE__DEFAULT = 'Обращение к программному интерфейсу службы доставки привело к сбою.';
+	const P__METHOD = 'request_method';
+	const P__POST = 'post_params';
+	const P__QUERY = 'query_params';
+	const P__SUFFIX = 'suffix';
 }

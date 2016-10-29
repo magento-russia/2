@@ -10,20 +10,6 @@ class Request extends \Df\Shipping\Request {
 
 	/**
 	 * @override
-	 * @see \Df\Shipping\Request::host()
-	 * @return string
-	 */
-	protected function host() {return 'emspost.ru';}
-
-	/**
-	 * @override
-	 * @see \Df\Shipping\Request::path()
-	 * @return string
-	 */
-	protected function path() {return '/api/rest';}
-
-	/**
-	 * @override
 	 * @return void
 	 * @throws \Exception
 	 */
@@ -41,9 +27,18 @@ class Request extends \Df\Shipping\Request {
 	}
 
 	/**
+	 * 2016-10-29
+	 * @override
+	 * @see \Df\Shipping\Request::uri()
+	 * @used-by \Df\Shipping\Request::zuri()
+	 * @return string
+	 */
+	protected function uri() {return 'http://emspost.ru/api/rest';}
+
+	/**
 	 * @static
 	 * @param array(string => mixed) $p [optional]
 	 * @return \Df\Ems\Request
 	 */
-	public static function i(array $p = []) {return new self([self::P__PARAMS_QUERY => $p]);}
+	public static function i(array $p = []) {return new self([self::P__QUERY => $p]);}
 }

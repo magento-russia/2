@@ -28,7 +28,6 @@ class Collector extends \Df\Shipping\Collector\Ua {
 		 * http://novaposhta.ua/posulku
 		 */
 		$this->checkWeightIsLE(30);
-		$this->checkCityDest();
 		$this->call(function() {
 			$this->_addRate(true, 'to-home', 'до дома');
 			$this->_addRate(false, 'to-warehouse', 'до пункта выдачи');
@@ -43,9 +42,9 @@ class Collector extends \Df\Shipping\Collector\Ua {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Request $request */
 			$request = new Request(array(
-				Request::P__QUERY_PATH => '/onlineorder/estimatedate'
-				,Request::P__REQUEST_METHOD => \Zend_Http_Client::POST
-				,Request::P__PARAMS_POST => array('EstimateDateForm' => array(
+				Request::P__SUFFIX => 'onlineorder/estimatedate'
+				,Request::P__METHOD => \Zend_Http_Client::POST
+				,Request::P__POST => array('EstimateDateForm' => array(
 					'date' => \Zend_Date::now()->toString('dd.MM.yyyy')
 					,'recipientCityId' => $this->locationDestId()
 					,'recipientCity' => $this->locationDestName()
@@ -150,9 +149,9 @@ class Collector extends \Df\Shipping\Collector\Ua {
 		$mode = 1 + (int)!$toHome + 2 * (int)!$this->приезжатьНаСкладМагазина();
 		/** @var Request $request */
 		$request = new Request([
-			Request::P__QUERY_PATH => '/ru/delivery'
-			,Request::P__REQUEST_METHOD => \Zend_Http_Client::POST
-			,Request::P__PARAMS_POST => ['DeliveryForm' => [
+			Request::P__SUFFIX => 'ru/delivery'
+			,Request::P__METHOD => \Zend_Http_Client::POST
+			,Request::P__POST => ['DeliveryForm' => [
 				'TimeIntervals' => 0
 				,'backDelivery' => 0
 				,'cargoType' => 'Cargo'

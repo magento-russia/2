@@ -13,19 +13,11 @@ class Request extends \Df\Shipping\Request {
 	}
 
 	/**
+	 * 2016-10-29
 	 * @override
-	 * @see \Df\Shipping\Request::host()
-	 * @used-by \Df\Shipping\Request::getUri()
+	 * @see \Df\Shipping\Request::uri()
+	 * @used-by \Df\Shipping\Request::zuri()
 	 * @return string
 	 */
-	protected function host() {return 'novaposhta.ua';}
-
-	/**
-	 * 2016-10-24
-	 * @override
-	 * @see \Df\Shipping\Request::scheme()
-	 * @used-by \Df\Shipping\Request::getUri()
-	 * @return string
-	 */
-	protected function scheme() {return 'https';}
+	protected function uri() {return 'https://novaposhta.ua/';}
 }

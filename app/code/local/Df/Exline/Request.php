@@ -3,23 +3,20 @@ namespace Df\Exline;
 class Request extends \Df\Shipping\Request {
 	/**
 	 * @override
-	 * @see \Df\Shipping\Request::host()
-	 * @used-by \Df\Shipping\Request::getUri()
+	 * @see \Df\Shipping\Request::uri()
+	 * @used-by \Df\Shipping\Request::zuri()
 	 * @return string
 	 */
-	protected function host() {return 'calculator.exline.kz';}
+	protected function uri() {return 'http://calculator.exline.kz/api/';}
 
 	/**
 	 * @used-by \Df\Exline\Locator::map()
 	 * @used-by \Df\Exline\Collector::json()
-	 * @param string $pathSuffix
+	 * @param string $suffix
 	 * @param array(string => string) $queryParams [optional]
 	 * @return self
 	 */
-	public static function i($pathSuffix, array $queryParams = array()) {
-		return new self(array(
-			self::P__QUERY_PATH => '/api/' .$pathSuffix
-			,self::P__PARAMS_QUERY => $queryParams
-		));
-	}
+	public static function i($suffix, array $queryParams = []) {return new self([
+		self::P__SUFFIX => $suffix, self::P__QUERY => $queryParams
+	]);}
 }

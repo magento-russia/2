@@ -1,6 +1,6 @@
 <?php
 namespace Df\Ems;
-class Conditions extends \Df\Ems\Request {
+class Cond extends \Df\Ems\Request {
 	/**
 	 * @override
 	 * @return float
@@ -34,7 +34,7 @@ class Conditions extends \Df\Ems\Request {
 	 * @param string $type
 	 * @return $this
 	 */
-	public static function i2($from, $to, $weight, $type) {return new self([self::P__PARAMS_QUERY => [
+	public static function i2($from, $to, $weight, $type) {return new self([self::P__QUERY => [
 		'from' => $from
 		,'method' => 'ems.calculate'
 		,'to' => $to

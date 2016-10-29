@@ -78,7 +78,7 @@ class Locator extends \Df\Shipping\Locator {
 		/** @var \Df\Shipping\Response $r */
 		static $r;
 		if (!$r) {
-			$r = (new Request([Request::P__QUERY_PATH => '/ru/delivery']))->response();
+			$r = (new Request([Request::P__SUFFIX => 'ru/delivery']))->response();
 		}
 		return $r;
 	}

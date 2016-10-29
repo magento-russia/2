@@ -233,7 +233,6 @@ abstract class Collector extends Bridge {
 
 	/**
 	 * 2016-10-29
-	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
 	protected function eUnknownDest() {$this->error(
@@ -243,7 +242,6 @@ abstract class Collector extends Bridge {
 
 	/**
 	 * 2016-10-29
-	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
 	protected function eUnknownOrig() {$this->error(

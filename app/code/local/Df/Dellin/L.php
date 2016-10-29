@@ -35,19 +35,19 @@ namespace Df\Dellin;
 		<...>
 	]
  */
-class Locator {
+class L {
 	/**
 	 * 2016-10-28
 	 * @param string $city
 	 * @param string $region
-	 * @return int|null
+	 * @return string|null
 	 */
 	public static function find($city, $region) {return
 		df_cache_get_simple([$city, $region], function($city, $region) {return
 			df_find(function(array $l) use ($city, $region) {return
 				$city === mb_strtoupper(dfa($l, 'city'))
 				&& $region === mb_strtoupper(self::normalizeRegion(dfa($l, 'regionString')))
-				? intval($l['cityID'])
+				? $l['code']
 				: false
 			;}, df_http_json('https://www.dellin.ru/api/cities/search.json', ['q' => $city]))
 		;}, mb_strtoupper($city), mb_strtoupper($region))

@@ -11,25 +11,12 @@ class Collector extends \Df\Shipping\Collector\Ru {
 	 */
 	protected function _collect() {
 		$this->checkCountryDestIsRU();
-		df_log(Locator::find('Верхоянск', 'Саха (Якутия)'));
-		$this->addRate(100);
+		$this->addRate($this->cond()->getRate());
 	}
 
-	/**
-	 * 2016-10-29
-	 * @return int
-	 * @throws \Exception
-	 */
-	private function dest() {return dfc($this, function() {return
-		Locator::find($this->dCity(), $this->dRegion()) ?: $this->eUnknownDest()
-	;});}
-
-	/**
-	 * 2016-10-29
-	 * @return int
-	 * @throws \Exception
-	 */
-	private function orig() {return dfc($this, function() {return
-		Locator::find($this->oCity(), $this->oRegion()) ?: $this->eUnknownOrig()
-	;});}
+	/** @return Cond */
+	private function cond() {return dfc($this, function() {return Cond::i(
+		L::find($this->oCity(), $this->oRegion()) ?: $this->eUnknownOrig()
+		,L::find($this->dCity(), $this->dRegion()) ?: $this->eUnknownDest()
+	);});}
 }
