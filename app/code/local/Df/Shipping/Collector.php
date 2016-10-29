@@ -1,5 +1,6 @@
 <?php
 namespace Df\Shipping;
+use Df_Directory_Model_Country as Country;
 use Df\Shipping\Exception\MethodNotApplicable as EMethodNotApplicable;
 abstract class Collector extends Bridge {
 	/**
@@ -73,9 +74,7 @@ abstract class Collector extends Bridge {
 	 * @return void
 	 */
 	protected function call(\Closure $f) {
-		try {
-			$f();
-		}
+		try {$f();}
 		catch (\Exception $e) {
 			df_context('Служба доставки', $this->main()->getTitle());
 			/** @var \Exception|\Df\Shipping\Exception $e) */
@@ -99,37 +98,34 @@ abstract class Collector extends Bridge {
 	}
 
 	/**
-	 * @return void
-	 * @throws \Df\Shipping\Exception
-	 */
-	protected function checkCityDest() {
-		if (!$this->cityDest()) {
-			$this->error('Укажите город.');
-		}
-	}
-
-	/**
-	 * @return void
-	 * @throws \Df\Shipping\Exception
-	 */
-	protected function checkCityOrig() {
-		if (!$this->cityOrig()) {
-			$this->error('Администратор должен указать город склада интернет-магазина.');
-		}
-	}
-
-	/**
-	 * @used-by \Df\NovaPoshta\Collector::_collect()
 	 * @param string|string[] $allowedIso2
 	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
 	protected function checkCountryDestIs($allowedIso2) {
 		$allowedIso2 = df_array($allowedIso2);
-		if (!in_array($this->countryDestIso2(), $allowedIso2)) {
+		if (!in_array($this->dCountryIso2(), $allowedIso2)) {
 			$this->errorInvalidCountryDest();
 		}
 	}
+
+	/**
+	 * 2016-10-29
+	 * @used-by \Df\InTime\Collector::_collect()
+	 * @used-by \Df\NovaPoshta\Collector::_collect()
+	 * @return void
+	 * @throws \Df\Shipping\Exception
+	 */
+	protected function checkCountryDestIsRU() {$this->checkCountryDestIs('RU');}
+
+	/**
+	 * 2016-10-29
+	 * @used-by \Df\InTime\Collector::_collect()
+	 * @used-by \Df\NovaPoshta\Collector::_collect()
+	 * @return void
+	 * @throws \Df\Shipping\Exception
+	 */
+	protected function checkCountryDestIsUA() {$this->checkCountryDestIs('UA');}
 
 	/**
 	 * @used-by \Df\InTime\Collector::_collect()
@@ -153,35 +149,6 @@ abstract class Collector extends Bridge {
 		}
 	}
 
-	/**
-	 * @used-by cityDestUc()
-	 * @return string|null
-	 */
-	protected function cityDest() {return $this->rr()->getDestinationCity();}
-
-	/** @return string */
-	protected function cityDestUc() {return dfc($this, function() {return
-		mb_strtoupper($this->cityDest())
-	;});}
-
-	/**
-	 * @used-by cityOrigUc()
-	 * @return string
-	 */
-	protected function cityOrig() {return $this->rr()->getOriginCity();}
-
-	/**
-	 * @used-by collect()
-	 * @used-by \Df\Exline\Collector::locationOrigId()
-	 * @return string|null
-	 */
-	protected function countryOrigIso2() {return $this->rr()->getOriginCountryId();}
-
-	/** @return string */
-	protected function cityOrigUc() {return dfc($this, function() {return
-		mb_strtoupper($this->cityOrig())
-	;});}
-
 	/** @return \Df\Shipping\Config\Area\Admin */
 	protected function configA() {return $this->config()->admin();}
 
@@ -192,22 +159,47 @@ abstract class Collector extends Bridge {
 	protected function configS() {return $this->config()->service();}
 
 	/**
-	 * @used-by countryDestUc()
-	 * @return string
+	 * @used-by dCityUc()
+	 * @return string|null
 	 */
-	protected function countryDest() {return $this->rr()->getDestinationCountry()->getNameRussian();}
+	protected function dCity() {return $this->rr()->getDestinationCity();}
+
+	/** @return string */
+	protected function dCityUc() {return dfc($this, function() {return
+		mb_strtoupper($this->dCity())
+	;});}
+
+	/**
+	 * 2016-10-29
+	 * @return Country
+	 */
+	protected function dCountry() {return $this->rr()->getDestinationCountry();}
 
 	/**
 	 * @used-by \Df\Shipping\Collector\Conditional\WithForeign::suffix()
-	 * @return string|null
+	 * @return string
 	 */
-	protected function countryDestIso2() {return $this->rr()->getDestinationCountryId();}
+	protected function dCountryIso2() {return $this->dCountry()->getIso2Code();}
 
 	/**
 	 * @used-by Df_Kazpost_Collector::collectForeign()
 	 * @return string
 	 */
-	protected function countryDestUc() {return mb_strtoupper($this->countryDest());}
+	protected function dCountryUc() {return
+		mb_strtoupper($this->dCountry()->getNameRussian())
+	;}
+
+	/**
+	 * 2016-10-29
+	 * @return string|null
+	 */
+	protected function dRegion() {return $this->rr()->getDestinationRegionName();}
+
+	/**
+	 * 2016-10-29
+	 * @return int|null
+	 */
+	protected function dRegionId() {return $this->rr()->getDestinationRegionId();}
 
 	/**
 	 * @used-by \Df\NovaPoshta\Collector::responseRate()
@@ -218,18 +210,6 @@ abstract class Collector extends Bridge {
 		* $this->configA()->getDeclaredValuePercent()
 		/ 100
 	;});}
-
-	/**
-	 * @used-by addRate()
-	 * @return int|float
-	 */
-	protected function feeFixed() {return 0;}
-
-	/**
-	 * @used-by addRate()
-	 * @return int|float
-	 */
-	protected function feePercentOfDeclaredValue() {return 0;}
 
 	/**
 	 * @return void
@@ -251,10 +231,81 @@ abstract class Collector extends Bridge {
 		$this->error('Доставка <b>%s</b> невозможна.', $this->rr()->вСтрану());
 	}
 
+	/**
+	 * 2016-10-29
+	 * @return void
+	 * @throws \Df\Shipping\Exception
+	 */
+	protected function eUnknownDest() {$this->error(
+		'К сожалению, мы не можем определить указанное Вами место доставки.'
+		."<br/>Может быть, Вы неправильно указали город, область или страну?"
+	);}
+
+	/**
+	 * 2016-10-29
+	 * @return void
+	 * @throws \Df\Shipping\Exception
+	 */
+	protected function eUnknownOrig() {$this->error(
+		'Не получается найти адрес магазина в справочнике службы доставки.'
+		."\nАдминистратору магазина надо либо изменить соответствующие значения"
+		. ' в разделе «Система» → «Настройки» → «Продажи» → «Доставка:'
+		. ' общие настройки» → «Расположение магазина»,'
+		. ', либо обратиться в службу технической поддержки Российской сборки Magento.'
+	);}
+
+	/**
+	 * @used-by addRate()
+	 * @return int|float
+	 */
+	protected function feeFixed() {return 0;}
+
+	/**
+	 * @used-by addRate()
+	 * @return int|float
+	 */
+	protected function feePercentOfDeclaredValue() {return 0;}
+
 	/** @return bool */
 	protected function isInCity() {return dfc($this, function() {return
 		df_strings_are_equal_ci($this->rr()->getData('city'), $this->rr()->getDestCity())
 	;});}
+
+	/**
+	 * @used-by oCityUc()
+	 * @return string
+	 */
+	protected function oCity() {return $this->rr()->getOriginCity();}
+
+	/** @return string */
+	protected function oCityUc() {return dfc($this, function() {return
+		mb_strtoupper($this->oCity())
+	;});}
+
+	/**
+	 * 2016-10-29
+	 * @return Country
+	 */
+	protected function oCountry() {return $this->rr()->getOriginCountry();}
+
+	/**
+	 * @used-by collect()
+	 * @used-by \Df\Exline\Collector::locationOrigId()
+	 * @return string|null
+	 */
+	protected function oCountryIso2() {return $this->rr()->getOriginCountryId();}
+
+	/**
+	 * 2016-10-29
+	 * @return string
+	 */
+	protected function oRegion() {return $this->rr()->getOriginRegionName();}
+
+	/**
+	 * 2016-10-29
+	 * @return int
+	 */
+	protected function oRegionId() {return $this->rr()->getOriginRegionId();}
 
 	/**
 	 * перекрывается методом @see \Df\Shipping\Collector\Child::rateDefaultCode()
@@ -317,37 +368,31 @@ abstract class Collector extends Bridge {
 	}
 
 	/**
-	 * @used-by collect()
-	 * @return void
-	 * @throws \Df\Shipping\Exception
-	 */
-	private function checkCountryDest() {
-		if (!$this->rr()->getDestinationCountry()) {
-			$this->error('Укажите страну.');
-		}
-	}
-
-	/**
-	 * @used-by collect()
-	 * @return void
-	 * @throws \Df\Shipping\Exception
-	 */
-	private function checkCountryOrig() {
-		if (!$this->rr()->getOriginCountry()) {
-			$this->error('Администратор должен указать страну склада интернет-магазина.');
-		}
-	}
-
-	/**
 	 * @used-by _result()
 	 * @return void
 	 */
 	private function collect() {
-		$this->checkCountryOrig();
-		if (in_array($this->countryOrigIso2(), array_merge(
+		if (!$this->rr()->getOriginCountry()) {
+			$this->error('Администратор должен указать страну склада интернет-магазина.');
+		}
+		if (!$this->oCity()) {
+			$this->error('Администратор должен указать город склада интернет-магазина.');
+		}
+		if (!$this->oRegion()) {
+			$this->error('Администратор должен указать область склада интернет-магазина.');
+		}
+		if (in_array($this->oCountryIso2(), array_merge(
 			[$this->domesticIso2()], df_array($this->allowedOrigIso2Additional())
 		))) {
-			$this->checkCountryDest();
+			if (!$this->rr()->getDestinationCountry()) {
+				$this->error('Укажите страну.');
+			}
+			if (!$this->dCity()) {
+				$this->error('Укажите город.');
+			}
+			if (!$this->dRegion()) {
+				$this->error('Укажите область.');
+			}
 			$this->_collect();
 		}
 	}

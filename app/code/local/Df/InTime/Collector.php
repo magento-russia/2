@@ -9,7 +9,7 @@ class Collector extends \Df\Shipping\Collector\Ua {
 	 * @return void
 	 */
 	protected function _collect() {
-		$this->checkCountryDestIs('UA');
+		$this->checkCountryDestIsUA();
 		$this->checkStreetDest();
 		//rm_log(\Df\InTime\Api::s()->списокСправочников());
 		//rm_log(\Df\InTime\Api::s()->подразделения());

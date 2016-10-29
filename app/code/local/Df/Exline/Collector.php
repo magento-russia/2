@@ -72,7 +72,7 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	private function locationDestId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $result */
-			$result = (int)Locator::findD($this->cityDestUc());
+			$result = (int)Locator::findD($this->dCityUc());
 			if (0 >= $result) {
 				$this->errorInvalidCityDest();
 			}
@@ -88,13 +88,13 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	private function locationOrigId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int $result */
-			switch ($this->countryOrigIso2()) {
+			switch ($this->oCountryIso2()) {
 				case 'RU':
 					$result = (int)Locator::findO('РОССИЯ');
 					df_assert_gt0($result);
 					break;
 				case 'KZ':
-					$result = (int)Locator::findO($this->cityOrigUc());
+					$result = (int)Locator::findO($this->oCityUc());
 					if (0 >= $result) {
 						$this->errorInvalidCityOrig();
 					}

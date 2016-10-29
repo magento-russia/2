@@ -15,16 +15,15 @@ abstract class Locator extends \Df_Core_Model {
 	 * @param string $type
 	 * @return array(string => string|int|array(string|int))
 	 */
-	protected function map($type) {return dfc($this, function($type) {return
-		df_cache_get_simple(df_ckey(get_class(), $type), function() use($type) {return
+	protected function map($type) {return
+		df_cache_get_simple([get_class($this), $type], function() use($type) {return
 			df_key_uc($this->_map($type))
 		;})
-	;}, func_get_args());}
+	;}
 
 	/**
 	 * @used-by \Df\Exline\Locator::findD()
 	 * @used-by \Df\Exline\Locator::findO()
-	 * @used-by \Df\InTime\Locator::find()
 	 * @used-by \Df\NovaPoshta\Locator::findD()
 	 * @used-by \Df\NovaPoshta\Locator::findO()
 	 * @param string $type

@@ -10,7 +10,7 @@ class Foreign extends Child {
 	 */
 	protected function _collect() {
 		/** @var int|null $zone */
-		$zone = dfa(D::$countries, $this->countryDestUc());
+		$zone = dfa(D::$countries, $this->dCountryUc());
 		if (is_null($zone)) {
 			$this->errorInvalidCountryDest();
 		}

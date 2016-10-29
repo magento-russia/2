@@ -8,6 +8,6 @@ abstract class WithForeign extends \Df\Shipping\Collector\Conditional {
 	 * @return string
 	 */
 	protected function suffix() {return
-		$this->domesticIso2() === $this->countryDestIso2() ? 'Domestic' : 'Foreign'
+		$this->domesticIso2() === $this->dCountryIso2() ? 'Domestic' : 'Foreign'
 	;}
 }

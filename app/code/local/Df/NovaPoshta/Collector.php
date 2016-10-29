@@ -20,7 +20,7 @@ class Collector extends \Df\Shipping\Collector\Ua {
 	 * @return void
 	 */
 	protected function _collect() {
-		$this->checkCountryDestIs('UA');
+		$this->checkCountryDestIsUA();
 		/**
 		 * «Параметры посылок, которые принимаются к отправке:
 		 * максимальная сторона – не более 150 см
@@ -80,7 +80,7 @@ class Collector extends \Df\Shipping\Collector\Ua {
 	private function locationDest() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = Locator::findD($this->cityDestUc());
+			$result = Locator::findD($this->dCityUc());
 			if (!$result) {
 				$this->errorInvalidCityDest();
 			}
@@ -111,7 +111,7 @@ class Collector extends \Df\Shipping\Collector\Ua {
 	private function locationOrig() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = Locator::findO($this->cityOrigUc());
+			$result = Locator::findO($this->oCityUc());
 			if (!$result) {
 				$this->errorInvalidCityOrig();
 			}

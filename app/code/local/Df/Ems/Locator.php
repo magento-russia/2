@@ -6,25 +6,14 @@ use Df_Directory_Model_Country as Country;
 class Locator extends \Df\Shipping\Locator {
 	/**
 	 * 2016-10-25
-	 * @param Country|null $country
+	 * @param Country $country
 	 * @param int|null $regionId
-	 * @param string|null $city
+	 * @param string $city
 	 * @return string|null
 	 */
-	public static function find($country, $regionId, $city) {
-		/** @var string|null $result */
-		$result = null;
-		// Сначала пробуем найти город
-		if ($city) {
-			$result = self::city($city);
-		}
-		// Город не найден. Теперь ищем субъект РФ.
-		if (!$result && $regionId) {
-			$result = self::region($regionId);
-		}
-		// Субъект РФ не найден. Ищем страну.
-		return $result ?: (!$country ? null : self::country($country->getNameRussian()));
-	}
+	public static function find(Country $country, $regionId, $city) {return
+		$country->isRussia() ? self::city($city) : self::country($country->getNameRussian())
+	;}
 
 	/**
 	 * 2016-10-25

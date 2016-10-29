@@ -11,13 +11,13 @@ class Domestic extends Child {
 	protected function _collect() {
 		$this->checkCityOrig();
 		/** @var int|null $cityIdOrig */
-		$cityIdOrig = dfa(D::$cities, $this->cityOrigUc());
+		$cityIdOrig = dfa(D::$cities, $this->oCityUc());
 		if (!$cityIdOrig) {
 			$this->errorInvalidCityOrig();
 		}
 		$this->checkCityDest();
 		/** @var int|null $cityIdDest */
-		$cityIdDest = dfa(D::$cities, $this->cityDestUc());
+		$cityIdDest = dfa(D::$cities, $this->dCityUc());
 		if (!$cityIdDest) {
 			$this->errorInvalidCityDest();
 		}
