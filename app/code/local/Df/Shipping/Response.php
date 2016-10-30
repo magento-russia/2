@@ -40,7 +40,13 @@ class Response extends \Df_Core_Model {
 	/**
 	 * @return void
 	 */
-	public function log() {df_report($this->getLogFileNameTemplate(), $this->report());}
+	public function log() {df_report(
+		strtr('{module}-{date}-{time}.{extension}', [
+			'{extension}' => $this->_type, '{module}' => df_module_id($this->getRequest(), '.')
+		])
+		, $this->report()
+	);}
+
 
 	/**
 	 * @param string $pattern
@@ -106,7 +112,12 @@ class Response extends \Df_Core_Model {
 	public function report() {return
 		(self::$TYPE__JSON === $this->_type)
 		&& isset($this->_jsonDecoded) && is_array($this->_jsonDecoded)
-		? df_print_params($this->_jsonDecoded)
+		/**
+		 * 2016-10-30
+		 * @see df_json_prettify() почему-то вставляет пустые строки между значащими,
+		 * лень разбираться.
+		 */
+		? df_json_encode_pretty($this->_jsonDecoded)
 		: $this->text()
 	;}
 
@@ -145,13 +156,6 @@ class Response extends \Df_Core_Model {
 		
 	/** @return \Df\Shipping\Request */
 	protected function getRequest() {return $this->cfg(self::P__REQUEST);}
-
-	/** @return string */
-	private function getLogFileNameTemplate() {
-		return strtr('{module}-{ordering}.{extension}', array(
-			'{extension}' => $this->_type, '{module}' => df_module_id($this->getRequest(), '.')
-		));
-	}
 
 	/**
 	 * @override

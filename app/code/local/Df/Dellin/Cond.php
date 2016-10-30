@@ -3,6 +3,14 @@
 namespace Df\Dellin;
 class Cond extends \Df\Shipping\Request {
 	/**
+	 * 2016-10-30
+	 * @override
+	 * @see \Df\Shipping\Request::_getDeliveryTime()
+	 * @return float
+	 */
+	protected function _getDeliveryTime() {return $this->response()->json('time/value');}
+
+	/**
 	 * 2016-10-29
 	 * @override
 	 * @see \Df\Shipping\Request::_getRate()

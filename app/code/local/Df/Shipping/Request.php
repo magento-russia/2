@@ -106,9 +106,14 @@ abstract class Request extends \Df_Core_Model {
 	 * @used-by \Df\Exline\Locator::_map()
 	 * @return Response
 	 */
-	public function response() {return dfc($this, function() {return
-		Response::i($this, $this->getResponseAsText())
-	;});}
+	public function response() {return dfc($this, function() {
+		/** @var Response $result */
+		$result = Response::i($this, $this->getResponseAsText());
+		if (df_my_local()) {
+			$result->log();
+		}
+		return $result;
+	});}
 
 	/**
 	 * @used-by \Df\Shipping\Request::getDeliveryTime()
