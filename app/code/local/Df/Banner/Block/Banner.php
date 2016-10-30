@@ -67,7 +67,7 @@ class Df_Banner_Block_Banner extends Df_Core_Block_Template {
 		return
 				parent::needToShow()
 			&&
-				df_cfg()->promotion()->banners()->getEnabled()
+				df_cfgr()->promotion()->banners()->getEnabled()
 			&&
 				$this->getBanner()->isEnabled()
 			&&

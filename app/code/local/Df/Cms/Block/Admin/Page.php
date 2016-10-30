@@ -27,7 +27,7 @@ class Df_Cms_Block_Admin_Page extends Df_Core_Block_Admin {
 	 * @return Df_Cms_Block_Admin_Page
 	 */
 	protected function _prepareLayout() {
-		if (df_cfg()->cms()->versioning()->isEnabled()) {
+		if (df_cfgr()->cms()->versioning()->isEnabled()) {
 			/* @var Mage_Core_Block_Abstract $page */
 			$page = $this->getLayout()->getBlock('cms_page');
 			if ($page) {

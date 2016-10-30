@@ -15,7 +15,7 @@ class Df_YandexMarket_Config_Backend_Category
 					"Категория «%s» отсутствует"
 					. " в <a href='%s'>официальном перечне категорий Яндекс.Маркета</a>"
 					,$value
-					,df_cfg()->yandexMarket()->other()->getCategoriesReferenceBookUrl()
+					,df_cfgr()->yandexMarket()->other()->getCategoriesReferenceBookUrl()
 				);
 			}
 		}

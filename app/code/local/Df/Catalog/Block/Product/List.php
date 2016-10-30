@@ -17,11 +17,11 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 					(
 							df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 						&&
-							df_cfg()->tweaks()->catalog()->product()->view()->needHideAddToCart()
+							df_cfgr()->tweaks()->catalog()->product()->view()->needHideAddToCart()
 					)
 				||
 					(
-							df_cfg()->tweaks()->catalog()->product()->_list()->needHideAddToCart()
+							df_cfgr()->tweaks()->catalog()->product()->_list()->needHideAddToCart()
 						&&
 							df_h()->tweaks()->isItCatalogProductList()
 					)
@@ -38,7 +38,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 			if (
 					df_h()->tweaks()->isItCatalogProductList()
 				&&
-					df_cfg()->tweaks()->catalog()->product()->_list()->needReplaceAddToCartWithMore()
+					df_cfgr()->tweaks()->catalog()->product()->_list()->needReplaceAddToCartWithMore()
 			) {
 				$textToTranslate = dfa($fa, 0);
 				if (is_string($textToTranslate)) {
@@ -73,7 +73,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 							df_handle(Df_Core_Model_Layout_Handle::CMS_PAGE)
 					)
 				&&
-					df_cfg()->tweaks()->catalog()->product()->_list()->needReplaceAddToCartWithMore()
+					df_cfgr()->tweaks()->catalog()->product()->_list()->needReplaceAddToCartWithMore()
 			)
 		?
 			parent::getProductUrl($product, $additional)
@@ -94,7 +94,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->catalogProductList()
+				df_cfgr()->speed()->blockCaching()->catalogProductList()
 		) {
 			$result = array_merge($result, array(
 				get_class($this)
@@ -119,7 +119,7 @@ class Df_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->catalogProductList()
+				df_cfgr()->speed()->blockCaching()->catalogProductList()
 		) {
 			$this->addData(array(
 				/**

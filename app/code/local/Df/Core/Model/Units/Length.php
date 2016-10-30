@@ -79,7 +79,7 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 	/** @return string */
 	private function getDefaultUnits() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cfg()->shipping()->product()->getUnitsLength();
+			$this->{__METHOD__} = df_cfgr()->shipping()->product()->getUnitsLength();
 		}
 		return $this->{__METHOD__};
 	}

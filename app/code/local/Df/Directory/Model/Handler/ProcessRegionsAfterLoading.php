@@ -56,7 +56,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 			foreach (array('RU', 'KZ', 'UA') as $iso2) {
 				/** @var array $iso2 */
 				$ids = array_merge($ids,
-					df_cfg()->directory()->getRegions($iso2)->getPriorityRegionIds()
+					df_cfgr()->directory()->getRegions($iso2)->getPriorityRegionIds()
 				);
 			}
 			$this->{__METHOD__} =

@@ -12,7 +12,7 @@ class Df_Catalog_Block_Product_Compare_Sidebar extends Mage_Catalog_Block_Produc
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->catalogProductCompareSidebar()
+				df_cfgr()->speed()->blockCaching()->catalogProductCompareSidebar()
 		) {
 			$result = array_merge($result, array(get_class($this)), $this->getItems()->getProductIds());
 		}
@@ -28,7 +28,7 @@ class Df_Catalog_Block_Product_Compare_Sidebar extends Mage_Catalog_Block_Produc
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->catalogProductCompareSidebar()
+				df_cfgr()->speed()->blockCaching()->catalogProductCompareSidebar()
 		) {
 			/**
 			 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

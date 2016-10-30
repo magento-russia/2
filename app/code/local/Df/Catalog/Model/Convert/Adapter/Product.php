@@ -111,7 +111,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		if (isset($importData['category_ids'])) {
 			$product->setCategoryIds($importData['category_ids']);
 		}
-		if (df_cfg()->dataflow()->products()->getEnhancedCategorySupport()) {
+		if (df_cfgr()->dataflow()->products()->getEnhancedCategorySupport()) {
 			// BEGIN PATCH: Import categories in various formats
 			Df_Dataflow_Model_Importer_Product_Categories::i($product, $importData, $store)->process();
 			// END PATCH: Import categories in various formats
@@ -286,7 +286,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		$imageData = $galleryImporter->getPrimaryImages();
 		// Do something only if there are some new images!
 		if (!empty ($imageData)) {
-			if (df_cfg()->dataflow()->products()->getDeletePreviousImages()) {
+			if (df_cfgr()->dataflow()->products()->getDeletePreviousImages()) {
 				//remove previous images
 				$product->deleteImages();
 			}
@@ -302,7 +302,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 					df_handle_entry_point_exception($e, false);
 				}
 			}
-			if (df_cfg()->dataflow()->products()->getGallerySupport()) {
+			if (df_cfgr()->dataflow()->products()->getGallerySupport()) {
 				// BEGIN PATCH 2: Import of additional images
 				$galleryImporter->addAdditionalImagesToProduct();
 				// END PATCH 2: Import of additional images
@@ -311,7 +311,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		}
 		// END PATCH: import images
 		// BEGIN PATCH: Import of custom options
-		if (df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
+		if (df_cfgr()->dataflow()->products()->getCustomOptionsSupport()) {
 			$product->reload();
 			Df_Dataflow_Model_Importer_Product_Options::i($product, $importData)->process();
 			$product->save();

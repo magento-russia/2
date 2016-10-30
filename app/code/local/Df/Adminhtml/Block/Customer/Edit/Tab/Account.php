@@ -8,7 +8,7 @@ class Df_Adminhtml_Block_Customer_Edit_Tab_Account extends Mage_Adminhtml_Block_
 	 */
 	public function initForm() {
 		parent::initForm();
-		if (df_cfg()->admin()->sales()->customers()->getEnableWebsiteChanging()) {
+		if (df_cfgr()->admin()->sales()->customers()->getEnableWebsiteChanging()) {
 			// Позволяем администратору редактировать поле website_id
 			/** @var Varien_Object $websiteIdElement */
 			$websiteIdElement = $this->getForm()->getElement('website_id');

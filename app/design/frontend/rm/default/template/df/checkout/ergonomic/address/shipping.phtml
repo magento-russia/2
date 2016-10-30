@@ -48,7 +48,7 @@
 	var shippingRegionEnabled =
 		<?php echo intval(
 			Df_Checkout_Model_Config_Source_Field_Applicability::VALUE__NO
-			!== df_cfg()->checkout()->applicabilityShipping()->region()
+			!== df_cfgr()->checkout()->applicabilityShipping()->region()
 		); ?>
 	;
 	var shippingRegionUpdater =

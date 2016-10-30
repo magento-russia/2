@@ -28,7 +28,7 @@ class Df_Catalog_Helper_Product_Compare extends Mage_Catalog_Helper_Product_Comp
 	private function needHideLink_addToCompare() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Tweaks_Model_Settings_Catalog_Product $settings */
-			$settings = df_cfg()->tweaks()->catalog()->product();
+			$settings = df_cfgr()->tweaks()->catalog()->product();
 			$this->{__METHOD__} =
 					df_module_enabled(Df_Core_Module::TWEAKS)
 				&&

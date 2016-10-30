@@ -11,7 +11,7 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	 * @override
 	 */
 	public function __construct() {
-		if (df_cfg()->seo()->common()->getEnhancedRussianTransliteration()) {
+		if (df_cfgr()->seo()->common()->getEnhancedRussianTransliteration()) {
 			$this->_convertTable =
 				array_merge($this->_convertTable, $this->getRussianUpdatesLc()
 			);
@@ -26,7 +26,7 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	 */
 	public function extendedFormat($string) {
 		return
-			df_cfg()->seo()->urls()->getPreserveCyrillic()
+			df_cfgr()->seo()->urls()->getPreserveCyrillic()
 			? df_output()->formatUrlKeyPreservingCyrillic($string)
 			: df_output()->transliterate($string)
 		;

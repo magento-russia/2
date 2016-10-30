@@ -5,7 +5,7 @@ class Df_Cms_Observer {
 	 * @return void
 	 */
 	public function admin_user_delete_after() {
-		if (df_cfg()->cms()->versioning()->isEnabled()) {
+		if (df_cfgr()->cms()->versioning()->isEnabled()) {
 			/** @var Df_Cms_Model_Page_Version $version */
 			$version = Df_Cms_Model_Page_Version::i();
 			$collection = $version->getCollection();
@@ -34,7 +34,7 @@ class Df_Cms_Observer {
 		Varien_Simplexml_Element $config, Df_Logging_Model_Event $eventModel
 	) {
 		return
-			df_cfg()->cms()->hierarchy()->isEnabled()
+			df_cfgr()->cms()->hierarchy()->isEnabled()
 			? $eventModel->setInfo(df_h()->cms()->__('Tree Viewed'))
 			: false
 		;
@@ -57,7 +57,7 @@ class Df_Cms_Observer {
 		if ($page) {
 			$this->replaceValidatorByCyrillic($baseFieldset);
 		}
-		if (df_cfg()->cms()->versioning()->isEnabled()) {
+		if (df_cfgr()->cms()->versioning()->isEnabled()) {
 			$isActiveElement = $form->getElement('is_active');
 			if ($isActiveElement) {
 				// Making is_active as disabled if user does not have publish permission
@@ -145,7 +145,7 @@ class Df_Cms_Observer {
 		Varien_Simplexml_Element $config, Df_Logging_Model_Event $eventModel
 	) {
 		return
-			df_cfg()->cms()->versioning()->isEnabled()
+			df_cfgr()->cms()->versioning()->isEnabled()
 			? $eventModel->setInfo(Mage::app()->getRequest()->getParam('revision_id'))
 			: false
 		;
@@ -159,7 +159,7 @@ class Df_Cms_Observer {
 	 * @return void
 	 */
 	public function cms_controller_router_match_before(Varien_Event_Observer $o) {
-		if (df_cfg()->cms()->hierarchy()->isEnabled()) {
+		if (df_cfgr()->cms()->hierarchy()->isEnabled()) {
 			/**
 			 * @var Varien_Object $condition
 			 * @see Df_Cms_Controller_Router::match()
@@ -227,7 +227,7 @@ class Df_Cms_Observer {
 	public function cms_page_save_after(Varien_Event_Observer $o) {
 		/* @var Mage_Cms_Model_Page|Df_Cms_Model_Page $page */
 		$page = $o['object'];
-		if (df_cfg()->cms()->versioning()->isEnabled()) {
+		if (df_cfgr()->cms()->versioning()->isEnabled()) {
 			// Create new initial version & revision if it
 			// is a new page or version control was turned on for this page.
 			if (
@@ -257,7 +257,7 @@ class Df_Cms_Observer {
 				}
 			}
 		}
-		if (df_cfg()->cms()->hierarchy()->isEnabled()) {
+		if (df_cfgr()->cms()->hierarchy()->isEnabled()) {
 			// rebuild URL rewrites if page has changed for identifier
 			if ($page->dataHasChangedFor('identifier')) {
 				Df_Cms_Model_Hierarchy_Node::s()->updateRewriteUrls($page);
@@ -285,7 +285,7 @@ class Df_Cms_Observer {
 	public function cms_page_save_before(Varien_Event_Observer $o) {
 		/* @var Mage_Cms_Model_Page|Df_Cms_Model_Page $page */
 		$page = $o['object'];
-		if (df_cfg()->cms()->versioning()->isEnabled()) {
+		if (df_cfgr()->cms()->versioning()->isEnabled()) {
 			/*
 			 * All new pages created by user without permission to publish
 			 * should be disabled from the beginning.
@@ -301,7 +301,7 @@ class Df_Cms_Observer {
 				$page->setPublishedRevisionId(null);
 			}
 		}
-		if (df_cfg()->cms()->hierarchy()->isEnabled()) {
+		if (df_cfgr()->cms()->hierarchy()->isEnabled()) {
 			/*
 			 * Checking if node's data was passed and if yes. Saving new sort order for nodes.
 			 */
@@ -437,7 +437,7 @@ class Df_Cms_Observer {
 	 * @return void
 	 */
 	public function cms_page_get_available_statuses(Varien_Event_Observer $o) {
-		if (df_cfg()->cms()->versioning()->isEnabled()) {
+		if (df_cfgr()->cms()->versioning()->isEnabled()) {
 			/** @var Varien_Object $statuses */
 			$statuses = $o['statuses'];
 			$statuses->setData(Mage_Cms_Model_Page::STATUS_ENABLED, df_h()->cms()->__('Published'));
@@ -452,7 +452,7 @@ class Df_Cms_Observer {
 	 */
 	public function controller_action_layout_generate_blocks_after(Varien_Event_Observer $o) {
 		try {
-			if (df_cfg()->cms()->hierarchy()->isEnabled()) {
+			if (df_cfgr()->cms()->hierarchy()->isEnabled()) {
 				df_handle_event(
 					Df_Cms_Model_Handler_ContentsMenu_Insert::class
 					,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class

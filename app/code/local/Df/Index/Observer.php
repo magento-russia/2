@@ -9,7 +9,7 @@ class Df_Index_Observer {
 		try {
 			if (df_installed()) {
 				/** @var int $varcharLength */
-				$varcharLength = df_cfg()->index()->getVarcharLength();
+				$varcharLength = df_cfgr()->index()->getVarcharLength();
 				if (0 < $varcharLength) {
 					/** @var string $keyColumns */
 					$keyColumns = 'columns';

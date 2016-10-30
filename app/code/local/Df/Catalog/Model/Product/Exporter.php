@@ -174,7 +174,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			}
 			/**
 			 * Раньше тут был код:
-				if (0 < df_cfg()->yandexMarket()->products()->getMinQty()) {
+				if (0 < df_cfgr()->yandexMarket()->products()->getMinQty()) {
 					$result
 						->joinField(
 							'qty',
@@ -186,7 +186,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 						)
 						->addAttributeToFilter(
 							'qty'
-							,array('ge' => df_cfg()->yandexMarket()->products()->getMinQty())
+							,array('ge' => df_cfgr()->yandexMarket()->products()->getMinQty())
 						)
 					;
 				}

@@ -8,7 +8,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 	 */
 	public function handle() {
 		/** @var Df_Tweaks_Model_Settings_Header $config */
-		$config = df_cfg()->tweaks()->header();
+		$config = df_cfgr()->tweaks()->header();
 		/**
 		 * @TODO ЗДЕСЬ НАДО ДОБАВИТЬ В ПОКУПАТЕЛЬСКОЕ МЕНЮ НОВЫЕ ССЫЛКИ,
 		 * ОПИСАННЫЕ В НАСТРОЕЧНЫХ ФАЙЛАХ
@@ -67,7 +67,7 @@ class Df_Tweaks_Model_Handler_Header_AdjustLinks extends Df_Core_Model_Handler {
 		$accountUrl = df_customer_h()->getAccountUrl();
 		/** @var string $customerName */
 		$customerName =
-			df_cfg()->tweaks()->header()->showOnlyFirstName()
+			df_cfgr()->tweaks()->header()->showOnlyFirstName()
 			? df_h()->tweaks()->customer()->getFirstNameWithPrefix()
 			: df_session_customer()->getCustomer()->getName()
 		;

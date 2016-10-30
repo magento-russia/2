@@ -12,7 +12,7 @@ class Df_Core_Boot {
 	 * controller_front_init_before — это первое событие,
 	 * которое становится доступно подписчикам,
 	 * а метод @see Df_Speed_Observer::controller_front_init_before()
-	 * уже использует @uses df_cfg(),
+	 * уже использует @uses df_cfgr(),
 	 * поэтому нам надо инициализирвать РСМ.
 	 * @used-by Mage_Core_Model_App::_callObserverMethod()
 	 * @return void

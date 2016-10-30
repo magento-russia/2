@@ -333,7 +333,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		 * мы можем сделать перенаправление на настраиваемый товар — это самое разумное
 		 */
 		$this->getResource()->clearRewritesForInvisibleProducts($storeId);
-		if (df_cfg()->seo()->urls()->needRedirectToCanonicalProductUrl()) {
+		if (df_cfgr()->seo()->urls()->needRedirectToCanonicalProductUrl()) {
 			$this->makeRedirectsToCanonicalProductUrl($storeId);
 		}
 		return $this;
@@ -578,7 +578,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		// Если перенаправлений меньше 2, то переписывать нечего
 		if (1 < count($rewrites)) {
 			$indexOfMainRewrite =
-				df_cfg()->seo()->urls()->getAddCategoryToProductUrl($storeId)
+				df_cfgr()->seo()->urls()->getAddCategoryToProductUrl($storeId)
 				? $this->getIndexOfRewriteWithCategory($rewrites)
 				: $this->getIndexOfRewriteWithoutCategory($rewrites)
 			;

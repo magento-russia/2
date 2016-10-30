@@ -491,7 +491,7 @@ abstract class Collector extends Bridge {
 	 * @return string
 	 */
 	private function messageFailureGeneral() {return $this->main()->evaluateMessage(
-		df_cfg()->shipping()->message()->getFailureGeneral($this->store())
+		df_cfgr()->shipping()->message()->getFailureGeneral($this->store())
 	);}
 
 	/**

@@ -12,7 +12,7 @@ class Df_Wishlist_Block_Customer_Sidebar extends Mage_Wishlist_Block_Customer_Si
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->wishlistCustomerSidebar()
+				df_cfgr()->speed()->blockCaching()->wishlistCustomerSidebar()
 		) {
 			$result = array_merge($result, array(get_class($this)), $this->getProductIds());
 		}
@@ -28,7 +28,7 @@ class Df_Wishlist_Block_Customer_Sidebar extends Mage_Wishlist_Block_Customer_Si
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->wishlistCustomerSidebar()
+				df_cfgr()->speed()->blockCaching()->wishlistCustomerSidebar()
 		) {
 			/**
 			 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

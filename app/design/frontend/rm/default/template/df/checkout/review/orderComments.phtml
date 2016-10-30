@@ -30,11 +30,11 @@
 <style type='text/css'>
 	#df_order_comment {
 		height: <?php echo $this->getTextareaVisibleRows(); ?>em;
-		<?php if (df_cfg()->checkout()->orderComments()->specifyTextareaWidth()) { ?>
+		<?php if (df_cfgr()->checkout()->orderComments()->specifyTextareaWidth()) { ?>
 			width: <?php echo $this->getTextareaWidth(); ?>px;
 		<?php } ?>
 		<?php
-			if (df_cfg()->checkout()->orderComments()->specifyTextareaPosition()) {
+			if (df_cfgr()->checkout()->orderComments()->specifyTextareaPosition()) {
 				echo $this->getFloatRule();
 				echo $this->getMarginRule();
 			}
@@ -43,7 +43,7 @@
 </style>
 <?php
     /** @var Df_Checkout_Model_Settings_OrderComments $settings  */
-	$settings = df_cfg()->checkout()->orderComments();
+	$settings = df_cfgr()->checkout()->orderComments();
 ?>
 <script type='text/javascript'>
 	rm.namespace('rm.checkout.orderComments');

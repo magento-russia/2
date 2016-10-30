@@ -57,12 +57,12 @@ abstract class Df_Page_JQueryInjecter extends Df_Core_Model {
 	 */
 	public static function p($format, array &$staticItems) {
 		/** @var bool $needLoad */
-		static $needLoad; if (is_null($needLoad)) {$needLoad = df_cfg()->jquery()->needLoad();}
+		static $needLoad; if (is_null($needLoad)) {$needLoad = df_cfgr()->jquery()->needLoad();}
 		/** @var Df_Page_JQueryInjecter $processor */
 		static $processor;
 		if ($needLoad && !$processor) {
 			$processor =
-				df_cfg()->jquery()->fromGoogle()
+				df_cfgr()->jquery()->fromGoogle()
 				? new Df_Page_JQueryInjecter_Google
 				: new Df_Page_JQueryInjecter_Local
 			;

@@ -31,12 +31,12 @@ class Df_Reports_Model_Handler_SetDefaultFilterValues extends Df_Core_Model_Hand
 			if (
 					Df_Reports_Model_Config_Source_Duration::UNDEFINED
 				!==
-					df_cfg()->reports()->common()->getPeriodDuration()
+					df_cfgr()->reports()->common()->getPeriodDuration()
 			) {
 				/** @var Df_Reports_Model_Config_Source_Duration $configDuration */
 				$configDuration = Df_Reports_Model_Config_Source_Duration::i();
 				/** @var string $duration */
-				$duration = df_cfg()->reports()->common()->getPeriodDuration();
+				$duration = df_cfgr()->reports()->common()->getPeriodDuration();
 				foreach ($configDuration->toOptionArray() as $option) {
 					/** @var array(string => string) $option */
 					if ($duration === df_option_v($option))  {

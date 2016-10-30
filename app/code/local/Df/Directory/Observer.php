@@ -15,14 +15,14 @@ class Df_Directory_Observer {
 		$collection = $o['collection'];
 		/**
 		 * 2015-03-24
-		 * Проверку надо обязательно выполнить до вызова @uses df_cfg(),
+		 * Проверку надо обязательно выполнить до вызова @uses df_cfgr(),
 		 * потому что если событие «core_collection_abstract_load_after»
 		 * относится к коллекции магазинов @see Mage_Core_Model_App::_initStores(),
-		 * то использовать @uses df_cfg() ещё нельзя: текущий магазие ещё не инициализирован.
+		 * то использовать @uses df_cfgr() ещё нельзя: текущий магазие ещё не инициализирован.
 		 */
 		if ($collection instanceof Mage_Directory_Model_Resource_Region_Collection) {
 			/** @var Df_Directory_Settings $cfg */
-			static $cfg; if (!$cfg) {$cfg = df_cfg()->directory();};
+			static $cfg; if (!$cfg) {$cfg = df_cfgr()->directory();};
 			if (
 					(
 						$cfg->regionsRu()->getEnabled()

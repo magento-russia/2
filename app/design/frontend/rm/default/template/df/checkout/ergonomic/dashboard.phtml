@@ -6,12 +6,12 @@
 </script>
 <script type='text/javascript'>
 	rm.namespace('rm.checkout');
-	rm.checkout.alphabet = '<?php echo df_cfg()->checkout()->other()->getAlphabet();?>';
+	rm.checkout.alphabet = '<?php echo df_cfgr()->checkout()->other()->getAlphabet();?>';
 </script>
 <style type='text/css'>
 	.df .df-checkout-ergonomic .df-body .df-block .error-msg
 	,.df .df-checkout-ergonomic .df-body .df-block .error-msg * {
-		color: <?php echo df_cfg()->checkout()->other()->getColorFailure();?>;
+		color: <?php echo df_cfgr()->checkout()->other()->getColorFailure();?>;
 	}
 </style>
 <?php

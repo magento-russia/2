@@ -255,7 +255,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				}
 			}
 			// BEGIN PATCH: Export of additional images
-			if (df_cfg()->dataflow()->products()->getGallerySupport()) {
+			if (df_cfgr()->dataflow()->products()->getGallerySupport()) {
 				$row['df_additional_images'] = $this->getAdditionalImagesAsString(array(
 					'product' => $product, 'row' => $row)
 				);
@@ -263,13 +263,13 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 			// END PATCH: Export of additional images
 
 			// BEGIN PATCH: Export of Custom Options
-			if (df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
+			if (df_cfgr()->dataflow()->products()->getCustomOptionsSupport()) {
 				$this->unparseCustomOptions($product, $row);
 			}
 			// END PATCH: Export of Custom Options
 
 			// BEGIN PATCH: Export of product categories
-			if (df_cfg()->dataflow()->products()->getEnhancedCategorySupport()) {
+			if (df_cfgr()->dataflow()->products()->getEnhancedCategorySupport()) {
 				$row['df_categories'] =
 					Df_Dataflow_Model_Exporter_Product_Categories::i(
 						array(

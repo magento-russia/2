@@ -7,7 +7,7 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 	 * @return void
 	 */
 	public function handle() {
-		if ($this->getOrderComment() && df_cfg()->checkout()->orderComments()->isEnabled()) {
+		if ($this->getOrderComment() && df_cfgr()->checkout()->orderComments()->isEnabled()) {
 			$this->getEvent()->getOrder()->addData(array(
 				/**
 				 * Устанавка «customer note»
@@ -15,10 +15,10 @@ class Df_Checkout_Model_Handler_SaveOrderComment extends Df_Core_Model_Handler {
 				 */
 				Df_Sales_Model_Order::P__CUSTOMER_NOTE => $this->getOrderComment()
 				,Df_Sales_Model_Order::P__CUSTOMER_NOTE_NOTIFY =>
-					df_cfg()->checkout()->orderComments()->needShowInOrderEmail()
+					df_cfgr()->checkout()->orderComments()->needShowInOrderEmail()
 			));
 			$this->getEvent()->getOrder()->setCommentToBeVisibleOnFront(
-				df_cfg()->checkout()->orderComments()->needShowInCustomerAccount()
+				df_cfgr()->checkout()->orderComments()->needShowInCustomerAccount()
 			);
 		}
 	}

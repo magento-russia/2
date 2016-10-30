@@ -15,7 +15,7 @@ class Df_Checkout_Model_Filter_Ergonomic_SetDefaultPassword
 	public function filter($value) {
 		df_param_array($value, 0);
 		/** @var Df_Checkout_Model_Settings_Field_Applicability $settings */
-		$settings = df_cfg()->checkout()->applicabilityBilling();
+		$settings = df_cfgr()->checkout()->applicabilityBilling();
 		if (
 				df_checkout_ergonomic()
 			&&

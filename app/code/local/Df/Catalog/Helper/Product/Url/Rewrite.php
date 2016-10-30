@@ -22,7 +22,7 @@ class Df_Catalog_Helper_Product_Url_Rewrite extends Mage_Catalog_Helper_Product_
 					 */
 					sprintf(
 						'(url_rewrite.category_id IS %s) AND (url_rewrite.store_id = ?) AND '
-						,df_cfg()->seo()->urls()->getAddCategoryToProductUrl($storeId)
+						,df_cfgr()->seo()->urls()->getAddCategoryToProductUrl($storeId)
 						? 'NOT NULL'
 						: 'NULL'
 					)

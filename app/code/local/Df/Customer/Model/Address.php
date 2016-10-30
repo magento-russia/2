@@ -40,7 +40,7 @@ class Df_Customer_Model_Address extends Mage_Customer_Model_Address {
 		$result =
 				!$addressType
 			||
-				!df_cfg()->checkout()->field()->getApplicabilityByAddressType($addressType)->isEnabled()
+				!df_cfgr()->checkout()->field()->getApplicabilityByAddressType($addressType)->isEnabled()
 			? parent::validate()
 			: $this->getValidator()->validate()
 		;

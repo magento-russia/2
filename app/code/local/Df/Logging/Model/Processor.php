@@ -253,7 +253,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 				if ($handler) {
 					if (
 						$model instanceof Mage_Core_Model_Store
-						|| df_cfg()->logging()->isEnabled()
+						|| df_cfgr()->logging()->isEnabled()
 					) {
 						$changes = $handler->$callback($model, $this);
 						//Because of logging view action, $changes must be checked if it is an object

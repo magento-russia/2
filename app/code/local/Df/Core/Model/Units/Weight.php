@@ -33,7 +33,7 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	/** @return string */
 	private function getDefaultUnits() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cfg()->shipping()->product()->getUnitsWeight();
+			$this->{__METHOD__} = df_cfgr()->shipping()->product()->getUnitsWeight();
 		}
 		return $this->{__METHOD__};
 	}

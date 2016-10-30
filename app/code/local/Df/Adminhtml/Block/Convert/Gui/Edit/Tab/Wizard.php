@@ -14,7 +14,7 @@ class Df_Adminhtml_Block_Convert_Gui_Edit_Tab_Wizard
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded = df_cfg()->dataflow()->patches()->fixFieldMappingGui();
+			$patchNeeded = df_cfgr()->dataflow()->patches()->fixFieldMappingGui();
 		}
 		return $patchNeeded ? $this->getMappingsDf($entityType) : parent::getMappings($entityType);
 	}

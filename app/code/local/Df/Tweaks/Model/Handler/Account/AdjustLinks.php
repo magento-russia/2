@@ -13,28 +13,28 @@ class Df_Tweaks_Model_Handler_Account_AdjustLinks extends Df_Core_Model_Handler 
 		 * при отключенных функциях модуля Df_Tweaks
 		 */
 		if (
-				df_cfg()->tweaks()->account()->removeSectionApplications()
+				df_cfgr()->tweaks()->account()->removeSectionApplications()
 			&&
 				!is_null($this->getBlock())
 		) {
 			$this->getBlock()->removeLinkByPath('oauth/customer_token');
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionBillingAgreements()
+				df_cfgr()->tweaks()->account()->removeSectionBillingAgreements()
 			&&
 				!is_null($this->getBlock())
 		) {
 			$this->getBlock()->removeLinkByPath('sales/billing_agreement/');
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionDownloadableProducts()
+				df_cfgr()->tweaks()->account()->removeSectionDownloadableProducts()
 			&&
 				!is_null($this->getBlock())
 		) {
 			$this->getBlock()->removeLinkByPath('downloadable/customer/products');
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionNewsletterSubscriptions()
+				df_cfgr()->tweaks()->account()->removeSectionNewsletterSubscriptions()
 			&&
 				!is_null($this->getBlock())
 		) {
@@ -44,28 +44,28 @@ class Df_Tweaks_Model_Handler_Account_AdjustLinks extends Df_Core_Model_Handler 
 			;
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionProductReviews()
+				df_cfgr()->tweaks()->account()->removeSectionProductReviews()
 			&&
 				!is_null($this->getBlock())
 		) {
 			$this->getBlock()->removeLinkByPath('review/customer');
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionRecurringProfiles()
+				df_cfgr()->tweaks()->account()->removeSectionRecurringProfiles()
 			&&
 				!is_null($this->getBlock())
 		) {
 			$this->getBlock()->removeLinkByPath('sales/recurring_profile/');
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionTags()
+				df_cfgr()->tweaks()->account()->removeSectionTags()
 			&&
 				!is_null($this->getBlock())
 		) {
 			$this->getBlock()->removeLinkByPath('tag/customer/');
 		}
 		if (
-				df_cfg()->tweaks()->account()->removeSectionWishlist()
+				df_cfgr()->tweaks()->account()->removeSectionWishlist()
 			&&
 				!is_null($this->getBlock())
 		) {

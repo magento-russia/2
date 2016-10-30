@@ -8,7 +8,7 @@ class Df_YandexMarket_Config_Backend_Api_ConfirmationCode
 	protected function _beforeSave() {
 		try {
 			/** @var string $previousValue */
-			$previousValue = df_cfg()->yandexMarket()->api()->getConfirmationCode();
+			$previousValue = df_cfgr()->yandexMarket()->api()->getConfirmationCode();
 			if ($this->getValue() && ($this->getValue() !== $previousValue)) {
 				/** @var Mage_Core_Model_Config $config */
 				$config = new Mage_Core_Model_Config();
@@ -29,8 +29,8 @@ class Df_YandexMarket_Config_Backend_Api_ConfirmationCode
 	/** @return string */
 	private function requestToken() {
 		return Df_YandexMarket_OAuth::i(
-			df_cfg()->yandexMarket()->api()->getApplicationId()
-			, df_cfg()->yandexMarket()->api()->getApplicationPassword()
+			df_cfgr()->yandexMarket()->api()->getApplicationId()
+			, df_cfgr()->yandexMarket()->api()->getApplicationPassword()
 			, $this->getValue()
 		)->getToken();
 	}

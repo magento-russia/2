@@ -14,7 +14,7 @@ class Df_Catalog_Block_Product_View extends Mage_Catalog_Block_Product_View {
 			&&
 				df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 			&&
-				df_cfg()->tweaks()->catalog()->product()->view()->needHideEmailToFriend()
+				df_cfgr()->tweaks()->catalog()->product()->view()->needHideEmailToFriend()
 		) {
 			$result = false;
 		}
@@ -52,7 +52,7 @@ class Df_Catalog_Block_Product_View extends Mage_Catalog_Block_Product_View {
 				&&
 					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
-					df_cfg()->tweaks()->catalog()->product()->view()->needHideShortDescription()
+					df_cfgr()->tweaks()->catalog()->product()->view()->needHideShortDescription()
 			) {
 				$result->unsetData('short_description');
 			}

@@ -10,7 +10,7 @@ class Df_Catalog_Model_Product_Url extends Mage_Catalog_Model_Product_Url {
 		/** @var bool $needFormat */
 		static $needFormat;
 		if (is_null($needFormat)) {
-			$needFormat = df_cfg()->seo()->common()->getEnhancedRussianTransliteration();
+			$needFormat = df_cfgr()->seo()->common()->getEnhancedRussianTransliteration();
 		}
 		return
 			$needFormat

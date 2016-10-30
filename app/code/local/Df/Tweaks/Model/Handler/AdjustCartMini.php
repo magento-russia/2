@@ -10,7 +10,7 @@ class Df_Tweaks_Model_Handler_AdjustCartMini extends Df_Tweaks_Model_Handler_Rem
 	 * @override
 	 * @return Df_Tweaks_Model_Settings_Remove
 	 */
-	protected function getSettings() {return df_cfg()->tweaks()->cart();}
+	protected function getSettings() {return df_cfgr()->tweaks()->cart();}
 
 	/**
 	 * @override

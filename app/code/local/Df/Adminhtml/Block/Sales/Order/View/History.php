@@ -12,7 +12,7 @@ class Df_Adminhtml_Block_Sales_Order_View_History extends Mage_Adminhtml_Block_S
 	public function escapeHtml($data, $allowedTags = null) {
 		$allowedTags = is_null($allowedTags) ? array() : $allowedTags;
 		/** @var Df_Sales_Model_Settings_OrderComments $settings */
-		$settings = df_cfg()->sales()->orderComments();
+		$settings = df_cfgr()->sales()->orderComments();
 		if ($settings->preserveSomeTagsInAdminOrderView()) {
 			$allowedTags = array_merge(
 				$allowedTags, $settings->getTagsToPreserveInAdminOrderView()

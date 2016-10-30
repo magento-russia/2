@@ -75,7 +75,7 @@ class Df_Catalog_Block_Category_Navigation extends Df_Core_Block_Template {
 	protected function needToShow() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_cfg()->catalog()->navigation()->getEnabled() && $this->hasItems()
+				df_cfgr()->catalog()->navigation()->getEnabled() && $this->hasItems()
 			;
 		}
 		return $this->{__METHOD__};

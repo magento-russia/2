@@ -12,7 +12,7 @@ class Df_Page_Block_Switch extends Mage_Page_Block_Switch {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->pageSwitch()
+				df_cfgr()->speed()->blockCaching()->pageSwitch()
 			&&
 				$this->isTemplateStandard()
 		) {
@@ -40,7 +40,7 @@ class Df_Page_Block_Switch extends Mage_Page_Block_Switch {
 				(
 						df_module_enabled(Df_Core_Module::SPEED)
 					&&
-						df_cfg()->speed()->blockCaching()->pageSwitch()
+						df_cfgr()->speed()->blockCaching()->pageSwitch()
 					&&
 						$this->isTemplateStandard()
 				)

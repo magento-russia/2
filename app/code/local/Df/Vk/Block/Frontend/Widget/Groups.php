@@ -52,7 +52,7 @@ class Df_Vk_Block_Frontend_Widget_Groups extends Df_Vk_Block_Frontend_Widget {
 	 * @override
 	 * @return Df_Vk_Model_Settings_Widget
 	 */
-	protected function getSettings() {return df_cfg()->vk()->groups();}
+	protected function getSettings() {return df_cfgr()->vk()->groups();}
 
 	/**
 	 * @override

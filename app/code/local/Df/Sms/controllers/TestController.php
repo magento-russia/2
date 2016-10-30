@@ -4,7 +4,7 @@ class Df_Sms_TestController extends Mage_Core_Controller_Front_Action {
 	public function indexAction() {
 		try {
 			df_h()->sms()->send(
-				$receiver = df_cfg()->sms()->general()->getAdministratorPhone(df_store())
+				$receiver = df_cfgr()->sms()->general()->getAdministratorPhone(df_store())
 				,$message = 'давай дружить :-)'
 				,df_store()
 			);

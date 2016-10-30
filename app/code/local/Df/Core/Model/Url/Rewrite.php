@@ -11,7 +11,7 @@ class Df_Core_Model_Url_Rewrite extends Mage_Core_Model_Url_Rewrite {
 		/** @var bool */
  		static $patchEnabled;
 		if (is_null($patchEnabled)) {
-			$patchEnabled = df_cfg()->seo()->urls()->getPreserveCyrillic();
+			$patchEnabled = df_cfgr()->seo()->urls()->getPreserveCyrillic();
 		}
 		return parent::loadByRequestPath(
 			!$patchEnabled

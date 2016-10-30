@@ -21,7 +21,7 @@ class Df_AdminNotification_Model_Resource_Inbox extends Mage_AdminNotification_M
 			/** @var bool $patchNeeded */
 			static $patchNeeded;
 			if (is_null($patchNeeded)) {
-				$patchNeeded = df_cfg()->admin()->system()->notifications()->getFixReminder();
+				$patchNeeded = df_cfgr()->admin()->system()->notifications()->getFixReminder();
 			}
 			$patchNeeded ? $this->parseDf($object, $data) : parent::parse($object, $data);
 		}

@@ -63,7 +63,7 @@ class Df_Catalog_Block_Frontend_Product_View_Sku extends Df_Core_Block_Template 
 	/** @return Df_Tweaks_Model_Settings_Catalog_Product_View_Sku */
 	private function settings() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cfg()->tweaks()->catalog()->product()->view()->sku();
+			$this->{__METHOD__} = df_cfgr()->tweaks()->catalog()->product()->view()->sku();
 		}
 		return $this->{__METHOD__};
 	}

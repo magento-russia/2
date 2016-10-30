@@ -239,8 +239,8 @@ class Request extends \Mage_Shipping_Model_Rate_Request {
 
 	/** @return array(string => string) */
 	public function getMessageVariables() {return dfc($this, function() {return [
-		'{phone}' => df_cfg()->base()->getStorePhone($this->getStoreId())
-		,'{телефон магазина}' => df_cfg()->base()->getStorePhone($this->getStoreId())
+		'{phone}' => df_cfgr()->base()->getStorePhone($this->getStoreId())
+		,'{телефон магазина}' => df_cfgr()->base()->getStorePhone($this->getStoreId())
 		,'{в месте доставки}' =>
 			!$this->getDestinationCityMorpher()
 			? sprintf('в населённом пункте «%s»', $this->getDestinationCity())
@@ -628,7 +628,7 @@ class Request extends \Mage_Shipping_Model_Rate_Request {
 	/** @return int|float[] */
 	private function getDimensionDefaultValues() {return dfc($this, function() {
 		/** @var \Df\Shipping\Settings\Product $s */
-		$s = df_cfg()->shipping()->product();
+		$s = df_cfgr()->shipping()->product();
 		return [
 			P::P__WIDTH => $s->getDefaultWidth()
 			,P::P__HEIGHT => $s->getDefaultHeight()

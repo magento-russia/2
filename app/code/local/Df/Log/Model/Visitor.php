@@ -13,7 +13,7 @@ class Df_Log_Model_Visitor extends Mage_Log_Model_Visitor {
 		if (!$this->_skipRequestLogging && !$this->isModuleIgnored($observer)) {
 			try {
 				$this->setLastVisitAt(now());
-				if (!df_cfg()->speed()->general()->disableLoggingLastVisitTime()) {
+				if (!df_cfgr()->speed()->general()->disableLoggingLastVisitTime()) {
 					$this->save();
 				}
 				$this->_getSession()->setData('visitor_data', $this->getData());

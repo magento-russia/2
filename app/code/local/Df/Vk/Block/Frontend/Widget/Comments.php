@@ -16,7 +16,7 @@ class Df_Vk_Block_Frontend_Widget_Comments extends Df_Vk_Block_Frontend_Widget {
 	 * @override
 	 * @return Df_Vk_Model_Settings_Widget
 	 */
-	protected function getSettings() {return df_cfg()->vk()->comments();}
+	protected function getSettings() {return df_cfgr()->vk()->comments();}
 
 	
 }

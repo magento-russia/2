@@ -90,7 +90,7 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 	}
 
 	/** @return string */
-	private function getToken() {return df_cfg()->sms()->sms16ru()->getToken($this->store());}
+	private function getToken() {return df_cfgr()->sms()->sms16ru()->getToken($this->store());}
 
 	/** @used-by Df_Sms_Model_Settings_General::getGateClass() */
 

@@ -11,7 +11,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 	public function handle() {
 		if (
 			$this->isItReportCollection()
-			&& df_cfg()->reports()->common()->enableGroupByWeek()
+			&& df_cfgr()->reports()->common()->enableGroupByWeek()
 			&& df_h()->reports()->groupResultsByWeek()->isSelectedInFilter()
 		) {
 			if (!$this->getReportCollection()->isTotals()) {

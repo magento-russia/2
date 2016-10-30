@@ -14,7 +14,7 @@ class Df_Tweaks_Model_Handler_ProductBlock_Recent_Compared extends Df_Tweaks_Mod
 	 * @override
 	 * @return Df_Tweaks_Model_Settings_Remove
 	 */
-	protected function getSettings() {return df_cfg()->tweaks()->recentlyComparedProducts();}
+	protected function getSettings() {return df_cfgr()->tweaks()->recentlyComparedProducts();}
 
 	/**
 	 * @override

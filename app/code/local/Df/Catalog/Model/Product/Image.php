@@ -12,7 +12,7 @@ class Df_Catalog_Model_Product_Image extends Mage_Catalog_Model_Product_Image {
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded = df_cfg()->seo()->images()->getAddExifToJpegs();
+			$patchNeeded = df_cfgr()->seo()->images()->getAddExifToJpegs();
 		}
 		if ($patchNeeded) {
 			Df_Seo_Model_Processor_Image_Exif::p($this->getNewFile(), $this->getProductDf());

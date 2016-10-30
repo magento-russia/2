@@ -36,7 +36,7 @@ class Df_YandexMarket_Block_Api_GetConfirmationCode extends Df_Admin_Block_Field
 	 */
 	protected function url() {
 		return 'https://oauth.yandex.ru/authorize?response_type=code&client_id='
-			. df_cfg()->yandexMarket()->api()->getApplicationId()
+			. df_cfgr()->yandexMarket()->api()->getApplicationId()
 		;
 	}
 }

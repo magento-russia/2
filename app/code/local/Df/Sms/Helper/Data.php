@@ -7,11 +7,11 @@ class Df_Sms_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @return Df_Sms_Helper_Data
 	 */
 	public function send($receiver, $message, Df_Core_Model_StoreM $store) {
-		if (df_cfg()->sms()->general()->isEnabled($store)) {
+		if (df_cfgr()->sms()->general()->isEnabled($store)) {
 			/** @var Df_Sms_Model_Gate $gate */
 			$gate =
 				df_model(
-					df_cfg()->sms()->general()->getGateClass($store)
+					df_cfgr()->sms()->general()->getGateClass($store)
 					,array(
 						Df_Sms_Model_Gate::P__MESSAGE =>
 							Df_Sms_Model_Message::i(

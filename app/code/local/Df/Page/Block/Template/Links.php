@@ -72,7 +72,7 @@ class Df_Page_Block_Template_Links extends Mage_Page_Block_Template_Links {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->pageTemplateLinks()
+				df_cfgr()->speed()->blockCaching()->pageTemplateLinks()
 		) {
 			/**
 			 * Ключ кэша не устанавливаем, потому что это делает родительский класс

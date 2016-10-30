@@ -31,7 +31,7 @@ class Df_Tweaks_Observer {
 			if (
 					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
-					df_cfg()->tweaks()->catalog()->product()->view()->needHideTags()
+					df_cfgr()->tweaks()->catalog()->product()->view()->needHideTags()
 			) {
 				df_block_remove('product_tag_list');
 			}
@@ -51,10 +51,10 @@ class Df_Tweaks_Observer {
 			if (
 						df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 					&&
-						df_cfg()->tweaks()->catalog()->product()->view()->needHideAddToCart()
+						df_cfgr()->tweaks()->catalog()->product()->view()->needHideAddToCart()
 				||
 
-						df_cfg()->tweaks()->catalog()->product()->_list()->needHideAddToCart()
+						df_cfgr()->tweaks()->catalog()->product()->_list()->needHideAddToCart()
 					&&
 						df_h()->tweaks()->isItCatalogProductList()
 			) {

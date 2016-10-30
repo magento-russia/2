@@ -11,7 +11,7 @@ class Df_Bundle_Block_Adminhtml_Catalog_Product_Edit_Tab_Attributes extends Mage
 	 */
 	protected function _prepareForm() {
 		parent::_prepareForm();
-		if (df_cfg()->admin()->catalog()->product()->getFixBundleJs()) {
+		if (df_cfgr()->admin()->catalog()->product()->getFixBundleJs()) {
 			$tax = $this->getForm()->getElement('tax_class_id');
 			if ($tax) {
 				$tax->setAfterElementHtml(

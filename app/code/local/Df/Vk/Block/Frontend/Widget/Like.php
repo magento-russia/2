@@ -16,7 +16,7 @@ class Df_Vk_Block_Frontend_Widget_Like extends Df_Vk_Block_Frontend_Widget {
 	 * @override
 	 * @return Df_Vk_Model_Settings_Widget
 	 */
-	protected function getSettings() {return df_cfg()->vk()->like();}
+	protected function getSettings() {return df_cfgr()->vk()->like();}
 
 	
 }

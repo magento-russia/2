@@ -27,7 +27,7 @@
 		/** @var string $editorUrl */
 		$editorUrl =
 			$this->getJsUrl(
-				df_cfg()->admin()->editor()->useRm()
+				df_cfgr()->admin()->editor()->useRm()
 				? 'df/js/system/tiny_mce/tiny_mce.js'
 				: 'tiny_mce/tiny_mce.js'
 			)
@@ -41,7 +41,7 @@
 	<script type="text/javascript">
 		rm.namespace('rm.editor');
 		rm.editor.useRm =
-			<?php echo intval(df_cfg()->admin()->editor()->useRm()) ? 'true' : 'false'; ?>
+			<?php echo intval(df_cfgr()->admin()->editor()->useRm()) ? 'true' : 'false'; ?>
 		;
 	</script>
 <?php endif; ?>

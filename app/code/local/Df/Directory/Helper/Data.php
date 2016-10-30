@@ -167,7 +167,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 		/** @var bool $needNormalize */
 		static $needNormalize;
 		if (is_null($needNormalize)) {
-			$needNormalize = !df_cfg()->directory()->regionsRu()->getEnabled();
+			$needNormalize = !df_cfgr()->directory()->regionsRu()->getEnabled();
 		}
 		if ($needNormalize) {
 			Df_Directory_Model_Handler_ProcessRegionsAfterLoading::addTypeToNameStatic($regions);

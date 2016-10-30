@@ -65,7 +65,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	 * @return void
 	 */
 	public function log($message) {
-		if (df_cfg()->yandexMarket()->diagnostics()->isEnabled()) {
+		if (df_cfgr()->yandexMarket()->diagnostics()->isEnabled()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
 			$message = df_format($arguments);
@@ -104,7 +104,7 @@ class Df_YandexMarket_Helper_Data extends Mage_Core_Helper_Data {
 	}
 
 	/** @return Df_YandexMarket_Settings */
-	private function settings() {return df_cfg()->yandexMarket();}
+	private function settings() {return df_cfgr()->yandexMarket();}
 
 	
 	/** @return Df_YandexMarket_Helper_Data */

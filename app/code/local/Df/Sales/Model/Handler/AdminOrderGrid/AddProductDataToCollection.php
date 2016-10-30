@@ -9,7 +9,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductDataToCollection extends D
 	 * @return void
 	 */
 	public function handle() {
-		if (df_cfg()->sales()->orderGrid()->productColumn()->getEnabled()) {
+		if (df_cfgr()->sales()->orderGrid()->productColumn()->getEnabled()) {
 			/**
 			 * Важно подсчитать количество элементов в коллекции до выполнения последующих действий,
 			 * иначе расчёт будет неверным:

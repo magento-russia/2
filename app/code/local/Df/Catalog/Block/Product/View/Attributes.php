@@ -25,7 +25,7 @@ class Df_Catalog_Block_Product_View_Attributes extends Mage_Catalog_Block_Produc
 				if (is_null($needHideEmptyAttributes)) {
 					$needHideEmptyAttributes =
 						df_module_enabled(Df_Core_Module::TWEAKS)
-						&& df_cfg()->tweaks()->catalog()->product()->view()->needHideEmptyAttributes()
+						&& df_cfgr()->tweaks()->catalog()->product()->view()->needHideEmptyAttributes()
 					;
 				}
 				$result =

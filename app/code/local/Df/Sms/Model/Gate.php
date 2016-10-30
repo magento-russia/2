@@ -10,7 +10,7 @@ abstract class Df_Sms_Model_Gate extends Df_Core_Model {
 
 	/** @return string */
 	protected function getSenderName() {
-		return df_cfg()->sms()->general()->getSender($this->store());
+		return df_cfgr()->sms()->general()->getSender($this->store());
 	}
 
 	/**

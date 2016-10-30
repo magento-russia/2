@@ -33,7 +33,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	 */
 	public function massDeleteVersionsAction()
 	{
-		if (!df_cfg()->cms()->versioning()->isEnabled()) {
+		if (!df_cfgr()->cms()->versioning()->isEnabled()) {
 			$this->_forward('denied');
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
@@ -78,7 +78,7 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	 */
 	public function versionsAction()
 	{
-		if (!df_cfg()->cms()->versioning()->isEnabled()) {
+		if (!df_cfgr()->cms()->versioning()->isEnabled()) {
 			$this->_forward('denied');
 			$this->setFlag('', self::FLAG_NO_DISPATCH, true);
 		}
@@ -99,9 +99,9 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 	{
 		if (
 			!(
-					df_cfg()->cms()->versioning()->isEnabled()
+					df_cfgr()->cms()->versioning()->isEnabled()
 				||
-					df_cfg()->cms()->hierarchy()->isEnabled()
+					df_cfgr()->cms()->hierarchy()->isEnabled()
 			)
 		) {
 			parent::_initAction();

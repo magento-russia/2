@@ -104,7 +104,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		/** @var bool $removeExtraneous */
 		static $removeExtraneous;
 		if (is_null($removeExtraneous)) {
-			$removeExtraneous = df_cfg()->jquery()->needRemoveExtraneous();
+			$removeExtraneous = df_cfgr()->jquery()->needRemoveExtraneous();
 		}
 		return
 			$removeExtraneous

@@ -8,7 +8,7 @@ class Df_Tweaks_Model_Handler_Footer_AdjustCopyright extends Df_Core_Model_Handl
 	 */
 	public function handle() {
 		if (
-				df_cfg()->tweaks()->footer()->needUpdateYearInCopyright()
+				df_cfgr()->tweaks()->footer()->needUpdateYearInCopyright()
 			&&
 				!is_null($this->getBlock())
 		) {

@@ -7,7 +7,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 	 * @return void
 	 */
 	public function handle() {
-		if (df_cfg()->sales()->orderGrid()->productColumn()->getEnabled()) {
+		if (df_cfgr()->sales()->orderGrid()->productColumn()->getEnabled()) {
 			$this
 				->registerProductColumnRenderer()
 				->addProductColumn()
@@ -50,7 +50,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 					// Минус 2, потому что:
 					// самый левый столбец с флажками не учитывается
 					// администратор ведёт отчёт с 1, а система — с 0.
-					,df_cfg()->sales()->orderGrid()->productColumn()->getOrdering() - 2
+					,df_cfgr()->sales()->orderGrid()->productColumn()->getOrdering() - 2
 				)
 			);
 		}

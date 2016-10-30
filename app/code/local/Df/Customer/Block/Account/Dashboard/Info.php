@@ -15,7 +15,7 @@ class Df_Customer_Block_Account_Dashboard_Info extends Mage_Customer_Block_Accou
 				!(
 					df_module_enabled(Df_Core_Module::TWEAKS)
 				  &&
-					df_cfg()->tweaks()->account()->removeSectionNewsletterSubscriptions()
+					df_cfgr()->tweaks()->account()->removeSectionNewsletterSubscriptions()
 				)
 		;
 	}

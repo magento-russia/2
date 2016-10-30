@@ -16,7 +16,7 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded =  df_cfg()->seo()->images()->getUseDescriptiveFileNames();
+			$patchNeeded =  df_cfgr()->seo()->images()->getUseDescriptiveFileNames();
 		}
 		$patchNeeded ? $this->uploadActionDf() : parent::uploadAction();
 	}

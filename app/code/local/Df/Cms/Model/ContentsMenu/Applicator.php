@@ -13,7 +13,7 @@ class Df_Cms_Model_ContentsMenu_Applicator extends Df_Core_Model {
 	public function isApplicableToTheCurrentPage() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_cfg()->cms()->hierarchy()->isEnabled()
+				df_cfgr()->cms()->hierarchy()->isEnabled()
 				&& df_bool($this->getNodeMenuParam('enabled'))
 			;
 		}

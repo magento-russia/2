@@ -31,9 +31,9 @@ class Df_Catalog_Block_Product_Price extends Mage_Catalog_Block_Product_Price {
 				&&
 					(
 							df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
-							&& df_cfg()->tweaks()->catalog()->product()->view()->needHidePrice()
+							&& df_cfgr()->tweaks()->catalog()->product()->view()->needHidePrice()
 						||
-							df_cfg()->tweaks()->catalog()->product()->_list()->needHidePrice()
+							df_cfgr()->tweaks()->catalog()->product()->_list()->needHidePrice()
 							&& df_h()->tweaks()->isItCatalogProductList()
 					)
 			;

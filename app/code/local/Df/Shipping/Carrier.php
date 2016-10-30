@@ -152,8 +152,8 @@ abstract class Carrier
 	protected function getMessageVariables() {return dfc($this, function() {return [
 		'{carrier}' => $this->getTitle()
 		,'{название службы доставки в именительном падеже}' => $this->getTitle()
-		,'{phone}' => df_cfg()->base()->getStorePhone($this->getStore())
-		,'{телефон магазина}' => df_cfg()->base()->getStorePhone($this->getStore())
+		,'{phone}' => df_cfgr()->base()->getStorePhone($this->getStore())
+		,'{телефон магазина}' => df_cfgr()->base()->getStorePhone($this->getStore())
 		,'{название службы доставки в творительном падеже}' =>
 			$this->названиеВТворительномПадеже()
 		,'{название службы и способа доставки в творительном падеже}' =>

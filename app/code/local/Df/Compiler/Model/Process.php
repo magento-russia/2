@@ -62,7 +62,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 		return
 			// Видимо, улучшенную компиляцию нельзя отрубать даже по истечению лицензии,
 			// иначе при неправильной компиляции сайт может перестать работать
-			df_cfg()->admin()->system()->tools()->compilation()->getFix()
+			df_cfgr()->admin()->system()->tools()->compilation()->getFix()
 			? $this->_getClassesSourceCodeDf($classes, $scope)
 			: parent::_getClassesSourceCode($classes, $scope)
 		;

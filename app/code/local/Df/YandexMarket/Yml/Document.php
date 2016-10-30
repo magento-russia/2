@@ -55,8 +55,8 @@ class Df_YandexMarket_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
 		df_assert_ge(2, count($schemeTailExploded));
 		/** @var string $domainAndPort */
 		$domainAndPort = df_first($schemeTailExploded);
-		if (df_cfg()->yandexMarket()->other()->useNonStandardDomain()) {
-			$domainAndPort = df_cfg()->yandexMarket()->other()->getDomain();
+		if (df_cfgr()->yandexMarket()->other()->useNonStandardDomain()) {
+			$domainAndPort = df_cfgr()->yandexMarket()->other()->getDomain();
 		}
 		/** @var string[] $path */
 		$pathExploded = df_tail($schemeTailExploded);
@@ -110,7 +110,7 @@ class Df_YandexMarket_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
 	 * @override
 	 * @return bool
 	 */
-	protected function needLog() {return df_cfg()->yandexMarket()->diagnostics()->isEnabled();}
+	protected function needLog() {return df_cfgr()->yandexMarket()->diagnostics()->isEnabled();}
 	
 	/** @return array(array(string => string|array(string => int))) */
 	private function getOutput_Categories() {

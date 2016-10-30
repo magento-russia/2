@@ -3,7 +3,7 @@ class Df_PromoGift_Block_Chooser_Product extends Df_Core_Block_Template_NoCache 
 	/** @return string */
 	public function getButtonCaption() {
 		return
-			df_cfg()->promotion()->gifts()->enableAddToCartButton()
+			df_cfgr()->promotion()->gifts()->enableAddToCartButton()
 			? df_mage()->catalogHelper()->__('Add to Cart')
 			: $this->__('Подробнее...')
 		;
@@ -12,7 +12,7 @@ class Df_PromoGift_Block_Chooser_Product extends Df_Core_Block_Template_NoCache 
 	/** @return string */
 	public function getButtonTitle() {
 		return
-			df_cfg()->promotion()->gifts()->enableAddToCartButton()
+			df_cfgr()->promotion()->gifts()->enableAddToCartButton()
 			? df_mage()->catalogHelper()->__('Add to Cart')
 			: $this->getName()
 		;
@@ -21,7 +21,7 @@ class Df_PromoGift_Block_Chooser_Product extends Df_Core_Block_Template_NoCache 
 	/** @return string */
 	public function getButtonUrl() {
 		return
-			df_cfg()->promotion()->gifts()->enableAddToCartButton()
+			df_cfgr()->promotion()->gifts()->enableAddToCartButton()
 			? df_mage()->checkout()->cartHelper()->getAddUrl($this->getProduct())
 			: $this->getDetailsUrl()
 		;

@@ -38,7 +38,7 @@ class Df_Logging_Model_Config extends Df_Core_Model {
 	 */
 	public function getSystemConfigValues() {
 		if (null === $this->_systemConfigValues) {
-			$this->_systemConfigValues = df_cfg()->admin()->logging()->getActions();
+			$this->_systemConfigValues = df_cfgr()->admin()->logging()->getActions();
 			if ($this->_systemConfigValues) {
 				$this->_systemConfigValues = unserialize($this->_systemConfigValues);
 			}

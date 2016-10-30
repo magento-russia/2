@@ -162,6 +162,6 @@ class Df_PromoGift_Observer {
 	/** @return bool */
 	private static function enabled() {
 		/** @var bool $result */
-		static $r; return !is_null($r) ? $r : $r = df_cfg()->promotion()->gifts()->getEnabled();
+		static $r; return !is_null($r) ? $r : $r = df_cfgr()->promotion()->gifts()->getEnabled();
 	}
 }

@@ -22,7 +22,7 @@ class Df_YandexMarket_Block_GetAddress extends Df_Core_Block_Template {
 	 */
 	protected function needToShow() {
 		return
-			df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
+			df_cfgr()->checkout()->other()->canGetAddressFromYandexMarket()
 			&& !df_customer_logged_in()
 		;
 	}

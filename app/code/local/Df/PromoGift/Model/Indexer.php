@@ -154,7 +154,7 @@ class Df_PromoGift_Model_Indexer extends Mage_Index_Model_Indexer_Abstract {
 		try {
 			if (
 				df_module_enabled(Df_Core_Module::PROMO_GIFT)
-				&& df_cfg()->promotion()->gifts()->getEnabled()
+				&& df_cfgr()->promotion()->gifts()->getEnabled()
 			) {
 				/** @var string $entityType */
 				$entityType = $event->getEntity();

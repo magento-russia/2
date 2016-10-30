@@ -15,7 +15,7 @@ class Df_Tweaks_Model_Handler_Footer_AdjustLinks extends Df_Core_Model_Handler {
 		 * при отключенных функциях модуля Df_Tweaks
 		 */
 		if (
-				df_cfg()->tweaks()->footer()->removeAdvancedSearchLink()
+				df_cfgr()->tweaks()->footer()->removeAdvancedSearchLink()
 			&&
 				!is_null($this->getBlock())
 		) {
@@ -26,7 +26,7 @@ class Df_Tweaks_Model_Handler_Footer_AdjustLinks extends Df_Core_Model_Handler {
 			;
 		}
 		if (
-				df_cfg()->tweaks()->footer()->removeSearchTermsLink()
+				df_cfgr()->tweaks()->footer()->removeSearchTermsLink()
 			&&
 				!is_null($this->getBlock())
 		) {

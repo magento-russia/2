@@ -12,7 +12,7 @@ class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->googleAnalytics()
+				df_cfgr()->speed()->blockCaching()->googleAnalytics()
 		) {
 			$result = array_merge(
 				$result
@@ -41,7 +41,7 @@ class Df_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->googleAnalytics()
+				df_cfgr()->speed()->blockCaching()->googleAnalytics()
 		) {
 			/**
 			 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

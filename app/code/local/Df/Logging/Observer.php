@@ -76,7 +76,7 @@ class Df_Logging_Observer extends Df_Core_Model {
 	 * @return void
 	 */
 	public function model_delete_after(Varien_Event_Observer $o) {
-		if (df_cfg()->logging()->isEnabled()) {
+		if (df_cfgr()->logging()->isEnabled()) {
 			Df_Logging_Model_Processor::s()->modelActionAfter($o['object'], 'delete');
 		}
 	}
@@ -96,7 +96,7 @@ class Df_Logging_Observer extends Df_Core_Model {
 	 * @return void
 	 */
 	public function model_save_after(Varien_Event_Observer $o) {
-		if (df_cfg()->logging()->isEnabled()) {
+		if (df_cfgr()->logging()->isEnabled()) {
 			Df_Logging_Model_Processor::s()->modelActionAfter($o['object'], 'save');
 		}
 	}
@@ -110,11 +110,11 @@ class Df_Logging_Observer extends Df_Core_Model {
 			$lastRotationFlag = df_model('df_logging/flag')->loadSelf();
 			//$lastRotationTime = $lastRotationFlag->getFlagData();
 	//		$rotationFrequency =
-	//			3600 * 24 * df_cfg()->admin()->logging()->archiving()->getFrequency()
+	//			3600 * 24 * df_cfgr()->admin()->logging()->archiving()->getFrequency()
 	//		;
 	//		if (!$lastRotationTime || ($lastRotationTime < time() - $rotationFrequency)) {
 			Df_Logging_Model_Resource_Event::s()->rotate(
-				3600 * 24 * (df_cfg()->admin()->logging()->archiving()->getLifetime())
+				3600 * 24 * (df_cfgr()->admin()->logging()->archiving()->getLifetime())
 			);
 	//		}
 			$lastRotationFlag->setFlagData(time())->save();
@@ -156,7 +156,7 @@ class Df_Logging_Observer extends Df_Core_Model {
 		/** @var bool $result */
 		static $result;
 		if (is_null($result)) {
-			$result = df_cfg()->logging()->isEnabled();
+			$result = df_cfgr()->logging()->isEnabled();
 		}
 		return $result;
 	}

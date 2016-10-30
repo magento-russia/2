@@ -10,7 +10,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded = df_cfg()->dataflow()->common()->getShowInteractiveMessages();
+			$patchNeeded = df_cfgr()->dataflow()->common()->getShowInteractiveMessages();
 		}
 		$patchNeeded ? $this->batchFinishActionDf() : parent::batchFinishAction();
 	}
@@ -24,7 +24,7 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded = df_cfg()->dataflow()->common()->getShowInteractiveMessages();
+			$patchNeeded = df_cfgr()->dataflow()->common()->getShowInteractiveMessages();
 		}
 		$patchNeeded ? $this->batchRunActionDf() : parent::batchRunAction();
 	}

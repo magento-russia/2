@@ -1,7 +1,7 @@
 <?php
 /** @return bool */
 function df_checkout_ergonomic() {
-	return df_cfg()->checkout()->_interface()->needShowAllStepsAtOnce();
+	return df_cfgr()->checkout()->_interface()->needShowAllStepsAtOnce();
 }
 
 /** @return bool */

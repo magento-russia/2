@@ -500,7 +500,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	public function getHeight() {
 		/** @var float $result */
 		$result = df_float(parent::_getData(self::P__HEIGHT));
-		return $result ? $result : df_cfg()->shipping()->product()->getDefaultHeight();
+		return $result ? $result : df_cfgr()->shipping()->product()->getDefaultHeight();
 	}
 
 	/**
@@ -606,7 +606,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		/** @var float $result */
 		$result = parent::_getData(self::P__LENGTH);
 		if (is_null($result) || (0.0 === df_float($result))) {
-			$result = df_cfg()->shipping()->product()->getDefaultLength();
+			$result = df_cfgr()->shipping()->product()->getDefaultLength();
 		}
 		$result = df_float($result);
 		return $result;
@@ -832,7 +832,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 					}
 				}
 				if ($canUseConfig && (is_null($result) || (0.0 === df_float($result)))) {
-					$result = df_cfg()->shipping()->product()->getDefaultWeight($this->getStore());
+					$result = df_cfgr()->shipping()->product()->getDefaultWeight($this->getStore());
 				}
 			}
 		}
@@ -851,7 +851,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	public function getWidth() {
 		/** @var float $result */
 		$result = df_float(parent::_getData(self::P__WIDTH));
-		return $result ? $result : df_cfg()->shipping()->product()->getDefaultWidth();
+		return $result ? $result : df_cfgr()->shipping()->product()->getDefaultWidth();
 	}
 
 	/**
@@ -1050,7 +1050,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 
 	/** @return boolean */
 	private function isCategoryTailEnabled() {
-		return df_cfg()->seo()->html()->getAppendCategoryNameToProductTitleTag();
+		return df_cfgr()->seo()->html()->getAppendCategoryNameToProductTitleTag();
 	}
 
 	/** @return string|null */
@@ -1060,7 +1060,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 
 	/** @return string */
 	private function getDefaultProductRawMetaTitle() {
-		return df_cfg()->seo()->html()->getDefaultPatternForProductTitleTag();
+		return df_cfgr()->seo()->html()->getDefaultPatternForProductTitleTag();
 	}
 
 	/** @return string */

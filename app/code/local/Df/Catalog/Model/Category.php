@@ -50,7 +50,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		if (
 				1 < $pageNumber
 			&&
-				df_cfg()->seo()->catalog()->category()->needHideDescriptionFromNonFirstPages()
+				df_cfgr()->seo()->catalog()->category()->needHideDescriptionFromNonFirstPages()
 		) {
 			$result = '';
 		}
@@ -118,7 +118,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		/** @var bool $needFormat */
 		static $needFormat;
 		if (!isset($needFormat)) {
-			$needFormat = df_cfg()->seo()->common()->getEnhancedRussianTransliteration();
+			$needFormat = df_cfgr()->seo()->common()->getEnhancedRussianTransliteration();
 		}
 		return
 			$needFormat

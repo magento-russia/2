@@ -19,7 +19,7 @@ class Df_Widget_Model_Template_Filter extends Mage_Widget_Model_Template_Filter 
 		$params = $this->_getIncludeParameters($construction[2]);
 		$params['_absolute'] = $this->_useAbsoluteLinks;
 		// НАЧАЛО ЗАПЛАТКИ
-		if (df_cfg()->admin()->editor()->fixImages()) {
+		if (df_cfgr()->admin()->editor()->fixImages()) {
 			$params = array_merge(array('_area' => 'frontend'), $params);
 		}
 		// КОНЕЦ ЗАПЛАТКИ

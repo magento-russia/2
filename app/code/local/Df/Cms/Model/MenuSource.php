@@ -12,8 +12,8 @@ class Df_Cms_Model_MenuSource extends Df_Page_Model_MenuSource {
 	 */
 	public function isEnabled() {
 		return
-			df_cfg()->cms()->hierarchy()->isEnabled()
-			&& df_cfg()->cms()->hierarchy()->needAddToCatalogMenu()
+			df_cfgr()->cms()->hierarchy()->isEnabled()
+			&& df_cfgr()->cms()->hierarchy()->needAddToCatalogMenu()
 		;
 	}
 

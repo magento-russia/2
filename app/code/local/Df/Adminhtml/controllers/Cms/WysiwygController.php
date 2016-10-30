@@ -10,7 +10,7 @@ class Df_Adminhtml_Cms_WysiwygController extends Mage_Adminhtml_Cms_WysiwygContr
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded = df_cfg()->admin()->editor()->fixHeadersAlreadySent();
+			$patchNeeded = df_cfgr()->admin()->editor()->fixHeadersAlreadySent();
 		}
 		$patchNeeded ? $this->directiveActionDf() : parent::directiveAction();
 	}

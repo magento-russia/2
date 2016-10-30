@@ -12,7 +12,7 @@ class Df_Cms_Block_Page extends Mage_Cms_Block_Page {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->cmsPage()
+				df_cfgr()->speed()->blockCaching()->cmsPage()
 		) {
 			$result = array_merge($result, array(
 				get_class($this)
@@ -37,7 +37,7 @@ class Df_Cms_Block_Page extends Mage_Cms_Block_Page {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->cmsPage()
+				df_cfgr()->speed()->blockCaching()->cmsPage()
 		) {
 			/**
 			 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

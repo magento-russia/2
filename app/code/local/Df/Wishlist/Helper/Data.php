@@ -15,11 +15,11 @@ class Df_Wishlist_Helper_Data extends Mage_Wishlist_Helper_Data {
 						(
 								df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 							&&
-								df_cfg()->tweaks()->catalog()->product()->view()->needHideAddToWishlist()
+								df_cfgr()->tweaks()->catalog()->product()->view()->needHideAddToWishlist()
 						)
 					||
 						(
-								df_cfg()->tweaks()->catalog()->product()->_list()->needHideAddToWishlist()
+								df_cfgr()->tweaks()->catalog()->product()->_list()->needHideAddToWishlist()
 							&&
 								df_h()->tweaks()->isItCatalogProductList()
 						)

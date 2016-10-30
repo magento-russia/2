@@ -15,7 +15,7 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Resou
 	public function getCollection($storeId) {
 		/** @var bool $patchNeeded */
 		static $patchNeeded; if (is_null($patchNeeded)) {$patchNeeded =
-			df_cfg()->seo()->urls()->getFixAddCategoryToProductUrl()
+			df_cfgr()->seo()->urls()->getFixAddCategoryToProductUrl()
 			/**
 			 * Для Magento CE 1.8.0.0 и более свежих версий
 			 * обработка вынесена в класс @see Df_Catalog_Helper_Product_Url_Rewrite
@@ -40,7 +40,7 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Resou
 		}
 		/** @var string $categoryCondition */
 		$categoryCondition =
-			df_cfg()->seo()->urls()->getAddCategoryToProductUrl($storeId)
+			df_cfgr()->seo()->urls()->getAddCategoryToProductUrl($storeId)
 			? 'ur.category_id IS NOT null'
 			: 'ur.category_id IS null'
 		;

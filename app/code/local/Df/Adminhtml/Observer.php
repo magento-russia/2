@@ -13,12 +13,12 @@ class Df_Adminhtml_Observer  {
 			// на странице System - Permissions - Roles $block->getForm() возвращает null
 			if ($block instanceof Mage_Adminhtml_Block_Widget_Form && $block->getForm()) {
 				/** @var Df_Admin_Config_Font $font */
-				$font = df_cfg()->admin()->_interface()->getFormLabelFont();
+				$font = df_cfgr()->admin()->_interface()->getFormLabelFont();
 				$font->applyLetterCaseToForm($block->getForm());
 			}
 			else if ($block instanceof Mage_Adminhtml_Block_Widget_Grid) {
 				/** @var Df_Admin_Config_Font $font */
-				$font = df_cfg()->admin()->_interface()->getGridLabelFont();
+				$font = df_cfgr()->admin()->_interface()->getGridLabelFont();
 				foreach ($block->getColumns() as $column) {
 					/** @var Varien_Object $column */
 					$column['header'] = $font->applyLetterCase((string)$column['header']);
@@ -138,7 +138,7 @@ class Df_Adminhtml_Observer  {
 			$block = $o['block'];
 			if ($block instanceof Mage_Adminhtml_Block_Widget_Button) {
 				/** @var Df_Admin_Config_Font $font */
-				$font = df_cfg()->admin()->_interface()->getButtonLabelFont();
+				$font = df_cfgr()->admin()->_interface()->getButtonLabelFont();
 				$block['label'] = $font->applyLetterCase((string)$block['label']);
 			}
 		}

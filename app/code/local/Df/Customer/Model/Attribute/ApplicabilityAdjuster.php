@@ -83,7 +83,7 @@ class Df_Customer_Model_Attribute_ApplicabilityAdjuster extends Df_Core_Model {
 			$this->{__METHOD__} = df_n_set(
 				!$this->getAddressType()
 				? null
-				: df_cfg()->checkout()->field()->getApplicabilityByAddressType($this->getAddressType())
+				: df_cfgr()->checkout()->field()->getApplicabilityByAddressType($this->getAddressType())
 			);
 		}
 		return df_n_get($this->{__METHOD__});

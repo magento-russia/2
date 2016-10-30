@@ -48,7 +48,7 @@ class Df_Cms_Block_Frontend_Menu_Contents extends Df_Core_Block_Abstract {
 	 */
 	protected function needToShow() {
 		return
-			df_cfg()->cms()->hierarchy()->isEnabled()
+			df_cfgr()->cms()->hierarchy()->isEnabled()
 			&& $this->getMenu()->getApplicators()->hasItems()
 			&& $this->getRenderedNodes()
 		;

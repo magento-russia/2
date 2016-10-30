@@ -70,7 +70,7 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 	/** @return Df_Tweaks_Block_Frontend_Style */
 	private function adjustReviewsAndRatings() {
 		/** @var Df_Tweaks_Model_Settings_Catalog_Product $s */
-		$s = df_cfg()->tweaks()->catalog()->product();
+		$s = df_cfgr()->tweaks()->catalog()->product();
 		if (df_h()->tweaks()->isItCatalogProductList()) {
 			if ($s->_list()->needHideRating() && $s->_list()->needHideReviews()) {
 				$this->hide('.category-products .ratings');
@@ -143,18 +143,18 @@ class Df_Tweaks_Block_Frontend_Style extends Df_Core_Block_Abstract {
 				 */
 				->adjustLetterCase($fonts->forFormInputs(), '.form-list label')
 				->adjustLetterCase($fonts->forSideBlockTitles(), '.sidebar .block-title')
-				->adjustLetterCase(df_cfg()->tweaks()->header()->getFont(), array(
+				->adjustLetterCase(df_cfgr()->tweaks()->header()->getFont(), array(
 					'.header .links', '.header-container .quick-access .links a'
 				))
 			;
 			$this->adjustReviewsAndRatings();
-			if (df_cfg()->tweaks()->footer()->removeHelpUs()) {
+			if (df_cfgr()->tweaks()->footer()->removeHelpUs()) {
 				$this->hide('p.bugs');
 			}
 			if (
 					df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)
 				&&
-					df_cfg()->tweaks()->catalog()->product()->view()->needHideAvailability()
+					df_cfgr()->tweaks()->catalog()->product()->view()->needHideAvailability()
 			) {
 				$this->hide('.product-view p.availability');
 			}

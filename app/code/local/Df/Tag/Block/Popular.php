@@ -14,7 +14,7 @@ class Df_Tag_Block_Popular extends Mage_Tag_Block_Popular {
 		/** @var string $result */
 		$result = parent::getTemplate();
 		/** @var Df_Tweaks_Model_Settings_Tags_Popular $settings */
-		$settings = df_cfg()->tweaks()->tags()->popular();
+		$settings = df_cfgr()->tweaks()->tags()->popular();
 		if (
 			df_module_enabled(Df_Core_Module::TWEAKS)
 			&&

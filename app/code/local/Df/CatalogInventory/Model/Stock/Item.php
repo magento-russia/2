@@ -27,7 +27,7 @@ class Df_CatalogInventory_Model_Stock_Item extends Mage_CatalogInventory_Model_S
 		static $optimizationNeeded;
 		if (is_null($optimizationNeeded)) {
 			$optimizationNeeded =
-				df_cfg()->admin()->optimization()->getFixDoubleStockReindexingOnProductSave()
+				df_cfgr()->admin()->optimization()->getFixDoubleStockReindexingOnProductSave()
 			;
 		}
 		if ($optimizationNeeded && !$result && isset($this->_productInstance)) {

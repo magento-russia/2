@@ -58,16 +58,16 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 			$this->{__METHOD__} = Df_YandexMarket_Yml_Document::i(
 				Df_Catalog_Model_Product_Exporter::i(array(
 					Df_Catalog_Model_Product_Exporter::P__RULE =>
-						df_cfg()->yandexMarket()->products()->getRule()
+						df_cfgr()->yandexMarket()->products()->getRule()
 					,Df_Catalog_Model_Product_Exporter::P__ADDITIONAL_ATTRIBUTES => array(
 						Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
 						,Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
 					)
 					,Df_Catalog_Model_Product_Exporter::P__LIMIT =>
-							df_cfg()->yandexMarket()->diagnostics()->isEnabled()
+							df_cfgr()->yandexMarket()->diagnostics()->isEnabled()
 						&&
-							df_cfg()->yandexMarket()->diagnostics()->needLimit()
-						? df_cfg()->yandexMarket()->diagnostics()->getLimit()
+							df_cfgr()->yandexMarket()->diagnostics()->needLimit()
+						? df_cfgr()->yandexMarket()->diagnostics()->getLimit()
 						: 0
 					,Df_Catalog_Model_Product_Exporter::P__NEED_REMOVE_NOT_SALABLE => true
 					,Df_Catalog_Model_Product_Exporter::P__NEED_REMOVE_OUT_OF_STOCK => true

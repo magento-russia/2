@@ -10,7 +10,7 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 	protected function needToShow() {
 		return
 			parent::needToShow()
-			&& df_cfg()->promotion()->gifts()->getEnabled()
+			&& df_cfgr()->promotion()->gifts()->getEnabled()
 			&& $this->isEnabledForCurrentPageType()
 			&& $this->hasDataToShow()
 		;
@@ -27,13 +27,13 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 					(
 							df_handle(Df_Core_Model_Layout_Handle::CATALOG_CATEGORY_VIEW)
 						&&
-							df_cfg()->promotion()->gifts()->needShowChooserOnProductListPage()
+							df_cfgr()->promotion()->gifts()->needShowChooserOnProductListPage()
 					)
 				||
 					(
 							df_handle(Df_Core_Model_Layout_Handle::CHECKOUT_CART_INDEX)
 						&&
-							df_cfg()->promotion()->gifts()->needShowChooserOnCartPage()
+							df_cfgr()->promotion()->gifts()->needShowChooserOnCartPage()
 					)
 				||
 					(
@@ -41,18 +41,18 @@ class Df_PromoGift_Block_Chooser extends Df_Core_Block_Template_NoCache {
 						&&
 							!df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 						&&
-							df_cfg()->promotion()->gifts()->needShowChooserOnCmsPage()
+							df_cfgr()->promotion()->gifts()->needShowChooserOnCmsPage()
 					)
 				||
 					(
 							df_handle(Df_Core_Model_Layout_Handle::CMS_INDEX_INDEX)
 						&&
-							df_cfg()->promotion()->gifts()->needShowChooserOnFrontPage()
+							df_cfgr()->promotion()->gifts()->needShowChooserOnFrontPage()
 					)
 			;
 			if (df_handle(Df_Core_Model_Layout_Handle::CATALOG_PRODUCT_VIEW)) {
 				/** @var string $position */
-				$position = df_cfg()->promotion()->gifts()->getChooserPositionOnProductViewPage();
+				$position = df_cfgr()->promotion()->gifts()->getChooserPositionOnProductViewPage();
 				$result =
 							Df_Admin_Config_Source_Layout_Column::isLeft($position)
 						&&

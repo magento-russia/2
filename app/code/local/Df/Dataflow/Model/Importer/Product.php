@@ -172,7 +172,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 
 	/** @return Df_Dataflow_Model_Importer_Product */
 	private function importCustomOptions() {
-		if (df_cfg()->dataflow()->products()->getCustomOptionsSupport()) {
+		if (df_cfgr()->dataflow()->products()->getCustomOptionsSupport()) {
 			$this->reloadProduct();
 			$this->getCustomOptionsImporter()->process();
 			$this->getProduct()->saveRm($isMassUpdate = true);
@@ -199,7 +199,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		$primaryImages = $this->getGalleryImporter()->getPrimaryImages();
 		if ($primaryImages) {
 			$this->reloadProduct();
-			if (df_cfg()->dataflow()->products()->getDeletePreviousImages()) {
+			if (df_cfgr()->dataflow()->products()->getDeletePreviousImages()) {
 				//remove previous images
 				$this->getProduct()->deleteImages();
 			}
@@ -224,7 +224,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 					df_handle_entry_point_exception($e, false);
 				}
 			}
-			if (df_cfg()->dataflow()->products()->getGallerySupport()) {
+			if (df_cfgr()->dataflow()->products()->getGallerySupport()) {
 				$this->getGalleryImporter()->addAdditionalImagesToProduct();
 			}
 			$this->getProduct()->saveRm($isMassUpdate = true);
@@ -360,7 +360,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 
 	/** @return Df_Dataflow_Model_Importer_Product */
 	private function importCategoriesUsingAdvancedTechnology() {
-		if (df_cfg()->dataflow()->products()->getEnhancedCategorySupport()) {
+		if (df_cfgr()->dataflow()->products()->getEnhancedCategorySupport()) {
 			Df_Dataflow_Model_Importer_Product_Categories::i(
 				$this->getProduct(), $this->getRow()->getAsArray(), $this->store()
 			)->process();

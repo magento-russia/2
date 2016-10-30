@@ -69,7 +69,7 @@ class Df_Checkout_Block_Cart_Sidebar extends Mage_Checkout_Block_Cart_Sidebar {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->checkoutCartSidebar()
+				df_cfgr()->speed()->blockCaching()->checkoutCartSidebar()
 		) {
 			/**
 			 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

@@ -9,9 +9,9 @@ class Df_Cms_Block_Admin_Page_Edit extends Df_Core_Block_Admin {
 	protected function _prepareLayout()
 	{
 		if (
-				df_cfg()->cms()->hierarchy()->isEnabled()
+				df_cfgr()->cms()->hierarchy()->isEnabled()
 			||
-				df_cfg()->cms()->versioning()->isEnabled()
+				df_cfgr()->cms()->versioning()->isEnabled()
 		) {
 			$tabsBlock = $this->getLayout()->getBlock('cms_page_edit_tabs');
 			/* @var $tabBlock Mage_Adminhtml_Block_Cms_Page_Edit_Tabs */

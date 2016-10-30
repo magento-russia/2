@@ -117,7 +117,7 @@ class Df_Page_Block_Html_Topmenu extends Mage_Page_Block_Html_Topmenu {
 			$this->{__METHOD__} =
 					df_module_enabled(Df_Core_Module::SPEED)
 				&&
-					df_cfg()->speed()->blockCaching()->pageHtmlTopmenu()
+					df_cfgr()->speed()->blockCaching()->pageHtmlTopmenu()
 			;
 		}
 		return $this->{__METHOD__};

@@ -16,7 +16,7 @@ class Df_Reports_Observer {
 			$block = $o['block'];
 			if (
 				$block instanceof Mage_Adminhtml_Block_Report_Filter_Form
-				&& df_cfg()->reports()->common()->enableGroupByWeek()
+				&& df_cfgr()->reports()->common()->enableGroupByWeek()
 			) {
 				df_handle_event(
 					Df_Reports_Model_Handler_GroupResultsByWeek_AddOptionToFilter::class
@@ -26,7 +26,7 @@ class Df_Reports_Observer {
 			}
 			if (
 				$block instanceof Mage_Adminhtml_Block_Report_Filter_Form
-				&& df_cfg()->reports()->common()->needSetEndDateToTheYesterday()
+				&& df_cfgr()->reports()->common()->needSetEndDateToTheYesterday()
 			) {
 				df_handle_event(
 					Df_Reports_Model_Handler_SetDefaultFilterValues::class
@@ -35,7 +35,7 @@ class Df_Reports_Observer {
 				);
 			}
 			if ($block instanceof Mage_Adminhtml_Block_Report_Grid_Abstract
-				&& df_cfg()->reports()->common()->enableGroupByWeek()
+				&& df_cfgr()->reports()->common()->enableGroupByWeek()
 				&& df_h()->reports()->groupResultsByWeek()->isSelectedInFilter()
 			) {
 				df_handle_event(
@@ -57,7 +57,7 @@ class Df_Reports_Observer {
 	 */
 	public function controller_action_layout_generate_blocks_after(Varien_Event_Observer $o) {
 		try {
-			if (df_cfg()->reports()->common()->needRemoveTimezoneNotice()) {
+			if (df_cfgr()->reports()->common()->needRemoveTimezoneNotice()) {
 				df_handle_event(
 					Df_Reports_Model_Handler_RemoveTimezoneNotice::class
 					,Df_Core_Model_Event_Controller_Action_Layout_GenerateBlocksAfter::class

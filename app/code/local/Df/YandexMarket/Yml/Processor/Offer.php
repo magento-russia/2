@@ -215,7 +215,7 @@ class Df_YandexMarket_Yml_Processor_Offer extends Df_Catalog_Model_XmlExport_Pro
 		/** @var string|null $salesNotes */
 		$salesNotes = $this->getProduct()->getData(Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES);
 		if (!$salesNotes) {
-			$salesNotes = df_cfg()->yandexMarket()->general()->getSalesNotes();
+			$salesNotes = df_cfgr()->yandexMarket()->general()->getSalesNotes();
 		}
 		if ($salesNotes) {
 			$result['sales_notes'] = df_cdata($salesNotes);

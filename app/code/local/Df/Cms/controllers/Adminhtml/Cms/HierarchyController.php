@@ -60,7 +60,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		if (!df_cfg()->cms()->hierarchy()->isEnabled()) {
+		if (!df_cfgr()->cms()->hierarchy()->isEnabled()) {
 			if ($this->getRequest()->getActionName() != 'denied') {
 				$this->_forward('denied');
 				$this->setFlag('', self::FLAG_NO_DISPATCH, true);
@@ -127,7 +127,7 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 	 * @return bool
 	 */
 	protected function _isAllowed() {
-		return df_admin_allowed('cms/hierarchy') && df_cfg()->cms()->hierarchy()->isEnabled();
+		return df_admin_allowed('cms/hierarchy') && df_cfgr()->cms()->hierarchy()->isEnabled();
 	}
 
 	/**

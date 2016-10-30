@@ -7,7 +7,7 @@ class Df_Sales_Observer {
 	 */
 	public function sales_convert_order_to_quote(Varien_Event_Observer $o) {
 		try {
-			if (df_cfg()->checkout()->patches()->fixSalesConvertOrderToQuote()) {
+			if (df_cfgr()->checkout()->patches()->fixSalesConvertOrderToQuote()) {
 				/** @var Df_Sales_Model_Order $sourceOrder */
 				$sourceOrder = $o['order'];
 				df_assert($sourceOrder instanceof Df_Sales_Model_Order);

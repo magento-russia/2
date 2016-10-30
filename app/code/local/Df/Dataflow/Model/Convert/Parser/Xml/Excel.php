@@ -11,7 +11,7 @@ class Df_Dataflow_Model_Convert_Parser_Xml_Excel extends Mage_Dataflow_Model_Con
 		/** @var bool $patchNeeded */
 		static $patchNeeded;
 		if (is_null($patchNeeded)) {
-			$patchNeeded = df_cfg()->dataflow()->common()->getSupportHtmlTagsInExcel();
+			$patchNeeded = df_cfgr()->dataflow()->common()->getSupportHtmlTagsInExcel();
 		}
 		return
 			$patchNeeded

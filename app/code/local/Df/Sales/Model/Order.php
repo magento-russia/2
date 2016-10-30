@@ -60,14 +60,14 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 		static $preserveLineBreaks;
 		if (is_null($preserveLineBreaks)) {
 			$preserveLineBreaks =
-				df_cfg()->sales()->orderComments()->preserveLineBreaksInOrderEmail()
+				df_cfgr()->sales()->orderComments()->preserveLineBreaksInOrderEmail()
 			;
 		}
 		/** @var string|null $result */
 		$result = parent::getEmailCustomerNote();
 		if ($result && $preserveLineBreaks) {
 			$result = df_t()->nl2br($result);
-			if (df_cfg()->sales()->orderComments()->wrapInStandardFrameInOrderEmail()) {
+			if (df_cfgr()->sales()->orderComments()->wrapInStandardFrameInOrderEmail()) {
 				$result = Df_Sales_Block_Order_Email_Comments::r($result);
 			}
 		}

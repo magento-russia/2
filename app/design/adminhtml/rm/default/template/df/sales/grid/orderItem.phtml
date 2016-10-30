@@ -1,17 +1,17 @@
 <?php /** @var Df_Sales_Block_Admin_Grid_OrderItem $this */ ?>
 <li class='df-product'>
 	<ol class='df-fields'>
-		<?php if (df_cfg()->sales()->orderGrid()->productColumn()->needShowName()) { ?>
+		<?php if (df_cfgr()->sales()->orderGrid()->productColumn()->needShowName()) { ?>
 			<li class='df-field df-field-name'>
 				<?php echo df_e($this->getProductNameToDisplay()); ?>
 			</li>
 		<?php } ?>
-		<?php if (df_cfg()->sales()->orderGrid()->productColumn()->needShowSku()) { ?>
+		<?php if (df_cfgr()->sales()->orderGrid()->productColumn()->needShowSku()) { ?>
 			<li class='df-field df-field-sku'>
 				<?php echo df_e($this->getProductSku()); ?>
 			</li>
 		<?php } ?>
-		<?php if (df_cfg()->sales()->orderGrid()->productColumn()->needShowQty()) { ?>
+		<?php if (df_cfgr()->sales()->orderGrid()->productColumn()->needShowQty()) { ?>
 			<li class='df-field df-field-qty'>
 				<?php
 					echo $this->getProductQty()

@@ -30,7 +30,7 @@ class Df_Sales_Model_Handler_OrderStatusHistory_SetVisibleOnFrontParam extends D
 				 * Можно опционально его изменить...
 				 */
 				if (
-					df_cfg()->sales()->orderComments()
+					df_cfgr()->sales()->orderComments()
 						->adminOrderCreate_commentIsVisibleOnFront()
 				) {
 					if (

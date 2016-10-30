@@ -11,7 +11,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 			/** @var Df_Sales_Model_Quote_Address $result */
 			$result = null;
 			if (!df_customer_logged_in()
-				&& df_cfg()->checkout()->other()->canGetAddressFromYandexMarket()
+				&& df_cfgr()->checkout()->other()->canGetAddressFromYandexMarket()
 			) {
 				$result = $this->addressFromYandexMarket();
 			}

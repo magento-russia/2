@@ -10,7 +10,7 @@ class Df_SalesRule_Model_Rule_Condition_Product_Subselect extends Mage_SalesRule
 		parent::loadValueOptions();
 		/** @var bool $needFix */
 		static $needFix; if (is_null($needFix)) {$needFix =
-			df_cfg()->admin()->promotions()->getFixProductsSubselection()
+			df_cfgr()->admin()->promotions()->getFixProductsSubselection()
 		;}
 		if ($needFix) {
 			$valueOptions = $this[self::DF_FIELD_VALUE_OPTION];

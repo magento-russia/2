@@ -7,7 +7,7 @@ class Df_Speed_Observer {
 	 * controller_front_init_before — это первое событие,
 	 * которое становится доступно подписчикам,
 	 * а метод @see Df_Speed_Observer::controller_front_init_before()
-	 * уже использует @uses df_cfg(),
+	 * уже использует @uses df_cfgr(),
 	 * поэтому нам надо инициализирвать РСМ.
 	 * Мы это делаем в методе @see Df_Core_Boot::controller_front_init_before()
 	 * @used-by Mage_Core_Model_App::_callObserverMethod()
@@ -25,7 +25,7 @@ class Df_Speed_Observer {
 					<prefix>MIR_PRYAZHI_</prefix>
 				</cache>
 			 */
-			if (df_cfg()->speed()->general()->enableZendDateCaching()) {
+			if (df_cfgr()->speed()->general()->enableZendDateCaching()) {
 				Zend_Date::setOptions(array('cache' => Mage::app()->getCache()));
 			}
 			if (
@@ -36,7 +36,7 @@ class Df_Speed_Observer {
 					 */
 					false
 				&&
-					df_cfg()->speed()->general()->disableVisitorLogging()
+					df_cfgr()->speed()->general()->disableVisitorLogging()
 			) {
 				/**
 				 * На данном этапе инициализации системы

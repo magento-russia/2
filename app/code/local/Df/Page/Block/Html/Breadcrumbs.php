@@ -44,7 +44,7 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 			&&
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->pageHtmlBreadcrumbs()
+				df_cfgr()->speed()->blockCaching()->pageHtmlBreadcrumbs()
 		) {
 			$result = array_merge($result, array(get_class($this)), array_keys(df_nta($this->_crumbs)));
 		}
@@ -60,7 +60,7 @@ class Df_Page_Block_Html_Breadcrumbs extends Mage_Page_Block_Html_Breadcrumbs {
 		if (
 				df_module_enabled(Df_Core_Module::SPEED)
 			&&
-				df_cfg()->speed()->blockCaching()->pageHtmlBreadcrumbs()
+				df_cfgr()->speed()->blockCaching()->pageHtmlBreadcrumbs()
 		) {
 			/**
 			 * Чтобы блок кэшировался стандартным, заложенным в @see Mage_Core_Block_Abstract способом,

@@ -10,7 +10,7 @@ class Df_Sales_Block_Order_View extends Mage_Sales_Block_Order_View {
 	 * @return string
 	 */
 	public function escapeHtml($data, $allowedTags = null) {
-		if (df_cfg()->sales()->orderComments()->preserveLineBreaksInCustomerAccount()) {
+		if (df_cfgr()->sales()->orderComments()->preserveLineBreaksInCustomerAccount()) {
 			if (is_null($allowedTags)) {
 				$allowedTags = array();
 			}

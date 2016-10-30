@@ -33,7 +33,7 @@ class Df_YandexMarket_Category_Excel_Document extends Df_Core_Model {
 	/** @return Df_YandexMarket_Category_Excel_Document */
 	private function downloadFile() {
 		/** @var string $fileUrl */
-		$fileUrl = df_cfg()->yandexMarket()->other()->getCategoriesReferenceBookUrl();
+		$fileUrl = df_cfgr()->yandexMarket()->other()->getCategoriesReferenceBookUrl();
 		/** @var string|bool $contents */
 		$contents = @file_get_contents($fileUrl);
 		if (false === $contents) {
@@ -63,7 +63,7 @@ class Df_YandexMarket_Category_Excel_Document extends Df_Core_Model {
 						. ' в <a href="http://magento-forum.ru/forum/270/">разделе модуля «Яндекс.Маркет»</a>.'
 						,array(
 							'{categories-url}' =>
-								df_cfg()->yandexMarket()->other()->getCategoriesReferenceBookUrl()
+								df_cfgr()->yandexMarket()->other()->getCategoriesReferenceBookUrl()
 							,'{settings-url}' =>
 								df_mage()->adminhtmlHelper()->getUrl(
 									'system_config/edit/section/df_yandex_market'

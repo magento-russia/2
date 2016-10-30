@@ -62,7 +62,7 @@ abstract class Manager extends \Df\Checkout\Module\Bridge {
 	private function getTemplates() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_merge(
-				array('{телефон магазина}' => df_cfg()->base()->getStorePhone($this->store()))
+				array('{телефон магазина}' => df_cfgr()->base()->getStorePhone($this->store()))
 				,$this->main()->getConfigTemplates()
 			);
 		}

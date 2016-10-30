@@ -37,11 +37,11 @@ class Df_Page_Block_Html_Welcome extends Df_Page_Block_Html_WelcomeM {
 			&& df_installed()
 			&& df_session_customer()->isLoggedIn()
 		) {
-			if (df_cfg()->tweaks()->header()->hideWelcomeFromLoggedIn()) {
+			if (df_cfgr()->tweaks()->header()->hideWelcomeFromLoggedIn()) {
 				$result = '';
 			}
 			else {
-				if (df_cfg()->tweaks()->header()->showOnlyFirstName()) {
+				if (df_cfgr()->tweaks()->header()->showOnlyFirstName()) {
 					$result = sprintf(df_translate('Welcome, %s!', 'Mage_Page'), df_e(
 						df_h()->tweaks()->customer()->getFirstNameWithPrefix())
 					);
