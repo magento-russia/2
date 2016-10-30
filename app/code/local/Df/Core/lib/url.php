@@ -57,7 +57,7 @@ function df_current_domain($store = null) {return dfcf(function($store = null) {
 	if (!$result) {
 		// Magento запущена с командной строки (например, планировщиком задач)
 		/** @var string|null $baseUrl */
-		$baseUrl = Mage::getStoreConfig(Mage_Core_Model_Store::XML_PATH_UNSECURE_BASE_URL);
+		$baseUrl = df_cfg(Mage_Core_Model_Store::XML_PATH_UNSECURE_BASE_URL);
 		/**
 		 * Тут уже нам некуда деваться:
 		 * пусть уж администратор указывает базовый адрес в настройках.

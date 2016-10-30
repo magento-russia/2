@@ -65,7 +65,7 @@ class Df_Tweaks_Model_Settings_Remove extends Df_Core_Model {
 	 */
 	private function value($shortKey) {
 		/** @var string|null $result */
-		$result = Mage::getStoreConfig($this->translateConfigKeyFromShortToFull($shortKey));
+		$result = df_cfg($this->translateConfigKeyFromShortToFull($shortKey));
 		return !is_null($result) ? $result : Df_Admin_Config_Source_RemoveIfEmpty::NO_REMOVE;
 	}
 

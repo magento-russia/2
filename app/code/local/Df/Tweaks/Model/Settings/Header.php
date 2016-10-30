@@ -23,7 +23,7 @@ class Df_Tweaks_Model_Settings_Header extends Df_Core_Model_Settings {
 	 * (количество возможных значений этой опции больше 2)
 	 * @return string
 	 */
-	public function hideWishlistLink() {return Mage::getStoreConfig('remove_wishlist_link');}
+	public function hideWishlistLink() {return df_cfg('remove_wishlist_link');}
 	/** @return boolean */
 	public function replaceAccountLinkTitleWithCustomerName() {
 		return $this->getYesNo('replace_account_link_title_with_customer_name');

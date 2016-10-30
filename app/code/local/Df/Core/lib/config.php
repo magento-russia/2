@@ -1,4 +1,25 @@
 <?php
+use Mage_Core_Model_Store as Store;
+
+/**
+ * 2015-10-09
+ * https://mage2.pro/t/128
+ * https://github.com/magento/magento2/issues/2064
+ *
+ * @param string $key
+ * @param null|string|int|Store $store [optional]
+ * @param mixed|callable $default [optional]
+ * @return array|string|null|mixed
+ */
+function df_cfg($key, $store = null, $default = null) {
+	/** @var array|string|null|mixed $result */
+	$result = df_store($store)->getConfig($key);
+	return df_if(is_null($result) || '' === $result, $default, $result);
+}
+
+/** @return Df_Admin_Model_Settings */
+function df_cfgr() {return Df_Admin_Model_Settings::s();}
+
 /**
  * @param Mage_Core_Model_Config_Element|string|string[] $path
  * @return array(string => mixed)

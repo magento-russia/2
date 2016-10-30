@@ -606,11 +606,11 @@ class Df_PageCache_Model_Processor
 				$contentSize = strlen($content);
 				$currentStorageSize = (int) $cacheInstance->load(self::CACHE_SIZE_KEY);
 
-				if (Mage::getStoreConfig(Df_PageCache_Model_Processor::XML_PATH_CACHE_DEBUG)) {
+				if (df_cfg(Df_PageCache_Model_Processor::XML_PATH_CACHE_DEBUG)) {
 					$response->setBody(implode(', ', $this->getRequestTags()) . $response->getBody());
 				}
 
-				$maxSizeInBytes = Mage::getStoreConfig(self::XML_PATH_CACHE_MAX_SIZE) * 1024 * 1024;
+				$maxSizeInBytes = df_cfg(self::XML_PATH_CACHE_MAX_SIZE) * 1024 * 1024;
 
 				if ($currentStorageSize >= $maxSizeInBytes) {
 					Mage::app()->getCacheInstance()->invalidateType('full_page');
@@ -678,13 +678,13 @@ class Df_PageCache_Model_Processor
 		}
 
 		if ($res) {
-			$maxDepth = Mage::getStoreConfig(self::XML_PATH_ALLOWED_DEPTH);
+			$maxDepth = df_cfg(self::XML_PATH_ALLOWED_DEPTH);
 			$queryParams = $request->getQuery();
 			unset($queryParams[Df_PageCache_Model_Cache::REQUEST_MESSAGE_GET_PARAM]);
 			$res = count($queryParams)<=$maxDepth;
 		}
 		if ($res) {
-			$multicurrency = Mage::getStoreConfig(self::XML_PATH_CACHE_MULTICURRENCY);
+			$multicurrency = df_cfg(self::XML_PATH_CACHE_MULTICURRENCY);
 			if (!$multicurrency && !empty($_COOKIE['currency'])) {
 				$res = false;
 			}

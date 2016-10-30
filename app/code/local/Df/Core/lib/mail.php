@@ -6,7 +6,7 @@ use Mage_Core_Model_Store as Store;
  */
 function df_store_mail_address($store = null) {return dfcf(function($store = null) {
 	/** @var string $result */
-	$result = df_nts(Mage::getStoreConfig('trans_email/ident_general/email', $store));
+	$result = df_nts(df_cfg('trans_email/ident_general/email', $store));
 	/** @var Zend_Validate_EmailAddress $mailValidator */
 	$mailValidator = new Zend_Validate_EmailAddress();
 	if (!$mailValidator->isValid($result)) {

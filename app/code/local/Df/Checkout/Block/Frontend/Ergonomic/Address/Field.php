@@ -201,7 +201,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_Field extends Df_Core_Block_T
 			/** @var string $key */
 			$key = "df_checkout/{$this->getAddress()->getType()}_field_{$paramName}/{$fieldType}";
 			/** @var string $result */
-			$result = Mage::getStoreConfig($key);
+			$result = df_cfg($key);
 			if (!is_string($result)) {
 				df_error('Не могу прочитать значение настройки «%s»', $key);
 			}

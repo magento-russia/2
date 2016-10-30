@@ -79,7 +79,7 @@ abstract class Df_PageCache_Model_Container_Abstract
 			return false;
 		}
 
-		if (Mage::getStoreConfig(Df_PageCache_Model_Processor::XML_PATH_CACHE_DEBUG)) {
+		if (df_cfg(Df_PageCache_Model_Processor::XML_PATH_CACHE_DEBUG)) {
 			$debugBlock = new Df_PageCache_Block_Debug;
 			$debugBlock->setDynamicBlockContent($blockContent);
 			$debugBlock->setTags($this->_getPlaceHolderBlock()->getCacheTags());

@@ -35,11 +35,9 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 	 * @override
 	 * @return string
 	 */
-	public function getCurrency() {
-		/** @var string $result */
-		$result = Mage::getStoreConfig(self::XML_PATH_DEFAULT_CURRENCY);
-		return $result ? $result : parent::getCurrency();
-	}
+	public function getCurrency() {return
+		df_cfg(self::XML_PATH_DEFAULT_CURRENCY) ?: parent::getCurrency()
+	;}
 
 	/**
 	 * Цель перекрытия —
@@ -96,11 +94,9 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 	 * @override
 	 * @return string
 	 */
-	public function getTimezone() {
-		/** @var string $result */
-		$result = Mage::getStoreConfig(self::XML_PATH_DEFAULT_TIMEZONE);
-		return $result ? $result : parent::getTimezone();
-	}
+	public function getTimezone() {return
+		df_cfg(self::XML_PATH_DEFAULT_TIMEZONE) ?: parent::getTimezone()
+	;}
 
 	/**
 	 * Цель перекрытия —

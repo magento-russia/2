@@ -9,9 +9,9 @@ class Df_Review_Model_Notifier extends Df_Core_Model {
 			/** @var Mage_Core_Model_Email_Template_Mailer $result */
 			$result = df_model('core/email_template_mailer');
 			$result->addEmailInfo($this->getMailInfo());
-			$result->setSender(Mage::getStoreConfig('contacts/email/sender_email_identity'));
+			$result->setSender(df_cfg('contacts/email/sender_email_identity'));
 			$result->setStoreId(df_store_id());
-			$result->setTemplateId(Mage::getStoreConfig('df_tweaks_admin/reviews/notification_template'));
+			$result->setTemplateId(df_cfg('df_tweaks_admin/reviews/notification_template'));
 			$result->setTemplateParams(array(
 				'review' => $this->getReview()
 				,'product' => $this->getReview()->getProduct()
@@ -35,7 +35,7 @@ class Df_Review_Model_Notifier extends Df_Core_Model {
 	/** @return string */
 	private function getRecipientAddress() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::getStoreConfig('contacts/email/recipient_email');
+			$this->{__METHOD__} = df_cfg('contacts/email/recipient_email');
 		}
 		return $this->{__METHOD__};
 	}

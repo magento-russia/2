@@ -10,7 +10,7 @@ class Df_Seo_Model_Processor_Image_Exif extends Df_Core_Model {
 	/** @return void */
 	private function addTag_copyright() {
 		/** @var string|null $copyright */
-		$copyright = Mage::getStoreConfig('design/footer/copyright');
+		$copyright = df_cfg('design/footer/copyright');
 		if ($copyright) {
 			$this->getPelIfd0()->addEntry(new PelEntryCopyright(strtr($copyright, array(
 				"&copy;" => "(c)"

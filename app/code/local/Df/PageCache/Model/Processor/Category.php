@@ -89,7 +89,7 @@ class Df_PageCache_Model_Processor_Category extends Df_PageCache_Model_Processor
 			$params = $this->_getSessionParams();
 			$queryParams = $request->getQuery();
 			$queryParams = array_merge($queryParams, $params);
-			$maxDepth = Mage::getStoreConfig(Df_PageCache_Model_Processor::XML_PATH_ALLOWED_DEPTH);
+			$maxDepth = df_cfg(Df_PageCache_Model_Processor::XML_PATH_ALLOWED_DEPTH);
 			$res = count($queryParams)<=$maxDepth;
 		}
 		return $res;

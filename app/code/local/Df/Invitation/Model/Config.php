@@ -14,7 +14,7 @@ class Df_Invitation_Model_Config {
 	 * @return int
 	 */
 	public function getMaxInvitationsPerSend($storeId = null) {
-		$max = (int)Mage::getStoreConfig(self::XML_PATH_MAX_INVITATION_AMOUNT_PER_SEND, $storeId);
+		$max = (int)df_cfg(self::XML_PATH_MAX_INVITATION_AMOUNT_PER_SEND, $storeId);
 		return($max < 1 ? 1 : $max);
 	}
 
@@ -24,10 +24,9 @@ class Df_Invitation_Model_Config {
 	 * @param int $storeId
 	 * @return boolean
 	 */
-	public function getInvitationRequired($storeId = null)
-	{
-		return Mage::getStoreConfig(self::XML_PATH_REGISTRATION_REQUIRED_INVITATION, $storeId);
-	}
+	public function getInvitationRequired($storeId = null) {return
+		df_cfg(self::XML_PATH_REGISTRATION_REQUIRED_INVITATION, $storeId)
+	;}
 
 	/**
 	 * Return config value for use same group as inviter

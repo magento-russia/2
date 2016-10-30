@@ -32,9 +32,9 @@ class Df_Directory_Settings_Regions extends Df_Core_Model_Settings {
 	 * @param int $position
 	 * @return int
 	 */
-	private function getPriorityRegionIdAtPosition($position) {
-		return df_int(Mage::getStoreConfig($this->getConfigKeyFull('position_' . $position)));
-	}
+	private function getPriorityRegionIdAtPosition($position) {return
+		df_int(df_cfg($this->getConfigKeyFull('position_' . $position)))
+	;}
 
 	/**
 	 * @override

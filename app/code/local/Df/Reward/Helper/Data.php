@@ -176,7 +176,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	 */
 	public function getLandingPageUrl()
 	{
-		$pageIdentifier = Mage::getStoreConfig('df_reward/general/landing_page');
+		$pageIdentifier = df_cfg('df_reward/general/landing_page');
 		return Mage::getUrl('', array('_direct' => $pageIdentifier));
 	}
 

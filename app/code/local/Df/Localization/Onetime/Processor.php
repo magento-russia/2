@@ -54,7 +54,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 	public function getTimeOfLastProcessing() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null $resultAsString */
-			$resultAsString = Mage::getStoreConfig($this->getConfigPath_TimeOfLastProcessing());
+			$resultAsString = df_cfg($this->getConfigPath_TimeOfLastProcessing());
 			$this->{__METHOD__} = df_n_set(!$resultAsString ? null : new Zend_Date($resultAsString));
 		}
 		return df_n_get($this->{__METHOD__});

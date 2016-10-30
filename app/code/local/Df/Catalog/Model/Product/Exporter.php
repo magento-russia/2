@@ -100,7 +100,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 * работает не так, как нам нужно.
 			 * Поэтому вызываем его только если нам не нужно добавлять разделы в адрес товара.
 			 */
-			if (!Mage::getStoreConfig(
+			if (!df_cfg(
 				Mage_Catalog_Helper_Product::XML_PATH_PRODUCT_URL_USE_CATEGORY
 				, df_state()->getStoreProcessed()
 			)) {

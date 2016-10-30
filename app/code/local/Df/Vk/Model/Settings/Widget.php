@@ -9,7 +9,7 @@ abstract class Df_Vk_Model_Settings_Widget extends Df_Core_Model_Settings {
 	/** @return string|null */
 	public function getCode() {
 		/** @var string|null $result */
-		$result = Mage::getStoreConfig($this->getConfigKey('code'));
+		$result = df_cfg($this->getConfigKey('code'));
 		if (!is_null($result)) {
 			df_result_string($result);
 		}

@@ -126,7 +126,7 @@ function df_store_id($store = null) {return df_store($store)->getId();}
  * Magento CE 1.4.0.1 больше не поддерживаем.
  */
 function df_store_iso2($store = null) {return
-	Mage::getStoreConfig(H::XML_PATH_MERCHANT_COUNTRY_CODE, df_store($store))
+	df_cfg(H::XML_PATH_MERCHANT_COUNTRY_CODE, df_store($store))
 ;}
 
 /**

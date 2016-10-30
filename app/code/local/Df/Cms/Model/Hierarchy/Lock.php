@@ -5,7 +5,7 @@
 class Df_Cms_Model_Hierarchy_Lock extends Df_Core_Model {
 	/** @return int */
 	public function getLockLifeTime() {
-		$timeout = df_nat0(Mage::getStoreConfig('df_cms/hierarchy/lock_timeout'));
+		$timeout = df_nat0(df_cfg('df_cms/hierarchy/lock_timeout'));
 		return ($timeout != 0 && $timeout < 120 ) ? 120 : $timeout;
 	}
 

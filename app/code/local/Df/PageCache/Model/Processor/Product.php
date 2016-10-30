@@ -18,7 +18,7 @@ class Df_PageCache_Model_Processor_Product extends Df_PageCache_Model_Processor_
 
 		/** @var Df_PageCache_Model_Processor */
 		$processor = Mage::getSingleton('df_pagecache/processor');
-		$countLimit = Mage::getStoreConfig(Mage_Reports_Block_Product_Viewed::XML_PATH_RECENTLY_VIEWED_COUNT);
+		$countLimit = df_cfg(Mage_Reports_Block_Product_Viewed::XML_PATH_RECENTLY_VIEWED_COUNT);
 		// save recently viewed product count limit
 		$cacheId = $processor->getRecentlyViewedCountCacheId();
 		if (!$cacheInstance->getFrontend()->test($cacheId)) {

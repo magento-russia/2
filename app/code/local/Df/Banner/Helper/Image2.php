@@ -199,7 +199,7 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 						->setWatermarkSize($this->parseSize($this->getWatermarkSize()))
 						->setWatermark($this->getWatermark(), $this->getWatermarkPosition());
 				} else {
-					$watermark = Mage::getStoreConfig(
+					$watermark = df_cfg(
 						"design/watermark/{$this->_getModel()->getDestinationSubdir()}_image"
 					);
 					if ($watermark) {
@@ -270,7 +270,7 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 		if ($this->_watermarkPosition ) {
 			return $this->_watermarkPosition;
 		} else {
-			return Mage::getStoreConfig("design/watermark/{$this->_getModel()->getDestinationSubdir()}_position");
+			return df_cfg("design/watermark/{$this->_getModel()->getDestinationSubdir()}_position");
 		}
 	}
 
@@ -285,7 +285,7 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 		if ($this->_watermarkSize ) {
 			return $this->_watermarkSize;
 		} else {
-			return Mage::getStoreConfig("design/watermark/{$this->_getModel()->getDestinationSubdir()}_size");
+			return df_cfg("design/watermark/{$this->_getModel()->getDestinationSubdir()}_size");
 		}
 	}
 

@@ -745,7 +745,7 @@ class Df_PageCache_Observer {
 		}
 
 		// renew customer viewed product ids cookie
-		$countLimit = Mage::getStoreConfig(Mage_Reports_Block_Product_Viewed::XML_PATH_RECENTLY_VIEWED_COUNT);
+		$countLimit = df_cfg(Mage_Reports_Block_Product_Viewed::XML_PATH_RECENTLY_VIEWED_COUNT);
 		$collection = Mage::getResourceModel('reports/product_index_viewed_collection')
 			->addIndexFilter()
 			->setAddedAtOrder()
@@ -894,12 +894,12 @@ class Df_PageCache_Observer {
 		}
 		$exceptions = $this->_loadDesignExceptions();
 		if (!isset($exceptions[$storeIdentifier])) {
-			$exceptions[$storeIdentifier][self::XML_PATH_DESIGN_EXCEPTION] = Mage::getStoreConfig(
+			$exceptions[$storeIdentifier][self::XML_PATH_DESIGN_EXCEPTION] = df_cfg(
 				self::XML_PATH_DESIGN_EXCEPTION
 			);
 			foreach ($this->_themeExceptionTypes as $type) {
 				$configPath = sprintf('design/theme/%s_ua_regexp', $type);
-				$exceptions[$storeIdentifier][$configPath] = Mage::getStoreConfig($configPath);
+				$exceptions[$storeIdentifier][$configPath] = df_cfg($configPath);
 			}
 			$this->_saveDesignExceptions($exceptions);
 			$this->_processor->refreshRequestIds();

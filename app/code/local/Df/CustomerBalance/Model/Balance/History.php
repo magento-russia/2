@@ -42,8 +42,8 @@ class Df_CustomerBalance_Model_Balance_History extends Df_Core_Model {
 			;
 			$customer = $this->getBalanceModel()->getCustomer();
 			$email->sendTransactional(
-				Mage::getStoreConfig('df_customer/balance/email_template', $storeId)
-				,Mage::getStoreConfig('df_customer/balance/email_identity', $storeId)
+				df_cfg('df_customer/balance/email_template', $storeId)
+				,df_cfg('df_customer/balance/email_identity', $storeId)
 				,$customer->getEmail()
 				,$customer->getName()
 				,array(

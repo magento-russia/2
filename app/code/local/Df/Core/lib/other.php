@@ -4,9 +4,6 @@ use Exception as E;
 /** @return Df_Core_Helper_Data */
 function df() {static $r; return $r ? $r : $r = Df_Core_Helper_Data::s();}
 
-/** @return Df_Admin_Model_Settings */
-function df_cfgr() {return Df_Admin_Model_Settings::s();}
-
 /**
  * Обработка исключительных ситуаций в точках сочленения моих модулей и ядра
  *

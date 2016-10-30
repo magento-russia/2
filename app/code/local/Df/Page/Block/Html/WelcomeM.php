@@ -26,7 +26,7 @@ class Df_Page_Block_Html_WelcomeM extends Mage_Page_Block_Html_Welcome {
 			if (Mage::isInstalled() && $this->_getSession()->isLoggedIn()) {
 				$this->_data['welcome'] = $this->__('Welcome, %s!', $this->escapeHtml($this->_getSession()->getCustomer()->getName()));
 			} else {
-				$this->_data['welcome'] = Mage::getStoreConfig('design/header/welcome');
+				$this->_data['welcome'] = df_cfg('design/header/welcome');
 			}
 		}
 

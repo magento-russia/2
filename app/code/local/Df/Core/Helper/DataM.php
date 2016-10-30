@@ -101,7 +101,7 @@ class Df_Core_Helper_DataM extends Mage_Core_Helper_Data {
 		 * Константа @see Mage_Core_Helper_Data::XML_PATH_DEFAULT_COUNTRY
 		 * также отсутствует в Magento 1.4.0.1.
 		 */
-		return $result ? $result : Mage::getStoreConfig('general/country/default', $store);
+		return $result ?: df_cfg('general/country/default', $store);
 	}
 
 	/**

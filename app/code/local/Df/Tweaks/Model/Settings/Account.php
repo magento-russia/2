@@ -17,9 +17,7 @@ class Df_Tweaks_Model_Settings_Account extends Df_Core_Model_Settings {
 		return $this->getYesNo('remove_section_newsletter_subscriptions');
 	}
 	/** @return boolean */
-	public function removeSectionProductReviews() {
-		return Mage::getStoreConfig('remove_section_product_reviews');
-	}
+	public function removeSectionProductReviews() {return df_cfg('remove_section_product_reviews');}
 	/** @return boolean */
 	public function removeSectionRecurringProfiles() {
 		return $this->getYesNo('remove_section_recurring_profiles');

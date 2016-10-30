@@ -1,15 +1,16 @@
 <?php
+use Df_Directory_Model_Currency as C;
 class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 	/**
 	 * @param float $amountInBaseCurrency
-	 * @param string|Mage_Directory_Model_Currency $customCurrency
+	 * @param string|C|Mage_Directory_Model_Currency $customCurrency
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertFromBase($amountInBaseCurrency, $customCurrency, $store = null) {
 		df_param_float($amountInBaseCurrency, 0);
 		if (!is_string($customCurrency)) {
-			df_assert($customCurrency instanceof Mage_Directory_Model_Currency);
+			df_assert($customCurrency instanceof C);
 			// метод ядра использует только код валюты
 			$customCurrency = $customCurrency->getCode();
 		}
@@ -82,16 +83,16 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 
 	/**
 	 * @param float $amountInCustomCurrency
-	 * @param string|Mage_Directory_Model_Currency $customCurrency
+	 * @param string|C|Mage_Directory_Model_Currency $customCurrency
 	 * @param Df_Core_Model_StoreM|int|string|bool|null $store [optional]
 	 * @return float
 	 */
 	public function convertToBase($amountInCustomCurrency, $customCurrency, $store = null) {
 		df_param_float($amountInCustomCurrency, 0);
 		if (is_string($customCurrency)) {
-			$customCurrency = Df_Directory_Model_Currency::ld($customCurrency);
+			$customCurrency = C::ld($customCurrency);
 		}
-		df_assert($customCurrency instanceof Mage_Directory_Model_Currency);
+		df_assert($customCurrency instanceof C);
 		/** @var float $result */
 		$result =
 			/**
@@ -109,33 +110,21 @@ class Df_Directory_Helper_Currency extends Mage_Core_Helper_Abstract {
 		return $result;
 	}
 
-	/** @return Df_Directory_Model_Currency */
-	public function getBase() {
-		return Df_Directory_Model_Currency::ld(Mage::getStoreConfig(
-			Mage_Directory_Model_Currency::XML_PATH_CURRENCY_BASE
-		));
-	}
+	/** @return C */
+	public function getBase() {return C::ld(df_cfg(C::XML_PATH_CURRENCY_BASE));}
 
-	/** @return Df_Directory_Model_Currency */
-	public function getDollar() {
-		return Df_Directory_Model_Currency::ld(Df_Directory_Model_Currency::USD);
-	}
+	/** @return C */
+	public function getDollar() {return C::ld(C::USD);}
 
-	/** @return Df_Directory_Model_Currency */
-	public function getHryvnia() {
-		return Df_Directory_Model_Currency::ld(Df_Directory_Model_Currency::UAH);
-	}
+	/** @return C */
+	public function getHryvnia() {return C::ld(C::UAH);}
 
-	/** @return Df_Directory_Model_Currency */
-	public function getRouble() {
-		return Df_Directory_Model_Currency::ld(Df_Directory_Model_Currency::RUB);
-	}
+	/** @return C */
+	public function getRouble() {return C::ld(C::RUB);}
 
-	/** @return Df_Directory_Model_Currency */
-	public function getTenge() {
-		return Df_Directory_Model_Currency::ld(Df_Directory_Model_Currency::KZT);
-	}
+	/** @return C */
+	public function getTenge() {return C::ld(C::KZT);}
 
-	/** @return Df_Directory_Helper_Currency */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
