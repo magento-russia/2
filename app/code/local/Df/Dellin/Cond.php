@@ -69,15 +69,15 @@ class Cond extends \Df\Shipping\Request {
 		// 2016-10-29
 		// «высота самого высокого из мест»
 		// Необязательный параметр.
-		,'height' => 1
+		//,'height' => 1
 		// 2016-10-29
 		// «длина самого длинного из мест»
 		// Необязательный параметр.
-		,'length' => 1
+		//,'length' => 1
 		// 2016-10-29
 		// «вес самого тяжёлого места»
 		// Необязательный параметр.
-		,'maxWeight' => 1
+		//,'maxWeight' => 1
 		// 2016-10-29
 		// «объём негабаритной части груза в кубических метрах»
 		// Необязательный параметр.
@@ -97,22 +97,22 @@ class Cond extends \Df\Shipping\Request {
 		// 2016-10-29
 		// «общий объём груза в кубических метрах»
 		// Обязательный параметр.
-		,'sizedVolume' => 1
+		,'sizedVolume' => $this->cl()->rr()->getVolumeInCubicMetres()
 		// 2016-10-29
 		// «общий вес груза в килограммах»
 		// Обязательный параметр.
-		,'sizedWeight' => 1
+		,'sizedWeight' => $this->cl()->weightKg()
 		// 2016-10-29
 		// «Заявленная стоимость груза в рублях.
 		// При отсутствии - груз не страхуется,
 		// при передаче 0 - страхуется без объявленной стоимости,
 		// при передаче значения больше 0 - страхуется на указанную сумму.»
 		// Необязательный параметр.
-		,'statedValue' => 1000
+		,'statedValue' => $this->cl()->declaredValue()
 		// 2016-10-29
 		// «ширина самого широкого из мест»
 		// Необязательный параметр.
-		,'width' => 1
+		//,'width' => 1
 	]);});}
 
 	/**
@@ -139,6 +139,12 @@ class Cond extends \Df\Shipping\Request {
 	protected function uri() {return 'https://api.dellin.ru/v1/public/calculator.json';}
 
 	/**
+	 * 2016-10-30
+	 * @return Collector
+	 */
+	private function cl() {return $this[self::$P__COLLECTOR];}
+
+	/**
 	 * 2016-10-29
 	 * @override
 	 * @return void
@@ -146,11 +152,14 @@ class Cond extends \Df\Shipping\Request {
 	protected function _construct() {
 		parent::_construct();
 		$this
+			->_prop(self::$P__COLLECTOR, Collector::class)
 			->_prop(self::$P__DEST, DF_V_STRING_NE)
 			->_prop(self::$P__ORIG, DF_V_STRING_NE)
 		;
 	}
 
+	/** @var string */
+	private static $P__COLLECTOR = 'collector';
 	/** @var string */
 	private static $P__DEST = 'dest';
 	/** @var string */
@@ -158,11 +167,12 @@ class Cond extends \Df\Shipping\Request {
 
 	/**
 	 * 2016-10-29
+	 * @param Collector $cl
 	 * @param string $orig
 	 * @param string $dest
 	 * @return self
 	 */
-	public static function i($orig, $dest) {return new self([
-		self::$P__DEST => $dest, self::$P__ORIG => $orig
+	public static function i(Collector $cl, $orig, $dest) {return new self([
+		self::$P__COLLECTOR => $cl, self::$P__DEST => $dest, self::$P__ORIG => $orig
 	]);}
 }

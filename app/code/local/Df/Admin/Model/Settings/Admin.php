@@ -2,8 +2,6 @@
 class Df_Admin_Model_Settings_Admin extends Df_Core_Model_Settings {
 	/** @return Df_Admin_Model_Settings_Admin_Interface */
 	public function _interface() {return Df_Admin_Model_Settings_Admin_Interface::s();}
-	/** @return Df_AccessControl_Model_Settings */
-	public function access_control() {return Df_AccessControl_Model_Settings::s();}
 	/** @return Df_Admin_Model_Settings_Admin_Catalog */
 	public function catalog() {return Df_Admin_Model_Settings_Admin_Catalog::s();}
 	/** @return Df_Admin_Model_Settings_Admin_Editor */

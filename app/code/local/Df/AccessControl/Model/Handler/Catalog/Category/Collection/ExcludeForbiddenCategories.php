@@ -10,7 +10,7 @@ class Df_AccessControl_Model_Handler_Catalog_Category_Collection_ExcludeForbidde
 	 * @return void
 	 */
 	public function handle() {
-		if (df_cfg()->admin()->access_control()->getEnabled()
+		if (Df_AccessControl_Settings::s()->getEnabled()
 			&& !is_null(df_h()->accessControl()->getCurrentRole())
 			&& df_h()->accessControl()->getCurrentRole()->isModuleEnabled()
 		) {

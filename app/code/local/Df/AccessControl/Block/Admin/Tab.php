@@ -3,7 +3,7 @@ class Df_AccessControl_Block_Admin_Tab
 	extends Mage_Adminhtml_Block_Widget_Form
 	implements Mage_Adminhtml_Block_Widget_Tab_Interface {
 	/** @return bool */
-	public function canShowTab() {return df_cfg()->admin()->access_control()->getEnabled();}
+	public function canShowTab() {return Df_AccessControl_Settings::s()->getEnabled();}
 
 	/**
 	 * @override

@@ -1,4 +1,7 @@
-<?php /** @var Df_AccessControl_Block_Admin_Tab_Tree $this */ ?>
+<?php
+/** @var Df_AccessControl_Block_Admin_Tab_Tree $this */
+use Df_AccessControl_Settings as S;
+?>
 <?php if ($this->isTreeEmpty()) { ?>
 	<div>У данного магазина отсутствуют товарные разделы.</div>
 <?php } else { ?>
@@ -22,13 +25,13 @@
 			rootNodeId: '<?php echo $this->getRoot()->getId(); ?>'
 			,
 			/** @type {Boolean} */
-			autoSelectAncestors: <?php echo df_cfg()->admin()->access_control()->getAutoSelectAncestors() ? 'true' : 'false'; ?>
+			autoSelectAncestors: <?php echo S::s()->getAutoSelectAncestors() ? 'true' : 'false'; ?>
 			,
 			/** @type {Boolean} */
-			autoSelectDescendants: <?php echo df_cfg()->admin()->access_control()->getAutoSelectDescendants() ? 'true' : 'false'; ?>
+			autoSelectDescendants: <?php echo S::s()->getAutoSelectDescendants() ? 'true' : 'false'; ?>
 			,
 			/** @type {Boolean} */
-			autoExpandAll: <?php echo df_cfg()->admin()->access_control()->getAutoExpandAll() ? 'true' : 'false'; ?>
+			autoExpandAll: <?php echo S::s()->getAutoExpandAll() ? 'true' : 'false'; ?>
 		};
 		/** @type {HTMLInputElement} */
 		var selectedCategoriesContainer = $(dfWidgetParams.selectedCategoriesContainerElementId);

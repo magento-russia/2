@@ -24,13 +24,11 @@ class Df_AccessControl_Block_Admin_Tab_Tree	extends Mage_Adminhtml_Block_Catalog
 	 * @used-by Mage_Core_Block_Template::getTemplateFile()
 	 * @return string|null
 	 */
-	public function getTemplate() {
-		return
-			!df_cfg()->admin()->access_control()->getEnabled()
-			? null
-			: 'df/access_control/tab/tree.phtml'
-		;
-	}
+	public function getTemplate() {return
+		!Df_AccessControl_Settings::s()->getEnabled()
+		? null
+		:'df/access_control/tab/tree.phtml'
+	;}
 
 	/** @return bool */
 	public function isTreeEmpty() {return !$this->getRoot() || !$this->getRoot()->hasChildren();}

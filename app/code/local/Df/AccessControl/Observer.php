@@ -47,7 +47,7 @@ class Df_AccessControl_Observer {
 	 */
 	public function admin_roles_save_after(Varien_Event_Observer $o) {
 		try {
-			if (df_cfg()->admin()->access_control()->getEnabled()) {
+			if (Df_AccessControl_Settings::s()->getEnabled()) {
 				/** @var Mage_Admin_Model_Roles $role */
 				$role = $o['object'];
 				df_h()->accessControl()->setLastSavedRoleId($role->getId());

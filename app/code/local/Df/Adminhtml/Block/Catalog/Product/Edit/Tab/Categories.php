@@ -12,12 +12,9 @@ class Df_Adminhtml_Block_Catalog_Product_Edit_Tab_Categories extends Mage_Adminh
 	protected function _getNodeJson($node, $level=1) {
 		/** @var array(string => bool) $result */
 		$result = parent::_getNodeJson($node, $level);
-		if (
-				df_module_enabled(Df_Core_Module::ACCESS_CONTROL)
-			&&
-				df_cfg()->admin()->access_control()->getEnabled()
-			&&
-				df_h()->accessControl()->getCurrentRole()->isModuleEnabled()
+		if (df_module_enabled(Df_Core_Module::ACCESS_CONTROL)
+			&& Df_AccessControl_Settings::s()->getEnabled()
+			&& df_h()->accessControl()->getCurrentRole()->isModuleEnabled()
 		) {
 			if (
 				!in_array(

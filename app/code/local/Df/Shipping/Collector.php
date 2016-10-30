@@ -24,6 +24,33 @@ abstract class Collector extends Bridge {
 	abstract protected function domesticIso2();
 
 	/**
+	 * 2016-10-30
+	 * В валюте @see currencyCode()
+	 * @used-by \Df\Dellin\Cond::postRaw()
+	 * @used-by \Df\NovaPoshta\Collector::rate()
+	 * @return float
+	 */
+	public function declaredValue() {return dfc($this, function() {return
+		df_currency_convert_from_base(
+			$this->declaredValueBase(), $this->currencyCode(), $this->store()
+		)
+	;});}
+
+	/**
+	 * @used-by \Df\Dellin\Cond::postRaw()
+	 * @used-by \Df\NovaPoshta\Collector::responseRate()
+	 * @return \Df\Shipping\Rate\Request
+	 */
+	public function rr() {return $this[self::$P__RATE_REQUEST];}
+
+	/**
+	 * @used-by weightKgS()
+	 * @used-by \Df\Dellin\Cond::postRaw()
+	 * @return float
+	 */
+	public function weightKg() {return $this->rr()->getWeightInKg();}
+
+	/**
 	 * @used-by \Df\Shipping\Collector\Child::_result()
 	 * @used-by addError()
 	 * @used-by addRate()
@@ -202,16 +229,6 @@ abstract class Collector extends Bridge {
 	protected function dRegionId() {return $this->rr()->getDestinationRegionId();}
 
 	/**
-	 * @used-by \Df\NovaPoshta\Collector::responseRate()
-	 * @return float
-	 */
-	protected function declaredValue() {return dfc($this, function() {return
-		$this->rr()->getPackageValue()
-		* $this->configA()->getDeclaredValuePercent()
-		/ 100
-	;});}
-
-	/**
 	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
@@ -313,12 +330,6 @@ abstract class Collector extends Bridge {
 	protected function rateDefaultCode() {return 'standard';}
 
 	/**
-	 * @used-by \Df\NovaPoshta\Collector::responseRate()
-	 * @return \Df\Shipping\Rate\Request
-	 */
-	protected function rr() {return $this[self::$P__RATE_REQUEST];}
-
-	/**
 	 * @used-by \Df\InTime\Collector::_collect()
 	 * @used-by checkStreetDest()
 	 * @return string
@@ -329,12 +340,6 @@ abstract class Collector extends Bridge {
 	 * @return int
 	 */
 	protected function weightG() {return $this->rr()->getWeightInGrammes();}
-
-	/**
-	 * @used-by weightKgS()
-	 * @return float
-	 */
-	protected function weightKg() {return $this->rr()->getWeightInKg();}
 
 	/**
 	 * @used-by \Df\Exline\Collector::_collect()

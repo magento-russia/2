@@ -8,7 +8,7 @@ class Df_AccessControl_Model_Handler_Permissions_Role_Saverole_UpdateCatalogAcce
 	 * @return void
 	 */
 	public function handle() {
-		if (df_cfg()->admin()->access_control()->getEnabled()) {
+		if (Df_AccessControl_Settings::s()->getEnabled()) {
 			/**
 			 * true, если расширенное управление доступом
 			 * включено для данной конкретной должности

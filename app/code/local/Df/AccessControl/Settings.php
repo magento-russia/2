@@ -1,5 +1,5 @@
 <?php
-class Df_AccessControl_Model_Settings extends Df_Core_Model_Settings {
+class Df_AccessControl_Settings extends Df_Core_Model_Settings {
 	/** @return boolean */
 	public function getAutoExpandAll() {return $this->getYesNo('auto_expand_all');}
 	/** @return boolean */
@@ -15,7 +15,7 @@ class Df_AccessControl_Model_Settings extends Df_Core_Model_Settings {
 	protected function getKeyPrefix() {return 'df_tweaks_admin/access_control/';}
 	/**
 	 * @used-by Df_Admin_Model_Settings_Admin::access_control()
-	 * @return Df_AccessControl_Model_Settings
+	 * @return Df_AccessControl_Settings
 	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

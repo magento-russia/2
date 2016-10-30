@@ -14,7 +14,7 @@ class Df_AccessControl_Model_Handler_Catalog_Product_Collection_ExcludeForbidden
 		static $needHandle;
 		if (is_null($needHandle)) {
 			$needHandle =
-				df_cfg()->admin()->access_control()->getEnabled()
+				Df_AccessControl_Settings::s()->getEnabled()
 				&& df_h()->accessControl()->getCurrentRole()
 			;
 		}
