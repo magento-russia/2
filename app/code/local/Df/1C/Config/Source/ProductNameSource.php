@@ -10,12 +10,10 @@ class Df_1C_Config_Source_ProductNameSource extends Df_Admin_Config_Source {
 	 * @param bool $isMultiSelect
 	 * @return array(array(string => string))
 	 */
-	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return df_map_to_options(array(
-			'name' => '«Наименование» («Рабочее наименование»)'
-			,self::$VALUE__NAME_FULL => '«Полное наименование» («Наименование для печати»)'
-		));
-	}
+	protected function toOptionArrayInternal($isMultiSelect = false) {return df_map_to_options([
+		'name' => '«Наименование» («Рабочее наименование»)'
+		,self::$VALUE__NAME_FULL => '«Полное наименование» («Наименование для печати»)'
+	]);}
 
 	/** @var string */
 	private static $VALUE__NAME_FULL = 'name_full';

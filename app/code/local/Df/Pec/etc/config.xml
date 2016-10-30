@@ -1,27 +1,27 @@
 <?xml version='1.0'?>
 <config>
 	<modules>
-		<Df_Dellin>
-			<author>Дмитрий Федюк</author>
-			<title>Деловые Линии</title>
+		<Df_Pec>
 			<version>1.0.0</version>
-		</Df_Dellin>
+			<author>Дмитрий Федюк</author>
+			<version>1.0.0</version>
+		</Df_Pec>
 	</modules>
 	<default>
 		<carriers>
-			<df-dellin>
+			<df-pec>
 				<active>0</active>
-				<model>Df\Dellin\Carrier</model>
+				<model>Df\Pec\Carrier</model>
 				<!--
 					Заголовок для способа доставки.
 					Система отображает его при оформлении доставки
 					над перечнем тарифов данного способа доставки.
 				-->
-				<title>Деловые Линии</title>
-			</df-dellin>
+				<title>ПЭК</title>
+			</df-pec>
 		</carriers>
 		<df_shipping>
-			<dellin>
+			<pec>
 				<frontend__disable_for_shop_city>0</frontend__disable_for_shop_city>
 				<frontend__sort_order>0</frontend__sort_order>
 				<admin__declared_value_percent>0</admin__declared_value_percent>
@@ -29,16 +29,17 @@
 				<admin__fee_fixed>0</admin__fee_fixed>
 				<frontend__sallowspecific>0</frontend__sallowspecific>
 				<frontend__display_diagnostic_messages>1</frontend__display_diagnostic_messages>
-			</dellin>
+				<service__moscow_cargo_reception_point>0</service__moscow_cargo_reception_point>
+			</pec>
 		</df_shipping>
 	</default>
 	<df>
 		<features>
-			<df-dellin>
-				<module>df_dellin</module>
-				<title>Деловые Линии</title>
-				<url>http://magento-forum.ru/forum/208/</url>
-			</df-dellin>
+			<df-pec>
+				<module>df_pec</module>
+				<title>ПЭК</title>
+				<url>http://magento-forum.ru/forum/207/</url>
+			</df-pec>
 		</features>
 	</df>
 </config>

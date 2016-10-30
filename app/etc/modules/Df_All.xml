@@ -515,6 +515,14 @@
 				<Mage_Paypal/>
 			</depends>
 		</Df_Paypal>
+		<Df_Pec>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Df_Core/>
+				<Df_Shipping/>
+			</depends>
+		</Df_Pec>
 		<Df_Pbridge>
 			<active>true</active>
 			<codePool>local</codePool>

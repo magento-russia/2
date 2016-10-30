@@ -7,8 +7,9 @@ class Source extends \Df_Core_Model {
 	 * @used-by Df_Core_Model::cacheSaveProperty()
 	 * @return array(string => string)
 	 */
-	public function departments() {
-		if (!isset($this->{__METHOD__})) {
+	public function departments() {return dfc($this, function() {
+		/** @var array(string => string) $result */
+		try {
 			/** @var array(string => string) $result */
 			foreach (\Df\InTime\Api::s()->представительства() as $department) {
 				/** @var array(string => mixed) $department */
@@ -28,10 +29,18 @@ class Source extends \Df_Core_Model {
 					return ((v != "none") && (v != null) && (v.length != 0));
 				}],
 			 */
-			$this->{__METHOD__} = array('' => '-- выберите представительство --') + $result;
+			$result = ['' => '-- выберите представительство --'] + $result;
 		}
-		return $this->{__METHOD__};
-	}
+		// 2016-10-30
+		catch (\SoapFault $e) {
+			$result = ['' =>
+				"Модуль в настоящее время неработспособен по вине Ин-Тайм."
+				."\nПеред повторной проверкой работоспособности удалите кэш."
+				."\nСообщение от Ин-Тайм: «{$e->getMessage()}»."
+			];
+		}
+		return $result;
+	});}
 
 	/**
 	 * @override
