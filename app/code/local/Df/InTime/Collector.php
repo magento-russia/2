@@ -94,6 +94,6 @@ class Collector extends \Df\Shipping\Collector\Ua {
 		catch (\Exception $e) {
 			$date = null;
 		}
-		$this->addRate($terms['Amount'], null, null, $date);
+		$this->rate($terms['Amount'], $date);
 	}
 }

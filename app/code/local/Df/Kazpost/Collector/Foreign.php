@@ -35,14 +35,14 @@ class Foreign extends Child {
 				$rates[]= $last[$i] + $diff * self::$_ratesMore[$i];
 			}
 		}
-		$this->addRate($rates[$zone - 1], 'ground', 'наземным транспортом');
-		$this->addRate($rates[5 + $zone - 1], 'air', 'воздушным транспортом');
+		$this->rate($rates[$zone - 1], null, null, 'ground', 'наземным транспортом');
+		$this->rate($rates[5 + $zone - 1], null, null, 'air', 'воздушным транспортом');
 	}
 
 	/**
 	 * @override
 	 * @see \Df\Shipping\Collector::feeFixed()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * «Прием/доставка посылок на дом, в офис за 1 ед. отправления (при наличии возможности): 600»
 	 * «Экспедиционный сбор независимо от  веса и объявленной ценности: 400»
 	 * «Простое уведомление международных почтовых отправлений: 310»

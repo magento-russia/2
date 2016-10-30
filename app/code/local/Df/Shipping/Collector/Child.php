@@ -5,7 +5,7 @@ abstract class Child extends \Df\Shipping\Collector {
 	 * @override
 	 * @see \Df\Shipping\Collector::_result()
 	 * @used-by \Df\Shipping\Collector::addError()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * @used-by \Df\Shipping\Collector::call()
 	 * @used-by \Df\Shipping\Collector::r()
 	 * @return \Mage_Shipping_Model_Rate_Result
@@ -40,7 +40,7 @@ abstract class Child extends \Df\Shipping\Collector {
 
 	/**
 	 * @see \Df\Shipping\Collector::rateDefaultCode()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * @return string
 	 */
 	protected function rateDefaultCode() {return dfc($this, function() {

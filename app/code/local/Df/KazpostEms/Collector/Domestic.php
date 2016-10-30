@@ -22,13 +22,13 @@ class Domestic extends Child {
 			$this->errorInvalidCityDest();
 		}
 		df_assert(isset(D::$zones[$cityIdOrig][$cityIdDest]));
-		$this->addRate($this->choose(D::$_rates, D::$_ratesMore, D::$zones[$cityIdOrig][$cityIdDest]));
+		$this->rate($this->choose(D::$_rates, D::$_ratesMore, D::$zones[$cityIdOrig][$cityIdDest]));
 	}
 
 	/**
 	 * @override
 	 * @see \Df\Shipping\Collector::feeFixed()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * «Заказное уведомление EMS отправлений: 400»
 	 * http://www.kazpost.kz/uploads/content/files/УСЛУГИ%20УСКОРЕННОЙ%20И%20КУРЬЕРСКОЙ%20ПОЧТЫ.docx
 	 * @return int|float

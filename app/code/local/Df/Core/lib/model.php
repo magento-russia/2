@@ -119,7 +119,6 @@ function df_model($modelClass = '', $parameters = array()) {
  * В качестве параметра $modelClass можно передавать:
  * 1) класс модели в стандартном формате
  * 2) класс модели в формате Magento
- * @used-by Df_Tax_Setup_3_0_0::addRate()
  * @param string $modelClass
  * @param array(string => mixed) $parameters [optional]
  * @return Mage_Core_Model_Abstract

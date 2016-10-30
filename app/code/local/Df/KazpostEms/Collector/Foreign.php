@@ -14,13 +14,13 @@ class Foreign extends Child {
 		if (is_null($zone)) {
 			$this->errorInvalidCountryDest();
 		}
-		$this->addRate($this->choose(D::$_rates, D::$_ratesMore, $zone));
+		$this->rate($this->choose(D::$_rates, D::$_ratesMore, $zone));
 	}
 
 	/**
 	 * @override
 	 * @see \Df\Shipping\Collector::feeFixed()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * «Заказное уведомление EMS отправлений: 400»
 	 * http://www.kazpost.kz/uploads/content/files/УСЛУГИ%20УСКОРЕННОЙ%20И%20КУРЬЕРСКОЙ%20ПОЧТЫ.docx
 	 * @return int|float

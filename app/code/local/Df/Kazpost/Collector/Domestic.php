@@ -31,7 +31,7 @@ class Domestic extends Child {
 	/**
 	 * @override
 	 * @see \Df\Shipping\Collector::feeFixed()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * «Прием/доставка посылок на дом, в офис за 1 ед. отправления (при наличии возможности): 600»
 	 * http://www.kazpost.kz/uploads/content/files/СТАНДАРТ%20Тарифы%20по%20почтовым%20услугам.docx
 	 * @return int|float
@@ -46,11 +46,11 @@ class Domestic extends Child {
 	 */
 	private function rates($inCity, $ground, $air) {
 		if ($this->isInCity()) {
-			$this->addRate($inCity, 'in_city');
+			$this->rate($inCity, null, null, 'in_city');
 		}
 		else {
-			$this->addRate($ground, 'ground', 'наземным транспортом');
-			$this->addRate($air, 'air', 'воздушным транспортом');
+			$this->rate($ground, null, null, 'ground', 'наземным транспортом');
+			$this->rate($air, null, null, 'air', 'воздушным транспортом');
 		}
 	}
 }

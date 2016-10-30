@@ -10,6 +10,6 @@ class Collector extends \Df\Shipping\Collector\Ru {
 	 * @return void
 	 */
 	protected function _collect() {
-		$this->addRate(100);
+		$this->rate(100);
 	}
 }

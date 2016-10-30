@@ -53,7 +53,7 @@ abstract class Collector extends Bridge {
 	/**
 	 * @used-by \Df\Shipping\Collector\Child::_result()
 	 * @used-by addError()
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @used-by call()
 	 * @used-by r()
 	 * @return \Df\Shipping\Rate\Result
@@ -65,27 +65,6 @@ abstract class Collector extends Bridge {
 			$this->call(function() {$this->collect();});
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @param float $cost
-	 * @param string|null $code [optional]
-	 * @param string|null $title [optional]
-	 * @param \Zend_Date|int|null $timeMin [optional]
-	 * @param \Zend_Date|int|null $timeMax [optional]
-	 */
-	protected function addRate($cost, $code = null, $title = null, $timeMin = null, $timeMax = null) {
-		$cost = df_float_positive($cost);
-		if (!$code) {
-			$code = $this->rateDefaultCode();
-		}
-		/** @var float $costBase */
-		$costBase = $this->toBase($cost + $this->feeFixed()) + $this->feeDeclaredValueBase();
-		/** @var float $price */
-		$price = $this->roundPrice($costBase + $this->feeHandling($costBase));
-		$this->_result()->append(\Df\Shipping\Rate\Result\Method::i(
-			$code, $title, $costBase, $price, $this->resultCommon(), $timeMin, $timeMax
-		));
 	}
 
 	/**
@@ -270,13 +249,13 @@ abstract class Collector extends Bridge {
 	);}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @return int|float
 	 */
 	protected function feeFixed() {return 0;}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @return int|float
 	 */
 	protected function feePercentOfDeclaredValue() {return 0;}
@@ -323,8 +302,29 @@ abstract class Collector extends Bridge {
 	protected function oRegionId() {return $this->rr()->getOriginRegionId();}
 
 	/**
+	 * @param float $cost
+	 * @param string|null $code [optional]
+	 * @param string|null $title [optional]
+	 * @param \Zend_Date|int|null $timeMin [optional]
+	 * @param \Zend_Date|int|null $timeMax [optional]
+	 */
+	protected function rate($cost, $timeMin = null, $timeMax = null, $code = null, $title = null) {
+		$cost = df_float_positive($cost);
+		if (!$code) {
+			$code = $this->rateDefaultCode();
+		}
+		/** @var float $costBase */
+		$costBase = $this->toBase($cost + $this->feeFixed()) + $this->feeDeclaredValueBase();
+		/** @var float $price */
+		$price = $this->roundPrice($costBase + $this->feeHandling($costBase));
+		$this->_result()->append(\Df\Shipping\Rate\Result\Method::i(
+			$code, $title, $costBase, $price, $this->resultCommon(), $timeMin, $timeMax
+		));
+	}
+
+	/**
 	 * перекрывается методом @see \Df\Shipping\Collector\Child::rateDefaultCode()
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @return string
 	 */
 	protected function rateDefaultCode() {return 'standard';}
@@ -461,7 +461,7 @@ abstract class Collector extends Bridge {
 	}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @return float
 	 */
 	private function feeDeclaredValueBase() {return dfc($this, function() {return
@@ -469,7 +469,7 @@ abstract class Collector extends Bridge {
 	;});}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @param float $costBase
 	 * @return float
 	 */
@@ -478,7 +478,7 @@ abstract class Collector extends Bridge {
 	;}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @param float $amount
 	 * @return float
 	 */
@@ -496,7 +496,7 @@ abstract class Collector extends Bridge {
 
 	/**
 	 * @used-by addError()
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @return array(string => string)
 	 */
 	private function resultCommon() {return dfc($this, function() {return [
@@ -515,14 +515,14 @@ abstract class Collector extends Bridge {
 	];});}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @param float $price
 	 * @return float
 	 */
 	private function roundPrice($price) {return $this->store()->roundPrice($price);}
 
 	/**
-	 * @used-by addRate()
+	 * @used-by rate()
 	 * @param float $amount
 	 * @return float
 	 */

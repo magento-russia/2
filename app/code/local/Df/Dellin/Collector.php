@@ -11,7 +11,7 @@ class Collector extends \Df\Shipping\Collector\Ru {
 	 */
 	protected function _collect() {
 		$this->checkCountryDestIsRU();
-		$this->addRate($this->cond()->getRate(), null, null, $this->cond()->getDeliveryTime());
+		$this->rate($this->cond()->getRate(), $this->cond()->getDeliveryTime());
 	}
 
 	/** @return Cond */

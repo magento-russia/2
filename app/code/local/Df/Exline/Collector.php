@@ -9,10 +9,10 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	 * @param int $methodName
 	 * @return void
 	 */
-	protected function _addRate($id, $methodCode, $methodName) {
+	protected function _rate($id, $methodCode, $methodName) {
 		/** @var \Zend_Date[] $time */
 		$time = $this->time($id);
-		$this->addRate($this->rate($id), $methodCode, $methodName, df_first($time), df_last($time));
+		$this->rate($this->rate($id), df_first($time), df_last($time), $methodCode, $methodName);
 	}
 
 	/**
@@ -22,8 +22,8 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	 * @return void
 	 */
 	protected function _collect() {$this->call(function() {
-		$this->_addRate(1, 'express', 'экспресс');
-		$this->_addRate(2, 'standard', 'стандартный');
+		$this->_rate(1, 'express', 'экспресс');
+		$this->_rate(2, 'standard', 'стандартный');
 	});}
 
 	/**
@@ -36,7 +36,7 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	/**
 	 * @override
 	 * @see \Df\Shipping\Collector::feePercentOfDeclaredValue()
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * «Сумма расчета не включает в себя сбор в размере 0.8% от суммы объявленной стоимости.
 	 * Минимальная сумма объявленной стоимости составляет 15000 тенге.»
 	 * http://www.exline.kz/ru/calculations
@@ -109,7 +109,7 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	}
 
 	/**
-	 * @used-by _addRate()
+	 * @used-by _rate()
 	 * @param int $id
 	 * @return float
 	 */
@@ -126,7 +126,7 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	}
 
 	/**
-	 * @used-by _addRate()
+	 * @used-by _rate()
 	 * @param int $id
 	 * @return \Zend_Date[]
 	 */

@@ -2,18 +2,6 @@
 namespace Df\NovaPoshta;
 class Collector extends \Df\Shipping\Collector\Ua {
 	/**
-	 * @used-by _collect()
-	 * @used-by \Df\Shipping\Collector::call()
-	 * @param bool $toHome
-	 * @param string $methodCode
-	 * @param int $methodName
-	 * @return void
-	 */
-	protected function _addRate($toHome, $methodCode, $methodName) {
-		$this->addRate($this->rate($toHome), $methodCode, $methodName, $this->date());
-	}
-
-	/**
 	 * @override
 	 * @see \Df\Shipping\Collector::_collect()
 	 * @used-by \Df\Shipping\Collector::collect()
@@ -29,13 +17,25 @@ class Collector extends \Df\Shipping\Collector\Ua {
 		 */
 		$this->checkWeightIsLE(30);
 		$this->call(function() {
-			$this->_addRate(true, 'to-home', 'до дома');
-			$this->_addRate(false, 'to-warehouse', 'до пункта выдачи');
+			$this->_rate(true, 'to-home', 'до дома');
+			$this->_rate(false, 'to-warehouse', 'до пункта выдачи');
 		});
 	}
 
 	/**
-	 * @used-by _addRate()
+	 * @used-by _collect()
+	 * @used-by \Df\Shipping\Collector::call()
+	 * @param bool $toHome
+	 * @param string $methodCode
+	 * @param int $methodName
+	 * @return void
+	 */
+	private function _rate($toHome, $methodCode, $methodName) {
+		$this->rate($this->getRate($toHome), $this->date(), null, $methodCode, $methodName);
+	}
+
+	/**
+	 * @used-by _rate()
 	 * @return \Zend_Date
 	 */
 	private function date() {
@@ -138,7 +138,7 @@ class Collector extends \Df\Shipping\Collector\Ua {
 	 * @param bool $toHome
 	 * @return float
 	 */
-	private function rate($toHome) {return dfc($this, function($toHome) {
+	private function getRate($toHome) {return dfc($this, function($toHome) {
 		/**
 		 * Двери-Двери => 1
 		 * Двери-Склад => 2

@@ -21,7 +21,7 @@ class Method extends \Mage_Shipping_Model_Rate_Result_Method {
 
 	/**
 	 * 2015-04-06
-	 * @used-by \Df\Shipping\Collector::addRate()
+	 * @used-by \Df\Shipping\Collector::rate()
 	 * @param string|null $code
 	 * @param string|null $title
 	 * @param float $costBase

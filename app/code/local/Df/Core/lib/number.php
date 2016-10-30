@@ -47,7 +47,7 @@ function df_f2i($value, $precision = 2) {return
  * 3 => 3
  * 3.333 => 3.333
  * 3.300 => 3.3
- * @used-by Df_Tax_Setup_3_0_0::addRate()
+ * @used-by Df_Tax_Setup_3_0_0::rate()
  * @param float|int $value
  * @return string
  */

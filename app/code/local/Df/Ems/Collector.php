@@ -11,10 +11,8 @@ class Collector extends \Df\Shipping\Collector\Ru {
 	 */
 	protected function _collect() {
 		$this->checkWeightIsLE(31.5);
-		$this->addRate(
+		$this->rate(
 			$this->cond()->getRate()
-			, null
-			, null
 			, $this->cond()->getDeliveryTimeMin()
 			, $this->cond()->getDeliveryTimeMax()
 		);
