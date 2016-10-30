@@ -16,6 +16,9 @@
                         .form-list label {float: left;}
 					 */
 					float: none;
+					&:after {content: '' !important;};
+					// 2016-10-30
+					margin-bottom: 2px;
 				}
 				input {
 					letter-spacing: 0.03em;
@@ -24,7 +27,7 @@
 					float: left;
 					label {
 						width: 2.5em;
-						margin: 0 0 0 0.5em;
+						margin-left: 0.5em;
 					}
 					.df-network-code-input-frame {
 						width: 5em;

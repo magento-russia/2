@@ -70,14 +70,17 @@ body.customer-account-create .account-create {
     					/** ╨Т ╤Б╨╕╤Б╤В╨╡╨╝╨╜╨╛╨╝ ╤Д╨░╨╣╨╗╨╡ Magento ╨┐╤А╨╕╤Б╤Г╤В╤Б╤В╨▓╤Г╨╡╤В ╨┐╤А╨░╨▓╨╕╨╗╨╛
                             .form-list label {float: left;}
     					 */
-    float: none; }
+    float: none;
+    margin-bottom: 2px; }
+    .form-list ul li .df-phone-container label:after {
+      content: '' !important; }
   .form-list ul li .df-phone-container input {
     letter-spacing: 0.03em; }
   .form-list ul li .df-phone-container .df-network-code-container {
     float: left; }
     .form-list ul li .df-phone-container .df-network-code-container label {
       width: 2.5em;
-      margin: 0 0 0 0.5em; }
+      margin-left: 0.5em; }
     .form-list ul li .df-phone-container .df-network-code-container .df-network-code-input-frame {
       width: 5em;
       overflow: hidden; }
