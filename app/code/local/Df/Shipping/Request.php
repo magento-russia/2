@@ -154,12 +154,12 @@ abstract class Request extends \Df_Core_Model {
 
 	/**
 	 * Этот метод предназначен для перекрытия потомкими.
-	 * @see Df_RussianPost_Model_Official_Request_International::adjustHttpClient()
-	 * @used-by getHttpClient()
-	 * @param \Zend_Http_Client $httpClient
+	 * @see Df_RussianPost_Model_Official_Request_International::adjust()
+	 * @used-by client()
+	 * @param \Zend_Http_Client $client
 	 * @return void
 	 */
-	protected function adjustHttpClient(\Zend_Http_Client $httpClient) {}
+	protected function adjust(\Zend_Http_Client $client) {}
 
 	/**
 	 * @used-by getDeliveryTime()
@@ -234,29 +234,15 @@ abstract class Request extends \Df_Core_Model {
 	/** @return string */
 	protected function getErrorMessage() {return '';}
 
-	/** @return array(string => string) */
-	protected function getHeaders() {return array(
-		'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0'
-	);}
-
-	/**
-	 * Используем класс Zend_Http_Client, а не Varien_Http_Client,
-	 * потому что применение Varien_Http_Client зачастую приводит к сбою:
-	 * Error parsing body - doesn't seem to be a chunked message
-	 * @return \Zend_Http_Client
-	 */
-	protected function getHttpClient() {return dfc($this, function() {
-		/** @var \Zend_Http_Client $result */
-		$result = new \Zend_Http_Client();
-		$result->setHeaders($this->getHeaders());
-		$result->setConfig($this->getRequestConfuguration() + array('timeout' => 10));
-		$this->adjustHttpClient($result);
-		return $result;
-	});}
-
 	/** @return string|array(string => string) */
 	protected function getQuery() {return df_clean($this->paramsQuery());}
 
+	/**
+	 * @used-by client()
+	 * @return array(string => string) 
+	 */
+	protected function headers() {return [];}	
+	
 	/** @return string */
 	protected function method() {return $this->cfg(self::P__METHOD, \Zend_Http_Client::GET);}
 
@@ -331,20 +317,35 @@ abstract class Request extends \Df_Core_Model {
 			,!$this->isItPost() ? [] : [$this->postRaw() ?: $this->paramsPost()]
 		));
 	});}
-	
+
+	/**
+	 * Используем класс Zend_Http_Client, а не Varien_Http_Client,
+	 * потому что применение Varien_Http_Client зачастую приводит к сбою:
+	 * Error parsing body - doesn't seem to be a chunked message
+	 * @return \Zend_Http_Client
+	 */
+	private function client() {return dfc($this, function() {
+		/** @var \Zend_Http_Client $result */
+		$result = new \Zend_Http_Client();
+		$result->setHeaders($this->headers());
+		$result->setConfig($this->getRequestConfuguration() + ['timeout' => 10]);
+		$this->adjust($result);
+		return $result;
+	});}
+
 	/** @return \Zend_Http_Response */
 	private function getResponse() {return dfc($this, function() {
-		$this->getHttpClient()->setUri($this->zuri());
+		$this->client()->setUri($this->zuri());
 		if ($this->isItPost()) {
 			if ($this->postRaw()) {
-				$this->getHttpClient()->setRawData($this->postRaw());
+				$this->client()->setRawData($this->postRaw());
 			}
 			else {
 				if (!$this->needPostKeysWithSameName()) {
-					$this->getHttpClient()->setParameterPost($this->paramsPost());
+					$this->client()->setParameterPost($this->paramsPost());
 				}
 				else {
-					$this->getHttpClient()->setRawData(
+					$this->client()->setRawData(
 						/**
 						 * Некоторые калькуляторы допускают несколько одноимённых опций.
 						 * http_build_query кодирует их как a[0]=1&a[1]=2&a[2]=3
@@ -361,16 +362,16 @@ abstract class Request extends \Df_Core_Model {
 			}
 		}
 		/** @var \Zend_Http_Response $result */
-		$result = $this->getHttpClient()->request($this->method());
+		$result = $this->client()->request($this->method());
 		/**
 		 * Обратите внимание,
 		 * что обычное @see Zend_Uri::__toString() здесь для сравнения использовать нельзя,
 		 * потому что Zend Framework свежих версий Magento CE (заметил в Magento CE 1.9.0.1)
-		 * зачем-то добавляет ко второму веб-адресу $this->getHttpClient()->getUri()
+		 * зачем-то добавляет ко второму веб-адресу $this->client()->getUri()
 		 * порт по-умолчанию (80), даже если в первом веб-адресе ($this->zuri())
 		 * порт отсутствует.
 		 */
-		if (!\Df\Zf\UriComparator::c($this->zuri(), $this->getHttpClient()->getUri())) {
+		if (!\Df\Zf\UriComparator::c($this->zuri(), $this->client()->getUri())) {
 			/**
 			 * Сервер службы доставки перенаправил нас на новый адрес.
 			 * С большой вероятностью, это означает, что изменился программный интерфейс службы доставки
@@ -384,7 +385,7 @@ abstract class Request extends \Df_Core_Model {
 				, $this->getCarrier()->getTitle()
 				, get_class($this)
 				, $this->zuri()->__toString()
-				, $this->getHttpClient()->getUri()->__toString()
+				, $this->client()->getUri()->__toString()
 			);
 		}
 		return $result;

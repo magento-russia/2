@@ -13,6 +13,24 @@ class Cond extends \Df\Shipping\Request {
 	/**
 	 * 2016-10-29
 	 * @override
+	 * @see \Df\Shipping\Request::headers()
+	 * @used-by \Df\Shipping\Request::client()
+	 * @used-by client()
+	 * @return array(string => string)
+	 */
+	protected function headers() {return ['Content-type' => 'application/json'];}
+
+	/**
+	 * 2016-10-30
+	 * @override
+	 * @see \Df\Shipping\Request::method()
+	 * @return string
+	 */
+	protected function method() {return \Zend_Http_Client::POST;}
+
+	/**
+	 * 2016-10-29
+	 * @override
 	 * @see \Df\Shipping\Request::postRaw()
 	 * @return string
 	 */

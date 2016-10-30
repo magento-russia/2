@@ -3,13 +3,13 @@ namespace Df\NovaPoshta;
 class Request extends \Df\Shipping\Request {
 	/**
 	 * @override
-	 * @see \Df\Shipping\Request::adjustHttpClient()
-	 * @used-by \Df\Shipping\Request::getHttpClient()
-	 * @param \Zend_Http_Client $httpClient
+	 * @see \Df\Shipping\Request::adjust()
+	 * @used-by \Df\Shipping\Request::client()
+	 * @param \Zend_Http_Client $client
 	 * @return void
 	 */
-	protected function adjustHttpClient(\Zend_Http_Client $httpClient) {
-		$httpClient->setCookie(new \Zend_Http_Cookie('language', 'ru', 'novaposhta.ua'));
+	protected function adjust(\Zend_Http_Client $client) {
+		$client->setCookie(new \Zend_Http_Cookie('language', 'ru', 'novaposhta.ua'));
 	}
 
 	/**
