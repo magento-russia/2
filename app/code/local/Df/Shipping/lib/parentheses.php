@@ -33,7 +33,14 @@ function df_parentheses_explode($name) {
 	/** @var int $count */
 	$count = count($result);
 	if (1 < $count) {
-		df_assert_eq(2, $count);
+		/**
+		 * 2016-10-31
+		 * Раньше тут стояло: df_assert_eq(2, $count);
+		 * Однако в справочнике модуля доставки «ПЭК» встречаются значения
+		 * с двумя группами скобок, например: «Советская (Краснодарский край) (Новокубанский р-н)».
+		 * Две группы скобок после @see explode дают 3 строки.
+		 * В общем, проверку убрал.
+		 */
 		$result = df_trim($result, '()');
 	}
 	return $result;
