@@ -11,17 +11,12 @@ class Collector extends \Df\Shipping\Collector\Ru {
 	 */
 	protected function _collect() {
 		$this->checkWeightIsLE(31.5);
-		$this->rate(
-			$this->cond()->getRate()
-			, $this->cond()->getDeliveryTimeMin()
-			, $this->cond()->getDeliveryTimeMax()
+		/** @var Cond $c */
+		$c = Cond::i2(
+			L::find($this->oCountry(), $this->oRegionId(), $this->oCity()) ?: $this->eUnknownOrig()
+			,L::find($this->dCountry(), $this->dRegionId(), $this->dCity()) ?: $this->eUnknownDest()
+			,$this->rr()->getWeightInKg(), 'att'
 		);
+		$this->rate($c->rate(), $c->deliveryTimeMin(), $c->deliveryTimeMax());
 	}
-
-	/** @return Cond */
-	private function cond() {return dfc($this, function() {return Cond::i2(
-		L::find($this->oCountry(), $this->oRegionId(), $this->oCity()) ?: $this->eUnknownOrig()
-		,L::find($this->dCountry(), $this->dRegionId(), $this->dCity()) ?: $this->eUnknownDest()
-		,$this->rr()->getWeightInKg(), 'att'
-	);});}
 }

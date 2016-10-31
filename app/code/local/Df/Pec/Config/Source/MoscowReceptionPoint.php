@@ -1,5 +1,5 @@
 <?php
-namespace Df\Pec;
+namespace Df\Pec\Config\Source;
 /**
  * @singleton
  * Система создаёт объект-одиночку для потомков этого класса.

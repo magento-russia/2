@@ -72,10 +72,10 @@ class Locator extends \Df\Shipping\Locator {
 
 	/**
 	 * @used-by _map()
-	 * @return \Df\Shipping\Response
+	 * @return \Df\Core\Response
 	 */
 	private static function response() {
-		/** @var \Df\Shipping\Response $r */
+		/** @var \Df\Core\Response $r */
 		static $r;
 		if (!$r) {
 			$r = (new Request([Request::P__SUFFIX => 'ru/delivery']))->response();

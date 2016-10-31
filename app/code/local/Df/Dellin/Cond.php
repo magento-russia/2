@@ -5,18 +5,18 @@ class Cond extends \Df\Shipping\Request {
 	/**
 	 * 2016-10-30
 	 * @override
-	 * @see \Df\Shipping\Request::_getDeliveryTime()
+	 * @see \Df\Shipping\Request::_deliveryTime()
 	 * @return float
 	 */
-	protected function _getDeliveryTime() {return $this->response()->json('time/value');}
+	protected function _deliveryTime() {return $this->response()->json('time/value');}
 
 	/**
 	 * 2016-10-29
 	 * @override
-	 * @see \Df\Shipping\Request::_getRate()
+	 * @see \Df\Shipping\Request::_rate()
 	 * @return float
 	 */
-	protected function _getRate() {return $this->response()->json('price');}
+	protected function _rate() {return $this->response()->json('price');}
 
 	/**
 	 * 2016-10-29

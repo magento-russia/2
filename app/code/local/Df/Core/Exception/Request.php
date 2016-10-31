@@ -1,8 +1,8 @@
 <?php
-namespace Df\Shipping\Exception;
-use \Df\Shipping\Request as R;
+namespace Df\Core\Exception;
+use \Df\Core\Request as R;
 use \Exception as E;
-abstract class Request extends \Df\Shipping\Exception {
+class Request extends \Df\Core\Exception {
 	/**
 	 * @override
 	 * @param E $e
@@ -17,6 +17,9 @@ abstract class Request extends \Df\Shipping\Exception {
 	/** @return E */
 	public function getException() {return $this->_exception;}
 
+	/** @return R */
+	public function getRequest() {return $this->_request;}
+
 	/**
 	 * @override
 	 * @see \Df\Shipping\Exception::message()
@@ -24,17 +27,16 @@ abstract class Request extends \Df\Shipping\Exception {
 	 */
 	public function message() {return df_ets($this->getException());}
 
-	/** @return R */
-	public function getRequest() {return $this->_request;}
-
 	/**
 	 * 2016-10-24
 	 * @override
-	 * @see \Df\Shipping\Exception::carrier()
-	 * @used-by \Df\Shipping\Exception::reportNamePrefix()
-	 * @return \Df\Shipping\Carrier
+	 * @see \Df\Core\Exception::reportNamePrefix()
+	 * @used-by \Df\Qa\Message\Failure\Exception::reportNamePrefix()
+	 * @return string|string[]
 	 */
-	protected function carrier() {return $this->getRequest()->getCarrier();}
+	public function reportNamePrefix() {return [
+		df_module_name_lc($this->getRequest()), 'exception'
+	];}
 
 	/** @var E */
 	private $_exception;

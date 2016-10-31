@@ -1,5 +1,5 @@
 <?php
-namespace Df\Shipping;
+namespace Df\Core;
 use Df\Xml\X;
 class Response extends \Df_Core_Model {
 	/**
@@ -192,7 +192,7 @@ class Response extends \Df_Core_Model {
 	const P__TEXT = 'text';
 	/**
 	 * @static
-	 * @param \Df\Shipping\Request $request
+	 * @param \Df\Core\Request $request
 	 * @param string $text
 	 * @return self
 	 */

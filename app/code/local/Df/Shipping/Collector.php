@@ -24,6 +24,12 @@ abstract class Collector extends Bridge {
 	abstract protected function domesticIso2();
 
 	/**
+	 * @used-by \Df\Pec\Cond::post()
+	 * @return \Df\Shipping\Config\Area\Service
+	 */
+	public function configS() {return $this->config()->service();}
+
+	/**
 	 * 2016-10-30
 	 * В валюте @see currencyCode()
 	 * @used-by \Df\Dellin\Cond::postRaw()
@@ -35,6 +41,28 @@ abstract class Collector extends Bridge {
 			$this->declaredValueBase(), $this->currencyCode(), $this->store()
 		)
 	;});}
+
+	/**
+	 * @used-by \Df\Pec\Cond
+	 * @param float $cost
+	 * @param string|null $code [optional]
+	 * @param string|null $title [optional]
+	 * @param \Zend_Date|int|null $timeMin [optional]
+	 * @param \Zend_Date|int|null $timeMax [optional]
+	 */
+	public function rate($cost, $timeMin = null, $timeMax = null, $code = null, $title = null) {
+		$cost = df_float_positive($cost);
+		if (!$code) {
+			$code = $this->rateDefaultCode();
+		}
+		/** @var float $costBase */
+		$costBase = $this->toBase($cost + $this->feeFixed()) + $this->feeDeclaredValueBase();
+		/** @var float $price */
+		$price = $this->roundPrice($costBase + $this->feeHandling($costBase));
+		$this->_result()->append(\Df\Shipping\Rate\Result\Method::i(
+			$code, $title, $costBase, $price, $this->resultCommon(), $timeMin, $timeMax
+		));
+	}
 
 	/**
 	 * @used-by \Df\Dellin\Cond::postRaw()
@@ -104,13 +132,12 @@ abstract class Collector extends Bridge {
 	}
 
 	/**
-	 * @param string|string[] $allowedIso2
+	 * @param string[] $isos
 	 * @return void
 	 * @throws \Df\Shipping\Exception
 	 */
-	protected function checkCountryDestIs($allowedIso2) {
-		$allowedIso2 = df_array($allowedIso2);
-		if (!in_array($this->dCountryIso2(), $allowedIso2)) {
+	protected function checkCountryDestIs(...$isos) {
+		if (!in_array($this->dCountryIso2(), $isos)) {
 			$this->errorInvalidCountryDest();
 		}
 	}
@@ -160,9 +187,6 @@ abstract class Collector extends Bridge {
 
 	/** @return \Df\Shipping\Config\Area\Frontend */
 	protected function configF() {return $this->config()->frontend();}
-
-	/** @return \Df\Shipping\Config\Area\Service */
-	protected function configS() {return $this->config()->service();}
 
 	/**
 	 * @used-by dCityUc()
@@ -300,27 +324,6 @@ abstract class Collector extends Bridge {
 	 * @return int
 	 */
 	protected function oRegionId() {return $this->rr()->getOriginRegionId();}
-
-	/**
-	 * @param float $cost
-	 * @param string|null $code [optional]
-	 * @param string|null $title [optional]
-	 * @param \Zend_Date|int|null $timeMin [optional]
-	 * @param \Zend_Date|int|null $timeMax [optional]
-	 */
-	protected function rate($cost, $timeMin = null, $timeMax = null, $code = null, $title = null) {
-		$cost = df_float_positive($cost);
-		if (!$code) {
-			$code = $this->rateDefaultCode();
-		}
-		/** @var float $costBase */
-		$costBase = $this->toBase($cost + $this->feeFixed()) + $this->feeDeclaredValueBase();
-		/** @var float $price */
-		$price = $this->roundPrice($costBase + $this->feeHandling($costBase));
-		$this->_result()->append(\Df\Shipping\Rate\Result\Method::i(
-			$code, $title, $costBase, $price, $this->resultCommon(), $timeMin, $timeMax
-		));
-	}
 
 	/**
 	 * перекрывается методом @see \Df\Shipping\Collector\Child::rateDefaultCode()

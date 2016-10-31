@@ -3,9 +3,10 @@ namespace Df\Ems;
 class Cond extends \Df\Ems\Request {
 	/**
 	 * @override
+	 * @see \Df\Shipping\Request::_rate()
 	 * @return float
 	 */
-	protected function _getRate() {return $this->p('price');}
+	protected function _rate() {return $this->p('price');}
 
 	/**
 	 * Для международных отправлений калькулятор EMS не сообщает сроки
@@ -13,19 +14,19 @@ class Cond extends \Df\Ems\Request {
 	 * @param string|int|null $value
 	 * @return int
 	 */
-	protected function _filterDeliveryTime($value) {return is_null($value) ? 0 : df_nat($value);}
+	protected function _deliveryTimeFilter($value) {return is_null($value) ? 0 : df_nat($value);}
 
 	/**
 	 * @override
 	 * @return int
 	 */
-	protected function _getDeliveryTimeMax() {return $this->p('term/max');}
+	protected function _deliveryTimeMax() {return $this->p('term/max');}
 
 	/**
 	 * @override
 	 * @return int
 	 */
-	protected function _getDeliveryTimeMin() {return $this->p('term/min');}
+	protected function _deliveryTimeMin() {return $this->p('term/min');}
 
 	/**
 	 * @param string $from
