@@ -8,7 +8,7 @@ class Df_Seo_Model_Processor_MediaGallery extends Df_Core_Model {
 			$this->getProduct()->getTypeInstance(true)->getSetAttributes($this->getProduct())
 			,'media_gallery'
 		));
-		$product->setData(self::IMAGE_KEY, df_output()->transliterate($this->getProduct()->getName()));
+		$product->setData(self::IMAGE_KEY, df_translit_url($this->getProduct()->getName()));
 		foreach ($product->getMediaGalleryImages() as $image) {
 			Df_Seo_Model_Processor_Image::i($this->getProduct(), $image)->process();
 		}

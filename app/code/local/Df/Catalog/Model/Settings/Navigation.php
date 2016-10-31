@@ -3,9 +3,9 @@ class Df_Catalog_Model_Settings_Navigation extends Df_Core_Model_Settings {
 	/** @return boolean */
 	public function getEnabled() {return $this->getYesNo('enabled');}
 	/** @return int */
-	public function getNumberOfColumns() {return $this->getNatural('number_of_columns');}
+	public function getNumberOfColumns() {return $this->nat('number_of_columns');}
 	/** @return string */
-	public function getPosition() {return $this->getString('position');}
+	public function getPosition() {return $this->v('position');}
 	/**
 	 * @override
 	 * @return string

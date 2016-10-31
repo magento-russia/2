@@ -7,7 +7,7 @@ $this->startSetup();
  * Здесь стоял пограммный код:
 		Df_Catalog_Model_Resource_Installer_Attribute::s()->updateAttribute(
 			$entityTypeId = Mage_Catalog_Model_Product::ENTITY
-			,$id = Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
+			,$id = \Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
 			,$field = 'backend_model'
 			,$value = Df_YandexMarket_Model_System_Config_Backend_Category::_CLASS
 		);

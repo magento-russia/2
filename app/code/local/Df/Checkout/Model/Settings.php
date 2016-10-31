@@ -49,7 +49,7 @@ class Df_Checkout_Model_Settings extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	private function getTocContentIdentifier() {
-		return  $this->getString('df_checkout/terms_and_conditions/content');
+		return  $this->v('df_checkout/terms_and_conditions/content');
 	}
 
 	const DEFAULT_APPLICABILITY_CODE = '1'; // 1 - optional

@@ -235,8 +235,8 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 				,Df_Catalog_Model_Product::P__SMALL_IMAGE
 				,Df_Catalog_Model_Product::P__STORE_ID
 				,Df_Catalog_Model_Product::P__URL_KEY
-				,Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
-				,Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
+				,\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
+				,\Df\YandexMarket\ConstT::ATTRIBUTE__SALES_NOTES
 			));
 	}
 

@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_Category_Excel_Document extends Df_Core_Model {
+namespace Df\YandexMarket\Category\Excel;
+class Document extends \Df_Core_Model {
 	/** @return string[][] */
 	public function getRows() {
 		if (!isset($this->{__METHOD__})) {

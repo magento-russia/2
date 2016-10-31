@@ -1,11 +1,11 @@
 <?php
 class Df_Vk_Model_Settings_Widget_Groups_Page extends Df_Core_Model_Settings {
 	/** @return string */
-	public function getColumn() {return $this->getString($this->getConfigKey('column'));}
+	public function getColumn() {return $this->v($this->getConfigKey('column'));}
 	/** @return boolean */
 	public function getEnabled() {return $this->getYesNo($this->getConfigKey('show'));}
 	/** @return int */
-	public function getPosition() {return $this->getInteger($this->getConfigKey('vertical_ordering'));}
+	public function getPosition() {return $this->int($this->getConfigKey('vertical_ordering'));}
 	/** @return string */
 	public function getType() {
 		return $this->_type;

@@ -7,14 +7,14 @@ class Df_MoySklad_Settings_Export_Products extends Df_Core_Model_Settings {
 	 * «Приставка для кодов товаров в МойСклад»
 	 * @return string
 	 */
-	public function codePrefix() {return $this->getString(__FUNCTION__);}
+	public function codePrefix() {return $this->v(__FUNCTION__);}
 	/**  
 	 * 2016-10-09
 	 * @return Mage_CatalogRule_Model_Rule|null 
 	 */
 	public function rule() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_n_set(
 		Df_Catalog_Model_ConditionsLoader::i(
-			$this->getNatural0('conditions'), 'МойСклад', '«МойСклад» → «Экспорт товаров» → «Условия»'
+			$this->nat0('conditions'), 'МойСклад', '«МойСклад» → «Экспорт товаров» → «Условия»'
 		)->getRule()
 	);}return df_n_get($this->{__METHOD__});}
 	/**

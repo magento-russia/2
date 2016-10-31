@@ -6,7 +6,7 @@ class Df_Sales_Model_Settings_OrderComments extends Df_Core_Model_Settings {
 	}
 	/** @return string[] */
 	public function getTagsToPreserveInAdminOrderView() {
-		return df_csv_parse($this->getStringNullable('tags_to_preserve_in_admin_order_view'));
+		return df_csv_parse($this->v('tags_to_preserve_in_admin_order_view'));
 	}
 	/** @return boolean */
 	public function preserveLineBreaksInAdminOrderView() {

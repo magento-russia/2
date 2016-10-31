@@ -1,10 +1,11 @@
 <?php
-class Df_YandexMarket_OAuth extends Df_Yandex_OAuth {
+namespace Df\YandexMarket;
+class OAuth extends \Df_Yandex_OAuth {
 	/**
 	 * @override
 	 * @param array(string => string) $response
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function checkResponse(array $response) {
 		/** @var string $errorType */
@@ -35,10 +36,10 @@ class Df_YandexMarket_OAuth extends Df_Yandex_OAuth {
 		df_param_string_not_empty($appId, 0);
 		df_param_string_not_empty($appPassword, 1);
 		df_param_string_not_empty($tokenTemporary, 2);
-		return new self(array(
+		return new self([
 			self::P__APP_ID => $appId
 			, self::P__APP_PASSWORD => $appPassword
 			, self::P__TOKEN_TEMPOPARY => $tokenTemporary
-		));
+		]);
 	}
 }

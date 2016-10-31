@@ -1,16 +1,13 @@
 <?php
-class Df_YandexMarket_Settings_Products extends Df_YandexMarket_Settings_Yml {
-	/** @return Mage_CatalogRule_Model_Rule|null */
-	public function getRule() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				Df_Catalog_Model_ConditionsLoader::i(
-					$this->getRuleId(), 'Яндекс.Маркет', '«Яндекс.Маркет» → «Товары» → «Условия»'
-				)->getRule()
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+namespace Df\YandexMarket\Settings;
+use Df_Catalog_Model_ConditionsLoader as ConditionsLoader;
+class Products extends Yml {
+	/** @return \Mage_CatalogRule_Model_Rule|null */
+	public function getRule() {return dfc($this, function() {return
+		ConditionsLoader::i(
+			$this->getRuleId(), 'Яндекс.Маркет', '«Яндекс.Маркет» → «Товары» → «Условия»'
+		)->getRule()
+	;});}
 
 	/** @return bool */
 	public function needPublishOutOfStock() {return $this->getYesNo('publish_out_of_stock');}
@@ -22,8 +19,8 @@ class Df_YandexMarket_Settings_Products extends Df_YandexMarket_Settings_Yml {
 	protected function getKeyPrefix() {return 'df_yandex_market/products/';}
 
 	/** @return int */
-	private function getRuleId() {return $this->getNatural0('conditions');}
+	private function getRuleId() {return $this->nat0('conditions');}
 
-	/** @return Df_YandexMarket_Settings_Products */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

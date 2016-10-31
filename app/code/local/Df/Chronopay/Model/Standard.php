@@ -248,9 +248,7 @@ class Df_Chronopay_Model_Standard extends Mage_Payment_Model_Method_Abstract {
 		if (2 > mb_strlen($name)) {
 			$name = $defaultName;
 		}
-		/** @var string $result */
-		$result = strtoupper(df_output()->transliterate($name));
-		return $result;
+		return strtoupper(df_translit_url($name));
 	}
 
 

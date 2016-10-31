@@ -13,9 +13,9 @@ class Product extends \Df_Core_Model_Settings {
 	/** @return float */
 	public function getDefaultWidth() {return $this->getFloat('default__width');}
 	/** @return string */
-	public function getUnitsLength() {return $this->getString('units__length');}
+	public function getUnitsLength() {return $this->v('units__length');}
 	/** @return string */
-	public function getUnitsWeight() {return $this->getString('units__weight');}
+	public function getUnitsWeight() {return $this->v('units__weight');}
 	/**
 	 * @override
 	 * @return string

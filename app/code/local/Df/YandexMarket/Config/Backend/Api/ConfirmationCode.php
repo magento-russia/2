@@ -1,9 +1,9 @@
 <?php
-class Df_YandexMarket_Config_Backend_Api_ConfirmationCode
-	extends Df_Admin_Config_Backend {
+namespace Df\YandexMarket\Config\Backend\Api;
+class ConfirmationCode extends \Df_Admin_Config_Backend {
 	/**
 	 * @overide
-	 * @return Df_YandexMarket_Config_Backend_Api_ConfirmationCode
+	 * @return $this
 	 */
 	protected function _beforeSave() {
 		try {
@@ -29,7 +29,7 @@ class Df_YandexMarket_Config_Backend_Api_ConfirmationCode
 	/** @return string */
 	private function requestToken() {
 		return Df_YandexMarket_OAuth::i(
-			df_cfgr()->yandexMarket()->api()->getApplicationId()
+			df_cfgr()->yandexMarket()->api()->appId()
 			, df_cfgr()->yandexMarket()->api()->getApplicationPassword()
 			, $this->getValue()
 		)->getToken();

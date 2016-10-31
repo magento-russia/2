@@ -36,7 +36,7 @@ class Df_Admin_Config_BackendChecker_CurrencyIsSupported
 	}
 
 	/** @return Df_Directory_Model_Currency */
-	private function getCurrency() {return Df_Directory_Model_Currency::ld($this->getCurrencyCode());}
+	private function getCurrency() {return df_currency($this->getCurrencyCode());}
 
 	/** @return string */
 	private function getCurrencyCode() {return $this->cfg(self::$P__CURRENCY_CODE);}

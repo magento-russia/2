@@ -3,7 +3,7 @@ class Df_Logging_Model_Settings extends Df_Core_Model_Settings {
 	/** @return Df_Logging_Model_Settings_Archiving */
 	public function archiving() {return Df_Logging_Model_Settings_Archiving::s();}
 	/** @return string|null */
-	public function getActions() {return $this->getStringNullable('actions/actions');}
+	public function getActions() {return $this->v('actions/actions');}
 	/** @return boolean */
 	public function isEnabled() {return $this->getYesNo('archiving/enabled');}
 	/**

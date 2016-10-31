@@ -3,21 +3,21 @@ class Df_Sales_Model_Settings_OrderGrid_ProductColumn extends Df_Core_Model_Sett
 	/** @return boolean */
 	public function getEnabled() {return $this->getYesNo('enabled');}
 	/** @return int */
-	public function getMaxProductsToShow() {return $this->getNatural('max_products_to_show');}
+	public function getMaxProductsToShow() {return $this->nat('max_products_to_show');}
 	/** @return int */
-	public function getNameWidth() {return $this->getNatural('name_width');}
+	public function getNameWidth() {return $this->nat('name_width');}
 	/** @return string */
-	public function getOrderBy() {return $this->getString('order_by');}
+	public function getOrderBy() {return $this->v('order_by');}
 	/** @return string */
-	public function getOrderDirection() {return $this->getString('order_direction');}
+	public function getOrderDirection() {return $this->v('order_direction');}
 	/** @return int */
-	public function getOrdering() {return $this->getInteger('ordering');}
+	public function getOrdering() {return $this->int('ordering');}
 	/** @return int */
-	public function getProductNameMaxLength() {return $this->getNatural('product_name_max_length');}
+	public function getProductNameMaxLength() {return $this->nat('product_name_max_length');}
 	/** @return int */
-	public function getQtyWidth() {return $this->getNatural('qty_width');}
+	public function getQtyWidth() {return $this->nat('qty_width');}
 	/** @return int */
-	public function getSkuWidth() {return $this->getNatural('sku_width');}
+	public function getSkuWidth() {return $this->nat('sku_width');}
 	/** @return boolean */
 	public function needChopName() {return $this->getYesNo('chop_name');}
 	/** @return boolean */

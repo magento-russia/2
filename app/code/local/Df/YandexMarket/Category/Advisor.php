@@ -1,14 +1,13 @@
 <?php
-class Df_YandexMarket_Category_Adviser extends Df_Core_Model {
+namespace Df\YandexMarket\Category;
+class Advisor extends \Df_Core_Model {
 	/**
 	 * @param string $piece
 	 * @return string[]
 	 */
 	public function getSuggestions($piece) {
 		if (!isset($this->{__METHOD__}[$piece])) {
-			$this->{__METHOD__}[$piece] =
-				Df_YandexMarket_Category_Adviser_Case::i($piece)->getSuggestions()
-			;
+			$this->{__METHOD__}[$piece] = Advisor\CaseT::i($piece)->getSuggestions();
 			$this->markCachedPropertyAsModified(__METHOD__);
 		}
 		return $this->{__METHOD__}[$piece];
@@ -29,7 +28,7 @@ class Df_YandexMarket_Category_Adviser extends Df_Core_Model {
 	 */
 	protected function cachedGlobal() {return self::m(__CLASS__, 'getSuggestions');}
 
-	/** @return Df_YandexMarket_Category_Adviser */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
 

@@ -24,13 +24,13 @@ class Df_Catalog_Helper_Product_Url extends Mage_Catalog_Helper_Product_Url {
 	 * @param string $string
 	 * @return string
 	 */
-	public function extendedFormat($string) {
-		return
-			df_cfgr()->seo()->urls()->getPreserveCyrillic()
-			? df_output()->formatUrlKeyPreservingCyrillic($string)
-			: df_output()->transliterate($string)
-		;
-	}
+	public function extendedFormat($string) {return
+		df_cfgr()->seo()->urls()->getPreserveCyrillic()
+		// 2016-10-31
+		// сохраняет кириллицу в URL
+		? trim(preg_replace('/[^\pL\pN]+/u','-', mb_strtolower($string)),'-')
+		: df_translit_url($string)
+	;}
 
 	/**
 	 * @param string $string

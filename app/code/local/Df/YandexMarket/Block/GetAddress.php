@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_Block_GetAddress extends Df_Core_Block_Template {
+namespace Df\YandexMarket\Block;
+class GetAddress extends \Df_Core_Block_Template {
 	/** @return string */
 	public function getRedirectUrl() {
 		return df_c(

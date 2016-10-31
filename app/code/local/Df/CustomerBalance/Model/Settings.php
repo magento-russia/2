@@ -1,9 +1,9 @@
 <?php
 class Df_CustomerBalance_Model_Settings extends Df_Core_Model_Settings {
 	/** @return string */
-	public function getTransactionalEmailSender() {return $this->getStringNullable('email_identity');}
+	public function getTransactionalEmailSender() {return $this->v('email_identity');}
 	/** @return int */
-	public function getTransactionalEmailTemplateId() {return $this->getNatural('email_template');}
+	public function getTransactionalEmailTemplateId() {return $this->nat('email_template');}
 	/** @return boolean */
 	public function isEnabled() {return $this->getYesNo('enabled');}
 	/** @return boolean */

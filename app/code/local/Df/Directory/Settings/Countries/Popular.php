@@ -22,13 +22,13 @@ class Df_Directory_Settings_Countries_Popular extends Df_Core_Model_Settings {
 	 * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
 	 * @return string
 	 */
-	public function labelAll() {return $this->getStringNullable('label_all');}
+	public function labelAll() {return $this->v('label_all');}
 
 	/**
 	 * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
 	 * @return string
 	 */
-	public function labelPopular() {return $this->getStringNullable('label_popular');}
+	public function labelPopular() {return $this->v('label_popular');}
 
 	/**
 	 * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()

@@ -5,13 +5,13 @@ class Message extends \Df_Core_Model_Settings {
 	 * @param \Df_Core_Model_StoreM|int|string|bool|null $s [optional]
 	 * @return string
 	 */
-	public function getFailureGeneral($s = null) {return $this->getString('general', $s);}
+	public function getFailureGeneral($s = null) {return $this->v('general', $s);}
 
 	/**
 	 * @param \Df_Core_Model_StoreM|int|string|bool|null $s [optional]
 	 * @return string
 	 */
-	public function getFailureSameLocation($s = null) {return $this->getString('same_location', $s);}
+	public function getFailureSameLocation($s = null) {return $this->v('same_location', $s);}
 	/**
 	 * @override
 	 * @return string

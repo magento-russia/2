@@ -6,7 +6,7 @@ class Df_PromoGift_Model_Settings extends Df_Core_Model_Settings {
 	public function getAutoAddToCart() {return $this->getYesNo('auto_add_to_cart');}
 	/** @return string */
 	public function getChooserPositionOnProductViewPage() {
-		return $this->getString('chooser__show_on_product_view');
+		return $this->v('chooser__show_on_product_view');
 	}
 	/** @return boolean */
 	public function getEnabled() {return $this->getYesNo('enabled');}

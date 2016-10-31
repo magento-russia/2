@@ -4,11 +4,11 @@ class Df_Checkout_Model_Settings_OrderComments extends Df_Core_Model_Settings {
 	 * @used-by df/checkout/review/orderComments.phtml
 	 * @return string
 	 */
-	public function getPositionRelativeToTheTerms() {return $this->getString('position_relative_to_terms');}
+	public function getPositionRelativeToTheTerms() {return $this->v('position_relative_to_terms');}
 	/** @return string */
-	public function getTextareaFloat() {return $this->getString('textarea_float');}
+	public function getTextareaFloat() {return $this->v('textarea_float');}
 	/** @return int */
-	public function getTextareaWidth() {return $this->getNatural('textarea_width');}
+	public function getTextareaWidth() {return $this->nat('textarea_width');}
 	/** @return boolean */
 	public function specifyTextareaHoriziontalShift() {
 		return $this->getYesNo('specify_textarea_horizontal_shift');
@@ -18,14 +18,14 @@ class Df_Checkout_Model_Settings_OrderComments extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	public function getTextareaHoriziontalShiftDirection() {
-		return $this->getString('textarea_horizontal_shift_direction');
+		return $this->v('textarea_horizontal_shift_direction');
 	}
 	/** @return int */
 	public function getTextareaHoriziontalShiftLength() {
-		return $this->getInteger('textarea_horizontal_shift_length');
+		return $this->int('textarea_horizontal_shift_length');
 	}
 	/** @return int */
-	public function getTextareaVisibleRows() {return $this->getNatural('textarea_rows');}
+	public function getTextareaVisibleRows() {return $this->nat('textarea_rows');}
 	/** @return boolean */
 	public function isEnabled() {return $this->getYesNo('enabled');}
 	/** @return boolean */

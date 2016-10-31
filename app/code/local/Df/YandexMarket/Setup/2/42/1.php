@@ -48,12 +48,12 @@ class Df_YandexMarket_Setup_2_42_1 extends Df_Core_Setup {
 					, null
 				)
 				->where('ea.attribute_code IN (?)', array(
-					Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
-					, Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
+					\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
+					, \Df\YandexMarket\ConstT::ATTRIBUTE__SALES_NOTES
 				))
 		)) {
 			df_table_delete('eav/attribute', 'attribute_code', array(
-				Df_YandexMarket_Const::ATTRIBUTE__CATEGORY, Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
+				\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY, \Df\YandexMarket\ConstT::ATTRIBUTE__SALES_NOTES
 			));
 			df_eav_reset();
 		}

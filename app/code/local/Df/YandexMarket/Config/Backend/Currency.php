@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_Config_Backend_Currency extends Df_Admin_Config_Backend_Currency {
+namespace Df\YandexMarket\Config\Backend;
+class Currency extends \Df_Admin_Config_Backend_Currency {
 	/**
 	 * @override
 	 * @return string

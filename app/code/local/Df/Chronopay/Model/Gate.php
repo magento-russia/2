@@ -145,9 +145,7 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	}
 
 	/** @return Df_Directory_Model_Currency */
-	public function getChronopayCurrency() {
-		return Df_Directory_Model_Currency::ld($this->getChronopayCurrencyCode());
-	}
+	public function getChronopayCurrency() {return df_currency($this->getChronopayCurrencyCode());}
 
 	/** @return bool */
 	public function hasVerification() {return true;}

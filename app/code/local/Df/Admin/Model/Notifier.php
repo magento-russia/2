@@ -7,14 +7,9 @@ abstract class Df_Admin_Model_Notifier extends Df_Core_Model {
 	 * @used-by app/design/adminhtml/rm/default/template/df/core/notifications.phtml
 	 * @return string
 	 */
-	public function getMessage() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_output()->processLink(
-				strtr($this->messageTemplate(), $this->getMessageVariables()), $this->getUrlHelp()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	public function getMessage() {return dfc($this, function() {return df_url_bake(
+		strtr($this->messageTemplate(), $this->getMessageVariables()), $this->getUrlHelp()
+	);});}
 
 	/**
 	 * @used-by app/design/adminhtml/rm/default/template/df/core/notifications.phtml

@@ -1,8 +1,7 @@
 <?php
-/**
- * @method Df_YandexMarket_Yml_Document getDocument()
- */
-class Df_YandexMarket_Yml_Processor_Offer extends Df_Catalog_Model_XmlExport_Product {
+namespace Df\YandexMarket\Yml\Processor;
+/** @method \Df\YandexMarket\Yml\Document getDocument() */
+class Offer extends \Df_Catalog_Model_XmlExport_Product {
 	/**
 	 * @override
 	 * @return array(string => mixed)
@@ -213,7 +212,7 @@ class Df_YandexMarket_Yml_Processor_Offer extends Df_Catalog_Model_XmlExport_Pro
 		}
 		$result['description'] = df_cdata(df_nts($this->getProduct()->getDescription()));
 		/** @var string|null $salesNotes */
-		$salesNotes = $this->getProduct()->getData(Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES);
+		$salesNotes = $this->getProduct()->getData(\Df\YandexMarket\ConstT::ATTRIBUTE__SALES_NOTES);
 		if (!$salesNotes) {
 			$salesNotes = df_cfgr()->yandexMarket()->general()->getSalesNotes();
 		}
@@ -255,12 +254,12 @@ class Df_YandexMarket_Yml_Processor_Offer extends Df_Catalog_Model_XmlExport_Pro
 	private function getYandexMarketCategoryName() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
-			$result = $this->getProduct()->getData(Df_YandexMarket_Const::ATTRIBUTE__CATEGORY);
+			$result = $this->getProduct()->getData(\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY);
 			if (!$result) {
 				/** @var Df_Catalog_Model_Category|null $category */
 				$category = $this->getCategory();
 				while ($category) {
-					$result = $category->getData(Df_YandexMarket_Const::ATTRIBUTE__CATEGORY);
+					$result = $category->getData(\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY);
 					if ($result) {
 						break;
 					}

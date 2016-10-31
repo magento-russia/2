@@ -39,10 +39,7 @@ class Df_Sms_Model_Gate_Sms16Ru extends Df_Sms_Model_Gate {
 			 * Не более 11 латинских символов, например: SMS4TEST
 			 * и не более 15 цифровых символов, например, 492589655555
 			 */
-			substr(
-				df_output()->transliterate(parent::getSenderName())
-				,0, 11
-			)
+			substr(df_translit_url(parent::getSenderName()), 0, 11)
 		;
 	}
 

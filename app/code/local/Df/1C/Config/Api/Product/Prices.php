@@ -1,7 +1,7 @@
 <?php
 class Df_1C_Config_Api_Product_Prices extends Df_1C_Config_Api_Cml2 {
 	/** @return string */
-	public function getMain() {return $this->getString('main');}
+	public function getMain() {return $this->v('main');}
 
 	/**
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_PriceType::getCustomerGroup()

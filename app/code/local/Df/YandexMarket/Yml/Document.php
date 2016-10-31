@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
+namespace Df\YandexMarket\Yml;
+class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override
 	 * @see \Df\Xml\Generator\Document::getExportCurrency()
@@ -204,10 +205,10 @@ class Df_YandexMarket_Yml_Document extends Df_Catalog_Model_XmlExport_Catalog {
 
 	/**
 	 * @used-by Df_YandexMarket_Action_Front::getDocument()
-	 * @param Df_Catalog_Model_Resource_Product_Collection $products
-	 * @return Df_YandexMarket_Yml_Document
+	 * @param \Df_Catalog_Model_Resource_Product_Collection $products
+	 * @return self
 	 */
-	public static function i(Df_Catalog_Model_Resource_Product_Collection $products) {
+	public static function i(\Df_Catalog_Model_Resource_Product_Collection $products) {
 		return self::ic(__CLASS__, $products);
 	}
 }

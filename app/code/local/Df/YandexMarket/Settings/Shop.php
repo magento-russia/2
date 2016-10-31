@@ -1,18 +1,19 @@
 <?php
-class Df_YandexMarket_Settings_Shop extends Df_YandexMarket_Settings_Yml {
+namespace Df\YandexMarket\Settings;
+class Shop extends Yml {
 	/** @return string */
-	public function getAgency() {return $this->getString('agency');}
+	public function getAgency() {return $this->v('agency');}
 	/** @return string */
-	public function getNameForAdministration() {return $this->getString('name_for_administration');}
+	public function getNameForAdministration() {return $this->v('name_for_administration');}
 	/** @return string */
-	public function getNameForClients() {return $this->getString('name_for_clients');}
+	public function getNameForClients() {return $this->v('name_for_clients');}
 	/** @return string */
-	public function getSupportEmail() {return $this->getString('support_email');}
+	public function getSupportEmail() {return $this->v('support_email');}
 	/**
 	 * @override
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_yandex_market/shop/';}
-	/** @return Df_YandexMarket_Settings_Shop */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

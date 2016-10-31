@@ -1,18 +1,19 @@
 <?php
-class Df_YandexMarket_Settings_Api extends Df_Core_Model_Settings {
+namespace Df\YandexMarket\Settings;
+class Api extends \Df_Core_Model_Settings {
 	/** @return string */
-	public function getApplicationId() {return $this->getStringNullable('application_id');}
+	public function appId() {return $this->v('application_id');}
 	/** @return string */
-	public function getApplicationPassword() {return $this->getStringNullable('application_password');}
+	public function getApplicationPassword() {return $this->v('application_password');}
 	/** @return string */
-	public function getConfirmationCode() {return $this->getStringNullable('confirmation_code');}
+	public function getConfirmationCode() {return $this->v('confirmation_code');}
 	/** @return string */
-	public function getToken() {return $this->getStringNullable('token');}
+	public function getToken() {return $this->v('token');}
 	/**
 	 * @override
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_yandex_market/api/';}
-	/** @return Df_YandexMarket_Settings_Api */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

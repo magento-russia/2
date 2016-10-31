@@ -192,7 +192,7 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 				 * Стало: {"image":"\/t\/s\/tsb95041.jpg.tmp","small_image":"\/t\/s\/tsb95041.jpg.tmp","thumbnail":"\/t\/s\/tsb95041.jpg.tmp"}
 				 * http://stackoverflow.com/questions/6700719/
 				 */
-				: str_replace('\/', '/', Zend_Json::encode($values))
+				: str_replace('\/', '/', df_json_encode($values))
 			;
 			Mage::dispatchEvent('catalog_product_media_save_before', array(
 				'product' => $object
@@ -317,9 +317,8 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 		$destionationFilePathOptimizedForSeo =
 			df_cc_path(
 				dirname($destionationFilePath)
-				,df_ccc('.'
-					,df_output()->transliterate($product->getName())
-					,df_file_ext($destionationFilePath)
+				,df_ccc('.',
+					df_translit_url($product->getName()), df_file_ext($destionationFilePath)
 				)
 			)
 		;

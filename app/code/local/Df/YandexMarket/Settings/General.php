@@ -1,15 +1,16 @@
 <?php
-class Df_YandexMarket_Settings_General extends Df_YandexMarket_Settings_Yml {
+namespace Df\YandexMarket\Settings;
+class General extends Yml {
 	/** @return string */
-	public function getCurrency() {return Df_Directory_Model_Currency::ld($this->getCurrencyCode());}
+	public function getCurrency() {return df_currency($this->getCurrencyCode());}
 	/** @return string */
-	public function getCurrencyCode() {return $this->getString('currency');}
+	public function getCurrencyCode() {return $this->v('currency');}
 	/** @return int */
-	public function getLocalDeliveryCost() {return $this->getNatural0('local_delivery_cost');}
+	public function getLocalDeliveryCost() {return $this->nat0('local_delivery_cost');}
 	/** @return string */
-	public function getNotificationEmail() {return $this->getStringNullable('notification_email');}
+	public function getNotificationEmail() {return $this->v('notification_email');}
 	/** @return string */
-	public function getSalesNotes() {return $this->getStringNullable('sales_notes');}
+	public function getSalesNotes() {return $this->v('sales_notes');}
 	/** @return boolean */
 	public function hasPointsOfSale() {return $this->getYesNo('has_points_of_sale');}
 	/** @return boolean */
@@ -21,6 +22,6 @@ class Df_YandexMarket_Settings_General extends Df_YandexMarket_Settings_Yml {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_yandex_market/general/';}
-	/** @return Df_YandexMarket_Settings_General */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

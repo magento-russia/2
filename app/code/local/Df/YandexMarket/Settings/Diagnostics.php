@@ -1,9 +1,10 @@
 <?php
-class Df_YandexMarket_Settings_Diagnostics extends Df_YandexMarket_Settings_Yml {
+namespace Df\YandexMarket\Settings;
+class Diagnostics extends Yml {
 	/** @return boolean */
 	public function isEnabled() {return $this->getYesNo('enabled');}
 	/** @return int */
-	public function getLimit() {return $this->getNatural('limit');}
+	public function getLimit() {return $this->nat('limit');}
 	/** @return boolean */
 	public function needExplainRejection() {return $this->getYesNo('need_explain_rejection');}
 	/** @return boolean */
@@ -13,6 +14,6 @@ class Df_YandexMarket_Settings_Diagnostics extends Df_YandexMarket_Settings_Yml 
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_yandex_market/diagnostics/';}
-	/** @return Df_YandexMarket_Settings_Diagnostics */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

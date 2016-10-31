@@ -1,5 +1,10 @@
 <?php
-class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
+namespace Df\YandexMarket\Action;
+use Df_Catalog_Model_Product_Exporter as E;
+use Df\YandexMarket\ConstT as C;
+use Df\YandexMarket\Settings as S;
+use Df\YandexMarket\Yml\Document as Document;
+class Front extends \Df\YandexMarket\Action {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::generateResponseBody()
@@ -15,13 +20,11 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 	 * @used-by Df_Core_Model_Action::processPrepare()
 	 * @return string
 	 */
-	protected function contentType() {
-		return
-			$this->getDocument()->hasEncodingWindows1251()
-			? 'application/xml; charset=windows-1251'
-			: self::$CONTENT_TYPE__XML__UTF_8
-		;
-	}
+	protected function contentType() {return
+		$this->getDocument()->hasEncodingWindows1251()
+		? 'application/xml; charset=windows-1251'
+		: self::$CONTENT_TYPE__XML__UTF_8
+	;}
 
 	/**
 	 * @override
@@ -48,32 +51,21 @@ class Df_YandexMarket_Action_Front extends Df_YandexMarket_Action {
 	 * @see Df_Core_Model_Action::store()
 	 * @used-by Df_Core_Model_Action::checkAccessRights()
 	 * @used-by Df_Core_Model_Action::getStoreConfig()
-	 * @return Df_Core_Model_StoreM
+	 * @return \Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_state()->getStoreProcessed();}
 
-	/** @return Df_YandexMarket_Yml_Document */
-	private function getDocument() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_YandexMarket_Yml_Document::i(
-				Df_Catalog_Model_Product_Exporter::i(array(
-					Df_Catalog_Model_Product_Exporter::P__RULE =>
-						df_cfgr()->yandexMarket()->products()->getRule()
-					,Df_Catalog_Model_Product_Exporter::P__ADDITIONAL_ATTRIBUTES => array(
-						Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
-						,Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
-					)
-					,Df_Catalog_Model_Product_Exporter::P__LIMIT =>
-							df_cfgr()->yandexMarket()->diagnostics()->isEnabled()
-						&&
-							df_cfgr()->yandexMarket()->diagnostics()->needLimit()
-						? df_cfgr()->yandexMarket()->diagnostics()->getLimit()
-						: 0
-					,Df_Catalog_Model_Product_Exporter::P__NEED_REMOVE_NOT_SALABLE => true
-					,Df_Catalog_Model_Product_Exporter::P__NEED_REMOVE_OUT_OF_STOCK => true
-				))->getResult()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Document */
+	private function getDocument() {return dfc($this, function() {return
+		Document::i(E::i([
+			E::P__RULE => S::s()->products()->getRule()
+			,E::P__ADDITIONAL_ATTRIBUTES =>[C::ATTRIBUTE__CATEGORY, C::ATTRIBUTE__SALES_NOTES]
+			,E::P__LIMIT =>
+				S::s()->diagnostics()->isEnabled() && S::s()->diagnostics()->needLimit()
+				? S::s()->diagnostics()->getLimit()
+				: 0
+			,E::P__NEED_REMOVE_NOT_SALABLE => true
+			,E::P__NEED_REMOVE_OUT_OF_STOCK => true
+		])->getResult())
+	;});}
 }

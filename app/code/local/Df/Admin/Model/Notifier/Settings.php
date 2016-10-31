@@ -24,18 +24,12 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 	 * @override
 	 * @return string
 	 */
-	public function getMessage() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = parent::getMessage();
-			if ($this->getUrlSettingsSuffix()) {
-				$this->{__METHOD__} .= df_output()->processLink(
-					'<br/><span class="rm-url-settings">[[открыть раздел настроек]]</span>'
-					, df_url_backend('adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix())
-				);
-			}
-		}
-		return $this->{__METHOD__};
-	}
+	public function getMessage() {return dfc($this, function() {return df_ccc(parent::getMessage(),
+		!$this->getUrlSettingsSuffix() ? null : df_url_bake(
+			'<br/><span class="rm-url-settings">[[открыть раздел настроек]]</span>'
+			,df_url_backend('adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix())
+		)				
+	);});}
 
 	/**
 	 * @override

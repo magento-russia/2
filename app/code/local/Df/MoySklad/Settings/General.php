@@ -4,7 +4,7 @@ class Df_MoySklad_Settings_General extends Df_Core_Model_Settings {
 	/** @return boolean */
 	public function enabled() {return $this->getYesNo(__FUNCTION__);}
 	/** @return string */
-	public function login() {return $this->getString(__FUNCTION__);}
+	public function login() {return $this->v(__FUNCTION__);}
 	/** @return string */
 	public function password() {return $this->getPassword(__FUNCTION__);}
 	/**

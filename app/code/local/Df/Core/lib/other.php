@@ -170,9 +170,6 @@ function df_notify_me($message, $doLog = true) {
 	))->log();
 }
 
-/** @return Df_Core_Helper_Output */
-function df_output() {return Df_Core_Helper_Output::s();}
-
 /**
  * При установке заголовка HTTP «Content-Type»
  * надёжнее всегда добавлять 3-й параметр: $replace = true,

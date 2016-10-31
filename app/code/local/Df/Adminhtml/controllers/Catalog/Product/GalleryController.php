@@ -42,9 +42,8 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 			 * Аналогичный алгоритм:
 			 * @see Df_Catalog_Model_Product_Attribute_Backend_Media::moveImageFromTmpDf()
 			 */
-			$imageName = df_ccc('.'
-				,df_output()->transliterate(df_strip_ext($imageName))
-				,df_file_ext($imageName)
+			$imageName = df_ccc('.',
+				df_translit_url(df_strip_ext($imageName)), df_file_ext($imageName)
 			);
 			// Конец заплатки
 			$result =

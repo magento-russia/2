@@ -36,7 +36,7 @@ class Df_1C_Config_Api_General extends Df_1C_Config_Api_Cml2 {
 	public function getLogFileNameTemplate() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = strtr(
-				df_trim_ds_left(df_path_n($this->getString('log_file_name_template')))
+				df_trim_ds_left(df_path_n($this->v('log_file_name_template')))
 				,array(
 					'{store-view}' => df_state()->getStoreProcessed()->getCode()
 					,'{node}' => df_request('node')

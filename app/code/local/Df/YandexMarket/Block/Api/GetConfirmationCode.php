@@ -1,4 +1,6 @@
 <?php
+namespace Df\YandexMarket\Block\Api;
+use Df\YandexMarket\Settings\Api as S;
 /**
  * @singleton
  * КЭШИРОВАНИЕ НАДО РЕАЛИЗОВЫВАТЬ КРАЙНЕ ОСТОРОЖНО!!!
@@ -26,7 +28,7 @@
 		$html .= '<td class="value">';
 		$html .= $this->_getElementHtml($element);
  */
-class Df_YandexMarket_Block_Api_GetConfirmationCode extends Df_Admin_Block_Field_Button {
+class GetConfirmationCode extends \Df_Admin_Block_Field_Button {
 	/**
 	 * @override
 	 * @see Df_Admin_Block_Field_Button::url()
@@ -34,9 +36,7 @@ class Df_YandexMarket_Block_Api_GetConfirmationCode extends Df_Admin_Block_Field
 	 * @used-by df/admin/field/button/action.phtml
 	 * @return string
 	 */
-	protected function url() {
-		return 'https://oauth.yandex.ru/authorize?response_type=code&client_id='
-			. df_cfgr()->yandexMarket()->api()->getApplicationId()
-		;
-	}
+	protected function url() {return
+		'https://oauth.yandex.ru/authorize?response_type=code&client_id=' . S::s()->appId()
+	;}
 }

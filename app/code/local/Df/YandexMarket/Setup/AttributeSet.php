@@ -23,7 +23,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 				 * При отсутствии данной вкладки она добавляется автоматически:
 				 * @see Df_Catalog_Model_Installer_AddAttributeToSet::process()
 				 */
-				,Df_YandexMarket_Const::PRODUCT_ATTRIBUTE_GROUP_NAME
+				,\Df\YandexMarket\ConstT::PRODUCT_ATTRIBUTE_GROUP_NAME
 				,$ordering
 			);
 		}
@@ -33,7 +33,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute_Category() {
 		return $this->getAttributeAdministrative(
-			Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
+			\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
 			, 'Категория Яндекс.Маркета'
 			, self::$ORDERING__CATEGORY
 			, array(
@@ -48,7 +48,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute_SalesNotes() {
 		return $this->getAttributeAdministrative(
-			Df_YandexMarket_Const::ATTRIBUTE__SALES_NOTES
+			\Df\YandexMarket\ConstT::ATTRIBUTE__SALES_NOTES
 			, 'Примечание к товару (sales_notes)'
 			, self::$ORDERING__SALES_NOTES
 			,array(

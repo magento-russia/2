@@ -21,7 +21,7 @@ class Df_1C_Config_Api_CatalogExport extends Df_1C_Config_Api_Cml2 {
 	protected function getKeyPrefix() {return 'df_1c/catalog_export/';}
 
 	/** @return int */
-	private function getRuleId() {return $this->getNatural0('product_conditions');}
+	private function getRuleId() {return $this->nat0('product_conditions');}
 
 	/** @return Df_1C_Config_Api_CatalogExport */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

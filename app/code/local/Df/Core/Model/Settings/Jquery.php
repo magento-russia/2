@@ -26,7 +26,7 @@ class Df_Core_Model_Settings_Jquery extends Df_Core_Model_Settings {
 	 * @used-by needLoad()
 	 * @return string
 	 */
-	private function mode() {return $this->getString('load_mode');}
+	private function mode() {return $this->v('load_mode');}
 
 	/**
 	 * @used-by Df_Admin_Model_Settings::jquery()

@@ -1,6 +1,6 @@
 <?php
-class Df_YandexMarket_Config_Backend_Category
-	extends Mage_Eav_Model_Entity_Attribute_Backend_Abstract {
+namespace Df\YandexMarket\Config\Backend;
+class Category extends \Mage_Eav_Model_Entity_Attribute_Backend_Abstract {
 	/**
 	 * @overide
 	 * @param Varien_Object $object

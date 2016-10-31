@@ -5,7 +5,7 @@ class Df_Sms_Model_Settings_General extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	public function getAdministratorPhone(Df_Core_Model_StoreM $store) {
-		return $this->getString('administrator_phone', $store);
+		return $this->v('administrator_phone', $store);
 	}
 	/**
 	 * @param Df_Core_Model_StoreM $store
@@ -26,7 +26,7 @@ class Df_Sms_Model_Settings_General extends Df_Core_Model_Settings {
 	 * @param Df_Core_Model_StoreM $store
 	 * @return string
 	 */
-	public function getSender(Df_Core_Model_StoreM $store) {return $this->getString('sender', $store);}
+	public function getSender(Df_Core_Model_StoreM $store) {return $this->v('sender', $store);}
 	/**
 	 * @param Df_Core_Model_StoreM $store
 	 * @return boolean

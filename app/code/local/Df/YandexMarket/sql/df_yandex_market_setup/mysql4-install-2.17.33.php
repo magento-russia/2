@@ -5,7 +5,7 @@ $this->startSetup();
  * Раньше тут был код (не совсем идеальный):
 		self::attribute()->addAdministrativeAttribute(
 			$entityType = 'catalog_product'
-			,$attributeId = Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
+			,$attributeId = \Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
 			,$attributeLabel = 'Категория Яндекс.Маркета'
 		);
  * Теперь улучшенный вариант этого кода я поместил в инсталлятор версии 2.38.2.
@@ -28,7 +28,7 @@ $this->startSetup();
 /**
  * Во вторую попытку здесь стоял вообще ошибочный код:
 		self::attribute()->addAdministrativeCategoryAttribute(
-			$attributeId = Df_YandexMarket_Const::ATTRIBUTE__CATEGORY
+			$attributeId = \Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
 			,$attributeLabel = 'Категория Яндекс.Маркета'
 		);
 		rm_eav_reset();

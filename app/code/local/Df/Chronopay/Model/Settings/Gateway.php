@@ -2,7 +2,7 @@
 class Df_Chronopay_Model_Settings_Gateway extends Df_Core_Model_Settings {
 	/** @return string */
 	public function getTransactionCurrency() {
-		return $this->getString('df_payment/chronopay_gate/transaction_currency');
+		return $this->v('df_payment/chronopay_gate/transaction_currency');
 	}
 	/**
 	 * @static

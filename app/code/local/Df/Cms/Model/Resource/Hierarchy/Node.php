@@ -1,4 +1,5 @@
 <?php
+use Df_Cms_Model_Hierarchy_Node as N;
 class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Check identifier
@@ -61,10 +62,10 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * Retrieve tree meta data flags from secondary table.
 	 * Filtering by root node of passed node.
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @return array
 	 */
-	public function getTreeMetaData(Df_Cms_Model_Hierarchy_Node $object) {
+	public function getTreeMetaData(N $object) {
 		$read = $this->_getReadAdapter();
 		$select = $read->select();
 		$select
@@ -78,7 +79,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * Retrieve brief/detailed Tree Slice for object
 	 * 2 level array
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @param int $up, if equals zero - no limitation
 	 * @param int $down, if equals zero - no limitation
 	 * @return array
@@ -161,7 +162,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Load node by Request Path
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @param string $url
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node
 	 */
@@ -182,7 +183,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Load First node by parent node id
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @param int $parentNodeId
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node
 	 */
@@ -235,7 +236,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * Flag to indicate whether append included pages (menu_excluded=0) only or not
 	 *
 	 * @param bool $flag
-	 * @return Df_Cms_Model_Hierarchy_Node
+	 * @return N
 	 */
 	public function setAppendIncludedPagesOnly($flag) {
 		$this->_appendIncludedPagesOnly = !!$flag;
@@ -313,7 +314,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Return nearest parent params for pagination/menu
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @param string $fieldName Parent metadata field to use in filter
 	 * @param string|string[] $values Values for filter
 	 * @return array|null
@@ -336,7 +337,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Retrieve Parent node children
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @return array
 	 */
 	public function getParentNodeChildren($object)
@@ -356,7 +357,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Load page data for model if defined page id
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node
 	 */
 	public function loadPageData($object)
@@ -395,30 +396,24 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 
 	/**
 	 * @override
-	 * @param Df_Cms_Model_Hierarchy_Node|Mage_Core_Model_Abstract $object
+	 * @param N|Mage_Core_Model_Abstract $object
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node
 	 */
 	protected function _afterLoad(Mage_Core_Model_Abstract $object) {
 		parent::_afterLoad($object);
 		/** @var string|null $additionalSettingsEncoded */
-		$additionalSettingsEncoded =
-			$object->getData(Df_Cms_Model_Hierarchy_Node::P__ADDITIONAL_SETTINGS)
-		;
+		$additionalSettingsEncoded = $object[N::P__ADDITIONAL_SETTINGS];
 		if (!is_null($additionalSettingsEncoded)) {
 			/** @var array|bool $additionalSettings */
 			$additionalSettings = df_json_decode($additionalSettingsEncoded);
 			df_assert_array($additionalSettings);
-			$object
-				->addData(
-					$additionalSettings
-				)
-			;
+			$object->addData($additionalSettings);
 		}
 		return $this;
 	}
 
 	/**
-	 * @param Df_Cms_Model_Hierarchy_Node|Mage_Core_Model_Abstract $object
+	 * @param N|Mage_Core_Model_Abstract $object
 	 * @return Df_Cms_Model_Resource_Hierarchy_Node
 	 */
 	protected function _afterSave(Mage_Core_Model_Abstract $object) {
@@ -436,30 +431,14 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Perform actions before object save
 	 * @override
-	 * @param Df_Cms_Model_Hierarchy_Node|Mage_Core_Model_Abstract $object
+	 * @param N|Mage_Core_Model_Abstract $object
 	 * @return Mage_Core_Model_Resource_Db_Abstract
 	 */
 	protected function _beforeSave(Mage_Core_Model_Abstract $object) {
 		parent::_beforeSave($object);
-		/** @var array $additionalSettings */
-		$additionalSettings =
-			dfa_select($object->getData(), Df_Cms_Model_Hierarchy_Node::getMetadataKeysAdditional())
+		$object[N::P__ADDITIONAL_SETTINGS] = 
+			df_json_encode(dfa_select($object->getData(), N::getMetadataKeysAdditional()))
 		;
-		/**
-		 * @see Zend_Json::encode() использует
-		 * @see json_encode() при наличии расширения PHP JSON
-		 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-		 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-		 * Обратите внимание,
-		 * что расширение PHP JSON не входит в системные требования Magento.
-		 * http://www.magentocommerce.com/system-requirements
-		 * Поэтому использование @see Zend_Json::encode()
-		 * выглядит более правильным, чем @see json_encode().
-		 */
-		$object->setData(
-			Df_Cms_Model_Hierarchy_Node::P__ADDITIONAL_SETTINGS
-			, Zend_Json::encode($additionalSettings)
-		);
 		return $this;
 	}
 
@@ -478,7 +457,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	/**
 	 * Return object nested childs and its neighbours in Tree Slice
 	 *
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @param int $down Number of Child Node Levels to Include, if equals zero - no limitation
 	 * @return mixed[]
 	 */
@@ -554,7 +533,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 *
 	 * @param string $field
 	 * @param mixed $value
-	 * @param Df_Cms_Model_Hierarchy_Node $object
+	 * @param N $object
 	 * @return Varien_Db_Select
 	 */
 	protected function _getLoadSelect($field, $value, $object)
@@ -635,7 +614,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @override
 	 * @return void
 	 */
-	protected function _construct() {$this->_init(self::TABLE, Df_Cms_Model_Hierarchy_Node::P__ID);}
+	protected function _construct() {$this->_init(self::TABLE, N::P__ID);}
 	/** used-by Df_Cms_Setup_2_0_0::_process() */
 	const TABLE = 'df_cms/hierarchy_node';
 	/**

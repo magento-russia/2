@@ -1,7 +1,7 @@
 <?php
 class Df_Logging_Model_Settings_Archiving extends Df_Core_Model_Settings {
 	/** @return int */
-	public function getLifetime() {return $this->getNatural('lifetime');}
+	public function getLifetime() {return $this->nat('lifetime');}
 	/**
 	 * @override
 	 * @return string

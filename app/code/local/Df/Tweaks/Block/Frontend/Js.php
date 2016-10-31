@@ -50,7 +50,7 @@ class Df_Tweaks_Block_Frontend_Js extends Df_Core_Block_Template {
 			$options['version'] = array('rm' => df_version(), 'core' => Mage::getVersion());
 			$options['formKey'] = df_session_core()->getFormKey();
 			/** @var string $result */
-			$this->{__METHOD__} = df_output()->json($options);
+			$this->{__METHOD__} = df_json_encode_js($options);
 		}
 		return $this->{__METHOD__};
 	}

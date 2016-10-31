@@ -44,8 +44,8 @@ class Df_Admin_Model_Settings extends Df_Core_Model_Settings {
 	public function tweaks() {return Df_Tweaks_Model_Settings::s();}
 	/** @return Df_Vk_Model_Settings */
 	public function vk() {return Df_Vk_Model_Settings::s();}
-	/** @return Df_YandexMarket_Settings */
-	public function yandexMarket() {return Df_YandexMarket_Settings::s();}
+	/** @return \Df\YandexMarket\Settings */
+	public function yandexMarket() {return \Df\YandexMarket\Settings::s();}
 	/** @return Df_Admin_Model_Settings */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

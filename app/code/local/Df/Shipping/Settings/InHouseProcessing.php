@@ -33,9 +33,9 @@ class InHouseProcessing extends \Df_Core_Model_Settings {
 			/** @var $this $s */
 			$s = new self;
 			/** @var int $result */
-			$result = $s->getNatural0('days');
+			$result = $s->nat0('days');
 			/** @var bool $canShipToday */
-			$canShipToday = df_hour() < $s->getNatural('can_ship_today_untill');
+			$canShipToday = df_hour() < $s->nat('can_ship_today_untill');
 			if (!$canShipToday) {
 				$result++;
 			}

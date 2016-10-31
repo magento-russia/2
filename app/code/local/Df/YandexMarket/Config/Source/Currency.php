@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_Config_Source_Currency extends Df_Admin_Config_Source {
+namespace Df\YandexMarket\Config\Source;
+class Currency extends \Df_Admin_Config_Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect

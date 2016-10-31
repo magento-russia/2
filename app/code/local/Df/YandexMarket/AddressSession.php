@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_AddressSession extends Df_Core_Model {
+namespace Df\YandexMarket;
+class AddressSession extends \Df_Core_Model {
 	/**
 	 * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address::addressFromYandexMarket()
 	 * @param string $type
@@ -24,6 +25,6 @@ class Df_YandexMarket_AddressSession extends Df_Core_Model {
 	/** @return array(array(string => string)) */
 	private static function _get() {return df_nta(self::session()->getData(__CLASS__));}
 
-	/** @return Mage_Checkout_Model_Session */
+	/** @return \Mage_Checkout_Model_Session */
 	private static function session() {static $r; return $r ? $r : $r = df_session_checkout();}
 }

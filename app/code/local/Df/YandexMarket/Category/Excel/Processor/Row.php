@@ -1,6 +1,7 @@
 <?php
-class Df_YandexMarket_Category_Excel_Processor_Row extends Df_Core_Model {
-	/** @return Df_YandexMarket_Category_Excel_Processor_Row */
+namespace Df\YandexMarket\Category\Excel\Processor;
+class Row extends \Df_Core_Model {
+	/** @return $this */
 	public function process() {
 		/** @var Df_YandexMarket_Category_Node|null $parent */
 		$parent = null;

@@ -31,7 +31,7 @@ class Df_Eav_Model_Entity_Attribute_Namer extends Df_Core_Model {
 	private function adjust($name) {
 		df_param_string_not_empty($name, 0);
 		/** @var string $result */
-		$result = str_replace('-', '_', df_output()->transliterate(df_trim($name)));
+		$result = str_replace('-', '_', df_translit_url(df_trim($name)));
 		df_result_string_not_empty($result);
 		return $result;
 	}

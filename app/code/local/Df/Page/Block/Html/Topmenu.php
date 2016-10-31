@@ -108,7 +108,7 @@ class Df_Page_Block_Html_Topmenu extends Mage_Page_Block_Html_Topmenu {
 				rm.namespace('rm.topMenu');
 				rm.topMenu.activeNodePath = {json};
 			</script>
-		", array('{json}' => df_output()->json($this->getActiveNodePath($menuTree))));
+		", array('{json}' => df_json_encode_js($this->getActiveNodePath($menuTree))));
 	}
 
 	/** @return bool */

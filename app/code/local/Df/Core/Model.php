@@ -490,7 +490,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	/**
 	 * @used-by cacheSaveProperty()
 	 * @see Df_Core_Model_Geo_Cache::cacheLifetime()
-	 * @see Df_YandexMarket_Category_Adviser::cacheLifetime()
+	 * @see Df_YandexMarket_Category_Advisor::cacheLifetime()
 	 * @return int|null
 	 */
 	protected function cacheLifetime() {return null; /* пожизненно*/}

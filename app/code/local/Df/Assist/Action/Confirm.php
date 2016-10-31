@@ -14,7 +14,7 @@ class Confirm extends \Df\Payment\Action\Confirm {
 	 * @return string
 	 */
 	protected function responseTextForError(\Exception $e) {return df_cc_n(
-		df_output()->getXmlHeader()
+		df_xml_header()
 		,"<pushpaymentresult firstcode='1' secondcode='0'></pushpaymentresult>"
 	);}
 
@@ -23,7 +23,7 @@ class Confirm extends \Df\Payment\Action\Confirm {
 	 * @return string
 	 */
 	protected function responseTextForSuccess() {return df_cc_n(
-		df_output()->getXmlHeader()
+		df_xml_header()
 		,"<pushpaymentresult firstcode='0' secondcode='0'>
 			<order>
 				<billnumber>{$this->rExternalId()}</billnumber>

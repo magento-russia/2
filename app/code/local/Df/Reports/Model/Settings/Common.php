@@ -5,7 +5,7 @@ class Df_Reports_Model_Settings_Common extends Df_Core_Model_Settings {
 	/** @return boolean */
 	public function getEnabled() {return $this->getYesNo('enabled');}
 	/** @return string */
-	public function getPeriodDuration() {return $this->getString('period_duration');}
+	public function getPeriodDuration() {return $this->v('period_duration');}
 	/** @return boolean */
 	public function needRemoveTimezoneNotice() {return $this->getYesNo('remove_timozone_notice');}
 	/** @return boolean */

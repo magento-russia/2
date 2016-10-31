@@ -97,3 +97,19 @@ function df_translate_simple($text, $module) {
 /* @return Df_Localization_Helper_Translation */
 function df_translator() {return Df_Localization_Helper_Translation::s();}
 
+/**
+ * @param string $string
+ * @return string
+ */
+function df_translit_url($string) {return
+	trim(
+		strtolower(
+			preg_replace(
+				'#[^0-9a-z]+#i'
+				,'-'
+				,df_mage()->catalog()->product()->urlHelper()->format($string)
+			)
+		)
+		,'-'
+	)
+;}
