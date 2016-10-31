@@ -263,7 +263,7 @@ abstract class Request extends \Df_Core_Model {
 			}
 		}
 		/** @var \Zend_Http_Response $result */
-		$result = $this->client()->request($this->method());
+		$result = $this->try_(function() {return $this->client()->request($this->method());});
 		/**
 		 * Обратите внимание,
 		 * что обычное @see Zend_Uri::__toString() здесь для сравнения использовать нельзя,

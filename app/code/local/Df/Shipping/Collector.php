@@ -82,7 +82,7 @@ abstract class Collector extends Bridge {
 	 * @used-by \Df\Shipping\Collector\Child::_result()
 	 * @used-by addError()
 	 * @used-by rate()
-	 * @used-by call()
+	 * @used-by try_()
 	 * @used-by r()
 	 * @return \Df\Shipping\Rate\Result
 	 */
@@ -90,7 +90,7 @@ abstract class Collector extends Bridge {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = new \Df\Shipping\Rate\Result;
 			/** @uses collect() */
-			$this->call(function() {$this->collect();});
+			$this->try_(function() {$this->collect();});
 		}
 		return $this->{__METHOD__};
 	}
@@ -100,36 +100,6 @@ abstract class Collector extends Bridge {
 	 * @return string|string[]
 	 */
 	protected function allowedOrigIso2Additional() {return [];}
-
-	/**
-	 * @used-by _result()
-	 * @used-by \Df\Exline\Collector::_collect()
-	 * @param \Closure $f
-	 * @return void
-	 */
-	protected function call(\Closure $f) {
-		try {$f();}
-		catch (\Exception $e) {
-			df_context('Служба доставки', $this->main()->getTitle());
-			/** @var \Exception|\Df\Shipping\Exception $e) */
-			/** @var bool $isSpecific */
-			$isSpecific = $e instanceof \Df\Shipping\Exception;
-			if (!$isSpecific) {
-				$e = df_ewrap(df_ef($e));
-			}
-			$e->comment(df_print_params(dfa_unset($this->rr()->getData(), 'all_items')));
-			df_log($e);
-			/** @var string $mc */
-			if ($isSpecific && $e->messageC()) {
-				$mc = $e->messageC();
-			}
-			else {
-				$this->_result()->markInternalError();
-				$mc = $this->messageFailureGeneral();
-			}
-			$this->addError($mc);
-		}
-	}
 
 	/**
 	 * @param string[] $isos
@@ -340,6 +310,36 @@ abstract class Collector extends Bridge {
 	protected function streetDest() {return $this->rr()->getDestStreet();}
 
 	/**
+	 * @used-by _result()
+	 * @used-by \Df\Exline\Collector::_collect()
+	 * @param \Closure $f
+	 * @return void
+	 */
+	protected function try_(\Closure $f) {
+		try {$f();}
+		catch (\Exception $e) {
+			df_context('Служба доставки', $this->main()->getTitle());
+			/** @var \Exception|\Df\Shipping\Exception $e) */
+			/** @var bool $isSpecific */
+			$isSpecific = $e instanceof \Df\Shipping\Exception;
+			if (!$isSpecific) {
+				$e = df_ewrap(df_ef($e));
+			}
+			$e->comment(df_print_params(dfa_unset($this->rr()->getData(), 'all_items')));
+			df_log($e);
+			/** @var string $mc */
+			if ($isSpecific && $e->messageC()) {
+				$mc = $e->messageC();
+			}
+			else {
+				$this->_result()->markInternalError();
+				$mc = $this->messageFailureGeneral();
+			}
+			$this->addError($mc);
+		}
+	}
+
+	/**
 	 * @return int
 	 */
 	protected function weightG() {return $this->rr()->getWeightInGrammes();}
@@ -361,7 +361,7 @@ abstract class Collector extends Bridge {
 	/**
 	 * 2015-03-22
 	 * Добавляем не более одного диагностического сообщения для конкретного способа доставки.
-	 * @used-by call()
+	 * @used-by try_()
 	 * @param string $message
 	 * @return void
 	 */
@@ -490,7 +490,7 @@ abstract class Collector extends Bridge {
 	;}
 
 	/**
-	 * @used-by call()
+	 * @used-by try_()
 	 * @return string
 	 */
 	private function messageFailureGeneral() {return $this->main()->evaluateMessage(

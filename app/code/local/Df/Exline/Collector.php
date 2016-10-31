@@ -21,7 +21,7 @@ class Collector extends \Df\Shipping\Collector\Kz {
 	 * @used-by \Df\Shipping\Collector::collect()
 	 * @return void
 	 */
-	protected function _collect() {$this->call(function() {
+	protected function _collect() {$this->try_(function() {
 		$this->_rate(1, 'express', 'экспресс');
 		$this->_rate(2, 'standard', 'стандартный');
 	});}
