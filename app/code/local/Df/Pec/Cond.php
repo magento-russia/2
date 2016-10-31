@@ -99,14 +99,14 @@ class Cond extends \Df\Shipping\Request {
 	protected function post() {return dfc($this, function() {return [
 		'deliver' => [
 			'gidro' => df_01($this->s()->needCargoTailLoaderAtDestination())
-			,'moscow' => $this->s()->moscowReceptionPoint()
+			,'moscow' => 0
 			,'speed' => 0
 			,'tent' => df_01($this->s()->needRemoveAwningAtDestination())
 			,'town' => $this[self::$P__DEST]
 		]
 		,'take' => [
 			'gidro' => df_01($this->s()->needCargoTailLoaderAtOrigin())
-			,'moscow' => $this->cl()
+			,'moscow' => $this->s()->moscowReceptionPoint()
 			,'speed' => 0
 			,'tent' => df_01($this->s()->needRemoveAwningAtOrigin())
 			,'town' => $this[self::$P__ORIG]
