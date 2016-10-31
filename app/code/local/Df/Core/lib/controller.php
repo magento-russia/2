@@ -35,18 +35,16 @@
  * @used-by Lamoda_Parser_Frontend_ImportController::shoesAction()
  * @used-by Utkonos_Parser_Frontend_IndexController::indexAction()
  * @param Mage_Core_Controller_Varien_Action $controller
- * @param string|null $class [optional]
+ * @param string|null $suffix [optional]
  * @return void
  */
-function df_action(Mage_Core_Controller_Varien_Action $controller, $class = null) {
-	/** @var string $m */
-	$m = df_module_name($controller);
+function df_action(Mage_Core_Controller_Varien_Action $controller, $suffix = null) {
 	/** @var bool $full */
-	$full = $class && df_class_my($class);
-	if (!$class) {
-		// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
-		$class = df_trim_text_right(df_class_last($controller), 'Controller');
-	}
-	Df_Core_Model_Action::pc($full ? $class : df_cc_class($m, 'Action', $class), $controller);
+	$full = $suffix && df_class_my($suffix);
+	// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
+	$suffix = $suffix ?: df_trim_text_right(df_class_last($controller), 'Controller');
+	/** @var string $class */
+	$class = $full ? $suffix : df_con($controller, ['Action', $suffix]);
+	Df_Core_Model_Action::pc($class, $controller);
 }
 

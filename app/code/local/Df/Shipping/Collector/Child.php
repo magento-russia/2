@@ -66,7 +66,7 @@ abstract class Child extends \Df\Shipping\Collector {
 	 */
 	public static function s_collect($suffix, Conditional $parent) {
 		/** @var string $class */
-		$class = df_cts($parent) . df_class_delimiter($parent) . $suffix;
+		$class = df_cts($parent) . df_cld($parent) . $suffix;
 		/** @var self $i */
 		$i = df_ic($class, __CLASS__, [self::$P__PARENT => $parent] + $parent->getData());
 		$i->_collect();

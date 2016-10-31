@@ -101,22 +101,6 @@ function df_cc_method($a1, $a2 = null) {
 }
 
 /**
- * 2016-10-15
- * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- *
- * @param string|object $class
- * @return string
- */
-function df_class_delimiter($class) {
-	/** @var string $s */
-	$s = is_object($class) ? get_class($class) : $class;
-	return df_contains($s , '\\') ? '\\' : '_';
-}
-
-/**
  * 2016-01-01
  * 2016-10-20
  * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
@@ -163,19 +147,14 @@ function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Df
  * 2016-07-10
  * Df\Payment\R\Response => Df\Payment\R\Request
  * @param string|object $class
- * @param string $newSuffix
+ * @param string[] $newSuffix
  * @return string
  */
-function df_class_replace_last($class, $newSuffix) {
-	/** @var string $s */
-	$s = df_cts($class);
-	/** @var string $d */
-	$d = df_class_delimiter($s);
-	/** @var string[] $a */
-	$a = df_explode_class($s);
-	$a[count($a) - 1] = $newSuffix;
-	return implode($d, $a);
-}
+function df_class_replace_last($class, ...$newSuffix) {return
+	implode(df_cld($class),
+		array_merge(df_head(df_explode_class($class)), dfa_flatten($newSuffix))
+	)
+;}
 
 /**
  * 2016-02-09
@@ -200,6 +179,18 @@ function df_class_second($class) {return df_explode_class($class)[1];}
 function df_class_second_lc($class) {return df_lcfirst(df_class_second($class));}
 
 /**
+ * 2016-10-15
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ *
+ * @param string|object $class
+ * @return string
+ */
+function df_cld($class) {return df_contains(df_cts($class) , '\\') ? '\\' : '_';}
+
+/**
  * 2016-08-04
  * 2016-08-10
  * @uses defined() не реагирует на методы класса, в том числе на статические,
@@ -222,7 +213,7 @@ function df_const($class, $name, $default = null) {
  * 2) $default
  * Возвращает первый из найденных классов.
  * @param object|string $caller
- * @param string $suffix
+ * @param string|string[] $suffix
  * @param string|null $default [optional]
  * @param bool $throw [optional]
  * @return string|null
@@ -230,8 +221,8 @@ function df_const($class, $name, $default = null) {
 function df_con($caller, $suffix, $default = null, $throw = true) {return
 	df_con_generic(function($callerC, $suffix) {
 		/** @var string $del */
-		$del = df_class_delimiter($callerC);
-		return df_module_name($callerC, $del) . $del . $suffix;
+		$del = df_cld($callerC);
+		return df_cc($del, df_module_name($callerC, $del), $suffix);
 	}, $caller, $suffix, $default, $throw)
 ;}
 
@@ -240,7 +231,7 @@ function df_con($caller, $suffix, $default = null, $throw = true) {return
  * 2016-10-26
  * @param \Closure $handler
  * @param object|string $caller
- * @param string $suffix
+ * @param string|string[] $suffix
  * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
@@ -258,24 +249,22 @@ function df_con_generic(\Closure $handler, $caller, $suffix, $def = null, $throw
 /**
  * 2016-10-26
  * @param object|string $caller
- * @param string $suffix
+ * @param string|string[] $suffix
  * @param string|null $default [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
 function df_con_child($caller, $suffix, $default = null, $throw = true) {return
-	df_con_generic(function($callerC, $suffix) {
-		/** @var string $del */
-		$del = df_class_delimiter($callerC);
-		return $callerC . $del . $suffix;
-	}, $caller, $suffix, $default, $throw)
+	df_con_generic(function($callerC, $suffix) {return
+		df_cc(df_cld($callerC), $callerC, $suffix)
+	;}, $caller, $suffix, $default, $throw)
 ;}
 
 /**
  * 2016-08-29
  * @used-by dfp_method_call_s()
  * @param string|object $caller
- * @param string $suffix
+ * @param string|string[] $suffix
  * @param string $method
  * @param mixed[] $params [optional]
  * @return mixed
@@ -289,7 +278,7 @@ function df_con_s($caller, $suffix, $method, array $params = []) {return dfcf(
 /**
  * 2016-07-10
  * @param object|string $caller
- * @param string $suffix
+ * @param string|string[] $suffix
  * @param string|null $default [optional]
  * @param bool $throw [optional]
  * @return string|null

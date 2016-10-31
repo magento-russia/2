@@ -3,7 +3,7 @@
  * @param mixed|mixed[] $value
  * @return mixed[]|string[]|float[]|int[]
  */
-function df_array($value) {return is_array($value) ? $value : array($value);}
+function df_array($value) {return is_array($value) ? $value : [$value];}
 
 /**
  * 2015-02-07
