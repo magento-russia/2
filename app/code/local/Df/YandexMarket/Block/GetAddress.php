@@ -2,12 +2,10 @@
 namespace Df\YandexMarket\Block;
 class GetAddress extends \Df_Core_Block_Template {
 	/** @return string */
-	public function getRedirectUrl() {
-		return df_c(
-			'http://market.yandex.ru/addresses.xml?callback='
-			,rawurlencode(Mage::getUrl('df-yandex-market/address/'))
-		);
-	}
+	public function getRedirectUrl() {return
+		'http://market.yandex.ru/addresses.xml?callback='
+		. rawurlencode(\Mage::getUrl('df-yandex-market/address/'))
+	;}
 
 	/**
 	 * @override
@@ -21,10 +19,8 @@ class GetAddress extends \Df_Core_Block_Template {
 	 * @override
 	 * @return bool
 	 */
-	protected function needToShow() {
-		return
-			df_cfgr()->checkout()->other()->canGetAddressFromYandexMarket()
-			&& !df_customer_logged_in()
-		;
-	}
+	protected function needToShow() {return
+		df_cfgr()->checkout()->other()->canGetAddressFromYandexMarket()
+		&& !df_customer_logged_in()
+	;}
 }

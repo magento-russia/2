@@ -2,10 +2,10 @@
 namespace Df\YandexMarket;
 class Categories extends \Df_Core_Model {
 	/** @return string */
-	public function getNodesAsText() {return df_cc_n($this->getNodesAsTextArray());}
+	public function getNodesAsText() {return df_cc_n($this->nodesA());}
 
 	/** @return string[] */
-	public function getNodesAsTextArray() {
+	public function nodesA() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $cacheKey */
 			$cacheKey = $this->getCache()->makeKey(__METHOD__);
@@ -24,7 +24,7 @@ class Categories extends \Df_Core_Model {
 	 * @param string $path
 	 * @return bool
 	 */
-	public function isPathValid($path) {return in_array($path, $this->getNodesAsTextArray(), $path);}
+	public function isPathValid($path) {return in_array($path, $this->nodesA(), $path);}
 
 	/** @return \Df\YandexMarket\Category\Tree */
 	public function getTree() {
