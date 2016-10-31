@@ -256,22 +256,6 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 */
 	public function saveDataArray($key, array $value) {
 		if ($this->isEnabled()) {
-			/**
-			 * @see Zend_Json::encode() использует
-			 * @see json_encode() при наличии расширения PHP JSON
-			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-			 * Обратите внимание,
-			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование @see Zend_Json::encode()
-			 * выглядит более правильным, чем @see json_encode().
-			 *
-			 * $this->saveData($key, Zend_Json::encode($value));
-			 *
-			 * P.S. Оно, конечно, правильнее, но @uses json_encode() работает заметно быстрее,
-			 * чем обёртка @see Zend_Json::encode()
-			 */
 			$this->saveData($key, df_serialize_simple($value));
 		}
 	}

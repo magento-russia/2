@@ -78,26 +78,6 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model {
 			$result[]= df_ruri();
 		}
 		if (!is_null($routeParams)) {
-			/**
-			 * @see json_encode() работает быстрее, чем @see serialize()
-			 * http://stackoverflow.com/a/7723730
-			 * http://stackoverflow.com/a/804053
-			 *
-			 * @see Zend_Json::encode() использует
-			 * @see json_encode() при наличии расширения PHP JSON
-			 * и свой внутренний кодировщик при отсутствии расширения PHP JSON.
-			 * http://stackoverflow.com/questions/4402426/json-encode-json-decode-vs-zend-jsonencode-zend-jsondecode
-			 * Обратите внимание,
-			 * что расширение PHP JSON не входит в системные требования Magento.
-			 * http://www.magentocommerce.com/system-requirements
-			 * Поэтому использование @see Zend_Json::encode()
-			 * выглядит более правильным, чем @see json_encode().
-			 *
-			 * $cacheKey .= Zend_Json::encode($routeParams);
-			 *
-			 * P.S. Оно, конечно, правильнее, но @uses json_encode() работает заметно быстрее,
-			 * чем обёртка @see Zend_Json::encode()
-			 */
 			$result[]= json_encode($routeParams);
 		}
 		if ($url->getStore()) {

@@ -6,7 +6,7 @@ class Df_Localization_Block_Admin_Verification extends Df_Core_Block_Admin {
 	 */
 	public function getDetailsAsJson() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Zend_Json::encode($this->getDetails());
+			$this->{__METHOD__} = df_json_encode($this->getDetails());
 		}
 		return $this->{__METHOD__};
 	}

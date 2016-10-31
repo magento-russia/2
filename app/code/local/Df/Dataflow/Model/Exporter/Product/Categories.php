@@ -18,7 +18,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	 * @param mixed $data
 	 * @return  string
 	 */
-	private function encodeAsJson($data) {return df_json_prettify(Zend_Json::encode($data));}
+	private function encodeAsJson($data) {return df_json_encode_pretty($data);}
 
 	/**
 	 * @param array $data
