@@ -44,7 +44,12 @@ function df_action(Mage_Core_Controller_Varien_Action $controller, $suffix = nul
 	// «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
 	$suffix = $suffix ?: df_trim_text_right(df_class_last($controller), 'Controller');
 	/** @var string $class */
-	$class = $full ? $suffix : df_con($controller, ['Action', $suffix]);
+	$class = $full ? $suffix
+		// 2016-11-01
+		// Нельзя использовать здесь df_con($controller, ['Action', $suffix]),
+		// потому что тогда df_con будет использовать разделитель $controller,
+		// а у $controller разделитель «_», а не «/».
+		: df_cc('\\', df_module_name($controller, '\\'), 'Action', $suffix);
 	Df_Core_Model_Action::pc($class, $controller);
 }
 
