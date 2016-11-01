@@ -10,7 +10,7 @@ class Df_Dataflow_Exception_Import_RequiredValueIsAbsent extends Df_Dataflow_Exc
 	}
 
 	/**
-	 * @used-by Df_1C_Cml2_Import_Processor_Product_Type_Simple::process()
+	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Simple::process()
 	 * @used-by message()
 	 * @return string
 	 */

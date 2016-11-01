@@ -55,7 +55,7 @@ function df_clean(array $array, array $additionalValuesToClean = []) {
  * Отличается от @see df_clean() дополнительным удалением их исходного массива элементов,
  * чьим значением является применение @see df_cdata() к пустой строке.
  * Пример применения:
- * @used-by Df_1C_Cml2_Export_Processor_Catalog_Product::getElement_Производитель()
+ * @used-by Df_C1_Cml2_Export_Processor_Catalog_Product::getElement_Производитель()
  * @param array(string => mixed) $array
  * @return array(string => mixed)
  */

@@ -11,7 +11,7 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 		 * указать в установочном скрипте,
 		 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
 		 * @see Df_Shipping_Setup_2_16_2::process()
-		 * Однако методу Df_1C_Cml2_Import_Processor_Product_Type::getDescription()
+		 * Однако методу Df_C1_Cml2_Import_Processor_Product_Type::getDescription()
 		 * требуется, чтобы в коллекции товаров присутствовало свойство «описание».
 		 * Однако значения поля «описание» могут быть очень длинными,
 		 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,
@@ -37,19 +37,19 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 		$result->addAttributeToSelect(array(
 			/**
 			 * Нужно методу
-			 * @see Df_1C_Cml2_Import_Processor_Product_Type::getDescriptionAbstract()
+			 * @see Df_C1_Cml2_Import_Processor_Product_Type::getDescriptionAbstract()
 			 *
 			 * 2014-09-18
 			 * Отныне нужно также модулю «Русификация» для перевода демо-данных
 			 * @see Df_Localization_Onetime_Dictionary_Rule::getAllProducts().
 			 */
 			Df_Catalog_Model_Product::P__DESCRIPTION
-			,Df_1C_Const::ENTITY_EXTERNAL_ID
+			,Df_C1_Const::ENTITY_EXTERNAL_ID
 			,Df_Catalog_Model_Product::P__NAME
 			,Df_Catalog_Model_Product::P__PRICE
 			/**
 			 * Нужно методу
-			 * @see Df_1C_Cml2_Import_Processor_Product_Type::getDescriptionAbstract()
+			 * @see Df_C1_Cml2_Import_Processor_Product_Type::getDescriptionAbstract()
 			 *
 			 * 2014-09-18
 			 * Отныне нужно также модулю «Русификация» для перевода демо-данных
@@ -59,7 +59,7 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 			,Df_Catalog_Model_Product::P__SKU
 			/**
 			 * Нужно методу
-			 * Df_1C_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateBase
+			 * Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateBase
 			 */
 			,Df_Catalog_Model_Product::P__WEIGHT
 		));
@@ -69,7 +69,7 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 		 * Обратите внимание, что метод addCategoryIds
 		 * работает только после загрузки коллекции.
 		 * Товарные разделы нужны нам
-		 * в методе Df_1C_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateBase.
+		 * в методе Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateBase.
 		 *
 		 * Метод Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::addCategoryIds
 		 * отсутствует в Magento CE 1.4.0.1

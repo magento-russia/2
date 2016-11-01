@@ -22,7 +22,7 @@ class Document extends Element {
 	}
 
 	/**
-	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_CustomerGroup::getResult()
+	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup::getResult()
 	 * @return \Df_Directory_Model_Currency
 	 */
 	public function getExportCurrency() {return $this->store()->getDefaultCurrency();}
@@ -165,11 +165,11 @@ class Document extends Element {
 	/**
 	 * Использование извне:
 	 * @used-by \Df\Xml\Generator\Part::store()
-	 * @used-by Df_1C_Cml2_Export_Processor_Catalog_Category::getExternalId()
+	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Category::getExternalId()
 	 * Использование наследниками:
-	 * @used-by Df_1C_Cml2_Export_Document_Catalog::getКаталог_Наименование()
-	 * @used-by Df_1C_Cml2_Export_Document_Catalog::getКлассификатор_Наименование()
-	 * @used-by Df_1C_Cml2_Export_Document_Catalog::getПакетПредложений_Наименование()
+	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getКаталог_Наименование()
+	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getКлассификатор_Наименование()
+	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getПакетПредложений_Наименование()
 	 * @used-by Df_Catalog_Model_XmlExport_Catalog::getCategories()
 	 * @used-by Df_Catalog_Model_XmlExport_Catalog::getCategoriesAsTree()
 	 * Использование внутри:
@@ -236,7 +236,7 @@ class Document extends Element {
 	}
 
 	/**
-	 * «Df_1C_Cml2_Export_Document_Catalog» => «export.document.catalog»
+	 * «Df_C1_Cml2_Export_Document_Catalog» => «export.document.catalog»
 	 * @return string
 	 */
 	protected function getLogDocumentName() {

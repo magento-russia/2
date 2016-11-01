@@ -89,7 +89,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 
 	/**
 	 * @param Df_Catalog_Model_Product $product
-	 * @return Df_1C_Cml2_Import_Processor_Product_Part_Images
+	 * @return Df_C1_Cml2_Import_Processor_Product_Part_Images
 	 */
 	private function addImagesToDefaultScopeIfNeeded(Df_Catalog_Model_Product $product) {
 		/** @var string[] $mediaAttributes */
@@ -175,7 +175,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 
 	/**
 	 * @param Df_Catalog_Model_Product $product
-	 * @return Df_1C_Cml2_Import_Processor_Product_Part_Images
+	 * @return Df_C1_Cml2_Import_Processor_Product_Part_Images
 	 */
 	private function excludeImagesFromOtherStores(Df_Catalog_Model_Product $product) {
 		/** @var int[] $storesToExcludeFrom */

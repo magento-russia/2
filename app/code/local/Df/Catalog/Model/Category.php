@@ -36,7 +36,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	public function getAttributeSetId() {static $r; return $r ? $r : $r = $this['attribute_set_id'];}
 
 	/** @return string|null */
-	public function get1CId() {return $this[Df_1C_Const::ENTITY_EXTERNAL_ID];}
+	public function get1CId() {return $this[Df_C1_Const::ENTITY_EXTERNAL_ID];}
 
 	/**
 	 * @override
@@ -210,7 +210,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	 * @return Df_Catalog_Model_Category
 	 */
 	public function set1CId($value) {
-		$this->setData(Df_1C_Const::ENTITY_EXTERNAL_ID, $value);
+		$this->setData(Df_C1_Const::ENTITY_EXTERNAL_ID, $value);
 		return $this;
 	}
 
@@ -251,7 +251,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 	}
 
 	/**
-	 * @used-by Df_1C_Cml2_Import_Processor_Category::_construct()
+	 * @used-by Df_C1_Cml2_Import_Processor_Category::_construct()
 	 * @used-by Df_Catalog_Model_Resource_Category_Collection::_init()
 	 * @used-by Df_Catalog_Model_Resource_Category_Flat_Collection::_construct()
 	 * @used-by Df_Catalog_Model_XmlExport_Category::_construct()

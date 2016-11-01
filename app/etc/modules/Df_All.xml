@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <config>
 	<modules>
-		<Df_1C>
+		<Df_C1>
 			<active>true</active>
 			<codePool>local</codePool>
 			<depends>
 				<Df_Core/>
 			</depends>
-		</Df_1C>
+		</Df_C1>
 		<Df_AccessControl>
 			<active>true</active>
 			<codePool>local</codePool>

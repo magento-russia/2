@@ -14,7 +14,7 @@ class Df_Sales_Model_Resource_Order_Collection extends Mage_Sales_Model_Resource
 		parent::_construct();
 		$this->_itemObjectClass = Df_Sales_Model_Order::class;
 	}
-	/** @used-by Df_1C_Cml2_Export_Document_Orders::_construct() */
+	/** @used-by Df_C1_Cml2_Export_Document_Orders::_construct() */
 
 
 	/** @return Df_Sales_Model_Resource_Order_Collection */

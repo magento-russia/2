@@ -15,7 +15,7 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
  * Результатом всегда является непустая строка.
  * @used-by Autostyler_Import_Model_Action::getLogFilePath()
- * @used-by Df_1C_Helper_Data::logger()
+ * @used-by Df_C1_Helper_Data::logger()
  * @used-by df_report()
  * @used-by Df_Core_Model_Action::responseLogName()
  * @used-by \Df\Xml\Generator\Document::createLogger()

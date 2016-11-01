@@ -2,7 +2,7 @@
 interface Df_Dataflow_Logger {
 	/**
 	 * @param string|array(string|int => string) $message
-	 * @return Df_1C_Helper_Data
+	 * @return Df_C1_Helper_Data
 	 */
 	public function log($message);
 

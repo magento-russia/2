@@ -4,7 +4,7 @@
  */
 class Df_Eav_Model_Entity_Attribute_Option extends Mage_Eav_Model_Entity_Attribute_Option {
 	/** @return string|null */
-	public function get1CId() {return $this->_getData(Df_1C_Const::ENTITY_EXTERNAL_ID);}
+	public function get1CId() {return $this->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID);}
 
 	/**
 	 * 2015-02-06
@@ -30,7 +30,7 @@ class Df_Eav_Model_Entity_Attribute_Option extends Mage_Eav_Model_Entity_Attribu
 	 * @return Df_Eav_Model_Entity_Attribute_Option
 	 */
 	public function set1CId($value) {
-		$this->setData(Df_1C_Const::ENTITY_EXTERNAL_ID, $value);
+		$this->setData(Df_C1_Const::ENTITY_EXTERNAL_ID, $value);
 		return $this;
 	}
 

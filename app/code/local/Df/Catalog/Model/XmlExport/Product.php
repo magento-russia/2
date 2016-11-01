@@ -3,7 +3,7 @@
 abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part {
 	/**
 	 * Метод публичен, потому что его использует, например, метод
-	 * @see Df_1C_Cml2_Export_Processor_Catalog_Attribute_Url::getЗначение()
+	 * @see Df_C1_Cml2_Export_Processor_Catalog_Attribute_Url::getЗначение()
 	 * @return string
 	 */
 	public function getUrl() {

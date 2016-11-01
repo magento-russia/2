@@ -68,11 +68,11 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 		/**
 		 * Вызывать
 		 * @see Df_Catalog_Model_Resource_Product_Attribute_Collection::addFieldToSelect(
-		  		Df_1C_Const::ENTITY_EXTERNAL_ID
+		  		Df_C1_Const::ENTITY_EXTERNAL_ID
 		  )
 		 * здесь ошибочно (ибо это поле — не из основной таблицы,
 		 * а из дополнительной таблицы «catalog/eav_attribute»,
-		 * @see Df_1C_Setup_1_0_2::process())
+		 * @see Df_C1_Setup_1_0_2::process())
 		 * и даже приводит к сбою (по той же причине).
 		 * Данные из дополнительной таблицы «catalog/eav_attribute»
 		 * добавляются к коллекции автоматически:

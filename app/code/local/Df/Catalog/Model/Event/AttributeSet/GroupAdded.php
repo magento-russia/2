@@ -46,7 +46,7 @@ class Df_Catalog_Model_Event_AttributeSet_GroupAdded extends Df_Core_Model_Event
 	}
 
 	/**
-	 * @used-by Df_1C_Observer::df_catalog__attribute_set__group_added()
+	 * @used-by Df_C1_Observer::df_catalog__attribute_set__group_added()
 	 * @param Varien_Event_Observer $observer
 	 * @return Df_Catalog_Model_Event_AttributeSet_GroupAdded
 	 */

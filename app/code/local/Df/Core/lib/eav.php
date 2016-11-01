@@ -107,7 +107,7 @@ function df_eav_id_product() {
  * поэтому вручную проверять присутствие свойства не нужно.
  * @used-by df_remove_category_attribute()
  * @used-by df_remove_product_attribute()
- * @used-by Df_1C_Setup_1_0_2::add1CIdToEntity()
+ * @used-by Df_C1_Setup_1_0_2::add1CIdToEntity()
  * $entityTypeId может быть как символьным идентификатором (например, «catalog_product») ,
  * так и числовым (например, «3»):
  * @see Mage_Eav_Model_Entity_Setup::getEntityType()
@@ -131,7 +131,7 @@ function df_remove_attribute($entityTypeId, $attributeCode) {
 function df_remove_category_attribute($code) {df_remove_attribute('catalog_category', $code);}
 
 /**
- * @used-by Df_1C_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::findMagentoAttributeInRegistry()
+ * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::findMagentoAttributeInRegistry()
  * @param string $code
  * @return void
  */

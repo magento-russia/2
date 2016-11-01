@@ -2,12 +2,12 @@
 /**
  * 2015-03-10
  * Параметр $class:
- * 1) может быть полным именем класса («Df_1C_Cml2_Action_Front»)
+ * 1) может быть полным именем класса («Df_C1_Cml2_Action_Front»)
  * 2) может быть суффиксом класса («CustomerReturn»), в таком система ищет класс по стандартному пути:
  * <имя модуля>_Model_Action_<суффикс>
  * 3) может отсутствовать, тогда суффикс определяется по классу контроллера:
  * «Df_Alfabank_CustomerReturnController» => «CustomerReturn»
- * @used-by Df_1C_Cml2Controller::indexAction()
+ * @used-by Df_C1_Cml2Controller::indexAction()
  * @used-by Df_Alfabank_CustomerReturnController::indexAction()
  * @used-by Df_Assist_ConfirmController::indexAction()
  * @used-by Df_EasyPay_ConfirmController::indexAction()

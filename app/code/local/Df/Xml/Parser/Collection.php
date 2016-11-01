@@ -158,9 +158,9 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @see Entity::isValid()
 	 *
 	 * @used-by getItems()
-	 * @see Df_1C_Cml2_Import_Data_Collection_Offers::postInitItems()
-	 * @see Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues::postInitItems()
-	 * @see Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::postInitItems()
+	 * @see Df_C1_Cml2_Import_Data_Collection_Offers::postInitItems()
+	 * @see Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::postInitItems()
+	 * @see Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::postInitItems()
 	 * @param Entity[] $items
 	 * @return void
 	 */
@@ -170,7 +170,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * 2015-08-04
 	 * Временно сделал это свойство protected.
 	 * Потом надо будет переработать обработку заказов.
-	 * @used-by Df_1C_Cml2_Import_Data_Collection_Order_Items::initItems()
+	 * @used-by Df_C1_Cml2_Import_Data_Collection_Order_Items::initItems()
 	 * @var Entity
 	 */
 	protected $_items;

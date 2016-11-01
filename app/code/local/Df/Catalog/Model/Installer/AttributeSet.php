@@ -103,7 +103,7 @@ class Df_Catalog_Model_Installer_AttributeSet extends Df_Core_Model {
 	private static $P__SKIP_REINDEXING = 'skip_reindexing';
 	/**
 	 * @static
-	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getAttributeSet()
+	 * @used-by Df_C1_Cml2_Import_Data_Entity_Product::getAttributeSet()
 	 * @used-by Lamoda_Catalog_Setup_Shoes::getAttributeSet()
 	 * @param string $name
 	 * @param bool $skipReindexing [optional]

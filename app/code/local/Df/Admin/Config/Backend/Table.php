@@ -7,7 +7,7 @@
  * для опции «Нестандартные символьные коды валют»:
 		<non_standard_currency_codes>
 			<label>Нестандартные символьные коды валют</label>
-			<frontend_model>Df_1C_Config_Block_NonStandardCurrencyCodes</frontend_model>
+			<frontend_model>Df_C1_Config_Block_NonStandardCurrencyCodes</frontend_model>
 			<backend_model>Df_Admin_Config_Backend_Table</backend_model>
 			(...)
 		</non_standard_currency_codes>
@@ -196,8 +196,8 @@ class Df_Admin_Config_Backend_Table extends Df_Admin_Config_Backend {
 		if (is_array($result)) {
 			df_assert(method_exists($rowClass, 'fields'));
 			/**
-			 * @uses Df_1C_Config_MapItem_CurrencyCode::fields()
-			 * @uses Df_1C_Config_MapItem_PriceType::fields()
+			 * @uses Df_C1_Config_MapItem_CurrencyCode::fields()
+			 * @uses Df_C1_Config_MapItem_PriceType::fields()
 			 * @uses Df_Directory_Config_MapItem_Country::fields()
 			 * @var string[] $fields
 			 */

@@ -34,12 +34,12 @@ class Df_Core_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup {
 		$versionTo = df_last(explode('-', $basename));
 		/**
 		 * Подсмотрел алгоритм в @see Mage_Core_Model_Resource_Setup::__construct()
-		 * «Df_1C»
+		 * «Df_C1»
 		 * @var string $moduleName
 		 */
 		$moduleName = (string)$this->_resourceConfig->{'setup'}->{'module'};
 		/**
-		 * «Df_1C_Setup_3_0_0»
+		 * «Df_C1_Setup_3_0_0»
 		 * @var string $class
 		 */
 		$class = df_cc_class_($moduleName, 'Setup', str_replace('.', '_', $versionTo));

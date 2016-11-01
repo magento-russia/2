@@ -839,13 +839,13 @@ License: MIT
   /*box-sizing: border-box; */ }
 .entry-edit .form-list td.value .Df_Directory_Block_Field_CountriesOrdered {
   width: 300px; }
-.entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType {
+.entry-edit .form-list td.value .Df_C1_Config_Block_MapFromCustomerGroupToPriceType {
   max-width: 470px; }
-  .entry-edit .form-list td.value .Df_1C_Config_Block_MapFromCustomerGroupToPriceType select.customer_group {
+  .entry-edit .form-list td.value .Df_C1_Config_Block_MapFromCustomerGroupToPriceType select.customer_group {
     width: 10em; }
-.entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes {
+.entry-edit .form-list td.value .Df_C1_Config_Block_NonStandardCurrencyCodes {
   width: 380px; }
-  .entry-edit .form-list td.value .Df_1C_Config_Block_NonStandardCurrencyCodes select.standard_code {
+  .entry-edit .form-list td.value .Df_C1_Config_Block_NonStandardCurrencyCodes select.standard_code {
     width: 15em; }
 .entry-edit .form-list td.value #df_directory_countries_popular__order .grid {
   width: 300px; }
