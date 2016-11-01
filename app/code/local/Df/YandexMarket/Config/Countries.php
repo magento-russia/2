@@ -4,7 +4,7 @@ class Countries extends \Df_Core_Model {
 	/** @return array(string => string) */
 	public function getMapFromIso2CodeToCountryNameInYandexMarketFormat() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Varien_Simplexml_Config $countriesConfigAsSimpleXml */
+			/** @var \Df_Varien_Simplexml_Config $countriesConfigAsSimpleXml */
 			$countriesConfigAsSimpleXml =
 				$this->getFileAsSimpleXml()->getNode('df/yandex-market/countries/country')
 			;
@@ -38,11 +38,11 @@ class Countries extends \Df_Core_Model {
 		return in_array($nameInYandexMarketFormat, $this->getValidNames());
 	}
 
-	/** @return Df_Varien_Simplexml_Config */
+	/** @return \Df_Varien_Simplexml_Config */
 	private function getFileAsSimpleXml() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Varien_Simplexml_Config $result */
-			$result = new Df_Varien_Simplexml_Config();
+			/** @var \Df_Varien_Simplexml_Config $result */
+			$result = new \Df_Varien_Simplexml_Config();
 			/** @var bool $r */
 			$r = $result->loadFile($this->getFilePath('countries.xml'));
 			df_assert(false !== $r);
@@ -58,7 +58,7 @@ class Countries extends \Df_Core_Model {
 	 * @return string
 	 */
 	private function getFilePath($name) {
-		return Mage::getConfig()->getModuleDir(self::FILE_DIR, self::MODULE_NAME) . DS . $name;
+		return \Mage::getConfig()->getModuleDir(self::FILE_DIR, self::MODULE_NAME) . DS . $name;
 	}
 
 	/** @return array(mixed => mixed) */
@@ -75,6 +75,6 @@ class Countries extends \Df_Core_Model {
 	const XML_TAG__NAME__MAGENTO = 'magento';
 	const XML_TAG__NAME__YANDEX_MARKET = 'yandex-market';
 
-	/** @return Df_YandexMarket_Config_Countries */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

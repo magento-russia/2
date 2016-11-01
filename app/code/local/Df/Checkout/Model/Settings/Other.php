@@ -13,6 +13,6 @@ class Df_Checkout_Model_Settings_Other extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_checkout/other/';}
-	/** @return Df_Checkout_Model_Settings_Other */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

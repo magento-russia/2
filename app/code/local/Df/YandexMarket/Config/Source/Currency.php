@@ -6,7 +6,9 @@ class Currency extends \Df_Admin_Config_Source {
 	 * @param bool $isMultiSelect
 	 * @return array(array(string => string))
 	 */
-	protected function toOptionArrayInternal($isMultiSelect = false) {return $this->getAsOptionArray();}
+	protected function toOptionArrayInternal($isMultiSelect = false) {return
+		$this->getAsOptionArray()
+	;}
 
 	/**
 	 * Здесь кэшировать результат можно,
@@ -17,7 +19,7 @@ class Currency extends \Df_Admin_Config_Source {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $optionCurrencyMap */
 			/** @noinspection PhpParamsInspection */
-			$optionCurrencyMap = df_options_to_map(Mage::app()->getLocale()->getOptionCurrencies());
+			$optionCurrencyMap = df_options_to_map(\Mage::app()->getLocale()->getOptionCurrencies());
 			/** @var string[][] $result */
 			$result = array();
 			foreach (self::$_currencies as $currencyCode) {
@@ -34,13 +36,15 @@ class Currency extends \Df_Admin_Config_Source {
 	}
 
 	/**
-	 * @used-by Df_YandexMarket_Config_Backend_Currency::_beforeSave()
+	 * @used-by \Df\YandexMarket\Config\Backend\Currency::_beforeSave()
 	 * @param string $code
 	 * @throws \Df\Core\Exception
 	 */
 	public static function check($code) {
 		if (!in_array($code, self::$_currencies)) {
-			df_error('Яндекс.Маркет не допускает указанную Вами валюту «%s».', df_currency_name($code));
+			df_error('Яндекс.Маркет не допускает указанную Вами валюту «%s».',
+				df_currency_name($code)
+			);
 		}
 	}
 

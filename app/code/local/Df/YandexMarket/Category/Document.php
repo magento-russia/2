@@ -1,37 +1,36 @@
 <?php
-namespace Df\YandexMarket\Category\Excel;
+namespace Df\YandexMarket\Category;
 class Document extends \Df_Core_Model {
 	/** @return string[][] */
-	public function getRows() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[][] $result  */
-			$result = array();
-			/** @var PHPExcel_Worksheet $sheet */
-			$sheet = $this->getPhpExcel()->getSheet(0);
-			$highestRow = $sheet->getHighestRow();
-			$highestColumn = $sheet->getHighestColumn();
-			for ($rowIndex = 1; $rowIndex <= $highestRow; $rowIndex++){
-				/** @var int $rowIndex */
-				/** @var string[] $row */
-			    $row =
-					df_first(
-						$sheet->rangeToArray(
-							$pRange = 'A' . $rowIndex . ':' . $highestColumn . $rowIndex
-							,$nullValue = ''
-							,$calculateFormulas = false
-							,$formatData = false
-							,$returnCellRef = false
-						)
+	private function _rows() {return dfc($this, function() {
+		/** @var string[][] $result  */
+		$result = [];
+		\Df_Core_Lib::load('Excel');
+		$this->downloadFile();
+		/** @var \PHPExcel_Worksheet $sheet */
+		$sheet = \PHPExcel_IOFactory::load($this->path())->getSheet(0);
+		$highestRow = $sheet->getHighestRow();
+		$highestColumn = $sheet->getHighestColumn();
+		for ($rowIndex = 1; $rowIndex <= $highestRow; $rowIndex++){
+			/** @var int $rowIndex */
+			/** @var string[] $row */
+			$row =
+				df_first(
+					$sheet->rangeToArray(
+						$pRange = 'A' . $rowIndex . ':' . $highestColumn . $rowIndex
+						,$nullValue = ''
+						,$calculateFormulas = false
+						,$formatData = false
+						,$returnCellRef = false
 					)
-				;
-				$result[]= $row;
-			}
-			$this->{__METHOD__} = $result;
+				)
+			;
+			$result[]= $row;
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
-	/** @return Df_YandexMarket_Category_Excel_Document */
+	/** @return void */
 	private function downloadFile() {
 		/** @var string $fileUrl */
 		$fileUrl = df_cfgr()->yandexMarket()->other()->getCategoriesReferenceBookUrl();
@@ -74,35 +73,12 @@ class Document extends \Df_Core_Model {
 				);
 			}
 		}
-		df_file_put_contents($this->getFilePath(), $contents);
-		return $this;
-	}
-
-	/** @return PHPExcel */
-	private function getPhpExcel() {
-		if (!isset($this->{__METHOD__})) {
-			Df_Core_Lib::load('Excel');
-			$this->downloadFile();
-			$this->{__METHOD__} = PHPExcel_IOFactory::load($this->getFilePath());
-		}
-		return $this->{__METHOD__};
+		df_file_put_contents($this->path(), $contents);
 	}
 	
 	/** @return string */
-	private function getFilePath() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Mage::getBaseDir('var') . '/rm/yandex.market/categories.xls';
-		}
-		return $this->{__METHOD__};
-	}
+	private function path() {return \Mage::getBaseDir('var') . '/rm/yandex.market/categories.xls';}
 
-	
-	/**
-	 * @static
-	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_YandexMarket_Category_Excel_Document
-	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_YandexMarket_Category_Excel_Document */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	/** @return self */
+	public static function rows() {return dfcf(function() {return (new self)->_rows();});}
 }

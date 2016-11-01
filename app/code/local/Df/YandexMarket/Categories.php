@@ -1,59 +1,50 @@
 <?php
 namespace Df\YandexMarket;
+use Df\YandexMarket\Category\Document as Document;
+use Df\YandexMarket\Category\Node as Node;
+use Df\YandexMarket\Category\Tree as Tree;
 class Categories extends \Df_Core_Model {
-	/** @return string */
-	public function getNodesAsText() {return df_cc_n($this->nodesA());}
-
 	/** @return string[] */
-	public function nodesA() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $cacheKey */
-			$cacheKey = $this->getCache()->makeKey(__METHOD__);
-			/** @var string[] $result */
-			$result = $this->getCache()->loadDataArray($cacheKey);
-			if (!is_array($result)) {
-				$result = $this->getTree()->getNodesAsTextArray();
-				$this->getCache()->saveDataArray($cacheKey, $result);
-			}
-			$this->{__METHOD__} = $result;
+	public static function paths() {return df_cache_get_simple(__METHOD__, function() {
+		/** @var Tree $tree */
+		$tree = new Tree;
+		foreach (Document::rows() as $row) {
+			self::processRow($tree, $row);
 		}
-		return $this->{__METHOD__};
-	}
+		return $tree->paths();
+	});}
 
-	/**
-	 * @param string $path
-	 * @return bool
-	 */
-	public function isPathValid($path) {return in_array($path, $this->nodesA(), $path);}
-
-	/** @return \Df\YandexMarket\Category\Tree */
-	public function getTree() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\YandexMarket\Category\Tree $result */
-			$result = new \Df\YandexMarket\Category\Tree;
-			foreach (\Df\YandexMarket\Category\Excel\Document::s()->getRows() as $row) {
-				\Df\YandexMarket\Category\Excel\Processor\Row::i($result, $row)->process();
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return \Df_Core_Model_Cache */
-	private function getCache() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df_Core_Model_Cache::i(null, 30 * 86400);
-		}
-		return $this->{__METHOD__};
-	}
-
-	
 	/**
 	 * @static
-	 * @param array(string => mixed) $parameters [optional]
-	 * @return self
+	 * @param Tree $tree
+	 * @param string[] $row
+	 * @return void
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	private static function processRow(Tree $tree, array $row) {
+		/** @var Node|null $parent */
+		$parent = null;
+		/** @var bool $parentHasBeenJustCreated */
+		$parentHasBeenJustCreated = false;
+		foreach ($row as $nodeName) {
+			/** @var string $nodeName */
+			// Значения некоторых ячеек таблицы оканчиваются пробелом.
+			// Например: «Красота »
+			$nodeName = df_trim($nodeName);
+			if (!$nodeName) {
+				break;
+			}
+			/** @var string $nodeName */
+			/** @var Node $node */
+			$node = null;
+			if (!$parentHasBeenJustCreated) {
+				$node = $tree->findNodeByNameAndParent($nodeName, $parent);
+			}
+			if (is_null($node)) {
+				$node = new Node(['id' => df_uid(), 'name' => $nodeName],'id', $tree, $parent);
+				$tree->addNode($node, $parent);
+				$parentHasBeenJustCreated = true;
+			}
+			$parent = $node;
+		}
+	;}
 }

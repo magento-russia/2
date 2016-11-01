@@ -12,11 +12,11 @@ class Suggest extends \Df_Core_Model_Action {
 		/** @var string $q */
 		$q = df_request('query');
 		return df_json_encode(['query' => $q, 'suggestions' =>
-			df_cache_get_simple(md5($q), function($q) {return
-				array_filter(C::s()->nodesA(), function($path) use($q) {return
+			df_cache_get_simple(md5($q), function() use ($q) {return
+				array_filter(C::paths(), function($path) use($q) {return
 					df_contains($path, $q)
 				;})
-			;}, $q)
+			;})
 		]);
 	}
 

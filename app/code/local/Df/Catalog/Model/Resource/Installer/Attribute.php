@@ -192,16 +192,16 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 	 * Поэтому правильное решение для товаров
 	 * смотрите у наследников класса @see Df_Core_Setup_AttributeSet:
 	 * @see \Df\Shipping\Processor\AddDimensionsToProductAttributeSet
-	 * @see Df_YandexMarket_Setup_AttributeSet
+	 * @see \Df\YandexMarket\Setup\AttributeSet
 	 * В целом, оно заключается в загрузке/создании/изменении свойства
 	 * вызовом @see Df_Dataflow_Model_Registry_Collection_Attributes::createOrUpdate()
 	 * (df_attributes()->createOrUpdate())
 	 * и затем ручной привязкой свойства к конкретному прикладному типу товаров,
 	 * а когда надо привязать свойство сразу ко всем прикладным типам товаров,
 	 * то это делается в цикле с вызовом соответствующего настройщика прикладного типа товаров.
-	 * Смотрите, например, @see Df_YandexMarket_Setup_AttributeSet::p():
+	 * Смотрите, например, @see \Df\YandexMarket\Setup\AttributeSet::p():
 		foreach (df()->registry()->attributeSets() as $attributeSet) {
-			Df_YandexMarket_Setup_AttributeSet::process($attributeSet);
+			\Df\YandexMarket\Setup\AttributeSet::process($attributeSet);
 		}
 	 *
 	 * @param string $entityType

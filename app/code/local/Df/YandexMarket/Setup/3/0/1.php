@@ -10,7 +10,7 @@ class Df_YandexMarket_Setup_3_0_1 extends Df_Core_Setup {
 	protected function _process() {
 		$this->conn()->update(
 			df_table('eav/attribute')
-			,['backend_model' => Df_YandexMarket_Config_Backend_Category::class]
+			,['backend_model' => \Df\YandexMarket\Config\Backend\Category::class]
 			,['? = backend_model' => 'Df_YandexMarket_Model_Config_Backend_Category']
 		);
 		df_eav_reset();

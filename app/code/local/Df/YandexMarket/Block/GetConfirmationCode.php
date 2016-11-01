@@ -1,5 +1,5 @@
 <?php
-namespace Df\YandexMarket\Block\Api;
+namespace Df\YandexMarket\Block;
 use Df\YandexMarket\Settings\Api as S;
 /**
  * @singleton

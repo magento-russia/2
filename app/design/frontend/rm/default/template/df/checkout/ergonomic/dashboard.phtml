@@ -94,7 +94,7 @@
 					<div class='df-legend' style="text-align:right"><span style='color:#ff0000'>*</span> - <?php echo $this->__('Required fields') ?></div>
 					<div id='opc-billing' class='df-block df-block-address-billing'>
 						<h3 class='df-h3'><?php echo $this->__('Payment Details') ?></h3>
-						<?php echo df_render('Df_YandexMarket_Block_GetAddress'); ?>
+						<?php echo \Df\YandexMarket\GetAddress::r(); ?>
 						<?php echo $this->getChildHtml('billing'); ?>
 					</div>
 					<div id='opc-shipping' class='df-block df-block-address-shipping'>

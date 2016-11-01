@@ -29,7 +29,7 @@
 abstract class Df_Admin_Block_Field_Button extends Df_Adminhtml_Block_Config_Form_Field {
 	/**
 	 * @see Df_Admin_Block_Field_Button_Action::url()
-	 * @see Df_YandexMarket_Block_Api_GetConfirmationCode::url()
+	 * @see \Df\YandexMarket\Block\GetConfirmationCode::url()
 	 * Кэшировать результат обычным образом нельзя!
 	 * @used-by df/admin/field/button.phtml
 	 * 2015-04-16
@@ -71,7 +71,7 @@ abstract class Df_Admin_Block_Field_Button extends Df_Adminhtml_Block_Config_For
 	/**
 	 * @used-by getCaption()
 	 * @used-by Df_Admin_Block_Field_Button_Action::getUrl()
-	 * @used-by Df_YandexMarket_Block_Api_GetConfirmationCode::getUrl()
+	 * @used-by \Df\YandexMarket\Block\GetConfirmationCode::getUrl()
 	 * @param string $name
 	 * @return string|null
 	 */

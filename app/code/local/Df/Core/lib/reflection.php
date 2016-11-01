@@ -390,7 +390,7 @@ function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class)
 function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_camel($class));}
 
 /**
- * «Df_YandexMarket_Yml_Document» => «yandex.market»
+ * «Df\YandexMarket\Yml\Document» => «yandex.market»
  * «Df_1C_Cml2_Export_Document_Catalog» => «1c»
  * @param Varien_Object $object
  * @param string $separator

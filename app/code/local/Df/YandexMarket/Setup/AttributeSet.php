@@ -1,5 +1,6 @@
 <?php
-class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
+namespace Df\YandexMarket\Setup;
+class AttributeSet extends \Df_Core_Setup_AttributeSet {
 	/**
 	 * @override
 	 * @see Df_Core_Setup_AttributeSet::_process()
@@ -15,8 +16,8 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 		 */
 		foreach ($this->getAttributeMap() as $ordering => $attribute) {
 			/** @var int $ordering */
-			/** @var Mage_Eav_Model_Entity_Attribute $attribute */
-			Df_Catalog_Model_Installer_AddAttributeToSet::p(
+			/** @var \Mage_Eav_Model_Entity_Attribute $attribute */
+			\Df_Catalog_Model_Installer_AddAttributeToSet::p(
 				$attribute->getAttributeCode()
 				,$this->getAttributeSet()->getId()
 				/**
@@ -30,14 +31,14 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 		df_eav_reset();
 	}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute_Category() {
 		return $this->getAttributeAdministrative(
 			\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY
 			, 'Категория Яндекс.Маркета'
 			, self::$ORDERING__CATEGORY
 			, array(
-				'backend_model' => 'Df_YandexMarket_Config_Backend_Category'
+				'backend_model' => \Df\YandexMarket\Config\Backend\Category::class
 				,'note' =>
 'Начните вводить первые символы — и система сама предложит Вам правильные варианты.
 <br/>Указание категории упростит Яндекс.Маркету размещение Вашего товара в правильном разделе.'
@@ -45,7 +46,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 		);
 	}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute_SalesNotes() {
 		return $this->getAttributeAdministrative(
 			\Df\YandexMarket\ConstT::ATTRIBUTE__SALES_NOTES
@@ -55,7 +56,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 				'frontend_class' => 'validate-length maximum-length-50'
 				//,'frontend_input' => 'textarea'
 				// Область действия значения свойства: «всеобщая», «витрина», «сайт»
-				,'is_global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE
+				,'is_global' =>\ Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE
 				,'note' =>
 'Информация о минимальной сумме заказа,
 партии товара или необходимости предоплаты, описания акций, скидок и распродаж.
@@ -71,12 +72,12 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 	 * @param string $label
 	 * @param int $ordering
 	 * @param array(string => string) $params [optional]
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	private function getAttributeAdministrative($code, $label, $ordering, array $params = array()) {
 		if (!isset($this->{__METHOD__}[$code])) {
 			$this->{__METHOD__}[$code] = df_attributes()->createOrUpdate(
-				Df_Catalog_Model_Attribute_Preset::administrative($params + array(
+				\Df_Catalog_Model_Attribute_Preset::administrative($params + array(
 					// Код свойства
 					'attribute_code' => $code
 					// Класс объектов для свойства (товары, покупатели...)
@@ -89,7 +90,7 @@ class Df_YandexMarket_Setup_AttributeSet extends Df_Core_Setup_AttributeSet {
 		return $this->{__METHOD__}[$code];
 	}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute[] */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute[] */
 	private function getAttributeMap() {
 		return array(
 			self::$ORDERING__CATEGORY => $this->getAttribute_Category()

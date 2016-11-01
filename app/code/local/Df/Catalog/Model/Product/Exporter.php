@@ -51,17 +51,17 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 * http://magento-forum.ru/topic/3780/
 			 *
 			 * Вместо этого система теперь отфильтровывает простые товары с нулевой ценой
-			 * в методе @see Df_YandexMarket_Yml_Processor_Offer::isEnabled
+			 * в методе @see \Df\YandexMarket\Yml\Processor\Offer::isEnabled
 			 *
 			 * Для товаров типов CONFIGURABLE, GROUPED, BUNDLE
 			 * стандартный метод получения цены (getPrice) в Magento всегда возвращает 0.
 			 *
 			 * Товары типов CONFIGURABLE и GROUPED отсеиваются методом
-			 * @see Df_YandexMarket_Yml_Processor_Offer::isEnabled()
+			 * @see \Df\YandexMarket\Yml\Processor\Offer::isEnabled()
 			 *
 			 * Для товаров типа BUNDLE в качестве цены берётся
 			 * наименьшая возможная цена приобретения комплекта.
-			 * @see Df_YandexMarket_Yml_Processor_Offer::getPrice()
+			 * @see \Df\YandexMarket\Yml\Processor\Offer::getPrice()
 			 * http://magento-forum.ru/topic/3800/
 			 */
 			$result->addStoreFilter(df_state()->getStoreProcessed());
@@ -128,12 +128,12 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 * потому что она отбраковывает простые варианты настраиваемых товаров
 			 * (у них практически значением видимости является «Виден только как часть другого товара»).
 			 * В то же время, настраиваемые товары-родители отбраковываются в методе
-			 * @see Df_YandexMarket_Yml_Processor_Offer::isEnabled()
+			 * @see \Df\YandexMarket\Yml\Processor\Offer::isEnabled()
 			 * Таким образом, получалось,
 			 * что настраиваемые товары вообще публиковались на Яндекс.Маркете.
 			 * Теперь я сделал по-другому:
 			 * отбраковку по видимости я здесь не произожу,
-			 * а вместо этого доработал метод @see Df_YandexMarket_Yml_Processor_Offer::isEnabled(),
+			 * а вместо этого доработал метод @see \Df\YandexMarket\Yml\Processor\Offer::isEnabled(),
 			 * чтобы там отбраковывать только не невидимые товары,
 			 * которые не являются составными частями подлежащих публикации настраиваемых товаров
 			 * (в то же время настраиваемые товары-родители по-прежнему на Яндекс.Маркете не публикуются,
@@ -149,7 +149,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 */
 			/**
 			 * Заставляем систему загружать в коллекцию значение видимости,
-			 * чтобы использовать его в методе @see Df_YandexMarket_Yml_Processor_Offer::isEnabled()
+			 * чтобы использовать его в методе @see \Df\YandexMarket\Yml\Processor\Offer::isEnabled()
 			 */
 			$result->addAttributeToSelect('visibility');
 			if ($this->needRemoveNotSalable()) {
@@ -198,7 +198,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 			 * Обратите внимание, что метод addCategoryIds
 			 * работает только после загрузки коллекции.
 			 * Товарные разделы нужны нам
-			 * в методе Df_YandexMarket_Yml_Processor_Offer::getCategoryId.
+			 * в методе \Df\YandexMarket\Yml\Processor\Offer::getCategoryId.
 			 *
 			 * Метод Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection::addCategoryIds
 			 * отсутствует в Magento CE 1.4.0.1

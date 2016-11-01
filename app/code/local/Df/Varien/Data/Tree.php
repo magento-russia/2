@@ -1,4 +1,5 @@
 <?php
+use Df_Varien_Data_Tree_Node as Node;
 class Df_Varien_Data_Tree extends Varien_Data_Tree {
 	/**
 	 * @param string $name
@@ -33,21 +34,13 @@ class Df_Varien_Data_Tree extends Varien_Data_Tree {
 		return $result;
 	}
 
-	/** @return string[] */
-	public function getNodesAsTextArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $result */
-			$result = array();
-			foreach ($this->getTree()->getNodes() as $node) {
-				/** @var Df_Varien_Data_Tree_Node $node */
-				if (!$node->hasChildren()) {
-					$result[]= $node->getPathAsText();
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	
+	/**
+	 * @used-by \Df\YandexMarket\Categories::paths()
+	 * @return string[]
+	 */
+	public function paths() {return dfc($this, function() {return
+		df_clean(df_map(function(Node $n) {return
+			$n->hasChildren() ? null : $n->getPathAsText()
+		;}, $this->getTree()->getNodes()))
+	;});}
 }

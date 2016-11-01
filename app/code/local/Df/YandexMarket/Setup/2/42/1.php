@@ -24,7 +24,7 @@ class Df_YandexMarket_Setup_2_42_1 extends Df_Core_Setup {
 		 * и в такой ситуации лучшим решением, видимо, будет поступить так:
 		 * 1) удалить половинчатую информацию об этих свойствах из таблицы eav/attribute
 		 * 2) заново выполнить установку данных свойств:
-		 * @see Df_YandexMarket_Setup_AttributeSet::p()
+		 * @see \Df\YandexMarket\Setup\AttributeSet::p()
 		 */
 		/**
 		 * Отсутствие свойства в таблице catalog/eav_attribute

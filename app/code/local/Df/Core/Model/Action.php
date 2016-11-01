@@ -298,7 +298,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by Df_1C_Cml2_Action_Front::_process()
-	 * @used-by Df_YandexMarket_Action_Category_Suggest::getQuery()
+	 * @used-by \Df\YandexMarket\Action\Category_Suggest::getQuery()
 	 * @return Df_Core_Model_InputRequest
 	 */
 	protected function rmRequest() {
@@ -431,7 +431,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 
 	/**
 	 * @used-by Df_1C_Cml2_Action_GenericExport::contentType()
-	 * @used-by Df_YandexMarket_Action_Front::contentType()
+	 * @used-by \Df\YandexMarket\Action\Front::contentType()
 	 * @var string
 	 */
 	protected static $CONTENT_TYPE__XML__UTF_8 = 'application/xml; charset=utf-8';

@@ -131,7 +131,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 	/**
 	 * 2015-10-28
 	 * @used-by getUrlForProduct()
-	 * @see Df_YandexMarket_Yml_Processor_Offer::getUrlMaxLength()
+	 * @see \Df\YandexMarket\Yml\Processor\Offer::getUrlMaxLength()
 	 * http://stackoverflow.com/a/417184
 	 * @return int
 	 */
@@ -272,7 +272,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 		 *
 		 * Обратите внимание, что, начиная с версии 2.17.45,
 		 * режим денормализации для данной коллекции товаров всегда отключен
-		 * @see Df_YandexMarket_Action_Front::getProducts()
+		 * @see \Df\YandexMarket\Action\Front::getProducts()
 		 * Однако вполне возможна ситуация,
 		 * когда большой картинки у товара нет, а маленькая — есть.
 		 */
@@ -288,7 +288,7 @@ abstract class Df_Catalog_Model_XmlExport_Product extends \Df\Xml\Generator\Part
 	/**
 	 * 2015-10-28
 	 * Перекрывается модулем Яндекс.Маркет:
-	 * @see Df_YandexMarket_Yml_Processor_Offer::getUrlForProduct()
+	 * @see \Df\YandexMarket\Yml\Processor\Offer::getUrlForProduct()
 	 * @param Df_Catalog_Model_Product $product
 	 * @param bool $forceShort [optional]
 	 * @return string

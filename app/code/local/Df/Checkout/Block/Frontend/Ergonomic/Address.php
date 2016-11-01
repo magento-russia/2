@@ -62,7 +62,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	private function addressFromYandexMarket() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string))|null $address */
-			$address = Df_YandexMarket_AddressSession::get($this->getType());
+			$address = \Df\YandexMarket\AddressSession::get($this->getType());
 			$this->{__METHOD__} = df_n_set(!$address ? null : Df_Sales_Model_Quote_Address::i($address));
 		}
 		return df_n_get($this->{__METHOD__});
@@ -162,9 +162,9 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address extends Df_Core_Block_Abstrac
 	 * @var string
 	 */
 	private static $P__TYPE = 'df__type';
-	/** @used-by Df_YandexMarket_Action_ImportAddress::getAddressType() */
+	/** @used-by \Df\YandexMarket\Action\ImportAddress::getAddressType() */
 	const TYPE__BILLING = 'billing';
-	/** @used-by Df_YandexMarket_Action_ImportAddress::getAddressType() */
+	/** @used-by \Df\YandexMarket\Action\ImportAddress::getAddressType() */
 	const TYPE__SHIPPING = 'shipping';
 
 	/**

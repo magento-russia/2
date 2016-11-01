@@ -9,7 +9,7 @@
 	</modules>
 	<df>
 		<attribute_set_processors>
-			<yandex-market>Df_YandexMarket_Setup_AttributeSet</yandex-market>
+			<yandex-market>Df\YandexMarket\Setup\AttributeSet</yandex-market>
 		</attribute_set_processors>
 		<features>
 			<df-yandex-market>
@@ -29,17 +29,7 @@
 		</disable-translation>
 	</df>
 	<global>
-		<blocks><df_yandex_market><class>Df_YandexMarket_Block</class></df_yandex_market></blocks>
 		<helpers><df_yandex_market><class>Df_YandexMarket_Helper</class></df_yandex_market></helpers>
-		<models>
-			<df_yandex_market>
-				<class>Df_YandexMarket_Model</class>
-				<resourceModel>df_yandex_market_resource</resourceModel>
-			</df_yandex_market>
-			<df_yandex_market_resource>
-				<class>Df_YandexMarket_Resource</class>
-			</df_yandex_market_resource>
-		</models>
 		<resources>
 			<df_yandex_market_setup>
 				<setup>

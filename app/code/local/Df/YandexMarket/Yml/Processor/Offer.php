@@ -36,9 +36,9 @@ class Offer extends \Df_Catalog_Model_XmlExport_Product {
 		 */
 		/** @var string[] $eligibleTypes */
 		static $eligibleTypes = array(
-			Mage_Catalog_Model_Product_Type::TYPE_SIMPLE
-			,Mage_Catalog_Model_Product_Type::TYPE_VIRTUAL
-			,Mage_Catalog_Model_Product_Type::TYPE_BUNDLE
+			\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE
+			,\Mage_Catalog_Model_Product_Type::TYPE_VIRTUAL
+			,\Mage_Catalog_Model_Product_Type::TYPE_BUNDLE
 		);
 		if (!in_array($this->getProduct()->getTypeId(), $eligibleTypes)) {
 			$this->log(
@@ -113,7 +113,7 @@ class Offer extends \Df_Catalog_Model_XmlExport_Product {
 					 * заменив стандартный справочник стран на нестандартные текстовые названия стран.
 					 * http://magento-forum.ru/index.php?app=members&module=messaging&section=view&do=showConversation&topicID=2105
 					 */
-					if (Df_YandexMarket_Config_Countries::s()->isNameValid($countryIso2Code)) {
+					if (\Df\YandexMarket\Config\Countries::s()->isNameValid($countryIso2Code)) {
 						$result = $countryIso2Code;
 					}
 					else {
@@ -150,8 +150,8 @@ class Offer extends \Df_Catalog_Model_XmlExport_Product {
 	 */
 	protected function getUrlMaxLength() {return 510;}
 
-	/** @return Df_YandexMarket_Settings */
-	private function getSettings() {return Df_YandexMarket_Settings::s();}
+	/** @return \Df\YandexMarket\Settings */
+	private function getSettings() {return \Df\YandexMarket\Settings::s();}
 
 	/** @return array(string => mixed) */
 	private function getValue() {
@@ -256,7 +256,7 @@ class Offer extends \Df_Catalog_Model_XmlExport_Product {
 			/** @var string $result */
 			$result = $this->getProduct()->getData(\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY);
 			if (!$result) {
-				/** @var Df_Catalog_Model_Category|null $category */
+				/** @var \Df_Catalog_Model_Category|null $category */
 				$category = $this->getCategory();
 				while ($category) {
 					$result = $category->getData(\Df\YandexMarket\ConstT::ATTRIBUTE__CATEGORY);
@@ -274,7 +274,4 @@ class Offer extends \Df_Catalog_Model_XmlExport_Product {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/** @used-by Df_YandexMarket_Yml_Document::getProcessorClass_products() */
-	
 }

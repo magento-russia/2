@@ -21,7 +21,7 @@
  * @used-by Df_Eav_Model_Entity_Attribute_Set::addExternalIdAttribute()
  * @used-by Df_Localization_Onetime_Type_Attribute::getAllEntities()
  * @used-by \Df\Shipping\Processor\AddDimensionsToProductAttributeSet::getAttribute()
- * @used-by Df_YandexMarket_Setup_AttributeSet::getAttributeAdministrative()
+ * @used-by \Df\YandexMarket\Setup\AttributeSet::getAttributeAdministrative()
  * @used-by Lamoda_Catalog_Setup_Shoes::addAttributeSimple()
  * @used-by Lamoda_Catalog_Setup_Shoes::addReferenceList()
  * @return Df_Dataflow_Model_Registry_Collection_Attributes

@@ -23,7 +23,7 @@
  * добавляет к прикладному типу товара свойства «длина», «ширина» и «высота».
  *
  * 2) Df_YandexMarket
- * Класс-настройщик @see Df_YandexMarket_Setup_AttributeSet
+ * Класс-настройщик @see \Df\YandexMarket\Setup\AttributeSet
  * добавляет к прикладному типу товара свойство «Примечание к товару (sales_notes)»
  * (свойство «Категория Яндекс.Маркета» пока добавляется по старой технологии).
  */
@@ -52,7 +52,7 @@ abstract class Df_Core_Setup_AttributeSet extends Df_Core_Model {
 	/**
 	 * @used-by runBlank()
 	 * @used-by \Df\Shipping\Processor\AddDimensionsToProductAttributeSet::process()
-	 * @used-by Df_YandexMarket_Setup_AttributeSet::p()
+	 * @used-by \Df\YandexMarket\Setup\AttributeSet::p()
 	 * @param string $class
 	 * @param Mage_Eav_Model_Entity_Attribute_Set $attributeSet
 	 * @return void

@@ -1,25 +1,24 @@
 <?php
 namespace Df\YandexMarket\Config\Backend;
+use Df\YandexMarket\Categories as C;
 class Category extends \Mage_Eav_Model_Entity_Attribute_Backend_Abstract {
 	/**
 	 * @overide
-	 * @param Varien_Object $object
-	 * @return Df_YandexMarket_Config_Backend_Category
+	 * @param \Varien_Object $object
+	 * @return $this
 	 */
 	public function beforeSave($object) {
 		try {
 			/** @var string|null $value */
 			$value = $object->getData($this->getAttribute()->getAttributeCode());
-			if ($value && !Df_YandexMarket_Categories::s()->isPathValid($value)) {
-				df_error(
-					"Категория «%s» отсутствует"
-					. " в <a href='%s'>официальном перечне категорий Яндекс.Маркета</a>"
-					,$value
+			if ($value && !in_array($value, C::paths())) {
+				df_error_html(df_url_bake(
+					"Категория «{$value}» отсутствует в [[официальном перечне Яндекс.Маркета]]."
 					,df_cfgr()->yandexMarket()->other()->getCategoriesReferenceBookUrl()
-				);
+				));
 			}
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			df_exception_to_session($e);
 		}
 		return $this;

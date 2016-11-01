@@ -33,12 +33,12 @@ class Currency extends \Df_Admin_Config_Backend_Currency {
 	/**
 	 * @see Df_Admin_Config_Backend_Currency::_beforeSave()
 	 * @overide
-	 * @return Df_YandexMarket_Config_Backend_Currency
+	 * @return $this
 	 */
 	protected function _beforeSave() {
 		// Выполняем проверки только при включенности модуля.
 		if ($this->getValue()) {
-			Df_YandexMarket_Config_Source_Currency::check($this->getValue());
+			\Df\YandexMarket\Config\Source\Currency::check($this->getValue());
 		}
 		parent::_beforeSave();
 		return $this;

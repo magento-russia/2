@@ -4,7 +4,7 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override
 	 * @see \Df\Xml\Generator\Document::getExportCurrency()
-	 * @return Df_Directory_Model_Currency
+	 * @return \Df_Directory_Model_Currency
 	 */
 	public function getExportCurrency() {return $this->getSettings()->general()->getCurrency();}
 
@@ -73,7 +73,7 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 	 * @return array(string => string)
 	 */
 	protected function getAttributes() {
-		return array('date' => df_dts(Zend_Date::now(), 'y-MM-dd HH:mm'));
+		return array('date' => df_dts(\Zend_Date::now(), 'y-MM-dd HH:mm'));
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 	 * @override
 	 * @return string
 	 */
-	protected function getProcessorClass_products() {return Df_YandexMarket_Yml_Processor_Offer::class;}
+	protected function getProcessorClass_products() {return \Df\YandexMarket\Yml\Processor\Offer::class;}
 
 	/**
 	 * @override
@@ -119,7 +119,7 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 			/** @var array(array(string => string|array(string => int))) $result  */
 			$result = array();
 			foreach ($this->getCategories() as $category) {
-				/** @var Df_Catalog_Model_Category $category */
+				/** @var \Df_Catalog_Model_Category $category */
 				if ($category->getId()) {
 					/** @var array(string => int) $attributes */
 					$attributes = array('id' => $category->getId());
@@ -166,7 +166,7 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 			'name' => $this->getSettings()->shop()->getNameForClients()
 			,'company' => $this->getSettings()->shop()->getNameForAdministration()
 			,'url' => $this->preprocessUrl(
-				df_state()->getStoreProcessed()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
+				df_state()->getStoreProcessed()->getBaseUrl(\Mage_Core_Model_Store::URL_TYPE_WEB)
 			)
 			,'platform' => 'Российская сборка Magento'
 			,'version' => df_version()
@@ -200,11 +200,11 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 		return $result;
 	}
 
-	/** @return Df_YandexMarket_Settings */
-	private function getSettings() {return Df_YandexMarket_Settings::s();}
+	/** @return \Df\YandexMarket\Settings */
+	private function getSettings() {return \Df\YandexMarket\Settings::s();}
 
 	/**
-	 * @used-by Df_YandexMarket_Action_Front::getDocument()
+	 * @used-by \Df\YandexMarket\Action\Front::getDocument()
 	 * @param \Df_Catalog_Model_Resource_Product_Collection $products
 	 * @return self
 	 */
