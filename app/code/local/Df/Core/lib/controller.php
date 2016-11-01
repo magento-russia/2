@@ -52,4 +52,3 @@ function df_action(Mage_Core_Controller_Varien_Action $controller, $suffix = nul
 		: df_cc('\\', df_module_name($controller, '\\'), 'Action', $suffix);
 	Df_Core_Model_Action::pc($class, $controller);
 }
-
