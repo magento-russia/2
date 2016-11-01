@@ -14,13 +14,13 @@ class Df_C1_Cml2_Processor_Product_AddExternalId extends Df_Core_Model {
 			// Данный товар не был импортирован из 1С:Управление торговлей,
 			// а был создан администратором магазина вручную.
 			// Назначаем этому товару внешний идентификатор.
-			df_1c_log(
+			df_c1_log(
 				"У товара %s отсутствует внешний идентификатор.\nНазначаем идентификатор «%s»."
 				,$product->getTitle(), $this->getExternalId()
 			);
 			// Добавляем к прикладному типу товаров
 			// свойство для учёта внешнего идентификатора товара в 1С:Управление торговлей
-			df_1c_add_external_id_attribute_to_set($product->getAttributeSet());
+			df_c1_add_external_id_attribute_to_set($product->getAttributeSet());
 			$product->saveAttributes(
 				array(Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getExternalId())
 				// Единое значение для всех витрин
@@ -33,7 +33,7 @@ class Df_C1_Cml2_Processor_Product_AddExternalId extends Df_Core_Model {
 				df_error('Не удалось добавить внешний идентификатор к товару %s.', $product->getTitle());
 			}
 			else {
-				df_1c_log('Товару %s назначен внешний идентификатор.', $product->getTitle());
+				df_c1_log('Товару %s назначен внешний идентификатор.', $product->getTitle());
 			}
 		}
 	}

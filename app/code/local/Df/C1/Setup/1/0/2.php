@@ -10,7 +10,7 @@
  */
 class Df_C1_Setup_1_0_2 extends Df_C1_Setup {
 	/**
-	 * Для товаров свойство «1С ID» добавляется функцией @see df_1c_add_external_id_attribute_to_set()
+	 * Для товаров свойство «1С ID» добавляется функцией @see df_c1_add_external_id_attribute_to_set()
 	 * @override
 	 * @see Df_Core_Setup::_process()
 	 * @used-by Df_Core_Setup::process()

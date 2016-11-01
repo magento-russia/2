@@ -68,7 +68,7 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 			 */
 			/** @var string $value */
 			$value = $e->leaf('Значение');
-			if (df_1c_is_external_id($value)) {
+			if (df_c1_is_external_id($value)) {
 				$valueId = $value;
 			}
 		}

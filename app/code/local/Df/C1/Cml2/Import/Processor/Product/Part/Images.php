@@ -22,7 +22,7 @@ class Df_C1_Cml2_Import_Processor_Product_Part_Images
 			Df_Dataflow_Model_Importer_Product_Images::i(
 				$this->getExistingMagentoProduct()
 				, $this->getEntityProduct()->getImages()->getFullPaths()
-				, df_1c()
+				, df_c1()
 			)->process();
 			/**
 			 * Нет необходимости импортировать картинки при каждом сеансе обмена.

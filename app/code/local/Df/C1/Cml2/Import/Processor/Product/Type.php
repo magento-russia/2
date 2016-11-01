@@ -266,7 +266,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 	private function getDescriptionAbstract($productField, array $fieldsToUpdate) {
 		df_param_string_not_empty($productField, 0);
 		/** @var string $result */
-		$result = df_1c_cfg()->product()->description()->getDefault();
+		$result = df_c1_cfg()->product()->description()->getDefault();
 		/** @var string|null $currentDescription */
 		$currentDescription =
 			!$this->getExistingMagentoProduct()
@@ -275,11 +275,11 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		;
 		/** @var bool $canUpdateCurrentDescription */
 		$canUpdateCurrentDescription =
-				!df_1c_cfg()->product()->description()->preserveInUnique()
+				!df_c1_cfg()->product()->description()->preserveInUnique()
 			||
 				!$currentDescription
 			||
-				($currentDescription === df_1c_cfg()->product()->description()->getDefault())
+				($currentDescription === df_c1_cfg()->product()->description()->getDefault())
 		;
 		// Обрабатываем случай,
 		// когда в 1С на товарной карточке заполнено поле «Файл описания для сайта».
@@ -295,7 +295,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 			;
 		}
 		else if (
-			!in_array(df_1c_cfg()->product()->description()->whichFieldToUpdate(), $fieldsToUpdate)
+			!in_array(df_c1_cfg()->product()->description()->whichFieldToUpdate(), $fieldsToUpdate)
 		) {
 			if ($currentDescription) {
 				$result = $currentDescription;
@@ -377,7 +377,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 				||
 						/** http://magento-forum.ru/topic/3655/ */
 						Df_C1_Config_Source_ProductNameSource::isFull(
-							df_1c_cfg()->product()->name()->getSource()
+							df_c1_cfg()->product()->name()->getSource()
 						)
 					&&
 						// Небольшая тонкость.
@@ -499,7 +499,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		/** @var array(string => string|int|float|bool|null) $result */
 		$result = array();
 		if ($this->getEntityOffer()->getOptionValues()->hasItems()) {
-			df_1c()->create1CAttributeGroupIfNeeded(
+			df_c1()->create1CAttributeGroupIfNeeded(
 				$this->getEntityProduct()->getAttributeSet()->getId()
 			);
 		}

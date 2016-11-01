@@ -52,9 +52,9 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 					,$caseInsensitive = true
 				)
 			));
-			df_1c_log('Обновление справочника «%s».', 'Изготовитель');
+			df_c1_log('Обновление справочника «%s».', 'Изготовитель');
 			$result = df_attributes()->createOrUpdate($attributeData);
-			df_1c_log('Добавили в справочник «%s» значение «%s».', 'Изготовитель', $this->getName());
+			df_c1_log('Добавили в справочник «%s» значение «%s».', 'Изготовитель', $this->getName());
 			// Назначаем новому справочному значению идентификатор из 1С
 			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
 			$options = Df_Eav_Model_Entity_Attribute_Option::c();
@@ -192,7 +192,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = df_attributes()->createOrUpdate($attributeData);
 		df_assert($result->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID));
-		df_1c_log('Добавлено свойство «%s».', 'Изготовитель');
+		df_c1_log('Добавлено свойство «%s».', 'Изготовитель');
 		return $result;
 	}
 

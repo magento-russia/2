@@ -17,7 +17,7 @@ class Df_Core_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup {
 	}
 
 	/**
-	 * Например: «app/code/local/Df/1C/sql/df_1c_setup/mysql4-upgrade-1.0.2-3.0.0.php»
+	 * Например: «app/code/local/Df/1C/sql/df_c1_setup/mysql4-upgrade-1.0.2-3.0.0.php»
 	 * @param string $file
 	 * @return void
 	 */

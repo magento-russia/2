@@ -20,7 +20,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				 */
 				/** @var string|null $value */
 				$value = $this->leaf('Значение');
-				if (df_1c_is_external_id($value)) {
+				if (df_c1_is_external_id($value)) {
 					$result = $value;
 				}
 			}
@@ -111,7 +111,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 			if (!$options->count()) {
 				// Из 1С:Управление торговлей в интернет-магазин передано справочное значение,
 				// отсутствующее в соответствующем справочнике интернет-магазина.
-				df_1c_log(
+				df_c1_log(
 					"Из «1С:Управление торговлей» в интернет-магазин передано"
 					. " значение «{value}» свойства {attribute}"
 					. " для товара «{productName}» [{productSku}],"
@@ -132,10 +132,10 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				$optionsAll->setPositionOrder('asc');
 				$optionsAll->setAttributeFilter($this->getAttributeMagento()->getId());
 				$optionsAll->setStoreFilter($this->getAttributeMagento()->getStoreId());
-				df_1c_log('Допустимые значения свойства %s:', $this->getAttributeMagento()->getTitle());
+				df_c1_log('Допустимые значения свойства %s:', $this->getAttributeMagento()->getTitle());
 				foreach ($optionsAll as $option) {
 					/** @var Df_Eav_Model_Entity_Attribute_Option $option */
-					df_1c_log('«{optionLabel}» («{optionExternalId}»)', array(
+					df_c1_log('«{optionLabel}» («{optionExternalId}»)', array(
 						'{optionLabel}' => $option->getValue()
 						,'{optionExternalId}' => $option->get1CId()
 					));

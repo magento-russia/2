@@ -18,12 +18,12 @@
 	</df>
 	<global>
 		<resources>
-			<df_1c_setup>
+			<df_c1_setup>
 				<setup>
 					<module>Df_C1</module>
 					<class>Df_Core_Model_Resource_Setup</class>
 				</setup>
-			</df_1c_setup>
+			</df_c1_setup>
 		</resources>
 		<ignoredModules><entities><df-1c/></entities></ignoredModules>
 		<events>

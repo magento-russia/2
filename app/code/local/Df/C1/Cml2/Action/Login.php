@@ -51,7 +51,7 @@ class Df_C1_Cml2_Action_Login extends Df_C1_Cml2_Action {
 			);
 		}
 		catch (Exception $e) {
-			df_1c()->logRaw(df_ets($e));
+			df_c1()->logRaw(df_ets($e));
 			df_notify_exception($e);
 			$this->response()->setHeader($name = 'HTTP/1.1', $value = '401 Unauthorized');
 			throw $e;

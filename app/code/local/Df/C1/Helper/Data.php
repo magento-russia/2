@@ -33,7 +33,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 * @return void
 	 */
 	public function log($message) {
-		if (df_1c_cfg()->general()->needLogging()) {
+		if (df_c1_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
 			self::logger()->log(df_format($arguments));
@@ -45,7 +45,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 * @return void
 	 */
 	public function logRaw($message) {
-		if (df_1c_cfg()->general()->needLogging()) {
+		if (df_c1_cfg()->general()->needLogging()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
 			self::logger()->logRaw(df_format($arguments));
@@ -83,9 +83,9 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 				$filePath = df_file_name(
 					df_cc_path(
 						Mage::getBaseDir('var'), 'log'
-						, df_1c_cfg()->general()->getLogFileNameTemplatePath()
+						, df_c1_cfg()->general()->getLogFileNameTemplatePath()
 					)
-					, df_1c_cfg()->general()->getLogFileNameTemplateBaseName()
+					, df_c1_cfg()->general()->getLogFileNameTemplateBaseName()
 				);
 				Df_C1_Cml2_Session_ByCookie_1C::s()->setFileName_Log($filePath);
 			}

@@ -146,7 +146,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 */
 	protected function getAttributeCodeNew() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_1c()->generateAttributeCode(
+			$this->{__METHOD__} = df_c1()->generateAttributeCode(
 				$this->getAttributeEntity()->getName()
 				// Намеренно убрал второй параметр ($this->getProduct()->getAppliedTypeName()),
 				// потому что счёл ненужным в данном случае

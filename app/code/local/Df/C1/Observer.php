@@ -10,7 +10,7 @@ class Df_C1_Observer {
 			if (df_is(df_controller(), 'Df_C1_Cml2Controller')) {
 				/** @var Df_Catalog_Model_Event_AttributeSet_GroupAdded $event */
 				$event = Df_Catalog_Model_Event_AttributeSet_GroupAdded::i($o);
-				df_1c_log(
+				df_c1_log(
 					'Добавили к прикладному типу товаров «%s» группу свойств «%s».'
 					,$event->getAttributeSet()->getData(Df_Eav_Model_Entity_Attribute_Set::P__NAME)
 					,$event->getGroupName()

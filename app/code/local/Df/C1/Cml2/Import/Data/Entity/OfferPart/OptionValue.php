@@ -205,7 +205,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 	/** @return string */
 	protected function getAttributeCodeGenerated() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_1c()->generateAttributeCode(
+			$this->{__METHOD__} = df_c1()->generateAttributeCode(
 				$this->getName()
 				// Намеренно убрал второй параметр ($this->getEntityProduct()->getAppliedTypeName()),
 				// потому что счёл ненужным в данном случае

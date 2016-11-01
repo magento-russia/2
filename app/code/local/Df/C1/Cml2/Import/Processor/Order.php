@@ -8,7 +8,7 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 		// Обновляем в Magento заказ
 		// на основании пришедших из 1С:Управление торговлей данных.
 		if (is_null($this->getEntity()->getOrder())) {
-			df_1c_log(
+			df_c1_log(
 				'Отказываемся импортировать заказ №%s, потому что этот заказ отсутствует в Magento.'
 				, $this->getEntity()->getIncrementId()
 			);

@@ -129,7 +129,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 			)
 			,'ХозОперация' => 'Заказ товара'
 			,'Роль' => 'Продавец'
-			,'Валюта' => df_1c_currency_code_to_1c_format($this->getOrder()->getOrderCurrencyCode())
+			,'Валюта' => df_c1_currency_code_to_1c_format($this->getOrder()->getOrderCurrencyCode())
 			,'Курс' => 1
 			,'Сумма' => df_f2($this->getOrder()->getGrandTotal())
 			,'Контрагенты' => array('Контрагент' => $this->getDocumentData_Customer())

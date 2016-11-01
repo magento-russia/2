@@ -8,7 +8,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 	 */
 	public function process() {
 		if (!$this->getEntityOffer()->isTypeSimple()) {
-			df_1c_log(
+			df_c1_log(
 				'Пропускаем товарное предложение «%s» как не являющееся простым товаром.'
 				,$this->getEntityOffer()->getName()
 			);
@@ -44,8 +44,8 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 			}
 			/** @var Df_Catalog_Model_Product $product */
 			$product = $this->getImporter()->getProduct();
-			df_1c_reindex_product($product);
-			df_1c_log(
+			df_c1_reindex_product($product);
+			df_c1_log(
 				'%s товар %s.'
 				, $this->getExistingMagentoProduct() ? 'Обновлён' : 'Создан'
 				, $product->getTitle()
@@ -79,7 +79,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 				// У товара в 1С:Управление торговлей может отсутствовать артикул
 				if (!$externalSku) {
 					// У этого товара нет артикула в 1С:Управление торговлей
-					df_1c_log(
+					df_c1_log(
 						'У товара «%s» в 1С отсутствует артикул.', $this->getEntityProduct()->getName()
 					);
 				}
@@ -93,7 +93,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 						$result = $externalSku;
 					}
 					else {
-						df_1c_log('Товар с артикулом «%s» уже присутствует в магазине.', $externalSku);
+						df_c1_log('Товар с артикулом «%s» уже присутствует в магазине.', $externalSku);
 					}
 				}
 				if (!$result) {

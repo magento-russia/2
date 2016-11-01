@@ -41,7 +41,7 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 				}
 			}
 			if ($result) {
-				df_1c_log(
+				df_c1_log(
 					"У товара «%s» найдено %d вариантов:\n%s"
 					, $this->getName()
 					, count($result)

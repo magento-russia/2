@@ -5,7 +5,7 @@ class Df_C1_Config_MapItem_CurrencyCode extends Df_Admin_Config_MapItem {
 
 	/** @return string */
 	public function getNonStandardNormalized() {
-		return df_1c_currency_code_normalize($this->getNonStandard());
+		return df_c1_currency_code_normalize($this->getNonStandard());
 	}
 
 	/**

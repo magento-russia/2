@@ -19,7 +19,7 @@ abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 	 * @used-by Df_Core_Model_Action::checkAccessRights()
 	 * @return bool
 	 */
-	protected function isModuleEnabledByAdmin() {return df_1c_cfg()->general()->isEnabled();}
+	protected function isModuleEnabledByAdmin() {return df_c1_cfg()->general()->isEnabled();}
 
 	/**
 	 * @override

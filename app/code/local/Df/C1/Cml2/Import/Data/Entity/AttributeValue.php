@@ -39,13 +39,13 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 				// Вот здесь-то мы можем добавить в Magento нестандартные свойства товаров,
 				// учёт которых ведётся в 1С:Управление торговлей.
 				$result = $this->createMagentoAttribute();
-				df_1c_log('Создано свойство «%s».', $result->getName());
+				df_c1_log('Создано свойство «%s».', $result->getName());
 				df_attributes()->addEntity($result);
 			}
 			df_assert($result instanceof Df_Catalog_Model_Resource_Eav_Attribute);
 			// Мало, чтобы свойство присутствовало в системе:
 			// надо добавить его к прикладному типу товара.
-			df_1c()->create1CAttributeGroupIfNeeded($this->getProduct()->getAttributeSet()->getId());
+			df_c1()->create1CAttributeGroupIfNeeded($this->getProduct()->getAttributeSet()->getId());
 			/** @var string $status */
 			$status = Df_Catalog_Model_Installer_AddAttributeToSet::p(
 				$result->getAttributeCode()
@@ -54,14 +54,14 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 			);
 			switch ($status) {
 				case Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__ADDED:
-					df_1c_log(
+					df_c1_log(
 						'К типу «%s» добавлено свойство «%s».'
 						,$this->getProduct()->getAttributeSet()->getAttributeSetName()
 						,$result->getName()
 					);
 					break;
 				case Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP:
-					df_1c_log(
+					df_c1_log(
 						'В типе «%s» свойство «%s» сменило группу на «%s».'
 						,$this->getProduct()->getAttributeSet()->getAttributeSetName()
 						,$result->getName()
@@ -85,7 +85,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = df_attributes()->createOrUpdate($this->getCreationParams());
 		df_assert($result->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID));
-		df_1c_log('Добавлено свойство «%s».', $this->getAttributeFrontendLabel());
+		df_c1_log('Добавлено свойство «%s».', $this->getAttributeFrontendLabel());
 		return $result;
 	}
 
@@ -161,7 +161,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 	/** @return int */
 	protected function isAttributeVisibleOnFront() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_01(df_1c_cfg()->product()->other()->showAttributesOnProductPage());
+			$this->{__METHOD__} = df_01(df_c1_cfg()->product()->other()->showAttributesOnProductPage());
 		}
 		return $this->{__METHOD__};
 	}

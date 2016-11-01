@@ -16,7 +16,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product extends Df_C1_Cml2_Import_Pro
 		 *
 		 * После этого код создания внешнего идентификатора был поправлен
 		 * used_in_product_listing = 1 в методе
-		 * @see df_1c_add_external_id_attribute_to_set(),
+		 * @see df_c1_add_external_id_attribute_to_set(),
 		 * а $result->getAttributeSet() гарантирует его вызов.
 		 */
 		$result->getAttributeSet();

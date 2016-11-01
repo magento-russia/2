@@ -29,7 +29,7 @@ class Df_C1_Cml2_Cookie {
 	 *
 	 * Обратите внимание, что в имени сессии нельзя использовать символ-точку («.»).
 	 */
-	const SESSION_ID = 'df_1c_cml2_sessionId';
+	const SESSION_ID = 'df_c1_cml2_sessionId';
 
 	/** @return Df_C1_Cml2_Cookie */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

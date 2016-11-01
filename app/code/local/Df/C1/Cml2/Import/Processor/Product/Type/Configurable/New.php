@@ -24,9 +24,9 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
 		}
 		$product->saveRm($isMassUpdate = true);
 		$product->reload();
-		df_1c_reindex_product($product);
+		df_c1_reindex_product($product);
 		df()->registry()->products()->addEntity($product);
-		df_1c_log('Создан товар %s.', $product->getTitle());
+		df_c1_log('Создан товар %s.', $product->getTitle());
 	}
 
 	/**
@@ -91,7 +91,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
 					$labels[]= $attribute->getFrontendLabel();
 				}
 			}
-			df_1c_log("Для товара настраиваются параметры:\n%s.", df_csv_pretty_quote($labels));
+			df_c1_log("Для товара настраиваются параметры:\n%s.", df_csv_pretty_quote($labels));
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};

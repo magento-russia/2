@@ -1,11 +1,11 @@
 <?php
 /**
- * @used-by df_1c_currency_code_to_magento_format()
+ * @used-by df_c1_currency_code_to_magento_format()
  * @used-by Df_C1_Config_MapItem_CurrencyCode::getNonStandardNormalized()
  * @param string $nonStandardCurrencyCode
  * @return string
  */
-function df_1c_currency_code_normalize($nonStandardCurrencyCode) {
+function df_c1_currency_code_normalize($nonStandardCurrencyCode) {
 	df_param_string_not_empty($nonStandardCurrencyCode, 0);
 	/** @var string $result */
 	$result = mb_substr(df_trim(mb_strtoupper($nonStandardCurrencyCode), ' .'), 0, 3);
@@ -18,9 +18,9 @@ function df_1c_currency_code_normalize($nonStandardCurrencyCode) {
  * @param string $ccInMagentoFormat
  * @return string
  */
-function df_1c_currency_code_to_1c_format($ccInMagentoFormat) {
+function df_c1_currency_code_to_1c_format($ccInMagentoFormat) {
 	df_param_string_not_empty($ccInMagentoFormat, 0);
-	$result = dfa(df_1c_cfg()->general()->ссMapTo1C(), $ccInMagentoFormat, $ccInMagentoFormat);
+	$result = dfa(df_c1_cfg()->general()->ссMapTo1C(), $ccInMagentoFormat, $ccInMagentoFormat);
 	/**
 	 * Раньше тут стояло df_result_string_not_empty,
 	 * однако в магазине belle.com.ua это привело к сбою:
@@ -43,12 +43,12 @@ function df_1c_currency_code_to_1c_format($ccInMagentoFormat) {
  * @param string $ccIn1CFormat
  * @return string
  */
-function df_1c_currency_code_to_magento_format($ccIn1CFormat) {
+function df_c1_currency_code_to_magento_format($ccIn1CFormat) {
 	df_param_string_not_empty($ccIn1CFormat, 0);
 	/** @var string $normalized */
-	$normalized = df_1c_currency_code_normalize($ccIn1CFormat);
+	$normalized = df_c1_currency_code_normalize($ccIn1CFormat);
 	return dfa(
-		df_1c_cfg()->general()->ccMapFrom1C() + array('РУБ' => 'RUB', 'ГРН' => 'UAH')
+		df_c1_cfg()->general()->ccMapFrom1C() + array('РУБ' => 'RUB', 'ГРН' => 'UAH')
 		,$normalized
 		,$normalized
 	);

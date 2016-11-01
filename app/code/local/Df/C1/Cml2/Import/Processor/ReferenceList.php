@@ -23,7 +23,7 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 					$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 				)
 			));
-			df_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
+			df_c1_log('Обновление справочника «%s».', $this->getEntity()->getName());
 		}
 		else {
 			/**
@@ -58,12 +58,12 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 						$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 					)
 				));
-				df_1c_log('Обновление справочника «%s».', $this->getEntity()->getName());
+				df_c1_log('Обновление справочника «%s».', $this->getEntity()->getName());
 			}
 			else {
 				$attributeData = array(
 					'entity_type_id' => df_eav_id_product()
-					,'attribute_code' => df_1c()->generateAttributeCode($this->getEntity()->getName())
+					,'attribute_code' => df_c1()->generateAttributeCode($this->getEntity()->getName())
 					/**
 					 * В Magento CE 1.4, если поле «attribute_model» присутствует,
 					 * то его значение не может быть пустым
@@ -90,7 +90,7 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 					,'is_filterable' => 1
 					,'is_comparable' => 1
 					,'is_visible_on_front' =>
-						df_01(df_1c_cfg()->product()->other()->showAttributesOnProductPage())
+						df_01(df_c1_cfg()->product()->other()->showAttributesOnProductPage())
 					,'is_html_allowed_on_front' => 0
 					,'is_used_for_price_rules' => 0
 					,'is_filterable_in_search' => 1
@@ -113,7 +113,7 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 					,Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
 					,'option' => $this->getEntity()->getOptionsInMagentoFormat()
 				);
-				df_1c_log('Создание справочника «%s».', $this->getEntity()->getName());
+				df_c1_log('Создание справочника «%s».', $this->getEntity()->getName());
 			}
 		}
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */

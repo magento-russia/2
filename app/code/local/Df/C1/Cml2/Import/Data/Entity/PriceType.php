@@ -12,7 +12,7 @@ class Df_C1_Cml2_Import_Data_Entity_PriceType extends Df_C1_Cml2_Import_Data_Ent
 
 	/** @return string */
 	public function getCurrencyCode() {
-		return df_1c_currency_code_to_magento_format($this->leafSne('Валюта'));
+		return df_c1_currency_code_to_magento_format($this->leafSne('Валюта'));
 	}
 
 	/** @return Df_Customer_Model_Group|null */
@@ -45,7 +45,7 @@ class Df_C1_Cml2_Import_Data_Entity_PriceType extends Df_C1_Cml2_Import_Data_Ent
 	}
 
 	/** @return Df_C1_Config_Api_Product_Prices */
-	private function getConfigPrices() {return df_1c_cfg()->product()->prices();}
+	private function getConfigPrices() {return df_c1_cfg()->product()->prices();}
 
 	/** @used-by Df_C1_Cml2_Import_Data_Collection_PriceTypes::itemClass() */
 

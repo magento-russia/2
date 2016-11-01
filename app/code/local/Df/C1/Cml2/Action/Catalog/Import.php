@@ -53,10 +53,10 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			/** @var int $count */
 			$count = $this->getCollections()->getOffers()->count();
 			if (!$count) {
-				df_1c_log('Товарные предложения отсутствуют.');
+				df_c1_log('Товарные предложения отсутствуют.');
 			}
 			else {
-				df_1c_log('Товарных предложений: %d.', $count);
+				df_c1_log('Товарных предложений: %d.', $count);
 				$this->importProductsSimple();
 				/**
 				 * Товарные изображения находятся в файле import.xml (import_*.xml).
@@ -93,18 +93,18 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 		/** @var int $count */
 		$count = $this->getCollections()->getCategories()->count();
 		if (!$count) {
-			df_1c_log('Товарные разделы отсутствуют.');
+			df_c1_log('Товарные разделы отсутствуют.');
 		}
 		else {
-			df_1c_log('Товарных разделов: %d.', $count);
-			df_1c_log('Импорт товарных разделов начат.');
+			df_c1_log('Товарных разделов: %d.', $count);
+			df_c1_log('Импорт товарных разделов начат.');
 			foreach ($this->getCollections()->getCategories() as $category) {
 				/** @var Df_C1_Cml2_Import_Data_Entity_Category $category */
 				Df_C1_Cml2_Import_Processor_Category::i(
 					$this->getState()->import()->getRootCategory(), $category
 				)->process();
 			}
-			df_1c_log('Импорт товарных разделов завершён.');
+			df_c1_log('Импорт товарных разделов завершён.');
 		}
 		return $this;
 	}
@@ -117,7 +117,7 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			/** @var int $countChildren */
 			$countChildren = count($this->getCollections()->getOffersConfigurableChild());
 			if (!$countChildren) {
-				df_1c_log('Настраиваемые товары отсутствуют.');
+				df_c1_log('Настраиваемые товары отсутствуют.');
 			}
 			else {
 				if (df_my_local()) {
@@ -125,19 +125,19 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 						'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!'
 					);
 				}
-				df_1c_log(
+				df_c1_log(
 					'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!'
 				);
 			}
 		}
 		else {
-			df_1c_log('Настраиваемых товаров: %d.', $countParent);
-			df_1c_log('Импорт настраиваемых товаров начат.');
+			df_c1_log('Настраиваемых товаров: %d.', $countParent);
+			df_c1_log('Импорт настраиваемых товаров начат.');
 			foreach ($this->getCollections()->getOffersConfigurableParent() as $offer) {
 				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
 				Df_C1_Cml2_Import_Processor_Product_Type_Configurable::p($offer);
 			}
-			df_1c_log('Импорт настраиваемых товаров завершён.');
+			df_c1_log('Импорт настраиваемых товаров завершён.');
 		}
 		return $this;
 	}
@@ -158,16 +158,16 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 		/** @var int $count */
 		$count = count($this->getCollections()->getOffersSimple());
 		if (!$count) {
-			df_1c_log('Простые товары отсутствуют.');
+			df_c1_log('Простые товары отсутствуют.');
 		}
 		else {
-			df_1c_log('Простых товаров: %d.', $count);
-			df_1c_log('Импорт простых товаров начат.');
+			df_c1_log('Простых товаров: %d.', $count);
+			df_c1_log('Импорт простых товаров начат.');
 			foreach ($this->getCollections()->getOffersSimple() as $offer) {
 				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
 				Df_C1_Cml2_Import_Processor_Product_Type_Simple::i($offer)->process();
 			}
-			df_1c_log('Импорт простых товаров завершён.');
+			df_c1_log('Импорт простых товаров завершён.');
 		}
 		return $this;
 	}
@@ -185,7 +185,7 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 
 	/** @return Df_C1_Cml2_Action_Catalog_Import */
 	private function importReferenceLists() {
-		df_1c_log('Импорт справочников начат.');
+		df_c1_log('Импорт справочников начат.');
 		df_h()->eav()->packetUpdateBegin();
 		foreach ($this->getCollections()->getAttributes() as $attribute) {
 			/** @var Df_C1_Cml2_Import_Data_Entity_Attribute $attribute */
@@ -196,7 +196,7 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			}
 		}
 		df_h()->eav()->packetUpdateEnd();
-		df_1c_log('Импорт справочников завершён.');
+		df_c1_log('Импорт справочников завершён.');
 		return $this;
 	}
 }

@@ -41,7 +41,7 @@ class Df_C1_Cml2_Import_Processor_Category extends Df_C1_Cml2_Import_Processor {
 				,'include_in_menu' => 1
 			), $this->storeId());
 			df()->registry()->categories()->addEntity($category);
-			df_1c_log('Создан товарный раздел «%s».', $category->getName());
+			df_c1_log('Создан товарный раздел «%s».', $category->getName());
 		}
 		foreach ($this->getEntity()->getChildren() as $child) {
 			/** @var Df_C1_Cml2_Import_Data_Entity_Category $child */

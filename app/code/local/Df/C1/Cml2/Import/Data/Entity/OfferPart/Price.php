@@ -2,7 +2,7 @@
 class Df_C1_Cml2_Import_Data_Entity_OfferPart_Price extends Df_C1_Cml2_Import_Data_Entity {
 	/** @return string */
 	public function getCurrencyCode() {
-		return df_1c_currency_code_to_magento_format($this->leafSne('Валюта'));
+		return df_c1_currency_code_to_magento_format($this->leafSne('Валюта'));
 	}
 
 	/**

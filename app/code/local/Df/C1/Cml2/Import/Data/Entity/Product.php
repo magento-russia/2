@@ -36,7 +36,7 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 			// Добавляем к прикладному типу товаров свойство «внешний идентификатор 1С».
 			// Все требуемые для такого добавления операции выполняются только при необходимости
 			// (свойство добавляется, только если оно ещё не было добавлено ранее)
-			df_1c_add_external_id_attribute_to_set($result);
+			df_c1_add_external_id_attribute_to_set($result);
 			df_assert(!is_null($this->getAttributeSets()->findByLabel($this->getAppliedTypeName())));
 			$this->{__METHOD__} = $result;
 		}
@@ -80,7 +80,7 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 			/** @var string $result */
 			$result = $this->leaf('Описание');
 			if (!$result) {
-				$result = df_1c_cfg()->product()->description()->getDefault();
+				$result = df_c1_cfg()->product()->description()->getDefault();
 			}
 			$this->{__METHOD__} = $result;
 		}
