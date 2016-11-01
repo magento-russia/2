@@ -1,6 +1,28 @@
 <?php
+use Varien_Db_Statement_Pdo_Mysql as Statement;
+
 /** @return Varien_Db_Adapter_Pdo_Mysql|Varien_Db_Adapter_Interface */
 function df_conn() {return df_db_resource()->getConnection('write');}
+
+/**
+ * 2016-11-01
+ * http://stackoverflow.com/a/7264865
+ * @param string $table
+ * @param string $column
+ * @return bool
+ */
+function df_db_column_exists($table, $column) {
+	$t_TABLE = df_table($table);
+	/** @var string $query */
+	$query = df_db_quote_into("SHOW COLUMNS FROM `{$t_TABLE}` LIKE ?", $column);
+	/**
+	 * 2016-11-01
+	 * @uses Zend_Db_Statement_Pdo::fetchColumn() в данном случае возвращает $column,
+	 * если колонка в таблицен присутствует, и false, если отсутствует.
+	 * http://stackoverflow.com/a/11305431
+	 */
+	return !!df_conn()->raw_query($query)->fetchColumn();
+}
 
 /**
  * 2016-01-27
@@ -16,9 +38,9 @@ function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier
  * @param int|null $count [optional]
  * @return string
  */
-function df_db_quote_into($text, $value, $type = null, $count = null) {
-	return df_conn()->quoteInto($text, $value, $type, $count);
-}
+function df_db_quote_into($text, $value, $type = null, $count = null) {return
+	df_conn()->quoteInto($text, $value, $type, $count)
+;}
 
 /**
  * 2016-03-26
@@ -294,7 +316,7 @@ function df_table_delete_not($table, $columnName, $values) {
  * @return void
  */
 function df_table_drop($table, $adapter = null) {
-	$adapter = $adapter ? $adapter : df_conn();
+	$adapter = $adapter ?: df_conn();
 	$adapter->raw_query('drop table if exists ' . df_db_quote($table));
 	/**
 	 * Обратите внимание, что изменение структуры базы данных может привести к тому,
