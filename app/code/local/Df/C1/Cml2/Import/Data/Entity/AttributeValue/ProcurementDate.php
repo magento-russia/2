@@ -46,7 +46,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 	 * @override
 	 * @return string
 	 */
-	protected function getAttributeCodeNew() {return 'df_1c__procurement_date';}
+	protected function getAttributeCodeNew() {return 'rm_1c__procurement_date';}
 
 	/**
 	 * @override

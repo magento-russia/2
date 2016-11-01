@@ -25,7 +25,7 @@ class Df_C1_Setup_1_0_2 extends Df_C1_Setup {
 
 	/**
 	 * @param string $entityType
-	 * @param string|null $groupNamg [optional]
+	 * @param string|null $groupName [optional]
 	 * @param int $ordering [optional]
 	 * @return void
 	 */

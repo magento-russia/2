@@ -37,7 +37,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode
 	 * @override
 	 * @return string
 	 */
-	protected function getAttributeCodeNew() {return 'df_1c__barcode';}
+	protected function getAttributeCodeNew() {return 'rm_1c__barcode';}
 
 	/**
 	 * @override

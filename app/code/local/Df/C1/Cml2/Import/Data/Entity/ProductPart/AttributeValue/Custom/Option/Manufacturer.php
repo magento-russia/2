@@ -201,14 +201,14 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Man
 	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
 	protected function findMagentoAttributeInRegistry() {
-		//df_1c__manufacturer
+		//rm_1c__manufacturer
 		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = df_attributes()->findByCode($this->getAttributeCode());
 		/** @var bool $oldAttributeProcessed */
 		static $oldAttributeProcessed = false;
 		if (!$oldAttributeProcessed) {
 			/** @var string $oldCode */
-			$oldCode = 'df_1c__manufacturer';
+			$oldCode = 'rm_1c__manufacturer';
 			/** @var Df_Catalog_Model_Resource_Eav_Attribute $oldAttribute */
 			$oldAttribute = df_attributes()->findByCode($oldCode);
 			if ($oldAttribute) {

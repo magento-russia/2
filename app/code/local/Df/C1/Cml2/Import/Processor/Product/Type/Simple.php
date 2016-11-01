@@ -25,7 +25,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 					$name = $e->getRow()->getFieldValue('sku');
 				}
 				if (!$name) {
-					$name = $e->getRow()->getFieldValue('df_1c_id');
+					$name = $e->getRow()->getFieldValue(Df_C1_Const::ENTITY_EXTERNAL_ID);
 				}
 				$name = $name ? sprintf(' «%s»', $name) : '';
 				df_error(

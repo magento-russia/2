@@ -22,7 +22,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	public function generateAttributeCode($attributeLabel, $prefix = null) {
 		df_param_string_not_empty($attributeLabel, 0);
 		return Df_Eav_Model_Entity_Attribute_Namer::i(
-			$attributeLabel, array_filter(array('df_1c', $prefix))
+			$attributeLabel, array_filter(array('rm_1c', $prefix))
 		)->getResult();
 	}
 
