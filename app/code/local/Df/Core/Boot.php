@@ -63,7 +63,7 @@ class Df_Core_Boot {
 		if (!self::$_done1) {
 			Df_Core_Autoload::register();
 			self::init1();
-			Df_Core_Lib::load('1C');
+			Df_Core_Lib::load('C1');
 			Df_Core_Lib::load('Checkout');
 			Df_Core_Lib::load('Customer');
 			Df_Core_Lib::load('Directory');

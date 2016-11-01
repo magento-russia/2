@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<phpunit
+	bootstrap='t.php'
+	convertErrorsToExceptions="false"
+	convertNoticesToExceptions="false"
+	convertWarningsToExceptions="false"
+>
+	<testsuite name='ALL'>
+		<directory suffix='.php'>*\T</directory>
+	</testsuite>
+</phpunit>
