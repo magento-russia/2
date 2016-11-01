@@ -55,7 +55,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 			 *
 			 * При этом код должен быть уникальным.
 			 */
-			,'code' => Df_MoySklad_Settings_Export_Products::s()->codePrefix() . strval($p->getId())
+			,'code' => \Df\MoySklad\Settings\Export\Products::s()->codePrefix() . strval($p->getId())
 			,'name' => $p->getName()
 			,'salePrices' => array(
 				'currency' => array(
@@ -93,7 +93,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 	public function productsAction() {
 		/** @var array(array(string => string|int)) $resultA */
 		$resultA = array();
-		foreach (Df_MoySklad_Product_Exporter::i()->getResult() as $p) {
+		foreach (\Df\MoySklad\Product\Exporter::i()->getResult() as $p) {
 			/** @var Df_Catalog_Model_Product $p */
 			$resultA[]= array(
 				'id' => $p->getId()
@@ -129,8 +129,8 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 	 * @return Zend_Http_Response
 	 */
 	private function request($method, $suffix = '', array $data = array()) {
-		/** @var Df_MoySklad_Settings_General $s */
-		$s = Df_MoySklad_Settings_General::s();
+		/** @var \Df\MoySklad\Settings\General $s */
+		$s = \Df\MoySklad\Settings\General::s();
 		/** @var Zend_Http_Client $c */
 		$c = new Zend_Http_Client;
 		$c->setUri(df_cc_path('https://online.moysklad.ru/api/remap/1.1/entity/product', $suffix));

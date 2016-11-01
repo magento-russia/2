@@ -1,9 +1,10 @@
 <?php
-class Df_MoySklad_Settings extends Df_Core_Model_Settings {
-	/** @return Df_MoySklad_Settings_Export */
-	public function export() {return Df_MoySklad_Settings_Export::s();}
-	/** @return Df_MoySklad_Settings_General */
-	public function general() {return Df_MoySklad_Settings_General::s();}
+namespace Df\MoySklad;
+class Settings extends \Df_Core_Model_Settings {
+	/** @return Settings\Export */
+	public function export() {return Settings\Export::s();}
+	/** @return Settings\General */
+	public function general() {return Settings\General::s();}
 	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

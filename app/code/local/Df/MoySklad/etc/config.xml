@@ -34,9 +34,7 @@
 		</features>
 	</df>
 	<global>
-		<blocks><df_moysklad><class>Df_MoySklad_Block</class></df_moysklad></blocks>
 		<helpers><df_moysklad><class>Df_MoySklad_Helper</class></df_moysklad></helpers>
-		<models><df_moysklad><class>Df_MoySklad_Model</class></df_moysklad></models>
 		<ignoredModules><entities><df-moysklad/></entities></ignoredModules>
 	</global>
 </config>

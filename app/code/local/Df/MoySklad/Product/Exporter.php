@@ -1,6 +1,7 @@
 <?php
+namespace Df\MoySklad\Product;
 // 2016-10-09
-class Df_MoySklad_Product_Exporter extends Df_Catalog_Model_Product_Exporter {
+class Exporter extends \Df_Catalog_Model_Product_Exporter {
 	/**
 	 * 2016-10-09
 	 * @override
@@ -42,9 +43,9 @@ class Df_MoySklad_Product_Exporter extends Df_Catalog_Model_Product_Exporter {
 	 * @override
 	 * @see Df_Catalog_Product_Exporter::rule()
 	 * @used-by Df_Catalog_Product_Exporter::applyRule()
-	 * @return Mage_CatalogRule_Model_Rule|null
+	 * @return \Mage_CatalogRule_Model_Rule|null
 	 */
-	protected function rule() {return Df_MoySklad_Settings_Export_Products::s()->rule();}
+	protected function rule() {return \Df\MoySklad\Settings\Export\Products::s()->rule();}
 
 	/**
 	 * 2016-10-09
@@ -64,7 +65,7 @@ class Df_MoySklad_Product_Exporter extends Df_Catalog_Model_Product_Exporter {
 
 	/**
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return Df_MoySklad_Product_Exporter
+	 * @return self
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
 }

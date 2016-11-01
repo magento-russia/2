@@ -1,18 +1,19 @@
 <?php
+namespace Df\MoySklad;
 // 2016-10-13
-class Df_MoySklad_Request extends Df_Core_Model {
+class Request extends \Df_Core_Model {
 	/**
 	 * 2016-10-13
 	 * @param string $method
 	 * @param string $suffix [optional]
 	 * @param array[string => mixed] $data [optional]
-	 * @return Zend_Http_Response
+	 * @return \Zend_Http_Response
 	 */
 	private function response($method, $suffix = '', array $data = array()) {
-		/** @var Df_MoySklad_Settings_General $s */
-		$s = Df_MoySklad_Settings_General::s();
-		/** @var Zend_Http_Client $c */
-		$c = new Zend_Http_Client;
+		/** @var \Df\MoySklad\Settings\General $s */
+		$s = \Df\MoySklad\Settings\General::s();
+		/** @var \Zend_Http_Client $c */
+		$c = new \Zend_Http_Client;
 		$c->setUri(df_cc_path('https://online.moysklad.ru/api/remap/1.1/entity/product', $suffix));
 		$c->setAuth($s->login(), $s->password());
 		$c->setHeaders('content-type', 'application/json');

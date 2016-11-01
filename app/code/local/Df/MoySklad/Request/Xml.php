@@ -1,5 +1,4 @@
 <?php
+namespace Df\MoySklad\Request;
 // 2016-10-13
-class Df_MoySklad_Request_Xml extends Df_MoySklad_Request {
-
-}
+class Xml extends \Df\MoySklad\Request {}
