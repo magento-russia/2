@@ -21,7 +21,7 @@ function df_db_column_exists($table, $column) {
 	 * если колонка в таблицен присутствует, и false, если отсутствует.
 	 * http://stackoverflow.com/a/11305431
 	 */
-	return !!df_conn()->raw_query($query)->fetchColumn();
+	return !!df_conn()->query($query)->fetchColumn();
 }
 
 /**
