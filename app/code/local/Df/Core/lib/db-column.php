@@ -13,6 +13,24 @@ function df_db_column_add($table, $name, $definition = 'varchar(255) default nul
 }
 
 /**
+ * 2016-11-04
+ * @param string $table
+ * @param string $column
+ * @return void
+ */
+function df_db_column_drop($table, $column) {
+	// 2016-11-04
+	// df_table нужно вызывать обязательно!
+	df_conn()->dropColumn(df_table($table), $column);
+	/**
+	 * 2016-11-04
+	 * @see Varien_Db_Adapter_Pdo_Mysql::resetDdlCache() здесь вызывать не надо,
+	 * потому что этот метод вызывается из @uses Varien_Db_Adapter_Pdo_Mysql::dropColumn()
+	 * https://github.com/OpenMage/magento-mirror/blob/1.4.0.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L662
+	 */
+}
+
+/**
  * 2016-11-01
  * http://stackoverflow.com/a/7264865
  *

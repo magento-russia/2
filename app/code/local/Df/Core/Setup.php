@@ -21,14 +21,20 @@ class Df_Core_Setup extends Df_Core_Model {
 	 * 2016-11-04
 	 * Добавил функцию @see df_db_column_exists()
 	 *
+	 * 2016-11-04
+	 * Раньше реализация была такой:
+	 * $this->runSilent("alter table {$table} drop column `{$column}`;");
+	 * На самом деле, @uses Varien_Db_Adapter_Pdo_Mysql::dropColumn()
+	 * всегда проверяет наличие колонки перед попыткой её удаления,
+	 * причём даже в старых версиях Magento CE:
+	 * https://github.com/OpenMage/magento-mirror/blob/1.4.0.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L644-L646
+	 *
 	 * @used-by Df_C1_Setup::add1CIdColumnToTable()
 	 * @param string $table
 	 * @param string $column
 	 * @return void
 	 */
-	public function dropColumn($table, $column) {
-		$this->runSilent("alter table {$table} drop column `{$column}`;");
-	}
+	public function dropColumn($table, $column) {df_conn()->dropColumn($table, $column);}
 
 	/**
 	 * @param string $table
