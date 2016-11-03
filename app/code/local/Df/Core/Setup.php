@@ -17,6 +17,10 @@ class Df_Core_Setup extends Df_Core_Model {
 	 * условно удалять колонку таблицы только при её наличии (типа drop column if exists):
 	 * http://stackoverflow.com/questions/173814
 	 * Поэтому мы вынуждены использовать @uses runSilent() вместо @see run().
+	 *
+	 * 2016-11-04
+	 * Добавил функцию @see df_db_column_exists()
+	 *
 	 * @used-by Df_C1_Setup::add1CIdColumnToTable()
 	 * @param string $table
 	 * @param string $column
