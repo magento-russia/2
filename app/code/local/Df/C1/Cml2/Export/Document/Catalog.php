@@ -1,40 +1,33 @@
 <?php
 namespace Df\C1\Cml2\Export\Document;
+use Df_Catalog_Model_Resource_Eav_Attribute as A;
+use Df\C1\Cml2\Export\Processor\Catalog\Attribute as ProcAttribute;
+use Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real as ProcAttributeReal;
+use Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url as ProcAttributeUrl;
+use Df\C1\Cml2\Export\Processor\Catalog\Product as ProcProduct;
 class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getOperationNameInPrepositionalCase() {
-		return 'формировании документа для помощника импорта товаров с сайта';
-	}
+	public function getOperationNameInPrepositionalCase() {return
+		'формировании документа для помощника импорта товаров с сайта'
+	;}
 
 	/**
-	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	 * @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real
+	 * @param A $a
+	 * @return ProcAttributeReal
 	 */
-	public function getProcessorForAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
-		if (!isset($this->{__METHOD__}[$attribute->getName()])) {
-			$this->{__METHOD__}[$attribute->getName()] =
-				\Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::i($attribute, $this)
-			;
-		}
-		return $this->{__METHOD__}[$attribute->getName()];
-	}
+	public function processorForAttribute(A $a) {return dfc($this, function(A $a) {return
+		ProcAttributeReal::i($a, $this)
+	;}, func_get_args());}
 
-	/** @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute[] */
-	public function getProcessorsForVirtualAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute[] $result */
-			$result = array();
-			foreach ($this->getVirtualAttributeProcessorClasses() as $class) {
-				/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute $processor */
-				$result[]= \Df\C1\Cml2\Export\Processor\Catalog\Attribute::ic($class, $this);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return ProcAttribute[] */
+	public function getProcessorsForVirtualAttributes() {return dfc($this, function() {return
+		array_map(function($class) {return
+			ProcAttribute::ic($class, $this)
+		;}, $this->getVirtualAttributeProcessorClasses())
+	;});}
 
 	/** @return \Df\C1\Cml2\Export\DocumentMixin */
 	protected function createMixin() {return \Df\C1\Cml2\Export\DocumentMixin\Catalog::i($this);}
@@ -43,17 +36,15 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	 * @override
 	 * @return array(string => mixed)
 	 */
-	protected function getContentsAsArray() {
-		return array(
-			// Обратите внимание,
-			// что обработку классификатора намеренно осуществляем до обработки товаров,
-			// чтобы перед обработкой товаров
-			// товарным разделам и свойствам были присвоены внешние идентификаторы.
-			'Классификатор' => $this->getКлассификатор()
-			,'Каталог' => $this->getКаталог()
-			,'ПакетПредложений' => $this->getПакетПредложений()
-		);
-	}
+	protected function getContentsAsArray() {return [
+		// Обратите внимание,
+		// что обработку классификатора намеренно осуществляем до обработки товаров,
+		// чтобы перед обработкой товаров
+		// товарным разделам и свойствам были присвоены внешние идентификаторы.
+		'Классификатор' => $this->getКлассификатор()
+		,'Каталог' => $this->getКаталог()
+		,'ПакетПредложений' => $this->getПакетПредложений()
+	];}
 
 	/**
 	 * @override
@@ -65,9 +56,7 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	 * @override
 	 * @return string
 	 */
-	protected function getProcessorClass_products() {
-		return \Df\C1\Cml2\Export\Processor\Catalog\Product::class;
-	}
+	protected function getProcessorClass_products() {return ProcProduct::class;}
 
 	/**
 	 * Нам потребуется обновлять товарные разделы (добавлять к ним внешние идентификаторы.
@@ -80,23 +69,16 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	protected function needUpdateCategories() {return true;}
 
 	/** @return array(string => array(string => array(string => mixed))) */
-	private function getКаталог() {
-		return df_clean_xml(array(
-			'Ид' => $this->getКаталог_Ид()
-			,'ИдКлассификатора' => $this->getКлассификатор_Ид()
-			,'Наименование' => df_cdata($this->getКаталог_Наименование())
-			,'Товары' => array('Товар' => array($this->getOutput_Products()))
-			,'Описание' => df_cdata($this->getКаталог_Описание())
-		));
-	}
+	private function getКаталог() {return df_clean_xml([
+		'Ид' => $this->getКаталог_Ид()
+		,'ИдКлассификатора' => $this->getКлассификатор_Ид()
+		,'Наименование' => df_cdata($this->getКаталог_Наименование())
+		,'Товары' => ['Товар' => [$this->getOutput_Products()]]
+		,'Описание' => df_cdata($this->getКаталог_Описание())
+	]);}
 
 	/** @return string */
-	private function getКаталог_Ид() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_t()->guid();
-		}
-		return $this->{__METHOD__};
-	}
+	private function getКаталог_Ид() {return dfc($this, function() {return df_t()->guid();});}
 
 	/** @return string */
 	private function getКаталог_Наименование() {return $this->store()->getFrontendName();}
@@ -105,15 +87,13 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	private function getКаталог_Описание() {return 'Российская сборка Magento ' . df_version_full();}
 
 	/** @return array(string => mixed) */
-	private function getКлассификатор() {
-		return df_clean_xml(array(
-			'Ид' => $this->getКлассификатор_Ид()
-			,'Наименование' => df_cdata($this->getКлассификатор_Наименование())
-			,'Группы' => $this->getКлассификатор_Группы()
-			,'Свойства' => array('Свойство' => $this->getКлассификатор_Свойства_Свойство())
-			,'ТипыЦен' => array('ТипЦены' => $this->getКлассификатор_ТипыЦен_ТипЦены())
-		));
-	}
+	private function getКлассификатор() {return df_clean_xml([
+		'Ид' => $this->getКлассификатор_Ид()
+		,'Наименование' => df_cdata($this->getКлассификатор_Наименование())
+		,'Группы' => $this->getКлассификатор_Группы()
+		,'Свойства' => ['Свойство' => $this->getКлассификатор_Свойства_Свойство()]
+		,'ТипыЦен' => ['ТипЦены' => $this->getКлассификатор_ТипыЦен_ТипЦены()]
+	]);}
 
 	/** @return array(array(string => mixed)) */
 	private function getКлассификатор_Группы() {
@@ -140,7 +120,7 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 		foreach ($this->getCatalogAttributes() as $attribute) {
 			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real $processor */
-			$processor = $this->getProcessorForAttribute($attribute);
+			$processor = $this->processorForAttribute($attribute);
 			if ($processor->isEligible()) {
 				$result[]= $processor->getResult();
 			}
@@ -191,27 +171,16 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	private function getПакетПредложений_Наименование() {return $this->store()->getFrontendName();}
 
 	/** @return string[] */
-	private function getVirtualAttributeProcessorClasses() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
-				\Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url::class
-			);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup::_construct()
-	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::_construct()
-	 */
-
+	private function getVirtualAttributeProcessorClasses() {return dfc($this, function() {return [
+		ProcAttributeUrl::class
+	];});}
 
 	/**
 	 * @used-by \Df\C1\Cml2\Action\Catalog\Export\Process::createDocument()
 	 * @param \Df_Catalog_Model_Resource_Product_Collection $products
 	 * @return \Df\C1\Cml2\Export\Document\Catalog
 	 */
-	public static function i(\Df_Catalog_Model_Resource_Product_Collection $products) {
-		return self::ic(__CLASS__, $products);
-	}
+	public static function i(\Df_Catalog_Model_Resource_Product_Collection $products) {return
+		self::ic(__CLASS__, $products)
+	;}
 }

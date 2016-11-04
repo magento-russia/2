@@ -22,26 +22,22 @@ class Import extends \Df\C1\Cml2\Action {
 	}
 
 	/** @return string */
-	private function getFileFullPath() {
-		return df_cc_path(\Mage::getBaseDir('var'), 'log', 'site-to-my.xml');
-	}
+	private function getFileFullPath() {return
+		df_cc_path(\Mage::getBaseDir('var'), 'log', 'site-to-my.xml')
+	;}
 
 	/** @return \Df\C1\Cml2\Import\Data\Collection\Orders */
-	private function getOrders() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Orders::i(df_xml_parse($this->getXml()));
-		}
-		return $this->{__METHOD__};
-	}
+	private function getOrders() {return dfc($this, function() {return
+		\Df\C1\Cml2\Import\Data\Collection\Orders::i(df_xml_parse($this->getXml()))				
+	;});}
 
 	/** @return string */
-	private function getXml() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = file_get_contents('php://input');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	private function getXml() {return dfc($this, function() {
+		/** @var mixed $result */
+		$result = file_get_contents('php://input');	
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/** @return void */
 	private function logXml() {df_file_put_contents($this->getFileFullPath(), $this->getXml());}

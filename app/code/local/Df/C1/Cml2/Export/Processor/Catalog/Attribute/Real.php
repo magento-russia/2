@@ -5,117 +5,109 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	 * @override
 	 * @return bool
 	 */
-	public function isEligible() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					/**
-					 * Невидимые свойства:
-					 * category_ids, created_at, has_options, links_exist, old_id,
-					 * price_type, required_options, sku_type, updated_at, url_path, weight_type.
-					 * Думаю, нет смысла экспортировать значения этих свойств.
-					 */
-					$this->getAttribute()->getIsVisible()
-				&&
-					!in_array($this->getAttribute()->getName(), array(
-						// «Макет»
-						'custom_design'
-						// «Вступление в силу»
-						,'custom_design_from'
-						// «Утрата силы»
-						,'custom_design_to'
-						// «Дополнительные макетные правила»
-						,'custom_layout_update'
-						/**
-						 * По стандарту CommerceML 2.08 описание должно передаваться в ветке
-						 * «Каталог/Товары/Товар/Описание».
-						 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-						 * Передавать описание как обычное свойство товаров не нужно.
-						 */
-						,'description'
-						// «Допустимо ли поздравительное сообщение?»
-						,'gift_message_available'
-						/**
-						 * По стандарту CommerceML 2.08 цены должны передаваться в ветке
-						 * «ПакетПредложений/Предложения/Предложение/Цены».
-						 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-						 * Передавать цены как обычные свойства товаров не нужно.
-						 */
-						,'group_price'
-						// «Является ли данный товар периодической услугой?»
-						,'is_recurring'
-						// «В какой момент открывать реальную цену?»
-						,'msrp_display_actual_price_type'
-						// «Накладывает ли производитель на товар ценово-рекламные ограничения?»
-						,'msrp_enabled'
-						/**
-						 * По стандарту CommerceML 2.08 название должно передаваться в ветке
-						 * «Каталог/Товары/Товар/Наименование».
-						 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-						 * Передавать название как обычное свойство товаров не нужно.
-						 */
-						,'name'
-						// «Место отображения свойств»
-						,'options_container'
-						// «Тип макета»
-						,'page_layout'
-						/**
-						 * По стандарту CommerceML 2.08 цены должны передаваться в ветке
-						 * «ПакетПредложений/Предложения/Предложение/Цены».
-						 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-						 * Передавать цены как обычные свойства товаров не нужно.
-						 */
-						,'price'
-						/**
-						 * По стандарту CommerceML 2.08 артикул должен передаваться в ветке
-						 * «Каталог/Товары/Товар/ИдентификаторТовара/Артикул».
-						 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-						 * А текущая версия 4.0.5.2 «Помощника импорта товаров с сайта»
-						 * дополнения 1С-Битрикс для обмена данными с интернет-магазином
-						 * http://www.1c-bitrix.ru/download/1c/ecommerce/4.0.5.2_UT11.1.9.61.zip
-						 * требует размещения поля «Артикул» в ветке
-						 * «Каталог/Товары/Товар/Артикул».
-						 * В любом случае, передавать артикул как обычное свойство товаров не нужно.
-						 */
-						,'sku'
-						// «Состояние» (продавать или нет).
-						// Думаю, клиентам передача значений этого свойства в 1С
-						// пока не потребуется.
-						,'status'
-						/**
-						 * «Налоговая группа».
-						 * Думаю, клиентам передача значений этого свойства в 1С пока не потребуется.
-						 * Однако стандарт CommerceML 2.08 поддерживает передачу таких сведений в ветке
-						 * «Каталог/Товары/Товар/СтавкиНалогов».
-						 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-						 */
-						,'tax_class_id'
-						/**
-						 * Я думаю, передавать внешней системе «url_key» смысла нет.
-						 * Вместо этого разумнее передавать полный веб-адрес товара
-						 * на витрине магазина.
-						 * @see \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url
-						 */
-						,'url_key'
-						// «Видимость».
-						// Думаю, клиентам передача значений этого свойства в 1С
-						// пока не потребуется.
-						,'visibility'
-					))
-				&&
-					/**
-					 * По стандарту CommerceML 2.08 картинки должны передаваться в ветке
-					 * «Каталог/Товары/Товар/Картинка».
-					 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-					 * Передавать картинки как обычные свойства товаров не нужно.
-					 */
-					!in_array($this->getAttribute()->getFrontendInput(), array(
-						'gallery', 'media_image'
-					))
-
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function isEligible() {return dfc($this, function() {return
+			/**
+			 * Невидимые свойства:
+			 * category_ids, created_at, has_options, links_exist, old_id,
+			 * price_type, required_options, sku_type, updated_at, url_path, weight_type.
+			 * Думаю, нет смысла экспортировать значения этих свойств.
+			 */
+			$this->getAttribute()->getIsVisible()
+		&&
+			!in_array($this->getAttribute()->getName(), [
+				// «Макет»
+				'custom_design'
+				// «Вступление в силу»
+				,'custom_design_from'
+				// «Утрата силы»
+				,'custom_design_to'
+				// «Дополнительные макетные правила»
+				,'custom_layout_update'
+				/**
+				 * По стандарту CommerceML 2.08 описание должно передаваться в ветке
+				 * «Каталог/Товары/Товар/Описание».
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 * Передавать описание как обычное свойство товаров не нужно.
+				 */
+				,'description'
+				// «Допустимо ли поздравительное сообщение?»
+				,'gift_message_available'
+				/**
+				 * По стандарту CommerceML 2.08 цены должны передаваться в ветке
+				 * «ПакетПредложений/Предложения/Предложение/Цены».
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 * Передавать цены как обычные свойства товаров не нужно.
+				 */
+				,'group_price'
+				// «Является ли данный товар периодической услугой?»
+				,'is_recurring'
+				// «В какой момент открывать реальную цену?»
+				,'msrp_display_actual_price_type'
+				// «Накладывает ли производитель на товар ценово-рекламные ограничения?»
+				,'msrp_enabled'
+				/**
+				 * По стандарту CommerceML 2.08 название должно передаваться в ветке
+				 * «Каталог/Товары/Товар/Наименование».
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 * Передавать название как обычное свойство товаров не нужно.
+				 */
+				,'name'
+				// «Место отображения свойств»
+				,'options_container'
+				// «Тип макета»
+				,'page_layout'
+				/**
+				 * По стандарту CommerceML 2.08 цены должны передаваться в ветке
+				 * «ПакетПредложений/Предложения/Предложение/Цены».
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 * Передавать цены как обычные свойства товаров не нужно.
+				 */
+				,'price'
+				/**
+				 * По стандарту CommerceML 2.08 артикул должен передаваться в ветке
+				 * «Каталог/Товары/Товар/ИдентификаторТовара/Артикул».
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 * А текущая версия 4.0.5.2 «Помощника импорта товаров с сайта»
+				 * дополнения 1С-Битрикс для обмена данными с интернет-магазином
+				 * http://www.1c-bitrix.ru/download/1c/ecommerce/4.0.5.2_UT11.1.9.61.zip
+				 * требует размещения поля «Артикул» в ветке
+				 * «Каталог/Товары/Товар/Артикул».
+				 * В любом случае, передавать артикул как обычное свойство товаров не нужно.
+				 */
+				,'sku'
+				// «Состояние» (продавать или нет).
+				// Думаю, клиентам передача значений этого свойства в 1С
+				// пока не потребуется.
+				,'status'
+				/**
+				 * «Налоговая группа».
+				 * Думаю, клиентам передача значений этого свойства в 1С пока не потребуется.
+				 * Однако стандарт CommerceML 2.08 поддерживает передачу таких сведений в ветке
+				 * «Каталог/Товары/Товар/СтавкиНалогов».
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 */
+				,'tax_class_id'
+				/**
+				 * Я думаю, передавать внешней системе «url_key» смысла нет.
+				 * Вместо этого разумнее передавать полный веб-адрес товара
+				 * на витрине магазина.
+				 * @see \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url
+				 */
+				,'url_key'
+				// «Видимость».
+				// Думаю, клиентам передача значений этого свойства в 1С
+				// пока не потребуется.
+				,'visibility'
+			])
+		&&
+			/**
+			 * По стандарту CommerceML 2.08 картинки должны передаваться в ветке
+			 * «Каталог/Товары/Товар/Картинка».
+			 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+			 * Передавать картинки как обычные свойства товаров не нужно.
+			 */
+			!in_array($this->getAttribute()->getFrontendInput(), ['gallery', 'media_image'])
+	;});}
 
 	/**       
 	 * @override
@@ -124,7 +116,7 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	protected function getВариантыЗначений() {
 		/** @var array(mixed => mixed) $result */
 		if (!$this->этоСправочник()) {
-			$result = array();
+			$result = [];
 		}
 		else switch ($this->getAttribute()->getSourceModel()) {
 			case 'eav/entity_attribute_source_boolean':
@@ -144,17 +136,14 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	 * @override
 	 * @return string
 	 */
-	protected function getИд() {
-		if (!isset($this->{__METHOD__})) {
-			if (!$this->getAttribute()->get1CId()) {
-				$this->setData(self::$P__ATTRIBUTE, df_attributes()->createOrUpdate(array(
-					\Df\C1\C::ENTITY_EXTERNAL_ID => df_t()->guid()
-				), $this->getAttribute()->getName()));
-			}
-			$this->{__METHOD__} = $this->getAttribute()->get1CId();
+	protected function getИд() {return dfc($this, function() {
+		if (!$this->getAttribute()->get1CId()) {
+			$this->setData(self::$P__ATTRIBUTE, df_attributes()->createOrUpdate(array(
+				\Df\C1\C::ENTITY_EXTERNAL_ID => df_t()->guid()
+			), $this->getAttribute()->getName()));
 		}
-		return $this->{__METHOD__};
-	}
+		return $this->getAttribute()->get1CId();
+	});}
 
 	/**
 	 * Действуем по аналогии с @see Mage_Eav_Model_Entity_Attribute_Frontend_Abstract::getValue()
@@ -164,9 +153,9 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	 * @param \Df_Catalog_Model_Product $product
 	 * @return string|string[]|null
 	 */
-	protected function getЗначение(\Df_Catalog_Model_Product $product) {
-		return $this->getЗначение_postProcess($product->getData($this->getAttribute()->getName()));
-	}
+	protected function getЗначение(\Df_Catalog_Model_Product $product) {return
+		$this->getЗначение_postProcess($product->getData($this->getAttribute()->getName()))
+	;}
 
 	/**
 	 * @override
@@ -184,91 +173,77 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	 * @override
 	 * @return string
 	 */
-	protected function getТипЗначений() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			switch ($this->getAttribute()->getFrontendInput()) {
-				case 'boolean':
-				case 'multiselect':
-				case 'select':
-					/**
-					 * Обратите внимание, что вариант «Булево»
-					 * официально недопустим в текущей версии 2.08 стандарта CommerceML 2
-					 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
-					 * Можно попробовать использовать его на свой страх и риск.
-					 */
-					$result = 'Справочник';
-					break;
-				case 'date':
-					$result = 'Время';
-					break;
-				case 'price':
-					$result = 'Число';
-					break;
-				case 'media_image':
-				case 'text':
-				case 'textarea':
-				case 'weee':
-				default:
-					$result = 'Строка';
-			}
-			$this->{__METHOD__} = $result;
+	protected function getТипЗначений() {return dfc($this, function() {
+		/** @var string $result */
+		switch ($this->getAttribute()->getFrontendInput()) {
+			case 'boolean':
+			case 'multiselect':
+			case 'select':
+				/**
+				 * Обратите внимание, что вариант «Булево»
+				 * официально недопустим в текущей версии 2.08 стандарта CommerceML 2
+				 * http://v8.1c.ru/edi/edi_stnd/90/CML208.XSD
+				 * Можно попробовать использовать его на свой страх и риск.
+				 */
+				$result = 'Справочник';
+				break;
+			case 'date':
+				$result = 'Время';
+				break;
+			case 'price':
+				$result = 'Число';
+				break;
+			case 'media_image':
+			case 'text':
+			case 'textarea':
+			case 'weee':
+			default:
+				$result = 'Строка';
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @return bool
 	 */
-	protected function isМножественное() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = 'multiselect' === $this->getAttribute()->getFrontendInput();
-		}
-		return $this->{__METHOD__};
-	}
+	protected function isМножественное() {return dfc($this, function() {return
+		'multiselect' === $this->getAttribute()->getFrontendInput()
+	;});}
 
 	/** @return \Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute() {return $this->cfg(self::$P__ATTRIBUTE);}
 
 	/** @return array(mixed => mixed) */
-	private function getВариантыЗначений_Boolean() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				array('Справочник' => array(
-					array('ИдЗначения' => 'true', 'Значение' => 'Да')
-					,array('ИдЗначения' => 'false', 'Значение' => 'Нет')
-				))
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getВариантыЗначений_Boolean() {return dfc($this, function() {return
+		['Справочник' => [
+			['ИдЗначения' => 'true', 'Значение' => 'Да']
+			,['ИдЗначения' => 'false', 'Значение' => 'Нет']
+		]]
+	;});}
 
 	/** @return array(mixed => mixed) */
-	private function getВариантыЗначений_CustomSourceModel() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $values */
-			$values = array();
-			// например: catalog/product_attribute_source_countryofmanufacture
-			foreach ($this->getAttribute()->getSource()->getAllOptions() as $option) {
-				/** @var array(string => string) $option */
-				/** @var string $value */
-				$value = dfa($option, 'value');
-				// не экспортируем опцию «-- выберите значение --» («-- Please Select --»)
-				if (!df_empty_string($value)) {
-					$values[]= df_cdata(dfa($option, 'label'));
-				}
+	private function getВариантыЗначений_CustomSourceModel() {return dfc($this, function() {
+		/** @var string[] $values */
+		$values = [];
+		// например: catalog/product_attribute_source_countryofmanufacture
+		foreach ($this->getAttribute()->getSource()->getAllOptions() as $option) {
+			/** @var array(string => string) $option */
+			/** @var string $value */
+			$value = dfa($option, 'value');
+			// не экспортируем опцию «-- выберите значение --» («-- Please Select --»)
+			if (!df_empty_string($value)) {
+				$values[]= df_cdata(dfa($option, 'label'));
 			}
-			$this->{__METHOD__} = array('Значение' => $values);
 		}
-		return $this->{__METHOD__};
-	}
+		return ['Значение' => $values];
+	});}
 
 	/** @return array(mixed => mixed) */
 	private function getВариантыЗначений_SourceTable() {
-		if (!isset($this->{__METHOD__})) {
+		return dfc($this, function() {
 			/** @var array(string => mixed) $values */
-			$values = array();
+			$values = [];
 			foreach ($this->getAttribute()->getOptions($this->store()) as $option) {
 				/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 				/**
@@ -279,13 +254,13 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 					$option->set1CId(df_t()->guid());
 					$option->save();
 				}
-				$values[] = array(
-					'ИдЗначения' => $option->get1CId(), 'Значение' => df_cdata($option->getValue())
-				);
+				$values[] = [
+					'ИдЗначения' => $option->get1CId()
+					,'Значение' => df_cdata($option->getValue())
+				];
 			}
-			$this->{__METHOD__} = array('Справочник' => $values);
-		}
-		return $this->{__METHOD__};
+			return ['Справочник' => $values];
+		});
 	}
 
 	/**
@@ -376,7 +351,7 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	/** @var string */
 	private static $P__ATTRIBUTE = 'attribute';
 	/**
-	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::getProcessorForAttribute()
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::processorForAttribute()
 	 * @static
 	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	 * @param \Df\C1\Cml2\Export\Document\Catalog $document
@@ -386,6 +361,6 @@ class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 		\Df_Catalog_Model_Resource_Eav_Attribute $attribute
 		,\Df\C1\Cml2\Export\Document\Catalog $document
 	) {
-		return new self(array(self::$P__DOCUMENT => $document, self::$P__ATTRIBUTE => $attribute));
+		return new self([self::$P__DOCUMENT => $document, self::$P__ATTRIBUTE => $attribute]);
 	}
 }

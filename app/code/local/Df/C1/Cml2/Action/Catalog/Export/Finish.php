@@ -7,7 +7,7 @@ class Finish extends \Df\C1\Cml2\Action {
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
-	protected function _process() {$this->setResponseLines(array('finished' => 'yes'));}
+	protected function _process() {$this->setResponseLines(['finished' => 'yes']);}
 }
 
 

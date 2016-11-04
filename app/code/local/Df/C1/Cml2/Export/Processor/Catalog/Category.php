@@ -1,8 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog;
-/**
- * @method \Df\C1\Cml2\Export\Document\Catalog getDocument()
- */
+/** @method \Df\C1\Cml2\Export\Document\Catalog getDocument() */
 class Category extends \Df_Catalog_Model_XmlExport_Category {
 	/**
 	 * Структуру данных получил из анализа программного кода
@@ -13,10 +11,10 @@ class Category extends \Df_Catalog_Model_XmlExport_Category {
 	 */
 	public function getResult() {
 		/** @var array(string => mixed) $result */
-		$result = array(
+		$result = [
 			'Ид' => $this->getExternalId()
 			,'Наименование' => df_cdata($this->getCategory()->getName())
-		);
+		];
 		if ($this->getChildren()) {
 			$result['Группы'] = self::process($this->getChildren(), $this->getDocument());
 		}
@@ -32,16 +30,13 @@ class Category extends \Df_Catalog_Model_XmlExport_Category {
 	public function isEligible() {return !!$this->getCategory()->getId();}
 
 	/** @return string */
-	private function getExternalId() {
-		if (!isset($this->{__METHOD__})) {
-			if (!$this->getCategory()->get1CId()) {
-				$this->getCategory()->set1CId(df_t()->guid());
-				$this->getCategory()->saveRm($this->getDocument()->store());
-			}
-			$this->{__METHOD__} = $this->getCategory()->get1CId();
+	private function getExternalId() {return dfc($this, function() {
+		if (!$this->getCategory()->get1CId()) {
+			$this->getCategory()->set1CId(df_t()->guid());
+			$this->getCategory()->saveRm($this->getDocument()->store());
 		}
-		return $this->{__METHOD__};
-	}
+		return $this->getCategory()->get1CId();
+	});}
 
 	/**
 	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::getКлассификатор_Группы()
@@ -51,10 +46,10 @@ class Category extends \Df_Catalog_Model_XmlExport_Category {
 	 */
 	public static function process(array $categories, \Df\C1\Cml2\Export\Document\Catalog $document) {
 		/** @var array(array(string => mixed)) $result */
-		$result = array();
+		$result = [];
 		if ($categories) {
 			/** @var array(array(string => mixed)) $groups */
-			$groups = array();
+			$groups = [];
 			foreach ($categories as $category) {
 				/** @var \Df_Catalog_Model_Category $category */
 				/** @var \Df\C1\Cml2\Export\Processor\Catalog\Category $processor */

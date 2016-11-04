@@ -10,7 +10,5 @@ class Init extends \Df\C1\Cml2\Action {
 	 * @used-by Df_Core_Model_Action::process()
 	 * @return void
 	 */
-	protected function _process() {
-		$this->setResponseLines(array('zip' => 'no', 'file_limit' => -1, ''));
-	}
+	protected function _process() {$this->setResponseLines(['zip' => 'no', 'file_limit' => -1, '']);}
 }

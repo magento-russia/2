@@ -12,15 +12,15 @@ class Process extends \Df\C1\Cml2\Action\GenericExport {
 	 * @used-by \Df\C1\Cml2\Action\GenericExport::getDocument()
 	 * @return \Df\C1\Cml2\Export\Document\Catalog
 	 */
-	protected function createDocument() {
-		return \Df\C1\Cml2\Export\Document\Catalog::i(
-			Exporter::i(array(
+	protected function createDocument() {return
+		\Df\C1\Cml2\Export\Document\Catalog::i(
+			Exporter::i([
 				Exporter::P__RULE => df_c1_cfg()->catalogExport()->getRule()
 				// нам нужны все свойства, потому что мы их экспортируем
 				,Exporter::P__NEED_LOAD_ALL_ATTRIBUTES => true
-			))->getResult()
-		);
-	}
+			])->getResult()
+		)
+	;}
 
 	/**
 	 * @override

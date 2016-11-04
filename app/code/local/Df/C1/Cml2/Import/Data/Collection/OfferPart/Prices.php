@@ -1,17 +1,19 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\OfferPart;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Df\C1\Cml2\Import\Data\Entity\OfferPart\Price;
 class Prices extends \Df\C1\Cml2\Import\Data\Collection {
-	/** @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price|null */
-	public function getMain() {
-		return $this->findByExternalId($this->getState()->getPriceTypes()->getMain()->getExternalId());
-	}
+	/** @return Price|null */
+	public function getMain() {return
+		$this->findByExternalId($this->getState()->getPriceTypes()->getMain()->getExternalId())
+	;}
 
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price::class;}
+	protected function itemClass() {return Price::class;}
 
 	/**
 	 * @override
@@ -26,18 +28,17 @@ class Prices extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
+		$this->_prop(self::$P__OFFER, Offer::class);
 	}
 	/** @var string */
 	private static $P__OFFER = 'offer';
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Offer::getPrices()
-	 * @static
 	 * @param \Df\Xml\X $e
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
-	 * @return \Df\C1\Cml2\Import\Data\Collection\OfferPart\Prices
+	 * @param Offer $offer
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		return new self(array(self::$P__E => $e, self::$P__OFFER => $offer));
-	}
+	public static function i(\Df\Xml\X $e, Offer $offer) {return new self([
+		self::$P__E => $e, self::$P__OFFER => $offer
+	]);}
 }

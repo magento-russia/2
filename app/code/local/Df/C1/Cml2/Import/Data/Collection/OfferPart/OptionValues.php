@@ -1,5 +1,9 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\OfferPart;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue;
+use Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\Anonymous;
+use Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT;
 class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * В версиях ранее 4-й модуля 1С-Битрикс
@@ -64,28 +68,26 @@ class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	public function addAbsentItems() {
 		foreach ($this->getAbsentConfigurableMagentoAttributes() as $attribute) {
 			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-			$this->addItem(\Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT::i2(
-				$this->getOffer(), $attribute
-			));
+			$this->addItem(EmptyT::i2($this->getOffer(), $attribute));
 		}
 	}
 
 	/**
 	 * @param string $attributeId
-	 * @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue
+	 * @return OptionValue
 	 */
 	public function findByAttributeId($attributeId) {
 		df_param_string_not_empty($attributeId, 0);
 		if (!isset($this->{__METHOD__}[$attributeId])) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue|null $result */
+			/** @var OptionValue|null $result */
 			foreach ($this as $optionValue) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
+				/** @var OptionValue $optionValue */
 				if ($attributeId === $optionValue->getAttributeMagento()->getId()) {
 					$result = $optionValue;
 					break;
 				}
 			}
-			df_assert($result instanceof \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue);
+			df_assert($result instanceof OptionValue);
 			$this->{__METHOD__}[$attributeId] = $result;
 		}
 		return $this->{__METHOD__}[$attributeId];
@@ -96,7 +98,7 @@ class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue::class;}
+	protected function itemClass() {return OptionValue::class;}
 
 	/**
 	 * @override
@@ -104,9 +106,7 @@ class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	 * дополнительные, единые для всех элементов, параметры
 	 * @return array(string => mixed)
 	 */
-	protected function itemParams() {
-		return array(\Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue::P__OFFER => $this->getOffer());
-	}
+	protected function itemParams() {return [OptionValue::P__OFFER => $this->getOffer()];}
 
 	/**
 	 * @override
@@ -124,9 +124,7 @@ class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function postInitItems(array $items) {
 		if ($items && $this->getOffer()->isTypeConfigurableChild()) {
-			$this->addItem(\Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\Anonymous::i(
-				$this->getOffer()
-			));
+			$this->addItem(Anonymous::i($this->getOffer()));
 		}
 		/**
 		 * НЕЛЬЗЯ автоматически вызывать здесь @see addAbsentItems(),
@@ -135,20 +133,15 @@ class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	}
 
 	/** @return \Df_Catalog_Model_Resource_Eav_Attribute[] */
-	private function getAbsentConfigurableMagentoAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				// очень красивое решение!
-				array_diff_key(
-					$this->getOffer()->getConfigurableParent()->getConfigurableAttributes()
-					, $this->getOffer()->getConfigurableAttributes()
-				)
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getAbsentConfigurableMagentoAttributes() {return dfc($this, function() {return
+		// очень красивое решение!
+		array_diff_key(
+			$this->getOffer()->getConfigurableParent()->getConfigurableAttributes()
+			, $this->getOffer()->getConfigurableAttributes()
+		)
+	;});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
+	/** @return Offer */
 	private function getOffer() {return $this->cfg(self::$P__OFFER);}
 
 	/**
@@ -157,18 +150,17 @@ class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
+		$this->_prop(self::$P__OFFER, Offer::class);
 	}
 	/** @var string */
 	private static $P__OFFER = 'offer';
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Offer::getOptionValues()
-	 * @static
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @param Offer $offer
 	 * @param \Df\Xml\X $e
-	 * @return \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues
+	 * @return self
 	 */
-	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer, \Df\Xml\X $e) {
-		return new self(array(self::$P__OFFER => $offer, self::$P__E => $e));
-	}
+	public static function i(Offer $offer, \Df\Xml\X $e) {return new self([
+		self::$P__OFFER => $offer, self::$P__E => $e
+	]);}
 }

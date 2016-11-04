@@ -1,23 +1,19 @@
 <?php
 namespace Df\C1\Cml2\Export\DocumentMixin;
+use Df\Xml\Generator\Document as Document;
 class Catalog extends \Df\C1\Cml2\Export\DocumentMixin {
 	/**
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getAttributes() {
-		return array(
-			'xmlns' => 'urn:1C.ru:commerceml_2'
-			/**
-			 * Префикс надо дублировать, иначе он пропадёт.
-			 * http://stackoverflow.com/a/6928183
-			 */
-			,'xmlns:xmlns:xs' => 'http://www.w3.org/2001/XMLSchema'
-			,'xmlns:xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
-			,'ВерсияСхемы' => '2.08'
-			,'ДатаФормирования' => $this->formatDate(\Zend_Date::now())
-		);
-	}
+	public function getAttributes() {return [
+		'xmlns' => 'urn:1C.ru:commerceml_2'
+		// Префикс надо дублировать, иначе он пропадёт: http://stackoverflow.com/a/6928183
+		,'xmlns:xmlns:xs' => 'http://www.w3.org/2001/XMLSchema'
+		,'xmlns:xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+		,'ВерсияСхемы' => '2.08'
+		,'ДатаФормирования' => $this->formatDate(\Zend_Date::now())
+	];}
 
 	/**
 	 * Обратите внимание, что хотя при обмене заказами
@@ -31,10 +27,8 @@ class Catalog extends \Df\C1\Cml2\Export\DocumentMixin {
 
 	/**
 	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::createMixin()
-	 * @param \Df\Xml\Generator\Document $parent
-	 * @return \Df\C1\Cml2\Export\DocumentMixin\Catalog
+	 * @param Document$parent
+	 * @return self
 	 */
-	public static function i(\Df\Xml\Generator\Document $parent) {
-		return self::ic(__CLASS__, $parent);
-	}
+	public static function i(Document $parent) {return self::ic(__CLASS__, $parent);}
 }

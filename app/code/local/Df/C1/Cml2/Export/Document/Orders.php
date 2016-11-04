@@ -1,5 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\Document;
+use Df_Sales_Model_Resource_Order_Collection as OC;
 class Orders extends \Df\Xml\Generator\Document {
 	/**
 	 * @override
@@ -27,17 +28,15 @@ class Orders extends \Df\Xml\Generator\Document {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ORDERS, \Df_Sales_Model_Resource_Order_Collection::class);
+		$this->_prop(self::$P__ORDERS, OC::class);
 	}
 	/** @var string */
 	private static $P__ORDERS = 'orders';
 	/**
 	 * @used-by \Df\C1\Cml2\Action\Orders\Export::createDocument()
 	 * @static
-	 * @param \Df_Sales_Model_Resource_Order_Collection $orders
+	 * @param OC $orders
 	 * @return \Df\C1\Cml2\Export\Document\Orders
 	 */
-	public static function i(\Df_Sales_Model_Resource_Order_Collection $orders) {
-		return new self(array(self::$P__ORDERS => $orders));
-	}
+	public static function i(OC $orders) {return new self([self::$P__ORDERS => $orders]);}
 }

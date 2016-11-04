@@ -1,16 +1,18 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\Order;
+use Df\C1\Cml2\Import\Data\Entity\Order;
+use Df\C1\Cml2\Import\Data\Entity\Order\Item;
 class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @param int $productId
-	 * @return \Df\C1\Cml2\Import\Data\Entity\Order\Item
+	 * @return Item
 	 */
 	public function getItemByProductId($productId) {
 		df_param_integer($productId, 0);
 		df_param_between($productId, 0, 1);
-		/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item $result */
+		/** @var Item $result */
 		$result = dfa($this->getMapFromProductIdToOrderItem(), $productId);
-		df_assert($result instanceof \Df\C1\Cml2\Import\Data\Entity\Order\Item);
+		df_assert($result instanceof Item);
 		return $result;
 	}
 
@@ -21,25 +23,25 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @return void
 	 */
 	protected function initItems() {
-		/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item[] $result */
+		/** @var Item[] $result */
 		$result = array();
-		/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item[] $mapFromProductsToOrderItems */
+		/** @var Item[] $mapFromProductsToOrderItems */
 		$mapFromProductsToOrderItems = array();
 		foreach ($this->getImportEntitiesAsSimpleXMLElementArray() as $e) {
 			/** @var \Df\Xml\X $e */
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item $orderItem */
+			/** @var Item $orderItem */
 			$orderItem = $this->createItem($e);
-			df_assert($orderItem instanceof \Df\C1\Cml2\Import\Data\Entity\Order\Item);
+			df_assert($orderItem instanceof Item);
 			/** @var int $productId */
 			$productId = $orderItem->getProduct()->getId();
 			df_assert_integer($productId);
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item[] $orderItemsForTheProduct */
+			/** @var Item[] $orderItemsForTheProduct */
 			$orderItemsForTheProduct = df_nta(dfa($mapFromProductsToOrderItems, $productId));
 			$orderItemsForTheProduct[]= $orderItem;
 			$mapFromProductsToOrderItems[$productId] = $orderItemsForTheProduct;
 		}
 		foreach ($mapFromProductsToOrderItems as $orderItemsForTheProduct) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item[] $orderItemsForTheProduct */
+			/** @var Item[] $orderItemsForTheProduct */
 			/** @var int $orderItemsCount */
 			$orderItemsCount = count($orderItemsForTheProduct);
 			df_assert_gt0($orderItemsCount);
@@ -64,15 +66,13 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Order\Item::class;}
+	protected function itemClass() {return Item::class;}
 
 	/**
 	 * @override
 	 * @return array(string = mixed)
 	 */
-	protected function itemParams() {
-		return array(\Df\C1\Cml2\Import\Data\Entity\Order\Item::P__ENTITY_ORDER => $this->getEntityOrder());
-	}
+	protected function itemParams() {return [Item::P__ENTITY_ORDER => $this->getEntityOrder()];}
 
 	/**
 	 * @override
@@ -81,18 +81,16 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function itemPath() {return 'Товары/Товар';}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Order */
-	private function getEntityOrder() {
-		return $this->cfg(self::$P__ENTITY_ORDER);
-	}
+	/** @return Order */
+	private function getEntityOrder() {return $this->cfg(self::$P__ENTITY_ORDER);}
 
-	/** @return array(int => \Df\C1\Cml2\Import\Data\Entity\Order\Item) */
+	/** @return array(int => Item) */
 	private function getMapFromProductIdToOrderItem() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(int => \Df\C1\Cml2\Import\Data\Entity\Order\Item) $result */
+			/** @var array(int => Item) $result */
 			$result = array();
 			foreach ($this->getItems() as $entityOrderItem) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item $entityOrderItem */
+				/** @var Item $entityOrderItem */
 				/** @var int $productId */
 				$productId = $entityOrderItem->getProduct()->getId();
 				df_assert_gt0($productId);
@@ -110,18 +108,17 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY_ORDER, \Df\C1\Cml2\Import\Data\Entity\Order::class);
+		$this->_prop(self::$P__ENTITY_ORDER, Order::class);
 	}
 	/** @var string */
 	private static $P__ENTITY_ORDER = 'entity_order';
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Order::getItems()
-	 * @static
 	 * @param \Df\Xml\X $e
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Order $order
-	 * @return \Df\C1\Cml2\Import\Data\Collection\Order\Items
+	 * @param Order $order
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Order $order) {
-		return new self(array(self::$P__E => $e, self::$P__ENTITY_ORDER => $order));
-	}
+	public static function i(\Df\Xml\X $e, Order $order) {return new self([
+		self::$P__E => $e, self::$P__ENTITY_ORDER => $order
+	]);}
 }

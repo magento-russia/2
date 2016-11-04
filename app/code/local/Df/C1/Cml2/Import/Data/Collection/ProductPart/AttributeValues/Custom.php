@@ -1,5 +1,8 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues;
+use Df\C1\Cml2\Import\Data\Entity\Product as EntityProduct;
+use Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom as Value;
+use Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer;
 /** @method \Df\C1\Cml2\Import\Data\Entity\AttributeValue[] getItems() */
 class Custom extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
@@ -8,10 +11,8 @@ class Custom extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @param \Df\Xml\X $e
 	 * @return \Df\C1\Cml2\Import\Data\Entity
 	 */
-	protected function createItem(\Df\Xml\X $e) {
-		return \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::ic(
-			$this->itemClassAdvanced($e), $e, $this->getProduct()
-		);
+	protected function createItem(\Df\Xml\X $e) {return
+		Value::ic($this->itemClassAdvanced($e), $e, $this->getProduct());
 	}
 
 	/**
@@ -119,18 +120,14 @@ class Custom extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::postInitItems()
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
-	 * @param \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom[] $items
+	 * @param Value[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {
 		/** @var \Df\Xml\X|null $xmlManufacturer */
 		$xmlManufacturer = $this->e()->descend('Изготовитель');
 		if ($xmlManufacturer) {
-			$this->addItem(
-				\Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer::i(
-					$xmlManufacturer, $this->getProduct()
-				)
-			);
+			$this->addItem(Manufacturer::i($xmlManufacturer, $this->getProduct()));
 		}
 	}
 
@@ -143,18 +140,17 @@ class Custom extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCT, \Df\C1\Cml2\Import\Data\Entity\Product::class);
+		$this->_prop(self::$P__PRODUCT, EntityProduct::class);
 	}
 	/** @var string */
 	private static $P__PRODUCT = 'product';
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Product::getAttributeValuesCustom()
-	 * @static
 	 * @param \Df\Xml\X $e
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Product $product
+	 * @param EntityProduct $product
 	 * @return \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom
 	 */
-	public static function i(\Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Product $product) {
-		return new self(array(self::$P__E => $e, self::$P__PRODUCT => $product));
-	}
+	public static function i(\Df\Xml\X $e, EntityProduct $product) {return new self([
+		self::$P__E => $e, self::$P__PRODUCT => $product
+	]);}
 }

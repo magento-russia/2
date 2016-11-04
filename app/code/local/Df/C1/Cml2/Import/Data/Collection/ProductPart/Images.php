@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ProductPart;
-class Images
-	extends \Df\C1\Cml2\Import\Data\Collection {
+class Images extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @uses unlink()
 	 * @return void
@@ -9,13 +8,10 @@ class Images
 	public function deleteFiles() {@array_map('unlink', $this->getFullPaths());}
 
 	/** @return string[] */
-	public function getFullPaths() {
-		if (!isset($this->{__METHOD__})) {
-			/** @uses \Df\C1\Cml2\Import\Data\Entity\ProductPart\Image::getFilePathFull() */
-			$this->{__METHOD__} = df_each($this, 'getFilePathFull');
-		}
-		return $this->{__METHOD__};
-	}
+	public function getFullPaths() {return dfc($this, function() {return
+		/** @uses \Df\C1\Cml2\Import\Data\Entity\ProductPart\Image::getFilePathFull() */
+		df_each($this, 'getFilePathFull')
+	;});}
 
 	/**
 	 * @override

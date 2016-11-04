@@ -1,14 +1,15 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog\Attribute;
+use Df\C1\Cml2\Export\Document\Catalog as DocumentCatalog;
 class Url extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	/**
 	 * @override
 	 * @param \Df_Catalog_Model_Product $product
 	 * @return string|string[]|null
 	 */
-	protected function getЗначение(\Df_Catalog_Model_Product $product) {
-		return $this->getDocument()->getProcessorForProduct($product)->getUrl();
-	}
+	protected function getЗначение(\Df_Catalog_Model_Product $product) {return
+		$this->getDocument()->getProcessorForProduct($product)->getUrl()
+	;}
 
 	/**
 	 * @override
@@ -34,15 +35,10 @@ class Url extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	 */
 	protected function getТипЗначений() {return 'Строка';}
 
-	/** @used-by \Df\C1\Cml2\Export\Document\Catalog::getVirtualAttributeProcessorClasses() */
-
-
 	/**
 	 * @static
-	 * @param \Df\C1\Cml2\Export\Document\Catalog $document
+	 * @param DocumentCatalog $document
 	 * @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url
 	 */
-	public static function i(\Df\C1\Cml2\Export\Document\Catalog $document) {
-		return self::ic(__CLASS__, $document);
-	}
+	public static function i(DocumentCatalog $document) {return self::ic(__CLASS__, $document);}
 }
