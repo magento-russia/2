@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2;
 class Df_C1_Cml2_Cookie {
 	/** @return string|null */
 	public function getSessionId() {return $this->get(self::SESSION_ID);}

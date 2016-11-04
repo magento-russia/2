@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\Data\Entity;
 class Df_C1_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 	/** @return string */
 	public function getDateOfBirthAsString() {

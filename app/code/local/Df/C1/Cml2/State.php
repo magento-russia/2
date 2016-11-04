@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2;
 class Df_C1_Cml2_State {
 	/** @return Df_C1_Cml2_State_Export */
 	public function export() {return Df_C1_Cml2_State_Export::s();}

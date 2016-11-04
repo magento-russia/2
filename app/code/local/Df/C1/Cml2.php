@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1;
 class Df_C1_Cml2 extends Df_Core_Model {
 	/** @return Df_C1_Cml2_Import_Data_Document */
 	protected function getDocumentCurrent() {return $this->getFileCurrent()->getXmlDocument();}

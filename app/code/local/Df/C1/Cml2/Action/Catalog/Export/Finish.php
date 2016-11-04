@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Action\Catalog\Export;
 class Df_C1_Cml2_Action_Catalog_Export_Finish extends Df_C1_Cml2_Action {
 	/**
 	 * @override

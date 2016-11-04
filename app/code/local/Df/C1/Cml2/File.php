@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2;
 class Df_C1_Cml2_File extends Df_Core_Model {
 	/** @return string */
 	public function getNameBase() {

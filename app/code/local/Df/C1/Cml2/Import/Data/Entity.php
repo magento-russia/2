@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data;
 abstract class Df_C1_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entity {
 	/** @return string */
 	public function getExternalId() {

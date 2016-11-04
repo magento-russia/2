@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2;
 class Df_C1_Cml2_FileSystem {
 	/** @return string */
 	public function getBaseDir() {

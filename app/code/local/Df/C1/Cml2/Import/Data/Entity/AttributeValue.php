@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity;
 abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 	extends Df_C1_Cml2_Import_Data_Entity {
 	/**

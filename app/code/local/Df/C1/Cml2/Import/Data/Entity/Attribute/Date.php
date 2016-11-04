@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity\Attribute;
 class Df_C1_Cml2_Import_Data_Entity_Attribute_Date
 	extends Df_C1_Cml2_Import_Data_Entity_Attribute {
 	/**

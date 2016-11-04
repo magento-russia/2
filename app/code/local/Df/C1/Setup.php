@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1;
 abstract class Df_C1_Setup extends Df_Core_Setup {
 	/**
 	 * Не забывайте после вызова этого метода вызывать @see df_cache_clean().

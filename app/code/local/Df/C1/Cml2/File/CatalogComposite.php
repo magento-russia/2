@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\File;
 class Df_C1_Cml2_File_CatalogComposite extends Df_C1_Cml2_File {
 	/**
 	 * @override

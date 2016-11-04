@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Action\Catalog;
 class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 	/** @return \Df\Xml\X */
 	protected function e() {return $this->getFileCurrent()->getXml();}

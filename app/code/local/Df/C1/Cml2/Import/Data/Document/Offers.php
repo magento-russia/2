@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Document;
 class Df_C1_Cml2_Import_Data_Document_Offers extends Df_C1_Cml2_Import_Data_Document {
 	/** @return string */
 	public function getExternalId() {

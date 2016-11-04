@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Action\Orders;
 class Df_C1_Cml2_Action_Orders_Import extends Df_C1_Cml2_Action {
 	/**
 	 * Обратите внимание,

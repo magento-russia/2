@@ -1,4 +1,11 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity\Attribute;
+/**
+ * 2016-11-04
+ * «Boolean» (unlike «Bool») is not a reserved word in PHP 7 nor PHP 5.x
+ * https://3v4l.org/OP3MZ
+ * http://php.net/manual/en/reserved.other-reserved-words.php
+ */
 class Df_C1_Cml2_Import_Data_Entity_Attribute_Boolean
 	extends Df_C1_Cml2_Import_Data_Entity_Attribute {
 	/**

@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import;
 abstract class Df_C1_Cml2_Import_Processor extends Df_C1_Cml2 {
 	/**
 	 * @abstract

@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Collection\Order;
 class Df_C1_Cml2_Import_Data_Collection_Order_Items
 	extends Df_C1_Cml2_Import_Data_Collection {
 	/**

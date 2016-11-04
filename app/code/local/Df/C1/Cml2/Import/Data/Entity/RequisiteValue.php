@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity;
 /**
  * Соответствует структуре вида:
 		<ЗначениеРеквизита>

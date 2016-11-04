@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity;
 class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity {
 	/** @return array(string => Df_Catalog_Model_Resource_Eav_Attribute) */
 	public function getConfigurableAttributes() {

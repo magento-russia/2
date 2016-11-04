@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Collection\ProductPart;
 class Df_C1_Cml2_Import_Data_Collection_ProductPart_Images
 	extends Df_C1_Cml2_Import_Data_Collection {
 	/**

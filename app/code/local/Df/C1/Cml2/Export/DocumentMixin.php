@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export;
 class Df_C1_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	/**
 	 * @override

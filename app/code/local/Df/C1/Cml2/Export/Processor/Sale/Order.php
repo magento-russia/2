@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\Processor\Sale;
 class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor_Sale {
 	/** @return void */
 	public function process() {

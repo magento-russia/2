@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity;
 class Df_C1_Cml2_Import_Data_Entity_Category extends Df_C1_Cml2_Import_Data_Entity {
 	/** @return Df_C1_Cml2_Import_Data_Collection_Categories */
 	public function getChildren() {

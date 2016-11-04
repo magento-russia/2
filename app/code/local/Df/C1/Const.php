@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1;
 interface Df_C1_Const {
 	/**
 	 * Имя свойства (или колонки таблицы),

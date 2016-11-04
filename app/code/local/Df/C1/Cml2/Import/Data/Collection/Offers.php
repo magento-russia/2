@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Collection;
 class Df_C1_Cml2_Import_Data_Collection_Offers extends Df_C1_Cml2_Import_Data_Collection {
 	/**
 	 * Заметил в магазине термобелье.su,

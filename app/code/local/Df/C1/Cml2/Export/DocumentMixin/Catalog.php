@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\DocumentMixin;
 class Df_C1_Cml2_Export_DocumentMixin_Catalog extends Df_C1_Cml2_Export_DocumentMixin {
 	/**
 	 * @override

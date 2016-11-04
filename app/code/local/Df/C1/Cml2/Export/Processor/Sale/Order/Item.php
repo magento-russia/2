@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\Processor\Sale\Order;
 class Df_C1_Cml2_Export_Processor_Sale_Order_Item extends Df_C1_Cml2_Export_Processor_Sale {
 	/** @return array(string => mixed) */
 	public function getDocumentData() {

@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Action\Orders;
 // Экспорт заказов из интернет-магазина в 1С:Управление торговлей
 class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
 	/**

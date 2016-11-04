@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2;
 /** @method Df_C1_Cml2_InputRequest_Generic rmRequest() */
 abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 	/** @return Df_C1_Cml2_State */

@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Action\Catalog\Export;
 /**
  * Экспорт товаров из интернет-магазина в 1С:Управление торговлей
  * http://1c.1c-bitrix.ru/blog/blog1c/catalog_import.php

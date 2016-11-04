@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Collection\OfferPart;
 class Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_C1_Cml2_Import_Data_Collection {
 	/** @return Df_C1_Cml2_Import_Data_Entity_OfferPart_Price|null */
 	public function getMain() {

@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\Processor\Catalog\Attribute;
 class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Url
 	extends Df_C1_Cml2_Export_Processor_Catalog_Attribute {
 	/**

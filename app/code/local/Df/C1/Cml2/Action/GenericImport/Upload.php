@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Action\GenericImport;
 class Df_C1_Cml2_Action_GenericImport_Upload extends Df_C1_Cml2_Action_GenericImport {
 	/**
 	 * @override

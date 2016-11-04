@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\Document;
 class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override

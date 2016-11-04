@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1;
 class Df_C1_Observer {
 	/**
 	 * @used-by Mage_Core_Model_App::_callObserverMethod()

@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Export\Processor\Catalog;
 /**
  * @method Df_C1_Cml2_Export_Document_Catalog getDocument()
  */
