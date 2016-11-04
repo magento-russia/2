@@ -7,9 +7,15 @@
  * @return void
  */
 function df_db_column_add($table, $name, $definition = 'varchar(255) default null') {
-	$table = df_table($table);
-	df_conn()->query("alter table {$table} add column `{$name}` {$definition};");
-	df_conn()->resetDdlCache($table);
+	// 2016-11-04
+	// df_table нужно вызывать обязательно!
+	df_conn()->addColumn(df_table($table), $name, $definition);
+	/**
+	 * 2016-11-04
+	 * @see Varien_Db_Adapter_Pdo_Mysql::resetDdlCache() здесь вызывать не надо,
+	 * потому что этот метод вызывается из @uses Varien_Db_Adapter_Pdo_Mysql::addColumn()
+	 * https://github.com/OpenMage/magento-mirror/blob/1.4.0.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L630
+	 */
 }
 
 /**
