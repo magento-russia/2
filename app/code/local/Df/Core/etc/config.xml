@@ -7,6 +7,13 @@
 		</Df_Core>
 	</modules>
 	<df>
+<!--
+2016-11-04
+Требуется Magento CE не ниже 1.6.1.0 (вышла в октябре 2011 года).
+В более ранних версиях отсутствует используемый метод
+Varien_Db_Adapter_Pdo_Mysql::getColumnCreateByDescribe()
+https://github.com/OpenMage/magento-mirror/blob/1.6.1.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L1590
+-->
 		<version>3.0.0</version>
 		<jquery>
 			<core>
