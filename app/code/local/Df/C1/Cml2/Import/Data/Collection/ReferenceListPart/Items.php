@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ReferenceListPart;
-class Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items
-	extends Df_C1_Cml2_Import_Data_Collection {
+class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @return \Df\Xml\X[]
@@ -20,7 +19,7 @@ class Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item::class;}
 
 	/**
 	 * 1С:Управление торговлей 10.2 + дополнение от Битрикса:
@@ -75,10 +74,10 @@ class Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items
 	private function itemPath2() {return 'ВариантыЗначений/Справочник';}
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList::getItems()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList::getItems()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items
+	 * @return \Df\C1\Cml2\Import\Data\Collection\ReferenceListPart\Items
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

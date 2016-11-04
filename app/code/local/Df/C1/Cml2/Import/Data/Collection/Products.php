@@ -1,12 +1,12 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
-class Df_C1_Cml2_Import_Data_Collection_Products extends Df_C1_Cml2_Import_Data_Collection {
+class Products extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_Product::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Product::class;}
 
 	/**
 	 * @override
@@ -16,10 +16,10 @@ class Df_C1_Cml2_Import_Data_Collection_Products extends Df_C1_Cml2_Import_Data_
 	protected function itemPath() {return '/КоммерческаяИнформация/Каталог/Товары/Товар';}
 
 	/**
-	 * @used-by Df_C1_Cml2_State_Import_Collections::getProducts()
+	 * @used-by \Df\C1\Cml2\State\Import\Collections::getProducts()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Collection_Products
+	 * @return \Df\C1\Cml2\Import\Data\Collection\Products
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

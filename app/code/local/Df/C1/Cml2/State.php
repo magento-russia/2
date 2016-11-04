@@ -1,15 +1,15 @@
 <?php
 namespace Df\C1\Cml2;
-class Df_C1_Cml2_State {
-	/** @return Df_C1_Cml2_State_Export */
-	public function export() {return Df_C1_Cml2_State_Export::s();}
+class State {
+	/** @return \Df\C1\Cml2\State\Export */
+	public function export() {return \Df\C1\Cml2\State\Export::s();}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_PriceTypes */
-	public function getPriceTypes() {return Df_C1_Cml2_Import_Data_Collection_PriceTypes::s();}
+	/** @return \Df\C1\Cml2\Import\Data\Collection\PriceTypes */
+	public function getPriceTypes() {return \Df\C1\Cml2\Import\Data\Collection\PriceTypes::s();}
 
-	/** @return Df_C1_Cml2_State_Import */
-	public function import() {return Df_C1_Cml2_State_Import::s();}
+	/** @return \Df\C1\Cml2\State\Import */
+	public function import() {return \Df\C1\Cml2\State\Import::s();}
 
-	/** @return Df_C1_Cml2_State */
+	/** @return \Df\C1\Cml2\State */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

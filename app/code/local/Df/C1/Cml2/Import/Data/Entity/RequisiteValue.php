@@ -39,7 +39,7 @@ namespace Df\C1\Cml2\Import\Data\Entity;
  * когда для узла обмена 1С включена опция «Выгружать планируемую дату поступления товара».
  * При этом все остальные реквизиты по-прежнему передаются через файл catalog_*.xml.
  */
-class Df_C1_Cml2_Import_Data_Entity_RequisiteValue extends Df_C1_Cml2_Import_Data_Entity {
+class RequisiteValue extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * @override
 	 * @return string
@@ -48,7 +48,4 @@ class Df_C1_Cml2_Import_Data_Entity_RequisiteValue extends Df_C1_Cml2_Import_Dat
 
 	/** @return string|null */
 	public function getValue() {return $this->leaf('Значение');}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_RequisiteValues::itemClass() */
-
 }

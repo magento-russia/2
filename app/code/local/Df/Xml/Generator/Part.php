@@ -53,7 +53,7 @@ abstract class Part extends \Df_Core_Model {
 	protected function preprocessUrl($url) {return $this->getDocument()->preprocessUrl($url);}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real::getВариантыЗначений_SourceTable()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::getВариантыЗначений_SourceTable()
 	 * @used-by Df_Catalog_Model_XmlExport_Product::removeRootCategoryId()
 	 * @return \Df_Core_Model_StoreM
 	 */

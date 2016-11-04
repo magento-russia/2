@@ -32,13 +32,13 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			/** @var int $value */
 			$value = df_nat0($oldOption->getData('option_id'));
 			df_assert_integer($value);
-			if (!Df_C1_Config_Source_ReferenceListUpdateMode::isNone($updateMode)) {
+			if (!\Df\C1\Config\Source\ReferenceListUpdateMode::isNone($updateMode)) {
 				// Сохраняем те старые опции, у которых нет идентификаторов из 1С,
 				// потому что они были введены администратором вручную.
 				if (
 						!$oldOption->get1CId()
 					||
-						Df_C1_Config_Source_ReferenceListUpdateMode::isAll($updateMode)
+						\Df\C1\Config\Source\ReferenceListUpdateMode::isAll($updateMode)
 				) {
 					$oldValuesToPreserve[]= $value;
 				}

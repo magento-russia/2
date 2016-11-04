@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Cml2_State_Import_Collections extends Df_Core_Model {
+namespace Df\C1\Cml2\State\Import;
+class Collections extends \Df_Core_Model {
 	/**
 	 * Если каталог разбит на несколько файлов,
 	 * то товарные свойства содержатся именно в файле со структурой:
@@ -12,59 +13,59 @@ class Df_C1_Cml2_State_Import_Collections extends Df_Core_Model {
 					СписокЕдиниц 	= РазбитаяСтруктураДанных.Единицы;
 				КонецЕсли;
 				(...)
-	 * @return Df_C1_Cml2_Import_Data_Collection_Attributes
+	 * @return \Df\C1\Cml2\Import\Data\Collection\Attributes
 	 */
 	public function getAttributes() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_Attributes::i(
-				Df_C1_Cml2_State_Import::s()->getFileCatalogAttributes()->getXml()
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Attributes::i(
+				\Df\C1\Cml2\State\Import::s()->getFileCatalogAttributes()->getXml()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Categories */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Categories */
 	public function getCategories() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_Categories::i(
-				Df_C1_Cml2_State_Import::s()->getFileCatalogStructure()->getXml()
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Categories::i(
+				\Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml()
 				, array('', 'КоммерческаяИнформация', 'Классификатор', 'Группы', 'Группа')
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Offers */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Offers */
 	public function getOffers() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_Offers::i(
-				Df_C1_Cml2_State_Import::s()->getFileOffers()->getXml()
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Offers::i(
+				\Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Offers */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Offers */
 	public function getOffersBase() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_C1_Cml2_State_Import::s()->getDocumentCurrentAsOffers()->isBase()
+				\Df\C1\Cml2\State\Import::s()->getDocumentCurrentAsOffers()->isBase()
 				? $this->getOffers()
-				: Df_C1_Cml2_Import_Data_Collection_Offers::i(
-					Df_C1_Cml2_State_Import::s()->getFileOffersBase()->getXml()
+				: \Df\C1\Cml2\Import\Data\Collection\Offers::i(
+					\Df\C1\Cml2\State\Import::s()->getFileOffersBase()->getXml()
 				)
 			;
 		}
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer[] */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
 	public function getOffersConfigurableChild() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer[] $result  */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
 			$result = array();
 			foreach ($this->getOffers() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				if ($offer->isTypeConfigurableChild()) {
 					$result[]= $offer;
 				}
@@ -74,13 +75,13 @@ class Df_C1_Cml2_State_Import_Collections extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer[] */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
 	public function getOffersConfigurableParent() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer[] $result  */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
 			$result = array();
 			foreach ($this->getOffers() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				if ($offer->isTypeConfigurableParent()) {
 					$result[]= $offer;
 				}
@@ -90,13 +91,13 @@ class Df_C1_Cml2_State_Import_Collections extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer[] */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
 	public function getOffersSimple() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer[] $result  */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
 			$result = array();
 			foreach ($this->getOffers() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				if ($offer->isTypeSimple()) {
 					$result[]= $offer;
 				}
@@ -106,19 +107,19 @@ class Df_C1_Cml2_State_Import_Collections extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Products */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Products */
 	public function getProducts() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_Products::i(
-				Df_C1_Cml2_State_Import::s()->getFileCatalogProducts()->getXml()
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Products::i(
+				\Df\C1\Cml2\State\Import::s()->getFileCatalogProducts()->getXml()
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_State_Import_Collections */
+	/** @return \Df\C1\Cml2\State\Import\Collections */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
-	/** @return Df_C1_Cml2_State */
-	private static function state() {return Df_C1_Cml2_State::s();}
+	/** @return \Df\C1\Cml2\State */
+	private static function state() {return \Df\C1\Cml2\State::s();}
 }

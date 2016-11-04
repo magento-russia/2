@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog\Attribute;
-class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
-	extends Df_C1_Cml2_Export_Processor_Catalog_Attribute {
+class Real extends \Df\C1\Cml2\Export\Processor\Catalog\Attribute {
 	/**
 	 * @override
 	 * @return bool
@@ -94,7 +93,7 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 						 * Я думаю, передавать внешней системе «url_key» смысла нет.
 						 * Вместо этого разумнее передавать полный веб-адрес товара
 						 * на витрине магазина.
-						 * @see Df_C1_Cml2_Export_Processor_Catalog_Attribute_Url
+						 * @see \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url
 						 */
 						,'url_key'
 						// «Видимость».
@@ -149,7 +148,7 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 		if (!isset($this->{__METHOD__})) {
 			if (!$this->getAttribute()->get1CId()) {
 				$this->setData(self::$P__ATTRIBUTE, df_attributes()->createOrUpdate(array(
-					Df_C1_Const::ENTITY_EXTERNAL_ID => df_t()->guid()
+					\Df\C1\C::ENTITY_EXTERNAL_ID => df_t()->guid()
 				), $this->getAttribute()->getName()));
 			}
 			$this->{__METHOD__} = $this->getAttribute()->get1CId();
@@ -162,10 +161,10 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 	 * В принципе, для простых свойств значение можно получить вызывая этот метод так:
 	 * $result = $this->getAttribute()->getFrontend()->getValue($product);
 	 * @override
-	 * @param Df_Catalog_Model_Product $product
+	 * @param \Df_Catalog_Model_Product $product
 	 * @return string|string[]|null
 	 */
-	protected function getЗначение(Df_Catalog_Model_Product $product) {
+	protected function getЗначение(\Df_Catalog_Model_Product $product) {
 		return $this->getЗначение_postProcess($product->getData($this->getAttribute()->getName()));
 	}
 
@@ -229,7 +228,7 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute */
 	private function getAttribute() {return $this->cfg(self::$P__ATTRIBUTE);}
 
 	/** @return array(mixed => mixed) */
@@ -271,10 +270,10 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 			/** @var array(string => mixed) $values */
 			$values = array();
 			foreach ($this->getAttribute()->getOptions($this->store()) as $option) {
-				/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+				/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 				/**
 				 * По аналогии с
-				 * @see Df_C1_Cml2_Import_Processor_ReferenceList::assignExternalIdToOptions()
+				 * @see \Df\C1\Cml2\Import\Processor\ReferenceList::assignExternalIdToOptions()
 				 */
 				if (!$option->get1CId()) {
 					$option->set1CId(df_t()->guid());
@@ -306,8 +305,8 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 			if (!$this->этоСправочник()) {
 				switch ($this->getAttribute()->getFrontendInput()) {
 					case 'date':
-						if (!$value instanceof Zend_Date) {
-							$value = new Zend_Date($value);
+						if (!$value instanceof \Zend_Date) {
+							$value = new \Zend_Date($value);
 						}
 						$result = $this->entry()->date($value);
 						break;
@@ -370,22 +369,22 @@ class Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DOCUMENT, Df_C1_Cml2_Export_Document_Catalog::class)
-			->_prop(self::$P__ATTRIBUTE, Df_Catalog_Model_Resource_Eav_Attribute::class)
+			->_prop(self::$P__DOCUMENT, \Df\C1\Cml2\Export\Document\Catalog::class)
+			->_prop(self::$P__ATTRIBUTE, \Df_Catalog_Model_Resource_Eav_Attribute::class)
 		;
 	}
 	/** @var string */
 	private static $P__ATTRIBUTE = 'attribute';
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getProcessorForAttribute()
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::getProcessorForAttribute()
 	 * @static
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	 * @param Df_C1_Cml2_Export_Document_Catalog $document
-	 * @return Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param \Df\C1\Cml2\Export\Document\Catalog $document
+	 * @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real
 	 */
 	public static function i(
-		Df_Catalog_Model_Resource_Eav_Attribute $attribute
-		,Df_C1_Cml2_Export_Document_Catalog $document
+		\Df_Catalog_Model_Resource_Eav_Attribute $attribute
+		,\Df\C1\Cml2\Export\Document\Catalog $document
 	) {
 		return new self(array(self::$P__DOCUMENT => $document, self::$P__ATTRIBUTE => $attribute));
 	}

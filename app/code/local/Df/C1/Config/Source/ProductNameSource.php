@@ -1,10 +1,11 @@
 <?php
+namespace Df\C1\Config\Source;
 /**
  * @singleton
  * Система создаёт объект-одиночку для потомков этого класса.
  * Не забывайте об этом при реализации кеширования результатов вычислений внутри этого класса!
  */
-class Df_C1_Config_Source_ProductNameSource extends Df_Admin_Config_Source {
+class ProductNameSource extends \Df_Admin_Config_Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect
@@ -19,7 +20,7 @@ class Df_C1_Config_Source_ProductNameSource extends Df_Admin_Config_Source {
 	private static $VALUE__NAME_FULL = 'name_full';
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type::getName()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type::getName()
 	 * @param string $name
 	 * @return bool
 	 */

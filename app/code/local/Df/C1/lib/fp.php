@@ -11,20 +11,20 @@ function df_c1() {return Df_C1_Helper_Data::s();}
  */
 function df_c1_add_external_id_attribute_to_set(Df_Eav_Model_Entity_Attribute_Set $attributeSet) {
 	$attributeSet->addExternalIdAttribute(
-		Df_C1_Const::ENTITY_EXTERNAL_ID
+		\Df\C1\C::ENTITY_EXTERNAL_ID
 		, 'Идентификатор товара в 1С'
-		, Df_C1_Const::PRODUCT_ATTRIBUTE_GROUP_NAME
+		, \Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME
 		, 2
 	);
 }
 
-/** @return Df_C1_Config_Api */
-function df_c1_cfg() {return Df_C1_Config_Api::s();}
+/** @return \Df\C1\Config\Api */
+function df_c1_cfg() {return \Df\C1\Config\Api::s();}
 
 /**
  * Пример внешнего идентификатора: «6cc37c6d-7d15-11df-901f-00e04c595000».
- * @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem()
- * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option::getExternalId()
+ * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::createItem()
+ * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option::getExternalId()
  * @param $string|null
  * @return bool
  */

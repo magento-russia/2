@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Document;
-class Df_C1_Cml2_Import_Data_Document_Offers extends Df_C1_Cml2_Import_Data_Document {
+class Offers extends \Df\C1\Cml2\Import\Data\Document {
 	/** @return string */
 	public function getExternalId() {
 		if (!isset($this->{__METHOD__})) {
@@ -13,7 +13,7 @@ class Df_C1_Cml2_Import_Data_Document_Offers extends Df_C1_Cml2_Import_Data_Docu
 	/**
 	 * 2015-08-04
 	 * @override
-	 * @see Df_C1_Cml2_Import_Data_Document::getExternalId_CatalogAttributes()
+	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogAttributes()
 	 * @return string
 	 */
 	public function getExternalId_CatalogAttributes() {
@@ -26,7 +26,7 @@ class Df_C1_Cml2_Import_Data_Document_Offers extends Df_C1_Cml2_Import_Data_Docu
 
 	/**
 	 * @override
-	 * @see Df_C1_Cml2_Import_Data_Document::getExternalId_CatalogProducts()
+	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogProducts()
 	 * @return string
 	 */
 	public function getExternalId_CatalogProducts() {
@@ -40,7 +40,7 @@ class Df_C1_Cml2_Import_Data_Document_Offers extends Df_C1_Cml2_Import_Data_Docu
 
 	/**
 	 * @override
-	 * @see Df_C1_Cml2_Import_Data_Document::getExternalId_CatalogStructure()
+	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogStructure()
 	 * @return string
 	 */
 	public function getExternalId_CatalogStructure() {
@@ -118,21 +118,21 @@ class Df_C1_Cml2_Import_Data_Document_Offers extends Df_C1_Cml2_Import_Data_Docu
 		$this->session()->end();
 	}
 
-	/** @used-by Df_C1_Cml2_Import_Data_Document::create() */
+	/** @used-by \Df\C1\Cml2\Import\Data\Document::create() */
 
 	/**
 	 * @used-by storeInSession()
-	 * @used-by Df_C1_Cml2_State_Import::getFileOffersBase()
+	 * @used-by \Df\C1\Cml2\State\Import::getFileOffersBase()
 	 */
 	const TYPE__BASE = 'offers_base';
 	/**
 	 * @used-by storeInSession()
-	 * @used-by Df_C1_Cml2_State_Import::getFileOffersPrices()
+	 * @used-by \Df\C1\Cml2\State\Import::getFileOffersPrices()
 	 */
 	const TYPE__PRICES = 'offers_prices';
 	/**
 	 * @used-by storeInSession()
-	 * @used-by Df_C1_Cml2_State_Import::getFileOffersStock()
+	 * @used-by \Df\C1\Cml2\State\Import::getFileOffersStock()
 	 */
 	const TYPE__STOCK = 'offers_stock';
 }

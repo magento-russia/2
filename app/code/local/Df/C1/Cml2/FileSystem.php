@@ -1,10 +1,10 @@
 <?php
 namespace Df\C1\Cml2;
-class Df_C1_Cml2_FileSystem {
+class FileSystem {
 	/** @return string */
 	public function getBaseDir() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cc_path(Mage::getBaseDir('var'), 'rm', '1c');
+			$this->{__METHOD__} = df_cc_path(\Mage::getBaseDir('var'), 'rm', '1c');
 		}
 		return $this->{__METHOD__};
 	}
@@ -27,7 +27,7 @@ class Df_C1_Cml2_FileSystem {
 
 	/**
 	 * @param string $relativePath
-	 * @return Df_C1_Cml2_Import_Data_Document
+	 * @return \Df\C1\Cml2\Import\Data\Document
 	 */
 	public function getXmlDocumentByRelativePath($relativePath) {
 		df_param_string_not_empty($relativePath, 0);
@@ -40,7 +40,7 @@ class Df_C1_Cml2_FileSystem {
 				df_error('Не могу прочитать требуемый файл «%s».', $fullPath);
 			}
 			$this->{__METHOD__}[$relativePath] =
-				Df_C1_Cml2_Import_Data_Document::create(
+				\Df\C1\Cml2\Import\Data\Document::create(
 					/**
 					 * Модуль 1С-Битрикс версии 4.0 формирует документы XML с таким заголовком:
 					 * <КоммерческаяИнформация
@@ -61,6 +61,6 @@ class Df_C1_Cml2_FileSystem {
 		return $this->{__METHOD__}[$relativePath];
 	}
 
-	/** @return Df_C1_Cml2_FileSystem */
+	/** @return \Df\C1\Cml2\FileSystem */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

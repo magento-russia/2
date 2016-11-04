@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Anonymous
-	extends Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue {
+namespace Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue;
+class Anonymous extends \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue {
 	/**
 	 * @override
 	 * @return string
@@ -56,10 +56,10 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Anonymous
 
 	/**
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return new self(array(self::P__OFFER => $offer));
 	}
 }

@@ -119,7 +119,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	}
 
 	/** @return string|null */
-	public function get1CId() {return $this->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID);}
+	public function get1CId() {return $this->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID);}
 
 	/** @return Df_Eav_Model_Entity_Attribute_Set */
 	public function getAttributeSet() {
@@ -471,7 +471,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	}
 
 	/** @return string|null */
-	public function getExternalId() {return $this->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID);}
+	public function getExternalId() {return $this->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID);}
 
 	/**
 	 * Этот метод загружает из базы данных полный экземпляр товара.
@@ -1018,7 +1018,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 * @return Df_Catalog_Model_Product
 	 */
 	public function set1CId($value) {
-		$this->setData(Df_C1_Const::ENTITY_EXTERNAL_ID, $value);
+		$this->setData(\Df\C1\C::ENTITY_EXTERNAL_ID, $value);
 		return $this;
 	}
 
@@ -1106,7 +1106,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		Df_Core_Boot::run();
 	}
 	/**
-	 * @used-by Df_C1_Cml2_Processor_Product_AddExternalId::_construct()
+	 * @used-by \Df\C1\Cml2\Processor\Product\AddExternalId::_construct()
 	 * @used-by Df_Catalog_Model_Resource_Category_Collection::_init()
 	 * @used-by Df_Catalog_Model_XmlExport_Product::_construct()
 	 * @used-by Df_Dataflow_Model_Importer_Product_Gallery::_construct()

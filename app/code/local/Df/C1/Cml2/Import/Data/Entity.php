@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data;
-abstract class Df_C1_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entity {
+abstract class Entity extends \Df\Xml\Parser\Entity {
 	/** @return string */
 	public function getExternalId() {
 		if (!isset($this->{__METHOD__})) {
@@ -114,15 +114,15 @@ abstract class Df_C1_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entity {
 	 * @return string
 	 */
 	protected function getRequisiteValue($name) {
-		/** @var Df_C1_Cml2_Import_Data_Entity_RequisiteValue $requisiteValue */
+		/** @var \Df\C1\Cml2\Import\Data\Entity\RequisiteValue $requisiteValue */
 		$requisiteValue = $this->getRequisiteValues()->findByName($name);
 		return $requisiteValue ? $requisiteValue->getValue() : '';
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_RequisiteValues */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\RequisiteValues */
 	protected function getRequisiteValues() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_RequisiteValues::i($this->e());
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\RequisiteValues::i($this->e());
 		}
 		return $this->{__METHOD__};
 	}
@@ -130,14 +130,8 @@ abstract class Df_C1_Cml2_Import_Data_Entity extends \Df\Xml\Parser\Entity {
 	/**
 	 * Данный метод никак не связан данным с классом,
 	 * однако включён в класс для удобного доступа объектов класса к реестру
-	 * (чтобы писать $this->getState() вместо Df_C1_Cml2_State::s())
-	 * @return Df_C1_Cml2_State
+	 * (чтобы писать $this->getState() вместо \Df\C1\Cml2\State::s())
+	 * @return \Df\C1\Cml2\State
 	 */
-	protected function getState() {return Df_C1_Cml2_State::s();}
-
-	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Attribute::create()
-	 * @used-by Df_C1_Cml2_Import_Processor::_construct
-	 */
-
+	protected function getState() {return \Df\C1\Cml2\State::s();}
 }

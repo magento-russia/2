@@ -1,15 +1,17 @@
 <?php
 namespace Df\C1\Cml2\Action\Orders;
+use Df_Sales_Model_Order as O;
+use Zend_Date as ZD;
 // Экспорт заказов из интернет-магазина в 1С:Управление торговлей
-class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
+class Export extends \Df\C1\Cml2\Action\GenericExport {
 	/**
 	 * @override
-	 * @see Df_C1_Cml2_Action_GenericExport::createDocument()
-	 * @used-by Df_C1_Cml2_Action_GenericExport::getDocument()
-	 * @return Df_C1_Cml2_Export_Document_Orders
+	 * @see \Df\C1\Cml2\Action\GenericExport::createDocument()
+	 * @used-by \Df\C1\Cml2\Action\GenericExport::getDocument()
+	 * @return \Df\C1\Cml2\Export\Document\Orders
 	 */
 	protected function createDocument() {
-		return Df_C1_Cml2_Export_Document_Orders::i($this->getOrders());
+		return \Df\C1\Cml2\Export\Document\Orders::i($this->getOrders());
 	}
 
 	/**
@@ -26,24 +28,24 @@ class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
 	 */
 	protected function processFinish() {
 		parent::processFinish();
-		df_c1()->saveConfigValue(self::$LAST_PROCESSED_KEY, df_dts(Zend_Date::now()));
+		df_c1()->saveConfigValue(self::$LAST_PROCESSED_KEY, df_dts(ZD::now()));
 	}
 
 	/**
 	 * @used-by getOrders()
-	 * @return Zend_Date
+	 * @return ZD
 	 */
 	private function getLastProcessedTime() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Zend_Date $result */
+			/** @var ZD $result */
 			// для некоторых сценариев тестирования
 			if (true && df_my_local()) {
-				$result = Zend_Date::now();
+				$result = ZD::now();
 				/**
 				 * Zend_Date::sub() возвращает число в виде строки для Magento CE 1.4.0.1
 				 * и объект класса Zend_Date для более современных версий Magento
 				 */
-				$result->sub(7, Zend_Date::DAY);
+				$result->sub(7, ZD::DAY);
 			}
 			else {
 				$result = null;
@@ -53,9 +55,9 @@ class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
 					try {
 						// Мы вправе рассчитывать на стандартный для Zend_Date формат даты,
 						// потому что предварительно именно в этом формате дата была сохранена.
-						$result = new Zend_Date($timeS);
+						$result = new ZD($timeS);
 					}
-					catch (Exception $e) {}
+					catch (\Exception $e) {}
 				}
 			}
 			$this->{__METHOD__} = $result ?: df_date_least();
@@ -65,13 +67,13 @@ class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
 
 	/**
 	 * @used-by createDocument()
-	 * @return Df_Sales_Model_Resource_Order_Collection
+	 * @return \Df_Sales_Model_Resource_Order_Collection
 	 */
 	private function getOrders() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Sales_Model_Resource_Order_Collection $result */
-			$result = Df_Sales_Model_Order::c();
-			/** @var Zend_Db_Adapter_Abstract $adapter */
+			/** @var \Df_Sales_Model_Resource_Order_Collection $result */
+			$result = O::c();
+			/** @var \Zend_Db_Adapter_Abstract $adapter */
 			$adapter = $result->getSelect()->getAdapter();
 			// Отбраковываем из коллекции заказы других магазинов
 			/**
@@ -90,7 +92,7 @@ class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
 					$quotedField = $this->getConnection()->quoteIdentifier($field);
 			 * https://github.com/OpenMage/magento-mirror/blob/92a1142a37a1f8f639db95353199368f5784725d/lib/Varien/Data/Collection/Db.php#L417
 			 */
-			$result->addFieldToFilter(Df_Sales_Model_Order::P__STORE_ID, $this->storeId());
+			$result->addFieldToFilter(O::P__STORE_ID, $this->storeId());
 			/**
 			 * Магазин должен передавать в 1С:Управление торговлей 2 вида заказов:
 			 * 1) Заказы, которые были созданы в магазине ПОСЛЕ последнего сеанса передачи данных
@@ -98,7 +100,7 @@ class Df_C1_Cml2_Action_Orders_Export extends Df_C1_Cml2_Action_GenericExport {
 			 * Как я понимаю, оба ограничения можно наложить единым фильтром:
 			 * по времени изменения заказа.
 			 */
-			$result->addFieldToFilter(Df_Sales_Model_Order::P__UPDATED_AT, array(
+			$result->addFieldToFilter(O::P__UPDATED_AT, array(
 				'from' => $this->getLastProcessedTime(), 'datetime' => true
 			));
 			$this->{__METHOD__} = $result;

@@ -2,7 +2,7 @@
 class Df_C1_Cml2Controller extends Mage_Core_Controller_Front_Action {
 	/**
 	 * Обратите внимание, что проверку на наличие и доступности лицензии
-	 * мы выполняем не здесь, а в классе @see Df_C1_Cml2_Action,
+	 * мы выполняем не здесь, а в классе @see \Df\C1\Cml2\Action,
 	 * потому что данные проверки должны при необходимости возбуждать исключительные ситуации,
 	 * и именно в том классе расположен блок try... catch, который обрабатывает их
 	 * надлежащим для 1C: Управление торговлей способом
@@ -14,7 +14,7 @@ class Df_C1_Cml2Controller extends Mage_Core_Controller_Front_Action {
 		if (df_my_local()) {
 			Mage::log(df_last(explode('?', df_ruri())));
 		}
-		df_action($this, 'Df_C1_Cml2_Action_Front');
+		df_action($this, \Df\C1\Cml2\Action\Front::class);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class Df_C1_Cml2Controller extends Mage_Core_Controller_Front_Action {
 	 * @return Df_C1_Cml2Controller
 	 */
 	public function preDispatch() {
-		Df_C1_Cml2_Session_ByCookie_1C::s();
+		\Df\C1\Cml2\Session\ByCookie\C1::s();
 		parent::preDispatch();
 		return $this;
 	}

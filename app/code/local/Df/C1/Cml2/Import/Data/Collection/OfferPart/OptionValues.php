@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\OfferPart;
-class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
-	extends Df_C1_Cml2_Import_Data_Collection {
+class OptionValues extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * В версиях ранее 4-й модуля 1С-Битрикс
 	 * товарное предложение не перечисляет незаполненные характеристики.
@@ -51,10 +50,10 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 * которые являются опциями настраиваемого товара.
 	 * Для тех свойств, значения которых в 1С отсутствуют,
 	 * мы в Magento используем значение [неизвестно].
-	 * @see Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue::$VALUE__UNKNOWN
+	 * @see \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue::$VALUE__UNKNOWN
 	 *
 	 * Смотрите также комментарий к методу
-	 * @see Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue::getValue()
+	 * @see \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue::getValue()
 	 * Тот метод содержит решение этой же проблемы для версии 4 модуля 1С-Битрикс.
 	 *
 	 * НЕЛЬЗЯ автоматически вызывать данный метод из метода @see getItems(),
@@ -64,8 +63,8 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 */
 	public function addAbsentItems() {
 		foreach ($this->getAbsentConfigurableMagentoAttributes() as $attribute) {
-			/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-			$this->addItem(Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty::i2(
+			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+			$this->addItem(\Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT::i2(
 				$this->getOffer(), $attribute
 			));
 		}
@@ -73,20 +72,20 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 
 	/**
 	 * @param string $attributeId
-	 * @return Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
+	 * @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue
 	 */
 	public function findByAttributeId($attributeId) {
 		df_param_string_not_empty($attributeId, 0);
 		if (!isset($this->{__METHOD__}[$attributeId])) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue|null $result */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue|null $result */
 			foreach ($this as $optionValue) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue $optionValue */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
 				if ($attributeId === $optionValue->getAttributeMagento()->getId()) {
 					$result = $optionValue;
 					break;
 				}
 			}
-			df_assert($result instanceof Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue);
+			df_assert($result instanceof \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue);
 			$this->{__METHOD__}[$attributeId] = $result;
 		}
 		return $this->{__METHOD__}[$attributeId];
@@ -97,7 +96,7 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue::class;}
 
 	/**
 	 * @override
@@ -106,7 +105,7 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 * @return array(string => mixed)
 	 */
 	protected function itemParams() {
-		return array(Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue::P__OFFER => $this->getOffer());
+		return array(\Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue::P__OFFER => $this->getOffer());
 	}
 
 	/**
@@ -120,12 +119,12 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::postInitItems()
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
-	 * @param Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue[] $items
+	 * @param \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {
 		if ($items && $this->getOffer()->isTypeConfigurableChild()) {
-			$this->addItem(Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Anonymous::i(
+			$this->addItem(\Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\Anonymous::i(
 				$this->getOffer()
 			));
 		}
@@ -135,7 +134,7 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 		 */
 	}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute[] */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute[] */
 	private function getAbsentConfigurableMagentoAttributes() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
@@ -149,7 +148,7 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
 	private function getOffer() {return $this->cfg(self::$P__OFFER);}
 
 	/**
@@ -158,18 +157,18 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OFFER, Df_C1_Cml2_Import_Data_Entity_Offer::class);
+		$this->_prop(self::$P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
 	}
 	/** @var string */
 	private static $P__OFFER = 'offer';
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Offer::getOptionValues()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Offer::getOptionValues()
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues
+	 * @return \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Offer $offer, \Df\Xml\X $e) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer, \Df\Xml\X $e) {
 		return new self(array(self::$P__OFFER => $offer, self::$P__E => $e));
 	}
 }

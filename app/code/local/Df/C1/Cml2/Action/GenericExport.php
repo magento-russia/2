@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Action;
-abstract class Df_C1_Cml2_Action_GenericExport extends Df_C1_Cml2_Action {
+abstract class GenericExport extends \Df\C1\Cml2\Action {
 	/**
 	 * @used-by getDocument()
 	 * @return \Df\Xml\Generator\Document
@@ -26,7 +26,7 @@ abstract class Df_C1_Cml2_Action_GenericExport extends Df_C1_Cml2_Action {
 	protected function generateResponseBodyFake() {
 		/** @var \Df\Xml\Generator\Document $document */
 		$document = \Df\Xml\Generator\Document::_i();
-		$document->setMixin(Df_C1_Cml2_Export_DocumentMixin::class);
+		$document->setMixin(\Df\C1\Cml2\Export\DocumentMixin::class);
 		return $document->getXml();
 	}
 

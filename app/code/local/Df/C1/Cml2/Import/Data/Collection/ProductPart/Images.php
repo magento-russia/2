@@ -1,7 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ProductPart;
-class Df_C1_Cml2_Import_Data_Collection_ProductPart_Images
-	extends Df_C1_Cml2_Import_Data_Collection {
+class Images
+	extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @uses unlink()
 	 * @return void
@@ -11,7 +11,7 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_Images
 	/** @return string[] */
 	public function getFullPaths() {
 		if (!isset($this->{__METHOD__})) {
-			/** @uses Df_C1_Cml2_Import_Data_Entity_ProductPart_Image::getFilePathFull() */
+			/** @uses \Df\C1\Cml2\Import\Data\Entity\ProductPart\Image::getFilePathFull() */
 			$this->{__METHOD__} = df_each($this, 'getFilePathFull');
 		}
 		return $this->{__METHOD__};
@@ -22,7 +22,7 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_Images
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_ProductPart_Image::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\ProductPart\Image::class;}
 
 	/**
 	 * @override
@@ -32,10 +32,10 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_Images
 	protected function itemPath() {return 'Картинка';}
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductЖЖgetImages()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductЖЖgetImages()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Collection_ProductPart_Images
+	 * @return \Df\C1\Cml2\Import\Data\Collection\ProductPart\Images
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

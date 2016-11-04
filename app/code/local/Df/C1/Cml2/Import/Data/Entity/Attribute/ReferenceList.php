@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\Attribute;
-class Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList
-	extends Df_C1_Cml2_Import_Data_Entity_Attribute {
+class ReferenceList extends \Df\C1\Cml2\Import\Data\Entity\Attribute {
 	/**
 	 * @override
 	 * @return string
@@ -23,10 +22,10 @@ class Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList
 	 */
 	public function getSourceModel() {return '';}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\ReferenceListPart\Items */
 	public function getItems() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items::i(
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\ReferenceListPart\Items::i(
 				$this->e()
 			);
 		}
@@ -41,7 +40,7 @@ class Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList
 			/** @var int $optionIndex */
 			$optionIndex = 0;
 			foreach ($this->getItems() as $item) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item $item */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item $item */
 				$values['option_' . $optionIndex] = array($item->getName());
 				$optionIndex++;
 			}
@@ -55,10 +54,4 @@ class Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Attribute::getTypeMap()
-	 * @used-by Df_C1_Cml2_Import_Processor_ReferenceList::_construct()
-	 */
-
 }

@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\Attribute;
-class Df_C1_Cml2_Import_Data_Entity_Attribute_Text
-	extends Df_C1_Cml2_Import_Data_Entity_Attribute {
+class Text extends \Df\C1\Cml2\Import\Data\Entity\Attribute {
 	/**
 	 * @override
 	 * @return string
@@ -25,10 +24,4 @@ class Df_C1_Cml2_Import_Data_Entity_Attribute_Text
 	 * @return string
 	 */
 	public function getSourceModel() {return '';}
-
-	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Attribute::create()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Attribute::getTypeMap()
-	 */
-
 }

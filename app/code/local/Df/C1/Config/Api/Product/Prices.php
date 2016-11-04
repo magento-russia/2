@@ -1,12 +1,13 @@
 <?php
-class Df_C1_Config_Api_Product_Prices extends Df_C1_Config_Api_Cml2 {
+namespace Df\C1\Config\Api\Product;
+class Prices extends \Df\C1\Config\Api\Cml2 {
 	/** @return string */
 	public function getMain() {return $this->v('main');}
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_PriceType::getCustomerGroup()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\PriceType::getCustomerGroup()
 	 * @param string $названиеТиповогоСоглашения
-	 * @return Df_Customer_Model_Group|null
+	 * @return \Df_Customer_Model_Group|null
 	 */
 	public function getCustomerGroup($названиеТиповогоСоглашения) {
 		return dfa($this->_map(), $названиеТиповогоСоглашения);
@@ -23,16 +24,16 @@ class Df_C1_Config_Api_Product_Prices extends Df_C1_Config_Api_Cml2 {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->map(
 				'map'
-				, Df_C1_Config_MapItem_PriceType::class
-				/** @uses Df_C1_Config_MapItem_PriceType::getCustomerGroup() */
+				, \Df\C1\Config\MapItem\PriceType::class
+				/** @uses \Df\C1\Config\MapItem\PriceType::getCustomerGroup() */
 				, 'getCustomerGroup'
-				/** @uses Df_C1_Config_MapItem_PriceType::getНазваниеТиповогоСоглашения() */
+				/** @uses \Df\C1\Config\MapItem\PriceType::getНазваниеТиповогоСоглашения() */
 				, 'getНазваниеТиповогоСоглашения'
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Config_Api_Product_Prices */
+	/** @return \Df\C1\Config\Api\Product\Prices */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

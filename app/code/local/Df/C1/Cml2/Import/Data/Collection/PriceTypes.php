@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
-class Df_C1_Cml2_Import_Data_Collection_PriceTypes
-	extends Df_C1_Cml2_Import_Data_Collection {
+class PriceTypes extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Entity::e()
@@ -12,16 +11,16 @@ class Df_C1_Cml2_Import_Data_Collection_PriceTypes
 			/** @var \Df\Xml\X $result */
 			$result = null;
 			if (
-				Df_C1_Cml2_State_Import::s()->getFileOffers()->getXml()
+				\Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml()
 					->descend('ПакетПредложений/ТипыЦен')
 			) {
-				$result = Df_C1_Cml2_State_Import::s()->getFileOffers()->getXml();
+				$result = \Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml();
 			}
 			else if (
-				Df_C1_Cml2_State_Import::s()->getFileCatalogStructure()->getXml()
+				\Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml()
 					->descend('Классификатор/ТипыЦен')
 			) {
-				$result = Df_C1_Cml2_State_Import::s()->getFileCatalogStructure()->getXml();
+				$result = \Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml();
 			}
 			df_assert($result instanceof \Df\Xml\X);
 			$this->{__METHOD__} = $result;
@@ -29,7 +28,7 @@ class Df_C1_Cml2_Import_Data_Collection_PriceTypes
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_PriceType */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\PriceType */
 	public function getMain() {
 		if (!isset($this->{__METHOD__})) {
 			if (!$this->hasItems()) {
@@ -64,7 +63,7 @@ class Df_C1_Cml2_Import_Data_Collection_PriceTypes
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_PriceType::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\PriceType::class;}
 
 	/**
 	 * @override
@@ -77,31 +76,31 @@ class Df_C1_Cml2_Import_Data_Collection_PriceTypes
 		return "/КоммерческаяИнформация/{$type}/ТипыЦен/ТипЦены";
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Document */
+	/** @return \Df\C1\Cml2\Import\Data\Document */
 	private function getDocument() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Import_Data_Document $result */
+			/** @var \Df\C1\Cml2\Import\Data\Document $result */
 			$result = null;
 			if (
-				Df_C1_Cml2_State_Import::s()->getFileOffers()->getXml()
+				\Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml()
 					->descend('ПакетПредложений/ТипыЦен')
 			) {
-				$result = Df_C1_Cml2_State_Import::s()->getFileOffers()->getXmlDocument();
+				$result = \Df\C1\Cml2\State\Import::s()->getFileOffers()->getXmlDocument();
 			}
 			/**
 			 * В новых версиях модуля 1С-Битрикс (ветка 4, CommerceML 2.0.8)
 			 * типы цен неожиданно переместились в файл каталога.
 			 */
 			else if (
-				Df_C1_Cml2_State_Import::s()->getFileCatalogStructure()->getXml()
+				\Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml()
 					->descend('Классификатор/ТипыЦен')
 			) {
-				$result = Df_C1_Cml2_State_Import::s()->getFileCatalogStructure()->getXmlDocument();
+				$result = \Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXmlDocument();
 			}
 			if (!$result) {
 				$this->throwError_noPriceTypes();
 			}
-			df_assert($result instanceof Df_C1_Cml2_Import_Data_Document);
+			df_assert($result instanceof \Df\C1\Cml2\Import\Data\Document);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
@@ -120,8 +119,8 @@ class Df_C1_Cml2_Import_Data_Collection_PriceTypes
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_State::getPriceTypes()
-	 * @return Df_C1_Cml2_Import_Data_Collection_PriceTypes
+	 * @used-by \Df\C1\Cml2\State::getPriceTypes()
+	 * @return \Df\C1\Cml2\Import\Data\Collection\PriceTypes
 	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

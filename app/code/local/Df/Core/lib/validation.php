@@ -777,7 +777,7 @@ function df_int_simple(array $values) {return array_map('intval', $values);}
  * @param mixed $variable
  * @param string|string[] $class
  * @return bool
- * @used-by Df_C1_Observer::df_catalog__attribute_set__group_added()
+ * @used-by \Df\C1\Observer::df_catalog__attribute_set__group_added()
  */
 function df_is($variable, $class) {
 	/** @var bool $result */

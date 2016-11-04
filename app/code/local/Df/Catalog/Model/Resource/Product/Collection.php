@@ -192,7 +192,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 * указать в установочном скрипте,
 	 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
 	 * @see Df_Shipping_Setup_2_16_2::process()
-	 * Однако методу Df_C1_Cml2_Import_Processor_Product_Type::getDescription()
+	 * Однако методу \Df\C1\Cml2\Import\Processor\Product\Type::getDescription()
 	 * требуется, чтобы в коллекции товаров присутствовало свойство «описание».
 	 * Однако значения поля «описание» могут быть очень длинными,
 	 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,
@@ -584,7 +584,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	 * указать в установочном скрипте,
 	 * что требуемые свойства должны попадать в коллекцию в режиме денормализации.
 	 * @see Df_Shipping_Setup_2_16_2::process()
-	 * Однако методу @see Df_C1_Cml2_Import_Processor_Product_Type::getDescription()
+	 * Однако методу @see \Df\C1\Cml2\Import\Processor\Product\Type::getDescription()
 	 * требуется, чтобы в коллекции товаров присутствовало свойство «описание».
 	 * Однако значения поля «описание» могут быть очень длинными,
 	 * и если добавить колонку для этого свойства в денормализованную таблицу товаров,

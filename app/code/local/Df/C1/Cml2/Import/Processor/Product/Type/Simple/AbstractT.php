@@ -1,6 +1,6 @@
 <?php
-abstract class Df_C1_Cml2_Import_Processor_Product_Type_Simple_Abstract
-	extends Df_C1_Cml2_Import_Processor_Product_Type {
+namespace Df\C1\Cml2\Import\Processor\Product\Type\Simple;
+abstract class AbstractT extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	/**
 	 * Обратите внимание, что 1С может вполне не передавать цену.
 	 * Это возможно в следующих ситуациях:
@@ -29,11 +29,11 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type_Simple_Abstract
 	 * @override
 	 * @return string
 	 */
-	protected function getType() {return Mage_Catalog_Model_Product_Type::TYPE_SIMPLE;}
+	protected function getType() {return \Mage_Catalog_Model_Product_Type::TYPE_SIMPLE;}
 
 	/**
 	 * @override
 	 * @return int
 	 */
-	protected function getVisibility() {return Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH;}
+	protected function getVisibility() {return \Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH;}
 }

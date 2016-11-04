@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Sale\Order;
-class Df_C1_Cml2_Export_Processor_Sale_Order_Item extends Df_C1_Cml2_Export_Processor_Sale {
+class Item extends \Df\C1\Cml2\Export\Processor\Sale {
 	/** @return array(string => mixed) */
 	public function getDocumentData() {
 		if (!isset($this->{__METHOD__})) {
@@ -135,7 +135,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order_Item extends Df_C1_Cml2_Export_Proc
 	private function getAttributeSetName() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_Eav_Model_Entity_Attribute_Set::ld($this->getProduct()->getAttributeSetId())
+				\Df_Eav_Model_Entity_Attribute_Set::ld($this->getProduct()->getAttributeSetId())
 					->getAttributeSetName()
 			;
 		}
@@ -146,11 +146,11 @@ class Df_C1_Cml2_Export_Processor_Sale_Order_Item extends Df_C1_Cml2_Export_Proc
 	/** @return string */
 	private function getItemId() {return '';}
 
-	/** @return Df_Catalog_Model_Product */
+	/** @return \Df_Catalog_Model_Product */
 	private function getProduct() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_C1_Cml2_State::s()->export()->getProducts()->getProductById(
+				\Df\C1\Cml2\State::s()->export()->getProducts()->getProductById(
 					df_nat($this->getOrderItem()->getProductId())
 				)
 			;
@@ -203,13 +203,13 @@ class Df_C1_Cml2_Export_Processor_Sale_Order_Item extends Df_C1_Cml2_Export_Proc
 		return $this->{__METHOD__};
 	}
 
-	/** @return Mage_Sales_Model_Order_Item */
+	/** @return \Mage_Sales_Model_Order_Item */
 	private function getOrderItem() {return $this->cfg(self::$P__ORDER_ITEM);}
 
-	/** @return Df_Sales_Model_Order_Item_Extended */
+	/** @return \Df_Sales_Model_Order_Item_Extended */
 	private function getOrderItemExtended() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Sales_Model_Order_Item_Extended::i($this->getOrderItem());
+			$this->{__METHOD__} = \Df_Sales_Model_Order_Item_Extended::i($this->getOrderItem());
 		}
 		return $this->{__METHOD__};
 	}
@@ -234,12 +234,12 @@ class Df_C1_Cml2_Export_Processor_Sale_Order_Item extends Df_C1_Cml2_Export_Proc
 	private static $P__ORDER_ITEM = 'order_item';
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Sale_Order::getDocumentData_OrderItems()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Sale\Order::getDocumentData_OrderItems()
 	 * @static
-	 * @param Mage_Sales_Model_Order_Item $orderItem
-	 * @return Df_C1_Cml2_Export_Processor_Sale_Order_Item
+	 * @param \Mage_Sales_Model_Order_Item $orderItem
+	 * @return \Df\C1\Cml2\Export\Processor\Sale\Order\Item
 	 */
-	public static function i(Mage_Sales_Model_Order_Item $orderItem) {
+	public static function i(\Mage_Sales_Model_Order_Item $orderItem) {
 		return new self(array(self::$P__ORDER_ITEM => $orderItem));
 	}
 }

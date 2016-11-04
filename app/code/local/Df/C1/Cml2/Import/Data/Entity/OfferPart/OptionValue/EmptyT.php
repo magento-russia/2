@@ -1,9 +1,9 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty
-	extends Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue {
+namespace Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue;
+class EmptyT extends \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue {
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	public function getAttributeMagento() {
 		if (!isset($this->{__METHOD__})) {
@@ -32,7 +32,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty
 
 	/**
 	 * Этот метод необходим, иначе @used-by getName() приведёт к сбою.
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	private function _getAttributeMagento() {return $this->cfg(self::$P__ATTRIBUTE);}
 
@@ -42,19 +42,19 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ATTRIBUTE, Df_Catalog_Model_Resource_Eav_Attribute::class);
+		$this->_prop(self::$P__ATTRIBUTE, \Df_Catalog_Model_Resource_Eav_Attribute::class);
 	}
 	/** @var string */
 	private static $P__ATTRIBUTE = 'attribute';
 	/**
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	 * @return Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT
 	 */
 	public static function i2(
-		Df_C1_Cml2_Import_Data_Entity_Offer $offer
-		,Df_Catalog_Model_Resource_Eav_Attribute $attribute
+		\Df\C1\Cml2\Import\Data\Entity\Offer $offer
+		,\Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	) {
 		return new self(array(self::P__OFFER => $offer, self::$P__ATTRIBUTE => $attribute));
 	}

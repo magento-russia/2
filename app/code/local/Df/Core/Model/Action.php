@@ -270,7 +270,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	}
 
 	/**
-	 * «Df_C1_Cml2_Action_Catalog_Export_Process» => «cml2.action.catalog.export.process»
+	 * «\Df\C1\Cml2\Action\Catalog\Export\Process» => «cml2.action.catalog.export.process»
 	 * @used-by responseLogName()
 	 * @return string
 	 */
@@ -297,7 +297,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Front::_process()
+	 * @used-by \Df\C1\Cml2\Action\Front::_process()
 	 * @used-by \Df\YandexMarket\Action\Category_Suggest::getQuery()
 	 * @return Df_Core_Model_InputRequest
 	 */
@@ -316,7 +316,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	protected function rmRequestClass() {return Df_Core_Model_InputRequest::class;}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action::getLastProcessedTimeAsString()
+	 * @used-by \Df\C1\Cml2\Action::getLastProcessedTimeAsString()
 	 * @param string $key
 	 * @return mixed
 	 */
@@ -350,7 +350,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	protected function store() {return df_store();}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Orders_Export::getOrders()
+	 * @used-by \Df\C1\Cml2\Action\Orders\Export::getOrders()
 	 * @return int
 	 */
 	protected function storeId() {return $this->store()->getId();}
@@ -430,7 +430,7 @@ abstract class Df_Core_Model_Action extends Df_Core_Model {
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_GenericExport::contentType()
+	 * @used-by \Df\C1\Cml2\Action\GenericExport::contentType()
 	 * @used-by \Df\YandexMarket\Action\Front::contentType()
 	 * @var string
 	 */

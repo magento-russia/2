@@ -1,12 +1,10 @@
 <?php
+namespace Df\C1\Cml2\Import\Processor\Order\Item;
 // удаляет из заказа позицию
-class Df_C1_Cml2_Import_Processor_Order_Item_Delete
-	extends Df_C1_Cml2_Import_Processor_Order_Item {
+class Delete extends \Df\C1\Cml2\Import\Processor\Order\Item {
 	/**
 	 * @override
 	 * @return void
 	 */
 	public function process() {}
-
-
 }

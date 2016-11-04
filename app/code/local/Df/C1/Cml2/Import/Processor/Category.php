@@ -1,12 +1,13 @@
 <?php
-/** @method Df_C1_Cml2_Import_Data_Entity_Category|Df_C1_Cml2_Import_Data_Entity getEntity() */
-class Df_C1_Cml2_Import_Processor_Category extends Df_C1_Cml2_Import_Processor {
+namespace Df\C1\Cml2\Import\Processor;
+/** @method \Df\C1\Cml2\Import\Data\Entity\Category|\Df\C1\Cml2\Import\Data\Entity getEntity() */
+class Category extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @override
 	 * @return void
 	 */
 	public function process() {
-		/** @var Df_Catalog_Model_Category $category */
+		/** @var \Df_Catalog_Model_Category $category */
 		$category = df()->registry()->categories()->findByExternalId($this->getEntity()->getExternalId());
 		if (!$category) {
 			/**
@@ -29,27 +30,27 @@ class Df_C1_Cml2_Import_Processor_Category extends Df_C1_Cml2_Import_Processor {
 			 * (`catalog_category_flat_store_1`, * CONSTRAINT `FK_CAT_CTGR_FLAT_STORE_1_ENTT_ID_CAT_CTGR_ENTT_ENTT_ID`
 			 * FOREIGN KEY (`entity_id`) REFERENCES `catalog_category_entity` (`en)
 			 */
-			$category = Df_Catalog_Model_Category::createAndSave(array(
-				Df_Catalog_Model_Category::P__PATH => $this->getParent()->getPath()
-				,Df_Catalog_Model_Category::P__NAME => $this->getEntity()->getName()
-				,Df_Catalog_Model_Category::P__IS_ACTIVE => true
-				,Df_Catalog_Model_Category::P__IS_ANCHOR => true
-				,Df_Catalog_Model_Category::P__DISPLAY_MODE => Mage_Catalog_Model_Category::DM_MIXED
-				,Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
+			$category = \Df_Catalog_Model_Category::createAndSave(array(
+				\Df_Catalog_Model_Category::P__PATH => $this->getParent()->getPath()
+				,\Df_Catalog_Model_Category::P__NAME => $this->getEntity()->getName()
+				,\Df_Catalog_Model_Category::P__IS_ACTIVE => true
+				,\Df_Catalog_Model_Category::P__IS_ANCHOR => true
+				,\Df_Catalog_Model_Category::P__DISPLAY_MODE => Mage_Catalog_Model_Category::DM_MIXED
+				,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
 				,'attribute_set_id' =>
-					Df_Catalog_Model_Resource_Installer_Attribute::s()->getCategoryAttributeSetId()
+					\Df_Catalog_Model_Resource_Installer_Attribute::s()->getCategoryAttributeSetId()
 				,'include_in_menu' => 1
 			), $this->storeId());
 			df()->registry()->categories()->addEntity($category);
 			df_c1_log('Создан товарный раздел «%s».', $category->getName());
 		}
 		foreach ($this->getEntity()->getChildren() as $child) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Category $child */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Category $child */
 			self::i($category, $child)->process();
 		}
 	}
 
-	/** @return Df_Catalog_Model_Category */
+	/** @return \Df_Catalog_Model_Category */
 	private function getParent() {return $this->cfg(self::$P__PARENT);}
 
 	/**
@@ -58,19 +59,19 @@ class Df_C1_Cml2_Import_Processor_Category extends Df_C1_Cml2_Import_Processor {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PARENT, Df_Catalog_Model_Category::class);
+		$this->_prop(self::$P__PARENT, \Df_Catalog_Model_Category::class);
 	}
 	/** @var string */
 	private static $P__PARENT = 'parent';
 	/**
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::importCategories()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importCategories()
 	 * @static
-	 * @param Df_Catalog_Model_Category $parent
-	 * @param Df_C1_Cml2_Import_Data_Entity_Category $category
-	 * @return Df_C1_Cml2_Import_Processor_Category
+	 * @param \Df_Catalog_Model_Category $parent
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Category $category
+	 * @return \Df\C1\Cml2\Import\Processor\Category
 	 */
 	public static function i(
-		Df_Catalog_Model_Category $parent, Df_C1_Cml2_Import_Data_Entity_Category $category
+		\Df_Catalog_Model_Category $parent, \Df\C1\Cml2\Import\Data\Entity\Category $category
 	) {
 		return new self(array(self::$P__PARENT => $parent, self::$P__ENTITY => $category));
 	}

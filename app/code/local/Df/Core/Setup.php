@@ -29,7 +29,7 @@ class Df_Core_Setup extends Df_Core_Model {
 	 * причём даже в старых версиях Magento CE:
 	 * https://github.com/OpenMage/magento-mirror/blob/1.4.0.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L644-L646
 	 *
-	 * @used-by Df_C1_Setup::add1CIdColumnToTable()
+	 * @used-by \Df\C1\Setup::add1CIdColumnToTable()
 	 * @param string $table
 	 * @param string $column
 	 * @return void
@@ -63,7 +63,7 @@ class Df_Core_Setup extends Df_Core_Model {
 	 * 2015-02-10
 	 * Используйте этот метод в тех ситуациях, когда надо игнорировать исключительные ситуации.
 	 * Пример: удаление из базы данных колонку, которая и так может там отсутствовать.
-	 * @used-by Df_C1_Setup::add1CIdColumnToTable()
+	 * @used-by \Df\C1\Setup::add1CIdColumnToTable()
 	 * @param string $sql
 	 * @return void
 	 */

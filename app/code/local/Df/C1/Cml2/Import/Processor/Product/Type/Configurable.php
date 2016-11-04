@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
-	extends Df_C1_Cml2_Import_Processor_Product_Type {
+namespace Df\C1\Cml2\Import\Processor\Product\Type;
+class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	/**
 	 * @override
 	 * @return void
@@ -15,15 +15,15 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 	}
 
 	/**
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
 	 * @return array(array(string => string|int|float)))
 	 */
-	protected function getConfigurableProductData(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	protected function getConfigurableProductData(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		/** @var array(mixed => mixed) $result */
 		$result = array();
 		foreach ($this->getTypeInstance()->getConfigurableAttributesAsArray() as $attribute) {
 			/** @var array(string => string|int) $attribute */
-			/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue $optionValue */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
 			$optionValue = $offer->getOptionValues()->findByAttributeId($attribute['attribute_id']);
 			/** @var int $valueId */
 			$valueId = $optionValue->getValueId();
@@ -45,7 +45,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 			/** @var array(int => array(array(string => string|int|float))) $result */
 			$result = array();
 			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				$result[$offer->getProduct()->getId()] = $this->getConfigurableProductData($offer);
 			}
 			$this->{__METHOD__} = $result;
@@ -73,7 +73,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 			//Mage::log(__METHOD__);
 			//Mage::log('children count: ' . count($this->getEntityOffer()->getConfigurableChildren()));
 			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				/** @var float|null $currentPrice */
 				//Mage::log('product name: ' . $offer->getProduct()->getName());
 				//Mage::log('product price: ' . $offer->getProduct()->getPrice());
@@ -100,7 +100,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 		return df_n_get($this->{__METHOD__});
 	}
 
-	/** @return Df_Catalog_Model_Product */
+	/** @return \Df_Catalog_Model_Product */
 	protected function getProductMagento() {df_abstract($this); return null;}
 
 	/**
@@ -123,7 +123,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 				}
 				$result = df_sku_adapt($result);
 				if (df_h()->catalog()->product()->isExist($result)) {
-					/** @var Df_Catalog_Model_Product $existingProduct */
+					/** @var \Df_Catalog_Model_Product $existingProduct */
 					$existingProduct = df_product($result);
 					// Вдруг товар с данным артикулом уже присутствует в системе?
 					df_c1_log(
@@ -153,13 +153,13 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 	 * @override
 	 * @return string
 	 */
-	protected function getType() {return Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE;}
+	protected function getType() {return \Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE;}
 
-	/** @return Mage_Catalog_Model_Product_Type_Configurable */
+	/** @return \Mage_Catalog_Model_Product_Type_Configurable */
 	protected function getTypeInstance() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->getProductMagento()->getTypeInstance();
-			df_assert($this->{__METHOD__} instanceof Mage_Catalog_Model_Product_Type_Configurable);
+			df_assert($this->{__METHOD__} instanceof \Mage_Catalog_Model_Product_Type_Configurable);
 		}
 		return $this->{__METHOD__};
 	}
@@ -175,8 +175,8 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 			df_c1_log('Найдено простых вариантов настраиваемых товаров: %d.', $count);
 			df_c1_log('Импорт простых вариантов настраиваемых товаров начат.');
 			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
-				Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Child::p($offer);
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
+				\Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Child::p($offer);
 			}
 			df_c1_log('Импорт простых вариантов настраиваемых товаров завершён.');
 		}
@@ -191,26 +191,26 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable
 
 	/** @return void */
 	private function importParentNew() {
-		Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New::p_new($this);
+		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable\NewT::p_new($this);
 	}
 
 	/** @return void */
 	private function importParentUpdate() {
-		Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update::p_update($this);
+		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Update::p_update($this);
 	}
 
 	/**
 	 * @override
 	 * @return int
 	 */
-	protected function getVisibility() {return Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH;}
+	protected function getVisibility() {return \Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH;}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::importProductsConfigurable()
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsConfigurable()
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
 	 * @return void
 	 */
-	public static function p(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function p(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		self::ic(__CLASS__, $offer)->process();
 	}
 }

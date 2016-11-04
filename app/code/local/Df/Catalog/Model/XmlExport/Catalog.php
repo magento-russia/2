@@ -74,8 +74,8 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	public function getProducts() {return $this->cfg(self::$P__PRODUCTS);}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Attribute_Url::getЗначение()
-	 * @see Df_C1_Cml2_Export_Processor_Catalog_Attribute
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url::getЗначение()
+	 * @see \Df\C1\Cml2\Export\Processor\Catalog\Attribute
 	 * @param Df_Catalog_Model_Product $product
 	 * @return Df_Catalog_Model_XmlExport_Product
 	 */
@@ -138,7 +138,7 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	private static $P__PRODUCTS = 'products';
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Catalog::i()
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::i()
 	 * @param string $class
 	 * @param Df_Catalog_Model_Resource_Product_Collection $products
 	 * @return Df_Catalog_Model_XmlExport_Catalog

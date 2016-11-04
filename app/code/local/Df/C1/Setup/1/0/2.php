@@ -8,7 +8,7 @@
  * Версии инсталлятора 1.0.0 и 1.0.1 удалил 2014-09-28 как устаревшие
  * и никому из клиентов больше не нужные.
  */
-class Df_C1_Setup_1_0_2 extends Df_C1_Setup {
+class Df_C1_Setup_1_0_2 extends \Df\C1\Setup {
 	/**
 	 * Для товаров свойство «1С ID» добавляется функцией @see df_c1_add_external_id_attribute_to_set()
 	 * @override
@@ -37,15 +37,15 @@ class Df_C1_Setup_1_0_2 extends Df_C1_Setup {
 		df_param_string($groupName, 1);
 		df_param_integer($ordering, 2);
 		self::attribute()->cleanCache();
-		df_remove_attribute($entityType, Df_C1_Const::ENTITY_EXTERNAL_ID_OLD);
-		df_remove_attribute($entityType, Df_C1_Const::ENTITY_EXTERNAL_ID);
+		df_remove_attribute($entityType, \Df\C1\C::ENTITY_EXTERNAL_ID_OLD);
+		df_remove_attribute($entityType, \Df\C1\C::ENTITY_EXTERNAL_ID);
 		/** @var int $entityTypeId */
 		$entityTypeId = self::attribute()->getEntityTypeId($entityType);
 		/** @var int $attributeSetId */
 		$attributeSetId = self::attribute()->getDefaultAttributeSetId($entityTypeId);
 		self::attribute()->addAttribute(
 			$entityType
-			,Df_C1_Const::ENTITY_EXTERNAL_ID
+			,\Df\C1\C::ENTITY_EXTERNAL_ID
 			,self::get1CIdProperties()
 		);
 		self::attribute()->addAttributeToGroup(
@@ -59,7 +59,7 @@ class Df_C1_Setup_1_0_2 extends Df_C1_Setup {
 			 * вместо размещения свойства на главной вкладке ("Главное").
 			 */
 			,$groupName
-			,Df_C1_Const::ENTITY_EXTERNAL_ID
+			,\Df\C1\C::ENTITY_EXTERNAL_ID
 			,$ordering
 		);
 	}

@@ -1,8 +1,7 @@
 <?php
-/**
- * @method Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList getEntity()
- */
-class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Processor {
+namespace Df\C1\Cml2\Import\Processor;
+/** @method \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList getEntity() */
+class ReferenceList extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @override
 	 * @return void
@@ -11,7 +10,7 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 		// Ищем справочник с данным идентификатором
 		/**
 		 * Обратите внимание, что класс — именно этот даже в Magento 1.4.0.1
-		 * @var Df_Catalog_Model_Resource_Eav_Attribute $attribute
+		 * @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 		 */
 		$attribute = df_attributes()->findByExternalId($this->getEntity()->getExternalId());
 		/** @var mixed[] $attributeData */
@@ -19,7 +18,7 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 			self::removeDuplicateOptionsWithTheSameExternalId($attribute);
 			$attributeData = array_merge($attribute->getData(), array(
 				'frontend_label' => $this->getEntity()->getName()
-				,'option' => Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
+				,'option' => \Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
 					$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 				)
 			));
@@ -39,8 +38,8 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 			;
 			if ($standardCode) {
 				// Убеждаемся, что стандартное свойство не удалено
-				/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-				$attribute = Df_Catalog_Model_Resource_Eav_Attribute::i();
+				/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+				$attribute = \Df_Catalog_Model_Resource_Eav_Attribute::i();
 				$attribute->loadByCode(df_eav_id_product(), $standardCode);
 				if (!$attribute->getId()) {
 					$attribute = null;
@@ -53,8 +52,8 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 			if ($attribute) {
 				// Используем объект-свойство из стандартной комплектации
 				$attributeData = array_merge($attribute->getData(), array(
-					Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
-					,'option' => Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
+					\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
+					,'option' => \Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
 						$attribute, dfa($this->getEntity()->getOptionsInMagentoFormat(), 'value')
 					)
 				));
@@ -110,13 +109,13 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 					,'position' => 0
 					,'is_wysiwyg_enabled' => 0
 					,'is_used_for_promo_rules' => 0
-					,Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
+					,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
 					,'option' => $this->getEntity()->getOptionsInMagentoFormat()
 				);
 				df_c1_log('Создание справочника «%s».', $this->getEntity()->getName());
 			}
 		}
-		/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+		/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 		$attribute = df_attributes()->createOrUpdate($attributeData);
 		if (!$attribute->get1CId()) {
 			df_error(
@@ -133,27 +132,27 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 	/**
 	 * 2015-01-24
 	 * По аналогии с этим методом сделан метод
-	 * @see Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real::assignExternalIdToOptions()
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @see \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::assignExternalIdToOptions()
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	 * @return void
 	 */
-	private function assignExternalIdToOptions(Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
+	private function assignExternalIdToOptions(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
 		/** @var string[] $alreadyAssigned */
 		$alreadyAssigned = array();
 		foreach ($attribute->getOptions() as $option) {
-			/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+			/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 			if (!$option->get1CId()) {
 				// Обратите внимание, что 1С:Управление торговлей
 				// допускает сразу несколько одноимённых значений
-				/** @var Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item[] $importedOption */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item[] $importedOption */
 				$importedOptions = $this->getEntity()->getItems()->findByNameAll($option->getValue());
 				// Мы могли не найти внешний идентификатор опции,
 				// если опция была добавлена администратором вручную.
 				if ($importedOptions) {
-					/** @var Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item|null $importedOption */
+					/** @var \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item|null $importedOption */
 					$importedOption = null;
 					foreach ($importedOptions as $importedOptionCurrent) {
-						/** @var Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item $importedOptionCurrent */
+						/** @var \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item $importedOptionCurrent */
 						if (!in_array($importedOptionCurrent->getExternalId(), $alreadyAssigned)) {
 							$importedOption = $importedOptionCurrent;
 							$alreadyAssigned[]= $importedOptionCurrent->getExternalId();
@@ -161,7 +160,7 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 						}
 					}
 					if ($importedOption) {
-						df_assert($importedOption instanceof Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item);
+						df_assert($importedOption instanceof \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item);
 						$option->set1CId($importedOption->getExternalId());
 						$option->save();
 					}
@@ -185,35 +184,35 @@ class Df_C1_Cml2_Import_Processor_ReferenceList extends Df_C1_Cml2_Import_Proces
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList::class);
+		$this->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList::class);
 	}
 	/**
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList $refList
-	 * @return Df_C1_Cml2_Import_Processor_ReferenceList
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList $refList
+	 * @return \Df\C1\Cml2\Import\Processor\ReferenceList
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList $refList) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList $refList) {
 		return new self(array(self::$P__ENTITY => $refList));
 	}
 
 	/**
 	 * @static
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	 * @return void
 	 */
 	public static function removeDuplicateOptionsWithTheSameExternalId(
-		Df_Catalog_Model_Resource_Eav_Attribute $attribute
+		\Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	) {
-		/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
-		$options = Df_Eav_Model_Entity_Attribute_Option::c();
+		/** @var \Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
+		$options = \Df_Eav_Model_Entity_Attribute_Option::c();
 		$options->setPositionOrder('asc');
 		$options->setAttributeFilter($attribute->getId());
 		$options->setStoreFilter($attribute->getStoreId());
-		$options->addFieldToSelect(Df_C1_Const::ENTITY_EXTERNAL_ID);
+		$options->addFieldToSelect(\Df\C1\C::ENTITY_EXTERNAL_ID);
 		/** @var string[] $alreadyAssigned */
 		$alreadyProcessed = array();
 		foreach ($options as $option) {
-			/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+			/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 			/** @var string|null $externalId */
 		    $externalId = $option->get1CId();
 			if (!is_null($externalId)) {

@@ -27,7 +27,7 @@ abstract class Df_Catalog_Model_XmlExport_Category extends \Df\Xml\Generator\Par
 	private static $P__CATEGORY = 'product';
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Category::process()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Category::process()
 	 * @param string $class
 	 * @param Df_Catalog_Model_Category $category
 	 * @param \Df\Xml\Generator\Document $document

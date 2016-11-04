@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
-	extends Df_C1_Cml2_Import_Data_Entity_AttributeValue_OfferPart {
+namespace Df\C1\Cml2\Import\Data\Entity\AttributeValue;
+class ProcurementDate extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue\OfferPart {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Entity::e()
@@ -16,7 +16,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateAttributeValues()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type::getProductDataNewOrUpdateAttributeValues()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата @see getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
@@ -28,7 +28,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 			$this->{__METHOD__} =
 				!$this->getValue()
 				? ''
-				: $this->getValue()->toString(Zend_Date::ISO_8601)
+				: $this->getValue()->toString(\Zend_Date::ISO_8601)
 			;
 		}
 		return $this->{__METHOD__};
@@ -36,7 +36,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
 	protected function findMagentoAttributeInRegistry() {
 		return df_attributes()->findByCode($this->getAttributeCodeNew());
@@ -62,10 +62,10 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Attribute
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Attribute
 	 */
 	protected function getAttributeTemplate() {
-		return new Df_C1_Cml2_Import_Data_Entity_Attribute_Date();
+		return new \Df\C1\Cml2\Import\Data\Entity\Attribute\Date();
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 		);
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_RequisiteValue|null */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\RequisiteValue|null */
 	private function getRequisiteDDValue() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
@@ -121,7 +121,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 		|	Номенклатура,
 		|	Характеристика";
 	 *
-	 * @return Zend_Date|null
+	 * @return \Zend_Date|null
 	 */
 	private function getValue() {
 		if (!isset($this->{__METHOD__})) {
@@ -129,20 +129,17 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
 				!$this->getRequisiteDDValue()
 				? null
 				// Обратите внимание, что формат именно H, а не HH: «28.08.2014 0:00:00»
-				: new Zend_Date($this->getRequisiteDDValue()->getValue(), 'y-MM-dd H:mm:ss')
+				: new \Zend_Date($this->getRequisiteDDValue()->getValue(), 'y-MM-dd H:mm:ss')
 			);
 		}
 		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Data\Entity\AttributeValue\ProcurementDate
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return new self(array(self::P__OFFER => $offer));
 	}
 }
-
-
- 

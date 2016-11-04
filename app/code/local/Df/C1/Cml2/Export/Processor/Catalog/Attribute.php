@@ -1,15 +1,14 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog;
 /**
- * @method Df_C1_Cml2_Export_Document_Catalog getDocument()
+ * @method \Df\C1\Cml2\Export\Document\Catalog getDocument()
  */
-abstract class Df_C1_Cml2_Export_Processor_Catalog_Attribute
-	extends \Df\Xml\Generator\Part {
+abstract class Attribute extends \Df\Xml\Generator\Part {
 	/**
-	 * @param Df_Catalog_Model_Product $product
+	 * @param \Df_Catalog_Model_Product $product
 	 * @return string|string[]|null
 	 */
-	abstract protected function getЗначение(Df_Catalog_Model_Product $product);
+	abstract protected function getЗначение(\Df_Catalog_Model_Product $product);
 	/** @return string */
 	abstract protected function getИд();
 	/** @return string */
@@ -25,10 +24,10 @@ abstract class Df_C1_Cml2_Export_Processor_Catalog_Attribute
 	public function getResult() {return $this->getСвойство();}
 
 	/**
-	 * @param Df_Catalog_Model_Product $product
+	 * @param \Df_Catalog_Model_Product $product
 	 * @return array(string => string|string[])|null
 	 */
-	public function getЗначенияСвойства(Df_Catalog_Model_Product $product) {
+	public function getЗначенияСвойства(\Df_Catalog_Model_Product $product) {
 		/** @var string $значение */
 		$значение = $this->getЗначение($product);
 		/** @var array(string => string|string[]) $result */
@@ -105,8 +104,8 @@ abstract class Df_C1_Cml2_Export_Processor_Catalog_Attribute
 		));
 	}
 
-	/** @return Df_C1_Cml2_Export_Entry */
-	protected function entry() {return Df_C1_Cml2_Export_Entry::s();}
+	/** @return \Df\C1\Cml2\Export\Entry */
+	protected function entry() {return \Df\C1\Cml2\Export\Entry::s();}
 
 	/** @return array(string => mixed)|null */
 	protected function getВариантыЗначений() {return null;}
@@ -118,11 +117,11 @@ abstract class Df_C1_Cml2_Export_Processor_Catalog_Attribute
 	protected function isМножественное() {return false;}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getProcessorsForVirtualAttributes()
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Attribute_Url::i()
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::getProcessorsForVirtualAttributes()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url::i()
 	 * @param string $class
 	 * @param \Df\Xml\Generator\Document $document
-	 * @return Df_C1_Cml2_Export_Processor_Catalog_Attribute
+	 * @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute
 	 */
 	public static function ic($class, \Df\Xml\Generator\Document $document) {
 		return df_ic($class, __CLASS__, array(self::$P__DOCUMENT => $document));

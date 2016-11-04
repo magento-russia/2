@@ -420,7 +420,7 @@ class X extends MX {
 
 	/**
 	 * 2015-08-15
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::itemClassAdvanced()
+	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::itemClassAdvanced()
 	 * @param string $child
 	 * @return string|null
 	 */
@@ -460,7 +460,7 @@ class X extends MX {
 			</СтавкаНалога>
 		</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Product::getTaxes()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Product::getTaxes()
 	 * @param string $path
 	 * @param string $keyName
 	 * @param string $valueName
@@ -532,7 +532,7 @@ class X extends MX {
 			</СтавкаНалога>
 		</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Product::getTaxes()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Product::getTaxes()
 	 * @param string $path
 	 * @param string $keyName
 	 * @param string $valueName

@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Product_Part_Images
-	extends Df_C1_Cml2_Import_Processor_Product {
+namespace Df\C1\Cml2\Import\Processor\Product\Part;
+class Images extends \Df\C1\Cml2\Import\Processor\Product {
 	/**
 	 * @override
 	 * @return void
@@ -19,7 +19,7 @@ class Df_C1_Cml2_Import_Processor_Product_Part_Images
 		 * и их файлы уже удалены из загрузочной папки.
 		 */
 		if ($this->getEntityProduct()->getImages()->hasItems()) {
-			Df_Dataflow_Model_Importer_Product_Images::i(
+			\Df_Dataflow_Model_Importer_Product_Images::i(
 				$this->getExistingMagentoProduct()
 				, $this->getEntityProduct()->getImages()->getFullPaths()
 				, df_c1()
@@ -35,13 +35,13 @@ class Df_C1_Cml2_Import_Processor_Product_Part_Images
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::importProductsConfigurablePartImages()
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::importProductsSimplePartImages()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsConfigurablePartImages()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsSimplePartImages()
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Processor_Product_Part_Images
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Processor\Product\Part\Images
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return self::ic(__CLASS__, $offer);
 	}
 }

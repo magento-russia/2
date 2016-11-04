@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
-class Df_C1_Cml2_Import_Data_Collection_Offers extends Df_C1_Cml2_Import_Data_Collection {
+class Offers extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * Заметил в магазине термобелье.su,
 	 * что «1С:Управление торговлей» передаёт в интернет-магазин в файле offers.xml
@@ -64,14 +64,14 @@ class Df_C1_Cml2_Import_Data_Collection_Offers extends Df_C1_Cml2_Import_Data_Co
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::postInitItems()
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer[] $items
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {
 		foreach ($items as $offer) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 			if ($offer->isTypeConfigurableChild() && is_null($offer->getConfigurableParent())) {
-				$this->addItem(Df_C1_Cml2_Import_Data_Entity_Offer_ParentStub::i($offer));
+				$this->addItem(\Df\C1\Cml2\Import\Data\Entity\Offer\ParentStub::i($offer));
 			}
 		}
 	}
@@ -81,7 +81,7 @@ class Df_C1_Cml2_Import_Data_Collection_Offers extends Df_C1_Cml2_Import_Data_Co
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_Offer::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Offer::class;}
 
 	/**
 	 * @override
@@ -93,11 +93,11 @@ class Df_C1_Cml2_Import_Data_Collection_Offers extends Df_C1_Cml2_Import_Data_Co
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_State_Import_Collections::getOffers()
-	 * @used-by Df_C1_Cml2_State_Import_Collections::getOffersBase()
+	 * @used-by \Df\C1\Cml2\State\Import\Collections::getOffers()
+	 * @used-by \Df\C1\Cml2\State\Import\Collections::getOffersBase()
 	 * @static
 	 * @param \Df\Xml\X $xml
-	 * @return Df_C1_Cml2_Import_Data_Collection_Offers
+	 * @return \Df\C1\Cml2\Import\Data\Collection\Offers
 	 */
 	public static function i(\Df\Xml\X $xml) {return new self(array(self::$P__E => $xml));}
 }

@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
-class Df_C1_Cml2_Import_Data_Entity_PriceType extends Df_C1_Cml2_Import_Data_Entity {
+class PriceType extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * @todo Надо учитывать НДС
 	 * @param float $originalPrice
@@ -16,7 +16,7 @@ class Df_C1_Cml2_Import_Data_Entity_PriceType extends Df_C1_Cml2_Import_Data_Ent
 		return df_c1_currency_code_to_magento_format($this->leafSne('Валюта'));
 	}
 
-	/** @return Df_Customer_Model_Group|null */
+	/** @return \Df_Customer_Model_Group|null */
 	public function getCustomerGroup() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set($this->getConfigPrices()->getCustomerGroup($this->getName()));
@@ -45,9 +45,6 @@ class Df_C1_Cml2_Import_Data_Entity_PriceType extends Df_C1_Cml2_Import_Data_Ent
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Config_Api_Product_Prices */
+	/** @return \Df\C1\Config\Api\Product\Prices */
 	private function getConfigPrices() {return df_c1_cfg()->product()->prices();}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_PriceTypes::itemClass() */
-
 }

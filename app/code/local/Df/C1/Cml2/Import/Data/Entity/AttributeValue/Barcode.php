@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode
-	extends Df_C1_Cml2_Import_Data_Entity_AttributeValue_OfferPart {
+namespace Df\C1\Cml2\Import\Data\Entity\AttributeValue;
+class Barcode extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue\OfferPart {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Entity::e()
@@ -16,7 +16,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode
 
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateAttributeValues()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type::getProductDataNewOrUpdateAttributeValues()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата @see getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
@@ -27,7 +27,7 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode
 
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute|null
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
 	protected function findMagentoAttributeInRegistry() {
 		return df_attributes()->findByCode($this->getAttributeCodeNew());
@@ -53,20 +53,20 @@ class Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode
 
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Attribute
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Attribute
 	 */
 	protected function getAttributeTemplate() {
-		return new Df_C1_Cml2_Import_Data_Entity_Attribute_Text();
+		return new \Df\C1\Cml2\Import\Data\Entity\Attribute\Text();
 	}
 
 	/** @return int */
 	protected function isAttributeVisibleOnFront() {return 0;}
 
 	/**
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Data\Entity\AttributeValue\Barcode
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return new self(array(self::P__OFFER => $offer));
 	}
 }

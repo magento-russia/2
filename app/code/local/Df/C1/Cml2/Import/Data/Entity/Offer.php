@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
-class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity {
+class Offer extends \Df\C1\Cml2\Import\Data\Entity {
 	/** @return array(string => Df_Catalog_Model_Resource_Eav_Attribute) */
 	public function getConfigurableAttributes() {
 		if (!isset($this->{__METHOD__})) {
@@ -9,13 +9,13 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 			$result = array();
 			if ($this->isTypeConfigurableParent()) {
 				foreach ($this->getConfigurableChildren() as $child) {
-					/** @var Df_C1_Cml2_Import_Data_Entity_Offer $child */
+					/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $child */
 					$result += $child->getConfigurableAttributes();
 				}
 			}
 			else {
 				foreach ($this->getOptionValues() as $optionValue) {
-					/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue $optionValue */
+					/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
 					$result[$optionValue->getAttributeMagento()->getAttributeCode()] =
 						$optionValue->getAttributeMagento()
 					;
@@ -26,14 +26,14 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer[] */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
 	public function getConfigurableChildren() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer[] $result */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result */
 			$result = array();
 			if (!$this->isTypeConfigurableChild()) {
 				foreach ($this->getStateOffers() as $offer) {
-					/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+					/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 					if ($offer->isTypeConfigurableChild()) {
 						if ($this->getExternalId() === $offer->getExternalIdForConfigurableParent()) {
 							$result[]= $offer;
@@ -46,7 +46,7 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 					"У товара «%s» найдено %d вариантов:\n%s"
 					, $this->getName()
 					, count($result)
-					/** @uses Df_C1_Cml2_Import_Data_Entity_Offer::getName() */
+					/** @uses \Df\C1\Cml2\Import\Data\Entity\Offer::getName() */
 					, df_cc_n(df_each($result, 'getName'))
 				);
 			}
@@ -61,9 +61,9 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 	 * даже если его нет в offers.xml,
 	 * потому что при отсутствии предложения-родителя в offers.xml
 	 * мы его добавляем в коллекцию искусственно:
-	 * @see Df_C1_Cml2_Import_Data_Collection_Offers::getItems()
+	 * @see \Df\C1\Cml2\Import\Data\Collection\Offers::getItems()
 	 *
-	 * @return Df_C1_Cml2_Import_Data_Entity_Offer|null
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Offer|null
 	 */
 	public function getConfigurableParent() {
 		return
@@ -75,7 +75,7 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 		;
 	}
 	
-	/** @return Df_C1_Cml2_Import_Data_Entity_Product */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
 	public function getEntityProduct() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
@@ -97,34 +97,34 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues */
 	public function getOptionValues() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				!$this->isBase()
 				? $this->getBase()->getOptionValues()
-				: Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::i($this, $this->e())
+				: \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::i($this, $this->e())
 			;
 			/**
 			 * НЕЛЬЗЯ автоматически вызывать здесь
-			 * @see Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::addAbsentItems(),
+			 * @see \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::addAbsentItems(),
 			 * потому что иначе мы попадём рекурсию.
 			 */
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\OfferPart\Prices */
 	public function getPrices() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices::i(
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\OfferPart\Prices::i(
 				$this->e(), $this
 			);
 		}
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_Catalog_Model_Product */
+	/** @return \Df_Catalog_Model_Product */
 	public function getProduct() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df()->registry()->products()->findByExternalId($this->getExternalId());
@@ -287,7 +287,7 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 		return df_n_get($this->{__METHOD__});
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer[] */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
 	public function getSiblings() {
 		df_assert($this->isTypeConfigurableChild());
 		return $this->getConfigurableParent()->getConfigurableChildren();
@@ -301,7 +301,7 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 			if (1 < count($this->getExternalIdExploded())) {
 				/**
 				 * Обратите внимание, что в данном месте мы не можем вызывать метод
-				 * @see Df_C1_Cml2_Import_Data_Entity_Offer::isTypeConfigurableParent(),
+				 * @see \Df\C1\Cml2\Import\Data\Entity\Offer::isTypeConfigurableParent(),
 				 * иначе попадём в рекурсию.
 				 */
 				if ($this->getStateOffers()->findByExternalId(
@@ -407,17 +407,17 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 	 * Данный метод возвращает базовую информацию товарного предложения
 	 * (ту, которая содержится в файле offers_*.xml):
 	 * название, характеристики, настраиваемые опции.
-	 * @return Df_C1_Cml2_Import_Data_Entity_Offer
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Offer
 	 */
 	private function getBase() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				$this->isBase()
 				? $this
-				: Df_C1_Cml2_State_Import::s()->collections()->getOffersBase()
+				: \Df\C1\Cml2\State\Import::s()->collections()->getOffersBase()
 					->findByExternalId($this->getExternalId())
 			;
-			df_assert($this->{__METHOD__} instanceof Df_C1_Cml2_Import_Data_Entity_Offer);
+			df_assert($this->{__METHOD__} instanceof \Df\C1\Cml2\Import\Data\Entity\Offer);
 		}
 		return $this->{__METHOD__};
 	}
@@ -430,27 +430,16 @@ class Df_C1_Cml2_Import_Data_Entity_Offer extends Df_C1_Cml2_Import_Data_Entity 
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Offers */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Offers */
 	private function getStateOffers() {
-		return Df_C1_Cml2_State_Import::s()->collections()->getOffers();
+		return \Df\C1\Cml2\State\Import::s()->collections()->getOffers();
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Products */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Products */
 	private function getStateProductEntities() {
-		return Df_C1_Cml2_State_Import::s()->collections()->getProducts();
+		return \Df\C1\Cml2\State\Import::s()->collections()->getProducts();
 	}
 
 	/** @return bool */
 	private function isBase() {return !!parent::getName();}
-
-	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_Offers::itemClass()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue::_construct()
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::_construct()
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices::_construct()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_AttributeValue_OfferPart::_construct()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Offer_ParentStub::_construct()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product::_construct()
-	 */
-
 }

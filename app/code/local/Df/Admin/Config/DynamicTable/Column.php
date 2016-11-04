@@ -5,8 +5,8 @@
  * @used-by Df_Admin_Block_Field_DynamicTable::addColumn()
  * @used-by Df_Admin_Block_Field_DynamicTable::_renderCellTemplate()
  * Прикладные пользователи:
- * @used-by Df_C1_Config_Block_MapFromCustomerGroupToPriceType::_construct()
- * @used-by Df_C1_Config_Block_NonStandardCurrencyCodes::_construct()
+ * @used-by \Df\C1\Config\Block\MapFromCustomerGroupToPriceType::_construct()
+ * @used-by \Df\C1\Config\Block\NonStandardCurrencyCodes::_construct()
  * @used-by Df_Directory_Block_Field_CountriesOrdered::_construct()
  */
 abstract class Df_Admin_Config_DynamicTable_Column extends Df_Core_Model {

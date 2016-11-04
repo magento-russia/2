@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export;
-class Df_C1_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
+class DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	/**
 	 * @override
 	 * @return array(string => string)
@@ -8,7 +8,7 @@ class Df_C1_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	public function getAttributes() {
 		return array(
 			'ВерсияСхемы' => '2.05'
-			,'ДатаФормирования' => $this->formatDate(Zend_Date::now())
+			,'ДатаФормирования' => $this->formatDate(\Zend_Date::now())
 			,'ФорматДаты' => 'ДФ=yyyy-MM-dd; ДЛФ=DT'
 			,'ФорматВремени' => 'ДФ=ЧЧ:мм:сс; ДЛФ=T'
 			,'РазделительДатаВремя' => 'T'
@@ -36,25 +36,25 @@ class Df_C1_Cml2_Export_DocumentMixin extends \Df\Xml\Generator\DocumentMixin {
 	}
 
 	/**
-	 * @param Zend_Date $date
+	 * @param \Zend_Date $date
 	 * @return string
 	 */
-	protected function formatDate(Zend_Date $date) {
+	protected function formatDate(\Zend_Date $date) {
 		return implode('T', array(
-			df_dts($date, self::DATE_FORMAT), df_dts($date, Zend_Date::TIME_MEDIUM)
+			df_dts($date, self::DATE_FORMAT), df_dts($date, \Zend_Date::TIME_MEDIUM)
 		));
 	}
 
-	/** @used-by Df_C1_Cml2_Action_GenericExport::generateResponseBodyFake() */
+	/** @used-by \Df\C1\Cml2\Action\GenericExport::generateResponseBodyFake() */
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Sale_Order::getDocumentData_Order()
-	 * @used-by Df_C1_Cml2_Export_Data_Entity_Customer::getDateOfBirthAsString()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Sale\Order::getDocumentData_Order()
+	 * @used-by \Df\C1\Cml2\Export\Data\Entity\Customer::getDateOfBirthAsString()
 	 */
 	const DATE_FORMAT = 'y-MM-dd';
 	/**
 	 * @param \Df\Xml\Generator\Document $parent
-	 * @return Df_C1_Cml2_Export_DocumentMixin
+	 * @return \Df\C1\Cml2\Export\DocumentMixin
 	 */
 	public static function i(\Df\Xml\Generator\Document $parent) {
 		return self::ic(__CLASS__, $parent);

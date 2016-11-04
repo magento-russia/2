@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2;
-class Df_C1_Cml2_Cookie {
+class Cookie {
 	/** @return string|null */
 	public function getSessionId() {return $this->get(self::SESSION_ID);}
 
@@ -8,7 +8,7 @@ class Df_C1_Cml2_Cookie {
 	 * @param string $cookieName
 	 * @return string|null
 	 */
-	private function get($cookieName) {return Mage::app()->getRequest()->getCookie($cookieName);}
+	private function get($cookieName) {return \Mage::app()->getRequest()->getCookie($cookieName);}
 
 	/**
 	 * Имя (идентификатор) cookie, которая содержит идентификатор сессии.
@@ -32,6 +32,6 @@ class Df_C1_Cml2_Cookie {
 	 */
 	const SESSION_ID = 'df_c1_cml2_sessionId';
 
-	/** @return Df_C1_Cml2_Cookie */
+	/** @return \Df\C1\Cml2\Cookie */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

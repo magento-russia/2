@@ -131,7 +131,7 @@ function df_remove_attribute($entityTypeId, $attributeCode) {
 function df_remove_category_attribute($code) {df_remove_attribute('catalog_category', $code);}
 
 /**
- * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::findMagentoAttributeInRegistry()
+ * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer::findMagentoAttributeInRegistry()
  * @param string $code
  * @return void
  */

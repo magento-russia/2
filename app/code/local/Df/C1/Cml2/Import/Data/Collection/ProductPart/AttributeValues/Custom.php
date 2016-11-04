@@ -1,16 +1,15 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues;
-/** @method Df_C1_Cml2_Import_Data_Entity_AttributeValue[] getItems() */
-class Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
-	extends Df_C1_Cml2_Import_Data_Collection {
+/** @method \Df\C1\Cml2\Import\Data\Entity\AttributeValue[] getItems() */
+class Custom extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::createItem()
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Entity
+	 * @return \Df\C1\Cml2\Import\Data\Entity
 	 */
 	protected function createItem(\Df\Xml\X $e) {
-		return Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::ic(
+		return \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::ic(
 			$this->itemClassAdvanced($e), $e, $this->getProduct()
 		);
 	}
@@ -75,8 +74,8 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 		}
 		return
 			!$valueId
-			? Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::class
-			: Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option::class
+			? \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::class
+			: \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option::class
 		;
 	}
 
@@ -120,7 +119,7 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::postInitItems()
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
-	 * @param Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom[] $items
+	 * @param \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {
@@ -128,14 +127,14 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 		$xmlManufacturer = $this->e()->descend('Изготовитель');
 		if ($xmlManufacturer) {
 			$this->addItem(
-				Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::i(
+				\Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer::i(
 					$xmlManufacturer, $this->getProduct()
 				)
 			);
 		}
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Product */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
 	private function getProduct() {return $this[self::$P__PRODUCT];}
 
 	/**
@@ -144,18 +143,18 @@ class Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCT, Df_C1_Cml2_Import_Data_Entity_Product::class);
+		$this->_prop(self::$P__PRODUCT, \Df\C1\Cml2\Import\Data\Entity\Product::class);
 	}
 	/** @var string */
 	private static $P__PRODUCT = 'product';
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Product::getAttributeValuesCustom()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Product::getAttributeValuesCustom()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @param Df_C1_Cml2_Import_Data_Entity_Product $product
-	 * @return Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Product $product
+	 * @return \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom
 	 */
-	public static function i(\Df\Xml\X $e, Df_C1_Cml2_Import_Data_Entity_Product $product) {
+	public static function i(\Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Product $product) {
 		return new self(array(self::$P__E => $e, self::$P__PRODUCT => $product));
 	}
 }

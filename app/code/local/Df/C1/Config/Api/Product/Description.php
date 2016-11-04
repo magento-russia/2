@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Config_Api_Product_Description extends Df_C1_Config_Api_Cml2 {
+namespace Df\C1\Config\Api\Product;
+class Description extends \Df\C1\Config\Api\Cml2 {
 	/** @return string */
 	public function getDefault() {return $this->v('default');}
 	/** @return boolean */
@@ -11,6 +12,6 @@ class Df_C1_Config_Api_Product_Description extends Df_C1_Config_Api_Cml2 {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_1c/product__description/';}
-	/** @return Df_C1_Config_Api_Product_Description */
+	/** @return \Df\C1\Config\Api\Product\Description */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -1,13 +1,13 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update
-	extends Df_C1_Cml2_Import_Processor_Product_Type_Configurable {
+namespace Df\C1\Cml2\Import\Processor\Product\Type\Configurable;
+class Update extends \Df\C1\Cml2\Import\Processor\Product\Type\Configurable {
 	/**
 	 * @override
 	 * @return void
 	 */
 	public function process() {
 		df_assert($this->getEntityOffer()->isTypeConfigurableParent());
-		/** @var Df_Catalog_Model_Product $product */
+		/** @var \Df_Catalog_Model_Product $product */
 		$product = $this->getExistingMagentoProduct();
 		$product->addData(array_merge(
 			$this->getProductDataNewOrUpdateAttributeValueIdsCustom()
@@ -45,7 +45,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update
 
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Product
+	 * @return \Df_Catalog_Model_Product
 	 */
 	protected function getProductMagento() {return $this->getExistingMagentoProduct();}
 
@@ -54,7 +54,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update
 		/** @var array(string => string) $result */
 		$result = array();
 		foreach ($this->getEntityProduct()->getAttributeValuesCustom() as $attributeValue) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom $attributeValue */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom $attributeValue */
 			if ($attributeValue->getAttributeMagento()) {
 				$result[$attributeValue->getAttributeName()] = $attributeValue->getValueForObject();
 			}
@@ -64,15 +64,15 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update
 
 	/**
 	 *
-	 * @param Df_C1_Cml2_Import_Processor_Product_Type_Configurable $masterProcessor
+	 * @param \Df\C1\Cml2\Import\Processor\Product\Type\Configurable $masterProcessor
 	 * @return void
 	 */
 	public static function p_update(
-		Df_C1_Cml2_Import_Processor_Product_Type_Configurable $masterProcessor
+		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable $masterProcessor
 	) {
 		/**
 		 * Обратите внимание, что мы тут можем вызывать
-		 * @uses Df_C1_Cml2_Import_Processor_Product::getEntityOffer(),
+		 * @uses \Df\C1\Cml2\Import\Processor\Product::getEntityOffer(),
 		 * несмотря на то, что этот метод имеет область видимости «protected».
 		 * http://php.net/manual/language.oop5.visibility.php
 		 * «Visibility from other objects.

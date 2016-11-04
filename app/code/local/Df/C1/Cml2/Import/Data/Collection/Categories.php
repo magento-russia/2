@@ -1,12 +1,12 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
-class Df_C1_Cml2_Import_Data_Collection_Categories extends Df_C1_Cml2_Import_Data_Collection {
+class Categories extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_Category::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Category::class;}
 
 
 	/**
@@ -27,12 +27,12 @@ class Df_C1_Cml2_Import_Data_Collection_Categories extends Df_C1_Cml2_Import_Dat
 	/** @var string */
 	private static $P__XML_PATH_AS_ARRAY = 'xml_path_as_array';
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Category::getChildren()
-	 * @used-by Df_C1_Cml2_State_Import_Collections::getCategories()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Category::getChildren()
+	 * @used-by \Df\C1\Cml2\State\Import\Collections::getCategories()
 	 * @static
 	 * @param \Df\Xml\X $xml
 	 * @param array|null $pathAsArray [optional]
-	 * @return Df_C1_Cml2_Import_Data_Collection_Categories
+	 * @return \Df\C1\Cml2\Import\Data\Collection\Categories
 	 */
 	public static function i(\Df\Xml\X $xml, $pathAsArray = null) {
 		return new self(array(self::$P__E => $xml, self::$P__XML_PATH_AS_ARRAY => $pathAsArray));

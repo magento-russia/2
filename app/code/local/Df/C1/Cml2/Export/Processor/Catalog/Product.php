@@ -1,9 +1,9 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog;
 /**
- * @method Df_C1_Cml2_Export_Document_Catalog getDocument()
+ * @method \Df\C1\Cml2\Export\Document\Catalog getDocument()
  */
-class Df_C1_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlExport_Product {
+class Product extends \Df_Catalog_Model_XmlExport_Product {
 	/**
 	 * Структуру данных получил из анализа программного кода
 	 * обработки «Б_ПомощникИмпортаТоваровБитрикс»
@@ -183,8 +183,8 @@ class Df_C1_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 		;
 	}
 
-	/** @return Df_C1_Cml2_Export_Entry */
-	protected function entry() {return Df_C1_Cml2_Export_Entry::s();}
+	/** @return \Df\C1\Cml2\Export\Entry */
+	protected function entry() {return \Df\C1\Cml2\Export\Entry::s();}
 
 	/** @return array(string => string[]) */
 	private function getOutput_Группы() {
@@ -206,15 +206,15 @@ class Df_C1_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 		/** @var array(array(string => string)) $attributeValues */
 		$attributeValues = array();
 		foreach ($this->getDocument()->getCatalogAttributes() as $attribute) {
-			/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-			/** @var Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real $processor */
+			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real $processor */
 			$processor = $this->getDocument()->getProcessorForAttribute($attribute);
 			if ($processor->isEligible()) {
 				$attributeValues[]= $processor->getЗначенияСвойства($this->getProduct());
 			}
 		}
 		foreach ($this->getDocument()->getProcessorsForVirtualAttributes() as $processor) {
-			/** @var Df_C1_Cml2_Export_Processor_Catalog_Attribute $processor */
+			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute $processor */
 			if ($processor->isEligible()) {
 				$attributeValues[]= $processor->getЗначенияСвойства($this->getProduct());
 			}
@@ -287,7 +287,7 @@ class Df_C1_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 	private function getExternalId() {
 		if (!isset($this->{__METHOD__})) {
 			if (!$this->getProduct()->get1CId()) {
-				Df_C1_Cml2_Processor_Product_AddExternalId::p($this->getProduct(), df_t()->guid());
+				\Df\C1\Cml2\Processor\Product\AddExternalId::p($this->getProduct(), df_t()->guid());
 			}
 			$this->{__METHOD__} = $this->getProduct()->get1CId();
 		}
@@ -303,6 +303,6 @@ class Df_C1_Cml2_Export_Processor_Catalog_Product extends Df_Catalog_Model_XmlEx
 		;
 	}
 
-	/** @used-by Df_C1_Cml2_Export_Document_Catalog::getProcessorClass_products() */
+	/** @used-by \Df\C1\Cml2\Export\Document\Catalog::getProcessorClass_products() */
 
 }

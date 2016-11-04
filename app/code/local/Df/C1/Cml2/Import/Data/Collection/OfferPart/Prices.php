@@ -1,7 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\OfferPart;
-class Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_C1_Cml2_Import_Data_Collection {
-	/** @return Df_C1_Cml2_Import_Data_Entity_OfferPart_Price|null */
+class Prices extends \Df\C1\Cml2\Import\Data\Collection {
+	/** @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price|null */
 	public function getMain() {
 		return $this->findByExternalId($this->getState()->getPriceTypes()->getMain()->getExternalId());
 	}
@@ -11,7 +11,7 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_C1_Cml2_Impo
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_OfferPart_Price::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price::class;}
 
 	/**
 	 * @override
@@ -20,7 +20,7 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_C1_Cml2_Impo
 	 */
 	protected function itemPath() {return 'Цены/Цена';}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
 	private function getOffer() {return $this->cfg(self::$P__OFFER);}
 
 	/**
@@ -29,18 +29,18 @@ class Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices extends Df_C1_Cml2_Impo
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__OFFER, Df_C1_Cml2_Import_Data_Entity_Offer::class);
+		$this->_prop(self::$P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
 	}
 	/** @var string */
 	private static $P__OFFER = 'offer';
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_Offer::getPrices()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Offer::getPrices()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Data\Collection\OfferPart\Prices
 	 */
-	public static function i(\Df\Xml\X $e, Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return new self(array(self::$P__E => $e, self::$P__OFFER => $offer));
 	}
 }

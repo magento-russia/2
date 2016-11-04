@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
+namespace Df\C1\Cml2\Import\Processor;
+class Order extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @override
 	 * @return void
@@ -40,7 +41,7 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 			 *
 			 * В импортирумых данных разным строкам заказа тоже соответствуют разные товары
 			 * благодаря применению шаблона composite:
-			 * @see Df_C1_Cml2_Import_Data_Entity_Order_Item_Composite
+			 * @see \Df\C1\Cml2\Import\Data\Entity\Order\Item\Composite
 			 *
 			 * Поэтому путём сравнения множества идентификаторов товаров в заказе Magento
 			 * с множеством идентификатором товаров импортированной версии того же самого заказа, * мы увидим:
@@ -56,21 +57,21 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Order
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Order
 	 */
 	protected function getEntity() {
 		return parent::getEntity();
 	}
 
-	/** @return Mage_Sales_Model_Order_Item[] */
+	/** @return \Mage_Sales_Model_Order_Item[] */
 	private function getMapFromProductIdToSimpleOrderItem() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Sales_Model_Order_Item[] $result */
+			/** @var \Mage_Sales_Model_Order_Item[] $result */
 			$result = array();
 			foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
-				/** @var Mage_Sales_Model_Order_Item $orderItem */
+				/** @var \Mage_Sales_Model_Order_Item $orderItem */
 				// собираем идентификаторы только простых товаров
-				if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
+				if (\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
 					/** @var int $productId */
 					$productId = df_nat($orderItem->getProductId());
 					df_assert(is_null(dfa($result, $productId)));
@@ -88,7 +89,7 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 			/** @var int[] $result */
 			$result = array();
 			foreach ($this->getEntity()->getItems() as $entityOrderItem) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Order_Item $entityOrderItem */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item $entityOrderItem */
 				$result[]= $entityOrderItem->getProduct()->getId();
 			}
 			$this->{__METHOD__} = $result;
@@ -105,9 +106,9 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 			/** @var int[] $result */
 			$result = array();
 			foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
-				/** @var Mage_Sales_Model_Order_Item $orderItem */
+				/** @var \Mage_Sales_Model_Order_Item $orderItem */
 				// Собираем идентификаторы только простых товаров.
-				if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
+				if (\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
 					$result[]= $orderItem->getProductId();
 				}
 			}
@@ -148,21 +149,21 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 
 	/**
 	 * @param int $productId
-	 * @return Mage_Sales_Model_Order_Item
+	 * @return \Mage_Sales_Model_Order_Item
 	 */
 	private function getSimpleOrderItemByProductId($productId) {
 		df_param_integer($productId, 0);
 		df_param_between($productId, 0, 1);
-		/** @var Mage_Sales_Model_Order_Item $result */
+		/** @var \Mage_Sales_Model_Order_Item $result */
 		$result = dfa($this->getMapFromProductIdToSimpleOrderItem(), $productId);
-		df_assert($result instanceof Mage_Sales_Model_Order_Item);
+		df_assert($result instanceof \Mage_Sales_Model_Order_Item);
 		return $result;
 	}
 
 	/** @return void */
 	private function orderItemsAdd() {
 		$this->orderItemsProcess(
-			$this->getProductIdsToAdd(), Df_C1_Cml2_Import_Processor_Order_Item_Add::class
+			$this->getProductIdsToAdd(), \Df\C1\Cml2\Import\Processor\Order\Item\Add::class
 		);
 	}
 
@@ -172,31 +173,31 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 //			->orderItemsProcess(
 //				$this->getProductIdsToDelete()
 //				,
-//				Df_C1_Cml2_Import_Processor_Order_Item_Delete::class
+//				\Df\C1\Cml2\Import\Processor\Order\Item\Delete::class
 //			)
 //		;
 		foreach ($this->getProductIdsToDelete() as $productId) {
 			/** @var int $productId */
 			df_assert_integer($productId);
 			df_assert_gt0($productId);
-			/** @var Mage_Sales_Model_Order_Item $orderItem */
+			/** @var \Mage_Sales_Model_Order_Item $orderItem */
 			$orderItem = $this->getSimpleOrderItemByProductId($productId);
-			/** @var Df_C1_Cml2_Import_Processor_Order_Item $processor */
+			/** @var \Df\C1\Cml2\Import\Processor\Order\Item $processor */
 //			$processor =
 //				df_model(
 //					$processorClassMf
 //					,
 //					array(
-//						Df_C1_Cml2_Import_Processor_Order_Item_Add
+//						\Df\C1\Cml2\Import\Processor\Order\Item\Add
 //							::P__ENTITY_ORDER => $this->getEntity()
 //						,
-//						Df_C1_Cml2_Import_Processor_Order_Item_Add::P__ENTITY =>
+//						\Df\C1\Cml2\Import\Processor\Order\Item\Add::P__ENTITY =>
 //							$this->getEntity()->getItems()->getItemByProductId($productId)
 //					)
 //				)
 //			;
 //
-//			df_assert($processor instanceof Df_C1_Cml2_Import_Processor_Order_Item);
+//			df_assert($processor instanceof \Df\C1\Cml2\Import\Processor\Order\Item);
 //
 //			$processor->process();
 		}
@@ -210,7 +211,7 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 	private function orderItemsProcess(array $productIds, $processorClass) {
 		foreach ($productIds as $productId) {
 			/** @var int $productId */
-			Df_C1_Cml2_Import_Processor_Order_Item::ic(
+			\Df\C1\Cml2\Import\Processor\Order\Item::ic(
 				$processorClass
 				, $this->getEntity()->getItems()->getItemByProductId($productId)
 				, $this->getEntity()
@@ -221,7 +222,7 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 	/** @return void */
 	private function orderItemsUpdate() {
 		$this->orderItemsProcess(
-			$this->getProductIdsToUpdate(), Df_C1_Cml2_Import_Processor_Order_Item_Update::class
+			$this->getProductIdsToUpdate(), \Df\C1\Cml2\Import\Processor\Order\Item\Update::class
 		);
 	}
 
@@ -231,14 +232,14 @@ class Df_C1_Cml2_Import_Processor_Order extends Df_C1_Cml2_Import_Processor {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_C1_Cml2_Import_Data_Entity_Order::class);
+		$this->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Order::class);
 	}
 	/**
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Order $order
-	 * @return Df_C1_Cml2_Import_Processor_Order
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Order $order
+	 * @return \Df\C1\Cml2\Import\Processor\Order
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Order $order) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Order $order) {
 		return new self(array(self::$P__ENTITY => $order));
 	}
 }

@@ -1,11 +1,12 @@
 <?php
-abstract class Df_C1_Cml2_Import_Processor_Product extends Df_C1_Cml2_Import_Processor {
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer */
+namespace Df\C1\Cml2\Import\Processor;
+abstract class Product extends \Df\C1\Cml2\Import\Processor {
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
 	protected function getEntityOffer() {return $this->getEntity();}
 	
-	/** @return Df_C1_Cml2_Import_Data_Entity_Product */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
 	protected function getEntityProduct() {
-		/** @var Df_C1_Cml2_Import_Data_Entity_Product $result */
+		/** @var \Df\C1\Cml2\Import\Data\Entity\Product $result */
 		$result = $this->getEntityOffer()->getEntityProduct();
 		/**
 		 * Инициализируем как следует прикладной тип.
@@ -23,7 +24,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product extends Df_C1_Cml2_Import_Pro
 		return $result;
 	}	
 
-	/** @return Df_Catalog_Model_Product|null */
+	/** @return \Df_Catalog_Model_Product|null */
 	protected function getExistingMagentoProduct() {
 		// Грязный хак.
 		// Причём кэшировать результат метода нельзя :(
@@ -38,22 +39,22 @@ abstract class Df_C1_Cml2_Import_Processor_Product extends Df_C1_Cml2_Import_Pro
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, Df_C1_Cml2_Import_Data_Entity_Offer::class);
+		$this->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Part_Images::i()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable::i()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Simple::i()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable::p()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Child::p()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New::p_new()
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update::p_update()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Part\Images::i()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable::i()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Simple::i()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable::p()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Child::p()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\NewT::p_new()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Update::p_update()
 	 * @param string $class
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Processor_Product
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Processor\Product
 	 */
-	protected static function ic($class, Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	protected static function ic($class, \Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return df_ic($class, __CLASS__, array(self::$P__ENTITY => $offer));
 	}
 }

@@ -1,8 +1,9 @@
 <?php
-class Df_C1_Cml2_State_Export extends Df_Core_Model {
-	/** @return Df_C1_Cml2_State_Export_Products */
-	public function getProducts() {return Df_C1_Cml2_State_Export_Products::s();}
+namespace Df\C1\Cml2\State;
+class Export extends \Df_Core_Model {
+	/** @return \Df\C1\Cml2\State\Export\Products */
+	public function getProducts() {return \Df\C1\Cml2\State\Export\Products::s();}
 
-	/** @return Df_C1_Cml2_State_Export */
+	/** @return \Df\C1\Cml2\State\Export */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

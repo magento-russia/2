@@ -1,4 +1,5 @@
 <?php
+namespace Df\C1\Cml2\Import\Data\Entity\Order\Item;
 /**
  * Это класс моделирует сложную строку заказа:
  * строку, включающую в себя все простые строки заказа для данного товара.
@@ -14,8 +15,7 @@
  *
  * http://en.wikipedia.org/wiki/Composite_pattern
  */
-class Df_C1_Cml2_Import_Data_Entity_Order_Item_Composite
-	extends Df_C1_Cml2_Import_Data_Entity_Order_Item {
+class Composite extends \Df\C1\Cml2\Import\Data\Entity\Order\Item {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Entity::leaf()
@@ -25,14 +25,14 @@ class Df_C1_Cml2_Import_Data_Entity_Order_Item_Composite
 	 */
 	public function leaf($name, $default = null) {return $this->getFirstItem()->leaf($name, $default);}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Order_Item */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Order\Item */
 	private function getFirstItem() {return dfa($this->getSimpleItems(), 0);}
 
 	/**
 	 * Перекрываем этот метод лишь для того,
 	 * чтобы не проводить ненужные вычисления свойства $_product
 	 * @override
-	 * @return Df_Catalog_Model_Product
+	 * @return \Df_Catalog_Model_Product
 	 */
 	public function getProduct() {return $this->getFirstItem()->getProduct();}
 
@@ -51,11 +51,11 @@ class Df_C1_Cml2_Import_Data_Entity_Order_Item_Composite
 	private static $P__SIMPLE_ITEMS = 'simple_items';
 	/**
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Order $order
-	 * @param Df_C1_Cml2_Import_Data_Entity_Order_Item[] $items
-	 * @return Df_C1_Cml2_Import_Data_Entity_Order_Item_Composite
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Order $order
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Order\Item[] $items
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Order\Item\Composite
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Order $order, array $items) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Order $order, array $items) {
 		return new self(array(
 			self::P__ENTITY_ORDER => $order, self::$P__SIMPLE_ITEMS => $items, self::$P__E => null
 		));

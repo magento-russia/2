@@ -1,10 +1,11 @@
 <?php
+namespace Df\C1\Config\Source;
 /**
  * @singleton
  * Система создаёт объект-одиночку для потомков этого класса.
  * Не забывайте об этом при реализации кеширования результатов вычислений внутри этого класса!
  */
-class Df_C1_Config_Source_ReferenceListUpdateMode extends Df_Admin_Config_Source {
+class ReferenceListUpdateMode extends \Df_Admin_Config_Source {
 	/**
 	 * @override
 	 * @param bool $isMultiSelect
@@ -36,5 +37,3 @@ class Df_C1_Config_Source_ReferenceListUpdateMode extends Df_Admin_Config_Source
 	 */
 	public static function isNone($value) {return self::$VALUE__NONE === $value;}
 }
-
-

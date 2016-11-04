@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Action\Orders;
-class Df_C1_Cml2_Action_Orders_Import extends Df_C1_Cml2_Action {
+class Import extends \Df\C1\Cml2\Action {
 	/**
 	 * Обратите внимание,
 	 * что 1С:Управление торговлей передаёт в магазин только те заказы,
@@ -15,21 +15,21 @@ class Df_C1_Cml2_Action_Orders_Import extends Df_C1_Cml2_Action {
 			$this->logXml();
 		}
 		foreach ($this->getOrders() as $entityOrder) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Order $entityOrder */
-			Df_C1_Cml2_Import_Processor_Order::i($entityOrder)->process();
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Order $entityOrder */
+			\Df\C1\Cml2\Import\Processor\Order::i($entityOrder)->process();
 		}
 		$this->setResponseSuccess();
 	}
 
 	/** @return string */
 	private function getFileFullPath() {
-		return df_cc_path(Mage::getBaseDir('var'), 'log', 'site-to-my.xml');
+		return df_cc_path(\Mage::getBaseDir('var'), 'log', 'site-to-my.xml');
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_Orders */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\Orders */
 	private function getOrders() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_Orders::i(df_xml_parse($this->getXml()));
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Orders::i(df_xml_parse($this->getXml()));
 		}
 		return $this->{__METHOD__};
 	}

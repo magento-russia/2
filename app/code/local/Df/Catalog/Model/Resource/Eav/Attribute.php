@@ -8,7 +8,7 @@
  */
 class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resource_Eav_Attribute {
 	/** @return string|null */
-	public function get1CId() {return $this->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID);}
+	public function get1CId() {return $this->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID);}
 
 	/**
 	 * 2015-01-24
@@ -105,8 +105,8 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 	private $_options = array();
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real::_construct()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty::_construct()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::_construct()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT::_construct()
 	 * @used-by Df_Catalog_Model_Resource_Product_Attribute_Collection::_construct()
 	 * @used-by Df_Dataflow_Model_Registry_Collection_Attributes::getEntityClass()
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Attribute::getEntityClass()

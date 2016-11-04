@@ -1,10 +1,9 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
-abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
-	extends Df_C1_Cml2_Import_Data_Entity {
+abstract class AttributeValue extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateAttributeValues()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type::getProductDataNewOrUpdateAttributeValues()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата @see getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
@@ -13,7 +12,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 	abstract public function getValueForDataflow();
 	/** @return bool */
 	abstract public function isValidForImport();
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute|null */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute|null */
 	abstract protected function findMagentoAttributeInRegistry();
 	/** @return string */
 	abstract protected function getAttributeCodeNew();
@@ -21,20 +20,20 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 	abstract protected function getAttributeExternalId();
 	/** @return string */
 	abstract protected function getAttributeFrontendLabel();
-	/** @return Df_C1_Cml2_Import_Data_Entity_Attribute */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Attribute */
 	abstract protected function getAttributeTemplate();
-	/** @return Df_C1_Cml2_Import_Data_Entity_Product */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
 	abstract protected function getProduct();
 
 	/**
 	 * Добавил к названию метода окончание «Magento»,
 	 * чтобы избежать конфликта с родительским методом
 	 * \Df\Xml\Parser\Entity::getAttribute()
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	public function getAttributeMagento() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $result */
+			/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $result */
 			$result = $this->findMagentoAttributeInRegistry();
 			if (!$result) {
 				// Вот здесь-то мы можем добавить в Magento нестандартные свойства товаров,
@@ -43,25 +42,25 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 				df_c1_log('Создано свойство «%s».', $result->getName());
 				df_attributes()->addEntity($result);
 			}
-			df_assert($result instanceof Df_Catalog_Model_Resource_Eav_Attribute);
+			df_assert($result instanceof \Df_Catalog_Model_Resource_Eav_Attribute);
 			// Мало, чтобы свойство присутствовало в системе:
 			// надо добавить его к прикладному типу товара.
 			df_c1()->create1CAttributeGroupIfNeeded($this->getProduct()->getAttributeSet()->getId());
 			/** @var string $status */
-			$status = Df_Catalog_Model_Installer_AddAttributeToSet::p(
+			$status = \Df_Catalog_Model_Installer_AddAttributeToSet::p(
 				$result->getAttributeCode()
 				,$this->getProduct()->getAttributeSet()->getId()
 				,$this->getGroupForAttribute($result)
 			);
 			switch ($status) {
-				case Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__ADDED:
+				case \Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__ADDED:
 					df_c1_log(
 						'К типу «%s» добавлено свойство «%s».'
 						,$this->getProduct()->getAttributeSet()->getAttributeSetName()
 						,$result->getName()
 					);
 					break;
-				case Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP:
+				case \Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__CHANGED_GROUP:
 					df_c1_log(
 						'В типе «%s» свойство «%s» сменило группу на «%s».'
 						,$this->getProduct()->getAttributeSet()->getAttributeSetName()
@@ -80,12 +79,12 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	protected function createMagentoAttribute() {
-		/** @var Df_Catalog_Model_Resource_Eav_Attribute $result */
+		/** @var \Df_Catalog_Model_Resource_Eav_Attribute $result */
 		$result = df_attributes()->createOrUpdate($this->getCreationParams());
-		df_assert($result->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID));
+		df_assert($result->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID));
 		df_c1_log('Добавлено свойство «%s».', $this->getAttributeFrontendLabel());
 		return $result;
 	}
@@ -94,11 +93,11 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 	protected function getCreationParamsCustom() {return array();}
 
 	/**
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	 * @return string
 	 */
-	protected function getGroupForAttribute(Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
-		return Df_C1_Const::PRODUCT_ATTRIBUTE_GROUP_NAME;
+	protected function getGroupForAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
+		return \Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME;
 	}
 
 	/** @return array(string => string|int) */
@@ -110,8 +109,8 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 			 * писать $template->getBackendModel(),
 			 * но и выполняет функцию кэша,
 			 * потому что @see getAttributeTemplate() не обязана кэшировать результат.
-			 * @see Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode::getAttributeTemplate()
-			 * @var Df_C1_Cml2_Import_Data_Entity_Attribute_Date $template
+			 * @see \Df\C1\Cml2\Import\Data\Entity\AttributeValue\Barcode::getAttributeTemplate()
+			 * @var \Df\C1\Cml2\Import\Data\Entity\Attribute\Date $template
 			 */
 			$template = $this->getAttributeTemplate();
 			$this->{__METHOD__} = array_merge(array(
@@ -153,7 +152,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue
 				,'position' => 0
 				,'is_wysiwyg_enabled' => 0
 				,'is_used_for_promo_rules' => 0
-				,Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getAttributeExternalId()
+				,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getAttributeExternalId()
 			), $this->getCreationParamsCustom());
 		}
 		return $this->{__METHOD__};

@@ -1,7 +1,7 @@
 <?php
 namespace Df\Xml\Generator;
 /**
- * Класс @see Df_C1_Cml2_Export_Document_Catalog
+ * Класс @see \Df\C1\Cml2\Export\Document\Catalog
  * (потомок @see \Df\Xml\Generator\Document)
  * должен наследовать как черты, общие для документов, передаваемых из интернет-магазина в 1C
  * (черты, общие для экспорта не только товаров, но и заказов),

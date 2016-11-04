@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Cml2_Session_ByIp extends Df_Core_Model_Session_Custom_Additional {
+namespace Df\C1\Cml2\Session;
+class ByIp extends \Df_Core_Model_Session_Custom_Additional {
 	/**
 	 * @param bool|null $value [optional]
 	 * @return bool|null
@@ -60,7 +61,7 @@ class Df_C1_Cml2_Session_ByIp extends Df_Core_Model_Session_Custom_Additional {
 	protected function getSessionIdCustom() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
-			$ipAddress = Mage::app()->getRequest()->getClientIp();
+			$ipAddress = \Mage::app()->getRequest()->getClientIp();
 			df_assert_string_not_empty($ipAddress);
 			/**
 			 * Вызывая функцию @uses md5(), мы избавляемся от недопустимых символов
@@ -90,6 +91,6 @@ class Df_C1_Cml2_Session_ByIp extends Df_Core_Model_Session_Custom_Additional {
 	/** @var string */
 	private static $P__FILE_MAPS = 'file_maps';
 
-	/** @return Df_C1_Cml2_Session_ByIp */
+	/** @return \Df\C1\Cml2\Session\ByIp */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

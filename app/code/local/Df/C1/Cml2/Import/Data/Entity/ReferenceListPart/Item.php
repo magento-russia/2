@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item
-	extends Df_C1_Cml2_Import_Data_Entity {
+namespace Df\C1\Cml2\Import\Data\Entity\ReferenceListPart;
+class Item extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * @override
 	 * @return string
@@ -93,6 +93,6 @@ class Df_C1_Cml2_Import_Data_Entity_ReferenceListPart_Item
 		return df_nts($this->leaf('Значение'));
 	}
 
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_ReferenceListPart_Items::itemClass() */
+	/** @used-by \Df\C1\Cml2\Import\Data\Collection\ReferenceListPart\Items::itemClass() */
 
 }

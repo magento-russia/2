@@ -9,7 +9,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		df_param_between($attributeSetId, 0, 1);
 		df_h()->catalog()->product()->addGroupToAttributeSetIfNeeded(
 			$attributeSetId
-			,Df_C1_Const::PRODUCT_ATTRIBUTE_GROUP_NAME
+			,\Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME
 			,$sortOrder = 2
 		);
 	}
@@ -53,7 +53,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Orders_Export::processFinish()
+	 * @used-by \Df\C1\Cml2\Action\Orders\Export::processFinish()
 	 * @param string $path
 	 * @param string $value
 	 * @return void
@@ -78,7 +78,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		static $result;
 		if (!$result) {
 			/** @var string $fileName */
-			$filePath = Df_C1_Cml2_Session_ByCookie_1C::s()->getFileName_Log();
+			$filePath = \Df\C1\Cml2\Session\ByCookie\C1::s()->getFileName_Log();
 			if (!$filePath) {
 				$filePath = df_file_name(
 					df_cc_path(
@@ -87,7 +87,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 					)
 					, df_c1_cfg()->general()->getLogFileNameTemplateBaseName()
 				);
-				Df_C1_Cml2_Session_ByCookie_1C::s()->setFileName_Log($filePath);
+				\Df\C1\Cml2\Session\ByCookie\C1::s()->setFileName_Log($filePath);
 			}
 			$result = Df_Core_Model_Logger::s($filePath);
 		}

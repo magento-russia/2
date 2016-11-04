@@ -1,12 +1,13 @@
 <?php
-class Df_C1_Cml2_State_Export_Products extends Df_Varien_Data_Collection {
+namespace Df\C1\Cml2\State\Export;
+class Products extends \Df_Varien_Data_Collection {
 	/**
 	 * @param int $productId
-	 * @return Df_Catalog_Model_Product
+	 * @return \Df_Catalog_Model_Product
 	 */
 	public function getProductById($productId) {
 		df_param_integer($productId, 0);
-		/** @var Df_Catalog_Model_Product $result */
+		/** @var \Df_Catalog_Model_Product $result */
 		$result = $this->getItemById($productId);
 		if (!$result) {
 			$result = df_product($productId, df_state()->getStoreProcessed()->getId());
@@ -16,8 +17,8 @@ class Df_C1_Cml2_State_Export_Products extends Df_Varien_Data_Collection {
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_State_Export::getProducts()
-	 * @return Df_C1_Cml2_State_Export_Products
+	 * @used-by \Df\C1\Cml2\State\Export::getProducts()
+	 * @return \Df\C1\Cml2\State\Export\Products
 	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

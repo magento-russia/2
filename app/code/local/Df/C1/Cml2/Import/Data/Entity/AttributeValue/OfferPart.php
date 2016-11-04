@@ -1,13 +1,13 @@
 <?php
-abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue_OfferPart
-	extends Df_C1_Cml2_Import_Data_Entity_AttributeValue {
+namespace Df\C1\Cml2\Import\Data\Entity\AttributeValue;
+abstract class OfferPart extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Product
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Product
 	 */
 	protected function getProduct() {return $this->getOffer()->getEntityProduct();}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
 	protected function getOffer() {return $this->cfg(self::P__OFFER);}
 
 	/**
@@ -16,7 +16,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_AttributeValue_OfferPart
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__OFFER, Df_C1_Cml2_Import_Data_Entity_Offer::class);
+		$this->_prop(self::P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
 	}
 	const P__OFFER = 'offer';
 }

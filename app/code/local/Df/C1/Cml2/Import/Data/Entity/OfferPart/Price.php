@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_OfferPart_Price extends Df_C1_Cml2_Import_Data_Entity {
+namespace Df\C1\Cml2\Import\Data\Entity\OfferPart;
+class Price extends \Df\C1\Cml2\Import\Data\Entity {
 	/** @return string */
 	public function getCurrencyCode() {
 		return df_c1_currency_code_to_magento_format($this->leafSne('Валюта'));
@@ -55,11 +56,8 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_Price extends Df_C1_Cml2_Import_Da
 		return df_n_get($this->{__METHOD__});
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_PriceType */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\PriceType */
 	public function getPriceType() {
 		return $this->getState()->getPriceTypes()->findByExternalId($this->getId());
 	}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_OfferPart_Prices::itemClass() */
-
 }

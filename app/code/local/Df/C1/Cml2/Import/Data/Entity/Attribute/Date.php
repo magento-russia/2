@@ -1,21 +1,20 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\Attribute;
-class Df_C1_Cml2_Import_Data_Entity_Attribute_Date
-	extends Df_C1_Cml2_Import_Data_Entity_Attribute {
+class Date extends \Df\C1\Cml2\Import\Data\Entity\Attribute {
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::getValueForDataflow()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::getValueForObject()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::getValueForDataflow()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::getValueForObject()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::getValueForDataflow()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
 	 * @override
 	 * @param string|int|float|bool|null $value
 	 * @return string|int|float|bool|null
 	 */
 	public function convertValueToMagentoFormat($value) {
-		return df_dtss($value, 'dd.MM.yyyy H:mm:ss', Varien_Date::DATETIME_INTERNAL_FORMAT, true);
+		return df_dtss($value, 'dd.MM.yyyy H:mm:ss', \Varien_Date::DATETIME_INTERNAL_FORMAT, true);
 	}
 
 	/**
@@ -41,7 +40,4 @@ class Df_C1_Cml2_Import_Data_Entity_Attribute_Date
 	 * @return string
 	 */
 	public function getSourceModel() {return '';}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Entity_Attribute::getTypeMap() */
-
 }

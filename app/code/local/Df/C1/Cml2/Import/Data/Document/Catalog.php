@@ -1,10 +1,10 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Document;
-class Df_C1_Cml2_Import_Data_Document_Catalog extends Df_C1_Cml2_Import_Data_Document {
+class Catalog extends \Df\C1\Cml2\Import\Data\Document {
 	/**
 	 * 2015-08-04
 	 * @override
-	 * @see Df_C1_Cml2_Import_Data_Document::getExternalId_CatalogAttributes()
+	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogAttributes()
 	 * @return string
 	 */
 	public function getExternalId_CatalogAttributes() {
@@ -17,7 +17,7 @@ class Df_C1_Cml2_Import_Data_Document_Catalog extends Df_C1_Cml2_Import_Data_Doc
 
 	/**
 	 * @override
-	 * @see Df_C1_Cml2_Import_Data_Document::getExternalId_CatalogProducts()
+	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogProducts()
 	 * @return string
 	 */
 	public function getExternalId_CatalogProducts() {
@@ -31,7 +31,7 @@ class Df_C1_Cml2_Import_Data_Document_Catalog extends Df_C1_Cml2_Import_Data_Doc
 
 	/**
 	 * @override
-	 * @see Df_C1_Cml2_Import_Data_Document::getExternalId_CatalogStructure()
+	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogStructure()
 	 * @return string
 	 */
 	public function getExternalId_CatalogStructure() {
@@ -51,7 +51,7 @@ class Df_C1_Cml2_Import_Data_Document_Catalog extends Df_C1_Cml2_Import_Data_Doc
 	 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
 	 * однако не содержит подветку Свойства.
 	 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::_process()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::_process()
 	 * @return bool
 	 */
 	public function hasAttributes() {
@@ -171,7 +171,7 @@ class Df_C1_Cml2_Import_Data_Document_Catalog extends Df_C1_Cml2_Import_Data_Doc
 		return df_n_get($this->{__METHOD__});
 	}
 
-	/** @used-by Df_C1_Cml2_Import_Data_Document::create() */
+	/** @used-by \Df\C1\Cml2\Import\Data\Document::create() */
 
 	/**
 	 * 2015-08-04
@@ -183,17 +183,17 @@ class Df_C1_Cml2_Import_Data_Document_Catalog extends Df_C1_Cml2_Import_Data_Doc
 	 * однако не содержит подветку Свойства.
 	 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
 	 * @used-by storeInSession()
-	 * @used-by Df_C1_Cml2_State_Import::getFileCatalogAttributes()
+	 * @used-by \Df\C1\Cml2\State\Import::getFileCatalogAttributes()
 	 */
 	const TYPE__ATTRIBUTES = 'catalog_attributes';
 	/**
 	 * @used-by storeInSession()
-	 * @used-by Df_C1_Cml2_State_Import::getFileCatalogProducts()
+	 * @used-by \Df\C1\Cml2\State\Import::getFileCatalogProducts()
 	 */
 	const TYPE__PRODUCTS = 'catalog_products';
 	/**
 	 * @used-by storeInSession()
-	 * @used-by Df_C1_Cml2_State_Import::getFileCatalogStructure()
+	 * @used-by \Df\C1\Cml2\State\Import::getFileCatalogStructure()
 	 */
 	const TYPE__STRUCTURE = 'catalog_structure';
 }

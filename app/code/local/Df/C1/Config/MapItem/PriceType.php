@@ -1,10 +1,11 @@
 <?php
-class Df_C1_Config_MapItem_PriceType extends Df_Admin_Config_MapItem {
-	/** @return Df_Customer_Model_Group|null */
+namespace Df\C1\Config\MapItem;
+class PriceType extends \Df_Admin_Config_MapItem {
+	/** @return \Df_Customer_Model_Group|null */
 	public function getCustomerGroup() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
-				Df_Customer_Model_Group::cs()->getItemById($this->getCustomerGroupId())
+				\Df_Customer_Model_Group::cs()->getItemById($this->getCustomerGroupId())
 			);
 		}
 		return df_n_get($this->{__METHOD__});
@@ -38,12 +39,12 @@ class Df_C1_Config_MapItem_PriceType extends Df_Admin_Config_MapItem {
 			->_prop(self::P__PRICE_TYPE, DF_V_STRING, false)
 		;
 	}
-	/** @used-by Df_C1_Config_Api_Product_Prices::_getMap() */
+	/** @used-by \Df\C1\Config\Api\Product\Prices::_getMap() */
 
 
-	/** @used-by Df_C1_Config_Api_Product_Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
+	/** @used-by \Df\C1\Config\Api\Product\Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
 	const P__CUSTOMER_GROUP = 'customer_group';
-	/** @used-by Df_C1_Config_Api_Product_Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
+	/** @used-by \Df\C1\Config\Api\Product\Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
 	const P__PRICE_TYPE = 'price_type';
 
 	/**

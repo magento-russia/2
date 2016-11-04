@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Cml2_Session_ByCookie_1C extends Df_Core_Model_Session_Custom_Primary {
+namespace Df\C1\Cml2\Session\ByCookie;
+class C1 extends \Df_Core_Model_Session_Custom_Primary {
 	/**
 	 * @used-by
 	 * @return string|null
@@ -8,7 +9,7 @@ class Df_C1_Cml2_Session_ByCookie_1C extends Df_Core_Model_Session_Custom_Primar
 
 	/**
 	 * @param string $value
-	 * @return Df_C1_Cml2_Session_ByCookie_1C
+	 * @return $this
 	 */
 	public function setFileName_Log($value) {
 		$this->setData(self::$P__FILE_NAME_LOG, $value);
@@ -19,11 +20,11 @@ class Df_C1_Cml2_Session_ByCookie_1C extends Df_Core_Model_Session_Custom_Primar
 	 * @override
 	 * @return string
 	 */
-	protected function getSessionIdCustom() {return Df_C1_Cml2_Cookie::s()->getSessionId();}
+	protected function getSessionIdCustom() {return \Df\C1\Cml2\Cookie::s()->getSessionId();}
 
 	/** @var string */
 	private static $P__FILE_NAME_LOG = 'file_name_log';
 
-	/** @return Df_C1_Cml2_Session_ByCookie_1C */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

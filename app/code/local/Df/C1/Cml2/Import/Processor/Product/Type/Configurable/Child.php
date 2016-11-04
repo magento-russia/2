@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Child
-	extends Df_C1_Cml2_Import_Processor_Product_Type_Simple_Abstract {
+namespace Df\C1\Cml2\Import\Processor\Product\Type\Configurable;
+class Child extends \Df\C1\Cml2\Import\Processor\Product\Type\Simple\AbstractT {
 	/**
 	 * @override
 	 * @return void
@@ -8,7 +8,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Child
 	public function process() {
 		if ($this->getEntityOffer()->isTypeConfigurableChild()) {
 			$this->getImporter()->import();
-			/** @var Df_Catalog_Model_Product $product */
+			/** @var \Df_Catalog_Model_Product $product */
 			$product = $this->getImporter()->getProduct();
 			df_c1_reindex_product($product);
 			df_c1_log(
@@ -31,15 +31,15 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Child
 	 * @return int
 	 */
 	protected function getVisibility() {
-		return Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE;
+		return \Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE;
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable::importChildren()
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable::importChildren()
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
 	 * @return void
 	 */
-	public static function p(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function p(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		self::ic(__CLASS__, $offer)->process();
 	}
 }

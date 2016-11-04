@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Action;
-class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
+class Front extends \Df\C1\Cml2\Action {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::_process()
@@ -9,22 +9,22 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 	 */
 	protected function _process() {
 		if ($this->rmRequest()->isCheckAuth()) {
-			/** @uses Df_C1_Cml2_Action_Login */
+			/** @uses \Df\C1\Cml2\Action\Login */
 			$this->delegate('Login');
 		}
 		else {
 			$this->checkLoggedIn();
 			switch ($this->rmRequest()->getType()) {
-				case Df_C1_Cml2_InputRequest_Generic::TYPE__GET_CATALOG:
+				case \Df\C1\Cml2\InputRequest\Generic::TYPE__GET_CATALOG:
 					$this->action_catalogExport();
 					break;
-				case Df_C1_Cml2_InputRequest_Generic::TYPE__CATALOG:
+				case \Df\C1\Cml2\InputRequest\Generic::TYPE__CATALOG:
 					$this->action_catalog();
 					break;
-				case Df_C1_Cml2_InputRequest_Generic::TYPE__ORDERS:
+				case \Df\C1\Cml2\InputRequest\Generic::TYPE__ORDERS:
 					$this->action_orders();
 					break;
-				case Df_C1_Cml2_InputRequest_Generic::TYPE__REFERENCE:
+				case \Df\C1\Cml2\InputRequest\Generic::TYPE__REFERENCE:
 					$this->action_reference();
 					break;
 			}
@@ -50,18 +50,18 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 			 * В журнале 1С этот режим прокомментирован так:
 			 * «Деактивация элементов, не попавшие в полную пакетную выгрузку.»
 			 */
-			case Df_C1_Cml2_InputRequest_Generic::MODE__DEACTIVATE:
-				/** @uses Df_C1_Cml2_Action_Catalog_Deactivate */
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__DEACTIVATE:
+				/** @uses \Df\C1\Cml2\Action\Catalog\Deactivate */
 				$this->delegate('Catalog_Deactivate');
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__FILE:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__FILE:
 				$this->action_upload();
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__IMPORT:
-				/** @uses Df_C1_Cml2_Action_Catalog_Import */
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__IMPORT:
+				/** @uses \Df\C1\Cml2\Action\Catalog\Import */
 				$this->delegate('Catalog_Import');
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__INIT:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__INIT:
 				$this->action_init();
 				break;
 		}
@@ -69,26 +69,26 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 
 	/**
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	private function action_catalogExport() {
 		switch($this->rmRequest()->getMode()) {
-			case Df_C1_Cml2_InputRequest_Generic::MODE__INIT:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__INIT:
 				$this->action_init();
 				$this->flag_catalogHasJustBeenExported(false);
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__QUERY:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__QUERY:
 				/** @var bool $process */
 				$process = !$this->flag_catalogHasJustBeenExported();
 				try {
 					/**
-					 * @uses Df_C1_Cml2_Action_Catalog_Export_Finish
-					 * @uses Df_C1_Cml2_Action_Catalog_Export_Process
+					 * @uses \Df\C1\Cml2\Action\Catalog\Export\Finish
+					 * @uses \Df\C1\Cml2\Action\Catalog\Export\Process
 					 */
 					$this->delegate('Catalog_Export_' . $process ? 'Process' : 'Finish');
 					$this->flag_catalogHasJustBeenExported($process);
 				}
-				catch (Exception $e) {
+				catch (\Exception $e) {
 					$this->flag_catalogHasJustBeenExported($process);
 					throw $e;
 				}
@@ -97,7 +97,7 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 	}
 
 	/**
-	 * @uses Df_C1_Cml2_Action_Init
+	 * @uses \Df\C1\Cml2\Action\Init
 	 * @return void
 	 */
 	private function action_init() {$this->delegate('Init');}
@@ -105,18 +105,18 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 	/** @return void */
 	private function action_orders() {
 		switch($this->rmRequest()->getMode()) {
-			case Df_C1_Cml2_InputRequest_Generic::MODE__FILE:
-				/** @uses Df_C1_Cml2_Action_Orders_Import */
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__FILE:
+				/** @uses \Df\C1\Cml2\Action\Orders\Import */
 				$this->delegate('Orders_Import');
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__INIT:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__INIT:
 				$this->action_init();
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__QUERY:
-				/** @uses Df_C1_Cml2_Action_Orders_Export */
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__QUERY:
+				/** @uses \Df\C1\Cml2\Action\Orders\Export */
 				$this->delegate('Orders_Export');
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__SUCCESS:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__SUCCESS:
 				$this->setResponseSuccess();
 				break;
 		}
@@ -125,21 +125,21 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 	/** @return void */
 	private function action_reference() {
 		switch($this->rmRequest()->getMode()) {
-			case Df_C1_Cml2_InputRequest_Generic::MODE__FILE:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__FILE:
 				$this->action_upload();
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__IMPORT:
-				/** @uses Df_C1_Cml2_Action_Reference_Import */
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__IMPORT:
+				/** @uses \Df\C1\Cml2\Action\Reference\Import */
 				$this->delegate('Reference_Import');
 				break;
-			case Df_C1_Cml2_InputRequest_Generic::MODE__INIT:
+			case \Df\C1\Cml2\InputRequest\Generic::MODE__INIT:
 				$this->action_init();
 				break;
 		}
 	}
 
 	/**
-	 * @uses Df_C1_Cml2_Action_GenericImport_Upload
+	 * @uses \Df\C1\Cml2\Action\GenericImport\Upload
 	 * @return void
 	 */
 	private function action_upload() {$this->delegate('GenericImport_Upload');}
@@ -147,7 +147,7 @@ class Df_C1_Cml2_Action_Front extends Df_C1_Cml2_Action {
 	/** @return void */
 	private function checkLoggedIn() {
 		/** @var string|null $sessionId */
-		$sessionId = Df_C1_Cml2_Cookie::s()->getSessionId();
+		$sessionId = \Df\C1\Cml2\Cookie::s()->getSessionId();
 		if (!df_check_string_not_empty($sessionId)) {
 			df_error(
 				'1С должна была указать в запросе идентификатор сессии, однако не указала.'

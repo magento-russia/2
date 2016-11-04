@@ -1,7 +1,7 @@
 <?php
 /**
  * @used-by df_c1_currency_code_to_magento_format()
- * @used-by Df_C1_Config_MapItem_CurrencyCode::getNonStandardNormalized()
+ * @used-by \Df\C1\Config\MapItem\CurrencyCode::getNonStandardNormalized()
  * @param string $nonStandardCurrencyCode
  * @return string
  */
@@ -14,7 +14,7 @@ function df_c1_currency_code_normalize($nonStandardCurrencyCode) {
 }
 
 /**
- * @used-by Df_C1_Cml2_Export_Processor_Sale_Order::getDocumentData_Order()
+ * @used-by \Df\C1\Cml2\Export\Processor\Sale\Order::getDocumentData_Order()
  * @param string $ccInMagentoFormat
  * @return string
  */
@@ -38,8 +38,8 @@ function df_c1_currency_code_to_1c_format($ccInMagentoFormat) {
 }
 
 /**
- * @used-by Df_C1_Cml2_Import_Data_Entity_OfferPart_Price::getCurrencyCode()
- * @used-by Df_C1_Cml2_Import_Data_Entity_PriceType::getCurrencyCode()
+ * @used-by \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price::getCurrencyCode()
+ * @used-by \Df\C1\Cml2\Import\Data\Entity\PriceType::getCurrencyCode()
  * @param string $ccIn1CFormat
  * @return string
  */

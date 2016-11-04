@@ -391,7 +391,7 @@ function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_c
 
 /**
  * «Df\YandexMarket\Yml\Document» => «yandex.market»
- * «Df_C1_Cml2_Export_Document_Catalog» => «1c»
+ * «\Df\C1\Cml2\Export\Document\Catalog» => «1c»
  * @param Varien_Object $object
  * @param string $separator
  * @return string
@@ -470,7 +470,7 @@ function df_module_name_lc($class, $delimiter = '_') {return
  * Намеренно добавили к названию метода окончание «ByClass»,
  * чтобы название метода не конфликтовало с родительским методом
  * @see Df_Core_Model::moduleTitle()
- * «Df_C1_Cml2_Export_Document_Catalog» => «1C:Управление торговлей»
+ * «\Df\C1\Cml2\Export\Document\Catalog» => «1C:Управление торговлей»
  * 2016-10-20
  * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»

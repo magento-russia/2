@@ -16,7 +16,7 @@ namespace Df\C1\Cml2\Action\Catalog;
  * В журнале 1С этот режим прокомментирован так:
  * «Деактивация элементов, не попавшие в полную пакетную выгрузку.»
  */
-class Df_C1_Cml2_Action_Catalog_Deactivate extends Df_C1_Cml2_Action_Catalog {
+class Deactivate extends \Df\C1\Cml2\Action\Catalog {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::_process()

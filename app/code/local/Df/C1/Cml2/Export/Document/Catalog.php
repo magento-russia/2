@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\Document;
-class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Catalog {
+class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	/**
 	 * @override
 	 * @return string
@@ -10,34 +10,34 @@ class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	}
 
 	/**
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	 * @return Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real
 	 */
-	public function getProcessorForAttribute(Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
+	public function getProcessorForAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
 		if (!isset($this->{__METHOD__}[$attribute->getName()])) {
 			$this->{__METHOD__}[$attribute->getName()] =
-				Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real::i($attribute, $this)
+				\Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::i($attribute, $this)
 			;
 		}
 		return $this->{__METHOD__}[$attribute->getName()];
 	}
 
-	/** @return Df_C1_Cml2_Export_Processor_Catalog_Attribute[] */
+	/** @return \Df\C1\Cml2\Export\Processor\Catalog\Attribute[] */
 	public function getProcessorsForVirtualAttributes() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Export_Processor_Catalog_Attribute[] $result */
+			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute[] $result */
 			$result = array();
 			foreach ($this->getVirtualAttributeProcessorClasses() as $class) {
-				/** @var Df_C1_Cml2_Export_Processor_Catalog_Attribute $processor */
-				$result[]= Df_C1_Cml2_Export_Processor_Catalog_Attribute::ic($class, $this);
+				/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute $processor */
+				$result[]= \Df\C1\Cml2\Export\Processor\Catalog\Attribute::ic($class, $this);
 			}
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Export_DocumentMixin */
-	protected function createMixin() {return Df_C1_Cml2_Export_DocumentMixin_Catalog::i($this);}
+	/** @return \Df\C1\Cml2\Export\DocumentMixin */
+	protected function createMixin() {return \Df\C1\Cml2\Export\DocumentMixin\Catalog::i($this);}
 
 	/**
 	 * @override
@@ -66,7 +66,7 @@ class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	 * @return string
 	 */
 	protected function getProcessorClass_products() {
-		return Df_C1_Cml2_Export_Processor_Catalog_Product::class;
+		return \Df\C1\Cml2\Export\Processor\Catalog\Product::class;
 	}
 
 	/**
@@ -117,7 +117,7 @@ class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 
 	/** @return array(array(string => mixed)) */
 	private function getКлассификатор_Группы() {
-		return Df_C1_Cml2_Export_Processor_Catalog_Category::process(
+		return \Df\C1\Cml2\Export\Processor\Catalog\Category::process(
 			$this->getCategoriesAsTree(), $this
 		);
 	}
@@ -138,15 +138,15 @@ class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 		/** @var array(array(string => mixed)) $result */
 		$result = array();
 		foreach ($this->getCatalogAttributes() as $attribute) {
-			/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
-			/** @var Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real $processor */
+			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real $processor */
 			$processor = $this->getProcessorForAttribute($attribute);
 			if ($processor->isEligible()) {
 				$result[]= $processor->getResult();
 			}
 		}
 		foreach ($this->getProcessorsForVirtualAttributes() as $processor) {
-			/** @var Df_C1_Cml2_Export_Processor_Catalog_Attribute $processor */
+			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute $processor */
 			if ($processor->isEligible()) {
 				$result[]= $processor->getResult();
 			}
@@ -158,10 +158,10 @@ class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	private function getКлассификатор_ТипыЦен_ТипЦены() {
 		/** @var array(array(string => mixed)) $result */
 		$result = array();
-		foreach (Df_Customer_Model_Group::c() as $group) {
-			/** @var Df_Customer_Model_Group $group */
-			/** @var Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup $processor */
-			$processor = Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup::i($group, $this);
+		foreach (\Df_Customer_Model_Group::c() as $group) {
+			/** @var \Df_Customer_Model_Group $group */
+			/** @var \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup $processor */
+			$processor = \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup::i($group, $this);
 			if ($processor->isEligible()) {
 				$result[]= $processor->getResult();
 			}
@@ -194,24 +194,24 @@ class Df_C1_Cml2_Export_Document_Catalog extends Df_Catalog_Model_XmlExport_Cata
 	private function getVirtualAttributeProcessorClasses() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array(
-				Df_C1_Cml2_Export_Processor_Catalog_Attribute_Url::class
+				\Df\C1\Cml2\Export\Processor\Catalog\Attribute\Url::class
 			);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup::_construct()
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_Attribute_Real::_construct()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup::_construct()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::_construct()
 	 */
 
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Catalog_Export_Process::createDocument()
-	 * @param Df_Catalog_Model_Resource_Product_Collection $products
-	 * @return Df_C1_Cml2_Export_Document_Catalog
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Export\Process::createDocument()
+	 * @param \Df_Catalog_Model_Resource_Product_Collection $products
+	 * @return \Df\C1\Cml2\Export\Document\Catalog
 	 */
-	public static function i(Df_Catalog_Model_Resource_Product_Collection $products) {
+	public static function i(\Df_Catalog_Model_Resource_Product_Collection $products) {
 		return self::ic(__CLASS__, $products);
 	}
 }

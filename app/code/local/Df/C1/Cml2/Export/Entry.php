@@ -1,12 +1,12 @@
 <?php
 namespace Df\C1\Cml2\Export;
-class Df_C1_Cml2_Export_Entry extends Df_Core_Model {
+class Entry extends \Df_Core_Model {
 	/**
-	 * @param Zend_Date $date
+	 * @param \Zend_Date $date
 	 * @return string
 	 */
 	public function date($date) {
-		return df_dts($date, Df_C1_Cml2_Export_DocumentMixin::DATE_FORMAT);
+		return df_dts($date, \Df\C1\Cml2\Export\DocumentMixin::DATE_FORMAT);
 	}
 
 	/**
@@ -59,6 +59,6 @@ class Df_C1_Cml2_Export_Entry extends Df_Core_Model {
 		);
 	}
 
-	/** @return Df_C1_Cml2_Export_Entry */
+	/** @return \Df\C1\Cml2\Export\Entry */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

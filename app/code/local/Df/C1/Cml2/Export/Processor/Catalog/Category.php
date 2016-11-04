@@ -1,9 +1,9 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog;
 /**
- * @method Df_C1_Cml2_Export_Document_Catalog getDocument()
+ * @method \Df\C1\Cml2\Export\Document\Catalog getDocument()
  */
-class Df_C1_Cml2_Export_Processor_Catalog_Category extends Df_Catalog_Model_XmlExport_Category {
+class Category extends \Df_Catalog_Model_XmlExport_Category {
 	/**
 	 * Структуру данных получил из анализа программного кода
 	 * обработки «Б_ПомощникИмпортаТоваровБитрикс»
@@ -44,20 +44,20 @@ class Df_C1_Cml2_Export_Processor_Catalog_Category extends Df_Catalog_Model_XmlE
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getКлассификатор_Группы()
-	 * @param Df_Catalog_Model_Category[] $categories
-	 * @param Df_C1_Cml2_Export_Document_Catalog $document
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::getКлассификатор_Группы()
+	 * @param \Df_Catalog_Model_Category[] $categories
+	 * @param \Df\C1\Cml2\Export\Document\Catalog $document
 	 * @return array(array(string => mixed))
 	 */
-	public static function process(array $categories, Df_C1_Cml2_Export_Document_Catalog $document) {
+	public static function process(array $categories, \Df\C1\Cml2\Export\Document\Catalog $document) {
 		/** @var array(array(string => mixed)) $result */
 		$result = array();
 		if ($categories) {
 			/** @var array(array(string => mixed)) $groups */
 			$groups = array();
 			foreach ($categories as $category) {
-				/** @var Df_Catalog_Model_Category $category */
-				/** @var Df_C1_Cml2_Export_Processor_Catalog_Category $processor */
+				/** @var \Df_Catalog_Model_Category $category */
+				/** @var \Df\C1\Cml2\Export\Processor\Catalog\Category $processor */
 				$processor = self::ic(__CLASS__, $category, $document);
 				if ($processor->isEligible()) {
 					$groups[]= $processor->getResult();

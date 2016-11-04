@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Sale;
-class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor_Sale {
+class Order extends \Df\C1\Cml2\Export\Processor\Sale {
 	/** @return void */
 	public function process() {
 		$this->getDocument()->importArray(
@@ -12,13 +12,13 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 	/** @return \Df\Xml\X */
 	private function e() {return $this->cfg(self::$P__E);}
 
-	/** @return Df_Sales_Model_Order_Address */
+	/** @return \Df_Sales_Model_Order_Address */
 	private function getAddress() {return $this->getCustomer()->getMergedAddressWithShippingPriority();}
 	
-	/** @return Df_C1_Cml2_Export_Data_Entity_Customer */
+	/** @return \Df\C1\Cml2\Export\Data\Entity\Customer */
 	private function getCustomer() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Export_Data_Entity_Customer::i($this->getOrder());
+			$this->{__METHOD__} = \Df\C1\Cml2\Export\Data\Entity\Customer::i($this->getOrder());
 		}
 		return $this->{__METHOD__};
 	}
@@ -64,7 +64,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 		/** @var array(string => mixed) $result */
 		$result = array(
 			'Представление' => df_cdata(df_nts(
-				$this->getAddress()->format(Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT)
+				$this->getAddress()->format(\Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT)
 			))
 			,'АдресноеПоле' => array(
 				$this->entry()->type('Почтовый индекс', $this->getAddress()->getPostcode())
@@ -103,14 +103,14 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 		);
 		/** @var float $rewardAmount */
 		$rewardAmount = df_float($this->getOrder()->getData(
-			Df_Sales_Model_Order::P__REWARD_CURRENCY_AMOUNT
+			\Df_Sales_Model_Order::P__REWARD_CURRENCY_AMOUNT
 		));
 		if (0 < $rewardAmount) {
 			$result[]= $this->entry()->discount('Бонусная скидка', $rewardAmount, false);
 		}
 		/** @var float $customerBalanceAmount */
 		$customerBalanceAmount = df_float($this->getOrder()->getData(
-			Df_Sales_Model_Order::P__CUSTOMER_BALANCE_AMOUNT
+			\Df_Sales_Model_Order::P__CUSTOMER_BALANCE_AMOUNT
 		));
 		if (0 < $customerBalanceAmount) {
 			$result[]= $this->entry()->discount('Оплата с личного счёта', $customerBalanceAmount, false);
@@ -126,7 +126,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 			,'Номер' => $this->getOrder()->getIncrementId()
 			,'Дата' => df_dts(
 				$this->getOrder()->getCreatedAtStoreDate()
-				, Df_C1_Cml2_Export_DocumentMixin::DATE_FORMAT
+				, \Df\C1\Cml2\Export\DocumentMixin::DATE_FORMAT
 			)
 			,'ХозОперация' => 'Заказ товара'
 			,'Роль' => 'Продавец'
@@ -160,9 +160,9 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 		/** @var array(array(string => mixed)) $result */
 		$result = array();
 		foreach ($this->getOrder()->getItemsCollection() as $item) {
-			/** @var Mage_Sales_Model_Order_Item $item */
-			if (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $item->getProductType()) {
-				$result[]= Df_C1_Cml2_Export_Processor_Sale_Order_Item::i($item)->getDocumentData();
+			/** @var \Mage_Sales_Model_Order_Item $item */
+			if (\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $item->getProductType()) {
+				$result[]= \Df\C1\Cml2\Export\Processor\Sale\Order\Item::i($item)->getDocumentData();
 			}
 		}
 		if (0 < $this->getOrder()->getShippingAmount()) {
@@ -204,7 +204,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 		$result[]= $this->entry()->name('Отменен', df_bts($this->getOrder()->isCanceled()));
 		$result[]= $this->entry()->name(
 			'Финальный статус'
-			, df_bts(Mage_Sales_Model_Order::STATE_COMPLETE === $this->getOrder()->getState())
+			, df_bts(\Mage_Sales_Model_Order::STATE_COMPLETE === $this->getOrder()->getState())
 		);
 		$result[]= $this->entry()->name(
 			'Статус заказа'
@@ -215,7 +215,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 		return $result;
 	}
 
-	/** @return Df_Sales_Model_Order */
+	/** @return \Df_Sales_Model_Order */
 	private function getOrder() {return $this->cfg(self::$P__ORDER);}
 
 	/** @return string */
@@ -223,7 +223,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 		/** @var string[] $comments */
 		$comments = array();
 		foreach ($this->getOrder()->getAllStatusHistory() as $historyItem) {
-			/** @var Mage_Sales_Model_Order_Status_History $historyItem */
+			/** @var \Mage_Sales_Model_Order_Status_History $historyItem */
 			if ($historyItem->getComment()) {
 				$comments[]= df_cc_n($historyItem->getCreatedAt(), $historyItem->getComment());
 			}
@@ -238,7 +238,7 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ORDER, Df_Sales_Model_Order::class)
+			->_prop(self::$P__ORDER, \Df_Sales_Model_Order::class)
 			->_prop(self::$P__E, \Df\Xml\X::class)
 		;
 	}
@@ -247,13 +247,13 @@ class Df_C1_Cml2_Export_Processor_Sale_Order extends Df_C1_Cml2_Export_Processor
 	/** @var string */
 	private static $P__E = 'e';
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Orders::createElement()
+	 * @used-by \Df\C1\Cml2\Export\Document\Orders::createElement()
 	 * @static
-	 * @param Df_Sales_Model_Order $order
+	 * @param \Df_Sales_Model_Order $order
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Export_Processor_Sale_Order
+	 * @return \Df\C1\Cml2\Export\Processor\Sale\Order
 	 */
-	public static function i(Df_Sales_Model_Order $order, \Df\Xml\X $e) {
+	public static function i(\Df_Sales_Model_Order $order, \Df\Xml\X $e) {
 		return new self(array(self::$P__ORDER => $order, self::$P__E => $e));
 	}
 }

@@ -1,13 +1,13 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
-	extends Df_C1_Cml2_Import_Processor_Product_Type_Configurable {
+namespace Df\C1\Cml2\Import\Processor\Product\Type\Configurable;
+class NewT extends \Df\C1\Cml2\Import\Processor\Product\Type\Configurable {
 	/**
 	 * @override
 	 * @return void
 	 */
 	public function process() {
 		df_assert($this->getEntityOffer()->isTypeConfigurableParent());
-		/** @var Df_Catalog_Model_Product $product */
+		/** @var \Df_Catalog_Model_Product $product */
 		$product = $this->getProductMagento();
 		$product->addData(array(
 			'can_save_configurable_attributes' => true
@@ -31,7 +31,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
 
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Product
+	 * @return \Df_Catalog_Model_Product
 	 */
 	protected function getProductMagento() {
 		if (!isset($this->{__METHOD__})) {
@@ -43,11 +43,11 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
 
 	/**
 	 * @override
-	 * @return Mage_Catalog_Model_Product_Type_Configurable
+	 * @return \Mage_Catalog_Model_Product_Type_Configurable
 	 */
 	protected function getTypeInstance() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Mage_Catalog_Model_Product_Type_Configurable $result */
+			/** @var \Mage_Catalog_Model_Product_Type_Configurable $result */
 			$result = parent::getTypeInstance();
 			$result->setUsedProductAttributeIds($this->getUsedProductAttributeIds());
 			$this->{__METHOD__} = $result;
@@ -80,12 +80,12 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
 			$result = array();
 			/** @var string[] $labels */
 			$labels = array();
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer|null $firstChild */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer|null $firstChild */
 			$firstChild = df_first($this->getEntityOffer()->getConfigurableChildren());
 			if ($firstChild) {
 				foreach ($firstChild->getOptionValues() as $optionValue) {
-					/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue $optionValue */
-					/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
+					/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
+					/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 					$attribute = $optionValue->getAttributeMagento();
 					$result[$attribute->getName()] = $attribute->getId();
 					$labels[]= $attribute->getFrontendLabel();
@@ -99,15 +99,15 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
 
 	/**
 	 * @buyer {buyer}
-	 * @param Df_C1_Cml2_Import_Processor_Product_Type_Configurable $masterProcessor
-	 * @return Df_C1_Cml2_Import_Processor_Product_Type_Configurable_New
+	 * @param \Df\C1\Cml2\Import\Processor\Product\Type\Configurable $masterProcessor
+	 * @return \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\NewT
 	 */
 	public static function p_new(
-		Df_C1_Cml2_Import_Processor_Product_Type_Configurable $masterProcessor
+		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable $masterProcessor
 	) {
 		/**
 		 * Обратите внимание, что мы тут можем вызывать
-		 * @uses Df_C1_Cml2_Import_Processor_Product::getEntityOffer(),
+		 * @uses \Df\C1\Cml2\Import\Processor\Product::getEntityOffer(),
 		 * несмотря на то, что этот метод имеет область видимости «protected».
 		 * http://php.net/manual/language.oop5.visibility.php
 		 * «Visibility from other objects.

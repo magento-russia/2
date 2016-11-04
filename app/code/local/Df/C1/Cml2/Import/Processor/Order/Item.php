@@ -1,12 +1,13 @@
 <?php
-abstract class Df_C1_Cml2_Import_Processor_Order_Item extends Df_C1_Cml2_Import_Processor {
+namespace Df\C1\Cml2\Import\Processor\Order;
+abstract class Item extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Order_Item
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Order\Item
 	 */
 	protected function getEntity() {return parent::getEntity();}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Order */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Order */
 	protected function getEntityOrder() {return $this->cfg(self::$P__ENTITY_ORDER);}
 
 	/**
@@ -16,24 +17,24 @@ abstract class Df_C1_Cml2_Import_Processor_Order_Item extends Df_C1_Cml2_Import_
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ENTITY, Df_C1_Cml2_Import_Data_Entity_Order_Item::class)
-			->_prop(self::$P__ENTITY_ORDER, Df_C1_Cml2_Import_Data_Entity_Order::class)
+			->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Order\Item::class)
+			->_prop(self::$P__ENTITY_ORDER, \Df\C1\Cml2\Import\Data\Entity\Order::class)
 		;
 	}
 	/** @var string */
 	private static $P__ENTITY_ORDER = 'entity_order';
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Processor_Order::orderItemsProcess()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Order::orderItemsProcess()
 	 * @param string $class
-	 * @param Df_C1_Cml2_Import_Data_Entity_Order_Item $orderItem
-	 * @param Df_C1_Cml2_Import_Data_Entity_Order $order
-	 * @return Df_C1_Cml2_Import_Processor_Order_Item
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Order\Item $orderItem
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Order $order
+	 * @return \Df\C1\Cml2\Import\Processor\Order\Item
 	 */
 	public static function ic(
 		$class
-		, Df_C1_Cml2_Import_Data_Entity_Order_Item $orderItem
-		, Df_C1_Cml2_Import_Data_Entity_Order $order
+		, \Df\C1\Cml2\Import\Data\Entity\Order\Item $orderItem
+		, \Df\C1\Cml2\Import\Data\Entity\Order $order
 	) {
 		return df_ic($class, __CLASS__, array(
 			self::$P__ENTITY => $orderItem, self::$P__ENTITY_ORDER => $order

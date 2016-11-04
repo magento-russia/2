@@ -1,12 +1,13 @@
 <?php
 namespace Df\C1\Cml2\Export\Data\Entity;
-class Df_C1_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
+use Df_Sales_Model_Order as O;
+class Customer extends \Df_Core_Model {
 	/** @return string */
 	public function getDateOfBirthAsString() {
 		return
 			$this->getMagentoCustomer()
 			? $this->getMagentoCustomer()->getDateOfBirthAsString(
-				Df_C1_Cml2_Export_DocumentMixin::DATE_FORMAT
+				\Df\C1\Cml2\Export\DocumentMixin::DATE_FORMAT
 			  )
 			: ''
 		;
@@ -29,8 +30,8 @@ class Df_C1_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 			: df_nts(
 				dfa(
 					array(
-						Df_Customer_Model_Customer::GENDER__FEMALE => 'F'
-						,Df_Customer_Model_Customer::GENDER__MALE => 'M'
+						\Df_Customer_Model_Customer::GENDER__FEMALE => 'F'
+						,\Df_Customer_Model_Customer::GENDER__MALE => 'M'
 					)
 					,$this->getMagentoCustomer()->getGenderAsString()
 				)
@@ -59,10 +60,10 @@ class Df_C1_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 		;
 	}
 
-	/** @return Df_Sales_Model_Order_Address */
+	/** @return \Df_Sales_Model_Order_Address */
 	public function getMergedAddressWithShippingPriority() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Sales_Model_Order_Address::i(df_merge_not_empty(
+			$this->{__METHOD__} = \Df_Sales_Model_Order_Address::i(df_merge_not_empty(
 				$this->getOrder()->getBillingAddress()->getData()
 				,$this->getOrder()->getShippingAddress()->getData()
 			));
@@ -109,19 +110,19 @@ class Df_C1_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 	/** @return string */
 	public function getNameShort() {return $this->getNameFull();}
 
-	/** @return Df_Customer_Model_Customer|null */
+	/** @return \Df_Customer_Model_Customer|null */
 	private function getMagentoCustomer() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
 				!$this->getOrder()->getCustomerId()
 				? null
-				: Df_Customer_Model_Customer::ld($this->getOrder()->getCustomerId())
+				: \Df_Customer_Model_Customer::ld($this->getOrder()->getCustomerId())
 			);
 		}
 		return df_n_get($this->{__METHOD__});
 	}
 
-	/** @return Df_Sales_Model_Order */
+	/** @return O */
 	private function getOrder() {return $this->cfg(self::$P__ORDER);}
 	/**
 	 * @override
@@ -129,14 +130,14 @@ class Df_C1_Cml2_Export_Data_Entity_Customer extends Df_Core_Model {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ORDER, Df_Sales_Model_Order::class);
+		$this->_prop(self::$P__ORDER, O::class);
 	}
 	/** @var string */
 	private static $P__ORDER = 'order';
 	/**
 	 * @static
-	 * @param Df_Sales_Model_Order $order
-	 * @return Df_C1_Cml2_Export_Data_Entity_Customer
+	 * @param O $order
+	 * @return \Df\C1\Cml2\Export\Data\Entity\Customer
 	 */
-	public static function i(Df_Sales_Model_Order $order) {return new self(array(self::$P__ORDER => $order));}
+	public static function i(O $order) {return new self(array(self::$P__ORDER => $order));}
 }

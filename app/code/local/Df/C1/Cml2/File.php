@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2;
-class Df_C1_Cml2_File extends Df_Core_Model {
+class File extends \Df_Core_Model {
 	/** @return string */
 	public function getNameBase() {
 		if (!isset($this->{__METHOD__})) {
@@ -13,7 +13,7 @@ class Df_C1_Cml2_File extends Df_Core_Model {
 	public function getPathFull() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_C1_Cml2_FileSystem::s()->getFullPathByRelativePath(
+				\Df\C1\Cml2\FileSystem::s()->getFullPathByRelativePath(
 					$this->getPathRelative()
 				)
 			;
@@ -33,24 +33,24 @@ class Df_C1_Cml2_File extends Df_Core_Model {
 	/** @return \Df\Xml\X */
 	public function getXml() {return $this->getXmlDocument()->e();}
 
-	/** @return Df_C1_Cml2_Import_Data_Document */
+	/** @return \Df\C1\Cml2\Import\Data\Document */
 	public function getXmlDocument() {
-		return Df_C1_Cml2_FileSystem::s()->getXmlDocumentByRelativePath($this->getPathRelative());
+		return \Df\C1\Cml2\FileSystem::s()->getXmlDocumentByRelativePath($this->getPathRelative());
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Document_Catalog */
+	/** @return \Df\C1\Cml2\Import\Data\Document\Catalog */
 	public function getXmlDocumentAsCatalog() {
 		if (!isset($this->{__METHOD__})) {
-			df_assert($this->getXmlDocument() instanceof Df_C1_Cml2_Import_Data_Document_Catalog);
+			df_assert($this->getXmlDocument() instanceof \Df\C1\Cml2\Import\Data\Document\Catalog);
 			$this->{__METHOD__} = $this->getXmlDocument();
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Document_Offers */
+	/** @return \Df\C1\Cml2\Import\Data\Document\Offers */
 	public function getXmlDocumentAsOffers() {
 		if (!isset($this->{__METHOD__})) {
-			df_assert($this->getXmlDocument() instanceof Df_C1_Cml2_Import_Data_Document_Offers);
+			df_assert($this->getXmlDocument() instanceof \Df\C1\Cml2\Import\Data\Document\Offers);
 			$this->{__METHOD__} = $this->getXmlDocument();
 		}
 		return $this->{__METHOD__};
@@ -65,14 +65,14 @@ class Df_C1_Cml2_File extends Df_Core_Model {
 		$this->_prop(self::$P__PATH_RELATIVE, DF_V_STRING_NE);
 	}
 
-	/** @used-by Df_C1_Cml2_File_CatalogComposite::_construct() */
+	/** @used-by \Df\C1\Cml2\File\CatalogComposite::_construct() */
 
 	/** @var string */
 	private static $P__PATH_RELATIVE = 'path_relative';
 
 	/**
 	 * @param string $pathRelative
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public static function i($pathRelative) {
 		return new self(array(self::$P__PATH_RELATIVE => $pathRelative));

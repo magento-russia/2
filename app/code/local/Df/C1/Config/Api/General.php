@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Config_Api_General extends Df_C1_Config_Api_Cml2 {
+namespace Df\C1\Config\Api;
+class General extends \Df\C1\Config\Api\Cml2 {
 	/**
 	 * @used-by ссMapTo1C()
 	 * @used-by df_c1_currency_code_to_magento_format()
@@ -9,10 +10,10 @@ class Df_C1_Config_Api_General extends Df_C1_Config_Api_Cml2 {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->map(
 				'non_standard_currency_codes'
-				, 'Df_C1_Config_MapItem_CurrencyCode'
-				/** @uses Df_C1_Config_MapItem_CurrencyCode::getStandard() */
+				, '\Df\C1\Config\MapItem\CurrencyCode'
+				/** @uses \Df\C1\Config\MapItem\CurrencyCode::getStandard() */
 				, 'getStandard'
-				/** @uses Df_C1_Config_MapItem_CurrencyCode::getNonStandardNormalized() */
+				/** @uses \Df\C1\Config\MapItem\CurrencyCode::getNonStandardNormalized() */
 				, 'getNonStandardNormalized'
 			);
 		}
@@ -86,6 +87,6 @@ class Df_C1_Config_Api_General extends Df_C1_Config_Api_Cml2 {
 	 */
 	protected function getKeyPrefix() {return 'df_1c/general/';}
 
-	/** @return Df_C1_Config_Api_General */
+	/** @return \Df\C1\Config\Api\General */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

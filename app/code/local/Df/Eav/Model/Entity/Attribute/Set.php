@@ -93,7 +93,7 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 				 * говорит системе загружать данное товарное свойство
 				 * в коллекцию товаров при включенном режиме денормализации товаров.
 				 *
-				 * Для свойства @see Df_C1_Const::ENTITY_EXTERNAL_ID
+				 * Для свойства @see \Df\C1\C::ENTITY_EXTERNAL_ID
 				 * эта опция обязательно должна быть включена.
 				 */
 				'used_in_product_listing' => 1

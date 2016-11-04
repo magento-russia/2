@@ -1,10 +1,11 @@
 <?php
-class Df_C1_Config_Api_CatalogExport extends Df_C1_Config_Api_Cml2 {
-	/** @return Mage_CatalogRule_Model_Rule|null */
+namespace Df\C1\Config\Api;
+class CatalogExport extends \Df\C1\Config\Api\Cml2 {
+	/** @return \Mage_CatalogRule_Model_Rule|null */
 	public function getRule() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
-				Df_Catalog_Model_ConditionsLoader::i(
+				\Df_Catalog_Model_ConditionsLoader::i(
 					$this->getRuleId()
 					, '1С:Управление торговлей'
 					, '«1С:Управление торговлей» → «Экспорт товаров в 1С» → «Условия»'
@@ -23,6 +24,6 @@ class Df_C1_Config_Api_CatalogExport extends Df_C1_Config_Api_Cml2 {
 	/** @return int */
 	private function getRuleId() {return $this->nat0('product_conditions');}
 
-	/** @return Df_C1_Config_Api_CatalogExport */
+	/** @return \Df\C1\Config\Api\CatalogExport */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

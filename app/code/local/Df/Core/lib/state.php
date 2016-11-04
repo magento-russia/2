@@ -58,7 +58,7 @@ function df_action_name() {return !df_controller() ? '' : df_controller()->getFu
 
 /**
  * @used-by df_action_name()
- * @used-by Df_C1_Observer::df_catalog__attribute_set__group_added()
+ * @used-by \Df\C1\Observer::df_catalog__attribute_set__group_added()
  * @used-by Df_Chronopay_Model_Gate_Buyer::getIpAddress()
  * @used-by Df_Core_Observer::piratesCheck()
  * @used-by df_redirect_to_checkout()

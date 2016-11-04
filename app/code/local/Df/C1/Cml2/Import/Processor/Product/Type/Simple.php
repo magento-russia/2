@@ -1,10 +1,10 @@
 <?php
-class Df_C1_Cml2_Import_Processor_Product_Type_Simple
-	extends Df_C1_Cml2_Import_Processor_Product_Type_Simple_Abstract {
+namespace Df\C1\Cml2\Import\Processor\Product\Type;
+class Simple extends \Df\C1\Cml2\Import\Processor\Product\Type\Simple\AbstractT {
 	/**
 	 * @override
 	 * @return void
-	 * @throws Exception|Df_Dataflow_Exception_Import_RequiredValueIsAbsent
+	 * @throws \Exception|\Df_Dataflow_Exception_Import_RequiredValueIsAbsent
 	 */
 	public function process() {
 		if (!$this->getEntityOffer()->isTypeSimple()) {
@@ -17,7 +17,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 			try {
 				$this->getImporter()->import();
 			}
-			catch (Df_Dataflow_Exception_Import_RequiredValueIsAbsent $e) {
+			catch (\Df_Dataflow_Exception_Import_RequiredValueIsAbsent $e) {
 				df_assert(!$this->getExistingMagentoProduct());
 				/** @var string $name */
 				$name = $this->getEntityOffer()->getName();
@@ -25,7 +25,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 					$name = $e->getRow()->getFieldValue('sku');
 				}
 				if (!$name) {
-					$name = $e->getRow()->getFieldValue(Df_C1_Const::ENTITY_EXTERNAL_ID);
+					$name = $e->getRow()->getFieldValue(\Df\C1\C::ENTITY_EXTERNAL_ID);
 				}
 				$name = $name ? sprintf(' «%s»', $name) : '';
 				df_error(
@@ -39,10 +39,10 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 					, df_tab_multiline(df_print_params($e->getRow()->getAsArray()))
 				);
 			}
-			catch (Exception $e) {
+			catch (\Exception $e) {
 				throw $e;
 			}
-			/** @var Df_Catalog_Model_Product $product */
+			/** @var \Df_Catalog_Model_Product $product */
 			$product = $this->getImporter()->getProduct();
 			df_c1_reindex_product($product);
 			df_c1_log(
@@ -121,7 +121,7 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 						 * в качестве своего артикула явно говорит о некорректном состоянии программы.
 						 * Идентификатор слишком длинен, чтобы случайно повторяться!
 						 */
-						/** @var Df_Catalog_Model_Product $existingProduct */
+						/** @var \Df_Catalog_Model_Product $existingProduct */
 						$existingProduct = df_product($existingProductId);
 						df_error(
 							'1С:Управление торговлей пытается передать в интернет-магазин товар «%s» '
@@ -143,12 +143,12 @@ class Df_C1_Cml2_Import_Processor_Product_Type_Simple
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::importProductsSimple()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsSimple()
 	 * @static
-	 * @param Df_C1_Cml2_Import_Data_Entity_Offer $offer
-	 * @return Df_C1_Cml2_Import_Processor_Product_Type_Simple
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @return \Df\C1\Cml2\Import\Processor\Product\Type\Simple
 	 */
-	public static function i(Df_C1_Cml2_Import_Data_Entity_Offer $offer) {
+	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
 		return self::ic(__CLASS__, $offer);
 	}
 }

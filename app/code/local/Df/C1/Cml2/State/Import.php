@@ -1,12 +1,13 @@
 <?php
-class Df_C1_Cml2_State_Import extends Df_Core_Model {
-	/** @return Df_C1_Cml2_State_Import_Collections */
-	public function collections() {return Df_C1_Cml2_State_Import_Collections::s();}
+namespace Df\C1\Cml2\State;
+class Import extends \Df_Core_Model {
+	/** @return \Df\C1\Cml2\State\Import\Collections */
+	public function collections() {return \Df\C1\Cml2\State\Import\Collections::s();}
 
-	/** @return Df_C1_Cml2_Import_Data_Document */
+	/** @return \Df\C1\Cml2\Import\Data\Document */
 	public function getDocumentCurrent() {return $this->getFileCurrent()->getXmlDocument();}
 
-	/** @return Df_C1_Cml2_Import_Data_Document_Offers */
+	/** @return \Df\C1\Cml2\Import\Data\Document\Offers */
 	public function getDocumentCurrentAsOffers() {
 		return $this->getFileCurrent()->getXmlDocumentAsOffers();
 	}
@@ -21,9 +22,9 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 	 * однако не содержит подветку Свойства.
 	 * Подветка Свойства передаётся уже следующим файлом import__*.xml.
 	 * @used-by getFileCatalogComposite()
-	 * @used-by Df_C1_Cml2_State_Import_Collections::getAttributes()
+	 * @used-by \Df\C1\Cml2\State\Import\Collections::getAttributes()
 	 * @param bool $preprareSession [optional]
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public function getFileCatalogAttributes($preprareSession = true) {
 		if (!isset($this->{__METHOD__})) {
@@ -36,28 +37,28 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			}
 			else {
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->begin();
+					\Df\C1\Cml2\Session\ByIp::s()->begin();
 				}
 				$this->{__METHOD__} =
-					Df_C1_Cml2_File::i(
-						Df_C1_Cml2_Session_ByIp::s()->getFilePathById(
-							Df_C1_Cml2_Import_Data_Document_Catalog::TYPE__ATTRIBUTES
+					\Df\C1\Cml2\File::i(
+						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
+							\Df\C1\Cml2\Import\Data\Document\Catalog::TYPE__ATTRIBUTES
 							, $this->getDocumentCurrent()->getExternalId_CatalogAttributes()
 						)
 					)
 				;
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->end();
+					\Df\C1\Cml2\Session\ByIp::s()->end();
 				}
 			}
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_File */
+	/** @return \Df\C1\Cml2\File */
 	public function getFileCatalogComposite() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_File $result */
+			/** @var \Df\C1\Cml2\File $result */
 			if (
 				$this->getDocumentCurrent()->isCatalog()
 				&& $this->getDocumentCurrentAsCatalog()->hasAttributes()
@@ -67,19 +68,19 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 				$result = $this->getFileCurrent();
 			}
 			else {
-				Df_C1_Cml2_Session_ByIp::s()->begin();
-				/** @var Df_C1_Cml2_File $fileAttributes */
+				\Df\C1\Cml2\Session\ByIp::s()->begin();
+				/** @var \Df\C1\Cml2\File $fileAttributes */
 				$fileAttributes = $this->getFileCatalogAttributes($preprareSession = false);
-				/** @var Df_C1_Cml2_File $fileProducts */
+				/** @var \Df\C1\Cml2\File $fileProducts */
 				$fileProducts = $this->getFileCatalogProducts($preprareSession = false);
-				/** @var Df_C1_Cml2_File $fileStructure */
+				/** @var \Df\C1\Cml2\File $fileStructure */
 				$fileStructure = $this->getFileCatalogStructure($preprareSession = false);
-				Df_C1_Cml2_Session_ByIp::s()->end();
+				\Df\C1\Cml2\Session\ByIp::s()->end();
 				$result =
 					$fileProducts->getPathRelative() === $fileStructure->getPathRelative()
 					&& $fileProducts->getPathRelative() === $fileAttributes->getPathRelative()
 					? $fileProducts
-					: Df_C1_Cml2_File_CatalogComposite::i2($fileStructure, $fileProducts, $fileAttributes)
+					: \Df\C1\Cml2\File\CatalogComposite::i2($fileStructure, $fileProducts, $fileAttributes)
 				;
 			}
 			$this->{__METHOD__} = $result;
@@ -89,7 +90,7 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public function getFileCatalogProducts($preprareSession = true) {
 		if (!isset($this->{__METHOD__})) {
@@ -102,18 +103,18 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			}
 			else {
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->begin();
+					\Df\C1\Cml2\Session\ByIp::s()->begin();
 				}
 				$this->{__METHOD__} =
-					Df_C1_Cml2_File::i(
-						Df_C1_Cml2_Session_ByIp::s()->getFilePathById(
-							Df_C1_Cml2_Import_Data_Document_Catalog::TYPE__PRODUCTS
+					\Df\C1\Cml2\File::i(
+						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
+							\Df\C1\Cml2\Import\Data\Document\Catalog::TYPE__PRODUCTS
 							, $this->getDocumentCurrent()->getExternalId_CatalogProducts()
 						)
 					)
 				;
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->end();
+					\Df\C1\Cml2\Session\ByIp::s()->end();
 				}
 			}
 		}
@@ -122,7 +123,7 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public function getFileCatalogStructure($preprareSession = true) {
 		if (!isset($this->{__METHOD__})) {
@@ -135,25 +136,25 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			}
 			else {
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->begin();
+					\Df\C1\Cml2\Session\ByIp::s()->begin();
 				}
 				$this->{__METHOD__} =
-					Df_C1_Cml2_File::i(
-						Df_C1_Cml2_Session_ByIp::s()->getFilePathById(
-							Df_C1_Cml2_Import_Data_Document_Catalog::TYPE__STRUCTURE
+					\Df\C1\Cml2\File::i(
+						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
+							\Df\C1\Cml2\Import\Data\Document\Catalog::TYPE__STRUCTURE
 							, $this->getDocumentCurrent()->getExternalId_CatalogStructure()
 						)
 					)
 				;
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->end();
+					\Df\C1\Cml2\Session\ByIp::s()->end();
 				}
 			}
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_File */
+	/** @return \Df\C1\Cml2\File */
 	public function getFileCurrent() {
 		if (!isset($this->{__METHOD__})) {
 			/**
@@ -163,7 +164,7 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			 * import_files/cb/cbcf4934-55bc-11d9-848a-00112f43529a_b5cfbe1a-c400-11e1-a851-4061868fc6eb.jpeg
 			 * @var string $relativePath
 			 */
-			$relativePath = Mage::app()->getRequest()->getParam('filename');
+			$relativePath = \Mage::app()->getRequest()->getParam('filename');
 			if (!df_check_string_not_empty($relativePath)) {
 				df_error(
 					'Учётная система нарушает протокол обмена данными.'
@@ -171,12 +172,12 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 					." в адресной строке параметр «filename»."
 				);
 			}
-			$this->{__METHOD__} = Df_C1_Cml2_File::i($relativePath);
+			$this->{__METHOD__} = \Df\C1\Cml2\File::i($relativePath);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_File */
+	/** @return \Df\C1\Cml2\File */
 	public function getFileOffers() {
 		if (!isset($this->{__METHOD__})) {
 			df_assert($this->getFileCurrent()->getXmlDocument()->isOffers());
@@ -187,7 +188,7 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public function getFileOffersBase($preprareSession = true) {
 		df_assert($this->getDocumentCurrent()->isOffers());
@@ -197,18 +198,18 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			}
 			else {
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->begin();
+					\Df\C1\Cml2\Session\ByIp::s()->begin();
 				}
 				$this->{__METHOD__} =
-					Df_C1_Cml2_File::i(
-						Df_C1_Cml2_Session_ByIp::s()->getFilePathById(
-							Df_C1_Cml2_Import_Data_Document_Offers::TYPE__BASE
+					\Df\C1\Cml2\File::i(
+						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
+							\Df\C1\Cml2\Import\Data\Document\Offers::TYPE__BASE
 							, $this->getDocumentCurrentAsOffers()->getExternalId()
 						)
 					)
 				;
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->end();
+					\Df\C1\Cml2\Session\ByIp::s()->end();
 				}
 			}
 		}
@@ -217,7 +218,7 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public function getFileOffersPrices($preprareSession = true) {
 		df_assert($this->getDocumentCurrent()->isOffers());
@@ -227,18 +228,18 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			}
 			else {
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->begin();
+					\Df\C1\Cml2\Session\ByIp::s()->begin();
 				}
 				$this->{__METHOD__} =
-					Df_C1_Cml2_File::i(
-						Df_C1_Cml2_Session_ByIp::s()->getFilePathById(
-							Df_C1_Cml2_Import_Data_Document_Offers::TYPE__PRICES
+					\Df\C1\Cml2\File::i(
+						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
+							\Df\C1\Cml2\Import\Data\Document\Offers::TYPE__PRICES
 							, $this->getDocumentCurrentAsOffers()->getExternalId()
 						)
 					)
 				;
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->end();
+					\Df\C1\Cml2\Session\ByIp::s()->end();
 				}
 			}
 		}
@@ -247,7 +248,7 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return Df_C1_Cml2_File
+	 * @return \Df\C1\Cml2\File
 	 */
 	public function getFileOffersStock($preprareSession = true) {
 		df_assert($this->getDocumentCurrent()->isOffers());
@@ -257,33 +258,33 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 			}
 			else {
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->begin();
+					\Df\C1\Cml2\Session\ByIp::s()->begin();
 				}
 				$this->{__METHOD__} =
-					Df_C1_Cml2_File::i(
-						Df_C1_Cml2_Session_ByIp::s()->getFilePathById(
-							Df_C1_Cml2_Import_Data_Document_Offers::TYPE__STOCK
+					\Df\C1\Cml2\File::i(
+						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
+							\Df\C1\Cml2\Import\Data\Document\Offers::TYPE__STOCK
 							, $this->getDocumentCurrentAsOffers()->getExternalId()
 						)
 					)
 				;
 				if ($preprareSession) {
-					Df_C1_Cml2_Session_ByIp::s()->end();
+					\Df\C1\Cml2\Session\ByIp::s()->end();
 				}
 			}
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Catalog_Model_Category */
+	/** @return \Df_Catalog_Model_Category */
 	public function getRootCategory() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_Catalog_Model_Category::ld($this->getRootCategoryId());
+			$this->{__METHOD__} = \Df_Catalog_Model_Category::ld($this->getRootCategoryId());
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Document_Catalog */
+	/** @return \Df\C1\Cml2\Import\Data\Document\Catalog */
 	private function getDocumentCurrentAsCatalog() {
 		return $this->getFileCurrent()->getXmlDocumentAsCatalog();
 	}
@@ -301,6 +302,6 @@ class Df_C1_Cml2_State_Import extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_State_Import */
+	/** @return \Df\C1\Cml2\State\Import */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

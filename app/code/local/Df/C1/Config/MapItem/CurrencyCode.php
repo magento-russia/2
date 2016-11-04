@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Config_MapItem_CurrencyCode extends Df_Admin_Config_MapItem {
+namespace Df\C1\Config\MapItem;
+class CurrencyCode extends \Df_Admin_Config_MapItem {
 	/** @return string */
 	public function getNonStandard() {return df_nts($this->cfg(self::P__NON_STANDARD));}
 
@@ -9,7 +10,7 @@ class Df_C1_Config_MapItem_CurrencyCode extends Df_Admin_Config_MapItem {
 	}
 
 	/**
-	 * Обратите внимание, что ключ @see Df_C1_Config_MapItem_CurrencyCode::P__STANDARD
+	 * Обратите внимание, что ключ @see \Df\C1\Config\MapItem\CurrencyCode::P__STANDARD
 	 * может отсутствовать в массиве:
 	 * http://magento-forum.ru/topic/4893/
 	 * Такое возможно даже в двух ситуациях
@@ -40,9 +41,9 @@ class Df_C1_Config_MapItem_CurrencyCode extends Df_Admin_Config_MapItem {
 			->_prop(self::P__STANDARD, DF_V_STRING, false)
 		;
 	}
-	/** @used-by Df_C1_Config_Block_NonStandardCurrencyCodes::_construct() */
+	/** @used-by \Df\C1\Config\Block\NonStandardCurrencyCodes::_construct() */
 	const P__NON_STANDARD = 'non_standard_code';
-	/** @used-by Df_C1_Config_Block_NonStandardCurrencyCodes::_construct() */
+	/** @used-by \Df\C1\Config\Block\NonStandardCurrencyCodes::_construct() */
 	const P__STANDARD = 'standard_code';
 
 	/**

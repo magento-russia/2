@@ -1,12 +1,12 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
-class Df_C1_Cml2_Import_Data_Collection_Orders extends Df_C1_Cml2_Import_Data_Collection {
+class Orders extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_Order::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Order::class;}
 
 	/**
 	 * @override
@@ -16,10 +16,10 @@ class Df_C1_Cml2_Import_Data_Collection_Orders extends Df_C1_Cml2_Import_Data_Co
 	protected function itemPath() {return '/КоммерческаяИнформация/Документ';}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Orders_Import::getOrders()
+	 * @used-by \Df\C1\Cml2\Action\Orders\Import::getOrders()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Collection_Orders
+	 * @return \Df\C1\Cml2\Import\Data\Collection\Orders
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

@@ -1,6 +1,6 @@
 <?php
-abstract class Df_C1_Cml2_Import_Processor_Product_Type
-	extends Df_C1_Cml2_Import_Processor_Product {
+namespace Df\C1\Cml2\Import\Processor\Product;
+abstract class Type extends \Df\C1\Cml2\Import\Processor\Product {
 	/**
 	 * Обратите внимание, что 1С может вполне не передавать цену.
 	 * Это возможно в следующих ситуациях:
@@ -21,11 +21,11 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 	/** @return int */
 	abstract protected function getVisibility();
 
-	/** @return Df_Dataflow_Model_Importer_Product */
+	/** @return \Df_Dataflow_Model_Importer_Product */
 	protected function getImporter() {
 		if (!isset($this->{__METHOD__})) {
 			if (!$this->getExistingMagentoProduct()) {
-				/** @var Df_C1_Cml2_Import_Data_Document_Offers $document */
+				/** @var \Df\C1\Cml2\Import\Data\Document\Offers $document */
 				$document = $this->getState()->import()->getDocumentCurrentAsOffers();
 				if (!$document->isBase() && ($document->hasPrices() || $document->hasStock())) {
 					/** http://magento-forum.ru/topic/4898/ */
@@ -38,16 +38,16 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 					);
 				}
 			}
-			$this->{__METHOD__} = new Df_Dataflow_Model_Importer_Product(array(
+			$this->{__METHOD__} = new \Df_Dataflow_Model_Importer_Product(array(
 				/**
 				 * Модули «1С:Управление торговлей» и «МойСклад»
 				 * импортируют опции товара самостоятельно.
 				 * Избежание вызова @see Df_Dataflow_Model_Importer_Product::importCustomOptions()
 				 * ускоряет работу этих модулей.
 				 */
-				Df_Dataflow_Model_Importer_Product::P__SKIP_CUSTOM_OPTIONS => true
-				,Df_Dataflow_Model_Importer_Product::P__ROW =>
-					Df_Dataflow_Model_Import_Product_Row::i(array_merge(
+				\Df_Dataflow_Model_Importer_Product::P__SKIP_CUSTOM_OPTIONS => true
+				,\Df_Dataflow_Model_Importer_Product::P__ROW =>
+					\Df_Dataflow_Model_Import_Product_Row::i(array_merge(
 						$this->getExistingMagentoProduct()
 							? $this->getProductDataUpdateOnly()
 							: $this->getProductDataNewOnly()
@@ -63,7 +63,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		df_assert_sku($this->getSku());
 		/** @var array(string => string|int|float|bool|null) $result */
 		$result = array(
-			Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getEntityOffer()->getExternalId()
+			\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getEntityOffer()->getExternalId()
 			,'sku' => $this->getSku()
 			,'category_ids' => df_csv($this->getCategoryIds())
 			,'description' => $this->getDescription()
@@ -76,7 +76,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		 */
 		if ($this->getSkuNew()) {
 			df_assert_sku($this->getSkuNew());
-			$result[Df_Dataflow_Model_Import_Product_Row::FIELD__SKU_NEW] = $this->getSkuNew();
+			$result[\Df_Dataflow_Model_Import_Product_Row::FIELD__SKU_NEW] = $this->getSkuNew();
 		}
 		/** @var bool $hasQuantity */
 		$hasQuantity = !is_null($this->getEntityOffer()->getQuantity());
@@ -113,7 +113,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		}
 		/**
 		 * Обратите внимание, что метод
-		 * @uses Df_C1_Cml2_Import_Data_Entity::getName()
+		 * @uses \Df\C1\Cml2\Import\Data\Entity::getName()
 		 * может вернуть null.
 		 * В частности, новая версия модуля 1С-Битрикс (ветка 4, CommerceML 2.0.8)
 		 * передаёт цены на товарные предложения отдельно от самих товарных предложений.
@@ -169,10 +169,10 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 			)
 		;
 		if (!is_null($this->getExistingMagentoProduct())) {
-			/** @var Df_CatalogInventory_Model_Stock_Item|null $stockItem  */
+			/** @var \Df_CatalogInventory_Model_Stock_Item|null $stockItem  */
 			$stockItem = $this->getExistingMagentoProduct()->getStockItem();
 			if (is_null($stockItem)) {
-				$stockItem = Df_CatalogInventory_Model_Stock_Item::i();
+				$stockItem = \Df_CatalogInventory_Model_Stock_Item::i();
 				$stockItem->assignProduct($this->getExistingMagentoProduct());
 			}
 			$result['is_in_stock'] =
@@ -182,7 +182,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		else {
 			/** @var int $minQty */
 			$minQty = df_nat0($this->getStoreConfig(
-				Mage_CatalogInventory_Model_Stock_Item::XML_PATH_MIN_QTY
+				\Mage_CatalogInventory_Model_Stock_Item::XML_PATH_MIN_QTY
 			));
 			$result['is_in_stock'] = ($minQty < $this->getEntityOffer()->getQuantity());
 		}
@@ -250,10 +250,10 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 	/** @return string */
 	private function getDescription() {
 		return $this->getDescriptionAbstract(
-			$productField =	Df_Catalog_Model_Product::P__DESCRIPTION
+			$productField =	\Df_Catalog_Model_Product::P__DESCRIPTION
 			,$fieldsToUpdate = array(
-				Df_C1_Config_Source_WhichDescriptionFieldToUpdate::V__DESCRIPTION
-				,Df_C1_Config_Source_WhichDescriptionFieldToUpdate::V__BOTH
+				\Df\C1\Config\Source\WhichDescriptionFieldToUpdate::V__DESCRIPTION
+				,\Df\C1\Config\Source\WhichDescriptionFieldToUpdate::V__BOTH
 			)
 		);
 	}
@@ -284,7 +284,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		// Обрабатываем случай,
 		// когда в 1С на товарной карточке заполнено поле «Файл описания для сайта».
 		if (
-				(Df_Catalog_Model_Product::P__DESCRIPTION === $productField)
+				(\Df_Catalog_Model_Product::P__DESCRIPTION === $productField)
 			&&
 				$this->getEntityProduct()->getDescriptionFull()
 		) {
@@ -315,10 +315,10 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 	/** @return string */
 	private function getDescriptionShort() {
 		return $this->getDescriptionAbstract(
-			$productField =	Df_Catalog_Model_Product::P__SHORT_DESCRIPTION
+			$productField =	\Df_Catalog_Model_Product::P__SHORT_DESCRIPTION
 			,$fieldsToUpdate = array(
-				Df_C1_Config_Source_WhichDescriptionFieldToUpdate::V__SHORT_DESCRIPTION
-				,Df_C1_Config_Source_WhichDescriptionFieldToUpdate::V__BOTH
+				\Df\C1\Config\Source\WhichDescriptionFieldToUpdate::V__SHORT_DESCRIPTION
+				,\Df\C1\Config\Source\WhichDescriptionFieldToUpdate::V__BOTH
 			)
 		);
 	}
@@ -332,7 +332,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 			if (
 				/**
 				 * Обратите внимание, что метод
-				 * @uses Df_C1_Cml2_Import_Data_Entity::getName()
+				 * @uses \Df\C1\Cml2\Import\Data\Entity::getName()
 				 * может вернуть null.
 				 * В частности, новая версия модуля 1С-Битрикс (ветка 4, CommerceML 2.0.8)
 				 * передаёт цены на товарные предложения отдельно от самих товарных предложений.
@@ -376,7 +376,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 					!$result
 				||
 						/** http://magento-forum.ru/topic/3655/ */
-						Df_C1_Config_Source_ProductNameSource::isFull(
+						\Df\C1\Config\Source\ProductNameSource::isFull(
 							df_c1_cfg()->product()->name()->getSource()
 						)
 					&&
@@ -462,10 +462,10 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 					$this->getEntityProduct()->getAttributeValuesCustom()->getItems()
 				)
 				,$this->getProductDataNewOrUpdateAttributeValues(array(
-					Df_C1_Cml2_Import_Data_Entity_AttributeValue_ProcurementDate::i(
+					\Df\C1\Cml2\Import\Data\Entity\AttributeValue\ProcurementDate::i(
 						$this->getEntityOffer()
 					)
-					,Df_C1_Cml2_Import_Data_Entity_AttributeValue_Barcode::i(
+					,\Df\C1\Cml2\Import\Data\Entity\AttributeValue\Barcode::i(
 						$this->getEntityOffer()
 					)
 				))
@@ -476,14 +476,14 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 	}
 
 	/**
-	 * @param Df_C1_Cml2_Import_Data_Entity_AttributeValue[] $attributeValues
+	 * @param \Df\C1\Cml2\Import\Data\Entity\AttributeValue[] $attributeValues
 	 * @return array(string => string|int|float|bool|null)
 	 */
 	private function getProductDataNewOrUpdateAttributeValues($attributeValues) {
 		/** @var array(string => string|int|float|bool|null) $result */
 		$result = array();
 		foreach ($attributeValues as $value) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_AttributeValue $value */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\AttributeValue $value */
 			if ($value->isValidForImport()) {
 				$result[$value->getAttributeName()] = $value->getValueForDataflow();
 			}
@@ -508,13 +508,13 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 			$this->getEntityOffer()->getOptionValues()->addAbsentItems();
 		}
 		foreach ($this->getEntityOffer()->getOptionValues() as $optionValue) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue $optionValue */
-			Df_Catalog_Model_Installer_AddAttributeToSet::p(
+			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
+			\Df_Catalog_Model_Installer_AddAttributeToSet::p(
 				$optionValue->getAttributeMagento()->getAttributeCode()
 				,$this->getEntityProduct()->getAttributeSet()->getId()
-				,Df_C1_Const::PRODUCT_ATTRIBUTE_GROUP_NAME
+				,\Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME
 			);
-			/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+			/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 			$option = $optionValue->getOption();
 			$result[$optionValue->getAttributeMagento()->getName()] = $option->getData('value');
 		}
@@ -554,10 +554,10 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 		if (!isset($this->{__METHOD__})) {
 			/** @var mixed[] $result  */
 			$result = array();
-			/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_Price|null $mainPrice */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price|null $mainPrice */
 			$mainPrice = $this->getEntityOffer()->getPrices()->getMain();
 			foreach ($this->getEntityOffer()->getPrices()->getItems() as $price) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_OfferPart_Price $price */
+				/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price $price */
 				if (is_null($mainPrice) || ($price->getId() !== $mainPrice->getId())) {
 					/** @var int|null $customerGroupId */
 					$customerGroupId = $price->getPriceType()->getCustomerGroupId();
@@ -577,7 +577,7 @@ abstract class Df_C1_Cml2_Import_Processor_Product_Type
 
 	/** @return string */
 	private function getVisibilityAsString() {
-		return dfa(Mage_Catalog_Model_Product_Visibility::getOptionArray(), $this->getVisibility());
+		return dfa(\Mage_Catalog_Model_Product_Visibility::getOptionArray(), $this->getVisibility());
 	}
 
 	/**

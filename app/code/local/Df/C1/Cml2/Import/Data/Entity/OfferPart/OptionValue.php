@@ -1,15 +1,15 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
-	extends Df_C1_Cml2_Import_Data_Entity {
+namespace Df\C1\Cml2\Import\Data\Entity\OfferPart;
+class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * Добавили к названию метода окончание «Magento»,
 	 * чтобы избежать конфликта с родительским методом
 	 * \Df\Xml\Parser\Entity::getAttribute()
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	public function getAttributeMagento() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $result */
+			/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $result */
 			if (
 					$this->getEntityAttribute()
 				&&
@@ -140,7 +140,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 				[store_default_value] =>
 				[value] => натуральная кожа
 			 )
-	 * @return Df_Eav_Model_Entity_Attribute_Option
+	 * @return \Df_Eav_Model_Entity_Attribute_Option
 	 */
 	public function getOption() {
 		if (!isset($this->{__METHOD__})) {
@@ -190,7 +190,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 			 * Поэтому вместо пустой строки используем значение «неизвестно».
 			 *
 			 * Смотрите также комментарий к методу
-			 * @see Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::addAbsentItems()
+			 * @see \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::addAbsentItems()
 			 * Тот метод содержит решение этой же проблемы
 			 * для версий младше версии 4 модуля 1С-Битрикс.
 			 */
@@ -219,24 +219,24 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Product */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
 	protected function getEntityProduct() {return $this->getOffer()->getEntityProduct();}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Offer */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
 	protected function getOffer() {return $this->cfg(self::P__OFFER);}
 
-	/** @return Df_Catalog_Model_Resource_Eav_Attribute */
+	/** @return \Df_Catalog_Model_Resource_Eav_Attribute */
 	protected function setupAttribute() {
 		return df_attributes()->createOrUpdate($this->getAttributeData());
 	}
 
 	/**
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	 * @return void
 	 */
-	protected function setupOption(Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
+	protected function setupOption(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
 		// Назначаем справочным значениям идентификаторы из 1С
-		/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+		/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 		$option = $this->getOptionByAttribute($attribute);
 		$option->set1CId($this->getExternalId());
 		$option->save();
@@ -245,7 +245,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 	/** @return array(string => mixed) */
 	private function getAttributeData() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Catalog_Model_Resource_Eav_Attribute|null $attribute */
+			/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $attribute */
 			$attribute =
 				df_attributes()->findByExternalId(
 					$this->getEntityAttribute()
@@ -262,7 +262,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 						 * чтобы добавить в уже присутствующий в Magento справочник
 						 * значение текущей опции, если его там нет
 						 */
-						'option' => Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
+						'option' => \Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
 							$attribute
 							,array('option_0' => array($this->getValue()))
 							,$isModeInsert = true
@@ -312,7 +312,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 						// Какое-то значение тут надо установить,
 						// потому что оно будет одним из ключей в реестре
 						// (второй ключ — название справочника).
-						,Df_C1_Const::ENTITY_EXTERNAL_ID => $this->getAttributeExternalId()
+						,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getAttributeExternalId()
 						,'option' => array(
 							'value' => array('option_0' => array($this->getValue()))
 							,'order' => array('option_0' => 0)
@@ -375,11 +375,11 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 				(...)
 			</ВариантыЗначений>
 		</Свойство>
-	 * @return Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList|null
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList|null
 	 */
 	private function getEntityAttribute() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList|null $result */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList|null $result */
 			$result =
 				$this->getState()->import()->collections()->getAttributes()->findByName(
 					$this->getName()
@@ -389,7 +389,7 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 			 * Возможно, что «свойство» и «характеристика» получили одинаковое имя по случайности?
 			 * Сопоставимое «свойство» обязательно должно быть типа «справочник».
 			 */
-			if (!$result instanceof Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList) {
+			if (!$result instanceof \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList) {
 				$result = null;
 			}
 			$this->{__METHOD__} = df_n_set($result);
@@ -398,15 +398,15 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 	}
 
 	/**
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	 * @return Df_Eav_Model_Entity_Attribute_Option
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @return \Df_Eav_Model_Entity_Attribute_Option
 	 */
-	private function getOptionByAttribute(Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
-		/** @var Mage_Eav_Model_Entity_Attribute_Source_Table $source */
+	private function getOptionByAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
+		/** @var \Mage_Eav_Model_Entity_Attribute_Source_Table $source */
 		$source = $attribute->getSource();
-		df_assert($source instanceof Mage_Eav_Model_Entity_Attribute_Source_Table);
-		/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
-		$options = Df_Eav_Model_Entity_Attribute_Option::c();
+		df_assert($source instanceof \Mage_Eav_Model_Entity_Attribute_Source_Table);
+		/** @var \Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
+		$options = \Df_Eav_Model_Entity_Attribute_Option::c();
 		$options->setPositionOrder('asc');
 		$options->setAttributeFilter($attribute->getId());
 		$options->setStoreFilter($attribute->getStoreId());
@@ -419,9 +419,9 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 			);
 		}
 		df_assert_eq(1, $options->count());
-		/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+		/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 		$result = $options->fetchItem();
-		df_assert($result instanceof Df_Eav_Model_Entity_Attribute_Option);
+		df_assert($result instanceof \Df_Eav_Model_Entity_Attribute_Option);
 		return $result;
 	}
 
@@ -431,21 +431,21 @@ class Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__OFFER, Df_C1_Cml2_Import_Data_Entity_Offer::class);
+		$this->_prop(self::P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
 	}
 
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::itemClass() */
+	/** @used-by \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::itemClass() */
 
 	/**
 	 * @used-by _construct()
 	 * @used-by getOffer()
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_OfferPart_OptionValues::itemParams()
+	 * @used-by \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::itemParams()
 	 */
 	const P__OFFER = 'offer';
 	/**
 	 * @used-by getAttributeMagento()
 	 * @used-by getValue()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_OfferPart_OptionValue_Empty::getValue()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT::getValue()
 	 * @var string
 	 */
 	protected static $VALUE__UNKNOWN = '[неизвестно]';

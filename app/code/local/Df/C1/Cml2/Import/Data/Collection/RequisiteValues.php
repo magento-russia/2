@@ -39,13 +39,13 @@ namespace Df\C1\Cml2\Import\Data\Collection;
  * когда для узла обмена 1С включена опция «Выгружать планируемую дату поступления товара».
  * При этом все остальные реквизиты по-прежнему передаются через файл catalog_*.xml.
  */
-class Df_C1_Cml2_Import_Data_Collection_RequisiteValues extends Df_C1_Cml2_Import_Data_Collection {
+class RequisiteValues extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return Df_C1_Cml2_Import_Data_Entity_RequisiteValue::class;}
+	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\RequisiteValue::class;}
 
 	/**
 	 * @override
@@ -55,10 +55,10 @@ class Df_C1_Cml2_Import_Data_Collection_RequisiteValues extends Df_C1_Cml2_Impor
 	protected function itemPath() {return 'ЗначенияРеквизитов/ЗначениеРеквизита';}
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Entity::getRequisiteValues()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity::getRequisiteValues()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Collection_RequisiteValues
+	 * @return \Df\C1\Cml2\Import\Data\Collection\RequisiteValues
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

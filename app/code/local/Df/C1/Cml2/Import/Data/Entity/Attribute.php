@@ -1,13 +1,13 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
-abstract class Df_C1_Cml2_Import_Data_Entity_Attribute extends Df_C1_Cml2_Import_Data_Entity {
+abstract class Attribute extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::getValueForDataflow()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::getValueForObject()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::getValueForDataflow()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::getValueForObject()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::getValueForDataflow()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom::getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
 	 * @param string|int|float|bool|null $value
 	 * @return string|int|float|bool|null
@@ -36,20 +36,20 @@ abstract class Df_C1_Cml2_Import_Data_Entity_Attribute extends Df_C1_Cml2_Import
 
 	/**
 	 * @static
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_Attributes::itemClassAdvanced()
+	 * @used-by \Df\C1\Cml2\Import\Data\Collection\Attributes::itemClassAdvanced()
 	 * @param \Df\Xml\X $e
-	 * @return Df_C1_Cml2_Import_Data_Entity
+	 * @return \Df\C1\Cml2\Import\Data\Entity
 	 */
 	public static function getClass(\Df\Xml\X $e) {
 		/** @var array(string => string) $map */
 		static $map = array(
-			'Справочник' => Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList::class
-			,'Дата' => Df_C1_Cml2_Import_Data_Entity_Attribute_Date::class
-			,'Число' => Df_C1_Cml2_Import_Data_Entity_Attribute_Number::class
-			,'Булево' => Df_C1_Cml2_Import_Data_Entity_Attribute_Boolean::class
-			,self::TYPE__TEXT => Df_C1_Cml2_Import_Data_Entity_Attribute_Text::class
+			'Справочник' => \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList::class
+			,'Дата' => \Df\C1\Cml2\Import\Data\Entity\Attribute\Date::class
+			,'Число' => \Df\C1\Cml2\Import\Data\Entity\Attribute\Number::class
+			,'Булево' => \Df\C1\Cml2\Import\Data\Entity\Attribute\Boolean::class
+			,self::TYPE__TEXT => \Df\C1\Cml2\Import\Data\Entity\Attribute\Text::class
 		);
-		return dfa($map, self::_type($e), Df_C1_Cml2_Import_Data_Entity_Attribute_Text::class);
+		return dfa($map, self::_type($e), \Df\C1\Cml2\Import\Data\Entity\Attribute\Text::class);
 	}
 
 	/**
@@ -81,7 +81,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_Attribute extends Df_C1_Cml2_Import
 				</ТипыЗначений>
 			</Свойство>
 		 */
-		/** @var SimpleXMLElement[]|bool $externalTypeNames */
+		/** @var \SimpleXMLElement[]|bool $externalTypeNames */
 		$externalTypeNames = $e->xpathA('ТипыЗначений/ТипЗначений/Тип');
 		if (!$externalTypeNames) {
 			/**
@@ -146,9 +146,7 @@ abstract class Df_C1_Cml2_Import_Data_Entity_Attribute extends Df_C1_Cml2_Import
 		df_result_string($result);
 		return $result;
 	}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_Attributes::itemClass() */
-
+	
 	/**
 	 * 2015-08-04
 	 * Почему-то PHP не разрешает использовать приватную станическую переменную

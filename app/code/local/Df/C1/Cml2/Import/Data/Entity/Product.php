@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
-class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entity {
+class Product extends \Df\C1\Cml2\Import\Data\Entity {
 	/** @return string */
 	public function getAppliedTypeName() {
 		/** @var string $result */
@@ -12,14 +12,14 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 		return $result;
 	}
 
-	/** @return Df_Eav_Model_Entity_Attribute_Set */
+	/** @return \Df_Eav_Model_Entity_Attribute_Set */
 	public function getAttributeSet() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Eav_Model_Entity_Attribute_Set $result */
+			/** @var \Df_Eav_Model_Entity_Attribute_Set $result */
 			$result = df()->registry()->attributeSets()->findByLabel($this->getAppliedTypeName());
 			if (!$result) {
 				// Добавляем в систему новый прикладной тип товара
-				$result = Df_Catalog_Model_Installer_AttributeSet::create(
+				$result = \Df_Catalog_Model_Installer_AttributeSet::create(
 					$this->getAppliedTypeName()
 					// Избегаем автроматической перестройки денормализованной таблицы,
 					// потому что ниже мы добавим к прикладному типу товара новое свойство
@@ -28,7 +28,7 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 					,$skipReindexing = true
 				);
 			}
-			df_assert($result instanceof Df_Eav_Model_Entity_Attribute_Set);
+			df_assert($result instanceof \Df_Eav_Model_Entity_Attribute_Set);
 			/**
 			 * Прикладной тип товара уже имеется в системе,
 			 * однако неизвестно, есть ли у него свойство «внешний идентификатор 1С»
@@ -44,11 +44,11 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom */
 	public function getAttributeValuesCustom() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::i(
+				\Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::i(
 					$this->e(), $this
 				)
 			;
@@ -56,7 +56,7 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 		return $this->{__METHOD__};
 	}
 	
-	/** @return Df_Catalog_Model_Category[] */
+	/** @return \Df_Catalog_Model_Category[] */
 	public function getCategories() {
 		if (!isset($this->{__METHOD__})) {
 			/** @uses getCategoryByExternalId() */
@@ -91,10 +91,10 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 	/** @return string */
 	public function getDescriptionFull() {return $this->getRequisiteValue('ОписаниеВФорматеHTML');}
 
-	/** @return Df_C1_Cml2_Import_Data_Collection_ProductPart_Images */
+	/** @return \Df\C1\Cml2\Import\Data\Collection\ProductPart\Images */
 	public function getImages() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_C1_Cml2_Import_Data_Collection_ProductPart_Images::i($this->e());
+			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\ProductPart\Images::i($this->e());
 		}
 		return $this->{__METHOD__};
 	}
@@ -134,16 +134,16 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Dataflow_Model_Registry_Collection_AttributeSets */
+	/** @return \Df_Dataflow_Model_Registry_Collection_AttributeSets */
 	private function getAttributeSets() {return df()->registry()->attributeSets();}
 	
 	/**                 
 	 * @param string $externalId
-	 * @return Df_Catalog_Model_Category
+	 * @return \Df_Catalog_Model_Category
 	 */
 	private function getCategoryByExternalId($externalId) {
 		df_param_string_not_empty($externalId, 0);
-		/** @var Df_Catalog_Model_Category $result */
+		/** @var \Df_Catalog_Model_Category $result */
 		$result = df()->registry()->categories()->findByExternalId($externalId);
 		if (!$result) {
 			df_error('Товарный раздел не найден в реестре: «%s».', $externalId);
@@ -216,11 +216,5 @@ class Df_C1_Cml2_Import_Data_Entity_Product extends Df_C1_Cml2_Import_Data_Entit
 		}
 		return df_n_get($this->{__METHOD__});
 	}
-
-	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_Products::itemClass()
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::_construct()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom::_construct()
-	 */
 
 }

@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
-	extends Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom {
+namespace Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom;
+class Option extends \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom {
 	/**
 	 * @override
 	 * @return string
@@ -54,7 +54,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateAttributeValues()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type::getProductDataNewOrUpdateAttributeValues()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата @see getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
@@ -95,19 +95,19 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 				[store_default_value] =>
 				[value] => натуральная кожа
 			 )
-	 * @return Df_Eav_Model_Entity_Attribute_Option|null
+	 * @return \Df_Eav_Model_Entity_Attribute_Option|null
 	 */
 	private function getOption() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Df_Eav_Model_Entity_Attribute_Option|null $result */
+			/** @var \Df_Eav_Model_Entity_Attribute_Option|null $result */
 			$result = null;
 			df_assert(!is_null($this->getExternalId()));
-			/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
-			$options = Df_Eav_Model_Entity_Attribute_Option::c();
+			/** @var \Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $options */
+			$options = \Df_Eav_Model_Entity_Attribute_Option::c();
 			$options->setPositionOrder('asc');
 			$options->setAttributeFilter($this->getAttributeMagento()->getId());
 			$options->setStoreFilter($this->getAttributeMagento()->getStoreId());
-			$options->addFieldToFilter(Df_C1_Const::ENTITY_EXTERNAL_ID, $this->getExternalId());
+			$options->addFieldToFilter(\Df\C1\C::ENTITY_EXTERNAL_ID, $this->getExternalId());
 			if (!$options->count()) {
 				// Из 1С:Управление торговлей в интернет-магазин передано справочное значение,
 				// отсутствующее в соответствующем справочнике интернет-магазина.
@@ -127,14 +127,14 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 						,'{productSku}' => $this->getProduct()->getSku()
 					)
 				);
-				/** @var Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $optionsAll */
-				$optionsAll = Df_Eav_Model_Entity_Attribute_Option::c();
+				/** @var \Df_Eav_Model_Resource_Entity_Attribute_Option_Collection $optionsAll */
+				$optionsAll = \Df_Eav_Model_Entity_Attribute_Option::c();
 				$optionsAll->setPositionOrder('asc');
 				$optionsAll->setAttributeFilter($this->getAttributeMagento()->getId());
 				$optionsAll->setStoreFilter($this->getAttributeMagento()->getStoreId());
 				df_c1_log('Допустимые значения свойства %s:', $this->getAttributeMagento()->getTitle());
 				foreach ($optionsAll as $option) {
-					/** @var Df_Eav_Model_Entity_Attribute_Option $option */
+					/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 					df_c1_log('«{optionLabel}» («{optionExternalId}»)', array(
 						'{optionLabel}' => $option->getValue()
 						,'{optionExternalId}' => $option->get1CId()
@@ -146,12 +146,9 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option
 			}
 			$this->{__METHOD__} = df_n_set($result);
 			if ($result) {
-				df_assert($result instanceof Df_Eav_Model_Entity_Attribute_Option);
+				df_assert($result instanceof \Df_Eav_Model_Entity_Attribute_Option);
 			}
 		}
 		return df_n_get($this->{__METHOD__});
 	}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem() */
-
 }

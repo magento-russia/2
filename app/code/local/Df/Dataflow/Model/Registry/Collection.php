@@ -131,7 +131,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	 * @return string|null
 	 */
 	protected function getEntityExternalId(Mage_Core_Model_Abstract $entity) {
-		return $entity->getData(Df_C1_Const::ENTITY_EXTERNAL_ID);
+		return $entity->getData(\Df\C1\C::ENTITY_EXTERNAL_ID);
 	}
 
 	/**

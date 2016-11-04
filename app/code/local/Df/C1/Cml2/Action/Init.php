@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Action;
-class Df_C1_Cml2_Action_Init extends Df_C1_Cml2_Action {
+class Init extends \Df\C1\Cml2\Action {
 	/**
 	 * @todo надо добавить поддержку формата ZIP
 	 * @todo надо передавать реальное значение «file_limit»

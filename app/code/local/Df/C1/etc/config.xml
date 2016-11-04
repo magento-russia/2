@@ -30,7 +30,7 @@
 			<df_catalog__attribute_set__group_added>
 				<observers>
 					<Df_C1>
-						<class>Df_C1_Observer</class>
+						<class>Df\C1\Observer</class>
 						<method>df_catalog__attribute_set__group_added</method>
 					</Df_C1>
 				</observers>

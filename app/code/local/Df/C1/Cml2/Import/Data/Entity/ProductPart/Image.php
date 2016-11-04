@@ -1,5 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_ProductPart_Image extends Df_C1_Cml2_Import_Data_Entity {
+namespace Df\C1\Cml2\Import\Data\Entity\ProductPart;
+class Image extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * @override
 	 * @return string
@@ -12,7 +13,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_Image extends Df_C1_Cml2_Import_
 			$this->{__METHOD__} =
 				str_replace(
 					DS, '/'
-					, Df_C1_Cml2_FileSystem::s()->getFullPathByRelativePath(
+					, \Df\C1\Cml2\FileSystem::s()->getFullPathByRelativePath(
 						$this->getFilePathRelative()
 					)
 				)
@@ -102,7 +103,4 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_Image extends Df_C1_Cml2_Import_
 				$this->isFileExist()
 		;
 	}
-
-	/** @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_Images::itemClass() */
-
 }

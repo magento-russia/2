@@ -27,8 +27,8 @@ class Df_Core_Model_Mixin extends Df_Core_Model {
 	private static $P__PARENT = 'parent';
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_DocumentMixin::i()
-	 * @used-by Df_C1_Cml2_Export_DocumentMixin_Catalog::i()
+	 * @used-by \Df\C1\Cml2\Export\DocumentMixin::i()
+	 * @used-by \Df\C1\Cml2\Export\DocumentMixin\Catalog::i()
 	 * @param string $class
 	 * @param Df_Core_Model $parent
 	 * @return Df_Core_Model_Mixin

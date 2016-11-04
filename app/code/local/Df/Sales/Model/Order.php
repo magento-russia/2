@@ -139,8 +139,8 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	/** @var bool */
 	private $_commentNeedToBeVisibleOnFront = false;
 	/**
-	 * @used-by Df_C1_Cml2_Export_Data_Entity_Customer::_construct()
-	 * @used-by Df_C1_Cml2_Export_Processor_Sale_Order::_construct()
+	 * @used-by \Df\C1\Cml2\Export\Data\Entity\Customer::_construct()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Sale\Order::_construct()
 	 * @used-by \Df\Payment\Request\Payment::_construct()
 	 * @used-by Df_Sales_Model_Resource_Order_Collection::_construct()
 	 */

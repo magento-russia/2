@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
-class Df_C1_Cml2_Import_Data_Collection_Attributes extends Df_C1_Cml2_Import_Data_Collection {
+class Attributes extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @return \Df\Xml\X[]
@@ -27,7 +27,7 @@ class Df_C1_Cml2_Import_Data_Collection_Attributes extends Df_C1_Cml2_Import_Dat
 	 * @return string
 	 */
 	protected function itemClassAdvanced(\Df\Xml\X $e) {
-		return Df_C1_Cml2_Import_Data_Entity_Attribute::getClass($e);
+		return \Df\C1\Cml2\Import\Data\Entity\Attribute::getClass($e);
 	}
 
 	/**
@@ -65,10 +65,10 @@ class Df_C1_Cml2_Import_Data_Collection_Attributes extends Df_C1_Cml2_Import_Dat
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_State_Import_Collections::getAttributes()
+	 * @used-by \Df\C1\Cml2\State\Import\Collections::getAttributes()
 	 * @static
 	 * @param \Df\Xml\X $xml
-	 * @return Df_C1_Cml2_Import_Data_Collection_Attributes
+	 * @return \Df\C1\Cml2\Import\Data\Collection\Attributes
 	 */
 	public static function i(\Df\Xml\X $xml) {return new self(array(self::$P__E => $xml));}
 }

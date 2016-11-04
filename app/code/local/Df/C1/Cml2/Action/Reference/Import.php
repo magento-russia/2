@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Action\Reference;
-class Df_C1_Cml2_Action_Reference_Import extends Df_C1_Cml2_Action_Reference {
+class Import extends \Df\C1\Cml2\Action\Reference {
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::_process()

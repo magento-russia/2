@@ -4,7 +4,7 @@ class Df_Customer_Model_Group extends Mage_Customer_Model_Group {
 	 * @see Df_C1_Setup_2_44_0::process()
 	 * @return string|null
 	 */
-	public function get1CId() {return $this->_getData(Df_C1_Const::ENTITY_EXTERNAL_ID);}
+	public function get1CId() {return $this->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID);}
 
 	/**
 	 * @override
@@ -17,7 +17,7 @@ class Df_Customer_Model_Group extends Mage_Customer_Model_Group {
 	 * @return Df_Customer_Model_Group
 	 */
 	public function set1CId($value) {
-		$this->setData(Df_C1_Const::ENTITY_EXTERNAL_ID, $value);
+		$this->setData(\Df\C1\C::ENTITY_EXTERNAL_ID, $value);
 		return $this;
 	}
 
@@ -32,7 +32,7 @@ class Df_Customer_Model_Group extends Mage_Customer_Model_Group {
 	protected function _getResource() {return Df_Customer_Model_Resource_Group::s();}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup::_construct()
+	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup::_construct()
 	 * @used-by Df_Customer_Model_Resource_Group_Collection::_construct()
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_CustomerGroup::getEntityClass()
 	 */

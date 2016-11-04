@@ -10,7 +10,7 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 		$result->setStore($this->store());
 		/**
 		 * Раньше тут стояло
-		 * $result->addAttributeToSelect(Df_C1_Const::ENTITY_EXTERNAL_ID);
+		 * $result->addAttributeToSelect(\Df\C1\C::ENTITY_EXTERNAL_ID);
 		 * потому что реестр использовался только модулем 1С:Управление торговлей.
 		 *
 		 * Теперь же реестр начинает использоваться прикладным решением «Lamoda»,

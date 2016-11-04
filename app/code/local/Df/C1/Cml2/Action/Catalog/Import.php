@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Action\Catalog;
-class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
+class Import extends \Df\C1\Cml2\Action\Catalog {
 	/** @return \Df\Xml\X */
 	protected function e() {return $this->getFileCurrent()->getXml();}
 
@@ -39,7 +39,7 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			/**
 			 * 2015-08-04
 			 * Раньше товарные свойства импортировались при возвращении true методом
-			 * @see Df_C1_Cml2_Import_Data_Document_Catalog::hasStructure()
+			 * @see \Df\C1\Cml2\Import\Data\Document\Catalog::hasStructure()
 			 * Однако сегодня, тестируя версию 5.0.6 модуля 1С-Битрикс (CommerceML версии 2.09)
 			 * заметил, что первый файл import__*.xml, который 1С передаёт интернет-магазину,
 			 * внутри ветки Классификатор содержит подветки Группы, ТипыЦен, Склады, ЕдиницыИзмерения,
@@ -86,10 +86,10 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 		df_cache_clean();
 	}
 
-	/** @return Df_C1_Cml2_State_Import_Collections */
+	/** @return \Df\C1\Cml2\State\Import\Collections */
 	private function getCollections() {return $this->getState()->import()->collections();}
 
-	/** @return Df_C1_Cml2_Action_Catalog_Import */
+	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importCategories() {
 		/** @var int $count */
 		$count = $this->getCollections()->getCategories()->count();
@@ -100,8 +100,8 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			df_c1_log('Товарных разделов: %d.', $count);
 			df_c1_log('Импорт товарных разделов начат.');
 			foreach ($this->getCollections()->getCategories() as $category) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Category $category */
-				Df_C1_Cml2_Import_Processor_Category::i(
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Category $category */
+				\Df\C1\Cml2\Import\Processor\Category::i(
 					$this->getState()->import()->getRootCategory(), $category
 				)->process();
 			}
@@ -110,7 +110,7 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 		return $this;
 	}
 
-	/** @return Df_C1_Cml2_Action_Catalog_Import */
+	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importProductsConfigurable() {
 		/** @var int $countParent */
 		$countParent = count($this->getCollections()->getOffersConfigurableParent());
@@ -122,7 +122,7 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			}
 			else {
 				if (df_my_local()) {
-					Mage::log(
+					\Mage::log(
 						'ВНИМАНИЕ: отсутствуют настраиваемые товары, однако присутствуют их составные части!'
 					);
 				}
@@ -135,26 +135,26 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			df_c1_log('Настраиваемых товаров: %d.', $countParent);
 			df_c1_log('Импорт настраиваемых товаров начат.');
 			foreach ($this->getCollections()->getOffersConfigurableParent() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
-				Df_C1_Cml2_Import_Processor_Product_Type_Configurable::p($offer);
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
+				\Df\C1\Cml2\Import\Processor\Product\Type\Configurable::p($offer);
 			}
 			df_c1_log('Импорт настраиваемых товаров завершён.');
 		}
 		return $this;
 	}
 
-	/** @return Df_C1_Cml2_Action_Catalog_Import */
+	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importProductsConfigurablePartImages() {
 		foreach ($this->getCollections()->getOffers() as $offer) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 			if ($offer->isTypeConfigurableParent()) {
-				Df_C1_Cml2_Import_Processor_Product_Part_Images::i($offer)->process();
+				\Df\C1\Cml2\Import\Processor\Product\Part\Images::i($offer)->process();
 			}
 		}
 		return $this;
 	}
 
-	/** @return Df_C1_Cml2_Action_Catalog_Import */
+	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importProductsSimple() {
 		/** @var int $count */
 		$count = count($this->getCollections()->getOffersSimple());
@@ -165,35 +165,35 @@ class Df_C1_Cml2_Action_Catalog_Import extends Df_C1_Cml2_Action_Catalog {
 			df_c1_log('Простых товаров: %d.', $count);
 			df_c1_log('Импорт простых товаров начат.');
 			foreach ($this->getCollections()->getOffersSimple() as $offer) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
-				Df_C1_Cml2_Import_Processor_Product_Type_Simple::i($offer)->process();
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
+				\Df\C1\Cml2\Import\Processor\Product\Type\Simple::i($offer)->process();
 			}
 			df_c1_log('Импорт простых товаров завершён.');
 		}
 		return $this;
 	}
 
-	/** @return Df_C1_Cml2_Action_Catalog_Import */
+	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importProductsSimplePartImages() {
 		foreach ($this->getCollections()->getOffers() as $offer) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Offer $offer */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 			if ($offer->isTypeSimple()) {
-				Df_C1_Cml2_Import_Processor_Product_Part_Images::i($offer)->process();
+				\Df\C1\Cml2\Import\Processor\Product\Part\Images::i($offer)->process();
 			}
 		}
 		return $this;
 	}
 
-	/** @return Df_C1_Cml2_Action_Catalog_Import */
+	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importReferenceLists() {
 		df_c1_log('Импорт справочников начат.');
 		df_h()->eav()->packetUpdateBegin();
 		foreach ($this->getCollections()->getAttributes() as $attribute) {
-			/** @var Df_C1_Cml2_Import_Data_Entity_Attribute $attribute */
+			/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute $attribute */
 			// Обратываем только свойства, у которых тип значений — «Справочник».
-			if ($attribute instanceof Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList) {
-				/** @var Df_C1_Cml2_Import_Data_Entity_Attribute_ReferenceList $attribute */
-				Df_C1_Cml2_Import_Processor_ReferenceList::i($attribute)->process();
+			if ($attribute instanceof \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList) {
+				/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList $attribute */
+				\Df\C1\Cml2\Import\Processor\ReferenceList::i($attribute)->process();
 			}
 		}
 		df_h()->eav()->packetUpdateEnd();

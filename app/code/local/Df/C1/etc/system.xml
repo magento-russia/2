@@ -136,9 +136,9 @@ Eсли Вы хотите использовать параметр {node},
 и соответствующие им валюты здесь,в настройках модуля (кнопка «<b>добавить...</b>»).
 								]]>
 							</comment>
-							<frontend_model>Df_C1_Config_Block_NonStandardCurrencyCodes</frontend_model>
+							<frontend_model>\Df\C1\Config\Block\NonStandardCurrencyCodes</frontend_model>
 							<backend_model>Df_Admin_Config_Backend_Table</backend_model>
-							<rm_type>Df_C1_Config_MapItem_CurrencyCode</rm_type>
+							<rm_type>\Df\C1\Config\MapItem\CurrencyCode</rm_type>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -189,9 +189,9 @@ Eсли Вы хотите использовать параметр {node},
 									соответствие уже задано выше и повторно указывать не нужно.
 								]]>
 							</comment>
-							<frontend_model>Df_C1_Config_Block_MapFromCustomerGroupToPriceType</frontend_model>
+							<frontend_model>\Df\C1\Config\Block\MapFromCustomerGroupToPriceType</frontend_model>
 							<backend_model>Df_Admin_Config_Backend_Table</backend_model>
-							<rm_type>Df_C1_Config_MapItem_PriceType</rm_type>
+							<rm_type>\Df\C1\Config\MapItem\PriceType</rm_type>
 							<sort_order>2000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -211,7 +211,7 @@ Eсли Вы хотите использовать параметр {node},
 							<label>Каким полем из 1С:Управление торговлей
 								обновлять название товара в интернет-магазине?</label>
 							<frontend_type>select</frontend_type>
-							<source_model>Df_C1_Config_Source_ProductNameSource</source_model>
+							<source_model>\Df\C1\Config\Source\ProductNameSource</source_model>
 							<sort_order>3000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -240,7 +240,7 @@ Eсли Вы хотите использовать параметр {node},
 								]]>
 							</comment>
 							<frontend_type>select</frontend_type>
-							<source_model>Df_C1_Config_Source_WhichDescriptionFieldToUpdate</source_model>
+							<source_model>\Df\C1\Config\Source\WhichDescriptionFieldToUpdate</source_model>
 							<sort_order>4000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
@@ -351,7 +351,7 @@ Eсли Вы хотите использовать параметр {node},
 через административную часть интернет-магазина.
 							]]></comment>
 							<frontend_type>select</frontend_type>
-							<source_model>Df_C1_Config_Source_ReferenceListUpdateMode</source_model>
+							<source_model>\Df\C1\Config\Source\ReferenceListUpdateMode</source_model>
 							<sort_order>1000</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>

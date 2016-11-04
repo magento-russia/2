@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Export\DocumentMixin;
-class Df_C1_Cml2_Export_DocumentMixin_Catalog extends Df_C1_Cml2_Export_DocumentMixin {
+class Catalog extends \Df\C1\Cml2\Export\DocumentMixin {
 	/**
 	 * @override
 	 * @return array(string => string)
@@ -15,7 +15,7 @@ class Df_C1_Cml2_Export_DocumentMixin_Catalog extends Df_C1_Cml2_Export_Document
 			,'xmlns:xmlns:xs' => 'http://www.w3.org/2001/XMLSchema'
 			,'xmlns:xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
 			,'ВерсияСхемы' => '2.08'
-			,'ДатаФормирования' => $this->formatDate(Zend_Date::now())
+			,'ДатаФормирования' => $this->formatDate(\Zend_Date::now())
 		);
 	}
 
@@ -30,9 +30,9 @@ class Df_C1_Cml2_Export_DocumentMixin_Catalog extends Df_C1_Cml2_Export_Document
 	public function getXml($reformat = false) {return $this->parent(__FUNCTION__, $reformat);}
 
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Catalog::createMixin()
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::createMixin()
 	 * @param \Df\Xml\Generator\Document $parent
-	 * @return Df_C1_Cml2_Export_DocumentMixin_Catalog
+	 * @return \Df\C1\Cml2\Export\DocumentMixin\Catalog
 	 */
 	public static function i(\Df\Xml\Generator\Document $parent) {
 		return self::ic(__CLASS__, $parent);

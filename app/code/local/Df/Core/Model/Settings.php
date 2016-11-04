@@ -122,8 +122,8 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 	protected function getKeyPrefix() {return $this->cfg(self::$P__PREFIX);}
 
 	/**
-	 * @used-by Df_C1_Config_Api_General::ccMapFrom1C()
-	 * @used-by Df_C1_Config_Api_Product_Prices::_map()
+	 * @used-by \Df\C1\Config\Api\General::ccMapFrom1C()
+	 * @used-by \Df\C1\Config\Api\Product\Prices::_map()
 	 * @used-by Df_Directory_Settings_Countries_EACU::::iso2Codes()
 	 * @used-by Df_Directory_Settings_Countries_Popular::iso2Codes()
 	 * @param string $key

@@ -1,10 +1,9 @@
 <?php
 namespace Df\C1\Cml2\Export\Processor\Catalog;
 /**
- * @method Df_C1_Cml2_Export_Document_Catalog getDocument()
+ * @method \Df\C1\Cml2\Export\Document\Catalog getDocument()
  */
-class Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup
-	extends \Df\Xml\Generator\Part {
+class CustomerGroup extends \Df\Xml\Generator\Part {
 	/**
 	 * @override
 	 * @return array(string => string|mixed)
@@ -27,10 +26,10 @@ class Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup
 		));
 	}
 
-	/** @return Df_C1_Cml2_Export_Entry */
-	private function entry() {return Df_C1_Cml2_Export_Entry::s();}
+	/** @return \Df\C1\Cml2\Export\Entry */
+	private function entry() {return \Df\C1\Cml2\Export\Entry::s();}
 
-	/** @return Df_Customer_Model_Group */
+	/** @return \Df_Customer_Model_Group */
 	private function getGroup() {return $this->cfg(self::$P__GROUP);}
 
 	/**
@@ -55,21 +54,21 @@ class Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__DOCUMENT, Df_C1_Cml2_Export_Document_Catalog::class)
-			->_prop(self::$P__GROUP, Df_Customer_Model_Group::class)
+			->_prop(self::$P__DOCUMENT, \Df\C1\Cml2\Export\Document\Catalog::class)
+			->_prop(self::$P__GROUP, \Df_Customer_Model_Group::class)
 		;
 	}
 	/** @var string */
 	private static $P__GROUP = 'group';
 	/**
-	 * @used-by Df_C1_Cml2_Export_Document_Catalog::getКлассификатор_ТипыЦен_ТипЦены()
+	 * @used-by \Df\C1\Cml2\Export\Document\Catalog::getКлассификатор_ТипыЦен_ТипЦены()
 	 * @static
-	 * @param Df_Customer_Model_Group $group
+	 * @param \Df_Customer_Model_Group $group
 	 * @param \Df\Xml\Generator\Document $document
-	 * @return Df_C1_Cml2_Export_Processor_Catalog_CustomerGroup
+	 * @return \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup
 	 */
 	public static function i(
-		Df_Customer_Model_Group $group, \Df\Xml\Generator\Document $document
+		\Df_Customer_Model_Group $group, \Df\Xml\Generator\Document $document
 	) {
 		return new self(array(self::$P__DOCUMENT => $document, self::$P__GROUP => $group));
 	}

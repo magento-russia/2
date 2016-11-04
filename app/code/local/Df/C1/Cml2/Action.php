@@ -1,18 +1,18 @@
 <?php
 namespace Df\C1\Cml2;
-/** @method Df_C1_Cml2_InputRequest_Generic rmRequest() */
-abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
-	/** @return Df_C1_Cml2_State */
-	protected function getState() {return Df_C1_Cml2_State::s();}
+/** @method \Df\C1\Cml2\InputRequest\Generic rmRequest() */
+abstract class Action extends \Df_Core_Model_Action {
+	/** @return \Df\C1\Cml2\State */
+	protected function getState() {return \Df\C1\Cml2\State::s();}
 
 	/**
 	 * @override
 	 * @see Df_Core_Model_Action::rmRequestClass()
 	 * @used-by Df_Core_Model_Action::rmRequest()
-	 * @uses Df_C1_Cml2_InputRequest_Generic
+	 * @uses \Df\C1\Cml2\InputRequest\Generic
 	 * @return string
 	 */
-	protected function rmRequestClass() {return 'Df_C1_Cml2_InputRequest_Generic';}
+	protected function rmRequestClass() {return \Df\C1\Cml2\InputRequest\Generic::class;}
 
 	/**
 	 * @override
@@ -26,10 +26,10 @@ abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 	 * @override
 	 * @see Df_Core_Model_Action::processException()
 	 * @used-by Df_Core_Model_Action::process()
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @return void
 	 */
-	protected function processException(Exception $e) {
+	protected function processException(\Exception $e) {
 		/** @var string $diagnosticMessage */
 		$diagnosticMessage = df_ets($e);
 		/** @var string|bool $output */
@@ -37,7 +37,7 @@ abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 		// Такой сбой у меня возник на сервере moysklad.magento-demo.ru.
 		$output = @ob_get_clean();
 		if ($output) {
-			Mage::log('output buffer: ' . $output);
+			\Mage::log('output buffer: ' . $output);
 			$diagnosticMessage = $output;
 		}
 		df_handle_entry_point_exception($e, false);
@@ -52,25 +52,25 @@ abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 	 */
 	protected function processPrepare() {
 		parent::processPrepare();
-		df_h()->dataflow()->registry()->products()->addValidator(Df_C1_Validate_Product::s());
+		df_h()->dataflow()->registry()->products()->addValidator(\Df\C1\Validate\Product::s());
 	}
 
-	/** @return Df_C1_Cml2_Session_ByIp */
-	protected function session() {return Df_C1_Cml2_Session_ByIp::s();}
+	/** @return \Df\C1\Cml2\Session\ByIp */
+	protected function session() {return \Df\C1\Cml2\Session\ByIp::s();}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Front::checkLoggedIn()
-	 * @used-by Df_C1_Cml2_Action_Login::_process()
-	 * @return Df_C1_Cml2_Session_ByCookie_MagentoAPI
+	 * @used-by \Df\C1\Cml2\Action\Front::checkLoggedIn()
+	 * @used-by \Df\C1\Cml2\Action\Login::_process()
+	 * @return \Df\C1\Cml2\Session\ByCookie\MagentoAPI
 	 */
-	protected function sessionMagentoAPI() {return Df_C1_Cml2_Session_ByCookie_MagentoAPI::s();}
+	protected function sessionMagentoAPI() {return \Df\C1\Cml2\Session\ByCookie\MagentoAPI::s();}
 
 	/**
 	 * @used-by processException()
 	 * @used-by setResponseSuccess()
-	 * @used-by Df_C1_Cml2_Action_Init::_process()
-	 * @used-by Df_C1_Cml2_Action_Login::_process()
-	 * @used-by Df_C1_Cml2_Action_Catalog_Export_Finish::_process()
+	 * @used-by \Df\C1\Cml2\Action\Init::_process()
+	 * @used-by \Df\C1\Cml2\Action\Login::_process()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Export\Finish::_process()
 	 * @param string|string[] $lines
 	 * @return void
 	 */
@@ -81,12 +81,12 @@ abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 	}
 
 	/**
-	 * @used-by Df_C1_Cml2_Action_Catalog_Deactivate::_process()
-	 * @used-by Df_C1_Cml2_Action_Catalog_Import::_process()
-	 * @used-by Df_C1_Cml2_Action_Front::action_ordersExportSuccess()
-	 * @used-by Df_C1_Cml2_Action_GenericImport_Upload::_process()
-	 * @used-by Df_C1_Cml2_Action_Orders_Import::_process()
-	 * @used-by Df_C1_Cml2_Action_Reference_Import::_process()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Deactivate::_process()
+	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::_process()
+	 * @used-by \Df\C1\Cml2\Action\Front::action_ordersExportSuccess()
+	 * @used-by \Df\C1\Cml2\Action\GenericImport\Upload::_process()
+	 * @used-by \Df\C1\Cml2\Action\Orders\Import::_process()
+	 * @used-by \Df\C1\Cml2\Action\Reference\Import::_process()
 	 * @return void
 	 */
 	protected function setResponseSuccess() {$this->setResponseLines('success', '');}
@@ -96,15 +96,15 @@ abstract class Df_C1_Cml2_Action extends Df_Core_Model_Action {
 	 * @see Df_Core_Model_Action::store()
 	 * @used-by Df_Core_Model_Action::checkAccessRights()
 	 * @used-by Df_Core_Model_Action::getStoreConfig()
-	 * @return Df_Core_Model_StoreM
+	 * @return \Df_Core_Model_StoreM
 	 */
 	protected function store() {return df_state()->getStoreProcessed();}
 
 	/**
 	 * 2015-03-13
 	 * Поддержка синтаксиса setResponseLines(array('paramName' => 'paramValue'))
-	 * @see Df_C1_Cml2_Action_Init::_process()
-	 * @see Df_C1_Cml2_Action_Catalog_Export_Finish::_process()
+	 * @see \Df\C1\Cml2\Action\Init::_process()
+	 * @see \Df\C1\Cml2\Action\Catalog\Export\Finish::_process()
 	 * @used-by setResponseLines()
 	 * @param array(int|string => string) $lines
 	 * @return string[]

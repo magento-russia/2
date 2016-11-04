@@ -1,6 +1,6 @@
 <?php
-class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
-	extends Df_C1_Cml2_Import_Data_Entity_AttributeValue {
+namespace Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue;
+class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	/**
 	 * @override
 	 * @return string
@@ -23,7 +23,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 
 	/**
 	 * 2015-02-06
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type::getProductDataNewOrUpdateAttributeValues()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type::getProductDataNewOrUpdateAttributeValues()
 	 * Метод @used-by Df_Dataflow_Model_Import_Abstract_Row::getFieldValue()
 	 * проверяет принадлежность результата @see getValueForDataflow()
 	 * одному из типов: string|int|float|bool|null
@@ -67,7 +67,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 * Для приведённой выше структуры данных
 	 * @see getValueForObject() вернёт значение «35»,
 	 * а @see getValueForDataflow() вернёт значение «натуральная кожа».
-	 * @used-by Df_C1_Cml2_Import_Processor_Product_Type_Configurable_Update::getProductDataNewOrUpdateAttributeValueIdsCustom()
+	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Update::getProductDataNewOrUpdateAttributeValueIdsCustom()
 	 * @return string|int|float|bool|null
 	 */
 	public function getValueForObject() {
@@ -134,7 +134,7 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 
 	/**
 	 * @override
-	 * @return Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
 	protected function findMagentoAttributeInRegistry() {
 		return df_attributes()->findByExternalId($this->getAttributeExternalId());
@@ -165,27 +165,27 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Attribute
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Attribute
 	 */
 	protected function getAttributeTemplate() {return $this->getAttributeEntity();}
 
 	/**
-	 * @param Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
 	 * @return string
 	 */
-	protected function getGroupForAttribute(Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
-		return Df_C1_Const::PRODUCT_ATTRIBUTE_GROUP_NAME;
+	protected function getGroupForAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
+		return \Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME;
 	}
 
 	/**
 	 * @override
-	 * @return Df_C1_Cml2_Import_Data_Entity_Product
+	 * @return \Df\C1\Cml2\Import\Data\Entity\Product
 	 */
 	protected function getProduct() {return $this->cfg(self::$P__PRODUCT);}
 
-	/** @return Df_C1_Cml2_Import_Data_Entity_Attribute */
+	/** @return \Df\C1\Cml2\Import\Data\Entity\Attribute */
 	private function getAttributeEntity() {
-		/** @var Df_C1_Cml2_Import_Data_Entity_Attribute $result */
+		/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute $result */
 		$result =
 			$this->getState()->import()->collections()->getAttributes()->findByExternalId(
 				$this->getAttributeExternalId()
@@ -205,24 +205,24 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 		if (!isset($this->{__METHOD__})) {
 			/** @var bool $result */
 			$result = false;
-			/** @var Mage_Eav_Model_Entity_Attribute|null $attribute */
+			/** @var \Mage_Eav_Model_Entity_Attribute|null $attribute */
 			$attribute = df_attributes()->findByExternalId($this->getAttributeExternalId());
 			if ($attribute) {
-				df_assert($attribute instanceof Mage_Eav_Model_Entity_Attribute);
+				df_assert($attribute instanceof \Mage_Eav_Model_Entity_Attribute);
 				// Смотрим, принадлежит ли свойство типу товара
-				/** @var Mage_Eav_Model_Resource_Entity_Attribute_Collection $attributes */
-				$attributes = Mage::getResourceModel('eav/entity_attribute_collection');
+				/** @var \Mage_Eav_Model_Resource_Entity_Attribute_Collection $attributes */
+				$attributes = \Mage::getResourceModel('eav/entity_attribute_collection');
 				$attributes->setEntityTypeFilter(df_eav_id_product());
 				$attributes->addSetInfo();
 				$attributes->addFieldToFilter('attribute_code', $attribute->getAttributeCode());
 				$attributes->load();
-				/** @var Mage_Eav_Model_Entity_Attribute $attributeInfo */
+				/** @var \Mage_Eav_Model_Entity_Attribute $attributeInfo */
 				$attributeInfo = null;
 				foreach ($attributes as $attributeInfoCurrent) {
 					$attributeInfo = $attributeInfoCurrent;
 					break;
 				}
-				df_assert($attributeInfo instanceof Mage_Eav_Model_Entity_Attribute);
+				df_assert($attributeInfo instanceof \Mage_Eav_Model_Entity_Attribute);
 				/** @var mixed[] $setsInfo */
 				$setsInfo = $attributeInfo->getData('attribute_set_info');
 				df_assert_array($setsInfo);
@@ -239,25 +239,25 @@ class Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCT, Df_C1_Cml2_Import_Data_Entity_Product::class);
+		$this->_prop(self::$P__PRODUCT, \Df\C1\Cml2\Import\Data\Entity\Product::class);
 	}
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::itemClass()
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem()
+	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::itemClass()
+	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::createItem()
 	 */
 
 	/** @var string  */
 	private static $P__PRODUCT = 'product';
 
 	/**
-	 * @used-by Df_C1_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::createItem()
-	 * @used-by Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom_Option_Manufacturer::i()
+	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::createItem()
+	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer::i()
 	 * @param string $class
 	 * @param \Df\Xml\X $e
-	 * @param Df_C1_Cml2_Import_Data_Entity_Product $product
-	 * @return Df_C1_Cml2_Import_Data_Entity_ProductPart_AttributeValue_Custom
+	 * @param \Df\C1\Cml2\Import\Data\Entity\Product $product
+	 * @return \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom
 	 */
-	public static function ic($class, \Df\Xml\X $e, Df_C1_Cml2_Import_Data_Entity_Product $product) {
+	public static function ic($class, \Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Product $product) {
 		return df_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PRODUCT => $product));
 	}
 }

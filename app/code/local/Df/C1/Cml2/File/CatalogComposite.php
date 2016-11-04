@@ -1,6 +1,6 @@
 <?php
 namespace Df\C1\Cml2\File;
-class Df_C1_Cml2_File_CatalogComposite extends Df_C1_Cml2_File {
+class CatalogComposite extends \Df\C1\Cml2\File {
 	/**
 	 * @override
 	 * @return string
@@ -34,26 +34,26 @@ class Df_C1_Cml2_File_CatalogComposite extends Df_C1_Cml2_File {
 
 	/**
 	 * @override
-	 * @see Df_C1_Cml2_File::getXmlDocument()
-	 * @return Df_C1_Cml2_Import_Data_Document_Catalog
+	 * @see \Df\C1\Cml2\File::getXmlDocument()
+	 * @return \Df\C1\Cml2\Import\Data\Document\Catalog
 	 */
 	public function getXmlDocument() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				Df_C1_Cml2_Import_Data_Document::create($this->getXml(), 'no path')
+				\Df\C1\Cml2\Import\Data\Document::create($this->getXml(), 'no path')
 			;
-			df_assert($this->{__METHOD__} instanceof Df_C1_Cml2_Import_Data_Document_Catalog);
+			df_assert($this->{__METHOD__} instanceof \Df\C1\Cml2\Import\Data\Document\Catalog);
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_C1_Cml2_File */
+	/** @return \Df\C1\Cml2\File */
 	private function getFileAttributes() {return $this->cfg(self::$P__FILE_ATTRIBUTES);}
 
-	/** @return Df_C1_Cml2_File */
+	/** @return \Df\C1\Cml2\File */
 	private function getFileProducts() {return $this->cfg(self::$P__FILE_PRODUCTS);}
 
-	/** @return Df_C1_Cml2_File */
+	/** @return \Df\C1\Cml2\File */
 	private function getFileStructure() {return $this->cfg(self::$P__FILE_STRUCTURE);}
 
 	/**
@@ -63,9 +63,9 @@ class Df_C1_Cml2_File_CatalogComposite extends Df_C1_Cml2_File {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__FILE_ATTRIBUTES, Df_C1_Cml2_File::class)
-			->_prop(self::$P__FILE_PRODUCTS, Df_C1_Cml2_File::class)
-			->_prop(self::$P__FILE_STRUCTURE, Df_C1_Cml2_File::class)
+			->_prop(self::$P__FILE_ATTRIBUTES, \Df\C1\Cml2\File::class)
+			->_prop(self::$P__FILE_PRODUCTS, \Df\C1\Cml2\File::class)
+			->_prop(self::$P__FILE_STRUCTURE, \Df\C1\Cml2\File::class)
 		;
 	}
 	/** @var string */
@@ -75,13 +75,13 @@ class Df_C1_Cml2_File_CatalogComposite extends Df_C1_Cml2_File {
 	/** @var string */
 	private static $P__FILE_STRUCTURE = 'file_structure';
 	/**
-	 * @param Df_C1_Cml2_File $fileStructure
-	 * @param Df_C1_Cml2_File $fileProducts
-	 * @param Df_C1_Cml2_File $fileAttributes
-	 * @return Df_C1_Cml2_File_CatalogComposite
+	 * @param \Df\C1\Cml2\File $fileStructure
+	 * @param \Df\C1\Cml2\File $fileProducts
+	 * @param \Df\C1\Cml2\File $fileAttributes
+	 * @return \Df\C1\Cml2\File\CatalogComposite
 	 */
 	public static function i2(
-		Df_C1_Cml2_File $fileStructure, Df_C1_Cml2_File $fileProducts, Df_C1_Cml2_File $fileAttributes
+		\Df\C1\Cml2\File $fileStructure, \Df\C1\Cml2\File $fileProducts, \Df\C1\Cml2\File $fileAttributes
 	) {
 		df_assert($fileAttributes->getXmlDocumentAsCatalog()->hasAttributes());
 		df_assert($fileProducts->getXmlDocumentAsCatalog()->hasProducts());

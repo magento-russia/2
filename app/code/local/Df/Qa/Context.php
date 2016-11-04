@@ -22,7 +22,7 @@
 	Тип цен «Розничная», указанный администратором как основной, отсутствует в 1С:Управление торговлей.
 	***********************************
  *
- * @see Df_C1_Cml2_Action_Catalog_Import::_process()
+ * @see \Df\C1\Cml2\Action\Catalog\Import::_process()
  */
 namespace Df\Qa;
 class Context {
