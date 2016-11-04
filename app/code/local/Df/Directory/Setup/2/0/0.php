@@ -1,4 +1,5 @@
 <?php
+use Df_Directory_Model_Resource_Region as RegionR;
 class Df_Directory_Setup_2_0_0 extends Df_Core_Setup {
 	/**
 	 * @override
@@ -8,16 +9,14 @@ class Df_Directory_Setup_2_0_0 extends Df_Core_Setup {
 	 */
 	protected function _process() {
 		df_notify_me('Российская сборка Magento установлена', $doLog = false);
-		$t_REGION = df_table(Df_Directory_Model_Resource_Region::TABLE);
-		// Обратите внимание, что нам не страшно, если колонки df_type и df_capital
-		// уже присутствуют в таблице directory_country_region:
-		// исключительную ситуацию мы тут же гасим.
-		$this->runSilent("
-			alter table {$t_REGION}
-				add column `df_type` int(4) default null
-				,add column `df_capital` varchar(255) character set utf8 default null
-			;
-		");
+		/**
+		 * 2016-11-04
+		 * Нам не страшно, если колонки df_type и df_capital
+		 * уже присутствуют в таблице directory_country_region:
+		 * @uses df_db_column_add() в таком случае просто ничего не сделает.
+		 */
+		df_db_column_add(RegionR::TABLE, 'df_type', 'int(4) default null');
+		df_db_column_add(RegionR::TABLE, 'df_capital', 'varchar(255) character set utf8 default null');
 		// После изменения структуры базы данных надо удалить кэш,
 		// потому что Magento кэширует структуру базы данных.
 		df_cache_clean();
