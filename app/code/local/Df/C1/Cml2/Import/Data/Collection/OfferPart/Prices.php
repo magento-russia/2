@@ -20,9 +20,6 @@ class Prices extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function itemPath() {return 'Цены/Цена';}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
-	private function getOffer() {return $this->cfg(self::$P__OFFER);}
-
 	/**
 	 * @override
 	 * @return void

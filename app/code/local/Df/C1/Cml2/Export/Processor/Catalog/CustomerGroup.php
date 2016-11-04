@@ -26,9 +26,6 @@ class CustomerGroup extends \Df\Xml\Generator\Part {
 		));
 	}
 
-	/** @return \Df\C1\Cml2\Export\Entry */
-	private function entry() {return \Df\C1\Cml2\Export\Entry::s();}
-
 	/** @return \Df_Customer_Model_Group */
 	private function getGroup() {return $this->cfg(self::$P__GROUP);}
 

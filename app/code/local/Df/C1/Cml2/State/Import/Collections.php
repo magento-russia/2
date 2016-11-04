@@ -119,7 +119,4 @@ class Collections extends \Df_Core_Model {
 
 	/** @return \Df\C1\Cml2\State\Import\Collections */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
-
-	/** @return \Df\C1\Cml2\State */
-	private static function state() {return \Df\C1\Cml2\State::s();}
 }

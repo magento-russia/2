@@ -74,7 +74,7 @@ class Export extends \Df\C1\Cml2\Action\GenericExport {
 			/** @var \Df_Sales_Model_Resource_Order_Collection $result */
 			$result = O::c();
 			/** @var \Zend_Db_Adapter_Abstract $adapter */
-			$adapter = $result->getSelect()->getAdapter();
+			//$adapter = $result->getSelect()->getAdapter();
 			// Отбраковываем из коллекции заказы других магазинов
 			/**
 			 * 2015-11-09

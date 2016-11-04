@@ -142,10 +142,6 @@ class Item extends \Df\C1\Cml2\Export\Processor\Sale {
 		return $this->{__METHOD__};
 	}
 
-
-	/** @return string */
-	private function getItemId() {return '';}
-
 	/** @return \Df_Catalog_Model_Product */
 	private function getProduct() {
 		if (!isset($this->{__METHOD__})) {

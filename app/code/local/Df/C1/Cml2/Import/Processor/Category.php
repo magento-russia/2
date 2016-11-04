@@ -35,7 +35,7 @@ class Category extends \Df\C1\Cml2\Import\Processor {
 				,\Df_Catalog_Model_Category::P__NAME => $this->getEntity()->getName()
 				,\Df_Catalog_Model_Category::P__IS_ACTIVE => true
 				,\Df_Catalog_Model_Category::P__IS_ANCHOR => true
-				,\Df_Catalog_Model_Category::P__DISPLAY_MODE => Mage_Catalog_Model_Category::DM_MIXED
+				,\Df_Catalog_Model_Category::P__DISPLAY_MODE => \Mage_Catalog_Model_Category::DM_MIXED
 				,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getEntity()->getExternalId()
 				,'attribute_set_id' =>
 					\Df_Catalog_Model_Resource_Installer_Attribute::s()->getCategoryAttributeSetId()

@@ -181,7 +181,7 @@ class Order extends \Df\C1\Cml2\Import\Processor {
 			df_assert_integer($productId);
 			df_assert_gt0($productId);
 			/** @var \Mage_Sales_Model_Order_Item $orderItem */
-			$orderItem = $this->getSimpleOrderItemByProductId($productId);
+//			$orderItem = $this->getSimpleOrderItemByProductId($productId);
 			/** @var \Df\C1\Cml2\Import\Processor\Order\Item $processor */
 //			$processor =
 //				df_model(
