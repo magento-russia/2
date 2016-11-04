@@ -1,4 +1,5 @@
 <?php
+use Df_PromoGift_Model_Rule as Rule;
 class Df_PromoGift_Setup_1_0_0 extends Df_Core_Setup {
 	/**
 	 * @override
@@ -13,11 +14,7 @@ class Df_PromoGift_Setup_1_0_0 extends Df_Core_Setup {
 		$t_SALES_RULE = df_table('salesrule');
 		// Добавляем в таблицу «salesrule» поле «df_max_usages_per_quote»
 		// для ограничения числа применений правила для заказа
-		/** @var string $column */
-		$column = Df_PromoGift_Model_Rule::P__MAX_USAGES_PER_QUOTE;
-		$this->run("
-			ALTER TABLE `{$t_SALES_RULE}` ADD COLUMN `{$column}` int(11) unsigned NOT null DEFAULT '0';
-		");
+		df_db_column_add($t_SALES_RULE, Rule::P__MAX_USAGES_PER_QUOTE, "int(11) unsigned NOT null DEFAULT '0'");
 		$this->dropTable($_PROMO_GIFT);
 		$this->run("
 			create table if not exists `{$_PROMO_GIFT}` (
