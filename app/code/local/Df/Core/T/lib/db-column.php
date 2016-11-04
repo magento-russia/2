@@ -9,7 +9,7 @@ class DbColumn extends \PHPUnit\Framework\TestCase {
 	public function df_db_column_add_drop() {
 		/** @var $name */
 		$name = df_uid(4, 'test_');
-		df_db_column_add(self::$TABLE, $name);
+		df_db_column_add(self::$TABLE, $name, "int(11) unsigned NOT null DEFAULT '0'");
 		$this->assertTrue(df_db_column_exists(self::$TABLE, $name));
 		df_db_column_drop(self::$TABLE, $name);
 		$this->assertFalse(df_db_column_exists(self::$TABLE, $name));
