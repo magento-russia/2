@@ -11,13 +11,11 @@ class ReferenceListUpdateMode extends \Df_Admin_Config_Source {
 	 * @param bool $isMultiSelect
 	 * @return array(array(string => string))
 	 */
-	protected function toOptionArrayInternal($isMultiSelect = false) {
-		return df_map_to_options(array(
-			self::$VALUE__ALL => 'сохранять все'
-			,'manual-only' => 'сохранять только добавленные вручную администратором'
-			,self::$VALUE__NONE => 'не сохранять'
-		));
-	}
+	protected function toOptionArrayInternal($isMultiSelect = false) {return df_map_to_options([
+		self::$VALUE__ALL => 'сохранять все'
+		,'manual-only' => 'сохранять только добавленные вручную администратором'
+		,self::$VALUE__NONE => 'не сохранять'
+	]);}
 	/** @var string */
 	private static $VALUE__ALL = 'all';
 	/** @var string */

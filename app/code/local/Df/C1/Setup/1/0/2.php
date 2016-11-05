@@ -65,25 +65,23 @@ class Df_C1_Setup_1_0_2 extends \Df\C1\Setup {
 	}
 
 	/** @return array(string => string) */
-	private static function get1CIdProperties() {
-		return array(
-			'type' => 'varchar'
-			,'backend' => ''
-			,'frontend' => ''
-			,'label' => '1С ID'
-			,'input' => 'text'
-			,'class' => ''
-			,'source' => ''
-			,'global' => Df_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL
-			,'visible' => true
-			,'required' => false
-			,'user_defined' => false
-			,'default' => ''
-			,'searchable' => false
-			,'filterable' => false
-			,'comparable' => false
-			,'visible_on_front' => false
-			,'unique' => false
-		);
-	}
+	private static function get1CIdProperties() {return [
+		'type' => 'varchar'
+		,'backend' => ''
+		,'frontend' => ''
+		,'label' => '1С ID'
+		,'input' => 'text'
+		,'class' => ''
+		,'source' => ''
+		,'global' => Df_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL
+		,'visible' => true
+		,'required' => false
+		,'user_defined' => false
+		,'default' => ''
+		,'searchable' => false
+		,'filterable' => false
+		,'comparable' => false
+		,'visible_on_front' => false
+		,'unique' => false
+	];}
 }

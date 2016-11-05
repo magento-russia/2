@@ -2,14 +2,9 @@
 namespace Df\C1\Config\MapItem;
 class PriceType extends \Df_Admin_Config_MapItem {
 	/** @return \Df_Customer_Model_Group|null */
-	public function getCustomerGroup() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				\Df_Customer_Model_Group::cs()->getItemById($this->getCustomerGroupId())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getCustomerGroup() {return dfc($this, function() {return
+		\Df_Customer_Model_Group::cs()->getItemById($this->getCustomerGroupId())				
+	;});}
 
 	/** @return string|null */
 	public function getНазваниеТиповогоСоглашения() {return $this->cfg(self::P__PRICE_TYPE);}
@@ -23,7 +18,9 @@ class PriceType extends \Df_Admin_Config_MapItem {
 	 * @override
 	 * @return bool
 	 */
-	public function isValid() {return $this->getCustomerGroupId() && $this->getНазваниеТиповогоСоглашения();}
+	public function isValid() {return
+		$this->getCustomerGroupId() && $this->getНазваниеТиповогоСоглашения()
+	;}
 
 	/** @return int|null */
 	private function getCustomerGroupId() {return $this->cfg(self::P__CUSTOMER_GROUP);}
@@ -39,9 +36,6 @@ class PriceType extends \Df_Admin_Config_MapItem {
 			->_prop(self::P__PRICE_TYPE, DF_V_STRING, false)
 		;
 	}
-	/** @used-by \Df\C1\Config\Api\Product\Prices::_getMap() */
-
-
 	/** @used-by \Df\C1\Config\Api\Product\Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
 	const P__CUSTOMER_GROUP = 'customer_group';
 	/** @used-by \Df\C1\Config\Api\Product\Prices::getMapFromCustomerGroupIdToНазваниеТиповогоСоглашения() */
@@ -54,5 +48,5 @@ class PriceType extends \Df_Admin_Config_MapItem {
 	 * @used-by Df_Admin_Config_Backend_Table::unserialize()
 	 * @return string[]
 	 */
-	public static function fields() {return array(self::P__CUSTOMER_GROUP, self::P__PRICE_TYPE);}
+	public static function fields() {return [self::P__CUSTOMER_GROUP, self::P__PRICE_TYPE];}
 }

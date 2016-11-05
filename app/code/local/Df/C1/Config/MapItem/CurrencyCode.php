@@ -5,9 +5,9 @@ class CurrencyCode extends \Df_Admin_Config_MapItem {
 	public function getNonStandard() {return df_nts($this->cfg(self::P__NON_STANDARD));}
 
 	/** @return string */
-	public function getNonStandardNormalized() {
-		return df_c1_currency_code_normalize($this->getNonStandard());
-	}
+	public function getNonStandardNormalized() {return
+		df_c1_currency_code_normalize($this->getNonStandard())
+	;}
 
 	/**
 	 * Обратите внимание, что ключ @see \Df\C1\Config\MapItem\CurrencyCode::P__STANDARD
@@ -53,5 +53,5 @@ class CurrencyCode extends \Df_Admin_Config_MapItem {
 	 * @used-by Df_Admin_Config_Backend_Table::unserialize()
 	 * @return string[]
 	 */
-	public static function fields() {return array(self::P__NON_STANDARD, self::P__STANDARD);}
+	public static function fields() {return [self::P__NON_STANDARD, self::P__STANDARD];}
 }

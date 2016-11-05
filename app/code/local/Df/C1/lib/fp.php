@@ -28,9 +28,9 @@ function df_c1_cfg() {return \Df\C1\Config\Api::s();}
  * @param $string|null
  * @return bool
  */
-function df_c1_is_external_id($string) {
-	return is_string($string) && 36 === mb_strlen($string) && 5 === count(explode('-', $string));
-}
+function df_c1_is_external_id($string) {return
+	is_string($string) && 36 === mb_strlen($string) && 5 === count(explode('-', $string))
+;}
 
 /**
  * @param string|mixed[] $arguments

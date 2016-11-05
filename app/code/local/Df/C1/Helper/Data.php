@@ -1,4 +1,5 @@
 <?php
+use Df\C1\Cml2\Session\ByCookie\C1 as SessionByCookieC1;
 class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow_Logger {
 	/**
 	 * @param int $attributeSetId
@@ -73,24 +74,19 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 	 * @used-by logRaw()
 	 * @return Df_Core_Model_Logger
 	 */
-	private static function logger() {
-		/** @var Df_Core_Model_Logger $result */
-		static $result;
-		if (!$result) {
-			/** @var string $fileName */
-			$filePath = \Df\C1\Cml2\Session\ByCookie\C1::s()->getFileName_Log();
-			if (!$filePath) {
-				$filePath = df_file_name(
-					df_cc_path(
-						Mage::getBaseDir('var'), 'log'
-						, df_c1_cfg()->general()->getLogFileNameTemplatePath()
-					)
-					, df_c1_cfg()->general()->getLogFileNameTemplateBaseName()
-				);
-				\Df\C1\Cml2\Session\ByCookie\C1::s()->setFileName_Log($filePath);
-			}
-			$result = Df_Core_Model_Logger::s($filePath);
+	private static function logger() {return dfcf(function() {
+		/** @var string $fileName */
+		$filePath = SessionByCookieC1::s()->getFileName_Log();
+		if (!$filePath) {
+			$filePath = df_file_name(
+				df_cc_path(
+					Mage::getBaseDir('var'), 'log'
+					, df_c1_cfg()->general()->getLogFileNameTemplatePath()
+				)
+				, df_c1_cfg()->general()->getLogFileNameTemplateBaseName()
+			);
+			SessionByCookieC1::s()->setFileName_Log($filePath);
 		}
-		return $result;
-	}
+		return Df_Core_Model_Logger::s($filePath);
+	});}
 }

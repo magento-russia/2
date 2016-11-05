@@ -5,9 +5,9 @@ class Cml2 extends \Df_Core_Model {
 	protected function getDocumentCurrent() {return $this->getFileCurrent()->getXmlDocument();}
 
 	/** @return \Df\C1\Cml2\Import\Data\Document\Offers */
-	protected function getDocumentCurrentAsOffers() {
-		return $this->getFileCurrent()->getXmlDocumentAsOffers();
-	}
+	protected function getDocumentCurrentAsOffers() {return
+		$this->getFileCurrent()->getXmlDocumentAsOffers()
+	;}
 
 	/** @return \Df\C1\Cml2\File */
 	protected function getFileCurrent() {return \Df\C1\Cml2\State\Import::s()->getFileCurrent();}
