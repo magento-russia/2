@@ -1,6 +1,8 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Product\Type\Configurable;
-class Update extends \Df\C1\Cml2\Import\Processor\Product\Type\Configurable {
+use Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom as AttributeValueCustom;
+use Df\C1\Cml2\Import\Processor\Product\Type\Configurable;
+class Update extends Configurable {
 	/**
 	 * @override
 	 * @return void
@@ -50,35 +52,23 @@ class Update extends \Df\C1\Cml2\Import\Processor\Product\Type\Configurable {
 	protected function getProductMagento() {return $this->getExistingMagentoProduct();}
 
 	/** @return array(string => string) */
-	private function getProductDataNewOrUpdateAttributeValueIdsCustom() {
-		/** @var array(string => string) $result */
-		$result = array();
-		foreach ($this->getEntityProduct()->getAttributeValuesCustom() as $attributeValue) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom $attributeValue */
-			if ($attributeValue->getAttributeMagento()) {
-				$result[$attributeValue->getAttributeName()] = $attributeValue->getValueForObject();
-			}
-		}
-		return $result;
-	}
+	private function getProductDataNewOrUpdateAttributeValueIdsCustom() {return array_filter(df_map(
+		function(AttributeValueCustom $v) {return [
+			$v->getAttributeName(), !$v->getAttributeMagento() ? null : $v->getValueForObject()
+		];}, $this->getEntityProduct()->getAttributeValuesCustom(), [], [], 0, true
+	));}
 
 	/**
-	 *
-	 * @param \Df\C1\Cml2\Import\Processor\Product\Type\Configurable $masterProcessor
+	 * Мы тут можем вызывать @uses \Df\C1\Cml2\Import\Processor\Product::getEntityOffer(),
+	 * несмотря на то, что этот метод имеет область видимости «protected».
+	 * http://php.net/manual/language.oop5.visibility.php
+	 * «Visibility from other objects.
+	 * Objects of the same type will have access to each others private and protected members
+	 * even though they are not the same instances.»
+	 * @param Configurable $masterProcessor
 	 * @return void
 	 */
-	public static function p_update(
-		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable $masterProcessor
-	) {
-		/**
-		 * Обратите внимание, что мы тут можем вызывать
-		 * @uses \Df\C1\Cml2\Import\Processor\Product::getEntityOffer(),
-		 * несмотря на то, что этот метод имеет область видимости «protected».
-		 * http://php.net/manual/language.oop5.visibility.php
-		 * «Visibility from other objects.
-		 * Objects of the same type will have access to each others private and protected members
-		 * even though they are not the same instances.»
-		 */
-		self::ic(__CLASS__, $masterProcessor->getEntityOffer())->process();
-	}
+	public static function p_update(Configurable $masterProcessor) {
+		self::ic(__CLASS__, $masterProcessor->getEntityOffer())->process()
+	;}
 }

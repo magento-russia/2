@@ -1,7 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data;
-abstract class Collection
-	extends \Df\Xml\Parser\Collection {
+abstract class Collection extends \Df\Xml\Parser\Collection {
 	/**
 	 * @param string $externalId
 	 * @return \Df\C1\Cml2\Import\Data\Entity|null

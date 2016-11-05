@@ -1,15 +1,13 @@
 <?php
 namespace Df\C1\Cml2\Import\Data;
+use Df\C1\Cml2\Import\Data\Collection\RequisiteValues;
 abstract class Entity extends \Df\Xml\Parser\Entity {
 	/** @return string */
-	public function getExternalId() {
-		if (!isset($this->{__METHOD__})) {
-			// Идентификатор у передаваемого из 1С:Управление торговлей
-			// в интернет-магазин товара должен быть всегда
-			$this->{__METHOD__} = $this->leafSne('Ид');
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId() {return dfc($this, function() {return
+		// Идентификатор у передаваемого из 1С:Управление торговлей
+		// в интернет-магазин товара должен присутствовать всегда.
+		$this->leafSne('Ид')
+	;});}
 
 	/**
 	 * Обратите внимание, что именно @see getId() должен вызывать @uses getExternalId(),
@@ -64,12 +62,9 @@ abstract class Entity extends \Df\Xml\Parser\Entity {
 	 * @override
 	 * @return string|null
 	 */
-	public function getName() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set($this->leaf('Наименование'));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getName() {return dfc($this, function() {return
+		$this->leaf('Наименование')
+	;});}
 
 	/**
 	 * На данный момент реквизиты могут быть только у сущностей product и offer.
@@ -119,13 +114,10 @@ abstract class Entity extends \Df\Xml\Parser\Entity {
 		return $requisiteValue ? $requisiteValue->getValue() : '';
 	}
 
-	/** @return \Df\C1\Cml2\Import\Data\Collection\RequisiteValues */
-	protected function getRequisiteValues() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\RequisiteValues::i($this->e());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return RequisiteValues */
+	protected function getRequisiteValues() {return dfc($this, function() {return
+		RequisiteValues::i($this->e())
+	;});}
 
 	/**
 	 * Данный метод никак не связан данным с классом,

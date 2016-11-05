@@ -1,13 +1,15 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Order;
+use \Df\C1\Cml2\Import\Data\Entity\Order as EntityOrder;
+use Df\C1\Cml2\Import\Data\Entity\Order\Item as EntityOrderItem;
 abstract class Item extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @override
-	 * @return \Df\C1\Cml2\Import\Data\Entity\Order\Item
+	 * @return EntityOrderItem
 	 */
 	protected function getEntity() {return parent::getEntity();}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Order */
+	/** @return EntityOrder */
 	protected function getEntityOrder() {return $this->cfg(self::$P__ENTITY_ORDER);}
 
 	/**
@@ -17,8 +19,8 @@ abstract class Item extends \Df\C1\Cml2\Import\Processor {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Order\Item::class)
-			->_prop(self::$P__ENTITY_ORDER, \Df\C1\Cml2\Import\Data\Entity\Order::class)
+			->_prop(self::$P__ENTITY, EntityOrderItem::class)
+			->_prop(self::$P__ENTITY_ORDER, EntityOrder::class)
 		;
 	}
 	/** @var string */
@@ -27,17 +29,13 @@ abstract class Item extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Processor\Order::orderItemsProcess()
 	 * @param string $class
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Order\Item $orderItem
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Order $order
-	 * @return \Df\C1\Cml2\Import\Processor\Order\Item
+	 * @param EntityOrderItem $orderItem
+	 * @param EntityOrder $order
+	 * @return self
 	 */
-	public static function ic(
-		$class
-		, \Df\C1\Cml2\Import\Data\Entity\Order\Item $orderItem
-		, \Df\C1\Cml2\Import\Data\Entity\Order $order
-	) {
-		return df_ic($class, __CLASS__, array(
+	public static function ic($class, EntityOrderItem $orderItem, EntityOrder $order) {return
+		df_ic($class, __CLASS__, [
 			self::$P__ENTITY => $orderItem, self::$P__ENTITY_ORDER => $order
-		));
+		]);
 	}
 }

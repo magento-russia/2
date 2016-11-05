@@ -1,5 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Product\Type\Simple;
+use Mage_Catalog_Model_Product_Visibility as Visibility;
 abstract class AbstractT extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	/**
 	 * Обратите внимание, что 1С может вполне не передавать цену.
@@ -14,16 +15,11 @@ abstract class AbstractT extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	 * @override
 	 * @return float|null
 	 */
-	protected function getPrice() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				is_null($this->getEntityOffer()->getPrices()->getMain())
-				? null
-				: $this->getEntityOffer()->getPrices()->getMain()->getPriceBase()
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	protected function getPrice() {return dfc($this, function() {return
+		is_null($this->getEntityOffer()->getPrices()->getMain())
+		? null
+		: $this->getEntityOffer()->getPrices()->getMain()->getPriceBase()
+	;});}
 
 	/**
 	 * @override
@@ -35,5 +31,5 @@ abstract class AbstractT extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	 * @override
 	 * @return int
 	 */
-	protected function getVisibility() {return \Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH;}
+	protected function getVisibility() {return Visibility::VISIBILITY_BOTH;}
 }

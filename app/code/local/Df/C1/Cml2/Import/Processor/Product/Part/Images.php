@@ -1,5 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Product\Part;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
 class Images extends \Df\C1\Cml2\Import\Processor\Product {
 	/**
 	 * @override
@@ -37,11 +38,8 @@ class Images extends \Df\C1\Cml2\Import\Processor\Product {
 	/**
 	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsConfigurablePartImages()
 	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsSimplePartImages()
-	 * @static
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
-	 * @return \Df\C1\Cml2\Import\Processor\Product\Part\Images
+	 * @param Offer $offer
+	 * @return self
 	 */
-	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		return self::ic(__CLASS__, $offer);
-	}
+	public static function i(Offer $offer) {return self::ic(__CLASS__, $offer);}
 }

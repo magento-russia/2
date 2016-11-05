@@ -1,9 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data;
-/**
- * Данный класс соответствует документу в формате XML,
- * передаваемому 1С в интернет-магазин.
- */
+use Df\Xml\X;
+// Класс соответствует документу в формате XML, передаваемому 1С в интернет-магазин.
 abstract class Document extends \Df\Xml\Parser\Entity {
 	/**
 	 * 2015-08-04
@@ -31,20 +29,14 @@ abstract class Document extends \Df\Xml\Parser\Entity {
 	public function getSchemeVersion() {return $this->getAttribute('ВерсияСхемы');}
 
 	/** @return bool */
-	public function isCatalog() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = self::_isCatalog($this->e());
-		}
-		return $this->{__METHOD__};
-	}
+	public function isCatalog() {return dfc($this, function() {return
+		self::_isCatalog($this->e())
+	;});}
 
 	/** @return bool */
-	public function isOffers() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = self::_isOffers($this->e());
-		}
-		return $this->{__METHOD__};
-	}
+	public function isOffers() {return dfc($this, function() {return
+		self::_isOffers($this->e())
+	;});}
 
 	/** @return string */
 	protected function getPath() {return $this->cfg(self::$P__PATH);}
@@ -67,33 +59,30 @@ abstract class Document extends \Df\Xml\Parser\Entity {
 	 * @used-by \Df\C1\Cml2\Import\Data\Document::create()
 	 * @used-by \Df\C1\Cml2\File\CatalogComposite::getXmlDocument()
 	 * @static
-	 * @param \Df\Xml\X $e
+	 * @param X $e
 	 * @param string $relativePath
-	 * @return \Df\C1\Cml2\Import\Data\Document
+	 * @return self
 	 */
-	public static function create(\Df\Xml\X $e, $relativePath) {
+	public static function create(X $e, $relativePath) {
 		df_param_string_not_empty($relativePath, 1);
 		/** @var string $class */
 		$class =
-			self::_isCatalog($e)
-			? \Df\C1\Cml2\Import\Data\Document\Catalog::class
-			: (
-				self::_isOffers($e)
-				? \Df\C1\Cml2\Import\Data\Document\Offers::class
-				: df_error('Неизвестный тип документа.')
+			self::_isCatalog($e) ? Document\Catalog::class : (
+				self::_isOffers($e) ? Document\Offers::class :
+					df_error('Неизвестный тип документа.')
 			)
 		;
-		return df_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PATH => $relativePath));
+		return df_ic($class, __CLASS__, [self::$P__E => $e, self::$P__PATH => $relativePath]);
 	}
 
 	/**
-	 * @param \Df\Xml\X $e
+	 * @param X $e
 	 * @return bool
 	 */
-	private static function _isCatalog(\Df\Xml\X $e) {return !!$e->descend('Каталог');}
+	private static function _isCatalog(X $e) {return !!$e->descend('Каталог');}
 	/**
-	 * @param \Df\Xml\X $e
+	 * @param X $e
 	 * @return bool
 	 */
-	private static function _isOffers(\Df\Xml\X $e) {return !!$e->descend('ПакетПредложений');}
+	private static function _isOffers(X $e) {return !!$e->descend('ПакетПредложений');}
 }

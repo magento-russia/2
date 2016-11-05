@@ -957,7 +957,6 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	}
 
 	/**
-	 * @buyer {buyer}
 	 * @param string[] $propertyNames
 	 * @param string $cacheKey
 	 * @return void

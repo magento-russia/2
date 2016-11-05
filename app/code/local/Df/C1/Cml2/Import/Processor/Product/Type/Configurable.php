@@ -1,5 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Product\Type;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
 class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	/**
 	 * @override
@@ -15,12 +16,12 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	}
 
 	/**
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @param Offer $offer
 	 * @return array(array(string => string|int|float)))
 	 */
-	protected function getConfigurableProductData(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
+	protected function getConfigurableProductData(Offer $offer) {
 		/** @var array(mixed => mixed) $result */
-		$result = array();
+		$result = [];
 		foreach ($this->getTypeInstance()->getConfigurableAttributesAsArray() as $attribute) {
 			/** @var array(string => string|int) $attribute */
 			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue $optionValue */
@@ -28,30 +29,23 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 			/** @var int $valueId */
 			$valueId = $optionValue->getValueId();
 			df_nat($valueId);
-			$result[]= array(
+			$result[]= [
 				'attribute_id' => $attribute['attribute_id']
 				,'pricing_value' => $offer->getProduct()->getPrice()
 				,'is_percent' => false
 				,'value_index' => $valueId
 				,'use_default_value' => true
-			);
+			];
 		}
 		return $result;
 	}
 
 	/** @return array(int => array(array(string => string|int|float))) */
-	protected function getConfigurableProductsData() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var array(int => array(array(string => string|int|float))) $result */
-			$result = array();
-			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
-				$result[$offer->getProduct()->getId()] = $this->getConfigurableProductData($offer);
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getConfigurableProductsData() {return dfc($this, function() {return df_map(
+		function(Offer $o) {return [
+			$o->getProduct()->getId(), $this->getConfigurableProductData($o)
+		];}, $this->getEntityOffer()->getConfigurableChildren(), [], [], 0, true
+	);});}
 
 	/**
 	 * Обратите внимание, что 1С может вполне не передавать цену.
@@ -66,39 +60,36 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	 * @override
 	 * @return float|null
 	 */
-	protected function getPrice() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var float|null $result */
-			$result = null;
-			//Mage::log(__METHOD__);
-			//Mage::log('children count: ' . count($this->getEntityOffer()->getConfigurableChildren()));
-			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
-				/** @var float|null $currentPrice */
-				//Mage::log('product name: ' . $offer->getProduct()->getName());
-				//Mage::log('product price: ' . $offer->getProduct()->getPrice());
-				$currentPrice = $offer->getProduct()->getPrice();
-				/**
-				 * Раньше тут стояло: !is_null($currentPrice), что неверно.
-				 * Настраиваемые варианты с нулевой ценой надо игнорировать
-				 * при расчёте стоимости настраиваемого товара
-				 * (вариантов с нулевой ценой наверняка просто нет на складе),
-				 * потому что иначе цена настраиваемого товара получится равной нулю.
-				 * ведь по данному алгоритму ценой настраиваемого товара считается
-				 * цена самого дешёвого настраиваемого варианта.
-				 */
-				if (0 < $currentPrice) {
-					/** @var float $currentPriceAsFloat */
-					$currentPriceAsFloat = df_float($currentPrice);
-					if (is_null($result) || ($result > $currentPriceAsFloat)) {
-						$result = $currentPriceAsFloat;
-					}
+	protected function getPrice() {return dfc($this, function() {
+		/** @var float|null $result */
+		$result = null;
+		//Mage::log(__METHOD__);
+		//Mage::log('children count: ' . count($this->getEntityOffer()->getConfigurableChildren()));
+		foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
+			/** @var Offer $offer */
+			/** @var float|null $currentPrice */
+			//Mage::log('product name: ' . $offer->getProduct()->getName());
+			//Mage::log('product price: ' . $offer->getProduct()->getPrice());
+			$currentPrice = $offer->getProduct()->getPrice();
+			/**
+			 * Раньше тут стояло: !is_null($currentPrice), что неверно.
+			 * Настраиваемые варианты с нулевой ценой надо игнорировать
+			 * при расчёте стоимости настраиваемого товара
+			 * (вариантов с нулевой ценой наверняка просто нет на складе),
+			 * потому что иначе цена настраиваемого товара получится равной нулю.
+			 * ведь по данному алгоритму ценой настраиваемого товара считается
+			 * цена самого дешёвого настраиваемого варианта.
+			 */
+			if (0 < $currentPrice) {
+				/** @var float $currentPriceAsFloat */
+				$currentPriceAsFloat = df_float($currentPrice);
+				if (is_null($result) || ($result > $currentPriceAsFloat)) {
+					$result = $currentPriceAsFloat;
 				}
 			}
-			$this->{__METHOD__} = df_n_set($result);
 		}
-		return df_n_get($this->{__METHOD__});
-	}
+		return $result;
+	});}
 
 	/** @return \Df_Catalog_Model_Product */
 	protected function getProductMagento() {df_abstract($this); return null;}
@@ -107,47 +98,44 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	 * @override
 	 * @return string
 	 */
-	protected function getSku() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
- 			if ($this->getExistingMagentoProduct()) {
-				$result = $this->getExistingMagentoProduct()->getSku();
-			}
-			else {
-				$result = $this->getEntityProduct()->getSku();
-				if (!$result) {
-					df_c1_log(
-						'У товара «%s» в 1С отсутствует артикул.', $this->getEntityProduct()->getName()
-					);
-					$result = $this->getEntityOffer()->getExternalId();
-				}
-				$result = df_sku_adapt($result);
-				if (df_h()->catalog()->product()->isExist($result)) {
-					/** @var \Df_Catalog_Model_Product $existingProduct */
-					$existingProduct = df_product($result);
-					// Вдруг товар с данным артикулом уже присутствует в системе?
-					df_c1_log(
-						'В магазине уже присутствует товар с артикулом «{артикул}»:'
-						. ' он имеет номер {идентификатор уже имеющегося товара},'
-						. ' название «{название уже имеющегося товара}»'
-						. ' и внешний идентификатор {внешний идентификатор уже имеющегося товара}.'
-						, array(
-							'{артикул}' => $result
-							,'{идентификатор уже имеющегося товара}' => $existingProduct->getId()
-							,'{внешний идентификатор уже имеющегося товара}' =>
-									$existingProduct->getExternalId()
-							,'{название уже имеющегося товара}' => $existingProduct->getName()
-						)
-					);
-					df_assert_ne($result, $this->getEntityOffer()->getExternalId());
-					$result = df_sku_adapt($this->getEntityOffer()->getExternalId());
-				}
-			}
-			df_result_sku($result);
-			$this->{__METHOD__} = $result;
+	protected function getSku() {return dfc($this, function() {
+		/** @var string $result */
+		if ($this->getExistingMagentoProduct()) {
+			$result = $this->getExistingMagentoProduct()->getSku();
 		}
-		return $this->{__METHOD__};
-	}
+		else {
+			$result = $this->getEntityProduct()->getSku();
+			if (!$result) {
+				df_c1_log(
+					'У товара «%s» в 1С отсутствует артикул.', $this->getEntityProduct()->getName()
+				);
+				$result = $this->getEntityOffer()->getExternalId();
+			}
+			$result = df_sku_adapt($result);
+			if (df_h()->catalog()->product()->isExist($result)) {
+				/** @var \Df_Catalog_Model_Product $existingProduct */
+				$existingProduct = df_product($result);
+				// Вдруг товар с данным артикулом уже присутствует в системе?
+				df_c1_log(
+					'В магазине уже присутствует товар с артикулом «{артикул}»:'
+					. ' он имеет номер {идентификатор уже имеющегося товара},'
+					. ' название «{название уже имеющегося товара}»'
+					. ' и внешний идентификатор {внешний идентификатор уже имеющегося товара}.'
+					, array(
+						'{артикул}' => $result
+						,'{идентификатор уже имеющегося товара}' => $existingProduct->getId()
+						,'{внешний идентификатор уже имеющегося товара}' =>
+								$existingProduct->getExternalId()
+						,'{название уже имеющегося товара}' => $existingProduct->getName()
+					)
+				);
+				df_assert_ne($result, $this->getEntityOffer()->getExternalId());
+				$result = df_sku_adapt($this->getEntityOffer()->getExternalId());
+			}
+		}
+		df_result_sku($result);
+		return $result;
+	});}
 
 	/**
 	 * @override
@@ -156,13 +144,12 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 	protected function getType() {return \Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE;}
 
 	/** @return \Mage_Catalog_Model_Product_Type_Configurable */
-	protected function getTypeInstance() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getProductMagento()->getTypeInstance();
-			df_assert($this->{__METHOD__} instanceof \Mage_Catalog_Model_Product_Type_Configurable);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getTypeInstance() {return dfc($this, function() {
+		/** @var \Mage_Catalog_Model_Product_Type_Configurable $result */
+		$result = $this->getProductMagento()->getTypeInstance();
+		df_assert($result instanceof \Mage_Catalog_Model_Product_Type_Configurable);
+		return $result;
+	});}
 
 	/** @return void */
 	private function importChildren() {
@@ -175,8 +162,8 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 			df_c1_log('Найдено простых вариантов настраиваемых товаров: %d.', $count);
 			df_c1_log('Импорт простых вариантов настраиваемых товаров начат.');
 			foreach ($this->getEntityOffer()->getConfigurableChildren() as $offer) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
-				\Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Child::p($offer);
+				/** @var Offer $offer */
+				Configurable\Child::p($offer);
 			}
 			df_c1_log('Импорт простых вариантов настраиваемых товаров завершён.');
 		}
@@ -184,20 +171,14 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 
 	/** @return void */
 	private function importParent() {
-		$this->getExistingMagentoProduct()
-		? $this->importParentUpdate()
-		: $this->importParentNew();
-	}
+		$this->getExistingMagentoProduct() ? $this->importParentUpdate() : $this->importParentNew()
+	;}
 
 	/** @return void */
-	private function importParentNew() {
-		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable\NewT::p_new($this);
-	}
+	private function importParentNew() {Configurable\NewT::p_new($this);}
 
 	/** @return void */
-	private function importParentUpdate() {
-		\Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Update::p_update($this);
-	}
+	private function importParentUpdate() {Configurable\Update::p_update($this);}
 
 	/**
 	 * @override
@@ -207,10 +188,8 @@ class Configurable extends \Df\C1\Cml2\Import\Processor\Product\Type {
 
 	/**
 	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsConfigurable()
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @param Offer $offer
 	 * @return void
 	 */
-	public static function p(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		self::ic(__CLASS__, $offer)->process();
-	}
+	public static function p(Offer $offer) {self::ic(__CLASS__, $offer)->process();}
 }

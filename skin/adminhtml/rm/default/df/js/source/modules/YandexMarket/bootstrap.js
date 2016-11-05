@@ -1,6 +1,3 @@
-/**
- * @buyer {buyer}
- */
 ;(function($) { $(function() {
 	var $categoryField = $('#rm_yandex_market_category');
 	if (0 < $categoryField.length) {

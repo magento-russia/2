@@ -1,5 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Product\Type\Configurable;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Mage_Catalog_Model_Product_Visibility as Visibility;
 class Child extends \Df\C1\Cml2\Import\Processor\Product\Type\Simple\AbstractT {
 	/**
 	 * @override
@@ -30,16 +32,12 @@ class Child extends \Df\C1\Cml2\Import\Processor\Product\Type\Simple\AbstractT {
 	 * @override
 	 * @return int
 	 */
-	protected function getVisibility() {
-		return \Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE;
-	}
+	protected function getVisibility() {return Visibility::VISIBILITY_NOT_VISIBLE;}
 
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable::importChildren()
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @param Offer $offer
 	 * @return void
 	 */
-	public static function p(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		self::ic(__CLASS__, $offer)->process();
-	}
+	public static function p(Offer $offer) {self::ic(__CLASS__, $offer)->process();}
 }
