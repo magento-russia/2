@@ -2,7 +2,7 @@
 namespace Df\C1\Cml2\State;
 class Import extends \Df_Core_Model {
 	/** @return \Df\C1\Cml2\State\Import\Collections */
-	public function collections() {return \Df\C1\Cml2\State\Import\Collections::s();}
+	public function cl() {return \Df\C1\Cml2\State\Import\Collections::s();}
 
 	/** @return \Df\C1\Cml2\Import\Data\Document */
 	public function getDocumentCurrent() {return $this->getFileCurrent()->getXmlDocument();}

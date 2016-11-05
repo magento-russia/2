@@ -1,5 +1,8 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\OfferPart;
+use Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Df\C1\Cml2\State\Import\Collections as Cl;
 class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * Добавили к названию метода окончание «Magento»,
@@ -7,45 +10,37 @@ class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 	 * \Df\Xml\Parser\Entity::getAttribute()
 	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
-	public function getAttributeMagento() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $result */
-			if (
-					$this->getEntityAttribute()
-				&&
-					/**
-					 * Значение «[неизвестно]» в справочнике должно отсутствовать.
-					 * Добавляем его вручную.
-					 */
-					(self::$VALUE__UNKNOWN !== $this->getValue())
-			)  {
-				$result = df_attributes()->findByExternalId($this->getEntityAttribute()->getExternalId());
-				df_assert($result);
-			}
-			else {
-				$result = $this->setupAttribute();
-			}
-			if (!$this->getEntityAttribute()) {
-				$this->setupOption($result);
-				df_attributes()->addEntity($result);
-			}
-			$this->{__METHOD__} = $result;
+	public function getAttributeMagento() {return dfc($this, function() {
+		/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $result */
+		if (
+				$this->getEntityAttribute()
+			&&
+				/**
+				 * Значение «[неизвестно]» в справочнике должно отсутствовать.
+				 * Добавляем его вручную.
+				 */
+				(self::$VALUE__UNKNOWN !== $this->getValue())
+		)  {
+			$result = df_attributes()->findByExternalId($this->getEntityAttribute()->getExternalId());
+			df_assert($result);
 		}
-		return $this->{__METHOD__};
-	}
+		else {
+			$result = $this->setupAttribute();
+		}
+		if (!$this->getEntityAttribute()) {
+			$this->setupOption($result);
+			df_attributes()->addEntity($result);
+		}
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getExternalId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				mb_strtolower(implode(': ', array($this->getName(), $this->getValue())))
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId() {return dfc($this, function() {return
+		mb_strtolower(implode(': ', array($this->getName(), $this->getValue())))				
+	;});}
 
 	/**
 	 * В новой версии модуля 1С-Битрикс (ветка 4, CommerceML 2.0.8)
@@ -117,17 +112,13 @@ class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 	 * @override
 	 * @return string|null
 	 */
-	public function getName() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string|null $result */
-			$result = parent::getName();
-			if ($result && df_ends_with($result, '))')) {
-				$result = df_trim(df_first(explode('(', $result)));
-			}
-			$this->{__METHOD__} = df_n_set($result);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getName() {return dfc($this, function() {
+		/** @var string|null $result */
+		$result = parent::getName();
+		return !$result || !df_ends_with($result, '))') ? $result : 
+			df_trim(df_first(explode('(', $result)))
+		;
+	});}
 
 	/**
 	 * Опция имеет следующую структуру данных:
@@ -142,93 +133,84 @@ class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 			 )
 	 * @return \Df_Eav_Model_Entity_Attribute_Option
 	 */
-	public function getOption() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->getOptionByAttribute($this->getAttributeMagento());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getOption() {return dfc($this, function() {return
+		$this->getOptionByAttribute($this->getAttributeMagento())				
+	;});}
 
-	/** @return string */
-	public function getValue() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * Обратите внимание на важность значения «неизвестно».
-			 * Мы можем получить из 1С подобное товарное предложение:
-					<Предложение>
-						(...)
-						<ХарактеристикиТовара>
-							<ХарактеристикаТовара>
-								<Наименование>Размер</Наименование>
-								<Значение>36</Значение>
-							</ХарактеристикаТовара>
-							<ХарактеристикаТовара>
-								<Наименование>Тип кожи</Наименование>
-								<Значение/>
-							</ХарактеристикаТовара>
-							(...)
-						</ХарактеристикиТовара>
-						<ЗначенияСвойств>
-							<ЗначенияСвойства>
-								<Ид>14ed8b06-55bd-11d9-848a-00112f43529a</Ид>
-								<Значение>14ed8b08-55bd-11d9-848a-00112f43529a</Значение>
-							</ЗначенияСвойства>
-							(...)
-						</ЗначенияСвойств>
-					</Предложение>
-			 * В 1С для этого товара неизвестно значение опции «Тип кожи».
-			 * В Magento все опции внутри ветки ХарактеристикиТовара
-			 * становятся настраиваемыми опциями настраиваемого товара.
-			 * Если мы импортируем для данного товара
-			 * пустую строку в качестве значения опции «Тип кожи»,
-			 * то на витрине мы не сможем заказать данный товар,
-			 * ибо в выпадающем списке опций значение будет отсутствовать.
-			 * Да и даже если бы там пустое значение присутствовало,
-			 * оно бы в вводило в ступор поупателя
-			 * (аналогично, плохо обстояли бы дела с блоком пошаговой фильтрации,
-			 * ибо непонятно, как там показывать пустую строку).
-			 * Поэтому вместо пустой строки используем значение «неизвестно».
-			 *
-			 * Смотрите также комментарий к методу
-			 * @see \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::addAbsentItems()
-			 * Тот метод содержит решение этой же проблемы
-			 * для версий младше версии 4 модуля 1С-Битрикс.
-			 */
-			$this->{__METHOD__} = $this->leaf('Значение', self::$VALUE__UNKNOWN);
-		}
-		return $this->{__METHOD__};
-	}
+	/**      
+	 * Обратите внимание на важность значения «неизвестно».
+	 * Мы можем получить из 1С подобное товарное предложение:
+			<Предложение>
+				(...)
+				<ХарактеристикиТовара>
+					<ХарактеристикаТовара>
+						<Наименование>Размер</Наименование>
+						<Значение>36</Значение>
+					</ХарактеристикаТовара>
+					<ХарактеристикаТовара>
+						<Наименование>Тип кожи</Наименование>
+						<Значение/>
+					</ХарактеристикаТовара>
+					(...)
+				</ХарактеристикиТовара>
+				<ЗначенияСвойств>
+					<ЗначенияСвойства>
+						<Ид>14ed8b06-55bd-11d9-848a-00112f43529a</Ид>
+						<Значение>14ed8b08-55bd-11d9-848a-00112f43529a</Значение>
+					</ЗначенияСвойства>
+					(...)
+				</ЗначенияСвойств>
+			</Предложение>
+	 * В 1С для этого товара неизвестно значение опции «Тип кожи».
+	 * В Magento все опции внутри ветки ХарактеристикиТовара
+	 * становятся настраиваемыми опциями настраиваемого товара.
+	 * Если мы импортируем для данного товара
+	 * пустую строку в качестве значения опции «Тип кожи»,
+	 * то на витрине мы не сможем заказать данный товар,
+	 * ибо в выпадающем списке опций значение будет отсутствовать.
+	 * Да и даже если бы там пустое значение присутствовало,
+	 * оно бы в вводило в ступор поупателя
+	 * (аналогично, плохо обстояли бы дела с блоком пошаговой фильтрации,
+	 * ибо непонятно, как там показывать пустую строку).
+	 * Поэтому вместо пустой строки используем значение «неизвестно».
+	 *
+	 * Смотрите также комментарий к методу
+	 * @see \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::addAbsentItems()
+	 * Тот метод содержит решение этой же проблемы
+	 * для версий младше версии 4 модуля 1С-Битрикс.
+	 * @return string 
+	 */
+	public function getValue() {return dfc($this, function() {return
+		$this->leaf('Значение', self::$VALUE__UNKNOWN)				
+	;});}
 
 	/** @return int */
 	public function getValueId() {return $this->getOption()->getId();}
 
 	/** @return string */
-	protected function getAttributeCodeGenerated() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_c1()->generateAttributeCode(
-				$this->getName()
-				// Намеренно убрал второй параметр ($this->getEntityProduct()->getAppliedTypeName()),
-				// потому что счёл ненужным в данном случае
-				// использовать приставку для системных имён товарных свойств,
-				// потому что приставка (прикладной тип товара),
-				// как правило, получается слишком длинной,
-				// а название системного имени товарного свойства
-				// ограничено 32 символами
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getAttributeCodeGenerated() {return dfc($this, function() {return
+		df_c1()->generateAttributeCode(
+			$this->getName()
+			// Намеренно убрал второй параметр ($this->getEntityProduct()->getAppliedTypeName()),
+			// потому что счёл ненужным в данном случае
+			// использовать приставку для системных имён товарных свойств,
+			// потому что приставка (прикладной тип товара),
+			// как правило, получается слишком длинной,
+			// а название системного имени товарного свойства
+			// ограничено 32 символами
+		)				
+	;});}
 
 	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
 	protected function getEntityProduct() {return $this->getOffer()->getEntityProduct();}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
+	/** @return Offer */
 	protected function getOffer() {return $this->cfg(self::P__OFFER);}
 
 	/** @return \Df_Catalog_Model_Resource_Eav_Attribute */
-	protected function setupAttribute() {
-		return df_attributes()->createOrUpdate($this->getAttributeData());
-	}
+	protected function setupAttribute() {return
+		df_attributes()->createOrUpdate($this->getAttributeData())
+	;}
 
 	/**
 	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
@@ -243,86 +225,82 @@ class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 	}
 
 	/** @return array(string => mixed) */
-	private function getAttributeData() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $attribute */
-			$attribute =
-				df_attributes()->findByExternalId(
-					$this->getEntityAttribute()
-					? $this->getEntityAttribute()->getExternalId()
-					: $this->getAttributeExternalId()
+	private function getAttributeData() {return dfc($this, function() {
+		/** @var mixed $result */
+		/** @var \Df_Catalog_Model_Resource_Eav_Attribute|null $attribute */
+		$attribute =
+			df_attributes()->findByExternalId(
+				$this->getEntityAttribute()
+				? $this->getEntityAttribute()->getExternalId()
+				: $this->getAttributeExternalId()
+			)
+		;
+		return
+			$attribute
+			?	array_merge($attribute->getData(), [
+				/**
+				 * Вот здесь, похоже, удачное место,
+				 * чтобы добавить в уже присутствующий в Magento справочник
+				 * значение текущей опции, если его там нет
+				 */
+				'option' => \Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
+					$attribute
+					,['option_0' => [$this->getValue()]]
+					,$isModeInsert = true
+					,$caseInsensitive = true
 				)
-			;
-			$this->{__METHOD__} =
-				$attribute
-				?
-					array_merge($attribute->getData(), array(
-						/**
-						 * Вот здесь, похоже, удачное место,
-						 * чтобы добавить в уже присутствующий в Magento справочник
-						 * значение текущей опции, если его там нет
-						 */
-						'option' => \Df_Eav_Model_Entity_Attribute_Option_Calculator::calculateStatic(
-							$attribute
-							,array('option_0' => array($this->getValue()))
-							,$isModeInsert = true
-							,$caseInsensitive = true
-						)
-					))
-				:
-					array(
-						'entity_type_id' => df_eav_id_product()
-						,'attribute_code' => $this->getAttributeCodeGenerated()
-						/**
-						 * В Magento CE 1.4, если поле «attribute_model» присутствует,
-						 * то его значение не может быть пустым
-						 * @see Mage_Eav_Model_Config::_createAttribute()
-						 */
-						,'backend_model' => null
-						,'backend_type' => 'int'
-						,'backend_table' => null
-						,'frontend_model' => null
-						,'frontend_input' => 'select'
-						,'frontend_label' => $this->getName()
-						,'frontend_class' => null
-						,'source_model' => null
-						,'is_required' => 0
-						,'is_user_defined' => 1
-						,'default_value' => null
-						,'is_unique' => 0
-						// в Magento CE 1.4 значением поля «note» не может быть null
-						,'note' => ''
-						,'frontend_input_renderer' => null
-						,'is_global' => 1
-						,'is_visible' => 1
-						,'is_searchable' => 1
-						,'is_filterable' => 1
-						,'is_comparable' => 1
-						,'is_visible_on_front' => 1
-						,'is_html_allowed_on_front' => 0
-						,'is_used_for_price_rules' => 0
-						,'is_filterable_in_search' => 1
-						,'used_in_product_listing' => 0
-						,'used_for_sort_by' => 0
-						,'is_configurable' => 1
-						,'is_visible_in_advanced_search' => 1
-						,'position' => 0
-						,'is_wysiwyg_enabled' => 0
-						,'is_used_for_promo_rules' => 0
-						// Какое-то значение тут надо установить,
-						// потому что оно будет одним из ключей в реестре
-						// (второй ключ — название справочника).
-						,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getAttributeExternalId()
-						,'option' => array(
-							'value' => array('option_0' => array($this->getValue()))
-							,'order' => array('option_0' => 0)
-							,'delete' => array('option_0' => 0)
-						)
-					)
-			;
-		}
-		return $this->{__METHOD__};
-	}
+			])
+			: [
+				'entity_type_id' => df_eav_id_product()
+				,'attribute_code' => $this->getAttributeCodeGenerated()
+				/**
+				 * В Magento CE 1.4, если поле «attribute_model» присутствует,
+				 * то его значение не может быть пустым
+				 * @see Mage_Eav_Model_Config::_createAttribute()
+				 */
+				,'backend_model' => null
+				,'backend_type' => 'int'
+				,'backend_table' => null
+				,'frontend_model' => null
+				,'frontend_input' => 'select'
+				,'frontend_label' => $this->getName()
+				,'frontend_class' => null
+				,'source_model' => null
+				,'is_required' => 0
+				,'is_user_defined' => 1
+				,'default_value' => null
+				,'is_unique' => 0
+				// в Magento CE 1.4 значением поля «note» не может быть null
+				,'note' => ''
+				,'frontend_input_renderer' => null
+				,'is_global' => 1
+				,'is_visible' => 1
+				,'is_searchable' => 1
+				,'is_filterable' => 1
+				,'is_comparable' => 1
+				,'is_visible_on_front' => 1
+				,'is_html_allowed_on_front' => 0
+				,'is_used_for_price_rules' => 0
+				,'is_filterable_in_search' => 1
+				,'used_in_product_listing' => 0
+				,'used_for_sort_by' => 0
+				,'is_configurable' => 1
+				,'is_visible_in_advanced_search' => 1
+				,'position' => 0
+				,'is_wysiwyg_enabled' => 0
+				,'is_used_for_promo_rules' => 0
+				// Какое-то значение тут надо установить,
+				// потому что оно будет одним из ключей в реестре
+				// (второй ключ — название справочника).
+				,\Df\C1\C::ENTITY_EXTERNAL_ID => $this->getAttributeExternalId()
+				,'option' => [
+					'value' => ['option_0' => [$this->getValue()]]
+					,'order' => ['option_0' => 0]
+					,'delete' => ['option_0' => 0]
+				]
+			]
+		;
+	});}
 
 	/** @return string */
 	private function getAttributeExternalId() {return 'RM 1С - ' .  $this->getName();}
@@ -375,27 +353,13 @@ class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 				(...)
 			</ВариантыЗначений>
 		</Свойство>
-	 * @return \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList|null
+	 * @return ReferenceList|null
 	 */
-	private function getEntityAttribute() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList|null $result */
-			$result =
-				$this->getState()->import()->collections()->getAttributes()->findByName(
-					$this->getName()
-				)
-			;
-			/**
-			 * Возможно, что «свойство» и «характеристика» получили одинаковое имя по случайности?
-			 * Сопоставимое «свойство» обязательно должно быть типа «справочник».
-			 */
-			if (!$result instanceof \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList) {
-				$result = null;
-			}
-			$this->{__METHOD__} = df_n_set($result);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function getEntityAttribute() {return dfc($this, function() {return		
+		// Возможно, что «свойство» и «характеристика» получили одинаковое имя по случайности?
+		// Сопоставимое «свойство» обязательно должно быть типа «справочник».
+		Cl::s()->getAttributes()->findByName($this->getName()) instanceof ReferenceList ?: null	
+	;});}
 
 	/**
 	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
@@ -431,11 +395,8 @@ class OptionValue extends \Df\C1\Cml2\Import\Data\Entity {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::P__OFFER, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
+		$this->_prop(self::P__OFFER, Offer::class);
 	}
-
-	/** @used-by \Df\C1\Cml2\Import\Data\Collection\OfferPart\OptionValues::itemClass() */
-
 	/**
 	 * @used-by _construct()
 	 * @used-by getOffer()

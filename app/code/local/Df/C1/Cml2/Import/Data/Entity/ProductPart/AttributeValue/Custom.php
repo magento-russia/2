@@ -1,5 +1,9 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue;
+use Df_Catalog_Model_Resource_Eav_Attribute as CatalogAttribute;
+use Df\C1\Cml2\Import\Data\Entity\Product as EntityProduct;
+use Df\Xml\X;
+use Mage_Eav_Model_Entity_Attribute as EavAttribute;
 class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	/**
 	 * @override
@@ -14,9 +18,9 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	 * @override
 	 * @return string
 	 */
-	public function getExternalId() {
-		return implode('::', array($this->getAttributeExternalId(), $this->getValue()));
-	}
+	public function getExternalId() {return
+		implode('::', [$this->getAttributeExternalId(), $this->getValue()])
+	;}
 
 	/** @return string */
 	public function getValue() {return $this->leaf('Значение');}
@@ -47,9 +51,9 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	 * @override
 	 * @return string|int|float|bool|null
 	 */
-	public function getValueForDataflow() {
-		return $this->getAttributeEntity()->convertValueToMagentoFormat($this->getValue());
-	}
+	public function getValueForDataflow() {return
+		$this->getAttributeEntity()->convertValueToMagentoFormat($this->getValue())
+	;}
 
 	/**
 	 * 2015-02-06
@@ -70,61 +74,56 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Update::getProductDataNewOrUpdateAttributeValueIdsCustom()
 	 * @return string|int|float|bool|null
 	 */
-	public function getValueForObject() {
-		return $this->getAttributeEntity()->convertValueToMagentoFormat($this->getValue());
-	}
+	public function getValueForObject() {return
+		$this->getAttributeEntity()->convertValueToMagentoFormat($this->getValue())
+	;}
 
 	/**
 	 * @override
 	 * @return bool
 	 */
-	public function isValidForImport() {
-		return
-			// 1C для каждого товара
-			// указывает не только значения свойств, относящихся к товару,
-			// но и значения свойств, к товару никак не относящихся,
-			// при этом значения — пустые, например:
-			//
-			//	<ЗначенияСвойства>
-			//		<Ид>b79b0fe0-c8a5-11e1-a928-4061868fc6eb</Ид>
-			//		<Значение/>
-			//	</ЗначенияСвойства>
-			//
-			// Мы не обрабатываем эти свойства, потому что их обработка приведёт к добавлению
-			// к прикладному типу товара данного свойства, а нам это не нужно, потому что
-			// свойство не имеет отношения к прикладному типу товара.
-				$this->leaf('Значение')
-			||
-				$this->leaf('ИдЗначения')
-			// 11 февраля 2014 года заметил,
-			// что 1С:Управление торговлей 11.1 при использовании версии 2.05 протокола CommerceML
-			// и версии 8.3 платформы 1С:Предприятие
-			// при обмене данными с интернет-магазином передаёт информацию о производителе
-			// не в виде стандартного атрибута, а иначе:
-			//
-			//	<КоммерческаяИнформация ВерсияСхемы="2.05" ДатаФормирования="2014-02-11T15:32:13">
-			//		(...)
-			//		<Каталог СодержитТолькоИзменения="false">
-			//			(...)
-			//			<Товары>
-			//				<Товар>
-			//					(...)
-			//					<Изготовитель>
-			//						<Ид>9bf2b1bf-8e9a-11e3-bd2c-742f68ccd0fb</Ид>
-			//						<Наименование>Tecumseh</Наименование>
-			//						<ОфициальноеНаименование>Tecumseh</ОфициальноеНаименование>
-			//					</Изготовитель>
-			//					(...)
-			//				</Товар>
-			//			</Товары>
-			//		</Каталог>
-			//	</КоммерческаяИнформация>
-			||
-				$this->leaf('Наименование')
-			||
-				$this->isAttributeExistAndBelongToTheProductType()
-		;
-	}
+	public function isValidForImport() {return
+		// 1C для каждого товара
+		// указывает не только значения свойств, относящихся к товару,
+		// но и значения свойств, к товару никак не относящихся,
+		// при этом значения — пустые, например:
+		//
+		//	<ЗначенияСвойства>
+		//		<Ид>b79b0fe0-c8a5-11e1-a928-4061868fc6eb</Ид>
+		//		<Значение/>
+		//	</ЗначенияСвойства>
+		//
+		// Мы не обрабатываем эти свойства, потому что их обработка приведёт к добавлению
+		// к прикладному типу товара данного свойства, а нам это не нужно, потому что
+		// свойство не имеет отношения к прикладному типу товара.
+		$this->leaf('Значение')
+		|| $this->leaf('ИдЗначения')
+		// 11 февраля 2014 года заметил,
+		// что 1С:Управление торговлей 11.1 при использовании версии 2.05 протокола CommerceML
+		// и версии 8.3 платформы 1С:Предприятие
+		// при обмене данными с интернет-магазином передаёт информацию о производителе
+		// не в виде стандартного атрибута, а иначе:
+		//
+		//	<КоммерческаяИнформация ВерсияСхемы="2.05" ДатаФормирования="2014-02-11T15:32:13">
+		//		(...)
+		//		<Каталог СодержитТолькоИзменения="false">
+		//			(...)
+		//			<Товары>
+		//				<Товар>
+		//					(...)
+		//					<Изготовитель>
+		//						<Ид>9bf2b1bf-8e9a-11e3-bd2c-742f68ccd0fb</Ид>
+		//						<Наименование>Tecumseh</Наименование>
+		//						<ОфициальноеНаименование>Tecumseh</ОфициальноеНаименование>
+		//					</Изготовитель>
+		//					(...)
+		//				</Товар>
+		//			</Товары>
+		//		</Каталог>
+		//	</КоммерческаяИнформация>
+		|| $this->leaf('Наименование')
+		|| $this->isAttributeExistAndBelongToTheProductType()
+	;}
 
 	/**
 	 * @override
@@ -136,29 +135,26 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	 * @override
 	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
 	 */
-	protected function findMagentoAttributeInRegistry() {
-		return df_attributes()->findByExternalId($this->getAttributeExternalId());
-	}
+	protected function findMagentoAttributeInRegistry() {return
+		df_attributes()->findByExternalId($this->getAttributeExternalId())
+	;}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getAttributeCodeNew() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_c1()->generateAttributeCode(
-				$this->getAttributeEntity()->getName()
-				// Намеренно убрал второй параметр ($this->getProduct()->getAppliedTypeName()),
-				// потому что счёл ненужным в данном случае
-				// использовать приставку для системных имён товарных свойств,
-				// потому что приставка (прикладной тип товара),
-				// как правило, получается слишком длинной,
-				// а название системного имени товарного свойства
-				// ограничено 32 символами
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getAttributeCodeNew() {return dfc($this, function() {return
+		df_c1()->generateAttributeCode(
+			$this->getAttributeEntity()->getName()
+			// Намеренно убрал второй параметр ($this->getProduct()->getAppliedTypeName()),
+			// потому что счёл ненужным в данном случае
+			// использовать приставку для системных имён товарных свойств,
+			// потому что приставка (прикладной тип товара),
+			// как правило, получается слишком длинной,
+			// а название системного имени товарного свойства
+			// ограничено 32 символами
+		)
+	;});}
 
 	/** @return string */
 	protected function getAttributeFrontendLabel() {return $this->getAttributeEntity()->getName();}
@@ -170,16 +166,16 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	protected function getAttributeTemplate() {return $this->getAttributeEntity();}
 
 	/**
-	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param CatalogAttribute $attribute
 	 * @return string
 	 */
-	protected function getGroupForAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
-		return \Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME;
-	}
+	protected function getGroupForAttribute(CatalogAttribute $attribute) {return
+		\Df\C1\C::PRODUCT_ATTRIBUTE_GROUP_NAME
+	;}
 
 	/**
 	 * @override
-	 * @return \Df\C1\Cml2\Import\Data\Entity\Product
+	 * @return EntityProduct
 	 */
 	protected function getProduct() {return $this->cfg(self::$P__PRODUCT);}
 
@@ -187,7 +183,7 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	private function getAttributeEntity() {
 		/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute $result */
 		$result =
-			$this->getState()->import()->collections()->getAttributes()->findByExternalId(
+			$this->getState()->import()->cl()->getAttributes()->findByExternalId(
 				$this->getAttributeExternalId()
 			)
 		;
@@ -201,37 +197,34 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	}
 
 	/** @return bool */
-	private function isAttributeExistAndBelongToTheProductType() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var bool $result */
-			$result = false;
-			/** @var \Mage_Eav_Model_Entity_Attribute|null $attribute */
-			$attribute = df_attributes()->findByExternalId($this->getAttributeExternalId());
-			if ($attribute) {
-				df_assert($attribute instanceof \Mage_Eav_Model_Entity_Attribute);
-				// Смотрим, принадлежит ли свойство типу товара
-				/** @var \Mage_Eav_Model_Resource_Entity_Attribute_Collection $attributes */
-				$attributes = \Mage::getResourceModel('eav/entity_attribute_collection');
-				$attributes->setEntityTypeFilter(df_eav_id_product());
-				$attributes->addSetInfo();
-				$attributes->addFieldToFilter('attribute_code', $attribute->getAttributeCode());
-				$attributes->load();
-				/** @var \Mage_Eav_Model_Entity_Attribute $attributeInfo */
-				$attributeInfo = null;
-				foreach ($attributes as $attributeInfoCurrent) {
-					$attributeInfo = $attributeInfoCurrent;
-					break;
-				}
-				df_assert($attributeInfo instanceof \Mage_Eav_Model_Entity_Attribute);
-				/** @var mixed[] $setsInfo */
-				$setsInfo = $attributeInfo->getData('attribute_set_info');
-				df_assert_array($setsInfo);
-				$result = in_array($this->getProduct()->getAttributeSet()->getId(), array_keys($setsInfo));
+	private function isAttributeExistAndBelongToTheProductType() {return dfc($this, function() {
+		/** @var bool $result */
+		$result = false;
+		/** @var EavAttribute|null $attribute */
+		$attribute = df_attributes()->findByExternalId($this->getAttributeExternalId());
+		if ($attribute) {
+			df_assert($attribute instanceof EavAttribute);
+			// Смотрим, принадлежит ли свойство типу товара
+			/** @var \Mage_Eav_Model_Resource_Entity_Attribute_Collection $attributes */
+			$attributes = \Mage::getResourceModel('eav/entity_attribute_collection');
+			$attributes->setEntityTypeFilter(df_eav_id_product());
+			$attributes->addSetInfo();
+			$attributes->addFieldToFilter('attribute_code', $attribute->getAttributeCode());
+			$attributes->load();
+			/** @var EavAttribute $attributeInfo */
+			$attributeInfo = null;
+			foreach ($attributes as $attributeInfoCurrent) {
+				$attributeInfo = $attributeInfoCurrent;
+				break;
 			}
-			$this->{__METHOD__} = $result;
+			df_assert($attributeInfo instanceof EavAttribute);
+			/** @var mixed[] $setsInfo */
+			$setsInfo = $attributeInfo->getData('attribute_set_info');
+			df_assert_array($setsInfo);
+			$result = in_array($this->getProduct()->getAttributeSet()->getId(), array_keys($setsInfo));
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * @override
@@ -239,12 +232,8 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PRODUCT, \Df\C1\Cml2\Import\Data\Entity\Product::class);
+		$this->_prop(self::$P__PRODUCT, EntityProduct::class);
 	}
-	/**
-	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::itemClass()
-	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::createItem()
-	 */
 
 	/** @var string  */
 	private static $P__PRODUCT = 'product';
@@ -253,11 +242,11 @@ class Custom extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue {
 	 * @used-by \Df\C1\Cml2\Import\Data\Collection\ProductPart\AttributeValues\Custom::createItem()
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer::i()
 	 * @param string $class
-	 * @param \Df\Xml\X $e
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Product $product
-	 * @return \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom
+	 * @param X $e
+	 * @param EntityProduct $product
+	 * @return self
 	 */
-	public static function ic($class, \Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Product $product) {
-		return df_ic($class, __CLASS__, array(self::$P__E => $e, self::$P__PRODUCT => $product));
-	}
+	public static function ic($class, X $e, EntityProduct $product) {return
+		df_ic($class, __CLASS__, [self::$P__E => $e, self::$P__PRODUCT => $product])
+	;}
 }

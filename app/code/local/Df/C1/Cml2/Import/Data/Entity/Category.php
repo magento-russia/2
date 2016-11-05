@@ -1,11 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
+use Df\C1\Cml2\Import\Data\Collection\Categories as C;
 class Category extends \Df\C1\Cml2\Import\Data\Entity {
-	/** @return \Df\C1\Cml2\Import\Data\Collection\Categories */
-	public function getChildren() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Categories::i($this->e());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return C */
+	public function getChildren() {return dfc($this, function() {return C::i($this->e());});}
 }

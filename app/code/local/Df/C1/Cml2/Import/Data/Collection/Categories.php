@@ -1,13 +1,13 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
+use Df\C1\Cml2\Import\Data\Entity\Category;
 class Categories extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Category::class;}
-
+	protected function itemClass() {return Category::class;}
 
 	/**
 	 * @override
@@ -32,9 +32,9 @@ class Categories extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @static
 	 * @param \Df\Xml\X $xml
 	 * @param array|null $pathAsArray [optional]
-	 * @return \Df\C1\Cml2\Import\Data\Collection\Categories
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $xml, $pathAsArray = null) {
-		return new self(array(self::$P__E => $xml, self::$P__XML_PATH_AS_ARRAY => $pathAsArray));
-	}
+	public static function i(\Df\Xml\X $xml, $pathAsArray = null) {return new self([
+		self::$P__E => $xml, self::$P__XML_PATH_AS_ARRAY => $pathAsArray
+	]);}
 }

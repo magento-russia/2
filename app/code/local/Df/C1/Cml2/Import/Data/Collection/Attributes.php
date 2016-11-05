@@ -1,34 +1,31 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
+use Df\Xml\X;
+use Df\C1\Cml2\Import\Data\Entity\Attribute;
 class Attributes extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
-	 * @return \Df\Xml\X[]
+	 * @return X[]
 	 */
-	protected function getImportEntitiesAsSimpleXMLElementArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\Xml\X[] $result */
-			$result = parent::getImportEntitiesAsSimpleXMLElementArray();
-			/** @var \Df\Xml\X[] $entitiesFromAdditionalPath */
-			$entitiesFromAdditionalPath = $this->e()->xpath($this->itemPath2());
-			if (is_array($entitiesFromAdditionalPath)) {
-				$result = array_merge($result, $entitiesFromAdditionalPath);
-			}
-			$this->{__METHOD__} = $result;
+	protected function getImportEntitiesAsSimpleXMLElementArray() {return dfc($this, function() {
+		/** @var X[] $result */
+		$result = parent::getImportEntitiesAsSimpleXMLElementArray();
+		/** @var X[] $entitiesFromAdditionalPath */
+		$entitiesFromAdditionalPath = $this->e()->xpath($this->itemPath2());
+		if (is_array($entitiesFromAdditionalPath)) {
+			$result = array_merge($result, $entitiesFromAdditionalPath);
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * 2015-08-15
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClassAdvanced()
-	 * @param \Df\Xml\X $e
+	 * @param X $e
 	 * @return string
 	 */
-	protected function itemClassAdvanced(\Df\Xml\X $e) {
-		return \Df\C1\Cml2\Import\Data\Entity\Attribute::getClass($e);
-	}
+	protected function itemClassAdvanced(X $e) {return Attribute::getClass($e);}
 
 	/**
 	 * @override
@@ -60,15 +57,15 @@ class Attributes extends \Df\C1\Cml2\Import\Data\Collection {
 	 * (смотрел программный код той же конфигурации другого магазина).
 	 * @return string[]
 	 */
-	private function itemPath2() {
-		return '/КоммерческаяИнформация/Классификатор/Свойства/СвойствоНоменклатуры';
-	}
+	private function itemPath2() {return
+		'/КоммерческаяИнформация/Классификатор/Свойства/СвойствоНоменклатуры'
+	;}
 
 	/**
 	 * @used-by \Df\C1\Cml2\State\Import\Collections::getAttributes()
 	 * @static
-	 * @param \Df\Xml\X $xml
-	 * @return \Df\C1\Cml2\Import\Data\Collection\Attributes
+	 * @param X $xml
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $xml) {return new self(array(self::$P__E => $xml));}
+	public static function i(X $xml) {return new self([self::$P__E => $xml]);}
 }

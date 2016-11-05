@@ -2,13 +2,12 @@
 namespace Df\C1\Cml2\Import\Data\Document;
 class Offers extends \Df\C1\Cml2\Import\Data\Document {
 	/** @return string */
-	public function getExternalId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->descendS('ПакетПредложений/Ид');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->descendS('ПакетПредложений/Ид');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * 2015-08-04
@@ -16,75 +15,57 @@ class Offers extends \Df\C1\Cml2\Import\Data\Document {
 	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogAttributes()
 	 * @return string
 	 */
-	public function getExternalId_CatalogAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->descendS('ПакетПредложений/ИдКлассификатора');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId_CatalogAttributes() {return dfc($this, function() {
+		/** @var string $result */
+		$result = $this->descendS('ПакетПредложений/ИдКлассификатора');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogProducts()
 	 * @return string
 	 */
-	public function getExternalId_CatalogProducts() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->isOffers());
-			$this->{__METHOD__} = $this->descendS('ПакетПредложений/ИдКаталога');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId_CatalogProducts() {return dfc($this, function() {
+		df_assert($this->isOffers());
+		/** @var string $result */
+		$result = $this->descendS('ПакетПредложений/ИдКаталога');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogStructure()
 	 * @return string
 	 */
-	public function getExternalId_CatalogStructure() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->isOffers());
-			$this->{__METHOD__} = $this->descendS('ПакетПредложений/ИдКлассификатора');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId_CatalogStructure() {return dfc($this, function() {
+		df_assert($this->isOffers());
+		/** @var string $result */
+		$result = $this->descendS('ПакетПредложений/ИдКлассификатора');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/** @return bool */
-	public function hasPrices() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!!$this->e()->descend('ПакетПредложений/Предложения/Предложение/Цены/Цена')
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function hasPrices() {return dfc($this, function() {return
+		!!$this->e()->descend('ПакетПредложений/Предложения/Предложение/Цены/Цена')
+	;});}
 
 	/** @return bool */
-	public function hasStock() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!!$this->e()->descend('ПакетПредложений/Предложения/Предложение/Остатки/Остаток')
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function hasStock() {return dfc($this, function() {return
+		!!$this->e()->descend('ПакетПредложений/Предложения/Предложение/Остатки/Остаток')
+	;});}
 
 	/**
 	 * Базовый файл offers_*.xml содержит основные характеристики товара (например, имя),
 	 * а также настраиваемые опции товара.
 	 * @return bool
 	 */
-	public function isBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!!$this->e()->descend('ПакетПредложений/Предложения/Предложение/Наименование')
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function isBase() {return dfc($this, function() {return
+		!!$this->e()->descend('ПакетПредложений/Предложения/Предложение/Наименование')
+	;});}
 
 	/**
 	 * @override
@@ -117,8 +98,6 @@ class Offers extends \Df\C1\Cml2\Import\Data\Document {
 		}
 		$this->session()->end();
 	}
-
-	/** @used-by \Df\C1\Cml2\Import\Data\Document::create() */
 
 	/**
 	 * @used-by storeInSession()

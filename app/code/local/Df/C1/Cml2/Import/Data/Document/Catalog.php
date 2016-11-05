@@ -7,41 +7,38 @@ class Catalog extends \Df\C1\Cml2\Import\Data\Document {
 	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogAttributes()
 	 * @return string
 	 */
-	public function getExternalId_CatalogAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->descendS('Каталог/ИдКлассификатора');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId_CatalogAttributes() {return dfc($this, function() {
+		/** @var mixed $result */
+		$result = $this->descendS('Каталог/ИдКлассификатора');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogProducts()
 	 * @return string
 	 */
-	public function getExternalId_CatalogProducts() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->isOffers());
-			$this->{__METHOD__} = $this->descendS('Каталог/Ид');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId_CatalogProducts() {return dfc($this, function() {
+		df_assert($this->isOffers());
+		/** @var string $result */
+		$result = $this->descendS('Каталог/Ид');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @see \Df\C1\Cml2\Import\Data\Document::getExternalId_CatalogStructure()
 	 * @return string
 	 */
-	public function getExternalId_CatalogStructure() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->isOffers());
-			$this->{__METHOD__} = $this->descendS('Каталог/ИдКлассификатора');
-			df_result_string_not_empty($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalId_CatalogStructure() {return dfc($this, function() {
+		df_assert($this->isOffers());
+		/** @var string $result */
+		$result = $this->descendS('Каталог/ИдКлассификатора');
+		df_result_string_not_empty($result);
+		return $result;
+	});}
 
 	/**
 	 * 2015-08-04
@@ -54,12 +51,9 @@ class Catalog extends \Df\C1\Cml2\Import\Data\Document {
 	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::_process()
 	 * @return bool
 	 */
-	public function hasAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->e()->descend('Классификатор/Свойства');
-		}
-		return $this->{__METHOD__};
-	}
+	public function hasAttributes() {return dfc($this, function() {return
+		$this->e()->descend('Классификатор/Свойства')
+	;});}
 
 	/**
 	 * Начиная с ветки 4 модуля 1С-Битрикс
@@ -72,12 +66,9 @@ class Catalog extends \Df\C1\Cml2\Import\Data\Document {
 	 * а все последующие — уже сами товары, разбитые на пакеты.
 	 * @return bool
 	 */
-	public function hasProducts() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !!$this->e()->descend('Каталог/Товары');
-		}
-		return $this->{__METHOD__};
-	}
+	public function hasProducts() {return dfc($this, function() {return
+		!!$this->e()->descend('Каталог/Товары')
+	;});}
 
 	/**
 	 * Начиная с ветки 4 модуля 1С-Битрикс
@@ -90,18 +81,11 @@ class Catalog extends \Df\C1\Cml2\Import\Data\Document {
 	 * а все последующие — уже сами товары, разбитые на пакеты.
 	 * @return bool
 	 */
-	public function hasStructure() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-					$this->e()->descend('Классификатор/Группы')
-				||
-					$this->e()->descend('Классификатор/ТипыЦен')
-				||
-					$this->e()->descend('Классификатор/ЕдиницыИзмерения')
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function hasStructure() {return dfc($this, function() {return
+		$this->e()->descend('Классификатор/Группы')
+		|| $this->e()->descend('Классификатор/ТипыЦен')
+		|| $this->e()->descend('Классификатор/ЕдиницыИзмерения')
+	;});}
 
 	/**
 	 * @override
@@ -148,30 +132,19 @@ class Catalog extends \Df\C1\Cml2\Import\Data\Document {
 	}
 
 	/** @return string|null */
-	private function getIdAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set($this->descendS('Классификатор/Ид'));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function getIdAttributes() {return dfc($this, function() {return
+		$this->descendS('Классификатор/Ид')
+	;});}
 
 	/** @return string|null */
-	private function getIdProducts() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set($this->descendS('Каталог/Ид'));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function getIdProducts() {return dfc($this, function() {return
+		$this->descendS('Каталог/Ид')
+	;});}
 
 	/** @return string|null */
-	private function getIdStructure() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set($this->descendS('Классификатор/Ид'));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
-
-	/** @used-by \Df\C1\Cml2\Import\Data\Document::create() */
+	private function getIdStructure() {return dfc($this, function() {return
+		$this->descendS('Классификатор/Ид')
+	;});}
 
 	/**
 	 * 2015-08-04

@@ -1,17 +1,17 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Df_Catalog_Model_Resource_Eav_Attribute as Attribute;
 class EmptyT extends \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue {
 	/**
 	 * @override
-	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return Attribute
 	 */
 	public function getAttributeMagento() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->_getAttributeMagento();
-			/**
-			 * Нельзя объединять это выражение с предыдущим,
-			 * чтобы не попасть в рекурсию.
-			 */
+			// Нельзя объединять это выражение с предыдущим,
+			// чтобы не попасть в рекурсию.
 			$this->setupAttribute($this->{__METHOD__});
 			$this->setupOption($this->{__METHOD__});
 		}
@@ -32,7 +32,7 @@ class EmptyT extends \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue {
 
 	/**
 	 * Этот метод необходим, иначе @used-by getName() приведёт к сбою.
-	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return Attribute
 	 */
 	private function _getAttributeMagento() {return $this->cfg(self::$P__ATTRIBUTE);}
 
@@ -42,20 +42,16 @@ class EmptyT extends \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ATTRIBUTE, \Df_Catalog_Model_Resource_Eav_Attribute::class);
+		$this->_prop(self::$P__ATTRIBUTE, Attribute::class);
 	}
 	/** @var string */
 	private static $P__ATTRIBUTE = 'attribute';
 	/**
-	 * @static
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
-	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	 * @return \Df\C1\Cml2\Import\Data\Entity\OfferPart\OptionValue\EmptyT
+	 * @param Offer $offer
+	 * @param Attribute $attribute
+	 * @return self
 	 */
-	public static function i2(
-		\Df\C1\Cml2\Import\Data\Entity\Offer $offer
-		,\Df_Catalog_Model_Resource_Eav_Attribute $attribute
-	) {
-		return new self(array(self::P__OFFER => $offer, self::$P__ATTRIBUTE => $attribute));
-	}
+	public static function i2(Offer $offer, Attribute $attribute) {return new self([
+		self::P__OFFER => $offer, self::$P__ATTRIBUTE => $attribute
+	]);}
 }

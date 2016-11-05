@@ -1,10 +1,11 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\OfferPart;
+use Df\C1\Cml2\Import\Data\Entity\PriceType;
 class Price extends \Df\C1\Cml2\Import\Data\Entity {
 	/** @return string */
-	public function getCurrencyCode() {
-		return df_c1_currency_code_to_magento_format($this->leafSne('Валюта'));
-	}
+	public function getCurrencyCode() {return
+		df_c1_currency_code_to_magento_format($this->leafSne('Валюта'))
+	;}
 
 	/**
 	 * @override
@@ -24,14 +25,11 @@ class Price extends \Df\C1\Cml2\Import\Data\Entity {
 	 * в то время как файл offers_*.xml цен не содержит.
 	 * @return float|null
 	 */
-	public function getPrice() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string|null $result */
-			$resultS = $this->leaf('ЦенаЗаЕдиницу');
-			$this->{__METHOD__} = df_n_set(!$resultS ? null : df_float($resultS));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getPrice() {return dfc($this, function() {
+		/** @var string|null $result */
+		$resultS = $this->leaf('ЦенаЗаЕдиницу');
+		return !$resultS ? null : df_float($resultS);
+	});}
 
 	/**
 	 * Обратите внимание, что 1С может вполне не передавать цену.
@@ -45,19 +43,13 @@ class Price extends \Df\C1\Cml2\Import\Data\Entity {
 	 * в то время как файл offers_*.xml цен не содержит.
 	 * @return float|null
 	 */
-	public function getPriceBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				is_null($this->getPrice())
-				? null
-				: df_currency_h()->convertToBase($this->getPrice(), $this->getCurrencyCode())
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getPriceBase() {return dfc($this, function() {return
+		is_null($this->getPrice()) ?: 
+			df_currency_h()->convertToBase($this->getPrice(), $this->getCurrencyCode())				
+	;});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\PriceType */
-	public function getPriceType() {
-		return $this->getState()->getPriceTypes()->findByExternalId($this->getId());
-	}
+	/** @return PriceType */
+	public function getPriceType() {return
+		$this->getState()->getPriceTypes()->findByExternalId($this->getId())
+	;}
 }

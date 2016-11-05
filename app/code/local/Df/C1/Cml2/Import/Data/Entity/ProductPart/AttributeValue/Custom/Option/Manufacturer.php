@@ -1,13 +1,16 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option;
+use Df_Catalog_Model_Resource_Eav_Attribute as Attribute;
+use Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList;
+use Df\C1\Cml2\Import\Data\Entity\Product as EntityProduct;
 class Manufacturer extends \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option {
 	/**
 	 * @override
-	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return Attribute
 	 */
 	public function getAttributeMagento() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $result */
+			/** @var Attribute $result */
 			$result = parent::getAttributeMagento();
 			// Все обычные справочники мы импортируем перед товарами.
 			// Однако справочник «Изготовители» («Производители») в УТ 11 — необычный.
@@ -142,13 +145,13 @@ class Manufacturer extends \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeV
 
 	/**
 	 * @override
-	 * @return \Df_Catalog_Model_Resource_Eav_Attribute
+	 * @return Attribute
 	 */
 	protected function createMagentoAttribute() {
-		/** @var \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList $referenceList */
-		$referenceList = new \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList();
-		/** @var mixed[] $attributeData */
-		$attributeData = array(
+		/** @var ReferenceList $referenceList */
+		$referenceList = new ReferenceList;
+		/** @var Attribute $result */
+		$result = df_attributes()->createOrUpdate([
 			'entity_type_id' => df_eav_id_product()
 			,'attribute_code' => $this->getAttributeCode()
 			/**
@@ -188,9 +191,7 @@ class Manufacturer extends \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeV
 			,'is_wysiwyg_enabled' => 0
 			,'is_used_for_promo_rules' => 0
 			,\Df\C1\C::ENTITY_EXTERNAL_ID => 'Изготовитель'
-		);
-		/** @var \Df_Catalog_Model_Resource_Eav_Attribute $result */
-		$result = df_attributes()->createOrUpdate($attributeData);
+		]);
 		df_assert($result->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID));
 		df_c1_log('Добавлено свойство «%s».', 'Изготовитель');
 		return $result;
@@ -198,18 +199,18 @@ class Manufacturer extends \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeV
 
 	/**
 	 * @override
-	 * @return \Df_Catalog_Model_Resource_Eav_Attribute|null
+	 * @return Attribute|null
 	 */
 	protected function findMagentoAttributeInRegistry() {
 		//rm_1c__manufacturer
-		/** @var \Df_Catalog_Model_Resource_Eav_Attribute $result */
+		/** @var Attribute $result */
 		$result = df_attributes()->findByCode($this->getAttributeCode());
 		/** @var bool $oldAttributeProcessed */
 		static $oldAttributeProcessed = false;
 		if (!$oldAttributeProcessed) {
 			/** @var string $oldCode */
 			$oldCode = 'rm_1c__manufacturer';
-			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $oldAttribute */
+			/** @var Attribute $oldAttribute */
 			$oldAttribute = df_attributes()->findByCode($oldCode);
 			if ($oldAttribute) {
 				df_remove_product_attribute($oldCode);
@@ -227,36 +228,31 @@ class Manufacturer extends \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeV
 	}
 
 	/**
+	 * Если свойство «manufacturer» («Изготовитель», «Производитель»)
+	 * было создано вручную, то размещаем его на вкладке 1C. 
+	 * Если же это свойство уже присуствовало в системе   
+	 * (а оно присутствует в стандартной комплектации Magento  
+	 * и может отсутствовать в системе только в случае ручного удаления),  
+	 * то мы оставляем это свойство на главной вкладке товара.     
 	 * @override
-	 * @param \Df_Catalog_Model_Resource_Eav_Attribute $attribute
+	 * @param Attribute $attribute
 	 * @return string
 	 */
-	protected function getGroupForAttribute(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
-		// Если свойство «manufacturer» («Изготовитель», «Производитель»)
-		// было создано вручную, то размещаем его на вкладке 1C.
-		// Если же это свойство уже присуствовало в системе
-		// (а оно присутствует в стандартной комплектации Magento
-		// и может отсутствовать в системе только в случае ручного удаления),
-		// то мы оставляем это свойство на главной вкладке товара.
-		return
-			('Изготовитель' === $attribute->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID))
-			? parent::getGroupForAttribute($attribute)
-			: null
-		;
-	}
+	protected function getGroupForAttribute(Attribute $attribute) {return
+		('Изготовитель' === $attribute->_getData(\Df\C1\C::ENTITY_EXTERNAL_ID))
+		? parent::getGroupForAttribute($attribute)
+		: null
+	;}
 
 	/** @return string */
 	private function getAttributeCode() {return 'manufacturer';}
 
 	/**
 	 * @param \Df\Xml\X $e
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Product $entityProduct
-	 * @return \Df\C1\Cml2\Import\Data\Entity\ProductPart\AttributeValue\Custom\Option\Manufacturer
+	 * @param EntityProduct $entityProduct
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $e, \Df\C1\Cml2\Import\Data\Entity\Product $entityProduct) {
-		return self::ic(__CLASS__, $e, $entityProduct);
-	}
+	public static function i(\Df\Xml\X $e, EntityProduct $entityProduct) {return
+		self::ic(__CLASS__, $e, $entityProduct)
+	;}
 }
-
-
- 

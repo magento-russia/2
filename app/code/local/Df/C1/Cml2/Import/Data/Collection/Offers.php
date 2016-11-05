@@ -1,5 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Df\Xml\X;
 class Offers extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * Заметил в магазине термобелье.su,
@@ -64,14 +66,14 @@ class Offers extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::postInitItems()
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer[] $items
+	 * @param Offer[] $items
 	 * @return void
 	 */
 	protected function postInitItems(array $items) {
 		foreach ($items as $offer) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
+			/** @var Offer $offer */
 			if ($offer->isTypeConfigurableChild() && is_null($offer->getConfigurableParent())) {
-				$this->addItem(\Df\C1\Cml2\Import\Data\Entity\Offer\ParentStub::i($offer));
+				$this->addItem(Offer\ParentStub::i($offer));
 			}
 		}
 	}
@@ -81,23 +83,23 @@ class Offers extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\Offer::class;}
+	protected function itemClass() {return Offer::class;}
 
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemPath()
 	 * @return string|string[]
 	 */
-	protected function itemPath() {
-		return '/КоммерческаяИнформация/ПакетПредложений/Предложения/Предложение';
-	}
+	protected function itemPath() {return
+		'/КоммерческаяИнформация/ПакетПредложений/Предложения/Предложение'
+	;}
 
 	/**
 	 * @used-by \Df\C1\Cml2\State\Import\Collections::getOffers()
 	 * @used-by \Df\C1\Cml2\State\Import\Collections::getOffersBase()
 	 * @static
-	 * @param \Df\Xml\X $xml
-	 * @return \Df\C1\Cml2\Import\Data\Collection\Offers
+	 * @param X $xml
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $xml) {return new self(array(self::$P__E => $xml));}
+	public static function i(X $xml) {return new self(array(self::$P__E => $xml));}
 }

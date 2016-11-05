@@ -1,25 +1,21 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ReferenceListPart;
+use Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item;
 class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @return \Df\Xml\X[]
 	 */
-	protected function getImportEntitiesAsSimpleXMLElementArray() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\Xml\X[] $result */
-			$result = parent::getImportEntitiesAsSimpleXMLElementArray();
-			$this->{__METHOD__} = $result ? $result : $this->e()->xpath($this->itemPath2());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getImportEntitiesAsSimpleXMLElementArray() {return dfc($this, function() {return
+		parent::getImportEntitiesAsSimpleXMLElementArray() ?: $this->e()->xpath($this->itemPath2())
+	;});}
 
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\ReferenceListPart\Item::class;}
+	protected function itemClass() {return Item::class;}
 
 	/**
 	 * 1С:Управление торговлей 10.2 + дополнение от Битрикса:
@@ -77,7 +73,7 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList::getItems()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return \Df\C1\Cml2\Import\Data\Collection\ReferenceListPart\Items
+	 * @return self
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

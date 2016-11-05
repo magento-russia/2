@@ -1,5 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
+use Df\C1\Cml2\Import\Data\Entity\RequisiteValue;
+use Df\Xml\X;
 /**
  * Соответствует структуре вида:
 		<ЗначениеРеквизита>
@@ -45,7 +47,7 @@ class RequisiteValues extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\RequisiteValue::class;}
+	protected function itemClass() {return RequisiteValue::class;}
 
 	/**
 	 * @override
@@ -57,8 +59,8 @@ class RequisiteValues extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity::getRequisiteValues()
 	 * @static
-	 * @param \Df\Xml\X $e
-	 * @return \Df\C1\Cml2\Import\Data\Collection\RequisiteValues
+	 * @param X $e
+	 * @return self
 	 */
-	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
+	public static function i(X $e) {return new self([self::$P__E => $e]);}
 }

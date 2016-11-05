@@ -13,9 +13,9 @@ class Date extends \Df\C1\Cml2\Import\Data\Entity\Attribute {
 	 * @param string|int|float|bool|null $value
 	 * @return string|int|float|bool|null
 	 */
-	public function convertValueToMagentoFormat($value) {
-		return df_dtss($value, 'dd.MM.yyyy H:mm:ss', \Varien_Date::DATETIME_INTERNAL_FORMAT, true);
-	}
+	public function convertValueToMagentoFormat($value) {return
+		df_dtss($value, 'dd.MM.yyyy H:mm:ss', \Varien_Date::DATETIME_INTERNAL_FORMAT, true)
+	;}
 
 	/**
 	 * @override

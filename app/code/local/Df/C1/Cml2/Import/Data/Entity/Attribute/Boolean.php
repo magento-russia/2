@@ -19,9 +19,9 @@ class Boolean extends \Df\C1\Cml2\Import\Data\Entity\Attribute {
 	 * @param string|int|float|bool|null $value
 	 * @return string|int|float|bool|null
 	 */
-	public function convertValueToMagentoFormat($value) {
-		return dfa(array('true' => '1', 'false' => '0'), $value, '');
-	}
+	public function convertValueToMagentoFormat($value) {return
+		dfa(['true' => '1', 'false' => '0'], $value, '')
+	;}
 
 	/**
 	 * @override

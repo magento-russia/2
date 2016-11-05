@@ -1,5 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection\ProductPart;
+use Df\C1\Cml2\Import\Data\Entity\ProductPart\Image;
 class Images extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @uses unlink()
@@ -18,7 +19,7 @@ class Images extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\ProductPart\Image::class;}
+	protected function itemClass() {return Image::class;}
 
 	/**
 	 * @override
@@ -31,7 +32,7 @@ class Images extends \Df\C1\Cml2\Import\Data\Collection {
 	 * @used-by \Df\C1\Cml2\Import\Data\Entity\ProductЖЖgetImages()
 	 * @static
 	 * @param \Df\Xml\X $e
-	 * @return \Df\C1\Cml2\Import\Data\Collection\ProductPart\Images
+	 * @return self
 	 */
 	public static function i(\Df\Xml\X $e) {return new self(array(self::$P__E => $e));}
 }

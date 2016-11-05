@@ -414,7 +414,7 @@ class Offer extends \Df\C1\Cml2\Import\Data\Entity {
 			$this->{__METHOD__} =
 				$this->isBase()
 				? $this
-				: \Df\C1\Cml2\State\Import::s()->collections()->getOffersBase()
+				: \Df\C1\Cml2\State\Import::s()->cl()->getOffersBase()
 					->findByExternalId($this->getExternalId())
 			;
 			df_assert($this->{__METHOD__} instanceof \Df\C1\Cml2\Import\Data\Entity\Offer);
@@ -432,12 +432,12 @@ class Offer extends \Df\C1\Cml2\Import\Data\Entity {
 
 	/** @return \Df\C1\Cml2\Import\Data\Collection\Offers */
 	private function getStateOffers() {
-		return \Df\C1\Cml2\State\Import::s()->collections()->getOffers();
+		return \Df\C1\Cml2\State\Import::s()->cl()->getOffers();
 	}
 
 	/** @return \Df\C1\Cml2\Import\Data\Collection\Products */
 	private function getStateProductEntities() {
-		return \Df\C1\Cml2\State\Import::s()->collections()->getProducts();
+		return \Df\C1\Cml2\State\Import::s()->cl()->getProducts();
 	}
 
 	/** @return bool */

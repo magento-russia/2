@@ -1,5 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity;
+use Df\C1\Cml2\Import\Data\Entity\Attribute as A;
+use Df\Xml\X;
 abstract class Attribute extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * 2015-02-06
@@ -21,12 +23,9 @@ abstract class Attribute extends \Df\C1\Cml2\Import\Data\Entity {
 	public function getBackendType() {return '';}
 
 	/** @return string */
-	public function getExternalTypeName() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = self::_type($this->e());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getExternalTypeName() {return dfc($this, function() {return
+		self::_type($this->e())
+	;});}
 
 	/** @return string */
 	public function getFrontendInput() {return '';}
@@ -37,26 +36,26 @@ abstract class Attribute extends \Df\C1\Cml2\Import\Data\Entity {
 	/**
 	 * @static
 	 * @used-by \Df\C1\Cml2\Import\Data\Collection\Attributes::itemClassAdvanced()
-	 * @param \Df\Xml\X $e
+	 * @param X $e
 	 * @return \Df\C1\Cml2\Import\Data\Entity
 	 */
-	public static function getClass(\Df\Xml\X $e) {
+	public static function getClass(X $e) {
 		/** @var array(string => string) $map */
-		static $map = array(
-			'Справочник' => \Df\C1\Cml2\Import\Data\Entity\Attribute\ReferenceList::class
-			,'Дата' => \Df\C1\Cml2\Import\Data\Entity\Attribute\Date::class
-			,'Число' => \Df\C1\Cml2\Import\Data\Entity\Attribute\Number::class
-			,'Булево' => \Df\C1\Cml2\Import\Data\Entity\Attribute\Boolean::class
-			,self::TYPE__TEXT => \Df\C1\Cml2\Import\Data\Entity\Attribute\Text::class
-		);
-		return dfa($map, self::_type($e), \Df\C1\Cml2\Import\Data\Entity\Attribute\Text::class);
+		static $map = [
+			'Справочник' => A\ReferenceList::class
+			,'Дата' => A\Date::class
+			,'Число' => A\Number::class
+			,'Булево' => A\Boolean::class
+			,self::TYPE__TEXT => A\Text::class
+		];
+		return dfa($map, self::_type($e), A\Text::class);
 	}
 
 	/**
-	 * @param \Df\Xml\X $e
+	 * @param X $e
 	 * @return string
 	 */
-	private static function _type(\Df\Xml\X $e) {
+	private static function _type(X $e) {
 		/**
 		 * 1С:Управление торговлей 10.2 + дополнение от Битрикса:
 		 *

@@ -87,7 +87,7 @@ class Import extends \Df\C1\Cml2\Action\Catalog {
 	}
 
 	/** @return \Df\C1\Cml2\State\Import\Collections */
-	private function getCollections() {return $this->getState()->import()->collections();}
+	private function getCollections() {return $this->getState()->import()->cl();}
 
 	/** @return \Df\C1\Cml2\Action\Catalog\Import */
 	private function importCategories() {

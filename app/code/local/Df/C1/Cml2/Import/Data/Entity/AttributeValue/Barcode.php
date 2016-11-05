@@ -1,5 +1,7 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Entity\AttributeValue;
+use Df\C1\Cml2\Import\Data\Entity\Attribute\Text;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
 class Barcode extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue\OfferPart {
 	/**
 	 * @override
@@ -29,9 +31,9 @@ class Barcode extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue\OfferPart {
 	 * @override
 	 * @return \Df_Catalog_Model_Resource_Eav_Attribute|null
 	 */
-	protected function findMagentoAttributeInRegistry() {
-		return df_attributes()->findByCode($this->getAttributeCodeNew());
-	}
+	protected function findMagentoAttributeInRegistry() {return
+		df_attributes()->findByCode($this->getAttributeCodeNew())
+	;}
 
 	/**
 	 * @override
@@ -55,20 +57,16 @@ class Barcode extends \Df\C1\Cml2\Import\Data\Entity\AttributeValue\OfferPart {
 	 * @override
 	 * @return \Df\C1\Cml2\Import\Data\Entity\Attribute
 	 */
-	protected function getAttributeTemplate() {
-		return new \Df\C1\Cml2\Import\Data\Entity\Attribute\Text();
-	}
+	protected function getAttributeTemplate() {return new Text;}
 
 	/** @return int */
 	protected function isAttributeVisibleOnFront() {return 0;}
 
 	/**
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
-	 * @return \Df\C1\Cml2\Import\Data\Entity\AttributeValue\Barcode
+	 * @param Offer $offer
+	 * @return self
 	 */
-	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		return new self(array(self::P__OFFER => $offer));
-	}
+	public static function i(Offer $offer) {return new self([self::P__OFFER => $offer]);}
 }
 
 

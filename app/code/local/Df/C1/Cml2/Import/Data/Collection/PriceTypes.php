@@ -1,69 +1,64 @@
 <?php
 namespace Df\C1\Cml2\Import\Data\Collection;
+use Df\C1\Cml2\Import\Data\Document;
+use Df\C1\Cml2\Import\Data\Entity\PriceType;
+use Df\C1\Cml2\State\Import as I;
+use Df\Xml\X;
 class PriceTypes extends \Df\C1\Cml2\Import\Data\Collection {
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Entity::e()
-	 * @return \Df\Xml\X
+	 * @return X
 	 */
-	public function e() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\Xml\X $result */
-			$result = null;
-			if (
-				\Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml()
-					->descend('ПакетПредложений/ТипыЦен')
-			) {
-				$result = \Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml();
-			}
-			else if (
-				\Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml()
-					->descend('Классификатор/ТипыЦен')
-			) {
-				$result = \Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml();
-			}
-			df_assert($result instanceof \Df\Xml\X);
-			$this->{__METHOD__} = $result;
+	public function e() {return dfc($this, function() {
+		/** @var X $result */
+		$result = null;
+		/** @var I $i */
+		$i = I::s();
+		if ($i->getFileOffers()->getXml()->descend('ПакетПредложений/ТипыЦен')) {
+			$result = $i->getFileOffers()->getXml();
 		}
-		return $this->{__METHOD__};
-	}
+		else if ($i->getFileCatalogStructure()->getXml()->descend('Классификатор/ТипыЦен')) {
+			$result = $i->getFileCatalogStructure()->getXml();
+		}
+		df_assert($result instanceof X);
+		return $result;
+	});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Entity\PriceType */
-	public function getMain() {
-		if (!isset($this->{__METHOD__})) {
-			if (!$this->hasItems()) {
-				$this->throwError_noPriceTypes();
-			}
-			$this->{__METHOD__} = $this->findByName(df_c1_cfg()->product()->prices()->getMain());
-			if (!$this->{__METHOD__}) {
-				df_error(
-					  'Модуль «1С:Управление торговлей» для Magento'
-					. ' не нашёл в полученных из «1С:Управление торговлей» данных'
-					. ' цены типового соглашения (типа) «{название типового соглашения}».'
-					. "\nИменно это типовое соглашение (тип цен) указано администратором как основное"
-					. ' в настройках модуля «1С:Управление торговлей» для Magento:'
-					. "\n(«Система» -> «Настройки» -> «1С:Управление торговлей»"
-					. ' -> «Российская сборка» -> «1С:Управление торговлей» -> «Цены»'
-					. ' -> «Название основной цены или типового соглашения»).'
-					. "\nВам сейчас нужно убедиться, что типовое соглашение (тип цен) с данным именем"
-					. ' действительно присутствует в «1С:Управление торговлей»'
-					. ' и указано в настройках задействованного для обмена данными с интернет-магазином'
-					. ' узла обмена в «1С:Управление торговлей».'
-					. "\nИнструкция по настройке типового соглашения «1С:Управление торговлей»"
-					. ' для обмена данными с интернет-магазином: http://magento-forum.ru/topic/3100/'
-					,array('{название типового соглашения}' => df_c1_cfg()->product()->prices()->getMain())
-				);
-			}
+	/** @return PriceType */
+	public function getMain() {return dfc($this, function() {
+		if (!$this->hasItems()) {
+			$this->throwError_noPriceTypes();
 		}
-		return $this->{__METHOD__};
-	}
+		$result = $this->findByName(df_c1_cfg()->product()->prices()->getMain());
+		if (!$result) {
+			df_error(
+				  'Модуль «1С:Управление торговлей» для Magento'
+				. ' не нашёл в полученных из «1С:Управление торговлей» данных'
+				. ' цены типового соглашения (типа) «{название типового соглашения}».'
+				. "\nИменно это типовое соглашение (тип цен) указано администратором как основное"
+				. ' в настройках модуля «1С:Управление торговлей» для Magento:'
+				. "\n(«Система» -> «Настройки» -> «1С:Управление торговлей»"
+				. ' -> «Российская сборка» -> «1С:Управление торговлей» -> «Цены»'
+				. ' -> «Название основной цены или типового соглашения»).'
+				. "\nВам сейчас нужно убедиться, что типовое соглашение (тип цен) с данным именем"
+				. ' действительно присутствует в «1С:Управление торговлей»'
+				. ' и указано в настройках задействованного для обмена данными с интернет-магазином'
+				. ' узла обмена в «1С:Управление торговлей».'
+				. "\nИнструкция по настройке типового соглашения «1С:Управление торговлей»"
+				. ' для обмена данными с интернет-магазином: http://magento-forum.ru/topic/3100/'
+				,['{название типового соглашения}' => df_c1_cfg()->product()->prices()->getMain()]
+			);
+		}
+		return $result;
+	});}
 
 	/**
 	 * @override
 	 * @see \Df\Xml\Parser\Collection::itemClass()
 	 * @return string
 	 */
-	protected function itemClass() {return \Df\C1\Cml2\Import\Data\Entity\PriceType::class;}
+	protected function itemClass() {return PriceType::class;}
 
 	/**
 	 * @override
@@ -76,35 +71,26 @@ class PriceTypes extends \Df\C1\Cml2\Import\Data\Collection {
 		return "/КоммерческаяИнформация/{$type}/ТипыЦен/ТипЦены";
 	}
 
-	/** @return \Df\C1\Cml2\Import\Data\Document */
-	private function getDocument() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\Import\Data\Document $result */
-			$result = null;
-			if (
-				\Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml()
-					->descend('ПакетПредложений/ТипыЦен')
-			) {
-				$result = \Df\C1\Cml2\State\Import::s()->getFileOffers()->getXmlDocument();
-			}
-			/**
-			 * В новых версиях модуля 1С-Битрикс (ветка 4, CommerceML 2.0.8)
-			 * типы цен неожиданно переместились в файл каталога.
-			 */
-			else if (
-				\Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml()
-					->descend('Классификатор/ТипыЦен')
-			) {
-				$result = \Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXmlDocument();
-			}
-			if (!$result) {
-				$this->throwError_noPriceTypes();
-			}
-			df_assert($result instanceof \Df\C1\Cml2\Import\Data\Document);
-			$this->{__METHOD__} = $result;
+	/** @return Document */
+	private function getDocument() {return dfc($this, function() {
+		/** @var Document $result */
+		$result = null;
+		/** @var I $i */
+		$i = I::s();
+		if ($i->getFileOffers()->getXml()->descend('ПакетПредложений/ТипыЦен')) {
+			$result = $i->getFileOffers()->getXmlDocument();
 		}
-		return $this->{__METHOD__};
-	}
+		// В новых версиях модуля 1С-Битрикс (ветка 4, CommerceML 2.0.8)
+		// типы цен неожиданно переместились в файл каталога.
+		else if ($i->getFileCatalogStructure()->getXml()->descend('Классификатор/ТипыЦен')) {
+			$result = $i->getFileCatalogStructure()->getXmlDocument();
+		}
+		if (!$result) {
+			$this->throwError_noPriceTypes();
+		}
+		df_assert($result instanceof Document);
+		return $result;
+	});}
 
 	/** @return void */
 	private function throwError_noPriceTypes() {
@@ -120,7 +106,7 @@ class PriceTypes extends \Df\C1\Cml2\Import\Data\Collection {
 
 	/**
 	 * @used-by \Df\C1\Cml2\State::getPriceTypes()
-	 * @return \Df\C1\Cml2\Import\Data\Collection\PriceTypes
+	 * @return self
 	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
