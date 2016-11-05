@@ -58,21 +58,18 @@ class ByIp extends \Df_Core_Model_Session_Custom_Additional {
 	 * @override
 	 * @return string
 	 */
-	protected function getSessionIdCustom() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$ipAddress = \Mage::app()->getRequest()->getClientIp();
-			df_assert_string_not_empty($ipAddress);
-			/**
-			 * Вызывая функцию @uses md5(), мы избавляемся от недопустимых символов
-			 * в идентификаторе сессии.
-			 * @see session_id()
-			 * http://php.net/manual/function.session-id.php
-			 */
-			$this->{__METHOD__} = md5($ipAddress);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function getSessionIdCustom() {return dfc($this, function() {
+		/** @var string $result */
+		$ipAddress = \Mage::app()->getRequest()->getClientIp();
+		df_assert_string_not_empty($ipAddress);
+		/**
+		 * Вызывая функцию @uses md5(), мы избавляемся от недопустимых символов
+		 * в идентификаторе сессии.
+		 * @see session_id()
+		 * http://php.net/manual/function.session-id.php
+		 */
+		return md5($ipAddress);
+	});}
 
 	/**
 	 * @param string $type [optional]

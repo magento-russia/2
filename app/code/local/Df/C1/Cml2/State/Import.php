@@ -1,5 +1,10 @@
 <?php
 namespace Df\C1\Cml2\State;
+use Df\C1\Cml2\File;
+use Df\C1\Cml2\Import\Data\Document\Catalog as DocumentCatalog;
+use Df\C1\Cml2\Import\Data\Document\Offers as DocumentOffers;
+use Df\C1\Cml2\Session\ByIp as SessionByIp;
+use Df_Catalog_Model_Category as Category;
 class Import extends \Df_Core_Model {
 	/** @return \Df\C1\Cml2\State\Import\Collections */
 	public function cl() {return \Df\C1\Cml2\State\Import\Collections::s();}
@@ -8,9 +13,9 @@ class Import extends \Df_Core_Model {
 	public function getDocumentCurrent() {return $this->getFileCurrent()->getXmlDocument();}
 
 	/** @return \Df\C1\Cml2\Import\Data\Document\Offers */
-	public function getDocumentCurrentAsOffers() {
-		return $this->getFileCurrent()->getXmlDocumentAsOffers();
-	}
+	public function getDocumentCurrentAsOffers() {return
+		$this->getFileCurrent()->getXmlDocumentAsOffers()
+	;}
 
 	/**
 	 * 2015-08-04
@@ -24,282 +29,214 @@ class Import extends \Df_Core_Model {
 	 * @used-by getFileCatalogComposite()
 	 * @used-by \Df\C1\Cml2\State\Import\Collections::getAttributes()
 	 * @param bool $preprareSession [optional]
-	 * @return \Df\C1\Cml2\File
+	 * @return File
 	 */
-	public function getFileCatalogAttributes($preprareSession = true) {
-		if (!isset($this->{__METHOD__})) {
-			if (
-					$this->getDocumentCurrent()->isCatalog()
-				&&
-					$this->getDocumentCurrentAsCatalog()->hasAttributes()
-			) {
-				$this->{__METHOD__} = $this->getFileCurrent();
-			}
-			else {
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->begin();
-				}
-				$this->{__METHOD__} =
-					\Df\C1\Cml2\File::i(
-						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
-							\Df\C1\Cml2\Import\Data\Document\Catalog::TYPE__ATTRIBUTES
-							, $this->getDocumentCurrent()->getExternalId_CatalogAttributes()
-						)
-					)
-				;
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->end();
-				}
-			}
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return \Df\C1\Cml2\File */
-	public function getFileCatalogComposite() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\File $result */
-			if (
-				$this->getDocumentCurrent()->isCatalog()
+	public function getFileCatalogAttributes($preprareSession = true) {return
+		// 2016-11-05
+		// Так в оригинале: $preprareSession не учитывается в ключе кэширования.
+		// Не знаю, правильно ли это.
+		dfc($this, function() use($preprareSession) {return
+			$this->getDocumentCurrent()->isCatalog()
 				&& $this->getDocumentCurrentAsCatalog()->hasAttributes()
+			? $this->getFileCurrent()
+			: self::prepareSession($preprareSession, function() {return
+				File::i(SessionByIp::s()->getFilePathById(
+					DocumentCatalog::TYPE__ATTRIBUTES
+					,$this->getDocumentCurrent()->getExternalId_CatalogAttributes()
+				))
+			;})
+		;})
+	;}
+
+	/** @return File */
+	public function getFileCatalogComposite() {return dfc($this, function() {
+		/** @var File $result */
+		if (
+			$this->getDocumentCurrent()->isCatalog()
+			&& $this->getDocumentCurrentAsCatalog()->hasAttributes()
+			&& $this->getDocumentCurrentAsCatalog()->hasProducts()
+			&& $this->getDocumentCurrentAsCatalog()->hasStructure()
+		) {
+			$result = $this->getFileCurrent();
+		}
+		else {
+			SessionByIp::s()->begin();
+			/** @var File $fileAttributes */
+			$fileAttributes = $this->getFileCatalogAttributes($preprareSession = false);
+			/** @var File $fileProducts */
+			$fileProducts = $this->getFileCatalogProducts($preprareSession = false);
+			/** @var File $fileStructure */
+			$fileStructure = $this->getFileCatalogStructure($preprareSession = false);
+			SessionByIp::s()->end();
+			$result =
+				$fileProducts->getPathRelative() === $fileStructure->getPathRelative()
+				&& $fileProducts->getPathRelative() === $fileAttributes->getPathRelative()
+				? $fileProducts
+				: \Df\C1\Cml2\File\CatalogComposite::i2($fileStructure, $fileProducts, $fileAttributes)
+			;
+		}
+		return $result;
+	});}
+
+	/**
+	 * @param bool $preprareSession [optional]
+	 * @return File
+	 */
+	public function getFileCatalogProducts($preprareSession = true) {return
+		// 2016-11-05
+		// Так в оригинале: $preprareSession не учитывается в ключе кэширования.
+		// Не знаю, правильно ли это.
+		dfc($this, function() use($preprareSession) {return
+			$this->getDocumentCurrent()->isCatalog()
 				&& $this->getDocumentCurrentAsCatalog()->hasProducts()
+			? $this->getFileCurrent()
+			: self::prepareSession($preprareSession, function() {return
+				File::i(SessionByIp::s()->getFilePathById(
+					DocumentCatalog::TYPE__PRODUCTS
+					,$this->getDocumentCurrent()->getExternalId_CatalogProducts()
+				))
+			;})
+		;})
+	;}
+
+	/**
+	 * @param bool $preprareSession [optional]
+	 * @return File
+	 */
+	public function getFileCatalogStructure($preprareSession = true) {return
+		// 2016-11-05
+		// Так в оригинале: $preprareSession не учитывается в ключе кэширования.
+		// Не знаю, правильно ли это.
+		dfc($this, function() use($preprareSession) {return
+			$this->getDocumentCurrent()->isCatalog()
 				&& $this->getDocumentCurrentAsCatalog()->hasStructure()
-			) {
-				$result = $this->getFileCurrent();
-			}
-			else {
-				\Df\C1\Cml2\Session\ByIp::s()->begin();
-				/** @var \Df\C1\Cml2\File $fileAttributes */
-				$fileAttributes = $this->getFileCatalogAttributes($preprareSession = false);
-				/** @var \Df\C1\Cml2\File $fileProducts */
-				$fileProducts = $this->getFileCatalogProducts($preprareSession = false);
-				/** @var \Df\C1\Cml2\File $fileStructure */
-				$fileStructure = $this->getFileCatalogStructure($preprareSession = false);
-				\Df\C1\Cml2\Session\ByIp::s()->end();
-				$result =
-					$fileProducts->getPathRelative() === $fileStructure->getPathRelative()
-					&& $fileProducts->getPathRelative() === $fileAttributes->getPathRelative()
-					? $fileProducts
-					: \Df\C1\Cml2\File\CatalogComposite::i2($fileStructure, $fileProducts, $fileAttributes)
-				;
-			}
-			$this->{__METHOD__} = $result;
+			? $this->getFileCurrent()
+			: self::prepareSession($preprareSession, function() {return
+				File::i(SessionByIp::s()->getFilePathById(
+					DocumentCatalog::TYPE__STRUCTURE
+					,$this->getDocumentCurrent()->getExternalId_CatalogStructure()
+				))
+			;})
+		;})
+	;}
+
+	/** @return File */
+	public function getFileCurrent() {return dfc($this, function() {
+		/**
+		 * Обратите внимание,
+		 * что «filename» может быть не просто именем файла (catalog.xml, offers.xml),
+		 * но и именем файла с относительным путём (для файлов картинок), например:
+		 * import_files/cb/cbcf4934-55bc-11d9-848a-00112f43529a_b5cfbe1a-c400-11e1-a851-4061868fc6eb.jpeg
+		 * @var string $relativePath
+		 */
+		$relativePath = \Mage::app()->getRequest()->getParam('filename');
+		if (!df_check_string_not_empty($relativePath)) {
+			df_error(
+				'Учётная система нарушает протокол обмена данными.'
+				."\nВ данном сценарии она должна была передать"
+				." в адресной строке параметр «filename»."
+			);
 		}
-		return $this->{__METHOD__};
-	}
+		return File::i($relativePath);
+	});}
+
+	/** @return File */
+	public function getFileOffers() {return dfc($this, function() {
+		df_assert($this->getFileCurrent()->getXmlDocument()->isOffers());
+		return $this->getFileCurrent();
+	});}
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return \Df\C1\Cml2\File
+	 * @return File
 	 */
-	public function getFileCatalogProducts($preprareSession = true) {
-		if (!isset($this->{__METHOD__})) {
-			if (
-					$this->getDocumentCurrent()->isCatalog()
-				&&
-					$this->getDocumentCurrentAsCatalog()->hasProducts()
-			) {
-				$this->{__METHOD__} = $this->getFileCurrent();
-			}
-			else {
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->begin();
-				}
-				$this->{__METHOD__} =
-					\Df\C1\Cml2\File::i(
-						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
-							\Df\C1\Cml2\Import\Data\Document\Catalog::TYPE__PRODUCTS
-							, $this->getDocumentCurrent()->getExternalId_CatalogProducts()
-						)
-					)
-				;
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->end();
-				}
-			}
-		}
-		return $this->{__METHOD__};
-	}
+	public function getFileOffersBase($preprareSession = true) {return
+		// 2016-11-05
+		// Так в оригинале: $preprareSession не учитывается в ключе кэширования.
+		// Не знаю, правильно ли это.
+		dfc($this, function() use($preprareSession) {df_assert($this->getDocumentCurrent()->isOffers()); return
+			$this->getDocumentCurrentAsOffers()->isBase()
+			? $this->getFileCurrent()
+			: self::prepareSession($preprareSession, function() {return
+				File::i(SessionByIp::s()->getFilePathById(
+					DocumentOffers::TYPE__BASE
+					,$this->getDocumentCurrentAsOffers()->getExternalId()
+				))
+			;})
+		;})
+	;}
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return \Df\C1\Cml2\File
+	 * @return File
 	 */
-	public function getFileCatalogStructure($preprareSession = true) {
-		if (!isset($this->{__METHOD__})) {
-			if (
-					$this->getDocumentCurrent()->isCatalog()
-				&&
-					$this->getDocumentCurrentAsCatalog()->hasStructure()
-			) {
-				$this->{__METHOD__} = $this->getFileCurrent();
-			}
-			else {
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->begin();
-				}
-				$this->{__METHOD__} =
-					\Df\C1\Cml2\File::i(
-						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
-							\Df\C1\Cml2\Import\Data\Document\Catalog::TYPE__STRUCTURE
-							, $this->getDocumentCurrent()->getExternalId_CatalogStructure()
-						)
-					)
-				;
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->end();
-				}
-			}
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return \Df\C1\Cml2\File */
-	public function getFileCurrent() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * Обратите внимание,
-			 * что «filename» может быть не просто именем файла (catalog.xml, offers.xml),
-			 * но и именем файла с относительным путём (для файлов картинок), например:
-			 * import_files/cb/cbcf4934-55bc-11d9-848a-00112f43529a_b5cfbe1a-c400-11e1-a851-4061868fc6eb.jpeg
-			 * @var string $relativePath
-			 */
-			$relativePath = \Mage::app()->getRequest()->getParam('filename');
-			if (!df_check_string_not_empty($relativePath)) {
-				df_error(
-					'Учётная система нарушает протокол обмена данными.'
-					."\nВ данном сценарии она должна была передать"
-					." в адресной строке параметр «filename»."
-				);
-			}
-			$this->{__METHOD__} = \Df\C1\Cml2\File::i($relativePath);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return \Df\C1\Cml2\File */
-	public function getFileOffers() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->getFileCurrent()->getXmlDocument()->isOffers());
-			$this->{__METHOD__} = $this->getFileCurrent();
-		}
-		return $this->{__METHOD__};
-	}
+	public function getFileOffersPrices($preprareSession = true) {return
+		// 2016-11-05
+		// Так в оригинале: $preprareSession не учитывается в ключе кэширования.
+		// Не знаю, правильно ли это.
+		dfc($this, function() use($preprareSession) {df_assert($this->getDocumentCurrent()->isOffers()); return
+			$this->getDocumentCurrentAsOffers()->hasPrices()
+			? $this->getFileCurrent()
+			: self::prepareSession($preprareSession, function() {return
+				File::i(SessionByIp::s()->getFilePathById(
+					DocumentOffers::TYPE__PRICES
+					,$this->getDocumentCurrentAsOffers()->getExternalId()
+				))
+			;})
+		;})
+	;}
 
 	/**
 	 * @param bool $preprareSession [optional]
-	 * @return \Df\C1\Cml2\File
+	 * @return File
 	 */
-	public function getFileOffersBase($preprareSession = true) {
-		df_assert($this->getDocumentCurrent()->isOffers());
-		if (!isset($this->{__METHOD__})) {
-			if ($this->getDocumentCurrentAsOffers()->isBase()) {
-				$this->{__METHOD__} = $this->getFileCurrent();
-			}
-			else {
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->begin();
-				}
-				$this->{__METHOD__} =
-					\Df\C1\Cml2\File::i(
-						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
-							\Df\C1\Cml2\Import\Data\Document\Offers::TYPE__BASE
-							, $this->getDocumentCurrentAsOffers()->getExternalId()
-						)
-					)
-				;
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->end();
-				}
-			}
-		}
-		return $this->{__METHOD__};
-	}
+	public function getFileOffersStock($preprareSession = true) {return
+		// 2016-11-05
+		// Так в оригинале: $preprareSession не учитывается в ключе кэширования.
+		// Не знаю, правильно ли это.
+		dfc($this, function() use($preprareSession) {df_assert($this->getDocumentCurrent()->isOffers()); return
+			$this->getDocumentCurrentAsOffers()->hasStock()
+			? $this->getFileCurrent()
+			: self::prepareSession($preprareSession, function() {return
+				File::i(SessionByIp::s()->getFilePathById(
+					DocumentOffers::TYPE__STOCK
+					,$this->getDocumentCurrentAsOffers()->getExternalId()
+				))
+			;})
+		;})
+	;}
 
-	/**
-	 * @param bool $preprareSession [optional]
-	 * @return \Df\C1\Cml2\File
-	 */
-	public function getFileOffersPrices($preprareSession = true) {
-		df_assert($this->getDocumentCurrent()->isOffers());
-		if (!isset($this->{__METHOD__})) {
-			if ($this->getDocumentCurrentAsOffers()->hasPrices()) {
-				$this->{__METHOD__} = $this->getFileCurrent();
-			}
-			else {
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->begin();
-				}
-				$this->{__METHOD__} =
-					\Df\C1\Cml2\File::i(
-						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
-							\Df\C1\Cml2\Import\Data\Document\Offers::TYPE__PRICES
-							, $this->getDocumentCurrentAsOffers()->getExternalId()
-						)
-					)
-				;
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->end();
-				}
-			}
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @param bool $preprareSession [optional]
-	 * @return \Df\C1\Cml2\File
-	 */
-	public function getFileOffersStock($preprareSession = true) {
-		df_assert($this->getDocumentCurrent()->isOffers());
-		if (!isset($this->{__METHOD__})) {
-			if ($this->getDocumentCurrentAsOffers()->hasStock()) {
-				$this->{__METHOD__} = $this->getFileCurrent();
-			}
-			else {
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->begin();
-				}
-				$this->{__METHOD__} =
-					\Df\C1\Cml2\File::i(
-						\Df\C1\Cml2\Session\ByIp::s()->getFilePathById(
-							\Df\C1\Cml2\Import\Data\Document\Offers::TYPE__STOCK
-							, $this->getDocumentCurrentAsOffers()->getExternalId()
-						)
-					)
-				;
-				if ($preprareSession) {
-					\Df\C1\Cml2\Session\ByIp::s()->end();
-				}
-			}
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return \Df_Catalog_Model_Category */
-	public function getRootCategory() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df_Catalog_Model_Category::ld($this->getRootCategoryId());
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Category */
+	public function getRootCategory() {return dfc($this, function() {return 
+		Category::ld($this->getRootCategoryId())				
+	;});}
 
 	/** @return \Df\C1\Cml2\Import\Data\Document\Catalog */
-	private function getDocumentCurrentAsCatalog() {
-		return $this->getFileCurrent()->getXmlDocumentAsCatalog();
-	}
+	private function getDocumentCurrentAsCatalog() {return
+		$this->getFileCurrent()->getXmlDocumentAsCatalog()
+	;}
 
 	/** @return int */
-	private function getRootCategoryId() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var int $result */
-			$result = df_nat0(df_state()->getStoreProcessed()->getRootCategoryId());
-			if (0 === $result) {
-				df_error('В обрабатываемом магазине должен присутствовать корневой товарный раздел');
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
+	private function getRootCategoryId() {return dfc($this, function() {return
+		df_nat0(df_state()->getStoreProcessed()->getRootCategoryId()) ?:
+			df_error('В обрабатываемом магазине должен присутствовать корневой товарный раздел')
+	;});}
+
+	/**
+	 * 2016-11-05
+	 * @used-by getFileCatalogAttributes()
+	 * @used-by getFileCatalogProducts()
+	 * @used-by getFileCatalogStructure()
+	 * @param bool $flag
+	 * @param \Closure $f
+	 * @return mixed
+	 */
+	private static function prepareSession($flag, \Closure $f) {
+		/** mixed $result */
+		if ($flag) {SessionByIp::s()->begin();}
+		$result = $f();
+		if ($flag) {SessionByIp::s()->end();}
+		return $result;
 	}
 
 	/** @return self */

@@ -2,18 +2,13 @@
 namespace Df\C1\Config\Api;
 class CatalogExport extends \Df\C1\Config\Api\Cml2 {
 	/** @return \Mage_CatalogRule_Model_Rule|null */
-	public function getRule() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(
-				\Df_Catalog_Model_ConditionsLoader::i(
-					$this->getRuleId()
-					, '1С:Управление торговлей'
-					, '«1С:Управление торговлей» → «Экспорт товаров в 1С» → «Условия»'
-				)->getRule()
-			);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function getRule() {return dfc($this, function() {return
+		\Df_Catalog_Model_ConditionsLoader::i(
+			$this->getRuleId()
+			, '1С:Управление торговлей'
+			, '«1С:Управление торговлей» → «Экспорт товаров в 1С» → «Условия»'
+		)->getRule()				
+	;});}
 
 	/**
 	 * @override

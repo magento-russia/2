@@ -1,5 +1,11 @@
 <?php
 namespace Df\C1\Cml2\State\Import;
+use Df\C1\Cml2\Import\Data\Collection\Attributes;
+use Df\C1\Cml2\Import\Data\Collection\Categories;
+use Df\C1\Cml2\Import\Data\Collection\Offers;
+use Df\C1\Cml2\Import\Data\Collection\Products;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
+use Df\C1\Cml2\State\Import as I;
 class Collections extends \Df_Core_Model {
 	/**
 	 * Если каталог разбит на несколько файлов,
@@ -13,109 +19,56 @@ class Collections extends \Df_Core_Model {
 					СписокЕдиниц 	= РазбитаяСтруктураДанных.Единицы;
 				КонецЕсли;
 				(...)
-	 * @return \Df\C1\Cml2\Import\Data\Collection\Attributes
+	 * @return Attributes
 	 */
-	public function getAttributes() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Attributes::i(
-				\Df\C1\Cml2\State\Import::s()->getFileCatalogAttributes()->getXml()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	public function getAttributes() {return dfc($this, function() {return
+		Attributes::i(I::s()->getFileCatalogAttributes()->getXml())				
+	;});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Collection\Categories */
-	public function getCategories() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Categories::i(
-				\Df\C1\Cml2\State\Import::s()->getFileCatalogStructure()->getXml()
-				, array('', 'КоммерческаяИнформация', 'Классификатор', 'Группы', 'Группа')
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Categories */
+	public function getCategories() {return dfc($this, function() {return
+		Categories::i(I::s()->getFileCatalogStructure()->getXml(), [
+			'', 'КоммерческаяИнформация', 'Классификатор', 'Группы', 'Группа'
+		])				
+	;});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Collection\Offers */
-	public function getOffers() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Offers::i(
-				\Df\C1\Cml2\State\Import::s()->getFileOffers()->getXml()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Offers */
+	public function getOffers() {return dfc($this, function() {return
+		Offers::i(I::s()->getFileOffers()->getXml())				
+	;});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Collection\Offers */
-	public function getOffersBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				\Df\C1\Cml2\State\Import::s()->getDocumentCurrentAsOffers()->isBase()
-				? $this->getOffers()
-				: \Df\C1\Cml2\Import\Data\Collection\Offers::i(
-					\Df\C1\Cml2\State\Import::s()->getFileOffersBase()->getXml()
-				)
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Offers */
+	public function getOffersBase() {return dfc($this, function() {return
+		I::s()->getDocumentCurrentAsOffers()->isBase()
+		? $this->getOffers()
+		: Offers::i(I::s()->getFileOffersBase()->getXml())				
+	;});}
+	
+	/** @return Offer[] */
+	public function getOffersConfigurableChild() {return dfc($this, function() {return
+		array_filter(df_map(function(Offer $o) {return
+			$o->isTypeConfigurableChild() ? $o : null				
+		;}, $this->getOffers()))	
+	;});}
+	
+	/** @return Offer[] */
+	public function getOffersConfigurableParent() {return dfc($this, function() {return
+		array_filter(df_map(function(Offer $o) {return
+			$o->isTypeConfigurableParent() ? $o : null				
+		;}, $this->getOffers()))	
+	;});}
 	
 	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
-	public function getOffersConfigurableChild() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
-			$result = [];
-			foreach ($this->getOffers() as $offer) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
-				if ($offer->isTypeConfigurableChild()) {
-					$result[]= $offer;
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-	
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
-	public function getOffersConfigurableParent() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
-			$result = [];
-			foreach ($this->getOffers() as $offer) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
-				if ($offer->isTypeConfigurableParent()) {
-					$result[]= $offer;
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-	
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer[] */
-	public function getOffersSimple() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
-			$result = [];
-			foreach ($this->getOffers() as $offer) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
-				if ($offer->isTypeSimple()) {
-					$result[]= $offer;
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getOffersSimple() {return dfc($this, function() {return
+		array_filter(df_map(function(Offer $o) {return
+			$o->isTypeSimple() ? $o : null				
+		;}, $this->getOffers()))	
+	;});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Collection\Products */
-	public function getProducts() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\C1\Cml2\Import\Data\Collection\Products::i(
-				\Df\C1\Cml2\State\Import::s()->getFileCatalogProducts()->getXml()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Products */
+	public function getProducts() {return dfc($this, function() {return
+		Products::i(I::s()->getFileCatalogProducts()->getXml())				
+	;});}
 
 	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

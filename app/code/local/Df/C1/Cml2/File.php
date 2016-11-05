@@ -1,25 +1,16 @@
 <?php
 namespace Df\C1\Cml2;
+use Df\C1\Cml2\Import\Data\Document;
 class File extends \Df_Core_Model {
 	/** @return string */
-	public function getNameBase() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = basename($this->getPathRelative());
-		}
-		return $this->{__METHOD__};
-	}
+	public function getNameBase() {return dfc($this, function() {return
+		basename($this->getPathRelative())
+	;});}
 
 	/** @return string */
-	public function getPathFull() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				\Df\C1\Cml2\FileSystem::s()->getFullPathByRelativePath(
-					$this->getPathRelative()
-				)
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function getPathFull() {return dfc($this, function() {return
+		FileSystem::s()->getFullPathByRelativePath($this->getPathRelative())
+	;});}
 
 	/**
 	 * Обратите внимание,
@@ -33,28 +24,22 @@ class File extends \Df_Core_Model {
 	/** @return \Df\Xml\X */
 	public function getXml() {return $this->getXmlDocument()->e();}
 
-	/** @return \Df\C1\Cml2\Import\Data\Document */
-	public function getXmlDocument() {
-		return \Df\C1\Cml2\FileSystem::s()->getXmlDocumentByRelativePath($this->getPathRelative());
-	}
+	/** @return Document */
+	public function getXmlDocument() {return
+		FileSystem::s()->getXmlDocumentByRelativePath($this->getPathRelative())
+	;}
 
-	/** @return \Df\C1\Cml2\Import\Data\Document\Catalog */
-	public function getXmlDocumentAsCatalog() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->getXmlDocument() instanceof \Df\C1\Cml2\Import\Data\Document\Catalog);
-			$this->{__METHOD__} = $this->getXmlDocument();
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Document\Catalog */
+	public function getXmlDocumentAsCatalog() {return dfc($this, function() {
+		df_assert($this->getXmlDocument() instanceof Document\Catalog);
+		return $this->getXmlDocument();
+	});}
 
-	/** @return \Df\C1\Cml2\Import\Data\Document\Offers */
-	public function getXmlDocumentAsOffers() {
-		if (!isset($this->{__METHOD__})) {
-			df_assert($this->getXmlDocument() instanceof \Df\C1\Cml2\Import\Data\Document\Offers);
-			$this->{__METHOD__} = $this->getXmlDocument();
-		}
-		return $this->{__METHOD__};
-	}
+	/** @return Document\Offers */
+	public function getXmlDocumentAsOffers() {return dfc($this, function() {
+		df_assert($this->getXmlDocument() instanceof Document\Offers);
+		return $this->getXmlDocument();
+	});}
 
 	/**
 	 * @override
@@ -65,16 +50,14 @@ class File extends \Df_Core_Model {
 		$this->_prop(self::$P__PATH_RELATIVE, DF_V_STRING_NE);
 	}
 
-	/** @used-by \Df\C1\Cml2\File\CatalogComposite::_construct() */
-
 	/** @var string */
 	private static $P__PATH_RELATIVE = 'path_relative';
 
 	/**
 	 * @param string $pathRelative
-	 * @return \Df\C1\Cml2\File
+	 * @return self
 	 */
-	public static function i($pathRelative) {
-		return new self(array(self::$P__PATH_RELATIVE => $pathRelative));
-	}
+	public static function i($pathRelative) {return new self([
+		self::$P__PATH_RELATIVE => $pathRelative
+	]);}
 }

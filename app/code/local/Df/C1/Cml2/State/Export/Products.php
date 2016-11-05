@@ -18,7 +18,7 @@ class Products extends \Df_Varien_Data_Collection {
 
 	/**
 	 * @used-by \Df\C1\Cml2\State\Export::getProducts()
-	 * @return \Df\C1\Cml2\State\Export\Products
+	 * @return self
 	 */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
