@@ -63,6 +63,6 @@ class Df_Admin_Model_Mode extends Df_Core_Model {
 	/** @var bool */
 	private $_updateMode;
 
-	/** @return Df_Admin_Model_Mode */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

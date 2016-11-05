@@ -172,6 +172,6 @@ class Df_PromoGift_Model_Gift extends Df_Core_Model {
 	 * @return Df_PromoGift_Model_Gift
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/** @return Df_PromoGift_Model_Gift */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

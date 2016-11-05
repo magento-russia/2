@@ -323,6 +323,6 @@ class Df_PromoGift_Model_Resource_Indexer extends Df_Core_Model_Resource {
 	protected function _construct() {
 		$this->_init(Df_PromoGift_Model_Resource_Gift::TABLE, Df_PromoGift_Model_Gift::P__ID);
 	}
-	/** @return Df_PromoGift_Model_Resource_Indexer */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

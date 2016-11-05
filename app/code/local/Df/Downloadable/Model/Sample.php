@@ -36,6 +36,6 @@ class Df_Downloadable_Model_Sample extends Mage_Downloadable_Model_Sample {
 	 * @return Df_Downloadable_Model_Sample
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Downloadable_Model_Sample */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

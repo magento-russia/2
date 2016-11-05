@@ -89,6 +89,6 @@ class Df_AccessControl_Model_Resource_Role extends Df_Core_Model_Resource {
 	 */
 	private static $TABLE = 'df_access_control/role';
 
-	/** @return Df_AccessControl_Model_Resource_Role */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

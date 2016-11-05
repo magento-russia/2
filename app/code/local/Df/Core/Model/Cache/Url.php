@@ -90,6 +90,6 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model {
 		return $result;
 	}
 
-	/** @return Df_Core_Model_Cache_Url */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

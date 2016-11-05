@@ -192,6 +192,6 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 		;
 	}
 
-	/** @return Df_Page_Helper_Head */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

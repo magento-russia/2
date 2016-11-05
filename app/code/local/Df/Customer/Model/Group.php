@@ -49,6 +49,6 @@ class Df_Customer_Model_Group extends Mage_Customer_Model_Group {
 	 * @return Df_Customer_Model_Group
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Customer_Model_Group */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

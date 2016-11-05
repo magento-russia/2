@@ -1,5 +1,10 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor;
+use Df\C1\Cml2\Import\Data\Entity\Order as EntityOrder;
+use Df\C1\Cml2\Import\Data\Entity\Order\Item as EntityOrderItem;
+use Mage_Catalog_Model_Product_Type as Type;
+use Mage_Sales_Model_Order_Item as OI;
+/** @method EntityOrder getEntity() */
 class Order extends \Df\C1\Cml2\Import\Processor {
 	/**
 	 * @override
@@ -55,152 +60,59 @@ class Order extends \Df\C1\Cml2\Import\Processor {
 		}
 	}
 
-	/**
-	 * @override
-	 * @return \Df\C1\Cml2\Import\Data\Entity\Order
-	 */
-	protected function getEntity() {
-		return parent::getEntity();
-	}
-
-	/** @return \Mage_Sales_Model_Order_Item[] */
-	private function getMapFromProductIdToSimpleOrderItem() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Mage_Sales_Model_Order_Item[] $result */
-			$result = [];
-			foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
-				/** @var \Mage_Sales_Model_Order_Item $orderItem */
-				// собираем идентификаторы только простых товаров
-				if (\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
-					/** @var int $productId */
-					$productId = df_nat($orderItem->getProductId());
-					df_assert(is_null(dfa($result, $productId)));
-					$result[$productId] = $orderItem;
-				}
+	/** @return array(int => OI) */
+	private function getMapFromProductIdToSimpleOrderItem() {return dfc($this, function() {
+		/** @var array(int => OI) $result */
+		$result = [];
+		foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
+			/** @var OI $orderItem */
+			// собираем идентификаторы только простых товаров
+			if (Type::TYPE_SIMPLE === $orderItem->getProductType()) {
+				/** @var int $productId */
+				$productId = df_nat($orderItem->getProductId());
+				df_assert(is_null(dfa($result, $productId)));
+				$result[$productId] = $orderItem;
 			}
-			$this->{__METHOD__} = $result;
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/** @return int[] */
-	private function getProductIdsFrom1COrder() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var int[] $result */
-			$result = [];
-			foreach ($this->getEntity()->getItems() as $entityOrderItem) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item $entityOrderItem */
-				$result[]= $entityOrderItem->getProduct()->getId();
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getProductIdsFrom1COrder() {return dfc($this, function() {return
+		df_map(function(EntityOrderItem $i) {return
+			$i->getProduct()->getId()
+		;}, $this->getEntity()->getItems())
+	;});}
 
 	/**
 	 * Возвращает идентификаторы только простых товаров
 	 * @return int[]
 	 */
-	private function getProductIdsFromMagentoOrder() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var int[] $result */
-			$result = [];
-			foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
-				/** @var \Mage_Sales_Model_Order_Item $orderItem */
-				// Собираем идентификаторы только простых товаров.
-				if (\Mage_Catalog_Model_Product_Type::TYPE_SIMPLE === $orderItem->getProductType()) {
-					$result[]= $orderItem->getProductId();
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getProductIdsFromMagentoOrder() {return dfc($this, function() {return
+		array_filter(df_map(function(OI $i) {return
+			// Собираем идентификаторы только простых товаров.
+			Type::TYPE_SIMPLE === $i->getProductType() ? $i->getProductId() : null
+		;}, $this->getEntity()->getOrder()->getAllItems()))
+	;});}
 
 	/** @return int[] */
-	private function getProductIdsToAdd() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				array_diff($this->getProductIdsFrom1COrder(), $this->getProductIdsFromMagentoOrder())
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getProductIdsToAdd() {return dfc($this, function() {return
+		array_diff($this->getProductIdsFrom1COrder(), $this->getProductIdsFromMagentoOrder())
+	;});}
 
 	/** @return int[] */
-	private function getProductIdsToDelete() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				array_diff($this->getProductIdsFromMagentoOrder(), $this->getProductIdsFrom1COrder())
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getProductIdsToDelete() {return dfc($this, function() {return
+		array_diff($this->getProductIdsFromMagentoOrder(), $this->getProductIdsFrom1COrder())
+	;});}
 
 	/** @return int[] */
-	private function getProductIdsToUpdate() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_intersect(
-				$this->getProductIdsFromMagentoOrder(), $this->getProductIdsFrom1COrder()
-			);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @param int $productId
-	 * @return \Mage_Sales_Model_Order_Item
-	 */
-	private function getSimpleOrderItemByProductId($productId) {
-		df_param_integer($productId, 0);
-		df_param_between($productId, 0, 1);
-		/** @var \Mage_Sales_Model_Order_Item $result */
-		$result = dfa($this->getMapFromProductIdToSimpleOrderItem(), $productId);
-		df_assert($result instanceof \Mage_Sales_Model_Order_Item);
-		return $result;
-	}
+	private function getProductIdsToUpdate() {return dfc($this, function() {return
+		array_intersect($this->getProductIdsFromMagentoOrder(), $this->getProductIdsFrom1COrder())
+	;});}
 
 	/** @return void */
 	private function orderItemsAdd() {
-		$this->orderItemsProcess(
-			$this->getProductIdsToAdd(), \Df\C1\Cml2\Import\Processor\Order\Item\Add::class
-		);
-	}
-
-	/** @return void */
-	private function orderItemsDelete() {
-//		$this
-//			->orderItemsProcess(
-//				$this->getProductIdsToDelete()
-//				,
-//				\Df\C1\Cml2\Import\Processor\Order\Item\Delete::class
-//			)
-//		;
-		foreach ($this->getProductIdsToDelete() as $productId) {
-			/** @var int $productId */
-			df_assert_integer($productId);
-			df_assert_gt0($productId);
-			/** @var \Mage_Sales_Model_Order_Item $orderItem */
-//			$orderItem = $this->getSimpleOrderItemByProductId($productId);
-			/** @var \Df\C1\Cml2\Import\Processor\Order\Item $processor */
-//			$processor =
-//				df_model(
-//					$processorClassMf
-//					,
-//					array(
-//						\Df\C1\Cml2\Import\Processor\Order\Item\Add
-//							::P__ENTITY_ORDER => $this->getEntity()
-//						,
-//						\Df\C1\Cml2\Import\Processor\Order\Item\Add::P__ENTITY =>
-//							$this->getEntity()->getItems()->getItemByProductId($productId)
-//					)
-//				)
-//			;
-//
-//			df_assert($processor instanceof \Df\C1\Cml2\Import\Processor\Order\Item);
-//
-//			$processor->process();
-		}
+		$this->orderItemsProcess($this->getProductIdsToAdd(), Order\Item\Add::class);
 	}
 
 	/**
@@ -232,14 +144,11 @@ class Order extends \Df\C1\Cml2\Import\Processor {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Order::class);
+		$this->_prop(self::$P__ENTITY, EntityOrder::class);
 	}
 	/**
-	 * @static
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Order $order
-	 * @return \Df\C1\Cml2\Import\Processor\Order
+	 * @param EntityOrder $order
+	 * @return self
 	 */
-	public static function i(\Df\C1\Cml2\Import\Data\Entity\Order $order) {
-		return new self(array(self::$P__ENTITY => $order));
-	}
+	public static function i(EntityOrder $order) {return new self([self::$P__ENTITY => $order]);}
 }

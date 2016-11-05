@@ -25,6 +25,6 @@ class Df_PromoGift_Model_Settings extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_promotion/gifts/';}
-	/** @return Df_PromoGift_Model_Settings */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

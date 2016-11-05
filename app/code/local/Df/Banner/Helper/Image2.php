@@ -316,6 +316,6 @@ class Df_Banner_Helper_Image2 extends Mage_Core_Helper_Abstract {
 		return false;
 	}
 
-	/** @return Df_Banner_Helper_Image2 */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

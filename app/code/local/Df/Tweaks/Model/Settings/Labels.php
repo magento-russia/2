@@ -23,6 +23,6 @@ class Df_Tweaks_Model_Settings_Labels extends Df_Core_Model_Settings {
 		return $this->{__METHOD__}[$keyPrefix];
 	}
 
-	/** @return Df_Tweaks_Model_Settings_Labels */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

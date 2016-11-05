@@ -110,6 +110,6 @@ class Df_Logging_Model_Archive extends Df_Core_Model {
 	 * @return Df_Logging_Model_Archive
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Logging_Model_Archive */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

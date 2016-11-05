@@ -130,6 +130,6 @@ class Df_Core_Helper_Mage extends Mage_Core_Helper_Abstract {
 	public function wishlistHelper() {return Mage::helper('wishlist');}
 	/** @return Mage_XmlConnect_Helper_Data */
 	public function xmlConnectHelper() {return Mage::helper('xmlconnect');}
-	/** @return Df_Core_Helper_Mage */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

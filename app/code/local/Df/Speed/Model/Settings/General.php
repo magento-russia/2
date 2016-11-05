@@ -15,6 +15,6 @@ class Df_Speed_Model_Settings_General extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_speed/general/';}
-	/** @return Df_Speed_Model_Settings_General */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

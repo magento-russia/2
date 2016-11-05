@@ -58,6 +58,6 @@ class Df_Logging_Model_Event extends Df_Core_Model {
 	 * @return Df_Logging_Model_Event
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/** @return Df_Logging_Model_Event */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -264,6 +264,6 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 	 * @used-by Df_Reward_Setup_2_20_6::_process()
 	 */
 	const TABLE = 'df_reward/reward_history';
-	/** @return Df_Reward_Model_Resource_Reward_History */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -12,6 +12,6 @@ class Df_Customer_Model_Resource_Group extends Mage_Customer_Model_Entity_Group 
 		);
 		return $this;
 	}
-	/** @return Df_Customer_Model_Resource_Group */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

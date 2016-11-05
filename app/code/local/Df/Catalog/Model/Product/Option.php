@@ -63,6 +63,6 @@ class Df_Catalog_Model_Product_Option extends Mage_Catalog_Model_Product_Option 
 	 * @return Df_Catalog_Model_Product_Option
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/** @return Df_Catalog_Model_Product_Option */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

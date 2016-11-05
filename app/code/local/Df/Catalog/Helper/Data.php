@@ -6,6 +6,6 @@ class Df_Catalog_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function check() {return Df_Catalog_Helper_Check::s();}
 	/** @return Df_Catalog_Helper_Product */
 	public function product() {return Df_Catalog_Helper_Product::s();}
-	/** @return Df_Catalog_Helper_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

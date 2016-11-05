@@ -101,6 +101,6 @@ class Df_Core_Model_Units_Length extends Df_Core_Model {
 	const VALUE__CENTIMETRE = 'centimetre';
 	const VALUE__METRE = 'metre';
 	const VALUE__MILLIMETRE = 'millimetre';
-	/** @return Df_Core_Model_Units_Length */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

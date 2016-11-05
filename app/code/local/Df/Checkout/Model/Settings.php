@@ -53,6 +53,6 @@ class Df_Checkout_Model_Settings extends Df_Core_Model_Settings {
 	}
 
 	const DEFAULT_APPLICABILITY_CODE = '1'; // 1 - optional
-	/** @return Df_Checkout_Model_Settings */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -207,6 +207,6 @@ class Df_Chronopay_Model_Gate extends Mage_Payment_Model_Method_Cc {
 	const FIELD__CLIENT_LOCAL_TIME = 'client_local_time';
 	const FIELD__CLIENT_SCREEN_RESOLUTION = 'client_screen_resolution';
 
-	/** @return Df_Chronopay_Model_Gate */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

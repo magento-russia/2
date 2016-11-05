@@ -21,6 +21,6 @@ class Df_Customer_Model_Resource_Group_Collection extends Mage_Customer_Model_En
 	protected function _construct() {$this->_itemObjectClass = Df_Customer_Model_Group::class;}
 
 
-	/** @return Df_Customer_Model_Resource_Group_Collection */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

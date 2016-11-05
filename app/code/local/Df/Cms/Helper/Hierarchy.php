@@ -69,6 +69,6 @@ class Df_Cms_Helper_Hierarchy extends Mage_Core_Helper_Abstract {
 		return isset($default[$field][$value]) ? $default[$field][$value] : null;
 	}
 
-	/** @return Df_Cms_Helper_Hierarchy */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

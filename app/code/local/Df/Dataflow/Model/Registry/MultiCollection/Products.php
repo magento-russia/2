@@ -10,6 +10,6 @@ class Df_Dataflow_Model_Registry_MultiCollection_Products
 		return Df_Dataflow_Model_Registry_Collection_Products::s($store);
 	}
 
-	/** @return Df_Dataflow_Model_Registry_MultiCollection_Products */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

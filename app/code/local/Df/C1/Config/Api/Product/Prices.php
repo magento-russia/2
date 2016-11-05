@@ -34,6 +34,6 @@ class Prices extends \Df\C1\Config\Api\Cml2 {
 		return $this->{__METHOD__};
 	}
 
-	/** @return \Df\C1\Config\Api\Product\Prices */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

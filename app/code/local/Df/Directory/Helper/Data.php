@@ -245,6 +245,6 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 		return $regions;
 	}
 
-	/** @return Df_Directory_Helper_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

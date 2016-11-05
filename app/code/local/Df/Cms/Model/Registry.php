@@ -50,7 +50,7 @@ class Df_Cms_Model_Registry extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Cms_Model_Registry */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
 

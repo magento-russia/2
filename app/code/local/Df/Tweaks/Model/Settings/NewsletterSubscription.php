@@ -15,6 +15,6 @@ class Df_Tweaks_Model_Settings_NewsletterSubscription extends Df_Core_Model_Sett
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_tweaks/newsletter_subscription/remove_from_';}
-	/** @return Df_Tweaks_Model_Settings_NewsletterSubscription */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

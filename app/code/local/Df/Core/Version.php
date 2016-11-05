@@ -133,6 +133,6 @@ class Version {
 		return $result;
 	}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

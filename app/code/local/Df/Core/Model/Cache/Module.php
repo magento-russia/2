@@ -38,6 +38,6 @@ class Df_Core_Model_Cache_Module extends Df_Core_Model {
 
 	/** @var string */
 	private static $F__CACHE = '_cache';
-	/** @return Df_Core_Model_Cache_Module */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

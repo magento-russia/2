@@ -10,7 +10,7 @@ class Df_Banner_Model_Status extends Varien_Object {
 			,self::STATUS_DISABLED => df_h()->banner()->__('Disabled')
 		);
 	}
-	/** @return Df_Banner_Model_Status */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 	/**
 	 * 2015-01-31

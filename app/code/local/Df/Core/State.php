@@ -259,6 +259,6 @@ class Df_Core_State {
 	 */
 	private $_storeProcessed;
 
-	/** @return Df_Core_State */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

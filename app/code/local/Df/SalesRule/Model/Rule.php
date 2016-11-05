@@ -38,6 +38,6 @@ class Df_SalesRule_Model_Rule extends Mage_SalesRule_Model_Rule {
 	const BY_PERCENT_ACTION = 'by_percent';
 	/** @return Df_SalesRule_Model_Resource_Rule_Collection */
 	public static function c() {return new Df_SalesRule_Model_Resource_Rule_Collection;}
-	/** @return Df_SalesRule_Model_Rule */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

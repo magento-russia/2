@@ -54,6 +54,6 @@ class Df_Core_Model_Units_Weight extends Df_Core_Model {
 	const VALUE__GRAM = 'gram';
 	const VALUE__KILOGRAM = 'kilogram';
 
-	/** @return Df_Core_Model_Units_Weight */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

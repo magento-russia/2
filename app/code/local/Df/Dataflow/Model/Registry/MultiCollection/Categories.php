@@ -10,6 +10,6 @@ class Df_Dataflow_Model_Registry_MultiCollection_Categories extends
 		return Df_Dataflow_Model_Registry_Collection_Categories::s($store);
 	}
 
-	/** @return Df_Dataflow_Model_Registry_MultiCollection_Categories */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

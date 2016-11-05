@@ -302,6 +302,6 @@ class Import extends \Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return \Df\C1\Cml2\State\Import */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

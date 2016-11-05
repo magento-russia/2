@@ -91,6 +91,6 @@ class ByIp extends \Df_Core_Model_Session_Custom_Additional {
 	/** @var string */
 	private static $P__FILE_MAPS = 'file_maps';
 
-	/** @return \Df\C1\Cml2\Session\ByIp */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

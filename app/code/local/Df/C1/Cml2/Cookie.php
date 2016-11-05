@@ -32,6 +32,6 @@ class Cookie {
 	 */
 	const SESSION_ID = 'df_c1_cml2_sessionId';
 
-	/** @return \Df\C1\Cml2\Cookie */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

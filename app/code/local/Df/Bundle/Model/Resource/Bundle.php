@@ -12,6 +12,6 @@ class Df_Bundle_Model_Resource_Bundle extends Mage_Bundle_Model_Resource_Bundle 
 		df_table_delete('bundle/option', 'parent_id', $productId);
 	}
 
-	/** @return Df_Bundle_Model_Resource_Bundle */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

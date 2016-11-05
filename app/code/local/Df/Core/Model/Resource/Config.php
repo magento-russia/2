@@ -73,6 +73,6 @@ class Df_Core_Model_Resource_Config extends Df_Core_Model_Resource_ConfigM {
 		}
 	}
 
-	/** @return Df_Core_Model_Resource_Config */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

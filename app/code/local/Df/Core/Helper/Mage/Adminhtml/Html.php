@@ -6,6 +6,6 @@ class Df_Core_Helper_Mage_Adminhtml_Html extends Mage_Core_Helper_Abstract {
 	}
 
 
-	/** @return Df_Core_Helper_Mage_Adminhtml_Html */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

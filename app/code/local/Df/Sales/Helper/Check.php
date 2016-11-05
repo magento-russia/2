@@ -24,6 +24,6 @@ class Df_Sales_Helper_Check extends Mage_Core_Helper_Abstract {
 		$c instanceof Mage_Sales_Model_Resource_Quote_Address_Item_Collection
 	;}
 
-	/** @return Df_Sales_Helper_Check */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

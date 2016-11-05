@@ -153,6 +153,6 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 		return $this;
 	}
 
-	/** @return Df_Admin_Model_ClassRewrite_Finder */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

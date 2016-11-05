@@ -13,6 +13,6 @@ class Df_PromoGift_Model_Resource_Gift extends Df_Core_Model_Resource {
 	 * @used-by Df_PromoGift_Setup_1_0_0::_process()
 	 */
 	const TABLE = 'df_promo_gift/gift';
-	/** @return Df_PromoGift_Model_Resource_Gift */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

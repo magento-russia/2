@@ -33,6 +33,6 @@ class Df_Invitation_Model_Source_Invitation_Status extends Df_Core_Model {
 	}
 
 
-	/** @return Df_Invitation_Model_Source_Invitation_Status */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

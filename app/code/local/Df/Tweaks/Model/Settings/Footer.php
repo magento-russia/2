@@ -13,6 +13,6 @@ class Df_Tweaks_Model_Settings_Footer extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_tweaks/footer/';}
-	/** @return Df_Tweaks_Model_Settings_Footer */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -114,6 +114,6 @@ class Df_Review_Model_Review extends Mage_Review_Model_Review {
 	 * @return Df_Review_Model_Review
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Review_Model_Review */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

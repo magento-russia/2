@@ -623,6 +623,6 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @used-by Df_Cms_Setup_2_0_1::_process()
 	 */
 	const TABLE_META_DATA = 'df_cms/hierarchy_metadata';
-	/** @return Df_Cms_Model_Resource_Hierarchy_Node */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

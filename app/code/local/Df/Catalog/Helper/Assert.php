@@ -36,6 +36,6 @@ class Df_Catalog_Helper_Assert extends Mage_Core_Helper_Abstract {
 		return $this;
 	}
 
-	/** @return Df_Catalog_Helper_Assert */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

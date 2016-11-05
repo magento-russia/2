@@ -99,6 +99,6 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Catalog_Helper_Product */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

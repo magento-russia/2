@@ -14,6 +14,6 @@ class Df_Checkout_Model_Settings_Field extends Df_Core_Model_Settings {
 		return $this->{__METHOD__}[$addressType];
 	}
 
-	/** @return Df_Checkout_Model_Settings_Field */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

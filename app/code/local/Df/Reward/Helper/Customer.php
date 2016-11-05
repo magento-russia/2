@@ -16,6 +16,6 @@ class Df_Reward_Helper_Customer extends Mage_Core_Helper_Abstract {
 		return Mage::getUrl('df_reward/customer/unsubscribe/', array('notification' => $notification));
 	}
 
-	/** @return Df_Reward_Helper_Customer */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

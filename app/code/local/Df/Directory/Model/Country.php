@@ -146,6 +146,6 @@ class Df_Directory_Model_Country extends Mage_Directory_Model_Country {
 	 * @return Df_Directory_Model_Country
 	 */
 	public static function ld($isoCode) {return df_country($isoCode);}
-	/** @return Df_Directory_Model_Country */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

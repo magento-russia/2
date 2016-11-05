@@ -20,6 +20,6 @@ class Df_Seo_Helper_Product_Image_Batch_Processor extends Mage_Core_Helper_Abstr
 
 
 
-	/** @return Df_Seo_Helper_Product_Image_Batch_Processor */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

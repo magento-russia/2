@@ -30,6 +30,6 @@ class Df_Directory_Model_Finder_CallingCode extends Df_Core_Model {
 		return $this->{__METHOD__}[$iso3][$key];
 	}
 
-	/** @return Df_Directory_Model_Finder_CallingCode */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

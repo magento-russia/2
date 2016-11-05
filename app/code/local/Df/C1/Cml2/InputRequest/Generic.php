@@ -2,27 +2,23 @@
 namespace Df\C1\Cml2\InputRequest;
 class Generic extends \Df_Core_Model_InputRequest {
 	/** @return string */
-	public function getMode() {
-		return $this->getParamFromRange('mode', array(
-			self::$MODE__CHECK_AUTH
-			,self::MODE__DEACTIVATE
-			,self::MODE__FILE
-			,self::MODE__IMPORT
-			,self::MODE__INIT
-			,self::MODE__QUERY
-			,self::MODE__SUCCESS
-		));
-	}
+	public function getMode() {return $this->getParamFromRange('mode', [
+		self::$MODE__CHECK_AUTH
+		,self::MODE__DEACTIVATE
+		,self::MODE__FILE
+		,self::MODE__IMPORT
+		,self::MODE__INIT
+		,self::MODE__QUERY
+		,self::MODE__SUCCESS
+	]);}
 
 	/** @return string */
-	public function getType() {
-		return $this->getParamFromRange('type', array(
-			self::TYPE__CATALOG
-			,self::TYPE__GET_CATALOG
-			,self::TYPE__ORDERS
-			,self::TYPE__REFERENCE
-		));
-	}
+	public function getType() {return $this->getParamFromRange('type', [
+		self::TYPE__CATALOG
+		,self::TYPE__GET_CATALOG
+		,self::TYPE__ORDERS
+		,self::TYPE__REFERENCE
+	]);}
 
 	/** @return bool */
 	public function isCheckAuth() {return self::$MODE__CHECK_AUTH === $this->getMode();}

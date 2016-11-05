@@ -7,6 +7,6 @@ class Df_Cms_Model_Source_Hierarchy_Menu_Listtype {
 			,'1' => df_h()->cms()->__('Ordered')
 		);
 	}
-	/** @return Df_Cms_Model_Source_Hierarchy_Menu_Listtype */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

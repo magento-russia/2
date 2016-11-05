@@ -4,6 +4,6 @@ class Df_Core_Helper_Mage_Catalog_Category extends Mage_Core_Helper_Abstract {
 	public function flatHelper() {return Mage::helper('catalog/category_flat');}
 
 
-	/** @return Df_Core_Helper_Mage_Catalog_Category */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -7,6 +7,6 @@ class Df_Vk_Model_Settings_Widget_Like extends Df_Vk_Model_Settings_Widget {
 	protected function getWidgetType() {
 		return 'like';
 	}
-	/** @return Df_Vk_Model_Settings_Widget_Like */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

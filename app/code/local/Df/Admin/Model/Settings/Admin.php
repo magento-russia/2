@@ -16,6 +16,6 @@ class Df_Admin_Model_Settings_Admin extends Df_Core_Model_Settings {
 	public function sales() {return Df_Admin_Model_Settings_Admin_Sales::s();}
 	/** @return Df_Admin_Model_Settings_Admin_System */
 	public function system() {return Df_Admin_Model_Settings_Admin_System::s();}
-	/** @return Df_Admin_Model_Settings_Admin */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

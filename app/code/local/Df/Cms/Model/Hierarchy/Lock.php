@@ -142,6 +142,6 @@ class Df_Cms_Model_Hierarchy_Lock extends Df_Core_Model {
 	 * @return Df_Cms_Model_Hierarchy_Lock
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/** @return Df_Cms_Model_Hierarchy_Lock */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

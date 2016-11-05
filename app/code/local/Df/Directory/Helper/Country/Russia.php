@@ -35,6 +35,6 @@ class Df_Directory_Helper_Country_Russia extends Df_Directory_Helper_Country {
 		return !is_null(dfa($this->getMapFromCenterToRegion(), mb_strtoupper($locationName)));
 	}
 
-	/** @return Df_Directory_Helper_Country_Russia */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

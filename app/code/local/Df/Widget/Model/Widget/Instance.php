@@ -71,6 +71,6 @@ class Df_Widget_Model_Widget_Instance extends Mage_Widget_Model_Widget_Instance 
 	public static function c($forUpdating = false) {
 		return Df_Widget_Model_Resource_Widget_Instance_Collection::i($forUpdating);
 	}
-	/** @return Df_Widget_Model_Widget_Instance */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

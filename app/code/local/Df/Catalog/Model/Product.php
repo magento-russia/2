@@ -1251,6 +1251,6 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 		 */
 		df_h()->index()->reindex('catalog_product_flat');
 	}
-	/** @return Df_Catalog_Model_Product */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

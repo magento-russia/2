@@ -106,6 +106,6 @@ class Df_Localization_Realtime_Translator extends Df_Core_Model {
 		return !$configNode ? null : df_leaf_sne($configNode);
 	}
 
-	/** @return Df_Localization_Realtime_Translator */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -12,6 +12,6 @@ class Df_Admin_Helper_Data extends Mage_Adminhtml_Helper_Data {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Admin_Helper_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

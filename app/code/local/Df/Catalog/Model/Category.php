@@ -384,7 +384,7 @@ class Df_Catalog_Model_Category extends Mage_Catalog_Model_Category {
 		df_h()->index()->reindex('catalog_category_flat');
 	}
 
-	/** @return Df_Catalog_Model_Category */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
 	/**

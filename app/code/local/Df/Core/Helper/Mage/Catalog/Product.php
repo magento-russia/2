@@ -16,6 +16,6 @@ class Df_Core_Helper_Mage_Catalog_Product extends Mage_Core_Helper_Abstract {
 	}
 
 
-	/** @return Df_Core_Helper_Mage_Catalog_Product */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

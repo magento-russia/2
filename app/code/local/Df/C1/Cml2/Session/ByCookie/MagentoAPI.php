@@ -33,6 +33,6 @@ class MagentoAPI extends \Mage_Api_Model_Session {
 		\Mage::register('_singleton/api/session', $this);
 	}
 
-	/** @return \Df\C1\Cml2\Session\ByCookie\MagentoAPI */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -19,6 +19,6 @@ class Df_Seo_Model_Settings_Urls extends Df_Core_Model_Settings {
 	public function needRedirectToCanonicalProductUrl() {
 		return $this->getYesNo('df_seo/urls/redirect_to_canonical_product_url');
 	}
-	/** @return Df_Seo_Model_Settings_Urls */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

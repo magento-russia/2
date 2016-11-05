@@ -351,6 +351,6 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 	 */
 	const XML_PATH_SKIP_GLOBAL_FIELDS = 'adminhtml/df/logging/skip_fields';
 
-	/** @return Df_Logging_Model_Processor */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

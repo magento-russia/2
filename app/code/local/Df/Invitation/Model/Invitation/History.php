@@ -39,6 +39,6 @@ class Df_Invitation_Model_Invitation_History extends Df_Core_Model {
 	 * @return Df_Invitation_Model_Invitation_History
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Invitation_Model_Invitation_History */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

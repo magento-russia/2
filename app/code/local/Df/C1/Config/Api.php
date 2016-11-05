@@ -11,6 +11,6 @@ class Api extends \Df_Core_Model_Settings {
 	public function product() {return \Df\C1\Config\Api\Product::s();}
 	/** @return \Df\C1\Config\Api\ReferenceLists */
 	public function referenceLists() {return \Df\C1\Config\Api\ReferenceLists::s();}
-	/** @return \Df\C1\Config\Api */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

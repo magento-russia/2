@@ -81,6 +81,6 @@ class Df_Cms_Model_Config extends Df_Core_Model {
 		,'custom_theme_from'
 		,'custom_theme_to'
 	));
-	/** @return Df_Cms_Model_Config */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

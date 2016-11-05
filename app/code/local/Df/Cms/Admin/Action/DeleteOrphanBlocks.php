@@ -14,6 +14,6 @@ class Df_Cms_Admin_Action_DeleteOrphanBlocks extends Df_Core_Model_Action_Admin 
 		df_cache_clean();
 	}
 
-	/** @return Df_Cms_Admin_Action_DeleteOrphanBlocks */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

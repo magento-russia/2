@@ -56,6 +56,6 @@ class Df_Directory_Helper_Country extends Mage_Core_Helper_Abstract {
 	const ISO_2_CODE__UKRAINE = 'UA';
 	const ISO_2_CODE__USA = 'US';
 
-	/** @return Df_Directory_Helper_Country */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

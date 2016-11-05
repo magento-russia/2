@@ -75,6 +75,6 @@ class Df_Core_Model_Store extends Df_Core_Model_StoreM {
 	 * @return Df_Core_Model_Store
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Core_Model_Store */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

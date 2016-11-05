@@ -21,6 +21,6 @@ class Df_Accounting_Settings_Vat extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_accounting/vat/';}
-	/** @return Df_Accounting_Settings_Vat */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

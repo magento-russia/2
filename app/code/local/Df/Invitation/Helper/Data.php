@@ -124,6 +124,6 @@ class Df_Invitation_Helper_Data extends Mage_Core_Helper_Abstract {
 		return $this->config()->isEnabled();
 	}
 
-	/** @return Df_Invitation_Helper_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

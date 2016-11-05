@@ -30,6 +30,6 @@ class Df_Parser_Model_Category_Tree extends Df_Varien_Data_Tree {
 	 * @return Df_Parser_Model_Category_Tree
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Parser_Model_Category_Tree */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

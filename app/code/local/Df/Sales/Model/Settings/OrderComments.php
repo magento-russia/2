@@ -33,6 +33,6 @@ class Df_Sales_Model_Settings_OrderComments extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_sales/order_comments/';}
-	/** @return Df_Sales_Model_Settings_OrderComments */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

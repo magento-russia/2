@@ -16,6 +16,6 @@ class Df_Localization_Translation_Db extends Df_Core_Model {
 	private function getCoreTranslateResource() {
 		return df_mage()->core()->translateSingleton()->getResource();
 	}
-	/** @return Df_Localization_Translation_Db */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

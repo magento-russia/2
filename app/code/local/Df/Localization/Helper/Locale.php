@@ -17,6 +17,6 @@ class Df_Localization_Helper_Locale extends Mage_Core_Helper_Abstract {
 
 	const SEPARATOR = '_';
 
-	/** @return Df_Localization_Helper_Locale */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

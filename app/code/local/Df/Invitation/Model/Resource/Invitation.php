@@ -26,6 +26,6 @@ class Df_Invitation_Model_Resource_Invitation extends Df_Core_Model_Resource {
 	protected function _construct() {$this->_init(self::TABLE, Df_Invitation_Model_Invitation::P__ID);}
 	/** @used-by Df_Invitation_Setup_1_0_0::_process() */
 	const TABLE = 'df_invitation/invitation';
-	/** @return Df_Invitation_Model_Resource_Invitation */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -11,6 +11,6 @@ class Df_Cms_Model_Source_Hierarchy_Visibility {
 			,Df_Cms_Helper_Hierarchy::METADATA_VISIBILITY_NO => df_h()->cms()->__('No')
 		);
 	}
-	/** @return Df_Cms_Model_Source_Hierarchy_Visibility */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

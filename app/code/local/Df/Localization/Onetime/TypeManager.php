@@ -78,6 +78,6 @@ class Df_Localization_Onetime_TypeManager extends Df_Core_Model {
 		$batchException->throwIfNeeed();
 	}
 
-	/** @return Df_Localization_Onetime_TypeManager */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

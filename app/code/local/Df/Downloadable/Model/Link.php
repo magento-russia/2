@@ -48,6 +48,6 @@ class Df_Downloadable_Model_Link extends Mage_Downloadable_Model_Link {
 	 * @return Df_Downloadable_Model_Link
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Downloadable_Model_Link */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

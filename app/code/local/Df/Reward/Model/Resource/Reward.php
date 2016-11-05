@@ -130,6 +130,6 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 	 * @used-by Df_Reward_Setup_1_0_1::_process()
 	 */
 	const TABLE = 'df_reward/reward';
-	/** @return Df_Reward_Model_Resource_Reward */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

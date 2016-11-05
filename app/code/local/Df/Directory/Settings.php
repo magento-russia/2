@@ -21,6 +21,6 @@ class Df_Directory_Settings extends Df_Core_Model_Settings {
 	/** @return Df_Directory_Settings_Regions */
 	public function regionsUa() {return $this->getRegions('UA');}
 
-	/** @return Df_Directory_Settings */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

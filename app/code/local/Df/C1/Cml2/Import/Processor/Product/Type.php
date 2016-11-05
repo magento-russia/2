@@ -521,44 +521,39 @@ abstract class Type extends \Df\C1\Cml2\Import\Processor\Product {
 	});}
 
 	/** @return mixed[] */
-	private function getTierPricesInImporterFormat() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var mixed[] $result  */
-			$result = [];
-			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price|null $mainPrice */
-			$mainPrice = $this->getEntityOffer()->getPrices()->getMain();
-			foreach ($this->getEntityOffer()->getPrices()->getItems() as $price) {
-				/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price $price */
-				if (is_null($mainPrice) || ($price->getId() !== $mainPrice->getId())) {
-					/** @var int|null $customerGroupId */
-					$customerGroupId = $price->getPriceType()->getCustomerGroupId();
-					if ($customerGroupId) {
-						/** @var string $groupPriceKey */
-						$groupPriceKey = implode('_', array(
-							'rm_tier_price', $this->store()->getWebsiteId(), $customerGroupId, 1
-						));
-						$result[$groupPriceKey] = $price->getPriceBase();
-					}
+	private function getTierPricesInImporterFormat() {return dfc($this, function() {
+		/** @var mixed[] $result  */
+		$result = [];
+		/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price|null $mainPrice */
+		$mainPrice = $this->getEntityOffer()->getPrices()->getMain();
+		foreach ($this->getEntityOffer()->getPrices()->getItems() as $price) {
+			/** @var \Df\C1\Cml2\Import\Data\Entity\OfferPart\Price $price */
+			if (is_null($mainPrice) || ($price->getId() !== $mainPrice->getId())) {
+				/** @var int|null $customerGroupId */
+				$customerGroupId = $price->getPriceType()->getCustomerGroupId();
+				if ($customerGroupId) {
+					/** @var string $groupPriceKey */
+					$groupPriceKey = implode('_', array(
+						'rm_tier_price', $this->store()->getWebsiteId(), $customerGroupId, 1
+					));
+					$result[$groupPriceKey] = $price->getPriceBase();
 				}
 			}
-			$this->{__METHOD__} = $result;
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/** @return string */
-	private function getVisibilityAsString() {
-		return dfa(\Mage_Catalog_Model_Product_Visibility::getOptionArray(), $this->getVisibility());
-	}
+	private function getVisibilityAsString() {return
+		dfa(\Mage_Catalog_Model_Product_Visibility::getOptionArray(), $this->getVisibility())
+	;}
 
 	/**
 	 * 2015-08-09
 	 * @used-by getProductDataNewOrUpdateBase()
 	 * @return int|string
 	 */
-	private function taxClassId() {
-		/** @var int|null $result */
-		$result = $this->getEntityProduct()->taxClassId();
-		return $result ? $result : df_tax_h()->__('None');
-	}
+	private function taxClassId() {return
+		$this->getEntityProduct()->taxClassId() ?: df_tax_h()->__('None')
+	;}
 }

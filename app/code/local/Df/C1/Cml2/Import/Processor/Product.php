@@ -1,7 +1,8 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
 abstract class Product extends \Df\C1\Cml2\Import\Processor {
-	/** @return \Df\C1\Cml2\Import\Data\Entity\Offer */
+	/** @return Offer */
 	protected function getEntityOffer() {return $this->getEntity();}
 	
 	/** @return \Df\C1\Cml2\Import\Data\Entity\Product */
@@ -39,7 +40,7 @@ abstract class Product extends \Df\C1\Cml2\Import\Processor {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ENTITY, \Df\C1\Cml2\Import\Data\Entity\Offer::class);
+		$this->_prop(self::$P__ENTITY, Offer::class);
 	}
 
 	/**
@@ -51,10 +52,10 @@ abstract class Product extends \Df\C1\Cml2\Import\Processor {
 	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\NewT::p_new()
 	 * @used-by \Df\C1\Cml2\Import\Processor\Product\Type\Configurable\Update::p_update()
 	 * @param string $class
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
+	 * @param Offer $offer
 	 * @return \Df\C1\Cml2\Import\Processor\Product
 	 */
-	protected static function ic($class, \Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		return df_ic($class, __CLASS__, array(self::$P__ENTITY => $offer));
-	}
+	protected static function ic($class, Offer $offer) {return
+		df_ic($class, __CLASS__, [self::$P__ENTITY => $offer])
+	;}
 }

@@ -22,6 +22,6 @@ class Df_Localization_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	const TRANSLATION_LIST__LANGUAGE = 'language';
 
-	/** @return Df_Localization_Helper_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -24,6 +24,6 @@ class Df_Directory_Model_Resource_Region extends Mage_Directory_Model_Resource_R
 	 * @used-by Df_Directory_Setup_Processor_Region::getTableRegionName()
 	 */
 	const TABLE__NAME = 'directory/country_region_name';
-	/** @return Df_Directory_Model_Resource_Region */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -31,6 +31,6 @@ class Df_Tweaks_Model_Settings_Catalog_Product_View_Sku extends Df_Core_Model_Se
 	const CONFIG_GROUP_PATH = 'df_tweaks/catalog_product_view_sku';
 	const CONFIG_KEY_PREFIX__LABEL = 'label';
 	const CONFIG_KEY_PREFIX__SKU = 'sku';
-	/** @return Df_Tweaks_Model_Settings_Catalog_Product_View_Sku */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

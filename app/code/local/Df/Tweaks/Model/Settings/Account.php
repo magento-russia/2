@@ -35,6 +35,6 @@ class Df_Tweaks_Model_Settings_Account extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_tweaks/account/';}
-	/** @return Df_Tweaks_Model_Settings_Account */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

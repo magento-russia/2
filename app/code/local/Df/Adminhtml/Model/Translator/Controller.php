@@ -33,6 +33,6 @@ class Df_Adminhtml_Model_Translator_Controller extends Df_Core_Model {
 		return $this->{__METHOD__}[$controllerClass];
 	}
 
-	/** @return Df_Adminhtml_Model_Translator_Controller */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -13,6 +13,6 @@ class Df_Tweaks_Model_Settings_Poll extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_tweaks/poll/remove_from_';}
-	/** @return Df_Tweaks_Model_Settings_Poll */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

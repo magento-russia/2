@@ -52,6 +52,6 @@ class Df_Cms_Model_Hierarchy_Config {
 
 	const XML_PATH_CONTEXT_MENU_LAYOUTS = 'global/df_cms/hierarchy/menu/layouts';
 
-	/** @return Df_Cms_Model_Hierarchy_Config */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

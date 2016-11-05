@@ -9,6 +9,6 @@ class Product extends \Df\C1\Config\Api\Cml2 {
 	public function other() {return \Df\C1\Config\Api\Product\Other::s();}
 	/** @return \Df\C1\Config\Api\Product\Prices */
 	public function prices() {return \Df\C1\Config\Api\Product\Prices::s();}
-	/** @return \Df\C1\Config\Api\Product */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

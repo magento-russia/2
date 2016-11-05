@@ -24,6 +24,6 @@ class Df_PageCache_Model_Resource_Crawler extends Df_Core_Model_Resource {
 		// Эта ресурсная модель действительно работает с таблицей core_url_rewrite
 		$this->_init(Df_Catalog_Model_Resource_Url::TABLE, Df_Core_Model_Url_Rewrite::P__ID);
 	}
-	/** @return Df_PageCache_Model_Resource_Crawler */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

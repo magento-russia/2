@@ -35,6 +35,6 @@ class Df_Core_Model_Store_Group extends Mage_Core_Model_Store_Group {
 	 * @return Df_Core_Model_Store_Group
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Core_Model_Store_Group */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

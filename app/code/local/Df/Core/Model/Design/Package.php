@@ -40,6 +40,6 @@ class Df_Core_Model_Design_Package extends Df_Core_Model {
 	const PACKAGE_PARAM__DEFAULT_ROUTE = 'default-route';
 	const PACKAGE_PARAM__VERSION = 'version';
 
-	/** @return Df_Core_Model_Design_Package */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

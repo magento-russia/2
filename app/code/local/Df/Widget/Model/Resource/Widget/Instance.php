@@ -11,6 +11,6 @@ class Df_Widget_Model_Resource_Widget_Instance extends Mage_Widget_Model_Resourc
 		return $this;
 	}
 
-	/** @return Df_Widget_Model_Resource_Widget_Instance */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

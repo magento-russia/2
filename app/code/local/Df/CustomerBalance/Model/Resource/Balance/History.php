@@ -36,6 +36,6 @@ class Df_CustomerBalance_Model_Resource_Balance_History extends Df_Core_Model_Re
 	}
 	/** @used-by Df_CustomerBalance_Setup_1_0_0::_process() */
 	const TABLE = 'df_customerbalance/balance_history';
-	/** @return Df_CustomerBalance_Model_Resource_Balance_History */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

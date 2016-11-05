@@ -47,6 +47,6 @@ class Df_Poll_Model_Poll extends Mage_Poll_Model_Poll {
 	public static function c($loadStoresInfo = false) {
 		return Df_Poll_Model_Resource_Poll_Collection::i($loadStoresInfo);
 	}
-	/** @return Df_Poll_Model_Poll */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

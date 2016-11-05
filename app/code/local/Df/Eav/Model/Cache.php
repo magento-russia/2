@@ -36,6 +36,6 @@ class Df_Eav_Model_Cache extends Df_Core_Model_Cache {
 	 */
 	protected function getType() {return 'eav';}
 
-	/** @return Df_Eav_Model_Cache */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -18,6 +18,6 @@ class Df_Directory_Settings_Countries_EACU extends Df_Core_Model_Settings {
 	 */
 	protected function getKeyPrefix() {return 'df_directory/countries_eacu/';}
 
-	/** @return Df_Directory_Settings_Countries_EACU */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

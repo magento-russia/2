@@ -81,6 +81,6 @@ class Df_Invitation_Model_Config {
 		return false;
 	}
 
-	/** @return Df_Invitation_Model_Config */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

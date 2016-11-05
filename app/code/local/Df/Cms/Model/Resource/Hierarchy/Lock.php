@@ -23,6 +23,6 @@ class Df_Cms_Model_Resource_Hierarchy_Lock extends Df_Core_Model_Resource {
 	protected function _construct() {$this->_init(self::TABLE, Df_Cms_Model_Hierarchy_Lock::P__ID);}
 	/** @used-by Df_Cms_Setup_2_0_0::_process() */
 	const TABLE = 'df_cms/hierarchy_lock';
-	/** @return Df_Cms_Model_Resource_Hierarchy_Lock */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

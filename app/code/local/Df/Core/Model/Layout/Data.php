@@ -20,6 +20,6 @@ class Df_Core_Model_Layout_Data extends Mage_Core_Model_Layout_Data {
 
 	/** @return Df_Core_Model_Resource_Layout_Collection */
 	public static function c() {return new Df_Core_Model_Resource_Layout_Collection;}
-	/** @return Df_Core_Model_Layout_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

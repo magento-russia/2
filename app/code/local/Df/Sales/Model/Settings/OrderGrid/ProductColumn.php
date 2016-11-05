@@ -33,6 +33,6 @@ class Df_Sales_Model_Settings_OrderGrid_ProductColumn extends Df_Core_Model_Sett
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_sales/order_grid__product_column/';}
-	/** @return Df_Sales_Model_Settings_OrderGrid_ProductColumn */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

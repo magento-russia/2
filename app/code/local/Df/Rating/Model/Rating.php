@@ -159,6 +159,6 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	 * @return Df_Rating_Model_Rating
 	 */
 	public static function i(array $parameters = array()) {return new self($parameters);}
-	/** @return Df_Rating_Model_Rating */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

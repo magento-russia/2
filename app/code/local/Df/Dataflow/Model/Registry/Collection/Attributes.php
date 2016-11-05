@@ -145,6 +145,6 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 		unset($this->{__CLASS__ . '::getMapFromCodeToEntity'}[$code]);
 	}
 
-	/** @return Df_Dataflow_Model_Registry_Collection_Attributes */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

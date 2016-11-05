@@ -76,6 +76,6 @@ class Df_Logging_Model_Archive_Collection extends Varien_Data_Collection_Filesys
 	/** @var string */
 	protected $_allowedFilesMask = '/^[a-z0-9\.\-\_]+\.csv$/i';
 
-	/** @return Df_Logging_Model_Archive_Collection */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

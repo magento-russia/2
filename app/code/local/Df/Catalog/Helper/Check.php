@@ -49,6 +49,6 @@ class Df_Catalog_Helper_Check extends Mage_Core_Helper_Abstract {
 		$c instanceof Mage_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection
 	;}
 
-	/** @return Df_Catalog_Helper_Check */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -82,6 +82,6 @@ class Df_Core_Helper_Df_Helper extends Mage_Core_Helper_Abstract {
 	public function yandexMarket() {return Df_YandexMarket_Helper_Data::s();}
 	/** @return Df_Zf_Helper_Data */
 	public function zf() {return Df_Zf_Helper_Data::s();}
-	/** @return Df_Core_Helper_Df_Helper */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

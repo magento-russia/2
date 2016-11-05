@@ -6,6 +6,6 @@ class Df_Core_Helper_Mage_Checkout extends Mage_Core_Helper_Abstract {
 	public function helper() {return df_mage()->checkoutHelper();}
 	/** @return Mage_Checkout_Helper_Url */
 	public function urlHelper() {return Mage::helper('checkout/url');}
-	/** @return Df_Core_Helper_Mage_Checkout */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

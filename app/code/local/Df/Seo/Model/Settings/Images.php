@@ -9,6 +9,6 @@ class Df_Seo_Model_Settings_Images extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_seo/images/';}
-	/** @return Df_Seo_Model_Settings_Images */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

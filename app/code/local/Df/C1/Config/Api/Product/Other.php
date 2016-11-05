@@ -10,6 +10,6 @@ class Other extends \Df\C1\Config\Api\Cml2 {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_1c/product__other/';}
-	/** @return \Df\C1\Config\Api\Product\Other */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

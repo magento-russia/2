@@ -10,6 +10,6 @@ class State {
 	/** @return \Df\C1\Cml2\State\Import */
 	public function import() {return \Df\C1\Cml2\State\Import::s();}
 
-	/** @return \Df\C1\Cml2\State */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

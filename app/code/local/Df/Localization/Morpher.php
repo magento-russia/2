@@ -66,6 +66,6 @@ class Df_Localization_Morpher extends Df_Core_Model {
 
 
 
-	/** @return Df_Localization_Morpher */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -35,6 +35,6 @@ class Df_Catalog_Model_Product_Option_Title extends Df_Core_Model {
 	 * @return Df_Catalog_Model_Product_Option_Title
 	 */
 	public static function ld($id, $field = null) {return df_load(self::i(), $id, $field);}
-	/** @return Df_Catalog_Model_Product_Option_Title */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

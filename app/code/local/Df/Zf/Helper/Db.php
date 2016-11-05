@@ -21,6 +21,6 @@ class Df_Zf_Helper_Db extends Mage_Core_Helper_Abstract {
 		return $result;
 	}
 
-	/** @return Df_Zf_Helper_Db */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

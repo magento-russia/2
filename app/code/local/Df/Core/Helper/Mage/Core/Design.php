@@ -42,6 +42,6 @@ class Df_Core_Helper_Mage_Core_Design extends Mage_Core_Helper_Abstract {
 		return $result;
 	}
 
-	/** @return Df_Core_Helper_Mage_Core_Design */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

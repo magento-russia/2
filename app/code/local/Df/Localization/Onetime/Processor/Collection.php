@@ -34,7 +34,7 @@ class Df_Localization_Onetime_Processor_Collection extends Df_Varien_Data_Collec
 		$this->uasort('compare');
 	}
 
-	/** @return Df_Localization_Onetime_Processor_Collection */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
 	/**

@@ -24,6 +24,6 @@ class CatalogExport extends \Df\C1\Config\Api\Cml2 {
 	/** @return int */
 	private function getRuleId() {return $this->nat0('product_conditions');}
 
-	/** @return \Df\C1\Config\Api\CatalogExport */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

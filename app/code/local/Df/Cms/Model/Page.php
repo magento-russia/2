@@ -114,6 +114,6 @@ class Df_Cms_Model_Page extends Mage_Cms_Model_Page {
 		return $result->getId() ? $result : null;
 	}
 
-	/** @return Df_Cms_Model_Page */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

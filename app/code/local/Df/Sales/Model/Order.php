@@ -328,6 +328,6 @@ class Df_Sales_Model_Order extends Mage_Sales_Model_Order {
 	public static function ldi($incrementId, $throwOnError = true) {
 		return self::ld($incrementId, self::P__INCREMENT_ID, $throwOnError);
 	}
-	/** @return Df_Sales_Model_Order */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

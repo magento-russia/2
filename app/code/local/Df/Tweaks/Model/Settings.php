@@ -21,6 +21,6 @@ class Df_Tweaks_Model_Settings extends Df_Core_Model_Settings {
 	public function tags() {return Df_Tweaks_Model_Settings_Tags::s();}
 	/** @return Df_Tweaks_Model_Settings_Theme */
 	public function theme() {return Df_Tweaks_Model_Settings_Theme::s();}
-	/** @return Df_Tweaks_Model_Settings */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

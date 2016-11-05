@@ -65,7 +65,7 @@ class Df_C1_Helper_Data extends Mage_Core_Helper_Abstract implements Df_Dataflow
 		df_store()->setConfig($path, $value);
 	}
 
-	/** @return Df_C1_Helper_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
 	/**

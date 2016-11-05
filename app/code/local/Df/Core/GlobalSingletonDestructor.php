@@ -28,6 +28,6 @@ class Df_Core_GlobalSingletonDestructor {
 	/** @var Df_Core_Destructable[] */
 	private $_objects = [];
 
-	/** @return Df_Core_GlobalSingletonDestructor */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

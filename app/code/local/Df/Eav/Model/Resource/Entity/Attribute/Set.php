@@ -84,6 +84,6 @@ class Df_Eav_Model_Resource_Entity_Attribute_Set extends Mage_Eav_Model_Resource
 		return array_column($rows, 'attribute_set_id', 'attribute_set_name');
 	}
 
-	/** @return Df_Eav_Model_Resource_Entity_Attribute_Set */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

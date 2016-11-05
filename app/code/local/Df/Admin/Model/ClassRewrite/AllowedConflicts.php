@@ -40,6 +40,6 @@ class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Df_Admin_Model_ClassRewrite_AllowedConflicts */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

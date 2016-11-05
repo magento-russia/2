@@ -61,6 +61,6 @@ class FileSystem {
 		return $this->{__METHOD__}[$relativePath];
 	}
 
-	/** @return \Df\C1\Cml2\FileSystem */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

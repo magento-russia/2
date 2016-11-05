@@ -92,6 +92,6 @@ class Df_Core_Model_Config_Data extends Mage_Core_Model_Config_Data {
 		$entry->save();
 	}
 
-	/** @return Df_Core_Model_Config_Data */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

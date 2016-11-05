@@ -10,6 +10,6 @@ class Df_Core_Helper_Mage_Adminhtml extends Mage_Core_Helper_Abstract {
 	public function urlSingleton() {return Mage::getSingleton('adminhtml/url');}
 	/** @return Mage_Adminhtml_Model_System_Config_Source_Yesno */
 	public function yesNo() {return Mage::getSingleton('adminhtml/system_config_source_yesno');}
-	/** @return Df_Core_Helper_Mage_Adminhtml */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

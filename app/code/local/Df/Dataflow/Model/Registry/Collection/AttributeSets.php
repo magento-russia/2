@@ -27,6 +27,6 @@ class Df_Dataflow_Model_Registry_Collection_AttributeSets extends Df_Dataflow_Mo
 		return $entity->getAttributeSetName();
 	}
 
-	/** @return Df_Dataflow_Model_Registry_Collection_AttributeSets */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

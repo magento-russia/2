@@ -100,6 +100,6 @@ class Df_Logging_Model_Resource_Event extends Df_Core_Model_Resource {
 	protected function _construct() {$this->_init(self::TABLE, Df_Logging_Model_Event::P__ID);}
 	/** @used-by Df_Logging_Setup_1_0_0::_process() */
 	const TABLE = 'df_logging/event';
-	/** @return Df_Logging_Model_Resource_Event */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

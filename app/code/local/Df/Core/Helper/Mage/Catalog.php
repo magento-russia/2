@@ -14,6 +14,6 @@ class Df_Core_Helper_Mage_Catalog extends Mage_Core_Helper_Abstract {
 	public function sessionSingleton() {return Mage::getSingleton('catalog/session');}
 	/** @return Df_Catalog_Model_Url */
 	public function urlSingleton() {return Mage::getSingleton('catalog/url');}
-	/** @return Df_Core_Helper_Mage_Catalog */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -22,6 +22,6 @@ class Df_Sales_Model_Resource_Order extends Mage_Sales_Model_Resource_Order {
 		return df_nat0($this->getReadConnection()->fetchOne($select));
 	}
 
-	/** @return Df_Sales_Model_Resource_Order */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

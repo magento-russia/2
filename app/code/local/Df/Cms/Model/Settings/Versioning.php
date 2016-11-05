@@ -9,6 +9,6 @@ class Df_Cms_Model_Settings_Versioning extends Df_Core_Model_Settings {
 	 * @return string
 	 */
 	protected function getKeyPrefix() {return 'df_cms/versioning/';}
-	/** @return Df_Cms_Model_Settings_Versioning */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

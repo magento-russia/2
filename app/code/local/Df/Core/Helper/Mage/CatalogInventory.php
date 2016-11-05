@@ -4,6 +4,6 @@ class Df_Core_Helper_Mage_CatalogInventory extends Mage_Core_Helper_Abstract {
 	public function stockSingleton() {
 		return Mage::getSingleton('cataloginventory/stock');
 	}
-	/** @return Df_Core_Helper_Mage_CatalogInventory */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
