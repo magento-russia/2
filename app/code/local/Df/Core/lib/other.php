@@ -200,7 +200,7 @@ function df_session() {
  */
 function df_singleton($class) {
 	/** @var array(string => Object) $cache */
-	static $cache = array();
+	static $cache = [];
 	return isset($cache[$class]) ? $cache[$class] : $cache[$class] = new $class();
 }
 

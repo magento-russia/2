@@ -20,7 +20,7 @@ class SignatureGenerator extends \Df_Core_Model {
 	 */
 	private function convertParamsToWindows1251(array $params) {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		foreach ($params as $key => $value) {
 			/** @var string|int $key */
 			/** @var mixed $value */
@@ -99,7 +99,7 @@ class SignatureGenerator extends \Df_Core_Model {
 	 */
 	private function sortParams(array $params) {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		foreach ($params as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */

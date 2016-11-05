@@ -19,7 +19,7 @@ abstract class Df_PageCache_Model_Container_Abstract
 	/**
 	 * @var array
 	 */
-	protected $_layouts = array();
+	protected $_layouts = [];
 
 	/**
 	 * Class constructor

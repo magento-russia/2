@@ -21,7 +21,7 @@ abstract class Response extends \Df_Core_Model {
 	public function getReport() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $reportRows */
-			$reportRows = array();
+			$reportRows = [];
 			foreach ($this->getReportAsArray() as $key => $value) {
 				/** @var string $key */
 				/** @var string $value */

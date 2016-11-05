@@ -9,7 +9,7 @@ class Df_Checkout_Model_Filter_Ergonomic_Address
 	 */
 	public function filter($value) {
 		/** @var array(int => Df_Customer_Model_Address) $result */
-		$result = array();
+		$result = [];
 		foreach ($value as $id => $address) {
 			/** @var int $id */
 			/** @var Df_Customer_Model_Address $address */

@@ -167,7 +167,7 @@ class PHPExcel_CachedObjectStorage_PHPTemp extends PHPExcel_CachedObjectStorage_
 			$this->_currentObject->detach();
 			$this->_currentObject = $this->_currentObjectID = null;
 		}
-		$this->_cellCache = array();
+		$this->_cellCache = [];
 
 		//	detach ourself from the worksheet, so that it can then delete this object successfully
 		$this->_parent = null;

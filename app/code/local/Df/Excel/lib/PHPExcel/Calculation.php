@@ -247,7 +247,7 @@ class PHPExcel_Calculation {
 	 *
 	 */
 	private static $_localeArgumentSeparator = ',';
-	private static $_localeFunctions = array();
+	private static $_localeFunctions = [];
 
 	/**
 	 * Locale-specific translations for Excel constants (True, False and Null)
@@ -1912,7 +1912,7 @@ class PHPExcel_Calculation {
 	 * Clear calculation cache
 	 */
 	public function clearCalculationCache() {
-		$this->_calculationCache = array();
+		$this->_calculationCache = [];
 	}	//	function clearCalculationCache()
 
 	/**
@@ -1969,7 +1969,7 @@ class PHPExcel_Calculation {
 		//	Test whether we have any language data for this language (any locale)
 		if (in_array($language,self::$_validLocaleLanguages)) {
 			//	initialise language/locale settings
-			self::$_localeFunctions = array();
+			self::$_localeFunctions = [];
 			self::$_localeArgumentSeparator = ',';
 			self::$_localeBoolean = array('TRUE' => 'TRUE', 'FALSE' => 'FALSE', 'NULL' => 'NULL');
 			//	Default is English, if user isn't requesting english, then read the necessary data from the locale files
@@ -2084,7 +2084,7 @@ class PHPExcel_Calculation {
 
 	public function _translateFormulaToLocale($formula) {
 		if (self::$functionReplaceFromExcel === NULL) {
-			self::$functionReplaceFromExcel = array();
+			self::$functionReplaceFromExcel = [];
 			foreach(array_keys(self::$_localeFunctions) as $excelFunctionName) {
 				self::$functionReplaceFromExcel[] = '/(@?[^\w\.])'.preg_quote($excelFunctionName).'([\s]*\()/Ui';
 			}
@@ -2095,7 +2095,7 @@ class PHPExcel_Calculation {
 		}
 
 		if (self::$functionReplaceToLocale === NULL) {
-			self::$functionReplaceToLocale = array();
+			self::$functionReplaceToLocale = [];
 			foreach(array_values(self::$_localeFunctions) as $localeFunctionName) {
 				self::$functionReplaceToLocale[] = '$1'.trim($localeFunctionName).'$2';
 			}
@@ -2113,7 +2113,7 @@ class PHPExcel_Calculation {
 
 	public function _translateFormulaToEnglish($formula) {
 		if (self::$functionReplaceFromLocale === NULL) {
-			self::$functionReplaceFromLocale = array();
+			self::$functionReplaceFromLocale = [];
 			foreach(array_values(self::$_localeFunctions) as $localeFunctionName) {
 				self::$functionReplaceFromLocale[] = '/(@?[^\w\.])'.preg_quote($localeFunctionName).'([\s]*\()/Ui';
 			}
@@ -2123,7 +2123,7 @@ class PHPExcel_Calculation {
 		}
 
 		if (self::$functionReplaceToExcel === NULL) {
-			self::$functionReplaceToExcel = array();
+			self::$functionReplaceToExcel = [];
 			foreach(array_keys(self::$_localeFunctions) as $excelFunctionName) {
 				self::$functionReplaceToExcel[] = '$1'.trim($excelFunctionName).'$2';
 			}
@@ -2582,7 +2582,7 @@ class PHPExcel_Calculation {
 			}
 
 			if (is_array($value)) {
-				$returnMatrix = array();
+				$returnMatrix = [];
 				$pad = $rpad = ', ';
 				foreach($value as $row) {
 					if (is_array($row)) {
@@ -2749,7 +2749,7 @@ class PHPExcel_Calculation {
 		//	Start with initialisation
 		$index = 0;
 		$stack = new PHPExcel_Calculation_Token_Stack;
-		$output = array();
+		$output = [];
 		$expectingOperator = FALSE;					//	We use this test in syntax-checking the expression to determine when a
 													//		- is a negation or + is a positive operator rather than an operation
 		$expectingOperand = FALSE;					//	We use this test in syntax-checking the expression to determine whether an operand
@@ -3163,7 +3163,7 @@ class PHPExcel_Calculation {
 							}
 
 							$oData = array_merge(explode(':',$operand1Data['reference']),explode(':',$operand2Data['reference']));
-							$oCol = $oRow = array();
+							$oCol = $oRow = [];
 							foreach($oData as $oDatum) {
 								$oCR = PHPExcel_Cell::coordinateFromString($oDatum);
 								$oCol[] = PHPExcel_Cell::columnIndexFromString($oCR[0]) - 1;
@@ -3227,7 +3227,7 @@ class PHPExcel_Calculation {
 						break;
 					case '|'	:			//	Intersect
 						$rowIntersect = array_intersect_key($operand1,$operand2);
-						$cellIntersect = $oCol = $oRow = array();
+						$cellIntersect = $oCol = $oRow = [];
 						foreach(array_keys($rowIntersect) as $row) {
 							$oRow[] = $row;
 							foreach($rowIntersect[$row] as $col => $data) {
@@ -3371,7 +3371,7 @@ class PHPExcel_Calculation {
 					}
 					// get the arguments for this function
 //					echo 'Function '.$functionName.' expects '.$argCount.' arguments<br />';
-					$args = $argArrayVals = array();
+					$args = $argArrayVals = [];
 					for ($i = 0; $i < $argCount; ++$i) {
 						$arg = $stack->pop();
 						$a = $argCount - $i - 1;
@@ -3409,7 +3409,7 @@ class PHPExcel_Calculation {
 //					if (($argCount == 1) && (is_array($args[1])) && ($functionName != 'MKMATRIX')) {
 //						$operand1 = $args[1];
 //						$this->_debugLog->writeDebugLog('Argument is a matrix: ', $this->_showValue($operand1));
-//						$result = array();
+//						$result = [];
 //						$row = 0;
 //						foreach($operand1 as $args) {
 //							if (is_array($args)) {
@@ -3515,7 +3515,7 @@ class PHPExcel_Calculation {
 	private function _executeBinaryComparisonOperation($cellID, $operand1, $operand2, $operation, &$stack, $recursingArrays=FALSE) {
 		//	If we're dealing with matrix operations, we want a matrix result
 		if ((is_array($operand1)) || (is_array($operand2))) {
-			$result = array();
+			$result = [];
 			if ((is_array($operand1)) && (!is_array($operand2))) {
 				foreach($operand1 as $x => $operandData) {
 					$this->_debugLog->writeDebugLog('Evaluating Comparison ', $this->_showValue($operandData), ' ', $operation, ' ', $this->_showValue($operand2));
@@ -3598,7 +3598,7 @@ class PHPExcel_Calculation {
 		if ((is_array($operand1)) || (is_array($operand2))) {
 			//	Ensure that both operands are arrays/matrices
 			$executeMatrixOperation = TRUE;
-			$mSize = array();
+			$mSize = [];
 			list($mSize[],$mSize[],$mSize[],$mSize[]) = self::_checkMatrixOperands($operand1,$operand2,2);
 
 			//	But if they're both single cell matrices, then we can treat them as simple values
@@ -3844,7 +3844,7 @@ class PHPExcel_Calculation {
 	 */
 	public function listFunctions() {
 		// Return value
-		$returnValue = array();
+		$returnValue = [];
 		// Loop functions
 		foreach(self::$_PHPExcelFunctions as $functionName => $function) {
 			if ($function['functionCall'] != 'PHPExcel_Calculation_Functions::DUMMY') {
@@ -3876,7 +3876,7 @@ class PHPExcel_Calculation {
 	 */
 	public function listFunctionNames() {
 		// Return value
-		$returnValue = array();
+		$returnValue = [];
 		// Loop functions
 		foreach(self::$_PHPExcelFunctions as $functionName => $function) {
 			if ($function['functionCall'] != 'PHPExcel_Calculation_Functions::DUMMY') {

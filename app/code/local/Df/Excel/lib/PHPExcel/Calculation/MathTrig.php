@@ -51,7 +51,7 @@ class PHPExcel_Calculation_MathTrig {
 	private static function _factors($value) {
 		$startVal = floor(sqrt($value));
 
-		$factorArray = array();
+		$factorArray = [];
 		for ($i = $startVal; $i > 1; --$i) {
 			if (($value % $i) == 0) {
 				$factorArray = array_merge($factorArray,self::_factors($value / $i));
@@ -346,7 +346,7 @@ class PHPExcel_Calculation_MathTrig {
 	 */
 	public static function GCD() {
 		$returnValue = 1;
-		$allValuesFactors = array();
+		$allValuesFactors = [];
 		// Loop through arguments
 		foreach(PHPExcel_Calculation_Functions::flattenArray(func_get_args()) as $value) {
 			if (!is_numeric($value)) {
@@ -451,7 +451,7 @@ class PHPExcel_Calculation_MathTrig {
 	 */
 	public static function LCM() {
 		$returnValue = 1;
-		$allPoweredFactors = array();
+		$allPoweredFactors = [];
 		// Loop through arguments
 		foreach(PHPExcel_Calculation_Functions::flattenArray(func_get_args()) as $value) {
 			if (!is_numeric($value)) {
@@ -464,7 +464,7 @@ class PHPExcel_Calculation_MathTrig {
 			}
 			$myFactors = self::_factors(floor($value));
 			$myCountedFactors = array_count_values($myFactors);
-			$myPoweredFactors = array();
+			$myPoweredFactors = [];
 			foreach($myCountedFactors as $myCountedFactor => $myCountedPower) {
 				$myPoweredFactors[$myCountedFactor] = pow($myCountedFactor,$myCountedPower);
 			}
@@ -525,7 +525,7 @@ class PHPExcel_Calculation_MathTrig {
 	 * @return	float
 	 */
 	public static function MDETERM($matrixValues) {
-		$matrixData = array();
+		$matrixData = [];
 		if (!is_array($matrixValues)) { $matrixValues = array(array($matrixValues)); }
 
 		$row = $maxColumn = 0;
@@ -567,7 +567,7 @@ class PHPExcel_Calculation_MathTrig {
 	 * @return	array
 	 */
 	public static function MINVERSE($matrixValues) {
-		$matrixData = array();
+		$matrixData = [];
 		if (!is_array($matrixValues)) { $matrixValues = array(array($matrixValues)); }
 
 		$row = $maxColumn = 0;
@@ -603,7 +603,7 @@ class PHPExcel_Calculation_MathTrig {
 	 * @return	array
 	 */
 	public static function MMULT($matrixData1,$matrixData2) {
-		$matrixAData = $matrixBData = array();
+		$matrixAData = $matrixBData = [];
 		if (!is_array($matrixData1)) { $matrixData1 = array(array($matrixData1)); }
 		if (!is_array($matrixData2)) { $matrixData2 = array(array($matrixData2)); }
 

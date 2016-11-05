@@ -3,7 +3,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 	/** @return array */
 	public function getGiftingQuoteItemIds() {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		$dataContainer = $this->getDataContainer();
 		/** @var array $dataContainer */
 		df_assert_array($dataContainer);
@@ -74,7 +74,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 		df_assert_array($dataContainer);
 		$result = dfa($dataContainer, $ruleId);
 		if (is_null($result)) {
-			$result = array();
+			$result = [];
 			$dataContainer[$ruleId] = $result;
 			$this->setDataContainer($dataContainer);
 		}
@@ -102,7 +102,7 @@ class Df_PromoGift_Model_Customer_Rule_Counter extends Df_Core_Model {
 	private function getDataContainer() {
 		$result = $this->getSession()->getData(self::SESSION_CONTAINER_KEY);
 		if (is_null($result)) {
-			$result = array();
+			$result = [];
 			$this->setDataContainer($result);
 		}
 		df_result_array($result);

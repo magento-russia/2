@@ -26,7 +26,7 @@ class Df_Core_GlobalSingletonDestructor {
 	 */
 	public function register(Df_Core_Destructable $object) {$this->_objects[]= $object;}
 	/** @var Df_Core_Destructable[] */
-	private $_objects = array();
+	private $_objects = [];
 
 	/** @return Df_Core_GlobalSingletonDestructor */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

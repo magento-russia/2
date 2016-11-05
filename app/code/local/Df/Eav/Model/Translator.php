@@ -152,7 +152,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 	 */
 	public function translateLabels(array $labels) {
 		/** @var array(string => string) $result */
-		$result = array();
+		$result = [];
 		/** @var string|null $translatedValue */
 		$translatedValue = null;
 		foreach ($labels as $labelName => $labelValue) {
@@ -209,7 +209,7 @@ class Df_Eav_Model_Translator extends Df_Core_Model_DestructableSingleton {
 	}
 
 	/** @var string[] */
-	private $_untranslated = array();
+	private $_untranslated = [];
 
 	/** @return Df_Eav_Model_Translator */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

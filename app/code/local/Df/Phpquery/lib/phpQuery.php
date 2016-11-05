@@ -38,7 +38,7 @@ abstract class phpQuery {
 	 */
 	public static $mbstringSupport = true;
 	public static $debug = false;
-	public static $documents = array();
+	public static $documents = [];
 	public static $defaultDocumentID = null;
 //	public static $defaultDoctype = 'html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"';
 	/**
@@ -54,20 +54,20 @@ abstract class phpQuery {
 	 *
 	 * @var object
 	 */
-	public static $plugins = array();
+	public static $plugins = [];
 	/**
 	 * List of loaded plugins.
 	 *
 	 * @var unknown_type
 	 */
-	public static $pluginsLoaded = array();
-	public static $pluginsMethods = array();
-	public static $pluginsStaticMethods = array();
-	public static $extendMethods = array();
+	public static $pluginsLoaded = [];
+	public static $pluginsMethods = [];
+	public static $pluginsStaticMethods = [];
+	public static $extendMethods = [];
 	/**
 	 * @TODO implement
 	 */
-	public static $extendStaticMethods = array();
+	public static $extendStaticMethods = [];
 	/**
 	 * Hosts allowed for AJAX connections.
 	 * Dot '.' means $_SERVER['HTTP_HOST'] (if any).
@@ -181,7 +181,7 @@ abstract class phpQuery {
 			$phpQuery = $class != 'phpQuery'
 				? new $class($arg1, $domId)
 				: new phpQueryObject($domId);
-			$phpQuery->elements = array();
+			$phpQuery->elements = [];
 			foreach ($arg1->elements as $node)
 				$phpQuery->elements[]= $phpQuery->document->importNode($node, true);
 			return $phpQuery;
@@ -193,7 +193,7 @@ abstract class phpQuery {
 			$phpQuery = new phpQueryObject($domId);
 			if (!($arg1 instanceof DOMNODELIST) && ! is_array($arg1))
 				$arg1 = array($arg1);
-			$phpQuery->elements = array();
+			$phpQuery->elements = [];
 			foreach ($arg1 as $node) {
 				$sameDocument = $node->ownerDocument instanceof DOMDOCUMENT
 					&& ! $node->ownerDocument->isSameNode($phpQuery->document);
@@ -221,7 +221,7 @@ abstract class phpQuery {
 			if ($context && $context instanceof phpQueryObject)
 				$phpQuery->elements = $context->elements;
 			else if ($context && $context instanceof DOMNODELIST) {
-				$phpQuery->elements = array();
+				$phpQuery->elements = [];
 				foreach ($context as $node)
 					$phpQuery->elements[]= $node;
 			} else if ($context && $context instanceof DOMNODE)
@@ -628,7 +628,7 @@ abstract class phpQuery {
 		return self::markupToPHP($content);
 	}
 	public static function DOMNodeListToArray($DOMNodeList) {
-		$array = array();
+		$array = [];
 		if (! $DOMNodeList)
 			return $array;
 		foreach ($DOMNodeList as $node)
@@ -776,7 +776,7 @@ abstract class phpQuery {
 		// TODO $options['processData']
 		if ($options['data'] instanceof phpQueryObject) {
 			$serialized = $options['data']->serializeArray($options['data']);
-			$options['data'] = array();
+			$options['data'] = [];
 			foreach ($serialized as $r)
 				$options['data'][ $r['name'] ] = $r['value'];
 		}
@@ -995,7 +995,7 @@ abstract class phpQuery {
 	 * @link http://docs.jquery.com/Utilities/jQuery.makeArray
 	 */
 	public static function makeArray($object) {
-		$array = array();
+		$array = [];
 		if (is_object($object) && $object instanceof DOMNODELIST) {
 			foreach ($object as $value)
 				$array[]= $value;
@@ -1037,7 +1037,7 @@ abstract class phpQuery {
 	 * @link http://docs.jquery.com/Utilities/jQuery.map
 	 */
 	public static function map($array, $callback, $param1 = null, $param2 = null, $param3 = null) {
-		$result = array();
+		$result = [];
 		$paramStructure = null;
 		if (func_num_args() > 2) {
 			$paramStructure = func_get_args();
@@ -1123,7 +1123,7 @@ abstract class phpQuery {
 	 * @link http://docs.jquery.com/Utilities/jQuery.grep
 	 */
 	public static function grep($array, $callback, $invert = false) {
-		$result = array();
+		$result = [];
 		foreach ($array as $k => $v) {
 			$r = call_user_func_array($callback, array($v, $k));
 			if ($r === !(bool)$invert)
@@ -1253,7 +1253,7 @@ abstract class phpQuery {
 			$node->dataID = ++phpQuery::$documents[$documentID]->uuid;
 		$id = $node->dataID;
 		if (! isset($document->data[$id]))
-			$document->data[$id] = array();
+			$document->data[$id] = [];
 		if (! is_null($data))
 			$document->data[$id][$name] = $data;
 		if ($name) {

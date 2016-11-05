@@ -56,7 +56,7 @@ class Df_Catalog_Model_Category_Content_Inserter extends Df_Core_Model {
 	private function getMethodOfUpdate() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var (string|null)[] $map */
-			$map = array();
+			$map = [];
 			if ($this->isItProductListBlock()) {
 				$map = array(
 					Df_Catalog_Model_Config_Source_Category_Content_Position

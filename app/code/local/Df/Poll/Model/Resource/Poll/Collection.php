@@ -65,7 +65,7 @@ class Df_Poll_Model_Resource_Poll_Collection extends Mage_Poll_Model_Resource_Po
 	 */
 	public function _construct() {$this->_itemObjectClass = Df_Poll_Model_Poll::class;}
 	/** @var array(string => mixed) */
-	private $_rmData = array();
+	private $_rmData = [];
 
 	const P__STORE_IDS = 'store_ids';
 	const P__STORES = 'stores';

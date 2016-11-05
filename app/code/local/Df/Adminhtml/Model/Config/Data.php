@@ -55,7 +55,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		/* @var $saveTransaction Mage_Core_Model_Resource_Transaction */
 
 		// Extends for old config data
-		$oldConfigAdditionalGroups = array();
+		$oldConfigAdditionalGroups = [];
 		foreach ($groups as $group => $groupData) {
 			/**
 			* Map field names if they were cloned
@@ -68,7 +68,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				} else {
 					Mage::throwException('Config form fieldset clone model required to be able to clone fields');
 				}
-				$mappedFields = array();
+				$mappedFields = [];
 				$fieldsConfig = $sections->descend($section.'/groups/'.$group.'/fields');
 				if ($fieldsConfig->hasChildren()) {
 					foreach ($fieldsConfig->children() as $field => $node) {
@@ -81,7 +81,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			}
 			// set value for group field entry by fieldname
 			// use extra memory
-			$fieldsetData = array();
+			$fieldsetData = [];
 			foreach ($groupData['fields'] as $field => $fieldData) {
 				$fieldsetData[$field] =
 					is_array($fieldData) && isset($fieldData['value'])
@@ -213,7 +213,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 		/* @var $saveTransaction Mage_Core_Model_Resource_Transaction */
 
 		// Extends for old config data
-		$oldConfigAdditionalGroups = array();
+		$oldConfigAdditionalGroups = [];
 		foreach ($groups as $group => $groupData) {
 			/**
 			* Map field names if they were cloned
@@ -227,7 +227,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 				else {
 					Mage::throwException('Config form fieldset clone model required to be able to clone fields');
 				}
-				$mappedFields = array();
+				$mappedFields = [];
 				$fieldsConfig = $sections->descend($section.'/groups/'.$group.'/fields');
 				if ($fieldsConfig->hasChildren()) {
 					foreach ($fieldsConfig->children() as $field => $node) {
@@ -240,7 +240,7 @@ class Df_Adminhtml_Model_Config_Data extends Mage_Adminhtml_Model_Config_Data {
 			}
 			// set value for group field entry by fieldname
 			// use extra memory
-			$fieldsetData = array();
+			$fieldsetData = [];
 			foreach ($groupData['fields'] as $field => $fieldData) {
 				$fieldsetData[$field] = (is_array($fieldData) && isset($fieldData['value']))
 					? $fieldData['value'] : null;

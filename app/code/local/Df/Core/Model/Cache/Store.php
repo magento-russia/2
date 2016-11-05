@@ -20,7 +20,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model {
 	public function resetConfig() {
 		/**
 		 * Если вместо
-		 * $this->_config = array();
+		 * $this->_config = [];
 		 * написать
 		 * unset($this->_config);
 		 * или
@@ -28,7 +28,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model {
 		 * то свойство не будет сохранено в кэше.
 		 * Мы же намеренно присваиваем свойству пустой массив, чтобы старый кэш был удалён.
 		 */
-		$this->_config = array();
+		$this->_config = [];
 		$this->markCachedPropertyAsModified('_config');
 	}
 
@@ -119,7 +119,7 @@ class Df_Core_Model_Cache_Store extends Df_Core_Model {
 	public static function s(Df_Core_Model_StoreM $store) {
 		/** @var Df_Core_Model_Cache_Store $result */
 		/** @var array(string => Df_Core_Model_Cache_Store) $cache */
-		static $cache = array();
+		static $cache = [];
 		/** @var bool $inConstruction */
 		static $inConstruction = false;
 		/** @var string $storeCode */

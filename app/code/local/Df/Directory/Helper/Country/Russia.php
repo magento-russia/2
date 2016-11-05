@@ -7,7 +7,7 @@ class Df_Directory_Helper_Country_Russia extends Df_Directory_Helper_Country {
 	public function getMapFromCenterToRegion() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Directory_Model_Region) $result */
-			$result = array();
+			$result = [];
 			foreach (df_h()->directory()->getRussianRegions() as $region) {
 				/** @var Df_Directory_Model_Region $region */
 				/** @var string $centerName */

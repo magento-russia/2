@@ -18,7 +18,7 @@ class Df_Admin_Config_Source_Units_Weight extends Df_Admin_Config_Source {
 		// потому что у класса нет параметров.
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string)) $result */
-			$result = array();
+			$result = [];
 			foreach (df_weight()->getUnitsSettings() as $unitId => $unitData) {
 				/** @var array(string => string|int) $unitData */
 				$result[]= df_option($unitId, dfa($unitData, Df_Core_Model_Units_Weight::UNIT__LABEL));

@@ -43,7 +43,7 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	public function getCategoriesAsTree() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Catalog_Model_Category[] $result */
-			$result = array();
+			$result = [];
 			/** @var int $rootCategoryId */
 			$rootCategoryId = (int)$this->store()->getRootCategoryId();
 			foreach ($this->getCategories() as $category) {
@@ -104,7 +104,7 @@ abstract class Df_Catalog_Model_XmlExport_Catalog extends \Df\Xml\Generator\Docu
 	protected function getOutput_Products() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => mixed)) $result  */
-			$result = array();
+			$result = [];
 			$this->log('Рассматривается товаров: %d.', $this->getProducts()->count());
 			foreach ($this->getProducts() as $product) {
 				/** @var Df_Catalog_Model_Product $product */

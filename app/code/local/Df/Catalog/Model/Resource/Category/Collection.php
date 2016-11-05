@@ -11,7 +11,7 @@ class Df_Catalog_Model_Resource_Category_Collection
 	 */
 	public function addAncestors($attributesToSelect = '*') {
 		/** @var int[] $ancestorIds */
-		$ancestorIds = array();
+		$ancestorIds = [];
 		foreach ($this as $category) {
 			/** @var Df_Catalog_Model_Category $category */
 			$ancestorIds = array_merge($ancestorIds, $category->getParentIds());

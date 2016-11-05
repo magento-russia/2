@@ -161,7 +161,7 @@ class Df_Banner_Model_Image extends Df_Core_Model {
 	 * @return string
 	 */
 	private function _rgbToString($rgbArray) {
-		$result = array();
+		$result = [];
 		foreach ($rgbArray as $value) {
 			$result[]= is_null($value) ? 'null' : sprintf('%02s', dechex($value));
 		}

@@ -67,7 +67,7 @@ class Df_Core_Model_Cache_Url extends Df_Core_Model {
 	 */
 	private function getCacheKeyParams2(Df_Core_Model_Url $url, $routePath = null, $routeParams = null) {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		$result[]= is_null($routePath) ? 'empty' : $routePath;
 		/**
 		 * Звёздочка может интерпретироваться для каждой страницы индивидуально,

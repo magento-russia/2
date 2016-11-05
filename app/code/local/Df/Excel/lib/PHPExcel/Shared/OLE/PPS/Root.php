@@ -93,7 +93,7 @@ class PHPExcel_Shared_OLE_PPS_Root extends PHPExcel_Shared_OLE_PPS
 			throw new PHPExcel_Writer_Exception("Can't open $filename. It may be in use or protected.");
 		}
 		// Make an array of PPS's (for Save)
-		$aList = array();
+		$aList = [];
 		PHPExcel_Shared_OLE_PPS::_savePpsSetPnt($aList, array($this));
 		// calculate values for header
 		list($iSBDcnt, $iBBcnt, $iPPScnt) = $this->_calcSize($aList); //, $rhInfo);

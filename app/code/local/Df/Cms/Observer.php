@@ -306,8 +306,8 @@ class Df_Cms_Observer {
 			 * Checking if node's data was passed and if yes. Saving new sort order for nodes.
 			 */
 			$nodesData = $page->getNodesData();
-			$appendToNodes = array();
-			$sortOrders = array();
+			$appendToNodes = [];
+			$sortOrders = [];
 			if ($nodesData) {
 				$nodesData = df_mage()->coreHelper()->jsonDecode($page->getNodesData());
 				if (!empty($nodesData)) {

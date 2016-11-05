@@ -20,11 +20,11 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 		 * http://magento-forum.ru/topic/3750/
 		 */
 		/** @var array $oldValues */
-		$oldValues = array();
+		$oldValues = [];
 		/** @var array $oldValuesToPreserve */
-		$oldValuesToPreserve = array();
+		$oldValuesToPreserve = [];
 		/** @var array $oldLabels */
-		$oldLabels = array();
+		$oldLabels = [];
 		/** @var string $updateMode */
 		$updateMode = df_c1_cfg()->referenceLists()->updateMode();
 		foreach ($this->getOptionsOld() as $oldOption) {
@@ -111,7 +111,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 			}
 		}
 		/** @var array $actualOrders */
-		$actualOrders = array();
+		$actualOrders = [];
 		/** @var string $actualLabels */
 		$actualLabels = $this->extractLabelsFromValues($actualValues);
 		df_assert_array($actualLabels);
@@ -141,7 +141,7 @@ class Df_Eav_Model_Entity_Attribute_Option_Calculator extends Df_Core_Model {
 	 */
 	private function extractLabelsFromValues(array $values) {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		foreach ($values as $label) {
 			/** @var string|array $label */
 			if (is_array($label)) {

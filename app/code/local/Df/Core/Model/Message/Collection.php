@@ -9,7 +9,7 @@ class Df_Core_Model_Message_Collection extends Mage_Core_Model_Message_Collectio
 	 */
 	public function addMessage(Mage_Core_Model_Message_Abstract $message) {
 		if (!isset($this->_messages[$message->getType()])) {
-			$this->_messages[$message->getType()] = array();
+			$this->_messages[$message->getType()] = [];
 		}
 		/** @var bool $found */
 		$found = false;

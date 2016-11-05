@@ -920,7 +920,7 @@ class PHPExcel_Calculation_DateTime {
 		}
 
 		//	Test any extra holiday parameters
-		$holidayCountedArray = array();
+		$holidayCountedArray = [];
 		foreach ($dateArgs as $holidayDate) {
 			if (is_string($holidayDate = self::_getDateValue($holidayDate))) {
 				return PHPExcel_Calculation_Functions::VALUE();
@@ -1003,7 +1003,7 @@ class PHPExcel_Calculation_DateTime {
 
 		//	Test any extra holiday parameters
 		if (!empty($dateArgs)) {
-			$holidayCountedArray = $holidayDates = array();
+			$holidayCountedArray = $holidayDates = [];
 			foreach ($dateArgs as $holidayDate) {
 				if (($holidayDate !== NULL) && (trim($holidayDate) > '')) {
 					if (is_string($holidayDate = self::_getDateValue($holidayDate))) {

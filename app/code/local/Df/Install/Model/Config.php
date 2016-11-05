@@ -11,7 +11,7 @@ class Df_Install_Model_Config extends Mage_Install_Model_Config {
 		/** @var Varien_Object[] $result */
 		$result = parent::getWizardSteps();
 		/** @var int[] $indicesToRemove */
-		$indicesToRemove = array();
+		$indicesToRemove = [];
 		foreach ($result as $index => $step) {
 			/** @var int $index */
 			/** @var Varien_Object $step */

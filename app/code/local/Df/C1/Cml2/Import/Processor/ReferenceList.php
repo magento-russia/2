@@ -138,7 +138,7 @@ class ReferenceList extends \Df\C1\Cml2\Import\Processor {
 	 */
 	private function assignExternalIdToOptions(\Df_Catalog_Model_Resource_Eav_Attribute $attribute) {
 		/** @var string[] $alreadyAssigned */
-		$alreadyAssigned = array();
+		$alreadyAssigned = [];
 		foreach ($attribute->getOptions() as $option) {
 			/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 			if (!$option->get1CId()) {
@@ -210,7 +210,7 @@ class ReferenceList extends \Df\C1\Cml2\Import\Processor {
 		$options->setStoreFilter($attribute->getStoreId());
 		$options->addFieldToSelect(\Df\C1\C::ENTITY_EXTERNAL_ID);
 		/** @var string[] $alreadyAssigned */
-		$alreadyProcessed = array();
+		$alreadyProcessed = [];
 		foreach ($options as $option) {
 			/** @var \Df_Eav_Model_Entity_Attribute_Option $option */
 			/** @var string|null $externalId */

@@ -88,7 +88,7 @@ class Df_Catalog_Block_Product_List_Toolbar extends Mage_Catalog_Block_Product_L
 		}
 		else {
 			parent::_construct();
-			$settings = array();
+			$settings = [];
 			foreach ($cachedFields as $cachedField) {
 				/** @var string $cachedField */
 				$settings[$cachedField] = $this->{$cachedField};

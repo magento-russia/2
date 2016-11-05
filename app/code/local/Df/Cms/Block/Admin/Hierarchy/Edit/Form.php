@@ -30,7 +30,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	 */
 	public function getListModesJson() {
 		$listModes = Df_Cms_Model_Source_Hierarchy_Menu_Listmode::s()->toOptionArray();
-		$result = array();
+		$result = [];
 		foreach ($listModes as $type => $label) {
 			if ('' === $type) {
 				continue;
@@ -61,7 +61,7 @@ class Df_Cms_Block_Admin_Hierarchy_Edit_Form extends Mage_Adminhtml_Block_Widget
 	 * @return string
 	 */
 	public function getNodesJson() {
-		$nodes = array();
+		$nodes = [];
 		/* @var $node Df_Cms_Model_Hierarchy_Node */
 		$nodeModel = Mage::registry('current_hierarchy_node');
 		// restore data is exists

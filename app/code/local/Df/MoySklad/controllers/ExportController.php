@@ -92,7 +92,7 @@ class Df_MoySklad_ExportController extends Df_Core_Controller_Admin {
 	 */
 	public function productsAction() {
 		/** @var array(array(string => string|int)) $resultA */
-		$resultA = array();
+		$resultA = [];
 		foreach (\Df\MoySklad\Product\Exporter::i()->getResult() as $p) {
 			/** @var Df_Catalog_Model_Product $p */
 			$resultA[]= array(

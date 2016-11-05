@@ -182,7 +182,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 			$method = implode('::', array(get_class($object), $function));
 		}
 		/** @var string[] $keyParts */
-		$keyParts = array();
+		$keyParts = [];
 		if ($this->getType()) {
 			$keyParts[]= $this->getType();
 		}
@@ -312,7 +312,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 * 2015-08-10
 	 * @return void
 	 */
-	protected function ramReset() {$this->_ram = array();}
+	protected function ramReset() {$this->_ram = [];}
 
 	/**
 	 * 2015-08-10
@@ -324,7 +324,7 @@ class Df_Core_Model_Cache extends Df_Core_Model {
 	 * @used-by ramSet()
 	 * @var array(string => mixed)
 	 */
-	private $_ram = array();
+	private $_ram = [];
 
 	/**
 	 * @override

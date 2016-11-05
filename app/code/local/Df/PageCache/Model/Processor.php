@@ -172,7 +172,7 @@ class Df_PageCache_Model_Processor
 			return false;
 		}
 
-		$keys = array();
+		$keys = [];
 		foreach ($exceptions[$storeIdentifier] as $type => $exception) {
 			$rule = @unserialize($exception);
 			if (is_array($rule)) {
@@ -515,13 +515,13 @@ class Df_PageCache_Model_Processor
 	 */
 	protected function _processContainers(&$content)
 	{
-		$placeholders = array();
+		$placeholders = [];
 		preg_match_all(
 			Df_PageCache_Model_Container_Placeholder::HTML_NAME_PATTERN,
 			$content, $placeholders, PREG_PATTERN_ORDER
 		);
 		$placeholders = array_unique($placeholders[1]);
-		$containers = array();
+		$containers = [];
 		foreach ($placeholders as $definition) {
 			$placeholder = new Df_PageCache_Model_Container_Placeholder($definition);
 			$container = $placeholder->getContainerClass();

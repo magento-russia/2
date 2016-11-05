@@ -43,7 +43,7 @@ abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Df_Core_Mo
 	 */
 	public function addVisibilityFilter($userId, $accessLevel = Df_Cms_Model_Page_Version::ACCESS_LEVEL_PUBLIC)
 	{
-		$_condition = array();
+		$_condition = [];
 		if (is_array($userId)) {
 			$_condition[]= $this->_getConditionSql(
 				$this->_getMappedField('user_id'), array('in' => $userId)
@@ -103,7 +103,7 @@ abstract class Df_Cms_Model_Resource_Page_Collection_Abstract extends Df_Core_Mo
 	public function getUsersArray($idAsKey = true)
 	{
 		if (!$this->_usersHash) {
-			$this->_usersHash = array();
+			$this->_usersHash = [];
 			foreach ($this->_toOptionHash('user_id', 'username') as $userId => $username) {
 				if ($userId) {
 					if ($idAsKey) {

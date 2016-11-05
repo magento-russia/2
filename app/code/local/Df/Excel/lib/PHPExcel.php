@@ -68,7 +68,7 @@ class PHPExcel
      *
      * @var PHPExcel_Worksheet[]
      */
-    private $_workSheetCollection = array();
+    private $_workSheetCollection = [];
 
     /**
 	 * Calculation Engine
@@ -89,7 +89,7 @@ class PHPExcel
      *
      * @var PHPExcel_NamedRange[]
      */
-    private $_namedRanges = array();
+    private $_namedRanges = [];
 
     /**
      * CellXf supervisor
@@ -103,14 +103,14 @@ class PHPExcel
      *
      * @var PHPExcel_Style[]
      */
-    private $_cellXfCollection = array();
+    private $_cellXfCollection = [];
 
     /**
      * CellStyleXf collection
      *
      * @var PHPExcel_Style[]
      */
-    private $_cellStyleXfCollection = array();
+    private $_cellStyleXfCollection = [];
 
     /**
      * Create a new PHPExcel with one Worksheet
@@ -121,7 +121,7 @@ class PHPExcel
 		$this->_calculationEngine	= PHPExcel_Calculation::getInstance($this);
 
         // Initialise worksheet collection and add one worksheet
-        $this->_workSheetCollection = array();
+        $this->_workSheetCollection = [];
         $this->_workSheetCollection[] = new PHPExcel_Worksheet($this);
         $this->_activeSheetIndex = 0;
 
@@ -132,7 +132,7 @@ class PHPExcel
         $this->_security = new PHPExcel_DocumentSecurity();
 
         // Set named ranges
-        $this->_namedRanges = array();
+        $this->_namedRanges = [];
 
         // Create the cellXf supervisor
         $this->_cellXfSupervisor = new PHPExcel_Style(true);
@@ -165,7 +165,7 @@ class PHPExcel
             $this->_workSheetCollection[$k] = null;
         }
         unset($worksheet);
-        $this->_workSheetCollection = array();
+        $this->_workSheetCollection = [];
     }
 
 	/**
@@ -474,7 +474,7 @@ class PHPExcel
      */
     public function getSheetNames()
     {
-        $returnValue = array();
+        $returnValue = [];
         $worksheetCount = $this->getSheetCount();
         for ($i = 0; $i < $worksheetCount; ++$i) {
             $returnValue[] = $this->getSheet($i)->getTitle();
@@ -808,7 +808,7 @@ class PHPExcel
     public function garbageCollect()
     {
         // how many references are there to each cellXf ?
-        $countReferencesCellXf = array();
+        $countReferencesCellXf = [];
         foreach ($this->_cellXfCollection as $index => $cellXf) {
             $countReferencesCellXf[$index] = 0;
         }

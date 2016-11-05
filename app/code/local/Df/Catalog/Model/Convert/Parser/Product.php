@@ -50,7 +50,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 		/** @var array(array(string => mixed)) $images */
 		$images = $mediaGallery['images'];
 		/** @var string[] $imagesAsArray */
-		$imagesAsArray = array();
+		$imagesAsArray = [];
 		if (is_array($images)) {
 			foreach ($images as $image) {
 				/** @var array(string => mixed) $image */
@@ -74,7 +74,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 	 * @return array
 	 */
 	private function getPrimaryImages(array $row) {
-		$result = array();
+		$result = [];
 		foreach ($this->getImageFields() as $field) {
 			$image = dfa($row, $field);
 			if (!empty ($image)) {
@@ -151,7 +151,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 	 */
 	private function unparseCustomOptions(Mage_Catalog_Model_Product $product, array &$row) {
 		if ($product->getOptions()) {
-			$optionsForSerialization = array();
+			$optionsForSerialization = [];
 			foreach ($product->getOptions() as $optionKey => $option) {
 				/** @var Mage_Catalog_Model_Product_Option $option */
 				$optionsForSerialization[$optionKey]=
@@ -193,7 +193,7 @@ class Df_Catalog_Model_Convert_Parser_Product extends Mage_Catalog_Model_Convert
 				,'category_ids' => df_csv($product->getCategoryIds())
 			);
 			if (Mage_Core_Model_Store::ADMIN_CODE === $this->getStore()->getCode()) {
-				$websiteCodes = array();
+				$websiteCodes = [];
 				foreach ($product->getWebsiteIds() as $websiteId) {
 					$websiteCode = df_website($websiteId)->getCode();
 					$websiteCodes[$websiteCode] = $websiteCode;

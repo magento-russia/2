@@ -30,7 +30,7 @@ class ConstT extends \Df\Payment\Config\ManagerBase {
 	 */
 	public function availablePaymentMethodsAsOptionArray() {return dfc($this, function() {
 		/** @var array(string => array(string => string)) $result */
-		$result = array();
+		$result = [];
 		foreach ($this->methodsCA() as $methodCode => $methodOptions) {
 			/** @var string $methodCode */
 			/** @var array $methodOptions */

@@ -101,7 +101,7 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 				->forUpdate(true);
 			$stmt = $this->_getReadAdapter()->query($select);
 			$updateSql = "INSERT INTO `{$this->getMainTable()}` (`history_id`, `points_used`) VALUES ";
-			$updateSqlValues = array();
+			$updateSqlValues = [];
 			/** @noinspection PhpAssignmentInConditionInspection */
 			while ($row = $stmt->fetch()) {
 				if ($required <= 0) {
@@ -173,9 +173,9 @@ class Df_Reward_Model_Resource_Reward_History extends Df_Core_Model_Resource {
 				->where('`points_delta`-`points_used`>0')
 				->limit((int)$limit)
 		;
-		$duplicates = array();
-		$expiredAmounts = array();
-		$expiredHistoryIds = array();
+		$duplicates = [];
+		$expiredAmounts = [];
+		$expiredHistoryIds = [];
 		$stmt = $this->_getReadAdapter()->query($select);
 		while (true) {
 			$row = $stmt->fetch();

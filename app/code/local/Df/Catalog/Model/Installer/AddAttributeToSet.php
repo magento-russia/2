@@ -74,7 +74,7 @@ class Df_Catalog_Model_Installer_AddAttributeToSet extends Df_Core_Model {
 		/** @var string $result */
 		$result = Df_Catalog_Model_Resource_Installer_Attribute::ADD_ATTRIBUTE_TO_SET__NOT_CHANGED;
 		/** @var mixed[] $cache */
-		static $cache = array();
+		static $cache = [];
 		if (!isset($cache[$setId][$attributeCode][$groupName])) {
 			df_param_string($attributeCode, 0);
 			df_param_integer($setId, 1);

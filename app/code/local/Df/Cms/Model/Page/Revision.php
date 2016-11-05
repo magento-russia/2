@@ -119,7 +119,7 @@ class Df_Cms_Model_Page_Revision extends Df_Core_Model {
 
 	/** @return mixed[] */
 	protected function _prepareDataForPublish() {
-		$data = array();
+		$data = [];
 		$attributes = $this->_config->getPageRevisionControledAttributes();
 		foreach ($this->getData() as $key => $value) {
 			if (in_array($key, $attributes)) {

@@ -114,7 +114,7 @@ class PelIfd implements IteratorAggregate, ArrayAccess {
    *
    * @var array
    */
-  private $entries = array();
+  private $entries = [];
   /**
    * The type of this directory.
    *
@@ -141,7 +141,7 @@ class PelIfd implements IteratorAggregate, ArrayAccess {
    *
    * @var array
    */
-  private $sub = array();
+  private $sub = [];
   /**
    * The thumbnail data.
    *

@@ -84,7 +84,7 @@ abstract class Df_Directory_Model_Currency_Import_XmlStandard
 	private function getMapFromCurrencyCodeToRate() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array $result */
-			$result = array();
+			$result = [];
 			/** @var \Df\Xml\X $currenciesAsSimpleXml */
 			$currenciesAsSimpleXml = $this->getSimpleXml()->descendO($this->getTagName_CurrencyItem());
 			foreach ($currenciesAsSimpleXml as $currencyAsSimpleXml) {

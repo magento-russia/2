@@ -10,7 +10,7 @@ class Locator extends \Df\Shipping\Locator {
 	 */
 	protected function _map($type) {
 		/** @var array(string -> string[]) $result */
-		$result = array();
+		$result = [];
 		/** @var \phpQueryObject $pqItems */
 		$pqItems = self::response()->pq('#' . self::getInputIdByType($type))->parent()->find('li');
 		df_assert_gt0(count($pqItems));

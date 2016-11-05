@@ -26,7 +26,7 @@ class Df_YandexMarket_TestController extends Mage_Core_Controller_Front_Action {
 			/** @var phpQueryObject $pqOptions */
 			$pqOptions = df_pq('#country1 option', $pq);
 			/** @var array(string => string) $options */
-			$options = array();
+			$options = [];
 			foreach ($pqOptions as $domOption) {
 				/** @var DOMNode $domOption */
 				/** @var string $label */

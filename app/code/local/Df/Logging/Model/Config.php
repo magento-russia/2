@@ -18,7 +18,7 @@ class Df_Logging_Model_Config extends Df_Core_Model {
 		return $this->_labels;
 	}
 	/** @var string[] */
-	private $_labels = array();
+	private $_labels = [];
 
 	/**
 	 * Get configuration node for specified full action name
@@ -43,7 +43,7 @@ class Df_Logging_Model_Config extends Df_Core_Model {
 				$this->_systemConfigValues = unserialize($this->_systemConfigValues);
 			}
 			else {
-				$this->_systemConfigValues = array();
+				$this->_systemConfigValues = [];
 				foreach ($this->getLabels() as $key => $label) {
 					$this->_systemConfigValues[$key] = 1;
 				}

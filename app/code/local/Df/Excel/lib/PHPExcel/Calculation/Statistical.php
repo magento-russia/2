@@ -1742,7 +1742,7 @@ class PHPExcel_Calculation_Statistical {
 			$newValues = $bestFitExponential->getXValues();
 		}
 
-		$returnArray = array();
+		$returnArray = [];
 		foreach($newValues as $xValue) {
 			$returnArray[0][] = $bestFitExponential->getValueOfYForX($xValue);
 		}
@@ -1926,7 +1926,7 @@ class PHPExcel_Calculation_Statistical {
 		$entry = floor(array_pop($aArgs));
 
 		if ((is_numeric($entry)) && (!is_string($entry))) {
-			$mArgs = array();
+			$mArgs = [];
 			foreach ($aArgs as $arg) {
 				// Is it a numeric value?
 				if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -2247,7 +2247,7 @@ class PHPExcel_Calculation_Statistical {
 		// Return value
 		$returnValue = PHPExcel_Calculation_Functions::NaN();
 
-		$mArgs = array();
+		$mArgs = [];
 		// Loop through arguments
 		$aArgs = PHPExcel_Calculation_Functions::flattenArray(func_get_args());
 		foreach ($aArgs as $arg) {
@@ -2397,7 +2397,7 @@ class PHPExcel_Calculation_Statistical {
 	//		but can work with floating point numbers as values
 	//
 	private static function _modeCalc($data) {
-		$frequencyArray = array();
+		$frequencyArray = [];
 		foreach($data as $datum) {
 			$found = False;
 			foreach($frequencyArray as $key => $value) {
@@ -2446,7 +2446,7 @@ class PHPExcel_Calculation_Statistical {
 		// Loop through arguments
 		$aArgs = PHPExcel_Calculation_Functions::flattenArray(func_get_args());
 
-		$mArgs = array();
+		$mArgs = [];
 		foreach ($aArgs as $arg) {
 			// Is it a numeric value?
 			if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -2619,7 +2619,7 @@ class PHPExcel_Calculation_Statistical {
 			if (($entry < 0) || ($entry > 1)) {
 				return PHPExcel_Calculation_Functions::NaN();
 			}
-			$mArgs = array();
+			$mArgs = [];
 			foreach ($aArgs as $arg) {
 				// Is it a numeric value?
 				if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -2936,7 +2936,7 @@ class PHPExcel_Calculation_Statistical {
 		$entry = array_pop($aArgs);
 
 		if ((is_numeric($entry)) && (!is_string($entry))) {
-			$mArgs = array();
+			$mArgs = [];
 			foreach ($aArgs as $arg) {
 				// Is it a numeric value?
 				if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -3344,7 +3344,7 @@ class PHPExcel_Calculation_Statistical {
 			$newValues = $bestFitLinear->getXValues();
 		}
 
-		$returnArray = array();
+		$returnArray = [];
 		foreach($newValues as $xValue) {
 			$returnArray[0][] = $bestFitLinear->getValueOfYForX($xValue);
 		}
@@ -3379,7 +3379,7 @@ class PHPExcel_Calculation_Statistical {
 			if (($percent < 0) || ($percent > 1)) {
 				return PHPExcel_Calculation_Functions::NaN();
 			}
-			$mArgs = array();
+			$mArgs = [];
 			foreach ($aArgs as $arg) {
 				// Is it a numeric value?
 				if ((is_numeric($arg)) && (!is_string($arg))) {

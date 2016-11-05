@@ -63,7 +63,7 @@ class Collections extends \Df_Core_Model {
 	public function getOffersConfigurableChild() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
-			$result = array();
+			$result = [];
 			foreach ($this->getOffers() as $offer) {
 				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				if ($offer->isTypeConfigurableChild()) {
@@ -79,7 +79,7 @@ class Collections extends \Df_Core_Model {
 	public function getOffersConfigurableParent() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
-			$result = array();
+			$result = [];
 			foreach ($this->getOffers() as $offer) {
 				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				if ($offer->isTypeConfigurableParent()) {
@@ -95,7 +95,7 @@ class Collections extends \Df_Core_Model {
 	public function getOffersSimple() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Df\C1\Cml2\Import\Data\Entity\Offer[] $result  */
-			$result = array();
+			$result = [];
 			foreach ($this->getOffers() as $offer) {
 				/** @var \Df\C1\Cml2\Import\Data\Entity\Offer $offer */
 				if ($offer->isTypeSimple()) {

@@ -462,7 +462,7 @@ class Df_PageCache_Observer {
 		$previouseList = $this->_getCookie()->get(Df_PageCache_Model_Cookie::COOKIE_COMPARE_LIST);
 		$previouseList = (empty($previouseList)) ? array() : explode(',', $previouseList);
 
-		$ids = array();
+		$ids = [];
 		foreach ($listItems as $item) {
 			$ids[] = $item->getId();
 		}

@@ -73,13 +73,13 @@ class Df_Catalog_Model_Product_Attribute_Backend_Media
 			}
 			$values = df_nta($values);
 			/** @var string[] $clearImages */
-			$clearImages = array();
+			$clearImages = [];
 			/** @var string[] $newImages */
-			$newImages = array();
+			$newImages = [];
 			/** @var string[] $existImages */
-			$existImages = array();
+			$existImages = [];
 			/** @var string[] $duplicate */
-			$duplicate = array();
+			$duplicate = [];
 			if (!$object->getIsDuplicate()) {
 				foreach ($images as &$image) {
 					/** @var string $file */

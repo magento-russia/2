@@ -253,7 +253,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
 	{
 		// Built-in format codes
 		if (is_null(self::$_builtInFormats)) {
-			self::$_builtInFormats = array();
+			self::$_builtInFormats = [];
 
 			// General
 			self::$_builtInFormats[0] = PHPExcel_Style_NumberFormat::FORMAT_GENERAL;
@@ -630,7 +630,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
 				// This is indicated by a number of commas after a digit placeholder:
 				//		#,   or	0.0,,
 				$scale = 1; // same as no scale
-				$matches = array();
+				$matches = [];
 				if (preg_match('/(#|0)(,+)/', $format, $matches)) {
 					$scale = pow(1000, strlen($matches[2]));
 

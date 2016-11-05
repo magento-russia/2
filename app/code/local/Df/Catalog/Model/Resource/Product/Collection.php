@@ -17,7 +17,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	public function getAttributes() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Catalog_Model_Resource_Eav_Attribute) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getAttributeSets() as $attributeSet) {
 				/** @var Df_Eav_Model_Entity_Attribute_Set $attributeSet */
 				foreach ($attributeSet->getAttributes() as $attribute) {
@@ -36,7 +36,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	public function getAttributeSets() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(int => Df_Eav_Model_Entity_Attribute_Set) $result */
-			$result = array();
+			$result = [];
 			/** @var Df_Dataflow_Model_Registry_Collection_AttributeSets $registry */
 			$registry = Df_Dataflow_Model_Registry::s()->attributeSets();
 			foreach ($this as $product) {
@@ -157,7 +157,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 		return $this;
 	}
 	/** @var int[] */
-	private $_idFilterClientSide = array();
+	private $_idFilterClientSide = [];
 
 	/**
 	 * Возвращает идентификаторы всех товарных разделов коллекции.
@@ -473,7 +473,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 			/** @var Mage_Catalog_Model_Resource_Product_Flat $resourceProductFlat */
 			$resourceProductFlat = $this->getEntity();
 			/** @var string[] $failedAttributes */
-			$failedAttributes = array();
+			$failedAttributes = [];
 			foreach ($attributes as $attribute) {
 				/** @var string $attribute */
 				/**
@@ -572,7 +572,7 @@ class Df_Catalog_Model_Resource_Product_Collection
 	/** @var bool */
 	private $_catIndexPositionIsAvailable = false;
 	/** @var array(string => mixed) */
-	private $_rmData = array();
+	private $_rmData = [];
 	/** @used-by Df_Catalog_Model_XmlExport_Catalog::_construct() */
 
 	/** @var string */

@@ -61,7 +61,7 @@ class Df_Localization_Helper_Translation extends Mage_Core_Helper_Abstract {
 			 *
 				protected function _getOptions()
 				{
-					$result = array();
+					$result = [];
 					foreach (self::$_types as $code=>$label) {
 						$result[]= array('value'=>$code, 'label'=>df_mage()->adminhtmlHelper()->__($label));
 					}

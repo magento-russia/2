@@ -56,7 +56,7 @@ class Df_Widget_Model_Resource_Widget_Instance_Collection
 	 */
 	protected function _construct() {$this->_itemObjectClass = Df_Widget_Model_Widget_Instance::class;}
 	/** @var array(string => mixed) */
-	private $_rmData = array();
+	private $_rmData = [];
 	
 	/** @var string */
 	private static $P__FOR_UPDATING = 'for_updating';

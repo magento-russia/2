@@ -25,7 +25,7 @@ class Df_PageCache_Model_Validator
 	 */
 	protected function _getObjectClasses($object)
 	{
-		$classes = array();
+		$classes = [];
 		if (is_object($object)) {
 			$classes[] = get_class($object);
 			$parent = $object;

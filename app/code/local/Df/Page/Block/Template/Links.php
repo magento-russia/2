@@ -47,7 +47,7 @@ class Df_Page_Block_Template_Links extends Mage_Page_Block_Template_Links {
 	 */
 	public function removeLinkByBlockType($blockType) {
 		/** @var array $keysToUnset */
-		$keysToUnset = array();
+		$keysToUnset = [];
 		foreach ($this->getLinks() as $key => $link) {
 			/** @var Varien_Object $link */
 			if ($link instanceof Mage_Core_Block_Abstract) {

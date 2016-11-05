@@ -160,5 +160,5 @@ class Df_Varien_Data_Form extends Varien_Data_Form {
 		return $result;
 	}
 	/** @var array */
-	private $_additionalHtmlAttributes = array();
+	private $_additionalHtmlAttributes = [];
 }

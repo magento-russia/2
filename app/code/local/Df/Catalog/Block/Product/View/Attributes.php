@@ -50,7 +50,7 @@ class Df_Catalog_Block_Product_View_Attributes extends Mage_Catalog_Block_Produc
 	 */
 	private function getAdditionalDataWithoutEmptyAttributes(array $excludeAttr = array()) {
 		/** @var array $data */
-		$data = array();
+		$data = [];
 		/** @var Mage_Catalog_Model_Product $product */
 		$product = $this->getProduct();
 		/** @var array(string => Mage_Catalog_Model_Resource_Eav_Attribute)|Mage_Catalog_Model_Resource_Eav_Attribute[] $attributes */

@@ -126,7 +126,7 @@ class PHPExcel_Polynomial_Best_Fit extends PHPExcel_Best_Fit
 	 **/
 	public function getSlope($dp=0) {
 		if ($dp != 0) {
-			$coefficients = array();
+			$coefficients = [];
 			foreach($this->_slope as $coefficient) {
 				$coefficients[] = round($coefficient,$dp);
 			}
@@ -179,7 +179,7 @@ class PHPExcel_Polynomial_Best_Fit extends PHPExcel_Best_Fit
 		$matrixB = new Matrix($B);
 		$C = $matrixA->solve($matrixB);
 
-		$coefficients = array();
+		$coefficients = [];
 		for($i = 0; $i < $C->m; ++$i) {
 			$r = $C->get($i, 0);
 			if (abs($r) <= pow(10, -9)) {

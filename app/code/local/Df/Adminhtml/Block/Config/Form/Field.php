@@ -117,7 +117,7 @@ class Df_Adminhtml_Block_Config_Form_Field extends Mage_Adminhtml_Block_System_C
 			/** @noinspection PhpUndefinedMethodInspection */
 			$defText = $element->getDefaultValue();
 			if ($options) {
-				$defTextArr = array();
+				$defTextArr = [];
 				foreach ($options as $k=>$v) {
 					if ($isMultiple) {
 						if (is_array($v['value']) && in_array($k, $v['value'])) {

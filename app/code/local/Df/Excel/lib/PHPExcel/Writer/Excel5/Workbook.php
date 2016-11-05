@@ -88,7 +88,7 @@ class PHPExcel_Writer_Excel5_Workbook extends PHPExcel_Writer_Excel5_BIFFwriter
 	 * XF Writers
 	 * @var PHPExcel_Writer_Excel5_Xf[]
 	 */
-	private $_xfWriters = array();
+	private $_xfWriters = [];
 
 	/**
 	 * Array containing the colour palette
@@ -119,42 +119,42 @@ class PHPExcel_Writer_Excel5_Workbook extends PHPExcel_Writer_Excel5_BIFFwriter
 	 *
 	 * @var PHPExcel_Writer_Excel5_Font[]
 	 */
-	private $_fontWriters = array();
+	private $_fontWriters = [];
 
 	/**
 	 * Added fonts. Maps from font's hash => index in workbook
 	 *
 	 * @var array
 	 */
-	private $_addedFonts = array();
+	private $_addedFonts = [];
 
 	/**
 	 * Shared number formats
 	 *
 	 * @var array
 	 */
-	private $_numberFormats = array();
+	private $_numberFormats = [];
 
 	/**
 	 * Added number formats. Maps from numberFormat's hash => index in workbook
 	 *
 	 * @var array
 	 */
-	private $_addedNumberFormats = array();
+	private $_addedNumberFormats = [];
 
 	/**
 	 * Sizes of the binary worksheet streams
 	 *
 	 * @var array
 	 */
-	private $_worksheetSizes = array();
+	private $_worksheetSizes = [];
 
 	/**
 	 * Offsets of the binary worksheet streams relative to the start of the global workbook stream
 	 *
 	 * @var array
 	 */
-	private $_worksheetOffsets = array();
+	private $_worksheetOffsets = [];
 
 	/**
 	 * Total number of shared strings in workbook
@@ -209,7 +209,7 @@ class PHPExcel_Writer_Excel5_Workbook extends PHPExcel_Writer_Excel5_BIFFwriter
 
 		$this->_parser           = $parser;
 		$this->_biffsize         = 0;
-		$this->_palette          = array();
+		$this->_palette          = [];
 		$this->_country_code     = -1;
 
 		$this->_str_total       = &$str_total;
@@ -1300,7 +1300,7 @@ class PHPExcel_Writer_Excel5_Workbook extends PHPExcel_Writer_Excel5_BIFFwriter
 		$continue_limit = 8224;
 
 		// initialize array of record data blocks
-		$recordDatas = array();
+		$recordDatas = [];
 
 		// start SST record data block with total number of strings, total number of unique strings
 		$recordData = pack("VV", $this->_str_total, $this->_str_unique);

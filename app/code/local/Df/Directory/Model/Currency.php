@@ -82,7 +82,7 @@ class Df_Directory_Model_Currency extends Mage_Directory_Model_Currency {
 				 * не воспроизводит символ «→» (заменяет его символом «?»).
 				 */
 				/** @var Df_Directory_Model_Currency[] $notAvailableCurrencies */
-				$notAvailableCurrencies = array();
+				$notAvailableCurrencies = [];
 				if (!$this->isAvailable()) {
 					$notAvailableCurrencies[]= $this;
 				}

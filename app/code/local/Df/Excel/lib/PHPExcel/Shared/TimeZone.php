@@ -91,7 +91,7 @@ class PHPExcel_Shared_TimeZone
 	 */
 	private static function _getTimezoneTransitions($objTimezone, $timestamp) {
 		$allTransitions = $objTimezone->getTransitions();
-		$transitions = array();
+		$transitions = [];
 		foreach($allTransitions as $key => $transition) {
 			if ($transition['ts'] > $timestamp) {
 				$transitions[] = ($key > 0) ? $allTransitions[$key - 1] : $transition;

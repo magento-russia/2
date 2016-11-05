@@ -7,7 +7,7 @@ class Df_Directory_Settings_Regions extends Df_Core_Model_Settings {
 	public function getPriorityRegionIds() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $result */
-			$result = array();
+			$result = [];
 			for ($i=1; $i <= self::NUM_PRIORITY_REGIONS; $i++) {
 				$ids[]= $this->getPriorityRegionIdAtPosition($i);
 			}

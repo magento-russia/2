@@ -87,7 +87,7 @@ class PHPExcel_Calculation_FormulaParser {
 	 *
 	 * @var PHPExcel_Calculation_FormulaToken[]
 	 */
-	private $_tokens = array();
+	private $_tokens = [];
 
     /**
      * Create a new PHPExcel_Calculation_FormulaParser
@@ -162,7 +162,7 @@ class PHPExcel_Calculation_FormulaParser {
 		if ($formulaLength < 2 || $this->_formula{0} != '=') return;
 
 		// Helper variables
-		$tokens1	= $tokens2 	= $stack = array();
+		$tokens1	= $tokens2 	= $stack = [];
 		$inString	= $inPath 	= $inRange 	= $inError = false;
 		$token		= $previousToken	= $nextToken	= null;
 
@@ -516,7 +516,7 @@ class PHPExcel_Calculation_FormulaParser {
 
 		// move tokens to final list, switching infix "-" operators to prefix when appropriate, switching infix "+" operators
 		// to noop when appropriate, identifying operand and infix-operator subtypes, and pulling "@" from function names
-		$this->_tokens = array();
+		$this->_tokens = [];
 
 		$tokenCount = count($tokens2);
 		for ($i = 0; $i < $tokenCount; ++$i) {

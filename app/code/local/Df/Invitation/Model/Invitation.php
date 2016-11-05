@@ -276,7 +276,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 
 	/** @return string[] */
 	public function validate() {
-		$errors = array();
+		$errors = [];
 		if (!Zend_Validate::is($this->getEmail(), 'EmailAddress')) {
 			$errors[]= df_h()->invitation()->__("Invalid invitation email.");
 		}
@@ -364,7 +364,7 @@ class Df_Invitation_Model_Invitation extends Df_Core_Model {
 	protected function _getResource() {return Df_Invitation_Model_Resource_Invitation::s();}
 
 	/** @var array[] */
-	private static $_customerExistsLookup = array();
+	private static $_customerExistsLookup = [];
 	/** @var string */
 	protected $_eventObject = 'invitation';
 	/** @var string */

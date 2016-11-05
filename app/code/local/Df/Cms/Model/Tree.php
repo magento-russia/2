@@ -5,7 +5,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 		if (!$this->_tree) {
 			/** @var Varien_Data_Tree $result */
 			$result = new Varien_Data_Tree();
-			$this->_nodesMap = array();
+			$this->_nodesMap = [];
 			foreach ($this->getCmsNodes() as $cmsNode) {
 				/** @var Df_Cms_Model_Hierarchy_Node $cmsNode */
 				/** @var Df_Cms_Varien_Data_Tree_Node $varienNode */
@@ -214,7 +214,7 @@ class Df_Cms_Model_Tree extends Df_Core_Model {
 	}
 
 	/** @var Df_Cms_Varien_Data_Tree_Node[]  */
-	protected $_nodesMap = array();
+	protected $_nodesMap = [];
 	/** @var Varien_Data_Tree */
 	protected $_tree;
 

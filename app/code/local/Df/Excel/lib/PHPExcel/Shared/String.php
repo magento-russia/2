@@ -46,14 +46,14 @@ class PHPExcel_Shared_String
 	 *
 	 * @var string[]
 	 */
-	private static $_controlCharacters = array();
+	private static $_controlCharacters = [];
 
 	/**
 	 * SYLK Characters array
 	 *
 	 * $var array
 	 */
-	private static $_SYLKCharacters = array();
+	private static $_SYLKCharacters = [];
 
 	/**
 	 * Decimal separator

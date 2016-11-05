@@ -595,7 +595,7 @@ class PHPExcel_Calculation_Functions {
 			return (array) $array;
 		}
 
-		$arrayValues = array();
+		$arrayValues = [];
 		foreach ($array as $value) {
 			if (is_array($value)) {
 				foreach ($value as $val) {
@@ -627,7 +627,7 @@ class PHPExcel_Calculation_Functions {
 			return (array) $array;
 		}
 
-		$arrayValues = array();
+		$arrayValues = [];
 		foreach ($array as $k1 => $value) {
 			if (is_array($value)) {
 				foreach ($value as $k2 => $val) {
@@ -791,7 +791,7 @@ if ((!function_exists('mb_str_replace')) &&
 	(function_exists('mb_substr')) && (function_exists('mb_strlen')) && (function_exists('mb_strpos'))) {
 	function mb_str_replace($search, $replace, $subject) {
 		if(is_array($subject)) {
-			$ret = array();
+			$ret = [];
 			foreach($subject as $key => $val) {
 				$ret[$key] = mb_str_replace($search, $replace, $val);
 			}

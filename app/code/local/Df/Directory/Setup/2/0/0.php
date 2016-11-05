@@ -137,7 +137,7 @@ class Df_Directory_Setup_2_0_0 extends Df_Core_Setup {
 				,array('Ярославская','Ярославль','76',3)
 			);
 			/** @var Df_Directory_Setup_Entity_Region[] $result */
-			$result = array();
+			$result = [];
 			foreach ($dtoRegions as $dtoRegion) {
 				/** @var array(string|int|null) $dtoRegion */
 				$result[]= call_user_func_array('Df_Directory_Setup_Entity_Region::i', $dtoRegion);

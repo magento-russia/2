@@ -21,7 +21,7 @@ class Df_Reward_Model_Resource_Reward extends Df_Core_Model_Resource {
 	 * @return array
 	 */
 	public function getRewardSalesrule($rule) {
-		$data = array();
+		$data = [];
 		$select = df_select()->from(df_table('df_reward/reward_salesrule'));
 		if (is_array($rule)) {
 			$select->where('rule_id IN (?)', $rule);

@@ -26,7 +26,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 				if (!empty($info['cookie'])) {
 					$options[CURLOPT_COOKIE] = $info['cookie'];
 				}
-				$urls = array();
+				$urls = [];
 				$urlsCount = 0;
 				$totalCount = 0;
 				$this->request(array($baseUrl), $options);
@@ -46,7 +46,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 						}
 
 						$urlsCount = 0;
-						$urls = array();
+						$urls = [];
 					}
 				}
 				if (!empty($urls)) {
@@ -105,7 +105,7 @@ class Df_PageCache_Model_Crawler extends Df_Core_Model {
 	 * @return array
 	 */
 	private function getStoresInfo() {
-		$baseUrls = array();
+		$baseUrls = [];
 		foreach (Mage::app()->getStores() as $store) {
 			/** @var Df_Core_Model_StoreM $store */
 			/** @var Mage_Core_Model_Website $website */

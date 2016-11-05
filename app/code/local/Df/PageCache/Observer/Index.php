@@ -9,7 +9,7 @@ class Df_PageCache_Observer_Index
 	 */
 	protected function _cleanEntityCache(Mage_Core_Model_Abstract $entity, array $ids)
 	{
-		$cacheTags = array();
+		$cacheTags = [];
 		foreach ($ids as $entityId) {
 			$entity->setId($entityId);
 			$cacheTags = array_merge($cacheTags, $entity->getCacheIdTags());

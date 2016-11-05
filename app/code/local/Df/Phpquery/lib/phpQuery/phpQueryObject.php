@@ -34,11 +34,11 @@ class phpQueryObject
 	 * @TODO refactor to ->nodes
 	 * @var array
 	 */
-	public $elements = array();
+	public $elements = [];
 	/**
 	 * @access private
 	 */
-	protected $elementsBackup = array();
+	protected $elementsBackup = [];
 	/**
 	 * @access private
 	 */
@@ -47,7 +47,7 @@ class phpQueryObject
 	 * @access private
 	 * @TODO deprecate
 	 */
-	protected $root = array();
+	protected $root = [];
 	/**
 	 * Indicated if doument is just a fragment (no <html> tag).
 	 *
@@ -62,7 +62,7 @@ class phpQueryObject
 	 * Iterator interface helper
 	 * @access private
 	 */
-	protected $elementsInterator = array();
+	protected $elementsInterator = [];
 	/**
 	 * Iterator interface helper
 	 * @access private
@@ -234,7 +234,7 @@ class phpQueryObject
 			->find('input, select, textarea')
 			->andSelf()
 			->not('form');
-		$return = array();
+		$return = [];
 //		$source->dumpDie();
 		foreach ($source as $input) {
 			$input = phpQuery::pq($input);
@@ -310,14 +310,14 @@ class phpQueryObject
 		$return =& $queries[0];
 		$specialChars = array('>',' ');
 //		$specialCharsMapping = array('/' => '>');
-		$specialCharsMapping = array();
+		$specialCharsMapping = [];
 		$strlen = mb_strlen($query);
 		$classChars = array('.', '-');
 		$pseudoChars = array('-');
 		$tagChars = array('*', '|', '-');
 		// split multibyte string
 		// http://code.google.com/p/phpquery/issues/detail?id=76
-		$_query = array();
+		$_query = [];
 		for ($i=0; $i<$strlen; $i++)
 			$_query[]= mb_substr($query, $i, 1);
 		$query = $_query;
@@ -493,7 +493,7 @@ class phpQueryObject
 		if ($index)
 			$return = $this->eq($index)->text();
 		else {
-			$return = array();
+			$return = [];
 			for($i = 0; $i < $this->size(); $i++) {
 				$return[]= $this->eq($i)->text();
 			}
@@ -520,7 +520,7 @@ class phpQueryObject
 		if ($index)
 			$return = $this->eq($index)->text();
 		else {
-			$return = array();
+			$return = [];
 			for($i = 0; $i < $this->size(); $i++) {
 				$return[]= $this->eq($i)->text();
 			}
@@ -604,7 +604,7 @@ class phpQueryObject
 	protected function runQuery($XQuery, $selector = null, $compare = null) {
 		if ($compare && ! method_exists($this, $compare))
 			return false;
-		$stack = array();
+		$stack = [];
 		if (! $this->elements)
 			$this->debug('Stack empty, skipping...');
 //		var_dump($this->elements[0]->nodeType);
@@ -638,7 +638,7 @@ class phpQueryObject
 			$this->debug("QUERY FETCHED");
 			if (! $nodes->length )
 				$this->debug('Nothing found');
-			$debug = array();
+			$debug = [];
 			foreach ($nodes as $node) {
 				$matched = false;
 				if ($compare) {
@@ -683,7 +683,7 @@ class phpQueryObject
 			if (! is_array($context) && $context instanceof DOMELEMENT)
 				$this->elements = array($context);
 			else if (is_array($context)) {
-				$this->elements = array();
+				$this->elements = [];
 				foreach ($context as $c)
 					if ($c instanceof DOMELEMENT)
 						$this->elements[]= $c;
@@ -696,7 +696,7 @@ class phpQueryObject
 		// remember stack state because of multi-queries
 		$oldStack = $this->elements;
 		// here we will be keeping found elements
-		$stack = array();
+		$stack = [];
 		foreach ($queries as $selector) {
 			$this->elements = $oldStack;
 			$delimiterBefore = false;
@@ -781,7 +781,7 @@ class phpQueryObject
 					$XQuery = '';
 					$subSelector = substr($s, 1);
 					$subElements = $this->elements;
-					$this->elements = array();
+					$this->elements = [];
 					foreach ($subElements as $node) {
 						// search first DOMElement sibling
 						$test = $node->nextSibling;
@@ -845,7 +845,7 @@ class phpQueryObject
 		switch($class) {
 			case 'even':
 			case 'odd':
-				$stack = array();
+				$stack = [];
 				foreach ($this->elements as $i => $node) {
 					if ($class == 'even' && ($i%2) == 0)
 						$stack[]= $node;
@@ -877,7 +877,7 @@ class phpQueryObject
 					$this->elements = array($this->elements[count($this->elements)-1]);
 				break;
 			/*case 'parent':
-				$stack = array();
+				$stack = [];
 				foreach ($this->elements as $node) {
 					if ($node->childNodes->length )
 						$stack[]= $node;
@@ -886,7 +886,7 @@ class phpQueryObject
 				break;*/
 			case 'contains':
 				$text = trim($args, "\"'");
-				$stack = array();
+				$stack = [];
 				foreach ($this->elements as $node) {
 					if (mb_stripos($node->textContent, $text) === false)
 						continue;
@@ -913,7 +913,7 @@ class phpQueryObject
 				break;
 			case 'has':
 				$selector = trim($args, "\"'");
-				$stack = array();
+				$stack = [];
 				foreach ($this->stack(1) as $el) {
 					if ($this->find($selector, $el, true)->length)
 						$stack[]= $el;
@@ -931,7 +931,7 @@ class phpQueryObject
 					)
 				);
 			break;
-//				$stack = array();
+//				$stack = [];
 //				foreach ($this->elements as $node)
 //					if ($node->is('input[type=submit]') || $node->is('button[type=submit]'))
 //						$stack[]= $el;
@@ -1141,7 +1141,7 @@ class phpQueryObject
 			$this->elementsBackup = $this->elements;
 			$this->debug("Filtering by callback");
 		}
-		$newStack = array();
+		$newStack = [];
 		foreach ($this->elements as $index => $node) {
 			$result = phpQuery::callbackRun($callback, array($index, $node));
 			if (is_null($result) || (! is_null($result) && $result))
@@ -1167,9 +1167,9 @@ class phpQueryObject
 			$selectors = $this->parseSelector($selectors);
 		if (! $_skipHistory)
 			$this->debug(array("Filtering:", $selectors));
-		$finalStack = array();
+		$finalStack = [];
 		foreach ($selectors as $selector) {
-			$stack = array();
+			$stack = [];
 			if (! $selector)
 				break;
 			// avoid first space or /
@@ -1563,7 +1563,7 @@ class phpQueryObject
 	 * @testme Support for text nodes
 	 */
 	public function contents() {
-		$stack = array();
+		$stack = [];
 		foreach ($this->stack(1) as $el) {
 			// FIXME (fixed) http://code.google.com/p/phpquery/issues/detail?id=56
 //			if (! isset($el->childNodes))
@@ -1584,7 +1584,7 @@ class phpQueryObject
 		foreach ($this->stack(1) as $node) {
 			if (! $node->parentNode )
 				continue;
-			$childNodes = array();
+			$childNodes = [];
 			// any modification in DOM tree breaks childNodes iteration, so cache them first
 			foreach ($node->childNodes as $chNode )
 				$childNodes[]= $chNode;
@@ -1617,7 +1617,7 @@ class phpQueryObject
 	public function eq($num) {
 		$oldStack = $this->elements;
 		$this->elementsBackup = $this->elements;
-		$this->elements = array();
+		$this->elements = [];
 		if (isset($oldStack[$num]))
 			$this->elements[]= $oldStack[$num];
 		return $this->newInstance();
@@ -1661,7 +1661,7 @@ class phpQueryObject
 	 * @access private
 	 */
 	public function _clone() {
-		$newStack = array();
+		$newStack = [];
 		//pr(array('copy... ', $this->whois()));
 		//$this->dumpHistory('copy');
 		$this->elementsBackup = $this->elements;
@@ -1869,7 +1869,7 @@ class phpQueryObject
 	 * @return phpQueryObject|QueryTemplatesSource|QueryTemplatesParse|QueryTemplatesSourceQuery
 	 */
 	public function children($selector = null) {
-		$stack = array();
+		$stack = [];
 		foreach ($this->stack(1) as $node) {
 //			foreach ($node->getElementsByTagName('*') as $newNode) {
 			foreach ($node->childNodes as $newNode) {
@@ -2001,7 +2001,7 @@ class phpQueryObject
 		}
 		switch(gettype($target)) {
 			case 'string':
-				$insertFrom = $insertTo = array();
+				$insertFrom = $insertTo = [];
 				if ($to) {
 					// INSERT TO
 					$insertFrom = $this->elements;
@@ -2023,7 +2023,7 @@ class phpQueryObject
 				}
 				break;
 			case 'object':
-				$insertFrom = $insertTo = array();
+				$insertFrom = $insertTo = [];
 				// phpQuery
 				if ($target instanceof self) {
 					if ($to) {
@@ -2312,7 +2312,7 @@ class phpQueryObject
 	 * @access private
 	 */
 	protected function getElementSiblings($direction, $selector = null, $limitToOne = false) {
-		$stack = array();
+		$stack = [];
 		$count = 0;
 		foreach ($this->stack() as $node) {
 			$test = $node;
@@ -2338,7 +2338,7 @@ class phpQueryObject
 	 * @return phpQueryObject|QueryTemplatesSource|QueryTemplatesParse|QueryTemplatesSourceQuery
 	 */
 	public function siblings($selector = null) {
-		$stack = array();
+		$stack = [];
 		$siblings = array_merge(
 			$this->getElementSiblings('previousSibling', $selector),
 			$this->getElementSiblings('nextSibling', $selector)
@@ -2358,7 +2358,7 @@ class phpQueryObject
 			phpQuery::debug(array('not', $selector));
 		else
 			phpQuery::debug('not');
-		$stack = array();
+		$stack = [];
 		if ($selector instanceof self || $selector instanceof DOMNODE) {
 			foreach ($this->stack() as $node) {
 				if ($selector instanceof self) {
@@ -2380,7 +2380,7 @@ class phpQueryObject
 		} else {
 			$orgStack = $this->stack();
 			$matched = $this->filter($selector, true)->stack();
-//			$matched = array();
+//			$matched = [];
 //			// simulate OR in filter() instead of AND 5y
 //			foreach ($this->parseSelector($selector) as $s) {
 //				$matched = array_merge($matched,
@@ -2402,7 +2402,7 @@ class phpQueryObject
 	public function add($selector = null) {
 		if (! $selector)
 			return $this;
-		$stack = array();
+		$stack = [];
 		$this->elementsBackup = $this->elements;
 		$found = phpQuery::pq($selector, $this->getDocumentID());
 		$this->merge($found->elements);
@@ -2436,7 +2436,7 @@ class phpQueryObject
 	 * @return phpQueryObject|QueryTemplatesSource|QueryTemplatesParse|QueryTemplatesSourceQuery
 	 */
 	public function parent($selector = null) {
-		$stack = array();
+		$stack = [];
 		foreach ($this->elements as $node )
 			if ($node->parentNode && ! $this->elementsContainsNode($node->parentNode, $stack))
 				$stack[]= $node->parentNode;
@@ -2451,7 +2451,7 @@ class phpQueryObject
 	 * @return phpQueryObject|QueryTemplatesSource|QueryTemplatesParse|QueryTemplatesSourceQuery
 	 */
 	public function parents($selector = null) {
-		$stack = array();
+		$stack = [];
 		if (! $this->elements )
 			$this->debug('parents() - stack empty');
 		foreach ($this->elements as $node) {
@@ -2482,7 +2482,7 @@ class phpQueryObject
 			return $this->elements;
 		if (!is_array($nodeTypes))
 			$nodeTypes = array($nodeTypes);
-		$return = array();
+		$return = [];
 		foreach ($this->elements as $node) {
 			if (in_array($node->nodeType, $nodeTypes))
 				$return[]= $node;
@@ -2555,7 +2555,7 @@ class phpQueryObject
 				}
 			} else if ($attr == '*') {
 				// jQuery difference
-				$return = array();
+				$return = [];
 				foreach ($node->attributes as $n => $v)
 					$return[$n] = $v->value;
 				return $return;
@@ -2571,7 +2571,7 @@ class phpQueryObject
 	 * @access private
 	 */
 	protected function getNodeAttrs($node) {
-		$return = array();
+		$return = [];
 		foreach ($node->attributes as $n => $o)
 			$return[]= $n;
 		return $return;
@@ -2597,7 +2597,7 @@ class phpQueryObject
 //				$node->appendChild($attrNode);
 			} else if ($attr == '*') {
 				// jQuery diff
-				$return = array();
+				$return = [];
 				foreach ($node->attributes as $n => $v)
 					$return[$n] = $v->value;
 				return $return;
@@ -2652,7 +2652,7 @@ class phpQueryObject
 						$node->removeAttr('checked');
 				} else if ($node->get(0)->tagName == 'select') {
 					if (! isset($_val)) {
-						$_val = array();
+						$_val = [];
 						if (! is_array($val))
 							$_val = array((string)$val);
 						else
@@ -2828,7 +2828,7 @@ class phpQueryObject
 	 * @todo add $scope and $args as in each() ???
 	 */
 	public function map($callback, $param1 = null, $param2 = null, $param3 = null) {
-//		$stack = array();
+//		$stack = [];
 ////		foreach ($this->newInstance() as $node) {
 //		foreach ($this->newInstance() as $node) {
 //			$result = call_user_func($callback, $node);
@@ -2968,7 +2968,7 @@ class phpQueryObject
 	 * @access private
 	 */
 	protected function getNodeXpath($oneNode = null, $namespace = null) {
-		$return = array();
+		$return = [];
 		$loop = $oneNode
 			? array($oneNode)
 			: $this->elements;
@@ -2979,7 +2979,7 @@ class phpQueryObject
 				$return[]= '';
 				continue;
 			}
-			$xpath = array();
+			$xpath = [];
 			while(! ($node instanceof DOMDOCUMENT)) {
 				$i = 1;
 				$sibling = $node;
@@ -3003,7 +3003,7 @@ class phpQueryObject
 	}
 	// HELPERS
 	public function whois($oneNode = null) {
-		$return = array();
+		$return = [];
 		$loop = $oneNode
 			? array( $oneNode )
 			: $this->elements;

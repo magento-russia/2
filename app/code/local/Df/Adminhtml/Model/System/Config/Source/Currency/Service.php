@@ -18,7 +18,7 @@ class Df_Adminhtml_Model_System_Config_Source_Currency_Service extends Df_Admin_
 		// потому что у класса нет параметров.
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[][] $result */
-			$result = array();
+			$result = [];
 			foreach (df_config_a('global/currency/import/services') as $code => $service) {
 				/** @var array $service */
 				df_assert_array($service);

@@ -49,7 +49,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 	 *
 	 * @var array
 	 */
-	private $_styles = array();
+	private $_styles = [];
 
 	/**
 	 * Character set used in the file
@@ -135,7 +135,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 			throw new PHPExcel_Reader_Exception($pFilename . " is an Invalid Spreadsheet file.");
 		}
 
-		$worksheetNames = array();
+		$worksheetNames = [];
 
 		$xml = simplexml_load_file($pFilename);
 		$namespaces = $xml->getNamespaces(true);
@@ -163,7 +163,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$worksheetInfo = array();
+		$worksheetInfo = [];
 
 		$xml = simplexml_load_file($pFilename);
 		$namespaces = $xml->getNamespaces(true);
@@ -173,7 +173,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 		foreach($xml_ss->Worksheet as $worksheet) {
 			$worksheet_ss = $worksheet->attributes($namespaces['ss']);
 
-			$tmpInfo = array();
+			$tmpInfo = [];
 			$tmpInfo['worksheetName'] = '';
 			$tmpInfo['lastColumnLetter'] = 'A';
 			$tmpInfo['lastColumnIndex'] = 0;
@@ -411,7 +411,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 			$styleID = (string) $style_ss['ID'];
 //			echo 'Style ID = '.$styleID.'<br />';
 			if ($styleID == 'Default') {
-				$this->_styles['Default'] = array();
+				$this->_styles['Default'] = [];
 			} else {
 				$this->_styles[$styleID] = $this->_styles['Default'];
 			}
@@ -443,7 +443,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 					case 'Borders' :
 							foreach($styleData->Border as $borderStyle) {
 								$borderAttributes = $borderStyle->attributes($namespaces['ss']);
-								$thisBorder = array();
+								$thisBorder = [];
 								foreach($borderAttributes as $borderStyleKey => $borderStyleValue) {
 //									echo $borderStyleKey.' = '.$borderStyleValue.'<br />';
 									switch ($borderStyleKey) {

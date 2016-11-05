@@ -365,9 +365,9 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 			}
 		}
 		/** @var Zend_Validate_Interface[] $additionalValidators */
-		$additionalValidators = array();
+		$additionalValidators = [];
 		/** @var Zend_Filter_Interface[] $additionalFilters */
-		$additionalFilters = array();
+		$additionalFilters = [];
 		if (!is_array($validator)) {
 			$validator = \Df\Core\Validator::resolveForProperty(
 				$this, $validator, $key, $skipOnNull = false === $isRequired
@@ -620,11 +620,11 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	}
 
 	/** @var array(string => Zend_Filter_Interface[]) */
-	private $_filters = array();
+	private $_filters = [];
 	/** @var array(string => Zend_Validate_Interface[]) */
-	private $_validators = array();
+	private $_validators = [];
 	/** @var array(string => bool) */
-	private $_valueWasNullBeforeFilters = array();
+	private $_valueWasNullBeforeFilters = [];
 
 	const CACHE_KEY_EMPTY = 'empty'; // ключ для кэширования пустых блоков
 	const CACHE_LIFETIME_DISABLE = null;
@@ -668,7 +668,7 @@ class Df_Core_Block_Template extends Mage_Core_Block_Template {
 	protected static function m($class, $functions) {
 		df_assert($functions);
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();

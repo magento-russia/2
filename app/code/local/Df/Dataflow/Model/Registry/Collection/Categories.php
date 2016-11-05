@@ -87,5 +87,5 @@ class Df_Dataflow_Model_Registry_Collection_Categories extends Df_Dataflow_Model
 	 * Используется методом @see Df_Dataflow_Model_Registry_Collection_Categories::reset()
 	 * @var array(int => Df_Dataflow_Model_Registry_Collection_Categories)
 	 */
-	private static $_s = array();
+	private static $_s = [];
 }

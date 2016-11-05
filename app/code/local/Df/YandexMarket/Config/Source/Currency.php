@@ -21,7 +21,7 @@ class Currency extends \Df_Admin_Config_Source {
 			/** @noinspection PhpParamsInspection */
 			$optionCurrencyMap = df_options_to_map(\Mage::app()->getLocale()->getOptionCurrencies());
 			/** @var string[][] $result */
-			$result = array();
+			$result = [];
 			foreach (self::$_currencies as $currencyCode) {
 				/** @var string $currencyCode */
 				/** @var string|null $label */

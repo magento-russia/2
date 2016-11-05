@@ -100,7 +100,7 @@ class Df_Seo_Model_Processor_Image_Renamer extends Df_Core_Model {
 
 	/** @return array */
 	private function getFields() {
-		$result = array();
+		$result = [];
 		$fields = array("image", "small_image", "thumbnail");
 		foreach ($fields as $field) {
 			/** @noinspection PhpUndefinedMethodInspection */

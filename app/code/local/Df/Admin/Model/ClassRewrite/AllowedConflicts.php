@@ -22,7 +22,7 @@ class Df_Admin_Model_ClassRewrite_AllowedConflicts extends Df_Core_Model {
 	private function getMap() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => array(string => bool) $result */
-			$result = array();
+			$result = [];
 			/** @var Mage_Core_Model_Config_Element[]|bool $nodes */
 			$nodes = df_config_node('df/admin/class_rewrite_conflicts/skip/conflict');
 			if ($nodes) {

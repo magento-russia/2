@@ -81,7 +81,7 @@ class PHPExcel_Style_Conditional implements PHPExcel_IComparable
 	 *
 	 * @var string[]
 	 */
-	private $_condition = array();
+	private $_condition = [];
 
 	/**
 	 * Style

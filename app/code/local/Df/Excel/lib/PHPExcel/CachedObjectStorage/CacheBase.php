@@ -70,7 +70,7 @@ abstract class PHPExcel_CachedObjectStorage_CacheBase {
 	 *
 	 * @var array of mixed
 	 */
-	protected $_cellCache = array();
+	protected $_cellCache = [];
 
 
 	/**
@@ -180,7 +180,7 @@ abstract class PHPExcel_CachedObjectStorage_CacheBase {
 	 * @return	void
 	 */
 	public function getSortedCellList() {
-		$sortKeys = array();
+		$sortKeys = [];
 		foreach ($this->getCellList() as $coord) {
 			sscanf($coord,'%[A-Z]%d', $column, $row);
 			$sortKeys[rm_sprintf('%09d%3s',$row,$column)] = $coord;

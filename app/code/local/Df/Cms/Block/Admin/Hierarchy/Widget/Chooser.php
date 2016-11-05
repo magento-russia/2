@@ -7,7 +7,7 @@ class Df_Cms_Block_Admin_Hierarchy_Widget_Chooser extends Df_Core_Block_Admin {
 	/** @return array[] */
 	public function getNodes() {
 		/** @var array[] $result */
-		$result = array();
+		$result = [];
 		$collection = Df_Cms_Model_Hierarchy_Node::c();
 		$collection
 			->joinCmsPage()

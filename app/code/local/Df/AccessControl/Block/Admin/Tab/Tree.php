@@ -103,7 +103,7 @@ class Df_AccessControl_Block_Admin_Tab_Tree	extends Mage_Adminhtml_Block_Catalog
 	 */
 	public static function getChildrenNodes($categoryId) {
 		/** @var array(array(string => mixed)) $result */
-		$result = array();
+		$result = [];
 		/** @var Df_AccessControl_Block_Admin_Tab_Tree $i */
 		$i = new self;
 		/** @var Varien_Data_Tree $tree */

@@ -193,7 +193,7 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
 
 		$escapeEnclosures = array( "\\" . $this->_enclosure, $this->_enclosure . $this->_enclosure );
 
-		$worksheetInfo = array();
+		$worksheetInfo = [];
 		$worksheetInfo[0]['worksheetName'] = 'Worksheet';
 		$worksheetInfo[0]['lastColumnLetter'] = 'A';
 		$worksheetInfo[0]['lastColumnIndex'] = 0;

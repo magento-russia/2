@@ -11,7 +11,7 @@ class Df_Logging_Helper_Data extends Mage_Core_Helper_Abstract {
 		if (!is_array($array)) {
 			return $array;
 		}
-		$result = array();
+		$result = [];
 		foreach ($array as $item) {
 			if ((string)$item !== '') {
 				$result[]= $item;

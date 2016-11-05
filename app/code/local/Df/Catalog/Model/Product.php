@@ -418,7 +418,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	public function getDownloadableLinks() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(int => Mage_Downloadable_Model_Link) $result */
-			$result = array();
+			$result = [];
 			if ($this->isDownloadable()) {
 				/** @var Df_Downloadable_Model_Resource_Link_Collection $links */
 				$links = Df_Downloadable_Model_Link::c();
@@ -577,7 +577,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	public function getImageUrls() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			if (is_array($this->getMediaGallery())) {
 				/** @var array(string => string)|null $images */
 				$images = dfa($this->getMediaGallery(), 'images');
@@ -727,7 +727,7 @@ class Df_Catalog_Model_Product extends Mage_Catalog_Model_Product {
 	 */
 	public function getOptionsByTitle($title) {
 		df_param_string_not_empty($title, 0);
-		$result = array();
+		$result = [];
 		foreach ($this->getOptions() as $option) {
 			/** @var Df_Catalog_Model_Product_Option $option */
 			if ($title === $option->getTitle()) {

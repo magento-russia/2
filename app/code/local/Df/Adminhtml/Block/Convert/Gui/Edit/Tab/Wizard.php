@@ -28,7 +28,7 @@ class Df_Adminhtml_Block_Convert_Gui_Edit_Tab_Wizard
 		$mappings = parent::getMappings($entityType);
 		df_assert_array($mappings);
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		foreach ($mappings as $ordering => $fieldName) {
 			/** @var int $ordering */
 			df_assert_integer($ordering);

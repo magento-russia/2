@@ -132,7 +132,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 		if (isset($importData['websites'])) {
 			$websiteIds = $product->getWebsiteIds();
 			if (!is_array($websiteIds) || !$store->getId()) {
-				$websiteIds = array();
+				$websiteIds = [];
 			}
 			$websiteCodes = df_csv_parse($importData['websites']);
 			foreach ($websiteCodes as $websiteCode) {
@@ -207,7 +207,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 				) {
 					$value = explode(self::MULTI_DELIMITER, $value);
 					$isArray = true;
-					$setValue = array();
+					$setValue = [];
 				}
 				if ('decimal' === $value && $attribute->getBackendType()) {
 					$setValue = $this->getNumber($value);
@@ -260,7 +260,7 @@ class Df_Catalog_Model_Convert_Adapter_Product extends Mage_Catalog_Model_Conver
 			/** @noinspection PhpUndefinedMethodInspection */
 			$product->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE);
 		}
-		$stockData = array();
+		$stockData = [];
 		$inventoryFields = isset($this->_inventoryFieldsProductTypes[$product->getTypeId()])
 			? $this->_inventoryFieldsProductTypes[$product->getTypeId()]
 			: array();

@@ -27,7 +27,7 @@ class Df_Adminhtml_Catalog_Product_GalleryController extends Mage_Adminhtml_Cata
 		//We upload image to local Magento FS, then we check whether this file exists in DB
 		//If it exists, we are getting unique name from DB, and change them on FS
 		//After this we upload file to DB storage
-		$result = array();
+		$result = [];
 		try {
 			$uploader = new Varien_File_Uploader('image');
 			$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));

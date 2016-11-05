@@ -60,7 +60,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 	 * @return array
 	 */
 	public function getRewritesForProducts(array $productIds, $storeId) {
-		$result = array();
+		$result = [];
 		/** @var Zend_Db_Statement_Pdo $query */
 		$query = df_conn()->query(
 			df_select()
@@ -79,7 +79,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 			$rewrite->setIdFieldName($this->getIdFieldName());
 			$productId = $rewrite->getData('product_id');
 			if (!isset($result[$productId])) {
-				$result[$productId] = array();
+				$result[$productId] = [];
 			}
 			$result[$productId][]= $rewrite;
 		}
@@ -125,7 +125,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 		// мы поддерживаем её, даже если она отсутствует в стандартной сборке
 
 		/** @var bool[] $needSaveRewriteHistoryPatch */
-		static $needSaveRewriteHistoryPatch = array();
+		static $needSaveRewriteHistoryPatch = [];
 		/** @var int $storeId */
 		$storeId = $rewriteData['store_id'];
 		if (!isset($needSaveRewriteHistoryPatch[$storeId])) {
@@ -176,7 +176,7 @@ class Df_Catalog_Model_Resource_Url extends Mage_Catalog_Model_Resource_Url {
 		$isActiveAttribute = df_mage()->eav()->configSingleton()->getAttribute(
 			Mage_Catalog_Model_Category::ENTITY, 'is_active'
 		);
-		$categories = array();
+		$categories = [];
 		$adapter = $this->_getReadAdapter();
 		$categoryIds = df_array($categoryIds);
 		/**

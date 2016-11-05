@@ -6,11 +6,11 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 	 */
 	public function getCompileClassList() {
 		Df_Core_Boot::run();
-		$arrFiles = array();
+		$arrFiles = [];
 		foreach ($this->getScopes() as $code) {
 			/** @var array|null $classes */
 			$arrFiles[$code] = array_keys(df_nta(dfa($this->getConfigMap(), $code), true));
-			$statClasses = array();
+			$statClasses = [];
 			/** @var string|null $statFileForTheCurrentScope */
 			$statFileForTheCurrentScope = dfa($this->getStatFiles(), $code);
 			if (!is_null($statFileForTheCurrentScope)) {
@@ -19,7 +19,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 				$statClassesCount = count($statClassesAll);
 				/** @var int $statClassesLimit */
 				$statClassesLimit = df_round(1.0 * $statClassesCount);
-				$popularStatClasses = array();
+				$popularStatClasses = [];
 				foreach ($statClassesAll as $classInfo) {
 					$classInfo = explode(':', $classInfo);
 					$popularStatClasses[$classInfo[1]][]= $classInfo[0];
@@ -74,7 +74,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 	 * @return string
 	 */
 	private function _getClassesSourceCodeDf($classes, $scope) {
-		$sortedClasses = array();
+		$sortedClasses = [];
 		foreach ($classes as $className) {
 			/** @var string $className */
 			if (!@class_exists($className)) {
@@ -187,7 +187,7 @@ class Df_Compiler_Model_Process extends Mage_Compiler_Model_Process {
 	private function getStatFiles() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			if (is_dir($this->_statDir)) {
 				$dir = dir($this->_statDir);
 				while (false !== ($file = $dir->read())) {

@@ -81,7 +81,7 @@ class trendClass
 	 *
 	 * @var PHPExcel_Best_Fit[]
 	 **/
-	private static $_trendCache = array();
+	private static $_trendCache = [];
 
 
 	public static function calculate($trendType=self::TREND_BEST_FIT, $yValues, $xValues=array(), $const=True) {

@@ -10,7 +10,7 @@ class Df_Directory_UtilityController extends Mage_Core_Controller_Front_Action {
 			/** @var string[] $fileContentsAsRows */
 			$fileContentsAsRows = df_explode_n($fileContents);
 			/** @var array(string => array(string => string)) $fileContentsAsAssocArray */
-			$fileContentsAsAssocArray = array();
+			$fileContentsAsAssocArray = [];
 			foreach ($fileContentsAsRows as $fileContentsAsRow) {
 				/** @var string[] $fileContentsAsRow */
 				$rowAsColumns = explode(';', $fileContentsAsRow);

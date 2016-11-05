@@ -75,7 +75,7 @@ class Df_Reward_Model_Action_OrderExtra extends Df_Reward_Model_Action_Abstract 
 			 * Смотрим, какие ценовые правила применимы к корзине.
 			 */
 			/** @var array $ruleIds */
-			$ruleIds = array();
+			$ruleIds = [];
 			foreach (df_h()->reward()->getSalesRuleApplications() as $salesRuleApplication) {
 				/** @var Varien_Object $salesRuleApplication */
 				/** @var Mage_SalesRule_Model_Rule $rule */

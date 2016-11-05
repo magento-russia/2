@@ -177,7 +177,7 @@ class Df_Cms_Setup_2_0_0 extends Df_Core_Setup {
 					,'level' => 1
 					,'last_id' => 1
 				));
-				$_data = array();
+				$_data = [];
 				foreach ($attributes as $attr) {
 					$_data[$attr] = $page[$attr];
 				}

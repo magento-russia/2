@@ -324,9 +324,9 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 			}
 		}
 		/** @var Zend_Validate_Interface[] $additionalValidators */
-		$additionalValidators = array();
+		$additionalValidators = [];
 		/** @var Zend_Filter_Interface[] $additionalFilters */
-		$additionalFilters = array();
+		$additionalFilters = [];
 		if (!is_array($validator)) {
 			$validator = \Df\Core\Validator::resolveForProperty(
 				$this, $validator, $key, $skipOnNull = false === $isRequired
@@ -1091,19 +1091,19 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	protected $_eventPrefix = 'df_core_abstract';
 
 	/** @var array(string => bool) */
-	private $_cachedPropertiesLoaded = array();
+	private $_cachedPropertiesLoaded = [];
 	/** @var array(string => bool) */
-	private $_cachedPropertiesModified = array();
+	private $_cachedPropertiesModified = [];
 	/** @var array(string => null) */
 	private $_cachedPropertiesSimpleMap;
 	/** @var array(string => bool) */
-	private $_disabledMixins = array();
+	private $_disabledMixins = [];
 	/** @var array(string => Zend_Filter_Interface[]) */
-	private $_filters = array();
+	private $_filters = [];
 	/** @var array(string => Zend_Validate_Interface[]) */
-	private $_validators = array();
+	private $_validators = [];
 	/** @var array(string => bool) */
-	private $_valueWasNullBeforeFilters = array();
+	private $_valueWasNullBeforeFilters = [];
 
 	/**
 	 * @param string $class
@@ -1113,7 +1113,7 @@ abstract class Df_Core_Model extends Mage_Core_Model_Abstract implements Df_Core
 	protected static function m($class, $functions) {
 		df_assert($functions);
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();

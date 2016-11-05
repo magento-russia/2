@@ -48,7 +48,7 @@ class Df_Admin_Model_Form_Element extends Df_Core_Model {
 
 	/** @return string */
 	private function getDefaultValueFromOptions() {
-		$defTextArr = array();
+		$defTextArr = [];
 		foreach ($this->getOptions() as $k=>$v) {
 			/** @var string $k */
 			/** @var array $v */

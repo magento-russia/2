@@ -2346,7 +2346,7 @@ class PHPExcel_Calculation_Engineering {
 	 *	@return	array
 	 */
 	public static function getConversionGroups() {
-		$conversionGroups = array();
+		$conversionGroups = [];
 		foreach(self::$_conversionUnits as $conversionUnit) {
 			$conversionGroups[] = $conversionUnit['Group'];
 		}
@@ -2362,7 +2362,7 @@ class PHPExcel_Calculation_Engineering {
 	 *	@return	array
 	 */
 	public static function getConversionGroupUnits($group = NULL) {
-		$conversionGroups = array();
+		$conversionGroups = [];
 		foreach(self::$_conversionUnits as $conversionUnit => $conversionGroup) {
 			if ((is_null($group)) || ($conversionGroup['Group'] == $group)) {
 				$conversionGroups[$conversionGroup['Group']][] = $conversionUnit;
@@ -2379,7 +2379,7 @@ class PHPExcel_Calculation_Engineering {
 	 *	@return	array
 	 */
 	public static function getConversionGroupUnitDetails($group = NULL) {
-		$conversionGroups = array();
+		$conversionGroups = [];
 		foreach(self::$_conversionUnits as $conversionUnit => $conversionGroup) {
 			if ((is_null($group)) || ($conversionGroup['Group'] == $group)) {
 				$conversionGroups[$conversionGroup['Group']][] = array(	'unit'			=> $conversionUnit,

@@ -45,7 +45,7 @@ class Df_Adminhtml_Model_Config_Data_1401 extends Df_Adminhtml_Model_Config_Data
 		$configDataCollection = Df_Core_Model_Config_Data::c();
 		$configDataCollection->addScopeFilter($this->getScope(), $this->getScopeId(), $path);
 		/** @var array(string => string|array(string => string|int)) $result */
-		$result = array();
+		$result = [];
 		foreach ($configDataCollection as $data) {
 			/** @var Df_Core_Model_Config_Data $data */
 			$result[$data->getPath()] =

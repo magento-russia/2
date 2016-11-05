@@ -207,7 +207,7 @@ class Df_Localization_Onetime_Processor extends Df_Core_Model {
 	 */
 	private function executeFilesystemOperations(Df_Localization_Onetime_Dictionary $dictionary) {
 		/** @var string[] $messages */
-		$messages = array();
+		$messages = [];
 		foreach ($dictionary->getFilesystemOperations() as $filesystemOperation) {
 			/** @var Df_Localization_Onetime_Dictionary_Filesystem_Operation $filesystemOperation */
 			try {

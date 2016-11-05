@@ -7,7 +7,7 @@
 class Df_Seo_Model_Processor_UrlKey_Product extends Mage_Dataflow_Model_Convert_Container_Abstract {
 	public function process() {
 		/** @var array $messagesToReport */
-		$messagesToReport = array();
+		$messagesToReport = [];
 		/** @var Df_Catalog_Model_Resource_Product_Collection $products */
 		$products = Df_Catalog_Model_Product::c();
 		$products->addAttributeToSelect("url_key");

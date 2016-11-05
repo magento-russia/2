@@ -57,7 +57,7 @@ class Df_Localization_Onetime_TypeManager extends Df_Core_Model {
 		return $this->_types[$type];
 	}
 	/** @var array(string => Df_Localization_Onetime_Type) */
-	private $_types = array();
+	private $_types = [];
 
 	/**
 	 * @return void

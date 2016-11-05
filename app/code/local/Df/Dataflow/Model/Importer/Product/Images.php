@@ -106,7 +106,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		$productWithDefaultValues = $product->forStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 		$productWithDefaultValues->deleteImages();
 		/** @var string[] $attributesToUpdate */
-		$attributesToUpdate = array();
+		$attributesToUpdate = [];
 		foreach ($mediaAttributes as $mediaAttribute) {
 			/** @var string $mediaAttribute */
 			if (!$productWithDefaultValues->getData($mediaAttribute)) {
@@ -183,7 +183,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 		$storesToExcludeFrom[]= Mage_Core_Model_App::ADMIN_STORE_ID;
 		if ($storesToExcludeFrom) {
 			/** @var string[] $imageFileNames */
-			$imageFileNames = array();
+			$imageFileNames = [];
 			/** @var Mage_Eav_Model_Entity_Attribute_Abstract[] $attributes */
 			$attributes = $product->getTypeInstance()->getSetAttributes();
 			df_assert_array($attributes);
@@ -245,7 +245,7 @@ class Df_Dataflow_Model_Importer_Product_Images extends Df_Core_Model {
 	private function getImages() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result  */
-			$result = array();
+			$result = [];
 			foreach ($this->cfg(self::P__IMAGES) as $image) {
 				/** @var string $image */
 				if (df_check_url($image)) {

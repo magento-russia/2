@@ -109,7 +109,7 @@ abstract class phpQueryEvents {
 		if (! $eventNode)
 			$eventNode = self::setNode($documentID, $node);
 		if (!isset($eventNode->eventHandlers[$type]))
-			$eventNode->eventHandlers[$type] = array();
+			$eventNode->eventHandlers[$type] = [];
 		$eventNode->eventHandlers[$type][]= array(
 			'callback' => $callback,
 			'data' => $data,

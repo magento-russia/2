@@ -249,7 +249,7 @@ class Df_Core_State {
 	 * @used-by blockSetPrev()
 	 * @var array(Mage_Core_Block_Abstract|null)
 	 */
-	private $_blockStack = array();
+	private $_blockStack = [];
 	/** @var bool */
 	private $_layoutRenderingHasBeenStarted = false;
 	/**

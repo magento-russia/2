@@ -46,7 +46,7 @@ class OrderItems extends \Df\Xml\Generator\Document {
 	/** @return array(array(string => string|array(string => int|float))) */
 	private function getDocumentData_Items() {return dfc($this, function() {
 		/** @var array(array(string => string|array(string => int|string))) $result  */
-		$result = array();
+		$result = [];
 		/** @var int $itemOrdering */
 		$itemOrdering = 0;
 		foreach ($this->getOrderItems() as $item) {

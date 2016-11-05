@@ -6,7 +6,7 @@ class Df_WalletOne_Helper_Data extends Mage_Core_Helper_Data {
 	 */
 	public function preprocessSignatureParams(array $params) {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		foreach ($params as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */

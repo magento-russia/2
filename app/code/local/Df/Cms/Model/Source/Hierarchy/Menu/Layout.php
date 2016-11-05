@@ -7,7 +7,7 @@ class Df_Cms_Model_Source_Hierarchy_Menu_Layout {
 	 * @return array
 	 */
 	public function toOptionArray($withDefault = false) {
-		$options = array();
+		$options = [];
 		if ($withDefault) {
 		   $options[]= df_option('', df_h()->cms()->__('Use Default'));
 		}

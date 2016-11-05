@@ -44,7 +44,7 @@ class Df_Admin_Model_ClassRewrite_Finder extends Df_Core_Model {
 	private function getModulesConfiguration() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Varien_Simplexml_Config) $result */
-			$result = array();
+			$result = [];
 			/** @var array(string => Mage_Core_Model_Config_Element) $moduleDeclarations */
 			$moduleDeclarations = df_config_node('modules')->children();
 			/** @var string[] $configFileBaseNames */

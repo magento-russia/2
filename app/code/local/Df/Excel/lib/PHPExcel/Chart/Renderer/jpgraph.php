@@ -274,7 +274,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 		}
 
 		$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
-		$seriesPlots = array();
+		$seriesPlots = [];
 		if ($grouping == 'percentStacked') {
 			$sumValues = $this->_percentageSumCalculation($groupID,$seriesCount);
 		}
@@ -350,7 +350,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 
 
 		$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
-		$seriesPlots = array();
+		$seriesPlots = [];
 		if ($grouping == 'percentStacked') {
 			$sumValues = $this->_percentageSumCalculation($groupID,$seriesCount);
 		}
@@ -416,7 +416,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 		$scatterStyle = $bubbleSize = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotStyle();
 
 		$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
-		$seriesPlots = array();
+		$seriesPlots = [];
 
 		//	Loop through each data series in turn
 		for($i = 0; $i < $seriesCount; ++$i) {
@@ -460,7 +460,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 		$radarStyle = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotStyle();
 
 		$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
-		$seriesPlots = array();
+		$seriesPlots = [];
 
 		//	Loop through each data series in turn
 		for($i = 0; $i < $seriesCount; ++$i) {
@@ -468,7 +468,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 			$dataValuesX = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotValuesByIndex($i)->getDataValues();
 			$marker = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotValuesByIndex($i)->getPointMarker();
 
-			$dataValues = array();
+			$dataValues = [];
 			foreach($dataValuesY as $k => $dataValueY) {
 				$dataValues[$k] = implode(' ',array_reverse($dataValueY));
 			}
@@ -498,9 +498,9 @@ class PHPExcel_Chart_Renderer_jpgraph
 		$contourStyle = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotStyle();
 
 		$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
-		$seriesPlots = array();
+		$seriesPlots = [];
 
-		$dataValues = array();
+		$dataValues = [];
 		//	Loop through each data series in turn
 		for($i = 0; $i < $seriesCount; ++$i) {
 			$dataValuesY = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotCategoryByIndex($i)->getDataValues();
@@ -517,9 +517,9 @@ class PHPExcel_Chart_Renderer_jpgraph
 	private function _renderPlotStock($groupID) {
 		$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
 		$plotOrder = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotOrder();
-		$seriesPlots = array();
+		$seriesPlots = [];
 
-		$dataValues = array();
+		$dataValues = [];
 		//	Loop through each data series in turn
 		for($i = 0; $i < $seriesCount; ++$i) {
 			$dataValuesY = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotCategoryByIndex($i)->getDataValues();
@@ -613,7 +613,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 			}
 
 			$seriesCount = $this->_chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
-			$seriesPlots = array();
+			$seriesPlots = [];
 			//	For pie charts, we only display the first series: doughnut charts generally display all series
 			$jLimit = ($multiplePlots) ? $seriesCount : 1;
 			//	Loop through each data series in turn
@@ -756,7 +756,7 @@ class PHPExcel_Chart_Renderer_jpgraph
 		if ($groupCount == 1) {
 			$chartType = $this->_chart->getPlotArea()->getPlotGroupByIndex(0)->getPlotType();
 		} else {
-			$chartTypes = array();
+			$chartTypes = [];
 			for($i = 0; $i < $groupCount; ++$i) {
 				$chartTypes[] = $this->_chart->getPlotArea()->getPlotGroupByIndex($i)->getPlotType();
 			}

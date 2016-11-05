@@ -28,7 +28,7 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 	public function getAttributes() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Catalog_Model_Resource_Eav_Attribute) $result */
-			$result = array();
+			$result = [];
 			foreach (df_attributes() as $attribute) {
 				/** @var Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 				df_assert($attribute->hasAttributeSetInfo());
@@ -148,7 +148,7 @@ class Df_Eav_Model_Entity_Attribute_Set extends Mage_Eav_Model_Entity_Attribute_
 	const P__NAME = 'attribute_set_name';
 
 	/** @var array(string => bool) */
-	private $_hasExternalId = array();
+	private $_hasExternalId = [];
 
 	/** @return Df_Eav_Model_Resource_Entity_Attribute_Set_Collection */
 	public static function c() {return new Df_Eav_Model_Resource_Entity_Attribute_Set_Collection;}

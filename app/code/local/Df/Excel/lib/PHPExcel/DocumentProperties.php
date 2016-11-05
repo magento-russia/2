@@ -125,7 +125,7 @@ class PHPExcel_DocumentProperties
      *
      * @var string
      */
-    private $_customProperties    = array();
+    private $_customProperties    = [];
 
 
     /**

@@ -126,7 +126,7 @@ class PHPExcel_Writer_Excel5 extends PHPExcel_Writer_Abstract implements PHPExce
 		PHPExcel_Calculation_Functions::setReturnDateType(PHPExcel_Calculation_Functions::RETURNDATE_EXCEL);
 
 		// initialize colors array
-		$this->_colors          = array();
+		$this->_colors          = [];
 
 		// Initialise workbook writer
 		$this->_writerWorkbook = new PHPExcel_Writer_Excel5_Workbook($this->_phpExcel,
@@ -182,7 +182,7 @@ class PHPExcel_Writer_Excel5 extends PHPExcel_Writer_Abstract implements PHPExce
 
 		// Write the worksheet streams before the global workbook stream,
 		// because the byte sizes of these are needed in the global workbook stream
-		$worksheetSizes = array();
+		$worksheetSizes = [];
 		for ($i = 0; $i < $countSheets; ++$i) {
 			$this->_writerWorksheets[$i]->close();
 			$worksheetSizes[] = $this->_writerWorksheets[$i]->_datasize;
@@ -581,7 +581,7 @@ class PHPExcel_Writer_Excel5 extends PHPExcel_Writer_Abstract implements PHPExce
 		$data .= pack('V', 0x30);
 
 		// SECTION
-		$dataSection = array();
+		$dataSection = [];
 		$dataSection_NumProps = 0;
 		$dataSection_Summary = '';
 		$dataSection_Content = '';
@@ -781,7 +781,7 @@ class PHPExcel_Writer_Excel5 extends PHPExcel_Writer_Abstract implements PHPExce
 		$data .= pack('V', 0x30);
 
 		// SECTION
-		$dataSection = array();
+		$dataSection = [];
 		$dataSection_NumProps = 0;
 		$dataSection_Summary = '';
 		$dataSection_Content = '';

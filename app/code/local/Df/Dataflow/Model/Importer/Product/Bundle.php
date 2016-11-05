@@ -45,7 +45,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 	private function getBundleOptions() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string|int|null)) $result */
-			$result = array();
+			$result = [];
 			/**
 			 * Порядковый номер внутреннего товара в сборном товаре
 			 * @var int $innerProductOrdering
@@ -66,7 +66,7 @@ class Df_Dataflow_Model_Importer_Product_Bundle extends Df_Dataflow_Model_Import
 	private function getBundleSelections() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(array(string => string|int|null))) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getInnerProducts() as $innerProduct) {
 				/** @var array $innerProduct */
 				df_assert_array($innerProduct);

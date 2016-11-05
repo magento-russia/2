@@ -43,7 +43,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 					/** @uses Mage_Directory_Model_Country::getCountryId() */
 					->addCountryFilter($this->getCountryCollection()->walk('getCountryId'))
 					->load();
-				$regions = array();
+				$regions = [];
 				foreach ($collection as $region) {
 					/** @var Df_Directory_Model_Region $region */
 					if (!$region->getRegionId()) {
@@ -138,9 +138,9 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 		return $this->_regionNameById[$regionId];
 	}
 	/** @var string[] */
-	private $_regionNameById = array();
+	private $_regionNameById = [];
 	/** @var bool[] */
-	private $_regionNameByIdIsNull = array();
+	private $_regionNameByIdIsNull = [];
 
 	/** @return Df_Directory_Model_Resource_Region_Collection */
 	public function getRussianRegions() {
@@ -187,7 +187,7 @@ class Df_Directory_Helper_Data extends Mage_Directory_Helper_Data {
 	 */
 	protected function _getRegions($storeId) {
 		/** @var int[] $countryIds */
-		$countryIds = array();
+		$countryIds = [];
 		/** @var Mage_Directory_Model_Resource_Country_Collection $collection */
 		$countryCollection = $this->getCountryCollection()->loadByStore($storeId);
 		/** @var Mage_Directory_Model_Region $regionModel */

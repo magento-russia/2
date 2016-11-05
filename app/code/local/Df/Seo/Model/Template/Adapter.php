@@ -37,7 +37,7 @@ abstract class Df_Seo_Model_Template_Adapter extends Df_Core_Model {
 		;
 	}
 	/** @var array */
-	private $_properties = array();
+	private $_properties = [];
 
 	/** @return Df_Seo_Model_Template_Expression */
 	protected function getExpression() {

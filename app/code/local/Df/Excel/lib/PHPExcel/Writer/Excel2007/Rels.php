@@ -201,7 +201,7 @@ class PHPExcel_Writer_Excel2007_Rels extends PHPExcel_Writer_Excel2007_WriterPar
 			if ($includeCharts) {
 				$charts = $pWorksheet->getChartCollection();
 			} else {
-				$charts = array();
+				$charts = [];
 			}
 			if (($pWorksheet->getDrawingCollection()->count() > 0) ||
 				(count($charts) > 0)) {

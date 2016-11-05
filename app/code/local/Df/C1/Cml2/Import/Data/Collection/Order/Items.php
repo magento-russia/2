@@ -24,9 +24,9 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	 */
 	protected function initItems() {
 		/** @var Item[] $result */
-		$result = array();
+		$result = [];
 		/** @var Item[] $mapFromProductsToOrderItems */
-		$mapFromProductsToOrderItems = array();
+		$mapFromProductsToOrderItems = [];
 		foreach ($this->getImportEntitiesAsSimpleXMLElementArray() as $e) {
 			/** @var \Df\Xml\X $e */
 			/** @var Item $orderItem */
@@ -88,7 +88,7 @@ class Items extends \Df\C1\Cml2\Import\Data\Collection {
 	private function getMapFromProductIdToOrderItem() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(int => Item) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getItems() as $entityOrderItem) {
 				/** @var Item $entityOrderItem */
 				/** @var int $productId */

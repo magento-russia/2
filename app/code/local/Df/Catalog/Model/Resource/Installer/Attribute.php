@@ -165,7 +165,7 @@ class Df_Catalog_Model_Resource_Installer_Attribute extends Mage_Catalog_Model_R
 
 	/** @return Df_Catalog_Model_Resource_Installer_Attribute */
 	public function cleanQueryCache() {
-		$this->_setupCache = array();
+		$this->_setupCache = [];
 		return $this;
 	}
 

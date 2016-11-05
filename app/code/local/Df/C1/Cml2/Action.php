@@ -111,7 +111,7 @@ abstract class Action extends \Df_Core_Model_Action {
 	 */
 	private function flatResponseLines(array $lines) {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		foreach ($lines as $key => $value) {
 			/** @var string|int $key */
 			/** @var string $value */

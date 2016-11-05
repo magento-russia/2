@@ -10,7 +10,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		return $this;
 	}
 	/** @var Df_Logging_Model_Event_Changes[] */
-	private $_eventChanges = array();
+	private $_eventChanges = [];
 
 	/**
 	 * Clear model data from objects, arrays and fields that should be skipped
@@ -22,7 +22,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		if (!$data && !is_array($data)) {
 			return array();
 		}
-		$clearData = array();
+		$clearData = [];
 		foreach ($data as $key=>$value) {
 			/** @noinspection PhpDeprecationInspection */
 			/** @noinspection PhpDeprecationInspection */
@@ -44,7 +44,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 
 	/** @return int[] */
 	public function getCollectedIds() {
-		$ids = array();
+		$ids = [];
 		foreach ($this->_collectedIds as $className => $classIds) {
 			/**
 			 * Нельзя здесь использовать @see array_unique_fast()
@@ -65,7 +65,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 		return $ids;
 	}
 	/** @var int[] */
-	protected $_collectedIds = array();
+	protected $_collectedIds = [];
 
 	/**
 	 * preDispatch action handler
@@ -111,7 +111,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 				$sessionValue = df_csv_parse($sessionValue);
 			}
 			else if (!$sessionValue) {
-				$sessionValue = array();
+				$sessionValue = [];
 			}
 			$merge = array_merge($addValue, $sessionValue);
 			df_admin_session()->setSkipLoggingAction($merge);
@@ -226,7 +226,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 			}
 		}
 
-		$skipData = array();
+		$skipData = [];
 		//Log event changes for each model
 		foreach ($usedModels->children() as $expect => $callback) {
 			//Add custom skip fields per expecetd model
@@ -270,7 +270,7 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 
 				}
 			}
-			$skipData = array();
+			$skipData = [];
 		}
 	}
 
@@ -337,13 +337,13 @@ class Df_Logging_Model_Processor extends Df_Core_Model {
 	 * @deprecated 1.6.0.0
 	 * @var mixed[]
 	 */
-	protected $_skipFields = array();
+	protected $_skipFields = [];
 	/**
 	 * Set of fields that should not be logged per expected model
 	 * @deprecated 1.6.0.0
 	 * @var mixed[]
 	 */
-	protected $_skipFieldsByModel = array();
+	protected $_skipFieldsByModel = [];
 
 
 	/**

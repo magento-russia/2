@@ -125,7 +125,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$worksheetNames = array();
+		$worksheetNames = [];
 
 		$zip = new ZipArchive;
 		$zip->open($pFilename);
@@ -169,7 +169,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$worksheetInfo = array();
+		$worksheetInfo = [];
 
 		$zip = new ZipArchive;
 		$zip->open($pFilename);
@@ -181,7 +181,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 				$relsWorkbook = simplexml_load_string($this->_getFromZipArchive($zip, "$dir/_rels/" . basename($rel["Target"]) . ".rels"));  //~ http://schemas.openxmlformats.org/package/2006/relationships");
 				$relsWorkbook->registerXPathNamespace("rel", "http://schemas.openxmlformats.org/package/2006/relationships");
 
-				$worksheets = array();
+				$worksheets = [];
 				foreach ($relsWorkbook->Relationship as $ele) {
 					if ($ele["Type"] == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet") {
 						$worksheets[(string) $ele["Id"]] = $ele["Target"];
@@ -371,7 +371,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 						$colourSchemeName = (string)$colourScheme['name'];
 						$colourScheme = $xmlTheme->themeElements->clrScheme->children("http://schemas.openxmlformats.org/drawingml/2006/main");
 
-						$themeColours = array();
+						$themeColours = [];
 						foreach ($colourScheme as $k => $xmlColour) {
 							$themePos = array_search($k,$themeOrderArray);
 							if ($themePos === false) {
@@ -448,7 +448,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 					$relsWorkbook = simplexml_load_string($this->_getFromZipArchive($zip, "$dir/_rels/" . basename($rel["Target"]) . ".rels"));  //~ http://schemas.openxmlformats.org/package/2006/relationships");
 					$relsWorkbook->registerXPathNamespace("rel", "http://schemas.openxmlformats.org/package/2006/relationships");
 
-					$sharedStrings = array();
+					$sharedStrings = [];
 					$xpath = self::array_item($relsWorkbook->xpath("rel:Relationship[@Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings']"));
 					$xmlStrings = simplexml_load_string($this->_getFromZipArchive($zip, "$dir/$xpath[Target]"));  //~ http://schemas.openxmlformats.org/spreadsheetml/2006/main");
 					if (isset($xmlStrings) && isset($xmlStrings->si)) {
@@ -461,7 +461,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 						}
 					}
 
-					$worksheets = array();
+					$worksheets = [];
 					foreach ($relsWorkbook->Relationship as $ele) {
 						if ($ele["Type"] == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet") {
 							$worksheets[(string) $ele["Id"]] = $ele["Target"];
@@ -469,7 +469,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 					}
 
 					$styles 	= array();
-					$cellStyles = array();
+					$cellStyles = [];
 					$xpath = self::array_item($relsWorkbook->xpath("rel:Relationship[@Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles']"));
 					$xmlStyles = simplexml_load_string($this->_getFromZipArchive($zip, "$dir/$xpath[Target]")); //~ http://schemas.openxmlformats.org/spreadsheetml/2006/main");
 					$numFmts = null;
@@ -543,7 +543,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 						}
 					}
 
-					$dxfs = array();
+					$dxfs = [];
 					if (!$this->_readDataOnly && $xmlStyles) {
 						//	Conditional Styles
 						if ($xmlStyles->dxfs) {
@@ -584,10 +584,10 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 					$sheetId = 0; // keep track of new sheet id in final workbook
 					$oldSheetId = -1; // keep track of old sheet id in final workbook
 					$countSkippedSheets = 0; // keep track of number of skipped sheets
-					$mapSheetId = array(); // mapping of sheet ids from old to new
+					$mapSheetId = []; // mapping of sheet ids from old to new
 
 
-					$charts = $chartDetails = array();
+					$charts = $chartDetails = [];
 
 					if ($xmlWorkbook->sheets) {
 						foreach ($xmlWorkbook->sheets->sheet as $eleSheet) {
@@ -614,7 +614,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 							$fileWorksheet = $worksheets[(string) self::array_item($eleSheet->attributes("http://schemas.openxmlformats.org/officeDocument/2006/relationships"), "id")];
 							$xmlSheet = simplexml_load_string($this->_getFromZipArchive($zip, "$dir/$fileWorksheet"));  //~ http://schemas.openxmlformats.org/spreadsheetml/2006/main");
 
-							$sharedFormulas = array();
+							$sharedFormulas = [];
 
 							if (isset($eleSheet["state"]) && (string) $eleSheet["state"] != '') {
 								$docSheet->setSheetState( (string) $eleSheet["state"] );
@@ -826,7 +826,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 													// Formula
 													$this->_castToFormula($c,$r,$cellDataType,$value,$calculatedValue,$sharedFormulas,'_castToBool');
 													if (isset($c->f['t'])) {
-														$att = array();
+														$att = [];
 														$att = $c->f;
 														$docSheet->getCell($r)->setFormulaAttributes($att);
 													}
@@ -899,7 +899,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 								}
 							}
 
-							$conditionals = array();
+							$conditionals = [];
 							if (!$this->_readDataOnly && $xmlSheet && $xmlSheet->conditionalFormatting) {
 								foreach ($xmlSheet->conditionalFormatting as $conditional) {
 									foreach ($conditional->cfRule as $cfRule) {
@@ -918,7 +918,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 
 								foreach ($conditionals as $ref => $cfRules) {
 									ksort($cfRules);
-									$conditionalStyles = array();
+									$conditionalStyles = [];
 									foreach ($cfRules as $cfRule) {
 										$objConditional = new PHPExcel_Style_Conditional();
 										$objConditional->setConditionType((string)$cfRule["type"]);
@@ -1190,7 +1190,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 							}
 
 							// Add hyperlinks
-							$hyperlinks = array();
+							$hyperlinks = [];
 							if (!$this->_readDataOnly) {
 								// Locate hyperlink relations
 								if ($zip->locateName(dirname("$dir/$fileWorksheet") . "/_rels/" . basename($fileWorksheet) . ".rels")) {
@@ -1230,8 +1230,8 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 							}
 
 							// Add comments
-							$comments = array();
-							$vmlComments = array();
+							$comments = [];
+							$vmlComments = [];
 							if (!$this->_readDataOnly) {
 								// Locate comment relations
 								if ($zip->locateName(dirname("$dir/$fileWorksheet") . "/_rels/" . basename($fileWorksheet) . ".rels")) {
@@ -1253,7 +1253,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 									$commentsFile = simplexml_load_string($this->_getFromZipArchive($zip, $relPath) );
 
 									// Utility variables
-									$authors = array();
+									$authors = [];
 
 									// Loop through authors
 									foreach ($commentsFile->authors->author as $author) {
@@ -1334,7 +1334,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 										if ($vmlRelationship != '') {
 											// Fetch linked images
 											$relsVML = simplexml_load_string($this->_getFromZipArchive($zip,  dirname($vmlRelationship) . '/_rels/' . basename($vmlRelationship) . '.rels' )); //~ http://schemas.openxmlformats.org/package/2006/relationships");
-											$drawings = array();
+											$drawings = [];
 											foreach ($relsVML->Relationship as $ele) {
 												if ($ele["Type"] == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image") {
 													$drawings[(string) $ele["Id"]] = self::dir_add($vmlRelationship, $ele["Target"]);
@@ -1345,7 +1345,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 											$vmlDrawing = simplexml_load_string($this->_getFromZipArchive($zip, $vmlRelationship));
 											$vmlDrawing->registerXPathNamespace('v', 'urn:schemas-microsoft-com:vml');
 
-											$hfImages = array();
+											$hfImages = [];
 
 											$shapes = $vmlDrawing->xpath('//v:shape');
 											foreach ($shapes as $shape) {
@@ -1380,7 +1380,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 // TODO: Autoshapes from twoCellAnchors!
 							if ($zip->locateName(dirname("$dir/$fileWorksheet") . "/_rels/" . basename($fileWorksheet) . ".rels")) {
 								$relsWorksheet = simplexml_load_string($this->_getFromZipArchive($zip,  dirname("$dir/$fileWorksheet") . "/_rels/" . basename($fileWorksheet) . ".rels") ); //~ http://schemas.openxmlformats.org/package/2006/relationships");
-								$drawings = array();
+								$drawings = [];
 								foreach ($relsWorksheet->Relationship as $ele) {
 									if ($ele["Type"] == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing") {
 										$drawings[(string) $ele["Id"]] = self::dir_add("$dir/$fileWorksheet", $ele["Target"]);
@@ -1390,7 +1390,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 									foreach ($xmlSheet->drawing as $drawing) {
 										$fileDrawing = $drawings[(string) self::array_item($drawing->attributes("http://schemas.openxmlformats.org/officeDocument/2006/relationships"), "id")];
 										$relsDrawing = simplexml_load_string($this->_getFromZipArchive($zip,  dirname($fileDrawing) . "/_rels/" . basename($fileDrawing) . ".rels") ); //~ http://schemas.openxmlformats.org/package/2006/relationships");
-										$images = array();
+										$images = [];
 
 										if ($relsDrawing && $relsDrawing->Relationship) {
 											foreach ($relsDrawing->Relationship as $ele) {
@@ -1541,7 +1541,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 
 												// Set print titles
 												foreach ($extractedRange as $range) {
-													$matches = array();
+													$matches = [];
 													$range = str_replace('$', '', $range);
 
 													// check for repeating columns, e g. 'A:A' or 'A:D'
@@ -1557,7 +1557,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 
 											case '_xlnm.Print_Area':
 												$rangeSets = explode(',', $extractedRange);		// FIXME: what if sheetname contains comma?
-												$newRangeSets = array();
+												$newRangeSets = [];
 												foreach($rangeSets as $rangeSet) {
 													$range = explode('!', $rangeSet);	// FIXME: what if sheetname contains exclamation mark?
 													$rangeSet = isset($range[1]) ? $range[1] : $range[0];
@@ -1946,7 +1946,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 		$style = str_replace(array("\r","\n"), "", $style);
 
 		$temp = explode(';', $style);
-		$style = array();
+		$style = [];
 		foreach ($temp as $item) {
 			$item = explode(':', $item);
 

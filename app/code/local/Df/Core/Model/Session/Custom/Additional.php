@@ -8,7 +8,7 @@ abstract class Df_Core_Model_Session_Custom_Additional extends Df_Core_Model_Ses
 		if ($this->isSessionStarted()) {
 			$this->_previousName = session_name();
 			session_write_close();
-			$_SESSION = array();
+			$_SESSION = [];
 		}
 		$this->start($this->getName());
 		$this->init($this->getNamespace());
@@ -18,7 +18,7 @@ abstract class Df_Core_Model_Session_Custom_Additional extends Df_Core_Model_Ses
 	/** @return Df_Core_Model_Session_Custom_Additional */
 	public function end() {
 		session_write_close();
-		$_SESSION = array();
+		$_SESSION = [];
 		if ($this->_previousName) {
 			if ($this->_previousSession) {
 				$this->_previousSession->start($this->_previousName);

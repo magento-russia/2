@@ -117,14 +117,14 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 				)
 			;
 			/** @var array(int => array(string => mixed)) $result */
-			$result = array();
+			$result = [];
 			/** @var int $numProducts */
 			$numProducts = count(dfa($parsedValues,
 				Df_Sales_Block_Admin_Grid_OrderItem::P__PRODUCT_NAME
 			));
 			for ($productOrdering = 0; $productOrdering < $numProducts; $productOrdering++) {
 				/** @var array(string => mixed) $product */
-				$product = array();
+				$product = [];
 				foreach (Df_Sales_Block_Admin_Grid_OrderItem::getKeysTarget() as $key) {
 					/** @var string $key */
 					df_assert_string($key);
@@ -150,9 +150,9 @@ class Df_Sales_Block_Admin_Grid_OrderItems extends Df_Admin_Block_Grid_ColumnRen
 	 */
 	private function removeParents(array $products) {
 		/** @var int[] $idsToRemove */
-		$idsToRemove = array();
+		$idsToRemove = [];
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		foreach ($products as $id => $product) {
 			/** @var int $id */
 			/** @var array(string => mixed) $product */

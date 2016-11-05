@@ -52,7 +52,7 @@ class Df_Directory_Model_Handler_ProcessRegionsAfterLoading extends Df_Core_Mode
 	private function getPriorityRegions() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $ids */
-			$ids = array();
+			$ids = [];
 			foreach (array('RU', 'KZ', 'UA') as $iso2) {
 				/** @var array $iso2 */
 				$ids = array_merge($ids,

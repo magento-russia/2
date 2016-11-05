@@ -71,7 +71,7 @@ class Df_Core_Model_Locale extends Mage_Core_Model_Locale {
 	 * @return array(array(string => string))
 	 */
 	public function getOptionTimezones() {
-		$options = array();
+		$options = [];
 		// НАЧАЛО ЗАПЛАТКИ
 		// заменяем 'windowstotimezone' на 'citytotimezone'
 		$zones = $this->getTranslationList('citytotimezone');

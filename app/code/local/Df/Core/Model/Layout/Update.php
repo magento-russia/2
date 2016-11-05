@@ -39,7 +39,7 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 		$elementClass = $this->getElementClass();
 		$updatesRoot = df_config_node($area, 'layout/updates');
 		Mage::dispatchEvent('core_layout_update_updates_get_after', array('updates' => $updatesRoot));
-		$updateFiles = array();
+		$updateFiles = [];
 		foreach ($updatesRoot->children() as $updateNode) {
 			if ($updateNode->file) {
 				$module = $updateNode->getAttribute('module');
@@ -64,7 +64,7 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 			libxml_use_internal_errors(true);
 			$fileXml = simplexml_load_string($fileStr, $elementClass);
 			if (!$fileXml) {
-				$errors = array();
+				$errors = [];
 				foreach (libxml_get_errors() as $error) {
 					$errors[]= $error->message;
 				}

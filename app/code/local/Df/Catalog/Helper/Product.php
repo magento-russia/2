@@ -11,7 +11,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 		df_param_between($attributeSetId, 0, 1);
 		df_param_string($groupName, 1);
 		if (!isset($this->{__METHOD__}[$attributeSetId])) {
-			$this->{__METHOD__}[$attributeSetId] = array();
+			$this->{__METHOD__}[$attributeSetId] = [];
 		}
 		if (!isset($this->{__METHOD__}[$attributeSetId][$groupName])) {
 			Df_Catalog_Model_Resource_Installer_Attribute::s()
@@ -82,7 +82,7 @@ class Df_Catalog_Helper_Product extends Mage_Catalog_Helper_Data {
 	private function getMapFromManufacturerCodeToName() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
-			$result = array();
+			$result = [];
 			/** @var Mage_Eav_Model_Entity_Attribute_Abstract|bool $manufacturerAttribute */
 			$manufacturerAttribute =
 				$this->getResource()->getAttribute(Df_Catalog_Model_Product::P__MANUFACTURER)

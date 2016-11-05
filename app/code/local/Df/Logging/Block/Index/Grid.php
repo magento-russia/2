@@ -33,7 +33,7 @@ class Df_Logging_Block_Index_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 	 */
 	protected function _prepareColumns() {
 		/** @var string[] $actions */
-		$actions = array();
+		$actions = [];
 		foreach (Df_Logging_Model_Resource_Event::s()->getAllFieldValues('action') as $action) {
 			$actions[$action] = df_h()->logging()->__($action);
 		}

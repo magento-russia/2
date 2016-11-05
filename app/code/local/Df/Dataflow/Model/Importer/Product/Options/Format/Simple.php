@@ -45,7 +45,7 @@ class Df_Dataflow_Model_Importer_Product_Options_Format_Simple
 	/** @return mixed[][] */
 	private function getValues() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array();
+			$this->{__METHOD__} = [];
 			$ordering = 0;
 			foreach ($this->getValuesTitles() as $title) {
 				/** @var string $title */

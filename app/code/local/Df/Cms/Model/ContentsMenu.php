@@ -15,7 +15,7 @@ class Df_Cms_Model_ContentsMenu extends Df_Core_Model {
 	public function getRootNodeIds() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getApplicators() as $applicator) {
 				/** @var Df_Cms_Model_ContentsMenu_Applicator $applicator */
 				/** @var Df_Cms_Model_Hierarchy_Node $node */

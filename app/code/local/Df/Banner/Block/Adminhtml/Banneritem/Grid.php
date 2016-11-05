@@ -44,7 +44,7 @@ class Df_Banner_Block_Adminhtml_Banneritem_Grid extends Mage_Adminhtml_Block_Wid
 			,'index' => 'banner_item_id'
 		));
 		/** @var string[] $banners */
-		$banners = array();
+		$banners = [];
 		$collection = Df_Banner_Model_Banner::c();
 		foreach ($collection as $banner) {
 			/** @var Df_Banner_Model_Banner $banner */

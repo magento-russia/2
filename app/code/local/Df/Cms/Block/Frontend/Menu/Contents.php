@@ -84,7 +84,7 @@ class Df_Cms_Block_Frontend_Menu_Contents extends Df_Core_Block_Abstract {
 	private function getRenderedNodes() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			foreach (df_h()->cms()->getTree()->getTree()->getNodes() as $node) {
 				/** @var Df_Cms_Varien_Data_Tree_Node $node */
 				/** @var Df_Cms_Model_Hierarchy_Node $cmsNode */
@@ -117,7 +117,7 @@ class Df_Cms_Block_Frontend_Menu_Contents extends Df_Core_Block_Abstract {
 	 */
 	private function renderChildren(Df_Cms_Varien_Data_Tree_Node $parent, $menuLevelsDown = null) {
 		/** @var array $renderedNodes */
-		$renderedNodes = array();
+		$renderedNodes = [];
 		if (is_null($menuLevelsDown) || (0 < $menuLevelsDown)) {
 			foreach ($parent->getChildren() as $childNode) {
 				/** @var Df_Cms_Varien_Data_Tree_Node $childNode */

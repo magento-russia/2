@@ -4,7 +4,7 @@ class Df_Admin_Config_Form_FieldInstance_Info_Urls extends Df_Admin_Config_Form_
 	public function getUrls() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => mixed) $result */
-			$result = array();
+			$result = [];
 			foreach (Mage::app()->getStores() as $store) {
 				/** @var Df_Core_Model_StoreM $store */
 				$result[$store->getName()] = $this->getUrlForStore($store);

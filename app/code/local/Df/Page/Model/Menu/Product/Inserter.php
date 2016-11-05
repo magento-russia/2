@@ -46,7 +46,7 @@ class Df_Page_Model_Menu_Product_Inserter extends Df_Core_Model {
 	private function getMenuSources() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Page_Model_MenuSource[] $result  */
-			$result = array();
+			$result = [];
 			foreach (df_config_a('df/menu/product') as $menuSourceAsArray) {
 				/** @var array(string => string|int) $menuSourceAsArray */
 				/** @var Df_Page_Model_MenuSource $menuSource */

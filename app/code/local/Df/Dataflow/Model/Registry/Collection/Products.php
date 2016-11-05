@@ -125,5 +125,5 @@ class Df_Dataflow_Model_Registry_Collection_Products extends Df_Dataflow_Model_R
 		return self::$_s[$store->getId()];
 	}
 	/** @var array(int => Df_Dataflow_Model_Registry_Collection_Products)  */
-	private static $_s = array();
+	private static $_s = [];
 }

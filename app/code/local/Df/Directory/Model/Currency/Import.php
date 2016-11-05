@@ -22,7 +22,7 @@ abstract class Df_Directory_Model_Currency_Import extends Mage_Directory_Model_C
 	public function getMessages() {return $this->_messages;}
 
 	/** @var string[] */
-	private $_messages = array();
+	private $_messages = [];
 
 	/**
 	 * @override

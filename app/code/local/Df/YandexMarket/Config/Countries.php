@@ -10,7 +10,7 @@ class Countries extends \Df_Core_Model {
 			;
 			df_assert($countriesConfigAsSimpleXml instanceof \Df\Xml\X);
 			/** @var array(string => string) $result */
-			$result = array();
+			$result = [];
 			foreach ($countriesConfigAsSimpleXml as $countryConfigAsSimpleXml) {
 				/** @var \Df\Xml\X $countryConfigAsSimpleXml */
 				/** @var array $countryConfig */

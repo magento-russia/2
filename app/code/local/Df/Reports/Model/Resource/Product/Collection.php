@@ -45,5 +45,5 @@ class Df_Reports_Model_Resource_Product_Collection
 	const P__DISABLE_FLAT = 'disable_flat';
 
 	/** @var array(string => mixed) */
-	private $_rmData = array();
+	private $_rmData = [];
 }

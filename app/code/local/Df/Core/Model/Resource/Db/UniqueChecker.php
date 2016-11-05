@@ -32,7 +32,7 @@ class Df_Core_Model_Resource_Db_UniqueChecker extends Df_Core_Model {
 		/** @var Mage_Core_Model_Abstract $model */
 		$model = $this->getModel();
 		/** @var string[] $existent */
-		$existent = array();
+		$existent = [];
 		/** @var array(array(string => string|string[])) $fields */
 		$fields = $this->getResourceForModel()->getUniqueFields();
 		if (!empty($fields)) {

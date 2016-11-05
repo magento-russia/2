@@ -650,5 +650,5 @@ class Df_Reward_Model_Reward extends Df_Core_Model {
 		self::$_actionModelClasses[$actionId] = $actionModelClass;
 	}
 	/** @var array */
-	static protected $_actionModelClasses = array();
+	static protected $_actionModelClasses = [];
 }

@@ -24,7 +24,7 @@ class Df_Localization_Onetime_Dictionary_Rule extends \Df\Xml\Parser\Entity {
 	public function getApplicableEntities($type) {
 		if (!isset($this->{__METHOD__}[$type])) {
 			/** @var Mage_Core_Model_Abstract[] $result */
-			$result = array();
+			$result = [];
 			if ($this->getConditions()->isApplicableToType($type)) {
 				foreach ($this->getAllEntities($type) as $entity) {
 					/** @var Mage_Core_Model_Abstract $entity */

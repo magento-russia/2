@@ -56,7 +56,7 @@ class PHPExcel_Worksheet_AutoFilter
 	 *
 	 * @var array of PHPExcel_Worksheet_AutoFilter_Column
 	 */
-	private $_columns = array();
+	private $_columns = [];
 
 
     /**
@@ -125,7 +125,7 @@ class PHPExcel_Worksheet_AutoFilter
 
 		if (empty($pRange)) {
 			//	Discard all column rules
-			$this->_columns = array();
+			$this->_columns = [];
 		} else {
 			//	Discard any column rules that are no longer valid within this range
 			list($rangeStart,$rangeEnd) = PHPExcel_Cell::rangeBoundaries($this->_range);
@@ -469,7 +469,7 @@ class PHPExcel_Worksheet_AutoFilter
 		PHPExcel_Calculation_Functions::setReturnDateType(PHPExcel_Calculation_Functions::RETURNDATE_PHP_NUMERIC);
 		$val = $maxVal = NULL;
 
-		$ruleValues = array();
+		$ruleValues = [];
 		$baseDate = PHPExcel_Calculation_DateTime::DATENOW();
 		//	Calculate start/end dates for the required date range based on current date
 		switch ($dynamicRuleType) {
@@ -607,12 +607,12 @@ class PHPExcel_Worksheet_AutoFilter
 //		echo 'AutoFilter Heading Row ',$rangeStart[1],' is always SHOWN',PHP_EOL;
 		$this->_workSheet->getRowDimension($rangeStart[1])->setVisible(TRUE);
 
-		$columnFilterTests = array();
+		$columnFilterTests = [];
 		foreach($this->_columns as $columnID => $filterColumn) {
 			$rules = $filterColumn->getRules();
 			switch ($filterColumn->getFilterType()) {
 				case PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER :
-					$ruleValues = array();
+					$ruleValues = [];
 					//	Build a list of the filter value selections
 					foreach($rules as $rule) {
 						$ruleType = $rule->getRuleType();
@@ -633,7 +633,7 @@ class PHPExcel_Worksheet_AutoFilter
 						);
 					} else {
 						//	Filter on date group values
-						$arguments = array();
+						$arguments = [];
 						foreach($ruleDataSet as $ruleValue) {
 							$date = $time = '';
 							if ((isset($ruleValue[PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_DATEGROUP_YEAR])) &&
@@ -673,7 +673,7 @@ class PHPExcel_Worksheet_AutoFilter
 					break;
 				case PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_CUSTOMFILTER :
 					$customRuleForBlanks = FALSE;
-					$ruleValues = array();
+					$ruleValues = [];
 					//	Build a list of the filter value selections
 					foreach($rules as $rule) {
 						$ruleType = $rule->getRuleType();
@@ -701,7 +701,7 @@ class PHPExcel_Worksheet_AutoFilter
 					);
 					break;
 				case PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_DYNAMICFILTER :
-					$ruleValues = array();
+					$ruleValues = [];
 					foreach($rules as $rule) {
 						//	We should only ever have one Dynamic Filter Rule anyway
 						$dynamicRuleType = $rule->getGrouping();
@@ -751,7 +751,7 @@ class PHPExcel_Worksheet_AutoFilter
 					}
 					break;
 				case PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_TOPTENFILTER :
-					$ruleValues = array();
+					$ruleValues = [];
 					$dataRowCount = $rangeEnd[1] - $rangeStart[1];
 					foreach($rules as $rule) {
 						//	We should only ever have one Dynamic Filter Rule anyway
@@ -835,7 +835,7 @@ class PHPExcel_Worksheet_AutoFilter
 				}
 			} elseif ((is_array($value)) && ($key == '_columns')) {
 				//	The columns array of PHPExcel_Worksheet_AutoFilter objects
-				$this->{$key} = array();
+				$this->{$key} = [];
 				foreach ($value as $k => $v) {
 					$this->{$key}[$k] = clone $v;
 					// attach the new cloned Column to this new cloned Autofilter object

@@ -91,7 +91,7 @@ class Df_Chronopay_Model_Gate_Buyer extends Df_Core_Model {
 	 */
 	private function checkNameValidness($name) {
 		/** @var string[][] $matches */
-		$matches = array();
+		$matches = [];
 		/** @var int|bool $matchingResult */
 		$matchingResult =
 			preg_match_all(

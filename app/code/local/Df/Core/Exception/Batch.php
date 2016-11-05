@@ -46,5 +46,5 @@ class Batch extends Exception {
 	}
 
 	/** @var Entity[] */
-	private $_exceptions = array();
+	private $_exceptions = [];
 }

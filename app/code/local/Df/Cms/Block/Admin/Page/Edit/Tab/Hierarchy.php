@@ -30,7 +30,7 @@ class Df_Cms_Block_Admin_Page_Edit_Tab_Hierarchy
 	 */
 	public function getNodes() {
 		if (is_null($this->_nodes)) {
-			$this->_nodes = array();
+			$this->_nodes = [];
 			$data = df_mage()->coreHelper()->jsonDecode($this->getPage()->getNodesData());
 			$collection = Df_Cms_Model_Hierarchy_Node::c();
 			$collection
@@ -110,7 +110,7 @@ class Df_Cms_Block_Admin_Page_Edit_Tab_Hierarchy
 	 */
 	public function getSelectedNodeIds() {
 		if (!$this->getPage()->hasData('node_ids')) {
-			$ids = array();
+			$ids = [];
 			foreach ($this->getNodes() as $node) {
 				if (isset($node['page_exists']) && $node['page_exists']) {
 					$ids[]= $node['node_id'];

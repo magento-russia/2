@@ -97,7 +97,7 @@ class Df_Admin_Config_Backend extends Mage_Core_Model_Config_Data {
 	public function getWebsiteIds() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $result */
-			$result = array();
+			$result = [];
 			switch($this->getScope()) {
 				case self::$SCOPE__DEFAULT:
 					$result = array_keys(Mage::app()->getWebsites($withDefault = false, $codeKey = false));

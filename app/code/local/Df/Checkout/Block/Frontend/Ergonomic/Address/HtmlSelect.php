@@ -51,7 +51,7 @@ class Df_Checkout_Block_Frontend_Ergonomic_Address_HtmlSelect extends Df_Core_Bl
 	private function getOptions() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string)) $result */
-			$result = array();
+			$result = [];
 			/**
 			 * 2015-01-31
 			 * В оригинальном методе

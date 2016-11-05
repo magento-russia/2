@@ -47,7 +47,7 @@ class PHPExcel_Chart_PlotArea
 	 *
 	 * @var array of PHPExcel_Chart_DataSeries
 	 */
-	private $_plotSeries = array();
+	private $_plotSeries = [];
 
 	/**
 	 * Create a new PHPExcel_Chart_PlotArea

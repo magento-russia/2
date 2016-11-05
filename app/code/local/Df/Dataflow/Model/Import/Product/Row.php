@@ -139,7 +139,7 @@ class Df_Dataflow_Model_Import_Product_Row extends Df_Dataflow_Model_Import_Abst
 	public function getWebsites() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Mage_Core_Model_Website[] $result */
-			$result = array();
+			$result = [];
 			if (!is_null($this->getWebsitesAsString())) {
 				/** @var string[] $websiteCodes */
 				$websiteCodes = df_csv_parse($this->getWebsitesAsString());

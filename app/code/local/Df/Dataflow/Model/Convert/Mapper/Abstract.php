@@ -124,7 +124,7 @@ abstract class Df_Dataflow_Model_Convert_Mapper_Abstract
 			/** @var array $result */
 			$result = $this->getVar(self::VAR_MAP);
 			if (is_null($result)) {
-				$result = array();
+				$result = [];
 			}
 			df_result_array($result);
 			$this->{__METHOD__} = $result;

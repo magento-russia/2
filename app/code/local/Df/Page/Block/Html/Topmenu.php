@@ -37,7 +37,7 @@ class Df_Page_Block_Html_Topmenu extends Mage_Page_Block_Html_Topmenu {
 	 */
 	protected function _getMenuItemClasses(Varien_Data_Tree_Node $item) {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		$result[] = 'level' . $item->getData('level');
 		$result[] = $item->getData('position_class');
 		if ($item->getData('is_first')) {
@@ -90,7 +90,7 @@ class Df_Page_Block_Html_Topmenu extends Mage_Page_Block_Html_Topmenu {
 		/** @var Varien_Data_Tree_Node|null $activeNode */
 		$activeNode = $this->getActiveLeaf($menuTree);
 		/** @var string $result */
-		$result = array();
+		$result = [];
 		while ($activeNode && $activeNode->getParent()) {
 			$result[]= $activeNode->getId();
 			$activeNode = $activeNode->getParent();

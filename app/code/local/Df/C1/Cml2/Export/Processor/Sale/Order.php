@@ -195,7 +195,7 @@ class Order extends \Df\C1\Cml2\Export\Processor\Sale {
 	/** @return string */
 	private function getOrderComments() {
 		/** @var string[] $comments */
-		$comments = array();
+		$comments = [];
 		foreach ($this->getOrder()->getAllStatusHistory() as $historyItem) {
 			/** @var \Mage_Sales_Model_Order_Status_History $historyItem */
 			if ($historyItem->getComment()) {

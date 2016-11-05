@@ -281,9 +281,9 @@ abstract class Df_Core_Block_Abstract extends Mage_Core_Block_Abstract {
 			}
 		}
 		/** @var Zend_Validate_Interface[] $additionalValidators */
-		$additionalValidators = array();
+		$additionalValidators = [];
 		/** @var Zend_Filter_Interface[] $additionalFilters */
-		$additionalFilters = array();
+		$additionalFilters = [];
 		if (!is_array($validator)) {
 			$validator = \Df\Core\Validator::resolveForProperty(
 				$this, $validator, $key, $skipOnNull = false === $isRequired
@@ -530,11 +530,11 @@ abstract class Df_Core_Block_Abstract extends Mage_Core_Block_Abstract {
 	}
 
 	/** @var array(string => Zend_Filter_Interface[]) */
-	private $_filters = array();
+	private $_filters = [];
 	/** @var array(string => Zend_Validate_Interface[]) */
-	private $_validators = array();
+	private $_validators = [];
 	/** @var array(string => bool) */
-	private $_valueWasNullBeforeFilters = array();
+	private $_valueWasNullBeforeFilters = [];
 
 	/**
 	 * @param string $class
@@ -544,7 +544,7 @@ abstract class Df_Core_Block_Abstract extends Mage_Core_Block_Abstract {
 	protected static function m($class, $functions) {
 		df_assert($functions);
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();

@@ -39,7 +39,7 @@ class PHPExcel_Shared_JAMA_Matrix {
 	 *	@var array
 	 *	@access public
 	 */
-	public $A = array();
+	public $A = [];
 
 	/**
 	 *	Matrix row dimension

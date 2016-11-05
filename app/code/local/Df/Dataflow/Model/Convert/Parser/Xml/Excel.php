@@ -25,7 +25,7 @@ class Df_Dataflow_Model_Convert_Parser_Xml_Excel extends Mage_Dataflow_Model_Con
 	 * @return string
 	 */
 	private function _getXmlStringDf(array $fields = array()) {
-		$xmlData = array();
+		$xmlData = [];
 		$xmlData[]= '<Row>';
 		foreach ($fields as $value) {
 			$dataType = "String";

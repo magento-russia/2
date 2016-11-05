@@ -169,7 +169,7 @@ class Response extends \Df_Core_Model {
 		;
 	}
 	/** @var array(string => mixed) */
-	private $_jsonCache = array();
+	private $_jsonCache = [];
 	/** @var mixed[] */
 	private $_jsonDecoded;
 	/** @var string */
@@ -177,7 +177,7 @@ class Response extends \Df_Core_Model {
 	/** @var \phpQueryObject */
 	private $_pq;
 	/** @var array(string => phpQueryObject) */
-	private $_pqCache = array();
+	private $_pqCache = [];
 	/** @var X */
 	private $_xml;
 

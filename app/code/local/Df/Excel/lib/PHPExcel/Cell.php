@@ -643,7 +643,7 @@ class PHPExcel_Cell
 		}
 
 		// Build range
-		$imploded = array();
+		$imploded = [];
 		$counter = count($pRange);
 		for ($i = 0; $i < $counter; ++$i) {
 			$pRange[$i] = implode(':', $pRange[$i]);
@@ -740,7 +740,7 @@ class PHPExcel_Cell
 		//	Using a lookup cache adds a slight memory overhead, but boosts speed
 		//	caching using a static within the method is faster than a class static,
 		//		though it's additional memory overhead
-		static $_indexCache = array();
+		static $_indexCache = [];
 
 		if (isset($_indexCache[$pString]))
 			return $_indexCache[$pString];
@@ -783,7 +783,7 @@ class PHPExcel_Cell
 		//	Using a lookup cache adds a slight memory overhead, but boosts speed
 		//	caching using a static within the method is faster than a class static,
 		//		though it's additional memory overhead
-		static $_indexCache = array();
+		static $_indexCache = [];
 
 		if (!isset($_indexCache[$pColumnIndex])) {
 			// Determine column string
@@ -809,7 +809,7 @@ class PHPExcel_Cell
 	 */
 	public static function extractAllCellReferencesInRange($pRange = 'A1') {
 		// Returnvalue
-		$returnValue = array();
+		$returnValue = [];
 
 		// Explode spaces
 		$cellBlocks = explode(' ', str_replace('$', '', strtoupper($pRange)));
@@ -852,7 +852,7 @@ class PHPExcel_Cell
 		}
 
 		//	Sort the result by column and row
-		$sortKeys = array();
+		$sortKeys = [];
 		foreach (array_unique($returnValue) as $coord) {
 			sscanf($coord,'%[A-Z]%d', $column, $row);
 			$sortKeys[rm_sprintf('%3s%09d',$column,$row)] = $coord;

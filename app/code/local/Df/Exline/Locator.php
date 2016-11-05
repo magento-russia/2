@@ -24,9 +24,9 @@ class Locator extends \Df\Shipping\Locator {
 	 */
 	private function postProcess(array $map) {
 		/** @var array(string => int) $alts */
-		$alts = array();
+		$alts = [];
 		/** @var string[] $unset */
-		$unset = array();
+		$unset = [];
 		foreach ($map as $name => $id) {
 			/** @var string $name */
 			/** @var int $id */

@@ -101,7 +101,7 @@ class Df_PageCache_Model_Processor_Category extends Df_PageCache_Model_Processor
 	 */
 	protected function _getSessionParams()
 	{
-		$params = array();
+		$params = [];
 		$data   = Mage::getSingleton('catalog/session')->getData();
 		foreach ($this->_paramsMap as $sessionParam => $queryParam) {
 			if (isset($data[$sessionParam])) {

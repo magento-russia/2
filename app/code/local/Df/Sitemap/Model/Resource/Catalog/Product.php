@@ -32,7 +32,7 @@ class Df_Sitemap_Model_Resource_Catalog_Product extends Mage_Sitemap_Model_Resou
 	 * @return array(int => Varien_Object)
 	 */
 	private function getCollectionDf($storeId) {
-		$products = array();
+		$products = [];
 		/* @var Df_Core_Model_StoreM $store */
 		$store = df_store($storeId);
 		if (!$store) {

@@ -20,7 +20,7 @@ class Df_Core_Model_Geo_Cache extends Df_Core_Model {
 	 * @used-by Df_Core_Model_Geo_Locator::saveToCache()
 	 * @var array(string => array(string => string))
 	 */
-	public $cache = array();
+	public $cache = [];
 
 	/** @return Df_Core_Model_Geo_Cache */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

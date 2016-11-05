@@ -26,7 +26,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 			,'identifier' => null
 			,'label' => null
 		);
-		$removeFromNodes = array();
+		$removeFromNodes = [];
 		foreach ($parentNodes as $node) {
 			/* @var $node Df_Cms_Model_Hierarchy_Node */
 			if (isset($nodes[$node->getId()])) {
@@ -83,7 +83,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 		if (!is_array($data)) {
 			return $this;
 		}
-		$nodes = array();
+		$nodes = [];
 		foreach ($data as $v) {
 			$required = array(
 				'node_id', 'parent_node_id', 'page_id', 'label', 'identifier', 'level', 'sort_order'
@@ -527,7 +527,7 @@ class Df_Cms_Model_Hierarchy_Node extends Df_Core_Model {
 		;
 	}
 	/** @var array */
-	 protected $_metaNodes = array();
+	 protected $_metaNodes = [];
 
 	/**
 	 * @used-by Df_Cms_Model_ContentsMenu_Applicator::_construct()

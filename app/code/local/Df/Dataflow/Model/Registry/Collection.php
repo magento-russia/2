@@ -230,7 +230,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	private function getMapFromExternalIdToEntity() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Mage_Core_Model_Abstract) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getCollectionRm() as $entity) {
 				/** @var Mage_Core_Model_Abstract $entity */
 				/** @var string|null $externalId */
@@ -249,7 +249,7 @@ abstract class Df_Dataflow_Model_Registry_Collection
 	private function getMapFromLabelToEntity() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Mage_Core_Model_Abstract) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getCollectionRm() as $entity) {
 				/** @var Mage_Core_Model_Abstract $entity */
 				/** @var string|null $label */

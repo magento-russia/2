@@ -7,7 +7,7 @@ class Df_Catalog_Helper_Product_Dataflow extends Mage_Catalog_Helper_Data {
 	public function getInventoryFields() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			/** @var Mage_Core_Model_Config_Element[] $inventoryNodes */
 			$inventoryNodes = $this->getFieldsConfigContainingOption('inventory');
 			foreach ($inventoryNodes as $code => $fieldConfig) {
@@ -39,7 +39,7 @@ class Df_Catalog_Helper_Product_Dataflow extends Mage_Catalog_Helper_Data {
 		df_param_string_not_empty($productType, 0);
 		if (!isset($this->{__METHOD__}[$productType])) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getFieldsConfigContainingOption('inventory') as $fieldName => $fieldConfig) {
 				/** @var string $fieldName */
 				/** @var Mage_Core_Model_Config_Element $fieldConfig */
@@ -69,7 +69,7 @@ class Df_Catalog_Helper_Product_Dataflow extends Mage_Catalog_Helper_Data {
 				df_assert(df_xml_exists_child($fieldConfig, 'product_type'));
 				$productTypesNode = $fieldConfig->{'product_type'};
 				/** @var string[] $productTypes */
-				$productTypes = array();
+				$productTypes = [];
 				foreach ($productTypesNode->children() as $productTypeNode) {
 					/** @var SimpleXMLElement $productTypeNode */
 					/** @var string $productTypeName */
@@ -157,7 +157,7 @@ class Df_Catalog_Helper_Product_Dataflow extends Mage_Catalog_Helper_Data {
 		df_assert_string_not_empty($optionName, 0);
 		if (!isset($this->{__METHOD__}[$optionName])) {
 			/** @var array(string => Mage_Core_Model_Config_Element) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getFieldset() as $fieldName => $fieldConfig) {
 				/**
 				 * 2015-02-06

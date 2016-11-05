@@ -90,7 +90,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		}
 		else {
 			$this->_translateInline = false;
-			$this->_data = array();
+			$this->_data = [];
 		}
 		return $this;
 	}
@@ -547,7 +547,7 @@ class Df_Core_Model_Translate extends Mage_Core_Model_Translate {
 		foreach ($files as $file) {
 			/** @var string $file */
 			/** @var string[] $paths */
-			$paths = array();
+			$paths = [];
 			/** @var bool $isItRmModule */
 			/**
 			 * Раньше тут стоял код:

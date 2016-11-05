@@ -122,7 +122,7 @@ class PelJpeg {
    *
    * @var array
    */
-  private $sections = array();
+  private $sections = [];
   /**
    * The JPEG image data.
    *

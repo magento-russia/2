@@ -13,7 +13,7 @@ class Df_Reports_Helper_GroupResultsByWeek extends Mage_Core_Helper_Abstract {
 	private function getFilterAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
-			$result = array();
+			$result = [];
 			/** @var string|null $f$filterAsStringilter */
 			$filterAsString = df_request('filter');
 			if (!is_null($filterAsString)) {

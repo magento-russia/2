@@ -5,7 +5,7 @@
  */
 class Df_CustomerBalance_Block_Adminhtml_Widget_Grid_Column_Renderer_Currency
 	extends Df_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency {	/** @var array */
-	protected static $_websiteBaseCurrencyCodes = array();
+	protected static $_websiteBaseCurrencyCodes = [];
 
 	/**
 	 * Get currency code by row data

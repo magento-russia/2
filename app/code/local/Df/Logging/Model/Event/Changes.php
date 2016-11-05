@@ -76,7 +76,7 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 */
 	protected function _calculateDifference() {
 		if (is_null($this->_difference)) {
-			$updatedParams = $newParams = $sameParams = $difference = array();
+			$updatedParams = $newParams = $sameParams = $difference = [];
 			$newOriginalData = $this->getOriginalData();
 			$origData = df_nta($newOriginalData);
 			$newResultData = $this->getResultData();
@@ -122,9 +122,9 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 		}
 		$skipFields = $this->_skipFields;
 		if (!$skipFields || !is_array($skipFields)) {
-			$skipFields = array();
+			$skipFields = [];
 		}
-		$clearedData = array();
+		$clearedData = [];
 		foreach ($data as $key => $value) {
 			if (!in_array($key, $this->_globalSkipFields) && !in_array($key, $skipFields) && !is_array($value) && !is_object($value)) {
 				$clearedData[$key] = $value;
@@ -154,12 +154,12 @@ class Df_Logging_Model_Event_Changes extends Df_Core_Model {
 	 * Set of fields that should not be logged for all models
 	 * @var array
 	 */
-	protected $_globalSkipFields = array();
+	protected $_globalSkipFields = [];
 	/**
 	 * Set of fields that should not be logged per expected model
 	 * @var array
 	 */
-	protected $_skipFields = array();
+	protected $_skipFields = [];
 	/**
 	 * Store difference between original data and result data of model
 	 * @var array

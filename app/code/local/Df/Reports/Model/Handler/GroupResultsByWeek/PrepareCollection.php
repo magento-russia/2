@@ -56,7 +56,7 @@ class Df_Reports_Model_Handler_GroupResultsByWeek_PrepareCollection extends Df_C
 		$partGroup = $this->getSelect()->getPart(Zend_Db_Select::GROUP);
 		df_assert_array($partGroup);
 		$this->getSelect()->reset(Zend_Db_Select::GROUP);
-		$cleanedPartGroup = array();
+		$cleanedPartGroup = [];
 		foreach ($partGroup as $partGroupItem) {
 			if (is_string($partGroupItem)) {
 				if (df_contains($partGroupItem, 'period')) {

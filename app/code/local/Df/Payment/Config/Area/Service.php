@@ -42,7 +42,7 @@ class Service extends \Df\Payment\Config\Area {
 			/** @var array(array(string => string)) $currenciesAllowedInSystem */
 			$currenciesAllowedInSystem = \Mage::app()->getLocale()->getOptionCurrencies();
 			/** @var array(array(string => string)) $result */
-			$result = array();
+			$result = [];
 			if (!$this->constManager()->hasCurrencySetRestriction()) {
 				$result = $currenciesAllowedInSystem;
 			}
@@ -64,7 +64,7 @@ class Service extends \Df\Payment\Config\Area {
 	public function getAllowedLocalesAsOptionArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => array(string => string)) $result */
-			$result = array();
+			$result = [];
 			/** @var array(string => string) $languages */
 			$languages = df_h()->localization()->getLanguages();
 			/** @var \Df_Localization_Helper_Locale $helper */

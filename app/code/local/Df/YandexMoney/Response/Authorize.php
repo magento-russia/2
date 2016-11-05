@@ -43,7 +43,7 @@ class Authorize extends \Df\YandexMoney\Response {
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
-			$result = array();
+			$result = [];
 			$result['Успешна ли операция'] = df_bts_r($this->isSuccessful());
 			if (!$this->isSuccessful()) {
 				$result['Диагностическое сообщение'] = $this->getErrorMessage();
@@ -88,7 +88,7 @@ class Authorize extends \Df\YandexMoney\Response {
 	 */
 	public function getMoneySources() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array();
+			$this->{__METHOD__} = [];
 			/** @var array(string => array(string => bool|string)) $sources */
 			$sources = $this->cfg('money_source');
 			foreach ($sources as $sourceName => $sourceProperties) {

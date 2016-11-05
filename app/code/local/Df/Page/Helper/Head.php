@@ -68,7 +68,7 @@ class Df_Page_Helper_Head extends Mage_Core_Helper_Abstract {
 			/** @var string $pattern */
 			$pattern = '#^jquery(\-\d+\.\d+(\.\d+)?)?(\.min)?\.js$#ui';
 			/** @var string[] $matches */
-			$matches = array();
+			$matches = [];
 			$result = (1 === preg_match($pattern, $fileName, $matches));
 		}
 		return $result;

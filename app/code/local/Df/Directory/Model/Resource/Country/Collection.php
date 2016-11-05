@@ -282,7 +282,7 @@ class Df_Directory_Model_Resource_Country_Collection
 		}
 		if (!isset($this->{__METHOD__}[$localeCode])) {
 			/** @var array(string => string) $result */
-			$result = array();
+			$result = [];
 			foreach ($this as $country) {
 				/** @var Df_Directory_Model_Country $country */
 				/** @var string $localizedName */
@@ -345,9 +345,9 @@ class Df_Directory_Model_Resource_Country_Collection
 			, $additional = array('title' => 'iso2_code')
 		);
 		/** @var array(string => string) $mapFromLocalizedNameToIso2 */
-		$mapFromLocalizedNameToIso2 = array();
+		$mapFromLocalizedNameToIso2 = [];
 		/** @var array(string => string) $mapFromIso2ToLocalizedName */
-		$mapFromIso2ToLocalizedName = array();
+		$mapFromIso2ToLocalizedName = [];
 		/** @var Zend_Locale $zendLocale */
 		$zendLocale = new Zend_Locale(df_locale($locale));
 		foreach ($options as $option) {

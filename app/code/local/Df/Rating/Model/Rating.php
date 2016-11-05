@@ -14,7 +14,7 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	public function __construct() {
 		$args = func_get_args();
 		if (empty($args[0])) {
-			$args[0] = array();
+			$args[0] = [];
 		}
 		$this->_data = $args[0];
 		$this->_construct();
@@ -129,7 +129,7 @@ class Df_Rating_Model_Rating extends Mage_Rating_Model_Rating {
 	private function getMapFromCodeToOptionId() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(int => int) $result  */
-			$result = array();
+			$result = [];
 			foreach ($this->getOptions() as $option) {
 				/** @var Mage_Rating_Model_Rating_Option $option */
 				$result[df_nat0($option->getCode())] = df_nat0($option->getId());

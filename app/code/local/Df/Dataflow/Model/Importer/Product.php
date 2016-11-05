@@ -245,7 +245,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 	/** @return Df_Dataflow_Model_Importer_Product */
 	private function importInventoryData() {
 		/** @var array $stockData */
-		$stockData = array();
+		$stockData = [];
 		foreach ($this->getInventoryFields() as $inventoryField) {
 			/** @var string $inventoryField */
 			df_assert_string($inventoryField);
@@ -267,9 +267,9 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 		/** @var string $pattern */
 		$pattern = '#^rm_tier_price_(\d+)_(\d+)_(\d+)$#';
 		/** @var string[] $matches */
-		$matches = array();
+		$matches = [];
 		/** @var array(array(string => int)) $newTierPrices */
-		$newTierPrices = array();
+		$newTierPrices = [];
 		foreach ($this->getRow()->getAsArray() as $fieldName => $fieldValue) {
 			/** @var string $fieldName */
 			/** @var mixed $fieldValue */
@@ -397,7 +397,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 					// Странное условие. Присутствует в оригинальном коде ядра.
 					0 === $this->storeId()
 			) {
-				$websiteIds = array();
+				$websiteIds = [];
 			}
 			/** @uses Mage_Core_Model_Website::getId() */
 			$this->getProduct()->setDataUsingMethod('website_ids', array_unique(array_merge($websiteIds,
@@ -482,7 +482,7 @@ class Df_Dataflow_Model_Importer_Product extends Df_Dataflow_Model_Importer_Row 
 						, $fieldValue
 					);
 					$isArray = true;
-					$valueToSet = array();
+					$valueToSet = [];
 				}
 				if ('decimal' === $fieldAttribute->getBackendType()) {
 					$valueToSet = $this->getRow()->parseAsNumber($fieldValue);

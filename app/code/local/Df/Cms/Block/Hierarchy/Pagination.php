@@ -354,7 +354,7 @@ class Df_Cms_Block_Hierarchy_Pagination extends Df_Core_Block_Template {
 	 */
 	public function getNodesInRange()
 	{
-		$range = array();
+		$range = [];
 		$nodes = $this->getNodes();
 		foreach ($nodes as $k => $node) {
 			if ($k >= $this->getRangeStart() && $k < $this->getRangeEnd()) {

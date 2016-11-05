@@ -102,7 +102,7 @@ class Df_Catalog_Model_Resource_Eav_Attribute extends Mage_Catalog_Model_Resourc
 	protected function _getResource() {return Df_Catalog_Model_Resource_Attribute::s();}
 
 	/** @var array(int => Df_Eav_Model_Resource_Entity_Attribute_Option_Collection) */
-	private $_options = array();
+	private $_options = [];
 
 	/**
 	 * @used-by \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real::_construct()

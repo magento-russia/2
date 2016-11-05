@@ -83,7 +83,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 		return $attributes[$code];
 	}
 	/** @var Df_Catalog_Model_Resource_Eav_Attribute[] */
-	private $_rowData = array();
+	private $_rowData = [];
 
 	/** @return string */
 	private function getAttributeCode() {
@@ -129,7 +129,7 @@ class Df_Dataflow_Model_Convert_Adapter_Dropdown
 	private function getSessionStorage() {
 		$result = df_session_core()->getData($this->getSessionKey());
 		if (!$result) {
-			$result = array();
+			$result = [];
 		}
 		return $result;
 	}

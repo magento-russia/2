@@ -77,7 +77,7 @@ class Df_Cms_Model_Resource_Block_Collection extends Mage_Cms_Model_Resource_Blo
 	}
 
 	/** @var array(string => mixed) */
-	private $_rmData = array();
+	private $_rmData = [];
 
 	/** @used-by Df_Cms_Block_Admin_Notifier_DeleteOrphanBlocks::_construct() */
 

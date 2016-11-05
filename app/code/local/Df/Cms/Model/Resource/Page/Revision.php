@@ -222,7 +222,7 @@ class Df_Cms_Model_Resource_Page_Revision extends Df_Core_Model_Resource {
 	protected function _getPermissionCondition($accessLevel, $userId)
 	{
 		$read = $this->_getReadAdapter();
-		$permissionCondition = array();
+		$permissionCondition = [];
 		$permissionCondition[]= df_db_quote_into($this->_versionTableAlias . '.user_id = ? ', $userId);
 		if (is_array($accessLevel) && !empty($accessLevel)) {
 			$permissionCondition[]= df_db_quote_into($this->_versionTableAlias . '.access_level in (?)', $accessLevel);

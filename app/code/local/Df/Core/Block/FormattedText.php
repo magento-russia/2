@@ -64,7 +64,7 @@ class Df_Core_Block_FormattedText extends Df_Core_Block_Template_NoCache {
 	private function getCssRules() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			if ($this->font()->needSetup() && $this->font()->useUnderline()) {
 				$result[]= Df_Core_Model_Css_Rule::compose(
 					'text-decoration', 'underline', null, !$this->isInline()

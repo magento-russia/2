@@ -84,7 +84,7 @@ class PHPExcel_Chart_DataSeriesValues
 	 *
 	 * @var	array of mixed
 	 */
-	private $_dataValues = array();
+	private $_dataValues = [];
 
 	/**
 	 * Create a new PHPExcel_Chart_DataSeriesValues object

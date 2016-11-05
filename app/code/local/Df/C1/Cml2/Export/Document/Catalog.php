@@ -116,7 +116,7 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	/** @return array(array(string => mixed)) */
 	private function getКлассификатор_Свойства_Свойство() {
 		/** @var array(array(string => mixed)) $result */
-		$result = array();
+		$result = [];
 		foreach ($this->getCatalogAttributes() as $attribute) {
 			/** @var \Df_Catalog_Model_Resource_Eav_Attribute $attribute */
 			/** @var \Df\C1\Cml2\Export\Processor\Catalog\Attribute\Real $processor */
@@ -137,7 +137,7 @@ class Catalog extends \Df_Catalog_Model_XmlExport_Catalog {
 	/** @return array(array(string => mixed)) */
 	private function getКлассификатор_ТипыЦен_ТипЦены() {
 		/** @var array(array(string => mixed)) $result */
-		$result = array();
+		$result = [];
 		foreach (\Df_Customer_Model_Group::c() as $group) {
 			/** @var \Df_Customer_Model_Group $group */
 			/** @var \Df\C1\Cml2\Export\Processor\Catalog\CustomerGroup $processor */

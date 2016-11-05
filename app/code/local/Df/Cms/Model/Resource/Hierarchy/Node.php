@@ -85,7 +85,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 	 * @return array
 	 */
 	public function getTreeSlice($object, $up = 0, $down = 0) {
-		$tree	   = array();
+		$tree	   = [];
 		$parentId   = $object->getParentNodeId();
 		if ($this->_treeMaxDepth > 0 && $object->getLevel() > $this->_treeMaxDepth) {
 			return $tree;
@@ -94,7 +94,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		if (!$this->_treeIsBrief) {
 			array_pop($xpath); //remove self node
 		}
-		$parentIds = array();
+		$parentIds = [];
 		$useUp = $up > 0;
 		while (count($xpath) > 0) {
 			if ($useUp && $up == 0) {
@@ -109,7 +109,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 		/**
 		 * Collect childs
 		 */
-		$children = array();
+		$children = [];
 		if ($this->_treeMaxDepth > 0 && $this->_treeMaxDepth > $object->getLevel() || $this->_treeMaxDepth == 0) {
 			$children = $this->_getSliceChildren($object, $down);
 		}
@@ -284,7 +284,7 @@ class Df_Cms_Model_Resource_Hierarchy_Node extends Df_Core_Model_Resource {
 			->orWhere('xpath = ?', $xpath)
 			->group('node_table.node_id')
 			->order(array('level', 'node_table.sort_order'));
-		$nodes	  = array();
+		$nodes	  = [];
 		$rowSet	 = $select->query()->fetchAll();
 		foreach ($rowSet as $row) {
 			$nodes[df_nat0($row['parent_node_id'])][$row[$this->getIdFieldName()]] = $row;

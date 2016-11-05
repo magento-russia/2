@@ -141,7 +141,7 @@ class Df_Reward_Helper_Data extends Mage_Core_Helper_Abstract {
 	public function getExpiryConfig()
 	{
 		if ($this->_expiryConfig === null) {
-			$result = array();
+			$result = [];
 			foreach (Mage::app()->getWebsites() as $website) {
 				$websiteId = $website->getId();
 				$result[$websiteId] = new Varien_Object(array(

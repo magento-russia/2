@@ -37,7 +37,7 @@ class Df_Localization_Block_Admin_Verification extends Df_Core_Block_Admin {
 	private function getDetails() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getFiles() as $file)  {
 				/** @var Df_Localization_Translation_File $file */
 				$result[$file->getName()]=

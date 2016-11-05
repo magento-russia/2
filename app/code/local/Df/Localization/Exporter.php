@@ -23,7 +23,7 @@ class Df_Localization_Exporter extends Df_Core_Model {
 		,$stringInTargetLanguage
 	) {
 		if (!isset($this->{__METHOD__}[$sourceKey->getModule()])) {
-			$this->{__METHOD__}[$sourceKey->getModule()] = array();
+			$this->{__METHOD__}[$sourceKey->getModule()] = [];
 		}
 		$this->{__METHOD__}[$sourceKey->getModule()][$sourceKey->getString()] =
 			$stringInTargetLanguage
@@ -92,7 +92,7 @@ class Df_Localization_Exporter extends Df_Core_Model {
 	private function getTranslationFromCsv($module) {
 		df_param_string($module, 0);
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		/** @var string $filePath */
 		$filePath =
 			df_cc_path(
@@ -153,7 +153,7 @@ class Df_Localization_Exporter extends Df_Core_Model {
 		/** @var Varien_File_Csv $parser */
 		$parser = new Varien_File_Csv();
 		/** string[] @var $csvdata */
-		$csvdata = array();
+		$csvdata = [];
 		foreach ($translation as $key => $value)
 			/** @var string $value */
 			/** @var string $value */

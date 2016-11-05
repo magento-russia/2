@@ -65,7 +65,7 @@ class Df_PageCache_Model_Container_Catalognavigation extends Df_PageCache_Model_
 			$categoryCacheId = $this->_getCategoryCacheId();
 			if ($categoryCacheId) {
 				$categoryUniqueClasses = '';
-				$classes = array();
+				$classes = [];
 				$classesCount = preg_match_all('/< *li[^>]*class *= *["\']?([^"\']*)/i', $blockContent, $classes);
 				for ($i = 0; $i < $classesCount; $i++) {
 					$classAttribute = $classes[0][$i];
@@ -75,7 +75,7 @@ class Df_PageCache_Model_Container_Catalognavigation extends Df_PageCache_Model_
 					}
 					$classInactive = preg_replace('/\s+active|active\s+|active/', '', $classAttribute);
 					$blockContent = str_replace($classAttribute, $classInactive, $blockContent);
-					$matches = array();
+					$matches = [];
 					if (preg_match('/(?<=\s|^)nav-.+?(?=\s|$)/', $classValue, $matches)) {
 						$categoryUniqueClasses .= ($categoryUniqueClasses ? ' ' : '') . $matches[0];
 					}

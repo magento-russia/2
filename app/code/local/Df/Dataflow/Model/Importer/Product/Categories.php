@@ -30,7 +30,7 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	private function getCategories() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getPaths() as $path) {
 				/** @var string[] $path */
 				$result = array_merge($result, $this->getCategoriesByPath($path));
@@ -87,7 +87,7 @@ class Df_Dataflow_Model_Importer_Product_Categories
 	private function getPaths() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getParsers() as $parser) {
 				/** @var Df_Dataflow_Model_Importer_Product_Categories_Parser $parser */
 				$result = $parser->getPaths();

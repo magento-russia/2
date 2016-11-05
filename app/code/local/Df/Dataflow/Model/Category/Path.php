@@ -20,7 +20,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 			$relevancies[]= array(self::INTERNAL_PARAM__IDENTICAL_PART_LENGTH => 0);
 		}
 		/** @var Df_Catalog_Model_Category[] $result */
-		$result = array();
+		$result = [];
 		foreach ($relevancies as $relevancy) {
 			/** @var mixed[] $relevancy */
 			df_assert_array($relevancy);
@@ -111,7 +111,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/** @return Df_Catalog_Model_Category[] */
 	private function findCategories() {
 		/** @var Df_Catalog_Model_Category[] $result */
-		$result = array();
+		$result = [];
 		/** @var Df_Catalog_Model_Resource_Category_Collection $categories */
 		$categories = $this->findCategoriesByName($this->getNodeName());
 		foreach ($categories as $category) {
@@ -159,7 +159,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	 */
 	private function getIdenticalPartBetweenRootAndNewPath(Df_Catalog_Model_Category $root) {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		if ($root->getName() === dfa($this->getPathAsNamesArray(), 0)) {
 			$result[]= $root;
 			/** @var int $depth */
@@ -244,7 +244,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	 */
 	private function getPathForCategory(Df_Catalog_Model_Category $category) {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		/** @var Df_Catalog_Model_Category $currentCategory */
 		$currentCategory = $category;
 		while (0 !== $currentCategory->getParentId()) {
@@ -261,7 +261,7 @@ class Df_Dataflow_Model_Category_Path extends Df_Core_Model {
 	/** @return mixed[][] */
 	private function getTheMostRelevantExistedCategoriesToInsertToInsertNewPath() {
 		/** @var mixed[][] $result */
-		$result = array();
+		$result = [];
 		/** @var int $identicalPartLength */
 		$identicalPartLength = 0;
 		/** @var Df_Catalog_Model_Resource_Category_Collection $categoriesWithSameName */

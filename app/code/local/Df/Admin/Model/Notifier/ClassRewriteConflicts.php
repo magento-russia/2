@@ -82,7 +82,7 @@ class Df_Admin_Model_Notifier_ClassRewriteConflicts extends Df_Admin_Model_Notif
 		 */
 		$vendors = df_path()->children($path);
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		foreach ($vendors as $vendor) {
 			/** @var string $vendor */
 			$modules = df_path()->children($path . DS . $vendor);

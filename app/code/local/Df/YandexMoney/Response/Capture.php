@@ -74,7 +74,7 @@ class Capture extends \Df\YandexMoney\Response {
 	public function getReportAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
-			$result = array();
+			$result = [];
 			$result['Успешна ли операция'] = df_bts_r($this->isSuccessful());
 			if (!$this->isSuccessful()) {
 				$result['Диагностическое сообщение'] = $this->getErrorMessage();

@@ -184,7 +184,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 					$factoryName = (string)$e->source_model;
 					$method = false;
 					/** @var string[] $matches */
-					$matches = array();
+					$matches = [];
 					if (1 === preg_match('/^([^:]+?)::([^:]+?)$/', $factoryName, $matches)) {
 						df_assert_array($matches);
 						array_shift($matches);
@@ -199,7 +199,7 @@ class Df_Adminhtml_Block_Config_Form extends Mage_Adminhtml_Block_System_Config_
 						if ('multiselect' === $fieldType) {
 							$optionArray = $sourceModel->$method();
 						} else {
-							$optionArray = array();
+							$optionArray = [];
 							foreach ($sourceModel->$method() as $value => $label) {
 								$optionArray[]= df_option($value, $label);
 							}

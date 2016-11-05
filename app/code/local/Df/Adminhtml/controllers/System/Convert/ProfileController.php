@@ -80,14 +80,14 @@ class Df_Adminhtml_System_Convert_ProfileController extends Mage_Adminhtml_Syste
 		df_assert($batchImportModel instanceof Mage_Dataflow_Model_Batch_Import);
 		$adapter->setBatchParams($batchModel->getParams());
 		/** @var array $errors */
-		$errors = array();
+		$errors = [];
 		/** @var int $savedRowsCounter */
 		$savedRowsCounter = 0;
 
 		// BEGIN PATCH
 		/** @var Mage_Catalog_Model_Convert_Adapter_Product|Mage_Customer_Model_Convert_Adapter_Customer|Df_Dataflow_Model_Convert_Adapter_Abstract|Df_Catalog_Model_Convert_Adapter_Category $adapter */
 		$adapter->setProfile(Df_Dataflow_Model_Convert_Profile::i());
-		$messages = array();
+		$messages = [];
 		// END PATCH
 
 		/**

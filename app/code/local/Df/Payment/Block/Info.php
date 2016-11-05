@@ -19,7 +19,7 @@ class Info extends \Df_Core_Block_Template_NoCache {
 	 */
 	public function getChildPdfAsArray() {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		foreach ($this->getChild() as $child) {
 			/** @var \Mage_Core_Block_Abstract $child */
 			/**
@@ -107,7 +107,7 @@ class Info extends \Df_Core_Block_Template_NoCache {
 	public function getValueAsArray($value, $escapeHtml = false) {
 		/** @var string[]|mixed[] $result */
 		if (!$value) {
-			$result = array();
+			$result = [];
 		}
 		else {
 			$result = df_array($value);

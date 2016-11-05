@@ -125,7 +125,7 @@ class PHPExcel_Calculation_LookupRef {
 				list($startAddress,$endAddress) = explode(':',$cellAddress);
 				$startAddress = preg_replace('/[^a-z]/i','',$startAddress);
 				$endAddress = preg_replace('/[^a-z]/i','',$endAddress);
-				$returnValue = array();
+				$returnValue = [];
 				do {
 					$returnValue[] = (integer) PHPExcel_Cell::columnIndexFromString($startAddress);
 				} while ($startAddress++ != $endAddress);
@@ -200,7 +200,7 @@ class PHPExcel_Calculation_LookupRef {
 				list($startAddress,$endAddress) = explode(':',$cellAddress);
 				$startAddress = preg_replace('/[^0-9]/','',$startAddress);
 				$endAddress = preg_replace('/[^0-9]/','',$endAddress);
-				$returnValue = array();
+				$returnValue = [];
 				do {
 					$returnValue[][] = (integer) $startAddress;
 				} while ($startAddress++ != $endAddress);
@@ -620,7 +620,7 @@ class PHPExcel_Calculation_LookupRef {
 				return $arrayValues;
 			}
 			$rowNum = $rowKeys[--$rowNum];
-			$returnArray = array();
+			$returnArray = [];
 			foreach($arrayValues as $arrayColumn) {
 				if (is_array($arrayColumn)) {
 					if (isset($arrayColumn[$rowNum])) {
@@ -655,7 +655,7 @@ class PHPExcel_Calculation_LookupRef {
 	 * Unlike the Excel TRANSPOSE function, which will only work on a single row or column, this function will transpose a full matrix.
 	 */
 	public static function TRANSPOSE($matrixData) {
-		$returnMatrix = array();
+		$returnMatrix = [];
 		if (!is_array($matrixData)) { $matrixData = array(array($matrixData)); }
 
 		$column = 0;

@@ -140,7 +140,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 		$cacheKey = $key . $this->storeIdCacheSuffix($store);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var Varien_Object[] $result */
-			$result = array();
+			$result = [];
 			/** @var string|null $mapSerialized */
 			$mapSerialized = $this->v($key, $store);
 			if ($mapSerialized) {
@@ -148,7 +148,7 @@ abstract class Df_Core_Model_Settings extends Df_Core_Model {
 				/** @var array(array(string => string)) $map */
 				$map = df_nta(Df_Admin_Config_Backend_Table::unserialize($mapSerialized, $itemClass));
 				/** @var array(string|int => mixed) $result */
-				$result = array();
+				$result = [];
 				foreach ($map as $itemData) {
 					/** @var array(string => $mixed) $itemData */
 					/** @var Df_Admin_Config_MapItem $item */

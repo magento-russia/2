@@ -201,7 +201,7 @@ class PHPExcel_ReferenceHelper
 	protected function _adjustComments($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
 	{
 		$aComments = $pSheet->getComments();
-		$aNewComments = array(); // the new array of all comments
+		$aNewComments = []; // the new array of all comments
 
 		foreach ($aComments as $key => &$value) {
 			// Any comments inside a deleted range will be ignored
@@ -279,7 +279,7 @@ class PHPExcel_ReferenceHelper
 	protected function _adjustMergeCells($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
 	{
 		$aMergeCells = $pSheet->getMergeCells();
-		$aNewMergeCells = array(); // the new array of all merge cells
+		$aNewMergeCells = []; // the new array of all merge cells
 		foreach ($aMergeCells as $key => &$value) {
 			$newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
 			$aNewMergeCells[$newReference] = $newReference;
@@ -483,7 +483,7 @@ class PHPExcel_ReferenceHelper
 					for ($j = $beforeColumnIndex - 1; $j <= $beforeColumnIndex - 2 + $pNumCols; ++$j) {
 						$pSheet->getCellByColumnAndRow($j, $i)->setXfIndex($xfIndex);
 						if ($conditionalStyles) {
-							$cloned = array();
+							$cloned = [];
 							foreach ($conditionalStyles as $conditionalStyle) {
 								$cloned[] = clone $conditionalStyle;
 							}
@@ -507,7 +507,7 @@ class PHPExcel_ReferenceHelper
 					for ($j = $beforeRow; $j <= $beforeRow - 1 + $pNumRows; ++$j) {
 						$pSheet->getCell(PHPExcel_Cell::stringFromColumnIndex($i) . $j)->setXfIndex($xfIndex);
 						if ($conditionalStyles) {
-							$cloned = array();
+							$cloned = [];
 							foreach ($conditionalStyles as $conditionalStyle) {
 								$cloned[] = clone $conditionalStyle;
 							}
@@ -653,7 +653,7 @@ class PHPExcel_ReferenceHelper
 			//	Ignore blocks that were enclosed in quotes (alternating entries in the $formulaBlocks array after the explode)
 			if ($i = !$i) {
 				$adjustCount = 0;
-				$newCellTokens = $cellTokens = array();
+				$newCellTokens = $cellTokens = [];
 				//	Search for row ranges (e.g. 'Sheet1'!3:5 or 3:5) with or without $ absolutes (e.g. $3:5)
 				$matchCount = preg_match_all('/'.self::REFHELPER_REGEXP_ROWRANGE.'/i', ' '.$formulaBlock.' ', $matches, PREG_SET_ORDER);
 				if ($matchCount > 0) {

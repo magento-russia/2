@@ -103,21 +103,21 @@ class PHPExcel_Chart_DataSeries
 	 *
 	 * @var array of integer
 	 */
-	private $_plotOrder = array();
+	private $_plotOrder = [];
 
 	/**
 	 * Plot Label
 	 *
 	 * @var array of PHPExcel_Chart_DataSeriesValues
 	 */
-	private $_plotLabel = array();
+	private $_plotLabel = [];
 
 	/**
 	 * Plot Category
 	 *
 	 * @var array of PHPExcel_Chart_DataSeriesValues
 	 */
-	private $_plotCategory = array();
+	private $_plotCategory = [];
 
 	/**
 	 * Smooth Line
@@ -131,7 +131,7 @@ class PHPExcel_Chart_DataSeries
 	 *
 	 * @var array of PHPExcel_Chart_DataSeriesValues
 	 */
-	private $_plotValues = array();
+	private $_plotValues = [];
 
 	/**
 	 * Create a new PHPExcel_Chart_DataSeries

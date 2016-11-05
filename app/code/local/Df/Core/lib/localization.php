@@ -63,7 +63,7 @@ function df_translate($text, $module) {
 			$text = array_shift($variables);
 		}
 		else {
-			$variables = array();
+			$variables = [];
 		}
 		if (is_object($module)) {
 			$module = df_module_name($module);

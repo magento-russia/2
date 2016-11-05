@@ -20,7 +20,7 @@ class Df_Sales_Model_Handler_AdminOrderGrid_AddProductColumn extends Df_Core_Mod
 		/** @var array|null $columnRenderers */
 		$columnRenderers = $this->_getData('column_renderers');
 		if (is_null($columnRenderers)) {
-			$columnRenderers = array();
+			$columnRenderers = [];
 		}
 		df_assert_array($columnRenderers);
 		$this->getEvent()->getGrid()->setData('column_renderers',

@@ -8,7 +8,7 @@ class Df_PageCache_Model_Container_Placeholder
 	 *
 	 * @var array
 	 */
-	protected static $_definitionMap = array();
+	protected static $_definitionMap = [];
 
 	/**
 	 * Original placeholder definition based on HTML_NAME_PATTERN
@@ -26,7 +26,7 @@ class Df_PageCache_Model_Container_Placeholder
 	 * Placeholder attributes
 	 * @var $_attributes array
 	 */
-	protected $_attributes = array();
+	protected $_attributes = [];
 
 	/**
 	 * Class constructor.

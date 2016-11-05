@@ -331,7 +331,7 @@ class Df_Catalog_Model_Product_Exporter extends Df_Core_Model {
 						$matchingProductIds = df_int_simple(array_values($matchingProductIdsRaw));
 					}
 					else {
-						$matchingProductIds = array();
+						$matchingProductIds = [];
 						/**
 						 * 2015-11-07
 						 * Тут раньше стояло

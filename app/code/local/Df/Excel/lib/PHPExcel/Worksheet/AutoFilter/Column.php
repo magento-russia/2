@@ -111,7 +111,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
 	 *
 	 * @var array of PHPExcel_Worksheet_AutoFilter_Column_Rule
 	 */
-	private $_ruleset = array();
+	private $_ruleset = [];
 
 
 	/**
@@ -119,7 +119,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
 	 *
 	 * @var array of mixed
 	 */
-	private $_attributes = array();
+	private $_attributes = [];
 
 
 	/**
@@ -358,7 +358,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
 	 * @return	PHPExcel_Worksheet_AutoFilter_Column
 	 */
 	public function clearRules() {
-		$this->_ruleset = array();
+		$this->_ruleset = [];
 		$this->setJoin(self::AUTOFILTER_COLUMN_JOIN_OR);
 
 		return $this;
@@ -379,7 +379,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
 				}
 			} elseif ((is_array($value)) && ($key == '_ruleset')) {
 				//	The columns array of PHPExcel_Worksheet_AutoFilter objects
-				$this->$key = array();
+				$this->$key = [];
 				foreach ($value as $k => $v) {
 					$this->$key[$k] = clone $v;
 					// attach the new cloned Rule to this new cloned Autofilter Cloned object

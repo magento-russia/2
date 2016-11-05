@@ -22,16 +22,16 @@ class DOMDocumentWrapper {
 	public $contentType = '';
 	public $xpath;
 	public $uuid = 0;
-	public $data = array();
-	public $dataNodes = array();
-	public $events = array();
-	public $eventsNodes = array();
-	public $eventsGlobal = array();
+	public $data = [];
+	public $dataNodes = [];
+	public $events = [];
+	public $eventsNodes = [];
+	public $eventsGlobal = [];
 	/**
 	 * @TODO iframes support http://code.google.com/p/phpquery/issues/detail?id=28
 	 * @var unknown_type
 	 */
-	public $frames = array();
+	public $frames = [];
 	/**
 	 * Document root, by default equals to document itself.
 	 * Used by documentFragments.
@@ -329,7 +329,7 @@ class DOMDocumentWrapper {
 	 * @return array contentType, charset
 	 */
 	protected function contentTypeFromHTML($markup) {
-		$matches = array();
+		$matches = [];
 		// find meta tag
 		preg_match('@<meta[^>]+http-equiv\\s*=\\s*(["|\'])Content-Type\\1([^>]+?)>@i',
 			$markup, $matches
@@ -347,7 +347,7 @@ class DOMDocumentWrapper {
 		return $contentType[1];
 	}
 	protected function charsetFromXML($markup) {
-		$matches = array();
+		$matches = [];
 		// find declaration
 		preg_match('@<'.'?xml[^>]+encoding\\s*=\\s*(["|\'])(.*?)\\1@i',
 			$markup, $matches
@@ -363,7 +363,7 @@ class DOMDocumentWrapper {
 	 * @param $html
 	 */
 	protected function charsetFixHTML($markup) {
-		$matches = array();
+		$matches = [];
 		// find meta tag
 		preg_match('@\s*<meta[^>]+http-equiv\\s*=\\s*(["|\'])Content-Type\\1([^>]+?)>@i',
 			$markup, $matches, PREG_OFFSET_CAPTURE
@@ -429,7 +429,7 @@ class DOMDocumentWrapper {
 	 */
 	public function import($source, $sourceCharset = null) {
 		// TODO charset conversions
-		$return = array();
+		$return = [];
 		if ($source instanceof DOMNODE && !($source instanceof DOMNODELIST))
 			$source = array($source);
 //		if (is_array($source)) {
@@ -596,7 +596,7 @@ class DOMDocumentWrapper {
 				foreach ($nodes as $node)
 					$markup .= $this->document->saveXML($node);
 			} else {
-				$loop = array();
+				$loop = [];
 				if ($innerMarkup)
 					foreach ($nodes as $node) {
 						if ($node->childNodes)

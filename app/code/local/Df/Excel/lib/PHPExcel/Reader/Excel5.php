@@ -428,7 +428,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$worksheetNames = array();
+		$worksheetNames = [];
 
 		// Read the OLE file
 		$this->_loadOLE($pFilename);
@@ -477,7 +477,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$worksheetInfo = array();
+		$worksheetInfo = [];
 
 		// Read the OLE file
 		$this->_loadOLE($pFilename);
@@ -487,7 +487,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
 		// initialize
 		$this->_pos    = 0;
-		$this->_sheets = array();
+		$this->_sheets = [];
 
 		// Parse Workbook Global Substream
 		while ($this->_pos < $this->_dataSize) {
@@ -511,7 +511,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 				continue;
 			}
 
-			$tmpInfo = array();
+			$tmpInfo = [];
 			$tmpInfo['worksheetName'] = $sheet['name'];
 			$tmpInfo['lastColumnLetter'] = 'A';
 			$tmpInfo['lastColumnIndex'] = 0;
@@ -729,19 +729,19 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			$this->_drawingData = '';
 
 			// Initialize objs
-			$this->_objs = array();
+			$this->_objs = [];
 
 			// Initialize shared formula parts
-			$this->_sharedFormulaParts = array();
+			$this->_sharedFormulaParts = [];
 
 			// Initialize shared formulas
-			$this->_sharedFormulas = array();
+			$this->_sharedFormulas = [];
 
 			// Initialize text objs
-			$this->_textObjects = array();
+			$this->_textObjects = [];
 
 			// Initialize cell annotations
-			$this->_cellNotes = array();
+			$this->_cellNotes = [];
 			$this->textObjRef = -1;
 
 			while ($this->_pos <= $this->_dataSize - 4) {
@@ -958,7 +958,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 					//	in general, formula looks like this: Foo!$C$7:$J$66,Bar!$A$1:$IV$2
 					$ranges = explode(',', $definedName['formula']); // FIXME: what if sheetname contains comma?
 
-					$extractedRanges = array();
+					$extractedRanges = [];
 					foreach ($ranges as $range) {
 						// $range should look like one of these
 						//		Foo!$C$7:$J$66
@@ -2369,7 +2369,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			$offset += $encodedUrlString['size'];
 
 			// offset: var; size: var; list of $nm sheet names (Unicode strings, 16-bit length)
-			$externalSheetNames = array();
+			$externalSheetNames = [];
 			for ($i = 0; $i < $nm; ++$i) {
 				$externalSheetNameString = self::_readUnicodeStringLong(substr($recordData, $offset));
 				$externalSheetNames[] = $externalSheetNameString['value'];
@@ -2706,7 +2706,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			$retstr = self::_encodeUTF16($retstr, $isCompressed);
 
 			// read additional Rich-Text information, if any
-			$fmtRuns = array();
+			$fmtRuns = [];
 			if ($hasRichText) {
 				// list of formatting runs
 				for ($j = 0; $j < $formattingRuns; ++$j) {
@@ -4763,7 +4763,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			$offset += 6;
 
 			// offset: 27; size: 8 * $cref; list of cell ranges (like in hyperlink record)
-			$cellRanges = array();
+			$cellRanges = [];
 			for ($i = 0; $i < $cref; ++$i) {
 				try {
 					$cellRange = $this->_readBIFF8CellRangeAddressFixed(substr($recordData, 27 + 8 * $i, 8));
@@ -4839,7 +4839,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 //			var_dump($bcBitCount);
 
 			$rgbString = substr($iData, 12);
-			$rgbTriples = array();
+			$rgbTriples = [];
 			while (strlen($rgbString) > 0) {
 				$rgbTriples[] = unpack('Cb/Cg/Cr', $rgbString);
 				$rgbString = substr($rgbString, 3);
@@ -4932,7 +4932,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 	private function _getSplicedRecordData()
 	{
 		$data = '';
-		$spliceOffsets = array();
+		$spliceOffsets = [];
 
 		$i = 0;
 		$spliceOffsets[0] = 0;
@@ -5013,7 +5013,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 	private function _getFormulaFromData($formulaData,  $additionalData = '', $baseCell = 'A1')
 	{
 		// start parsing the formula data
-		$tokens = array();
+		$tokens = [];
 
 		while (strlen($formulaData) > 0 and $token = $this->_getNextToken($formulaData, $baseCell)) {
 			$tokens[] = $token;
@@ -5044,7 +5044,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			return '';
 		}
 
-		$formulaStrings = array();
+		$formulaStrings = [];
 		foreach ($tokens as $token) {
 			// initialize spaces
 			$space0 = isset($space0) ? $space0 : ''; // spaces before next token, not tParen
@@ -5125,7 +5125,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 			case 'tFuncV': // function with variable number of arguments
 				if ($token['data']['function'] != '') {
 					// normal function
-					$ops = array(); // array of operators
+					$ops = []; // array of operators
 					for ($i = 0; $i < $token['data']['args']; ++$i) {
 						$ops[] = array_pop($formulaStrings);
 					}
@@ -5134,7 +5134,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 					unset($space0, $space1);
 				} else {
 					// add-in function
-					$ops = array(); // array of operators
+					$ops = []; // array of operators
 					for ($i = 0; $i < $token['data']['args'] - 1; ++$i) {
 						$ops[] = array_pop($formulaStrings);
 					}
@@ -6056,7 +6056,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 	 */
 	private function _readBIFF8CellRangeAddressList($subData)
 	{
-		$cellRangeAddresses = array();
+		$cellRangeAddresses = [];
 
 		// offset: 0; size: 2; number of the following cell range addresses
 		$nm = self::_GetInt2d($subData, 0);
@@ -6084,7 +6084,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 	 */
 	private function _readBIFF5CellRangeAddressList($subData)
 	{
-		$cellRangeAddresses = array();
+		$cellRangeAddresses = [];
 
 		// offset: 0; size: 2; number of the following cell range addresses
 		$nm = self::_GetInt2d($subData, 0);
@@ -6180,9 +6180,9 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 		$arrayData = substr($arrayData, 3);
 
 		// offset: 3; size: var; list of ($nc + 1) * ($nr + 1) constant values
-		$matrixChunks = array();
+		$matrixChunks = [];
 		for ($r = 1; $r <= $nr + 1; ++$r) {
-			$items = array();
+			$items = [];
 			for ($c = 1; $c <= $nc + 1; ++$c) {
 				$constant = self::_readBIFF8Constant($arrayData);
 				$items[] = $constant['value'];

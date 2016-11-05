@@ -17,7 +17,7 @@ class Df_Admin_Config_Source_SelectNumberFromDropdown extends Df_Admin_Config_So
 		// Кэшировать результат нельзя,
 		// потому что система использует единый объект для всех элементов управления данного типа!
 		/** @var int[][] $result */
-		$result = array();
+		$result = [];
 		/** @var int $max */
 		$max = df_nat0($this->getFieldParam(self::$DF_MAX, 10));
 		/** @var int $step */

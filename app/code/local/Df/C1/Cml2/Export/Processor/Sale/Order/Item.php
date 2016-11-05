@@ -155,7 +155,7 @@ class Item extends \Df\C1\Cml2\Export\Processor\Sale {
 			$customOptions = df_nta(dfa($productOptions, 'options'));
 			if ($customOptions) {
 				/** @var string[] $customOptionsKeyValuePairsAsText */
-				$customOptionsKeyValuePairsAsText = array();
+				$customOptionsKeyValuePairsAsText = [];
 				foreach ($customOptions as $customOption) {
 					/** @var array(string => string) $customOption */
 					df_assert_array($customOption);

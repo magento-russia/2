@@ -423,7 +423,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 			$cVal = $cell->getValue();
 			if ($cVal instanceof PHPExcel_RichText) {
 				// $this->_writeString($row, $column, $cVal->getPlainText(), $xfIndex);
-				$arrcRun = array();
+				$arrcRun = [];
 				$str_len = PHPExcel_Shared_String::CountCharacters($cVal->getPlainText(), 'UTF-8');
 				$str_pos = 0;
 				$elements = $cVal->getRichTextElements();
@@ -525,7 +525,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 
 		$arrConditionalStyles = $_phpSheet->getConditionalStylesCollection();
 		if(!empty($arrConditionalStyles)){
-			$arrConditional = array();
+			$arrConditional = [];
 			// @todo CFRule & CFHeader
 			// Write CFHEADER record
 			$this->_writeCFHeader();
@@ -1731,7 +1731,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 	 */
 	private function _writePanes()
 	{
-		$panes = array();
+		$panes = [];
 		if ($freezePane = $this->_phpSheet->getFreezePane()) {
 			list($column, $row) = PHPExcel_Cell::coordinateFromString($freezePane);
 			$panes[0] = $row - 1;
@@ -2182,8 +2182,8 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 	private function _writeBreaks()
 	{
 		// initialize
-		$vbreaks = array();
-		$hbreaks = array();
+		$vbreaks = [];
+		$hbreaks = [];
 
 		foreach ($this->_phpSheet->getBreaks() as $cell => $breakType) {
 			// Fetch coordinates
@@ -3640,7 +3640,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 		$numColumnMax = null;
 		$numRowMin = null;
 		$numRowMax = null;
-		$arrConditional = array();
+		$arrConditional = [];
 		foreach ($this->_phpSheet->getConditionalStylesCollection() as $cellCoordinate => $conditionalStyles) {
 			foreach ($conditionalStyles as $conditional) {
 				if($conditional->getConditionType() == PHPExcel_Style_Conditional::CONDITION_EXPRESSION

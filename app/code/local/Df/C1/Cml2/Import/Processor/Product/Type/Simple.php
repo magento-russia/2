@@ -1,5 +1,6 @@
 <?php
 namespace Df\C1\Cml2\Import\Processor\Product\Type;
+use Df\C1\Cml2\Import\Data\Entity\Offer;
 class Simple extends \Df\C1\Cml2\Import\Processor\Product\Type\Simple\AbstractT {
 	/**
 	 * @override
@@ -59,96 +60,91 @@ class Simple extends \Df\C1\Cml2\Import\Processor\Product\Type\Simple\AbstractT 
 	 * @override
 	 * @return string
 	 */
-	protected function getSku() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string|null $result */
-			$result = null;
- 			if (!is_null($this->getExistingMagentoProduct())) {
-				$result = $this->getExistingMagentoProduct()->getSku();
-				df_assert_sku($result);
+	protected function getSku() {return dfc($this, function() {
+		/** @var string|null $result */
+		$result = null;
+			if (!is_null($this->getExistingMagentoProduct())) {
+			$result = $this->getExistingMagentoProduct()->getSku();
+			df_assert_sku($result);
+		}
+		else {
+			/**
+			 * Данный товар ранее не импортировался
+			 * из 1С:Управление торговлей в интернет-магазин.
+			 * Сначала пробуем в качестве артикула товара в интернет-магазине
+			 * взять артикул товара из 1С:Управление торговлей
+			 */
+			/** @var string|null $externalSku */
+			$externalSku = $this->getEntityProduct()->getSku();
+			// У товара в 1С:Управление торговлей может отсутствовать артикул
+			if (!$externalSku) {
+				// У этого товара нет артикула в 1С:Управление торговлей
+				df_c1_log(
+					'У товара «%s» в 1С отсутствует артикул.', $this->getEntityProduct()->getName()
+				);
 			}
 			else {
+				$externalSku = df_sku_adapt($externalSku);
 				/**
-				 * Данный товар ранее не импортировался
-				 * из 1С:Управление торговлей в интернет-магазин.
-				 * Сначала пробуем в качестве артикула товара в интернет-магазине
-				 * взять артикул товара из 1С:Управление торговлей
+				 * Убеждаемся, что ни один товар в интернет-магазине
+				 * ещё не использует этот артикул
 				 */
-				/** @var string|null $externalSku */
-				$externalSku = $this->getEntityProduct()->getSku();
-				// У товара в 1С:Управление торговлей может отсутствовать артикул
-				if (!$externalSku) {
-					// У этого товара нет артикула в 1С:Управление торговлей
-					df_c1_log(
-						'У товара «%s» в 1С отсутствует артикул.', $this->getEntityProduct()->getName()
-					);
+				if (!df_h()->catalog()->product()->isExist($externalSku)) {
+					$result = $externalSku;
 				}
 				else {
-					$externalSku = df_sku_adapt($externalSku);
-					/**
-					 * Убеждаемся, что ни один товар в интернет-магазине
-					 * ещё не использует этот артикул
-					 */
-					if (!df_h()->catalog()->product()->isExist($externalSku)) {
-						$result = $externalSku;
-					}
-					else {
-						df_c1_log('Товар с артикулом «%s» уже присутствует в магазине.', $externalSku);
-					}
-				}
-				if (!$result) {
-					/**
-					 * Итак, использовать артикул 1С:Управление торговлей
-					 * в качестве артикула товара в интернет-магазине мы не можем,
-					 * потому что этот артикул уже занят в интернет-магазине.
-					 *
-					 * Поэтому пытаемся в качестве артикула товара в магазине
-					 * использовать идентификатор товара в 1С:Управление торговлей.
-					 */
-					/** @var string $externalId */
-					$externalId = $this->getEntityOffer()->getExternalId();
-					/** @var string $skuCandidate */
-					$skuCandidate = df_sku_adapt($externalId);
-					/** @var string|null $existingProductId */
-					$existingProductId = df_h()->catalog()->product()->getIdBySku($skuCandidate);
-					if (is_null($existingProductId)) {
-						$result = $skuCandidate;
-					}
-					else {
-						/**
-						 * Наличие в интернет-магазине товара,
-						 * который использует идентификатор импортируемого сейчас товара
-						 * в качестве своего артикула явно говорит о некорректном состоянии программы.
-						 * Идентификатор слишком длинен, чтобы случайно повторяться!
-						 */
-						/** @var \Df_Catalog_Model_Product $existingProduct */
-						$existingProduct = df_product($existingProductId);
-						df_error(
-							'1С:Управление торговлей пытается передать в интернет-магазин товар «%s» '
-							.'и интернет-магазин намерен присвоить ему артикул «%s», '
-							.'являющийся идентификатором данного товара в 1С:Управление торговлей,'
-							.'однако в интернет-магазине уже присутствует товар %s,'
-							.'который уже использует данный идентификатор в качестве своего артикула.'
-							,$this->getEntityOffer()->getName()
-							,$skuCandidate
-							,$existingProduct->getTitle()
-						);
-					}
+					df_c1_log('Товар с артикулом «%s» уже присутствует в магазине.', $externalSku);
 				}
 			}
-			df_result_sku($result);
-			$this->{__METHOD__} = $result;
+			if (!$result) {
+				/**
+				 * Итак, использовать артикул 1С:Управление торговлей
+				 * в качестве артикула товара в интернет-магазине мы не можем,
+				 * потому что этот артикул уже занят в интернет-магазине.
+				 *
+				 * Поэтому пытаемся в качестве артикула товара в магазине
+				 * использовать идентификатор товара в 1С:Управление торговлей.
+				 */
+				/** @var string $externalId */
+				$externalId = $this->getEntityOffer()->getExternalId();
+				/** @var string $skuCandidate */
+				$skuCandidate = df_sku_adapt($externalId);
+				/** @var string|null $existingProductId */
+				$existingProductId = df_h()->catalog()->product()->getIdBySku($skuCandidate);
+				if (is_null($existingProductId)) {
+					$result = $skuCandidate;
+				}
+				else {
+					/**
+					 * Наличие в интернет-магазине товара,
+					 * который использует идентификатор импортируемого сейчас товара
+					 * в качестве своего артикула явно говорит о некорректном состоянии программы.
+					 * Идентификатор слишком длинен, чтобы случайно повторяться!
+					 */
+					/** @var \Df_Catalog_Model_Product $existingProduct */
+					$existingProduct = df_product($existingProductId);
+					df_error(
+						'1С:Управление торговлей пытается передать в интернет-магазин товар «%s» '
+						.'и интернет-магазин намерен присвоить ему артикул «%s», '
+						.'являющийся идентификатором данного товара в 1С:Управление торговлей,'
+						.'однако в интернет-магазине уже присутствует товар %s,'
+						.'который уже использует данный идентификатор в качестве своего артикула.'
+						,$this->getEntityOffer()->getName()
+						,$skuCandidate
+						,$existingProduct->getTitle()
+					);
+				}
+			}
 		}
-		return $this->{__METHOD__};
-	}
+		df_result_sku($result);
+		return $result;
+	});}
 
 	/**
 	 * @used-by \Df\C1\Cml2\Action\Catalog\Import::importProductsSimple()
 	 * @static
-	 * @param \Df\C1\Cml2\Import\Data\Entity\Offer $offer
-	 * @return \Df\C1\Cml2\Import\Processor\Product\Type\Simple
+	 * @param Offer $offer
+	 * @return self
 	 */
-	public static function i(\Df\C1\Cml2\Import\Data\Entity\Offer $offer) {
-		return self::ic(__CLASS__, $offer);
-	}
+	public static function i(Offer $offer) {return self::ic(__CLASS__, $offer);}
 }

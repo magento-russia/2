@@ -24,7 +24,7 @@ class Df_Core_Model_Cache_Design_Package extends Df_Core_Model {
 	protected function cachedGlobal() {return array(self::$F__CACHE);}
 
 	/** @var array(string => string) */
-	protected $_cache = array();
+	protected $_cache = [];
 	/** @var string */
 	private static $F__CACHE = '_cache';
 

@@ -163,7 +163,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
 	}
 
 	//	Data Array used for testing only, should write to PHPExcel object on completion of tests
-	private $_dataArray = array();
+	private $_dataArray = [];
 
 	private $_tableLevel = 0;
 	private $_nestedColumn = array('A');
@@ -219,7 +219,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
 			} elseif($child instanceof DOMElement) {
 //				echo '<b>DOM ELEMENT: </b>' , strtoupper($child->nodeName) , '<br />';
 
-				$attributeArray = array();
+				$attributeArray = [];
 				foreach($child->attributes as $attribute) {
 //					echo '<b>ATTRIBUTE: </b>' , $attribute->name , ' => ' , $attribute->value , '<br />';
 					$attributeArray[$attribute->name] = $attribute->value;

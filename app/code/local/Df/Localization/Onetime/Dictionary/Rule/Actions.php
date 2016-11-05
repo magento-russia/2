@@ -25,7 +25,7 @@ class Df_Localization_Onetime_Dictionary_Rule_Actions extends \Df\Xml\Parser\Ent
 		df_param_string_not_empty($termName, 0);
 		if (!isset($this->{__METHOD__}[$termName])) {
 			/** @var @var Df_Localization_Onetime_Dictionary_Term[] $terms */
-			$terms = array();
+			$terms = [];
 			/** @var @var \Df\Xml\X[] $nodes */
 			$nodes = $this->e()->xpath($termName);
 			df_assert_ne(false, $nodes);

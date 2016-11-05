@@ -8,7 +8,7 @@ class Df_Customer_Block_Account_Navigation extends Mage_Customer_Block_Account_N
 	 * @return Df_Customer_Block_Account_Navigation
 	 */
 	public function removeLinkByPath($path) {
-		$linkNamesToRemove = array();
+		$linkNamesToRemove = [];
 		/** @var array $linkNamesToRemove */
 		foreach ($this->_links as $name => $link) {
 			/** @var Varien_Object $link */

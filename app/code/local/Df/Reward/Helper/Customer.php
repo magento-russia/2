@@ -9,7 +9,7 @@ class Df_Reward_Helper_Customer extends Mage_Core_Helper_Abstract {
 	 */
 	public function getUnsubscribeUrl($notification = false)
 	{
-		$params = array();
+		$params = [];
 		if ($notification) {
 			$params = array('notification' => $notification);
 		}

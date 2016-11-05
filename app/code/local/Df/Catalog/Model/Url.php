@@ -293,7 +293,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			// match request_url abcdef1234(-12)(.html) pattern
 
 			/** @var string[] $match */
-			$match = array();
+			$match = [];
 			/**
 			 * Наша заплатка состоит в том,
 			 * что мы добавляем в регулярное выражение русские буквы
@@ -417,7 +417,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 	 * @return array
 	 */
 	private function filterRewritesByCategoryPresence(array $rewrites) {
-		$result = array();
+		$result = [];
 		foreach ($rewrites as $rewrite) {
 			/** @var Varien_Object $rewrite */
 			if (null !== $rewrite->getData('category_id')) {
@@ -450,7 +450,7 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 		return $result;
 	}
 	/** @var array */
-	private $_preloadedCategoriesLevelInfo = array();
+	private $_preloadedCategoriesLevelInfo = [];
 
 	/**
 	 * @param Varien_Object[] $rewrites

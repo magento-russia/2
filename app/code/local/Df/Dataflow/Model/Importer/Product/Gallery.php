@@ -42,13 +42,13 @@ class Df_Dataflow_Model_Importer_Product_Gallery extends Df_Core_Model {
 	/** @return string[][] */
 	public function getPrimaryImages() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array();
+			$this->{__METHOD__} = [];
 			foreach ($this->getImageFields() as $primaryImageSize) {
 				/** @var string $primaryImageSize */
 				$imagePath = $this->getImportedValue($primaryImageSize);
 				if ($imagePath && ('no_selection' !== $imagePath)) {
 					if (!isset($this->{__METHOD__}[$imagePath])) {
-						$this->{__METHOD__}[$imagePath] = array();
+						$this->{__METHOD__}[$imagePath] = [];
 					}
 					$this->{__METHOD__}[$imagePath][]= $primaryImageSize;
 				}

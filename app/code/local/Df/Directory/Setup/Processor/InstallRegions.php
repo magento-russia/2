@@ -31,7 +31,7 @@ abstract class Df_Directory_Setup_Processor_InstallRegions extends Df_Core_Model
 	/** @return array(array(string => string|int)) */
 	private function getRegionsData() {
 		/** @var array $result */
-		$result = array();
+		$result = [];
 		/** @var int $ordering */
 		$ordering = 0;
 		foreach ($this->getRegionsDataRaw() as $regionDataRaw) {

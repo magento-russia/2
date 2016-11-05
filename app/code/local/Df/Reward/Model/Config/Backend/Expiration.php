@@ -13,7 +13,7 @@ class Df_Reward_Model_Config_Backend_Expiration extends Mage_Core_Model_Config_D
 			return $this;
 		}
 
-		$websiteIds = array();
+		$websiteIds = [];
 		if ($this->getWebsiteCode()) {
 			$websiteIds = array(df_website($this->getWebsiteCode())->getId());
 		} else {

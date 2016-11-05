@@ -127,8 +127,8 @@ class PHPExcel_Writer_Excel5_Parser
 		$this->_lookahead     = '';       // The character ahead of the current char.
 		$this->_parse_tree    = '';       // The parse tree to be generated.
 		$this->_initializeHashes();      // Initialize the hashes: ptg's and function's ptg's
-		$this->_ext_sheets = array();
-		$this->_references = array();
+		$this->_ext_sheets = [];
+		$this->_references = [];
 	}
 
 	/**

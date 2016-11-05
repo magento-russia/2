@@ -115,14 +115,14 @@ class Df_Reward_Block_Adminhtml_Customer_Edit_Tab_Reward_Management_Update
 
 		$stores = df_mage()->adminhtml()->system()->storeSingleton()
 			->getStoresStructure(false, array(), array(), array($customer->getWebsiteId()));
-		$values = array();
+		$values = [];
 		$nonEscapableNbspChar = html_entity_decode('&#160;', ENT_NOQUOTES, 'UTF-8');
 		foreach ($stores as $websiteId => $website) {
 			$values[]= df_option(array(), $website['label']);
 			if (isset($website['children']) && is_array($website['children'])) {
 				foreach ($website['children'] as $groupId => $group) {
 					if (isset($group['children']) && is_array($group['children'])) {
-						$options = array();
+						$options = [];
 						foreach ($group['children'] as $storeId => $store) {
 							$options[]= df_option(
 								$store['value'], str_repeat($nonEscapableNbspChar, 4) . $store['label']

@@ -20,7 +20,7 @@ class Df_PageCache_RequestController extends Mage_Core_Controller_Front_Action
 		if ($sessionInfo) {
 			$sessionInfo = unserialize($sessionInfo);
 		} else {
-			$sessionInfo = array();
+			$sessionInfo = [];
 		}
 		$session = Mage::getSingleton('core/session');
 		$cookieName = $session->getSessionName();

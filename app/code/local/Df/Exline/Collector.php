@@ -138,7 +138,7 @@ class Collector extends \Df\Shipping\Collector\Kz {
 			$result = array(self::date(dfa($a, 'min_date')), self::date(dfa($a, 'max_date')));
 		}
 		catch (\Exception $e) {
-			$result = array();
+			$result = [];
 		}
 		return $result;
 	}

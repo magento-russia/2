@@ -46,7 +46,7 @@ function df_config_a($path) {
 			$node = df_config_node($path);
 		}
 		if (!$node) {
-			$result = array();
+			$result = [];
 		}
 		else {
 			/** @var array(string => array(string => mixed)) $cache */

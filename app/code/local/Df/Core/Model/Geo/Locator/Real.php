@@ -65,7 +65,7 @@ abstract class Df_Core_Model_Geo_Locator_Real extends Df_Core_Model_Geo_Locator 
 	protected function getResponseAsArray() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => mixed) $result */
-			$result = array();
+			$result = [];
 			if ($this->getResponse()) {
 				try {
 					$result = call_user_func(array($this, $this->getConverter()), $this->getResponse());

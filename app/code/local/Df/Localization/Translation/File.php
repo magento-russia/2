@@ -68,7 +68,7 @@ class Df_Localization_Translation_File extends Df_Core_Model {
 	public function getUntranslatedEntries() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getEntries() as $entryKey => $entryValue) {
 				/** @var string $entryKey */
 				df_assert_string($entryKey);

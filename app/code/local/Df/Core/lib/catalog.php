@@ -131,13 +131,13 @@ function df_products_update(array $data, array $ids = array(), array $stores = a
 			}
 		}
 		/** @var int[] $websiteIds */
-		$websiteIds = array();
+		$websiteIds = [];
 		foreach ($stores as $store) {
 			/** @var Df_Core_Model_StoreM $store */
 			$websiteIds[]= $store->getWebsiteId();
 		}
 		/** @var array(int => int) $mapFromWebsiteToAllProductIds */
-		$mapFromWebsiteToAllProductIds = array();
+		$mapFromWebsiteToAllProductIds = [];
 		foreach ($websiteIds as $websiteId) {
 			/** @var int $websiteId */
 			if (!isset($mapFromWebsiteToAllProductIds[$websiteId])) {
@@ -156,7 +156,7 @@ function df_products_update(array $data, array $ids = array(), array $stores = a
 			// потому что конкретный товар может быть не привязан к конкретному сайту,
 			// и, соответственно, некорректно обновлять свойство данного товара для витрин данного сайта.
 			$ids = df_int_simple($ids);
-			$mapFromWebsiteToProductIds = array();
+			$mapFromWebsiteToProductIds = [];
 			foreach ($ids as $id) {
 				/** @var int $id */
 				foreach ($websiteIds as $websiteId) {

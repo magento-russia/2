@@ -57,7 +57,7 @@ abstract class Df_PageCache_Model_Container_Advanced_Abstract
 
 		Df_PageCache_Helper_Data::prepareContentPlaceholders($data);
 
-		$result = array();
+		$result = [];
 
 		$cacheRecord = parent::_loadCache($id);
 		if ($cacheRecord) {

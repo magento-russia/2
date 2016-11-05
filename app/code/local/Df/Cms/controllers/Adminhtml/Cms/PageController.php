@@ -162,5 +162,5 @@ class Df_Cms_Adminhtml_Cms_PageController extends Mage_Adminhtml_Cms_PageControl
 		}
 	}
 
-	protected $_handles = array();
+	protected $_handles = [];
 }

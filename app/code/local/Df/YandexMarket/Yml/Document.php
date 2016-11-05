@@ -117,7 +117,7 @@ class Document extends \Df_Catalog_Model_XmlExport_Catalog {
 	private function getOutput_Categories() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(array(string => string|array(string => int))) $result  */
-			$result = array();
+			$result = [];
 			foreach ($this->getCategories() as $category) {
 				/** @var \Df_Catalog_Model_Category $category */
 				if ($category->getId()) {

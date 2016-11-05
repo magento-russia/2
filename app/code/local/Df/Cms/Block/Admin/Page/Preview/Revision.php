@@ -26,7 +26,7 @@ class Df_Cms_Block_Admin_Page_Preview_Revision extends Df_Core_Block_Admin {
 			->addNumberSort()
 			->addVisibilityFilter(df_admin_id(), Df_Cms_Model_Config::s()->getAllowedAccessLevel())
 		;
-		$revisions = array();
+		$revisions = [];
 		foreach ($collection->getItems() as $item) {
 			if (isset($revisions[$item->getVersionId()])) {
 				$revisions[$item->getVersionId()]['revisions'][]= $item;

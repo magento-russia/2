@@ -659,7 +659,7 @@ class PHPExcel_Writer_Excel2007_Chart extends PHPExcel_Writer_Excel2007_WriterPa
 		if ($groupCount == 1) {
 			$chartType = array($plotArea->getPlotGroupByIndex(0)->getPlotType());
 		} else {
-			$chartTypes = array();
+			$chartTypes = [];
 			for($i = 0; $i < $groupCount; ++$i) {
 				$chartTypes[] = $plotArea->getPlotGroupByIndex($i)->getPlotType();
 			}

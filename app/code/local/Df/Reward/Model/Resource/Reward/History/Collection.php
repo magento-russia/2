@@ -145,7 +145,7 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 			$this->getSelect()->columns(array('expiration_date' => $field));
 		} else {
 			$sql = " CASE main_table.website_id ";
-			$cases = array();
+			$cases = [];
 			foreach ($expiryConfig as $wId => $config) {
 				$field =
 					'static' === $config->getExpiryCalculation()
@@ -226,6 +226,6 @@ class Df_Reward_Model_Resource_Reward_History_Collection extends Df_Core_Model_R
 	 */
 	protected function _construct() {$this->_itemObjectClass = Df_Reward_Model_Reward_History::class;}
 	/** @var array */
-	protected $_expiryConfig = array();
+	protected $_expiryConfig = [];
 
 }

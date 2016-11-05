@@ -24,7 +24,7 @@ class Df_Localization_Notifier_Theme extends Df_Admin_Model_Notifier {
 	private function getProcessors() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Localization_Onetime_Processor[] */
-			$result = array();
+			$result = [];
 			foreach (Df_Localization_Onetime_Processor_Collection::s() as $processor) {
 				/** @var Df_Localization_Onetime_Processor $processor */
 				if ($processor->isApplicable()) {

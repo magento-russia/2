@@ -284,7 +284,7 @@ class PHPExcel_Style extends PHPExcel_Style_Supervisor implements PHPExcel_IComp
                         for ($y = 1; $y <= $yMax; ++$y) {
 
                             // which edges are touching the region
-                            $edges = array();
+                            $edges = [];
 
                             // are we at left edge
                             if ($x == 1) {
@@ -369,14 +369,14 @@ class PHPExcel_Style extends PHPExcel_Style_Supervisor implements PHPExcel_IComp
                 // First loop through columns, rows, or cells to find out which styles are affected by this operation
                 switch ($selectionType) {
                     case 'COLUMN':
-                        $oldXfIndexes = array();
+                        $oldXfIndexes = [];
                         for ($col = $rangeStart[0]; $col <= $rangeEnd[0]; ++$col) {
                             $oldXfIndexes[$this->getActiveSheet()->getColumnDimensionByColumn($col)->getXfIndex()] = true;
                         }
                         break;
 
                     case 'ROW':
-                        $oldXfIndexes = array();
+                        $oldXfIndexes = [];
                         for ($row = $rangeStart[1]; $row <= $rangeEnd[1]; ++$row) {
                             if ($this->getActiveSheet()->getRowDimension($row)->getXfIndex() == null) {
                                 $oldXfIndexes[0] = true; // row without explicit style should be formatted based on default style
@@ -387,7 +387,7 @@ class PHPExcel_Style extends PHPExcel_Style_Supervisor implements PHPExcel_IComp
                         break;
 
                     case 'CELL':
-                        $oldXfIndexes = array();
+                        $oldXfIndexes = [];
                         for ($col = $rangeStart[0]; $col <= $rangeEnd[0]; ++$col) {
                             for ($row = $rangeStart[1]; $row <= $rangeEnd[1]; ++$row) {
                                 $oldXfIndexes[$this->getActiveSheet()->getCellByColumnAndRow($col, $row)->getXfIndex()] = true;

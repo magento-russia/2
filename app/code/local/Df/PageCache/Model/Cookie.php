@@ -157,7 +157,7 @@ class Df_PageCache_Model_Cookie extends Mage_Core_Model_Cookie
 				$cookieIds = $_COOKIE[Df_PageCache_Model_Container_Viewedproducts::COOKIE_NAME];
 				$cookieIds = explode(',', $cookieIds);
 			} else {
-				$cookieIds = array();
+				$cookieIds = [];
 			}
 			array_splice($cookieIds, 0, 0, $productIds);  // append to the beginning
 		} else {

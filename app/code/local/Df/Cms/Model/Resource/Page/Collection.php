@@ -92,7 +92,7 @@ class Df_Cms_Model_Resource_Page_Collection extends Mage_Cms_Model_Resource_Page
 		$this->_itemObjectClass = Df_Cms_Model_Page::class;
 	}
 	/** @var array(string => mixed) */
-	private $_rmData = array();
+	private $_rmData = [];
 
 	/**
 	 * Если Вы намерены изменять (обновлять, сохранять) элементы коллекции,

@@ -44,7 +44,7 @@ class Df_Cms_Model_ContentsMenu_Collection extends Df_Varien_Data_Collection {
 	 */
 	public function mergeItems() {
 		/** @var Df_Cms_Model_ContentsMenu[] $verticalOrderings */
-		$verticalOrderings = array();
+		$verticalOrderings = [];
 		foreach ($this->getItems() as $item) {
 			/** @var Df_Cms_Model_ContentsMenu $item */
 			/** @var bool $merged */

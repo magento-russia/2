@@ -73,12 +73,12 @@ class Df_Logging_Model_Handler_Controllers
 	{
 		$request = Mage::app()->getRequest();
 		$postData = $request->getPost();
-		$groupFieldsData = array();
+		$groupFieldsData = [];
 		/** @var Df_Logging_Model_Event_Changes $change */
 		$change = Df_Logging_Model_Event_Changes::i();
 		//Collect skip encrypted fields
 		$encryptedNodeEntriesPaths = df_config_adminhtml()->getEncryptedNodeEntriesPaths(true);
-		$skipEncrypted = array();
+		$skipEncrypted = [];
 		foreach ($encryptedNodeEntriesPaths as $fieldName) {
 			$skipEncrypted[]= $fieldName['field'];
 		}
@@ -97,7 +97,7 @@ class Df_Logging_Model_Handler_Controllers
 								 ->setOriginalData(array())
 								 ->setResultData($groupFieldsData)
 				);
-				$groupFieldsData = array();
+				$groupFieldsData = [];
 			}
 		}
 		$id = $request->getParam('section');
@@ -488,7 +488,7 @@ class Df_Logging_Model_Handler_Controllers
 		/** @var Df_Logging_Model_Event_Changes $change */
 		$change = Df_Logging_Model_Event_Changes::i();
 		$data = $request->getParam('rate');
-		$values = array();
+		$values = [];
 		if (!is_array($data)){
 			return false;
 		}
@@ -527,7 +527,7 @@ class Df_Logging_Model_Handler_Controllers
 		if (!$request->isPost()) {
 			return false;
 		}
-		$clean = $enable = array();
+		$clean = $enable = [];
 		$action	 = $info = '';
 		/** @var Df_Logging_Model_Event_Changes $change */
 		$change = Df_Logging_Model_Event_Changes::i();

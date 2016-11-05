@@ -86,12 +86,12 @@ class Df_Cms_Adminhtml_Cms_HierarchyController extends Mage_Adminhtml_Controller
 				if (!empty($data['nodes_data'])) {
 					$nodesData = df_mage()->coreHelper()->jsonDecode($data['nodes_data']);
 				} else {
-					$nodesData = array();
+					$nodesData = [];
 				}
 				if (!empty($data['removed_nodes'])) {
 					$removedNodes = df_csv_parse_int($data['removed_nodes']);
 				} else {
-					$removedNodes = array();
+					$removedNodes = [];
 				}
 				$node->collectTree($nodesData, $removedNodes);
 				$hasError = false;

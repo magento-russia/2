@@ -7,7 +7,7 @@ class Df_CustomerBalance_Block_Adminhtml_Customer_Edit_Tab_Customerbalance_Js ex
 
 	public function getWebsitesJson()
 	{
-		$result = array();
+		$result = [];
 		foreach (Mage::app()->getWebsites() as $websiteId => $website) {
 			$result[$websiteId] = array(
 				'name' => $website->getName()

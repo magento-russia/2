@@ -54,7 +54,7 @@ class Df_PageCache_Model_Processor_Default
 	 */
 	public function replaceContentToPlaceholderReplacer($content)
 	{
-		$placeholders = array();
+		$placeholders = [];
 		preg_match_all(
 			Df_PageCache_Model_Container_Placeholder::HTML_NAME_PATTERN,
 			$content,

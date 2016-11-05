@@ -56,7 +56,7 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 	private function getStoresAffected() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var Df_Core_Model_StoreM[] $result */
-			$result = array();
+			$result = [];
 			foreach (Mage::app()->getStores() as $store) {
 				/** @var Df_Core_Model_StoreM $store */
 				if ($this->isStoreAffected($store)) {

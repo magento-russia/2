@@ -39,7 +39,7 @@ class Df_PageCache_Model_Config extends Varien_Simplexml_Config
 	protected function _initPlaceholders()
 	{
 		if ($this->_placeholders === null) {
-			$this->_placeholders = array();
+			$this->_placeholders = [];
 			foreach ($this->getNode('placeholders')->children() as $placeholder) {
 				$this->_placeholders[(string)$placeholder->block][] = array(
 					'container'     => (string)$placeholder->container,

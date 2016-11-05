@@ -67,7 +67,7 @@ class Order extends \Df\C1\Cml2\Import\Processor {
 	private function getMapFromProductIdToSimpleOrderItem() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Mage_Sales_Model_Order_Item[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
 				/** @var \Mage_Sales_Model_Order_Item $orderItem */
 				// собираем идентификаторы только простых товаров
@@ -87,7 +87,7 @@ class Order extends \Df\C1\Cml2\Import\Processor {
 	private function getProductIdsFrom1COrder() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getEntity()->getItems() as $entityOrderItem) {
 				/** @var \Df\C1\Cml2\Import\Data\Entity\Order\Item $entityOrderItem */
 				$result[]= $entityOrderItem->getProduct()->getId();
@@ -104,7 +104,7 @@ class Order extends \Df\C1\Cml2\Import\Processor {
 	private function getProductIdsFromMagentoOrder() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var int[] $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getEntity()->getOrder()->getAllItems() as $orderItem) {
 				/** @var \Mage_Sales_Model_Order_Item $orderItem */
 				// Собираем идентификаторы только простых товаров.

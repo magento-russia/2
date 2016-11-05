@@ -96,7 +96,7 @@ abstract class Df_Localization_Block_Admin_Theme_Processor extends Df_Core_Block
 	 */
 	public static function getDemoLinksParameters(array $urls) {
 		/** @var array(string => array(string => string)) $result */
-		$result = array();
+		$result = [];
 		/** @var int $i */
 		$i = 1;
 		foreach ($urls as $url) {

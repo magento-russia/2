@@ -49,7 +49,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 	 *
 	 * @var array
 	 */
-	private $_styles = array();
+	private $_styles = [];
 
 
 	/**
@@ -129,7 +129,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! Error opening file.");
 		}
 
-		$worksheetNames = array();
+		$worksheetNames = [];
 
 		$xml = new XMLReader();
 		$res = $xml->open('zip://'.realpath($pFilename).'#content.xml');
@@ -174,7 +174,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$worksheetInfo = array();
+		$worksheetInfo = [];
 
 		$zip = new ZipArchive;
 		if (!$zip->open($pFilename)) {
@@ -346,7 +346,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 		$docProps = $objPHPExcel->getProperties();
 		$officeProperty = $xml->children($namespacesMeta['office']);
 		foreach($officeProperty as $officePropertyData) {
-			$officePropertyDC = array();
+			$officePropertyDC = [];
 			if (isset($namespacesMeta['dc'])) {
 				$officePropertyDC = $officePropertyData->children($namespacesMeta['dc']);
 			}
@@ -372,7 +372,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 							break;
 				}
 			}
-			$officePropertyMeta = array();
+			$officePropertyMeta = [];
 			if (isset($namespacesMeta['dc'])) {
 				$officePropertyMeta = $officePropertyData->children($namespacesMeta['meta']);
 			}
@@ -503,7 +503,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 								if (isset($cellDataOffice->annotation)) {
 //									echo 'Cell has comment<br />';
 									$annotationText = $cellDataOffice->annotation->children($namespacesContent['text']);
-									$textArray = array();
+									$textArray = [];
 									foreach($annotationText as $t) {
 										foreach($t->span as $text) {
 											$textArray[] = (string)$text;
@@ -518,7 +518,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 
 									if (isset($cellDataText->p)) {
 									// Consolidate if there are multiple p records (maybe with spans as well)
-									$dataArray = array();
+									$dataArray = [];
 									// Text can have multiple text:p and within those, multiple text:span.
 									// text:p newlines, but text:span does not.
 									// Also, here we assume there is no text data is span fields are specified, since

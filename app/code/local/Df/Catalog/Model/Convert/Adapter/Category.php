@@ -3,7 +3,7 @@
  * @deprecated
  */
 class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_Adapter_Entity {	/** @var array */
-	protected $_categoryCache = array();
+	protected $_categoryCache = [];
 	/** @var array */
 	protected $_stores;
 
@@ -85,7 +85,7 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 				$cat->setNamePath($namePath);
 			}
 
-			$cache = array();
+			$cache = [];
 			foreach ($collection as $cat) {
 				/** @noinspection PhpUndefinedMethodInspection */
 				$cache[mb_strtolower($cat->getNamePath())] = $cat;
@@ -180,5 +180,5 @@ class Df_Catalog_Model_Convert_Adapter_Category extends Mage_Eav_Model_Convert_A
 	 * @used-by Mage_Catalog_Model_Convert_Adapter_Product::getStoreById()
 	 * @var array(int => string)
 	 */
-	protected $_storesIdCode = array();
+	protected $_storesIdCode = [];
 }

@@ -118,7 +118,7 @@ class Df_Dataflow_Model_Registry_Collection_Attributes extends Df_Dataflow_Model
 	private function getMapFromCodeToEntity() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Catalog_Model_Resource_Eav_Attribute) $result */
-			$result = array();
+			$result = [];
 			foreach ($this->getCollectionRm() as $entity) {
 				/** @var Df_Catalog_Model_Resource_Eav_Attribute $entity */
 				/** @var string|null $code */

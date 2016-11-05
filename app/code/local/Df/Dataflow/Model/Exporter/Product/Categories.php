@@ -32,7 +32,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	/** @return string[][] */
 	private function getCategoriesInExportFormat() {
 		/** @var string[][] $result */
-		$result = array();
+		$result = [];
 		foreach ($this->getProduct()->getCategoryCollection() as $category) {
 			/** @var Df_Catalog_Model_Category $category */
 			$result[]= $this->getCategoryInExportFormat($category);
@@ -46,7 +46,7 @@ class Df_Dataflow_Model_Exporter_Product_Categories extends Df_Core_Model {
 	 */
 	private function getCategoryInExportFormat(Df_Catalog_Model_Category $category) {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		foreach ($this->getParentCategories($category) as $ancestor) {
 			/** @var Df_Catalog_Model_Category $ancestor */
 			/** @var string $ancestorName */

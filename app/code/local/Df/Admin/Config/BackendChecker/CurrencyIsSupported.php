@@ -45,7 +45,7 @@ class Df_Admin_Config_BackendChecker_CurrencyIsSupported
 	private function getFailedBaseCurrenciesInFormOrigin() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => Df_Directory_Model_Currency) $baseCurrencies */
-			$baseCurrencies = array();
+			$baseCurrencies = [];
 			foreach ($this->getFailedStores() as $failedStore) {
 				/** @var Df_Core_Model_StoreM $failedStore */
 				/** @var Df_Directory_Model_Currency $baseCurrency */

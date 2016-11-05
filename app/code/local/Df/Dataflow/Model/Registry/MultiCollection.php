@@ -41,7 +41,7 @@ abstract class Df_Dataflow_Model_Registry_MultiCollection
 	private function getCollections() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(int => Df_Dataflow_Model_Registry_Collection) $result */
-			$result = array();
+			$result = [];
 			foreach (Mage::app()->getStores($withDefault = true) as $store) {
 				/** @var Df_Core_Model_StoreM $store */
 				$result[$store->getId()] = $this->getCollectionForStore($store);

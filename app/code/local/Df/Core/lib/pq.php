@@ -35,7 +35,7 @@ function df_pq($arguments, $context = null) {
 function df_pq_options(phpQueryObject $pqOptions) {
 	Df_Phpquery_Lib::s();
 	/** @var array(string => string) $result */
-	$result = array();
+	$result = [];
 	foreach ($pqOptions as $domOption) {
 		/** @var DOMNode $domOption */
 		/** @var string $label */
