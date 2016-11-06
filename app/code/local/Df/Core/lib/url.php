@@ -224,10 +224,13 @@ function df_url_from_path($path) {return
  * 2015-11-28
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
+ * @param Df_Core_Model_StoreM|int|string|null $store [optional]
  * @return string
  */
-function df_url_frontend($path = null, array $params = []) {return
-	df_url_frontend_o()->getUrl($path, df_adjust_route_params($params))
+function df_url_frontend($path = null, array $params = [], $store = null) {return
+	df_url_frontend_o()->getUrl($path,
+		df_adjust_route_params($params) + (is_null($store) ? [] : ['_store' => df_store($store)])
+	)
 ;}
 
 /** @return Df_Core_Model_Url */

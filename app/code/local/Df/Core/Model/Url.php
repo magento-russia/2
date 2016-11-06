@@ -28,7 +28,6 @@ class Df_Core_Model_Url extends Mage_Core_Model_Url {
 		return parent::getUrl($routePath, $routeParams);
 	}
 
-
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]

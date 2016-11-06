@@ -46,12 +46,12 @@
 Если Вы решите использовать больше одного узла обмена данными для одного и того же интернет-магазина,
 то рекомендуется добавить к указанному выше адресу узла окончание
 «<b>node/<системное имя узла обмена данными>/</b>», например:
-<ul><li>«http://example.ru/df-1c/cml2/index/node/prices/»</li>
-<li>«http://example.ru/df-1c/cml2/index/store-view/defaut/node/orders/»</li></ul>
+<ul><li>«http://example.ru/df-1c/cml2/node/prices/»</li>
+<li>«http://example.ru/df-1c/cml2/node/orders/»</li></ul>
 При этом <системное имя узла обмена данными> Вы можете выбрать произвольно.
 							]]></comment>
 							<frontend_model>Df_Admin_Block_Field_Info_Urls</frontend_model>
-							<rm_url_path_base>df-1c/cml2/index</rm_url_path_base>
+							<df_url_path_base>df-1c/cml2</df_url_path_base>
 							<backend_model>core/config_data</backend_model>
 							<sort_order>1500</sort_order>
 							<show_in_default>1</show_in_default>
