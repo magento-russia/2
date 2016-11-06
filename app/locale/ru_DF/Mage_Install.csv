@@ -116,7 +116,7 @@
 "Web access options","Параметры веб-интерфейса"
 "Welcome","Добро пожаловать"
 "Welcome to Magento's Installation Wizard","Установка Российской сборки Magento"
-"You can specify server port, ex.: localhost:3307<br />If you are not using default UNIX socket, you can specify it here instead of host, ex.: /var/run/mysqld/mysqld.sock","Вы можете указать и порт, например.: localhost:3307<br />Если Ваш Unix-подобный сервер использует нестандартный доменный сокет, то Вы можете указать его вместо имени сервера баз данных, например.: /var/run/mysqld/mysqld.sock"
+"You can specify server port, ex.: localhost:3307<br />If you are not using default UNIX socket, you can specify it here instead of host, ex.: /var/run/mysqld/mysqld.sock","Вы можете указать и порт, например: localhost:3307<br />Если Ваш Unix-подобный сервер использует нестандартный доменный сокет, то Вы можете указать его вместо имени сервера баз данных, например: /var/run/mysqld/mysqld.sock"
 "You could enable this option to use web server rewrites functionality for improved search engines optimization.","Эта функция требует поддержки веб-сервера. Например, если Вы используете веб-сервер Apache, то вам потребуется модуль Apache mod_rewrite. Если не уверены в присутствии поддержки этой функции со стороны Вашего веб-сервера, то не включайте её."
 "You're All Set","Установка завершена"
 "You're All Set!","Установка завершена!"
