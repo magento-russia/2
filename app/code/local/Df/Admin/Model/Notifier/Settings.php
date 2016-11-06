@@ -24,7 +24,7 @@ abstract class Df_Admin_Model_Notifier_Settings extends Df_Admin_Model_Notifier 
 	 * @override
 	 * @return string
 	 */
-	public function getMessage() {return dfc($this, function() {return df_ccc(parent::getMessage(),
+	public function getMessage() {return dfc($this, function() {return parent::getMessage() . (
 		!$this->getUrlSettingsSuffix() ? null : df_url_bake(
 			'<br/><span class="rm-url-settings">[[открыть раздел настроек]]</span>'
 			,df_url_backend('adminhtml/system_config/edit/section/' . $this->getUrlSettingsSuffix())
