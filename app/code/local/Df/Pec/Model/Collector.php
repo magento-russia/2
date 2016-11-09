@@ -6,6 +6,18 @@ class Df_Pec_Model_Collector extends Df_Shipping_Model_Collector {
 	 */
 	protected function getMethods() {
 		if (!isset($this->{__METHOD__})) {
+			/**
+			 * 2016-11-10
+			 * Раньше эта проверка выполнялась в методе
+			 * @see Df_Pec_Model_Api_Calculator::getLocationDestinationId():
+			 * df_assert($this->getRequest()->getDestinationCity(), 'Укажите город.');
+			 * Это было неправильно, потому что возбуждаемая исключительная ситуация является обобщённой,
+			 * и система её логирует и отсылает по почте:
+			 * При добавлении товара в корзину «ПЭК» создаёт диагностический отчёт
+			 * с сообщением «Укажите город»: http://magento-forum.ru/topic/5495/
+			 * Вместо обобщённой исключительной ситуции здесь я теперь возбуждаю специализированную.
+			 */
+			$this->checkCityDest();
 			/** @var Df_Pec_Model_Method[] $result */
 			$result = array();
 			/** @var array(string => array(string, string)) $methods */

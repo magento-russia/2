@@ -98,6 +98,19 @@ class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
 	}
 
 	/**
+	 * @return void
+	 * @throws Df_Shipping_Exception
+	 */
+	protected function checkCityDest() {
+		if (!$this->cityDest()) {
+			$this->error('Укажите город.');
+		}
+	}
+
+	/** @return string|null */
+	protected function cityDest() {return $this->rr()->getDestinationCity();}
+
+	/**
 	 * @param string $class
 	 * @param string $title
 	 * @return Df_Shipping_Model_Method
@@ -152,6 +165,16 @@ class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
 		return $this->{__METHOD__};
 	}
 
+	/**
+	 * @return void
+	 * @throws Df_Shipping_Exception
+	 */
+	protected function error() {
+		/** @var mixed $args */
+		$args = func_get_args();
+		throw new Df_Shipping_Exception(call_user_func_array('sprintf', $args));
+	}
+
 	/** @return Df_Shipping_Model_Method[] */
 	protected function getMethods() {
 		if (!isset($this->{__METHOD__})) {
@@ -194,6 +217,9 @@ class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
 		return $methods;
 	}
 
+	/** @return Df_Shipping_Model_Rate_Request */
+	protected function rr() {return $this->getRateRequest();}
+
 	/**
 	 * @param Exception $e
 	 * @param Df_Shipping_Model_Method $method|null [optional]
@@ -222,18 +248,6 @@ class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
 			;
 		}
 		return Df_Shipping_Model_Rate_Result_Error::i($this->getCarrier(), $message);
-	}
-
-	/**
-	 * Намеренно сделали этот метод закрытым, чтобы модули не теребили метод createMethod,
-	 * а использовали getMethods
-	 * @return string[]
-	 */
-	private function getMethodClasses() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_column($this->getCarrier()->getAllowedMethodsAsArray(), 'class');
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**

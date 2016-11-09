@@ -157,7 +157,18 @@ class Df_Pec_Model_Api_Calculator extends Df_Core_Model_Abstract {
 	 * @return string
 	 */
 	private function getLocationDestinationId() {
-		df_assert($this->getRequest()->getDestinationCity(), 'Укажите город.');
+		/**
+		 * 2016-11-10
+		 * Раньше тут стояло:
+		 * df_assert($this->getRequest()->getDestinationCity(), 'Укажите город.');
+		 * Это неправильно, потому что возбуждаемая исключительная ситуация является обобщённой,
+		 * и система её логирует и отсылает по почте:
+		 * При добавлении товара в корзину «ПЭК» создаёт диагностический отчёт с сообщением «Укажите город»:
+		 * http://magento-forum.ru/topic/5495/
+		 *
+		 * Вместо обобщённой исключительной ситуции здесь я теперь возбуждаю
+		 * специализированную исключительную ситуацию в методе @see Df_Pec_Model_Collector::getMethods()
+		 */
 		/** @var string $result */
 		$result =
 			df_a(

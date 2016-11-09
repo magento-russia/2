@@ -87,16 +87,6 @@ abstract class Df_Shipping_Model_Collector_Simple extends Df_Shipping_Model_Coll
 	 * @return void
 	 * @throws Df_Shipping_Exception
 	 */
-	protected function checkCityDest() {
-		if (!$this->cityDest()) {
-			$this->error('Укажите город.');
-		}
-	}
-
-	/**
-	 * @return void
-	 * @throws Df_Shipping_Exception
-	 */
 	protected function checkCityOrig() {
 		if (!$this->cityOrig()) {
 			$this->error('Администратор должен указать город склада интернет-магазина.');
@@ -126,12 +116,6 @@ abstract class Df_Shipping_Model_Collector_Simple extends Df_Shipping_Model_Coll
 			$this->errorInvalidWeight($weightInKilogrammes, 'не больше');
 		}
 	}
-
-	/**
-	 * @used-by cityDestUc()
-	 * @return string|null
-	 */
-	protected function cityDest() {return $this->rr()->getDestinationCity();}
 
 	/**
 	 * @return string
@@ -261,12 +245,6 @@ abstract class Df_Shipping_Model_Collector_Simple extends Df_Shipping_Model_Coll
 	protected function rateDefaultCode() {return 'standard';}
 
 	/**
-	 * @used-by Df_NovaPoshta_Model_Collector::responseRate()
-	 * @return Df_Shipping_Model_Rate_Request
-	 */
-	protected function rr() {return $this->getRateRequest();}
-
-	/**
 	 * @return int
 	 */
 	protected function weightG() {return $this->rr()->getWeightInGrammes();}
@@ -380,16 +358,6 @@ abstract class Df_Shipping_Model_Collector_Simple extends Df_Shipping_Model_Coll
 	 */
 	private function dayNoun($value) {
 		return df_text()->getNounForm($value, array('день', 'дня', 'дней'));
-	}
-
-	/**
-	 * @return void
-	 * @throws Df_Shipping_Exception
-	 */
-	private function error() {
-		/** @var mixed $args */
-		$args = func_get_args();
-		throw new Df_Shipping_Exception(call_user_func_array('sprintf', $args));
 	}
 
 	/**

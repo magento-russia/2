@@ -285,40 +285,48 @@ abstract class Df_Shipping_Model_Carrier
 	public function proccessAdditionalValidation(Mage_Shipping_Model_Rate_Request $request) {
 		/** @var Df_Shipping_Model_Carrier|Mage_Shipping_Model_Rate_Result_Error|boolean $result */
 		$result = parent::proccessAdditionalValidation($request);
-		if (
-				(false !== $result)
-			&&
-				!($result instanceof Mage_Shipping_Model_Rate_Result_Error)
-		) {
-			try {
-				/** @var Df_Shipping_Model_Rate_Request $rmRequest */
-				$rmRequest = $this->createRateRequest($request);
-				$rmRequest->getOriginCity();
-				if (
-						$this->getRmConfig()->frontend()->needDisableForShopCity()
-					&&
-						$rmRequest->isOriginTheSameAsDestination()
-				) {
-					/** @var Df_Shipping_Model_Rate_Result_Error $result */
-					$result =
-						Df_Shipping_Model_Rate_Result_Error::i(
-							$this
-							,$rmRequest->evaluateMessage(
-								'Склад нашего магазина расположен тоже {в месте доставки}.'
-								."\r\nВыберите доставку курьером."
-							)
-						)
-					;
-				}
+		if (false !== $result && !$result instanceof Mage_Shipping_Model_Rate_Result_Error) {
+			/**
+			 * 2016-11-10
+			 * При добавлении товара в корзину «ПЭК» создаёт диагностический отчёт
+			 * с сообщением «Укажите город»: http://magento-forum.ru/topic/5495/
+			 * Пришёл к мысли, что при добавлении товара в корзину
+			 * нам вообще не стоит рассчитывать стоимость доставки.
+			 */
+			if (df_action_is('checkout_cart_add')) {
+				$result = false;
 			}
-			catch(Exception $e) {
-				/** @var string $message */
-				$message = rm_ets($e);
-				if ($e instanceof Df_Core_Exception_Internal) {
-					df_notify_exception($e);
-					$message = df_mage()->shippingHelper()->__(self::T_INTERNAL_ERROR);
+			else {
+				try {
+					/** @var Df_Shipping_Model_Rate_Request $rmRequest */
+					$rmRequest = $this->createRateRequest($request);
+					$rmRequest->getOriginCity();
+					if (
+							$this->getRmConfig()->frontend()->needDisableForShopCity()
+						&&
+							$rmRequest->isOriginTheSameAsDestination()
+					) {
+						/** @var Df_Shipping_Model_Rate_Result_Error $result */
+						$result =
+							Df_Shipping_Model_Rate_Result_Error::i(
+								$this
+								,$rmRequest->evaluateMessage(
+									'Склад нашего магазина расположен тоже {в месте доставки}.'
+									."\r\nВыберите доставку курьером."
+								)
+							)
+						;
+					}
 				}
-				$result = Df_Shipping_Model_Rate_Result_Error::i($this, $message);
+				catch(Exception $e) {
+					/** @var string $message */
+					$message = rm_ets($e);
+					if ($e instanceof Df_Core_Exception_Internal) {
+						df_notify_exception($e);
+						$message = df_mage()->shippingHelper()->__(self::T_INTERNAL_ERROR);
+					}
+					$result = Df_Shipping_Model_Rate_Result_Error::i($this, $message);
+				}
 			}
 		}
 		return $result;
