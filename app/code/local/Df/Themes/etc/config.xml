@@ -186,6 +186,11 @@
 				</rewrite>
 			</dataporter>
 			<df_themes><class>Df_Themes_Model</class></df_themes>
+			<smtppro>
+				<rewrite>
+					<system_config_source_smtp_authentication>Df_Themes_Model_SMTPPro_Authentication</system_config_source_smtp_authentication>
+				</rewrite>
+			</smtppro>
 		</models>
 	</global>
 	<adminhtml>
