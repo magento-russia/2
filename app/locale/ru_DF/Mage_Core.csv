@@ -210,7 +210,7 @@
 "Please define flag code.","Определитесь с этим кодом."
 "Please enter 6 or more characters.","Укажите значение длиной не менее 6 символов."
 "Please enter 6 or more characters. Leading or trailing spaces will be ignored.","Укажите значение длиной не менее 6 символов. Пробелы в начале и в конце строки не учитываются системой."
-"Please enter 7 or more characters. Password should contain both numeric and alphabetic characters.","Пожалуйста, введите 6 или более символов. Пароль должен содержать как буквы, так и цифры."
+"Please enter 7 or more characters. Password should contain both numeric and alphabetic characters.","Пожалуйста, введите 7 или более символов. Пароль должен содержать как буквы, так и цифры."
 "Please enter a number 0 or greater in this field.","Пожалуйста, введите в это поле число больше 0 или 0."
 "Please enter a number greater than 0 in this field.","Пожалуйста, введите в это поле число больше 0."
 "Please enter a number lower than 100.","Пожалуйста, введите число меньше 100."
