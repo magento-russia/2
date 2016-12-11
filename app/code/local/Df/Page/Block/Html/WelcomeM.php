@@ -43,7 +43,11 @@ class Df_Page_Block_Html_WelcomeM extends Mage_Page_Block_Html_Welcome {
 	 */
 	public function getCacheTags()
 	{
-		if ($this->_getSession()->isLoggedIn()) {
+		/**
+		 * 2016-12-12
+		 * Метод @uses Mage_Core_Block_Abstract::addModelTags() отсутствует в версиях < 1.8.
+		 */
+		if ($this->_getSession()->isLoggedIn() && method_exists($this, 'addModelTags')) {
 			$this->addModelTags($this->_getSession()->getCustomer());
 		}
 
