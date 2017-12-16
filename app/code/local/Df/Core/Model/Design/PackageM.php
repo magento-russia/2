@@ -6,6 +6,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	 * но некорректно обрабатывает те же конструкции, когда data в кавычках:
 	 * img:hover{filter: url("data:
 	 * @override
+	 * @see Mage_Core_Model_Design_Package::beforeMergeCss()
 	 * @param string $file
 	 * @param string $contents
 	 * @return string
@@ -36,6 +37,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Design_Package::getFilename()
 	 * @param string $file
 	 * @param array $params
 	 * @return string
@@ -70,6 +72,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Design_Package::getMergedJsUrl()
 	 * @param string[] $files
 	 * @return string
 	 */
@@ -98,6 +101,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Design_Package::getSkinUrl()
 	 * @param string $file
 	 * @param array $params
 	 * @return string
@@ -141,6 +145,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Design_Package::_fallback()
 	 * @param string $file
 	 * @param array &$params
 	 * @param array $fallbackScheme
