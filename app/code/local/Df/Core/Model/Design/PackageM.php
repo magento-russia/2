@@ -3,7 +3,7 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	/**
 	 * Magento CE / EE правильно обрабатывает конструкции типа
 	 * img:hover{filter: url(data:
-	 * но некорректно обрабатывает те же конструкции, но когда data в кавычках:
+	 * но некорректно обрабатывает те же конструкции, когда data в кавычках:
 	 * img:hover{filter: url("data:
 	 * @override
 	 * @param string $file
