@@ -4,6 +4,8 @@
 *
 !*/
 !.gitignore
+!.editorconfig
+!README.md
 !app/code/local/Df/**/*
 !app/code/local/Varien/**/*
 !app/code/local/Zend/**/*
