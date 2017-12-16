@@ -105,6 +105,11 @@ class Df_PageCache_Model_Container_Catalognavigation extends Df_PageCache_Model_
 		 * Этот блок хоть и стандартен, но может быть удалён сторонней оформительской темой:
 		 * http://magento-forum.ru/topic/5252/
 		 * Вообще, этот код у нас свеж: он из новой версии модуля PageCache.
+		 * 2017-12-16
+		 * Сегодня устранил аналогичный дефект в методе
+		 * @see \Df_PageCache_Model_Container_Minicart::_renderBlock():
+		 * "«Call to a member function setSkipRenderTag() on boolean
+	 * in Df/PageCache/Model/Container/Minicart.php:13»": https://github.com/magento-russia/2/issues/2
 		 */
 		/** @var string $result */
 		if (!$block || !($block instanceof Mage_Core_Block_Template) || !$block->getTemplate()) {
