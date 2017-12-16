@@ -299,7 +299,19 @@ class Df_Catalog_Model_Url extends Mage_Catalog_Model_Url {
 			) {
 				return $this->getUnusedPath($storeId, '-', $idPath);
 			}
-			$requestPath = $match[1].(isset($match[3])?'-'.($match[3]+1):'-1').(isset($match[4])?$match[4]:'');
+			/**
+			 * 2017-12-16
+			 * 1) "При использовании PHP 7.1
+			 * перестройка расчётной таблицы «Адреса страниц» может приводить к сбою
+			 * «A non-numeric value encountered in Df/Catalog/Model/Url.php on line 302»":
+			 * https://github.com/magento-russia/2/issues/1
+			 * 2) https://stackoverflow.com/questions/42044127
+			 */
+			$requestPath = 
+				$match[1]
+				. (isset($match[3]) ? '-' . (intval($match[3]) + 1) : '-1')
+				. (isset($match[4]) ? $match[4] : '')
+			;
 			return $this->getUnusedPath($storeId, $requestPath, $idPath);
 		}
 		else {
