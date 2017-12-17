@@ -2341,6 +2341,14 @@ rm.namespace('rm.checkout');
 	 * http://magento-forum.ru/forum/372/
 	 */
 	,'df-theme-templatemonster-53174': {package: 'default', skin: 'theme690'}
+	/**
+	 * 2017-12-17
+	 * TemplateMonster #58050 («Electro»)
+	 * https://www.templatemonster.com/magento-themes/58050.html 
+	 * https://magento-forum.ru/forum/379
+	 * https://github.com/magento-russia/2/issues/5
+	 */
+	,'df-theme-templatemonster-58050': {package: 'tm_themes', skin: 'theme760'}
 	,'df-theme-tt-theme069': {package: 'tt', skin: 'theme069'}
 	/**
 	 * Ves Super Store (ThemeForest 8002349)
