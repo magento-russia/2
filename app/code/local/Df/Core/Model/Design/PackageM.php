@@ -154,25 +154,11 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 	protected function _fallback($file, array &$params, array $fallbackScheme = array(array())) {
 		/**
 		 * Раньше здесь стояло:
-		 *
-		 *	array_splice(
-		 *		$fallbackScheme
-		 *		,0
-		 *		,0
-		 *		,array(
-		 *			array(
-		 *				'_package' => 'rm'
-		 *				,'_theme' => 'priority'
-		 *			)
-		 *			,array(
-		 *				'_package' => df_a($params, '_package')
-		 *				,'_theme' => df_a($params, '_theme')
-		 *			)
-		 *		)
-		 *	)
-		 *	;
-		 *
-		 * array_unshift, видимо, работает быстрее
+		 *	array_splice($fallbackScheme, 0, 0, array(
+		 *		array('_package' => 'rm', '_theme' => 'priority')
+		 *		,array('_package' => df_a($params, '_package'), '_theme' => df_a($params, '_theme'))
+		 *	));
+		 * @see array_unshift(), видимо, работает быстрее
 		 */
 		array_unshift(
 			$fallbackScheme
