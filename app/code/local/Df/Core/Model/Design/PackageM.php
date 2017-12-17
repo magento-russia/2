@@ -176,29 +176,21 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 		 */
 		array_unshift(
 			$fallbackScheme
+			,array('_package' => 'rm', '_theme' => 'priority')
+			/**
+			 * Сюда мы можем попасть при установке оформительской темы.
+			 * В частности, сюда попадаем при установке темы EM Taobaus.
+			 * Российская сборка Magento во время работы установочного скрипта
+			 * еще не инициализирована, и работа установочного скрипта завершалась сбоем:
+			 * «Call to undefined function df_a()»
+			 * @link http://magento-forum.ru/topic/3779/
+			 */
 			,array(
-				'_package' => 'rm'
-				,'_theme' => 'priority'
-			)
-			,array(
-				/**
-				 * Сюда мы можем попасть при установке оформительской темы.
-				 * В частности, сюда попадаем при установке темы EM Taobaus.
-				 * Российская сборка Magento во время работы установочного скрипта
-				 * еще не инициализирована, и работа установочного скрипта завершалась сбоем:
-				 * «Call to undefined function df_a()»
-				 * @link http://magento-forum.ru/topic/3779/
-				 */
 				'_package' => isset($params['_package']) ? $params['_package'] : null
 				,'_theme' => isset($params['_theme']) ? $params['_theme'] : null
 			)
 		);
-		$fallbackScheme[]=
-			array(
-				'_package' => 'rm'
-				,'_theme' => self::DEFAULT_THEME
-			)
-		;
+		$fallbackScheme[]= array('_package' => 'rm', '_theme' => self::DEFAULT_THEME);
 		return parent::_fallback($file, $params, $fallbackScheme);
 	}
 }
