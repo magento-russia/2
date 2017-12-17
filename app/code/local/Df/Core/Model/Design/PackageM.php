@@ -160,9 +160,8 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 		 *	));
 		 * @see array_unshift(), видимо, работает быстрее
 		 */
-		array_unshift(
-			$fallbackScheme
-			,array('_package' => 'rm', '_theme' => 'priority')
+		array_unshift($fallbackScheme,
+			array('_package' => 'rm', '_theme' => 'priority')
 			/**
 			 * Сюда мы можем попасть при установке оформительской темы.
 			 * В частности, сюда попадаем при установке темы EM Taobaus.
