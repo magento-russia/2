@@ -57,14 +57,23 @@ class Df_Core_Model_Design_PackageM extends Mage_Core_Model_Design_Package {
 		/** @var string|null $result */
 		$result = Df_Core_Model_Cache_Design_Package::s()->cacheGet($cacheKey);
 		if (!$result) {
-			//Mage::log('cache miss!');
-			$result =
-				$this->_fallback($file, $params, array(
-					array(),
-					array('_theme' => $this->getFallbackTheme()),
-					array('_theme' => self::DEFAULT_THEME),
-				));
-			;
+			/**
+			 * 2017-12-17
+			 * "Российская сборка Magento игнорирует нестандартное объявление родительской оформительской темы
+			 * сторонней оформительской темой синтаксисом `theme/parent` (появившимся в Magento 1.9)":
+			 * https://github.com/magento-russia/2/issues/3
+			 */
+			$result = $this->_fallback($file, $params,
+				$this->_fallback
+					? $this->_fallback->getFallbackScheme(
+						$params['_area'], $params['_package'], $params['_theme']
+					)
+					: array(
+						array(),
+						array('_theme' => $this->getFallbackTheme()),
+						array('_theme' => self::DEFAULT_THEME)
+					)
+			);
 			Df_Core_Model_Cache_Design_Package::s()->cacheSet($cacheKey, $result);
 		}
 		return $result;
