@@ -41,16 +41,30 @@ class Df_Core_Model_Layout_Update extends Mage_Core_Model_Layout_Update {
 		$elementClass = $this->getElementClass();
 		$updatesRoot = Mage::app()->getConfig()->getNode($area.'/layout/updates');
 		Mage::dispatchEvent('core_layout_update_updates_get_after', array('updates' => $updatesRoot));
-		$updateFiles = array();
-		foreach ($updatesRoot->children() as $updateNode) {
-			if ($updateNode->file) {
-				$module = $updateNode->getAttribute('module');
-				if ($module && Mage::getStoreConfigFlag('advanced/modules_disable_output/' . $module, $storeId)) {
-					continue;
-				}
-				$updateFiles[]= (string)$updateNode->file;
-			}
-		}
+		/**
+		 * 2017-12-16
+		 * Обновил этот блок кодом из Magento >= 1.9:
+		 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.7/app/code/core/Mage/Core/Model/Layout/Update.php#L420-L435
+		 * Раньше тут стоял код из Magento < 1.9:
+		 * https://github.com/OpenMage/magento-mirror/blob/1.8.1.0/app/code/core/Mage/Core/Model/Layout/Update.php#L420-L429
+		 * https://github.com/magento-russia/2/blob/2.50.1/app/code/local/Df/Core/Model/Layout/Update.php#L44-L53
+		 */
+        $updates = $updatesRoot->asArray();
+        $themeUpdates = Mage::getSingleton('core/design_config')->getNode("$area/$package/$theme/layout/updates");
+        if ($themeUpdates && is_array($themeUpdates->asArray())) {
+            //array_values() to ensure that theme-specific layouts don't override, but add to module layouts
+            $updates = array_merge($updates, array_values($themeUpdates->asArray()));
+        }
+        $updateFiles = array();
+        foreach ($updates as $updateNode) {
+            if (!empty($updateNode['file'])) {
+                $module = isset($updateNode['@']['module']) ? $updateNode['@']['module'] : false;
+                if ($module && Mage::getStoreConfigFlag('advanced/modules_disable_output/' . $module, $storeId)) {
+                    continue;
+                }
+                $updateFiles[] = $updateNode['file'];
+            }
+        }
 		// custom local layout updates file - load always last
 		$updateFiles[]= 'local.xml';
 		$layoutStr = '';
