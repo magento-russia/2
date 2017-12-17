@@ -1891,6 +1891,11 @@ body.df-theme-templatemonster-53174 .grid-full .catagory_children .level1 {
 body.df-theme-templatemonster-53174 .block-blog .block-subtitle, body.df-theme-templatemonster-53174 .menu-tags h5 {
   text-transform: none; }
 
+body.df-theme-templatemonster-58050 .products-grid .label-product span, body.df-theme-templatemonster-58050 .products-list .label-product span {
+  width: 54px;
+  height: 54px;
+  line-height: 54px; }
+
 body.df-theme-tt-theme069 button.button, body.df-theme-tt-theme069 a.button {
   padding-left: 8px;
   padding-right: 8px;

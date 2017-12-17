@@ -1,0 +1,12 @@
+// 2017-12-17
+// "Русифицировать оформительскую тему TemplateMonster #58050 («Electro»)":
+// https://github.com/magento-russia/2/issues/5
+body.df-theme-templatemonster-58050 {
+	// 2017-12-17
+	// Увеличиваем размер кружков для надписей «Скидка!» и «Новинка!»,
+	// потому что в русском языке они длиннее, чем в английском: там «Sale!» и «New!».
+	// В оригинале — 41px.
+	.products-grid .label-product span, .products-list .label-product span {
+		width: 54px; height: 54px; line-height: 54px;
+	}
+}
