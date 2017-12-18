@@ -1,6 +1,10 @@
 <?xml version='1.0'?>
 <dictionary>
 	<rule>
+		<conditions><type>block</type><block><id>contact_block</id></block></conditions>
+		<actions><new_title>Контактная информация на странице «contacts»</new_title></actions>
+	</rule>
+	<rule>
 		<conditions><type>block</type><block><id>footer_info</id></block></conditions>
 		<actions><new_title>[Подвал] Телефоны, часы работы и адрес магазина</new_title></actions>
 	</rule>
@@ -25,7 +29,12 @@
 		<conditions><type>block page</type></conditions>
 		<actions>
 			<term><from>800-2345-679</from><to>+7 (495)-128-96-02</to></term>
+			<term><from>800-2345-7892;</from><to>+7 (495)-128-96-03</to></term>
+			<term><from>800-2345-7893</from><to>+7 (495)-128-96-04</to></term>
 			<term><from>80023456790</from><to>+74951289602</to></term>
+			<term><from>80023457892</from><to>+74951289603</to></term>
+			<term><from>80023457893</from><to>+74951289604</to></term>
+			<term><from>mail@demolink.org</from><to>admin@magento-forum.ru</to></term>
 			<term>
 				<from>28 Jackson Blvd Ste 1020 Chicago IL 60604-2340</from>
 				<to>г. Москва, м.Владыкино, ул.Алтуфьевское шоссе 2А</to>
