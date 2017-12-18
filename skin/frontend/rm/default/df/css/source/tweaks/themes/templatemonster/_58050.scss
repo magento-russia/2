@@ -11,4 +11,13 @@ body.df-theme-templatemonster-58050 {
 	}
 	// 2017-12-18 Модуль Cmsmart_Megamenu норовит сделать здесь «text-transform: capitalize».
 	.level2 .cat-label, .hidden-level3 {text-transform: none;}
+	.df-checkout-ergonomic-page {
+		// 2017-12-18
+		// "TemplateMonster #58050 («Electro»)
+		// неправильно отображает переключатель «доставить по этому адресу» / «доставить по другому адресу»
+		// на странице удобного оформления заказа": https://github.com/magento-russia/2/issues/6
+		input[name='billing[use_for_shipping]'] {
+			& + label:before, & + label:after {content: none;}
+		}
+	}
 }

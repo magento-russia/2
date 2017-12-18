@@ -1897,6 +1897,8 @@ body.df-theme-templatemonster-58050 .products-grid .label-product span, body.df-
   line-height: 54px; }
 body.df-theme-templatemonster-58050 .level2 .cat-label, body.df-theme-templatemonster-58050 .hidden-level3 {
   text-transform: none; }
+body.df-theme-templatemonster-58050 .df-checkout-ergonomic-page input[name='billing[use_for_shipping]'] + label:before, body.df-theme-templatemonster-58050 .df-checkout-ergonomic-page input[name='billing[use_for_shipping]'] + label:after {
+  content: none; }
 
 body.df-theme-tt-theme069 button.button, body.df-theme-tt-theme069 a.button {
   padding-left: 8px;
