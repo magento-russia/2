@@ -9,4 +9,6 @@ body.df-theme-templatemonster-58050 {
 	.products-grid .label-product span, .products-list .label-product span {
 		width: 54px; height: 54px; line-height: 54px;
 	}
+	// 2017-12-18 Модуль Cmsmart_Megamenu норовит сделать здесь «text-transform: capitalize».
+	.level2 .cat-label, .hidden-level3 {text-transform: none;}
 }

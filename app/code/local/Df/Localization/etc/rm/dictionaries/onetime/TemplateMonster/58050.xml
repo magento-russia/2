@@ -43,6 +43,13 @@
 				<from><![CDATA[>7 Days a week from 9:00 am to 7:00 pm<]]></from>
 				<to><![CDATA[>ежедневно с 10 до 22<]]></to>
 			</term>
+			<term>
+				<from><![CDATA[> The Company Name Inc. 9870 St Vincent Place,<br /> Glasgow, DC 45<]]></from>
+				<to><![CDATA[>г. Москва, м.Владыкино, ул.Алтуфьевское шоссе 2А<]]></to>
+			</term>
+			<term><from><![CDATA[>Address 1:<]]></from><to><![CDATA[>Адрес<]]></to></term>
+			<term><from><![CDATA[>Fax:<]]></from><to><![CDATA[>Факс<]]></to></term>
+			<term><from><![CDATA[>Phones:<]]></from><to><![CDATA[><]]></to></term>
 		</actions>
 	</rule>
 </dictionary>
