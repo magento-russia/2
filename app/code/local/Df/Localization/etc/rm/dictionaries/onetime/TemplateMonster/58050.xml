@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<dictionary>
+	<rule>
+		<conditions>
+			<type>block</type>
+			<block><id>header_info</id></block>
+		</conditions>
+		<actions>
+			<new_title>[Шапка] Телефоны и часы работы магазина</new_title>
+		</actions>
+	</rule>
+</dictionary>

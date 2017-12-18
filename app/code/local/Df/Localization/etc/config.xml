@@ -140,6 +140,9 @@
 			<rwd>
 				<default>Magento/RWD.xml</default>
 			</rwd>
+			<tm_themes>
+				<theme760>TemplateMonster/58050.xml</theme760>
+			</tm_themes>
 			<!--
 			 	Infortis Ultimo
 				http://magento-forum.ru/forum/320/
@@ -314,6 +317,19 @@
 					<official_site>http://store.templatemonster.com/ru/magento-themes-type/53174.html?aff=Dmitry_Fedyuk</official_site>
 				</url>
 			</templatemonster-53174>
+<!-- 2017-12-18
+"Русифицировать оформительскую тему TemplateMonster #58050 («Electro»)":
+https://github.com/magento-russia/2/issues/5 -->
+			<templatemonster-58050>
+				<title>TemplateMonster #58050 (Electro)</title>
+				<package>tm_themes</package>
+				<theme>theme760</theme>
+				<dictionary>TemplateMonster/58050.xml</dictionary>
+				<url>
+					<forum>http://magento-forum.ru/forum/379</forum>
+					<official_site>http://store.templatemonster.com/ru/magento-themes-type/58050.html?aff=Dmitry_Fedyuk</official_site>
+				</url>
+			</templatemonster-58050>
 			<ves-super-store>
 				<title>Ves Super Store (ThemeForest 8002349)</title>
 				<package>default</package>
