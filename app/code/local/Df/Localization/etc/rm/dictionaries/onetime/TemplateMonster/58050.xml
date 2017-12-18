@@ -5,6 +5,10 @@
 		<actions><new_title>[Подвал] Телефоны, часы работы и адрес магазина</new_title></actions>
 	</rule>
 	<rule>
+		<conditions><type>block</type><block><id>footer_list</id></block></conditions>
+		<actions><new_title>[Подвал] 2 центральные колонки с ссылками</new_title></actions>
+	</rule>
+	<rule>
 		<conditions><type>block</type><block><id>header_info</id></block></conditions>
 		<actions><new_title>[Шапка] Телефоны и часы работы магазина</new_title></actions>
 	</rule>
