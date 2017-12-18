@@ -1,23 +1,15 @@
 <?xml version='1.0'?>
 <dictionary>
 	<rule>
-		<conditions>
-			<type>block</type>
-			<block><id>header_info</id></block>
-		</conditions>
-		<actions>
-			<new_title>[Шапка] Телефоны и часы работы магазина</new_title>
-			<term>
-				<from><![CDATA[>7 Days a week from 9:00 am to 7:00 pm<]]></from>
-				<to><![CDATA[>ежедневно с 10 до 22<]]></to>
-			</term>
-		</actions>
+		<conditions><type>block</type><block><id>footer_info</id></block></conditions>
+		<actions><new_title>[Подвал] Телефоны, часы работы и адрес магазина</new_title></actions>
 	</rule>
 	<rule>
-		<conditions>
-			<type>block</type>
-			<block><id>footer_links</id></block>
-		</conditions>
+		<conditions><type>block</type><block><id>header_info</id></block></conditions>
+		<actions><new_title>[Шапка] Телефоны и часы работы магазина</new_title></actions>
+	</rule>
+	<rule>
+		<conditions><type>block</type><block><id>footer_links</id></block></conditions>
 		<actions>
 			<term>
 				<from><![CDATA[>Template Settings<]]></from>
@@ -26,17 +18,13 @@
 		</actions>
 	</rule>
 	<rule>
-		<conditions>
-			<type>block page</type>
-		</conditions>
+		<conditions><type>block page</type></conditions>
 		<actions>
+			<term><from>800-2345-679</from><to>+7 (495)-128-96-02</to></term>
+			<term><from>80023456790</from><to>+74951289602</to></term>
 			<term>
-				<from>800-2345-679</from>
-				<to>+7 (495)-128-96-02</to>
-			</term>
-			<term>
-				<from>80023456790</from>
-				<to>+74951289602</to>
+				<from><![CDATA[>7 Days a week from 9:00 am to 7:00 pm<]]></from>
+				<to><![CDATA[>ежедневно с 10 до 22<]]></to>
 			</term>
 		</actions>
 	</rule>
