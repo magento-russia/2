@@ -140,9 +140,6 @@
 			<rwd>
 				<default>Magento/RWD.xml</default>
 			</rwd>
-			<tm_themes>
-				<theme760>TemplateMonster/58050.xml</theme760>
-			</tm_themes>
 			<!--
 			 	Infortis Ultimo
 				http://magento-forum.ru/forum/320/
