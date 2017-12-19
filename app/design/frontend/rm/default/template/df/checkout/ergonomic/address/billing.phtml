@@ -61,6 +61,12 @@
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
         </span>
     </div>
+<!-- 2017-12-19
+"Magento 1.9.3.3 добавила опцию «Enable Form Key Validation On Checkout»,
+которая (если её включить) ломает модуль «Удобное оформление заказа» Российской сборки Magento":
+https://github.com/magento-russia/2/issues/8
+-->
+	<?php echo $this->getBlockHtml('formkey') ?>
 </fieldset>
 </form>
 <script type="text/javascript">
