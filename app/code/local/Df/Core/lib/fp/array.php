@@ -323,6 +323,15 @@ function df_array_query(array $array, $query, $defaultValue = null) {
 }
 
 /**
+ * 2016-09-05
+ * @used-by \Df_RussianPost_Model_RussianPostCalc_Method::getMethodTitle()
+ * @param int|string $v
+ * @param array(int|string => mixed) $map
+ * @return int|string|mixed
+ */
+function dftr($v, array $map) {return df_a($map, $v, $v);}
+
+/**
  * Отсекает первый элемент массива и возвращает хвост (аналог CDR в Lisp)
  * @param array $array
  * @return array

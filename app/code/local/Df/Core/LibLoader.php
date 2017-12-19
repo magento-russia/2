@@ -9,22 +9,23 @@ class Df_Core_LibLoader extends Df_Core_LibLoader_Abstract {
 		$base = 'fp' . DS;
 		return array(
 			$base . 'compiled'
+			, $base . '1c'
 			, $base . 'array'
+			, $base . 'catalog'
+			, $base . 'date'
+			, $base . 'db'
+			, $base . 'domain'
+			, $base . 'filesystem'
+			, $base . 'float'
+			, $base . 'licensor'
+			, $base . 'other'
 			, $base . 'reflection'
-			, $base . 'validation'
+			, $base . 'serialize'
 			, $base . 'state'
 			, $base . 'store'
 			, $base . 'text'
+			, $base . 'validation'
 			, $base . 'xml'
-			, $base . 'serialize'
-			, $base . 'date'
-			, $base . 'other'
-			, $base . 'filesystem'
-			, $base . 'licensor'
-			, $base . 'domain'
-			, $base . 'db'
-			, $base . 'catalog'
-			, $base . '1c'
 		);
 	}
 

@@ -248,12 +248,12 @@ function df_magento_version($param1 = null, $param2 = null) {
  * В качестве параметра $modelClass можно передавать:
  * 1) класс модели в стандартном формате
  * 2) класс модели в формате Magento
- * @param string $modelClass
+ * @param string|object $c
  * @param array(string => mixed) $parameters [optional]
  * @return Mage_Core_Model_Abstract
  * @throws Exception
  */
-function df_model($modelClass = '', $parameters = array()) {
+function df_model($c = '', $parameters = array()) {
 	/**
 	 * Удаление df_param_string
 	 * ускорило загрузку главной страницы на эталонном тесте
@@ -262,9 +262,9 @@ function df_model($modelClass = '', $parameters = array()) {
 	/** @var Mage_Core_Model_Abstract $result */
 	$result = null;
 	try {
-		$result = Mage::getModel($modelClass, $parameters);
+		$result = is_object($c) ? $c : Mage::getModel($c, $parameters);
 		if (!is_object($result)) {
-			df_error('Не найден класс «%s»', $modelClass);
+			df_error('Не найден класс «%s»', $c);
 		}
 		/**
 		 * Обратите внимание, что Mage::getModel
@@ -295,7 +295,7 @@ function df_model($modelClass = '', $parameters = array()) {
 			,array(
 				'%method%' => $methodNameWithClassName
 				,'%line%' => df_a(df_a($bt, 0), "line")
-				,'%modelClass%' => $modelClass
+				,'%modelClass%' => $c
 				,'%message%' => rm_ets($e)
 			)
 		));

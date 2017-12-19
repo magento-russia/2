@@ -20,11 +20,46 @@ class Df_RussianPost_Model_Collector extends Df_Shipping_Model_Collector {
 				&&
 					$this->getRateRequest()->getDestinationPostalCode()
 			) {
-				foreach ($this->getDomesticApi()->getRatesAsText() as $textualRate) {
-					/** @var string $textualRate */
-					df_assert_string($textualRate);
-					$method = $this->createMethodByTextualRate($textualRate);
-					$result[]= $method;
+				/**
+				 * 2017-12-19
+				 * 1) "Модуль «Почта России» поломался,
+				 * потому что используемый им для внутрероссийских отправлений сервис russianpostcalc.ru
+				 * ввёл CAPTCHA (стал требовать «проверочный код»)": https://github.com/magento-russia/2/issues/9
+				 * 2) «API. Метод calc. Расчет стоимости отправки Почтового отправления»:
+				 * http://russianpostcalc.ru/user/myaddr/api/#calc
+				 * 3) «PHP скрипт - пример, вызова метода calc»: http://russianpostcalc.ru/user/rp_calc.zip
+				 */
+				/** @var Zend_Http_Client $c */
+				$c = new Zend_Http_Client('http://russianpostcalc.ru/api_v1.php');
+				$c->setMethod(Zend_Http_Client::POST);
+				/**
+				 * 2017-12-19
+				 * Параметры должны идти именно в такой последовательности не только для расчёта `hash`,
+				 * но и в самом запросе HTTP к API, иначе API ответит:
+				 * «10006 auth Ошибка доступа (не верная подпись)!».
+				 * https://df.tips/t/268
+				 */
+				$p = array(
+					// 2017-12-19 «API ключ Вашего аккаунта»
+					'apikey' => '21ae2a1cd5dd3493a99a841658ea8bc8'
+					// 2017-12-19 «Вызываемый метод»
+					,'method' => 'calc'
+					// 2017-12-19 «Почтовый индекс отправителя»
+					,'from_index' => $this->getRateRequest()->getOriginPostalCode()
+					// 2017-12-19 «Почтовый индекс получателя»
+					,'to_index' => $this->getRateRequest()->getDestinationPostalCode()
+					,'weight' => dff_2($this->getRateRequest()->getWeightInKilogrammes())
+					// 2017-12-19 «Объявленная ценность отправления, руб»
+					,'ob_cennost_rub' => rm_currency()->convertFromBaseToRoubles($this->declaredValueBase())
+				); /** @var array(string => string) $p */
+				// 2017-12-19 «Обязательный аргумент, если аутентификация по методу API ключ + API пароль»
+				$c->setParameterPost($p + ['hash' => md5(implode('|', array_merge($p, array('braKecU3'))))]);
+				$res = df_json_decode($c->request()->getBody()); /** @var array(string => mixed) $res */
+				if ('done' !== df_a_deep($res, 'msg/type')) {
+					df_error(df_a_deep($res, 'msg/text'));
+				}
+				foreach ($res['calc'] as $rate) { /** @var array(string => string|float) $rate */
+					$result[]= $this->createMethod(new Df_RussianPost_Model_RussianPostCalc_Method($rate));
 				}
 			}
 			try {
@@ -52,60 +87,6 @@ class Df_RussianPost_Model_Collector extends Df_Shipping_Model_Collector {
 				}
 			}
 			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @param string $textualRate
-	 * @return Df_Shipping_Model_Method
-	 */
-	private function createMethodByTextualRate($textualRate) {
-		/** @var Df_Shipping_Model_Method $result */
-		$result = null;
-		/** @var string $methodClass */
-		$methodClass = null;
-		/** @var string $methodTitle */
-		$methodTitle = null;
-		/** @var int $titleLength */
-		$titleLength = 0;
-		foreach ($this->getCarrier()->getAllowedMethodsAsArray() as $methodData) {
-			/** @var array $methodData */
-			df_assert_array($methodData);
-			/** @var string $title */
-			$title = df_a($methodData, 'title');
-			df_assert_string($title);
-			if (rm_starts_with($textualRate, $title)) {
-				/** @var int $currentTitleLength */
-				$currentTitleLength = mb_strlen($title);
-				if ($currentTitleLength > $titleLength) {
-					$methodClass = df_a($methodData, 'class');
-					$methodTitle = $title;
-				}
-			}
-		}
-		df_assert_string($methodClass);
-		df_assert_string($methodTitle);
-		/** @var Df_RussianPost_Model_RussianPostCalc_Method $result */
-		$result = $this->createMethod($methodClass, $methodTitle);
-		df_assert($result instanceof Df_RussianPost_Model_RussianPostCalc_Method);
-		$result->setRateAsText($textualRate);
-		return $result;
-	}
-
-	/** @return Df_RussianPost_Model_RussianPostCalc_Api */
-	private function getDomesticApi() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Df_RussianPost_Model_RussianPostCalc_Api::i(array(
-				Df_RussianPost_Model_RussianPostCalc_Api::P__WEIGHT =>
-					$this->getRateRequest()->getWeightInKilogrammes()
-				,Df_RussianPost_Model_RussianPostCalc_Api::P__DECLARED_VALUE =>
-					rm_currency()->convertFromBaseToRoubles($this->declaredValueBase())
-				,Df_RussianPost_Model_RussianPostCalc_Api::P__SOURCE__POSTAL_CODE =>
-					$this->getRateRequest()->getOriginPostalCode()
-				,Df_RussianPost_Model_RussianPostCalc_Api::P__DESTINATION__POSTAL_CODE =>
-					$this->getRateRequest()->getDestinationPostalCode()
-			));
 		}
 		return $this->{__METHOD__};
 	}

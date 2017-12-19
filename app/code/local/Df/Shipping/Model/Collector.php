@@ -111,15 +111,13 @@ class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
 	protected function cityDest() {return $this->rr()->getDestinationCity();}
 
 	/**
-	 * @param string $class
-	 * @param string $title
+	 * @used-by \Df_RussianPost_Model_Collector::getMethods()
+	 * @param string|object $c
+	 * @param string|null $title [optional]
 	 * @return Df_Shipping_Model_Method
 	 */
-	protected function createMethod($class, $title) {
-		df_param_string_not_empty($class, 0);
-		df_param_string_not_empty($title, 1);
-		/** @var Df_Shipping_Model_Method $result */
-		$result = df_model($class);
+	protected function createMethod($c, $title = null) {
+		$result = df_model($c); /** @var Df_Shipping_Model_Method $result */
 		df_assert($result instanceof Df_Shipping_Model_Method);
 		$result
 			->setRequest($this->getRateRequest())
@@ -128,22 +126,20 @@ class Df_Shipping_Model_Collector extends Df_Core_Model_Abstract {
 			 * При оформлении заказа Magento игнорирует данное значение
 			 * и берёт заголовок способа доставки из реестра настроек:
 			 *
-				public function getCarrierName($carrierCode)
-				{
-					if ($name = Mage::getStoreConfig('carriers/'.$carrierCode.'/title')) {
-						return $name;
-					}
-					return $carrierCode;
-				}
+			 *	public function getCarrierName($carrierCode)
+			 *	{
+			 *		if ($name = Mage::getStoreConfig('carriers/'.$carrierCode.'/title')) {
+			 *			return $name;
+			 *		}
+			 *		return $carrierCode;
+			 *	}
 			 */
 			->setCarrierTitle($this->getCarrier()->getTitle())
-			->addData(
-				array(
-					Df_Shipping_Model_Method::P__CARRIER_INSTANCE => $this->getCarrier()
-					,Df_Shipping_Model_Method::P__METHOD_TITLE => $title . ':'
-				)
-			)
+			->addData(array(Df_Shipping_Model_Method::P__CARRIER_INSTANCE => $this->getCarrier()))
 		;
+		if ($title) {
+			$result[Df_Shipping_Model_Method::P__METHOD_TITLE] = "$title:";
+		}
 		return $result;
 	}
 
