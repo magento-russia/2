@@ -6,6 +6,8 @@
 <?php echo $this->getChildHtml('form_before')?>
 <?php if ($maxPerSend =(int)df_h()->invitation()->getMaxInvitationsPerSend()): ?>
 <form id="invitationForm" action="" method="post">
+	<!-- 2017-12-18 -->
+	<?php echo $this->getBlockHtml('formkey') ?>	
     <div class="fieldset">
     <h2 class="legend"><?php echo df_h()->invitation()->__('Invite your friends by entering their email addresses below'); ?></h2>
         <ul class="form-list">
