@@ -1,6 +1,10 @@
 <?php
 abstract class Df_Shipping_Model_Location extends Df_Core_Model_Abstract {
-	/** @return string */
+	/**
+	 * @used-by hasRegion()
+	 * @see Df_Spsr_Model_Location::getRegion()
+	 * @return string
+	 */
 	abstract public function getRegion();
 
 	/** @return bool */

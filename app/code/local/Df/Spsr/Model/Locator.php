@@ -26,6 +26,7 @@ class Df_Spsr_Model_Locator extends Df_Shipping_Model_Locator {
 			/** @var string $countryNameNormalized */
 			$countryNameNormalized = Df_Cdek_Model_Location::i()->normalizeName($this->getCountryName());
 			foreach ($locationsWithSameName as $location) {
+				/** @var Df_Spsr_Model_Location $location */
 				if (
 						!$location->hasRegion()
 					||

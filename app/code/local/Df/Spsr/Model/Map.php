@@ -20,30 +20,30 @@ class Df_Spsr_Model_Map extends Df_Core_Model_DestructableSingleton {
 	protected function getPropertiesToCache() {return self::m(__CLASS__, 'getByCity');}
 
 	/**
+	 * 2018-01-05
+	 * 1) "Модуль «СПСР-Экспресс» стал приводить к сбою:
+	 * «Значение переменной забраковано проверяющим «Df_Zf_Validate_Array»»,
+	 * потому что СПСР-Экспресс изменила API": https://github.com/magento-russia/2/issues/11
+	 * 2) "[СПСР-Экспресс] Пример ответа на `https://www.spsr.ru/webapi/autocomplete_city?city=<value>`":
+	 * https://df.tips/t/294
 	 * @param string $cityName
 	 * @return Df_Spsr_Model_Location[]
 	 * @throws Exception
 	 */
 	private function requestLocationsFromServer($cityName) {
 		try {
-			/** @var Df_Spsr_Model_Location[] $result */
-			$result = array();
-			/** @var Zend_Uri_Http $uri */
-			$uri = Zend_Uri::factory('http');
+			$result = array(); /** @var Df_Spsr_Model_Location[] $result */
+			$uri = Zend_Uri::factory('https'); /** @var Zend_Uri_Http $uri */
 			$uri->setHost('www.spsr.ru');
-			$uri->setPath('/ru/service/calculator');
-			$uri->setQuery(array('q' => df_concat('/spsr/cc_autocomplete/', $cityName)));
-			/** @var Zend_Http_Client $httpClient */
-			$httpClient = new Zend_Http_Client();
+			$uri->setPath('/webapi/autocomplete_city');
+			$uri->setQuery(array('city' => $cityName));
+			$httpClient = new Zend_Http_Client; /** @var Zend_Http_Client $httpClient */
 			$httpClient->setUri($uri);
-			/** @var Zend_Http_Response $response */
-			$response = $httpClient->request(Zend_Http_Client::GET);
-			/** @var string $responseAsJson */
-			$responseAsJson = $response->getBody();
+			$response = $httpClient->request(Zend_Http_Client::GET); /** @var Zend_Http_Response $response */
+			$responseAsJson = $response->getBody(); /** @var string $responseAsJson */
 			df_assert_string_not_empty($responseAsJson);
 			$responseAsJson = df_text()->bomRemove($responseAsJson);
-			/** @var string[] $responseAsArray */
-			$responseAsArray = df_json_decode($responseAsJson);
+			$responseAsArray = df_json_decode($responseAsJson); /** @var string[] $responseAsArray */
 			df_assert_array($responseAsArray);
 			foreach ($responseAsArray as $locationAsArray) {
 				/** @var array(string => string|int|null) $locationAsArray */

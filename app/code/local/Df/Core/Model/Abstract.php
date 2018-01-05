@@ -118,6 +118,8 @@ abstract class Df_Core_Model_Abstract
 
 	/**
 	 * @override
+	 * @see Mage_Core_Model_Abstract::getId()
+	 * @see Df_Spsr_Model_Location::getId()
 	 * @return string|int
 	 */
 	public function getId() {
