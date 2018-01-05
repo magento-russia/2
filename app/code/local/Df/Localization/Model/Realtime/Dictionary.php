@@ -332,8 +332,14 @@ class Df_Localization_Model_Realtime_Dictionary extends Df_Localization_Model_Di
 			 * общим словарём и словарём конкретной темы.
 			 */
 			$cacheId = __METHOD__ . '::' . md5($this->getPathFull());
-			if ($canUseCache) {
-				$this->_entries = df_json_decode(Mage::app()->loadCache($cacheId));
+			/**
+			 * 2018-01-05
+			 * "`Df_Localization_Model_Realtime_Dictionary->hasEntry('Empty')`:
+			 * «Parsing a JSON document failed with the message «Syntax error»»":
+			 * https://github.com/magento-russia/2/issues/14
+			 */
+			if ($canUseCache && ($c = Mage::app()->loadCache($cacheId))) { /** @var string|false $c */
+				$this->_entries = df_json_decode($c);
 			}
 			if (!isset($this->_entries) || !is_array($this->_entries)) {
 				foreach ($this->e()->xpath('//en_US') as $entry) {

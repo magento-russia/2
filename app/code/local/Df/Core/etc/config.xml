@@ -7,7 +7,7 @@
 		</Df_Core>
 	</modules>
 	<df>
-		<version>2.51.2</version>
+		<version>2.51.3</version>
 		<jquery>
 			<core>
 				<cdn>//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js</cdn>
