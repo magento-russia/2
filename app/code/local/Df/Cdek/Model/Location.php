@@ -34,6 +34,8 @@ class Df_Cdek_Model_Location extends Df_Shipping_Model_Location {
 
 	/**
 	 * @override
+	 * @see Df_Shipping_Model_Location::normalizeNameSingle()
+	 * @used-by Df_Shipping_Model_Location::normalizeName()
 	 * @param string $name
 	 * @return string
 	 */

@@ -103,14 +103,20 @@ abstract class Df_Shipping_Model_Location extends Df_Core_Model_Abstract {
 	 * Этот метод может быть приватным,
 	 * несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @link http://php.net/manual/en/language.types.callable.php#113447
+	 * http://php.net/manual/en/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * @link http://3v4l.org/OipEQ
-	 *
+	 * http://3v4l.org/OipEQ
+	 * 2018-01-05
+	 * "Метод `Df_Shipping_Model_Location::normalizeNameSingle()` не должен быть приватным,
+	 * потому что его использует (и перекрывает) метод `Df_Cdek_Model_Location::normalizeNameSingle()`":
+	 * https://github.com/magento-russia/2/issues/13
+	 * @used-by normalizeName()
+	 * @used-by Df_Cdek_Model_Location::normalizeNameSingle()
+	 * @see Df_Cdek_Model_Location::normalizeNameSingle()
 	 * @param string $name
 	 * @return string
 	 */
-	private function normalizeNameSingle($name) {return strtr(mb_strtoupper($name), array('Ё' => 'Е'));}
+	protected function normalizeNameSingle($name) {return strtr(mb_strtoupper($name), array('Ё' => 'Е'));}
 
 	const _CLASS = __CLASS__;
 }
