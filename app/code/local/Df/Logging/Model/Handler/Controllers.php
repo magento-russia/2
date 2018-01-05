@@ -166,7 +166,7 @@ class Df_Logging_Model_Handler_Controllers
 	 * @return Df_Logging_Model_Event|bool
 	 */
 	public function postDispatchPollValidation($config, $eventModel) {
-		$out = df_json_decode(Mage::app()->getResponse()->getBody(), false);
+		$out = json_decode(Mage::app()->getResponse()->getBody());
 		if (!empty($out->error)) {
 			$id = Mage::app()->getRequest()->getParam('id');
 			return $eventModel->setIsSuccess(false)->setInfo($id == 0 ? '' : $id);
@@ -187,7 +187,7 @@ class Df_Logging_Model_Handler_Controllers
 	 * @return Df_Logging_Model_Event|bool
 	 */
 	public function postDispatchCustomerValidate($config, $eventModel) {
-		$out = df_json_decode(Mage::app()->getResponse()->getBody(), false);
+		$out = json_decode(Mage::app()->getResponse()->getBody());
 		if (!empty($out->error)) {
 			$id = Mage::app()->getRequest()->getParam('id');
 			return $eventModel->setIsSuccess(false)->setInfo($id == 0 ? '' : $id);

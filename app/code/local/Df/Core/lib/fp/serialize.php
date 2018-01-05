@@ -14,15 +14,62 @@ if (false) {
 }
 
 /**
- * 2015-12-19
- * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
- * «Decoding failed: Syntax error»
- * @param string $string
- * @param bool $returnArray [optional]
- * @return mixed|bool
+ * 2017-01-05
+ * "Надо портировать функцию `df_json_decode` из `mage2pro/core`,
+ * потому что за 2.5 года она ушла далеко вперёд
+ * по сравнению с одноимённой функцией Российской сборки Magento":
+ * https://github.com/magento-russia/2/issues/12
+ * @param $s|null $string
+ * @param bool $throw [optional]
+ * @return array|mixed|bool|null
+ * @throws Exception
+ * Returns the value encoded in json in appropriate PHP type.
+ * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
+ * NULL is returned if the json cannot be decoded
+ * or if the encoded data is deeper than the recursion limit.
+ * http://php.net/manual/function.json-decode.php
  */
-function df_json_decode($string, $returnArray = true) {
-	return '' === $string ? $string : json_decode($string, $returnArray);
+function df_json_decode($s, $throw = true) {
+	/** @var mixed|bool|null $r */
+	// 2015-12-19
+	// У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
+	if ('' === $s || is_null($s)) {
+		$r = $s;
+	}
+	else {
+		/**                                                                                         
+		 * 2016-10-30
+		 * json_decode('7700000000000000000000000') возвращает 7.7E+24
+		 * https://3v4l.org/NnUhk
+		 * http://stackoverflow.com/questions/28109419
+		 * Такие длинные числоподобные строки используются как идентификаторы КЛАДР
+		 * (модулем доставки «Деловые Линии»), и поэтому их нельзя так корёжить.
+		 * Поэтому используем константу JSON_BIGINT_AS_STRING
+		 * https://3v4l.org/vvFaF
+		 * 2018-01-05
+		 * 3-й параметр появился в 5.3.0:
+		 * 		«Added the optional depth. The default recursion depth was increased from 128 to 512».
+		 * 4-й параметр появился в 5.4.0:
+		 * 		«The options parameter was added».
+		 * http://php.net/manual/en/function.json-decode.php#refsect1-function.json-decode-changelog
+		 */
+		$r = version_compare(phpversion(), '5.4', '<')
+			? json_decode($s, true)
+			: json_decode($s, true, 512, JSON_BIGINT_AS_STRING)
+		;
+		// 2016-10-28
+		// json_encode(null) возвращает строку 'null',
+		// а json_decode('null') возвращает null.
+		// Добавил проверку для этой ситуации, чтобы не считать её сбоем.
+		if (is_null($r) && 'null' !== $s && $throw) {
+			df_assert_ne(JSON_ERROR_NONE, json_last_error());
+			df_error(
+				"Parsing a JSON document failed with the message «%s».\nThe document:\n{$s}"
+				,json_last_error_msg()
+			);
+		}
+	}
+	return $r;
 }
 
 /** @return bool */
