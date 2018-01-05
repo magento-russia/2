@@ -8,7 +8,7 @@ abstract class Df_Shipping_Model_Location extends Df_Core_Model_Abstract {
 
 	/**
 	 * @param string|string[] $name
-	 * @return string
+	 * @return string|string[]
 	 */
 	public function normalizeName($name) {
 		/** @var string|string[] $result */
