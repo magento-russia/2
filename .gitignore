@@ -21,6 +21,8 @@
 !skin/frontend/rm/**/*
 dev/
 mail/
+# 2018-01-05 "How to add `phpseclib/mcrypt_compat` to Magento 1 (for PHP 7.2)?": https://df.tips/t/281
+vendor/
 # 2015-12-22
 # Раньше я исключал ещё файлы *.css.map,
 # однако эти файлы предназначены для сопоставления *.css и *.scss,
