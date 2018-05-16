@@ -38,3 +38,7 @@ app/locale/ru_DF/Alvosoft/
 
 # 2017-12-18
 skin/frontend/rm/default/df/css/.sass-cache
+
+# 2018-05-16 For dive.voyage
+myblog/
+js/buyme/
