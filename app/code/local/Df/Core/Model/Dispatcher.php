@@ -137,10 +137,8 @@ class Df_Core_Model_Dispatcher {
 	public function controller_front_init_before(Varien_Event_Observer $observer) {
 		try {
 			Df_Core_Bootstrap::s()->init();
-			if (
-					df_module_enabled(Df_Core_Module::SPEED)
-				&&
-					df_cfg()->speed()->general()->enablePhpScriptsLoadChecking()
+			if (df_module_enabled(Df_Core_Module::SPEED)
+				&& df_cfg()->speed()->general()->enablePhpScriptsLoadChecking()
 			) {
 				Df_Core_Autoload::register();
 			}
