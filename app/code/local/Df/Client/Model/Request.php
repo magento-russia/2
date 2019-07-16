@@ -31,7 +31,7 @@ class Df_Client_Model_Request extends Df_Core_Model_RemoteControl_Request {
 			$result->setPort(811);
 		}
 		else {
-			$result->setHost('server.magento-pro.ru');
+			$result->setHost('server.magento-forum.ru');
 		}
 		$result->setPath('/df-server/');
 		return $result;

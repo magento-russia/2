@@ -71,7 +71,7 @@ function df_is_it_my_local_pc() {
 /** @return bool */
 function df_is_it_my_sever() {
 	return
-			('server.magento-pro.ru' === Mage::app()->getRequest()->getHttpHost())
+			('server.magento-forum.ru' === Mage::app()->getRequest()->getHttpHost())
 		&&
 			('5.9.188.84' === df_a($_SERVER, 'SERVER_ADDR'))
 	;

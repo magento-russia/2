@@ -8,7 +8,7 @@ class Df_Licensor_Model_Server_Time_MagentoProRu extends Df_Licensor_Model_Serve
 		$httpClient = new Zend_Http_Client();
 		/** @var Zend_Uri_Http $uri */
 		$uri = Zend_Uri::factory('http');
-		$uri->setHost('server.magento-pro.ru');
+		$uri->setHost('server.magento-forum.ru');
 		$uri->setPath('/time.php');
 		$httpClient
 			->setHeaders(array(
